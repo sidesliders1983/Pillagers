@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "runtime": "bd69e50b9545e0a57ef9ba93e003e5ddf4de39aa",
+  "comparisons": [
+    {
+      "fixture": "developed-810",
+      "repeat": 1,
+      "canonicalSha256": "0148cfc948ed6ef6e178155b2e2016fd63abc765907ce0a75e51fc9152941c3a",
+      "floorBefore": 652.9999999962747,
+      "floorAfter": 1.4999999981373549,
+      "cardBefore": 84.00000000931323,
+      "cardAfter": 4.200000001117587
+    },
+    {
+      "fixture": "boundary-810",
+      "repeat": 1,
+      "canonicalSha256": "f9963eab98c57e70d82eecc01fd29e15a722d6f8beac3b292b668a95d8f494a1",
+      "floorBefore": 689.100000012666,
+      "floorAfter": 24.89999999664724,
+      "cardBefore": 95.79999999888241,
+      "cardAfter": 7.400000002235174
+    },
+    {
+      "fixture": "visited-800",
+      "repeat": 1,
+      "canonicalSha256": "70d323eba388c58bb025566adedcd67154d057dd2dfeb50a6b203b32eb3d78fd",
+      "floorBefore": 0,
+      "floorAfter": 0,
+      "cardBefore": 18.50000000372529,
+      "cardAfter": 0
+    },
+    {
+      "fixture": "visited-800",
+      "repeat": 2,
+      "canonicalSha256": "70d323eba388c58bb025566adedcd67154d057dd2dfeb50a6b203b32eb3d78fd",
+      "floorBefore": 0,
+      "floorAfter": 0,
+      "cardBefore": 13.999999994412065,
+      "cardAfter": 0.19999999925494194
+    },
+    {
+      "fixture": "boundary-810",
+      "repeat": 2,
+      "canonicalSha256": "f9963eab98c57e70d82eecc01fd29e15a722d6f8beac3b292b668a95d8f494a1",
+      "floorBefore": 847.4000000022352,
+      "floorAfter": 16.599999997764826,
+      "cardBefore": 114.49999999627471,
+      "cardAfter": 7.700000002980232
+    },
+    {
+      "fixture": "developed-810",
+      "repeat": 2,
+      "canonicalSha256": "0148cfc948ed6ef6e178155b2e2016fd63abc765907ce0a75e51fc9152941c3a",
+      "floorBefore": 728.4000000096858,
+      "floorAfter": 1.8999999985098839,
+      "cardBefore": 93.59999999776483,
+      "cardAfter": 4.899999998509884
+    }
+  ]
+}

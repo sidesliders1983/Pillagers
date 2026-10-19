@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "checks": [
+    "Warmed unchanged resident card retains DOM and exact Core without reparsing HTML",
+    "Actual focused form edits/disclosures survive a tick; unfocused paused controls reconcile; age, work and resource feedback remain fresh without duplicate awards",
+    "Import with reused identities invalidates the card; stock-dependent Build availability updates immediately; the real paid command spends once and the mobile card stays current",
+    "Core and published book survive save/load exactly; actual checkpoint rollback restores the prior tent/action state with reused identities"
+  ],
+  "errors": [],
+  "unchanged": {
+    "cardParses": 0,
+    "exactCore": true,
+    "exactBook": true,
+    "sameMarkup": true,
+    "sameRoot": true,
+    "preserved": true,
+    "reset": true,
+    "aged": true,
+    "occupationFresh": true,
+    "noDuplicateAwards": true,
+    "exactRestore": true
+  }
+}

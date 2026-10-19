@@ -7,12 +7,14 @@ const before = JSON.parse(await readFile(beforePath + '/results.json', 'utf8'));
 const after = JSON.parse(await readFile(afterPath + '/results.json', 'utf8'));
 assert.equal(before.status, 'PASS');
 assert.equal(after.status, 'PASS');
+assert.equal(after.selection ?? null, before.selection ?? null, 'Matched selection');
 const pairs = [];
 for (const original of before.cases) {
     const current = after.cases.find(item => item.name === original.name);
     assert.ok(current, 'Missing matched campaign: ' + original.name);
     assert.equal(current.fixtureSha256, original.fixtureSha256);
     const a = original.captures[0], b = current.captures[0];
+    assert.equal(b.cardSha256 ?? null, a.cardSha256 ?? null, 'Matched selected-card markup');
     assert.equal(b.canonicalSha256, a.canonicalSha256, 'Exact Core/RNG/history/discovery: ' + original.name);
     assert.equal(b.blueprintSha256, a.blueprintSha256, 'Authoritative geography: ' + original.name);
     const { servedSource: beforeSource, ...beforeState } = a.state;

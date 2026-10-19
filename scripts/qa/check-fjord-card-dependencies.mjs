@@ -30,6 +30,7 @@ try {
         refs.refresh(); await refs.settle();
         const panel = document.querySelector('#entity-panel');
         const beforeCore = refs.session.saveJSON(), beforeMarkup = panel.innerHTML;
+        const beforeBook = JSON.stringify(refs.session.book.snapshot());
         const root = panel.firstElementChild;
         // Observe actual browser parsing at the external DOM boundary, without
         // substituting updateView, the interface, the session or renderer modules.
@@ -42,6 +43,7 @@ try {
         try {
             for (let i = 0; i < 5; i++) { refs.refresh(); await refs.settle(); }
             const unchanged = { cardParses, exactCore: refs.session.saveJSON() === beforeCore,
+                exactBook: JSON.stringify(refs.session.book.snapshot()) === beforeBook,
                 sameMarkup: panel.innerHTML === beforeMarkup, sameRoot: panel.firstElementChild === root };
             const details = panel.querySelector('[data-legacy-management]');
             details.open = true;
@@ -72,7 +74,10 @@ try {
             for (let i = 0; i < 3; i++) { refs.refresh(); await refs.settle(); }
             const noDuplicateAwards = JSON.parse(totals || '[]').length > 0 &&
                 totals === document.querySelector('#fjord-production-labels').dataset.totals;
-            return { ...unchanged, preserved, reset, aged, occupationFresh, noDuplicateAwards };
+            const restored = refs.shared.constructor.restore(refs.shared.persist(), 'fjord');
+            const exactRestore = restored.session.saveJSON() === refs.session.saveJSON() &&
+                JSON.stringify(restored.session.book.snapshot()) === JSON.stringify(refs.session.book.snapshot());
+            return { ...unchanged, preserved, reset, aged, occupationFresh, noDuplicateAwards, exactRestore };
         } finally { Object.defineProperty(Element.prototype, 'innerHTML', descriptor); }
     });
     report.unchanged = result;
@@ -80,7 +85,7 @@ try {
     assert.equal(result.sameMarkup, true);
     assert.equal(result.sameRoot, true);
     assert.equal(result.exactCore, true);
-    for (const name of ['preserved', 'reset', 'aged', 'occupationFresh', 'noDuplicateAwards'])
+    for (const name of ['exactBook', 'preserved', 'reset', 'aged', 'occupationFresh', 'noDuplicateAwards', 'exactRestore'])
         assert.equal(result[name], true, name);
     report.checks.push('Warmed unchanged resident card retains DOM and exact Core without reparsing HTML');
     report.checks.push('Actual focused form edits/disclosures survive a tick; unfocused paused controls reconcile; age, work and resource feedback remain fresh without duplicate awards');
@@ -101,7 +106,7 @@ try {
         refs.session.command({ type: 'SalvageLongship', longshipId: 'founding-longship' });
         refs.refresh(); await refs.settle();
         return { before, after: document.querySelector('[data-ui="build"]').disabled,
-            canonical: refs.session.saveJSON() };
+            canonical: refs.session.saveJSON(), checkpoint: refs.shared.fjord.exportJSON() };
     });
     assert.equal(affordability.before, true);
     assert.equal(affordability.after, false);
@@ -114,6 +119,21 @@ try {
     await page.waitForTimeout(100);
     assert.equal(await page.locator('#entity-panel').getByRole('heading', { name: 'Home', exact: true }).count(), 1);
     report.checks.push('Import with reused identities invalidates the card; stock-dependent Build availability updates immediately; the real paid command spends once and the mobile card stays current');
+    await page.setViewportSize({ width: 1400, height: 900 });
+    await openFjordCampaign(page);
+    await page.locator('#fjord-import').setInputFiles({ name: 'card-rollback.json', mimeType: 'application/json',
+        buffer: Buffer.from(affordability.checkpoint) });
+    await page.waitForFunction(() => document.querySelector('#fjord-notice').textContent === 'Campaign imported, paused.');
+    await closeFjordMenu(page);
+    const rolledBack = await page.evaluate(async () => {
+        const refs = window.__fjordAudit.references;
+        refs.shared.select({ kind: 'household', id: 'founder-1' });
+        refs.refresh(); await refs.settle();
+        return { core: refs.session.saveJSON(), buildEnabled: !document.querySelector('[data-ui="build"]').disabled };
+    });
+    assert.deepEqual(JSON.parse(rolledBack.core), JSON.parse(affordability.canonical));
+    assert.equal(rolledBack.buildEnabled, true);
+    report.checks.push('Core and published book survive save/load exactly; actual checkpoint rollback restores the prior tent/action state with reused identities');
     assert.deepEqual(report.errors, []);
     report.status = 'PASS';
 } catch (error) {

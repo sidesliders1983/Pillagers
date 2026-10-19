@@ -68,6 +68,12 @@ The extraction retains the same 500 ms campaign-clock cadence, visual update fre
 
 Lifecycle defects exposed by delayed-load/disposal checks are isolated from the mechanical extraction in separate commits and recorded with the QA evidence. They must not be hidden by changing the ordinary baseline or weakening parity checks. A simple revert removes the extraction/fix commits together; canonical campaigns need no migration. Physical iOS acceptance is pending unless a device is actually tested.
 
+### Scoped presentation reuse (#210)
+
+Two measured paths reuse derived results locally; neither adds another campaign read model. `FjordEntities` retains one native Farmyard floor sample per cattle instance, keyed by the exact yard object, yard world matrix and source XYZ. World replacement clears these samples through the existing world binding; model replacement/removal, assignment changes, or changed yard/point inputs require a fresh geometry query. A newly constructed layer remains the full-resync reference. This does not change moving-cattle navigation or yard collision sampling.
+
+`FjordInterface` still renders current card HTML and refreshes dependent actions at the existing cadence. When a card has no editable controls and its HTML is identical, it retains the mounted DOM instead of parsing another template. Campaign/history epoch or world replacement invalidates this reuse. Forms always use the existing field-preserving patch path, including when markup is unchanged. Other mounted views, ordered production/event cursors, persistence, canonical ticks and per-frame camera/motion/effects remain on their existing paths. Both caches belong to their presentation instance and never enter saves; there is no generic invalidation framework or quality change.
+
 See [#140](https://github.com/sidesliders1983/Pillagers/issues/140) for the gated migration: documentation freeze → shared-service extraction → 3D entry/management parity → legacy UI removal. Preserve historical source documents for implementation provenance rather than rewriting them as though 2D had never existed.
 
 ## Canonical session-time model

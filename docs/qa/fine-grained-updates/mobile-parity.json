@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "pairs": [
+    {
+      "name": "village-17-island-pool-v2",
+      "canonicalSha256": "b5e2ce85a9cb18b39f15774086b2c4246b2477d92f44a02044da0a41f4e0606e",
+      "blueprintSha256": "2caacc7fd5426867930ca7da4931a69714c6024f045dfd8a7dac5ca27652feaf",
+      "pixelsSha256": "c9dee15278297a3ed8445412e5e7165218a36dbb4f4a078735bafe07e845ee59",
+      "renderer": {
+        "callsIncludingShadows": 227,
+        "trianglesIncludingShadows": 5182154,
+        "geometries": 113,
+        "textures": 71,
+        "pixelRatio": 1,
+        "width": 390,
+        "height": 844
+      },
+      "beforeSource": {
+        "ref": "a54cb668f826b529ff132fc6275e22e095224423",
+        "overrides": {
+          "src/fjord-play/FjordPlay.ts": "aff1cc4658888acb49c152df2c4946665228a366f9146cc295a2991122245c3a",
+          "src/core/WorldLighting.ts": "6c641dceff1145f760187ba3b55e72226f0a77e286e30569ea25196e9cba2d75",
+          "src/fjord-play/FjordEntities.ts": "759923b67764acf43717c0309c8df93c66ffd5430bb86909e2cd4a8830ee28c8",
+          "src/fjord-play/FjordInterface.ts": "64e9334bbfa7f7e94a37af41d723e1089e160b2ac74a688a1bd6e083f2261de6"
+        }
+      },
+      "afterSource": {
+        "ref": null,
+        "overrides": {}
+      }
+    }
+  ],
+  "note": "Same Edge version, viewport, saved campaign, quality, camera and frozen presentation time. This does not claim cross-device pixel identity or an FPS gain."
+}

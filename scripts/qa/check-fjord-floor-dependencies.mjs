@@ -77,12 +77,16 @@ try {
             delete unassigned.find(e => e.selectionKey === cattle.selectionKey).status.assignment;
             await compare('Assignment removed', unassigned, 0);
             await compare('Assignment restored', entities, 1);
+            const young = entities.find(e => e.kind === 'cattle' && e.asset === 'young-adult' && e.status.assignment);
+            const grown = structuredClone(entities);
+            const adult = grown.find(e => e.selectionKey === young.selectionKey);
+            adult.asset = adult.status.sex === 'female' ? 'adult-female' : 'adult-male';
+            adult.status.stage = 'Adult';
+            await compare('Life-stage source replacement', grown, 1);
+            await compare('Life-stage rollback', entities, 1);
             const removed = entities.filter(e => e.selectionKey !== cattle.selectionKey);
             await compare('Cattle removed', removed, 0);
-            const count = queries;
-            await layer.sync(entities);
-            cases.push({ label: 'Cattle instance recreated', additionalQueries: queries - count,
-                expectedQueries: 1, positionsEqual: true, maxBoundsDelta: 0 });
+            await compare('Cattle instance recreated', entities, 1);
             layer.prepareExpeditions(shared.session.readSnapshot(), structuredClone(shared.fjord.blueprint));
             await compare('Another world with reused identities', entities,
                 entities.filter(e => e.kind === 'cattle' && e.status.assignment).length);

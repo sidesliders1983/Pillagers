@@ -8,6 +8,7 @@ import { loadTypeScript } from '../load-typescript.mjs';
 const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE ||
     'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const core = loadTypeScript(new URL('../../src/simulation/SimulationCore.ts', import.meta.url));
+const { SharedSettlement } = loadTypeScript(new URL('../../src/play/SharedSettlement.ts', import.meta.url));
 const output = process.env.QA_OUTPUT || 'docs/qa/fjord-runtime-performance';
 let origin = process.env.QA_ORIGIN || 'http://127.0.0.1:5190';
 const variants = process.env.QA_VARIANTS ? JSON.parse(process.env.QA_VARIANTS) : [{ label: 'current', origin }];
@@ -304,7 +305,15 @@ try {
                 const absoluteTick = state => state.time.winter * 1000 + state.time.tick;
                 const ticks = absoluteTick(after) - absoluteTick(loaded.state);
                 const actual = await page.evaluate(() => window.__fjordAudit.references.session.saveJSON());
-                assert.deepEqual(JSON.parse(actual), core.applyCommand(loaded.state, { type: 'AdvanceTicks', ticks }),
+                // Active physical expeditions require their saved terrain/discovery binding.
+                // Keep the original headless Core reference for legacy benchmark campaigns.
+                let expected;
+                if (loaded.state.world?.island) {
+                    const reference = SharedSettlement.restore(loaded.json, 'fjord');
+                    reference.session.command({ type: 'AdvanceTicks', ticks });
+                    expected = reference.session.readSnapshot();
+                } else expected = core.applyCommand(loaded.state, { type: 'AdvanceTicks', ticks });
+                assert.deepEqual(JSON.parse(actual), expected,
                     'Rendered campaign must equal identical headless canonical commands');
                 const run = { scenario, repeat, variant: variant.label, sourceCommit: variant.sourceCommit || results.sourceCommit, before, after, actualTicksFromFixture: ticks,
                     canonicalReplayEqual: true, windows,

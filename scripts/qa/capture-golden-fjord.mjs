@@ -26,7 +26,8 @@ const context = await browser.newContext({ viewport, deviceScaleFactor: 1 });
 const result = {
     version: 'fjord-golden-v1', sourceCommit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
     diffSha256: digest(execFileSync('git', ['diff', 'HEAD', '--', 'src', 'scripts/qa'])),
-    browser: browser.version(), viewport, quality, reloads, cases: [], errors: [], resources: [],
+    browser: browser.version(), viewport, quality, reloads, selection: process.env.QA_SELECTED ?? null,
+    cases: [], errors: [], resources: [],
 };
 const sourceFiles = execFileSync('git', ['ls-files', '--cached', '--others', '--exclude-standard', '--',
     'src', 'scripts/qa/fjord-runtime-server.mjs', 'scripts/qa/fjord-runtime-browser.mjs',
@@ -84,7 +85,15 @@ try {
                 await page.goto(origin + '/fjord-play', { waitUntil: 'domcontentloaded', timeout: 240000 });
                 await page.waitForFunction(() => window.__fjordAudit?.golden &&
                     document.querySelector('#fjord-canvas')?.dataset.ready === 'true');
-                const state = await page.evaluate(() => window.__fjordAudit.golden.capture());
+                let selection = null;
+                if (process.env.QA_SELECTED) {
+                    assert.match(process.env.QA_SELECTED, /^(persona|building|household|cattle|campfire):[a-z0-9-]+$/);
+                    const [kind, id] = process.env.QA_SELECTED.split(':');
+                    selection = { kind, id };
+                }
+                const state = await page.evaluate(selection => window.__fjordAudit.golden.capture({ selection }), selection);
+                assert.equal(await page.locator('#fjord-canvas').getAttribute('data-selected'), process.env.QA_SELECTED ?? '');
+                const cardHTML = selection ? await page.locator('#entity-panel').innerHTML() : null;
                 assert.deepEqual(state.placeholders, [], 'Golden scenes must use actual entity assets');
                 assert.deepEqual(JSON.parse(state.canonicalJSON), expectedCanonical,
                     'Loading must preserve every canonical fact, RNG state and event');
@@ -97,7 +106,8 @@ try {
                 const stateSha256 = digest(JSON.stringify(state));
                 const image = await page.locator('#fjord-canvas').screenshot();
                 const pixels = await sharp(image).raw().toBuffer();
-                const secondState = await page.evaluate(() => window.__fjordAudit.golden.capture());
+                const secondState = await page.evaluate(selection => window.__fjordAudit.golden.capture({ selection }), selection);
+                if (selection) assert.equal(await page.locator('#entity-panel').innerHTML(), cardHTML, 'Frozen card markup');
                 assert.equal(digest(secondState.canonicalJSON), canonicalSha256);
                 assert.equal(digest(secondState.blueprintJSON), blueprintSha256);
                 delete secondState.canonicalJSON;
@@ -116,7 +126,8 @@ try {
                 await page.screenshot({ path: output + '/' + label + '-desktop.png' });
                 const host = await page.evaluate(() => window.__fjordAudit.inspect().renderer);
                 entry.captures.push({ canonicalSha256, blueprintSha256, stateSha256,
-                    pixelsSha256: digest(pixels), host, state, image: label + '-world.png' });
+                    pixelsSha256: digest(pixels), cardSha256: cardHTML === null ? null : digest(cardHTML),
+                    host, state, image: label + '-world.png' });
                 console.log('PASS golden', label, state.calendar.season, state.renderer.callsIncludingShadows, 'calls');
                 if (process.env.QA_PROFILE_MS) {
                     const milliseconds = Number(process.env.QA_PROFILE_MS);
