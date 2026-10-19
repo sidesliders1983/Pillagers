@@ -7,6 +7,7 @@ const playwrightPath = process.env.PLAYWRIGHT_MODULE ||
 const { chromium } = createRequire(import.meta.url)(playwrightPath);
 const browser = await chromium.launch({ channel: 'msedge', headless: true });
 const origin = process.env.QA_ORIGIN || 'http://127.0.0.1:5180';
+const output = process.env.QA_OUTPUT || 'docs/qa/cinematic-loading';
 const flows = [];
 try {
     const page = await browser.newPage({ viewport: { width: 390, height: 844 }, hasTouch: true });
@@ -16,7 +17,7 @@ try {
         new MutationObserver(() => {
             const canvas = document.querySelector('#fjord-canvas');
             const run = document.querySelector('#fjord-run');
-            if (canvas?.dataset.ready === 'true' && run?.textContent === 'Pause') run.click();
+            if (canvas?.dataset.ready === 'true' && run?.getAttribute('aria-label') === 'Pause simulation') run.click();
         }).observe(document, { subtree: true, attributes: true, attributeFilter: ['data-ready'] });
         const NativeWorker = window.Worker;
         window.Worker = class extends NativeWorker {
@@ -39,7 +40,7 @@ try {
     flows.push('Navigating away during generation terminates the worker without saving a partial campaign.');
 
     let failedRequests = 0;
-    await page.route('**/ground-materials/blended-v1/**', route => {
+    await page.route('**/ground-materials/**', route => {
         failedRequests++;
         return route.abort('failed');
     });
@@ -52,8 +53,8 @@ try {
         { winter: 800, tick: 500, ticksPerWinter: 1000 });
     assert.equal(await page.evaluate(() => sessionStorage.getItem('qa-worker-status')), 'terminated');
     flows.push('Failed ground-material fetch retains the existing declared native-material fallback and reaches the playable Summer state.');
-    mkdirSync('docs/qa/cinematic-loading', { recursive: true });
-    writeFileSync('docs/qa/cinematic-loading/lifecycle.json', JSON.stringify({ flows, failedRequests }, null, 2));
+    mkdirSync(output, { recursive: true });
+    writeFileSync(output + '/lifecycle.json', JSON.stringify({ flows, failedRequests }, null, 2));
     console.log(JSON.stringify({ flows, failedRequests }));
 } finally {
     await browser.close();

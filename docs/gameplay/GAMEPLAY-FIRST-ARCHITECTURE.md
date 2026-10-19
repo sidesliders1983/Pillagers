@@ -51,6 +51,23 @@ Currently `src/fjord-play/FjordPlay.ts` reuses `src/play/SettlementPanel.ts`, `s
 
 The current `src/main.ts` also distinguishes the `/` standalone world prototype from `/fjord-play`. Promoting one player route must not remove developer access or unintentionally start a new campaign for returning users.
 
+### Active presentation ownership (#209)
+
+This is the narrow implementation map for the scene-lifecycle extraction, at the existing architecture location tracked by [#17](https://github.com/sidesliders1983/Pillagers/issues/17). It does not replace the authority of Core, add an engine abstraction, or prescribe the scheduling/quality changes in #210/#211.
+
+| Owner | Responsibility and lifetime |
+| --- | --- |
+| `SimulationCore`, `GameplaySession`, `SharedSettlement` | Authoritative commands, time, RNG, events, discovery, persistence and selection. The scene reads the existing cached `FjordCampaign.readProjection()`; it does not tick or save Core. |
+| `FjordPlay` | Restores the campaign, composes DOM/gameplay interfaces, queues commands, owns the canonical clock interval and playback intent, and installs the single renderer frame callback. It retains the existing page/background/context epochs, recovery dialog, generation/arrival controls and failed-import restoration. Its teardown stops the clock, aborts lifecycle listeners and disposes its UI owners and the active scene. |
+| `createFjordScene` in `FjordScene.ts` | Constructs, replaces, updates and releases the active Three.js presentation. Owns the renderer, scene root, camera/controller, asset/model factories, resident/rival layers, current world, discovery fog, lighting, dressing, visual effects, target marker and island map. `initialize`, `replace`, `sync` and `dispose` are its lifecycle boundary; concrete camera/input/GPU-preparation ports let the entry point retain existing interaction and recovery policy. |
+| `FjordScene` visual bindings | Owns its ResizeObserver, reduced-motion/effects, quality and saved-view bindings. The host supplies the current loading operation and stopped state. Work-start/end notifications retain the existing campaign-clock load gate; they never advance canonical time. The entry point supplies frame eligibility; scene disposal stops that renderer's frame loop. |
+| Existing resource owners | `FjordEntities` owns resident instance roots, rings and structure season state; `FjordModels` owns native Meshy actors and its model templates; `AssetManager` owns the scenery templates borrowed by worlds and houses. `WorldFactory`, `RivalScene`, `SettlementDressingLayer` and the existing effect/lighting classes retain their own resource disposal. World replacement retains the shared factories; final scene disposal releases them. |
+| Existing UI owners | `FjordPlay` retains mission panels/markers, selection and production labels, header/mobile shell, book/history views and command/form bindings. The scene borrows the labels and the attached mission-marker root. Their actual owners release them; scene replacement does not recreate forms or discard in-progress edits. |
+
+The extraction retains the same 500 ms campaign-clock cadence, visual update frequencies, quality defaults, entity reconciliation, source assets, independent home/rival ground caches and save formats. Generation workers and cancellation remain in `IslandLoading`; graphics recovery continues to use the existing context epoch and GPU preparation. This is a maintainability change, with no claimed frame-rate improvement.
+
+Lifecycle defects exposed by delayed-load/disposal checks are isolated from the mechanical extraction in separate commits and recorded with the QA evidence. They must not be hidden by changing the ordinary baseline or weakening parity checks. A simple revert removes the extraction/fix commits together; canonical campaigns need no migration. Physical iOS acceptance is pending unless a device is actually tested.
+
 See [#140](https://github.com/sidesliders1983/Pillagers/issues/140) for the gated migration: documentation freeze → shared-service extraction → 3D entry/management parity → legacy UI removal. Preserve historical source documents for implementation provenance rather than rewriting them as though 2D had never existed.
 
 ## Canonical session-time model
