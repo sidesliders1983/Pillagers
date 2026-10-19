@@ -1,0 +1,7 @@
+{
+  "flows": [
+    "Navigating away during generation terminates the worker without saving a partial campaign.",
+    "Failed ground-material fetch retains the existing declared native-material fallback and reaches the playable Summer state."
+  ],
+  "failedRequests": 1
+}

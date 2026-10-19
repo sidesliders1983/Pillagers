@@ -44,6 +44,10 @@ export class FjordInterface {
     private expanded = false;
     private abort = new AbortController();
     private lastFocus?: HTMLElement;
+    private panelHTML?: string;
+    private panelEpoch = -1;
+    private panelWorld?: SharedSettlement['fjord']['blueprint'];
+    private panelEditable = true;
     private panel = document.querySelector<HTMLElement>('#entity-panel')!;
     private management = document.querySelector<HTMLElement>('#fjord-management')!;
     private workspace = document.querySelector<HTMLElement>('#fjord-workspace')!;
@@ -221,10 +225,21 @@ export class FjordInterface {
                         `<details data-legacy-management data-view-key="advanced:${esc(key)}"><summary>More management</summary>${this.advanced ? legacy() : ''}</details>`}</div>`;
             }
         }
-        const preserved = new Set(Array.from(this.panel.querySelectorAll<HTMLInputElement | HTMLSelectElement>('input,select'))
-            .filter(field => !field.dataset.draft && !field.dataset.cattle &&
-                (this.owner.session.running || field === document.activeElement)).map(field => field.id));
-        updateView(this.panel, html, preserved);
+        const panelEpoch = this.owner.session.personalHistoryEpoch;
+        const panelWorld = this.owner.fjord.blueprint;
+        // HTML remains a current projection. Only skip the redundant DOM patch, and
+        // retain normal control reconciliation for forms and replacement campaigns.
+        if (html !== this.panelHTML || panelEpoch !== this.panelEpoch ||
+            panelWorld !== this.panelWorld || this.panelEditable) {
+            const preserved = new Set(Array.from(this.panel.querySelectorAll<HTMLInputElement | HTMLSelectElement>('input,select'))
+                .filter(field => !field.dataset.draft && !field.dataset.cattle &&
+                    (this.owner.session.running || field === document.activeElement)).map(field => field.id));
+            updateView(this.panel, html, preserved);
+            this.panelHTML = html;
+            this.panelEpoch = panelEpoch;
+            this.panelWorld = panelWorld;
+            this.panelEditable = this.panel.querySelector('input,select') !== null;
+        }
         const count = this.attentionCount(state);
         document.querySelector('#fjord-attention-count')!.textContent = String(count);
         document.querySelector('#fjord-attention')!.setAttribute('aria-label', `Attention: ${count} current conditions`);

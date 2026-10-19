@@ -115,6 +115,11 @@ behavior, with no hunting, combat or economic effect.
 
 ## Rendering and inspection
 
+The active `FjordScene` owns wildlife loading, human proximity inputs, per-frame
+updates and disposal. Same-blueprint world replacement retains the population;
+changed blueprints replace it. Superseded asynchronous loads release their layer
+before attaching anything to the current scene.
+
 Each model loads once through a reference-counted cache. Actor clones share
 geometry, textures, materials and source clips, and own independent skeletons.
 Rebuilding the world disposes the old population and releases its asset leases;

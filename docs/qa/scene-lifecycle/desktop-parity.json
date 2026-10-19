@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "pairs": [
+    {
+      "name": "village-17-island-pool-v2",
+      "canonicalSha256": "b5e2ce85a9cb18b39f15774086b2c4246b2477d92f44a02044da0a41f4e0606e",
+      "blueprintSha256": "2caacc7fd5426867930ca7da4931a69714c6024f045dfd8a7dac5ca27652feaf",
+      "pixelsSha256": "e0d7f6b261c35566cb995798e6a56bdd8aca8d8287999668cd4716d937cd7b79",
+      "renderer": {
+        "callsIncludingShadows": 235,
+        "trianglesIncludingShadows": 5281421,
+        "geometries": 111,
+        "textures": 71,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "beforeSource": {
+        "ref": "ac3833d4fc286bce5c8522920420a006607a6e0f",
+        "overrides": {
+          "src/fjord-play/FjordPlay.ts": "31a3a717e86892d960bd5294985dc2a715fee756ced049dd1948a4d593e98248",
+          "src/core/WorldLighting.ts": "6c641dceff1145f760187ba3b55e72226f0a77e286e30569ea25196e9cba2d75",
+          "src/fjord-play/FjordEntities.ts": "61db60a3dd55160981d5717607a53606cd08c52cb7e73b1f9ba3425003cfd7fd"
+        }
+      },
+      "afterSource": {
+        "ref": null,
+        "overrides": {}
+      }
+    },
+    {
+      "name": "winter-32-island-pool-v2",
+      "canonicalSha256": "4f326a9682fc0e8c42920311bc33db28912335fe6e4723fd206ec26e99142b4b",
+      "blueprintSha256": "564f858cda13aab38ac2d1b779b6a486c7db6a5a75db8f2e333ad6f853bd9451",
+      "pixelsSha256": "5cba0ce6ee6f1c1653459b0df868a1721bf2254fc5aba780b97002ec521da9d0",
+      "renderer": {
+        "callsIncludingShadows": 246,
+        "trianglesIncludingShadows": 4527832,
+        "geometries": 119,
+        "textures": 75,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "beforeSource": {
+        "ref": "ac3833d4fc286bce5c8522920420a006607a6e0f",
+        "overrides": {
+          "src/fjord-play/FjordPlay.ts": "31a3a717e86892d960bd5294985dc2a715fee756ced049dd1948a4d593e98248",
+          "src/core/WorldLighting.ts": "6c641dceff1145f760187ba3b55e72226f0a77e286e30569ea25196e9cba2d75",
+          "src/fjord-play/FjordEntities.ts": "61db60a3dd55160981d5717607a53606cd08c52cb7e73b1f9ba3425003cfd7fd"
+        }
+      },
+      "afterSource": {
+        "ref": null,
+        "overrides": {}
+      }
+    }
+  ],
+  "note": "Same Edge version, viewport, saved campaign, quality, camera and frozen presentation time. This does not claim cross-device pixel identity or an FPS gain."
+}

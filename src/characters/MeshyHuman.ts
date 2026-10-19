@@ -1,3 +1,4 @@
+import { worldResidentDetail } from '../config/PresentationQuality';
 import {
  AnimationAction, AnimationMixer, Bone, Box3, Group, LoopOnce, LoopRepeat, Material,
  Mesh, MeshStandardMaterial, Color, Object3D, SkinnedMesh, Vector3, Quaternion,
@@ -212,7 +213,7 @@ export class MeshyHumanFactory {
 
  async createWorld(dna: CharacterDNA, profile?: HumanProfile) {
   if (this.bodySource) throw new Error('A review-only body cannot create a world resident');
-  return this.create(dna, 2, profile);
+  return this.create(dna, worldResidentDetail.lod, profile);
  }
 }
 export class MeshyHuman {

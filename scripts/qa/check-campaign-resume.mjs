@@ -7,7 +7,7 @@ const fixture = JSON.parse(await readFile('docs/qa/fjord-runtime-performance/fix
 fixture.pace.running = false;
 delete fixture.target;
 const origin = process.env.QA_ORIGIN || 'http://127.0.0.1:5193';
-const output = 'artifacts/campaign-resume';
+const output = process.env.QA_OUTPUT || 'artifacts/campaign-resume';
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'msedge', headless: true });
 try {
@@ -32,7 +32,7 @@ try {
     assert.ok(await page.evaluate(() => window.resumeHeartbeats) > before + 2, 'Resume shell stays responsive');
     await page.locator('#fjord-canvas[data-ready="true"]').waitFor();
     assert.equal(await page.locator('#island-loading').count(), 0);
-    assert.equal(await page.locator('#fjord-run').innerText(), 'Start');
+    assert.equal(await page.locator('#fjord-run').getAttribute('aria-label'), 'Start simulation');
     const restored = JSON.parse(await page.evaluate(() => sessionStorage.getItem('pillagers.fjord-play.active.v1')));
     assert.deepEqual(restored.fjord.campaign, fixture.fjord.campaign);
     assert.deepEqual(restored.fjord.narrative, fixture.fjord.narrative);
@@ -50,7 +50,7 @@ try {
     await page.waitForTimeout(1000);
     assert.equal(await page.evaluate(() => window.resumeCanvas === document.querySelector('#fjord-canvas')), true,
         'Cached return keeps the same canvas and renderer instead of reloading');
-    assert.equal(await page.locator('#fjord-run').innerText(), 'Start');
+    assert.equal(await page.locator('#fjord-run').getAttribute('aria-label'), 'Start simulation');
     const afterReturn = await page.evaluate(() => sessionStorage.getItem('pillagers.fjord-play.active.v1'));
     assert.deepEqual(JSON.parse(afterReturn).fjord.campaign, JSON.parse(suspension).fjord.campaign,
         'Suspension never advances canonical time or RNG');
@@ -64,7 +64,7 @@ try {
         return true;
     }), true, 'This browser must support a real context-loss test');
     await page.locator('#fjord-context-recovery').waitFor({ timeout: 5000 });
-    assert.equal(await page.locator('#fjord-run').innerText(), 'Start');
+    assert.equal(await page.locator('#fjord-run').getAttribute('aria-label'), 'Start simulation');
     const contextCheckpoint = await page.evaluate(() => sessionStorage.getItem('pillagers.fjord-play.active.v1'));
     await page.waitForTimeout(150);
     await page.evaluate(() => window.resumeGl.restoreContext());
@@ -72,7 +72,7 @@ try {
     assert.equal(await page.evaluate(() => window.resumeCanvas === document.querySelector('#fjord-canvas')), true);
     assert.deepEqual(JSON.parse(await page.evaluate(() => sessionStorage.getItem('pillagers.fjord-play.active.v1'))).fjord.campaign,
         JSON.parse(contextCheckpoint).fjord.campaign, 'Graphics recovery cannot advance or replace Core');
-    assert.equal(await page.locator('#fjord-run').innerText(), 'Start');
+    assert.equal(await page.locator('#fjord-run').getAttribute('aria-label'), 'Start simulation');
     console.log('Real WebGL context loss/restoration recovers the existing scene with exact paused Core.');
     const beforeReload = JSON.parse(await page.evaluate(() => sessionStorage.getItem('pillagers.fjord-play.active.v1')));
     await page.reload({ waitUntil: 'domcontentloaded' });

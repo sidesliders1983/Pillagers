@@ -5,6 +5,7 @@ import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { StructureSeasonTint } from '../world/StructureSeasonTint';
 import { natureVariation } from '../world/NatureVariation';
 import { seasonBlend } from '../config/timeVisualization';
+import { presentationProfiles } from '../config/PresentationQuality';
 import {
     dressingAssetKeys, planSettlementDressing, visibleDressing,
     type DressingAsset, type DressingInput, type DressingPlacement, type DressingSources
@@ -103,7 +104,7 @@ export class SettlementDressingLayer {
         const selected = visibleDressing(this.plan, this.quality, this.discovery);
         for (const asset of dressingAssetKeys) {
             const items = selected.filter(item => item.asset === asset);
-            const castShadow = this.quality === 'standard' && !asset.startsWith('kaykit-');
+            const castShadow = presentationProfiles[this.quality].dressing.castPropShadows && !asset.startsWith('kaykit-');
             const signature = JSON.stringify([castShadow, items]);
             const current = this.batches.get(asset);
             if (current?.signature === signature) continue;

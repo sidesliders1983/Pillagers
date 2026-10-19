@@ -4,6 +4,7 @@ import { BatchedRenderer, ColorOverLife, ConstantColor, ConstantValue, Gradient,
 import { Vector3 as ColorVector, Vector4, type Particle } from 'quarks.core';
 import { particleTexture, type EffectQuality } from './CampfireEffect';
 import type { FjordPrecipitation } from '../fjord-play/FjordProjection';
+import { effectProfiles } from '../config/PresentationQuality';
 
 type FallingKind = keyof FjordPrecipitation;
 type Coverage = { center: Vector3; radius: number; height: number; sizeScale: number };
@@ -113,7 +114,7 @@ export class PrecipitationEffect {
         this.root.visible = this.enabled;
     }
 
-    private get enabled() { return this.quality !== 'off' && !this.reducedMotion; }
+    private get enabled() { return effectProfiles[this.quality].enabled && !this.reducedMotion; }
 
     update(delta: number, active: boolean, focus: Vector3, cameraPosition: Vector3) {
         if (this.disposed || !active || !this.enabled) return;
@@ -129,10 +130,7 @@ export class PrecipitationEffect {
         for (const entry of this.entries) {
             const target = this.precipitation[entry.kind];
             entry.weight += Math.sign(target - entry.weight) * Math.min(Math.abs(target - entry.weight), step / 2);
-            const snow = entry.kind === 'snow';
-            const low = this.quality === 'low';
-            const cap = snow ? (low ? 300 : 700) : (low ? 250 : 600);
-            const rate = snow ? (low ? 70 : 140) : (low ? 180 : 400);
+            const { cap, rate } = effectProfiles[this.quality][entry.kind];
             // Reserve one fractional emission so the library cannot overshoot the live budget.
             (entry.system.emissionOverTime as ConstantValue).value = target
                 ? Math.min(rate * entry.weight, Math.max(0, cap - entry.system.particleNum - 1) / step) : 0;

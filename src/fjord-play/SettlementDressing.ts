@@ -5,6 +5,7 @@ import { createBlueprintSurface } from '../world-generation/TerrainQueries';
 import type { FjordEntity, FjordPlot, FjordTransform } from './FjordProjection';
 import type { FjordGround } from './FjordGround';
 import type { SettlementCampfire } from './SettlementCampfire';
+import { presentationProfiles } from '../config/PresentationQuality';
 
 export const dressingAssetKeys = [
     'logs', 'barrel', 'crate', 'fish', 'well',
@@ -38,8 +39,8 @@ export interface DressingPlacement extends FjordTransform {
 }
 // Quality changes select stable subsets of one plan, never a different world or RNG sequence.
 export const dressingBudgets = {
-    low: { props: 40, cover: 160 },
-    standard: { props: 64, cover: 320 }
+    low: presentationProfiles.low.dressing,
+    standard: presentationProfiles.standard.dressing,
 } as const;
 
 /** Only facts which change the visible arrangement enter the planner/cache key.

@@ -29,9 +29,17 @@ small terrain/water patch around each selected animal. It verified shore roaming
 and swimming for both species with no browser errors (`browser.json`). This is a
 close-up motion review, not an end-to-end full-scene browser test.
 
-Sixteen focused wildlife/Fjord entity tests pass. New assertions measure actual
+Eighteen focused wildlife, Fjord entity and presentation-quality tests pass. New assertions measure actual
 skinned-vertex displacement through a motion cycle, require visible motion above
 water, retain finite compact geometry, verify resting motion and paused poses,
 and keep land puffins above water during 60 seconds of valid roaming. Real island
 planning records are preserved alongside this report. Code formatting was
 reviewed manually; no project formatter is configured.
+
+After integration with main's scene owner, the existing scene-owner browser runner
+also passes (Edge with software ANGLE). Wildlife is owned by `FjordScene`, retained
+for the same blueprint and released on replacement/disposal. Delayed scenery and
+native-body loads, three warm world replacements, a superseded campaign and final
+disposal preserve exact Core state and produce no browser errors. Owned roots
+stabilize at 13; final disposal leaves zero roots (`scene-owner.json`). This test
+checks lifecycle/resource stability; the separate close-ups check animal motion.
