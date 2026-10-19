@@ -125,8 +125,10 @@ export function validateLivestockRules(state: SimulationState): void {
 export function validateAnimalSpecies(state: SimulationState): void {
     const landing = state.landing;
     if (!landing) return;
-    for (const id of Object.keys(landing.cattleArchive ?? {}))
+    for (const [id, animal] of Object.entries(landing.cattleArchive ?? {})) {
+        if (!animal || animal.id !== id) throw new Error('Invalid archived livestock identity');
         if (landing.cattle[id]) throw new Error('Duplicate active and archived livestock identity');
+    }
     for (const animal of Object.values({ ...landing.cattleArchive, ...landing.cattle })) {
         if (!livestockSpeciesIds.includes(animalSpecies(animal)))
             throw new Error('Unknown livestock species');

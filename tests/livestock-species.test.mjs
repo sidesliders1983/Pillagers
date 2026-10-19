@@ -180,6 +180,10 @@ test('saved species require complete bounded rules and cannot register one anima
     const duplicated = structuredClone(initial);
     duplicated.landing.cattleArchive = { 'cattle-1': structuredClone(duplicated.landing.cattle['cattle-1']) };
     assert.throws(() => core.reconstructState(JSON.stringify(duplicated)), /livestock/i);
+    const aliased = structuredClone(initial);
+    aliased.landing.cattleArchive = { alias: structuredClone(aliased.landing.cattle['cattle-1']) };
+    assert.throws(() => core.reconstructState(JSON.stringify(aliased)), /livestock/i,
+        'A second dictionary key cannot register the same immutable animal again');
     assert.equal(core.serializeState(initial), before);
 });
 

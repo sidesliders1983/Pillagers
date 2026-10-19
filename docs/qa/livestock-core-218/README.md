@@ -32,3 +32,4 @@ See [the visual review](review.html). Current balance and compatibility details 
 - The independent legacy oracle matched every recorded canonical checkpoint.
 - Desktop, tablet-touch and phone-touch browser flows passed with no page errors. Screenshots were inspected; there was no horizontal page overflow.
 - TypeScript, production build, all 478 tracked public files/47 decoded Terrain models, and explicit character Lab previews passed (20 assets, 36 GLBs, 12 Golden Characters, 19 equipped modules). The existing large-chunk build warning remains.
+- Final archive-key validation: 17 Core/compatibility tests passed after rejecting aliased registrations; all legacy canonical checkpoints remained identical.
