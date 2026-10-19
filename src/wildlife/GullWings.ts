@@ -21,6 +21,7 @@ export function prepareGullWings(scene: Group, grounded = false) {
     for (const mesh of meshes) {
         if (grounded) {
             prepareFoldedWingTarget(mesh);
+            prepareGullHeadTargets(mesh);
             continue;
         }
         const positions = mesh.geometry.getAttribute('position');
@@ -137,9 +138,12 @@ export function gullFoldedWings(model: Group) {
     return meshes;
 }
 
-export function poseGroundedGull(meshes: readonly Mesh[], fold: number) {
-    for (const mesh of meshes)
+export function poseGroundedGull(meshes: readonly Mesh[], fold: number, head = 0) {
+    for (const mesh of meshes) {
         mesh.morphTargetInfluences![0] = fold;
+        mesh.morphTargetInfluences![1] = Math.max(0, head);
+        mesh.morphTargetInfluences![2] = Math.max(0, -head);
+    }
 }
 
 export function poseGullWings(rig: readonly GullWingRig[], flap: number) {
@@ -148,4 +152,38 @@ export function poseGullWings(rig: readonly GullWingRig[], flap: number) {
         wing.elbow.quaternion.setFromAxisAngle(forward, -wing.side * flap * .35);
         wing.wrist.quaternion.identity();
     }
+}
+
+/** Brief left/right scans, separated by a longer neutral rest and phased per bird. */
+export function gullHeadLook(time: number, phase: number) {
+    const cycle = (time + phase * 3) % (14 + phase);
+    if (cycle < 1) return smooth(cycle);
+    if (cycle < 2) return 1;
+    if (cycle < 3.5) return 1 - 2 * smooth((cycle - 2) / 1.5);
+    if (cycle < 4.5) return -1;
+    if (cycle < 5.5) return -1 + smooth(cycle - 4.5);
+    return 0;
+}
+
+/** Head-only targets combine additively with the existing absolute folded-wing target. */
+function prepareGullHeadTargets(mesh: Mesh) {
+    const positions = mesh.geometry.getAttribute('position');
+    const pivot = new Vector3(0, .11, .24), up = new Vector3(0, 1, 0);
+    for (const side of [1, -1]) {
+        const target = new Float32Array(positions.count * 3);
+        for (let vertex = 0; vertex < positions.count; vertex++) {
+            const point = new Vector3().fromBufferAttribute(positions, vertex);
+            const weight = smooth((point.z - .20) / .10) * smooth((point.y - .025) / .10)
+                * (1 - smooth((Math.abs(point.x) - .09) / .08));
+            const turned = point.clone().sub(pivot).applyAxisAngle(up, side * .45).add(pivot);
+            point.lerp(turned, weight).toArray(target, vertex * 3);
+        }
+        const turned = mesh.geometry.clone();
+        turned.setAttribute('position', new Float32BufferAttribute(target, 3));
+        turned.computeVertexNormals();
+        mesh.geometry.morphAttributes.position!.push(turned.getAttribute('position'));
+        mesh.geometry.morphAttributes.normal!.push(turned.getAttribute('normal'));
+        turned.dispose();
+    }
+    mesh.updateMorphTargets();
 }

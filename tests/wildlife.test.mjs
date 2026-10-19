@@ -559,7 +559,8 @@ test('the five newly animated species use their source clips on land and water a
             if (record.actor.speed > 0)
                 assert.ok(maximumMotion > .015, record.actor.id + ' must visibly deform');
             else
-                assert.ok(maximumMotion < 1e-9, 'Hauled-out seals must retain their resting pose');
+                assert.ok(maximumMotion > .005 && maximumMotion < .15,
+                    'Hauled-out seals should retain subtle head/breathing motion');
             const paused = capture();
             layer.advance(.5, false);
             assert.deepEqual(capture(), paused, record.actor.id + ' must keep its paused pose');
@@ -612,4 +613,190 @@ test('repaired reindeer keeps both hind chains on their own side throughout the 
     }
     assert.ok(largestEdge < .50, 'Reindeer has a stretched triangle: ' + largestEdge);
     mixer.stopAllAction();
+});
+
+test('resting otters breathe and look around without drifting, then resume the unmodified Meshy pose', async () => {
+    const layer = await WildlifeLayer.create(worldFixture(), () => true, sources);
+    const control = await WildlifeLayer.create(worldFixture(), () => true, sources);
+    try {
+        const record = layer.records.find(item => item.actor.id === 'otter:shore:0');
+        const baseline = control.records.find(item => item.actor.id === record.actor.id);
+        const actor = record.actor;
+        actor.wait = Infinity;
+        actor.target = null;
+        actor.state = 'idle';
+        const origin = { ...actor.position };
+        let mesh;
+        record.root.traverse(node => { if (node.isSkinnedMesh) mesh = node; });
+        const capture = () => {
+            record.root.updateMatrixWorld(true);
+            const inverse = record.root.matrixWorld.clone().invert();
+            return Array.from({ length: mesh.geometry.attributes.position.count }, (_, index) =>
+                mesh.getVertexPosition(index, new Vector3()).applyMatrix4(mesh.matrixWorld).applyMatrix4(inverse));
+        };
+        layer.advance(0, true);
+        const before = capture();
+        let displacement = 0;
+        for (let frame = 0; frame < 40; frame++) {
+            layer.advance(.2, true);
+            const points = capture();
+            assert.ok(points.every(point => point.toArray().every(Number.isFinite)));
+            displacement = Math.max(displacement, ...points.map((point, index) => point.distanceTo(before[index])));
+        }
+        assert.ok(displacement > .005 && displacement < .15, 'Resting motion must be visible and subtle');
+        assert.deepEqual(actor.position, origin, 'Idle must not translate the actor');
+        const paused = capture();
+        layer.advance(.5, false);
+        assert.deepEqual(capture(), paused, 'Pause must freeze the idle overlay exactly');
+
+        actor.state = baseline.actor.state = 'roam';
+        layer.population.time = control.population.time = 5;
+        layer.advance(0, false);
+        control.advance(0, false);
+        for (const [name, joint] of record.resting.joints) {
+            const expected = baseline.root.getObjectByName(name);
+            assert.ok(joint.bone.quaternion.toArray().every((value, index) =>
+                Math.abs(value - expected.quaternion.toArray()[index]) < 1e-7),
+                'Idle overlay leaked into locomotion: ' + name
+                + JSON.stringify({ actual: joint.bone.quaternion.toArray(), expected: expected.quaternion.toArray() }));
+        }
+        const walking = capture();
+        layer.advance(.5, false);
+        assert.deepEqual(capture(), walking, 'Repeated moving-pose evaluation must not reset animated joints');
+    } finally {
+        layer.dispose();
+        control.dispose();
+    }
+});
+
+test('shore otters roam autonomously while running and freeze their position on pause', () => {
+    const population = new WildlifePopulation(worldFixture());
+    const otter = population.actors.find(actor => actor.id === 'otter:shore:0');
+    let travelled = 0, walking = false;
+    for (let frame = 0; frame < 600; frame++) {
+        const before = { ...otter.position };
+        population.advance(.1, true);
+        travelled += Math.hypot(otter.position.x - before.x, otter.position.z - before.z);
+        walking ||= otter.state === 'roam';
+        assert.ok(population.habitats.valid(otter.position, otter.variant));
+    }
+    assert.ok(walking && travelled > 1, 'The shore otter must choose and walk its own valid routes');
+    const paused = JSON.stringify(otter);
+    population.advance(.5, false);
+    assert.equal(JSON.stringify(otter), paused);
+});
+
+test('grounded gulls scan with their heads while folded wings and feet remain fixed', async () => {
+    const { gullHeadLook } = load('../src/wildlife/GullWings.ts');
+    let left = false, right = false, neutral = 0;
+    for (let time = 0; time < 60; time += .1) {
+        const head = gullHeadLook(time, 1);
+        left ||= head > .9;
+        right ||= head < -.9;
+        if (head === 0) neutral++;
+    }
+    assert.ok(left && right && neutral > 300, 'Head scans should have substantial quiet intervals');
+    const source = await sources.acquire('gull-standing');
+    prepareGullWings(source.scene, true);
+    const model = source.scene.clone(true), other = source.scene.clone(true);
+    const meshes = gullFoldedWings(model), others = gullFoldedWings(other);
+    const mesh = meshes[0], positions = mesh.geometry.attributes.position;
+    const capture = () => Array.from({ length: positions.count }, (_, index) => mesh.getVertexPosition(index, new Vector3()));
+    poseGroundedGull(meshes, 1, 0);
+    const before = capture();
+    poseGroundedGull(meshes, 1, 1);
+    const turned = capture();
+    let headMotion = 0;
+    for (let index = 0; index < positions.count; index++) {
+        const distance = before[index].distanceTo(turned[index]);
+        if (positions.getY(index) < .025 || Math.abs(positions.getX(index)) > .35)
+            assert.ok(distance < 1e-7, 'Head look moved a foot or folded wing');
+        if (positions.getZ(index) > .35 && positions.getY(index) > .125 && Math.abs(positions.getX(index)) < .08)
+            headMotion = Math.max(headMotion, distance);
+        assert.ok(turned[index].toArray().every(Number.isFinite));
+    }
+    assert.ok(headMotion > .05, 'The beak/head must visibly turn independently');
+    poseGroundedGull(meshes, 1, 1);
+    assert.deepEqual(capture(), turned);
+    poseGroundedGull(others, 1, -1);
+    assert.notEqual(meshes[0].morphTargetInfluences, others[0].morphTargetInfluences);
+    assert.equal(meshes[0].morphTargetInfluences[1], 1);
+    assert.equal(others[0].morphTargetInfluences[2], 1);
+});
+
+test('hauled-out seals look around independently, remain in place and preserve their paused poses', async () => {
+    const layer = await WildlifeLayer.create(worldFixture(), () => true, sources);
+    try {
+        const seals = layer.records.filter(record => record.actor.species === 'seal' && record.actor.variant.movement === 'shore');
+        assert.equal(seals.length, 2);
+        const origins = seals.map(record => ({ ...record.actor.position }));
+        layer.advance(0, true);
+        const heads = seals.map(record => record.root.getObjectByName('head'));
+        const before = heads.map(head => head.quaternion.toArray());
+        for (let frame = 0; frame < 40; frame++) layer.advance(.1, true);
+        for (let index = 0; index < seals.length; index++) {
+            assert.ok(heads[index].quaternion.toArray().some((value, axis) => Math.abs(value - before[index][axis]) > .01));
+            assert.deepEqual(seals[index].actor.position, origins[index]);
+        }
+        assert.notDeepEqual(heads[0].quaternion.toArray(), heads[1].quaternion.toArray());
+        const paused = heads.map(head => head.quaternion.toArray());
+        layer.advance(.5, false);
+        assert.deepEqual(heads.map(head => head.quaternion.toArray()), paused);
+    } finally {
+        layer.dispose();
+    }
+});
+
+test('all seven Meshy species retain resting motion and hand full joint control back to their source clip', async () => {
+    const layer = await WildlifeLayer.create(worldFixture(), () => true, sources);
+    const control = await WildlifeLayer.create(worldFixture(), () => true, sources);
+    try {
+        const records = layer.records.filter(record => record.resting && record.actor.variant.movement !== 'water');
+        assert.equal(records.length, 8);
+        assert.equal(new Set(records.map(record => record.actor.species)).size, 7);
+        for (const record of records) record.actor.state = 'idle';
+        const capture = record => {
+            record.root.updateMatrixWorld(true);
+            const inverse = record.root.matrixWorld.clone().invert();
+            let mesh;
+            record.root.traverse(node => { if (node.isSkinnedMesh) mesh = node; });
+            return Array.from({ length: mesh.geometry.attributes.position.count }, (_, index) =>
+                mesh.getVertexPosition(index, new Vector3()).applyMatrix4(mesh.matrixWorld).applyMatrix4(inverse));
+        };
+        layer.population.time = 0;
+        layer.advance(0, false);
+        const before = records.map(capture), motion = records.map(() => 0);
+        for (const time of [.5, 1.5, 3, 5]) {
+            layer.population.time = time;
+            layer.advance(0, false);
+            records.forEach((record, index) => {
+                const points = capture(record);
+                assert.ok(points.every(point => point.toArray().every(Number.isFinite)));
+                motion[index] = Math.max(motion[index],
+                    ...points.map((point, vertex) => point.distanceTo(before[index][vertex])));
+            });
+        }
+        records.forEach((record, index) => {
+            assert.ok(motion[index] > .003 && motion[index] < .35,
+                record.actor.id + ' should have subtle, visible idle motion: ' + motion[index]);
+        });
+        const paused = records.map(capture);
+        layer.advance(.5, false);
+        assert.deepEqual(records.map(capture), paused);
+        const baselines = records.map(record => control.records.find(item => item.actor.id === record.actor.id));
+        for (const record of [...records, ...baselines]) record.actor.state = 'roam';
+        layer.population.time = control.population.time = 7;
+        layer.advance(0, false);
+        control.advance(0, false);
+        records.forEach((record, index) => {
+            for (const [name, joint] of record.resting.joints) {
+                const expected = baselines[index].root.getObjectByName(name).quaternion.toArray();
+                assert.ok(joint.bone.quaternion.toArray().every((value, axis) => Math.abs(value - expected[axis]) < 1e-7),
+                    record.actor.id + ': rest overlay leaked into clip at ' + name);
+            }
+        });
+    } finally {
+        layer.dispose();
+        control.dispose();
+    }
 });

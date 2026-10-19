@@ -103,7 +103,21 @@ calibrated against the previous runtime body length in the first animated pose;
 this avoids inheriting Meshy's inconsistent export units. Counts, habitats,
 roaming speeds and shyness do not change. Swimming otters and seals reuse the
 supplied locomotion loop with their existing water immersion and bob; these are
-not separate authored swimming clips. Hauled-out seals retain the resting frame.
+not separate authored swimming clips.
+
+All seven Meshy animals retain species-specific procedural resting movement over
+the source clip's resting frame: small head turns, breathing and tail movement
+where appropriate. Hauled-out seals keep their position and move their head and
+upper body subtly. The rest overlay is removed before evaluating locomotion, so
+it cannot accumulate into the Meshy walk/swim pose. Every animal has its own
+seeded phase. The wildlife clock and all these poses freeze when the game pauses;
+resuming the simulation resumes normal wandering and animation.
+
+Grounded gulls also scan left/right with their head independently of their folded
+wings and feet. A 5.5-second scan is followed by a longer neutral rest, with a
+14–21 second per-bird cycle. The existing 3.6-second wing stretch every 29–35
+seconds remains unchanged. These motions also use the paused wildlife clock.
+See [resting motion revision 005](qa/wildlife-213/revision-005/README.md).
 
 The reindeer export has a crossed right hind hock and hoof chain. The authoring
 pipeline mirrors the sound left chain, inverse bind matrices and hindquarter skin

@@ -1,8 +1,9 @@
+import { animalRestRig, clearAnimalRest, poseAnimalRest, type AnimalRestRig } from './AnimalRestMotion';
 import { rabbitRig, poseRabbit, type RabbitRig } from './RabbitMotion';
 import { coastalAnimalRig, poseCoastalAnimal, type CoastalAnimalRig } from './CoastalAnimalMotion';
 import {
     prepareGullWings, gullWingRig, gullWingMotion, poseGullWings,
-    gullFoldedWings, poseGroundedGull, type GullWingRig,
+    gullFoldedWings, poseGroundedGull, gullHeadLook, type GullWingRig,
 } from './GullWings';
 import { AnimationMixer, Frustum, Group, Matrix4, Mesh, Quaternion, Sphere, Texture, Vector3, type Camera, type Bone } from 'three';
 import { GLTFLoader, type GLTF } from 'three/addons/loaders/GLTFLoader.js';
@@ -74,6 +75,7 @@ interface RenderActor {
     legs: LegPose[];
     coastal?: CoastalAnimalRig;
     rabbit?: RabbitRig;
+    resting?: AnimalRestRig;
     wings?: GullWingRig[];
     foldedWings?: Mesh[];
     height: number;
@@ -159,6 +161,7 @@ export class WildlifeLayer {
                     const coastal = mixer ? undefined : coastalAnimalRig(model as Group, actor.species);
                     const rabbit = actor.species === 'rabbit' ? rabbitRig(model as Group, root) : undefined;
                     layer.records.push({ actor, root, mixer, coastal, rabbit,
+                        resting: mixer ? animalRestRig(model as Group, root, actor.species) : undefined,
                         legs: mixer || coastal || rabbit || id.startsWith('gull-') ? [] : legPoses(model as Group),
                         wings: id === 'gull-flying' ? gullWingRig(model as Group) : undefined,
                         foldedWings: id === 'gull-standing' ? gullFoldedWings(model as Group) : undefined,
@@ -231,7 +234,8 @@ export class WildlifeLayer {
                 poseGullWings(record.wings, pose.flap);
             }
             if (record.foldedWings) {
-                poseGroundedGull(record.foldedWings, gullWingMotion(this.population.time, actor.phase, true).fold);
+                poseGroundedGull(record.foldedWings, gullWingMotion(this.population.time, actor.phase, true).fold,
+                    gullHeadLook(this.population.time, actor.phase));
             }
             if (airborne)
                 root.rotation.x = -Math.atan2(actor.climbRate, actor.speed) * .3;
@@ -247,7 +251,10 @@ export class WildlifeLayer {
                 });
             }
             else if (record.mixer) {
+                if (record.resting) clearAnimalRest(record.resting);
                 record.mixer.setTime(moving ? this.population.time * gaitSpeed + actor.phase : 0);
+                if (record.resting && !moving)
+                    poseAnimalRest(record.resting, this.population.time, actor.phase);
             }
             else
                 for (const leg of record.legs) {
