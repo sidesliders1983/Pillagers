@@ -17,7 +17,7 @@ moving the camera and changing presentation quality keep the current actors.
 | Reindeer | 1 | Alpine terrain, at least 125 m from centres |
 | Lynx | 1 | Deep forest or foothills, at least 135 m from centres |
 | Great black-backed gull | 6 flying + 3 grounded | One species, two supplied model variants around the coast |
-| Puffin | 3 on land + 2 in water | Small coastal group |
+| Puffin | 3 on land + 2 in water | Initial coastal group within 16 m of its shared anchor; land birds at least 0.6 m above water |
 | Otter | 1 on shore + 1 in water | Coastal pair |
 | Seal | 2 hauled out + 2 in water | Small coastal group |
 
@@ -86,6 +86,17 @@ their actual one-second Meshy walk clip. Only horizontal hip root motion is remo
 so the world controller moves the actor exactly once; vertical bob and joint
 motion remain. The separate `-rigged` originals are retained untouched in Assets.
 
+Otters and puffins have no authored clips. Their supplied joint chains receive
+species-specific procedural movement: otters walk with diagonal leg pairs on
+shore, paddle in water, and move their spine, head and tail. Puffins waddle at
+0.12 m/s on land, paddle while swimming, and make small head and folded-feather
+motions while resting. The poses restore the authored joint rotations each frame
+and pause with the wildlife clock. Water immersion is 35% of the otter's height
+and 45% of the puffin's height, leaving the upper body visible; other swimmers
+retain 60% immersion. Land puffins remain at least 0.6 m above the waterline,
+including while moving, and stay in the same coastal colony as the water birds.
+Their canonical height remains 0.32 m; no visibility-based scale inflation is used.
+
 Other supplied models have no authored clips. Four-legged skeletons receive a
 small procedural leg swing during roaming. Idle animals make a subtle orientation
 change; hauled-out seals rest; grounded gulls turn and stretch their folded wings. Swimmers bob and glide;
@@ -138,4 +149,5 @@ using `createCampaignIsland`: both produce all 26 actors without a missing-habit
 fallback. This is placement validation, not a claim of complete ecology or authored
 animation quality for models without clips.
 
-Updated behavior and distribution evidence is in [revision 002](qa/wildlife-213/revision-002/README.md).
+Gull and distribution evidence is in [revision 002](qa/wildlife-213/revision-002/README.md).
+Current coastal animal motion and placement evidence is in [revision 003](qa/wildlife-213/revision-003/README.md).

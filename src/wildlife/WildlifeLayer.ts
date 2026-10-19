@@ -1,3 +1,4 @@
+import { coastalAnimalRig, poseCoastalAnimal, type CoastalAnimalRig } from './CoastalAnimalMotion';
 import {
     prepareGullWings, gullWingRig, gullWingMotion, poseGullWings,
     gullFoldedWings, poseGroundedGull, type GullWingRig,
@@ -70,6 +71,7 @@ interface RenderActor {
     root: Group;
     mixer?: AnimationMixer;
     legs: LegPose[];
+    coastal?: CoastalAnimalRig;
     wings?: GullWingRig[];
     foldedWings?: Mesh[];
     height: number;
@@ -152,7 +154,9 @@ export class WildlifeLayer {
                     const mixer = source.animations.length ? new AnimationMixer(model) : undefined;
                     if (mixer)
                         mixer.clipAction(source.animations[0]).play();
-                    layer.records.push({ actor, root, mixer, legs: mixer || id.startsWith('gull-') ? [] : legPoses(model as Group),
+                    const coastal = mixer ? undefined : coastalAnimalRig(model as Group, actor.species);
+                    layer.records.push({ actor, root, mixer, coastal,
+                        legs: mixer || coastal || id.startsWith('gull-') ? [] : legPoses(model as Group),
                         wings: id === 'gull-flying' ? gullWingRig(model as Group) : undefined,
                         foldedWings: id === 'gull-standing' ? gullFoldedWings(model as Group) : undefined,
                         height: entry.bounds.max[1] - entry.bounds.min[1],
@@ -203,7 +207,9 @@ export class WildlifeLayer {
                 root.quaternion.premultiply(this.surfaceTilt);
             }
             if (water) {
-                root.position.y -= record.height * .6;
+                const immersion = actor.species === 'otter' ? .35
+                    : actor.species === 'puffin' ? .45 : .6;
+                root.position.y -= record.height * immersion;
                 root.position.y += Math.sin(this.population.time * 1.4 + actor.phase) * .025;
                 root.rotation.x = Math.sin(this.population.time + actor.phase) * .035;
             }
@@ -225,7 +231,13 @@ export class WildlifeLayer {
             }
             if (airborne)
                 root.rotation.x = -Math.atan2(actor.climbRate, actor.speed) * .3;
-            if (record.mixer) {
+            if (record.coastal) {
+                poseCoastalAnimal(record.coastal, {
+                    time: this.population.time, delta: running ? delta : 0, phase: actor.phase,
+                    moving, water, speed: gaitSpeed,
+                });
+            }
+            else if (record.mixer) {
                 record.mixer.setTime(moving ? this.population.time * gaitSpeed + actor.phase : 0);
             }
             else

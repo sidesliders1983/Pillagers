@@ -114,6 +114,9 @@ export class WildlifeHabitats {
         if (!this.inBounds(point, variant.clearance + 1))
             return false;
         const sample = 'tags' in point ? point as HabitatSample : this.sample(point.x, point.z);
+        if (variant.minimumElevation !== undefined
+            && sample.height < this.world.waterLevel + variant.minimumElevation)
+            return false;
         const center = this.world.settlement.center;
         if (Math.hypot(point.x - center.x, point.z - center.z) < variant.avoidSettlement)
             return false;

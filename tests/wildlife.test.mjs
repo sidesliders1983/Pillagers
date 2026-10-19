@@ -342,3 +342,72 @@ test('human proximity reads displayed resident and expedition positions without 
         layer.dispose();
     }
 });
+
+test('coastal animals deform their supplied skins while walking, paddling and resting; pause preserves the pose', async () => {
+    const { poseCoastalAnimal } = load('../src/wildlife/CoastalAnimalMotion.ts');
+    const layer = await WildlifeLayer.create(worldFixture(), () => true, sources);
+    try {
+        const records = layer.records.filter(record => record.coastal);
+        assert.equal(records.length, 7);
+        for (const record of records) {
+            const rig = record.coastal;
+            let mesh;
+            record.root.traverse(node => { if (node.isSkinnedMesh) mesh = node; });
+            assert.ok(mesh, record.actor.id);
+            const capture = () => {
+                record.root.updateMatrixWorld(true);
+                return Array.from({ length: mesh.geometry.attributes.position.count }, (_, vertex) =>
+                    mesh.getVertexPosition(vertex, new Vector3()).applyMatrix4(mesh.matrixWorld));
+            };
+            const frame = { delta: .1, phase: record.actor.phase, moving: true,
+                water: record.actor.variant.movement === 'water', speed: record.actor.speed };
+            rig.activity = 1;
+            poseCoastalAnimal(rig, { ...frame, time: 0 });
+            const before = capture();
+            let after;
+            const displacement = before.map(() => 0);
+            for (const time of [.2, .4, .6, .8, 1]) {
+                poseCoastalAnimal(rig, { ...frame, time });
+                after = capture();
+                after.forEach((point, index) => {
+                    displacement[index] = Math.max(displacement[index], point.distanceTo(before[index]));
+                });
+            }
+            assert.ok(Math.max(...displacement) > .01, record.actor.id + ' must visibly deform');
+            if (frame.water) {
+                const exposed = displacement.filter((_, index) => before[index].y > 0 && after[index].y > 0);
+                assert.ok(Math.max(...exposed) > .003, record.actor.id + ' must animate above water');
+            }
+            assert.ok(after.every(point => point.toArray().every(Number.isFinite)));
+            const body = new Box3().setFromPoints(after).getSize(new Vector3());
+            assert.ok(body.length() < 2, record.actor.id + ' must retain a compact body');
+            poseCoastalAnimal(rig, { ...frame, delta: 0, time: 1 });
+            assert.deepEqual(capture(), after, 'A paused pose must not drift');
+
+            rig.activity = 0;
+            poseCoastalAnimal(rig, { ...frame, moving: false, time: 1 });
+            const resting = capture();
+            poseCoastalAnimal(rig, { ...frame, moving: false, time: 2 });
+            assert.ok(capture().some((point, index) => point.distanceTo(resting[index]) > .002),
+                record.actor.id + ' should retain breathing/head motion while resting');
+        }
+    } finally {
+        layer.dispose();
+    }
+});
+
+test('land puffins perch above the waterline and can waddle within the coastal colony', () => {
+    const population = new WildlifePopulation(worldFixture());
+    const puffins = population.actors.filter(actor => actor.species === 'puffin');
+    assert.equal(puffins.length, 5);
+    let waddled = false;
+    for (let frame = 0; frame < 600; frame++) {
+        population.advance(.1, true);
+        for (const puffin of puffins.filter(actor => actor.variant.id === 'land')) {
+            assert.ok(puffin.position.y >= population.world.waterLevel + .6);
+            assert.ok(population.habitats.valid(puffin.position, puffin.variant));
+            waddled ||= puffin.state === 'roam';
+        }
+    }
+    assert.ok(waddled, 'Land puffins should not remain frozen throughout the review');
+});

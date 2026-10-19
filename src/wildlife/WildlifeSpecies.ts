@@ -14,6 +14,7 @@ export interface WildlifeVariant {
     fleeSpeed?: number;
     maximumCoastDistance?: number;
     minimumCoastDistance?: number;
+    minimumElevation?: number;
     flightHeight?: readonly [
         number,
         number
@@ -61,10 +62,10 @@ export const wildlifeSpecies: readonly WildlifeSpecies[] = [
                 habitats: ['coast', 'rocky_shore'], radius: 3, speed: 0, clearance: 1.1,
                 avoidSettlement: 12, maximumCoastDistance: 10 },
         ] },
-    { id: 'puffin', label: 'Puffin', group: 'small_group', groupRadius: 10, variants: [
+    { id: 'puffin', label: 'Puffin', group: 'small_group', groupRadius: 16, variants: [
             { id: 'land', asset: 'puffin', movement: 'shore', count: 3,
-                habitats: ['coast', 'rocky_shore'], radius: 3, speed: 0, clearance: .16,
-                avoidSettlement: 25, shyDistance: 12, fleeSpeed: .7, maximumCoastDistance: 10 },
+                habitats: ['coast', 'rocky_shore'], radius: 3, speed: .12, clearance: .16,
+                avoidSettlement: 25, shyDistance: 12, fleeSpeed: .7, maximumCoastDistance: 10, minimumElevation: .6 },
             { id: 'water', asset: 'puffin', movement: 'water', count: 2,
                 habitats: ['fjord_water'], radius: 5, speed: .18, clearance: .16,
                 avoidSettlement: 25, maximumCoastDistance: 22 },
