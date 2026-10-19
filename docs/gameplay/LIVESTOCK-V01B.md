@@ -12,7 +12,7 @@ Loading never calls the factory. Earlier saves retain their livestock, species o
 
 ## Explicit breeding and space rules
 
-The trial saves three breeding parameters: `requireFed`, `capacityLimited` and `unassignedCapacityUnits`. The candidate enables both guards and gives the shared outdoor herd 40,000 occupancy units, equivalent to four existing cattle spaces. These are proposed coefficients, pending review.
+The trial saves three breeding parameters: `requireFed`, `capacityLimited` and `unassignedCapacityUnits`. After rejecting the strict-cap pilot, the current candidate enables the feeding guard, leaves `capacityLimited` **false**, and gives the shared outdoor herd a **soft** capacity of 40,000 occupancy units, equivalent to four existing cattle spaces. Overcrowding raises mortality; it does not impose a hard founding/herd population limit. These are proposed coefficients, pending review.
 
 When `requireFed` is enabled, a real human or livestock feeding shortfall at the current annual boundary prevents new livestock births. This consumes no birth/sex roll and does not kill existing animals. It does not alter the existing human fertility reserve policy or Food order. The guard reads actual feeding events rather than persisting a second feeding status.
 
