@@ -1,3 +1,7 @@
+import {
+    prepareGullWings, gullWingRig, gullWingMotion, poseGullWings,
+    gullFoldedWings, poseGroundedGull, type GullWingRig,
+} from './GullWings';
 import { AnimationMixer, Frustum, Group, Matrix4, Mesh, Quaternion, Sphere, Texture, Vector3, type Camera, type Bone } from 'three';
 import { GLTFLoader, type GLTF } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
@@ -66,6 +70,8 @@ interface RenderActor {
     root: Group;
     mixer?: AnimationMixer;
     legs: LegPose[];
+    wings?: GullWingRig[];
+    foldedWings?: Mesh[];
     height: number;
     radius: number;
 }
@@ -73,8 +79,10 @@ interface RenderActor {
 function legPoses(root: Group): LegPose[] {
     root.updateMatrixWorld(true);
     const bones: Bone[] = [];
-    root.traverse(node => { if ((node as Bone).isBone)
-        bones.push(node as Bone); });
+    root.traverse(node => {
+        if ((node as Bone).isBone)
+            bones.push(node as Bone);
+    });
     if (!bones.length)
         return [];
     const hip = bones[0].getWorldPosition(new Vector3());
@@ -87,8 +95,10 @@ function legPoses(root: Group): LegPose[] {
         if (Math.abs(point.x - hip.x) < .025 || point.y > hip.y * 1.35 || point.y < hip.y * .55)
             continue;
         let lowest = Infinity;
-        bone.traverse(child => { if ((child as Bone).isBone)
-            lowest = Math.min(lowest, child.getWorldPosition(new Vector3()).y); });
+        bone.traverse(child => {
+            if ((child as Bone).isBone)
+                lowest = Math.min(lowest, child.getWorldPosition(new Vector3()).y);
+        });
         if (lowest > hip.y * .3)
             continue;
         const key = (point.x < hip.x ? 'left' : 'right') + (point.z > 0 ? 'front' : 'back');
@@ -125,20 +135,26 @@ export class WildlifeLayer {
             const loads = await Promise.allSettled(ids.map(async (id) => {
                 layer.leases.add(id);
                 const source = await layer.sources.acquire(id);
+                if (id.startsWith('gull-'))
+                    prepareGullWings(source.scene, id === 'gull-standing');
                 for (const actor of layer.population.actors.filter(item => item.variant.asset === id)) {
                     const entry = wildlifeAssetManifest.find(item => item.id === id)!;
                     const root = new Group(), model = clone(source.scene);
                     root.name = 'wildlife:' + actor.id;
                     root.add(model);
-                    model.traverse(node => { if (node instanceof Mesh) {
-                        node.castShadow = true;
-                        node.receiveShadow = true;
-                        node.frustumCulled = false;
-                    } });
+                    model.traverse(node => {
+                        if (node instanceof Mesh) {
+                            node.castShadow = true;
+                            node.receiveShadow = true;
+                            node.frustumCulled = false;
+                        }
+                    });
                     const mixer = source.animations.length ? new AnimationMixer(model) : undefined;
                     if (mixer)
                         mixer.clipAction(source.animations[0]).play();
-                    layer.records.push({ actor, root, mixer, legs: mixer ? [] : legPoses(model as Group),
+                    layer.records.push({ actor, root, mixer, legs: mixer || id.startsWith('gull-') ? [] : legPoses(model as Group),
+                        wings: id === 'gull-flying' ? gullWingRig(model as Group) : undefined,
+                        foldedWings: id === 'gull-standing' ? gullFoldedWings(model as Group) : undefined,
                         height: entry.bounds.max[1] - entry.bounds.min[1],
                         radius: Math.hypot(...entry.bounds.max.map((value, i) => value - entry.bounds.min[i])) * .5 + .15 });
                     layer.root.add(root);
@@ -155,6 +171,9 @@ export class WildlifeLayer {
             throw error;
         }
     }
+    setHumans(positions: readonly { x: number; z: number }[]) {
+        this.population.setHumans(positions);
+    }
     setObstacles(obstacles: readonly WildlifeObstacle[]) { this.population.habitats.setObstacles(obstacles); }
     advance(delta: number, running: boolean, camera?: Camera) {
         if (this.disposed)
@@ -168,9 +187,12 @@ export class WildlifeLayer {
         }
         for (const record of this.records) {
             const { actor, root } = record;
-            const moving = actor.state === 'roam' || actor.state === 'swim';
+            const moving = actor.state === 'roam' || actor.state === 'swim' || actor.state === 'flee';
+            const gaitSpeed = actor.state === 'flee'
+                ? actor.variant.fleeSpeed ?? actor.speed * 2.5 : actor.speed;
+            const turnAmplitude = record.wings || record.foldedWings ? .5 : .06;
             const look = !moving && actor.variant.movement !== 'air'
-                ? Math.sin(this.population.time * .25 + actor.phase) * .06 : 0;
+                ? Math.sin(this.population.time * .25 + actor.phase) * turnAmplitude : 0;
             const water = actor.variant.movement === 'water', airborne = actor.variant.movement === 'air';
             root.position.set(actor.position.x, actor.position.y, actor.position.z);
             root.rotation.set(0, actor.heading + look, actor.bank);
@@ -194,14 +216,23 @@ export class WildlifeLayer {
             }
             if (!root.visible || camera && root.position.distanceToSquared(this.cameraPoint) > 200 * 200)
                 continue;
+            if (record.wings) {
+                const pose = gullWingMotion(this.population.time, actor.phase, false, actor.flapEffort);
+                poseGullWings(record.wings, pose.flap);
+            }
+            if (record.foldedWings) {
+                poseGroundedGull(record.foldedWings, gullWingMotion(this.population.time, actor.phase, true).fold);
+            }
+            if (airborne)
+                root.rotation.x = -Math.atan2(actor.climbRate, actor.speed) * .3;
             if (record.mixer) {
-                record.mixer.setTime(moving ? this.population.time * actor.speed + actor.phase : 0);
+                record.mixer.setTime(moving ? this.population.time * gaitSpeed + actor.phase : 0);
             }
             else
                 for (const leg of record.legs) {
                     leg.bone.quaternion.copy(leg.rest);
                     if (moving)
-                        leg.bone.quaternion.premultiply(new Quaternion().setFromAxisAngle(leg.axis, Math.sin(this.population.time * 5 * Math.max(.4, actor.speed) + actor.phase + leg.phase) * .22));
+                        leg.bone.quaternion.premultiply(new Quaternion().setFromAxisAngle(leg.axis, Math.sin(this.population.time * 5 * Math.max(.4, gaitSpeed) + actor.phase + leg.phase) * .22));
                 }
         }
     }

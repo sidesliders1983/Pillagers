@@ -6,17 +6,19 @@ import { Box3, Vector3, AnimationMixer, PerspectiveCamera } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { load } from './load-source.mjs';
-const { wildlifeSpecies } = load('../src/wildlife/WildlifeSpecies.ts');
+import { createRequire } from 'node:module';
+const { wildlifeSpecies, wildlifeTerritoryGap } = load('../src/wildlife/WildlifeSpecies.ts');
 const { WildlifePopulation } = load('../src/wildlife/WildlifePopulation.ts');
 const { WildlifeLayer } = load('../src/wildlife/WildlifeLayer.ts');
 const { wildlifeAssetManifest } = load('../src/wildlife/WildlifeAssetManifest.ts');
+const { gullWingMotion, prepareGullWings, gullWingRig, poseGullWings, gullFoldedWings, poseGroundedGull } = load('../src/wildlife/GullWings.ts');
 const { freezeBlueprint } = load('../src/world-generation/WorldBlueprint.ts');
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 function worldFixture(seed = 213) {
-    const bounds = { minX: -160, maxX: 160, minZ: -160, maxZ: 160 };
+    const bounds = { minX: -400, maxX: 400, minZ: -400, maxZ: 400 };
     const heights = [], cells = [], biomes = [], moisture = [], forest = [], rock = [];
-    for (let z = -160; z <= 160; z += 4)
-        for (let x = -160; x <= 160; x += 4) {
+    for (let z = -400; z <= 400; z += 4)
+        for (let x = -400; x <= 400; x += 4) {
             const height = x < -92 ? -3 : (x + 80) * .25;
             heights.push(height);
             cells.push(height > .2);
@@ -25,14 +27,14 @@ function worldFixture(seed = 213) {
             forest.push(x > -60 && x < 70 ? .7 : 0);
             rock.push(x > 70 || x < -60 ? .6 : .1);
         }
-    const terrain = { bounds, spacing: 4, columns: 81, rows: 81, heights };
+    const terrain = { bounds, spacing: 4, columns: 201, rows: 201, heights };
     return freezeBlueprint({
-        config: { seed, width: 320, depth: 320 }, waterLevel: 0, terrain,
+        config: { seed, width: 800, depth: 800 }, waterLevel: 0, terrain,
         navigation: { ...terrain, heights: undefined, cells },
-        coast: [{ a: { x: -80, z: -160 }, b: { x: -80, z: 160 } }],
+        coast: [{ a: { x: -80, z: -400 }, b: { x: -80, z: 400 } }],
         settlement: { center: { x: -40, z: 0 }, harbor: { x: -80, z: 0 }, buildings: [], accessPaths: [], bounds },
         biomes: { cells: biomes, moisture, waterDistance: heights.map(h => Math.abs(h) * 4), worn: heights.map(() => 0), coverage: {} },
-        environment: { spacing: 4, columns: 81, rows: 81, fields: { forestCover: forest, moisture, rockExposure: rock } },
+        environment: { spacing: 4, columns: 201, rows: 201, fields: { forestCover: forest, moisture, rockExposure: rock } },
         placementPlan: [],
     });
 }
@@ -166,8 +168,10 @@ test('world wildlife shares render resources, owns independent rigs, respects di
         assert.equal(second.inspect().rendered, 0);
         const meshes = layer => {
             const result = [];
-            layer.root.traverse(node => { if (node.isSkinnedMesh)
-                result.push(node); });
+            layer.root.traverse(node => {
+                if (node.isSkinnedMesh)
+                    result.push(node);
+            });
             return result;
         };
         const a = meshes(first)[0], b = meshes(second)[0];
@@ -177,22 +181,22 @@ test('world wildlife shares render resources, owns independent rigs, respects di
         assert.notEqual(a.skeleton.bones[0], b.skeleton.bones[0]);
         const initial = first.population.actors.map(actor => actor.id);
         const bearRoot = first.root.getObjectByName('wildlife:brown-bear:roaming:0');
-        const up = new Vector3(0,1,0).applyQuaternion(bearRoot.quaternion);
-        assert.ok(up.distanceTo(new Vector3(-.25,1,0).normalize()) < 1e-6);
-        const camera = new PerspectiveCamera(45,1,.1,10);
-        camera.position.set(100000,100,100000);
-        camera.lookAt(100100,100,100100);
-        const populationBeforeCamera=first.population.inspect();
-        first.advance(0,false,camera);
-        assert.equal(first.inspect().rendered,0);
-        assert.deepEqual(first.population.inspect(),populationBeforeCamera);
+        const up = new Vector3(0, 1, 0).applyQuaternion(bearRoot.quaternion);
+        assert.ok(up.distanceTo(new Vector3(-.25, 1, 0).normalize()) < 1e-6);
+        const camera = new PerspectiveCamera(45, 1, .1, 10);
+        camera.position.set(100000, 100, 100000);
+        camera.lookAt(100100, 100, 100100);
+        const populationBeforeCamera = first.population.inspect();
+        first.advance(0, false, camera);
+        assert.equal(first.inspect().rendered, 0);
+        assert.deepEqual(first.population.inspect(), populationBeforeCamera);
         first.advance(.5, true);
         assert.deepEqual(first.population.actors.map(actor => actor.id), initial);
         const before = released.length;
-        let skeletonDisposed=false;
-        a.skeleton.addEventListener?.('dispose',()=>{skeletonDisposed=true;});
-        const disposeSkeleton=a.skeleton.dispose.bind(a.skeleton);
-        a.skeleton.dispose=()=>{skeletonDisposed=true;disposeSkeleton();};
+        let skeletonDisposed = false;
+        a.skeleton.addEventListener?.('dispose', () => { skeletonDisposed = true; });
+        const disposeSkeleton = a.skeleton.dispose.bind(a.skeleton);
+        a.skeleton.dispose = () => { skeletonDisposed = true; disposeSkeleton(); };
         first.dispose();
         first.dispose();
         assert.equal(released.length - before, 11);
@@ -229,4 +233,112 @@ test('missing habitats are reported without invalid forced spawns', () => {
     assert.equal(population.actors.some(actor => actor.variant.movement === 'ground'), false);
     for (const actor of population.actors)
         assert.ok(population.habitats.valid(actor.anchor, actor.variant));
+});
+test('inland species reserve separate roaming territories away from human settlements', () => {
+    const population = new WildlifePopulation(worldFixture());
+    const mammals = population.actors.filter(actor => actor.variant.movement === 'ground');
+    assert.equal(mammals.length, 6);
+    for (const actor of mammals) {
+        assert.ok(Math.hypot(actor.anchor.x - population.world.settlement.center.x, actor.anchor.z - population.world.settlement.center.z) >= actor.variant.avoidSettlement + actor.variant.radius);
+        for (const other of mammals)
+            if (actor !== other) {
+                assert.ok(Math.hypot(actor.anchor.x - other.anchor.x, actor.anchor.z - other.anchor.z)
+                    >= actor.variant.radius + other.variant.radius + wildlifeTerritoryGap);
+            }
+    }
+    const harbour = population.world.settlement.harbor;
+    for (const actor of population.actors.filter(actor => actor.variant.movement === 'air')) {
+        assert.ok(Math.hypot(actor.anchor.x - harbour.x, actor.anchor.z - harbour.z) < 70, 'Flying gulls must stay around the settlement harbour');
+    }
+});
+test('nearby people trigger a valid escape without teleporting or advancing while paused', () => {
+    const population = new WildlifePopulation(worldFixture());
+    const fox = population.actors.find(actor => actor.species === 'red-fox');
+    const human = { x: fox.position.x - 8, z: fox.position.z };
+    const before = { ...fox.position };
+    population.setHumans([human]);
+    population.advance(.25, false);
+    assert.deepEqual(fox.position, before);
+    let previous = { ...fox.position }, escaped = false;
+    for (let frame = 0; frame < 30; frame++) {
+        population.advance(.1, true);
+        assert.ok(population.habitats.valid(fox.position, fox.variant));
+        assert.ok(Math.hypot(fox.position.x - previous.x, fox.position.z - previous.z) <= fox.variant.fleeSpeed * .1 + 1e-6);
+        escaped ||= fox.state === 'flee';
+        previous = { ...fox.position };
+    }
+    assert.ok(escaped);
+    assert.ok(Math.hypot(fox.position.x - human.x, fox.position.z - human.z) > 11);
+    population.setHumans([]);
+    for (let frame = 0; frame < 80; frame++)
+        population.advance(.1, true);
+    assert.notEqual(fox.state, 'flee');
+    assert.notEqual(fox.state, 'alert');
+});
+test('flying gull wing effort follows measured ascent and fades to gliding while descending', () => {
+    const population = new WildlifePopulation(worldFixture());
+    let climbing = false, gliding = false;
+    for (let frame = 0; frame < 800; frame++) {
+        population.advance(.1, true);
+        for (const gull of population.actors.filter(actor => actor.variant.movement === 'air')) {
+            climbing ||= gull.climbRate > .6 && gull.flapEffort > .7;
+            gliding ||= gull.climbRate < -.1 && gull.flapEffort < .02;
+            assert.ok(gull.flapEffort >= 0 && gull.flapEffort <= 1);
+        }
+    }
+    assert.ok(climbing);
+    assert.ok(gliding);
+    assert.equal(gullWingMotion(10, 1, false, 0).flap, 0);
+    assert.ok(Math.abs(gullWingMotion(10, 1, false, 1).flap) > .1);
+});
+test('grounded gulls spend most time folded, occasionally spread, and keep feet and beak in place', async () => {
+    let folded = 0, stretched = false;
+    for (let time = 0; time < 120; time += .1) {
+        const pose = gullWingMotion(time, 1, true);
+        if (pose.fold > .95)
+            folded++;
+        stretched ||= pose.fold < .1;
+    }
+    assert.ok(folded > 1000);
+    assert.ok(stretched);
+    const source = await sources.acquire('gull-standing');
+    prepareGullWings(source.scene, true);
+    const model = source.scene.clone(true), meshes = gullFoldedWings(model);
+    poseGroundedGull(meshes, 0);
+    model.updateMatrixWorld(true);
+    const open = new Box3().setFromObject(model, true);
+    const mesh = meshes[0], positions = mesh.geometry.getAttribute('position');
+    const fixed = [];
+    for (let i = 0; i < positions.count; i++)
+        if (Math.abs(positions.getX(i)) < .15 || positions.getY(i) < -.13 && Math.abs(positions.getX(i)) < .35)
+            fixed.push([i, mesh.getVertexPosition(i, new Vector3())]);
+    poseGroundedGull(meshes, 1);
+    model.updateMatrixWorld(true);
+    const closed = new Box3().setFromObject(model, true);
+    assert.ok(closed.getSize(new Vector3()).x < open.getSize(new Vector3()).x * .45);
+    for (const [vertex, point] of fixed)
+        assert.ok(mesh.getVertexPosition(vertex, new Vector3()).distanceTo(point) < 1e-7);
+    for (const attr of [mesh.geometry.morphAttributes.position[0], mesh.geometry.morphAttributes.normal[0]]) {
+        assert.ok([...attr.array].every(Number.isFinite));
+    }
+});
+test('human proximity reads displayed resident and expedition positions without including cattle or hidden models', () => {
+    const { FjordEntities } = load('../src/fjord-play/FjordEntities.ts');
+    const { Group } = createRequire(import.meta.url)('three');
+    const layer = new FjordEntities({ release: () => false });
+    for (const [id, kind, x, z, visible] of [['resident', 'persona', 12, 34, true], ['expedition', 'persona', 87, 66, true],
+        ['cow', 'cattle', 5, 5, true], ['hidden', 'persona', 3, 3, false]]) {
+        const model = new Group();
+        model.userData.canonical = { kind };
+        model.position.set(x, 0, z);
+        model.visible = visible;
+        layer.entries.set(id, { signature: id, model });
+        layer.root.add(model);
+    }
+    try {
+        assert.deepEqual(layer.humanPositions(), [{ x: 12, z: 34 }, { x: 87, z: 66 }]);
+    }
+    finally {
+        layer.dispose();
+    }
 });

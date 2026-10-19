@@ -1,0 +1,561 @@
+{
+  "seed": 0,
+  "recipe": {
+    "version": "island-pool-v2",
+    "generatorVersion": "fjordside-island-v0.3e-r3",
+    "seed": 18
+  },
+  "count": 26,
+  "planningMs": 849.9010000000017,
+  "minimumTerritoryGap": 111.175061635108,
+  "diagnostics": [],
+  "moved": [
+    "otter",
+    "reindeer",
+    "brown-bear",
+    "moose",
+    "lynx",
+    "red-fox",
+    "wolf"
+  ],
+  "actors": [
+    {
+      "id": "wolf:roaming:0",
+      "species": "wolf",
+      "variant": "roaming",
+      "movement": "ground",
+      "habitat": "forest_edge",
+      "state": "roam",
+      "position": {
+        "x": -221.8888551500243,
+        "y": 5.16337649229994,
+        "z": -61.31219965693879
+      },
+      "anchor": {
+        "x": -212,
+        "z": -60
+      },
+      "radius": 38,
+      "heading": 2.0980453677596906,
+      "flightHeight": null
+    },
+    {
+      "id": "brown-bear:roaming:0",
+      "species": "brown-bear",
+      "variant": "roaming",
+      "movement": "ground",
+      "habitat": "deep_forest",
+      "state": "roam",
+      "position": {
+        "x": -127.57561469569148,
+        "y": 5.662812362042622,
+        "z": 231.4044638271455
+      },
+      "anchor": {
+        "x": -124,
+        "z": 236
+      },
+      "radius": 28,
+      "heading": -13.59508805923274,
+      "flightHeight": null
+    },
+    {
+      "id": "reindeer:alpine:0",
+      "species": "reindeer",
+      "variant": "alpine",
+      "movement": "ground",
+      "habitat": "alpine",
+      "state": "roam",
+      "position": {
+        "x": 29.174401256036113,
+        "y": 31.38754927380839,
+        "z": -17.737072762506095
+      },
+      "anchor": {
+        "x": 44,
+        "z": -4
+      },
+      "radius": 24,
+      "heading": 7.45116417794811,
+      "flightHeight": null
+    },
+    {
+      "id": "lynx:roaming:0",
+      "species": "lynx",
+      "variant": "roaming",
+      "movement": "ground",
+      "habitat": "deep_forest",
+      "state": "roam",
+      "position": {
+        "x": 137.59268186745157,
+        "y": 5.479286963856409,
+        "z": -219.9329304502914
+      },
+      "anchor": {
+        "x": 148,
+        "z": -220
+      },
+      "radius": 18,
+      "heading": -2.206739692457485,
+      "flightHeight": null
+    },
+    {
+      "id": "moose:roaming:0",
+      "species": "moose",
+      "variant": "roaming",
+      "movement": "ground",
+      "habitat": "wet_lowland",
+      "state": "roam",
+      "position": {
+        "x": 186.74349692070842,
+        "y": 6.0212012384159,
+        "z": 34.67600426888691
+      },
+      "anchor": {
+        "x": 196,
+        "z": 36
+      },
+      "radius": 22,
+      "heading": 14.330411528969782,
+      "flightHeight": null
+    },
+    {
+      "id": "red-fox:roaming:0",
+      "species": "red-fox",
+      "variant": "roaming",
+      "movement": "ground",
+      "habitat": "forest_edge",
+      "state": "idle",
+      "position": {
+        "x": 177.65491867074704,
+        "y": 6.051324191118859,
+        "z": 188.15494465974663
+      },
+      "anchor": {
+        "x": 180,
+        "z": 188
+      },
+      "radius": 14,
+      "heading": -0.9129548016811014,
+      "flightHeight": null
+    },
+    {
+      "id": "great-black-backed-gull:airborne:0",
+      "species": "great-black-backed-gull",
+      "variant": "airborne",
+      "movement": "air",
+      "habitat": "fjord_water",
+      "state": "glide",
+      "position": {
+        "x": 148.38126601722476,
+        "y": 30.599106745092435,
+        "z": 193.80753001104952
+      },
+      "anchor": {
+        "x": 108.67689732692084,
+        "z": 196.16778205328367
+      },
+      "radius": 44,
+      "heading": -3.048974565237746,
+      "flightHeight": [
+        12,
+        30
+      ]
+    },
+    {
+      "id": "great-black-backed-gull:airborne:1",
+      "species": "great-black-backed-gull",
+      "variant": "airborne",
+      "movement": "air",
+      "habitat": "coast",
+      "state": "glide",
+      "position": {
+        "x": 133.05704157512358,
+        "y": 22.597988644504582,
+        "z": 157.4118319792579
+      },
+      "anchor": {
+        "x": 116.31641967619467,
+        "z": 191.43381741787846
+      },
+      "radius": 44,
+      "heading": -1.8758788722418687,
+      "flightHeight": [
+        12,
+        30
+      ]
+    },
+    {
+      "id": "great-black-backed-gull:airborne:2",
+      "species": "great-black-backed-gull",
+      "variant": "airborne",
+      "movement": "air",
+      "habitat": "coast",
+      "state": "glide",
+      "position": {
+        "x": 70.51254388026345,
+        "y": 23.10590250941132,
+        "z": 156.66913802925828
+      },
+      "anchor": {
+        "x": 97.00725902986478,
+        "z": 188.12404223849228
+      },
+      "radius": 44,
+      "heading": -1.0763778999661426,
+      "flightHeight": [
+        12,
+        30
+      ]
+    },
+    {
+      "id": "great-black-backed-gull:airborne:3",
+      "species": "great-black-backed-gull",
+      "variant": "airborne",
+      "movement": "air",
+      "habitat": "coast",
+      "state": "glide",
+      "position": {
+        "x": 86.56165886890025,
+        "y": 15.044221639633179,
+        "z": 155.85265990341566
+      },
+      "anchor": {
+        "x": 96.90168580567449,
+        "z": 185.12590043158355
+      },
+      "radius": 44,
+      "heading": -1.348469664722826,
+      "flightHeight": [
+        12,
+        30
+      ]
+    },
+    {
+      "id": "great-black-backed-gull:airborne:4",
+      "species": "great-black-backed-gull",
+      "variant": "airborne",
+      "movement": "air",
+      "habitat": "coast",
+      "state": "glide",
+      "position": {
+        "x": 76.05412222143381,
+        "y": 15.010307542911608,
+        "z": 157.8205854038227
+      },
+      "anchor": {
+        "x": 104.01717233615614,
+        "z": 185.27972438904047
+      },
+      "radius": 44,
+      "heading": -0.9931954847571386,
+      "flightHeight": [
+        12,
+        30
+      ]
+    },
+    {
+      "id": "great-black-backed-gull:airborne:5",
+      "species": "great-black-backed-gull",
+      "variant": "airborne",
+      "movement": "air",
+      "habitat": "coast",
+      "state": "glide",
+      "position": {
+        "x": 112.54522984161034,
+        "y": 23.630739482231064,
+        "z": 220.95233225590871
+      },
+      "anchor": {
+        "x": 111.81975249441017,
+        "z": 186.67449698455297
+      },
+      "radius": 44,
+      "heading": 1.5843408550664997,
+      "flightHeight": [
+        12,
+        30
+      ]
+    },
+    {
+      "id": "great-black-backed-gull:grounded:0",
+      "species": "great-black-backed-gull",
+      "variant": "grounded",
+      "movement": "shore",
+      "habitat": "coast",
+      "state": "idle",
+      "position": {
+        "x": 118.88673803303729,
+        "y": 0.9852665874571893,
+        "z": 189.31771338997476
+      },
+      "anchor": {
+        "x": 118.88673803303729,
+        "z": 189.31771338997476
+      },
+      "radius": 3,
+      "heading": 3.047179853077688,
+      "flightHeight": null
+    },
+    {
+      "id": "great-black-backed-gull:grounded:1",
+      "species": "great-black-backed-gull",
+      "variant": "grounded",
+      "movement": "shore",
+      "habitat": "coast",
+      "state": "idle",
+      "position": {
+        "x": 127.99104631290803,
+        "y": 0.4192309881757961,
+        "z": 198.11012266000938
+      },
+      "anchor": {
+        "x": 127.99104631290803,
+        "z": 198.11012266000938
+      },
+      "radius": 3,
+      "heading": 1.7986372464037303,
+      "flightHeight": null
+    },
+    {
+      "id": "great-black-backed-gull:grounded:2",
+      "species": "great-black-backed-gull",
+      "variant": "grounded",
+      "movement": "shore",
+      "habitat": "coast",
+      "state": "idle",
+      "position": {
+        "x": 124.3371756235789,
+        "y": 1.1650033222948157,
+        "z": 192.17939263371923
+      },
+      "anchor": {
+        "x": 124.3371756235789,
+        "z": 192.17939263371923
+      },
+      "radius": 3,
+      "heading": 5.579570217026837,
+      "flightHeight": null
+    },
+    {
+      "id": "puffin:land:0",
+      "species": "puffin",
+      "variant": "land",
+      "movement": "shore",
+      "habitat": "coast",
+      "state": "idle",
+      "position": {
+        "x": 100.00268577490883,
+        "y": 0.12380622780156306,
+        "z": 188.07850797828394
+      },
+      "anchor": {
+        "x": 100.00268577490883,
+        "z": 188.07850797828394
+      },
+      "radius": 3,
+      "heading": 3.945775559950043,
+      "flightHeight": null
+    },
+    {
+      "id": "puffin:land:1",
+      "species": "puffin",
+      "variant": "land",
+      "movement": "shore",
+      "habitat": "coast",
+      "state": "idle",
+      "position": {
+        "x": 101.10364903981748,
+        "y": 0.1330369454830196,
+        "z": 188.10975042446253
+      },
+      "anchor": {
+        "x": 101.10364903981748,
+        "z": 188.10975042446253
+      },
+      "radius": 3,
+      "heading": 3.6136367546127697,
+      "flightHeight": null
+    },
+    {
+      "id": "puffin:land:2",
+      "species": "puffin",
+      "variant": "land",
+      "movement": "shore",
+      "habitat": "coast",
+      "state": "idle",
+      "position": {
+        "x": 101.20100932196583,
+        "y": 0.5060724647857529,
+        "z": 185.11133067808612
+      },
+      "anchor": {
+        "x": 101.20100932196583,
+        "z": 185.11133067808612
+      },
+      "radius": 3,
+      "heading": 5.183516874832557,
+      "flightHeight": null
+    },
+    {
+      "id": "puffin:water:0",
+      "species": "puffin",
+      "variant": "water",
+      "movement": "water",
+      "habitat": "fjord_water",
+      "state": "swim",
+      "position": {
+        "x": 104.52155593955003,
+        "y": -0.12,
+        "z": 193.09679883586534
+      },
+      "anchor": {
+        "x": 103.70670986761317,
+        "z": 195.2753684581364
+      },
+      "radius": 5,
+      "heading": 1.8437803996656994,
+      "flightHeight": null
+    },
+    {
+      "id": "puffin:water:1",
+      "species": "puffin",
+      "variant": "water",
+      "movement": "water",
+      "habitat": "fjord_water",
+      "state": "swim",
+      "position": {
+        "x": 103.12137557125963,
+        "y": -0.12,
+        "z": 193.91975304129238
+      },
+      "anchor": {
+        "x": 103.80192042879878,
+        "z": 192.27641407891375
+      },
+      "radius": 5,
+      "heading": 1.7082603596819557,
+      "flightHeight": null
+    },
+    {
+      "id": "otter:shore:0",
+      "species": "otter",
+      "variant": "shore",
+      "movement": "shore",
+      "habitat": "coast",
+      "state": "roam",
+      "position": {
+        "x": 98.22665592036428,
+        "y": 0.8196340393749189,
+        "z": 182.04270945178212
+      },
+      "anchor": {
+        "x": 99.94860115969419,
+        "z": 185.07899554217084
+      },
+      "radius": 5,
+      "heading": 3.011032728753444,
+      "flightHeight": null
+    },
+    {
+      "id": "otter:water:0",
+      "species": "otter",
+      "variant": "water",
+      "movement": "water",
+      "habitat": "fjord_water",
+      "state": "swim",
+      "position": {
+        "x": 94.41893323792011,
+        "y": -0.12,
+        "z": 196.07598274878296
+      },
+      "anchor": {
+        "x": 96.28573333494207,
+        "z": 192.15254965873518
+      },
+      "radius": 6,
+      "heading": -0.18888944569506097,
+      "flightHeight": null
+    },
+    {
+      "id": "seal:haul-out:0",
+      "species": "seal",
+      "variant": "haul-out",
+      "movement": "shore",
+      "habitat": "coast",
+      "state": "idle",
+      "position": {
+        "x": 114.44813726809399,
+        "y": 0.8478517767278326,
+        "z": 187.50456288244425
+      },
+      "anchor": {
+        "x": 114.44813726809399,
+        "z": 187.50456288244425
+      },
+      "radius": 3,
+      "heading": 3.466651848284295,
+      "flightHeight": null
+    },
+    {
+      "id": "seal:haul-out:1",
+      "species": "seal",
+      "variant": "haul-out",
+      "movement": "shore",
+      "habitat": "coast",
+      "state": "idle",
+      "position": {
+        "x": 119.4441731082898,
+        "y": 0.3387141406088832,
+        "z": 192.90537949553678
+      },
+      "anchor": {
+        "x": 119.4441731082898,
+        "z": 192.90537949553678
+      },
+      "radius": 3,
+      "heading": 5.960931253513325,
+      "flightHeight": null
+    },
+    {
+      "id": "seal:water:0",
+      "species": "seal",
+      "variant": "water",
+      "movement": "water",
+      "habitat": "fjord_water",
+      "state": "swim",
+      "position": {
+        "x": 119.92646844397929,
+        "y": -0.12,
+        "z": 199.49853110904795
+      },
+      "anchor": {
+        "x": 116.22270131726356,
+        "z": 199.12004919710756
+      },
+      "radius": 9,
+      "heading": 1.9332939949018568,
+      "flightHeight": null
+    },
+    {
+      "id": "seal:water:1",
+      "species": "seal",
+      "variant": "water",
+      "movement": "water",
+      "habitat": "fjord_water",
+      "state": "swim",
+      "position": {
+        "x": 108.91340973676007,
+        "y": -0.12,
+        "z": 197.8568683215411
+      },
+      "anchor": {
+        "x": 113.11730305856985,
+        "z": 194.44679291469487
+      },
+      "radius": 9,
+      "heading": -1.3169792778617637,
+      "flightHeight": null
+    }
+  ]
+}

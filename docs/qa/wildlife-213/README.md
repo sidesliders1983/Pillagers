@@ -1,4 +1,7 @@
-# Wildlife #213 visual and placement evidence
+# Wildlife #213 initial visual and placement evidence
+
+This records the first revision. See [revision 002](revision-002/README.md) for
+the later wing animation, folded rests, separated territories and human avoidance.
 
 The contact sheet shows all eleven compact runtime assets. Each tile is framed
 independently; the labels give canonical size references, not relative screen scale.

@@ -1155,6 +1155,7 @@ export class FjordPlay {
             motion!.advance(motionDelta, running, !document.hidden);
             layer!.advance(motion!, motionDelta, running);
             rivalScene?.advance(motionDelta, running);
+            wildlife?.setHumans([...layer!.humanPositions(), ...(rivalScene?.humanPositions() ?? [])]);
             wildlife?.advance(motionDelta, running, camera);
             campfireEffect!.update(delta, running && !document.hidden);
             precipitationEffect!.update(delta, running && !document.hidden, controller.focus, camera.position);

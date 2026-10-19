@@ -292,6 +292,11 @@ export class FjordEntities {
             return [{ id: facts.id, kind: facts.kind, bounds: this.bounds(key)! }];
         });
     }
+    humanPositions() {
+        return [...this.entries.values()].flatMap(({ model }) =>
+            model.userData.canonical?.kind === 'persona' && model.visible
+                ? [{ x: model.position.x, z: model.position.z }] : []);
+    }
     describe() {
         this.root.updateMatrixWorld(true);
         return [...this.entries].map(([key, entry]) => ({
