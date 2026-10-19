@@ -5,6 +5,7 @@ import { execFileSync } from 'node:child_process';
 import { mkdtempSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { livestockCandidate } from '../scripts/qa/livestock-candidates.mjs';
 
 test('the public species study runs the real player and CPU with auditable stock accounting and save/load', () => {
     const first = runLivestockScenario({ seed: 1, species: 'chicken', policy: 'herd', winters: 2 });
@@ -14,6 +15,7 @@ test('the public species study runs the real player and CPU with auditable stock
     assert.notEqual(first.initial.cpu.species, 'chicken');
     assert.equal(first.initial.player.food, 15);
     assert.equal(first.initial.cpu.food, 30);
+    assert.equal(first.initial.player.adultDescendantsReached, 0);
     assert.deepEqual(first.initial.player.sex, { female: 2, male: 1 });
     assert.equal(first.annual.length, 2);
     for (const row of first.annual) for (const clan of [row.player, row.cpu]) {
@@ -48,11 +50,16 @@ test('the bounded study CLI keeps raw observations and refuses to overwrite an e
 });
 
 test('sensible herd management removes surplus adult males to retain breeding space and records the real slaughter cost', () => {
-    const result = runLivestockScenario({ seed: 1, species: 'cattle', policy: 'herd', winters: 5 });
+    // Fixed contract fixture. Changing a proposed balance must not silently change
+    // the conditions under which this specific surplus-adult regression is tested.
+    const livestockRules = { ...livestockCandidate,
+        breeding: { requireFed: true, capacityLimited: true, unassignedCapacityUnits: 40000 } };
+    const result = runLivestockScenario({ seed: 1, species: 'cattle', policy: 'herd', winters: 5, livestockRules });
     assert.ok(result.annual.some(row => row.player.slaughters > 0));
     assert.ok(result.commands.some(command => command.type === 'SlaughterLivestock'));
     assert.ok(result.annual.some(row => row.player.slaughterFood > 0 && row.player.hidesReceived > 0));
-    const full = runLivestockScenario({ seed: 1, species: 'cattle', policy: 'herd', winters: 5, fullWorld: true });
+    const full = runLivestockScenario({ seed: 1, species: 'cattle', policy: 'herd', winters: 5,
+        fullWorld: true, livestockRules });
     assert.deepEqual(full.annual, result.annual);
     assert.equal(full.finalStateHash, result.finalStateHash);
 });

@@ -186,3 +186,15 @@ test('livestock management and the factual Chronicle disclose the actual special
     const entries = projectChronicle(result.events).flatMap(group => group.entries);
     assert.ok(entries.some(entry => /Livestock 1 was slaughtered for 8 Food and 1 Hides\./.test(entry.text)));
 });
+
+test('natural livestock deaths retain identity without producing specialist Hides', () => {
+    const mortal = structuredClone(rules);
+    for (const profile of Object.values(mortal.profiles))
+        profile.mortalityBands = [{ minAge: 0, chanceBps: 10000 }];
+    const initial = campaign(32, {}, mortal);
+    const result = core.applyCommand(initial, { type: 'AdvanceTicks', ticks: 500 });
+    assert.equal(result.events.filter(event => event.type === 'LivestockDied').length, 3);
+    assert.equal(livingAnimals(result).length, 0);
+    assert.equal(Object.keys(result.landing.cattle).length, 3);
+    assert.equal(result.specialistStocks, undefined);
+});

@@ -9,6 +9,8 @@ import { gzipSync, gunzipSync } from 'node:zlib';
 // player policies, bounded to 64 compressed entries per worker. The full-world oracle
 // below verifies identical canonical results, including target RNG and event history.
 const cpuCache = new Map();
+const scenarioHash = studyHash(readFileSync(new URL(import.meta.url), 'utf8').replace(/\r\n/g, '\n'));
+const foodPolicyHash = studyHash(readFileSync(new URL('./food-policy.mjs', import.meta.url), 'utf8').replace(/\r\n/g, '\n'));
 
 const speciesIds = ['cattle', 'chicken', 'pig', 'sheep', 'goat', 'goose'];
 const bounds = { minX: 0, maxX: 512, minZ: 0, maxZ: 256 };
@@ -65,10 +67,12 @@ function prepareHerd(core, initial, commands) {
 
 function observe(core, state) {
     const animals = alive(state), people = Object.values(state.personas).filter(person => person.deathWinter === null);
+    const allPeople = Object.values({ ...state.personaArchive, ...state.personas });
     return { food: state.stocks.food, materials: state.stocks.materials,
         hides: state.specialistStocks?.hides ?? 0, population: people.length,
         children: people.filter(person => core.personaAge(state, person.id) < 16).length,
         adultDescendants: people.filter(person => person.parentIds.length && core.personaAge(state, person.id) >= 16).length,
+        adultDescendantsReached: allPeople.filter(person => person.parentIds.length && core.personaAge(state, person.id) >= 16).length,
         species: animals[0]?.species ?? 'extinct', herd: animals.length, sex: count(animals, 'sex'),
         young: animals.filter(animal => core.inspectLivestock(state, animal.id).stage !== 'Adult').length,
         overcrowded: animals.filter(animal => core.inspectLivestock(state, animal.id).overcrowding > 0).length,
@@ -127,14 +131,16 @@ function annual(core, state, before, offset) {
 
 /** Public bounded real-Core measurement. Budgets stop observations, never alter a herd. */
 export function runLivestockScenario({ seed = 1, species = 'cattle', policy = 'passive', winters = 40,
-    resumeAt = null, maxAnimals = 1000, maxMilliseconds = 180000, onYear = () => {}, fullWorld = false } = {}) {
+    resumeAt = null, maxAnimals = 1000, maxMilliseconds = 180000, onYear = () => {}, fullWorld = false,
+    livestockRules = livestockCandidate } = {}) {
     if (!['control', ...speciesIds].includes(species)) throw new Error('Unknown study species');
     if (!['passive', 'prepared', 'herd'].includes(policy)) throw new Error('Unknown study policy');
     if (!Number.isInteger(seed) || seed < 0 || seed > 0xffffffff ||
         !Number.isInteger(winters) || winters < 1 || winters > 100) throw new Error('Invalid study bounds');
     const { core, identity } = livestockStudyCore(seed, species);
+    const candidateHash = studyHash(livestockRules);
     let state = core.createCampaign(seed, {}, {}, { enabled: true }, {}, { enabled: true }, {},
-        'summer-800-v1', undefined, species === 'control' ? undefined : { player: livestockCandidate });
+        'summer-800-v1', undefined, species === 'control' ? undefined : { player: livestockRules });
     state = core.initializeIslandClans(state, world, 'livestock-study-219');
     const savedWorld = state.world;
     const rootKeys = Object.keys(state);
@@ -197,9 +203,7 @@ export function runLivestockScenario({ seed = 1, species = 'cattle', policy = 'p
             .map(key => [key, state[key]]));
     }
     return { version: 1, seed, species, policy, winters, status, stopReason, initial, ruleConfiguration,
-        identity: { ...identity, scenarioHash: studyHash(readFileSync(new URL(import.meta.url), 'utf8').replace(/\r\n/g, '\n')),
-            foodPolicyHash: studyHash(readFileSync(new URL('./food-policy.mjs', import.meta.url), 'utf8').replace(/\r\n/g, '\n')),
-            candidateHash: studyHash(livestockCandidate) },
+        identity: { ...identity, scenarioHash, foodPolicyHash, candidateHash },
         execution: { fullWorld, cpuCacheHit: !!cachedCpu },
         annual: rows, commands, elapsedMs: Math.round(performance.now() - started),
         finalStateHash: studyHash(core.serializeState(state)) };
