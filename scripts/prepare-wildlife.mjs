@@ -10,6 +10,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { AnimationMixer, Box3, Matrix3, Matrix4, Quaternion, Vector3 } from 'three';
 import sharp from 'sharp';
+import { repairReindeerHindLeg } from './characters/repair-reindeer-rig.mjs';
 const sourceRoot = resolve(process.argv[2] ?? 'Assets/Characters/Wildlife');
 const definitions = JSON.parse(await readFile(new URL('./characters/wildlife.sources.json', import.meta.url), 'utf8'));
 const destination = 'public/wildlife';
@@ -36,6 +37,13 @@ for (const definition of definitions) {
     const doc = await io.readBinary(original), root = doc.getRoot();
     const triangles = root.listMeshes().reduce((sum, m) => sum + m.listPrimitives().reduce((n, p) => n + (p.getIndices()?.getCount() ?? p.getAttribute('POSITION').getCount()) / 3, 0), 0);
     const operations = ['Preserve supplied geometry, UVs, rig and source clip rotations', 'Normalize once to canonical metre scale in an authoring wrapper'];
+    if (definition.repairRightHindLeg) {
+        const gltf = await parse(original);
+        const repair = repairReindeerHindLeg(doc, gltf);
+        operations[0] = 'Preserve supplied geometry, UVs and unaffected rig/clip channels';
+        operations.push(repair.operation);
+        console.log(JSON.stringify({ id: definition.id, repair }));
+    }
     if (root.listAnimations().length) {
         for (const animation of root.listAnimations()) {
             animation.setName('Walk');

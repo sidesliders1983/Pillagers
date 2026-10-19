@@ -116,7 +116,7 @@ const sources = {
     },
     release(id) { released.push(id); },
 };
-test('compact exports pin source identities, canonical scales, source rigs and the two actual walk clips', async () => {
+test('compact exports pin source identities, canonical scales, source rigs and seven authored walk clips', async () => {
     assert.equal(wildlifeAssetManifest.length, 12);
     for (const entry of wildlifeAssetManifest) {
         const bytes = await readFile('public' + entry.path);
@@ -140,7 +140,7 @@ test('compact exports pin source identities, canonical scales, source rigs and t
             assert.ok(Math.abs(box.getSize(new Vector3()).x - 1.6) < .002);
         if (['puffin', 'gull-standing', 'rabbit'].includes(entry.id))
             assert.ok(Math.abs(box.getSize(new Vector3()).y - entry.scaleReference.metres) < .002);
-        if (entry.id === 'bear' || entry.id === 'wolf') {
+        if (['bear', 'wolf', 'fox', 'lynx', 'reindeer', 'otter', 'seal'].includes(entry.id)) {
             assert.match(entry.source, /animate/);
             assert.ok(entry.joints >= 27);
             assert.equal(source.animations[0].name, 'Walk');
@@ -343,12 +343,12 @@ test('human proximity reads displayed resident and expedition positions without 
     }
 });
 
-test('coastal animals deform their supplied skins while walking, paddling and resting; pause preserves the pose', async () => {
+test('puffins deform their supplied skins while waddling, paddling and resting; pause preserves the pose', async () => {
     const { poseCoastalAnimal } = load('../src/wildlife/CoastalAnimalMotion.ts');
     const layer = await WildlifeLayer.create(worldFixture(), () => true, sources);
     try {
         const records = layer.records.filter(record => record.coastal);
-        assert.equal(records.length, 7);
+        assert.equal(records.length, 5);
         for (const record of records) {
             const rig = record.coastal;
             let mesh;
@@ -520,4 +520,96 @@ test('rabbit population pauses its hop exactly and responds to people without te
     const paused = JSON.stringify(rabbit);
     population.advance(.5, false);
     assert.equal(JSON.stringify(rabbit), paused);
+});
+
+test('the five newly animated species use their source clips on land and water and freeze on pause', async () => {
+    const layer = await WildlifeLayer.create(worldFixture(), () => true, sources);
+    try {
+        const species = ['red-fox', 'lynx', 'reindeer', 'otter', 'seal'];
+        const records = layer.records.filter(record => species.includes(record.actor.species));
+        assert.equal(records.length, 9);
+        for (const record of records) {
+            assert.ok(record.mixer, record.actor.id + ' must play its authored clip');
+            assert.equal(record.coastal, undefined);
+            assert.deepEqual(record.legs, []);
+            record.actor.state = record.actor.variant.movement === 'water' ? 'swim'
+                : record.actor.speed > 0 ? 'roam' : 'idle';
+            let mesh;
+            record.root.traverse(node => { if (node.isSkinnedMesh) mesh = node; });
+            const capture = () => {
+                record.root.updateMatrixWorld(true);
+                const actorInverse = record.root.matrixWorld.clone().invert();
+                return Array.from({ length: mesh.geometry.attributes.position.count }, (_, vertex) =>
+                    mesh.getVertexPosition(vertex, new Vector3()).applyMatrix4(mesh.matrixWorld)
+                        .applyMatrix4(actorInverse));
+            };
+            layer.population.time = 0;
+            layer.advance(0, false);
+            const before = capture();
+            let maximumMotion = 0;
+            for (const time of [.2, .4, .6, .8, 1]) {
+                layer.population.time = time;
+                layer.advance(0, false);
+                const points = capture();
+                assert.ok(points.every(point => point.toArray().every(Number.isFinite)));
+                assert.ok(new Box3().setFromPoints(points).getSize(new Vector3()).length() < 3.5);
+                maximumMotion = Math.max(maximumMotion,
+                    ...points.map((point, index) => point.distanceTo(before[index])));
+            }
+            if (record.actor.speed > 0)
+                assert.ok(maximumMotion > .015, record.actor.id + ' must visibly deform');
+            else
+                assert.ok(maximumMotion < 1e-9, 'Hauled-out seals must retain their resting pose');
+            const paused = capture();
+            layer.advance(.5, false);
+            assert.deepEqual(capture(), paused, record.actor.id + ' must keep its paused pose');
+            record.actor.state = record.actor.variant.movement === 'water' ? 'swim' : 'idle';
+        }
+    } finally {
+        layer.dispose();
+    }
+});
+
+test('repaired reindeer keeps both hind chains on their own side throughout the walk', async () => {
+    const source = await sources.acquire('reindeer');
+    const mixer = new AnimationMixer(source.scene);
+    mixer.clipAction(source.animations[0]).play();
+    let mesh;
+    source.scene.traverse(node => { if (node.isSkinnedMesh) mesh = node; });
+    const positions = mesh.geometry.attributes.position;
+    const indices = mesh.geometry.attributes.skinIndex, weights = mesh.geometry.attributes.skinWeight;
+    for (let vertex = 0; vertex < positions.count; vertex++) {
+        let sum = 0;
+        for (let slot = 0; slot < 4; slot++) {
+            const weight = weights.getComponent(vertex, slot);
+            sum += weight;
+            const name = mesh.skeleton.bones[indices.getComponent(vertex, slot)].name;
+            if (weight > .01 && name.startsWith('R_backleg'))
+                assert.ok(positions.getX(vertex) <= 0, 'Right hind weights crossed onto the left surface');
+        }
+        assert.ok(Math.abs(sum - 1) < .002, 'Skin weights must stay normalized');
+    }
+    let largestEdge = 0;
+    for (let frame = 0; frame < 40; frame++) {
+        mixer.setTime(frame / 40);
+        source.scene.updateMatrixWorld(true);
+        // Hooves adduct during a trot; compare against the pelvis midpoint, not a fixed hip offset.
+        const leftHip = source.scene.getObjectByName('backleg').getWorldPosition(new Vector3());
+        const rightHip = source.scene.getObjectByName('R_backleg').getWorldPosition(new Vector3());
+        const centreX = (leftHip.x + rightHip.x) * .5;
+        for (const name of ['backleg1', 'backleg2', 'R_backleg1', 'R_backleg2']) {
+            const point = source.scene.getObjectByName(name).getWorldPosition(new Vector3());
+            const side = name.startsWith('R_') ? -1 : 1;
+            assert.ok((point.x - centreX) * side > .05, name + ' crossed the body');
+        }
+        const index = mesh.geometry.index;
+        for (let triangle = 0; triangle < index.count; triangle += 3) {
+            const points = [0, 1, 2].map(slot => mesh.getVertexPosition(index.getX(triangle + slot),
+                new Vector3()).applyMatrix4(mesh.matrixWorld));
+            for (let edge = 0; edge < 3; edge++)
+                largestEdge = Math.max(largestEdge, points[edge].distanceTo(points[(edge + 1) % 3]));
+        }
+    }
+    assert.ok(largestEdge < .50, 'Reindeer has a stretched triangle: ' + largestEdge);
+    mixer.stopAllAction();
 });

@@ -65,9 +65,9 @@ node scripts/prepare-wildlife.mjs C:/CodexWorkspaces/Pillagers/Assets/Characters
 inconsistent scales, including very small skinned bear/wolf transforms. The
 pipeline measures posed bounds, applies a single authored metre-scale wrapper,
 keeps original UVs and skinning, compresses colour maps to 512 px WebP, and removes
-normal, roughness/metallic, occlusion and emissive maps. The bear/wolf emissive
-factor is also reset to zero. All twelve runtime GLBs together are about 1.47 MB;
-individual exports are below 150 KB. The publication manifest pins original and
+normal, roughness/metallic, occlusion and emissive maps. Emissive factors are reset
+to zero. All twelve runtime GLBs together are about 1.60 MB;
+individual exports are below 160 KB. The publication manifest pins original and
 runtime SHA-256 hashes and records every authoring operation.
 
 Canonical shoulder/body reference heights in metres: bear 1.15, fox 0.40, wolf
@@ -87,16 +87,30 @@ their actual one-second Meshy walk clip. Only horizontal hip root motion is remo
 so the world controller moves the actor exactly once; vertical bob and joint
 motion remain. The separate `-rigged` originals are retained untouched in Assets.
 
-Otters and puffins have no authored clips. Their supplied joint chains receive
-species-specific procedural movement: otters walk with diagonal leg pairs on
-shore, paddle in water, and move their spine, head and tail. Puffins waddle at
-0.12 m/s on land, paddle while swimming, and make small head and folded-feather
-motions while resting. The poses restore the authored joint rotations each frame
-and pause with the wildlife clock. Water immersion is 35% of the otter's height
-and 45% of the puffin's height, leaving the upper body visible; other swimmers
-retain 60% immersion. Land puffins remain at least 0.6 m above the waterline,
-including while moving, and stay in the same coastal colony as the water birds.
-Their canonical height remains 0.32 m; no visibility-based scale inflation is used.
+Puffins retain species-specific procedural movement: waddling at 0.12 m/s on
+land, paddling while swimming, and small head and folded-feather motions while
+resting. Their poses restore authored joint rotations each frame and pause with
+the wildlife clock. Land birds remain at least 0.6 m above the waterline and stay
+in the same coastal colony as water birds. Their canonical height remains 0.32 m.
+Water immersion is 35% of otter height and 45% of puffin height, leaving the upper
+body visible; other swimmers retain 60% immersion.
+
+Fox, lynx, reindeer, sea otter and seal now use the supplied `-animated` Meshy
+exports, alongside the existing bear and wolf clips. Each contains a one-second
+locomotion loop. Horizontal hip motion is removed so the world controller moves
+the actor once; source joint motion and vertical bob remain. New wrappers are
+calibrated against the previous runtime body length in the first animated pose;
+this avoids inheriting Meshy's inconsistent export units. Counts, habitats,
+roaming speeds and shyness do not change. Swimming otters and seals reuse the
+supplied locomotion loop with their existing water immersion and bob; these are
+not separate authored swimming clips. Hauled-out seals retain the resting frame.
+
+The reindeer export has a crossed right hind hock and hoof chain. The authoring
+pipeline mirrors the sound left chain, inverse bind matrices and hindquarter skin
+weights onto the right side, then samples opposite-phase motion in the moving hip
+frame. The other 23 animated joints, geometry, UVs and materials are retained.
+This repair is applied only to the derivative runtime export; the supplied GLB is
+unchanged. See [authored motion revision 004](qa/wildlife-213/revision-004/README.md).
 
 The rabbit uses the supplied `bunny.glb` skeleton (no authored clip), with a
 procedural hop informed by the supplied `WgZ.gif`. It gathers before pushing,
@@ -112,8 +126,7 @@ interpretation of the reference, not motion capture. The pair stays within a
 12 m roaming radius, detects people within 16 m, and shares the existing six-second
 alert behavior. It adds no hunting, resource production or Core entities.
 
-Other supplied models have no authored clips. Four-legged skeletons receive a
-small procedural leg swing during roaming. Idle animals make a subtle orientation
+The moose retains a small procedural leg swing because it has no authored clip. Idle animals make a subtle orientation
 change; hauled-out seals rest; grounded gulls turn and stretch their folded wings. Swimmers bob and glide;
 flying gulls alternate ascent-driven wingbeats and gliding. These are ambient v0.1 motions,
 not authored locomotion, hunting or flight takeoff/landing animations.
@@ -158,7 +171,8 @@ placement and 60-second roaming checks. It writes inspection records under
 `tests/wildlife.test.mjs` checks deterministic population counts, seed variation,
 land/water/alpine/flight constraints over motion, pause behavior, full-segment
 obstacle checks, missing habitats, immutable geography, compact asset hashes,
-canonical dimensions, retained walk clips and stationary hip root motion. Render
+canonical dimensions, all seven retained locomotion clips, stationary hip root motion and the repaired
+reindeer hind chain. Render
 resource tests cover shared geometry/materials, independent skeletons, discovery,
 repeated disposal and cleanup after an asset-load failure. The build's public asset
 validator verifies all wildlife runtime manifest entries, including tracked files

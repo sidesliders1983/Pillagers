@@ -46,35 +46,41 @@ export const wildlifeAssetManifest = [
         "id": "fox",
         "file": "fox.glb",
         "path": "/wildlife/fox.glb",
-        "source": "Assets/Characters/Wildlife/Fox.glb",
-        "sourceSha256": "4af2a03578844cd13cad54190b4787b70fc282850605230fa1b9acdd24852bc1",
-        "sha256": "0e46e1290274dcb76d1002bbaf29ebe2d5a915f5164f927be2ada7b1772b7705",
-        "sourceBytes": 8308368,
-        "bytes": 128816,
+        "source": "Assets/Characters/Wildlife/Fox-animated.glb",
+        "sourceSha256": "d1e08d538898b24fcac8234d5bfbd247c67cc7047a90b0ffef6599075d2f4593",
+        "sha256": "c90c5043b8ccd270e3ceadde7ca31bcaf267b0be1210902a3f75382ec9d50aa3",
+        "sourceBytes": 5564064,
+        "bytes": 153936,
         "triangles": 3032,
         "scaleReference": {
             "kind": "shoulder-height",
             "metres": 0.4,
-            "sourceDimension": 1.15,
-            "scale": 0.3478260869565218
+            "sourceDimension": 0.0020905010284525995,
+            "scale": 191.341690128745
         },
         "bounds": {
             "min": [
-                -0.15116449965492026,
-                0.000024869815931173522,
-                -0.40071242366737964
+                -0.144055755012845,
+                -0.0000016378100920477756,
+                -0.4007100984512586
             ],
             "max": [
-                0.15116447672985614,
-                0.5912795856604844,
-                0.40071226793700565
+                0.14411304602918784,
+                0.4835886789007619,
+                0.400714593153127
             ]
         },
-        "joints": 41,
-        "clips": [],
+        "joints": 27,
+        "clips": [
+            {
+                "name": "Walk",
+                "duration": 1
+            }
+        ],
         "operations": [
             "Preserve supplied geometry, UVs, rig and source clip rotations",
             "Normalize once to canonical metre scale in an authoring wrapper",
+            "Keep source walk loop; remove only horizontal Hips root motion",
             "Resize albedo to 512px WebP and remove high-frequency surface maps"
         ]
     },
@@ -160,35 +166,42 @@ export const wildlifeAssetManifest = [
         "id": "reindeer",
         "file": "reindeer.glb",
         "path": "/wildlife/reindeer.glb",
-        "source": "Assets/Characters/Wildlife/Reindeer.glb",
-        "sourceSha256": "6305a072d6e303577090e87b5fcca9ec0a8240a5930b2ec6d45e64ed54dcb674",
-        "sha256": "db00397a6d4a5d524ade776fd3de295be9a5879ce53e633d6f3d47a4cf3f13a9",
-        "sourceBytes": 8426860,
-        "bytes": 115412,
+        "source": "Assets/Characters/Wildlife/Reindeer-animated.glb",
+        "sourceSha256": "464665f030b1017db3559c6e859c97ab1fc765d5ec9ebbe4c06e0006c9de31e4",
+        "sha256": "599290165c65b90c15718233a4825e4e6e453031fb9b3175dd5f8192762536c9",
+        "sourceBytes": 5679720,
+        "bytes": 138836,
         "triangles": 3130,
         "scaleReference": {
             "kind": "shoulder-height",
             "metres": 1.15,
-            "sourceDimension": 1.05,
-            "scale": 1.0952380952380951
+            "sourceDimension": 0.0014673360090781556,
+            "scale": 783.7332368899472
         },
         "bounds": {
             "min": [
-                -0.46076040813318836,
-                0.000035854617519464626,
-                -1.0094081361024179
+                -0.4685367464152921,
+                0.000012831818807457207,
+                -1.0093739966329753
             ],
             "max": [
-                0.460761157496013,
-                1.8618686222415646,
-                1.009408450884072
+                0.46852570024882234,
+                2.029608572843521,
+                1.0094425903535147
             ]
         },
-        "joints": 46,
-        "clips": [],
+        "joints": 27,
+        "clips": [
+            {
+                "name": "Walk",
+                "duration": 1
+            }
+        ],
         "operations": [
-            "Preserve supplied geometry, UVs, rig and source clip rotations",
+            "Preserve supplied geometry, UVs and unaffected rig/clip channels",
             "Normalize once to canonical metre scale in an authoring wrapper",
+            "Repair crossed right hind chain, inverse binds and weights from mirrored left surface; mirror opposite-phase leg motion",
+            "Keep source walk loop; remove only horizontal Hips root motion",
             "Resize albedo to 512px WebP and remove high-frequency surface maps"
         ]
     },
@@ -196,35 +209,41 @@ export const wildlifeAssetManifest = [
         "id": "lynx",
         "file": "lynx.glb",
         "path": "/wildlife/lynx.glb",
-        "source": "Assets/Characters/Wildlife/Lynx.glb",
-        "sourceSha256": "b5be60065ba843447d85f3ae2b78d652d5d1a8a18c4e61bc055ed9d6e48d6792",
-        "sha256": "d88a374a0b03bd9c6e25dcc3877b30eed1f9a6ab0fe70621c49eb6795c45ee50",
-        "sourceBytes": 8780360,
-        "bytes": 135100,
+        "source": "Assets/Characters/Wildlife/Lynx-animated.glb",
+        "sourceSha256": "ba75a5572c350a9a0403acf28cc5dd91df1c37b59c98d88a2440d0f0e61b7e95",
+        "sha256": "d40d0675fbb597626bea1d312ab6699071816b3dfe163ec1b34196fc4a7544e8",
+        "sourceBytes": 5846988,
+        "bytes": 158220,
         "triangles": 3110,
         "scaleReference": {
             "kind": "shoulder-height",
             "metres": 0.62,
-            "sourceDimension": 1.15,
-            "scale": 0.5391304347826087
+            "sourceDimension": 0.0015581426167843593,
+            "scale": 397.90966072125957
         },
         "bounds": {
             "min": [
-                -0.24419270040691887,
-                -0.000025500243297186417,
-                -0.5543864725752828
+                -0.213379467089578,
+                0.00002039713970611312,
+                -0.5543936802362222
             ],
             "max": [
-                0.24419265408224608,
-                0.9165475068869304,
-                0.5543865103441082
+                0.21339431787460086,
+                0.9436327680904055,
+                0.5543793026831696
             ]
         },
-        "joints": 46,
-        "clips": [],
+        "joints": 27,
+        "clips": [
+            {
+                "name": "Walk",
+                "duration": 1
+            }
+        ],
         "operations": [
             "Preserve supplied geometry, UVs, rig and source clip rotations",
             "Normalize once to canonical metre scale in an authoring wrapper",
+            "Keep source walk loop; remove only horizontal Hips root motion",
             "Resize albedo to 512px WebP and remove high-frequency surface maps"
         ]
     },
@@ -270,35 +289,41 @@ export const wildlifeAssetManifest = [
         "id": "otter",
         "file": "otter.glb",
         "path": "/wildlife/otter.glb",
-        "source": "Assets/Characters/Wildlife/Sea-otter.glb",
-        "sourceSha256": "4630abec86f23983dccadc733e8ad1b02a3bf479b168c5c1a4ecaae08f3a2a4e",
-        "sha256": "7e21ed871ec9cc5212520d4bffa92b8005d3f8273f963da0444972ecdbaf36b5",
-        "sourceBytes": 7906232,
-        "bytes": 116048,
+        "source": "Assets/Characters/Wildlife/Sea-otter-animated.glb",
+        "sourceSha256": "5d63f9b50913175e9e8738b1dc3bec85d94fce2c64441670cfd1f06e3412c3c0",
+        "sha256": "92ef6f30a3dbd6471d24d606f2a1383f4179f26120f940f26d27ba04ac5266cb",
+        "sourceBytes": 5242136,
+        "bytes": 141528,
         "triangles": 2952,
         "scaleReference": {
             "kind": "body-height",
             "metres": 0.3,
-            "sourceDimension": 0.85,
-            "scale": 0.35294117647058826
+            "sourceDimension": 0.0018861880085896004,
+            "scale": 159.05095283917396
         },
         "bounds": {
             "min": [
-                -0.23220981787335246,
-                0.000009133890528299635,
-                -0.5405139394525176
+                -0.19274404656795982,
+                0.000004242130343071193,
+                -0.540528503073959
             ],
             "max": [
-                0.23220969482143794,
-                0.5999908317542886,
-                0.5405140866431096
+                0.1927731073125344,
+                0.5857548138256296,
+                0.5404995230216683
             ]
         },
-        "joints": 34,
-        "clips": [],
+        "joints": 27,
+        "clips": [
+            {
+                "name": "Walk",
+                "duration": 1
+            }
+        ],
         "operations": [
             "Preserve supplied geometry, UVs, rig and source clip rotations",
             "Normalize once to canonical metre scale in an authoring wrapper",
+            "Keep source walk loop; remove only horizontal Hips root motion",
             "Resize albedo to 512px WebP and remove high-frequency surface maps"
         ]
     },
@@ -306,35 +331,41 @@ export const wildlifeAssetManifest = [
         "id": "seal",
         "file": "seal.glb",
         "path": "/wildlife/seal.glb",
-        "source": "Assets/Characters/Wildlife/Seal.glb",
-        "sourceSha256": "6236c247c7eee67884b631806781423e869d6d3eb53f5b44e4358af136035340",
-        "sha256": "def6fef3c69e90ee7026ea728009e14a7fac4e6c3662bc64b85b12e31d84372f",
-        "sourceBytes": 7269492,
-        "bytes": 104212,
+        "source": "Assets/Characters/Wildlife/Seal-animated.glb",
+        "sourceSha256": "80cd0fac97ebf3efbbfea85ce159718ac3d43609129ca8466255f8d70f47fc82",
+        "sha256": "18bb89448497d824ce611c3b3aa170a8c593c050d123a284027a460e27b5fa1c",
+        "sourceBytes": 5273524,
+        "bytes": 135296,
         "triangles": 3036,
         "scaleReference": {
             "kind": "body-height",
             "metres": 0.6,
-            "sourceDimension": 1,
-            "scale": 0.6
+            "sourceDimension": 0.0018693116255900871,
+            "scale": 320.97377012278383
         },
         "bounds": {
             "min": [
-                -0.6019498659247361,
-                0.000023642087072455754,
-                -0.9512909513083991
+                -0.6027173744807133,
+                -0.000007738613289773322,
+                -0.9513074798795345
             ],
             "max": [
-                0.6019497486461854,
-                1.0199767054063968,
-                0.9512912320128757
+                0.6027025944334686,
+                0.9339942220993556,
+                0.9512747034417398
             ]
         },
         "joints": 27,
-        "clips": [],
+        "clips": [
+            {
+                "name": "Walk",
+                "duration": 1
+            }
+        ],
         "operations": [
             "Preserve supplied geometry, UVs, rig and source clip rotations",
             "Normalize once to canonical metre scale in an authoring wrapper",
+            "Keep source walk loop; remove only horizontal Hips root motion",
             "Resize albedo to 512px WebP and remove high-frequency surface maps"
         ]
     },

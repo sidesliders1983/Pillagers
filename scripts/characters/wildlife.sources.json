@@ -8,10 +8,10 @@
   },
   {
     "id": "fox",
-    "file": "Fox.glb",
+    "file": "Fox-animated.glb",
     "reference": "shoulder-height",
     "metres": 0.4,
-    "sourceDimension": 1.15
+    "sourceDimension": 0.0020905010284525995
   },
   {
     "id": "wolf",
@@ -29,17 +29,18 @@
   },
   {
     "id": "reindeer",
-    "file": "Reindeer.glb",
+    "file": "Reindeer-animated.glb",
     "reference": "shoulder-height",
     "metres": 1.15,
-    "sourceDimension": 1.05
+    "sourceDimension": 0.0014673360090781556,
+    "repairRightHindLeg": true
   },
   {
     "id": "lynx",
-    "file": "Lynx.glb",
+    "file": "Lynx-animated.glb",
     "reference": "shoulder-height",
     "metres": 0.62,
-    "sourceDimension": 1.15
+    "sourceDimension": 0.0015581426167843593
   },
   {
     "id": "puffin",
@@ -51,17 +52,17 @@
   },
   {
     "id": "otter",
-    "file": "Sea-otter.glb",
+    "file": "Sea-otter-animated.glb",
     "reference": "body-height",
     "metres": 0.3,
-    "sourceDimension": 0.85
+    "sourceDimension": 0.0018861880085896004
   },
   {
     "id": "seal",
-    "file": "Seal.glb",
+    "file": "Seal-animated.glb",
     "reference": "body-height",
     "metres": 0.6,
-    "sourceDimension": 1
+    "sourceDimension": 0.0018693116255900871
   },
   {
     "id": "gull-flying",
