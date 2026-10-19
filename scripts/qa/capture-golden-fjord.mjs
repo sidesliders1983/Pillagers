@@ -20,13 +20,15 @@ assert.ok(['standard', 'low'].includes(quality));
 assert.ok(Number.isInteger(reloads) && reloads >= 1 && reloads <= 3);
 const digest = value => createHash('sha256').update(value).digest('hex');
 const viewport = { width: Number(process.env.QA_WIDTH || 1400), height: Number(process.env.QA_HEIGHT || 900) };
+const pixelRatioOverride = process.env.QA_PIXEL_RATIO === undefined ? null : Number(process.env.QA_PIXEL_RATIO);
+assert.ok(pixelRatioOverride === null || Number.isFinite(pixelRatioOverride) && pixelRatioOverride >= .5 && pixelRatioOverride <= 2);
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'msedge', headless: true });
 const context = await browser.newContext({ viewport, deviceScaleFactor: 1 });
 const result = {
     version: 'fjord-golden-v1', sourceCommit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
     diffSha256: digest(execFileSync('git', ['diff', 'HEAD', '--', 'src', 'scripts/qa'])),
-    browser: browser.version(), viewport, quality, reloads, selection: process.env.QA_SELECTED ?? null,
+    browser: browser.version(), viewport, quality, reloads, selection: process.env.QA_SELECTED ?? null, pixelRatioOverride,
     cases: [], errors: [], resources: [],
 };
 const sourceFiles = execFileSync('git', ['ls-files', '--cached', '--others', '--exclude-standard', '--',
@@ -85,6 +87,8 @@ try {
                 await page.goto(origin + '/fjord-play', { waitUntil: 'domcontentloaded', timeout: 240000 });
                 await page.waitForFunction(() => window.__fjordAudit?.golden &&
                     document.querySelector('#fjord-canvas')?.dataset.ready === 'true');
+                if (pixelRatioOverride !== null)
+                    await page.evaluate(ratio => window.__fjordAudit.references.renderer.setPixelRatio(ratio), pixelRatioOverride);
                 let selection = null;
                 if (process.env.QA_SELECTED) {
                     assert.match(process.env.QA_SELECTED, /^(persona|building|household|cattle|campfire):[a-z0-9-]+$/);

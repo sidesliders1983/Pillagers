@@ -1,0 +1,61 @@
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 346 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                         1.35 kB │ gzip:   0.62 kB
+dist/assets/GenerationWorker-CDdUaqu0.js               67.23 kB
+dist/assets/PreviewGround-BO2hWq-D.css                  0.22 kB │ gzip:   0.13 kB
+dist/assets/ScreenAwakeControl-rxpOnXDJ.css             0.27 kB │ gzip:   0.18 kB
+dist/assets/MeshyCharacterLab-CqNdCCub.css              1.14 kB │ gzip:   0.49 kB
+dist/assets/AssetLab-HQ7TMumO.css                       1.43 kB │ gzip:   0.58 kB
+dist/assets/EnvironmentLab-CqiAP2SL.css                 1.86 kB │ gzip:   0.69 kB
+dist/assets/WaterLab-CamFp8SX.css                       2.60 kB │ gzip:   1.02 kB
+dist/assets/GameplayLab-JhEYIz1p.css                    3.55 kB │ gzip:   1.24 kB
+dist/assets/SettlementBrowser-CY0BWsEw.css              3.84 kB │ gzip:   1.32 kB
+dist/assets/index-BPHQuCGE.css                          5.14 kB │ gzip:   1.71 kB
+dist/assets/CharacterLab-D6v7iLwL.css                   8.43 kB │ gzip:   2.50 kB
+dist/assets/PlayUI-BqzHz75C.css                         8.75 kB │ gzip:   2.75 kB
+dist/assets/FjordPlay-CmWcj6WG.css                     51.74 kB │ gzip:   9.75 kB
+dist/assets/CattlePresentation-BsbnPLU9.js              0.29 kB │ gzip:   0.18 kB
+dist/assets/Renderer-M6qnwYoZ.js                        0.45 kB │ gzip:   0.30 kB
+dist/assets/Villager-CFmvp25R.js                        0.76 kB │ gzip:   0.50 kB
+dist/assets/HumanPreviewPace-9YyU6qGo.js                0.92 kB │ gzip:   0.56 kB
+dist/assets/worldConfig-BCznhcbi.js                     0.98 kB │ gzip:   0.64 kB
+dist/assets/BrowserGeneration-D73puYsQ.js               1.22 kB │ gzip:   0.63 kB
+dist/assets/PreviewGround-v4XIoBKD.js                   1.80 kB │ gzip:   0.88 kB
+dist/assets/world-shell-C_RMA22M.js                     2.38 kB │ gzip:   0.95 kB
+dist/assets/SettlementVisibility-B6g6uVX7.js            2.76 kB │ gzip:   1.33 kB
+dist/assets/generateName-BUy7F8LY.js                    4.36 kB │ gzip:   1.80 kB
+dist/assets/ClanDiscovery-B9t5u8bQ.js                   4.69 kB │ gzip:   2.07 kB
+dist/assets/generateCharacterDNA-BkZX7qL4.js            5.67 kB │ gzip:   2.17 kB
+dist/assets/AssetLab-E5f7IYyA.js                        6.07 kB │ gzip:   2.67 kB
+dist/assets/index-6jTTsn7K.js                           6.55 kB │ gzip:   2.45 kB
+dist/assets/MeshyCharacterLab-C1c50wL2.js               7.15 kB │ gzip:   3.05 kB
+dist/assets/CampaignIsland-CLTFO_7U.js                 10.30 kB │ gzip:   4.35 kB
+dist/assets/CowCharacterPreview-DuOLiSUW.js            10.70 kB │ gzip:   4.17 kB
+dist/assets/WaterLab-CzAC3Pi4.js                       11.37 kB │ gzip:   3.92 kB
+dist/assets/ReferenceWater-CKTqRVjQ.js                 12.30 kB │ gzip:   4.54 kB
+dist/assets/OrbitControls-W8s2-Cim.js                  19.11 kB │ gzip:   4.34 kB
+dist/assets/GameplayLab-B1q9no3s.js                    20.41 kB │ gzip:   6.96 kB
+dist/assets/Game-Cc68Hopj.js                           22.41 kB │ gzip:   8.05 kB
+dist/assets/PlayUI-DdabRbPP.js                         25.15 kB │ gzip:   8.99 kB
+dist/assets/RTSCameraController-B5ETiL3j.js            36.68 kB │ gzip:  13.35 kB
+dist/assets/SettlementBrowser-CnwdnFYM.js              61.84 kB │ gzip:  20.94 kB
+dist/assets/WorldSave-CSkX6_HF.js                      68.18 kB │ gzip:  26.73 kB
+dist/assets/BlueprintMovement-B7Hjhg7V.js              76.21 kB │ gzip:  28.02 kB
+dist/assets/UniversalHumanProfile-DFK8-4b8.js          76.31 kB │ gzip:  26.28 kB
+dist/assets/CharacterFactory-BzltqNgw.js               94.63 kB │ gzip:  31.71 kB
+dist/assets/EnvironmentLab-UErXY1Ap.js                 95.90 kB │ gzip:  31.17 kB
+dist/assets/CharacterLab-BJFsj1EN.js                   98.91 kB │ gzip:  30.17 kB
+dist/assets/MeshyHuman-D5_wJG0A.js                    158.23 kB │ gzip:  48.60 kB
+dist/assets/ScreenAwakeControl-DLvSSh2p.js            225.31 kB │ gzip:  66.66 kB
+dist/assets/GoldenBodySurfaceCalibration-C_5LNdMz.js  314.91 kB │ gzip:  64.61 kB
+dist/assets/FjordPlay-DVCMTl3K.js                     367.38 kB │ gzip: 103.54 kB
+dist/assets/three.module-CHm4yqpi.js                  560.55 kB │ gzip: 143.17 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 31.50s

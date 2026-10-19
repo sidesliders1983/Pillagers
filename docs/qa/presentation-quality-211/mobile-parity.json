@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "pairs": [
+    {
+      "name": "village-17-island-pool-v2",
+      "canonicalSha256": "b5e2ce85a9cb18b39f15774086b2c4246b2477d92f44a02044da0a41f4e0606e",
+      "blueprintSha256": "2caacc7fd5426867930ca7da4931a69714c6024f045dfd8a7dac5ca27652feaf",
+      "pixelsSha256": "c9dee15278297a3ed8445412e5e7165218a36dbb4f4a078735bafe07e845ee59",
+      "renderer": {
+        "callsIncludingShadows": 227,
+        "trianglesIncludingShadows": 5182154,
+        "geometries": 113,
+        "textures": 71,
+        "pixelRatio": 1,
+        "width": 390,
+        "height": 844
+      },
+      "beforeSource": {
+        "ref": null,
+        "overrides": {}
+      },
+      "afterSource": {
+        "ref": null,
+        "overrides": {}
+      }
+    }
+  ],
+  "note": "Same Edge version, viewport, saved campaign, quality, camera and frozen presentation time. This does not claim cross-device pixel identity or an FPS gain."
+}

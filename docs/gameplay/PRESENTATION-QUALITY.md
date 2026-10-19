@@ -57,3 +57,9 @@ samples, CPU/GPU/frame/resource evidence and the adopt/retain/defer decision bel
 accompanying QA report. Pixel count alone is not an FPS result. A changed default requires owner
 visual/performance approval before merge. Physical iPhone/iPad Safari and thermal acceptance remain
 pending under #151 unless actually observed.
+
+The first measured candidate used a QA-only Low drawing-buffer ratio of 0.85 instead of 1.
+Three alternating repetitions of the inhabited-village and observed-rival cases did not establish
+a consistent end-to-end frame improvement. The decision is to retain the existing values above;
+the candidate remains an explicit experiment, not a product setting. See the
+[paired measurements and visual comparison](../qa/presentation-quality-211/report.md).

@@ -158,6 +158,12 @@ try {
                     refs.setPlayback(false);
                     const quality = document.querySelector('#fjord-quality');
                     quality.value = scenario.quality || 'low'; quality.dispatchEvent(new Event('change'));
+                    // One explicit resolution experiment; no shipped preference/default override.
+                    if (scenario.pixelRatio !== undefined) {
+                        if (!Number.isFinite(scenario.pixelRatio) || scenario.pixelRatio < .5 || scenario.pixelRatio > 2)
+                            throw Error('Invalid QA pixel ratio');
+                        refs.renderer.setPixelRatio(scenario.pixelRatio);
+                    }
                     const effects = document.querySelector('#fjord-effects');
                     effects.value = scenario.effects || 'low'; effects.dispatchEvent(new Event('change'));
                     refs.session.setMinutesPerWinter(scenario.minutes || 3);

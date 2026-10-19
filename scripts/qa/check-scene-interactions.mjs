@@ -11,6 +11,8 @@ const { SharedSettlement } = loadTypeScript(new URL('../../src/play/SharedSettle
 const { createBlueprintSurface } = loadTypeScript(new URL('../../src/world-generation/TerrainQueries.ts', import.meta.url));
 const origin = process.env.QA_ORIGIN || 'http://127.0.0.1:5182';
 const output = process.env.QA_OUTPUT || 'artifacts/scene-lifecycle/interactions';
+const pixelRatioOverride = process.env.QA_PIXEL_RATIO === undefined ? null : Number(process.env.QA_PIXEL_RATIO);
+assert.ok(pixelRatioOverride === null || Number.isFinite(pixelRatioOverride) && pixelRatioOverride >= .5 && pixelRatioOverride <= 2);
 await mkdir(output, { recursive: true });
 // Reuse the published, normally discovered mission fixture; obtain building funds
 // through the real salvage command, without changing stocks or game rules.
@@ -23,7 +25,7 @@ const height = createBlueprintSurface(shared.fjord.blueprint).surfaceHeightAt(ce
 save.presentation = { quality: 'low', effects: 'low', camera: {
     position: [center.x + 24, height + 42, center.z - 48], target: [center.x, height, center.z] } };
 const browser = await chromium.launch({ channel: 'msedge', headless: true });
-const report = { status: 'RUNNING', physicalDeviceTested: false, checks: [], errors: [] };
+const report = { status: 'RUNNING', physicalDeviceTested: false, pixelRatioOverride, checks: [], errors: [] };
 try {
     const context = await browser.newContext({ viewport: { width: 1024, height: 768 }, hasTouch: true });
     await context.addInitScript(save => sessionStorage.setItem('pillagers.fjord-play.active.v1', JSON.stringify(save)), save);
@@ -33,7 +35,13 @@ try {
     await page.goto(origin + '/fjord-play');
     await page.locator('#fjord-canvas[data-ready="true"]').waitFor();
     if (await page.locator('#clan-book-close').isVisible()) await page.locator('#clan-book-close').click();
-    assert.equal(await page.evaluate(() => typeof window.__fjordAudit), 'undefined');
+    if (pixelRatioOverride === null) {
+        assert.equal(await page.evaluate(() => typeof window.__fjordAudit), 'undefined');
+    } else {
+        // Explicit QA-only resolution trial; the ordinary production check above stays strict.
+        await page.evaluate(ratio => window.__fjordAudit.references.renderer.setPixelRatio(ratio), pixelRatioOverride);
+        assert.equal(await page.evaluate(() => window.__fjordAudit.references.renderer.getPixelRatio()), pixelRatioOverride);
+    }
     const saved = () => page.evaluate(() => JSON.parse(sessionStorage.getItem('pillagers.fjord-play.active.v1')).fjord.campaign);
     const beforeMission = await saved();
     const camera = await page.locator('#fjord-canvas').evaluate(canvas => JSON.parse(canvas.dataset.camera));

@@ -1,0 +1,38 @@
+✔ Fjord treatment preserves season, weather, fog and shadow contracts while separating lit planes (47.3572ms)
+✔ open sea has 53 cm depth at the lab water level (3.1424ms)
+✔ land reports a negative depth and raising water by 10 cm adds 10 cm to sea depth (1.855ms)
+✔ invalid depth-query coordinates cannot propagate non-finite water depths (3.0777ms)
+✔ zoned ground blends the canonical continuous influences without changing saved terrain (1766.4329ms)
+✔ steep rock uses height-aware native UVs while preserving canonical triangles and wear (1431.8828ms)
+✔ existing clearing and path wear updates the blend without adding saved fields (1329.9157ms)
+✔ empty blend layers do not redraw terrain, including after path wear changes (1404.78ms)
+✔ optional snow uses saved climate potential and leaves the normal-climate substrate untouched (2424.3656ms)
+✔ material masks reproduce through save/load and legacy worlds retain their original renderer (4630.1969ms)
+✔ Fjord quality preserves cold-start and live-switch resolution without changing resident detail (569.7326ms)
+✔ existing preference defaults remain separate from canonical campaigns and survive restore (6137.7906ms)
+✔ mobile water tiers keep one surface within explicit geometry and texture budgets (136.5858ms)
+✔ frame updates retain geometry, material and textures instead of reallocating GPU resources (17.0034ms)
+✔ quality changes retire old geometry and setting the current tier allocates nothing (24.0947ms)
+✔ invalid numeric options cannot leak nonfinite coordinates or shader parameters (14.0384ms)
+✔ lighting and time changes do not replace the caller-owned scene object (11.4761ms)
+✔ disposing one component once releases its resources without invalidating another component (38.1923ms)
+✔ the optional far skirt preserves budgets and remains inside displacement-aware culling bounds (33.9653ms)
+✔ every stretched skirt triangle has zero wave slope to prevent radial horizon streaks (59.5174ms)
+✔ regional ground retains every canonical triangle and raycast height with continuous padded UVs (1067.7595ms)
+✔ Low ground retains sourced colour and roughness while omitting the per-pixel normal layer (470.3482ms)
+✔ view handoff preserves selection, running pace, fractional time and exact Fjord (6495.7676ms)
+✔ shared commands use Core availability and update both projections without moving the plot (1268.1374ms)
+✔ shared import is atomic and new/restart campaigns reset both presentations while retaining saved rules (2463.7431ms)
+✔ paired 2D/Fjord ownership transfers retain deterministic replay through Winters and exact local saves (4752.9963ms)
+✔ same-seed saves from an earlier campaign clear unavailable identities from the Fjord sidecar (714.1529ms)
+✔ resident selection identifies the canonical partner, child and home; home selection identifies its occupants (1900.6829ms)
+✔ Auto excludes compatible unaccepted previews while explicit inspection stays available and DNA stays fixed (12.9889ms)
+✔ accepted-only automatic policy leaves the legacy body deterministic (15.6284ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 35631.1834
