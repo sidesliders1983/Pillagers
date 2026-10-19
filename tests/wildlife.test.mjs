@@ -322,6 +322,51 @@ test('grounded gulls spend most time folded, occasionally spread, and keep feet 
         assert.ok([...attr.array].every(Number.isFinite));
     }
 });
+test('grounded gulls lift closed wings before spreading and lower them along the flanks afterward', async () => {
+    // Phase 1 begins its stretch at t=21 in the existing 30-second schedule.
+    const rest = gullWingMotion(20, 1, true);
+    const lifting = gullWingMotion(21.3, 1, true);
+    const raised = gullWingMotion(21.6, 1, true);
+    const spread = gullWingMotion(22.8, 1, true);
+    const settling = gullWingMotion(24.3, 1, true);
+    const settled = gullWingMotion(24.6, 1, true);
+    assert.equal(rest.lower, 1);
+    assert.equal(lifting.fold, 1);
+    assert.ok(lifting.lower > .4 && lifting.lower < .6);
+    assert.ok(raised.fold > .999 && raised.lower < .001);
+    assert.ok(spread.fold < .001 && spread.lower === 0);
+    assert.equal(settling.fold, 1);
+    assert.ok(settling.lower > .4 && settling.lower < .6);
+    assert.equal(settled.lower, 1);
+    for (const boundary of [21, 21.6, 22.8, 24, 24.6, 51]) {
+        const before = gullWingMotion(boundary - .0001, 1, true);
+        const after = gullWingMotion(boundary + .0001, 1, true);
+        for (const key of ['fold', 'lower']) assert.ok(Math.abs(before[key] - after[key]) < .001);
+    }
+    const source = await sources.acquire('gull-standing');
+    prepareGullWings(source.scene, true);
+    const meshes = gullFoldedWings(source.scene.clone(true));
+    const mesh = meshes[0], positions = mesh.geometry.getAttribute('position');
+    const wings = [];
+    for (let i = 0; i < positions.count; i++) {
+        if (Math.abs(positions.getX(i)) > .35) wings.push(i);
+    }
+    poseGroundedGull(meshes, 1, 0, 0);
+    const lifted = wings.map(i => mesh.getVertexPosition(i, new Vector3()));
+    poseGroundedGull(meshes, 1, 0, 1);
+    const lowered = wings.map(i => mesh.getVertexPosition(i, new Vector3()));
+    const average = (points, component) => points.reduce((sum, p) => sum + Math.abs(p[component]), 0) / points.length;
+    const meanY = points => points.reduce((sum, p) => sum + p.y, 0) / points.length;
+    assert.ok(meanY(lowered) < meanY(lifted) - .09);
+    assert.ok(average(lowered, 'x') < average(lifted, 'x'));
+    for (let i = 0; i < lowered.length; i++) {
+        assert.ok(lowered[i].y > -.2, 'folded feathers must stay above the feet');
+        assert.ok(Math.abs(lowered[i].z - lifted[i].z) < 1e-7, 'feathers retain rearward order');
+    }
+    for (const attributes of Object.values(mesh.geometry.morphAttributes)) {
+        for (const attribute of attributes) assert.ok([...attribute.array].every(Number.isFinite));
+    }
+});
 test('human proximity reads displayed resident and expedition positions without including cattle or hidden models', () => {
     const { FjordEntities } = load('../src/fjord-play/FjordEntities.ts');
     const { Group } = createRequire(import.meta.url)('three');
@@ -720,8 +765,8 @@ test('grounded gulls scan with their heads while folded wings and feet remain fi
     assert.deepEqual(capture(), turned);
     poseGroundedGull(others, 1, -1);
     assert.notEqual(meshes[0].morphTargetInfluences, others[0].morphTargetInfluences);
-    assert.equal(meshes[0].morphTargetInfluences[1], 1);
-    assert.equal(others[0].morphTargetInfluences[2], 1);
+    assert.equal(meshes[0].morphTargetInfluences[2], 1);
+    assert.equal(others[0].morphTargetInfluences[3], 1);
 });
 
 test('hauled-out seals look around independently, remain in place and preserve their paused poses', async () => {

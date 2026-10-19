@@ -97,15 +97,20 @@ export function gullWingRig(model: Group): GullWingRig[] {
 /** Folded rest with a brief, separately phased wing stretch. Flight effort follows actual ascent. */
 export function gullWingMotion(time: number, phase: number, grounded: boolean, effort = 0) {
     if (!grounded)
-        return { fold: 0, flap: Math.sin(time * Math.PI * 5.6 + phase) * .45 * effort };
+        return { fold: 0, lower: 0, flap: Math.sin(time * Math.PI * 5.6 + phase) * .45 * effort };
     const period = 29 + phase, cycle = (time + 6 + phase * 3) % period;
-    const stretch = cycle < 3.6 ? Math.sin(Math.PI * cycle / 3.6) ** 2 : 0;
-    return { fold: 1 - stretch, flap: 0 };
+    // Lift the closed wings before opening them; reverse those stages to settle.
+    if (cycle < .6) return { fold: 1, lower: 1 - smooth(cycle / .6), flap: 0 };
+    if (cycle < 1.8) return { fold: 1 - smooth((cycle - .6) / 1.2), lower: 0, flap: 0 };
+    if (cycle < 3) return { fold: smooth((cycle - 1.8) / 1.2), lower: 0, flap: 0 };
+    if (cycle < 3.6) return { fold: 1, lower: smooth((cycle - 3) / .6), flap: 0 };
+    return { fold: 1, lower: 1, flap: 0 };
 }
 
 function prepareFoldedWingTarget(mesh: Mesh) {
     const positions = mesh.geometry.getAttribute('position');
     const target = new Float32Array(positions.count * 3);
+    const lowered = new Float32Array(positions.count * 3);
     for (let i = 0; i < positions.count; i++) {
         const point = new Vector3().fromBufferAttribute(positions, i);
         const distance = Math.abs(point.x);
@@ -116,16 +121,31 @@ function prepareFoldedWingTarget(mesh: Mesh) {
             .03 + (point.y - .03) * .75,
             -.04 - (distance - .18) * .68,
         );
-        point.lerp(folded, point.y < -.13 && distance < .35 ? 0 : smooth((distance - .16) / .08));
-        point.toArray(target, i * 3);
+        const attachment = point.y < -.13 && distance < .35 ? 0 : smooth((distance - .16) / .08);
+        // Roll the closed wing down around its longitudinal shoulder hinge.
+        // Retain its thickness and rearward feather order instead of flattening it.
+        const side = Math.sign(point.x), angle = 1.1;
+        const outward = Math.abs(folded.x) - .11, height = folded.y - .05;
+        const resting = new Vector3(
+            side * (.11 + (outward * Math.cos(angle) + height * Math.sin(angle)) * .65),
+            .03 - outward * Math.sin(angle) + height * Math.cos(angle),
+            folded.z,
+        );
+        const restAttachment = point.y < -.13 && distance < .35 ? 0 : smooth((distance - .15) / .04);
+        point.clone().lerp(resting, restAttachment).toArray(lowered, i * 3);
+        point.lerp(folded, attachment).toArray(target, i * 3);
     }
-    const closed = mesh.geometry.clone();
-    closed.setAttribute('position', new Float32BufferAttribute(target, 3));
-    closed.computeVertexNormals();
-    mesh.geometry.morphAttributes.position = [closed.getAttribute('position')];
-    mesh.geometry.morphAttributes.normal = [closed.getAttribute('normal')];
+    mesh.geometry.morphAttributes.position = [];
+    mesh.geometry.morphAttributes.normal = [];
+    for (const vertices of [target, lowered]) {
+        const closed = mesh.geometry.clone();
+        closed.setAttribute('position', new Float32BufferAttribute(vertices, 3));
+        closed.computeVertexNormals();
+        mesh.geometry.morphAttributes.position.push(closed.getAttribute('position'));
+        mesh.geometry.morphAttributes.normal.push(closed.getAttribute('normal'));
+        closed.dispose();
+    }
     mesh.geometry.morphTargetsRelative = false;
-    closed.dispose();
     mesh.updateMorphTargets();
     mesh.userData.wildlifeFoldedWing = true;
 }
@@ -138,11 +158,12 @@ export function gullFoldedWings(model: Group) {
     return meshes;
 }
 
-export function poseGroundedGull(meshes: readonly Mesh[], fold: number, head = 0) {
+export function poseGroundedGull(meshes: readonly Mesh[], fold: number, head = 0, lower = 1) {
     for (const mesh of meshes) {
-        mesh.morphTargetInfluences![0] = fold;
-        mesh.morphTargetInfluences![1] = Math.max(0, head);
-        mesh.morphTargetInfluences![2] = Math.max(0, -head);
+        mesh.morphTargetInfluences![0] = fold * (1 - lower);
+        mesh.morphTargetInfluences![1] = fold * lower;
+        mesh.morphTargetInfluences![2] = Math.max(0, head);
+        mesh.morphTargetInfluences![3] = Math.max(0, -head);
     }
 }
 
@@ -165,7 +186,7 @@ export function gullHeadLook(time: number, phase: number) {
     return 0;
 }
 
-/** Head-only targets combine additively with the existing absolute folded-wing target. */
+/** Head-only targets combine additively with both absolute folded-wing targets. */
 function prepareGullHeadTargets(mesh: Mesh) {
     const positions = mesh.geometry.getAttribute('position');
     const pivot = new Vector3(0, .11, .24), up = new Vector3(0, 1, 0);

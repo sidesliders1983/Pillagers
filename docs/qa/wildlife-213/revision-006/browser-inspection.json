@@ -1,0 +1,72 @@
+{
+  "actor": "great-black-backed-gull:grounded:0",
+  "review": "actual WildlifeLayer, stepped via visible controls",
+  "samples": [
+    {
+      "stage": "low",
+      "time": 14.517086839862978,
+      "influences": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "position": {
+        "x": 143.70029197226435,
+        "y": 0.36477953820680886,
+        "z": -182.8129673839608
+      },
+      "diagnostics": []
+    },
+    {
+      "stage": "raised",
+      "time": 15.117086839862976,
+      "influences": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "position": {
+        "x": 143.70029197226435,
+        "y": 0.36477953820680886,
+        "z": -182.8129673839608
+      },
+      "diagnostics": []
+    },
+    {
+      "stage": "spread",
+      "time": 16.317086839862977,
+      "influences": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "position": {
+        "x": 143.70029197226435,
+        "y": 0.36477953820680886,
+        "z": -182.8129673839608
+      },
+      "diagnostics": []
+    },
+    {
+      "stage": "settled",
+      "time": 18.117086839863003,
+      "influences": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "position": {
+        "x": 143.70029197226435,
+        "y": 0.36477953820680886,
+        "z": -182.8129673839608
+      },
+      "diagnostics": []
+    }
+  ],
+  "browserErrors": [],
+  "screenshotDownload": "timed out"
+}

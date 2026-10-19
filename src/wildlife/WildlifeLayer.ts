@@ -234,8 +234,9 @@ export class WildlifeLayer {
                 poseGullWings(record.wings, pose.flap);
             }
             if (record.foldedWings) {
-                poseGroundedGull(record.foldedWings, gullWingMotion(this.population.time, actor.phase, true).fold,
-                    gullHeadLook(this.population.time, actor.phase));
+                const pose = gullWingMotion(this.population.time, actor.phase, true);
+                poseGroundedGull(record.foldedWings, pose.fold,
+                    gullHeadLook(this.population.time, actor.phase), pose.lower);
             }
             if (airborne)
                 root.rotation.x = -Math.atan2(actor.climbRate, actor.speed) * .3;

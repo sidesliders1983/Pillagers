@@ -76,9 +76,10 @@ references are measured source cross-sections rather than overall antler, head o
 upright otter height. Puffin standing height is 0.32 m; grounded gull height is
 0.60 m; flying gull wingspan is 1.60 m. Rabbit height including ears is 0.42 m. Puffin wing chains are posed compactly with
 the supplied rig and the body is rotated upright for land/water. The grounded
-gull gets a compact folded-wing morph target at runtime using the original faces
-and UVs. The target sweeps the intact wing volume rearward beside the body; the
-head and feet remain fixed. Each bird spends most time folded, with a 3.6-second
+gull gets compact raised and lowered folded-wing morph targets at runtime using
+the original faces and UVs. The wings rest down against the flanks, with their
+feathers pointing rearward; the head and feet remain fixed. Each bird spends most
+time folded, with a 3.6-second
 stretch approximately every 29–35 seconds, and visibly turns while resting. Flying
 gulls receive a small seven-bone wing rig once in the shared model cache.
 
@@ -116,7 +117,11 @@ resuming the simulation resumes normal wandering and animation.
 Grounded gulls also scan left/right with their head independently of their folded
 wings and feet. A 5.5-second scan is followed by a longer neutral rest, with a
 14–21 second per-bird cycle. The existing 3.6-second wing stretch every 29–35
-seconds remains unchanged. These motions also use the paused wildlife clock.
+seconds retains its schedule. The first 0.6 seconds lift the still-closed wings
+into the previous raised pose, followed by 1.2 seconds opening and 1.2 seconds
+closing. The final 0.6 seconds lower the closed wings against the flanks again.
+Smooth transitions stop at each pose without a jump. These motions also use the
+paused wildlife clock. See [lowered gull wings revision 006](qa/wildlife-213/revision-006/README.md).
 See [resting motion revision 005](qa/wildlife-213/revision-005/README.md).
 
 The reindeer export has a crossed right hind hock and hoof chain. The authoring
