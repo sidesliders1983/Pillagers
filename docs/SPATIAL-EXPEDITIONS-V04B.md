@@ -18,11 +18,30 @@ The paid departure dialog shows the actual total, per-person amount and a test-p
 
 `StartExpedition.testFoodPerMember` is an explicit optional playtest command field. A custom purchase stores its amount in the existing provisions and an optional `testCapacity: true` marker. Save validation bounds marked packs to 1–10 and still requires unmarked normal packs to carry exactly 2; all ration accounting checks remain. Save/load and replay retain the purchased custom pack and its remaining rations. The unpurchased input draft is presentation state for the next departure, not a persistent campaign-wide balance setting. Ongoing custom supplies remain labelled **Test pack** in the UI.
 
+### Live destination preview — 2026-10-19
+
+Choose/Change destination collapses the expedition toolbar. Only the ground ring
+remains; the group-name shortcut can reopen its controls.
+Mouse hover shows a bright green ground ring for a destination accepted by the same
+Core offer/route validation as a click, or signal red for a rejected destination. The indicator material bypasses scene
+tone mapping and fog to keep both colours saturated. The
+toolbar opens with the reason after a rejected click; hovering does not open a
+menu. Hover is read-only: it never commits a route, spends Food, changes supplies, advances time or reveals discovery.
+
+Pointer checks use the latest pointer/camera and canonical revision, at most once
+per 120 ms. Panning, dragging, pointer exit and loss of focus clear the hover
+preview. A click revalidates against current state before issuing the existing
+command. Invalid clicks keep selection active and reopen the toolbar with the reason.
+Cancel/Escape restores the current expedition controls and cancellation message
+without changing its mission. A successful destination keeps the toolbar hidden;
+the group-name shortcut remains available to reopen it. Touch retains its one-tap destination flow and has
+Cancel in the controls reopened through the group-name shortcut.
+
 ### Navigation and mobile visibility — 2026-10-18
 
 Only the paid **Start Expedition** action requires confirmation. Choose/Change destination arms a single ground tap; a valid tap immediately applies the new route using the same pack. An invalid tap leaves the existing expedition unchanged and keeps destination selection active. Separate Recon, Surveillance and Pillage departures retain their own paid confirmation.
 
-Each active group has a numbered route-icon shortcut above Expeditions in the navigation dock. It hides or restores that group's map controls without changing its mission, supplies, camera or clock. Hiding also leaves destination-selection mode so ordinary map navigation is available. Multiple groups have independent visibility controls; visibility is transient presentation state.
+Each active group has a named route-icon shortcut above Expeditions in the navigation dock. It hides or restores that group's map controls without changing its mission, supplies, camera or clock. During destination selection, this shortcut can reopen or collapse the controls without cancelling the pending choice; Escape or Cancel exits selection. Outside targeting, hiding the controls leaves ordinary map navigation available. Multiple groups have independent visibility controls; visibility is transient presentation state.
 
 The **Exploration supplies** bar excludes the existing protected journey-home allowance (actual reached return trail at canonical speed plus the existing two-tick safety margin). Its time estimate is available exploration time, not total pack endurance including return. Automatic low-supply return shows zero exploration time and an explicit reason, including while paused. Remaining rations still fund the real homeward journey. This changes presentation only: prices, consumption, safe-return rules, save data and pacing are unchanged. A general attention/warning system is outside this pass.
 

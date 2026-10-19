@@ -569,7 +569,7 @@ export class FjordPlay {
                 this.session.command(command);
                 expeditions!.committed(command);
                 islandMissions?.committed(command);
-            }), point => presentation!.setTarget(point),
+            }), (point, valid) => presentation!.setTarget(point, valid),
             memberIds => presentation!.origins(memberIds), {
                 showMap: () => {
                     desktopUI?.showExplorationMap();
@@ -741,11 +741,37 @@ export class FjordPlay {
             select(selected.kind, selected.id);
             return true;
         });
+        let destinationPointer: { x: number; y: number } | undefined;
+        let lastDestinationPreview = 0, destinationPreviewKey = '';
+        const clearDestinationPreview = () => {
+            destinationPointer = undefined;
+            destinationPreviewKey = '';
+            expeditions?.previewTarget();
+        };
+        canvas.addEventListener('pointermove', event => {
+            if (event.pointerType !== 'mouse' || event.buttons) { clearDestinationPreview(); return; }
+            destinationPointer = { x: event.clientX, y: event.clientY };
+        }, { signal: lifecycleEvents.signal });
+        canvas.addEventListener('pointerleave', clearDestinationPreview, { signal: lifecycleEvents.signal });
+        canvas.addEventListener('pointerdown', clearDestinationPreview, { signal: lifecycleEvents.signal });
+        window.addEventListener('blur', clearDestinationPreview, { signal: lifecycleEvents.signal });
+        const previewDestination = () => {
+            if (!expeditions?.targeting) { destinationPreviewKey = ''; return; }
+            if (!controller.enabled || !destinationPointer || performance.now() - lastDestinationPreview < 120) return;
+            lastDestinationPreview = performance.now();
+            const { x, y } = destinationPointer;
+            const key = [x, y, expeditions.targetingGroup, this.session.revision, ...camera.matrixWorld.elements].join(',');
+            if (key === destinationPreviewKey) return;
+            destinationPreviewKey = key;
+            const point = presentation!.groundPoint(x, y, true);
+            expeditions.previewTarget(point ? { x: point.x, z: point.z } : undefined);
+        };
         resetFrameTime = () => { previous = performance.now(); presentation!.resetFrameTime(); };
         // Public camera diagnostics let visual QA locate objects before exercising real pointer picking.
         renderer.setAnimationLoop(() => {
             if (!drawingReady || pageSuspended || contextLost || document.hidden) return;
             presentation!.frame(calendar, this.session.running && canAdvance());
+            previewDestination();
         });
         const prepareGpu = (loading: Pick<IslandLoading, 'stage' | 'measure' | 'check'>) =>
             presentation!.prepareGpu(loading);

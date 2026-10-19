@@ -20,7 +20,7 @@ import type { SelectionLabel } from './SelectionLabels';
 import { fjordTerrain, fjordSnowLine } from '../config/FjordTerrain';
 import { fjordPresentation } from '../config/FjordPresentation';
 import { resolvePresentationQuality, type PresentationQuality } from '../config/PresentationQuality';
-import { Vector2, Vector3, Raycaster, RingGeometry, MeshBasicMaterial, DoubleSide, Clock, PerspectiveCamera, Scene, Mesh, Texture } from 'three';
+import { Vector2, Vector3, Plane, Raycaster, RingGeometry, MeshBasicMaterial, DoubleSide, Clock, PerspectiveCamera, Scene, Mesh, Texture } from 'three';
 import { AssetManager } from '../core/AssetManager';
 import { createRenderer } from '../core/Renderer';
 import { WorldLighting } from '../core/WorldLighting';
@@ -82,7 +82,8 @@ export function createFjordScene(options: {
     const targetGeometry = new RingGeometry(2.7, 3, 48);
     const targetMaterial = new MeshBasicMaterial({
         color: '#ffe09a', side: DoubleSide,
-        depthTest: false, depthWrite: false, transparent: true, opacity: .95
+        depthTest: false, depthWrite: false, toneMapped: false, fog: false,
+        transparent: true, opacity: 1
     });
     const targetMarker = new Mesh(targetGeometry, targetMaterial);
     targetMarker.rotation.x = -Math.PI / 2;
@@ -626,10 +627,16 @@ export function createFjordScene(options: {
         resetFrameTime: () => clock.start(),
         get hasWorld() { return !!world; },
         get diagnostics() { return [...(assets?.diagnostics ?? []), ...(models?.diagnostics ?? [])]; },
-        setTarget(point: { x: number; z: number } | null | undefined) {
+        setTarget(point: { x: number; z: number } | null | undefined, valid?: boolean) {
             targetMarker.visible = !!point;
-            if (point) targetMarker.position.set(point.x,
-                createBlueprintSurface(campaign.blueprint).surfaceHeightAt(point.x, point.z) + .4, point.z);
+            targetMaterial.color.set(valid === undefined ? '#ffe09a' : valid ? '#22ff44' : '#ff2030');
+            if (import.meta.env.DEV) {
+                canvas.dataset.destinationPreview = JSON.stringify({
+                    point, valid, color: targetMaterial.color.getHexString(),
+                });
+            }
+            if (point) targetMarker.position.set(point.x, Math.max(campaign.blueprint.waterLevel,
+                createBlueprintSurface(campaign.blueprint).surfaceHeightAt(point.x, point.z)) + .4, point.z);
         },
         origins(memberIds: readonly string[]) {
             const rendered = layer?.describe() ?? [];
@@ -642,13 +649,15 @@ export function createFjordScene(options: {
         pick(x: number, y: number, pointerType: 'mouse' | 'touch') {
             return layer!.pick(camera, x, y, canvas.getBoundingClientRect(), pointerType);
         },
-        groundPoint(x: number, y: number) {
+        groundPoint(x: number, y: number, fallbackToWater = false) {
             const rect = canvas.getBoundingClientRect(), ray = new Raycaster();
             camera.updateMatrixWorld();
             ray.setFromCamera(new Vector2((x - rect.left) / rect.width * 2 - 1,
                 -(y - rect.top) / rect.height * 2 + 1), camera);
             const hit = intersectNavigationTerrain(world!.terrain, ray.ray, new Vector3());
-            return hit === undefined ? ray.intersectObject(world!.terrain, false)[0]?.point : hit;
+            const point = hit === undefined ? ray.intersectObject(world!.terrain, false)[0]?.point : hit;
+            return point ?? (fallbackToWater ? ray.ray.intersectPlane(
+                new Plane(new Vector3(0, 1, 0), -campaign.blueprint.waterLevel), new Vector3()) : undefined);
         },
     };
 }
