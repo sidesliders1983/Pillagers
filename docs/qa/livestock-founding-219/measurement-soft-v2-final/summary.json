@@ -1,0 +1,3290 @@
+{
+  "version": 1,
+  "revision": "fcf465d4dc836848b92a613e8bf5c987a80b33ac",
+  "finishedAt": null,
+  "seedsPerCohort": 30,
+  "expectedCases": 630,
+  "observedCases": 160,
+  "missingCases": 470,
+  "completedCases": 160,
+  "limitedCases": 0,
+  "failedCases": 0,
+  "observedYears": 6400,
+  "maxResidual": 0,
+  "independentCpuCases": 23,
+  "player": [
+    {
+      "species": "cattle",
+      "policy": "herd",
+      "cases": 8,
+      "complete": 8,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 320,
+      "clanExtinctions": 0,
+      "herdExtinctions": 7,
+      "humanShortageCases": 4,
+      "animalShortageCases": 0,
+      "firstHumanShortage": {
+        "count": 4,
+        "min": 2,
+        "median": 2.5,
+        "max": 27
+      },
+      "finalFood": {
+        "count": 8,
+        "min": 462,
+        "median": 802,
+        "max": 1167
+      },
+      "finalPopulation": {
+        "count": 8,
+        "min": 10,
+        "median": 15,
+        "max": 21
+      },
+      "finalHerd": {
+        "count": 8,
+        "min": 0,
+        "median": 0,
+        "max": 6
+      },
+      "peakHerd": 6,
+      "adultDescendantsReached": {
+        "count": 8,
+        "min": 3,
+        "median": 6,
+        "max": 10
+      },
+      "births": 65,
+      "deaths": 25,
+      "animalBirths": 57,
+      "animalDeaths": 28,
+      "slaughters": 47,
+      "foodProduced": 15344,
+      "animalFoodProduced": 1138,
+      "humanConsumed": 8815,
+      "animalConsumed": 606,
+      "animalRequired": 606,
+      "animalShortfall": 0,
+      "humanShortfall": 60,
+      "slaughterFood": 485,
+      "foodSpoiled": 0,
+      "materialsProduced": 2350,
+      "hidesReceived": 16,
+      "youngAnimalFeedings": 74,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 166,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8
+      ]
+    },
+    {
+      "species": "cattle",
+      "policy": "passive",
+      "cases": 8,
+      "complete": 8,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 320,
+      "clanExtinctions": 0,
+      "herdExtinctions": 5,
+      "humanShortageCases": 6,
+      "animalShortageCases": 4,
+      "firstHumanShortage": {
+        "count": 6,
+        "min": 2,
+        "median": 3,
+        "max": 21
+      },
+      "finalFood": {
+        "count": 8,
+        "min": 4,
+        "median": 80.5,
+        "max": 265
+      },
+      "finalPopulation": {
+        "count": 8,
+        "min": 5,
+        "median": 9.5,
+        "max": 15
+      },
+      "finalHerd": {
+        "count": 8,
+        "min": 0,
+        "median": 0,
+        "max": 2
+      },
+      "peakHerd": 15,
+      "adultDescendantsReached": {
+        "count": 8,
+        "min": 0,
+        "median": 3,
+        "max": 6
+      },
+      "births": 32,
+      "deaths": 32,
+      "animalBirths": 99,
+      "animalDeaths": 119,
+      "slaughters": 0,
+      "foodProduced": 8115,
+      "animalFoodProduced": 905,
+      "humanConsumed": 6431,
+      "animalConsumed": 1035,
+      "animalRequired": 1085,
+      "animalShortfall": 50,
+      "humanShortfall": 899,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 1833,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 179,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 828,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        2,
+        3,
+        4,
+        5,
+        7
+      ]
+    },
+    {
+      "species": "cattle",
+      "policy": "prepared",
+      "cases": 8,
+      "complete": 8,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 320,
+      "clanExtinctions": 0,
+      "herdExtinctions": 5,
+      "humanShortageCases": 4,
+      "animalShortageCases": 1,
+      "firstHumanShortage": {
+        "count": 4,
+        "min": 2,
+        "median": 2.5,
+        "max": 3
+      },
+      "finalFood": {
+        "count": 8,
+        "min": 549,
+        "median": 775,
+        "max": 1151
+      },
+      "finalPopulation": {
+        "count": 8,
+        "min": 10,
+        "median": 13,
+        "max": 26
+      },
+      "finalHerd": {
+        "count": 8,
+        "min": 0,
+        "median": 0,
+        "max": 6
+      },
+      "peakHerd": 15,
+      "adultDescendantsReached": {
+        "count": 8,
+        "min": 3,
+        "median": 5,
+        "max": 12
+      },
+      "births": 58,
+      "deaths": 25,
+      "animalBirths": 120,
+      "animalDeaths": 136,
+      "slaughters": 0,
+      "foodProduced": 15800,
+      "animalFoodProduced": 962,
+      "humanConsumed": 8518,
+      "animalConsumed": 1012,
+      "animalRequired": 1015,
+      "animalShortfall": 3,
+      "humanShortfall": 96,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 2314,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 220,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 972,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        2,
+        3,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "species": "chicken",
+      "policy": "herd",
+      "cases": 8,
+      "complete": 8,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 320,
+      "clanExtinctions": 0,
+      "herdExtinctions": 7,
+      "humanShortageCases": 5,
+      "animalShortageCases": 2,
+      "firstHumanShortage": {
+        "count": 5,
+        "min": 2,
+        "median": 3,
+        "max": 23
+      },
+      "finalFood": {
+        "count": 8,
+        "min": 507,
+        "median": 667.5,
+        "max": 1052
+      },
+      "finalPopulation": {
+        "count": 8,
+        "min": 9,
+        "median": 15.5,
+        "max": 23
+      },
+      "finalHerd": {
+        "count": 8,
+        "min": 0,
+        "median": 0,
+        "max": 19
+      },
+      "peakHerd": 20,
+      "adultDescendantsReached": {
+        "count": 8,
+        "min": 2,
+        "median": 6,
+        "max": 9
+      },
+      "births": 74,
+      "deaths": 29,
+      "animalBirths": 140,
+      "animalDeaths": 82,
+      "slaughters": 63,
+      "foodProduced": 15528,
+      "animalFoodProduced": 2329,
+      "humanConsumed": 8967,
+      "animalConsumed": 1081,
+      "animalRequired": 1100,
+      "animalShortfall": 19,
+      "humanShortfall": 203,
+      "slaughterFood": 126,
+      "foodSpoiled": 0,
+      "materialsProduced": 2043,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 0,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 0,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        2,
+        1,
+        3,
+        6,
+        5,
+        7,
+        8
+      ]
+    },
+    {
+      "species": "chicken",
+      "policy": "passive",
+      "cases": 8,
+      "complete": 8,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 320,
+      "clanExtinctions": 0,
+      "herdExtinctions": 8,
+      "humanShortageCases": 7,
+      "animalShortageCases": 5,
+      "firstHumanShortage": {
+        "count": 7,
+        "min": 2,
+        "median": 3,
+        "max": 4
+      },
+      "finalFood": {
+        "count": 8,
+        "min": 0,
+        "median": 36,
+        "max": 154
+      },
+      "finalPopulation": {
+        "count": 8,
+        "min": 6,
+        "median": 9,
+        "max": 20
+      },
+      "finalHerd": {
+        "count": 8,
+        "min": 0,
+        "median": 0,
+        "max": 0
+      },
+      "peakHerd": 11,
+      "adultDescendantsReached": {
+        "count": 8,
+        "min": 0,
+        "median": 3,
+        "max": 7
+      },
+      "births": 31,
+      "deaths": 32,
+      "animalBirths": 31,
+      "animalDeaths": 55,
+      "slaughters": 0,
+      "foodProduced": 7098,
+      "animalFoodProduced": 265,
+      "humanConsumed": 6310,
+      "animalConsumed": 468,
+      "animalRequired": 508,
+      "animalShortfall": 40,
+      "humanShortfall": 1295,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 1790,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 0,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 0,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "species": "chicken",
+      "policy": "prepared",
+      "cases": 8,
+      "complete": 8,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 320,
+      "clanExtinctions": 0,
+      "herdExtinctions": 6,
+      "humanShortageCases": 7,
+      "animalShortageCases": 4,
+      "firstHumanShortage": {
+        "count": 7,
+        "min": 2,
+        "median": 3,
+        "max": 24
+      },
+      "finalFood": {
+        "count": 8,
+        "min": 147,
+        "median": 528,
+        "max": 966
+      },
+      "finalPopulation": {
+        "count": 8,
+        "min": 7,
+        "median": 14,
+        "max": 22
+      },
+      "finalHerd": {
+        "count": 8,
+        "min": 0,
+        "median": 0,
+        "max": 3
+      },
+      "peakHerd": 39,
+      "adultDescendantsReached": {
+        "count": 8,
+        "min": 1,
+        "median": 4.5,
+        "max": 8
+      },
+      "births": 55,
+      "deaths": 24,
+      "animalBirths": 161,
+      "animalDeaths": 180,
+      "slaughters": 0,
+      "foodProduced": 13984,
+      "animalFoodProduced": 969,
+      "humanConsumed": 8129,
+      "animalConsumed": 1698,
+      "animalRequired": 1738,
+      "animalShortfall": 40,
+      "humanShortfall": 375,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 2050,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 0,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 0,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        2,
+        3,
+        4,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "species": "control",
+      "policy": "herd",
+      "cases": 8,
+      "complete": 8,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 320,
+      "clanExtinctions": 0,
+      "herdExtinctions": 7,
+      "humanShortageCases": 4,
+      "animalShortageCases": 0,
+      "firstHumanShortage": {
+        "count": 4,
+        "min": 2,
+        "median": 2.5,
+        "max": 27
+      },
+      "finalFood": {
+        "count": 8,
+        "min": 506,
+        "median": 676,
+        "max": 973
+      },
+      "finalPopulation": {
+        "count": 8,
+        "min": 10,
+        "median": 14,
+        "max": 21
+      },
+      "finalHerd": {
+        "count": 8,
+        "min": 0,
+        "median": 0,
+        "max": 5
+      },
+      "peakHerd": 6,
+      "adultDescendantsReached": {
+        "count": 8,
+        "min": 3,
+        "median": 5,
+        "max": 10
+      },
+      "births": 60,
+      "deaths": 25,
+      "animalBirths": 56,
+      "animalDeaths": 27,
+      "slaughters": 48,
+      "foodProduced": 14586,
+      "animalFoodProduced": 1162,
+      "humanConsumed": 8803,
+      "animalConsumed": 632,
+      "animalRequired": 632,
+      "animalShortfall": 0,
+      "humanShortfall": 60,
+      "slaughterFood": 505,
+      "foodSpoiled": 0,
+      "materialsProduced": 2139,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 72,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 174,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8
+      ]
+    },
+    {
+      "species": "control",
+      "policy": "passive",
+      "cases": 8,
+      "complete": 8,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 320,
+      "clanExtinctions": 0,
+      "herdExtinctions": 3,
+      "humanShortageCases": 8,
+      "animalShortageCases": 7,
+      "firstHumanShortage": {
+        "count": 8,
+        "min": 2,
+        "median": 4.5,
+        "max": 34
+      },
+      "finalFood": {
+        "count": 8,
+        "min": 13,
+        "median": 31,
+        "max": 78
+      },
+      "finalPopulation": {
+        "count": 8,
+        "min": 5,
+        "median": 8,
+        "max": 15
+      },
+      "finalHerd": {
+        "count": 8,
+        "min": 0,
+        "median": 19.5,
+        "max": 137
+      },
+      "peakHerd": 137,
+      "adultDescendantsReached": {
+        "count": 8,
+        "min": 0,
+        "median": 2,
+        "max": 6
+      },
+      "births": 28,
+      "deaths": 34,
+      "animalBirths": 563,
+      "animalDeaths": 290,
+      "slaughters": 0,
+      "foodProduced": 9650,
+      "animalFoodProduced": 2963,
+      "humanConsumed": 5706,
+      "animalConsumed": 3714,
+      "animalRequired": 4898,
+      "animalShortfall": 1184,
+      "humanShortfall": 1516,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 1716,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 971,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 0,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "species": "control",
+      "policy": "prepared",
+      "cases": 8,
+      "complete": 8,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 320,
+      "clanExtinctions": 0,
+      "herdExtinctions": 2,
+      "humanShortageCases": 6,
+      "animalShortageCases": 3,
+      "firstHumanShortage": {
+        "count": 6,
+        "min": 2,
+        "median": 3,
+        "max": 22
+      },
+      "finalFood": {
+        "count": 8,
+        "min": 158,
+        "median": 496,
+        "max": 955
+      },
+      "finalPopulation": {
+        "count": 8,
+        "min": 7,
+        "median": 13,
+        "max": 24
+      },
+      "finalHerd": {
+        "count": 8,
+        "min": 0,
+        "median": 49.5,
+        "max": 187
+      },
+      "peakHerd": 187,
+      "adultDescendantsReached": {
+        "count": 8,
+        "min": 0,
+        "median": 4.5,
+        "max": 9
+      },
+      "births": 51,
+      "deaths": 20,
+      "animalBirths": 853,
+      "animalDeaths": 320,
+      "slaughters": 0,
+      "foodProduced": 18232,
+      "animalFoodProduced": 4687,
+      "humanConsumed": 7982,
+      "animalConsumed": 6242,
+      "animalRequired": 6313,
+      "animalShortfall": 71,
+      "humanShortfall": 382,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 2065,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 1464,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 0,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        7,
+        8
+      ]
+    },
+    {
+      "species": "goat",
+      "policy": "herd",
+      "cases": 6,
+      "complete": 6,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 240,
+      "clanExtinctions": 0,
+      "herdExtinctions": 4,
+      "humanShortageCases": 1,
+      "animalShortageCases": 0,
+      "firstHumanShortage": {
+        "count": 1,
+        "min": 3,
+        "median": 3,
+        "max": 3
+      },
+      "finalFood": {
+        "count": 6,
+        "min": 616,
+        "median": 682,
+        "max": 1251
+      },
+      "finalPopulation": {
+        "count": 6,
+        "min": 8,
+        "median": 16,
+        "max": 21
+      },
+      "finalHerd": {
+        "count": 6,
+        "min": 0,
+        "median": 0,
+        "max": 5
+      },
+      "peakHerd": 7,
+      "adultDescendantsReached": {
+        "count": 6,
+        "min": 3,
+        "median": 5.5,
+        "max": 10
+      },
+      "births": 52,
+      "deaths": 20,
+      "animalBirths": 63,
+      "animalDeaths": 16,
+      "slaughters": 58,
+      "foodProduced": 11600,
+      "animalFoodProduced": 1167,
+      "humanConsumed": 6635,
+      "animalConsumed": 706,
+      "animalRequired": 706,
+      "animalShortfall": 0,
+      "humanShortfall": 35,
+      "slaughterFood": 541,
+      "foodSpoiled": 0,
+      "materialsProduced": 1523,
+      "hidesReceived": 52,
+      "youngAnimalFeedings": 59,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 111,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        2,
+        3,
+        5
+      ]
+    },
+    {
+      "species": "goat",
+      "policy": "passive",
+      "cases": 8,
+      "complete": 8,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 320,
+      "clanExtinctions": 0,
+      "herdExtinctions": 7,
+      "humanShortageCases": 8,
+      "animalShortageCases": 3,
+      "firstHumanShortage": {
+        "count": 8,
+        "min": 2,
+        "median": 4.5,
+        "max": 39
+      },
+      "finalFood": {
+        "count": 8,
+        "min": 0,
+        "median": 81,
+        "max": 348
+      },
+      "finalPopulation": {
+        "count": 8,
+        "min": 7,
+        "median": 10,
+        "max": 15
+      },
+      "finalHerd": {
+        "count": 8,
+        "min": 0,
+        "median": 0,
+        "max": 10
+      },
+      "peakHerd": 14,
+      "adultDescendantsReached": {
+        "count": 8,
+        "min": 0,
+        "median": 2.5,
+        "max": 6
+      },
+      "births": 32,
+      "deaths": 28,
+      "animalBirths": 57,
+      "animalDeaths": 71,
+      "slaughters": 0,
+      "foodProduced": 7851,
+      "animalFoodProduced": 492,
+      "humanConsumed": 6473,
+      "animalConsumed": 644,
+      "animalRequired": 685,
+      "animalShortfall": 41,
+      "humanShortfall": 1156,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 1757,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 53,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 333,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        3,
+        4,
+        6,
+        5,
+        8,
+        7
+      ]
+    },
+    {
+      "species": "goat",
+      "policy": "prepared",
+      "cases": 8,
+      "complete": 8,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 320,
+      "clanExtinctions": 0,
+      "herdExtinctions": 4,
+      "humanShortageCases": 3,
+      "animalShortageCases": 1,
+      "firstHumanShortage": {
+        "count": 3,
+        "min": 2,
+        "median": 8,
+        "max": 12
+      },
+      "finalFood": {
+        "count": 8,
+        "min": 271,
+        "median": 539.5,
+        "max": 945
+      },
+      "finalPopulation": {
+        "count": 8,
+        "min": 9,
+        "median": 13,
+        "max": 20
+      },
+      "finalHerd": {
+        "count": 8,
+        "min": 0,
+        "median": 0.5,
+        "max": 10
+      },
+      "peakHerd": 12,
+      "adultDescendantsReached": {
+        "count": 8,
+        "min": 2,
+        "median": 4,
+        "max": 8
+      },
+      "births": 54,
+      "deaths": 25,
+      "animalBirths": 106,
+      "animalDeaths": 114,
+      "slaughters": 0,
+      "foodProduced": 14157,
+      "animalFoodProduced": 777,
+      "humanConsumed": 8503,
+      "animalConsumed": 1212,
+      "animalRequired": 1224,
+      "animalShortfall": 12,
+      "humanShortfall": 224,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 2263,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 99,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 789,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        3,
+        4,
+        8
+      ]
+    },
+    {
+      "species": "goose",
+      "policy": "herd",
+      "cases": 6,
+      "complete": 6,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 240,
+      "clanExtinctions": 0,
+      "herdExtinctions": 5,
+      "humanShortageCases": 2,
+      "animalShortageCases": 1,
+      "firstHumanShortage": {
+        "count": 2,
+        "min": 3,
+        "median": 5.5,
+        "max": 8
+      },
+      "finalFood": {
+        "count": 6,
+        "min": 377,
+        "median": 939.5,
+        "max": 1198
+      },
+      "finalPopulation": {
+        "count": 6,
+        "min": 8,
+        "median": 14.5,
+        "max": 23
+      },
+      "finalHerd": {
+        "count": 6,
+        "min": 0,
+        "median": 0,
+        "max": 13
+      },
+      "peakHerd": 23,
+      "adultDescendantsReached": {
+        "count": 6,
+        "min": 3,
+        "median": 4.5,
+        "max": 9
+      },
+      "births": 46,
+      "deaths": 17,
+      "animalBirths": 161,
+      "animalDeaths": 36,
+      "slaughters": 130,
+      "foodProduced": 11831,
+      "animalFoodProduced": 1388,
+      "humanConsumed": 6363,
+      "animalConsumed": 1111,
+      "animalRequired": 1119,
+      "animalShortfall": 8,
+      "humanShortfall": 185,
+      "slaughterFood": 650,
+      "foodSpoiled": 0,
+      "materialsProduced": 1655,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 0,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 88,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        2,
+        4,
+        6,
+        5
+      ]
+    },
+    {
+      "species": "goose",
+      "policy": "passive",
+      "cases": 6,
+      "complete": 6,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 240,
+      "clanExtinctions": 0,
+      "herdExtinctions": 5,
+      "humanShortageCases": 6,
+      "animalShortageCases": 4,
+      "firstHumanShortage": {
+        "count": 6,
+        "min": 1,
+        "median": 5,
+        "max": 30
+      },
+      "finalFood": {
+        "count": 6,
+        "min": 0,
+        "median": 141,
+        "max": 199
+      },
+      "finalPopulation": {
+        "count": 6,
+        "min": 5,
+        "median": 10.5,
+        "max": 15
+      },
+      "finalHerd": {
+        "count": 6,
+        "min": 0,
+        "median": 0,
+        "max": 31
+      },
+      "peakHerd": 31,
+      "adultDescendantsReached": {
+        "count": 6,
+        "min": 0,
+        "median": 3,
+        "max": 6
+      },
+      "births": 29,
+      "deaths": 28,
+      "animalBirths": 88,
+      "animalDeaths": 75,
+      "slaughters": 0,
+      "foodProduced": 6626,
+      "animalFoodProduced": 663,
+      "humanConsumed": 4909,
+      "animalConsumed": 1073,
+      "animalRequired": 1110,
+      "animalShortfall": 37,
+      "humanShortfall": 819,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 1318,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 0,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 416,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ]
+    },
+    {
+      "species": "goose",
+      "policy": "prepared",
+      "cases": 6,
+      "complete": 6,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 240,
+      "clanExtinctions": 0,
+      "herdExtinctions": 5,
+      "humanShortageCases": 4,
+      "animalShortageCases": 3,
+      "firstHumanShortage": {
+        "count": 4,
+        "min": 3,
+        "median": 6,
+        "max": 8
+      },
+      "finalFood": {
+        "count": 6,
+        "min": 394,
+        "median": 606.5,
+        "max": 1051
+      },
+      "finalPopulation": {
+        "count": 6,
+        "min": 12,
+        "median": 13.5,
+        "max": 16
+      },
+      "finalHerd": {
+        "count": 6,
+        "min": 0,
+        "median": 0,
+        "max": 17
+      },
+      "peakHerd": 19,
+      "adultDescendantsReached": {
+        "count": 6,
+        "min": 3,
+        "median": 5,
+        "max": 7
+      },
+      "births": 37,
+      "deaths": 15,
+      "animalBirths": 81,
+      "animalDeaths": 82,
+      "slaughters": 0,
+      "foodProduced": 11340,
+      "animalFoodProduced": 554,
+      "humanConsumed": 6142,
+      "animalConsumed": 1137,
+      "animalRequired": 1157,
+      "animalShortfall": 20,
+      "humanShortfall": 241,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 1607,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 0,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 0,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        3,
+        4,
+        6,
+        5
+      ]
+    },
+    {
+      "species": "pig",
+      "policy": "herd",
+      "cases": 8,
+      "complete": 8,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 320,
+      "clanExtinctions": 0,
+      "herdExtinctions": 8,
+      "humanShortageCases": 5,
+      "animalShortageCases": 2,
+      "firstHumanShortage": {
+        "count": 5,
+        "min": 2,
+        "median": 3,
+        "max": 4
+      },
+      "finalFood": {
+        "count": 8,
+        "min": 179,
+        "median": 554,
+        "max": 1052
+      },
+      "finalPopulation": {
+        "count": 8,
+        "min": 11,
+        "median": 14,
+        "max": 19
+      },
+      "finalHerd": {
+        "count": 8,
+        "min": 0,
+        "median": 0,
+        "max": 0
+      },
+      "peakHerd": 7,
+      "adultDescendantsReached": {
+        "count": 8,
+        "min": 2,
+        "median": 4.5,
+        "max": 10
+      },
+      "births": 58,
+      "deaths": 26,
+      "animalBirths": 32,
+      "animalDeaths": 26,
+      "slaughters": 30,
+      "foodProduced": 13089,
+      "animalFoodProduced": 0,
+      "humanConsumed": 8234,
+      "animalConsumed": 369,
+      "animalRequired": 380,
+      "animalShortfall": 11,
+      "humanShortfall": 171,
+      "slaughterFood": 363,
+      "foodSpoiled": 0,
+      "materialsProduced": 2175,
+      "hidesReceived": 14,
+      "youngAnimalFeedings": 21,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 100,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        5,
+        7,
+        8
+      ]
+    },
+    {
+      "species": "pig",
+      "policy": "passive",
+      "cases": 8,
+      "complete": 8,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 320,
+      "clanExtinctions": 0,
+      "herdExtinctions": 8,
+      "humanShortageCases": 7,
+      "animalShortageCases": 4,
+      "firstHumanShortage": {
+        "count": 7,
+        "min": 1,
+        "median": 2,
+        "max": 30
+      },
+      "finalFood": {
+        "count": 8,
+        "min": 1,
+        "median": 46.5,
+        "max": 206
+      },
+      "finalPopulation": {
+        "count": 8,
+        "min": 6,
+        "median": 8.5,
+        "max": 14
+      },
+      "finalHerd": {
+        "count": 8,
+        "min": 0,
+        "median": 0,
+        "max": 0
+      },
+      "peakHerd": 10,
+      "adultDescendantsReached": {
+        "count": 8,
+        "min": 0,
+        "median": 2,
+        "max": 5
+      },
+      "births": 22,
+      "deaths": 27,
+      "animalBirths": 32,
+      "animalDeaths": 56,
+      "slaughters": 0,
+      "foodProduced": 7385,
+      "animalFoodProduced": 0,
+      "humanConsumed": 6350,
+      "animalConsumed": 531,
+      "animalRequired": 560,
+      "animalShortfall": 29,
+      "humanShortfall": 853,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 1792,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 30,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 246,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        2,
+        1,
+        3,
+        4,
+        6,
+        5,
+        7,
+        8
+      ]
+    },
+    {
+      "species": "pig",
+      "policy": "prepared",
+      "cases": 8,
+      "complete": 8,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 320,
+      "clanExtinctions": 0,
+      "herdExtinctions": 8,
+      "humanShortageCases": 5,
+      "animalShortageCases": 3,
+      "firstHumanShortage": {
+        "count": 5,
+        "min": 2,
+        "median": 3,
+        "max": 9
+      },
+      "finalFood": {
+        "count": 8,
+        "min": 274,
+        "median": 691,
+        "max": 963
+      },
+      "finalPopulation": {
+        "count": 8,
+        "min": 7,
+        "median": 11.5,
+        "max": 22
+      },
+      "finalHerd": {
+        "count": 8,
+        "min": 0,
+        "median": 0,
+        "max": 0
+      },
+      "peakHerd": 11,
+      "adultDescendantsReached": {
+        "count": 8,
+        "min": 2,
+        "median": 4,
+        "max": 6
+      },
+      "births": 53,
+      "deaths": 33,
+      "animalBirths": 47,
+      "animalDeaths": 71,
+      "slaughters": 0,
+      "foodProduced": 13676,
+      "animalFoodProduced": 0,
+      "humanConsumed": 7914,
+      "animalConsumed": 550,
+      "animalRequired": 570,
+      "animalShortfall": 20,
+      "humanShortfall": 298,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 2198,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 42,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 358,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        5,
+        7,
+        8
+      ]
+    },
+    {
+      "species": "sheep",
+      "policy": "herd",
+      "cases": 8,
+      "complete": 8,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 320,
+      "clanExtinctions": 0,
+      "herdExtinctions": 6,
+      "humanShortageCases": 2,
+      "animalShortageCases": 0,
+      "firstHumanShortage": {
+        "count": 2,
+        "min": 2,
+        "median": 3.5,
+        "max": 5
+      },
+      "finalFood": {
+        "count": 8,
+        "min": 569,
+        "median": 1002.5,
+        "max": 1346
+      },
+      "finalPopulation": {
+        "count": 8,
+        "min": 11,
+        "median": 16,
+        "max": 25
+      },
+      "finalHerd": {
+        "count": 8,
+        "min": 0,
+        "median": 0,
+        "max": 5
+      },
+      "peakHerd": 7,
+      "adultDescendantsReached": {
+        "count": 8,
+        "min": 2,
+        "median": 7.5,
+        "max": 10
+      },
+      "births": 77,
+      "deaths": 25,
+      "animalBirths": 80,
+      "animalDeaths": 26,
+      "slaughters": 71,
+      "foodProduced": 17121,
+      "animalFoodProduced": 656,
+      "humanConsumed": 9412,
+      "animalConsumed": 857,
+      "animalRequired": 857,
+      "animalShortfall": 0,
+      "humanShortfall": 32,
+      "slaughterFood": 668,
+      "foodSpoiled": 0,
+      "materialsProduced": 2994,
+      "hidesReceived": 65,
+      "youngAnimalFeedings": 74,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 128,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        2,
+        3,
+        6,
+        5,
+        8
+      ]
+    },
+    {
+      "species": "sheep",
+      "policy": "passive",
+      "cases": 8,
+      "complete": 8,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 320,
+      "clanExtinctions": 0,
+      "herdExtinctions": 8,
+      "humanShortageCases": 7,
+      "animalShortageCases": 5,
+      "firstHumanShortage": {
+        "count": 7,
+        "min": 1,
+        "median": 5,
+        "max": 19
+      },
+      "finalFood": {
+        "count": 8,
+        "min": 1,
+        "median": 72.5,
+        "max": 324
+      },
+      "finalPopulation": {
+        "count": 8,
+        "min": 6,
+        "median": 9,
+        "max": 12
+      },
+      "finalHerd": {
+        "count": 8,
+        "min": 0,
+        "median": 0,
+        "max": 0
+      },
+      "peakHerd": 11,
+      "adultDescendantsReached": {
+        "count": 8,
+        "min": 0,
+        "median": 1,
+        "max": 5
+      },
+      "births": 16,
+      "deaths": 27,
+      "animalBirths": 53,
+      "animalDeaths": 77,
+      "slaughters": 0,
+      "foodProduced": 7629,
+      "animalFoodProduced": 324,
+      "humanConsumed": 6151,
+      "animalConsumed": 835,
+      "animalRequired": 891,
+      "animalShortfall": 56,
+      "humanShortfall": 1082,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 1765,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 48,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 434,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        5,
+        8,
+        7
+      ]
+    },
+    {
+      "species": "sheep",
+      "policy": "prepared",
+      "cases": 8,
+      "complete": 8,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 320,
+      "clanExtinctions": 0,
+      "herdExtinctions": 7,
+      "humanShortageCases": 3,
+      "animalShortageCases": 0,
+      "firstHumanShortage": {
+        "count": 3,
+        "min": 2,
+        "median": 8,
+        "max": 10
+      },
+      "finalFood": {
+        "count": 8,
+        "min": 332,
+        "median": 819,
+        "max": 1213
+      },
+      "finalPopulation": {
+        "count": 8,
+        "min": 10,
+        "median": 14.5,
+        "max": 24
+      },
+      "finalHerd": {
+        "count": 8,
+        "min": 0,
+        "median": 0,
+        "max": 3
+      },
+      "peakHerd": 10,
+      "adultDescendantsReached": {
+        "count": 8,
+        "min": 3,
+        "median": 5,
+        "max": 11
+      },
+      "births": 62,
+      "deaths": 23,
+      "animalBirths": 53,
+      "animalDeaths": 74,
+      "slaughters": 0,
+      "foodProduced": 16026,
+      "animalFoodProduced": 266,
+      "humanConsumed": 8895,
+      "animalConsumed": 851,
+      "animalRequired": 851,
+      "animalShortfall": 0,
+      "humanShortfall": 64,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 2711,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 51,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 350,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        3,
+        4,
+        6,
+        5,
+        8,
+        7
+      ]
+    }
+  ],
+  "cpu": [
+    {
+      "species": "cattle",
+      "policy": "control-autonomous",
+      "cases": 8,
+      "complete": 8,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 320,
+      "clanExtinctions": 0,
+      "herdExtinctions": 4,
+      "humanShortageCases": 8,
+      "animalShortageCases": 4,
+      "firstHumanShortage": {
+        "count": 8,
+        "min": 1,
+        "median": 4,
+        "max": 21
+      },
+      "finalFood": {
+        "count": 8,
+        "min": 0,
+        "median": 19.5,
+        "max": 244
+      },
+      "finalPopulation": {
+        "count": 8,
+        "min": 5,
+        "median": 10,
+        "max": 14
+      },
+      "finalHerd": {
+        "count": 8,
+        "min": 0,
+        "median": 1,
+        "max": 105
+      },
+      "peakHerd": 105,
+      "adultDescendantsReached": {
+        "count": 8,
+        "min": 0,
+        "median": 2.5,
+        "max": 5
+      },
+      "births": 29,
+      "deaths": 28,
+      "animalBirths": 320,
+      "animalDeaths": 155,
+      "slaughters": 0,
+      "foodProduced": 9243,
+      "animalFoodProduced": 1670,
+      "humanConsumed": 6595,
+      "animalConsumed": 2439,
+      "animalRequired": 2667,
+      "animalShortfall": 228,
+      "humanShortfall": 1109,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 1133,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 533,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 0,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        2,
+        4,
+        6,
+        7
+      ]
+    },
+    {
+      "species": "cattle",
+      "policy": "seeded-autonomous",
+      "cases": 1,
+      "complete": 1,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 40,
+      "clanExtinctions": 0,
+      "herdExtinctions": 0,
+      "humanShortageCases": 1,
+      "animalShortageCases": 0,
+      "firstHumanShortage": {
+        "count": 1,
+        "min": 5,
+        "median": 5,
+        "max": 5
+      },
+      "finalFood": {
+        "count": 1,
+        "min": 97,
+        "median": 97,
+        "max": 97
+      },
+      "finalPopulation": {
+        "count": 1,
+        "min": 10,
+        "median": 10,
+        "max": 10
+      },
+      "finalHerd": {
+        "count": 1,
+        "min": 4,
+        "median": 4,
+        "max": 4
+      },
+      "peakHerd": 10,
+      "adultDescendantsReached": {
+        "count": 1,
+        "min": 2,
+        "median": 2,
+        "max": 2
+      },
+      "births": 4,
+      "deaths": 4,
+      "animalBirths": 31,
+      "animalDeaths": 30,
+      "slaughters": 0,
+      "foodProduced": 1185,
+      "animalFoodProduced": 166,
+      "humanConsumed": 892,
+      "animalConsumed": 226,
+      "animalRequired": 226,
+      "animalShortfall": 0,
+      "humanShortfall": 71,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 213,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 51,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 257,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": []
+    },
+    {
+      "species": "chicken",
+      "policy": "seeded-autonomous",
+      "cases": 1,
+      "complete": 1,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 40,
+      "clanExtinctions": 0,
+      "herdExtinctions": 1,
+      "humanShortageCases": 1,
+      "animalShortageCases": 1,
+      "firstHumanShortage": {
+        "count": 1,
+        "min": 15,
+        "median": 15,
+        "max": 15
+      },
+      "finalFood": {
+        "count": 1,
+        "min": 18,
+        "median": 18,
+        "max": 18
+      },
+      "finalPopulation": {
+        "count": 1,
+        "min": 11,
+        "median": 11,
+        "max": 11
+      },
+      "finalHerd": {
+        "count": 1,
+        "min": 0,
+        "median": 0,
+        "max": 0
+      },
+      "peakHerd": 6,
+      "adultDescendantsReached": {
+        "count": 1,
+        "min": 4,
+        "median": 4,
+        "max": 4
+      },
+      "births": 6,
+      "deaths": 5,
+      "animalBirths": 5,
+      "animalDeaths": 8,
+      "slaughters": 0,
+      "foodProduced": 1018,
+      "animalFoodProduced": 39,
+      "humanConsumed": 964,
+      "animalConsumed": 66,
+      "animalRequired": 68,
+      "animalShortfall": 2,
+      "humanShortfall": 52,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 299,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 0,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 0,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1
+      ]
+    },
+    {
+      "species": "goat",
+      "policy": "seeded-autonomous",
+      "cases": 4,
+      "complete": 4,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 160,
+      "clanExtinctions": 0,
+      "herdExtinctions": 4,
+      "humanShortageCases": 3,
+      "animalShortageCases": 1,
+      "firstHumanShortage": {
+        "count": 3,
+        "min": 2,
+        "median": 3,
+        "max": 21
+      },
+      "finalFood": {
+        "count": 4,
+        "min": 34,
+        "median": 78.5,
+        "max": 236
+      },
+      "finalPopulation": {
+        "count": 4,
+        "min": 8,
+        "median": 10,
+        "max": 12
+      },
+      "finalHerd": {
+        "count": 4,
+        "min": 0,
+        "median": 0,
+        "max": 0
+      },
+      "peakHerd": 6,
+      "adultDescendantsReached": {
+        "count": 4,
+        "min": 1,
+        "median": 4,
+        "max": 4
+      },
+      "births": 15,
+      "deaths": 15,
+      "animalBirths": 16,
+      "animalDeaths": 28,
+      "slaughters": 0,
+      "foodProduced": 4130,
+      "animalFoodProduced": 272,
+      "humanConsumed": 3433,
+      "animalConsumed": 390,
+      "animalRequired": 401,
+      "animalShortfall": 11,
+      "humanShortfall": 356,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 580,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 16,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 48,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        2,
+        4,
+        6,
+        5
+      ]
+    },
+    {
+      "species": "goose",
+      "policy": "seeded-autonomous",
+      "cases": 4,
+      "complete": 4,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 160,
+      "clanExtinctions": 0,
+      "herdExtinctions": 3,
+      "humanShortageCases": 4,
+      "animalShortageCases": 3,
+      "firstHumanShortage": {
+        "count": 4,
+        "min": 1,
+        "median": 11,
+        "max": 21
+      },
+      "finalFood": {
+        "count": 4,
+        "min": 0,
+        "median": 77.5,
+        "max": 250
+      },
+      "finalPopulation": {
+        "count": 4,
+        "min": 7,
+        "median": 8.5,
+        "max": 12
+      },
+      "finalHerd": {
+        "count": 4,
+        "min": 0,
+        "median": 0,
+        "max": 16
+      },
+      "peakHerd": 25,
+      "adultDescendantsReached": {
+        "count": 4,
+        "min": 0,
+        "median": 3,
+        "max": 4
+      },
+      "births": 11,
+      "deaths": 15,
+      "animalBirths": 70,
+      "animalDeaths": 66,
+      "slaughters": 0,
+      "foodProduced": 4219,
+      "animalFoodProduced": 441,
+      "humanConsumed": 3098,
+      "animalConsumed": 836,
+      "animalRequired": 981,
+      "animalShortfall": 145,
+      "humanShortfall": 695,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 599,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 0,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 92,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        4,
+        6,
+        8
+      ]
+    },
+    {
+      "species": "pig",
+      "policy": "seeded-autonomous",
+      "cases": 2,
+      "complete": 2,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 80,
+      "clanExtinctions": 0,
+      "herdExtinctions": 2,
+      "humanShortageCases": 2,
+      "animalShortageCases": 1,
+      "firstHumanShortage": {
+        "count": 2,
+        "min": 2,
+        "median": 9,
+        "max": 16
+      },
+      "finalFood": {
+        "count": 2,
+        "min": 12,
+        "median": 171.5,
+        "max": 331
+      },
+      "finalPopulation": {
+        "count": 2,
+        "min": 11,
+        "median": 12.5,
+        "max": 14
+      },
+      "finalHerd": {
+        "count": 2,
+        "min": 0,
+        "median": 0,
+        "max": 0
+      },
+      "peakHerd": 6,
+      "adultDescendantsReached": {
+        "count": 2,
+        "min": 3,
+        "median": 3.5,
+        "max": 4
+      },
+      "births": 9,
+      "deaths": 4,
+      "animalBirths": 12,
+      "animalDeaths": 18,
+      "slaughters": 0,
+      "foodProduced": 2224,
+      "animalFoodProduced": 0,
+      "humanConsumed": 1776,
+      "animalConsumed": 165,
+      "animalRequired": 174,
+      "animalShortfall": 9,
+      "humanShortfall": 218,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 337,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 11,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 51,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        3,
+        7
+      ]
+    },
+    {
+      "species": "sheep",
+      "policy": "seeded-autonomous",
+      "cases": 3,
+      "complete": 3,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 120,
+      "clanExtinctions": 0,
+      "herdExtinctions": 3,
+      "humanShortageCases": 3,
+      "animalShortageCases": 2,
+      "firstHumanShortage": {
+        "count": 3,
+        "min": 2,
+        "median": 12,
+        "max": 14
+      },
+      "finalFood": {
+        "count": 3,
+        "min": 7,
+        "median": 24,
+        "max": 52
+      },
+      "finalPopulation": {
+        "count": 3,
+        "min": 8,
+        "median": 11,
+        "max": 18
+      },
+      "finalHerd": {
+        "count": 3,
+        "min": 0,
+        "median": 0,
+        "max": 0
+      },
+      "peakHerd": 12,
+      "adultDescendantsReached": {
+        "count": 3,
+        "min": 1,
+        "median": 4,
+        "max": 8
+      },
+      "births": 17,
+      "deaths": 10,
+      "animalBirths": 29,
+      "animalDeaths": 38,
+      "slaughters": 0,
+      "foodProduced": 3242,
+      "animalFoodProduced": 139,
+      "humanConsumed": 2830,
+      "animalConsumed": 419,
+      "animalRequired": 445,
+      "animalShortfall": 26,
+      "humanShortfall": 440,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 793,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 25,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 281,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        2,
+        3,
+        7
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "seed": 2,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "checks": [
+    "desktop/goat: seed 0, real founding trio, roster, cancel/confirm, actual Food/Hides receipt; mouse",
+    "desktop/goose: seed 1, real founding trio, roster, cancel/confirm, actual Food/Hides receipt; mouse",
+    "desktop/cattle: seed 2, real founding trio, roster, cancel/confirm, actual Food/Hides receipt; mouse",
+    "desktop/chicken: seed 5, real founding trio, roster, cancel/confirm, actual Food/Hides receipt; mouse",
+    "desktop/pig: seed 8, real founding trio, roster, cancel/confirm, actual Food/Hides receipt; mouse",
+    "desktop/sheep: seed 10, real founding trio, roster, cancel/confirm, actual Food/Hides receipt; mouse",
+    "tablet/goat: seed 0, real founding trio, roster, cancel/confirm, actual Food/Hides receipt; touch",
+    "tablet/chicken: seed 5, real founding trio, roster, cancel/confirm, actual Food/Hides receipt; touch",
+    "phone/goat: seed 0, real founding trio, roster, cancel/confirm, actual Food/Hides receipt; touch",
+    "phone/chicken: seed 5, real founding trio, roster, cancel/confirm, actual Food/Hides receipt; touch"
+  ],
+  "errors": []
+}

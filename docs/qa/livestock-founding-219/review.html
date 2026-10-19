@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Seeded livestock · FjordSide review</title>
+<style>
+    body { margin: 0; background: #152a27; color: #eee9d7; font: 17px/1.6 system-ui, sans-serif; }
+    main { max-width: 1180px; margin: auto; padding: 24px; }
+    h1, h2 { font-family: Georgia, serif; color: #efd08c; }
+    a { color: #efd08c; }
+    button, select { min-height: 44px; padding: 8px 12px; font: inherit; color: inherit; background: #263d38; border: 1px solid #b39a66; border-radius: 6px; }
+    .notice { padding: 16px; border: 1px solid #b39a66; border-radius: 8px; }
+    .controls { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin: 18px 0; }
+    .scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; }
+    th, td { padding: 10px; border-bottom: 1px solid #55756a; text-align: left; white-space: nowrap; }
+    th { color: #efd08c; }
+    pre { overflow: auto; font-size: 13px; }
+    img { display: block; max-width: 100%; height: auto; border: 1px solid #b39a66; border-radius: 8px; }
+    figure { margin: 30px 0; }
+    figcaption { margin: 10px 0; }
+    .phone { max-width: 390px; }
+</style>
+<main>
+    <h1>Seeded founding livestock</h1>
+    <p class="notice">Explicit #219 balance trial, awaiting owner review. The shipping New campaign flow still starts with cattle. Additional native models belong to #220.</p>
+    <p><a href="report.md">Balance recommendation and validation</a> · <a href="../../gameplay/LIVESTOCK-V01B.md">Saved rules and methodology</a> · <a href="/fjord-play">Fjord Play</a></p>
+    <h2>Same seeds, different founding species</h2>
+    <p>Exactly three adults: two females and one male. The single physical CPU rival receives a different species. No extra Food, purchases or replacement animals are granted.</p>
+    <p id="measurement-status" role="status">Loading measurement status…</p>
+    <div class="controls">
+        <label>Player policy
+            <select id="policy">
+                <option value="prepared">Prepared Food and housing</option>
+                <option value="herd">Prepared with herd management</option>
+                <option value="passive">Autonomous</option>
+            </select>
+        </label>
+        <button id="refresh" type="button">Refresh measurements</button>
+    </div>
+    <div class="scroll" tabindex="0" role="region" aria-label="Player balance comparison">
+        <table>
+            <thead><tr><th>Species</th><th>Complete</th><th>Clan lost</th><th>Food shortfall observed</th><th>Final Food median</th><th>Reached adulthood median</th><th>Herd lost</th><th>Peak herd</th></tr></thead>
+            <tbody id="player-results"></tbody>
+        </table>
+    </div>
+    <p>Final medians and extinction counts include completed runs only. Shortfall counts describe observed cases. Limits and missing cases are reported above; no partial run is treated as a successful full campaign.</p>
+    <p>The CPU continues autonomously. Its repeated trajectories are deduplicated in the report rather than counted as independent samples. Weather configuration and seed sets match; actual weather rolls can diverge when species change domestic RNG consumption.</p>
+    <details>
+        <summary>Full proposed rules — not activated defaults</summary>
+        <pre id="rules">Loading proposed rules…</pre>
+    </details>
+    <h2>Management on desktop and touch</h2>
+    <p>These roster fixtures use extra Materials to create a Farmyard for inspection. The balance study starts with the real 15 Food and five Materials. Non-cattle animals are not rendered as cows while their native models are being prepared.</p>
+    <figure><img src="desktop-goat.png" alt="Desktop goat details with stable Livestock 1 title and the actual Food and Hides slaughter receipt"><figcaption>Stable identity, actual species and sex, parentage, shelter and exact slaughter receipt.</figcaption></figure>
+    <figure><img src="tablet-goat-roster.png" alt="Tablet Farmyard card showing three livestock using 2.25 of four cattle-equivalent spaces"><figcaption>Headcount and weighted space remain separate. The existing individual roster is available under More management.</figcaption></figure>
+    <figure class="phone"><img src="phone-chicken.png" alt="Phone hen details with a two Food slaughter action and no Hides yield"><figcaption>Touch controls use the same canonical animals and commands. Poultry does not yield Hides.</figcaption></figure>
+</main>
+<script type="module">
+    const names = { control: 'Current cattle control', cattle: 'Cattle', chicken: 'Chicken', pig: 'Pig',
+        sheep: 'Sheep', goat: 'Goat', goose: 'Goose' };
+    const policy = document.querySelector('#policy');
+    const status = document.querySelector('#measurement-status');
+    let summary;
+    const value = number => Number.isFinite(number) ? String(number) : '—';
+    function render() {
+        const body = document.querySelector('#player-results');
+        body.replaceChildren();
+        for (const [species, name] of Object.entries(names)) {
+            const result = summary?.player.find(row => row.species === species && row.policy === policy.value);
+            const row = document.createElement('tr');
+            const cells = result ? [name, `${result.complete}/${summary.seedsPerCohort}`, result.clanExtinctions,
+                `${result.humanShortageCases}/${result.cases}`, value(result.finalFood.median),
+                value(result.adultDescendantsReached.median), result.herdExtinctions, result.peakHerd] :
+                [name, 'Not yet measured', '—', '—', '—', '—', '—', '—'];
+            for (const text of cells) {
+                const cell = document.createElement('td');
+                cell.textContent = text;
+                row.append(cell);
+            }
+            body.append(row);
+        }
+    }
+    async function refresh() {
+        try {
+            const response = await fetch('measurement-soft-v2-final/summary.json', { cache: 'no-store' });
+            if (!response.ok) throw new Error('Measurement summary is not available yet.');
+            summary = await response.json();
+            const finished = summary.finishedAt && summary.missingCases === 0;
+            status.textContent = `${summary.completedCases}/${summary.expectedCases} complete · ${summary.limitedCases} limited · ${summary.failedCases} failed · ${summary.missingCases} missing. ` +
+                (finished ? 'Matrix finished; see the report for the owner-review recommendation.' : 'Measurement is in progress. Partial results are not a recommendation.');
+            render();
+        } catch (error) { status.textContent = error.message; }
+    }
+    policy.addEventListener('change', render);
+    document.querySelector('#refresh').addEventListener('click', refresh);
+    fetch('proposed-rules.json').then(response => response.json()).then(rules => {
+        document.querySelector('#rules').textContent = JSON.stringify(rules, null, 2);
+    }).catch(() => { document.querySelector('#rules').textContent = 'See the saved configurations in each raw observation.'; });
+    await refresh();
+</script>
+</html>
