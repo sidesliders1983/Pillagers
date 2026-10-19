@@ -1,4 +1,5 @@
 import { birthdayCalendarMode } from '../simulation/BirthdayCalendar';
+import type { PresentationQuality, EffectQuality } from '../config/PresentationQuality';
 import { islandRecipe, type IslandRecipe, type CampaignGeography } from '../fjord-play/CampaignIsland';
 import { historyIdentity } from '../lore/ClanBook';
 import { projectSelection } from './SelectionPresentation';
@@ -184,8 +185,8 @@ export function localSettlementText(storage: Pick<Storage, 'getItem'>): string {
 }
 
 export interface SettlementPresentation {
-    quality: 'low' | 'standard';
-    effects: 'off' | 'low' | 'normal';
+    quality: PresentationQuality;
+    effects: EffectQuality;
     camera: { position: number[]; target: number[] };
 }
 function copyPresentation(value: SettlementPresentation): SettlementPresentation {

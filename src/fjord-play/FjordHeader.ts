@@ -1,4 +1,5 @@
 import type { FjordCalendar } from './FjordCalendar';
+import { defaultPresentationPreferences } from '../config/PresentationQuality';
 import { icon } from './FjordIcons';
 import { isMobileLayout, mobileLayoutQuery } from './MobileShell';
 
@@ -25,10 +26,10 @@ export function fjordHeaderHTML(): string {
                     <span id="fjord-menu-pacing-slot"></span>
                     <span id="fjord-menu-next-slot"></span>
                     <button id="clan-book-open" type="button">Clan Book</button><button id="fjord-expeditions-open" type="button">Expedition groups</button>
-                    <label>Quality<select id="fjord-quality"><option value="low">Low</option>
-                        <option value="standard">Standard</option></select></label>
-                    <label>Local effects<select id="fjord-effects"><option value="off">Off</option>
-                        <option value="low" selected>Low</option><option value="normal">Normal</option></select></label>
+                    <label>Quality<select id="fjord-quality"><option value="low"${defaultPresentationPreferences.quality === 'low' ? ' selected' : ''}>Low</option>
+                        <option value="standard"${defaultPresentationPreferences.quality === 'standard' ? ' selected' : ''}>Standard</option></select></label>
+                    <label>Local effects<select id="fjord-effects"><option value="off"${defaultPresentationPreferences.effects === 'off' ? ' selected' : ''}>Off</option>
+                        <option value="low"${defaultPresentationPreferences.effects === 'low' ? ' selected' : ''}>Low</option><option value="normal"${defaultPresentationPreferences.effects === 'normal' ? ' selected' : ''}>Normal</option></select></label>
                     <small>Snow, rain and fire particles. Visual quality only; burning still uses fuel. Reduced motion disables particles.</small>
                     <span id="screen-awake-slot"></span>
                     <details><summary>Camera views &amp; controls</summary>

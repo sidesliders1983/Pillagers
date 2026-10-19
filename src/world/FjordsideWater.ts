@@ -1,6 +1,7 @@
 import { Camera, UniformsLib, UniformsUtils, Vector3 } from 'three';
 import { ReferenceWater, REFERENCE_WATER_DEFAULTS } from '../water/ReferenceWater';
 import { lightingConfig } from '../config/lightingConfig';
+import { presentationProfiles } from '../config/PresentationQuality';
 import type { WorldLighting } from '../core/WorldLighting';
 
 /** Approved water with native world atmosphere; the wave/detail implementation is unchanged. */
@@ -13,7 +14,7 @@ export class FjordsideWater {
     constructor(level: number, center: { x: number; z: number }, quality: 'standard' | 'low') {
         this.surface = new ReferenceWater({
             size: 80, extent: 2000, level,
-            quality: quality === 'low' ? 'low' : 'medium',
+            quality: presentationProfiles[quality].waterQuality,
         });
         this.mesh = this.surface.mesh;
         this.mesh.position.set(center.x, level, center.z);
