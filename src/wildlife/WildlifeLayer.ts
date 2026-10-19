@@ -2,6 +2,7 @@ import { AnimationMixer, Frustum, Group, Matrix4, Mesh, Quaternion, Sphere, Text
 import { GLTFLoader, type GLTF } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { clone } from 'three/addons/utils/SkeletonUtils.js';
+import { terrainGradientAt } from '../world-generation/TerrainQueries';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { wildlifeAssetManifest } from './WildlifeAssetManifest';
 import { WildlifePopulation, type WildlifeActor } from './WildlifePopulation';
@@ -110,6 +111,9 @@ export class WildlifeLayer {
     private projection = new Matrix4();
     private sphere = new Sphere();
     private cameraPoint = new Vector3();
+    private surfaceNormal = new Vector3();
+    private surfaceTilt = new Quaternion();
+    private up = new Vector3(0, 1, 0);
     private constructor(world: WorldBlueprint, private known: (x: number, z: number) => boolean, private sources: WildlifeSources) {
         this.population = new WildlifePopulation(world);
         this.root.name = 'Ambient wildlife';
@@ -136,7 +140,7 @@ export class WildlifeLayer {
                         mixer.clipAction(source.animations[0]).play();
                     layer.records.push({ actor, root, mixer, legs: mixer ? [] : legPoses(model as Group),
                         height: entry.bounds.max[1] - entry.bounds.min[1],
-                        radius: Math.max(...entry.bounds.max.map((v, i) => v - entry.bounds.min[i])) * .7 });
+                        radius: Math.hypot(...entry.bounds.max.map((value, i) => value - entry.bounds.min[i])) * .5 + .15 });
                     layer.root.add(root);
                 }
             }));
@@ -164,9 +168,18 @@ export class WildlifeLayer {
         }
         for (const record of this.records) {
             const { actor, root } = record;
+            const moving = actor.state === 'roam' || actor.state === 'swim';
+            const look = !moving && actor.variant.movement !== 'air'
+                ? Math.sin(this.population.time * .25 + actor.phase) * .06 : 0;
             const water = actor.variant.movement === 'water', airborne = actor.variant.movement === 'air';
             root.position.set(actor.position.x, actor.position.y, actor.position.z);
-            root.rotation.set(0, actor.heading, actor.bank);
+            root.rotation.set(0, actor.heading + look, actor.bank);
+            if (actor.variant.movement === 'ground') {
+                const gradient = terrainGradientAt(this.population.world, actor.position.x, actor.position.z);
+                this.surfaceNormal.set(-gradient.x, 1, -gradient.z).normalize();
+                this.surfaceTilt.setFromUnitVectors(this.up, this.surfaceNormal);
+                root.quaternion.premultiply(this.surfaceTilt);
+            }
             if (water) {
                 root.position.y -= record.height * .6;
                 root.position.y += Math.sin(this.population.time * 1.4 + actor.phase) * .025;
@@ -181,7 +194,6 @@ export class WildlifeLayer {
             }
             if (!root.visible || camera && root.position.distanceToSquared(this.cameraPoint) > 200 * 200)
                 continue;
-            const moving = actor.state === 'roam' || actor.state === 'swim';
             if (record.mixer) {
                 record.mixer.setTime(moving ? this.population.time * actor.speed + actor.phase : 0);
             }
@@ -191,8 +203,6 @@ export class WildlifeLayer {
                     if (moving)
                         leg.bone.quaternion.premultiply(new Quaternion().setFromAxisAngle(leg.axis, Math.sin(this.population.time * 5 * Math.max(.4, actor.speed) + actor.phase + leg.phase) * .22));
                 }
-            if (!moving && !airborne)
-                root.rotation.y += Math.sin(this.population.time * .25 + actor.phase) * .06;
         }
     }
     inspect() {

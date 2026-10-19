@@ -74,7 +74,7 @@ export class WildlifePopulation {
                     }
                     group ??= chosen;
                     const habitat = this.habitats.sample(chosen.x, chosen.z).tags.find(tag => variant.habitats.includes(tag))!;
-                    this.actors.push({ id, species: species.id, variant, anchor: { ...chosen },
+                    this.actors.push({ id, species: species.id, variant, anchor: { x: chosen.x, z: chosen.z },
                         position: { x: chosen.x, y: this.habitats.surface.surfaceHeightAt(chosen.x, chosen.z), z: chosen.z },
                         target: null, heading: random('heading') * Math.PI * 2, bank: 0,
                         state: variant.movement === 'air' ? 'glide' : variant.movement === 'water' ? 'swim' : 'idle',

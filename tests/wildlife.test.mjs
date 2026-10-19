@@ -176,6 +176,9 @@ test('world wildlife shares render resources, owns independent rigs, respects di
         assert.notEqual(a.skeleton, b.skeleton);
         assert.notEqual(a.skeleton.bones[0], b.skeleton.bones[0]);
         const initial = first.population.actors.map(actor => actor.id);
+        const bearRoot = first.root.getObjectByName('wildlife:brown-bear:roaming:0');
+        const up = new Vector3(0,1,0).applyQuaternion(bearRoot.quaternion);
+        assert.ok(up.distanceTo(new Vector3(-.25,1,0).normalize()) < 1e-6);
         const camera = new PerspectiveCamera(45,1,.1,10);
         camera.position.set(100000,100,100000);
         camera.lookAt(100100,100,100100);

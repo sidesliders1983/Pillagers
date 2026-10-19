@@ -31,7 +31,8 @@ Candidates are sampled once on an 8 m grid and along existing coast segments.
 Mixed land/water groups require a shared coastal anchor. Ground footprints must
 be walkable, dry and clear of buildings and nature obstacles. Water actors remain
 in water at least 20 cm deep; their routes cannot cross a headland. Movement checks
-the whole proposed segment every 50 cm. Newly built structures update the obstacle
+the whole proposed segment every 50 cm. Ground mammals follow the existing
+terrain triangle normal so their feet do not remain horizontal across a slope. Newly built structures update the obstacle
 list. An actor whose position becomes blocked rests and is hidden rather than
 appearing inside the structure or teleporting elsewhere. Unavailable habitats
 produce a diagnostic instead of an invalid forced spawn.
