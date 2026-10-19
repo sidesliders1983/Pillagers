@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "pairs": [
+    {
+      "name": "village-17-island-pool-v2",
+      "canonicalSha256": "b5e2ce85a9cb18b39f15774086b2c4246b2477d92f44a02044da0a41f4e0606e",
+      "blueprintSha256": "2caacc7fd5426867930ca7da4931a69714c6024f045dfd8a7dac5ca27652feaf",
+      "pixelsSha256": "af4b0499a25d5fd9a41b4d70720d00a1fa9a35dd952998bc371405bc80481f56",
+      "renderer": {
+        "callsIncludingShadows": 239,
+        "trianglesIncludingShadows": 5282189,
+        "geometries": 113,
+        "textures": 71,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "beforeSource": {
+        "ref": null,
+        "overrides": {}
+      },
+      "afterSource": {
+        "ref": null,
+        "overrides": {}
+      }
+    },
+    {
+      "name": "winter-32-island-pool-v2",
+      "canonicalSha256": "4f326a9682fc0e8c42920311bc33db28912335fe6e4723fd206ec26e99142b4b",
+      "blueprintSha256": "564f858cda13aab38ac2d1b779b6a486c7db6a5a75db8f2e333ad6f853bd9451",
+      "pixelsSha256": "6c395f8b1ede0fadf70b48b3fcac3e32ba6ef0d187aad58eaa9ac308dcff16ff",
+      "renderer": {
+        "callsIncludingShadows": 252,
+        "trianglesIncludingShadows": 4528984,
+        "geometries": 122,
+        "textures": 75,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "beforeSource": {
+        "ref": null,
+        "overrides": {}
+      },
+      "afterSource": {
+        "ref": null,
+        "overrides": {}
+      }
+    }
+  ],
+  "note": "Same Edge version, viewport, saved campaign, quality, camera and frozen presentation time. This does not claim cross-device pixel identity or an FPS gain."
+}

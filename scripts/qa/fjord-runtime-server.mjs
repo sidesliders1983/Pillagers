@@ -5,12 +5,15 @@ import { createHash } from 'node:crypto';
 
 const goldenMode = process.env.QA_GOLDEN === '1';
 const fogStudyMode = process.env.QA_FOG_STUDY === '1';
+const updateStudyMode = process.env.QA_UPDATE_STUDY === '1';
 if (fogStudyMode && !goldenMode) throw Error('The fog study requires the frozen golden capture clock.');
 const sourceRef = process.env.QA_SOURCE_REF;
 if (sourceRef && !/^[a-f0-9]{40}$/.test(sourceRef)) throw Error('QA_SOURCE_REF requires an exact commit');
 // A paired baseline serves these unchanged sources through the same QA bridge, not HMR state.
 const pinnedFiles = sourceRef ? ['src/fjord-play/FjordPlay.ts', 'src/core/WorldLighting.ts',
-    ...(process.env.QA_PIN_SCENE_LIFECYCLE === '1' ? ['src/fjord-play/FjordEntities.ts'] : []),
+    ...(process.env.QA_PIN_SCENE_LIFECYCLE === '1' || process.env.QA_PIN_UPDATE_PATHS === '1'
+        ? ['src/fjord-play/FjordEntities.ts'] : []),
+    ...(process.env.QA_PIN_UPDATE_PATHS === '1' ? ['src/fjord-play/FjordInterface.ts'] : []),
     ...(process.env.QA_PIN_PRESENTATION === '1' ? ['src/config/FjordPresentation.ts'] : [])] : [];
 const pinnedSources = new Map(pinnedFiles.map(path => [path,
     execFileSync('git', ['show', sourceRef + ':' + path], { encoding: 'utf8' })]));
@@ -124,6 +127,25 @@ const server = await createServer({
         const path = id.replaceAll('\\', '/').split('?')[0];
         const pinned = [...pinnedSources.keys()].find(file => path.endsWith('/' + file));
         if (pinned) source = pinnedSources.get(pinned);
+        if (updateStudyMode && path.endsWith('/src/fjord-play/FjordEntities.ts')) {
+            const start = '                if (yard) {';
+            const end = '                        entry.model.position.y = floor;';
+            if (source.split(start).length !== 2 || source.split(end).length !== 2)
+                throw Error('Yard-floor observation anchor changed');
+            source = source.replace(start, start + '\n                    const __floorStart = performance.now();')
+                .replace(end, end + "\n                    if (audit.active) audit.record('scene.yardFloor', performance.now() - __floorStart);");
+            return { code: "import { audit } from '/scripts/qa/fjord-runtime-browser.mjs';\n" + source, map: null };
+        }
+        if (updateStudyMode && path.endsWith('/src/fjord-play/FjordInterface.ts')) {
+            const start = source.includes('        const panelEpoch =')
+                ? '        const panelEpoch =' : '        const preserved =';
+            const end = '        const count = this.attentionCount(state);';
+            if (source.split(start).length !== 2 || source.split(end).length !== 2)
+                throw Error('Card-patch observation anchor changed');
+            source = source.replace(start, '        const __cardPatchStart = performance.now();\n' + start)
+                .replace(end, "        if (audit.active) audit.record('ui.cardPatch', performance.now() - __cardPatchStart);\n" + end);
+            return { code: "import { audit } from '/scripts/qa/fjord-runtime-browser.mjs';\n" + source, map: null };
+        }
         if (path.endsWith('/src/fjord-play/FjordPlay.ts')) return { code: instrument(source), map: null };
         if (path.endsWith('/src/fjord-play/FjordScene.ts')) return { code: instrumentScene(source), map: null };
         if (pinned) return { code: source, map: null };

@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "physicalDeviceTested": false,
+  "pixelRatioOverride": null,
+  "checks": [
+    "Touch on discovered rival opens Recon; confirmation spends exactly once, keeps Surveillance private and disables year skipping",
+    "Map toggle and ordinary paid tent-to-house action retain exact Core command/event/charge semantics and render the house",
+    "Running refresh preserves actual focused search edit and exact physical-mission tick replay"
+  ],
+  "errors": []
+}

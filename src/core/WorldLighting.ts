@@ -6,6 +6,7 @@ import { hearth } from '../world/SettlementLayout';
 import { surfaceHeightAt } from '../world/Terrain';
 import { TimeVisualization, daylight, seasonBlend } from '../config/timeVisualization';
 import type { FogPresentation } from '../config/FjordFog';
+import { presentationShadowSize } from '../config/PresentationQuality';
 type DayLightingSettings = {[K in keyof typeof config.day]: K extends 'sunPosition' ? readonly number[] : number};
 export class WorldLighting {
     readonly ambient=new HemisphereLight();
@@ -74,7 +75,7 @@ export class WorldLighting {
         Object.assign(this.directional.shadow.camera,{left:-50,right:50,top:50,bottom:-50,near:1,far:110});
         this.directional.shadow.camera.updateProjectionMatrix();
         this.directional.shadow.bias=0;this.directional.shadow.normalBias=day.shadowNormalBias;this.directional.shadow.radius=day.shadowRadius;
-        const size=this.quality==='low'?Math.min(1024,preset.shadowMapSize):preset.shadowMapSize;
+        const size=presentationShadowSize(this.quality,preset.shadowMapSize);
         if(this.directional.shadow.mapSize.x!==size){this.directional.shadow.map?.dispose();this.directional.shadow.map=null;this.directional.shadow.mapSize.set(size,size);}
         this.placeWorldLight();
         this.renderer.shadowMap.needsUpdate=true;this.renderer.toneMappingExposure=preset.exposure;
@@ -101,8 +102,8 @@ export class WorldLighting {
     }
     setQuality(quality: 'standard' | 'low') {
         this.quality = quality;
-        const size = quality === 'low' ? 1024 :
-            (this.mode === 'night' ? config.night.shadowMapSize : config.day.shadowMapSize);
+        const size = presentationShadowSize(quality,
+            this.mode === 'night' ? config.night.shadowMapSize : config.day.shadowMapSize);
         if (this.directional.shadow.mapSize.x === size) return;
         this.directional.shadow.map?.dispose();
         this.directional.shadow.map = null;

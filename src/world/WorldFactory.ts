@@ -1,4 +1,5 @@
 import { discoveryAt, type DiscoveryView } from '../simulation/ClanDiscovery';
+import { presentationProfiles } from '../config/PresentationQuality';
 import { campaignIslandPlan } from '../fjord-play/CampaignIsland';
 import { Camera, Group, InstancedMesh, Mesh, Vector3 } from 'three';
 import type { AssetManager } from '../core/AssetManager';
@@ -268,7 +269,7 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
             get quality() { return quality; },
             setQuality(value: 'standard' | 'low') {
                 quality = value;
-                (water ?? classic!.water).surface.setQuality(value === 'low' ? 'low' : 'medium');
+                (water ?? classic!.water).surface.setQuality(presentationProfiles[value].waterQuality);
                 floatingBoat?.update((water ?? classic!.water).surface,waterTime);
             },
             setMotion(value: typeof motion) { motion = { ...value }; },

@@ -1,0 +1,12 @@
+{
+  "status": "FAIL",
+  "checks": [],
+  "errors": [],
+  "unchanged": {
+    "cardParses": 5,
+    "exactCore": true,
+    "sameMarkup": true,
+    "sameRoot": true
+  },
+  "failure": "AssertionError [ERR_ASSERTION]: Warmed identical non-editable cards must not allocate and parse another template\n\n5 !== 0\n\n    at file:///C:/CodexWorkspaces/Pillagers/scratch/fine-grained-updates-210/scripts/qa/check-fjord-card-dependencies.mjs:44:12"
+}

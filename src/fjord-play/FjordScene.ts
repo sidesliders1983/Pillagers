@@ -18,6 +18,7 @@ import { ProductionLabels } from './ProductionLabels';
 import type { SelectionLabel } from './SelectionLabels';
 import { fjordTerrain, fjordSnowLine } from '../config/FjordTerrain';
 import { fjordPresentation } from '../config/FjordPresentation';
+import { resolvePresentationQuality, type PresentationQuality } from '../config/PresentationQuality';
 import { Vector2, Vector3, Raycaster, RingGeometry, MeshBasicMaterial, DoubleSide, Clock, PerspectiveCamera, Scene, Mesh, Texture } from 'three';
 import { AssetManager } from '../core/AssetManager';
 import { createRenderer } from '../core/Renderer';
@@ -87,7 +88,10 @@ export function createFjordScene(options: {
     scene.add(targetMarker);
 
     const renderer = createRenderer(canvas);
-    renderer.setPixelRatio(1);
+    renderer.setPixelRatio(resolvePresentationQuality(
+        document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as PresentationQuality,
+        document.querySelector<HTMLSelectElement>('#fjord-effects')!.value as EffectQuality,
+        devicePixelRatio, 'initial').pixelRatio);
     const controller = new RTSCameraController(camera, canvas, 'pan');
     const islandMap = new IslandMap(document.querySelector('#fjord-play')!, {
         focus: point => controller.focusAt(point),
@@ -421,12 +425,14 @@ export function createFjordScene(options: {
         else await syncScene!();
         if (inactive() || shared.transferring) return;
         document.querySelector('#fjord-quality')!.addEventListener('change', event => {
-            const quality = (event.target as HTMLSelectElement).value as 'low' | 'standard';
+            const quality = (event.target as HTMLSelectElement).value as PresentationQuality;
             world!.setQuality(quality);
             dressing!.setQuality(quality);
             canvas.dataset.dressing = JSON.stringify(dressing!.inspect());
             lighting!.setQuality(quality);
-            renderer.setPixelRatio(Math.min(devicePixelRatio, quality === 'low' ? 1 : 1.5));
+            renderer.setPixelRatio(resolvePresentationQuality(quality,
+                document.querySelector<HTMLSelectElement>('#fjord-effects')!.value as EffectQuality,
+                devicePixelRatio, 'live').pixelRatio);
         }, { signal: bindings.signal });
 
         const resize = () => {

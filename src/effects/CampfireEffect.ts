@@ -4,7 +4,8 @@ import { BatchedRenderer, Bezier, ColorOverLife, ConeEmitter, ConstantColor, Con
     Gradient, IntervalValue, ParticleSystem, PiecewiseBezier, RenderMode, SizeOverLife } from 'three.quarks';
 import { Vector3 as ColorVector, Vector4, type Particle } from 'quarks.core';
 
-export type EffectQuality = 'off' | 'low' | 'normal';
+import { effectProfiles, type EffectQuality } from '../config/PresentationQuality';
+export type { EffectQuality } from '../config/PresentationQuality';
 
 /** Only presentation randomness. Never reads or writes the simulation's saved RNG. */
 function stream(seed: number) {
@@ -108,7 +109,7 @@ export class CampfireEffect {
         }
         this.root.visible = this.enabled;
     }
-    private get enabled() { return this.quality !== 'off' && !this.reducedMotion; }
+    private get enabled() { return effectProfiles[this.quality].enabled && !this.reducedMotion; }
     setLit(lit: boolean) { this.lit = lit; }
     update(delta: number, active: boolean) {
         if (this.disposed || !active) return;
@@ -118,9 +119,10 @@ export class CampfireEffect {
         this.heat = this.lit ? Math.min(1, this.heat + step / 3) : Math.max(0, this.heat - step / 6);
         if (!this.enabled) return;
         for (const entry of this.systems) {
-            const limit = this.quality === 'low' ? Math.ceil(entry.cap / 2) : entry.cap;
+            const budget = effectProfiles[this.quality];
+            const limit = Math.ceil(entry.cap * budget.fireCapScale);
             const rate = this.lit && entry.system.particleNum < limit
-                ? entry.rate * (this.quality === 'low' ? .45 : 1) : 0;
+                ? entry.rate * budget.fireRateScale : 0;
             (entry.system.emissionOverTime as ConstantValue).value = rate;
         }
         this.renderer.update(step);

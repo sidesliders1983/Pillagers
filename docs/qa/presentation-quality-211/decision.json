@@ -1,0 +1,399 @@
+{
+  "decision": "retain",
+  "rationale": "Five of six paired GPU means were lower, but first-contact repetition two worsened (frame p95 133.3 to 150.2 ms) and most other p95 pairs were similar. Shared-host variation is substantial; these runs do not establish a reliable end-to-end improvement that justifies softer imagery.",
+  "defaultsChanged": false,
+  "runtime": "54c266b8b03a37dea6406f39209a80dca7d6a090",
+  "runnerSha256": "73f15b7a8a033059498b177ba7ef07ec230a392681dbbbda867dd6df519ad1ad",
+  "pairs": [
+    {
+      "fixture": "village-17",
+      "repeat": 1,
+      "canonicalSha256": "0c4fb091c147711a5c4fd03bbed28b26c8e9b63432df07a65cb660a658345a43",
+      "before": {
+        "frames": {
+          "count": 540,
+          "total": 44933.3,
+          "mean": 83.20981481481482,
+          "min": 16.59999999999127,
+          "max": 183.3000000000029,
+          "p50": 83.3,
+          "p95": 100,
+          "p99": 100.3,
+          "over33": 539,
+          "over50": 539
+        },
+        "gpu": {
+          "count": 133,
+          "total": 10715.736746999995,
+          "mean": 80.56944922556387,
+          "min": 69.871303,
+          "max": 94.69662,
+          "p50": 80.4,
+          "p95": 89,
+          "p99": 92.8,
+          "over33": 133,
+          "over50": 133
+        }
+      },
+      "after": {
+        "frames": {
+          "count": 560,
+          "total": 44949.899999999994,
+          "mean": 80.26767857142856,
+          "min": 17,
+          "max": 166.6999999999971,
+          "p50": 83.3,
+          "p95": 99.9,
+          "p99": 100.2,
+          "over33": 559,
+          "over50": 559
+        },
+        "gpu": {
+          "count": 138,
+          "total": 10703.079057000004,
+          "mean": 77.55854389130438,
+          "min": 68.058642,
+          "max": 92.901295,
+          "p50": 77.4,
+          "p95": 88.3,
+          "p99": 92.8,
+          "over33": 138,
+          "over50": 138
+        }
+      }
+    },
+    {
+      "fixture": "visited-800",
+      "repeat": 1,
+      "canonicalSha256": "da12fc819ea5869dc606971980ed432388a7a570cfde6194a6bdaa55c14d27ba",
+      "before": {
+        "frames": {
+          "count": 386,
+          "total": 44933.5,
+          "mean": 116.40803108808291,
+          "min": 16.60000000000582,
+          "max": 716.6999999999971,
+          "p50": 116.6,
+          "p95": 149.9,
+          "p99": 166.6,
+          "over33": 381,
+          "over50": 375
+        },
+        "gpu": {
+          "count": 95,
+          "total": 10475.728701000004,
+          "mean": 110.27082843157899,
+          "min": 68.91364,
+          "max": 156.240624,
+          "p50": 110.7,
+          "p95": 131.9,
+          "p99": 156.2,
+          "over33": 95,
+          "over50": 95
+        }
+      },
+      "after": {
+        "frames": {
+          "count": 391,
+          "total": 44915.2,
+          "mean": 114.87263427109974,
+          "min": 16.09999999999127,
+          "max": 666.5,
+          "p50": 116.6,
+          "p95": 133.6,
+          "p99": 166.8,
+          "over33": 383,
+          "over50": 382
+        },
+        "gpu": {
+          "count": 96,
+          "total": 10544.270171999999,
+          "mean": 109.83614762499998,
+          "min": 67.505146,
+          "max": 148.759154,
+          "p50": 110.6,
+          "p95": 128.2,
+          "p99": 148.8,
+          "over33": 96,
+          "over50": 96
+        }
+      }
+    },
+    {
+      "fixture": "visited-800",
+      "repeat": 2,
+      "canonicalSha256": "da12fc819ea5869dc606971980ed432388a7a570cfde6194a6bdaa55c14d27ba",
+      "before": {
+        "frames": {
+          "count": 417,
+          "total": 45000.20000000001,
+          "mean": 107.91414868105518,
+          "min": 16.5,
+          "max": 500,
+          "p50": 100.1,
+          "p95": 133.3,
+          "p99": 133.6,
+          "over33": 413,
+          "over50": 410
+        },
+        "gpu": {
+          "count": 103,
+          "total": 10767.282025999997,
+          "mean": 104.5367186990291,
+          "min": 82.360503,
+          "max": 134.392211,
+          "p50": 102.3,
+          "p95": 124.6,
+          "p99": 131.8,
+          "over33": 103,
+          "over50": 103
+        }
+      },
+      "after": {
+        "frames": {
+          "count": 353,
+          "total": 44867.100000000006,
+          "mean": 127.10226628895185,
+          "min": 16.10000000000582,
+          "max": 633.4000000000087,
+          "p50": 132,
+          "p95": 150.2,
+          "p99": 183.5,
+          "over33": 349,
+          "over50": 347
+        },
+        "gpu": {
+          "count": 87,
+          "total": 10846.670477000003,
+          "mean": 124.67437329885061,
+          "min": 87.934398,
+          "max": 165.66167,
+          "p50": 123,
+          "p95": 148.6,
+          "p99": 165.7,
+          "over33": 87,
+          "over50": 87
+        }
+      }
+    },
+    {
+      "fixture": "village-17",
+      "repeat": 2,
+      "canonicalSha256": "0c4fb091c147711a5c4fd03bbed28b26c8e9b63432df07a65cb660a658345a43",
+      "before": {
+        "frames": {
+          "count": 386,
+          "total": 44900,
+          "mean": 116.32124352331606,
+          "min": 16.5,
+          "max": 233.5,
+          "p50": 116.7,
+          "p95": 133.5,
+          "p99": 150.1,
+          "over33": 385,
+          "over50": 385
+        },
+        "gpu": {
+          "count": 95,
+          "total": 10339.885471000001,
+          "mean": 108.84089969473686,
+          "min": 71.207881,
+          "max": 139.69869,
+          "p50": 108.2,
+          "p95": 127.1,
+          "p99": 139.7,
+          "over33": 95,
+          "over50": 95
+        }
+      },
+      "after": {
+        "frames": {
+          "count": 419,
+          "total": 44933.3,
+          "mean": 107.23937947494034,
+          "min": 16.599999999998545,
+          "max": 216.6999999999971,
+          "p50": 100.1,
+          "p95": 133.3,
+          "p99": 133.4,
+          "over33": 418,
+          "over50": 418
+        },
+        "gpu": {
+          "count": 103,
+          "total": 10469.690025999995,
+          "mean": 101.64747598058247,
+          "min": 82.961167,
+          "max": 129.444231,
+          "p50": 100.9,
+          "p95": 117.8,
+          "p99": 125.7,
+          "over33": 103,
+          "over50": 103
+        }
+      }
+    },
+    {
+      "fixture": "village-17",
+      "repeat": 3,
+      "canonicalSha256": "0c4fb091c147711a5c4fd03bbed28b26c8e9b63432df07a65cb660a658345a43",
+      "before": {
+        "frames": {
+          "count": 384,
+          "total": 44966.7,
+          "mean": 117.10078125,
+          "min": 33.299999999995634,
+          "max": 200,
+          "p50": 116.7,
+          "p95": 133.5,
+          "p99": 150,
+          "over33": 383,
+          "over50": 383
+        },
+        "gpu": {
+          "count": 94,
+          "total": 10623.951074000004,
+          "mean": 113.02075610638302,
+          "min": 91.666799,
+          "max": 137.91328,
+          "p50": 112.4,
+          "p95": 133,
+          "p99": 137.9,
+          "over33": 94,
+          "over50": 94
+        }
+      },
+      "after": {
+        "frames": {
+          "count": 413,
+          "total": 44966.8,
+          "mean": 108.87845036319614,
+          "min": 16.60000000000582,
+          "max": 200,
+          "p50": 100.2,
+          "p95": 133.4,
+          "p99": 149.9,
+          "over33": 412,
+          "over50": 412
+        },
+        "gpu": {
+          "count": 102,
+          "total": 10543.490391,
+          "mean": 103.36755285294117,
+          "min": 75.402115,
+          "max": 145.722999,
+          "p50": 101.8,
+          "p95": 121.9,
+          "p99": 131.9,
+          "over33": 102,
+          "over50": 102
+        }
+      }
+    },
+    {
+      "fixture": "visited-800",
+      "repeat": 3,
+      "canonicalSha256": "da12fc819ea5869dc606971980ed432388a7a570cfde6194a6bdaa55c14d27ba",
+      "before": {
+        "frames": {
+          "count": 398,
+          "total": 44916.8,
+          "mean": 112.85628140703518,
+          "min": 16.60000000000582,
+          "max": 799.8999999999942,
+          "p50": 116.6,
+          "p95": 133.5,
+          "p99": 183.9,
+          "over33": 391,
+          "over50": 389
+        },
+        "gpu": {
+          "count": 98,
+          "total": 10420.877665999998,
+          "mean": 106.33548638775508,
+          "min": 53.486036,
+          "max": 138.234363,
+          "p50": 104.8,
+          "p95": 130.9,
+          "p99": 138.2,
+          "over33": 98,
+          "over50": 98
+        }
+      },
+      "after": {
+        "frames": {
+          "count": 422,
+          "total": 44883.399999999994,
+          "mean": 106.35876777251184,
+          "min": 16.5,
+          "max": 566.6000000000058,
+          "p50": 100.1,
+          "p95": 133.3,
+          "p99": 150,
+          "over33": 418,
+          "over50": 417
+        },
+        "gpu": {
+          "count": 104,
+          "total": 10607.094589999999,
+          "mean": 101.99129413461537,
+          "min": 77.822271,
+          "max": 135.82579,
+          "p50": 101.1,
+          "p95": 118.6,
+          "p99": 130.5,
+          "over33": 104,
+          "over50": 104
+        }
+      }
+    }
+  ],
+  "imageRows": [
+    {
+      "size": "desktop",
+      "before": {
+        "callsIncludingShadows": 235,
+        "trianglesIncludingShadows": 5195439,
+        "geometries": 113,
+        "textures": 71,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "after": {
+        "callsIncludingShadows": 235,
+        "trianglesIncludingShadows": 5195439,
+        "geometries": 113,
+        "textures": 71,
+        "pixelRatio": 0.85,
+        "width": 1190,
+        "height": 765
+      },
+      "canonicalSha256": "b5e2ce85a9cb18b39f15774086b2c4246b2477d92f44a02044da0a41f4e0606e",
+      "cardSha256": "7cf6d087ab41c5283b8f7d30385a274cbfd206c41cf61e0d8bdf48d9bb306efa"
+    },
+    {
+      "size": "mobile",
+      "before": {
+        "callsIncludingShadows": 227,
+        "trianglesIncludingShadows": 5182154,
+        "geometries": 113,
+        "textures": 71,
+        "pixelRatio": 1,
+        "width": 390,
+        "height": 844
+      },
+      "after": {
+        "callsIncludingShadows": 227,
+        "trianglesIncludingShadows": 5182154,
+        "geometries": 113,
+        "textures": 71,
+        "pixelRatio": 0.85,
+        "width": 331,
+        "height": 717
+      },
+      "canonicalSha256": "b5e2ce85a9cb18b39f15774086b2c4246b2477d92f44a02044da0a41f4e0606e",
+      "cardSha256": "465db20c2e549e23d8c74c28482f4e11b421043df8c6f0feaf3897ee079fbcd3"
+    }
+  ]
+}

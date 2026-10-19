@@ -1,0 +1,577 @@
+{
+  "status": "PASS",
+  "browser": "155.0.4283.62",
+  "device": "Windows Edge, DPR2 touch emulation; physical iOS untested",
+  "checks": [
+    "Three live quality cycles preserve exact Core/book/geography/native instances and ground tier; water/shadow/DPR budgets apply and warm GPU resource counts stabilize",
+    "Existing Off/Low/Normal and reduced motion remain independent of world quality, Core, heat and resident detail",
+    "Orientation resize, synthetic cached return and real WebGL context recovery retain the same scene, live DPR and exact paused campaign",
+    "A genuine reload restores explicit Standard/Low preferences and exact save facts, retaining the established cold-start ratio"
+  ],
+  "samples": [
+    {
+      "cycle": 0,
+      "quality": "low",
+      "ratio": 1,
+      "renderer": {
+        "geometries": 115,
+        "textures": 73
+      },
+      "world": {
+        "ground": "standard",
+        "water": "low"
+      },
+      "shadow": 1024,
+      "models": {
+        "actors": 13,
+        "sourceTemplates": 2,
+        "ownedInstanceRoots": 0
+      },
+      "actors": [
+        {
+          "key": "persona:founder-1",
+          "uuid": "48e0ec16-ee1f-405d-b03f-cc8afaefb123"
+        },
+        {
+          "key": "persona:founder-2",
+          "uuid": "8fbaeb72-d7e6-4609-a935-8b3ee29d17d1"
+        },
+        {
+          "key": "persona:founder-8",
+          "uuid": "687b7792-a2e5-421e-816c-30d7df7c5dca"
+        },
+        {
+          "key": "persona:founder-3",
+          "uuid": "d3221039-c1b3-4cc1-8cd8-0f9ebfd05cbf"
+        },
+        {
+          "key": "persona:founder-10",
+          "uuid": "7a74e98d-60a4-4356-9ea9-23fdc4b5d376"
+        },
+        {
+          "key": "persona:founder-4",
+          "uuid": "d3d771e7-f022-4454-afac-404386f9c576"
+        },
+        {
+          "key": "persona:founder-5",
+          "uuid": "9c97e772-6fab-41c1-941d-f1fc2da52a73"
+        },
+        {
+          "key": "persona:founder-6",
+          "uuid": "71e9d2d7-bdfb-4da4-b9d4-b563c278f5a0"
+        },
+        {
+          "key": "persona:founder-7",
+          "uuid": "f280d0f5-a63c-4fdf-ae2f-dc63bdbbddb8"
+        },
+        {
+          "key": "persona:founder-9",
+          "uuid": "1b9ecced-dd08-4aef-b9f5-4c13b47e34d3"
+        }
+      ],
+      "fire": {
+        "key": "settlement-campfire",
+        "lit": false,
+        "heat": 0,
+        "time": 0,
+        "quality": "low",
+        "reducedMotion": false,
+        "particles": 0,
+        "systems": 3,
+        "batches": 2,
+        "visible": true,
+        "snowMultiplier": 1
+      },
+      "rain": {
+        "targetSnow": 0,
+        "targetRain": 0,
+        "quality": "low",
+        "reducedMotion": false,
+        "enabled": true,
+        "time": 0,
+        "snow": 0,
+        "rain": 0,
+        "snowWeight": 0,
+        "rainWeight": 0,
+        "radius": 25,
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "batches": 2
+      }
+    },
+    {
+      "cycle": 0,
+      "quality": "standard",
+      "ratio": 1.5,
+      "renderer": {
+        "geometries": 115,
+        "textures": 73
+      },
+      "world": {
+        "ground": "standard",
+        "water": "medium"
+      },
+      "shadow": 2048,
+      "models": {
+        "actors": 13,
+        "sourceTemplates": 2,
+        "ownedInstanceRoots": 0
+      },
+      "actors": [
+        {
+          "key": "persona:founder-1",
+          "uuid": "48e0ec16-ee1f-405d-b03f-cc8afaefb123"
+        },
+        {
+          "key": "persona:founder-2",
+          "uuid": "8fbaeb72-d7e6-4609-a935-8b3ee29d17d1"
+        },
+        {
+          "key": "persona:founder-8",
+          "uuid": "687b7792-a2e5-421e-816c-30d7df7c5dca"
+        },
+        {
+          "key": "persona:founder-3",
+          "uuid": "d3221039-c1b3-4cc1-8cd8-0f9ebfd05cbf"
+        },
+        {
+          "key": "persona:founder-10",
+          "uuid": "7a74e98d-60a4-4356-9ea9-23fdc4b5d376"
+        },
+        {
+          "key": "persona:founder-4",
+          "uuid": "d3d771e7-f022-4454-afac-404386f9c576"
+        },
+        {
+          "key": "persona:founder-5",
+          "uuid": "9c97e772-6fab-41c1-941d-f1fc2da52a73"
+        },
+        {
+          "key": "persona:founder-6",
+          "uuid": "71e9d2d7-bdfb-4da4-b9d4-b563c278f5a0"
+        },
+        {
+          "key": "persona:founder-7",
+          "uuid": "f280d0f5-a63c-4fdf-ae2f-dc63bdbbddb8"
+        },
+        {
+          "key": "persona:founder-9",
+          "uuid": "1b9ecced-dd08-4aef-b9f5-4c13b47e34d3"
+        }
+      ],
+      "fire": {
+        "key": "settlement-campfire",
+        "lit": false,
+        "heat": 0,
+        "time": 0,
+        "quality": "low",
+        "reducedMotion": false,
+        "particles": 0,
+        "systems": 3,
+        "batches": 2,
+        "visible": true,
+        "snowMultiplier": 1
+      },
+      "rain": {
+        "targetSnow": 0,
+        "targetRain": 0,
+        "quality": "low",
+        "reducedMotion": false,
+        "enabled": true,
+        "time": 0,
+        "snow": 0,
+        "rain": 0,
+        "snowWeight": 0,
+        "rainWeight": 0,
+        "radius": 25,
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "batches": 2
+      }
+    },
+    {
+      "cycle": 1,
+      "quality": "low",
+      "ratio": 1,
+      "renderer": {
+        "geometries": 115,
+        "textures": 73
+      },
+      "world": {
+        "ground": "standard",
+        "water": "low"
+      },
+      "shadow": 1024,
+      "models": {
+        "actors": 13,
+        "sourceTemplates": 2,
+        "ownedInstanceRoots": 0
+      },
+      "actors": [
+        {
+          "key": "persona:founder-1",
+          "uuid": "48e0ec16-ee1f-405d-b03f-cc8afaefb123"
+        },
+        {
+          "key": "persona:founder-2",
+          "uuid": "8fbaeb72-d7e6-4609-a935-8b3ee29d17d1"
+        },
+        {
+          "key": "persona:founder-8",
+          "uuid": "687b7792-a2e5-421e-816c-30d7df7c5dca"
+        },
+        {
+          "key": "persona:founder-3",
+          "uuid": "d3221039-c1b3-4cc1-8cd8-0f9ebfd05cbf"
+        },
+        {
+          "key": "persona:founder-10",
+          "uuid": "7a74e98d-60a4-4356-9ea9-23fdc4b5d376"
+        },
+        {
+          "key": "persona:founder-4",
+          "uuid": "d3d771e7-f022-4454-afac-404386f9c576"
+        },
+        {
+          "key": "persona:founder-5",
+          "uuid": "9c97e772-6fab-41c1-941d-f1fc2da52a73"
+        },
+        {
+          "key": "persona:founder-6",
+          "uuid": "71e9d2d7-bdfb-4da4-b9d4-b563c278f5a0"
+        },
+        {
+          "key": "persona:founder-7",
+          "uuid": "f280d0f5-a63c-4fdf-ae2f-dc63bdbbddb8"
+        },
+        {
+          "key": "persona:founder-9",
+          "uuid": "1b9ecced-dd08-4aef-b9f5-4c13b47e34d3"
+        }
+      ],
+      "fire": {
+        "key": "settlement-campfire",
+        "lit": false,
+        "heat": 0,
+        "time": 0,
+        "quality": "low",
+        "reducedMotion": false,
+        "particles": 0,
+        "systems": 3,
+        "batches": 2,
+        "visible": true,
+        "snowMultiplier": 1
+      },
+      "rain": {
+        "targetSnow": 0,
+        "targetRain": 0,
+        "quality": "low",
+        "reducedMotion": false,
+        "enabled": true,
+        "time": 0,
+        "snow": 0,
+        "rain": 0,
+        "snowWeight": 0,
+        "rainWeight": 0,
+        "radius": 25,
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "batches": 2
+      }
+    },
+    {
+      "cycle": 1,
+      "quality": "standard",
+      "ratio": 1.5,
+      "renderer": {
+        "geometries": 115,
+        "textures": 73
+      },
+      "world": {
+        "ground": "standard",
+        "water": "medium"
+      },
+      "shadow": 2048,
+      "models": {
+        "actors": 13,
+        "sourceTemplates": 2,
+        "ownedInstanceRoots": 0
+      },
+      "actors": [
+        {
+          "key": "persona:founder-1",
+          "uuid": "48e0ec16-ee1f-405d-b03f-cc8afaefb123"
+        },
+        {
+          "key": "persona:founder-2",
+          "uuid": "8fbaeb72-d7e6-4609-a935-8b3ee29d17d1"
+        },
+        {
+          "key": "persona:founder-8",
+          "uuid": "687b7792-a2e5-421e-816c-30d7df7c5dca"
+        },
+        {
+          "key": "persona:founder-3",
+          "uuid": "d3221039-c1b3-4cc1-8cd8-0f9ebfd05cbf"
+        },
+        {
+          "key": "persona:founder-10",
+          "uuid": "7a74e98d-60a4-4356-9ea9-23fdc4b5d376"
+        },
+        {
+          "key": "persona:founder-4",
+          "uuid": "d3d771e7-f022-4454-afac-404386f9c576"
+        },
+        {
+          "key": "persona:founder-5",
+          "uuid": "9c97e772-6fab-41c1-941d-f1fc2da52a73"
+        },
+        {
+          "key": "persona:founder-6",
+          "uuid": "71e9d2d7-bdfb-4da4-b9d4-b563c278f5a0"
+        },
+        {
+          "key": "persona:founder-7",
+          "uuid": "f280d0f5-a63c-4fdf-ae2f-dc63bdbbddb8"
+        },
+        {
+          "key": "persona:founder-9",
+          "uuid": "1b9ecced-dd08-4aef-b9f5-4c13b47e34d3"
+        }
+      ],
+      "fire": {
+        "key": "settlement-campfire",
+        "lit": false,
+        "heat": 0,
+        "time": 0,
+        "quality": "low",
+        "reducedMotion": false,
+        "particles": 0,
+        "systems": 3,
+        "batches": 2,
+        "visible": true,
+        "snowMultiplier": 1
+      },
+      "rain": {
+        "targetSnow": 0,
+        "targetRain": 0,
+        "quality": "low",
+        "reducedMotion": false,
+        "enabled": true,
+        "time": 0,
+        "snow": 0,
+        "rain": 0,
+        "snowWeight": 0,
+        "rainWeight": 0,
+        "radius": 25,
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "batches": 2
+      }
+    },
+    {
+      "cycle": 2,
+      "quality": "low",
+      "ratio": 1,
+      "renderer": {
+        "geometries": 115,
+        "textures": 73
+      },
+      "world": {
+        "ground": "standard",
+        "water": "low"
+      },
+      "shadow": 1024,
+      "models": {
+        "actors": 13,
+        "sourceTemplates": 2,
+        "ownedInstanceRoots": 0
+      },
+      "actors": [
+        {
+          "key": "persona:founder-1",
+          "uuid": "48e0ec16-ee1f-405d-b03f-cc8afaefb123"
+        },
+        {
+          "key": "persona:founder-2",
+          "uuid": "8fbaeb72-d7e6-4609-a935-8b3ee29d17d1"
+        },
+        {
+          "key": "persona:founder-8",
+          "uuid": "687b7792-a2e5-421e-816c-30d7df7c5dca"
+        },
+        {
+          "key": "persona:founder-3",
+          "uuid": "d3221039-c1b3-4cc1-8cd8-0f9ebfd05cbf"
+        },
+        {
+          "key": "persona:founder-10",
+          "uuid": "7a74e98d-60a4-4356-9ea9-23fdc4b5d376"
+        },
+        {
+          "key": "persona:founder-4",
+          "uuid": "d3d771e7-f022-4454-afac-404386f9c576"
+        },
+        {
+          "key": "persona:founder-5",
+          "uuid": "9c97e772-6fab-41c1-941d-f1fc2da52a73"
+        },
+        {
+          "key": "persona:founder-6",
+          "uuid": "71e9d2d7-bdfb-4da4-b9d4-b563c278f5a0"
+        },
+        {
+          "key": "persona:founder-7",
+          "uuid": "f280d0f5-a63c-4fdf-ae2f-dc63bdbbddb8"
+        },
+        {
+          "key": "persona:founder-9",
+          "uuid": "1b9ecced-dd08-4aef-b9f5-4c13b47e34d3"
+        }
+      ],
+      "fire": {
+        "key": "settlement-campfire",
+        "lit": false,
+        "heat": 0,
+        "time": 0,
+        "quality": "low",
+        "reducedMotion": false,
+        "particles": 0,
+        "systems": 3,
+        "batches": 2,
+        "visible": true,
+        "snowMultiplier": 1
+      },
+      "rain": {
+        "targetSnow": 0,
+        "targetRain": 0,
+        "quality": "low",
+        "reducedMotion": false,
+        "enabled": true,
+        "time": 0,
+        "snow": 0,
+        "rain": 0,
+        "snowWeight": 0,
+        "rainWeight": 0,
+        "radius": 25,
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "batches": 2
+      }
+    },
+    {
+      "cycle": 2,
+      "quality": "standard",
+      "ratio": 1.5,
+      "renderer": {
+        "geometries": 115,
+        "textures": 73
+      },
+      "world": {
+        "ground": "standard",
+        "water": "medium"
+      },
+      "shadow": 2048,
+      "models": {
+        "actors": 13,
+        "sourceTemplates": 2,
+        "ownedInstanceRoots": 0
+      },
+      "actors": [
+        {
+          "key": "persona:founder-1",
+          "uuid": "48e0ec16-ee1f-405d-b03f-cc8afaefb123"
+        },
+        {
+          "key": "persona:founder-2",
+          "uuid": "8fbaeb72-d7e6-4609-a935-8b3ee29d17d1"
+        },
+        {
+          "key": "persona:founder-8",
+          "uuid": "687b7792-a2e5-421e-816c-30d7df7c5dca"
+        },
+        {
+          "key": "persona:founder-3",
+          "uuid": "d3221039-c1b3-4cc1-8cd8-0f9ebfd05cbf"
+        },
+        {
+          "key": "persona:founder-10",
+          "uuid": "7a74e98d-60a4-4356-9ea9-23fdc4b5d376"
+        },
+        {
+          "key": "persona:founder-4",
+          "uuid": "d3d771e7-f022-4454-afac-404386f9c576"
+        },
+        {
+          "key": "persona:founder-5",
+          "uuid": "9c97e772-6fab-41c1-941d-f1fc2da52a73"
+        },
+        {
+          "key": "persona:founder-6",
+          "uuid": "71e9d2d7-bdfb-4da4-b9d4-b563c278f5a0"
+        },
+        {
+          "key": "persona:founder-7",
+          "uuid": "f280d0f5-a63c-4fdf-ae2f-dc63bdbbddb8"
+        },
+        {
+          "key": "persona:founder-9",
+          "uuid": "1b9ecced-dd08-4aef-b9f5-4c13b47e34d3"
+        }
+      ],
+      "fire": {
+        "key": "settlement-campfire",
+        "lit": false,
+        "heat": 0,
+        "time": 0,
+        "quality": "low",
+        "reducedMotion": false,
+        "particles": 0,
+        "systems": 3,
+        "batches": 2,
+        "visible": true,
+        "snowMultiplier": 1
+      },
+      "rain": {
+        "targetSnow": 0,
+        "targetRain": 0,
+        "quality": "low",
+        "reducedMotion": false,
+        "enabled": true,
+        "time": 0,
+        "snow": 0,
+        "rain": 0,
+        "snowWeight": 0,
+        "rainWeight": 0,
+        "radius": 25,
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "batches": 2
+      }
+    }
+  ],
+  "errors": [],
+  "lifecycle": {
+    "returnedRatio": 1.5,
+    "recoveredRatio": 1.5,
+    "sameCanvas": true
+  }
+}

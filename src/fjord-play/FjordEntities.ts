@@ -9,6 +9,16 @@ import type { SelectionMarker } from '../play/SelectionPresentation';
 import { Box3, Camera, DoubleSide, Group, Mesh, MeshBasicMaterial, Object3D, Raycaster, RingGeometry, SkinnedMesh, Vector2, Vector3 } from 'three';
 import { FjordModels } from './FjordModels';
 import type { FjordEntity } from './FjordProjection';
+
+interface YardFloor {
+    yard: Object3D;
+    matrix: number[];
+    x: number;
+    y: number;
+    z: number;
+    height?: number;
+}
+
 /** Reconcile canonical identities; unchanged objects and the environment remain alive. */
 export class FjordEntities {
     readonly root = new Group();
@@ -18,6 +28,7 @@ export class FjordEntities {
         season?: StructureSeasonTint;
         localBounds?: Box3;
         boundsSignature?: string;
+        yardFloor?: YardFloor;
     }>();
     private expeditionSurface?: TerrainSurface;
     private expeditionWorld?: WorldBlueprint;
@@ -27,6 +38,7 @@ export class FjordEntities {
             this.expeditionWorld = world;
             this.expeditionSurface = createBlueprintSurface(world);
             this.expeditionFrames.clear();
+            for (const entry of this.entries.values()) entry.yardFloor = undefined;
         }
         const active = Object.values(state.world?.spatial?.missions ?? {}).filter(m => m.status !== 'Returned' && m.status !== 'Prepared');
         const ids = new Set(active.map(m => m.id));
@@ -164,13 +176,24 @@ export class FjordEntities {
                 const home = this.entries.get('building:' + entity.status.assignment)?.model;
                 const yard = home?.getObjectByName('farmHutTerrain') ?? home?.getObjectByName('farmyardMarker');
                 if (yard) {
-                    this.root.updateMatrixWorld(true);
-                    const floor = new Raycaster(new Vector3(p.x, p.y + 20, p.z), new Vector3(0, -1, 0))
-                        .intersectObject(yard, true)[0]?.point.y;
+                    yard.updateWorldMatrix(true, false);
+                    const previous = entry.yardFloor;
+                    // The authored yard is static. Reuse only this instance's exact query;
+                    // world replacement, another yard, or any transform/point change invalidates it.
+                    if (!previous || previous.yard !== yard || previous.x !== p.x ||
+                        previous.y !== p.y || previous.z !== p.z ||
+                        yard.matrixWorld.elements.some((value, index) => value !== previous.matrix[index])) {
+                        this.root.updateMatrixWorld(true);
+                        const height = new Raycaster(new Vector3(p.x, p.y + 20, p.z), new Vector3(0, -1, 0))
+                            .intersectObject(yard, true)[0]?.point.y;
+                        entry.yardFloor = { yard, matrix: [...yard.matrixWorld.elements],
+                            x: p.x, y: p.y, z: p.z, height };
+                    }
+                    const floor = entry.yardFloor!.height;
                     if (floor !== undefined)
                         entry.model.position.y = floor;
-                }
-            }
+                } else entry.yardFloor = undefined;
+            } else entry.yardFloor = undefined;
             entry.model.userData.canonical = { kind: entity.kind, id: entity.id, ...entity.status };
             entry.model.updateMatrixWorld(true);
             const boundsSignature = JSON.stringify([entity.asset, this.models.boundsShape(entry.model) ?? entity.dna, entity.transform!.scale, entity.transform!.rotation, entry.model.userData.clothingSet?.id]);
