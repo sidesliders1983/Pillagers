@@ -86,4 +86,9 @@ export const wildlifeSpecies: readonly WildlifeSpecies[] = [
                 habitats: ['fjord_water'], radius: 9, speed: .45, clearance: .55,
                 avoidSettlement: 35, maximumCoastDistance: 28 },
         ] },
+    { id: 'rabbit', label: 'Rabbit', group: 'pair', groupRadius: 16, variants: [
+            { id: 'hopping', asset: 'rabbit', movement: 'ground', count: 2,
+                habitats: ['forest_edge', 'lowland'], radius: 12, speed: .65, clearance: .24,
+                avoidSettlement: 60, minimumCoastDistance: 18, shyDistance: 16, fleeSpeed: 1.8 },
+        ] },
 ];

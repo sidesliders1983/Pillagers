@@ -20,6 +20,7 @@ moving the camera and changing presentation quality keep the current actors.
 | Puffin | 3 on land + 2 in water | Initial coastal group within 16 m of its shared anchor; land birds at least 0.6 m above water |
 | Otter | 1 on shore + 1 in water | Coastal pair |
 | Seal | 2 hauled out + 2 in water | Small coastal group |
+| Rabbit | 2 | Forest edge/lowland pair, at least 60 m from centres and 18 m inland |
 
 The registry in `src/wildlife/WildlifeSpecies.ts` owns these values, movement
 speeds, roaming radii, group spacing and clearances. Habitat tags derive from the
@@ -65,7 +66,7 @@ inconsistent scales, including very small skinned bear/wolf transforms. The
 pipeline measures posed bounds, applies a single authored metre-scale wrapper,
 keeps original UVs and skinning, compresses colour maps to 512 px WebP, and removes
 normal, roughness/metallic, occlusion and emissive maps. The bear/wolf emissive
-factor is also reset to zero. All eleven runtime GLBs together are about 1.36 MB;
+factor is also reset to zero. All twelve runtime GLBs together are about 1.47 MB;
 individual exports are below 150 KB. The publication manifest pins original and
 runtime SHA-256 hashes and records every authoring operation.
 
@@ -73,7 +74,7 @@ Canonical shoulder/body reference heights in metres: bear 1.15, fox 0.40, wolf
 0.75, moose 1.90, reindeer 1.15, lynx 0.62, otter 0.30 and seal 0.60. Shoulder/body
 references are measured source cross-sections rather than overall antler, head or
 upright otter height. Puffin standing height is 0.32 m; grounded gull height is
-0.60 m; flying gull wingspan is 1.60 m. Puffin wing chains are posed compactly with
+0.60 m; flying gull wingspan is 1.60 m. Rabbit height including ears is 0.42 m. Puffin wing chains are posed compactly with
 the supplied rig and the body is rotated upright for land/water. The grounded
 gull gets a compact folded-wing morph target at runtime using the original faces
 and UVs. The target sweeps the intact wing volume rearward beside the body; the
@@ -96,6 +97,20 @@ and 45% of the puffin's height, leaving the upper body visible; other swimmers
 retain 60% immersion. Land puffins remain at least 0.6 m above the waterline,
 including while moving, and stay in the same coastal colony as the water birds.
 Their canonical height remains 0.32 m; no visibility-based scale inflation is used.
+
+The rabbit uses the supplied `bunny.glb` skeleton (no authored clip), with a
+procedural hop informed by the supplied `WgZ.gif`. It gathers before pushing,
+travels mostly during flight, lands on its forepaws, then recovers its hind paws.
+Stride phase drives both horizontal travel and a separate visual lift: 6 cm when
+roaming, 8.5 cm when fleeing. Roaming averages 0.65 m/s before seeded variation;
+fleeing uses 1.8 m/s. Hop duration ranges from 0.42 to 0.70 s with pace. A stride
+lands before stopping or changing direction; pause freezes the exact phase.
+Support paws use the actual terrain height and the supplied leg chains, with
+independent body compression, head stabilization and ear follow-through. No
+geometry, skin weights or source bone lengths are changed. This is a procedural
+interpretation of the reference, not motion capture. The pair stays within a
+12 m roaming radius, detects people within 16 m, and shares the existing six-second
+alert behavior. It adds no hunting, resource production or Core entities.
 
 Other supplied models have no authored clips. Four-legged skeletons receive a
 small procedural leg swing during roaming. Idle animals make a subtle orientation
@@ -150,9 +165,11 @@ validator verifies all wildlife runtime manifest entries, including tracked file
 in CI.
 
 The two current curated campaign island recipes (18 and 7) were also inspected
-using `createCampaignIsland`: both produce all 26 actors without a missing-habitat
+using `createCampaignIsland`: both produce all 28 actors without a missing-habitat
 fallback. This is placement validation, not a claim of complete ecology or authored
 animation quality for models without clips.
 
 Gull and distribution evidence is in [revision 002](qa/wildlife-213/revision-002/README.md).
 Current coastal animal motion and placement evidence is in [revision 003](qa/wildlife-213/revision-003/README.md).
+
+Rabbit motion and placement evidence is in [rabbit revision 001](qa/wildlife-213/rabbit-001/README.md).

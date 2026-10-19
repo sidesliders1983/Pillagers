@@ -41,8 +41,8 @@ function worldFixture(seed = 213) {
 test('wildlife population is habitat driven, deterministic, complete and does not mutate geography', () => {
     const world = worldFixture(), before = JSON.stringify(world);
     const first = new WildlifePopulation(world), second = new WildlifePopulation(world);
-    assert.equal(wildlifeSpecies.length, 10);
-    assert.equal(first.actors.length, 26, JSON.stringify(first.diagnostics));
+    assert.equal(wildlifeSpecies.length, 11);
+    assert.equal(first.actors.length, 28, JSON.stringify(first.diagnostics));
     assert.deepEqual(first.diagnostics, []);
     assert.deepEqual(first.inspect(), second.inspect());
     assert.notDeepEqual(first.inspect(), new WildlifePopulation(worldFixture(214)).inspect());
@@ -117,7 +117,7 @@ const sources = {
     release(id) { released.push(id); },
 };
 test('compact exports pin source identities, canonical scales, source rigs and the two actual walk clips', async () => {
-    assert.equal(wildlifeAssetManifest.length, 11);
+    assert.equal(wildlifeAssetManifest.length, 12);
     for (const entry of wildlifeAssetManifest) {
         const bytes = await readFile('public' + entry.path);
         assert.equal(hash(bytes), entry.sha256);
@@ -138,7 +138,7 @@ test('compact exports pin source identities, canonical scales, source rigs and t
         });
         if (entry.id === 'gull-flying')
             assert.ok(Math.abs(box.getSize(new Vector3()).x - 1.6) < .002);
-        if (['puffin', 'gull-standing'].includes(entry.id))
+        if (['puffin', 'gull-standing', 'rabbit'].includes(entry.id))
             assert.ok(Math.abs(box.getSize(new Vector3()).y - entry.scaleReference.metres) < .002);
         if (entry.id === 'bear' || entry.id === 'wolf') {
             assert.match(entry.source, /animate/);
@@ -163,8 +163,8 @@ test('world wildlife shares render resources, owns independent rigs, respects di
     const first = await WildlifeLayer.create(worldFixture(), () => true, sources);
     const second = await WildlifeLayer.create(worldFixture(), () => false, sources);
     try {
-        assert.equal(first.inspect().instances, 26);
-        assert.equal(first.inspect().sharedAssets, 11);
+        assert.equal(first.inspect().instances, 28);
+        assert.equal(first.inspect().sharedAssets, 12);
         assert.equal(second.inspect().rendered, 0);
         const meshes = layer => {
             const result = [];
@@ -199,8 +199,8 @@ test('world wildlife shares render resources, owns independent rigs, respects di
         a.skeleton.dispose = () => { skeletonDisposed = true; disposeSkeleton(); };
         first.dispose();
         first.dispose();
-        assert.equal(released.length - before, 11);
-        assert.equal(second.inspect().instances, 26);
+        assert.equal(released.length - before, wildlifeAssetManifest.length);
+        assert.equal(second.inspect().instances, 28);
         assert.equal(first.root.children.length, 0);
         assert.ok(skeletonDisposed);
     }
@@ -221,8 +221,8 @@ test('a failed model load releases every acquired asset after outstanding loads 
         release(id) { releases.push(id); },
     };
     await assert.rejects(WildlifeLayer.create(worldFixture(), () => true, failing), /Missing bear fixture/);
-    assert.equal(releases.length, 11);
-    assert.equal(new Set(releases).size, 11);
+    assert.equal(releases.length, wildlifeAssetManifest.length);
+    assert.equal(new Set(releases).size, wildlifeAssetManifest.length);
 });
 test('missing habitats are reported without invalid forced spawns', () => {
     const world = worldFixture();
@@ -236,7 +236,7 @@ test('missing habitats are reported without invalid forced spawns', () => {
 });
 test('inland species reserve separate roaming territories away from human settlements', () => {
     const population = new WildlifePopulation(worldFixture());
-    const mammals = population.actors.filter(actor => actor.variant.movement === 'ground');
+    const mammals = population.actors.filter(actor => wildlifeSpecies.find(species => species.id === actor.species).group === 'solo');
     assert.equal(mammals.length, 6);
     for (const actor of mammals) {
         assert.ok(Math.hypot(actor.anchor.x - population.world.settlement.center.x, actor.anchor.z - population.world.settlement.center.z) >= actor.variant.avoidSettlement + actor.variant.radius);
@@ -410,4 +410,114 @@ test('land puffins perch above the waterline and can waddle within the coastal c
         }
     }
     assert.ok(waddled, 'Land puffins should not remain frozen throughout the review');
+});
+
+test('rabbit strides gather, travel in flight and finish landing independent of frame subdivision', () => {
+    const { advanceRabbitHop, rabbitHopProgress, rabbitHopLift } = load('../src/wildlife/RabbitGait.ts');
+    const actor = () => ({ position: { x: 0, y: 1, z: 0 }, target: { x: 0, z: 4 }, heading: 0 });
+    const first = actor();
+    advanceRabbitHop(first, .08, .65, () => true);
+    assert.equal(first.position.z, 0, 'Gathering feet must not slide forward');
+    assert.equal(first.hop.lift, 0);
+    advanceRabbitHop(first, .3, .65, () => true);
+    assert.ok(first.position.z > .05 && first.hop.lift > .04);
+    const run = step => {
+        const rabbit = actor();
+        for (let t = 0; t < 600; t++) advanceRabbitHop(rabbit, step, .65, () => true);
+        return rabbit;
+    };
+    const coarse = run(.05), fine = run(.01);
+    // Both finish their bounded destination, then rest with no residual airborne offset.
+    assert.deepEqual(coarse.position, { x: 0, y: 1, z: 4 });
+    // Compare equal elapsed time before the destination as well.
+    const a = actor(), b = actor();
+    for (let i = 0; i < 60; i++) advanceRabbitHop(a, .05, .65, () => true);
+    for (let i = 0; i < 300; i++) advanceRabbitHop(b, .01, .65, () => true);
+    assert.ok(Math.abs(a.position.z - b.position.z) < 1e-8);
+    assert.ok(Math.abs(a.hop.lift - b.hop.lift) < 1e-8);
+    assert.equal(coarse.hop.active, false);
+    assert.equal(coarse.hop.lift, 0);
+    let previous = 0;
+    for (let i = 0; i <= 100; i++) {
+        const phase = i / 100, progress = rabbitHopProgress(phase), lift = rabbitHopLift(phase);
+        assert.ok(progress >= previous && progress <= 1);
+        assert.ok(lift >= 0 && lift <= 1);
+        previous = progress;
+    }
+    assert.equal(rabbitHopProgress(.18), 0);
+    assert.equal(rabbitHopProgress(.86), 1);
+    assert.equal(rabbitHopLift(0), 0);
+    assert.equal(rabbitHopLift(1), 0);
+    assert.ok(fine.position.z > 3.8);
+});
+
+test('rabbit skins stay compact, support paws stay on the slope and paused poses do not drift', async () => {
+    const { rabbitHopProgress, rabbitHopLift, rabbitHopDuration } = load('../src/wildlife/RabbitGait.ts');
+    const layer = await WildlifeLayer.create(worldFixture(), () => true, sources);
+    try {
+        const records = layer.records.filter(record => record.rabbit);
+        assert.equal(records.length, 2);
+        const record = records[0], actor = record.actor, rig = record.rabbit;
+        const from = { ...actor.anchor }, duration = rabbitHopDuration(actor.speed);
+        const to = { x: from.x, z: from.z + actor.speed * duration };
+        let mesh;
+        record.root.traverse(node => { if (node.isSkinnedMesh) mesh = node; });
+        let maximumContactError = 0, minimumClearance = Infinity;
+        for (const phase of [0, .1, .3, .5, .7, .9, .999]) {
+            const progress = rabbitHopProgress(phase);
+            actor.position.x = from.x;
+            actor.position.z = from.z + (to.z - from.z) * progress;
+            actor.position.y = layer.population.habitats.surface.surfaceHeightAt(actor.position.x, actor.position.z);
+            actor.heading = 0;
+            actor.hop = { phase, duration, amplitude: .06, lift: rabbitHopLift(phase) * .06,
+                active: true, from, to, startHeading: 0 };
+            layer.advance(0, false);
+            record.root.updateMatrixWorld(true);
+            for (const paw of rig.paws) {
+                const point = paw.end.getWorldPosition(new Vector3());
+                const planted = paw.fore ? phase <= .12 || phase >= .70 : phase <= .28 || phase >= .84;
+                if (planted) {
+                    const floor = layer.population.habitats.surface.surfaceHeightAt(point.x, point.z);
+                    maximumContactError = Math.max(maximumContactError, Math.abs(point.y - floor - paw.rest.y));
+                }
+            }
+            const points = [];
+            for (let i = 0; i < mesh.geometry.attributes.position.count; i++) {
+                const point = mesh.getVertexPosition(i, new Vector3()).applyMatrix4(mesh.matrixWorld);
+                assert.ok(point.toArray().every(Number.isFinite));
+                minimumClearance = Math.min(minimumClearance,
+                    point.y - layer.population.habitats.surface.surfaceHeightAt(point.x, point.z));
+                points.push(point);
+            }
+            assert.ok(new Box3().setFromPoints(points).getSize(new Vector3()).length() < .9);
+            const paused = [...rig.joints.values()].map(joint => joint.bone.quaternion.toArray());
+            layer.advance(.5, false);
+            assert.deepEqual([...rig.joints.values()].map(joint => joint.bone.quaternion.toArray()), paused);
+        }
+        assert.ok(maximumContactError < .005, 'Support paw contact error: ' + maximumContactError);
+        assert.ok(minimumClearance > -.02, 'Rabbit penetrated the ground: ' + minimumClearance);
+        assert.notEqual(records[0].rabbit.joints.get('Bone_010').bone,
+            records[1].rabbit.joints.get('Bone_010').bone);
+    } finally {
+        layer.dispose();
+    }
+});
+
+test('rabbit population pauses its hop exactly and responds to people without teleporting', () => {
+    const population = new WildlifePopulation(worldFixture());
+    const rabbit = population.actors.find(actor => actor.species === 'rabbit');
+    assert.ok(rabbit);
+    population.setHumans([{ x: rabbit.position.x - 8, z: rabbit.position.z }]);
+    let airborne = false;
+    for (let i = 0; i < 100; i++) {
+        const before = { ...rabbit.position };
+        population.advance(.05, true);
+        assert.ok(population.habitats.valid(rabbit.position, rabbit.variant));
+        assert.ok(Math.hypot(before.x - rabbit.position.x, before.z - rabbit.position.z) < .21);
+        airborne ||= (rabbit.hop?.lift ?? 0) > .04;
+    }
+    assert.ok(airborne);
+    const paused = JSON.stringify(rabbit);
+    population.advance(.5, false);
+    assert.equal(JSON.stringify(rabbit), paused);
 });

@@ -74,5 +74,11 @@
     "file": "Seagull-standing.glb",
     "reference": "standing-height",
     "metres": 0.6
+  },
+  {
+    "id": "rabbit",
+    "file": "bunny.glb",
+    "reference": "standing-height",
+    "metres": 0.42
   }
 ]

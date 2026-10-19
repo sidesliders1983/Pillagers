@@ -1,3 +1,4 @@
+import { advanceRabbitHop, type RabbitHop } from './RabbitGait';
 import { planWildlifeTerritories } from './WildlifeTerritories';
 import type { Point2, WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { identitySample } from '../characters/seededRandom';
@@ -27,6 +28,7 @@ export interface WildlifeActor {
     escapeWait: number;
     climbRate: number;
     flapEffort: number;
+    hop?: RabbitHop;
 }
 /** Small ambient population; no mutations to world generation, campaign state or simulation entropy. */
 export class WildlifePopulation {
@@ -209,7 +211,12 @@ export class WildlifePopulation {
                 }
                 actor.wait = 3 + this.random(actor, 'rest') * 9;
             }
-            if (actor.target) {
+            if (actor.species === 'rabbit') {
+                advanceRabbitHop(actor, delta, fleeing ? v.fleeSpeed ?? actor.speed * 2.5 : actor.speed,
+                    point => this.habitats.segmentValid(actor.position, point, v));
+                actor.state = actor.hop?.active ? fleeing ? 'flee' : 'roam' : fleeing ? 'alert' : 'idle';
+            }
+            else if (actor.target) {
                 const dx = actor.target.x - actor.position.x, dz = actor.target.z - actor.position.z;
                 const distance = Math.hypot(dx, dz), step = Math.min(distance, (fleeing ? v.fleeSpeed ?? actor.speed * 2.5 : actor.speed) * delta);
                 const next = { x: actor.position.x + dx / (distance || 1) * step,
@@ -239,6 +246,8 @@ export class WildlifePopulation {
             position: { ...actor.position }, anchor: { ...actor.anchor }, radius: actor.variant.radius,
             heading: actor.heading, climbRate: actor.climbRate, wingEffort: actor.flapEffort,
             shyDistance: actor.variant.shyDistance ?? null,
-            flightHeight: actor.variant.flightHeight ?? null }));
+            flightHeight: actor.variant.flightHeight ?? null,
+            ...(actor.hop ? { hop: { phase: actor.hop.phase, lift: actor.hop.lift,
+                active: actor.hop.active, duration: actor.hop.duration } } : {}) }));
     }
 }

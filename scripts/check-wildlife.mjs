@@ -18,7 +18,7 @@ for (const seed of seeds) {
     const planningMs = performance.now() - started;
     assert.equal(population.actors.length, expected, JSON.stringify(population.diagnostics));
     assert.deepEqual(population.diagnostics, []);
-    const mammals = population.actors.filter(actor => actor.variant.movement === 'ground');
+    const mammals = population.actors.filter(actor => wildlifeSpecies.find(species => species.id === actor.species).group === 'solo');
     let minimumTerritoryGap = Infinity;
     for (let i = 0; i < mammals.length; i++)
         for (let j = i + 1; j < mammals.length; j++) {

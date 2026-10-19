@@ -1,3 +1,4 @@
+import { rabbitRig, poseRabbit, type RabbitRig } from './RabbitMotion';
 import { coastalAnimalRig, poseCoastalAnimal, type CoastalAnimalRig } from './CoastalAnimalMotion';
 import {
     prepareGullWings, gullWingRig, gullWingMotion, poseGullWings,
@@ -72,6 +73,7 @@ interface RenderActor {
     mixer?: AnimationMixer;
     legs: LegPose[];
     coastal?: CoastalAnimalRig;
+    rabbit?: RabbitRig;
     wings?: GullWingRig[];
     foldedWings?: Mesh[];
     height: number;
@@ -155,8 +157,9 @@ export class WildlifeLayer {
                     if (mixer)
                         mixer.clipAction(source.animations[0]).play();
                     const coastal = mixer ? undefined : coastalAnimalRig(model as Group, actor.species);
-                    layer.records.push({ actor, root, mixer, coastal,
-                        legs: mixer || coastal || id.startsWith('gull-') ? [] : legPoses(model as Group),
+                    const rabbit = actor.species === 'rabbit' ? rabbitRig(model as Group, root) : undefined;
+                    layer.records.push({ actor, root, mixer, coastal, rabbit,
+                        legs: mixer || coastal || rabbit || id.startsWith('gull-') ? [] : legPoses(model as Group),
                         wings: id === 'gull-flying' ? gullWingRig(model as Group) : undefined,
                         foldedWings: id === 'gull-standing' ? gullFoldedWings(model as Group) : undefined,
                         height: entry.bounds.max[1] - entry.bounds.min[1],
@@ -206,6 +209,7 @@ export class WildlifeLayer {
                 this.surfaceTilt.setFromUnitVectors(this.up, this.surfaceNormal);
                 root.quaternion.premultiply(this.surfaceTilt);
             }
+            root.position.y += actor.hop?.lift ?? 0;
             if (water) {
                 const immersion = actor.species === 'otter' ? .35
                     : actor.species === 'puffin' ? .45 : .6;
@@ -231,7 +235,12 @@ export class WildlifeLayer {
             }
             if (airborne)
                 root.rotation.x = -Math.atan2(actor.climbRate, actor.speed) * .3;
-            if (record.coastal) {
+            if (record.rabbit) {
+                poseRabbit(record.rabbit, { time: this.population.time, phase: actor.phase,
+                    position: actor.position, heading: actor.heading, hop: actor.hop,
+                    ground: (x, z) => this.population.habitats.surface.surfaceHeightAt(x, z) });
+            }
+            else if (record.coastal) {
                 poseCoastalAnimal(record.coastal, {
                     time: this.population.time, delta: running ? delta : 0, phase: actor.phase,
                     moving, water, speed: gaitSpeed,

@@ -409,5 +409,41 @@ export const wildlifeAssetManifest = [
             "Normalize once to canonical metre scale in an authoring wrapper",
             "Resize albedo to 512px WebP and remove high-frequency surface maps"
         ]
+    },
+    {
+        "id": "rabbit",
+        "file": "rabbit.glb",
+        "path": "/wildlife/rabbit.glb",
+        "source": "Assets/Characters/Wildlife/bunny.glb",
+        "sourceSha256": "d3c1564631fd13e70962cf1965b7b8caf684d4c06857ae626a41ca0373d3f2b5",
+        "sha256": "e69f298619d8e76c6bd5a72b6ec47ee179ecab90c69e1bf2b022ae072da46b45",
+        "sourceBytes": 8369076,
+        "bytes": 113088,
+        "triangles": 2774,
+        "scaleReference": {
+            "kind": "standing-height",
+            "metres": 0.42,
+            "sourceDimension": 1.7000030232261651,
+            "scale": 0.2470583841686051
+        },
+        "bounds": {
+            "min": [
+                -0.08398835799732475,
+                -6.133384259882843e-7,
+                -0.20933322207173724
+            ],
+            "max": [
+                0.08398832793220716,
+                0.4199996690257308,
+                0.20933328482796942
+            ]
+        },
+        "joints": 41,
+        "clips": [],
+        "operations": [
+            "Preserve supplied geometry, UVs, rig and source clip rotations",
+            "Normalize once to canonical metre scale in an authoring wrapper",
+            "Resize albedo to 512px WebP and remove high-frequency surface maps"
+        ]
     }
 ] as const;
