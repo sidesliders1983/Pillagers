@@ -177,7 +177,13 @@ export class GameplaySession {
         const targetLandingConfigs = Object.fromEntries(Object.entries(this.state.world?.targetClans ?? {})
             .filter(([, target]) => target.landing)
             .map(([id, target]) => [id, target.landing!.config]));
-        this.replace(createCampaign(seed, this.state.landing?.config, this.state.mechanics?.config, { ...this.state.weather?.config, enabled: weatherEnabled }, this.state.world?.config, { ...this.state.social?.config, enabled: socialEnabled }, targetLandingConfigs, foundingPhase, birthdayCalendarMode(this.state)));
+        const livestock = {
+            player: this.state.landing?.livestock,
+            targetClans: Object.fromEntries(Object.entries(this.state.world?.targetClans ?? {})
+                .filter(([, target]) => target.landing?.livestock)
+                .map(([id, target]) => [id, target.landing!.livestock!])),
+        };
+        this.replace(createCampaign(seed, this.state.landing?.config, this.state.mechanics?.config, { ...this.state.weather?.config, enabled: weatherEnabled }, this.state.world?.config, { ...this.state.social?.config, enabled: socialEnabled }, targetLandingConfigs, foundingPhase, birthdayCalendarMode(this.state), livestock));
     }
     private replace(state: SimulationState, fresh = true): void {
         this.physicalWorld = undefined;

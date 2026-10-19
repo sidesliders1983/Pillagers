@@ -37,7 +37,7 @@ const animalBorn: Template = (event, details) => str(details, 'livestockId') || 
 const animalDied: Template = (event, details) => str(details, 'livestockId') || str(details, 'cattleId') ? animalName(event) + ' died.' : null;
 const animalSlaughtered: Template = (event, details) =>
     (str(details, 'livestockId') || str(details, 'cattleId')) && number(details, 'food') !== null ?
-        `${animalName(event)} was slaughtered for ${details.food} Food.` : null;
+        `${animalName(event)} was slaughtered for ${details.food} Food${number(details, 'hides') ? ` and ${details.hides} Hides` : ''}.` : null;
 const animalAssigned: Template = (event, details) => {
     if (!(str(details, 'livestockId') || str(details, 'cattleId')) ||
         !(details.farmyardId === null || str(details, 'farmyardId'))) return null;

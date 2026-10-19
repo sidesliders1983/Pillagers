@@ -2,6 +2,8 @@
 
 Issue #218 is the first slice of #217. New player and CPU campaigns still begin with the existing two cows and one bull. No new species economics or founding selection is activated here. #219 owns measured, owner-reviewed coefficients and founding selection; #220 owns additional animal models and capture integration.
 
+The explicit [v0.1B founding/balance trial](LIVESTOCK-V01B.md) adds a saved version-2 contract without changing this shipping default or version-1 behavior.
+
 ## One canonical animal model
 
 The existing `LandingState.cattle` collection and immutable IDs remain authoritative. `LivestockAnimal` is its shared type; `Cattle` remains a compatible alias. An optional species discriminator supports cattle, chicken, pig, sheep, goat and goose. Missing species explicitly means legacy cattle. Age and life stage are derived from birth Winter and saved species thresholds, never stored as competing live state.

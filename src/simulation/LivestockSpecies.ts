@@ -41,7 +41,14 @@ export type LivestockProfile = {
 };
 
 export type LivestockProfiles = Partial<Record<ConfiguredSpecies, LivestockProfile>>;
-export type LivestockRules = { version: 1; profiles: LivestockProfiles };
+export type SeededLivestockRules = {
+    version: 2;
+    profiles: Required<LivestockProfiles>;
+    founding: { version: 1; excludedSpecies?: LivestockSpecies };
+    breeding: { requireFed: boolean; capacityLimited: boolean; unassignedCapacityUnits: number };
+    hides: Record<LivestockSpecies, number>;
+};
+export type LivestockRules = { version: 1; profiles: LivestockProfiles } | SeededLivestockRules;
 
 /** Missing species in earlier cattle saves has one explicit versioned meaning. */
 export function animalSpecies(animal: Cattle): LivestockSpecies {
@@ -82,9 +89,25 @@ export function animalProfile(state: SimulationState, animal: Cattle): Livestock
 export function validateLivestockRules(state: SimulationState): void {
     const rules = state.landing?.livestock;
     if (rules === undefined) return;
-    if (!rules || rules.version !== livestockSpeciesVersion || !rules.profiles ||
+    if (!rules || ![livestockSpeciesVersion, 2].includes(rules.version) || !rules.profiles ||
         typeof rules.profiles !== 'object' || Array.isArray(rules.profiles))
         throw new Error('Unsupported livestock rules');
+    if (rules.version === 2) {
+        if (Object.keys(rules).length !== 5 || rules.founding?.version !== 1 ||
+            Object.keys(rules.founding).some(key => !['version', 'excludedSpecies'].includes(key)) ||
+            rules.founding.excludedSpecies !== undefined &&
+                !livestockSpeciesIds.includes(rules.founding.excludedSpecies) ||
+            !rules.breeding || Object.keys(rules.breeding).length !== 3 ||
+            typeof rules.breeding.requireFed !== 'boolean' ||
+            typeof rules.breeding.capacityLimited !== 'boolean' ||
+            !Number.isSafeInteger(rules.breeding.unassignedCapacityUnits) ||
+            rules.breeding.unassignedCapacityUnits < 1 || rules.breeding.unassignedCapacityUnits > 1000000 ||
+            !rules.hides || Object.keys(rules.hides).length !== livestockSpeciesIds.length ||
+            livestockSpeciesIds.some(species => !Number.isSafeInteger(rules.hides[species]) ||
+                rules.hides[species] < 0 || rules.hides[species] > 1000) ||
+            livestockSpeciesIds.slice(1).some(species => !(species in rules.profiles)))
+            throw new Error('Invalid seeded livestock rules');
+    }
     for (const [species, profile] of Object.entries(rules.profiles)) {
         if (species === 'cattle' || !livestockSpeciesIds.includes(species as LivestockSpecies) ||
             !profile || !Array.isArray(profile.mortalityBands))

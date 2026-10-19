@@ -12,6 +12,8 @@ import {cattleSheltered,inspectCattle} from './Livestock';
 import {seededRandom} from '../characters/seededRandom';
 import { validateLivestockRules, validateAnimalSpecies, animalSpecies } from './LivestockSpecies';
 import type { LivestockSpecies, LivestockRules } from './LivestockSpecies';
+import { initializeFoundingLivestock } from './FoundingLivestock';
+import { creditHides, slaughterHides } from './SpecialistStocks';
 
 export type LandingConfig = {initialFood:number;initialMaterials:number;longshipSalvage:number;cattleAdultAge:number;cattleYoungAdultAge:number;adultCattleFood:number;calfFood:number;cowFoodPerWinter:number;exposedProductivityBps:number;farmyardCapacity:number;slaughterFood:number;foundingCoupleChanceBps:number;foundingCoupleCap:number;cattleBirthChanceBps:number;cattleFertileMinAge:number;cattleFertileMaxAge:number;cattleBirthInterval:number;cattleMortalityYoungBps:number;cattleMortalityAdultBps:number;cattleMortalityOlderBps:number;cattleMortalityOldBps:number;cattleCrowdingBps:number;cattleWeatherMortalityBps:number;};
 export const defaultLandingConfig:LandingConfig={initialFood:30,initialMaterials:5,longshipSalvage:20,cattleAdultAge:3,cattleYoungAdultAge:1,adultCattleFood:1,calfFood:0,cowFoodPerWinter:4,exposedProductivityBps:5000,farmyardCapacity:4,slaughterFood:15,foundingCoupleChanceBps:5000,foundingCoupleCap:3,cattleBirthChanceBps:5000,cattleFertileMinAge:3,cattleFertileMaxAge:12,cattleBirthInterval:2,cattleMortalityYoungBps:200,cattleMortalityAdultBps:50,cattleMortalityOlderBps:500,cattleMortalityOldBps:1500,cattleCrowdingBps:200,cattleWeatherMortalityBps:0};
@@ -32,7 +34,7 @@ export type LivestockAnimal = {
 export type Cattle = LivestockAnimal;
 export type LandingState = {version:3;livestock?:LivestockRules;config:LandingConfig;region:{id:string;settledByClanId:string|null};founderIds:string[];longships:Record<string,{id:string;acquiredWinter:number;salvagedWinter:number|null}>;cattle:Record<string,Cattle>;cattleArchive?:Record<string,Cattle>};
 
-export function createCampaign(seed:number, overrides:Partial<LandingConfig>={}, mechanicsOverrides:Partial<PrototypeConfig>={}, foundingPhase?:FoundingPhase, calendarMode?:BirthdayCalendarMode):SimulationState {
+export function createCampaign(seed:number, overrides:Partial<LandingConfig>={}, mechanicsOverrides:Partial<PrototypeConfig>={}, foundingPhase?:FoundingPhase, calendarMode?:BirthdayCalendarMode, livestock?:LivestockRules):SimulationState {
     if(!Number.isInteger(seed)||seed<0||seed>0xffffffff)throw new Error('Seed must be uint32');
     const config={...defaultLandingConfig,...overrides};
     for(const value of Object.values(config))if(!Number.isSafeInteger(value)||value<0)throw new Error('Invalid landing configuration');
@@ -52,7 +54,7 @@ export function createCampaign(seed:number, overrides:Partial<LandingConfig>={},
     initializeBirthdayCalendar(state, calendarMode);
     state.mechanics=initializeMechanics(state,mechanicsOverrides);
     state.landing={version:3,livestock:{version:1,profiles:{}},config,region:{id:'landing-region',settledByClanId:null},founderIds:Object.keys(state.personas),longships:{'founding-longship':{id:'founding-longship',acquiredWinter:800,salvagedWinter:null}},cattle:{}};
-    for(let i=1;i<=3;i++)state.landing.cattle[`cattle-${i}`]={id:`cattle-${i}`,species:'cattle',sex:i===3?'male':'female',birthWinter:797,deathWinter:null,parentIds:[],origin:'founding',lastCalvingWinter:null,farmyardId:null,foodProgress:0};
+    initializeFoundingLivestock(state, livestock);
     state.events.push({id:'event-1',time:{...state.time},type:'FoundingPartyLanded',details:eventFacts(state,{regionId:'landing-region',founderIds:[...state.landing.founderIds],longshipIds:['founding-longship'],cattleIds:Object.keys(state.landing.cattle),stocks:{...state.stocks}})});
     // A separate stream preserves individual founder identities when pairing settings change.
     const pairRandom=seededRandom(seed,'founding-couples-v1');
@@ -97,12 +99,14 @@ export function applyLandingCommand(state:SimulationState,command:LandingCommand
         if (!animal || animal.deathWinter !== null)
             throw new Error(command.type === 'SlaughterCattle' ? 'Living cattle required' : 'Living livestock required');
         const food = inspectCattle(state, id).slaughterFood, farmyardId = animal.farmyardId;
+        const hides = slaughterHides(state, animal);
         animal.deathWinter = state.time.winter;
         animal.farmyardId = null;
         state.stocks.food += food;
+        creditHides(state, hides);
         const cattle = animalSpecies(animal) === 'cattle';
         emit(state, cattle ? 'CattleSlaughtered' : 'LivestockSlaughtered', {
-            ...(cattle ? { cattleId: id } : { livestockId: id }), food,
+            ...(cattle ? { cattleId: id } : { livestockId: id }), food, ...(hides ? { hides } : {}),
             parentIds: [...animal.parentIds], sex: animal.sex,
             age: state.time.winter - animal.birthWinter, farmyardId,
         });

@@ -1,10 +1,11 @@
 import {weatherProfile,weatherFacts} from './Weather';
-import {farmyards} from './Farmyards';
+import {farmyards, livestockHerdSpace} from './Farmyards';
 import type {SimulationState, GameTime} from './SimulationCore';
 import type {Cattle} from './Landing';
 import { livestockName, livestockIdentity } from './LivestockNames';
 import { animalProfile, animalSpecies, livestockSpecies } from './LivestockSpecies';
 import { eventFacts } from './EventFacts';
+import { slaughterHides } from './SpecialistStocks';
 export function cattleSheltered(state:SimulationState,cattle:Cattle):boolean {return cattle.farmyardId!==null&&farmyards(state).some(f=>f.id===cattle.farmyardId);}
 function emit(state: SimulationState, type: string, details: Record<string, unknown>): void {
     // Production and feeding already have source IDs and exact amounts. Do not repeat the
@@ -83,9 +84,9 @@ export function inspectCattle(state:SimulationState,id:string) {
     const descriptor = livestockSpecies[species];
     const slaughterFood = age < profile.youngAdultAge ? profile.youngSlaughterFood :
         age < profile.adultAge ? profile.youngAdultSlaughterFood : profile.slaughterFood;
-    return {...cattle,age,slaughterFood,name:livestockName(state,id),species,
+    return {...cattle,age,slaughterFood,slaughterHides:slaughterHides(state,cattle),name:livestockName(state,id),species,
         speciesName:descriptor.name,sexTerm:descriptor[cattle.sex],
-        stage:age<profile.youngAdultAge?'Young':age<profile.adultAge?'Young Adult':'Adult',sheltered:cattle.deathWinter===null&&cattleSheltered(state,cattle),overcrowding:farmyards(state).find(f=>f.id===cattle.farmyardId)?.overcrowding??0,mortalityRiskBps:cattle.deathWinter===null?cattleMortalityRisk(state,cattle):0};
+        stage:age<profile.youngAdultAge?'Young':age<profile.adultAge?'Young Adult':'Adult',sheltered:cattle.deathWinter===null&&cattleSheltered(state,cattle),overcrowding:(livestockHerdSpace(state,cattle)?.overcrowdingUnits??0)/10000,mortalityRiskBps:cattle.deathWinter===null?cattleMortalityRisk(state,cattle):0};
 }
 
 /** Historical animals remain inspectable without inventing their current age or status. */
@@ -121,13 +122,23 @@ export function inspectLivestock(state: SimulationState, id: string) {
         ...animal, ...identity, name: recorded?.name ?? identity.name, age,
         stage: recorded && ['Young', 'Young Adult', 'Adult'].includes(recorded.stage) ? recorded.stage : stage,
         historical: true as const, observedAt,
-        slaughterFood: null, sheltered: null, overcrowding: null, mortalityRiskBps: null,
+        slaughterFood: null, slaughterHides: null, sheltered: null, overcrowding: null, mortalityRiskBps: null,
     };
 }
 
 export function resolveCattleBirths(state:SimulationState,chance:(bps:number)=>boolean):void {
     const landing = state.landing;
     if (!landing) return;
+    const rules = landing.livestock;
+    if (rules?.version === 2 && rules.breeding.requireFed) {
+        // Feed facts belong to this boundary, not a previous shortage or saved derived flag.
+        for (let index = state.events.length - 1; index >= 0; index--) {
+            const event = state.events[index];
+            if (event.time.winter !== state.time.winter || event.time.tick !== state.time.tick) break;
+            if (['FoodConsumed', 'CattleFoodConsumed', 'LivestockFoodConsumed'].includes(event.type) &&
+                Number(event.details?.shortfall) > 0) return;
+        }
+    }
     const winter = state.time.winter;
     const eligible = Object.values(landing.cattle).filter(animal => {
         const profile = animalProfile(state, animal), age = winter - animal.birthWinter;
@@ -137,6 +148,10 @@ export function resolveCattleBirths(state:SimulationState,chance:(bps:number)=>b
         const profile = animalProfile(state, mother), species = animalSpecies(mother);
         if (mother.lastCalvingWinter !== null && winter - mother.lastCalvingWinter < profile.birthInterval)
             continue;
+        if (rules?.version === 2 && rules.breeding.capacityLimited) {
+            const space = livestockHerdSpace(state, mother);
+            if (!space || space.occupiedUnits + profile.capacityWeightBps > space.capacityUnits) continue;
+        }
         const father = eligible.find(animal => animal.sex === 'male' &&
             animalSpecies(animal) === species && animal.farmyardId === mother.farmyardId);
         if (!father || !chance(profile.birthChanceBps)) continue;
@@ -166,7 +181,7 @@ export function cattleMortalityRisk(state: SimulationState, animal: Cattle): num
         if (band.minAge > age) break;
         base = band.chanceBps;
     }
-    const units = farmyards(state).find(yard => yard.id === animal.farmyardId)?.overcrowdingUnits ?? 0;
+    const units = livestockHerdSpace(state, animal)?.overcrowdingUnits ?? 0;
     const crowdingRisk = Math.floor(units * profile.crowdingBps / 10000);
     return Math.min(10000, base + crowdingRisk + profile.weatherMortalityBps +
         (cattleSheltered(state, animal) ? 0 : weatherProfile(state).exposedCattleMortalityBps));

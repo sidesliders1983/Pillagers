@@ -32,6 +32,12 @@ export {caregiverEligible, isProvidingCare} from './FamilyMechanics';
 export {landingSummary} from './Landing';
 import {createCampaign as generateCampaign, isLandingCommand, applyLandingCommand, validateLanding, migrateLanding} from './Landing';
 import type {LandingState, LandingCommand, LandingConfig} from './Landing';
+import type { LivestockRules } from './LivestockSpecies';
+import { validateSpecialistStocks, type SpecialistStocks } from './SpecialistStocks';
+export type CampaignLivestockRules = {
+    player?: LivestockRules;
+    targetClans?: Record<string, LivestockRules>;
+};
 export {canPartner} from './FamilyMechanics';
 import {initializeMechanics, stepMechanicsTick, isMechanicsCommand, applyMechanicsCommand, recordOccupationChange, validateMechanics, migrateMechanics} from './Mechanics';
 import type {MechanicsState, PrototypeConfig, MechanicsCommand} from './Mechanics';
@@ -51,6 +57,7 @@ export type Persona = {
 };
 export type SimulationEvent = {id: string; time: GameTime; type: string; personaId?: string; details?: Record<string, unknown>};
 export type SimulationState = {
+    specialistStocks?: SpecialistStocks;
     discovery?: ClanDiscovery;
     birthdayCalendar?: BirthdayCalendar;
     foundingPhase?: FoundingPhase;
@@ -67,16 +74,22 @@ export function createCampaign(
     mechanicsOverrides: Partial<PrototypeConfig> = {}, weatherOverrides: Partial<WeatherConfig> = {},
     expeditionOverrides: Partial<ExpeditionConfig> = {}, socialOverrides: Partial<SocialConfig> = {},
     targetLandingConfigs: Record<string, LandingConfig> = {}, foundingPhase?: FoundingPhase,
-    calendarMode?: BirthdayCalendarMode,
+    calendarMode?: BirthdayCalendarMode, livestock?: CampaignLivestockRules,
 ): SimulationState {
     // Player defaults are separate from the shared Landing factory used by CPU clans and QA.
-    const state = generateCampaign(seed, {initialFood: 15, ...overrides}, mechanicsOverrides, foundingPhase, calendarMode);
+    const state = generateCampaign(seed, {initialFood: 15, ...overrides}, mechanicsOverrides, foundingPhase, calendarMode, livestock?.player);
     initializeWeather(state, weatherOverrides);
     // A restarted world can contain new neighbours; inherit the first saved CPU rules for those.
     const savedTargetDefault = Object.keys(targetLandingConfigs).sort().map(id => targetLandingConfigs[id])[0];
+    const savedLivestockDefault = Object.keys(livestock?.targetClans ?? {}).sort()
+        .map(id => livestock!.targetClans![id])[0];
     initializeWorld(state, (targetSeed, clanId) => {
         const targetConfig = targetLandingConfigs[clanId] ?? savedTargetDefault ?? overrides;
-        const target = generateCampaign(targetSeed, targetConfig, mechanicsOverrides, foundingPhase, calendarMode);
+        const targetLivestock = structuredClone(livestock?.targetClans?.[clanId] ??
+            savedLivestockDefault ?? livestock?.player);
+        // Only physical two-clan binding excludes the player's founding species.
+        if (targetLivestock?.version === 2) delete targetLivestock.founding.excludedSpecies;
+        const target = generateCampaign(targetSeed, targetConfig, mechanicsOverrides, foundingPhase, calendarMode, targetLivestock);
         initializeWeather(target, weatherOverrides);
         return target;
     }, expeditionOverrides);
@@ -115,8 +128,12 @@ export function initializeIslandClans(input: SimulationState, world: IslandClanL
     const targetSeed = Math.floor(random() * 4294967296);
     const targetRules = Object.keys(input.world.targetClans).sort()
         .map(id => input.world!.targetClans[id].landing?.config)[0];
+    const livestock = structuredClone(Object.keys(input.world.targetClans).sort()
+        .map(id => input.world!.targetClans[id].landing?.livestock)[0] ?? input.landing?.livestock);
+    if (livestock?.version === 2 && input.landing?.livestock?.version === 2)
+        livestock.founding.excludedSpecies = Object.values(input.landing.cattle)[0].species!;
     const target = generateCampaign(targetSeed, targetRules, state.mechanics?.config,
-        state.foundingPhase, birthdayCalendarMode(state));
+        state.foundingPhase, birthdayCalendarMode(state), livestock);
     initializeWeather(target, state.weather?.config);
     initializeSocial(target, state.social?.config ?? {});
     const rival = namespaceTarget(target, clanId);
@@ -247,6 +264,7 @@ function validateState(state: SimulationState): void {
             throw new Error('Campaign time precedes its founding phase.');
     }
     integer(state.stocks.food, 'Food'); integer(state.stocks.materials, 'Materials');
+    validateSpecialistStocks(state);
     if (!state.clan.id || !state.clan.name || !Array.isArray(state.events)) throw new Error('Invalid clan/events');
     const occupations = ['farmer', 'herder', 'fisher', 'hunter', 'textileWorker', 'smith', 'woodworker', 'boatbuilder', 'trader', 'leatherAndJewelleryMaker'];
     const timeValue = (time: GameTime) => {

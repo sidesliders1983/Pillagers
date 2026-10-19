@@ -435,6 +435,7 @@ export class FjordInterface {
             <p>${esc(command.type.replace(/([a-z])([A-Z])/g, '$1 $2'))}: ${esc(target)}.</p>
             ${irreversible ? '<p>This permanently removes the selected subject.</p>' : ''}
             <p>Stock change: ${next.stocks.food - state.stocks.food} Food · ${next.stocks.materials - state.stocks.materials} Materials.</p>
+            ${(next.specialistStocks?.hides ?? 0) > (state.specialistStocks?.hides ?? 0) ? `<p>Specialist stock: +${(next.specialistStocks?.hides ?? 0) - (state.specialistStocks?.hides ?? 0)} Hides.</p>` : ''}
             ${losses.length ? `<p class="fjord-risk">Livestock losing shelter: ${losses.map(esc).join(', ')}.</p>` : ''}
             <div class="fjord-actions"><button type="button" data-confirm>Confirm action</button><button type="button" data-cancel>Cancel</button></div>`;
         document.querySelector('#fjord-play')!.append(dialog);
