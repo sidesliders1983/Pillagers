@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { runLivestockScenario } from '../scripts/qa/livestock-scenario.mjs';
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, readFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync, writeFileSync, unlinkSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { livestockCandidate } from '../scripts/qa/livestock-candidates.mjs';
@@ -62,4 +62,32 @@ test('sensible herd management removes surplus adult males to retain breeding sp
         fullWorld: true, livestockRules });
     assert.deepEqual(full.annual, result.annual);
     assert.equal(full.finalStateHash, result.finalStateHash);
+});
+
+test('an interrupted study resumes only missing cases and preserves verified raw evidence', () => {
+    const out = mkdtempSync(join(tmpdir(), 'livestock-study-resume-219-'));
+    const args = ['scripts/qa/run-livestock-study.mjs', '--seeds=1', '--species=chicken,goat',
+        '--policies=passive', '--winters=1', '--workers=1', '--timeout=60000', '--out=' + out];
+    execFileSync(process.execPath, args, { stdio: 'pipe' });
+    const manifestPath = join(out, 'manifest.json');
+    const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+    const missing = manifest.observations.pop();
+    unlinkSync(join(out, missing.file));
+    manifest.finishedAt = null;
+    writeFileSync(manifestPath, JSON.stringify(manifest));
+    const retained = manifest.observations[0];
+    const retainedBytes = readFileSync(join(out, retained.file));
+    const output = execFileSync(process.execPath, [...args, '--resume'], { encoding: 'utf8' });
+    const resumed = JSON.parse(readFileSync(manifestPath, 'utf8'));
+    assert.equal(resumed.observations.length, 2);
+    assert.ok(resumed.finishedAt);
+    assert.deepEqual(resumed.observations.find(row => row.file === retained.file), retained);
+    assert.deepEqual(readFileSync(join(out, retained.file)), retainedBytes);
+    assert.match(output, new RegExp(missing.species + '/passive/1: complete'));
+    assert.doesNotMatch(output, new RegExp(retained.species + '/passive/1: complete'));
+    writeFileSync(join(out, retained.file), 'corrupted');
+    const corruptManifest = readFileSync(manifestPath);
+    assert.throws(() => execFileSync(process.execPath, [...args, '--resume'], { stdio: 'pipe' }),
+        /Command failed/);
+    assert.deepEqual(readFileSync(manifestPath), corruptManifest);
 });

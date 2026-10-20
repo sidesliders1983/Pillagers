@@ -1,10 +1,12 @@
 import { Worker, isMainThread, parentPort } from 'node:worker_threads';
-import { mkdirSync, writeFileSync, existsSync } from 'node:fs';
+import { mkdirSync, writeFileSync, existsSync, readFileSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { execFileSync } from 'node:child_process';
 import { runLivestockScenario } from './livestock-scenario.mjs';
-import { studyHash } from './livestock-study-core.mjs';
+import { studyHash, livestockStudyCore } from './livestock-study-core.mjs';
+import { livestockCandidate } from './livestock-candidates.mjs';
+import { summarizeLivestockStudy } from './summarize-livestock-study.mjs';
 
 if (!isMainThread) {
     parentPort.on('message', job => {
@@ -14,6 +16,7 @@ if (!isMainThread) {
         } catch (error) { parentPort.postMessage({ error: error.stack }); }
     });
 } else {
+    let resume = false;
     const options = {
         seeds: Array.from({ length: 30 }, (_, index) => index + 1).join(','),
         species: 'control,cattle,chicken,pig,sheep,goat,goose', policies: 'passive,prepared,herd',
@@ -21,6 +24,10 @@ if (!isMainThread) {
         out: 'docs/qa/livestock-founding-219/measurement',
     };
     for (const arg of process.argv.slice(2)) {
+        if (arg === '--resume') {
+            resume = true;
+            continue;
+        }
         const match = /^--([^=]+)=(.+)$/.exec(arg);
         if (!match || !Object.hasOwn(options, match[1])) throw new Error('Unknown study argument: ' + arg);
         options[match[1]] = match[2];
@@ -40,19 +47,50 @@ if (!isMainThread) {
         new Set(species).size !== species.length || new Set(policies).size !== policies.length)
         throw new Error('Invalid study matrix');
     const directory = resolve(options.out), manifestFile = join(directory, 'manifest.json');
-    if (existsSync(manifestFile)) throw new Error('Refusing to replace an existing measurement');
+    if (existsSync(manifestFile) && !resume) throw new Error('Refusing to replace an existing measurement');
+    if (resume && !existsSync(manifestFile)) throw new Error('Cannot resume a missing measurement');
     mkdirSync(directory, { recursive: true });
-    const manifest = {
-        version: 1, kind: 'livestock-founding-study', node: process.version, platform: process.platform,
+    const runIdentity = {
         revision: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
         dirty: !!execFileSync('git', ['status', '--porcelain'], { encoding: 'utf8' }).trim(),
+        runnerHash: studyHash(readFileSync(new URL(import.meta.url), 'utf8').replace(/\r\n/g, '\n')),
+        startedAt: new Date().toISOString(),
+    };
+    const manifest = resume ? JSON.parse(readFileSync(manifestFile, 'utf8')) : {
+        version: 1, kind: 'livestock-founding-study', node: process.version, platform: process.platform,
+        ...runIdentity,
         startedAt: new Date().toISOString(), finishedAt: null, options, observations: [],
     };
+    if (resume) {
+        summarizeLivestockStudy(directory, { allowPartial: true });
+        if (manifest.node !== process.version || manifest.platform !== process.platform ||
+            Object.keys(options).some(key => key !== 'out' && manifest.options[key] !== options[key]))
+            throw new Error('Resume requires the original runtime and matrix options');
+        const protocol = {
+            ...livestockStudyCore(seeds[0], species[0]).identity,
+            scenarioHash: studyHash(readFileSync(new URL('./livestock-scenario.mjs', import.meta.url),
+                'utf8').replace(/\r\n/g, '\n')),
+            foodPolicyHash: studyHash(readFileSync(new URL('./food-policy.mjs', import.meta.url),
+                'utf8').replace(/\r\n/g, '\n')),
+            candidateHash: studyHash(livestockCandidate),
+        };
+        for (const observation of manifest.observations) {
+            for (const key of ['sourceHash', 'adapterHash', 'scenarioHash', 'foodPolicyHash', 'candidateHash']) {
+                if (observation.identity?.[key] !== protocol[key])
+                    throw new Error('Resume protocol mismatch: ' + key);
+            }
+        }
+        manifest.resumptions ??= [];
+        manifest.resumptions.push(runIdentity);
+        manifest.finishedAt = null;
+    }
     const save = () => writeFileSync(manifestFile, JSON.stringify(manifest, null, 2) + '\n');
     save();
+    const observed = new Set(manifest.observations.map(row => `${row.seed}/${row.species}/${row.policy}`));
     const batches = seeds.map(seed => species.flatMap(species => policies.map(policy => ({ seed, species, policy,
         winters: options.winters, maxAnimals: options.maxAnimals, maxMilliseconds: options.timeout - 10000,
-        resumeAt: Math.floor(options.winters / 2) }))));
+        resumeAt: Math.floor(options.winters / 2) })))
+        .filter(job => !observed.has(`${job.seed}/${job.species}/${job.policy}`)));
     async function execute(job, slot) {
         const started = performance.now(), annual = [];
         const result = await new Promise(resolveResult => {
@@ -89,7 +127,7 @@ if (!isMainThread) {
         });
         const file = `${job.species}-${job.policy}-${job.seed}.json.gz`;
         const bytes = gzipSync(Buffer.from(JSON.stringify(result) + '\n'));
-        writeFileSync(join(directory, file), bytes);
+        writeFileSync(join(directory, file), bytes, { flag: 'wx' });
         const observation = { ...job, file, bytes: bytes.length, sha256: studyHash(bytes),
             status: result.status, stopReason: result.stopReason,
             completedYears: result.annual.length, elapsedMs: Math.round(performance.now() - started),
