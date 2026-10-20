@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FjordSide · Explore pack review #231</title>
+  <link rel="stylesheet" href="/src/style.css">
+  <link rel="stylesheet" href="/src/fjord-play/fjord-play.css">
+  <link rel="stylesheet" href="/src/fjord-play/desktop-foundations.css">
+  <link rel="stylesheet" href="/src/fjord-play/fjord-interface.css">
+  <link rel="stylesheet" href="/src/fjord-play/mobile-horizon.css">
+  <style>
+    #qa-controls { position: fixed; top: 0; inset-inline: 0; z-index: 100;
+      padding: 8px; background: #172c2c; color: #eee6ce; font: 14px system-ui; }
+    #qa-controls button { margin: 2px; min-height: 44px; }
+    #qa-controls p { margin: 4px; }
+    #fjord-play .fjord-stage { margin-top: 170px; height: calc(100dvh - 170px); background: #708386; }
+    #fjord-workspace { top: 0; }
+    #qa-proof { overflow-wrap: anywhere; }
+  </style>
+</head>
+<body class="fjord-play">
+  <header id="qa-controls">
+    <p>QA #231 · real ExpeditionPanel and GameplaySession · route fixture, not a full game scene</p>
+    <button data-crew="2" data-food="15">Founding: two residents / 15 Food</button>
+    <button data-crew="1" data-food="15">One resident / 15 Food</button>
+    <button data-crew="2" data-food="64">Funded QA: two residents</button>
+    <button data-crew="4" data-food="64">Funded QA: four residents</button>
+    <p id="qa-proof" role="status"></p>
+  </header>
+  <main id="fjord-play"><section class="fjord-stage">
+    <canvas id="fjord-canvas"></canvas>
+    <section id="fjord-workspace" data-surface="expeditions"><section id="expedition-panel"></section></section>
+  </section>
+    <nav id="fjord-navigation"><button id="fjord-mobile-menu">Menu</button><div id="fjord-navigation-drawer"></div></nav>
+  </main>
+  <script type="module">
+    import { GameplaySession } from '/src/gameplay-lab/GameplaySession.ts';
+    import * as core from '/src/simulation/SimulationCore.ts';
+    import { ExpeditionPanel } from '/src/fjord-play/ExpeditionPanel.ts';
+    import { MobileShell } from '/src/fjord-play/MobileShell.ts';
+
+    const { context } = await fetch('./legacy-prepared.json').then(response => response.json());
+    new MobileShell(document.querySelector('#fjord-play'));
+    let panel;
+    function reset(crew, food) {
+      panel?.dispose();
+      const session = new GameplaySession();
+      const state = core.initializePhysicalDiscovery(core.createCampaign(32, { initialFood: food }),
+        context.world, context.worldId);
+      session.loadJSON(core.serializeState(state));
+      session.bindPhysicalWorld(context.world, context.worldId);
+      session.command({ type: 'CreateExpeditionGroup', name: 'Group 1',
+        memberIds: Array.from({ length: crew }, (_, index) => 'founder-' + (index + 1)) });
+      const workspace = document.querySelector('#fjord-workspace');
+      workspace.hidden = false;
+      function proof() {
+        const snapshot = session.readSnapshot();
+        const mission = core.inspectSpatialExpeditions(snapshot).missions.at(-1);
+        document.querySelector('#qa-proof').textContent = `Clan Food: ${snapshot.stocks.food} · ` +
+          `Crew: ${crew} · ${mission ? mission.status + ' · Pack: ' + mission.supplies.foodPerMember +
+            ' each · Active ticks: ' + mission.supplies.activeTicksRemaining +
+            ' · QA override: ' + mission.supplies.testCapacity : 'No accepted departure'} · Clock paused`;
+      }
+      const command = action => { session.command(action); panel.committed(action); proof(); };
+      panel = new ExpeditionPanel(document.querySelector('#expedition-panel'), session, command, () => {},
+        ids => Object.fromEntries(ids.map(id => [id, { ...context.world.settlement.center }])), {
+          showMap: () => { workspace.hidden = true; }, showGroups: () => { workspace.hidden = false; },
+          focus: () => {}, toggleClock: () => {},
+        });
+      panel.refresh();
+      proof();
+    }
+    for (const button of document.querySelectorAll('[data-crew]'))
+      button.addEventListener('click', () => reset(Number(button.dataset.crew), Number(button.dataset.food)));
+    reset(2, 15);
+  </script>
+</body>
+</html>
