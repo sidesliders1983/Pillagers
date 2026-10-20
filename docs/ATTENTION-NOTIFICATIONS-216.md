@@ -117,3 +117,13 @@ and emit these events; notifications never enable it or fabricate disagreements.
 
 The feed uses the shared dark-theme palette, a selected filter, compact actions and
 a direct detail link for single-event groups. All actions retain 44px touch targets.
+
+## Compact passive notification revision (owner review, 2026-10-20)
+
+The latest owner direction supersedes the interactive card above: notifications
+contain only an icon, category and 11px message, aligned just above the Attention
+counter at the bottom right. The category and message have equal font size.
+There is no close button, detail link, focusable target or pointer interception.
+The existing eight-second timer always expires, including under the pointer.
+Showing and expiration never mark events read or acknowledge current conditions.
+The Attention counter remains the entry point for investigation and action.

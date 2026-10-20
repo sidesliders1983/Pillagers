@@ -234,13 +234,7 @@ export class FjordPlay {
                     else if (target.kind !== 'wildlife') select(target.kind === 'livestock' ? 'cattle' : target.kind, target.id);
                 },
             });
-        const attentionToast = new AttentionToast(document.querySelector<HTMLElement>('#fjord-attention-toast')!, this.shared,
-            target => {
-                desktopUI?.open('attention', true);
-                if (target.eventId) attentionView.openEvent(target.eventId);
-                else if (target.alertId) attentionView.openAlert(target.alertId);
-                else attentionView.openInbox();
-            });
+        const attentionToast = new AttentionToast(document.querySelector<HTMLElement>('#fjord-attention-toast')!, this.shared);
         const personalHistory = new PersonalHistoryView(document.querySelector<HTMLElement>('#fjord-play')!, this.shared);
         let clockIntent = 0;
         let previous = performance.now();

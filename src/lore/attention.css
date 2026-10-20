@@ -15,29 +15,34 @@
 #fjord-attention-feed .attention-list button { margin-right: 8px; }
 #fjord-attention-feed .attention-condition[data-severity="critical"] { border-left: 4px solid #f17a6e; }
 #fjord-attention-feed .attention-condition[data-severity="critical"] > strong { color: #ffb0a3; }
-#fjord-attention-feed button:focus-visible, #fjord-attention-toast button:focus-visible { outline: 2px solid var(--fjord-accent, #ddbd87); outline-offset: 3px; }
+#fjord-attention-feed button:focus-visible { outline: 2px solid var(--fjord-accent, #ddbd87); outline-offset: 3px; }
 
+/* Passive glance above the existing Attention counter, with no independent controls. */
 #fjord-play #fjord-attention-toast {
-    position: absolute; right: calc(var(--fjord-safe-right, 0px) + 16px);
-    bottom: calc(var(--fjord-safe-bottom, 0px) + 84px + var(--fjord-shortcut-space, 0px));
-    z-index: 65; box-sizing: border-box;
-    width: min(380px, calc(100% - var(--fjord-safe-left, 0px) - var(--fjord-safe-right, 0px) - 32px));
-    max-height: calc(var(--fjord-viewport-height, 100dvh) - var(--fjord-safe-top, 0px) - var(--fjord-safe-bottom, 0px) - 110px);
-    overflow: auto; display: grid; grid-template-columns: 24px minmax(0, 1fr) 44px; gap: 10px;
-    padding: 12px 8px 10px 14px; border: 1px solid var(--fjord-line, #737b6b);
-    border-left: 3px solid var(--fjord-accent, #ddbd87); border-radius: 8px;
-    background: var(--fjord-panel, #1b2327f5); color: var(--fjord-text, #f0e9dc);
-    box-shadow: 0 8px 28px #0005; pointer-events: auto;
+    position: absolute;
+    right: calc(var(--fjord-safe-right, 0px) + 8px);
+    bottom: calc(var(--fjord-safe-bottom, 0px) + 68px);
+    z-index: 65;
+    box-sizing: border-box;
+    width: min(260px, calc(100% - var(--fjord-safe-left, 0px) - var(--fjord-safe-right, 0px) - 16px));
+    display: grid;
+    grid-template-columns: 18px minmax(0, 1fr);
+    gap: 7px;
+    padding: 8px 10px;
+    border: 1px solid #737b6b88;
+    border-radius: 5px;
+    background: var(--fjord-panel, #1b2327f5);
+    color: var(--fjord-text, #f0e9dc);
+    box-shadow: 0 3px 12px #0003;
+    pointer-events: none;
     animation: attention-arrive 160ms ease-out;
 }
 #fjord-play #fjord-attention-toast[hidden] { display: none; }
-#fjord-attention-toast .attention-toast-mark { color: var(--fjord-accent, #ddbd87); padding-top: 3px; }
-#fjord-attention-toast .attention-toast-mark svg { width: 24px; height: 24px; }
-#fjord-attention-toast small { color: var(--fjord-accent, #ddbd87); font: 600 11px/1.4 system-ui, sans-serif; }
-#fjord-attention-toast p { margin: 4px 0 6px; font: 14px/1.45 system-ui, sans-serif; overflow-wrap: anywhere; }
-#fjord-attention-toast button { min-height: 44px; background: transparent; color: inherit; border: 0; padding: 8px; }
-#fjord-attention-toast [data-toast-view] { color: var(--fjord-accent, #ddbd87); text-align: left; padding-left: 0; }
-#fjord-attention-toast [data-toast-dismiss] { align-self: start; width: 44px; }
-#fjord-attention-toast [data-toast-dismiss] svg { width: 18px; height: 18px; }
+#fjord-play #fjord-attention-toast .attention-toast-mark { color: var(--fjord-accent, #ddbd87); padding-top: 1px; }
+#fjord-play #fjord-attention-toast .attention-toast-mark svg { width: 18px; height: 18px; }
+#fjord-play #fjord-attention-toast small,
+#fjord-play #fjord-attention-toast p { font: 400 11px/1.4 system-ui, sans-serif; }
+#fjord-play #fjord-attention-toast small { color: var(--fjord-accent, #ddbd87); font-weight: 600; }
+#fjord-play #fjord-attention-toast p { margin: 2px 0 0; overflow-wrap: anywhere; }
 @keyframes attention-arrive { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { #fjord-play #fjord-attention-toast { animation: none; } }

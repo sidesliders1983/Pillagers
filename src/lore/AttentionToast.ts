@@ -3,8 +3,7 @@ import { icon, type FjordIcon } from '../fjord-play/FjordIcons';
 import { eventOrdinal } from './AttentionHistory';
 import './attention.css';
 
-type ToastTarget = { eventId?: string; alertId?: string };
-type Notice = ToastTarget & { text: string; label: string; glyph: FjordIcon };
+type Notice = { eventId?: string; alertId?: string } & { text: string; label: string; glyph: FjordIcon };
 const toastDurationMs = 8000;
 const queueLimit = 3;
 /** Ephemeral delivery of new canonical facts. Attention remains the persistent source of truth. */
@@ -17,19 +16,10 @@ export class AttentionToast {
     private timer?: number;
     private disposed = false;
 
-    constructor(private root: HTMLElement, private owner: SharedSettlement,
-        private navigate: (target: ToastTarget) => void) {
+    constructor(private root: HTMLElement, private owner: SharedSettlement) {
         root.innerHTML = '<span class="attention-toast-mark"></span><div class="attention-toast-copy">' +
-            '<small></small><p role="status" aria-live="polite" aria-atomic="true"></p>' +
-            '<button type="button" data-toast-view>View details <span aria-hidden="true">→</span></button></div>' +
-            '<button type="button" data-toast-dismiss aria-label="Dismiss notification">' + icon('close') + '</button>';
+            '<small></small><p role="status" aria-live="polite" aria-atomic="true"></p></div>';
         this.baseline();
-        root.addEventListener('click', this.click);
-        root.addEventListener('mouseenter', this.hold);
-        root.addEventListener('mouseleave', this.release);
-        root.addEventListener('focusin', this.hold);
-        root.addEventListener('focusout', this.focusout);
-        root.addEventListener('keydown', this.keydown);
     }
 
     private baseline() {
@@ -87,7 +77,8 @@ export class AttentionToast {
         this.root.querySelector('.attention-toast-mark')!.innerHTML = icon(notice.glyph);
         this.root.querySelector('small')!.textContent = notice.label;
         this.root.querySelector('p')!.textContent = notice.text;
-        this.release();
+        this.hold();
+        this.timer = window.setTimeout(() => this.dismiss(), toastDurationMs);
     }
 
     private hold = () => {
@@ -95,50 +86,12 @@ export class AttentionToast {
         this.timer = undefined;
     };
 
-    private release = () => this.startTimer();
-
-    private startTimer(leavingFocus = false) {
-        this.hold();
-        if (!this.current || (!leavingFocus && this.root.contains(document.activeElement)) || this.root.matches(':hover')) return;
-        this.timer = window.setTimeout(() => this.dismiss(), toastDurationMs);
-    }
-
-    private focusout = (event: FocusEvent) => {
-        if (!this.root.contains(event.relatedTarget as Node | null)) this.startTimer(true);
-    };
-
-    private dismiss(restoreFocus = false) {
-        const focused = this.root.contains(document.activeElement);
+    private dismiss() {
         this.hold();
         this.current = undefined;
         this.root.hidden = true;
         this.showNext();
-        if (restoreFocus && focused) {
-            const next = this.current ? this.root.querySelector<HTMLElement>('[data-toast-view]') :
-                document.querySelector<HTMLElement>('#fjord-attention');
-            next?.focus();
-        }
     }
-
-    private click = (event: MouseEvent) => {
-        const button = (event.target as Element).closest('button');
-        if (!button || !this.current) return;
-        if (this.owner.transferring || this.epoch !== this.owner.session.personalHistoryEpoch) {
-            this.baseline();
-            return;
-        }
-        if (button.hasAttribute('data-toast-dismiss')) this.dismiss(true);
-        else if (button.hasAttribute('data-toast-view')) {
-            const target = { eventId: this.current.eventId, alertId: this.current.alertId };
-            this.clear();
-            this.navigate(target);
-        }
-    };
-
-    private keydown = (event: KeyboardEvent) => {
-        if (event.key !== 'Escape') return;
-        event.preventDefault(); event.stopPropagation(); this.dismiss(true);
-    };
 
     private clear() {
         this.hold(); this.pending = []; this.current = undefined; this.root.hidden = true;
@@ -146,11 +99,5 @@ export class AttentionToast {
 
     dispose() {
         this.disposed = true; this.clear();
-        this.root.removeEventListener('click', this.click);
-        this.root.removeEventListener('mouseenter', this.hold);
-        this.root.removeEventListener('mouseleave', this.release);
-        this.root.removeEventListener('focusin', this.hold);
-        this.root.removeEventListener('focusout', this.focusout);
-        this.root.removeEventListener('keydown', this.keydown);
     }
 }

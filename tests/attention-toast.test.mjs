@@ -29,12 +29,7 @@ function setup(births = false, food = 0) {
     const session = new GameplaySession(); session.loadJSON(core.serializeState(state));
     const owner = new SharedSettlement(session), root = document.querySelector('#toast'), targets = [];
     const view = new AttentionView(document.querySelector('#feed'), owner, () => {}, { target: () => {} });
-    const toast = new AttentionToast(root, owner, target => {
-        targets.push(target);
-        if (target.eventId) view.openEvent(target.eventId);
-        else if (target.alertId) view.openAlert(target.alertId);
-        else view.openInbox();
-    });
+    const toast = new AttentionToast(root, owner);
     return { dom, owner, session, root, toast, targets, timers,
         fire() { const [id, callback] = timers.entries().next().value; timers.delete(id); callback(); },
         dispose() {
@@ -45,7 +40,7 @@ function setup(births = false, food = 0) {
         } };
 }
 
-test('a real disagreement announces historical names, keeps focus/clock/Core, and opens the shared Attention source', () => {
+test('a passive disagreement message announces historical names without controls or changes to focus, clock or read state', () => {
     const h = setup();
     try {
         assert.equal(h.root.hidden, true, 'Adopting existing conditions is silent');
@@ -57,30 +52,27 @@ test('a real disagreement announces historical names, keeps focus/clock/Core, an
         assert.equal(document.activeElement.id, 'fjord-attention', 'Arrival never steals focus');
         assert.equal(h.session.saveJSON(), before); assert.equal(h.session.running, true);
         assert.equal(h.owner.fjord.attentionView().records.find(record => record.eventId === source.id).read, false);
-        h.root.querySelector('[data-toast-view]').click();
-        assert.equal(h.targets[0].eventId, source.id); assert.equal(h.root.hidden, true);
-        assert.match(document.querySelector('#feed').textContent, /Historical record/);
-        assert.equal(h.owner.fjord.attentionView().records.find(record => record.eventId === source.id).read, true);
+        assert.equal(h.root.querySelector('button, a, [tabindex]'), null);
+        h.root.click();
+        assert.equal(h.targets.length, 0);
+        h.fire();
+        assert.equal(h.root.hidden, true);
+        assert.equal(h.owner.fjord.attentionView().records.find(record => record.eventId === source.id).read, false);
         assert.equal(h.session.saveJSON(), before); assert.equal(h.session.running, true);
         h.toast.update(); assert.equal(h.root.hidden, true, 'Refreshing cannot replay the same event');
     } finally { h.dispose(); }
 });
 
-test('hover/focus holds expiration; dismissal does not read; reload, replacement and hidden periods never replay', () => {
+test('passive messages expire even under the pointer; reload, replacement and hidden periods never replay', () => {
     const h = setup();
     try {
         h.session.command({ type: 'AdvanceTicks', ticks: 1000 }); h.toast.update();
         const source = h.owner.fjord.attentionView().records.find(record => record.canonicalType === 'ResidentQuarrelled');
         assert.equal(h.timers.size, 1);
         h.root.dispatchEvent(new h.dom.window.MouseEvent('mouseenter'));
-        assert.equal(h.timers.size, 0);
-        h.root.dispatchEvent(new h.dom.window.MouseEvent('mouseleave'));
-        assert.equal(h.timers.size, 1);
-        h.root.querySelector('[data-toast-view]').focus(); assert.equal(h.timers.size, 0);
-        document.querySelector('#fjord-attention').focus(); assert.equal(h.timers.size, 1);
-        h.root.querySelector('[data-toast-dismiss]').focus();
-        h.root.dispatchEvent(new h.dom.window.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
-        assert.equal(h.root.hidden, true); assert.equal(document.activeElement.id, 'fjord-attention');
+        assert.equal(h.timers.size, 1, 'A passive message does not intercept pointer input or hold its timer');
+        h.fire();
+        assert.equal(h.root.hidden, true);
         assert.equal(h.owner.fjord.attentionView().records.find(record => record.eventId === source.eventId).read, false);
         const saved = h.owner.persist(); h.owner.importJSON(JSON.stringify(JSON.parse(saved).fjord));
         h.toast.update(); assert.equal(h.root.hidden, true);
@@ -98,8 +90,8 @@ test('real multi-year births condense into a bounded catch-up invitation, retain
         assert.match(h.root.textContent, /New updates from your clan and expeditions/);
         const births = h.owner.fjord.attentionView().records.filter(record => record.canonicalType === 'ChildBorn');
         assert.ok(births.length > 3); assert.ok(births.every(record => !record.read));
-        h.root.querySelector('[data-toast-view]').click();
-        assert.deepEqual(h.targets, [{ eventId: undefined, alertId: undefined }]);
+        h.fire();
+        assert.equal(h.root.hidden, true);
         assert.ok(h.owner.fjord.attentionView().records.filter(record => record.canonicalType === 'ChildBorn').every(record => !record.read));
         assert.equal(h.session.saveJSON(), before);
     } finally { h.dispose(); }
