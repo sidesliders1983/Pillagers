@@ -1,4 +1,5 @@
-import { applyCommand, inspectWork, inspectCattle, occupationAptitude, occupationIds, personaAge, landingSummary } from '../simulation/SimulationCore';
+import { applyCommand, inspectWork, inspectCattle, inspectLivestock, occupationAptitude, occupationIds, personaAge, landingSummary } from '../simulation/SimulationCore';
+import { renderLivestockBreeding, slaughterBreedingWarning } from '../play/LivestockBreedingView';
 import type { Occupation, SimulationCommand, SimulationState } from '../simulation/SimulationCore';
 import type { SharedSettlement, SettlementSelection } from '../play/SharedSettlement';
 import { commandAvailability } from '../play/SharedSettlement';
@@ -206,7 +207,8 @@ export class FjordInterface {
                     `<div class="fjord-card-body">${home ? `<details class="fjord-home-residents" data-view-key="home-residents:${esc(home.id)}"><summary><span title="${esc(housingName(state, 'household', home.id))}">${esc(housingName(state, 'household', home.id))}</span><small>Residents · ${home.memberIds.length}</small></summary>${home.memberIds.map(id => `<div class="fjord-member">${this.link('persona', id, state.personas[id].name)}<small>${esc(occupationLabel(state.personas[id].occupation))}</small></div>`).join('')}</details>` : '<p class="fjord-caption">Vacant home</p>'}
                     ${house && (!isMobileLayout() || this.expanded) ? this.improvements(state, buildingId!) : ''}
                     ${house && isMobileLayout() && !this.expanded ? `<p>${esc(state.buildings[buildingId!].specialization ? workLabel(state.buildings[buildingId!].specialization!) : 'Unspecialized')} · Level ${homeLevel(homeImprovements(state, buildingId!).upgradeLevel)}</p>` : ''}
-                    ${yard ? `<p>${yard.occupants}/${yard.capacity} livestock sheltered · overcrowding ${yard.overcrowding}</p>` : ''}
+                    ${yard ? `<p>${yard.occupants} livestock · space ${yard.occupancy}/${yard.capacity} · overcrowding ${yard.overcrowding}</p>` : ''}
+                    ${yard ? renderLivestockBreeding(state, { farmyardId: yard.id }) : ''}
                     <div class="fjord-actions">${home && !house ? button('build', `Build house · ${state.mechanics!.config.houseCost} Materials`, 'home',
                         this.owner.availability({ type: 'BuildHouse', householdId: home.id }).allowed ? '' : 'disabled title="Insufficient Materials or household unavailable"') : ''}
                     ${home ? button('work-menu', 'Manage work', 'work') : ''}</div>
@@ -215,7 +217,7 @@ export class FjordInterface {
                         this.expanded ? 'back' : 'home') : ''}
                     ${home && !house && !this.owner.availability({ type: 'BuildHouse', householdId: home.id }).allowed ?
                         `<p class="fjord-caption">${esc(this.owner.availability({ type: 'BuildHouse', householdId: home.id }).reason)}</p>` : ''}</div>`;
-            } else html = this.heading(selection.kind === 'cattle' ? 'Livestock · ' + selection.id :
+            } else html = this.heading(selection.kind === 'cattle' ? inspectLivestock(state, selection.id).name :
                 selection.kind === 'campfire' ? 'Settlement campfire' : 'Longship', 'Current settlement record',
                 selection.kind === 'cattle' ? 'cattle' : selection.kind === 'longship' ? 'ship' : 'home');
             if (!this.task && (!isMobileLayout() || this.expanded ||
@@ -285,8 +287,8 @@ export class FjordInterface {
             summary = `<p><strong>${plan.materials} Materials</strong> · ${plan.upkeep} Materials/year home upkeep</p>
                 <p>${esc(state.personas[draft.workerId].name)}: ${esc(occupationLabel(state.personas[draft.workerId].occupation))} → ${esc(occupationLabel(draft.occupation))}.
                 ${state.personas[draft.workerId].occupation === draft.occupation ? 'Existing career settings are kept.' : 'The occupation becomes player-assigned; the existing career-switch rules apply.'}</p>
-                ${plan.farmyard ? `<p>Farmyard after setup: ${plan.farmyard.occupants}/${plan.farmyard.capacity} livestock · overcrowding ${plan.farmyard.overcrowding}.</p>` : ''}
-                ${plan.unsheltered.length ? `<p class="fjord-risk">Livestock losing shelter: ${plan.unsheltered.map(esc).join(', ')}.</p>` : ''}`;
+                ${plan.farmyard ? `<p>Farmyard after setup: ${plan.farmyard.occupants} livestock · space ${plan.farmyard.occupancy}/${plan.farmyard.capacity} · overcrowding ${plan.farmyard.overcrowding}.</p>` : ''}
+                ${plan.unsheltered.length ? `<p class="fjord-risk">Livestock losing shelter: ${plan.unsheltered.map(id => esc(inspectLivestock(state, id).name)).join(', ')}.</p>` : ''}`;
         } catch (reason) { error = reason instanceof Error ? reason.message : String(reason); }
         return this.heading(draft.kind === 'farmyard' ? 'Set up farmyard' : 'Set up ' + workLabel(draft.occupation).toLowerCase(),
             'Review the whole task before applying it.', occupationIcon(draft.occupation)) + `<div class="fjord-card-body">
@@ -297,7 +299,7 @@ export class FjordInterface {
             ${residence?.kind === 'house' || draft.buildHouse ? `<label class="fjord-check"><input type="checkbox" data-draft="specialize" ${draft.specialize ? 'checked' : ''}> Specialize the home for ${esc(workLabel(draft.occupation).toLowerCase())}</label>` : ''}
             </section>${draft.kind === 'farmyard' ? `<section><h3>Livestock</h3><p class="fjord-caption">Suggested animals are unassigned. Other farmyard assignments are kept unless explicitly chosen.</p>
             <div class="fjord-animal-list">${Object.values(state.landing?.cattle ?? {}).filter(c => c.deathWinter === null || draft.cattleIds.includes(c.id)).map(c =>
-                `<label class="fjord-check"><input type="checkbox" data-cattle="${esc(c.id)}" ${draft.cattleIds.includes(c.id) ? 'checked' : ''}>${icon('cattle')} ${esc(c.id)} · ${c.deathWinter !== null ? 'Unavailable · died in Winter ' + c.deathWinter : c.farmyardId ? 'Move from ' + esc(housingName(state, 'building', c.farmyardId)) : 'Unassigned'}</label>`).join('')}</div></section>` : ''}</div>
+                `<label class="fjord-check"><input type="checkbox" data-cattle="${esc(c.id)}" ${draft.cattleIds.includes(c.id) ? 'checked' : ''}>${icon('cattle')} ${esc(inspectLivestock(state, c.id).name)} · ${c.deathWinter !== null ? 'Unavailable · died in Winter ' + c.deathWinter : c.farmyardId ? 'Move from ' + esc(housingName(state, 'building', c.farmyardId)) : 'Unassigned'}</label>`).join('')}</div></section>` : ''}</div>
             <section class="fjord-plan-review">${summary}${error ? `<p class="fjord-risk" role="status">${esc(error)}</p>` : ''}
             <div class="fjord-actions">${button('commit-plan', 'Confirm setup', 'work', error ? 'disabled' : '')}${button('cancel-task', 'Cancel', 'close')}</div></section></div>`;
     }
@@ -366,7 +368,7 @@ export class FjordInterface {
                 const losses = Object.values(state.landing?.cattle ?? {}).filter(c => c.farmyardId && next.landing?.cattle[c.id]?.farmyardId === null);
                 if (losses.length) {
                     this.pending = command; this.task = 'risk';
-                    this.result = `Changing the last farmer leaves ${losses.map(c => c.id).join(', ')} without farmyard shelter.`;
+                    this.result = `Changing the last farmer leaves ${losses.map(c => inspectLivestock(state, c.id).name).join(', ')} without farmyard shelter.`;
                 } else this.run([command], 'Occupation updated.');
                 break;
             }
@@ -419,14 +421,17 @@ export class FjordInterface {
         this.management.hidden = true;
     }
     async approve(command: SimulationCommand): Promise<boolean> {
-        const irreversible = ['SalvageBuilding', 'SalvageLongship', 'SlaughterCattle'].includes(command.type);
+        const irreversible = ['SalvageBuilding', 'SalvageLongship', 'SlaughterCattle', 'SlaughterLivestock'].includes(command.type);
         const state = this.state;
         const next = applyCommand(state, command);
         const losses = Object.values(state.landing?.cattle ?? {}).filter(c => c.farmyardId &&
-            next.landing?.cattle[c.id]?.farmyardId === null).map(c => c.id);
+            next.landing?.cattle[c.id]?.farmyardId === null).map(c => inspectLivestock(state, c.id).name);
         if (!irreversible && !losses.length) return true;
         const target = 'buildingId' in command ? command.buildingId : 'longshipId' in command ?
-            command.longshipId : 'cattleId' in command ? command.cattleId : 'personaId' in command ? command.personaId : '';
+            command.longshipId : 'livestockId' in command ? inspectLivestock(state, command.livestockId).name :
+            'cattleId' in command ? inspectLivestock(state, command.cattleId).name : 'personaId' in command ? command.personaId : '';
+        const breedingWarning = command.type === 'SlaughterLivestock' || command.type === 'SlaughterCattle' ?
+            slaughterBreedingWarning(state, next, command.type === 'SlaughterLivestock' ? command.livestockId : command.cattleId) : '';
         const dialog = document.createElement('dialog');
         dialog.id = 'fjord-command-review';
         dialog.setAttribute('aria-labelledby', 'fjord-command-title');
@@ -434,7 +439,9 @@ export class FjordInterface {
             <p>${esc(command.type.replace(/([a-z])([A-Z])/g, '$1 $2'))}: ${esc(target)}.</p>
             ${irreversible ? '<p>This permanently removes the selected subject.</p>' : ''}
             <p>Stock change: ${next.stocks.food - state.stocks.food} Food · ${next.stocks.materials - state.stocks.materials} Materials.</p>
+            ${(next.specialistStocks?.hides ?? 0) > (state.specialistStocks?.hides ?? 0) ? `<p>Specialist stock: +${(next.specialistStocks?.hides ?? 0) - (state.specialistStocks?.hides ?? 0)} Hides.</p>` : ''}
             ${losses.length ? `<p class="fjord-risk">Livestock losing shelter: ${losses.map(esc).join(', ')}.</p>` : ''}
+            ${breedingWarning ? `<p class="fjord-risk">${esc(breedingWarning)}</p>` : ''}
             <div class="fjord-actions"><button type="button" data-confirm>Confirm action</button><button type="button" data-cancel>Cancel</button></div>`;
         document.querySelector('#fjord-play')!.append(dialog);
         return new Promise(resolve => {
@@ -490,21 +497,27 @@ export class FjordInterface {
             document.querySelector('#fjord-attention-summary')!.innerHTML =
                 (state.stocks.food <= 0 ? '<p class="fjord-risk">Food stocks are empty.</p>' : '') +
                 `<h3>${homes.length} households in tents</h3>` + homes.map(h => this.link('household', h.id, housingName(state, 'household', h.id))).join('') +
-                `<h3>${cattle.length} livestock without shelter</h3>` + cattle.map(c => this.link('cattle', c.id, c.id)).join('');
+                `<h3>${cattle.length} livestock without shelter</h3>` + cattle.map(c => this.link('cattle', c.id, inspectLivestock(state, c.id).name)).join('');
         } else if (this.surface === 'settlement') {
             const kinds = { persona: 'Residents', household: 'Homes', cattle: 'Livestock', longship: 'Vehicles' };
             const records = this.directory === 'persona' ? Object.values({ ...state.personaArchive, ...state.personas }).map(p =>
                 ({ id: p.id, label: p.name, detail: state.personas[p.id] ? occupationLabel(p.occupation) + (p.deathWinter !== null ? ' · deceased' : '') : 'Historical record' })) :
                 this.directory === 'household' ? Object.values(state.households).map(h => ({ id: h.id, label: housingName(state, 'household', h.id),
                     detail: h.residenceId && state.residences[h.residenceId]?.kind === 'house' ? 'Permanent home' : 'Tent' })) :
-                this.directory === 'cattle' ? Object.values(state.landing?.cattle ?? {}).map(c => ({ id: c.id, label: c.id,
-                    detail: c.deathWinter !== null ? 'Died · Winter ' + c.deathWinter : c.farmyardId ? 'Assigned to a farmyard' : 'Unassigned cattle' })) :
+                this.directory === 'cattle' ? Object.values({ ...state.landing?.cattleArchive, ...state.landing?.cattle }).map(c => {
+                    const animal = inspectLivestock(state, c.id);
+                    return { id: c.id, label: animal.name,
+                        detail: animal.speciesName + ' · ' + animal.sexTerm + ' · ' + (animal.historical ? 'Historical record' :
+                            animal.deathWinter !== null ? 'Died · Winter ' + animal.deathWinter :
+                            animal.farmyardId ? 'Assigned to a farmyard' : 'Unassigned') };
+                }) :
                 Object.values(state.landing?.longships ?? {})
                     .filter(ship => ship.salvagedWinter === null)
                     .map(ship => ({ id: ship.id, label: ship.id, detail: 'Longship' }));
             const html = `${this.hooks.home ? button('camera-home', 'View settlement', 'home') : ''}
                 <div class="fjord-tabs">${Object.entries(kinds).map(([kind, label]) => button('directory', label, kind === 'persona' ? 'people' : kind === 'cattle' ? 'cattle' : kind === 'longship' ? 'ship' : 'home', `data-kind="${kind}" aria-pressed="${kind === this.directory}"`)).join('')}</div>
                 <label class="fjord-search-label">Find an identity<input id="fjord-search" type="search" value="${esc(this.search)}" placeholder="Name or identifier"></label>
+                ${this.directory === 'cattle' ? renderLivestockBreeding(state) : ''}
                 <div class="fjord-directory-list">${records.filter(r => (r.label + ' ' + r.id).toLocaleLowerCase().includes(this.search.toLocaleLowerCase())).map(r =>
                     `<div>${this.link(this.directory, r.id, r.label)}<small>${esc(r.detail)}</small></div>`).join('') || '<p>No matching identities.</p>'}</div>`;
             updateView(content, html, new Set(['fjord-search']));

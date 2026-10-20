@@ -1,4 +1,5 @@
 import type {SimulationEvent} from '../simulation/SimulationCore';
+import { isLivestockEvent, recordedLivestock } from './LivestockNarrative';
 export type ChronicleEntry={winter:number;text:string;sourceEventIds:string[];templateId:string;templateVersion:number;routine:boolean};
 export type ChronicleWinter={winter:number;entries:ChronicleEntry[]};
 type Facts=Record<string,unknown>;
@@ -31,6 +32,19 @@ export function occupationLabel(id: string | null): string {
     return id ? occupationLabels[id] ?? 'Occupation not recorded' : 'No occupation';
 }
 type Template=(e:SimulationEvent,d:Facts)=>string|null;
+const animalName = (event: SimulationEvent) => recordedLivestock(event)?.name ?? 'Recorded livestock';
+const animalBorn: Template = (event, details) => str(details, 'livestockId') || str(details, 'cattleId') ? animalName(event) + ' was born.' : null;
+const animalDied: Template = (event, details) => str(details, 'livestockId') || str(details, 'cattleId') ? animalName(event) + ' died.' : null;
+const animalSlaughtered: Template = (event, details) =>
+    (str(details, 'livestockId') || str(details, 'cattleId')) && number(details, 'food') !== null ?
+        `${animalName(event)} was slaughtered for ${details.food} Food${number(details, 'hides') ? ` and ${details.hides} Hides` : ''}.` : null;
+const animalAssigned: Template = (event, details) => {
+    if (!(str(details, 'livestockId') || str(details, 'cattleId')) ||
+        !(details.farmyardId === null || str(details, 'farmyardId'))) return null;
+    if (details.farmyardId === null) return animalName(event) + ' was unassigned from its Farmyard.';
+    const home = housingReference(details, 'building', details.farmyardId, 'a Farmyard');
+    return animalName(event) + ' was assigned to ' + (home === 'a Farmyard' ? home : 'the Farmyard at ' + home) + '.';
+};
 /** Registry contains only supported recorded facts; unknown types stay in Raw Events. */
 const templates:Record<string,Template>={
     ResidentQuarrelled: (event, details) => {
@@ -59,8 +73,8 @@ const templates:Record<string,Template>={
             details.reason === 'inactive' ? 'The quarrel between ' + pair + ' became inactive after death or departure.' : null;
     },
     PersonaDied:(e,d)=>{const name=person(e,e.personaId);return name?name+' died'+(str(d,'cause')?' ('+d.cause+')':'')+'.':null;},
-    CattleBorn:(_e,d)=>str(d,'cattleId')?'Animal '+d.cattleId+' was born.':null,
-    CattleDied:(_e,d)=>str(d,'cattleId')?'Animal '+d.cattleId+' died.':null,
+    CattleBorn: animalBorn, LivestockBorn: animalBorn,
+    CattleDied: animalDied, LivestockDied: animalDied,
     FoundingPartyLanded:(_e,d)=>{const founders=ids(d,'founderIds');return founders?`The founding party of ${founders.length} residents arrived.`:null;},
     FoundingPartnershipPresent:(e,d)=>{const p=ids(d,'participants');return p?.length===2?`${person(e,p[0])} and ${person(e,p[1])} were already partners at arrival.`:null;},
     OccupationAssigned:(e,d)=>{const name=person(e,e.personaId),role=str(d,'occupation');return name&&(d.occupation===null||role&&occupationLabels[role])?d.occupation===null?`${name} no longer had an assigned occupation.`:`${name} became a ${occupationLabels[role!]}.`:null;},
@@ -69,14 +83,8 @@ const templates:Record<string,Template>={
     ChildBorn:(e,d)=>{const parents=ids(d,'parentIds'),name=person(e,e.personaId);return name&&parents?.length===2?`${name} was born to ${person(e,parents[0])} and ${person(e,parents[1])}.`:null;},
     FoundingLongshipKept:(_e,d)=>str(d,'longshipId')?'Our longship was retained.':null,
     FoundingLongshipSalvaged:(_e,d)=>str(d,'longshipId')&&number(d,'materials')!==null?`Our longship was salvaged for ${d.materials} Materials.`:null,
-    CattleSlaughtered:(_e,d)=>str(d,'cattleId')&&number(d,'food')!==null?`Animal ${d.cattleId} was slaughtered for ${d.food} Food.`:null,
-    CattleAssigned: (_e, d) => {
-        if (!str(d, 'cattleId') || !(d.farmyardId === null || str(d, 'farmyardId'))) return null;
-        if (d.farmyardId === null) return `Animal ${d.cattleId} was unassigned from its Farmyard.`;
-        const home = housingReference(d, 'building', d.farmyardId, 'a Farmyard');
-        const destination = home === 'a Farmyard' ? home : 'the Farmyard at ' + home;
-        return `Animal ${d.cattleId} was assigned to ${destination}.`;
-    },
+    CattleSlaughtered: animalSlaughtered, LivestockSlaughtered: animalSlaughtered,
+    CattleAssigned: animalAssigned, LivestockAssigned: animalAssigned,
     FarmyardFunctionChanged: (_e, d) => {
         if (!str(d, 'buildingId') || typeof d.active !== 'boolean') return null;
         const home = housingReference(d, 'building', d.buildingId, 'A home');
@@ -147,6 +155,7 @@ const templates:Record<string,Template>={
     PersonaTransferredOut:(_e,d)=>str(d,'name')?`${d.name} was transferred to ${d.destinationClanId}.`:null,
     FoodConsumed:(_e,d)=>number(d,'units')!==null&&number(d,'shortfall')!==null?`Residents consumed ${d.units} Food; the recorded shortfall was ${d.shortfall} Food.`:null,
     CattleFoodConsumed:(_e,d)=>number(d,'units')!==null&&number(d,'shortfall')!==null?`The herd consumed ${d.units} Food; the recorded shortfall was ${d.shortfall} Food.`:null,
+    LivestockFoodConsumed:(_e,d)=>number(d,'units')!==null&&number(d,'shortfall')!==null?`The herd consumed ${d.units} Food; the recorded shortfall was ${d.shortfall} Food.`:null,
 };
 export function projectChronicle(events:readonly SimulationEvent[],currentWinter?:number):ChronicleWinter[] {
     const winters=new Map<number,SimulationEvent[]>();
@@ -154,20 +163,28 @@ export function projectChronicle(events:readonly SimulationEvent[],currentWinter
     if(currentWinter!==undefined){const first=events.length?events.reduce((first,event)=>Math.min(first,event.time.winter),events[0].time.winter):currentWinter;for(let winter=first;winter<=currentWinter;winter++)if(!winters.has(winter))winters.set(winter,[]);}
     return [...winters].sort(([a],[b])=>b-a).map(([winter,ledger])=>{
         const output=ledger.filter(e=>e.type==='ResourceProduced'&&['food','materials'].includes(String(e.details?.resource))&&number(e.details??{},'units')!==null);
-        const herd=ledger.filter(e=>e.type==='CattleFoodProduced'&&number(e.details??{},'units')!==null);
+        const herd=ledger.filter(e=>(e.type==='CattleFoodProduced'||e.type==='LivestockResourceProduced'&&
+            ['food','materials'].includes(String(e.details?.resource)))&&number(e.details??{},'units')!==null);
         const entries:ChronicleEntry[]=[];
         for(const event of ledger){
             const d=event.details??{};let text:string|null=null,sourceEventIds=[event.id],templateId=event.type,routine=false;
-            const aggregate=event.type==='ResourceProduced'?output:event.type==='CattleFoodProduced'?herd:null;
+            const aggregate=event.type==='ResourceProduced'?output:herd.includes(event)?herd:null;
             if(aggregate){
                 if(event!==aggregate[0])continue;
                 sourceEventIds=aggregate.map(e=>e.id);routine=true;templateId+= '.winter-total';
-                if(event.type==='CattleFoodProduced'){const total=aggregate.reduce((n,e)=>n+Number(e.details!.units),0);if(Number.isSafeInteger(total))text=`The herd produced ${total} Food this Winter.`;}
+                if(aggregate===herd){
+                    const parts = (['food','materials'] as const).flatMap(resource => {
+                        const records = aggregate.filter(e => (e.type === 'CattleFoodProduced' ? 'food' : e.details!.resource) === resource);
+                        const total = records.reduce((sum,e) => sum + Number(e.details!.units),0);
+                        return records.length && Number.isSafeInteger(total) ? [total + ' ' + (resource === 'food' ? 'Food' : 'Materials')] : [];
+                    });
+                    if (parts.length) text = 'The herd produced ' + parts.join(' and ') + ' this Winter.';
+                }
                 else {const total=(resource:string)=>aggregate.filter(e=>e.details!.resource===resource).reduce((n,e)=>n+Number(e.details!.units),0);const food=total('food'),materials=total('materials');if(Number.isSafeInteger(food)&&Number.isSafeInteger(materials)){const parts=[];if(aggregate.some(e=>e.details!.resource==='food'))parts.push(`${food} Food`);if(aggregate.some(e=>e.details!.resource==='materials'))parts.push(`${materials} Materials`);text=`The settlement produced ${parts.join(' and ')} this Winter.`;}}
-            }else {text=Object.hasOwn(templates,event.type)?templates[event.type](event,d):null;routine=['FoodConsumed','CattleFoodConsumed'].includes(event.type);}
+            }else {text=Object.hasOwn(templates,event.type)?templates[event.type](event,d):null;routine=['FoodConsumed','CattleFoodConsumed','LivestockFoodConsumed'].includes(event.type);}
             if (text) {
                 const templateVersion = ['FoundingLongshipKept', 'FoundingLongshipSalvaged']
-                    .includes(event.type) ? 2 : 1;
+                    .includes(event.type) || isLivestockEvent(event.type) ? 2 : 1;
                 entries.push({ winter, text, sourceEventIds, templateId, templateVersion, routine });
             }
         }

@@ -29,7 +29,7 @@ import { SettlementPanel, panelCommand, updateManagementAvailability } from '../
 import { openSettlement, persistSettlement, bindViewSwitch } from '../play/SettlementBrowser';
 import type { EntityKind } from '../play/SettlementView';
 import { projectChronicle } from '../lore/Chronicle';
-import { inspectWeatherExposure, personaAway } from '../simulation/SimulationCore';
+import { inspectWeatherExposure, personaAway, landingSummary } from '../simulation/SimulationCore';
 
 const campaignClockIntervalMs = 500;
 const escape = (value: string) => value.replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]!));
@@ -291,7 +291,7 @@ export class FjordPlay {
                 .map(id => ({ kind: 'persona', id })));
             header.update(view.calendar, view.stocks,
                 Object.values(state.personas).filter(p => p.deathWinter === null).length,
-                view.entities.filter(e => e.kind === 'cattle').length, this.session.expeditionMode);
+                state.landing ? landingSummary(state).cattle : 0, this.session.expeditionMode);
             canvas.dataset.time = JSON.stringify({ ...view.time, ticksPerWinter: state.ticksPerWinter });
             canvas.dataset.calendar = JSON.stringify(view.calendar);
             const workspace = document.querySelector<HTMLElement>('#fjord-workspace')!;
@@ -306,7 +306,7 @@ export class FjordPlay {
                     (profile.materialsProductionBps ?? 10000) / 100 + '%<br>Resident Food ×' +
                     (profile.residentConsumptionBps ?? 10000) / 10000 + ' · Adult cattle Food ×' +
                     (profile.cattleConsumptionBps ?? profile.cattleConsumptionMultiplier * 10000) / 10000 + '</p>' +
-                    '<p>' + exposure.residentIds.length + ' exposed residents · ' + exposure.cattleIds.length + ' exposed cattle</p>' +
+                    '<p>' + exposure.residentIds.length + ' exposed residents · ' + exposure.cattleIds.length + ' exposed livestock</p>' +
                     (profile.tentMortalityBps || profile.exposedCattleMortalityBps ?
                         '<p class="weather-warning">Shelter exposed residents and cattle before the Winter reckoning.</p>' : '') :
                     '<strong>Winter weather disabled</strong>';
@@ -586,7 +586,7 @@ export class FjordPlay {
                 islandMissions?.committed(command);
             }), memberIds => presentation!.origins(memberIds),
             () => desktopUI?.showExplorationMap(), () => desktopUI?.open('expeditions', true),
-            point => controller.focusAt(point));
+            point => controller.focusAt(point), id => select('cattle', id));
         document.querySelector('#fjord-expeditions-open')!.addEventListener('click', () => {
             document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open = false;
             showManagement(true);

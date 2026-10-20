@@ -1,0 +1,7424 @@
+{
+  "version": 1,
+  "revision": "fcf465d4dc836848b92a613e8bf5c987a80b33ac",
+  "finishedAt": "2026-10-20T05:27:43.059Z",
+  "seedsPerCohort": 30,
+  "expectedCases": 630,
+  "observedCases": 630,
+  "missingCases": 0,
+  "completedCases": 630,
+  "limitedCases": 0,
+  "failedCases": 0,
+  "observedYears": 25200,
+  "maxResidual": 0,
+  "independentCpuCases": 90,
+  "player": [
+    {
+      "species": "cattle",
+      "policy": "herd",
+      "cases": 30,
+      "complete": 30,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 1200,
+      "clanExtinctions": 0,
+      "herdExtinctions": 26,
+      "humanShortageCases": 10,
+      "animalShortageCases": 2,
+      "firstHumanShortage": {
+        "count": 10,
+        "min": 2,
+        "median": 2.5,
+        "max": 27
+      },
+      "finalFood": {
+        "count": 30,
+        "min": 317,
+        "median": 765.5,
+        "max": 1271
+      },
+      "finalPopulation": {
+        "count": 30,
+        "min": 8,
+        "median": 16,
+        "max": 24
+      },
+      "finalHerd": {
+        "count": 30,
+        "min": 0,
+        "median": 0,
+        "max": 6
+      },
+      "peakHerd": 7,
+      "adultDescendantsReached": {
+        "count": 30,
+        "min": 2,
+        "median": 6,
+        "max": 10
+      },
+      "births": 265,
+      "deaths": 89,
+      "animalBirths": 230,
+      "animalDeaths": 102,
+      "slaughters": 205,
+      "foodProduced": 56408,
+      "animalFoodProduced": 4439,
+      "humanConsumed": 33856,
+      "animalConsumed": 2417,
+      "animalRequired": 2428,
+      "animalShortfall": 11,
+      "humanShortfall": 231,
+      "slaughterFood": 2095,
+      "foodSpoiled": 0,
+      "materialsProduced": 8238,
+      "hidesReceived": 74,
+      "youngAnimalFeedings": 285,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 691,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        2,
+        20,
+        21,
+        22,
+        23,
+        24,
+        27,
+        28,
+        29,
+        3,
+        30,
+        4,
+        5,
+        7,
+        8
+      ]
+    },
+    {
+      "species": "cattle",
+      "policy": "passive",
+      "cases": 30,
+      "complete": 30,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 1200,
+      "clanExtinctions": 0,
+      "herdExtinctions": 19,
+      "humanShortageCases": 25,
+      "animalShortageCases": 17,
+      "firstHumanShortage": {
+        "count": 25,
+        "min": 2,
+        "median": 4,
+        "max": 25
+      },
+      "finalFood": {
+        "count": 30,
+        "min": 0,
+        "median": 53,
+        "max": 265
+      },
+      "finalPopulation": {
+        "count": 30,
+        "min": 4,
+        "median": 11,
+        "max": 23
+      },
+      "finalHerd": {
+        "count": 30,
+        "min": 0,
+        "median": 0,
+        "max": 6
+      },
+      "peakHerd": 15,
+      "adultDescendantsReached": {
+        "count": 30,
+        "min": 0,
+        "median": 3.5,
+        "max": 8
+      },
+      "births": 137,
+      "deaths": 106,
+      "animalBirths": 368,
+      "animalDeaths": 435,
+      "slaughters": 0,
+      "foodProduced": 30803,
+      "animalFoodProduced": 3086,
+      "humanConsumed": 25351,
+      "animalConsumed": 3762,
+      "animalRequired": 3923,
+      "animalShortfall": 161,
+      "humanShortfall": 3193,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 6252,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 633,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 3030,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        19,
+        2,
+        21,
+        23,
+        24,
+        25,
+        26,
+        27,
+        3,
+        4,
+        5,
+        7
+      ]
+    },
+    {
+      "species": "cattle",
+      "policy": "prepared",
+      "cases": 30,
+      "complete": 30,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 1200,
+      "clanExtinctions": 0,
+      "herdExtinctions": 18,
+      "humanShortageCases": 14,
+      "animalShortageCases": 4,
+      "firstHumanShortage": {
+        "count": 14,
+        "min": 2,
+        "median": 3,
+        "max": 19
+      },
+      "finalFood": {
+        "count": 30,
+        "min": 256,
+        "median": 691.5,
+        "max": 1151
+      },
+      "finalPopulation": {
+        "count": 30,
+        "min": 7,
+        "median": 14,
+        "max": 27
+      },
+      "finalHerd": {
+        "count": 30,
+        "min": 0,
+        "median": 0,
+        "max": 8
+      },
+      "peakHerd": 15,
+      "adultDescendantsReached": {
+        "count": 30,
+        "min": 1,
+        "median": 5,
+        "max": 12
+      },
+      "births": 236,
+      "deaths": 98,
+      "animalBirths": 405,
+      "animalDeaths": 460,
+      "slaughters": 0,
+      "foodProduced": 55583,
+      "animalFoodProduced": 2923,
+      "humanConsumed": 31876,
+      "animalConsumed": 3632,
+      "animalRequired": 3658,
+      "animalShortfall": 26,
+      "humanShortfall": 751,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 8414,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 689,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 3082,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        10,
+        12,
+        14,
+        16,
+        17,
+        19,
+        2,
+        20,
+        21,
+        22,
+        24,
+        25,
+        26,
+        3,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "species": "chicken",
+      "policy": "herd",
+      "cases": 30,
+      "complete": 30,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 1200,
+      "clanExtinctions": 0,
+      "herdExtinctions": 20,
+      "humanShortageCases": 16,
+      "animalShortageCases": 6,
+      "firstHumanShortage": {
+        "count": 16,
+        "min": 2,
+        "median": 3,
+        "max": 23
+      },
+      "finalFood": {
+        "count": 30,
+        "min": 507,
+        "median": 797.5,
+        "max": 2351
+      },
+      "finalPopulation": {
+        "count": 30,
+        "min": 6,
+        "median": 13.5,
+        "max": 32
+      },
+      "finalHerd": {
+        "count": 30,
+        "min": 0,
+        "median": 0,
+        "max": 47
+      },
+      "peakHerd": 48,
+      "adultDescendantsReached": {
+        "count": 30,
+        "min": 0,
+        "median": 5,
+        "max": 12
+      },
+      "births": 253,
+      "deaths": 112,
+      "animalBirths": 1706,
+      "animalDeaths": 388,
+      "slaughters": 1092,
+      "foodProduced": 66303,
+      "animalFoodProduced": 15924,
+      "humanConsumed": 32239,
+      "animalConsumed": 8351,
+      "animalRequired": 8386,
+      "animalShortfall": 35,
+      "humanShortfall": 559,
+      "slaughterFood": 2184,
+      "foodSpoiled": 0,
+      "materialsProduced": 7827,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 0,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 1510,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        10,
+        12,
+        13,
+        15,
+        17,
+        18,
+        2,
+        21,
+        22,
+        24,
+        25,
+        26,
+        28,
+        29,
+        3,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "species": "chicken",
+      "policy": "passive",
+      "cases": 30,
+      "complete": 30,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 1200,
+      "clanExtinctions": 0,
+      "herdExtinctions": 26,
+      "humanShortageCases": 28,
+      "animalShortageCases": 19,
+      "firstHumanShortage": {
+        "count": 28,
+        "min": 2,
+        "median": 3,
+        "max": 15
+      },
+      "finalFood": {
+        "count": 30,
+        "min": 0,
+        "median": 44.5,
+        "max": 235
+      },
+      "finalPopulation": {
+        "count": 30,
+        "min": 6,
+        "median": 10,
+        "max": 20
+      },
+      "finalHerd": {
+        "count": 30,
+        "min": 0,
+        "median": 0,
+        "max": 90
+      },
+      "peakHerd": 93,
+      "adultDescendantsReached": {
+        "count": 30,
+        "min": 0,
+        "median": 3,
+        "max": 7
+      },
+      "births": 126,
+      "deaths": 96,
+      "animalBirths": 687,
+      "animalDeaths": 679,
+      "slaughters": 0,
+      "foodProduced": 31854,
+      "animalFoodProduced": 4382,
+      "humanConsumed": 24346,
+      "animalConsumed": 5788,
+      "animalRequired": 6267,
+      "animalShortfall": 479,
+      "humanShortfall": 4648,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 6068,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 0,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 1778,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        17,
+        18,
+        2,
+        20,
+        21,
+        22,
+        23,
+        24,
+        26,
+        27,
+        28,
+        29,
+        3,
+        30,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "species": "chicken",
+      "policy": "prepared",
+      "cases": 30,
+      "complete": 30,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 1200,
+      "clanExtinctions": 0,
+      "herdExtinctions": 23,
+      "humanShortageCases": 22,
+      "animalShortageCases": 12,
+      "firstHumanShortage": {
+        "count": 22,
+        "min": 2,
+        "median": 3,
+        "max": 24
+      },
+      "finalFood": {
+        "count": 30,
+        "min": 56,
+        "median": 521,
+        "max": 966
+      },
+      "finalPopulation": {
+        "count": 30,
+        "min": 6,
+        "median": 15,
+        "max": 26
+      },
+      "finalHerd": {
+        "count": 30,
+        "min": 0,
+        "median": 0,
+        "max": 68
+      },
+      "peakHerd": 90,
+      "adultDescendantsReached": {
+        "count": 30,
+        "min": 0,
+        "median": 5,
+        "max": 11
+      },
+      "births": 212,
+      "deaths": 85,
+      "animalBirths": 1089,
+      "animalDeaths": 983,
+      "slaughters": 0,
+      "foodProduced": 55088,
+      "animalFoodProduced": 6077,
+      "humanConsumed": 30870,
+      "animalConsumed": 9045,
+      "animalRequired": 9199,
+      "animalShortfall": 154,
+      "humanShortfall": 1340,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 7517,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 0,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 3574,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        17,
+        18,
+        2,
+        20,
+        21,
+        22,
+        23,
+        24,
+        26,
+        27,
+        28,
+        3,
+        30,
+        4,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "species": "control",
+      "policy": "herd",
+      "cases": 30,
+      "complete": 30,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 1200,
+      "clanExtinctions": 0,
+      "herdExtinctions": 25,
+      "humanShortageCases": 10,
+      "animalShortageCases": 1,
+      "firstHumanShortage": {
+        "count": 10,
+        "min": 2,
+        "median": 2.5,
+        "max": 27
+      },
+      "finalFood": {
+        "count": 30,
+        "min": 317,
+        "median": 722.5,
+        "max": 1271
+      },
+      "finalPopulation": {
+        "count": 30,
+        "min": 8,
+        "median": 16,
+        "max": 29
+      },
+      "finalHerd": {
+        "count": 30,
+        "min": 0,
+        "median": 0,
+        "max": 5
+      },
+      "peakHerd": 7,
+      "adultDescendantsReached": {
+        "count": 30,
+        "min": 2,
+        "median": 6,
+        "max": 10
+      },
+      "births": 265,
+      "deaths": 85,
+      "animalBirths": 224,
+      "animalDeaths": 101,
+      "slaughters": 200,
+      "foodProduced": 56780,
+      "animalFoodProduced": 4424,
+      "humanConsumed": 34008,
+      "animalConsumed": 2408,
+      "animalRequired": 2410,
+      "animalShortfall": 2,
+      "humanShortfall": 272,
+      "slaughterFood": 2090,
+      "foodSpoiled": 0,
+      "materialsProduced": 8129,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 283,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 663,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        10,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        2,
+        20,
+        21,
+        22,
+        23,
+        24,
+        27,
+        28,
+        29,
+        3,
+        30,
+        4,
+        5,
+        7,
+        8
+      ]
+    },
+    {
+      "species": "control",
+      "policy": "passive",
+      "cases": 30,
+      "complete": 30,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 1200,
+      "clanExtinctions": 0,
+      "herdExtinctions": 8,
+      "humanShortageCases": 29,
+      "animalShortageCases": 24,
+      "firstHumanShortage": {
+        "count": 29,
+        "min": 2,
+        "median": 5,
+        "max": 34
+      },
+      "finalFood": {
+        "count": 30,
+        "min": 8,
+        "median": 41.5,
+        "max": 153
+      },
+      "finalPopulation": {
+        "count": 30,
+        "min": 5,
+        "median": 9.5,
+        "max": 17
+      },
+      "finalHerd": {
+        "count": 30,
+        "min": 0,
+        "median": 25.5,
+        "max": 152
+      },
+      "peakHerd": 152,
+      "adultDescendantsReached": {
+        "count": 30,
+        "min": 0,
+        "median": 3,
+        "max": 8
+      },
+      "births": 110,
+      "deaths": 118,
+      "animalBirths": 2190,
+      "animalDeaths": 1100,
+      "slaughters": 0,
+      "foodProduced": 40372,
+      "animalFoodProduced": 12717,
+      "humanConsumed": 22959,
+      "animalConsumed": 16247,
+      "animalRequired": 19270,
+      "animalShortfall": 3023,
+      "humanShortfall": 4862,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 6181,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 3823,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 0,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        19,
+        21,
+        22,
+        30,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "species": "control",
+      "policy": "prepared",
+      "cases": 30,
+      "complete": 30,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 1200,
+      "clanExtinctions": 0,
+      "herdExtinctions": 7,
+      "humanShortageCases": 19,
+      "animalShortageCases": 9,
+      "firstHumanShortage": {
+        "count": 19,
+        "min": 2,
+        "median": 3,
+        "max": 28
+      },
+      "finalFood": {
+        "count": 30,
+        "min": 34,
+        "median": 419,
+        "max": 1161
+      },
+      "finalPopulation": {
+        "count": 30,
+        "min": 7,
+        "median": 14,
+        "max": 26
+      },
+      "finalHerd": {
+        "count": 30,
+        "min": 0,
+        "median": 36.5,
+        "max": 289
+      },
+      "peakHerd": 289,
+      "adultDescendantsReached": {
+        "count": 30,
+        "min": 0,
+        "median": 5,
+        "max": 10
+      },
+      "births": 237,
+      "deaths": 91,
+      "animalBirths": 2922,
+      "animalDeaths": 1263,
+      "slaughters": 0,
+      "foodProduced": 67664,
+      "animalFoodProduced": 16300,
+      "humanConsumed": 31548,
+      "animalConsumed": 22808,
+      "animalRequired": 23305,
+      "animalShortfall": 497,
+      "humanShortfall": 1238,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 7832,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 5086,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 0,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        10,
+        11,
+        17,
+        19,
+        22,
+        7,
+        8
+      ]
+    },
+    {
+      "species": "goat",
+      "policy": "herd",
+      "cases": 30,
+      "complete": 30,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 1200,
+      "clanExtinctions": 0,
+      "herdExtinctions": 22,
+      "humanShortageCases": 10,
+      "animalShortageCases": 2,
+      "firstHumanShortage": {
+        "count": 10,
+        "min": 2,
+        "median": 3,
+        "max": 5
+      },
+      "finalFood": {
+        "count": 30,
+        "min": 366,
+        "median": 791,
+        "max": 1570
+      },
+      "finalPopulation": {
+        "count": 30,
+        "min": 8,
+        "median": 16,
+        "max": 28
+      },
+      "finalHerd": {
+        "count": 30,
+        "min": 0,
+        "median": 0,
+        "max": 5
+      },
+      "peakHerd": 8,
+      "adultDescendantsReached": {
+        "count": 30,
+        "min": 0,
+        "median": 5.5,
+        "max": 13
+      },
+      "births": 275,
+      "deaths": 94,
+      "animalBirths": 312,
+      "animalDeaths": 102,
+      "slaughters": 280,
+      "foodProduced": 58657,
+      "animalFoodProduced": 5400,
+      "humanConsumed": 33237,
+      "animalConsumed": 3130,
+      "animalRequired": 3134,
+      "animalShortfall": 4,
+      "humanShortfall": 355,
+      "slaughterFood": 2536,
+      "foodSpoiled": 0,
+      "materialsProduced": 8243,
+      "hidesReceived": 238,
+      "youngAnimalFeedings": 288,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 597,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        10,
+        12,
+        13,
+        15,
+        16,
+        17,
+        18,
+        19,
+        2,
+        20,
+        21,
+        23,
+        24,
+        25,
+        28,
+        29,
+        3,
+        30,
+        5,
+        7,
+        8
+      ]
+    },
+    {
+      "species": "goat",
+      "policy": "passive",
+      "cases": 30,
+      "complete": 30,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 1200,
+      "clanExtinctions": 0,
+      "herdExtinctions": 22,
+      "humanShortageCases": 29,
+      "animalShortageCases": 17,
+      "firstHumanShortage": {
+        "count": 29,
+        "min": 2,
+        "median": 4,
+        "max": 39
+      },
+      "finalFood": {
+        "count": 30,
+        "min": 0,
+        "median": 47.5,
+        "max": 348
+      },
+      "finalPopulation": {
+        "count": 30,
+        "min": 4,
+        "median": 10.5,
+        "max": 20
+      },
+      "finalHerd": {
+        "count": 30,
+        "min": 0,
+        "median": 0,
+        "max": 10
+      },
+      "peakHerd": 14,
+      "adultDescendantsReached": {
+        "count": 30,
+        "min": 0,
+        "median": 3,
+        "max": 7
+      },
+      "births": 131,
+      "deaths": 103,
+      "animalBirths": 266,
+      "animalDeaths": 333,
+      "slaughters": 0,
+      "foodProduced": 30546,
+      "animalFoodProduced": 2745,
+      "humanConsumed": 25034,
+      "animalConsumed": 3667,
+      "animalRequired": 3844,
+      "animalShortfall": 177,
+      "humanShortfall": 3723,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 6044,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 252,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 2044,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        14,
+        16,
+        17,
+        19,
+        21,
+        25,
+        26,
+        27,
+        28,
+        29,
+        3,
+        30,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "species": "goat",
+      "policy": "prepared",
+      "cases": 30,
+      "complete": 30,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 1200,
+      "clanExtinctions": 0,
+      "herdExtinctions": 22,
+      "humanShortageCases": 19,
+      "animalShortageCases": 9,
+      "firstHumanShortage": {
+        "count": 19,
+        "min": 2,
+        "median": 5,
+        "max": 16
+      },
+      "finalFood": {
+        "count": 30,
+        "min": 271,
+        "median": 646,
+        "max": 1063
+      },
+      "finalPopulation": {
+        "count": 30,
+        "min": 6,
+        "median": 13,
+        "max": 24
+      },
+      "finalHerd": {
+        "count": 30,
+        "min": 0,
+        "median": 0,
+        "max": 10
+      },
+      "peakHerd": 16,
+      "adultDescendantsReached": {
+        "count": 30,
+        "min": 0,
+        "median": 4.5,
+        "max": 9
+      },
+      "births": 205,
+      "deaths": 95,
+      "animalBirths": 309,
+      "animalDeaths": 373,
+      "slaughters": 0,
+      "foodProduced": 53808,
+      "animalFoodProduced": 2613,
+      "humanConsumed": 30721,
+      "animalConsumed": 4032,
+      "animalRequired": 4112,
+      "animalShortfall": 80,
+      "humanShortfall": 1023,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 8344,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 281,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 2509,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        21,
+        22,
+        23,
+        24,
+        26,
+        27,
+        28,
+        29,
+        3,
+        30,
+        4,
+        8,
+        9
+      ]
+    },
+    {
+      "species": "goose",
+      "policy": "herd",
+      "cases": 30,
+      "complete": 30,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 1200,
+      "clanExtinctions": 0,
+      "herdExtinctions": 18,
+      "humanShortageCases": 14,
+      "animalShortageCases": 3,
+      "firstHumanShortage": {
+        "count": 14,
+        "min": 2,
+        "median": 3,
+        "max": 14
+      },
+      "finalFood": {
+        "count": 30,
+        "min": 164,
+        "median": 873.5,
+        "max": 1758
+      },
+      "finalPopulation": {
+        "count": 30,
+        "min": 8,
+        "median": 14.5,
+        "max": 31
+      },
+      "finalHerd": {
+        "count": 30,
+        "min": 0,
+        "median": 0,
+        "max": 21
+      },
+      "peakHerd": 25,
+      "adultDescendantsReached": {
+        "count": 30,
+        "min": 0,
+        "median": 5,
+        "max": 10
+      },
+      "births": 251,
+      "deaths": 99,
+      "animalBirths": 1227,
+      "animalDeaths": 189,
+      "slaughters": 973,
+      "foodProduced": 61937,
+      "animalFoodProduced": 9866,
+      "humanConsumed": 31511,
+      "animalConsumed": 7336,
+      "animalRequired": 7354,
+      "animalShortfall": 18,
+      "humanShortfall": 603,
+      "slaughterFood": 4865,
+      "foodSpoiled": 0,
+      "materialsProduced": 8300,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 0,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 558,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        10,
+        11,
+        12,
+        15,
+        17,
+        2,
+        21,
+        22,
+        24,
+        25,
+        27,
+        28,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "species": "goose",
+      "policy": "passive",
+      "cases": 30,
+      "complete": 30,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 1200,
+      "clanExtinctions": 0,
+      "herdExtinctions": 23,
+      "humanShortageCases": 30,
+      "animalShortageCases": 22,
+      "firstHumanShortage": {
+        "count": 30,
+        "min": 1,
+        "median": 3,
+        "max": 30
+      },
+      "finalFood": {
+        "count": 30,
+        "min": 0,
+        "median": 51.5,
+        "max": 272
+      },
+      "finalPopulation": {
+        "count": 30,
+        "min": 4,
+        "median": 10,
+        "max": 17
+      },
+      "finalHerd": {
+        "count": 30,
+        "min": 0,
+        "median": 0,
+        "max": 31
+      },
+      "peakHerd": 31,
+      "adultDescendantsReached": {
+        "count": 30,
+        "min": 0,
+        "median": 3,
+        "max": 6
+      },
+      "births": 123,
+      "deaths": 110,
+      "animalBirths": 472,
+      "animalDeaths": 497,
+      "slaughters": 0,
+      "foodProduced": 31168,
+      "animalFoodProduced": 3219,
+      "humanConsumed": 23592,
+      "animalConsumed": 5792,
+      "animalRequired": 6322,
+      "animalShortfall": 530,
+      "humanShortfall": 4527,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 5815,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 0,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 915,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        17,
+        18,
+        2,
+        22,
+        24,
+        25,
+        26,
+        27,
+        29,
+        3,
+        30,
+        4,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "species": "goose",
+      "policy": "prepared",
+      "cases": 30,
+      "complete": 30,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 1200,
+      "clanExtinctions": 0,
+      "herdExtinctions": 20,
+      "humanShortageCases": 24,
+      "animalShortageCases": 10,
+      "firstHumanShortage": {
+        "count": 24,
+        "min": 2,
+        "median": 3.5,
+        "max": 26
+      },
+      "finalFood": {
+        "count": 30,
+        "min": 56,
+        "median": 600.5,
+        "max": 1051
+      },
+      "finalPopulation": {
+        "count": 30,
+        "min": 6,
+        "median": 14,
+        "max": 24
+      },
+      "finalHerd": {
+        "count": 30,
+        "min": 0,
+        "median": 0,
+        "max": 35
+      },
+      "peakHerd": 43,
+      "adultDescendantsReached": {
+        "count": 30,
+        "min": 0,
+        "median": 4.5,
+        "max": 9
+      },
+      "births": 204,
+      "deaths": 93,
+      "animalBirths": 755,
+      "animalDeaths": 657,
+      "slaughters": 0,
+      "foodProduced": 55899,
+      "animalFoodProduced": 4055,
+      "humanConsumed": 30795,
+      "animalConsumed": 8193,
+      "animalRequired": 8237,
+      "animalShortfall": 44,
+      "humanShortfall": 838,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 8013,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 0,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 2897,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        11,
+        12,
+        13,
+        14,
+        17,
+        18,
+        21,
+        24,
+        25,
+        26,
+        27,
+        28,
+        3,
+        30,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "species": "pig",
+      "policy": "herd",
+      "cases": 30,
+      "complete": 30,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 1200,
+      "clanExtinctions": 0,
+      "herdExtinctions": 29,
+      "humanShortageCases": 20,
+      "animalShortageCases": 7,
+      "firstHumanShortage": {
+        "count": 20,
+        "min": 2,
+        "median": 3,
+        "max": 21
+      },
+      "finalFood": {
+        "count": 30,
+        "min": 37,
+        "median": 606.5,
+        "max": 1081
+      },
+      "finalPopulation": {
+        "count": 30,
+        "min": 6,
+        "median": 14,
+        "max": 25
+      },
+      "finalHerd": {
+        "count": 30,
+        "min": 0,
+        "median": 0,
+        "max": 1
+      },
+      "peakHerd": 7,
+      "adultDescendantsReached": {
+        "count": 30,
+        "min": 0,
+        "median": 5,
+        "max": 10
+      },
+      "births": 237,
+      "deaths": 107,
+      "animalBirths": 145,
+      "animalDeaths": 100,
+      "slaughters": 134,
+      "foodProduced": 50179,
+      "animalFoodProduced": 0,
+      "humanConsumed": 31723,
+      "animalConsumed": 1694,
+      "animalRequired": 1716,
+      "animalShortfall": 22,
+      "humanShortfall": 797,
+      "slaughterFood": 1659,
+      "foodSpoiled": 0,
+      "materialsProduced": 8013,
+      "hidesReceived": 62,
+      "youngAnimalFeedings": 101,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 424,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        2,
+        20,
+        21,
+        22,
+        23,
+        24,
+        26,
+        27,
+        28,
+        29,
+        3,
+        30,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "species": "pig",
+      "policy": "passive",
+      "cases": 30,
+      "complete": 30,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 1200,
+      "clanExtinctions": 0,
+      "herdExtinctions": 30,
+      "humanShortageCases": 29,
+      "animalShortageCases": 19,
+      "firstHumanShortage": {
+        "count": 29,
+        "min": 1,
+        "median": 2,
+        "max": 30
+      },
+      "finalFood": {
+        "count": 30,
+        "min": 0,
+        "median": 56,
+        "max": 390
+      },
+      "finalPopulation": {
+        "count": 30,
+        "min": 3,
+        "median": 9,
+        "max": 16
+      },
+      "finalHerd": {
+        "count": 30,
+        "min": 0,
+        "median": 0,
+        "max": 0
+      },
+      "peakHerd": 12,
+      "adultDescendantsReached": {
+        "count": 30,
+        "min": 0,
+        "median": 2,
+        "max": 5
+      },
+      "births": 83,
+      "deaths": 103,
+      "animalBirths": 199,
+      "animalDeaths": 289,
+      "slaughters": 0,
+      "foodProduced": 27750,
+      "animalFoodProduced": 0,
+      "humanConsumed": 23370,
+      "animalConsumed": 2384,
+      "animalRequired": 2530,
+      "animalShortfall": 146,
+      "humanShortfall": 3463,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 5896,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 179,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 1460,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        2,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        3,
+        30,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "species": "pig",
+      "policy": "prepared",
+      "cases": 30,
+      "complete": 30,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 1200,
+      "clanExtinctions": 0,
+      "herdExtinctions": 28,
+      "humanShortageCases": 23,
+      "animalShortageCases": 11,
+      "firstHumanShortage": {
+        "count": 23,
+        "min": 2,
+        "median": 3,
+        "max": 9
+      },
+      "finalFood": {
+        "count": 30,
+        "min": 137,
+        "median": 546,
+        "max": 993
+      },
+      "finalPopulation": {
+        "count": 30,
+        "min": 5,
+        "median": 13,
+        "max": 22
+      },
+      "finalHerd": {
+        "count": 30,
+        "min": 0,
+        "median": 0,
+        "max": 1
+      },
+      "peakHerd": 12,
+      "adultDescendantsReached": {
+        "count": 30,
+        "min": 0,
+        "median": 4,
+        "max": 9
+      },
+      "births": 211,
+      "deaths": 103,
+      "animalBirths": 197,
+      "animalDeaths": 285,
+      "slaughters": 0,
+      "foodProduced": 49165,
+      "animalFoodProduced": 0,
+      "humanConsumed": 29878,
+      "animalConsumed": 2253,
+      "animalRequired": 2314,
+      "animalShortfall": 61,
+      "humanShortfall": 1152,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 7876,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 179,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 1297,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        10,
+        11,
+        12,
+        14,
+        16,
+        17,
+        18,
+        19,
+        2,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        3,
+        30,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "species": "sheep",
+      "policy": "herd",
+      "cases": 30,
+      "complete": 30,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 1200,
+      "clanExtinctions": 0,
+      "herdExtinctions": 16,
+      "humanShortageCases": 12,
+      "animalShortageCases": 1,
+      "firstHumanShortage": {
+        "count": 12,
+        "min": 2,
+        "median": 2.5,
+        "max": 16
+      },
+      "finalFood": {
+        "count": 30,
+        "min": 569,
+        "median": 937.5,
+        "max": 1489
+      },
+      "finalPopulation": {
+        "count": 30,
+        "min": 7,
+        "median": 15.5,
+        "max": 25
+      },
+      "finalHerd": {
+        "count": 30,
+        "min": 0,
+        "median": 0,
+        "max": 5
+      },
+      "peakHerd": 8,
+      "adultDescendantsReached": {
+        "count": 30,
+        "min": 0,
+        "median": 6,
+        "max": 11
+      },
+      "births": 266,
+      "deaths": 96,
+      "animalBirths": 357,
+      "animalDeaths": 95,
+      "slaughters": 320,
+      "foodProduced": 61523,
+      "animalFoodProduced": 2827,
+      "humanConsumed": 33188,
+      "animalConsumed": 3354,
+      "animalRequired": 3359,
+      "animalShortfall": 5,
+      "humanShortfall": 228,
+      "slaughterFood": 2866,
+      "foodSpoiled": 0,
+      "materialsProduced": 11137,
+      "hidesReceived": 267,
+      "youngAnimalFeedings": 324,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 712,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        12,
+        15,
+        16,
+        17,
+        2,
+        21,
+        23,
+        25,
+        26,
+        28,
+        3,
+        30,
+        5,
+        6,
+        8
+      ]
+    },
+    {
+      "species": "sheep",
+      "policy": "passive",
+      "cases": 30,
+      "complete": 30,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 1200,
+      "clanExtinctions": 0,
+      "herdExtinctions": 25,
+      "humanShortageCases": 29,
+      "animalShortageCases": 19,
+      "firstHumanShortage": {
+        "count": 29,
+        "min": 1,
+        "median": 3,
+        "max": 39
+      },
+      "finalFood": {
+        "count": 30,
+        "min": 0,
+        "median": 51.5,
+        "max": 324
+      },
+      "finalPopulation": {
+        "count": 30,
+        "min": 4,
+        "median": 9,
+        "max": 17
+      },
+      "finalHerd": {
+        "count": 30,
+        "min": 0,
+        "median": 0,
+        "max": 8
+      },
+      "peakHerd": 16,
+      "adultDescendantsReached": {
+        "count": 30,
+        "min": 0,
+        "median": 2,
+        "max": 6
+      },
+      "births": 85,
+      "deaths": 104,
+      "animalBirths": 250,
+      "animalDeaths": 327,
+      "slaughters": 0,
+      "foodProduced": 29392,
+      "animalFoodProduced": 1352,
+      "humanConsumed": 23773,
+      "animalConsumed": 3674,
+      "animalRequired": 3886,
+      "animalShortfall": 212,
+      "humanShortfall": 3442,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 6752,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 231,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 2159,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        10,
+        12,
+        14,
+        15,
+        16,
+        17,
+        19,
+        2,
+        21,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        3,
+        30,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "species": "sheep",
+      "policy": "prepared",
+      "cases": 30,
+      "complete": 30,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 1200,
+      "clanExtinctions": 0,
+      "herdExtinctions": 25,
+      "humanShortageCases": 18,
+      "animalShortageCases": 7,
+      "firstHumanShortage": {
+        "count": 18,
+        "min": 2,
+        "median": 3.5,
+        "max": 10
+      },
+      "finalFood": {
+        "count": 30,
+        "min": 332,
+        "median": 725,
+        "max": 1213
+      },
+      "finalPopulation": {
+        "count": 30,
+        "min": 6,
+        "median": 14,
+        "max": 24
+      },
+      "finalHerd": {
+        "count": 30,
+        "min": 0,
+        "median": 0,
+        "max": 12
+      },
+      "peakHerd": 16,
+      "adultDescendantsReached": {
+        "count": 30,
+        "min": 0,
+        "median": 4,
+        "max": 11
+      },
+      "births": 225,
+      "deaths": 87,
+      "animalBirths": 294,
+      "animalDeaths": 357,
+      "slaughters": 0,
+      "foodProduced": 56598,
+      "animalFoodProduced": 1306,
+      "humanConsumed": 31449,
+      "animalConsumed": 3811,
+      "animalRequired": 3852,
+      "animalShortfall": 41,
+      "humanShortfall": 854,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 9918,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 265,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 2279,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        21,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        3,
+        30,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    }
+  ],
+  "cpu": [
+    {
+      "species": "cattle",
+      "policy": "control-autonomous",
+      "cases": 30,
+      "complete": 30,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 1200,
+      "clanExtinctions": 0,
+      "herdExtinctions": 10,
+      "humanShortageCases": 30,
+      "animalShortageCases": 23,
+      "firstHumanShortage": {
+        "count": 30,
+        "min": 1,
+        "median": 3,
+        "max": 24
+      },
+      "finalFood": {
+        "count": 30,
+        "min": 0,
+        "median": 33.5,
+        "max": 256
+      },
+      "finalPopulation": {
+        "count": 30,
+        "min": 4,
+        "median": 10,
+        "max": 21
+      },
+      "finalHerd": {
+        "count": 30,
+        "min": 0,
+        "median": 13.5,
+        "max": 146
+      },
+      "peakHerd": 146,
+      "adultDescendantsReached": {
+        "count": 30,
+        "min": 0,
+        "median": 3,
+        "max": 7
+      },
+      "births": 112,
+      "deaths": 95,
+      "animalBirths": 1718,
+      "animalDeaths": 783,
+      "slaughters": 0,
+      "foodProduced": 36652,
+      "animalFoodProduced": 9493,
+      "humanConsumed": 22991,
+      "animalConsumed": 12479,
+      "animalRequired": 14369,
+      "animalShortfall": 1890,
+      "humanShortfall": 5693,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 5952,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 2967,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 0,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        12,
+        13,
+        15,
+        2,
+        28,
+        30,
+        4,
+        6,
+        7,
+        9
+      ]
+    },
+    {
+      "species": "cattle",
+      "policy": "seeded-autonomous",
+      "cases": 5,
+      "complete": 5,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 200,
+      "clanExtinctions": 0,
+      "herdExtinctions": 4,
+      "humanShortageCases": 5,
+      "animalShortageCases": 3,
+      "firstHumanShortage": {
+        "count": 5,
+        "min": 2,
+        "median": 3,
+        "max": 7
+      },
+      "finalFood": {
+        "count": 5,
+        "min": 4,
+        "median": 97,
+        "max": 286
+      },
+      "finalPopulation": {
+        "count": 5,
+        "min": 6,
+        "median": 10,
+        "max": 13
+      },
+      "finalHerd": {
+        "count": 5,
+        "min": 0,
+        "median": 0,
+        "max": 4
+      },
+      "peakHerd": 10,
+      "adultDescendantsReached": {
+        "count": 5,
+        "min": 0,
+        "median": 2,
+        "max": 5
+      },
+      "births": 18,
+      "deaths": 18,
+      "animalBirths": 46,
+      "animalDeaths": 57,
+      "slaughters": 0,
+      "foodProduced": 4626,
+      "animalFoodProduced": 319,
+      "humanConsumed": 3626,
+      "animalConsumed": 474,
+      "animalRequired": 504,
+      "animalShortfall": 30,
+      "humanShortfall": 996,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 1264,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 77,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 370,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        12,
+        13,
+        16,
+        17
+      ]
+    },
+    {
+      "species": "chicken",
+      "policy": "seeded-autonomous",
+      "cases": 7,
+      "complete": 7,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 280,
+      "clanExtinctions": 0,
+      "herdExtinctions": 6,
+      "humanShortageCases": 7,
+      "animalShortageCases": 5,
+      "firstHumanShortage": {
+        "count": 7,
+        "min": 1,
+        "median": 3,
+        "max": 15
+      },
+      "finalFood": {
+        "count": 7,
+        "min": 0,
+        "median": 18,
+        "max": 142
+      },
+      "finalPopulation": {
+        "count": 7,
+        "min": 6,
+        "median": 11,
+        "max": 15
+      },
+      "finalHerd": {
+        "count": 7,
+        "min": 0,
+        "median": 0,
+        "max": 15
+      },
+      "peakHerd": 23,
+      "adultDescendantsReached": {
+        "count": 7,
+        "min": 0,
+        "median": 4,
+        "max": 6
+      },
+      "births": 24,
+      "deaths": 23,
+      "animalBirths": 93,
+      "animalDeaths": 99,
+      "slaughters": 0,
+      "foodProduced": 6053,
+      "animalFoodProduced": 631,
+      "humanConsumed": 5124,
+      "animalConsumed": 883,
+      "animalRequired": 958,
+      "animalShortfall": 75,
+      "humanShortfall": 1455,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 1970,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 0,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 0,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        1,
+        12,
+        16,
+        17,
+        10,
+        19
+      ]
+    },
+    {
+      "species": "goat",
+      "policy": "seeded-autonomous",
+      "cases": 16,
+      "complete": 16,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 640,
+      "clanExtinctions": 0,
+      "herdExtinctions": 16,
+      "humanShortageCases": 15,
+      "animalShortageCases": 9,
+      "firstHumanShortage": {
+        "count": 15,
+        "min": 1,
+        "median": 3,
+        "max": 21
+      },
+      "finalFood": {
+        "count": 16,
+        "min": 0,
+        "median": 48.5,
+        "max": 236
+      },
+      "finalPopulation": {
+        "count": 16,
+        "min": 7,
+        "median": 10.5,
+        "max": 19
+      },
+      "finalHerd": {
+        "count": 16,
+        "min": 0,
+        "median": 0,
+        "max": 0
+      },
+      "peakHerd": 12,
+      "adultDescendantsReached": {
+        "count": 16,
+        "min": 0,
+        "median": 3.5,
+        "max": 9
+      },
+      "births": 70,
+      "deaths": 58,
+      "animalBirths": 67,
+      "animalDeaths": 115,
+      "slaughters": 0,
+      "foodProduced": 15308,
+      "animalFoodProduced": 1244,
+      "humanConsumed": 13309,
+      "animalConsumed": 1385,
+      "animalRequired": 1469,
+      "animalShortfall": 84,
+      "humanShortfall": 2201,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 3015,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 63,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 396,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        14,
+        18,
+        2,
+        20,
+        22,
+        26,
+        27,
+        11,
+        23,
+        29,
+        30,
+        4,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    {
+      "species": "goose",
+      "policy": "seeded-autonomous",
+      "cases": 9,
+      "complete": 9,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 360,
+      "clanExtinctions": 0,
+      "herdExtinctions": 8,
+      "humanShortageCases": 9,
+      "animalShortageCases": 6,
+      "firstHumanShortage": {
+        "count": 9,
+        "min": 1,
+        "median": 3,
+        "max": 21
+      },
+      "finalFood": {
+        "count": 9,
+        "min": 0,
+        "median": 91,
+        "max": 250
+      },
+      "finalPopulation": {
+        "count": 9,
+        "min": 7,
+        "median": 10,
+        "max": 19
+      },
+      "finalHerd": {
+        "count": 9,
+        "min": 0,
+        "median": 0,
+        "max": 16
+      },
+      "peakHerd": 25,
+      "adultDescendantsReached": {
+        "count": 9,
+        "min": 0,
+        "median": 2,
+        "max": 9
+      },
+      "births": 41,
+      "deaths": 30,
+      "animalBirths": 88,
+      "animalDeaths": 99,
+      "slaughters": 0,
+      "foodProduced": 9217,
+      "animalFoodProduced": 625,
+      "humanConsumed": 7466,
+      "animalConsumed": 1201,
+      "animalRequired": 1361,
+      "animalShortfall": 160,
+      "humanShortfall": 1213,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 1374,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 0,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 92,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        11,
+        23,
+        29,
+        30,
+        4,
+        6,
+        8,
+        9
+      ]
+    },
+    {
+      "species": "pig",
+      "policy": "seeded-autonomous",
+      "cases": 9,
+      "complete": 9,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 360,
+      "clanExtinctions": 0,
+      "herdExtinctions": 9,
+      "humanShortageCases": 8,
+      "animalShortageCases": 5,
+      "firstHumanShortage": {
+        "count": 8,
+        "min": 1,
+        "median": 2,
+        "max": 16
+      },
+      "finalFood": {
+        "count": 9,
+        "min": 0,
+        "median": 33,
+        "max": 331
+      },
+      "finalPopulation": {
+        "count": 9,
+        "min": 2,
+        "median": 11,
+        "max": 15
+      },
+      "finalHerd": {
+        "count": 9,
+        "min": 0,
+        "median": 0,
+        "max": 0
+      },
+      "peakHerd": 7,
+      "adultDescendantsReached": {
+        "count": 9,
+        "min": 0,
+        "median": 3,
+        "max": 5
+      },
+      "births": 27,
+      "deaths": 26,
+      "animalBirths": 24,
+      "animalDeaths": 51,
+      "slaughters": 0,
+      "foodProduced": 7806,
+      "animalFoodProduced": 0,
+      "humanConsumed": 6733,
+      "animalConsumed": 488,
+      "animalRequired": 537,
+      "animalShortfall": 49,
+      "humanShortfall": 1447,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 1904,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 23,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 116,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        10,
+        19,
+        15,
+        21,
+        24,
+        25,
+        28,
+        3,
+        7
+      ]
+    },
+    {
+      "species": "sheep",
+      "policy": "seeded-autonomous",
+      "cases": 14,
+      "complete": 14,
+      "limited": 0,
+      "failed": 0,
+      "observedYears": 560,
+      "clanExtinctions": 0,
+      "herdExtinctions": 10,
+      "humanShortageCases": 14,
+      "animalShortageCases": 10,
+      "firstHumanShortage": {
+        "count": 14,
+        "min": 1,
+        "median": 3,
+        "max": 19
+      },
+      "finalFood": {
+        "count": 14,
+        "min": 4,
+        "median": 29.5,
+        "max": 190
+      },
+      "finalPopulation": {
+        "count": 14,
+        "min": 6,
+        "median": 9,
+        "max": 18
+      },
+      "finalHerd": {
+        "count": 14,
+        "min": 0,
+        "median": 0,
+        "max": 2
+      },
+      "peakHerd": 15,
+      "adultDescendantsReached": {
+        "count": 14,
+        "min": 0,
+        "median": 2.5,
+        "max": 8
+      },
+      "births": 53,
+      "deaths": 52,
+      "animalBirths": 121,
+      "animalDeaths": 158,
+      "slaughters": 0,
+      "foodProduced": 13269,
+      "animalFoodProduced": 626,
+      "humanConsumed": 11268,
+      "animalConsumed": 1657,
+      "animalRequired": 1767,
+      "animalShortfall": 110,
+      "humanShortfall": 1918,
+      "slaughterFood": 0,
+      "foodSpoiled": 0,
+      "materialsProduced": 3362,
+      "hidesReceived": 0,
+      "youngAnimalFeedings": 110,
+      "youngFoodRequiredBeforeWeather": 0,
+      "overcrowdedAnimalYears": 973,
+      "extinctClanSeeds": [],
+      "extinctHerdSeeds": [
+        15,
+        25,
+        3,
+        7,
+        14,
+        18,
+        2,
+        20,
+        22,
+        26
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "seed": 1,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 10,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 11,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 12,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 13,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 14,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 15,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 16,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 17,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 18,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 19,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 20,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 21,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 22,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 23,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 24,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 25,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 26,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 27,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 28,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 29,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 30,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 9,
+      "species": "cattle",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 10,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 11,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 12,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 13,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 14,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 15,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 16,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 17,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 18,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 19,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 20,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 21,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 22,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 23,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 24,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 25,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 26,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 27,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 28,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 29,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 30,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 9,
+      "species": "cattle",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 10,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 11,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 12,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 13,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 14,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 15,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 16,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 17,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 18,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 19,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 20,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 21,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 22,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 23,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 24,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 25,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 26,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 27,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 28,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 29,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 30,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 9,
+      "species": "cattle",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 10,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 11,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 12,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 13,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 14,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 15,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 16,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 17,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 18,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 19,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 20,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 21,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 22,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 23,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 24,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 25,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 26,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 27,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 28,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 29,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 30,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 9,
+      "species": "chicken",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 10,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 11,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 12,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 13,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 14,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 15,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 16,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 17,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 18,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 19,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 20,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 21,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 22,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 23,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 24,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 25,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 26,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 27,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 28,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 29,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 30,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 9,
+      "species": "chicken",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 10,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 11,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 12,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 13,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 14,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 15,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 16,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 17,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 18,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 19,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 20,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 21,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 22,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 23,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 24,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 25,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 26,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 27,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 28,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 29,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 30,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 9,
+      "species": "chicken",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 10,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 11,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 12,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 13,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 14,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 15,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 16,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 17,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 18,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 19,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 20,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 21,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 22,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 23,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 24,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 25,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 26,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 27,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 28,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 29,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 30,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 9,
+      "species": "control",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 10,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 11,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 12,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 13,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 14,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 15,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 16,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 17,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 18,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 19,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 20,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 21,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 22,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 23,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 24,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 25,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 26,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 27,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 28,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 29,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 30,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 9,
+      "species": "control",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 10,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 11,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 12,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 13,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 14,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 15,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 16,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 17,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 18,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 19,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 20,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 21,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 22,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 23,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 24,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 25,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 26,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 27,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 28,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 29,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 30,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 9,
+      "species": "control",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 10,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 11,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 12,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 13,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 14,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 15,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 16,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 17,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 18,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 19,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 20,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 21,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 22,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 23,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 24,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 25,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 26,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 27,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 28,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 29,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 30,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 9,
+      "species": "goat",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 10,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 11,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 12,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 13,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 14,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 15,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 16,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 17,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 18,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 19,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 20,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 21,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 22,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 23,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 24,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 25,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 26,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 27,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 28,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 29,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 30,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 9,
+      "species": "goat",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 10,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 11,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 12,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 13,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 14,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 15,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 16,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 17,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 18,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 19,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 20,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 21,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 22,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 23,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 24,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 25,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 26,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 27,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 28,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 29,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 30,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 9,
+      "species": "goat",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 10,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 11,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 12,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 13,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 14,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 15,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 16,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 17,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 18,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 19,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 20,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 21,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 22,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 23,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 24,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 25,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 26,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 27,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 28,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 29,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 30,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 9,
+      "species": "goose",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 10,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 11,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 12,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 13,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 14,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 15,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 16,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 17,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 18,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 19,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 20,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 21,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 22,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 23,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 24,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 25,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 26,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 27,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 28,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 29,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 30,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 9,
+      "species": "goose",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 10,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 11,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 12,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 13,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 14,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 15,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 16,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 17,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 18,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 19,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 20,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 21,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 22,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 23,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 24,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 25,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 26,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 27,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 28,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 29,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 30,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 9,
+      "species": "goose",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 10,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 11,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 12,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 13,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 14,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 15,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 16,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 17,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 18,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 19,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 20,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 21,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 22,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 23,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 24,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 25,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 26,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 27,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 28,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 29,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 30,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 9,
+      "species": "pig",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 10,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 11,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 12,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 13,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 14,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 15,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 16,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 17,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 18,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 19,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 20,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 21,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 22,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 23,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 24,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 25,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 26,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 27,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 28,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 29,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 30,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 9,
+      "species": "pig",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 10,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 11,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 12,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 13,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 14,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 15,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 16,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 17,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 18,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 19,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 20,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 21,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 22,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 23,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 24,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 25,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 26,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 27,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 28,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 29,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 30,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 9,
+      "species": "pig",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 10,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 11,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 12,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 13,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 14,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 15,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 16,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 17,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 18,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 19,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 20,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 21,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 22,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 23,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 24,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 25,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 26,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 27,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 28,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 29,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 30,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 9,
+      "species": "sheep",
+      "policy": "herd",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 10,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 11,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 12,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 13,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 14,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 15,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 16,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 17,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 18,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 19,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 20,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 21,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 22,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 23,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 24,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 25,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 26,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 27,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 28,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 29,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 30,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 9,
+      "species": "sheep",
+      "policy": "passive",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 1,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 10,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 11,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 12,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 13,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 14,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 15,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 16,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 17,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 18,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 19,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 2,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 20,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 21,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 22,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 23,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 24,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 25,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 26,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 27,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 28,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 29,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 3,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 30,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 4,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 5,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 6,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 7,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 8,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    },
+    {
+      "seed": 9,
+      "species": "sheep",
+      "policy": "prepared",
+      "status": "complete",
+      "years": 40,
+      "stopReason": null
+    }
+  ]
+}

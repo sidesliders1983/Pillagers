@@ -2,6 +2,8 @@
 
 Status: scoped design baseline.
 
+Implementation update (#218): [Livestock v0.1A](LIVESTOCK-V01A.md) now defines the shared six-species Core, local titles and weighted soft shelter capacity. New campaigns remain cattle-only, with unchanged cattle/weather coefficients. The older Cattle Pen and cattle-only direction below records the original baseline; it does not activate another building model or new species economics. #219 owns the latter after measurement and owner review.
+
 ## Scope guardrail
 
 Pillagers must remain a strategy game rather than an all-in-one life simulation.

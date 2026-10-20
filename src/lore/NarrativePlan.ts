@@ -27,6 +27,7 @@ const themes: Record<string, NarrativeTheme> = {
     BuildingSpecialized: 'homes', MaintenanceDebtIncreased: 'homes',
     OccupationAssigned: 'work', OccupationReleased: 'work',
     CattleBorn: 'herd', CattleDied: 'herd', CattleSlaughtered: 'herd', CattleAssigned: 'herd',
+    LivestockBorn: 'herd', LivestockDied: 'herd', LivestockSlaughtered: 'herd', LivestockAssigned: 'herd',
     FoundingLongshipKept: 'expeditions', FoundingLongshipSalvaged: 'expeditions',
     ExpeditionDeparted: 'expeditions', ExpeditionReturned: 'expeditions',
 };
@@ -38,7 +39,7 @@ function subjects(event: SimulationEvent): string[] {
     return [...new Set([
         ...(event.personaId ? [event.personaId] : []),
         ...strings(details.participants), ...strings(details.parentIds),
-        ...['buildingId', 'cattleId', 'missionId', 'longshipId'].flatMap(key =>
+        ...['buildingId', 'cattleId', 'livestockId', 'missionId', 'longshipId'].flatMap(key =>
             typeof details[key] === 'string' ? [details[key] as string] : []),
     ])];
 }
@@ -62,10 +63,10 @@ function relevantOlder(current: SimulationEvent, earlier: readonly IndexedFact[]
         return earlier.find(fact => fact.event.type === 'ChildBorn' && fact.event.personaId === current.personaId) ??
             (current.type === 'PersonaDied' ? earlier.find(fact => fact.event.type === 'FoundingPartyLanded' &&
                 strings(fact.event.details?.founderIds).includes(current.personaId!)) : undefined);
-    if (current.type === 'CattleBorn') {
+    if (current.type === 'CattleBorn' || current.type === 'LivestockBorn') {
         const motherId = strings(details.parentIds)[0];
-        const assignment = [...earlier].reverse().find(fact => fact.event.type === 'CattleAssigned' &&
-            fact.event.details?.cattleId === motherId);
+        const assignment = [...earlier].reverse().find(fact => ['CattleAssigned', 'LivestockAssigned'].includes(fact.event.type) &&
+            (fact.event.details?.livestockId ?? fact.event.details?.cattleId) === motherId);
         return details.farmyardId && assignment?.event.details?.farmyardId === details.farmyardId ? assignment : undefined;
     }
     if (current.type === 'ExpeditionReturned' && typeof details.missionId === 'string')

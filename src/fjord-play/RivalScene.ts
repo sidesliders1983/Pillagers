@@ -18,7 +18,14 @@ export class RivalScene {
         trees: Parameters<LivingWorldController['setStandingTrees']>[0]) {
         if (this.disposed) return;
         this.layer.setSeason(season);
-        await this.layer.sync(view.entities);
+        const knowledge = this.knowledge();
+        this.layer.retainVisibleDeaths((x, z) => Boolean(knowledge && discoveryAt(knowledge, x, z) === 'visible'));
+        const observed = new Map(this.layer.describe().map(entity => [entity.id, entity.position]));
+        const deaths = view.livestockDeaths?.filter(fact => {
+            const position = observed.get(fact.id);
+            return position && knowledge && discoveryAt(knowledge, position[0], position[2]) === 'visible';
+        });
+        await this.layer.sync(view.entities, undefined, () => !this.disposed, deaths);
         if (this.disposed) return;
         if (!this.motion && view.entities.length && view.campfire) {
             const bounds = this.world.rivalSite!.bounds;

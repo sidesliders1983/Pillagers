@@ -1,0 +1,508 @@
+{
+  "status": "PASS",
+  "sourceManifest": {
+    "frozenStudyRevision": "05e8d8afc4599479d664782c8f6364f0a18f03ac",
+    "runtimeRevision": "37e8ba72e2b0127806097a886966758df1991998",
+    "studyHead": "5ff93b8707f87ef9598e887dacc9d3677bd7d01d",
+    "originalManifestSha256": "068483d80aad528c7ef9f50fcec07e6f73e779ba02a7a65d3eedb9b9f6d822c0",
+    "originalCases": 60,
+    "originalCasesWithCapture": 22,
+    "purpose": "Six source-pinned paid mid-raid saves; no controller, matrix, new success rolls or production override",
+    "rows": [
+      {
+        "species": "cattle",
+        "file": "cattle.json.gz",
+        "sha256": "8bb5c3688ddafc8867cebf2e43eb60ef157681c7833060b76ea88398a3d15893",
+        "originalFile": "coupling-different-sheep-1.json.gz",
+        "originalSha256": "0df26393104603c1d313067e6ec6d28eb3f361d33d9a21697c19cb3a8d075bcb",
+        "seed": 1,
+        "overlap": false,
+        "remainingTicks": 250,
+        "capturedIds": [
+          "island-rival:cattle-1"
+        ]
+      },
+      {
+        "species": "chicken",
+        "file": "chicken.json.gz",
+        "sha256": "ea05592eb7369c133c2d25af506d25744a7eb0387fb886d1ff6632b15c604f54",
+        "originalFile": "coupling-same-chicken-2.json.gz",
+        "originalSha256": "863920778004d916e8fd752095e9d5b7bf22ea599186b45aa3f08e23fc8deccc",
+        "seed": 2,
+        "overlap": true,
+        "remainingTicks": 250,
+        "capturedIds": [
+          "island-rival:livestock-1",
+          "island-rival:livestock-2"
+        ]
+      },
+      {
+        "species": "pig",
+        "file": "pig.json.gz",
+        "sha256": "eaf136babc24f712829ad51614c71c037274e73d906c1bb21049c843b1f78151",
+        "originalFile": "coupling-same-pig-5.json.gz",
+        "originalSha256": "b673d70428a96181b6cf0e7032baec8ef78462147002ed90a5521730a6e17d5e",
+        "seed": 5,
+        "overlap": true,
+        "remainingTicks": 375,
+        "capturedIds": [
+          "island-rival:livestock-1"
+        ]
+      },
+      {
+        "species": "sheep",
+        "file": "sheep.json.gz",
+        "sha256": "f75cc689bc1f29f6753cfef42d7a6428b1d82cc3f6a0b27de95c092b8278134b",
+        "originalFile": "coupling-different-goat-2.json.gz",
+        "originalSha256": "da74cc5b8d3b7fd0e4130e804050482403ff458a95f842147867decf4d114d13",
+        "seed": 2,
+        "overlap": false,
+        "remainingTicks": 250,
+        "capturedIds": [
+          "island-rival:livestock-1",
+          "island-rival:livestock-2"
+        ]
+      },
+      {
+        "species": "goat",
+        "file": "goat.json.gz",
+        "sha256": "5d800f5bbdf78e6d314c90762061319b8fc669981e237fa564d2b75b338b968d",
+        "originalFile": "coupling-different-cattle-2.json.gz",
+        "originalSha256": "e2d25b1ffedb8364ec5b696cf7d1e111d2c4eafe00b031157f81e1f9a97d899a",
+        "seed": 2,
+        "overlap": false,
+        "remainingTicks": 250,
+        "capturedIds": [
+          "island-rival:livestock-1",
+          "island-rival:livestock-2"
+        ]
+      },
+      {
+        "species": "goose",
+        "file": "goose.json.gz",
+        "sha256": "3e0b3983759dcb38ec366ee0fe3b8c8fede509ea9cf114207aa169b1d92bced1",
+        "originalFile": "coupling-different-cattle-4.json.gz",
+        "originalSha256": "455e4e7216ae0667797099ae1450526c73f15c550122393f737ad3d532a3e481",
+        "seed": 4,
+        "overlap": false,
+        "remainingTicks": 250,
+        "capturedIds": [
+          "island-rival:livestock-1",
+          "island-rival:livestock-2"
+        ]
+      }
+    ]
+  },
+  "rows": [
+    {
+      "species": "cattle",
+      "originalFile": "coupling-different-sheep-1.json.gz",
+      "checkpointSha256": "8bb5c3688ddafc8867cebf2e43eb60ef157681c7833060b76ea88398a3d15893",
+      "status": "PASS",
+      "result": {
+        "success": true,
+        "discovery": null,
+        "survivorIds": [
+          "founder-10"
+        ],
+        "casualtyIds": [
+          "founder-1"
+        ],
+        "food": 0,
+        "materials": 0,
+        "cattleIds": [
+          "island-rival:cattle-1"
+        ],
+        "personaIds": [],
+        "summary": "Raid completed."
+      },
+      "names": [
+        "Livestock 1",
+        "Livestock 2",
+        "Livestock 3",
+        "Livestock 4"
+      ],
+      "arrivedAt": {
+        "winter": 801,
+        "tick": 706
+      },
+      "assignedYard": "house-1",
+      "exactMidRaidLoad": true,
+      "referenceAnimalsStocksRngAndClocksMatch": true,
+      "donorContinues": true,
+      "receipts": [
+        {
+          "id": "island-rival:cattle-1",
+          "atReturn": {
+            "id": "island-rival:cattle-1",
+            "name": "Livestock 4",
+            "species": "cattle",
+            "speciesName": "Cattle",
+            "sex": "female",
+            "sexTerm": "Cow",
+            "birthWinter": 797,
+            "age": 4,
+            "stage": "Adult",
+            "parentIds": [],
+            "origin": "founding"
+          },
+          "currentBreedingAge": "within-window"
+        }
+      ]
+    },
+    {
+      "species": "chicken",
+      "originalFile": "coupling-same-chicken-2.json.gz",
+      "checkpointSha256": "ea05592eb7369c133c2d25af506d25744a7eb0387fb886d1ff6632b15c604f54",
+      "status": "PASS",
+      "result": {
+        "success": true,
+        "discovery": null,
+        "survivorIds": [
+          "founder-1",
+          "founder-10"
+        ],
+        "casualtyIds": [],
+        "food": 0,
+        "materials": 0,
+        "cattleIds": [
+          "island-rival:livestock-1",
+          "island-rival:livestock-2"
+        ],
+        "personaIds": [],
+        "summary": "Raid completed."
+      },
+      "names": [
+        "Livestock 1",
+        "Livestock 2",
+        "Livestock 3",
+        "Livestock 4",
+        "Livestock 5"
+      ],
+      "arrivedAt": {
+        "winter": 801,
+        "tick": 756
+      },
+      "assignedYard": "house-1",
+      "exactMidRaidLoad": true,
+      "referenceAnimalsStocksRngAndClocksMatch": true,
+      "donorContinues": true,
+      "receipts": [
+        {
+          "id": "island-rival:livestock-1",
+          "atReturn": {
+            "id": "island-rival:livestock-1",
+            "name": "Livestock 4",
+            "species": "chicken",
+            "speciesName": "Chicken",
+            "sex": "female",
+            "sexTerm": "Hen",
+            "birthWinter": 799,
+            "age": 2,
+            "stage": "Adult",
+            "parentIds": [],
+            "origin": "founding"
+          },
+          "currentBreedingAge": "within-window"
+        },
+        {
+          "id": "island-rival:livestock-2",
+          "atReturn": {
+            "id": "island-rival:livestock-2",
+            "name": "Livestock 5",
+            "species": "chicken",
+            "speciesName": "Chicken",
+            "sex": "female",
+            "sexTerm": "Hen",
+            "birthWinter": 799,
+            "age": 2,
+            "stage": "Adult",
+            "parentIds": [],
+            "origin": "founding"
+          },
+          "currentBreedingAge": "within-window"
+        }
+      ]
+    },
+    {
+      "species": "pig",
+      "originalFile": "coupling-same-pig-5.json.gz",
+      "checkpointSha256": "eaf136babc24f712829ad51614c71c037274e73d906c1bb21049c843b1f78151",
+      "status": "PASS",
+      "result": {
+        "success": true,
+        "discovery": null,
+        "survivorIds": [
+          "founder-10"
+        ],
+        "casualtyIds": [
+          "founder-1"
+        ],
+        "food": 0,
+        "materials": 0,
+        "cattleIds": [
+          "island-rival:livestock-1"
+        ],
+        "personaIds": [],
+        "summary": "Raid completed."
+      },
+      "names": [
+        "Livestock 1",
+        "Livestock 2",
+        "Livestock 3",
+        "Livestock 4"
+      ],
+      "arrivedAt": {
+        "winter": 802,
+        "tick": 706
+      },
+      "assignedYard": "house-2",
+      "exactMidRaidLoad": true,
+      "referenceAnimalsStocksRngAndClocksMatch": true,
+      "donorContinues": true,
+      "receipts": [
+        {
+          "id": "island-rival:livestock-1",
+          "atReturn": {
+            "id": "island-rival:livestock-1",
+            "name": "Livestock 4",
+            "species": "pig",
+            "speciesName": "Pig",
+            "sex": "female",
+            "sexTerm": "Sow",
+            "birthWinter": 798,
+            "age": 4,
+            "stage": "Adult",
+            "parentIds": [],
+            "origin": "founding"
+          },
+          "currentBreedingAge": "within-window"
+        }
+      ]
+    },
+    {
+      "species": "sheep",
+      "originalFile": "coupling-different-goat-2.json.gz",
+      "checkpointSha256": "f75cc689bc1f29f6753cfef42d7a6428b1d82cc3f6a0b27de95c092b8278134b",
+      "status": "PASS",
+      "result": {
+        "success": true,
+        "discovery": null,
+        "survivorIds": [
+          "founder-1",
+          "founder-10"
+        ],
+        "casualtyIds": [],
+        "food": 0,
+        "materials": 0,
+        "cattleIds": [
+          "island-rival:livestock-1",
+          "island-rival:livestock-2"
+        ],
+        "personaIds": [],
+        "summary": "Raid completed."
+      },
+      "names": [
+        "Livestock 1",
+        "Livestock 2",
+        "Livestock 3",
+        "Livestock 4",
+        "Livestock 5"
+      ],
+      "arrivedAt": {
+        "winter": 801,
+        "tick": 756
+      },
+      "assignedYard": "house-1",
+      "exactMidRaidLoad": true,
+      "referenceAnimalsStocksRngAndClocksMatch": true,
+      "donorContinues": true,
+      "receipts": [
+        {
+          "id": "island-rival:livestock-1",
+          "atReturn": {
+            "id": "island-rival:livestock-1",
+            "name": "Livestock 4",
+            "species": "sheep",
+            "speciesName": "Sheep",
+            "sex": "female",
+            "sexTerm": "Ewe",
+            "birthWinter": 798,
+            "age": 3,
+            "stage": "Adult",
+            "parentIds": [],
+            "origin": "founding"
+          },
+          "currentBreedingAge": "within-window"
+        },
+        {
+          "id": "island-rival:livestock-2",
+          "atReturn": {
+            "id": "island-rival:livestock-2",
+            "name": "Livestock 5",
+            "species": "sheep",
+            "speciesName": "Sheep",
+            "sex": "female",
+            "sexTerm": "Ewe",
+            "birthWinter": 798,
+            "age": 3,
+            "stage": "Adult",
+            "parentIds": [],
+            "origin": "founding"
+          },
+          "currentBreedingAge": "within-window"
+        }
+      ]
+    },
+    {
+      "species": "goat",
+      "originalFile": "coupling-different-cattle-2.json.gz",
+      "checkpointSha256": "5d800f5bbdf78e6d314c90762061319b8fc669981e237fa564d2b75b338b968d",
+      "status": "PASS",
+      "result": {
+        "success": true,
+        "discovery": null,
+        "survivorIds": [
+          "founder-1",
+          "founder-10"
+        ],
+        "casualtyIds": [],
+        "food": 0,
+        "materials": 0,
+        "cattleIds": [
+          "island-rival:livestock-1",
+          "island-rival:livestock-2"
+        ],
+        "personaIds": [],
+        "summary": "Raid completed."
+      },
+      "names": [
+        "Livestock 1",
+        "Livestock 2",
+        "Livestock 3",
+        "Livestock 4",
+        "Livestock 5"
+      ],
+      "arrivedAt": {
+        "winter": 801,
+        "tick": 756
+      },
+      "assignedYard": "house-1",
+      "exactMidRaidLoad": true,
+      "referenceAnimalsStocksRngAndClocksMatch": true,
+      "donorContinues": true,
+      "receipts": [
+        {
+          "id": "island-rival:livestock-1",
+          "atReturn": {
+            "id": "island-rival:livestock-1",
+            "name": "Livestock 4",
+            "species": "goat",
+            "speciesName": "Goat",
+            "sex": "female",
+            "sexTerm": "Doe",
+            "birthWinter": 798,
+            "age": 3,
+            "stage": "Adult",
+            "parentIds": [],
+            "origin": "founding"
+          },
+          "currentBreedingAge": "within-window"
+        },
+        {
+          "id": "island-rival:livestock-2",
+          "atReturn": {
+            "id": "island-rival:livestock-2",
+            "name": "Livestock 5",
+            "species": "goat",
+            "speciesName": "Goat",
+            "sex": "female",
+            "sexTerm": "Doe",
+            "birthWinter": 798,
+            "age": 3,
+            "stage": "Adult",
+            "parentIds": [],
+            "origin": "founding"
+          },
+          "currentBreedingAge": "within-window"
+        }
+      ]
+    },
+    {
+      "species": "goose",
+      "originalFile": "coupling-different-cattle-4.json.gz",
+      "checkpointSha256": "3e0b3983759dcb38ec366ee0fe3b8c8fede509ea9cf114207aa169b1d92bced1",
+      "status": "PASS",
+      "result": {
+        "success": true,
+        "discovery": null,
+        "survivorIds": [
+          "founder-1",
+          "founder-10"
+        ],
+        "casualtyIds": [],
+        "food": 0,
+        "materials": 0,
+        "cattleIds": [
+          "island-rival:livestock-1",
+          "island-rival:livestock-2"
+        ],
+        "personaIds": [],
+        "summary": "Raid completed."
+      },
+      "names": [
+        "Livestock 1",
+        "Livestock 2",
+        "Livestock 3",
+        "Livestock 4",
+        "Livestock 5",
+        "Livestock 6",
+        "Livestock 7"
+      ],
+      "arrivedAt": {
+        "winter": 801,
+        "tick": 756
+      },
+      "assignedYard": "house-1",
+      "exactMidRaidLoad": true,
+      "referenceAnimalsStocksRngAndClocksMatch": true,
+      "donorContinues": true,
+      "receipts": [
+        {
+          "id": "island-rival:livestock-1",
+          "atReturn": {
+            "id": "island-rival:livestock-1",
+            "name": "Livestock 6",
+            "species": "goose",
+            "speciesName": "Goose",
+            "sex": "female",
+            "sexTerm": "Goose",
+            "birthWinter": 799,
+            "age": 2,
+            "stage": "Adult",
+            "parentIds": [],
+            "origin": "founding"
+          },
+          "currentBreedingAge": "within-window"
+        },
+        {
+          "id": "island-rival:livestock-2",
+          "atReturn": {
+            "id": "island-rival:livestock-2",
+            "name": "Livestock 7",
+            "species": "goose",
+            "speciesName": "Goose",
+            "sex": "female",
+            "sexTerm": "Goose",
+            "birthWinter": 799,
+            "age": 2,
+            "stage": "Adult",
+            "parentIds": [],
+            "origin": "founding"
+          },
+          "currentBreedingAge": "within-window"
+        }
+      ]
+    }
+  ]
+}

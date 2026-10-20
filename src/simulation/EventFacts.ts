@@ -1,6 +1,7 @@
 import { housingName } from './HousingNames';
 import type { SimulationState } from './SimulationCore';
 import { personaAge } from './PersonaAge';
+import { livestockIdentity } from './LivestockNames';
 export type HousingResidents = {
     version: 1;
     householdIds: string[];
@@ -56,9 +57,20 @@ export function eventFacts(
         } : undefined);
     // Salvage/collapse capture before deletion; do not overwrite that snapshot afterwards.
     const housingNames = details.housingNames ?? (Object.keys(names).length > 1 ? names : undefined);
+    const animalIds = [details.livestockId, details.cattleId,
+        ...(Array.isArray(details.livestockIds) ? details.livestockIds : []),
+        ...(Array.isArray(details.cattleIds) ? details.cattleIds : [])]
+        .filter((id): id is string => typeof id === 'string');
+    const livestock = details.livestock ?? (state.landing?.livestock && animalIds.length ? {
+        version: 1, recordedClanId: state.clan.id,
+        animals: [...new Set(animalIds)].filter(id =>
+            state.landing?.cattle[id] || state.landing?.cattleArchive?.[id])
+            .map(id => livestockIdentity(state, id)),
+    } : undefined);
     return { ...details,
         ...(people.length ? { people } : {}),
         ...(housingNames ? { housingNames } : {}),
-        ...(housingResidents ? { housingResidents } : {})
+        ...(housingResidents ? { housingResidents } : {}),
+        ...(livestock ? { livestock } : {})
     };
 }

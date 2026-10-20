@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FjordSide · Livestock integration #220</title>
+  <link rel="stylesheet" href="/src/style.css">
+  <link rel="stylesheet" href="/src/fjord-play/fjord-play.css">
+  <link rel="stylesheet" href="/src/fjord-play/desktop-foundations.css">
+  <link rel="stylesheet" href="/src/fjord-play/fjord-interface.css">
+  <link rel="stylesheet" href="/src/fjord-play/mobile-horizon.css">
+  <style>
+    body.fjord-play { overflow: auto; background: #203638; color: #eee6ce; }
+    #qa-header { padding: 16px; font: 15px system-ui; }
+    #qa-header p { max-width: 80ch; }
+    #qa-header button, #qa-header select { min-height: 44px; margin: 3px; }
+    #fjord-play .fjord-stage { display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      height: auto; min-height: 600px; margin: 0 16px; overflow: visible; }
+    #expedition-panel, #entity-panel { padding: 16px; background: #172b2c; min-width: 0; }
+    #entity-panel button, #entity-panel select { max-width: 100%; min-height: 44px; }
+    #entity-panel p { overflow-wrap: anywhere; }
+    #entity-panel details { margin: 12px 0; }
+    #island-mission-panel { margin: 0; }
+    @media(max-width:700px) { #fjord-play .fjord-stage { grid-template-columns: 1fr; margin: 0 8px; } }
+  </style>
+</head>
+<body class="fjord-play">
+  <header id="qa-header">
+    <h1>Livestock integration · #220</h1>
+    <p>Six real saved raids from the frozen coupling evidence, continued by the current Core.
+      Donor ownership lasts until return. These retain their historical paid Explore packs;
+      new ordinary starts use eight Food. Cards and mission controls are the shipping components.</p>
+    <label>Saved raid <select id="qa-species">
+      <option value="goat">Goat</option><option value="sheep">Sheep</option><option value="pig">Pig</option>
+      <option value="cattle">Cattle</option><option value="chicken">Chicken</option><option value="goose">Goose</option>
+    </select></label>
+    <button id="qa-load">Reload checkpoint</button><button id="qa-finish">Complete current raid</button>
+    <button id="qa-fjord">Open real island 7 after its raid</button>
+    <p id="qa-proof" role="status">Loading checkpoint…</p>
+    <p>These cards support real assignment commands. Slaughter is disabled in this inspection page;
+      its normal confirmation can be tested in the full Fjord model campaigns.
+      <a href="../livestock-models/review.html">Models and full Goat/Pig/Sheep campaigns</a>.
+      Chicken/Goose meshes remain deferred. Island 18's Recon search limit remains open.</p>
+  </header>
+  <main id="fjord-play"><section class="fjord-stage">
+    <section id="expedition-panel"></section><section id="entity-panel" aria-label="Animal details"></section>
+  </section></main>
+  <script type="module">
+    import * as core from '/src/simulation/SimulationCore.ts';
+    import { GameplaySession } from '/src/gameplay-lab/GameplaySession.ts';
+    import { IslandMissionPanel } from '/src/fjord-play/IslandMissionPanel.ts';
+    import { SettlementPanel, panelCommand } from '/src/play/SettlementPanel.ts';
+    let session, panel, packet, selected;
+    const entity = document.querySelector('#entity-panel'), cards = new SettlementPanel();
+    function select(id) { selected = { kind: 'cattle', id }; render(); entity.scrollIntoView({block:'nearest'}); }
+    function render() {
+      const state = session.readSnapshot();
+      panel.refresh();
+      const latest = state.world.spatial.missions[packet.missionId];
+      document.querySelector('#qa-proof').textContent = `${latest.status} · ${Object.values(state.landing.cattle)
+        .filter(animal => animal.deathWinter === null).length} player-owned livestock · Clock paused`;
+      document.querySelector('#qa-finish').disabled = latest.status === 'Returned';
+      entity.innerHTML = selected ? cards.render(state, selected) : '<p>Select a received animal from the report after return.</p>';
+      for (const button of entity.querySelectorAll('[data-command]')) {
+        button.disabled = true; button.title = 'Use the full Fjord campaign for consequence confirmation.';
+      }
+    }
+    function command(action) { session.command(action); panel.committed(action); render(); }
+    async function load() {
+      const response = await fetch('./checkpoints/' + document.querySelector('#qa-species').value + '.json.gz');
+      if (!response.ok) throw new Error('Saved coupling checkpoint unavailable.');
+      const bytes = new Uint8Array(await response.arrayBuffer());
+      // Vite advertises Content-Encoding and the browser decodes automatically;
+      // plain static servers may serve the gzip bytes without that header.
+      packet = bytes[0] === 0x1f && bytes[1] === 0x8b ? await new Response(
+        new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).json() :
+        JSON.parse(new TextDecoder().decode(bytes));
+      panel?.dispose(); selected = undefined;
+      session = new GameplaySession();
+      session.loadJSON(core.serializeState(packet.checkpoint));
+      session.bindPhysicalWorld(packet.context.world, packet.context.worldId);
+      panel = new IslandMissionPanel(document.querySelector('#expedition-panel'), session, command,
+        ids => Object.fromEntries(ids.map(id => [id, {...packet.context.world.settlement.center}])),
+        () => {}, () => {}, () => {}, select);
+      render();
+    }
+    document.querySelector('#qa-load').onclick = load;
+    document.querySelector('#qa-species').onchange = load;
+    document.querySelector('#qa-finish').onclick = () => command({type:'AdvanceTicks', ticks:packet.remainingTicks});
+    entity.onclick = event => {
+      const button = event.target.closest('button');
+      if (!button || button.disabled) return;
+      if (button.dataset.select) { selected = {kind:button.dataset.kind, id:button.dataset.select}; render(); return; }
+      const action = panelCommand(button, selected, id => entity.querySelector('#' + id)?.value ?? '');
+      if (action) command(action);
+    };
+    document.querySelector('#qa-fjord').onclick = async () => {
+      const response = await fetch('./islands/7-returned-campaign.json');
+      if (!response.ok) return;
+      sessionStorage.setItem('pillagers.fjord-play.active.v1', await response.text());
+      location.assign('/fjord-play');
+    };
+    load().catch(error => { document.querySelector('#qa-proof').textContent = error.message; });
+  </script>
+</body>
+</html>

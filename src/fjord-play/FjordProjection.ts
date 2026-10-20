@@ -2,6 +2,8 @@ import type { HumanProfile } from '../characters/UniversalHumanProfile';
 import { spatialMemberPosition } from '../simulation/SpatialExpeditions';
 import { campaignIslandPlan } from './CampaignIsland';
 import { settlementCampfire } from './SettlementCampfire';
+import { livestockAsset } from '../characters/LivestockPresentation';
+import { animalProfile } from '../simulation/LivestockSpecies';
 export { settlementCampfire } from './SettlementCampfire';
 import { housingName } from '../simulation/HousingNames';
 import { projectFjordCalendar } from './FjordCalendar';
@@ -62,6 +64,8 @@ export interface FjordEntity {
         workEligible?: boolean;
         workHomeId?: string;
         stage?: string;
+        species?: string;
+        sexTerm?: string;
         sex?: string;
         age?: number;
         level?: number;
@@ -135,6 +139,7 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
         previous.geographyId !== geographyIdentity(world) || previous.version !== 'fjord-layout-v2')
         throw new Error('Campaign, geography and presentation identities do not match.');
     const layout = structuredClone(previous);
+    const livestockDeaths: { id: string; position: Point2 }[] = [];
     // Historical identities remain in Core, but no longer reserve outdoor render space.
     for (const key of Object.keys(layout.points)) {
         const identity = key.split('@')[0];
@@ -142,7 +147,12 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
         const kind = identity.slice(0, separator), id = identity.slice(separator + 1);
         const living = kind === 'persona' ? state.personas[id]?.deathWinter === null && !personaAway(state, id) :
             kind === 'cattle' ? state.landing?.cattle[id]?.deathWinter === null : false;
-        if (!living) delete layout.points[key];
+        if (!living) {
+            const animal = kind === 'cattle' ? state.landing?.cattle[id] : undefined;
+            if (animal && animal.deathWinter !== null)
+                livestockDeaths.push({ id, position: { x: layout.points[key].x, z: layout.points[key].z } });
+            delete layout.points[key];
+        }
     }
     // Transfer tent parcels before removing obsolete reservations so construction stays in place.
     for (const building of Object.values(state.buildings)) {
@@ -323,15 +333,20 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
         }
     }
     const livingCattle = Object.values(state.landing?.cattle ?? {})
-        .filter(c => c.deathWinter === null).sort((a, b) => a.id.localeCompare(b.id));
+        .filter(c => c.deathWinter === null)
+        .sort((a, b) => a.id.localeCompare(b.id));
     for (const [index, c] of livingCattle.entries()) {
         const view = inspectCattle(state, c.id);
+        const asset = livestockAsset(c.species ?? 'cattle', c.sex, view.stage);
+        if (!asset) continue;
         const assigned = c.farmyardId ? buildingPlots.get(c.farmyardId) : null;
         const level = c.farmyardId ? state.mechanics?.buildings[c.farmyardId]?.upgradeLevel ?? 0 : 0;
         const herd = livingCattle.filter(member => member.farmyardId === c.farmyardId);
         const rank = herd.findIndex(member => member.id === c.id);
         const capacity = state.landing!.config.farmyardCapacity;
-        const grazingZone = assigned ? rank < capacity ? 'yard' : 'overflow' : 'exposed';
+        const occupied = herd.slice(0, rank + 1).reduce((sum, animal) =>
+            sum + animalProfile(state, animal).capacityWeightBps, 0);
+        const grazingZone = assigned ? occupied <= capacity * 10000 ? 'yard' : 'overflow' : 'exposed';
         const key = 'cattle:' + c.id + '@' + (c.farmyardId ?? 'outside') + '@' + level + '@' + grazingZone;
         const x = assigned ? assigned.x - (grazingZone === 'yard' ? 4.8 : 10) : center.x - 7 + index * 2;
         const z = assigned ? assigned.z - 3.9 + rank % 4 * 2.6 : center.z - 3;
@@ -345,9 +360,9 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
         const point = allocatePoint(key, { x, z }, assigned ?? undefined, {
             halfWidth: widths[Math.min(level, 3)] + .7, halfDepth: depths[Math.min(level, 3)] + .7
         }, permitted);
-        add('cattle', c.id, c.id, view.stage === 'Young' ? 'baby' :
-            view.stage === 'Young Adult' ? 'young-adult' : c.sex === 'female' ? 'adult-female' : 'adult-male', point,
-            { living: true, sex: c.sex, age: view.age, stage: view.stage, assignment: c.farmyardId,
+        add('cattle', c.id, view.name, asset, point,
+            { living: true, sex: c.sex, species: view.species, sexTerm: view.sexTerm,
+                age: view.age, stage: view.stage, assignment: c.farmyardId,
                 sheltered: view.sheltered, overcrowding: view.overcrowding, parentIds: [...view.parentIds], grazingZone });
     }
     for (const ship of site ? [] : Object.values(state.landing?.longships ?? {}))
@@ -364,7 +379,7 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
         rain: from.name === 'Autumn' ? 1 - mix : to.name === 'Autumn' ? mix : 0
     };
     return { calendar, precipitation,
-        campfire, entities, layout, diagnostics, ground, time: { ...state.time }, stocks: { ...state.stocks },
+        campfire, entities, livestockDeaths, layout, diagnostics, ground, time: { ...state.time }, stocks: { ...state.stocks },
         weather: inspectWeather(state),
         weatherVisual: projectFjordWeather(inspectWeather(state).enabled ? inspectWeather(state).class : null) };
 }

@@ -1,6 +1,7 @@
 import { applyCommand, inspectBuilding, landingSummary, occupationAptitude } from '../simulation/SimulationCore';
 import type { Occupation, SimulationCommand, SimulationState } from '../simulation/SimulationCore';
 import { commandAvailability } from '../play/SharedSettlement';
+import { animalProfile } from '../simulation/LivestockSpecies';
 
 export interface WorkDraft {
     householdId: string;
@@ -28,12 +29,18 @@ export function proposeWork(state: SimulationState, householdId: string,
     const residence = home.residenceId ? state.residences[home.residenceId] : undefined;
     const yard = residence?.buildingId && state.landing ?
         landingSummary(state).farmyards.find(y => y.id === residence.buildingId) : undefined;
-    const freeCapacity = Math.max(0, (yard?.capacity ?? state.landing?.config.farmyardCapacity ?? 0) - (yard?.occupants ?? 0));
+    let freeUnits = Math.max(0, Math.round(((yard?.capacity ?? state.landing?.config.farmyardCapacity ?? 0) -
+        (yard?.occupancy ?? 0)) * 10000));
+    const suggested = Object.values(state.landing?.cattle ?? {}).filter(animal => {
+        if (animal.deathWinter !== null || animal.farmyardId !== null) return false;
+        const weight = animalProfile(state, animal).capacityWeightBps;
+        if (weight > freeUnits) return false;
+        freeUnits -= weight;
+        return true;
+    });
     return { householdId, occupation, kind, workerId: workCandidates(state, householdId, occupation)[0] ?? '',
         buildHouse: residence?.kind !== 'house', specialize: true,
-        cattleIds: kind === 'farmyard' ? Object.values(state.landing?.cattle ?? {})
-            .filter(c => c.deathWinter === null && c.farmyardId === null)
-            .slice(0, freeCapacity).map(c => c.id) : [] };
+        cattleIds: kind === 'farmyard' ? suggested.map(animal => animal.id) : [] };
 }
 
 /** Replay the existing authoritative commands without modifying the live campaign. */

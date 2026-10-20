@@ -1,5 +1,7 @@
 import { cardinal, ordinal } from './NarrativeTime';
 import { housingName } from '../simulation/HousingNames';
+import { animalProfile, animalSpecies, livestockSpeciesIds, type LivestockSpecies } from '../simulation/LivestockSpecies';
+import { livestockName } from '../simulation/LivestockNames';
 import { bookLedger } from './BookLedger';
 import { projectChronicle } from './Chronicle';
 import { planNarrative } from './NarrativePlan';
@@ -16,7 +18,8 @@ export type OpeningFacts = {
     livestock?: {
         youngAdultAge: number;
         adultAge: number;
-        animals: { id: string; sex: 'female' | 'male'; birthWinter: number }[];
+        animals: { id: string; sex: 'female' | 'male'; birthWinter: number;
+            species?: LivestockSpecies; name?: string; youngAdultAge?: number; adultAge?: number }[];
     };
     recordedReceipts?: { eventId: string; winter: number; resource: 'materials'; units: number }[];
     residences?: { id: string; kind: 'house' | 'tent' }[];
@@ -80,7 +83,10 @@ function livestockFacts(state: SimulationState): OpeningFacts['livestock'] {
         youngAdultAge: state.landing.config.cattleYoungAdultAge,
         adultAge: state.landing.config.cattleAdultAge,
         animals: Object.values({ ...state.landing.cattleArchive, ...state.landing.cattle })
-            .map(animal => ({ id: animal.id, sex: animal.sex, birthWinter: animal.birthWinter }))
+            .map(animal => ({ id: animal.id, sex: animal.sex, birthWinter: animal.birthWinter,
+                ...(state.landing?.livestock ? { species: animalSpecies(animal), name: livestockName(state, animal.id),
+                    youngAdultAge: animalProfile(state, animal).youngAdultAge,
+                    adultAge: animalProfile(state, animal).adultAge } : {}) }))
     };
 }
 function validFacts(facts: OpeningFacts): boolean {
@@ -93,7 +99,11 @@ function validFacts(facts: OpeningFacts): boolean {
         facts.livestock.youngAdultAge < 0 || !Number.isSafeInteger(facts.livestock.adultAge) ||
         facts.livestock.adultAge < facts.livestock.youngAdultAge || !Array.isArray(facts.livestock.animals) ||
         facts.livestock.animals.some(animal => !animal || typeof animal.id !== 'string' ||
-            !['female', 'male'].includes(animal.sex) || !Number.isSafeInteger(animal.birthWinter)))) return false;
+            !['female', 'male'].includes(animal.sex) || !Number.isSafeInteger(animal.birthWinter) ||
+            animal.species !== undefined && (!livestockSpeciesIds.includes(animal.species) ||
+                typeof animal.name !== 'string' || !Number.isSafeInteger(animal.youngAdultAge) ||
+                !Number.isSafeInteger(animal.adultAge) || animal.youngAdultAge! < 0 ||
+                animal.adultAge! < animal.youngAdultAge!)))) return false;
     if (facts.recordedReceipts && (!Array.isArray(facts.recordedReceipts) ||
         facts.recordedReceipts.some(receipt => !receipt || typeof receipt.eventId !== 'string' ||
             !Number.isSafeInteger(receipt.winter) || receipt.resource !== 'materials' ||
@@ -220,7 +230,8 @@ export class ClanBook {
                 period: { from: { ...cursor.time }, through: { ...state.time } },
                 livestock: livestockFacts(state),
                 founders: [], households: [], cattle: [], longships: [], stocks: { ...state.stocks }, ledger,
-                demographics: events.filter(e => ['ChildBorn', 'PersonaDied', 'CattleBorn', 'CattleDied', 'CattleSlaughtered'].includes(e.type))
+                demographics: events.filter(e => ['ChildBorn', 'PersonaDied', 'CattleBorn', 'CattleDied', 'CattleSlaughtered',
+                    'LivestockBorn', 'LivestockDied', 'LivestockSlaughtered'].includes(e.type))
                     .map(e => ({ eventId: e.id, type: e.type, time: { ...e.time }, details: structuredClone(e.details ?? {}),
                         ...(e.personaId ? { personaId: e.personaId } : {}) })) }
         });

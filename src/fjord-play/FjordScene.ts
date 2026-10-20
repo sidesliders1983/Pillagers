@@ -397,7 +397,7 @@ export function createFjordScene(options: {
                     dressing!.setSeason(view.calendar.visualProgress);
                     canvas.dataset.dressing = JSON.stringify(dressing!.inspect());
                     layer!.prepareExpeditions(state, campaign.blueprint, host.tickIntervalSeconds);
-                    await layer!.sync(view.entities, host.loading ? yieldForInput : undefined, current);
+                    await layer!.sync(view.entities, host.loading ? yieldForInput : undefined, current, view.livestockDeaths);
                     if (!current()) return;
                     campfireEffect!.setLit(inspectCampfire(state).lit);
                     layer!.setCampfireHeat(campfireEffect!.inspect().heat);
@@ -502,6 +502,7 @@ export function createFjordScene(options: {
         productionLabels.setAnchors(layer!.productionAnchors());
         if (performance.now() - lastDiagnostics > 500) {
             canvas.dataset.rendered = JSON.stringify(layer!.describe());
+            canvas.dataset.dyingLivestock = JSON.stringify(layer!.describeDeaths());
             if (import.meta.env.DEV && query.has('debugWildlife')) {
                 canvas.dataset.wildlife = JSON.stringify(wildlife?.inspect());
             }

@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "species": "pig",
+  "variant": "baby",
+  "file": "pig-baby.glb",
+  "bytes": 407764,
+  "sha256": "f45d0753c75fc0aea98b55c2200243e3f545ac0d7a09eecc104c8472dcbda33e",
+  "sourceFile": "baby-pig.glb",
+  "sourceSha256": "f7449164e74571d9ab4ae30effd6ac1081cd93637fac9faa7c27032bf0a97649",
+  "animationSourceSha256": "f7449164e74571d9ab4ae30effd6ac1081cd93637fac9faa7c27032bf0a97649",
+  "triangles": 2808,
+  "joints": 27,
+  "height": 0.3218390804597701,
+  "withersHeightM": 0.28,
+  "walkSpeedMps": 0.1423864744191779,
+  "walkCycleSeconds": 1,
+  "clips": {
+    "Idle": {
+      "duration": 6,
+      "loop": true,
+      "surfaceMinY": 0.00007672410407529289,
+      "surfaceMaxY": 0.003326513656246646
+    },
+    "Walk": {
+      "duration": 1,
+      "loop": true,
+      "surfaceMinY": 0.00006752095801092825,
+      "surfaceMaxY": 0.00332195275856309
+    },
+    "Graze": {
+      "duration": 12,
+      "loop": true,
+      "surfaceMinY": 0.00007636343722006278,
+      "surfaceMaxY": 0.003321952833477186
+    },
+    "Rest": {
+      "duration": 10,
+      "loop": true,
+      "surfaceMinY": 0.00007636343453801564,
+      "surfaceMaxY": 0.003321952833477186
+    },
+    "HumanInteraction": {
+      "duration": 6,
+      "loop": true,
+      "surfaceMinY": 0.00007672410407529289,
+      "surfaceMaxY": 0.0033423118376993883
+    },
+    "Death": {
+      "duration": 2.4,
+      "loop": false,
+      "surfaceMinY": 0.00007636344663609211,
+      "surfaceMaxY": 0.0036190900068249162
+    }
+  },
+  "authoring": "Baked glTF channels on supplied skin",
+  "posture": "Source lift order and cycle duration; upright bind trunk; baked planted-hoof IK; no root travel"
+}

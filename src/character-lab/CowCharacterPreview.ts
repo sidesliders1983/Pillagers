@@ -1,5 +1,5 @@
 import { cattleVariants as COWS } from '../characters/CattlePresentation';
-import {AnimationAction,AnimationMixer,Color,DirectionalLight,HemisphereLight,Mesh,MOUSE,PerspectiveCamera,Scene} from 'three';
+import {AnimationAction,AnimationMixer,LoopOnce,LoopRepeat,Color,DirectionalLight,HemisphereLight,Mesh,MOUSE,PerspectiveCamera,Scene} from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
@@ -10,7 +10,7 @@ import {meshyHumanFactory,MeshyHuman} from '../characters/MeshyHuman';
 import {CharacterLabUI,LabAction} from './CharacterLabUI';
 import {PreviewGround} from './PreviewGround';
 
-type Clip='Idle'|'Graze'|'Walk'|'HumanInteraction';
+type Clip='Idle'|'Graze'|'Walk'|'HumanInteraction'|'Death';
 
 type Variant=keyof typeof COWS;
 const requestedVariant=new URLSearchParams(location.search).get('variant');
@@ -48,7 +48,7 @@ export class CowCharacterPreview {
   (document.querySelector('#lab-character-type') as HTMLSelectElement).value='cow';
   const sidebar=document.querySelector<HTMLElement>('.lab-controls')!;
   const status=document.querySelector('#lab-status')!;
-  sidebar.innerHTML='<div class="lab-section-heading"><h2>01 <span>'+this.cow.label+'</span></h2><span class="lab-badge">PROTOTYPE</span></div><label class="lab-note" for="lab-cow-variant">Cow variant</label><select id="lab-cow-variant">'+Object.entries(COWS).map(([id,cow])=>'<option value="'+id+'">'+cow.label+'</option>').join('')+'</select><p class="lab-note">Four authored animations on each original textured cow. Select an animation below the preview.</p><div class="lab-slider"><label for="lab-cow-speed">Playback speed <output id="lab-cow-speed-value">1.00×</output></label><input id="lab-cow-speed" type="range" min="0.25" max="2" step="0.05" value="1"></div><p class="lab-note">The ground follows the authored walking pace so hoof contact can be inspected. Cow withers: '+this.cow.withers.toFixed(2)+' m. Reference human: 1.65 m.</p><label class="lab-checkbox"><input id="lab-cow-human" type="checkbox" checked>Show human during interaction</label><p class="lab-note" id="lab-cow-description"></p>';
+  sidebar.innerHTML='<div class="lab-section-heading"><h2>01 <span>'+this.cow.label+'</span></h2><span class="lab-badge">PROTOTYPE</span></div><label class="lab-note" for="lab-cow-variant">Cow variant</label><select id="lab-cow-variant">'+Object.entries(COWS).map(([id,cow])=>'<option value="'+id+'">'+cow.label+'</option>').join('')+'</select><p class="lab-note">Four existing activities plus a one-shot Death animation on each textured cow. Select an animation below the preview.</p><div class="lab-slider"><label for="lab-cow-speed">Playback speed <output id="lab-cow-speed-value">1.00×</output></label><input id="lab-cow-speed" type="range" min="0.25" max="2" step="0.05" value="1"></div><p class="lab-note">The ground follows the authored walking pace so hoof contact can be inspected. Cow withers: '+this.cow.withers.toFixed(2)+' m. Reference human: 1.65 m.</p><label class="lab-checkbox"><input id="lab-cow-human" type="checkbox" checked>Show human during interaction</label><p class="lab-note" id="lab-cow-description"></p>';
   const variantChoice=document.querySelector<HTMLSelectElement>('#lab-cow-variant')!;variantChoice.value=this.variant;
   variantChoice.addEventListener('change',()=>{const url=new URL(location.href);url.searchParams.set('variant',variantChoice.value);url.searchParams.set('animation',this.clip);location.href=url.pathname+url.search+url.hash;});
   sidebar.append(status);
@@ -62,7 +62,7 @@ export class CowCharacterPreview {
   document.querySelector('#lab-current-label')!.textContent=this.cow.label.toUpperCase();
   const source=document.querySelector<HTMLSelectElement>('#lab-body-source')!;
   source.replaceChildren(new Option('Meshy · '+this.cow.label+' · textured','cow'));source.disabled=true;
-  document.querySelector('#lab-source-status')!.textContent='Original geometry and skin weights. Four authored bone animations.';
+  document.querySelector('#lab-source-status')!.textContent='Original geometry and skin weights. Five authored bone animations.';
   this.canvas=document.querySelector<HTMLCanvasElement>('#lab-preview')!;
   this.canvas.setAttribute('aria-label','Animated '+this.cow.label.toLowerCase()+'. Right drag to rotate, scroll to zoom.');
   this.canvas.dataset.variant=this.variant;
@@ -99,10 +99,10 @@ export class CowCharacterPreview {
    gltf.scene.traverse(object=>{if(object instanceof Mesh){object.castShadow=true;object.receiveShadow=true;}});
    this.scene.add(gltf.scene);this.mixer=new AnimationMixer(gltf.scene);
    for(const clip of gltf.animations)this.actions.set(clip.name as Clip,this.mixer.clipAction(clip));
-   const choices=[['Idle','Standing'],['Graze','Grazing'],['Walk','Walking'],['HumanInteraction','Human interaction']] as const;
+   const choices=[['Idle','Standing'],['Graze','Grazing'],['Walk','Walking'],['HumanInteraction','Human interaction'],['Death','Death']] as const;
    for(const [name] of choices)if(!this.actions.has(name))throw new Error('Missing animation: '+name);
    document.querySelector<HTMLSelectElement>('#lab-animation')!.replaceChildren(...choices.map(([name,label])=>new Option(label,name)));
-   document.querySelector('#lab-dimensions')!.innerHTML='<div><span>COW TRIANGLES</span><strong>'+this.manifest.triangles.toLocaleString()+'</strong></div><div><span>BONES</span><strong>'+this.manifest.joints+'</strong></div><div><span>ANIMATIONS</span><strong>4</strong></div><div><span>RUNTIME ASSET</span><strong>'+(this.manifest.bytes/1048576).toFixed(2)+' <small>MiB</small></strong></div>';
+   document.querySelector('#lab-dimensions')!.innerHTML='<div><span>COW TRIANGLES</span><strong>'+this.manifest.triangles.toLocaleString()+'</strong></div><div><span>BONES</span><strong>'+this.manifest.joints+'</strong></div><div><span>ANIMATIONS</span><strong>5</strong></div><div><span>RUNTIME ASSET</span><strong>'+(this.manifest.bytes/1048576).toFixed(2)+' <small>MiB</small></strong></div>';
    const requestedClip=new URLSearchParams(location.search).get('animation');
    this.play(this.actions.has(requestedClip as Clip)?requestedClip as Clip:'Idle');this.canvas.dataset.ready='true';this.canvas.dataset.bodySource='cow';this.canvas.dataset.withersHeight=String(this.manifest.withersHeightM);
   }catch(error){this.ui.status((error as Error).message,true);console.error(error);}
@@ -136,10 +136,10 @@ export class CowCharacterPreview {
  }
  private play(clip:Clip){
   if(!this.mixer||!this.actions.has(clip))return;
-  this.mixer.stopAllAction();this.clip=clip;this.action=this.actions.get(clip)!;this.action.reset().play();this.mixer.update(0);this.ground.sample(0);this.paused=false;
+  this.mixer.stopAllAction();this.clip=clip;this.action=this.actions.get(clip)!;this.action.reset().setLoop(clip==='Death'?LoopOnce:LoopRepeat,clip==='Death'?1:Infinity);this.action.clampWhenFinished=clip==='Death';this.action.play();this.mixer.update(0);this.ground.sample(0);this.paused=false;
   this.time.max=String(this.action.getClip().duration);
   (document.querySelector('#lab-animation') as HTMLSelectElement).value=clip;this.canvas.dataset.animation=clip;this.setCamera(this.view);
-  const descriptions:Record<Clip,string>={Idle:this.variant==='young-adult'?'Quiet standing with subtle breathing and tail movement.':'Quiet standing with subtle breathing, ears and tail.',Graze:'Head lowers to a gentle grazing pose with subtle shoulder and head turns, then lifts.',Walk:'Four-beat walk. The moving ground follows the authored '+this.manifest.walkSpeedMps.toFixed(2)+' m/s pace.',HumanInteraction:'Attentive head lift with gentle up-and-down movement toward a human.'};
+  const descriptions:Record<Clip,string>={Death:'Falls onto its side once and holds the final pose. The Fjord scene then fades the body away.',Idle:this.variant==='young-adult'?'Quiet standing with subtle breathing and tail movement.':'Quiet standing with subtle breathing, ears and tail.',Graze:'Head lowers to a gentle grazing pose with subtle shoulder and head turns, then lifts.',Walk:'Four-beat walk. The moving ground follows the authored '+this.manifest.walkSpeedMps.toFixed(2)+' m/s pace.',HumanInteraction:'Attentive head lift with gentle up-and-down movement toward a human.'};
   document.querySelector('#lab-cow-description')!.textContent=descriptions[clip];this.report();
   if(this.human)this.human.root.visible=this.showHuman();
   if(clip==='HumanInteraction')void this.ensureHuman();

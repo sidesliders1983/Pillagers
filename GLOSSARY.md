@@ -46,26 +46,29 @@ _Avoid_: Family
 
 **Longship**: A persistent clan vessel enabling future maritime expeditions. Salvaging it permanently exchanges the vessel for Materials.
 
-**Cattle**: Individually identified livestock with sex, birth Winter and an origin; their identity remains after death. Cows supply ongoing Food; cows and bulls both consume Food.
+**Livestock**: Individually identified domestic animals: cattle, chickens, pigs, sheep, goats and geese. Their sex, parentage, origin and history remain meaningful after death or departure.
 
-**Farmyard**: The function of a permanent household home while at least one living resident has the farmer occupation. Individually assigned cattle gain sheltered output. The function disappears when the last farmer leaves; cattle then become unassigned. Tents never have this function.
+**Livestock designation**: A stable local title such as Livestock 1, unique within the clan. A new arrival does not take another animal’s former title; species and sex are separate from the designation.
 
-**Overcrowding**: The number of living cattle above a Farmyard's shelter capacity. Capacity is a soft cap: excess cattle remain allowed, with increased annual mortality risk.
+**Cattle**: One livestock species, whose mature females are cows and mature males are bulls. Cows supply ongoing Food; cows and bulls both consume Food.
+
+**Farmyard**: The function of a permanent household home while at least one living resident has the farmer occupation. Individually assigned livestock gain sheltered output. The function disappears when the last farmer leaves; livestock then become unassigned. Tents never have this function.
+
+**Overcrowding**: Living livestock occupancy above a Farmyard’s soft shelter capacity, using saved species weights. One cattle space equals 10,000 occupancy units. Excess animals remain allowed, with species-configured annual mortality risk.
 
 **Natural mortality**: The age-dependent chance that a living persona dies during a Winter transition.
 
 **Deceased persona**: A person whose life has ended but whose identity, kinship and history remain part of the clan.
 
-**Cattle herd**: The living cattle assigned to one Farmyard, or all unassigned cattle together outside. Breeding requires an eligible cow and bull in the same herd; a calf inherits its mother’s assignment.
+**Livestock herd**: The living livestock assigned to one Farmyard, or all unassigned livestock together outside. Breeding requires an eligible male and female of the same species in the same herd; their young inherit the mother’s assignment.
 
-**Cattle life stage**: Age-derived presentation: Young before one Winter, Young Adult from one to under two, and Adult from two. Birth and death Winters preserve continuous age independently of presentation.
+**Cattle life stage**: Age-derived presentation: Young before one Winter, Young Adult from one to under three, and Adult from three in a new campaign. Earlier campaigns retain their own maturity ages.
 
 **Cattle calving interval**: The minimum number of Winters between one cow’s births. Each birth retains its mother and father, including when those parents later die.
 
 **Winter weather**: A region's annual conditions, classified as Mild, Normal, Harsh or Severe and revealed before that Winter's work and final reckoning.
 
 **Weather exposure**: The effects of a Winter's conditions on residents and cattle that lack effective shelter.
-**Overcrowding**: The number of living cattle above a Farmyard's shelter capacity. Capacity is a soft cap: excess cattle remain allowed, with increased mortality risk when livestock mortality is introduced.
 
 **Clan Chronicle**: A readable account of the clan’s recorded history, grouped by Winter. It describes established facts without adding motives, emotions or unrecorded causes.
 

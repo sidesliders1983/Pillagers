@@ -9,6 +9,8 @@ import type { SelectionMarker } from '../play/SelectionPresentation';
 import { Box3, Camera, DoubleSide, Group, Mesh, MeshBasicMaterial, Object3D, Raycaster, RingGeometry, SkinnedMesh, Vector2, Vector3 } from 'three';
 import { FjordModels } from './FjordModels';
 import type { FjordEntity } from './FjordProjection';
+import { livestockPresentation } from '../characters/LivestockPresentation';
+import type { LivestockDeath } from './LivestockDeath';
 
 interface YardFloor {
     yard: Object3D;
@@ -30,6 +32,7 @@ export class FjordEntities {
         boundsSignature?: string;
         yardFloor?: YardFloor;
     }>();
+    private deaths = new Map<string, { model: Object3D; presentation: LivestockDeath }>();
     private expeditionSurface?: TerrainSurface;
     private expeditionWorld?: WorldBlueprint;
     private expeditionFrames = new Map<string, { mission: SpatialMission; from: number; elapsed: number; duration: number }>();
@@ -129,14 +132,23 @@ export class FjordEntities {
         this.root.userData.markers = descriptions;
         this.root.userData.selection = descriptions.find(marker => marker.role === 'selected') ?? null;
     }
-    async sync(entities: readonly FjordEntity[], yieldControl?: () => Promise<void>, current = () => true) {
+    async sync(entities: readonly FjordEntity[], yieldControl?: () => Promise<void>, current = () => true,
+        livestockDeaths: readonly { id: string }[] = []) {
         if (this.disposed || !current()) return;
         const visible = entities.filter(e => e.transform !== null);
         const wanted = new Set(visible.map(e => e.selectionKey));
+        const confirmedDeaths = new Set(livestockDeaths.map(fact => fact.id));
+        for (const key of this.deaths.keys()) if (wanted.has(key)) this.finishDeath(key);
         for (const [key, entry] of this.entries)
             if (!wanted.has(key)) {
                 entry.season?.dispose();
-                this.remove(entry.model);
+                const facts = entry.model.userData.canonical;
+                const death = facts?.kind === 'cattle' && confirmedDeaths.has(facts.id)
+                    ? this.models.beginDeath(entry.model) : undefined;
+                if (death) {
+                    delete entry.model.userData.canonical;
+                    this.deaths.set(key, { model: entry.model, presentation: death });
+                } else this.remove(entry.model);
                 this.entries.delete(key);
             }
         for (const entity of visible) {
@@ -285,13 +297,16 @@ export class FjordEntities {
                 };
                 this.yardSamplers.set(canonical.assignment, sampler);
             }
-            const clearance = canonical.stage === 'Young' ? .5 :
-                canonical.stage === 'Young Adult' ? .7 : .9;
+            const clearance = livestockPresentation(entry.model.userData.asset)?.radius ?? .9;
             const sample = sampler.sample;
             motion.setYardSurface(key, (x, z) => sample(x, z, clearance), yardVersion + ':' + clearance);
         }
     }
     advance(motion: LivingWorldController, delta: number, running: boolean) {
+        for (const [key, death] of this.deaths) {
+            death.presentation.advance(delta, running);
+            if (death.presentation.inspect().complete) this.finishDeath(key);
+        }
         for (const frame of this.expeditionFrames.values()) frame.elapsed += running ? delta : 0;
         for (const entry of this.entries.values()) {
             const facts = entry.model.userData.canonical;
@@ -341,6 +356,21 @@ export class FjordEntities {
             })(),
         }));
     }
+    retainVisibleDeaths(visible: (x: number, z: number) => boolean) {
+        for (const [key, death] of this.deaths)
+            if (!visible(death.model.position.x, death.model.position.z)) this.finishDeath(key);
+    }
+    describeDeaths() {
+        return [...this.deaths].map(([key, death]) => ({ key, position: death.model.position.toArray(),
+            ...death.presentation.inspect() }));
+    }
+    private finishDeath(key: string) {
+        const death = this.deaths.get(key);
+        if (!death) return;
+        death.presentation.dispose();
+        this.remove(death.model);
+        this.deaths.delete(key);
+    }
     private remove(model: Object3D) {
         model.removeFromParent();
         if (this.models.release(model)) return;
@@ -351,6 +381,7 @@ export class FjordEntities {
     }
     dispose() {
         this.disposed = true;
+        for (const key of this.deaths.keys()) this.finishDeath(key);
         for (const entry of this.entries.values()) {
             entry.season?.dispose();
             this.remove(entry.model);

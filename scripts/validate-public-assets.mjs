@@ -33,6 +33,14 @@ for (const variant of ['adult-female', 'adult-male', 'baby', 'young-adult']) {
     await verifyEntry(directory, await json(directory + '/manifest.json'));
 }
 
+for (const species of ['goat', 'pig', 'sheep']) {
+    const variants = ['baby', 'adult-female', 'adult-male'];
+    for (const variant of variants) {
+        const directory = 'game-assets/livestock/' + species + '/' + variant;
+        await verifyEntry(directory, await json(directory + '/manifest.json'));
+    }
+}
+
 const wildlife = await json('wildlife/manifest.json');
 for (const entry of wildlife.entries) await verifyEntry('wildlife', entry);
 

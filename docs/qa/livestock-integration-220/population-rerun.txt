@@ -1,0 +1,22 @@
+✔ new default player campaigns agree on 15 Food without retuning CPU starts or founder assets (101.7197ms)
+✔ Lab and shared game use the new default after import, while saved-rule restarts retain explicit Food (3511.5817ms)
+✔ annual diagnostic output observes real decisions without changing Core events, RNG or save/load (919.2872ms)
+✔ zero Food is recorded as unmet cattle need but does not currently block unassigned breeding (680.3463ms)
+✔ annual cattle exposure uses each outgoing weather profile once, with soft-cap shelter and disabled weather (1448.0793ms)
+✔ last farmer death exposes cattle before the same mortality boundary and dead cattle stop eating and producing (680.2527ms)
+✔ well-fed mothers can have a third and fourth child while own care and two complete cooldown Winters remain distinct (81.5278ms)
+✔ paired opening runs retain founder identity, exact stock accounting and replayable annual outcomes (2855.9781ms)
+✔ restarting a new 15-Food player campaign preserves separately configured CPU opening rules (23.505ms)
+✔ human-only reserve experiment allows a birth that the cattle-inclusive gate blocks without changing saved defaults (1293.4663ms)
+✔ mortality proposal increases adult age and exposure risk while retaining child natural mortality and the old reserve gate (696.9449ms)
+✔ feeding and yard-space proposals block only new breeding; existing cattle are never capped or culled (1359.9506ms)
+✔ domestic measurements match complete-world domestic outcomes and keep CPU decisions out of player diagnostics (1971.2481ms)
+✔ study CLI writes auditable raw data and rejects unknown arguments without silently overwriting evidence (5320.4515ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 23399.9021

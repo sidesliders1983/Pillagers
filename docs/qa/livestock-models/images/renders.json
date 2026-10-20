@@ -1,0 +1,184 @@
+[
+  {
+    "asset": "cattle-adult-female",
+    "clip": "Walk",
+    "frame": 9,
+    "decodedSourceSha256": "1380a2306d78c7b30f09afb7a50948574dd3df58ed190103579b72328a56be38",
+    "file": "cattle-adult-female-walk.png"
+  },
+  {
+    "asset": "cattle-adult-female",
+    "clip": "Death",
+    "frame": 57,
+    "decodedSourceSha256": "1380a2306d78c7b30f09afb7a50948574dd3df58ed190103579b72328a56be38",
+    "file": "cattle-adult-female-death.png"
+  },
+  {
+    "asset": "cattle-adult-male",
+    "clip": "Walk",
+    "frame": 9,
+    "decodedSourceSha256": "5d6128721e930ca0d9d0c1d3fd9e7324c25119ae40962f19d96af7da94f20fcc",
+    "file": "cattle-adult-male-walk.png"
+  },
+  {
+    "asset": "cattle-adult-male",
+    "clip": "Death",
+    "frame": 57,
+    "decodedSourceSha256": "5d6128721e930ca0d9d0c1d3fd9e7324c25119ae40962f19d96af7da94f20fcc",
+    "file": "cattle-adult-male-death.png"
+  },
+  {
+    "asset": "cattle-baby",
+    "clip": "Walk",
+    "frame": 9,
+    "decodedSourceSha256": "7bc2f9ab0f8766e069e7436f422af6aab4d07aa77737d7f91499642f616d7110",
+    "file": "cattle-baby-walk.png"
+  },
+  {
+    "asset": "cattle-baby",
+    "clip": "Death",
+    "frame": 57,
+    "decodedSourceSha256": "7bc2f9ab0f8766e069e7436f422af6aab4d07aa77737d7f91499642f616d7110",
+    "file": "cattle-baby-death.png"
+  },
+  {
+    "asset": "cattle-young-adult",
+    "clip": "Walk",
+    "frame": 9,
+    "decodedSourceSha256": "75d97c361c19ab9427394a24d059c200f7922c4345e62605ad2b178a79f66094",
+    "file": "cattle-young-adult-walk.png"
+  },
+  {
+    "asset": "cattle-young-adult",
+    "clip": "Death",
+    "frame": 57,
+    "decodedSourceSha256": "75d97c361c19ab9427394a24d059c200f7922c4345e62605ad2b178a79f66094",
+    "file": "cattle-young-adult-death.png"
+  },
+  {
+    "asset": "goat-adult-female",
+    "clip": "Walk",
+    "frame": 6,
+    "decodedSourceSha256": "ffd9c1f953f5b4751c3dfdaace8eaad67df37e69ba37390a06667681cfdd4fe1",
+    "file": "goat-adult-female-walk.png"
+  },
+  {
+    "asset": "goat-adult-female",
+    "clip": "Death",
+    "frame": 57,
+    "decodedSourceSha256": "ffd9c1f953f5b4751c3dfdaace8eaad67df37e69ba37390a06667681cfdd4fe1",
+    "file": "goat-adult-female-death.png"
+  },
+  {
+    "asset": "goat-adult-male",
+    "clip": "Walk",
+    "frame": 6,
+    "decodedSourceSha256": "271ceff88ce99ff7d8681960fd3b9220f85f92c29afeefe537aafda80b5fb17e",
+    "file": "goat-adult-male-walk.png"
+  },
+  {
+    "asset": "goat-adult-male",
+    "clip": "Death",
+    "frame": 57,
+    "decodedSourceSha256": "271ceff88ce99ff7d8681960fd3b9220f85f92c29afeefe537aafda80b5fb17e",
+    "file": "goat-adult-male-death.png"
+  },
+  {
+    "asset": "goat-baby",
+    "clip": "Walk",
+    "frame": 6,
+    "decodedSourceSha256": "672a9c13ea94287dbb526cfe226b23af1a5bc83cac33ee1bcf984f19c9cfae32",
+    "file": "goat-baby-walk.png"
+  },
+  {
+    "asset": "goat-baby",
+    "clip": "Death",
+    "frame": 57,
+    "decodedSourceSha256": "672a9c13ea94287dbb526cfe226b23af1a5bc83cac33ee1bcf984f19c9cfae32",
+    "file": "goat-baby-death.png"
+  },
+  {
+    "asset": "pig-adult-female",
+    "clip": "Walk",
+    "frame": 6,
+    "decodedSourceSha256": "fe10e5c6ad55f09ff3344e449ff025eaff66172a6a7e9e1725fdb7db144c79a7",
+    "file": "pig-adult-female-walk.png"
+  },
+  {
+    "asset": "pig-adult-female",
+    "clip": "Death",
+    "frame": 57,
+    "decodedSourceSha256": "fe10e5c6ad55f09ff3344e449ff025eaff66172a6a7e9e1725fdb7db144c79a7",
+    "file": "pig-adult-female-death.png"
+  },
+  {
+    "asset": "pig-adult-male",
+    "clip": "Walk",
+    "frame": 6,
+    "decodedSourceSha256": "5dbc5385063b9121197964dcd163eaf406775a78fa90939f4643b482b692db4a",
+    "file": "pig-adult-male-walk.png"
+  },
+  {
+    "asset": "pig-adult-male",
+    "clip": "Death",
+    "frame": 57,
+    "decodedSourceSha256": "5dbc5385063b9121197964dcd163eaf406775a78fa90939f4643b482b692db4a",
+    "file": "pig-adult-male-death.png"
+  },
+  {
+    "asset": "sheep-adult-female",
+    "clip": "Walk",
+    "frame": 6,
+    "decodedSourceSha256": "00ec4302f7e5f8c30da5378fa3433f3acca473d8a95ec7a001a034b147587e9a",
+    "file": "sheep-adult-female-walk.png"
+  },
+  {
+    "asset": "sheep-adult-female",
+    "clip": "Death",
+    "frame": 57,
+    "decodedSourceSha256": "00ec4302f7e5f8c30da5378fa3433f3acca473d8a95ec7a001a034b147587e9a",
+    "file": "sheep-adult-female-death.png"
+  },
+  {
+    "asset": "sheep-adult-male",
+    "clip": "Walk",
+    "frame": 6,
+    "decodedSourceSha256": "3852789f83c43b60cf52aa7eed9af5d3598e85f6edc180698c98efb7f6a9f988",
+    "file": "sheep-adult-male-walk.png"
+  },
+  {
+    "asset": "sheep-adult-male",
+    "clip": "Death",
+    "frame": 57,
+    "decodedSourceSha256": "3852789f83c43b60cf52aa7eed9af5d3598e85f6edc180698c98efb7f6a9f988",
+    "file": "sheep-adult-male-death.png"
+  },
+  {
+    "asset": "sheep-baby",
+    "clip": "Walk",
+    "frame": 6,
+    "decodedSourceSha256": "609cd880adb73504a6e03eda83ff80c2a716d21cce8613d1bae8b8bee77d16d5",
+    "file": "sheep-baby-walk.png"
+  },
+  {
+    "asset": "sheep-baby",
+    "clip": "Death",
+    "frame": 57,
+    "decodedSourceSha256": "609cd880adb73504a6e03eda83ff80c2a716d21cce8613d1bae8b8bee77d16d5",
+    "file": "sheep-baby-death.png"
+  },
+  {
+    "asset": "pig-baby",
+    "clip": "Walk",
+    "frame": 6,
+    "decodedSourceSha256": "45028906f6e60d0b31526d269b88503bebc3864ee8b9e83c3f23ddfd386ad6ac",
+    "file": "pig-baby-walk.png"
+  },
+  {
+    "asset": "pig-baby",
+    "clip": "Death",
+    "frame": 57,
+    "decodedSourceSha256": "45028906f6e60d0b31526d269b88503bebc3864ee8b9e83c3f23ddfd386ad6ac",
+    "file": "pig-baby-death.png"
+  }
+]
