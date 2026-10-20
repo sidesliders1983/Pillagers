@@ -71,6 +71,8 @@ locations, instance counts or registry entries for undiscovered species.
 Species encounter pages are bounded; history is not cloned into UI storage.
 Attention read state contains only the bounded first-discovery event IDs, stored
 in the campaign's noncanonical presentation envelope, never in Core truth.
+When local storage combines an older canonical save with a newer same-seed sidecar,
+stale read IDs are discarded; a reused event number cannot mark another discovery read.
 Historical navigation falls back to the recorded encounter when a group/person
 is no longer available. Gameplay clocks and movement are not interrupted.
 

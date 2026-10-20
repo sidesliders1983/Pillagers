@@ -179,9 +179,12 @@ export function localSettlementText(storage: Pick<Storage, 'getItem'>): string {
         throw new Error('No shared campaign save found.');
     const sidecar = storage.getItem(fjordCampaignKey);
     const saved = sidecar ? JSON.parse(sidecar) : null;
-    return (saved && saved.campaign.seed === JSON.parse(canonical).seed ?
-        JSON.stringify({ ...saved, campaign: JSON.parse(canonical),
-            attention: historyIdentity(JSON.stringify(saved.campaign)) === historyIdentity(canonical) ? saved.attention : undefined,
+    const campaign = JSON.parse(canonical);
+    const matchingHistory = saved && historyIdentity(JSON.stringify(saved.campaign)) === historyIdentity(canonical);
+    return (saved && saved.campaign.seed === campaign.seed ?
+        JSON.stringify({ ...saved, campaign,
+            attention: matchingHistory ? saved.attention : undefined,
+            wildlifeReadIds: matchingHistory ? saved.wildlifeReadIds : undefined,
             narrative: saved.narrative?.canonicalIdentity === historyIdentity(canonical) ? saved.narrative : undefined }) : canonical);
 }
 

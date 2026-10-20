@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { JSDOM } from 'jsdom';
 import { loadDOMSource } from './load-dom-source.mjs';
 const load = path => loadDOMSource('../src/' + path + '.ts');
-const { SharedSettlement } = load('play/SharedSettlement');
+const { SharedSettlement, localSettlementText } = load('play/SharedSettlement');
 const { GameplaySession } = load('gameplay-lab/GameplaySession');
 const core = load('simulation/SimulationCore');
 const { ClanBookReader } = load('lore/ClanBookReader');
@@ -38,6 +38,7 @@ test('real Clan Book DOM supports explicit adoption, Attention, witnesses, group
         assert.ok(session.snapshot().wildlife);
         assert.match(wildlifePanel.textContent, /No wildlife has been recorded/);
         assert.doesNotMatch(wildlifePanel.textContent, /Lynx|Reindeer|Rabbit/);
+        const beforeEncounters = session.saveJSON();
         session.command({ type: 'CreateExpeditionGroup', name: 'Coast watch', memberIds: ['founder-1', 'founder-2'] });
         session.command({ type: 'StartExpedition', groupId: 'group-1' });
         const target = session.snapshot().wildlife.actors.find(actor => actor.id.includes('grounded')).position;
@@ -93,6 +94,12 @@ test('real Clan Book DOM supports explicit adoption, Attention, witnesses, group
         reader.openWildlife(record.eventId);
         assert.equal(panel.hidden, false);
         assert.deepEqual(owner.fjord.readWildlifeDiscoveries, [record.eventId]);
+        const sidecar = owner.fjord.exportJSON();
+        const mixedStorage = { getItem: key => key === 'pillagers.gameplay-lab.v1' ? beforeEncounters : sidecar };
+        const rolledBack = SharedSettlement.restore(localSettlementText(mixedStorage), 'fjord');
+        assert.deepEqual(rolledBack.session.snapshot(), core.reconstructState(beforeEncounters));
+        assert.deepEqual(rolledBack.fjord.readWildlifeDiscoveries, [],
+            'A newer same-seed presentation sidecar must not block or mark discoveries in an older canonical save');
         panel.dispatchEvent(new dom.window.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
         assert.equal(panel.hidden, true);
     } finally {
