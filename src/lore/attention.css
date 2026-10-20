@@ -17,7 +17,7 @@
 #fjord-attention-feed .attention-condition[data-severity="critical"] > strong { color: #ffb0a3; }
 #fjord-attention-feed button:focus-visible { outline: 2px solid var(--fjord-accent, #ddbd87); outline-offset: 3px; }
 
-/* Passive glance above the existing Attention counter, with no independent controls. */
+/* One compact, tappable message above the existing Attention counter. */
 #fjord-play #fjord-attention-toast {
     position: absolute;
     right: calc(var(--fjord-safe-right, 0px) + 8px);
@@ -34,15 +34,20 @@
     background: var(--fjord-panel, #1b2327f5);
     color: var(--fjord-text, #f0e9dc);
     box-shadow: 0 3px 12px #0003;
-    pointer-events: none;
+    pointer-events: auto;
+    cursor: pointer;
+    text-align: left;
+    min-height: 44px;
     animation: attention-arrive 160ms ease-out;
 }
 #fjord-play #fjord-attention-toast[hidden] { display: none; }
 #fjord-play #fjord-attention-toast .attention-toast-mark { color: var(--fjord-accent, #ddbd87); padding-top: 1px; }
 #fjord-play #fjord-attention-toast .attention-toast-mark svg { width: 18px; height: 18px; }
 #fjord-play #fjord-attention-toast small,
-#fjord-play #fjord-attention-toast p { font: 400 11px/1.4 system-ui, sans-serif; }
-#fjord-play #fjord-attention-toast small { color: var(--fjord-accent, #ddbd87); font-weight: 600; }
-#fjord-play #fjord-attention-toast p { margin: 2px 0 0; overflow-wrap: anywhere; }
+#fjord-play #fjord-attention-toast .attention-toast-text { font: 400 11px/1.4 system-ui, sans-serif; }
+#fjord-play #fjord-attention-toast small { display: block; color: var(--fjord-accent, #ddbd87); font-weight: 600; }
+#fjord-play #fjord-attention-toast .attention-toast-text { display: block; margin: 2px 0 0; overflow-wrap: anywhere; }
 @keyframes attention-arrive { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { #fjord-play #fjord-attention-toast { animation: none; } }
+
+#fjord-play #fjord-attention-toast:focus-visible { outline: 2px solid var(--fjord-accent, #ddbd87); outline-offset: 2px; }

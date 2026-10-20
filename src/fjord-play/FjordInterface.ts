@@ -484,7 +484,7 @@ export class FjordInterface {
             node.hidden = node.dataset.workspaceArea !== this.surface;
         }
         document.querySelector('#fjord-workspace-title')!.textContent = ({ settlement: 'Settlement',
-            expeditions: 'Expeditions', attention: 'Attention & recent events', food: 'Food stocks', materials: 'Materials stocks' } as Record<string, string>)[this.surface] ?? 'Settlement';
+            expeditions: 'Expeditions', attention: 'Activity Center', food: 'Food stocks', materials: 'Materials stocks' } as Record<string, string>)[this.surface] ?? 'Settlement';
         const content = document.querySelector<HTMLElement>('#fjord-directory')!;
         content.hidden = this.surface !== 'settlement' && !['food', 'materials'].includes(this.surface);
         if (this.surface === 'attention') {

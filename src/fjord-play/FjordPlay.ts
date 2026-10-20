@@ -145,7 +145,7 @@ export class FjordPlay {
                 </div>
                 <button type="button" data-surface="expeditions">${icon('route')}Expeditions</button>
             </nav><button id="fjord-attention" type="button" data-surface="attention">${icon('alert')}<span class="fjord-attention-label">Attention</span> <span id="fjord-attention-count">0</span></button>
-            <section id="fjord-attention-toast" aria-label="Notification" hidden></section><footer><p id="fjord-notice" role="status">Loading the Fjord. Simulation controls remain available.</p></footer></main>`;
+            <button type="button" id="fjord-attention-toast" aria-label="Open Activity Center" hidden></button><footer><p id="fjord-notice" role="status">Loading the Fjord. Simulation controls remain available.</p></footer></main>`;
         const savedPresentation = this.shared.presentation;
         let restoredCamera = savedPresentation?.camera;
         if (savedPresentation) {
@@ -234,7 +234,8 @@ export class FjordPlay {
                     else if (target.kind !== 'wildlife') select(target.kind === 'livestock' ? 'cattle' : target.kind, target.id);
                 },
             });
-        const attentionToast = new AttentionToast(document.querySelector<HTMLElement>('#fjord-attention-toast')!, this.shared);
+        const attentionToast = new AttentionToast(document.querySelector<HTMLElement>('#fjord-attention-toast')!, this.shared,
+            () => { desktopUI?.open('attention', true); attentionView.openInbox(); });
         const personalHistory = new PersonalHistoryView(document.querySelector<HTMLElement>('#fjord-play')!, this.shared);
         let clockIntent = 0;
         let previous = performance.now();

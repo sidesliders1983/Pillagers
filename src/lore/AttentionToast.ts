@@ -16,9 +16,14 @@ export class AttentionToast {
     private timer?: number;
     private disposed = false;
 
-    constructor(private root: HTMLElement, private owner: SharedSettlement) {
-        root.innerHTML = '<span class="attention-toast-mark"></span><div class="attention-toast-copy">' +
-            '<small></small><p role="status" aria-live="polite" aria-atomic="true"></p></div>';
+    constructor(private root: HTMLElement, private owner: SharedSettlement, private openActivity: () => void) {
+        root.innerHTML = '<span class="attention-toast-mark"></span><span class="attention-toast-copy">' +
+            '<small></small><span class="attention-toast-text" id="fjord-notification-message" role="status" aria-live="polite" aria-atomic="true"></span></span>';
+        root.setAttribute('aria-label', 'Open Activity Center');
+        root.setAttribute('aria-describedby', 'fjord-notification-message');
+        root.addEventListener('click', this.click);
+        root.addEventListener('focusin', this.hold);
+        root.addEventListener('focusout', this.resume);
         this.baseline();
     }
 
@@ -76,14 +81,28 @@ export class AttentionToast {
         this.root.hidden = false;
         this.root.querySelector('.attention-toast-mark')!.innerHTML = icon(notice.glyph);
         this.root.querySelector('small')!.textContent = notice.label;
-        this.root.querySelector('p')!.textContent = notice.text;
-        this.hold();
-        this.timer = window.setTimeout(() => this.dismiss(), toastDurationMs);
+        this.root.querySelector('.attention-toast-text')!.textContent = notice.text;
+        this.resume();
     }
 
     private hold = () => {
         if (this.timer !== undefined) window.clearTimeout(this.timer);
         this.timer = undefined;
+    };
+
+    private resume = () => {
+        this.hold();
+        if (this.current) this.timer = window.setTimeout(() => this.dismiss(), toastDurationMs);
+    };
+
+    private click = () => {
+        if (!this.current) return;
+        if (this.owner.transferring || this.epoch !== this.owner.session.personalHistoryEpoch) {
+            this.baseline();
+            return;
+        }
+        this.clear();
+        this.openActivity();
     };
 
     private dismiss() {
@@ -99,5 +118,8 @@ export class AttentionToast {
 
     dispose() {
         this.disposed = true; this.clear();
+        this.root.removeEventListener('click', this.click);
+        this.root.removeEventListener('focusin', this.hold);
+        this.root.removeEventListener('focusout', this.resume);
     }
 }

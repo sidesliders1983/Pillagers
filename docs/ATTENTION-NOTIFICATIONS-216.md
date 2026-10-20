@@ -127,3 +127,8 @@ There is no close button, detail link, focusable target or pointer interception.
 The existing eight-second timer always expires, including under the pointer.
 Showing and expiration never mark events read or acknowledge current conditions.
 The Attention counter remains the entry point for investigation and action.
+
+The owner's subsequent clarification makes the entire compact message one native
+button: clicking immediately closes it and opens Activity Center's unread overview,
+without marking sources read. There are still no separate close/detail controls.
+Keyboard focus holds expiration until the user leaves the button; hovering does not.

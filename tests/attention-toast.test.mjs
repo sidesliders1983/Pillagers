@@ -13,7 +13,7 @@ const quiet = { fertilityChanceBps: 0, partnershipChanceBps: 0, childcareWinters
     mortalityBands: [{ minAge: 0, chanceBps: 0 }] };
 
 function setup(births = false, food = 0) {
-    const dom = new JSDOM('<button id="fjord-attention">Attention</button><section id="toast" hidden></section><section id="feed"></section>',
+    const dom = new JSDOM('<button id="fjord-attention">Attention</button><button type="button" id="toast" hidden></button><section id="feed"></section>',
         { pretendToBeVisual: true });
     const previous = {};
     for (const name of ['window', 'document', 'HTMLElement', 'Element']) {
@@ -29,7 +29,7 @@ function setup(births = false, food = 0) {
     const session = new GameplaySession(); session.loadJSON(core.serializeState(state));
     const owner = new SharedSettlement(session), root = document.querySelector('#toast'), targets = [];
     const view = new AttentionView(document.querySelector('#feed'), owner, () => {}, { target: () => {} });
-    const toast = new AttentionToast(root, owner);
+    const toast = new AttentionToast(root, owner, () => { targets.push('activity'); view.openInbox(); });
     return { dom, owner, session, root, toast, targets, timers,
         fire() { const [id, callback] = timers.entries().next().value; timers.delete(id); callback(); },
         dispose() {
@@ -40,7 +40,7 @@ function setup(births = false, food = 0) {
         } };
 }
 
-test('a passive disagreement message announces historical names without controls or changes to focus, clock or read state', () => {
+test('a compact message opens Activity Center with one click, closes immediately and preserves Core, clock and unread state', () => {
     const h = setup();
     try {
         assert.equal(h.root.hidden, true, 'Adopting existing conditions is silent');
@@ -48,14 +48,15 @@ test('a passive disagreement message announces historical names without controls
         h.session.command({ type: 'AdvanceTicks', ticks: 1000 }); h.session.setRunning(true);
         const source = h.session.readSnapshot().events.find(event => event.type === 'ResidentQuarrelled'); assert.ok(source);
         const before = h.session.saveJSON(); h.toast.update();
-        assert.match(h.root.querySelector('p').textContent, /Einar and Liv had a disagreement/);
+        assert.match(h.root.querySelector('.attention-toast-text').textContent, /Einar and Liv had a disagreement/);
         assert.equal(document.activeElement.id, 'fjord-attention', 'Arrival never steals focus');
         assert.equal(h.session.saveJSON(), before); assert.equal(h.session.running, true);
         assert.equal(h.owner.fjord.attentionView().records.find(record => record.eventId === source.id).read, false);
-        assert.equal(h.root.querySelector('button, a, [tabindex]'), null);
+        assert.equal(h.root.tagName, 'BUTTON');
+        assert.equal(h.root.querySelector('button, a, [data-toast-view], [data-toast-dismiss]'), null);
         h.root.click();
-        assert.equal(h.targets.length, 0);
-        h.fire();
+        assert.deepEqual(h.targets, ['activity']);
+        assert.match(document.querySelector('#feed').textContent, /Events/);
         assert.equal(h.root.hidden, true);
         assert.equal(h.owner.fjord.attentionView().records.find(record => record.eventId === source.id).read, false);
         assert.equal(h.session.saveJSON(), before); assert.equal(h.session.running, true);
@@ -128,10 +129,10 @@ test('a newly empty Food stock is announced, but expiration never acknowledges i
     try {
         h.session.command({ type: 'AdvanceTicks', ticks: 1000 });
         const before = h.session.saveJSON(); h.toast.update();
-        assert.match(h.root.querySelector('p').textContent, /Food stocks are empty/);
+        assert.match(h.root.querySelector('.attention-toast-text').textContent, /Food stocks are empty/);
         h.fire();
         assert.equal(h.owner.fjord.attentionView().alerts.find(alert => alert.id === 'food-empty').acknowledged, false);
         assert.equal(h.session.saveJSON(), before);
-        assert.match(h.root.querySelector('p').textContent, /disagreement/);
+        assert.match(h.root.querySelector('.attention-toast-text').textContent, /disagreement/);
     } finally { h.dispose(); }
 });
