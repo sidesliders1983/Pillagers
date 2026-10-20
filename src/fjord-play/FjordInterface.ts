@@ -243,8 +243,8 @@ export class FjordInterface {
             this.panelEditable = this.panel.querySelector('input,select') !== null;
         }
         const count = this.attentionCount(state);
-        document.querySelector('#fjord-attention-count')!.textContent = String(count);
-        document.querySelector('#fjord-attention')!.setAttribute('aria-label', `Attention: ${count} current conditions`);
+        document.querySelector('#fjord-attention-count')!.textContent = count > 99 ? '99+' : String(count);
+        document.querySelector('#fjord-attention')!.setAttribute('aria-label', `Attention: ${count} unread events and current conditions`);
         if (this.surface) this.renderSurface();
     }
     private renderTask(state: SimulationState): string {
@@ -457,11 +457,8 @@ export class FjordInterface {
             dialog.showModal();
         });
     }
-    private attentionCount(state: SimulationState) {
-        return (state.stocks.food <= 0 ? 1 : 0) +
-            Object.values(state.households).filter(h => h.memberIds.some(id => state.personas[id]?.deathWinter === null) &&
-                (!h.residenceId || state.residences[h.residenceId]?.kind === 'tent')).length +
-            (state.landing ? landingSummary(state).unshelteredCattle : 0);
+    private attentionCount(_state: SimulationState) {
+        return this.owner.fjord.attentionView().unreadCount;
     }
     open(surface: string, force = false) {
         if (surface === 'livestock') { this.directory = 'cattle'; surface = 'settlement'; force = true; }
@@ -491,13 +488,7 @@ export class FjordInterface {
         const content = document.querySelector<HTMLElement>('#fjord-directory')!;
         content.hidden = this.surface !== 'settlement' && !['food', 'materials'].includes(this.surface);
         if (this.surface === 'attention') {
-            const homes = Object.values(state.households).filter(h => h.memberIds.some(id => state.personas[id]?.deathWinter === null) &&
-                (!h.residenceId || state.residences[h.residenceId]?.kind === 'tent'));
-            const cattle = Object.values(state.landing?.cattle ?? {}).filter(c => c.deathWinter === null && !inspectCattle(state, c.id).sheltered);
-            document.querySelector('#fjord-attention-summary')!.innerHTML =
-                (state.stocks.food <= 0 ? '<p class="fjord-risk">Food stocks are empty.</p>' : '') +
-                `<h3>${homes.length} households in tents</h3>` + homes.map(h => this.link('household', h.id, housingName(state, 'household', h.id))).join('') +
-                `<h3>${cattle.length} livestock without shelter</h3>` + cattle.map(c => this.link('cattle', c.id, inspectLivestock(state, c.id).name)).join('');
+            // The shared AttentionView renders alerts and history in this existing workspace.
         } else if (this.surface === 'settlement') {
             const kinds = { persona: 'Residents', household: 'Homes', cattle: 'Livestock', longship: 'Vehicles' };
             const records = this.directory === 'persona' ? Object.values({ ...state.personaArchive, ...state.personas }).map(p =>

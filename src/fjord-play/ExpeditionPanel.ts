@@ -388,6 +388,13 @@ export class ExpeditionPanel {
             Stranded: 'This group cannot travel or return. Its expedition is stranded.' })[mission.status];
     }
 
+    openGroup(groupId: string) {
+        if (!this.session.readSnapshot().world?.groups[groupId]) return;
+        this.groupId = groupId;
+        this.navigation.showGroups();
+        this.toolbarExpanded = true;
+        this.refresh();
+    }
     refresh() {
         const state = this.session.readSnapshot();
         const groups = Object.values(state.world?.groups ?? {});

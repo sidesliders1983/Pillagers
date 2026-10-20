@@ -39,7 +39,7 @@ marriage. Death and birth are canonical facts, not inferred from a later populat
 Wildlife #226 will be an adapter on this contract, with only first species discovery
 noteworthy. It will not keep a separate badge or independent read-state mechanism.
 
-## Proposed projection and bounded metadata
+## Projection and bounded metadata
 
 A versioned presentation record contains source event ID/type, category, severity,
 year/tick, historical actor IDs, factual text and a typed optional navigation target.
@@ -51,12 +51,13 @@ A rebuildable append-only index retains at most 200 noteworthy notifications and
 100 recent Chronicle facts; source history is neither copied into saves nor pruned.
 The UI groups same-type events in a year, pages groups/details, and shows an exact
 unread count. Older notifications remain accessible as historical facts in the Clan
-Book/Chronicle rather than expanding an unbounded inbox. Ambient facts have no badge.
+Book/Chronicle rather than expanding an unbounded inbox. Earlier Chronicle pages scan
+at most 200 source events per request and show at most 20 formatted facts. Ambient facts have no badge.
 No toasts are required; reload and fast-forward therefore cannot replay toast bursts.
 
 Save only version 1 UI metadata: an adoption/read-through event ordinal, up to 200
 read event IDs and at most 19 current alert episode/acknowledgement records. Individual
-reads are compacted against the retained inbox. Mark all read advances the cursor.
+reads are compacted against the retained inbox. Mark events read advances the cursor; critical conditions require their separate Acknowledge action.
 Older saves adopt at their current event head, so historical life events are not
 replayed as new; genuine current actionable conditions still appear.
 
@@ -87,3 +88,5 @@ the clock, edit resources or change replay outcomes.
 Browser control currently reports no enabled browser surfaces. DOM interaction tests
 are available, but do not substitute for CSS/WebGL/device visual acceptance. Keep the
 PRs draft until required current-head checks pass and report the visual QA limit.
+
+Reproducible interaction and profile evidence: [QA report](qa/attention-216/README.md).

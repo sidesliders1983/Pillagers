@@ -1,3 +1,4 @@
+import { AttentionView } from '../lore/AttentionView';
 import { createFjordScene, type FjordScene } from './FjordScene';
 import { ExpeditionPanel } from './ExpeditionPanel';
 import { IslandMissionPanel } from './IslandMissionPanel';
@@ -28,7 +29,6 @@ import { icon } from './FjordIcons';
 import { SettlementPanel, panelCommand, updateManagementAvailability } from '../play/SettlementPanel';
 import { openSettlement, persistSettlement, bindViewSwitch } from '../play/SettlementBrowser';
 import type { EntityKind } from '../play/SettlementView';
-import { projectChronicle } from '../lore/Chronicle';
 import { inspectWeatherExposure, personaAway, landingSummary } from '../simulation/SimulationCore';
 
 const campaignClockIntervalMs = 500;
@@ -133,7 +133,7 @@ export class FjordPlay {
             <section id="fjord-workspace" tabindex="-1" aria-label="Settlement workspace" hidden>
                 <div class="fjord-workspace-heading"><h2 id="fjord-workspace-title">Settlement</h2><button type="button" data-ui="close-workspace" aria-label="Close workspace">×</button></div>
                 <div id="fjord-directory"></div><section id="expedition-panel" data-workspace-area="expeditions" aria-label="Expedition groups" hidden></section>
-                <div data-workspace-area="attention" hidden><section id="fjord-attention-summary" aria-label="Current conditions"></section><section id="fjord-weather-information" aria-label="Annual weather forecast"></section><h3>Recent events</h3><div id="fjord-chronicle"></div>
+                <div data-workspace-area="attention" hidden><section id="fjord-attention-feed" aria-label="Attention notifications"></section><section id="fjord-weather-information" aria-label="Annual weather forecast"></section>
                 <details><summary>Developer diagnostics</summary><pre id="fjord-diagnostics"></pre></details></div><ul id="fjord-identities" hidden></ul>
             </section></section>
             <nav id="fjord-navigation" aria-label="Settlement navigation">
@@ -220,7 +220,19 @@ export class FjordPlay {
             try { localStorage.setItem(resumeCheckpointKey, this.shared.persist()); }
             catch { say('Resume checkpoint unavailable. Save or export before leaving this view.'); }
         };
+        // An explicit Attention deep link takes precedence over automatic story opening; it does not mark story content read.
+        if (query.has('attention')) this.session.book.notifyPending();
         const bookReader = new ClanBookReader(this.shared, persist);
+        const attentionView = new AttentionView(document.querySelector<HTMLElement>('#fjord-attention-feed')!, this.shared,
+            () => { persist(); refresh(); }, {
+                family: id => { bookReader.openFamily(id); },
+                target: target => {
+                    if (target.kind === 'expedition') expeditions?.openGroup(target.id);
+                    else if (target.kind === 'site') islandMissions?.selectSite(target.id);
+                    else if (target.kind === 'surface') desktopUI?.open(target.id, true);
+                    else if (target.kind !== 'wildlife') select(target.kind === 'livestock' ? 'cattle' : target.kind, target.id);
+                },
+            });
         const personalHistory = new PersonalHistoryView(document.querySelector<HTMLElement>('#fjord-play')!, this.shared);
         let clockIntent = 0;
         let previous = performance.now();
@@ -296,9 +308,7 @@ export class FjordPlay {
             canvas.dataset.calendar = JSON.stringify(view.calendar);
             const workspace = document.querySelector<HTMLElement>('#fjord-workspace')!;
             if (!workspace.hidden && workspace.dataset.surface === 'attention') {
-                document.querySelector('#fjord-chronicle')!.innerHTML = projectChronicle(state.events, state.time.winter)
-                    .slice(0, 3).map(w => '<h3>Winter ' + w.winter + '</h3>' +
-                    w.entries.slice(-8).map(e => '<p>' + escape(e.text) + '</p>').join('')).join('');
+                attentionView.render();
                 const profile = view.weather.enabled ? view.weather.modifiers : null;
                 const exposure = inspectWeatherExposure(state);
                 const forecast = profile ? '<strong>Year ' + view.time.winter + ' · ' + view.weather.class + ' annual weather</strong>' +
@@ -627,6 +637,7 @@ export class FjordPlay {
             header.dispose();
             mobileShell.dispose();
             bookReader.dispose();
+            attentionView.dispose();
             this.foundingBook?.dispose();
             personalHistory.dispose();
             setPlayback(false);
@@ -804,6 +815,11 @@ export class FjordPlay {
         sceneLoads--;
         initialAutoStart?.();
         refresh();
+        if (query.has('attention')) {
+            desktopUI?.open('attention', true);
+            const source = query.get('attention');
+            if (source?.startsWith('event-')) attentionView.openEvent(source);
+        }
         canvas.dataset.ready = 'true';
         trace.record('scene-ready');
         previous = performance.now();

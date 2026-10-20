@@ -1,0 +1,31 @@
+{
+  "fixture": {
+    "seed": 32,
+    "time": {
+      "winter": 803,
+      "tick": 0
+    },
+    "sourceEvents": 168,
+    "notifications": 9,
+    "realBirths": 5
+  },
+  "syntheticHistory": {
+    "examined": 100000,
+    "retained": 200,
+    "chronicle": 100,
+    "initialBuildMs": 74.62610000000132,
+    "thousandRepeatedReadsMs": 1861.4161000000022,
+    "description": "100,000 source records; every twentieth is a copy of one real birth. Not a canonical campaign.",
+    "olderPageExamined": 200,
+    "olderPageRecords": 10
+  },
+  "currentCampaign": {
+    "thousandCachedViewReadsMs": 0.39800000000104774,
+    "metadataBytes": 165
+  },
+  "persistence": {
+    "exactCoreRoundTrip": true,
+    "exactReadRoundTrip": true,
+    "markReadDoesNotChangeCore": true
+  }
+}

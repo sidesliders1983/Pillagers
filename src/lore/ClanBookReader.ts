@@ -231,7 +231,7 @@ export class ClanBookReader {
                 this.paint();
         }
     }
-    open(index = this.queuedChapter ?? this.chapterIndex): void {
+    open(index = this.queuedChapter ?? this.chapterIndex, tab: 'story' | 'family' = 'story'): void {
         if (this.owner.transferring || document.hidden)
             return;
         this.opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
@@ -239,11 +239,16 @@ export class ClanBookReader {
             return;
         this.chapterIndex = index;
         this.queuedChapter = null;
-        this.owner.session.book.notifyPending();
+        if (tab === 'story') this.owner.session.book.notifyPending();
         this.panel.hidden = false;
-        this.setTab('story');
+        this.setTab(tab);
         this.measureBounds();
         this.panel.querySelector<HTMLElement>('#clan-book-close')!.focus();
+    }
+    openFamily(personaId: string) {
+        if (!this.owner.session.familyTree().nodes.some(node => node.id === personaId)) return false;
+        this.open(undefined, 'family');
+        return this.familyTree.openPersona(personaId);
     }
     private setTab(tab: 'story' | 'family'): void {
         if (this.owner.transferring || document.hidden)

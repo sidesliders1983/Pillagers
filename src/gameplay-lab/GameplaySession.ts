@@ -1,3 +1,4 @@
+import { AttentionHistoryIndex } from '../lore/AttentionHistory';
 import { assertSpatialWorld, exploreOffer, startExpeditionOffer, expeditionModeActive, type PhysicalExpeditionContext } from '../simulation/SpatialExpeditions';
 import { islandMissionOffer, type IslandTarget } from '../simulation/IslandMissions';
 import type { Cargo, MissionType } from '../simulation/WorldExpeditions';
@@ -49,6 +50,11 @@ export class GameplaySession {
         this.canonicalRevision++;
         this.readState = undefined;
         this.serializedState = undefined;
+    }
+    private attentionIndex = new AttentionHistoryIndex();
+    attentionHistory() {
+        this.attentionIndex.append(this.state.events);
+        return this.attentionIndex;
     }
     private familyIndex = new FamilyTreeIndex();
     familyTree() {
@@ -188,6 +194,7 @@ export class GameplaySession {
     private replace(state: SimulationState, fresh = true): void {
         this.physicalWorld = undefined;
         this.physicalExclusions = undefined;
+        this.attentionIndex = new AttentionHistoryIndex();
         this.familyIndex = new FamilyTreeIndex();
         this.personalIndex = new PersonalHistoryIndex();
         this.personalBookKey = '';

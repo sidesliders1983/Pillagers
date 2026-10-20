@@ -1,0 +1,9 @@
+.attention-modes, #fjord-attention-feed nav { display: flex; flex-wrap: wrap; gap: 8px; }
+#fjord-attention-feed button { min-height: 44px; max-width: 100%; white-space: normal; }
+.attention-list { list-style: none; padding: 0; display: grid; gap: 12px; }
+.attention-list > li { border: 1px solid #84958a55; border-radius: 8px; padding: 12px; }
+.attention-list small { display: block; color: #516761; }
+.attention-list button { margin-right: 8px; }
+.attention-condition[data-severity="critical"] { border-left: 5px solid #c1372d; }
+.attention-condition[data-severity="critical"] > strong { color: #a02720; }
+#fjord-attention-feed { overflow-wrap: anywhere; }

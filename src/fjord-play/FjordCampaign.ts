@@ -1,3 +1,6 @@
+import { attentionAlerts, eventOrdinal, type AttentionRecord, type AttentionAlert } from '../lore/AttentionHistory';
+import { createAttentionMetadata, validateAttentionMetadata, reconcileAttention, attentionRead,
+    readAttentionEvents, acknowledgeAttention, type AttentionMetadata } from '../lore/AttentionState';
 import { foundingTime } from '../simulation/FoundingPhase';
 import { initializeIslandClans } from '../simulation/SimulationCore';
 import { inspectRivalSettlement, projectRivalSettlement, type ObservedRivalSettlement } from './RivalSettlement';
@@ -19,6 +22,51 @@ type FjordCampaignProjection = ReturnType<typeof projectFjordSettlement> & { riv
 export class FjordCampaign {
     private rivalLayout?: FjordLayout;
     private fresh = true;
+    private attentionMetadata!: AttentionMetadata;
+    private attentionCoreRevision = -1;
+    private attentionRecords: AttentionRecord[] = [];
+    private currentAlerts: AttentionAlert[] = [];
+    private attentionCache?: ReturnType<FjordCampaign['buildAttentionView']>;
+    private buildAttentionView() {
+        const records = this.attentionRecords.map(record => ({ ...record, read: attentionRead(this.attentionMetadata, record.eventId) }));
+        const alerts = this.currentAlerts.map(alert => ({ ...alert,
+            ...this.attentionMetadata.alerts.find(saved => saved.id === alert.id)! }));
+        return freezeReadView({ records, alerts,
+            unreadCount: records.filter(record => !record.read).length + alerts.filter(alert => !alert.acknowledged).length });
+    }
+    attentionView() {
+        if (this.attentionCoreRevision !== this.session.revision) {
+            const index = this.session.attentionHistory();
+            this.attentionRecords = index.retained();
+            this.currentAlerts = attentionAlerts(this.session.readSnapshot(), index.strandedIds());
+            reconcileAttention(this.attentionMetadata, this.attentionRecords, this.currentAlerts,
+                this.session.readSnapshot().events.length);
+            this.attentionCoreRevision = this.session.revision;
+            this.attentionCache = undefined;
+        }
+        return this.attentionCache ??= this.buildAttentionView();
+    }
+    attentionSave() { this.attentionView(); return structuredClone(this.attentionMetadata); }
+    attentionSource(eventId: string) {
+        const event = this.session.readSnapshot().events[eventOrdinal(eventId) - 1];
+        return event?.id === eventId ? this.session.attentionHistory().format(event) : null;
+    }
+    markAttentionRead(ids: readonly string[]) {
+        this.attentionView();
+        readAttentionEvents(this.attentionMetadata, this.attentionRecords, ids);
+        this.attentionCache = undefined;
+    }
+    acknowledgeAttention(id: string, since: number) {
+        this.attentionView();
+        acknowledgeAttention(this.attentionMetadata, id, since);
+        this.attentionCache = undefined;
+    }
+    markAllAttentionRead() {
+        this.attentionView();
+        this.attentionMetadata.readThrough = this.session.readSnapshot().events.length;
+        this.attentionMetadata.readIds = [];
+        this.attentionCache = undefined;
+    }
     private readView?: Readonly<FjordCampaignProjection>;
     private readRevision = -1;
     private readBlueprint?: WorldBlueprint;
@@ -32,6 +80,7 @@ export class FjordCampaign {
     constructor(readonly session: GameplaySession, private geography: CampaignGeography = 'legacy', restored?: string) {
         // Import validates a complete proposal before committing. A known save needs no throwaway geography.
         if (restored !== undefined) { this.importJSON(restored); return; }
+        this.attentionMetadata = createAttentionMetadata(session.readSnapshot().events.length);
         this.blueprint = this.createGeography(session.snapshot().seed);
         this.layout = createFjordLayout(this.blueprint, undefined, session.snapshot().seed);
         this.bindExpeditionWorld();
@@ -105,7 +154,7 @@ export class FjordCampaign {
         return { bridgeVersion: island ? 2 : 1, campaign: state,
             ...(island ? { island } : { blueprint: this.blueprint }), layout: this.layout, selection: this.selection,
             ...(this.rivalLayout ? { rivalLayout: this.rivalLayout } : {}),
-            narrative: this.session.book.save(state) };
+            narrative: this.session.book.save(state), attention: this.attentionSave() };
     }
     exportJSON() {
         return JSON.stringify(this.exportData());
@@ -120,6 +169,8 @@ export class FjordCampaign {
             throw new Error('Unsupported Fjord campaign version.');
         proposal.loadJSON(extended ? JSON.stringify(saved.campaign) : text);
         if (saved.narrative) proposal.book.restore(saved.narrative, proposal.snapshot());
+        const attention = saved.attention ?? createAttentionMetadata(proposal.readSnapshot().events.length);
+        validateAttentionMetadata(attention, proposal.readSnapshot());
         const seed = proposal.snapshot().seed;
         if (saved.bridgeVersion === 2 && !saved.island) throw new Error('Missing campaign island recipe.');
         const blueprint = saved.bridgeVersion === 2 ? createCampaignIsland(seed, saved.island) :
@@ -183,6 +234,9 @@ export class FjordCampaign {
         this.session.book.restore(proposal.book.save(proposal.snapshot()), this.session.snapshot());
 
         this.blueprint = blueprint;
+        this.attentionMetadata = structuredClone(attention);
+        this.attentionCoreRevision = -1;
+        this.attentionCache = undefined;
         if (saved.bridgeVersion === 2) this.geography = saved.island.version;
         this.layout = view.layout;
         this.rivalLayout = rival?.layout;
@@ -216,6 +270,7 @@ export class FjordCampaign {
         saved.layout = createFjordLayout(this.blueprint,
             this.layout.mooringResolved ? this.layout.mooring : undefined, proposal.snapshot().seed);
         saved.selection = null;
+        delete saved.attention;
         delete saved.rivalLayout;
         this.importJSON(JSON.stringify(saved));
         this.fresh = true;

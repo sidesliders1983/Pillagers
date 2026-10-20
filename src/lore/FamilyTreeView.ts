@@ -23,6 +23,13 @@ export class FamilyTreeView {
     get selection(): SettlementSelection {
         return this.selectedId ? { kind: 'persona', id: this.selectedId } : null;
     }
+    openPersona(id: string) {
+        this.update();
+        if (!this.data?.nodes.some(node => node.id === id)) return false;
+        this.selectedId = id;
+        this.update(true);
+        return true;
+    }
     update(force = false): void {
         const epoch = this.owner.session.personalHistoryEpoch;
         if (this.epoch !== epoch) {
