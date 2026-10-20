@@ -286,6 +286,7 @@ export class FjordPlay {
         let islandMissions: IslandMissionPanel | undefined;
         const islandMarkers = new IslandMissionMarkers();
         let desktopUI: FjordInterface | undefined;
+        let renderedWildlifeAttention = '';
         const refresh = () => {
             let expeditionPace = cycleField.querySelector<HTMLOptionElement>('option[value="10"]');
             if (!expeditionPace) {
