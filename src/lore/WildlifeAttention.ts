@@ -1,7 +1,7 @@
 import type { AttentionAdapter } from './AttentionHistory';
 import { createAttentionMetadata, attentionRead, type AttentionMetadata } from './AttentionState';
 import { wildlifeSighting } from '../simulation/WildlifeSightings';
-import { wildlifeSightingText } from './WildlifeHistory';
+import { wildlifeLabel, wildlifeSightingText } from './WildlifeHistory';
 import type { SimulationState } from '../simulation/SimulationCore';
 import type { AttentionRecord } from './AttentionHistory';
 
@@ -11,7 +11,9 @@ export const wildlifeAttentionAdapter: AttentionAdapter = event => {
     if (!sighting || !headline) return null;
     return { eventId: event.id, canonicalType: event.type, category: 'discovery',
         severity: sighting.firstForClan ? 'noteworthy' : 'ambient', time: { ...event.time },
-        actorIds: [...sighting.witnessPersonaIds], headline, target: { kind: 'wildlife', id: event.id } };
+        actorIds: [...sighting.witnessPersonaIds], headline,
+        shortText: sighting.groupName + ' sighted a ' + wildlifeLabel(sighting.speciesId).toLowerCase() + ' on their journey.',
+        target: { kind: 'wildlife', id: event.id } };
 };
 
 /** Import-only migration of prototype #226 saves; new saves have only the shared metadata. */

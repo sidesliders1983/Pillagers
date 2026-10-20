@@ -128,3 +128,13 @@ not merge the stack while checks for either head are pending/failing. The QA lau
 binds immediately, reports loading/fetch failures and opens the selected paused
 checkpoint directly at Attention. It no longer imports/restores a whole world before
 responding to a click. The actual game remains responsible for checkpoint restoration.
+
+## Short first-discovery messages
+
+The shared #216 pop-up presents a first sighting as “Coast watch sighted a seagull
+on their journey.” The exact group name/species come from that canonical event;
+View details opens its shared Attention source and then the Clan Book encounter.
+Repeat sightings remain ambient. No wildlife-specific timer, badge or read store
+is introduced. The live QA checkpoint is captured before the actual first sighting;
+pressing Play advances that real route and generates a new event, not a scripted
+or replayed example. Saved unread/read checkpoints intentionally do not replay cards.

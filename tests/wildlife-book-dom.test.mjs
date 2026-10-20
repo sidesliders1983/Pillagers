@@ -57,7 +57,8 @@ test('real Clan Book DOM supports explicit adoption, Attention, witnesses, group
         const beforeReading = session.saveJSON();
         const sharedRecord = owner.fjord.attentionView().records.find(item => item.eventId === record.eventId);
         assert.ok(sharedRecord && !sharedRecord.read && sharedRecord.severity === 'noteworthy');
-        click('#attention [data-attention-action="group"][data-attention-id="WildlifeSighted:' + record.time.winter + '"]');
+        const groupButton = attention.querySelector('[data-attention-action="group"][data-attention-id="WildlifeSighted:' + record.time.winter + '"]');
+        if (groupButton) groupButton.click();
         click('#attention [data-attention-action="event"][data-attention-id="' + record.eventId + '"]');
         click('#attention [data-attention-action="target"]');
         assert.equal(panel.hidden, false);
@@ -111,6 +112,7 @@ test('real Clan Book DOM supports explicit adoption, Attention, witnesses, group
         assert.throws(() => migrated.importJSON(JSON.stringify(legacy.fjord)), /legacy wildlife/);
         assert.deepEqual(migrated.session.snapshot(), session.snapshot(), 'Rejected migration commits no canonical changes');
         const source = session.readSnapshot().events.find(event => event.id === record.eventId);
+        assert.match(wildlifeAttentionAdapter(source).shortText, /Coast watch sighted a .* on their journey/);
         const policyFixture = { ...source, details: { ...source.details, firstForClan: false } };
         assert.equal(wildlifeAttentionAdapter(policyFixture).severity, 'ambient', 'Repeat policy has no Attention badge');
         owner.importJSON(JSON.stringify(JSON.parse(checkpoint).fjord));

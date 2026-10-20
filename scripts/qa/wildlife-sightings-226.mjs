@@ -35,6 +35,8 @@ for (const actor of actors.filter(actor => actor.id.includes('grounded'))) {
 }
 assert.ok(target, 'A real grounded gull must have a reachable nearby position');
 session.command({ type: 'ExploreArea', groupId: 'group-1', target });
+// A paused, real pre-sighting route: Play triggers a new discovery rather than replaying saved history.
+await writeFile(output + '/live.json', owner.persist());
 const ticks = [];
 for (let batch = 0; batch < 30 && !session.wildlifeHistory().summaries().length; batch++) {
     const start = performance.now();
