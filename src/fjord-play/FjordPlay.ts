@@ -67,6 +67,8 @@ export class FjordPlay {
         document.body.innerHTML = '<main class="fjord-bootstrap"><h1>Opening FjordSide…</h1><p role="status">Reading your campaign.</p></main>';
         await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
         const query = new URLSearchParams(location.search);
+        const activityPrototyping = import.meta.env.DEV && query.has('activityPrototype');
+        let disposeActivityPrototype = () => {};
         let tracedBook: GameplaySession['book'] | undefined, tracedBookId: string | undefined;
         const trace = this.trace = new LifecycleTrace(query.has('debugLifecycle'), () => {
             if (!this.session) return {};
@@ -222,7 +224,7 @@ export class FjordPlay {
             catch { say('Resume checkpoint unavailable. Save or export before leaving this view.'); }
         };
         // An explicit Attention deep link takes precedence over automatic story opening; it does not mark story content read.
-        if (query.has('attention') || query.has('notifications')) this.session.book.notifyPending();
+        if (query.has('attention') || query.has('notifications') || activityPrototyping) this.session.book.notifyPending();
         const bookReader = new ClanBookReader(this.shared, persist, {
             witness: id => select('persona', id), group: id => expeditions?.openGroup(id),
         }, () => refresh());
@@ -317,7 +319,7 @@ export class FjordPlay {
             attentionToast.update(Boolean(this.loading) || document.hidden || this.shared.transferring || !workspace.hidden ||
                 !document.querySelector<HTMLElement>('#clan-book-reader')!.hidden);
             if (!workspace.hidden && workspace.dataset.surface === 'attention') {
-                attentionView.render();
+                if (!activityPrototyping) attentionView.render();
                 const profile = view.weather.enabled ? view.weather.modifiers : null;
                 const exposure = inspectWeatherExposure(state);
                 const forecast = profile ? '<strong>Year ' + view.time.winter + ' · ' + view.weather.class + ' annual weather</strong>' +
@@ -648,6 +650,7 @@ export class FjordPlay {
             bookReader.dispose();
             attentionView.dispose();
             attentionToast.dispose();
+            disposeActivityPrototype();
             this.foundingBook?.dispose();
             personalHistory.dispose();
             setPlayback(false);
@@ -829,6 +832,12 @@ export class FjordPlay {
             desktopUI?.open('attention', true);
             const source = query.get('attention');
             if (source?.startsWith('event-')) attentionView.openEvent(source);
+        }
+        if (activityPrototyping) {
+            const { ActivityCenterPrototype } = await import('../lore/ActivityCenter.prototype');
+            desktopUI?.open('attention', true);
+            const prototype = new ActivityCenterPrototype(document.querySelector<HTMLElement>('#fjord-attention-feed')!, this.shared);
+            disposeActivityPrototype = () => prototype.dispose();
         }
         canvas.dataset.ready = 'true';
         trace.record('scene-ready');

@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Activity Center design preview</title><body style="background:#1b2327;color:#f0e9dc;font:16px system-ui;padding:24px">
+<h1>Opening the design preview…</h1><p role="status">Loading a paused QA snapshot. Your game on port 5218 is unchanged.</p>
+<script type="module">
+const response = await fetch('/scratch/wildlife-sightings-226/unread.json');
+const checkpoint = await response.json();
+checkpoint.target = 'fjord'; checkpoint.pace.running = false;
+sessionStorage.setItem('pillagers.fjord-play.active.v1', JSON.stringify(checkpoint));
+const variant = new URL(location.href).searchParams.get('variant') ?? 'focus';
+location.replace('/fjord-play?activityPrototype=1&variant=' + encodeURIComponent(variant));
+</script></body></html>

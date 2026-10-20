@@ -1,0 +1,31 @@
+{
+  "variants": [
+    "focus",
+    "inbox",
+    "journal"
+  ],
+  "realSourceRows": 11,
+  "sourceIds": [
+    "alert:housing",
+    "alert:livestock-shelter",
+    "event-9",
+    "event-8",
+    "event-7",
+    "event-6",
+    "event-5",
+    "event-4",
+    "event-3",
+    "event-2",
+    "event-1"
+  ],
+  "localSeen": [
+    "alert:housing"
+  ],
+  "localRead": [
+    "event-9"
+  ],
+  "canonicalUnchanged": true,
+  "readAcknowledgementMetadataUnchanged": true,
+  "clockRunning": false,
+  "verification": "Component interaction smoke in jsdom; no browser/CSS/WebGL visual verification."
+}
