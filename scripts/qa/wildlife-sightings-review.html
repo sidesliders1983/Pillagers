@@ -14,8 +14,8 @@ iframe { width: 390px; height: 780px; border: 2px solid #203738; max-width: 100%
 <body><main>
 <h1>Wildlife sightings review · #226</h1>
 <p>This isolated QA opening has extra Food. Wildlife, expedition routes and sightings come from real simulation commands.</p>
-<p>Open a checkpoint to inspect Attention, then follow the discovery into Clan Book. The world stays paused.</p>
-<label>Checkpoint <select id="checkpoint"><option value="unread">Unread first discovery</option><option value="read">Read discovery after save/load</option><option value="legacy">Older physical campaign, recording not adopted</option></select></label>
+<p>Open a checkpoint to inspect Attention, then follow the discovery into Clan Book. Checkpoints open paused. For the live notification demo, press Play to trigger a real first sighting.</p>
+<label>Checkpoint <select id="checkpoint"><option value="live">Live notification demo · press Play</option><option value="unread" selected>Unread first discovery</option><option value="read">Read discovery after save/load</option><option value="legacy">Older physical campaign, recording not adopted</option></select></label>
 <button id="desktop">Open desktop Fjord Play</button><button id="phone">Open 390px phone preview</button>
 <p role="status" aria-live="polite">Ready. Choose a checkpoint, then open Fjord Play. This changes this QA server’s session only.</p>
 <iframe hidden title="Phone Fjord Play preview"></iframe>
@@ -25,7 +25,7 @@ const previewStatus = document.querySelector('[role="status"]');
 const previewFrame = document.querySelector('iframe');
 const previewButtons = Array.from(document.querySelectorAll('button'));
 const activeSettlementKey = 'pillagers.fjord-play.active.v1';
-const destination = '/fjord-play?attention=1';
+const destination = checkpoint => checkpoint === 'live' ? '/fjord-play?notifications=1' : '/fjord-play?attention=1';
 let opening = false;
 
 async function openPreview(phone) {
@@ -46,12 +46,14 @@ async function openPreview(phone) {
         sessionStorage.setItem(activeSettlementKey, JSON.stringify(checkpoint));
         if (phone) {
             previewFrame.hidden = false;
-            previewFrame.src = destination;
-            previewStatus.textContent = 'Opening Fjord Play below. Its loading screen shows world progress. Attention opens when ready.';
+            previewFrame.src = destination(checkpointSelect.value);
+            previewStatus.textContent = checkpointSelect.value === 'live' ?
+                'Opening the live demo below. Press Play to see a new discovery notification.' :
+                'Opening Fjord Play below. Its loading screen shows world progress. Attention opens when ready.';
             previewFrame.scrollIntoView({ block: 'start', behavior: 'smooth' });
         } else {
             previewStatus.textContent = 'Opening Fjord Play. Its loading screen shows world progress…';
-            location.assign(destination);
+            location.assign(destination(checkpointSelect.value));
         }
     } catch (error) {
         previewStatus.textContent = 'Could not open the preview. ' + String(error);

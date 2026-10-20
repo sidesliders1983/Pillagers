@@ -36,6 +36,12 @@ test('review launcher responds before fetch, preserves checkpoint data and opens
         assert.equal(requests.length, 2, 'An already-open phone preview follows the selected checkpoint');
         finish({ ok: true, json: async () => structuredClone(checkpoint) });
         await new Promise(setImmediate);
+        document.querySelector('select').value = 'live';
+        document.querySelector('select').dispatchEvent(new dom.window.Event('change'));
+        finish({ ok: true, json: async () => structuredClone(checkpoint) });
+        await new Promise(setImmediate);
+        assert.equal(document.querySelector('iframe').getAttribute('src'), '/fjord-play?notifications=1');
+        assert.match(document.querySelector('[role="status"]').textContent, /Press Play/);
     } finally { dom.window.close(); }
 });
 
