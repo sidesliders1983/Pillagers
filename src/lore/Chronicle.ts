@@ -1,3 +1,4 @@
+import { wildlifeSightingText } from './WildlifeHistory';
 import type {SimulationEvent} from '../simulation/SimulationCore';
 import { isLivestockEvent, recordedLivestock } from './LivestockNarrative';
 export type ChronicleEntry={winter:number;text:string;sourceEventIds:string[];templateId:string;templateVersion:number;routine:boolean};
@@ -181,7 +182,8 @@ export function projectChronicle(events:readonly SimulationEvent[],currentWinter
                     if (parts.length) text = 'The herd produced ' + parts.join(' and ') + ' this Winter.';
                 }
                 else {const total=(resource:string)=>aggregate.filter(e=>e.details!.resource===resource).reduce((n,e)=>n+Number(e.details!.units),0);const food=total('food'),materials=total('materials');if(Number.isSafeInteger(food)&&Number.isSafeInteger(materials)){const parts=[];if(aggregate.some(e=>e.details!.resource==='food'))parts.push(`${food} Food`);if(aggregate.some(e=>e.details!.resource==='materials'))parts.push(`${materials} Materials`);text=`The settlement produced ${parts.join(' and ')} this Winter.`;}}
-            }else {text=Object.hasOwn(templates,event.type)?templates[event.type](event,d):null;routine=['FoodConsumed','CattleFoodConsumed','LivestockFoodConsumed'].includes(event.type);}
+            }else {text=event.type === 'WildlifeSighted' ? wildlifeSightingText(event) : Object.hasOwn(templates,event.type)?templates[event.type](event,d):null;routine=['FoodConsumed','CattleFoodConsumed','LivestockFoodConsumed'].includes(event.type) ||
+                event.type === 'WildlifeSighted' && !event.details?.firstForClan;}
             if (text) {
                 const templateVersion = ['FoundingLongshipKept', 'FoundingLongshipSalvaged']
                     .includes(event.type) || isLivestockEvent(event.type) ? 2 : 1;
@@ -194,6 +196,11 @@ export function projectChronicle(events:readonly SimulationEvent[],currentWinter
 
 /** Personal formatting reuses the factual registry, with neutral labels for unnamed destinations. */
 export function personalChronicleEntry(event: SimulationEvent): ChronicleEntry | null {
+    if (event.type === 'WildlifeSighted') {
+        const text = wildlifeSightingText(event, true);
+        return text ? { winter: event.time.winter, text, sourceEventIds: [event.id],
+            templateId: 'chronicle.WildlifeSighted', templateVersion: 1, routine: !event.details?.firstForClan } : null;
+    }
     const details = {...event.details};
     const references = [event.personaId, details.personaId, details.caregiverId,
         ...(Array.isArray(details.participants) ? details.participants : []),

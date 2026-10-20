@@ -1,3 +1,4 @@
+import { WildlifeBookView, type WildlifeNavigation } from './WildlifeBookView';
 import { FamilyTreeView } from './FamilyTreeView';
 import { isLivestockEvent, recordedLivestock, livestockAction, livestockGroups, livestockQuantity } from './LivestockNarrative';
 import type { SimulationEvent } from '../simulation/SimulationCore';
@@ -107,14 +108,16 @@ function appendix(chapter: BookChapter): string {
 export class ClanBookReader {
     private panel = document.createElement('section');
     private bookId = '';
-    private tab: 'story' | 'family' = 'story';
+    private tab: 'story' | 'family' | 'wildlife' = 'story';
+    private wildlifeView: WildlifeBookView;
     private familyTree: FamilyTreeView;
     private campaignEpoch = -1;
     private chapterIndex = 0;
     private queuedChapter: number | null = null;
     private renderedChapter = '';
     private opener: HTMLElement | null = null;
-    constructor(private owner: SharedSettlement, private persist: () => void) {
+    constructor(private owner: SharedSettlement, private persist: () => void,
+        private wildlifeNavigation: WildlifeNavigation = {}, private wildlifeChanged: () => void = () => {}) {
         this.panel.id = 'clan-book-reader';
         this.panel.hidden = true;
         this.panel.setAttribute('role', 'dialog');
@@ -122,13 +125,21 @@ export class ClanBookReader {
         this.panel.innerHTML = '<header><h2 id="clan-book-title">Clan Book</h2><button id="clan-book-close" type="button" aria-label="Close Clan Book">Close</button></header>' +
             '<div class="book-tabs" role="tablist" aria-label="Book sections">' +
             '<button type="button" id="clan-book-story-tab" role="tab" aria-selected="true" aria-controls="clan-book-story-panel">Story</button>' +
-            '<button type="button" id="clan-book-family-tab" role="tab" aria-selected="false" aria-controls="clan-book-tree-panel" tabindex="-1">Family Tree</button></div>' +
+            '<button type="button" id="clan-book-family-tab" role="tab" aria-selected="false" aria-controls="clan-book-tree-panel" tabindex="-1">Family Tree</button>' +
+            '<button type="button" id="clan-book-wildlife-tab" role="tab" aria-selected="false" aria-controls="clan-book-wildlife-panel" tabindex="-1">Wildlife</button></div>' +
             '<button type="button" id="clan-book-new-story" hidden>New story available</button>' +
             '<section id="clan-book-story-panel" role="tabpanel" aria-labelledby="clan-book-story-tab">' +
             '<label>Chapter<select id="clan-book-chapter"></select></label><article id="clan-book-story"></article>' +
             '<details id="clan-book-appendix"><summary>Factual overview</summary><div></div></details></section>' +
-            '<section id="clan-book-tree-panel" role="tabpanel" aria-labelledby="clan-book-family-tab" hidden></section>';
+            '<section id="clan-book-tree-panel" role="tabpanel" aria-labelledby="clan-book-family-tab" hidden></section>' +
+            '<section id="clan-book-wildlife-panel" role="tabpanel" aria-labelledby="clan-book-wildlife-tab" hidden></section>';
         document.body.append(this.panel);
+        this.wildlifeView = new WildlifeBookView(this.panel.querySelector<HTMLElement>('#clan-book-wildlife-panel')!,
+            owner, () => { this.persist(); this.wildlifeChanged(); }, {
+                witness: this.wildlifeNavigation.witness ? id => { this.close(); this.wildlifeNavigation.witness!(id); } : undefined,
+                group: this.wildlifeNavigation.group ? id => { this.close(); this.wildlifeNavigation.group!(id); } : undefined,
+            });
+        this.panel.querySelector('#clan-book-wildlife-tab')!.addEventListener('click', () => this.setTab('wildlife'));
         this.familyTree = new FamilyTreeView(this.panel.querySelector<HTMLElement>('#clan-book-tree-panel')!, owner);
         this.panel.querySelector('#clan-book-story-tab')!.addEventListener('click', () => this.setTab('story'));
         this.panel.querySelector('#clan-book-family-tab')!.addEventListener('click', () => this.setTab('family'));
@@ -142,8 +153,11 @@ export class ClanBookReader {
             if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(key))
                 return;
             event.preventDefault();
-            this.setTab(key === 'Home' ? 'story' : key === 'End' ? 'family' : this.tab === 'story' ? 'family' : 'story');
-            this.panel.querySelector<HTMLElement>(this.tab === 'story' ? '#clan-book-story-tab' : '#clan-book-family-tab')!.focus();
+            const tabs = ['story', 'family', 'wildlife'] as const;
+            const index = key === 'Home' ? 0 : key === 'End' ? tabs.length - 1 :
+                (tabs.indexOf(this.tab) + (key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+            this.setTab(tabs[index]);
+            this.panel.querySelector<HTMLElement>('#clan-book-' + this.tab + '-tab')!.focus();
         });
         // Internal scrolling/selection must never reach world gesture handlers.
         for (const type of ['pointerdown', 'pointerup', 'wheel'])
@@ -169,6 +183,14 @@ export class ClanBookReader {
         this.panel.style.setProperty('--book-top', top + 'px');
     };
     private menuClick = (event: MouseEvent): void => {
+        const wildlife = (event.target as Element).closest<HTMLButtonElement>('[data-wildlife-event], [data-wildlife-book]');
+        if (wildlife) {
+            if (this.owner.transferring) return;
+            const id = wildlife.dataset.wildlifeEvent;
+            if (id && (Number(wildlife.dataset.wildlifeEpoch) !== this.owner.session.personalHistoryEpoch ||
+                !this.owner.session.wildlifeHistory().encounter(id))) return;
+            this.openWildlife(id); return;
+        }
         const link = (event.target as Element).closest<HTMLButtonElement>('[data-history-chapter]');
         if (link) {
             event.stopPropagation();
@@ -214,7 +236,7 @@ export class ClanBookReader {
         if (document.hidden || this.owner.transferring)
             return;
         const pending = book.chapters.find(c => !c.notified);
-        const familyOpen = !this.panel.hidden && this.tab === 'family';
+        const familyOpen = !this.panel.hidden && this.tab !== 'story';
         (this.panel.querySelector('#clan-book-new-story') as HTMLElement).hidden = !pending || !familyOpen;
         if (pending && familyOpen)
             this.queuedChapter = pending.index;
@@ -227,11 +249,12 @@ export class ClanBookReader {
         if (!this.panel.hidden) {
             if (this.tab === 'family')
                 this.familyTree.update();
+            else if (this.tab === 'wildlife') this.wildlifeView.update();
             else
                 this.paint();
         }
     }
-    open(index = this.queuedChapter ?? this.chapterIndex, tab: 'story' | 'family' = 'story'): void {
+    open(index = this.queuedChapter ?? this.chapterIndex, tab: 'story' | 'family' | 'wildlife' = 'story'): void {
         if (this.owner.transferring || document.hidden)
             return;
         this.opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
@@ -250,20 +273,26 @@ export class ClanBookReader {
         this.open(undefined, 'family');
         return this.familyTree.openPersona(personaId);
     }
-    private setTab(tab: 'story' | 'family'): void {
+    openWildlife(eventId?: string) {
+        this.open(undefined, 'wildlife');
+        this.wildlifeView.open(eventId);
+    }
+    private setTab(tab: 'story' | 'family' | 'wildlife'): void {
         if (this.owner.transferring || document.hidden)
             return;
         this.tab = tab;
         this.panel.dataset.tab = tab;
-        for (const value of ['story', 'family'] as const) {
+        for (const value of ['story', 'family', 'wildlife'] as const) {
             const active = value === tab, button = this.panel.querySelector<HTMLElement>('#clan-book-' + value + '-tab')!;
             button.setAttribute('aria-selected', String(active));
             button.tabIndex = active ? 0 : -1;
         }
         (this.panel.querySelector('#clan-book-story-panel') as HTMLElement).hidden = tab !== 'story';
         (this.panel.querySelector('#clan-book-tree-panel') as HTMLElement).hidden = tab !== 'family';
+        (this.panel.querySelector('#clan-book-wildlife-panel') as HTMLElement).hidden = tab !== 'wildlife';
         if (tab === 'family')
             this.familyTree.update();
+        else if (tab === 'wildlife') this.wildlifeView.update();
         else
             this.paint();
     }
@@ -298,6 +327,7 @@ export class ClanBookReader {
         document.removeEventListener('click', this.menuClick);
         window.removeEventListener('resize', this.measureBounds);
         this.familyTree.dispose();
+        this.wildlifeView.dispose();
         this.panel.remove();
     }
 }

@@ -155,3 +155,18 @@ Primary starting references for #105, to verify before use: [llama.cpp](https://
 The reader's no-auto-pause policy is decided in LORE-002; detailed multi-chapter navigation remains an implementation UX choice. Before model adoption, settle exact candidate/runtime/licence and measured resource limits. Approximate opening length 150–250 words, chapter 250–450 and about ten style examples are initial proposals, not quotas. No compulsory voice generation, new game mechanics or fine-tuning is implied.
 
 This specification does not claim Lore v0.2 is already implemented and does not rewrite historical QA reports.
+
+
+## Wildlife history (#226)
+
+**Clan Book > Wildlife / Creatures of the Fjord** records only species encountered by
+real physical expeditions. Each species entry shows its first sighting, historical
+group and witnesses, subsequent encounter count and paged recorded locations.
+Personal Chronicle entries describe expedition participation, not independent spotting.
+First-discovery read state is presentation metadata; the group-level event and saved
+witness identities remain canonical and survive later death or membership changes.
+The existing Attention surface links first discoveries to these records without
+pausing movement. The broader Attention hub remains tracked separately in #216.
+
+Eligibility, cooldowns, old-save adoption and validation are documented in
+[Wildlife sightings #226](../../WILDLIFE-SIGHTINGS-226.md).

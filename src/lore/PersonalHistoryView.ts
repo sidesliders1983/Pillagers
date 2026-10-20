@@ -1,3 +1,4 @@
+import { wildlifeEventLink } from './WildlifeBookView';
 import type { SharedSettlement, SettlementSelection } from '../play/SharedSettlement';
 import type { PersonalHistory, PersonalRecord } from './PersonalHistory';
 import { updateView } from '../gameplay-lab/updateView';
@@ -100,11 +101,13 @@ export class PersonalHistoryView {
                 '" data-history-persona="' + escape(history.personaId) +
                 '" data-history-epoch="' + this.epoch + '">Read in Saga Book' + (context ? ' (context)' : '') + '</button>';
         }).join('');
+        const wildlife = record.kind === 'WildlifeSighted' ? this.owner.session.wildlifeHistory().encounter(record.sourceEventId) : null;
         return '<li data-view-key="' + escape(record.sourceEventId) + '"><strong>' + escape(record.date) +
             '</strong><small>' + (record.status === 'recent' ? 'Recent — not yet included in a checkpoint' : 'Recorded') +
             ' · ' + escape(record.roles.join(', ')) + '</small><p>' + escape(record.text) + '</p>' +
             (record.roles.includes('expedition participant') ? '<p class="muted">Recorded group expedition, not individual loot.</p>' : '') +
-            links + '<details data-view-key="source"><summary>Source record</summary><p>' + escape(record.sourceEventId) +
+            (wildlife ? '<p class="muted">Recorded expedition participation; no individual spotter was assigned.</p>' +
+                wildlifeEventLink(wildlife, this.epoch) : '') + links + '<details data-view-key="source"><summary>Source record</summary><p>' + escape(record.sourceEventId) +
             ' · ' + escape(record.kind) + '<br>Winter ' + record.time.winter + ', tick ' + record.time.tick +
             '</p></details></li>';
     }

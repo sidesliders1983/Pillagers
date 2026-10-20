@@ -1,3 +1,4 @@
+import { migrateWildlifeAttention } from '../lore/WildlifeAttention';
 import { attentionAlerts, eventOrdinal, type AttentionRecord, type AttentionAlert } from '../lore/AttentionHistory';
 import { createAttentionMetadata, validateAttentionMetadata, reconcileAttention, attentionRead,
     readAttentionEvents, acknowledgeAttention, type AttentionMetadata } from '../lore/AttentionState';
@@ -169,7 +170,9 @@ export class FjordCampaign {
             throw new Error('Unsupported Fjord campaign version.');
         proposal.loadJSON(extended ? JSON.stringify(saved.campaign) : text);
         if (saved.narrative) proposal.book.restore(saved.narrative, proposal.snapshot());
-        const attention = saved.attention ?? createAttentionMetadata(proposal.readSnapshot().events.length);
+        const attention = saved.attention ?? (saved.wildlifeReadIds !== undefined ?
+            migrateWildlifeAttention(saved.wildlifeReadIds, proposal.readSnapshot(), proposal.attentionHistory().retained()) :
+            createAttentionMetadata(proposal.readSnapshot().events.length));
         validateAttentionMetadata(attention, proposal.readSnapshot());
         const seed = proposal.snapshot().seed;
         if (saved.bridgeVersion === 2 && !saved.island) throw new Error('Missing campaign island recipe.');

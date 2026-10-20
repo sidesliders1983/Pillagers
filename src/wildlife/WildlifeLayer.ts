@@ -1,3 +1,5 @@
+import { restoreWildlife } from './WildlifeSnapshot';
+import type { WildlifeState } from '../simulation/WildlifeSightings';
 import { animalRestRig, clearAnimalRest, poseAnimalRest, type AnimalRestRig } from './AnimalRestMotion';
 import { rabbitRig, poseRabbit, type RabbitRig } from './RabbitMotion';
 import { coastalAnimalRig, poseCoastalAnimal, type CoastalAnimalRig } from './CoastalAnimalMotion';
@@ -69,6 +71,7 @@ interface LegPose {
     phase: number;
 }
 interface RenderActor {
+    presentedPosition?: Vector3;
     actor: WildlifeActor;
     root: Group;
     mixer?: AnimationMixer;
@@ -181,6 +184,17 @@ export class WildlifeLayer {
             throw error;
         }
     }
+    private canonical?: WildlifeState;
+    private animationTime = 0;
+    private canonicalPending = false;
+    private targetPosition = new Vector3();
+    useCanonical(snapshot?: WildlifeState) {
+        if (snapshot === this.canonical) return;
+        if (snapshot) restoreWildlife(this.population, snapshot.actors, this.animationTime);
+        this.canonical = snapshot;
+        this.canonicalPending = true;
+        if (!snapshot) this.records.forEach(record => { record.presentedPosition = undefined; });
+    }
     setHumans(positions: readonly { x: number; z: number }[]) {
         this.population.setHumans(positions);
     }
@@ -188,7 +202,13 @@ export class WildlifeLayer {
     advance(delta: number, running: boolean, camera?: Camera) {
         if (this.disposed)
             return;
-        this.population.advance(Math.min(1, delta), running);
+        if (this.canonical) {
+            if (running) this.animationTime += delta;
+            this.population.time = this.animationTime;
+        } else {
+            this.population.advance(Math.min(1, delta), running);
+            this.animationTime = this.population.time;
+        }
         if (camera) {
             camera.updateMatrixWorld();
             this.projection.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
@@ -204,7 +224,14 @@ export class WildlifeLayer {
             const look = !moving && actor.variant.movement !== 'air'
                 ? Math.sin(this.population.time * .25 + actor.phase) * turnAmplitude : 0;
             const water = actor.variant.movement === 'water', airborne = actor.variant.movement === 'air';
-            root.position.set(actor.position.x, actor.position.y, actor.position.z);
+            this.targetPosition.set(actor.position.x, actor.position.y, actor.position.z);
+            if (this.canonical) {
+                // Smooth presentation between tick poses without moving the authoritative animal.
+                record.presentedPosition ??= this.targetPosition.clone();
+                const blend = !running ? (this.canonicalPending ? 1 : 0) : 1 - Math.exp(-12 * delta);
+                record.presentedPosition.lerp(this.targetPosition, blend);
+                root.position.copy(record.presentedPosition);
+            } else root.position.copy(this.targetPosition);
             root.rotation.set(0, actor.heading + look, actor.bank);
             if (actor.variant.movement === 'ground') {
                 const gradient = terrainGradientAt(this.population.world, actor.position.x, actor.position.z);
@@ -264,6 +291,7 @@ export class WildlifeLayer {
                         leg.bone.quaternion.premultiply(new Quaternion().setFromAxisAngle(leg.axis, Math.sin(this.population.time * 5 * Math.max(.4, gaitSpeed) + actor.phase + leg.phase) * .22));
                 }
         }
+        this.canonicalPending = false;
     }
     inspect() {
         return { version: 'wildlife-v0.1', population: this.population.inspect(),

@@ -222,9 +222,11 @@ export class FjordPlay {
             try { localStorage.setItem(resumeCheckpointKey, this.shared.persist()); }
             catch { say('Resume checkpoint unavailable. Save or export before leaving this view.'); }
         };
-        // Explicit notification review links take precedence over automatic story opening; it does not mark story content read.
+        // An explicit Attention deep link takes precedence over automatic story opening; it does not mark story content read.
         if (query.has('attention') || query.has('notifications')) this.session.book.notifyPending();
-        const bookReader = new ClanBookReader(this.shared, persist);
+        const bookReader = new ClanBookReader(this.shared, persist, {
+            witness: id => select('persona', id), group: id => expeditions?.openGroup(id),
+        }, () => refresh());
         const attentionView = new AttentionView(document.querySelector<HTMLElement>('#fjord-attention-feed')!, this.shared,
             () => { persist(); refresh(); }, {
                 family: id => { bookReader.openFamily(id); },
@@ -232,7 +234,8 @@ export class FjordPlay {
                     if (target.kind === 'expedition') expeditions?.openGroup(target.id);
                     else if (target.kind === 'site') islandMissions?.selectSite(target.id);
                     else if (target.kind === 'surface') desktopUI?.open(target.id, true);
-                    else if (target.kind !== 'wildlife') select(target.kind === 'livestock' ? 'cattle' : target.kind, target.id);
+                    else if (target.kind === 'wildlife') bookReader.openWildlife(target.id);
+                    else select(target.kind === 'livestock' ? 'cattle' : target.kind, target.id);
                 },
             });
         const attentionToast = new AttentionToast(document.querySelector<HTMLElement>('#fjord-attention-toast')!, this.shared,
@@ -284,6 +287,7 @@ export class FjordPlay {
         let islandMissions: IslandMissionPanel | undefined;
         const islandMarkers = new IslandMissionMarkers();
         let desktopUI: FjordInterface | undefined;
+        let renderedWildlifeAttention = '';
         const refresh = () => {
             let expeditionPace = cycleField.querySelector<HTMLOptionElement>('option[value="10"]');
             if (!expeditionPace) {
