@@ -32,3 +32,18 @@ are interaction evidence only; no visual acceptance is claimed.
 No gameplay rates, event emission rules, save schema version, RNG or pause policy
 changed. Unsupported future combat/diplomacy/skills remain unsupported. Adoption of
 old saves suppresses historical unread replay; current conditions still appear.
+
+## Owner follow-up: short notifications
+
+`tests/attention-toast.test.mjs` exercises actual annual social events, real funded
+multi-year births, physically prepared expedition return travel and new Food
+shortage conditions. The full focused set (Attention model/DOM/toast plus existing
+personality life events) passes 27 tests. DOM checks cover no focus theft, held
+expiration, Escape/dismissal, exact detail navigation, no automatic read/acknowledge,
+reload and hidden-period silence, bounded catch-up delivery and unchanged Core/clock.
+The test uses controlled timers; it does not wait eight wall-clock seconds per card.
+
+The UI uses existing Fjord icons/colours, safe-area offsets, 44px actions, polite
+announcements and reduced-motion CSS. The supplied phone screenshot is a design
+reference, not proof of the updated rendering. Browser inventory is still empty;
+physical device, CSS layout and WebGL UAT remain unverified.

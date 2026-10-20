@@ -1,3 +1,4 @@
+import { AttentionToast } from '../lore/AttentionToast';
 import { AttentionView } from '../lore/AttentionView';
 import { createFjordScene, type FjordScene } from './FjordScene';
 import { ExpeditionPanel } from './ExpeditionPanel';
@@ -144,7 +145,7 @@ export class FjordPlay {
                 </div>
                 <button type="button" data-surface="expeditions">${icon('route')}Expeditions</button>
             </nav><button id="fjord-attention" type="button" data-surface="attention">${icon('alert')}<span class="fjord-attention-label">Attention</span> <span id="fjord-attention-count">0</span></button>
-            <footer><p id="fjord-notice" role="status">Loading the Fjord. Simulation controls remain available.</p></footer></main>`;
+            <section id="fjord-attention-toast" aria-label="Notification" hidden></section><footer><p id="fjord-notice" role="status">Loading the Fjord. Simulation controls remain available.</p></footer></main>`;
         const savedPresentation = this.shared.presentation;
         let restoredCamera = savedPresentation?.camera;
         if (savedPresentation) {
@@ -220,8 +221,8 @@ export class FjordPlay {
             try { localStorage.setItem(resumeCheckpointKey, this.shared.persist()); }
             catch { say('Resume checkpoint unavailable. Save or export before leaving this view.'); }
         };
-        // An explicit Attention deep link takes precedence over automatic story opening; it does not mark story content read.
-        if (query.has('attention')) this.session.book.notifyPending();
+        // Explicit notification review links take precedence over automatic story opening; it does not mark story content read.
+        if (query.has('attention') || query.has('notifications')) this.session.book.notifyPending();
         const bookReader = new ClanBookReader(this.shared, persist);
         const attentionView = new AttentionView(document.querySelector<HTMLElement>('#fjord-attention-feed')!, this.shared,
             () => { persist(); refresh(); }, {
@@ -232,6 +233,13 @@ export class FjordPlay {
                     else if (target.kind === 'surface') desktopUI?.open(target.id, true);
                     else if (target.kind !== 'wildlife') select(target.kind === 'livestock' ? 'cattle' : target.kind, target.id);
                 },
+            });
+        const attentionToast = new AttentionToast(document.querySelector<HTMLElement>('#fjord-attention-toast')!, this.shared,
+            target => {
+                desktopUI?.open('attention', true);
+                if (target.eventId) attentionView.openEvent(target.eventId);
+                else if (target.alertId) attentionView.openAlert(target.alertId);
+                else attentionView.openInbox();
             });
         const personalHistory = new PersonalHistoryView(document.querySelector<HTMLElement>('#fjord-play')!, this.shared);
         let clockIntent = 0;
@@ -307,6 +315,8 @@ export class FjordPlay {
             canvas.dataset.time = JSON.stringify({ ...view.time, ticksPerWinter: state.ticksPerWinter });
             canvas.dataset.calendar = JSON.stringify(view.calendar);
             const workspace = document.querySelector<HTMLElement>('#fjord-workspace')!;
+            attentionToast.update(Boolean(this.loading) || document.hidden || this.shared.transferring || !workspace.hidden ||
+                !document.querySelector<HTMLElement>('#clan-book-reader')!.hidden);
             if (!workspace.hidden && workspace.dataset.surface === 'attention') {
                 attentionView.render();
                 const profile = view.weather.enabled ? view.weather.modifiers : null;
@@ -638,6 +648,7 @@ export class FjordPlay {
             mobileShell.dispose();
             bookReader.dispose();
             attentionView.dispose();
+            attentionToast.dispose();
             this.foundingBook?.dispose();
             personalHistory.dispose();
             setPlayback(false);

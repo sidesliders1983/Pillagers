@@ -29,11 +29,20 @@ export class AttentionView {
         root.addEventListener('keydown', this.keydown);
     }
     private button(action: string, label: string, id = '') {
-        return '<button type="button" data-attention-action="' + action + '" data-attention-id="' + escape(id) +
+        const pressed = ['unread', 'all', 'chronicle'].includes(action) ? ' aria-pressed="' + (this.mode === action) + '"' : '';
+        return '<button type="button"' + pressed + ' data-attention-action="' + action + '" data-attention-id="' + escape(id) +
             '" data-attention-epoch="' + this.owner.session.personalHistoryEpoch + '">' + escape(label) + '</button>';
     }
     private groups() {
         return attentionGroups(this.owner.fjord.attentionView().records, this.owner.fjord.attentionSave(), this.mode === 'unread');
+    }
+    openInbox() {
+        this.mode = 'unread'; this.detail = undefined; this.page = 0; this.render();
+    }
+    openAlert(id: string) {
+        this.render();
+        if (!this.owner.fjord.attentionView().alerts.some(alert => alert.id === id)) return;
+        this.detail = { kind: 'alert', id }; this.render();
     }
     openEvent(id: string) {
         this.render();
@@ -49,14 +58,15 @@ export class AttentionView {
         const view = this.owner.fjord.attentionView();
         let html = '<nav class="attention-modes" aria-label="Attention views">' +
             this.button('unread', 'Unread (' + view.unreadCount + ')') + this.button('all', 'All recent') +
-            this.button('chronicle', 'Chronicle') + this.button('read-all', 'Mark events read') + '</nav>';
+            this.button('chronicle', 'Chronicle') + '</nav><div class="attention-actions">' +
+            this.button('read-all', 'Mark events read') + '</div>';
         if (this.detail) html += this.renderDetail();
         else if (this.mode === 'chronicle') {
             const page = this.owner.session.attentionHistory().chroniclePage(this.owner.session.readSnapshot().events, this.before);
             html += '<h3>Chronicle</h3><p>Recorded facts. Routine events do not add to the Attention badge.</p>' +
                 this.button('newest', 'Newest facts') + '<ul class="attention-list">' + page.records.map(record =>
                     '<li><small>' + when(record) + '</small><p>' + escape(record.headline) + '</p>' +
-                    this.button('event', 'View recorded detail', record.eventId) + '</li>').join('') + '</ul>' +
+                    this.button('event', 'View details', record.eventId) + '</li>').join('') + '</ul>' +
                 (!page.records.length ? '<p>No formatted facts in this part of the history.</p>' : '') +
                 (page.nextBefore > 0 ? this.button('older', 'Earlier facts', String(page.nextBefore)) : '');
         } else {
@@ -64,18 +74,19 @@ export class AttentionView {
             html += '<h3>Current conditions</h3>' + (alerts.length ? '<ul class="attention-list">' + alerts.map(alert =>
                 '<li class="attention-condition" data-severity="' + alert.severity + '"><strong>' +
                 (alert.severity === 'critical' ? 'Critical' : 'Actionable') + '</strong><p>' + escape(alert.headline) + '</p>' +
-                this.button('alert', 'View condition', alert.id) + (alert.acknowledged ? '<small>Acknowledged</small>' :
+                this.button('alert', 'Details', alert.id) + (alert.acknowledged ? '<small>Acknowledged</small>' :
                     this.button('ack', 'Acknowledge', alert.id + '|' + alert.since)) + '</li>').join('') + '</ul>' :
                 '<p>No unacknowledged current conditions.</p>');
             const groups = this.groups();
             this.page = Math.min(this.page, Math.max(0, Math.ceil(groups.length / attentionLimits.page) - 1));
-            html += '<h3>Events</h3><p>Up to 200 recent notifications. Older facts remain in Chronicle.</p>' +
+            html += '<h3>Events</h3>' +
                 '<ul class="attention-list">' + groups.slice(this.page * attentionLimits.page, (this.page + 1) * attentionLimits.page)
                     .map(group => { const first = group.records[0]; return '<li><small>' + escape(first.category) + ' · Year ' +
                         first.time.winter + ' · ' + group.unread + ' unread</small><p>' + escape(group.records.length === 1 ? first.headline :
                             group.records.length + ' ' + (plurals[first.canonicalType] ?? 'recorded events')) + '</p>' +
-                        this.button('group', 'View ' + group.records.length + ' event' + (group.records.length === 1 ? '' : 's'), group.id) + '</li>'; }).join('') + '</ul>' +
-                (!groups.length ? '<p>No unread events. Explore the world or continue your clan’s story.</p>' : '') +
+                        (group.records.length === 1 ? this.button('event', 'View details', first.eventId) :
+                            this.button('group', 'View ' + group.records.length + ' events', group.id)) + '</li>'; }).join('') + '</ul>' +
+                (!groups.length ? '<p>Nothing new right now. Your clan’s story will continue here.</p>' : '') +
                 '<nav aria-label="Attention pages">' + (this.page > 0 ? this.button('page', 'Previous groups', String(this.page - 1)) : '') +
                 ((this.page + 1) * attentionLimits.page < groups.length ? this.button('page', 'More groups', String(this.page + 1)) : '') + '</nav>';
         }
@@ -98,7 +109,7 @@ export class AttentionView {
             html += '<h3>Recorded events</h3>' + this.button('read-group', 'Mark these events read', detail.id) +
                 '<ul class="attention-list">' + records.slice(this.detailPage * 20, this.detailPage * 20 + 20).map(record =>
                     '<li><small>' + when(record) + '</small><p>' + escape(record.headline) + '</p>' +
-                    this.button('event', 'View recorded detail', record.eventId) + '</li>').join('') + '</ul>' +
+                    this.button('event', 'View details', record.eventId) + '</li>').join('') + '</ul>' +
                 (this.detailPage > 0 ? this.button('detail-page', 'Newer events', String(this.detailPage - 1)) : '') +
                 ((this.detailPage + 1) * 20 < records.length ? this.button('detail-page', 'Older events', String(this.detailPage + 1)) : '');
         } else if (detail.kind === 'alert') {

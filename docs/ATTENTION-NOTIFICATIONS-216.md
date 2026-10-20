@@ -25,6 +25,8 @@ owners to extend; notification priority and read state do not belong in Core.
 | `HouseBuilt`, `BuildingCollapsed` | Noteworthy settlement milestone | Existing home, otherwise recorded detail |
 | `ExpeditionDeparted`, `ExpeditionReturned` | Noteworthy expedition fact | Actual mission/group reference or historical report |
 | `ExploreAreaDeparted` | Noteworthy only for real departure; redirects ambient | Actual group/mission or historical report |
+| `ExploreAreaReturnStarted` | Noteworthy homeward travel | Actual mission/group or historical record |
+| `ResidentQuarrelled`, `ResidentsReconciled` | Noteworthy actual social facts | Recorded participants / family or historical detail |
 | `ExploreAreaReturned` | Noteworthy expedition result | Actual group or historical report |
 | `IslandSiteSighted`, `IslandMissionVisited` | Noteworthy actual discovery / visit | Only recorded, known site/mission; no unseen clan inventory |
 | `ExploreAreaStranded` | Current critical alert, not a duplicate event badge | Current stranded mission; source remains in Chronicle |
@@ -53,7 +55,7 @@ The UI groups same-type events in a year, pages groups/details, and shows an exa
 unread count. Older notifications remain accessible as historical facts in the Clan
 Book/Chronicle rather than expanding an unbounded inbox. Earlier Chronicle pages scan
 at most 200 source events per request and show at most 20 formatted facts. Ambient facts have no badge.
-No toasts are required; reload and fast-forward therefore cannot replay toast bursts.
+New visible-world events receive one compact eight-second notification card. Reload/adoption is silent; large batches become one catch-up invitation instead of a replay burst.
 
 Save only version 1 UI metadata: an adoption/read-through event ordinal, up to 200
 read event IDs and at most 19 current alert episode/acknowledgement records. Individual
@@ -90,3 +92,28 @@ are available, but do not substitute for CSS/WebGL/device visual acceptance. Kee
 PRs draft until required current-head checks pass and report the visual QA limit.
 
 Reproducible interaction and profile evidence: [QA report](qa/attention-216/README.md).
+
+## Short world notifications (owner review, 2026-10-20)
+
+The existing dark Fjord UI now has one notification card above the bottom navigation,
+inside device safe areas. It offers View details and Dismiss, announces politely,
+keeps keyboard focus in place, and pauses its eight-second timeout during hover or
+keyboard interaction. Reduced-motion preferences disable its entrance animation.
+The world never pauses and no sound is played. Dismiss/expiry do not mark a source
+read or acknowledge an emergency; View uses the same Attention detail/read contract.
+
+Only newly observed canonical events are delivered, with at most three pending cards.
+A larger batch becomes a generic catch-up card; a newly critical condition keeps
+its explicit message before that summary. Existing history and initial conditions
+are silent on adoption, load or campaign replacement. Hidden/loading periods and
+open workspaces/readers advance the ephemeral cursor without a later replay queue.
+No toast state is saved. The persistent Attention badge/history remains available.
+
+`ExploreAreaReturnStarted` is now a noteworthy expedition fact (heading home is
+distinct from arrival). Real `ResidentQuarrelled` and `ResidentsReconciled` events
+are noteworthy life facts; mediation attempts and incident expiry remain ambient.
+Names come from historical snapshots. The social pilot must actually be enabled
+and emit these events; notifications never enable it or fabricate disagreements.
+
+The feed uses the shared dark-theme palette, a selected filter, compact actions and
+a direct detail link for single-event groups. All actions retain 44px touch targets.

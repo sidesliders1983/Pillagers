@@ -18,6 +18,7 @@ export interface AttentionRecord {
     time: GameTime;
     actorIds: string[];
     headline: string;
+    shortText?: string;
     target?: AttentionTarget;
 }
 export interface AttentionAlert {
@@ -38,6 +39,7 @@ const noteworthy = new Map<string, AttentionCategory>([
     ['ExpeditionDeparted', 'expedition'], ['ExpeditionReturned', 'expedition'],
     ['ExploreAreaDeparted', 'expedition'], ['ExploreAreaReturned', 'expedition'],
     ['IslandSiteSighted', 'discovery'], ['IslandMissionVisited', 'discovery'],
+    ['ExploreAreaReturnStarted', 'expedition'], ['ResidentQuarrelled', 'life'], ['ResidentsReconciled', 'life'],
 ]);
 
 const formattedTypes = new Set([...noteworthy.keys(), 'FoundingPartyLanded', 'FoundingPartnershipPresent',
@@ -46,7 +48,7 @@ const formattedTypes = new Set([...noteworthy.keys(), 'FoundingPartyLanded', 'Fo
     'ExploreAreaPrepared', 'ExploreAreaCancelled', 'ExploreAreaStranded', 'ExploreAreaReturnStarted',
     'ExploreAreaSuppliesConsumed', 'ExploreAreaSuppliesDiscarded', 'ExploreAreaSuppliesLost',
     'ExpeditionGroupCreated', 'ResidenceAssigned', 'BuildingSpecialized', 'BuildingUpgraded',
-    'MaintenanceDebtIncreased', 'BuildingSalvaged', 'CattleBorn', 'CattleDied', 'LivestockBorn',
+    'MediationAttempted', 'SocialIncidentEnded', 'MaintenanceDebtIncreased', 'BuildingSalvaged', 'CattleBorn', 'CattleDied', 'LivestockBorn',
     'LivestockDied', 'CattleSlaughtered', 'LivestockSlaughtered', 'FarmyardFunctionChanged']);
 
 /** Only supported source facts are formatted. Unknown/future event types never gain a badge. */
@@ -74,8 +76,13 @@ export function attentionEvent(event: SimulationEvent): AttentionRecord | null {
         target = { kind: 'building', id: d.buildingId as string };
     else if (string(d.missionId)) target = { kind: 'expedition', id: d.missionId as string };
     else if (event.type === 'IslandSiteSighted' && string(d.siteId)) target = { kind: 'site', id: d.siteId as string };
+    const groupName = string(d.groupName) ?? 'An expedition';
+    const shortText = event.type === 'ExploreAreaReturnStarted' ? groupName + ' is heading home.' :
+        ['ExpeditionReturned', 'ExploreAreaReturned'].includes(event.type) ? groupName + ' has returned home.' :
+        ['ExpeditionDeparted', 'ExploreAreaDeparted'].includes(event.type) ? groupName + ' has set out.' :
+        event.type === 'ResidentQuarrelled' ? headline.replace(/ quarrelled\.$/, ' had a disagreement.') : headline;
     return { eventId: event.id, canonicalType: event.type, category, severity,
-        time: { ...event.time }, actorIds, headline, ...(target ? { target } : {}) };
+        time: { ...event.time }, actorIds, headline, shortText, ...(target ? { target } : {}) };
 }
 
 /** Append-only ingestion with bounded retained projections, not a second event stream in UI saves. */
