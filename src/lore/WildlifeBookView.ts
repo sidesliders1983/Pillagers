@@ -38,6 +38,7 @@ export class WildlifeBookView {
     private offset = 0;
     private epoch = -1;
     private target = '';
+    private rendered = '';
     constructor(private root: HTMLElement, private owner: SharedSettlement,
         private changed: () => void, private navigation: WildlifeNavigation = {}) {
         root.addEventListener('click', this.click);
@@ -90,7 +91,10 @@ export class WildlifeBookView {
                     (this.offset + 20 >= species.count ? ' disabled' : '') + '>Older encounters</button></nav>';
             }
         }
-        if (this.root.innerHTML !== html) this.root.innerHTML = html;
+        if (this.rendered !== html) {
+            this.root.innerHTML = html;
+            this.rendered = html;
+        }
     }
     private record(record: WildlifeRecord) {
         const d = record.sighting, state = this.owner.session.readSnapshot();

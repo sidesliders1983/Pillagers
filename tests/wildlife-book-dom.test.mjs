@@ -59,6 +59,11 @@ test('real Clan Book DOM supports explicit adoption, Attention, witnesses, group
         assert.ok(persisted.length);
         assert.match(attention.textContent, /No unread wildlife discoveries/);
         const witness = record.sighting.witnessPersonaIds[0];
+        const witnessButton = wildlifePanel.querySelector('[data-wildlife-person="' + witness + '"]');
+        witnessButton.focus();
+        for (let refresh = 0; refresh < 20; refresh++) reader.update();
+        assert.equal(document.activeElement, witnessButton, 'Unchanged refreshes must preserve keyboard/touch targets');
+        assert.equal(witnessButton.isConnected, true);
         click('[data-wildlife-person="' + witness + '"]');
         assert.deepEqual(selected, [witness]);
         assert.equal(panel.hidden, true);
