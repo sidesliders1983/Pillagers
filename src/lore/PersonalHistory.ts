@@ -51,6 +51,8 @@ function housingIds(event: SimulationEvent): string[] | null {
 }
 function rolesFor(event: SimulationEvent, personaId: string, byId: ReadonlyMap<string, SimulationEvent>): string[] {
     const details = event.details ?? {};
+    if (event.type === 'WildlifeSighted')
+        return ids(details.witnessPersonaIds).includes(personaId) ? ['expedition witness'] : [];
     if (['ResidentQuarrelled', 'SocialIncidentEnded'].includes(event.type))
         return ids(details.participants).includes(personaId) ? ['disputant'] : [];
     if (event.type === 'MediationAttempted') {
@@ -137,6 +139,7 @@ function candidates(event: SimulationEvent, byId: ReadonlyMap<string, Simulation
     const prior = event.type === 'ResidentsReconciled' ? byId.get(String(details.priorEventId)) : undefined;
     return [...new Set([event.personaId, details.personaId, details.caregiverId,
             ...ids(details.participants), ...ids(details.parentIds), ...ids(details.founderIds),
+            ...(event.type === 'WildlifeSighted' ? ids(details.witnessPersonaIds) : []),
             ...(housingKinds.has(event.type) ? housingIds(event) ?? [] : []), prior?.details?.mediatorId]
             .filter((id): id is string => typeof id === 'string'))];
 }
