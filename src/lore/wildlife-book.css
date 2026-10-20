@@ -1,0 +1,13 @@
+.wildlife-species-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: 12px; padding: 0; list-style: none; }
+.wildlife-species-list button { display: grid; gap: 8px; text-align: left; width: 100%; min-height: 100px; padding: 16px; }
+.wildlife-records { list-style: none; padding: 0; }
+.wildlife-records > li { border-top: 1px solid #80918066; padding: 18px 4px; scroll-margin-top: 24px; }
+.wildlife-records h5 { font-size: 1rem; margin: 0 0 12px; }
+.wildlife-records h6 { font-size: .95rem; margin-bottom: 8px; }
+.wildlife-records small, .wildlife-attention small { display: block; opacity: .8; }
+.wildlife-records nav, #clan-book-wildlife-panel nav { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+#clan-book-wildlife-panel button, .wildlife-attention button { min-height: 44px; }
+#clan-book-reader .book-tabs { flex-wrap: wrap; }
+.wildlife-attention { padding-left: 20px; }
+.wildlife-attention li { margin-bottom: 14px; }
+.wildlife-group-history button { text-align: left; }

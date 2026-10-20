@@ -1,0 +1,80 @@
+{
+  "seed": 32,
+  "time": {
+    "winter": 800,
+    "tick": 5
+  },
+  "sightings": [
+    {
+      "species": "great-black-backed-gull",
+      "event": "event-9",
+      "witnesses": [
+        "founder-1",
+        "founder-2"
+      ]
+    }
+  ],
+  "realCommandBatches": {
+    "ticksPerBatch": 5,
+    "count": 1,
+    "maximumMs": 161.2167000000045
+  },
+  "syntheticSpatialProbe": {
+    "description": "16 route copies, 62 observers; stress instrumentation, not a canonical campaign",
+    "scans": [
+      {
+        "animalsIndexed": 28,
+        "observersIndexed": 62,
+        "candidateChecks": 620,
+        "sightlines": 16,
+        "eventsRecorded": 16,
+        "ms": 7.86250000000291
+      },
+      {
+        "animalsIndexed": 28,
+        "observersIndexed": 62,
+        "candidateChecks": 620,
+        "sightlines": 16,
+        "eventsRecorded": 0,
+        "ms": 5.047099999996135
+      },
+      {
+        "animalsIndexed": 28,
+        "observersIndexed": 62,
+        "candidateChecks": 620,
+        "sightlines": 16,
+        "eventsRecorded": 0,
+        "ms": 4.956500000000233
+      },
+      {
+        "animalsIndexed": 28,
+        "observersIndexed": 62,
+        "candidateChecks": 620,
+        "sightlines": 16,
+        "eventsRecorded": 0,
+        "ms": 12.550100000000384
+      },
+      {
+        "animalsIndexed": 28,
+        "observersIndexed": 62,
+        "candidateChecks": 620,
+        "sightlines": 16,
+        "eventsRecorded": 0,
+        "ms": 5.461600000002363
+      }
+    ]
+  },
+  "index": {
+    "examined": 100000,
+    "sightings": 5000,
+    "species": 1,
+    "buildMs": 33.76230000000214,
+    "thousandRepeatedReadsMs": 47.4829000000027,
+    "pageLimit": 20
+  },
+  "persistence": {
+    "exactRoundTrip": true,
+    "readIsNoncanonical": true,
+    "restartClearsReads": true
+  }
+}

@@ -1,3 +1,4 @@
+import { recentGroupWildlife } from '../lore/WildlifeBookView';
 import { expeditionEligible, groupMission, personaAway } from '../simulation/WorldExpeditions';
 import { defaultExpeditionFoodPerMember, inspectSpatialExpeditions,
     maximumTestExpeditionFoodPerMember } from '../simulation/SpatialExpeditions';
@@ -449,6 +450,7 @@ export class ExpeditionPanel {
                             this.session.running ? 'pause' : 'play', 'data-expedition-action="clock"') : ''}
                     </div><p class="fjord-caption">${!this.session.running ? 'Clock paused. Resume travel when you are ready.' :
                         'The clock is running.'} ${mission.missionType ? 'Return home before starting another mission.' : 'New destinations use the same carried supplies.'}</p>`;
+                html += recentGroupWildlife(this.session, group.id);
                 const latest = missions.filter(candidate => candidate.groupId === group.id).at(-1);
                 if (!mission && latest) html += `<p class="fjord-expedition-history">${icon('check')}Previous expedition: ${escape(latest.outcome ?? latest.status)} · ${latest.foodCost} Food supplied</p>`;
             }
