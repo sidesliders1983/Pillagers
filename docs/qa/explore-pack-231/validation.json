@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "baseRevision": "82f8797d9a3f72174f6b0d21d5f0ae805c84d217",
+  "sourceHashEncoding": "UTF-8 with LF",
+  "sourceHashes": {
+    "src/simulation/SpatialExpeditions.ts": "ef43befec7a05f449f9628c5b252e259898df7b65c5173d4675c38b3c8c4e505",
+    "src/fjord-play/ExpeditionPanel.ts": "64d1faa0680bb75215a65097e6f1b4f4e81b214f78f9438f716cb91e664f5ae2",
+    "tests/expedition-mode.test.mjs": "1520b749237c9dd4d0652deaff314539653531ec4a0507b8dbfff1ac9bd53ccb",
+    "scripts/qa/check-explore-pack-231.mjs": "19e3106f30eeb88dd5fb41dd6b6cfc5d42bca9df9356b2b2fa0b9481411a8670"
+  },
+  "tests": {
+    "total": 55,
+    "passed": 55,
+    "failed": 0,
+    "skipped": 0
+  },
+  "build": "PASS",
+  "characterValidation": "PASS",
+  "browser": {
+    "desktop": [
+      1280,
+      800
+    ],
+    "tablet": [
+      1180,
+      820
+    ],
+    "phone": [
+      390,
+      844
+    ],
+    "physicalDeviceTest": false,
+    "confirmations": [
+      {
+        "crew": 2,
+        "cost": 16
+      },
+      {
+        "crew": 4,
+        "cost": 32
+      }
+    ],
+    "ordinaryActiveTicks": 2000,
+    "ordinaryQAOverride": false
+  },
+  "physicalSmoke": "physical-smoke.json",
+  "fullCIRun": "See pull request; local checks are focused"
+}

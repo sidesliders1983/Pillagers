@@ -1,5 +1,6 @@
 import { expeditionEligible, groupMission, personaAway } from '../simulation/WorldExpeditions';
-import { inspectSpatialExpeditions, maximumTestExpeditionFoodPerMember } from '../simulation/SpatialExpeditions';
+import { defaultExpeditionFoodPerMember, inspectSpatialExpeditions,
+    maximumTestExpeditionFoodPerMember } from '../simulation/SpatialExpeditions';
 import { isProvidingCare, personaAge } from '../simulation/SimulationCore';
 import type { GameplaySession } from '../gameplay-lab/GameplaySession';
 import type { SimulationCommand, SimulationState } from '../simulation/SimulationCore';
@@ -345,9 +346,9 @@ export class ExpeditionPanel {
                 <span class="fjord-expedition-badge">${mission ? phase(mission) : 'At home'}</span></div>`;
     }
     private testFoodPerMember(groupId: string) {
-        const draft = this.testFoodDrafts.get(groupId) ?? '2';
+        const draft = this.testFoodDrafts.get(groupId) ?? String(defaultExpeditionFoodPerMember);
         const amount = draft.trim() ? Number(draft) : NaN;
-        return amount === 2 ? undefined : amount;
+        return amount === defaultExpeditionFoodPerMember ? undefined : amount;
     }
     private preparation(state: SimulationState, group: Group) {
         let offer: ReturnType<GameplaySession['startExpeditionOffer']> | undefined;
@@ -361,8 +362,8 @@ export class ExpeditionPanel {
                 <summary>Test supplies</summary>
                 <label><span>Food per resident (test)</span>
                     <input type="number" inputmode="numeric" min="1" max="${maximumTestExpeditionFoodPerMember}" step="1"
-                        data-test-food="${escape(group.id)}" value="${escape(this.testFoodDrafts.get(group.id) ?? '2')}"></label>
-                <p class="fjord-caption">Normal pack: 2 per resident. Choose up to ${maximumTestExpeditionFoodPerMember} for testing. Food is paid once from clan stocks.</p>
+                        data-test-food="${escape(group.id)}" value="${escape(this.testFoodDrafts.get(group.id) ?? String(defaultExpeditionFoodPerMember))}"></label>
+                <p class="fjord-caption">Normal pack: ${defaultExpeditionFoodPerMember} per resident. Choose up to ${maximumTestExpeditionFoodPerMember} for testing. Food is paid once from clan stocks.</p>
             </details><div class="fjord-expedition-departure">
             <div>${icon('food')}<span>${offer ? `<strong>${offer.foodCost} Food</strong><small>${offer.foodPerMember} per resident · paid once</small>` :
                 '<strong>Prepare supplies</strong><small>Food is confirmed before packing</small>'}</span></div>

@@ -59,7 +59,7 @@ try {
     });
     const choice = page.locator('[data-test-food="group-1"]');
     assert.equal(await choice.count(), 1, 'Preparation must offer a test-only Food-per-resident choice');
-    assert.equal(await choice.inputValue(), '2');
+    assert.equal(await choice.inputValue(), '8');
     assert.equal(await choice.getAttribute('max'), '10');
     const before = await page.evaluate(() => suppliesQA.session.saveJSON());
     await page.locator('[data-expedition-test-options] > summary').click();
@@ -67,27 +67,27 @@ try {
     await choice.fill('11');
     assert.equal(await page.locator('[data-start="group-1"]').isDisabled(), true);
     assert.equal(await page.evaluate(() => suppliesQA.session.saveJSON()), before);
-    await choice.fill('8');
+    await choice.fill('6');
     assert.equal(await page.locator('[data-expedition-test-options]').evaluate(details => details.open), true);
-    assert.ok((await page.locator('.fjord-expedition-departure').innerText()).includes('24 Food'));
+    assert.ok((await page.locator('.fjord-expedition-departure').innerText()).includes('18 Food'));
     await page.screenshot({ path: output + '/test-choice-ipad.png' });
-    report.checks.push('The normal two-Food pack stays default; the test input allows 1–10 and rejects 11 without changing Core');
+    report.checks.push('The ordinary eight-Food pack stays default; the test input allows 1–10 and rejects 11 without changing Core');
     await page.locator('[data-start="group-1"]').click();
     await page.locator('#expedition-start-dialog[open]').waitFor();
     const summary = await page.locator('#expedition-start-summary').innerText();
-    assert.ok(summary.includes('24'));
-    assert.ok(summary.includes('8 Food each'));
+    assert.ok(summary.includes('18'));
+    assert.ok(summary.includes('6 Food each'));
     assert.ok(summary.includes('Test pack'));
     await page.locator('#expedition-start-cancel').click();
     assert.equal(await page.evaluate(() => suppliesQA.session.saveJSON()), before, 'Cancelling the quote never spends');
     await page.locator('[data-start="group-1"]').click();
     await page.locator('#expedition-start-confirm').click();
     const purchased = await page.evaluate(() => suppliesQA.session.readSnapshot());
-    assert.equal(purchased.stocks.food, 476);
-    assert.equal(purchased.world.spatial.missions['explore-1'].provisions.foodPerMember, 8);
+    assert.equal(purchased.stocks.food, 482);
+    assert.equal(purchased.world.spatial.missions['explore-1'].provisions.foodPerMember, 6);
     assert.equal(purchased.world.spatial.missions['explore-1'].provisions.testCapacity, true);
     assert.equal(await page.evaluate(() => suppliesQA.session.running), false);
-    report.checks.push('The dialog quotes 24 Food for three residents; cancel is free and confirm purchases exactly the chosen pack without unpausing');
+    report.checks.push('The dialog quotes 18 Food for three residents; cancel is free and confirm purchases exactly the chosen pack without unpausing');
     await page.evaluate(() => {
         suppliesQA.panel.chooseTarget({ x: 216, z: 64 });
         suppliesQA.command({ type: 'AdvanceTicks', ticks: 600 });
@@ -95,7 +95,7 @@ try {
     const continued = await page.evaluate(() => suppliesQA.Core.inspectSpatialExpeditions(
         suppliesQA.session.readSnapshot()).missions[0]);
     assert.equal(continued.status, 'Exploring');
-    assert.equal(continued.supplies.activeTicksRemaining, 1400);
+    assert.equal(continued.supplies.activeTicksRemaining, 900);
     const saved = await page.evaluate(() => suppliesQA.session.saveJSON());
     await page.evaluate(saved => {
         suppliesQA.session.loadJSON(saved);
@@ -104,8 +104,8 @@ try {
     }, saved);
     assert.equal(await page.evaluate(() => suppliesQA.session.saveJSON()), saved);
     await page.locator('#expedition-details').click();
-    assert.ok((await page.locator('#expedition-mode').innerText()).includes('Test pack · 8 Food per resident'));
-    report.checks.push('The custom pack keeps exploring beyond normal endurance, retains its exact remaining rations through save/load and stays visibly labelled as a test pack');
+    assert.ok((await page.locator('#expedition-mode').innerText()).includes('Test pack · 6 Food per resident'));
+    report.checks.push('The custom pack retains its purchased amount and remaining rations through save/load and stays visibly labelled as a test pack');
     await page.evaluate(() => {
         suppliesQA.command({ type: 'RecallExpedition', groupId: 'group-1' });
         suppliesQA.command({ type: 'AdvanceTicks', ticks: 100 });

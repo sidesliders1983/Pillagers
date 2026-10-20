@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import { loadTypeScript } from '../scripts/load-typescript.mjs';
 const core = loadTypeScript(new URL('../src/simulation/SimulationCore.ts', import.meta.url));
 const spatial = loadTypeScript(new URL('../src/simulation/SpatialExpeditions.ts', import.meta.url));
@@ -11,8 +12,8 @@ const world = {
     settlement: { center: { x: 16, z: 64 }, harbor: null }
 };
 const context = { world, worldId: 'expedition-mode-fixture' };
-function campaign(members = ['founder-1', 'founder-2', 'founder-3'], landscape = world) {
-    let state = core.createCampaign(32, { initialFood: 500, cattleBirthChanceBps: 0 },
+function campaign(members = ['founder-1', 'founder-2', 'founder-3'], landscape = world, initialFood = 500) {
+    let state = core.createCampaign(32, { initialFood, cattleBirthChanceBps: 0 },
         { mortalityBands: [{ minAge: 0, chanceBps: 0 }], fertilityChanceBps: 0, partnershipChanceBps: 0 },
         { enabled: false });
     state = core.initializePhysicalDiscovery(state, landscape, context.worldId);
@@ -20,6 +21,55 @@ function campaign(members = ['founder-1', 'founder-2', 'founder-3'], landscape =
 }
 const start = { type: 'StartExpedition', groupId: 'group-1' };
 const goal = { type: 'ExploreArea', groupId: 'group-1', target: { x: 216, z: 64 } };
+
+test('ordinary pack prices use actual crew size and two founders cannot depart on the original 15 Food', () => {
+    for (const [members, foodCost] of [[['founder-1'], 8], [['founder-1', 'founder-2'], 16],
+        [['founder-1', 'founder-2', 'founder-3', 'founder-4'], 32]]) {
+        const state = campaign(members);
+        assert.equal(core.startExpeditionOffer(state, 'group-1', context).foodCost, foodCost);
+        const prepared = core.applyCommand(state, start, context);
+        assert.equal(prepared.world.spatial.missions['explore-1'].provisions.testCapacity, undefined);
+        assert.equal(prepared.world.spatial.missions['explore-1'].provisions.version, 2);
+    }
+    const poor = campaign(['founder-1', 'founder-2'], world, 15);
+    const before = core.serializeState(poor);
+    assert.throws(() => core.startExpeditionOffer(poor, 'group-1', context), /16 Food/);
+    assert.throws(() => core.applyCommand(poor, start, context), /16 Food/);
+    assert.equal(core.serializeState(poor), before);
+});
+
+test('paid historical Prepared packs retain two Food through load and travel; subsequent starts buy eight', async () => {
+    const fixture = JSON.parse(await readFile(new URL('../docs/qa/explore-pack-231/legacy-prepared.json', import.meta.url), 'utf8'));
+    let state = core.reconstructState(JSON.stringify(fixture.state));
+    assert.deepEqual(state, fixture.state, 'Loading never refills or relabels an already paid pack');
+    spatial.assertSpatialWorld(state, fixture.context);
+    const walking = core.applyCommand(state, goal, fixture.context);
+    const moved = core.applyCommand(walking, { type: 'AdvanceTicks', ticks: 20 }, fixture.context);
+    assert.equal(core.inspectSpatialExpeditions(moved).missions[0].supplies.activeTicksRemaining, 480);
+    assert.equal(moved.stocks.food, 494);
+    assert.deepEqual(core.reconstructState(core.serializeState(moved)), moved);
+    const qa = core.reconstructState(JSON.stringify(fixture.qaState));
+    assert.deepEqual(qa, fixture.qaState, 'Historical explicit QA packs retain their recorded marker and spending');
+    assert.equal(qa.world.spatial.missions['explore-2'].provisions.version, 1);
+    assert.equal(qa.world.spatial.missions['explore-2'].provisions.foodPerMember, 10);
+    const qaWalking = core.applyCommand(qa, goal, fixture.context);
+    const qaMoved = core.applyCommand(qaWalking, { type: 'AdvanceTicks', ticks: 20 }, fixture.context);
+    assert.equal(core.inspectSpatialExpeditions(qaMoved).missions[1].supplies.activeTicksRemaining, 2480);
+    assert.deepEqual(core.reconstructState(core.serializeState(qaMoved)), qaMoved);
+    state = core.applyCommand(state, { type: 'CancelExpedition', groupId: 'group-1' }, fixture.context);
+    state = core.applyCommand(state, start, fixture.context);
+    assert.equal(state.stocks.food, 470);
+    assert.equal(state.world.spatial.missions['explore-1'].provisions.foodPerMember, 2);
+    assert.equal(state.world.spatial.missions['explore-2'].provisions.foodPerMember, 8);
+    assert.deepEqual(core.reconstructState(core.serializeState(state)), state);
+    for (const [version, foodPerMember, testCapacity] of [[1, 8, undefined], [2, 2, undefined],
+        [2, 7, undefined], [3, 8, undefined], [2, 11, true], [2, 8, false]]) {
+        const corrupt = structuredClone(state);
+        Object.assign(corrupt.world.spatial.missions['explore-2'].provisions,
+            { version, foodPerMember, testCapacity });
+        assert.throws(() => core.reconstructState(JSON.stringify(corrupt)), /spatial|expedition/i);
+    }
+});
 
 test('new expeditions take diagonal routes at the same speed and retain them through redirect, recall and save/load', () => {
     let state = core.applyCommand(campaign(['founder-1']), start, context);
@@ -89,7 +139,7 @@ test('a test pack quotes and pays the chosen Food per member once and retains it
     const walking = core.applyCommand(prepared, goal, context);
     const exploring = core.applyCommand(walking, { type: 'AdvanceTicks', ticks: 600 }, context);
     const mission = core.inspectSpatialExpeditions(exploring).missions[0];
-    assert.equal(mission.status, 'Exploring', 'The chosen pack must last beyond the normal 500-tick allowance');
+    assert.equal(mission.status, 'Exploring', 'The chosen pack must last beyond the historical 500-tick allowance');
     assert.equal(mission.supplies.activeTicksRemaining, 1400);
     assert.equal(mission.supplies.testCapacity, true);
     const restored = core.reconstructState(core.serializeState(exploring));
@@ -118,21 +168,21 @@ test('exploration supplies exclude the protected homeward allowance without chan
     state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 20 }, context);
     const saved = core.serializeState(state);
     const supplies = core.inspectSpatialExpeditions(state).missions[0].supplies;
-    assert.equal(supplies.activeTicksRemaining, 480);
+    assert.equal(supplies.activeTicksRemaining, 1980);
     assert.equal(supplies.returnTicksReserved, 22, '20 ticks home plus the existing two-tick safety margin');
-    assert.equal(supplies.explorationTicksRemaining, 458);
+    assert.equal(supplies.explorationTicksRemaining, 1958);
     assert.equal(core.serializeState(state), saved, 'Projection never consumes or stores derived supplies');
     assert.deepEqual(core.inspectSpatialExpeditions(core.reconstructState(saved)).missions[0].supplies, supplies);
 });
 
-test('Start Expedition reserves six Food for three residents once, stages without eating and cancellation never refunds confirmed spending', () => {
+test('Start Expedition spends 24 Food for three residents once, stages without eating and cancellation never refunds confirmed spending', () => {
     const state = campaign(), saved = core.serializeState(state);
     const offer = core.startExpeditionOffer(state, 'group-1', context);
-    assert.equal(offer.foodPerMember, 2);
-    assert.equal(offer.foodCost, 6);
-    assert.equal(offer.activeTicks, 500);
+    assert.equal(offer.foodPerMember, 8);
+    assert.equal(offer.foodCost, 24);
+    assert.equal(offer.activeTicks, 2000);
     const prepared = core.applyCommand(state, start, context);
-    assert.equal(prepared.stocks.food, 494);
+    assert.equal(prepared.stocks.food, 476);
     assert.equal(core.inspectSpatialExpeditions(prepared).missions[0].status, 'Prepared');
     assert.equal(spatial.expeditionModeActive(prepared), true);
     assert.equal(core.serializeState(state), saved);
@@ -145,9 +195,9 @@ test('Start Expedition reserves six Food for three residents once, stages withou
     assert.equal(cancelled.stocks.food, waiting.stocks.food);
     assert.equal(spatial.expeditionModeActive(cancelled), false);
     assert.throws(() => core.applyCommand(cancelled, { type: 'CancelExpedition', groupId: 'group-1' }, context), /prepared|active/i);
-    const poor = structuredClone(state); poor.stocks.food = 5;
+    const poor = structuredClone(state); poor.stocks.food = 23;
     const poorSaved = core.serializeState(poor);
-    assert.throws(() => core.applyCommand(poor, start, context), /6 Food/i);
+    assert.throws(() => core.applyCommand(poor, start, context), /24 Food/i);
     assert.equal(core.serializeState(poor), poorSaved);
 });
 
@@ -158,7 +208,7 @@ test('prepared groups depart from actual origins and redirects/recall reuse thei
     assert.equal('plannedTicks' in offer, false);
     const origins = { 'founder-1': { x: 18, z: 65 }, 'founder-2': { x: 24, z: 64 }, 'founder-3': { x: 32, z: 64 } };
     let state = core.applyCommand(prepared, { ...goal, origins }, context);
-    assert.equal(state.stocks.food, 494);
+    assert.equal(state.stocks.food, 476);
     assert.deepEqual(state.world.spatial.missions['explore-1'].memberRoutes['founder-1'][0], origins['founder-1']);
     state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 10 }, context);
     const before = core.serializeState(state), supplies = structuredClone(state.world.spatial.missions['explore-1'].provisions);
@@ -183,30 +233,30 @@ test('early physical homecoming discards unused Food without refunds or a second
     state = core.applyCommand(state, goal, context);
     state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 20 }, context);
     const pack = core.inspectSpatialExpeditions(state).missions[0].supplies;
-    assert.equal(pack.activeTicksRemaining, 480);
-    assert.equal(pack.unopenedFood, 3);
-    assert.equal(state.stocks.food, 494, 'Eating uses carried Food, not home stock');
+    assert.equal(pack.activeTicksRemaining, 1980);
+    assert.equal(pack.unopenedFood, 21);
+    assert.equal(state.stocks.food, 476, 'Eating uses carried Food, not home stock');
     state = core.applyCommand(state, { type: 'RecallExpedition', groupId: 'group-1' }, context);
     const halfway = core.reconstructState(core.serializeState(state));
     const returned = core.applyCommand(halfway, { type: 'AdvanceTicks', ticks: 20 }, context);
     assert.equal(returned.world.spatial.missions['explore-1'].status, 'Returned');
-    assert.equal(returned.stocks.food, 494, 'The confirmed six-Food cost is final, including unused rations');
+    assert.equal(returned.stocks.food, 476, 'The confirmed 24-Food cost is final, including unused rations');
     const discarded = returned.events.filter(e => e.type === 'ExploreAreaSuppliesDiscarded');
-    assert.equal(discarded.length, 1); assert.equal(discarded[0].details.units, 3);
+    assert.equal(discarded.length, 1); assert.equal(discarded[0].details.units, 21);
     assert.equal(returned.events.some(e => e.type === 'ExploreAreaSuppliesReturned'), false);
     assert.equal(returned.events.filter(e => e.type === 'ExploreAreaSuppliesConsumed')
         .reduce((sum, e) => sum + e.details.units, 0), 3);
     const later = core.applyCommand(returned, { type: 'AdvanceTicks', ticks: 10 }, context);
-    assert.equal(later.stocks.food, 494);
+    assert.equal(later.stocks.food, 476);
 });
 
-test('a distant destination triggers conservative return on the reached trail before rations run out', () => {
+test('a short test pack triggers conservative return on the reached trail before rations run out', () => {
     const wideBounds = { ...bounds, maxX: 1024 };
     const wideWorld = { ...world,
         terrain: { bounds: wideBounds, spacing: 8, columns: 129, rows: 17, heights: Array(2193).fill(0) },
         navigation: { bounds: wideBounds, spacing: 8, columns: 129, rows: 17, cells: Array(2193).fill(true) } };
     const bound = { ...context, world: wideWorld };
-    let state = core.applyCommand(campaign(['founder-1'], wideWorld), start, bound);
+    let state = core.applyCommand(campaign(['founder-1'], wideWorld), { ...start, testFoodPerMember: 2 }, bound);
     state = core.applyCommand(state, { ...goal, target: { x: 904, z: 64 } }, bound);
     state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 300 }, bound);
     const mission = state.world.spatial.missions['explore-1'];
@@ -239,7 +289,7 @@ test('an actually blocked return is terminal and factual, without a teleport, re
     const result = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 20 }, { ...context, world: blocked });
     assert.equal(result.world.spatial.missions['explore-1'].status, 'Stranded');
     assert.equal(spatial.expeditionModeActive(result), false);
-    assert.equal(result.stocks.food, 498);
+    assert.equal(result.stocks.food, 492);
     assert.equal(core.inspectWork(result, 'founder-1').reason, 'expedition');
     assert.ok(result.events.some(e => e.type === 'ExploreAreaStranded'));
     assert.equal(result.events.some(e => e.type === 'ExploreAreaReturned'), false);
@@ -284,9 +334,9 @@ test('the Clan Book reconciles upfront spending, carried consumption and discard
     const facts = session.book.snapshot().chapters.at(-1).facts;
     assert.equal(facts.ledger.food.residual, 0);
     assert.equal(facts.ledger.food.complete, true);
-    assert.equal(facts.ledger.provisions.reserved, 6);
+    assert.equal(facts.ledger.provisions.reserved, 24);
     assert.equal(facts.ledger.provisions.consumed, 3);
-    assert.equal(facts.ledger.provisions.discarded, 3);
+    assert.equal(facts.ledger.provisions.discarded, 21);
     assert.equal(facts.ledger.provisions.lost, 0);
     const returned = core.reconstructState(session.saveJSON());
     assert.deepEqual(returned, session.snapshot());
@@ -305,7 +355,7 @@ test('prepared cancellation creates no fictitious journey and terminal losses ca
     assert.equal(spatial.expeditionModeActive(lost), false);
     const supplies = core.inspectSpatialExpeditions(lost).missions[0].supplies;
     assert.equal(supplies.consumedFood, 1);
-    assert.equal(supplies.lostFood, 1);
+    assert.equal(supplies.lostFood, 7);
     assert.equal(supplies.discardedFood, 0);
     const corrupt = structuredClone(prepared);
     corrupt.world.spatial.missions['explore-1'].provisions.members['founder-1'].food++;
@@ -324,7 +374,7 @@ test('physical return keeps the override for another prepared group and restores
     assert.equal(session.snapshot().time.tick, 3, '600 ms returns home, then the normal 300 ms tick applies');
     assert.equal(session.expeditionMode, false);
     assert.equal(session.effectiveMinutesPerWinter, 5);
-    assert.equal(session.snapshot().stocks.food, 498, 'The unopened remainder is never refunded');
+    assert.equal(session.snapshot().stocks.food, 492, 'The unopened remainder is never refunded');
     session.setRunning(false);
     session.command({ type: 'CreateExpeditionGroup', name: 'Group 2', memberIds: ['founder-2'] });
     session.command({ type: 'StartExpedition', groupId: 'group-2' });

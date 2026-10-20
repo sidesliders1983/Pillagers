@@ -48,7 +48,7 @@ A new island may have at least player and rival settlement IDs; old four-directi
 ## First interaction milestone
 
 1. Start a new physical-island discovery prototype with a small visible founding area.
-2. Create a numbered Expedition Group, add eligible selected residents and confirm Start Expedition for the displayed fixed Food price.
+2. Create a numbered Expedition Group, add eligible selected residents and confirm Start Expedition for the displayed fixed Food price: 8 Food per member for new ordinary starts (#231), providing 2,000 active ticks including the protected return. Two members cost 16 Food, exceeding the unchanged 15-Food founding stock. Already purchased packs retain their recorded amounts.
 3. Choose Explore Area and tap unknown terrain. This sends or redirects the same paid group without a second confirmation or per-destination Food purchase; see [Expedition Mode](../SPATIAL-EXPEDITIONS-V04B.md).
 4. The group chooses a plausible path, progresses by canonical ticks, uses provisions and reveals actual terrain visited or seen behind/above ridge constraints.
 5. On return, terrain remains mapped. The group can later reconnoiter a known possible rival site, surveil for fresher intelligence, or pillage a confirmed valid target.
