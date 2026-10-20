@@ -6,8 +6,11 @@ const load = path => loadDOMSource('../src/' + path + '.ts');
 const { SharedSettlement, localSettlementText } = load('play/SharedSettlement');
 const { GameplaySession } = load('gameplay-lab/GameplaySession');
 const core = load('simulation/SimulationCore');
+const { AttentionView } = load('lore/AttentionView');
+const { readWildlifeDiscoveries, wildlifeAttentionAdapter } = load('lore/WildlifeAttention');
+const reads = owner => readWildlifeDiscoveries(owner.session.readSnapshot(), owner.fjord.attentionSave());
 const { ClanBookReader } = load('lore/ClanBookReader');
-const { wildlifeAttentionHTML, wildlifeEventLink, recentGroupWildlife } = load('lore/WildlifeBookView');
+const { wildlifeEventLink, recentGroupWildlife } = load('lore/WildlifeBookView');
 
 test('real Clan Book DOM supports explicit adoption, Attention, witnesses, groups, persistence and stale links', () => {
     const dom = new JSDOM('<!doctype html><main><button id="clan-book-open">Clan Book</button><section id="attention"></section></main>',
@@ -21,9 +24,12 @@ test('real Clan Book DOM supports explicit adoption, Attention, witnesses, group
     owner.session.initializeDiscovery(owner.fjord.blueprint, owner.fjord.layout.geographyId);
     const selected = [], groups = [], persisted = [];
     const attention = document.querySelector('#attention');
-    const refresh = () => { attention.innerHTML = wildlifeAttentionHTML(owner); };
+    let attentionView;
+    const refresh = () => attentionView?.render();
     const reader = new ClanBookReader(owner, () => persisted.push(owner.persist()),
         { witness: id => selected.push(id), group: id => groups.push(id) }, refresh);
+    attentionView = new AttentionView(attention, owner, () => { persisted.push(owner.persist()); refresh(); },
+        { target: target => { if (target.kind === 'wildlife') reader.openWildlife(target.id); } });
     const panel = document.querySelector('#clan-book-reader');
     const wildlifePanel = document.querySelector('#clan-book-wildlife-panel');
     const click = selector => {
@@ -49,16 +55,20 @@ test('real Clan Book DOM supports explicit adoption, Attention, witnesses, group
         assert.ok(record, 'Actual expedition produces the UI source record');
         refresh();
         const beforeReading = session.saveJSON();
-        click('#attention [data-wildlife-event]');
+        const sharedRecord = owner.fjord.attentionView().records.find(item => item.eventId === record.eventId);
+        assert.ok(sharedRecord && !sharedRecord.read && sharedRecord.severity === 'noteworthy');
+        click('#attention [data-attention-action="group"][data-attention-id="WildlifeSighted:' + record.time.winter + '"]');
+        click('#attention [data-attention-action="event"][data-attention-id="' + record.eventId + '"]');
+        click('#attention [data-attention-action="target"]');
         assert.equal(panel.hidden, false);
         assert.equal(panel.dataset.tab, 'wildlife');
         assert.match(wildlifePanel.textContent, /First clan sighting/);
         assert.equal(wildlifePanel.querySelectorAll('[data-wildlife-person]').length, 2);
         assert.doesNotMatch(wildlifePanel.textContent, /Lynx|Reindeer|Rabbit/);
         assert.equal(session.saveJSON(), beforeReading);
-        assert.deepEqual(owner.fjord.readWildlifeDiscoveries, [record.eventId]);
+        assert.deepEqual(reads(owner), [record.eventId]);
         assert.ok(persisted.length);
-        assert.match(attention.textContent, /No unread wildlife discoveries/);
+        assert.equal(owner.fjord.attentionView().records.find(item => item.eventId === record.eventId).read, true);
         const witness = record.sighting.witnessPersonaIds[0];
         const witnessButton = wildlifePanel.querySelector('[data-wildlife-person="' + witness + '"]');
         witnessButton.focus();
@@ -86,6 +96,23 @@ test('real Clan Book DOM supports explicit adoption, Attention, witnesses, group
         staleLink.innerHTML = wildlifeEventLink(record, session.personalHistoryEpoch);
         document.body.append(staleLink);
         const checkpoint = owner.persist();
+        const legacy = JSON.parse(checkpoint);
+        delete legacy.fjord.attention; legacy.fjord.wildlifeReadIds = [];
+        const migrated = SharedSettlement.restore(JSON.stringify(legacy), 'fjord');
+        assert.deepEqual(migrated.session.snapshot(), session.snapshot());
+        assert.equal(migrated.fjord.attentionView().records.find(item => item.eventId === record.eventId).read, false);
+        assert.ok(migrated.fjord.attentionView().records.filter(item => item.canonicalType !== 'WildlifeSighted').every(item => item.read),
+            'Prototype migration preserves unread discoveries without replaying old life/expedition notifications');
+        assert.equal(Object.hasOwn(migrated.fjord.exportData(), 'wildlifeReadIds'), false,
+            'New saves have one common read contract, not a parallel wildlife read store');
+        legacy.fjord.wildlifeReadIds = [record.eventId];
+        assert.deepEqual(reads(SharedSettlement.restore(JSON.stringify(legacy), 'fjord')), [record.eventId]);
+        legacy.fjord.wildlifeReadIds = ['event-999999'];
+        assert.throws(() => migrated.importJSON(JSON.stringify(legacy.fjord)), /legacy wildlife/);
+        assert.deepEqual(migrated.session.snapshot(), session.snapshot(), 'Rejected migration commits no canonical changes');
+        const source = session.readSnapshot().events.find(event => event.id === record.eventId);
+        const policyFixture = { ...source, details: { ...source.details, firstForClan: false } };
+        assert.equal(wildlifeAttentionAdapter(policyFixture).severity, 'ambient', 'Repeat policy has no Attention badge');
         owner.importJSON(JSON.stringify(JSON.parse(checkpoint).fjord));
         reader.update();
         assert.equal(panel.hidden, true);
@@ -93,17 +120,17 @@ test('real Clan Book DOM supports explicit adoption, Attention, witnesses, group
         assert.equal(panel.hidden, true, 'Previous campaign epoch cannot open a coincidentally reused event ID');
         reader.openWildlife(record.eventId);
         assert.equal(panel.hidden, false);
-        assert.deepEqual(owner.fjord.readWildlifeDiscoveries, [record.eventId]);
+        assert.deepEqual(reads(owner), [record.eventId]);
         const sidecar = owner.fjord.exportJSON();
         const mixedStorage = { getItem: key => key === 'pillagers.gameplay-lab.v1' ? beforeEncounters : sidecar };
         const rolledBack = SharedSettlement.restore(localSettlementText(mixedStorage), 'fjord');
         assert.deepEqual(rolledBack.session.snapshot(), core.reconstructState(beforeEncounters));
-        assert.deepEqual(rolledBack.fjord.readWildlifeDiscoveries, [],
+        assert.deepEqual(reads(rolledBack), [],
             'A newer same-seed presentation sidecar must not block or mark discoveries in an older canonical save');
         panel.dispatchEvent(new dom.window.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
         assert.equal(panel.hidden, true);
     } finally {
-        reader.dispose(); dom.window.close();
+        attentionView.dispose(); reader.dispose(); dom.window.close();
         for (const [key, value] of Object.entries(previous)) {
             if (value === undefined) delete globalThis[key]; else globalThis[key] = value;
         }

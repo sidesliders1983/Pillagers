@@ -10,17 +10,6 @@ export function wildlifeEventLink(record: WildlifeRecord, epoch: number, label =
     return '<button type="button" data-wildlife-event="' + escape(record.eventId) +
         '" data-wildlife-epoch="' + epoch + '">' + escape(label) + '</button>';
 }
-export function wildlifeAttentionHTML(owner: SharedSettlement) {
-    const unread = owner.session.wildlifeHistory().unread(owner.fjord.readWildlifeDiscoveries);
-    return '<h3>Wildlife discoveries</h3>' + (unread.length ?
-        '<ul class="wildlife-attention">' + unread.map(summary => '<li>' +
-            wildlifeEventLink(summary.first, owner.session.personalHistoryEpoch,
-                'First sighting: ' + summary.label) + '<small>' + date(summary.first) + ' · ' +
-            escape(summary.first.sighting.groupName) + '</small></li>').join('') + '</ul>' +
-        '<button type="button" data-wildlife-read-all>Mark discoveries read</button>' :
-        '<p>No unread wildlife discoveries.</p>') +
-        '<button type="button" data-wildlife-book>Open wildlife in Clan Book</button>';
-}
 export function recentGroupWildlife(owner: { wildlifeHistory: SharedSettlement['session']['wildlifeHistory']; personalHistoryEpoch: number }, groupId: string) {
     const records = owner.wildlifeHistory().group(groupId);
     return records.length ? '<section class="wildlife-group-history" aria-label="Recent wildlife sightings"><h4>Recent wildlife sightings</h4><ul>' +
@@ -55,7 +44,7 @@ export class WildlifeBookView {
     }
     private readSpecies(speciesId: string) {
         const first = this.owner.session.wildlifeHistory().species(speciesId)?.first;
-        if (first) { this.owner.fjord.markWildlifeRead(first.eventId); this.changed(); }
+        if (first) { this.owner.fjord.markAttentionRead([first.eventId]); this.changed(); }
     }
     update() {
         if (this.epoch !== this.owner.session.personalHistoryEpoch) {

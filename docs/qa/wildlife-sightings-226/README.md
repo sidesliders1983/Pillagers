@@ -49,3 +49,25 @@ Browser inventory was empty and direct in-app browser creation returned
 `Browser is not available: iab`. No desktop/mobile screenshot or visual UAT is claimed.
 The manual review page and DOM coverage are supplied so that visual acceptance can
 be completed without pretending the unavailable browser check passed.
+
+## Attention #216 integration (2026-10-20)
+
+PR #234 is now stacked on foundation PR #235. The original measurements above and
+`measurements.json` remain evidence of the earlier implementation.
+`attention-stack-measurements.json` records the regenerated real campaign using the
+shared Attention contract; source events, encounters and actual witnesses are unchanged.
+The old wildlife-only feed/read store was removed, with import-only migration for
+prototype saves. New saves contain only the bounded common `attention` metadata.
+
+Nineteen focused tests pass across canonical Attention/wildlife and actual jsdom
+components; an additional migration run passes with preservation of prototype unread
+and read discoveries, no old-life replay, rejected invalid IDs and unchanged Core.
+The lightweight review launcher has two passing DOM tests for immediate click
+feedback, paused checkpoint transfer, iframe selection changes, failure messages and
+retry. `/fjord-play?attention=1` now opens the actual common feed directly.
+
+Regenerate with `node scripts/qa/wildlife-sightings-226.mjs` and open
+`/scripts/qa/wildlife-sightings-review.html` on the branch's Vite server. Checkpoints
+are isolated paused QA data in session storage, not edits to an existing saved campaign.
+No browser surface is currently enabled, so CSS/WebGL/device visual UAT is still
+unverified. A passing jsdom interaction test is not visual acceptance.

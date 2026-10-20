@@ -1,6 +1,6 @@
 # Wildlife sightings — #226
 
-## Architecture audit (current main 65980e0)
+## Original architecture audit (main 65980e0, before #216)
 
 - Wildlife entered Fjord Play in [PR #215](https://github.com/sidesliders1983/Pillagers/pull/215).
   `WildlifePopulation` owns seeded real instance IDs, habitat placement and motion.
@@ -69,8 +69,19 @@ A rebuildable append-only index maps the one event stream to species, groups and
 encounters. Personal history uses the same witness IDs. Views never list names,
 locations, instance counts or registry entries for undiscovered species.
 Species encounter pages are bounded; history is not cloned into UI storage.
-Attention read state contains only the bounded first-discovery event IDs, stored
-in the campaign's noncanonical presentation envelope, never in Core truth.
+This PR now depends on [Attention #216 / PR #235](https://github.com/sidesliders1983/Pillagers/pull/235).
+The `wildlifeAttentionAdapter` joins the common Attention projection: first clan
+species sightings are noteworthy discoveries, subsequent encounters are ambient
+Chronicle facts. Both use the canonical sighting ID and actual witness roster.
+One shared badge and bounded `attention` metadata store cover life, expeditions,
+conditions and wildlife. Reading the species in Clan Book marks that same source
+read. There is no separate wildlife notification feed or persisted read store.
+
+Prototype #226 saves with `wildlifeReadIds` are validated and migrated on import:
+retained old non-wildlife facts are adopted as read; actual first-sighting read flags
+are preserved. New exports contain only the #216 contract. Without either metadata
+field, normal #216 old-save adoption applies. Older facts outside the bounded inbox
+remain in Chronicle and the species history.
 When local storage combines an older canonical save with a newer same-seed sidecar,
 stale read IDs are discarded; a reused event number cannot mark another discovery read.
 Historical navigation falls back to the recorded encounter when a group/person
@@ -108,3 +119,12 @@ This feature does not implement hunting, taming, combat or population growth.
 - Reproducible real-island checkpoint and bounded workload measurements:
   `node scripts/qa/wildlife-sightings-226.mjs`.
   See [QA evidence](qa/wildlife-sightings-226/README.md).
+
+## Stacked delivery
+
+Merge #216 first. This feature branch and PR #234 target its branch so reviewers see
+only the wildlife extension. Retarget #234 to main after the foundation merges; do
+not merge the stack while checks for either head are pending/failing. The QA launcher
+binds immediately, reports loading/fetch failures and opens the selected paused
+checkpoint directly at Attention. It no longer imports/restores a whole world before
+responding to a click. The actual game remains responsible for checkpoint restoration.

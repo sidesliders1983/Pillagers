@@ -1,3 +1,4 @@
+import { wildlifeAttentionAdapter } from '../lore/WildlifeAttention';
 import { AttentionHistoryIndex } from '../lore/AttentionHistory';
 import { WildlifeHistoryIndex } from '../lore/WildlifeHistory';
 import { initializeWildlifeSightings, assertWildlifeWorld } from '../simulation/WildlifeSightings';
@@ -55,7 +56,7 @@ export class GameplaySession {
         this.readState = undefined;
         this.serializedState = undefined;
     }
-    private attentionIndex = new AttentionHistoryIndex();
+    private attentionIndex = new AttentionHistoryIndex([wildlifeAttentionAdapter]);
     attentionHistory() {
         this.attentionIndex.append(this.state.events);
         return this.attentionIndex;
@@ -210,7 +211,7 @@ export class GameplaySession {
     private replace(state: SimulationState, fresh = true): void {
         this.physicalWorld = undefined;
         this.physicalExclusions = undefined;
-        this.attentionIndex = new AttentionHistoryIndex();
+        this.attentionIndex = new AttentionHistoryIndex([wildlifeAttentionAdapter]);
         this.familyIndex = new FamilyTreeIndex();
         this.personalIndex = new PersonalHistoryIndex();
         this.wildlifeIndex = new WildlifeHistoryIndex();

@@ -508,7 +508,6 @@ export class FjordPlay {
             refresh();
         };
         desktopUI = new FjordInterface(this.shared, { select, refresh, notify: say,
-            wildlifeAttentionCount: () => this.session.wildlifeHistory().unread(this.campaign.readWildlifeDiscoveries).length,
             home: () => controller.home(),
             commit: (commands, done) => action(async () => {
                 this.session.commandBatch(typeof commands === 'function' ? commands() : commands);
