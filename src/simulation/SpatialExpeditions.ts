@@ -8,6 +8,7 @@ import { eventFacts } from './EventFacts';
 import { completeIslandMission, observeIslandMission, recordIslandSightings, validateIslandMission, type IslandMissionTask } from './IslandMissions';
 
 export interface PhysicalExpeditionContext {
+    wildlifeWorld?: WorldBlueprint;
     exclusions?: readonly Bounds2[];
     worldId: string;
     world: Pick<WorldBlueprint, 'terrain' | 'waterLevel' | 'navigation' | 'settlement' | 'rivalSite'> &
@@ -708,8 +709,9 @@ function prepareModeTick(state: SimulationState, mission: SpatialMission, contex
 }
 export function stepSpatialExpeditions(state: SimulationState, context?: PhysicalExpeditionContext) {
     const spatial = state.world?.spatial;
-    const active = Object.values(spatial?.missions ?? {}).filter(m => m.status !== 'Returned' && m.status !== 'Stranded');
-    if (!active.length) return;
+    const remaining = Object.values(spatial?.missions ?? {}).filter(m => m.status !== 'Returned');
+    const active = remaining.filter(m => m.status !== 'Stranded');
+    if (!active.length) return remaining;
     const bound = requireContext(state, context), now = absoluteTick(state);
     let observe = false;
     for (const mission of active) {
@@ -759,6 +761,7 @@ export function stepSpatialExpeditions(state: SimulationState, context?: Physica
         observe ||= previousStatus !== mission.status || Math.floor(previous / 8) !== Math.floor(mission.travelled / 8);
     }
     if (observe) refreshSpatialObservations(state, bound);
+    return remaining;
 }
 function refreshSpatialObservations(state: SimulationState, context: PhysicalExpeditionContext) {
     const observations = [{

@@ -1,3 +1,7 @@
+import {
+    stepWildlifeSightings, validateWildlife, validateWildlifeSighting, wildlifeSighting, assertWildlifeWorld,
+    initializeWildlifeSightings as bindWildlifeSightings, type WildlifeState,
+} from './WildlifeSightings';
 import { seededRandom } from '../characters/seededRandom';
 import { assertIslandClanWorld, type IslandClanLandscape } from './IslandClans';
 import { applySpatialCommand, stepSpatialExpeditions, requireSpatialAdvance, validateSpatialExpeditions } from './SpatialExpeditions';
@@ -59,6 +63,7 @@ export type Persona = {
 };
 export type SimulationEvent = {id: string; time: GameTime; type: string; personaId?: string; details?: Record<string, unknown>};
 export type SimulationState = {
+    wildlife?: WildlifeState;
     specialistStocks?: SpecialistStocks;
     discovery?: ClanDiscovery;
     birthdayCalendar?: BirthdayCalendar;
@@ -96,6 +101,12 @@ export function createCampaign(
         return target;
     }, expeditionOverrides);
     initializeSocial(state, socialOverrides);
+    validateState(state);
+    return state;
+}
+export function initializeWildlifeSightings(input: SimulationState, world: WorldBlueprint, worldId: string) {
+    validateState(input);
+    const state = bindWildlifeSightings(input, world, worldId);
     validateState(state);
     return state;
 }
@@ -233,7 +244,17 @@ export function applyCommand(input: SimulationState, command: SimulationCommand,
     integer(total, 'Total ticks');
     integer(input.time.winter + Math.floor(total / input.ticksPerWinter), 'Winter');
     const state = structuredClone(input);
-    if(state.mechanics){requireSpatialAdvance(state,context);for(let index=0;index<ticks;index++){stepMechanicsTick(state);stepSpatialExpeditions(state,context);}validateState(state); return state;}
+    if (state.mechanics) {
+        requireSpatialAdvance(state, context);
+        assertWildlifeWorld(state, context);
+        for (let index = 0; index < ticks; index++) {
+            stepMechanicsTick(state);
+            const missions = stepSpatialExpeditions(state, context);
+            stepWildlifeSightings(state, context, missions);
+        }
+        validateState(state);
+        return state;
+    }
     const winter = state.time.winter + Math.floor(total / state.ticksPerWinter);
     while (state.time.winter < winter) {
         state.time = {winter: state.time.winter + 1, tick: 0};
@@ -267,6 +288,7 @@ function validateState(state: SimulationState): void {
     }
     integer(state.stocks.food, 'Food'); integer(state.stocks.materials, 'Materials');
     validateSpecialistStocks(state);
+    validateWildlife(state);
     if (!state.clan.id || !state.clan.name || !Array.isArray(state.events)) throw new Error('Invalid clan/events');
     const occupations = ['farmer', 'herder', 'fisher', 'hunter', 'textileWorker', 'smith', 'woodworker', 'boatbuilder', 'trader', 'leatherAndJewelleryMaker'];
     const timeValue = (time: GameTime) => {
@@ -316,7 +338,17 @@ function validateState(state: SimulationState): void {
     }
     for (const [id, building] of Object.entries(state.buildings)) if (id !== building.id || building.kind !== 'house') throw new Error('Invalid building');
     let previousEventTime = 0;
+    let wildlifeSequence = 0;
+    const wildlifeFirsts = new Map<string, string>();
     state.events.forEach((event, index) => {
+        validateWildlifeSighting(event, state);
+        const sighting = wildlifeSighting(event);
+        if (sighting) {
+            if (sighting.encounterKey !== 'wildlife-' + ++wildlifeSequence ||
+                sighting.firstForClan !== !wildlifeFirsts.has(sighting.speciesId))
+                throw new Error('Invalid wildlife encounter ordering.');
+            if (sighting.firstForClan) wildlifeFirsts.set(sighting.speciesId, event.id);
+        }
         const timestamp = timeValue(event.time);
         if (timestamp < previousEventTime) throw new Error('Backwards events');
         previousEventTime = timestamp;
@@ -325,6 +357,10 @@ function validateState(state: SimulationState): void {
         integer(event.time.winter, 'Event Winter'); integer(event.time.tick, 'Event tick');
         if (event.time.tick >= ticksPerWinter || event.time.winter < 800 || event.time.winter > state.time.winter || (event.time.winter === state.time.winter && event.time.tick > state.time.tick)) throw new Error('Invalid event time');
     });
+    if (state.wildlife && (state.wildlife.nextEncounter !== wildlifeSequence + 1 ||
+        Object.keys(state.wildlife.firstDiscoveries).length !== wildlifeFirsts.size ||
+        [...wildlifeFirsts].some(([species, id]) => state.wildlife!.firstDiscoveries[species] !== id)))
+        throw new Error('Wildlife first discoveries do not match history.');
     for(const [id,p] of Object.entries(state.personaArchive??{})){if(id!==p.id||!p.name||!p.originClanId)throw new Error('Invalid historical identity');parseCharacterDNA(p.dna);integer(p.birthWinter,'Historical birth');validatePersonaDates(state,p);}
     validateBirthdayCalendar(state);
     validateCampfire(state);

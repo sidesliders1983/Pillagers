@@ -69,3 +69,26 @@ Exact detection radius by terrain height, forest, season/weather; expedition spe
 ## Explicit non-goals
 
 Direct resident movement control, CPU-initiated raids and autonomous warfare, tactical player-directed combat, auto-exploration by every resident, real-time multiplayer, offline progression, unlimited procedural region streaming, fully simulated optical weather, adding a second player-facing 2D world map, or rewriting lore facts.
+
+
+## Wildlife sightings (#226)
+
+New physical Fjord campaigns bind the existing real wildlife population to canonical
+simulation ticks. Older physical saves can explicitly choose **Start recording wildlife
+sightings** in Clan Book > Wildlife, without inventing earlier encounters. Abstract
+Region Graph campaigns remain unchanged.
+
+Departed groups sample nearby real animals every 5 ticks. An encounter requires a
+living confirmed expedition member within 32 m, known/currently observed terrain and
+an unobstructed terrain sightline. Prepared and returned groups do not observe.
+One group/species encounter records the actual mission roster as historical witnesses;
+it does not credit a randomly selected individual spotter. Continuous contact and
+redirects do not duplicate an encounter. Re-entry requires 50 ticks of absence and
+250 ticks since the prior sighting.
+
+The first clan sighting of a species creates one persistent, readable Attention
+notification. Later sightings remain quiet history. Clan Book > Wildlife, recent
+group sightings and the actual participants' personal Chronicles refer to the same
+canonical event. Undiscovered species names and locations are absent from these views.
+See [the event, persistence and performance contract](../WILDLIFE-SIGHTINGS-226.md).
+This does not add hunting, combat, taming or a Familiar knowledge threshold.

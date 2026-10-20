@@ -1,4 +1,6 @@
 import { AttentionHistoryIndex } from '../lore/AttentionHistory';
+import { WildlifeHistoryIndex } from '../lore/WildlifeHistory';
+import { initializeWildlifeSightings, assertWildlifeWorld } from '../simulation/WildlifeSightings';
 import { assertSpatialWorld, exploreOffer, startExpeditionOffer, expeditionModeActive, type PhysicalExpeditionContext } from '../simulation/SpatialExpeditions';
 import { islandMissionOffer, type IslandTarget } from '../simulation/IslandMissions';
 import type { Cargo, MissionType } from '../simulation/WorldExpeditions';
@@ -16,8 +18,10 @@ export class GameplaySession {
     private physicalWorld?: PhysicalExpeditionContext;
     private physicalExclusions?: () => PhysicalExpeditionContext['exclusions'];
     bindPhysicalWorld(world: PhysicalExpeditionContext['world'], worldId: string, exclusions?: () => PhysicalExpeditionContext['exclusions']): void {
-        const context = { world, worldId };
+        const fullWorld = world as WorldBlueprint;
+        const context = { world, worldId, ...(fullWorld.config && fullWorld.coast && fullWorld.biomes && fullWorld.placementPlan ? { wildlifeWorld: fullWorld } : {}) };
         assertSpatialWorld(this.state, context);
+        assertWildlifeWorld(this.state, context);
         this.physicalWorld = context;
         this.physicalExclusions = exclusions;
     }
@@ -60,6 +64,11 @@ export class GameplaySession {
     familyTree() {
         return this.familyIndex.read(this.state);
     }
+    private wildlifeIndex = new WildlifeHistoryIndex();
+    wildlifeHistory() {
+        this.wildlifeIndex.append(this.state.events, this.state.clan.id);
+        return this.wildlifeIndex;
+    }
     private personalIndex = new PersonalHistoryIndex();
     private personalBookKey = '';
     private historyGeneration = 0;
@@ -90,6 +99,12 @@ export class GameplaySession {
         this.state = createCampaign(seed, {}, {}, {}, {}, {enabled: socialEnabled}, {}, foundingPhase, calendarMode);
         this.book = new ClanBook(this.state, true, narrativeSeed);
     }
+    initializeWildlife(): void {
+        const world = this.physicalWorld?.wildlifeWorld;
+        if (!world || !this.physicalWorld) throw new Error('Wildlife requires a physical island.');
+        this.state = initializeWildlifeSightings(this.state, world, this.physicalWorld.worldId);
+        this.invalidateRead();
+    }
     initializeDiscovery(world: WorldBlueprint, worldId: string): void {
         this.state = initializePhysicalDiscovery(this.state, world, worldId);
         this.bindPhysicalWorld(world, worldId);
@@ -100,7 +115,8 @@ export class GameplaySession {
         assertSpatialWorld(next, { world, worldId });
         this.state = next;
         this.bindPhysicalWorld(world, worldId);
-        this.invalidateRead();
+        if (this.physicalWorld?.wildlifeWorld) this.initializeWildlife();
+        else this.invalidateRead();
     }
     snapshot(): SimulationState {
         return structuredClone(this.state);
@@ -197,6 +213,7 @@ export class GameplaySession {
         this.attentionIndex = new AttentionHistoryIndex();
         this.familyIndex = new FamilyTreeIndex();
         this.personalIndex = new PersonalHistoryIndex();
+        this.wildlifeIndex = new WildlifeHistoryIndex();
         this.personalBookKey = '';
         this.historyGeneration++;
         this.state = state;

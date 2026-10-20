@@ -23,7 +23,7 @@
   is no general persisted notification feed. This issue adds only a wildlife-first
   discovery adapter to that existing surface, leaving the general hub to #216.
 
-## Proposed authoritative contract
+## Implemented authoritative contract
 
 A versioned optional `SimulationState.wildlife` binds the existing seeded
 population to a physical world. Its compact motion snapshot advances at fixed
@@ -32,7 +32,7 @@ The renderer reads those actual positions and keeps cosmetic animation on its
 paused presentation clock. Camera, model load success and frame subdivisions
 cannot create sightings or move the authoritative animals.
 
-Fresh physical discovery enables the feature. Existing saves keep their meaning;
+New Fjord physical-island campaigns enable the feature. Existing saves keep their meaning;
 older physical campaigns may explicitly start recording from their current tick.
 No historical sightings are backfilled. Graph-only campaigns remain unchanged.
 
@@ -84,3 +84,25 @@ is no longer available. Gameplay clocks and movement are not interrupted.
    query/index costs. Record profiling and desktop/mobile inspection evidence.
 
 This feature does not implement hunting, taming, combat or population growth.
+
+
+## Implementation notes and limits
+
+- The initial audit was committed separately as `e6ee42d`, before implementation.
+- No group-splitting, disband or wildlife-despawn command exists in current main.
+  Existing roster edit, separate groups, physical return and real mortality are
+  exercised. Historical projections tolerate absent groups/actors without
+  reattributing or deleting their events; this does not introduce new commands.
+- Canonical animal avoidance uses confirmed expedition poses. Cosmetic resident
+  motion and camera visibility cannot change the canonical animal population.
+- The renderer smooths tick positions and retains existing cosmetic animations;
+  render-only smoothing cannot affect distance, LOS, encounter IDs or witnesses.
+- DOM integration tests exercise actual reader/Attention/group links, keyboard
+  tabs, Escape, historical participant navigation, read persistence and epoch
+  guards. A pinned jsdom development dependency supplies DOM semantics only.
+- Browser control reported no available browsers in this session. Desktop/mobile
+  screenshots and visual UAT are **not** claimed. The isolated review page is
+  `scripts/qa/wildlife-sightings-review.html`, including a 390 px iframe option.
+- Reproducible real-island checkpoint and bounded workload measurements:
+  `node scripts/qa/wildlife-sightings-226.mjs`.
+  See [QA evidence](qa/wildlife-sightings-226/README.md).

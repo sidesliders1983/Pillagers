@@ -491,6 +491,7 @@ export function createFjordScene(options: {
         layer!.advance(motion!, motionDelta, running);
         rivalScene?.advance(motionDelta, running);
         wildlife?.setHumans([...layer!.humanPositions(), ...(rivalScene?.humanPositions() ?? [])]);
+        wildlife?.useCanonical(session.readSnapshot().wildlife);
         wildlife?.advance(motionDelta, running, camera);
         campfireEffect!.update(delta, running && !document.hidden);
         precipitationEffect!.update(delta, running && !document.hidden, controller.focus, camera.position);
