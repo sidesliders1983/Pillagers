@@ -31,11 +31,13 @@ let opening = false;
 async function openPreview(phone) {
     if (opening) return;
     opening = true;
+    const selected = checkpointSelect.value;
+    checkpointSelect.disabled = true;
     previewButtons.forEach(button => { button.disabled = true; });
     previewStatus.setAttribute('aria-busy', 'true');
     previewStatus.textContent = 'Loading the selected checkpoint…';
     try {
-        const response = await fetch('/scratch/wildlife-sightings-226/' + checkpointSelect.value + '.json');
+        const response = await fetch('/scratch/wildlife-sightings-226/' + selected + '.json');
         if (!response.ok) throw new Error('Could not load the QA checkpoint (' + response.status + ').');
         const checkpoint = await response.json();
         if (checkpoint.sharedVersion !== 1 || !checkpoint.fjord?.campaign || !checkpoint.pace)
@@ -46,19 +48,20 @@ async function openPreview(phone) {
         sessionStorage.setItem(activeSettlementKey, JSON.stringify(checkpoint));
         if (phone) {
             previewFrame.hidden = false;
-            previewFrame.src = destination(checkpointSelect.value);
-            previewStatus.textContent = checkpointSelect.value === 'live' ?
+            previewFrame.src = destination(selected);
+            previewStatus.textContent = selected === 'live' ?
                 'Opening the live demo below. Press Play to see a new discovery notification.' :
                 'Opening Fjord Play below. Its loading screen shows world progress. Attention opens when ready.';
             previewFrame.scrollIntoView({ block: 'start', behavior: 'smooth' });
         } else {
             previewStatus.textContent = 'Opening Fjord Play. Its loading screen shows world progress…';
-            location.assign(destination(checkpointSelect.value));
+            location.assign(destination(selected));
         }
     } catch (error) {
         previewStatus.textContent = 'Could not open the preview. ' + String(error);
     } finally {
         opening = false;
+        checkpointSelect.disabled = false;
         previewButtons.forEach(button => { button.disabled = false; });
         previewStatus.setAttribute('aria-busy', 'false');
     }

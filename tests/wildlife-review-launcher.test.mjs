@@ -21,6 +21,7 @@ test('review launcher responds before fetch, preserves checkpoint data and opens
         button.click();
         assert.match(document.querySelector('[role="status"]').textContent, /Loading the selected checkpoint/);
         assert.equal(button.disabled, true);
+        assert.equal(document.querySelector('select').disabled, true);
         document.querySelector('#desktop').click(); assert.equal(requests.length, 1);
         finish({ ok: true, json: async () => structuredClone(checkpoint) });
         await new Promise(setImmediate);
@@ -31,6 +32,7 @@ test('review launcher responds before fetch, preserves checkpoint data and opens
         assert.equal(document.querySelector('iframe').getAttribute('src'), '/fjord-play?attention=1');
         assert.match(document.querySelector('[role="status"]').textContent, /Attention opens when ready/);
         assert.equal(button.disabled, false);
+        assert.equal(document.querySelector('select').disabled, false);
         document.querySelector('select').value = 'read';
         document.querySelector('select').dispatchEvent(new dom.window.Event('change'));
         assert.equal(requests.length, 2, 'An already-open phone preview follows the selected checkpoint');
