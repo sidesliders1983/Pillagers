@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FjordSide · Livestock animation review</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; color: #efe9d5; background: #14272b; font: 16px system-ui; }
+    header { padding: 12px 20px; }
+    h1 { font: 28px Georgia; margin: 0 0 8px; }
+    p { margin: 8px 0; max-width: 80ch; }
+    nav { display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 8px; }
+    button, select { background: #243b3b; color: inherit; border: 1px solid #9b956b;
+      border-radius: 4px; min-height: 44px; padding: 8px 14px; font: inherit; }
+    button[aria-pressed="true"] { background: #625b37; }
+    #stage { position: relative; height: 75vh; min-height: 440px; }
+    canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+    #labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+    #labels span { position: absolute; transform: translate(-50%, -50%); white-space: nowrap;
+      padding: 3px 6px; background: #14272bce; font-size: 12px; }
+    #status { min-height: 24px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Livestock · supplied models and authored activities</h1>
+    <p>Goat and Sheep: baby, adult female and adult male. Pig: adult female and adult male; piglet deferred. Existing cattle retain their activities and gain Death. Drag to orbit; pinch or scroll to zoom.</p>
+    <nav id="clips" aria-label="Animation"></nav>
+    <nav><button id="pause">Pause</button><button id="restart">Restart animation</button>
+      <label>View <select id="view"><option value="all">All animals</option></select></label>
+      <label><input id="fade" type="checkbox" checked> Fade after death</label>
+      <label>Seconds <input id="seconds" type="number" min="0" max="20" step=".1" value="0" style="width:70px"></label>
+      <button id="sample">Sample pose</button></nav>
+    <p id="status" role="status">Loading prepared models…</p>
+    <nav id="campaigns" aria-label="Actual Fjord fixtures">
+      <button data-campaign="goat">Open Goat campaign</button>
+      <button data-campaign="pig">Open Pig campaign</button>
+      <button data-campaign="sheep">Open Sheep campaign</button>
+    </nav>
+    <p>Campaign buttons open separate QA saves on this preview origin. These use explicit trial species rules and 50 starting Materials for a real Farmyard; game defaults stay unchanged.</p>
+  </header>
+  <main id="stage"><canvas></canvas><div id="labels"></div></main>
+  <script type="module">
+    import { AnimationMixer, Box3, Color, DirectionalLight, GridHelper, HemisphereLight,
+      LoopOnce, LoopRepeat, Mesh, MeshStandardMaterial, PerspectiveCamera, PlaneGeometry,
+      Scene, Vector3, WebGLRenderer } from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
+    import { LivestockDeath } from '/src/fjord-play/LivestockDeath.ts';
+
+    const scene = new Scene();
+    scene.background = new Color('#708386');
+    scene.add(new HemisphereLight(0xf2f3e6, 0x465448, 2.2));
+    const sun = new DirectionalLight(0xffebd5, 3);
+    sun.position.set(4, 8, 6);
+    scene.add(sun);
+    const plane = new Mesh(new PlaneGeometry(80, 80), new MeshStandardMaterial({ color: '#687668', roughness: 1 }));
+    plane.rotation.x = -Math.PI / 2;
+    plane.position.y = -.01;
+    scene.add(plane, new GridHelper(40, 80, 0x8b927d, 0x738173));
+    const canvas = document.querySelector('canvas');
+    const renderer = new WebGLRenderer({ canvas, antialias: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+    const camera = new PerspectiveCamera(40, 1, .01, 100);
+    const controls = new OrbitControls(camera, canvas);
+    const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
+    const animals = [];
+    const errors = [];
+    const clips = ['Idle', 'Walk', 'Graze', 'Rest', 'HumanInteraction', 'Death'];
+    let clip = new URLSearchParams(location.search).get('animation') ?? 'Idle';
+    let paused = false, elapsed = 0;
+    const view = document.querySelector('#view');
+    for (const species of ['goat', 'pig', 'sheep', 'cattle']) {
+      const variants = species === 'cattle' ? ['baby', 'young-adult', 'adult-female', 'adult-male'] :
+        species === 'pig' ? ['adult-female', 'adult-male'] : ['baby', 'adult-female', 'adult-male'];
+      for (const variant of variants) {
+        const id = species + '/' + variant;
+        try {
+          const directory = '/game-assets/' + (species === 'cattle' ? 'cattle/' : 'livestock/' + species + '/') + variant + '/';
+          const manifest = await fetch(directory + 'manifest.json').then(response => response.json());
+          const gltf = await loader.loadAsync(directory + manifest.file);
+          const index = animals.length;
+          gltf.scene.position.set((index % 3 - 1) * 3.2, 0, Math.floor(index / 3) * 3.5 - 5);
+          const materials = [];
+          gltf.scene.traverse(node => {
+            if (!node.isMesh) return;
+            const source = Array.isArray(node.material) ? node.material : [node.material];
+            const cloned = source.map(material => {
+              const instance = material.clone();
+              materials.push(instance);
+              return instance;
+            });
+            node.material = Array.isArray(node.material) ? cloned : cloned[0];
+          });
+          const mixer = new AnimationMixer(gltf.scene);
+          const label = document.createElement('span');
+          label.textContent = species + ' · ' + variant;
+          document.querySelector('#labels').append(label);
+          animals.push({ id, root: gltf.scene, mixer, clips: gltf.animations, materials, label, manifest });
+          scene.add(gltf.scene);
+          view.add(new Option(species + ' · ' + variant, id));
+        } catch (error) { errors.push(id + ': ' + error.message); }
+      }
+    }
+    function play() {
+      paused = false;
+      document.querySelector('#pause').textContent = 'Pause';
+      elapsed = 0;
+      for (const animal of animals) {
+        animal.death?.dispose();
+        animal.death = undefined;
+        animal.mixer.stopAllAction();
+        const selected = animal.clips.find(value => value.name === clip) ?? animal.clips.find(value => value.name === 'Idle');
+        animal.action = animal.mixer.clipAction(selected).reset();
+        animal.action.setLoop(clip === 'Death' ? LoopOnce : LoopRepeat, clip === 'Death' ? 1 : Infinity);
+        animal.action.clampWhenFinished = clip === 'Death';
+        animal.action.play();
+        if (clip === 'Death') animal.death = new LivestockDeath(animal.root, animal.mixer, selected);
+        animal.mixer.update(0);
+        for (const material of animal.materials) { material.opacity = 1; material.transparent = false; material.depthWrite = true; }
+      }
+      for (const button of document.querySelectorAll('[data-clip]'))
+        button.setAttribute('aria-pressed', String(button.dataset.clip === clip));
+      canvas.dataset.animation = clip;
+    }
+    for (const name of clips) {
+      const button = document.createElement('button');
+      button.textContent = name === 'HumanInteraction' ? 'Interaction' : name;
+      button.dataset.clip = name;
+      button.onclick = () => { clip = name; play(); };
+      document.querySelector('#clips').append(button);
+    }
+    document.querySelector('#pause').onclick = event => { paused = !paused; event.target.textContent = paused ? 'Resume' : 'Pause'; };
+    document.querySelector('#restart').onclick = play;
+    for (const button of document.querySelectorAll('[data-campaign]')) button.onclick = async () => {
+      const target = window.open('about:blank', '_blank');
+      if (!target) { document.querySelector('#status').textContent = 'Allow this review to open a new tab.'; return; }
+      try {
+        const response = await fetch('./fixtures/' + button.dataset.campaign + '.json');
+        if (!response.ok) throw new Error('Run node scripts/qa/prepare-livestock-model-review.mjs first.');
+        const save = await response.text();
+        JSON.parse(save);
+        target.sessionStorage.setItem('pillagers.fjord-play.active.v1', save);
+        target.location.replace('/fjord-play');
+      } catch (error) { target.close(); document.querySelector('#status').textContent = error.message; }
+    };
+    document.querySelector('#sample').onclick = () => {
+      const seconds = Math.max(0, Math.min(20, Number(document.querySelector('#seconds').value) || 0));
+      play(); paused = true; elapsed = seconds;
+      document.querySelector('#pause').textContent = 'Resume';
+      for (const animal of animals) {
+        if (animal.death) animal.death.advance(seconds, true);
+        else animal.mixer.setTime(seconds);
+      }
+    };
+    function frameView() {
+      const animal = animals.find(value => value.id === view.value);
+      const center = animal ? animal.root.position.clone().add(new Vector3(0, animal.manifest.height * .4, 0)) : new Vector3(0, .6, 1.5);
+      controls.target.copy(center);
+      camera.position.copy(center).add(animal ? new Vector3(2.5, 1.2, 3).multiplyScalar(Math.max(.45, animal.manifest.height)) : new Vector3(12, 12, 18));
+      controls.update();
+    }
+    view.onchange = frameView;
+    frameView();
+    play();
+    canvas.dataset.ready = 'true';
+    canvas.dataset.models = JSON.stringify(animals.map(animal => ({ id: animal.id, clips: animal.clips.map(value => value.name), bytes: animal.manifest.bytes })));
+    document.querySelector('#status').textContent = errors.length ? errors.join('; ') : animals.length + ' models ready. Death holds for 2 seconds after falling, then fades over 5 seconds.';
+    let last = performance.now();
+    renderer.setAnimationLoop(() => {
+      const now = performance.now(), delta = Math.min(.05, (now - last) / 1000);
+      last = now;
+      if (!paused) elapsed += delta;
+      const stage = canvas.parentElement;
+      renderer.setSize(stage.clientWidth, stage.clientHeight, false);
+      camera.aspect = stage.clientWidth / stage.clientHeight;
+      camera.updateProjectionMatrix();
+      for (const animal of animals) {
+        if (animal.death) animal.death.advance(delta, !paused);
+        else if (!paused) animal.mixer.update(delta);
+        const opacity = animal.death && document.querySelector('#fade').checked ? animal.death.inspect().opacity : 1;
+        for (const material of animal.materials) {
+          material.transparent = opacity < 1;
+          material.depthWrite = opacity === 1;
+          material.opacity = opacity;
+        }
+        const point = animal.root.position.clone().add(new Vector3(0, animal.manifest.height + .15, 0)).project(camera);
+        animal.label.style.left = (point.x + 1) * stage.clientWidth / 2 + 'px';
+        animal.label.style.top = (1 - point.y) * stage.clientHeight / 2 + 'px';
+        animal.label.hidden = point.z > 1;
+      }
+      canvas.dataset.deaths = JSON.stringify(animals.flatMap(animal => animal.death ? [{ id: animal.id, ...animal.death.inspect() }] : []));
+      renderer.render(scene, camera);
+    });
+    window.livestockReview = { animals, scene, camera, controls, renderer,
+      sample(name, seconds) {
+        clip = name; play(); paused = true; elapsed = seconds;
+        animals.forEach(animal => animal.mixer.setTime(seconds));
+      } };
+  </script>
+</body>
+</html>

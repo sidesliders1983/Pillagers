@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "species": "sheep",
+  "variant": "adult-male",
+  "file": "sheep-adult-male.glb",
+  "bytes": 374724,
+  "sha256": "2dcae8dc261695f072b23df19a3d4ccaaa562cfb7bf988531657dde214ce8689",
+  "sourceFile": "Male-sheep.glb",
+  "sourceSha256": "f1b6991f0de40992797f42ce43b3469d71fededa846856b5312750374040b085",
+  "animationSourceSha256": "f1b6991f0de40992797f42ce43b3469d71fededa846856b5312750374040b085",
+  "triangles": 3062,
+  "joints": 27,
+  "height": 1.1111111111111112,
+  "withersHeightM": 0.8,
+  "walkSpeedMps": 0.431567074416725,
+  "walkCycleSeconds": 1,
+  "clips": {
+    "Idle": {
+      "duration": 6,
+      "loop": true,
+      "surfaceMinY": 0.00027363010791617146,
+      "surfaceMaxY": 0.012936819356212685
+    },
+    "Walk": {
+      "duration": 1,
+      "loop": true,
+      "surfaceMinY": 0.0000978114201446616,
+      "surfaceMaxY": 0.012918779140745525
+    },
+    "Graze": {
+      "duration": 12,
+      "loop": true,
+      "surfaceMinY": 0.00027555110374291743,
+      "surfaceMaxY": 0.013313184609925886
+    },
+    "Rest": {
+      "duration": 10,
+      "loop": true,
+      "surfaceMinY": 0.00027555110374291743,
+      "surfaceMaxY": 0.012938490587078504
+    },
+    "HumanInteraction": {
+      "duration": 6,
+      "loop": true,
+      "surfaceMinY": 0.00027363010791617146,
+      "surfaceMaxY": 0.012920189157388913
+    },
+    "Death": {
+      "duration": 2.4,
+      "loop": false,
+      "surfaceMinY": 0.00027555101851811246,
+      "surfaceMaxY": 0.013792184726717853
+    }
+  },
+  "authoring": "Baked glTF channels on supplied skin",
+  "posture": "Source lift order and cycle duration; upright bind trunk; baked planted-hoof IK; no root travel"
+}

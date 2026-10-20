@@ -28,6 +28,6 @@ The factual Chronicle and management use friendly titles. Narrative passages gro
 
 ## Presentation and compatibility
 
-Management, selection cards, Farmyard rosters and the shared book/session work for explicit mixed-species fixtures independently of 3D assets. The current native renderer displays cattle only; it never presents another species as a cow. Additional meshes belong to #220.
+Management, selection cards, Farmyard rosters and the shared book/session work for explicit mixed-species fixtures independently of 3D assets. The native renderer now supports the supplied Cattle, Goat, Sheep and adult Pig models in the [#220 presentation slice](LIVESTOCK-V01C-PRESENTATION.md). Piglet, Chicken and Goose assets remain deferred; another species is never substituted with a cow.
 
 Older saves acquire neither new species fields nor new event snapshots when loaded. An independent pre-change Core capture verifies canonical bytes after repeated, split and restored advancement, including legacy CPU and physical expedition state. New-campaign cattle economics, founder DNA and RNG remain unchanged; only versioned identity metadata is added.

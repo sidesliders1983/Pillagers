@@ -1,5 +1,5 @@
 import { WaypointQueue } from './WaypointQueue';
-import { cattleVariants } from '../characters/CattlePresentation';
+import { livestockPresentation } from '../characters/LivestockPresentation';
 import { passConversation, passNeighbours } from '../systems/ResidentPassing';
 import { SocialEncounters, residentMovementConfig, turnToward } from '../systems/SocialEncounters';
 import { settlementCampfire, type SettlementCampfire } from './SettlementCampfire';
@@ -23,7 +23,7 @@ type Agent = {
     y: number;
     z: number;
     rotation: number;
-    state: 'Idle' | 'Walk' | 'Talk' | 'Listen' | 'Graze' | 'HumanInteraction' | OccupationClip;
+    state: 'Idle' | 'Walk' | 'Talk' | 'Listen' | 'Graze' | 'Rest' | 'HumanInteraction' | OccupationClip;
     visit: Visit | null;
     visitDelay: number;
     occupationClips: Partial<Record<OccupationClip, number>>;
@@ -31,6 +31,9 @@ type Agent = {
     grazeSeconds: number;
     grazeRemaining: number;
     grazeNext: boolean;
+    restNext: boolean;
+    restSeconds: number;
+    restRemaining: number;
     blockedSeconds: number;
     socialEnabled: boolean;
     speed: number;
@@ -138,7 +141,7 @@ export class LivingWorldController {
                     wait: 1 + seed % 40 / 10, path: [], homeTrail: [], detour: [], signature,
                     visit: null, visitDelay: 8 + seed % 130 / 10, occupationClips: {},
                     state: 'Idle', interactionSeconds: 0, grazeSeconds: 0,
-                    grazeRemaining: 0, grazeNext: true, blockedSeconds: 0,
+                    grazeRemaining: 0, grazeNext: true, restNext: false, restSeconds: 0, restRemaining: 0, blockedSeconds: 0,
                     failedRoutes: new Map(), socialEnabled: true, speed: 0, pace: entity.kind === 'persona' ? .8 : .28,
                 };
                 this.agents.set(agent.key, agent);
@@ -336,7 +339,7 @@ export class LivingWorldController {
         if (a.entity.status.workEligible && !this.diagnostics.includes(reason)) this.diagnostics.push(reason);
         a.visitDelay = 20 + this.random(a) * 20;
     }
-    setActivityClips(key: string, clips: { Graze?: number; HumanInteraction?: number }) {
+    setActivityClips(key: string, clips: { Graze?: number; Rest?: number; HumanInteraction?: number }) {
         const actor = this.agents.get(key);
         if (!actor) return;
         if (clips.Graze !== undefined && (!Number.isFinite(clips.Graze) || clips.Graze <= 0))
@@ -344,6 +347,13 @@ export class LivingWorldController {
         if (clips.HumanInteraction !== undefined &&
             (!Number.isFinite(clips.HumanInteraction) || clips.HumanInteraction <= 0))
             throw new Error('Invalid cattle interaction clip duration');
+        if (clips.Rest !== undefined && (!Number.isFinite(clips.Rest) || clips.Rest <= 0))
+            throw new Error('Invalid livestock rest clip duration');
+        actor.restSeconds = clips.Rest ?? 0;
+        if (!actor.restSeconds && actor.state === 'Rest') {
+            actor.state = 'Idle';
+            actor.restRemaining = 0;
+        }
         actor.interactionSeconds = clips.HumanInteraction ?? 0;
         if (!actor.interactionSeconds && actor.state === 'HumanInteraction') this.social.remove(key);
         this.clearReleasedPoses();
@@ -462,7 +472,7 @@ export class LivingWorldController {
         return true;
     }
     private radius(a: Agent) {
-        return a.kind === 'persona' ? residentMovementConfig.radius : a.entity.status.stage === 'Young' ? .5 : a.entity.status.stage === 'Young Adult' ? .7 : .9;
+        return a.kind === 'persona' ? residentMovementConfig.radius : livestockPresentation(a.entity.asset)?.radius ?? .9;
     }
     private height(a: Agent) { return this.yardSurfaces.get(a.key)?.(a.x, a.z) ?? this.surface.surfaceHeightAt(a.x, a.z); }
     setPace(key: string, pace: number) {
@@ -705,8 +715,8 @@ export class LivingWorldController {
     private cattleEncounters() {
         const people = [...this.agents.values()].filter(a => a.kind === 'persona' && a.socialEnabled && a.visit?.phase !== 'activity');
         for (const cow of this.agents.values()) {
-            if (cow.kind !== 'cattle' || !cow.interactionSeconds || !this.social.available(cow.key)) continue;
-            const reference = cattleVariants[cow.entity.asset as keyof typeof cattleVariants];
+            if (cow.kind !== 'cattle' || cow.state === 'Rest' || !cow.interactionSeconds || !this.social.available(cow.key)) continue;
+            const reference = livestockPresentation(cow.entity.asset);
             if (!reference) continue;
             const nearby = people.filter(person => this.social.available(person.key))
                 .sort((a, b) => Math.hypot(a.x - cow.x, a.z - cow.z) - Math.hypot(b.x - cow.x, b.z - cow.z) ||
@@ -801,6 +811,13 @@ export class LivingWorldController {
                 // continued above, so their retained destinations are never replaced mid-pair.
                 if (a.visitDelay <= 0) this.beginVisit(a);
             }
+            if (a.state === 'Rest') {
+                a.restRemaining -= dt;
+                a.speed = 0;
+                if (a.restRemaining > 1e-8) continue;
+                a.state = 'Idle';
+                a.wait = 0;
+            }
             if (a.state === 'Graze') {
                 a.grazeRemaining -= dt;
                 a.speed = 0;
@@ -816,8 +833,14 @@ export class LivingWorldController {
                 a.wait -= dt;
                 if (a.wait <= 0) {
                     if (a.kind === 'cattle' && a.grazeNext && a.grazeSeconds > 0) {
-                        a.state = 'Graze';
-                        a.grazeRemaining = a.grazeSeconds;
+                        if (a.restNext && a.restSeconds > 0) {
+                            a.state = 'Rest';
+                            a.restRemaining = a.restSeconds;
+                        } else {
+                            a.state = 'Graze';
+                            a.grazeRemaining = a.grazeSeconds;
+                        }
+                        a.restNext = !a.restNext;
                         a.grazeNext = false;
                         continue;
                     }

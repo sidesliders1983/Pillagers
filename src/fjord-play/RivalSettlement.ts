@@ -67,6 +67,7 @@ export interface ObservedRivalSettlement {
     currentlyObserved: boolean;
     site?: { id: string; center: { x: number; z: number } };
     entities: FjordEntity[];
+    livestockDeaths?: { id: string; position: { x: number; z: number } }[];
     ground: FjordGround;
     campfire?: SettlementCampfire;
 }
@@ -93,7 +94,7 @@ export function inspectRivalSettlement(state: SimulationState, world: WorldBluep
         const { naming: _naming, ...dna } = entity.dna ?? {};
         const visualProfile = entity.dna ? universalHumanProfile({ ...entity.dna, age: Math.min(100, entity.dna.age) }) : undefined;
         const status: FjordEntity['status'] = { living: entity.status.living, workEligible: false,
-            sex: entity.status.sex, stage: entity.status.stage,
+            sex: entity.status.sex, stage: entity.status.stage, species: entity.status.species,
             occupation: entity.status.occupation === 'farmer' ? 'farmer' : undefined,
             assignment: entity.status.assignment && visibleBuildings.has(entity.status.assignment) ? entity.status.assignment : null,
             grazingZone: entity.status.assignment && visibleBuildings.has(entity.status.assignment) ? entity.status.grazingZone : 'exposed' };
@@ -101,7 +102,7 @@ export function inspectRivalSettlement(state: SimulationState, world: WorldBluep
             physicality: .5, agility: .5, intelligence: .5, cunning: .5, temperament: .5
         } } as FjordEntity['dna'], visualProfile } : {};
         return { ...entity, label: entity.kind === 'persona' ? 'Observed resident' :
-            entity.kind === 'cattle' ? 'Cattle' : entity.kind === 'campfire' ? 'Observed campfire' :
+            entity.kind === 'cattle' ? 'Observed livestock' : entity.kind === 'campfire' ? 'Observed campfire' :
                 entity.kind === 'household' ? 'Observed tent' : 'Observed house', status,
             ...appearance };
     });
@@ -110,6 +111,8 @@ export function inspectRivalSettlement(state: SimulationState, world: WorldBluep
         paths: projection.ground.paths.filter(path => visibleBuildings.has(path.from) && visibleConnections.has(path.to) && path.points.every(point =>
             discoveryAt(knowledge, point.x, point.z) === 'visible'))
     };
-    return { known: true, currentlyObserved: true, site, entities, ground,
+    const livestockDeaths = projection.livestockDeaths.filter(fact =>
+        discoveryAt(knowledge, fact.position.x, fact.position.z) === 'visible');
+    return { known: true, currentlyObserved: true, site, entities, livestockDeaths, ground,
         campfire: entities.some(entity => entity.kind === 'campfire') ? projection.campfire : undefined };
 }

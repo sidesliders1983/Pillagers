@@ -1,6 +1,6 @@
 # Livestock v0.1B — founding and balance trials
 
-Issue #219 builds on [v0.1A](LIVESTOCK-V01A.md). This is an explicit trial contract, **not the shipping default**. New game UI continues using the existing cattle founding rule until the owner reviews the measured economics. Additional 3D models remain #220; crafting and equipment remain #221.
+Issue #219 builds on [v0.1A](LIVESTOCK-V01A.md). This is an explicit trial contract, **not the shipping default**. New game UI continues using the existing cattle founding rule until the owner reviews the measured economics. The supplied models are integrated separately in the [#220 presentation slice](LIVESTOCK-V01C-PRESENTATION.md); crafting and equipment remain #221.
 
 ## Canonical founding factory
 

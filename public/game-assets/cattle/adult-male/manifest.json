@@ -6,9 +6,9 @@
   "source": "Assets/Characters/Cow/Adult Male/cow-male-adult-textured.glb",
   "sourceSha256": "ae948be2dc240ff8dffca20fb3961dfd3963a2479e18f5cf9708a9b872f013f4",
   "authoringSha256": "677cf4bdb2816e0e333afd98c0d22d61303a73a45307bfac7f81b8c871c95e2e",
-  "sha256": "dda6ee2a327e07a36848ad7cb3e66f519b0cfa4bd74e78f589a807f3fccbbac4",
+  "sha256": "6c9ca166e770ce845b9c8f1dbee01bab6908a95eb8f9b1744d2ffd217f34e272",
   "authoringBytes": 5711668,
-  "bytes": 761356,
+  "bytes": 790888,
   "triangles": 5664,
   "joints": 39,
   "height": 1.3503702380713365,
@@ -33,6 +33,12 @@
     "HumanInteraction": {
       "maxPlantedTargetErrorM": 6.462580198267961e-7,
       "duration": 6
+    },
+    "Death": {
+      "duration": 2.4,
+      "loop": false,
+      "surfaceMinY": -0.000032972011885951217,
+      "surfaceMaxY": 1.452964964202488
     }
   },
   "grazing": {
@@ -71,5 +77,11 @@
     }
   ],
   "blenderVersion": "5.2.2 LTS",
-  "referenceMethod": "Authored keys with cattle gait literature and user grazing reference; not video motion capture"
+  "referenceMethod": "Authored keys with cattle gait literature and user grazing reference; not video motion capture",
+  "species": "cattle",
+  "sourceFile": "cow-male-adult.glb",
+  "animationSourceSha256": "dda6ee2a327e07a36848ad7cb3e66f519b0cfa4bd74e78f589a807f3fccbbac4",
+  "animationSourceRevision": "37e8ba72e2b0127806097a886966758df1991998",
+  "authoring": "Baked glTF channels on supplied skin",
+  "posture": "Existing approved cattle activities retained"
 }

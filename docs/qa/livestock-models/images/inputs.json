@@ -1,0 +1,62 @@
+[
+  {
+    "asset": "goat-baby",
+    "publishedSha256": "682a73de1658c86573bf914b2276d8956295a6916ebffc870aa8206c9d1bfd1a",
+    "decodedSha256": "672a9c13ea94287dbb526cfe226b23af1a5bc83cac33ee1bcf984f19c9cfae32"
+  },
+  {
+    "asset": "goat-adult-female",
+    "publishedSha256": "fb2ed598cf73c5dbe40df9e1ea5030296b9d86d64135693a6794e02c478b7733",
+    "decodedSha256": "ffd9c1f953f5b4751c3dfdaace8eaad67df37e69ba37390a06667681cfdd4fe1"
+  },
+  {
+    "asset": "goat-adult-male",
+    "publishedSha256": "6a2dbc3e20c795fa30e9a8fef0b88c7246b482860fcfb7d765f429e1debc7e27",
+    "decodedSha256": "271ceff88ce99ff7d8681960fd3b9220f85f92c29afeefe537aafda80b5fb17e"
+  },
+  {
+    "asset": "pig-adult-female",
+    "publishedSha256": "3797ce41e9805aa4ced7c8e681986a29f839b301da5f8ed17ee03466372760d9",
+    "decodedSha256": "fe10e5c6ad55f09ff3344e449ff025eaff66172a6a7e9e1725fdb7db144c79a7"
+  },
+  {
+    "asset": "pig-adult-male",
+    "publishedSha256": "1caf052eb052a44463235801ee8139cd213812873c23905ec28c122345a1d992",
+    "decodedSha256": "5dbc5385063b9121197964dcd163eaf406775a78fa90939f4643b482b692db4a"
+  },
+  {
+    "asset": "sheep-baby",
+    "publishedSha256": "3e0bb33c8db180af38bb06eec1944a439ba85931cbc0f6bb0bd4b6db79d6addc",
+    "decodedSha256": "609cd880adb73504a6e03eda83ff80c2a716d21cce8613d1bae8b8bee77d16d5"
+  },
+  {
+    "asset": "sheep-adult-female",
+    "publishedSha256": "85532737b55871c693beb2405f5e032721fbff8022c7c1040fdd43e6ae095401",
+    "decodedSha256": "00ec4302f7e5f8c30da5378fa3433f3acca473d8a95ec7a001a034b147587e9a"
+  },
+  {
+    "asset": "sheep-adult-male",
+    "publishedSha256": "2dcae8dc261695f072b23df19a3d4ccaaa562cfb7bf988531657dde214ce8689",
+    "decodedSha256": "3852789f83c43b60cf52aa7eed9af5d3598e85f6edc180698c98efb7f6a9f988"
+  },
+  {
+    "asset": "cattle-baby",
+    "publishedSha256": "2299f22466eeeab8075cdeff2c00372cee351171277d536865cbd295c7fc3e36",
+    "decodedSha256": "7bc2f9ab0f8766e069e7436f422af6aab4d07aa77737d7f91499642f616d7110"
+  },
+  {
+    "asset": "cattle-young-adult",
+    "publishedSha256": "8ffe14d2d03970bdfce754bc9b19a559273609e2f29971f7463467572c892e14",
+    "decodedSha256": "75d97c361c19ab9427394a24d059c200f7922c4345e62605ad2b178a79f66094"
+  },
+  {
+    "asset": "cattle-adult-female",
+    "publishedSha256": "eb4bddd8e775609e0e7d79d6650ea44f27ed9c5dc611bc599bed9a1761107df0",
+    "decodedSha256": "1380a2306d78c7b30f09afb7a50948574dd3df58ed190103579b72328a56be38"
+  },
+  {
+    "asset": "cattle-adult-male",
+    "publishedSha256": "6c9ca166e770ce845b9c8f1dbee01bab6908a95eb8f9b1744d2ffd217f34e272",
+    "decodedSha256": "5d6128721e930ca0d9d0c1d3fd9e7324c25119ae40962f19d96af7da94f20fcc"
+  }
+]

@@ -1,5 +1,7 @@
 import { MeshyHumanFactory, meshyAnimationClips, type MeshyHuman } from '../characters/MeshyHuman';
 import { universalHumanProfile } from '../characters/UniversalHumanProfile';
+import { livestockPresentation } from '../characters/LivestockPresentation';
+import { LivestockDeath } from './LivestockDeath';
 import { humanPreviewGroundSpeed } from '../character-lab/HumanPreviewPace';
 import { AnimationMixer, LoopOnce, LoopRepeat, Box3, BoxGeometry, CapsuleGeometry, Group, Mesh, MeshStandardMaterial, Object3D, Vector3 } from 'three';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
@@ -53,12 +55,12 @@ export class FjordModels {
     pace(model: Object3D) { return this.actors.get(model)?.pace ?? 0; }
     activityClips(model: Object3D) {
         const actor = this.actors.get(model);
-        const available: { Graze?: number; HumanInteraction?: number } = {};
+        const available: { Graze?: number; Rest?: number; HumanInteraction?: number } = {};
         if (!actor?.mixer) return available;
-        for (const name of ['Graze', 'HumanInteraction'] as const) {
+        for (const name of ['Graze', 'Rest', 'HumanInteraction'] as const) {
             const clip = actor.clips?.find(clip => clip.name === name);
             if (clip) available[name] = clip.duration;
-            else {
+            else if (name !== 'Rest') {
                 const message = model.name + ': missing ' + name + ' source clip; activity unavailable.';
                 if (!this.diagnostics.includes(message)) this.diagnostics.push(message);
             }
@@ -90,11 +92,11 @@ export class FjordModels {
         }
         return available;
     }
-    animate(model: Object3D, state: 'Idle' | 'Walk' | 'Run' | 'Talk' | 'Listen' | 'Graze' | 'HumanInteraction' | 'Farm' | 'Attack' | 'Doze', speed: number, delta: number) {
+    animate(model: Object3D, state: 'Idle' | 'Walk' | 'Run' | 'Talk' | 'Listen' | 'Graze' | 'Rest' | 'HumanInteraction' | 'Farm' | 'Attack' | 'Doze', speed: number, delta: number) {
         const actor = this.actors.get(model);
         if (!actor) return;
         if (actor.human) {
-            const humanState = state === 'Graze' || state === 'HumanInteraction' ? 'Idle' : state;
+            const humanState = state === 'Graze' || state === 'Rest' || state === 'HumanInteraction' ? 'Idle' : state;
             if (actor.human.clips.some(c => c.name === meshyAnimationClips[humanState])) {
                 actor.human.setAnimation(humanState);
                 actor.human.setPlaybackRate(state === 'Walk' ? Math.max(.05, speed / Math.max(.01, actor.groundSpeed)) : null);
@@ -113,7 +115,7 @@ export class FjordModels {
                     next.time = actor.resumeGrazeTime;
                     actor.resumeGrazeTime = undefined;
                 }
-                const once = state === 'Graze' || state === 'HumanInteraction';
+                const once = state === 'Graze' || state === 'Rest' || state === 'HumanInteraction';
                 next.setLoop(once ? LoopOnce : LoopRepeat, once ? 1 : Infinity);
                 next.clampWhenFinished = once;
                 next.play();
@@ -124,6 +126,13 @@ export class FjordModels {
             actor.mixer.update(delta);
         }
         model.userData.motion = { state, speed, clipTime: actor.human?.animationState.time ?? actor.action?.time, sourceClip: actor.human?.root.userData.clip ?? actor.action?.getClip().name ?? 'static-fallback', clip: actor.human?.animationState.animation ?? actor.action?.getClip().name ?? 'static-fallback' };
+    }
+    beginDeath(model: Object3D) {
+        const actor = this.actors.get(model);
+        const clip = actor?.clips?.find(value => value.name === 'Death');
+        if (!actor?.mixer || !clip) return undefined;
+        actor.state = 'Death';
+        return new LivestockDeath(model, actor.mixer, clip, actor.action);
     }
     inspectResources() {
         return { actors: this.actors.size, sourceTemplates: this.templates.size,
@@ -249,14 +258,16 @@ export class FjordModels {
                 height = 1.8;
             }
             else if (entity.kind === 'cattle') {
-                const response = await fetch(import.meta.env.BASE_URL + 'game-assets/cattle/' + entity.asset + '/manifest.json');
+                const reference = livestockPresentation(entity.asset);
+                if (!reference) throw new Error('Livestock model unavailable');
+                const response = await fetch(import.meta.env.BASE_URL + reference.directory + '/manifest.json');
                 if (!response.ok)
                     throw new Error('Cattle manifest unavailable');
                 const manifest = await response.json();
                 if (!Number.isFinite(manifest.height) || manifest.height <= 0 ||
                     typeof manifest.file !== 'string' || /[\/\\]/.test(manifest.file))
                     throw new Error('Invalid cattle source metadata');
-                url = 'game-assets/cattle/' + entity.asset + '/' + manifest.file;
+                url = reference.directory + '/' + manifest.file;
                 height = manifest.height;
                 pace = manifest.walkSpeedMps ?? .28;
             }

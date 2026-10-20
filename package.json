@@ -22,7 +22,8 @@
     "assets:terrain": "node scripts/prepare-terrain-assets.mjs",
     "validate:public": "node scripts/validate-public-assets.mjs",
     "assets:tent": "node scripts/prepare-meshy-tent.mjs",
-    "assets:cow": "node scripts/prepare-meshy-cow.mjs"
+    "assets:cow": "node scripts/prepare-meshy-cow.mjs",
+    "assets:livestock": "node scripts/prepare-livestock.mjs"
   },
   "dependencies": {
     "nosleep.js": "0.12.0",

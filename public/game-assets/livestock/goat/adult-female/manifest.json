@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "species": "goat",
+  "variant": "adult-female",
+  "file": "goat-adult-female.glb",
+  "bytes": 439540,
+  "sha256": "fb2ed598cf73c5dbe40df9e1ea5030296b9d86d64135693a6794e02c478b7733",
+  "sourceFile": "Female-Goat.glb",
+  "sourceSha256": "e06aeeee0c5720d591460a51eec335bc428cb81368ee5d66003b8d6860a57f2e",
+  "animationSourceSha256": "e06aeeee0c5720d591460a51eec335bc428cb81368ee5d66003b8d6860a57f2e",
+  "triangles": 2965,
+  "joints": 27,
+  "height": 0.9027777777777779,
+  "withersHeightM": 0.65,
+  "walkSpeedMps": 0.2783825518740014,
+  "walkCycleSeconds": 1,
+  "clips": {
+    "Idle": {
+      "duration": 6,
+      "loop": true,
+      "surfaceMinY": 0.00005196084259170171,
+      "surfaceMaxY": 0.003212762545777182
+    },
+    "Walk": {
+      "duration": 1,
+      "loop": true,
+      "surfaceMinY": 0.00004898472011339043,
+      "surfaceMaxY": 0.0032116067062940633
+    },
+    "Graze": {
+      "duration": 12,
+      "loop": true,
+      "surfaceMinY": 0.00005201565332243172,
+      "surfaceMaxY": 0.0032140475908229876
+    },
+    "Rest": {
+      "duration": 10,
+      "loop": true,
+      "surfaceMinY": 0.00005181859765267811,
+      "surfaceMaxY": 0.0032116066227601252
+    },
+    "HumanInteraction": {
+      "duration": 6,
+      "loop": true,
+      "surfaceMinY": 0.00005196084259170171,
+      "surfaceMaxY": 0.0032116067062940633
+    },
+    "Death": {
+      "duration": 2.4,
+      "loop": false,
+      "surfaceMinY": 0.00005181861254372953,
+      "surfaceMaxY": 0.0033991996716808723
+    }
+  },
+  "authoring": "Baked glTF channels on supplied skin",
+  "posture": "Source lift order and cycle duration; upright bind trunk; baked planted-hoof IK; no root travel"
+}

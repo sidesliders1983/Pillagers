@@ -58,8 +58,10 @@ test('Fjord labels cattle by local designation and never depicts another species
     const view = projectFjordSettlement(state, world, createFjordLayout(world));
     assert.deepEqual(view.entities.filter(entity => entity.kind === 'cattle').map(entity =>
         [entity.id, entity.label, entity.status.species, entity.status.sexTerm]), [
-        ['cattle-1', 'Livestock 1', 'cattle', 'Cow'], ['cattle-3', 'Livestock 3', 'cattle', 'Bull'],
+        ['cattle-1', 'Livestock 1', 'cattle', 'Cow'], ['cattle-2', 'Livestock 2', 'goat', 'Doe'],
+        ['cattle-3', 'Livestock 3', 'cattle', 'Bull'],
     ]);
+    assert.equal(view.entities.find(entity => entity.id === 'cattle-2').asset, 'goat/adult-female');
     const { projectSettlement } = loadTypeScript(new URL('../src/play/SettlementView.ts', import.meta.url));
     assert.equal(projectSettlement(state).cattle, 3, 'The shared 2D total includes animals without a native sprite');
     assert.equal(core.serializeState(state), before);

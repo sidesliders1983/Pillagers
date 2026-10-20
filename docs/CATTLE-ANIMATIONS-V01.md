@@ -1,5 +1,10 @@
 # Cattle animation prototype — four variants
 
+Current runtime extension: [livestock presentation](gameplay/LIVESTOCK-V01C-PRESENTATION.md)
+adds a one-shot Death clip to all four variants. The four source activities and
+their original authoring measurements below are retained. Runtime files now
+contain five clips; the Character Lab also exposes Death.
+
 The existing Character Lab offers **Character → Cow**, with a **Cow variant**
 selector for Adult female cow, Baby calf, Young adult cow and Adult bull.
 Use `/character-lab?model=cow`; an optional `variant` query selects

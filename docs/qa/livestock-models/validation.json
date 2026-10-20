@@ -1,0 +1,86 @@
+{
+  "status": "PASS",
+  "branch": "codex/livestock-models-220",
+  "baseRevision": "37e8ba72e2b0127806097a886966758df1991998",
+  "tests": {
+    "total": 1054,
+    "passed": 1044,
+    "failed": 0,
+    "skipped": 10,
+    "newSkips": 0,
+    "command": "node --test --test-concurrency=4 tests/*.test.mjs",
+    "sha256": "40da824f3d692c3b417801105c1469f4eb08f3b3b40b797ef8d2284ec199ffc3"
+  },
+  "typeScript": "PASS",
+  "publicAssets": {
+    "status": "PASS",
+    "files": 494
+  },
+  "productionBuild": "PASS",
+  "cattleOriginalActivities": {
+    "clips": 16,
+    "maximumDifference": 0
+  },
+  "browser": {
+    "runner": "Codex in-app browser, manual public UI and DOM diagnostics",
+    "goat": {
+      "seed": 0,
+      "nativeModels": 3,
+      "placeholders": 0,
+      "selected": "Livestock 1 / Goat / Doe",
+      "slaughter": {
+        "foodBefore": 15,
+        "foodAfter": 25,
+        "herdBefore": 3,
+        "herdAfter": 2,
+        "pausedDeathTime": 0,
+        "bodyFadedAfterResume": true,
+        "survivorActivity": "Rest"
+      }
+    },
+    "pig": {
+      "seed": 8,
+      "viewport": {
+        "width": 1180,
+        "height": 820
+      },
+      "nativeModels": 3,
+      "placeholders": 0,
+      "selected": "Livestock 3 / Pig / Boar",
+      "horizontalOverflow": false
+    },
+    "sheep": {
+      "seed": 10,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "nativeModels": 3,
+      "placeholders": 0,
+      "selected": "Livestock 3 / Sheep / Ram",
+      "horizontalOverflow": false
+    },
+    "gallery": {
+      "models": 12,
+      "deathSampleSeconds": 6.9,
+      "deathClipTime": 2.4000000953674316,
+      "opacity": 0.5000000190734862,
+      "phase": "fading"
+    },
+    "physicalDeviceTest": false,
+    "temporaryGameTabsClosed": true,
+    "viewportOverrideReset": true,
+    "electronHostStartupErrors": 2
+  },
+  "excludedModels": [
+    "pig/baby",
+    "chicken",
+    "goose"
+  ],
+  "shippingDefaultsChanged": false,
+  "simulationSourcesChanged": false,
+  "originalSources": {
+    "verified": 8,
+    "unchanged": true
+  }
+}
