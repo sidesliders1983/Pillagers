@@ -66,9 +66,10 @@ The snapshot is paused; the prototype never sends a simulation command or persis
 notification metadata. Normal surrounding game controls remain real: use the separate
 QA origin, not a personal campaign. Purple controls expose all relevant local state.
 
-Recommendation is Focus, pending owner comparison. No winning Activity Center layout
-has been approved or promoted into main. After selection, rewrite the chosen behavior
-properly in the actual component and retain these alternatives on this branch.
+Initial recommendation was Focus. The owner selected **Focus** on 2026-10-20:
+current conditions first, then new activity. Rewrite that hierarchy in the actual
+component with the existing read/acknowledgement/navigation contracts. Retain all
+three primary-source alternatives on this branch; do not merge prototype code.
 
 Run `pnpm dev --host 0.0.0.0 --port 5220 --strictPort`, then open
 `/scripts/qa/activity-center-prototype.html?variant=focus` (also `inbox`, `journal`).

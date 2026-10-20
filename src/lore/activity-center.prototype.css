@@ -1,53 +1,53 @@
 /* THROWAWAY design variants; the existing Fjord shell, data and world remain visible. */
 .activity-prototyping #fjord-weather-information,
 .activity-prototyping [data-workspace-area="attention"] > details { display: none; }
-.ac-prototype { color: var(--fjord-text, #f0e9dc); font: 13px/1.45 system-ui, sans-serif; }
-.ac-prototype .ac-context { display: flex; justify-content: space-between; align-items: center; margin: 4px 0 12px; }
-.ac-prototype .ac-context > span { font-size: 10px; letter-spacing: .13em; color: var(--fjord-accent, #ddbd87); }
-.ac-prototype small, .ac-prototype .ac-meta { color: var(--fjord-muted, #bec7c1); font-size: 11px; }
-.ac-prototype h3 { font: 20px/1.25 Georgia, serif; margin: 12px 0; }
-.ac-prototype h4 { font-size: 12px; margin-bottom: 4px; }
-.ac-prototype button { color: inherit; min-height: 44px; touch-action: manipulation; }
-.ac-prototype .ac-tabs { display: flex; gap: 4px; border-bottom: 1px solid #737b6b88; margin-bottom: 14px; }
-.ac-prototype .ac-tabs button { flex: 1; border: 0; border-radius: 0; border-bottom: 2px solid transparent; background: none; }
-.ac-prototype .ac-tabs button[aria-pressed="true"] { border-bottom-color: var(--fjord-accent, #ddbd87); color: var(--fjord-accent, #ddbd87); }
-.ac-prototype .ac-section-heading { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-.ac-prototype .ac-section-heading > span { font-size: 11px; color: var(--fjord-muted, #bec7c1); }
-.ac-prototype .ac-section-heading button { background: none; border: 0; font-size: 11px; padding: 4px; }
-.ac-prototype .ac-priority { margin-bottom: 20px; }
-.ac-prototype .ac-rows { display: grid; }
-.ac-prototype .ac-row { display: grid; grid-template-columns: 22px minmax(0, 1fr) 12px; gap: 9px; align-items: start; width: 100%; text-align: left; border: 0; border-bottom: 1px solid #737b6b55; border-radius: 0; padding: 12px 4px; background: transparent; }
-.ac-prototype .ac-row:hover { background: #ffffff08; }
-.ac-prototype .ac-row[data-critical="true"] { border-left: 3px solid #f28d7b; padding-left: 9px; }
-.ac-prototype .ac-row strong { display: block; font-weight: 400; line-height: 1.45; }
-.ac-prototype .ac-meta { display: block; margin-bottom: 4px; }
-.ac-prototype .ac-item-text { min-width: 0; overflow-wrap: anywhere; }
-.ac-prototype .ac-item-icon { color: var(--fjord-accent, #ddbd87); margin-top: 3px; }
-.ac-prototype .ac-item-icon svg { width: 21px; height: 21px; }
-.ac-prototype .ac-indicator { color: var(--fjord-muted, #bec7c1); align-self: center; }
-.ac-prototype .ac-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--fjord-accent, #ddbd87); }
-.ac-prototype .ac-empty { display: grid; justify-items: center; padding: 18px 10px; color: var(--fjord-muted, #bec7c1); }
-.ac-prototype .ac-empty svg { width: 23px; height: 23px; }
-.ac-prototype .ac-empty p { margin: 7px 0 3px; }
-.ac-prototype .ac-detail { padding: 3px 0 12px; }
-.ac-prototype .ac-detail-top { display: flex; justify-content: space-between; align-items: center; }
-.ac-prototype .ac-detail-top button { background: none; border: 0; padding-left: 0; }
-.ac-prototype .ac-detail h3 { font-size: 21px; }
-.ac-prototype .ac-detail > button { display: block; width: 100%; margin-top: 10px; }
-.ac-prototype .ac-primary { color: var(--fjord-accent, #ddbd87); }
-.ac-prototype .ac-detail details { margin-top: 20px; }
-.ac-prototype .ac-detail summary { min-height: 44px; align-content: center; }
-.ac-prototype .ac-preview-destination { border-left: 2px solid #b3a3df; padding: 9px; color: #ddcff9; }
-.ac-prototype .ac-mailbox-heading { display: flex; justify-content: space-between; align-items: center; margin: 2px 0 8px; }
-.ac-prototype .ac-mailbox-heading button { font-size: 11px; background: none; border: 0; }
-.ac-prototype .ac-inbox-hint { padding: 24px 12px; font-size: 12px; color: var(--fjord-muted, #bec7c1); }
-.ac-prototype .ac-inbox-layout aside:has(.ac-detail) { border: 1px solid #737b6b88; border-radius: 6px; padding: 10px; margin-top: 12px; }
-.ac-prototype .ac-journal-issues > summary { min-height: 44px; align-content: center; border-bottom: 1px solid #737b6b88; }
-.ac-prototype .ac-subjects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; margin-top: 12px; }
-.ac-prototype .ac-subjects button { display: grid; justify-items: start; gap: 7px; padding: 14px; text-align: left; background: #ffffff04; }
-.ac-prototype .ac-subjects svg { width: 24px; height: 24px; color: var(--fjord-accent, #ddbd87); }
-.ac-prototype .ac-subjects strong { font-weight: 500; }
-.ac-prototype .ac-visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+#fjord-play .ac-prototype { color: var(--fjord-text, #f0e9dc); font: 13px/1.45 system-ui, sans-serif; }
+#fjord-play .ac-prototype .ac-context { display: flex; justify-content: space-between; align-items: center; margin: 4px 0 12px; }
+#fjord-play .ac-prototype .ac-context > span { font-size: 10px; letter-spacing: .13em; color: var(--fjord-accent, #ddbd87); }
+#fjord-play .ac-prototype small, #fjord-play .ac-prototype .ac-meta { color: var(--fjord-muted, #bec7c1); font-size: 11px; }
+#fjord-play .ac-prototype h3 { font: 20px/1.25 Georgia, serif; margin: 12px 0; }
+#fjord-play .ac-prototype h4 { font-size: 12px; margin-bottom: 4px; }
+#fjord-play .ac-prototype button { color: inherit; min-height: 44px; touch-action: manipulation; }
+#fjord-play .ac-prototype .ac-tabs { display: flex; gap: 4px; border-bottom: 1px solid #737b6b88; margin-bottom: 14px; }
+#fjord-play .ac-prototype .ac-tabs button { flex: 1; border: 0; border-radius: 0; border-bottom: 2px solid transparent; background: none; }
+#fjord-play .ac-prototype .ac-tabs button[aria-pressed="true"] { border-bottom-color: var(--fjord-accent, #ddbd87); color: var(--fjord-accent, #ddbd87); }
+#fjord-play .ac-prototype .ac-section-heading { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+#fjord-play .ac-prototype .ac-section-heading > span { font-size: 11px; color: var(--fjord-muted, #bec7c1); }
+#fjord-play .ac-prototype .ac-section-heading button { background: none; border: 0; font-size: 11px; padding: 4px; }
+#fjord-play .ac-prototype .ac-priority { margin-bottom: 20px; }
+#fjord-play .ac-prototype .ac-rows { display: grid; }
+#fjord-play .ac-prototype .ac-row { display: grid; grid-template-columns: 22px minmax(0, 1fr) 12px; gap: 9px; align-items: start; width: 100%; text-align: left; border: 0; border-bottom: 1px solid #737b6b55; border-radius: 0; padding: 12px 4px; background: transparent; }
+#fjord-play .ac-prototype .ac-row:hover { background: #ffffff08; }
+#fjord-play .ac-prototype .ac-row[data-critical="true"] { border-left: 3px solid #f28d7b; padding-left: 9px; }
+#fjord-play .ac-prototype .ac-row strong { display: block; font-weight: 400; line-height: 1.45; }
+#fjord-play .ac-prototype .ac-meta { display: block; margin-bottom: 4px; }
+#fjord-play .ac-prototype .ac-item-text { min-width: 0; overflow-wrap: anywhere; }
+#fjord-play .ac-prototype .ac-item-icon { color: var(--fjord-accent, #ddbd87); margin-top: 3px; }
+#fjord-play .ac-prototype .ac-item-icon svg { width: 21px; height: 21px; }
+#fjord-play .ac-prototype .ac-indicator { color: var(--fjord-muted, #bec7c1); align-self: center; }
+#fjord-play .ac-prototype .ac-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--fjord-accent, #ddbd87); }
+#fjord-play .ac-prototype .ac-empty { display: grid; justify-items: center; padding: 18px 10px; color: var(--fjord-muted, #bec7c1); }
+#fjord-play .ac-prototype .ac-empty svg { width: 23px; height: 23px; }
+#fjord-play .ac-prototype .ac-empty p { margin: 7px 0 3px; }
+#fjord-play .ac-prototype .ac-detail { padding: 3px 0 12px; }
+#fjord-play .ac-prototype .ac-detail-top { display: flex; justify-content: space-between; align-items: center; }
+#fjord-play .ac-prototype .ac-detail-top button { background: none; border: 0; padding-left: 0; }
+#fjord-play .ac-prototype .ac-detail h3 { font-size: 21px; }
+#fjord-play .ac-prototype .ac-detail > button { display: block; width: 100%; margin-top: 10px; }
+#fjord-play .ac-prototype .ac-primary { color: var(--fjord-accent, #ddbd87); }
+#fjord-play .ac-prototype .ac-detail details { margin-top: 20px; }
+#fjord-play .ac-prototype .ac-detail summary { min-height: 44px; align-content: center; }
+#fjord-play .ac-prototype .ac-preview-destination { border-left: 2px solid #b3a3df; padding: 9px; color: #ddcff9; }
+#fjord-play .ac-prototype .ac-mailbox-heading { display: flex; justify-content: space-between; align-items: center; margin: 2px 0 8px; }
+#fjord-play .ac-prototype .ac-mailbox-heading button { font-size: 11px; background: none; border: 0; }
+#fjord-play .ac-prototype .ac-inbox-hint { padding: 24px 12px; font-size: 12px; color: var(--fjord-muted, #bec7c1); }
+#fjord-play .ac-prototype .ac-inbox-layout aside:has(.ac-detail) { border: 1px solid #737b6b88; border-radius: 6px; padding: 10px; margin-top: 12px; }
+#fjord-play .ac-prototype .ac-journal-issues > summary { min-height: 44px; align-content: center; border-bottom: 1px solid #737b6b88; }
+#fjord-play .ac-prototype .ac-subjects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; margin-top: 12px; }
+#fjord-play .ac-prototype .ac-subjects button { display: grid; justify-items: start; gap: 7px; padding: 14px; text-align: left; background: #ffffff04; }
+#fjord-play .ac-prototype .ac-subjects svg { width: 24px; height: 24px; color: var(--fjord-accent, #ddbd87); }
+#fjord-play .ac-prototype .ac-subjects strong { font-weight: 500; }
+#fjord-play .ac-prototype .ac-visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 #fjord-play .ac-prototype-switcher { position: fixed; left: 50%; bottom: calc(var(--fjord-safe-bottom, 0px) + 74px); transform: translateX(-50%); z-index: 100; display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; gap: 6px; align-items: center; width: min(360px, calc(100vw - 24px)); padding: 5px; border: 1px solid #b9a2ed; border-radius: 9px; background: #30283e; box-shadow: 0 4px 20px #0006; color: #f5edff; text-align: center; }
 #fjord-play .ac-prototype-switcher button { min-width: 44px; min-height: 44px; background: transparent; border: 0; color: inherit; }
 #fjord-play .ac-prototype-switcher small { display: block; color: #d1bff0; font: 500 9px/1.5 system-ui; letter-spacing: .08em; }
@@ -55,10 +55,10 @@
 #fjord-play .ac-prototype-inspector { position: fixed; left: 12px; bottom: calc(var(--fjord-safe-bottom, 0px) + 142px); z-index: 100; color: #ddcff9; background: #30283e; border-radius: 5px; padding: 6px 10px; font: 11px system-ui; max-width: calc(100vw - 24px); }
 #fjord-play .ac-prototype-inspector pre { max-height: 35dvh; overflow: auto; font: 10px/1.4 monospace; }
 #fjord-play.activity-prototyping #fjord-workspace { padding-bottom: 156px; }
-@media (min-width: 1101px) { .ac-prototype .ac-inbox-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; } }
+@media (min-width: 1101px) { #fjord-play .ac-prototype .ac-inbox-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; } }
 
 @media (max-width: 1100px) {
-    .ac-prototype .ac-inbox-layout:has(.ac-detail) > section { display: none; }
-    .ac-prototype .ac-inbox-layout > aside:not(:has(.ac-detail)) { display: none; }
-    .ac-prototype .ac-inbox-layout aside:has(.ac-detail) { margin-top: 0; }
+    #fjord-play .ac-prototype .ac-inbox-layout:has(.ac-detail) > section { display: none; }
+    #fjord-play .ac-prototype .ac-inbox-layout > aside:not(:has(.ac-detail)) { display: none; }
+    #fjord-play .ac-prototype .ac-inbox-layout aside:has(.ac-detail) { margin-top: 0; }
 }
