@@ -26,13 +26,14 @@ export function persistSettlement(campaign: SharedSettlement, say: (message: str
     }
 }
 export function bindViewSwitch(root: HTMLElement, campaign: SharedSettlement, say: (message: string) => void, cachedReturn?: () => void) {
+    const events = new AbortController();
     // A cached outgoing page no longer owns the campaign; restore the current checkpoint.
     window.addEventListener('pageshow', event => {
         if (event.persisted) {
             if (cachedReturn) cachedReturn();
             else location.reload();
         }
-    });
+    }, { signal: events.signal });
     root.addEventListener('click', event => {
         const link = (event.target as Element).closest<HTMLAnchorElement>('a[data-settlement-view]');
         if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)
@@ -40,6 +41,11 @@ export function bindViewSwitch(root: HTMLElement, campaign: SharedSettlement, sa
         const pace = campaign.session.pacing();
         try {
             sessionStorage.setItem(activeSettlementKey, campaign.handoff(link.dataset.settlementView as SettlementView));
+            if (link.dataset.settlementView === 'fjord') {
+                const url = new URL(link.href);
+                url.searchParams.set('entry', 'handoff');
+                link.href = url.href;
+            }
         }
         catch (error) {
             event.preventDefault();
@@ -47,5 +53,6 @@ export function bindViewSwitch(root: HTMLElement, campaign: SharedSettlement, sa
             campaign.session.restorePacing(pace);
             say('View switch cancelled; campaign could not be transferred. ' + String(error));
         }
-    });
+    }, { signal: events.signal });
+    return () => events.abort();
 }

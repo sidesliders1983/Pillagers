@@ -51,7 +51,7 @@ export function livestockSexTerm(species: LivestockSpecies, sex: Cattle['sex'], 
 export type SeededLivestockRules = {
     version: 2;
     profiles: Required<LivestockProfiles>;
-    founding: { version: 1; excludedSpecies?: LivestockSpecies };
+    founding: { version: 1; excludedSpecies?: LivestockSpecies; species?: LivestockSpecies[] };
     breeding: { requireFed: boolean; capacityLimited: boolean; unassignedCapacityUnits: number };
     hides: Record<LivestockSpecies, number>;
 };
@@ -101,7 +101,7 @@ export function validateLivestockRules(state: SimulationState): void {
         throw new Error('Unsupported livestock rules');
     if (rules.version === 2) {
         if (Object.keys(rules).length !== 5 || rules.founding?.version !== 1 ||
-            Object.keys(rules.founding).some(key => !['version', 'excludedSpecies'].includes(key)) ||
+            Object.keys(rules.founding).some(key => !['version', 'excludedSpecies', 'species'].includes(key)) ||
             rules.founding.excludedSpecies !== undefined &&
                 !livestockSpeciesIds.includes(rules.founding.excludedSpecies) ||
             !rules.breeding || Object.keys(rules.breeding).length !== 3 ||
@@ -114,6 +114,10 @@ export function validateLivestockRules(state: SimulationState): void {
                 rules.hides[species] < 0 || rules.hides[species] > 1000) ||
             livestockSpeciesIds.slice(1).some(species => !(species in rules.profiles)))
             throw new Error('Invalid seeded livestock rules');
+        const pool = rules.founding.species;
+        if (pool !== undefined && (!Array.isArray(pool) || pool.length < 2 ||
+            new Set(pool).size !== pool.length || pool.some(species => !livestockSpeciesIds.includes(species))))
+            throw new Error('Invalid founding livestock species pool');
     }
     for (const [species, profile] of Object.entries(rules.profiles)) {
         if (species === 'cattle' || !livestockSpeciesIds.includes(species as LivestockSpecies) ||

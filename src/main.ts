@@ -1,7 +1,7 @@
 import './style.css';
 const route=location.pathname.replace(/\/+$/, '');
 if (route === '/fjord-play') {
-    import('./fjord-play/FjordPlay').then(({ FjordPlay }) => new FjordPlay().start()).catch(error => {
+    import('./fjord-play/FjordEntry').then(({ runFjordEntry }) => runFjordEntry()).catch(error => {
         console.error(error);
         const status = document.querySelector('#fjord-notice');
         if (status) status.textContent = 'Fjord rendering unavailable. Simulation controls remain available. ' + error.message;

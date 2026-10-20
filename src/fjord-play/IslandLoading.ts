@@ -3,6 +3,7 @@ import type { SettlementRestoreMetadata } from '../play/SharedSettlement';
 import type { FoundingBookWindow } from '../lore/FoundingBookWindow';
 import { browserGeneration } from '../world-generation/BrowserGeneration';
 import { adoptCampaignIsland, islandRecipe } from './CampaignIsland';
+import type { IslandRecipe } from './CampaignIsland';
 import type { GenerationProgress } from '../world-generation/GenerationTask';
 import type { TerrainPreview } from '../world-generation/TerrainPreview';
 import type { RTSCameraController } from '../camera/RTSCameraController';
@@ -39,7 +40,8 @@ export class IslandLoading {
     private status: HTMLElement;
     private retry: HTMLButtonElement;
     private skip: HTMLButtonElement;
-    constructor(private canReturnToGame = false, book?: FoundingBookWindow, private resume?: SettlementRestoreMetadata) {
+    constructor(private canReturnToGame = false, book?: FoundingBookWindow, private resume?: SettlementRestoreMetadata,
+        private options: { backLabel?: string; recipe?: IslandRecipe; founding?: SettlementRestoreMetadata } = {}) {
         this.signal = this.abort.signal;
         this.root.id = 'island-loading';
         this.root.tabIndex = -1;
@@ -54,6 +56,12 @@ export class IslandLoading {
             <button type="button" id="island-loading-retry" hidden>Retry generation</button>
             <button type="button" id="island-loading-skip" hidden>Skip camera arrival</button></div></div>`;
         this.root.dataset.mode = resume ? 'resume' : 'new';
+        if (options.backLabel) this.root.querySelector('#island-loading-cancel')!.textContent = options.backLabel;
+        if (options.founding) {
+            const calendar = projectFjordCalendar(options.founding.time, options.founding.ticksPerWinter);
+            this.root.querySelector('.island-loading-help')!.textContent =
+                `Preparing your ${calendar.season} ${calendar.year} landing. The campaign clock has not started.`;
+        }
         if (resume) {
             const calendar = projectFjordCalendar(resume.time, resume.ticksPerWinter);
             this.root.setAttribute('aria-label', 'Returning to your settlement');
@@ -128,12 +136,13 @@ export class IslandLoading {
             this.retry.hidden = true;
             this.stage(this.resume ? 'Restoring saved terrain' : 'Shaping coast & valleys');
             try {
-                const result = await this.worker.generate({ kind: 'campaign', seed, recipe: this.resume?.island ?? islandRecipe(seed),
+                const recipe = this.options.recipe ?? this.resume?.island ?? islandRecipe(seed);
+                const result = await this.worker.generate({ kind: 'campaign', seed, recipe,
                     profile: new URLSearchParams(location.search).has('profileLoading') }, this.progress);
                 this.check();
                 if (this.resultSentAt) this.evidence.samples.push({ stage: 'worker-result-transfer',
                     milliseconds: performance.timeOrigin + performance.now() - this.resultSentAt });
-                await this.measure('receive-and-freeze', () => adoptCampaignIsland(seed, result.world, result.plan!, this.resume?.island ?? islandRecipe(seed)));
+                await this.measure('receive-and-freeze', () => adoptCampaignIsland(seed, result.world, result.plan!, recipe));
                 this.stage('Preparing FjordSide');
                 return;
             } catch (error) {

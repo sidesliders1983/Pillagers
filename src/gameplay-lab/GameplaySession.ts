@@ -12,7 +12,7 @@ import { FamilyTreeIndex } from '../lore/FamilyTree';
 import { PersonalHistoryIndex } from '../lore/PersonalHistory';
 import { ClanBook } from '../lore/ClanBook';
 import { createCampaign, applyCommand, serializeState, reconstructState, initializePhysicalDiscovery, initializeIslandClans } from '../simulation/SimulationCore';
-import type { BirthdayCalendarMode, FoundingPhase, SimulationCommand, SimulationState } from '../simulation/SimulationCore';
+import type { BirthdayCalendarMode, CampaignLivestockRules, FoundingPhase, SimulationCommand, SimulationState } from '../simulation/SimulationCore';
 /** Browser pacing is transient; only explicit commands change canonical state. */
 export class GameplaySession {
     private state: SimulationState;
@@ -96,8 +96,9 @@ export class GameplaySession {
     trend = { food: 0, materials: 0 };
     running = false;
     minutesPerWinter = 3;
-    constructor(seed = 32, narrativeSeed?: number, socialEnabled = true, foundingPhase?: FoundingPhase, calendarMode?: BirthdayCalendarMode) {
-        this.state = createCampaign(seed, {}, {}, {}, {}, {enabled: socialEnabled}, {}, foundingPhase, calendarMode);
+    constructor(seed = 32, narrativeSeed?: number, socialEnabled = true, foundingPhase?: FoundingPhase,
+        calendarMode?: BirthdayCalendarMode, livestock?: CampaignLivestockRules) {
+        this.state = createCampaign(seed, {}, {}, {}, {}, {enabled: socialEnabled}, {}, foundingPhase, calendarMode, livestock);
         this.book = new ClanBook(this.state, true, narrativeSeed);
     }
     initializeWildlife(): void {
@@ -190,8 +191,30 @@ export class GameplaySession {
             throw new Error('This save has no gameplay mechanics');
         this.replace(state, false);
     }
-    newCampaign(seed: number, weatherEnabled = true, socialEnabled = true, foundingPhase = this.state.foundingPhase, calendarMode: BirthdayCalendarMode | undefined = birthdayCalendarMode(this.state)): void {
-        this.replace(createCampaign(seed, {}, {}, { enabled: weatherEnabled }, {}, { enabled: socialEnabled }, {}, foundingPhase, calendarMode));
+    newCampaign(seed: number, weatherEnabled = true, socialEnabled = true, foundingPhase = this.state.foundingPhase, calendarMode: BirthdayCalendarMode | undefined = birthdayCalendarMode(this.state), livestock?: CampaignLivestockRules): void {
+        this.replace(createCampaign(seed, {}, {}, { enabled: weatherEnabled }, {}, { enabled: socialEnabled }, {}, foundingPhase, calendarMode, livestock));
+    }
+    /** Prepare a replay without taking ownership of the current campaign or its read state. */
+    restartProposal(): GameplaySession {
+        const proposal = new GameplaySession();
+        proposal.loadJSON(this.saveJSON());
+        proposal.restartCampaign(true);
+        const replay = proposal.readSnapshot();
+        const founders = this.state.landing?.founderIds;
+        const identity = (person: SimulationState['personas'][string]) => JSON.stringify({
+            id: person.id, name: person.name, dna: person.dna, birthWinter: person.birthWinter,
+            birthTick: person.birthTick, parentIds: person.parentIds, originClanId: person.originClanId,
+        });
+        const partners = (state: Readonly<SimulationState>) => state.events
+            .filter(event => event.type === 'FoundingPartnershipPresent')
+            .map(event => JSON.stringify([...(event.details?.participants as string[] ?? [])].sort())).sort();
+        if (!founders || founders.some(id => {
+            const original = this.state.personas[id] ?? this.state.personaArchive?.[id];
+            return !original || !replay.personas[id] || identity(original) !== identity(replay.personas[id]);
+        }) || JSON.stringify(partners(this.state)) !== JSON.stringify(partners(replay))) {
+            throw new Error('This save cannot faithfully recreate its original founders. Continue or start a new scenario.');
+        }
+        return proposal;
     }
     restartCampaign(sameFounders = false, drawSeed: () => number = () => crypto.getRandomValues(new Uint32Array(1))[0], weatherEnabled = this.state.weather?.config.enabled ?? false, socialEnabled = this.state.social?.config.enabled ?? false, foundingPhase = this.state.foundingPhase): void {
         let seed = sameFounders ? this.state.seed : drawSeed();

@@ -1,0 +1,20 @@
+✔ entry is read-only until a confirmed choice is ready; cancel and repeated clicks are safe (3632.9564ms)
+✔ failed assets and quota retry the same attempt, protecting saves and exposing export (590.6574ms)
+✔ fresh entry has no invented save; leaving fences late activation (88.7836ms)
+✔ a changed active session fences a stale loaded campaign before any write (788.1487ms)
+✔ a restart proposal reproduces original founders and rules without changing the saved campaign (786.1019ms)
+✔ a prepared founder replay retains its visible founding chapter and read state without old Attention (2106.2773ms)
+✔ fresh Fjord scenarios roll only the four supplied species, with saved rules and independent founders (3978.428ms)
+✔ four-species physical rivals exclude the player species; invalid saved pools fail closed (309.0857ms)
+✔ actual raid reports distinguish immutable arrival facts from current breeding age and never grant home ownership early (1273.8218ms)
+✔ six source-pinned real raids retain actual animal identities, donor changes, clocks and exact interrupted-save outcomes (2176.7765ms)
+✔ a successful raid without livestock reports receipt separately and exposes no invented donor explanation (543.402ms)
+✔ a genuinely born and raided young animal can mature while its immutable return receipt stays young (1119.4353ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7439.2603

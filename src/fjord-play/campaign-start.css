@@ -1,0 +1,48 @@
+body.fjord-entry {
+    margin: 0;
+    min-height: 100dvh;
+    overflow: auto;
+    background: radial-gradient(ellipse at 30% 0%, #31545d, #132d34 70%);
+    color: #ece7d2;
+    font: 15px/1.5 system-ui, sans-serif;
+}
+#campaign-start {
+    box-sizing: border-box;
+    width: min(100%, 600px);
+    margin: auto;
+    padding: max(28px, env(safe-area-inset-top)) max(22px, env(safe-area-inset-right))
+        max(28px, env(safe-area-inset-bottom)) max(22px, env(safe-area-inset-left));
+}
+#campaign-start header { display: flex; align-items: center; gap: 18px; margin: 12px 0 28px; }
+#campaign-start img { border-radius: 16px; flex-shrink: 0; }
+#campaign-start h1 { font: bold 38px/1.2 Georgia, serif; margin: 3px 0; }
+#campaign-start h2 { font: bold 25px/1.3 Georgia, serif; }
+#campaign-start .entry-eyebrow { color: #d7c296; font-size: 12px; margin: 0; }
+#campaign-start .entry-content { padding: 22px; border: 1px solid #8f9475; border-radius: 10px; background: #162928ed; }
+#campaign-start .entry-actions { display: grid; gap: 10px; margin: 20px 0; }
+#campaign-start button {
+    min-height: 48px; padding: 12px 16px; border: 1px solid #91a28a;
+    border-radius: 5px; background: #30473d; color: inherit; text-align: left;
+    font: inherit; cursor: pointer;
+}
+#campaign-start button small { display: block; font-size: 12px; color: #d1d8c9; margin-top: 3px; }
+#campaign-start button:disabled { opacity: .45; cursor: not-allowed; }
+#campaign-start button:focus-visible { outline: 3px solid #f0d18b; outline-offset: 3px; }
+#campaign-start button:hover:not(:disabled) { border-color: #efd18c; }
+#campaign-start .entry-secondary { background: transparent; font-size: 13px; }
+#campaign-start .entry-confirm { display: flex; gap: 12px; flex-wrap: wrap; }
+#campaign-start [data-confirm] { border-color: #efd18c; }
+#campaign-start [data-context] { color: #dccba6; font-size: 13px; }
+#campaign-start [data-storage] { color: #eac78b; }
+#campaign-start .entry-rules { color: #c4cfc3; font-size: 12px; }
+#campaign-start .entry-actions p { font-size: 12px; margin: 0; }
+#campaign-start p:empty { display: none; }
+body.fjord-entry #campaign-recovery { box-sizing: border-box; max-width: 650px; margin: auto; padding: 28px; }
+body.fjord-entry #campaign-recovery button, body.fjord-entry #campaign-recovery input { font: inherit; min-height: 44px; margin: 6px; }
+@media (max-height: 500px) and (min-width: 600px) {
+    #campaign-start { width: min(100%, 900px); padding-top: 12px; padding-bottom: 12px; }
+    #campaign-start header { margin: 0 0 12px; }
+    #campaign-start .entry-actions { grid-template-columns: 1fr 1fr 1fr; }
+    #campaign-start .entry-actions p { grid-row: 2; }
+    #campaign-start [data-entry] { grid-row: 1; }
+}

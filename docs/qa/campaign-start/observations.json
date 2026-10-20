@@ -1,0 +1,127 @@
+{
+  "baseCommit": "584a5ee5510407fdb79989b55c205aa882668f6a",
+  "browser": "Codex in-app browser, desktop engine",
+  "physicalIPhoneOrIPadTest": false,
+  "cases": [
+    {
+      "name": "Fresh desktop menu",
+      "workers": 0,
+      "webgl": 0,
+      "modelRequests": 0,
+      "gameModule": false,
+      "savesUnchanged": true
+    },
+    {
+      "name": "Saved campaign menu after normal reload",
+      "seed": 736878959,
+      "season": "Summer",
+      "year": 800,
+      "workers": 0,
+      "webgl": 0,
+      "modelRequests": 0,
+      "gameModule": false,
+      "savesUnchanged": true
+    },
+    {
+      "name": "Replacement confirmation cancelled",
+      "workers": 0,
+      "webgl": 0,
+      "modelRequests": 0,
+      "gameModule": false,
+      "savesUnchanged": true
+    },
+    {
+      "name": "Fresh phone portrait menu",
+      "width": 390,
+      "height": 844,
+      "workers": 0,
+      "webgl": 0,
+      "modelRequests": 0,
+      "gameModule": false,
+      "savesUnchanged": true
+    },
+    {
+      "name": "New scenario during camera arrival",
+      "workers": 6,
+      "webgl": 1,
+      "modelRequests": 60,
+      "gameModule": true,
+      "savesUnchanged": true
+    },
+    {
+      "name": "Progressed fixture continued",
+      "fixture": "docs/qa/fjord-runtime-performance/fixtures/developed-810.json",
+      "season": "Summer",
+      "year": 810,
+      "food": 100102,
+      "materials": 9900,
+      "residents": 17,
+      "livestock": 8,
+      "paused": true
+    },
+    {
+      "name": "Physical four-species scenario, seed 7",
+      "season": "Summer",
+      "year": 800,
+      "food": 15,
+      "materials": 5,
+      "residents": 10,
+      "livestock": 3,
+      "foundingSpecies": "sheep",
+      "females": 2,
+      "males": 1
+    },
+    {
+      "name": "Saved-source menu on final implementation",
+      "source": "Last resume checkpoint",
+      "seed": 32,
+      "season": "Autumn",
+      "year": 800,
+      "workers": 0,
+      "webgl": 0,
+      "modelRequests": 0,
+      "gameModule": false,
+      "savesUnchanged": true
+    },
+    {
+      "name": "Confirmed new scenario cancelled during real loading",
+      "workers": 6,
+      "webgl": 1,
+      "modelRequests": 61,
+      "gameModule": true,
+      "savesUnchanged": true,
+      "menu": true,
+      "ready": false
+    },
+    {
+      "name": "Physical same-founders sheep replay after fix",
+      "seed": 7,
+      "foundingVisible": true,
+      "fullReaderVisible": false,
+      "foundersRetained": true,
+      "foundingSpecies": "sheep"
+    }
+  ],
+  "foundingSamples": [
+    {
+      "seed": 0,
+      "species": "goat",
+      "islandSeed": 18
+    },
+    {
+      "seed": 2,
+      "species": "cattle",
+      "islandSeed": 18
+    },
+    {
+      "seed": 5,
+      "species": "pig",
+      "islandSeed": 7
+    },
+    {
+      "seed": 7,
+      "species": "sheep",
+      "islandSeed": 7
+    }
+  ]
+}
