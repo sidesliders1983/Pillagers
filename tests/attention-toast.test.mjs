@@ -56,7 +56,7 @@ test('a compact message opens Activity Center with one click, closes immediately
         assert.equal(h.root.querySelector('button, a, [data-toast-view], [data-toast-dismiss]'), null);
         h.root.click();
         assert.deepEqual(h.targets, ['activity']);
-        assert.match(document.querySelector('#feed').textContent, /Events/);
+        assert.match(document.querySelector('#feed').textContent, /Needs attention.*New activity/s);
         assert.equal(h.root.hidden, true);
         assert.equal(h.owner.fjord.attentionView().records.find(record => record.eventId === source.id).read, false);
         assert.equal(h.session.saveJSON(), before); assert.equal(h.session.running, true);

@@ -134,8 +134,9 @@ export class FjordPlay {
             <section id="fjord-workspace" tabindex="-1" aria-label="Settlement workspace" hidden>
                 <div class="fjord-workspace-heading"><h2 id="fjord-workspace-title">Settlement</h2><button type="button" data-ui="close-workspace" aria-label="Close workspace">×</button></div>
                 <div id="fjord-directory"></div><section id="expedition-panel" data-workspace-area="expeditions" aria-label="Expedition groups" hidden></section>
-                <div data-workspace-area="attention" hidden><section id="fjord-attention-feed" aria-label="Attention notifications"></section><section id="fjord-weather-information" aria-label="Annual weather forecast"></section>
-                <details><summary>Developer diagnostics</summary><pre id="fjord-diagnostics"></pre></details></div><ul id="fjord-identities" hidden></ul>
+                <div data-workspace-area="attention" hidden><section id="fjord-attention-feed" aria-label="Activity Center"></section>
+                <details class="attention-weather"><summary>Weather &amp; exposure</summary><section id="fjord-weather-information" aria-label="Annual weather forecast"></section></details>
+                <details ${query.has('debugLifecycle') ? '' : 'hidden'}><summary>Developer diagnostics</summary><pre id="fjord-diagnostics"></pre></details></div><ul id="fjord-identities" hidden></ul>
             </section></section>
             <nav id="fjord-navigation" aria-label="Settlement navigation">
                 <button type="button" id="fjord-mobile-menu" aria-label="Settlement navigation" aria-expanded="false" aria-controls="fjord-navigation-drawer">${icon('menu')}</button>

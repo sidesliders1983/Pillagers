@@ -1,21 +1,39 @@
-/* Share the dark Fjord surfaces; only this notification view is styled here. */
+/* Focus: current problems first, unread activity second, history on a separate tab. */
 #fjord-attention-feed { color: var(--fjord-text, #f0e9dc); overflow-wrap: anywhere; }
-#fjord-attention-feed .attention-modes { display: flex; gap: 4px; padding: 4px; border: 1px solid var(--fjord-line, #737b6b); border-radius: 6px; }
-#fjord-attention-feed .attention-modes button { flex: 1; border: 0; background: transparent; }
-#fjord-attention-feed .attention-modes button[aria-pressed="true"] { background: var(--fjord-control, #303b3c); color: var(--fjord-accent, #ddbd87); }
-#fjord-attention-feed .attention-actions { display: flex; justify-content: flex-end; margin: 4px 0 12px; }
-#fjord-attention-feed .attention-actions button { background: transparent; border-color: transparent; font-size: 12px; }
 #fjord-attention-feed button { min-height: 44px; max-width: 100%; white-space: normal; }
-#fjord-attention-feed h3 { font: 20px Georgia, serif; margin: 16px 0 10px; }
-#fjord-attention-feed nav { display: flex; flex-wrap: wrap; gap: 8px; }
-#fjord-attention-feed .attention-list { list-style: none; padding: 0; display: grid; gap: 8px; }
-#fjord-attention-feed .attention-list > li { border: 1px solid #84958a55; border-radius: 6px; padding: 12px; background: #ffffff04; }
-#fjord-attention-feed .attention-list p { margin: 6px 0; line-height: 1.45; }
-#fjord-attention-feed small { display: block; color: var(--fjord-muted, #bec7c1); }
-#fjord-attention-feed .attention-list button { margin-right: 8px; }
-#fjord-attention-feed .attention-condition[data-severity="critical"] { border-left: 4px solid #f17a6e; }
-#fjord-attention-feed .attention-condition[data-severity="critical"] > strong { color: #ffb0a3; }
+#fjord-attention-feed .attention-modes { display: flex; gap: 4px; padding: 4px; border: 1px solid #737b6b88; border-radius: 6px; }
+#fjord-attention-feed .attention-modes button { flex: 1; justify-content: center; border: 0; background: transparent; }
+#fjord-attention-feed .attention-modes button[aria-pressed="true"] { background: var(--fjord-control, #303b3c); color: var(--fjord-accent, #ddbd87); }
+#fjord-attention-feed .attention-section { margin-top: 20px; }
+#fjord-attention-feed .attention-section-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px 12px; }
+#fjord-attention-feed h3 { font: 20px Georgia, serif; margin: 0; }
+#fjord-attention-feed small, #fjord-attention-feed .attention-hint { color: var(--fjord-muted, #bec7c1); font: 12px/1.45 system-ui, sans-serif; }
+#fjord-attention-feed .attention-section-heading button { background: transparent; border-color: transparent; padding: 4px 0; color: var(--fjord-accent, #ddbd87); font-size: 12px; }
+#fjord-attention-feed .attention-list { list-style: none; margin: 8px 0 0; padding: 0; }
+#fjord-attention-feed .attention-list > li { border-bottom: 1px solid #84958a40; }
+#fjord-attention-feed .attention-row { display: flex; align-items: center; gap: 10px; width: 100%; padding: 12px 8px; margin: 0; border: 0; border-radius: 3px; background: transparent; text-align: left; }
+#fjord-attention-feed .attention-row-copy { flex: 1; min-width: 0; font: 14px/1.45 system-ui, sans-serif; }
+#fjord-attention-feed .attention-row-copy small { display: block; margin-bottom: 3px; }
+#fjord-attention-feed .attention-row-icon { align-self: flex-start; padding-top: 3px; color: var(--fjord-accent, #ddbd87); }
+#fjord-attention-feed .attention-row-icon svg { width: 18px; height: 18px; }
+#fjord-attention-feed .attention-row-arrow { color: var(--fjord-muted, #bec7c1); font-size: 22px; }
+#fjord-attention-feed .attention-unread { width: 6px; height: 6px; flex: 0 0 6px; border-radius: 50%; background: var(--fjord-accent, #ddbd87); }
+#fjord-attention-feed .attention-conditions > li[data-severity="critical"] { border-left: 3px solid #f17a6e; }
+#fjord-attention-feed .attention-conditions > li[data-severity="critical"] .attention-row-icon { color: #ffb0a3; }
+#fjord-attention-feed .attention-empty { padding: 12px 8px; margin: 8px 0; color: var(--fjord-muted, #bec7c1); font: 13px/1.5 system-ui, sans-serif; }
+#fjord-attention-feed .attention-pagination { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+#fjord-attention-feed .attention-history-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-top: 16px; font-size: 12px; color: var(--fjord-muted, #bec7c1); }
+#fjord-attention-feed .attention-detail { margin-top: 16px; }
+#fjord-attention-feed .attention-detail h3 { margin: 16px 0 10px; }
+#fjord-attention-feed .attention-detail p { line-height: 1.5; }
+#fjord-attention-feed .attention-confirm { border-top: 1px solid #84958a40; margin-top: 20px; padding-top: 12px; }
+#fjord-attention-feed .attention-detail details { margin-top: 20px; font-size: 12px; color: var(--fjord-muted, #bec7c1); }
 #fjord-attention-feed button:focus-visible { outline: 2px solid var(--fjord-accent, #ddbd87); outline-offset: 3px; }
+#fjord-attention-feed + .attention-weather { border-top: 1px solid #84958a40; margin-top: 20px; padding-top: 8px; font-size: 12px; }
+#fjord-attention-feed + .attention-weather > summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; color: var(--fjord-muted, #bec7c1); }
+#fjord-attention-feed + .attention-weather > summary::after { content: '⌄'; margin-left: auto; }
+#fjord-attention-feed + .attention-weather[open] > summary::after { transform: rotate(180deg); }
+#fjord-attention-feed[data-activity-view="history"] + .attention-weather { display: none; }
 
 /* One compact, tappable message above the existing Attention counter. */
 #fjord-play #fjord-attention-toast {

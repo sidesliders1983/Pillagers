@@ -132,3 +132,25 @@ The owner's subsequent clarification makes the entire compact message one native
 button: clicking immediately closes it and opens Activity Center's unread overview,
 without marking sources read. There are still no separate close/detail controls.
 Keyboard focus holds expiration until the user leaves the button; hovering does not.
+
+## Focus Activity Center (owner selected, 2026-10-20)
+
+The owner compared three read-only prototypes and selected Focus: current problems
+first, then unread activity, with history separate. Design reasoning, journey
+hypotheses and the other variants remain on branch `codex/activity-center-prototype`
+in `docs/qa/activity-center-prototype/JOURNEY.md`; prototype code is not merged.
+
+The production Overview has **Needs attention** and **New activity** sections.
+Critical conditions sort first. Confirm seen is separate from reading events:
+confirmed conditions remain visible as “Seen · still active” until actually resolved.
+The scoped Mark updates read action changes only notification metadata. Each compact
+row opens its detail; condition details lead to the actual relevant game surface.
+History includes read and unread recent activity plus paged older canonical records.
+Weather/exposure is a collapsed reference on Overview; developer diagnostics are
+visible only with the existing `debugLifecycle` query flag. No gameplay rules change.
+
+The notification remains a single compact native button: clicking closes it before
+opening this Overview. No source becomes read merely by opening Activity Center.
+DOM journeys cover ordering, separate confirmation/read state, historical navigation,
+stale campaign guards and unchanged Core/clock. Device visual acceptance remains a
+separate owner review because no browser automation surface is enabled here.

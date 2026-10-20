@@ -32,10 +32,19 @@ test('Attention DOM acknowledges actual conditions, groups births, navigates sou
         session.setRunning(true); const before = session.saveJSON(); view.render();
         assert.match(root.textContent, /Food stocks are empty/);
         const food = owner.fjord.attentionView().alerts.find(alert => alert.id === 'food-empty');
-        click('read-all');
+        assert.match(root.textContent, /Needs attention.*New activity/s);
+        assert.equal(root.querySelector('.attention-conditions > li').dataset.severity, 'critical');
+        assert.doesNotMatch(root.textContent, /Mark updates read/);
+        click('alert', 'food-empty');
         assert.equal(owner.fjord.attentionView().alerts.find(alert => alert.id === 'food-empty').acknowledged, false);
+        assert.match(root.textContent, /Confirming removes this alert/);
+        click('target-alert', 'food-empty');
+        assert.deepEqual(targets.pop(), { kind: 'surface', id: 'food' });
         click('ack', 'food-empty|' + food.since);
         assert.equal(owner.fjord.attentionView().alerts.find(alert => alert.id === 'food-empty').acknowledged, true);
+        click('back');
+        assert.match(root.textContent, /Seen · still active/);
+        assert.match(root.textContent, /Food stocks are empty/);
         assert.equal(session.saveJSON(), before); assert.equal(session.running, true);
         // Fund the separate life-event phase explicitly; acknowledgement itself changes no resources.
         const funded = owner.fjord.exportData();
@@ -46,9 +55,20 @@ test('Attention DOM acknowledges actual conditions, groups births, navigates sou
         const births = owner.fjord.attentionView().records.filter(record => record.canonicalType === 'ChildBorn');
         assert.ok(births.length);
         const birth = births[0];
+        const beforeReads = session.saveJSON();
+        const beforeAlerts = owner.fjord.attentionSave().alerts;
+        click('read-all');
+        assert.ok(owner.fjord.attentionView().records.every(record => record.read));
+        assert.deepEqual(owner.fjord.attentionSave().alerts, beforeAlerts, 'Mark updates read never confirms conditions');
+        assert.match(root.textContent, /You’re up to date/);
+        assert.equal(session.saveJSON(), beforeReads);
+        click('all');
+        assert.match(root.textContent, /Recent activity/);
         if (root.querySelector('[data-attention-action="group"][data-attention-id="ChildBorn:' + birth.time.winter + '"]'))
             click('group', 'ChildBorn:' + birth.time.winter);
-        click('event', birth.eventId);
+        const eventButton = root.querySelector('[data-attention-action="event"][data-attention-id="' + birth.eventId + '"]');
+        eventButton.focus(); eventButton.click();
+        assert.equal(document.activeElement.dataset.attentionAction, 'back', 'Opening a detail keeps keyboard focus in the view');
         assert.equal(owner.fjord.attentionView().records.find(record => record.eventId === birth.eventId).read, true);
         assert.match(root.textContent, /Historical record/);
         click('target', birth.eventId);
@@ -71,8 +91,11 @@ test('Attention DOM acknowledges actual conditions, groups births, navigates sou
         assert.match(root.textContent, /Einar.*Liv/);
         root.dispatchEvent(new dom.window.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
         assert.doesNotMatch(root.textContent, /Historical record/);
+        click('all');
+        assert.doesNotMatch(root.textContent, /Needs attention/);
+        assert.match(root.textContent, /Recent activity/);
         click('chronicle');
-        assert.match(root.textContent, /Routine events do not add/);
+        assert.match(root.textContent, /Includes routine facts/);
         assert.ok(root.querySelector('[data-attention-action="event"]'));
         assert.ok(saves.length);
         const reader = new ClanBookReader(owner, () => {});
