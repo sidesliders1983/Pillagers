@@ -24,7 +24,6 @@ const meter = (label: string, value: number) => `<div class="fjord-meter"><div><
 
 interface InterfaceHooks {
     home?: () => void;
-    wildlifeAttentionCount?: () => number;
     select: (kind: string, id: string) => void;
     refresh: () => void;
     commit: (commands: SimulationCommand[] | (() => SimulationCommand[]), done: () => void) => void;

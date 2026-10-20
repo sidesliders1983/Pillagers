@@ -8,6 +8,8 @@ const { SharedSettlement } = load('play/SharedSettlement');
 const { GameplaySession } = load('gameplay-lab/GameplaySession');
 const { currentIslandVersion } = load('fjord-play/CampaignIsland');
 const { WildlifeHistoryIndex } = load('lore/WildlifeHistory');
+const { readWildlifeDiscoveries } = load('lore/WildlifeAttention');
+const reads = owner => readWildlifeDiscoveries(owner.session.readSnapshot(), owner.fjord.attentionSave());
 const { stepWildlifeSightings } = load('simulation/WildlifeSightings');
 const { geographyIdentity } = load('fjord-play/FjordProjection');
 const output = 'scratch/wildlife-sightings-226';
@@ -45,15 +47,15 @@ session.setRunning(false);
 await writeFile(output + '/unread.json', owner.persist());
 const event = summaries[0].first;
 const before = session.saveJSON();
-owner.fjord.markWildlifeRead(event.eventId);
+owner.fjord.markAttentionRead([event.eventId]);
 assert.equal(session.saveJSON(), before, 'Reading is presentation only');
-assert.equal(session.wildlifeHistory().unread(owner.fjord.readWildlifeDiscoveries).length, summaries.length - 1);
+assert.equal(session.wildlifeHistory().unread(reads(owner)).length, summaries.length - 1);
 const restored = SharedSettlement.restore(owner.persist(), 'fjord');
-assert.deepEqual(restored.fjord.readWildlifeDiscoveries, [event.eventId]);
+assert.deepEqual(reads(restored), [event.eventId]);
 assert.deepEqual(restored.session.snapshot(), session.snapshot());
 await writeFile(output + '/read.json', restored.persist());
 restored.restart(true);
-assert.deepEqual(restored.fjord.readWildlifeDiscoveries, []);
+assert.deepEqual(reads(restored), []);
 assert.equal(restored.session.snapshot().wildlife, undefined);
 const historical = Array.from({ length: 100000 }, (_, i) => ({ ...event, id: 'event-' + (i + 1),
     type: i % 20 ? 'RoutineFixture' : 'WildlifeSighted', details: { ...event.sighting,
@@ -83,6 +85,8 @@ const report = { seed: 32, time: session.readSnapshot().time, sightings: summari
     realCommandBatches: { ticksPerBatch: 5, count: ticks.length, maximumMs: Math.max(...ticks) },
     syntheticSpatialProbe: { description: '16 route copies, 62 observers; stress instrumentation, not a canonical campaign', scans },
     index: { ...index.inspect(), buildMs, thousandRepeatedReadsMs: repeatedMs, pageLimit: 20 },
+    attention: { contract: '#216 shared bounded metadata', wildlifeRecords: owner.fjord.attentionView().records.filter(record => record.canonicalType === 'WildlifeSighted').length,
+        metadataBytes: Buffer.byteLength(JSON.stringify(owner.fjord.attentionSave())) },
     persistence: { exactRoundTrip: true, readIsNoncanonical: true, restartClearsReads: true } };
 await writeFile(output + '/measurements.json', JSON.stringify(report, null, 2));
 console.log(JSON.stringify(report, null, 2));

@@ -183,14 +183,9 @@ export class ClanBookReader {
         this.panel.style.setProperty('--book-top', top + 'px');
     };
     private menuClick = (event: MouseEvent): void => {
-        const wildlife = (event.target as Element).closest<HTMLButtonElement>('[data-wildlife-event], [data-wildlife-book], [data-wildlife-read-all]');
+        const wildlife = (event.target as Element).closest<HTMLButtonElement>('[data-wildlife-event], [data-wildlife-book]');
         if (wildlife) {
             if (this.owner.transferring) return;
-            if (wildlife.hasAttribute('data-wildlife-read-all')) {
-                for (const record of this.owner.session.wildlifeHistory().summaries())
-                    this.owner.fjord.markWildlifeRead(record.first.eventId);
-                this.persist(); this.wildlifeChanged(); return;
-            }
             const id = wildlife.dataset.wildlifeEvent;
             if (id && (Number(wildlife.dataset.wildlifeEpoch) !== this.owner.session.personalHistoryEpoch ||
                 !this.owner.session.wildlifeHistory().encounter(id))) return;
