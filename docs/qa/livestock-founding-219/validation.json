@@ -1,0 +1,95 @@
+{
+  "revision": "67ab93be53e65ee0bbafc3a2bb56f664f62284f1",
+  "productionSourceRevision": "fcf465d4dc836848b92a613e8bf5c987a80b33ac",
+  "updatedAt": "2026-10-20T05:28:39.2954441Z",
+  "focusedTests": {
+    "status": "PASS",
+    "log": "artifacts/livestock-219-focused-resume.log",
+    "tests": 14
+  },
+  "fullTestSuite": {
+    "status": "PASS",
+    "command": "node --test --test-concurrency=2 tests/*.test.mjs",
+    "log": "artifacts/livestock-219-full-tests-resumed.log",
+    "tests": 1048,
+    "passed": 1038,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 10,
+    "durationMs": 1226633.5021,
+    "skipReason": "Nine existing Meshy source/runtime comparisons require unavailable original assets; one frozen r3 export-evidence test requires RUN_R3_EVIDENCE=1. No test was skipped due to a preceding failed check and no guard was changed."
+  },
+  "publicAssets": {
+    "status": "PASS",
+    "trackedFiles": 478,
+    "terrainModels": 47
+  },
+  "characters": {
+    "goldenCharacters": 12,
+    "modules": 19,
+    "assets": 20,
+    "glbs": 36,
+    "status": "PASS",
+    "physicalVisualAcceptance": "Not claimed"
+  },
+  "build": {
+    "typescript": "PASS",
+    "viteCommand": "vite build --configLoader native",
+    "log": "artifacts/livestock-219-vite-build-native.log",
+    "vite": "PASS",
+    "publicValidation": "PASS",
+    "status": "PASS",
+    "warnings": [
+      "Existing chunk-size advisory above 500 kB"
+    ],
+    "note": "Standard config bundling hit a permission error in the shared dependency cache. Native config loading built the same vite.config.ts without changing validation or build configuration."
+  },
+  "gameBrowser": {
+    "status": "PASS",
+    "evidence": "browser.json",
+    "errors": 0,
+    "checks": 10,
+    "touch": "Emulated tablet and phone; no physical-device claim"
+  },
+  "reviewBrowser": {
+    "status": "PASS",
+    "viewports": [
+      1440,
+      390
+    ],
+    "errors": 0,
+    "checks": "Three policies, seven species rows, no outer overflow, full rules and report"
+  },
+  "formatting": {
+    "status": "Manual inspection and git diff --check",
+    "formatter": "No configured formatter"
+  },
+  "github": {
+    "status": "NOT_PUBLISHED",
+    "parentState": "OPEN draft, both current-head checks SUCCESS",
+    "reason": "Explicit public-push authorization required after automatic approval review rejections",
+    "draftUntilCurrentHeadChecksPass": true,
+    "parentPullRequest": 225
+  },
+  "defaultActivation": {
+    "status": "DISABLED",
+    "ownerBalanceApproval": false,
+    "shippingFounding": "Existing cattle contract"
+  },
+  "measurement": {
+    "status": "PASS",
+    "complete": 630,
+    "expected": 630,
+    "limited": 0,
+    "failed": 0,
+    "missing": 0,
+    "yearsPerCase": 40,
+    "independentCpuCases": 90,
+    "maximumAccountingResidual": 0,
+    "provenance": "measurement-soft-v2-final/manifest.json",
+    "originalFrozenRevision": "fcf465d4dc836848b92a613e8bf5c987a80b33ac",
+    "resumeRunnerRevision": "67ab93b",
+    "retainedPriorCases": 160,
+    "newlyCompletedCases": 470
+  }
+}

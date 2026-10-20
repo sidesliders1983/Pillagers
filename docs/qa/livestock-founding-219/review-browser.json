@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "checks": [
+    "1440px: three policies, seven species rows, no outer overflow, rules and report",
+    "390px: three policies, seven species rows, no outer overflow, rules and report"
+  ],
+  "errors": []
+}
