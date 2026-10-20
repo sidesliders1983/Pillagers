@@ -1,6 +1,8 @@
 import { careActive } from '../simulation/CareCalendar';
 import { inspectCampfire } from '../simulation/SimulationCore';
 import { housingName } from '../simulation/HousingNames';
+import { renderLivestockBreeding } from './LivestockBreedingView';
+import { livestockArrivals } from '../simulation/LivestockNames';
 import { commandAvailability } from './SharedSettlement';
 import { canApplyCommand, personaAge, occupationAptitude, inspectWork, inspectBuilding, inspectLivestock, landingSummary, occupationIds, caregiverEligible } from '../simulation/SimulationCore';
 import type { SimulationState, SimulationCommand, Occupation } from '../simulation/SimulationCore';
@@ -58,6 +60,10 @@ export class SettlementPanel {
             if (!state.landing?.cattle[id] && !state.landing?.cattleArchive?.[id])
                 return '<h2>Livestock</h2><p>This animal is no longer present in the settlement.</p>';
             const c = inspectLivestock(state, id), yards = landingSummary(state).farmyards;
+            const arrivals = livestockArrivals(state, id);
+            const captureHistory = arrivals.length ? '<details><summary>Capture history</summary>' +
+                arrivals.map(arrival => `<p>Arrived after Pillage in Winter ${arrival.time.winter}, tick ${arrival.time.tick}.</p>` +
+                    `<details><summary>Source record</summary><p>${esc(arrival.eventId)} · ${esc(arrival.missionId)}</p></details>`).join('') + '</details>' : '';
             const parents = c.parentIds.map(parentId => {
                 const known = state.landing!.cattle[parentId] ?? state.landing!.cattleArchive?.[parentId];
                 return known ? this.select('cattle', parentId, inspectLivestock(state, parentId).name) : 'Recorded parent';
@@ -65,7 +71,7 @@ export class SettlementPanel {
             const biology = `<h2>${esc(c.name)}</h2><p>${esc(c.speciesName)} · ${esc(c.sexTerm)} · ${c.sex} · ${c.age === null ? 'Age unobserved' : c.age + ' Winters'}${c.stage ? ' · ' + esc(c.stage) : ''}</p><p>Parents: ${parents}<br>Origin: ${esc(c.origin)}</p>`;
             if (c.historical) return biology + '<p>Historical record. Current status is not observed.</p>' +
                 (c.observedAt ? `<p>Last observed in Winter ${c.observedAt.winter}, tick ${c.observedAt.tick}.</p>` : '');
-            return biology + `<p>${c.deathWinter !== null ? `Died / slaughtered in Winter ${c.deathWinter}` : c.sheltered ? 'Sheltered' : 'Exposed'}</p><p>Farmyard: ${c.farmyardId ? this.select('building', c.farmyardId, housingName(state, 'building', c.farmyardId)) : 'unassigned'}</p>${c.deathWinter === null ? `<p>Annual mortality risk: ${percent(c.mortalityRiskBps)}<br>Overcrowding: ${c.overcrowding}</p><label>Farmyard<select id="farmyard">${option('', 'Exposed / unassigned', c.farmyardId)}${yards.map(f => option(f.id, housingName(state, 'building', f.id), c.farmyardId)).join('')}</select></label><button data-action="cattle">Assign livestock</button><small data-availability hidden></small>${this.button(state, { type: 'SlaughterLivestock', livestockId: id }, `Slaughter (${c.slaughterFood} Food${c.slaughterHides ? `, ${c.slaughterHides} Hides` : ''})`)}` : ''}`;
+            return biology + captureHistory + (c.deathWinter === null ? renderLivestockBreeding(state, { farmyardId: c.farmyardId, species: c.species }) : '') + `<p>${c.deathWinter !== null ? `Died / slaughtered in Winter ${c.deathWinter}` : c.sheltered ? 'Sheltered' : 'Exposed'}</p><p>Farmyard: ${c.farmyardId ? this.select('building', c.farmyardId, housingName(state, 'building', c.farmyardId)) : 'unassigned'}</p>${c.deathWinter === null ? `<p>Annual mortality risk: ${percent(c.mortalityRiskBps)}<br>Overcrowding: ${c.overcrowding}</p><label>Farmyard<select id="farmyard">${option('', 'Exposed / unassigned', c.farmyardId)}${yards.map(f => option(f.id, housingName(state, 'building', f.id), c.farmyardId)).join('')}</select></label><button data-action="cattle">Assign livestock</button><small data-availability hidden></small>${this.button(state, { type: 'SlaughterLivestock', livestockId: id }, `Slaughter (${c.slaughterFood} Food${c.slaughterHides ? `, ${c.slaughterHides} Hides` : ''})`)}` : ''}`;
         }
         const building = kind === 'building' ? state.buildings[id] : null;
         const home = kind === 'household' ? state.households[id] : Object.values(state.households).find(h => h.residenceId && state.residences[h.residenceId]?.buildingId === id);
@@ -81,6 +87,7 @@ export class SettlementPanel {
             const status = inspectBuilding(state, house.id), yard = landingSummary(state).farmyards.find(f => f.id === house.id);
             html += `<p>${this.select('building', house.id, housingName(state, 'building', house.id))} · ${status.occupied ? 'occupied' : 'vacant'}<br>Upkeep: ${status.upkeep} Materials/Winter<br>Debt: ${status.debtWinters} Winters<br>Upgrade level: ${status.upgradeLevel}</p><p>Farmyard: ${yard ? `active · ${yard.occupants} livestock · space ${yard.occupancy}/${yard.capacity} · overcrowding ${yard.overcrowding}` : 'inactive'}</p>${yard ? Object.values(state.landing!.cattle).filter(c => c.deathWinter === null && c.farmyardId === yard.id).map(c => this.select('cattle', c.id, inspectLivestock(state, c.id).name)).join(' ') : ''}`;
             if (options.homeImprovements !== false) {
+                if (yard) html += renderLivestockBreeding(state, { farmyardId: yard.id });
                 html += `<label>Specialization<select id="specialization">${this.roles(house.specialization)}</select></label><button data-action="specialize" data-building="${esc(house.id)}">Specialize</button><small data-availability hidden></small>${this.button(state, { type: 'UpgradeBuilding', buildingId: house.id }, `Upgrade (${state.mechanics!.config.upgradeCosts[status.upgradeLevel] ?? 'max'} Materials)`)}`;
             }
             html += this.button(state, { type: 'SalvageBuilding', buildingId: house.id }, `Salvage house (${Math.floor(status.investedMaterials / 2)} Materials)`);

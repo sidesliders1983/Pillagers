@@ -1,0 +1,131 @@
+{
+  "status": "PASS_WITH_KNOWN_DEPENDENCY",
+  "rows": [
+    {
+      "island": 7,
+      "checkpointSha256": "856fe0fe264fb90fbbe270125e47b82a393e632a36bea9b1ef61fd84a61a53c4",
+      "source": "01-cattle-C.json.gz",
+      "sourceSha256": "126ec6f3a4c262ee1398d9eaa741fdf8966d7e0444b1519c6475a82eba23b85c",
+      "protocolHash": "6b8c3b5c6163422ede53189e47ddefc19d55a1ab4775584ffac5b1849fcb162e",
+      "historicalExploreFood": 10,
+      "mappedSite": {
+        "id": "site-2",
+        "position": {
+          "x": -10,
+          "z": -70
+        },
+        "sightedAt": 808068,
+        "sourceEventId": "event-459",
+        "reportEventId": "event-497",
+        "knowledge": {
+          "level": "Scouted",
+          "observedAt": 808739,
+          "terrain": "Forest",
+          "resources": [],
+          "settlementName": "Island community",
+          "opportunity": true,
+          "resistance": null
+        }
+      },
+      "command": {
+        "type": "DispatchIslandMission",
+        "groupId": "group-1",
+        "target": {
+          "kind": "site",
+          "siteId": "site-2"
+        },
+        "mission": "Pillage",
+        "priorities": [
+          "Cattle"
+        ]
+      },
+      "at": {
+        "winter": 808,
+        "tick": 850
+      },
+      "startingFood": 170,
+      "newOrdinaryOffer": {
+        "status": "accepted",
+        "foodPerMember": 8,
+        "ticksPerFood": 250,
+        "foodCost": 16,
+        "members": 2,
+        "activeTicks": 2000,
+        "minutesPer1000Ticks": 10
+      },
+      "status": "returned-with-real-risk",
+      "offer": {
+        "duration": 500,
+        "foodCost": 10,
+        "foodPerMember": 5,
+        "successBps": 6000,
+        "casualtyBps": 1000,
+        "target": {
+          "x": -10,
+          "z": -76
+        },
+        "travelTicks": 111
+      },
+      "result": {
+        "success": false,
+        "discovery": null,
+        "survivorIds": [
+          "founder-1",
+          "founder-10"
+        ],
+        "casualtyIds": [],
+        "food": 0,
+        "materials": 0,
+        "cattleIds": [],
+        "personaIds": [],
+        "summary": "Mission failed; no discoveries or recovered assets."
+      },
+      "receipts": [],
+      "exactMidRaidLoad": true
+    },
+    {
+      "island": 18,
+      "checkpointSha256": "a092559bd8e1a338c2ab973e0aa78f1f71cae343b70d88addc452123a7de4848",
+      "source": "02-cattle-C.json.gz",
+      "sourceSha256": "f60e47794ae6d49e74633383502dc9df91e510849dcbde3a4b4ce24ebcf6de00",
+      "protocolHash": "6b8c3b5c6163422ede53189e47ddefc19d55a1ab4775584ffac5b1849fcb162e",
+      "historicalExploreFood": 10,
+      "mappedSite": {
+        "id": "site-2",
+        "position": {
+          "x": -20,
+          "z": -170
+        },
+        "sightedAt": 813141,
+        "sourceEventId": "event-795",
+        "reportEventId": null,
+        "knowledge": null
+      },
+      "command": {
+        "type": "DispatchIslandMission",
+        "groupId": "group-1",
+        "target": {
+          "kind": "site",
+          "siteId": "site-2"
+        },
+        "mission": "Recon"
+      },
+      "at": {
+        "winter": 813,
+        "tick": 700
+      },
+      "startingFood": 224,
+      "newOrdinaryOffer": {
+        "status": "accepted",
+        "foodPerMember": 8,
+        "ticksPerFood": 250,
+        "foodCost": 16,
+        "members": 2,
+        "activeTicks": 2000,
+        "minutesPer1000Ticks": 10
+      },
+      "refusal": "No safe route found within the exploration search limit. Choose a nearer destination.",
+      "status": "known-search-dependency"
+    }
+  ]
+}

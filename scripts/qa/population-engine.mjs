@@ -102,8 +102,9 @@ export function populationEngine(candidate = 'baseline15', { detailLimit = 50000
                 'const died=roll(risk); study.humanMortality(state,id,age,band?.chanceBps??0,weatherExposureBps,risk,died); if(!died)return [];');
         }
         if (url.pathname.endsWith('/simulation/Livestock.ts')) {
-            source = replace(source, 'if (mother.lastCalvingWinter !== null && winter - mother.lastCalvingWinter < profile.birthInterval)\n            continue;',
-                "if(mother.lastCalvingWinter!==null&&winter-mother.lastCalvingWinter<profile.birthInterval){study.breeding(state,mother,'cooldown');continue;}");
+            source = replace(source, 'if (!livestockBirthIntervalReady(state, mother) || !livestockBirthSpaceReady(state, mother)) continue;',
+                "if(!livestockBirthIntervalReady(state,mother)){study.breeding(state,mother,'cooldown');continue;}" +
+                "if(!livestockBirthSpaceReady(state,mother)){study.breeding(state,mother,'capacity');continue;}");
             source = replace(source, 'if (!father || !chance(profile.birthChanceBps)) continue;',
                 "if(!father){study.breeding(state,mother,'no-bull');continue;}" +
                 "const blocked=study.breedingBlock(state,mother);if(blocked){study.breeding(state,mother,blocked);continue;}" +

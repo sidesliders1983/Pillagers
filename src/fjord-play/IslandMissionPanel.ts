@@ -3,6 +3,7 @@ import { expeditionEligible, groupMission, type Cargo, type MissionType } from '
 import type { SimulationCommand } from '../simulation/SimulationCore';
 import type { GameplaySession } from '../gameplay-lab/GameplaySession';
 import type { Point2 } from '../world-generation/WorldBlueprint';
+import { renderMissionLivestock } from '../play/MissionLivestockView';
 
 const escape = (value: string) => value.replace(/[&<>"']/g,
     char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]!));
@@ -25,7 +26,8 @@ export class IslandMissionPanel {
         private command: (command: SimulationCommand) => void,
         private origins: (members: readonly string[]) => Record<string, Point2>,
         private showMap: () => void, private showGroups: () => void,
-        private focus: (point: Point2) => void) {
+        private focus: (point: Point2) => void,
+        private inspectAnimal: (id: string) => void = () => {}) {
         this.root = document.createElement('section');
         this.root.id = 'island-mission-panel';
         this.root.setAttribute('aria-label', 'Physical island missions');
@@ -87,6 +89,10 @@ export class IslandMissionPanel {
     private click = (event: Event) => {
         const button = (event.target as Element).closest<HTMLButtonElement>('button');
         if (!button || button.disabled) return;
+        if (button.dataset.islandLivestock) {
+            const id = button.dataset.islandLivestock, state = this.session.readSnapshot();
+            if (state.landing?.cattle[id] || state.landing?.cattleArchive?.[id]) this.inspectAnimal(id);
+        }
         if (button.hasAttribute('data-island-area')) {
             this.choosing = true; this.message = ''; this.showMap(); this.targetBar.hidden = false;
         }
@@ -168,7 +174,8 @@ export class IslandMissionPanel {
             return groupReason;
         };
         const reports = Object.values(state.world!.spatial?.missions ?? {}).filter(m => m.groupId === this.groupId && m.task?.result);
-        const latest = reports.at(-1)?.task?.result;
+        const latestMission = reports.at(-1);
+        const latest = latestMission?.task?.result;
         const observationAge = site?.knowledge ? Math.floor((state.time.winter * state.ticksPerWinter +
             state.time.tick - site.knowledge.observedAt) / state.ticksPerWinter) : 0;
         const html = `<h3>Island missions</h3><p class="fjord-caption">Separate missions depart from home. Explore first to map possible destinations.</p>
@@ -190,9 +197,11 @@ export class IslandMissionPanel {
                 ${site.knowledge?.opportunity ? `<details data-island-cargo-options><summary>Pillage priorities</summary>
                     <p class="fjord-caption">First available category, top to bottom. One category per survivor.</p>
                     <fieldset><legend>Choose cargo</legend>${(['Food', 'Materials', 'Cattle', 'People'] as const).map(cargo =>
-                        `<label><input type="checkbox" data-cargo="${cargo}" checked> ${cargo}</label>`).join('')}</fieldset></details>` : ''}` : ''}
+                        `<label><input type="checkbox" data-cargo="${cargo}" checked> ${cargo === 'Cattle' ? 'Livestock' : cargo}</label>`).join('')}</fieldset>
+                    <p class="fjord-caption">The next available living animal is taken. Species, sex and age cannot be selected.</p></details>` : ''}` : ''}
             ${latest ? `<article aria-label="Mission report"><h4>Latest mission report</h4><p>${escape(latest.summary)}</p>
-                <details data-island-report-details><summary>Recovered assets &amp; crew</summary><p>${latest.food} Food · ${latest.materials} Materials · ${latest.cattleIds.length} cattle · ${latest.personaIds.length} residents recovered.
+                ${latestMission?.task?.type === 'Pillage' ? renderMissionLivestock(state, latestMission.id) : ''}
+                <details data-island-report-details><summary>Recovered assets &amp; crew</summary><p>${latest.food} Food · ${latest.materials} Materials · ${latest.cattleIds.length} livestock · ${latest.personaIds.length} residents recovered.
                 ${latest.casualtyIds.length} lost · ${latest.survivorIds.length} returned.</p></details></article>` : ''}`;
         if (html !== this.html) {
             const checked = Array.from(this.controls.querySelectorAll<HTMLInputElement>('[data-cargo]'))

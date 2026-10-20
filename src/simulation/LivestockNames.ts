@@ -1,5 +1,5 @@
 import type { SimulationState } from './SimulationCore';
-import { animalProfile, animalSpecies, livestockSpecies } from './LivestockSpecies';
+import { animalProfile, animalSpecies, livestockSpecies, livestockSexTerm } from './LivestockSpecies';
 
 type Names = {
     events: number;
@@ -7,6 +7,13 @@ type Names = {
     labels: Map<string, string>;
 };
 const cache = new WeakMap<SimulationState, Names>();
+
+export function livestockArrivals(state: SimulationState, id: string) {
+    return state.events.filter(event => event.type === 'ExpeditionReturned' &&
+        Array.isArray(event.details?.cattleIds) && event.details.cattleIds.includes(id))
+        .map(event => ({ eventId: event.id, time: { ...event.time },
+            missionId: typeof event.details?.missionId === 'string' ? event.details.missionId : null }));
+}
 
 /** Local arrival order reserves a title even after death or departure.
  * Existing event identities are the source; reading a name never edits a save or draws RNG.
@@ -50,7 +57,7 @@ export function livestockIdentity(state: SimulationState, id: string) {
     const age = (animal.deathWinter ?? state.time.winter) - animal.birthWinter;
     return {
         id, name: livestockName(state, id), species, speciesName: descriptor.name,
-        sex: animal.sex, sexTerm: descriptor[animal.sex], birthWinter: animal.birthWinter,
+        sex: animal.sex, sexTerm: livestockSexTerm(species, animal.sex, age, profile), birthWinter: animal.birthWinter,
         age, stage: age < profile.youngAdultAge ? 'Young' : age < profile.adultAge ? 'Young Adult' : 'Adult',
         parentIds: [...animal.parentIds], origin: animal.origin,
     };

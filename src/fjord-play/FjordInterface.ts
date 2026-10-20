@@ -1,4 +1,5 @@
 import { applyCommand, inspectWork, inspectCattle, inspectLivestock, occupationAptitude, occupationIds, personaAge, landingSummary } from '../simulation/SimulationCore';
+import { renderLivestockBreeding, slaughterBreedingWarning } from '../play/LivestockBreedingView';
 import type { Occupation, SimulationCommand, SimulationState } from '../simulation/SimulationCore';
 import type { SharedSettlement, SettlementSelection } from '../play/SharedSettlement';
 import { commandAvailability } from '../play/SharedSettlement';
@@ -207,6 +208,7 @@ export class FjordInterface {
                     ${house && (!isMobileLayout() || this.expanded) ? this.improvements(state, buildingId!) : ''}
                     ${house && isMobileLayout() && !this.expanded ? `<p>${esc(state.buildings[buildingId!].specialization ? workLabel(state.buildings[buildingId!].specialization!) : 'Unspecialized')} · Level ${homeLevel(homeImprovements(state, buildingId!).upgradeLevel)}</p>` : ''}
                     ${yard ? `<p>${yard.occupants} livestock · space ${yard.occupancy}/${yard.capacity} · overcrowding ${yard.overcrowding}</p>` : ''}
+                    ${yard ? renderLivestockBreeding(state, { farmyardId: yard.id }) : ''}
                     <div class="fjord-actions">${home && !house ? button('build', `Build house · ${state.mechanics!.config.houseCost} Materials`, 'home',
                         this.owner.availability({ type: 'BuildHouse', householdId: home.id }).allowed ? '' : 'disabled title="Insufficient Materials or household unavailable"') : ''}
                     ${home ? button('work-menu', 'Manage work', 'work') : ''}</div>
@@ -428,6 +430,8 @@ export class FjordInterface {
         const target = 'buildingId' in command ? command.buildingId : 'longshipId' in command ?
             command.longshipId : 'livestockId' in command ? inspectLivestock(state, command.livestockId).name :
             'cattleId' in command ? inspectLivestock(state, command.cattleId).name : 'personaId' in command ? command.personaId : '';
+        const breedingWarning = command.type === 'SlaughterLivestock' || command.type === 'SlaughterCattle' ?
+            slaughterBreedingWarning(state, next, command.type === 'SlaughterLivestock' ? command.livestockId : command.cattleId) : '';
         const dialog = document.createElement('dialog');
         dialog.id = 'fjord-command-review';
         dialog.setAttribute('aria-labelledby', 'fjord-command-title');
@@ -437,6 +441,7 @@ export class FjordInterface {
             <p>Stock change: ${next.stocks.food - state.stocks.food} Food · ${next.stocks.materials - state.stocks.materials} Materials.</p>
             ${(next.specialistStocks?.hides ?? 0) > (state.specialistStocks?.hides ?? 0) ? `<p>Specialist stock: +${(next.specialistStocks?.hides ?? 0) - (state.specialistStocks?.hides ?? 0)} Hides.</p>` : ''}
             ${losses.length ? `<p class="fjord-risk">Livestock losing shelter: ${losses.map(esc).join(', ')}.</p>` : ''}
+            ${breedingWarning ? `<p class="fjord-risk">${esc(breedingWarning)}</p>` : ''}
             <div class="fjord-actions"><button type="button" data-confirm>Confirm action</button><button type="button" data-cancel>Cancel</button></div>`;
         document.querySelector('#fjord-play')!.append(dialog);
         return new Promise(resolve => {
@@ -512,6 +517,7 @@ export class FjordInterface {
             const html = `${this.hooks.home ? button('camera-home', 'View settlement', 'home') : ''}
                 <div class="fjord-tabs">${Object.entries(kinds).map(([kind, label]) => button('directory', label, kind === 'persona' ? 'people' : kind === 'cattle' ? 'cattle' : kind === 'longship' ? 'ship' : 'home', `data-kind="${kind}" aria-pressed="${kind === this.directory}"`)).join('')}</div>
                 <label class="fjord-search-label">Find an identity<input id="fjord-search" type="search" value="${esc(this.search)}" placeholder="Name or identifier"></label>
+                ${this.directory === 'cattle' ? renderLivestockBreeding(state) : ''}
                 <div class="fjord-directory-list">${records.filter(r => (r.label + ' ' + r.id).toLocaleLowerCase().includes(this.search.toLocaleLowerCase())).map(r =>
                     `<div>${this.link(this.directory, r.id, r.label)}<small>${esc(r.detail)}</small></div>`).join('') || '<p>No matching identities.</p>'}</div>`;
             updateView(content, html, new Set(['fjord-search']));

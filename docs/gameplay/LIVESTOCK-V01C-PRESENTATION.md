@@ -1,4 +1,4 @@
-# Livestock v0.1C — supplied model integration
+# Livestock v0.1C — models and herd information
 
 This is the presentation slice of #220 under #217. The owner's reference to
 #212 identifies the already merged scene lifecycle work; the requested animal
@@ -64,6 +64,40 @@ its currently observed cell is lost.
 There is no new Core death timing, mortality, slaughter reward, founding species
 rule, saved flag or save schema. Names remain `Livestock N`; details retain the
 real species, sex, stage, parentage and assignment.
+
+## Herd information and returned livestock (#220 owner amendment)
+
+The Livestock directory, animal details and Farmyard details expose a read-only
+`Breeding stock` summary. Combinations require the same species and actual herd
+location. Age-eligible combinations are distinguished from young possible
+replacements, animals past the breeding window, birth intervals, actual space
+and the same-boundary feeding guard. These values reuse the birth resolver's
+canonical predicates; they are not saved flags or a second biological model.
+No inbreeding rule is introduced. A pair is not a guarantee of a successful birth.
+
+Slaughter remains available with its existing costs/rewards and confirmation.
+The confirmation warns when its actual preview removes the last age-eligible
+combination for that species in that herd; a young possible replacement is
+identified separately. This is advice, not a new automatic slaughter policy.
+Mixed Farmyard occupancy continues using each individual's species weight.
+
+Returned Pillage reports link the actual recovered animals to their cards.
+Cards distinguish current age/breeding status from the immutable recorded
+identity at return and expose factual capture history. No recovered animals
+means no livestock was recovered; the UI does not invent a reason.
+
+Loot remains the first living animal in sorted-ID order, with no targeted sex,
+age or species selection. The donor owns and simulates the animals until actual
+return; transfer preserves IDs, species, sex, birth, parents and progress.
+Assignment uses the existing commands. Founding species exclusion and all
+livestock coefficients remain unchanged. New ordinary Explore starts include
+the approved #231 eight-Food pack; Recon/Pillage fees are separate and unchanged.
+
+See [the integration evidence](../qa/livestock-integration-220/report.md) and
+[interactive returned-raid review](../qa/livestock-integration-220/review.html).
+The frozen 360-campaign study is reused as historical evidence, not rerun or
+relabelled. Island 18's mission search limit remains a separate dependency;
+Chicken/Goose meshes and physical-device acceptance remain outstanding.
 
 ## Review and reproduction
 

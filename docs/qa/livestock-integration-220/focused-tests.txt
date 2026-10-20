@@ -1,0 +1,33 @@
+✔ breeding status counts each species separately and never mistakes another species male for a partner (566.511ms)
+✔ separate Farmyards are not a usable pair and real reassignment restores the correct mixed-herd status (205.8436ms)
+✔ young replacements, old animals and birth intervals remain distinct from current structural pairs (926.3223ms)
+✔ breeding status uses the actual outdoor capacity and same-boundary feeding guard without storing a shortage flag (773.2451ms)
+✔ current animal cards and slaughter previews show a young replacement without blocking the risky action (6445.9706ms)
+✔ actual raid reports distinguish immutable arrival facts from current breeding age and never grant home ownership early (5525.8267ms)
+✔ six source-pinned real raids retain actual animal identities, donor changes, clocks and exact interrupted-save outcomes (10315.2703ms)
+✔ a successful raid without livestock reports receipt separately and exposes no invented donor explanation (3251.4976ms)
+✔ a genuinely born and raided young animal can mature while its immutable return receipt stays young (6732.6444ms)
+✔ management shows species and stable labels in animal details and mixed Farmyard rosters (345.9711ms)
+✔ Fjord labels cattle by local designation and never depicts another species using a cattle model (3319.4341ms)
+✔ the saved book and Chronicle retain real species and exact receipts through session handoff (6263.3096ms)
+✔ Farmyard suggestions use the shared occupancy weights and production cursors retain real resource sources (493.0803ms)
+✔ animal inspection exposes stable friendly titles and real species and sex without changing the campaign (41.1431ms)
+✔ six species use their own explicit saved profiles and sex terms without changing founding animals (285.9591ms)
+✔ saved species require complete bounded rules and cannot register one animal twice (288.0716ms)
+✔ a mature female breeds only with her own species and preserves parentage, cooldown and event-time identity (1523.1854ms)
+✔ loaded animal genealogy cannot cross species even when both profiles are valid (810.1581ms)
+✔ explicit species outputs accumulate whole Food and Materials with exact annual feeding and ledger accounting (1159.4529ms)
+✔ one mixed Farmyard uses weighted soft capacity and each species crowding risk (139.9124ms)
+✔ new cattle campaigns record versioned founding designations while preserving founder RNG and economics (193.8111ms)
+✔ species mortality retains each dead animal and freezes its age and recorded designation (980.0601ms)
+✔ generic livestock commands assign real animals and grant stage-specific slaughter Food exactly once (334.6022ms)
+✔ species profile setup is restricted to the saved founding phase and cannot retune a running campaign (152.9317ms)
+✔ existing real transfers keep local titles unique, reserve dead titles and retain source observations (1335.3971ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 34317.6447

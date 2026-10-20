@@ -33,6 +33,14 @@ While any physical mission is active the existing Expedition Mode pacing applies
 
 ## Save contract and UI
 
+The returned Pillage report lists actual recovered livestock and opens each
+animal's card. Current species, age-appropriate role and breeding-age status
+are separate from the immutable identity recorded at return. Capture history
+and real Farmyard assignment remain available on the card. A report with no
+livestock says so without inventing a reason. Loot uses the first living animal
+in sorted-ID order; it does not target a breeding sex or age. Donor ownership
+and simulation continue until return. See [#220 integration evidence](qa/livestock-integration-220/report.md).
+
 `world.spatial.version = 3` composes an optional version-1 mission task into the existing saved movement record. `world.islandIntel.version = 1` stores only site sighting/report evidence and dated knowledge. Core does not duplicate the heightfield, invent a target clan, or mutate the four legacy Region slots. Existing version-1/2 spatial journeys and old regional missions retain their saved behavior.
 
 Expeditions contains the reused group selector, **Recon mapped area**, and known settlement actions. Tap a known gold site ring in the 3D scene to open its actions; drag/pinch remain navigation outside explicit targeting. Tapping mapped land during Recon targeting opens the cost confirmation. Separate missions cannot receive Explore redirects; Return home remains available. Results appear after actual homecoming and also feed existing Chronicle/Clan Book resource accounting.

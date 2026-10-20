@@ -15,6 +15,8 @@ export type { FoundingPhase } from './FoundingPhase';
 import { setCampfire, validateCampfire } from './Campfire';
 import type { CampfireState, CampfireCommand } from './Campfire';
 export { inspectCampfire } from './Campfire';
+export { inspectLivestockBreeding } from './LivestockBreeding';
+export { inspectIslandMissionLivestock } from './MissionLivestock';
 import {initializeSocial, validateSocial} from './PersonalityLifeEvents';
 import type {SocialState, SocialConfig} from './PersonalityLifeEvents';
 export {defaultSocialConfig, socialProbabilities} from './PersonalityLifeEvents';

@@ -586,7 +586,7 @@ export class FjordPlay {
                 islandMissions?.committed(command);
             }), memberIds => presentation!.origins(memberIds),
             () => desktopUI?.showExplorationMap(), () => desktopUI?.open('expeditions', true),
-            point => controller.focusAt(point));
+            point => controller.focusAt(point), id => select('cattle', id));
         document.querySelector('#fjord-expeditions-open')!.addEventListener('click', () => {
             document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open = false;
             showManagement(true);

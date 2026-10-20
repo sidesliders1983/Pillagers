@@ -41,6 +41,13 @@ export type LivestockProfile = {
 };
 
 export type LivestockProfiles = Partial<Record<ConfiguredSpecies, LivestockProfile>>;
+
+export function livestockSexTerm(species: LivestockSpecies, sex: Cattle['sex'], age: number,
+    profile: LivestockProfile): string {
+    if (age >= profile.adultAge) return livestockSpecies[species][sex];
+    if (species === 'cattle' && age >= profile.youngAdultAge) return sex === 'female' ? 'Heifer' : 'Young bull';
+    return { cattle: 'Calf', chicken: 'Chick', pig: 'Piglet', sheep: 'Lamb', goat: 'Kid', goose: 'Gosling' }[species];
+}
 export type SeededLivestockRules = {
     version: 2;
     profiles: Required<LivestockProfiles>;

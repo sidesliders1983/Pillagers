@@ -3,9 +3,11 @@ import {farmyards, livestockHerdSpace} from './Farmyards';
 import type {SimulationState, GameTime} from './SimulationCore';
 import type {Cattle} from './Landing';
 import { livestockName, livestockIdentity } from './LivestockNames';
-import { animalProfile, animalSpecies, livestockSpecies } from './LivestockSpecies';
+import { animalProfile, animalSpecies, livestockSpecies, livestockSexTerm } from './LivestockSpecies';
 import { eventFacts } from './EventFacts';
 import { slaughterHides } from './SpecialistStocks';
+import { ageEligibleForBreeding, compatibleLivestockPartner, livestockBirthIntervalReady,
+    livestockBirthSpaceReady, livestockFeedingBlocked } from './LivestockBreeding';
 export function cattleSheltered(state:SimulationState,cattle:Cattle):boolean {return cattle.farmyardId!==null&&farmyards(state).some(f=>f.id===cattle.farmyardId);}
 function emit(state: SimulationState, type: string, details: Record<string, unknown>): void {
     // Production and feeding already have source IDs and exact amounts. Do not repeat the
@@ -85,7 +87,7 @@ export function inspectCattle(state:SimulationState,id:string) {
     const slaughterFood = age < profile.youngAdultAge ? profile.youngSlaughterFood :
         age < profile.adultAge ? profile.youngAdultSlaughterFood : profile.slaughterFood;
     return {...cattle,age,slaughterFood,slaughterHides:slaughterHides(state,cattle),name:livestockName(state,id),species,
-        speciesName:descriptor.name,sexTerm:descriptor[cattle.sex],
+        speciesName:descriptor.name,sexTerm:livestockSexTerm(species, cattle.sex, age, profile),
         stage:age<profile.youngAdultAge?'Young':age<profile.adultAge?'Young Adult':'Adult',sheltered:cattle.deathWinter===null&&cattleSheltered(state,cattle),overcrowding:(livestockHerdSpace(state,cattle)?.overcrowdingUnits??0)/10000,mortalityRiskBps:cattle.deathWinter===null?cattleMortalityRisk(state,cattle):0};
 }
 
@@ -120,6 +122,7 @@ export function inspectLivestock(state: SimulationState, id: string) {
         age < profile.adultAge ? 'Young Adult' : 'Adult';
     return {
         ...animal, ...identity, name: recorded?.name ?? identity.name, age,
+        sexTerm: age === null ? identity.sexTerm : livestockSexTerm(identity.species, animal.sex, age, profile),
         stage: recorded && ['Young', 'Young Adult', 'Adult'].includes(recorded.stage) ? recorded.stage : stage,
         historical: true as const, observedAt,
         slaughterFood: null, slaughterHides: null, sheltered: null, overcrowding: null, mortalityRiskBps: null,
@@ -129,31 +132,14 @@ export function inspectLivestock(state: SimulationState, id: string) {
 export function resolveCattleBirths(state:SimulationState,chance:(bps:number)=>boolean):void {
     const landing = state.landing;
     if (!landing) return;
-    const rules = landing.livestock;
-    if (rules?.version === 2 && rules.breeding.requireFed) {
-        // Feed facts belong to this boundary, not a previous shortage or saved derived flag.
-        for (let index = state.events.length - 1; index >= 0; index--) {
-            const event = state.events[index];
-            if (event.time.winter !== state.time.winter || event.time.tick !== state.time.tick) break;
-            if (['FoodConsumed', 'CattleFoodConsumed', 'LivestockFoodConsumed'].includes(event.type) &&
-                Number(event.details?.shortfall) > 0) return;
-        }
-    }
+    if (livestockFeedingBlocked(state)) return;
     const winter = state.time.winter;
-    const eligible = Object.values(landing.cattle).filter(animal => {
-        const profile = animalProfile(state, animal), age = winter - animal.birthWinter;
-        return animal.deathWinter === null && age >= profile.fertileMinAge && age <= profile.fertileMaxAge;
-    }).sort((a, b) => a.id.localeCompare(b.id));
+    const eligible = Object.values(landing.cattle).filter(animal => ageEligibleForBreeding(state, animal))
+        .sort((a, b) => a.id.localeCompare(b.id));
     for (const mother of eligible.filter(animal => animal.sex === 'female')) {
         const profile = animalProfile(state, mother), species = animalSpecies(mother);
-        if (mother.lastCalvingWinter !== null && winter - mother.lastCalvingWinter < profile.birthInterval)
-            continue;
-        if (rules?.version === 2 && rules.breeding.capacityLimited) {
-            const space = livestockHerdSpace(state, mother);
-            if (!space || space.occupiedUnits + profile.capacityWeightBps > space.capacityUnits) continue;
-        }
-        const father = eligible.find(animal => animal.sex === 'male' &&
-            animalSpecies(animal) === species && animal.farmyardId === mother.farmyardId);
+        if (!livestockBirthIntervalReady(state, mother) || !livestockBirthSpaceReady(state, mother)) continue;
+        const father = eligible.find(animal => compatibleLivestockPartner(mother, animal));
         if (!father || !chance(profile.birthChanceBps)) continue;
         const prefix = (state.entityPrefix ?? '') + (species === 'cattle' ? 'cattle-' : 'livestock-');
         let serial = Object.keys(landing.cattle).length + 1;
