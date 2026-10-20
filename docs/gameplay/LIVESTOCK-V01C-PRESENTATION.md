@@ -12,22 +12,23 @@ The candidate founding/balance rules are not activated by this change.
 | Cattle | Existing calf | Existing young-adult / cow | Existing young-adult / bull |
 | Goat | Supplied kid | Supplied doe | Supplied buck |
 | Sheep | Supplied lamb | Supplied ewe | Supplied ram |
-| Pig | Deferred by owner | Supplied sow | Supplied boar |
+| Pig | Supplied piglet | Supplied sow | Supplied boar |
 | Chicken | Deferred | Deferred | Deferred |
 | Goose | Deferred | Deferred | Deferred |
 
 Only cattle have a separate Young Adult mesh. Other supplied juvenile-adult
 stages use their sex-specific model; the stage and age shown in details still
 come from Core. Deferred animals remain canonical and manageable in the roster;
-they are not depicted with another species, or with a scaled adult piglet.
+they are not depicted with another species or with a scaled adult as a baby.
 Their actual occupancy still counts when projecting yard/overflow placement.
 
-The eight new models retain their supplied surface geometry, UVs, textures,
+The nine new models retain their supplied surface geometry, UVs, textures,
 27-joint skins and sex differences. Runtime copies use uniform metre scaling,
 WebP textures and Meshopt compression. Originals in iCloud are read only.
 `public/game-assets/livestock/` contains the distributable copies. The owner
-excluded the incorrect 200,958-triangle piglet download; it is neither simplified
-nor published. Chicken and Goose remain later work.
+replaced the incorrect 200,958-triangle piglet download with a 2,808-triangle
+model. The replacement is published without geometry reduction; the incorrect
+download was never published. Chicken and Goose remain later work.
 
 ## Activities
 

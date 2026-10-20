@@ -58,5 +58,10 @@
     "asset": "cattle-adult-male",
     "publishedSha256": "6c9ca166e770ce845b9c8f1dbee01bab6908a95eb8f9b1744d2ffd217f34e272",
     "decodedSha256": "5d6128721e930ca0d9d0c1d3fd9e7324c25119ae40962f19d96af7da94f20fcc"
+  },
+  {
+    "asset": "pig-baby",
+    "publishedSha256": "f45d0753c75fc0aea98b55c2200243e3f545ac0d7a09eecc104c8472dcbda33e",
+    "decodedSha256": "45028906f6e60d0b31526d269b88503bebc3864ee8b9e83c3f23ddfd386ad6ac"
   }
 ]

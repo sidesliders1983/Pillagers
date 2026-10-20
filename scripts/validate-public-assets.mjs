@@ -34,7 +34,7 @@ for (const variant of ['adult-female', 'adult-male', 'baby', 'young-adult']) {
 }
 
 for (const species of ['goat', 'pig', 'sheep']) {
-    const variants = species === 'pig' ? ['adult-female', 'adult-male'] : ['baby', 'adult-female', 'adult-male'];
+    const variants = ['baby', 'adult-female', 'adult-male'];
     for (const variant of variants) {
         const directory = 'game-assets/livestock/' + species + '/' + variant;
         await verifyEntry(directory, await json(directory + '/manifest.json'));

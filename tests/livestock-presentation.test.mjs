@@ -52,13 +52,8 @@ test('Fjord uses supplied sex and age models for Goat, Pig and Sheep without cha
         const born = core.advanceWinter(state);
         const newborns = projectFjordSettlement(born, world, view.layout).entities
             .filter(entity => entity.kind === 'cattle' && entity.status.age === 0);
-        if (species === 'pig') {
-            assert.ok(Object.values(born.landing.cattle).some(animal => animal.birthWinter === born.time.winter));
-            assert.equal(newborns.length, 0, 'The deferred piglet must not use a different model');
-        } else {
-            assert.ok(newborns.length > 0, 'The actual Core must produce the fixture offspring');
-            assert.ok(newborns.every(entity => entity.asset === species + '/baby'));
-        }
+        assert.ok(newborns.length > 0, 'The actual Core must produce the fixture offspring');
+        assert.ok(newborns.every(entity => entity.asset === species + '/baby'));
     }
 });
 
@@ -199,7 +194,7 @@ test('published skins have bounded geometry, upright walks and an actual non-loo
     try {
         for (const species of ['goat', 'pig', 'sheep', 'cattle']) {
             const variants = species === 'cattle' ? ['baby', 'young-adult', 'adult-female', 'adult-male'] :
-                species === 'pig' ? ['adult-female', 'adult-male'] : ['baby', 'adult-female', 'adult-male'];
+                ['baby', 'adult-female', 'adult-male'];
             for (const variant of variants) {
                 const directory = '../public/game-assets/' + (species === 'cattle' ? 'cattle/' : 'livestock/' + species + '/') + variant + '/';
                 const manifest = JSON.parse(await readFile(new URL(directory + 'manifest.json', import.meta.url), 'utf8'));

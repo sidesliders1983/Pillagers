@@ -30,7 +30,7 @@ function compareClip(before, after, name) {
 }
 for (const species of ['goat', 'pig', 'sheep', 'cattle']) {
     const variants = species === 'cattle' ? ['baby', 'young-adult', 'adult-female', 'adult-male'] :
-        species === 'pig' ? ['adult-female', 'adult-male'] : ['baby', 'adult-female', 'adult-male'];
+        ['baby', 'adult-female', 'adult-male'];
     for (const variant of variants) {
         const directory = 'public/game-assets/' + (species === 'cattle' ? 'cattle/' : 'livestock/' + species + '/') + variant;
         const manifest = JSON.parse(await readFile(directory + '/manifest.json', 'utf8'));
@@ -50,22 +50,27 @@ for (const species of ['goat', 'pig', 'sheep', 'cattle']) {
         publications.push({ species, variant, directory, ...manifest });
     }
 }
-let sourceAudit;
-try {
-    sourceAudit = JSON.parse(await readFile('artifacts/livestock-models/source-audit-visible/source-rigs.json', 'utf8'));
-} catch (error) {
-    if (error.code !== 'ENOENT') throw error;
-    sourceAudit = JSON.parse(await readFile('docs/qa/livestock-models/source-audit.json', 'utf8')).sources;
+let sourceAudit = JSON.parse(await readFile('docs/qa/livestock-models/source-audit.json', 'utf8')).sources;
+const sourceArgument = process.argv.indexOf('--source-audit');
+if (sourceArgument !== -1) {
+    const additions = JSON.parse(await readFile(process.argv[sourceArgument + 1], 'utf8'));
+    const fileName = record => record.source.replaceAll('\\', '/').split('/').at(-1).toLowerCase();
+    const updatedFiles = new Set(additions.map(fileName));
+    sourceAudit = [...sourceAudit.filter(record => !updatedFiles.has(fileName(record))), ...additions];
 }
-for (const source of sourceAudit.filter(record => !record.source.endsWith('baby-pig.glb'))) {
+for (const source of sourceAudit) {
     const publication = publications.find(record => record.species !== 'cattle' &&
         source.source.toLowerCase().endsWith(record.sourceFile.toLowerCase()));
     assert.ok(publication, 'An audited source must have a real publication');
     assert.equal(publication.sourceSha256, source.sha256, 'Source audit is stale; repeat the Blender inspection');
 }
+for (const publication of publications.filter(record => record.species !== 'cattle')) {
+    assert.ok(sourceAudit.some(source => source.sha256 === publication.sourceSha256),
+        'Every supplied publication must have a matching source inspection');
+}
 const report = { status: 'PASS', sourceRevision: revision,
-    excluded: ['baby-pig.glb: owner deferred incorrect source', 'Chicken: assets deferred', 'Goose: assets deferred'],
-    sources: sourceAudit.filter(record => !record.source.endsWith('baby-pig.glb')), publications,
+    excluded: ['Chicken: assets deferred', 'Goose: assets deferred'],
+    sources: sourceAudit, publications,
     cattlePreservation: preservation };
 await writeFile('docs/qa/livestock-models/source-audit.json', JSON.stringify(report, null, 2) + '\n');
-console.log('Verified 12 publications and all 16 existing cattle activity clips against the frozen source.');
+console.log('Verified ' + publications.length + ' publications and all 16 existing cattle activity clips against the frozen source.');

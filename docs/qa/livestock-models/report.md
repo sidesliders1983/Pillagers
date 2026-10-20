@@ -1,5 +1,9 @@
 # Livestock model and animation integration
 
+Follow-up: the owner replaced the deferred piglet with a 2,808-triangle source.
+See [piglet-update.md](piglet-update.md) for its integration and separate validation.
+The initial results below retain their original twelve-model scope.
+
 Local review: `/docs/qa/livestock-models/review.html` on preview port **5194**.
 Branch: `codex/livestock-models-220`, based on the existing livestock work at
 `37e8ba72e2b0127806097a886966758df1991998`. No shipping species/balance default

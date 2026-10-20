@@ -166,5 +166,19 @@
     "frame": 57,
     "decodedSourceSha256": "609cd880adb73504a6e03eda83ff80c2a716d21cce8613d1bae8b8bee77d16d5",
     "file": "sheep-baby-death.png"
+  },
+  {
+    "asset": "pig-baby",
+    "clip": "Walk",
+    "frame": 6,
+    "decodedSourceSha256": "45028906f6e60d0b31526d269b88503bebc3864ee8b9e83c3f23ddfd386ad6ac",
+    "file": "pig-baby-walk.png"
+  },
+  {
+    "asset": "pig-baby",
+    "clip": "Death",
+    "frame": 57,
+    "decodedSourceSha256": "45028906f6e60d0b31526d269b88503bebc3864ee8b9e83c3f23ddfd386ad6ac",
+    "file": "pig-baby-death.png"
   }
 ]

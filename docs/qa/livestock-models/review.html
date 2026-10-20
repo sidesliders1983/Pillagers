@@ -25,7 +25,7 @@
 <body>
   <header>
     <h1>Livestock · supplied models and authored activities</h1>
-    <p>Goat and Sheep: baby, adult female and adult male. Pig: adult female and adult male; piglet deferred. Existing cattle retain their activities and gain Death. Drag to orbit; pinch or scroll to zoom.</p>
+    <p>Goat, Pig and Sheep: baby, adult female and adult male. Existing cattle retain their activities and gain Death. Drag to orbit; pinch or scroll to zoom.</p>
     <nav id="clips" aria-label="Animation"></nav>
     <nav><button id="pause">Pause</button><button id="restart">Restart animation</button>
       <label>View <select id="view"><option value="all">All animals</option></select></label>
@@ -74,7 +74,7 @@
     const view = document.querySelector('#view');
     for (const species of ['goat', 'pig', 'sheep', 'cattle']) {
       const variants = species === 'cattle' ? ['baby', 'young-adult', 'adult-female', 'adult-male'] :
-        species === 'pig' ? ['adult-female', 'adult-male'] : ['baby', 'adult-female', 'adult-male'];
+        ['baby', 'adult-female', 'adult-male'];
       for (const variant of variants) {
         const id = species + '/' + variant;
         try {

@@ -11,7 +11,6 @@ export function livestockAsset(species: string, sex: string, stage: string): str
     if (species === 'cattle') return stage === 'Young' ? 'baby' :
         stage === 'Young Adult' ? 'young-adult' : sex === 'female' ? 'adult-female' : 'adult-male';
     if (!Object.hasOwn(sizes, species)) return null;
-    if (species === 'pig' && stage === 'Young') return null;
     return species + '/' + (stage === 'Young' ? 'baby' : sex === 'female' ? 'adult-female' : 'adult-male');
 }
 
@@ -23,7 +22,6 @@ export function livestockPresentation(asset?: string) {
             radius: asset === 'baby' ? .5 : asset === 'young-adult' ? .7 : .9 };
     }
     const [species, variant] = asset.split('/');
-    if (species === 'pig' && variant === 'baby') return null;
     if (!Object.hasOwn(sizes, species) || !['baby', 'adult-female', 'adult-male'].includes(variant)) return null;
     const profile = sizes[species as keyof typeof sizes];
     const withers = profile[variant === 'baby' ? 'baby' : variant === 'adult-female' ? 'female' : 'male'];

@@ -32,7 +32,6 @@ for (const species of ['goat', 'pig', 'sheep']) {
         if (!file.toLowerCase().endsWith('.glb')) continue;
         const variant = file.toLowerCase().startsWith('baby') ? 'baby' :
             file.toLowerCase().startsWith('female') ? 'adult-female' : 'adult-male';
-        if (species === 'pig' && variant === 'baby') continue;
         definitions.push({ species, variant, source: resolve(directory, file),
             withers: livestockPresentation(species + '/' + variant).withers });
     }

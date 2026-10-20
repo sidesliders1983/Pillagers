@@ -1,0 +1,30 @@
+✔ Fjord uses supplied sex and age models for Goat, Pig and Sheep without changing the campaign (46799.7074ms)
+✔ a real slaughter publishes death evidence without resurrecting an animal or altering its history (5133.5063ms)
+✔ death falls once, holds its final pose, then fades only its own materials and releases them (181.5934ms)
+✔ the public scene layer retains only confirmed deaths and cancels them on rollback or disposal (919.768ms)
+✔ visible goats alternate grazing and authored rest without advancing the canonical herd (7809.3134ms)
+✔ published skins have bounded geometry, upright walks and an actual non-looping fallen end pose (33805.1305ms)
+✔ management shows species and stable labels in animal details and mixed Farmyard rosters (1092.7048ms)
+✔ Fjord labels cattle by local designation and never depicts another species using a cattle model (5272ms)
+✔ the saved book and Chronicle retain real species and exact receipts through session handoff (30662.8033ms)
+✔ Farmyard suggestions use the shared occupancy weights and production cursors retain real resource sources (1097.2615ms)
+✔ animal inspection exposes stable friendly titles and real species and sex without changing the campaign (59.0099ms)
+✔ six species use their own explicit saved profiles and sex terms without changing founding animals (764.7467ms)
+✔ saved species require complete bounded rules and cannot register one animal twice (408.7357ms)
+✔ a mature female breeds only with her own species and preserves parentage, cooldown and event-time identity (2894.8501ms)
+✔ loaded animal genealogy cannot cross species even when both profiles are valid (2083.5722ms)
+✔ explicit species outputs accumulate whole Food and Materials with exact annual feeding and ledger accounting (3224.4709ms)
+✔ one mixed Farmyard uses weighted soft capacity and each species crowding risk (228.4519ms)
+✔ new cattle campaigns record versioned founding designations while preserving founder RNG and economics (168.6651ms)
+✔ species mortality retains each dead animal and freezes its age and recorded designation (2878.5312ms)
+✔ generic livestock commands assign real animals and grant stage-specific slaughter Food exactly once (523.4925ms)
+✔ species profile setup is restricted to the saved founding phase and cannot retune a running campaign (194.4392ms)
+✔ existing real transfers keep local titles unique, reserve dead titles and retain source observations (4061.7561ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 136161.6121
