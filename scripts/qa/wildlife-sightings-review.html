@@ -14,28 +14,59 @@ iframe { width: 390px; height: 780px; border: 2px solid #203738; max-width: 100%
 <body><main>
 <h1>Wildlife sightings review · #226</h1>
 <p>This isolated QA opening has extra Food. Wildlife, expedition routes and sightings come from real simulation commands.</p>
-<p>Generate checkpoints first with <code>node scripts/qa/wildlife-sightings-226.mjs</code>.</p>
+<p>Open a checkpoint to inspect Attention, then follow the discovery into Clan Book. The world stays paused.</p>
 <label>Checkpoint <select id="checkpoint"><option value="unread">Unread first discovery</option><option value="read">Read discovery after save/load</option><option value="legacy">Older physical campaign, recording not adopted</option></select></label>
 <button id="desktop">Open desktop Fjord Play</button><button id="phone">Open 390px phone preview</button>
-<p role="status">The selected checkpoint replaces this QA server’s session only.</p>
+<p role="status" aria-live="polite">Ready. Choose a checkpoint, then open Fjord Play. This changes this QA server’s session only.</p>
 <iframe hidden title="Phone Fjord Play preview"></iframe>
-<script type="module">
-import { activeSettlementKey, SharedSettlement } from '/src/play/SharedSettlement.ts';
-const status = document.querySelector('[role="status"]');
-async function open(phone) {
+<script>
+const checkpointSelect = document.querySelector('#checkpoint');
+const previewStatus = document.querySelector('[role="status"]');
+const previewFrame = document.querySelector('iframe');
+const previewButtons = Array.from(document.querySelectorAll('button'));
+const activeSettlementKey = 'pillagers.fjord-play.active.v1';
+const destination = '/fjord-play?attention=1';
+let opening = false;
+
+async function openPreview(phone) {
+    if (opening) return;
+    opening = true;
+    previewButtons.forEach(button => { button.disabled = true; });
+    previewStatus.setAttribute('aria-busy', 'true');
+    previewStatus.textContent = 'Loading the selected checkpoint…';
     try {
-        const response = await fetch('/scratch/wildlife-sightings-226/' + document.querySelector('select').value + '.json');
-        if (!response.ok) throw new Error('Generate the QA checkpoints first.');
-        const text = await response.text();
-        const owner = SharedSettlement.restore(text, 'fjord');
-        sessionStorage.setItem(activeSettlementKey, owner.persist());
+        const response = await fetch('/scratch/wildlife-sightings-226/' + checkpointSelect.value + '.json');
+        if (!response.ok) throw new Error('Could not load the QA checkpoint (' + response.status + ').');
+        const checkpoint = await response.json();
+        if (checkpoint.sharedVersion !== 1 || !checkpoint.fjord?.campaign || !checkpoint.pace)
+            throw new Error('The QA checkpoint is incomplete.');
+        // Let Fjord Play validate and build the world once, with its normal loading screen.
+        checkpoint.target = 'fjord';
+        checkpoint.pace.running = false;
+        sessionStorage.setItem(activeSettlementKey, JSON.stringify(checkpoint));
         if (phone) {
-            const frame = document.querySelector('iframe'); frame.hidden = false;
-            frame.src = '/fjord-play'; status.textContent = 'Phone preview opened. Use Attention or Clan Book → Wildlife.';
-        } else location.href = '/fjord-play';
-    } catch (error) { status.textContent = String(error); }
+            previewFrame.hidden = false;
+            previewFrame.src = destination;
+            previewStatus.textContent = 'Opening Fjord Play below. Its loading screen shows world progress. Attention opens when ready.';
+            previewFrame.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        } else {
+            previewStatus.textContent = 'Opening Fjord Play. Its loading screen shows world progress…';
+            location.assign(destination);
+        }
+    } catch (error) {
+        previewStatus.textContent = 'Could not open the preview. ' + String(error);
+    } finally {
+        opening = false;
+        previewButtons.forEach(button => { button.disabled = false; });
+        previewStatus.setAttribute('aria-busy', 'false');
+    }
 }
-document.querySelector('#desktop').addEventListener('click', () => open(false));
-document.querySelector('#phone').addEventListener('click', () => open(true));
+
+document.querySelector('#desktop').addEventListener('click', () => openPreview(false));
+document.querySelector('#phone').addEventListener('click', () => openPreview(true));
+checkpointSelect.addEventListener('change', () => {
+    previewStatus.textContent = 'Selected: ' + checkpointSelect.selectedOptions[0].textContent + '.';
+    if (!previewFrame.hidden) openPreview(true);
+});
 </script>
 </main></body></html>
