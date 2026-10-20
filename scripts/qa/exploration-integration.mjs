@@ -109,6 +109,11 @@ export function runExplorationScenario(seed, { encounter = false } = {}) {
     try {
         assertClanIdentity(initial);
         assert.equal(shared.fjord.readProjection().rival.known, false);
+        // Two ordinary eight-Food packs exceed the unchanged 15-Food founding
+        // stock. Earn the missing Food through real Core work, not a QA top-up.
+        for (let waited = 0; state().stocks.food < 16 && waited < 500; waited += 25)
+            command({ type: 'AdvanceTicks', ticks: 25 });
+        assert.ok(state().stocks.food >= 16, 'Founders must actually fund both ordinary packs.');
         const crew = core.inspectWorld(initial).eligible.slice(0, 2).map(person => person.id);
         assert.equal(crew.length, 2);
         for (const [index, id] of crew.entries()) {
@@ -122,7 +127,7 @@ export function runExplorationScenario(seed, { encounter = false } = {}) {
             const food = state().stocks.food;
             const known = structuredClone(state().discovery);
             command({ type: 'StartExpedition', groupId });
-            assert.equal(state().stocks.food, food - 2);
+            assert.equal(state().stocks.food, food - 8);
             assert.deepEqual(state().discovery, known, 'Packing must not map a planned destination.');
         }
         const entities = shared.fjord.readProjection().entities;
