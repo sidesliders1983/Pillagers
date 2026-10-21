@@ -67,6 +67,13 @@ export function fjordHeadwearAsset(entity: Pick<FjordEntity, 'kind' | 'dna' | 's
 export function fjordToolAsset(entity: Pick<FjordEntity, 'kind' | 'dna' | 'status'>): string {
     return occupationModuleAsset(entity, 'equipment');
 }
+
+/** Portraits and live residents use exactly the same wardrobe choices. */
+export function fjordWardrobePresentation(entity: Pick<FjordEntity, 'kind' | 'dna' | 'status'>): CharacterPresentation {
+    return { ...fjordClothingSets[fjordClothingSet(entity)], hair: fjordHairAsset(entity),
+        beard: fjordBeardAsset(entity), headwear: fjordHeadwearAsset(entity),
+        equipment: fjordToolAsset(entity) } as CharacterPresentation;
+}
 interface WardrobeState {
     installed?: string;
     pending?: string;
@@ -100,7 +107,7 @@ export class FjordWardrobe {
         }
         const revision = ++state.revision;
         state.pending = key;
-        const request = this.factory.equip(human, {...fjordClothingSets[selected], hair, beard, headwear, equipment} as CharacterPresentation);
+        const request = this.factory.equip(human, fjordWardrobePresentation(entity));
         const equipRevision = human.equipRevision;
         state.equipRevision = equipRevision;
         state.task = request.then(() => {

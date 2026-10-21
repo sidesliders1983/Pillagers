@@ -1,4 +1,4 @@
-import { MeshyHumanFactory, meshyAnimationClips, type MeshyHuman } from '../characters/MeshyHuman';
+import { meshyHumanFactory, meshyAnimationClips, type MeshyHuman } from '../characters/MeshyHuman';
 import { universalHumanProfile } from '../characters/UniversalHumanProfile';
 import { livestockPresentation } from '../characters/LivestockPresentation';
 import { LivestockDeath } from './LivestockDeath';
@@ -16,7 +16,7 @@ import {FjordWardrobe} from './FjordWardrobe';
 /** Reuse verified Fjordside DNA bodies and source livestock clips, with independent instance ownership. */
 export class FjordModels {
     readonly diagnostics: string[] = [];
-    private humans = new MeshyHumanFactory();
+    private humans = meshyHumanFactory;
     private wardrobe = new FjordWardrobe(this.humans, message => {
         if (!this.diagnostics.includes(message)) this.diagnostics.push(message);
     });
@@ -26,11 +26,12 @@ export class FjordModels {
     async reconcile(model: Object3D, entity: FjordEntity) {
         const actor = this.actors.get(model);
         if (!actor?.human || !entity.dna) return;
-        const fingerprint = JSON.stringify([entity.dna, entity.visualProfile]);
+        const fingerprint = JSON.stringify([entity.dna, entity.visualProfile, entity.facialIdentity]);
         if (actor.fingerprint !== fingerprint) {
             model.scale.setScalar(1);
             const profile = entity.visualProfile ?? universalHumanProfile({ ...entity.dna, age: Math.min(100, entity.dna.age) });
-            actor.human.applyDNA({ ...entity.dna, age: Math.min(100, entity.dna.age) }, profile);
+            actor.human.applyDNA({ ...entity.dna, age: Math.min(100, entity.dna.age) }, profile,
+                { face: entity.facialIdentity });
             actor.fingerprint = fingerprint;
             model.scale.setScalar(entity.transform!.scale / (1 - .35 * profile.weights.Child));
             const paceSignature = JSON.stringify([model.scale.toArray(), profile.motion]);
@@ -165,7 +166,8 @@ export class FjordModels {
     async create(entity: FjordEntity): Promise<Object3D> {
         if (entity.kind === 'persona' && entity.dna) {
             try {
-                const human = await this.humans.createWorld({ ...entity.dna, age: Math.min(100, entity.dna.age) }, entity.visualProfile);
+                const human = await this.humans.createWorld({ ...entity.dna, age: Math.min(100, entity.dna.age) },
+                    entity.visualProfile, entity.facialIdentity);
                 this.actors.set(human.root, { human, pace: 0, groundSpeed: 0, state: 'Idle' });
                 await this.reconcile(human.root, entity);
                 return human.root;

@@ -13,6 +13,10 @@ import { homeImprovements, previewHomeSpecialization, homeLevel } from './HomeIm
 import './fjord-interface.css';
 import './mobile-horizon.css';
 import { isMobileLayout } from './MobileShell';
+import { CharacterPortraits } from '../characters/CharacterPortraits';
+import { projectResidentAppearance } from '../characters/ResidentAppearance';
+import { fjordWardrobePresentation } from './FjordWardrobe';
+import { presentationProfiles } from '../config/PresentationQuality';
 
 const esc = (value: unknown) => String(value ?? '').replace(/[&<>"']/g,
     c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
@@ -49,6 +53,10 @@ export class FjordInterface {
     private panelEpoch = -1;
     private panelWorld?: SharedSettlement['fjord']['blueprint'];
     private panelEditable = true;
+    private portraits = new CharacterPortraits();
+    private portraitAbort?: AbortController;
+    private portraitKey = '';
+    private portraitImage?: string;
     private panel = document.querySelector<HTMLElement>('#entity-panel')!;
     private management = document.querySelector<HTMLElement>('#fjord-management')!;
     private workspace = document.querySelector<HTMLElement>('#fjord-workspace')!;
@@ -91,14 +99,20 @@ export class FjordInterface {
             else if (this.owner.selection) this.hooks.select('', '');
         }, { signal: this.abort.signal });
     }
-    dispose() { this.abort.abort(); }
+    dispose() {
+        this.abort.abort();
+        this.portraitAbort?.abort();
+        this.portraits.dispose();
+    }
     private get state() { return this.owner.session.readSnapshot(); }
     private link(kind: string, id: string, label: string) {
         return button('inspect', esc(label), kind === 'persona' ? 'people' : kind === 'cattle' ? 'cattle' : 'home',
             `class="fjord-link" data-kind="${kind}" data-id="${esc(id)}"`);
     }
-    private heading(title: string, subtitle: string, glyph: FjordIcon) {
-        return `<div class="fjord-card-heading"><span class="fjord-emblem">${icon(glyph)}</span><div>
+    private heading(title: string, subtitle: string, glyph: FjordIcon, portrait = false) {
+        const emblem = portrait && this.portraitImage
+            ? `<img src="${this.portraitImage}" alt="" width="64" height="72">` : icon(glyph);
+        return `<div class="fjord-card-heading"><span class="fjord-emblem${portrait ? ' fjord-portrait' : ''}">${emblem}</span><div>
             <small>Settlement</small><h2>${esc(title)}</h2><p>${esc(subtitle)}</p></div>
             ${button('close-card', '', 'close', 'class="fjord-close" aria-label="Close selection"')}</div>`;
     }
@@ -144,7 +158,7 @@ export class FjordInterface {
         const work = inspectWork(state, id);
         if (isMobileLayout() && !this.expanded) {
             return this.heading(person.name,
-                `${personaAge(state, id)} Winters · ${occupationLabel(person.occupation)}`, 'people') +
+                `${personaAge(state, id)} Winters · ${occupationLabel(person.occupation)}`, 'people', true) +
                 `<div class="fjord-card-body"><p class="fjord-caption">${person.deathWinter !== null ?
                     'Deceased · Winter ' + person.deathWinter : work.reason ? esc(work.reason.replaceAll('-', ' ')) :
                     'Working · ' + esc(work.resource ?? 'occupation')}</p>
@@ -158,7 +172,7 @@ export class FjordInterface {
             const end = h.endedAt ?? state.time;
             return years + end.winter - h.startedAt.winter + (end.tick - h.startedAt.tick) / state.ticksPerWinter;
         }, 0);
-        return this.heading(person.name, `${personaAge(state, id)} Winters · ${person.dna.sex === 'male' ? 'Male' : 'Female'} · ${occupationLabel(person.occupation)}`, 'people') +
+        return this.heading(person.name, `${personaAge(state, id)} Winters · ${person.dna.sex === 'male' ? 'Male' : 'Female'} · ${occupationLabel(person.occupation)}`, 'people', true) +
             `<div class="fjord-card-body"><p class="fjord-status">${person.deathWinter !== null ? 'Deceased · Winter ' + person.deathWinter :
                 work.reason ? esc(work.reason.replaceAll('-', ' ')) : 'Working · ' + esc(work.resource ?? 'occupation')}</p>
             <div class="fjord-profile-stats">${meter('Productivity', work.productivityBps / 10000)}${meter('Occupation fit', work.aptitudeBps / 10000)}</div>
@@ -191,11 +205,12 @@ export class FjordInterface {
         this.management.classList.toggle('fjord-home-card', !!selection &&
             ['household', 'building'].includes(selection.kind) && !this.task);
         let html = '';
+        this.syncPortrait(state, selection);
         if (selection && !this.surface) {
             if (this.task) html = this.renderTask(state);
             else if (selection.kind === 'persona' && state.personas[selection.id]) html = this.person(state, selection.id, history);
             else if (selection.kind === 'persona') html = this.heading(state.personaArchive?.[selection.id]?.name ?? 'Historical identity',
-                'Archived identity · current status is not observed', 'people') + `<div class="fjord-card-body">${history}</div>`;
+                'Archived identity · current status is not observed', 'people', true) + `<div class="fjord-card-body">${history}</div>`;
             else if (['household', 'building'].includes(selection.kind)) {
                 const home = this.household(selection);
                 const residence = home?.residenceId ? state.residences[home.residenceId] : null;
@@ -246,6 +261,40 @@ export class FjordInterface {
         document.querySelector('#fjord-attention-count')!.textContent = count > 99 ? '99+' : String(count);
         document.querySelector('#fjord-attention')!.setAttribute('aria-label', `Attention: ${count} unread events and current conditions`);
         if (this.surface) this.renderSurface();
+    }
+
+    private syncPortrait(state: SimulationState, selection: SettlementSelection) {
+        if (selection?.kind !== 'persona' || this.surface || this.task) {
+            this.portraitAbort?.abort();
+            this.portraitKey = '';
+            this.portraitImage = undefined;
+            return;
+        }
+        try {
+            const appearance = projectResidentAppearance(state, selection.id);
+            if (!appearance) return;
+            const person = state.personas[selection.id] ?? state.personaArchive![selection.id];
+            const input = { ...appearance, presentation: fjordWardrobePresentation({ kind: 'persona',
+                dna: appearance.dna, status: { living: person.deathWinter === null, occupation: person.occupation } }),
+                pixelRatio: presentationProfiles[this.owner.presentation?.quality ?? 'low'].maximumPixelRatio };
+            const key = selection.id + JSON.stringify(input);
+            if (key === this.portraitKey) return;
+            this.portraitAbort?.abort();
+            const abort = this.portraitAbort = new AbortController();
+            this.portraitKey = key;
+            this.portraitImage = undefined;
+            void this.portraits.request(input, abort.signal).then(image => {
+                if (!image || abort.signal.aborted) return;
+                this.portraitImage = image;
+                this.hooks.refresh();
+            }).catch(error => {
+                if (!abort.signal.aborted) console.warn('Resident portrait unavailable:', error);
+            });
+        } catch (error) {
+            // Incomplete historical records retain the existing identity emblem.
+            this.portraitAbort?.abort();
+            this.portraitImage = undefined;
+        }
     }
     private renderTask(state: SimulationState): string {
         if (this.task === 'risk') return this.heading('Review consequences', 'Your campaign has not changed.', 'alert') +

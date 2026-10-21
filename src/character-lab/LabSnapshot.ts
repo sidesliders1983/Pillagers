@@ -8,6 +8,7 @@ import { assetMeasurement, characterAsset, characterAssetURL } from '../characte
 import { meshyHumanAvailableClips } from '../characters/MeshyHumanAssetIdentity';
 import { nativeNeutralPose } from '../characters/NativeNeutralPose';
 import { humanExtraAnimations } from '../characters/HumanExtraAnimations';
+import { parseFacialIdentity, type FacialIdentityV1 } from '../characters/FacialIdentity';
 
 export const labSnapshotVersion='pillagers-lab-snapshot/1' as const;
 export const labStyleVersion=publishedLabBodyStyle;
@@ -18,6 +19,7 @@ export interface LabTestSnapshot {
     pose:{animation:string;time:number;paused:boolean};
     camera:{type:'perspective'|'orthographic';scale:number|null;fov:38;position:CameraPoint;target:CameraPoint};lighting:'lab-neutral/1';
     modules:ReturnType<typeof snapshotModules>;
+    face?: FacialIdentityV1;
 }
 export const fixedLabViews={
     front:{position:[0,.95,3.7],target:[0,.95,0]},
@@ -43,6 +45,9 @@ export function parseLabSnapshot(value:unknown):LabTestSnapshot {
     const dna=parseCharacterDNA(s.dna),presentation=parseCharacterPresentation(s.presentation),body=parseLabBodyPresentation(s.body??defaultLabBodyPresentation);
     if(!Number.isInteger(s.lod)||s.lod<0||s.lod>2)throw new Error('Snapshot LOD must be 0, 1 or 2.');
     const source=validateLabBodyUsage(body.source??'published',s.lod,presentation);
+    const face = s.face === undefined ? undefined : parseFacialIdentity(s.face);
+    if (face && !isMeshyLabBodySource(body.source))
+        throw new Error('Facial identity requires the native Meshy body.');
     if(s.styleVersion!==source.styleVersion)throw new Error('Snapshot style differs from the selected body source.');
     if(!s.pose||!([...characterContract.animations,...(isMeshyLabBodySource(body.source)?[...meshyHumanAvailableClips,...humanExtraAnimations.clips,nativeNeutralPose]:[])] as readonly string[]).includes(s.pose.animation)||!Number.isFinite(s.pose.time)||s.pose.time<0||s.pose.time>60||typeof s.pose.paused!=='boolean')throw new Error('Invalid snapshot animation or clip time (0–60 seconds).');
     if(s.pose.animation===nativeNeutralPose&&(s.pose.time!==0||!s.pose.paused))throw new Error('Native neutral snapshots must be paused at time zero.');
@@ -51,5 +56,5 @@ export function parseLabSnapshot(value:unknown):LabTestSnapshot {
     if(!s.camera||!point(s.camera.position)||!point(s.camera.target)||Math.hypot(...s.camera.position.map((n,i)=>n-s.camera.target[i]))<2-1e-6||Math.hypot(...s.camera.position.map((n,i)=>n-s.camera.target[i]))>14+1e-6||s.camera.position[1]<s.camera.target[1]-1e-6)throw new Error('Invalid snapshot camera.');
     const modules=snapshotModules(dna,presentation,s.lod,body);
     if(!Array.isArray(s.modules)||JSON.stringify(s.modules)!==JSON.stringify(modules))throw new Error('Snapshot assets differ from the current registry. Capture a new snapshot deliberately.');
-    return {version:labSnapshotVersion,styleVersion:source.styleVersion,contractVersion:1,fitVersion:s.fitVersion,dna,presentation,body,lod:s.lod,pose:{...s.pose},camera:{type:s.camera.type,scale:s.camera.scale,fov:38,position:[...s.camera.position],target:[...s.camera.target]},lighting:'lab-neutral/1',modules};
+    return {version:labSnapshotVersion,styleVersion:source.styleVersion,contractVersion:1,fitVersion:s.fitVersion,dna,presentation,body,lod:s.lod,pose:{...s.pose},camera:{type:s.camera.type,scale:s.camera.scale,fov:38,position:[...s.camera.position],target:[...s.camera.target]},lighting:'lab-neutral/1',modules,...(face ? {face} : {})};
 }

@@ -79,6 +79,7 @@ export class CharacterLab {
     private update(){const phenotype=generatePhenotype(this.dna);this.preview.setCharacter(phenotype,this.dna,this.presentation,this.body);this.ui.update(this.dna,phenotype,this.comparison?.dna??null,this.presentation,this.body);}
     private newSeed(){const array=new Uint32Array(1);crypto.getRandomValues(array);return array[0]===this.dna.seed?(array[0]+1)>>>0:array[0];}
     private async action(action:LabAction){
+        if(action==='portrait'){await this.preview.renderPortrait();return;}
         if(action.startsWith('animation-')){this.preview.setAnimation(action.slice(10));return;}
         if(action.startsWith('view-')){this.preview.fixedView(action.slice(5) as 'front'|'side'|'back');return;}
         if(action==='freeze-pose'){this.preview.setPose(this.ui.getPoseTime());return;}

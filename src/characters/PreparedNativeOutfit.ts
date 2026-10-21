@@ -275,6 +275,8 @@ export function preparedCoverage(
     const geometry = mergeGeometries(fragments, false);
     for (const fragment of fragments) fragment.dispose();
     requireValue(geometry, 'Selected body coverage could not be combined');
+    // mergeGeometries copies morph buffers but resets their relative mode.
+    geometry.morphTargetsRelative = fit.sourceGeometry.morphTargetsRelative;
     geometry.computeBoundingSphere();
     return geometry;
 }
@@ -394,6 +396,7 @@ export function preparedModuleCoverage(sources: NativeModuleSource[], fit: Meshy
     const result = mergeGeometries(fragments, false);
     for (const fragment of fragments) fragment.dispose();
     requireValue(result, 'Independent clothing body coverage could not be combined');
+    result.morphTargetsRelative = fit.sourceGeometry.morphTargetsRelative;
     const neck = sources.flatMap(source => {
         const prepared = source.binding.precomputedNative;
         return prepared?.version === 3 && prepared.neckMaterial?.stabilizeSkinWeights

@@ -4,6 +4,8 @@ import {BodyFitAdapter, BodySurface, bodyFitVersion, SurfaceAnchor, NativeBodyId
 import {meshyHumanAssetIdentity} from './MeshyHumanAssetIdentity';
 import {meshyNativeRig,meshyRigSignature} from './MeshyNativeRig';
 import type {FitDebugOptions} from './CharacterFitSystem';
+import type { FacialIdentityV1 } from './FacialIdentity';
+import type { FacialPresentation } from './NativeFacialGeometry';
 const parents:Record<SocketName,string>={socket_head_top:'Head',socket_face:'Head',socket_jaw:'Head',socket_neck:'Neck',socket_back_head:'Head',socket_chest:'Spine2',socket_back:'Spine2',socket_shoulder_L:'LeftShoulder',socket_shoulder_R:'RightShoulder',socket_waist:'Hips',socket_hip_L:'Hips',socket_hip_R:'Hips',socket_hand_L:'LeftHand',socket_hand_R:'RightHand',socket_forearm_L:'LeftForeArm',socket_forearm_R:'RightForeArm'};
 /** A topology fingerprint supplements the exact GLB identity, including split render corners. */
 export function surfaceTopology(surface:BodySurface){let h=2166136261;for(const value of [...surface.positions,...surface.indices]){const word=Math.round(value*1e7);h=Math.imul(h^word,16777619);}return (h>>>0).toString(16).padStart(8,'0');}
@@ -55,6 +57,8 @@ export function anchorPoint(surface:BodySurface,anchor:SurfaceAnchor){
 }
 /** Native Meshy surfaces are captured before DNA/animation; masking never edits them. */
 export class MeshyBodyFitAdapter implements BodyFitAdapter {
+ facialIdentity?: FacialIdentityV1;
+ facialPresentation?: FacialPresentation;
  readonly version=bodyFitVersion;readonly body:NativeBodyIdentity;readonly nativeSkeleton;readonly sockets=new Map<SocketName,Group>();readonly debug=new Group();
  readonly modules=new Map<string,Group>();revision=0;readonly sourceGeometry:BufferGeometry;readonly source:BodySurface;readonly encoding:Matrix4;
  private anchors=new Map<SocketName,SurfaceAnchor>();private debugOptions?:FitDebugOptions;private topology:string;
@@ -93,7 +97,16 @@ export class MeshyBodyFitAdapter implements BodyFitAdapter {
  }
  surface(state:'source'|'posed'):BodySurface {
   if(state==='source')return this.source;this.root.updateMatrixWorld(true);this.nativeSkeleton.update();
-  const positions:number[]=[];for(let v=0;v<this.source.positions.length/3;v++)positions.push(...this.mesh.getVertexPosition(v,new Vector3()).toArray());return {...this.source,positions};
+  // Coverage can clip and reindex the rendered geometry. The public posed
+  // surface always retains the original vertex and triangle correspondence.
+  const renderedGeometry=this.mesh.geometry;
+  const positions:number[]=[];
+  try {
+   this.mesh.geometry=this.sourceGeometry;
+   for(let v=0;v<this.source.positions.length/3;v++)
+    positions.push(...this.mesh.getVertexPosition(v,new Vector3()).toArray());
+  } finally {this.mesh.geometry=renderedGeometry;}
+  return {...this.source,positions};
  }
  refit(){
   this.root.updateMatrixWorld(true);this.nativeSkeleton.update();const posed=this.surface('posed');

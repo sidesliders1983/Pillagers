@@ -1,0 +1,1667 @@
+{
+  "baselineRevision": "d36d7ef3cbd27ec45bb5bd6cc2fbcc7e8c761d2b",
+  "generatedAt": "2026-10-21T08:44:45.487Z",
+  "hashes": {
+    "src/characters/FacialIdentity.ts": "3e411484deb459bb7759d1ad2e3f2dc275e6678f93eab90780216e620dd62cc4",
+    "src/characters/NativeFacialGeometry.ts": "fe5d811b0e6f40c9a549088fb4c568c7333a6dac84b176309b839f267a0ea4dc",
+    "src/characters/NativeFacialDetail.ts": "338d5fac0ab7545c04e16dde014f07ff9cd26bf16f8c196a49b34643af464964",
+    "src/characters/BodyCoverage.ts": "165255f851f113b78aba9399602a1934d905658c5d2d0536af33ecb15ee06642",
+    "src/characters/MeshyHuman.ts": "5f86714275430ce006f6fff3645320f1246afcf6608ab86861323e396a0f75af",
+    "src/characters/MeshyBodyFitAdapter.ts": "006736bea67bce391fba525e8c6062907a380d2646638defce1baf29643d43c7",
+    "src/characters/MeshyModuleRuntime.ts": "ff55ccc730c36455374392d78e937807a9c3c0140c766534cf42a2d176434659",
+    "src/characters/UniversalHumanProfile.ts": "5096a1946a9cf7d51e12e33986d5068d1c14f1057a4fddb5525bd22ec96be24b",
+    "scripts/qa/qualify-facial-proof.mjs": "bd7af2d4c7f51671ca548e82de198904d1f7f0254ea20913b87ecd46e61aab3f"
+  },
+  "topology": [
+    {
+      "lod": 0,
+      "combinations": 512,
+      "checkedFaceTriangles": 440320,
+      "reversed": 0,
+      "worstDot": 0.2147652113162728,
+      "reversals": []
+    },
+    {
+      "lod": 1,
+      "combinations": 512,
+      "checkedFaceTriangles": 183296,
+      "reversed": 0,
+      "worstDot": 0.5364566405688187,
+      "reversals": []
+    },
+    {
+      "lod": 2,
+      "combinations": 512,
+      "checkedFaceTriangles": 183296,
+      "reversed": 0,
+      "worstDot": 0.08295538311784928,
+      "reversals": []
+    }
+  ],
+  "cases": [
+    {
+      "lod": 0,
+      "extreme": -1,
+      "occupation": "farmer",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-farmer",
+        "outfit": null,
+        "shoes": "garment/meshy-high-shoes-005",
+        "trousers": "garment/meshy-short-trousers-006",
+        "top": null,
+        "equipment": "equipment/occupation-farmer"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.020319659403381686
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615602117740055
+        },
+        {
+          "mesh": "Module_occupation_farmer_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 3930,
+          "maximumMeters": 0.020234355487510305
+        }
+      ],
+      "sampledVertices": 13488,
+      "animationFitRunsUnchanged": true
+    },
+    {
+      "lod": 0,
+      "extreme": -1,
+      "occupation": "fisher",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-fisher",
+        "outfit": null,
+        "shoes": "garment/meshy-fisherman-shoe-009",
+        "trousers": "garment/meshy-fisherman-trousers-009",
+        "top": "garment/meshy-fisherman-tunic-009",
+        "equipment": "equipment/occupation-fisher"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.020319659403381686
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615602117740055
+        },
+        {
+          "mesh": "Module_occupation_fisher_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 3651,
+          "maximumMeters": 0.016832421913445566
+        }
+      ],
+      "sampledVertices": 22500,
+      "animationFitRunsUnchanged": true
+    },
+    {
+      "lod": 0,
+      "extreme": -1,
+      "occupation": "hunter",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-hunter",
+        "outfit": "garment/meshy-grid-trial-001",
+        "shoes": "garment/meshy-low-shoes-005",
+        "trousers": null,
+        "top": null,
+        "equipment": "equipment/occupation-hunter"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.020319659403381686
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615602117740055
+        },
+        {
+          "mesh": "Module_occupation_hunter_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 5123,
+          "maximumMeters": 0.017176141422788286
+        }
+      ],
+      "sampledVertices": 36174,
+      "animationFitRunsUnchanged": true
+    },
+    {
+      "lod": 0,
+      "extreme": -1,
+      "occupation": "smith",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-smith",
+        "outfit": "garment/meshy-grid-trial-001",
+        "shoes": "garment/meshy-low-shoes-005",
+        "trousers": null,
+        "top": null,
+        "equipment": "equipment/occupation-smith"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.020319659403381686
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615602117740055
+        },
+        {
+          "mesh": "Module_occupation_smith_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 5533,
+          "maximumMeters": 0.016462624706732987
+        }
+      ],
+      "sampledVertices": 35712,
+      "animationFitRunsUnchanged": true
+    },
+    {
+      "lod": 0,
+      "extreme": 1,
+      "occupation": "farmer",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-farmer",
+        "outfit": null,
+        "shoes": "garment/meshy-high-shoes-005",
+        "trousers": "garment/meshy-short-trousers-006",
+        "top": null,
+        "equipment": "equipment/occupation-farmer"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.020319659403381686
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615602117740055
+        },
+        {
+          "mesh": "Module_occupation_farmer_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 3930,
+          "maximumMeters": 0.020234355487510305
+        }
+      ],
+      "sampledVertices": 13488,
+      "animationFitRunsUnchanged": true
+    },
+    {
+      "lod": 0,
+      "extreme": 1,
+      "occupation": "fisher",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-fisher",
+        "outfit": null,
+        "shoes": "garment/meshy-fisherman-shoe-009",
+        "trousers": "garment/meshy-fisherman-trousers-009",
+        "top": "garment/meshy-fisherman-tunic-009",
+        "equipment": "equipment/occupation-fisher"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.020319659403381686
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615602117740055
+        },
+        {
+          "mesh": "Module_occupation_fisher_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 3651,
+          "maximumMeters": 0.016832421913445566
+        }
+      ],
+      "sampledVertices": 22500,
+      "animationFitRunsUnchanged": true
+    },
+    {
+      "lod": 0,
+      "extreme": 1,
+      "occupation": "hunter",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-hunter",
+        "outfit": "garment/meshy-grid-trial-001",
+        "shoes": "garment/meshy-low-shoes-005",
+        "trousers": null,
+        "top": null,
+        "equipment": "equipment/occupation-hunter"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.020319659403381686
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615602117740055
+        },
+        {
+          "mesh": "Module_occupation_hunter_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 5123,
+          "maximumMeters": 0.017176141422788286
+        }
+      ],
+      "sampledVertices": 36174,
+      "animationFitRunsUnchanged": true
+    },
+    {
+      "lod": 0,
+      "extreme": 1,
+      "occupation": "smith",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-smith",
+        "outfit": "garment/meshy-grid-trial-001",
+        "shoes": "garment/meshy-low-shoes-005",
+        "trousers": null,
+        "top": null,
+        "equipment": "equipment/occupation-smith"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.020319659403381686
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615602117740055
+        },
+        {
+          "mesh": "Module_occupation_smith_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 5533,
+          "maximumMeters": 0.016462624706732987
+        }
+      ],
+      "sampledVertices": 35712,
+      "animationFitRunsUnchanged": true
+    },
+    {
+      "lod": 1,
+      "extreme": -1,
+      "occupation": "farmer",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-farmer",
+        "outfit": null,
+        "shoes": "garment/meshy-high-shoes-005",
+        "trousers": "garment/meshy-short-trousers-006",
+        "top": null,
+        "equipment": "equipment/occupation-farmer"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.02031965446907382
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615601956985179
+        },
+        {
+          "mesh": "Module_occupation_farmer_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 3930,
+          "maximumMeters": 0.020234360822658486
+        }
+      ],
+      "sampledVertices": 11352,
+      "animationFitRunsUnchanged": true
+    },
+    {
+      "lod": 1,
+      "extreme": -1,
+      "occupation": "fisher",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-fisher",
+        "outfit": null,
+        "shoes": "garment/meshy-fisherman-shoe-009",
+        "trousers": "garment/meshy-fisherman-trousers-009",
+        "top": "garment/meshy-fisherman-tunic-009",
+        "equipment": "equipment/occupation-fisher"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.02031965446907382
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615601956985179
+        },
+        {
+          "mesh": "Module_occupation_fisher_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 3651,
+          "maximumMeters": 0.016832423571415973
+        }
+      ],
+      "sampledVertices": 16092,
+      "animationFitRunsUnchanged": true
+    },
+    {
+      "lod": 1,
+      "extreme": -1,
+      "occupation": "hunter",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-hunter",
+        "outfit": "garment/meshy-grid-trial-001",
+        "shoes": "garment/meshy-low-shoes-005",
+        "trousers": null,
+        "top": null,
+        "equipment": "equipment/occupation-hunter"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.02031965446907382
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615601956985179
+        },
+        {
+          "mesh": "Module_occupation_hunter_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 5123,
+          "maximumMeters": 0.017176144795803292
+        }
+      ],
+      "sampledVertices": 32718,
+      "animationFitRunsUnchanged": true
+    },
+    {
+      "lod": 1,
+      "extreme": -1,
+      "occupation": "smith",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-smith",
+        "outfit": "garment/meshy-grid-trial-001",
+        "shoes": "garment/meshy-low-shoes-005",
+        "trousers": null,
+        "top": null,
+        "equipment": "equipment/occupation-smith"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.02031965446907382
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615601956985179
+        },
+        {
+          "mesh": "Module_occupation_smith_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 5533,
+          "maximumMeters": 0.01646262550350596
+        }
+      ],
+      "sampledVertices": 32256,
+      "animationFitRunsUnchanged": true
+    },
+    {
+      "lod": 1,
+      "extreme": 1,
+      "occupation": "farmer",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-farmer",
+        "outfit": null,
+        "shoes": "garment/meshy-high-shoes-005",
+        "trousers": "garment/meshy-short-trousers-006",
+        "top": null,
+        "equipment": "equipment/occupation-farmer"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.02031965446907382
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615601956985179
+        },
+        {
+          "mesh": "Module_occupation_farmer_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 3930,
+          "maximumMeters": 0.020234360822658486
+        }
+      ],
+      "sampledVertices": 11352,
+      "animationFitRunsUnchanged": true
+    },
+    {
+      "lod": 1,
+      "extreme": 1,
+      "occupation": "fisher",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-fisher",
+        "outfit": null,
+        "shoes": "garment/meshy-fisherman-shoe-009",
+        "trousers": "garment/meshy-fisherman-trousers-009",
+        "top": "garment/meshy-fisherman-tunic-009",
+        "equipment": "equipment/occupation-fisher"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.02031965446907382
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615601956985179
+        },
+        {
+          "mesh": "Module_occupation_fisher_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 3651,
+          "maximumMeters": 0.016832423571415973
+        }
+      ],
+      "sampledVertices": 16092,
+      "animationFitRunsUnchanged": true
+    },
+    {
+      "lod": 1,
+      "extreme": 1,
+      "occupation": "hunter",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-hunter",
+        "outfit": "garment/meshy-grid-trial-001",
+        "shoes": "garment/meshy-low-shoes-005",
+        "trousers": null,
+        "top": null,
+        "equipment": "equipment/occupation-hunter"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.02031965446907382
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615601956985179
+        },
+        {
+          "mesh": "Module_occupation_hunter_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 5123,
+          "maximumMeters": 0.017176144795803292
+        }
+      ],
+      "sampledVertices": 32718,
+      "animationFitRunsUnchanged": true
+    },
+    {
+      "lod": 1,
+      "extreme": 1,
+      "occupation": "smith",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-smith",
+        "outfit": "garment/meshy-grid-trial-001",
+        "shoes": "garment/meshy-low-shoes-005",
+        "trousers": null,
+        "top": null,
+        "equipment": "equipment/occupation-smith"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.02031965446907382
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615601956985179
+        },
+        {
+          "mesh": "Module_occupation_smith_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 5533,
+          "maximumMeters": 0.01646262550350596
+        }
+      ],
+      "sampledVertices": 32256,
+      "animationFitRunsUnchanged": true
+    },
+    {
+      "lod": 2,
+      "extreme": -1,
+      "occupation": "farmer",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-farmer",
+        "outfit": null,
+        "shoes": "garment/meshy-high-shoes-005",
+        "trousers": "garment/meshy-short-trousers-006",
+        "top": null,
+        "equipment": "equipment/occupation-farmer"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.02031965446907382
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615601956985179
+        },
+        {
+          "mesh": "Module_occupation_farmer_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 3930,
+          "maximumMeters": 0.020234360822658486
+        }
+      ],
+      "sampledVertices": 11352,
+      "animationFitRunsUnchanged": true
+    },
+    {
+      "lod": 2,
+      "extreme": -1,
+      "occupation": "fisher",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-fisher",
+        "outfit": null,
+        "shoes": "garment/meshy-fisherman-shoe-009",
+        "trousers": "garment/meshy-fisherman-trousers-009",
+        "top": "garment/meshy-fisherman-tunic-009",
+        "equipment": "equipment/occupation-fisher"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.02031965446907382
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615601956985179
+        },
+        {
+          "mesh": "Module_occupation_fisher_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 3651,
+          "maximumMeters": 0.016832423571415973
+        }
+      ],
+      "sampledVertices": 16092,
+      "animationFitRunsUnchanged": true
+    },
+    {
+      "lod": 2,
+      "extreme": -1,
+      "occupation": "hunter",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-hunter",
+        "outfit": "garment/meshy-grid-trial-001",
+        "shoes": "garment/meshy-low-shoes-005",
+        "trousers": null,
+        "top": null,
+        "equipment": "equipment/occupation-hunter"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.02031965446907382
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615601956985179
+        },
+        {
+          "mesh": "Module_occupation_hunter_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 5123,
+          "maximumMeters": 0.017176144795803292
+        }
+      ],
+      "sampledVertices": 32718,
+      "animationFitRunsUnchanged": true
+    },
+    {
+      "lod": 2,
+      "extreme": -1,
+      "occupation": "smith",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-smith",
+        "outfit": "garment/meshy-grid-trial-001",
+        "shoes": "garment/meshy-low-shoes-005",
+        "trousers": null,
+        "top": null,
+        "equipment": "equipment/occupation-smith"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.02031965446907382
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615601956985179
+        },
+        {
+          "mesh": "Module_occupation_smith_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 5533,
+          "maximumMeters": 0.01646262550350596
+        }
+      ],
+      "sampledVertices": 32256,
+      "animationFitRunsUnchanged": true
+    },
+    {
+      "lod": 2,
+      "extreme": 1,
+      "occupation": "farmer",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-farmer",
+        "outfit": null,
+        "shoes": "garment/meshy-high-shoes-005",
+        "trousers": "garment/meshy-short-trousers-006",
+        "top": null,
+        "equipment": "equipment/occupation-farmer"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.02031965446907382
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615601956985179
+        },
+        {
+          "mesh": "Module_occupation_farmer_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 3930,
+          "maximumMeters": 0.020234360822658486
+        }
+      ],
+      "sampledVertices": 11352,
+      "animationFitRunsUnchanged": true
+    },
+    {
+      "lod": 2,
+      "extreme": 1,
+      "occupation": "fisher",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-fisher",
+        "outfit": null,
+        "shoes": "garment/meshy-fisherman-shoe-009",
+        "trousers": "garment/meshy-fisherman-trousers-009",
+        "top": "garment/meshy-fisherman-tunic-009",
+        "equipment": "equipment/occupation-fisher"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.02031965446907382
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615601956985179
+        },
+        {
+          "mesh": "Module_occupation_fisher_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 3651,
+          "maximumMeters": 0.016832423571415973
+        }
+      ],
+      "sampledVertices": 16092,
+      "animationFitRunsUnchanged": true
+    },
+    {
+      "lod": 2,
+      "extreme": 1,
+      "occupation": "hunter",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-hunter",
+        "outfit": "garment/meshy-grid-trial-001",
+        "shoes": "garment/meshy-low-shoes-005",
+        "trousers": null,
+        "top": null,
+        "equipment": "equipment/occupation-hunter"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.02031965446907382
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615601956985179
+        },
+        {
+          "mesh": "Module_occupation_hunter_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 5123,
+          "maximumMeters": 0.017176144795803292
+        }
+      ],
+      "sampledVertices": 32718,
+      "animationFitRunsUnchanged": true
+    },
+    {
+      "lod": 2,
+      "extreme": 1,
+      "occupation": "smith",
+      "installed": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-smith",
+        "outfit": "garment/meshy-grid-trial-001",
+        "shoes": "garment/meshy-low-shoes-005",
+        "trousers": null,
+        "top": null,
+        "equipment": "equipment/occupation-smith"
+      },
+      "correction": [
+        {
+          "mesh": "Module_manual_hair_short2",
+          "version": "facial-identity-v1",
+          "changedVertices": 7500,
+          "maximumMeters": 0.02031965446907382
+        },
+        {
+          "mesh": "Module_manual_beard_normal",
+          "version": "facial-identity-v1",
+          "changedVertices": 4119,
+          "maximumMeters": 0.01615601956985179
+        },
+        {
+          "mesh": "Module_occupation_smith_0",
+          "version": "facial-identity-v1",
+          "changedVertices": 5533,
+          "maximumMeters": 0.01646262550350596
+        }
+      ],
+      "sampledVertices": 32256,
+      "animationFitRunsUnchanged": true
+    }
+  ],
+  "attachmentCases": [
+    {
+      "lod": 0,
+      "extreme": -1,
+      "age": 32,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-fitted-short",
+        "beard": "beard/manual-fitted-braid",
+        "headwear": "headwear/occupation-farmer",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 0,
+      "extreme": -1,
+      "age": 64,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-double",
+        "headwear": "headwear/occupation-fisher",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 0,
+      "extreme": -1,
+      "age": 32,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-long-braided",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-hunter",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 0,
+      "extreme": -1,
+      "age": 64,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-long-2",
+        "beard": "beard/manual-fitted-pointed",
+        "headwear": "headwear/occupation-smith",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 0,
+      "extreme": -1,
+      "age": 32,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-fitted-short",
+        "beard": "none",
+        "headwear": "headwear/occupation-farmer",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 0,
+      "extreme": -1,
+      "age": 64,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "none",
+        "headwear": "headwear/occupation-fisher",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 0,
+      "extreme": -1,
+      "age": 32,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-long-braided",
+        "beard": "none",
+        "headwear": "headwear/occupation-hunter",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 0,
+      "extreme": -1,
+      "age": 64,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-long-2",
+        "beard": "none",
+        "headwear": "headwear/occupation-smith",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 0,
+      "extreme": -1,
+      "age": 8,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-fitted-short"
+      },
+      "finite": true
+    },
+    {
+      "lod": 0,
+      "extreme": 1,
+      "age": 32,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-fitted-short",
+        "beard": "beard/manual-fitted-braid",
+        "headwear": "headwear/occupation-farmer",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 0,
+      "extreme": 1,
+      "age": 64,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-double",
+        "headwear": "headwear/occupation-fisher",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 0,
+      "extreme": 1,
+      "age": 32,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-long-braided",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-hunter",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 0,
+      "extreme": 1,
+      "age": 64,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-long-2",
+        "beard": "beard/manual-fitted-pointed",
+        "headwear": "headwear/occupation-smith",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 0,
+      "extreme": 1,
+      "age": 32,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-fitted-short",
+        "beard": "none",
+        "headwear": "headwear/occupation-farmer",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 0,
+      "extreme": 1,
+      "age": 64,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "none",
+        "headwear": "headwear/occupation-fisher",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 0,
+      "extreme": 1,
+      "age": 32,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-long-braided",
+        "beard": "none",
+        "headwear": "headwear/occupation-hunter",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 0,
+      "extreme": 1,
+      "age": 64,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-long-2",
+        "beard": "none",
+        "headwear": "headwear/occupation-smith",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 0,
+      "extreme": 1,
+      "age": 8,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-fitted-short"
+      },
+      "finite": true
+    },
+    {
+      "lod": 1,
+      "extreme": -1,
+      "age": 32,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-fitted-short",
+        "beard": "beard/manual-fitted-braid",
+        "headwear": "headwear/occupation-farmer",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 1,
+      "extreme": -1,
+      "age": 64,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-double",
+        "headwear": "headwear/occupation-fisher",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 1,
+      "extreme": -1,
+      "age": 32,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-long-braided",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-hunter",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 1,
+      "extreme": -1,
+      "age": 64,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-long-2",
+        "beard": "beard/manual-fitted-pointed",
+        "headwear": "headwear/occupation-smith",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 1,
+      "extreme": -1,
+      "age": 32,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-fitted-short",
+        "beard": "none",
+        "headwear": "headwear/occupation-farmer",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 1,
+      "extreme": -1,
+      "age": 64,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "none",
+        "headwear": "headwear/occupation-fisher",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 1,
+      "extreme": -1,
+      "age": 32,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-long-braided",
+        "beard": "none",
+        "headwear": "headwear/occupation-hunter",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 1,
+      "extreme": -1,
+      "age": 64,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-long-2",
+        "beard": "none",
+        "headwear": "headwear/occupation-smith",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 1,
+      "extreme": -1,
+      "age": 8,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-fitted-short"
+      },
+      "finite": true
+    },
+    {
+      "lod": 1,
+      "extreme": 1,
+      "age": 32,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-fitted-short",
+        "beard": "beard/manual-fitted-braid",
+        "headwear": "headwear/occupation-farmer",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 1,
+      "extreme": 1,
+      "age": 64,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-double",
+        "headwear": "headwear/occupation-fisher",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 1,
+      "extreme": 1,
+      "age": 32,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-long-braided",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-hunter",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 1,
+      "extreme": 1,
+      "age": 64,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-long-2",
+        "beard": "beard/manual-fitted-pointed",
+        "headwear": "headwear/occupation-smith",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 1,
+      "extreme": 1,
+      "age": 32,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-fitted-short",
+        "beard": "none",
+        "headwear": "headwear/occupation-farmer",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 1,
+      "extreme": 1,
+      "age": 64,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "none",
+        "headwear": "headwear/occupation-fisher",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 1,
+      "extreme": 1,
+      "age": 32,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-long-braided",
+        "beard": "none",
+        "headwear": "headwear/occupation-hunter",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 1,
+      "extreme": 1,
+      "age": 64,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-long-2",
+        "beard": "none",
+        "headwear": "headwear/occupation-smith",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 1,
+      "extreme": 1,
+      "age": 8,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-fitted-short"
+      },
+      "finite": true
+    },
+    {
+      "lod": 2,
+      "extreme": -1,
+      "age": 32,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-fitted-short",
+        "beard": "beard/manual-fitted-braid",
+        "headwear": "headwear/occupation-farmer",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 2,
+      "extreme": -1,
+      "age": 64,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-double",
+        "headwear": "headwear/occupation-fisher",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 2,
+      "extreme": -1,
+      "age": 32,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-long-braided",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-hunter",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 2,
+      "extreme": -1,
+      "age": 64,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-long-2",
+        "beard": "beard/manual-fitted-pointed",
+        "headwear": "headwear/occupation-smith",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 2,
+      "extreme": -1,
+      "age": 32,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-fitted-short",
+        "beard": "none",
+        "headwear": "headwear/occupation-farmer",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 2,
+      "extreme": -1,
+      "age": 64,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "none",
+        "headwear": "headwear/occupation-fisher",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 2,
+      "extreme": -1,
+      "age": 32,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-long-braided",
+        "beard": "none",
+        "headwear": "headwear/occupation-hunter",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 2,
+      "extreme": -1,
+      "age": 64,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-long-2",
+        "beard": "none",
+        "headwear": "headwear/occupation-smith",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 2,
+      "extreme": -1,
+      "age": 8,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-fitted-short"
+      },
+      "finite": true
+    },
+    {
+      "lod": 2,
+      "extreme": 1,
+      "age": 32,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-fitted-short",
+        "beard": "beard/manual-fitted-braid",
+        "headwear": "headwear/occupation-farmer",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 2,
+      "extreme": 1,
+      "age": 64,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "beard/manual-fitted-double",
+        "headwear": "headwear/occupation-fisher",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 2,
+      "extreme": 1,
+      "age": 32,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-long-braided",
+        "beard": "beard/manual-fitted-normal",
+        "headwear": "headwear/occupation-hunter",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 2,
+      "extreme": 1,
+      "age": 64,
+      "sex": "male",
+      "presentation": {
+        "hair": "hair/manual-long-2",
+        "beard": "beard/manual-fitted-pointed",
+        "headwear": "headwear/occupation-smith",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 2,
+      "extreme": 1,
+      "age": 32,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-fitted-short",
+        "beard": "none",
+        "headwear": "headwear/occupation-farmer",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 2,
+      "extreme": 1,
+      "age": 64,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-fitted-short2",
+        "beard": "none",
+        "headwear": "headwear/occupation-fisher",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 2,
+      "extreme": 1,
+      "age": 32,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-long-braided",
+        "beard": "none",
+        "headwear": "headwear/occupation-hunter",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 2,
+      "extreme": 1,
+      "age": 64,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-long-2",
+        "beard": "none",
+        "headwear": "headwear/occupation-smith",
+        "outfit": "none",
+        "equipment": "none"
+      },
+      "finite": true
+    },
+    {
+      "lod": 2,
+      "extreme": 1,
+      "age": 8,
+      "sex": "female",
+      "presentation": {
+        "hair": "hair/manual-fitted-short"
+      },
+      "finite": true
+    }
+  ],
+  "failures": [],
+  "limitation": "Finite geometry and stable refit checks are not a visual clearance proof; owner review and physical-device observations remain required."
+}

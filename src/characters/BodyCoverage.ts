@@ -17,6 +17,14 @@ export function maskedBodyGeometry(
     rims: readonly SurfaceAnchor[] = [],
 ) {
     const attributes = Object.entries(source.attributes);
+    const morphs = new Map<string, { name: string; index: number }>();
+    for (const [name, targets] of Object.entries(source.morphAttributes)) {
+        for (const [index, attribute] of (targets ?? []).entries()) {
+            const key = 'morph:' + name + ':' + index;
+            morphs.set(key, { name, index });
+            attributes.push([key, attribute]);
+        }
+    }
     const arrays = new Map(attributes.map(([name, attribute]) => [name,
         Array.from({length: attribute.count * attribute.itemSize}, (_, i) =>
             attribute.getComponent(Math.floor(i / attribute.itemSize), i % attribute.itemSize)),
@@ -134,10 +142,17 @@ export function maskedBodyGeometry(
         }
     }
     const geometry = new BufferGeometry();
+    geometry.morphTargetsRelative = source.morphTargetsRelative;
     for (const [name, attribute] of attributes) {
         const values = arrays.get(name)!;
         const typed = name === 'skinIndex' ? new Uint16Array(values) : new Float32Array(values);
-        geometry.setAttribute(name, new BufferAttribute(typed, attribute.itemSize));
+        const copied = new BufferAttribute(typed, attribute.itemSize);
+        copied.name = attribute.name;
+        const morph = morphs.get(name);
+        if (morph) {
+            const targets = geometry.morphAttributes as Record<string, BufferAttribute[]>;
+            (targets[morph.name] ??= [])[morph.index] = copied;
+        } else geometry.setAttribute(name, copied);
     }
     geometry.setIndex(indices);
     geometry.userData.coverageWeights = coverageWeights;

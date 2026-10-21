@@ -1,0 +1,92 @@
+{
+  "baselineRevision": "d36d7ef3cbd27ec45bb5bd6cc2fbcc7e8c761d2b",
+  "generatedAt": "2026-10-21T08:39:06.785Z",
+  "hashes": {
+    "src/characters/FacialIdentity.ts": "3e411484deb459bb7759d1ad2e3f2dc275e6678f93eab90780216e620dd62cc4",
+    "src/characters/NativeFacialGeometry.ts": "696c4b631f6d9dfa73c81eed32715d115a36cba8e9bad268a4bab45285806bef",
+    "src/characters/NativeFacialDetail.ts": "338d5fac0ab7545c04e16dde014f07ff9cd26bf16f8c196a49b34643af464964",
+    "src/characters/BodyCoverage.ts": "165255f851f113b78aba9399602a1934d905658c5d2d0536af33ecb15ee06642",
+    "src/characters/MeshyHuman.ts": "5f86714275430ce006f6fff3645320f1246afcf6608ab86861323e396a0f75af",
+    "src/characters/MeshyBodyFitAdapter.ts": "006736bea67bce391fba525e8c6062907a380d2646638defce1baf29643d43c7",
+    "src/characters/MeshyModuleRuntime.ts": "ff55ccc730c36455374392d78e937807a9c3c0140c766534cf42a2d176434659",
+    "src/characters/UniversalHumanProfile.ts": "5096a1946a9cf7d51e12e33986d5068d1c14f1057a4fddb5525bd22ec96be24b",
+    "scripts/qa/qualify-facial-proof.mjs": "7d2cefe13e2cc38dac1bb3d7718cf3f1b706a8ba84fe4d39e1da3dd3b900e442"
+  },
+  "topology": [
+    {
+      "lod": 0,
+      "combinations": 512,
+      "checkedFaceTriangles": 440320,
+      "reversed": 0,
+      "worstDot": 0.1897587592689356,
+      "reversals": []
+    },
+    {
+      "lod": 1,
+      "combinations": 512,
+      "checkedFaceTriangles": 183296,
+      "reversed": 0,
+      "worstDot": 0.5364310215577742,
+      "reversals": []
+    },
+    {
+      "lod": 2,
+      "combinations": 512,
+      "checkedFaceTriangles": 183296,
+      "reversed": 2,
+      "worstDot": -0.009653351440888358,
+      "reversals": [
+        {
+          "combination": 408,
+          "triangle": 1677,
+          "dot": -0.009653351440888358,
+          "points": [
+            [
+              0.014236552324902684,
+              1.539007794947264,
+              0.09556059019404076
+            ],
+            [
+              0.010310126473004803,
+              1.5018577651012197,
+              0.1001917608528922
+            ],
+            [
+              0.015142650362823987,
+              1.4855479946642138,
+              0.09737278940747207
+            ]
+          ]
+        },
+        {
+          "combination": 410,
+          "triangle": 1677,
+          "dot": -0.007802749610673176,
+          "points": [
+            [
+              0.014236552324902684,
+              1.539007794947264,
+              0.09556059019404076
+            ],
+            [
+              0.010310126473004803,
+              1.5018577651012197,
+              0.1001917608528922
+            ],
+            [
+              0.015142650362823987,
+              1.4855479946642138,
+              0.09737278940747207
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "cases": [],
+  "attachmentCases": [],
+  "failures": [
+    "LOD 2: 2 face-triangle orientation reversals in all-corner stress sweep."
+  ],
+  "limitation": "Finite geometry and stable refit checks are not a visual clearance proof; owner review and physical-device observations remain required."
+}

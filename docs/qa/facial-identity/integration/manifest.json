@@ -1,0 +1,83 @@
+{
+  "generatedAt": "2026-10-21T09:38:04.4089257Z",
+  "baselineCommit": "d36d7ef3cbd27ec45bb5bd6cc2fbcc7e8c761d2b",
+  "branch": "codex/heritable-faces-198",
+  "hashes": {
+    "scripts/qa/audit-facial-source.mjs": "ce4e76635b6d9357d54960c0fd9d824e40cdd9ff9e653ca2d5be4208165ab976",
+    "scripts/qa/facial-family-fixture.mjs": "ad61408fff1283921be373507698ce63fd753ba57e45009c9ca5045b9d8da1b4",
+    "scripts/qa/qualify-facial-proof.mjs": "604ed847bd0be337dddfbbfca87b8c6446d158efa91f33da71baf75ac5692bb6",
+    "src/character-lab/character-lab.css": "c4fd73e28572f9adfacb270cb67e914a5bfa29426a9014f6cddebd4112992d6f",
+    "src/character-lab/CharacterLab.ts": "7d8a652936327fecdff4dde606e6593ab892c15cad29b080c9ce09a697b1c5c2",
+    "src/character-lab/CharacterLabUI.ts": "974a1e33914e046546556955771e9f056240f04018a56f8700204ef7768c7e27",
+    "src/character-lab/CharacterPreview.ts": "3b503b26ffdb8bb80e7f8fd6a8e26890d9157709b62610afbbedc47008698029",
+    "src/character-lab/LabSnapshot.ts": "79f52f527845c4bfc3596b3bb7ac505488546cea09cedae39f40e4716a7d6142",
+    "src/characters/BodyCoverage.ts": "165255f851f113b78aba9399602a1934d905658c5d2d0536af33ecb15ee06642",
+    "src/characters/CharacterPortraits.ts": "67470cc0233c76d290bb5075529de569fc356ffe8d4dc1eb4b69e7ac62ec9554",
+    "src/characters/FacialIdentity.ts": "3ba3c0334bd03c442adfcf5d32a61870f9fc8df4a20a5cd81fe5e1ed9124d814",
+    "src/characters/MeshyBodyFitAdapter.ts": "97c6f1ad1e2f14bd2c0210bad135d11fb7b276df2d412fb6b3f972ea3aebb418",
+    "src/characters/MeshyHuman.ts": "db32e38310a37c16963d1ceb64987fd03c4d6e5295d5bd2390b64bb941a403fb",
+    "src/characters/MeshyModuleRuntime.ts": "cd768e3dbd4fc95cf21b7a158be4eda9f43b80a12227b084894220c7676be9a9",
+    "src/characters/NativeFacialGeometry.ts": "c55d46b11d2df1f502c1acae1e201b6ea51225a0a1dc015c09d78276daed5e16",
+    "src/characters/NativePortraitRenderer.ts": "4b7ee01a16b697d93b6070356a05cb7c0e03c039a59a2313827998f1559dc9a3",
+    "src/characters/PreparedNativeOutfit.ts": "2cfac49ac480129f0a46125e54676ba606770b5f3221efc6a9a4ad7f99bc1566",
+    "src/characters/ResidentAppearance.ts": "a1413f755b3d3598c37f28dd4307f98cac7c29e2df226b126841f1026929a0b4",
+    "src/fjord-play/fjord-interface.css": "64c2b39a095db10d162f2d5c5122c9671d9a28ff67f7d090fd1bf423550bcbad",
+    "src/fjord-play/FjordInterface.ts": "71c57a35df445932eb60dc3a53c2fcb30cc779037250d477551c5bdc576d4847",
+    "src/fjord-play/FjordModels.ts": "7030b2acc5ef01775ee773bade3c7996b5acef101f1aa03b6f0175941e2df616",
+    "src/fjord-play/FjordProjection.ts": "1ac710f076dd3713f340f432b7c2929b1e75c545fae05cf77f1580b665f13f48",
+    "src/fjord-play/FjordWardrobe.ts": "a741fce32d1f628de3fb20369784aea6f571d2d29321e7e69790407c2bd6f142",
+    "src/fjord-play/mobile-horizon.css": "61c8bfbc4ace513ada68763691ba88aeb7214fe8717d219a9b71030dda3204a1",
+    "tests/character-portraits.test.mjs": "3a3de1e2c865086acefc55db4d66cb4b2219a3e99e8dcce7e9322a51ff806a63",
+    "tests/facial-identity.test.mjs": "b8890105b2f3a1b188e034c83527952cdd175935345023e45951708da80c8113",
+    "tests/lab-facial-snapshot.test.mjs": "78c3316647e1a03628eab09e0355d0b351662984a591b62b56a433976691a70e",
+    "tests/native-facial-geometry.test.mjs": "8b94846cb1215e8887d5224f4d978770851dbd6f22a42bab026fa824d2d5ddc5",
+    "tests/resident-appearance.test.mjs": "586c0e441c13e2b14921ee06b881d94c97859f5c1e2c1231cd6aff88dfc23e02"
+  },
+  "checks": {
+    "focusedBeforeNeutralRegression": {
+      "skipped": 0,
+      "passed": 37,
+      "failed": 0
+    },
+    "build": "passed: public validation, TypeScript, Vite",
+    "finalFacialSuites": {
+      "skipped": 0,
+      "passed": 15,
+      "failed": 0
+    },
+    "formatting": "manual review and git diff --check; no configured formatter",
+    "topology": {
+      "lods": [
+        0,
+        1,
+        2
+      ],
+      "failures": 0,
+      "attachmentCases": 54,
+      "occupationAnimationCases": 24,
+      "reversedTriangles": 0,
+      "combinationsPerLOD": 512
+    },
+    "relatedProjectionSessionDiscoveryLab": {
+      "skipped": 0,
+      "passed": 39,
+      "failed": 0
+    }
+  },
+  "browser": {
+    "environment": "Windows desktop IAB; mobile viewport emulation only",
+    "campaign": "Existing Spring 803 seed 32 resume checkpoint, paused",
+    "verified": [
+      "Desktop person card uses the existing avatar slot",
+      "390px peek and Personal details retain the same portrait",
+      "Different residents receive their own wardrobe and image",
+      "Character Lab Render portrait creates a 2D snapshot",
+      "Lab snapshot exports facial-identity-v1 and Apply snapshot produces an identical portrait"
+    ],
+    "physicalDeviceTested": false
+  },
+  "remaining": [
+    "Physical iPhone/iPad memory and thermal qualification",
+    "No new frozen portrait-at-event archive"
+  ]
+}

@@ -24,7 +24,7 @@ const traitInfo:Record<TraitKey,{label:string;low:string;high:string}>={
     cunning:{label:'Cunning',low:'Straightforward',high:'Crafty / opportunistic'},
     temperament:{label:'Temperament',low:'Calm / restrained',high:'Fierce / volatile'},
 };
-export type LabAction=`animation-${string}`|'reroll-name'|'reroll'|'randomize'|'defaults'|'pin'|'unpin'|'copy'|'export'|'import'|'export-glb'|'export-static-glb'|'reset-view'|'overview'|'idle'|'walk'|'run'|'lod0'|'lod1'|'lod2'|`debug-${'sockets'|'landmarks'|'cages'|'coverage'|'bounds'}`|`preset-${keyof typeof fitPresetLabels}`|`golden-${string}`|`view-${'front'|'side'|'back'}`|'freeze-pose'|'play'|'golden-base'|'reset-presentation'|'snapshot-export'|'snapshot-import'|'reset-lab'|'reset-body';
+export type LabAction=`animation-${string}`|'reroll-name'|'reroll'|'randomize'|'defaults'|'pin'|'unpin'|'copy'|'export'|'import'|'export-glb'|'export-static-glb'|'reset-view'|'overview'|'idle'|'walk'|'run'|'lod0'|'lod1'|'lod2'|`debug-${'sockets'|'landmarks'|'cages'|'coverage'|'bounds'}`|`preset-${keyof typeof fitPresetLabels}`|`golden-${string}`|`view-${'front'|'side'|'back'}`|'freeze-pose'|'play'|'golden-base'|'reset-presentation'|'snapshot-export'|'snapshot-import'|'reset-lab'|'reset-body'|'portrait';
 export class CharacterLabUI {
     private dna:CharacterDNA;
     private presentation:CharacterPresentation={...defaultCharacterPresentation};
@@ -70,6 +70,12 @@ export class CharacterLabUI {
                     </div>
                     <div class="lab-preview-tools"><span>Drag to rotate · Pinch / scroll to zoom</span><div><button data-action="reset-view">Reset view</button></div></div>
                     <div class="lab-dimensions" id="lab-dimensions"></div>
+                    <section class="lab-panel lab-portrait-panel" aria-label="2D portrait">
+                        <h2>2D portrait</h2>
+                        <p class="lab-note">Snapshot of the native 3D face, seen from three-quarter view. Shape only; no added eyes or brows.</p>
+                        <button data-action="portrait">Render portrait</button>
+                        <img id="lab-portrait" alt="Three-quarter character portrait" width="192" height="192" hidden>
+                    </section>
                     <details class="lab-panel lab-fit-debug"><summary>Attachment &amp; Fit debug · v0.1</summary>
                         <div class="lab-button-row">${['sockets','landmarks','cages','coverage','bounds'].map(key=>`<button data-action="debug-${key}" aria-pressed="false">${key}</button>`).join('')}</div>
                         <p class="lab-note">Blue: sockets · pink: surface landmarks · wireframes: fit cages / coverage. Overlays follow the animated rig. Physicality is retained only for legacy compatibility.</p>
