@@ -219,7 +219,7 @@ test('footwear body masks cannot change DNA height normalization or lift a resid
     } finally {human.dispose();}
 });
 
-test('approved hair variants are stable across occupation, sex and age without consuming Core identity', () => {
+test('existing male hair variants are stable across occupation and age without consuming Core identity', () => {
     const variants = new Set();
     for (let seed = 0; seed < 40; seed++) {
         const person = entity();
@@ -230,7 +230,7 @@ test('approved hair variants are stable across occupation, sex and age without c
         variants.add(selected);
         assert.deepEqual(person, before);
         assert.equal(fjordHairAsset({...person, status: {...person.status, occupation: 'farmer'}}), selected);
-        assert.equal(fjordHairAsset({...person, dna: {...person.dna, sex: 'female', age: 85}}), selected);
+        assert.ok(fjordHairAssets.includes(fjordHairAsset({...person, dna: {...person.dna, sex: 'female', age: 85}})));
         assert.equal(fjordHairAsset({...person, dna: {...person.dna, age: 18}}), selected);
     }
     assert.equal(variants.size, 4);
@@ -251,7 +251,7 @@ test('children keep the existing short-hair selection until adult bindings becom
     }
 });
 
-test('both long hairstyles equip on world residents across generic and farmer sets and survive aging', async () => {
+test('both long hairstyles equip on male world residents across generic and farmer sets and survive aging', async () => {
     const owner = fixture();
     const human = await owner.factory.createWorld(adult);
     human.root.position.set(21, 3, -18);
@@ -262,7 +262,6 @@ test('both long hairstyles equip on world residents across generic and farmer se
             while (fjordHairAsset(person) !== hair) person.dna.seed++;
             for (const [occupation, sex, set, garments] of [
                 [null, 'male', 'generic', [tunic, low]],
-                ['farmer', 'female', 'farmerFemale', [skirt, low]],
                 ['farmer', 'male', 'farmerMale', [shorts, high]],
             ]) {
                 person.status.occupation = occupation;

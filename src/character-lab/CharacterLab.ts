@@ -13,6 +13,7 @@ import { LabTestSnapshot, parseLabSnapshot } from './LabSnapshot';
 import {gridTrialOutfitId} from '../characters/GridTrialOutfitCatalog';
 import {braidedHairAsset} from '../characters/BraidedHairCatalog';
 import {longHairAsset} from '../characters/LongHairCatalog';
+import {femaleHairAssets} from '../characters/FemaleHairCatalog';
 import { goldenLabBody, isMeshyLabBodySource } from '../characters/LabBodySources';
 import { LabBodyPresentation, defaultLabBodyPresentation, previewLabBodyPresentation, parseLabBodyPresentation } from '../characters/LabBodyPresentation';
 
@@ -38,6 +39,14 @@ export class CharacterLab {
             this.presentation.beard = 'beard/manual-fitted-' + beard;
         }
         const shortHair = requestedOutfit.get('hair');
+        const femaleHair = femaleHairAssets.find(asset =>
+            asset.id === 'hair/manual-female-' + shortHair);
+        if (femaleHair) {
+            this.presentation.hair = femaleHair.id;
+            this.dna = { ...this.dna, sex: 'female', ...(this.dna.morphology ? {
+                morphology: { ...this.dna.morphology, masculinity: .15 },
+            } : {}) };
+        }
         if (shortHair === 'short' || shortHair === 'short2') {
             this.presentation.hair = 'hair/manual-fitted-' + shortHair;
         }

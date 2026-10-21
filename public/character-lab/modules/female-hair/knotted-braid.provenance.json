@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "route": "manual-female-hair",
+  "moduleId": "hair/manual-female-knotted-braid",
+  "source": {
+    "path": "Assets/Characters/Human/Manual-Fitting/female/knotted-braid.glb",
+    "sha256": "477020c8f0813d589fada983298b934b8b258c75b6ee012e38ebfbb719f6415c",
+    "bytes": 238371780,
+    "selectedNode": "low_poly_unwrapped",
+    "excludedMeshes": 8,
+    "nodeTransform": [
+      0.1312454640865326,
+      0,
+      0,
+      0,
+      0,
+      -3.978196949733481e-8,
+      0.13131691065966683,
+      0,
+      0,
+      -0.13131691065966683,
+      -3.978196949733481e-8,
+      0,
+      0.002044923137873411,
+      1.5418471097946167,
+      0.027224186807870865,
+      1
+    ]
+  },
+  "output": {
+    "sha256": "4aed5e8c3c8e97067970356522ac92bdb7b880acf989754eb01d3d97f39d2746",
+    "triangles": 3088,
+    "materials": 1,
+    "bytes": 143104,
+    "bounds": {
+      "min": [
+        -0.10368805606397657,
+        1.4141151142956456,
+        -0.08411027080979666
+      ],
+      "max": [
+        0.10940678957721417,
+        1.6727613932974932,
+        0.12161524674062955
+      ]
+    },
+    "vertices": 2912
+  },
+  "bindingSha256": "c31f35d6867b2be6a61d82283355a1fbca1d599aa29ead202dfafb8fd372698b",
+  "pipeline": {
+    "path": "scripts/prepare-female-hair.mjs",
+    "sha256": "cb8aa6af4311626c56befba617a2741bdc87dd2069d3fa55aee41c5d5803ca4a"
+  },
+  "operations": [
+    "Extract only the audited hairstyle; exclude reference body, rig and older hair",
+    "Bake manual fit into metre positions; preserve source normals, vertices and triangle indices",
+    "Remove texture maps and UVs; apply the existing DNA hair colour and greying",
+    "Reuse Head/Neck/Spine2 binding for all three native body LODs"
+  ],
+  "reviewStatus": "preview"
+}
