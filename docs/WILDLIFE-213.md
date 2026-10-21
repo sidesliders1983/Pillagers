@@ -180,6 +180,16 @@ in unknown terrain. Frustum culling skips hidden actors, and animations more tha
 200 m from the camera are not evaluated. Camera position does not influence
 placement or motion decisions.
 
+Confirmed land/shore positions are interpolated over the campaign's actual
+snapshot cadence, including coalesced updates, rather than repeatedly easing into
+each tick position and stopping. Heading follows the shortest turn. Land Meshy
+clip time and the fallback moose leg phase advance with horizontal metres actually
+displayed, so changing from roaming to fleeing does not multiply the whole elapsed
+clock by a new speed or leave fast feet cycling over a stationary body. Pauses
+retain the interpolated pose; loading snaps without adding teleport distance to
+the gait. These are presentation changes: canonical flee speeds, shyness,
+habitats, sighting positions and saved wildlife remain unchanged.
+
 In the development server open `/fjord-play?debugWildlife` and inspect
 `JSON.parse(document.querySelector('canvas[data-wildlife]').dataset.wildlife)`.
 It reports stable IDs, species/variant, habitat, state, position, anchor, radius,
