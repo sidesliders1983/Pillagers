@@ -30,27 +30,42 @@ export interface OtterFloatRig {
     space: Group;
     joints: { bone: Bone; base: Quaternion }[];
     tailTip: { mesh: Mesh; vertex: number };
+    back: { mesh: Mesh; vertex: number };
     applied: boolean;
 }
 export function otterFloatRig(model: Group, space: Group): OtterFloatRig {
     model.updateWorldMatrix(true, true);
     let tailTip: OtterFloatRig['tailTip'] | undefined;
+    let back: OtterFloatRig['back'] | undefined;
     let furthest = Infinity;
+    let highest = -Infinity;
     model.traverse(node => {
         if (!('isMesh' in node) || !node.isMesh) return;
         const mesh = node as Mesh;
         const positions = mesh.geometry.getAttribute('position');
+        mesh.geometry.computeBoundingBox();
+        const bounds = mesh.geometry.boundingBox!;
+        const length = bounds.max.z - bounds.min.z;
         for (let vertex = 0; vertex < positions.count; vertex++) {
             // Choose the anatomical tip from immutable mesh coordinates, not the current walk
             // pose. Otherwise re-equipping or sampling a different clip frame can pick a flank.
             const z = positions.getZ(vertex);
-            if (z >= furthest) continue;
-            furthest = z;
-            tailTip = { mesh, vertex };
+            if (z < furthest) {
+                furthest = z;
+                tailTip = { mesh, vertex };
+            }
+            // The middle fifth excludes the raised head, paws and tail. Bind coordinates
+            // keep this landmark stable when re-equipped at a different walk-loop frame.
+            const y = positions.getY(vertex);
+            if (z >= bounds.min.z + length * .4 && z <= bounds.min.z + length * .6 && y > highest) {
+                highest = y;
+                back = { mesh, vertex };
+            }
         }
     });
     if (!tailTip) throw new Error('Missing otter tail surface.');
-    return { model, space, tailTip, applied: false,
+    if (!back) throw new Error('Missing otter back surface.');
+    return { model, space, tailTip, back, applied: false,
         joints: ['chest', 'head', 'frontleg', 'R_frontleg'].map(name => {
             const bone = model.getObjectByName(name) as Bone;
             if (!bone?.isBone) throw new Error('Missing otter floating joint: ' + name);
@@ -62,15 +77,16 @@ export function clearOtterFloat(rig: OtterFloatRig) {
     rig.joints.forEach(joint => joint.bone.quaternion.copy(joint.base));
     rig.applied = false;
 }
-/** Keep the muzzle above the surface and the paws resting over the belly after rolling. */
+/** Raise the swimming neck; blend to the head and belly-paw pose when rolling onto the back. */
 export function poseOtterFloat(rig: OtterFloatRig, amount: number, time: number) {
     clearOtterFloat(rig);
     rig.model.updateWorldMatrix(true, true);
     const heading = rig.space.getWorldQuaternion(new Quaternion());
     rig.joints.forEach((joint, index) => {
         joint.base.copy(joint.bone.quaternion);
-        const angle = (index === 0 ? -.7 : index === 1 ? -.5 : index === 2 ? -.8 : .8)
-            * amount + Math.sin(time * 1.3 + index) * .025 * amount;
+        const angle = (index === 0 ? -.4 - .3 * amount : index === 1 ? -.15 - .35 * amount
+            : (index === 2 ? -.8 : .8) * amount)
+            + Math.sin(time * 1.3 + index) * .025 * amount;
         const axis = (index < 2 ? new Vector3(1, 0, 0) : new Vector3(0, 0, 1))
             .applyQuaternion(heading)
             .applyQuaternion(joint.bone.parent!.getWorldQuaternion(new Quaternion()).invert());
@@ -82,10 +98,16 @@ export function poseOtterFloat(rig: OtterFloatRig, amount: number, time: number)
 
 /** The real skinned tail tip, rather than the source bounds or a guessed body-height ratio. */
 export function otterTailPoint(rig: OtterFloatRig, point: Vector3) {
+    return otterSurfacePoint(rig, rig.tailTip, point);
+}
+export function otterBackPoint(rig: OtterFloatRig, point: Vector3) {
+    return otterSurfacePoint(rig, rig.back, point);
+}
+function otterSurfacePoint(rig: OtterFloatRig, surface: OtterFloatRig['tailTip'], point: Vector3) {
     rig.space.updateWorldMatrix(true, false);
     // SkinnedMesh.updateMatrixWorld also refreshes the attached bind inverse. Calling only
     // Object3D.updateWorldMatrix leaves the prior root translation in the skin evaluation.
     rig.space.updateMatrixWorld(true);
-    rig.tailTip.mesh.getVertexPosition(rig.tailTip.vertex, point);
-    return rig.tailTip.mesh.localToWorld(point);
+    surface.mesh.getVertexPosition(surface.vertex, point);
+    return surface.mesh.localToWorld(point);
 }

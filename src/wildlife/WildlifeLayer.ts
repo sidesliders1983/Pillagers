@@ -18,7 +18,7 @@ import { WildlifePopulation, type WildlifeActor } from './WildlifePopulation';
 import { marinePose, wildlifeObservable } from './MarineEncounters';
 import { MarineEffects } from './MarineEffects';
 import { marineTailRig, poseMarineTail, otterFloatRig, clearOtterFloat, poseOtterFloat,
-    otterTailPoint, type OtterFloatRig } from './MarineMotion';
+    otterTailPoint, otterBackPoint, type OtterFloatRig } from './MarineMotion';
 import type { WildlifeObstacle } from './WildlifeHabitats';
 interface CachedAsset {
     promise: Promise<GLTF>;
@@ -287,7 +287,7 @@ export class WildlifeLayer {
             const known = this.known(actor.position.x, actor.position.z);
             let inView = true;
             root.visible = known
-                && wildlifeObservable(actor)
+                && (pose ? pose.renderVisible : wildlifeObservable(actor))
                 && (airborne || this.population.habitats.valid(actor.position, actor.variant));
             if (camera) {
                 this.sphere.center.copy(root.position).y += record.height * .5;
@@ -300,12 +300,14 @@ export class WildlifeLayer {
                 if (record.effects.root.visible) record.effects.update(root.position.x, waterHeight, root.position.z,
                     actor.heading, pose, this.population.time);
             }
-            if (!root.visible || camera && root.position.distanceToSquared(this.cameraPoint) > 200 * 200)
-                continue;
             if (record.marineTail && pose) {
+                // Finish the dive pose even on its first submerged frame; a stale lifted
+                // fluke must not be hidden while its previous skin pose still clears water.
                 poseMarineTail(record.marineTail, this.population.time, pose.tail, actor.species);
                 continue;
             }
+            if (!root.visible || camera && root.position.distanceToSquared(this.cameraPoint) > 200 * 200)
+                continue;
             if (record.wings) {
                 const pose = gullWingMotion(this.population.time, actor.phase, false, actor.flapEffort);
                 poseGullWings(record.wings, pose.flap);
@@ -334,11 +336,15 @@ export class WildlifeLayer {
                 record.mixer.setTime(moving ? this.population.time * gaitSpeed + actor.phase : 0);
                 if (record.resting && !moving)
                     poseAnimalRest(record.resting, this.population.time, actor.phase);
-                if (record.floating && floatAmount > 0) {
+                if (record.floating) {
                     poseOtterFloat(record.floating, floatAmount, this.population.time);
+                    const back = otterBackPoint(record.floating, this.floatTailPoint);
+                    const backWater = this.waterHeight?.(back.x, back.z) ?? this.population.world.waterLevel;
+                    const swimCorrection = backWater - .008 - back.y;
                     const tip = otterTailPoint(record.floating, this.floatTailPoint);
                     const surface = this.waterHeight?.(tip.x, tip.z) ?? this.population.world.waterLevel;
-                    root.position.y += (surface + .008 - tip.y) * floatAmount;
+                    root.position.y += swimCorrection * (1 - floatAmount)
+                        + (surface + .008 - tip.y) * floatAmount;
                 }
             }
             else

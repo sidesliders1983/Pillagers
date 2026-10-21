@@ -12,7 +12,7 @@ const { WildlifePopulation } = load('../src/wildlife/WildlifePopulation.ts');
 const { captureWildlife, restoreWildlife } = load('../src/wildlife/WildlifeSnapshot.ts');
 const { marinePose, marineDuration, wildlifeObservable, advanceMarine } = load('../src/wildlife/MarineEncounters.ts');
 const { WildlifeLayer } = load('../src/wildlife/WildlifeLayer.ts');
-const { otterFloatRig, otterTailPoint } = load('../src/wildlife/MarineMotion.ts');
+const { otterFloatRig, otterTailPoint, otterBackPoint } = load('../src/wildlife/MarineMotion.ts');
 const { wildlifeAssetManifest } = load('../src/wildlife/WildlifeAssetManifest.ts');
 const whale = population => population.actors.find(actor => actor.species === 'humpback-whale');
 
@@ -47,7 +47,7 @@ test('encounters are episodic, continuous, deterministic, pause-safe and local-w
         states.add(actor.state);
         if (previous && previous.state !== 'absent' && actor.state !== 'absent') {
             assert.ok(Math.hypot(actor.position.x - previous.position.x, actor.position.z - previous.position.z) <= .401);
-            assert.ok(Math.abs(actor.position.y - previous.position.y) < .12, 'No surface height snapping');
+            assert.ok(Math.abs(actor.position.y - previous.position.y) < .15, 'No surface height snapping');
         }
         if (actor.state !== 'absent') {
             assert.ok(first.habitats.valid(actor.position, actor.variant));
@@ -76,12 +76,12 @@ test('surface blow and rare tail dive differ from ordinary cruise; deep states c
     const actor = whale(new WildlifePopulation(marineWorld()));
     actor.state = 'surface'; actor.marine.elapsed = 22.25;
     assert.ok(marinePose(actor).spout > .6);
-    actor.state = 'dive'; actor.marine.elapsed = 49;
+    actor.state = 'dive'; actor.marine.elapsed = 44.5;
     actor.marine.special = false;
     const ordinary = marinePose(actor);
     actor.marine.special = true;
     assert.ok(marinePose(actor).tail > ordinary.tail * 3);
-    actor.state = 'surface'; actor.marine.elapsed = 81;
+    actor.state = 'surface'; actor.marine.elapsed = 72;
     assert.ok(Math.abs(marinePose(actor).pitch) < .001,
         'A whale fluke dive must not enable the orca head rise');
     actor.state = 'submerged'; actor.marine.elapsed = 60;
@@ -164,11 +164,47 @@ test('marine renderer samples actual water height, keeps the floating head above
         const root = layer.root.getObjectByName('wildlife:' + actor.id);
         assert.ok(root.visible);
         assert.ok(Math.abs(root.position.y - water - marinePose(actor).offset) < 1e-8);
+        actor.marine.special = true;
+        for (const start of [42, 81]) {
+            for (let elapsed = start; elapsed <= start + 5.01; elapsed += .1) {
+                actor.marine.elapsed = elapsed;
+                advanceMarine(actor, 0, world.config.seed, layer.population.marineRoutes.get(actor.id), layer.population.habitats);
+                layer.advance(0, false);
+                layer.root.updateMatrixWorld(true);
+                const bounds = new Box3().setFromObject(root, true);
+                if (elapsed < start + 4.95) assert.ok(root.visible, 'Render the complete five-second dive');
+                if (!root.visible) assert.ok(bounds.max.y < water,
+                    'Never hide a whale while its actual skinned fluke is above water');
+            }
+            actor.marine.elapsed = start + 5.01;
+            advanceMarine(actor, 0, world.config.seed, layer.population.marineRoutes.get(actor.id), layer.population.habitats);
+            layer.advance(0, false);
+            layer.root.updateMatrixWorld(true);
+            assert.equal(root.visible, false);
+            assert.ok(new Box3().setFromObject(root, true).max.y < water,
+                'The entire whale is below water after at most five seconds');
+        }
         const otter = layer.population.actors.find(actor => actor.variant.behavior === 'otter_shore_water');
         otter.state = 'back_float'; otter.wait = 30; otter.floatUntil = layer.population.time + 20;
         const otterRoot = layer.root.getObjectByName('wildlife:' + otter.id);
         const head = otterRoot.getObjectByName('head');
         const floatRig = otterFloatRig(otterRoot.children[0].children[0], otterRoot);
+        otter.state = 'swim';
+        for (const heading of [0, Math.PI * .5, Math.PI, Math.PI * 1.5]) {
+            otter.heading = heading;
+            for (const phase of [0, .25, .5, .75]) {
+                otter.phase = phase;
+                layer.advance(0, false);
+                layer.root.updateMatrixWorld(true);
+                const back = otterBackPoint(floatRig, new Vector3());
+                assert.ok(Math.abs(back.y - water + .008) < .015, 'Swimming waterline reaches the upper back');
+                assert.ok(head.getWorldPosition(new Vector3()).y > water + .01, 'Swimming head stays above water');
+                for (const name of ['frontleg2', 'R_frontleg2', 'backleg2', 'R_backleg2'])
+                    assert.ok(otterRoot.getObjectByName(name).getWorldPosition(new Vector3()).y < water,
+                        'Swimming paws stay underwater: ' + name);
+            }
+        }
+        otter.state = 'back_float';
         for (const heading of [0, Math.PI * .5, Math.PI, Math.PI * 1.5]) {
             otter.heading = heading;
             layer.advance(0, false);

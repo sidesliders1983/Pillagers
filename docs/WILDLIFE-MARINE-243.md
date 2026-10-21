@@ -39,7 +39,7 @@ standing animals retain their original ground origin.
   at 80 m from the coast. The whale's stricter route rule requires **6.5 m depth**
   and a **7.1 m body-clearance envelope**, including diagonal probes.
   Orcas require **5 m depth** and a **3.6 m clearance envelope**.
-- At world initialization, a bounded search checks straight 240 m whale / 276 m
+- At world initialization, a bounded search checks straight 204 m whale / 276 m
   orca corridors from
   the deep-water map edge. Sample spacing is 2 m; full-body clearance is checked
   along the route. Retain at most six seeded corridors, favouring safe coastal
@@ -48,9 +48,9 @@ standing animals retain their original ground origin.
   720–1,200 second cooldown for humpbacks. Orcas arrive after 90–210 seconds,
   followed by a 300–600 second cooldown. Selection uses the world seed, instance and encounter
   number; it never consumes campaign RNG or depends on the camera.
-- Each humpback visit travels at 2 m/s for 120 seconds: submerged approach (14 s), first
-  surface (28 s), dive (14 s), submerged travel (14 s), second surface (20 s),
-  dive (14 s), submerged exit (16 s). Repositioning for the next route happens
+- Each humpback visit travels at 2 m/s for 102 seconds: submerged approach (14 s), first
+  surface (28 s), dive (5 s), submerged travel (14 s), second surface (20 s),
+  dive (5 s), submerged exit (16 s). Repositioning for the next route happens
   only while absent, before the submerged approach starts.
 - Orcas travel at 3 m/s for 92 seconds: approach (10 s), surface (24 s), dive (8 s),
   submerged travel (12 s), surface (20 s), dive (8 s), exit (10 s). The dorsal fin
@@ -60,7 +60,9 @@ standing animals retain their original ground origin.
 - Surface rise takes six eased seconds. Body mostly remains underwater. The first
   surface has a 2.5 second blow beginning seven seconds into that phase.
   Twelve percent of humpback visits use a pronounced tail-arch/slap dive. The fluke
-  rises, holds briefly, then lowers more quickly, following the supplied reference.
+  rises and immediately lowers in a continuous arc. Both dives finish fully underwater
+  within five seconds. Rendering continues through the entire dive instead of hiding
+  the skinned fluke when an approximate sighting-height threshold is crossed.
   The normal dive retains a small arch. Tail motion uses the supplied bones.
 - A fixed pool of 32 overlapping, soft mist puffs and two low-resolution wake/splash rings per
   visitor adds no fluid simulation or per-frame allocation of effect geometry.
@@ -81,7 +83,8 @@ remain on presentation time. Pausing freezes animal decisions and poses.
 ## Otter water behaviour
 
 Only the water otter gets `otter_shore_water`; the shore animal retains its Meshy
-walk and rest animation. Every third destination decision gives the water otter
+walk and rest animation. Swimming puts the actual skinned upper-back point 8 mm
+below local water, with the paws submerged and the head above water. Every third destination decision gives the water otter
 a 14–24 second back-float. Enter/exit roll eases over two seconds. It drifts at
 0.025 m/s with water/obstacle checks, breathes and adjusts its head
 and forepaws over its belly. Floating height uses the actual skinned tail-tip

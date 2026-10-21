@@ -49,7 +49,8 @@ function present() {
         + (selected.marine ? `${selected.variant.encounter!.canonicalLength} m · depth ${(-layer.population.habitats.surface.surfaceHeightAt(
             selected.position.x, selected.position.z)).toFixed(1)} m · `
             + `${marinePose(selected).visible ? 'surfaced / sightable' : 'submerged / not sightable'}`
-            : 'source rig · tail tip on local water surface');
+            : selected.state === 'back_float' ? 'source rig · tail tip on local water surface'
+                : 'source rig · upper back at waterline · paws submerged');
     controls.update();
     renderer.render(scene, camera);
 }

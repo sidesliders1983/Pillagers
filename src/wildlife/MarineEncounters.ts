@@ -18,7 +18,7 @@ export interface MarineMotion {
     special: boolean;
 }
 export const marineStages = ['approach', 'surface', 'dive', 'submerged', 'surface', 'dive', 'exit'] as const;
-const whaleDurations = [14, 28, 14, 14, 20, 14, 16];
+const whaleDurations = [14, 28, 5, 14, 20, 5, 16];
 const orcaDurations = [10, 24, 8, 12, 20, 8, 10];
 const smooth = (value: number) => {
     const t = Math.max(0, Math.min(1, value));
@@ -95,7 +95,7 @@ export function marinePose(actor: WildlifeActor) {
     const hidden = orca ? -2.4 : -3.3;
     const cruise = orca ? -.45 : -1.15;
     if (actor.state === 'absent') return { offset: hidden, pitch: 0, tail: 0,
-        visible: false, spout: 0, blowAge: -1, splash: 0, wake: 0 };
+        visible: false, renderVisible: false, spout: 0, blowAge: -1, splash: 0, wake: 0 };
     const stage = marineStage(actor.variant, motion.elapsed);
     let offset = hidden, pitch = 0, tail = 0, spout = 0, blowAge = -1, splash = 0, wake = 0;
     if (stage.state === 'surface') {
@@ -121,14 +121,17 @@ export function marinePose(actor: WildlifeActor) {
         pitch = .14 * Math.sin(Math.PI * stage.progress);
         wake = 1 - dive;
         if (!orca) {
-            // Rise, briefly show the fluke, then lower it faster into the water.
-            const fluke = smooth(stage.progress / .45) * (1 - smooth((stage.progress - .55) / .35));
+            // A continuous five-second arc: lift and immediately lower, without a mid-air hold.
+            const fluke = smooth(stage.progress / .4) * (1 - smooth((stage.progress - .4) / .5));
             tail = fluke * (motion.special ? .8 : .1);
             if (motion.special) splash = pulse((stage.progress - .73) / .24);
         }
     }
     const top = orca ? 1.8 + Math.max(0, -pitch) * 3.5 : 1.4 + tail * 4;
-    return { offset, pitch, tail, spout, blowAge, splash, wake, visible: offset + top > .05 };
+    // Sighting eligibility is approximate; it must never clip the visible skinned fluke.
+    // Keep drawing throughout the dive, ending only once the neutral body is fully submerged.
+    const renderVisible = stage.state === 'surface' || stage.state === 'dive';
+    return { offset, pitch, tail, spout, blowAge, splash, wake, renderVisible, visible: offset + top > .05 };
 }
 
 /** Same actor slots and canonical clock as all other wildlife. Camera never enters this decision. */
