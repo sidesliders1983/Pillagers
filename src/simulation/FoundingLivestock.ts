@@ -9,7 +9,8 @@ export function initializeFoundingLivestock(state: SimulationState, rules?: Live
     landing.livestock = structuredClone(rules ?? { version: 1, profiles: {} });
     validateLivestockRules(state);
     const founding = landing.livestock;
-    const candidates = livestockSpeciesIds.filter(species =>
+    const pool = founding.version === 2 ? founding.founding.species ?? livestockSpeciesIds : livestockSpeciesIds;
+    const candidates = pool.filter(species =>
         founding.version !== 2 || species !== founding.founding.excludedSpecies);
     const random = seededRandom(state.seed, 'founding-livestock-v1');
     const species = founding.version === 2 ? candidates[Math.floor(random() * candidates.length)] : 'cattle';

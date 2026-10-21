@@ -84,8 +84,9 @@ export class SharedSettlement {
         proposal.newCampaign(seed, weatherEnabled, socialEnabled, foundingPhase, birthdayCalendarMode(this.session.readSnapshot()));
         this.fjord.startCampaign(proposal, geography);
     }
-    restart(sameFounders: boolean, weatherEnabled = this.session.snapshot().weather?.config.enabled ?? false, foundingPhase = this.session.snapshot().foundingPhase) {
-        this.fjord.restart(sameFounders, weatherEnabled, foundingPhase);
+    restart(sameFounders: boolean, weatherEnabled = this.session.snapshot().weather?.config.enabled ?? false,
+        foundingPhase = this.session.snapshot().foundingPhase, prepared?: GameplaySession) {
+        this.fjord.restart(sameFounders, weatherEnabled, foundingPhase, prepared);
     }
     saveLocal(storage: Pick<Storage, 'getItem' | 'setItem'>) {
         storage.setItem(fjordCampaignKey, this.fjord.exportJSON());

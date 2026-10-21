@@ -3,7 +3,7 @@ import type { RecoverySources } from '../play/SettlementRecovery';
 import { projectFjordCalendar } from './FjordCalendar';
 
 /** A full-page recovery choice. Reading, importing and downloading never writes storage. */
-export function chooseSettlementRecovery(sources: RecoverySources, error = ''): Promise<string | null> {
+export function chooseSettlementRecovery(sources: RecoverySources, error = '', backLabel = 'Start a new campaign'): Promise<string | null> {
     const root = document.createElement('main');
     root.id = 'campaign-recovery';
     root.className = 'fjord-bootstrap';
@@ -14,8 +14,11 @@ export function chooseSettlementRecovery(sources: RecoverySources, error = ''): 
         <section aria-label="Damaged save recovery files"></section>
         <button type="button" data-new>Start a new campaign</button>`;
     const status = root.querySelector<HTMLElement>('[role="status"]')!;
-    status.textContent = error || sources.warnings.join(' ') ||
-        'The active session is missing or could not be restored.';
+    root.querySelector('[data-new]')!.textContent = backLabel;
+    if (backLabel !== 'Start a new campaign') root.querySelector('p:not([role])')!.textContent =
+        'Choose a saved campaign or import a file. Your existing saves have not been replaced.';
+    status.textContent = error || sources.warnings.join(' ') || (sources.active ?
+        'Choose a saved campaign or import a file.' : 'The active session is missing or could not be restored.');
     document.body.replaceChildren(root);
     return new Promise((resolve, reject) => {
         const events = new AbortController();
@@ -29,7 +32,7 @@ export function chooseSettlementRecovery(sources: RecoverySources, error = ''): 
             const calendar = projectFjordCalendar(candidate.metadata.time, candidate.metadata.ticksPerWinter);
             const item = document.createElement('p');
             const button = document.createElement('button');
-            button.textContent = 'Restore ' + candidate.source.toLowerCase();
+            button.textContent = (backLabel === 'Start a new campaign' ? 'Restore ' : 'Use ') + candidate.source.toLowerCase();
             button.addEventListener('click', () => finish(candidate.text), { signal: events.signal });
             item.append(button, document.createTextNode(' ' + calendar.season + ' ' + calendar.year +
                 ' · campaign ' + candidate.metadata.seed));

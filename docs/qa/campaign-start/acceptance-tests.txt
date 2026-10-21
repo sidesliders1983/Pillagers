@@ -1,0 +1,38 @@
+✔ saved island restores through asynchronous preparation without changing Core, book, layout or fractional pace (38482.053ms)
+✔ missing or damaged active storage offers recoverable saves without replacing their raw data (125.3238ms)
+✔ incomplete shared saves are rejected rather than constructing an unrelated default campaign (0.8112ms)
+✔ resume checkpoints preserve presentation controls and camera independently of Core (717.0304ms)
+✔ invalid pacing or island identity is rejected before expensive restoration begins (113.9571ms)
+✔ explicit legacy view handoff retains its pace and full saved terrain through the asynchronous restore route (1159.4223ms)
+✔ manual canonical data remains a recovery choice when its scenery sidecar cannot be used (183.2104ms)
+✔ entry is read-only until a confirmed choice is ready; cancel and repeated clicks are safe (6510.6787ms)
+✔ failed assets and quota retry the same attempt, protecting saves and exposing export (787.1796ms)
+✔ fresh entry has no invented save; leaving fences late activation (83.1337ms)
+✔ a changed active session fences a stale loaded campaign before any write (950.2022ms)
+✔ a restart proposal reproduces original founders and rules without changing the saved campaign (1654.5166ms)
+✔ a prepared founder replay retains its visible founding chapter and read state without old Attention (3687.1995ms)
+✔ fresh Fjord scenarios roll only the four supplied species, with saved rules and independent founders (7187.6351ms)
+✔ four-species physical rivals exclude the player species; invalid saved pools fail closed (649.4032ms)
+✔ explicit founding rules create real mature single-species trios without changing human founders or stocks (1985.6552ms)
+✔ only the single physical rival excludes the player species and keeps its actual CPU stocks (1001.5678ms)
+✔ the saved feeding guard blocks breeding after a real feeding shortfall without consuming a birth roll (528.2749ms)
+✔ outside herds use saved weighted space for breeding and crowding instead of bypassing Farmyard pressure (153.6853ms)
+✔ saved-rule session restart retains explicit player and CPU livestock rules while a new campaign uses its own defaults (1004.1779ms)
+✔ actual slaughter credits whole specialist Hides once for hide-bearing adults and never changes the general stock shape (248.8028ms)
+✔ seeded campaigns retain exact tick-batch and save/load results including a physical CPU clan (1000.6421ms)
+✔ livestock management and the factual Chronicle disclose the actual specialist slaughter receipt (921.0177ms)
+✔ natural livestock deaths retain identity without producing specialist Hides (79.5403ms)
+✔ view handoff preserves selection, running pace, fractional time and exact Fjord (7300.7759ms)
+✔ shared commands use Core availability and update both projections without moving the plot (1198.7896ms)
+✔ shared import is atomic and new/restart campaigns reset both presentations while retaining saved rules (1708.6364ms)
+✔ paired 2D/Fjord ownership transfers retain deterministic replay through Winters and exact local saves (5358.1058ms)
+✔ same-seed saves from an earlier campaign clear unavailable identities from the Fjord sidecar (1975.3819ms)
+✔ resident selection identifies the canonical partner, child and home; home selection identifies its occupants (4412.0957ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 47237.26

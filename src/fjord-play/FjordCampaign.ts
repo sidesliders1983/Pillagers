@@ -259,10 +259,19 @@ export class FjordCampaign {
         return this.geography !== 'legacy' ? createCampaignIsland(seed, islandRecipe(seed, this.geography)) :
             generateWorld({ seed, conifers: 'ez-tree' });
     }
-    restart(sameFounders = true, weatherEnabled = this.session.snapshot().weather?.config.enabled ?? false, foundingPhase = this.session.snapshot().foundingPhase) {
-        const proposal = new GameplaySession();
-        proposal.loadJSON(this.session.saveJSON());
-        proposal.restartCampaign(sameFounders, undefined, weatherEnabled, undefined, foundingPhase);
+    restart(sameFounders = true, weatherEnabled = this.session.snapshot().weather?.config.enabled ?? false,
+        foundingPhase = this.session.snapshot().foundingPhase, prepared?: GameplaySession) {
+        const proposal = prepared ?? new GameplaySession();
+        if (prepared) {
+            const state = prepared.readSnapshot();
+            if (!sameFounders || state.seed !== this.session.readSnapshot().seed ||
+                state.foundingPhase !== foundingPhase || state.weather?.config.enabled !== weatherEnabled ||
+                prepared.saveJSON() !== this.session.restartProposal().saveJSON())
+                throw new Error('Prepared founding campaign does not match this replay.');
+        } else {
+            proposal.loadJSON(this.session.saveJSON());
+            proposal.restartCampaign(sameFounders, undefined, weatherEnabled, undefined, foundingPhase);
+        }
         if (!sameFounders) {
             this.startCampaign(proposal);
             return;
@@ -274,6 +283,7 @@ export class FjordCampaign {
             this.layout.mooringResolved ? this.layout.mooring : undefined, proposal.snapshot().seed);
         saved.selection = null;
         delete saved.attention;
+        delete saved.wildlifeReadIds;
         delete saved.rivalLayout;
         this.importJSON(JSON.stringify(saved));
         this.fresh = true;
