@@ -568,8 +568,11 @@ test('the five newly animated species use their source clips on land and water a
             layer.population.time = 0;
             layer.advance(0, false);
             const before = capture();
+            const origin = { ...record.actor.position };
             let maximumMotion = 0;
             for (const time of [.2, .4, .6, .8, 1]) {
+                if (record.motion && record.actor.speed > 0)
+                    record.actor.position.z = origin.z + time * record.actor.speed;
                 layer.population.time = time;
                 layer.advance(0, false);
                 const points = capture();
@@ -823,6 +826,45 @@ test('all seven Meshy species retain resting motion and hand full joint control 
     }
 });
 
+
+test('canonical land motion keeps fleeing speed, rendered distance and clip phase synchronized across batched ticks', async () => {
+    const { captureWildlife } = load('../src/wildlife/WildlifeSnapshot.ts');
+    const layer = await WildlifeLayer.create(worldFixture(), () => true, sources);
+    try {
+        const fox = layer.records.find(record => record.actor.species === 'red-fox');
+        const snapshot = { actors: captureWildlife(layer.population) };
+        snapshot.actors.find(actor => actor.id === fox.actor.id).state = 'roam';
+        layer.useCanonical(snapshot, .5);
+        layer.advance(0, false);
+        const initial = fox.root.position.clone();
+        const before = fox.mixer.time;
+        const flee = structuredClone(snapshot);
+        const animal = flee.actors.find(actor => actor.id === fox.actor.id);
+        animal.state = 'flee';
+        layer.useCanonical(flee, .5);
+        layer.advance(.01, true);
+        assert.equal(fox.mixer.time, before, 'Entering flee cannot jump the animation to time × new speed');
+        animal.position.z += fox.actor.variant.fleeSpeed * .5;
+        const next = structuredClone(flee), saved = structuredClone(next);
+        layer.useCanonical(next, .5);
+        let previous = fox.root.position.z;
+        for (let frame = 0; frame < 30; frame++) {
+            layer.advance(1 / 60, true);
+            const step = fox.root.position.z - previous;
+            assert.ok(Math.abs(step - fox.actor.variant.fleeSpeed / 60) < 1e-9,
+                'A fleeing body must keep moving evenly between canonical updates');
+            previous = fox.root.position.z;
+            assert.ok(Math.abs(fox.mixer.time - before - Math.abs(previous - initial.z)) < 1e-9,
+                'Clip time must advance with actual displayed metres');
+        }
+        const paused = [fox.root.position.toArray(), fox.mixer.time];
+        layer.advance(5, false);
+        assert.deepEqual([fox.root.position.toArray(), fox.mixer.time], paused);
+        layer.advance(.5, true);
+        assert.equal(fox.mixer.time, paused[1], 'Without new body travel the feet stop cycling');
+        assert.deepEqual(next, saved, 'Presentation must not change authoritative wildlife');
+    } finally { layer.dispose(); }
+});
 
 test('canonical wildlife is unchanged by render frames, camera culling or rendered human positions', async () => {
     const { captureWildlife } = load('../src/wildlife/WildlifeSnapshot.ts');

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wildlife motion and home residents · review</title>
+    <style>
+        body { margin: 0; }
+        #fjord-play { height: 100vh; }
+        #qa-controls { position: absolute; z-index: 20; top: 12px; left: 12px; right: 12px;
+            background: #192529f5; border-radius: 6px; padding: 12px; }
+        #qa-controls h1 { font-size: 17px; margin: 0 0 6px; }
+        #qa-controls button { padding: 5px 10px; margin-right: 6px; }
+        #qa-status { margin: 8px 0 0; font-size: 12px; }
+        #fjord-play .fjord-stage #fjord-management { left: auto; right: 16px; bottom: 20px; }
+        #qa-scene { position: absolute; inset: 0; }
+    </style>
+</head>
+<body class="fjord-play">
+    <main id="fjord-play">
+        <header id="qa-controls">
+            <h1>Wildlife flight · confirmed snapshots every 500 ms</h1>
+            <button id="qa-threat">Expedition nearby</button>
+            <button id="qa-replay">Replay flight</button>
+            <button id="qa-pause">Pause / resume</button>
+            <button id="qa-home">Select house</button>
+            <button id="qa-tent">Select tent</button>
+            <p id="qa-status">Loading production wildlife and interface…</p>
+        </header>
+        <div class="fjord-stage">
+            <div id="qa-scene"></div>
+            <section id="fjord-management"><div id="entity-panel"></div></section>
+        </div>
+        <nav id="fjord-navigation" hidden></nav>
+        <section id="fjord-workspace" hidden></section>
+        <button id="fjord-attention" hidden><span id="fjord-attention-count"></span></button>
+    </main>
+    <script type="module" src="./wildlife-home-regressions.ts"></script>
+</body>
+</html>
