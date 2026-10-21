@@ -13,6 +13,7 @@ import { longshipModel, terrainAssetPath } from '../config/TerrainAssets';
 import { placeSettlement } from '../world/PlaceSettlement';
 import type { FjordEntity } from './FjordProjection';
 import {FjordWardrobe} from './FjordWardrobe';
+import { measureBuildEnvelope } from '../construction/BuildEnvelope';
 /** Reuse verified Fjordside DNA bodies and source livestock clips, with independent instance ownership. */
 export class FjordModels {
     readonly diagnostics: string[] = [];
@@ -220,8 +221,10 @@ export class FjordModels {
                 root.userData.placeholder = true;
                 this.loaded.add(root);
                 this.instanceResources.add(root);
+                root.userData.buildEnvelope = measureBuildEnvelope(root, entity.asset);
                 return root;
             }
+            model.userData.buildEnvelope = measureBuildEnvelope(model, entity.asset);
             return model;
         }
         if (entity.kind === 'campfire') {

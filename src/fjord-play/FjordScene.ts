@@ -91,6 +91,7 @@ export function createFjordScene(options: {
     scene.add(targetMarker);
 
     const renderer = createRenderer(canvas);
+    renderer.localClippingEnabled = true;
     renderer.setPixelRatio(resolvePresentationQuality(
         document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as PresentationQuality,
         document.querySelector<HTMLSelectElement>('#fjord-effects')!.value as EffectQuality,
@@ -195,6 +196,7 @@ export function createFjordScene(options: {
                 wildlife = nextWildlife;
                 scene.add(wildlife.root);
             }
+            if (activeBlueprint !== blueprint) layer!.resetConstructionBaseline();
             activeBlueprint = blueprint;
             wildlife?.setWaterHeightSampler((x, z) => world!.waterHeightAt(x, z));
             appliedRevision = -1;
@@ -490,6 +492,7 @@ export function createFjordScene(options: {
         if (running) activeTime += motionDelta;
         motion!.advance(motionDelta, running, !document.hidden);
         layer!.advance(motion!, motionDelta, running);
+        layer!.updateConstruction(document.hidden ? 0 : delta);
         rivalScene?.advance(motionDelta, running);
         wildlife?.setHumans([...layer!.humanPositions(), ...(rivalScene?.humanPositions() ?? [])]);
         wildlife?.useCanonical(session.readSnapshot().wildlife);
@@ -505,6 +508,7 @@ export function createFjordScene(options: {
         if (performance.now() - lastDiagnostics > 500) {
             canvas.dataset.rendered = JSON.stringify(layer!.describe());
             canvas.dataset.dyingLivestock = JSON.stringify(layer!.describeDeaths());
+            canvas.dataset.construction = JSON.stringify(layer!.inspectConstruction());
             if (import.meta.env.DEV && query.has('debugWildlife')) {
                 canvas.dataset.wildlife = JSON.stringify(wildlife?.inspect());
             }

@@ -11,6 +11,7 @@ import { FjordModels } from './FjordModels';
 import type { FjordEntity } from './FjordProjection';
 import { livestockPresentation } from '../characters/LivestockPresentation';
 import type { LivestockDeath } from './LivestockDeath';
+import { ConstructionTransitions } from '../construction/ConstructionTransition';
 
 interface YardFloor {
     yard: Object3D;
@@ -24,6 +25,8 @@ interface YardFloor {
 /** Reconcile canonical identities; unchanged objects and the environment remain alive. */
 export class FjordEntities {
     readonly root = new Group();
+    private construction = new ConstructionTransitions();
+    private constructionInitialized = false;
     private entries = new Map<string, {
         signature: string;
         model: Object3D;
@@ -72,8 +75,15 @@ export class FjordEntities {
         mesh: Mesh<RingGeometry, MeshBasicMaterial>;
         radius: number;
     }>();
-    constructor(private models: FjordModels) {
+    constructor(private models: FjordModels, private animateConstruction = true) {
+        this.root.add(this.construction.root);
     }
+    resetConstructionBaseline() {
+        for (const transition of this.construction.inspect()) this.construction.finish(transition.key);
+        this.constructionInitialized = false;
+    }
+    inspectConstruction() { return this.construction.inspect(); }
+    updateConstruction(delta: number) { this.construction.update(delta); }
     setSeason(progress: number | null) {
         this.seasonProgress = progress;
         for (const entry of this.entries.values()) entry.season?.update(progress);
@@ -141,6 +151,7 @@ export class FjordEntities {
         for (const key of this.deaths.keys()) if (wanted.has(key)) this.finishDeath(key);
         for (const [key, entry] of this.entries)
             if (!wanted.has(key)) {
+                this.construction.finish(key);
                 entry.season?.dispose();
                 const facts = entry.model.userData.canonical;
                 const death = facts?.kind === 'cattle' && confirmedDeaths.has(facts.id)
@@ -158,6 +169,8 @@ export class FjordEntities {
             if (this.disposed || !current()) return;
             const signature = entity.asset + ':' + (entity.terrainAsset ?? '');
             let entry = this.entries.get(entity.selectionKey);
+            let transitionOld: typeof entry;
+            let construct = false;
             if (!entry || entry.signature !== signature) {
                 const model = await this.models.create(entity);
                 model.userData.asset = entity.asset;
@@ -165,7 +178,11 @@ export class FjordEntities {
                     this.remove(model);
                     return;
                 }
-                if (entry) {
+                this.construction.finish(entity.selectionKey);
+                construct = this.animateConstruction && this.constructionInitialized && entity.kind === 'building' &&
+                    (!entry || entity.status.level! > (entry.model.userData.canonical?.level ?? -1));
+                if (entry && construct) transitionOld = entry;
+                else if (entry) {
                     entry.season?.dispose();
                     this.remove(entry.model);
                 }
@@ -182,7 +199,11 @@ export class FjordEntities {
             entry.model.position.set(display.x, display.y, display.z);
             entry.model.rotation.y = display.rotation;
             await this.models.reconcile(entry.model, entity);
-            if (this.disposed || !current()) return;
+            if (this.disposed || !current()) {
+                transitionOld?.season?.dispose();
+                if (transitionOld) this.remove(transitionOld.model);
+                return;
+            }
             if (entity.kind === 'persona' && !entry.model.userData.appearance) entry.model.scale.setScalar(p.scale);
             if (entity.kind === 'cattle' && entity.status.assignment) {
                 const home = this.entries.get('building:' + entity.status.assignment)?.model;
@@ -213,7 +234,15 @@ export class FjordEntities {
                 entry.localBounds = new Box3().setFromObject(entry.model, true).translate(entry.model.position.clone().negate());
                 entry.boundsSignature = boundsSignature;
             }
+            if (construct) {
+                const old = transitionOld;
+                this.construction.play(entity.selectionKey, entry.model, old?.model, old ? () => {
+                    old.season?.dispose();
+                    this.remove(old.model);
+                } : undefined);
+            }
         }
+        this.constructionInitialized = true;
     }
     bounds(key: string) {
         const entry = this.entries.get(key);
@@ -381,6 +410,7 @@ export class FjordEntities {
     }
     dispose() {
         this.disposed = true;
+        this.construction.dispose();
         for (const key of this.deaths.keys()) this.finishDeath(key);
         for (const entry of this.entries.values()) {
             entry.season?.dispose();

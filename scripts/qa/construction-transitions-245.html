@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Construction transitions · #245</title>
+<style>
+    body { margin: 0; background: #d3dad0; color: #213c37; font: 14px system-ui; }
+    header { position: absolute; inset: 12px 12px auto; z-index: 1; max-width: 900px;
+        padding: 14px; background: #f8faf3ee; border: 1px solid #b6c3af; border-radius: 8px; }
+    h1 { font: 600 18px Georgia; margin: 0 0 8px; }
+    button, select { padding: 8px; margin: 3px; border: 1px solid #8c9c89; border-radius: 4px;
+        background: #fffef8; color: inherit; }
+    label { display: inline-flex; align-items: center; gap: 8px; margin: 5px; }
+    input[type=range] { width: 200px; }
+    output { display: block; margin: 6px 3px; font-size: 12px; }
+    canvas { display: block; }
+</style>
+<header>
+    <h1>Construction transitions · production houses · #245</h1>
+    <select id="scenario" aria-label="Construction scenario">
+        <option value="build">New hut · light scaffold</option>
+        <option value="upgrade">Hut → homestead · light scaffold</option>
+        <option value="longhouse">Homestead → longhouse · heavy scaffold</option>
+        <option value="heavy">Longhouse → great hall · heavy scaffold</option>
+        <option value="farm">Farm hut → farm homestead · yard excluded</option>
+        <option value="multiple">Three concurrent house builds</option>
+    </select>
+    <button id="replay">Replay</button><button id="pause">Play</button>
+    <label>Time <input id="time" type="range" min="0" max="3.3" step="0.01" value="1.2"></label>
+    <label><input id="debug" type="checkbox"> Construction envelopes</label>
+    <output id="status">Loading production assets…</output>
+    <output id="proof">In-memory canonical build/upgrade commands; no saved campaign is changed.</output>
+</header>
+<script type="module" src="./construction-transitions-245.ts"></script>
+</html>
