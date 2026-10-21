@@ -1,0 +1,64 @@
+{
+  "surveyComplete": true,
+  "sourceHashesUnchanged": true,
+  "sourceAccepted": 165,
+  "counts": {
+    "prepared-candidate": 25,
+    "campaign-capacity-failure": 128,
+    "invalid-geography": 93,
+    "campaign-preparation-failure": 12
+  },
+  "newPrepared": [
+    15,
+    25,
+    38,
+    43,
+    55,
+    79,
+    88,
+    95,
+    101,
+    102,
+    112,
+    126,
+    129,
+    144,
+    157,
+    165,
+    168,
+    171,
+    186,
+    195,
+    210,
+    223,
+    227
+  ],
+  "shortlist": [
+    15,
+    79,
+    88,
+    101,
+    112,
+    168,
+    195,
+    227
+  ],
+  "maximumRSSMiB": 681.60546875,
+  "elapsedMs": {
+    "median": 11287.8265,
+    "p95": 16104.069099999999,
+    "max": 20263.8534
+  },
+  "earliestStart": "2026-10-21T05:35:59.162Z",
+  "latestFinish": "2026-10-21T06:02:57.117Z",
+  "uniquePreparedTerrainHashes": 25,
+  "inspected": 23,
+  "exactRepeats": 23,
+  "pending": [
+    "Owner visual acceptance",
+    "Full-house scenery-aware home/shore navigation acceptance",
+    "New version registry plus candidate compact save/restart/worker admission tests",
+    "Normal Fjord loading and Low/Standard/phone viewport checks on the expanded version",
+    "Physical iPhone/iPad playtest"
+  ]
+}

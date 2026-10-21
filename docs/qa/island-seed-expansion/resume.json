@@ -1,0 +1,41 @@
+{
+  "files": 258,
+  "before": "696c7d9853e8a43bda504a6ad42e8280f2e2c0c5f4a00417ad78c7fef65e6d61",
+  "after": "696c7d9853e8a43bda504a6ad42e8280f2e2c0c5f4a00417ad78c7fef65e6d61",
+  "unchanged": true,
+  "output": {
+    "counts": {
+      "prepared-candidate": 25,
+      "campaign-capacity-failure": 128,
+      "invalid-geography": 93,
+      "campaign-preparation-failure": 12
+    },
+    "newPreparedCandidates": [
+      15,
+      25,
+      38,
+      43,
+      55,
+      79,
+      88,
+      95,
+      101,
+      102,
+      112,
+      126,
+      129,
+      144,
+      157,
+      165,
+      168,
+      171,
+      186,
+      195,
+      210,
+      223,
+      227
+    ],
+    "pending": 0,
+    "output": "scratch\\island-seed-expansion\\run-1"
+  }
+}

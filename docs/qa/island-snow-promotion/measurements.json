@@ -1,0 +1,1219 @@
+{
+  "generatedAt": "2026-10-21T06:53:30.279Z",
+  "recipe": "island-pool-v3",
+  "sources": {
+    "src/config/FjordTerrain.ts": "a1f793b77899ae997e47e9d3555a7fbadf0a558be566f89486e099ee1b502526",
+    "src/fjord-play/CampaignIsland.ts": "3f95d1bf8d63c0ae158093eb1393b72fb6ae69a7d1735d65228dabd6c89f7399",
+    "src/world/SeasonTint.ts": "a8490243510c9d972c4c526def9809e7cc8d66f30ec4cc9f0bf293968fd8e9ad",
+    "src/world/WorldFactory.ts": "94dafca549f4021c0a29ce731352ca32c3aa215c6786acaa4916c75c7c4d3207",
+    "src/world/TerrainShading.ts": "50a704b771bcd97ed0620112428932b4e2f6172d47560c6543cecf7fd56b3b12",
+    "src/world-generation/GenerateWorld.ts": "60f134d9f9bf5b68c234546d4bfb9aab20f8ab8c12dbe6d03714982d27fa7326",
+    "src/world-generation/IslandShape.ts": "34b832daaa23cae097d9495c0fde878d7c024b14b2e3760b5f00605716c9191b",
+    "src/world-generation/EnvironmentZoning.ts": "a13a27428ec82e9054610ddad58ec2477832f88bae89381056d757b5b160da1c",
+    "scripts/qa/validate-island-promotion.mjs": "db6e8a82a9674eb7bc276b8e2eb1ac5771b8723e171850ade9e81fd9c9b91bfa"
+  },
+  "method": "Canonical smooth-normal grid samples, not exact rasterized surface area. Four-neighbour connected snow regions.",
+  "preservation": "Phase-one survey files remain unchanged; v3 canonical worlds must equal their frozen v2 candidate fingerprints.",
+  "rows": [
+    {
+      "seed": 18,
+      "campaignSeed": 0,
+      "blueprintSha256": "564f858cda13aab38ac2d1b779b6a486c7db6a5a75db8f2e333ad6f853bd9451",
+      "canonicalUnchanged": true,
+      "saveRoundTrip": true,
+      "sameFounderRestart": true,
+      "rejectedRecipeMismatch": true,
+      "homeRoutes": [
+        {
+          "id": "house-1",
+          "campfireMetres": 27.485281374238575,
+          "shoreMetres": 64.14213562373092
+        },
+        {
+          "id": "house-10",
+          "campfireMetres": 35.24264068711928,
+          "shoreMetres": 100.08326112068515
+        },
+        {
+          "id": "house-2",
+          "campfireMetres": 35.24264068711929,
+          "shoreMetres": 88.62741699796949
+        },
+        {
+          "id": "house-3",
+          "campfireMetres": 54.31370849898476,
+          "shoreMetres": 109.7817459305201
+        },
+        {
+          "id": "house-4",
+          "campfireMetres": 54.31370849898476,
+          "shoreMetres": 86.14213562373092
+        },
+        {
+          "id": "house-5",
+          "campfireMetres": 56.41421356237309,
+          "shoreMetres": 121.25483399593895
+        },
+        {
+          "id": "house-6",
+          "campfireMetres": 58.07106781186547,
+          "shoreMetres": 109.79898987322329
+        },
+        {
+          "id": "house-7",
+          "campfireMetres": 70.2132034355964,
+          "shoreMetres": 130.9533188057739
+        },
+        {
+          "id": "house-8",
+          "campfireMetres": 74.2132034355964,
+          "shoreMetres": 108.97056274847711
+        },
+        {
+          "id": "house-9",
+          "campfireMetres": 80.07106781186546,
+          "shoreMetres": 140.76955262170054
+        }
+      ],
+      "shoreApproach": {
+        "x": 105,
+        "z": 188
+      },
+      "rivalRouteMetres": null,
+      "directRouteLimitation": "No safe route found within the exploration search limit. Choose a nearer destination.",
+      "fullFieldRivalRouteMetres": 860,
+      "groundPaths": 10,
+      "peakY": 45.9556884765625,
+      "previousSnowlineY": 41.348119628906254,
+      "snowlineY": 36.348119628906254,
+      "oldLandSnowPercent": 0.5805575858828443,
+      "newLandSnowPercent": 1.6101075493369532,
+      "regions": [
+        {
+          "samples": 462,
+          "approximateSquareMetres": 1848,
+          "center": {
+            "x": -108.14285714285714,
+            "z": -55.896103896103895
+          },
+          "minimumY": 36.39636993408203,
+          "maximumY": 45.9556884765625
+        },
+        {
+          "samples": 200,
+          "approximateSquareMetres": 800,
+          "center": {
+            "x": 62.69,
+            "z": -129.18
+          },
+          "minimumY": 36.358314514160156,
+          "maximumY": 38.99494171142578
+        },
+        {
+          "samples": 109,
+          "approximateSquareMetres": 436,
+          "center": {
+            "x": -21.834862385321102,
+            "z": 113.13761467889908
+          },
+          "minimumY": 36.358245849609375,
+          "maximumY": 39.30615997314453
+        }
+      ],
+      "preparationAndChecksMs": 15759.258300000001
+    },
+    {
+      "seed": 7,
+      "campaignSeed": 25,
+      "blueprintSha256": "2caacc7fd5426867930ca7da4931a69714c6024f045dfd8a7dac5ca27652feaf",
+      "canonicalUnchanged": true,
+      "saveRoundTrip": true,
+      "sameFounderRestart": true,
+      "rejectedRecipeMismatch": true,
+      "homeRoutes": [
+        {
+          "id": "house-1",
+          "campfireMetres": 28.07106781186548,
+          "shoreMetres": 63.21320343559643
+        },
+        {
+          "id": "house-10",
+          "campfireMetres": 35.82842712474619,
+          "shoreMetres": 61.35533905932734
+        },
+        {
+          "id": "house-2",
+          "campfireMetres": 42.65685424949238,
+          "shoreMetres": 88.52691193458114
+        },
+        {
+          "id": "house-3",
+          "campfireMetres": 47.72792206135785,
+          "shoreMetres": 85.84062043356589
+        },
+        {
+          "id": "house-4",
+          "campfireMetres": 57.828427124746185,
+          "shoreMetres": 48.24264068711929
+        },
+        {
+          "id": "house-5",
+          "campfireMetres": 60.556349186104036,
+          "shoreMetres": 79.41421356237309
+        },
+        {
+          "id": "house-6",
+          "campfireMetres": 70.7989898732233,
+          "shoreMetres": 108.87005768508878
+        },
+        {
+          "id": "house-7",
+          "campfireMetres": 74.01219330881973,
+          "shoreMetres": 90.52691193458118
+        },
+        {
+          "id": "house-8",
+          "campfireMetres": 80.94112549695424,
+          "shoreMetres": 108.38477631085021
+        },
+        {
+          "id": "house-9",
+          "campfireMetres": 86.21320343559638,
+          "shoreMetres": 63.355339059327335
+        }
+      ],
+      "shoreApproach": {
+        "x": 143,
+        "z": -186
+      },
+      "rivalRouteMetres": 220.9533188057745,
+      "directRouteLimitation": null,
+      "fullFieldRivalRouteMetres": 258,
+      "groundPaths": 10,
+      "peakY": 42.65959167480469,
+      "previousSnowlineY": 38.38163250732422,
+      "snowlineY": 33.38163250732422,
+      "oldLandSnowPercent": 0.21922866126287247,
+      "newLandSnowPercent": 0.7009547985115527,
+      "regions": [
+        {
+          "samples": 76,
+          "approximateSquareMetres": 304,
+          "center": {
+            "x": -17.394736842105264,
+            "z": 47.026315789473685
+          },
+          "minimumY": 39.39744186401367,
+          "maximumY": 42.65959167480469
+        },
+        {
+          "samples": 76,
+          "approximateSquareMetres": 304,
+          "center": {
+            "x": 14.552631578947368,
+            "z": 43.76315789473684
+          },
+          "minimumY": 34.30237579345703,
+          "maximumY": 38.14093780517578
+        },
+        {
+          "samples": 49,
+          "approximateSquareMetres": 196,
+          "center": {
+            "x": -178.24489795918367,
+            "z": 20.897959183673468
+          },
+          "minimumY": 33.64970016479492,
+          "maximumY": 36.13747024536133
+        },
+        {
+          "samples": 42,
+          "approximateSquareMetres": 168,
+          "center": {
+            "x": 63.333333333333336,
+            "z": -87.85714285714286
+          },
+          "minimumY": 33.48921203613281,
+          "maximumY": 34.5457763671875
+        }
+      ],
+      "preparationAndChecksMs": 13507.102299999999
+    },
+    {
+      "seed": 15,
+      "campaignSeed": 26,
+      "blueprintSha256": "2cad1c1743c5d1bcd9c2bcaa467a9290393edfd08bde709b8d2212c262d3cb20",
+      "canonicalUnchanged": true,
+      "saveRoundTrip": true,
+      "sameFounderRestart": true,
+      "rejectedRecipeMismatch": true,
+      "homeRoutes": [
+        {
+          "id": "house-1",
+          "campfireMetres": 30.656854249492383,
+          "shoreMetres": 109.78174593052012
+        },
+        {
+          "id": "house-10",
+          "campfireMetres": 31.485281374238575,
+          "shoreMetres": 123.5807358037434
+        },
+        {
+          "id": "house-2",
+          "campfireMetres": 49.14213562373092,
+          "shoreMetres": 88.08326112068515
+        },
+        {
+          "id": "house-3",
+          "campfireMetres": 40.89949493661166,
+          "shoreMetres": 127.19595949289318
+        },
+        {
+          "id": "house-4",
+          "campfireMetres": 42.07106781186546,
+          "shoreMetres": 80.66904755831206
+        },
+        {
+          "id": "house-5",
+          "campfireMetres": 48.21320343559643,
+          "shoreMetres": 140.30865786510134
+        },
+        {
+          "id": "house-6",
+          "campfireMetres": 53.242640687119284,
+          "shoreMetres": 135.6812408671318
+        },
+        {
+          "id": "house-7",
+          "campfireMetres": 56.7989898732233,
+          "shoreMetres": 148.89444430272832
+        },
+        {
+          "id": "house-8",
+          "campfireMetres": 59.6274169979695,
+          "shoreMetres": 125.98275605729683
+        },
+        {
+          "id": "house-9",
+          "campfireMetres": 59.18376618407353,
+          "shoreMetres": 55.35533905932734
+        }
+      ],
+      "shoreApproach": {
+        "x": -77,
+        "z": -248
+      },
+      "rivalRouteMetres": 244.75230867899762,
+      "directRouteLimitation": null,
+      "fullFieldRivalRouteMetres": 284,
+      "groundPaths": 10,
+      "peakY": 45.66956329345703,
+      "previousSnowlineY": 41.09060696411133,
+      "snowlineY": 36.09060696411133,
+      "oldLandSnowPercent": 0.4510152195869466,
+      "newLandSnowPercent": 1.4435969769790689,
+      "regions": [
+        {
+          "samples": 440,
+          "approximateSquareMetres": 1760,
+          "center": {
+            "x": 204.48636363636365,
+            "z": 100.68181818181819
+          },
+          "minimumY": 36.09677505493164,
+          "maximumY": 39.33418655395508
+        },
+        {
+          "samples": 288,
+          "approximateSquareMetres": 1152,
+          "center": {
+            "x": -121.31944444444444,
+            "z": -75.40277777777777
+          },
+          "minimumY": 39.688926696777344,
+          "maximumY": 45.66956329345703
+        },
+        {
+          "samples": 101,
+          "approximateSquareMetres": 404,
+          "center": {
+            "x": -95.02970297029702,
+            "z": 174.03960396039605
+          },
+          "minimumY": 36.79620361328125,
+          "maximumY": 40.24212646484375
+        }
+      ],
+      "preparationAndChecksMs": 18757.3413
+    },
+    {
+      "seed": 79,
+      "campaignSeed": 16,
+      "blueprintSha256": "bd2ea6f5df8a54654a19d93de696bdbbbca5b409ce4dd3b93602637b473ea54e",
+      "canonicalUnchanged": true,
+      "saveRoundTrip": true,
+      "sameFounderRestart": true,
+      "rejectedRecipeMismatch": true,
+      "homeRoutes": [
+        {
+          "id": "house-1",
+          "campfireMetres": 28.07106781186548,
+          "shoreMetres": 72.48528137423857
+        },
+        {
+          "id": "house-10",
+          "campfireMetres": 34.071067811865476,
+          "shoreMetres": 58.627416997969505
+        },
+        {
+          "id": "house-2",
+          "campfireMetres": 43.828427124746185,
+          "shoreMetres": 74.18376618407352
+        },
+        {
+          "id": "house-3",
+          "campfireMetres": 41.14213562373096,
+          "shoreMetres": 80.62741699796949
+        },
+        {
+          "id": "house-4",
+          "campfireMetres": 54.2132034355964,
+          "shoreMetres": 98.62741699796949
+        },
+        {
+          "id": "house-5",
+          "campfireMetres": 65.87005768508877,
+          "shoreMetres": 102.66904755831204
+        },
+        {
+          "id": "house-6",
+          "campfireMetres": 66.65685424949238,
+          "shoreMetres": 87.3969696196699
+        },
+        {
+          "id": "house-7",
+          "campfireMetres": 64.79898987322332,
+          "shoreMetres": 104.28427124746187
+        },
+        {
+          "id": "house-8",
+          "campfireMetres": 79.28427124746189,
+          "shoreMetres": 112.32590180780444
+        },
+        {
+          "id": "house-9",
+          "campfireMetres": 101.76955262170044,
+          "shoreMetres": 135.98275605729688
+        }
+      ],
+      "shoreApproach": {
+        "x": 192,
+        "z": 167
+      },
+      "rivalRouteMetres": 283.7989898732233,
+      "directRouteLimitation": null,
+      "fullFieldRivalRouteMetres": 294,
+      "groundPaths": 10,
+      "peakY": 37.84602737426758,
+      "previousSnowlineY": 34.04942463684082,
+      "snowlineY": 29.04942463684082,
+      "oldLandSnowPercent": 1.4579163594227327,
+      "newLandSnowPercent": 5.231223006425787,
+      "regions": [
+        {
+          "samples": 1649,
+          "approximateSquareMetres": 6596,
+          "center": {
+            "x": 13.27956337174045,
+            "z": 108.85385081867798
+          },
+          "minimumY": 29.06595802307129,
+          "maximumY": 37.84602737426758
+        },
+        {
+          "samples": 795,
+          "approximateSquareMetres": 3180,
+          "center": {
+            "x": 4.510691823899371,
+            "z": -98.99622641509434
+          },
+          "minimumY": 29.094661712646484,
+          "maximumY": 36.565101623535156
+        },
+        {
+          "samples": 17,
+          "approximateSquareMetres": 68,
+          "center": {
+            "x": -205.52941176470588,
+            "z": -28.235294117647058
+          },
+          "minimumY": 32.465110778808594,
+          "maximumY": 33.38747024536133
+        },
+        {
+          "samples": 13,
+          "approximateSquareMetres": 52,
+          "center": {
+            "x": -109.53846153846153,
+            "z": 85.84615384615384
+          },
+          "minimumY": 32.48625183105469,
+          "maximumY": 35.654747009277344
+        },
+        {
+          "samples": 3,
+          "approximateSquareMetres": 12,
+          "center": {
+            "x": -100,
+            "z": 42
+          },
+          "minimumY": 29.053926467895508,
+          "maximumY": 29.30635643005371
+        },
+        {
+          "samples": 3,
+          "approximateSquareMetres": 12,
+          "center": {
+            "x": -106,
+            "z": 66
+          },
+          "minimumY": 29.073165893554688,
+          "maximumY": 29.990690231323242
+        },
+        {
+          "samples": 2,
+          "approximateSquareMetres": 8,
+          "center": {
+            "x": -57,
+            "z": -138
+          },
+          "minimumY": 32.77096939086914,
+          "maximumY": 33.1502685546875
+        },
+        {
+          "samples": 1,
+          "approximateSquareMetres": 4,
+          "center": {
+            "x": -140,
+            "z": 94
+          },
+          "minimumY": 32.86811065673828,
+          "maximumY": 32.86811065673828
+        }
+      ],
+      "preparationAndChecksMs": 16137.9982
+    },
+    {
+      "seed": 88,
+      "campaignSeed": 1,
+      "blueprintSha256": "5d7d0df49fa6b18c3761fd0ba4aee870566eb8fe666b1d8aaaeaf41be16d9630",
+      "canonicalUnchanged": true,
+      "saveRoundTrip": true,
+      "sameFounderRestart": true,
+      "rejectedRecipeMismatch": true,
+      "homeRoutes": [
+        {
+          "id": "house-1",
+          "campfireMetres": 43.89949493661166,
+          "shoreMetres": 93.81118318204301
+        },
+        {
+          "id": "house-10",
+          "campfireMetres": 19.07106781186548,
+          "shoreMetres": 116.0121933088197
+        },
+        {
+          "id": "house-2",
+          "campfireMetres": 41.41421356237309,
+          "shoreMetres": 81.76955262170043
+        },
+        {
+          "id": "house-3",
+          "campfireMetres": 33.071067811865476,
+          "shoreMetres": 131.811183182043
+        },
+        {
+          "id": "house-4",
+          "campfireMetres": 53.07106781186547,
+          "shoreMetres": 120.4386001800125
+        },
+        {
+          "id": "house-5",
+          "campfireMetres": 55.07106781186546,
+          "shoreMetres": 146.1959594928933
+        },
+        {
+          "id": "house-6",
+          "campfireMetres": 67.55634918610403,
+          "shoreMetres": 63.76955262170043
+        },
+        {
+          "id": "house-7",
+          "campfireMetres": 67.55634918610403,
+          "shoreMetres": 81.66904755831207
+        },
+        {
+          "id": "house-8",
+          "campfireMetres": 43.89949493661166,
+          "shoreMetres": 144.0121933088198
+        },
+        {
+          "id": "house-9",
+          "campfireMetres": 73.2132034355964,
+          "shoreMetres": 109.4680374315354
+        }
+      ],
+      "shoreApproach": {
+        "x": -61,
+        "z": -198
+      },
+      "rivalRouteMetres": 236.24978336205606,
+      "directRouteLimitation": null,
+      "fullFieldRivalRouteMetres": 284,
+      "groundPaths": 10,
+      "peakY": 42.67982864379883,
+      "previousSnowlineY": 38.399845779418946,
+      "snowlineY": 33.399845779418946,
+      "oldLandSnowPercent": 1.2642986152919928,
+      "newLandSnowPercent": 4.906682721252258,
+      "regions": [
+        {
+          "samples": 1372,
+          "approximateSquareMetres": 5488,
+          "center": {
+            "x": 36.411078717201164,
+            "z": 126.09037900874635
+          },
+          "minimumY": 33.459754943847656,
+          "maximumY": 42.67982864379883
+        },
+        {
+          "samples": 561,
+          "approximateSquareMetres": 2244,
+          "center": {
+            "x": -130.0427807486631,
+            "z": -13.090909090909092
+          },
+          "minimumY": 33.40275955200195,
+          "maximumY": 35.312049865722656
+        },
+        {
+          "samples": 498,
+          "approximateSquareMetres": 1992,
+          "center": {
+            "x": 93.34538152610442,
+            "z": -105.59437751004016
+          },
+          "minimumY": 33.41160583496094,
+          "maximumY": 37.930049896240234
+        },
+        {
+          "samples": 14,
+          "approximateSquareMetres": 56,
+          "center": {
+            "x": -53,
+            "z": -24.428571428571427
+          },
+          "minimumY": 33.43747329711914,
+          "maximumY": 34.046878814697266
+        }
+      ],
+      "preparationAndChecksMs": 15235.2064
+    },
+    {
+      "seed": 101,
+      "campaignSeed": 5,
+      "blueprintSha256": "e89f3af840fd64a68785f0c0d3f9355cc83d61b9d63223c141ca4fb80b92113f",
+      "canonicalUnchanged": true,
+      "saveRoundTrip": true,
+      "sameFounderRestart": true,
+      "rejectedRecipeMismatch": true,
+      "homeRoutes": [
+        {
+          "id": "house-1",
+          "campfireMetres": 34.31370849898477,
+          "shoreMetres": 101.97056274847711
+        },
+        {
+          "id": "house-10",
+          "campfireMetres": 37.82842712474619,
+          "shoreMetres": 99.7695526217004
+        },
+        {
+          "id": "house-2",
+          "campfireMetres": 48.31370849898475,
+          "shoreMetres": 81.08326112068518
+        },
+        {
+          "id": "house-3",
+          "campfireMetres": 60.656854249492376,
+          "shoreMetres": 109.56854249492369
+        },
+        {
+          "id": "house-4",
+          "campfireMetres": 57.426406871192825,
+          "shoreMetres": 59.08326112068519
+        },
+        {
+          "id": "house-5",
+          "campfireMetres": 69.76955262170041,
+          "shoreMetres": 131.5685424949237
+        },
+        {
+          "id": "house-6",
+          "campfireMetres": 71.97056274847714,
+          "shoreMetres": 116.05382386916227
+        },
+        {
+          "id": "house-7",
+          "campfireMetres": 70.11269837220804,
+          "shoreMetres": 130.88225099390846
+        },
+        {
+          "id": "house-8",
+          "campfireMetres": 84.63961030678921,
+          "shoreMetres": 155.36753236814704
+        },
+        {
+          "id": "house-9",
+          "campfireMetres": 95.28427124746187,
+          "shoreMetres": 144.33809511662412
+        }
+      ],
+      "shoreApproach": {
+        "x": -173,
+        "z": 161
+      },
+      "rivalRouteMetres": 257.42135623731025,
+      "directRouteLimitation": null,
+      "fullFieldRivalRouteMetres": 304,
+      "groundPaths": 10,
+      "peakY": 42.73712158203125,
+      "previousSnowlineY": 38.451409423828125,
+      "snowlineY": 33.451409423828125,
+      "oldLandSnowPercent": 2.0613309581371677,
+      "newLandSnowPercent": 3.893625143147983,
+      "regions": [
+        {
+          "samples": 1062,
+          "approximateSquareMetres": 4248,
+          "center": {
+            "x": 223.69114877589453,
+            "z": 25.661016949152543
+          },
+          "minimumY": 33.46027755737305,
+          "maximumY": 42.73712158203125
+        },
+        {
+          "samples": 308,
+          "approximateSquareMetres": 1232,
+          "center": {
+            "x": 17.623376623376622,
+            "z": -142.13636363636363
+          },
+          "minimumY": 33.455562591552734,
+          "maximumY": 36.184661865234375
+        },
+        {
+          "samples": 193,
+          "approximateSquareMetres": 772,
+          "center": {
+            "x": 112.02072538860104,
+            "z": 144.5181347150259
+          },
+          "minimumY": 33.46956253051758,
+          "maximumY": 38.380516052246094
+        },
+        {
+          "samples": 155,
+          "approximateSquareMetres": 620,
+          "center": {
+            "x": -12.180645161290322,
+            "z": 164.2709677419355
+          },
+          "minimumY": 33.61335372924805,
+          "maximumY": 38.6530876159668
+        },
+        {
+          "samples": 78,
+          "approximateSquareMetres": 312,
+          "center": {
+            "x": 5.512820512820513,
+            "z": 31.41025641025641
+          },
+          "minimumY": 38.305030822753906,
+          "maximumY": 40.8919792175293
+        },
+        {
+          "samples": 40,
+          "approximateSquareMetres": 160,
+          "center": {
+            "x": -20.65,
+            "z": 62.55
+          },
+          "minimumY": 35.16023635864258,
+          "maximumY": 37.770912170410156
+        }
+      ],
+      "preparationAndChecksMs": 16217.605799999998
+    },
+    {
+      "seed": 112,
+      "campaignSeed": 8,
+      "blueprintSha256": "4f4f86d4c589862a2111588cd5188075daacbd0b5e37fe8721d123e6a4a469f4",
+      "canonicalUnchanged": true,
+      "saveRoundTrip": true,
+      "sameFounderRestart": true,
+      "rejectedRecipeMismatch": true,
+      "homeRoutes": [
+        {
+          "id": "house-1",
+          "campfireMetres": 25,
+          "shoreMetres": 104.84062043356587
+        },
+        {
+          "id": "house-10",
+          "campfireMetres": 38.41421356237309,
+          "shoreMetres": 122.69848480983495
+        },
+        {
+          "id": "house-2",
+          "campfireMetres": 36.899494936611674,
+          "shoreMetres": 110.41421356237309
+        },
+        {
+          "id": "house-3",
+          "campfireMetres": 51.97056274847713,
+          "shoreMetres": 131.811183182043
+        },
+        {
+          "id": "house-4",
+          "campfireMetres": 58.89949493661166,
+          "shoreMetres": 132.4142135623731
+        },
+        {
+          "id": "house-5",
+          "campfireMetres": 60.41421356237309,
+          "shoreMetres": 144.69848480983504
+        },
+        {
+          "id": "house-6",
+          "campfireMetres": 73.97056274847711,
+          "shoreMetres": 153.811183182043
+        },
+        {
+          "id": "house-7",
+          "campfireMetres": 82.55634918610403,
+          "shoreMetres": 156.07106781186548
+        },
+        {
+          "id": "house-8",
+          "campfireMetres": 84.07106781186546,
+          "shoreMetres": 165.04163056034267
+        },
+        {
+          "id": "house-9",
+          "campfireMetres": 93.38477631085023,
+          "shoreMetres": 174.1543289325507
+        }
+      ],
+      "shoreApproach": {
+        "x": 22,
+        "z": 250
+      },
+      "rivalRouteMetres": 256.6518036156097,
+      "directRouteLimitation": null,
+      "fullFieldRivalRouteMetres": 300,
+      "groundPaths": 10,
+      "peakY": 43.219688415527344,
+      "previousSnowlineY": 38.88571957397461,
+      "snowlineY": 33.88571957397461,
+      "oldLandSnowPercent": 1.4223122481780752,
+      "newLandSnowPercent": 4.986899755608886,
+      "regions": [
+        {
+          "samples": 2023,
+          "approximateSquareMetres": 8092,
+          "center": {
+            "x": 110.42609985170539,
+            "z": 76.86999505684626
+          },
+          "minimumY": 33.88884353637695,
+          "maximumY": 43.219688415527344
+        },
+        {
+          "samples": 208,
+          "approximateSquareMetres": 832,
+          "center": {
+            "x": 233.34615384615384,
+            "z": 71.1826923076923
+          },
+          "minimumY": 33.90867614746094,
+          "maximumY": 36.36043930053711
+        },
+        {
+          "samples": 34,
+          "approximateSquareMetres": 136,
+          "center": {
+            "x": -72.52941176470588,
+            "z": 136.11764705882354
+          },
+          "minimumY": 33.901424407958984,
+          "maximumY": 34.32124328613281
+        }
+      ],
+      "preparationAndChecksMs": 15273.6983
+    },
+    {
+      "seed": 168,
+      "campaignSeed": 9,
+      "blueprintSha256": "7efbe5563f1a8f0ebf8bc7515d84ff771d143362d23af0360701b7309794e14a",
+      "canonicalUnchanged": true,
+      "saveRoundTrip": true,
+      "sameFounderRestart": true,
+      "rejectedRecipeMismatch": true,
+      "homeRoutes": [
+        {
+          "id": "house-1",
+          "campfireMetres": 32.24264068711929,
+          "shoreMetres": 71.48528137423858
+        },
+        {
+          "id": "house-10",
+          "campfireMetres": 39.41421356237309,
+          "shoreMetres": 90.25483399593895
+        },
+        {
+          "id": "house-2",
+          "campfireMetres": 31.89949493661167,
+          "shoreMetres": 94.31370849898475
+        },
+        {
+          "id": "house-3",
+          "campfireMetres": 34.72792206135786,
+          "shoreMetres": 47
+        },
+        {
+          "id": "house-4",
+          "campfireMetres": 44.97056274847712,
+          "shoreMetres": 110.69848480983495
+        },
+        {
+          "id": "house-5",
+          "campfireMetres": 57.213203435596405,
+          "shoreMetres": 76.69848480983497
+        },
+        {
+          "id": "house-6",
+          "campfireMetres": 69.45584412271567,
+          "shoreMetres": 124.05382386916227
+        },
+        {
+          "id": "house-7",
+          "campfireMetres": 66.97056274847711,
+          "shoreMetres": 132.69848480983495
+        },
+        {
+          "id": "house-8",
+          "campfireMetres": 89.94112549695423,
+          "shoreMetres": 134.33809511662412
+        },
+        {
+          "id": "house-9",
+          "campfireMetres": 87.94112549695424,
+          "shoreMetres": 146.0538238691623
+        }
+      ],
+      "shoreApproach": {
+        "x": 100,
+        "z": 103
+      },
+      "rivalRouteMetres": 409.7056274847726,
+      "directRouteLimitation": null,
+      "fullFieldRivalRouteMetres": 468,
+      "groundPaths": 10,
+      "peakY": 42.60597610473633,
+      "previousSnowlineY": 38.333378494262696,
+      "snowlineY": 33.333378494262696,
+      "oldLandSnowPercent": 1.3830270761638854,
+      "newLandSnowPercent": 2.993312122589442,
+      "regions": [
+        {
+          "samples": 1009,
+          "approximateSquareMetres": 4036,
+          "center": {
+            "x": -131.20911793855302,
+            "z": -12.251734390485629
+          },
+          "minimumY": 34.58467102050781,
+          "maximumY": 42.60597610473633
+        },
+        {
+          "samples": 365,
+          "approximateSquareMetres": 1460,
+          "center": {
+            "x": -7.293150684931507,
+            "z": 180.64657534246575
+          },
+          "minimumY": 33.334388732910156,
+          "maximumY": 42.58991622924805
+        },
+        {
+          "samples": 9,
+          "approximateSquareMetres": 36,
+          "center": {
+            "x": -111.33333333333333,
+            "z": 21.333333333333332
+          },
+          "minimumY": 34.337730407714844,
+          "maximumY": 35.30155563354492
+        }
+      ],
+      "preparationAndChecksMs": 14334.8697
+    },
+    {
+      "seed": 195,
+      "campaignSeed": 4,
+      "blueprintSha256": "df6de59c0b5380d476c8559f80a5cc5bd77e140b7bd484d4241f42d455362aaf",
+      "canonicalUnchanged": true,
+      "saveRoundTrip": true,
+      "sameFounderRestart": true,
+      "rejectedRecipeMismatch": true,
+      "homeRoutes": [
+        {
+          "id": "house-1",
+          "campfireMetres": 36.65685424949238,
+          "shoreMetres": 108.97056274847711
+        },
+        {
+          "id": "house-10",
+          "campfireMetres": 27,
+          "shoreMetres": 93.59797974644658
+        },
+        {
+          "id": "house-2",
+          "campfireMetres": 40.899494936611646,
+          "shoreMetres": 112.56854249492372
+        },
+        {
+          "id": "house-3",
+          "campfireMetres": 44.55634918610405,
+          "shoreMetres": 83.31370849898474
+        },
+        {
+          "id": "house-4",
+          "campfireMetres": 54.89949493661167,
+          "shoreMetres": 112.52691193458112
+        },
+        {
+          "id": "house-5",
+          "campfireMetres": 49,
+          "shoreMetres": 71.59797974644658
+        },
+        {
+          "id": "house-6",
+          "campfireMetres": 59.97056274847713,
+          "shoreMetres": 110.08326112068514
+        },
+        {
+          "id": "house-7",
+          "campfireMetres": 65.38477631085021,
+          "shoreMetres": 114.50966799187795
+        },
+        {
+          "id": "house-8",
+          "campfireMetres": 88.21320343559638,
+          "shoreMetres": 84.7695526217004
+        },
+        {
+          "id": "house-9",
+          "campfireMetres": 90.69848480983497,
+          "shoreMetres": 113.39696961966987
+        }
+      ],
+      "shoreApproach": {
+        "x": 43,
+        "z": 72
+      },
+      "rivalRouteMetres": 272.50966799187813,
+      "directRouteLimitation": null,
+      "fullFieldRivalRouteMetres": 320,
+      "groundPaths": 10,
+      "peakY": 42.56141662597656,
+      "previousSnowlineY": 38.293274963378906,
+      "snowlineY": 33.293274963378906,
+      "oldLandSnowPercent": 1.376847534966769,
+      "newLandSnowPercent": 3.3111794464834836,
+      "regions": [
+        {
+          "samples": 1217,
+          "approximateSquareMetres": 4868,
+          "center": {
+            "x": -103.69926047658176,
+            "z": -87.90139687756779
+          },
+          "minimumY": 34.19837951660156,
+          "maximumY": 42.56141662597656
+        },
+        {
+          "samples": 165,
+          "approximateSquareMetres": 660,
+          "center": {
+            "x": 217.6969696969697,
+            "z": 8.593939393939394
+          },
+          "minimumY": 33.35554122924805,
+          "maximumY": 36.75058364868164
+        },
+        {
+          "samples": 118,
+          "approximateSquareMetres": 472,
+          "center": {
+            "x": -93.84745762711864,
+            "z": 130.01694915254237
+          },
+          "minimumY": 33.49565505981445,
+          "maximumY": 39.448951721191406
+        },
+        {
+          "samples": 92,
+          "approximateSquareMetres": 368,
+          "center": {
+            "x": 117.06521739130434,
+            "z": -47.108695652173914
+          },
+          "minimumY": 38.84452438354492,
+          "maximumY": 41.22127151489258
+        },
+        {
+          "samples": 75,
+          "approximateSquareMetres": 300,
+          "center": {
+            "x": 90.37333333333333,
+            "z": 136.72
+          },
+          "minimumY": 33.300201416015625,
+          "maximumY": 36.79582595825195
+        },
+        {
+          "samples": 1,
+          "approximateSquareMetres": 4,
+          "center": {
+            "x": 152,
+            "z": -22
+          },
+          "minimumY": 33.56636428833008,
+          "maximumY": 33.56636428833008
+        },
+        {
+          "samples": 1,
+          "approximateSquareMetres": 4,
+          "center": {
+            "x": 74,
+            "z": 112
+          },
+          "minimumY": 35.6258544921875,
+          "maximumY": 35.6258544921875
+        }
+      ],
+      "preparationAndChecksMs": 30110.173800000004
+    },
+    {
+      "seed": 227,
+      "campaignSeed": 2,
+      "blueprintSha256": "ff35251563796bc0387239972fd62f3ebac3e369a31daf4112265201d048122c",
+      "canonicalUnchanged": true,
+      "saveRoundTrip": true,
+      "sameFounderRestart": true,
+      "rejectedRecipeMismatch": true,
+      "homeRoutes": [
+        {
+          "id": "house-1",
+          "campfireMetres": 40.24264068711928,
+          "shoreMetres": 131.53910524340085
+        },
+        {
+          "id": "house-10",
+          "campfireMetres": 32.24264068711929,
+          "shoreMetres": 103.9827560572968
+        },
+        {
+          "id": "house-2",
+          "campfireMetres": 30.242640687119287,
+          "shoreMetres": 100.5685424949237
+        },
+        {
+          "id": "house-3",
+          "campfireMetres": 32.242640687119284,
+          "shoreMetres": 136.95331880577393
+        },
+        {
+          "id": "house-4",
+          "campfireMetres": 40.38477631085024,
+          "shoreMetres": 80.32590180780446
+        },
+        {
+          "id": "house-5",
+          "campfireMetres": 48.72792206135785,
+          "shoreMetres": 122.56854249492369
+        },
+        {
+          "id": "house-6",
+          "campfireMetres": 41.21320343559644,
+          "shoreMetres": 127.63961030678917
+        },
+        {
+          "id": "house-7",
+          "campfireMetres": 55.07106781186547,
+          "shoreMetres": 159.29646455628173
+        },
+        {
+          "id": "house-8",
+          "campfireMetres": 61.213203435596405,
+          "shoreMetres": 114.08326112068514
+        },
+        {
+          "id": "house-9",
+          "campfireMetres": 80.04163056034258,
+          "shoreMetres": 127.41421356237309
+        }
+      ],
+      "shoreApproach": {
+        "x": 146,
+        "z": 54
+      },
+      "rivalRouteMetres": 278.8528137423859,
+      "directRouteLimitation": null,
+      "fullFieldRivalRouteMetres": 326,
+      "groundPaths": 10,
+      "peakY": 39.34825897216797,
+      "previousSnowlineY": 35.40143307495117,
+      "snowlineY": 30.40143307495117,
+      "oldLandSnowPercent": 1.745171532933846,
+      "newLandSnowPercent": 2.740707140640294,
+      "regions": [
+        {
+          "samples": 900,
+          "approximateSquareMetres": 3600,
+          "center": {
+            "x": 15.137777777777778,
+            "z": 139.74444444444444
+          },
+          "minimumY": 33.08949661254883,
+          "maximumY": 37.31478500366211
+        },
+        {
+          "samples": 248,
+          "approximateSquareMetres": 992,
+          "center": {
+            "x": -19.217741935483872,
+            "z": -10.008064516129032
+          },
+          "minimumY": 30.452327728271484,
+          "maximumY": 39.34825897216797
+        }
+      ],
+      "preparationAndChecksMs": 27779.0115
+    }
+  ]
+}

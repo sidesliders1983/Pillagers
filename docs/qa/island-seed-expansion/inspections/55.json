@@ -1,0 +1,119 @@
+{
+  "seed": 55,
+  "sweepProtocolSha256": "ad008a173d4c78555668995e006192294ec9eb1b1edd65cc9d8abfcdeafe4077",
+  "inspectionRunnerSha256": "468061460523e501a1f777162342e6b5096af5bb469d23a5b4efac9f5954c728",
+  "repeatedBlueprintIdentical": true,
+  "repeatedPlanIdentical": true,
+  "checks": {
+    "jettySourceSha256": "3f80cd720c6f61dc2a840c1feb8b02dcd39db3d6981093696f98f269f9142ef3",
+    "independentFoundingHouseholds": 10,
+    "convertedHouses": 10,
+    "groundPaths": 10,
+    "farmyard": true,
+    "longhouse": true,
+    "allEntitiesPlaced": true,
+    "diagnostics": [],
+    "authoredFootprints": [
+      {
+        "id": "house-1",
+        "asset": "farmHut",
+        "fits": true
+      },
+      {
+        "id": "house-10",
+        "asset": "hut",
+        "fits": true
+      },
+      {
+        "id": "house-2",
+        "asset": "longhouse",
+        "fits": true
+      },
+      {
+        "id": "house-3",
+        "asset": "hut",
+        "fits": true
+      },
+      {
+        "id": "house-4",
+        "asset": "hut",
+        "fits": true
+      },
+      {
+        "id": "house-5",
+        "asset": "hut",
+        "fits": true
+      },
+      {
+        "id": "house-6",
+        "asset": "hut",
+        "fits": true
+      },
+      {
+        "id": "house-7",
+        "asset": "hut",
+        "fits": true
+      },
+      {
+        "id": "house-8",
+        "asset": "hut",
+        "fits": true
+      },
+      {
+        "id": "house-9",
+        "asset": "hut",
+        "fits": true
+      }
+    ],
+    "physicalRoutes": {
+      "outboundMetres": 372.55129855222106,
+      "inboundMetres": 372.55129855222117,
+      "adjustedRivalTarget": true
+    },
+    "travelSaveRoundTrip": true,
+    "travel": {
+      "groupId": "group-1",
+      "members": 1,
+      "initialFood": 15,
+      "foodCharged": 8,
+      "outboundTicks": 192,
+      "stateAtTarget": "Exploring",
+      "finalStatus": "Returned",
+      "currentFoodPerMember": 8,
+      "testCapacityOverride": false,
+      "returned": true
+    }
+  },
+  "findings": [
+    "Authored pier: The curated island has no supported parallel pier landing."
+  ],
+  "cohorts": [
+    {
+      "campaignSeed": 55,
+      "playerSpecies": "cattle",
+      "rivalSpecies": "pig",
+      "rivalHouseholds": 9,
+      "allRivalEntitiesPlaced": true,
+      "rivalInitiallyHidden": true,
+      "originalHumanFoundersUnchanged": true
+    },
+    {
+      "campaignSeed": 10055,
+      "playerSpecies": "goat",
+      "rivalSpecies": "sheep",
+      "rivalHouseholds": 8,
+      "allRivalEntitiesPlaced": true,
+      "rivalInitiallyHidden": true,
+      "originalHumanFoundersUnchanged": true
+    },
+    {
+      "campaignSeed": 20055,
+      "playerSpecies": "sheep",
+      "rivalSpecies": "goat",
+      "rivalHouseholds": 8,
+      "allRivalEntitiesPlaced": true,
+      "rivalInitiallyHidden": true,
+      "originalHumanFoundersUnchanged": true
+    }
+  ]
+}

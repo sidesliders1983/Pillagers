@@ -68,7 +68,7 @@ test('a worker-produced campaign keeps the pinned island recipe, foundations and
  adoptCampaignIsland(32,result.world,result.plan);
  assert.equal(createCampaignIsland(32),result.world);
  assert.ok(Object.isFrozen(result.world.terrain.heights));
- assert.equal(campaignIslandPlan(result.world).recipe.version,'island-pool-v2');
+ assert.equal(campaignIslandPlan(result.world).recipe.version,'island-pool-v3');
  assert.throws(()=>adoptCampaignIsland(1,result.world,{...result.plan,recipe:{...result.plan.recipe,seed:999}}),/recipe/);
 });
 

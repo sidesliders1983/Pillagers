@@ -32,7 +32,8 @@ test('v1 campaign geography replays the exact merged-main fingerprint on both cu
 test('v2 groups trees near each village without raising asset quotas or changing terrain/foundations', () => {
     for (const seed of [17, 32]) {
         const old = createCampaignIsland(seed, islandRecipe(seed, 'island-pool-v1'));
-        const world = createCampaignIsland(seed), plan = campaignIslandPlan(world);
+        const world = createCampaignIsland(seed, islandRecipe(seed, 'island-pool-v2'));
+        const plan = campaignIslandPlan(world);
         assert.equal(plan.recipe.version, 'island-pool-v2');
         assert.notEqual(world, old);
         for (const key of ['terrain', 'coast', 'environment', 'biomes', 'settlement', 'rivalSite'])
@@ -87,7 +88,7 @@ test('both recipe versions round-trip and coexist in caches, workers, restores a
         assert.throws(() => owner.importJSON(JSON.stringify(damaged.fjord)), /recipe version/);
         assert.equal(owner.persist(), snapshot, 'Rejected versions cannot partially change a campaign');
     }
-    assert.equal(campaignIslandPlan(createCampaignIsland(17)).recipe.version, 'island-pool-v2');
+    assert.equal(campaignIslandPlan(createCampaignIsland(17)).recipe.version, 'island-pool-v3');
 });
 
 test('recipe choice and scenery do not change ordinary gameplay commands or Core RNG', () => {
