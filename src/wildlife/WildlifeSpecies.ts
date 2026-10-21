@@ -1,5 +1,12 @@
 export type WildlifeMovement = 'ground' | 'air' | 'water' | 'shore';
-export type HabitatTag = 'coast' | 'fjord_water' | 'rocky_shore' | 'cliff' | 'forest_edge' | 'deep_forest' | 'lowland' | 'wet_lowland' | 'foothill' | 'mountain' | 'alpine';
+export type HabitatTag = 'coast' | 'fjord_water' | 'deep_coastal_water' | 'outer_coast' | 'rocky_shore' | 'cliff' | 'forest_edge' | 'deep_forest' | 'lowland' | 'wet_lowland' | 'foothill' | 'mountain' | 'alpine';
+export interface MarineEncounterProfile {
+    behavior: 'humpback_surface_sighting';
+    canonicalLength: number;
+    rarity: 'rare';
+    initialDelay: readonly [number, number];
+    cooldown: readonly [number, number];
+}
 export interface WildlifeVariant {
     id: string;
     asset: string;
@@ -15,6 +22,9 @@ export interface WildlifeVariant {
     maximumCoastDistance?: number;
     minimumCoastDistance?: number;
     minimumElevation?: number;
+    minimumDepth?: number;
+    encounter?: MarineEncounterProfile;
+    behavior?: 'otter_shore_water';
     flightHeight?: readonly [
         number,
         number
@@ -75,6 +85,7 @@ export const wildlifeSpecies: readonly WildlifeSpecies[] = [
                 habitats: ['coast', 'rocky_shore'], radius: 5, speed: .3, clearance: .6,
                 avoidSettlement: 35, shyDistance: 18, fleeSpeed: 1.2, maximumCoastDistance: 9 },
             { id: 'water', asset: 'otter', movement: 'water', count: 1,
+                behavior: 'otter_shore_water',
                 habitats: ['fjord_water'], radius: 6, speed: .4, clearance: .25,
                 avoidSettlement: 35, maximumCoastDistance: 22 },
         ] },
@@ -85,6 +96,13 @@ export const wildlifeSpecies: readonly WildlifeSpecies[] = [
             { id: 'water', asset: 'seal', movement: 'water', count: 2,
                 habitats: ['fjord_water'], radius: 9, speed: .45, clearance: .55,
                 avoidSettlement: 35, maximumCoastDistance: 28 },
+        ] },
+    { id: 'humpback-whale', label: 'Humpback whale', group: 'solo', variants: [
+            { id: 'visiting', asset: 'humpback', movement: 'water', count: 1,
+                habitats: ['fjord_water', 'deep_coastal_water', 'outer_coast'],
+                radius: 0, speed: 2, clearance: 7.1, avoidSettlement: 0, minimumDepth: 6.5,
+                encounter: { behavior: 'humpback_surface_sighting', canonicalLength: 14,
+                    rarity: 'rare', initialDelay: [240, 480], cooldown: [720, 1200] } },
         ] },
     { id: 'rabbit', label: 'Rabbit', group: 'pair', groupRadius: 16, variants: [
             { id: 'hopping', asset: 'rabbit', movement: 'ground', count: 2,

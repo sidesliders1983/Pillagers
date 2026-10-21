@@ -1,5 +1,10 @@
 # Wildlife v0.1 — Fjordside (#213)
 
+Current marine encounters and otter back-floating extend this runtime in
+[Wildlife v0.2 (#243)](WILDLIFE-MARINE-243.md). In physical campaigns, the canonical
+motion/sighting snapshots described in [#226](WILDLIFE-SIGHTINGS-226.md) take
+precedence over reconstructing the opening population on reload.
+
 Wildlife is a visual population in the loaded Fjordside world. It does not change
 world generation, navigation, the simulation clock, residents, resources, hunting,
 food production, rival settlements or campaign RNG. It is not saved as ecology.

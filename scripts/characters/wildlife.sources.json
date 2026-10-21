@@ -77,6 +77,13 @@
     "metres": 0.6
   },
   {
+    "id": "humpback",
+    "file": "Whale.glb",
+    "reference": "body-length",
+    "straightenTail": true,
+    "metres": 14
+  },
+  {
     "id": "rabbit",
     "file": "bunny.glb",
     "reference": "standing-height",

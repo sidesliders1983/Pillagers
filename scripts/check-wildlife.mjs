@@ -5,7 +5,8 @@ import { loadTypeScript } from './load-typescript.mjs';
 const { createCampaignIsland, islandRecipe, campaignIslandPlan } = loadTypeScript(new URL('../src/fjord-play/CampaignIsland.ts', import.meta.url));
 const { WildlifePopulation } = loadTypeScript(new URL('../src/wildlife/WildlifePopulation.ts', import.meta.url));
 const { wildlifeSpecies, wildlifeTerritoryGap } = loadTypeScript(new URL('../src/wildlife/WildlifeSpecies.ts', import.meta.url));
-const expected = wildlifeSpecies.flatMap(species => species.variants).reduce((count, variant) => count + variant.count, 0);
+const expected = wildlifeSpecies.flatMap(species => species.variants)
+    .filter(variant => !variant.encounter).reduce((count, variant) => count + variant.count, 0);
 const hash = world => createHash('sha256').update(JSON.stringify(world)).digest('hex');
 const directory = 'output/wildlife-213';
 await mkdir(directory, { recursive: true });
@@ -16,9 +17,10 @@ for (const seed of seeds) {
     const started = performance.now();
     const population = new WildlifePopulation(world);
     const planningMs = performance.now() - started;
-    assert.equal(population.actors.length, expected, JSON.stringify(population.diagnostics));
-    assert.deepEqual(population.diagnostics, []);
-    const mammals = population.actors.filter(actor => wildlifeSpecies.find(species => species.id === actor.species).group === 'solo');
+    assert.equal(population.actors.filter(actor => !actor.marine).length, expected, JSON.stringify(population.diagnostics));
+    assert.deepEqual(population.diagnostics.filter(message => !message.includes('visits disabled')), []);
+    const mammals = population.actors.filter(actor => actor.variant.movement === 'ground'
+        && wildlifeSpecies.find(species => species.id === actor.species).group === 'solo');
     let minimumTerritoryGap = Infinity;
     for (let i = 0; i < mammals.length; i++)
         for (let j = i + 1; j < mammals.length; j++) {

@@ -14,6 +14,7 @@ import { repairReindeerHindLeg } from './characters/repair-reindeer-rig.mjs';
 const sourceRoot = resolve(process.argv[2] ?? 'Assets/Characters/Wildlife');
 const definitions = JSON.parse(await readFile(new URL('./characters/wildlife.sources.json', import.meta.url), 'utf8'));
 const destination = 'public/wildlife';
+const only = process.argv.find(arg => arg.startsWith('--only='))?.slice(7).split(',');
 await mkdir(destination, { recursive: true });
 await Promise.all([Decoder.ready, MeshoptEncoder.ready]);
 const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({ 'meshopt.decoder': Decoder, 'meshopt.encoder': MeshoptEncoder });
@@ -31,8 +32,10 @@ function pose(gltf, time = 0) {
     gltf.scene.updateMatrixWorld(true);
     return new Box3().setFromObject(gltf.scene, true);
 }
-const entries = [];
+const entries = only ? JSON.parse(await readFile(destination + '/manifest.json', 'utf8')).entries
+    .filter(entry => !only.includes(entry.id)) : [];
 for (const definition of definitions) {
+    if (only && !only.includes(definition.id)) continue;
     const original = await readFile(resolve(sourceRoot, definition.file));
     const doc = await io.readBinary(original), root = doc.getRoot();
     const triangles = root.listMeshes().reduce((sum, m) => sum + m.listPrimitives().reduce((n, p) => n + (p.getIndices()?.getCount() ?? p.getAttribute('POSITION').getCount()) / 3, 0), 0);
@@ -64,6 +67,22 @@ for (const definition of definitions) {
             }
         }
         operations.push('Keep source walk loop; remove only horizontal Hips root motion');
+    }
+    if (definition.straightenTail) {
+        const gltf = await parse(Buffer.from(await io.writeBinary(doc)));
+        for (let index = 26; index >= 18; index--) {
+            const name = 'Bone_' + String(index).padStart(3, '0');
+            const bone = gltf.scene.getObjectByName(name);
+            const tip = gltf.scene.getObjectByName('Bone_' + String(index - 1).padStart(3, '0'));
+            assert.ok(bone && tip, 'Expected humpback tail chain ' + name);
+            gltf.scene.updateMatrixWorld(true);
+            const current = tip.getWorldPosition(new Vector3()).sub(bone.getWorldPosition(new Vector3())).normalize();
+            const turn = new Quaternion().setFromUnitVectors(current, new Vector3(0, 0, -1));
+            const parent = bone.parent.getWorldQuaternion(new Quaternion());
+            bone.quaternion.premultiply(parent.clone().invert().multiply(turn).multiply(parent));
+            root.listNodes().find(node => node.getName() === name).setRotation(bone.quaternion.toArray());
+        }
+        operations.push('Straighten the supplied raised tail chain for neutral swimming; preserve skin weights');
     }
     if (definition.foldWings) {
         const gltf = await parse(Buffer.from(await io.writeBinary(doc)));
@@ -103,7 +122,9 @@ for (const definition of definitions) {
     }
     operations.push('Resize albedo to 512px WebP and remove high-frequency surface maps');
     const before = await parse(Buffer.from(await io.writeBinary(doc))), bounds = pose(before);
-    const sourceDimension = definition.sourceDimension ?? (definition.reference === 'wingspan' ? bounds.max.x - bounds.min.x : bounds.max.y - bounds.min.y);
+    const sourceDimension = definition.sourceDimension ?? (definition.reference === 'wingspan'
+        ? bounds.max.x - bounds.min.x : definition.reference === 'body-length'
+            ? bounds.max.z - bounds.min.z : bounds.max.y - bounds.min.y);
     const scale = definition.metres / sourceDimension;
     assert.ok(Number.isFinite(scale) && scale > 0);
     const scene = root.listScenes()[0], wrapper = doc.createNode('Wildlife_metres_' + definition.id);
@@ -113,7 +134,8 @@ for (const definition of definitions) {
         wrapper.addChild(node);
     }
     wrapper.setScale([scale, scale, scale]);
-    wrapper.setTranslation([-(bounds.max.x + bounds.min.x) * .5 * scale, -bounds.min.y * scale, -(bounds.max.z + bounds.min.z) * .5 * scale]);
+    const originY = definition.reference === 'body-length' ? (bounds.max.y + bounds.min.y) * .5 : bounds.min.y;
+    wrapper.setTranslation([-(bounds.max.x + bounds.min.x) * .5 * scale, -originY * scale, -(bounds.max.z + bounds.min.z) * .5 * scale]);
     scene.addChild(wrapper);
     await doc.transform(dedup(), resample({ tolerance: 1e-6 }), prune(), meshopt({ encoder: MeshoptEncoder, level: 'medium' }));
     const bytes = Buffer.from(await io.writeBinary(doc)), gltf = await parse(bytes), finalBounds = pose(gltf);

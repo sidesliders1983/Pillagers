@@ -15,6 +15,10 @@ import { terrainGradientAt } from '../world-generation/TerrainQueries';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { wildlifeAssetManifest } from './WildlifeAssetManifest';
 import { WildlifePopulation, type WildlifeActor } from './WildlifePopulation';
+import { marinePose, wildlifeObservable } from './MarineEncounters';
+import { MarineEffects } from './MarineEffects';
+import { whaleTailRig, poseWhaleTail, otterFloatRig, clearOtterFloat, poseOtterFloat,
+    type OtterFloatRig } from './MarineMotion';
 import type { WildlifeObstacle } from './WildlifeHabitats';
 interface CachedAsset {
     promise: Promise<GLTF>;
@@ -74,6 +78,10 @@ interface RenderActor {
     presentedPosition?: Vector3;
     actor: WildlifeActor;
     root: Group;
+    body: Group;
+    floating?: OtterFloatRig;
+    whaleTail?: ReturnType<typeof whaleTailRig>;
+    effects?: MarineEffects;
     mixer?: AnimationMixer;
     legs: LegPose[];
     coastal?: CoastalAnimalRig;
@@ -133,6 +141,7 @@ export class WildlifeLayer {
     private surfaceNormal = new Vector3();
     private surfaceTilt = new Quaternion();
     private up = new Vector3(0, 1, 0);
+    private waterHeight?: (x: number, z: number) => number;
     private constructor(world: WorldBlueprint, private known: (x: number, z: number) => boolean, private sources: WildlifeSources) {
         this.population = new WildlifePopulation(world);
         this.root.name = 'Ambient wildlife';
@@ -148,9 +157,18 @@ export class WildlifeLayer {
                     prepareGullWings(source.scene, id === 'gull-standing');
                 for (const actor of layer.population.actors.filter(item => item.variant.asset === id)) {
                     const entry = wildlifeAssetManifest.find(item => item.id === id)!;
-                    const root = new Group(), model = clone(source.scene);
+                    const root = new Group(), body = new Group(), model = clone(source.scene);
                     root.name = 'wildlife:' + actor.id;
-                    root.add(model);
+                    root.add(body);
+                    body.add(model);
+                    const floating = actor.variant.behavior === 'otter_shore_water'
+                        ? otterFloatRig(model as Group, root) : undefined;
+                    if (floating) {
+                        body.position.y = (entry.bounds.max[1] + entry.bounds.min[1]) * .5;
+                        model.position.y -= body.position.y;
+                    }
+                    const effects = actor.marine ? new MarineEffects() : undefined;
+                    if (effects) layer.root.add(effects.root);
                     model.traverse(node => {
                         if (node instanceof Mesh) {
                             node.castShadow = true;
@@ -163,9 +181,10 @@ export class WildlifeLayer {
                         mixer.clipAction(source.animations[0]).play();
                     const coastal = mixer ? undefined : coastalAnimalRig(model as Group, actor.species);
                     const rabbit = actor.species === 'rabbit' ? rabbitRig(model as Group, root) : undefined;
-                    layer.records.push({ actor, root, mixer, coastal, rabbit,
+                    layer.records.push({ actor, root, body, mixer, coastal, rabbit, floating, effects,
+                        whaleTail: actor.marine ? whaleTailRig(model as Group) : undefined,
                         resting: mixer ? animalRestRig(model as Group, root, actor.species) : undefined,
-                        legs: mixer || coastal || rabbit || id.startsWith('gull-') ? [] : legPoses(model as Group),
+                        legs: mixer || coastal || rabbit || actor.marine || id.startsWith('gull-') ? [] : legPoses(model as Group),
                         wings: id === 'gull-flying' ? gullWingRig(model as Group) : undefined,
                         foldedWings: id === 'gull-standing' ? gullFoldedWings(model as Group) : undefined,
                         height: entry.bounds.max[1] - entry.bounds.min[1],
@@ -190,7 +209,7 @@ export class WildlifeLayer {
     private targetPosition = new Vector3();
     useCanonical(snapshot?: WildlifeState) {
         if (snapshot === this.canonical) return;
-        if (snapshot) restoreWildlife(this.population, snapshot.actors, this.animationTime);
+        if (snapshot) restoreWildlife(this.population, snapshot.actors, this.animationTime, snapshot.version === 1);
         this.canonical = snapshot;
         this.canonicalPending = true;
         if (!snapshot) this.records.forEach(record => { record.presentedPosition = undefined; });
@@ -199,6 +218,7 @@ export class WildlifeLayer {
         this.population.setHumans(positions);
     }
     setObstacles(obstacles: readonly WildlifeObstacle[]) { this.population.habitats.setObstacles(obstacles); }
+    setWaterHeightSampler(sample: (x: number, z: number) => number) { this.waterHeight = sample; }
     advance(delta: number, running: boolean, camera?: Camera) {
         if (this.disposed)
             return;
@@ -224,6 +244,12 @@ export class WildlifeLayer {
             const look = !moving && actor.variant.movement !== 'air'
                 ? Math.sin(this.population.time * .25 + actor.phase) * turnAmplitude : 0;
             const water = actor.variant.movement === 'water', airborne = actor.variant.movement === 'air';
+            const pose = actor.marine ? marinePose(actor) : undefined;
+            const canonicalTime = this.canonical ? (this.canonical.advancedAt - this.canonical.startedAt) * .2
+                : this.population.time;
+            const remainingFloat = (actor.floatUntil ?? 0) - canonicalTime;
+            const floatAmount = actor.state === 'back_float'
+                ? Math.max(0, Math.min(1, (actor.wait - remainingFloat) / 2, remainingFloat / 2)) : 0;
             this.targetPosition.set(actor.position.x, actor.position.y, actor.position.z);
             if (this.canonical) {
                 // Smooth presentation between tick poses without moving the authoritative animal.
@@ -233,6 +259,7 @@ export class WildlifeLayer {
                 root.position.copy(record.presentedPosition);
             } else root.position.copy(this.targetPosition);
             root.rotation.set(0, actor.heading + look, actor.bank);
+            if (pose) record.body.rotation.x = pose.pitch;
             if (actor.variant.movement === 'ground') {
                 const gradient = terrainGradientAt(this.population.world, actor.position.x, actor.position.z);
                 this.surfaceNormal.set(-gradient.x, 1, -gradient.z).normalize();
@@ -240,22 +267,39 @@ export class WildlifeLayer {
                 root.quaternion.premultiply(this.surfaceTilt);
             }
             root.position.y += actor.hop?.lift ?? 0;
+            const waterHeight = water && wildlifeObservable(actor)
+                ? this.waterHeight?.(root.position.x, root.position.z) ?? this.population.world.waterLevel
+                : this.population.world.waterLevel;
             if (water) {
+                root.position.y += waterHeight - this.population.world.waterLevel;
+            }
+            if (water && !actor.marine) {
                 const immersion = actor.species === 'otter' ? .35
                     : actor.species === 'puffin' ? .45 : .6;
-                root.position.y -= record.height * immersion;
+                root.position.y -= record.height * (immersion - floatAmount * .1);
                 root.position.y += Math.sin(this.population.time * 1.4 + actor.phase) * .025;
                 root.rotation.x = Math.sin(this.population.time + actor.phase) * .035;
+                record.body.rotation.z = floatAmount * (Math.PI + Math.sin(this.population.time * .6) * .035);
             }
             root.visible = this.known(actor.position.x, actor.position.z)
+                && wildlifeObservable(actor)
                 && (airborne || this.population.habitats.valid(actor.position, actor.variant));
             if (camera) {
                 this.sphere.center.copy(root.position).y += record.height * .5;
                 this.sphere.radius = record.radius;
                 root.visible &&= this.frustum.intersectsSphere(this.sphere);
             }
+            if (record.effects && pose) {
+                record.effects.root.visible = root.visible;
+                if (root.visible) record.effects.update(root.position.x, waterHeight, root.position.z,
+                    actor.heading, pose, this.population.time);
+            }
             if (!root.visible || camera && root.position.distanceToSquared(this.cameraPoint) > 200 * 200)
                 continue;
+            if (record.whaleTail && pose) {
+                poseWhaleTail(record.whaleTail, this.population.time, pose.tail);
+                continue;
+            }
             if (record.wings) {
                 const pose = gullWingMotion(this.population.time, actor.phase, false, actor.flapEffort);
                 poseGullWings(record.wings, pose.flap);
@@ -279,10 +323,13 @@ export class WildlifeLayer {
                 });
             }
             else if (record.mixer) {
+                if (record.floating) clearOtterFloat(record.floating);
                 if (record.resting) clearAnimalRest(record.resting);
                 record.mixer.setTime(moving ? this.population.time * gaitSpeed + actor.phase : 0);
                 if (record.resting && !moving)
                     poseAnimalRest(record.resting, this.population.time, actor.phase);
+                if (record.floating && floatAmount > 0)
+                    poseOtterFloat(record.floating, floatAmount, this.population.time);
             }
             else
                 for (const leg of record.legs) {
@@ -294,7 +341,7 @@ export class WildlifeLayer {
         this.canonicalPending = false;
     }
     inspect() {
-        return { version: 'wildlife-v0.1', population: this.population.inspect(),
+        return { version: 'wildlife-v0.2', population: this.population.inspect(),
             diagnostics: [...this.population.diagnostics, ...this.diagnostics],
             rendered: this.records.filter(record => record.root.visible).length,
             instances: this.records.length, sharedAssets: this.leases.size };
@@ -304,6 +351,7 @@ export class WildlifeLayer {
             return;
         this.disposed = true;
         this.records.forEach(record => {
+            record.effects?.dispose();
             record.mixer?.stopAllAction();
             record.mixer?.uncacheRoot(record.mixer.getRoot());
             record.root.traverse(node => {
