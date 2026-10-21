@@ -13,6 +13,7 @@ import { LabTestSnapshot, parseLabSnapshot } from './LabSnapshot';
 import {gridTrialOutfitId} from '../characters/GridTrialOutfitCatalog';
 import {braidedHairAsset} from '../characters/BraidedHairCatalog';
 import {longHairAsset} from '../characters/LongHairCatalog';
+import {femaleHairAssets} from '../characters/FemaleHairCatalog';
 import { goldenLabBody, isMeshyLabBodySource } from '../characters/LabBodySources';
 import { LabBodyPresentation, defaultLabBodyPresentation, previewLabBodyPresentation, parseLabBodyPresentation } from '../characters/LabBodyPresentation';
 
@@ -38,6 +39,14 @@ export class CharacterLab {
             this.presentation.beard = 'beard/manual-fitted-' + beard;
         }
         const shortHair = requestedOutfit.get('hair');
+        const femaleHair = femaleHairAssets.find(asset =>
+            asset.id === 'hair/manual-female-' + shortHair);
+        if (femaleHair) {
+            this.presentation.hair = femaleHair.id;
+            this.dna = { ...this.dna, sex: 'female', ...(this.dna.morphology ? {
+                morphology: { ...this.dna.morphology, masculinity: .15 },
+            } : {}) };
+        }
         if (shortHair === 'short' || shortHair === 'short2') {
             this.presentation.hair = 'hair/manual-fitted-' + shortHair;
         }
@@ -79,6 +88,7 @@ export class CharacterLab {
     private update(){const phenotype=generatePhenotype(this.dna);this.preview.setCharacter(phenotype,this.dna,this.presentation,this.body);this.ui.update(this.dna,phenotype,this.comparison?.dna??null,this.presentation,this.body);}
     private newSeed(){const array=new Uint32Array(1);crypto.getRandomValues(array);return array[0]===this.dna.seed?(array[0]+1)>>>0:array[0];}
     private async action(action:LabAction){
+        if(action==='portrait'){await this.preview.renderPortrait();return;}
         if(action.startsWith('animation-')){this.preview.setAnimation(action.slice(10));return;}
         if(action.startsWith('view-')){this.preview.fixedView(action.slice(5) as 'front'|'side'|'back');return;}
         if(action==='freeze-pose'){this.preview.setPose(this.ui.getPoseTime());return;}

@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "route": "manual-female-hair",
+  "moduleId": "hair/manual-female-mid-wavy-long",
+  "source": {
+    "path": "Assets/Characters/Human/Manual-Fitting/female/mid-wavy-long.glb",
+    "sha256": "1699724ffc430eac823ed006977b9ef7ceee5c1ff801835e75b59cc50a6095b1",
+    "bytes": 238724628,
+    "selectedNode": "low_poly_unwrapped.002",
+    "excludedMeshes": 10,
+    "nodeTransform": [
+      0.2737502455711365,
+      0,
+      0,
+      0,
+      0,
+      -7.437880236769441e-8,
+      0.2455181246405082,
+      0,
+      0,
+      -0.2737502660033783,
+      -8.293162455106844e-8,
+      0,
+      0.006048898212611675,
+      1.4087179899215698,
+      -0.032012052834033966,
+      1
+    ]
+  },
+  "output": {
+    "sha256": "a9642f3531b8b8ea23a9421b48512afb03a1858825701c925eb5891b078560e3",
+    "triangles": 6182,
+    "materials": 1,
+    "bytes": 296372,
+    "bounds": {
+      "min": [
+        -0.17733967099561454,
+        1.195499919649561,
+        -0.18877219315009275
+      ],
+      "max": [
+        0.18798741095296734,
+        1.6690569381196938,
+        0.12389936681605718
+      ]
+    },
+    "vertices": 6138
+  },
+  "bindingSha256": "d0459addff56c9e2852debdfe5606f9a6e412643de8bdbf7b72ae8c6b4e47d0a",
+  "pipeline": {
+    "path": "scripts/prepare-female-hair.mjs",
+    "sha256": "cb8aa6af4311626c56befba617a2741bdc87dd2069d3fa55aee41c5d5803ca4a"
+  },
+  "operations": [
+    "Extract only the audited hairstyle; exclude reference body, rig and older hair",
+    "Bake manual fit into metre positions; preserve source normals, vertices and triangle indices",
+    "Remove texture maps and UVs; apply the existing DNA hair colour and greying",
+    "Reuse Head/Neck/Spine2 binding for all three native body LODs"
+  ],
+  "reviewStatus": "preview"
+}

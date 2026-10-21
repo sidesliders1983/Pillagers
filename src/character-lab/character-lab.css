@@ -23,3 +23,5 @@
 .lab-ground-controls {
     padding: 0 18px 16px;
 }
+.lab-portrait-panel { display: grid; justify-items: start; gap: 12px; }
+.lab-portrait-panel img { border-radius: 8px; max-width: 100%; background: #243e45; }

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FjordSide · Heritable face proof</title>
+<style>
+body { background: #10272d; color: #f0eddf; font: 16px system-ui; margin: 0; }
+main { max-width: 1250px; margin: auto; padding: 20px; } h1,h2 { font-family: Georgia; }
+nav { display: flex; gap: 10px; flex-wrap: wrap; align-items: end; margin: 18px 0; }
+label { display: grid; gap: 5px; } button,select { background: #2c4443; border: 1px solid #9eae87; border-radius: 5px; padding: 12px; color: inherit; }
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; } figure { margin: 0; } figure img { width: 100%; background: #233c41; aspect-ratio: 1; object-fit: contain; }
+figcaption { padding: 8px; } #gallery { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 20px; } article { background: #1c393d; padding: 12px; }
+article .angles { display: flex; } article img { width: 33.33%; } article small { display: block; margin-bottom: 12px; }
+canvas { display: none; } #status { min-height: 2.8em; } a { color: #ead28d; } pre { overflow: auto; }
+@media (max-width:600px) { main {padding:12px;} .compare {gap:8px;} }
+</style>
+<main>
+<h1>Heritable faces · Native Meshy proof</h1>
+<p>One real three-generation family, derived from recorded parents. These are on-demand 2D snapshots of the real native 3D residents, with inherited face shape only and no added eye or brow features.</p>
+<p>The owner accepted this minimal face style. It is now integrated in <a href="/fjord-play">FjordSide</a> and <a href="/character-lab">Character Lab</a>. The source remains angular and adult-looking, including on children and women. Physical-device performance is still unmeasured.</p>
+<nav>
+<label>Resident<select id="resident"></select></label>
+<label>View<select id="view"><option value="front">Front</option><option value="quarter" selected>Three-quarter</option><option value="profile">Profile</option><option value="world">World / RTS</option></select></label>
+<label>Age study<select id="age"><option value="recorded">Recorded age</option><option value="8">8</option><option value="16">16</option><option value="32">32</option><option value="64">64</option></select></label>
+<label>Body LOD<select id="lod"><option value="0">LOD 0 · portrait</option><option value="1">LOD 1</option><option value="2">LOD 2 · world</option></select></label>
+<label>Appearance<select id="appearance"><option value="bare">Anatomy only</option><option value="wardrobe" selected>Existing wardrobe</option><option value="farmer">Farmer hat</option><option value="fisher">Fisher hat</option><option value="hunter">Hunter hat</option><option value="smith">Smith hat</option></select></label>
+<label>Animation<select id="animation"><option>Idle</option><option>Walk</option><option>Run</option></select></label>
+<label>Profile study<select id="extreme"><option value="recorded">Inherited profile</option><option value="minus">All axes −1 · stress case</option><option value="plus">All axes +1 · stress case</option></select></label>
+<button id="render">Render selection</button><button id="render-family">Render family gallery</button>
+</nav>
+<p id="status" role="status">Loading recorded family…</p>
+<section class="compare">
+<figure><img id="before" alt="Existing resident without the facial proof"><figcaption>Existing anatomy</figcaption></figure>
+<figure><img id="after" alt="The same resident with inherited facial anatomy"><figcaption>Same resident · inherited facial profile</figcaption></figure>
+</section>
+<p id="family-facts"></p>
+<details><summary>Measurement and source diagnostics</summary><pre id="diagnostics"></pre></details>
+<h2>Three-generation family</h2><p>Use recorded age first. Age studies change only the visual preview, never the saved family or inherited face. Fixed cameras and light; real native assets and animations. The gallery renders on demand, using one shared renderer.</p>
+<section id="gallery"></section>
+<canvas id="studio" width="512" height="512"></canvas>
+</main><script type="module" src="./review.js"></script>
+</html>

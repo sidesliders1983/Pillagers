@@ -1,0 +1,1976 @@
+{
+  "observedAt": "2026-10-21T08:59:23.001Z",
+  "url": "http://127.0.0.1:5196/docs/qa/facial-identity/review.html",
+  "status": "Rendered on demand · 19 render calls made by this studio · 19 / 48 cached images. No animation loop.",
+  "pairedAfter": {
+    "age": 66,
+    "calls": 10,
+    "corrective": [
+      {
+        "changedVertices": 5701,
+        "maximumMeters": 0.004705716273317106,
+        "version": "facial-identity-v1"
+      },
+      {
+        "changedVertices": 5123,
+        "maximumMeters": 0.004643965872087433,
+        "version": "facial-identity-v1"
+      }
+    ],
+    "facialIdentity": {
+      "axes": {
+        "chinProjection": 0.3619162596762181,
+        "eyeSpacing": -0.5454841833561659,
+        "faceLength": 0.2227142781019211,
+        "faceWidth": -0.4057124733924866,
+        "jawWidth": -0.4573378000408411,
+        "noseProjection": 0.7920735970139504,
+        "noseWidth": -0.716115876659751
+      },
+      "derivation": "founder",
+      "parentIds": [],
+      "version": "facial-identity-v1"
+    },
+    "facialPresentation": {
+      "feminine": 0,
+      "juvenile": 0
+    },
+    "fit": {
+      "bindings": [
+        {
+          "id": "hair/manual-fitted-short",
+          "path": "/character-lab/modules/manual-hair/short.binding.json",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+          "sha256": "96ade45ea283f249934f5b186f8ea58cc804f32d0b72d3c3f4b1b5e23ea4c52c"
+        },
+        {
+          "id": "headwear/occupation-hunter",
+          "materialPolicy": {
+            "kind": "provider-original",
+            "provider": "Meshy",
+            "reviewOnly": true,
+            "sourceSha256": "0dc760ed68e92bd24cb23bb359ab9f469ab3cdeff4110c3f04924aa8de7dfd26"
+          },
+          "meshes": [
+            {
+              "count": 5123,
+              "mesh": "Module_occupation_hunter_0",
+              "start": 0
+            }
+          ],
+          "path": "/character-lab/modules/occupation-hats/hunter.binding.json",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+          "sha256": "8f4e4f0b1621ad629d871b523910667115cf691f931ab0157ee598b27f2da012"
+        },
+        {
+          "id": "garment/meshy-grid-trial-001",
+          "materialPolicy": {
+            "kind": "provider-original",
+            "provider": "Meshy",
+            "reviewOnly": true,
+            "sourceSha256": "d90e5e0dec9eabc065b7b22542c3ecf19a516681924755951add6fbc71e6d98e"
+          },
+          "meshes": [
+            {
+              "count": 66875,
+              "mesh": "Module_grid_trial_top_0",
+              "start": 0
+            },
+            {
+              "count": 26976,
+              "mesh": "Module_grid_trial_trousers_0",
+              "start": 66875
+            }
+          ],
+          "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.binding.json",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+          "sha256": "f3073f071dc8fa7955d55db9833a01cadd7d7b02a9ccd95a843eb03b88efeb03"
+        },
+        {
+          "id": "garment/meshy-low-shoes-005",
+          "materialPolicy": {
+            "kind": "provider-original",
+            "provider": "Meshy",
+            "reviewOnly": true,
+            "sourceSha256": "45cae28d4779b7dad4d186e9c86877466889dd45d7dc2904ed97083b722d2e4b"
+          },
+          "meshes": [
+            {
+              "count": 27347,
+              "mesh": "Module_low-shoes_left_0",
+              "start": 0
+            },
+            {
+              "count": 27347,
+              "mesh": "Module_low-shoes_right",
+              "start": 27347
+            }
+          ],
+          "path": "/character-lab/candidates/meshy-additional-005/low-shoes.binding.json",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+          "sha256": "ad27c923a926d59c8c1de43649129749e7856108d45cf440bb31eed35d5ded97"
+        },
+        {
+          "id": "equipment/occupation-hunter",
+          "materialPolicy": {
+            "kind": "provider-original",
+            "provider": "Meshy",
+            "reviewOnly": true,
+            "sourceSha256": "63a79f5ed627b7a7d76ace0f1072a53d0d24204320e932fbfe7a68573d34ff10"
+          },
+          "meshes": [
+            {
+              "count": 1130,
+              "mesh": "Module_tool_hunter_bow_0",
+              "start": 0
+            },
+            {
+              "count": 5261,
+              "mesh": "Module_tool_hunter_quiver_0",
+              "start": 1130
+            },
+            {
+              "count": 16,
+              "mesh": "Module_tool_hunter_string",
+              "start": 6391
+            }
+          ],
+          "path": "/character-lab/modules/occupation-tools/hunter.binding.json",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+          "sha256": "1304364921d84f4a148ca7ea2e9958907af572a2367ee11dc6c8a6af4a6c9f93"
+        }
+      ],
+      "fitRuns": 3,
+      "lastFitMilliseconds": 1037.5
+    },
+    "geometries": 10,
+    "id": "founder-8",
+    "name": "Minvydas",
+    "renderMsIncludingPreparation": 1761.7000000029802,
+    "selected": {
+      "age": "recorded",
+      "animation": "Idle",
+      "appearance": "wardrobe",
+      "extreme": "recorded",
+      "lod": "0",
+      "resident": "founder-8",
+      "view": "quarter"
+    },
+    "textures": 11,
+    "triangles": 193854,
+    "withFace": true
+  },
+  "gallery": [
+    {
+      "alt": "Minvydas · front",
+      "evidence": {
+        "age": 66,
+        "calls": 10,
+        "corrective": [
+          {
+            "changedVertices": 5701,
+            "maximumMeters": 0.004705716273317106,
+            "version": "facial-identity-v1"
+          },
+          {
+            "changedVertices": 5123,
+            "maximumMeters": 0.004643965872087433,
+            "version": "facial-identity-v1"
+          }
+        ],
+        "facialIdentity": {
+          "axes": {
+            "chinProjection": 0.3619162596762181,
+            "eyeSpacing": -0.5454841833561659,
+            "faceLength": 0.2227142781019211,
+            "faceWidth": -0.4057124733924866,
+            "jawWidth": -0.4573378000408411,
+            "noseProjection": 0.7920735970139504,
+            "noseWidth": -0.716115876659751
+          },
+          "derivation": "founder",
+          "parentIds": [],
+          "version": "facial-identity-v1"
+        },
+        "facialPresentation": {
+          "feminine": 0,
+          "juvenile": 0
+        },
+        "fit": {
+          "bindings": [
+            {
+              "id": "hair/manual-fitted-short",
+              "path": "/character-lab/modules/manual-hair/short.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "96ade45ea283f249934f5b186f8ea58cc804f32d0b72d3c3f4b1b5e23ea4c52c"
+            },
+            {
+              "id": "headwear/occupation-hunter",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "0dc760ed68e92bd24cb23bb359ab9f469ab3cdeff4110c3f04924aa8de7dfd26"
+              },
+              "meshes": [
+                {
+                  "count": 5123,
+                  "mesh": "Module_occupation_hunter_0",
+                  "start": 0
+                }
+              ],
+              "path": "/character-lab/modules/occupation-hats/hunter.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "8f4e4f0b1621ad629d871b523910667115cf691f931ab0157ee598b27f2da012"
+            },
+            {
+              "id": "garment/meshy-grid-trial-001",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "d90e5e0dec9eabc065b7b22542c3ecf19a516681924755951add6fbc71e6d98e"
+              },
+              "meshes": [
+                {
+                  "count": 66875,
+                  "mesh": "Module_grid_trial_top_0",
+                  "start": 0
+                },
+                {
+                  "count": 26976,
+                  "mesh": "Module_grid_trial_trousers_0",
+                  "start": 66875
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "f3073f071dc8fa7955d55db9833a01cadd7d7b02a9ccd95a843eb03b88efeb03"
+            },
+            {
+              "id": "garment/meshy-low-shoes-005",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "45cae28d4779b7dad4d186e9c86877466889dd45d7dc2904ed97083b722d2e4b"
+              },
+              "meshes": [
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_left_0",
+                  "start": 0
+                },
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_right",
+                  "start": 27347
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-additional-005/low-shoes.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "ad27c923a926d59c8c1de43649129749e7856108d45cf440bb31eed35d5ded97"
+            },
+            {
+              "id": "equipment/occupation-hunter",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "63a79f5ed627b7a7d76ace0f1072a53d0d24204320e932fbfe7a68573d34ff10"
+              },
+              "meshes": [
+                {
+                  "count": 1130,
+                  "mesh": "Module_tool_hunter_bow_0",
+                  "start": 0
+                },
+                {
+                  "count": 5261,
+                  "mesh": "Module_tool_hunter_quiver_0",
+                  "start": 1130
+                },
+                {
+                  "count": 16,
+                  "mesh": "Module_tool_hunter_string",
+                  "start": 6391
+                }
+              ],
+              "path": "/character-lab/modules/occupation-tools/hunter.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "1304364921d84f4a148ca7ea2e9958907af572a2367ee11dc6c8a6af4a6c9f93"
+            }
+          ],
+          "fitRuns": 3,
+          "lastFitMilliseconds": 1291.8999999910593
+        },
+        "geometries": 10,
+        "id": "founder-8",
+        "name": "Minvydas",
+        "renderMsIncludingPreparation": 1974.20000000298,
+        "selected": {
+          "age": "recorded",
+          "animation": "Idle",
+          "appearance": "wardrobe",
+          "extreme": "recorded",
+          "lod": "0",
+          "resident": "founder-8",
+          "view": "front"
+        },
+        "textures": 11,
+        "triangles": 193854,
+        "withFace": true
+      }
+    },
+    {
+      "alt": "Minvydas · quarter",
+      "evidence": {
+        "age": 66,
+        "calls": 10,
+        "corrective": [
+          {
+            "changedVertices": 5701,
+            "maximumMeters": 0.004705716273317106,
+            "version": "facial-identity-v1"
+          },
+          {
+            "changedVertices": 5123,
+            "maximumMeters": 0.004643965872087433,
+            "version": "facial-identity-v1"
+          }
+        ],
+        "facialIdentity": {
+          "axes": {
+            "chinProjection": 0.3619162596762181,
+            "eyeSpacing": -0.5454841833561659,
+            "faceLength": 0.2227142781019211,
+            "faceWidth": -0.4057124733924866,
+            "jawWidth": -0.4573378000408411,
+            "noseProjection": 0.7920735970139504,
+            "noseWidth": -0.716115876659751
+          },
+          "derivation": "founder",
+          "parentIds": [],
+          "version": "facial-identity-v1"
+        },
+        "facialPresentation": {
+          "feminine": 0,
+          "juvenile": 0
+        },
+        "fit": {
+          "bindings": [
+            {
+              "id": "hair/manual-fitted-short",
+              "path": "/character-lab/modules/manual-hair/short.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "96ade45ea283f249934f5b186f8ea58cc804f32d0b72d3c3f4b1b5e23ea4c52c"
+            },
+            {
+              "id": "headwear/occupation-hunter",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "0dc760ed68e92bd24cb23bb359ab9f469ab3cdeff4110c3f04924aa8de7dfd26"
+              },
+              "meshes": [
+                {
+                  "count": 5123,
+                  "mesh": "Module_occupation_hunter_0",
+                  "start": 0
+                }
+              ],
+              "path": "/character-lab/modules/occupation-hats/hunter.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "8f4e4f0b1621ad629d871b523910667115cf691f931ab0157ee598b27f2da012"
+            },
+            {
+              "id": "garment/meshy-grid-trial-001",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "d90e5e0dec9eabc065b7b22542c3ecf19a516681924755951add6fbc71e6d98e"
+              },
+              "meshes": [
+                {
+                  "count": 66875,
+                  "mesh": "Module_grid_trial_top_0",
+                  "start": 0
+                },
+                {
+                  "count": 26976,
+                  "mesh": "Module_grid_trial_trousers_0",
+                  "start": 66875
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "f3073f071dc8fa7955d55db9833a01cadd7d7b02a9ccd95a843eb03b88efeb03"
+            },
+            {
+              "id": "garment/meshy-low-shoes-005",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "45cae28d4779b7dad4d186e9c86877466889dd45d7dc2904ed97083b722d2e4b"
+              },
+              "meshes": [
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_left_0",
+                  "start": 0
+                },
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_right",
+                  "start": 27347
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-additional-005/low-shoes.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "ad27c923a926d59c8c1de43649129749e7856108d45cf440bb31eed35d5ded97"
+            },
+            {
+              "id": "equipment/occupation-hunter",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "63a79f5ed627b7a7d76ace0f1072a53d0d24204320e932fbfe7a68573d34ff10"
+              },
+              "meshes": [
+                {
+                  "count": 1130,
+                  "mesh": "Module_tool_hunter_bow_0",
+                  "start": 0
+                },
+                {
+                  "count": 5261,
+                  "mesh": "Module_tool_hunter_quiver_0",
+                  "start": 1130
+                },
+                {
+                  "count": 16,
+                  "mesh": "Module_tool_hunter_string",
+                  "start": 6391
+                }
+              ],
+              "path": "/character-lab/modules/occupation-tools/hunter.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "1304364921d84f4a148ca7ea2e9958907af572a2367ee11dc6c8a6af4a6c9f93"
+            }
+          ],
+          "fitRuns": 3,
+          "lastFitMilliseconds": 1037.5
+        },
+        "geometries": 10,
+        "id": "founder-8",
+        "name": "Minvydas",
+        "renderMsIncludingPreparation": 1761.7000000029802,
+        "selected": {
+          "age": "recorded",
+          "animation": "Idle",
+          "appearance": "wardrobe",
+          "extreme": "recorded",
+          "lod": "0",
+          "resident": "founder-8",
+          "view": "quarter"
+        },
+        "textures": 11,
+        "triangles": 193854,
+        "withFace": true
+      }
+    },
+    {
+      "alt": "Minvydas · profile",
+      "evidence": {
+        "age": 66,
+        "calls": 10,
+        "corrective": [
+          {
+            "changedVertices": 5701,
+            "maximumMeters": 0.004705716273317106,
+            "version": "facial-identity-v1"
+          },
+          {
+            "changedVertices": 5123,
+            "maximumMeters": 0.004643965872087433,
+            "version": "facial-identity-v1"
+          }
+        ],
+        "facialIdentity": {
+          "axes": {
+            "chinProjection": 0.3619162596762181,
+            "eyeSpacing": -0.5454841833561659,
+            "faceLength": 0.2227142781019211,
+            "faceWidth": -0.4057124733924866,
+            "jawWidth": -0.4573378000408411,
+            "noseProjection": 0.7920735970139504,
+            "noseWidth": -0.716115876659751
+          },
+          "derivation": "founder",
+          "parentIds": [],
+          "version": "facial-identity-v1"
+        },
+        "facialPresentation": {
+          "feminine": 0,
+          "juvenile": 0
+        },
+        "fit": {
+          "bindings": [
+            {
+              "id": "hair/manual-fitted-short",
+              "path": "/character-lab/modules/manual-hair/short.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "96ade45ea283f249934f5b186f8ea58cc804f32d0b72d3c3f4b1b5e23ea4c52c"
+            },
+            {
+              "id": "headwear/occupation-hunter",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "0dc760ed68e92bd24cb23bb359ab9f469ab3cdeff4110c3f04924aa8de7dfd26"
+              },
+              "meshes": [
+                {
+                  "count": 5123,
+                  "mesh": "Module_occupation_hunter_0",
+                  "start": 0
+                }
+              ],
+              "path": "/character-lab/modules/occupation-hats/hunter.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "8f4e4f0b1621ad629d871b523910667115cf691f931ab0157ee598b27f2da012"
+            },
+            {
+              "id": "garment/meshy-grid-trial-001",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "d90e5e0dec9eabc065b7b22542c3ecf19a516681924755951add6fbc71e6d98e"
+              },
+              "meshes": [
+                {
+                  "count": 66875,
+                  "mesh": "Module_grid_trial_top_0",
+                  "start": 0
+                },
+                {
+                  "count": 26976,
+                  "mesh": "Module_grid_trial_trousers_0",
+                  "start": 66875
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "f3073f071dc8fa7955d55db9833a01cadd7d7b02a9ccd95a843eb03b88efeb03"
+            },
+            {
+              "id": "garment/meshy-low-shoes-005",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "45cae28d4779b7dad4d186e9c86877466889dd45d7dc2904ed97083b722d2e4b"
+              },
+              "meshes": [
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_left_0",
+                  "start": 0
+                },
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_right",
+                  "start": 27347
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-additional-005/low-shoes.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "ad27c923a926d59c8c1de43649129749e7856108d45cf440bb31eed35d5ded97"
+            },
+            {
+              "id": "equipment/occupation-hunter",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "63a79f5ed627b7a7d76ace0f1072a53d0d24204320e932fbfe7a68573d34ff10"
+              },
+              "meshes": [
+                {
+                  "count": 1130,
+                  "mesh": "Module_tool_hunter_bow_0",
+                  "start": 0
+                },
+                {
+                  "count": 5261,
+                  "mesh": "Module_tool_hunter_quiver_0",
+                  "start": 1130
+                },
+                {
+                  "count": 16,
+                  "mesh": "Module_tool_hunter_string",
+                  "start": 6391
+                }
+              ],
+              "path": "/character-lab/modules/occupation-tools/hunter.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "1304364921d84f4a148ca7ea2e9958907af572a2367ee11dc6c8a6af4a6c9f93"
+            }
+          ],
+          "fitRuns": 3,
+          "lastFitMilliseconds": 1116.2000000029802
+        },
+        "geometries": 10,
+        "id": "founder-8",
+        "name": "Minvydas",
+        "renderMsIncludingPreparation": 1657.7000000029802,
+        "selected": {
+          "age": "recorded",
+          "animation": "Idle",
+          "appearance": "wardrobe",
+          "extreme": "recorded",
+          "lod": "0",
+          "resident": "founder-8",
+          "view": "profile"
+        },
+        "textures": 11,
+        "triangles": 193854,
+        "withFace": true
+      }
+    },
+    {
+      "alt": "Kaunikki · front",
+      "evidence": {
+        "age": 61,
+        "calls": 6,
+        "corrective": [
+          {
+            "changedVertices": 4520,
+            "maximumMeters": 0.012539426796484444,
+            "version": "facial-identity-v1"
+          }
+        ],
+        "facialIdentity": {
+          "axes": {
+            "chinProjection": 0.27853964529931546,
+            "eyeSpacing": -0.38887226283550264,
+            "faceLength": -0.006681197136640549,
+            "faceWidth": 0.7686188571155071,
+            "jawWidth": -0.7360883668065071,
+            "noseProjection": -0.29308963604271415,
+            "noseWidth": 0.5694093156605959
+          },
+          "derivation": "founder",
+          "parentIds": [],
+          "version": "facial-identity-v1"
+        },
+        "facialPresentation": {
+          "feminine": 1,
+          "juvenile": 0
+        },
+        "fit": {
+          "bindings": [
+            {
+              "id": "hair/manual-long-2",
+              "path": "/character-lab/modules/manual-long-hair/long-2.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "b808c552c30a68e7b6b2b3221227dc8af9d98deb4dcdba425133ef77f58f186d"
+            },
+            {
+              "id": "garment/meshy-grid-trial-001",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "d90e5e0dec9eabc065b7b22542c3ecf19a516681924755951add6fbc71e6d98e"
+              },
+              "meshes": [
+                {
+                  "count": 66875,
+                  "mesh": "Module_grid_trial_top_0",
+                  "start": 0
+                },
+                {
+                  "count": 26976,
+                  "mesh": "Module_grid_trial_trousers_0",
+                  "start": 66875
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "f3073f071dc8fa7955d55db9833a01cadd7d7b02a9ccd95a843eb03b88efeb03"
+            },
+            {
+              "id": "garment/meshy-low-shoes-005",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "45cae28d4779b7dad4d186e9c86877466889dd45d7dc2904ed97083b722d2e4b"
+              },
+              "meshes": [
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_left_0",
+                  "start": 0
+                },
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_right",
+                  "start": 27347
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-additional-005/low-shoes.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "ad27c923a926d59c8c1de43649129749e7856108d45cf440bb31eed35d5ded97"
+            }
+          ],
+          "fitRuns": 3,
+          "lastFitMilliseconds": 1174.9000000059605
+        },
+        "geometries": 6,
+        "id": "founder-7",
+        "name": "Kaunikki",
+        "renderMsIncludingPreparation": 1807.9000000059605,
+        "selected": {
+          "age": "recorded",
+          "animation": "Idle",
+          "appearance": "wardrobe",
+          "extreme": "recorded",
+          "lod": "0",
+          "resident": "founder-7",
+          "view": "front"
+        },
+        "textures": 11,
+        "triangles": 189310,
+        "withFace": true
+      }
+    },
+    {
+      "alt": "Kaunikki · quarter",
+      "evidence": {
+        "age": 61,
+        "calls": 6,
+        "corrective": [
+          {
+            "changedVertices": 4520,
+            "maximumMeters": 0.012539426796484444,
+            "version": "facial-identity-v1"
+          }
+        ],
+        "facialIdentity": {
+          "axes": {
+            "chinProjection": 0.27853964529931546,
+            "eyeSpacing": -0.38887226283550264,
+            "faceLength": -0.006681197136640549,
+            "faceWidth": 0.7686188571155071,
+            "jawWidth": -0.7360883668065071,
+            "noseProjection": -0.29308963604271415,
+            "noseWidth": 0.5694093156605959
+          },
+          "derivation": "founder",
+          "parentIds": [],
+          "version": "facial-identity-v1"
+        },
+        "facialPresentation": {
+          "feminine": 1,
+          "juvenile": 0
+        },
+        "fit": {
+          "bindings": [
+            {
+              "id": "hair/manual-long-2",
+              "path": "/character-lab/modules/manual-long-hair/long-2.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "b808c552c30a68e7b6b2b3221227dc8af9d98deb4dcdba425133ef77f58f186d"
+            },
+            {
+              "id": "garment/meshy-grid-trial-001",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "d90e5e0dec9eabc065b7b22542c3ecf19a516681924755951add6fbc71e6d98e"
+              },
+              "meshes": [
+                {
+                  "count": 66875,
+                  "mesh": "Module_grid_trial_top_0",
+                  "start": 0
+                },
+                {
+                  "count": 26976,
+                  "mesh": "Module_grid_trial_trousers_0",
+                  "start": 66875
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "f3073f071dc8fa7955d55db9833a01cadd7d7b02a9ccd95a843eb03b88efeb03"
+            },
+            {
+              "id": "garment/meshy-low-shoes-005",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "45cae28d4779b7dad4d186e9c86877466889dd45d7dc2904ed97083b722d2e4b"
+              },
+              "meshes": [
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_left_0",
+                  "start": 0
+                },
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_right",
+                  "start": 27347
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-additional-005/low-shoes.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "ad27c923a926d59c8c1de43649129749e7856108d45cf440bb31eed35d5ded97"
+            }
+          ],
+          "fitRuns": 3,
+          "lastFitMilliseconds": 1122.7000000029802
+        },
+        "geometries": 6,
+        "id": "founder-7",
+        "name": "Kaunikki",
+        "renderMsIncludingPreparation": 1708.8999999910593,
+        "selected": {
+          "age": "recorded",
+          "animation": "Idle",
+          "appearance": "wardrobe",
+          "extreme": "recorded",
+          "lod": "0",
+          "resident": "founder-7",
+          "view": "quarter"
+        },
+        "textures": 11,
+        "triangles": 189310,
+        "withFace": true
+      }
+    },
+    {
+      "alt": "Kaunikki · profile",
+      "evidence": {
+        "age": 61,
+        "calls": 6,
+        "corrective": [
+          {
+            "changedVertices": 4520,
+            "maximumMeters": 0.012539426796484444,
+            "version": "facial-identity-v1"
+          }
+        ],
+        "facialIdentity": {
+          "axes": {
+            "chinProjection": 0.27853964529931546,
+            "eyeSpacing": -0.38887226283550264,
+            "faceLength": -0.006681197136640549,
+            "faceWidth": 0.7686188571155071,
+            "jawWidth": -0.7360883668065071,
+            "noseProjection": -0.29308963604271415,
+            "noseWidth": 0.5694093156605959
+          },
+          "derivation": "founder",
+          "parentIds": [],
+          "version": "facial-identity-v1"
+        },
+        "facialPresentation": {
+          "feminine": 1,
+          "juvenile": 0
+        },
+        "fit": {
+          "bindings": [
+            {
+              "id": "hair/manual-long-2",
+              "path": "/character-lab/modules/manual-long-hair/long-2.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "b808c552c30a68e7b6b2b3221227dc8af9d98deb4dcdba425133ef77f58f186d"
+            },
+            {
+              "id": "garment/meshy-grid-trial-001",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "d90e5e0dec9eabc065b7b22542c3ecf19a516681924755951add6fbc71e6d98e"
+              },
+              "meshes": [
+                {
+                  "count": 66875,
+                  "mesh": "Module_grid_trial_top_0",
+                  "start": 0
+                },
+                {
+                  "count": 26976,
+                  "mesh": "Module_grid_trial_trousers_0",
+                  "start": 66875
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "f3073f071dc8fa7955d55db9833a01cadd7d7b02a9ccd95a843eb03b88efeb03"
+            },
+            {
+              "id": "garment/meshy-low-shoes-005",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "45cae28d4779b7dad4d186e9c86877466889dd45d7dc2904ed97083b722d2e4b"
+              },
+              "meshes": [
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_left_0",
+                  "start": 0
+                },
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_right",
+                  "start": 27347
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-additional-005/low-shoes.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "ad27c923a926d59c8c1de43649129749e7856108d45cf440bb31eed35d5ded97"
+            }
+          ],
+          "fitRuns": 3,
+          "lastFitMilliseconds": 1044.7999999970198
+        },
+        "geometries": 6,
+        "id": "founder-7",
+        "name": "Kaunikki",
+        "renderMsIncludingPreparation": 1597.3999999910593,
+        "selected": {
+          "age": "recorded",
+          "animation": "Idle",
+          "appearance": "wardrobe",
+          "extreme": "recorded",
+          "lod": "0",
+          "resident": "founder-7",
+          "view": "profile"
+        },
+        "textures": 11,
+        "triangles": 189310,
+        "withFace": true
+      }
+    },
+    {
+      "alt": "Kauko · front",
+      "evidence": {
+        "age": 24,
+        "calls": 7,
+        "corrective": [
+          {
+            "changedVertices": 7500,
+            "maximumMeters": 0.007035238056254304,
+            "version": "facial-identity-v1"
+          },
+          {
+            "changedVertices": 3518,
+            "maximumMeters": 0.004727725027492713,
+            "version": "facial-identity-v1"
+          }
+        ],
+        "facialIdentity": {
+          "axes": {
+            "chinProjection": 0.362124716155231,
+            "eyeSpacing": -0.5443469865992665,
+            "faceLength": 0.038227170817554,
+            "faceWidth": 0.14283140268176792,
+            "jawWidth": -0.6336399850994349,
+            "noseProjection": 0.2352224024757743,
+            "noseWidth": -0.11824888881295918
+          },
+          "derivation": "two-parents",
+          "parentIds": [
+            "founder-7",
+            "founder-8"
+          ],
+          "version": "facial-identity-v1"
+        },
+        "facialPresentation": {
+          "feminine": 0,
+          "juvenile": 0
+        },
+        "fit": {
+          "bindings": [
+            {
+              "id": "hair/manual-fitted-short2",
+              "path": "/character-lab/modules/manual-hair/short2.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "ba7307e86a9eb60d4dcdac71d4b7cab1e4b0149e85611a9bc1ff8e69a424bd8f"
+            },
+            {
+              "id": "beard/manual-fitted-double",
+              "path": "/character-lab/modules/manual-beards/double.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "5b7f7e3a8e387806c4e450ed25ad6aca82d75af6f0dbe71019abb8cfc826199a"
+            },
+            {
+              "id": "garment/meshy-grid-trial-001",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "d90e5e0dec9eabc065b7b22542c3ecf19a516681924755951add6fbc71e6d98e"
+              },
+              "meshes": [
+                {
+                  "count": 66875,
+                  "mesh": "Module_grid_trial_top_0",
+                  "start": 0
+                },
+                {
+                  "count": 26976,
+                  "mesh": "Module_grid_trial_trousers_0",
+                  "start": 66875
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "f3073f071dc8fa7955d55db9833a01cadd7d7b02a9ccd95a843eb03b88efeb03"
+            },
+            {
+              "id": "garment/meshy-low-shoes-005",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "45cae28d4779b7dad4d186e9c86877466889dd45d7dc2904ed97083b722d2e4b"
+              },
+              "meshes": [
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_left_0",
+                  "start": 0
+                },
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_right",
+                  "start": 27347
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-additional-005/low-shoes.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "ad27c923a926d59c8c1de43649129749e7856108d45cf440bb31eed35d5ded97"
+            }
+          ],
+          "fitRuns": 3,
+          "lastFitMilliseconds": 1109.5
+        },
+        "geometries": 7,
+        "id": "persona-6",
+        "name": "Kauko",
+        "renderMsIncludingPreparation": 1904.8999999910593,
+        "selected": {
+          "age": "recorded",
+          "animation": "Idle",
+          "appearance": "wardrobe",
+          "extreme": "recorded",
+          "lod": "0",
+          "resident": "persona-6",
+          "view": "front"
+        },
+        "textures": 11,
+        "triangles": 192786,
+        "withFace": true
+      }
+    },
+    {
+      "alt": "Kauko · quarter",
+      "evidence": {
+        "age": 24,
+        "calls": 7,
+        "corrective": [
+          {
+            "changedVertices": 7500,
+            "maximumMeters": 0.007035238056254304,
+            "version": "facial-identity-v1"
+          },
+          {
+            "changedVertices": 3518,
+            "maximumMeters": 0.004727725027492713,
+            "version": "facial-identity-v1"
+          }
+        ],
+        "facialIdentity": {
+          "axes": {
+            "chinProjection": 0.362124716155231,
+            "eyeSpacing": -0.5443469865992665,
+            "faceLength": 0.038227170817554,
+            "faceWidth": 0.14283140268176792,
+            "jawWidth": -0.6336399850994349,
+            "noseProjection": 0.2352224024757743,
+            "noseWidth": -0.11824888881295918
+          },
+          "derivation": "two-parents",
+          "parentIds": [
+            "founder-7",
+            "founder-8"
+          ],
+          "version": "facial-identity-v1"
+        },
+        "facialPresentation": {
+          "feminine": 0,
+          "juvenile": 0
+        },
+        "fit": {
+          "bindings": [
+            {
+              "id": "hair/manual-fitted-short2",
+              "path": "/character-lab/modules/manual-hair/short2.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "ba7307e86a9eb60d4dcdac71d4b7cab1e4b0149e85611a9bc1ff8e69a424bd8f"
+            },
+            {
+              "id": "beard/manual-fitted-double",
+              "path": "/character-lab/modules/manual-beards/double.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "5b7f7e3a8e387806c4e450ed25ad6aca82d75af6f0dbe71019abb8cfc826199a"
+            },
+            {
+              "id": "garment/meshy-grid-trial-001",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "d90e5e0dec9eabc065b7b22542c3ecf19a516681924755951add6fbc71e6d98e"
+              },
+              "meshes": [
+                {
+                  "count": 66875,
+                  "mesh": "Module_grid_trial_top_0",
+                  "start": 0
+                },
+                {
+                  "count": 26976,
+                  "mesh": "Module_grid_trial_trousers_0",
+                  "start": 66875
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "f3073f071dc8fa7955d55db9833a01cadd7d7b02a9ccd95a843eb03b88efeb03"
+            },
+            {
+              "id": "garment/meshy-low-shoes-005",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "45cae28d4779b7dad4d186e9c86877466889dd45d7dc2904ed97083b722d2e4b"
+              },
+              "meshes": [
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_left_0",
+                  "start": 0
+                },
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_right",
+                  "start": 27347
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-additional-005/low-shoes.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "ad27c923a926d59c8c1de43649129749e7856108d45cf440bb31eed35d5ded97"
+            }
+          ],
+          "fitRuns": 3,
+          "lastFitMilliseconds": 1011.7999999970198
+        },
+        "geometries": 7,
+        "id": "persona-6",
+        "name": "Kauko",
+        "renderMsIncludingPreparation": 1595.8999999910593,
+        "selected": {
+          "age": "recorded",
+          "animation": "Idle",
+          "appearance": "wardrobe",
+          "extreme": "recorded",
+          "lod": "0",
+          "resident": "persona-6",
+          "view": "quarter"
+        },
+        "textures": 11,
+        "triangles": 192786,
+        "withFace": true
+      }
+    },
+    {
+      "alt": "Kauko · profile",
+      "evidence": {
+        "age": 24,
+        "calls": 7,
+        "corrective": [
+          {
+            "changedVertices": 7500,
+            "maximumMeters": 0.007035238056254304,
+            "version": "facial-identity-v1"
+          },
+          {
+            "changedVertices": 3518,
+            "maximumMeters": 0.004727725027492713,
+            "version": "facial-identity-v1"
+          }
+        ],
+        "facialIdentity": {
+          "axes": {
+            "chinProjection": 0.362124716155231,
+            "eyeSpacing": -0.5443469865992665,
+            "faceLength": 0.038227170817554,
+            "faceWidth": 0.14283140268176792,
+            "jawWidth": -0.6336399850994349,
+            "noseProjection": 0.2352224024757743,
+            "noseWidth": -0.11824888881295918
+          },
+          "derivation": "two-parents",
+          "parentIds": [
+            "founder-7",
+            "founder-8"
+          ],
+          "version": "facial-identity-v1"
+        },
+        "facialPresentation": {
+          "feminine": 0,
+          "juvenile": 0
+        },
+        "fit": {
+          "bindings": [
+            {
+              "id": "hair/manual-fitted-short2",
+              "path": "/character-lab/modules/manual-hair/short2.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "ba7307e86a9eb60d4dcdac71d4b7cab1e4b0149e85611a9bc1ff8e69a424bd8f"
+            },
+            {
+              "id": "beard/manual-fitted-double",
+              "path": "/character-lab/modules/manual-beards/double.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "5b7f7e3a8e387806c4e450ed25ad6aca82d75af6f0dbe71019abb8cfc826199a"
+            },
+            {
+              "id": "garment/meshy-grid-trial-001",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "d90e5e0dec9eabc065b7b22542c3ecf19a516681924755951add6fbc71e6d98e"
+              },
+              "meshes": [
+                {
+                  "count": 66875,
+                  "mesh": "Module_grid_trial_top_0",
+                  "start": 0
+                },
+                {
+                  "count": 26976,
+                  "mesh": "Module_grid_trial_trousers_0",
+                  "start": 66875
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "f3073f071dc8fa7955d55db9833a01cadd7d7b02a9ccd95a843eb03b88efeb03"
+            },
+            {
+              "id": "garment/meshy-low-shoes-005",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "45cae28d4779b7dad4d186e9c86877466889dd45d7dc2904ed97083b722d2e4b"
+              },
+              "meshes": [
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_left_0",
+                  "start": 0
+                },
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_right",
+                  "start": 27347
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-additional-005/low-shoes.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "ad27c923a926d59c8c1de43649129749e7856108d45cf440bb31eed35d5ded97"
+            }
+          ],
+          "fitRuns": 3,
+          "lastFitMilliseconds": 1302.5
+        },
+        "geometries": 7,
+        "id": "persona-6",
+        "name": "Kauko",
+        "renderMsIncludingPreparation": 1872.6000000089407,
+        "selected": {
+          "age": "recorded",
+          "animation": "Idle",
+          "appearance": "wardrobe",
+          "extreme": "recorded",
+          "lod": "0",
+          "resident": "persona-6",
+          "view": "profile"
+        },
+        "textures": 11,
+        "triangles": 192786,
+        "withFace": true
+      }
+    },
+    {
+      "alt": "Beorngifu · front",
+      "evidence": {
+        "age": 32,
+        "calls": 6,
+        "corrective": [
+          {
+            "changedVertices": 4520,
+            "maximumMeters": 0.012194461576681175,
+            "version": "facial-identity-v1"
+          }
+        ],
+        "facialIdentity": {
+          "axes": {
+            "chinProjection": 0.12142361257225276,
+            "eyeSpacing": 0.2258483573794365,
+            "faceLength": -0.02368774931877848,
+            "faceWidth": -0.31671075098216533,
+            "jawWidth": -0.10648802593350412,
+            "noseProjection": -0.1298242371156812,
+            "noseWidth": 0.2560845687240362
+          },
+          "derivation": "two-parents",
+          "parentIds": [
+            "founder-6",
+            "founder-9"
+          ],
+          "version": "facial-identity-v1"
+        },
+        "facialPresentation": {
+          "feminine": 1,
+          "juvenile": 0
+        },
+        "fit": {
+          "bindings": [
+            {
+              "id": "hair/manual-long-2",
+              "path": "/character-lab/modules/manual-long-hair/long-2.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "b808c552c30a68e7b6b2b3221227dc8af9d98deb4dcdba425133ef77f58f186d"
+            },
+            {
+              "id": "garment/meshy-grid-trial-001",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "d90e5e0dec9eabc065b7b22542c3ecf19a516681924755951add6fbc71e6d98e"
+              },
+              "meshes": [
+                {
+                  "count": 66875,
+                  "mesh": "Module_grid_trial_top_0",
+                  "start": 0
+                },
+                {
+                  "count": 26976,
+                  "mesh": "Module_grid_trial_trousers_0",
+                  "start": 66875
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "f3073f071dc8fa7955d55db9833a01cadd7d7b02a9ccd95a843eb03b88efeb03"
+            },
+            {
+              "id": "garment/meshy-low-shoes-005",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "45cae28d4779b7dad4d186e9c86877466889dd45d7dc2904ed97083b722d2e4b"
+              },
+              "meshes": [
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_left_0",
+                  "start": 0
+                },
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_right",
+                  "start": 27347
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-additional-005/low-shoes.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "ad27c923a926d59c8c1de43649129749e7856108d45cf440bb31eed35d5ded97"
+            }
+          ],
+          "fitRuns": 3,
+          "lastFitMilliseconds": 1126.0999999940395
+        },
+        "geometries": 6,
+        "id": "persona-2",
+        "name": "Beorngifu",
+        "renderMsIncludingPreparation": 1677.7000000029802,
+        "selected": {
+          "age": "recorded",
+          "animation": "Idle",
+          "appearance": "wardrobe",
+          "extreme": "recorded",
+          "lod": "0",
+          "resident": "persona-2",
+          "view": "front"
+        },
+        "textures": 11,
+        "triangles": 189310,
+        "withFace": true
+      }
+    },
+    {
+      "alt": "Beorngifu · quarter",
+      "evidence": {
+        "age": 32,
+        "calls": 6,
+        "corrective": [
+          {
+            "changedVertices": 4520,
+            "maximumMeters": 0.012194461576681175,
+            "version": "facial-identity-v1"
+          }
+        ],
+        "facialIdentity": {
+          "axes": {
+            "chinProjection": 0.12142361257225276,
+            "eyeSpacing": 0.2258483573794365,
+            "faceLength": -0.02368774931877848,
+            "faceWidth": -0.31671075098216533,
+            "jawWidth": -0.10648802593350412,
+            "noseProjection": -0.1298242371156812,
+            "noseWidth": 0.2560845687240362
+          },
+          "derivation": "two-parents",
+          "parentIds": [
+            "founder-6",
+            "founder-9"
+          ],
+          "version": "facial-identity-v1"
+        },
+        "facialPresentation": {
+          "feminine": 1,
+          "juvenile": 0
+        },
+        "fit": {
+          "bindings": [
+            {
+              "id": "hair/manual-long-2",
+              "path": "/character-lab/modules/manual-long-hair/long-2.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "b808c552c30a68e7b6b2b3221227dc8af9d98deb4dcdba425133ef77f58f186d"
+            },
+            {
+              "id": "garment/meshy-grid-trial-001",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "d90e5e0dec9eabc065b7b22542c3ecf19a516681924755951add6fbc71e6d98e"
+              },
+              "meshes": [
+                {
+                  "count": 66875,
+                  "mesh": "Module_grid_trial_top_0",
+                  "start": 0
+                },
+                {
+                  "count": 26976,
+                  "mesh": "Module_grid_trial_trousers_0",
+                  "start": 66875
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "f3073f071dc8fa7955d55db9833a01cadd7d7b02a9ccd95a843eb03b88efeb03"
+            },
+            {
+              "id": "garment/meshy-low-shoes-005",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "45cae28d4779b7dad4d186e9c86877466889dd45d7dc2904ed97083b722d2e4b"
+              },
+              "meshes": [
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_left_0",
+                  "start": 0
+                },
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_right",
+                  "start": 27347
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-additional-005/low-shoes.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "ad27c923a926d59c8c1de43649129749e7856108d45cf440bb31eed35d5ded97"
+            }
+          ],
+          "fitRuns": 3,
+          "lastFitMilliseconds": 1137
+        },
+        "geometries": 6,
+        "id": "persona-2",
+        "name": "Beorngifu",
+        "renderMsIncludingPreparation": 1691.0999999940395,
+        "selected": {
+          "age": "recorded",
+          "animation": "Idle",
+          "appearance": "wardrobe",
+          "extreme": "recorded",
+          "lod": "0",
+          "resident": "persona-2",
+          "view": "quarter"
+        },
+        "textures": 11,
+        "triangles": 189310,
+        "withFace": true
+      }
+    },
+    {
+      "alt": "Beorngifu · profile",
+      "evidence": {
+        "age": 32,
+        "calls": 6,
+        "corrective": [
+          {
+            "changedVertices": 4520,
+            "maximumMeters": 0.012194461576681175,
+            "version": "facial-identity-v1"
+          }
+        ],
+        "facialIdentity": {
+          "axes": {
+            "chinProjection": 0.12142361257225276,
+            "eyeSpacing": 0.2258483573794365,
+            "faceLength": -0.02368774931877848,
+            "faceWidth": -0.31671075098216533,
+            "jawWidth": -0.10648802593350412,
+            "noseProjection": -0.1298242371156812,
+            "noseWidth": 0.2560845687240362
+          },
+          "derivation": "two-parents",
+          "parentIds": [
+            "founder-6",
+            "founder-9"
+          ],
+          "version": "facial-identity-v1"
+        },
+        "facialPresentation": {
+          "feminine": 1,
+          "juvenile": 0
+        },
+        "fit": {
+          "bindings": [
+            {
+              "id": "hair/manual-long-2",
+              "path": "/character-lab/modules/manual-long-hair/long-2.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "b808c552c30a68e7b6b2b3221227dc8af9d98deb4dcdba425133ef77f58f186d"
+            },
+            {
+              "id": "garment/meshy-grid-trial-001",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "d90e5e0dec9eabc065b7b22542c3ecf19a516681924755951add6fbc71e6d98e"
+              },
+              "meshes": [
+                {
+                  "count": 66875,
+                  "mesh": "Module_grid_trial_top_0",
+                  "start": 0
+                },
+                {
+                  "count": 26976,
+                  "mesh": "Module_grid_trial_trousers_0",
+                  "start": 66875
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "f3073f071dc8fa7955d55db9833a01cadd7d7b02a9ccd95a843eb03b88efeb03"
+            },
+            {
+              "id": "garment/meshy-low-shoes-005",
+              "materialPolicy": {
+                "kind": "provider-original",
+                "provider": "Meshy",
+                "reviewOnly": true,
+                "sourceSha256": "45cae28d4779b7dad4d186e9c86877466889dd45d7dc2904ed97083b722d2e4b"
+              },
+              "meshes": [
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_left_0",
+                  "start": 0
+                },
+                {
+                  "count": 27347,
+                  "mesh": "Module_low-shoes_right",
+                  "start": 27347
+                }
+              ],
+              "path": "/character-lab/candidates/meshy-additional-005/low-shoes.binding.json",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+              "sha256": "ad27c923a926d59c8c1de43649129749e7856108d45cf440bb31eed35d5ded97"
+            }
+          ],
+          "fitRuns": 3,
+          "lastFitMilliseconds": 1046.4000000059605
+        },
+        "geometries": 6,
+        "id": "persona-2",
+        "name": "Beorngifu",
+        "renderMsIncludingPreparation": 1627.6000000089407,
+        "selected": {
+          "age": "recorded",
+          "animation": "Idle",
+          "appearance": "wardrobe",
+          "extreme": "recorded",
+          "lod": "0",
+          "resident": "persona-2",
+          "view": "profile"
+        },
+        "textures": 11,
+        "triangles": 189310,
+        "withFace": true
+      }
+    },
+    {
+      "alt": "Kaunikki · front",
+      "evidence": {
+        "age": 4,
+        "calls": 1,
+        "corrective": [],
+        "facialIdentity": {
+          "axes": {
+            "chinProjection": 0.1972939791530371,
+            "eyeSpacing": -0.20923368426039812,
+            "faceLength": 0.06351558029651644,
+            "faceWidth": -0.016449139546602973,
+            "jawWidth": -0.3660315220057965,
+            "noseProjection": -0.0194103878736496,
+            "noseWidth": 0.06991438014432785
+          },
+          "derivation": "two-parents",
+          "parentIds": [
+            "persona-2",
+            "persona-6"
+          ],
+          "version": "facial-identity-v1"
+        },
+        "facialPresentation": {
+          "feminine": 1,
+          "juvenile": 1
+        },
+        "fit": {
+          "bindings": [],
+          "fitRuns": 3,
+          "lastFitMilliseconds": 0
+        },
+        "geometries": 1,
+        "id": "persona-10",
+        "name": "Kaunikki",
+        "renderMsIncludingPreparation": 137.79999999701977,
+        "selected": {
+          "age": "recorded",
+          "animation": "Idle",
+          "appearance": "wardrobe",
+          "extreme": "recorded",
+          "lod": "0",
+          "resident": "persona-10",
+          "view": "front"
+        },
+        "textures": 11,
+        "triangles": 7644,
+        "withFace": true
+      }
+    },
+    {
+      "alt": "Kaunikki · quarter",
+      "evidence": {
+        "age": 4,
+        "calls": 1,
+        "corrective": [],
+        "facialIdentity": {
+          "axes": {
+            "chinProjection": 0.1972939791530371,
+            "eyeSpacing": -0.20923368426039812,
+            "faceLength": 0.06351558029651644,
+            "faceWidth": -0.016449139546602973,
+            "jawWidth": -0.3660315220057965,
+            "noseProjection": -0.0194103878736496,
+            "noseWidth": 0.06991438014432785
+          },
+          "derivation": "two-parents",
+          "parentIds": [
+            "persona-2",
+            "persona-6"
+          ],
+          "version": "facial-identity-v1"
+        },
+        "facialPresentation": {
+          "feminine": 1,
+          "juvenile": 1
+        },
+        "fit": {
+          "bindings": [],
+          "fitRuns": 3,
+          "lastFitMilliseconds": 0
+        },
+        "geometries": 1,
+        "id": "persona-10",
+        "name": "Kaunikki",
+        "renderMsIncludingPreparation": 184.19999998807907,
+        "selected": {
+          "age": "recorded",
+          "animation": "Idle",
+          "appearance": "wardrobe",
+          "extreme": "recorded",
+          "lod": "0",
+          "resident": "persona-10",
+          "view": "quarter"
+        },
+        "textures": 11,
+        "triangles": 7644,
+        "withFace": true
+      }
+    },
+    {
+      "alt": "Kaunikki · profile",
+      "evidence": {
+        "age": 4,
+        "calls": 1,
+        "corrective": [],
+        "facialIdentity": {
+          "axes": {
+            "chinProjection": 0.1972939791530371,
+            "eyeSpacing": -0.20923368426039812,
+            "faceLength": 0.06351558029651644,
+            "faceWidth": -0.016449139546602973,
+            "jawWidth": -0.3660315220057965,
+            "noseProjection": -0.0194103878736496,
+            "noseWidth": 0.06991438014432785
+          },
+          "derivation": "two-parents",
+          "parentIds": [
+            "persona-2",
+            "persona-6"
+          ],
+          "version": "facial-identity-v1"
+        },
+        "facialPresentation": {
+          "feminine": 1,
+          "juvenile": 1
+        },
+        "fit": {
+          "bindings": [],
+          "fitRuns": 3,
+          "lastFitMilliseconds": 0.09999999403953552
+        },
+        "geometries": 1,
+        "id": "persona-10",
+        "name": "Kaunikki",
+        "renderMsIncludingPreparation": 129.09999999403954,
+        "selected": {
+          "age": "recorded",
+          "animation": "Idle",
+          "appearance": "wardrobe",
+          "extreme": "recorded",
+          "lod": "0",
+          "resident": "persona-10",
+          "view": "profile"
+        },
+        "textures": 11,
+        "triangles": 7644,
+        "withFace": true
+      }
+    },
+    {
+      "alt": "Helmikki · front",
+      "evidence": {
+        "age": 0,
+        "calls": 1,
+        "corrective": [],
+        "facialIdentity": {
+          "axes": {
+            "chinProjection": 0.292852562405169,
+            "eyeSpacing": -0.2185294294171035,
+            "faceLength": -0.029222205244004703,
+            "faceWidth": -0.11867363067343832,
+            "jawWidth": -0.3458142809942365,
+            "noseProjection": 0.02127761855721473,
+            "noseWidth": 0.007620189469307641
+          },
+          "derivation": "two-parents",
+          "parentIds": [
+            "persona-2",
+            "persona-6"
+          ],
+          "version": "facial-identity-v1"
+        },
+        "facialPresentation": {
+          "feminine": 1,
+          "juvenile": 1
+        },
+        "fit": {
+          "bindings": [],
+          "fitRuns": 3,
+          "lastFitMilliseconds": 0
+        },
+        "geometries": 1,
+        "id": "persona-11",
+        "name": "Helmikki",
+        "renderMsIncludingPreparation": 104.40000000596046,
+        "selected": {
+          "age": "recorded",
+          "animation": "Idle",
+          "appearance": "wardrobe",
+          "extreme": "recorded",
+          "lod": "0",
+          "resident": "persona-11",
+          "view": "front"
+        },
+        "textures": 11,
+        "triangles": 7644,
+        "withFace": true
+      }
+    },
+    {
+      "alt": "Helmikki · quarter",
+      "evidence": {
+        "age": 0,
+        "calls": 1,
+        "corrective": [],
+        "facialIdentity": {
+          "axes": {
+            "chinProjection": 0.292852562405169,
+            "eyeSpacing": -0.2185294294171035,
+            "faceLength": -0.029222205244004703,
+            "faceWidth": -0.11867363067343832,
+            "jawWidth": -0.3458142809942365,
+            "noseProjection": 0.02127761855721473,
+            "noseWidth": 0.007620189469307641
+          },
+          "derivation": "two-parents",
+          "parentIds": [
+            "persona-2",
+            "persona-6"
+          ],
+          "version": "facial-identity-v1"
+        },
+        "facialPresentation": {
+          "feminine": 1,
+          "juvenile": 1
+        },
+        "fit": {
+          "bindings": [],
+          "fitRuns": 3,
+          "lastFitMilliseconds": 0
+        },
+        "geometries": 1,
+        "id": "persona-11",
+        "name": "Helmikki",
+        "renderMsIncludingPreparation": 128.90000000596046,
+        "selected": {
+          "age": "recorded",
+          "animation": "Idle",
+          "appearance": "wardrobe",
+          "extreme": "recorded",
+          "lod": "0",
+          "resident": "persona-11",
+          "view": "quarter"
+        },
+        "textures": 11,
+        "triangles": 7644,
+        "withFace": true
+      }
+    },
+    {
+      "alt": "Helmikki · profile",
+      "evidence": {
+        "age": 0,
+        "calls": 1,
+        "corrective": [],
+        "facialIdentity": {
+          "axes": {
+            "chinProjection": 0.292852562405169,
+            "eyeSpacing": -0.2185294294171035,
+            "faceLength": -0.029222205244004703,
+            "faceWidth": -0.11867363067343832,
+            "jawWidth": -0.3458142809942365,
+            "noseProjection": 0.02127761855721473,
+            "noseWidth": 0.007620189469307641
+          },
+          "derivation": "two-parents",
+          "parentIds": [
+            "persona-2",
+            "persona-6"
+          ],
+          "version": "facial-identity-v1"
+        },
+        "facialPresentation": {
+          "feminine": 1,
+          "juvenile": 1
+        },
+        "fit": {
+          "bindings": [],
+          "fitRuns": 3,
+          "lastFitMilliseconds": 0.10000000894069672
+        },
+        "geometries": 1,
+        "id": "persona-11",
+        "name": "Helmikki",
+        "renderMsIncludingPreparation": 136.29999999701977,
+        "selected": {
+          "age": "recorded",
+          "animation": "Idle",
+          "appearance": "wardrobe",
+          "extreme": "recorded",
+          "lod": "0",
+          "resident": "persona-11",
+          "view": "profile"
+        },
+        "textures": 11,
+        "triangles": 7644,
+        "withFace": true
+      }
+    }
+  ],
+  "notes": [
+    "Actual IAB desktop browser; no physical iOS claim.",
+    "On-demand cached PNG snapshots, inherited face shape only, no added eye/brow mesh.",
+    "Existing wardrobe, recorded age, all three angles for the fixed real family."
+  ]
+}

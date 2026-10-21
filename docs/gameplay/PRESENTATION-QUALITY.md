@@ -39,15 +39,16 @@ depends on quality, viewport, culling or reduced motion. Existing load/disposal 
 independent home/rival ground caches retain their ownership. No animation cadence or LOD transition
 is changed in this delivery, so no new distance switching, fitting loop or LOD cache is introduced.
 
-## Future portrait consumer (#198)
+## On-demand portraits (#198)
 
-A future on-demand portrait request reads the same chosen profile: its `maximumPixelRatio` gives
-the existing resolution constraint and `residentLOD` identifies the currently supported world
-body. The caller supplies an explicit CSS/output rectangle and any separately reviewed compatible
-portrait-detail request. It must preserve the same resident DNA, source rig and module bindings;
-it cannot silently change the world's LOD or infer hidden identities. Actual portrait output
-budgets, source eligibility and a bounded on-demand cache remain #198's responsibility. This policy
-does not create portraits, extra permanent renderers or background portrait jobs.
+Person-card portraits use the same recorded DNA, inherited face and wardrobe selection as the
+world. World residents retain native LOD2; the separately requested portrait uses native LOD0
+with the approved shape-only face and fixed three-quarter camera. Its 256px output uses the
+chosen profile's `maximumPixelRatio` (1× Low, 1.5× Standard). No hidden identity is projected.
+`CharacterPortraits` serializes requests, retains at most 24 PNGs per consumer and releases its
+temporary renderer after each request burst. There is no live card renderer or background
+population capture. Character Lab requests its 2D preview explicitly. See the
+[integration evidence and limitations](../qa/facial-identity/REPORT.md).
 
 ## Measured candidate and acceptance
 

@@ -1,0 +1,41 @@
+{
+  "baselineCommit": "94792905d583a7c791a92169d1c8862c7ab8c8d3",
+  "generatedAt": "2026-10-21T10:06:27.0194019Z",
+  "hashes": {
+    "src/character-lab/CharacterLab.ts": "87cd46b7538b15fbcb4a94f5b047b2d49c8d3ce1f0325313a9a4b02318496ff9",
+    "src/characters/CharacterAssets.ts": "ecf8e0fc04c9900237e8864734eee0d3dc95eff8ac089b53764e0ac2f1ea0381",
+    "src/characters/FemaleHairCatalog.ts": "df6e94caf91262d79991025047d2ad11d45433f1a40c578344ff15bcf100af92",
+    "src/characters/FemaleHairMeasurements.ts": "63bfb9e5453cd318a7cc787acfc82fedb623ac02de32995d80597b80456c5921",
+    "src/fjord-play/FjordWardrobe.ts": "fe5a3ba9dd31d80808f3b9bd6934bd40e54005f171d9a92c4dfa0daad7c538b4",
+    "scripts/prepare-female-hair.mjs": "cb8aa6af4311626c56befba617a2741bdc87dd2069d3fa55aee41c5d5803ca4a",
+    "tests/female-hair.test.mjs": "c4bbb334fc93187a96cc815e443b30fffe345dc5987d510f97ebee61a9d135d4",
+    "tests/fjord-clothing.test.mjs": "0783c461ea839c85ca635e8a7b3298d3d3b367aca699773e997d392f95145a3c"
+  },
+  "results": {
+    "characterValidation": "passed: 20 assets / 36 GLBs, 12 Golden Characters, 19 equipped modules",
+    "productionBuild": "passed",
+    "formatting": "manual review and git diff --check",
+    "publicFilesValidated": 505,
+    "typeScript": "passed",
+    "focusedTests": {
+      "passed": 31,
+      "failed": 0,
+      "skipped": 0
+    },
+    "finalFemaleHairTests": {
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "browser": {
+    "environment": "Windows IAB desktop",
+    "physicalDeviceTested": false,
+    "observations": [
+      "All three styles rendered in native Character Lab portraits",
+      "Wavy hair with fisher headwear",
+      "Wavy hair with fully grey DNA colour at age 100"
+    ]
+  },
+  "sourcePreserved": true
+}

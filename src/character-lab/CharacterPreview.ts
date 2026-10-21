@@ -18,6 +18,8 @@ import { LabBodyPresentation, defaultLabBodyPresentation, parseLabBodyPresentati
 import {nativeNeutralPose} from '../characters/NativeNeutralPose';
 import {PreviewGround} from './PreviewGround';
 import {humanPreviewGroundSpeed} from './HumanPreviewPace';
+import { founderFacialIdentity, type FacialIdentityV1 } from '../characters/FacialIdentity';
+import { CharacterPortraits } from '../characters/CharacterPortraits';
 
 export class CharacterPreview {
     private scene=new Scene();
@@ -30,6 +32,10 @@ export class CharacterPreview {
     private current:UniversalHuman|MeshyHuman|null=null;
     private comparison:UniversalHuman|MeshyHuman|null=null;
     private currentDNA:CharacterDNA|null=null;
+    private face?: FacialIdentityV1;
+    private faceSeed?: number;
+    private portraits = new CharacterPortraits();
+    private portraitAbort?: AbortController;
     private presentation:CharacterPresentation={...defaultCharacterPresentation};
     private comparisonSnapshot:LabTestSnapshot|null=null;
     private bodyPresentation:LabBodyPresentation={...defaultLabBodyPresentation};
@@ -74,8 +80,16 @@ export class CharacterPreview {
             this.controls.update();
             this.renderer.render(this.scene, this.camera);
         });
+        window.addEventListener('pagehide', () => {
+            this.portraitAbort?.abort();
+            this.portraits.dispose();
+        }, { once: true });
     }
     setCharacter(_phenotype:Phenotype,dna:CharacterDNA,presentation:CharacterPresentation=this.presentation,body:LabBodyPresentation=this.bodyPresentation){
+        if (this.faceSeed !== dna.seed) {
+            this.face = founderFacialIdentity(dna.seed);
+            this.faceSeed = dna.seed;
+        }
         this.currentDNA = dna;
         this.presentation = parseCharacterPresentation(presentation);
         this.bodyPresentation = parseLabBodyPresentation(body);
@@ -109,29 +123,44 @@ export class CharacterPreview {
     }
     resume(){this.paused=this.animation===nativeNeutralPose;this.reportModel();}
     /** Restore camera/clock before the controller issues its single character refresh. */
-    restoreReviewState(snapshot:LabTestSnapshot){const s=parseLabSnapshot(snapshot);this.restoringSnapshot=true;this.lod=s.lod;this.animation=s.pose.animation;this.poseTime=s.pose.time;this.paused=s.pose.paused;this.setCamera(s.camera.position,s.camera.target,s.camera.type,s.camera.scale??2.4);}
+    restoreReviewState(snapshot: LabTestSnapshot) {
+        const saved = parseLabSnapshot(snapshot);
+        this.face = saved.face ?? founderFacialIdentity(saved.dna.seed);
+        this.faceSeed = saved.dna.seed;
+        this.restoringSnapshot = true;
+        this.lod = saved.lod;
+        this.animation = saved.pose.animation;
+        this.poseTime = saved.pose.time;
+        this.paused = saved.pose.paused;
+        this.setCamera(saved.camera.position, saved.camera.target, saved.camera.type, saved.camera.scale ?? 2.4);
+    }
     captureSnapshot():LabTestSnapshot {
         if(!this.current||!this.currentDNA||this.canvas.dataset.ready!=='true')throw new Error('Wait until the character has loaded.');
         this.setPose(this.current.animationState.time);
         return parseLabSnapshot({version:labSnapshotVersion,styleVersion:labBodyAsset(this.bodyPresentation.source??'published',this.lod).styleVersion,contractVersion:1,fitVersion:isMeshyLabBodySource(this.bodyPresentation.source)?'pillagers-fit/0.2':characterContract.attachmentVersion,
             dna:this.currentDNA,presentation:this.presentation,body:this.bodyPresentation,lod:this.lod,pose:{animation:this.animation,time:this.current.animationState.time,paused:true},
+            ...(this.current instanceof MeshyHuman ? {face:this.face} : {}),
             camera:{type:this.camera===this.orthographicCamera?'orthographic':'perspective',scale:this.camera===this.orthographicCamera?this.orthographicScale/this.orthographicCamera.zoom:null,fov:38,position:this.camera.position.toArray(),target:this.controls.target.toArray()},lighting:'lab-neutral/1',modules:snapshotModules(this.currentDNA,this.presentation,this.lod,this.bodyPresentation)});
     }
-    private async createPreview(dna:CharacterDNA,lod:number,presentation:CharacterPresentation,body:LabBodyPresentation){
+    private async createPreview(dna:CharacterDNA,lod:number,presentation:CharacterPresentation,body:LabBodyPresentation,face?:FacialIdentityV1){
         if(!isMeshyLabBodySource(body.source))return characterFactory.create(dna,lod,presentation,body);
         const factory=meshyHumanFactory;
-        const resolved=resolveLabBodyProfile(dna,body),model=await factory.create(dna,lod,resolved.profile,presentation);
+        const resolved=resolveLabBodyProfile(dna,body),model=await factory.create(dna,lod,resolved.profile,presentation,
+            face ?? founderFacialIdentity(dna.seed));
         model.setPlaybackRate(1);
         model.root.userData.bodySource=labBodyAsset(body.source,lod);model.root.userData.presentation={...presentation};
         model.root.userData.bodyPresentation=resolved.body;model.root.userData.bodyPresentationStatus=resolved.status;
         return model;
     }
     private async refresh(){
+        this.portraitAbort?.abort();
+        const portrait = document.querySelector<HTMLImageElement>('#lab-portrait');
+        if (portrait) portrait.hidden = true;
         const revision=++this.revision;this.canvas.dataset.ready='false';
         this.syncGroundPlayback();
         try{
             const pinned=this.comparisonSnapshot;
-            const models=await Promise.all([this.currentDNA?this.createPreview(this.currentDNA,this.lod,this.presentation,this.bodyPresentation):null,pinned?this.createPreview(pinned.dna,pinned.lod,pinned.presentation,pinned.body):null]);
+            const models=await Promise.all([this.currentDNA?this.createPreview(this.currentDNA,this.lod,this.presentation,this.bodyPresentation,this.face):null,pinned?this.createPreview(pinned.dna,pinned.lod,pinned.presentation,pinned.body,pinned.face):null]);
             if(revision!==this.revision){for(const model of models)model?.dispose();return;}
             for(const model of [this.current,this.comparison])if(model){this.scene.remove(model.root);model.dispose();}
             [this.current,this.comparison]=models;
@@ -143,6 +172,24 @@ export class CharacterPreview {
             this.canvas.dataset.ready = 'true';
             this.reportModel();
         }catch(error){if(revision!==this.revision)return;this.report(`Universal Human could not load: ${error instanceof Error?error.message:String(error)}`,true);}
+    }
+    async renderPortrait() {
+        if (!(this.current instanceof MeshyHuman) || !this.currentDNA || this.canvas.dataset.ready !== 'true') {
+            throw new Error('Load the native Meshy Human before rendering its portrait.');
+        }
+        this.portraitAbort?.abort();
+        const abort = this.portraitAbort = new AbortController();
+        const input = { dna: this.currentDNA, face: this.face!, presentation: this.presentation,
+            profile: resolveLabBodyProfile(this.currentDNA, this.bodyPresentation).profile };
+        this.report('Preparing 2D portrait…');
+        const image = await this.portraits.request(input, abort.signal);
+        if (!image || abort.signal.aborted) return;
+        const portrait = document.querySelector<HTMLImageElement>('#lab-portrait');
+        if (portrait) {
+            portrait.src = image;
+            portrait.hidden = false;
+        }
+        this.report('2D portrait ready · inherited face shape · three-quarter view.');
     }
     private playModel(model:UniversalHuman|MeshyHuman,animation:string){
         if(model instanceof MeshyHuman)model.sampleAnimation(animation,0);else model.setAnimation(animation as HumanAnimation);

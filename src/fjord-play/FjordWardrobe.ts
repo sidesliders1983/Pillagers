@@ -2,6 +2,7 @@ import {defaultCharacterPresentation, type CharacterPresentation} from '../chara
 import {gridTrialOutfitId} from '../characters/GridTrialOutfitCatalog';
 import {identitySample} from '../characters/seededRandom';
 import {characterAppearance} from '../characters/CharacterAppearance';
+import {femaleHairAssets} from '../characters/FemaleHairCatalog';
 import type {FjordEntity} from './FjordProjection';
 import type {MeshyHuman, MeshyHumanFactory} from '../characters/MeshyHuman';
 
@@ -27,16 +28,20 @@ export function fjordClothingSet(entity: Pick<FjordEntity, 'kind' | 'dna' | 'sta
 }
 
 export const fjordShortHairAssets = ['hair/manual-fitted-short', 'hair/manual-fitted-short2'] as const;
-export const fjordHairAssets = [...fjordShortHairAssets,
+export const fjordMaleHairAssets = [...fjordShortHairAssets,
     'hair/manual-long-braided', 'hair/manual-long-2'] as const;
+export const fjordFemaleHairAssets = femaleHairAssets.map(asset => asset.id);
+export const fjordHairAssets: readonly string[] = [...fjordMaleHairAssets, ...fjordFemaleHairAssets];
 
-/** Approved adult styles use a visual seed stream independent of sex and occupation. */
+/** Adult women use the fitted female styles; men's and children's existing streams stay stable. */
 export function fjordHairAsset(entity: Pick<FjordEntity, 'kind' | 'dna'>): string {
     if (entity.kind !== 'persona' || !entity.dna || entity.dna.age < 6) return 'none';
     // Long hair has adult-only source bindings. Preserve children's existing short variants.
     const adult = entity.dna.age >= 18;
-    const assets = adult ? fjordHairAssets : fjordShortHairAssets;
-    const stream = adult ? 'fjord.hair.adult.variant' : 'fjord.hair.short.variant';
+    const female = adult && entity.dna.sex === 'female';
+    const assets = female ? fjordFemaleHairAssets : adult ? fjordMaleHairAssets : fjordShortHairAssets;
+    const stream = female ? 'fjord.hair.female.adult.variant' :
+        adult ? 'fjord.hair.adult.variant' : 'fjord.hair.short.variant';
     const variant = Math.floor(identitySample(entity.dna.seed, stream) * assets.length);
     return assets[variant];
 }
@@ -66,6 +71,13 @@ export function fjordHeadwearAsset(entity: Pick<FjordEntity, 'kind' | 'dna' | 's
 }
 export function fjordToolAsset(entity: Pick<FjordEntity, 'kind' | 'dna' | 'status'>): string {
     return occupationModuleAsset(entity, 'equipment');
+}
+
+/** Portraits and live residents use exactly the same wardrobe choices. */
+export function fjordWardrobePresentation(entity: Pick<FjordEntity, 'kind' | 'dna' | 'status'>): CharacterPresentation {
+    return { ...fjordClothingSets[fjordClothingSet(entity)], hair: fjordHairAsset(entity),
+        beard: fjordBeardAsset(entity), headwear: fjordHeadwearAsset(entity),
+        equipment: fjordToolAsset(entity) } as CharacterPresentation;
 }
 interface WardrobeState {
     installed?: string;
@@ -100,7 +112,7 @@ export class FjordWardrobe {
         }
         const revision = ++state.revision;
         state.pending = key;
-        const request = this.factory.equip(human, {...fjordClothingSets[selected], hair, beard, headwear, equipment} as CharacterPresentation);
+        const request = this.factory.equip(human, fjordWardrobePresentation(entity));
         const equipRevision = human.equipRevision;
         state.equipRevision = equipRevision;
         state.task = request.then(() => {

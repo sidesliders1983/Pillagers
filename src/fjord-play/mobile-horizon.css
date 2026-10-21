@@ -168,6 +168,7 @@
 #fjord-play.fjord-mobile .fjord-card-heading h2 { font: 20px/1.15 Georgia,serif; margin: 2px 0 4px; }
 #fjord-play.fjord-mobile .fjord-card-heading small { display: none; }
 #fjord-play.fjord-mobile .fjord-emblem { border: 0; width: 28px; height: 36px; }
+#fjord-play.fjord-mobile .fjord-portrait { width: 52px; height: 60px; }
 #fjord-play.fjord-mobile .fjord-emblem .fjord-glyph { width: 26px; height: 26px; }
 #fjord-play.fjord-mobile .fjord-close { width: 44px; min-height: 44px; flex: 0 0 auto; }
 #fjord-play.fjord-mobile .fjord-card-body { padding: 8px 12px 12px; overflow: visible; }

@@ -6,6 +6,7 @@ import type {GLTF} from 'three/addons/loaders/GLTFLoader.js';
 import {MeshyBodyFitAdapter, anchorPoint} from './MeshyBodyFitAdapter';
 import {ModuleBindingV2} from './BodyFitAdapter';
 import {fitNativeHeadwear} from './NativeHeadwearFit';
+import { fitNativeFacialModule } from './NativeFacialGeometry';
 import {NativeHairRig} from './NativeHairRig';
 import {maskedBodyGeometry} from './BodyCoverage';
 import {sewModuleOpenings, weldModuleOpeningCorners} from './ModuleRims';
@@ -418,6 +419,13 @@ export class MeshyModuleRuntime {
   for (const record of this.records.values()) {
    if (!record.source.binding.dependency) {
     for (const part of record.parts) this.fitPart(record, part, inverseEncoding, profile);
+   }
+  }
+  if (this.fit.facialIdentity && this.fit.mesh.morphTargetInfluences?.some(weight => weight !== 0)) {
+   for (const record of this.records.values()) {
+    if (!['hair', 'beard', 'headwear'].includes(record.source.asset.type)) continue;
+    for (const part of record.parts)
+     fitNativeFacialModule(part.mesh as SkinnedMesh, this.fit, this.fit.facialIdentity);
    }
   }
   this.fit.rootForModulesUpdate();

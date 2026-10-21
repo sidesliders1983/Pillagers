@@ -1,0 +1,1034 @@
+{
+  "revision": "d36d7ef3cbd27ec45bb5bd6cc2fbcc7e8c761d2b",
+  "note": "Actual production native Meshy runtime assets; no source substitutions. Images are unmodified embedded runtime textures.",
+  "rows": [
+    {
+      "lod": 0,
+      "asset": {
+        "id": "body/meshy-human",
+        "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "lod": 0,
+        "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+      },
+      "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+      "vertices": 5997,
+      "triangles": 7644,
+      "authoredMorphTargets": {},
+      "headJoint": 5,
+      "joints": [
+        "mixamorigHips",
+        "mixamorigSpine",
+        "mixamorigSpine1",
+        "mixamorigSpine2",
+        "mixamorigNeck",
+        "mixamorigHead",
+        "mixamorigHeadTop_End",
+        "headfront",
+        "mixamorigLeftShoulder",
+        "mixamorigLeftArm",
+        "mixamorigLeftForeArm",
+        "mixamorigLeftHand",
+        "Bone_045",
+        "mixamorigLeftHandThumb1",
+        "mixamorigLeftHandThumb2",
+        "mixamorigLeftHandThumb3",
+        "mixamorigLeftHandThumb4",
+        "mixamorigLeftHandMiddle1",
+        "mixamorigLeftHandMiddle2",
+        "mixamorigLeftHandMiddle3",
+        "mixamorigLeftHandMiddle4",
+        "mixamorigRightShoulder",
+        "mixamorigRightArm",
+        "mixamorigRightForeArm",
+        "mixamorigRightHand",
+        "Bone_046",
+        "mixamorigRightHandThumb1",
+        "mixamorigRightHandThumb2",
+        "mixamorigRightHandThumb3",
+        "mixamorigRightHandThumb4",
+        "mixamorigRightHandMiddle1",
+        "mixamorigRightHandMiddle2",
+        "mixamorigRightHandMiddle3",
+        "mixamorigRightHandMiddle4",
+        "mixamorigLeftUpLeg",
+        "mixamorigLeftLeg",
+        "mixamorigLeftFoot",
+        "mixamorigLeftToeBase",
+        "mixamorigLeftToe_End",
+        "mixamorigRightUpLeg",
+        "mixamorigRightLeg",
+        "mixamorigRightFoot",
+        "mixamorigRightToeBase",
+        "mixamorigRightToe_End"
+      ],
+      "fullyHeadVertices": 84,
+      "mixedHeadVertices": 654,
+      "fullyHeadTriangles": 103,
+      "faceBands": [
+        {
+          "y": 1.38,
+          "count": 10,
+          "front": [
+            0.008479541025585605,
+            1.3847017888683921,
+            0.02614636861971862
+          ]
+        },
+        {
+          "y": 1.4,
+          "count": 23,
+          "front": [
+            -0.013475473665062583,
+            1.4031319254863126,
+            0.029469830842321753
+          ]
+        },
+        {
+          "y": 1.42,
+          "count": 9,
+          "front": [
+            -0.006627118585410836,
+            1.4167279330839948,
+            0.03883596110381617
+          ]
+        },
+        {
+          "y": 1.44,
+          "count": 29,
+          "front": [
+            0.0026383035714344525,
+            1.4472686098342062,
+            0.09221283652197419
+          ]
+        },
+        {
+          "y": 1.46,
+          "count": 4,
+          "front": [
+            0.022679804727903187,
+            1.4539154834910162,
+            -0.09319627428490632
+          ]
+        },
+        {
+          "y": 1.48,
+          "count": 23,
+          "front": [
+            -0.0047136059390771945,
+            1.4867473663174327,
+            0.10057185573409615
+          ]
+        },
+        {
+          "y": 1.5,
+          "count": 12,
+          "front": [
+            -0.0037064950729793662,
+            1.5052782106652376,
+            0.11587994108603128
+          ]
+        },
+        {
+          "y": 1.52,
+          "count": 11,
+          "front": [
+            -0.014381870453814925,
+            1.528844606063084,
+            0.09825549889812317
+          ]
+        },
+        {
+          "y": 1.54,
+          "count": 22,
+          "front": [
+            -0.005922138979115061,
+            1.5333766066290144,
+            0.11094509641959725
+          ]
+        },
+        {
+          "y": 1.56,
+          "count": 8,
+          "front": [
+            -0.009044182660683556,
+            1.555331625623373,
+            0.11316073960510507
+          ]
+        },
+        {
+          "y": 1.58,
+          "count": 4,
+          "front": [
+            -0.00290080618664806,
+            1.5833293105277704,
+            0.10711807291874309
+          ]
+        },
+        {
+          "y": 1.6,
+          "count": 10,
+          "front": [
+            -0.0023972507049372393,
+            1.5934004196930924,
+            0.10359318426558234
+          ]
+        },
+        {
+          "y": 1.62,
+          "count": 10,
+          "front": [
+            -0.013676892668775975,
+            1.6171682387837096,
+            0.08657300860644498
+          ]
+        },
+        {
+          "y": 1.64,
+          "count": 25,
+          "front": [
+            -0.0033036504743515008,
+            1.6335841463375176,
+            0.07176847725925639
+          ]
+        }
+      ],
+      "fullyHeadBounds": {
+        "min": [
+          -0.06342817073720437,
+          1.5986373933551818,
+          -0.041833634638176
+        ],
+        "max": [
+          0.06437420098822882,
+          1.649798630275766,
+          0.08657300860644498
+        ]
+      },
+      "mixedHeadBounds": {
+        "min": [
+          -0.12748042481498845,
+          1.3768463172237182,
+          -0.11072001043748396
+        ],
+        "max": [
+          0.12480084021289481,
+          1.650000052919203,
+          0.11587994108603128
+        ]
+      },
+      "encoding": [
+        0.825000098921667,
+        2.678322147398049e-11,
+        4.9817278358066375e-9,
+        0,
+        -4.947974727859128e-9,
+        0.8250000629383877,
+        -2.7077644293438397e-10,
+        0,
+        -1.774038416169077e-10,
+        7.087651077153367e-9,
+        0.8250000852156005,
+        0,
+        -0.0003830394918613242,
+        0.825000100516559,
+        0.0003643293313526953,
+        1
+      ],
+      "clips": [
+        "Running",
+        "Walking",
+        "01a11653-99cc-7579-b58e-8682f15317fa",
+        "Attack",
+        "Fall_Dead_from_Abdominal_Injury",
+        "Idle_02",
+        "Idle_03",
+        "Idle_11",
+        "Idle_7",
+        "Listening_Gesture",
+        "Pull_Radish",
+        "Talk_Passionately",
+        "Unsteady_Walk",
+        "01a11653-99cc-7579-b58e-8682f15317fa.001"
+      ],
+      "images": [
+        {
+          "name": "normal",
+          "mime": "image/png",
+          "bytes": 2975435,
+          "sha256": "5fd3258fa5a4c7f9e49280eb6793b5e2d2ae5ed67ef6e140c3672c16bb53185b",
+          "filename": "scratch/facial-identity/source-audit/lod0-texture0.png"
+        },
+        {
+          "name": "Image_0",
+          "mime": "image/jpeg",
+          "bytes": 1434853,
+          "sha256": "3c154a48bb49626fab3f0ba500bbc8cff6cda960a377e1a976309be3548c6b14",
+          "filename": "scratch/facial-identity/source-audit/lod0-texture1.jpeg"
+        },
+        {
+          "name": "Image_1",
+          "mime": "image/jpeg",
+          "bytes": 839977,
+          "sha256": "2ebb9cbdd318f43c42d944dd115c7e14b5a481eed6683febe6923ad0c307b506",
+          "filename": "scratch/facial-identity/source-audit/lod0-texture2.jpeg"
+        }
+      ],
+      "sockets": {
+        "socket_head_top": {
+          "position": [
+            -0.0004318729882038467,
+            1.5034983261359447,
+            0.0025289153293977656
+          ],
+          "quaternion": [
+            7.719790522713098e-18,
+            0,
+            -2.4124345383478425e-18,
+            1
+          ],
+          "scale": [
+            0.8988448434567853,
+            0.8988448434567852,
+            0.8988448434567852
+          ]
+        },
+        "socket_face": {
+          "position": [
+            0.0032229102819973073,
+            1.4171171771958675,
+            0.10129514473023557
+          ],
+          "quaternion": [
+            7.719790522713098e-18,
+            0,
+            -2.4124345383478425e-18,
+            1
+          ],
+          "scale": [
+            0.8988448434567853,
+            0.8988448434567852,
+            0.8988448434567852
+          ]
+        },
+        "socket_jaw": {
+          "position": [
+            0.004118479769878149,
+            1.3494116038281543,
+            0.08858457118103424
+          ],
+          "quaternion": [
+            7.719790522713098e-18,
+            0,
+            -2.4124345383478425e-18,
+            1
+          ],
+          "scale": [
+            0.8988448434567853,
+            0.8988448434567852,
+            0.8988448434567852
+          ]
+        },
+        "socket_neck": {
+          "position": [
+            0.010719354399052517,
+            1.3204141166332284,
+            0.07834006065140264
+          ],
+          "quaternion": [
+            0,
+            1.9299476306782733e-18,
+            6.7548167073739576e-18,
+            1
+          ],
+          "scale": [
+            0.8988448434567854,
+            0.8988448434567852,
+            0.8988448434567852
+          ]
+        }
+      }
+    },
+    {
+      "lod": 1,
+      "asset": {
+        "id": "body/meshy-human",
+        "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+        "lod": 1,
+        "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+      },
+      "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+      "vertices": 3409,
+      "triangles": 3221,
+      "authoredMorphTargets": {},
+      "headJoint": 5,
+      "joints": [
+        "mixamorigHips",
+        "mixamorigSpine",
+        "mixamorigSpine1",
+        "mixamorigSpine2",
+        "mixamorigNeck",
+        "mixamorigHead",
+        "mixamorigHeadTop_End",
+        "headfront",
+        "mixamorigLeftShoulder",
+        "mixamorigLeftArm",
+        "mixamorigLeftForeArm",
+        "mixamorigLeftHand",
+        "Bone_045",
+        "mixamorigLeftHandThumb1",
+        "mixamorigLeftHandThumb2",
+        "mixamorigLeftHandThumb3",
+        "mixamorigLeftHandThumb4",
+        "mixamorigLeftHandMiddle1",
+        "mixamorigLeftHandMiddle2",
+        "mixamorigLeftHandMiddle3",
+        "mixamorigLeftHandMiddle4",
+        "mixamorigRightShoulder",
+        "mixamorigRightArm",
+        "mixamorigRightForeArm",
+        "mixamorigRightHand",
+        "Bone_046",
+        "mixamorigRightHandThumb1",
+        "mixamorigRightHandThumb2",
+        "mixamorigRightHandThumb3",
+        "mixamorigRightHandThumb4",
+        "mixamorigRightHandMiddle1",
+        "mixamorigRightHandMiddle2",
+        "mixamorigRightHandMiddle3",
+        "mixamorigRightHandMiddle4",
+        "mixamorigLeftUpLeg",
+        "mixamorigLeftLeg",
+        "mixamorigLeftFoot",
+        "mixamorigLeftToeBase",
+        "mixamorigLeftToe_End",
+        "mixamorigRightUpLeg",
+        "mixamorigRightLeg",
+        "mixamorigRightFoot",
+        "mixamorigRightToeBase",
+        "mixamorigRightToe_End"
+      ],
+      "fullyHeadVertices": 41,
+      "mixedHeadVertices": 350,
+      "fullyHeadTriangles": 37,
+      "faceBands": [
+        {
+          "y": 1.38,
+          "count": 2,
+          "front": [
+            0.0001416835040460182,
+            1.3884695598116414,
+            -0.11837925339887925
+          ]
+        },
+        {
+          "y": 1.4,
+          "count": 11,
+          "front": [
+            -0.013449786087629928,
+            1.4030678246700325,
+            0.029516109140657186
+          ]
+        },
+        {
+          "y": 1.42,
+          "count": 9,
+          "front": [
+            -0.006603709446053807,
+            1.4167599864542135,
+            0.03887912223637228
+          ]
+        },
+        {
+          "y": 1.44,
+          "count": 17,
+          "front": [
+            0.0025579521720669835,
+            1.4472905044705735,
+            0.09223823501715328
+          ]
+        },
+        {
+          "y": 1.46,
+          "count": 4,
+          "front": [
+            0.02269346763751587,
+            1.4539351636394842,
+            -0.0932098594508174
+          ]
+        },
+        {
+          "y": 1.48,
+          "count": 9,
+          "front": [
+            -0.004791510901279836,
+            1.486756125900225,
+            0.10059447198587328
+          ]
+        },
+        {
+          "y": 1.5,
+          "count": 4,
+          "front": [
+            -0.0037847350010730796,
+            1.5052808047529838,
+            0.11589746344194082
+          ]
+        },
+        {
+          "y": 1.52,
+          "count": 9,
+          "front": [
+            -0.014355881041329581,
+            1.5288393584297384,
+            0.09817820788363812
+          ]
+        },
+        {
+          "y": 1.54,
+          "count": 7,
+          "front": [
+            -0.013651137873695937,
+            1.5458538717458334,
+            0.11025951683592213
+          ]
+        },
+        {
+          "y": 1.56,
+          "count": 5,
+          "front": [
+            0.007189121656608635,
+            1.551793849446075,
+            0.1129778112185179
+          ]
+        },
+        {
+          "y": 1.58,
+          "count": 0
+        },
+        {
+          "y": 1.6,
+          "count": 4,
+          "front": [
+            -0.002375248454112678,
+            1.5933736917752743,
+            0.10351411644837458
+          ]
+        },
+        {
+          "y": 1.62,
+          "count": 3,
+          "front": [
+            0.0011484670443570914,
+            1.6220668034751937,
+            0.08509011748836118
+          ]
+        },
+        {
+          "y": 1.64,
+          "count": 10,
+          "front": [
+            -0.004086767153584315,
+            1.644618580165584,
+            0.05075906090367844
+          ]
+        }
+      ],
+      "fullyHeadBounds": {
+        "min": [
+          -0.06348654076500135,
+          1.5986089214967292,
+          -0.03219926545807741
+        ],
+        "max": [
+          0.0626624695733615,
+          1.6494511031132135,
+          0.08509011748836118
+        ]
+      },
+      "mixedHeadBounds": {
+        "min": [
+          -0.12751749563163886,
+          1.3768916440948278,
+          -0.10066000066866025
+        ],
+        "max": [
+          0.1247805423641696,
+          1.6149186939522095,
+          0.11589746344194082
+        ]
+      },
+      "encoding": [
+        0.8247256128178639,
+        -8.439318417707842e-9,
+        5.447384959778034e-9,
+        0,
+        -8.541960520858094e-9,
+        0.8247255868138316,
+        -2.332601611865215e-9,
+        0,
+        -5.2434774022724895e-9,
+        5.729173718771463e-9,
+        0.8247256115165611,
+        0,
+        -0.0002610247374400833,
+        0.8247256175829669,
+        0.0009236734125902778,
+        1
+      ],
+      "clips": [
+        "Running",
+        "Walking",
+        "01a11653-99cc-7579-b58e-8682f15317fa",
+        "Attack",
+        "Fall_Dead_from_Abdominal_Injury",
+        "Idle_02",
+        "Idle_03",
+        "Idle_11",
+        "Idle_7",
+        "Listening_Gesture",
+        "Pull_Radish",
+        "Talk_Passionately",
+        "Unsteady_Walk",
+        "01a11653-99cc-7579-b58e-8682f15317fa.001"
+      ],
+      "images": [
+        {
+          "name": "normal",
+          "mime": "image/png",
+          "bytes": 2975435,
+          "sha256": "5fd3258fa5a4c7f9e49280eb6793b5e2d2ae5ed67ef6e140c3672c16bb53185b",
+          "filename": "scratch/facial-identity/source-audit/lod0-texture0.png"
+        },
+        {
+          "name": "Image_0",
+          "mime": "image/jpeg",
+          "bytes": 1434853,
+          "sha256": "3c154a48bb49626fab3f0ba500bbc8cff6cda960a377e1a976309be3548c6b14",
+          "filename": "scratch/facial-identity/source-audit/lod0-texture1.jpeg"
+        },
+        {
+          "name": "Image_1",
+          "mime": "image/jpeg",
+          "bytes": 839977,
+          "sha256": "2ebb9cbdd318f43c42d944dd115c7e14b5a481eed6683febe6923ad0c307b506",
+          "filename": "scratch/facial-identity/source-audit/lod0-texture2.jpeg"
+        }
+      ],
+      "sockets": {
+        "socket_head_top": {
+          "position": [
+            0.0006366001562960848,
+            1.5036980736384353,
+            0.0037502888838580085
+          ],
+          "quaternion": [
+            -7.717260717501733e-18,
+            -9.646575896877186e-19,
+            -3.6174659613289374e-18,
+            1
+          ],
+          "scale": [
+            0.8991394949467925,
+            0.8991394949467924,
+            0.8991394949467922
+          ]
+        },
+        "socket_face": {
+          "position": [
+            0.0031905378747670793,
+            1.417637469207411,
+            0.10125396764224905
+          ],
+          "quaternion": [
+            -7.717260717501733e-18,
+            -9.646575896877186e-19,
+            -3.6174659613289374e-18,
+            1
+          ],
+          "scale": [
+            0.8991394949467925,
+            0.8991394949467924,
+            0.8991394949467922
+          ]
+        },
+        "socket_jaw": {
+          "position": [
+            -0.0018986281742969062,
+            1.3592533128714717,
+            0.08981383883222006
+          ],
+          "quaternion": [
+            -7.717260717501733e-18,
+            -9.646575896877186e-19,
+            -3.6174659613289374e-18,
+            1
+          ],
+          "scale": [
+            0.8991394949467925,
+            0.8991394949467924,
+            0.8991394949467922
+          ]
+        },
+        "socket_neck": {
+          "position": [
+            0.010754104131824014,
+            1.3208450467269928,
+            0.07835835604116559
+          ],
+          "quaternion": [
+            -3.0869042870006933e-17,
+            1.929315179375431e-18,
+            -2.8939727690631496e-18,
+            1
+          ],
+          "scale": [
+            0.8991394949467925,
+            0.8991394949467925,
+            0.8991394949467924
+          ]
+        }
+      }
+    },
+    {
+      "lod": 2,
+      "asset": {
+        "id": "body/meshy-human",
+        "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+        "lod": 2,
+        "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+      },
+      "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+      "vertices": 3409,
+      "triangles": 3219,
+      "authoredMorphTargets": {},
+      "headJoint": 5,
+      "joints": [
+        "mixamorigHips",
+        "mixamorigSpine",
+        "mixamorigSpine1",
+        "mixamorigSpine2",
+        "mixamorigNeck",
+        "mixamorigHead",
+        "mixamorigHeadTop_End",
+        "headfront",
+        "mixamorigLeftShoulder",
+        "mixamorigLeftArm",
+        "mixamorigLeftForeArm",
+        "mixamorigLeftHand",
+        "Bone_045",
+        "mixamorigLeftHandThumb1",
+        "mixamorigLeftHandThumb2",
+        "mixamorigLeftHandThumb3",
+        "mixamorigLeftHandThumb4",
+        "mixamorigLeftHandMiddle1",
+        "mixamorigLeftHandMiddle2",
+        "mixamorigLeftHandMiddle3",
+        "mixamorigLeftHandMiddle4",
+        "mixamorigRightShoulder",
+        "mixamorigRightArm",
+        "mixamorigRightForeArm",
+        "mixamorigRightHand",
+        "Bone_046",
+        "mixamorigRightHandThumb1",
+        "mixamorigRightHandThumb2",
+        "mixamorigRightHandThumb3",
+        "mixamorigRightHandThumb4",
+        "mixamorigRightHandMiddle1",
+        "mixamorigRightHandMiddle2",
+        "mixamorigRightHandMiddle3",
+        "mixamorigRightHandMiddle4",
+        "mixamorigLeftUpLeg",
+        "mixamorigLeftLeg",
+        "mixamorigLeftFoot",
+        "mixamorigLeftToeBase",
+        "mixamorigLeftToe_End",
+        "mixamorigRightUpLeg",
+        "mixamorigRightLeg",
+        "mixamorigRightFoot",
+        "mixamorigRightToeBase",
+        "mixamorigRightToe_End"
+      ],
+      "fullyHeadVertices": 41,
+      "mixedHeadVertices": 350,
+      "fullyHeadTriangles": 37,
+      "faceBands": [
+        {
+          "y": 1.38,
+          "count": 2,
+          "front": [
+            0.0001416835040460182,
+            1.3884695598116414,
+            -0.11837925339887925
+          ]
+        },
+        {
+          "y": 1.4,
+          "count": 11,
+          "front": [
+            -0.013449786087629928,
+            1.4030678246700325,
+            0.029516109140657186
+          ]
+        },
+        {
+          "y": 1.42,
+          "count": 9,
+          "front": [
+            -0.006603709446053807,
+            1.4167599864542135,
+            0.03887912223637228
+          ]
+        },
+        {
+          "y": 1.44,
+          "count": 17,
+          "front": [
+            0.0025579521720669835,
+            1.4472905044705735,
+            0.09223823501715328
+          ]
+        },
+        {
+          "y": 1.46,
+          "count": 4,
+          "front": [
+            0.02269346763751587,
+            1.4539351636394842,
+            -0.0932098594508174
+          ]
+        },
+        {
+          "y": 1.48,
+          "count": 9,
+          "front": [
+            -0.004791510901279836,
+            1.486756125900225,
+            0.10059447198587328
+          ]
+        },
+        {
+          "y": 1.5,
+          "count": 4,
+          "front": [
+            -0.0037847350010730796,
+            1.5052808047529838,
+            0.11589746344194082
+          ]
+        },
+        {
+          "y": 1.52,
+          "count": 9,
+          "front": [
+            -0.014355881041329581,
+            1.5288393584297384,
+            0.09817820788363812
+          ]
+        },
+        {
+          "y": 1.54,
+          "count": 7,
+          "front": [
+            -0.013651137873695937,
+            1.5458538717458334,
+            0.11025951683592213
+          ]
+        },
+        {
+          "y": 1.56,
+          "count": 5,
+          "front": [
+            0.007189121656608635,
+            1.551793849446075,
+            0.1129778112185179
+          ]
+        },
+        {
+          "y": 1.58,
+          "count": 0
+        },
+        {
+          "y": 1.6,
+          "count": 4,
+          "front": [
+            -0.002375248454112678,
+            1.5933736917752743,
+            0.10351411644837458
+          ]
+        },
+        {
+          "y": 1.62,
+          "count": 3,
+          "front": [
+            0.0011484670443570914,
+            1.6220668034751937,
+            0.08509011748836118
+          ]
+        },
+        {
+          "y": 1.64,
+          "count": 10,
+          "front": [
+            -0.004086767153584315,
+            1.644618580165584,
+            0.05075906090367844
+          ]
+        }
+      ],
+      "fullyHeadBounds": {
+        "min": [
+          -0.06348654076500135,
+          1.5986089214967292,
+          -0.03219926545807741
+        ],
+        "max": [
+          0.0626624695733615,
+          1.6494511031132135,
+          0.08509011748836118
+        ]
+      },
+      "mixedHeadBounds": {
+        "min": [
+          -0.12751749563163886,
+          1.3768916440948278,
+          -0.10066000066866025
+        ],
+        "max": [
+          0.1247805423641696,
+          1.6149186939522095,
+          0.11589746344194082
+        ]
+      },
+      "encoding": [
+        0.8247256128178639,
+        -8.439318417707842e-9,
+        5.447384959778034e-9,
+        0,
+        -8.541960520858094e-9,
+        0.8247255868138316,
+        -2.332601611865215e-9,
+        0,
+        -5.2434774022724895e-9,
+        5.729173718771463e-9,
+        0.8247256115165611,
+        0,
+        -0.0002610247374400833,
+        0.8247256175829669,
+        0.0009236734125902778,
+        1
+      ],
+      "clips": [
+        "Running",
+        "Walking",
+        "01a11653-99cc-7579-b58e-8682f15317fa",
+        "Attack",
+        "Fall_Dead_from_Abdominal_Injury",
+        "Idle_02",
+        "Idle_03",
+        "Idle_11",
+        "Idle_7",
+        "Listening_Gesture",
+        "Pull_Radish",
+        "Talk_Passionately",
+        "Unsteady_Walk",
+        "01a11653-99cc-7579-b58e-8682f15317fa.001"
+      ],
+      "images": [
+        {
+          "name": "normal",
+          "mime": "image/png",
+          "bytes": 2975435,
+          "sha256": "5fd3258fa5a4c7f9e49280eb6793b5e2d2ae5ed67ef6e140c3672c16bb53185b",
+          "filename": "scratch/facial-identity/source-audit/lod0-texture0.png"
+        },
+        {
+          "name": "Image_0",
+          "mime": "image/jpeg",
+          "bytes": 1434853,
+          "sha256": "3c154a48bb49626fab3f0ba500bbc8cff6cda960a377e1a976309be3548c6b14",
+          "filename": "scratch/facial-identity/source-audit/lod0-texture1.jpeg"
+        },
+        {
+          "name": "Image_1",
+          "mime": "image/jpeg",
+          "bytes": 839977,
+          "sha256": "2ebb9cbdd318f43c42d944dd115c7e14b5a481eed6683febe6923ad0c307b506",
+          "filename": "scratch/facial-identity/source-audit/lod0-texture2.jpeg"
+        }
+      ],
+      "sockets": {
+        "socket_head_top": {
+          "position": [
+            0.0006366001562960878,
+            1.5036980736384358,
+            0.0037502888838580016
+          ],
+          "quaternion": [
+            -7.717260717501733e-18,
+            -9.646575896877186e-19,
+            -3.6174659613289374e-18,
+            1
+          ],
+          "scale": [
+            0.8991394949467925,
+            0.8991394949467924,
+            0.8991394949467922
+          ]
+        },
+        "socket_face": {
+          "position": [
+            0.0031905378747670793,
+            1.417637469207411,
+            0.10125396764224905
+          ],
+          "quaternion": [
+            -7.717260717501733e-18,
+            -9.646575896877186e-19,
+            -3.6174659613289374e-18,
+            1
+          ],
+          "scale": [
+            0.8991394949467925,
+            0.8991394949467924,
+            0.8991394949467922
+          ]
+        },
+        "socket_jaw": {
+          "position": [
+            -0.0018986281742969062,
+            1.3592533128714717,
+            0.08981383883222006
+          ],
+          "quaternion": [
+            -7.717260717501733e-18,
+            -9.646575896877186e-19,
+            -3.6174659613289374e-18,
+            1
+          ],
+          "scale": [
+            0.8991394949467925,
+            0.8991394949467924,
+            0.8991394949467922
+          ]
+        },
+        "socket_neck": {
+          "position": [
+            0.010754104131824014,
+            1.3208450467269928,
+            0.07835835604116559
+          ],
+          "quaternion": [
+            -3.0869042870006933e-17,
+            1.929315179375431e-18,
+            -2.8939727690631496e-18,
+            1
+          ],
+          "scale": [
+            0.8991394949467925,
+            0.8991394949467925,
+            0.8991394949467924
+          ]
+        }
+      }
+    }
+  ]
+}
