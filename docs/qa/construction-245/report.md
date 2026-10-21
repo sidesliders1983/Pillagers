@@ -49,3 +49,25 @@ This verifies the production house presentation on a desktop browser, rather tha
 full physical-device mobile performance benchmark. No worker AI, audio clips, new
 house models or construction simulation is introduced. Temporary objects have no
 ray hits or navigation entries; existing yard and lifecycle regression tests pass.
+
+## Follow-up — crossfade between upgrade models
+
+The initial masked swap above was visually too abrupt in user review. Upgrades now
+crossfade for 0.8 seconds, from 1.1 to 1.9 seconds into the same 3.2-second transition.
+The old model remains owned and visible until its fade completes; the new model gains
+opacity smoothly. Exact original material bindings are restored before either owner
+is released. The baseline screenshots and draw counts above record the initial version.
+
+Twenty-two focused construction, season and housing tests passed after the change.
+The nine construction tests were repeated after preserving opaque depth behavior before
+the fade begins; all passed. Coverage includes 50/50 midpoint opacities, original
+material arrays, translucent material opacity, seasonal hooks, cancelled fades and
+single owner release. The production build and strict QA-entry TypeScript check passed.
+Formatting was reviewed manually and `git diff --check` passed.
+
+Browser review confirmed the Hut → Homestead midpoint at 50%, followed by the fully
+opaque target and completed scaffold removal. No warning/error logs were reported.
+The midpoint review used eight total scene draws, including both overlapping house
+models. See `crossfade-browser.json` for the captured phase and canonical-state proof.
+
+![Upgrade crossfade midpoint](crossfade-midpoint.png)

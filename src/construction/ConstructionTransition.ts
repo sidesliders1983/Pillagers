@@ -1,12 +1,15 @@
 import {
-    BoxGeometry, CylinderGeometry, DynamicDrawUsage, Group, InstancedMesh, Material,
-    Matrix4, Mesh, MeshStandardMaterial, Object3D, OctahedronGeometry, Plane, Vector3
+    BoxGeometry, CylinderGeometry, DynamicDrawUsage, Group, InstancedMesh,
+    Matrix4, MeshStandardMaterial, Object3D, OctahedronGeometry, Plane, Vector3
 } from 'three';
 import { measureBuildEnvelope, unionBuildEnvelope, type BuildEnvelope } from './BuildEnvelope';
 import { generateScaffold, type ScaffoldPart } from './ScaffoldGenerator';
+import { ConstructionMaterials } from './ConstructionMaterials';
 
 export const constructionDuration = 3.2;
-const swapTime = 1.45;
+export const constructionFadeStart = 1.1;
+export const constructionFadeDuration = .8;
+const feedbackTime = constructionFadeStart + constructionFadeDuration / 2;
 const ease = (value: number) => {
     const t = Math.max(0, Math.min(1, value));
     return 1 - (1 - t) ** 3;
@@ -32,8 +35,8 @@ export class ConstructionTransitions {
         envelope: BuildEnvelope; plan: ReturnType<typeof generateScaffold>;
         batches: { mesh: InstancedMesh; parts: ScaffoldPart[] }[];
         dust: InstancedMesh; plane: Plane;
-        bindings: { mesh: Mesh; original: Mesh['material'] }[];
-        clips: Material[]; releaseOld?: () => void; swapped: boolean;
+        reveal?: ConstructionMaterials; oldFade?: ConstructionMaterials; targetFade?: ConstructionMaterials;
+        releaseOld?: () => void; swapped: boolean; fadeProgress: number;
     }>();
 
     play(key: string, target: Object3D, old?: Object3D, releaseOld?: () => void) {
@@ -71,26 +74,13 @@ export class ConstructionTransitions {
         dust.raycast = () => {};
         group.add(dust);
         const plane = new Plane(new Vector3(0, -1, 0), target.position.y + envelope.baseHeight - .05);
-        const bindings: { mesh: Mesh; original: Mesh['material'] }[] = [], clips: Material[] = [];
-        // Only a new build needs a reveal; upgrades retain the old model until one masked swap.
-        if (!old) target.traverse(node => {
-            if (!(node instanceof Mesh)) return;
-            const original = node.material;
-            const copy = (material: Material) => {
-                const clip = material.clone();
-                clip.onBeforeCompile = material.onBeforeCompile;
-                clip.customProgramCacheKey = material.customProgramCacheKey.bind(material);
-                clip.clippingPlanes = [plane];
-                clip.clipShadows = true;
-                clips.push(clip);
-                return clip;
-            };
-            bindings.push({ mesh: node, original });
-            node.material = Array.isArray(original) ? original.map(copy) : copy(original);
-        });
+        const reveal = old ? undefined : new ConstructionMaterials(target, 'reveal', plane);
+        const oldFade = old ? new ConstructionMaterials(old, 'fade') : undefined;
+        const targetFade = old ? new ConstructionMaterials(target, 'fade') : undefined;
+        targetFade?.setOpacity(0);
         target.visible = !old;
         this.active.set(key, { time: 0, group, target, old, envelope, plan, batches, dust,
-            plane, bindings, clips, releaseOld, swapped: false });
+            plane, reveal, oldFade, targetFade, releaseOld, swapped: false, fadeProgress: 0 });
         this.update(0);
     }
 
@@ -105,11 +95,20 @@ export class ConstructionTransitions {
             transition.time += Math.max(0, Math.min(delta, .1));
             const { time, envelope } = transition;
             if (time >= constructionDuration) { this.finish(key); continue; }
-            if (!transition.swapped && time >= swapTime) {
-                transition.swapped = true;
-                transition.target.visible = true;
-                if (transition.old) {
+            if (transition.old) {
+                const progress = Math.max(0, Math.min(1, (time - constructionFadeStart) / constructionFadeDuration));
+                // Smooth start/end, with complementary opacities throughout the overlap.
+                transition.fadeProgress = progress * progress * (3 - 2 * progress);
+                transition.oldFade!.setOpacity(1 - transition.fadeProgress);
+                transition.targetFade!.setOpacity(transition.fadeProgress);
+                transition.target.visible = transition.fadeProgress > 0;
+                if (progress >= 1) {
+                    transition.swapped = true;
                     transition.old.visible = false;
+                    // Restore before releasing: the seasonal owner must see its original bindings.
+                    transition.oldFade!.dispose();
+                    transition.targetFade!.dispose();
+                    transition.oldFade = transition.targetFade = undefined;
                     transition.releaseOld?.();
                     transition.releaseOld = undefined;
                     transition.old = undefined;
@@ -129,7 +128,7 @@ export class ConstructionTransitions {
                 });
                 batch.mesh.instanceMatrix.needsUpdate = true;
             }
-            const puff = Math.max(0, Math.min(1, (time - swapTime) / .45));
+            const puff = Math.max(0, Math.min(1, (time - feedbackTime) / .45));
             transition.dust.visible = puff > 0 && puff < 1;
             if (transition.dust.visible) {
                 const xs = envelope.footprint.map(p => p.x), zs = envelope.footprint.map(p => p.z);
@@ -151,8 +150,9 @@ export class ConstructionTransitions {
         const transition = this.active.get(key);
         if (!transition) return;
         transition.target.visible = true;
-        for (const binding of transition.bindings) binding.mesh.material = binding.original;
-        for (const material of transition.clips) material.dispose();
+        transition.reveal?.dispose();
+        transition.oldFade?.dispose();
+        transition.targetFade?.dispose();
         transition.releaseOld?.();
         for (const batch of transition.batches) batch.mesh.dispose();
         transition.dust.dispose();
@@ -166,7 +166,8 @@ export class ConstructionTransitions {
                 value.time < 2.1 ? 'building' : 'dismantle',
             preset: value.envelope.scaffoldPreset, envelope: value.envelope,
             postPoints: value.plan.postPoints, pieces: value.plan.parts.length,
-            drawCalls: value.batches.length + Number(value.dust.visible), swapped: value.swapped }));
+            drawCalls: value.batches.length + Number(value.dust.visible), swapped: value.swapped,
+            fadeProgress: value.fadeProgress }));
     }
 
     dispose() {

@@ -36,12 +36,18 @@ The 3.2-second sequence is:
 | 0–0.6 s | Staggered posts and small material stack |
 | 0.45–1.1 s | Ledgers, braces, platforms and ladder |
 | 1–2.05 s | New house revealed bottom-to-top using a local clipping plane |
-| 1.45 s | Upgrade swaps the old model for the target; brief low-poly dust puff |
+| 1.1–1.9 s | Upgrade crossfades old → target with smooth complementary opacities |
+| 1.5 s | Brief low-poly dust puff during the crossfade |
 | 2.08–3.2 s | Upper platforms, braces/ledgers, posts, ladder and props removed |
 
-`ConstructionTransitions.play` retains the old model until the swap. New builds clone
-only instance materials for clipping and preserve existing seasonal shader hooks.
-Finish/cancel restores the original bindings. The animation is wall-clock feedback,
+`ConstructionTransitions.play` retains the old model until the 0.8-second crossfade
+finishes. Both upgrade models use temporary material copies with complementary eased
+opacities, transparency and depth writes disabled for the overlap. Authored material
+opacity is multiplied rather than replaced; a translucent yard retains its original
+appearance. `ConstructionMaterials` shares copies within each model and preserves
+seasonal shader hooks. New builds use temporary copies only for clipping. Completing
+or cancelling the effect restores exact original bindings before releasing an owner.
+The animation is wall-clock feedback,
 so an accepted build remains readable when the simulation is paused. Hidden documents
 do not advance it. Duration/timing constants and the two presets are centralized in
 the construction modules. No audio dependency is introduced.
@@ -64,8 +70,8 @@ matrices without rebuilding topology. Temporary geometry casts no shadows, has n
 hits and is released at completion. An idle system does no procedural frame work.
 
 The original house geometry/materials and asset files are not edited. During an upgrade
-both house roots are briefly owned, but only the appropriate state is shown; the old
-root is released at the swap. A rapid next upgrade first completes the previous visual
+both house roots are briefly shown during the crossfade; the old root is released at
+its end. A rapid next upgrade first completes the previous visual
 transition. This is intentionally bounded presentation, without worker AI, real labour
 simulation, scaffold physics, per-piece colliders or saved construction progress.
 

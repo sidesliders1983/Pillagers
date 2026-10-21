@@ -127,6 +127,15 @@ renderer.setAnimationLoop(now => {
     controls.update(); renderer.render(scene, camera);
     const construction = layer.inspectConstruction();
     renderer.domElement.dataset.construction = JSON.stringify(construction);
-    status.textContent = `${elapsed.toFixed(2)}s · ${construction.length ? construction.map(item =>
-        `${item.preset} · ${item.phase} · eave ${item.envelope.eaveHeight.toFixed(1)}m · ridge ${item.envelope.ridgeHeight.toFixed(1)}m · ${item.pieces} pieces / ${item.drawCalls} draws`).join(' | ') : 'Complete · scaffold released'} · ${renderer.info.render.calls} scene draws`;
+    const descriptions = construction.map(item => [
+        item.preset, item.phase,
+        ...(item.fadeProgress > 0 ? [`fade ${Math.round(item.fadeProgress * 100)}%`] : []),
+        `eave ${item.envelope.eaveHeight.toFixed(1)}m`,
+        `ridge ${item.envelope.ridgeHeight.toFixed(1)}m`,
+        `${item.pieces} pieces / ${item.drawCalls} draws`
+    ].join(' · '));
+    status.textContent = [
+        `${elapsed.toFixed(2)}s`, descriptions.join(' | ') || 'Complete · scaffold released',
+        `${renderer.info.render.calls} scene draws`
+    ].join(' · ');
 });

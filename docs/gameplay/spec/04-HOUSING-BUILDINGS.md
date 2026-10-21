@@ -64,8 +64,9 @@ Great Hall. Tents remain emergency shelter and do not receive scaffolding. Farm 
 Farm Homestead use the same transition system at their corresponding house sizes.
 
 Posts rise first, then ledgers, sparse braces, working planks and a ladder. A new house
-appears from its foundation to its roof. An upgrade retains its previous model until a
-single swap behind the standing frame, accompanied by a brief dust effect. The frame
+appears from its foundation to its roof. An upgrade crossfades its previous model into
+the target over 0.8 seconds (1.1–1.9 seconds into the transition), behind the standing
+frame and accompanied by a brief dust effect. The frame
 then disappears from its upper platforms down to its posts and ladder.
 
 The transition communicates an already accepted Core command. Construction has no added

@@ -111,20 +111,63 @@ test('new build reveals bottom to top, restores source materials and frees tempo
     transitions.dispose(); disposeHouse(target);
 });
 
-test('upgrade retains old model until masked swap, then releases it once and shows unmodified target', () => {
+test('upgrade crossfades both models smoothly before releasing the old one and restoring materials', () => {
     const transitions = new ConstructionTransitions(), old = house(), target = house('homestead', 9, 5, 7);
+    const oldMesh = old.children[0].children[0], targetMesh = target.children[0].children[0];
+    const oldSource = oldMesh.material, targetSource = targetMesh.material;
     let releases = 0;
-    transitions.play('home', target, old, () => releases++);
+    transitions.play('home', target, old, () => {
+        assert.equal(oldMesh.material, oldSource, 'Restore source bindings before releasing their owner');
+        releases++;
+    });
     assert.equal(old.visible, true); assert.equal(target.visible, false);
-    advance(transitions, 1.3);
+    assert.equal(oldMesh.material.transparent, oldSource.transparent);
+    assert.equal(oldMesh.material.depthWrite, oldSource.depthWrite);
+    advance(transitions, 1);
     assert.equal(releases, 0); assert.equal(target.visible, false);
-    advance(transitions, .2);
+    advance(transitions, .5);
+    assert.equal(releases, 0, 'Old geometry remains alive for the entire fade');
+    assert.equal(old.visible, true); assert.equal(target.visible, true);
+    assert.ok(Math.abs(oldMesh.material.opacity - .5) < 1e-8);
+    assert.ok(Math.abs(targetMesh.material.opacity - .5) < 1e-8);
+    assert.ok(oldMesh.material.transparent && targetMesh.material.transparent);
+    assert.equal(oldMesh.material.depthWrite, false);
+    assert.equal(oldSource.opacity, 1); assert.equal(targetSource.opacity, 1);
+    assert.ok(Math.abs(transitions.inspect()[0].fadeProgress - .5) < 1e-8);
+    advance(transitions, .5);
     assert.equal(releases, 1); assert.equal(old.visible, false); assert.equal(target.visible, true);
+    assert.equal(oldMesh.material, oldSource); assert.equal(targetMesh.material, targetSource);
     assert.ok(transitions.inspect()[0].drawCalls <= 5);
     advance(transitions, constructionDuration);
     transitions.finish('home'); transitions.dispose();
     assert.equal(releases, 1);
     disposeHouse(old); disposeHouse(target);
+});
+
+test('interrupted fades restore material arrays, authored opacity and seasonal hooks without shared mutation', () => {
+    const transitions = new ConstructionTransitions(), old = house(), target = house('homestead');
+    const mesh = target.children[0].children[0], first = mesh.material;
+    first.opacity = .4;
+    const hook = () => {}, key = () => 'seasonal-source';
+    first.onBeforeCompile = hook; first.customProgramCacheKey = key;
+    const second = first.clone(); second.opacity = .8; second.alphaTest = .5;
+    const originals = [first, second]; mesh.material = originals;
+    let disposed = 0, released = 0;
+    transitions.play('home', target, old, () => released++);
+    assert.equal(mesh.material[0].onBeforeCompile, hook);
+    assert.equal(mesh.material[0].customProgramCacheKey(), 'seasonal-source');
+    mesh.material.forEach(material => material.addEventListener('dispose', () => disposed++));
+    advance(transitions, 1.5);
+    assert.ok(Math.abs(mesh.material[0].opacity - .2) < 1e-8);
+    assert.ok(Math.abs(mesh.material[1].opacity - .4) < 1e-8);
+    assert.ok(Math.abs(mesh.material[1].alphaTest - .25) < 1e-8);
+    assert.equal(first.opacity, .4); assert.equal(second.opacity, .8);
+    assert.equal(second.alphaTest, .5);
+    transitions.finish('home'); transitions.finish('home');
+    assert.equal(mesh.material, originals);
+    assert.equal(disposed, 2); assert.equal(released, 1); assert.equal(target.visible, true);
+    assert.equal(first.transparent, false); assert.equal(first.depthWrite, true);
+    transitions.dispose(); disposeHouse(old); disposeHouse(target);
 });
 
 test('concurrent builds reuse geometry/materials and rapid replacement or teardown cleans every owner', () => {
