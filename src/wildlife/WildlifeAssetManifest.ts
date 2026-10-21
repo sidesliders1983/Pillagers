@@ -478,6 +478,43 @@ export const wildlifeAssetManifest = [
         ]
     },
     {
+        "id": "orca",
+        "file": "orca.glb",
+        "path": "/wildlife/orca.glb",
+        "source": "Assets/Characters/Wildlife/Orca.glb",
+        "sourceSha256": "bd07cb403d4caa4ff8cfa2184bceba2d38b54fe3d6e6b574a55341d35704c157",
+        "sha256": "bd43f416c1fd814ff48f4184ab21e00033b45c1654638d88511d4e3b5909eb21",
+        "sourceBytes": 6422160,
+        "bytes": 82668,
+        "triangles": 2646,
+        "scaleReference": {
+            "kind": "body-length",
+            "metres": 7,
+            "sourceDimension": 2.8601510684943388,
+            "scale": 2.4474231718414057
+        },
+        "bounds": {
+            "min": [
+                -1.9585951110372775,
+                -1.7287034694471668,
+                -3.4997817521779786
+            ],
+            "max": [
+                1.9585950180607803,
+                1.7288204851354827,
+                3.499999930859073
+            ]
+        },
+        "joints": 16,
+        "clips": [],
+        "operations": [
+            "Preserve supplied geometry, UVs, rig and source clip rotations",
+            "Normalize once to canonical metre scale in an authoring wrapper",
+            "Straighten the supplied tail chain for neutral swimming; preserve skin weights",
+            "Resize albedo to 512px WebP and remove high-frequency surface maps"
+        ]
+    },
+    {
         "id": "humpback",
         "file": "humpback.glb",
         "path": "/wildlife/humpback.glb",
@@ -510,7 +547,7 @@ export const wildlifeAssetManifest = [
         "operations": [
             "Preserve supplied geometry, UVs, rig and source clip rotations",
             "Normalize once to canonical metre scale in an authoring wrapper",
-            "Straighten the supplied raised tail chain for neutral swimming; preserve skin weights",
+            "Straighten the supplied tail chain for neutral swimming; preserve skin weights",
             "Resize albedo to 512px WebP and remove high-frequency surface maps"
         ]
     }

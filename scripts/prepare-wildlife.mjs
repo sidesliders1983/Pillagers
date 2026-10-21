@@ -70,11 +70,13 @@ for (const definition of definitions) {
     }
     if (definition.straightenTail) {
         const gltf = await parse(Buffer.from(await io.writeBinary(doc)));
-        for (let index = 26; index >= 18; index--) {
+        const [firstJoint, lastJoint] = Array.isArray(definition.straightenTail)
+            ? definition.straightenTail : [26, 18];
+        for (let index = firstJoint; index >= lastJoint; index--) {
             const name = 'Bone_' + String(index).padStart(3, '0');
             const bone = gltf.scene.getObjectByName(name);
             const tip = gltf.scene.getObjectByName('Bone_' + String(index - 1).padStart(3, '0'));
-            assert.ok(bone && tip, 'Expected humpback tail chain ' + name);
+            assert.ok(bone && tip, 'Expected ' + definition.id + ' tail chain ' + name);
             gltf.scene.updateMatrixWorld(true);
             const current = tip.getWorldPosition(new Vector3()).sub(bone.getWorldPosition(new Vector3())).normalize();
             const turn = new Quaternion().setFromUnitVectors(current, new Vector3(0, 0, -1));
@@ -82,7 +84,7 @@ for (const definition of definitions) {
             bone.quaternion.premultiply(parent.clone().invert().multiply(turn).multiply(parent));
             root.listNodes().find(node => node.getName() === name).setRotation(bone.quaternion.toArray());
         }
-        operations.push('Straighten the supplied raised tail chain for neutral swimming; preserve skin weights');
+        operations.push('Straighten the supplied tail chain for neutral swimming; preserve skin weights');
     }
     if (definition.foldWings) {
         const gltf = await parse(Buffer.from(await io.writeBinary(doc)));

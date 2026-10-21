@@ -1,4 +1,5 @@
 import type { WildlifeActor, WildlifePopulation } from './WildlifePopulation';
+import { initialMarineMotion } from './MarineEncounters';
 
 const motionKeys = ['position', 'target', 'heading', 'bank', 'state', 'wait', 'decisions',
     'fleeUntil', 'escapeWait', 'climbRate', 'flapEffort', 'hop', 'marine', 'floatUntil'] as const;
@@ -22,7 +23,12 @@ export function restoreWildlife(population: WildlifePopulation, actors: readonly
     if (saved.size !== expected.length) throw new Error('Wildlife population identity mismatch.');
     for (const actor of population.actors) {
         const motion = saved.get(actor.id);
-        if (legacy && actor.marine && !motion) continue;
+        if (legacy && actor.marine && !motion) {
+            actor.state = 'absent';
+            actor.position = { ...actor.anchor, y: population.world.waterLevel - 4 };
+            actor.marine = initialMarineMotion(population.world.config.seed, actor.id, actor.variant);
+            continue;
+        }
         if (!motion) throw new Error('Wildlife instance missing from saved population.');
         for (const key of motionKeys) {
             if (motion[key] === undefined) delete (actor as unknown as Record<string, unknown>)[key];

@@ -1,7 +1,7 @@
 import type { AttentionAdapter } from './AttentionHistory';
 import { createAttentionMetadata, attentionRead, type AttentionMetadata } from './AttentionState';
 import { wildlifeSighting } from '../simulation/WildlifeSightings';
-import { wildlifeLabel, wildlifeSightingText } from './WildlifeHistory';
+import { wildlifeNoun, wildlifeSightingText } from './WildlifeHistory';
 import type { SimulationState } from '../simulation/SimulationCore';
 import type { AttentionRecord } from './AttentionHistory';
 
@@ -12,7 +12,7 @@ export const wildlifeAttentionAdapter: AttentionAdapter = event => {
     return { eventId: event.id, canonicalType: event.type, category: 'discovery',
         severity: sighting.firstForClan ? 'noteworthy' : 'ambient', time: { ...event.time },
         actorIds: [...sighting.witnessPersonaIds], headline,
-        shortText: sighting.groupName + ' sighted a ' + wildlifeLabel(sighting.speciesId).toLowerCase() + ' on their journey.',
+        shortText: sighting.groupName + ' sighted ' + wildlifeNoun(sighting.speciesId) + ' on their journey.',
         target: { kind: 'wildlife', id: event.id } };
 };
 

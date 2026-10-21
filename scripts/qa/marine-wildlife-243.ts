@@ -2,7 +2,7 @@ import { Scene, Color, HemisphereLight, DirectionalLight, PerspectiveCamera, Web
     Vector3 } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { WildlifeLayer } from '../../src/wildlife/WildlifeLayer';
-import { advanceMarine, marinePose } from '../../src/wildlife/MarineEncounters';
+import { advanceMarine, marineDuration, marinePose } from '../../src/wildlife/MarineEncounters';
 import { ReferenceWater } from '../../src/water/ReferenceWater';
 import type { WorldBlueprint } from '../../src/world-generation/WorldBlueprint';
 
@@ -38,26 +38,41 @@ scene.add(water.mesh);
 const layer = await WildlifeLayer.create(world);
 scene.add(layer.root);
 layer.setWaterHeightSampler((x, z) => water.getHeightAt(x, z) ?? world.waterLevel);
-const whale = layer.population.actors.find(actor => actor.marine)!;
+const whale = layer.population.actors.find(actor => actor.species === 'humpback-whale')!;
+const orca = layer.population.actors.find(actor => actor.species === 'orca')!;
 const otter = layer.population.actors.find(actor => actor.variant.behavior === 'otter_shore_water')!;
-const routes = layer.population.marineRoutes.get(whale.id)!;
+const species = document.getElementById('marine-species') as HTMLSelectElement;
+const timeline = document.getElementById('encounter-time') as HTMLInputElement;
 let selected = whale, playing = false, waterTime = 0;
+function present() {
+    document.getElementById('status')!.textContent = `${selected.species} · ${selected.state} · `
+        + (selected.marine ? `${selected.variant.encounter!.canonicalLength} m · depth ${(-layer.population.habitats.surface.surfaceHeightAt(
+            selected.position.x, selected.position.z)).toFixed(1)} m · `
+            + `${marinePose(selected).visible ? 'surfaced / sightable' : 'submerged / not sightable'}`
+            : 'source rig · tail tip on local water surface');
+    controls.update();
+    renderer.render(scene, camera);
+}
 function focus() {
-    const size = selected === whale ? 14 : 1.5;
+    const size = selected.variant.encounter?.canonicalLength ?? 1.5;
     controls.target.set(selected.position.x, 0, selected.position.z);
-    camera.position.copy(controls.target).add(new Vector3(size * 1.1, size * .7, size * 1.1));
+    const view = new Vector3(size * 1.3, size * .6, size * .6)
+        .applyAxisAngle(new Vector3(0, 1, 0), selected.heading);
+    camera.position.copy(controls.target).add(view);
     water.mesh.position.set(selected.position.x, 0, selected.position.z);
     controls.update();
 }
 function choose(id: string) {
-    selected = id === 'float' || id === 'swim' ? otter : whale;
-    playing = id === 'play' || selected === otter;
-    if (selected === whale) {
-        whale.state = 'surface';
-        Object.assign(whale.marine!, { elapsed: id === 'blow' ? 22.25 : id === 'dive' ? 49
-            : id === 'deep' ? 60 : id === 'play' ? 0 : 28, cooldown: 0, routeIndex: 0,
-            special: id === 'dive' });
-        advanceMarine(whale, 0, world.config.seed, routes, layer.population.habitats);
+    selected = id === 'float' || id === 'swim' ? otter : species.value === 'orca' ? orca : whale;
+    playing = id !== 'deep';
+    if (selected.marine) {
+        const isOrca = selected === orca;
+        selected.state = 'surface';
+        Object.assign(selected.marine, { elapsed: id === 'blow' ? 21
+            : id === 'dive' ? isOrca ? 34 : 42 : id === 'headrise' ? 62
+                : id === 'deep' ? isOrca ? 48 : 60 : id === 'play' ? 0 : isOrca ? 22 : 28,
+            cooldown: 0, routeIndex: 0, special: id === 'dive' || id === 'headrise' });
+        advanceMarine(selected, 0, world.config.seed, layer.population.marineRoutes.get(selected.id)!, layer.population.habitats);
     } else {
         otter.state = id === 'float' ? 'back_float' : 'swim';
         otter.wait = 1010;
@@ -65,11 +80,34 @@ function choose(id: string) {
         otter.target = null;
     }
     layer.advance(0, false);
+    timeline.disabled = !selected.marine;
+    if (selected.marine) {
+        timeline.max = String(marineDuration(selected.variant) - .1);
+        timeline.value = String(selected.marine.elapsed);
+    }
     focus();
+    present();
 }
-for (const id of ['surface', 'blow', 'dive', 'deep', 'play', 'float', 'swim'])
+for (const id of ['surface', 'blow', 'dive', 'deep', 'play', 'headrise', 'float', 'swim'])
     document.getElementById(id)!.onclick = () => choose(id);
 document.getElementById('pause')!.onclick = () => { playing = !playing; };
+species.onchange = () => {
+    (document.getElementById('blow') as HTMLButtonElement).disabled = species.value === 'orca';
+    (document.getElementById('headrise') as HTMLButtonElement).disabled = species.value !== 'orca';
+    document.getElementById('dive')!.textContent = species.value === 'orca' ? 'Dive' : 'Rare tail dive';
+    choose('surface');
+};
+timeline.oninput = () => {
+    if (!selected.marine) return;
+    playing = false;
+    selected.state = 'surface';
+    selected.marine.cooldown = 0;
+    selected.marine.elapsed = Number(timeline.value);
+    advanceMarine(selected, 0, world.config.seed, layer.population.marineRoutes.get(selected.id)!, layer.population.habitats);
+    layer.advance(0, false);
+    focus();
+    present();
+};
 choose('surface');
 let previous = performance.now();
 renderer.setAnimationLoop(() => {
@@ -78,18 +116,13 @@ renderer.setAnimationLoop(() => {
     if (playing) waterTime += delta;
     water.update(waterTime, camera);
     layer.advance(delta, playing, camera);
-    if (selected === whale && playing) {
-        const shift = new Vector3(whale.position.x - controls.target.x, 0, whale.position.z - controls.target.z);
+    if (playing && selected.marine) timeline.value = String(selected.marine.elapsed);
+    if (selected.marine && playing) {
+        const shift = new Vector3(selected.position.x - controls.target.x, 0, selected.position.z - controls.target.z);
         controls.target.add(shift);
         camera.position.add(shift);
     }
-    document.getElementById('status')!.textContent = `${selected.species} · ${selected.state} · `
-        + (selected === whale ? `14 m · depth ${(-layer.population.habitats.surface.surfaceHeightAt(
-            selected.position.x, selected.position.z)).toFixed(1)} m · `
-            + `${marinePose(whale).visible ? 'surfaced / sightable' : 'submerged / not sightable'}`
-            : 'source rig · DNA-independent wildlife material');
-    controls.update();
-    renderer.render(scene, camera);
+    present();
 });
 onresize = () => {
     camera.aspect = innerWidth / innerHeight;

@@ -12,14 +12,15 @@ const { WildlifePopulation } = load('../src/wildlife/WildlifePopulation.ts');
 const { captureWildlife, restoreWildlife } = load('../src/wildlife/WildlifeSnapshot.ts');
 const { marinePose, marineDuration, wildlifeObservable, advanceMarine } = load('../src/wildlife/MarineEncounters.ts');
 const { WildlifeLayer } = load('../src/wildlife/WildlifeLayer.ts');
+const { otterFloatRig, otterTailPoint } = load('../src/wildlife/MarineMotion.ts');
 const { wildlifeAssetManifest } = load('../src/wildlife/WildlifeAssetManifest.ts');
-const whale = population => population.actors.find(actor => actor.marine);
+const whale = population => population.actors.find(actor => actor.species === 'humpback-whale');
 
-test('only a body-safe corridor connected to open sea admits a single whale slot', () => {
+test('only body-safe corridors connected to open sea admit one whale and one orca slot', () => {
     const population = new WildlifePopulation(marineWorld());
     const actor = whale(population);
     assert.ok(actor);
-    assert.equal(population.actors.filter(actor => actor.marine).length, 1);
+    assert.equal(population.actors.filter(actor => actor.marine).length, 2);
     assert.equal(actor.state, 'absent');
     assert.equal(actor.variant.encounter.canonicalLength, 14);
     assert.equal(whale(new WildlifePopulation(worldFixture())), undefined, 'Three metres is too shallow');
@@ -74,15 +75,34 @@ test('encounters are episodic, continuous, deterministic, pause-safe and local-w
 test('surface blow and rare tail dive differ from ordinary cruise; deep states cannot be sighted', () => {
     const actor = whale(new WildlifePopulation(marineWorld()));
     actor.state = 'surface'; actor.marine.elapsed = 22.25;
-    assert.ok(marinePose(actor).spout > .9);
+    assert.ok(marinePose(actor).spout > .6);
     actor.state = 'dive'; actor.marine.elapsed = 49;
     actor.marine.special = false;
     const ordinary = marinePose(actor);
     actor.marine.special = true;
     assert.ok(marinePose(actor).tail > ordinary.tail * 3);
+    actor.state = 'surface'; actor.marine.elapsed = 81;
+    assert.ok(Math.abs(marinePose(actor).pitch) < .001,
+        'A whale fluke dive must not enable the orca head rise');
     actor.state = 'submerged'; actor.marine.elapsed = 60;
     assert.equal(wildlifeObservable(actor), false);
     actor.state = 'exit'; actor.marine.elapsed = marineDuration(actor.variant) - 1;
+    assert.equal(wildlifeObservable(actor), false);
+});
+
+test('orca shows its dorsal fin, occasionally raises its head and travels fully submerged between surfaces', () => {
+    const population = new WildlifePopulation(marineWorld());
+    const actor = population.actors.find(actor => actor.species === 'orca');
+    assert.equal(actor.variant.encounter.canonicalLength, 7);
+    assert.equal(actor.speed, 3);
+    assert.ok(actor.marine.cooldown >= 90 && actor.marine.cooldown <= 210);
+    actor.state = 'surface'; actor.marine.elapsed = 22;
+    assert.ok(marinePose(actor).visible);
+    assert.equal(marinePose(actor).spout, 0);
+    actor.marine.special = true; actor.marine.elapsed = 65;
+    assert.ok(marinePose(actor).pitch < -.35);
+    assert.ok(marinePose(actor).offset > -.1);
+    actor.state = 'submerged'; actor.marine.elapsed = 48;
     assert.equal(wildlifeObservable(actor), false);
 });
 
@@ -107,18 +127,20 @@ test('otter alternates swimming and readable back-floats, with bounded drift and
 
 globalThis.self = globalThis;
 globalThis.createImageBitmap = async () => ({ width: 512, height: 512, close() {} });
-test('humpback publication retains the supplied skin, uses metres and has a neutral tail', async () => {
-    const entry = wildlifeAssetManifest.find(item => item.id === 'humpback');
-    assert.equal(entry.joints, 27);
-    assert.deepEqual(entry.clips, []);
-    assert.equal(entry.scaleReference.kind, 'body-length');
-    const bytes = await readFile('public' + entry.path);
-    const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder)
-        .parseAsync(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), '');
-    const bounds = new Box3().setFromObject(gltf.scene, true);
-    assert.ok(Math.abs(bounds.getSize(new Vector3()).z - 14) < .01);
-    assert.ok(bounds.getSize(new Vector3()).y < 5, 'Raised source tail has been neutralized');
-    assert.ok(bytes.length < 200000);
+test('marine publications retain both supplied skins, use metres and have neutral tails', async () => {
+    for (const [id, length, joints] of [['humpback', 14, 27], ['orca', 7, 16]]) {
+        const entry = wildlifeAssetManifest.find(item => item.id === id);
+        assert.equal(entry.joints, joints);
+        assert.deepEqual(entry.clips, []);
+        assert.equal(entry.scaleReference.kind, 'body-length');
+        const bytes = await readFile('public' + entry.path);
+        const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder)
+            .parseAsync(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), '');
+        const bounds = new Box3().setFromObject(gltf.scene, true);
+        assert.ok(Math.abs(bounds.getSize(new Vector3()).z - length) < .01);
+        assert.ok(bounds.getSize(new Vector3()).y < 5, 'Source tails have been neutralized');
+        assert.ok(bytes.length < 200000);
+    }
 });
 
 test('marine renderer samples actual water height, keeps the floating head above water and freezes paused poses', async () => {
@@ -146,12 +168,18 @@ test('marine renderer samples actual water height, keeps the floating head above
         otter.state = 'back_float'; otter.wait = 30; otter.floatUntil = layer.population.time + 20;
         const otterRoot = layer.root.getObjectByName('wildlife:' + otter.id);
         const head = otterRoot.getObjectByName('head');
+        const floatRig = otterFloatRig(otterRoot.children[0].children[0], otterRoot);
         for (const heading of [0, Math.PI * .5, Math.PI, Math.PI * 1.5]) {
             otter.heading = heading;
             layer.advance(0, false);
             layer.root.updateMatrixWorld(true);
             assert.ok(head.getWorldPosition(new Vector3()).y > water + .01,
                 'Floating head must clear the water at every heading');
+            assert.ok(otterRoot.getObjectByName('Hips').getWorldPosition(new Vector3()).y < water - .025,
+                'The body must be partly submerged, not resting on top of the surface');
+            const tailHeight = otterTailPoint(floatRig, new Vector3()).y;
+            assert.ok(Math.abs(tailHeight - water - .008) < .015,
+                'The skinned tail tip rests at the actual water surface: ' + (tailHeight - water));
         }
         const pose = [];
         otterRoot.traverse(node => { if (node.isBone) pose.push(node.quaternion.toArray()); });
@@ -161,5 +189,10 @@ test('marine renderer samples actual water height, keeps the floating head above
         otterRoot.traverse(node => { if (node.isBone) paused.push(node.quaternion.toArray()); });
         assert.deepEqual(paused, pose);
         assert.ok(before.distanceTo(otterRoot.position) < 1e-10);
+        layer.useCanonical({ version: 1, worldId: 'legacy-render-fixture', startedAt: 800000,
+            advancedAt: 800000, nextEncounter: 1, contacts: [], firstDiscoveries: {},
+            actors: captureWildlife(layer.population).filter(actor => !actor.marine) });
+        layer.advance(0, false);
+        assert.equal(root.visible, false, 'A legacy snapshot cannot retain a visitor from the prior scene');
     } finally { layer.dispose(); }
 });

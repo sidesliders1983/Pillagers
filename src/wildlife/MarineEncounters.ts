@@ -19,12 +19,14 @@ export interface MarineMotion {
 }
 export const marineStages = ['approach', 'surface', 'dive', 'submerged', 'surface', 'dive', 'exit'] as const;
 const whaleDurations = [14, 28, 14, 14, 20, 14, 16];
+const orcaDurations = [10, 24, 8, 12, 20, 8, 10];
 const smooth = (value: number) => {
     const t = Math.max(0, Math.min(1, value));
     return t * t * (3 - 2 * t);
 };
 const pulse = (value: number) => Math.sin(Math.PI * Math.max(0, Math.min(1, value)));
-export const marineDuration = (_variant: WildlifeVariant) => whaleDurations.reduce((sum, n) => sum + n, 0);
+const durations = (variant: WildlifeVariant) => variant.asset === 'orca' ? orcaDurations : whaleDurations;
+export const marineDuration = (variant: WildlifeVariant) => durations(variant).reduce((sum, n) => sum + n, 0);
 
 /** A bounded list of straight, fully checked sea corridors, connected to the map edge.
  * No enclosed lake can qualify, and no route search occurs during an encounter. */
@@ -76,7 +78,7 @@ export function initialMarineMotion(seed: number, id: string, variant: WildlifeV
 }
 
 export function marineStage(variant: WildlifeVariant, elapsed: number) {
-    const times = whaleDurations;
+    const times = durations(variant);
     let start = 0;
     for (let index = 0; index < times.length; index++) {
         if (elapsed < start + times[index]) return { index, start, duration: times[index],
@@ -89,28 +91,44 @@ export function marineStage(variant: WildlifeVariant, elapsed: number) {
 /** Pure presentation pose, also used to gate physical sightings below the surface. */
 export function marinePose(actor: WildlifeActor) {
     const motion = actor.marine!;
-    const hidden = -3.3;
-    const cruise = -1.15;
+    const orca = actor.variant.asset === 'orca';
+    const hidden = orca ? -2.4 : -3.3;
+    const cruise = orca ? -.45 : -1.15;
     if (actor.state === 'absent') return { offset: hidden, pitch: 0, tail: 0,
-        visible: false, spout: 0, splash: 0, wake: 0 };
+        visible: false, spout: 0, blowAge: -1, splash: 0, wake: 0 };
     const stage = marineStage(actor.variant, motion.elapsed);
-    let offset = hidden, pitch = 0, tail = 0, spout = 0, splash = 0, wake = 0;
+    let offset = hidden, pitch = 0, tail = 0, spout = 0, blowAge = -1, splash = 0, wake = 0;
     if (stage.state === 'surface') {
         const rise = smooth((motion.elapsed - stage.start) / 6);
         offset = hidden + (cruise - hidden) * rise;
         pitch = -.07 * Math.sin(Math.PI * rise);
         wake = rise;
-        spout = stage.index === 1 ? pulse((motion.elapsed - stage.start - 7) / 2.5) : 0;
+        if (!orca && stage.index === 1) {
+            const age = (motion.elapsed - stage.start - 7) / 2.5;
+            if (age >= 0 && age <= 1) {
+                blowAge = age;
+                spout = smooth(age / .12) * (1 - smooth((age - .25) / .75));
+            }
+        }
+        else if (orca && motion.special && stage.index === 4) {
+            const rise = pulse((motion.elapsed - stage.start - 8) / 6);
+            pitch -= rise * .4;
+            offset += rise * .45;
+        }
     } else if (stage.state === 'dive') {
         const dive = smooth(stage.progress);
         offset = cruise + (hidden - cruise) * dive;
         pitch = .14 * Math.sin(Math.PI * stage.progress);
         wake = 1 - dive;
-        tail = Math.sin(Math.PI * stage.progress) * (motion.special ? .8 : .1);
-        if (motion.special) splash = pulse((stage.progress - .5) / .3);
+        if (!orca) {
+            // Rise, briefly show the fluke, then lower it faster into the water.
+            const fluke = smooth(stage.progress / .45) * (1 - smooth((stage.progress - .55) / .35));
+            tail = fluke * (motion.special ? .8 : .1);
+            if (motion.special) splash = pulse((stage.progress - .73) / .24);
+        }
     }
-    const top = 1.4 + tail * 4;
-    return { offset, pitch, tail, spout, splash, wake, visible: offset + top > .05 };
+    const top = orca ? 1.8 + Math.max(0, -pitch) * 3.5 : 1.4 + tail * 4;
+    return { offset, pitch, tail, spout, blowAge, splash, wake, visible: offset + top > .05 };
 }
 
 /** Same actor slots and canonical clock as all other wildlife. Camera never enters this decision. */
@@ -123,7 +141,7 @@ export function advanceMarine(actor: WildlifeActor, delta: number, seed: number,
         if (motion.cooldown > 0) return;
         // Any repositioning occurs wholly submerged, before the approach starts at the edge.
         motion.routeIndex = Math.floor(random('route') * routes.length);
-        motion.special = random('special') < .12;
+        motion.special = random('special') < (actor.variant.asset === 'orca' ? .25 : .12);
         motion.elapsed = -motion.cooldown;
         motion.cooldown = 0;
         actor.state = 'approach';

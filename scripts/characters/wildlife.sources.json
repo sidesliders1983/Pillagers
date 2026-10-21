@@ -77,6 +77,13 @@
     "metres": 0.6
   },
   {
+    "id": "orca",
+    "file": "Orca.glb",
+    "reference": "body-length",
+    "metres": 7,
+    "straightenTail": [15, 11]
+  },
+  {
     "id": "humpback",
     "file": "Whale.glb",
     "reference": "body-length",

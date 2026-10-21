@@ -17,7 +17,7 @@ const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 test('wildlife population is habitat driven, deterministic, complete and does not mutate geography', () => {
     const world = worldFixture(), before = JSON.stringify(world);
     const first = new WildlifePopulation(world), second = new WildlifePopulation(world);
-    assert.equal(wildlifeSpecies.length, 12);
+    assert.equal(wildlifeSpecies.length, 13);
     assert.equal(first.actors.length, 28, JSON.stringify(first.diagnostics));
     assert.deepEqual(first.diagnostics.filter(message => !message.includes('visits disabled')), []);
     assert.deepEqual(first.inspect(), second.inspect());
@@ -94,7 +94,7 @@ const sources = {
     release(id) { released.push(id); },
 };
 test('compact exports pin source identities, canonical scales, source rigs and seven authored walk clips', async () => {
-    assert.equal(wildlifeAssetManifest.length, 13);
+    assert.equal(wildlifeAssetManifest.length, 14);
     for (const entry of wildlifeAssetManifest) {
         const bytes = await readFile('public' + entry.path);
         assert.equal(hash(bytes), entry.sha256);
@@ -176,7 +176,7 @@ test('world wildlife shares render resources, owns independent rigs, respects di
         a.skeleton.dispose = () => { skeletonDisposed = true; disposeSkeleton(); };
         first.dispose();
         first.dispose();
-        assert.equal(released.length - before, wildlifeAssetManifest.length - 1);
+        assert.equal(released.length - before, wildlifeAssetManifest.length - 2);
         assert.equal(second.inspect().instances, 28);
         assert.equal(first.root.children.length, 0);
         assert.ok(skeletonDisposed);
@@ -198,8 +198,8 @@ test('a failed model load releases every acquired asset after outstanding loads 
         release(id) { releases.push(id); },
     };
     await assert.rejects(WildlifeLayer.create(worldFixture(), () => true, failing), /Missing bear fixture/);
-    assert.equal(releases.length, wildlifeAssetManifest.length - 1);
-    assert.equal(new Set(releases).size, wildlifeAssetManifest.length - 1);
+    assert.equal(releases.length, wildlifeAssetManifest.length - 2);
+    assert.equal(new Set(releases).size, wildlifeAssetManifest.length - 2);
 });
 test('missing habitats are reported without invalid forced spawns', () => {
     const world = worldFixture();

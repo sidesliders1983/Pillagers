@@ -51,7 +51,7 @@ Missing participant identity is omitted. Later roster changes never rewrite even
 - Index existing animals in 64 m spatial buckets; query only nearby candidates
   from confirmed living expedition member poses. Never scan a cross product on
   render frames. Coalesce all member/instance matches into one group/species match.
-- Require actual proximity within 32 m (64 m for surfaced humpback whales), mapped or currently visible terrain, and
+- Require actual proximity within 32 m (64 m for surfaced humpbacks and orcas), mapped or currently visible terrain, and
   the existing terrain sightline from expedition eye height to the real animal.
   Trees/buildings are not newly claimed as opaque: LOS has the same terrain-only
   limitation as current exploration. Prepared and returned groups do not observe.

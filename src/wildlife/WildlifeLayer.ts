@@ -17,8 +17,8 @@ import { wildlifeAssetManifest } from './WildlifeAssetManifest';
 import { WildlifePopulation, type WildlifeActor } from './WildlifePopulation';
 import { marinePose, wildlifeObservable } from './MarineEncounters';
 import { MarineEffects } from './MarineEffects';
-import { whaleTailRig, poseWhaleTail, otterFloatRig, clearOtterFloat, poseOtterFloat,
-    type OtterFloatRig } from './MarineMotion';
+import { marineTailRig, poseMarineTail, otterFloatRig, clearOtterFloat, poseOtterFloat,
+    otterTailPoint, type OtterFloatRig } from './MarineMotion';
 import type { WildlifeObstacle } from './WildlifeHabitats';
 interface CachedAsset {
     promise: Promise<GLTF>;
@@ -80,7 +80,7 @@ interface RenderActor {
     root: Group;
     body: Group;
     floating?: OtterFloatRig;
-    whaleTail?: ReturnType<typeof whaleTailRig>;
+    marineTail?: ReturnType<typeof marineTailRig>;
     effects?: MarineEffects;
     mixer?: AnimationMixer;
     legs: LegPose[];
@@ -142,6 +142,7 @@ export class WildlifeLayer {
     private surfaceTilt = new Quaternion();
     private up = new Vector3(0, 1, 0);
     private waterHeight?: (x: number, z: number) => number;
+    private floatTailPoint = new Vector3();
     private constructor(world: WorldBlueprint, private known: (x: number, z: number) => boolean, private sources: WildlifeSources) {
         this.population = new WildlifePopulation(world);
         this.root.name = 'Ambient wildlife';
@@ -167,7 +168,7 @@ export class WildlifeLayer {
                         body.position.y = (entry.bounds.max[1] + entry.bounds.min[1]) * .5;
                         model.position.y -= body.position.y;
                     }
-                    const effects = actor.marine ? new MarineEffects() : undefined;
+                    const effects = actor.marine ? new MarineEffects(actor.variant.encounter!.canonicalLength) : undefined;
                     if (effects) layer.root.add(effects.root);
                     model.traverse(node => {
                         if (node instanceof Mesh) {
@@ -182,7 +183,7 @@ export class WildlifeLayer {
                     const coastal = mixer ? undefined : coastalAnimalRig(model as Group, actor.species);
                     const rabbit = actor.species === 'rabbit' ? rabbitRig(model as Group, root) : undefined;
                     layer.records.push({ actor, root, body, mixer, coastal, rabbit, floating, effects,
-                        whaleTail: actor.marine ? whaleTailRig(model as Group) : undefined,
+                        marineTail: actor.marine ? marineTailRig(model as Group, actor.species) : undefined,
                         resting: mixer ? animalRestRig(model as Group, root, actor.species) : undefined,
                         legs: mixer || coastal || rabbit || actor.marine || id.startsWith('gull-') ? [] : legPoses(model as Group),
                         wings: id === 'gull-flying' ? gullWingRig(model as Group) : undefined,
@@ -267,7 +268,8 @@ export class WildlifeLayer {
                 root.quaternion.premultiply(this.surfaceTilt);
             }
             root.position.y += actor.hop?.lift ?? 0;
-            const waterHeight = water && wildlifeObservable(actor)
+            const activeEffect = pose && (pose.wake > .01 || pose.spout > .01 || pose.splash > .01);
+            const waterHeight = water && (wildlifeObservable(actor) || activeEffect)
                 ? this.waterHeight?.(root.position.x, root.position.z) ?? this.population.world.waterLevel
                 : this.population.world.waterLevel;
             if (water) {
@@ -280,24 +282,28 @@ export class WildlifeLayer {
                 root.position.y += Math.sin(this.population.time * 1.4 + actor.phase) * .025;
                 root.rotation.x = Math.sin(this.population.time + actor.phase) * .035;
                 record.body.rotation.z = floatAmount * (Math.PI + Math.sin(this.population.time * .6) * .035);
+                record.body.rotation.x = -floatAmount * .15;
             }
-            root.visible = this.known(actor.position.x, actor.position.z)
+            const known = this.known(actor.position.x, actor.position.z);
+            let inView = true;
+            root.visible = known
                 && wildlifeObservable(actor)
                 && (airborne || this.population.habitats.valid(actor.position, actor.variant));
             if (camera) {
                 this.sphere.center.copy(root.position).y += record.height * .5;
                 this.sphere.radius = record.radius;
-                root.visible &&= this.frustum.intersectsSphere(this.sphere);
+                inView = this.frustum.intersectsSphere(this.sphere);
+                root.visible &&= inView;
             }
             if (record.effects && pose) {
-                record.effects.root.visible = root.visible;
-                if (root.visible) record.effects.update(root.position.x, waterHeight, root.position.z,
+                record.effects.root.visible = known && inView && !!activeEffect;
+                if (record.effects.root.visible) record.effects.update(root.position.x, waterHeight, root.position.z,
                     actor.heading, pose, this.population.time);
             }
             if (!root.visible || camera && root.position.distanceToSquared(this.cameraPoint) > 200 * 200)
                 continue;
-            if (record.whaleTail && pose) {
-                poseWhaleTail(record.whaleTail, this.population.time, pose.tail);
+            if (record.marineTail && pose) {
+                poseMarineTail(record.marineTail, this.population.time, pose.tail, actor.species);
                 continue;
             }
             if (record.wings) {
@@ -328,8 +334,12 @@ export class WildlifeLayer {
                 record.mixer.setTime(moving ? this.population.time * gaitSpeed + actor.phase : 0);
                 if (record.resting && !moving)
                     poseAnimalRest(record.resting, this.population.time, actor.phase);
-                if (record.floating && floatAmount > 0)
+                if (record.floating && floatAmount > 0) {
                     poseOtterFloat(record.floating, floatAmount, this.population.time);
+                    const tip = otterTailPoint(record.floating, this.floatTailPoint);
+                    const surface = this.waterHeight?.(tip.x, tip.z) ?? this.population.world.waterLevel;
+                    root.position.y += (surface + .008 - tip.y) * floatAmount;
+                }
             }
             else
                 for (const leg of record.legs) {

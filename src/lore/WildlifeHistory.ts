@@ -10,12 +10,16 @@ export interface WildlifeRecord {
 }
 export const wildlifeLabel = (speciesId: string) =>
     wildlifeSpecies.find(species => species.id === speciesId)?.label ?? 'Recorded wildlife';
+export function wildlifeNoun(speciesId: string) {
+    const label = wildlifeLabel(speciesId).toLowerCase();
+    return (/^[aeiou]/.test(label) ? 'an ' : 'a ') + label;
+}
 export function wildlifeSightingText(event: SimulationEvent, personal = false) {
     const d = wildlifeSighting(event);
     if (!d) return null;
-    const label = wildlifeLabel(d.speciesId).toLowerCase();
-    return personal ? 'Participated in ' + d.groupName + ' when the expedition sighted a ' + label + '.' :
-        d.groupName + ' sighted a ' + label + (d.firstForClan ? ', the clan’s first recorded encounter with this species.' : '.');
+    const noun = wildlifeNoun(d.speciesId);
+    return personal ? 'Participated in ' + d.groupName + ' when the expedition sighted ' + noun + '.' :
+        d.groupName + ' sighted ' + noun + (d.firstForClan ? ', the clan’s first recorded encounter with this species.' : '.');
 }
 
 /** Rebuildable projection: each canonical event is examined once, with no UI history copy in saves. */

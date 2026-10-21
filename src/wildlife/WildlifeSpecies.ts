@@ -1,9 +1,9 @@
 export type WildlifeMovement = 'ground' | 'air' | 'water' | 'shore';
 export type HabitatTag = 'coast' | 'fjord_water' | 'deep_coastal_water' | 'outer_coast' | 'rocky_shore' | 'cliff' | 'forest_edge' | 'deep_forest' | 'lowland' | 'wet_lowland' | 'foothill' | 'mountain' | 'alpine';
 export interface MarineEncounterProfile {
-    behavior: 'humpback_surface_sighting';
+    behavior: 'orca_surface_sighting' | 'humpback_surface_sighting';
     canonicalLength: number;
-    rarity: 'rare';
+    rarity: 'uncommon-rare' | 'rare';
     initialDelay: readonly [number, number];
     cooldown: readonly [number, number];
 }
@@ -96,6 +96,13 @@ export const wildlifeSpecies: readonly WildlifeSpecies[] = [
             { id: 'water', asset: 'seal', movement: 'water', count: 2,
                 habitats: ['fjord_water'], radius: 9, speed: .45, clearance: .55,
                 avoidSettlement: 35, maximumCoastDistance: 28 },
+        ] },
+    { id: 'orca', label: 'Orca', group: 'solo', variants: [
+            { id: 'visiting', asset: 'orca', movement: 'water', count: 1,
+                habitats: ['fjord_water', 'deep_coastal_water', 'outer_coast'],
+                radius: 0, speed: 3, clearance: 3.6, avoidSettlement: 0, minimumDepth: 5,
+                encounter: { behavior: 'orca_surface_sighting', canonicalLength: 7,
+                    rarity: 'uncommon-rare', initialDelay: [90, 210], cooldown: [300, 600] } },
         ] },
     { id: 'humpback-whale', label: 'Humpback whale', group: 'solo', variants: [
             { id: 'visiting', asset: 'humpback', movement: 'water', count: 1,
