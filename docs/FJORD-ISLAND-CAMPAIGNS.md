@@ -2,6 +2,11 @@
 
 ## Default and identity
 
+The [#240 geography survey](qa/island-seed-expansion/report.md) is an offline content-validation phase.
+Its explicit geography candidates reuse the production preparation function without entering the approved recipe pool
+or production cache. They are not new gameplay defaults. Owner selection, remaining integration checks and a new
+recipe/pool version are required before new campaigns can use them; the v1/v2 mapping below stays unchanged.
+
 New campaigns created in `/fjord-play` use `island-pool-v2`. The campaign seed deterministically selects geography seed **18 or 7** through a pinned integer hash. The Simulation Core keeps its original seed, founders, rules, RNG, events and resources. The geography seed is displayed separately under **Menu → Campaign**.
 
 Both entries use the existing `fjordside-island-v0.3e-r3` generator, the canonical 800 × 800 m heightfield, its geological compartments and the existing environment-zoning function. There is no random retry or silent seed substitution inside the generator. Changing this pool, selection mapping or preparation algorithm after release requires a new recipe version.

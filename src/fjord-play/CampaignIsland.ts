@@ -63,6 +63,24 @@ export function createCampaignIsland(campaignSeed: number, saved?: IslandRecipe,
     if (cached) return cached;
     const source = generateWorld({ seed: recipe.seed, preset: 'island',
         generatorVersion: recipe.generatorVersion, conifers: 'ez-tree', environment: { version: 1 } }, observe);
+    const world = prepareCampaignIsland(source, recipe.version, observe);
+    worlds.set(cacheKey, world);
+    return world;
+}
+
+/** Shared production preparation, also used by the offline geography survey.
+ * This does not admit a recipe to gameplay or retain the candidate in the world cache.
+ * Normal creation, import and worker adoption still require the approved pool mapping. */
+export function prepareCampaignIsland(source: WorldBlueprint, version: IslandRecipeVersion,
+    observe?: GenerationObserver): WorldBlueprint {
+    if (version !== 'island-pool-v1' && version !== currentIslandVersion)
+        throw new Error('Unsupported campaign island recipe version.');
+    if (source.config.preset !== 'island' ||
+        source.config.generatorVersion !== discoverySettlementGeneratorVersion ||
+        source.config.conifers !== 'ez-tree' || source.config.environment?.version !== 1)
+        throw new Error('Campaign preparation requires the pinned r3 island configuration.');
+    const recipe: IslandRecipe = { version, generatorVersion: discoverySettlementGeneratorVersion,
+        seed: source.config.seed };
     if (!source.validation.accepted || !source.siteSelection?.harborBerth || !source.rivalSite)
         throw new Error('The curated island no longer passes its geographical validation.');
     // The Lab's six demonstration buildings are not campaign houses. Start with the
@@ -119,7 +137,6 @@ export function createCampaignIsland(campaignSeed: number, saved?: IslandRecipe,
         throw new Error('The curated campaign fails its foundation, separation or access contract.');
     plans.set(world, freezeBlueprint({ recipe, center: layout.center, plots, maximumAdjustment, access,
         berth: source.siteSelection.harborBerth }));
-    worlds.set(cacheKey, world);
     return world;
 }
 
