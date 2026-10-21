@@ -224,6 +224,9 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
             .map(p => [p.assetId + '@' + p.x + ',' + p.z, p]));
         return {
             root,terrain,movement,blueprint,attachments,
+            waterHeightAt(x: number, z: number) {
+                return (water ?? classic!.water).surface.getHeightAt(x, z) ?? blueprint?.waterLevel ?? 0;
+            },
             setDiscovery(view: DiscoveryView) {
                 if (!blueprint || !nature || view.worldId !== discovery?.worldId)
                     throw new Error('Scenery discovery belongs to a different world.');

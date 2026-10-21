@@ -196,6 +196,7 @@ export function createFjordScene(options: {
                 scene.add(wildlife.root);
             }
             activeBlueprint = blueprint;
+            wildlife?.setWaterHeightSampler((x, z) => world!.waterHeightAt(x, z));
             appliedRevision = -1;
             discoveryFog?.dispose();
             knownTerrain = discovery;

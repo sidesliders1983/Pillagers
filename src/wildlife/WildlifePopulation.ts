@@ -4,6 +4,8 @@ import type { Point2, WorldBlueprint } from '../world-generation/WorldBlueprint'
 import { identitySample } from '../characters/seededRandom';
 import { wildlifeSpecies, wildlifeTerritoryGap, type HabitatTag, type WildlifeVariant } from './WildlifeSpecies';
 import { WildlifeHabitats } from './WildlifeHabitats';
+import { advanceMarine, initialMarineMotion, planMarineRoutes, marinePose,
+    type MarineMotion, type MarineRoute } from './MarineEncounters';
 export interface WildlifeActor {
     id: string;
     species: string;
@@ -17,7 +19,8 @@ export interface WildlifeActor {
     target: Point2 | null;
     heading: number;
     bank: number;
-    state: 'idle' | 'roam' | 'glide' | 'swim' | 'rest' | 'flee' | 'alert';
+    state: 'idle' | 'roam' | 'glide' | 'swim' | 'rest' | 'flee' | 'alert' | 'back_float'
+        | 'absent' | 'approach' | 'surface' | 'dive' | 'submerged' | 'exit';
     habitat: HabitatTag;
     phase: number;
     orbitRadius: number;
@@ -29,6 +32,8 @@ export interface WildlifeActor {
     climbRate: number;
     flapEffort: number;
     hop?: RabbitHop;
+    marine?: MarineMotion;
+    floatUntil?: number;
 }
 /** Small ambient population; no mutations to world generation, campaign state or simulation entropy. */
 export class WildlifePopulation {
@@ -37,14 +42,16 @@ export class WildlifePopulation {
     readonly diagnostics: string[] = [];
     time = 0;
     private humans: readonly Point2[] = [];
+    readonly marineRoutes = new Map<string, readonly MarineRoute[]>();
     constructor(readonly world: WorldBlueprint) {
         this.habitats = new WildlifeHabitats(world);
-        const available = new Map(wildlifeSpecies.flatMap(species => species.variants.map(variant => [variant,
+        const residentSpecies = wildlifeSpecies.filter(species => !species.variants[0].encounter);
+        const available = new Map(residentSpecies.flatMap(species => species.variants.map(variant => [variant,
             this.habitats.candidates.filter(point => this.habitats.valid(point, variant)
                 && (species.group !== 'solo' || [world.settlement.center, ...(world.rivalSite ? [world.rivalSite.center] : [])].every(center => Math.hypot(point.x - center.x, point.z - center.z) >= variant.avoidSettlement + variant.radius)))] as const)));
-        const territories = planWildlifeTerritories(world, available, wildlifeSpecies.filter(species => species.group === 'solo').map(species => species.variants[0]));
+        const territories = planWildlifeTerritories(world, available, residentSpecies.filter(species => species.group === 'solo').map(species => species.variants[0]));
         // Reserve scarce inland habitats first. Coastal gulls retain their harbour reference.
-        const ordered = [...wildlifeSpecies].sort((a, b) => a.group === 'solo' && b.group === 'solo'
+        const ordered = [...residentSpecies].sort((a, b) => a.group === 'solo' && b.group === 'solo'
             ? available.get(a.variants[0])!.length - available.get(b.variants[0])!.length
             : a.group === 'solo' ? -1 : b.group === 'solo' ? 1 : 0);
         for (const species of ordered) {
@@ -108,7 +115,27 @@ export class WildlifePopulation {
                 }
             }
         }
+        this.addMarineVisitors();
         this.advance(0, true);
+    }
+    private addMarineVisitors() {
+        for (const species of wildlifeSpecies.filter(item => item.variants[0].encounter)) {
+            const variant = species.variants[0];
+            const routes = planMarineRoutes(this.habitats, variant);
+            if (!routes.length) {
+                this.diagnostics.push(species.id + ': no deep open-water corridor; visits disabled');
+                continue;
+            }
+            const id = species.id + ':' + variant.id + ':0', anchor = { ...routes[0].from };
+            this.marineRoutes.set(id, routes);
+            this.actors.push({ id, species: species.id, variant, anchor,
+                position: { ...anchor, y: this.world.waterLevel - 4 }, target: null,
+                heading: 0, bank: 0, state: 'absent', habitat: 'deep_coastal_water',
+                phase: identitySample(this.world.config.seed, 'wildlife.' + id + '.phase') * Math.PI * 2,
+                orbitRadius: 0, speed: variant.speed, wait: 0, decisions: 0,
+                fleeUntil: 0, escapeWait: 0, climbRate: 0, flapEffort: 0,
+                marine: initialMarineMotion(this.world.config.seed, id, variant) });
+        }
     }
     setHumans(positions: readonly Point2[]) {
         this.humans = positions.filter(point => Number.isFinite(point.x) && Number.isFinite(point.z));
@@ -152,6 +179,23 @@ export class WildlifePopulation {
         this.time += delta;
         for (const actor of this.actors) {
             const v = actor.variant;
+            if (actor.marine) {
+                advanceMarine(actor, delta, this.world.config.seed, this.marineRoutes.get(actor.id)!, this.habitats);
+                continue;
+            }
+            if (v.behavior === 'otter_shore_water' && actor.state === 'back_float') {
+                if (this.time < actor.floatUntil!) {
+                    const drift = { x: actor.position.x + Math.sin(actor.heading) * delta * .025,
+                        z: actor.position.z + Math.cos(actor.heading) * delta * .025 };
+                    if (this.habitats.segmentValid(actor.position, drift, v)) {
+                        actor.position.x = drift.x;
+                        actor.position.z = drift.z;
+                    }
+                    continue;
+                }
+                actor.state = 'swim';
+                actor.wait = 0;
+            }
             if (v.movement === 'air') {
                 const previousHeight = actor.position.y;
                 const angle = actor.phase + this.time * actor.speed / actor.orbitRadius;
@@ -197,6 +241,13 @@ export class WildlifePopulation {
             actor.wait -= delta;
             if (!fleeing && !actor.target && actor.wait <= 0 && actor.speed > 0) {
                 actor.decisions++;
+                if (v.behavior === 'otter_shore_water' && actor.decisions % 3 === 0) {
+                    actor.state = 'back_float';
+                    actor.floatUntil = this.time + 14 + this.random(actor, 'float') * 10;
+                    actor.wait = actor.floatUntil - this.time;
+                    actor.position.y = this.world.waterLevel;
+                    continue;
+                }
                 for (let attempt = 0; attempt < 20; attempt++) {
                     const angle = this.random(actor, 'angle' + attempt) * Math.PI * 2;
                     const distance = 2 + this.random(actor, 'distance' + attempt) * Math.min(9, v.radius * .6);
@@ -245,6 +296,11 @@ export class WildlifePopulation {
             movement: actor.variant.movement, habitat: actor.habitat, state: actor.state,
             position: { ...actor.position }, anchor: { ...actor.anchor }, radius: actor.variant.radius,
             heading: actor.heading, climbRate: actor.climbRate, wingEffort: actor.flapEffort,
+            ...(actor.marine ? { encounter: { ...actor.marine },
+                canonicalLength: actor.variant.encounter!.canonicalLength,
+                surface: marinePose(actor).visible,
+                depth: this.world.waterLevel - this.habitats.surface.surfaceHeightAt(actor.position.x, actor.position.z),
+                route: this.marineRoutes.get(actor.id)?.[actor.marine.routeIndex] } : {}),
             shyDistance: actor.variant.shyDistance ?? null,
             flightHeight: actor.variant.flightHeight ?? null,
             ...(actor.hop ? { hop: { phase: actor.hop.phase, lift: actor.hop.lift,

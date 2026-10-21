@@ -1,7 +1,8 @@
 import type { WildlifeActor, WildlifePopulation } from './WildlifePopulation';
+import { initialMarineMotion } from './MarineEncounters';
 
 const motionKeys = ['position', 'target', 'heading', 'bank', 'state', 'wait', 'decisions',
-    'fleeUntil', 'escapeWait', 'climbRate', 'flapEffort', 'hop'] as const;
+    'fleeUntil', 'escapeWait', 'climbRate', 'flapEffort', 'hop', 'marine', 'floatUntil'] as const;
 export type WildlifeMotion = Pick<WildlifeActor, 'id' | typeof motionKeys[number]>;
 
 /** Persist only motion; seeded identity, habitat and variant settings come from the real population. */
@@ -16,11 +17,18 @@ export function captureWildlife(population: WildlifePopulation): WildlifeMotion[
 }
 
 /** Restore in place so pooled render records retain their actor references. */
-export function restoreWildlife(population: WildlifePopulation, actors: readonly WildlifeMotion[], time: number) {
+export function restoreWildlife(population: WildlifePopulation, actors: readonly WildlifeMotion[], time: number, legacy = false) {
     const saved = new Map(actors.map(actor => [actor.id, actor]));
-    if (saved.size !== population.actors.length) throw new Error('Wildlife population identity mismatch.');
+    const expected = legacy ? population.actors.filter(actor => !actor.marine) : population.actors;
+    if (saved.size !== expected.length) throw new Error('Wildlife population identity mismatch.');
     for (const actor of population.actors) {
         const motion = saved.get(actor.id);
+        if (legacy && actor.marine && !motion) {
+            actor.state = 'absent';
+            actor.position = { ...actor.anchor, y: population.world.waterLevel - 4 };
+            actor.marine = initialMarineMotion(population.world.config.seed, actor.id, actor.variant);
+            continue;
+        }
         if (!motion) throw new Error('Wildlife instance missing from saved population.');
         for (const key of motionKeys) {
             if (motion[key] === undefined) delete (actor as unknown as Record<string, unknown>)[key];

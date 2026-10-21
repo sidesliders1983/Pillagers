@@ -79,6 +79,10 @@ export class WildlifeHabitats {
         const elevation = height - world.waterLevel, tags: HabitatTag[] = [];
         if (elevation < -.2 && coastDistance < 80)
             tags.push('fjord_water');
+        if (elevation <= -4 && coastDistance >= 15)
+            tags.push('deep_coastal_water');
+        if (elevation <= -4 && coastDistance >= 80)
+            tags.push('outer_coast');
         if (elevation > .2 && coastDistance < 12 && elevation < 8) {
             tags.push('coast');
             if (rock > .18 || biome === 'rock')
@@ -140,11 +144,14 @@ export class WildlifeHabitats {
                         return false;
                 }
             }
-        for (const [dx, dz] of [[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1]]) {
+        const footprint = variant.encounter
+            ? [[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1], [.7, .7], [-.7, .7], [.7, -.7], [-.7, -.7]]
+            : [[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1]];
+        for (const [dx, dz] of footprint) {
             const x = point.x + dx * variant.clearance, z = point.z + dz * variant.clearance;
             const height = this.surface.surfaceHeightAt(x, z);
             if (variant.movement === 'water') {
-                if (height > this.world.waterLevel - .2)
+                if (height > this.world.waterLevel - (variant.minimumDepth ?? .2))
                     return false;
             }
             else if (height < this.world.waterLevel + .2 || !this.walkable({ x, z }))

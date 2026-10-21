@@ -477,6 +477,80 @@
         "Normalize once to canonical metre scale in an authoring wrapper",
         "Resize albedo to 512px WebP and remove high-frequency surface maps"
       ]
+    },
+    {
+      "id": "orca",
+      "file": "orca.glb",
+      "path": "/wildlife/orca.glb",
+      "source": "Assets/Characters/Wildlife/Orca.glb",
+      "sourceSha256": "bd07cb403d4caa4ff8cfa2184bceba2d38b54fe3d6e6b574a55341d35704c157",
+      "sha256": "bd43f416c1fd814ff48f4184ab21e00033b45c1654638d88511d4e3b5909eb21",
+      "sourceBytes": 6422160,
+      "bytes": 82668,
+      "triangles": 2646,
+      "scaleReference": {
+        "kind": "body-length",
+        "metres": 7,
+        "sourceDimension": 2.8601510684943388,
+        "scale": 2.4474231718414057
+      },
+      "bounds": {
+        "min": [
+          -1.9585951110372775,
+          -1.7287034694471668,
+          -3.4997817521779786
+        ],
+        "max": [
+          1.9585950180607803,
+          1.7288204851354827,
+          3.499999930859073
+        ]
+      },
+      "joints": 16,
+      "clips": [],
+      "operations": [
+        "Preserve supplied geometry, UVs, rig and source clip rotations",
+        "Normalize once to canonical metre scale in an authoring wrapper",
+        "Straighten the supplied tail chain for neutral swimming; preserve skin weights",
+        "Resize albedo to 512px WebP and remove high-frequency surface maps"
+      ]
+    },
+    {
+      "id": "humpback",
+      "file": "humpback.glb",
+      "path": "/wildlife/humpback.glb",
+      "source": "Assets/Characters/Wildlife/Whale.glb",
+      "sourceSha256": "8c9102199cd06815539030228944513ebf7b6a176850ec4eb964061ab3655e4c",
+      "sha256": "ee3219c9699c045c120a26712752f9b9a8264c5a37fa1abfba8d0aec29c2973f",
+      "sourceBytes": 16477736,
+      "bytes": 159552,
+      "triangles": 2994,
+      "scaleReference": {
+        "kind": "body-length",
+        "metres": 14,
+        "sourceDimension": 3.848400576718233,
+        "scale": 3.6378749355501494
+      },
+      "bounds": {
+        "min": [
+          -4.223018364815614,
+          -2.3135657664796123,
+          -7.001717320895374
+        ],
+        "max": [
+          4.223018136671177,
+          2.3140003745387405,
+          7.0000000148489505
+        ]
+      },
+      "joints": 27,
+      "clips": [],
+      "operations": [
+        "Preserve supplied geometry, UVs, rig and source clip rotations",
+        "Normalize once to canonical metre scale in an authoring wrapper",
+        "Straighten the supplied tail chain for neutral swimming; preserve skin weights",
+        "Resize albedo to 512px WebP and remove high-frequency surface maps"
+      ]
     }
   ]
 }

@@ -1,6 +1,7 @@
 import { WildlifePopulation } from '../wildlife/WildlifePopulation';
 import { captureWildlife, restoreWildlife, type WildlifeMotion } from '../wildlife/WildlifeSnapshot';
 import { wildlifeSpecies } from '../wildlife/WildlifeSpecies';
+import { marineDuration, marineStage, wildlifeObservable } from '../wildlife/MarineEncounters';
 import type { WildlifeActor } from '../wildlife/WildlifePopulation';
 import type { HabitatTag } from '../wildlife/WildlifeSpecies';
 import type { Point2, WorldBlueprint } from '../world-generation/WorldBlueprint';
@@ -21,7 +22,7 @@ interface Contact {
     recordedAt: number;
 }
 export interface WildlifeState {
-    version: 1;
+    version: 1 | 2;
     worldId: string;
     startedAt: number;
     advancedAt: number;
@@ -85,7 +86,7 @@ export function initializeWildlifeSightings(input: SimulationState, world: World
     // A cached engine may have advanced another replay branch. Generate the seeded opening once anew.
     const population = new WildlifePopulation(world);
     engines.set(world, population);
-    state.wildlife = { version: 1, worldId, startedAt: now(state), advancedAt: now(state),
+    state.wildlife = { version: 2, worldId, startedAt: now(state), advancedAt: now(state),
         actors: captureWildlife(population), nextEncounter: 1, contacts: [], firstDiscoveries: {} };
     return state;
 }
@@ -96,15 +97,29 @@ export function assertWildlifeWorld(state: SimulationState, context?: PhysicalEx
     if (state.wildlife.actors.some(actor => actor.position.x < bounds.minX || actor.position.x > bounds.maxX ||
         actor.position.z < bounds.minZ || actor.position.z > bounds.maxZ || Math.abs(actor.position.y) > 1000))
         throw new Error('Saved wildlife lies outside its physical island.');
+    if (state.wildlife.version === 1) {
+        const residents = population.actors.filter(actor => !actor.marine);
+        if (residents.length !== state.wildlife.actors.length ||
+            residents.some((actor, i) => actor.id !== state.wildlife!.actors[i]?.id))
+            throw new Error('Saved wildlife does not belong to this island population.');
+        // Explicit world-bound upgrade: preserve every old actor and event, start future visits now.
+        const opening = new WildlifePopulation(world);
+        state.wildlife.actors.push(...captureWildlife(opening).filter(actor => actor.marine));
+        state.wildlife.version = 2;
+    }
     if (population.actors.length !== state.wildlife.actors.length ||
         population.actors.some((actor, i) => actor.id !== state.wildlife!.actors[i]?.id))
         throw new Error('Saved wildlife does not belong to this island population.');
+    for (const actor of state.wildlife.actors) {
+        if (actor.marine && actor.marine.routeIndex >= (population.marineRoutes.get(actor.id)?.length ?? 0))
+            throw new Error('Saved wildlife has no matching sea corridor.');
+    }
 }
 
 /** Physical eligibility is independent of camera visibility and model load completion. */
 export function canSightWildlife(world: WorldBlueprint, view: DiscoveryView, observer: Point2,
-    animal: { x: number; y: number; z: number }, eyeHeight: number) {
-    if (Math.hypot(observer.x - animal.x, observer.z - animal.z) > wildlifeSightingPolicy.radius ||
+    animal: { x: number; y: number; z: number }, eyeHeight: number, radius: number = wildlifeSightingPolicy.radius) {
+    if (Math.hypot(observer.x - animal.x, observer.z - animal.z) > radius ||
         discoveryAt(view, animal.x, animal.z) === 'unknown') return false;
     const surface = createBlueprintSurface(world);
     return traceTerrainSightline(world,
@@ -138,9 +153,10 @@ export function stepWildlifeSightings(state: SimulationState, context?: Physical
     const activeGroups = new Set(groups.filter(group => group.witnesses.length).map(group => group.mission.groupId));
     saved.contacts = saved.contacts.filter(contact => activeGroups.has(contact.groupId));
     if (!observers.length) return stats;
-    const radius = wildlifeSightingPolicy.radius, buckets = new Map<string, WildlifeActor[]>();
+    const radius = 64, buckets = new Map<string, WildlifeActor[]>();
     const bucket = (x: number, z: number) => Math.floor(x / radius) + ':' + Math.floor(z / radius);
     for (const actor of population.actors) {
+        if (!wildlifeObservable(actor)) continue;
         if (actor.variant.movement !== 'air' && !population.habitats.valid(actor.position, actor.variant)) continue;
         const key = bucket(actor.position.x, actor.position.z), entries = buckets.get(key) ?? [];
         entries.push(actor); buckets.set(key, entries); stats.animalsIndexed++;
@@ -153,10 +169,12 @@ export function stepWildlifeSightings(state: SimulationState, context?: Physical
             for (const actor of buckets.get((bx + dx) + ':' + (bz + dz)) ?? []) {
                 stats.candidateChecks++;
                 const key = observer.group.mission.groupId + ':' + actor.species;
-                if (matches.has(key) || Math.hypot(x - actor.position.x, z - actor.position.z) > radius ||
+                const sightingRadius = actor.marine ? radius : wildlifeSightingPolicy.radius;
+                if (matches.has(key) || Math.hypot(x - actor.position.x, z - actor.position.z) > sightingRadius ||
                     discoveryAt(view, actor.position.x, actor.position.z) === 'unknown') continue;
                 stats.sightlines++;
-                if (!canSightWildlife(world, view, observer.position, actor.position, state.discovery!.policy.eyeHeight)) continue;
+                const sightPoint = actor.marine ? { ...actor.position, y: world.waterLevel + .4 } : actor.position;
+                if (!canSightWildlife(world, view, observer.position, sightPoint, state.discovery!.policy.eyeHeight, sightingRadius)) continue;
                 matches.set(key, { group: observer.group, actor });
             }
         }
@@ -212,10 +230,11 @@ export function validateWildlife(state: SimulationState) {
     const saved = state.wildlife;
     if (!saved) return;
     const fail = () => { throw new Error('Invalid saved wildlife state.'); };
-    if (saved.version !== 1 || !state.discovery || saved.worldId !== state.discovery.worldId ||
+    if (![1, 2].includes(saved.version) || !state.discovery || saved.worldId !== state.discovery.worldId ||
         !Number.isSafeInteger(saved.startedAt) || saved.startedAt < 800000 || saved.startedAt > now(state) ||
         saved.advancedAt !== now(state) || !Number.isSafeInteger(saved.nextEncounter) || saved.nextEncounter < 1 ||
-        !Array.isArray(saved.actors) || saved.actors.length > 128 || !Array.isArray(saved.contacts) || saved.contacts.length > 176 ||
+        !Array.isArray(saved.actors) || saved.actors.length > 128 || !Array.isArray(saved.contacts) ||
+        saved.contacts.length > wildlifeSpecies.length * 16 ||
         !saved.firstDiscoveries || typeof saved.firstDiscoveries !== 'object') return fail();
     const possibleIds = new Set(wildlifeSpecies.flatMap(species => species.variants.flatMap(variant =>
         Array.from({ length: variant.count }, (_, index) => species.id + ':' + variant.id + ':' + index))));
@@ -223,9 +242,26 @@ export function validateWildlife(state: SimulationState) {
     for (const actor of saved.actors) {
         if (!possibleIds.has(actor.id) || !finitePoint(actor.position) || !Number.isFinite(actor.position.y) ||
             actor.target !== null && !finitePoint(actor.target) || !Number.isSafeInteger(actor.decisions) || actor.decisions < 0 ||
-            !['idle', 'roam', 'glide', 'swim', 'rest', 'flee', 'alert'].includes(actor.state) ||
+            !['idle', 'roam', 'glide', 'swim', 'rest', 'flee', 'alert', 'back_float',
+                'absent', 'approach', 'surface', 'dive', 'submerged', 'exit'].includes(actor.state) ||
             !['heading', 'bank', 'wait', 'fleeUntil', 'escapeWait', 'climbRate', 'flapEffort'].every(key =>
                 Number.isFinite((actor as unknown as Record<string, number>)[key]))) fail();
+        const variant = wildlifeSpecies.flatMap(species => species.variants.map(variant => ({ species, variant })))
+            .find(item => actor.id.startsWith(item.species.id + ':' + item.variant.id + ':'))!.variant;
+        if (variant.encounter) {
+            const motion = actor.marine;
+            if (saved.version !== 2 || !motion || !Number.isFinite(motion.elapsed) || motion.elapsed < 0 ||
+                motion.elapsed >= marineDuration(variant) || !Number.isFinite(motion.cooldown) || motion.cooldown < 0 ||
+                motion.cooldown > variant.encounter.cooldown[1] || !Number.isSafeInteger(motion.cycle) || motion.cycle < 0 ||
+                !Number.isInteger(motion.routeIndex) || motion.routeIndex < 0 || motion.routeIndex >= 6 ||
+                typeof motion.special !== 'boolean' ||
+                !['absent', 'approach', 'surface', 'dive', 'submerged', 'exit'].includes(actor.state)) fail();
+            else if (actor.state === 'absent' ? motion.elapsed !== 0
+                : motion.cooldown !== 0 || actor.state !== marineStage(variant, motion.elapsed).state) fail();
+        } else if (actor.marine || ['absent', 'approach', 'surface', 'dive', 'submerged', 'exit'].includes(actor.state)) fail();
+        if (actor.floatUntil !== undefined && (!Number.isFinite(actor.floatUntil) || actor.floatUntil < 0 ||
+            variant.behavior !== 'otter_shore_water')) fail();
+        if (actor.state === 'back_float' && (variant.behavior !== 'otter_shore_water' || actor.floatUntil === undefined)) fail();
         const hop = actor.hop;
         if (hop && (!finitePoint(hop.from) || !finitePoint(hop.to) || typeof hop.active !== 'boolean' ||
             ![hop.phase, hop.duration, hop.amplitude, hop.lift, hop.startHeading].every(Number.isFinite) ||

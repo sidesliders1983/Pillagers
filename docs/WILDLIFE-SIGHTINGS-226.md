@@ -48,13 +48,16 @@ Missing participant identity is omitted. Later roster changes never rewrite even
 ## Eligibility and encounter policy
 
 - Sample every 5 canonical ticks, after expedition movement and discovery updates.
-- Index existing animals in 32 m spatial buckets; query only nearby candidates
+- Index existing animals in 64 m spatial buckets; query only nearby candidates
   from confirmed living expedition member poses. Never scan a cross product on
   render frames. Coalesce all member/instance matches into one group/species match.
-- Require actual proximity within 32 m, mapped or currently visible terrain, and
+- Require actual proximity within 32 m (64 m for surfaced humpbacks and orcas), mapped or currently visible terrain, and
   the existing terrain sightline from expedition eye height to the real animal.
   Trees/buildings are not newly claimed as opaque: LOS has the same terrain-only
   limitation as current exploration. Prepared and returned groups do not observe.
+  Marine encounter slots are indexed only when their surface pose is observable;
+  absence and fully submerged travel produce no sightings. See [#243](WILDLIFE-MARINE-243.md)
+  for encounter timing, deep-water routes and version-1 save adoption.
 - Keep group/species contact across destination redirects. Continuous proximity
   produces one encounter. Re-entry requires at least 50 ticks out of contact and
   250 ticks since the previous sighting. A persisted monotonic encounter sequence
