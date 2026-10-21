@@ -20,7 +20,7 @@ import {meshyHumanAssetIdentity} from './MeshyHumanAssetIdentity';
 import {humanExtraAnimations} from './HumanExtraAnimations';
 import {applyMeshyProportions,meshyBoneProportion} from './MeshyHumanDynamics';
 import {HumanProfile, childGrowthWeight, universalHumanProfile} from './UniversalHumanProfile';
-import { facialAxes, parseFacialIdentity, type FacialIdentityV1 } from './FacialIdentity';
+import { facialAxes, parseFacialShape, type FacialShapeV1 } from './FacialIdentity';
 import { nativeFacialSource, type FacialPresentation } from './NativeFacialGeometry';
 // One current exact snapshot per live binding, shared weakly across residents.
 // Comparing complete JSON detects in-place edits without retaining its large cages in every human key.
@@ -153,10 +153,10 @@ export class MeshyHumanFactory {
  }
  async create(input: CharacterDNA, lod = 0, profile?: HumanProfile,
   presentation: unknown = {hair: 'none', beard: 'none', outfit: 'none', equipment: 'none'},
-  face?: FacialIdentityV1) {
+  face?: FacialShapeV1) {
   if (![0, 1, 2].includes(lod)) throw new Error('Invalid Meshy human LOD');
   const dna = parseCharacterDNA(input);
-  const selectedFace = face ? parseFacialIdentity(face) : undefined;
+  const selectedFace = face ? parseFacialShape(face) : undefined;
   const identity = this.bodyIdentity(lod);
   const selected = resolveCharacterPresentation(dna, presentation, identity);
   await this.verifyBodyProvenance();
@@ -222,7 +222,7 @@ export class MeshyHumanFactory {
   model.setNativeModules(sources, selected.presentation, selected.profile.appearance);
  }
 
- async createWorld(dna: CharacterDNA, profile?: HumanProfile, face?: FacialIdentityV1) {
+ async createWorld(dna: CharacterDNA, profile?: HumanProfile, face?: FacialShapeV1) {
   if (this.bodySource) throw new Error('A review-only body cannot create a world resident');
   return this.create(dna, worldResidentDetail.lod, profile, undefined, face);
  }
@@ -349,7 +349,7 @@ export class MeshyHuman {
  private nativeNeutral = false;
  private animationRotations = new Map<Bone, Quaternion>();
  private action:AnimationAction|null=null;private materials:Material[]=[];private baseHeight:number;private disposed=false;
- constructor(source:GLTF,dna:CharacterDNA,readonly lod:number,profile?:HumanProfile,identity?:NativeBodyIdentity,face?:FacialIdentityV1){
+ constructor(source:GLTF,dna:CharacterDNA,readonly lod:number,profile?:HumanProfile,identity?:NativeBodyIdentity,face?:FacialShapeV1){
   this.body=clone(source.scene);this.root.add(this.body);this.clips=source.animations;
   this.body.updateMatrixWorld(true);
   const bounds=new Box3().setFromObject(this.body),centre=bounds.getCenter(new Vector3());
@@ -403,7 +403,7 @@ export class MeshyHuman {
   this.root.userData.bodySource={...this.fit.body,source:'meshy'};
   this.root.userData.capabilities={morphology:true,appearance:true,fitSizes:false,garmentSockets:true};
   if (face) {
-   const selectedFace = parseFacialIdentity(face);
+   const selectedFace = parseFacialShape(face);
    skin.updateMorphTargets();
    facialAxes.forEach((axis, index) => skin!.morphTargetInfluences![index] = selectedFace.axes[axis]);
    this.fit.facialIdentity = selectedFace;
@@ -412,9 +412,9 @@ export class MeshyHuman {
   this.applyDNA(dna,profile);this.setAnimation('Idle');
  }
  /** forceRefit retains the complete original fitting path for verification and fallback. */
- applyDNA(input:CharacterDNA,override?:HumanProfile,options:{forceRefit?:boolean;face?:FacialIdentityV1}={}){
+ applyDNA(input:CharacterDNA,override?:HumanProfile,options:{forceRefit?:boolean;face?:FacialShapeV1}={}){
   if (options.face) {
-   const face = parseFacialIdentity(options.face);
+   const face = parseFacialShape(options.face);
    if (!this.fit.mesh.geometry.morphAttributes.position?.length)
     throw new Error('Facial identity requires a native facial body.');
    facialAxes.forEach((axis, index) => this.fit.mesh.morphTargetInfluences![index] = face.axes[axis]);

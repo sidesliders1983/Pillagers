@@ -4,7 +4,7 @@ import {BodyFitAdapter, BodySurface, bodyFitVersion, SurfaceAnchor, NativeBodyId
 import {meshyHumanAssetIdentity} from './MeshyHumanAssetIdentity';
 import {meshyNativeRig,meshyRigSignature} from './MeshyNativeRig';
 import type {FitDebugOptions} from './CharacterFitSystem';
-import type { FacialIdentityV1 } from './FacialIdentity';
+import type { FacialShapeV1 } from './FacialIdentity';
 import type { FacialPresentation } from './NativeFacialGeometry';
 const parents:Record<SocketName,string>={socket_head_top:'Head',socket_face:'Head',socket_jaw:'Head',socket_neck:'Neck',socket_back_head:'Head',socket_chest:'Spine2',socket_back:'Spine2',socket_shoulder_L:'LeftShoulder',socket_shoulder_R:'RightShoulder',socket_waist:'Hips',socket_hip_L:'Hips',socket_hip_R:'Hips',socket_hand_L:'LeftHand',socket_hand_R:'RightHand',socket_forearm_L:'LeftForeArm',socket_forearm_R:'RightForeArm'};
 /** A topology fingerprint supplements the exact GLB identity, including split render corners. */
@@ -57,7 +57,7 @@ export function anchorPoint(surface:BodySurface,anchor:SurfaceAnchor){
 }
 /** Native Meshy surfaces are captured before DNA/animation; masking never edits them. */
 export class MeshyBodyFitAdapter implements BodyFitAdapter {
- facialIdentity?: FacialIdentityV1;
+ facialIdentity?: FacialShapeV1;
  facialPresentation?: FacialPresentation;
  readonly version=bodyFitVersion;readonly body:NativeBodyIdentity;readonly nativeSkeleton;readonly sockets=new Map<SocketName,Group>();readonly debug=new Group();
  readonly modules=new Map<string,Group>();revision=0;readonly sourceGeometry:BufferGeometry;readonly source:BodySurface;readonly encoding:Matrix4;

@@ -1,7 +1,7 @@
 import { BufferGeometry, Float32BufferAttribute, Matrix3, SkinnedMesh, Vector3 } from 'three';
 import { clone } from 'three/addons/utils/SkeletonUtils.js';
 import type { GLTF } from 'three/addons/loaders/GLTFLoader.js';
-import { facialAxes, type FacialAxis, type FacialIdentityV1 } from './FacialIdentity';
+import { facialAxes, type FacialAxis, type FacialShapeV1 } from './FacialIdentity';
 import type { MeshyBodyFitAdapter } from './MeshyBodyFitAdapter';
 
 export const facialPresentationAxes = ['feminine', 'juvenile'] as const;
@@ -141,7 +141,7 @@ export function nativeFacialSource(source: GLTF): GLTF {
 
 /** Existing module fitting owns these buffers. Apply the same bind-space field
  * once per real refit; source assets, native joints and per-frame animation stay intact. */
-export function fitNativeFacialModule(mesh: SkinnedMesh, fit: MeshyBodyFitAdapter, face: FacialIdentityV1) {
+export function fitNativeFacialModule(mesh: SkinnedMesh, fit: MeshyBodyFitAdapter, face: FacialShapeV1) {
     const positions = mesh.geometry.getAttribute('position');
     const inverse = fit.encoding.clone().invert();
     const point = new Vector3(), delta = new Vector3(), offset = new Vector3();

@@ -7,9 +7,12 @@ export const facialAxes = [
     'noseWidth', 'noseProjection', 'eyeSpacing',
 ] as const;
 export type FacialAxis = typeof facialAxes[number];
-export interface FacialIdentityV1 {
+/** Observable geometry, safe to render without revealing family records. */
+export interface FacialShapeV1 {
     version: typeof facialIdentityVersion;
     axes: Record<FacialAxis, number>;
+}
+export interface FacialIdentityV1 extends FacialShapeV1 {
     derivation: 'founder' | 'one-parent' | 'two-parents';
     parentIds: string[];
 }
@@ -66,17 +69,22 @@ export function projectFacialIdentity(family: Family, personaId: string): Facial
     return derive(personaId);
 }
 
-export function parseFacialIdentity(value: FacialIdentityV1): FacialIdentityV1 {
+export function parseFacialShape(value: FacialShapeV1): FacialShapeV1 {
     if (!value || value.version !== facialIdentityVersion || !value.axes ||
         Object.keys(value.axes).length !== facialAxes.length ||
-        facialAxes.some(axis => !Number.isFinite(value.axes[axis]) || Math.abs(value.axes[axis]) > 1) ||
-        !['founder', 'one-parent', 'two-parents'].includes(value.derivation) ||
+        facialAxes.some(axis => !Number.isFinite(value.axes[axis]) || Math.abs(value.axes[axis]) > 1))
+        throw new Error('Unsupported or invalid facial identity profile.');
+    return { version: facialIdentityVersion, axes: { ...value.axes } };
+}
+
+export function parseFacialIdentity(value: FacialIdentityV1): FacialIdentityV1 {
+    const shape = parseFacialShape(value);
+    if (!['founder', 'one-parent', 'two-parents'].includes(value.derivation) ||
         !Array.isArray(value.parentIds) || value.parentIds.length > 2 ||
         value.parentIds.some(id => typeof id !== 'string' || !id))
         throw new Error('Unsupported or invalid facial identity profile.');
     return {
-        version: facialIdentityVersion,
-        axes: { ...value.axes },
+        ...shape,
         derivation: value.derivation,
         parentIds: [...value.parentIds],
     };

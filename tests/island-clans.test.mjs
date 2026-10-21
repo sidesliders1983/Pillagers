@@ -113,12 +113,18 @@ test('the player sees no hidden rival information and only currently observed an
     assert.equal(observed.known, true);
     assert.equal(observed.currentlyObserved, true);
     assert.ok(observed.entities.some(entity => entity.kind === 'persona'));
+    const { projectFacialIdentity } = loadTypeScript(new URL('../src/characters/FacialIdentity.ts', import.meta.url));
+    const target = state.world.targetClans['island-rival'];
     for (const entity of observed.entities.filter(entity => entity.kind === 'persona')) {
         assert.deepEqual(entity.dna.traits, { physicality: .5, agility: .5, intelligence: .5, cunning: .5, temperament: .5 },
             'Render DNA is a neutral presentation surrogate, never live enemy gameplay traits');
         assert.ok(entity.visualProfile, 'The actual visible body/motion profile is retained separately');
+        assert.deepEqual(Object.keys(entity.facialIdentity).sort(), ['axes', 'version'],
+            'Visible face shape carries no family identity or ancestry metadata');
+        assert.deepEqual(entity.facialIdentity.axes, projectFacialIdentity(target, entity.id).axes,
+            'Filtering family metadata preserves the actual observed face');
     }
-    const text = JSON.stringify(observed), target = state.world.targetClans['island-rival'];
+    const text = JSON.stringify(observed);
     assert.equal(text.includes(target.clan.name), false);
     for (const person of Object.values(target.personas)) assert.equal(text.includes(person.name), false);
     for (const field of ['stocks', 'households', 'families', 'events', 'parentIds', 'workProgress'])

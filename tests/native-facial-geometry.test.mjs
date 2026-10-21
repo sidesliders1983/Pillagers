@@ -22,13 +22,15 @@ test('world residents retain their inherited face at the existing world LOD and 
     const family = createSettlement(1983);
     const dna = { ...generateCharacterDNA(1983), age: 32 };
     const face = projectFacialIdentity(family, 'einar');
-    const human = await factory.createWorld(dna, undefined, face);
+    const visibleShape = { version: face.version, axes: face.axes };
+    const human = await factory.createWorld(dna, undefined, visibleShape);
     try {
         assert.equal(human.lod, 2);
-        assert.deepEqual(human.root.userData.facialIdentity, face);
+        assert.deepEqual(human.root.userData.facialIdentity, visibleShape);
         const corrected = projectFacialIdentity(family, 'liv');
         human.applyDNA(dna, undefined, { face: corrected });
-        assert.deepEqual(human.root.userData.facialIdentity, corrected);
+        assert.deepEqual(human.root.userData.facialIdentity,
+            { version: corrected.version, axes: corrected.axes });
         assert.deepEqual(human.fit.mesh.morphTargetInfluences.slice(0, 7), Object.values(corrected.axes));
     } finally { human.dispose(); }
 });
@@ -41,7 +43,8 @@ test('native neutral remains the unshaped source reference and playback restores
         const inherited = [...human.fit.mesh.morphTargetInfluences];
         human.sampleNativeNeutral();
         assert.ok(human.fit.mesh.morphTargetInfluences.every(weight => weight === 0));
-        assert.deepEqual(human.root.userData.facialIdentity, face);
+        assert.deepEqual(human.root.userData.facialIdentity,
+            { version: face.version, axes: face.axes });
         human.setAnimation('Walk');
         assert.deepEqual(human.fit.mesh.morphTargetInfluences, inherited);
     } finally { human.dispose(); }

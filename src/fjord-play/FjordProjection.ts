@@ -1,5 +1,5 @@
 import type { HumanProfile } from '../characters/UniversalHumanProfile';
-import type { FacialIdentityV1 } from '../characters/FacialIdentity';
+import { parseFacialShape, type FacialShapeV1 } from '../characters/FacialIdentity';
 import { projectResidentAppearance } from '../characters/ResidentAppearance';
 import { spatialMemberPosition } from '../simulation/SpatialExpeditions';
 import { campaignIslandPlan } from './CampaignIsland';
@@ -56,7 +56,7 @@ export interface FjordEntity {
     terrainAsset?: string;
     dna?: CharacterDNA;
     visualProfile?: HumanProfile;
-    facialIdentity?: FacialIdentityV1;
+    facialIdentity?: FacialShapeV1;
     transform: FjordTransform | null;
     plot?: FjordPlot;
     status: {
@@ -334,7 +334,7 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
                     workHomeId: residence?.buildingId ?? undefined });
             const appearance = projectResidentAppearance(state, id)!;
             entities[entities.length - 1].dna = appearance.dna;
-            entities[entities.length - 1].facialIdentity = appearance.face;
+            entities[entities.length - 1].facialIdentity = parseFacialShape(appearance.face);
         }
     }
     const livingCattle = Object.values(state.landing?.cattle ?? {})
