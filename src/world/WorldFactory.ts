@@ -131,10 +131,10 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
                 catch (error) { if (!canonical) throw error;
                     assets.diagnostics.push('EZ-Tree unavailable; existing KayKit conifer fallback.'); }
             }
-            resolveNature = island?.recipe.version === 'island-pool-v2'
+            resolveNature = island && island.recipe.version !== 'island-pool-v1'
                 ? createVillageNatureResolver(assets, pines?.resolve) : pines?.resolve;
             nature = await prepare('nature-instance-assembly', () => createNatureFromPlan(assets,knownPlan(),
-                blueprint.config.seed,resolveNature, island?.recipe.version === 'island-pool-v2'));
+                blueprint.config.seed,resolveNature, !!island && island.recipe.version !== 'island-pool-v1'));
             root.add(nature); // Own instance buffers even if a required plot cannot be placed.
             try { attachments.push(...(island ? planCampaignDock(assets, blueprint) :
                 planWorldAttachments(assets,blueprint,includeTent))); }
@@ -229,7 +229,8 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
                     throw new Error('Scenery discovery belongs to a different world.');
                 if (view.explored === discovery.explored) { discovery = view; return false; }
                 discovery = view;
-                const next = createNatureFromPlan(assets, knownPlan(), blueprint.config.seed, resolveNature, island?.recipe.version === 'island-pool-v2');
+                const next = createNatureFromPlan(assets, knownPlan(), blueprint.config.seed, resolveNature,
+                    !!island && island.recipe.version !== 'island-pool-v1');
                 for (const plot of clearedPlots.values()) clearBuildingPlotNature(next, plot);
                 wind?.dispose();
                 nature.traverse(node => { if (node instanceof InstancedMesh) node.dispose(); });

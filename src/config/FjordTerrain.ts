@@ -5,11 +5,13 @@ export const fjordTerrain = {
     style: 'iceland-v1' as const,
     periodMeters: 24,
     permanentHeightFraction: .90,
+    permanentLoweringMeters: 5,
     permanentMinimumUp: .97,
     permanentColor: '#dfedf4',
     rockSnowRetention: [.72, .96] as const,
 };
 export function fjordSnowLine(world: WorldBlueprint): number {
     const peak = world.terrain.heights.reduce((highest, height) => Math.max(highest, height), -Infinity);
-    return world.waterLevel + (peak - world.waterLevel) * fjordTerrain.permanentHeightFraction;
+    return world.waterLevel + (peak - world.waterLevel) * fjordTerrain.permanentHeightFraction -
+        fjordTerrain.permanentLoweringMeters;
 }

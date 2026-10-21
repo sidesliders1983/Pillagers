@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FjordSide · Island snow review</title>
+<style>
+body { margin: 0; background: #10262d; color: #f0eee0; font: 16px system-ui; }
+main { max-width: 1350px; margin: auto; padding: 20px; }
+h1 { font: 30px Georgia; margin: 8px 0; }
+a { color: #dfc780; } button, select { padding: 12px; background: #25434a; color: inherit; border: 1px solid #aab68c; border-radius: 5px; cursor: pointer; }
+nav { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 15px 0; }
+canvas { display: block; width: 100%; height: min(63vh, 650px); }
+.labels { display: grid; grid-template-columns: 1fr 1fr; text-align: center; padding: 10px; }
+#status { min-height: 3em; } #islands { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 18px; }
+article { background: #19363c; padding: 12px; border: 1px solid #6e886c; }
+article .maps { display: grid; grid-template-columns: 1fr 1fr; } img { width: 100%; }
+small { display: block; margin: 8px 0; }
+</style>
+<main>
+<h1>FjordSide · Permanent highland snow</h1>
+<p>Eight approved new islands and both existing islands. The permanent snowline is five metres lower. Terrain, zoning, foundation limits and seasonal snow remain unchanged.</p>
+<nav><label>Island <select id="seed"></select></label><button id="inspect">Inspect island</button><button data-view="top">Top-down</button><button data-view="oblique">Oblique</button><label>Quality <select id="quality"><option value="standard">Standard</option><option value="low">Low</option></select></label><a href="/fjord-play">Open new campaign</a></nav>
+<div class="labels"><strong>Previous snowline</strong><strong>Five metres lower</strong></div>
+<canvas id="viewer" aria-label="Side-by-side terrain snow comparison"></canvas>
+<p id="status">Choose an island to inspect.</p>
+<p>White map areas are snow-capable gentle highlands. Green/grey remains exposed terrain; steep slopes stay exposed even above the snowline. These are game-scale visual caps, not a physical climate model. Full renders use the production terrain, native materials and seasonal shader, with summer light and no discovery fog or vegetation.</p>
+<section id="islands"></section>
+</main>
+<script type="module" src="./review.js"></script>
+</html>

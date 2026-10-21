@@ -2,16 +2,17 @@
 
 ## Default and identity
 
-The [#240 geography survey](qa/island-seed-expansion/report.md) is an offline content-validation phase.
-Its explicit geography candidates reuse the production preparation function without entering the approved recipe pool
-or production cache. They are not new gameplay defaults. Owner selection, remaining integration checks and a new
-recipe/pool version are required before new campaigns can use them; the v1/v2 mapping below stays unchanged.
+The [#240 geography survey](qa/island-seed-expansion/report.md) preserves the original offline measurements.
+The owner approved all eight shortlisted additions. The separate
+[promotion and permanent-snow review](qa/island-snow-promotion/report.md) records their integration checks.
 
-New campaigns created in `/fjord-play` use `island-pool-v2`. The campaign seed deterministically selects geography seed **18 or 7** through a pinned integer hash. The Simulation Core keeps its original seed, founders, rules, RNG, events and resources. The geography seed is displayed separately under **Menu → Campaign**.
+New campaigns created in `/fjord-play` use `island-pool-v3`. The ordered pool is **18, 7, 15, 79, 88, 101, 112, 168, 195, 227**. A pinned integer hash selects one geography from the campaign seed; v3 adds a final xor-shift before the modulo-ten selection. Fresh random campaign seeds can select any of the ten islands, including repeating a previous island. This is not a no-repeat shuffle. The Simulation Core keeps its original seed, founders, rules, RNG, events and resources. The geography seed is displayed separately under **Menu → Campaign**.
 
-Both entries use the existing `fjordside-island-v0.3e-r3` generator, the canonical 800 × 800 m heightfield, its geological compartments and the existing environment-zoning function. There is no random retry or silent seed substitution inside the generator. Changing this pool, selection mapping or preparation algorithm after release requires a new recipe version.
+All ten entries use the existing `fjordside-island-v0.3e-r3` generator, the canonical 800 × 800 m heightfield, its geological compartments and the existing environment-zoning function. There is no random retry or silent seed substitution inside the generator. Changing this pool, selection mapping or preparation algorithm after release requires a new recipe version. Only the requested world is generated; the shared world cache retains at most two recently used versions/geographies.
 
 The v2 recipe keeps the same terrain, foundations, berth, asset families and tree quotas, and composes a bounded share of trees into mixed-size village-edge groups. It reserves every future household plot and carves navigation from the actual new placements. Existing `island-pool-v1` saves reconstruct their original trees and navigation byte for byte; the two versions have separate worker/cache identities. See [village nature composition](VILLAGE-NATURE-203.md).
+
+V3 reuses that same preparation and village-nature treatment. V1 and v2 retain their original ordered **18, 7** pools and hash mapping. An existing save or same-founders restart never upgrades its recipe implicitly; only an explicitly new campaign uses v3.
 
 Existing campaign saves retain their original geography. A same-founders restart also retains that geography. **New campaign from seed** in the Fjord menu explicitly creates an island campaign. A transferred 2D campaign preserves whichever geography it already owns; a fresh standalone 2D campaign retains its existing behavior.
 
@@ -37,6 +38,8 @@ The adapter also checks the original 160 m center separation, 40 m construction 
 ## Presentation
 
 Island campaigns use the approved zoned native materials, source atlases and cool-grey rock treatment from #137. The existing zoning fields remain the only classifier; fields are recomputed with that same function after local grading. No second stored set of derived terrain values is added.
+
+Permanent summit snow is a presentation cap on gentle upper terrain: `waterLevel + 0.90 × (peakHeight − waterLevel) − 5 metres`, with the existing minimum upward normal of **0.97**. This lowers the previous cap by exactly five metres on all ten islands, including existing v1/v2 campaigns, without changing their saved terrain, climate zoning or seasonal transitions. Steep rock faces retain their exposed material. This game-scale visual treatment is separate from the climate-dependent `snowRetentionPotential` field; no additional biome classifier or snow array is saved.
 
 The existing ReferenceWater, EZ-Tree/KayKit assets, seasonal tints, character shaping, selection and Living World Controller remain in use. The ship uses the validated full-size berth; the actual source pier sits parallel beside it with a supported shore end. The camera follows actual terrain height, frames the inhabited area and supports the island extent. Atmospheric fog distance compensates for the higher overview camera; seasonal and annual weather treatment remains active. This atmospheric effect is not exploration concealment.
 

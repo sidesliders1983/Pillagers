@@ -12,8 +12,8 @@ import { planVillageNature } from './VillageNature';
 import { freezeBlueprint, type Bounds2, type Point2, type WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { discoverySettlementGeneratorVersion } from '../world-generation/SettlementSites';
 
-export const currentIslandVersion = 'island-pool-v2' as const;
-export type IslandRecipeVersion = 'island-pool-v1' | typeof currentIslandVersion;
+export const currentIslandVersion = 'island-pool-v3' as const;
+export type IslandRecipeVersion = 'island-pool-v1' | 'island-pool-v2' | typeof currentIslandVersion;
 export type CampaignGeography = 'legacy' | IslandRecipeVersion;
 export interface IslandRecipe {
     version: IslandRecipeVersion;
@@ -35,18 +35,32 @@ export interface CampaignIslandPlan {
     access: { centerDistance: number; reserveGap: number; campRoute: number; rivalRoute: number; minimumDepth: number };
     berth: NonNullable<WorldBlueprint['siteSelection']>['harborBerth'];
 }
-const pool = [18, 7] as const;
+// Each ordered pool is immutable: changing its length remaps the campaign seed.
+const pools = {
+    'island-pool-v1': [18, 7],
+    'island-pool-v2': [18, 7],
+    'island-pool-v3': [18, 7, 15, 79, 88, 101, 112, 168, 195, 227],
+} as const;
 const plans = new WeakMap<WorldBlueprint, CampaignIslandPlan>();
 // Bounded cache: world geometry is shared, while every campaign owns its layout and Core.
 const worlds = new Map<string, WorldBlueprint>();
+const maximumCachedWorlds = 2;
+function cacheWorld(key: string, world: WorldBlueprint) {
+    worlds.delete(key);
+    worlds.set(key, world);
+    while (worlds.size > maximumCachedWorlds) worlds.delete(worlds.keys().next().value!);
+}
 export const campaignIslandPlan = (world: WorldBlueprint) => plans.get(world);
 
 export function islandRecipe(campaignSeed: number, version: IslandRecipeVersion = currentIslandVersion): IslandRecipe {
-    if (version !== 'island-pool-v1' && version !== currentIslandVersion)
+    if (!Object.hasOwn(pools, version))
         throw new Error('Unsupported campaign island recipe version.');
     if (!Number.isInteger(campaignSeed) || campaignSeed < 0 || campaignSeed > 0xffffffff)
         throw new RangeError('Seed must be an integer from 0 to 4294967295.');
-    const hash = Math.imul(campaignSeed ^ (campaignSeed >>> 16), 0x45d9f3b) >>> 0;
+    const mixed = Math.imul(campaignSeed ^ (campaignSeed >>> 16), 0x45d9f3b) >>> 0;
+    // Finalize only the new recipe; the historical modulo-two mapping stays exact.
+    const hash = version === 'island-pool-v3' ? (mixed ^ (mixed >>> 16)) >>> 0 : mixed;
+    const pool = pools[version];
     return { version, generatorVersion: discoverySettlementGeneratorVersion,
         seed: pool[hash % pool.length] };
 }
@@ -60,11 +74,14 @@ export function createCampaignIsland(campaignSeed: number, saved?: IslandRecipe,
         throw new Error('Campaign island recipe does not match its seed or supported version.');
     const cacheKey = recipe.version + ':' + recipe.seed;
     const cached = worlds.get(cacheKey);
-    if (cached) return cached;
+    if (cached) {
+        cacheWorld(cacheKey, cached);
+        return cached;
+    }
     const source = generateWorld({ seed: recipe.seed, preset: 'island',
         generatorVersion: recipe.generatorVersion, conifers: 'ez-tree', environment: { version: 1 } }, observe);
     const world = prepareCampaignIsland(source, recipe.version, observe);
-    worlds.set(cacheKey, world);
+    cacheWorld(cacheKey, world);
     return world;
 }
 
@@ -73,7 +90,7 @@ export function createCampaignIsland(campaignSeed: number, saved?: IslandRecipe,
  * Normal creation, import and worker adoption still require the approved pool mapping. */
 export function prepareCampaignIsland(source: WorldBlueprint, version: IslandRecipeVersion,
     observe?: GenerationObserver): WorldBlueprint {
-    if (version !== 'island-pool-v1' && version !== currentIslandVersion)
+    if (!Object.hasOwn(pools, version))
         throw new Error('Unsupported campaign island recipe version.');
     if (source.config.preset !== 'island' ||
         source.config.generatorVersion !== discoverySettlementGeneratorVersion ||
@@ -153,7 +170,7 @@ export function adoptCampaignIsland(seed: number, world: WorldBlueprint, plan: C
         throw new Error('Worker campaign island recipe or validation does not match the request.');
     freezeBlueprint(world);
     plans.set(world, freezeBlueprint(plan));
-    worlds.set(expected.version + ':' + expected.seed, world);
+    cacheWorld(expected.version + ':' + expected.seed, world);
 }
 
 interface Foundation extends Point2 {
