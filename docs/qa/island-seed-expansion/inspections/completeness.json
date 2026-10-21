@@ -1,0 +1,250 @@
+{
+  "runnerSha256": "468061460523e501a1f777162342e6b5096af5bb469d23a5b4efac9f5954c728",
+  "sweepProtocolSha256": "ad008a173d4c78555668995e006192294ec9eb1b1edd65cc9d8abfcdeafe4077",
+  "seeds": [
+    15,
+    25,
+    38,
+    43,
+    55,
+    79,
+    88,
+    95,
+    101,
+    102,
+    112,
+    126,
+    129,
+    144,
+    157,
+    165,
+    168,
+    171,
+    186,
+    195,
+    210,
+    223,
+    227
+  ],
+  "concurrency": 2,
+  "timeoutMs": 180000,
+  "heapMB": 1024,
+  "fixture": "Ten independent homes: 10000 Materials, all founders assigned woodworker then founder-1 farmer. Separate travel: unchanged current newFjordScenario, one member, eight Food, no test override.",
+  "limits": "Direct QA reachability probe knows the target as an observer. It is not an information-limited player exploration strategy. No compact unapproved recipe is forged or admitted to the game.",
+  "outcomes": [
+    {
+      "seed": 15,
+      "technicalStatus": "complete",
+      "repeat": true,
+      "pier": true,
+      "returned": true,
+      "findings": []
+    },
+    {
+      "seed": 25,
+      "technicalStatus": "complete",
+      "repeat": true,
+      "pier": true,
+      "returned": false,
+      "findings": [
+        "Physical reachability probe: No safe route found within the exploration search limit. Choose a nearer destination."
+      ]
+    },
+    {
+      "seed": 38,
+      "technicalStatus": "complete",
+      "repeat": true,
+      "pier": true,
+      "returned": false,
+      "findings": [
+        "Physical reachability probe: No safe route found within the exploration search limit. Choose a nearer destination."
+      ]
+    },
+    {
+      "seed": 43,
+      "technicalStatus": "complete",
+      "repeat": true,
+      "pier": true,
+      "returned": false,
+      "findings": [
+        "Physical reachability probe: No safe route found within the exploration search limit. Choose a nearer destination."
+      ]
+    },
+    {
+      "seed": 55,
+      "technicalStatus": "complete",
+      "repeat": true,
+      "pier": false,
+      "returned": true,
+      "findings": [
+        "Authored pier: The curated island has no supported parallel pier landing."
+      ]
+    },
+    {
+      "seed": 79,
+      "technicalStatus": "complete",
+      "repeat": true,
+      "pier": true,
+      "returned": true,
+      "findings": []
+    },
+    {
+      "seed": 88,
+      "technicalStatus": "complete",
+      "repeat": true,
+      "pier": true,
+      "returned": true,
+      "findings": []
+    },
+    {
+      "seed": 95,
+      "technicalStatus": "complete",
+      "repeat": true,
+      "pier": true,
+      "returned": false,
+      "findings": [
+        "Physical reachability probe: No safe route found within the exploration search limit. Choose a nearer destination."
+      ]
+    },
+    {
+      "seed": 101,
+      "technicalStatus": "complete",
+      "repeat": true,
+      "pier": true,
+      "returned": true,
+      "findings": []
+    },
+    {
+      "seed": 102,
+      "technicalStatus": "complete",
+      "repeat": true,
+      "pier": true,
+      "returned": false,
+      "findings": [
+        "Physical reachability probe: No safe route found within the exploration search limit. Choose a nearer destination."
+      ]
+    },
+    {
+      "seed": 112,
+      "technicalStatus": "complete",
+      "repeat": true,
+      "pier": true,
+      "returned": true,
+      "findings": []
+    },
+    {
+      "seed": 126,
+      "technicalStatus": "complete",
+      "repeat": true,
+      "pier": true,
+      "returned": false,
+      "findings": [
+        "Physical reachability probe: No safe route found within the exploration search limit. Choose a nearer destination."
+      ]
+    },
+    {
+      "seed": 129,
+      "technicalStatus": "complete",
+      "repeat": true,
+      "pier": true,
+      "returned": false,
+      "findings": [
+        "Physical reachability probe: No safe route found within the exploration search limit. Choose a nearer destination."
+      ]
+    },
+    {
+      "seed": 144,
+      "technicalStatus": "complete",
+      "repeat": true,
+      "pier": true,
+      "returned": false,
+      "findings": [
+        "Physical reachability probe: No safe route found within the exploration search limit. Choose a nearer destination."
+      ]
+    },
+    {
+      "seed": 157,
+      "technicalStatus": "complete",
+      "repeat": true,
+      "pier": true,
+      "returned": false,
+      "findings": [
+        "Physical reachability probe: No safe route found within the exploration search limit. Choose a nearer destination."
+      ]
+    },
+    {
+      "seed": 165,
+      "technicalStatus": "complete",
+      "repeat": true,
+      "pier": true,
+      "returned": false,
+      "findings": [
+        "Physical reachability probe: No safe route found within the exploration search limit. Choose a nearer destination."
+      ]
+    },
+    {
+      "seed": 168,
+      "technicalStatus": "complete",
+      "repeat": true,
+      "pier": true,
+      "returned": true,
+      "findings": []
+    },
+    {
+      "seed": 171,
+      "technicalStatus": "complete",
+      "repeat": true,
+      "pier": true,
+      "returned": false,
+      "findings": [
+        "Physical reachability probe: No safe route found within the exploration search limit. Choose a nearer destination."
+      ]
+    },
+    {
+      "seed": 186,
+      "technicalStatus": "complete",
+      "repeat": true,
+      "pier": true,
+      "returned": false,
+      "findings": [
+        "Physical reachability probe: No safe route found within the exploration search limit. Choose a nearer destination."
+      ]
+    },
+    {
+      "seed": 195,
+      "technicalStatus": "complete",
+      "repeat": true,
+      "pier": true,
+      "returned": true,
+      "findings": []
+    },
+    {
+      "seed": 210,
+      "technicalStatus": "complete",
+      "repeat": true,
+      "pier": true,
+      "returned": false,
+      "findings": [
+        "Physical reachability probe: No safe route found within the exploration search limit. Choose a nearer destination."
+      ]
+    },
+    {
+      "seed": 223,
+      "technicalStatus": "complete",
+      "repeat": true,
+      "pier": true,
+      "returned": false,
+      "findings": [
+        "Physical reachability probe: No safe route found within the exploration search limit. Choose a nearer destination."
+      ]
+    },
+    {
+      "seed": 227,
+      "technicalStatus": "complete",
+      "repeat": true,
+      "pier": true,
+      "returned": true,
+      "findings": []
+    }
+  ]
+}

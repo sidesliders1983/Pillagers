@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FjordSide · New island survey</title>
+<style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #11272d; color: #ece8db; font: 16px/1.5 system-ui; }
+    main { max-width: 1400px; margin: auto; padding: 24px; }
+    h1, h2 { font-family: Georgia, serif; }
+    a { color: #edcc80; }
+    .note { padding: 16px; background: #293d40; border-left: 3px solid #e1c47c; }
+    #candidates, #alternates, #controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; }
+    article { border: 1px solid #778873; border-radius: 8px; overflow: hidden; background: #1b343a; }
+    article img { display: block; width: 100%; aspect-ratio: 1; }
+    article div { padding: 12px; }
+    button, select { padding: 10px 14px; font: inherit; color: inherit; background: #334b4b; border: 1px solid #929c7c; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #48625d; }
+    #viewer { width: 100%; height: min(70vh, 800px); display: block; background: #23444e; }
+    nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+    #status { min-height: 3em; }
+    small { display: block; color: #c9d4ce; }
+    .selected { border: 2px solid #eac46e; }
+</style>
+<main>
+    <h1>New island survey · #240</h1>
+    <p class="note">QA developer review only. These are explicit geography seeds, not campaign seeds.
+        Private player/rival locations are shown here for validation. No candidates have been added to the game pool.</p>
+    <p id="summary">Loading completed measurements…</p>
+    <h2>New shortlist · owner review pending</h2>
+    <p>These seeds passed shared preparation, ten-house construction, authored pier support,
+        representative CPU layouts and a direct eight-Food out-and-back probe.
+        Expanded recipe/worker/save integration and physical-device acceptance remain separate gates.</p>
+    <section id="candidates"></section>
+    <details><summary>Other prepared landscapes · recorded limitations</summary>
+        <p>These are new geographical candidates too, but do not yet pass every additional gate.
+            A route-search limit is not proof that no route exists through intermediate waypoints.</p>
+        <section id="alternates"></section>
+    </details>
+    <h2 id="viewer-title">Terrain inspection</h2>
+    <p>Full canonical heightfield through the existing terrain mesh builder. Untextured, fixed lighting,
+        no seasonal effects or fog. Region views use authored dwellings where inspection data is ready.</p>
+    <nav aria-label="Developer camera">
+        <button data-view="top">Top-down</button><button data-view="oblique">Oblique</button>
+        <button data-view="player">Player settlement</button><button data-view="shore">Shore / berth</button>
+        <button data-view="rival">Rival region · QA only</button>
+    </nav>
+    <p id="status" role="status">Choose a candidate to inspect.</p>
+    <canvas id="viewer" aria-label="Developer terrain inspection"></canvas>
+    <h2>Historical controls · not new candidates</h2>
+    <section id="controls"></section>
+    <p><a href="results.json">Raw completed measurements</a> · <a href="manifest.json">Frozen survey manifest</a></p>
+</main>
+<script type="module" src="./review.js"></script>
+</html>

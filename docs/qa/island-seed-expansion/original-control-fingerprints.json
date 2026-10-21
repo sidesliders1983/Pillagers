@@ -1,0 +1,608 @@
+[
+  {
+    "version": "island-pool-v1",
+    "campaignSeed": 32,
+    "geographySeed": 18,
+    "blueprintSha256": "60a7d74db1afcadeadb7a76385d8872b622cae57044f3f4c9b577fd27645cef6",
+    "planSha256": "5b404497754a0f0bb25ac966ed74d77e113847f1ddf07e2253e21ec5d861b1b1",
+    "plan": {
+      "recipe": {
+        "version": "island-pool-v1",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 18
+      },
+      "center": {
+        "x": 70,
+        "z": 146
+      },
+      "plots": [
+        {
+          "x": 87,
+          "z": 152,
+          "y": 3.0442216396331787,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 59,
+          "z": 130,
+          "y": 4.2312211990356445,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 81,
+          "z": 130,
+          "y": 4.097989082336426,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 37,
+          "z": 130,
+          "y": 4.748311519622803,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 103,
+          "z": 130,
+          "y": 4.180811405181885,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 61,
+          "z": 108,
+          "y": 4.731237411499023,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 83,
+          "z": 108,
+          "y": 4.683923721313477,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 39,
+          "z": 108,
+          "y": 5.154472351074219,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 105,
+          "z": 108,
+          "y": 4.759361267089844,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 67,
+          "z": 86,
+          "y": 5.09357213973999,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 89,
+          "z": 86,
+          "y": 4.99346923828125,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 45,
+          "z": 86,
+          "y": 5.413539409637451,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        }
+      ],
+      "maximumAdjustment": 0.58333420753479,
+      "access": {
+        "centerDistance": 328.5665838152139,
+        "reserveGap": 180.2,
+        "campRoute": 78,
+        "rivalRoute": 776,
+        "minimumDepth": 0.9383558082580566
+      },
+      "berth": {
+        "center": {
+          "x": 105,
+          "z": 206
+        },
+        "rotation": 0,
+        "halfLength": 8.25,
+        "halfBeam": 2.5,
+        "minimumDepth": 0.9383558082580566
+      }
+    },
+    "preparationMs": 11275.3999
+  },
+  {
+    "version": "island-pool-v1",
+    "campaignSeed": 33,
+    "geographySeed": 7,
+    "blueprintSha256": "49403b70494f860507dee3c7d7d2798b38ced1edfb5643393633b2a2f36c6eba",
+    "planSha256": "9a5dc26d358f913ebd1e63a0e160f0617f9b0af5d0f9fa38a7168b5adb0709ad",
+    "plan": {
+      "recipe": {
+        "version": "island-pool-v1",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 7
+      },
+      "center": {
+        "x": 176,
+        "z": -136
+      },
+      "plots": [
+        {
+          "x": 158,
+          "z": -129,
+          "y": 3.3594307899475098,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 186,
+          "z": -153,
+          "y": 4.961004257202148,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 166,
+          "z": -107,
+          "y": 4.265697479248047,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 208,
+          "z": -147,
+          "y": 5.494503021240234,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 182,
+          "z": -175,
+          "y": 4.816851615905762,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 144,
+          "z": -107,
+          "y": 3.9407663345336914,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 162,
+          "z": -85,
+          "y": 4.664275646209717,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 122,
+          "z": -105,
+          "y": 3.9544601440429688,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 140,
+          "z": -83,
+          "y": 4.504824161529541,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 104,
+          "z": -147,
+          "y": 0.9627768993377686,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 118,
+          "z": -83,
+          "y": 4.766498565673828,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 142,
+          "z": -61,
+          "y": 4.887632369995117,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 120,
+          "z": -61,
+          "y": 5.242265224456787,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        }
+      ],
+      "maximumAdjustment": 0.5971007347106934,
+      "access": {
+        "centerDistance": 197.36261044078233,
+        "reserveGap": 42.760752988744116,
+        "campRoute": 84,
+        "rivalRoute": 270,
+        "minimumDepth": 0.6210556077957153
+      },
+      "berth": {
+        "center": {
+          "x": 130.9791847198287,
+          "z": -199.02081528017132
+        },
+        "rotation": 3.926990816987241,
+        "halfLength": 8.25,
+        "halfBeam": 2.5,
+        "minimumDepth": 0.6210556077957153
+      }
+    },
+    "preparationMs": 10642.147799999999
+  },
+  {
+    "version": "island-pool-v2",
+    "campaignSeed": 32,
+    "geographySeed": 18,
+    "blueprintSha256": "564f858cda13aab38ac2d1b779b6a486c7db6a5a75db8f2e333ad6f853bd9451",
+    "planSha256": "c5f20a90d61faa8b5850c7a7c173fa2d0853312105cd6abf0ad88b11bfb9efac",
+    "plan": {
+      "recipe": {
+        "version": "island-pool-v2",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 18
+      },
+      "center": {
+        "x": 70,
+        "z": 146
+      },
+      "plots": [
+        {
+          "x": 87,
+          "z": 152,
+          "y": 3.0442216396331787,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 59,
+          "z": 130,
+          "y": 4.2312211990356445,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 81,
+          "z": 130,
+          "y": 4.097989082336426,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 37,
+          "z": 130,
+          "y": 4.748311519622803,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 103,
+          "z": 130,
+          "y": 4.180811405181885,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 61,
+          "z": 108,
+          "y": 4.731237411499023,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 83,
+          "z": 108,
+          "y": 4.683923721313477,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 39,
+          "z": 108,
+          "y": 5.154472351074219,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 105,
+          "z": 108,
+          "y": 4.759361267089844,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 67,
+          "z": 86,
+          "y": 5.09357213973999,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 89,
+          "z": 86,
+          "y": 4.99346923828125,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 45,
+          "z": 86,
+          "y": 5.413539409637451,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        }
+      ],
+      "maximumAdjustment": 0.58333420753479,
+      "access": {
+        "centerDistance": 328.5665838152139,
+        "reserveGap": 180.2,
+        "campRoute": 78,
+        "rivalRoute": 822,
+        "minimumDepth": 0.9383558082580566
+      },
+      "berth": {
+        "center": {
+          "x": 105,
+          "z": 206
+        },
+        "rotation": 0,
+        "halfLength": 8.25,
+        "halfBeam": 2.5,
+        "minimumDepth": 0.9383558082580566
+      }
+    },
+    "preparationMs": 12157.820500000002
+  },
+  {
+    "version": "island-pool-v2",
+    "campaignSeed": 33,
+    "geographySeed": 7,
+    "blueprintSha256": "2caacc7fd5426867930ca7da4931a69714c6024f045dfd8a7dac5ca27652feaf",
+    "planSha256": "434361e2e16e1148aaf2ffc236b820664cacd1647f23eabe35eb876b6226b2f3",
+    "plan": {
+      "recipe": {
+        "version": "island-pool-v2",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 7
+      },
+      "center": {
+        "x": 176,
+        "z": -136
+      },
+      "plots": [
+        {
+          "x": 158,
+          "z": -129,
+          "y": 3.3594307899475098,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 186,
+          "z": -153,
+          "y": 4.961004257202148,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 166,
+          "z": -107,
+          "y": 4.265697479248047,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 208,
+          "z": -147,
+          "y": 5.494503021240234,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 182,
+          "z": -175,
+          "y": 4.816851615905762,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 144,
+          "z": -107,
+          "y": 3.9407663345336914,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 162,
+          "z": -85,
+          "y": 4.664275646209717,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 122,
+          "z": -105,
+          "y": 3.9544601440429688,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 140,
+          "z": -83,
+          "y": 4.504824161529541,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 104,
+          "z": -147,
+          "y": 0.9627768993377686,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 118,
+          "z": -83,
+          "y": 4.766498565673828,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 142,
+          "z": -61,
+          "y": 4.887632369995117,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        },
+        {
+          "x": 120,
+          "z": -61,
+          "y": 5.242265224456787,
+          "halfWidth": 7.5,
+          "halfDepth": 7.5,
+          "rotation": 3.141592653589793,
+          "scale": 1
+        }
+      ],
+      "maximumAdjustment": 0.5971007347106934,
+      "access": {
+        "centerDistance": 197.36261044078233,
+        "reserveGap": 42.760752988744116,
+        "campRoute": 84,
+        "rivalRoute": 270,
+        "minimumDepth": 0.6210556077957153
+      },
+      "berth": {
+        "center": {
+          "x": 130.9791847198287,
+          "z": -199.02081528017132
+        },
+        "rotation": 3.926990816987241,
+        "halfLength": 8.25,
+        "halfBeam": 2.5,
+        "minimumDepth": 0.6210556077957153
+      }
+    },
+    "preparationMs": 10995.550800000005
+  }
+]

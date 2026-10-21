@@ -173,6 +173,8 @@ node scripts/qa/campaign-start-server.mjs
 Open /docs/qa/island-seed-expansion/review.html on port 5196. A fresh checkout reproduces ignored render data with the commands above.
 The committed elevation maps and archived captures remain available without those derived files.
 The coordinator preserves cases on resume and refuses changed source/protocol hashes in an existing sweep directory.
+Source hashes describe the actual measured workspace bytes. A checkout that converts CRLF/LF must use a fresh output
+directory and record its own source/protocol hashes; it must not relabel or resume cases from different byte hashes.
 
 Local validation: 16 existing island/village-nature/async-generation tests passed; TypeScript --noEmit passed;
 Vite production build passed with the existing chunk-size warning; 496 public assets and 47 decoded Terrain models validated.

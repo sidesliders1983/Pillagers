@@ -1,0 +1,130 @@
+{
+  "seed": 95,
+  "sweepProtocolSha256": "ad008a173d4c78555668995e006192294ec9eb1b1edd65cc9d8abfcdeafe4077",
+  "inspectionRunnerSha256": "468061460523e501a1f777162342e6b5096af5bb469d23a5b4efac9f5954c728",
+  "repeatedBlueprintIdentical": true,
+  "repeatedPlanIdentical": true,
+  "checks": {
+    "jettySourceSha256": "3f80cd720c6f61dc2a840c1feb8b02dcd39db3d6981093696f98f269f9142ef3",
+    "authoredPier": {
+      "supported": true,
+      "attachments": [
+        {
+          "id": "boat",
+          "key": "boat",
+          "x": 153.5,
+          "z": 169.5,
+          "y": 0.03,
+          "rotation": 0,
+          "scale": 1,
+          "halfWidth": 0.75,
+          "halfDepth": 2,
+          "support": "marine"
+        },
+        {
+          "id": "jetty",
+          "key": "jetty",
+          "x": 163.5,
+          "z": 158,
+          "y": -0.37,
+          "rotation": 0,
+          "scale": 1,
+          "halfWidth": 2,
+          "halfDepth": 2,
+          "support": "coast"
+        }
+      ]
+    },
+    "independentFoundingHouseholds": 10,
+    "convertedHouses": 10,
+    "groundPaths": 10,
+    "farmyard": true,
+    "longhouse": true,
+    "allEntitiesPlaced": true,
+    "diagnostics": [],
+    "authoredFootprints": [
+      {
+        "id": "house-1",
+        "asset": "farmHut",
+        "fits": true
+      },
+      {
+        "id": "house-10",
+        "asset": "hut",
+        "fits": true
+      },
+      {
+        "id": "house-2",
+        "asset": "longhouse",
+        "fits": true
+      },
+      {
+        "id": "house-3",
+        "asset": "hut",
+        "fits": true
+      },
+      {
+        "id": "house-4",
+        "asset": "hut",
+        "fits": true
+      },
+      {
+        "id": "house-5",
+        "asset": "hut",
+        "fits": true
+      },
+      {
+        "id": "house-6",
+        "asset": "hut",
+        "fits": true
+      },
+      {
+        "id": "house-7",
+        "asset": "hut",
+        "fits": true
+      },
+      {
+        "id": "house-8",
+        "asset": "hut",
+        "fits": true
+      },
+      {
+        "id": "house-9",
+        "asset": "hut",
+        "fits": true
+      }
+    ]
+  },
+  "findings": [
+    "Physical reachability probe: No safe route found within the exploration search limit. Choose a nearer destination."
+  ],
+  "cohorts": [
+    {
+      "campaignSeed": 95,
+      "playerSpecies": "sheep",
+      "rivalSpecies": "pig",
+      "rivalHouseholds": 8,
+      "allRivalEntitiesPlaced": true,
+      "rivalInitiallyHidden": true,
+      "originalHumanFoundersUnchanged": true
+    },
+    {
+      "campaignSeed": 10095,
+      "playerSpecies": "cattle",
+      "rivalSpecies": "pig",
+      "rivalHouseholds": 7,
+      "allRivalEntitiesPlaced": true,
+      "rivalInitiallyHidden": true,
+      "originalHumanFoundersUnchanged": true
+    },
+    {
+      "campaignSeed": 20095,
+      "playerSpecies": "cattle",
+      "rivalSpecies": "sheep",
+      "rivalHouseholds": 9,
+      "allRivalEntitiesPlaced": true,
+      "rivalInitiallyHidden": true,
+      "originalHumanFoundersUnchanged": true
+    }
+  ]
+}
