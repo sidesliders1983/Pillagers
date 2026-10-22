@@ -561,7 +561,7 @@ export function createFjordScene(options: {
                 await yieldForInput();
             }
         });
-        await loading.measure('shader-compilation', () => renderer.compileAsync(scene, camera));
+        await loading.measure('shader-compilation', () => renderer.compileAsync(scene, camera), { timeoutMs: 120_000 });
         await loading.measure('initial-gpu-upload-and-draws', async () => {
             const meshes: Mesh[] = [];
             scene.traverseVisible(node => { if (node instanceof Mesh) meshes.push(node); });
