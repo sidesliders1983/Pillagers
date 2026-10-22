@@ -1,4 +1,5 @@
 import { WildlifeLayer } from '../wildlife/WildlifeLayer';
+import { ConstructionGpuPreparation } from '../construction/ConstructionGpuPreparation';
 import { RivalScene } from './RivalScene';
 import { IslandMap } from './IslandMap';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
@@ -91,6 +92,7 @@ export function createFjordScene(options: {
     scene.add(targetMarker);
 
     const renderer = createRenderer(canvas);
+    const constructionGpu = new ConstructionGpuPreparation();
     renderer.localClippingEnabled = true;
     renderer.setPixelRatio(resolvePresentationQuality(
         document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as PresentationQuality,
@@ -552,6 +554,10 @@ export function createFjordScene(options: {
 
     const prepareGpu = async (loading: Pick<IslandLoading, 'stage' | 'measure' | 'check'>) => {
         loading.stage('Preparing FjordSide');
+        await loading.measure('construction-gpu-preparation', () => constructionGpu.prepare({
+            renderer, scene, models: models!, anchor: controller.focus.clone(),
+            check: () => loading.check(), yieldControl: yieldForInput
+        }));
         const textures = new Set<Texture>();
         scene.traverse(node => {
             if (!(node instanceof Mesh)) return;
@@ -609,6 +615,7 @@ export function createFjordScene(options: {
         rivalScene?.dispose();
         dressing?.dispose();
         layer?.dispose();
+        constructionGpu.dispose();
         weatherTint?.dispose();
         campfireEffect?.dispose();
         precipitationEffect?.dispose();

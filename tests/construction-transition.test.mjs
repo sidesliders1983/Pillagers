@@ -5,6 +5,7 @@ import { load } from './load-source.mjs';
 
 const { Box3, BoxGeometry, Group, Matrix4, Mesh, MeshStandardMaterial, Vector3 } =
     createRequire(import.meta.url)('three');
+const { InstancedMesh } = createRequire(import.meta.url)('three');
 const { measureBuildEnvelope, unionBuildEnvelope, housingConstructionProfiles } =
     load('../src/construction/BuildEnvelope.ts');
 const { generateScaffold } = load('../src/construction/ScaffoldGenerator.ts');
@@ -31,6 +32,26 @@ function disposeHouse(root) {
         for (const material of Array.isArray(node.material) ? node.material : [node.material]) material.dispose();
     });
 }
+
+test('a standing scaffold retains instance matrices and uploads again only when dismantling starts', () => {
+    const transitions = new ConstructionTransitions(), target = house('greatHall', 13, 7, 8);
+    transitions.play('site', target); advance(transitions, 1.2);
+    let writes = 0;
+    const original = InstancedMesh.prototype.setMatrixAt;
+    InstancedMesh.prototype.setMatrixAt = function (...args) {
+        if (this.geometry.type !== 'OctahedronGeometry') writes++;
+        return original.apply(this, args);
+    };
+    try {
+        for (let frame = 0; frame < 40; frame++) transitions.update(1 / 60);
+        assert.equal(writes, 0, 'A standing frame is static while the house reveal/fade runs');
+        advance(transitions, .7);
+        assert.ok(writes > 0, 'Dismantling still updates the instance transforms');
+    } finally {
+        InstancedMesh.prototype.setMatrixAt = original;
+        transitions.dispose(); disposeHouse(target);
+    }
+});
 
 test('all house types expose metric envelopes; farm fences and world placement do not inflate them', () => {
     for (const asset of Object.keys(housingConstructionProfiles)) {

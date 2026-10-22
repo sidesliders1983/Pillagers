@@ -82,6 +82,15 @@ share a hexagonal cylinder; planks and lashings use boxes. Active frames update 
 matrices without rebuilding topology. Temporary geometry casts no shadows, has no ray
 hits and is released at completion. An idle system does no procedural frame work.
 
+Standing parts retain their instance matrices; only changing erection/dismantling
+transforms trigger another upload. Dust footprint extents are calculated once per site.
+`ConstructionGpuPreparation` prepares ordinary, fading and clipped seasonal shaders
+under the existing loading cover, yielding between work chunks. It eagerly uploads
+only the two possible first-house forms (Hut and Farm Hut), with later sizes compiling
+shaders without eagerly making all their textures/geometry GPU-resident. Temporary
+material owners remain retained until scene disposal so Three.js keeps those programs
+cached. Preparation content is detached before play and never enters campaign state.
+
 The original house geometry/materials and asset files are not edited. During an upgrade
 both house roots are briefly shown during the crossfade; the old root is released at
 its end. A rapid next upgrade first completes the previous visual

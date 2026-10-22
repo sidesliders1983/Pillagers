@@ -9,6 +9,7 @@ import { FjordEntities } from '../../src/fjord-play/FjordEntities';
 import { createFjordLayout, projectFjordSettlement } from '../../src/fjord-play/FjordProjection';
 import { applyCommand, createCampaign, serializeState } from '../../src/simulation/SimulationCore';
 import { generateWorld } from '../../src/world-generation/GenerateWorld';
+import { ConstructionGpuPreparation } from '../../src/construction/ConstructionGpuPreparation';
 
 const select = document.querySelector<HTMLSelectElement>('#scenario')!;
 const status = document.querySelector<HTMLOutputElement>('#status')!;
@@ -32,6 +33,13 @@ const envelopeHelpers = new Group(); scene.add(envelopeHelpers);
 const assets = new AssetManager();
 await assets.loadForSimulation();
 const models = new FjordModels(assets);
+const constructionGpu = new ConstructionGpuPreparation();
+renderer.domElement.style.visibility = 'hidden';
+status.textContent = 'Preparing construction materials…';
+await constructionGpu.prepare({ renderer, scene, models, anchor: new Vector3(), check() {},
+    yieldControl: () => new Promise(resolve => setTimeout(resolve, 0)) });
+renderer.domElement.style.visibility = 'visible';
+addEventListener('pagehide', () => constructionGpu.dispose(), { once: true });
 const world = generateWorld({ seed: 32 });
 let layer: FjordEntities;
 let playing = false, elapsed = 1.2, busy = false;

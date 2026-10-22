@@ -35,8 +35,9 @@ export class ConstructionTransitions {
     private active = new Map<string, {
         time: number; group: Group; target: Object3D; old?: Object3D;
         envelope: BuildEnvelope; plan: ReturnType<typeof generateScaffold>;
-        batches: { mesh: InstancedMesh; parts: ScaffoldPart[] }[];
-        dust: InstancedMesh; plane: Plane; revealBase: number; revealTop: number;
+        batches: { mesh: InstancedMesh; parts: ScaffoldPart[]; amounts: Float32Array }[];
+        dust: InstancedMesh; dustHalfWidth: number; dustHalfDepth: number;
+        plane: Plane; revealBase: number; revealTop: number;
         reveal: ConstructionMaterials; oldFade?: ConstructionMaterials;
         releaseOld?: () => void; swapped: boolean; fadeProgress: number; revealProgress: number;
     }>();
@@ -70,7 +71,7 @@ export class ConstructionTransitions {
             mesh.receiveShadow = true;
             mesh.raycast = () => {};
             group.add(mesh);
-            batches.push({ mesh, parts });
+            batches.push({ mesh, parts, amounts: new Float32Array(parts.length).fill(NaN) });
         }
         const dust = new InstancedMesh(this.geometry.dust, this.material.dust, 12);
         dust.frustumCulled = false;
@@ -84,7 +85,11 @@ export class ConstructionTransitions {
         const oldFade = old ? new ConstructionMaterials(old, 'fade') : undefined;
         if (old) reveal.setOpacity(0);
         target.visible = !old;
+        const xs = envelope.footprint.map(p => p.x), zs = envelope.footprint.map(p => p.z);
+        const dustHalfWidth = (Math.max(...xs) - Math.min(...xs)) * .5;
+        const dustHalfDepth = (Math.max(...zs) - Math.min(...zs)) * .5;
         this.active.set(key, { time: 0, group, target, old, envelope, plan, batches, dust,
+            dustHalfWidth, dustHalfDepth,
             plane, revealBase, revealTop, reveal, oldFade, releaseOld, swapped: false,
             fadeProgress: 0, revealProgress: 0 });
         this.update(0);
@@ -124,25 +129,28 @@ export class ConstructionTransitions {
             transition.plane.constant = transition.revealBase +
                 (transition.revealTop - transition.revealBase) * transition.revealProgress;
             for (const batch of transition.batches) {
+                let changed = false;
                 batch.parts.forEach((part, index) => {
                     const amount = ease((time - part.erect) / .25) *
                         (1 - ease((time - part.remove) / .25));
+                    if (batch.amounts[index] === amount) return;
+                    batch.amounts[index] = amount;
+                    changed = true;
                     this.position.copy(part.start).addScaledVector(part.direction, part.length * amount / 2);
                     this.scale.set(part.width, part.length * amount, part.depth);
                     this.matrix.compose(this.position, part.rotation, this.scale);
                     batch.mesh.setMatrixAt(index, this.matrix);
                 });
-                batch.mesh.instanceMatrix.needsUpdate = true;
+                if (changed) batch.mesh.instanceMatrix.needsUpdate = true;
             }
             const puff = Math.max(0, Math.min(1, (time - feedbackTime) / .45));
             transition.dust.visible = puff > 0 && puff < 1;
             if (transition.dust.visible) {
-                const xs = envelope.footprint.map(p => p.x), zs = envelope.footprint.map(p => p.z);
                 for (let i = 0; i < 12; i++) {
                     const angle = i * Math.PI / 6;
-                    this.position.set(Math.cos(angle) * (Math.max(...xs) - Math.min(...xs)) * .5,
+                    this.position.set(Math.cos(angle) * transition.dustHalfWidth,
                         envelope.baseHeight + .35 + puff * .7,
-                        Math.sin(angle) * (Math.max(...zs) - Math.min(...zs)) * .5);
+                        Math.sin(angle) * transition.dustHalfDepth);
                     this.scale.setScalar(Math.sin(puff * Math.PI) * (.16 + (i % 3) * .06));
                     this.matrix.compose(this.position, this.identity, this.scale);
                     transition.dust.setMatrixAt(i, this.matrix);

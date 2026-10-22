@@ -92,3 +92,30 @@ follow-up (no connected browsers), so the earlier screenshots above record previ
 revisions rather than visual verification of this reveal update. New visual UAT remains
 available in the interactive review; automated checks verify the actual material plane,
 opacity, restoration and ownership used by the production renderer.
+
+## Follow-up — first construction performance
+
+The original loading pass prepared only currently visible scene meshes, so houses and
+construction material variants still had first-use shader/texture/vertex preparation
+on a build. This is a likely contributor to the reported first-build spike; actual
+browser/GPU profiling was unavailable because no browser is connected.
+
+The loading cover now includes interruptible construction preparation. All six housing
+forms prepare their opaque, fading and clipped seasonal shader variants. Only Hut/Farm
+Hut textures and vertex data upload eagerly, bounding added GPU residency on mobile.
+Scaffold shader/geometry preparation is included. Retained material owners preserve
+the program cache until exit; cancellation/scene disposal releases all warmup owners.
+The standalone construction review uses the same preparation before exposing its canvas.
+
+Unchanged standing scaffold matrices no longer upload each frame. An isolated Node
+benchmark (`scripts/qa/construction-cpu-benchmark.mjs`) compares 40 standing frames on a
+heavy frame, with the same dust motion in both versions. Matrix writes fell from 12,504
+to 264 (the remaining writes are dust), and median measured CPU time fell from 1.14ms
+to 0.52ms for that whole 40-frame sample. These are CPU-only measurements, not browser
+frame times or proof that the complete game spike is eliminated. Raw records are in
+`cpu-before.json` and `cpu-after.json`.
+
+Thirteen construction/preparation tests pass with zero skips/failures, including
+coalesced preparation, bounded uploads, retained program owners, cancellation cleanup,
+static-frame uploads and all previous construction/reveal contracts. Production build
+and strict QA TypeScript pass; formatting reviewed manually and diff whitespace checked.

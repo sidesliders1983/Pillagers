@@ -1,0 +1,13 @@
+{
+  "scope": "Node CPU only, 40 standing-frame updates; no WebGL/GPU timing",
+  "first": {
+    "initializeMs": 5.65440000000001,
+    "holdMs": 2.0854000000000497,
+    "matrixWrites": 12504
+  },
+  "median": {
+    "initializeMs": 0.336400000000026,
+    "holdMs": 1.1405999999999494,
+    "matrixWrites": 12504
+  }
+}
