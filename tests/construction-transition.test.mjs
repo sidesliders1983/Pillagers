@@ -111,7 +111,7 @@ test('new build reveals bottom to top, restores source materials and frees tempo
     transitions.dispose(); disposeHouse(target);
 });
 
-test('upgrade crossfades both models smoothly before releasing the old one and restoring materials', () => {
+test('upgrade builds the target bottom-to-top while fading the old model, then restores both owners', () => {
     const transitions = new ConstructionTransitions(), old = house(), target = house('homestead', 9, 5, 7);
     const oldMesh = old.children[0].children[0], targetMesh = target.children[0].children[0];
     const oldSource = oldMesh.material, targetSource = targetMesh.material;
@@ -130,18 +130,50 @@ test('upgrade crossfades both models smoothly before releasing the old one and r
     assert.equal(old.visible, true); assert.equal(target.visible, true);
     assert.ok(Math.abs(oldMesh.material.opacity - .5) < 1e-8);
     assert.ok(Math.abs(targetMesh.material.opacity - .5) < 1e-8);
+    const plane = targetMesh.material.clippingPlanes[0];
+    assert.ok(plane.distanceToPoint(new Vector3(0, 1, 0)) > 0, 'Target foundation is already revealed');
+    assert.ok(plane.distanceToPoint(new Vector3(0, 4.8, 0)) < 0, 'Target roof is still being built');
     assert.ok(oldMesh.material.transparent && targetMesh.material.transparent);
     assert.equal(oldMesh.material.depthWrite, false);
     assert.equal(oldSource.opacity, 1); assert.equal(targetSource.opacity, 1);
     assert.ok(Math.abs(transitions.inspect()[0].fadeProgress - .5) < 1e-8);
     advance(transitions, .5);
     assert.equal(releases, 1); assert.equal(old.visible, false); assert.equal(target.visible, true);
-    assert.equal(oldMesh.material, oldSource); assert.equal(targetMesh.material, targetSource);
+    assert.equal(oldMesh.material, oldSource);
+    assert.notEqual(targetMesh.material, targetSource, 'Roof reveal outlives the old model fade');
+    assert.equal(targetMesh.material.transparent, targetSource.transparent);
+    assert.equal(targetMesh.material.opacity, targetSource.opacity);
+    assert.ok(plane.distanceToPoint(new Vector3(0, 5, 0)) < 0);
+    advance(transitions, .1);
+    assert.ok(plane.distanceToPoint(new Vector3(0, 5, 0)) > 0, 'Roof is complete before scaffold dismantling');
     assert.ok(transitions.inspect()[0].drawCalls <= 5);
     advance(transitions, constructionDuration);
     transitions.finish('home'); transitions.dispose();
+    assert.equal(targetMesh.material, targetSource);
     assert.equal(releases, 1);
     disposeHouse(old); disposeHouse(target);
+});
+
+test('a bespoke occupational building uses its metadata and target height independently of an older larger envelope', () => {
+    const transitions = new ConstructionTransitions();
+    const old = house('greatHall', 12, 9, 8), target = house('blacksmith-workshop', 7, 5, 6);
+    target.position.y = 12; target.scale.setScalar(1.5);
+    const metadata = target.userData.buildEnvelope;
+    metadata.scaffoldPreset = 'heavy'; metadata.materialProfile = 'timber';
+    const before = structuredClone(metadata);
+    const mesh = target.children[0].children[0], source = mesh.material;
+    transitions.play('smith', target, old);
+    advance(transitions, 1.525);
+    const plane = mesh.material.clippingPlanes[0];
+    // Half of the fitted target (12m foundation, 19.5m ridge), rather than the old/new union.
+    assert.ok(Math.abs(plane.constant - 15.75) < .04);
+    assert.ok(plane.distanceToPoint(new Vector3(0, 13, 0)) > 0);
+    assert.ok(plane.distanceToPoint(new Vector3(0, 19, 0)) < 0);
+    assert.equal(transitions.inspect()[0].preset, 'heavy');
+    assert.deepEqual(metadata, before, 'The shared animation cannot change occupational building metadata');
+    transitions.finish('smith');
+    assert.equal(mesh.material, source);
+    transitions.dispose(); disposeHouse(old); disposeHouse(target);
 });
 
 test('interrupted fades restore material arrays, authored opacity and seasonal hooks without shared mutation', () => {

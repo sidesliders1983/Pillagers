@@ -71,3 +71,24 @@ The midpoint review used eight total scene draws, including both overlapping hou
 models. See `crossfade-browser.json` for the captured phase and canonical-state proof.
 
 ![Upgrade crossfade midpoint](crossfade-midpoint.png)
+
+## Follow-up — foundation-to-roof reveal for every target
+
+All target buildings now use the same bottom-to-top reveal, including each housing
+upgrade. The old model still fades out over 0.8 seconds; the target's clipping plane
+remains active until its roof is complete at 2.05 seconds. Reveal height comes from the
+fitted target alone, including its scale and world foundation, while the scaffold
+continues to contain the union of old and target bounds.
+
+Twenty-three construction, season and housing tests passed with zero failures/skips.
+New checks verify foundation visibility and roof clipping during an upgrade, continued
+roof clipping after the old fade finishes, and a synthetic occupational workshop with
+explicit construction metadata, non-unit scale and a different foundation. No Blacksmith
+asset is introduced. The production build passed; formatting was reviewed manually and
+`git diff --check` passed. The QA entry was also checked with strict TypeScript.
+
+The LAN preview is available on port 5225. Browser automation was unavailable for this
+follow-up (no connected browsers), so the earlier screenshots above record previous
+revisions rather than visual verification of this reveal update. New visual UAT remains
+available in the interactive review; automated checks verify the actual material plane,
+opacity, restoration and ownership used by the production renderer.

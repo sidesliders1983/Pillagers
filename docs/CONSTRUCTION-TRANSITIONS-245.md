@@ -35,7 +35,7 @@ The 3.2-second sequence is:
 |---|---|
 | 0–0.6 s | Staggered posts and small material stack |
 | 0.45–1.1 s | Ledgers, braces, platforms and ladder |
-| 1–2.05 s | New house revealed bottom-to-top using a local clipping plane |
+| 1–2.05 s | Every target, including upgrades, revealed bottom-to-top using a local clipping plane |
 | 1.1–1.9 s | Upgrade crossfades old → target with smooth complementary opacities |
 | 1.5 s | Brief low-poly dust puff during the crossfade |
 | 2.08–3.2 s | Upper platforms, braces/ledgers, posts, ladder and props removed |
@@ -45,12 +45,25 @@ finishes. Both upgrade models use temporary material copies with complementary e
 opacities, transparency and depth writes disabled for the overlap. Authored material
 opacity is multiplied rather than replaced; a translucent yard retains its original
 appearance. `ConstructionMaterials` shares copies within each model and preserves
-seasonal shader hooks. New builds use temporary copies only for clipping. Completing
-or cancelling the effect restores exact original bindings before releasing an owner.
+seasonal shader hooks. Every target uses the same foundation-to-roof reveal, including
+upgrades. Its clipping plane follows the fitted target's own world height range,
+including source scale and placement, independently of the larger old/new scaffold
+envelope. Full opacity at 1.9 seconds does not remove clipping early: the roof finishes
+at 2.05 seconds. New builds use temporary copies only for clipping. Completing or
+cancelling the effect restores exact original bindings before releasing an owner.
 The animation is wall-clock feedback,
 so an accepted build remains readable when the simulation is paused. Hidden documents
 do not advance it. Duration/timing constants and the two presets are centralized in
 the construction modules. No audio dependency is introduced.
+
+Future occupational building models can use this same transition without authored
+per-building animation. Register their source geometry and construction metadata:
+footprint, base/eave/ridge heights, material profile and light/heavy preset. A workshop
+with a chimney, for example, needs its chimney included in the measured ridge bounds.
+The current house profiles remain in `housingConstructionProfiles`; a model may instead
+provide explicit `userData.buildEnvelope` metadata. This does not add a Blacksmith model
+or turn a resident occupation change into a construction command. A synthetic workshop
+contract test verifies independent source scale, foundation height and scaffold preset.
 
 ## Integration and ownership
 

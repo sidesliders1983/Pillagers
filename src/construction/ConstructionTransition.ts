@@ -9,6 +9,8 @@ import { ConstructionMaterials } from './ConstructionMaterials';
 export const constructionDuration = 3.2;
 export const constructionFadeStart = 1.1;
 export const constructionFadeDuration = .8;
+export const constructionRevealStart = 1;
+export const constructionRevealDuration = 1.05;
 const feedbackTime = constructionFadeStart + constructionFadeDuration / 2;
 const ease = (value: number) => {
     const t = Math.max(0, Math.min(1, value));
@@ -34,16 +36,17 @@ export class ConstructionTransitions {
         time: number; group: Group; target: Object3D; old?: Object3D;
         envelope: BuildEnvelope; plan: ReturnType<typeof generateScaffold>;
         batches: { mesh: InstancedMesh; parts: ScaffoldPart[] }[];
-        dust: InstancedMesh; plane: Plane;
-        reveal?: ConstructionMaterials; oldFade?: ConstructionMaterials; targetFade?: ConstructionMaterials;
-        releaseOld?: () => void; swapped: boolean; fadeProgress: number;
+        dust: InstancedMesh; plane: Plane; revealBase: number; revealTop: number;
+        reveal: ConstructionMaterials; oldFade?: ConstructionMaterials;
+        releaseOld?: () => void; swapped: boolean; fadeProgress: number; revealProgress: number;
     }>();
 
     play(key: string, target: Object3D, old?: Object3D, releaseOld?: () => void) {
         this.finish(key);
         target.updateWorldMatrix(true, true);
-        let envelope: BuildEnvelope = target.userData.buildEnvelope ??
+        const targetEnvelope: BuildEnvelope = target.userData.buildEnvelope ??
             measureBuildEnvelope(target, target.userData.asset);
+        let envelope = targetEnvelope;
         if (old) {
             old.updateWorldMatrix(true, true);
             envelope = unionBuildEnvelope(envelope, old.userData.buildEnvelope ??
@@ -73,14 +76,17 @@ export class ConstructionTransitions {
         dust.frustumCulled = false;
         dust.raycast = () => {};
         group.add(dust);
-        const plane = new Plane(new Vector3(0, -1, 0), target.position.y + envelope.baseHeight - .05);
-        const reveal = old ? undefined : new ConstructionMaterials(target, 'reveal', plane);
+        // Scaffolding contains both states; the reveal follows only the fitted target's height.
+        const revealBase = target.localToWorld(new Vector3(0, targetEnvelope.baseHeight, 0)).y - .05;
+        const revealTop = target.localToWorld(new Vector3(0, targetEnvelope.ridgeHeight, 0)).y + .05;
+        const plane = new Plane(new Vector3(0, -1, 0), revealBase);
+        const reveal = new ConstructionMaterials(target, 'reveal', plane);
         const oldFade = old ? new ConstructionMaterials(old, 'fade') : undefined;
-        const targetFade = old ? new ConstructionMaterials(target, 'fade') : undefined;
-        targetFade?.setOpacity(0);
+        if (old) reveal.setOpacity(0);
         target.visible = !old;
         this.active.set(key, { time: 0, group, target, old, envelope, plan, batches, dust,
-            plane, reveal, oldFade, targetFade, releaseOld, swapped: false, fadeProgress: 0 });
+            plane, revealBase, revealTop, reveal, oldFade, releaseOld, swapped: false,
+            fadeProgress: 0, revealProgress: 0 });
         this.update(0);
     }
 
@@ -100,23 +106,23 @@ export class ConstructionTransitions {
                 // Smooth start/end, with complementary opacities throughout the overlap.
                 transition.fadeProgress = progress * progress * (3 - 2 * progress);
                 transition.oldFade!.setOpacity(1 - transition.fadeProgress);
-                transition.targetFade!.setOpacity(transition.fadeProgress);
+                transition.reveal.setOpacity(transition.fadeProgress);
                 transition.target.visible = transition.fadeProgress > 0;
                 if (progress >= 1) {
                     transition.swapped = true;
                     transition.old.visible = false;
                     // Restore before releasing: the seasonal owner must see its original bindings.
                     transition.oldFade!.dispose();
-                    transition.targetFade!.dispose();
-                    transition.oldFade = transition.targetFade = undefined;
+                    transition.oldFade = undefined;
                     transition.releaseOld?.();
                     transition.releaseOld = undefined;
                     transition.old = undefined;
                 }
             }
-            const reveal = Math.max(0, Math.min(1, (time - 1) / 1.05));
-            transition.plane.constant = transition.target.position.y + envelope.baseHeight - .05 +
-                (envelope.ridgeHeight - envelope.baseHeight + .1) * reveal;
+            transition.revealProgress = Math.max(0, Math.min(1,
+                (time - constructionRevealStart) / constructionRevealDuration));
+            transition.plane.constant = transition.revealBase +
+                (transition.revealTop - transition.revealBase) * transition.revealProgress;
             for (const batch of transition.batches) {
                 batch.parts.forEach((part, index) => {
                     const amount = ease((time - part.erect) / .25) *
@@ -150,9 +156,8 @@ export class ConstructionTransitions {
         const transition = this.active.get(key);
         if (!transition) return;
         transition.target.visible = true;
-        transition.reveal?.dispose();
+        transition.reveal.dispose();
         transition.oldFade?.dispose();
-        transition.targetFade?.dispose();
         transition.releaseOld?.();
         for (const batch of transition.batches) batch.mesh.dispose();
         transition.dust.dispose();
@@ -167,7 +172,7 @@ export class ConstructionTransitions {
             preset: value.envelope.scaffoldPreset, envelope: value.envelope,
             postPoints: value.plan.postPoints, pieces: value.plan.parts.length,
             drawCalls: value.batches.length + Number(value.dust.visible), swapped: value.swapped,
-            fadeProgress: value.fadeProgress }));
+            fadeProgress: value.fadeProgress, revealProgress: value.revealProgress }));
     }
 
     dispose() {

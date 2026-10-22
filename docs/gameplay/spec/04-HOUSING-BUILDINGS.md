@@ -63,8 +63,9 @@ construction transition. The housing sequence is Tent → Hut → Homestead → 
 Great Hall. Tents remain emergency shelter and do not receive scaffolding. Farm Hut and
 Farm Homestead use the same transition system at their corresponding house sizes.
 
-Posts rise first, then ledgers, sparse braces, working planks and a ladder. A new house
-appears from its foundation to its roof. An upgrade crossfades its previous model into
+Posts rise first, then ledgers, sparse braces, working planks and a ladder. Every target
+building appears from its foundation to its roof, for both new builds and upgrades.
+An upgrade also crossfades its previous model into
 the target over 0.8 seconds (1.1–1.9 seconds into the transition), behind the standing
 frame and accompanied by a brief dust effect. The frame
 then disappears from its upper platforms down to its posts and ladder.

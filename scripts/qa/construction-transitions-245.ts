@@ -129,6 +129,7 @@ renderer.setAnimationLoop(now => {
     renderer.domElement.dataset.construction = JSON.stringify(construction);
     const descriptions = construction.map(item => [
         item.preset, item.phase,
+        `build ${Math.round(item.revealProgress * 100)}%`,
         ...(item.fadeProgress > 0 ? [`fade ${Math.round(item.fadeProgress * 100)}%`] : []),
         `eave ${item.envelope.eaveHeight.toFixed(1)}m`,
         `ridge ${item.envelope.ridgeHeight.toFixed(1)}m`,
