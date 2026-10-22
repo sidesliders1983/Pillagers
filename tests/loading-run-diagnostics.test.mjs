@@ -27,6 +27,8 @@ test('diagnostic loading records browser resources, model work and nested spans,
         run.attach(status);
         const span = status.begin('initial-settlement-models');
         run.model('persona', 'human', performance.now());
+        run.character({ stage: 'binding-text-parse', resource: '/hair.binding.json?secret=1', subject: 'founder-1',
+            started: performance.now(), durationMs: 2, mode: 'synchronous', outcome: 'complete' });
         status.end(span);
         const resource = { name: 'https://user:secret@local.test/game-assets/body.glb?token=secret',
             entryType: 'resource', startTime: run.started, duration: 80, initiatorType: 'fetch',
@@ -48,12 +50,16 @@ test('diagnostic loading records browser resources, model work and nested spans,
         assert.equal(report.resources[0].path, '/game-assets/body.glb');
         assert.equal(report.resources[0].responseStatus, 200);
         assert.equal(report.settlementModels[0].kind, 'persona');
+        assert.equal(report.characterPreparation[0].resource, '/hair.binding.json');
+        assert.equal(report.characterPreparation[0].mode, 'synchronous');
         assert.equal(report.preparation[0].outcome, 'complete');
         assert.equal(report.preparation[0].attempt, status.attempt);
         assert.equal(report.longTasks[0].durationMs, 60);
         assert.ok(fake.instances.every(observer => observer.disconnected));
         assert.doesNotMatch(JSON.stringify(report), /secret|local\.test|token=/);
         assert.equal(run.finish().elapsedMs, report.elapsedMs, 're-export cannot extend the run');
+        run.character({ stage: 'late-fit', started: performance.now(), durationMs: 1, mode: 'synchronous', outcome: 'complete' });
+        assert.equal(run.finish().characterPreparation.length, 1, 'Disposed runs do not keep collecting model work');
     } finally { fake.restore(); }
 });
 
@@ -68,6 +74,7 @@ test('diagnostic records are bounded and failed preparation never reports a play
             const span = status.begin('model-' + index);
             status.end(span);
             run.model('persona', 'human', performance.now());
+            run.character({ stage: 'body', started: performance.now(), durationMs: 1, mode: 'synchronous', outcome: 'complete' });
         }
         status.end(parent);
         const observer = fake.instances.find(observer => observer.type === 'resource');
@@ -86,7 +93,8 @@ test('diagnostic records are bounded and failed preparation never reports a play
         assert.equal(report.preparation.length, 2048);
         assert.equal(report.preparation[0].outcome, 'complete', 'long parent spans survive UI timeline eviction');
         assert.equal(report.settlementModels.length, 512);
-        assert.deepEqual(report.dropped, { resources: 152, timings: 153, models: 1688, longTasks: 0 });
+        assert.equal(report.characterPreparation.length, 2048);
+        assert.deepEqual(report.dropped, { resources: 152, timings: 153, models: 1688, longTasks: 0, characters: 152 });
         assert.equal(report.loading.playableMs, undefined);
         assert.equal(status.timeline.length, 128, 'ordinary progress retains its small bound');
     } finally { fake.restore(); }

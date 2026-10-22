@@ -64,7 +64,8 @@ export class IslandLoadStatus {
     units?: { completed: number; total: number; kind: string };
     error?: { kind: string; message: string; resource?: string };
     latestResource?: string;
-    resources?: { geometries: number; textures: number; programs: number; calls: number; triangles: number };
+    resources?: { geometries: number; textures: number; programs: number; calls: number; triangles: number;
+        renderPixelRatio?: number; drawingBuffer?: [number, number] };
     firstFrameMs?: number;
     playableMs?: number;
     maxObservationGapMs = 0;

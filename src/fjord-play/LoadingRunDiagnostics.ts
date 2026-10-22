@@ -1,4 +1,5 @@
 import { loadResourceId, type IslandLoadStatus, type LoadTiming } from './IslandLoadStatus';
+import type { CharacterPreparationSample } from '../characters/CharacterPreparation';
 
 type Resource = {
     path: string; initiator: string; startedMs: number; durationMs: number;
@@ -17,9 +18,10 @@ export class LoadingRunDiagnostics {
     private resources: Resource[] = [];
     private resourceKeys = new Set<string>();
     private timings: (LoadTiming & { attempt: string })[] = [];
-    private models: { kind: string; asset: string; startedMs: number; durationMs: number }[] = [];
+    private models: { kind: string; asset: string; subject?: string; startedMs: number; durationMs: number }[] = [];
+    private characters: (Omit<CharacterPreparationSample, 'started'> & { startedMs: number })[] = [];
     private longTasks: { startedMs: number; durationMs: number }[] = [];
-    private dropped = { resources: 0, timings: 0, models: 0, longTasks: 0 };
+    private dropped = { resources: 0, timings: 0, models: 0, longTasks: 0, characters: 0 };
     private support = { resourceObserver: false, longTaskObserver: false };
 
     constructor() {
@@ -44,10 +46,17 @@ export class LoadingRunDiagnostics {
         };
     }
 
-    model(kind: string, asset: string, started: number) {
+    model(kind: string, asset: string, started: number, subject?: string) {
         if (this.models.length < 512) this.models.push({ kind, asset: asset.slice(0, 180),
-            startedMs: started - this.started, durationMs: performance.now() - started });
+            subject: subject?.slice(0, 80), startedMs: started - this.started, durationMs: performance.now() - started });
         else this.dropped.models++;
+    }
+    character(sample: CharacterPreparationSample) {
+        if (this.ended !== undefined) return;
+        if (this.characters.length >= 2048) { this.dropped.characters++; return; }
+        const { started, resource, ...timing } = sample;
+        this.characters.push({ ...timing, startedMs: started - this.started,
+            resource: resource && loadResourceId(resource) });
     }
 
     private collect(entries: PerformanceEntry[]) {
@@ -104,6 +113,7 @@ export class LoadingRunDiagnostics {
                 observedEncodedBodyBytes: resources.reduce((sum, item) => sum + item.encodedBodyBytes, 0),
                 settlementModelCount: this.models.length },
             resources, settlementModels: this.models.map(model => ({ ...model })),
+            characterPreparation: this.characters.map(sample => ({ ...sample })),
             // Nested spans overlap. Their durations must not be summed as total CPU time.
             preparation: this.timings.map(timing => ({ ...timing })),
             longTasks: this.longTasks.map(task => ({ ...task })), support: { ...this.support },

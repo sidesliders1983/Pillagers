@@ -294,7 +294,10 @@ export function createFjordScene(options: {
             assets.dispose();
             return;
         }
-        models = new FjordModels(assets);
+        const preparation = host.loading?.diagnosticRun ?
+            (sample: import('../characters/CharacterPreparation').CharacterPreparationSample) =>
+                host.loading?.diagnosticRun?.character(sample) : undefined;
+        models = new FjordModels(assets, preparation);
         layer = new FjordEntities(models);
         scene.add(layer.root);
 
@@ -417,8 +420,8 @@ export function createFjordScene(options: {
                         view.livestockDeaths, host.loading ? (completed, total, entity, started) => {
                             host.loading?.units('characters', completed, total, 'settlement models');
                             if (entity && started !== undefined)
-                                host.loading?.diagnosticRun?.model(entity.kind, entity.asset, started);
-                        } : undefined);
+                                host.loading?.diagnosticRun?.model(entity.kind, entity.asset, started, entity.id);
+                        } : undefined, preparation);
                     if (host.loading) await host.loading.measure('initial-settlement-models', prepareEntities);
                     else await prepareEntities();
                     if (!current()) return;
@@ -616,7 +619,8 @@ export function createFjordScene(options: {
             loading.diagnostics.firstFrameMs = performance.now() - loading.diagnostics.started;
             loading.diagnostics.metadata.quality = document.querySelector<HTMLSelectElement>('#fjord-quality')!.value;
             loading.diagnostics.resources = { ...renderer.info.memory, programs: renderer.info.programs?.length ?? 0,
-                calls: renderer.info.render.calls, triangles: renderer.info.render.triangles };
+                calls: renderer.info.render.calls, triangles: renderer.info.render.triangles,
+                renderPixelRatio: renderer.getPixelRatio(), drawingBuffer: [canvas.width, canvas.height] };
         }
         loading.check();
     };

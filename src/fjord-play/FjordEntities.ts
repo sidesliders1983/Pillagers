@@ -13,6 +13,7 @@ import { livestockPresentation } from '../characters/LivestockPresentation';
 import type { LivestockDeath } from './LivestockDeath';
 import { longshipDeckAnchors } from './LongshipDeck';
 import type { PortraitRequest } from '../characters/CharacterPortraits';
+import { characterSync, type CharacterPreparationObserver } from '../characters/CharacterPreparation';
 
 interface YardFloor {
     yard: Object3D;
@@ -138,7 +139,8 @@ export class FjordEntities {
     }
     async sync(entities: readonly FjordEntity[], yieldControl?: () => Promise<void>, current = () => true,
         livestockDeaths: readonly { id: string }[] = [],
-        progress?: (completed: number, total: number, entity?: FjordEntity, started?: number) => void) {
+        progress?: (completed: number, total: number, entity?: FjordEntity, started?: number) => void,
+        observe?: CharacterPreparationObserver) {
         if (this.disposed || !current()) return;
         const visible = entities.filter(e => e.transform !== null);
         let prepared = 0;
@@ -230,13 +232,15 @@ export class FjordEntities {
             } else entry.yardFloor = undefined;
             entry.model.userData.canonical = { kind: entity.kind, id: entity.id, ...entity.status };
             entry.model.updateMatrixWorld(true);
-            const boundsSignature = JSON.stringify([entity.asset, this.models.boundsShape(entry.model) ?? entity.dna, entity.transform!.scale, entity.transform!.rotation, entry.model.userData.clothingSet?.id]);
-            if (entry.boundsSignature !== boundsSignature) {
-                entry.localBounds = new Box3().setFromObject(entry.model, true).translate(entry.model.position.clone().negate());
-                entry.modelBounds = entry.localBounds.clone().translate(entry.model.position)
-                    .applyMatrix4(entry.model.matrixWorld.clone().invert());
-                entry.boundsSignature = boundsSignature;
-            }
+            characterSync(observe && (sample => observe({ ...sample, subject: entity.id })), 'reconciliation-bounds-registration', () => {
+                const boundsSignature = JSON.stringify([entity.asset, this.models.boundsShape(entry.model) ?? entity.dna, entity.transform!.scale, entity.transform!.rotation, entry.model.userData.clothingSet?.id]);
+                if (entry.boundsSignature !== boundsSignature) {
+                    entry.localBounds = new Box3().setFromObject(entry.model, true).translate(entry.model.position.clone().negate());
+                    entry.modelBounds = entry.localBounds.clone().translate(entry.model.position)
+                        .applyMatrix4(entry.model.matrixWorld.clone().invert());
+                    entry.boundsSignature = boundsSignature;
+                }
+            }, entity.asset);
             progress?.(++prepared, visible.length, entity, started);
         }
         // Four stable deck anchors, using the existing characters and their appearance resources.
