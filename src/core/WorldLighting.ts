@@ -8,6 +8,7 @@ import { TimeVisualization, daylight, seasonBlend } from '../config/timeVisualiz
 import type { FogPresentation } from '../config/FjordFog';
 import { presentationShadowSize } from '../config/PresentationQuality';
 import { northernLightState, type SeasonalLightState } from '../config/NorthernSeasonalLight';
+import { SeasonalLightTransition } from './SeasonalLightTransition';
 type DayLightingSettings = {[K in keyof typeof config.day]: K extends 'sunPosition' ? readonly number[] : number};
 export class WorldLighting {
     readonly ambient=new HemisphereLight();
@@ -31,8 +32,20 @@ export class WorldLighting {
     private shadowCoverage?: DirectionalShadowCoverage;
     private annualProgress?: number;
     private annualState?: SeasonalLightState;
+    private readonly annualTransition = new SeasonalLightTransition();
     /** World-space sun authority; shadow-fit positions are never the source of this state. */
-    get seasonalLightState() { return this.annualState; }
+    get seasonalLightState() {
+        return this.annualProgress === undefined ? undefined : this.annualTransition.snapshot();
+    }
+    /** Copy the same presentation authority without allocating a frozen snapshot every water frame. */
+    copySeasonalSolarLight(direction: Vector3, color: Color) {
+        if (this.annualProgress === undefined) return false;
+        const frame = this.annualTransition.current;
+        direction.copy(frame.direction);
+        color.copy(frame.solarColor).multiplyScalar(Math.min(1, frame.solarStrength));
+        return true;
+    }
+    finishSeasonTransition() { this.annualTransition.finish(); }
     constructor(private scene:Scene,private renderer:WebGLRenderer,private assets:AssetManager,fireAnchor?:Vector3,
         private worldAnchor?:Vector3,private quality: 'standard' | 'low' = 'standard',
         private seasonTreatment: SeasonalLightingTreatment = { ambientScale: 1, directScale: 1 }){
@@ -176,7 +189,8 @@ export class WorldLighting {
         if(mode==='day-night'){this.campfire.visible=true;this.halo.visible=true;}
     }
     /** Compose the existing season palette with annual weather, without resetting day/shadow settings. */
-    setSeason(progress:number,weather:DayLightingSettings=config.day,yearProgress?:number) {
+    setSeason(progress:number,weather:DayLightingSettings=config.day,yearProgress?:number,
+        transitionSeconds = 0) {
         this.annualProgress=yearProgress;
         this.annualState=undefined;
         this.visualization='seasons';
@@ -185,6 +199,12 @@ export class WorldLighting {
         this.nightWeight=0;
         this.campfire.visible=false;
         this.halo.visible=false;
+        if (yearProgress !== undefined) {
+            // Compose the approved palette/profile once per canonical anchor, not once per frame.
+            this.cycle(progress);
+            this.annualTransition.anchor(this.annualState!, this.skyColor, this.fog,
+                this.renderer.toneMappingExposure, transitionSeconds);
+        }
         this.update(0,progress);
     }
     private weatherColorDelta(target:Color,value:number,baseline:number,weight:number) {
@@ -282,9 +302,27 @@ export class WorldLighting {
     setCampfire(lit: boolean, time: number, reducedMotion = false) {
         this.fireOverride = { lit, time, reducedMotion };
     }
-    update(time:number,progress?:number){
+    update(time:number,progress?:number,delta = 0,running = false){
         if(this.visualization!=='off') {
-            this.cycle(progress??0);
+            if (this.annualProgress !== undefined) {
+                this.annualTransition.advance(delta, running);
+                const frame = this.annualTransition.current;
+                this.lightDirection.copy(frame.direction);
+                this.directional.position.copy(this.directional.target.position)
+                    .addScaledVector(this.lightDirection, 200);
+                this.directional.color.copy(frame.solarColor);
+                this.directional.intensity = frame.solarStrength;
+                this.ambient.color.copy(frame.skyFill);
+                this.ambient.groundColor.copy(frame.groundFill);
+                this.ambient.intensity = frame.ambientStrength;
+                this.skyColor.copy(frame.sky);
+                this.fog.color.copy(frame.fog);
+                this.fog.near = frame.fogNear;
+                this.fog.far = frame.fogFar;
+                this.renderer.toneMappingExposure = frame.exposure;
+                this.nightWeight = frame.darkness;
+                this.mode = frame.darkness > .5 ? 'night' : 'day';
+            } else this.cycle(progress??0);
             this.rememberFog();
         }
         this.composeFog();

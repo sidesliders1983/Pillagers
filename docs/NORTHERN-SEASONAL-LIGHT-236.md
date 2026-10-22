@@ -71,10 +71,30 @@ colors blend towards the existing native night palette. Background and fog
 colors use that same darkness blend; weather exposure and fog distances retain
 their existing owners. There is no compensating annual exposure boost.
 
-The pure profile and frozen composed state are re-evaluated on canonical
-progress/weather changes. Render frames reuse that state. No within-tick
-interpolation timer was added: pause and hidden-tab behavior follow existing
-canonical updates, and imports/time jumps anchor directly to the supplied tick.
+The pure profile and composed endpoints are re-evaluated on canonical
+progress/weather changes. Ordinary running clock batches blend from the currently
+visible light to the new confirmed endpoint over the existing 500 ms clock
+interval. Direction is normalized; linear RGB colors, direct/ambient strength,
+darkness, sky, base fog and exposure blend together. The presentation may trail
+Core by one update interval; it never extrapolates future calendar time. Small
+forward steps across midwinter wrap forward rather than crossing back through summer.
+
+Interpolation uses the existing active frame delta, with no additional timer or
+Core clock. Pause freezes the current light; resume continues from that pose.
+Loads, explicit time jumps and new worlds anchor directly to the supplied tick.
+Hidden-tab/context recovery reanchors to the last confirmed endpoint without
+replaying elapsed background time. The existing paused fire clock remains separate.
+
+Three reusable CPU buffers hold the render values. Frozen read-only light
+snapshots are created lazily for consumers such as diagnostics, and remain
+immutable after publication. Water copies the same sun authority directly into
+its existing uniforms, avoiding a snapshot allocation every frame. A steady or
+paused view retains its cached state. There are no new scene traversals, lights,
+shadow maps, shader variants, geometry or textures. The existing native receiver
+crop follows the interpolated direction, using cached bounds; camera/bounds
+changes retain their existing immediate behavior. Shadow crop CPU work is
+included in the follow-up measurement, rather than omitted from its cost.
+
 Light and seasonal-material invalidation have separate signatures, so returning
 sunlight does not force foliage/snow reprocessing while the winter palette is held.
 

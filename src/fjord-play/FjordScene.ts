@@ -120,6 +120,7 @@ export function createFjordScene(options: {
     document.querySelector('#fjord-effects')!.addEventListener('change', configureEffects, { signal: bindings.signal });
     let weatherSignature = "";
     let lightSignature = '';
+    let lightYear: number | undefined;
 
     const cleared = new Set<string>();
     let groundSignature = "";
@@ -244,6 +245,7 @@ export function createFjordScene(options: {
                 document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
                 fjordPresentation.lighting);
             lightSignature = '';
+            lightYear = undefined;
             lighting.includeWorldShadowBounds(next.root);
             if (syncScene) {
                 await syncScene();
@@ -325,7 +327,8 @@ export function createFjordScene(options: {
                     precipitationEffect!.setWeather(view.precipitation);
                     canvas.dataset.precipitation = JSON.stringify(precipitationEffect!.inspect());
                     const nextWeather = JSON.stringify([view.calendar.visualProgress, view.weatherVisual]);
-                    const nextLight = northernLight ? nextWeather + ':' + view.calendar.progress : nextWeather;
+                    const nextLight = northernLight
+                        ? nextWeather + ':' + view.time.winter + ':' + view.calendar.progress : nextWeather;
                     const weatherChanged = nextWeather !== weatherSignature;
                     const lightChanged = nextLight !== lightSignature;
                     if (weatherChanged) {
@@ -339,9 +342,17 @@ export function createFjordScene(options: {
                         discoveryFog?.setPresentation(fogPresentation);
                     }
                     if (lightChanged) {
+                        const year = view.time.winter + view.calendar.progress;
+                        const stepSeconds = lightYear === undefined ? Infinity :
+                            (year - lightYear) * session.effectiveMinutesPerWinter * 60;
+                        // Ordinary clock batches blend for one update interval. Loads, explicit
+                        // year jumps and world replacement reanchor directly to their confirmed state.
+                        const transition = northernLight && session.running && stepSeconds > 0 &&
+                            stepSeconds <= host.tickIntervalSeconds * 2.5 ? host.tickIntervalSeconds : 0;
                         lighting!.setSeason(view.calendar.visualProgress, view.weatherVisual.lighting,
-                            northernLight ? view.calendar.progress : undefined);
+                            northernLight ? view.calendar.progress : undefined, transition);
                         lightSignature = nextLight;
+                        lightYear = year;
                     }
                     if (weatherChanged) {
                         weatherTint!.update(view.calendar.visualProgress);
@@ -556,7 +567,7 @@ export function createFjordScene(options: {
         }
         lighting!.setFogViewDistance(campaignIslandPlan(campaign.blueprint) ?
             camera.position.distanceTo(controller.focus) : 60);
-        lighting!.update(time, calendar.visualProgress);
+        lighting!.update(time, calendar.visualProgress, motionDelta, running);
         lighting!.updateShadowView(camera);
         world!.update(time, lighting, camera);
         discoveryFog?.update(delta);
@@ -648,7 +659,7 @@ export function createFjordScene(options: {
         frame, prepareGpu, arrive, dispose, highlight,
         portrait: (input: PortraitRequest) => inactive() || renderer.getContext().isContextLost()
             ? Promise.resolve(undefined) : portraits.render(input, layer?.residentForPortrait(input)),
-        resetFrameTime: () => clock.start(),
+        resetFrameTime: () => { clock.start(); lighting?.finishSeasonTransition(); },
         get hasWorld() { return !!world; },
         get diagnostics() { return [...(assets?.diagnostics ?? []), ...(models?.diagnostics ?? [])]; },
         setTarget(point: { x: number; z: number } | null | undefined, valid?: boolean) {

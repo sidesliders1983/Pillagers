@@ -1,0 +1,570 @@
+{
+  "version": 1,
+  "runtime": "v24.19.0",
+  "platform": "win32",
+  "measurement": "CPU-only native WorldLighting updates plus actual shadow receiver-crop math; mock renderer, no GPU draws",
+  "fixture": "500 x 50 x 500 receiver/caster bounds, static normal/low camera, 60-second annual cycle, 500 ms clock batches",
+  "limitation": "Not a real browser/device frame-time, GPU allocation, thermal or visual smoothness guarantee",
+  "samples": [
+    {
+      "fps": 30,
+      "quality": "low",
+      "lowCamera": false,
+      "stepped": {
+        "cpuMsPerFrame": 0.005245888888888872,
+        "coveragePasses": 120,
+        "rounds": [
+          {
+            "cpuMsPerFrame": 0.00457238888888892,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.004897611111111107,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.005245888888888872,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.005785000000000006,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.005791500000000016,
+            "coveragePasses": 120
+          }
+        ],
+        "maximumPassMs": 2.384800000000041,
+        "shadowSources": 1,
+        "mapSize": [
+          1024,
+          1024
+        ]
+      },
+      "interpolated": {
+        "cpuMsPerFrame": 0.00876611111111111,
+        "coveragePasses": 1786,
+        "rounds": [
+          {
+            "cpuMsPerFrame": 0.007804888888888905,
+            "coveragePasses": 1786
+          },
+          {
+            "cpuMsPerFrame": 0.008152611111111128,
+            "coveragePasses": 1786
+          },
+          {
+            "cpuMsPerFrame": 0.00876611111111111,
+            "coveragePasses": 1786
+          },
+          {
+            "cpuMsPerFrame": 0.01130755555555557,
+            "coveragePasses": 1786
+          },
+          {
+            "cpuMsPerFrame": 0.013619833333333355,
+            "coveragePasses": 1786
+          }
+        ],
+        "maximumPassMs": 0.6699999999999591,
+        "shadowSources": 1,
+        "mapSize": [
+          1024,
+          1024
+        ]
+      },
+      "incrementalCpuMs": 0.003520222222222238
+    },
+    {
+      "fps": 30,
+      "quality": "low",
+      "lowCamera": true,
+      "stepped": {
+        "cpuMsPerFrame": 0.001989666666666684,
+        "coveragePasses": 120,
+        "rounds": [
+          {
+            "cpuMsPerFrame": 0.001698555555555509,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.001700888888888888,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.001989666666666684,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.0020223888888889026,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.0023937222222222467,
+            "coveragePasses": 120
+          }
+        ],
+        "maximumPassMs": 0.2669999999998254,
+        "shadowSources": 1,
+        "mapSize": [
+          1024,
+          1024
+        ]
+      },
+      "interpolated": {
+        "cpuMsPerFrame": 0.007392611111111162,
+        "coveragePasses": 1786,
+        "rounds": [
+          {
+            "cpuMsPerFrame": 0.007229000000000067,
+            "coveragePasses": 1786
+          },
+          {
+            "cpuMsPerFrame": 0.007390499999999949,
+            "coveragePasses": 1786
+          },
+          {
+            "cpuMsPerFrame": 0.007392611111111162,
+            "coveragePasses": 1786
+          },
+          {
+            "cpuMsPerFrame": 0.007394166666666579,
+            "coveragePasses": 1786
+          },
+          {
+            "cpuMsPerFrame": 0.0079588888888889,
+            "coveragePasses": 1786
+          }
+        ],
+        "maximumPassMs": 0.4696000000001277,
+        "shadowSources": 1,
+        "mapSize": [
+          1024,
+          1024
+        ]
+      },
+      "incrementalCpuMs": 0.005402944444444478
+    },
+    {
+      "fps": 30,
+      "quality": "standard",
+      "lowCamera": false,
+      "stepped": {
+        "cpuMsPerFrame": 0.0015118888888889614,
+        "coveragePasses": 120,
+        "rounds": [
+          {
+            "cpuMsPerFrame": 0.001486555555555545,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.0014906111111110932,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.0015118888888889614,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.001576444444444481,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.0018543888888888837,
+            "coveragePasses": 120
+          }
+        ],
+        "maximumPassMs": 0.20249999999987267,
+        "shadowSources": 1,
+        "mapSize": [
+          2048,
+          2048
+        ]
+      },
+      "interpolated": {
+        "cpuMsPerFrame": 0.008405888888888866,
+        "coveragePasses": 1786,
+        "rounds": [
+          {
+            "cpuMsPerFrame": 0.006637444444444454,
+            "coveragePasses": 1786
+          },
+          {
+            "cpuMsPerFrame": 0.007925833333333306,
+            "coveragePasses": 1786
+          },
+          {
+            "cpuMsPerFrame": 0.008405888888888866,
+            "coveragePasses": 1786
+          },
+          {
+            "cpuMsPerFrame": 0.010884333333333416,
+            "coveragePasses": 1786
+          },
+          {
+            "cpuMsPerFrame": 0.011257111111111094,
+            "coveragePasses": 1786
+          }
+        ],
+        "maximumPassMs": 0.6447000000000571,
+        "shadowSources": 1,
+        "mapSize": [
+          2048,
+          2048
+        ]
+      },
+      "incrementalCpuMs": 0.006893999999999904
+    },
+    {
+      "fps": 30,
+      "quality": "standard",
+      "lowCamera": true,
+      "stepped": {
+        "cpuMsPerFrame": 0.0017044999999999769,
+        "coveragePasses": 120,
+        "rounds": [
+          {
+            "cpuMsPerFrame": 0.0016383333333333718,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.0016785555555554766,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.0017044999999999769,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.001741000000000036,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.0022578888888889043,
+            "coveragePasses": 120
+          }
+        ],
+        "maximumPassMs": 0.05030000000010659,
+        "shadowSources": 1,
+        "mapSize": [
+          2048,
+          2048
+        ]
+      },
+      "interpolated": {
+        "cpuMsPerFrame": 0.010256722222222202,
+        "coveragePasses": 1786,
+        "rounds": [
+          {
+            "cpuMsPerFrame": 0.007973000000000006,
+            "coveragePasses": 1786
+          },
+          {
+            "cpuMsPerFrame": 0.009725944444444395,
+            "coveragePasses": 1786
+          },
+          {
+            "cpuMsPerFrame": 0.010256722222222202,
+            "coveragePasses": 1786
+          },
+          {
+            "cpuMsPerFrame": 0.011363000000000057,
+            "coveragePasses": 1786
+          },
+          {
+            "cpuMsPerFrame": 0.016008944444444447,
+            "coveragePasses": 1786
+          }
+        ],
+        "maximumPassMs": 0.44049999999992906,
+        "shadowSources": 1,
+        "mapSize": [
+          2048,
+          2048
+        ]
+      },
+      "incrementalCpuMs": 0.008552222222222225
+    },
+    {
+      "fps": 60,
+      "quality": "low",
+      "lowCamera": false,
+      "stepped": {
+        "cpuMsPerFrame": 0.0013676666666666885,
+        "coveragePasses": 120,
+        "rounds": [
+          {
+            "cpuMsPerFrame": 0.0012166111111111555,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.0012201666666666394,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.0013676666666666885,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.001767638888888933,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.002026722222222222,
+            "coveragePasses": 120
+          }
+        ],
+        "maximumPassMs": 0.44519999999988613,
+        "shadowSources": 1,
+        "mapSize": [
+          1024,
+          1024
+        ]
+      },
+      "interpolated": {
+        "cpuMsPerFrame": 0.00970386111111111,
+        "coveragePasses": 3571,
+        "rounds": [
+          {
+            "cpuMsPerFrame": 0.0077686944444444505,
+            "coveragePasses": 3571
+          },
+          {
+            "cpuMsPerFrame": 0.008529277777777794,
+            "coveragePasses": 3571
+          },
+          {
+            "cpuMsPerFrame": 0.00970386111111111,
+            "coveragePasses": 3571
+          },
+          {
+            "cpuMsPerFrame": 0.009747805555555576,
+            "coveragePasses": 3571
+          },
+          {
+            "cpuMsPerFrame": 0.009924555555555546,
+            "coveragePasses": 3571
+          }
+        ],
+        "maximumPassMs": 0.4699000000000524,
+        "shadowSources": 1,
+        "mapSize": [
+          1024,
+          1024
+        ]
+      },
+      "incrementalCpuMs": 0.00833619444444442
+    },
+    {
+      "fps": 60,
+      "quality": "low",
+      "lowCamera": true,
+      "stepped": {
+        "cpuMsPerFrame": 0.0011954722222222674,
+        "coveragePasses": 120,
+        "rounds": [
+          {
+            "cpuMsPerFrame": 0.0011516111111111134,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.001151694444444426,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.0011954722222222674,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.0012849444444444518,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.0013534444444444362,
+            "coveragePasses": 120
+          }
+        ],
+        "maximumPassMs": 0.35169999999993706,
+        "shadowSources": 1,
+        "mapSize": [
+          1024,
+          1024
+        ]
+      },
+      "interpolated": {
+        "cpuMsPerFrame": 0.009099749999999997,
+        "coveragePasses": 3571,
+        "rounds": [
+          {
+            "cpuMsPerFrame": 0.007847749999999994,
+            "coveragePasses": 3571
+          },
+          {
+            "cpuMsPerFrame": 0.007911305555555574,
+            "coveragePasses": 3571
+          },
+          {
+            "cpuMsPerFrame": 0.009099749999999997,
+            "coveragePasses": 3571
+          },
+          {
+            "cpuMsPerFrame": 0.010754805555555563,
+            "coveragePasses": 3571
+          },
+          {
+            "cpuMsPerFrame": 0.012532111111111072,
+            "coveragePasses": 3571
+          }
+        ],
+        "maximumPassMs": 0.4275000000000091,
+        "shadowSources": 1,
+        "mapSize": [
+          1024,
+          1024
+        ]
+      },
+      "incrementalCpuMs": 0.007904277777777729
+    },
+    {
+      "fps": 60,
+      "quality": "standard",
+      "lowCamera": false,
+      "stepped": {
+        "cpuMsPerFrame": 0.0015287499999999455,
+        "coveragePasses": 120,
+        "rounds": [
+          {
+            "cpuMsPerFrame": 0.001250305555555542,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.001332805555555549,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.0015287499999999455,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.0019070277777777595,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.0030249444444444863,
+            "coveragePasses": 120
+          }
+        ],
+        "maximumPassMs": 0.1391000000000986,
+        "shadowSources": 1,
+        "mapSize": [
+          2048,
+          2048
+        ]
+      },
+      "interpolated": {
+        "cpuMsPerFrame": 0.008981749999999995,
+        "coveragePasses": 3571,
+        "rounds": [
+          {
+            "cpuMsPerFrame": 0.006947583333333366,
+            "coveragePasses": 3571
+          },
+          {
+            "cpuMsPerFrame": 0.007843583333333362,
+            "coveragePasses": 3571
+          },
+          {
+            "cpuMsPerFrame": 0.008981749999999995,
+            "coveragePasses": 3571
+          },
+          {
+            "cpuMsPerFrame": 0.009298000000000002,
+            "coveragePasses": 3571
+          },
+          {
+            "cpuMsPerFrame": 0.009450916666666621,
+            "coveragePasses": 3571
+          }
+        ],
+        "maximumPassMs": 0.3752999999999247,
+        "shadowSources": 1,
+        "mapSize": [
+          2048,
+          2048
+        ]
+      },
+      "incrementalCpuMs": 0.00745300000000005
+    },
+    {
+      "fps": 60,
+      "quality": "standard",
+      "lowCamera": true,
+      "stepped": {
+        "cpuMsPerFrame": 0.001644694444444465,
+        "coveragePasses": 120,
+        "rounds": [
+          {
+            "cpuMsPerFrame": 0.001409250000000005,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.0015986944444443907,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.001644694444444465,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.0017765555555556349,
+            "coveragePasses": 120
+          },
+          {
+            "cpuMsPerFrame": 0.0020428888888889356,
+            "coveragePasses": 120
+          }
+        ],
+        "maximumPassMs": 0.3591000000001259,
+        "shadowSources": 1,
+        "mapSize": [
+          2048,
+          2048
+        ]
+      },
+      "interpolated": {
+        "cpuMsPerFrame": 0.007982555555555564,
+        "coveragePasses": 3571,
+        "rounds": [
+          {
+            "cpuMsPerFrame": 0.007346277777777712,
+            "coveragePasses": 3571
+          },
+          {
+            "cpuMsPerFrame": 0.007468444444444408,
+            "coveragePasses": 3571
+          },
+          {
+            "cpuMsPerFrame": 0.007982555555555564,
+            "coveragePasses": 3571
+          },
+          {
+            "cpuMsPerFrame": 0.009113555555555625,
+            "coveragePasses": 3571
+          },
+          {
+            "cpuMsPerFrame": 0.010583805555555601,
+            "coveragePasses": 3571
+          }
+        ],
+        "maximumPassMs": 0.5181999999999789,
+        "shadowSources": 1,
+        "mapSize": [
+          2048,
+          2048
+        ]
+      },
+      "incrementalCpuMs": 0.006337861111111099
+    }
+  ]
+}

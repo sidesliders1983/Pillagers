@@ -38,13 +38,8 @@ export class FjordsideWater {
         this.time = time;
         this.surface.update(time, camera);
         if (lighting) {
-            const annual = lighting.seasonalLightState;
-            if (annual) {
-                this.sunDirection.fromArray(annual.sunDirection);
-                // Compatibility for the existing shader: suppress an absent sun without
-                // adding the direct/ambient separation reserved for Unified Sunlight (#237).
-                this.solarColor.fromArray(annual.solarColor).multiplyScalar(Math.min(1, annual.solarStrength));
-            } else {
+            // Copy the shared, smoothly presented sun into existing uniforms without frame allocations.
+            if (!lighting.copySeasonalSolarLight(this.sunDirection, this.solarColor)) {
                 this.sunDirection.copy(lighting.directional.position).sub(lighting.directional.target.position);
                 this.solarColor.copy(lighting.directional.color);
             }

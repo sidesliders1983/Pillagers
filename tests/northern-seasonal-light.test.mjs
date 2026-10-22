@@ -183,3 +183,115 @@ test('opt-in annual presentation leaves canonical saves, events, RNG and outcome
         assert.equal(item.lighting.seasonalLightState.solarStrength, 0, 'A load/time jump reanchors immediately');
     } finally { item.dispose(); }
 });
+
+test('confirmed clock samples interpolate sun, sky, ambient and fog without per-tick jumps or extrapolation', () => {
+    const item = fixture();
+    const weather = projectFjordWeather('Normal').lighting;
+    try {
+        item.lighting.setSeason(0, weather, .125);
+        const before = item.lighting.seasonalLightState;
+        const sky = item.lighting.skyColor.clone(), fog = item.lighting.fog.color.clone();
+        item.lighting.setSeason(0, weather, .135, .5);
+        assert.deepEqual(item.lighting.seasonalLightState, before, 'Anchoring cannot move the visible light');
+        assert.ok(item.lighting.skyColor.equals(sky));
+        assert.ok(item.lighting.fog.color.equals(fog));
+        item.lighting.update(1, 0, .25, true);
+        const middle = item.lighting.seasonalLightState;
+        assert.ok(middle.yearProgress > .125 && middle.yearProgress < .135);
+        assert.ok(middle.solarStrength > before.solarStrength);
+        assert.ok(!item.lighting.skyColor.equals(sky));
+        assert.ok(!item.lighting.fog.color.equals(fog));
+        assert.ok(Math.abs(Math.hypot(...middle.sunDirection) - 1) < 1e-12);
+        item.lighting.update(2, 0, .25, true);
+        const end = item.lighting.seasonalLightState;
+        assert.ok(Math.abs(end.yearProgress - .135) < 1e-12);
+        for (let frame = 0; frame < 60; frame++) item.lighting.update(3 + frame, 0, 1 / 60, true);
+        assert.equal(item.lighting.seasonalLightState, end, 'No future calendar time is invented');
+        assert.deepEqual(before.yearProgress, .125, 'Previously published snapshots remain immutable');
+        assert.throws(() => { middle.ambient.skyColor[0] = 0; }, TypeError);
+    } finally { item.dispose(); }
+});
+
+test('annual presentation is frame-rate independent, freezes on pause, and resumes from the visible pose', () => {
+    const weather = projectFjordWeather('Normal').lighting;
+    const samples = [];
+    for (const fps of [15, 30, 60, 120]) {
+        const item = fixture();
+        try {
+            item.lighting.setSeason(0, weather, .15);
+            item.lighting.setSeason(0, weather, .16, .5);
+            for (let frame = 0; frame < fps; frame++) item.lighting.update(frame, 0, .25 / fps, true);
+            const paused = item.lighting.seasonalLightState;
+            for (let frame = 0; frame < fps; frame++) item.lighting.update(900 + frame, 0, 1 / fps, false);
+            assert.equal(item.lighting.seasonalLightState, paused);
+            samples.push(paused);
+            for (let frame = 0; frame < fps; frame++) item.lighting.update(frame, 0, .25 / fps, true);
+            assert.ok(Math.abs(item.lighting.seasonalLightState.yearProgress - .16) < 1e-12);
+        } finally { item.dispose(); }
+    }
+    for (const sample of samples) {
+        assert.ok(Math.abs(sample.yearProgress - .155) < 1e-12);
+        assert.ok(Math.abs(sample.solarStrength - samples[0].solarStrength) < 1e-12);
+        assert.ok(new Vector3(...sample.sunDirection).distanceTo(new Vector3(...samples[0].sunDirection)) < 1e-12);
+    }
+});
+
+test('retargeting stays continuous; year wrap, explicit jumps and hidden recovery do not replay a season', () => {
+    const item = fixture(), weather = projectFjordWeather('Normal').lighting;
+    try {
+        item.lighting.setSeason(0, weather, .999);
+        item.lighting.setSeason(0, weather, .001, .5);
+        item.lighting.update(0, 0, .1, true);
+        const before = item.lighting.seasonalLightState;
+        assert.ok(before.yearProgress > .999 && before.yearProgress < 1);
+        item.lighting.setSeason(0, weather, .002, .5);
+        assert.deepEqual(item.lighting.seasonalLightState, before);
+        item.lighting.update(0, 0, .25, true);
+        const middle = item.lighting.seasonalLightState;
+        assert.ok(middle.yearProgress < .002);
+        item.lighting.finishSeasonTransition();
+        item.lighting.update(0, 0, 10000, false);
+        assert.ok(Math.abs(item.lighting.seasonalLightState.yearProgress - .002) < 1e-12);
+        item.lighting.setSeason(.5, weather, .5);
+        assert.equal(item.lighting.seasonalLightState.yearProgress, .5);
+        assert.equal(item.lighting.seasonalLightState.darkness, 0);
+        item.lighting.setSeason(0, weather, 0);
+        assert.equal(item.lighting.seasonalLightState.solarStrength, 0);
+    } finally { item.dispose(); }
+});
+
+test('interpolated water and shadows share the sun without frame snapshots, world walks or new resources', () => {
+    const { FjordsideWater } = load('../src/world/FjordsideWater.ts');
+    const item = fixture(), water = new FjordsideWater(0, { x: 0, z: 0 }, 'low');
+    const weather = projectFjordWeather('Normal').lighting;
+    try {
+        const resources = [...item.scene.children];
+        item.lighting.setSeason(0, weather, .125);
+        item.lighting.setSeason(0, weather, .135, .5);
+        const geometry = water.mesh.geometry, material = water.mesh.material;
+        const shadow = item.lighting.directional.shadow;
+        Object.defineProperty(item.lighting, 'seasonalLightState', {
+            get() { assert.fail('The render/water path must not request an allocating public snapshot'); },
+        });
+        item.root.traverse = () => assert.fail('Frame interpolation must not walk world bounds');
+        for (let frame = 0; frame < 30; frame++) {
+            item.lighting.update(frame / 60, 0, 1 / 60, true);
+            item.lighting.updateShadowView(item.camera);
+            water.update(frame / 60, item.lighting, item.camera);
+            const direction = item.lighting.directional.position.clone()
+                .sub(item.lighting.directional.target.position).normalize();
+            assert.ok(material.uniforms.uSunDirection.value.distanceTo(direction) < 1e-12);
+            assert.ok(shadow.camera.projectionMatrix.elements.every(Number.isFinite));
+        }
+        assert.deepEqual(item.scene.children, resources);
+        assert.equal(item.lighting.directional.shadow, shadow);
+        assert.equal(water.mesh.geometry, geometry);
+        assert.equal(water.mesh.material, material);
+        const passes = item.lighting.inspectShadowCoverage().passes;
+        for (let frame = 0; frame < 60; frame++) {
+            item.lighting.update(10, 0, 1 / 60, false);
+            item.lighting.updateShadowView(item.camera);
+        }
+        assert.equal(item.lighting.inspectShadowCoverage().passes, passes);
+    } finally { water.dispose(); item.dispose(); }
+});

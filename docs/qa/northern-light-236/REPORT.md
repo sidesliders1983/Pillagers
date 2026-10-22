@@ -105,3 +105,44 @@ evidence are still pending.** The launcher provides the fixed scenarios and
 recording/export workflow; it is not a substitute for those artifacts. Device
 acceptance remains under #151. Do not activate this profile by default, close
 #236 as fully accepted, or merge automatically from these CPU-only results.
+
+## Follow-up: interpolate the accepted palette between clock batches
+
+The owner's 22 October recording (`ScreenRecording_10-22-2026 13-13-07_1.mov`)
+accepts the transition/palette but shows distracting stepped updates. Frames
+extracted from that supplied recording were inspected; they are evidence of the
+previous version, not a capture of the interpolation change. The approved annual
+profile and palette are unchanged.
+
+Ordinary confirmed clock batches now interpolate for 500 ms using existing
+active frame time. Reusable CPU buffers blend the full light presentation,
+including the normalized sun, ambient, background and base fog. Pause freezes
+the presentation; resume continues; year wrap stays forward. Import/time jumps,
+world replacement and hidden/context recovery reanchor. This adds no timer,
+Core mutation, light, shadow map or GPU resource. The native shadow crop follows
+the moving sun using existing cached world bounds, without a scene traversal.
+Frozen public snapshots are lazy; water consumes the same presentation authority
+without requesting a snapshot each frame.
+
+Four additional focused tests cover intermediate frames, 15/30/60/120 FPS
+equivalence, pause/resume, interrupted transitions, year wrap, explicit reanchors,
+unchanged paused shadow coverage, and actual water/shadow agreement. The render
+path test rejects snapshot reads and world-bound traversals. The resulting
+focused suite has **46 passing tests, zero failures and zero skips**. Production
+asset validation, TypeScript and build also pass; the existing large-chunk
+warning remains. Formatting is manually reviewed with `git diff --check`.
+
+`smoothing-cpu-report.json` preserves a separate follow-up benchmark; the initial
+CPU report above is unchanged. Eight paired samples compare stepped and blended
+presentation at 30/60 FPS, Low/Standard and normal/permitted low camera angles.
+Each sample measures five warmed-up complete one-minute annual cycles, including
+actual native receiver-crop math against fixed 500 × 50 × 500 bounds. Median
+extra CPU cost per frame ranges from **0.0035 to 0.0086 ms** in this Windows/Node
+run. Shadow crops increase from 120 to 1,786/3,571 per simulated minute as the sun
+moves between clock samples; their math is included in those timings. The
+existing native shadow source/map and resource identities remain stable. This
+is a mock-renderer CPU measurement, not a WebGL/GPU or physical-device guarantee.
+
+Browser inventory remains empty in this session. A new real-scene smoothness
+capture and physical-device acceptance are pending; the updated LAN comparison
+uses the existing port 5227. The default profile and publication gates remain unchanged.
