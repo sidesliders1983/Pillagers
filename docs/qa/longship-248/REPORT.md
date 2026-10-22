@@ -36,3 +36,34 @@ The owner's MOV shows an occupant lying in the hull; the follow-up photo reports
 Occupants now sample a standing Idle pose once per reconciliation and have no independent animation clock. Previous blended actions are stopped. Stable hull attachments are retained; pitch/roll reset on attachment and landing; stale autonomous frames cannot move an expedition member or play a conflicting activity. The native-resident regression uses actual founder DNA/faces, the committed body and extra animation clips: Doze → standing deck pose, repeated sync and hull turns, rejected stale Run updates, disembark → ordinary Walk. The scene regression also injects an incorrectly tilted root and verifies recovery and resource ownership. These checks cover the former gap in the initial source-deck-only test; visual UAT on the owner's device remains necessary.
 
 Follow-up validation: **67 targeted checks pass, 0 fail, 0 skip**, including a saved land journey and recall after disembarking. The production build passes, retaining the existing large-chunk warning. The separate LAN Vite process required a restart because its transformed modules still contained the earlier source after filesystem edits; verify the served `setEmbarked` method as well as disk contents when reviewing this worktree.
+
+## Pre-merge owner corrections: ship selection and unknown map geography
+
+The owner confirmed that re-boarding and subsequent sailing work once everyone
+has actually boarded, and authorized merging. No change to boarding authority is
+needed. The new simulation check sails to two different coasts, disembarks,
+saves/restores, re-boards without a clock tick when everyone is at shore, and
+immediately sets another water destination. Expedition identity, paid supplies
+and clan stocks remain unchanged by re-boarding.
+
+Ship destination picking now uses projected bounds plus 18 CSS pixels of padding
+and a 56 × 56 minimum target on both mouse and touch. Hover and click use the
+same target; distant water, hidden hulls and nearer occluding buildings remain
+excluded. An embarked group uses ordinary water selection even beside its hull.
+
+Unknown island-map pixels are now one opaque color for land, sea and all ground
+types, hiding the undiscovered outline rather than merely dimming it. Missing
+knowledge also fails closed. Explored terrain stays mapped, current observations
+stay brighter, and the existing mask-change cache is retained. Current design
+documentation supersedes the previous silhouette-visible policy; original map
+QA records are preserved.
+
+The branch was integrated with main `35beb6e`, retaining both the new portrait
+bridge and longship attachment/picking logic. **87 combined focused checks pass,
+0 fail, 0 skip**, including the portrait integration, controls, simulation,
+deck occupants, map pixels, touch and mouse. Production public-asset validation,
+TypeScript and Vite build pass; the existing Three.js chunk warning remains.
+Formatting is checked manually and with `git diff --check`. Visual phone review
+of the expanded target and map is not claimed: no controllable browser is
+available. The existing owner-approved longship behavior remains covered by
+the native-body and simulation checks.
