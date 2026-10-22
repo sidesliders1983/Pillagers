@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
@@ -17,6 +18,47 @@ const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
 const factory = new MeshyHumanFactory(async url =>
     loader.parseAsync(buffer(await readFile('public' + url.split('?')[0])), ''),
 async url => buffer(await readFile('public' + url.split('?')[0])));
+
+test('world clothing retains its visible triangles while bounding unused face morph storage', async () => {
+    const { createCampaign } = load('../src/simulation/SimulationCore.ts');
+    const { projectResidentAppearance } = load('../src/characters/ResidentAppearance.ts');
+    const { FjordWardrobe } = load('../src/fjord-play/FjordWardrobe.ts');
+    const family = createCampaign(32, {}, {}, {}, {}, {}, {}, 'summer-800-v1');
+    const wardrobe = new FjordWardrobe(factory, message => { throw new Error(message); });
+    // Frozen indexed triangle data from live main 31e54ef, including UVs, native
+    // skin weights and every face morph. Compaction must change no drawn value.
+    const references = [
+        ['founder-1', '39211efa287e63afb5cdc263dfa8d6272ec90bbe50c7e98f19219e38ee895aa1'],
+        ['founder-3', '797990cae5e0967e0d71457ee24a54738d8bb922d86f6e3cb0a55ee59e4dee99'],
+        ['founder-6', '0225e353c5bcfad65303fa0e12dafde5cc74f9c6e49379c7f8568104fa25b556'],
+    ];
+    for (const [id, expected] of references) {
+        const appearance = projectResidentAppearance(family, id);
+        const human = await factory.createWorld(appearance.dna, undefined, appearance.face);
+        try {
+            await wardrobe.reconcile(human, { kind: 'persona', id, dna: appearance.dna,
+                status: { living: true, sex: appearance.dna.sex, occupation: family.personas[id].occupation } });
+            const geometry = human.fit.mesh.geometry, hash = createHash('sha256');
+            const attributes = [...Object.entries(geometry.attributes).sort(),
+                ...Object.entries(geometry.morphAttributes).sort().flatMap(([name, targets]) =>
+                    targets.map((attribute, index) => ['morph:' + name + ':' + index, attribute]))];
+            for (const [name, attribute] of attributes) {
+                hash.update(name + ':' + attribute.itemSize + '\n');
+                const values = new Float32Array(geometry.index.count * attribute.itemSize);
+                for (let corner = 0; corner < geometry.index.count; corner++)
+                    for (let component = 0; component < attribute.itemSize; component++)
+                        values[corner * attribute.itemSize + component] =
+                            attribute.getComponent(geometry.index.getX(corner), component);
+                hash.update(Buffer.from(values.buffer));
+            }
+            assert.equal(hash.digest('hex'), expected, id + ' keeps every visible triangle attribute');
+            assert.ok(geometry.attributes.position.count <= 7000,
+                id + ' must not upload entire hidden bodies for each clothing coverage fragment');
+            assert.equal(geometry.morphTargetsRelative, true);
+            assert.equal(geometry.morphAttributes.position.length, 9);
+        } finally { human.dispose(); }
+    }
+});
 
 test('world residents retain their inherited face at the existing world LOD and accept ancestry corrections', async () => {
     const family = createSettlement(1983);

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Discovery fog · incremental update review</title>
+    <style>
+        body { margin: 0; font: 14px system-ui; background: #dce4df; }
+        header { position: absolute; top: 12px; left: 12px; right: 12px; padding: 16px;
+            border-radius: 8px; background: #fffffff2; }
+        h1 { font-size: 18px; margin: 0 0 8px; }
+        button, select { padding: 8px; margin: 4px; }
+        p { margin: 8px 0 0; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Discovery fog · incremental update review</h1>
+        <label>Explored coverage <select id="coverage"><option value="0.9">90%</option>
+            <option value="0.2">20%</option></select></label>
+        <button id="reveal">Reveal one cell</button>
+        <button id="repeat">Repeat unchanged ×1000</button>
+        <button id="motion" aria-pressed="false">Move visibility every 1.5 seconds</button>
+        <p id="status" role="status"></p>
+        <p>Production fog on a flat test surface. Watch the unchanged mapped ground around the small unknown patch.</p>
+    </header>
+    <script type="module" src="./discovery-fog.ts"></script>
+</body>
+</html>

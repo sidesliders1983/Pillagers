@@ -1,0 +1,673 @@
+{
+  "source": "31e54ef0c4425ccd1328cf35acdbb56febe71f2d",
+  "fixtures": [
+    {
+      "id": "founder-1",
+      "occupation": "hunter",
+      "vertices": 5005,
+      "sourceVertices": 3409,
+      "usedVertices": 1883,
+      "triangles": 1449,
+      "morphTargets": 9,
+      "digest": "39211efa287e63afb5cdc263dfa8d6272ec90bbe50c7e98f19219e38ee895aa1"
+    },
+    {
+      "id": "founder-2",
+      "occupation": "hunter",
+      "vertices": 5005,
+      "sourceVertices": 3409,
+      "usedVertices": 1883,
+      "triangles": 1449,
+      "morphTargets": 9,
+      "digest": "39211efa287e63afb5cdc263dfa8d6272ec90bbe50c7e98f19219e38ee895aa1"
+    },
+    {
+      "id": "founder-3",
+      "occupation": "fisher",
+      "vertices": 5496,
+      "sourceVertices": 3409,
+      "usedVertices": 2087,
+      "triangles": 1490,
+      "morphTargets": 9,
+      "digest": "797990cae5e0967e0d71457ee24a54738d8bb922d86f6e3cb0a55ee59e4dee99"
+    },
+    {
+      "id": "founder-4",
+      "occupation": "hunter",
+      "vertices": 5005,
+      "sourceVertices": 3409,
+      "usedVertices": 1883,
+      "triangles": 1449,
+      "morphTargets": 9,
+      "digest": "39211efa287e63afb5cdc263dfa8d6272ec90bbe50c7e98f19219e38ee895aa1"
+    },
+    {
+      "id": "founder-5",
+      "occupation": "fisher",
+      "vertices": 5496,
+      "sourceVertices": 3409,
+      "usedVertices": 2087,
+      "triangles": 1490,
+      "morphTargets": 9,
+      "digest": "797990cae5e0967e0d71457ee24a54738d8bb922d86f6e3cb0a55ee59e4dee99"
+    },
+    {
+      "id": "founder-6",
+      "occupation": "farmer",
+      "vertices": 5896,
+      "sourceVertices": 3409,
+      "usedVertices": 2487,
+      "triangles": 2198,
+      "morphTargets": 9,
+      "digest": "0225e353c5bcfad65303fa0e12dafde5cc74f9c6e49379c7f8568104fa25b556"
+    },
+    {
+      "id": "founder-7",
+      "occupation": "fisher",
+      "vertices": 5496,
+      "sourceVertices": 3409,
+      "usedVertices": 2087,
+      "triangles": 1490,
+      "morphTargets": 9,
+      "digest": "797990cae5e0967e0d71457ee24a54738d8bb922d86f6e3cb0a55ee59e4dee99"
+    },
+    {
+      "id": "founder-8",
+      "occupation": "hunter",
+      "vertices": 5005,
+      "sourceVertices": 3409,
+      "usedVertices": 1883,
+      "triangles": 1449,
+      "morphTargets": 9,
+      "digest": "39211efa287e63afb5cdc263dfa8d6272ec90bbe50c7e98f19219e38ee895aa1"
+    },
+    {
+      "id": "founder-9",
+      "occupation": "woodworker",
+      "vertices": 5005,
+      "sourceVertices": 3409,
+      "usedVertices": 1883,
+      "triangles": 1449,
+      "morphTargets": 9,
+      "digest": "39211efa287e63afb5cdc263dfa8d6272ec90bbe50c7e98f19219e38ee895aa1"
+    },
+    {
+      "id": "founder-10",
+      "occupation": "fisher",
+      "vertices": 5496,
+      "sourceVertices": 3409,
+      "usedVertices": 2087,
+      "triangles": 1490,
+      "morphTargets": 9,
+      "digest": "797990cae5e0967e0d71457ee24a54738d8bb922d86f6e3cb0a55ee59e4dee99"
+    }
+  ],
+  "rows": [
+    {
+      "label": "baseline",
+      "elapsedMs": 19.992499999999836,
+      "memory": {
+        "rss": 255500288,
+        "heapTotal": 180449280,
+        "heapUsed": 31401016,
+        "external": 32875536,
+        "arrayBuffers": 9358133
+      },
+      "modelCount": 0,
+      "vertices": 0,
+      "uniqueTextureObjects": 0,
+      "uniqueImages": 0,
+      "geometryBytes": 0,
+      "estimatedDecodedRgbaBytes": 0,
+      "note": "Headless preparation with image dimensions only; no measured GPU allocation."
+    },
+    {
+      "label": "resident-1",
+      "elapsedMs": 3722.6231,
+      "memory": {
+        "rss": 347471872,
+        "heapTotal": 199053312,
+        "heapUsed": 54005616,
+        "external": 94024252,
+        "arrayBuffers": 63740343
+      },
+      "modelCount": 1,
+      "vertices": 173096,
+      "uniqueTextureObjects": 9,
+      "uniqueImages": 9,
+      "geometryBytes": 13064682,
+      "estimatedDecodedRgbaBytes": 110100480,
+      "note": "Headless preparation with image dimensions only; no measured GPU allocation."
+    },
+    {
+      "label": "resident-2",
+      "elapsedMs": 5574.7354000000005,
+      "memory": {
+        "rss": 382857216,
+        "heapTotal": 208179200,
+        "heapUsed": 65849920,
+        "external": 111898509,
+        "arrayBuffers": 87078717
+      },
+      "modelCount": 2,
+      "vertices": 343877,
+      "uniqueTextureObjects": 9,
+      "uniqueImages": 9,
+      "geometryBytes": 25970748,
+      "estimatedDecodedRgbaBytes": 110100480,
+      "note": "Headless preparation with image dimensions only; no measured GPU allocation."
+    },
+    {
+      "label": "resident-3",
+      "elapsedMs": 7289.0932,
+      "memory": {
+        "rss": 429383680,
+        "heapTotal": 213180416,
+        "heapUsed": 71936504,
+        "external": 156595361,
+        "arrayBuffers": 129825531
+      },
+      "modelCount": 3,
+      "vertices": 385809,
+      "uniqueTextureObjects": 15,
+      "uniqueImages": 15,
+      "geometryBytes": 30018148,
+      "estimatedDecodedRgbaBytes": 169869312,
+      "note": "Headless preparation with image dimensions only; no measured GPU allocation."
+    },
+    {
+      "label": "resident-4",
+      "elapsedMs": 8941.7625,
+      "memory": {
+        "rss": 439820288,
+        "heapTotal": 238059520,
+        "heapUsed": 96532928,
+        "external": 129663801,
+        "arrayBuffers": 110843359
+      },
+      "modelCount": 4,
+      "vertices": 563581,
+      "uniqueTextureObjects": 15,
+      "uniqueImages": 15,
+      "geometryBytes": 43406242,
+      "estimatedDecodedRgbaBytes": 169869312,
+      "note": "Headless preparation with image dimensions only; no measured GPU allocation."
+    },
+    {
+      "label": "resident-5",
+      "elapsedMs": 10727.8574,
+      "memory": {
+        "rss": 453517312,
+        "heapTotal": 248045568,
+        "heapUsed": 106170424,
+        "external": 137621703,
+        "arrayBuffers": 115821427
+      },
+      "modelCount": 5,
+      "vertices": 613123,
+      "uniqueTextureObjects": 15,
+      "uniqueImages": 15,
+      "geometryBytes": 47955134,
+      "estimatedDecodedRgbaBytes": 169869312,
+      "note": "Headless preparation with image dimensions only; no measured GPU allocation."
+    },
+    {
+      "label": "resident-6",
+      "elapsedMs": 11582.6407,
+      "memory": {
+        "rss": 487260160,
+        "heapTotal": 245948416,
+        "heapUsed": 106862248,
+        "external": 171888630,
+        "arrayBuffers": 148395001
+      },
+      "modelCount": 6,
+      "vertices": 701303,
+      "uniqueTextureObjects": 19,
+      "uniqueImages": 19,
+      "geometryBytes": 55347530,
+      "estimatedDecodedRgbaBytes": 196083712,
+      "note": "Headless preparation with image dimensions only; no measured GPU allocation."
+    },
+    {
+      "label": "resident-7",
+      "elapsedMs": 12727.640500000001,
+      "memory": {
+        "rss": 473194496,
+        "heapTotal": 247259136,
+        "heapUsed": 107318952,
+        "external": 157972249,
+        "arrayBuffers": 137381699
+      },
+      "modelCount": 7,
+      "vertices": 743235,
+      "uniqueTextureObjects": 19,
+      "uniqueImages": 19,
+      "geometryBytes": 59394930,
+      "estimatedDecodedRgbaBytes": 196083712,
+      "note": "Headless preparation with image dimensions only; no measured GPU allocation."
+    },
+    {
+      "label": "resident-8",
+      "elapsedMs": 13692.384300000002,
+      "memory": {
+        "rss": 501940224,
+        "heapTotal": 260292608,
+        "heapUsed": 117549232,
+        "external": 175186777,
+        "arrayBuffers": 151242517
+      },
+      "modelCount": 8,
+      "vertices": 921115,
+      "uniqueTextureObjects": 19,
+      "uniqueImages": 19,
+      "geometryBytes": 72788364,
+      "estimatedDecodedRgbaBytes": 196083712,
+      "note": "Headless preparation with image dimensions only; no measured GPU allocation."
+    },
+    {
+      "label": "resident-9",
+      "elapsedMs": 14421.499,
+      "memory": {
+        "rss": 514805760,
+        "heapTotal": 261844992,
+        "heapUsed": 124033848,
+        "external": 187533235,
+        "arrayBuffers": 163588975
+      },
+      "modelCount": 9,
+      "vertices": 1077792,
+      "uniqueTextureObjects": 19,
+      "uniqueImages": 19,
+      "geometryBytes": 84824158,
+      "estimatedDecodedRgbaBytes": 196083712,
+      "note": "Headless preparation with image dimensions only; no measured GPU allocation."
+    },
+    {
+      "label": "resident-10",
+      "elapsedMs": 15730.9456,
+      "memory": {
+        "rss": 526553088,
+        "heapTotal": 264204288,
+        "heapUsed": 124590952,
+        "external": 187201981,
+        "arrayBuffers": 167663251
+      },
+      "modelCount": 10,
+      "vertices": 1119939,
+      "uniqueTextureObjects": 19,
+      "uniqueImages": 19,
+      "geometryBytes": 88881890,
+      "estimatedDecodedRgbaBytes": 196083712,
+      "note": "Headless preparation with image dimensions only; no measured GPU allocation."
+    },
+    {
+      "label": "resident-11",
+      "elapsedMs": 16420.2596,
+      "memory": {
+        "rss": 532434944,
+        "heapTotal": 264466432,
+        "heapUsed": 125180208,
+        "external": 203332441,
+        "arrayBuffers": 180744477
+      },
+      "modelCount": 11,
+      "vertices": 1293035,
+      "uniqueTextureObjects": 19,
+      "uniqueImages": 19,
+      "geometryBytes": 101946572,
+      "estimatedDecodedRgbaBytes": 196083712,
+      "note": "Headless preparation with image dimensions only; no measured GPU allocation."
+    },
+    {
+      "label": "resident-12",
+      "elapsedMs": 17061.084300000002,
+      "memory": {
+        "rss": 558080000,
+        "heapTotal": 266039296,
+        "heapUsed": 125710800,
+        "external": 216255051,
+        "arrayBuffers": 193667087
+      },
+      "modelCount": 12,
+      "vertices": 1463816,
+      "uniqueTextureObjects": 19,
+      "uniqueImages": 19,
+      "geometryBytes": 114852638,
+      "estimatedDecodedRgbaBytes": 196083712,
+      "note": "Headless preparation with image dimensions only; no measured GPU allocation."
+    },
+    {
+      "label": "resident-13",
+      "elapsedMs": 17966.0916,
+      "memory": {
+        "rss": 558219264,
+        "heapTotal": 265515008,
+        "heapUsed": 126297536,
+        "external": 215875121,
+        "arrayBuffers": 197731031
+      },
+      "modelCount": 13,
+      "vertices": 1505748,
+      "uniqueTextureObjects": 19,
+      "uniqueImages": 19,
+      "geometryBytes": 118900038,
+      "estimatedDecodedRgbaBytes": 196083712,
+      "note": "Headless preparation with image dimensions only; no measured GPU allocation."
+    },
+    {
+      "label": "resident-14",
+      "elapsedMs": 18688.4363,
+      "memory": {
+        "rss": 570130432,
+        "heapTotal": 269185024,
+        "heapUsed": 126748288,
+        "external": 233723633,
+        "arrayBuffers": 211135669
+      },
+      "modelCount": 14,
+      "vertices": 1683520,
+      "uniqueTextureObjects": 19,
+      "uniqueImages": 19,
+      "geometryBytes": 132288132,
+      "estimatedDecodedRgbaBytes": 196083712,
+      "note": "Headless preparation with image dimensions only; no measured GPU allocation."
+    },
+    {
+      "label": "resident-15",
+      "elapsedMs": 19789.077100000002,
+      "memory": {
+        "rss": 580517888,
+        "heapTotal": 268660736,
+        "heapUsed": 127257352,
+        "external": 231707615,
+        "arrayBuffers": 215701105
+      },
+      "modelCount": 15,
+      "vertices": 1733062,
+      "uniqueTextureObjects": 19,
+      "uniqueImages": 19,
+      "geometryBytes": 136837024,
+      "estimatedDecodedRgbaBytes": 196083712,
+      "note": "Headless preparation with image dimensions only; no measured GPU allocation."
+    },
+    {
+      "label": "resident-16",
+      "elapsedMs": 20167.8457,
+      "memory": {
+        "rss": 586555392,
+        "heapTotal": 266825728,
+        "heapUsed": 127679160,
+        "external": 239313663,
+        "arrayBuffers": 223110045
+      },
+      "modelCount": 16,
+      "vertices": 1821242,
+      "uniqueTextureObjects": 19,
+      "uniqueImages": 19,
+      "geometryBytes": 144229420,
+      "estimatedDecodedRgbaBytes": 196083712,
+      "note": "Headless preparation with image dimensions only; no measured GPU allocation."
+    },
+    {
+      "label": "resident-17",
+      "elapsedMs": 20930.7431,
+      "memory": {
+        "rss": 591372288,
+        "heapTotal": 267087872,
+        "heapUsed": 128239608,
+        "external": 246369899,
+        "arrayBuffers": 227173989
+      },
+      "modelCount": 17,
+      "vertices": 1863174,
+      "uniqueTextureObjects": 19,
+      "uniqueImages": 19,
+      "geometryBytes": 148276820,
+      "estimatedDecodedRgbaBytes": 196083712,
+      "note": "Headless preparation with image dimensions only; no measured GPU allocation."
+    },
+    {
+      "label": "resident-18",
+      "elapsedMs": 21531.7984,
+      "memory": {
+        "rss": 609296384,
+        "heapTotal": 269971456,
+        "heapUsed": 128744480,
+        "external": 263171931,
+        "arrayBuffers": 240583967
+      },
+      "modelCount": 18,
+      "vertices": 2041054,
+      "uniqueTextureObjects": 19,
+      "uniqueImages": 19,
+      "geometryBytes": 161670254,
+      "estimatedDecodedRgbaBytes": 196083712,
+      "note": "Headless preparation with image dimensions only; no measured GPU allocation."
+    },
+    {
+      "label": "resident-19",
+      "elapsedMs": 22067.892200000002,
+      "memory": {
+        "rss": 621256704,
+        "heapTotal": 267612160,
+        "heapUsed": 129176152,
+        "external": 275289805,
+        "arrayBuffers": 252636305
+      },
+      "modelCount": 19,
+      "vertices": 2197731,
+      "uniqueTextureObjects": 19,
+      "uniqueImages": 19,
+      "geometryBytes": 173706048,
+      "estimatedDecodedRgbaBytes": 196083712,
+      "note": "Headless preparation with image dimensions only; no measured GPU allocation."
+    },
+    {
+      "label": "resident-20",
+      "elapsedMs": 22825.8679,
+      "memory": {
+        "rss": 625606656,
+        "heapTotal": 268922880,
+        "heapUsed": 129785360,
+        "external": 274854671,
+        "arrayBuffers": 256710581
+      },
+      "modelCount": 20,
+      "vertices": 2239878,
+      "uniqueTextureObjects": 19,
+      "uniqueImages": 19,
+      "geometryBytes": 177763780,
+      "estimatedDecodedRgbaBytes": 196083712,
+      "note": "Headless preparation with image dimensions only; no measured GPU allocation."
+    },
+    {
+      "label": "disposed-instances",
+      "elapsedMs": 22867.1338,
+      "memory": {
+        "rss": 624021504,
+        "heapTotal": 268136448,
+        "heapUsed": 120519424,
+        "external": 269987547,
+        "arrayBuffers": 255888233
+      },
+      "modelCount": 0,
+      "vertices": 0,
+      "uniqueTextureObjects": 0,
+      "uniqueImages": 0,
+      "geometryBytes": 0,
+      "estimatedDecodedRgbaBytes": 0,
+      "note": "Headless preparation with image dimensions only; no measured GPU allocation."
+    }
+  ],
+  "requests": [
+    {
+      "path": "/game-assets/human/Human_LOD2.glb",
+      "bytes": 6118512
+    },
+    {
+      "path": "/game-assets/human/Human_ExtraAnimations.glb",
+      "bytes": 1022008
+    },
+    {
+      "path": "/character-lab/modules/manual-long-hair/long-2.glb",
+      "bytes": 358692
+    },
+    {
+      "path": "/character-lab/modules/occupation-hats/hunter.binding.json",
+      "bytes": 8413
+    },
+    {
+      "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.binding.json",
+      "bytes": 4518
+    },
+    {
+      "path": "/character-lab/candidates/meshy-additional-005/low-shoes.binding.json",
+      "bytes": 3251
+    },
+    {
+      "path": "/character-lab/modules/occupation-tools/hunter.binding.json",
+      "bytes": 5934
+    },
+    {
+      "path": "/character-lab/modules/occupation-hats/hunter.glb",
+      "bytes": 630828
+    },
+    {
+      "path": "/character-lab/modules/occupation-tools/hunter.glb",
+      "bytes": 864092
+    },
+    {
+      "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.glb",
+      "bytes": 3848864
+    },
+    {
+      "path": "/character-lab/modules/manual-long-hair/long-2.binding.json",
+      "bytes": 5508145
+    },
+    {
+      "path": "/character-lab/candidates/meshy-additional-005/low-shoes.glb",
+      "bytes": 5108840
+    },
+    {
+      "path": "/character-lab/modules/manual-hair/short.glb",
+      "bytes": 255620
+    },
+    {
+      "path": "/character-lab/modules/manual-hair/short.binding.json",
+      "bytes": 3619922
+    },
+    {
+      "path": "/character-lab/modules/female-hair/knotted-braid.glb",
+      "bytes": 143104
+    },
+    {
+      "path": "/character-lab/modules/occupation-hats/fisher.glb",
+      "bytes": 521536
+    },
+    {
+      "path": "/character-lab/modules/occupation-hats/fisher.binding.json",
+      "bytes": 8467
+    },
+    {
+      "path": "/character-lab/candidates/meshy-fisherman-009/shoe.binding.json",
+      "bytes": 3230
+    },
+    {
+      "path": "/character-lab/candidates/meshy-fisherman-009/trousers.binding.json",
+      "bytes": 3201
+    },
+    {
+      "path": "/character-lab/candidates/meshy-fisherman-009/tunic.binding.json",
+      "bytes": 4527
+    },
+    {
+      "path": "/character-lab/modules/occupation-tools/fisher.binding.json",
+      "bytes": 5316
+    },
+    {
+      "path": "/character-lab/modules/occupation-tools/fisher.glb",
+      "bytes": 861196
+    },
+    {
+      "path": "/character-lab/candidates/meshy-fisherman-009/tunic.glb",
+      "bytes": 1448060
+    },
+    {
+      "path": "/character-lab/candidates/meshy-fisherman-009/shoe.glb",
+      "bytes": 1355244
+    },
+    {
+      "path": "/character-lab/modules/female-hair/knotted-braid.binding.json",
+      "bytes": 1854404
+    },
+    {
+      "path": "/character-lab/candidates/meshy-fisherman-009/trousers.glb",
+      "bytes": 1867980
+    },
+    {
+      "path": "/character-lab/modules/manual-hair/short2.glb",
+      "bytes": 347196
+    },
+    {
+      "path": "/character-lab/modules/manual-beards/normal.glb",
+      "bytes": 223876
+    },
+    {
+      "path": "/character-lab/modules/manual-beards/normal.binding.json",
+      "bytes": 3131369
+    },
+    {
+      "path": "/character-lab/modules/manual-hair/short2.binding.json",
+      "bytes": 4702561
+    },
+    {
+      "path": "/character-lab/modules/manual-beards/pointed.glb",
+      "bytes": 207520
+    },
+    {
+      "path": "/character-lab/modules/manual-beards/pointed.binding.json",
+      "bytes": 2904604
+    },
+    {
+      "path": "/character-lab/modules/occupation-hats/farmer.binding.json",
+      "bytes": 8438
+    },
+    {
+      "path": "/character-lab/candidates/meshy-additional-005/long-skirt.binding.json",
+      "bytes": 3219
+    },
+    {
+      "path": "/character-lab/modules/occupation-tools/farmer.binding.json",
+      "bytes": 5316
+    },
+    {
+      "path": "/character-lab/modules/occupation-hats/farmer.glb",
+      "bytes": 607644
+    },
+    {
+      "path": "/character-lab/modules/occupation-tools/farmer.glb",
+      "bytes": 740996
+    },
+    {
+      "path": "/character-lab/candidates/meshy-additional-005/long-skirt.glb",
+      "bytes": 2569216
+    },
+    {
+      "path": "/character-lab/modules/manual-beards/double.glb",
+      "bytes": 226624
+    },
+    {
+      "path": "/character-lab/modules/manual-beards/double.binding.json",
+      "bytes": 3070706
+    },
+    {
+      "path": "/character-lab/modules/female-hair/mid-hair-knotted.glb",
+      "bytes": 148284
+    },
+    {
+      "path": "/character-lab/modules/female-hair/mid-hair-knotted.binding.json",
+      "bytes": 2075264
+    }
+  ]
+}

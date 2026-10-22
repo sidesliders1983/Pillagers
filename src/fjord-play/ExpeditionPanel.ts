@@ -21,7 +21,9 @@ const escape = (value: string) => value.replace(/[&<>"']/g,
     char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]!));
 const button = (label: string, glyph: FjordIcon, attrs = '') =>
     `<button type="button" ${attrs}>${icon(glyph)}<span>${label}</span></button>`;
-const phase = (mission?: Mission) => ({ Prepared: 'Ready to depart', Traveling: 'Travelling',
+const phase = (mission?: Mission) => mission?.transport?.phase === 'boarding' ? 'Boarding longship' :
+    mission?.transport?.phase === 'embarked' ? (mission.status === 'Traveling' ? 'Sailing' :
+        mission.status === 'Returning' ? 'Sailing home' : 'Aboard longship') : ({ Prepared: 'Ready to depart', Traveling: 'Travelling',
     Exploring: 'Exploring', Returning: 'Returning home', Returned: 'Home again',
     Stranded: 'Stranded' })[mission?.status ?? 'Returned'];
 
@@ -125,6 +127,28 @@ export class ExpeditionPanel {
         const origins = mission?.status === 'Prepared' ? this.origins(members) : undefined;
         return { offer: this.session.exploreOffer(this.groupId, point, origins), origins };
     }
+    get sailing() { return this.activeMission()?.transport?.phase === 'embarked'; }
+    private shipOffer(shipId: string) {
+        const mission = this.activeMission();
+        const origins = mission?.status === 'Prepared' ? this.origins(mission.memberIds) : undefined;
+        return { offer: this.session.boardLongshipOffer(this.groupId, shipId, origins), origins };
+    }
+    previewShip(shipId: string, point: Point2) {
+        if (!this.choosing) return;
+        try { this.shipOffer(shipId); this.showTarget(point, true); }
+        catch { this.showTarget(point, false); }
+    }
+    chooseShip(shipId: string) {
+        if (!this.choosing) return false;
+        try {
+            const { origins } = this.shipOffer(shipId);
+            this.command({ type: 'BoardLongship', groupId: this.groupId, shipId, origins });
+        } catch (error) {
+            this.hiddenGroups.delete(this.groupId);
+            this.notify(error instanceof Error ? error.message : String(error));
+        }
+        return true;
+    }
     /** Read-only, using the same route authority as confirmation; never dispatches a command. */
     previewTarget(point?: Point2) {
         if (!this.choosing) return;
@@ -205,6 +229,8 @@ export class ExpeditionPanel {
         }
         if (target.dataset.explore) this.beginTargeting(target.dataset.explore);
         if (target.dataset.recall) this.command({ type: 'RecallExpedition', groupId: target.dataset.recall });
+        if (target.dataset.disembark) this.command({ type: 'DisembarkLongship', groupId: target.dataset.disembark });
+        if (target.dataset.loadShipFood) this.command({ type: 'LoadLongshipFood', groupId: target.dataset.loadShipFood });
         if (target.dataset.cancelExpedition)
             this.command({ type: 'CancelExpedition', groupId: target.dataset.cancelExpedition });
         if (target.id === 'expedition-cancel') this.cancelTarget();
@@ -252,7 +278,13 @@ export class ExpeditionPanel {
         if (command.type === 'CreateExplorationGroup') this.groupId = Object.keys(state.world!.groups).at(-1)!;
         if ('groupId' in command) this.groupId = command.groupId;
         if (command.type === 'StartExpedition') { this.beginTargeting(command.groupId); return; }
-        if (['ExploreArea', 'RecallExpedition', 'CancelExpedition'].includes(command.type)) this.clearTarget();
+        if (['ExploreArea', 'RecallExpedition', 'CancelExpedition', 'BoardLongship', 'DisembarkLongship'].includes(command.type)) this.clearTarget();
+        if (command.type === 'BoardLongship') {
+            this.hiddenGroups.add(command.groupId);
+            this.message = 'Walking to the longship. The same expedition and supplies continue aboard.';
+        }
+        if (command.type === 'DisembarkLongship') this.message = 'Disembarked on safe shore. The longship remains here.';
+        if (command.type === 'LoadLongshipFood') this.message = 'Food loaded from clan stocks.';
         if (command.type === 'ExploreArea') {
             this.hiddenGroups.add(command.groupId);
             this.message = 'Destination set. No extra Food was charged.';
@@ -314,8 +346,8 @@ export class ExpeditionPanel {
         if (mission.missionType) return `<p class="fjord-caption">${escape(mission.missionType)} · ${mission.foodCost} Food paid. Travel and return are included in the mission duration.</p>`;
         if (!mission.supplies) return '<p class="fjord-caption">Return home to prepare a new expedition with carried supplies.</p>';
         const remaining = mission.supplies.explorationTicksRemaining;
-        const total = mission.supplies.foodPerMember * mission.supplies.ticksPerFood;
-        const percentage = Math.round(remaining / total * 100);
+        const total = mission.supplies.capacityPerMember * mission.supplies.ticksPerFood;
+        const percentage = Math.min(100, Math.round(remaining / total * 100));
         const seconds = Math.round(remaining * this.session.effectiveMinutesPerWinter * 60 /
             this.session.readSnapshot().ticksPerWinter);
         return `<div class="fjord-expedition-supplies ${percentage <= 25 ? 'is-low' : ''}">
@@ -331,7 +363,19 @@ export class ExpeditionPanel {
         const stranded = mission.status === 'Stranded';
         if (mission.missionType) return button(mission.status === 'Returning' ? 'Returning home' : 'Return home', 'home',
             `data-recall="${escape(mission.groupId)}" ${stranded || mission.status === 'Returning' ? 'disabled' : ''}`);
-        return button(mission.status === 'Prepared' ? 'Choose destination' : 'Change destination', 'destination',
+        let transportActions = '';
+        if (mission.transport?.phase === 'embarked') {
+            try {
+                this.session.disembarkLongshipOffer(mission.groupId);
+                transportActions += button('Disembark', 'people', `data-disembark="${escape(mission.groupId)}"`);
+            } catch { /* Only expose the contextual action beside a safe coast. */ }
+            try {
+                const offer = this.session.longshipFoodOffer(mission.groupId);
+                if (offer.foodCost) transportActions += button(`Load ${offer.foodCost} Food`, 'food',
+                    `data-load-ship-food="${escape(mission.groupId)}"`);
+            } catch { /* Clan stocks are accessible only at the founding coast. */ }
+        }
+        return transportActions + button(mission.status === 'Prepared' ? 'Choose destination' : 'Change destination', 'destination',
             `data-explore="${escape(mission.groupId)}" class="fjord-primary" ${stranded || !mission.supplies ? 'disabled' : ''}`) +
             (mission.status === 'Prepared' ? button('End expedition', 'close', `data-cancel-expedition="${escape(mission.groupId)}"`) :
                 button(mission.status === 'Returning' ? 'Returning home' : 'Return home', 'home',
@@ -373,6 +417,8 @@ export class ExpeditionPanel {
         </div>`;
     }
     private missionDescription(mission: Mission) {
+        if (mission.transport?.phase === 'boarding') return 'Walking to shore. The group boards together when everyone arrives.';
+        if (mission.transport?.phase === 'embarked') return 'Longship · 2× speed · 2× Food and cargo capacity. Choose water to sail; disembark near safe shore.';
         if (mission.missionType) return mission.status === 'Exploring' ? `${mission.missionType} in progress. Results are reported after returning home.` :
             mission.status === 'Traveling' ? `Travelling for ${mission.missionType}. Return home to change missions.` :
             mission.status === 'Returning' ? 'The group is returning home with its report.' :
@@ -490,7 +536,8 @@ export class ExpeditionPanel {
             return;
         }
         const instruction = this.choosing ?
-            'Click walkable land to travel there. Drag to pan · scroll to zoom · Esc to cancel.' : this.missionDescription(mission);
+            (mission.transport?.phase === 'embarked' ? 'Choose water to sail. Esc to cancel.' :
+                'Choose walkable land or the longship. Drag to pan · scroll to zoom · Esc to cancel.') : this.missionDescription(mission);
         const controls = this.choosing ?
             button('Cancel', 'close', 'id="expedition-cancel"') :
             this.actions(mission) + (mission.status !== 'Prepared' && mission.status !== 'Stranded' ?
@@ -513,7 +560,8 @@ export class ExpeditionPanel {
         const controls = this.choosing ?
             button('Cancel', 'close', 'id="expedition-cancel"') : this.actions(mission);
         const instruction = this.choosing ?
-            'Tap walkable land to travel there. Drag to orbit · pinch to zoom.' :
+            (mission.transport?.phase === 'embarked' ? 'Tap water to sail. Pinch to zoom.' :
+                'Tap walkable land or the longship. Drag to orbit · pinch to zoom.') :
             mission.status === 'Prepared' ? 'Your pack is ready. Choose where to explore.' :
             mission.status === 'Stranded' || mission.returnReason === 'low-supplies' ? this.missionDescription(mission) :
             this.session.running ? this.missionDescription(mission) : 'Clock paused. Resume using Play in the status strip.';

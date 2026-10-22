@@ -13,7 +13,7 @@ import { homeImprovements, previewHomeSpecialization, homeLevel } from './HomeIm
 import './fjord-interface.css';
 import './mobile-horizon.css';
 import { isMobileLayout } from './MobileShell';
-import { CharacterPortraits } from '../characters/CharacterPortraits';
+import { CharacterPortraits, type PortraitRequest } from '../characters/CharacterPortraits';
 import { projectResidentAppearance } from '../characters/ResidentAppearance';
 import { fjordWardrobePresentation } from './FjordWardrobe';
 import { presentationProfiles } from '../config/PresentationQuality';
@@ -27,6 +27,7 @@ const meter = (label: string, value: number) => `<div class="fjord-meter"><div><
     <strong>${Math.round(value * 100)}%</strong></div><meter min="0" max="1" value="${value}">${Math.round(value * 100)}%</meter></div>`;
 
 interface InterfaceHooks {
+    renderPortrait?: (input: PortraitRequest) => Promise<string | undefined>;
     home?: () => void;
     select: (kind: string, id: string) => void;
     refresh: () => void;
@@ -53,7 +54,7 @@ export class FjordInterface {
     private panelEpoch = -1;
     private panelWorld?: SharedSettlement['fjord']['blueprint'];
     private panelEditable = true;
-    private portraits = new CharacterPortraits();
+    private portraits: CharacterPortraits;
     private portraitAbort?: AbortController;
     private portraitKey = '';
     private portraitImage?: string;
@@ -62,6 +63,7 @@ export class FjordInterface {
     private workspace = document.querySelector<HTMLElement>('#fjord-workspace')!;
 
     constructor(private owner: SharedSettlement, private hooks: InterfaceHooks) {
+        this.portraits = new CharacterPortraits(hooks.renderPortrait);
         document.addEventListener('fjord-layout-change', () => this.hooks.refresh(),
             { signal: this.abort.signal });
         for (const region of [this.panel, this.workspace]) {
@@ -219,7 +221,7 @@ export class FjordInterface {
                 const yard = house && state.landing ? landingSummary(state).farmyards.find(y => y.id === buildingId) : null;
                 html = this.heading(house ? 'Home' : home ? 'Tent' : 'Building',
                     `${buildingId ?? selection.id} · ` + (house ? 'Permanent home' + (yard ? ' · Active farmyard' : '') : home ? 'Household in a tent' : 'Vacant building'), house ? 'home' : 'tent') +
-                    `<div class="fjord-card-body">${home ? `<details class="fjord-home-residents" data-view-key="home-residents:${esc(home.id)}"><summary><span title="${esc(housingName(state, 'household', home.id))}">${esc(housingName(state, 'household', home.id))}</span><small>Residents · ${home.memberIds.length}</small></summary>${home.memberIds.map(id => `<div class="fjord-member">${this.link('persona', id, state.personas[id].name)}<small>${esc(occupationLabel(state.personas[id].occupation))}</small></div>`).join('')}</details>` : '<p class="fjord-caption">Vacant home</p>'}
+                    `<div class="fjord-card-body">${home ? `<section class="fjord-home-residents" aria-label="Residents" data-view-key="home-residents:${esc(home.id)}"><div class="fjord-home-residents-heading"><span title="${esc(housingName(state, 'household', home.id))}">${esc(housingName(state, 'household', home.id))}</span><small>Residents · ${home.memberIds.length}</small></div>${home.memberIds.map(id => `<div class="fjord-member">${this.link('persona', id, state.personas[id].name)}<small>${esc(occupationLabel(state.personas[id].occupation))}</small></div>`).join('')}</section>` : '<p class="fjord-caption">Vacant home</p>'}
                     ${house && (!isMobileLayout() || this.expanded) ? this.improvements(state, buildingId!) : ''}
                     ${house && isMobileLayout() && !this.expanded ? `<p>${esc(state.buildings[buildingId!].specialization ? workLabel(state.buildings[buildingId!].specialization!) : 'Unspecialized')} · Level ${homeLevel(homeImprovements(state, buildingId!).upgradeLevel)}</p>` : ''}
                     ${yard ? `<p>${yard.occupants} livestock · space ${yard.occupancy}/${yard.capacity} · overcrowding ${yard.overcrowding}</p>` : ''}
@@ -274,7 +276,7 @@ export class FjordInterface {
             const appearance = projectResidentAppearance(state, selection.id);
             if (!appearance) return;
             const person = state.personas[selection.id] ?? state.personaArchive![selection.id];
-            const input = { ...appearance, presentation: fjordWardrobePresentation({ kind: 'persona',
+            const input = { residentId: selection.id, ...appearance, presentation: fjordWardrobePresentation({ kind: 'persona',
                 dna: appearance.dna, status: { living: person.deathWinter === null, occupation: person.occupation } }),
                 pixelRatio: presentationProfiles[this.owner.presentation?.quality ?? 'low'].maximumPixelRatio };
             const key = selection.id + JSON.stringify(input);

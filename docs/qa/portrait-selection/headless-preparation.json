@@ -1,0 +1,197 @@
+{
+  "base": "5f260f1f45ba6794ef599e0eb00d27041059d1be",
+  "hashes": {
+    "src/characters/ResidentPortraitStudio.ts": "49a3f490268e979b7216feb28d7bbe5600bd015db9bef5fdf5e8ec8a67e4b12c",
+    "src/characters/CharacterPortraits.ts": "3cb88de227abc9f76e119c9bad3470abd48ea506a990266e5ba4b721427f8727",
+    "src/fjord-play/FjordModels.ts": "5fd15d98aa1da05a4a9da8b595adab391925a80b9d4fcae8a2c6957051f42260",
+    "src/fjord-play/FjordEntities.ts": "0315811e5befb1e81628373186ca38cc334ed83ad91556b0d53cb268d387f38b",
+    "src/fjord-play/FjordInterface.ts": "50f12f6c7d140596bdd5d97f5d3bcfb1b7060282a979a826c538f12b2a4abc42",
+    "src/fjord-play/FjordScene.ts": "1f2d04079e39202223425745440eb9f603550dfa8a576eb94dab4186e0b9dd45",
+    "scripts/qa/measure-portrait-selection.mjs": "54970ebc35d0c1cdc6b4a914808d0b7700fd7b712fc765018c673abb5ddb5b05"
+  },
+  "seed": 32,
+  "rows": [
+    {
+      "route": "borrowed-world-model",
+      "id": "founder-1",
+      "preparationMs": 3.472899999999754,
+      "extraAssetRequests": 0
+    },
+    {
+      "route": "borrowed-world-model",
+      "id": "founder-3",
+      "preparationMs": 0.24729999999999563,
+      "extraAssetRequests": 0
+    },
+    {
+      "route": "borrowed-world-model",
+      "id": "founder-6",
+      "preparationMs": 0.16769999999996799,
+      "extraAssetRequests": 0
+    },
+    {
+      "route": "borrowed-world-model",
+      "id": "founder-1",
+      "preparationMs": 0.15520000000014988,
+      "extraAssetRequests": 0
+    },
+    {
+      "route": "borrowed-world-model",
+      "id": "founder-3",
+      "preparationMs": 0.17039999999997235,
+      "extraAssetRequests": 0
+    },
+    {
+      "route": "borrowed-world-model",
+      "id": "founder-6",
+      "preparationMs": 0.21410000000014406,
+      "extraAssetRequests": 0
+    },
+    {
+      "route": "legacy-LOD0-preparation",
+      "id": "founder-1",
+      "preparationMs": 1420.4589999999998,
+      "extraAssetRequests": 1
+    },
+    {
+      "route": "legacy-LOD0-preparation",
+      "id": "founder-3",
+      "preparationMs": 1767.2871999999988,
+      "extraAssetRequests": 0
+    },
+    {
+      "route": "legacy-LOD0-preparation",
+      "id": "founder-6",
+      "preparationMs": 630.5288,
+      "extraAssetRequests": 0
+    }
+  ],
+  "reusedTargetCount": 2,
+  "requests": [
+    {
+      "path": "/game-assets/human/Human_LOD2.glb",
+      "bytes": 6118512
+    },
+    {
+      "path": "/game-assets/human/Human_ExtraAnimations.glb",
+      "bytes": 1022008
+    },
+    {
+      "path": "/character-lab/modules/occupation-hats/hunter.binding.json",
+      "bytes": 8413
+    },
+    {
+      "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.binding.json",
+      "bytes": 4518
+    },
+    {
+      "path": "/character-lab/modules/manual-long-hair/long-2.glb",
+      "bytes": 358692
+    },
+    {
+      "path": "/character-lab/candidates/meshy-additional-005/low-shoes.binding.json",
+      "bytes": 3251
+    },
+    {
+      "path": "/character-lab/modules/occupation-tools/hunter.binding.json",
+      "bytes": 5934
+    },
+    {
+      "path": "/character-lab/modules/occupation-hats/hunter.glb",
+      "bytes": 630828
+    },
+    {
+      "path": "/character-lab/modules/occupation-tools/hunter.glb",
+      "bytes": 864092
+    },
+    {
+      "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.glb",
+      "bytes": 3848864
+    },
+    {
+      "path": "/character-lab/candidates/meshy-additional-005/low-shoes.glb",
+      "bytes": 5108840
+    },
+    {
+      "path": "/character-lab/modules/manual-long-hair/long-2.binding.json",
+      "bytes": 5508145
+    },
+    {
+      "path": "/character-lab/modules/female-hair/knotted-braid.glb",
+      "bytes": 143104
+    },
+    {
+      "path": "/character-lab/modules/occupation-hats/fisher.binding.json",
+      "bytes": 8467
+    },
+    {
+      "path": "/character-lab/candidates/meshy-fisherman-009/shoe.binding.json",
+      "bytes": 3230
+    },
+    {
+      "path": "/character-lab/modules/occupation-hats/fisher.glb",
+      "bytes": 521536
+    },
+    {
+      "path": "/character-lab/candidates/meshy-fisherman-009/trousers.binding.json",
+      "bytes": 3201
+    },
+    {
+      "path": "/character-lab/candidates/meshy-fisherman-009/tunic.binding.json",
+      "bytes": 4527
+    },
+    {
+      "path": "/character-lab/modules/occupation-tools/fisher.binding.json",
+      "bytes": 5316
+    },
+    {
+      "path": "/character-lab/modules/occupation-tools/fisher.glb",
+      "bytes": 861196
+    },
+    {
+      "path": "/character-lab/candidates/meshy-fisherman-009/shoe.glb",
+      "bytes": 1355244
+    },
+    {
+      "path": "/character-lab/modules/female-hair/knotted-braid.binding.json",
+      "bytes": 1854404
+    },
+    {
+      "path": "/character-lab/candidates/meshy-fisherman-009/tunic.glb",
+      "bytes": 1448060
+    },
+    {
+      "path": "/character-lab/candidates/meshy-fisherman-009/trousers.glb",
+      "bytes": 1867980
+    },
+    {
+      "path": "/character-lab/modules/occupation-hats/farmer.binding.json",
+      "bytes": 8438
+    },
+    {
+      "path": "/character-lab/candidates/meshy-additional-005/long-skirt.binding.json",
+      "bytes": 3219
+    },
+    {
+      "path": "/character-lab/modules/occupation-tools/farmer.binding.json",
+      "bytes": 5316
+    },
+    {
+      "path": "/character-lab/modules/occupation-hats/farmer.glb",
+      "bytes": 607644
+    },
+    {
+      "path": "/character-lab/modules/occupation-tools/farmer.glb",
+      "bytes": 740996
+    },
+    {
+      "path": "/character-lab/candidates/meshy-additional-005/long-skirt.glb",
+      "bytes": 2569216
+    },
+    {
+      "path": "/game-assets/human/Human_LOD0.glb",
+      "bytes": 6167788
+    }
+  ],
+  "limitation": "Headless CPU preparation with stub GPU and PNG boundaries; not iPhone, browser or GPU timings."
+}

@@ -41,3 +41,7 @@ Recon may reveal estimates such as population, defenses, resource abundance, liv
 For new physical island campaigns, [Spatial Recon, Surveillance and Pillage v0.4D](../../ISLAND-MISSIONS-V04D.md) is the implemented adapter to the existing rules. Missions depart from home with the existing weather-adjusted 2/4/5 Food per member and 250/400/500-tick durations. Every member travels a real land route; the round trip must fit the duration or departure is rejected. These are separate missions, not upgrades of a paid Explore expedition.
 
 Walking can mark an unidentified settlement. A returned successful Recon must identify the CPU clan before Surveillance is allowed; Pillage needs a dated viable opportunity. Operation-time observations become public at homecoming and never update from unseen remote changes. Actual recovery and identity transfers reuse the existing capacity and target state. `/fjord-play` is the player UI; the four-region graph remains for older saves.
+
+## Expedition transport (#248)
+
+[Longship transport v0.1](../../LONGSHIP-TRANSPORT-V01.md) lets an existing Explore group embark, sail and disembark from the persistent founding ship. Sailing speed, Food loading capacity and ship cargo recovery budget are 2× the corresponding foot values. Extra Food is purchased at the founding coast. Water routes, same-island safe landings, the soft sea boundary and full-group discovery/witness identity remain Core authority. It adds no new inventory, multi-island travel or naval combat.

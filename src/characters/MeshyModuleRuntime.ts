@@ -13,6 +13,7 @@ import {sewModuleOpenings, weldModuleOpeningCorners} from './ModuleRims';
 import {CharacterAsset, assetMeasurement} from './CharacterAssets';
 import {HumanProfile} from './UniversalHumanProfile';
 import {validatePreparedOutfit, preparedCoverage, preparedCoverageMaterial, preparedModuleCoverage, preparedNeckMaterial} from './PreparedNativeOutfit';
+import { characterSync, type CharacterPreparationObserver } from './CharacterPreparation';
 
 export interface NativeModuleSource {asset: CharacterAsset; source: GLTF; binding: ModuleBindingV2;}
 interface ModulePart {original: Mesh; mesh: Mesh; start: number; count: number;}
@@ -204,10 +205,12 @@ export class MeshyModuleRuntime {
  fitRuns = 0;
  lastFitMilliseconds = 0;
 
- constructor(readonly fit: MeshyBodyFitAdapter) {}
+ constructor(readonly fit: MeshyBodyFitAdapter, private observe?: CharacterPreparationObserver) {}
 
  install(sources: NativeModuleSource[], profile: HumanProfile) {
-  for (const source of sources) validateNativeModule(source, this.fit);
+  characterSync(this.observe, 'module-binding-validation', () => {
+   for (const source of sources) validateNativeModule(source, this.fit);
+  });
   fail(new Set(sources.map(source => source.asset.id)).size === sources.length,
    'Native module IDs must be unique');
   this.clear();
@@ -418,14 +421,16 @@ export class MeshyModuleRuntime {
   const inverseEncoding = this.fit.encoding.clone().invert();
   for (const record of this.records.values()) {
    if (!record.source.binding.dependency) {
-    for (const part of record.parts) this.fitPart(record, part, inverseEncoding, profile);
+    for (const part of record.parts) characterSync(this.observe, 'module-part-fit', () =>
+     this.fitPart(record, part, inverseEncoding, profile), record.source.asset.id);
    }
   }
   if (this.fit.facialIdentity && this.fit.mesh.morphTargetInfluences?.some(weight => weight !== 0)) {
    for (const record of this.records.values()) {
     if (!['hair', 'beard', 'headwear'].includes(record.source.asset.type)) continue;
     for (const part of record.parts)
-     fitNativeFacialModule(part.mesh as SkinnedMesh, this.fit, this.fit.facialIdentity);
+     characterSync(this.observe, 'hair-beard-face-fit', () =>
+      fitNativeFacialModule(part.mesh as SkinnedMesh, this.fit, this.fit.facialIdentity!), record.source.asset.id);
    }
   }
   this.fit.rootForModulesUpdate();
@@ -435,14 +440,17 @@ export class MeshyModuleRuntime {
    .filter(part => record.source.binding.rigidEquipment?.parts.some(binding =>
     binding.mesh === part.mesh.name && binding.socket === 'socket_back'))
    .map(part => part.mesh as SkinnedMesh));
-  for (const record of this.records.values()) record.hairRig?.configureClearance([...garments, ...backEquipment]);
+  characterSync(this.observe, 'hair-garment-clearance', () => {
+   for (const record of this.records.values()) record.hairRig?.configureClearance([...garments, ...backEquipment]);
+  });
   this.poseHair();
   this.fit.rootForModulesUpdate();
   const hair = [...this.records.values()].filter(record => record.source.asset.type === 'hair')
    .flatMap(record => record.parts.map(part => part.mesh).filter((mesh): mesh is SkinnedMesh => (mesh as SkinnedMesh).isSkinnedMesh));
   for (const record of this.records.values()) {
    if (record.source.binding.headwearFit) for (const part of record.parts) {
-    fitNativeHeadwear(part.mesh as SkinnedMesh, record.source.binding.headwearFit, hair, this.fit);
+    characterSync(this.observe, 'hat-fit', () =>
+     fitNativeHeadwear(part.mesh as SkinnedMesh, record.source.binding.headwearFit!, hair, this.fit), record.source.asset.id);
    }
   }
   for (const [id, record] of [...this.records]) {
@@ -458,7 +466,8 @@ export class MeshyModuleRuntime {
     && record.source.binding.precomputedNative!.version === 3)),
    'Prepared full outfits may combine only with explicitly separate footwear');
   if (prepared.length && !full.length) {
-   this.mask = preparedModuleCoverage([...this.records.values()].map(record => record.source), this.fit);
+   this.mask = characterSync(this.observe, 'body-coverage-preparation', () =>
+    preparedModuleCoverage([...this.records.values()].map(record => record.source), this.fit));
    this.fit.mesh.geometry = this.mask;
    const necks = prepared.flatMap(record => {
     const value = record.source.binding.precomputedNative!;
@@ -476,7 +485,8 @@ export class MeshyModuleRuntime {
    return;
   }
   if (prepared.length) {
-   this.mask = preparedCoverage(full[0].source, this.fit, footwear.map(record => record.source));
+   this.mask = characterSync(this.observe, 'body-coverage-preparation', () =>
+    preparedCoverage(full[0].source, this.fit, footwear.map(record => record.source)));
    this.fit.mesh.geometry = this.mask;
    this.originalBodyMaterial = this.fit.mesh.material;
    const originals = Array.isArray(this.originalBodyMaterial)

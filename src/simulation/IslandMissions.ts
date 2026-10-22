@@ -137,7 +137,8 @@ function observesSite(state: SimulationState, context: PhysicalExpeditionContext
         state.discovery!.policy.expeditionRadius) return false;
     const surface = createBlueprintSurface(context.world);
     return traceTerrainSightline(context.world,
-        { ...point, y: surface.surfaceHeightAt(point.x, point.z) + state.discovery!.policy.eyeHeight },
+        { ...point, y: Math.max(context.world.waterLevel, surface.surfaceHeightAt(point.x, point.z)) +
+            state.discovery!.policy.eyeHeight },
         { ...site.center, y: surface.surfaceHeightAt(site.center.x, site.center.z) + .05 }).visible;
 }
 

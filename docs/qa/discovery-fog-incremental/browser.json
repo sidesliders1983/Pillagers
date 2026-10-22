@@ -1,0 +1,23 @@
+{
+  "stats": {
+    "active": true,
+    "cellSize": 8,
+    "maskBuilds": 1,
+    "maskUpdates": 1,
+    "rasterizedCells": 10009,
+    "lastRasterizedCells": 9,
+    "exploredCells": 8971,
+    "visibleCells": 1,
+    "unknownCells": 1029,
+    "transitioning": false,
+    "fadingPixels": 0,
+    "fadeSeconds": 0.8,
+    "maskBytes": 2500,
+    "textureBytes": 646416,
+    "drawCalls": 1,
+    "triangles": 80008,
+    "nativeMaterial": true,
+    "geometryBytes": 1288388
+  },
+  "logs": []
+}
