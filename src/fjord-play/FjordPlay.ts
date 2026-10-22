@@ -77,6 +77,7 @@ export class FjordPlay {
         document.body.innerHTML = '<main class="fjord-bootstrap"><h1>Opening FjordSide…</h1><p role="status">Reading your campaign.</p></main>';
         this.loading = new IslandLoading(true, undefined, undefined, {
             backLabel: 'Back to start menu', mode: entry.kind === 'continue' ? 'resume' : entry.kind, seed: entry.seed,
+            diagnosticRun: entry.diagnosticRun,
         });
         await yieldForInput();
         this.loading.check();
@@ -240,12 +241,12 @@ export class FjordPlay {
         this.startupCleanup.push(disposeViewSwitch);
         let capturePresentation = () => {};
         const persist = () => {
-            if (this.loading || !this.persistenceReady) return;
+            if (entry.diagnosticRun || this.loading || !this.persistenceReady) return;
             capturePresentation();
             persistSettlement(this.shared, say);
         };
         const checkpointForResume = () => {
-            if (this.loading || !this.persistenceReady || this.shared.transferring) return;
+            if (entry.diagnosticRun || this.loading || !this.persistenceReady || this.shared.transferring) return;
             persist();
             try { localStorage.setItem(resumeCheckpointKey, this.shared.persist()); }
             catch { say('Resume checkpoint unavailable. Save or export before leaving this view.'); }
@@ -279,11 +280,11 @@ export class FjordPlay {
         this.startupCleanup.push(() => lifecycleEvents.abort());
         let sceneLoads = 1; // Initial assets and models must finish before active time can advance.
         const ownsClock = () => !document.hidden && !this.stopped && !this.shared.transferring && !pageSuspended && !contextLost;
-        const canAdvance = () => ownsClock() && sceneLoads === 0 && !this.loading;
+        const canAdvance = () => !entry.diagnosticRun && ownsClock() && sceneLoads === 0 && !this.loading;
         const setPlayback = (running: boolean) => {
             clockIntent++;
             previous = performance.now();
-            this.session.setRunning(running && ownsClock());
+            this.session.setRunning(running && !entry.diagnosticRun && ownsClock());
             const runButton = document.querySelector<HTMLButtonElement>('#fjord-run')!;
             runButton.innerHTML = icon(this.session.running ? 'pause' : 'play') + '<span>' + (this.session.running ? 'Running' : 'Paused') + '</span>';
             runButton.setAttribute('aria-label', this.session.running ? 'Pause simulation' : 'Start simulation');
@@ -945,6 +946,12 @@ export class FjordPlay {
         if (this.loading) {
             await finishArrival(this.loading);
             entry.signal.throwIfAborted();
+            if (entry.diagnosticRun) {
+                this.loading.diagnostics.diagnosticComplete();
+                this.disposeScene();
+                this.loading = undefined;
+                return;
+            }
             entry.activate(this.shared.persist());
             this.persistenceReady = true;
             this.foundingBook?.release();

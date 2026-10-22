@@ -1,7 +1,7 @@
 /** Presentation-only loading evidence. No campaign objects, renderer references or telemetry. */
 export type LoadMode = 'new' | 'restart' | 'resume';
 export type LoadStep = keyof typeof loadPlan;
-export type LoadOutcome = 'preparing' | 'failed' | 'cancelled' | 'playable';
+export type LoadOutcome = 'preparing' | 'failed' | 'cancelled' | 'playable' | 'diagnostic-complete';
 
 // Rounded from the existing cinematic-loading stage receipts, not a time-based animation.
 // Each envelope stays open until its owner seals all dependencies, including late model loads.
@@ -47,6 +47,7 @@ export class IslandLoadStatus {
     readonly attempt = `${Date.now().toString(36)}-${++sequence}`;
     readonly started: number;
     readonly timeline: LoadTiming[] = [];
+    observeTiming?: (timing: LoadTiming) => void;
     readonly metadata: {
         mode: LoadMode; seed?: number; recipe?: unknown; build: string;
         cache: 'browser-managed; cold/warm not inferred'; quality?: string;
@@ -95,11 +96,14 @@ export class IslandLoadStatus {
             this.timeline.push(timing);
             if (this.timeline.length > 128) this.active.delete(this.timeline.shift()!);
             this.active.add(timing);
+            this.observeTiming?.(timing);
         }
         return timing;
     }
     end(timing: LoadTiming, outcome: LoadTiming['outcome'] = 'complete') {
-        if (!this.active.delete(timing)) return;
+        // An opt-in run may retain a parent after the small UI timeline evicts it.
+        // Its eventual completion still belongs in the extended diagnostic record.
+        if (!this.active.delete(timing) && (!this.observeTiming || timing.outcome !== undefined)) return;
         timing.durationMs = this.now() - this.started - timing.startedMs;
         timing.outcome = outcome;
         if (outcome === 'complete') this.realProgress();
@@ -164,6 +168,12 @@ export class IslandLoadStatus {
         this.complete('handoff');
         this.playableMs = this.now() - this.started;
         this.outcome = 'playable';
+    }
+    diagnosticComplete() {
+        if (this.outcome !== 'preparing') return;
+        this.complete('handoff');
+        this.stoppedAt = this.now();
+        this.outcome = 'diagnostic-complete';
     }
     get percent() {
         let value = 0;

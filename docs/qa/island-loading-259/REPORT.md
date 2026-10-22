@@ -62,3 +62,20 @@ distinguishing supported fallback from required failure); hold compile; cancel; 
 Confirm previous valid saves/seed survive, recovery remains contextual, late GPU/model results are
 disposed by their existing owner, and failed attempts never report 100%. Process-kill final events
 and unsupported Safari memory/GPU APIs must remain explicitly unavailable.
+
+## Diagnostic-only run follow-up — 2026-10-22
+
+Added the opt-in `/fjord-play?diagnostics=load` entry and a start-menu diagnostics choice. The real
+preparation path stops before activation/playback/clock setup, disposes the scene and offers an
+automatic/local manual JSON download. The ordinary loading record remains capped at 128 entries;
+only diagnostic runs install extended resource/long-task observers and preparation/model records.
+
+24 focused Node/JSDOM tests passed with zero skips, including the ordinary entry/activation gates,
+save-preserving diagnostic success/failure/retry/export, bounded/redacted resource data, terminal
+outcomes, cancellation/disposal, source-yard reuse and native passenger reconciliation. Strict
+TypeScript, public asset validation and the Vite production build passed (the existing large
+Three.js chunk warning remains). Formatting was checked manually and with `git diff --check`;
+there is no configured formatter. These tests use real entry/loading/recorder controllers but simulate the open
+port/browser performance events; they do not run the full WebGL scene or measure an iPhone load.
+The browser-control inventory again returned no available apps/browsers. Physical auto-download,
+GPU cleanup and full real-device report acceptance remain pending on the LAN preview.

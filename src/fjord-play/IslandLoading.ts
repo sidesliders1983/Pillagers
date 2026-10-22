@@ -10,6 +10,7 @@ import type { RTSCameraController } from '../camera/RTSCameraController';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
 import './island-loading.css';
 import { IslandLoadStatus, loadPlan, type LoadMode, type LoadStep } from './IslandLoadStatus';
+import type { LoadingRunDiagnostics } from './LoadingRunDiagnostics';
 
 export const yieldForInput = () => new Promise<void>(resolve => setTimeout(resolve, 0));
 export function generationLabel(stage: string) {
@@ -50,9 +51,10 @@ export class IslandLoading {
     private measureContext?: MeasureContext;
     constructor(private canReturnToGame = false, book?: FoundingBookWindow, private resume?: SettlementRestoreMetadata,
         private options: { backLabel?: string; recipe?: IslandRecipe; founding?: SettlementRestoreMetadata;
-            mode?: LoadMode; seed?: number } = {}) {
+            mode?: LoadMode; seed?: number; diagnosticRun?: LoadingRunDiagnostics } = {}) {
         this.signal = this.abort.signal;
         this.diagnostics = new IslandLoadStatus(options.mode ?? (resume ? 'resume' : 'new'), options.seed ?? resume?.seed);
+        options.diagnosticRun?.attach(this.diagnostics);
         this.diagnostics.metadata.environment = { browser: window.navigator.userAgent.slice(0, 240),
             viewport: [window.innerWidth, window.innerHeight], pixelRatio: window.devicePixelRatio };
         this.root.id = 'island-loading';
@@ -90,6 +92,7 @@ export class IslandLoading {
                 calendar.season + ' ' + calendar.year + ' · campaign ' + resume.seed + '. The clock is paused.';
             this.root.querySelector('#island-loading-retry')!.textContent = 'Retry restoration';
         }
+        this.showDiagnosticMode();
         if (book) {
             this.root.classList.add('island-has-book');
             this.root.append(book.root);
@@ -174,12 +177,20 @@ export class IslandLoading {
                 `${calendar.season} ${calendar.year} · campaign ${resume.seed}. The clock is paused.`;
             this.root.setAttribute('aria-label', 'Returning to your settlement');
         }
+        this.showDiagnosticMode();
+    }
+    private showDiagnosticMode() {
+        if (!this.options.diagnosticRun) return;
+        this.root.setAttribute('aria-label', 'Loading diagnostics');
+        this.root.querySelector('.island-loading-eyebrow')!.textContent =
+            'FjordSide · loading diagnostics · game will not start';
     }
     complete(step: LoadStep) { this.diagnostics.complete(step); this.updateProgress(); }
     units(step: LoadStep, completed: number, total: number, kind: string, contributes = false) {
         if (this.signal.aborted || this.finished) return;
         this.diagnostics.count(step, completed, total, kind, contributes);
     }
+    get diagnosticRun() { return this.options.diagnosticRun; }
     private diagnosticsJSON() {
         this.diagnostics.metadata.screenRecording = this.root.querySelector<HTMLSelectElement>('[data-load-recording]')!.value as
             'not reported' | 'on' | 'off';
@@ -362,6 +373,7 @@ export class IslandLoading {
                 });
                 const previous = this.diagnostics;
                 this.diagnostics = new IslandLoadStatus(previous.metadata.mode, seed);
+                this.options.diagnosticRun?.attach(this.diagnostics);
                 this.diagnostics.metadata.environment = previous.metadata.environment;
                 this.diagnostics.metadata.screenRecording = previous.metadata.screenRecording;
                 for (const step of ['campaign', 'assets'] as const)

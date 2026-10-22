@@ -138,7 +138,7 @@ export class FjordEntities {
     }
     async sync(entities: readonly FjordEntity[], yieldControl?: () => Promise<void>, current = () => true,
         livestockDeaths: readonly { id: string }[] = [],
-        progress?: (completed: number, total: number) => void) {
+        progress?: (completed: number, total: number, entity?: FjordEntity, started?: number) => void) {
         if (this.disposed || !current()) return;
         const visible = entities.filter(e => e.transform !== null);
         let prepared = 0;
@@ -173,6 +173,7 @@ export class FjordEntities {
                 return;
             await yieldControl?.();
             if (this.disposed || !current()) return;
+            const started = progress ? performance.now() : 0;
             const signature = entity.asset + ':' + (entity.terrainAsset ?? '');
             let entry = this.entries.get(entity.selectionKey);
             if (!entry || entry.signature !== signature) {
@@ -236,7 +237,7 @@ export class FjordEntities {
                     .applyMatrix4(entry.model.matrixWorld.clone().invert());
                 entry.boundsSignature = boundsSignature;
             }
-            progress?.(++prepared, visible.length);
+            progress?.(++prepared, visible.length, entity, started);
         }
         // Four stable deck anchors, using the existing characters and their appearance resources.
         for (const { model } of this.entries.values()) {

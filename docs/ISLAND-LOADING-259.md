@@ -95,3 +95,37 @@ owned. No persistent cache, source/LOD change, new GPU resource or gameplay rule
 The loading title returns to its parent after a nested operation, and the redundant new-landing
 helper sentence has been removed. See the dated `settlement-preparation/REPORT.md` and comparison
 under this issue's QA directory for the CPU measurements, exact-output checks and device limits.
+
+## Diagnostic-only loading run
+
+Open `/fjord-play?diagnostics=load`, or choose **Run loading diagnostics** on the start menu.
+Choose **Test saved campaign**, **Test original arrival**, or **Test a new scenario**. The run uses
+the real loading path, including generation/restoration, assets, residents, texture uploads,
+shader compilation, initial draws and the normal arrival. It stops before campaign activation,
+playback or installation of the campaign clock. The scene and its owned resources are disposed;
+no active save or resume checkpoint is replaced. A new test scenario therefore needs no campaign
+replacement confirmation. Regular play retains its existing confirmation and activation gates.
+
+At completion, cancellation or failure, the result screen attempts a local JSON download and
+keeps **Download diagnostics JSON**, **Run again** and **Back to start menu** available. Some
+mobile browsers require the explicit download click. Retrying creates a fresh recorder for the
+same selected seed/source; returning to normal play removes the diagnostics query flag.
+
+The `fjordside-loading-run` v1 report includes the ordinary loading status and renderer counts,
+up to 2,048 preparation spans, 2,048 observed window Resource Timing entries, 512 settlement model
+preparation durations and 512 main-thread long tasks where the browser supports that API.
+Truncation counts and unsupported observers are explicit. Network paths exclude origin,
+credentials and queries; embedded image/blob data is omitted. It records available request and
+response timings, transfer/body byte sizes and HTTP status. Zero sizes/status do not establish
+cache hits or failures. Model durations include create/reconcile/bounds and any waiting; network
+duration, nested preparation time and long tasks overlap and must not be added as total CPU time.
+Preparation timestamps use each loading attempt's origin; resources/models/long tasks use the
+outer run's origin. Internal worker/cache/decoder activity may not produce window entries. Files
+loaded before choosing the run are outside its capture window. A run beginning after another run
+can be warmer; this mode deliberately does not clear caches or infer cold/warm status.
+
+The extended observers and records exist only during this opt-in run, disconnect before export,
+and perform no automatic upload or storage logging. GPU execution time/process memory remain
+unsupported. A browser-process kill can prevent the final report, as with ordinary loading.
+The diagnostic path still prepares and draws the scene: it measures real load costs rather than
+estimating them without loading assets.

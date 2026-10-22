@@ -414,8 +414,10 @@ export function createFjordScene(options: {
                     canvas.dataset.dressing = JSON.stringify(dressing!.inspect());
                     layer!.prepareExpeditions(state, campaign.blueprint, host.tickIntervalSeconds);
                     const prepareEntities = () => layer!.sync(view.entities, host.loading ? yieldForInput : undefined, current,
-                        view.livestockDeaths, host.loading ? (completed, total) => {
+                        view.livestockDeaths, host.loading ? (completed, total, entity, started) => {
                             host.loading?.units('characters', completed, total, 'settlement models');
+                            if (entity && started !== undefined)
+                                host.loading?.diagnosticRun?.model(entity.kind, entity.asset, started);
                         } : undefined);
                     if (host.loading) await host.loading.measure('initial-settlement-models', prepareEntities);
                     else await prepareEntities();

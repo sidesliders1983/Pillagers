@@ -5,6 +5,7 @@ import { chooseSettlementRecovery } from './CampaignRecovery';
 import { projectFjordCalendar } from './FjordCalendar';
 import './campaign-start.css';
 import { lastIslandLoad } from './IslandLoadStatus';
+import { LoadingRunDiagnostics } from './LoadingRunDiagnostics';
 
 export interface CampaignStartAttempt {
     kind: 'continue' | 'restart' | 'new';
@@ -13,6 +14,8 @@ export interface CampaignStartAttempt {
     restart?: GameplaySession;
     resumePlayback?: boolean;
     signal: AbortSignal;
+    /** Read-only preparation test: dispose before activation, playback or clock ownership. */
+    diagnosticRun?: LoadingRunDiagnostics;
     /** Called once, after world, assets and camera are ready. A failed write keeps the prior save. */
     activate(text: string): void;
 }
@@ -37,8 +40,10 @@ function download(text: string, filename = 'fjordside-campaign.json') {
     const link = document.createElement('a');
     link.href = url;
     link.download = filename;
+    document.body.append(link);
     link.click();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 30_000);
 }
 
 function shell() {
@@ -88,6 +93,37 @@ export async function runFjordEntry(ports: EntryPorts = {
             }, { signal: events.signal });
         });
     try {
+        let diagnosticMode = new URLSearchParams(window.location.search).get('diagnostics') === 'load';
+        const setDiagnosticMode = (enabled: boolean) => {
+            diagnosticMode = enabled;
+            const url = new URL(window.location.href);
+            if (enabled) url.searchParams.set('diagnostics', 'load');
+            else url.searchParams.delete('diagnostics');
+            window.history.replaceState(null, '', url);
+        };
+        const showDiagnosticResult = async (report: ReturnType<LoadingRunDiagnostics['finish']>) => {
+            const content = shell();
+            const completed = report.outcome === 'diagnostic-complete';
+            content.innerHTML = `<h2>${completed ? 'Loading diagnostics complete' : 'Loading diagnostics stopped'}</h2>
+                <p role="status" data-diagnostic-summary></p><p data-diagnostic-error></p>
+                <p>The game has not started. Your saved campaigns are unchanged.</p>
+                <div class="entry-actions"><button type="button" data-download>Download diagnostics JSON</button>
+                    <button type="button" data-retry>Run again</button>
+                    <button type="button" data-back>Back to start menu</button></div>
+                <p class="entry-rules">If the download did not start automatically, use Download diagnostics JSON.
+                The report stays on this device until you share it.</p>`;
+            content.querySelector('[data-diagnostic-summary]')!.textContent =
+                `${(report.elapsedMs / 1000).toFixed(1)} s · ${report.summary.resourceCount} observed resources · ` +
+                `${report.summary.settlementModelCount} settlement models`;
+            content.querySelector('[data-diagnostic-error]')!.textContent = report.error ?? report.loading?.error?.message ?? '';
+            const text = JSON.stringify(report, null, 2);
+            const save = () => download(text, `fjordside-loading-run-${report.loading?.attempt ?? Date.now()}.json`);
+            content.querySelector('[data-download]')!.addEventListener('click', save);
+            content.querySelector<HTMLButtonElement>('[data-download]')!.focus();
+            try { save(); } catch { /* A user-initiated download remains available on restricted browsers. */ }
+            return waitForChoice(content, target => target.hasAttribute('data-retry') ? true :
+                target.hasAttribute('data-back') ? false : undefined);
+        };
         let bypass = new URLSearchParams(window.location.search).get('entry');
         if (bypass) {
             const url = new URL(window.location.href);
@@ -130,7 +166,21 @@ export async function runFjordEntry(ports: EntryPorts = {
                         <p data-restart-reason></p>
                         <button type="button" data-entry="new">New scenario<small>A new seed, new people and a new history.</small></button>
                     </div><p class="entry-rules">Start with cattle, pigs, sheep or goats. Terrain comes from the validated island pool.</p>
-                    <button class="entry-secondary" type="button" data-recover>Recover or import a campaign</button>`;
+                    <button class="entry-secondary" type="button" data-recover>Recover or import a campaign</button>
+                    <button class="entry-secondary" type="button" data-diagnostics>Run loading diagnostics</button>
+                    <button class="entry-secondary" type="button" data-play-mode hidden>Back to normal play</button>`;
+                content.querySelector<HTMLButtonElement>('[data-diagnostics]')!.hidden = diagnosticMode;
+                content.querySelector<HTMLButtonElement>('[data-play-mode]')!.hidden = !diagnosticMode;
+                if (diagnosticMode) {
+                    content.querySelector('.entry-rules')!.textContent =
+                        'Loading diagnostics only. Prepare the island, download a JSON report and stop. Saved campaigns are unchanged.';
+                    content.querySelector('[data-entry="continue"]')!.innerHTML =
+                        'Test saved campaign<small>Measure loading your current settlement.</small>';
+                    content.querySelector('[data-entry="restart"]')!.innerHTML =
+                        'Test original arrival<small>Measure a replay with the same founders and island.</small>';
+                    content.querySelector('[data-entry="new"]')!.innerHTML =
+                        'Test a new scenario<small>Prepare a new island without saving or starting it.</small>';
+                }
                 const summary = selected && projectFjordCalendar(selected.metadata.time, selected.metadata.ticksPerWinter);
                 content.querySelector('[data-context]')!.textContent = selected ?
                     `${selected.source} · ${summary!.season} ${summary!.year} · Seed ${selected.metadata.seed}` :
@@ -146,17 +196,24 @@ export async function runFjordEntry(ports: EntryPorts = {
                 content.querySelector<HTMLButtonElement>('button:not(:disabled)')!.focus();
                 const choice = bypass === 'handoff' || bypass === 'recovery' || bypass === 'qa-continue' ?
                     (selected ? 'continue' : 'recover') : bypass === 'qa-new' ? 'new' :
-                    await waitForChoice(content, target => target.dataset.entry ?? (target.hasAttribute('data-recover') ? 'recover' : undefined));
+                    await waitForChoice(content, target => target.dataset.entry ??
+                        (target.hasAttribute('data-recover') ? 'recover' :
+                        target.hasAttribute('data-diagnostics') ? 'diagnostics' :
+                        target.hasAttribute('data-play-mode') ? 'play-mode' : undefined));
                 const qaNew = bypass === 'qa-new';
                 const handoff = bypass === 'handoff';
                 bypass = null;
+                if (choice === 'diagnostics' || choice === 'play-mode') {
+                    setDiagnosticMode(choice === 'diagnostics');
+                    continue;
+                }
                 if (choice === 'recover') {
                     const text = await chooseSettlementRecovery(sources, '', 'Back to start menu');
                     if (text) selected = sources.candidates.find(candidate => candidate.text === text) ??
                         { text, source: 'Imported campaign', metadata: inspectSettlementSave(text) };
                     continue;
                 }
-                if (choice !== 'continue' && (selected || sources.candidates.length || sources.damaged.length)) {
+                if (!diagnosticMode && choice !== 'continue' && (selected || sources.candidates.length || sources.damaged.length)) {
                     content.innerHTML = `<h2>Replace the active campaign?</h2>
                         <p>Your current progress will be replaced. Manually saved checkpoints are kept.</p>
                         <div class="entry-confirm"><button type="button" data-cancel>Cancel</button>
@@ -181,6 +238,7 @@ export async function runFjordEntry(ports: EntryPorts = {
                     resumePlayback: handoff, signal: lifetime.signal,
                     activate: text => {
                         lifetime.signal.throwIfAborted();
+                        if (attempt.diagnosticRun) throw new Error('A diagnostic run cannot activate or save a campaign.');
                         prepared = text;
                         if (activated) throw new Error('This campaign already owns the session.');
                         let current: string | null;
@@ -199,13 +257,26 @@ export async function runFjordEntry(ports: EntryPorts = {
                 };
                 for (;;) {
                     content = shell();
-                    content.innerHTML = '<p role="status">Opening your campaign…</p>';
+                    content.innerHTML = diagnosticMode ? '<p role="status">Starting loading diagnostics…</p>' :
+                        '<p role="status">Opening your campaign…</p>';
+                    attempt.diagnosticRun = diagnosticMode ? new LoadingRunDiagnostics() : undefined;
                     try {
                         await ports.open(attempt);
                         lifetime.signal.throwIfAborted();
+                        if (attempt.diagnosticRun) {
+                            const retry = await showDiagnosticResult(attempt.diagnosticRun.finish());
+                            if (retry) continue;
+                            break;
+                        }
                         return;
                     } catch (error) {
+                        const diagnosticReport = attempt.diagnosticRun?.finish(error);
                         lifetime.signal.throwIfAborted();
+                        if (diagnosticReport) {
+                            const retry = await showDiagnosticResult(diagnosticReport);
+                            if (retry) continue;
+                            break;
+                        }
                         if (error instanceof DOMException && error.name === 'AbortError') break;
                         content = shell();
                         content.innerHTML = `<h2>Campaign not opened</h2><p role="status"></p>
