@@ -13,7 +13,7 @@ import { homeImprovements, previewHomeSpecialization, homeLevel } from './HomeIm
 import './fjord-interface.css';
 import './mobile-horizon.css';
 import { isMobileLayout } from './MobileShell';
-import { CharacterPortraits } from '../characters/CharacterPortraits';
+import { CharacterPortraits, type PortraitRequest } from '../characters/CharacterPortraits';
 import { projectResidentAppearance } from '../characters/ResidentAppearance';
 import { fjordWardrobePresentation } from './FjordWardrobe';
 import { presentationProfiles } from '../config/PresentationQuality';
@@ -27,6 +27,7 @@ const meter = (label: string, value: number) => `<div class="fjord-meter"><div><
     <strong>${Math.round(value * 100)}%</strong></div><meter min="0" max="1" value="${value}">${Math.round(value * 100)}%</meter></div>`;
 
 interface InterfaceHooks {
+    renderPortrait?: (input: PortraitRequest) => Promise<string | undefined>;
     home?: () => void;
     select: (kind: string, id: string) => void;
     refresh: () => void;
@@ -53,7 +54,7 @@ export class FjordInterface {
     private panelEpoch = -1;
     private panelWorld?: SharedSettlement['fjord']['blueprint'];
     private panelEditable = true;
-    private portraits = new CharacterPortraits();
+    private portraits: CharacterPortraits;
     private portraitAbort?: AbortController;
     private portraitKey = '';
     private portraitImage?: string;
@@ -62,6 +63,7 @@ export class FjordInterface {
     private workspace = document.querySelector<HTMLElement>('#fjord-workspace')!;
 
     constructor(private owner: SharedSettlement, private hooks: InterfaceHooks) {
+        this.portraits = new CharacterPortraits(hooks.renderPortrait);
         document.addEventListener('fjord-layout-change', () => this.hooks.refresh(),
             { signal: this.abort.signal });
         for (const region of [this.panel, this.workspace]) {
@@ -274,7 +276,7 @@ export class FjordInterface {
             const appearance = projectResidentAppearance(state, selection.id);
             if (!appearance) return;
             const person = state.personas[selection.id] ?? state.personaArchive![selection.id];
-            const input = { ...appearance, presentation: fjordWardrobePresentation({ kind: 'persona',
+            const input = { residentId: selection.id, ...appearance, presentation: fjordWardrobePresentation({ kind: 'persona',
                 dna: appearance.dna, status: { living: person.deathWinter === null, occupation: person.occupation } }),
                 pixelRatio: presentationProfiles[this.owner.presentation?.quality ?? 'low'].maximumPixelRatio };
             const key = selection.id + JSON.stringify(input);

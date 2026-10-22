@@ -32,7 +32,7 @@ export type LivestockAnimal = {
 };
 /** Historical API/collection name retained for existing callers and serialized campaigns. */
 export type Cattle = LivestockAnimal;
-export type LandingState = {version:3;livestock?:LivestockRules;config:LandingConfig;region:{id:string;settledByClanId:string|null};founderIds:string[];longships:Record<string,{id:string;acquiredWinter:number;salvagedWinter:number|null}>;cattle:Record<string,Cattle>;cattleArchive?:Record<string,Cattle>};
+export type LandingState = {version:3;livestock?:LivestockRules;config:LandingConfig;region:{id:string;settledByClanId:string|null};founderIds:string[];longships:Record<string,{id:string;acquiredWinter:number;salvagedWinter:number|null;transport?:import('./LongshipTransport').LongshipLocation}>;cattle:Record<string,Cattle>;cattleArchive?:Record<string,Cattle>};
 
 export function createCampaign(seed:number, overrides:Partial<LandingConfig>={}, mechanicsOverrides:Partial<PrototypeConfig>={}, foundingPhase?:FoundingPhase, calendarMode?:BirthdayCalendarMode, livestock?:LivestockRules):SimulationState {
     if(!Number.isInteger(seed)||seed<0||seed>0xffffffff)throw new Error('Seed must be uint32');
@@ -130,6 +130,8 @@ export function applyLandingCommand(state:SimulationState,command:LandingCommand
     if(!ship||ship.salvagedWinter!==null)throw new Error('Longship unavailable');
     if(command.type==='KeepLongship'){emit(state,'FoundingLongshipKept',{longshipId:ship.id});return;}
     if(Object.values(state.world?.missions??{}).some(m=>m.status==='Away'&&m.shipId===ship.id))throw new Error('Longship is away on an expedition');
+    if(ship.transport?.groupId)throw new Error('Longship is assigned to an expedition.');
+    delete ship.transport;
     ship.salvagedWinter=state.time.winter;state.stocks.materials+=landing.config.longshipSalvage;
     emit(state,'FoundingLongshipSalvaged',{longshipId:ship.id,materials:landing.config.longshipSalvage});
 }

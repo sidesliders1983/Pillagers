@@ -133,9 +133,9 @@
       "path": "/wildlife/moose.glb",
       "source": "Assets/Characters/Wildlife/Elk.glb",
       "sourceSha256": "6a03c212d86940a9a64b340aa889ccbbe333934fe948097b06cfbc7cfc3efb2d",
-      "sha256": "c166ad35bc704474d22f481ad403f8f82518881ddd87ac4821009e4890cce6cd",
+      "sha256": "2ad71c2ad8666998df7414622449daae0af80922f521d7681d5cfa68d0b3c327",
       "sourceBytes": 8401764,
-      "bytes": 141472,
+      "bytes": 171940,
       "triangles": 5372,
       "scaleReference": {
         "kind": "shoulder-height",
@@ -145,21 +145,39 @@
       },
       "bounds": {
         "min": [
-          -1.1051536550432264,
-          -0.000017511834289219312,
-          -1.41020169651925
+          -1.1042333715722332,
+          -0.0000659969135795779,
+          -1.3831561700147705
         ],
         "max": [
-          1.1051536889345084,
-          2.60485394228038,
-          1.4102016957732784
+          1.104181139211181,
+          2.466397366561513,
+          1.3831654754787264
         ]
       },
       "joints": 35,
-      "clips": [],
+      "clips": [
+        {
+          "name": "Walk",
+          "duration": 1
+        },
+        {
+          "name": "Idle",
+          "duration": 1
+        }
+      ],
+      "animationSource": {
+        "file": "Lynx-animated.glb",
+        "sha256": "ba75a5572c350a9a0403acf28cc5dd91df1c37b59c98d88a2440d0f0e61b7e95",
+        "operation": "Retarget Lynx-animated.glb Walk onto all 35 original Elk joints; preserve bind geometry and lengths, plant the lowest hoof, and retain neutral Idle",
+        "donorDuration": 1,
+        "sampledFrames": 241,
+        "mappedJoints": 35
+      },
       "operations": [
-        "Preserve supplied geometry, UVs, rig and source clip rotations",
+        "Preserve supplied geometry, UVs, original rig and skin weights",
         "Normalize once to canonical metre scale in an authoring wrapper",
+        "Retarget Lynx-animated.glb Walk onto all 35 original Elk joints; preserve bind geometry and lengths, plant the lowest hoof, and retain neutral Idle",
         "Resize albedo to 512px WebP and remove high-frequency surface maps"
       ]
     },
@@ -443,42 +461,6 @@
       ]
     },
     {
-      "id": "rabbit",
-      "file": "rabbit.glb",
-      "path": "/wildlife/rabbit.glb",
-      "source": "Assets/Characters/Wildlife/bunny.glb",
-      "sourceSha256": "d3c1564631fd13e70962cf1965b7b8caf684d4c06857ae626a41ca0373d3f2b5",
-      "sha256": "e69f298619d8e76c6bd5a72b6ec47ee179ecab90c69e1bf2b022ae072da46b45",
-      "sourceBytes": 8369076,
-      "bytes": 113088,
-      "triangles": 2774,
-      "scaleReference": {
-        "kind": "standing-height",
-        "metres": 0.42,
-        "sourceDimension": 1.7000030232261651,
-        "scale": 0.2470583841686051
-      },
-      "bounds": {
-        "min": [
-          -0.08398835799732475,
-          -6.133384259882843e-7,
-          -0.20933322207173724
-        ],
-        "max": [
-          0.08398832793220716,
-          0.4199996690257308,
-          0.20933328482796942
-        ]
-      },
-      "joints": 41,
-      "clips": [],
-      "operations": [
-        "Preserve supplied geometry, UVs, rig and source clip rotations",
-        "Normalize once to canonical metre scale in an authoring wrapper",
-        "Resize albedo to 512px WebP and remove high-frequency surface maps"
-      ]
-    },
-    {
       "id": "orca",
       "file": "orca.glb",
       "path": "/wildlife/orca.glb",
@@ -549,6 +531,42 @@
         "Preserve supplied geometry, UVs, rig and source clip rotations",
         "Normalize once to canonical metre scale in an authoring wrapper",
         "Straighten the supplied tail chain for neutral swimming; preserve skin weights",
+        "Resize albedo to 512px WebP and remove high-frequency surface maps"
+      ]
+    },
+    {
+      "id": "rabbit",
+      "file": "rabbit.glb",
+      "path": "/wildlife/rabbit.glb",
+      "source": "Assets/Characters/Wildlife/bunny.glb",
+      "sourceSha256": "d3c1564631fd13e70962cf1965b7b8caf684d4c06857ae626a41ca0373d3f2b5",
+      "sha256": "e69f298619d8e76c6bd5a72b6ec47ee179ecab90c69e1bf2b022ae072da46b45",
+      "sourceBytes": 8369076,
+      "bytes": 113088,
+      "triangles": 2774,
+      "scaleReference": {
+        "kind": "standing-height",
+        "metres": 0.42,
+        "sourceDimension": 1.7000030232261651,
+        "scale": 0.2470583841686051
+      },
+      "bounds": {
+        "min": [
+          -0.08398835799732475,
+          -6.133384259882843e-7,
+          -0.20933322207173724
+        ],
+        "max": [
+          0.08398832793220716,
+          0.4199996690257308,
+          0.20933328482796942
+        ]
+      },
+      "joints": 41,
+      "clips": [],
+      "operations": [
+        "Preserve supplied geometry, UVs, rig and source clip rotations",
+        "Normalize once to canonical metre scale in an authoring wrapper",
         "Resize albedo to 512px WebP and remove high-frequency surface maps"
       ]
     }

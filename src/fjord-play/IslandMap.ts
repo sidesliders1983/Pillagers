@@ -47,7 +47,7 @@ export class IslandMap {
             <button type="button" data-map-close aria-label="Close island map" title="Close map">${icon('close')}</button></div>
             <div class="fjord-map-image"><canvas id="fjord-map-canvas" tabindex="0" aria-label="Island map. Use arrow keys to choose a point and Enter to focus the camera."></canvas>
             <svg viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true"></svg><span class="fjord-map-north">N ↑</span></div>
-            <p class="fjord-map-legend"><span>◇ Home</span><span>● Camera focus</span><span>⚑ Group destinations</span><span>Dim: unexplored</span></p>
+            <p class="fjord-map-legend"><span>◇ Home</span><span>● Camera focus</span><span>⚑ Group destinations</span><span>Dark: unexplored</span></p>
             <p data-map-status role="status">Choose explored ground to move the camera.</p>`;
         this.root.querySelector('#fjord-navigation')!.append(this.toggle);
         this.root.append(this.dialog);

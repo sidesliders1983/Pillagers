@@ -20,6 +20,37 @@ body.island-preparing #fjord-canvas { border-radius:0; }
 .fjord-load-error { max-width:40rem; padding:32px; margin:auto; font:18px/1.5 system-ui,sans-serif; }
 .fjord-load-error button { min-height:44px; padding:8px 16px; }
 
+.island-load-progress { max-width:36rem; margin:10px auto; text-align:left; font:13px/1.4 system-ui,sans-serif; }
+.island-load-summary { display:flex; justify-content:space-between; gap:16px; margin-bottom:6px; }
+.island-load-summary strong { font-variant-numeric:tabular-nums; }
+.island-load-progress progress { display:block; width:100%; height:8px; border:0; border-radius:4px; accent-color:#e5c47d; background:#31545b; }
+.island-load-progress progress::-webkit-progress-bar { background:#31545b; border-radius:4px; }
+.island-load-progress progress::-webkit-progress-value { background:#e5c47d; border-radius:4px; }
+.island-load-progress progress::-moz-progress-bar { background:#e5c47d; border-radius:4px; }
+.island-load-progress p { margin:5px 0; }
+[data-load-time] { color:#d1dccf; font-variant-numeric:tabular-nums; }
+[data-load-warning] { color:#ffe6a5; }
+.island-load-diagnostics summary { min-height:32px; display:flex; align-items:center; cursor:pointer; color:#d1dccf; }
+.island-load-diagnostics { overflow-wrap:anywhere; }
+.island-load-diagnostics[open] { padding:8px; background:#102c36; border:1px solid #7e9385; border-radius:5px; }
+.island-load-diagnostics select { min-height:44px; color:inherit; background:#1a3439; }
+.island-load-diagnostics button { margin:4px 0; }
+.island-loading-copy { max-height:60dvh; overflow:auto; overscroll-behavior:contain; touch-action:pan-y; }
+#island-loading { padding-top:env(safe-area-inset-top); box-sizing:border-box; }
+@media (max-height:560px) and (orientation:landscape) {
+    #island-loading, #island-loading.island-has-book {
+        grid-template-areas:"preview status";
+        grid-template-columns:minmax(0,1fr) minmax(300px,1fr);
+        grid-template-rows:minmax(0,1fr);
+    }
+    #island-loading.island-has-book { grid-template-areas:"book status"; }
+    #island-loading.island-has-book .island-preview-space { display:none; }
+    #island-loading #loading-clan-book { margin:8px 0 8px max(8px,env(safe-area-inset-left)); }
+    .island-loading-copy { max-height:100%; padding:8px max(12px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) 12px; }
+    .island-loading-eyebrow, .island-loading-help { display:none; }
+    #island-loading h1 { font-size:19px; }
+}
+
 .island-preview-space { grid-area:preview; min-height:0; pointer-events:none; }
 #island-loading.island-has-book {
     grid-template-areas:"preview" "book" "status";

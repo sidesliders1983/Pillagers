@@ -8,6 +8,12 @@ import { worldConfig } from '../config/worldConfig';
 import { splitEmissiveSurfaces } from './EmissiveSurfaces';
 import { terrainModels as registry, terrainAssetPath } from '../config/TerrainAssets';
 export type AssetKey = keyof typeof registry | keyof typeof generatedHouseFiles | NatureAssetKey | 'tent' | 'stoneCampfire';
+export interface AssetPreparationProgress {
+    completed: number;
+    total: number;
+    resource: string;
+    error?: unknown;
+}
 export class AssetManager {
     readonly windowMaterials:MeshStandardMaterial[]=[];
     readonly fireMaterials:MeshStandardMaterial[]=[];
@@ -16,7 +22,10 @@ export class AssetManager {
     private loader = new GLTFLoader().setDRACOLoader(this.draco).setMeshoptDecoder(MeshoptDecoder);
     readonly diagnostics: string[] = [];
     private tolerant = false;
-    async loadForSimulation() { this.tolerant = true; await this.load(); }
+    async loadForSimulation(progress?: (event: AssetPreparationProgress) => void) {
+        this.tolerant = true;
+        await this.load(progress);
+    }
     private fallback(key: AssetKey, reason: unknown) {
         this.diagnostics.push(key + ': placeholder — ' + String(reason));
         const dimensions = key.endsWith('Terrain') ? [11.5,.05,11.5] : key === 'tent' ? [1.88,1.5,2] :
@@ -28,7 +37,7 @@ export class AssetManager {
         mesh.position.y = dimensions[1]/2; root.add(mesh); root.name = key;
         root.userData.placeholder = true; this.models.set(key,root);
     }
-    async load() {
+    async load(progress?: (event: AssetPreparationProgress) => void) {
         let manifest: {assets: Partial<Record<keyof typeof generatedHouseFiles,{file:string}>>};
         try {
             const response = await fetch(import.meta.env.BASE_URL+'game-assets/houses/manifest.json');
@@ -36,6 +45,7 @@ export class AssetManager {
             manifest = await response.json();
         } catch (error) {
             if (!this.tolerant) throw error;
+            progress?.({ completed: 0, total: 0, resource: 'game-assets/houses/manifest.json', error });
             this.diagnostics.push('House manifest unavailable; registry paths use safe fallbacks.');
             manifest = { assets: Object.fromEntries(Object.entries(generatedHouseFiles).map(([key,file]) => [key,{file}])) };
         }
@@ -51,7 +61,12 @@ export class AssetManager {
             url: import.meta.env.BASE_URL + 'scenery/meshy-tent-v1/tent.glb', authored: true };
         const campfire = { key: 'stoneCampfire' as const,
             url: import.meta.env.BASE_URL + 'scenery/meshy-campfire-v1/campfire.glb', authored: true };
-        await Promise.all([...scenery,...generated,tent,campfire].map(async ({key,url,authored}) => {
+        const entries = [...scenery, ...generated, tent, campfire];
+        let completed = 0;
+        progress?.({ completed, total: entries.length, resource: '' });
+        await Promise.all(entries.map(async ({key,url,authored}) => {
+            let failure: unknown;
+            progress?.({ completed, total: entries.length, resource: url });
             try {
                 const { scene } = await this.loader.loadAsync(url);
                 // Pack nodes have centered translations: normalize actual world bounds to a grounded pivot.
@@ -112,7 +127,10 @@ export class AssetManager {
                 this.models.set(key, root);
             } catch (error) {
                 if (!this.tolerant) throw error;
+                failure = error;
                 this.fallback(key,error);
+            } finally {
+                progress?.({ completed: ++completed, total: entries.length, resource: url, error: failure });
             }
         }));
         if (this.tolerant) for (const key of Object.keys(generatedHouseFiles) as AssetKey[])

@@ -1,5 +1,6 @@
 import {defaultCharacterPresentation, type CharacterPresentation} from '../characters/CharacterPresentation';
 import {gridTrialOutfitId} from '../characters/GridTrialOutfitCatalog';
+import type { CharacterPreparationObserver } from '../characters/CharacterPreparation';
 import {identitySample} from '../characters/seededRandom';
 import {characterAppearance} from '../characters/CharacterAppearance';
 import {femaleHairAssets} from '../characters/FemaleHairCatalog';
@@ -92,7 +93,7 @@ export class FjordWardrobe {
     private states = new WeakMap<MeshyHuman, WardrobeState>();
     constructor(private factory: MeshyHumanFactory, private report: (message: string) => void) {}
 
-    async reconcile(human: MeshyHuman, entity: FjordEntity) {
+    async reconcile(human: MeshyHuman, entity: FjordEntity, observe?: CharacterPreparationObserver) {
         if (human.isDisposed) return;
         const selected = fjordClothingSet(entity);
         const hair = fjordHairAsset(entity);
@@ -112,7 +113,7 @@ export class FjordWardrobe {
         }
         const revision = ++state.revision;
         state.pending = key;
-        const request = this.factory.equip(human, fjordWardrobePresentation(entity));
+        const request = this.factory.equip(human, fjordWardrobePresentation(entity), observe);
         const equipRevision = human.equipRevision;
         state.equipRevision = equipRevision;
         state.task = request.then(() => {

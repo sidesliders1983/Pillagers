@@ -12,7 +12,10 @@ import { AssetManager } from '../core/AssetManager';
 import { longshipModel, terrainAssetPath } from '../config/TerrainAssets';
 import { placeSettlement } from '../world/PlaceSettlement';
 import type { FjordEntity } from './FjordProjection';
+import type { PortraitRequest } from '../characters/CharacterPortraits';
+import { parseFacialShape } from '../characters/FacialIdentity';
 import {FjordWardrobe} from './FjordWardrobe';
+import { characterSync, type CharacterPreparationObserver } from '../characters/CharacterPreparation';
 /** Reuse verified Fjordside DNA bodies and source livestock clips, with independent instance ownership. */
 export class FjordModels {
     readonly diagnostics: string[] = [];
@@ -22,23 +25,27 @@ export class FjordModels {
     });
     private actors = new Map<Object3D, { human?: MeshyHuman; mixer?: AnimationMixer;
         clips?: import('three').AnimationClip[]; action?: import('three').AnimationAction;
-        fingerprint?: string; paceSignature?: string; resumeGrazeTime?: number; pace: number; groundSpeed: number; state: string }>();
+        fingerprint?: string; paceSignature?: string; resumeGrazeTime?: number; embarked?: boolean;
+        pace: number; groundSpeed: number; state: string }>();
     async reconcile(model: Object3D, entity: FjordEntity) {
         const actor = this.actors.get(model);
         if (!actor?.human || !entity.dna) return;
+        const observe = this.preparation && ((sample: Parameters<CharacterPreparationObserver>[0]) =>
+            this.preparation!({ ...sample, subject: entity.id }));
         const fingerprint = JSON.stringify([entity.dna, entity.visualProfile, entity.facialIdentity]);
         if (actor.fingerprint !== fingerprint) {
             model.scale.setScalar(1);
             const profile = entity.visualProfile ?? universalHumanProfile({ ...entity.dna, age: Math.min(100, entity.dna.age) });
-            actor.human.applyDNA({ ...entity.dna, age: Math.min(100, entity.dna.age) }, profile,
-                { face: entity.facialIdentity });
+            characterSync(observe, 'body-face-reconciliation', () =>
+                actor.human!.applyDNA({ ...entity.dna!, age: Math.min(100, entity.dna!.age) }, profile,
+                    { face: entity.facialIdentity }));
             actor.fingerprint = fingerprint;
             model.scale.setScalar(entity.transform!.scale / (1 - .35 * profile.weights.Child));
             const paceSignature = JSON.stringify([model.scale.toArray(), profile.motion]);
             if (!actor.human.lastFitRetained || actor.paceSignature !== paceSignature) {
                 const position = model.position.clone(), rotation = model.quaternion.clone();
                 model.position.set(0, 0, 0); model.quaternion.identity();
-                try { actor.groundSpeed = humanPreviewGroundSpeed(actor.human, 'Walk'); }
+                try { actor.groundSpeed = characterSync(observe, 'walking-pace-preparation', () => humanPreviewGroundSpeed(actor.human!, 'Walk')); }
                 finally { model.position.copy(position); model.quaternion.copy(rotation); }
                 actor.paceSignature = paceSignature;
             }
@@ -48,11 +55,18 @@ export class FjordModels {
             actor.pace = actor.groundSpeed * profile.motion.cadence;
             actor.state = 'Idle';
         }
-        await this.wardrobe.reconcile(actor.human, entity);
+        await this.wardrobe.reconcile(actor.human, entity, observe);
         model.userData.appearance = model.userData.universalHumanProfile;
         model.userData.pace = actor.pace;
     }
     boundsShape(model: Object3D) { return this.actors.get(model)?.human?.boundsShapeSignature; }
+    /** Borrow only a completed instance matching the requested identity/wardrobe. */
+    residentForPortrait(model: Object3D, input: PortraitRequest) {
+        const actor = this.actors.get(model);
+        if (actor?.fingerprint !== JSON.stringify([input.dna, input.profile, parseFacialShape(input.face)]) ||
+            JSON.stringify(actor.human?.root.userData.presentation) !== JSON.stringify(input.presentation)) return;
+        return actor.human;
+    }
     pace(model: Object3D) { return this.actors.get(model)?.pace ?? 0; }
     activityClips(model: Object3D) {
         const actor = this.actors.get(model);
@@ -93,9 +107,20 @@ export class FjordModels {
         }
         return available;
     }
+    /** Occupants are recognizable posed characters, without an independent animation clock. */
+    setEmbarked(model: Object3D, embarked: boolean) {
+        const actor = this.actors.get(model);
+        if (!actor?.human) return;
+        if (embarked || actor.embarked) {
+            // Sampling stops previous blended actions as well as choosing a standing pose.
+            actor.human.sampleAnimation('Idle', 0);
+            actor.state = 'Idle';
+        }
+        actor.embarked = embarked;
+    }
     animate(model: Object3D, state: 'Idle' | 'Walk' | 'Run' | 'Talk' | 'Listen' | 'Graze' | 'Rest' | 'HumanInteraction' | 'Farm' | 'Attack' | 'Doze', speed: number, delta: number) {
         const actor = this.actors.get(model);
-        if (!actor) return;
+        if (!actor || actor.embarked) return;
         if (actor.human) {
             const humanState = state === 'Graze' || state === 'Rest' || state === 'HumanInteraction' ? 'Idle' : state;
             if (actor.human.clips.some(c => c.name === meshyAnimationClips[humanState])) {
@@ -162,12 +187,13 @@ export class FjordModels {
     private motionSources = new WeakMap<Object3D, { clips: import('three').AnimationClip[]; pace: number }>();
     private draco = new DRACOLoader().setDecoderPath(import.meta.env.BASE_URL + 'draco/');
     private loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).setDRACOLoader(this.draco);
-    constructor(private assets: AssetManager) { }
+    constructor(private assets: AssetManager, private preparation?: CharacterPreparationObserver) { }
     async create(entity: FjordEntity): Promise<Object3D> {
         if (entity.kind === 'persona' && entity.dna) {
             try {
                 const human = await this.humans.createWorld({ ...entity.dna, age: Math.min(100, entity.dna.age) },
-                    entity.visualProfile, entity.facialIdentity);
+                    entity.visualProfile, entity.facialIdentity, this.preparation && (sample =>
+                        this.preparation!({ ...sample, subject: entity.id })));
                 this.actors.set(human.root, { human, pace: 0, groundSpeed: 0, state: 'Idle' });
                 await this.reconcile(human.root, entity);
                 return human.root;

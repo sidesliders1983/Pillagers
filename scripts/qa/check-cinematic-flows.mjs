@@ -21,11 +21,11 @@ try{
   }).observe(document,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['data-ready']});
  });
  await page.goto((process.env.QA_ORIGIN||'http://127.0.0.1:5180')+'/fjord-play?seed=32',{waitUntil:'domcontentloaded'});
- await page.getByRole('button',{name:'Retry generation'}).waitFor();
+ await page.getByRole('button',{name:'Retry loading'}).waitFor();
  assert.match(await page.locator('#island-loading-status').textContent(),/Worker unavailable/);
  assert.equal(await page.evaluate(()=>sessionStorage.getItem('pillagers.fjord-play.active.v1')),null);
  const opening=await page.locator('#loading-clan-book-text').textContent();
- await page.getByRole('button',{name:'Retry generation'}).click();
+ await page.getByRole('button',{name:'Retry loading'}).click();
  await page.locator('#island-loading[data-preview]').waitFor();
  await page.waitForTimeout(700);
  await page.screenshot({path:'docs/qa/cinematic-loading/book/tablet-reading.png'});

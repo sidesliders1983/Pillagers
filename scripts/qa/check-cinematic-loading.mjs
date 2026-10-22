@@ -17,7 +17,7 @@ try {
     });
     await page.goto((process.env.QA_ORIGIN || 'http://127.0.0.1:5180') + '/fjord-play?seed=32',
         { waitUntil: 'domcontentloaded' });
-    await page.getByRole('button', { name: 'Retry generation', exact: true }).waitFor();
+    await page.getByRole('button', { name: 'Retry loading', exact: true }).waitFor();
     assert.equal(await page.locator('#island-loading-cancel').isVisible(), false,
         'First launch has no playable campaign to return to.');
     await page.keyboard.press('Escape');
@@ -25,7 +25,7 @@ try {
     assert.equal(await page.locator('a[href="/"]').isVisible(), false);
     await page.getByRole('button', { name: 'Close founding chapter' }).tap();
     await page.keyboard.press('Tab');
-    assert.equal(await page.getByRole('button', { name: 'Retry generation' }).evaluate(e =>
+    assert.equal(await page.getByRole('button', { name: 'Retry loading' }).evaluate(e =>
         e === document.activeElement), true);
     assert.equal(await page.evaluate(() => sessionStorage.getItem('pillagers.fjord-play.active.v1')), null);
     console.log('First launch keeps recovery available without cancellation or prototype navigation.');
