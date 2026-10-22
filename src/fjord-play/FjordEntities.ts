@@ -76,14 +76,17 @@ export class FjordEntities {
         radius: number;
     }>();
     constructor(private models: FjordModels, private animateConstruction = true) {
-        this.root.add(this.construction.root);
     }
     resetConstructionBaseline() {
         for (const transition of this.construction.inspect()) this.construction.finish(transition.key);
+        this.construction.root.removeFromParent();
         this.constructionInitialized = false;
     }
     inspectConstruction() { return this.construction.inspect(); }
-    updateConstruction(delta: number) { this.construction.update(delta); }
+    updateConstruction(delta: number) {
+        this.construction.update(delta);
+        if (!this.construction.root.children.length) this.construction.root.removeFromParent();
+    }
     setSeason(progress: number | null) {
         this.seasonProgress = progress;
         for (const entry of this.entries.values()) entry.season?.update(progress);
@@ -235,6 +238,7 @@ export class FjordEntities {
                 entry.boundsSignature = boundsSignature;
             }
             if (construct) {
+                this.root.add(this.construction.root);
                 const old = transitionOld;
                 this.construction.play(entity.selectionKey, entry.model, old?.model, old ? () => {
                     old.season?.dispose();
