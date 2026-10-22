@@ -533,6 +533,13 @@ export class FjordPlay {
         document.querySelector('#fjord-restart')!.addEventListener('click', () => startNewCampaign(true));
         document.querySelector('#fjord-new')!.addEventListener('click', () => startNewCampaign(false));
         const select = (kind: string, id: string) => {
+            const picked = this.campaign.readProjection().entities.find(e => e.kind === kind && e.id === id);
+            const ship = picked?.status.aboardShip ? this.campaign.readProjection().entities.find(e =>
+                e.kind === 'longship' && e.id === picked.status.aboardShip) : picked;
+            if (ship?.kind === 'longship' && ship.status.transportGroup) {
+                expeditions?.openGroup(ship.status.transportGroup);
+                return;
+            }
             showManagement(true);
             this.shared.select(kind ? { kind: kind as EntityKind, id } : null);
             const entity = this.campaign.readProjection().entities.find(e => e.kind === kind && e.id === id);
@@ -786,7 +793,10 @@ export class FjordPlay {
         if (this.stopped || this.shared.transferring) return;
         controller.setSelectionHandler((x, y, pointerType) => {
             if (expeditions?.targeting || islandMissions?.targeting) {
-                const point = presentation!.groundPoint(x, y);
+                const picked = presentation!.pick(x, y, pointerType);
+                if (expeditions?.targeting && picked?.kind === 'longship')
+                    return expeditions.chooseShip(picked.id);
+                const point = presentation!.groundPoint(x, y, true, expeditions?.sailing);
                 if (point) {
                     if (islandMissions?.targeting) islandMissions.chooseTarget({ x: point.x, z: point.z });
                     else expeditions!.chooseTarget({ x: point.x, z: point.z });
@@ -830,7 +840,12 @@ export class FjordPlay {
             const key = [x, y, expeditions.targetingGroup, this.session.revision, ...camera.matrixWorld.elements].join(',');
             if (key === destinationPreviewKey) return;
             destinationPreviewKey = key;
-            const point = presentation!.groundPoint(x, y, true);
+            const picked = presentation!.pick(x, y, 'mouse');
+            if (picked?.kind === 'longship') {
+                const ship = this.campaign.readProjection().entities.find(e => e.kind === 'longship' && e.id === picked.id);
+                if (ship?.transform) { expeditions.previewShip(picked.id, ship.transform); return; }
+            }
+            const point = presentation!.groundPoint(x, y, true, expeditions.sailing);
             expeditions.previewTarget(point ? { x: point.x, z: point.z } : undefined);
         };
         resetFrameTime = () => { previous = performance.now(); presentation!.resetFrameTime(); };

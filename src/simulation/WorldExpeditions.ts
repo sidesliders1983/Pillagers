@@ -101,7 +101,7 @@ export function missionOffer(state:SimulationState,groupId:string,regionId:strin
  const known=w.knowledge[regionId];if(type!=='Recon'&&!known)throw new Error('Recon required before this mission');
  if(type==='Pillage'&&(!known?.opportunity||!r.targetClanId))throw new Error('No known viable pillage opportunity');
  if(type==='Pillage'&&(!priorities.length||new Set(priorities).size!==priorities.length||priorities.some(p=>!['Food','Materials','Cattle','People'].includes(p))))throw new Error('Choose distinct pillage priorities');
- const ship=r.requiresShip?Object.values(state.landing?.longships??{}).find(s=>s.salvagedWinter===null&&!Object.values(w.missions).some(m=>m.status==='Away'&&m.shipId===s.id)):undefined;
+ const ship=r.requiresShip?Object.values(state.landing?.longships??{}).find(s=>s.salvagedWinter===null&&!s.transport?.groupId&&!Object.values(w.missions).some(m=>m.status==='Away'&&m.shipId===s.id)):undefined;
  if(r.requiresShip&&!ship)throw new Error('Available longship required for coastal expedition');
  const weather=weatherProfile(state),duration=Math.ceil(w.config.durations[type]*weather.travelDurationBps/10000);
  const perMember=Math.ceil(w.config.provisions[type]*duration/w.config.durations[type]);
@@ -151,18 +151,48 @@ export function resolveExpeditionCrew(state:SimulationState,m:Pick<ExpeditionMis
  const live=m.memberIds.filter(id=>state.personas[id]?.deathWinter===null);
  return {live,success:live.length>0&&chance(state,m.successBps)};
 }
-export function recoverExpeditionCargo(state:SimulationState,m:Pick<ExpeditionMission,'id'|'priorities'>,survivors:string[],targetClanId:string|null){
- const w=state.world!,target=targetClanId?w.targetClans[targetClanId]:null;
- const loot={food:0,materials:0,cattleIds:[] as string[],personaIds:[] as string[]};if(!target)return loot;
- for(const member of survivors){
-  for(const priority of m.priorities){
-   if(priority==='Food'&&target.stocks.food>0){const units=Math.min(w.config.foodCapacity,target.stocks.food);target.stocks.food-=units;state.stocks.food+=units;loot.food+=units;break;}
-   if(priority==='Cattle'){const cattle=Object.values(target.landing!.cattle).filter(c=>c.deathWinter===null).sort((a,b)=>a.id.localeCompare(b.id))[0];if(cattle){transferCattle(target,state,cattle.id);loot.cattleIds.push(cattle.id);break;}}
-   if(priority==='People'){const victim=Object.values(target.personas).filter(p=>p.deathWinter===null).sort((a,b)=>a.id.localeCompare(b.id))[0];if(victim){transferPersona(target,state,victim.id,m.id);loot.personaIds.push(victim.id);break;}}
-   if(priority==='Materials'&&target.stocks.materials>0){const units=Math.min(w.config.materialsCapacity,target.stocks.materials);target.stocks.materials-=units;state.stocks.materials+=units;loot.materials+=units;break;}
-  }
- }
- record(target,'SettlementPillaged',{missionId:m.id,raiderClanId:state.clan.id,...loot});return loot;
+export function expeditionCargoMultiplier(state: SimulationState, shipId?: string | null) {
+ const ship = shipId ? state.landing?.longships[shipId] : undefined;
+ return ship && ship.salvagedWinter === null ? 2 : 1;
+}
+export function recoverExpeditionCargo(state:SimulationState,m:Pick<ExpeditionMission,'id'|'priorities'> & {shipId?:string|null},survivors:string[],targetClanId:string|null){
+    const world = state.world!, target = targetClanId ? world.targetClans[targetClanId] : null;
+    const loot = { food: 0, materials: 0, cattleIds: [] as string[], personaIds: [] as string[] };
+    if (!target) return loot;
+    const multiplier = expeditionCargoMultiplier(state, m.shipId);
+    const living = [...new Set(survivors)].filter(id => state.personas[id]?.deathWinter === null);
+    for (let slot = 0; slot < living.length; slot++) {
+        for (const priority of m.priorities) {
+            if (priority === 'Food' && target.stocks.food > 0) {
+                const units = Math.min(world.config.foodCapacity * multiplier, target.stocks.food);
+                target.stocks.food -= units; state.stocks.food += units; loot.food += units;
+                break;
+            }
+            if (priority === 'Materials' && target.stocks.materials > 0) {
+                const units = Math.min(world.config.materialsCapacity * multiplier, target.stocks.materials);
+                target.stocks.materials -= units; state.stocks.materials += units; loot.materials += units;
+                break;
+            }
+            if (priority === 'Cattle') {
+                const cattle = Object.values(target.landing!.cattle).filter(c => c.deathWinter === null)
+                    .sort((a, b) => a.id.localeCompare(b.id)).slice(0, multiplier);
+                if (cattle.length) {
+                    for (const animal of cattle) { transferCattle(target, state, animal.id); loot.cattleIds.push(animal.id); }
+                    break;
+                }
+            }
+            if (priority === 'People') {
+                const people = Object.values(target.personas).filter(p => p.deathWinter === null)
+                    .sort((a, b) => a.id.localeCompare(b.id)).slice(0, multiplier);
+                if (people.length) {
+                    for (const person of people) { transferPersona(target, state, person.id, m.id); loot.personaIds.push(person.id); }
+                    break;
+                }
+            }
+        }
+    }
+    record(target, 'SettlementPillaged', { missionId: m.id, raiderClanId: state.clan.id, ...loot });
+    return loot;
 }
 export function namespaceTarget(target:SimulationState,clanId:string):SimulationState {
  const ids=new Set([target.clan.id,...Object.keys(target.personas),...Object.keys(target.families),...Object.keys(target.households),...Object.keys(target.residences),...Object.keys(target.buildings),...Object.keys(target.landing?.cattle??{}),...Object.keys(target.landing?.longships??{})]);

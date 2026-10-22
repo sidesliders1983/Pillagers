@@ -652,11 +652,13 @@ export function createFjordScene(options: {
         pick(x: number, y: number, pointerType: 'mouse' | 'touch') {
             return layer!.pick(camera, x, y, canvas.getBoundingClientRect(), pointerType);
         },
-        groundPoint(x: number, y: number, fallbackToWater = false) {
+        groundPoint(x: number, y: number, fallbackToWater = false, waterOnly = false) {
             const rect = canvas.getBoundingClientRect(), ray = new Raycaster();
             camera.updateMatrixWorld();
             ray.setFromCamera(new Vector2((x - rect.left) / rect.width * 2 - 1,
                 -(y - rect.top) / rect.height * 2 + 1), camera);
+            if (waterOnly) return ray.ray.intersectPlane(
+                new Plane(new Vector3(0, 1, 0), -campaign.blueprint.waterLevel), new Vector3());
             const hit = intersectNavigationTerrain(world!.terrain, ray.ray, new Vector3());
             const point = hit === undefined ? ray.intersectObject(world!.terrain, false)[0]?.point : hit;
             return point ?? (fallbackToWater ? ray.ray.intersectPlane(

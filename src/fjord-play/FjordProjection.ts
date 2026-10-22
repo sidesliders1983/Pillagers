@@ -2,6 +2,7 @@ import type { HumanProfile } from '../characters/UniversalHumanProfile';
 import { parseFacialShape, type FacialShapeV1 } from '../characters/FacialIdentity';
 import { projectResidentAppearance } from '../characters/ResidentAppearance';
 import { spatialMemberPosition } from '../simulation/SpatialExpeditions';
+import { visibleLongshipMembers } from '../simulation/LongshipTransport';
 import { campaignIslandPlan } from './CampaignIsland';
 import { settlementCampfire } from './SettlementCampfire';
 import { livestockAsset } from '../characters/LivestockPresentation';
@@ -63,6 +64,10 @@ export interface FjordEntity {
         living: boolean;
         expedition?: string;
         expeditionWalking?: boolean;
+        shipExpedition?: string;
+        transportGroup?: string;
+        aboardShip?: string;
+        aboardAnchor?: number;
         occupation?: string | null;
         workEligible?: boolean;
         workHomeId?: string;
@@ -115,7 +120,7 @@ export function createFjordLayout(world: WorldBlueprint, mooring?: FjordTransfor
  * Both source hull and pier run along local Z. The 14.47m longship needs a lateral
  * berth: 2m pier half-width + 1.74m hull half-width + .76m gap, and extra seaward room.
  */
-function longshipBerth(anchor: FjordTransform): FjordTransform {
+export function longshipBerth(anchor: FjordTransform): FjordTransform {
     const forward = 3.5 * anchor.scale;
     const lateral = 4.5 * anchor.scale;
     const sine = Math.sin(anchor.rotation), cosine = Math.cos(anchor.rotation);
@@ -324,11 +329,17 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
                 state.mechanics && isProvidingCare(state, id) ? 'childcare' : null;
             const key = 'persona:' + id + '@' + (plot ? plot.x + ',' + plot.z : home.id);
             const partyPoint = mission ? spatialMemberPosition(mission, id) : undefined;
-            const point = partyPoint ? { ...partyPoint, y: surface.surfaceHeightAt(partyPoint.x, partyPoint.z), scale: 1 } : plot && !indoorReason ? allocatePoint(key, { x: plot.x - 3 + index % 5 * 1.8,
+            const transport = mission?.transport?.phase === 'embarked' ? mission.transport : undefined;
+            const deckMembers = transport ? visibleLongshipMembers(mission!.memberIds.filter(member =>
+                state.personas[member]?.deathWinter === null)) : [];
+            const aboardAnchor = deckMembers.indexOf(id);
+            const point = transport && aboardAnchor < 0 ? undefined : partyPoint ? { ...partyPoint,
+                y: transport ? world.waterLevel + .15 : surface.surfaceHeightAt(partyPoint.x, partyPoint.z), scale: 1 } : plot && !indoorReason ? allocatePoint(key, { x: plot.x - 3 + index % 5 * 1.8,
                 z: plot.z + plot.halfDepth + 1.5 + Math.floor(index / 5) * 1.8 }) : undefined;
             const growth = .4 + .6 * Math.min(16, Math.max(0, age)) / 16;
             add('persona', id, p.name, 'human', point ? { ...point, scale: growth } : undefined,
                 { living: true, expedition: mission?.id, expeditionWalking: partyPoint?.moving ?? false,
+                    aboardShip: transport?.shipId, aboardAnchor: transport ? aboardAnchor : undefined,
                     sex: p.dna.sex, age, indoorReason, occupation: p.occupation,
                     workEligible: state.mechanics ? inspectWork(state, id).reason === null : false,
                     workHomeId: residence?.buildingId ?? undefined });
@@ -370,9 +381,14 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
                 age: view.age, stage: view.stage, assignment: c.farmyardId,
                 sheltered: view.sheltered, overcrowding: view.overcrowding, parentIds: [...view.parentIds], grazingZone });
     }
-    for (const ship of site ? [] : Object.values(state.landing?.longships ?? {}))
-        if (ship.salvagedWinter === null)
-            add('longship', ship.id, 'Founding longship', 'longship', longshipBerth(layout.mooring), { living: true });
+    for (const ship of site ? [] : Object.values(state.landing?.longships ?? {})) {
+        if (ship.salvagedWinter !== null) continue;
+        const mission = Object.values(state.world?.spatial?.missions ?? {}).find(m =>
+            m.transport?.shipId === ship.id && m.transport.phase === 'embarked');
+        const pose = ship.transport ? { ...ship.transport, y: world.waterLevel + .15, scale: 1 } : longshipBerth(layout.mooring);
+        add('longship', ship.id, 'Founding longship', 'longship', pose, { living: true,
+            shipExpedition: mission?.id, transportGroup: ship.transport?.groupId ?? undefined });
+    }
     for (const key of Object.keys(layout.points)) if (!usedPoints.has(key)) delete layout.points[key];
     const ground = projectFjordGround(world, entities, campfire);
     if (ground.plots.length > 0 && ground.paths.length < ground.plots.length)
