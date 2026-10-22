@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "runtime": "v24.19.0",
+  "platform": "win32",
+  "measurement": "CPU-only annual snow/color interpolation and real SeasonTint/StructureSeasonTint material writes; no WebGL draws",
+  "fixture": "12 terrain materials, 24 foliage materials, 20 or 100 structure instances; 500 ms committed samples, 60-second year",
+  "limitation": "Material-binding benchmark, not whole-scene browser/GPU, physical-device or GC evidence",
+  "samples": [
+    {
+      "fps": 30,
+      "structures": 20,
+      "stepped": {
+        "cpuMsPerFrame": 0.0007385555555555988,
+        "materialPasses": 90,
+        "roundMs": [
+          0.00047372222222217414,
+          0.00048455555555556706,
+          0.0007385555555555988,
+          0.0008858888888889599,
+          0.0009663888888888373
+        ]
+      },
+      "interpolated": {
+        "cpuMsPerFrame": 0.002961666666666613,
+        "materialPasses": 1351,
+        "roundMs": [
+          0.002309888888888862,
+          0.0026990555555556107,
+          0.002961666666666613,
+          0.003518611111111214,
+          0.008798111111111034
+        ]
+      },
+      "incrementalCpuMs": 0.0022231111111110143
+    },
+    {
+      "fps": 30,
+      "structures": 100,
+      "stepped": {
+        "cpuMsPerFrame": 0.0002825555555554931,
+        "materialPasses": 90,
+        "roundMs": [
+          0.00027711111111102584,
+          0.0002822222222222434,
+          0.0002825555555554931,
+          0.00028377777777778746,
+          0.0003272222222221899
+        ]
+      },
+      "interpolated": {
+        "cpuMsPerFrame": 0.004312388888888815,
+        "materialPasses": 1351,
+        "roundMs": [
+          0.0022911666666666657,
+          0.003986055555555544,
+          0.004312388888888815,
+          0.011710388888888904,
+          0.03334611111111106
+        ]
+      },
+      "incrementalCpuMs": 0.004029833333333322
+    },
+    {
+      "fps": 60,
+      "structures": 20,
+      "stepped": {
+        "cpuMsPerFrame": 0.0001170277777777705,
+        "materialPasses": 90,
+        "roundMs": [
+          0.00011444444444445405,
+          0.00011461111111114203,
+          0.0001170277777777705,
+          0.00011977777777777495,
+          0.00014358333333335495
+        ]
+      },
+      "interpolated": {
+        "cpuMsPerFrame": 0.003791777777777775,
+        "materialPasses": 2701,
+        "roundMs": [
+          0.00206661111111114,
+          0.0023613888888888825,
+          0.003791777777777775,
+          0.005183083333333292,
+          0.018520666666666633
+        ]
+      },
+      "incrementalCpuMs": 0.0036747500000000044
+    },
+    {
+      "fps": 60,
+      "structures": 100,
+      "stepped": {
+        "cpuMsPerFrame": 0.00019363888888891426,
+        "materialPasses": 90,
+        "roundMs": [
+          0.00011483333333330847,
+          0.00014374999999997978,
+          0.00019363888888891426,
+          0.00025500000000003336,
+          0.0005123888888889244
+        ]
+      },
+      "interpolated": {
+        "cpuMsPerFrame": 0.004421638888888929,
+        "materialPasses": 2701,
+        "roundMs": [
+          0.0028596944444444715,
+          0.0033171666666666827,
+          0.004421638888888929,
+          0.005505249999999996,
+          0.010031722222222218
+        ]
+      },
+      "incrementalCpuMs": 0.004228000000000015
+    }
+  ]
+}

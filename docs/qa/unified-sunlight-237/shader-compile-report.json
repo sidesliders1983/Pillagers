@@ -1,0 +1,31 @@
+{
+  "compiler": "Glslang Version: 11:16.6.0\r\nESSL Version: OpenGL ES GLSL 3.20 glslang Khronos. 16.6.0\r\nGLSL Version: 4.60 glslang Khronos. 16.6.0\r\nSPIR-V Version 0x00010600, Revision 1\r\nGLSL.std.450 Version 100, Revision 1\r\nKhronos Tool ID 8\r\nSPIR-V Generator Version 11\r\nGL_KHR_vulkan_glsl version 100\r\nARB_GL_gl_spirv version 100\r\n",
+  "method": "Installed Three r180 chunks expanded for WebGL2; native average-name alias for glslang 16.6 compatibility; real modified water/static/instancing/skinning shader sources; offline compile/link, no rendered pixels",
+  "results": [
+    {
+      "name": "water-low",
+      "status": 0,
+      "output": "C:/CodexWorkspaces/Pillagers/scratch/unified-sunlight-237/output/unified-sunlight-237/shaders/water-low.vert\r\nC:/CodexWorkspaces/Pillagers/scratch/unified-sunlight-237/output/unified-sunlight-237/shaders/water-low.frag\r\n"
+    },
+    {
+      "name": "water-standard",
+      "status": 0,
+      "output": "C:/CodexWorkspaces/Pillagers/scratch/unified-sunlight-237/output/unified-sunlight-237/shaders/water-standard.vert\r\nC:/CodexWorkspaces/Pillagers/scratch/unified-sunlight-237/output/unified-sunlight-237/shaders/water-standard.frag\r\n"
+    },
+    {
+      "name": "native-static",
+      "status": 0,
+      "output": "C:/CodexWorkspaces/Pillagers/scratch/unified-sunlight-237/output/unified-sunlight-237/shaders/native-static.vert\r\nC:/CodexWorkspaces/Pillagers/scratch/unified-sunlight-237/output/unified-sunlight-237/shaders/native-static.frag\r\n"
+    },
+    {
+      "name": "native-use_instancing",
+      "status": 0,
+      "output": "C:/CodexWorkspaces/Pillagers/scratch/unified-sunlight-237/output/unified-sunlight-237/shaders/native-use_instancing.vert\r\nC:/CodexWorkspaces/Pillagers/scratch/unified-sunlight-237/output/unified-sunlight-237/shaders/native-use_instancing.frag\r\n"
+    },
+    {
+      "name": "native-use_skinning",
+      "status": 0,
+      "output": "C:/CodexWorkspaces/Pillagers/scratch/unified-sunlight-237/output/unified-sunlight-237/shaders/native-use_skinning.vert\r\nC:/CodexWorkspaces/Pillagers/scratch/unified-sunlight-237/output/unified-sunlight-237/shaders/native-use_skinning.frag\r\n"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import { meshyHumanFactory, meshyAnimationClips, type MeshyHuman } from '../characters/MeshyHuman';
 import { universalHumanProfile } from '../characters/UniversalHumanProfile';
 import { livestockPresentation } from '../characters/LivestockPresentation';
+import { prepareFaunaLighting } from '../characters/FaunaLighting';
 import { LivestockDeath } from './LivestockDeath';
 import { humanPreviewGroundSpeed } from '../character-lab/HumanPreviewPace';
 import { AnimationMixer, LoopOnce, LoopRepeat, Box3, BoxGeometry, CapsuleGeometry, Group, Mesh, MeshStandardMaterial, Object3D, Vector3 } from 'three';
@@ -27,6 +28,7 @@ export class FjordModels {
     private actors = new Map<Object3D, { human?: MeshyHuman; mixer?: AnimationMixer;
         clips?: import('three').AnimationClip[]; action?: import('three').AnimationAction;
         fingerprint?: string; paceSignature?: string; resumeGrazeTime?: number; embarked?: boolean;
+        materialRevision?: number;
         pace: number; groundSpeed: number; state: string }>();
     async reconcile(model: Object3D, entity: FjordEntity) {
         const actor = this.actors.get(model);
@@ -57,6 +59,10 @@ export class FjordModels {
             actor.state = 'Idle';
         }
         await this.wardrobe.reconcile(actor.human, entity, observe);
+        if (this.decorateMaterials && actor.materialRevision !== actor.human.equipRevision) {
+            this.decorateMaterials(model);
+            actor.materialRevision = actor.human.equipRevision;
+        }
         model.userData.appearance = model.userData.universalHumanProfile;
         model.userData.pace = actor.pace;
     }
@@ -188,7 +194,8 @@ export class FjordModels {
     private motionSources = new WeakMap<Object3D, { clips: import('three').AnimationClip[]; pace: number }>();
     private draco = new DRACOLoader().setDecoderPath(import.meta.env.BASE_URL + 'draco/');
     private loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).setDRACOLoader(this.draco);
-    constructor(private assets: AssetManager, private preparation?: CharacterPreparationObserver) { }
+    constructor(private assets: AssetManager, private preparation?: CharacterPreparationObserver,
+        private decorateMaterials?: (root: Object3D) => void) { }
     async create(entity: FjordEntity): Promise<Object3D> {
         if (entity.kind === 'persona' && entity.dna) {
             try {
@@ -306,6 +313,7 @@ export class FjordModels {
                 url = terrainAssetPath(longshipModel);
             const gltf = await this.loader.loadAsync(import.meta.env.BASE_URL + url);
             const source = gltf.scene;
+            if (entity.kind === 'cattle') prepareFaunaLighting(source);
             source.updateMatrixWorld(true);
             const bounds = new Box3().setFromObject(source), size = bounds.getSize(new Vector3());
             if (!Number.isFinite(size.y) || size.y <= 0)

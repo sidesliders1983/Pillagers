@@ -1,4 +1,4 @@
-import { Box3, BoxGeometry, Color, Group, Mesh, MeshStandardMaterial, Object3D, Vector3 } from 'three';
+import { Box3, BoxGeometry, Color, Group, Mesh, MeshStandardMaterial, Object3D, Texture, TextureLoader, Vector3 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
@@ -7,6 +7,8 @@ import {natureAssetIds,NatureAssetKey} from '../config/NatureAssets';
 import { worldConfig } from '../config/worldConfig';
 import { splitEmissiveSurfaces } from './EmissiveSurfaces';
 import { terrainModels as registry, terrainAssetPath } from '../config/TerrainAssets';
+import { supportedHomeLights } from '../world/HomeLighting';
+import { homeLightGeometry } from '../world/HomeLightGeometry';
 export type AssetKey = keyof typeof registry | keyof typeof generatedHouseFiles | NatureAssetKey | 'tent' | 'stoneCampfire';
 export interface AssetPreparationProgress {
     completed: number;
@@ -15,6 +17,33 @@ export interface AssetPreparationProgress {
     error?: unknown;
 }
 export class AssetManager {
+    readonly homeLightMaps = new Map<string, Texture>();
+    async loadHomeLighting() {
+        const loader = new TextureLoader();
+        const response = await fetch(import.meta.env.BASE_URL + 'game-assets/houses/lights/manifest.json');
+        if (!response.ok) throw new Error('Home light surface manifest is missing.');
+        const manifest = await response.json() as { assets: Record<string, { bindings:
+            { node: string; triangleCount: number; triangles: number[] }[];
+            windows: { position: number[]; outward: number[] }[] }> };
+        await Promise.all(supportedHomeLights.map(async key => {
+            const texture = await loader.loadAsync(import.meta.env.BASE_URL + 'game-assets/houses/lights/' + key + '.png');
+            texture.flipY = false; // Same glTF UV orientation as the authored atlas.
+            texture.channel = 1;
+            this.homeLightMaps.set(key, texture);
+            const root = this.models.get(key)!;
+            if (root.userData.placeholder) return;
+            root.userData.homeLightWindows = manifest.assets[key].windows;
+            root.traverse(node => {
+                if (!(node instanceof Mesh)) return;
+                const binding = manifest.assets[key].bindings.find(entry => entry.node === node.name);
+                if (!binding || (node.geometry.index?.count ?? node.geometry.getAttribute('position').count) !== binding.triangleCount * 3)
+                    throw new Error('Home light surfaces do not match ' + key + '/' + node.name);
+                const original = node.geometry;
+                node.geometry = homeLightGeometry(original, binding.triangles);
+                original.dispose();
+            });
+        }));
+    }
     readonly windowMaterials:MeshStandardMaterial[]=[];
     readonly fireMaterials:MeshStandardMaterial[]=[];
     private models = new Map<AssetKey, Group>();
@@ -167,6 +196,8 @@ export class AssetManager {
         }
     }
     dispose(){
+        for (const texture of this.homeLightMaps.values()) texture.dispose();
+        this.homeLightMaps.clear();
         const geometries=new Set<import('three').BufferGeometry>(),materials=new Set<import('three').Material>(),textures=new Set<import('three').Texture>();
         for(const model of this.models.values())model.traverse(node=>{if(node instanceof Mesh){geometries.add(node.geometry);for(const m of Array.isArray(node.material)?node.material:[node.material]){materials.add(m);for(const value of Object.values(m))if(value&&typeof value==='object'&&'isTexture' in value)textures.add(value as import('three').Texture);}}});
         for(const resource of [...geometries,...materials,...textures])resource.dispose();this.models.clear();this.draco.dispose();

@@ -3,6 +3,7 @@ import type { AssetManager, AssetKey } from '../core/AssetManager';
 import type { DiscoveryView } from '../simulation/ClanDiscovery';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { StructureSeasonTint } from '../world/StructureSeasonTint';
+import type { SeasonAppearance } from '../world/SeasonAppearanceTransition';
 import { natureVariation } from '../world/NatureVariation';
 import { seasonBlend } from '../config/timeVisualization';
 import { presentationProfiles } from '../config/PresentationQuality';
@@ -33,11 +34,15 @@ export class SettlementDressingLayer {
     private discovery?: DiscoveryView;
     private quality: 'low' | 'standard';
     private season: number | null = null;
+    private seasonAppearance?: SeasonAppearance;
+    private readonly foliageTone = new Color();
+    private readonly nextFoliageTone = new Color();
     private planBuilds = 0;
     private batchBuilds = 0;
     private disposed = false;
 
-    constructor(private assets: AssetManager, private world: WorldBlueprint, quality: 'low' | 'standard') {
+    constructor(private assets: AssetManager, private world: WorldBlueprint, quality: 'low' | 'standard',
+        private decorateMaterials?: (root: Object3D) => void) {
         this.quality = quality;
         this.root.name = 'Settlement dressing';
         const sources: Record<string, import('./SettlementDressing').DressingBounds> = {};
@@ -79,14 +84,27 @@ export class SettlementDressingLayer {
     }
 
     setSeason(progress: number | null) {
+        this.seasonAppearance = undefined;
         this.season = progress;
         for (const batch of this.batches.values()) this.tint(batch);
     }
 
+    setSeasonAppearance(appearance: SeasonAppearance) {
+        this.seasonAppearance = appearance;
+        for (const batch of this.batches.values()) this.tint(batch);
+    }
+
     private tint(batch: DressingBatch) {
+        if (this.seasonAppearance) {
+            batch.snow.setSnowAmount(this.seasonAppearance.snowAmount);
+            for (const { material, base } of batch.foliage)
+                material.color.copy(base).lerp(this.seasonAppearance.foliage, .12);
+            return;
+        }
         batch.snow.update(this.season);
         const blend = this.season === null ? null : seasonBlend(this.season);
-        const tone = blend ? new Color(blend.from.foliage).lerp(new Color(blend.to.foliage), blend.mix) : null;
+        const tone = blend ? this.foliageTone.setHex(blend.from.foliage)
+            .lerp(this.nextFoliageTone.setHex(blend.to.foliage), blend.mix) : null;
         for (const { material, base } of batch.foliage) {
             material.color.copy(base);
             if (tone) material.color.lerp(tone, .12);
@@ -139,6 +157,7 @@ export class SettlementDressingLayer {
             });
             // Ankle-height foliage frosts on every face; roof/well/log snow keeps upward coverage.
             const snow = new StructureSeasonTint(root, /grass|bush/.test(asset) ? 'all' : 'upward');
+            this.decorateMaterials?.(root);
             const foliage: DressingBatch['foliage'] = [];
             if (/grass|bush/.test(asset)) {
                 const unique = new Set<import('three').MeshStandardMaterial>();

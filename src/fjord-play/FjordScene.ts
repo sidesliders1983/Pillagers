@@ -21,12 +21,15 @@ import { ProductionLabels } from './ProductionLabels';
 import type { SelectionLabel } from './SelectionLabels';
 import { fjordTerrain, fjordSnowLine } from '../config/FjordTerrain';
 import { fjordPresentation } from '../config/FjordPresentation';
+import { fjordLighting } from '../config/FjordLighting';
 import { resolvePresentationQuality, type PresentationQuality } from '../config/PresentationQuality';
 import { Vector2, Vector3, Plane, Raycaster, RingGeometry, MeshBasicMaterial, DoubleSide, Clock, PerspectiveCamera, Scene, Mesh, Texture } from 'three';
 import { AssetManager } from '../core/AssetManager';
 import { createRenderer } from '../core/Renderer';
 import { WorldLighting } from '../core/WorldLighting';
 import { SeasonTint } from '../world/SeasonTint';
+import { SeasonAppearanceTransition } from '../world/SeasonAppearanceTransition';
+import { DirectionalAtmosphere } from '../world/DirectionalAtmosphere';
 import { createWorld } from '../world/WorldFactory';
 import { RTSCameraController } from '../camera/RTSCameraController';
 import { inspectCampfire, inspectSpatialExpeditions } from '../simulation/SimulationCore';
@@ -58,6 +61,10 @@ export function createFjordScene(options: {
     const session = shared.session, campaign = shared.fjord;
     const selectionLabels = labels.selection, productionLabels = labels.production;
     const query = new URLSearchParams(location.search);
+    const { unified: unifiedSunlight, northern: northernLight, warmHomes } = fjordLighting(query);
+    canvas.dataset.homeLightingMode = warmHomes ? 'warm-v1' : 'off';
+    const atmosphere = unifiedSunlight ? new DirectionalAtmosphere() : undefined;
+    const decorateMaterials = atmosphere ? (root: import('three').Object3D) => atmosphere.bind(root) : undefined;
     let restoredCamera = options.restoredCamera;
     let disposed = false, queued = false, worldRevision = 0;
     let activeBlueprint: typeof campaign.blueprint | undefined;
@@ -122,6 +129,16 @@ export function createFjordScene(options: {
     reducedMotion.addEventListener('change', configureEffects, { signal: bindings.signal });
     document.querySelector('#fjord-effects')!.addEventListener('change', configureEffects, { signal: bindings.signal });
     let weatherSignature = "";
+    let lightSignature = '';
+    let seasonYear: number | undefined;
+    let seasonAppearance = new SeasonAppearanceTransition();
+    const applySeasonAppearance = () => {
+        const appearance = seasonAppearance.current;
+        weatherTint?.applyAppearance(appearance);
+        layer?.setSeasonAppearance(appearance);
+        dressing?.setSeasonAppearance(appearance);
+        rivalScene?.setSeasonAppearance(appearance);
+    };
 
     const cleared = new Set<string>();
     let groundSignature = "";
@@ -159,7 +176,7 @@ export function createFjordScene(options: {
             let initialSoilSamples = 0;
             host.built();
             const next = await createWorld(assets!, {
-                mode: 'generated', blueprint, discovery,
+                mode: 'generated', blueprint, discovery, atmosphere,
                 settlement: 'canonical', groundStyle: campaignIslandPlan(blueprint) ? fjordTerrain.style : undefined, quality: document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
                 anisotropy: renderer.capabilities.getMaxAnisotropy(),
                 initialGroundWeights: () => {
@@ -220,6 +237,7 @@ export function createFjordScene(options: {
             if (nextWildlife) {
                 wildlife?.dispose();
                 wildlife = nextWildlife;
+                atmosphere?.bind(wildlife.root);
                 scene.add(wildlife.root);
             }
             if (activeBlueprint !== blueprint) layer!.resetConstructionBaseline();
@@ -247,19 +265,22 @@ export function createFjordScene(options: {
             layer!.setCampfireHeat(campfireEffect.inspect().heat);
             const summitLine = campaignIslandPlan(blueprint) ? fjordSnowLine(blueprint) : null;
             weatherTint = new SeasonTint(next.root, next.terrain, summitLine);
+            atmosphere?.bind(next.root);
             canvas.dataset.terrainStyle = JSON.stringify({
                 style: summitLine !== null ? fjordTerrain.style : 'native',
                 summitLineY: summitLine, minimumUp: fjordTerrain.permanentMinimumUp
             });
             weatherSignature = "";
             scene.add(next.root);
-            dressing = new SettlementDressingLayer(assets!, blueprint, next.quality);
+            layer!.setHomeGround(blueprint);
+            dressing = new SettlementDressingLayer(assets!, blueprint, next.quality, decorateMaterials);
             scene.add(dressing.root);
             cleared.clear();
             motion = new LivingWorldController(campaign.blueprint, discovery ?
                 (x, z) => !knownTerrain || discoveryAt(knownTerrain, x, z) !== 'unknown' : undefined);
             rivalScene?.dispose();
-            rivalScene = new RivalScene(blueprint, models!, () => knownTerrain);
+            rivalScene = new RivalScene(blueprint, models!, () => knownTerrain, decorateMaterials,
+                warmHomes ? assets!.homeLightMaps : undefined);
             scene.add(rivalScene.root);
             groundSignature = "";
             preparedGroundSignature = initialGroundSignature;
@@ -268,6 +289,9 @@ export function createFjordScene(options: {
             lighting = new WorldLighting(scene, renderer, assets!, firePosition, next.center,
                 document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
                 fjordPresentation.lighting);
+            lightSignature = '';
+            seasonYear = undefined;
+            seasonAppearance = new SeasonAppearanceTransition();
             lighting.includeWorldShadowBounds(next.root);
             if (syncScene) {
                 await syncScene();
@@ -310,6 +334,7 @@ export function createFjordScene(options: {
             if (event.error) loading.diagnostics.problem('asset-fallback', event.error, event.resource);
         }));
         else await assets.loadForSimulation();
+        if (warmHomes) await assets.loadHomeLighting();
         host.loading?.check();
         if (inactive()) {
             assets.dispose();
@@ -318,8 +343,8 @@ export function createFjordScene(options: {
         const preparation = host.loading?.diagnosticRun ?
             (sample: import('../characters/CharacterPreparation').CharacterPreparationSample) =>
                 host.loading?.diagnosticRun?.character(sample) : undefined;
-        models = new FjordModels(assets, preparation);
-        layer = new FjordEntities(models);
+        models = new FjordModels(assets, preparation, decorateMaterials);
+        layer = new FjordEntities(models, decorateMaterials, warmHomes ? assets.homeLightMaps : undefined);
         scene.add(layer.root);
 
         await rebuildWorld();
@@ -347,6 +372,7 @@ export function createFjordScene(options: {
                         if (world!.setDiscovery(knownTerrain)) {
                             lighting!.includeWorldShadowBounds(world!.root);
                             weatherTint!.refreshFoliage(world!.root);
+                            atmosphere?.bind(world!.root);
                             weatherSignature = '';
                         }
                         discoveryFog.setKnowledge(knownTerrain);
@@ -358,7 +384,23 @@ export function createFjordScene(options: {
                     precipitationEffect!.setWeather(view.precipitation);
                     canvas.dataset.precipitation = JSON.stringify(precipitationEffect!.inspect());
                     const nextWeather = JSON.stringify([view.calendar.visualProgress, view.weatherVisual]);
-                    if (nextWeather !== weatherSignature) {
+                    const nextLight = northernLight
+                        ? nextWeather + ':' + view.time.winter + ':' + view.calendar.progress : nextWeather;
+                    const weatherChanged = nextWeather !== weatherSignature;
+                    const lightChanged = nextLight !== lightSignature;
+                    const year = view.time.winter + view.calendar.progress;
+                    const stepSeconds = seasonYear === undefined ? Infinity :
+                        (year - seasonYear) * session.effectiveMinutesPerWinter * 60;
+                    // Ordinary clock batches blend for one update interval. Loads, explicit
+                    // year jumps and world replacement reanchor directly to their confirmed state.
+                    const transition = session.running && stepSeconds > 0 &&
+                        stepSeconds <= host.tickIntervalSeconds * 2.5 ? host.tickIntervalSeconds : 0;
+                    let appearanceChanged = false;
+                    if (year !== seasonYear) {
+                        appearanceChanged = seasonAppearance.anchor(view.calendar.visualProgress, transition);
+                        seasonYear = year;
+                    }
+                    if (weatherChanged) {
                         const fogPresentation = fjordFogPresentation(fjordPresentation.fogProfile, {
                             width: campaign.blueprint.config.width,
                             winterWeight: view.calendar.winterWeight,
@@ -367,11 +409,20 @@ export function createFjordScene(options: {
                         });
                         lighting!.setFogPresentation(fogPresentation);
                         discoveryFog?.setPresentation(fogPresentation);
-                        lighting!.setSeason(view.calendar.visualProgress, view.weatherVisual.lighting);
-                        weatherTint!.update(view.calendar.visualProgress);
-                        layer!.setSeason(view.calendar.visualProgress);
+                    }
+                    if (lightChanged) {
+                        lighting!.setSeason(view.calendar.visualProgress, view.weatherVisual.lighting,
+                            northernLight ? view.calendar.progress : undefined, northernLight ? transition : 0);
+                        lightSignature = nextLight;
+                    }
+                    // Discovery can replace foliage during a paused or partial transition.
+                    // New bindings receive the current displayed appearance, never the endpoint.
+                    if (weatherChanged || appearanceChanged) applySeasonAppearance();
+                    if (weatherChanged) {
                         weatherSignature = nextWeather;
                         canvas.dataset.seasonMaterials = JSON.stringify(weatherTint!.inspect());
+                    }
+                    if (weatherChanged || lightChanged) {
                         canvas.dataset.weather = JSON.stringify({
                             ...view.weatherVisual, observed: {
                                 sky: lighting!.skyColor.getHex(), fogNear: lighting!.fog.near, fogFar: lighting!.fog.far,
@@ -441,7 +492,6 @@ export function createFjordScene(options: {
                         seed: state.seed, homes: dressingHomes(state, view.entities),
                         ground: view.ground, campfire: view.campfire
                     }, knownTerrain);
-                    dressing!.setSeason(view.calendar.visualProgress);
                     canvas.dataset.dressing = JSON.stringify(dressing!.inspect());
                     layer!.prepareExpeditions(state, campaign.blueprint, host.tickIntervalSeconds);
                     const prepareEntities = () => layer!.sync(view.entities, host.loading ? yieldForInput : undefined, current,
@@ -471,7 +521,7 @@ export function createFjordScene(options: {
                     motion!.setStandingTrees(trees);
                     layer!.configureMotion(motion!);
                     layer!.advance(motion!, 0, false);
-                    await rivalScene?.sync(view.rival, view.calendar.visualProgress, trees);
+                    await rivalScene?.sync(view.rival, view.calendar.visualProgress, trees, seasonAppearance.current);
                     if (!current()) return;
                     canvas.dataset.rival = JSON.stringify({
                         known: view.rival.known,
@@ -542,6 +592,7 @@ export function createFjordScene(options: {
         islandMap.update(camera, controller.focus, frameStarted);
         const motionDelta = Math.min(elapsed, 1);
         if (running) activeTime += motionDelta;
+        if (seasonAppearance.advance(motionDelta, running)) applySeasonAppearance();
         motion!.advance(motionDelta, running, !document.hidden);
         layer!.advance(motion!, motionDelta, running);
         layer!.updateConstruction(document.hidden ? 0 : delta);
@@ -553,7 +604,7 @@ export function createFjordScene(options: {
         precipitationEffect!.update(delta, running && !document.hidden, controller.focus, camera.position);
         const fireVisual = campfireEffect!.inspect();
         layer!.setCampfireHeat(fireVisual.heat);
-        lighting!.setCampfire(fireVisual.lit && fireVisual.quality !== 'off', fireVisual.time, fireVisual.reducedMotion);
+        lighting!.setCampfire(fireVisual.lit, fireVisual.time, fireVisual.reducedMotion);
         layer!.select(liveMarkers);
         selectionLabels.setAnchors(layer!.root.userData.markers ?? []);
         productionLabels.setAnchors(layer!.productionAnchors());
@@ -568,16 +619,22 @@ export function createFjordScene(options: {
                 ...motion!.inspectMetrics(), ...models!.inspectResources(),
                 lastFrameMs, drawCalls: renderer.info.render.calls,
                 triangles: renderer.info.render.triangles,
-                geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures
+                geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures,
+                programs: renderer.info.programs?.length ?? null
             });
             canvas.dataset.islandMap = JSON.stringify(islandMap.inspect());
             canvas.dataset.motion = JSON.stringify(motion!.inspect());
             canvas.dataset.campfireEffect = JSON.stringify(fireVisual);
             canvas.dataset.precipitation = JSON.stringify(precipitationEffect!.inspect());
             canvas.dataset.structureSnow = JSON.stringify(layer!.inspectSeason());
+            canvas.dataset.homeLighting = JSON.stringify(layer!.inspectHomeLighting());
+            canvas.dataset.homeGroundGlow = JSON.stringify(layer!.inspectHomeGround() ?? null);
+            canvas.dataset.seasonMaterials = JSON.stringify(weatherTint!.inspect());
             canvas.dataset.motionTime = String(activeTime);
             canvas.dataset.cameraClearance = JSON.stringify(controller.inspectClearance());
             canvas.dataset.shadowCoverage = JSON.stringify(lighting!.inspectShadowCoverage());
+            canvas.dataset.seasonalLight = JSON.stringify(lighting!.seasonalLightState ?? { profile: 'baseline' });
+            canvas.dataset.sunlight = JSON.stringify(atmosphere?.inspect() ?? { profile: 'baseline' });
             canvas.dataset.markers = JSON.stringify(layer!.root.userData.markers ?? []);
             lastDiagnostics = performance.now();
         }
@@ -594,8 +651,11 @@ export function createFjordScene(options: {
         }
         lighting!.setFogViewDistance(campaignIslandPlan(campaign.blueprint) ?
             camera.position.distanceTo(controller.focus) : 60);
-        lighting!.update(time, calendar.visualProgress);
+        lighting!.update(time, calendar.visualProgress, motionDelta, running);
+        layer!.setHomeDarkness(lighting!.darkness);
+        rivalScene?.setHomeDarkness(lighting!.darkness);
         lighting!.updateShadowView(camera);
+        atmosphere?.update(lighting!, camera);
         world!.update(time, lighting, camera);
         discoveryFog?.update(delta);
         renderer.render(scene, camera);
@@ -689,6 +749,7 @@ export function createFjordScene(options: {
         world?.dispose();
         lighting?.dispose();
         portraits.dispose();
+        atmosphere?.dispose();
         renderer.dispose();
         scene.clear();
         const releaseSources = () => {
@@ -708,7 +769,11 @@ export function createFjordScene(options: {
         frame, prepareGpu, arrive, dispose, highlight,
         portrait: (input: PortraitRequest) => inactive() || renderer.getContext().isContextLost()
             ? Promise.resolve(undefined) : portraits.render(input, layer?.residentForPortrait(input)),
-        resetFrameTime: () => clock.start(),
+        resetFrameTime: () => {
+            clock.start();
+            lighting?.finishSeasonTransition();
+            if (seasonAppearance.finish()) applySeasonAppearance();
+        },
         get hasWorld() { return !!world; },
         get diagnostics() { return [...(assets?.diagnostics ?? []), ...(models?.diagnostics ?? [])]; },
         setTarget(point: { x: number; z: number } | null | undefined, valid?: boolean) {

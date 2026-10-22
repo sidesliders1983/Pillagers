@@ -1,6 +1,7 @@
 import { Color, Group, Mesh, MeshStandardMaterial } from 'three';
 import { seasonBlend, seasonPresets } from '../config/timeVisualization';
 import { fjordTerrain } from '../config/FjordTerrain';
+import type { SeasonAppearance } from './SeasonAppearanceTransition';
 
 /** Only material uniforms change during the cycle; geometry and instancing stay intact. */
 export class SeasonTint {
@@ -131,6 +132,16 @@ export class SeasonTint {
         }
         this.tint.setHex(from.foliage).lerp(this.next.setHex(to.foliage), mix);
         for (const [material, base] of this.materials) material.color.copy(base).multiply(this.tint);
+    }
+
+    /** Apply a shared interpolated sample using cached bindings, without touching geometry/programs. */
+    applyAppearance(appearance: SeasonAppearance) {
+        for (const amount of this.snow.values()) amount.value = appearance.snowAmount;
+        for (const [ground, base] of this.grounds) {
+            ground.color.copy(base);
+            if (this.summitLine === null || ground.name !== 'mossy_rock') ground.color.multiply(appearance.ground);
+        }
+        for (const [material, base] of this.materials) material.color.copy(base).multiply(appearance.foliage);
     }
 
     /** Apply a canonical weather severity without inventing a seasonal clock. */

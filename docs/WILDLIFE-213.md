@@ -13,6 +13,10 @@ moving the camera and changing presentation quality keep the current actors.
 
 ## Population and habitats
 
+Wildlife coats use native scene lighting with source emission disabled once on
+cached model templates. They follow Northern Light alongside residents and terrain;
+this does not change authored colors, motion, discovery or sightings.
+
 | Species | Instances | Placement |
 | --- | ---: | --- |
 | Brown bear | 1 | Deep forest or foothills, at least 135 m from settlement centres |

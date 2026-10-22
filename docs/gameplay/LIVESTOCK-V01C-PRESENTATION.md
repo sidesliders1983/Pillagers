@@ -7,6 +7,11 @@ The candidate founding/balance rules are not activated by this change.
 
 ## Available assets
 
+Coats reflect the same scene light as the settlement. Imported emission is disabled
+on cached livestock templates; the goat, pig and sheep exports previously carried
+white self-emission that stayed bright in northern darkness. Future livestock
+exports clear that factor as well. Albedo, rigging, animations and Core are unchanged.
+
 | Species | Young | Young Adult / adult female | Young Adult / adult male |
 | --- | --- | --- | --- |
 | Cattle | Existing calf | Existing young-adult / cow | Existing young-adult / bull |

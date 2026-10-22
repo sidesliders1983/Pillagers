@@ -12,6 +12,23 @@ Thaw starts after Spring begins: Winter → Spring during ticks 250–375, then 
 Summer during ticks 375–500. Summer/Autumn blends retain their original timing. These
 visual phases are derived from the same saved tick; there is no second clock.
 
+The displayed ground/foliage colors and seasonal snow now interpolate between
+confirmed visual-season samples over the existing 500 ms campaign update interval.
+Terrain, discovered foliage, houses, rival structures and settlement dressing share
+one appearance sample. The full Winter hold and Spring thaw above keep their exact
+canonical endpoints; the render presentation can trail them by one update interval.
+This smoothing applies to Fjord Play with both baseline and opt-in northern lighting.
+It introduces no calendar fields, gameplay rules or weather changes.
+
+Pause freezes a partial transition and resume continues from that appearance.
+Import/load, explicit year jumps and new worlds apply the saved endpoint directly;
+hidden-tab/context recovery reanchors without background catch-up. New or upgraded
+structures, discovered foliage and rebuilt dressing quality subsets inherit the
+currently displayed appearance. Campfire heat remains its separate local multiplier,
+and permanent summit snow is unchanged. The transition updates cached material colors
+and existing snow uniforms only while changing; it does not traverse world geometry,
+rebuild instance buffers or allocate textures/materials/shader programs each frame.
+
 The label **Year length** offers 1, 3 or 5 **min per year**. **+1 Year** submits the existing
 AdvanceWinter command. It advances one full year while preserving a partial tick, so
 Spring 800 at tick 430 becomes Spring 801 at tick 430. Age remains expressed in Winters;

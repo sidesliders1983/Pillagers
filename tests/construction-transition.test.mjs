@@ -273,7 +273,7 @@ test('canonical build/upgrade sync triggers once, loaded houses and occupation c
     await layer.sync([entity(2)]);
     assert.deepEqual(layer.inspectConstruction(), [], 'World replacement establishes a new baseline');
     layer.dispose();
-    const observed = new FjordEntities(models, false);
+    const observed = new FjordEntities(models, undefined, undefined, false);
     await observed.sync([]);
     await observed.sync([entity(0)]);
     await observed.sync([entity(1)]);

@@ -8,8 +8,9 @@ export const campaignIslandCatalog = {
         "src/config/HousingAssets.ts": "e02198266092303a28e77af616e00c57742e96b546641c25cc4671231798e0d9",
         "src/config/NatureAssets.ts": "00b801b9f21109b5f3281b54e5b271bebc70f426f5397853b90bb2e0c9994d5d",
         "src/config/TerrainAssets.ts": "9ed1cb6b179fdebe1389dc504c28ed76499fd0f1f93950d4fbd90dc4de974680",
+        "src/config/lightingConfig.ts": "90a8db233c0c90aabee248d27c2bef1ff3fec3fe7070b8aac97010d07aea2b86",
         "src/config/worldConfig.ts": "e3cd430e0aed4f4747537fa49d87001c9427992ce7ba1abbfc655e28f3f819d9",
-        "src/core/AssetManager.ts": "99112fbebc6eec7e65bd2d4283fb2872b642830bad8e61e2970149b10d9d95b5",
+        "src/core/AssetManager.ts": "dc40e578881fa65812ffcc3b6fb079a487b46a70eaf36e4de15dd1fd1bdb088d",
         "src/core/EmissiveSurfaces.ts": "84d0f0a693d46437e0ec2521b1c4459655bce542d6d368531faeb9fa17789f6e",
         "src/fjord-play/CampaignIsland.ts": "8280568ba5be619b5a88b3dbe2853b159d3017b39d3adcd34c529de3264c7b28",
         "src/fjord-play/VillageNature.ts": "dc21173c545ef3e41760e3fe6f56eb02cf3ff0f9bd307835a322ce1a3996bfce",
@@ -38,6 +39,8 @@ export const campaignIslandCatalog = {
         "src/world-generation/ValidateNavigation.ts": "4bf887833ce8f05026ad83eebbf05aec549b85cb2e9b91fbe5f881f7d382d58c",
         "src/world-generation/WorldBlueprint.ts": "8f737b6f3c8c30abaf7237a1f6b58fed6b146aee8e154d99bc6aaee24a44346c",
         "src/world/BuildingPlot.ts": "b2848f022c605712a8dc2b993834debacf2b8b31967f3390680ea9f8145ba444",
+        "src/world/HomeLightGeometry.ts": "792f34f32f141de37a06560877b2a67c98e7f73d4ed9712b126376042fa36bfe",
+        "src/world/HomeLighting.ts": "b3c58a5442aff4ea76a8b1692e1150be257437ea59bb515c9cae75f4f7837ad2",
         "src/world/SettlementLayout.ts": "cad1c7e988136c674411983777264102dc3674631d743c6fb9d4bdb44868bc5a"
     },
     "entries": [

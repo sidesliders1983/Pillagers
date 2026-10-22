@@ -1,4 +1,5 @@
 import { restoreWildlife } from './WildlifeSnapshot';
+import { prepareFaunaLighting } from '../characters/FaunaLighting';
 import type { WildlifeState } from '../simulation/WildlifeSightings';
 import { animalRestRig, clearAnimalRest, poseAnimalRest, type AnimalRestRig } from './AnimalRestMotion';
 import { rabbitRig, poseRabbit, type RabbitRig } from './RabbitMotion';
@@ -159,6 +160,7 @@ export class WildlifeLayer {
             const loads = await Promise.allSettled(ids.map(async (id) => {
                 layer.leases.add(id);
                 const source = await layer.sources.acquire(id);
+                prepareFaunaLighting(source.scene);
                 if (id.startsWith('gull-'))
                     prepareGullWings(source.scene, id === 'gull-standing');
                 for (const actor of layer.population.actors.filter(item => item.variant.asset === id)) {
