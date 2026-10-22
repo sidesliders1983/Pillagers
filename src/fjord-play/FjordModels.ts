@@ -24,7 +24,8 @@ export class FjordModels {
     });
     private actors = new Map<Object3D, { human?: MeshyHuman; mixer?: AnimationMixer;
         clips?: import('three').AnimationClip[]; action?: import('three').AnimationAction;
-        fingerprint?: string; paceSignature?: string; resumeGrazeTime?: number; pace: number; groundSpeed: number; state: string }>();
+        fingerprint?: string; paceSignature?: string; resumeGrazeTime?: number; embarked?: boolean;
+        pace: number; groundSpeed: number; state: string }>();
     async reconcile(model: Object3D, entity: FjordEntity) {
         const actor = this.actors.get(model);
         if (!actor?.human || !entity.dna) return;
@@ -102,9 +103,20 @@ export class FjordModels {
         }
         return available;
     }
+    /** Occupants are recognizable posed characters, without an independent animation clock. */
+    setEmbarked(model: Object3D, embarked: boolean) {
+        const actor = this.actors.get(model);
+        if (!actor?.human) return;
+        if (embarked || actor.embarked) {
+            // Sampling stops previous blended actions as well as choosing a standing pose.
+            actor.human.sampleAnimation('Idle', 0);
+            actor.state = 'Idle';
+        }
+        actor.embarked = embarked;
+    }
     animate(model: Object3D, state: 'Idle' | 'Walk' | 'Run' | 'Talk' | 'Listen' | 'Graze' | 'Rest' | 'HumanInteraction' | 'Farm' | 'Attack' | 'Doze', speed: number, delta: number) {
         const actor = this.actors.get(model);
-        if (!actor) return;
+        if (!actor || actor.embarked) return;
         if (actor.human) {
             const humanState = state === 'Graze' || state === 'Rest' || state === 'HumanInteraction' ? 'Idle' : state;
             if (actor.human.clips.some(c => c.name === meshyAnimationClips[humanState])) {

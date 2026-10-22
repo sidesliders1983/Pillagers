@@ -116,9 +116,9 @@ body.fjord-play {
 #fjord-play .fjord-home-improvements p { margin-bottom: 7px; }
 .fjord-home-improvements .fjord-actions { margin-top: 8px; }
 .fjord-card-body details.fjord-worker-preview { margin: 8px 0; padding-top: 0; border: 0; }
-.fjord-card-body details.fjord-home-residents { margin: 0 0 10px; padding: 0; border: 0; }
-.fjord-home-residents summary { display: grid; gap: 3px; }
-.fjord-home-residents summary > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fjord-home-residents { margin: 0 0 10px; }
+.fjord-home-residents-heading { display: grid; gap: 3px; color: var(--fjord-accent); }
+.fjord-home-residents-heading > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 #fjord-play button.fjord-home-change { padding: 4px 6px; font-size: 11px; }
 #fjord-play .fjord-home-change .fjord-glyph { width: 16px; }
 @media(min-width:601px) {

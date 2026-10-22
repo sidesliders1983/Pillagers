@@ -180,6 +180,20 @@ in unknown terrain. Frustum culling skips hidden actors, and animations more tha
 200 m from the camera are not evaluated. Camera position does not influence
 placement or motion decisions.
 
+Confirmed land/shore and airborne positions are interpolated over the campaign's actual
+snapshot cadence, including coalesced updates, rather than repeatedly easing into
+each tick position and stopping. Heading follows the shortest turn. Land Meshy
+clip time and the fallback moose leg phase advance with horizontal metres actually
+displayed, so changing from roaming to fleeing does not multiply the whole elapsed
+clock by a new speed or leave fast feet cycling over a stationary body. Pauses
+retain the interpolated pose; loading snaps without adding teleport distance to
+the gait. Flying gulls retain their interpolated altitude; heading, bank, pitch
+and ascent-driven wing effort transition across the same snapshot interval. This
+avoids a rush-and-stall every 500 ms and abrupt changes in wingbeat amplitude.
+No flight extrapolation or additional simulation decisions run in render frames.
+These are presentation changes: canonical flee speeds, shyness,
+habitats, sighting positions and saved wildlife remain unchanged.
+
 In the development server open `/fjord-play?debugWildlife` and inspect
 `JSON.parse(document.querySelector('canvas[data-wildlife]').dataset.wildlife)`.
 It reports stable IDs, species/variant, habitat, state, position, anchor, radius,
@@ -211,3 +225,6 @@ Gull and distribution evidence is in [revision 002](qa/wildlife-213/revision-002
 Current coastal animal motion and placement evidence is in [revision 003](qa/wildlife-213/revision-003/README.md).
 
 Rabbit motion and placement evidence is in [rabbit revision 001](qa/wildlife-213/rabbit-001/README.md).
+
+Airborne snapshot interpolation and immediate house residents are covered in
+[the cadence regression report](qa/wildlife-home-regressions/revision-002.md).

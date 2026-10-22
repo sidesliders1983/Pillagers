@@ -568,8 +568,11 @@ test('the five newly animated species use their source clips on land and water a
             layer.population.time = 0;
             layer.advance(0, false);
             const before = capture();
+            const origin = { ...record.actor.position };
             let maximumMotion = 0;
             for (const time of [.2, .4, .6, .8, 1]) {
+                if (record.motion && record.actor.speed > 0)
+                    record.actor.position.z = origin.z + time * record.actor.speed;
                 layer.population.time = time;
                 layer.advance(0, false);
                 const points = capture();
@@ -823,6 +826,103 @@ test('all seven Meshy species retain resting motion and hand full joint control 
     }
 });
 
+
+test('canonical land motion keeps fleeing speed, rendered distance and clip phase synchronized across batched ticks', async () => {
+    const { captureWildlife } = load('../src/wildlife/WildlifeSnapshot.ts');
+    const layer = await WildlifeLayer.create(worldFixture(), () => true, sources);
+    try {
+        const fox = layer.records.find(record => record.actor.species === 'red-fox');
+        const snapshot = { actors: captureWildlife(layer.population) };
+        snapshot.actors.find(actor => actor.id === fox.actor.id).state = 'roam';
+        layer.useCanonical(snapshot, .5);
+        layer.advance(0, false);
+        const initial = fox.root.position.clone();
+        const before = fox.mixer.time;
+        const flee = structuredClone(snapshot);
+        const animal = flee.actors.find(actor => actor.id === fox.actor.id);
+        animal.state = 'flee';
+        layer.useCanonical(flee, .5);
+        layer.advance(.01, true);
+        assert.equal(fox.mixer.time, before, 'Entering flee cannot jump the animation to time × new speed');
+        animal.position.z += fox.actor.variant.fleeSpeed * .5;
+        const next = structuredClone(flee), saved = structuredClone(next);
+        layer.useCanonical(next, .5);
+        let previous = fox.root.position.z;
+        for (let frame = 0; frame < 30; frame++) {
+            layer.advance(1 / 60, true);
+            const step = fox.root.position.z - previous;
+            assert.ok(Math.abs(step - fox.actor.variant.fleeSpeed / 60) < 1e-9,
+                'A fleeing body must keep moving evenly between canonical updates');
+            previous = fox.root.position.z;
+            assert.ok(Math.abs(fox.mixer.time - before - Math.abs(previous - initial.z)) < 1e-9,
+                'Clip time must advance with actual displayed metres');
+        }
+        const paused = [fox.root.position.toArray(), fox.mixer.time];
+        layer.advance(5, false);
+        assert.deepEqual([fox.root.position.toArray(), fox.mixer.time], paused);
+        layer.advance(.5, true);
+        assert.equal(fox.mixer.time, paused[1], 'Without new body travel the feet stop cycling');
+        assert.deepEqual(next, saved, 'Presentation must not change authoritative wildlife');
+    } finally { layer.dispose(); }
+});
+
+test('canonical gull flight moves evenly in 3D with continuous turns and wing effort between snapshots', async () => {
+    const { captureWildlife } = load('../src/wildlife/WildlifeSnapshot.ts');
+    const world = worldFixture(), simulation = new WildlifePopulation(world);
+    const layer = await WildlifeLayer.create(world, () => true, sources);
+    try {
+        const gulls = layer.records.filter(record => record.actor.variant.movement === 'air');
+        assert.equal(gulls.length, 6);
+        let snapshot = { actors: captureWildlife(simulation) };
+        layer.useCanonical(snapshot, .5);
+        layer.advance(0, false);
+        for (const [interval, frames] of [[.18, 11], [.5, 15], [.5, 30], [.6, 36]]) {
+            const before = gulls.map(record => ({ position: record.root.position.clone(),
+                heading: record.motion.heading, flight: { ...record.motion.flight } }));
+            simulation.advance(.6, true);
+            snapshot = { actors: captureWildlife(simulation) };
+            const saved = structuredClone(snapshot);
+            layer.useCanonical(snapshot, interval);
+            for (let frame = 1; frame <= frames; frame++) {
+                layer.advance(interval / frames, true);
+                const ratio = frame / frames;
+                gulls.forEach((record, index) => {
+                    const target = record.actor, previous = before[index];
+                    const expected = previous.position.clone().lerp(new Vector3(
+                        target.position.x, target.position.y, target.position.z), ratio);
+                    assert.ok(record.root.position.distanceTo(expected) < 1e-8,
+                        'No rush-and-stall; retain flight altitude instead of snapping onto the ground');
+                    const turn = Math.atan2(Math.sin(target.heading - previous.heading),
+                        Math.cos(target.heading - previous.heading));
+                    assert.ok(Math.abs(record.root.rotation.y - previous.heading - turn * ratio) < 1e-8);
+                    for (const key of ['bank', 'climbRate', 'flapEffort']) {
+                        const expectedPose = previous.flight[key] + (target[key] - previous.flight[key]) * ratio;
+                        assert.ok(Math.abs(record.motion.flight[key] - expectedPose) < 1e-8,
+                            key + ' must transition continuously with the displayed flight');
+                    }
+                    assert.ok(Math.abs(record.root.rotation.z - record.motion.flight.bank) < 1e-8);
+                    const pitch = -Math.atan2(record.motion.flight.climbRate, target.speed) * .3;
+                    assert.ok(Math.abs(record.root.rotation.x - pitch) < 1e-8);
+                    const flap = gullWingMotion(layer.population.time, target.phase,
+                        false, record.motion.flight.flapEffort).flap;
+                    const wing = record.wings[0];
+                    assert.ok(Math.abs(wing.shoulder.quaternion.z - Math.sin(wing.side * flap / 2)) < 1e-8,
+                        'Wingbeat amplitude must use the interpolated climb effort');
+                });
+            }
+            assert.deepEqual(snapshot, saved, 'Flight presentation cannot change saved animals or sightings');
+        }
+        simulation.advance(.6, true);
+        layer.useCanonical({ actors: captureWildlife(simulation) }, .5);
+        layer.advance(.1, true);
+        const capture = () => gulls.map(record => ({ position: record.root.position.toArray(),
+            rotation: record.root.rotation.toArray(), flight: { ...record.motion.flight },
+            wing: record.wings[0].shoulder.quaternion.toArray() }));
+        const paused = capture();
+        layer.advance(5, false);
+        assert.deepEqual(capture(), paused, 'Pausing freezes the position, attitude and wings together');
+    } finally { layer.dispose(); }
+});
 
 test('canonical wildlife is unchanged by render frames, camera culling or rendered human positions', async () => {
     const { captureWildlife } = load('../src/wildlife/WildlifeSnapshot.ts');

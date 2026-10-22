@@ -495,7 +495,7 @@ export function createFjordScene(options: {
         layer!.advance(motion!, motionDelta, running);
         rivalScene?.advance(motionDelta, running);
         wildlife?.setHumans([...layer!.humanPositions(), ...(rivalScene?.humanPositions() ?? [])]);
-        wildlife?.useCanonical(session.readSnapshot().wildlife);
+        wildlife?.useCanonical(session.readSnapshot().wildlife, host.tickIntervalSeconds);
         wildlife?.advance(motionDelta, running, camera);
         campfireEffect!.update(delta, running && !document.hidden);
         precipitationEffect!.update(delta, running && !document.hidden, controller.focus, camera.position);
@@ -655,14 +655,16 @@ export function createFjordScene(options: {
                 return [id, { x: person.position[0], z: person.position[2] }];
             }));
         },
-        pick(x: number, y: number, pointerType: 'mouse' | 'touch') {
-            return layer!.pick(camera, x, y, canvas.getBoundingClientRect(), pointerType);
+        pick(x: number, y: number, pointerType: 'mouse' | 'touch', targetKind?: 'longship') {
+            return layer!.pick(camera, x, y, canvas.getBoundingClientRect(), pointerType, targetKind);
         },
-        groundPoint(x: number, y: number, fallbackToWater = false) {
+        groundPoint(x: number, y: number, fallbackToWater = false, waterOnly = false) {
             const rect = canvas.getBoundingClientRect(), ray = new Raycaster();
             camera.updateMatrixWorld();
             ray.setFromCamera(new Vector2((x - rect.left) / rect.width * 2 - 1,
                 -(y - rect.top) / rect.height * 2 + 1), camera);
+            if (waterOnly) return ray.ray.intersectPlane(
+                new Plane(new Vector3(0, 1, 0), -campaign.blueprint.waterLevel), new Vector3());
             const hit = intersectNavigationTerrain(world!.terrain, ray.ray, new Vector3());
             const point = hit === undefined ? ray.intersectObject(world!.terrain, false)[0]?.point : hit;
             return point ?? (fallbackToWater ? ray.ray.intersectPlane(
