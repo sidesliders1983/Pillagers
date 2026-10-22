@@ -122,6 +122,8 @@ export function createFjordScene(options: {
 
     const cleared = new Set<string>();
     let groundSignature = "";
+    let preparedGroundSignature = "";
+    let preparedSoilSamples = 0;
     let arrivalPose: { position: number[]; target: number[] };
     let highlandPose: { position: number[]; target: number[] };
     document.querySelector('#fjord-view-home')!.addEventListener('click', () => {
@@ -150,11 +152,24 @@ export function createFjordScene(options: {
             const revision = ++worldRevision;
             const canonical = session.readSnapshot();
             const discovery = canonical.discovery ? inspectClanDiscovery(canonical.discovery, canonical.clan.id) : undefined;
+            let initialGroundSignature = '';
+            let initialSoilSamples = 0;
             host.built();
             const next = await createWorld(assets!, {
                 mode: 'generated', blueprint, discovery,
                 settlement: 'canonical', groundStyle: campaignIslandPlan(blueprint) ? fjordTerrain.style : undefined, quality: document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
                 anisotropy: renderer.capabilities.getMaxAnisotropy(),
+                initialGroundWeights: () => {
+                    const view = campaign.readProjection();
+                    const ground = { plots: [...view.ground.plots, ...view.rival.ground.plots],
+                        paths: [...view.ground.paths, ...view.rival.ground.paths] };
+                    const grassPlots = [...view.entities, ...view.rival.entities]
+                        .filter(entity => entity.kind === 'household' && entity.plot).map(entity => entity.plot!);
+                    initialGroundSignature = JSON.stringify([ground, grassPlots]);
+                    const weights = fjordGroundWeights(blueprint, ground, grassPlots);
+                    initialSoilSamples = weights.filter(weight => weight > 0).length;
+                    return weights;
+                },
                 preparation: async (stage, operation) => {
                     if (host.loading) return host.loading.measure(stage, operation);
                     await yieldForInput();
@@ -243,6 +258,8 @@ export function createFjordScene(options: {
             rivalScene = new RivalScene(blueprint, models!, () => knownTerrain);
             scene.add(rivalScene.root);
             groundSignature = "";
+            preparedGroundSignature = initialGroundSignature;
+            preparedSoilSamples = initialSoilSamples;
             lighting?.dispose();
             lighting = new WorldLighting(scene, renderer, assets!, firePosition, next.center,
                 document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
@@ -367,20 +384,27 @@ export function createFjordScene(options: {
                     const grassPlots = observedEntities.filter(e => e.kind === 'household' && e.plot).map(e => e.plot!);
                     const signature = JSON.stringify([observedGround, grassPlots]);
                     if (signature !== groundSignature) {
-                        const weights = fjordGroundWeights(campaign.blueprint, observedGround, grassPlots);
-                        if (host.loading) {
-                            await host.loading.measure('initial-ground-wear',
-                                () => world!.prepareGroundWeights(weights));
-                            if (!current()) return;
-                        } else world!.setGroundWeights(weights);
+                        let soilSamples = preparedSoilSamples;
+                        // Initial masks/index already use this exact projection. Keep plot/UI
+                        // reconciliation, but rebuild wear only if the projection has changed.
+                        if (signature !== preparedGroundSignature) {
+                            const weights = fjordGroundWeights(campaign.blueprint, observedGround, grassPlots);
+                            soilSamples = weights.filter(weight => weight > 0).length;
+                            if (host.loading) {
+                                await host.loading.measure('initial-ground-wear',
+                                    () => world!.prepareGroundWeights(weights));
+                                if (!current()) return;
+                            } else world!.setGroundWeights(weights);
+                        }
                         canvas.dataset.ground = JSON.stringify({
                             plots: observedGround.plots.map(p => p.id),
-                            paths: observedGround.paths, soilSamples: weights.filter(w => w > 0).length
+                            paths: observedGround.paths, soilSamples
                         });
                         for (const path of observedGround.paths)
                             for (const p of path.points)
                                 world!.clearPlot({ ...p, halfWidth: 1.5, halfDepth: 1.5, futureAsset: 'hut' });
                         groundSignature = signature;
+                        preparedGroundSignature = '';
                     }
                     for (const [id, plot] of Object.entries(view.layout.plots))
                         if (!cleared.has(id)) {
