@@ -93,7 +93,7 @@ const sources = {
     },
     release(id) { released.push(id); },
 };
-test('compact exports pin source identities, canonical scales, source rigs and seven authored walk clips', async () => {
+test('compact exports pin source identities, canonical scales, source rigs and authored walk clips', async () => {
     assert.equal(wildlifeAssetManifest.length, 14);
     for (const entry of wildlifeAssetManifest) {
         const bytes = await readFile('public' + entry.path);
@@ -136,6 +136,57 @@ test('compact exports pin source identities, canonical scales, source rigs and s
         }
     }
 });
+test('moose retarget keeps its own 35-joint proportions, planted hooves, loop seam and neutral rest', async () => {
+    const source = await sources.acquire('moose');
+    const entry = wildlifeAssetManifest.find(item => item.id === 'moose');
+    assert.equal(entry.animationSource.file, 'Lynx-animated.glb');
+    assert.equal(entry.animationSource.mappedJoints, 35);
+    assert.equal(entry.animationSource.sha256, wildlifeAssetManifest.find(item => item.id === 'lynx').sourceSha256);
+    assert.deepEqual(source.animations.map(clip => clip.name), ['Walk', 'Idle']);
+    const joints = [];
+    source.scene.traverse(node => { if (node.isBone) joints.push(node); });
+    assert.equal(joints.length, 35);
+    const lengths = joints.map(bone => bone.position.length());
+    const root = source.scene.getObjectByName('Bone_000');
+    const origin = root.position.clone();
+    const mixer = new AnimationMixer(source.scene);
+    mixer.clipAction(source.animations[0]).play();
+    const feet = ['Bone_023', 'Bone_029', 'Bone_008', 'Bone_013'].map(name => source.scene.getObjectByName(name));
+    const sample = time => {
+        mixer.setTime(time);
+        source.scene.updateMatrixWorld(true);
+        return feet.map(bone => bone.getWorldPosition(new Vector3()));
+    };
+    const start = sample(0), ranges = feet.map(() => ({ min: Infinity, max: -Infinity }));
+    for (let frame = 0; frame <= 480; frame++) {
+        const points = sample(frame / 480);
+        assert.ok(Math.abs(root.position.x - origin.x) < 1e-6 && Math.abs(root.position.z - origin.z) < 1e-6);
+        joints.forEach((bone, index) => {
+            if (bone !== root) assert.ok(Math.abs(bone.position.length() - lengths[index]) < 1e-6);
+        });
+        const box = new Box3().setFromObject(source.scene, true);
+        assert.ok(Math.abs(box.min.y) < .006, 'At least one hoof must contact the ground: ' + box.min.y);
+        assert.ok(box.getSize(new Vector3()).length() < 5, 'No stretched skin or antlers');
+        points.forEach((point, index) => {
+            assert.ok(point.toArray().every(Number.isFinite));
+            ranges[index].min = Math.min(ranges[index].min, point.z);
+            ranges[index].max = Math.max(ranges[index].max, point.z);
+        });
+    }
+    assert.ok(ranges.every(range => range.max - range.min > .12), 'All four legs must stride');
+    const nearSeam = sample(1 - 1e-5);
+    assert.ok(nearSeam.every((point, index) => point.distanceTo(start[index]) < .002),
+        'The final stride must approach the first pose without a visible jump');
+    const seam = sample(1);
+    assert.ok(seam.every((point, index) => point.distanceTo(start[index]) < 1e-6));
+    mixer.stopAllAction();
+    mixer.clipAction(source.animations[1]).play();
+    const idle = sample(.5);
+    assert.ok(Math.max(...idle.map(point => point.y)) - Math.min(...idle.map(point => point.y)) < .04,
+        'Idle must put all four hooves down rather than freeze mid-stride');
+    mixer.stopAllAction();
+});
+
 test('world wildlife shares render resources, owns independent rigs, respects discovery, and releases leases once', async () => {
     const first = await WildlifeLayer.create(worldFixture(), () => true, sources);
     const second = await WildlifeLayer.create(worldFixture(), () => false, sources);
@@ -544,12 +595,12 @@ test('rabbit population pauses its hop exactly and responds to people without te
     assert.equal(JSON.stringify(rabbit), paused);
 });
 
-test('the five newly animated species use their source clips on land and water and freeze on pause', async () => {
+test('all eight walking species use their clips on land and water and freeze on pause', async () => {
     const layer = await WildlifeLayer.create(worldFixture(), () => true, sources);
     try {
-        const species = ['red-fox', 'lynx', 'reindeer', 'otter', 'seal'];
+        const species = ['brown-bear', 'wolf', 'moose', 'red-fox', 'lynx', 'reindeer', 'otter', 'seal'];
         const records = layer.records.filter(record => species.includes(record.actor.species));
-        assert.equal(records.length, 9);
+        assert.equal(records.length, 12);
         for (const record of records) {
             assert.ok(record.mixer, record.actor.id + ' must play its authored clip');
             assert.equal(record.coastal, undefined);
@@ -577,7 +628,8 @@ test('the five newly animated species use their source clips on land and water a
                 layer.advance(0, false);
                 const points = capture();
                 assert.ok(points.every(point => point.toArray().every(Number.isFinite)));
-                assert.ok(new Box3().setFromPoints(points).getSize(new Vector3()).length() < 3.5);
+                const sizeLimit = record.actor.species === 'moose' ? 5 : 3.5;
+                assert.ok(new Box3().setFromPoints(points).getSize(new Vector3()).length() < sizeLimit);
                 maximumMotion = Math.max(maximumMotion,
                     ...points.map((point, index) => point.distanceTo(before[index])));
             }
@@ -772,13 +824,13 @@ test('hauled-out seals look around independently, remain in place and preserve t
     }
 });
 
-test('all seven Meshy species retain resting motion and hand full joint control back to their source clip', async () => {
+test('all eight walking species retain resting motion and hand joint control back to their clip', async () => {
     const layer = await WildlifeLayer.create(worldFixture(), () => true, sources);
     const control = await WildlifeLayer.create(worldFixture(), () => true, sources);
     try {
         const records = layer.records.filter(record => record.resting && record.actor.variant.movement !== 'water');
-        assert.equal(records.length, 8);
-        assert.equal(new Set(records.map(record => record.actor.species)).size, 7);
+        assert.equal(records.length, 9);
+        assert.equal(new Set(records.map(record => record.actor.species)).size, 8);
         for (const record of records) record.actor.state = 'idle';
         const capture = record => {
             record.root.updateMatrixWorld(true);
@@ -815,7 +867,7 @@ test('all seven Meshy species retain resting motion and hand full joint control 
         control.advance(0, false);
         records.forEach((record, index) => {
             for (const [name, joint] of record.resting.joints) {
-                const expected = baselines[index].root.getObjectByName(name).quaternion.toArray();
+                const expected = baselines[index].root.getObjectByName(joint.bone.name).quaternion.toArray();
                 assert.ok(joint.bone.quaternion.toArray().every((value, axis) => Math.abs(value - expected[axis]) < 1e-7),
                     record.actor.id + ': rest overlay leaked into clip at ' + name);
             }
@@ -827,41 +879,42 @@ test('all seven Meshy species retain resting motion and hand full joint control 
 });
 
 
-test('canonical land motion keeps fleeing speed, rendered distance and clip phase synchronized across batched ticks', async () => {
+for (const species of ['red-fox', 'moose'])
+test(`canonical ${species} motion keeps fleeing speed, rendered distance and clip phase synchronized across batched ticks`, async () => {
     const { captureWildlife } = load('../src/wildlife/WildlifeSnapshot.ts');
     const layer = await WildlifeLayer.create(worldFixture(), () => true, sources);
     try {
-        const fox = layer.records.find(record => record.actor.species === 'red-fox');
+        const record = layer.records.find(record => record.actor.species === species);
         const snapshot = { actors: captureWildlife(layer.population) };
-        snapshot.actors.find(actor => actor.id === fox.actor.id).state = 'roam';
+        snapshot.actors.find(actor => actor.id === record.actor.id).state = 'roam';
         layer.useCanonical(snapshot, .5);
         layer.advance(0, false);
-        const initial = fox.root.position.clone();
-        const before = fox.mixer.time;
+        const initial = record.root.position.clone();
+        const before = record.mixer.time;
         const flee = structuredClone(snapshot);
-        const animal = flee.actors.find(actor => actor.id === fox.actor.id);
+        const animal = flee.actors.find(actor => actor.id === record.actor.id);
         animal.state = 'flee';
         layer.useCanonical(flee, .5);
         layer.advance(.01, true);
-        assert.equal(fox.mixer.time, before, 'Entering flee cannot jump the animation to time × new speed');
-        animal.position.z += fox.actor.variant.fleeSpeed * .5;
+        assert.equal(record.mixer.time, before, 'Entering flee cannot jump the animation to time × new speed');
+        animal.position.z += record.actor.variant.fleeSpeed * .5;
         const next = structuredClone(flee), saved = structuredClone(next);
         layer.useCanonical(next, .5);
-        let previous = fox.root.position.z;
+        let previous = record.root.position.z;
         for (let frame = 0; frame < 30; frame++) {
             layer.advance(1 / 60, true);
-            const step = fox.root.position.z - previous;
-            assert.ok(Math.abs(step - fox.actor.variant.fleeSpeed / 60) < 1e-9,
+            const step = record.root.position.z - previous;
+            assert.ok(Math.abs(step - record.actor.variant.fleeSpeed / 60) < 1e-9,
                 'A fleeing body must keep moving evenly between canonical updates');
-            previous = fox.root.position.z;
-            assert.ok(Math.abs(fox.mixer.time - before - Math.abs(previous - initial.z)) < 1e-9,
+            previous = record.root.position.z;
+            assert.ok(Math.abs(record.mixer.time - before - Math.abs(previous - initial.z)) < 1e-9,
                 'Clip time must advance with actual displayed metres');
         }
-        const paused = [fox.root.position.toArray(), fox.mixer.time];
+        const paused = [record.root.position.toArray(), record.mixer.time];
         layer.advance(5, false);
-        assert.deepEqual([fox.root.position.toArray(), fox.mixer.time], paused);
+        assert.deepEqual([record.root.position.toArray(), record.mixer.time], paused);
         layer.advance(.5, true);
-        assert.equal(fox.mixer.time, paused[1], 'Without new body travel the feet stop cycling');
+        assert.equal(record.mixer.time, paused[1], 'Without new body travel the feet stop cycling');
         assert.deepEqual(next, saved, 'Presentation must not change authoritative wildlife');
     } finally { layer.dispose(); }
 });
