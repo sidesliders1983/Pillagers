@@ -5,14 +5,16 @@ import { FjordEntities } from './FjordEntities';
 import type { FjordModels } from './FjordModels';
 import { LivingWorldController } from './LivingWorldController';
 import type { SeasonAppearance } from '../world/SeasonAppearanceTransition';
+import type { Object3D } from 'three';
 
 /** Only sanitized observed actors reach the existing asset/motion pipeline. This class never ticks Core. */
 export class RivalScene {
     private layer: FjordEntities;
     private motion?: LivingWorldController;
     private disposed = false;
-    constructor(private world: WorldBlueprint, models: FjordModels, private knowledge: () => DiscoveryView | undefined) {
-        this.layer = new FjordEntities(models);
+    constructor(private world: WorldBlueprint, models: FjordModels, private knowledge: () => DiscoveryView | undefined,
+        decorateMaterials?: (root: Object3D) => void) {
+        this.layer = new FjordEntities(models, decorateMaterials);
     }
     get root() { return this.layer.root; }
     setSeasonAppearance(appearance: SeasonAppearance) { this.layer.setSeasonAppearance(appearance); }

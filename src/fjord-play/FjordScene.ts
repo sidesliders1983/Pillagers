@@ -26,6 +26,7 @@ import { createRenderer } from '../core/Renderer';
 import { WorldLighting } from '../core/WorldLighting';
 import { SeasonTint } from '../world/SeasonTint';
 import { SeasonAppearanceTransition } from '../world/SeasonAppearanceTransition';
+import { DirectionalAtmosphere } from '../world/DirectionalAtmosphere';
 import { createWorld } from '../world/WorldFactory';
 import { RTSCameraController } from '../camera/RTSCameraController';
 import { inspectCampfire, inspectSpatialExpeditions } from '../simulation/SimulationCore';
@@ -57,7 +58,10 @@ export function createFjordScene(options: {
     const session = shared.session, campaign = shared.fjord;
     const selectionLabels = labels.selection, productionLabels = labels.production;
     const query = new URLSearchParams(location.search);
-    const northernLight = query.get('lighting') === 'northern-v1';
+    const unifiedSunlight = query.get('sunlight') === 'unified-v1';
+    const northernLight = query.get('lighting') === 'northern-v1' || unifiedSunlight;
+    const atmosphere = unifiedSunlight ? new DirectionalAtmosphere() : undefined;
+    const decorateMaterials = atmosphere ? (root: import('three').Object3D) => atmosphere.bind(root) : undefined;
     let restoredCamera = options.restoredCamera;
     let disposed = false, queued = false, worldRevision = 0;
     let activeBlueprint: typeof campaign.blueprint | undefined;
@@ -163,7 +167,7 @@ export function createFjordScene(options: {
             const discovery = canonical.discovery ? inspectClanDiscovery(canonical.discovery, canonical.clan.id) : undefined;
             host.built();
             const next = await createWorld(assets!, {
-                mode: 'generated', blueprint, discovery,
+                mode: 'generated', blueprint, discovery, atmosphere,
                 settlement: 'canonical', groundStyle: campaignIslandPlan(blueprint) ? fjordTerrain.style : undefined, quality: document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
                 anisotropy: renderer.capabilities.getMaxAnisotropy(),
                 preparation: async (stage, operation) => {
@@ -208,6 +212,7 @@ export function createFjordScene(options: {
             if (nextWildlife) {
                 wildlife?.dispose();
                 wildlife = nextWildlife;
+                atmosphere?.bind(wildlife.root);
                 scene.add(wildlife.root);
             }
             activeBlueprint = blueprint;
@@ -234,19 +239,20 @@ export function createFjordScene(options: {
             layer!.setCampfireHeat(campfireEffect.inspect().heat);
             const summitLine = campaignIslandPlan(blueprint) ? fjordSnowLine(blueprint) : null;
             weatherTint = new SeasonTint(next.root, next.terrain, summitLine);
+            atmosphere?.bind(next.root);
             canvas.dataset.terrainStyle = JSON.stringify({
                 style: summitLine !== null ? fjordTerrain.style : 'native',
                 summitLineY: summitLine, minimumUp: fjordTerrain.permanentMinimumUp
             });
             weatherSignature = "";
             scene.add(next.root);
-            dressing = new SettlementDressingLayer(assets!, blueprint, next.quality);
+            dressing = new SettlementDressingLayer(assets!, blueprint, next.quality, decorateMaterials);
             scene.add(dressing.root);
             cleared.clear();
             motion = new LivingWorldController(campaign.blueprint, discovery ?
                 (x, z) => !knownTerrain || discoveryAt(knownTerrain, x, z) !== 'unknown' : undefined);
             rivalScene?.dispose();
-            rivalScene = new RivalScene(blueprint, models!, () => knownTerrain);
+            rivalScene = new RivalScene(blueprint, models!, () => knownTerrain, decorateMaterials);
             scene.add(rivalScene.root);
             groundSignature = "";
             lighting?.dispose();
@@ -297,8 +303,8 @@ export function createFjordScene(options: {
             assets.dispose();
             return;
         }
-        models = new FjordModels(assets);
-        layer = new FjordEntities(models);
+        models = new FjordModels(assets, decorateMaterials);
+        layer = new FjordEntities(models, decorateMaterials);
         scene.add(layer.root);
 
         await rebuildWorld();
@@ -326,6 +332,7 @@ export function createFjordScene(options: {
                         if (world!.setDiscovery(knownTerrain)) {
                             lighting!.includeWorldShadowBounds(world!.root);
                             weatherTint!.refreshFoliage(world!.root);
+                            atmosphere?.bind(world!.root);
                             weatherSignature = '';
                         }
                         discoveryFog.setKnowledge(knownTerrain);
@@ -555,7 +562,8 @@ export function createFjordScene(options: {
                 ...motion!.inspectMetrics(), ...models!.inspectResources(),
                 lastFrameMs, drawCalls: renderer.info.render.calls,
                 triangles: renderer.info.render.triangles,
-                geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures
+                geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures,
+                programs: renderer.info.programs?.length ?? null
             });
             canvas.dataset.islandMap = JSON.stringify(islandMap.inspect());
             canvas.dataset.motion = JSON.stringify(motion!.inspect());
@@ -567,6 +575,7 @@ export function createFjordScene(options: {
             canvas.dataset.cameraClearance = JSON.stringify(controller.inspectClearance());
             canvas.dataset.shadowCoverage = JSON.stringify(lighting!.inspectShadowCoverage());
             canvas.dataset.seasonalLight = JSON.stringify(lighting!.seasonalLightState ?? { profile: 'baseline' });
+            canvas.dataset.sunlight = JSON.stringify(atmosphere?.inspect() ?? { profile: 'baseline' });
             canvas.dataset.markers = JSON.stringify(layer!.root.userData.markers ?? []);
             lastDiagnostics = performance.now();
         }
@@ -585,6 +594,7 @@ export function createFjordScene(options: {
             camera.position.distanceTo(controller.focus) : 60);
         lighting!.update(time, calendar.visualProgress, motionDelta, running);
         lighting!.updateShadowView(camera);
+        atmosphere?.update(lighting!, camera);
         world!.update(time, lighting, camera);
         discoveryFog?.update(delta);
         renderer.render(scene, camera);
@@ -656,6 +666,7 @@ export function createFjordScene(options: {
         world?.dispose();
         lighting?.dispose();
         portraits.dispose();
+        atmosphere?.dispose();
         renderer.dispose();
         scene.clear();
         const releaseSources = () => {

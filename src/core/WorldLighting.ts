@@ -39,11 +39,18 @@ export class WorldLighting {
     }
     /** Copy the same presentation authority without allocating a frozen snapshot every water frame. */
     copySeasonalSolarLight(direction: Vector3, color: Color) {
-        if (this.annualProgress === undefined) return false;
+        const strength = this.copySeasonalSun(direction, color);
+        if (strength === undefined) return false;
+        color.multiplyScalar(Math.min(1, strength));
+        return true;
+    }
+    /** Unattenuated linear solar color and actual intensity for independent direct/ambient consumers. */
+    copySeasonalSun(direction: Vector3, color: Color) {
+        if (this.annualProgress === undefined) return undefined;
         const frame = this.annualTransition.current;
         direction.copy(frame.direction);
-        color.copy(frame.solarColor).multiplyScalar(Math.min(1, frame.solarStrength));
-        return true;
+        color.copy(frame.solarColor);
+        return frame.solarStrength;
     }
     finishSeasonTransition() { this.annualTransition.finish(); }
     constructor(private scene:Scene,private renderer:WebGLRenderer,private assets:AssetManager,fireAnchor?:Vector3,
@@ -156,7 +163,10 @@ export class WorldLighting {
         root.updateMatrixWorld(true);
         root.traverse(node => {
             if (node instanceof Mesh && (node.castShadow || node.receiveShadow)) {
-                meshBounds.setFromObject(node);
+                const localReceiverBounds = node.userData.shadowReceiverBounds;
+                if (localReceiverBounds instanceof Box3)
+                    meshBounds.copy(localReceiverBounds).applyMatrix4(node.matrixWorld);
+                else meshBounds.setFromObject(node);
                 bounds.union(meshBounds);
                 if (node.castShadow) {
                     const localCasterBounds = node.userData.shadowCasterBounds;

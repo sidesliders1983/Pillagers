@@ -3,6 +3,8 @@ import { ReferenceWater, REFERENCE_WATER_DEFAULTS } from '../water/ReferenceWate
 import { lightingConfig } from '../config/lightingConfig';
 import { presentationProfiles } from '../config/PresentationQuality';
 import type { WorldLighting } from '../core/WorldLighting';
+import type { DirectionalAtmosphere } from './DirectionalAtmosphere';
+import { UnifiedWaterLighting } from './UnifiedWaterLighting';
 
 /** Approved water with native world atmosphere; the wave/detail implementation is unchanged. */
 export class FjordsideWater {
@@ -11,8 +13,10 @@ export class FjordsideWater {
     private readonly sunDirection = new Vector3();
     private readonly solarColor = new Color();
     private time = 0;
+    private unified?: UnifiedWaterLighting;
 
-    constructor(level: number, center: { x: number; z: number }, quality: 'standard' | 'low') {
+    constructor(level: number, center: { x: number; z: number }, quality: 'standard' | 'low',
+        atmosphere?: DirectionalAtmosphere) {
         this.surface = new ReferenceWater({
             size: 80, extent: 2000, level,
             quality: presentationProfiles[quality].waterQuality,
@@ -32,6 +36,15 @@ export class FjordsideWater {
         material.fragmentShader = material.fragmentShader.replace(
             '#include <colorspace_fragment>',
             '#include <colorspace_fragment>\n#include <fog_fragment>');
+        if (atmosphere) {
+            this.unified = new UnifiedWaterLighting(material, atmosphere, quality);
+            this.mesh.receiveShadow = true;
+        }
+    }
+
+    setQuality(quality: 'low' | 'standard') {
+        this.surface.setQuality(presentationProfiles[quality].waterQuality);
+        this.unified?.setQuality(quality);
     }
 
     update(time: number, lighting?: WorldLighting, camera?: Camera) {
@@ -49,12 +62,14 @@ export class FjordsideWater {
                 skyColor: lighting.skyColor,
                 intensity: lighting.ambient.intensity / lightingConfig.day.ambient,
             });
+            this.unified?.update(lighting);
         }
     }
 
     describe() {
         return {
             source: 'reference-water', ...this.surface.getStats(), time: this.time,
+            sunlight: this.unified ? 'unified-v1' : 'baseline',
             level: this.mesh.position.y, center: { x: this.mesh.position.x, z: this.mesh.position.z },
             denseSize: 80, extent: 2000,
             parameters: {

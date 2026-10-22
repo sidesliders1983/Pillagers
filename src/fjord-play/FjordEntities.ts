@@ -78,7 +78,7 @@ export class FjordEntities {
         mesh: Mesh<RingGeometry, MeshBasicMaterial>;
         radius: number;
     }>();
-    constructor(private models: FjordModels) {
+    constructor(private models: FjordModels, private decorateMaterials?: (root: Object3D) => void) {
     }
     setSeason(progress: number | null) {
         this.seasonAppearance = undefined;
@@ -194,6 +194,7 @@ export class FjordEntities {
                     ? new StructureSeasonTint(model) : undefined;
                 if (this.seasonAppearance) season?.setSnowAmount(this.seasonAppearance.snowAmount);
                 else season?.update(this.seasonProgress);
+                this.decorateMaterials?.(model);
                 entry = { signature, model, season };
                 this.entries.set(entity.selectionKey, entry);
                 this.root.add(model);

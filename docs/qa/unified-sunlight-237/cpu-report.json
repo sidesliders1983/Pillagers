@@ -1,0 +1,441 @@
+{
+  "version": 1,
+  "runtime": "v24.19.0",
+  "platform": "win32",
+  "measurement": "CPU-only light, native shadow receiver crop and water/atmosphere uniform updates with a mock renderer",
+  "limitation": "No shader execution, WebGL GPU timing, whole-game frame-time or physical-device performance claim; extra per-pixel shadow/glow work remains unmeasured",
+  "samples": [
+    {
+      "quality": "low",
+      "lowCamera": false,
+      "movingCamera": false,
+      "baseline": {
+        "cpuMsPerFrame": 0.0025353999999999815,
+        "rounds": [
+          0.0014300333333333128,
+          0.001543233333333319,
+          0.0025353999999999815,
+          0.002935766666666647,
+          0.005563400000000001
+        ],
+        "shadowSources": 1,
+        "receiverBounds": {
+          "min": [
+            -82,
+            -17,
+            -82
+          ],
+          "max": [
+            82,
+            17,
+            82
+          ]
+        },
+        "shadowSamplesPerWaterFragment": 0
+      },
+      "candidate": {
+        "cpuMsPerFrame": 0.0050232999999999875,
+        "rounds": [
+          0.0031263999999999515,
+          0.0035960333333333286,
+          0.0050232999999999875,
+          0.00663106666666666,
+          0.008041433333333393
+        ],
+        "shadowSources": 1,
+        "receiverBounds": {
+          "min": [
+            -98,
+            -17,
+            -98
+          ],
+          "max": [
+            98,
+            17,
+            98
+          ]
+        },
+        "shadowSamplesPerWaterFragment": 4
+      },
+      "incrementalCpuMs": 0.002487900000000006
+    },
+    {
+      "quality": "low",
+      "lowCamera": false,
+      "movingCamera": true,
+      "baseline": {
+        "cpuMsPerFrame": 0.009464899999999943,
+        "rounds": [
+          0.007372400000000046,
+          0.009148600000000064,
+          0.009464899999999943,
+          0.012068933333333386,
+          0.014591533333333398
+        ],
+        "shadowSources": 1,
+        "receiverBounds": {
+          "min": [
+            -82,
+            -17,
+            -82
+          ],
+          "max": [
+            82,
+            17,
+            82
+          ]
+        },
+        "shadowSamplesPerWaterFragment": 0
+      },
+      "candidate": {
+        "cpuMsPerFrame": 0.009277033333333368,
+        "rounds": [
+          0.008770666666666633,
+          0.00900686666666661,
+          0.009277033333333368,
+          0.011716666666666696,
+          0.014198633333333342
+        ],
+        "shadowSources": 1,
+        "receiverBounds": {
+          "min": [
+            -98,
+            -17,
+            -98
+          ],
+          "max": [
+            98,
+            17,
+            98
+          ]
+        },
+        "shadowSamplesPerWaterFragment": 4
+      },
+      "incrementalCpuMs": -0.00018786666666657445
+    },
+    {
+      "quality": "low",
+      "lowCamera": true,
+      "movingCamera": false,
+      "baseline": {
+        "cpuMsPerFrame": 0.0010885666666666414,
+        "rounds": [
+          0.0010615666666666736,
+          0.001075366666666696,
+          0.0010885666666666414,
+          0.001094633333333301,
+          0.001450400000000021
+        ],
+        "shadowSources": 1,
+        "receiverBounds": {
+          "min": [
+            -82,
+            -17,
+            -82
+          ],
+          "max": [
+            82,
+            17,
+            82
+          ]
+        },
+        "shadowSamplesPerWaterFragment": 0
+      },
+      "candidate": {
+        "cpuMsPerFrame": 0.001393066666666679,
+        "rounds": [
+          0.0013631000000000313,
+          0.00136560000000001,
+          0.001393066666666679,
+          0.001425700000000006,
+          0.0015394666666666884
+        ],
+        "shadowSources": 1,
+        "receiverBounds": {
+          "min": [
+            -98,
+            -17,
+            -98
+          ],
+          "max": [
+            98,
+            17,
+            98
+          ]
+        },
+        "shadowSamplesPerWaterFragment": 4
+      },
+      "incrementalCpuMs": 0.0003045000000000376
+    },
+    {
+      "quality": "low",
+      "lowCamera": true,
+      "movingCamera": true,
+      "baseline": {
+        "cpuMsPerFrame": 0.01021276666666654,
+        "rounds": [
+          0.007421966666666625,
+          0.01011256666666668,
+          0.01021276666666654,
+          0.010801166666666707,
+          0.011359600000000076
+        ],
+        "shadowSources": 1,
+        "receiverBounds": {
+          "min": [
+            -82,
+            -17,
+            -82
+          ],
+          "max": [
+            82,
+            17,
+            82
+          ]
+        },
+        "shadowSamplesPerWaterFragment": 0
+      },
+      "candidate": {
+        "cpuMsPerFrame": 0.009456533333333331,
+        "rounds": [
+          0.007887533333333219,
+          0.00804926666666673,
+          0.009456533333333331,
+          0.009471866666666605,
+          0.010391699999999976
+        ],
+        "shadowSources": 1,
+        "receiverBounds": {
+          "min": [
+            -98,
+            -17,
+            -98
+          ],
+          "max": [
+            98,
+            17,
+            98
+          ]
+        },
+        "shadowSamplesPerWaterFragment": 4
+      },
+      "incrementalCpuMs": -0.0007562333333332085
+    },
+    {
+      "quality": "standard",
+      "lowCamera": false,
+      "movingCamera": false,
+      "baseline": {
+        "cpuMsPerFrame": 0.0011127333333332294,
+        "rounds": [
+          0.0009954333333333427,
+          0.0011029000000000147,
+          0.0011127333333332294,
+          0.001129000000000057,
+          0.0011316000000000106
+        ],
+        "shadowSources": 1,
+        "receiverBounds": {
+          "min": [
+            -82,
+            -17,
+            -82
+          ],
+          "max": [
+            82,
+            17,
+            82
+          ]
+        },
+        "shadowSamplesPerWaterFragment": 0
+      },
+      "candidate": {
+        "cpuMsPerFrame": 0.0013588333333333746,
+        "rounds": [
+          0.001303066666666685,
+          0.0013308333333332787,
+          0.0013588333333333746,
+          0.0014546666666666777,
+          0.0014782000000000152
+        ],
+        "shadowSources": 1,
+        "receiverBounds": {
+          "min": [
+            -98,
+            -17,
+            -98
+          ],
+          "max": [
+            98,
+            17,
+            98
+          ]
+        },
+        "shadowSamplesPerWaterFragment": 9
+      },
+      "incrementalCpuMs": 0.00024610000000014525
+    },
+    {
+      "quality": "standard",
+      "lowCamera": false,
+      "movingCamera": true,
+      "baseline": {
+        "cpuMsPerFrame": 0.007502233333333303,
+        "rounds": [
+          0.007171166666666674,
+          0.007285166666666555,
+          0.007502233333333303,
+          0.007701100000000073,
+          0.00858193333333323
+        ],
+        "shadowSources": 1,
+        "receiverBounds": {
+          "min": [
+            -82,
+            -17,
+            -82
+          ],
+          "max": [
+            82,
+            17,
+            82
+          ]
+        },
+        "shadowSamplesPerWaterFragment": 0
+      },
+      "candidate": {
+        "cpuMsPerFrame": 0.00804273333333337,
+        "rounds": [
+          0.0076665666666667675,
+          0.00784453333333325,
+          0.00804273333333337,
+          0.008157666666666652,
+          0.009014666666666775
+        ],
+        "shadowSources": 1,
+        "receiverBounds": {
+          "min": [
+            -98,
+            -17,
+            -98
+          ],
+          "max": [
+            98,
+            17,
+            98
+          ]
+        },
+        "shadowSamplesPerWaterFragment": 9
+      },
+      "incrementalCpuMs": 0.0005405000000000661
+    },
+    {
+      "quality": "standard",
+      "lowCamera": true,
+      "movingCamera": false,
+      "baseline": {
+        "cpuMsPerFrame": 0.0009920333333332868,
+        "rounds": [
+          0.0009857666666666773,
+          0.0009862333333333785,
+          0.0009920333333332868,
+          0.0010132666666666714,
+          0.001058333333333394
+        ],
+        "shadowSources": 1,
+        "receiverBounds": {
+          "min": [
+            -82,
+            -17,
+            -82
+          ],
+          "max": [
+            82,
+            17,
+            82
+          ]
+        },
+        "shadowSamplesPerWaterFragment": 0
+      },
+      "candidate": {
+        "cpuMsPerFrame": 0.001282733333333302,
+        "rounds": [
+          0.0012699999999999819,
+          0.0012763999999998912,
+          0.001282733333333302,
+          0.0013328999999998813,
+          0.0013408333333333456
+        ],
+        "shadowSources": 1,
+        "receiverBounds": {
+          "min": [
+            -98,
+            -17,
+            -98
+          ],
+          "max": [
+            98,
+            17,
+            98
+          ]
+        },
+        "shadowSamplesPerWaterFragment": 9
+      },
+      "incrementalCpuMs": 0.00029070000000001525
+    },
+    {
+      "quality": "standard",
+      "lowCamera": true,
+      "movingCamera": true,
+      "baseline": {
+        "cpuMsPerFrame": 0.007656466666666801,
+        "rounds": [
+          0.00709366666666665,
+          0.0072396000000000335,
+          0.007656466666666801,
+          0.008135366666666716,
+          0.008402499999999993
+        ],
+        "shadowSources": 1,
+        "receiverBounds": {
+          "min": [
+            -82,
+            -17,
+            -82
+          ],
+          "max": [
+            82,
+            17,
+            82
+          ]
+        },
+        "shadowSamplesPerWaterFragment": 0
+      },
+      "candidate": {
+        "cpuMsPerFrame": 0.008082733333333333,
+        "rounds": [
+          0.007597366666666707,
+          0.007673800000000028,
+          0.008082733333333333,
+          0.00855106666666658,
+          0.011428866666666636
+        ],
+        "shadowSources": 1,
+        "receiverBounds": {
+          "min": [
+            -98,
+            -17,
+            -98
+          ],
+          "max": [
+            98,
+            17,
+            98
+          ]
+        },
+        "shadowSamplesPerWaterFragment": 9
+      },
+      "incrementalCpuMs": 0.00042626666666653167
+    }
+  ]
+}

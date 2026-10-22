@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Unified sunlight · #237 review</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; color: #ece6d8; background: #192529; font: 14px/1.4 system-ui; }
+        header { padding: 12px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+        h1 { font-size: 17px; margin: 0; }
+        label { display: grid; gap: 3px; font-size: 12px; }
+        button, select { font: inherit; padding: 7px; border-radius: 4px; }
+        iframe { display: block; width: 100%; height: calc(100vh - 200px); border: 0; background: #263946; }
+        p { margin: 0; padding: 0 12px 8px; }
+        details { margin: 8px 12px; }
+        pre { white-space: pre-wrap; font-size: 11px; }
+    </style>
+</head>
+<body data-sunlight-review="true">
+    <header>
+        <h1>Unified sunlight · #237</h1>
+        <label>Island <select id="island"><option value="32">18</option><option value="33">7</option></select></label>
+        <label>Phase <select id="phase"></select></label>
+        <label>Quality <select id="quality"><option>low</option><option>standard</option></select></label>
+        <label>Camera <select id="camera"><option value="low">Low</option><option value="normal">Normal strategy</option></select></label>
+        <label>Bearing <select id="bearing"><option value="sunward">Towards the sun</option><option value="away">Away from the sun</option></select></label>
+        <button id="prepare">Prepare review save</button>
+        <button id="baseline" disabled>Current annual lighting</button>
+        <button id="candidate" disabled>Unified sunlight</button>
+        <button id="save" disabled>Download fixed save</button>
+        <button id="record" disabled>Record canvas</button><button id="report" disabled>Export measurements</button>
+    </header>
+    <p id="status" role="status">Separate QA origin. Prepare a fixed save, capture Current annual lighting first, then Unified sunlight. Both restore the same paused campaign and camera.</p>
+    <p>Start with Late spring, Low camera, Towards the sun. Compare both bearings, normal strategy view, Low/Standard and both islands. Pan to sunlit/shadowed banks. No sun disc, new calendar or camera limits.</p>
+    <iframe title="Real Fjord Play sunlight comparison" id="game"></iframe>
+    <details><summary>Live light, atmosphere and resource measurements</summary><pre id="metrics"></pre></details>
+    <script type="module" src="./northern-light-236.ts"></script>
+</body>
+</html>
