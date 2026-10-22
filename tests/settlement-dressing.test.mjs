@@ -246,3 +246,31 @@ test('unchanged ticks/season updates reuse buffers; ten quality/layout cycles re
     assert.equal(layer.root.children.length, 0, 'A disposed layer cannot recreate buffers');
     geometry.dispose(); material.dispose();
 });
+
+test('interpolated snow reaches dressing batches and newly rebuilt quality subsets without new seasonal buffers', () => {
+    const { SeasonAppearanceTransition } = load('../src/world/SeasonAppearanceTransition.ts');
+    const geometry = new BoxGeometry(1, 1, 1), material = new MeshStandardMaterial();
+    const source = new Group(), mesh = new Mesh(geometry, material);
+    mesh.position.y = .5; source.add(mesh); source.updateMatrixWorld(true);
+    const layer = new SettlementDressingLayer({ has: () => true, get: () => source.clone(true) }, flatWorld(), 'standard');
+    const transition = new SeasonAppearanceTransition();
+    try {
+        layer.sync(input());
+        const initial = layer.inspect();
+        transition.anchor(0);
+        transition.anchor(.06, .5);
+        for (let frame = 0; frame < 15; frame++) {
+            transition.advance(1 / 60, true);
+            layer.setSeasonAppearance(transition.current);
+            assert.ok(layer.inspect().batches.every(batch => batch.snow.amount === transition.current.snowAmount));
+        }
+        const partial = layer.inspect();
+        assert.equal(partial.planBuilds, initial.planBuilds);
+        assert.equal(partial.batchBuilds, initial.batchBuilds);
+        assert.deepEqual(partial.batches.map(batch => batch.snow.materials), initial.batches.map(batch => batch.snow.materials));
+        layer.setQuality('low');
+        assert.ok(layer.inspect().batches.every(batch => batch.snow.amount === transition.current.snowAmount));
+        layer.sync(input([home('upgrade', 'homestead', 20)]));
+        assert.ok(layer.inspect().batches.every(batch => batch.snow.amount === transition.current.snowAmount));
+    } finally { layer.dispose(); geometry.dispose(); material.dispose(); }
+});

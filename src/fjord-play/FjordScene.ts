@@ -25,6 +25,7 @@ import { AssetManager } from '../core/AssetManager';
 import { createRenderer } from '../core/Renderer';
 import { WorldLighting } from '../core/WorldLighting';
 import { SeasonTint } from '../world/SeasonTint';
+import { SeasonAppearanceTransition } from '../world/SeasonAppearanceTransition';
 import { createWorld } from '../world/WorldFactory';
 import { RTSCameraController } from '../camera/RTSCameraController';
 import { inspectCampfire, inspectSpatialExpeditions } from '../simulation/SimulationCore';
@@ -120,7 +121,15 @@ export function createFjordScene(options: {
     document.querySelector('#fjord-effects')!.addEventListener('change', configureEffects, { signal: bindings.signal });
     let weatherSignature = "";
     let lightSignature = '';
-    let lightYear: number | undefined;
+    let seasonYear: number | undefined;
+    let seasonAppearance = new SeasonAppearanceTransition();
+    const applySeasonAppearance = () => {
+        const appearance = seasonAppearance.current;
+        weatherTint?.applyAppearance(appearance);
+        layer?.setSeasonAppearance(appearance);
+        dressing?.setSeasonAppearance(appearance);
+        rivalScene?.setSeasonAppearance(appearance);
+    };
 
     const cleared = new Set<string>();
     let groundSignature = "";
@@ -245,7 +254,8 @@ export function createFjordScene(options: {
                 document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
                 fjordPresentation.lighting);
             lightSignature = '';
-            lightYear = undefined;
+            seasonYear = undefined;
+            seasonAppearance = new SeasonAppearanceTransition();
             lighting.includeWorldShadowBounds(next.root);
             if (syncScene) {
                 await syncScene();
@@ -331,6 +341,18 @@ export function createFjordScene(options: {
                         ? nextWeather + ':' + view.time.winter + ':' + view.calendar.progress : nextWeather;
                     const weatherChanged = nextWeather !== weatherSignature;
                     const lightChanged = nextLight !== lightSignature;
+                    const year = view.time.winter + view.calendar.progress;
+                    const stepSeconds = seasonYear === undefined ? Infinity :
+                        (year - seasonYear) * session.effectiveMinutesPerWinter * 60;
+                    // Ordinary clock batches blend for one update interval. Loads, explicit
+                    // year jumps and world replacement reanchor directly to their confirmed state.
+                    const transition = session.running && stepSeconds > 0 &&
+                        stepSeconds <= host.tickIntervalSeconds * 2.5 ? host.tickIntervalSeconds : 0;
+                    let appearanceChanged = false;
+                    if (year !== seasonYear) {
+                        appearanceChanged = seasonAppearance.anchor(view.calendar.visualProgress, transition);
+                        seasonYear = year;
+                    }
                     if (weatherChanged) {
                         const fogPresentation = fjordFogPresentation(fjordPresentation.fogProfile, {
                             width: campaign.blueprint.config.width,
@@ -342,21 +364,14 @@ export function createFjordScene(options: {
                         discoveryFog?.setPresentation(fogPresentation);
                     }
                     if (lightChanged) {
-                        const year = view.time.winter + view.calendar.progress;
-                        const stepSeconds = lightYear === undefined ? Infinity :
-                            (year - lightYear) * session.effectiveMinutesPerWinter * 60;
-                        // Ordinary clock batches blend for one update interval. Loads, explicit
-                        // year jumps and world replacement reanchor directly to their confirmed state.
-                        const transition = northernLight && session.running && stepSeconds > 0 &&
-                            stepSeconds <= host.tickIntervalSeconds * 2.5 ? host.tickIntervalSeconds : 0;
                         lighting!.setSeason(view.calendar.visualProgress, view.weatherVisual.lighting,
-                            northernLight ? view.calendar.progress : undefined, transition);
+                            northernLight ? view.calendar.progress : undefined, northernLight ? transition : 0);
                         lightSignature = nextLight;
-                        lightYear = year;
                     }
+                    // Discovery can replace foliage during a paused or partial transition.
+                    // New bindings receive the current displayed appearance, never the endpoint.
+                    if (weatherChanged || appearanceChanged) applySeasonAppearance();
                     if (weatherChanged) {
-                        weatherTint!.update(view.calendar.visualProgress);
-                        layer!.setSeason(view.calendar.visualProgress);
                         weatherSignature = nextWeather;
                         canvas.dataset.seasonMaterials = JSON.stringify(weatherTint!.inspect());
                     }
@@ -423,7 +438,6 @@ export function createFjordScene(options: {
                         seed: state.seed, homes: dressingHomes(state, view.entities),
                         ground: view.ground, campfire: view.campfire
                     }, knownTerrain);
-                    dressing!.setSeason(view.calendar.visualProgress);
                     canvas.dataset.dressing = JSON.stringify(dressing!.inspect());
                     layer!.prepareExpeditions(state, campaign.blueprint, host.tickIntervalSeconds);
                     await layer!.sync(view.entities, host.loading ? yieldForInput : undefined, current, view.livestockDeaths);
@@ -446,7 +460,7 @@ export function createFjordScene(options: {
                     motion!.setStandingTrees(trees);
                     layer!.configureMotion(motion!);
                     layer!.advance(motion!, 0, false);
-                    await rivalScene?.sync(view.rival, view.calendar.visualProgress, trees);
+                    await rivalScene?.sync(view.rival, view.calendar.visualProgress, trees, seasonAppearance.current);
                     if (!current()) return;
                     canvas.dataset.rival = JSON.stringify({
                         known: view.rival.known,
@@ -516,6 +530,7 @@ export function createFjordScene(options: {
         islandMap.update(camera, controller.focus, frameStarted);
         const motionDelta = Math.min(elapsed, 1);
         if (running) activeTime += motionDelta;
+        if (seasonAppearance.advance(motionDelta, running)) applySeasonAppearance();
         motion!.advance(motionDelta, running, !document.hidden);
         layer!.advance(motion!, motionDelta, running);
         rivalScene?.advance(motionDelta, running);
@@ -547,6 +562,7 @@ export function createFjordScene(options: {
             canvas.dataset.campfireEffect = JSON.stringify(fireVisual);
             canvas.dataset.precipitation = JSON.stringify(precipitationEffect!.inspect());
             canvas.dataset.structureSnow = JSON.stringify(layer!.inspectSeason());
+            canvas.dataset.seasonMaterials = JSON.stringify(weatherTint!.inspect());
             canvas.dataset.motionTime = String(activeTime);
             canvas.dataset.cameraClearance = JSON.stringify(controller.inspectClearance());
             canvas.dataset.shadowCoverage = JSON.stringify(lighting!.inspectShadowCoverage());
@@ -659,7 +675,11 @@ export function createFjordScene(options: {
         frame, prepareGpu, arrive, dispose, highlight,
         portrait: (input: PortraitRequest) => inactive() || renderer.getContext().isContextLost()
             ? Promise.resolve(undefined) : portraits.render(input, layer?.residentForPortrait(input)),
-        resetFrameTime: () => { clock.start(); lighting?.finishSeasonTransition(); },
+        resetFrameTime: () => {
+            clock.start();
+            lighting?.finishSeasonTransition();
+            if (seasonAppearance.finish()) applySeasonAppearance();
+        },
         get hasWorld() { return !!world; },
         get diagnostics() { return [...(assets?.diagnostics ?? []), ...(models?.diagnostics ?? [])]; },
         setTarget(point: { x: number; z: number } | null | undefined, valid?: boolean) {

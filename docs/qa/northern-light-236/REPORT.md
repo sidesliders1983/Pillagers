@@ -146,3 +146,38 @@ is a mock-renderer CPU measurement, not a WebGL/GPU or physical-device guarantee
 Browser inventory remains empty in this session. A new real-scene smoothness
 capture and physical-device acceptance are pending; the updated LAN comparison
 uses the existing port 5227. The default profile and publication gates remain unchanged.
+
+## Follow-up: smooth snow and seasonal material transitions
+
+The owner accepted the interpolated light on 22 October and requested the same
+treatment for snow. A shared reusable appearance sample now blends the existing
+ground/foliage colors and snow amount between confirmed `visualProgress` endpoints
+over the same 500 ms update interval. It applies in baseline and northern-light
+Fjord Play. The canonical full-Winter hold, Spring thaw, annual weather and
+permanent summit mask remain unchanged. Falling precipitation already has its own
+existing smooth emission/opacity ramp and is unchanged.
+
+Terrain/foliage material bindings, local/rival structure uniforms and dressing
+batches receive the same appearance. Paused partial transitions stay frozen.
+New/upgraded houses, discovery foliage and newly rebuilt quality subsets inherit
+that partial state. Local campfire heat continues to multiply the seasonal snow.
+No render-frame scene traversal, asset cloning, instance-buffer rebuild or shader
+recompile is needed. Paused/settled frames skip the appearance update loop.
+
+The expanded focused suite has **68 passes, zero failures and zero skips**.
+It includes six new cases for actual snow shader uniforms/resource identity,
+15/30/60/120 FPS, interruptions and pause/resume, year rollover, hidden recovery,
+exact held-winter/thaw endpoints, newly discovered foliage, house replacement
+while paused, and quality/layout dressing rebuilds. Existing canonical seasons,
+save/load, weather-off, fog, permanent snow, fire and northern light tests pass.
+Production public-asset validation, TypeScript and build pass; the existing
+large-chunk warning remains. Formatting is reviewed manually with `git diff --check`.
+
+`snow-cpu-report.json` records a separate CPU-only material-binding benchmark:
+12 terrain materials, 24 foliage materials, 20/100 structures, 30/60 FPS and
+five warmed-up one-minute annual cycles. Paired median extra cost ranges from
+**0.0022 to 0.0043 ms per frame** in this Windows/Node run. These small timings
+are subject to runtime noise and do not measure browser/GPU, whole-scene or
+physical-device behavior. Previous light-only reports remain historical records.
+The LAN comparison on 5227 serves the new snow interpolation; real-device
+smoothness acceptance for this follow-up is pending.

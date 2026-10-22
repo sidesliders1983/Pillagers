@@ -63,6 +63,10 @@ export class StructureSeasonTint {
         this.snowMultiplier = Math.max(0, Math.min(1, value));
         this.amount.value = this.seasonalAmount * this.snowMultiplier;
     }
+    setSnowAmount(value: number) {
+        this.seasonalAmount = Math.max(0, Math.min(.65, value));
+        this.amount.value = this.seasonalAmount * this.snowMultiplier;
+    }
     update(progress: number | null) {
         if (progress === null) {
             this.seasonalAmount = this.amount.value = 0;

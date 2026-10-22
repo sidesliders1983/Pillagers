@@ -4,6 +4,7 @@ import type { ObservedRivalSettlement } from './RivalSettlement';
 import { FjordEntities } from './FjordEntities';
 import type { FjordModels } from './FjordModels';
 import { LivingWorldController } from './LivingWorldController';
+import type { SeasonAppearance } from '../world/SeasonAppearanceTransition';
 
 /** Only sanitized observed actors reach the existing asset/motion pipeline. This class never ticks Core. */
 export class RivalScene {
@@ -14,10 +15,12 @@ export class RivalScene {
         this.layer = new FjordEntities(models);
     }
     get root() { return this.layer.root; }
+    setSeasonAppearance(appearance: SeasonAppearance) { this.layer.setSeasonAppearance(appearance); }
     async sync(view: ObservedRivalSettlement, season: number,
-        trees: Parameters<LivingWorldController['setStandingTrees']>[0]) {
+        trees: Parameters<LivingWorldController['setStandingTrees']>[0], appearance?: SeasonAppearance) {
         if (this.disposed) return;
-        this.layer.setSeason(season);
+        if (appearance) this.layer.setSeasonAppearance(appearance);
+        else this.layer.setSeason(season);
         const knowledge = this.knowledge();
         this.layer.retainVisibleDeaths((x, z) => Boolean(knowledge && discoveryAt(knowledge, x, z) === 'visible'));
         const observed = new Map(this.layer.describe().map(entity => [entity.id, entity.position]));

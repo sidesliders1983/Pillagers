@@ -3,6 +3,7 @@ import type { SimulationState } from '../simulation/SimulationCore';
 import { createBlueprintSurface, type TerrainSurface } from '../world-generation/TerrainQueries';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { StructureSeasonTint } from '../world/StructureSeasonTint';
+import type { SeasonAppearance } from '../world/SeasonAppearanceTransition';
 import { createFjordYardSurface } from './FjordYardSurface';
 import type { LivingWorldController } from './LivingWorldController';
 import type { SelectionMarker } from '../play/SelectionPresentation';
@@ -71,6 +72,7 @@ export class FjordEntities {
     }
     private disposed = false;
     private seasonProgress: number | null = null;
+    private seasonAppearance?: SeasonAppearance;
     private yardSamplers = new Map<string, { signature: string; sample: (x: number, z: number, clearance: number) => number | null }>();
     private markers = new Map<string, {
         mesh: Mesh<RingGeometry, MeshBasicMaterial>;
@@ -79,8 +81,13 @@ export class FjordEntities {
     constructor(private models: FjordModels) {
     }
     setSeason(progress: number | null) {
+        this.seasonAppearance = undefined;
         this.seasonProgress = progress;
         for (const entry of this.entries.values()) entry.season?.update(progress);
+    }
+    setSeasonAppearance(appearance: SeasonAppearance) {
+        this.seasonAppearance = appearance;
+        for (const entry of this.entries.values()) entry.season?.setSnowAmount(appearance.snowAmount);
     }
     setCampfireHeat(heat: number) {
         this.entries.get('campfire:settlement-campfire')?.season?.setSnowMultiplier(1 - heat);
@@ -185,7 +192,8 @@ export class FjordEntities {
                 }
                 const season = entity.kind === 'building' || entity.kind === 'household' || entity.kind === 'campfire'
                     ? new StructureSeasonTint(model) : undefined;
-                season?.update(this.seasonProgress);
+                if (this.seasonAppearance) season?.setSnowAmount(this.seasonAppearance.snowAmount);
+                else season?.update(this.seasonProgress);
                 entry = { signature, model, season };
                 this.entries.set(entity.selectionKey, entry);
                 this.root.add(model);

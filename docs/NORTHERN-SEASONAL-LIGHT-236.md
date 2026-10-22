@@ -98,6 +98,13 @@ included in the follow-up measurement, rather than omitted from its cost.
 Light and seasonal-material invalidation have separate signatures, so returning
 sunlight does not force foliage/snow reprocessing while the winter palette is held.
 
+After owner acceptance of the interpolated lighting, the same presentation approach
+also smooths the existing snow/seasonal-material endpoints. `SeasonAppearanceTransition`
+uses `visualProgress` rather than solar progress; the approved Winter hold and Spring
+thaw remain independent of returning sunlight. Terrain, foliage, structures and
+settlement dressing share one reusable material sample. This snow/color smoothing
+also applies with baseline lighting. See [the current seasonal contract](FJORD-SEASONS-HUD.md).
+
 Camera, quality, FPS and brightness cannot change this state's annual solar
 direction. Shadow fitting consumes the direction and may translate the light
 along it, without becoming the authority for that vector. No new shadow maps or
