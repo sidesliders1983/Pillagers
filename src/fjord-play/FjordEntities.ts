@@ -138,10 +138,17 @@ export class FjordEntities {
     async sync(entities: readonly FjordEntity[], yieldControl?: () => Promise<void>, current = () => true,
         livestockDeaths: readonly { id: string }[] = []) {
         if (this.disposed || !current()) return;
-        // Passenger roots remain independently owned; detach before removing/replacing any hull.
-        for (const { model } of this.entries.values())
-            if (model.userData.canonical?.aboardShip && model.parent !== this.root) this.root.attach(model);
         const visible = entities.filter(e => e.transform !== null);
+        const nextEntities = new Map(visible.map(entity => [entity.selectionKey, entity]));
+        // Retain unchanged attachments. Detach only before removal, hull replacement or landing.
+        for (const [key, { model }] of this.entries) {
+            const shipId = model.userData.canonical?.aboardShip;
+            if (!shipId || model.parent === this.root) continue;
+            const hullKey = 'longship:' + shipId, nextHull = nextEntities.get(hullKey);
+            const sameHull = nextHull && this.entries.get(hullKey)?.signature ===
+                nextHull.asset + ':' + (nextHull.terrainAsset ?? '');
+            if (!sameHull || nextEntities.get(key)?.status.aboardShip !== shipId) this.root.attach(model);
+        }
         const wanted = new Set(visible.map(e => e.selectionKey));
         const confirmedDeaths = new Set(livestockDeaths.map(fact => fact.id));
         for (const key of this.deaths.keys()) if (wanted.has(key)) this.finishDeath(key);
@@ -186,9 +193,12 @@ export class FjordEntities {
             entry.model.name = entity.selectionKey;
             const display = entity.status.shipExpedition ? this.expeditionPose(entity.status.shipExpedition) ?? p :
                 entity.status.expedition ? this.expeditionPose(entity.status.expedition, entity.id) ?? p : p;
-            entry.model.position.set(display.x, display.y, display.z);
-            entry.model.rotation.y = display.rotation;
+            if (!entity.status.aboardShip || entry.model.parent === this.root) {
+                entry.model.position.set(display.x, display.y, display.z);
+                entry.model.rotation.set(0, display.rotation, 0);
+            }
             await this.models.reconcile(entry.model, entity);
+            this.models.setEmbarked?.(entry.model, !!entity.status.aboardShip);
             if (this.disposed || !current()) return;
             if (entity.kind === 'persona' && !entry.model.userData.appearance) entry.model.scale.setScalar(p.scale);
             if (entity.kind === 'cattle' && entity.status.assignment) {
@@ -230,9 +240,9 @@ export class FjordEntities {
             const hull = this.entries.get('longship:' + facts.aboardShip)?.model;
             const anchor = longshipDeckAnchors[facts.aboardAnchor as 0 | 1 | 2 | 3];
             if (!hull || !anchor) continue;
-            hull.add(model);
+            if (model.parent !== hull) hull.add(model);
             model.position.set(anchor[0], anchor[1], anchor[2]);
-            model.rotation.y = 0;
+            model.rotation.set(0, 0, 0);
             model.updateMatrixWorld(true);
         }
     }
@@ -342,18 +352,28 @@ export class FjordEntities {
         }
         for (const entry of this.entries.values()) {
             const facts = entry.model.userData.canonical;
+            if (facts?.aboardShip) {
+                const hull = this.entries.get('longship:' + facts.aboardShip)?.model;
+                const anchor = longshipDeckAnchors[facts.aboardAnchor as 0 | 1 | 2 | 3];
+                if (anchor && entry.model.parent === hull) {
+                    entry.model.position.set(anchor[0], anchor[1], anchor[2]);
+                    entry.model.rotation.set(0, 0, 0);
+                }
+                continue;
+            }
             if (facts?.expedition) {
                 const pose = this.expeditionPose(facts.expedition, facts.id);
                 if (pose && !facts.aboardShip) {
                     entry.model.position.set(pose.x, pose.y, pose.z);
-                    entry.model.rotation.y = pose.rotation;
+                    entry.model.rotation.set(0, pose.rotation, 0);
                 }
                 this.models.animate(entry.model, !facts.aboardShip && pose?.moving ? 'Run' : 'Idle', 1, running ? delta : 0);
             }
         }
         for (const agent of motion.inspect()) {
             const model = this.entries.get(agent.key)?.model;
-            if (!model) continue;
+            // A stale autonomous frame must never move a passenger or an expedition member.
+            if (!model || model.userData.canonical?.aboardShip || model.userData.canonical?.expedition) continue;
             model.position.set(agent.x, agent.y, agent.z);
             model.rotation.y = agent.rotation;
             this.models.animate(model, agent.state, agent.speed, running ? delta : 0);

@@ -323,11 +323,12 @@ export function splitRoute(route: readonly Point2[], distance: number) {
     return { prefix, suffix: [{ ...route.at(-1)! }, { ...route.at(-1)! }] };
 }
 export function joinRoutes(first: Point2[], second: readonly Point2[]) {
-    const result = [...first];
-    for (const point of second) {
-        if (Math.hypot(point.x - result.at(-1)!.x, point.z - result.at(-1)!.z) > 1e-8)
+    const result: Point2[] = [];
+    // A landed/waiting group has a valid two-point zero-length route. Its duplicate
+    // endpoint must not become an interior zero-length edge when it departs again.
+    for (const path of [first, second]) for (const point of path)
+        if (!result.length || Math.hypot(point.x - result.at(-1)!.x, point.z - result.at(-1)!.z) > 1e-8)
             result.push({ ...point });
-    }
     if (result.length < 2) result.push({ ...result[0] });
     return result;
 }

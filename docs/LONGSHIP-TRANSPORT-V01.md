@@ -23,6 +23,8 @@ One canonical ship can be reserved by only one active group, including boarding.
 
 The hull represents the group while embarked. Up to four deterministic current living members appear at fixed deck anchors, with their existing DNA, hair, beard and clothing. Groups of one or two show everyone; three–five show two–three; six–eight show three–four; larger groups show four. Others have no duplicate ground actor. These anchors have no independent deck AI, physics, crew assignment or boarding animation. Discovery and wildlife witnesses use the full original expedition, regardless of which members are rendered.
 
+Occupants hold a sampled standing Idle pose with no running animation clock. Unchanged attachments stay parented to the hull across Core updates. Land locomotion, stale autonomous frames and previous activity animations cannot overwrite that pose or its deck position. Disembarking resets the actor's pitch/roll, releases the held pose and restores ordinary land movement. A subsequent land destination joins the waiting point to its homeward trail without retaining duplicate interior route points.
+
 Water A* runs on destination proposals/commands against a cached terrain mask, with bounded search and sampled segments. It does not run every animation frame. The mask provides simple coastal clearance, not hull physics or a guarantee that an arbitrarily rotated full ship fits every narrow channel. Saves validate transport phase, assignment, member routes, return trails, Food accounting and actual hull position. Previous saves without transport fields retain their previous behavior.
 
 ## Validation

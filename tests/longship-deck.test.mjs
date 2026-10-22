@@ -35,8 +35,9 @@ test('passengers follow one hull, retain actual roots, and detach before hull re
     const { FjordEntities } = load('../src/fjord-play/FjordEntities.ts');
     const released = [], animations = [];
     const models = {
-        create: async () => {
+        create: async entity => {
             const model = new Group(); model.add(new Mesh(new BoxGeometry(1, 1, 1), new MeshBasicMaterial()));
+            if (entity.kind === 'persona') model.rotation.x = Math.PI / 2;
             return model;
         },
         reconcile: async () => {}, boundsShape: () => 'same', release: model => {
@@ -57,14 +58,22 @@ test('passengers follow one hull, retain actual roots, and detach before hull re
     const personRoot = layer.entries.get('persona:actual').model;
     const hull = layer.entries.get('longship:same-ship').model;
     assert.equal(personRoot.parent, hull);
+    assert.deepEqual(personRoot.rotation.toArray().slice(0, 3), [0, 0, 0]);
+    let detachments = 0;
+    personRoot.addEventListener('removed', () => detachments++);
+    await layer.sync([human, ship]);
+    assert.equal(detachments, 0, 'An unchanged occupant remains attached across Core reconciliation');
     hull.position.x += 12;
     assert.equal(layer.describe().find(e => e.id === 'actual').position[0], 32 + longshipDeckAnchors[0][0]);
-    layer.advance({ inspect: () => [] }, .1, true);
-    assert.deepEqual(animations, ['Idle']);
+    layer.advance({ inspect: () => [{ key: human.selectionKey, x: 900, y: -20, z: 900,
+        rotation: 2, state: 'Run', speed: 4 }] }, .1, true);
+    assert.deepEqual(personRoot.position.toArray(), [...longshipDeckAnchors[0]]);
+    assert.deepEqual(animations, [], 'An occupant has no animation clock or stale autonomous movement');
     await layer.sync([{ ...human, status: { living: true }, transform: { ...transform, x: 40 } }]);
     assert.equal(layer.entries.get('persona:actual').model, personRoot);
     assert.equal(personRoot.parent, layer.root);
     assert.equal(personRoot.position.x, 40);
+    assert.deepEqual(personRoot.rotation.toArray().slice(0, 3), [0, transform.rotation, 0]);
     assert.equal(released.filter(id => id === hull.uuid).length, 1);
     assert.equal(released.includes(personRoot.uuid), false);
     layer.dispose();

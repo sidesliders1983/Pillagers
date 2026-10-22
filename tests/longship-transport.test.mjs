@@ -175,6 +175,18 @@ test('an idle transported longship can still be salvaged, releasing its obsolete
     assert.throws(() => command(salvaged, { type: 'BoardLongship', groupId: 'group-1', shipId: 'founding-longship' }), /unavailable/);
 });
 
+test('disembarked groups choose new land destinations and recall without duplicate interior route edges', () => {
+    let state = command(aboard(), { type: 'DisembarkLongship', groupId: 'group-1' });
+    state = advance(state, 3);
+    state = command(state, { type: 'ExploreArea', groupId: 'group-1', target: { x: 144, z: 128 } });
+    for (const route of Object.values(mission(state).returnRoutes))
+        for (let i = 1; i < route.length; i++)
+            assert.ok(Math.hypot(route[i].x - route[i - 1].x, route[i].z - route[i - 1].z) > 0);
+    state = advance(core.reconstructState(core.serializeState(state)), 4);
+    state = command(state, { type: 'RecallExpedition', groupId: 'group-1' });
+    assert.equal(mission(advance(state, 100)).status, 'Returned');
+});
+
 test('the real expedition controls board, show contextual disembark, and keep valid sailing confirmations collapsed', () => {
     const dom = new JSDOM('<main class="fjord-stage"><div id="fjord-workspace" data-surface="expeditions"><section id="panel"></section></div><nav id="fjord-navigation"></nav></main>',
         { url: 'http://localhost/fjord-play', pretendToBeVisual: true });

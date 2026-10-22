@@ -28,3 +28,11 @@ Review on desktop and a narrow touch viewport:
 6. Inspect the recognizable hair, beard, clothes and feet at all four deck anchors while the ship turns.
 
 Visual desktop/mobile UAT remains open: the current computer-use inventory reports no available browser. LAN HTTP checks cover the launcher, TypeScript module and game routes, not WebGL rendering or input quality. Do not treat this report as visual approval.
+
+## Follow-up: owner-reported occupant pose and post-landing destination
+
+The owner's MOV shows an occupant lying in the hull; the follow-up photo reports `Invalid spatial expedition state` after disembarking and choosing land. The latter reproduces when joining the two identical points of the valid waiting route to a longer homeward trail: the duplicate became an invalid interior edge. Route joining now removes adjacent duplicates across both input paths, while preserving the valid two-point representation of a genuinely zero-length route.
+
+Occupants now sample a standing Idle pose once per reconciliation and have no independent animation clock. Previous blended actions are stopped. Stable hull attachments are retained; pitch/roll reset on attachment and landing; stale autonomous frames cannot move an expedition member or play a conflicting activity. The native-resident regression uses actual founder DNA/faces, the committed body and extra animation clips: Doze → standing deck pose, repeated sync and hull turns, rejected stale Run updates, disembark → ordinary Walk. The scene regression also injects an incorrectly tilted root and verifies recovery and resource ownership. These checks cover the former gap in the initial source-deck-only test; visual UAT on the owner's device remains necessary.
+
+Follow-up validation: **67 targeted checks pass, 0 fail, 0 skip**, including a saved land journey and recall after disembarking. The production build passes, retaining the existing large-chunk warning. The separate LAN Vite process required a restart because its transformed modules still contained the earlier source after filesystem edits; verify the served `setEmbarked` method as well as disk contents when reviewing this worktree.
