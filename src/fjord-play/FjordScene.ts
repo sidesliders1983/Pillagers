@@ -649,8 +649,8 @@ export function createFjordScene(options: {
                 return [id, { x: person.position[0], z: person.position[2] }];
             }));
         },
-        pick(x: number, y: number, pointerType: 'mouse' | 'touch') {
-            return layer!.pick(camera, x, y, canvas.getBoundingClientRect(), pointerType);
+        pick(x: number, y: number, pointerType: 'mouse' | 'touch', targetKind?: 'longship') {
+            return layer!.pick(camera, x, y, canvas.getBoundingClientRect(), pointerType, targetKind);
         },
         groundPoint(x: number, y: number, fallbackToWater = false, waterOnly = false) {
             const rect = canvas.getBoundingClientRect(), ray = new Raycaster();

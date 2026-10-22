@@ -85,6 +85,31 @@ test('unsafe water destinations fail atomically; disembarking releases the same 
     assert.equal(mission(state).transport.phase, 'embarked');
 });
 
+test('landing away from home and boarding again switches directly to sailing, including after saving', () => {
+    let state = aboard();
+    for (const berth of [{ x: 72, z: 128 }, { x: 128, z: 184 }]) {
+        state = command(state, { type: 'ExploreArea', groupId: 'group-1', target: berth });
+        for (let tick = 0; tick < 80 && mission(state).status === 'Traveling'; tick++) state = advance(state, 1);
+        assert.equal(mission(state).status, 'Exploring');
+        state = command(state, { type: 'DisembarkLongship', groupId: 'group-1' });
+        state = core.reconstructState(core.serializeState(state));
+        const id = mission(state).id, food = state.stocks.food, pack = structuredClone(mission(state).provisions);
+        const offer = ships.boardLongshipOffer(state, 'group-1', 'founding-longship', context);
+        assert.equal(offer.alreadyThere, true, 'A landed crew is already at its ship’s embarkation shore');
+        state = command(state, { type: 'BoardLongship', groupId: 'group-1', shipId: 'founding-longship' });
+        assert.equal(mission(state).transport.phase, 'embarked', 'No clock tick is required when everyone is at shore');
+        assert.equal(mission(state).id, id);
+        assert.equal(state.stocks.food, food);
+        assert.deepEqual(mission(state).provisions, pack);
+        const target = { x: 64, z: 64 };
+        assert.doesNotThrow(() => core.exploreOffer(state, 'group-1', target, context));
+        state = command(state, { type: 'ExploreArea', groupId: 'group-1', target });
+        assert.equal(mission(state).transport.phase, 'embarked');
+        state = advance(state, 2);
+        assert.ok(mission(state).travelled > 0);
+    }
+});
+
 test('the production island berth is boardable and projection uses actual residents on the persistent hull', () => {
     const { SharedSettlement } = load('../src/play/SharedSettlement.ts');
     const shared = new SharedSettlement(32, 123, true, 'island-pool-v1');

@@ -254,10 +254,10 @@ export class FjordEntities {
         }
         return entry?.localBounds?.clone().translate(entry.model.position);
     }
-    /** Touch targets use CSS pixels and current moving bodies, independently of render DPR. */
+    /** Expanded targets use CSS pixels and current moving bodies, independently of render DPR. */
     pick(camera: Camera, x: number, y: number,
         viewport: { left: number; top: number; width: number; height: number },
-        pointerType: 'mouse' | 'touch' = 'mouse') {
+        pointerType: 'mouse' | 'touch' = 'mouse', targetKind?: 'longship') {
         if (viewport.width <= 0 || viewport.height <= 0) return null;
         this.root.updateMatrixWorld(true);
         camera.updateMatrixWorld(true);
@@ -268,13 +268,22 @@ export class FjordEntities {
             while (node && !node.userData.canonical) node = node.parent;
             return node?.userData.canonical ?? null;
         };
-        const exact = canonical(ray.intersectObject(this.root, true)[0]?.object ?? null);
-        if (pointerType !== 'touch' || exact?.kind === 'persona' || exact?.kind === 'cattle')
+        const visible = (node: Object3D | null) => {
+            while (node) {
+                if (!node.visible) return false;
+                node = node.parent;
+            }
+            return true;
+        };
+        const exact = canonical(ray.intersectObject(this.root, true)
+            .find(hit => visible(hit.object))?.object ?? null);
+        if (targetKind ? exact?.kind === targetKind :
+            pointerType !== 'touch' || exact?.kind === 'persona' || exact?.kind === 'cattle')
             return exact;
         const candidates: { facts: { kind: string; id: string }; distance: number; depth: number }[] = [];
         for (const [key, entry] of this.entries) {
             const facts = entry.model.userData.canonical;
-            if (facts.kind !== 'persona' && facts.kind !== 'cattle') continue;
+            if (targetKind ? facts.kind !== targetKind : facts.kind !== 'persona' && facts.kind !== 'cattle') continue;
             const bounds = this.bounds(key);
             if (!bounds || !entry.model.visible) continue;
             const center = bounds.getCenter(new Vector3()), projected = center.clone().project(camera);
@@ -292,21 +301,25 @@ export class FjordEntities {
             const minX = Math.min(...points.map(p => p.x)), maxX = Math.max(...points.map(p => p.x));
             const minY = Math.min(...points.map(p => p.y)), maxY = Math.max(...points.map(p => p.y));
             const screenX = (minX + maxX) / 2, screenY = (minY + maxY) / 2;
-            // At least 44 x 44 CSS pixels; small models also get forgiving edge padding.
-            const halfWidth = Math.max(22, (maxX - minX) / 2 + 8);
-            const halfHeight = Math.max(22, (maxY - minY) / 2 + 8);
+            // Ship destinations include hull/sail gaps and nearby water on mouse and touch.
+            const minimumHalfSize = targetKind === 'longship' ? 28 : 22;
+            const padding = targetKind === 'longship' ? 18 : 8;
+            const halfWidth = Math.max(minimumHalfSize, (maxX - minX) / 2 + padding);
+            const halfHeight = Math.max(minimumHalfSize, (maxY - minY) / 2 + padding);
             if (Math.abs(x - screenX) > halfWidth || Math.abs(y - screenY) > halfHeight) continue;
             // Enlarging a target must not make a resident selectable through a nearer home.
             ray.setFromCamera(new Vector2(projected.x, projected.y), camera);
             const body = ray.ray.intersectBox(bounds, new Vector3());
-            const foreground = ray.intersectObject(this.root, true)[0];
-            if (body && foreground && canonical(foreground.object)?.id !== facts.id &&
+            const foreground = ray.intersectObject(this.root, true).find(hit => visible(hit.object));
+            const foregroundFacts = foreground && canonical(foreground.object);
+            if (body && foreground && foregroundFacts?.id !== facts.id &&
+                !(targetKind === 'longship' && foregroundFacts?.aboardShip === facts.id) &&
                 foreground.distance + .01 < body.distanceTo(ray.ray.origin)) continue;
             candidates.push({ facts, distance: Math.hypot(x - screenX, y - screenY), depth: projected.z });
         }
         candidates.sort((a, b) => a.distance - b.distance || a.depth - b.depth ||
             a.facts.id.localeCompare(b.facts.id));
-        return candidates[0]?.facts ?? exact;
+        return candidates[0]?.facts ?? (targetKind ? null : exact);
     }
     configureMotion(motion: LivingWorldController) {
         for (const id of this.yardSamplers.keys())

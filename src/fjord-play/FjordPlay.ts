@@ -793,8 +793,9 @@ export class FjordPlay {
         if (this.stopped || this.shared.transferring) return;
         controller.setSelectionHandler((x, y, pointerType) => {
             if (expeditions?.targeting || islandMissions?.targeting) {
-                const picked = presentation!.pick(x, y, pointerType);
-                if (expeditions?.targeting && picked?.kind === 'longship')
+                const picked = expeditions?.targeting && !expeditions.sailing
+                    ? presentation!.pick(x, y, pointerType, 'longship') : null;
+                if (expeditions && picked?.kind === 'longship')
                     return expeditions.chooseShip(picked.id);
                 const point = presentation!.groundPoint(x, y, true, expeditions?.sailing);
                 if (point) {
@@ -840,7 +841,7 @@ export class FjordPlay {
             const key = [x, y, expeditions.targetingGroup, this.session.revision, ...camera.matrixWorld.elements].join(',');
             if (key === destinationPreviewKey) return;
             destinationPreviewKey = key;
-            const picked = presentation!.pick(x, y, 'mouse');
+            const picked = !expeditions.sailing ? presentation!.pick(x, y, 'mouse', 'longship') : null;
             if (picked?.kind === 'longship') {
                 const ship = this.campaign.readProjection().entities.find(e => e.kind === 'longship' && e.id === picked.id);
                 if (ship?.transform) { expeditions.previewShip(picked.id, ship.transform); return; }

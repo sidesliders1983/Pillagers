@@ -37,3 +37,28 @@ test('the map shows one ordered destination per active group, points returning g
         { groupId: 'group-2', label: 'Group 2', status: 'Returning', x: 50, z: 0 },
     ]);
 });
+
+test('unknown land and water are identical opaque pixels, revealing no island outline or terrain', () => {
+    const preview = { bounds, columns: 4, rows: 2, waterLevel: 0,
+        heights: new Float32Array([-4, 12, -3, 35, 1, 75, -7, 2]),
+        ground: new Uint8Array([0, 1, 0, 4, 2, 3, 0, 1]) };
+    const knowledge = { version: 1, worldId: 'map-fixture', cellSize: 100,
+        grid: { bounds, columns: 4, rows: 2 }, explored: '01', visible: '01' };
+    const saved = structuredClone(knowledge), map = new IslandMapProjection(preview, knowledge);
+    const pixel = index => [...map.pixels.slice(index * 4, index * 4 + 4)];
+    const hidden = pixel(1);
+    assert.equal(hidden[3], 255);
+    for (let index = 2; index < 8; index++) assert.deepEqual(pixel(index), hidden);
+    const observed = pixel(0);
+    assert.notDeepEqual(observed, hidden);
+    map.setKnowledge({ ...knowledge, visible: '00' });
+    assert.notDeepEqual(pixel(0), hidden, 'Explored terrain remains on the map after observers leave');
+    assert.notDeepEqual(pixel(0), observed, 'Previously mapped terrain is dimmer than current observations');
+    map.setKnowledge({ ...knowledge, explored: '11', visible: '10' });
+    assert.notDeepEqual(pixel(4), hidden, 'New discoveries reveal their real terrain color');
+    assert.deepEqual(pixel(5), hidden, 'The neighboring unknown high ground stays masked');
+    assert.deepEqual(knowledge, saved, 'Rendering must not reveal cells in the canonical mask');
+    map.setKnowledge(undefined);
+    for (let index = 0; index < 8; index++) assert.deepEqual(pixel(index), hidden);
+    assert.equal(map.destination({ x: .1, y: .1 }), null, 'Missing knowledge fails closed');
+});
