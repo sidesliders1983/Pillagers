@@ -1,6 +1,7 @@
 import { meshyHumanFactory, meshyAnimationClips, type MeshyHuman } from '../characters/MeshyHuman';
 import { universalHumanProfile } from '../characters/UniversalHumanProfile';
 import { livestockPresentation } from '../characters/LivestockPresentation';
+import { prepareFaunaLighting } from '../characters/FaunaLighting';
 import { LivestockDeath } from './LivestockDeath';
 import { humanPreviewGroundSpeed } from '../character-lab/HumanPreviewPace';
 import { AnimationMixer, LoopOnce, LoopRepeat, Box3, BoxGeometry, CapsuleGeometry, Group, Mesh, MeshStandardMaterial, Object3D, Vector3 } from 'three';
@@ -303,6 +304,7 @@ export class FjordModels {
                 url = terrainAssetPath(longshipModel);
             const gltf = await this.loader.loadAsync(import.meta.env.BASE_URL + url);
             const source = gltf.scene;
+            if (entity.kind === 'cattle') prepareFaunaLighting(source);
             source.updateMatrixWorld(true);
             const bounds = new Box3().setFromObject(source), size = bounds.getSize(new Vector3());
             if (!Number.isFinite(size.y) || size.y <= 0)

@@ -47,6 +47,7 @@ for (const definition of definitions) {
     const source = cattle ? originalCattleFile(definition.source) : await readFile(definition.source);
     const doc = await io.readBinary(source);
     const root = doc.getRoot();
+    for (const material of root.listMaterials()) material.setEmissiveFactor([0, 0, 0]);
     const prepared = Buffer.from(await io.writeBinary(doc));
     const gltf = await loader.parseAsync(prepared.buffer.slice(prepared.byteOffset, prepared.byteOffset + prepared.byteLength), '');
     const authored = authorLivestockClips(doc, gltf, definition, cattle);

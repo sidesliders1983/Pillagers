@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "method": "CPU-only paired warm uniform updates; no renderer or GPU execution",
+  "device": "win32 x64",
+  "frames": 15000,
+  "cases": [
+    {
+      "homes": 5,
+      "quality": "Same native path on Low and Standard",
+      "baselineMs": {
+        "p50": 0.0001999999999497959,
+        "p95": 0.00040000000012696546,
+        "p99": 0.002199999999902502
+      },
+      "candidateMs": {
+        "p50": 0.0004999999998744897,
+        "p95": 0.001199999999926149,
+        "p99": 0.0015999999998257408
+      },
+      "deltaMs": {
+        "p50": 0.00029999999992469384,
+        "p95": 0.0007999999997991836,
+        "p99": -0.0006000000000767614
+      },
+      "extraLocalLights": 0,
+      "extraShadowSources": 0,
+      "extraMaterials": 0,
+      "sharedMasks": 3,
+      "estimatedRgbaMipBytes": 4194304,
+      "gpuTime": null,
+      "measuredDrawCalls": null,
+      "limitations": "Material/map counts are code resource budgets. Real draws, GPU timing and iPhone/iPad frame percentiles require device capture."
+    },
+    {
+      "homes": 80,
+      "quality": "Same native path on Low and Standard",
+      "baselineMs": {
+        "p50": 0.0003999999998995918,
+        "p95": 0.0011000000001786248,
+        "p99": 0.001399999999875945
+      },
+      "candidateMs": {
+        "p50": 0.0014000000001033186,
+        "p95": 0.0019999999999527063,
+        "p99": 0.003200000000106229
+      },
+      "deltaMs": {
+        "p50": 0.0010000000002037268,
+        "p95": 0.0008999999997740815,
+        "p99": 0.001800000000230284
+      },
+      "extraLocalLights": 0,
+      "extraShadowSources": 0,
+      "extraMaterials": 0,
+      "sharedMasks": 3,
+      "estimatedRgbaMipBytes": 4194304,
+      "gpuTime": null,
+      "measuredDrawCalls": null,
+      "limitations": "Material/map counts are code resource budgets. Real draws, GPU timing and iPhone/iPad frame percentiles require device capture."
+    }
+  ]
+}

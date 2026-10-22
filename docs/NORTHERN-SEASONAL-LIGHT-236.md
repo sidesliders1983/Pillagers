@@ -1,8 +1,10 @@
 # Northern Seasonal Light — #236
 
-Status: owner approved the contract/profile on 22 October 2026; opt-in integration is implemented.
-Baseline: main `d42b878`. Default activation requires a later visual acceptance;
-this issue delivers an opt-in comparison in the existing Fjord Play scene.
+Status: owner approved the profile, smooth transitions and visual result on 22 October 2026,
+and subsequently requested Northern Light as the Fjord Play default with #256.
+Ordinary `/fjord-play` URLs now select `northern-v1`; `?lighting=baseline` retains
+the earlier comparison. This default changes presentation only, including existing saves.
+Historical baseline measurements against main `d42b878` remain unchanged.
 
 ## Approved annual profile
 
