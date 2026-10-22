@@ -59,7 +59,9 @@ export function createFjordScene(options: {
     const session = shared.session, campaign = shared.fjord;
     const selectionLabels = labels.selection, productionLabels = labels.production;
     const query = new URLSearchParams(location.search);
-    const { unified: unifiedSunlight, northern: northernLight, warmHomes } = fjordLighting(query);
+    const { unified: unifiedSunlight, northern: northernLight, warmHomes } = fjordLighting(query,
+        import.meta.env.DEV && import.meta.env.VITE_WARM_HOME_PREVIEW === 'true');
+    canvas.dataset.homeLightingMode = warmHomes ? 'warm-v1' : 'off';
     const atmosphere = unifiedSunlight ? new DirectionalAtmosphere() : undefined;
     const decorateMaterials = atmosphere ? (root: import('three').Object3D) => atmosphere.bind(root) : undefined;
     let restoredCamera = options.restoredCamera;

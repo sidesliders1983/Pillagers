@@ -7,6 +7,12 @@ independently selectable with `sunlight=unified-v1`.
 The new housing effect remains opt-in with `homes=warm-v1` pending owner visual
 acceptance. No canonical rules, costs, saves, seasonal calendar or RNG change.
 
+The dedicated review server (`node scripts/dev-warm-home-review.mjs`, port 5229)
+enables the candidate for ordinary `/fjord-play` links as well. This avoids a
+false negative when continuing a real campaign outside the comparison iframe.
+`homes=baseline` still explicitly disables it for matched comparisons. The
+server injects a development-only switch; production defaults remain unchanged.
+
 ## Shared seasonal signal
 
 Homes consume `WorldLighting.darkness`, the same interpolated annual darkness

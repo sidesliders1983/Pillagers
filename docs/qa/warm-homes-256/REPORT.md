@@ -71,3 +71,20 @@ Use existing home controls for upgrade/removal and household reassignment.
 Paired game captures, visible warm-home readability at strategy distance,
 matched fire appearance, real village/GPU measurements and physical devices
 remain open gates. Keep housing opt-in and the PR draft; do not auto-merge.
+
+## Ordinary preview link correction — 22 October 2026
+
+The owner reported an unlit inhabited Homestead in a real campaign on port 5229.
+The ordinary game route still defaulted to housing emission off; only the
+comparison iframe appended the candidate query. The dedicated review server now
+injects a development-only candidate default for ordinary `/fjord-play` links.
+Explicit `homes=baseline` still overrides it. Production activation continues to
+require `homes=warm-v1` until owner visual acceptance.
+
+Eight focused housing/launcher checks and the production build pass after this
+correction. The served source was checked for the enabled review-server flag.
+The native GLTFLoader also finds the expected `Mesh_0` binding and creates the
+aperture UV channel on Homestead (13 triangles), Longhouse (11) and Farm Hut (22).
+That loader check stubs texture decoding and is not a WebGL/image test. Browser
+inventory again exposed no controllable browser, so device visibility remains
+subject to the owner's reload and review. Existing campaign storage is retained.

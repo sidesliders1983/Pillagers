@@ -40,6 +40,11 @@ test('Northern Light is the default; baseline comparisons and independent home r
     assert.equal(fjordLighting(new URLSearchParams('lighting=baseline')).northern, false);
     assert.equal(fjordLighting(new URLSearchParams('sunlight=unified-v1')).northern, true);
     assert.equal(fjordLighting(new URLSearchParams('homes=warm-v1')).warmHomes, true);
+    assert.equal(fjordLighting(new URLSearchParams(), true).warmHomes, true,
+        'The dedicated candidate server must light ordinary Fjord Play links');
+    assert.equal(fjordLighting(new URLSearchParams('homes=baseline'), true).warmHomes, false,
+        'Explicit baseline comparisons override the candidate server default');
+    assert.equal(fjordLighting(new URLSearchParams('homes=warm-v1'), true).warmHomes, true);
 });
 
 test('inhabited emission borrows shared darkness, stays instance-owned, and releases no source resource', async () => {
