@@ -25,6 +25,7 @@ export class FjordModels {
     private actors = new Map<Object3D, { human?: MeshyHuman; mixer?: AnimationMixer;
         clips?: import('three').AnimationClip[]; action?: import('three').AnimationAction;
         fingerprint?: string; paceSignature?: string; resumeGrazeTime?: number; embarked?: boolean;
+        materialRevision?: number;
         pace: number; groundSpeed: number; state: string }>();
     async reconcile(model: Object3D, entity: FjordEntity) {
         const actor = this.actors.get(model);
@@ -52,6 +53,10 @@ export class FjordModels {
             actor.state = 'Idle';
         }
         await this.wardrobe.reconcile(actor.human, entity);
+        if (this.decorateMaterials && actor.materialRevision !== actor.human.equipRevision) {
+            this.decorateMaterials(model);
+            actor.materialRevision = actor.human.equipRevision;
+        }
         model.userData.appearance = model.userData.universalHumanProfile;
         model.userData.pace = actor.pace;
     }
@@ -183,7 +188,7 @@ export class FjordModels {
     private motionSources = new WeakMap<Object3D, { clips: import('three').AnimationClip[]; pace: number }>();
     private draco = new DRACOLoader().setDecoderPath(import.meta.env.BASE_URL + 'draco/');
     private loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).setDRACOLoader(this.draco);
-    constructor(private assets: AssetManager) { }
+    constructor(private assets: AssetManager, private decorateMaterials?: (root: Object3D) => void) { }
     async create(entity: FjordEntity): Promise<Object3D> {
         if (entity.kind === 'persona' && entity.dna) {
             try {

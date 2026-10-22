@@ -41,7 +41,8 @@ export class SettlementDressingLayer {
     private batchBuilds = 0;
     private disposed = false;
 
-    constructor(private assets: AssetManager, private world: WorldBlueprint, quality: 'low' | 'standard') {
+    constructor(private assets: AssetManager, private world: WorldBlueprint, quality: 'low' | 'standard',
+        private decorateMaterials?: (root: Object3D) => void) {
         this.quality = quality;
         this.root.name = 'Settlement dressing';
         const sources: Record<string, import('./SettlementDressing').DressingBounds> = {};
@@ -156,6 +157,7 @@ export class SettlementDressingLayer {
             });
             // Ankle-height foliage frosts on every face; roof/well/log snow keeps upward coverage.
             const snow = new StructureSeasonTint(root, /grass|bush/.test(asset) ? 'all' : 'upward');
+            this.decorateMaterials?.(root);
             const foliage: DressingBatch['foliage'] = [];
             if (/grass|bush/.test(asset)) {
                 const unique = new Set<import('three').MeshStandardMaterial>();

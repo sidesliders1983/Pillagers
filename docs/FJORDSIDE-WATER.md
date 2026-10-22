@@ -30,6 +30,16 @@ source files, vendor licences and measurement reports are retained. ReferenceWat
 has no real building/tree/boat reflections, seabed refraction, bathymetry mask or
 shoreline foam. Its turquoise tint depends on viewing angle, not measured depth.
 
+## Opt-in unified sunlight (#237)
+
+The separate `/fjord-play?lighting=northern-v1&sunlight=unified-v1` comparison
+splits real solar diffuse/glitter from ambient body/sky fill, receives bounded
+coastal shadows from the existing directional map, and shares linear directional
+fog with land materials. It preserves the existing water geometry, wave/height
+and boat contracts. This adds per-pixel work without an extra shadow/water pass;
+real GPU and device acceptance remain pending. Baseline URLs retain the treatment
+above. See [the implementation contract](UNIFIED-SUNLIGHT-237.md).
+
 ## Original boat
 
 The grounded AssetManager faering measures 1.324 m wide, 1.181 m high and 4.954 m

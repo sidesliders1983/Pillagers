@@ -1,7 +1,9 @@
 import { discoveryAt, type DiscoveryView } from '../simulation/ClanDiscovery';
 import { presentationProfiles } from '../config/PresentationQuality';
 import { campaignIslandPlan } from '../fjord-play/CampaignIsland';
-import { Camera, Group, InstancedMesh, Mesh, Vector3 } from 'three';
+import { Box3, Camera, Group, InstancedMesh, Mesh, Vector3 } from 'three';
+import type { DirectionalAtmosphere } from './DirectionalAtmosphere';
+import { unifiedSunlight } from '../config/UnifiedSunlight';
 import type { AssetManager } from '../core/AssetManager';
 import type { WorldLighting } from '../core/WorldLighting';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
@@ -24,6 +26,7 @@ import { hearth } from './SettlementLayout';
 import { tentBuildingPlot, clearBuildingPlotNature, BuildingPlot } from './BuildingPlot';
 
 export interface WorldSelection {
+    atmosphere?: DirectionalAtmosphere;
     groundStyle?: 'iceland-v1';
     discovery?: DiscoveryView;
     preparation?: <T>(stage: string, operation: () => T | Promise<T>) => Promise<T>;
@@ -150,7 +153,13 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
                     scale:1,halfWidth:.75,halfDepth:2,support:'marine'});
             }
             const mooring = attachments.find(item => item.key === 'boat')!;
-            water = new FjordsideWater(blueprint.waterLevel, mooring, selection.quality);
+            water = new FjordsideWater(blueprint.waterLevel, mooring, selection.quality, selection.atmosphere);
+            if (selection.atmosphere) {
+                const bounds = blueprint.terrain.bounds, pad = unifiedSunlight.coastalReceiverPadding;
+                water.mesh.userData.shadowReceiverBounds = new Box3(
+                    new Vector3(bounds.minX - mooring.x - pad, -.2, bounds.minZ - mooring.z - pad),
+                    new Vector3(bounds.maxX - mooring.x + pad, .2, bounds.maxZ - mooring.z + pad));
+            }
             if (selection.attachmentVersion === 'authored-props-v2') {
                 validateAttachments([planWorldAttachments(assets,blueprint,true,initialTentFootprint,false)]);
             } else if (selection.attachmentVersion === 'authored-props-v3') {
@@ -273,7 +282,8 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
             get quality() { return quality; },
             setQuality(value: 'standard' | 'low') {
                 quality = value;
-                (water ?? classic!.water).surface.setQuality(presentationProfiles[value].waterQuality);
+                if (water) water.setQuality(value);
+                else classic!.water.surface.setQuality(presentationProfiles[value].waterQuality);
                 floatingBoat?.update((water ?? classic!.water).surface,waterTime);
             },
             setMotion(value: typeof motion) { motion = { ...value }; },
