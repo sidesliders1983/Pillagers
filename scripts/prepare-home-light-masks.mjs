@@ -43,6 +43,7 @@ for (const [key, regions] of Object.entries(surfaces)) {
     const size = 1024, mask = Buffer.alloc(size * size);
     let written = 0;
     const bindings = [];
+    const windowSamples = regions.map(() => ({ position: [0, 0, 0], count: 0 }));
     for (const node of document.getRoot().listNodes()) {
         const matrix = node.getWorldMatrix();
         for (const primitive of node.getMesh()?.listPrimitives() ?? []) {
@@ -70,7 +71,7 @@ for (const [key, regions] of Object.entries(surfaces)) {
                     const wc = 1 - wa - wb;
                     if (wa < 0 || wb < 0 || wc < 0) continue;
                     const world = [0, 1, 2].map(axis => wa * vertices[0].world[axis] + wb * vertices[1].world[axis] + wc * vertices[2].world[axis]);
-                    const selected = regions.some(region => {
+                    const regionIndex = regions.findIndex(region => {
                         const horizontal = region.axis === 2 ? 0 : 2;
                         const px = (world[horizontal] - (min[horizontal] + max[horizontal]) / 2) * scale * region.sign + 250 + region.panel[0];
                         const py = 465 - (world[1] - min[1]) * scale + region.panel[1];
@@ -84,7 +85,10 @@ for (const [key, regions] of Object.entries(surfaces)) {
                     const ty = Math.min(info.height - 1, Math.floor((y + .5) / size * info.height));
                     const offset = (ty * info.width + tx) * info.channels;
                     // A localized dark-aperture filter preserves the authored bright frame and mullions.
-                    if (selected && Math.max(...colors.subarray(offset, offset + 3)) < 100) {
+                    if (regionIndex >= 0 && Math.max(...colors.subarray(offset, offset + 3)) < 100) {
+                        const sample = windowSamples[regionIndex];
+                        world.forEach((value, axis) => sample.position[axis] += value);
+                        sample.count++;
                         triangles.add(triangle / 3);
                         if (!mask[y * size + x]) written++;
                         mask[y * size + x] = 255;
@@ -99,7 +103,13 @@ for (const [key, regions] of Object.entries(surfaces)) {
     await sharp(mask, { raw: { width: size, height: size, channels: 1 } })
         .resize(512, 512).png().toFile(`${output}/${file}`);
     manifest.assets[key] = { file, glbSha256: createHash('sha256').update(bytes).digest('hex'),
-        size: 512, bakeSize: size, emittingBakeTexels: written, regions, bindings };
+        size: 512, bakeSize: size, emittingBakeTexels: written, regions, bindings,
+        windows: windowSamples.map((sample, index) => {
+            if (!sample.count) throw new Error(key + ': window has no emitting surface');
+            return { position: sample.position.map((value, axis) => value / sample.count -
+                (axis === 1 ? min[axis] : (min[axis] + max[axis]) / 2)),
+                outward: [0, 1, 2].map(axis => axis === regions[index].axis ? regions[index].sign : 0) };
+        }) };
     console.log(key, written, 'emitting texels');
 }
 await writeFile(`${output}/manifest.json`, JSON.stringify(manifest, null, 2) + '\n');

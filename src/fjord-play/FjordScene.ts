@@ -248,6 +248,7 @@ export function createFjordScene(options: {
             });
             weatherSignature = "";
             scene.add(next.root);
+            layer!.setHomeGround(blueprint);
             dressing = new SettlementDressingLayer(assets!, blueprint, next.quality, decorateMaterials);
             scene.add(dressing.root);
             cleared.clear();
@@ -575,6 +576,7 @@ export function createFjordScene(options: {
             canvas.dataset.precipitation = JSON.stringify(precipitationEffect!.inspect());
             canvas.dataset.structureSnow = JSON.stringify(layer!.inspectSeason());
             canvas.dataset.homeLighting = JSON.stringify(layer!.inspectHomeLighting());
+            canvas.dataset.homeGroundGlow = JSON.stringify(layer!.inspectHomeGround() ?? null);
             canvas.dataset.seasonMaterials = JSON.stringify(weatherTint!.inspect());
             canvas.dataset.motionTime = String(activeTime);
             canvas.dataset.cameraClearance = JSON.stringify(controller.inspectClearance());

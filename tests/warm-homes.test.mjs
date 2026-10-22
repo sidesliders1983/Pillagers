@@ -138,6 +138,14 @@ test('localized native emissive maps remain bound to exact authored GLBs with bo
     for (const [key, entry] of Object.entries(manifest.assets)) {
         const bytes = await readFile(new URL(houses.assets[key].file, directory));
         assert.equal(createHash('sha256').update(bytes).digest('hex'), entry.glbSha256);
+        assert.equal(entry.windows.length, entry.regions.length);
+        for (const window of entry.windows) {
+            assert.equal(window.position.length, 3);
+            assert.ok(window.position.every(Number.isFinite));
+            assert.ok(window.position[1] > 0 && window.position[1] < houses.assets[key].bounds.max[1]);
+            assert.equal(Math.hypot(...window.outward), 1);
+            assert.equal(window.outward[1], 0);
+        }
         const document = await io.readBinary(bytes);
         for (const binding of entry.bindings) {
             const node = document.getRoot().listNodes().find(node => node.getName() === binding.node);

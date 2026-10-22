@@ -43,6 +43,7 @@ const timer = setInterval(() => {
     const data = frame.contentDocument?.querySelector('canvas')?.dataset;
     if (!data?.seasonalLight) return;
     const sample = { variant, light: JSON.parse(data.seasonalLight), homes: JSON.parse(data.homeLighting ?? '[]'),
+        groundGlow: JSON.parse(data.homeGroundGlow ?? 'null'),
         resources: JSON.parse(data.stability ?? '{}'), fire: JSON.parse(data.campfireEffect ?? '{}') };
     if (measurements.length < 300) measurements.push(sample);
     element('metrics').textContent = JSON.stringify(sample, null, 2);

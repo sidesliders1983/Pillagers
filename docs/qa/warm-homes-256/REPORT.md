@@ -88,3 +88,38 @@ aperture UV channel on Homestead (13 triangles), Longhouse (11) and Farm Hut (22
 That loader check stubs texture decoding and is not a WebGL/image test. Browser
 inventory again exposed no controllable browser, so device visibility remains
 subject to the owner's reload and review. Existing campaign storage is retained.
+
+## Ground spill and fauna follow-up — 22 October 2026
+
+The owner confirmed visible house windows on their device, then requested warm
+spill on snow and reported livestock staying bright. New source observations:
+all 27 published animal models use lit PBR; the nine goat/pig/sheep variants have
+an imported white emissive factor, unlike cattle and wildlife. Runtime source
+preparation disables animal-coat emission and the livestock exporter clears it
+for future publications. Original models/textures/animations remain unchanged.
+
+The candidate now batches warm, terrain-conforming ground patches for occupied,
+supported windows. One draw/material/geometry per visible settlement layer is
+added, with no new lights, shadow passes or textures. Empty/summer batches do not
+draw. Visibility and submerged-ground rejection are tested. Window anchors are
+derived reproducibly from the same aperture mask samples. Existing campfire code
+and tuning remain unchanged.
+
+87 focused lighting, housing, fauna, wildlife, marine, livestock and rival checks
+passed with no failures/skips. The final submerged-ground guard is covered by
+the subsequent focused rerun. Production build and asset validation pass. Three
+offline GLSL compile/link variants (no fog, linear fog, exponential fog) pass;
+see `spill-shader-report.json`. This does not establish rendered appearance.
+
+`spill-cpu-report.json` preserves the new CPU-only measurements separately from
+the original emission-only benchmark above. For 5/80 homes (10/160 patches):
+
+| Operation | 5 homes p50/p95/p99 ms | 80 homes p50/p95/p99 ms |
+| --- | --- | --- |
+| Cached Core sync | .0040 / .0113 / .0246 | .0516 / .0805 / .1533 |
+| Changed layout rebuild | .0673 / .1936 / .3731 | .5858 / 1.2624 / 1.3501 |
+
+The frame-uniform delta is at timer-noise scale (p99 at most .0002ms). Rebuilds
+are housing/visibility events, not a periodic frame operation. Counts are code
+budgets, not captured GPU counters. Physical-device GPU timings and paired
+captures of snow spill and dimmed coats remain pending owner review on port 5229.

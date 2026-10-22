@@ -55,7 +55,7 @@ This avoids filtered atlas bleed on unrelated walls. Three shared runtime geomet
 buffers are expanded once to preserve per-corner UVs, with identical authored
 positions, normals, triangle order and draw groups. They replace the original
 buffers before instance creation; no per-house geometry copy is made. There is
-no new material shader, light, bloom or postprocess pass.
+no additional shader for the window material, light, bloom or postprocess pass.
 
 Reproduce masks with `node scripts/prepare-home-light-masks.mjs`. Hash and area
 checks fail on mismatched runtime assets, so a future house replacement requires
@@ -80,8 +80,36 @@ World teardown releases the three maps through AssetManager.
 Rivals receive only the existing currently observed entity projection. A boolean
 inhabited presentation signal is forwarded only for a currently visible building;
 no resident IDs or household list is added. Hidden and mapped-only buildings are
-absent and their bindings are removed. There is no new exterior light spill.
+absent and their bindings are removed. Ground spill is also clipped to observed land.
 Campfire code, tuning, particles, halo and state are unchanged.
+
+## Warm light on snow and ground
+
+Following owner review, supported occupied windows also cast a small presentation
+light patch on nearby ground. Window anchors and outward directions are generated
+from the same reviewed aperture regions and transformed with the actual house.
+The patch extends 3.4 metres outward and fades softly across and along its footprint;
+maximum additive opacity is .2. It follows canonical terrain heights with a .045m
+surface offset and skips submerged or unobserved ground. No new discovery occurs.
+
+All patches share one geometry/material/draw per settlement layer, not one light or
+material per house. Vertices rebuild only when housing poses, occupancy, world or
+visible territory change. Interpolated darkness updates one uniform; summer and
+empty batches are hidden. It has depth testing, distance-fog attenuation, no depth
+writing, shadow source, new texture, timer or raycast target. It does not illuminate
+walls/actors like a dynamic light. This preserves the accepted campfire lighting.
+
+## Fauna reflect scene light
+
+The source audit covered all 13 livestock variants and 14 wildlife assets. The
+nine goat, pig and sheep GLBs imported an emissive factor of `[1,1,1]`; cattle and
+wildlife were already non-emissive lit PBR materials. `prepareFaunaLighting` now
+disables emission once on livestock/wildlife templates before instancing. Albedo,
+normal maps, skinning and animation stay intact, and texture references remain
+owned by their existing loader. No per-frame fauna material recoloring is needed.
+`prepare-livestock.mjs` also clears emission on future exports. Original supplied
+assets and the current runtime GLB bytes are preserved. Marine spray/wake effects
+are separate presentation effects and are not animal-coat materials.
 
 ## Review and limits
 

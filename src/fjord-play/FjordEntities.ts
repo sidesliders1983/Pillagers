@@ -4,6 +4,7 @@ import { createBlueprintSurface, type TerrainSurface } from '../world-generation
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { StructureSeasonTint } from '../world/StructureSeasonTint';
 import { HomeLighting } from '../world/HomeLighting';
+import { HomeGroundGlow } from '../world/HomeGroundGlow';
 import type { Texture } from 'three';
 import type { SeasonAppearance } from '../world/SeasonAppearanceTransition';
 import { createFjordYardSurface } from './FjordYardSurface';
@@ -82,13 +83,31 @@ export class FjordEntities {
         radius: number;
     }>();
     private homeDarkness = 0;
+    private homeGround?: HomeGroundGlow;
     constructor(private models: FjordModels, private decorateMaterials?: (root: Object3D) => void,
         private homeMasks?: ReadonlyMap<string, Texture>) {
     }
     setHomeDarkness(darkness: number) {
         if (darkness === this.homeDarkness) return;
         this.homeDarkness = darkness;
+        this.homeGround?.setDarkness(darkness);
         for (const entry of this.entries.values()) entry.homeLight?.setDarkness(darkness);
+    }
+    setHomeGround(world: WorldBlueprint, visible?: (x: number, z: number) => boolean) {
+        if (!this.homeMasks) return;
+        this.homeGround?.dispose();
+        const surface = createBlueprintSurface(world);
+        this.homeGround = new HomeGroundGlow(surface.surfaceHeightAt, (x, z) =>
+            surface.surfaceHeightAt(x, z) > world.waterLevel + .02 && (!visible || visible(x, z)));
+        this.homeGround.setDarkness(this.homeDarkness);
+        this.root.add(this.homeGround.mesh);
+        this.refreshHomeGround();
+    }
+    setHomeGroundVisibility(version: string) { this.homeGround?.setVisibilityVersion(version); }
+    inspectHomeGround() { return this.homeGround?.inspect(); }
+    private refreshHomeGround() {
+        this.homeGround?.sync([...this.entries.values()].flatMap(entry =>
+            entry.homeLight?.inhabitedRoot ? [entry.homeLight.inhabitedRoot] : []));
     }
     inspectHomeLighting() {
         return [...this.entries].flatMap(([key, entry]) => entry.homeLight
@@ -277,6 +296,7 @@ export class FjordEntities {
             model.rotation.set(0, 0, 0);
             model.updateMatrixWorld(true);
         }
+        this.refreshHomeGround();
     }
     bounds(key: string) {
         const entry = this.entries.get(key);
@@ -485,6 +505,7 @@ export class FjordEntities {
     }
     dispose() {
         this.disposed = true;
+        this.homeGround?.dispose();
         for (const { model } of this.entries.values())
             if (model.userData.canonical?.aboardShip && model.parent !== this.root) this.root.attach(model);
         for (const key of this.deaths.keys()) this.finishDeath(key);

@@ -17,7 +17,8 @@ export class AssetManager {
         const response = await fetch(import.meta.env.BASE_URL + 'game-assets/houses/lights/manifest.json');
         if (!response.ok) throw new Error('Home light surface manifest is missing.');
         const manifest = await response.json() as { assets: Record<string, { bindings:
-            { node: string; triangleCount: number; triangles: number[] }[] }> };
+            { node: string; triangleCount: number; triangles: number[] }[];
+            windows: { position: number[]; outward: number[] }[] }> };
         await Promise.all(supportedHomeLights.map(async key => {
             const texture = await loader.loadAsync(import.meta.env.BASE_URL + 'game-assets/houses/lights/' + key + '.png');
             texture.flipY = false; // Same glTF UV orientation as the authored atlas.
@@ -25,6 +26,7 @@ export class AssetManager {
             this.homeLightMaps.set(key, texture);
             const root = this.models.get(key)!;
             if (root.userData.placeholder) return;
+            root.userData.homeLightWindows = manifest.assets[key].windows;
             root.traverse(node => {
                 if (!(node instanceof Mesh)) return;
                 const binding = manifest.assets[key].bindings.find(entry => entry.node === node.name);

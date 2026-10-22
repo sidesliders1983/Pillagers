@@ -1,0 +1,20 @@
+{
+  "method": "Offline WebGL2 compile/link with native Three r180 chunks; not a GPU render or pixel test",
+  "results": [
+    {
+      "fog": "none",
+      "status": 0,
+      "output": "output/warm-home-lighting-256/glow-shaders/glow-none.vert\r\noutput/warm-home-lighting-256/glow-shaders/glow-none.frag\r\n"
+    },
+    {
+      "fog": "linear",
+      "status": 0,
+      "output": "output/warm-home-lighting-256/glow-shaders/glow-linear.vert\r\noutput/warm-home-lighting-256/glow-shaders/glow-linear.frag\r\n"
+    },
+    {
+      "fog": "exp2",
+      "status": 0,
+      "output": "output/warm-home-lighting-256/glow-shaders/glow-exp2.vert\r\noutput/warm-home-lighting-256/glow-shaders/glow-exp2.frag\r\n"
+    }
+  ]
+}

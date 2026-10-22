@@ -9,7 +9,7 @@ export class HomeLighting {
         map: Texture | null }[] = [];
     private inhabited = false;
     private darkness = 0;
-    constructor(root: Object3D, mask: Texture) {
+    constructor(private root: Object3D, mask: Texture) {
         root.traverse(node => {
             if (!(node instanceof Mesh)) return;
             for (const material of Array.isArray(node.material) ? node.material : [node.material]) {
@@ -23,6 +23,7 @@ export class HomeLighting {
             }
         });
     }
+    get inhabitedRoot() { return this.inhabited ? this.root : undefined; }
     setInhabited(inhabited: boolean) {
         if (this.inhabited === inhabited) return;
         this.inhabited = inhabited;

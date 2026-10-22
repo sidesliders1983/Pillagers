@@ -15,6 +15,10 @@ export class RivalScene {
     constructor(private world: WorldBlueprint, models: FjordModels, private knowledge: () => DiscoveryView | undefined,
         decorateMaterials?: (root: Object3D) => void, homeMasks?: ReadonlyMap<string, Texture>) {
         this.layer = new FjordEntities(models, decorateMaterials, homeMasks);
+        this.layer.setHomeGround(world, (x, z) => {
+            const knowledge = this.knowledge();
+            return !!knowledge && discoveryAt(knowledge, x, z) === 'visible';
+        });
     }
     get root() { return this.layer.root; }
     setHomeDarkness(darkness: number) { this.layer.setHomeDarkness(darkness); }
@@ -25,6 +29,7 @@ export class RivalScene {
         if (appearance) this.layer.setSeasonAppearance(appearance);
         else this.layer.setSeason(season);
         const knowledge = this.knowledge();
+        this.layer.setHomeGroundVisibility(knowledge?.visible ?? '');
         this.layer.retainVisibleDeaths((x, z) => Boolean(knowledge && discoveryAt(knowledge, x, z) === 'visible'));
         const observed = new Map(this.layer.describe().map(entity => [entity.id, entity.position]));
         const deaths = view.livestockDeaths?.filter(fact => {

@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "method": "CPU-only terrain batch construction, cached sync and darkness uniform updates",
+  "cases": [
+    {
+      "homes": 5,
+      "baselineCallMs": {
+        "p50": 0.00009999999997489795,
+        "p95": 0.0002000000000066393,
+        "p99": 0.0003000000000383807
+      },
+      "uniformMs": {
+        "p50": 0.00010000000003174137,
+        "p95": 0.00029999999998153726,
+        "p99": 0.00050000000004502
+      },
+      "deltaUniformMs": {
+        "p50": 5.684341886080802e-14,
+        "p95": 0.00009999999997489795,
+        "p99": 0.0002000000000066393
+      },
+      "cachedCoreSyncMs": {
+        "p50": 0.004000000000019099,
+        "p95": 0.011300000000005639,
+        "p99": 0.024599999999963984
+      },
+      "changedLayoutRebuildMs": {
+        "p50": 0.06729999999993197,
+        "p95": 0.1935999999999467,
+        "p99": 0.3731000000000222
+      },
+      "patches": 10,
+      "rebuilds": 250,
+      "visible": true,
+      "opacity": 0.2,
+      "drawCalls": 1,
+      "extraMaterials": 1,
+      "extraGeometries": 1,
+      "extraTextures": 0,
+      "extraLights": 0,
+      "extraShadowPasses": 0,
+      "quality": "Identical Low/Standard path",
+      "gpuMs": null,
+      "physicalDeviceEvidence": false,
+      "limitations": "No rendered pixels or GPU timing; 1 additional draw is the mesh budget, not a captured renderer counter."
+    },
+    {
+      "homes": 80,
+      "baselineCallMs": {
+        "p50": 0.00009999999997489795,
+        "p95": 0.00020000000006348273,
+        "p99": 0.00020000000006348273
+      },
+      "uniformMs": {
+        "p50": 0.00009999999997489795,
+        "p95": 0.00020000000006348273,
+        "p99": 0.00020000000006348273
+      },
+      "deltaUniformMs": {
+        "p50": 0,
+        "p95": 0,
+        "p99": 0
+      },
+      "cachedCoreSyncMs": {
+        "p50": 0.05160000000000764,
+        "p95": 0.0805000000000291,
+        "p99": 0.1533000000000584
+      },
+      "changedLayoutRebuildMs": {
+        "p50": 0.5857999999999493,
+        "p95": 1.262399999999957,
+        "p99": 1.3500999999999976
+      },
+      "patches": 160,
+      "rebuilds": 250,
+      "visible": true,
+      "opacity": 0.2,
+      "drawCalls": 1,
+      "extraMaterials": 1,
+      "extraGeometries": 1,
+      "extraTextures": 0,
+      "extraLights": 0,
+      "extraShadowPasses": 0,
+      "quality": "Identical Low/Standard path",
+      "gpuMs": null,
+      "physicalDeviceEvidence": false,
+      "limitations": "No rendered pixels or GPU timing; 1 additional draw is the mesh budget, not a captured renderer counter."
+    }
+  ]
+}
