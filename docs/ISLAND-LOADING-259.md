@@ -4,6 +4,8 @@ The loading screen estimates **completed preparation**, not downloaded bytes, re
 simulation time. A timer never advances the percentage. New, same-founders restart and cold saved
 restoration share the following fixed plan; warm cached-page return keeps the existing scene and
 does not create an attempt. This is presentation state, excluded from campaign saves and RNG.
+Local load and file import from the game menu use the same worker preparation and progress plan,
+reuse their owner's decoded scenery, and restore the retained campaign on failure/cancellation.
 
 | Required envelope | Points | Completion evidence |
 | --- | ---: | --- |

@@ -14,7 +14,7 @@ import { FoundingBookWindow } from '../lore/FoundingBookWindow';
 import { IslandLoading, yieldForInput } from './IslandLoading';
 import { lastIslandLoad } from './IslandLoadStatus';
 import { GameplaySession } from '../gameplay-lab/GameplaySession';
-import { SharedSettlement, activeSettlementKey } from '../play/SharedSettlement';
+import { SharedSettlement, activeSettlementKey, inspectSettlementSave, localSettlementText } from '../play/SharedSettlement';
 import { campaignIslandPlan, currentIslandVersion } from './CampaignIsland';
 import { type EffectQuality } from '../effects/CampfireEffect';
 import { PersonalHistoryView } from '../lore/PersonalHistoryView';
@@ -411,18 +411,56 @@ export class FjordPlay {
             this.shared.saveLocal(localStorage);
             say('Campaign and exact Fjord saved locally.');
         }));
-        document.querySelector('#fjord-load')!.addEventListener('click', () => {
-            setPlayback(false);
-            action(async () => {
-                say('Loading shared campaign…');
-                this.shared.loadLocal(localStorage);
+        const restoreInGame = async (read: () => string | Promise<string>, successMessage: string) => {
+            const backup = this.campaign.exportJSON();
+            const loading = this.loading = new IslandLoading(true, undefined, undefined, { mode: 'resume' });
+            loading.diagnostics.metadata.quality = document.querySelector<HTMLSelectElement>('#fjord-quality')!.value;
+            controller.enabled = false;
+            drawingReady = false;
+            sceneLoads++;
+            try {
+                const text = await loading.measure('campaign-read', read);
+                const metadata = await loading.measure('campaign-inspect', () => inspectSettlementSave(text));
+                loading.configure(undefined, metadata, { recipe: metadata.island });
+                loading.diagnostics.metadata.seed = metadata.seed;
+                loading.complete('assets'); // The existing owner retains its decoded scenery.
+                if (metadata.island) await loading.prepare(metadata.seed);
+                else { loading.diagnostics.worker = 'skipped'; loading.complete('geography'); }
+                await loading.measure('campaign-import', () => this.shared.importJSON(text));
+                loading.complete('campaign');
                 this.foundingBook?.dispose();
                 resetProduction();
                 campaignFields();
-                if (presentation?.hasWorld)
+                await presentation!.replace();
+                await finishArrival(loading);
+                controller.enabled = true;
+                loading.diagnostics.playable();
+                canvas.dataset.loadDiagnostics = JSON.stringify(loading.diagnostics.snapshot());
+                say(successMessage);
+            } catch (error) {
+                if (error instanceof Error && error.name !== 'AbortError') loading.fail(error);
+                // Rollback scene work belongs to the retained game, not the failed attempt.
+                this.loading = undefined;
+                if (this.campaign.exportJSON() !== backup) {
+                    this.shared.importJSON(backup);
+                    resetProduction();
+                    campaignFields();
                     await presentation!.replace();
-                say('Shared campaign loaded, paused.');
-            });
+                    await presentation!.sync();
+                }
+                say('Campaign not opened. Your previous campaign is retained. ' + String(error));
+            } finally {
+                loading.finish();
+                this.loading = undefined;
+                sceneLoads--;
+                controller.enabled = true;
+                drawingReady = true;
+                resetFrameTime();
+            }
+        };
+        document.querySelector('#fjord-load')!.addEventListener('click', () => {
+            setPlayback(false);
+            action(() => restoreInGame(() => localSettlementText(localStorage), 'Shared campaign loaded, paused.'));
         });
         const download = (text: string, name: string) => {
             const url = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
@@ -459,15 +497,8 @@ export class FjordPlay {
                 return;
             setPlayback(false);
             action(async () => {
-                say('Importing campaign…');
-                this.shared.importJSON(await file.text());
-                this.foundingBook?.dispose();
-                resetProduction();
-                campaignFields();
-                input.value = '';
-                if (presentation?.hasWorld)
-                    await presentation!.replace();
-                say('Campaign imported, paused.');
+                try { await restoreInGame(() => file.text(), 'Campaign imported, paused.'); }
+                finally { input.value = ''; }
             });
         });
         let campaignChangePending = false;
