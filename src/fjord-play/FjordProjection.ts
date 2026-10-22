@@ -78,6 +78,7 @@ export interface FjordEntity {
         age?: number;
         level?: number;
         farmyard?: boolean;
+        inhabited?: boolean;
         assignment?: string | null;
         sheltered?: boolean;
         overcrowding?: number;
@@ -291,7 +292,11 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
         const entity: FjordEntity = { kind: 'building', id: building.id, label: housingName(state, 'building', building.id),
             selectionKey: key, asset, transform: orientedPlot ? { ...orientedPlot } : null,
             ...(orientedPlot ? { plot: { ...orientedPlot } } : {}),
-            status: { living: true, level, farmyard: yard } };
+            status: { living: true, level, farmyard: yard, inhabited: homes.some(home => {
+                const residence = home.residenceId ? state.residences[home.residenceId] : undefined;
+                return residence?.kind === 'house' && residence.buildingId === building.id &&
+                    home.memberIds.some(id => state.personas[id]?.deathWinter === null);
+            }) } };
         if (yard) {
             entity.terrainAsset = level <= 1 ? 'farmHutTerrain' : 'farmyardMarker';
             if (level === 1)

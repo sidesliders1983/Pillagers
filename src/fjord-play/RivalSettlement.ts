@@ -94,6 +94,7 @@ export function inspectRivalSettlement(state: SimulationState, world: WorldBluep
         const { naming: _naming, ...dna } = entity.dna ?? {};
         const visualProfile = entity.dna ? universalHumanProfile({ ...entity.dna, age: Math.min(100, entity.dna.age) }) : undefined;
         const status: FjordEntity['status'] = { living: entity.status.living, workEligible: false,
+            inhabited: entity.kind === 'building' ? entity.status.inhabited : undefined,
             sex: entity.status.sex, stage: entity.status.stage, species: entity.status.species,
             occupation: entity.status.occupation === 'farmer' ? 'farmer' : undefined,
             assignment: entity.status.assignment && visibleBuildings.has(entity.status.assignment) ? entity.status.assignment : null,

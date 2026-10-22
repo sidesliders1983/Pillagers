@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Warm homes · #256 review</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; background: #192529; color: #ece6d8; font: 14px/1.4 system-ui; }
+        header { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 12px; }
+        h1 { font-size: 17px; margin: 0; } label { display: grid; gap: 3px; }
+        button, select { font: inherit; padding: 7px; } p { margin: 0; padding: 0 12px 8px; }
+        iframe { width: 100%; height: calc(100vh - 195px); border: 0; } pre { white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Warm inhabited homes · #256</h1>
+        <label>Phase <select id="phase"><option value="0">Midwinter</option><option value="0.125">Returning spring light</option><option value="0.5">High summer</option><option value="0.875">Autumn twilight</option></select></label>
+        <label>Quality <select id="quality"><option>low</option><option>standard</option></select></label>
+        <label>View <select id="view"><option value="normal">Normal strategy</option><option value="house-1">Homestead</option><option value="house-2">Longhouse</option><option value="house-3">GreatHouse (unlit)</option><option value="house-4">Farm Hut</option><option value="house-5">Farm Homestead (unlit)</option></select></label>
+        <label>Effects <select id="effects"><option>off</option><option>low</option><option>normal</option></select></label>
+        <button id="prepare">Prepare fixed save</button>
+        <button id="baseline" disabled>Current lighting</button><button id="candidate" disabled>Warm homes</button>
+        <button id="report">Export measurements</button>
+    </header>
+    <p id="status" role="status">Separate QA origin. Prepare a save, then compare the identical paused scene with and without home emission.</p>
+    <p>No new lights. Tents, Hut, GreatHouse and Farm Homestead stay unlit. Use existing Play, fire and house controls to inspect transitions, extinguishing, upgrades and vacancy.</p>
+    <iframe id="game" title="Real Fjord Play home lighting comparison"></iframe>
+    <details><summary>Resource and light measurements</summary><pre id="metrics"></pre></details>
+    <script type="module" src="./warm-homes-256.ts"></script>
+</body>
+</html>

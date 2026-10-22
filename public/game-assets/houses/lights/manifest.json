@@ -1,0 +1,198 @@
+{
+  "version": 1,
+  "assets": {
+    "homestead": {
+      "file": "homestead.png",
+      "glbSha256": "74619d6205e87ab1514a0bdb83a22693224a9f689090d50986236586473e5ccd",
+      "size": 512,
+      "bakeSize": 1024,
+      "emittingBakeTexels": 410,
+      "regions": [
+        {
+          "axis": 0,
+          "sign": 1,
+          "rectangle": [
+            725,
+            339,
+            736,
+            352
+          ],
+          "panel": [
+            500,
+            0
+          ],
+          "depth": 1
+        },
+        {
+          "axis": 0,
+          "sign": -1,
+          "rectangle": [
+            765,
+            839,
+            776,
+            852
+          ],
+          "panel": [
+            500,
+            500
+          ],
+          "depth": 1
+        }
+      ],
+      "bindings": [
+        {
+          "node": "Mesh_0",
+          "triangleCount": 2802,
+          "triangles": [
+            245,
+            246,
+            407,
+            408,
+            409,
+            413,
+            422,
+            2581,
+            2583,
+            2584,
+            2585,
+            2587,
+            2592
+          ]
+        }
+      ]
+    },
+    "longhouse": {
+      "file": "longhouse.png",
+      "glbSha256": "b5fed3a66257fcd37ed1be5470ccaf3d6f461dd08d48af8b616644cad7d7cf91",
+      "size": 512,
+      "bakeSize": 1024,
+      "emittingBakeTexels": 172,
+      "regions": [
+        {
+          "axis": 0,
+          "sign": 1,
+          "rectangle": [
+            725,
+            366,
+            734,
+            380
+          ],
+          "panel": [
+            500,
+            0
+          ],
+          "depth": 1
+        },
+        {
+          "axis": 0,
+          "sign": -1,
+          "rectangle": [
+            765,
+            866,
+            774,
+            880
+          ],
+          "panel": [
+            500,
+            500
+          ],
+          "depth": 1
+        }
+      ],
+      "bindings": [
+        {
+          "node": "Mesh_0",
+          "triangleCount": 7184,
+          "triangles": [
+            320,
+            321,
+            717,
+            718,
+            727,
+            728,
+            730,
+            6739,
+            6740,
+            6742,
+            6744
+          ]
+        }
+      ]
+    },
+    "farmHut": {
+      "file": "farmHut.png",
+      "glbSha256": "6715f69eb3ea6e62cdebc412e5532967952aedbc0e12c2e27471e79d9f57b019",
+      "size": 512,
+      "bakeSize": 1024,
+      "emittingBakeTexels": 824,
+      "regions": [
+        {
+          "axis": 2,
+          "sign": 1,
+          "rectangle": [
+            135,
+            362,
+            146,
+            384
+          ],
+          "panel": [
+            0,
+            0
+          ],
+          "depth": 0.9
+        },
+        {
+          "axis": 2,
+          "sign": 1,
+          "rectangle": [
+            352,
+            362,
+            364,
+            384
+          ],
+          "panel": [
+            0,
+            0
+          ],
+          "depth": 0.9
+        }
+      ],
+      "bindings": [
+        {
+          "node": "Mesh_0",
+          "triangleCount": 7221,
+          "triangles": [
+            2156,
+            2157,
+            2158,
+            2200,
+            2201,
+            2245,
+            2249,
+            2359,
+            2412,
+            2413,
+            2458,
+            2459,
+            2462,
+            2591,
+            4871,
+            4872,
+            4876,
+            4877,
+            4914,
+            4987,
+            4988,
+            7075
+          ]
+        }
+      ]
+    }
+  },
+  "unsupported": {
+    "tent": "No confirmed authored window or interior surface.",
+    "hut": "No confirmed window; the round door detail is not treated as glazing.",
+    "farmHomestead": "Closed timber walls and doors; lanterns are not fabricated house windows.",
+    "greatHall": "Open apertures without an independent interior surface; emission would light the exterior back wall."
+  }
+}

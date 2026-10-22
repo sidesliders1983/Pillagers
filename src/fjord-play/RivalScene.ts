@@ -5,7 +5,7 @@ import { FjordEntities } from './FjordEntities';
 import type { FjordModels } from './FjordModels';
 import { LivingWorldController } from './LivingWorldController';
 import type { SeasonAppearance } from '../world/SeasonAppearanceTransition';
-import type { Object3D } from 'three';
+import type { Object3D, Texture } from 'three';
 
 /** Only sanitized observed actors reach the existing asset/motion pipeline. This class never ticks Core. */
 export class RivalScene {
@@ -13,10 +13,11 @@ export class RivalScene {
     private motion?: LivingWorldController;
     private disposed = false;
     constructor(private world: WorldBlueprint, models: FjordModels, private knowledge: () => DiscoveryView | undefined,
-        decorateMaterials?: (root: Object3D) => void) {
-        this.layer = new FjordEntities(models, decorateMaterials);
+        decorateMaterials?: (root: Object3D) => void, homeMasks?: ReadonlyMap<string, Texture>) {
+        this.layer = new FjordEntities(models, decorateMaterials, homeMasks);
     }
     get root() { return this.layer.root; }
+    setHomeDarkness(darkness: number) { this.layer.setHomeDarkness(darkness); }
     setSeasonAppearance(appearance: SeasonAppearance) { this.layer.setSeasonAppearance(appearance); }
     async sync(view: ObservedRivalSettlement, season: number,
         trees: Parameters<LivingWorldController['setStandingTrees']>[0], appearance?: SeasonAppearance) {

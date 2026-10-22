@@ -3,6 +3,8 @@ import type { SimulationState } from '../simulation/SimulationCore';
 import { createBlueprintSurface, type TerrainSurface } from '../world-generation/TerrainQueries';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { StructureSeasonTint } from '../world/StructureSeasonTint';
+import { HomeLighting } from '../world/HomeLighting';
+import type { Texture } from 'three';
 import type { SeasonAppearance } from '../world/SeasonAppearanceTransition';
 import { createFjordYardSurface } from './FjordYardSurface';
 import type { LivingWorldController } from './LivingWorldController';
@@ -31,6 +33,7 @@ export class FjordEntities {
         signature: string;
         model: Object3D;
         season?: StructureSeasonTint;
+        homeLight?: HomeLighting;
         localBounds?: Box3;
         modelBounds?: Box3;
         boundsSignature?: string;
@@ -78,7 +81,18 @@ export class FjordEntities {
         mesh: Mesh<RingGeometry, MeshBasicMaterial>;
         radius: number;
     }>();
-    constructor(private models: FjordModels, private decorateMaterials?: (root: Object3D) => void) {
+    private homeDarkness = 0;
+    constructor(private models: FjordModels, private decorateMaterials?: (root: Object3D) => void,
+        private homeMasks?: ReadonlyMap<string, Texture>) {
+    }
+    setHomeDarkness(darkness: number) {
+        if (darkness === this.homeDarkness) return;
+        this.homeDarkness = darkness;
+        for (const entry of this.entries.values()) entry.homeLight?.setDarkness(darkness);
+    }
+    inspectHomeLighting() {
+        return [...this.entries].flatMap(([key, entry]) => entry.homeLight
+            ? [{ key, ...entry.homeLight.inspect() }] : []);
     }
     setSeason(progress: number | null) {
         this.seasonAppearance = undefined;
@@ -162,6 +176,7 @@ export class FjordEntities {
         for (const key of this.deaths.keys()) if (wanted.has(key)) this.finishDeath(key);
         for (const [key, entry] of this.entries)
             if (!wanted.has(key)) {
+                entry.homeLight?.dispose();
                 entry.season?.dispose();
                 const facts = entry.model.userData.canonical;
                 const death = facts?.kind === 'cattle' && confirmedDeaths.has(facts.id)
@@ -187,6 +202,7 @@ export class FjordEntities {
                     return;
                 }
                 if (entry) {
+                    entry.homeLight?.dispose();
                     entry.season?.dispose();
                     this.remove(entry.model);
                 }
@@ -194,8 +210,13 @@ export class FjordEntities {
                     ? new StructureSeasonTint(model) : undefined;
                 if (this.seasonAppearance) season?.setSnowAmount(this.seasonAppearance.snowAmount);
                 else season?.update(this.seasonProgress);
+                const house = entity.kind === 'building' ? model.getObjectByName(entity.asset) : undefined;
+                const mask = this.homeMasks?.get(entity.asset);
+                const homeLight = house && mask && !house.userData.placeholder
+                    ? new HomeLighting(house, mask) : undefined;
+                homeLight?.setDarkness(this.homeDarkness);
                 this.decorateMaterials?.(model);
-                entry = { signature, model, season };
+                entry = { signature, model, season, homeLight };
                 this.entries.set(entity.selectionKey, entry);
                 this.root.add(model);
             }
@@ -208,6 +229,7 @@ export class FjordEntities {
                 entry.model.rotation.set(0, display.rotation, 0);
             }
             await this.models.reconcile(entry.model, entity);
+            entry.homeLight?.setInhabited(entity.status.inhabited === true);
             this.models.setEmbarked?.(entry.model, !!entity.status.aboardShip);
             if (this.disposed || !current()) return;
             if (entity.kind === 'persona' && !entry.model.userData.appearance) entry.model.scale.setScalar(p.scale);
@@ -467,6 +489,7 @@ export class FjordEntities {
             if (model.userData.canonical?.aboardShip && model.parent !== this.root) this.root.attach(model);
         for (const key of this.deaths.keys()) this.finishDeath(key);
         for (const entry of this.entries.values()) {
+            entry.homeLight?.dispose();
             entry.season?.dispose();
             this.remove(entry.model);
         }

@@ -19,6 +19,7 @@ import { ProductionLabels } from './ProductionLabels';
 import type { SelectionLabel } from './SelectionLabels';
 import { fjordTerrain, fjordSnowLine } from '../config/FjordTerrain';
 import { fjordPresentation } from '../config/FjordPresentation';
+import { fjordLighting } from '../config/FjordLighting';
 import { resolvePresentationQuality, type PresentationQuality } from '../config/PresentationQuality';
 import { Vector2, Vector3, Plane, Raycaster, RingGeometry, MeshBasicMaterial, DoubleSide, Clock, PerspectiveCamera, Scene, Mesh, Texture } from 'three';
 import { AssetManager } from '../core/AssetManager';
@@ -58,8 +59,7 @@ export function createFjordScene(options: {
     const session = shared.session, campaign = shared.fjord;
     const selectionLabels = labels.selection, productionLabels = labels.production;
     const query = new URLSearchParams(location.search);
-    const unifiedSunlight = query.get('sunlight') === 'unified-v1';
-    const northernLight = query.get('lighting') === 'northern-v1' || unifiedSunlight;
+    const { unified: unifiedSunlight, northern: northernLight, warmHomes } = fjordLighting(query);
     const atmosphere = unifiedSunlight ? new DirectionalAtmosphere() : undefined;
     const decorateMaterials = atmosphere ? (root: import('three').Object3D) => atmosphere.bind(root) : undefined;
     let restoredCamera = options.restoredCamera;
@@ -252,7 +252,8 @@ export function createFjordScene(options: {
             motion = new LivingWorldController(campaign.blueprint, discovery ?
                 (x, z) => !knownTerrain || discoveryAt(knownTerrain, x, z) !== 'unknown' : undefined);
             rivalScene?.dispose();
-            rivalScene = new RivalScene(blueprint, models!, () => knownTerrain, decorateMaterials);
+            rivalScene = new RivalScene(blueprint, models!, () => knownTerrain, decorateMaterials,
+                warmHomes ? assets!.homeLightMaps : undefined);
             scene.add(rivalScene.root);
             groundSignature = "";
             lighting?.dispose();
@@ -298,13 +299,14 @@ export function createFjordScene(options: {
         assets = new AssetManager();
         if (host.loading) await host.loading.measure('assets-fetch-decode', () => assets!.loadForSimulation());
         else await assets.loadForSimulation();
+        if (warmHomes) await assets.loadHomeLighting();
         host.loading?.check();
         if (inactive()) {
             assets.dispose();
             return;
         }
         models = new FjordModels(assets, decorateMaterials);
-        layer = new FjordEntities(models, decorateMaterials);
+        layer = new FjordEntities(models, decorateMaterials, warmHomes ? assets.homeLightMaps : undefined);
         scene.add(layer.root);
 
         await rebuildWorld();
@@ -570,6 +572,7 @@ export function createFjordScene(options: {
             canvas.dataset.campfireEffect = JSON.stringify(fireVisual);
             canvas.dataset.precipitation = JSON.stringify(precipitationEffect!.inspect());
             canvas.dataset.structureSnow = JSON.stringify(layer!.inspectSeason());
+            canvas.dataset.homeLighting = JSON.stringify(layer!.inspectHomeLighting());
             canvas.dataset.seasonMaterials = JSON.stringify(weatherTint!.inspect());
             canvas.dataset.motionTime = String(activeTime);
             canvas.dataset.cameraClearance = JSON.stringify(controller.inspectClearance());
@@ -593,6 +596,8 @@ export function createFjordScene(options: {
         lighting!.setFogViewDistance(campaignIslandPlan(campaign.blueprint) ?
             camera.position.distanceTo(controller.focus) : 60);
         lighting!.update(time, calendar.visualProgress, motionDelta, running);
+        layer!.setHomeDarkness(lighting!.darkness);
+        rivalScene?.setHomeDarkness(lighting!.darkness);
         lighting!.updateShadowView(camera);
         atmosphere?.update(lighting!, camera);
         world!.update(time, lighting, camera);
