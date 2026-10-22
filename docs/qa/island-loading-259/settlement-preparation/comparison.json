@@ -1,0 +1,800 @@
+{
+  "baseline": {
+    "platform": "Node v24.19.0, win32/x64; CPU-only, image decode stubbed",
+    "scene": "10 actual seed-32 founder identities/faces; source assets read from disk; world LOD unchanged",
+    "sourceSha256": "3cd7713bcd9b776b538c5025e93d16e9160b3615be43dfdad6ddeabf2e003f18",
+    "elapsedMs": 6333.7862,
+    "residents": [
+      {
+        "id": "founder-1",
+        "milliseconds": 947.0558000000001,
+        "modules": {
+          "hair": "hair/manual-long-2",
+          "beard": null,
+          "headwear": "headwear/occupation-hunter",
+          "outfit": "garment/meshy-grid-trial-001",
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": null,
+          "top": null,
+          "equipment": "equipment/occupation-hunter"
+        },
+        "pace": 1.0703512113467886,
+        "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270"
+      },
+      {
+        "id": "founder-2",
+        "milliseconds": 565.0326999999997,
+        "modules": {
+          "hair": "hair/manual-fitted-short",
+          "beard": null,
+          "headwear": "headwear/occupation-hunter",
+          "outfit": "garment/meshy-grid-trial-001",
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": null,
+          "top": null,
+          "equipment": "equipment/occupation-hunter"
+        },
+        "pace": 1.1312790002918076,
+        "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270"
+      },
+      {
+        "id": "founder-3",
+        "milliseconds": 779.9034999999999,
+        "modules": {
+          "hair": "hair/manual-female-knotted-braid",
+          "beard": null,
+          "headwear": "headwear/occupation-fisher",
+          "outfit": null,
+          "shoes": "garment/meshy-fisherman-shoe-009",
+          "trousers": "garment/meshy-fisherman-trousers-009",
+          "top": "garment/meshy-fisherman-tunic-009",
+          "equipment": "equipment/occupation-fisher"
+        },
+        "pace": 1.0641482566647429,
+        "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296"
+      },
+      {
+        "id": "founder-4",
+        "milliseconds": 636.7002000000002,
+        "modules": {
+          "hair": "hair/manual-fitted-short2",
+          "beard": "beard/manual-fitted-normal",
+          "headwear": "headwear/occupation-hunter",
+          "outfit": "garment/meshy-grid-trial-001",
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": null,
+          "top": null,
+          "equipment": "equipment/occupation-hunter"
+        },
+        "pace": 1.1544986487731375,
+        "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270"
+      },
+      {
+        "id": "founder-5",
+        "milliseconds": 780.3256000000001,
+        "modules": {
+          "hair": "hair/manual-fitted-short",
+          "beard": "beard/manual-fitted-pointed",
+          "headwear": "headwear/occupation-fisher",
+          "outfit": null,
+          "shoes": "garment/meshy-fisherman-shoe-009",
+          "trousers": "garment/meshy-fisherman-trousers-009",
+          "top": "garment/meshy-fisherman-tunic-009",
+          "equipment": "equipment/occupation-fisher"
+        },
+        "pace": 1.0031009372119817,
+        "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296"
+      },
+      {
+        "id": "founder-6",
+        "milliseconds": 343.7049999999999,
+        "modules": {
+          "hair": "hair/manual-female-knotted-braid",
+          "beard": null,
+          "headwear": "headwear/occupation-farmer",
+          "outfit": null,
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": "garment/meshy-long-skirt-005",
+          "top": null,
+          "equipment": "equipment/occupation-farmer"
+        },
+        "pace": 1.1626571715270637,
+        "coverageSha256": "85b0d20d9b5f8f33015f2f7035a61a2f66b5fe9dbc242e52693f879bd0c0edc2"
+      },
+      {
+        "id": "founder-7",
+        "milliseconds": 662.2206999999999,
+        "modules": {
+          "hair": "hair/manual-female-knotted-braid",
+          "beard": null,
+          "headwear": "headwear/occupation-fisher",
+          "outfit": null,
+          "shoes": "garment/meshy-fisherman-shoe-009",
+          "trousers": "garment/meshy-fisherman-trousers-009",
+          "top": "garment/meshy-fisherman-tunic-009",
+          "equipment": "equipment/occupation-fisher"
+        },
+        "pace": 1.075164737491041,
+        "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296"
+      },
+      {
+        "id": "founder-8",
+        "milliseconds": 548.5397999999996,
+        "modules": {
+          "hair": "hair/manual-fitted-short2",
+          "beard": "beard/manual-fitted-double",
+          "headwear": "headwear/occupation-hunter",
+          "outfit": "garment/meshy-grid-trial-001",
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": null,
+          "top": null,
+          "equipment": "equipment/occupation-hunter"
+        },
+        "pace": 1.2242604003249362,
+        "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270"
+      },
+      {
+        "id": "founder-9",
+        "milliseconds": 433.4947000000002,
+        "modules": {
+          "hair": "hair/manual-female-mid-hair-knotted",
+          "beard": null,
+          "headwear": null,
+          "outfit": "garment/meshy-grid-trial-001",
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": null,
+          "top": null,
+          "equipment": null
+        },
+        "pace": 1.1569777387054652,
+        "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270"
+      },
+      {
+        "id": "founder-10",
+        "milliseconds": 629.8537000000006,
+        "modules": {
+          "hair": "hair/manual-female-mid-hair-knotted",
+          "beard": null,
+          "headwear": "headwear/occupation-fisher",
+          "outfit": null,
+          "shoes": "garment/meshy-fisherman-shoe-009",
+          "trousers": "garment/meshy-fisherman-trousers-009",
+          "top": "garment/meshy-fisherman-tunic-009",
+          "equipment": "equipment/occupation-fisher"
+        },
+        "pace": 1.1597099812488927,
+        "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296"
+      }
+    ],
+    "operations": {
+      "file-read-and-GLTF-parse": {
+        "calls": 21,
+        "milliseconds": 307.63809999999967
+      },
+      "MeshyBodyFitAdapter.refit": {
+        "calls": 30,
+        "milliseconds": 90.29040000000032
+      },
+      "MeshyModuleRuntime.refit": {
+        "calls": 30,
+        "milliseconds": 4767.715500000003
+      },
+      "MeshyHuman.applyDNA": {
+        "calls": 20,
+        "milliseconds": 85.53060000000096
+      },
+      "MeshyHuman.setNativeModules": {
+        "calls": 20,
+        "milliseconds": 5487.3153999999995
+      },
+      "MeshyHuman.sampleAnimation": {
+        "calls": 620,
+        "milliseconds": 73.70310000000518
+      }
+    },
+    "diagnostics": [],
+    "limitations": "Nested timings overlap. No physical iPhone, network/image decoding, GPU or full island load measurement."
+  },
+  "runs": [
+    {
+      "platform": "Node v24.19.0, win32/x64; CPU-only, image decode stubbed",
+      "scene": "10 actual seed-32 founder identities/faces; source assets read from disk; world LOD unchanged",
+      "sourceSha256": "3cd7713bcd9b776b538c5025e93d16e9160b3615be43dfdad6ddeabf2e003f18",
+      "elapsedMs": 3693.3851,
+      "residents": [
+        {
+          "id": "founder-1",
+          "milliseconds": 763.1492999999998,
+          "modules": {
+            "hair": "hair/manual-long-2",
+            "beard": null,
+            "headwear": "headwear/occupation-hunter",
+            "outfit": "garment/meshy-grid-trial-001",
+            "shoes": "garment/meshy-low-shoes-005",
+            "trousers": null,
+            "top": null,
+            "equipment": "equipment/occupation-hunter"
+          },
+          "pace": 1.0703512113467886,
+          "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270"
+        },
+        {
+          "id": "founder-2",
+          "milliseconds": 392.1930000000002,
+          "modules": {
+            "hair": "hair/manual-fitted-short",
+            "beard": null,
+            "headwear": "headwear/occupation-hunter",
+            "outfit": "garment/meshy-grid-trial-001",
+            "shoes": "garment/meshy-low-shoes-005",
+            "trousers": null,
+            "top": null,
+            "equipment": "equipment/occupation-hunter"
+          },
+          "pace": 1.1312790002918076,
+          "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270"
+        },
+        {
+          "id": "founder-3",
+          "milliseconds": 421.0078999999996,
+          "modules": {
+            "hair": "hair/manual-female-knotted-braid",
+            "beard": null,
+            "headwear": "headwear/occupation-fisher",
+            "outfit": null,
+            "shoes": "garment/meshy-fisherman-shoe-009",
+            "trousers": "garment/meshy-fisherman-trousers-009",
+            "top": "garment/meshy-fisherman-tunic-009",
+            "equipment": "equipment/occupation-fisher"
+          },
+          "pace": 1.0641482566647429,
+          "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296"
+        },
+        {
+          "id": "founder-4",
+          "milliseconds": 450.0753999999997,
+          "modules": {
+            "hair": "hair/manual-fitted-short2",
+            "beard": "beard/manual-fitted-normal",
+            "headwear": "headwear/occupation-hunter",
+            "outfit": "garment/meshy-grid-trial-001",
+            "shoes": "garment/meshy-low-shoes-005",
+            "trousers": null,
+            "top": null,
+            "equipment": "equipment/occupation-hunter"
+          },
+          "pace": 1.1544986487731375,
+          "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270"
+        },
+        {
+          "id": "founder-5",
+          "milliseconds": 338.0684000000001,
+          "modules": {
+            "hair": "hair/manual-fitted-short",
+            "beard": "beard/manual-fitted-pointed",
+            "headwear": "headwear/occupation-fisher",
+            "outfit": null,
+            "shoes": "garment/meshy-fisherman-shoe-009",
+            "trousers": "garment/meshy-fisherman-trousers-009",
+            "top": "garment/meshy-fisherman-tunic-009",
+            "equipment": "equipment/occupation-fisher"
+          },
+          "pace": 1.0031009372119817,
+          "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296"
+        },
+        {
+          "id": "founder-6",
+          "milliseconds": 218.07839999999942,
+          "modules": {
+            "hair": "hair/manual-female-knotted-braid",
+            "beard": null,
+            "headwear": "headwear/occupation-farmer",
+            "outfit": null,
+            "shoes": "garment/meshy-low-shoes-005",
+            "trousers": "garment/meshy-long-skirt-005",
+            "top": null,
+            "equipment": "equipment/occupation-farmer"
+          },
+          "pace": 1.1626571715270637,
+          "coverageSha256": "85b0d20d9b5f8f33015f2f7035a61a2f66b5fe9dbc242e52693f879bd0c0edc2"
+        },
+        {
+          "id": "founder-7",
+          "milliseconds": 259.96789999999964,
+          "modules": {
+            "hair": "hair/manual-female-knotted-braid",
+            "beard": null,
+            "headwear": "headwear/occupation-fisher",
+            "outfit": null,
+            "shoes": "garment/meshy-fisherman-shoe-009",
+            "trousers": "garment/meshy-fisherman-trousers-009",
+            "top": "garment/meshy-fisherman-tunic-009",
+            "equipment": "equipment/occupation-fisher"
+          },
+          "pace": 1.075164737491041,
+          "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296"
+        },
+        {
+          "id": "founder-8",
+          "milliseconds": 371.58010000000013,
+          "modules": {
+            "hair": "hair/manual-fitted-short2",
+            "beard": "beard/manual-fitted-double",
+            "headwear": "headwear/occupation-hunter",
+            "outfit": "garment/meshy-grid-trial-001",
+            "shoes": "garment/meshy-low-shoes-005",
+            "trousers": null,
+            "top": null,
+            "equipment": "equipment/occupation-hunter"
+          },
+          "pace": 1.2242604003249362,
+          "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270"
+        },
+        {
+          "id": "founder-9",
+          "milliseconds": 228.3069999999998,
+          "modules": {
+            "hair": "hair/manual-female-mid-hair-knotted",
+            "beard": null,
+            "headwear": null,
+            "outfit": "garment/meshy-grid-trial-001",
+            "shoes": "garment/meshy-low-shoes-005",
+            "trousers": null,
+            "top": null,
+            "equipment": null
+          },
+          "pace": 1.1569777387054652,
+          "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270"
+        },
+        {
+          "id": "founder-10",
+          "milliseconds": 244.20420000000013,
+          "modules": {
+            "hair": "hair/manual-female-mid-hair-knotted",
+            "beard": null,
+            "headwear": "headwear/occupation-fisher",
+            "outfit": null,
+            "shoes": "garment/meshy-fisherman-shoe-009",
+            "trousers": "garment/meshy-fisherman-trousers-009",
+            "top": "garment/meshy-fisherman-tunic-009",
+            "equipment": "equipment/occupation-fisher"
+          },
+          "pace": 1.1597099812488927,
+          "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296"
+        }
+      ],
+      "operations": {
+        "file-read-and-GLTF-parse": {
+          "calls": 21,
+          "milliseconds": 347.2857999999999
+        },
+        "MeshyBodyFitAdapter.refit": {
+          "calls": 30,
+          "milliseconds": 103.19139999999697
+        },
+        "MeshyModuleRuntime.refit": {
+          "calls": 30,
+          "milliseconds": 2101.364799999999
+        },
+        "MeshyHuman.applyDNA": {
+          "calls": 20,
+          "milliseconds": 101.47949999999969
+        },
+        "MeshyHuman.setNativeModules": {
+          "calls": 20,
+          "milliseconds": 2834.7524
+        },
+        "MeshyHuman.sampleAnimation": {
+          "calls": 620,
+          "milliseconds": 77.5531999999962
+        }
+      },
+      "diagnostics": [],
+      "limitations": "Nested timings overlap. No physical iPhone, network/image decoding, GPU or full island load measurement."
+    },
+    {
+      "platform": "Node v24.19.0, win32/x64; CPU-only, image decode stubbed",
+      "scene": "10 actual seed-32 founder identities/faces; source assets read from disk; world LOD unchanged",
+      "sourceSha256": "3cd7713bcd9b776b538c5025e93d16e9160b3615be43dfdad6ddeabf2e003f18",
+      "elapsedMs": 3690.2995,
+      "residents": [
+        {
+          "id": "founder-1",
+          "milliseconds": 769.6872999999998,
+          "modules": {
+            "hair": "hair/manual-long-2",
+            "beard": null,
+            "headwear": "headwear/occupation-hunter",
+            "outfit": "garment/meshy-grid-trial-001",
+            "shoes": "garment/meshy-low-shoes-005",
+            "trousers": null,
+            "top": null,
+            "equipment": "equipment/occupation-hunter"
+          },
+          "pace": 1.0703512113467886,
+          "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270"
+        },
+        {
+          "id": "founder-2",
+          "milliseconds": 386.5473000000002,
+          "modules": {
+            "hair": "hair/manual-fitted-short",
+            "beard": null,
+            "headwear": "headwear/occupation-hunter",
+            "outfit": "garment/meshy-grid-trial-001",
+            "shoes": "garment/meshy-low-shoes-005",
+            "trousers": null,
+            "top": null,
+            "equipment": "equipment/occupation-hunter"
+          },
+          "pace": 1.1312790002918076,
+          "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270"
+        },
+        {
+          "id": "founder-3",
+          "milliseconds": 408.08449999999993,
+          "modules": {
+            "hair": "hair/manual-female-knotted-braid",
+            "beard": null,
+            "headwear": "headwear/occupation-fisher",
+            "outfit": null,
+            "shoes": "garment/meshy-fisherman-shoe-009",
+            "trousers": "garment/meshy-fisherman-trousers-009",
+            "top": "garment/meshy-fisherman-tunic-009",
+            "equipment": "equipment/occupation-fisher"
+          },
+          "pace": 1.0641482566647429,
+          "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296"
+        },
+        {
+          "id": "founder-4",
+          "milliseconds": 471.59259999999995,
+          "modules": {
+            "hair": "hair/manual-fitted-short2",
+            "beard": "beard/manual-fitted-normal",
+            "headwear": "headwear/occupation-hunter",
+            "outfit": "garment/meshy-grid-trial-001",
+            "shoes": "garment/meshy-low-shoes-005",
+            "trousers": null,
+            "top": null,
+            "equipment": "equipment/occupation-hunter"
+          },
+          "pace": 1.1544986487731375,
+          "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270"
+        },
+        {
+          "id": "founder-5",
+          "milliseconds": 341.2048999999997,
+          "modules": {
+            "hair": "hair/manual-fitted-short",
+            "beard": "beard/manual-fitted-pointed",
+            "headwear": "headwear/occupation-fisher",
+            "outfit": null,
+            "shoes": "garment/meshy-fisherman-shoe-009",
+            "trousers": "garment/meshy-fisherman-trousers-009",
+            "top": "garment/meshy-fisherman-tunic-009",
+            "equipment": "equipment/occupation-fisher"
+          },
+          "pace": 1.0031009372119817,
+          "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296"
+        },
+        {
+          "id": "founder-6",
+          "milliseconds": 228.50950000000012,
+          "modules": {
+            "hair": "hair/manual-female-knotted-braid",
+            "beard": null,
+            "headwear": "headwear/occupation-farmer",
+            "outfit": null,
+            "shoes": "garment/meshy-low-shoes-005",
+            "trousers": "garment/meshy-long-skirt-005",
+            "top": null,
+            "equipment": "equipment/occupation-farmer"
+          },
+          "pace": 1.1626571715270637,
+          "coverageSha256": "85b0d20d9b5f8f33015f2f7035a61a2f66b5fe9dbc242e52693f879bd0c0edc2"
+        },
+        {
+          "id": "founder-7",
+          "milliseconds": 273.66049999999996,
+          "modules": {
+            "hair": "hair/manual-female-knotted-braid",
+            "beard": null,
+            "headwear": "headwear/occupation-fisher",
+            "outfit": null,
+            "shoes": "garment/meshy-fisherman-shoe-009",
+            "trousers": "garment/meshy-fisherman-trousers-009",
+            "top": "garment/meshy-fisherman-tunic-009",
+            "equipment": "equipment/occupation-fisher"
+          },
+          "pace": 1.075164737491041,
+          "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296"
+        },
+        {
+          "id": "founder-8",
+          "milliseconds": 344.0131000000001,
+          "modules": {
+            "hair": "hair/manual-fitted-short2",
+            "beard": "beard/manual-fitted-double",
+            "headwear": "headwear/occupation-hunter",
+            "outfit": "garment/meshy-grid-trial-001",
+            "shoes": "garment/meshy-low-shoes-005",
+            "trousers": null,
+            "top": null,
+            "equipment": "equipment/occupation-hunter"
+          },
+          "pace": 1.2242604003249362,
+          "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270"
+        },
+        {
+          "id": "founder-9",
+          "milliseconds": 227.83489999999983,
+          "modules": {
+            "hair": "hair/manual-female-mid-hair-knotted",
+            "beard": null,
+            "headwear": null,
+            "outfit": "garment/meshy-grid-trial-001",
+            "shoes": "garment/meshy-low-shoes-005",
+            "trousers": null,
+            "top": null,
+            "equipment": null
+          },
+          "pace": 1.1569777387054652,
+          "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270"
+        },
+        {
+          "id": "founder-10",
+          "milliseconds": 232.03279999999995,
+          "modules": {
+            "hair": "hair/manual-female-mid-hair-knotted",
+            "beard": null,
+            "headwear": "headwear/occupation-fisher",
+            "outfit": null,
+            "shoes": "garment/meshy-fisherman-shoe-009",
+            "trousers": "garment/meshy-fisherman-trousers-009",
+            "top": "garment/meshy-fisherman-tunic-009",
+            "equipment": "equipment/occupation-fisher"
+          },
+          "pace": 1.1597099812488927,
+          "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296"
+        }
+      ],
+      "operations": {
+        "file-read-and-GLTF-parse": {
+          "calls": 21,
+          "milliseconds": 298.81270000000063
+        },
+        "MeshyBodyFitAdapter.refit": {
+          "calls": 30,
+          "milliseconds": 109.22180000000071
+        },
+        "MeshyModuleRuntime.refit": {
+          "calls": 30,
+          "milliseconds": 2109.569400000001
+        },
+        "MeshyHuman.applyDNA": {
+          "calls": 20,
+          "milliseconds": 97.80520000000047
+        },
+        "MeshyHuman.setNativeModules": {
+          "calls": 20,
+          "milliseconds": 2840.0186999999996
+        },
+        "MeshyHuman.sampleAnimation": {
+          "calls": 620,
+          "milliseconds": 73.05549999999357
+        }
+      },
+      "diagnostics": [],
+      "limitations": "Nested timings overlap. No physical iPhone, network/image decoding, GPU or full island load measurement."
+    },
+    {
+      "platform": "Node v24.19.0, win32/x64; CPU-only, image decode stubbed",
+      "scene": "10 actual seed-32 founder identities/faces; source assets read from disk; world LOD unchanged",
+      "sourceSha256": "3cd7713bcd9b776b538c5025e93d16e9160b3615be43dfdad6ddeabf2e003f18",
+      "elapsedMs": 3617.7188000000006,
+      "residents": [
+        {
+          "id": "founder-1",
+          "milliseconds": 754.3909999999998,
+          "modules": {
+            "hair": "hair/manual-long-2",
+            "beard": null,
+            "headwear": "headwear/occupation-hunter",
+            "outfit": "garment/meshy-grid-trial-001",
+            "shoes": "garment/meshy-low-shoes-005",
+            "trousers": null,
+            "top": null,
+            "equipment": "equipment/occupation-hunter"
+          },
+          "pace": 1.0703512113467886,
+          "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270"
+        },
+        {
+          "id": "founder-2",
+          "milliseconds": 366.83179999999993,
+          "modules": {
+            "hair": "hair/manual-fitted-short",
+            "beard": null,
+            "headwear": "headwear/occupation-hunter",
+            "outfit": "garment/meshy-grid-trial-001",
+            "shoes": "garment/meshy-low-shoes-005",
+            "trousers": null,
+            "top": null,
+            "equipment": "equipment/occupation-hunter"
+          },
+          "pace": 1.1312790002918076,
+          "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270"
+        },
+        {
+          "id": "founder-3",
+          "milliseconds": 420.4689999999996,
+          "modules": {
+            "hair": "hair/manual-female-knotted-braid",
+            "beard": null,
+            "headwear": "headwear/occupation-fisher",
+            "outfit": null,
+            "shoes": "garment/meshy-fisherman-shoe-009",
+            "trousers": "garment/meshy-fisherman-trousers-009",
+            "top": "garment/meshy-fisherman-tunic-009",
+            "equipment": "equipment/occupation-fisher"
+          },
+          "pace": 1.0641482566647429,
+          "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296"
+        },
+        {
+          "id": "founder-4",
+          "milliseconds": 435.6714999999999,
+          "modules": {
+            "hair": "hair/manual-fitted-short2",
+            "beard": "beard/manual-fitted-normal",
+            "headwear": "headwear/occupation-hunter",
+            "outfit": "garment/meshy-grid-trial-001",
+            "shoes": "garment/meshy-low-shoes-005",
+            "trousers": null,
+            "top": null,
+            "equipment": "equipment/occupation-hunter"
+          },
+          "pace": 1.1544986487731375,
+          "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270"
+        },
+        {
+          "id": "founder-5",
+          "milliseconds": 342.39800000000014,
+          "modules": {
+            "hair": "hair/manual-fitted-short",
+            "beard": "beard/manual-fitted-pointed",
+            "headwear": "headwear/occupation-fisher",
+            "outfit": null,
+            "shoes": "garment/meshy-fisherman-shoe-009",
+            "trousers": "garment/meshy-fisherman-trousers-009",
+            "top": "garment/meshy-fisherman-tunic-009",
+            "equipment": "equipment/occupation-fisher"
+          },
+          "pace": 1.0031009372119817,
+          "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296"
+        },
+        {
+          "id": "founder-6",
+          "milliseconds": 194.8757000000005,
+          "modules": {
+            "hair": "hair/manual-female-knotted-braid",
+            "beard": null,
+            "headwear": "headwear/occupation-farmer",
+            "outfit": null,
+            "shoes": "garment/meshy-low-shoes-005",
+            "trousers": "garment/meshy-long-skirt-005",
+            "top": null,
+            "equipment": "equipment/occupation-farmer"
+          },
+          "pace": 1.1626571715270637,
+          "coverageSha256": "85b0d20d9b5f8f33015f2f7035a61a2f66b5fe9dbc242e52693f879bd0c0edc2"
+        },
+        {
+          "id": "founder-7",
+          "milliseconds": 228.9301999999998,
+          "modules": {
+            "hair": "hair/manual-female-knotted-braid",
+            "beard": null,
+            "headwear": "headwear/occupation-fisher",
+            "outfit": null,
+            "shoes": "garment/meshy-fisherman-shoe-009",
+            "trousers": "garment/meshy-fisherman-trousers-009",
+            "top": "garment/meshy-fisherman-tunic-009",
+            "equipment": "equipment/occupation-fisher"
+          },
+          "pace": 1.075164737491041,
+          "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296"
+        },
+        {
+          "id": "founder-8",
+          "milliseconds": 388.1978999999992,
+          "modules": {
+            "hair": "hair/manual-fitted-short2",
+            "beard": "beard/manual-fitted-double",
+            "headwear": "headwear/occupation-hunter",
+            "outfit": "garment/meshy-grid-trial-001",
+            "shoes": "garment/meshy-low-shoes-005",
+            "trousers": null,
+            "top": null,
+            "equipment": "equipment/occupation-hunter"
+          },
+          "pace": 1.2242604003249362,
+          "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270"
+        },
+        {
+          "id": "founder-9",
+          "milliseconds": 239.41269999999986,
+          "modules": {
+            "hair": "hair/manual-female-mid-hair-knotted",
+            "beard": null,
+            "headwear": null,
+            "outfit": "garment/meshy-grid-trial-001",
+            "shoes": "garment/meshy-low-shoes-005",
+            "trousers": null,
+            "top": null,
+            "equipment": null
+          },
+          "pace": 1.1569777387054652,
+          "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270"
+        },
+        {
+          "id": "founder-10",
+          "milliseconds": 239.96169999999984,
+          "modules": {
+            "hair": "hair/manual-female-mid-hair-knotted",
+            "beard": null,
+            "headwear": "headwear/occupation-fisher",
+            "outfit": null,
+            "shoes": "garment/meshy-fisherman-shoe-009",
+            "trousers": "garment/meshy-fisherman-trousers-009",
+            "top": "garment/meshy-fisherman-tunic-009",
+            "equipment": "equipment/occupation-fisher"
+          },
+          "pace": 1.1597099812488927,
+          "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296"
+        }
+      ],
+      "operations": {
+        "file-read-and-GLTF-parse": {
+          "calls": 21,
+          "milliseconds": 301.41090000000145
+        },
+        "MeshyBodyFitAdapter.refit": {
+          "calls": 30,
+          "milliseconds": 100.60749999999962
+        },
+        "MeshyModuleRuntime.refit": {
+          "calls": 30,
+          "milliseconds": 2034.144699999999
+        },
+        "MeshyHuman.applyDNA": {
+          "calls": 20,
+          "milliseconds": 101.78820000000087
+        },
+        "MeshyHuman.setNativeModules": {
+          "calls": 20,
+          "milliseconds": 2749.2834000000003
+        },
+        "MeshyHuman.sampleAnimation": {
+          "calls": 620,
+          "milliseconds": 71.40480000000025
+        }
+      },
+      "diagnostics": [],
+      "limitations": "Nested timings overlap. No physical iPhone, network/image decoding, GPU or full island load measurement."
+    }
+  ],
+  "summary": {
+    "beforeMs": 6333.7862,
+    "afterMedianMs": 3690.2995,
+    "reductionPercent": 41.736279320574475,
+    "exactBodyBuffersSelectionsAndPace": true
+  },
+  "sourceFiles": {
+    "src/characters/BodyCoverage.ts": "7adfde895002cae460ddc70d8dad94469161b945e7b27797948dadbea8c0a647",
+    "src/characters/PreparedNativeOutfit.ts": "4bb4386758be11e4b96754a8e850e04111d9d76b3bc5713f6f32ea25bc26c296"
+  },
+  "limitations": "CPU-only fixture, source images stubbed. Native body attribute/index/morph bytes and selected module IDs/pace checked. This is not a comparison of material pixels or end-to-end iPhone loading. Runs are separate processes with fresh per-process source caches; OS disk cache uncontrolled.",
+  "baselineSourceCommit": "b0ac985d69ce431e798a3b7700796d02e23fa9a2"
+}

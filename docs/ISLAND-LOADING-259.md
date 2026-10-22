@@ -85,3 +85,13 @@ See `docs/qa/island-loading-259/REPORT.md` for completed checks and uncompleted 
 gates. `node --expose-gc scripts/check-island-load-overhead.mjs` measures synthetic observer cost;
 it does not benchmark island loading or GPU work. Keep the PR draft until current-head checks
 and the browser/device acceptance evidence are complete.
+
+## Owner slow-resident follow-up
+
+The reported physical-device load exposed repeated native clothing coverage preparation. A refit
+now decodes the body's attributes/morphs once for all its fragments and allocates compact fragment
+outputs directly. Each refit still reads fresh source data; resident masks remain independently
+owned. No persistent cache, source/LOD change, new GPU resource or gameplay rule is introduced.
+The loading title returns to its parent after a nested operation, and the redundant new-landing
+helper sentence has been removed. See the dated `settlement-preparation/REPORT.md` and comparison
+under this issue's QA directory for the CPU measurements, exact-output checks and device limits.

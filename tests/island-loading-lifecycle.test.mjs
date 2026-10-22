@@ -158,3 +158,20 @@ test('worker retry labels a new attempt with the same seed, fencing stale progre
         });
     } finally { globalThis.Worker = previousWorker; }
 });
+
+test('a finished child stage restores its parent and new landings omit redundant helper copy', async () => {
+    await withLoading(async loading => {
+        assert.doesNotMatch(loading.root.textContent, /Preparing your Summer landing|campaign clock has not started/);
+        assert.equal(loading.root.querySelector('.island-loading-help').hidden, true);
+        await loading.measure('initial-character-scene-sync', async () => {
+            await loading.measure('initial-ground-wear', () => {});
+            assert.equal(loading.diagnostics.substage, 'initial-character-scene-sync');
+            assert.equal(document.querySelector('#island-loading-status').textContent, 'Preparing residents and settlement');
+            await loading.measure('initial-settlement-models', async () => {
+                loading.units('characters', 4, 23, 'settlement models');
+                assert.equal(document.querySelector('#island-loading-status').textContent, 'Preparing residents and settlement');
+                assert.equal(loading.diagnostics.substage, 'initial-settlement-models');
+            });
+        });
+    });
+});

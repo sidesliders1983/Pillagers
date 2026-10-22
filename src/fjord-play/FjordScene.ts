@@ -413,10 +413,12 @@ export function createFjordScene(options: {
                     dressing!.setSeason(view.calendar.visualProgress);
                     canvas.dataset.dressing = JSON.stringify(dressing!.inspect());
                     layer!.prepareExpeditions(state, campaign.blueprint, host.tickIntervalSeconds);
-                    await layer!.sync(view.entities, host.loading ? yieldForInput : undefined, current,
+                    const prepareEntities = () => layer!.sync(view.entities, host.loading ? yieldForInput : undefined, current,
                         view.livestockDeaths, host.loading ? (completed, total) => {
                             host.loading?.units('characters', completed, total, 'settlement models');
                         } : undefined);
+                    if (host.loading) await host.loading.measure('initial-settlement-models', prepareEntities);
+                    else await prepareEntities();
                     if (!current()) return;
                     campfireEffect!.setLit(inspectCampfire(state).lit);
                     layer!.setCampfireHeat(campfireEffect!.inspect().heat);

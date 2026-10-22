@@ -19,6 +19,7 @@ export function generationLabel(stage: string) {
     return 'Choosing settlement areas';
 }
 type CameraPose = { position: number[]; target: number[] };
+type MeasureContext = { step: LoadStep; stage: string; label: string; started: number };
 
 /** Disposable presentation of a new campaign. No Core commands or discovery mutations. */
 export class IslandLoading {
@@ -46,6 +47,7 @@ export class IslandLoading {
     private observedAt = performance.now();
     private displayed = '';
     private workerTimings = new Map<string, ReturnType<IslandLoadStatus['begin']>>();
+    private measureContext?: MeasureContext;
     constructor(private canReturnToGame = false, book?: FoundingBookWindow, private resume?: SettlementRestoreMetadata,
         private options: { backLabel?: string; recipe?: IslandRecipe; founding?: SettlementRestoreMetadata;
             mode?: LoadMode; seed?: number } = {}) {
@@ -72,22 +74,18 @@ export class IslandLoading {
                     <button type="button" data-load-copy>Copy diagnostics</button>
                     <button type="button" data-load-export>Save diagnostics JSON</button><p data-load-export-status role="status"></p>
                 </details></div>
-            <p class="island-loading-help">Preparing your Summer landing. The campaign clock has not started.</p>
+            <p class="island-loading-help" hidden></p>
             <div class="island-loading-actions"><button type="button" id="island-loading-cancel" ${canReturnToGame ? '' : 'hidden'}>Cancel &amp; Return to Game</button>
             <button type="button" id="island-loading-retry" hidden>Retry generation</button>
             <button type="button" id="island-loading-skip" hidden>Skip camera arrival</button></div></div>`;
         this.root.dataset.mode = resume ? 'resume' : 'new';
         if (options.backLabel) this.root.querySelector('#island-loading-cancel')!.textContent = options.backLabel;
-        if (options.founding) {
-            const calendar = projectFjordCalendar(options.founding.time, options.founding.ticksPerWinter);
-            this.root.querySelector('.island-loading-help')!.textContent =
-                `Preparing your ${calendar.season} ${calendar.year} landing. The campaign clock has not started.`;
-        }
         if (resume) {
             const calendar = projectFjordCalendar(resume.time, resume.ticksPerWinter);
             this.root.setAttribute('aria-label', 'Returning to your settlement');
             this.root.querySelector('.island-loading-eyebrow')!.textContent = 'FjordSide · saved campaign';
             this.root.querySelector('#island-loading-status')!.textContent = 'Returning to your settlement…';
+            this.root.querySelector<HTMLElement>('.island-loading-help')!.hidden = false;
             this.root.querySelector('.island-loading-help')!.textContent =
                 calendar.season + ' ' + calendar.year + ' · campaign ' + resume.seed + '. The clock is paused.';
             this.root.querySelector('#island-loading-retry')!.textContent = 'Retry restoration';
@@ -171,14 +169,10 @@ export class IslandLoading {
             this.root.dataset.mode = 'resume';
             const calendar = projectFjordCalendar(resume.time, resume.ticksPerWinter);
             this.root.querySelector('.island-loading-eyebrow')!.textContent = 'FjordSide · saved campaign';
+            this.root.querySelector<HTMLElement>('.island-loading-help')!.hidden = false;
             this.root.querySelector('.island-loading-help')!.textContent =
                 `${calendar.season} ${calendar.year} · campaign ${resume.seed}. The clock is paused.`;
             this.root.setAttribute('aria-label', 'Returning to your settlement');
-        }
-        if (options.founding) {
-            const calendar = projectFjordCalendar(options.founding.time, options.founding.ticksPerWinter);
-            this.root.querySelector('.island-loading-help')!.textContent =
-                `Preparing your ${calendar.season} ${calendar.year} landing. The campaign clock has not started.`;
         }
     }
     complete(step: LoadStep) { this.diagnostics.complete(step); this.updateProgress(); }
@@ -224,6 +218,9 @@ export class IslandLoading {
         this.check();
         const step = preparationStep(stage);
         this.diagnostics.enter(step, stage, preparationLabel(stage));
+        const parent = this.measureContext;
+        const context = this.measureContext = { step, stage, label: this.diagnostics.stage,
+            started: this.diagnostics.stageStarted };
         this.stage(this.diagnostics.stage);
         const timing = this.diagnostics.begin(stage);
         this.updateProgress();
@@ -248,6 +245,7 @@ export class IslandLoading {
                 this.diagnostics.end(timing, this.measureOutcome(success));
                 this.recordSample({ stage, startedAt: start, milliseconds: performance.now() - start });
                 if (success && stage === 'assets-fetch-decode') this.complete('assets');
+                this.finishMeasure(context, parent, success);
             }
         }
         let aborted: () => void;
@@ -271,7 +269,17 @@ export class IslandLoading {
             this.signal.removeEventListener('abort', aborted!);
             this.diagnostics.end(timing, this.measureOutcome(success));
             this.recordSample({ stage, startedAt: start, milliseconds: performance.now() - start });
+            this.finishMeasure(context, parent, success);
         }
+    }
+    private finishMeasure(context: MeasureContext, parent: MeasureContext | undefined, success: boolean) {
+        if (this.measureContext !== context) return;
+        this.measureContext = parent;
+        if (!success || !parent || this.signal.aborted || this.finished) return;
+        this.diagnostics.enter(parent.step, parent.stage, parent.label);
+        this.diagnostics.stageStarted = Math.max(parent.started, this.diagnostics.started);
+        this.stage(parent.label);
+        this.updateProgress();
     }
     private measureOutcome(success: boolean): 'complete' | 'cancelled' | 'failed' {
         if (success) return 'complete';
