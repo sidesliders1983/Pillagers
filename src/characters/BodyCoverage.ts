@@ -1,4 +1,5 @@
-import {BufferAttribute, BufferGeometry, Vector3} from 'three';
+import {BufferAttribute, BufferGeometry, Vector3, type InterleavedBufferAttribute,
+    type TypedArrayConstructor} from 'three';
 import type {BodySurface, SurfaceAnchor} from './BodyFitAdapter';
 
 export interface BodyCutPlane {
@@ -6,6 +7,65 @@ export interface BodyCutPlane {
     regionMatch?: 'all' | 'any';
     normal: number[];
     constant: number;
+}
+
+/** Drop unreferenced copies before merging coverage fragments. Only the first
+ * fragment retains the native prefix used by fitting and source correspondence.
+ * All drawn corner values, morphs, UV seams and native influences stay exact. */
+export function compactCoverageGeometry(geometry: BufferGeometry, retainedPrefix = 0) {
+    const index = geometry.index;
+    if (!index) return geometry;
+    const count = geometry.getAttribute('position').count;
+    if (!Number.isInteger(retainedPrefix) || retainedPrefix < 0 || retainedPrefix > count)
+        throw new Error('Invalid retained native vertex prefix.');
+    const remap = new Int32Array(count).fill(-1);
+    const retained: number[] = [];
+    for (let vertex = 0; vertex < retainedPrefix; vertex++) {
+        remap[vertex] = retained.length;
+        retained.push(vertex);
+    }
+    for (let corner = 0; corner < index.count; corner++) {
+        const vertex = index.getX(corner);
+        if (!Number.isInteger(vertex) || vertex < 0 || vertex >= count)
+            throw new Error('Coverage references an invalid native vertex.');
+        if (remap[vertex] === -1) {
+            remap[vertex] = retained.length;
+            retained.push(vertex);
+        }
+    }
+    if (retained.length === count) return geometry;
+    const copy = (attribute: BufferAttribute | InterleavedBufferAttribute) => {
+        const interleaved = attribute as InterleavedBufferAttribute;
+        const packed = attribute as BufferAttribute;
+        const shared = interleaved.isInterleavedBufferAttribute === true;
+        const source = shared ? interleaved.data.array : packed.array;
+        const ArrayType = source.constructor as TypedArrayConstructor;
+        const values = new ArrayType(retained.length * attribute.itemSize);
+        const stride = shared ? interleaved.data.stride : attribute.itemSize;
+        const offset = shared ? interleaved.offset : 0;
+        for (let vertex = 0; vertex < retained.length; vertex++)
+            for (let component = 0; component < attribute.itemSize; component++)
+                values[vertex * attribute.itemSize + component] =
+                    source[retained[vertex] * stride + offset + component];
+        const result = new BufferAttribute(values, attribute.itemSize, attribute.normalized);
+        result.name = attribute.name;
+        result.setUsage(shared ? interleaved.data.usage : packed.usage);
+        if (!shared) result.gpuType = packed.gpuType;
+        return result;
+    };
+    for (const [name, attribute] of Object.entries(geometry.attributes))
+        geometry.setAttribute(name, copy(attribute));
+    for (const [name, targets] of Object.entries(geometry.morphAttributes))
+        geometry.morphAttributes[name as keyof typeof geometry.morphAttributes] = targets?.map(copy);
+    geometry.setIndex(Array.from(index.array, vertex => remap[vertex]));
+    if (geometry.userData.coverageWeights) {
+        geometry.userData.coverageWeights = geometry.userData.coverageWeights
+            .filter((value: {vertex: number}) => remap[value.vertex] !== -1)
+            .map((value: {vertex: number}) => ({...value, vertex: remap[value.vertex]}));
+    }
+    geometry.boundingBox = null;
+    geometry.computeBoundingSphere();
+    return geometry;
 }
 
 /** Own the coverage mesh and sew its cut edges to the module's exact LOD contacts. */

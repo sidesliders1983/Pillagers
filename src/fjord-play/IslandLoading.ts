@@ -105,6 +105,7 @@ export class IslandLoading {
         (this.root.querySelector<HTMLButtonElement>('button:not([hidden])') ?? this.root).focus();
     }
     cancel = () => { this.abort.abort(); this.worker.cancel(); };
+    fail(error: Error) { this.abort.abort(error); this.worker.cancel(); }
     check() { this.signal.throwIfAborted(); }
     stage(label: string) {
         this.check();
@@ -112,12 +113,38 @@ export class IslandLoading {
         else if (this.status.textContent !== label) this.status.textContent = label;
         this.root.dataset.stage = label;
     }
-    async measure<T>(stage: string, operation: () => T | Promise<T>): Promise<T> {
+    async measure<T>(stage: string, operation: () => T | Promise<T>,
+        options: { timeoutMs?: number } = {}): Promise<T> {
         this.check();
         await yieldForInput();
+        this.check();
         const start = performance.now();
-        try { return await operation(); }
-        finally { this.evidence.samples.push({ stage, startedAt: start, milliseconds: performance.now() - start }); }
+        // Resource-building operations must drain before their owner disposes
+        // sources. Only explicitly bounded, result-free GPU waits may detach.
+        if (options.timeoutMs === undefined) {
+            try { return await operation(); }
+            finally {
+                this.evidence.samples.push({ stage, startedAt: start, milliseconds: performance.now() - start });
+            }
+        }
+        let aborted: () => void;
+        const cancelled = new Promise<never>((_, reject) => {
+            aborted = () => reject(this.signal.reason);
+            this.signal.addEventListener('abort', aborted, { once: true });
+        });
+        const timeout = setTimeout(() => {
+            this.fail(new Error('Preparing graphics took too long. Please retry loading the campaign.'));
+        }, options.timeoutMs);
+        try {
+            // The browser's GPU compiler cannot be aborted. Stop waiting for it;
+            // the scene owner disposes stale resources and ignores late results.
+            return await Promise.race([Promise.resolve().then(operation), cancelled]);
+        }
+        finally {
+            clearTimeout(timeout);
+            this.signal.removeEventListener('abort', aborted!);
+            this.evidence.samples.push({ stage, startedAt: start, milliseconds: performance.now() - start });
+        }
     }
     private progress = (event: GenerationProgress) => {
         if (this.signal.aborted) return;

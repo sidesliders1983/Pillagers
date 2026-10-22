@@ -721,6 +721,10 @@ export class FjordPlay {
             checkpointForResume();
             resetFrameTime();
             controller.enabled = false;
+            if (this.loading) {
+                this.loading.fail(new Error('Graphics were interrupted while preparing the island. Please retry.'));
+                return;
+            }
             if (!contextPanel) {
                 contextFocus = document.activeElement as HTMLElement | null;
                 contextPanel = document.createElement('section');

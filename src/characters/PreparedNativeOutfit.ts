@@ -1,6 +1,6 @@
 import {Material, Matrix4, Mesh, SkinnedMesh, Vector3} from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
-import {maskedBodyGeometry, type BodyCutPlane} from './BodyCoverage';
+import {compactCoverageGeometry, maskedBodyGeometry, type BodyCutPlane} from './BodyCoverage';
 import type {NativeModuleSource} from './MeshyModuleRuntime';
 import type {MeshyBodyFitAdapter} from './MeshyBodyFitAdapter';
 
@@ -272,6 +272,8 @@ export function preparedCoverage(
         if (Number.isFinite(maximum)) planes.push(plane([0, -1, 0], maximum));
         fragments.push(clip(planes, covered));
     }
+    fragments.forEach((fragment, index) => compactCoverageGeometry(fragment,
+        index === 0 ? fit.sourceGeometry.getAttribute('position').count : 0));
     const geometry = mergeGeometries(fragments, false);
     for (const fragment of fragments) fragment.dispose();
     requireValue(geometry, 'Selected body coverage could not be combined');
@@ -337,7 +339,12 @@ export function preparedModuleCoverage(sources: NativeModuleSource[], fit: Meshy
         requireValue(prepared.version === 3, 'Independent clothing coverage requires version 3');
         return prepared.moduleCoverage;
     });
-    const fragments = [];
+    const fragments: ReturnType<typeof maskedBodyGeometry>[] = [];
+    const append = (fragment: ReturnType<typeof maskedBodyGeometry>) => {
+        compactCoverageGeometry(fragment, fragments.length === 0
+            ? fit.sourceGeometry.getAttribute('position').count : 0);
+        fragments.push(fragment);
+    };
     // Split at every measured opening. Each fragment retains the original native influences.
     const boundaries = [...new Set(bands.flatMap(band => [band.minimumY, band.maximumY]))]
         .sort((a, b) => a - b);
@@ -360,7 +367,7 @@ export function preparedModuleCoverage(sources: NativeModuleSource[], fit: Meshy
         const planes: BodyCutPlane[] = sources.flatMap(source => source.binding.coverageClipPlanes ?? []);
         if (Number.isFinite(minimum)) planes.push({regions: allRegions, normal: [0, 1, 0], constant: -minimum});
         if (Number.isFinite(maximum)) planes.push({regions: allRegions, normal: [0, -1, 0], constant: maximum});
-        fragments.push(maskedBodyGeometry(fit.sourceGeometry, surface, covered, planes));
+        append(maskedBodyGeometry(fit.sourceGeometry, surface, covered, planes));
         // Restore only this garment's exposed body windows. Other modules keep their masks.
         for (const owner of sources) {
             const prepared = owner.binding.precomputedNative;
@@ -389,7 +396,7 @@ export function preparedModuleCoverage(sources: NativeModuleSource[], fit: Meshy
                     {regions: allRegions, normal: [0, -1, 0], constant: opening.maximumY},
                     ...opening.planes.map(plane => ({...plane, regions: allRegions})),
                 ];
-                fragments.push(maskedBodyGeometry(fit.sourceGeometry, surface, excluded, windowPlanes));
+                append(maskedBodyGeometry(fit.sourceGeometry, surface, excluded, windowPlanes));
             }
         }
     }
