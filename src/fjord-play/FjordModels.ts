@@ -15,6 +15,7 @@ import type { FjordEntity } from './FjordProjection';
 import type { PortraitRequest } from '../characters/CharacterPortraits';
 import { parseFacialShape } from '../characters/FacialIdentity';
 import {FjordWardrobe} from './FjordWardrobe';
+import { measureBuildEnvelope } from '../construction/BuildEnvelope';
 import { characterSync, type CharacterPreparationObserver } from '../characters/CharacterPreparation';
 /** Reuse verified Fjordside DNA bodies and source livestock clips, with independent instance ownership. */
 export class FjordModels {
@@ -246,8 +247,10 @@ export class FjordModels {
                 root.userData.placeholder = true;
                 this.loaded.add(root);
                 this.instanceResources.add(root);
+                root.userData.buildEnvelope = measureBuildEnvelope(root, entity.asset);
                 return root;
             }
+            model.userData.buildEnvelope = measureBuildEnvelope(model, entity.asset);
             return model;
         }
         if (entity.kind === 'campfire') {

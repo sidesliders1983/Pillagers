@@ -61,3 +61,27 @@ Specialization belongs to Building; does not auto-change with occupation; only m
 | III | 20 | +75% | 4 |
 
 Upgrades remain with the Building.
+
+## BUILD-003 — Construction feedback
+**Status:** Canonical presentation v0.1 (#245)
+
+Fjord Play presents newly built houses and housing upgrades with a 3.2-second timber
+construction transition. The housing sequence is Tent → Hut → Homestead → Longhouse →
+Great Hall. Tents remain emergency shelter and do not receive scaffolding. Farm Hut and
+Farm Homestead use the same transition system at their corresponding house sizes.
+
+Posts rise first, then ledgers, sparse braces, working planks and a ladder. Every target
+building appears from its foundation to its roof, for both new builds and upgrades.
+An upgrade also crossfades its previous model into
+the target over 0.8 seconds (1.1–1.9 seconds into the transition), behind the standing
+frame and accompanied by a brief dust effect. The frame
+then disappears from its upper platforms down to its posts and ladder.
+
+The transition communicates an already accepted Core command. Construction has no added
+labour, cost, delay, collider or navigation rule. Occupancy, upkeep and production take
+effect at the same canonical moment as before. Visual feedback finishes even while the
+campaign clock is paused; a hidden browser tab suspends it. Loading a campaign displays
+completed houses immediately, without replaying construction history.
+
+See [the construction contract](../../CONSTRUCTION-TRANSITIONS-245.md) for envelopes,
+shared scaffold presets, lifecycle ownership and review tooling.

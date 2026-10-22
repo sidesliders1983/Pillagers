@@ -11,7 +11,8 @@ export class RivalScene {
     private motion?: LivingWorldController;
     private disposed = false;
     constructor(private world: WorldBlueprint, models: FjordModels, private knowledge: () => DiscoveryView | undefined) {
-        this.layer = new FjordEntities(models);
+        // Newly observed houses are knowledge updates, not witnessed construction commands.
+        this.layer = new FjordEntities(models, false);
     }
     get root() { return this.layer.root; }
     async sync(view: ObservedRivalSettlement, season: number,

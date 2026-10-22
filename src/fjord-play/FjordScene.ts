@@ -1,4 +1,5 @@
 import { WildlifeLayer } from '../wildlife/WildlifeLayer';
+import { ConstructionGpuPreparation } from '../construction/ConstructionGpuPreparation';
 import { RivalScene } from './RivalScene';
 import { IslandMap } from './IslandMap';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
@@ -94,6 +95,8 @@ export function createFjordScene(options: {
     scene.add(targetMarker);
 
     const renderer = createRenderer(canvas);
+    const constructionGpu = new ConstructionGpuPreparation();
+    renderer.localClippingEnabled = true;
     const portraits = new ResidentPortraitStudio(renderer);
     renderer.setPixelRatio(resolvePresentationQuality(
         document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as PresentationQuality,
@@ -219,6 +222,7 @@ export function createFjordScene(options: {
                 wildlife = nextWildlife;
                 scene.add(wildlife.root);
             }
+            if (activeBlueprint !== blueprint) layer!.resetConstructionBaseline();
             activeBlueprint = blueprint;
             wildlife?.setWaterHeightSampler((x, z) => world!.waterHeightAt(x, z));
             appliedRevision = -1;
@@ -540,6 +544,7 @@ export function createFjordScene(options: {
         if (running) activeTime += motionDelta;
         motion!.advance(motionDelta, running, !document.hidden);
         layer!.advance(motion!, motionDelta, running);
+        layer!.updateConstruction(document.hidden ? 0 : delta);
         rivalScene?.advance(motionDelta, running);
         wildlife?.setHumans([...layer!.humanPositions(), ...(rivalScene?.humanPositions() ?? [])]);
         wildlife?.useCanonical(session.readSnapshot().wildlife, host.tickIntervalSeconds);
@@ -555,6 +560,7 @@ export function createFjordScene(options: {
         if (performance.now() - lastDiagnostics > 500) {
             canvas.dataset.rendered = JSON.stringify(layer!.describe());
             canvas.dataset.dyingLivestock = JSON.stringify(layer!.describeDeaths());
+            canvas.dataset.construction = JSON.stringify(layer!.inspectConstruction());
             if (import.meta.env.DEV && query.has('debugWildlife')) {
                 canvas.dataset.wildlife = JSON.stringify(wildlife?.inspect());
             }
@@ -598,6 +604,10 @@ export function createFjordScene(options: {
 
     const prepareGpu = async (loading: Pick<IslandLoading, 'stage' | 'measure' | 'check'> & Partial<Pick<IslandLoading, 'complete' | 'units'>>) => {
         loading.stage('Preparing FjordSide');
+        await loading.measure('construction-gpu-preparation', () => constructionGpu.prepare({
+            renderer, scene, models: models!, anchor: controller.focus.clone(),
+            check: () => loading.check(), yieldControl: yieldForInput
+        }));
         const textures = new Set<Texture>();
         scene.traverse(node => {
             if (!(node instanceof Mesh)) return;
@@ -672,6 +682,7 @@ export function createFjordScene(options: {
         rivalScene?.dispose();
         dressing?.dispose();
         layer?.dispose();
+        constructionGpu.dispose();
         weatherTint?.dispose();
         campfireEffect?.dispose();
         precipitationEffect?.dispose();
