@@ -12,6 +12,8 @@ import { AssetManager } from '../core/AssetManager';
 import { longshipModel, terrainAssetPath } from '../config/TerrainAssets';
 import { placeSettlement } from '../world/PlaceSettlement';
 import type { FjordEntity } from './FjordProjection';
+import type { PortraitRequest } from '../characters/CharacterPortraits';
+import { parseFacialShape } from '../characters/FacialIdentity';
 import {FjordWardrobe} from './FjordWardrobe';
 /** Reuse verified Fjordside DNA bodies and source livestock clips, with independent instance ownership. */
 export class FjordModels {
@@ -54,6 +56,13 @@ export class FjordModels {
         model.userData.pace = actor.pace;
     }
     boundsShape(model: Object3D) { return this.actors.get(model)?.human?.boundsShapeSignature; }
+    /** Borrow only a completed instance matching the requested identity/wardrobe. */
+    residentForPortrait(model: Object3D, input: PortraitRequest) {
+        const actor = this.actors.get(model);
+        if (actor?.fingerprint !== JSON.stringify([input.dna, input.profile, parseFacialShape(input.face)]) ||
+            JSON.stringify(actor.human?.root.userData.presentation) !== JSON.stringify(input.presentation)) return;
+        return actor.human;
+    }
     pace(model: Object3D) { return this.actors.get(model)?.pace ?? 0; }
     activityClips(model: Object3D) {
         const actor = this.actors.get(model);

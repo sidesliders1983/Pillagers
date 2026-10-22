@@ -547,6 +547,7 @@ export class FjordPlay {
             refresh();
         };
         desktopUI = new FjordInterface(this.shared, { select, refresh, notify: say,
+            renderPortrait: input => presentation?.portrait(input) ?? Promise.resolve(undefined),
             home: () => controller.home(),
             commit: (commands, done) => action(async () => {
                 this.session.commandBatch(typeof commands === 'function' ? commands() : commands);
