@@ -56,6 +56,7 @@ export function createFjordScene(options: {
     const session = shared.session, campaign = shared.fjord;
     const selectionLabels = labels.selection, productionLabels = labels.production;
     const query = new URLSearchParams(location.search);
+    const northernLight = query.get('lighting') === 'northern-v1';
     let restoredCamera = options.restoredCamera;
     let disposed = false, queued = false, worldRevision = 0;
     let activeBlueprint: typeof campaign.blueprint | undefined;
@@ -118,6 +119,7 @@ export function createFjordScene(options: {
     reducedMotion.addEventListener('change', configureEffects, { signal: bindings.signal });
     document.querySelector('#fjord-effects')!.addEventListener('change', configureEffects, { signal: bindings.signal });
     let weatherSignature = "";
+    let lightSignature = '';
 
     const cleared = new Set<string>();
     let groundSignature = "";
@@ -241,6 +243,7 @@ export function createFjordScene(options: {
             lighting = new WorldLighting(scene, renderer, assets!, firePosition, next.center,
                 document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
                 fjordPresentation.lighting);
+            lightSignature = '';
             lighting.includeWorldShadowBounds(next.root);
             if (syncScene) {
                 await syncScene();
@@ -322,7 +325,10 @@ export function createFjordScene(options: {
                     precipitationEffect!.setWeather(view.precipitation);
                     canvas.dataset.precipitation = JSON.stringify(precipitationEffect!.inspect());
                     const nextWeather = JSON.stringify([view.calendar.visualProgress, view.weatherVisual]);
-                    if (nextWeather !== weatherSignature) {
+                    const nextLight = northernLight ? nextWeather + ':' + view.calendar.progress : nextWeather;
+                    const weatherChanged = nextWeather !== weatherSignature;
+                    const lightChanged = nextLight !== lightSignature;
+                    if (weatherChanged) {
                         const fogPresentation = fjordFogPresentation(fjordPresentation.fogProfile, {
                             width: campaign.blueprint.config.width,
                             winterWeight: view.calendar.winterWeight,
@@ -331,11 +337,19 @@ export function createFjordScene(options: {
                         });
                         lighting!.setFogPresentation(fogPresentation);
                         discoveryFog?.setPresentation(fogPresentation);
-                        lighting!.setSeason(view.calendar.visualProgress, view.weatherVisual.lighting);
+                    }
+                    if (lightChanged) {
+                        lighting!.setSeason(view.calendar.visualProgress, view.weatherVisual.lighting,
+                            northernLight ? view.calendar.progress : undefined);
+                        lightSignature = nextLight;
+                    }
+                    if (weatherChanged) {
                         weatherTint!.update(view.calendar.visualProgress);
                         layer!.setSeason(view.calendar.visualProgress);
                         weatherSignature = nextWeather;
                         canvas.dataset.seasonMaterials = JSON.stringify(weatherTint!.inspect());
+                    }
+                    if (weatherChanged || lightChanged) {
                         canvas.dataset.weather = JSON.stringify({
                             ...view.weatherVisual, observed: {
                                 sky: lighting!.skyColor.getHex(), fogNear: lighting!.fog.near, fogFar: lighting!.fog.far,
@@ -501,7 +515,7 @@ export function createFjordScene(options: {
         precipitationEffect!.update(delta, running && !document.hidden, controller.focus, camera.position);
         const fireVisual = campfireEffect!.inspect();
         layer!.setCampfireHeat(fireVisual.heat);
-        lighting!.setCampfire(fireVisual.lit && fireVisual.quality !== 'off', fireVisual.time, fireVisual.reducedMotion);
+        lighting!.setCampfire(fireVisual.lit, fireVisual.time, fireVisual.reducedMotion);
         layer!.select(liveMarkers);
         selectionLabels.setAnchors(layer!.root.userData.markers ?? []);
         productionLabels.setAnchors(layer!.productionAnchors());
@@ -525,6 +539,7 @@ export function createFjordScene(options: {
             canvas.dataset.motionTime = String(activeTime);
             canvas.dataset.cameraClearance = JSON.stringify(controller.inspectClearance());
             canvas.dataset.shadowCoverage = JSON.stringify(lighting!.inspectShadowCoverage());
+            canvas.dataset.seasonalLight = JSON.stringify(lighting!.seasonalLightState ?? { profile: 'baseline' });
             canvas.dataset.markers = JSON.stringify(layer!.root.userData.markers ?? []);
             lastDiagnostics = performance.now();
         }

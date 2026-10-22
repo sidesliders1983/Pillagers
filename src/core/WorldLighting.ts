@@ -7,6 +7,7 @@ import { surfaceHeightAt } from '../world/Terrain';
 import { TimeVisualization, daylight, seasonBlend } from '../config/timeVisualization';
 import type { FogPresentation } from '../config/FjordFog';
 import { presentationShadowSize } from '../config/PresentationQuality';
+import { northernLightState, type SeasonalLightState } from '../config/NorthernSeasonalLight';
 type DayLightingSettings = {[K in keyof typeof config.day]: K extends 'sunPosition' ? readonly number[] : number};
 export class WorldLighting {
     readonly ambient=new HemisphereLight();
@@ -28,6 +29,10 @@ export class WorldLighting {
     private baseFog = { near: config.day.fogNear, far: config.day.fogFar, color: new Color(config.day.sky) };
     private readonly lightDirection = new Vector3();
     private shadowCoverage?: DirectionalShadowCoverage;
+    private annualProgress?: number;
+    private annualState?: SeasonalLightState;
+    /** World-space sun authority; shadow-fit positions are never the source of this state. */
+    get seasonalLightState() { return this.annualState; }
     constructor(private scene:Scene,private renderer:WebGLRenderer,private assets:AssetManager,fireAnchor?:Vector3,
         private worldAnchor?:Vector3,private quality: 'standard' | 'low' = 'standard',
         private seasonTreatment: SeasonalLightingTreatment = { ambientScale: 1, directScale: 1 }){
@@ -58,6 +63,8 @@ export class WorldLighting {
         this.setMode('day');
     }
     setMode(mode:LightingMode,day:DayLightingSettings=config.day){
+        this.annualProgress=undefined;
+        this.annualState=undefined;
         this.shadowCoverage?.invalidate();
         this.visualization='off';
         this.seasonWeather=null;
@@ -103,7 +110,8 @@ export class WorldLighting {
     setQuality(quality: 'standard' | 'low') {
         this.quality = quality;
         const size = presentationShadowSize(quality,
-            this.mode === 'night' ? config.night.shadowMapSize : config.day.shadowMapSize);
+            this.annualProgress === undefined && this.mode === 'night'
+                ? config.night.shadowMapSize : config.day.shadowMapSize);
         if (this.directional.shadow.mapSize.x === size) return;
         this.directional.shadow.map?.dispose();
         this.directional.shadow.map = null;
@@ -168,7 +176,9 @@ export class WorldLighting {
         if(mode==='day-night'){this.campfire.visible=true;this.halo.visible=true;}
     }
     /** Compose the existing season palette with annual weather, without resetting day/shadow settings. */
-    setSeason(progress:number,weather:DayLightingSettings=config.day) {
+    setSeason(progress:number,weather:DayLightingSettings=config.day,yearProgress?:number) {
+        this.annualProgress=yearProgress;
+        this.annualState=undefined;
         this.visualization='seasons';
         this.seasonWeather=weather;
         this.mode='day';
@@ -239,7 +249,34 @@ export class WorldLighting {
             this.fog.near=MathUtils.lerp(config.day.fogNear,weather.fogNear,winter);
             this.fog.far=MathUtils.lerp(config.day.fogFar,weather.fogFar,winter);
             this.renderer.toneMappingExposure=MathUtils.lerp(config.day.exposure,weather.exposure,winter);
+            if (this.annualProgress !== undefined) this.applyAnnualLight();
         }
+    }
+    private applyAnnualLight() {
+        // Rebuild only when canonical progress/weather is anchored by setSeason, not per frame.
+        this.annualState ??= northernLightState(this.annualProgress!, {
+            solarStrength: this.directional.intensity,
+            solarColor: this.directional.color.toArray() as [number, number, number],
+            skyColor: this.ambient.color.toArray() as [number, number, number],
+            groundColor: this.ambient.groundColor.toArray() as [number, number, number],
+            ambientStrength: this.ambient.intensity,
+            nightSkyColor: this.blendColor.setHex(config.night.ambientSky).toArray() as [number, number, number],
+            nightGroundColor: this.blendColor.setHex(config.night.ambientGround).toArray() as [number, number, number],
+        });
+        const state = this.annualState;
+        this.nightWeight = state.darkness;
+        this.mode = state.darkness > .5 ? 'night' : 'day';
+        this.directional.name = 'Sunlight';
+        this.directional.color.fromArray(state.solarColor);
+        this.directional.intensity = state.solarStrength;
+        this.lightDirection.fromArray(state.sunDirection);
+        this.directional.position.copy(this.directional.target.position).addScaledVector(this.lightDirection, 200);
+        this.ambient.color.fromArray(state.ambient.skyColor);
+        this.ambient.groundColor.fromArray(state.ambient.groundColor);
+        this.ambient.intensity = state.ambient.strength;
+        this.skyColor.lerp(this.blendColor.setHex(config.night.sky), state.darkness);
+        this.fog.color.lerp(this.blendColor.setHex(config.night.fogColor), state.darkness);
+        // Darkness does not counteract itself through exposure or a second directional night source.
     }
     private fireOverride: { lit: boolean; time: number; reducedMotion: boolean } | null = null;
     setCampfire(lit: boolean, time: number, reducedMotion = false) {
@@ -260,6 +297,7 @@ export class WorldLighting {
         this.campfire.intensity=config.fire.intensity*fireFlickerValue*fireWeight;
         this.halo.material.uniforms.opacity.value=config.fire.haloOpacity*fireFlickerValue*fireWeight;
         for(const material of this.assets.windowMaterials)material.emissiveIntensity=config.windows.emissiveIntensity*night;
-        for(const material of this.assets.fireMaterials)material.emissiveIntensity=config.fire.emissiveIntensity*flicker*night;
+        for(const material of this.assets.fireMaterials)material.emissiveIntensity=config.fire.emissiveIntensity*
+            (fire ? fireFlickerValue*fireWeight : flicker)*night;
     }
 }

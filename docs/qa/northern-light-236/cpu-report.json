@@ -1,0 +1,891 @@
+{
+  "version": 1,
+  "runtime": "v24.19.0",
+  "platform": "win32",
+  "measurement": "CPU-only WorldLighting.update with a mock renderer; no WebGL/GPU or device claim",
+  "samples": [
+    {
+      "seed": 32,
+      "island": 18,
+      "phase": "Midwinter",
+      "calendar": {
+        "season": "Winter",
+        "year": 800,
+        "progress": 0,
+        "visualProgress": 0,
+        "winterWeight": 1
+      },
+      "weatherClass": "Normal",
+      "path": "fixtures/seed-32-phase-0.json",
+      "saveSha256": "f17b46f36e2a070f149e51b16124340c7a35e15f45d51439ba7e2991210c64cc",
+      "baseline": {
+        "medianCpuMs": 0.002354133333332963,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": null
+      },
+      "candidate": {
+        "medianCpuMs": 0.002822166666666817,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": {
+          "profile": "northern-v1",
+          "yearProgress": 0,
+          "sunDirection": [
+            0.7044160264027587,
+            -0.08715574274765817,
+            -0.7044160264027587
+          ],
+          "sunElevation": -0.08726646259971647,
+          "solarStrength": 0,
+          "solarColor": [
+            0.7784441031329561,
+            0.8259884058613945,
+            0.9344886313902027
+          ],
+          "ambient": {
+            "skyColor": [
+              0.36625259558833256,
+              0.4793201830913402,
+              0.6653872982754769
+            ],
+            "groundColor": [
+              0.09758734713304495,
+              0.13563332964548108,
+              0.171441100722554
+            ],
+            "strength": 0.6715800000000001
+          },
+          "darkness": 1
+        }
+      },
+      "incrementalCpuMs": 0.0004680333333338541
+    },
+    {
+      "seed": 32,
+      "island": 18,
+      "phase": "Returning light, snow held",
+      "calendar": {
+        "season": "Winter",
+        "year": 800,
+        "progress": 0.125,
+        "visualProgress": 0,
+        "winterWeight": 1
+      },
+      "weatherClass": "Normal",
+      "path": "fixtures/seed-32-phase-0-125.json",
+      "saveSha256": "e723e6ef642c60392994349907409aa652362cf47fc3a3315ddf4f8aa98e4f08",
+      "baseline": {
+        "medianCpuMs": 0.0021603000000001583,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": null
+      },
+      "candidate": {
+        "medianCpuMs": 0.003370866666666795,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": {
+          "profile": "northern-v1",
+          "yearProgress": 0.125,
+          "sunDirection": [
+            0.7065260190098608,
+            0.04052121572899599,
+            -0.7065260190098608
+          ],
+          "sunElevation": 0.04053231302675713,
+          "solarStrength": 0.07591177416018496,
+          "solarColor": [
+            0.7784441031329561,
+            0.8259884058613945,
+            0.9344886313902027
+          ],
+          "ambient": {
+            "skyColor": [
+              0.49732975489076636,
+              0.581801075844479,
+              0.7128282628941343
+            ],
+            "groundColor": [
+              0.19662385956259118,
+              0.21052578874387914,
+              0.21069289638949357
+            ],
+            "strength": 0.7488170972456012
+          },
+          "darkness": 0.6549758900848698
+        }
+      },
+      "incrementalCpuMs": 0.0012105666666666366
+    },
+    {
+      "seed": 32,
+      "island": 18,
+      "phase": "Early spring",
+      "calendar": {
+        "season": "Spring",
+        "year": 800,
+        "progress": 0.28,
+        "visualProgress": 0.06000000000000005,
+        "winterWeight": 0.8548479999999998
+      },
+      "weatherClass": "Normal",
+      "path": "fixtures/seed-32-phase-0-28.json",
+      "saveSha256": "c0371cf8c57884e9edf617f181d47fee95546cfa1118181536e2349911189647",
+      "baseline": {
+        "medianCpuMs": 0.004722099999999652,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": null
+      },
+      "candidate": {
+        "medianCpuMs": 0.0034850333333336795,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": {
+          "profile": "northern-v1",
+          "yearProgress": 0.28,
+          "sunDirection": [
+            0.6424920343236288,
+            0.4176218045808554,
+            -0.6424920343236288
+          ],
+          "sunElevation": 0.4308263728047702,
+          "solarStrength": 1.7619614208000007,
+          "solarColor": [
+            0.8106033846750013,
+            0.8306764042816196,
+            0.8981060285659448
+          ],
+          "ambient": {
+            "skyColor": [
+              0.7461598413013247,
+              0.7763454917816438,
+              0.8028877315939685
+            ],
+            "groundColor": [
+              0.3846296423915051,
+              0.3526977519457669,
+              0.28520647113853687
+            ],
+            "strength": 0.9208009574400002
+          },
+          "darkness": 0
+        }
+      },
+      "incrementalCpuMs": -0.0012370666666659726
+    },
+    {
+      "seed": 32,
+      "island": 18,
+      "phase": "Late spring",
+      "calendar": {
+        "season": "Spring",
+        "year": 800,
+        "progress": 0.4,
+        "visualProgress": 0.30000000000000004,
+        "winterWeight": 0
+      },
+      "weatherClass": "Normal",
+      "path": "fixtures/seed-32-phase-0-4.json",
+      "saveSha256": "4ff431b64756513d9f00a07479e6d78775d6f4d93bd2e0c7124eb150e97a5471",
+      "baseline": {
+        "medianCpuMs": 0.002400866666666843,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": null
+      },
+      "candidate": {
+        "medianCpuMs": 0.0025421333333324582,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": {
+          "profile": "northern-v1",
+          "yearProgress": 0.3999999999999999,
+          "sunDirection": [
+            0.5398827684286986,
+            0.6457965567479657,
+            -0.5398827684286986
+          ],
+          "sunElevation": 0.7020661068096476,
+          "solarStrength": 2.3829120000000006,
+          "solarColor": [
+            1,
+            0.8484885231824993,
+            0.6605870489686038
+          ],
+          "ambient": {
+            "skyColor": [
+              0.7461598413013247,
+              0.7763454917816438,
+              0.8028877315939685
+            ],
+            "groundColor": [
+              0.3846296423915051,
+              0.3526977519457669,
+              0.28520647113853687
+            ],
+            "strength": 1.0792454400000002
+          },
+          "darkness": 0
+        }
+      },
+      "incrementalCpuMs": 0.0001412666666656152
+    },
+    {
+      "seed": 32,
+      "island": 18,
+      "phase": "High summer",
+      "calendar": {
+        "season": "Summer",
+        "year": 800,
+        "progress": 0.5,
+        "visualProgress": 0.5,
+        "winterWeight": 0
+      },
+      "weatherClass": "Normal",
+      "path": "fixtures/seed-32-phase-0-5.json",
+      "saveSha256": "65fb9ecccf9f897c10a6a7f4d69fd7374be0c3e48401fb9e96fd131639e1e359",
+      "baseline": {
+        "medianCpuMs": 0.0029861333333331764,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": null
+      },
+      "candidate": {
+        "medianCpuMs": 0.0026955666666666125,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": {
+          "profile": "northern-v1",
+          "yearProgress": 0.5,
+          "sunDirection": [
+            0.5000000000000001,
+            0.7071067811865475,
+            -0.5000000000000001
+          ],
+          "sunElevation": 0.7853981633974483,
+          "solarStrength": 2.7216000000000005,
+          "solarColor": [
+            1,
+            0.764083169975467,
+            0.46028080090342743
+          ],
+          "ambient": {
+            "skyColor": [
+              0.7461598413013247,
+              0.7763454917816438,
+              0.8028877315939685
+            ],
+            "groundColor": [
+              0.3846296423915051,
+              0.3526977519457669,
+              0.28520647113853687
+            ],
+            "strength": 1.15752
+          },
+          "darkness": 0
+        }
+      },
+      "incrementalCpuMs": -0.0002905666666665639
+    },
+    {
+      "seed": 32,
+      "island": 18,
+      "phase": "Autumn twilight",
+      "calendar": {
+        "season": "Autumn",
+        "year": 800,
+        "progress": 0.875,
+        "visualProgress": 0.875,
+        "winterWeight": 0.5
+      },
+      "weatherClass": "Normal",
+      "path": "fixtures/seed-32-phase-0-875.json",
+      "saveSha256": "7b8ea11cb45fde3e7fb3561e2f07c1465635626f8b9168c8809b690f748034ee",
+      "baseline": {
+        "medianCpuMs": 0.002226833333332858,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": null
+      },
+      "candidate": {
+        "medianCpuMs": 0.0026761333333330793,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": {
+          "profile": "northern-v1",
+          "yearProgress": 0.875,
+          "sunDirection": [
+            0.7065260190098608,
+            0.04052121572899606,
+            -0.7065260190098608
+          ],
+          "sunElevation": 0.0405323130267572,
+          "solarStrength": 0.0845381121329335,
+          "solarColor": [
+            0.889222051566478,
+            0.7028411702514058,
+            0.6298476609108082
+          ],
+          "ambient": {
+            "skyColor": [
+              0.4973297548907665,
+              0.5818010758444792,
+              0.7128282628941343
+            ],
+            "groundColor": [
+              0.19662385956259126,
+              0.21052578874387923,
+              0.21069289638949362
+            ],
+            "strength": 0.7670809288857378
+          },
+          "darkness": 0.6549758900848694
+        }
+      },
+      "incrementalCpuMs": 0.0004493000000002213
+    },
+    {
+      "seed": 32,
+      "island": 18,
+      "phase": "Year boundary",
+      "calendar": {
+        "season": "Autumn",
+        "year": 800,
+        "progress": 0.99,
+        "visualProgress": 0.99,
+        "winterWeight": 0.995328
+      },
+      "weatherClass": "Normal",
+      "path": "fixtures/seed-32-phase-0-99.json",
+      "saveSha256": "966ae823261dbea891322dd458d81f5d13c98cc93b05f9230d71b5bdff2c1547",
+      "baseline": {
+        "medianCpuMs": 0.0026737333333330753,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": null
+      },
+      "candidate": {
+        "medianCpuMs": 0.00280843333333299,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": {
+          "profile": "northern-v1",
+          "yearProgress": 0.99,
+          "sunDirection": [
+            0.7044688274949551,
+            -0.08629798477233747,
+            -0.7044688274949551
+          ],
+          "sunElevation": -0.08640546045064983,
+          "solarStrength": 0,
+          "solarColor": [
+            0.7794792122831189,
+            0.8248377180918548,
+            0.9316420661620431
+          ],
+          "ambient": {
+            "skyColor": [
+              0.36625259558833256,
+              0.4793201830913402,
+              0.6653872982754769
+            ],
+            "groundColor": [
+              0.09758734713304495,
+              0.13563332964548108,
+              0.171441100722554
+            ],
+            "strength": 0.6717330547200001
+          },
+          "darkness": 1
+        }
+      },
+      "incrementalCpuMs": 0.00013469999999991475
+    },
+    {
+      "seed": 33,
+      "island": 7,
+      "phase": "Midwinter",
+      "calendar": {
+        "season": "Winter",
+        "year": 800,
+        "progress": 0,
+        "visualProgress": 0,
+        "winterWeight": 1
+      },
+      "weatherClass": "Normal",
+      "path": "fixtures/seed-33-phase-0.json",
+      "saveSha256": "c66c4fc26885d0d2195c866eee6f0f7ddf1905c3569969fe89fed19dc6115a07",
+      "baseline": {
+        "medianCpuMs": 0.0020996666666663563,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": null
+      },
+      "candidate": {
+        "medianCpuMs": 0.0024714666666671597,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": {
+          "profile": "northern-v1",
+          "yearProgress": 0,
+          "sunDirection": [
+            0.7044160264027587,
+            -0.08715574274765817,
+            -0.7044160264027587
+          ],
+          "sunElevation": -0.08726646259971647,
+          "solarStrength": 0,
+          "solarColor": [
+            0.7784441031329561,
+            0.8259884058613945,
+            0.9344886313902027
+          ],
+          "ambient": {
+            "skyColor": [
+              0.36625259558833256,
+              0.4793201830913402,
+              0.6653872982754769
+            ],
+            "groundColor": [
+              0.09758734713304495,
+              0.13563332964548108,
+              0.171441100722554
+            ],
+            "strength": 0.6715800000000001
+          },
+          "darkness": 1
+        }
+      },
+      "incrementalCpuMs": 0.00037180000000080343
+    },
+    {
+      "seed": 33,
+      "island": 7,
+      "phase": "Returning light, snow held",
+      "calendar": {
+        "season": "Winter",
+        "year": 800,
+        "progress": 0.125,
+        "visualProgress": 0,
+        "winterWeight": 1
+      },
+      "weatherClass": "Normal",
+      "path": "fixtures/seed-33-phase-0-125.json",
+      "saveSha256": "b39684313e812078e726ebc4a765167c1725d8983a3850e0ce3f1649144cbf4d",
+      "baseline": {
+        "medianCpuMs": 0.002174833333333178,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": null
+      },
+      "candidate": {
+        "medianCpuMs": 0.0024178666666666688,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": {
+          "profile": "northern-v1",
+          "yearProgress": 0.125,
+          "sunDirection": [
+            0.7065260190098608,
+            0.04052121572899599,
+            -0.7065260190098608
+          ],
+          "sunElevation": 0.04053231302675713,
+          "solarStrength": 0.07591177416018496,
+          "solarColor": [
+            0.7784441031329561,
+            0.8259884058613945,
+            0.9344886313902027
+          ],
+          "ambient": {
+            "skyColor": [
+              0.49732975489076636,
+              0.581801075844479,
+              0.7128282628941343
+            ],
+            "groundColor": [
+              0.19662385956259118,
+              0.21052578874387914,
+              0.21069289638949357
+            ],
+            "strength": 0.7488170972456012
+          },
+          "darkness": 0.6549758900848698
+        }
+      },
+      "incrementalCpuMs": 0.00024303333333349072
+    },
+    {
+      "seed": 33,
+      "island": 7,
+      "phase": "Early spring",
+      "calendar": {
+        "season": "Spring",
+        "year": 800,
+        "progress": 0.28,
+        "visualProgress": 0.06000000000000005,
+        "winterWeight": 0.8548479999999998
+      },
+      "weatherClass": "Normal",
+      "path": "fixtures/seed-33-phase-0-28.json",
+      "saveSha256": "41441f17b9a9713d251f2c4d03d8cfd71652f9d05dce57713da4271bd2ca13b6",
+      "baseline": {
+        "medianCpuMs": 0.0022018333333338282,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": null
+      },
+      "candidate": {
+        "medianCpuMs": 0.0024125000000009703,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": {
+          "profile": "northern-v1",
+          "yearProgress": 0.28,
+          "sunDirection": [
+            0.6424920343236288,
+            0.4176218045808554,
+            -0.6424920343236288
+          ],
+          "sunElevation": 0.4308263728047702,
+          "solarStrength": 1.7619614208000007,
+          "solarColor": [
+            0.8106033846750013,
+            0.8306764042816196,
+            0.8981060285659448
+          ],
+          "ambient": {
+            "skyColor": [
+              0.7461598413013247,
+              0.7763454917816438,
+              0.8028877315939685
+            ],
+            "groundColor": [
+              0.3846296423915051,
+              0.3526977519457669,
+              0.28520647113853687
+            ],
+            "strength": 0.9208009574400002
+          },
+          "darkness": 0
+        }
+      },
+      "incrementalCpuMs": 0.00021066666666714204
+    },
+    {
+      "seed": 33,
+      "island": 7,
+      "phase": "Late spring",
+      "calendar": {
+        "season": "Spring",
+        "year": 800,
+        "progress": 0.4,
+        "visualProgress": 0.30000000000000004,
+        "winterWeight": 0
+      },
+      "weatherClass": "Normal",
+      "path": "fixtures/seed-33-phase-0-4.json",
+      "saveSha256": "b3eb0b15bf06c17c73db40ac16df0b6da6dda95b0286ec98b27adfa6e0e4f6d7",
+      "baseline": {
+        "medianCpuMs": 0.0023986666666666375,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": null
+      },
+      "candidate": {
+        "medianCpuMs": 0.002354033333334276,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": {
+          "profile": "northern-v1",
+          "yearProgress": 0.3999999999999999,
+          "sunDirection": [
+            0.5398827684286986,
+            0.6457965567479657,
+            -0.5398827684286986
+          ],
+          "sunElevation": 0.7020661068096476,
+          "solarStrength": 2.3829120000000006,
+          "solarColor": [
+            1,
+            0.8484885231824993,
+            0.6605870489686038
+          ],
+          "ambient": {
+            "skyColor": [
+              0.7461598413013247,
+              0.7763454917816438,
+              0.8028877315939685
+            ],
+            "groundColor": [
+              0.3846296423915051,
+              0.3526977519457669,
+              0.28520647113853687
+            ],
+            "strength": 1.0792454400000002
+          },
+          "darkness": 0
+        }
+      },
+      "incrementalCpuMs": -0.000044633333332361365
+    },
+    {
+      "seed": 33,
+      "island": 7,
+      "phase": "High summer",
+      "calendar": {
+        "season": "Summer",
+        "year": 800,
+        "progress": 0.5,
+        "visualProgress": 0.5,
+        "winterWeight": 0
+      },
+      "weatherClass": "Normal",
+      "path": "fixtures/seed-33-phase-0-5.json",
+      "saveSha256": "9145c8dee2fe9b463363074c397ea7324de671fb4e6f785957488984d84c025e",
+      "baseline": {
+        "medianCpuMs": 0.0024074999999999513,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": null
+      },
+      "candidate": {
+        "medianCpuMs": 0.002361100000000685,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": {
+          "profile": "northern-v1",
+          "yearProgress": 0.5,
+          "sunDirection": [
+            0.5000000000000001,
+            0.7071067811865475,
+            -0.5000000000000001
+          ],
+          "sunElevation": 0.7853981633974483,
+          "solarStrength": 2.7216000000000005,
+          "solarColor": [
+            1,
+            0.764083169975467,
+            0.46028080090342743
+          ],
+          "ambient": {
+            "skyColor": [
+              0.7461598413013247,
+              0.7763454917816438,
+              0.8028877315939685
+            ],
+            "groundColor": [
+              0.3846296423915051,
+              0.3526977519457669,
+              0.28520647113853687
+            ],
+            "strength": 1.15752
+          },
+          "darkness": 0
+        }
+      },
+      "incrementalCpuMs": -0.00004639999999926647
+    },
+    {
+      "seed": 33,
+      "island": 7,
+      "phase": "Autumn twilight",
+      "calendar": {
+        "season": "Autumn",
+        "year": 800,
+        "progress": 0.875,
+        "visualProgress": 0.875,
+        "winterWeight": 0.5
+      },
+      "weatherClass": "Normal",
+      "path": "fixtures/seed-33-phase-0-875.json",
+      "saveSha256": "9bdc8dae8e4c74893415423fada2825e0c2ac61545379da728d7412836288e89",
+      "baseline": {
+        "medianCpuMs": 0.0030779666666664223,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": null
+      },
+      "candidate": {
+        "medianCpuMs": 0.003044766666667177,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": {
+          "profile": "northern-v1",
+          "yearProgress": 0.875,
+          "sunDirection": [
+            0.7065260190098608,
+            0.04052121572899606,
+            -0.7065260190098608
+          ],
+          "sunElevation": 0.0405323130267572,
+          "solarStrength": 0.0845381121329335,
+          "solarColor": [
+            0.889222051566478,
+            0.7028411702514058,
+            0.6298476609108082
+          ],
+          "ambient": {
+            "skyColor": [
+              0.4973297548907665,
+              0.5818010758444792,
+              0.7128282628941343
+            ],
+            "groundColor": [
+              0.19662385956259126,
+              0.21052578874387923,
+              0.21069289638949362
+            ],
+            "strength": 0.7670809288857378
+          },
+          "darkness": 0.6549758900848694
+        }
+      },
+      "incrementalCpuMs": -0.00003319999999924512
+    },
+    {
+      "seed": 33,
+      "island": 7,
+      "phase": "Year boundary",
+      "calendar": {
+        "season": "Autumn",
+        "year": 800,
+        "progress": 0.99,
+        "visualProgress": 0.99,
+        "winterWeight": 0.995328
+      },
+      "weatherClass": "Normal",
+      "path": "fixtures/seed-33-phase-0-99.json",
+      "saveSha256": "362ac3b47bfbb15520616fb68dde8ac958d26111fe87dc12bb43fbf068129139",
+      "baseline": {
+        "medianCpuMs": 0.0023897333333334245,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": null
+      },
+      "candidate": {
+        "medianCpuMs": 0.002508866666667018,
+        "shadowSources": 1,
+        "shadowMapSize": [
+          1024,
+          1024
+        ],
+        "light": {
+          "profile": "northern-v1",
+          "yearProgress": 0.99,
+          "sunDirection": [
+            0.7044688274949551,
+            -0.08629798477233747,
+            -0.7044688274949551
+          ],
+          "sunElevation": -0.08640546045064983,
+          "solarStrength": 0,
+          "solarColor": [
+            0.7794792122831189,
+            0.8248377180918548,
+            0.9316420661620431
+          ],
+          "ambient": {
+            "skyColor": [
+              0.36625259558833256,
+              0.4793201830913402,
+              0.6653872982754769
+            ],
+            "groundColor": [
+              0.09758734713304495,
+              0.13563332964548108,
+              0.171441100722554
+            ],
+            "strength": 0.6717330547200001
+          },
+          "darkness": 1
+        }
+      },
+      "incrementalCpuMs": 0.00011913333333359337
+    }
+  ],
+  "visualEvidence": "Pending real browser captures and physical device acceptance"
+}

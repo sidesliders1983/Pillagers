@@ -1,4 +1,4 @@
-import { Camera, UniformsLib, UniformsUtils, Vector3 } from 'three';
+import { Camera, Color, UniformsLib, UniformsUtils, Vector3 } from 'three';
 import { ReferenceWater, REFERENCE_WATER_DEFAULTS } from '../water/ReferenceWater';
 import { lightingConfig } from '../config/lightingConfig';
 import { presentationProfiles } from '../config/PresentationQuality';
@@ -9,6 +9,7 @@ export class FjordsideWater {
     readonly surface: ReferenceWater;
     readonly mesh: ReferenceWater['mesh'];
     private readonly sunDirection = new Vector3();
+    private readonly solarColor = new Color();
     private time = 0;
 
     constructor(level: number, center: { x: number; z: number }, quality: 'standard' | 'low') {
@@ -37,10 +38,19 @@ export class FjordsideWater {
         this.time = time;
         this.surface.update(time, camera);
         if (lighting) {
-            this.sunDirection.copy(lighting.directional.position).sub(lighting.directional.target.position);
+            const annual = lighting.seasonalLightState;
+            if (annual) {
+                this.sunDirection.fromArray(annual.sunDirection);
+                // Compatibility for the existing shader: suppress an absent sun without
+                // adding the direct/ambient separation reserved for Unified Sunlight (#237).
+                this.solarColor.fromArray(annual.solarColor).multiplyScalar(Math.min(1, annual.solarStrength));
+            } else {
+                this.sunDirection.copy(lighting.directional.position).sub(lighting.directional.target.position);
+                this.solarColor.copy(lighting.directional.color);
+            }
             this.surface.setLighting({
                 sunDirection: this.sunDirection,
-                sunColor: lighting.directional.color,
+                sunColor: this.solarColor,
                 skyColor: lighting.skyColor,
                 intensity: lighting.ambient.intensity / lightingConfig.day.ambient,
             });
