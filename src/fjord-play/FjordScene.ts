@@ -33,6 +33,8 @@ import { FjordEntities } from './FjordEntities';
 import { fjordGroundWeights } from './FjordGround';
 import { dressingHomes } from './SettlementDressing';
 import { SettlementDressingLayer } from './SettlementDressingLayer';
+import { ResidentPortraitStudio } from '../characters/ResidentPortraitStudio';
+import type { PortraitRequest } from '../characters/CharacterPortraits';
 
 export interface FjordSceneHost {
     readonly tickIntervalSeconds: number;
@@ -91,6 +93,7 @@ export function createFjordScene(options: {
     scene.add(targetMarker);
 
     const renderer = createRenderer(canvas);
+    const portraits = new ResidentPortraitStudio(renderer);
     renderer.setPixelRatio(resolvePresentationQuality(
         document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as PresentationQuality,
         document.querySelector<HTMLSelectElement>('#fjord-effects')!.value as EffectQuality,
@@ -610,6 +613,7 @@ export function createFjordScene(options: {
         precipitationEffect?.dispose();
         world?.dispose();
         lighting?.dispose();
+        portraits.dispose();
         renderer.dispose();
         scene.clear();
         const releaseSources = () => {
@@ -627,6 +631,8 @@ export function createFjordScene(options: {
         replace: () => inactive() ? Promise.resolve() : track(rebuildWorld()),
         sync: () => inactive() ? Promise.resolve() : track(syncScene?.() ?? Promise.resolve()),
         frame, prepareGpu, arrive, dispose, highlight,
+        portrait: (input: PortraitRequest) => inactive() || renderer.getContext().isContextLost()
+            ? Promise.resolve(undefined) : portraits.render(input, layer?.residentForPortrait(input)),
         resetFrameTime: () => clock.start(),
         get hasWorld() { return !!world; },
         get diagnostics() { return [...(assets?.diagnostics ?? []), ...(models?.diagnostics ?? [])]; },

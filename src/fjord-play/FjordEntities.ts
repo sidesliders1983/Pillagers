@@ -11,6 +11,7 @@ import { FjordModels } from './FjordModels';
 import type { FjordEntity } from './FjordProjection';
 import { livestockPresentation } from '../characters/LivestockPresentation';
 import type { LivestockDeath } from './LivestockDeath';
+import type { PortraitRequest } from '../characters/CharacterPortraits';
 
 interface YardFloor {
     yard: Object3D;
@@ -218,6 +219,10 @@ export class FjordEntities {
     bounds(key: string) {
         const entry = this.entries.get(key);
         return entry?.localBounds?.clone().translate(entry.model.position);
+    }
+    residentForPortrait(input: PortraitRequest) {
+        const model = this.entries.get('persona:' + input.residentId)?.model;
+        return model ? this.models.residentForPortrait(model, input) : undefined;
     }
     /** Touch targets use CSS pixels and current moving bodies, independently of render DPR. */
     pick(camera: Camera, x: number, y: number,
