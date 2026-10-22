@@ -43,3 +43,6 @@ output/meshy-outfit-pipeline/pass-009/*.json -text
 
 # Manual beard provenance pins the preparation script bytes.
 scripts/prepare-manual-beards.mjs text eol=lf
+
+# Preserve the original physical-device diagnostic and its comparison receipts.
+docs/qa/island-loading-259/iphone-follow-up/*.json -text

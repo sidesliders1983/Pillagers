@@ -129,3 +129,22 @@ and perform no automatic upload or storage logging. GPU execution time/process m
 unsupported. A browser-process kill can prevent the final report, as with ordinary loading.
 The diagnostic path still prepares and draws the scene: it measures real load costs rather than
 estimating them without loading assets.
+
+## Physical-device follow-up
+
+The original iPhone report for build f9feee5, seed 3055065912/recipe 7 and Low quality
+is retained unchanged under `docs/qa/island-loading-259/iphone-follow-up/`, with matched
+local before/after receipts and the current validation limits. New diagnostic runs add
+up to 2,048 `characterPreparation` spans: synchronous operations are distinguished from
+async-inclusive waiting, with resident IDs for correlation. Body/source/binding, fitting,
+coverage, clearance, pace and bounds phases stay separate; parent/child spans overlap.
+The actual render DPR and framebuffer dimensions accompany the existing renderer counts.
+
+Three bounded preparation changes preserve the earlier coverage optimization and source
+fidelity: temporary, budgeted hair-clearance triangle candidates; a single-use natural
+heightfield handoff within generation; and initial terrain masks built from the exact
+current settlement/rival wear instead of a zero-then-rebuild pass. Changed wear still
+uses the existing update path. No new world/save field, pool preload or permanent model
+cache is introduced. See the follow-up report for byte/pose/canonical-world equivalence,
+memory tradeoffs, three-repeat local timings, the rejected candidate and the pending
+matched mobile diagnostic/gameplay rerun. Local CPU gains do not predict mobile load time.
