@@ -13,6 +13,7 @@ const profiles = new Map<string, RestProfile>([
     ['wolf', { head: .18, lookRate: .65, breath: .012, breathRate: 1.8, tail: .035 }],
     ['red-fox', { head: .24, lookRate: .8, breath: .014, breathRate: 2.4, tail: .065 }],
     ['lynx', { head: .22, lookRate: .6, breath: .012, breathRate: 2, tail: .02 }],
+    ['moose', { head: .06, lookRate: .4, breath: .006, breathRate: 1.4, tail: 0 }],
     ['reindeer', { head: .12, lookRate: .45, breath: .008, breathRate: 1.5, tail: .015 }],
     ['otter', { head: .18, lookRate: .65, breath: .018, breathRate: 2.1, tail: .035 }],
     ['seal', { head: .16, lookRate: .45, breath: .012, breathRate: 1.5, tail: 0 }],
@@ -30,14 +31,15 @@ export interface AnimalRestRig {
     applied: boolean;
 }
 
-/** Additive resting motion for the seven supplied Meshy animal rigs, separate from locomotion. */
+/** Additive resting motion over authored neutral frames, separate from locomotion. */
 export function animalRestRig(model: Group, space: Group, species: string): AnimalRestRig | undefined {
     const profile = profiles.get(species);
     if (!profile) return undefined;
     const joints = new Map<string, IdleJoint>();
     const names = profile.tail > 0 ? ['chest', 'head', 'tailstart', 'tail1', 'tail2'] : ['chest', 'head'];
     for (const name of names) {
-        const bone = model.getObjectByName(name) as Bone | undefined;
+        const rigName = species === 'moose' ? name === 'chest' ? 'Bone_005' : 'Bone_020' : name;
+        const bone = model.getObjectByName(rigName) as Bone | undefined;
         if (!bone?.isBone) throw new Error('Missing ' + species + ' rest joint: ' + name);
         joints.set(name, { bone, base: new Quaternion() });
     }

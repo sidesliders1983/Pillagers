@@ -12,7 +12,8 @@ function moduleAt(url) {
     if (cache.has(url.href)) return cache.get(url.href);
     const module = { exports: {} };
     cache.set(url.href, module.exports);
-    const source = ts.transpileModule(readFileSync(url, 'utf8'), { compilerOptions: {
+    const input = readFileSync(url, 'utf8').replace(/\bimport\.meta\.url\b/g, JSON.stringify(url.href));
+    const source = ts.transpileModule(input, { compilerOptions: {
         module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022,
     } }).outputText;
     const require = name => name.endsWith('.css') ? {} : name.startsWith('.') ?

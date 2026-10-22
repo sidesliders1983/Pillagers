@@ -12,6 +12,9 @@ import type { FjordEntity } from './FjordProjection';
 import { livestockPresentation } from '../characters/LivestockPresentation';
 import type { LivestockDeath } from './LivestockDeath';
 import { ConstructionTransitions } from '../construction/ConstructionTransition';
+import { longshipDeckAnchors } from './LongshipDeck';
+import type { PortraitRequest } from '../characters/CharacterPortraits';
+import { characterSync, type CharacterPreparationObserver } from '../characters/CharacterPreparation';
 
 interface YardFloor {
     yard: Object3D;
@@ -32,6 +35,7 @@ export class FjordEntities {
         model: Object3D;
         season?: StructureSeasonTint;
         localBounds?: Box3;
+        modelBounds?: Box3;
         boundsSignature?: string;
         yardFloor?: YardFloor;
     }>();
@@ -61,12 +65,13 @@ export class FjordEntities {
             this.expeditionFrames.set(mission.id, { mission, from, elapsed: 0, duration });
         }
     }
-    private expeditionPose(missionId: string, personaId: string) {
+    private expeditionPose(missionId: string, personaId?: string) {
         const frame = this.expeditionFrames.get(missionId);
         if (!frame) return;
         const travelled = frame.from + (frame.mission.travelled - frame.from) * Math.min(1, frame.elapsed / frame.duration);
-        const point = spatialMemberPosition({ ...frame.mission, travelled }, personaId);
-        return { ...point, y: this.expeditionSurface!.surfaceHeightAt(point.x, point.z) };
+        const point = spatialMemberPosition({ ...frame.mission, travelled }, personaId ?? frame.mission.memberIds[0]);
+        return { ...point, y: frame.mission.transport?.phase === 'embarked' ? this.expeditionWorld!.waterLevel + .15 :
+            this.expeditionSurface!.surfaceHeightAt(point.x, point.z) };
     }
     private disposed = false;
     private seasonProgress: number | null = null;
@@ -146,9 +151,23 @@ export class FjordEntities {
         this.root.userData.selection = descriptions.find(marker => marker.role === 'selected') ?? null;
     }
     async sync(entities: readonly FjordEntity[], yieldControl?: () => Promise<void>, current = () => true,
-        livestockDeaths: readonly { id: string }[] = []) {
+        livestockDeaths: readonly { id: string }[] = [],
+        progress?: (completed: number, total: number, entity?: FjordEntity, started?: number) => void,
+        observe?: CharacterPreparationObserver) {
         if (this.disposed || !current()) return;
         const visible = entities.filter(e => e.transform !== null);
+        let prepared = 0;
+        progress?.(prepared, visible.length);
+        const nextEntities = new Map(visible.map(entity => [entity.selectionKey, entity]));
+        // Retain unchanged attachments. Detach only before removal, hull replacement or landing.
+        for (const [key, { model }] of this.entries) {
+            const shipId = model.userData.canonical?.aboardShip;
+            if (!shipId || model.parent === this.root) continue;
+            const hullKey = 'longship:' + shipId, nextHull = nextEntities.get(hullKey);
+            const sameHull = nextHull && this.entries.get(hullKey)?.signature ===
+                nextHull.asset + ':' + (nextHull.terrainAsset ?? '');
+            if (!sameHull || nextEntities.get(key)?.status.aboardShip !== shipId) this.root.attach(model);
+        }
         const wanted = new Set(visible.map(e => e.selectionKey));
         const confirmedDeaths = new Set(livestockDeaths.map(fact => fact.id));
         for (const key of this.deaths.keys()) if (wanted.has(key)) this.finishDeath(key);
@@ -170,6 +189,7 @@ export class FjordEntities {
                 return;
             await yieldControl?.();
             if (this.disposed || !current()) return;
+            const started = progress ? performance.now() : 0;
             const signature = entity.asset + ':' + (entity.terrainAsset ?? '');
             let entry = this.entries.get(entity.selectionKey);
             let transitionOld: typeof entry;
@@ -198,15 +218,19 @@ export class FjordEntities {
             }
             const p = entity.transform!;
             entry.model.name = entity.selectionKey;
-            const display = entity.status.expedition ? this.expeditionPose(entity.status.expedition, entity.id) ?? p : p;
-            entry.model.position.set(display.x, display.y, display.z);
-            entry.model.rotation.y = display.rotation;
+            const display = entity.status.shipExpedition ? this.expeditionPose(entity.status.shipExpedition) ?? p :
+                entity.status.expedition ? this.expeditionPose(entity.status.expedition, entity.id) ?? p : p;
+            if (!entity.status.aboardShip || entry.model.parent === this.root) {
+                entry.model.position.set(display.x, display.y, display.z);
+                entry.model.rotation.set(0, display.rotation, 0);
+            }
             await this.models.reconcile(entry.model, entity);
             if (this.disposed || !current()) {
                 transitionOld?.season?.dispose();
                 if (transitionOld) this.remove(transitionOld.model);
                 return;
             }
+            this.models.setEmbarked?.(entry.model, !!entity.status.aboardShip);
             if (entity.kind === 'persona' && !entry.model.userData.appearance) entry.model.scale.setScalar(p.scale);
             if (entity.kind === 'cattle' && entity.status.assignment) {
                 const home = this.entries.get('building:' + entity.status.assignment)?.model;
@@ -232,11 +256,15 @@ export class FjordEntities {
             } else entry.yardFloor = undefined;
             entry.model.userData.canonical = { kind: entity.kind, id: entity.id, ...entity.status };
             entry.model.updateMatrixWorld(true);
-            const boundsSignature = JSON.stringify([entity.asset, this.models.boundsShape(entry.model) ?? entity.dna, entity.transform!.scale, entity.transform!.rotation, entry.model.userData.clothingSet?.id]);
-            if (entry.boundsSignature !== boundsSignature) {
-                entry.localBounds = new Box3().setFromObject(entry.model, true).translate(entry.model.position.clone().negate());
-                entry.boundsSignature = boundsSignature;
-            }
+            characterSync(observe && (sample => observe({ ...sample, subject: entity.id })), 'reconciliation-bounds-registration', () => {
+                const boundsSignature = JSON.stringify([entity.asset, this.models.boundsShape(entry.model) ?? entity.dna, entity.transform!.scale, entity.transform!.rotation, entry.model.userData.clothingSet?.id]);
+                if (entry.boundsSignature !== boundsSignature) {
+                    entry.localBounds = new Box3().setFromObject(entry.model, true).translate(entry.model.position.clone().negate());
+                    entry.modelBounds = entry.localBounds.clone().translate(entry.model.position)
+                        .applyMatrix4(entry.model.matrixWorld.clone().invert());
+                    entry.boundsSignature = boundsSignature;
+                }
+            }, entity.asset);
             if (construct) {
                 this.root.add(this.construction.root);
                 const old = transitionOld;
@@ -245,17 +273,38 @@ export class FjordEntities {
                     this.remove(old.model);
                 } : undefined);
             }
+            progress?.(++prepared, visible.length, entity, started);
+        }
+        // Four stable deck anchors, using the existing characters and their appearance resources.
+        for (const { model } of this.entries.values()) {
+            const facts = model.userData.canonical;
+            if (!facts?.aboardShip) continue;
+            const hull = this.entries.get('longship:' + facts.aboardShip)?.model;
+            const anchor = longshipDeckAnchors[facts.aboardAnchor as 0 | 1 | 2 | 3];
+            if (!hull || !anchor) continue;
+            if (model.parent !== hull) hull.add(model);
+            model.position.set(anchor[0], anchor[1], anchor[2]);
+            model.rotation.set(0, 0, 0);
+            model.updateMatrixWorld(true);
         }
         this.constructionInitialized = true;
     }
     bounds(key: string) {
         const entry = this.entries.get(key);
+        if (entry?.model.userData.canonical?.aboardShip) {
+            entry.model.updateWorldMatrix(true, false);
+            return entry.modelBounds?.clone().applyMatrix4(entry.model.matrixWorld);
+        }
         return entry?.localBounds?.clone().translate(entry.model.position);
     }
-    /** Touch targets use CSS pixels and current moving bodies, independently of render DPR. */
+    residentForPortrait(input: PortraitRequest) {
+        const model = this.entries.get('persona:' + input.residentId)?.model;
+        return model ? this.models.residentForPortrait(model, input) : undefined;
+    }
+    /** Expanded targets use CSS pixels and current moving bodies, independently of render DPR. */
     pick(camera: Camera, x: number, y: number,
         viewport: { left: number; top: number; width: number; height: number },
-        pointerType: 'mouse' | 'touch' = 'mouse') {
+        pointerType: 'mouse' | 'touch' = 'mouse', targetKind?: 'longship') {
         if (viewport.width <= 0 || viewport.height <= 0) return null;
         this.root.updateMatrixWorld(true);
         camera.updateMatrixWorld(true);
@@ -266,13 +315,22 @@ export class FjordEntities {
             while (node && !node.userData.canonical) node = node.parent;
             return node?.userData.canonical ?? null;
         };
-        const exact = canonical(ray.intersectObject(this.root, true)[0]?.object ?? null);
-        if (pointerType !== 'touch' || exact?.kind === 'persona' || exact?.kind === 'cattle')
+        const visible = (node: Object3D | null) => {
+            while (node) {
+                if (!node.visible) return false;
+                node = node.parent;
+            }
+            return true;
+        };
+        const exact = canonical(ray.intersectObject(this.root, true)
+            .find(hit => visible(hit.object))?.object ?? null);
+        if (targetKind ? exact?.kind === targetKind :
+            pointerType !== 'touch' || exact?.kind === 'persona' || exact?.kind === 'cattle')
             return exact;
         const candidates: { facts: { kind: string; id: string }; distance: number; depth: number }[] = [];
         for (const [key, entry] of this.entries) {
             const facts = entry.model.userData.canonical;
-            if (facts.kind !== 'persona' && facts.kind !== 'cattle') continue;
+            if (targetKind ? facts.kind !== targetKind : facts.kind !== 'persona' && facts.kind !== 'cattle') continue;
             const bounds = this.bounds(key);
             if (!bounds || !entry.model.visible) continue;
             const center = bounds.getCenter(new Vector3()), projected = center.clone().project(camera);
@@ -290,21 +348,25 @@ export class FjordEntities {
             const minX = Math.min(...points.map(p => p.x)), maxX = Math.max(...points.map(p => p.x));
             const minY = Math.min(...points.map(p => p.y)), maxY = Math.max(...points.map(p => p.y));
             const screenX = (minX + maxX) / 2, screenY = (minY + maxY) / 2;
-            // At least 44 x 44 CSS pixels; small models also get forgiving edge padding.
-            const halfWidth = Math.max(22, (maxX - minX) / 2 + 8);
-            const halfHeight = Math.max(22, (maxY - minY) / 2 + 8);
+            // Ship destinations include hull/sail gaps and nearby water on mouse and touch.
+            const minimumHalfSize = targetKind === 'longship' ? 28 : 22;
+            const padding = targetKind === 'longship' ? 18 : 8;
+            const halfWidth = Math.max(minimumHalfSize, (maxX - minX) / 2 + padding);
+            const halfHeight = Math.max(minimumHalfSize, (maxY - minY) / 2 + padding);
             if (Math.abs(x - screenX) > halfWidth || Math.abs(y - screenY) > halfHeight) continue;
             // Enlarging a target must not make a resident selectable through a nearer home.
             ray.setFromCamera(new Vector2(projected.x, projected.y), camera);
             const body = ray.ray.intersectBox(bounds, new Vector3());
-            const foreground = ray.intersectObject(this.root, true)[0];
-            if (body && foreground && canonical(foreground.object)?.id !== facts.id &&
+            const foreground = ray.intersectObject(this.root, true).find(hit => visible(hit.object));
+            const foregroundFacts = foreground && canonical(foreground.object);
+            if (body && foreground && foregroundFacts?.id !== facts.id &&
+                !(targetKind === 'longship' && foregroundFacts?.aboardShip === facts.id) &&
                 foreground.distance + .01 < body.distanceTo(ray.ray.origin)) continue;
             candidates.push({ facts, distance: Math.hypot(x - screenX, y - screenY), depth: projected.z });
         }
         candidates.sort((a, b) => a.distance - b.distance || a.depth - b.depth ||
             a.facts.id.localeCompare(b.facts.id));
-        return candidates[0]?.facts ?? exact;
+        return candidates[0]?.facts ?? (targetKind ? null : exact);
     }
     configureMotion(motion: LivingWorldController) {
         for (const id of this.yardSamplers.keys())
@@ -341,17 +403,37 @@ export class FjordEntities {
             if (death.presentation.inspect().complete) this.finishDeath(key);
         }
         for (const frame of this.expeditionFrames.values()) frame.elapsed += running ? delta : 0;
+        for (const { model } of this.entries.values()) {
+            const facts = model.userData.canonical;
+            const frame = facts?.shipExpedition && this.expeditionFrames.get(facts.shipExpedition);
+            if (!frame) continue;
+            const pose = this.expeditionPose(frame.mission.id, frame.mission.memberIds[0]);
+            if (pose) { model.position.set(pose.x, pose.y, pose.z); model.rotation.y = pose.rotation; }
+        }
         for (const entry of this.entries.values()) {
             const facts = entry.model.userData.canonical;
+            if (facts?.aboardShip) {
+                const hull = this.entries.get('longship:' + facts.aboardShip)?.model;
+                const anchor = longshipDeckAnchors[facts.aboardAnchor as 0 | 1 | 2 | 3];
+                if (anchor && entry.model.parent === hull) {
+                    entry.model.position.set(anchor[0], anchor[1], anchor[2]);
+                    entry.model.rotation.set(0, 0, 0);
+                }
+                continue;
+            }
             if (facts?.expedition) {
                 const pose = this.expeditionPose(facts.expedition, facts.id);
-                if (pose) { entry.model.position.set(pose.x, pose.y, pose.z); entry.model.rotation.y = pose.rotation; }
-                this.models.animate(entry.model, pose?.moving ? 'Run' : 'Idle', 1, running ? delta : 0);
+                if (pose && !facts.aboardShip) {
+                    entry.model.position.set(pose.x, pose.y, pose.z);
+                    entry.model.rotation.set(0, pose.rotation, 0);
+                }
+                this.models.animate(entry.model, !facts.aboardShip && pose?.moving ? 'Run' : 'Idle', 1, running ? delta : 0);
             }
         }
         for (const agent of motion.inspect()) {
             const model = this.entries.get(agent.key)?.model;
-            if (!model) continue;
+            // A stale autonomous frame must never move a passenger or an expedition member.
+            if (!model || model.userData.canonical?.aboardShip || model.userData.canonical?.expedition) continue;
             model.position.set(agent.x, agent.y, agent.z);
             model.rotation.y = agent.rotation;
             this.models.animate(model, agent.state, agent.speed, running ? delta : 0);
@@ -368,13 +450,13 @@ export class FjordEntities {
     humanPositions() {
         return [...this.entries.values()].flatMap(({ model }) =>
             model.userData.canonical?.kind === 'persona' && model.visible
-                ? [{ x: model.position.x, z: model.position.z }] : []);
+                ? [(() => { const p = model.getWorldPosition(new Vector3()); return { x: p.x, z: p.z }; })()] : []);
     }
     describe() {
         this.root.updateMatrixWorld(true);
         return [...this.entries].map(([key, entry]) => ({
             key, renderId: entry.model.uuid, ...entry.model.userData.canonical,
-            position: entry.model.position.toArray(),
+            position: entry.model.getWorldPosition(new Vector3()).toArray(),
             asset: entry.model.userData.asset, scale: entry.model.scale.toArray(),
             bounds: this.bounds(key),
             appearance: entry.model.userData.appearance, motion: entry.model.userData.motion,
@@ -415,6 +497,8 @@ export class FjordEntities {
     dispose() {
         this.disposed = true;
         this.construction.dispose();
+        for (const { model } of this.entries.values())
+            if (model.userData.canonical?.aboardShip && model.parent !== this.root) this.root.attach(model);
         for (const key of this.deaths.keys()) this.finishDeath(key);
         for (const entry of this.entries.values()) {
             entry.season?.dispose();

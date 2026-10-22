@@ -1,5 +1,12 @@
 # 04 — Housing & Buildings
 
+## Fjord Play selection
+
+Selecting a house or tent immediately shows its residents, occupations and links
+to individual person cards. The resident list is always visible in the initial
+selection card on desktop and mobile; it does not require a disclosure click.
+Specialization, upgrades and work management retain their existing actions.
+
 ## HOUSE-001 — Housing priority
 **Status:** Canonical
 

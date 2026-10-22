@@ -4,6 +4,7 @@ import { WildlifeHistoryIndex } from '../lore/WildlifeHistory';
 import { initializeWildlifeSightings, assertWildlifeWorld } from '../simulation/WildlifeSightings';
 import { assertSpatialWorld, exploreOffer, startExpeditionOffer, expeditionModeActive, type PhysicalExpeditionContext } from '../simulation/SpatialExpeditions';
 import { islandMissionOffer, type IslandTarget } from '../simulation/IslandMissions';
+import { boardLongshipOffer, disembarkLongshipOffer, longshipFoodOffer } from '../simulation/LongshipTransport';
 import type { Cargo, MissionType } from '../simulation/WorldExpeditions';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { birthdayCalendarMode } from '../simulation/BirthdayCalendar';
@@ -18,16 +19,30 @@ export class GameplaySession {
     private state: SimulationState;
     private physicalWorld?: PhysicalExpeditionContext;
     private physicalExclusions?: () => PhysicalExpeditionContext['exclusions'];
-    bindPhysicalWorld(world: PhysicalExpeditionContext['world'], worldId: string, exclusions?: () => PhysicalExpeditionContext['exclusions']): void {
+    private physicalShips?: () => PhysicalExpeditionContext['longshipOrigins'];
+    bindPhysicalWorld(world: PhysicalExpeditionContext['world'], worldId: string,
+        exclusions?: () => PhysicalExpeditionContext['exclusions'],
+        ships?: () => PhysicalExpeditionContext['longshipOrigins']): void {
         const fullWorld = world as WorldBlueprint;
         const context = { world, worldId, ...(fullWorld.config && fullWorld.coast && fullWorld.biomes && fullWorld.placementPlan ? { wildlifeWorld: fullWorld } : {}) };
         assertSpatialWorld(this.state, context);
         assertWildlifeWorld(this.state, context);
         this.physicalWorld = context;
         this.physicalExclusions = exclusions;
+        this.physicalShips = ships;
     }
     private physicalContext() {
-        return this.physicalWorld && { ...this.physicalWorld, exclusions: this.physicalExclusions?.() };
+        return this.physicalWorld && { ...this.physicalWorld, exclusions: this.physicalExclusions?.(),
+            longshipOrigins: this.physicalShips?.() };
+    }
+    boardLongshipOffer(groupId: string, shipId: string, origins?: Record<string, { x: number; z: number }>) {
+        return boardLongshipOffer(this.state, groupId, shipId, this.physicalContext(), origins);
+    }
+    disembarkLongshipOffer(groupId: string) {
+        return disembarkLongshipOffer(this.state, groupId, this.physicalContext());
+    }
+    longshipFoodOffer(groupId: string) {
+        return longshipFoodOffer(this.state, groupId, this.physicalContext());
     }
     startExpeditionOffer(groupId: string, testFoodPerMember?: number) {
         return startExpeditionOffer(this.state, groupId, this.physicalContext(), testFoodPerMember);

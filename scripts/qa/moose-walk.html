@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wildlife · walk and rest review</title>
+    <style>
+        body { margin: 0; background: #dce4df; font: 14px system-ui; }
+        header {
+            position: absolute;
+            z-index: 2;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            background: #fffffff0;
+            padding: 14px;
+            border-radius: 8px;
+        }
+        button, select { margin: 4px; padding: 8px; }
+        h1 { font-size: 18px; margin: 0 0 8px; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Wildlife · walk and rest review</h1>
+        <label>Animal
+            <select id="animal">
+                <option value="moose">Moose</option>
+                <option value="lynx">Lynx donor</option>
+                <option value="bear">Bear</option>
+                <option value="wolf">Wolf</option>
+                <option value="fox">Fox</option>
+                <option value="reindeer">Reindeer</option>
+                <option value="otter">Otter</option>
+                <option value="seal">Seal</option>
+            </select>
+        </label>
+        <button id="walk">Walk</button>
+        <button id="idle">Idle</button>
+        <button id="pause">Pause / resume</button>
+        <label>Pose <input id="time" type="range" min="0" max="1" step="0.01" value="0"></label>
+        <p id="status">Loading production assets…</p>
+    </header>
+    <script type="module" src="./moose-walk.ts"></script>
+</body>
+</html>

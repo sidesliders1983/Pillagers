@@ -7,10 +7,12 @@ import {
     prepareGullWings, gullWingRig, gullWingMotion, poseGullWings,
     gullFoldedWings, poseGroundedGull, gullHeadLook, type GullWingRig,
 } from './GullWings';
-import { AnimationMixer, Frustum, Group, Matrix4, Mesh, Quaternion, Sphere, Texture, Vector3, type Camera, type Bone } from 'three';
+import { AnimationMixer, Frustum, Group, Matrix4, Mesh, Quaternion, Sphere, Texture, Vector3,
+    type AnimationAction, type Camera, type Bone } from 'three';
 import { GLTFLoader, type GLTF } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { clone } from 'three/addons/utils/SkeletonUtils.js';
+import { WildlifeMotionTrack } from './WildlifeMotionTrack';
 import { terrainGradientAt } from '../world-generation/TerrainQueries';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { wildlifeAssetManifest } from './WildlifeAssetManifest';
@@ -76,6 +78,7 @@ interface LegPose {
 }
 interface RenderActor {
     presentedPosition?: Vector3;
+    motion?: WildlifeMotionTrack;
     actor: WildlifeActor;
     root: Group;
     body: Group;
@@ -83,6 +86,8 @@ interface RenderActor {
     marineTail?: ReturnType<typeof marineTailRig>;
     effects?: MarineEffects;
     mixer?: AnimationMixer;
+    walkAction?: AnimationAction;
+    idleAction?: AnimationAction;
     legs: LegPose[];
     coastal?: CoastalAnimalRig;
     rabbit?: RabbitRig;
@@ -178,11 +183,15 @@ export class WildlifeLayer {
                         }
                     });
                     const mixer = source.animations.length ? new AnimationMixer(model) : undefined;
-                    if (mixer)
-                        mixer.clipAction(source.animations[0]).play();
+                    const walkAction = mixer?.clipAction(source.animations[0]).play();
+                    const idleClip = source.animations.find(clip => clip.name === 'Idle');
+                    const idleAction = idleClip && mixer ? mixer.clipAction(idleClip).play() : undefined;
+                    if (idleAction) idleAction.enabled = false;
                     const coastal = mixer ? undefined : coastalAnimalRig(model as Group, actor.species);
                     const rabbit = actor.species === 'rabbit' ? rabbitRig(model as Group, root) : undefined;
-                    layer.records.push({ actor, root, body, mixer, coastal, rabbit, floating, effects,
+                    layer.records.push({ actor, root, body, mixer, walkAction, idleAction, coastal, rabbit, floating, effects,
+                        motion: actor.variant.movement !== 'water'
+                            ? new WildlifeMotionTrack(actor.position, actor.heading, actor) : undefined,
                         marineTail: actor.marine ? marineTailRig(model as Group, actor.species) : undefined,
                         resting: mixer ? animalRestRig(model as Group, root, actor.species) : undefined,
                         legs: mixer || coastal || rabbit || actor.marine || id.startsWith('gull-') ? [] : legPoses(model as Group),
@@ -207,10 +216,17 @@ export class WildlifeLayer {
     private canonical?: WildlifeState;
     private animationTime = 0;
     private canonicalPending = false;
+    private lastCanonicalTime = 0;
     private targetPosition = new Vector3();
-    useCanonical(snapshot?: WildlifeState) {
+    useCanonical(snapshot?: WildlifeState, updateIntervalSeconds = .5) {
         if (snapshot === this.canonical) return;
-        if (snapshot) restoreWildlife(this.population, snapshot.actors, this.animationTime, snapshot.version === 1);
+        if (snapshot) {
+            const duration = Math.max(updateIntervalSeconds, this.animationTime - this.lastCanonicalTime);
+            restoreWildlife(this.population, snapshot.actors, this.animationTime, snapshot.version === 1);
+            for (const record of this.records) record.motion?.retarget(
+                record.actor.position, record.actor.heading, duration, !this.canonical, record.actor);
+            this.lastCanonicalTime = this.animationTime;
+        }
         this.canonical = snapshot;
         this.canonicalPending = true;
         if (!snapshot) this.records.forEach(record => { record.presentedPosition = undefined; });
@@ -252,14 +268,21 @@ export class WildlifeLayer {
             const floatAmount = actor.state === 'back_float'
                 ? Math.max(0, Math.min(1, (actor.wait - remainingFloat) / 2, remainingFloat / 2)) : 0;
             this.targetPosition.set(actor.position.x, actor.position.y, actor.position.z);
-            if (this.canonical) {
+            if (record.motion) {
+                if (this.canonical) record.motion.advance(delta, running, this.canonicalPending);
+                else record.motion.sample(actor.position, actor.heading, actor);
+                root.position.copy(record.motion.position);
+                if (!airborne)
+                    root.position.y = this.population.habitats.surface.surfaceHeightAt(root.position.x, root.position.z);
+            } else if (this.canonical) {
                 // Smooth presentation between tick poses without moving the authoritative animal.
                 record.presentedPosition ??= this.targetPosition.clone();
                 const blend = !running ? (this.canonicalPending ? 1 : 0) : 1 - Math.exp(-12 * delta);
                 record.presentedPosition.lerp(this.targetPosition, blend);
                 root.position.copy(record.presentedPosition);
             } else root.position.copy(this.targetPosition);
-            root.rotation.set(0, actor.heading + look, actor.bank);
+            const flight = record.motion?.flight ?? actor;
+            root.rotation.set(0, (record.motion?.heading ?? actor.heading) + look, flight.bank);
             if (pose) record.body.rotation.x = pose.pitch;
             if (actor.variant.movement === 'ground') {
                 const gradient = terrainGradientAt(this.population.world, actor.position.x, actor.position.z);
@@ -309,7 +332,7 @@ export class WildlifeLayer {
             if (!root.visible || camera && root.position.distanceToSquared(this.cameraPoint) > 200 * 200)
                 continue;
             if (record.wings) {
-                const pose = gullWingMotion(this.population.time, actor.phase, false, actor.flapEffort);
+                const pose = gullWingMotion(this.population.time, actor.phase, false, flight.flapEffort);
                 poseGullWings(record.wings, pose.flap);
             }
             if (record.foldedWings) {
@@ -318,7 +341,7 @@ export class WildlifeLayer {
                     gullHeadLook(this.population.time, actor.phase), pose.lower);
             }
             if (airborne)
-                root.rotation.x = -Math.atan2(actor.climbRate, actor.speed) * .3;
+                root.rotation.x = -Math.atan2(flight.climbRate, actor.speed) * .3;
             if (record.rabbit) {
                 poseRabbit(record.rabbit, { time: this.population.time, phase: actor.phase,
                     position: actor.position, heading: actor.heading, hop: actor.hop,
@@ -333,7 +356,13 @@ export class WildlifeLayer {
             else if (record.mixer) {
                 if (record.floating) clearOtterFloat(record.floating);
                 if (record.resting) clearAnimalRest(record.resting);
-                record.mixer.setTime(moving ? this.population.time * gaitSpeed + actor.phase : 0);
+                if (record.idleAction) {
+                    record.walkAction!.enabled = moving;
+                    record.idleAction.enabled = !moving;
+                }
+                const gaitTime = record.motion ? actor.phase + record.motion.distance
+                    : this.population.time * gaitSpeed + actor.phase;
+                record.mixer.setTime(moving ? gaitTime : 0);
                 if (record.resting && !moving)
                     poseAnimalRest(record.resting, this.population.time, actor.phase);
                 if (record.floating) {
@@ -351,7 +380,9 @@ export class WildlifeLayer {
                 for (const leg of record.legs) {
                     leg.bone.quaternion.copy(leg.rest);
                     if (moving)
-                        leg.bone.quaternion.premultiply(new Quaternion().setFromAxisAngle(leg.axis, Math.sin(this.population.time * 5 * Math.max(.4, gaitSpeed) + actor.phase + leg.phase) * .22));
+                        leg.bone.quaternion.premultiply(new Quaternion().setFromAxisAngle(leg.axis,
+                            Math.sin((record.motion?.distance ?? this.population.time * Math.max(.4, gaitSpeed))
+                                * 5 + actor.phase + leg.phase) * .22));
                 }
         }
         this.canonicalPending = false;

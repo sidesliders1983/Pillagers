@@ -28,6 +28,7 @@ export function worldPoint(bounds: Bounds2, point: MapPoint): Point {
 }
 
 const palette = [[40, 83, 96], [101, 132, 87], [194, 175, 126], [104, 98, 76], [130, 141, 143]];
+const unknownColor = [25, 37, 41, 255];
 
 /** Takes geographic preview and the observing clan's mask only; no enemy/site/entity input. */
 export class IslandMapProjection {
@@ -51,16 +52,20 @@ export class IslandMapProjection {
         this.setKnowledge(knowledge);
     }
     setKnowledge(knowledge?: DiscoveryView): boolean {
-        const signature = knowledge ? knowledge.worldId + ':' + knowledge.explored + ':' + knowledge.visible : 'all-known';
+        const signature = knowledge ? knowledge.worldId + ':' + knowledge.explored + ':' + knowledge.visible : 'unavailable';
         if (signature === this.signature) return false;
         this.signature = signature;
         this.knowledge = knowledge;
         const { columns, rows, bounds } = this.preview;
         for (let row = 0; row < rows; row++) for (let col = 0; col < columns; col++) {
             const point = worldPoint(bounds, { x: (col + .5) / columns, y: (row + .5) / rows });
-            const visibility = knowledge ? discoveryAt(knowledge, point.x, point.z) : 'visible';
-            const shade = visibility === 'visible' ? 1 : visibility === 'mapped' ? .7 : .32;
+            const visibility = knowledge ? discoveryAt(knowledge, point.x, point.z) : 'unknown';
             const index = (row * columns + col) * 4;
+            if (visibility === 'unknown') {
+                this.pixels.set(unknownColor, index);
+                continue;
+            }
+            const shade = visibility === 'visible' ? 1 : .7;
             for (let channel = 0; channel < 3; channel++) this.pixels[index + channel] = this.base[index + channel] * shade;
             this.pixels[index + 3] = 255;
         }
@@ -70,7 +75,7 @@ export class IslandMapProjection {
         if (![point.x, point.y].every(Number.isFinite) || point.x < 0 || point.y < 0 || point.x >= 1 || point.y >= 1)
             return null;
         const destination = worldPoint(this.preview.bounds, point);
-        return this.knowledge && discoveryAt(this.knowledge, destination.x, destination.z) === 'unknown' ? null : destination;
+        return !this.knowledge || discoveryAt(this.knowledge, destination.x, destination.z) === 'unknown' ? null : destination;
     }
     get bytes() { return this.base.byteLength + this.pixels.byteLength + this.preview.heights.byteLength + this.preview.ground.byteLength; }
 }

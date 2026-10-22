@@ -23,6 +23,7 @@
   {
     "id": "moose",
     "file": "Elk.glb",
+    "retargetWalk": "Lynx-animated.glb",
     "reference": "shoulder-height",
     "metres": 1.9,
     "sourceDimension": 1.24

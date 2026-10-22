@@ -1,0 +1,26 @@
+{
+  "base": "31e54ef0c4425ccd1328cf35acdbb56febe71f2d",
+  "normalization": "UTF-8 source with LF line endings",
+  "rows": [
+    {
+      "path": "src/characters/BodyCoverage.ts",
+      "baseSha256": "01227bd89b0b63545ec7f9023cc214bc5e8f7da6f25569e02a850449923d7015",
+      "correctedSha256": "e60709eba7e967583767b5106ca536e223daedc5be63a36de087303849a2ee81"
+    },
+    {
+      "path": "src/characters/PreparedNativeOutfit.ts",
+      "baseSha256": "bb8275b2f429abb1a6a04ed4d0d32908e0c1c3805bd0d67343e235ff7b8d4b50",
+      "correctedSha256": "2f512024485aa5309193fd292d5711538bb3cc71ee41e1d60e8a6c30a853ded3"
+    },
+    {
+      "path": "src/characters/MeshyHuman.ts",
+      "baseSha256": "333e517ba48c4a9c98efe1392fb190745b1827f40817b6632db74fa0374c78de",
+      "correctedSha256": "333e517ba48c4a9c98efe1392fb190745b1827f40817b6632db74fa0374c78de"
+    },
+    {
+      "path": "src/fjord-play/FjordWardrobe.ts",
+      "baseSha256": "16ad20928438030e2ea65f59d1a9151944a637651fdc452e3ce66f0eaa1bfea2",
+      "correctedSha256": "16ad20928438030e2ea65f59d1a9151944a637651fdc452e3ce66f0eaa1bfea2"
+    }
+  ]
+}

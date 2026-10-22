@@ -71,8 +71,8 @@ inconsistent scales, including very small skinned bear/wolf transforms. The
 pipeline measures posed bounds, applies a single authored metre-scale wrapper,
 keeps original UVs and skinning, compresses colour maps to 512 px WebP, and removes
 normal, roughness/metallic, occlusion and emissive maps. Emissive factors are reset
-to zero. All twelve runtime GLBs together are about 1.60 MB;
-individual exports are below 160 KB. The publication manifest pins original and
+to zero. All fourteen runtime GLBs together remain below 2 MB;
+individual exports are below 200 KB. The publication manifest pins original and
 runtime SHA-256 hashes and records every authoring operation.
 
 Canonical shoulder/body reference heights in metres: bear 1.15, fox 0.40, wolf
@@ -150,10 +150,23 @@ interpretation of the reference, not motion capture. The pair stays within a
 12 m roaming radius, detects people within 16 m, and shares the existing six-second
 alert behavior. It adds no hunting, resource production or Core entities.
 
-The moose retains a small procedural leg swing because it has no authored clip. Idle animals make a subtle orientation
-change; hauled-out seals rest; grounded gulls turn and stretch their folded wings. Swimmers bob and glide;
-flying gulls alternate ascent-driven wingbeats and gliding. These are ambient v0.1 motions,
-not authored locomotion, hunting or flight takeoff/landing animations.
+The supplied `Elk.glb` contains a 35-joint rig but no animation. Its runtime
+derivative now retargets the actual one-second `Lynx-animated.glb` walk. World-space
+rotation deltas are transferred onto the original moose bind pose, retaining its
+own skin weights, leg lengths, body proportions and antlers. Extra shoulder, neck
+and hoof joints share the corresponding donor motion. Vertical root correction
+keeps the lowest hoof on the ground, with dense contact samples across support
+changes; horizontal motion remains under the world controller. Both source
+hashes and the retarget operation are recorded in the publication manifest.
+
+Moose rest uses a separate neutral `Idle` clip with all four hooves down, plus
+small head and breathing movements. It switches back to `Walk` when roaming or
+fleeing, without retaining the rest overlay. This is transferred feline motion,
+not a separately authored moose gait. See [moose retarget and wildlife audit](qa/wildlife-213/moose-001/README.md).
+
+Hauled-out seals rest; grounded gulls turn and stretch their folded wings.
+Swimmers bob and glide; flying gulls alternate ascent-driven wingbeats and gliding.
+These remain ambient motions without hunting or flight takeoff/landing animations.
 
 Land mammals also react to nearby people: bear/wolf/reindeer detect people at
 42–45 m, moose/lynx at 35–38 m and fox at 28 m. Otters and puffins have shorter
@@ -180,6 +193,20 @@ in unknown terrain. Frustum culling skips hidden actors, and animations more tha
 200 m from the camera are not evaluated. Camera position does not influence
 placement or motion decisions.
 
+Confirmed land/shore and airborne positions are interpolated over the campaign's actual
+snapshot cadence, including coalesced updates, rather than repeatedly easing into
+each tick position and stopping. Heading follows the shortest turn. Land Meshy
+clip time and the fallback moose leg phase advance with horizontal metres actually
+displayed, so changing from roaming to fleeing does not multiply the whole elapsed
+clock by a new speed or leave fast feet cycling over a stationary body. Pauses
+retain the interpolated pose; loading snaps without adding teleport distance to
+the gait. Flying gulls retain their interpolated altitude; heading, bank, pitch
+and ascent-driven wing effort transition across the same snapshot interval. This
+avoids a rush-and-stall every 500 ms and abrupt changes in wingbeat amplitude.
+No flight extrapolation or additional simulation decisions run in render frames.
+These are presentation changes: canonical flee speeds, shyness,
+habitats, sighting positions and saved wildlife remain unchanged.
+
 In the development server open `/fjord-play?debugWildlife` and inspect
 `JSON.parse(document.querySelector('canvas[data-wildlife]').dataset.wildlife)`.
 It reports stable IDs, species/variant, habitat, state, position, anchor, radius,
@@ -195,8 +222,10 @@ placement and 60-second roaming checks. It writes inspection records under
 `tests/wildlife.test.mjs` checks deterministic population counts, seed variation,
 land/water/alpine/flight constraints over motion, pause behavior, full-segment
 obstacle checks, missing habitats, immutable geography, compact asset hashes,
-canonical dimensions, all seven retained locomotion clips, stationary hip root motion and the repaired
-reindeer hind chain. Render
+canonical dimensions, seven retained source locomotion clips, the retargeted
+moose walk and neutral rest, stationary horizontal root motion and the repaired
+reindeer hind chain. Moose checks sample all four strides, original segment
+lengths, ground contact between baked frames, compact skin bounds and loop closure. Render
 resource tests cover shared geometry/materials, independent skeletons, discovery,
 repeated disposal and cleanup after an asset-load failure. The build's public asset
 validator verifies all wildlife runtime manifest entries, including tracked files
@@ -211,3 +240,6 @@ Gull and distribution evidence is in [revision 002](qa/wildlife-213/revision-002
 Current coastal animal motion and placement evidence is in [revision 003](qa/wildlife-213/revision-003/README.md).
 
 Rabbit motion and placement evidence is in [rabbit revision 001](qa/wildlife-213/rabbit-001/README.md).
+
+Airborne snapshot interpolation and immediate house residents are covered in
+[the cadence regression report](qa/wildlife-home-regressions/revision-002.md).

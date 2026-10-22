@@ -5,6 +5,7 @@ import {
 import { seededRandom } from '../characters/seededRandom';
 import { assertIslandClanWorld, type IslandClanLandscape } from './IslandClans';
 import { applySpatialCommand, stepSpatialExpeditions, requireSpatialAdvance, validateSpatialExpeditions } from './SpatialExpeditions';
+import { applyLongshipCommand, type LongshipCommand } from './LongshipTransport';
 import type { PhysicalExpeditionContext, SpatialExpeditionCommand } from './SpatialExpeditions';
 export { exploreOffer, startExpeditionOffer, inspectSpatialExpeditions } from './SpatialExpeditions';
 export { islandMissionOffer, inspectIslandMissions } from './IslandMissions';
@@ -187,7 +188,7 @@ export function createSettlement(seed:number, overrides:Partial<PrototypeConfig>
     }
     initializeSocial(state,socialOverrides);validateState(state); return state;
 }
-export type SimulationCommand = IslandMissionCommand | SpatialExpeditionCommand | CampfireCommand | ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
+export type SimulationCommand = LongshipCommand | IslandMissionCommand | SpatialExpeditionCommand | CampfireCommand | ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
 function integer(value: number, label: string) {
     if (!Number.isSafeInteger(value) || value < 0) throw new Error(`${label} must be a nonnegative safe integer`);
 }
@@ -197,6 +198,12 @@ function emit(state: SimulationState, type: string, personaId?: string, details?
 }
 export function applyCommand(input: SimulationState, command: SimulationCommand, context?: PhysicalExpeditionContext): SimulationState {
     validateState(input);
+    if (command.type === 'BoardLongship' || command.type === 'DisembarkLongship' || command.type === 'LoadLongshipFood') {
+        const state = structuredClone(input);
+        applyLongshipCommand(state, command, context);
+        validateState(state);
+        return state;
+    }
     if (command.type === 'DispatchIslandMission') {
         const state = structuredClone(input);
         dispatchIslandMission(state, command, context);

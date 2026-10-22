@@ -8,6 +8,7 @@ import { characterAsset, characterAssetURL } from './CharacterAssets';
 import { meshyHumanAssetIdentity } from './MeshyHumanAssetIdentity';
 
 export interface PortraitRequest {
+    residentId?: string;
     dna: CharacterDNA;
     face: FacialIdentityV1;
     presentation?: Partial<CharacterPresentation>;
@@ -34,7 +35,7 @@ export class CharacterPortraits {
     private revision = 0;
     private disposed = false;
 
-    constructor(private render?: (input: PortraitRequest) => Promise<string>, private capacity = 24) {
+    constructor(private render?: (input: PortraitRequest) => Promise<string | undefined>, private capacity = 24) {
         if (!Number.isInteger(capacity) || capacity < 1 || capacity > 48)
             throw new Error('Portrait cache capacity must be between 1 and 48 images.');
     }
@@ -54,7 +55,7 @@ export class CharacterPortraits {
                     image = await this.renderer.render(frozen);
                 }
             }
-            if (this.disposed || signal?.aborted) return undefined;
+            if (!image || this.disposed || signal?.aborted) return undefined;
             this.images.delete(key);
             this.images.set(key, image);
             while (this.images.size > this.capacity) this.images.delete(this.images.keys().next().value!);

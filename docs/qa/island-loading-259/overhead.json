@@ -1,0 +1,25 @@
+{
+  "sourceSha256": "3c0e340261e88d282cca83ef4649c72741fcc8b040bf1175a6aad99a0df630e1",
+  "platform": "Node v24.19.0, win32/x64; no browser, layout, assets or GPU",
+  "workload": "2000 synthetic attempts, 180 completed batches and 15 status reads each; not island load duration",
+  "baseline": {
+    "p50Ms": 0.006499999999959982,
+    "p95Ms": 0.019800000000032014,
+    "p99Ms": 0.043800000000032924
+  },
+  "instrumented": {
+    "p50Ms": 0.1592000000000553,
+    "p95Ms": 0.3569999999999709,
+    "p99Ms": 0.5454999999999472
+  },
+  "approximateRetainedHeapDeltaBytes": 43360,
+  "boundedReportBytes": 11372,
+  "timelineEntries": 128,
+  "addedRenderResources": {
+    "geometries": 0,
+    "textures": 0,
+    "programs": 0,
+    "drawCalls": 0
+  },
+  "limitations": "Synthetic CPU-only observation overhead. GC deltas are noisy; browser peak memory, DOM cost and real load latency remain unmeasured."
+}

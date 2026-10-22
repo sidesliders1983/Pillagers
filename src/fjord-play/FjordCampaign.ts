@@ -14,7 +14,7 @@ import { generateWorld } from '../world-generation/GenerateWorld';
 import { parseWorld } from '../world-generation/WorldSave';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
-import { createFjordLayout, fjordPlotFits, geographyIdentity, projectFjordSettlement, settlementCampfire } from './FjordProjection';
+import { createFjordLayout, fjordPlotFits, geographyIdentity, longshipBerth, projectFjordSettlement, settlementCampfire } from './FjordProjection';
 import type { FjordLayout, FjordTransform } from './FjordProjection';
 export const sharedCampaignKey = 'pillagers.gameplay-lab.v1';
 export const fjordCampaignKey = 'pillagers.fjord-play.v1';
@@ -101,7 +101,8 @@ export class FjordCampaign {
                     minZ: fire.transform.z-5, maxZ: fire.transform.z+5 }], rivalFire ? [{
                         minX: rivalFire.x-5, maxX: rivalFire.x+5, minZ: rivalFire.z-5, maxZ: rivalFire.z+5
                     }] : []);
-        });
+        }, () => Object.fromEntries(Object.keys(this.session.readSnapshot().landing?.longships ?? {})
+            .map(id => [id, longshipBerth(this.layout.mooring)])));
     }
     enableDiscovery(): void {
         if (!campaignIslandPlan(this.blueprint)) throw new Error('Discovery requires a physical island campaign.');

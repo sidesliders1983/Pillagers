@@ -1,0 +1,49 @@
+{
+  "label": "before",
+  "results": [
+    {
+      "exploredFraction": 0.2,
+      "constructionMs": 127.90509999999995,
+      "unchanged1000Ms": 1.7876999999999725,
+      "changedMedianMs": 65.76715000000002,
+      "changedMaximumMs": 75.23030000000006,
+      "inspect": {
+        "active": true,
+        "cellSize": 8,
+        "exploredCells": 2000,
+        "visibleCells": 0,
+        "unknownCells": 8000,
+        "maskBytes": 2500,
+        "textureBytes": 646416,
+        "drawCalls": 1,
+        "triangles": 80008,
+        "nativeMaterial": true,
+        "fadeSeconds": 0.8,
+        "transitioning": false,
+        "geometryBytes": 1288388
+      }
+    },
+    {
+      "exploredFraction": 0.9,
+      "constructionMs": 213.3615000000002,
+      "unchanged1000Ms": 1.0402999999998883,
+      "changedMedianMs": 187.66785000000004,
+      "changedMaximumMs": 203.85209999999984,
+      "inspect": {
+        "active": true,
+        "cellSize": 8,
+        "exploredCells": 9000,
+        "visibleCells": 0,
+        "unknownCells": 1000,
+        "maskBytes": 2500,
+        "textureBytes": 646416,
+        "drawCalls": 1,
+        "triangles": 80008,
+        "nativeMaterial": true,
+        "fadeSeconds": 0.8,
+        "transitioning": false,
+        "geometryBytes": 1288388
+      }
+    }
+  ]
+}

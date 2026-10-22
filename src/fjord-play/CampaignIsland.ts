@@ -2,7 +2,7 @@ import { measureGeneration, type GenerationObserver } from '../world-generation/
 import { siteRoutes } from '../world-generation/SiteNavigation';
 import { harborDepth } from '../world-generation/HarborClearance';
 import { fitsBuildingFoundation } from '../world/BuildingPlot';
-import { generateWorld } from '../world-generation/GenerateWorld';
+import { generateWorld, takeNaturalIslandTerrain } from '../world-generation/GenerateWorld';
 import { islandTerrain } from '../world-generation/IslandShape';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
 import { planSettlement, gradeSettlementFoundations, footprintBounds } from '../world-generation/PlanSettlement';
@@ -36,11 +36,12 @@ export interface CampaignIslandPlan {
     berth: NonNullable<WorldBlueprint['siteSelection']>['harborBerth'];
 }
 // Each ordered pool is immutable: changing its length remaps the campaign seed.
-const pools = {
+export const campaignIslandPools = {
     'island-pool-v1': [18, 7],
     'island-pool-v2': [18, 7],
     'island-pool-v3': [18, 7, 15, 79, 88, 101, 112, 168, 195, 227],
 } as const;
+const pools = campaignIslandPools;
 const plans = new WeakMap<WorldBlueprint, CampaignIslandPlan>();
 // Bounded cache: world geometry is shared, while every campaign owns its layout and Core.
 const worlds = new Map<string, WorldBlueprint>();
@@ -65,8 +66,8 @@ export function islandRecipe(campaignSeed: number, version: IslandRecipeVersion 
         seed: pool[hash % pool.length] };
 }
 
-/** A pinned campaign recipe prepares the existing generator's canonical surface.
- * Only local foundations change. No second biome classifier or saved heightfield is introduced. */
+/** Synchronous generator for authoring, headless contracts and already-adopted browser results.
+ * Fjord Play loads this exact final proposal from the prepared catalog before constructing Core. */
 export function createCampaignIsland(campaignSeed: number, saved?: IslandRecipe, observe?: GenerationObserver): WorldBlueprint {
     const recipe = islandRecipe(campaignSeed, saved?.version);
     if (saved && (saved.version !== recipe.version || saved.seed !== recipe.seed ||
@@ -79,7 +80,8 @@ export function createCampaignIsland(campaignSeed: number, saved?: IslandRecipe,
         return cached;
     }
     const source = generateWorld({ seed: recipe.seed, preset: 'island',
-        generatorVersion: recipe.generatorVersion, conifers: 'ez-tree', environment: { version: 1 } }, observe);
+        generatorVersion: recipe.generatorVersion, conifers: 'ez-tree', environment: { version: 1 } }, observe,
+        { retainNaturalIslandTerrain: true });
     const world = prepareCampaignIsland(source, recipe.version, observe);
     cacheWorld(cacheKey, world);
     return world;
@@ -102,8 +104,10 @@ export function prepareCampaignIsland(source: WorldBlueprint, version: IslandRec
         throw new Error('The curated island no longer passes its geographical validation.');
     // The Lab's six demonstration buildings are not campaign houses. Start with the
     // same natural heightfield, retaining the rival's reserved foundations only.
+    const retainedTerrain = takeNaturalIslandTerrain(source);
     const natural = { ...source, terrain: { ...source.terrain,
-        heights: measureGeneration('campaign-natural-terrain', () => islandTerrain(source.config, source.waterLevel), observe).heights } };
+        heights: measureGeneration('campaign-natural-terrain', () => retainedTerrain?.heights
+            ?? islandTerrain(source.config, source.waterLevel).heights, observe) } };
     const terrain = gradeSettlementFoundations(natural, source.rivalSite.foundations);
     const landscape = { ...natural, terrain };
     const bounds = {
