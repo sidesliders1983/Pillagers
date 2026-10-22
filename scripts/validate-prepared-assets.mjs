@@ -30,7 +30,7 @@ export async function validatePreparedAssets() {
     };
     for (const entry of islands.entries) {
         const bytes = await unpack(entry, entry.jsonBytes,
-            /^\/game-assets\/islands\/island-pool-v[123]-\d+-[a-f0-9]{12}\.json\.gz$/);
+            /^\/game-assets\/islands\/island-pool-v[123]-\d+-[a-f0-9]{12}\.json\.bin$/);
         assert.equal(sha256(bytes), entry.canonicalSha256);
         const { world, plan } = JSON.parse(bytes.toString('utf8'));
         assert.deepEqual(plan.recipe, { version: entry.version, generatorVersion: islands.generatorVersion, seed: entry.seed });
@@ -49,7 +49,7 @@ export async function validatePreparedAssets() {
     'World character sources changed. Run pnpm assets:character-sources.');
     for (const entry of characters.entries) {
         const bytes = await unpack(entry, entry.originalBytes,
-            /^\/game-assets\/character-sources\/[a-f0-9]{20}\.gz$/);
+            /^\/game-assets\/character-sources\/[a-f0-9]{20}\.bin$/);
         assert.equal(sha256(bytes), entry.originalSha256, entry.originalPath + ' exact original bytes');
         assert.deepEqual(bytes, await readFile('public' + entry.originalPath), entry.originalPath);
     }

@@ -1,6 +1,6 @@
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { gzipSync } from 'node:zlib';
+import { gzipSync, gunzipSync } from 'node:zlib';
 import assert from 'node:assert/strict';
 import { loadTypeScript } from './load-typescript.mjs';
 import { campaignIslandInputs } from './campaign-island-inputs.mjs';
@@ -8,6 +8,12 @@ import { campaignIslandInputs } from './campaign-island-inputs.mjs';
 const { campaignIslandPools, currentIslandVersion, islandRecipe, createCampaignIsland, campaignIslandPlan } =
     loadTypeScript(new URL('../src/fjord-play/CampaignIsland.ts', import.meta.url));
 const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
+// Repackage verified existing canonical data when only the transport format changes.
+// Changed generator inputs must still run the generator rather than reuse stale worlds.
+const existing = process.argv.includes('--repack')
+    ? loadTypeScript(new URL('../src/fjord-play/BakedIslandCatalog.ts', import.meta.url))
+        .campaignIslandCatalog : undefined;
+if (existing) assert.deepEqual(existing.inputs, campaignIslandInputs(), 'Cannot repackage stale generator inputs.');
 const directory = 'public/game-assets/islands';
 mkdirSync(directory, { recursive: true });
 const entries = [];
@@ -17,15 +23,26 @@ for (const version of versions) for (const geographySeed of campaignIslandPools[
     let seed = 0;
     while (islandRecipe(seed, version).seed !== geographySeed) seed++;
     const started = performance.now();
-    const world = createCampaignIsland(seed, islandRecipe(seed, version));
-    const plan = campaignIslandPlan(world);
+    const previous = existing?.entries.find(value => value.version === version && value.seed === geographySeed);
+    let world, plan;
+    if (previous) {
+        const compressed = readFileSync('public' + previous.path);
+        assert.equal(sha256(compressed), previous.sha256);
+        const json = gunzipSync(compressed, { maxOutputLength: previous.jsonBytes });
+        assert.equal(sha256(json), previous.canonicalSha256);
+        ({ world, plan } = JSON.parse(json.toString('utf8')));
+    } else {
+        world = createCampaignIsland(seed, islandRecipe(seed, version));
+        plan = campaignIslandPlan(world);
+    }
     assert.equal(world.validation.accepted, true);
     assert.ok(plan.plots.length >= 10 && plan.maximumAdjustment <= .600001);
     assert.equal(plan.recipe.seed, geographySeed);
     const json = Buffer.from(JSON.stringify({ world, plan }));
     const compressed = gzipSync(json, { level: 9 });
     const hash = sha256(compressed);
-    const path = `/game-assets/islands/${version}-${geographySeed}-${hash.slice(0, 12)}.json.gz`;
+    // An opaque extension avoids static hosts automatically serving gzip as Content-Encoding.
+    const path = `/game-assets/islands/${version}-${geographySeed}-${hash.slice(0, 12)}.json.bin`;
     writeFileSync('public' + path, compressed);
     entries.push({ version, seed: geographySeed, path, sha256: hash, bytes: compressed.length,
         jsonBytes: json.length, canonicalSha256: sha256(json) });

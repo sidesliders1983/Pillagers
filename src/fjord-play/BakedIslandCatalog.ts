@@ -44,7 +44,7 @@ export const campaignIslandCatalog = {
         {
             "version": "island-pool-v3",
             "seed": 18,
-            "path": "/game-assets/islands/island-pool-v3-18-c105fc26372b.json.gz",
+            "path": "/game-assets/islands/island-pool-v3-18-c105fc26372b.json.bin",
             "sha256": "c105fc26372b3d12a4946e40a0f4048141d0f92e8f30a557180ed641d2dd30e3",
             "bytes": 2668137,
             "jsonBytes": 16522098,
@@ -53,7 +53,7 @@ export const campaignIslandCatalog = {
         {
             "version": "island-pool-v3",
             "seed": 7,
-            "path": "/game-assets/islands/island-pool-v3-7-794faee6aca8.json.gz",
+            "path": "/game-assets/islands/island-pool-v3-7-794faee6aca8.json.bin",
             "sha256": "794faee6aca8838b3338b4eda13ef7e0c84cad34f75e69b866e11b08f0c39f39",
             "bytes": 2468301,
             "jsonBytes": 16501586,
@@ -62,7 +62,7 @@ export const campaignIslandCatalog = {
         {
             "version": "island-pool-v3",
             "seed": 15,
-            "path": "/game-assets/islands/island-pool-v3-15-7139bc1c465a.json.gz",
+            "path": "/game-assets/islands/island-pool-v3-15-7139bc1c465a.json.bin",
             "sha256": "7139bc1c465a9e99b38d120e680be5d02b7f93d40e7bc914d94fe7e5534158f4",
             "bytes": 2822309,
             "jsonBytes": 16612380,
@@ -71,7 +71,7 @@ export const campaignIslandCatalog = {
         {
             "version": "island-pool-v3",
             "seed": 79,
-            "path": "/game-assets/islands/island-pool-v3-79-8eda20c1b293.json.gz",
+            "path": "/game-assets/islands/island-pool-v3-79-8eda20c1b293.json.bin",
             "sha256": "8eda20c1b2934c5cc2e4e33d1f96ad91c8515a222ff29a1b23c550abe434b495",
             "bytes": 2628177,
             "jsonBytes": 16495681,
@@ -80,7 +80,7 @@ export const campaignIslandCatalog = {
         {
             "version": "island-pool-v3",
             "seed": 88,
-            "path": "/game-assets/islands/island-pool-v3-88-e8d8e41de2ac.json.gz",
+            "path": "/game-assets/islands/island-pool-v3-88-e8d8e41de2ac.json.bin",
             "sha256": "e8d8e41de2ac17435ef0b5dc7d9d1199aba9ff675960a9cc170be60e4772d2f4",
             "bytes": 2728807,
             "jsonBytes": 16561130,
@@ -89,7 +89,7 @@ export const campaignIslandCatalog = {
         {
             "version": "island-pool-v3",
             "seed": 101,
-            "path": "/game-assets/islands/island-pool-v3-101-cbf497fab5fc.json.gz",
+            "path": "/game-assets/islands/island-pool-v3-101-cbf497fab5fc.json.bin",
             "sha256": "cbf497fab5fc34e41e647b4d2fdb1dcea07c7b0f2fdcc444c7cce12c07d36fc1",
             "bytes": 2695244,
             "jsonBytes": 16566104,
@@ -98,7 +98,7 @@ export const campaignIslandCatalog = {
         {
             "version": "island-pool-v3",
             "seed": 112,
-            "path": "/game-assets/islands/island-pool-v3-112-2837ddb94ac1.json.gz",
+            "path": "/game-assets/islands/island-pool-v3-112-2837ddb94ac1.json.bin",
             "sha256": "2837ddb94ac12fd5ebcf8cc4567f9b48e9ffb5ecef0d37e66c3781a6c1cc1900",
             "bytes": 2647936,
             "jsonBytes": 16520646,
@@ -107,7 +107,7 @@ export const campaignIslandCatalog = {
         {
             "version": "island-pool-v3",
             "seed": 168,
-            "path": "/game-assets/islands/island-pool-v3-168-4d7db82c160c.json.gz",
+            "path": "/game-assets/islands/island-pool-v3-168-4d7db82c160c.json.bin",
             "sha256": "4d7db82c160cde1be150ea3347afe876a71ceedaa78f9827932de982090cc8de",
             "bytes": 2649976,
             "jsonBytes": 16540277,
@@ -116,7 +116,7 @@ export const campaignIslandCatalog = {
         {
             "version": "island-pool-v3",
             "seed": 195,
-            "path": "/game-assets/islands/island-pool-v3-195-8acee4c35805.json.gz",
+            "path": "/game-assets/islands/island-pool-v3-195-8acee4c35805.json.bin",
             "sha256": "8acee4c358053b8a237c8316550a9f453a7a31c56c8720bb5b37a2125fe94869",
             "bytes": 2785945,
             "jsonBytes": 16569670,
@@ -125,7 +125,7 @@ export const campaignIslandCatalog = {
         {
             "version": "island-pool-v3",
             "seed": 227,
-            "path": "/game-assets/islands/island-pool-v3-227-d835cd8694ac.json.gz",
+            "path": "/game-assets/islands/island-pool-v3-227-d835cd8694ac.json.bin",
             "sha256": "d835cd8694acabee4ac9171b2444339a6b1bc152e89584dd83e0088a1be469c9",
             "bytes": 2525272,
             "jsonBytes": 16468430,
@@ -134,7 +134,7 @@ export const campaignIslandCatalog = {
         {
             "version": "island-pool-v1",
             "seed": 18,
-            "path": "/game-assets/islands/island-pool-v1-18-56abf4b0f058.json.gz",
+            "path": "/game-assets/islands/island-pool-v1-18-56abf4b0f058.json.bin",
             "sha256": "56abf4b0f058b1c1fdfd7301b4d0171deda213a6236780c60f992e7f7a8dce6c",
             "bytes": 2667992,
             "jsonBytes": 16522048,
@@ -143,7 +143,7 @@ export const campaignIslandCatalog = {
         {
             "version": "island-pool-v1",
             "seed": 7,
-            "path": "/game-assets/islands/island-pool-v1-7-b8a1f5444187.json.gz",
+            "path": "/game-assets/islands/island-pool-v1-7-b8a1f5444187.json.bin",
             "sha256": "b8a1f5444187113b825fe1ead69ec5da49b65451bae5d7a6e43d300fd7b67c39",
             "bytes": 2468214,
             "jsonBytes": 16501806,
@@ -152,7 +152,7 @@ export const campaignIslandCatalog = {
         {
             "version": "island-pool-v2",
             "seed": 18,
-            "path": "/game-assets/islands/island-pool-v2-18-44f6636034a1.json.gz",
+            "path": "/game-assets/islands/island-pool-v2-18-44f6636034a1.json.bin",
             "sha256": "44f6636034a1799935994963168bc12cf701ca26a37fa360d740e1d6f7b99413",
             "bytes": 2668139,
             "jsonBytes": 16522098,
@@ -161,7 +161,7 @@ export const campaignIslandCatalog = {
         {
             "version": "island-pool-v2",
             "seed": 7,
-            "path": "/game-assets/islands/island-pool-v2-7-1d8de09d7199.json.gz",
+            "path": "/game-assets/islands/island-pool-v2-7-1d8de09d7199.json.bin",
             "sha256": "1d8de09d7199398386b78170ef79849d6f8e9d62c557e9ac71ff8ae7e69e84b5",
             "bytes": 2468303,
             "jsonBytes": 16501586,

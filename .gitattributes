@@ -48,6 +48,6 @@ scripts/prepare-manual-beards.mjs text eol=lf
 docs/qa/island-loading-259/iphone-follow-up/*.json -text
 
 # Prepared runtime bytes and physical-device measurements retain exact identities.
-public/game-assets/islands/*.gz -text
-public/game-assets/character-sources/*.gz -text
+public/game-assets/islands/*.bin -text
+public/game-assets/character-sources/*.bin -text
 docs/qa/island-loading-259/prepared-campaigns/*.json -text

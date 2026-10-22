@@ -6,7 +6,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/candidates/meshy-additional-005/high-shoes.binding.json",
             "originalSha256": "20b04401fb107b2b8ac6590ef6e8234347a1bbb577e1ac70d78f9c2e07ae85ee",
             "originalBytes": 3201,
-            "path": "/game-assets/character-sources/a7d1a5af21faf0c3d587.gz",
+            "path": "/game-assets/character-sources/a7d1a5af21faf0c3d587.bin",
             "sha256": "a7d1a5af21faf0c3d587cf6f2e2934a47c06496a72e25040f69ea7ef89fb04ed",
             "bytes": 1068
         },
@@ -14,7 +14,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/candidates/meshy-additional-005/high-shoes.glb",
             "originalSha256": "4b5250ee6b1a06b6f148a21f7428ea570632ab88f636c3a458d0904441d4d688",
             "originalBytes": 2718016,
-            "path": "/game-assets/character-sources/0b3f3a2fe623898ccf64.gz",
+            "path": "/game-assets/character-sources/0b3f3a2fe623898ccf64.bin",
             "sha256": "0b3f3a2fe623898ccf64d61767ab237eeee8a523e53c7be32dac327a0de07b99",
             "bytes": 2084889
         },
@@ -22,7 +22,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/candidates/meshy-additional-005/long-skirt.binding.json",
             "originalSha256": "851d86cb3e3aa37b1bdc499bca1e86254d7d277129ecac04266f85878885fb7c",
             "originalBytes": 3219,
-            "path": "/game-assets/character-sources/da204c604f08f880758c.gz",
+            "path": "/game-assets/character-sources/da204c604f08f880758c.bin",
             "sha256": "da204c604f08f880758c51d371ff45252b069a12169028fe73b2a8c6a5122741",
             "bytes": 1094
         },
@@ -30,7 +30,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/candidates/meshy-additional-005/long-skirt.glb",
             "originalSha256": "77f3957563e94b01211a8204e85621e2196a619380b7b1dd9d7719cfa259a1a0",
             "originalBytes": 2569216,
-            "path": "/game-assets/character-sources/2eaee487e2036adc4318.gz",
+            "path": "/game-assets/character-sources/2eaee487e2036adc4318.bin",
             "sha256": "2eaee487e2036adc43180093907e1247fcf97791c64f5c58afd7fa9f513f38fd",
             "bytes": 1961004
         },
@@ -38,7 +38,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/candidates/meshy-additional-005/low-shoes.binding.json",
             "originalSha256": "ad27c923a926d59c8c1de43649129749e7856108d45cf440bb31eed35d5ded97",
             "originalBytes": 3251,
-            "path": "/game-assets/character-sources/ded9fe1e4a3960cc580b.gz",
+            "path": "/game-assets/character-sources/ded9fe1e4a3960cc580b.bin",
             "sha256": "ded9fe1e4a3960cc580bf355245667aa66fbb9463fabdfa8ce74d95e08dbbc99",
             "bytes": 1094
         },
@@ -46,7 +46,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/candidates/meshy-additional-005/low-shoes.glb",
             "originalSha256": "0bd55b3eeb8abadaecc1e9ab4d824a5beaee454833473524173e17b14d7c2e2c",
             "originalBytes": 5108840,
-            "path": "/game-assets/character-sources/b76a4d6fa94d03d54955.gz",
+            "path": "/game-assets/character-sources/b76a4d6fa94d03d54955.bin",
             "sha256": "b76a4d6fa94d03d549556ddc2fec90d06d7640a48a7e737da10e9e1e9acc2073",
             "bytes": 3143515
         },
@@ -54,7 +54,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/candidates/meshy-fisherman-009/shoe.binding.json",
             "originalSha256": "563fd3b507df4a44c916ff477016092b3e7dc7321a4974588ec4f9983047f0a8",
             "originalBytes": 3230,
-            "path": "/game-assets/character-sources/d39cca69ad1b01b78caa.gz",
+            "path": "/game-assets/character-sources/d39cca69ad1b01b78caa.bin",
             "sha256": "d39cca69ad1b01b78caaf8ad4d82fdf7d578fc9ad51ac83793669b75fe452b9f",
             "bytes": 1087
         },
@@ -62,7 +62,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/candidates/meshy-fisherman-009/shoe.glb",
             "originalSha256": "171358ff4718aac7747160228538de02a8313092d61a161e0c4f5912b0bf046f",
             "originalBytes": 1355244,
-            "path": "/game-assets/character-sources/d2776e572bc9e8edbf6b.gz",
+            "path": "/game-assets/character-sources/d2776e572bc9e8edbf6b.bin",
             "sha256": "d2776e572bc9e8edbf6b9e67bbdd893cfe1db6565fcbba8faedfaeb15ac5376b",
             "bytes": 1080815
         },
@@ -70,7 +70,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/candidates/meshy-fisherman-009/trousers.binding.json",
             "originalSha256": "5f7395d4d0f197881fe6df51628bdad086c3206d54311aea253b19dc7842dcb8",
             "originalBytes": 3201,
-            "path": "/game-assets/character-sources/e7680a238e0f5957f481.gz",
+            "path": "/game-assets/character-sources/e7680a238e0f5957f481.bin",
             "sha256": "e7680a238e0f5957f481a0597253c34439c33db5cbd8d59b7d3dd5fe1a885ac1",
             "bytes": 1091
         },
@@ -78,7 +78,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/candidates/meshy-fisherman-009/trousers.glb",
             "originalSha256": "9d4be04a6c5fb98812dc74a9a8ffbde93d48da74896777faa768aa293ef4c576",
             "originalBytes": 1867980,
-            "path": "/game-assets/character-sources/7a7dba1a4fa9c04124c9.gz",
+            "path": "/game-assets/character-sources/7a7dba1a4fa9c04124c9.bin",
             "sha256": "7a7dba1a4fa9c04124c9e9225ac6cd330ea6d794419ae945943749d73d2ba2a6",
             "bytes": 1564156
         },
@@ -86,7 +86,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/candidates/meshy-fisherman-009/tunic.binding.json",
             "originalSha256": "98580ee0976561b110af62585ada72fef89444700eaa1a0767f98c78362bf6c7",
             "originalBytes": 4527,
-            "path": "/game-assets/character-sources/f039bc62941425498059.gz",
+            "path": "/game-assets/character-sources/f039bc62941425498059.bin",
             "sha256": "f039bc62941425498059311f44a379f06260cddb58fa9bd5ef76e42d9ec6a746",
             "bytes": 1301
         },
@@ -94,7 +94,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/candidates/meshy-fisherman-009/tunic.glb",
             "originalSha256": "2a0d9a40392caa385c210cc26ee3afb4703b70ec3e10f12ff52cc40329cc8bc4",
             "originalBytes": 1448060,
-            "path": "/game-assets/character-sources/b995eedfb75b5a5fe13a.gz",
+            "path": "/game-assets/character-sources/b995eedfb75b5a5fe13a.bin",
             "sha256": "b995eedfb75b5a5fe13a7fbe7b203f72909b6543ccdc62e9230009abde69e934",
             "bytes": 1149273
         },
@@ -102,7 +102,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/candidates/meshy-grid-trial-002/outfit.binding.json",
             "originalSha256": "f3073f071dc8fa7955d55db9833a01cadd7d7b02a9ccd95a843eb03b88efeb03",
             "originalBytes": 4518,
-            "path": "/game-assets/character-sources/6498d532942e4aca17e6.gz",
+            "path": "/game-assets/character-sources/6498d532942e4aca17e6.bin",
             "sha256": "6498d532942e4aca17e67648755db875df3f6ca5d8dfb36bbbc1e3a58b2eb1df",
             "bytes": 1404
         },
@@ -110,7 +110,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/candidates/meshy-grid-trial-002/outfit.glb",
             "originalSha256": "79794137e3e2bb33da24429d084cec0e5fb84711fdc4fd87c1568b1dabb4d52e",
             "originalBytes": 3848864,
-            "path": "/game-assets/character-sources/544fa02071675022d900.gz",
+            "path": "/game-assets/character-sources/544fa02071675022d900.bin",
             "sha256": "544fa02071675022d900625766134bf82706929277ed7a37dde34bf100092c6d",
             "bytes": 3679935
         },
@@ -118,7 +118,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/candidates/meshy-short-trousers-006/short-trousers.binding.json",
             "originalSha256": "41b69b9c926c5401be8f98647e382fcb5235b8c981122a97fb14e3c719ac8333",
             "originalBytes": 3239,
-            "path": "/game-assets/character-sources/09d256b4f49e57c16d0b.gz",
+            "path": "/game-assets/character-sources/09d256b4f49e57c16d0b.bin",
             "sha256": "09d256b4f49e57c16d0b3a3ec5235458fbf9e0f85025ac38e6e47fc304c6545c",
             "bytes": 1117
         },
@@ -126,7 +126,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/candidates/meshy-short-trousers-006/short-trousers.glb",
             "originalSha256": "c37cfa685911390ff9ba0f9462c44c1331a686b388281573840b5012a98904f3",
             "originalBytes": 2443800,
-            "path": "/game-assets/character-sources/3763c2bc6e3000ab5267.gz",
+            "path": "/game-assets/character-sources/3763c2bc6e3000ab5267.bin",
             "sha256": "3763c2bc6e3000ab5267c7d8cc70f0ae879c0f5c5f500f9e5d2f19e9b57c021d",
             "bytes": 1978878
         },
@@ -134,7 +134,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/female-hair/knotted-braid.binding.json",
             "originalSha256": "c31f35d6867b2be6a61d82283355a1fbca1d599aa29ead202dfafb8fd372698b",
             "originalBytes": 1854404,
-            "path": "/game-assets/character-sources/e7fc04c0cf3158fb9a8e.gz",
+            "path": "/game-assets/character-sources/e7fc04c0cf3158fb9a8e.bin",
             "sha256": "e7fc04c0cf3158fb9a8e98ceb50a4c4fcfc4f27a3af0cff1c4075aaaf9dcef0a",
             "bytes": 361547
         },
@@ -142,7 +142,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/female-hair/knotted-braid.glb",
             "originalSha256": "4aed5e8c3c8e97067970356522ac92bdb7b880acf989754eb01d3d97f39d2746",
             "originalBytes": 143104,
-            "path": "/game-assets/character-sources/9781277395f4987889b7.gz",
+            "path": "/game-assets/character-sources/9781277395f4987889b7.bin",
             "sha256": "9781277395f4987889b7cc24aa874c8c7704b4288dfadc20d405bbcc61f01fc1",
             "bytes": 72740
         },
@@ -150,7 +150,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/female-hair/mid-hair-knotted.binding.json",
             "originalSha256": "c4d2f2e85d8622ae4db2a1e4a17e90e8bc4065033ba8d4a49edaa233053b9290",
             "originalBytes": 2075264,
-            "path": "/game-assets/character-sources/ad4a4c3de303048f7dce.gz",
+            "path": "/game-assets/character-sources/ad4a4c3de303048f7dce.bin",
             "sha256": "ad4a4c3de303048f7dce6b6b63ce2278b4299e39411679794d86d009ebc82b8a",
             "bytes": 373303
         },
@@ -158,7 +158,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/female-hair/mid-hair-knotted.glb",
             "originalSha256": "ea8314ee05f0a450245911e77f728c9908b78e3062e336b947631c9d2ed6530d",
             "originalBytes": 148284,
-            "path": "/game-assets/character-sources/9dea2222c8c58a1b1fbb.gz",
+            "path": "/game-assets/character-sources/9dea2222c8c58a1b1fbb.bin",
             "sha256": "9dea2222c8c58a1b1fbb551d7eacb385c9d69c8da57acbc9ff6e88dd3dd8cd71",
             "bytes": 73401
         },
@@ -166,7 +166,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/female-hair/mid-wavy-long.binding.json",
             "originalSha256": "d0459addff56c9e2852debdfe5606f9a6e412643de8bdbf7b72ae8c6b4e47d0a",
             "originalBytes": 3907239,
-            "path": "/game-assets/character-sources/dd48cc74ba0a5c56cc7b.gz",
+            "path": "/game-assets/character-sources/dd48cc74ba0a5c56cc7b.bin",
             "sha256": "dd48cc74ba0a5c56cc7b7df40aca9acf5fbbf95f0b9581ae71ad740aae1783a8",
             "bytes": 755873
         },
@@ -174,7 +174,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/female-hair/mid-wavy-long.glb",
             "originalSha256": "a9642f3531b8b8ea23a9421b48512afb03a1858825701c925eb5891b078560e3",
             "originalBytes": 296372,
-            "path": "/game-assets/character-sources/ace8891fe484f0377ec7.gz",
+            "path": "/game-assets/character-sources/ace8891fe484f0377ec7.bin",
             "sha256": "ace8891fe484f0377ec7d8aaa0ad13b9556b796a61ae758b54786b83af6d04f9",
             "bytes": 151442
         },
@@ -182,7 +182,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/manual-beards/braid.binding.json",
             "originalSha256": "79de0ec8ea93c053dab3262f036f9c0a7351268c8e8b714e820f551be2a2f76d",
             "originalBytes": 3256054,
-            "path": "/game-assets/character-sources/7e689f976d7ae94f6b88.gz",
+            "path": "/game-assets/character-sources/7e689f976d7ae94f6b88.bin",
             "sha256": "7e689f976d7ae94f6b88b465d9eb48019e387cd8d61c577df246924a0e74c700",
             "bytes": 313907
         },
@@ -190,7 +190,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/manual-beards/braid.glb",
             "originalSha256": "4e3325ea924ccd9657ed9882ec31d92bb0a57049bc506ffd7fedecb4041a0ec4",
             "originalBytes": 235068,
-            "path": "/game-assets/character-sources/971d6cee4b40cfe81e44.gz",
+            "path": "/game-assets/character-sources/971d6cee4b40cfe81e44.bin",
             "sha256": "971d6cee4b40cfe81e44bb7b2fc80128929bacfe055a68932ffc1b11864d147b",
             "bytes": 98942
         },
@@ -198,7 +198,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/manual-beards/double.binding.json",
             "originalSha256": "5b7f7e3a8e387806c4e450ed25ad6aca82d75af6f0dbe71019abb8cfc826199a",
             "originalBytes": 3070706,
-            "path": "/game-assets/character-sources/5e19eb6f7877ffd7b387.gz",
+            "path": "/game-assets/character-sources/5e19eb6f7877ffd7b387.bin",
             "sha256": "5e19eb6f7877ffd7b387e44cf4309dc0d57538d50256b6b889b09fdda3a79af5",
             "bytes": 309901
         },
@@ -206,7 +206,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/manual-beards/double.glb",
             "originalSha256": "dd89de8ddc3ae9595ff2b04abd36fd825b4b64dddc7f8addcc32cbcbe3cbdde6",
             "originalBytes": 226624,
-            "path": "/game-assets/character-sources/023b6e58fa552202d1fd.gz",
+            "path": "/game-assets/character-sources/023b6e58fa552202d1fd.bin",
             "sha256": "023b6e58fa552202d1fd58b629e4e40e4b88e32b091c198682de28942662f4b2",
             "bytes": 96948
         },
@@ -214,7 +214,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/manual-beards/normal.binding.json",
             "originalSha256": "e7e40b02323f36ca663e937ec9f423a376f7054e454cb03bef1fb26774541cd2",
             "originalBytes": 3131369,
-            "path": "/game-assets/character-sources/8ca00b6248f9f499800a.gz",
+            "path": "/game-assets/character-sources/8ca00b6248f9f499800a.bin",
             "sha256": "8ca00b6248f9f499800a8f97fff14a01501bf8d3a7ac552224d90c7f8a924d82",
             "bytes": 333243
         },
@@ -222,7 +222,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/manual-beards/normal.glb",
             "originalSha256": "2140b3ce8a1ed1eae182b3de72d859d39a41555d0a2cf2f28d8e9ffe0446f0e4",
             "originalBytes": 223876,
-            "path": "/game-assets/character-sources/962120884dd031a68029.gz",
+            "path": "/game-assets/character-sources/962120884dd031a68029.bin",
             "sha256": "962120884dd031a6802989bf3040e5eabaefa8fd43f544bb59d8bb05c5182cff",
             "bytes": 96693
         },
@@ -230,7 +230,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/manual-beards/pointed.binding.json",
             "originalSha256": "5482b78bb7e74b0af55ee7387057c7f6cfef2260f5442a80518896b22b3b1241",
             "originalBytes": 2904604,
-            "path": "/game-assets/character-sources/dc0486ec6b5ecae910c8.gz",
+            "path": "/game-assets/character-sources/dc0486ec6b5ecae910c8.bin",
             "sha256": "dc0486ec6b5ecae910c8cb3a9027f8f46797b1966925432a563a58e8fb063a45",
             "bytes": 308525
         },
@@ -238,7 +238,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/manual-beards/pointed.glb",
             "originalSha256": "8f4068ec2ed31588068b1c269e36e6df34ac0daaf46ca83c8d47a3e155b07770",
             "originalBytes": 207520,
-            "path": "/game-assets/character-sources/5c74f2919a9ef89a1ac0.gz",
+            "path": "/game-assets/character-sources/5c74f2919a9ef89a1ac0.bin",
             "sha256": "5c74f2919a9ef89a1ac0539cc39daec58f9ed055edd5a48817fbe21e0d2aaacb",
             "bytes": 88639
         },
@@ -246,7 +246,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/manual-braided-hair/braided.binding.json",
             "originalSha256": "2b7ac5e3fb2e877b73c2b263bf4a89d1b9b22c31e7e98a857e2421b13f3b277e",
             "originalBytes": 2956229,
-            "path": "/game-assets/character-sources/910f6201c053f9bdb127.gz",
+            "path": "/game-assets/character-sources/910f6201c053f9bdb127.bin",
             "sha256": "910f6201c053f9bdb127b9cfebe08228f559d31f0dc7e24b180e92008c34ef41",
             "bytes": 475149
         },
@@ -254,7 +254,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/manual-braided-hair/braided.glb",
             "originalSha256": "3cbe59c32ca7ccccce742b39596b7c62b708724c9992e2a7928cac929fa6cd44",
             "originalBytes": 193240,
-            "path": "/game-assets/character-sources/97d153203539c018af14.gz",
+            "path": "/game-assets/character-sources/97d153203539c018af14.bin",
             "sha256": "97d153203539c018af144a797497ff90e5eaf2b58875b42c487bd3c43b0c8151",
             "bytes": 90647
         },
@@ -262,7 +262,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/manual-hair/short.binding.json",
             "originalSha256": "96ade45ea283f249934f5b186f8ea58cc804f32d0b72d3c3f4b1b5e23ea4c52c",
             "originalBytes": 3619922,
-            "path": "/game-assets/character-sources/f11110790ebb9727918e.gz",
+            "path": "/game-assets/character-sources/f11110790ebb9727918e.bin",
             "sha256": "f11110790ebb9727918eb4f56b0d4b91ce8a22be4682cf60b945212a88b6d953",
             "bytes": 554138
         },
@@ -270,7 +270,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/manual-hair/short.glb",
             "originalSha256": "9a6c057520eea8d57a9dc020d2a98d823f5f1966843fb8bd2cb4528303d959e6",
             "originalBytes": 255620,
-            "path": "/game-assets/character-sources/b532b81cf76b6f1cb9d8.gz",
+            "path": "/game-assets/character-sources/b532b81cf76b6f1cb9d8.bin",
             "sha256": "b532b81cf76b6f1cb9d8314e079a4c8572e676547258abe25a789846f81fb9c0",
             "bytes": 119370
         },
@@ -278,7 +278,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/manual-hair/short2.binding.json",
             "originalSha256": "ba7307e86a9eb60d4dcdac71d4b7cab1e4b0149e85611a9bc1ff8e69a424bd8f",
             "originalBytes": 4702561,
-            "path": "/game-assets/character-sources/f5587b9047abd0c59d57.gz",
+            "path": "/game-assets/character-sources/f5587b9047abd0c59d57.bin",
             "sha256": "f5587b9047abd0c59d57846fa51ce1db7aa79d5d359dbe7ad2948985ea3a7705",
             "bytes": 794868
         },
@@ -286,7 +286,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/manual-hair/short2.glb",
             "originalSha256": "2ba6181451bef3a27d06a400e60b01e5c23710771995b40c9fcbd7c2a248e3bf",
             "originalBytes": 347196,
-            "path": "/game-assets/character-sources/757fd3412ad3919717a8.gz",
+            "path": "/game-assets/character-sources/757fd3412ad3919717a8.bin",
             "sha256": "757fd3412ad3919717a8f680c277803809f63732e17a8d266a3d5f864e4cc063",
             "bytes": 167412
         },
@@ -294,7 +294,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/manual-long-hair/long-2.binding.json",
             "originalSha256": "b808c552c30a68e7b6b2b3221227dc8af9d98deb4dcdba425133ef77f58f186d",
             "originalBytes": 5508145,
-            "path": "/game-assets/character-sources/2469c91b4ee64b0568b3.gz",
+            "path": "/game-assets/character-sources/2469c91b4ee64b0568b3.bin",
             "sha256": "2469c91b4ee64b0568b3e64960aff6b9ec993c4cd0821c8814d1d12d81eb4f48",
             "bytes": 910926
         },
@@ -302,7 +302,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/manual-long-hair/long-2.glb",
             "originalSha256": "4d9b26798bf511c5141a93abd2c73e9d4ca02b2ccb92daa53e0146b35ae4afe6",
             "originalBytes": 358692,
-            "path": "/game-assets/character-sources/fad05276bcb98cbc719f.gz",
+            "path": "/game-assets/character-sources/fad05276bcb98cbc719f.bin",
             "sha256": "fad05276bcb98cbc719fc6b562f873dfda7eab961aa8aafbe50081965cc620e8",
             "bytes": 169238
         },
@@ -310,7 +310,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/occupation-hats/farmer.binding.json",
             "originalSha256": "7eb9d84b16cb19339ff1f1bfd488caa7d79ab403e01904786ae20617f780b411",
             "originalBytes": 8438,
-            "path": "/game-assets/character-sources/d8801e66e1dd52eaf4bf.gz",
+            "path": "/game-assets/character-sources/d8801e66e1dd52eaf4bf.bin",
             "sha256": "d8801e66e1dd52eaf4bfb0db6aae1a31a670959c00f789480ece3c567dbe96e6",
             "bytes": 2449
         },
@@ -318,7 +318,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/occupation-hats/farmer.glb",
             "originalSha256": "d1d39b739a4157b08d765a4100d139b5f813a0a85a2c4d0ae676afdcb926d217",
             "originalBytes": 607644,
-            "path": "/game-assets/character-sources/6aef20b71f1ccda10daa.gz",
+            "path": "/game-assets/character-sources/6aef20b71f1ccda10daa.bin",
             "sha256": "6aef20b71f1ccda10daa469164b09a7cb44bb36e23801a850e2981ab684839a5",
             "bytes": 476832
         },
@@ -326,7 +326,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/occupation-hats/fisher.binding.json",
             "originalSha256": "31dc11b8d32cae7dd95a0e2278a13693fbc8f8492c4f545156748ae72d51c890",
             "originalBytes": 8467,
-            "path": "/game-assets/character-sources/8e336119020183ebf4a9.gz",
+            "path": "/game-assets/character-sources/8e336119020183ebf4a9.bin",
             "sha256": "8e336119020183ebf4a9dac767a16733fa75d0ebf14e88561983e478fb00ef9c",
             "bytes": 2549
         },
@@ -334,7 +334,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/occupation-hats/fisher.glb",
             "originalSha256": "e32213f58413d166349af4ed526b9b208334214da3c229618b21e1e21958cc3f",
             "originalBytes": 521536,
-            "path": "/game-assets/character-sources/44d06e5a6b9472f97515.gz",
+            "path": "/game-assets/character-sources/44d06e5a6b9472f97515.bin",
             "sha256": "44d06e5a6b9472f9751553791d25fefe35600e51995843eef92bc5bb0a95ac61",
             "bytes": 402031
         },
@@ -342,7 +342,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/occupation-hats/hunter.binding.json",
             "originalSha256": "8f4e4f0b1621ad629d871b523910667115cf691f931ab0157ee598b27f2da012",
             "originalBytes": 8413,
-            "path": "/game-assets/character-sources/c1c6909f9ef98b5a2b2b.gz",
+            "path": "/game-assets/character-sources/c1c6909f9ef98b5a2b2b.bin",
             "sha256": "c1c6909f9ef98b5a2b2b738da142b609ce4bd751edbfa7a0b252f92ba686de65",
             "bytes": 2532
         },
@@ -350,7 +350,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/occupation-hats/hunter.glb",
             "originalSha256": "9f49a8daffa7e25913718f83f2194d57eb71f1db45029e2e7995d00bb93350a8",
             "originalBytes": 630828,
-            "path": "/game-assets/character-sources/b8c4ddef7e240012d0b5.gz",
+            "path": "/game-assets/character-sources/b8c4ddef7e240012d0b5.bin",
             "sha256": "b8c4ddef7e240012d0b59fffa0f8a1e621a0764e12750ffef0cfbab046dbc030",
             "bytes": 438053
         },
@@ -358,7 +358,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/occupation-hats/smith.binding.json",
             "originalSha256": "8821bdd6401c061649f6da641f37d29a8478b6a8cabe70b674533302a111d908",
             "originalBytes": 8410,
-            "path": "/game-assets/character-sources/f259b6229f9af8796aec.gz",
+            "path": "/game-assets/character-sources/f259b6229f9af8796aec.bin",
             "sha256": "f259b6229f9af8796aec5c2c846cc08f590c0ed6e0e3f0a0e66b4d625ce683a0",
             "bytes": 2536
         },
@@ -366,7 +366,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/occupation-hats/smith.glb",
             "originalSha256": "5e82235c0d59ea911f981498ed2a957e6c586680f9c2807efdf2f494f99cda8c",
             "originalBytes": 621816,
-            "path": "/game-assets/character-sources/476d207787bb0866be5a.gz",
+            "path": "/game-assets/character-sources/476d207787bb0866be5a.bin",
             "sha256": "476d207787bb0866be5ad8059d6c110378a2732c2c10c84f2ebbfe6f8380896b",
             "bytes": 415147
         },
@@ -374,7 +374,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/occupation-tools/farmer.binding.json",
             "originalSha256": "b17cc2b9f955f2332665cebbab5c17967478d79f66e26974dda405a1debcc4c7",
             "originalBytes": 5316,
-            "path": "/game-assets/character-sources/ff012ae7f91dd1fb49b0.gz",
+            "path": "/game-assets/character-sources/ff012ae7f91dd1fb49b0.bin",
             "sha256": "ff012ae7f91dd1fb49b0d62e8405e103ec94fb1a6ff65d44a56ffb80f8b97646",
             "bytes": 1720
         },
@@ -382,7 +382,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/occupation-tools/farmer.glb",
             "originalSha256": "8a01ead0b858fb6af2a33d8568f0dc6183d6e0aef1c94202a2cb81a651d1eacc",
             "originalBytes": 740996,
-            "path": "/game-assets/character-sources/74c74eabad94eb09561c.gz",
+            "path": "/game-assets/character-sources/74c74eabad94eb09561c.bin",
             "sha256": "74c74eabad94eb09561cf7395c0436473234c4d16940ba90c95b4e83f6378831",
             "bytes": 599173
         },
@@ -390,7 +390,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/occupation-tools/fisher.binding.json",
             "originalSha256": "2d072a7988c84cf766b509614dcd63765803e261a7621bfbabbf961389735629",
             "originalBytes": 5316,
-            "path": "/game-assets/character-sources/7c5d4b120f2cd9d477e6.gz",
+            "path": "/game-assets/character-sources/7c5d4b120f2cd9d477e6.bin",
             "sha256": "7c5d4b120f2cd9d477e6b03230edc37629041e349eae1196327b6bb11d69b8b7",
             "bytes": 1719
         },
@@ -398,7 +398,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/occupation-tools/fisher.glb",
             "originalSha256": "323147f12193009739d2ac55f54f94d74b17655754fc59d750afd553397590d8",
             "originalBytes": 861196,
-            "path": "/game-assets/character-sources/7de610347002efc5acbb.gz",
+            "path": "/game-assets/character-sources/7de610347002efc5acbb.bin",
             "sha256": "7de610347002efc5acbb17cb79be12d1430d5ce48840e9e134ff679cf6d5dfcc",
             "bytes": 615513
         },
@@ -406,7 +406,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/occupation-tools/hunter.binding.json",
             "originalSha256": "1304364921d84f4a148ca7ea2e9958907af572a2367ee11dc6c8a6af4a6c9f93",
             "originalBytes": 5934,
-            "path": "/game-assets/character-sources/0e5506d98b88d54356c8.gz",
+            "path": "/game-assets/character-sources/0e5506d98b88d54356c8.bin",
             "sha256": "0e5506d98b88d54356c88d5277ae61cdd859b69a2d855181b183d566cbb463a9",
             "bytes": 1790
         },
@@ -414,7 +414,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/occupation-tools/hunter.glb",
             "originalSha256": "c09b59ac929a36bfa1ba041de80d75ad93dd477e371de25679e4678801bc7781",
             "originalBytes": 864092,
-            "path": "/game-assets/character-sources/1fc4b23efa6ef8d72dfd.gz",
+            "path": "/game-assets/character-sources/1fc4b23efa6ef8d72dfd.bin",
             "sha256": "1fc4b23efa6ef8d72dfd91ab229437a32100faf49079d0cf332a294256043d4c",
             "bytes": 605255
         },
@@ -422,7 +422,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/occupation-tools/smith.binding.json",
             "originalSha256": "886977fa360b82eee2380016feb74005334226e45f75f96fe9cf891c5e119918",
             "originalBytes": 5313,
-            "path": "/game-assets/character-sources/2f6d76b48312f9827e3b.gz",
+            "path": "/game-assets/character-sources/2f6d76b48312f9827e3b.bin",
             "sha256": "2f6d76b48312f9827e3be6da59b24e64b3570f68e6526a7d580878aef705b84a",
             "bytes": 1721
         },
@@ -430,7 +430,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/character-lab/modules/occupation-tools/smith.glb",
             "originalSha256": "ae59cfb02110ea0b9f4f1434eae1fead5281188c579e9e9612cd057ff43ffd82",
             "originalBytes": 623880,
-            "path": "/game-assets/character-sources/634898cfa18e5871f641.gz",
+            "path": "/game-assets/character-sources/634898cfa18e5871f641.bin",
             "sha256": "634898cfa18e5871f64130c0ad6bca71da7003565d3f53313cb3cfcfdbe901c8",
             "bytes": 501833
         },
@@ -438,7 +438,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/game-assets/human/Human_ExtraAnimations.glb",
             "originalSha256": "a6f3884603041026f290fe0cffa2327c616ae490c779a48a456cb67edcb7a676",
             "originalBytes": 1022008,
-            "path": "/game-assets/character-sources/bf5e76ff8cf892439893.gz",
+            "path": "/game-assets/character-sources/bf5e76ff8cf892439893.bin",
             "sha256": "bf5e76ff8cf892439893cec70e0b45e99008b6f43f6dc1b92f23cc6fba1114e8",
             "bytes": 750429
         },
@@ -446,7 +446,7 @@ export const preparedCharacterCatalog = {
             "originalPath": "/game-assets/human/Human_LOD2.glb",
             "originalSha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
             "originalBytes": 6118512,
-            "path": "/game-assets/character-sources/a85a175d059013b5066f.gz",
+            "path": "/game-assets/character-sources/a85a175d059013b5066f.bin",
             "sha256": "a85a175d059013b5066f7bc0213eaf442329de473a7088efe3c67d5f01465980",
             "bytes": 5826299
         }

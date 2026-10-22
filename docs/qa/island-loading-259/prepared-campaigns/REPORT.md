@@ -85,6 +85,21 @@ precise coverage and unchanged poses. The production-worker integration check an
 repository suite are recorded separately in the local output logs. Formatting is checked manually
 and with `git diff --check`; the project has no formatter configuration.
 
+The complete repository run passed **1,176 tests**, with **0 failures** and **10 existing optional
+source-asset skips** (674.690 seconds). The production-worker integration check also passed.
+That full run preceded the opaque publication-extension correction below; **20 final prepared
+loading/progress/lifecycle contracts passed afterward**, with no failures/skips (60.178 seconds).
+Strict TypeScript, production build and tracked-public-asset validation also passed after that
+correction. GitHub validates the final head.
+
+The real LAN HTTP check caught the development host serving `.gz` files with HTTP gzip encoding;
+Fetch automatically inflated the body before its compressed identity could be checked. Publications
+therefore use opaque `.bin` names containing the same gzip bytes. The compressed/canonical hashes,
+byte counts, measured CPU work and exact original character data are unchanged. After restarting
+the preview to refresh its public-file index, **all 70 publications** returned exact compressed
+bytes over HTTP. The check also verifies that the currently served worker, factory and catalogs
+use the prepared path. This is delivery/source evidence, not a WebGL acceptance run.
+
 Pending: a matched physical iPhone diagnostic, actual WebGL/new/restart/resume/import play review,
 network/peak-memory measurements and current-head GitHub checks. The available computer-use
 inventory returned no browsers or apps, so no full UI/device result is inferred from HTTP or Node

@@ -68,6 +68,10 @@ Content-addressed gzip files are approximately 2.5–2.8 MB each, requested indi
 the canonical JSON at full numeric precision; they are not a simplified silhouette or lower LOD.
 The device still constructs native render geometry/material masks and performs GPU preparation.
 
+The compressed payloads use an opaque `.bin` extension so static hosts do not interpret them as
+HTTP `Content-Encoding: gzip` and automatically unpack them before identity verification. Native
+decompression happens explicitly after verification, independent of HTTP transport compression.
+
 `BakedIslandCatalog.ts` pins compressed hashes, original sizes, canonical hashes and all transitive
 generator source inputs. Public-asset validation rejects missing files, changed bytes or stale
 inputs. Changes to generation dependencies require regenerating these publications; rules/output

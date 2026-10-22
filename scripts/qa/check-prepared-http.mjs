@@ -25,6 +25,13 @@ assert.match(await workerResponse.text(), /await loadBakedCampaignIsland\(task.s
 const characterResponse = await fetch(new URL('/src/characters/MeshyHuman.ts', base));
 assert.equal(characterResponse.status, 200);
 assert.match(await characterResponse.text(), /verifiedCharacterBytes\(url, expected, observe\)/);
+for (const path of ['/src/fjord-play/BakedIslandCatalog.ts', '/src/characters/PreparedCharacterCatalog.ts']) {
+    const response = await fetch(new URL(path, base));
+    assert.equal(response.status, 200);
+    const source = await response.text();
+    assert.match(source, /\.bin/);
+    assert.doesNotMatch(source, /\.gz["']/);
+}
 const report = { base: base.origin, elapsedMs: performance.now() - started,
     results, limit: 'HTTP delivery and current served-source checks only; no WebGL/browser/device acceptance.' };
 await mkdir('output/island-loading-259', { recursive: true });

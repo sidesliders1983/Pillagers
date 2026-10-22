@@ -10,7 +10,7 @@ for (const [originalPath, originalSha256] of characterSourceInputs()) {
     const original = readFileSync('public' + originalPath);
     assert.equal(sha256(original), originalSha256, 'Original character bytes changed: ' + originalPath);
     const compressed = gzipSync(original, { level: 9 }), hash = sha256(compressed);
-    const path = '/game-assets/character-sources/' + hash.slice(0, 20) + '.gz';
+    const path = '/game-assets/character-sources/' + hash.slice(0, 20) + '.bin';
     writeFileSync('public' + path, compressed);
     entries.push({ originalPath, originalSha256, originalBytes: original.length,
         path, sha256: hash, bytes: compressed.length });
