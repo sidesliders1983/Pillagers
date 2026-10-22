@@ -308,6 +308,8 @@ export class WorldLighting {
         this.fog.color.lerp(this.blendColor.setHex(config.night.fogColor), state.darkness);
         // Darkness does not counteract itself through exposure or a second directional night source.
     }
+    /** Current interpolated darkness; borrowed scalar, without allocating a diagnostic snapshot. */
+    get darkness() { return this.nightWeight; }
     private fireOverride: { lit: boolean; time: number; reducedMotion: boolean } | null = null;
     setCampfire(lit: boolean, time: number, reducedMotion = false) {
         this.fireOverride = { lit, time, reducedMotion };

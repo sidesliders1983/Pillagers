@@ -19,7 +19,8 @@ export const lightingConfig={
     fire:{color:0xffb467,intensity:28,radius:10,decay:2,height:1.15,
         flickerAmount:.055,flickerSpeed:2.2,emissive:0xff7626,emissiveIntensity:1.8,
         haloRadius:3.8,haloOpacity:.14},
-    windows:{color:0xffc481,emissiveIntensity:2.4},
+    windows:{color:0xffc481,emissiveIntensity:2.4,
+        spill:{opacity:.2,length:3.4,halfWidth:1.35,surfaceOffset:.045,segments:4}},
 };
 export function fireFlicker(time:number):number {
     const f=lightingConfig.fire;
