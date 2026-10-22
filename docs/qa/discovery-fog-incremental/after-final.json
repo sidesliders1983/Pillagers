@@ -1,0 +1,59 @@
+{
+  "label": "after-final",
+  "results": [
+    {
+      "exploredFraction": 0.2,
+      "constructionMs": 122.75739999999996,
+      "unchanged1000Ms": 1.7591999999999643,
+      "changedMedianMs": 0.9493999999999687,
+      "changedMaximumMs": 3.433499999999867,
+      "inspect": {
+        "active": true,
+        "cellSize": 8,
+        "maskBuilds": 1,
+        "maskUpdates": 8,
+        "rasterizedCells": 10072,
+        "lastRasterizedCells": 9,
+        "exploredCells": 2000,
+        "visibleCells": 0,
+        "unknownCells": 8000,
+        "transitioning": false,
+        "fadingPixels": 0,
+        "fadeSeconds": 0.8,
+        "maskBytes": 2500,
+        "textureBytes": 646416,
+        "drawCalls": 1,
+        "triangles": 80008,
+        "nativeMaterial": true,
+        "geometryBytes": 1288388
+      }
+    },
+    {
+      "exploredFraction": 0.9,
+      "constructionMs": 89.98659999999995,
+      "unchanged1000Ms": 0.22880000000009204,
+      "changedMedianMs": 0.19909999999993033,
+      "changedMaximumMs": 0.24080000000003565,
+      "inspect": {
+        "active": true,
+        "cellSize": 8,
+        "maskBuilds": 1,
+        "maskUpdates": 8,
+        "rasterizedCells": 10072,
+        "lastRasterizedCells": 9,
+        "exploredCells": 9000,
+        "visibleCells": 0,
+        "unknownCells": 1000,
+        "transitioning": false,
+        "fadingPixels": 0,
+        "fadeSeconds": 0.8,
+        "maskBytes": 2500,
+        "textureBytes": 646416,
+        "drawCalls": 1,
+        "triangles": 80008,
+        "nativeMaterial": true,
+        "geometryBytes": 1288388
+      }
+    }
+  ]
+}

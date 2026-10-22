@@ -117,7 +117,9 @@ test('presentation preserves opaque unknown, visible/mapped masks, geometry and 
     assert.ok(mask.some((value, index) => index % 4 === 0 && value === 0), 'Visible interior stays clear.');
     state = commitClanObservation(state, world, 'fog-test', 'player', [home, scout], 800505);
     for (const layer of [baseline, fog]) layer.setKnowledge(inspectClanDiscovery(state, 'player'));
-    assert.equal(fog.inspect().drawCalls, 2);
+    assert.equal(fog.inspect().drawCalls, 1);
+    assert.equal(fog.inspect().transitioning, true);
+    assert.equal(fog.root.children[0].material.alphaMap, texture, 'Knowledge reuses the original texture.');
     fog.update(.2);
     baseline.update(.2);
     state = commitClanObservation(state, world, 'fog-test', 'player', [home], 800510);
@@ -135,9 +137,11 @@ test('presentation preserves opaque unknown, visible/mapped masks, geometry and 
         assert.deepEqual(hits, []);
     }
     fog.update(.4);
-    assert.equal(fog.inspect().drawCalls, 2);
+    assert.equal(fog.inspect().drawCalls, 1);
+    assert.equal(fog.inspect().transitioning, true);
     fog.update(.4);
     assert.equal(fog.inspect().drawCalls, 1);
+    assert.equal(fog.inspect().transitioning, false);
     fog.setPresentation(undefined);
     assert.equal(fog.root.children[0].material.fog, false);
     assert.equal(fog.inspect().geometryBytes, baseline.inspect().geometryBytes);
