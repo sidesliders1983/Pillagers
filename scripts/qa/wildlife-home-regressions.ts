@@ -29,7 +29,7 @@ const world = { config: { seed: 213, width: 800, depth: 800 }, waterLevel: 0, te
     biomes: { cells: biomes, moisture: heights.map(() => .8) }, placementPlan: [],
 } as unknown as WorldBlueprint;
 const simulation = new WildlifePopulation(world);
-const animal = simulation.actors.find(actor => actor.species === 'wolf')!;
+let animal = simulation.actors.find(actor => actor.variant.movement === 'air')!;
 const opening = captureWildlife(simulation);
 const layer = await WildlifeLayer.create(world);
 let tick = 800000, threatened = false, running = true, accumulated = 0;
@@ -37,7 +37,7 @@ const snapshot = (): WildlifeState => ({ version: 2, worldId: 'qa-motion', start
     advancedAt: tick, actors: captureWildlife(simulation), nextEncounter: 1, contacts: [], firstDiscoveries: {} });
 layer.useCanonical(snapshot(), .5);
 layer.advance(0, false);
-const actorRoot = layer.root.getObjectByName('wildlife:' + animal.id)!;
+let actorRoot = layer.root.getObjectByName('wildlife:' + animal.id)!;
 const scene = new Scene();
 scene.background = new Color('#dce4df');
 scene.add(new HemisphereLight('#ffffff', '#6f805e', 2.5));
@@ -64,7 +64,7 @@ let state = createCampaign(32, { initialMaterials: 100 });
 const house = Object.values(state.households).find(home => home.memberIds.length > 0)!;
 const tent = Object.values(state.households).find(home => home.id !== house.id && home.memberIds.length > 0)!;
 state = applyCommand(state, { type: 'BuildHouse', householdId: house.id });
-const building = state.residences[state.households[house.id].residenceId!].buildingId;
+const building = state.residences[state.households[house.id].residenceId!].buildingId!;
 const session = new GameplaySession();
 session.loadJSON(serializeState(state));
 const owner = new SharedSettlement(session);
@@ -84,6 +84,13 @@ document.getElementById('entity-panel')!.addEventListener('click', event => {
 document.getElementById('qa-home')!.onclick = () => { owner.select({ kind: 'building', id: building }); refresh(); };
 document.getElementById('qa-tent')!.onclick = () => { owner.select({ kind: 'household', id: tent.id }); refresh(); };
 document.getElementById('qa-threat')!.onclick = () => { threatened = !threatened; };
+const selectAnimal = (airborne: boolean) => {
+    animal = simulation.actors.find(actor => airborne
+        ? actor.variant.movement === 'air' : actor.species === 'wolf')!;
+    actorRoot = layer.root.getObjectByName('wildlife:' + animal.id)!;
+};
+document.getElementById('qa-gull')!.onclick = () => selectAnimal(true);
+document.getElementById('qa-wolf')!.onclick = () => selectAnimal(false);
 document.getElementById('qa-replay')!.onclick = () => {
     restoreWildlife(simulation, opening, 0);
     tick = 800000;
@@ -120,15 +127,15 @@ renderer.setAnimationLoop(() => {
     controls.target.copy(nextFocus);
     oldFocus.copy(nextFocus);
     controls.update();
-    document.getElementById('qa-status')!.textContent = `Wolf: ${animal.state} · `
-        + `canonical flee speed ${animal.variant.fleeSpeed} m/s · ${running ? 'Running' : 'Paused'} · `
+    document.getElementById('qa-status')!.textContent = `${animal.species}: ${animal.state} · `
+        + `${running ? 'Running' : 'Paused'} · `
         + `house residents appear immediately`;
     renderer.domElement.dataset.motion = JSON.stringify({ state: animal.state,
         displayed: actorRoot.position.toArray(), confirmed: { ...animal.position },
         canonicalFleeSpeed: animal.variant.fleeSpeed, running });
     renderer.render(scene, camera);
 });
-onresize = () => {
+const resize = () => {
     const mobile = innerWidth < 800;
     viewport.style.width = mobile ? '100%' : 'calc(100% - 390px)';
     Object.assign(document.getElementById('fjord-management')!.style, {
@@ -140,7 +147,8 @@ onresize = () => {
     camera.updateProjectionMatrix();
     renderer.setSize(viewport.clientWidth, viewport.clientHeight);
 };
-onresize(new Event('resize'));
+onresize = resize;
+resize();
 onpagehide = () => {
     renderer.setAnimationLoop(null);
     ui.dispose();

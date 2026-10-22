@@ -185,8 +185,8 @@ export class WildlifeLayer {
                     const coastal = mixer ? undefined : coastalAnimalRig(model as Group, actor.species);
                     const rabbit = actor.species === 'rabbit' ? rabbitRig(model as Group, root) : undefined;
                     layer.records.push({ actor, root, body, mixer, coastal, rabbit, floating, effects,
-                        motion: actor.variant.movement === 'ground' || actor.variant.movement === 'shore'
-                            ? new WildlifeMotionTrack(actor.position, actor.heading) : undefined,
+                        motion: actor.variant.movement !== 'water'
+                            ? new WildlifeMotionTrack(actor.position, actor.heading, actor) : undefined,
                         marineTail: actor.marine ? marineTailRig(model as Group, actor.species) : undefined,
                         resting: mixer ? animalRestRig(model as Group, root, actor.species) : undefined,
                         legs: mixer || coastal || rabbit || actor.marine || id.startsWith('gull-') ? [] : legPoses(model as Group),
@@ -219,7 +219,7 @@ export class WildlifeLayer {
             const duration = Math.max(updateIntervalSeconds, this.animationTime - this.lastCanonicalTime);
             restoreWildlife(this.population, snapshot.actors, this.animationTime, snapshot.version === 1);
             for (const record of this.records) record.motion?.retarget(
-                record.actor.position, record.actor.heading, duration, !this.canonical);
+                record.actor.position, record.actor.heading, duration, !this.canonical, record.actor);
             this.lastCanonicalTime = this.animationTime;
         }
         this.canonical = snapshot;
@@ -265,9 +265,10 @@ export class WildlifeLayer {
             this.targetPosition.set(actor.position.x, actor.position.y, actor.position.z);
             if (record.motion) {
                 if (this.canonical) record.motion.advance(delta, running, this.canonicalPending);
-                else record.motion.sample(actor.position, actor.heading);
+                else record.motion.sample(actor.position, actor.heading, actor);
                 root.position.copy(record.motion.position);
-                root.position.y = this.population.habitats.surface.surfaceHeightAt(root.position.x, root.position.z);
+                if (!airborne)
+                    root.position.y = this.population.habitats.surface.surfaceHeightAt(root.position.x, root.position.z);
             } else if (this.canonical) {
                 // Smooth presentation between tick poses without moving the authoritative animal.
                 record.presentedPosition ??= this.targetPosition.clone();
@@ -275,7 +276,8 @@ export class WildlifeLayer {
                 record.presentedPosition.lerp(this.targetPosition, blend);
                 root.position.copy(record.presentedPosition);
             } else root.position.copy(this.targetPosition);
-            root.rotation.set(0, (record.motion?.heading ?? actor.heading) + look, actor.bank);
+            const flight = record.motion?.flight ?? actor;
+            root.rotation.set(0, (record.motion?.heading ?? actor.heading) + look, flight.bank);
             if (pose) record.body.rotation.x = pose.pitch;
             if (actor.variant.movement === 'ground') {
                 const gradient = terrainGradientAt(this.population.world, actor.position.x, actor.position.z);
@@ -325,7 +327,7 @@ export class WildlifeLayer {
             if (!root.visible || camera && root.position.distanceToSquared(this.cameraPoint) > 200 * 200)
                 continue;
             if (record.wings) {
-                const pose = gullWingMotion(this.population.time, actor.phase, false, actor.flapEffort);
+                const pose = gullWingMotion(this.population.time, actor.phase, false, flight.flapEffort);
                 poseGullWings(record.wings, pose.flap);
             }
             if (record.foldedWings) {
@@ -334,7 +336,7 @@ export class WildlifeLayer {
                     gullHeadLook(this.population.time, actor.phase), pose.lower);
             }
             if (airborne)
-                root.rotation.x = -Math.atan2(actor.climbRate, actor.speed) * .3;
+                root.rotation.x = -Math.atan2(flight.climbRate, actor.speed) * .3;
             if (record.rabbit) {
                 poseRabbit(record.rabbit, { time: this.population.time, phase: actor.phase,
                     position: actor.position, heading: actor.heading, hop: actor.hop,
