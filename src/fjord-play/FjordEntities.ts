@@ -137,9 +137,12 @@ export class FjordEntities {
         this.root.userData.selection = descriptions.find(marker => marker.role === 'selected') ?? null;
     }
     async sync(entities: readonly FjordEntity[], yieldControl?: () => Promise<void>, current = () => true,
-        livestockDeaths: readonly { id: string }[] = []) {
+        livestockDeaths: readonly { id: string }[] = [],
+        progress?: (completed: number, total: number) => void) {
         if (this.disposed || !current()) return;
         const visible = entities.filter(e => e.transform !== null);
+        let prepared = 0;
+        progress?.(prepared, visible.length);
         const nextEntities = new Map(visible.map(entity => [entity.selectionKey, entity]));
         // Retain unchanged attachments. Detach only before removal, hull replacement or landing.
         for (const [key, { model }] of this.entries) {
@@ -233,6 +236,7 @@ export class FjordEntities {
                     .applyMatrix4(entry.model.matrixWorld.clone().invert());
                 entry.boundsSignature = boundsSignature;
             }
+            progress?.(++prepared, visible.length);
         }
         // Four stable deck anchors, using the existing characters and their appearance resources.
         for (const { model } of this.entries.values()) {

@@ -8,6 +8,8 @@ output, original model, dependency, visual quality or timeout setting was change
 Local results (Windows/Node 24): production asset validation + strict TypeScript + Vite build pass;
 29 current focused progress/DOM/entry/resume/lifecycle checks pass, zero failures/skips. Manual formatting review and
 `git diff --check` pass; this repository has no configured automatic formatter.
+Four additional passenger/deck and source-yard cache regressions pass after exposing completed
+settlement-model units; the final production build and progress/lifecycle recheck pass too.
 
 The broad local run completed 1,167 tests: 1,156 passed, one failed, ten pre-existing optional-source
 checks skipped. The sole failure was `female-hair.test.mjs:33`: the provenance hash expected the
