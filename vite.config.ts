@@ -1,9 +1,25 @@
 import { defineConfig } from 'vite';
 import { readFileSync, existsSync, cpSync, mkdirSync } from 'node:fs';
 import { resolve, sep } from 'node:path';
+import { execFileSync } from 'node:child_process';
+
+function sourceBuild() {
+    try {
+        // Sites builds an exported main snapshot without its own .git directory.
+        if (existsSync('.sites-main.json')) {
+            const source = JSON.parse(readFileSync('.sites-main.json', 'utf8'));
+            if (source.branch === 'main' && /^[a-f0-9]{40}$/.test(source.commit))
+                return source.commit + '-sites-main';
+        }
+        const head = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
+        const dirty = execFileSync('git', ['status', '--porcelain', '--untracked-files=no'], { encoding: 'utf8' }).trim();
+        return head + (dirty ? '-dirty' : '');
+    } catch { return 'unidentified-source'; }
+}
 
 // Scenery is committed in public/. Only the locked Three.js decoder needs a build copy.
 export default defineConfig({
+    define: { 'globalThis.__FJORD_BUILD__': JSON.stringify(sourceBuild()) },
     optimizeDeps: {
         entries: [
             'index.html', 'src/core/Game.ts', 'src/environment-lab/EnvironmentLab.ts',

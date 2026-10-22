@@ -7,6 +7,7 @@ import {GLTF, GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {clone} from 'three/addons/utils/SkeletonUtils.js';
 import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
 import {assetDigest} from './AssetDigest';
+import {verifiedCharacterBytes} from './PreparedCharacterBytes';
 import {MeshyModuleRuntime,NativeModuleSource,nativeModuleEligible} from './MeshyModuleRuntime';
 import {ModuleBindingV2, NativeBodyIdentity, NativeBodySource} from './BodyFitAdapter';
 import {meshyRigSignature} from './MeshyNativeRig';
@@ -22,6 +23,7 @@ import {applyMeshyProportions,meshyBoneProportion} from './MeshyHumanDynamics';
 import {HumanProfile, childGrowthWeight, universalHumanProfile} from './UniversalHumanProfile';
 import { facialAxes, parseFacialShape, type FacialShapeV1 } from './FacialIdentity';
 import { nativeFacialSource, type FacialPresentation } from './NativeFacialGeometry';
+import { characterSync, characterAsync, type CharacterPreparationObserver } from './CharacterPreparation';
 // One current exact snapshot per live binding, shared weakly across residents.
 // Comparing complete JSON detects in-place edits without retaining its large cages in every human key.
 const bindingDependencies = new WeakMap<ModuleBindingV2, { json: string; revision: number }>();
@@ -68,6 +70,12 @@ export function validateMeshyBodySource(source: NativeBodySource): NativeBodySou
 }
 export interface MeshyHumanFactoryOptions {bodySource?: NativeBodySource;}
 
+const loadBindingBytes = async (url: string) => {
+ const response = await fetch(url);
+ if (!response.ok) throw new Error('Could not load Meshy sidecar: ' + url);
+ return response.arrayBuffer();
+};
+
 /** Cached source geometry and clips; each resident owns bones, materials and mixer. */
 export class MeshyHumanFactory {
  private sources = new Map<number, Promise<GLTF>>();
@@ -79,12 +87,9 @@ export class MeshyHumanFactory {
  private provenanceVerified?: Promise<void>;
 
  constructor(
-  private load: (url: string) => Promise<GLTF> = url => this.loadVerified(url),
-  private loadBinding: (url: string) => Promise<ArrayBuffer> = async url => {
-   const response = await fetch(url);
-   if (!response.ok) throw new Error('Could not load Meshy sidecar: ' + url);
-   return response.arrayBuffer();
-  },
+  private load: (url: string, observe?: CharacterPreparationObserver) => Promise<GLTF> =
+   (url, observe) => this.loadVerified(url, observe),
+  private loadBinding: (url: string) => Promise<ArrayBuffer> = loadBindingBytes,
   options: MeshyHumanFactoryOptions = {},
  ) {
   this.bodySource = options.bodySource && validateMeshyBodySource(options.bodySource);
@@ -117,21 +122,17 @@ export class MeshyHumanFactory {
   return this.provenanceVerified;
  }
 
- private async loadVerified(url: string): Promise<GLTF> {
+ private async loadVerified(url: string, observe?: CharacterPreparationObserver): Promise<GLTF> {
   const path = url.split('?')[0];
   const expected = path === humanExtraAnimations.path ? humanExtraAnimations.sha256 :
    this.bodySource?.lods.find(asset => asset.path === path)?.sha256 ??
    meshyHumanAssetIdentity.find(asset => asset.path === path)?.sha256 ?? assetMeasurement(path).sha256;
-  const response = await fetch(url);
-  if (!response.ok) throw new Error('Could not load Meshy asset: ' + path);
-  const bytes = await response.arrayBuffer();
-  if (await assetDigest(bytes) !== expected)
-   throw new Error('Meshy asset bytes differ from the frozen identity: ' + path);
-  const source = await this.loader.parseAsync(bytes, '');
+  const bytes = await verifiedCharacterBytes(url, expected, observe);
+  const source = await characterAsync(observe, 'source-decode', () => this.loader.parseAsync(bytes, ''), path);
   if (meshyHumanAssetIdentity.some(asset => asset.path === path)) {
    try {
     this.extraAnimations ??= this.loadVerified(humanExtraAnimations.path +
-     '?v=' + humanExtraAnimations.sha256.slice(0, 12)).catch(error => {
+     '?v=' + humanExtraAnimations.sha256.slice(0, 12), observe).catch(error => {
       this.extraAnimations = undefined;
       throw error;
      });
@@ -153,7 +154,7 @@ export class MeshyHumanFactory {
  }
  async create(input: CharacterDNA, lod = 0, profile?: HumanProfile,
   presentation: unknown = {hair: 'none', beard: 'none', outfit: 'none', equipment: 'none'},
-  face?: FacialShapeV1) {
+  face?: FacialShapeV1, observe?: CharacterPreparationObserver) {
   if (![0, 1, 2].includes(lod)) throw new Error('Invalid Meshy human LOD');
   const dna = parseCharacterDNA(input);
   const selectedFace = face ? parseFacialShape(face) : undefined;
@@ -163,22 +164,22 @@ export class MeshyHumanFactory {
   let source = this.sources.get(lod);
   if (!source) {
    const path = identity.path ?? meshyHumanAssetIdentity[lod].path;
-   source = this.load(path + '?v=' + identity.sha256.slice(0, 12)).catch(error => {
+   source = this.load(path + '?v=' + identity.sha256.slice(0, 12), observe).catch(error => {
     this.sources.delete(lod);
     throw error;
    });
    this.sources.set(lod, source);
   }
-  const loaded = await source;
+  const loaded = await characterAsync(observe, 'body-source-wait', () => source!);
   let selectedSource = loaded;
   if (selectedFace) {
-   selectedSource = this.facialSources.get(lod) ?? nativeFacialSource(loaded);
+   selectedSource = this.facialSources.get(lod) ?? characterSync(observe, 'facial-source-preparation', () => nativeFacialSource(loaded));
    this.facialSources.set(lod, selectedSource);
   }
-  const model = new MeshyHuman(selectedSource, dna, lod,
-   {...(profile ?? selected.profile), appearance: selected.profile.appearance}, identity, selectedFace);
+  const model = characterSync(observe, 'body-face-construction', () => new MeshyHuman(selectedSource, dna, lod,
+   {...(profile ?? selected.profile), appearance: selected.profile.appearance}, identity, selectedFace, observe));
   try {
-   await this.equip(model, selected.presentation);
+   await this.equip(model, selected.presentation, observe);
    return model;
   } catch (error) {
    model.dispose();
@@ -186,7 +187,7 @@ export class MeshyHumanFactory {
   }
  }
 
- async equip(model: MeshyHuman, value: unknown) {
+ async equip(model: MeshyHuman, value: unknown, observe?: CharacterPreparationObserver) {
   const identity = this.bodyIdentity(model.lod);
   if (model.fit.body.sha256 !== identity.sha256 || model.fit.body.id !== identity.id
    || model.fit.body.reviewOnly !== identity.reviewOnly) {
@@ -196,20 +197,25 @@ export class MeshyHumanFactory {
   const selected = resolveCharacterPresentation(model.dna, value, model.fit.body);
   const ids = [selected.hairId, selected.beardId, selected.headwearId, ...selected.garmentIds, selected.equipmentId]
    .filter((id): id is string => !!id);
-  const sources = await Promise.all(ids.map(id => {
+  const sources = await characterAsync(observe, 'module-sources-wait', () => Promise.all(ids.map(id => {
    let promise = this.modules.get(id);
    if (!promise) {
     const asset = characterAsset(id);
     const binding = asset.metadata?.nativeBinding;
     if (!binding) throw new Error('This module has no native Meshy binding');
     promise = Promise.all([
-     this.load(characterAssetURL(id, model.lod)),
-     this.loadBinding(binding.path + '?v=' + binding.sha256.slice(0, 12)),
+     this.load(characterAssetURL(id, model.lod), observe),
+     this.loadBinding === loadBindingBytes
+      ? verifiedCharacterBytes(binding.path, binding.sha256, observe, 'binding')
+      : characterAsync(observe, 'binding-fetch-read', () =>
+       this.loadBinding(binding.path + '?v=' + binding.sha256.slice(0, 12)), binding.path),
     ]).then(async ([source, bytes]) => {
-     if (await assetDigest(bytes) !== binding.sha256) {
+     if (this.loadBinding !== loadBindingBytes &&
+      await characterAsync(observe, 'binding-digest', () => assetDigest(bytes), binding.path) !== binding.sha256) {
       throw new Error('Stale native module binding bytes: ' + id);
      }
-     return {asset, source, binding: JSON.parse(new TextDecoder().decode(bytes)) as ModuleBindingV2};
+     return {asset, source, binding: characterSync(observe, 'binding-text-parse', () =>
+      JSON.parse(new TextDecoder().decode(bytes)) as ModuleBindingV2, binding.path)};
     }).catch(error => {
      this.modules.delete(id);
      throw error;
@@ -217,14 +223,15 @@ export class MeshyHumanFactory {
     this.modules.set(id, promise);
    }
    return promise;
-  }));
+  })));
   if (request !== model.equipRevision || model.isDisposed) return;
-  model.setNativeModules(sources, selected.presentation, selected.profile.appearance);
+  characterSync(observe, 'clothing-hair-beard-fitting', () =>
+   model.setNativeModules(sources, selected.presentation, selected.profile.appearance));
  }
 
- async createWorld(dna: CharacterDNA, profile?: HumanProfile, face?: FacialShapeV1) {
+ async createWorld(dna: CharacterDNA, profile?: HumanProfile, face?: FacialShapeV1, observe?: CharacterPreparationObserver) {
   if (this.bodySource) throw new Error('A review-only body cannot create a world resident');
-  return this.create(dna, worldResidentDetail.lod, profile, undefined, face);
+  return this.create(dna, worldResidentDetail.lod, profile, undefined, face, observe);
  }
 }
 export class MeshyHuman {
@@ -275,7 +282,7 @@ export class MeshyHuman {
    });
    return values;
   };
-  return JSON.stringify([this.bodyFitDependencies(dna, profile),
+  return characterSync(this.preparationObserver, 'binding-dependency-key', () => JSON.stringify([this.bodyFitDependencies(dna, profile),
    this.nativeSources.map(source => [source.asset, this.dependencyId(source.binding),
     bindingDependencyRevision(source.binding), meshes(source.source.scene), nativeModuleEligible(source, profile)]),
    this.nativeSources.some(source => source.asset.type === 'hair' || source.asset.type === 'beard')
@@ -284,7 +291,7 @@ export class MeshyHuman {
    [...this.fit.modules].map(([id, group]) => [id, group.uuid, group.position.toArray(),
     group.quaternion.toArray(), group.scale.toArray(), meshes(group)]),
    [...this.fit.sockets].map(([id, socket]) => [id, socket.position.toArray(),
-    socket.quaternion.toArray(), socket.scale.toArray()])]);
+    socket.quaternion.toArray(), socket.scale.toArray()])]));
  }
  get lastFitRetained() { return this.fitRetained; }
  /** Same cached-bound policy as ordinary animation frames; actual shape changes invalidate it. */
@@ -349,7 +356,8 @@ export class MeshyHuman {
  private nativeNeutral = false;
  private animationRotations = new Map<Bone, Quaternion>();
  private action:AnimationAction|null=null;private materials:Material[]=[];private baseHeight:number;private disposed=false;
- constructor(source:GLTF,dna:CharacterDNA,readonly lod:number,profile?:HumanProfile,identity?:NativeBodyIdentity,face?:FacialShapeV1){
+ constructor(source:GLTF,dna:CharacterDNA,readonly lod:number,profile?:HumanProfile,identity?:NativeBodyIdentity,face?:FacialShapeV1,
+  private preparationObserver?: CharacterPreparationObserver){
   this.body=clone(source.scene);this.root.add(this.body);this.clips=source.animations;
   this.body.updateMatrixWorld(true);
   const bounds=new Box3().setFromObject(this.body),centre=bounds.getCenter(new Vector3());
@@ -399,7 +407,7 @@ export class MeshyHuman {
   // Capture bind surfaces before height normalization and DNA proportions.
   const offset=this.body.position.clone();this.body.position.set(0,0,0);
   this.fit=new MeshyBodyFitAdapter(skin,this.root,this.body as Group,lod,identity);this.body.position.copy(offset);
-  this.modules=new MeshyModuleRuntime(this.fit);this.fit.moduleSnapshot=()=>this.modules.snapshot();
+  this.modules=new MeshyModuleRuntime(this.fit, this.preparationObserver);this.fit.moduleSnapshot=()=>this.modules.snapshot();
   this.root.userData.bodySource={...this.fit.body,source:'meshy'};
   this.root.userData.capabilities={morphology:true,appearance:true,fitSizes:false,garmentSockets:true};
   if (face) {
@@ -598,6 +606,7 @@ export class MeshyHuman {
   if (waist) waist.scale.z *= 1 + bounce * .025;
  }
  dispose(){
+  this.preparationObserver = undefined;
   if(this.disposed)return;this.disposed=true;this.lastNeutralFit=undefined;this.normalizedBody=undefined;this.mixer.stopAllAction();this.mixer.uncacheRoot(this.body);
   this.modules.clear();this.fit.dispose();
   for(const material of this.materials)material.dispose();

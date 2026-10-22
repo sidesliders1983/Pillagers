@@ -90,17 +90,40 @@ export class NativeHairRig {
         }
     }
 
+    lastClearanceWork?: { possibleIntersections: number; testedIntersections: number; temporaryCandidateBytes: number };
     /** Rebuild only at equip/DNA refit, using the actual selected garment surface. */
     configureClearance(garments: SkinnedMesh[]) {
         this.back.updateWorldMatrix(true, false);
         const inverse = this.back.matrixWorld.clone().multiply(this.backBindInverse).invert();
+        const heights = this.binding.rearProfile.map(row => row[0]);
+        const minimumY = Math.min(...heights) - 1e-10, maximumY = Math.max(...heights) + 1e-10;
+        // At most 256 KiB of candidate indices across this refit. An unusually
+        // dense source falls back to the exhaustive query rather than growing a cache.
+        let remainingCandidates = 65_536;
         const surfaces = garments.map(mesh => {
             mesh.updateWorldMatrix(true, false);
             const points = Array.from({length: mesh.geometry.attributes.position.count}, (_, vertex) =>
                 mesh.localToWorld(mesh.getVertexPosition(vertex, new Vector3())).applyMatrix4(inverse));
-            return {mesh, points, indices: mesh.geometry.index?.array};
+            const indices = mesh.geometry.index?.array;
+            const count = indices?.length ?? points.length;
+            // Every ray is parallel to +Z at X=0/.04/.065 and a declared profile height.
+            // Reject triangles outside that strip once; retain native query/order inside it.
+            let selected: number[] | undefined = [];
+            for (let i = 0; i < count; i += 3) {
+                const a = points[indices?.[i] ?? i], b = points[indices?.[i + 1] ?? i + 1];
+                const c = points[indices?.[i + 2] ?? i + 2];
+                if (Math.min(a.x, b.x, c.x) > .065 + 1e-10 || Math.max(a.x, b.x, c.x) < -1e-10
+                    || Math.min(a.y, b.y, c.y) > maximumY || Math.max(a.y, b.y, c.y) < minimumY) continue;
+                if (selected.length === remainingCandidates) { selected = undefined; break; }
+                selected.push(i);
+            }
+            const candidates = selected && Uint32Array.from(selected);
+            remainingCandidates -= candidates?.length ?? 0;
+            return {mesh, points, indices, candidates};
         });
         const ray = new Ray(new Vector3(), new Vector3(0, 0, 1)), hit = new Vector3();
+        const work = this.lastClearanceWork = { possibleIntersections: 0, testedIntersections: 0,
+            temporaryCandidateBytes: surfaces.reduce((sum, surface) => sum + (surface.candidates?.byteLength ?? 0), 0) };
         this.garmentVertices = [];
         this.garmentSamples = [];
         this.garmentMeshes = garments;
@@ -124,7 +147,12 @@ export class NativeHairRig {
                 for (const surface of surfaces) {
                     const indices = surface.indices;
                     const count = indices?.length ?? surface.points.length;
-                    for (let i = 0; i < count; i += 3) {
+                    work.possibleIntersections += count / 3;
+                    const candidates = surface.candidates;
+                    const selectedCount = candidates?.length ?? count / 3;
+                    work.testedIntersections += selectedCount;
+                    for (let cursor = 0; cursor < selectedCount; cursor++) {
+                        const i = candidates?.[cursor] ?? cursor * 3;
                         const a = surface.points[indices?.[i] ?? i];
                         const b = surface.points[indices?.[i + 1] ?? i + 1];
                         const c = surface.points[indices?.[i + 2] ?? i + 2];
