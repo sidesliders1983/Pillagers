@@ -2,7 +2,7 @@ import { measureGeneration, type GenerationObserver } from '../world-generation/
 import { siteRoutes } from '../world-generation/SiteNavigation';
 import { harborDepth } from '../world-generation/HarborClearance';
 import { fitsBuildingFoundation } from '../world/BuildingPlot';
-import { generateWorld } from '../world-generation/GenerateWorld';
+import { generateWorld, takeNaturalIslandTerrain } from '../world-generation/GenerateWorld';
 import { islandTerrain } from '../world-generation/IslandShape';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
 import { planSettlement, gradeSettlementFoundations, footprintBounds } from '../world-generation/PlanSettlement';
@@ -79,7 +79,8 @@ export function createCampaignIsland(campaignSeed: number, saved?: IslandRecipe,
         return cached;
     }
     const source = generateWorld({ seed: recipe.seed, preset: 'island',
-        generatorVersion: recipe.generatorVersion, conifers: 'ez-tree', environment: { version: 1 } }, observe);
+        generatorVersion: recipe.generatorVersion, conifers: 'ez-tree', environment: { version: 1 } }, observe,
+        { retainNaturalIslandTerrain: true });
     const world = prepareCampaignIsland(source, recipe.version, observe);
     cacheWorld(cacheKey, world);
     return world;
@@ -102,8 +103,10 @@ export function prepareCampaignIsland(source: WorldBlueprint, version: IslandRec
         throw new Error('The curated island no longer passes its geographical validation.');
     // The Lab's six demonstration buildings are not campaign houses. Start with the
     // same natural heightfield, retaining the rival's reserved foundations only.
+    const retainedTerrain = takeNaturalIslandTerrain(source);
     const natural = { ...source, terrain: { ...source.terrain,
-        heights: measureGeneration('campaign-natural-terrain', () => islandTerrain(source.config, source.waterLevel), observe).heights } };
+        heights: measureGeneration('campaign-natural-terrain', () => retainedTerrain?.heights
+            ?? islandTerrain(source.config, source.waterLevel).heights, observe) } };
     const terrain = gradeSettlementFoundations(natural, source.rivalSite.foundations);
     const landscape = { ...natural, terrain };
     const bounds = {
