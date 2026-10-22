@@ -104,7 +104,32 @@ globalThis.createImageBitmap = async () => ({ width: 2048, height: 2048, close()
 const buffer = bytes => bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
 const bytes = async url => buffer(await readFile('public' + url.split('?')[0]));
 const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
-const factory = new MeshyHumanFactory(async url => {
+const verifiedSources = process.argv.includes('--verified-sources');
+const legacySourceBytes = process.argv.includes('--legacy-source-bytes');
+const httpDigest = process.argv.includes('--http-digest');
+let requestedSourceBytes = 0;
+if (verifiedSources) {
+    globalThis.fetch = async url => {
+        const body = await bytes(url);
+        requestedSourceBytes += body.byteLength;
+        return new Response(body);
+    };
+    if (httpDigest) {
+        const digest = load('characters/AssetDigest');
+        digest.assetDigest = async body => digest.sha256Bytes(new Uint8Array(body));
+    }
+    if (legacySourceBytes) {
+        const { characterAsync } = load('characters/CharacterPreparation');
+        const { assetDigest } = load('characters/AssetDigest');
+        load('characters/PreparedCharacterBytes').verifiedCharacterBytes = async (url, expected, observe, kind = 'source') => {
+            const body = await characterAsync(observe, kind + '-fetch-read', () => bytes(url), url);
+            requestedSourceBytes += body.byteLength;
+            assert.equal(await characterAsync(observe, kind + '-digest', () => assetDigest(body), url), expected);
+            return body;
+        };
+    }
+}
+const factory = verifiedSources ? new MeshyHumanFactory() : new MeshyHumanFactory(async url => {
     const start = performance.now();
     const result = await loader.parseAsync(await bytes(url), '');
     record('file-read-and-GLTF-parse', performance.now() - start);
@@ -151,6 +176,7 @@ const report = {
     platform: `Node ${process.version}, ${process.platform}/${process.arch}; CPU-only, image decode stubbed`,
     scene: `10 actual seed-${seed} founder identities/faces; source assets read from disk; world LOD unchanged`,
     seed, scenario: seedOption ? 'newFjordScenario/summer-800-v1' : 'legacy CPU harness',
+    verifiedSources, legacySourceBytes, httpDigest, requestedSourceBytes,
     sourceSha256: Object.fromEntries(['src/fjord-play/FjordModels.ts', 'src/characters/BodyCoverage.ts',
         'src/characters/PreparedNativeOutfit.ts', 'src/characters/MeshyHuman.ts', 'src/characters/NativeHairRig.ts'].map(path =>
         [path, createHash('sha256').update(readFileSync(path)).digest('hex')])),

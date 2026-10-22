@@ -10,7 +10,7 @@ reuse their owner's decoded scenery, and restore the retained campaign on failur
 | Required envelope | Points | Completion evidence |
 | --- | ---: | --- |
 | Campaign preparation | 2 | Proposal/restoration accepted |
-| Geography and receipt | 50 | Unique worker substeps, followed by successful receipt/adoption |
+| Geography and receipt | 50 | Prepared island downloaded, unpacked and verified, followed by receipt/adoption |
 | Houses and scenery | 5 | All existing scenery loads/fallback decisions settled |
 | Terrain and nature | 20 | World factory completed, including optional asset/fallback decisions |
 | Wildlife | 3 | Required source loads and instances prepared, or existing matching layer reused |
@@ -27,6 +27,10 @@ Worker substep points (48 of its 50) are in `IslandLoadStatus.ts`; nested founda
 are measured but never credited repeatedly. Receipt/adoption reserves two points. Current main
 has ten v3 curated islands, whereas the historical v1/v2 pools had two; the stage plan does not
 depend on pool size. Recalibration needs matched current browser measurements, not a guessed ETA.
+
+The prepared-island path satisfies those same fixed dependencies when verification succeeds;
+download/unpack starts alone credit no points. Diagnostics record actual `island-download`,
+`island-unpack` and `island-verify` spans, without inventing procedural phase measurements.
 
 Each envelope reserves all its late-discovered dependencies until its owner closes it. Asset/model
 counts are shown as units without equating unlike models' costs. GPU batches are enumerated once
@@ -100,7 +104,7 @@ under this issue's QA directory for the CPU measurements, exact-output checks an
 
 Open `/fjord-play?diagnostics=load`, or choose **Run loading diagnostics** on the start menu.
 Choose **Test saved campaign**, **Test original arrival**, or **Test a new scenario**. The run uses
-the real loading path, including generation/restoration, assets, residents, texture uploads,
+the real loading path, including prepared-island loading/restoration, assets, residents, texture uploads,
 shader compilation, initial draws and the normal arrival. It stops before campaign activation,
 playback or installation of the campaign clock. The scene and its owned resources are disposed;
 no active save or resume checkpoint is replaced. A new test scenario therefore needs no campaign
@@ -148,3 +152,14 @@ uses the existing update path. No new world/save field, pool preload or permanen
 cache is introduced. See the follow-up report for byte/pose/canonical-world equivalence,
 memory tradeoffs, three-repeat local timings, the rejected candidate and the pending
 matched mobile diagnostic/gameplay rerun. Local CPU gains do not predict mobile load time.
+
+## Prepared fixed islands and character sources
+
+The next owner-supplied run still spends 43 seconds in geography. Fjord Play now reads the complete
+prepared final blueprint/plan for its selected version and seed, rather than rerunning campaign
+generation on the device. Historical v1/v2 pools remain available. Committed publications have
+build-time source/dependency checks and runtime compressed-identity/size verification. Shared
+character source bytes are also prepared losslessly, while DNA/faces and individual fits stay
+independent. No visual LOD or gameplay rules change. See the current
+[campaign publication contract](FJORD-ISLAND-CAMPAIGNS.md#prepared-publications-259-follow-up) and
+[matched CPU measurements and limits](qa/island-loading-259/prepared-campaigns/REPORT.md).

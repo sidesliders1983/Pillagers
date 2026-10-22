@@ -7,6 +7,7 @@ import {GLTF, GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {clone} from 'three/addons/utils/SkeletonUtils.js';
 import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
 import {assetDigest} from './AssetDigest';
+import {verifiedCharacterBytes} from './PreparedCharacterBytes';
 import {MeshyModuleRuntime,NativeModuleSource,nativeModuleEligible} from './MeshyModuleRuntime';
 import {ModuleBindingV2, NativeBodyIdentity, NativeBodySource} from './BodyFitAdapter';
 import {meshyRigSignature} from './MeshyNativeRig';
@@ -69,6 +70,12 @@ export function validateMeshyBodySource(source: NativeBodySource): NativeBodySou
 }
 export interface MeshyHumanFactoryOptions {bodySource?: NativeBodySource;}
 
+const loadBindingBytes = async (url: string) => {
+ const response = await fetch(url);
+ if (!response.ok) throw new Error('Could not load Meshy sidecar: ' + url);
+ return response.arrayBuffer();
+};
+
 /** Cached source geometry and clips; each resident owns bones, materials and mixer. */
 export class MeshyHumanFactory {
  private sources = new Map<number, Promise<GLTF>>();
@@ -82,11 +89,7 @@ export class MeshyHumanFactory {
  constructor(
   private load: (url: string, observe?: CharacterPreparationObserver) => Promise<GLTF> =
    (url, observe) => this.loadVerified(url, observe),
-  private loadBinding: (url: string) => Promise<ArrayBuffer> = async url => {
-   const response = await fetch(url);
-   if (!response.ok) throw new Error('Could not load Meshy sidecar: ' + url);
-   return response.arrayBuffer();
-  },
+  private loadBinding: (url: string) => Promise<ArrayBuffer> = loadBindingBytes,
   options: MeshyHumanFactoryOptions = {},
  ) {
   this.bodySource = options.bodySource && validateMeshyBodySource(options.bodySource);
@@ -124,13 +127,7 @@ export class MeshyHumanFactory {
   const expected = path === humanExtraAnimations.path ? humanExtraAnimations.sha256 :
    this.bodySource?.lods.find(asset => asset.path === path)?.sha256 ??
    meshyHumanAssetIdentity.find(asset => asset.path === path)?.sha256 ?? assetMeasurement(path).sha256;
-  const bytes = await characterAsync(observe, 'source-fetch-read', async () => {
-   const response = await fetch(url);
-   if (!response.ok) throw new Error('Could not load Meshy asset: ' + path);
-   return response.arrayBuffer();
-  }, path);
-  if (await characterAsync(observe, 'source-digest', () => assetDigest(bytes), path) !== expected)
-   throw new Error('Meshy asset bytes differ from the frozen identity: ' + path);
+  const bytes = await verifiedCharacterBytes(url, expected, observe);
   const source = await characterAsync(observe, 'source-decode', () => this.loader.parseAsync(bytes, ''), path);
   if (meshyHumanAssetIdentity.some(asset => asset.path === path)) {
    try {
@@ -208,9 +205,13 @@ export class MeshyHumanFactory {
     if (!binding) throw new Error('This module has no native Meshy binding');
     promise = Promise.all([
      this.load(characterAssetURL(id, model.lod), observe),
-     characterAsync(observe, 'binding-fetch-read', () => this.loadBinding(binding.path + '?v=' + binding.sha256.slice(0, 12)), binding.path),
+     this.loadBinding === loadBindingBytes
+      ? verifiedCharacterBytes(binding.path, binding.sha256, observe, 'binding')
+      : characterAsync(observe, 'binding-fetch-read', () =>
+       this.loadBinding(binding.path + '?v=' + binding.sha256.slice(0, 12)), binding.path),
     ]).then(async ([source, bytes]) => {
-     if (await characterAsync(observe, 'binding-digest', () => assetDigest(bytes), binding.path) !== binding.sha256) {
+     if (this.loadBinding !== loadBindingBytes &&
+      await characterAsync(observe, 'binding-digest', () => assetDigest(bytes), binding.path) !== binding.sha256) {
       throw new Error('Stale native module binding bytes: ' + id);
      }
      return {asset, source, binding: characterSync(observe, 'binding-text-parse', () =>

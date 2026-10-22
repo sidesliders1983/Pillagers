@@ -36,11 +36,12 @@ export interface CampaignIslandPlan {
     berth: NonNullable<WorldBlueprint['siteSelection']>['harborBerth'];
 }
 // Each ordered pool is immutable: changing its length remaps the campaign seed.
-const pools = {
+export const campaignIslandPools = {
     'island-pool-v1': [18, 7],
     'island-pool-v2': [18, 7],
     'island-pool-v3': [18, 7, 15, 79, 88, 101, 112, 168, 195, 227],
 } as const;
+const pools = campaignIslandPools;
 const plans = new WeakMap<WorldBlueprint, CampaignIslandPlan>();
 // Bounded cache: world geometry is shared, while every campaign owns its layout and Core.
 const worlds = new Map<string, WorldBlueprint>();
@@ -65,8 +66,8 @@ export function islandRecipe(campaignSeed: number, version: IslandRecipeVersion 
         seed: pool[hash % pool.length] };
 }
 
-/** A pinned campaign recipe prepares the existing generator's canonical surface.
- * Only local foundations change. No second biome classifier or saved heightfield is introduced. */
+/** Synchronous generator for authoring, headless contracts and already-adopted browser results.
+ * Fjord Play loads this exact final proposal from the prepared catalog before constructing Core. */
 export function createCampaignIsland(campaignSeed: number, saved?: IslandRecipe, observe?: GenerationObserver): WorldBlueprint {
     const recipe = islandRecipe(campaignSeed, saved?.version);
     if (saved && (saved.version !== recipe.version || saved.seed !== recipe.seed ||

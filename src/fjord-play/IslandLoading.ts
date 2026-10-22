@@ -14,6 +14,9 @@ import type { LoadingRunDiagnostics } from './LoadingRunDiagnostics';
 
 export const yieldForInput = () => new Promise<void>(resolve => setTimeout(resolve, 0));
 export function generationLabel(stage: string) {
+    if (stage === 'island-download') return 'Loading the prepared island';
+    if (stage === 'island-unpack') return 'Reading terrain and routes';
+    if (stage === 'island-verify') return 'Checking the prepared island';
     if (stage.includes('terrain')) return 'Shaping coast & valleys';
     if (/zoning|nature/.test(stage)) return 'Ground & nature';
     if (/validation|freeze/.test(stage)) return 'Checking the island';
@@ -62,9 +65,9 @@ export class IslandLoading {
         this.root.setAttribute('role', 'dialog');
         this.root.setAttribute('aria-modal', 'true');
         this.root.setAttribute('aria-label', 'Preparing a new island campaign');
-        this.root.innerHTML = `<canvas aria-label="Top-down preview of the generated island"></canvas>
+        this.root.innerHTML = `<canvas aria-label="Top-down preview of the prepared island"></canvas>
             <div class="island-preview-space" aria-hidden="true"></div><div class="island-loading-copy"><p class="island-loading-eyebrow">FjordSide · a new shore</p>
-            <h1 id="island-loading-status" role="status" aria-live="polite">Shaping coast &amp; valleys</h1>
+            <h1 id="island-loading-status" role="status" aria-live="polite">Loading the prepared island</h1>
             <div class="island-load-progress" aria-label="Island preparation">
                 <div class="island-load-summary"><span>Preparing your island</span><strong data-load-percent>0%</strong></div>
                 <progress max="100" value="0" aria-label="Estimated completed preparation"></progress>
@@ -78,7 +81,7 @@ export class IslandLoading {
                 </details></div>
             <p class="island-loading-help" hidden></p>
             <div class="island-loading-actions"><button type="button" id="island-loading-cancel" ${canReturnToGame ? '' : 'hidden'}>Cancel &amp; Return to Game</button>
-            <button type="button" id="island-loading-retry" hidden>Retry generation</button>
+            <button type="button" id="island-loading-retry" hidden>Retry loading</button>
             <button type="button" id="island-loading-skip" hidden>Skip camera arrival</button></div></div>`;
         this.root.dataset.mode = resume ? 'resume' : 'new';
         if (options.backLabel) this.root.querySelector('#island-loading-cancel')!.textContent = options.backLabel;
@@ -334,13 +337,13 @@ export class IslandLoading {
         for (;;) {
             this.check();
             this.retry.hidden = true;
-            this.stage(this.resume ? 'Restoring saved terrain' : 'Shaping coast & valleys');
+            this.stage(this.resume ? 'Restoring saved terrain' : 'Loading the prepared island');
             try {
                 const recipe = this.options.recipe ?? this.resume?.island ?? islandRecipe(seed);
                 this.diagnostics.metadata.seed = seed;
                 this.diagnostics.metadata.recipe = { ...recipe };
                 this.diagnostics.worker = 'waiting';
-                this.diagnostics.enter('geography', 'worker-request', this.resume ? 'Restoring saved terrain' : 'Shaping coast & valleys');
+                this.diagnostics.enter('geography', 'worker-request', this.resume ? 'Restoring saved terrain' : 'Loading the prepared island');
                 const generation = this.diagnostics.begin('geography');
                 this.updateProgress();
                 const result = await this.worker.generate({ kind: 'campaign', seed, recipe,

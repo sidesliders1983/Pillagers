@@ -7,7 +7,7 @@ export type LoadOutcome = 'preparing' | 'failed' | 'cancelled' | 'playable' | 'd
 // Each envelope stays open until its owner seals all dependencies, including late model loads.
 export const loadPlan = {
     campaign: { weight: 2, label: 'Reading your campaign' },
-    geography: { weight: 50, label: 'Shaping coast & valleys' },
+    geography: { weight: 50, label: 'Loading the prepared island' },
     assets: { weight: 5, label: 'Loading houses and scenery' },
     world: { weight: 20, label: 'Preparing terrain and nature' },
     wildlife: { weight: 3, label: 'Preparing wildlife' },
@@ -123,6 +123,9 @@ export class IslandLoadStatus {
     generationComplete(stage: string) {
         if (this.outcome !== 'preparing') return;
         this.realProgress();
+        if (stage === 'island-verify') {
+            for (const name of Object.keys(geographyWork)) this.generated.add(name);
+        }
         if (Object.hasOwn(geographyWork, stage)) this.generated.add(stage);
     }
     count(step: LoadStep, completed: number, total: number, kind: string, contributes = false) {
