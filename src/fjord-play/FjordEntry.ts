@@ -4,6 +4,7 @@ import { readRecoverySources, type RecoveryCandidate } from '../play/SettlementR
 import { chooseSettlementRecovery } from './CampaignRecovery';
 import { projectFjordCalendar } from './FjordCalendar';
 import './campaign-start.css';
+import { lastIslandLoad } from './IslandLoadStatus';
 
 export interface CampaignStartAttempt {
     kind: 'continue' | 'restart' | 'new';
@@ -31,11 +32,11 @@ function restartProposal(text: string) {
     return session.restartProposal();
 }
 
-function download(text: string) {
+function download(text: string, filename = 'fjordside-campaign.json') {
     const url = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'fjordside-campaign.json';
+    link.download = filename;
     link.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
@@ -211,10 +212,19 @@ export async function runFjordEntry(ports: EntryPorts = {
                             <p>Your previous saves have not been replaced.</p><div class="entry-confirm">
                             <button type="button" data-retry>Try again</button>
                             <button type="button" data-back>Back to start menu</button>
-                            <button type="button" data-export>Export prepared campaign</button></div>`;
+                            <button type="button" data-export>Export prepared campaign</button>
+                            <button type="button" data-load-report>Save loading diagnostics</button></div><p data-load-context></p>`;
                         content.querySelector('[role="status"]')!.textContent = String(error);
                         content.querySelector<HTMLButtonElement>('[data-export]')!.hidden = !prepared;
                         content.querySelector('[data-export]')!.addEventListener('click', () => { if (prepared) download(prepared); });
+                        const report = lastIslandLoad();
+                        content.querySelector<HTMLButtonElement>('[data-load-report]')!.hidden = !report;
+                        if (report) {
+                            content.querySelector('[data-load-context]')!.textContent =
+                                `${report.stage} · ${report.percent}% · attempt ${report.attempt}`;
+                            content.querySelector('[data-load-report]')!.addEventListener('click', () =>
+                                download(JSON.stringify(report, null, 2), `fjordside-load-${report.attempt}.json`));
+                        }
                         content.querySelector<HTMLButtonElement>('[data-retry]')!.focus();
                         const retry = await waitForChoice(content, target => target.hasAttribute('data-retry') ? true :
                             target.hasAttribute('data-back') ? false : undefined);
