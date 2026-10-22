@@ -7,6 +7,38 @@ const { generateWorld } = load('../src/world-generation/GenerateWorld.ts');
 const { createBlueprintTerrain, disposeBlueprintTerrain } = load('../src/world/BlueprintTerrain.ts');
 const ids = ['Ground037', 'Ground054', 'grass_path_2', 'mossy_rock'];
 
+test('initial prepared wear draws exactly the same terrain and masks as the prior zero-then-update path', async () => {
+    const { createBlueprintTerrainAsync, updateBlueprintWearAsync } = load('../src/world/BlueprintTerrain.ts');
+    const world = fixture(), before = JSON.stringify(world);
+    const weights = world.terrain.heights.map((_, index) => (index % 9) / 8);
+    const sources = new Map(ids.map(id => [id, new MeshStandardMaterial({ name: id })]));
+    const yieldControl = async () => {};
+    const legacy = await createBlueprintTerrainAsync(world, sources, 'none', weights.map(() => 0), 'zoned', false, yieldControl);
+    const direct = await createBlueprintTerrainAsync(world, sources, 'none', weights, 'zoned', false, yieldControl);
+    const sameDrawnSurface = () => {
+        for (const [name, attribute] of Object.entries(legacy.geometry.attributes))
+            assert.deepEqual(direct.geometry.attributes[name].array, attribute.array, name);
+        assert.deepEqual(direct.geometry.groups, legacy.geometry.groups);
+        assert.deepEqual(direct.geometry.drawRange, legacy.geometry.drawRange);
+        const indices = mesh => mesh.geometry.index.array.slice(0, mesh.geometry.drawRange.count);
+        assert.deepEqual(indices(direct), indices(legacy));
+        for (let index = 0; index < legacy.material.length; index++)
+            assert.deepEqual(direct.material[index].alphaMap?.image.data, legacy.material[index].alphaMap?.image.data);
+    };
+    try {
+        await updateBlueprintWearAsync(legacy, weights, yieldControl);
+        sameDrawnSurface();
+        const changed = weights.map(weight => 1 - weight);
+        await updateBlueprintWearAsync(legacy, changed, yieldControl);
+        await updateBlueprintWearAsync(direct, changed, yieldControl);
+        sameDrawnSurface();
+        assert.equal(JSON.stringify(world), before);
+    } finally {
+        disposeBlueprintTerrain(legacy); disposeBlueprintTerrain(direct);
+        for (const material of sources.values()) material.dispose();
+    }
+});
+
 function fixture() {
     const world = structuredClone(generateWorld({ seed: 17, environment: { version: 1 } }));
     world.terrain.heights.fill(4);

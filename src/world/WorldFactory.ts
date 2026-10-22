@@ -30,6 +30,8 @@ export interface WorldSelection {
     groundStyle?: 'iceland-v1';
     discovery?: DiscoveryView;
     preparation?: <T>(stage: string, operation: () => T | Promise<T>) => Promise<T>;
+    /** Presentation-only initial wear, sampled once immediately before terrain construction. */
+    initialGroundWeights?: () => readonly number[];
     mode: 'reference' | 'generated';
     settlement?: 'prototype' | 'canonical';
     blueprint?: WorldBlueprint;
@@ -127,7 +129,7 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
             }
             const surface = createBlueprintSurface(blueprint);
             terrain = await prepare('terrain-mesh-and-masks', () => createBlueprintTerrainAsync(blueprint,grounds?.materials,'none',
-                canonical ? blueprint.terrain.heights.map(() => 0) : undefined, island ? 'zoned' : 'baseline',
+                selection.initialGroundWeights?.() ?? (canonical ? blueprint.terrain.heights.map(() => 0) : undefined), island ? 'zoned' : 'baseline',
                 false));
             if (blueprint.config.conifers === 'ez-tree') {
                 try { pines = await prepare('pine-assets-fetch-decode', () => loadPineModels(assets)); }

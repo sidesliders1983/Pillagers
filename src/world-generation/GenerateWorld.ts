@@ -17,6 +17,15 @@ import {
     gentlerIslandGeneratorVersion, GenerationRequest, WorldBlueprint, WorldGenerationConfig, Point2, ConiferSource,
 } from './WorldBlueprint';
 
+// A single-use handoff, not a persistent/pool cache. Only an original generator
+// result can supply its exact pre-foundation terrain; imports/clones use regeneration.
+const naturalIslandTerrains = new WeakMap<WorldBlueprint, WorldBlueprint['terrain']>();
+export function takeNaturalIslandTerrain(world: WorldBlueprint) {
+    const terrain = naturalIslandTerrains.get(world);
+    naturalIslandTerrains.delete(world);
+    return terrain;
+}
+
 export function normalizeWorldConfig(request: GenerationRequest): WorldGenerationConfig {
     if (!Number.isInteger(request.seed) || request.seed < 0 || request.seed > 0xffffffff) {
         throw new RangeError('Seed must be an integer from 0 to 4294967295.');
@@ -59,7 +68,8 @@ function segmentDistance(x: number, z: number, a: Point2, b: Point2) {
 }
 
 /** All stochastic geometry uses a private instance of the existing seeded RNG and pinned MIT noise. */
-export function generateWorld(request: GenerationRequest, observe?: GenerationObserver): WorldBlueprint {
+export function generateWorld(request: GenerationRequest, observe?: GenerationObserver,
+    options: { retainNaturalIslandTerrain?: boolean } = {}): WorldBlueprint {
     const config = normalizeWorldConfig(request);
     const random = seededRandom(config.seed);
     const noise = createNoise2D(seededRandom(config.seed));
@@ -145,8 +155,11 @@ export function generateWorld(request: GenerationRequest, observe?: GenerationOb
     const zoned = { ...planned, ...(environment ? { environment } : {}) };
     observe?.preview?.(zoned);
     const world = { ...zoned, ...measureGeneration('nature', () => planNature(zoned), observe) };
-    return measureGeneration('validation-and-freeze', () =>
+    const result = measureGeneration('validation-and-freeze', () =>
         freezeBlueprint({ ...world, validation: validateGeneratedWorld(world) }), observe);
+    if (options.retainNaturalIslandTerrain && island && isSettlementGeneratorVersion(config.generatorVersion))
+        naturalIslandTerrains.set(result, freezeBlueprint(terrain));
+    return result;
 }
 
 /** Replan scenery and its navigation while retaining the stored geography and settlement. */

@@ -1,0 +1,4823 @@
+{
+  "schema": "fjordside-loading-run",
+  "version": 1,
+  "diagnosticOnly": true,
+  "startedUtc": "2026-10-22T17:33:55.924Z",
+  "elapsedMs": 118577,
+  "outcome": "diagnostic-complete",
+  "loading": {
+    "version": 1,
+    "attempt": "mvjtlle8-1",
+    "startedUtc": "2026-10-22T17:33:56.238Z",
+    "mode": "new",
+    "seed": 3055065912,
+    "build": "f9feee5406630c88b2b0aa49c20b16c4e9c74484",
+    "cache": "browser-managed; cold/warm not inferred",
+    "screenRecording": "not reported",
+    "environment": {
+      "browser": "Mozilla/5.0 (iPhone; CPU iPhone OS 27_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/155.0.8059.37 Mobile/15E148 Safari/604.1",
+      "viewport": [
+        393,
+        654
+      ],
+      "pixelRatio": 3
+    },
+    "recipe": {
+      "version": "island-pool-v3",
+      "generatorVersion": "fjordside-island-v0.3e-r3",
+      "seed": 7
+    },
+    "quality": "low",
+    "outcome": "diagnostic-complete",
+    "percent": 100,
+    "stage": "Arriving at your settlement",
+    "substage": "arrival",
+    "worker": "received",
+    "elapsedMs": 118250,
+    "stageElapsedMs": 2716,
+    "lastProgressAgeMs": 13,
+    "warning": "",
+    "latestResource": "/terrain/fish-drying-rack.glb",
+    "resources": {
+      "geometries": 116,
+      "textures": 111,
+      "programs": 44,
+      "calls": 141,
+      "triangles": 2463802
+    },
+    "firstFrameMs": 115546,
+    "maxObservationGapMs": 9613,
+    "measurements": {
+      "gpuTime": "unsupported",
+      "processMemory": "unsupported",
+      "cacheTemperature": "not observable reliably",
+      "killedProcess": "may leave no final event"
+    },
+    "timeline": [
+      {
+        "stage": "campaign-founders",
+        "startedMs": 8,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 14,
+        "outcome": "complete"
+      },
+      {
+        "stage": "geography",
+        "startedMs": 23,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 42532,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:terrain",
+        "startedMs": 292,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 6141,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:initial-candidates",
+        "startedMs": 6438,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 228,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:initial-plan",
+        "startedMs": 6666,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 729,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:compartments",
+        "startedMs": 7396,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 436,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 7832,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 1923,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 9759,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 1040,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 10801,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 500,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 11304,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 348,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 11654,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 168,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 11824,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 200,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 12025,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 335,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 12362,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 126,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 12489,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 13,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 12503,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 28,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 12533,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 193,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 12727,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 481,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 13209,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 60,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 13270,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 11,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 13282,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 42,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 13325,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 216,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 13542,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 438,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 13981,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 67,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 14050,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 13,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 14064,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 32,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 14098,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 534,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 14635,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 321,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 14958,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 6,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 14965,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 40,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 15007,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 102,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 15112,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 20,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 15135,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 16,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 15153,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 23,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 15177,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 102,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 15281,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 223,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 15505,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 33,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 15541,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 19,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 15562,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 107,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 15671,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 19,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 15692,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 31,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 15727,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 18,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 15747,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 87,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 15838,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 16,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 15856,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 22,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 15880,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 22,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 15904,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 38,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 15945,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 17,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 15964,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 28,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 15995,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 15,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 16012,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 31,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 16046,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 24,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 16072,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 33,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:foundations",
+        "startedMs": 16106,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 18,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:player-navigation",
+        "startedMs": 16133,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 941,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:access",
+        "startedMs": 17074,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 36,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:harbor",
+        "startedMs": 17110,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 0,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:visibility",
+        "startedMs": 17111,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 177,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:final-navigation",
+        "startedMs": 17288,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 1079,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:final-route",
+        "startedMs": 18367,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 36,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:environment-zoning",
+        "startedMs": 18403,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 1309,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:nature",
+        "startedMs": 19715,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 5211,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:validation-and-freeze",
+        "startedMs": 24926,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 1333,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:campaign-natural-terrain",
+        "startedMs": 26260,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 6784,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:campaign-foundations",
+        "startedMs": 33044,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 501,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:campaign-zoning",
+        "startedMs": 34328,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 1326,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:campaign-nature-and-freeze",
+        "startedMs": 35658,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 5930,
+        "outcome": "complete"
+      },
+      {
+        "stage": "receive-and-freeze",
+        "startedMs": 41736,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 819,
+        "outcome": "complete"
+      },
+      {
+        "stage": "assets-fetch-decode",
+        "startedMs": 44898,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 200,
+        "outcome": "complete"
+      },
+      {
+        "stage": "nature-assets-fetch-decode",
+        "startedMs": 45101,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 237,
+        "outcome": "complete"
+      },
+      {
+        "stage": "ground-textures-fetch-decode",
+        "startedMs": 45338,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 36,
+        "outcome": "complete"
+      },
+      {
+        "stage": "terrain-mesh-and-masks",
+        "startedMs": 45374,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 11418,
+        "outcome": "complete"
+      },
+      {
+        "stage": "pine-assets-fetch-decode",
+        "startedMs": 56793,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 78,
+        "outcome": "complete"
+      },
+      {
+        "stage": "nature-instance-assembly",
+        "startedMs": 56871,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 2,
+        "outcome": "complete"
+      },
+      {
+        "stage": "movement-surface",
+        "startedMs": 56910,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 1,
+        "outcome": "complete"
+      },
+      {
+        "stage": "wildlife-preparation",
+        "startedMs": 56912,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 1323,
+        "outcome": "complete"
+      },
+      {
+        "stage": "initial-character-scene-sync",
+        "startedMs": 58618,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 49474,
+        "outcome": "complete"
+      },
+      {
+        "stage": "initial-ground-wear",
+        "startedMs": 58659,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 4349,
+        "outcome": "complete"
+      },
+      {
+        "stage": "initial-settlement-models",
+        "startedMs": 63133,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 44948,
+        "outcome": "complete"
+      },
+      {
+        "stage": "standing-tree-targets",
+        "startedMs": 108085,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 0,
+        "outcome": "complete"
+      },
+      {
+        "stage": "texture-upload",
+        "startedMs": 108095,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 824,
+        "outcome": "complete"
+      },
+      {
+        "stage": "shader-compilation",
+        "startedMs": 108919,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 109,
+        "outcome": "complete"
+      },
+      {
+        "stage": "initial-gpu-upload-and-draws",
+        "startedMs": 109028,
+        "attempt": "mvjtlle8-1",
+        "durationMs": 6518,
+        "outcome": "complete"
+      }
+    ]
+  },
+  "summary": {
+    "resourceCount": 286,
+    "observedTransferBytes": 15107480,
+    "observedEncodedBodyBytes": 15023480,
+    "settlementModelCount": 23
+  },
+  "resources": [
+    {
+      "path": "/src/fjord-play/FjordPlay.ts",
+      "initiator": "script",
+      "startedMs": 11,
+      "durationMs": 33,
+      "requestStartedMs": 13,
+      "responseStartedMs": 40,
+      "responseEndedMs": 44,
+      "transferBytes": 172601,
+      "encodedBodyBytes": 172301,
+      "decodedBodyBytes": 172301
+    },
+    {
+      "path": "/src/lore/AttentionToast.ts",
+      "initiator": "script",
+      "startedMs": 49,
+      "durationMs": 24,
+      "requestStartedMs": 49,
+      "responseStartedMs": 0,
+      "responseEndedMs": 73,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/IslandMissionMarkers.ts",
+      "initiator": "script",
+      "startedMs": 50,
+      "durationMs": 23,
+      "requestStartedMs": 50,
+      "responseStartedMs": 0,
+      "responseEndedMs": 73,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/lore/AttentionView.ts",
+      "initiator": "script",
+      "startedMs": 50,
+      "durationMs": 23,
+      "requestStartedMs": 50,
+      "responseStartedMs": 0,
+      "responseEndedMs": 73,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/LifecycleTrace.ts",
+      "initiator": "script",
+      "startedMs": 50,
+      "durationMs": 24,
+      "requestStartedMs": 50,
+      "responseStartedMs": 0,
+      "responseEndedMs": 74,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/IslandMissionPanel.ts",
+      "initiator": "script",
+      "startedMs": 50,
+      "durationMs": 24,
+      "requestStartedMs": 50,
+      "responseStartedMs": 0,
+      "responseEndedMs": 74,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/FjordScene.ts",
+      "initiator": "script",
+      "startedMs": 54,
+      "durationMs": 28,
+      "requestStartedMs": 64,
+      "responseStartedMs": 75,
+      "responseEndedMs": 82,
+      "transferBytes": 119572,
+      "encodedBodyBytes": 119272,
+      "decodedBodyBytes": 119272
+    },
+    {
+      "path": "/src/fjord-play/FjordScenario.ts",
+      "initiator": "script",
+      "startedMs": 50,
+      "durationMs": 47,
+      "requestStartedMs": 50,
+      "responseStartedMs": 0,
+      "responseEndedMs": 97,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/ExpeditionPanel.ts",
+      "initiator": "script",
+      "startedMs": 50,
+      "durationMs": 47,
+      "requestStartedMs": 50,
+      "responseStartedMs": 0,
+      "responseEndedMs": 97,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/config/FjordLivestock.ts",
+      "initiator": "script",
+      "startedMs": 50,
+      "durationMs": 48,
+      "requestStartedMs": 50,
+      "responseStartedMs": 0,
+      "responseEndedMs": 98,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/lore/FoundingBookWindow.ts",
+      "initiator": "script",
+      "startedMs": 50,
+      "durationMs": 48,
+      "requestStartedMs": 50,
+      "responseStartedMs": 0,
+      "responseEndedMs": 98,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/MobileShell.ts",
+      "initiator": "script",
+      "startedMs": 51,
+      "durationMs": 47,
+      "requestStartedMs": 51,
+      "responseStartedMs": 0,
+      "responseEndedMs": 98,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/IslandLoading.ts",
+      "initiator": "script",
+      "startedMs": 56,
+      "durationMs": 42,
+      "requestStartedMs": 82,
+      "responseStartedMs": 98,
+      "responseEndedMs": 98,
+      "transferBytes": 92662,
+      "encodedBodyBytes": 92362,
+      "decodedBodyBytes": 92362
+    },
+    {
+      "path": "/src/lore/PersonalHistoryView.ts",
+      "initiator": "script",
+      "startedMs": 50,
+      "durationMs": 56,
+      "requestStartedMs": 50,
+      "responseStartedMs": 0,
+      "responseEndedMs": 106,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/ui/ScreenAwakeControl.ts",
+      "initiator": "script",
+      "startedMs": 51,
+      "durationMs": 55,
+      "requestStartedMs": 51,
+      "responseStartedMs": 0,
+      "responseEndedMs": 106,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/FjordHeader.ts",
+      "initiator": "script",
+      "startedMs": 50,
+      "durationMs": 56,
+      "requestStartedMs": 50,
+      "responseStartedMs": 0,
+      "responseEndedMs": 106,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/SelectionLabels.ts",
+      "initiator": "script",
+      "startedMs": 51,
+      "durationMs": 55,
+      "requestStartedMs": 51,
+      "responseStartedMs": 0,
+      "responseEndedMs": 106,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/lore/ClanBookReader.ts",
+      "initiator": "script",
+      "startedMs": 50,
+      "durationMs": 57,
+      "requestStartedMs": 50,
+      "responseStartedMs": 0,
+      "responseEndedMs": 107,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/node_modules/.vite/deps/nosleep__js.js",
+      "initiator": "script",
+      "startedMs": 106,
+      "durationMs": 2,
+      "requestStartedMs": 106,
+      "responseStartedMs": 0,
+      "responseEndedMs": 108,
+      "transferBytes": 0,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/FjordProduction.ts",
+      "initiator": "script",
+      "startedMs": 51,
+      "durationMs": 59,
+      "requestStartedMs": 51,
+      "responseStartedMs": 0,
+      "responseEndedMs": 110,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/fjord-play.css",
+      "initiator": "script",
+      "startedMs": 51,
+      "durationMs": 63,
+      "requestStartedMs": 51,
+      "responseStartedMs": 0,
+      "responseEndedMs": 114,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/desktop-foundations.css",
+      "initiator": "script",
+      "startedMs": 51,
+      "durationMs": 63,
+      "requestStartedMs": 51,
+      "responseStartedMs": 0,
+      "responseEndedMs": 114,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/ProductionLabels.ts",
+      "initiator": "script",
+      "startedMs": 51,
+      "durationMs": 63,
+      "requestStartedMs": 51,
+      "responseStartedMs": 0,
+      "responseEndedMs": 114,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/FjordIcons.ts",
+      "initiator": "script",
+      "startedMs": 51,
+      "durationMs": 63,
+      "requestStartedMs": 51,
+      "responseStartedMs": 0,
+      "responseEndedMs": 114,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/play/SettlementBrowser.ts",
+      "initiator": "script",
+      "startedMs": 51,
+      "durationMs": 64,
+      "requestStartedMs": 51,
+      "responseStartedMs": 0,
+      "responseEndedMs": 115,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/play/SettlementPanel.ts",
+      "initiator": "script",
+      "startedMs": 51,
+      "durationMs": 64,
+      "requestStartedMs": 51,
+      "responseStartedMs": 0,
+      "responseEndedMs": 115,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/FjordInterface.ts",
+      "initiator": "script",
+      "startedMs": 51,
+      "durationMs": 72,
+      "requestStartedMs": 51,
+      "responseStartedMs": 0,
+      "responseEndedMs": 123,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/lore/attention.css",
+      "initiator": "script",
+      "startedMs": 73,
+      "durationMs": 51,
+      "requestStartedMs": 73,
+      "responseStartedMs": 0,
+      "responseEndedMs": 124,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/lore/AttentionNavigation.ts",
+      "initiator": "script",
+      "startedMs": 74,
+      "durationMs": 50,
+      "requestStartedMs": 74,
+      "responseStartedMs": 0,
+      "responseEndedMs": 124,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/play/MissionLivestockView.ts",
+      "initiator": "script",
+      "startedMs": 75,
+      "durationMs": 49,
+      "requestStartedMs": 75,
+      "responseStartedMs": 0,
+      "responseEndedMs": 124,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/RivalScene.ts",
+      "initiator": "script",
+      "startedMs": 83,
+      "durationMs": 41,
+      "requestStartedMs": 83,
+      "responseStartedMs": 0,
+      "responseEndedMs": 124,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/config/FjordFog.ts",
+      "initiator": "script",
+      "startedMs": 83,
+      "durationMs": 41,
+      "requestStartedMs": 83,
+      "responseStartedMs": 0,
+      "responseEndedMs": 124,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/wildlife/WildlifeLayer.ts",
+      "initiator": "script",
+      "startedMs": 83,
+      "durationMs": 48,
+      "requestStartedMs": 83,
+      "responseStartedMs": 0,
+      "responseEndedMs": 131,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/IslandMap.ts",
+      "initiator": "script",
+      "startedMs": 83,
+      "durationMs": 48,
+      "requestStartedMs": 83,
+      "responseStartedMs": 0,
+      "responseEndedMs": 131,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/DiscoveryFog.ts",
+      "initiator": "script",
+      "startedMs": 83,
+      "durationMs": 48,
+      "requestStartedMs": 83,
+      "responseStartedMs": 0,
+      "responseEndedMs": 131,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/TerrainNavigation.ts",
+      "initiator": "script",
+      "startedMs": 83,
+      "durationMs": 49,
+      "requestStartedMs": 83,
+      "responseStartedMs": 0,
+      "responseEndedMs": 132,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/effects/PrecipitationEffect.ts",
+      "initiator": "script",
+      "startedMs": 84,
+      "durationMs": 48,
+      "requestStartedMs": 84,
+      "responseStartedMs": 0,
+      "responseEndedMs": 132,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/config/FjordTerrain.ts",
+      "initiator": "script",
+      "startedMs": 84,
+      "durationMs": 48,
+      "requestStartedMs": 84,
+      "responseStartedMs": 0,
+      "responseEndedMs": 132,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/node_modules/.vite/deps/three_addons_utils_SkeletonUtils__js.js",
+      "initiator": "script",
+      "startedMs": 132,
+      "durationMs": 2,
+      "requestStartedMs": 132,
+      "responseStartedMs": 0,
+      "responseEndedMs": 134,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/node_modules/.vite/deps/three_addons_libs_meshopt_decoder__module__js.js",
+      "initiator": "script",
+      "startedMs": 132,
+      "durationMs": 3,
+      "requestStartedMs": 132,
+      "responseStartedMs": 0,
+      "responseEndedMs": 135,
+      "transferBytes": 0,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/node_modules/.vite/deps/three_addons_loaders_GLTFLoader__js.js",
+      "initiator": "script",
+      "startedMs": 132,
+      "durationMs": 3,
+      "requestStartedMs": 132,
+      "responseStartedMs": 0,
+      "responseEndedMs": 135,
+      "transferBytes": 0,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/node_modules/.vite/deps/quarks__core.js",
+      "initiator": "script",
+      "startedMs": 132,
+      "durationMs": 4,
+      "requestStartedMs": 132,
+      "responseStartedMs": 0,
+      "responseEndedMs": 136,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/node_modules/.vite/deps/three__quarks.js",
+      "initiator": "script",
+      "startedMs": 132,
+      "durationMs": 5,
+      "requestStartedMs": 132,
+      "responseStartedMs": 0,
+      "responseEndedMs": 137,
+      "transferBytes": 0,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/node_modules/.vite/deps/chunk-USTKNW3D.js",
+      "initiator": "script",
+      "startedMs": 136,
+      "durationMs": 1,
+      "requestStartedMs": 136,
+      "responseStartedMs": 0,
+      "responseEndedMs": 137,
+      "transferBytes": 0,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/node_modules/.vite/deps/chunk-MHYAJFXX.js",
+      "initiator": "script",
+      "startedMs": 136,
+      "durationMs": 2,
+      "requestStartedMs": 136,
+      "responseStartedMs": 0,
+      "responseEndedMs": 138,
+      "transferBytes": 0,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/config/FjordPresentation.ts",
+      "initiator": "script",
+      "startedMs": 84,
+      "durationMs": 56,
+      "requestStartedMs": 84,
+      "responseStartedMs": 0,
+      "responseEndedMs": 140,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/effects/CampfireEffect.ts",
+      "initiator": "script",
+      "startedMs": 84,
+      "durationMs": 56,
+      "requestStartedMs": 84,
+      "responseStartedMs": 0,
+      "responseEndedMs": 140,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/config/PresentationQuality.ts",
+      "initiator": "script",
+      "startedMs": 84,
+      "durationMs": 56,
+      "requestStartedMs": 84,
+      "responseStartedMs": 0,
+      "responseEndedMs": 140,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/core/Renderer.ts",
+      "initiator": "script",
+      "startedMs": 84,
+      "durationMs": 56,
+      "requestStartedMs": 84,
+      "responseStartedMs": 0,
+      "responseEndedMs": 140,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/LivingWorldController.ts",
+      "initiator": "script",
+      "startedMs": 84,
+      "durationMs": 56,
+      "requestStartedMs": 84,
+      "responseStartedMs": 0,
+      "responseEndedMs": 140,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/core/AssetManager.ts",
+      "initiator": "script",
+      "startedMs": 84,
+      "durationMs": 56,
+      "requestStartedMs": 84,
+      "responseStartedMs": 0,
+      "responseEndedMs": 140,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/node_modules/.vite/deps/three_addons_loaders_DRACOLoader__js.js",
+      "initiator": "script",
+      "startedMs": 141,
+      "durationMs": 1,
+      "requestStartedMs": 141,
+      "responseStartedMs": 0,
+      "responseEndedMs": 142,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/SeasonTint.ts",
+      "initiator": "script",
+      "startedMs": 84,
+      "durationMs": 63,
+      "requestStartedMs": 84,
+      "responseStartedMs": 0,
+      "responseEndedMs": 147,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/core/WorldLighting.ts",
+      "initiator": "script",
+      "startedMs": 84,
+      "durationMs": 64,
+      "requestStartedMs": 84,
+      "responseStartedMs": 0,
+      "responseEndedMs": 148,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/WorldFactory.ts",
+      "initiator": "script",
+      "startedMs": 84,
+      "durationMs": 64,
+      "requestStartedMs": 84,
+      "responseStartedMs": 0,
+      "responseEndedMs": 148,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/FjordModels.ts",
+      "initiator": "script",
+      "startedMs": 84,
+      "durationMs": 64,
+      "requestStartedMs": 84,
+      "responseStartedMs": 0,
+      "responseEndedMs": 148,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/camera/RTSCameraController.ts",
+      "initiator": "script",
+      "startedMs": 84,
+      "durationMs": 64,
+      "requestStartedMs": 84,
+      "responseStartedMs": 0,
+      "responseEndedMs": 148,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/FjordEntities.ts",
+      "initiator": "script",
+      "startedMs": 92,
+      "durationMs": 62,
+      "requestStartedMs": 140,
+      "responseStartedMs": 149,
+      "responseEndedMs": 154,
+      "transferBytes": 80793,
+      "encodedBodyBytes": 80493,
+      "decodedBodyBytes": 80493
+    },
+    {
+      "path": "/src/fjord-play/SettlementDressingLayer.ts",
+      "initiator": "script",
+      "startedMs": 84,
+      "durationMs": 71,
+      "requestStartedMs": 84,
+      "responseStartedMs": 0,
+      "responseEndedMs": 155,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/characters/ResidentPortraitStudio.ts",
+      "initiator": "script",
+      "startedMs": 84,
+      "durationMs": 71,
+      "requestStartedMs": 84,
+      "responseStartedMs": 0,
+      "responseEndedMs": 155,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/SettlementDressing.ts",
+      "initiator": "script",
+      "startedMs": 84,
+      "durationMs": 72,
+      "requestStartedMs": 84,
+      "responseStartedMs": 0,
+      "responseEndedMs": 156,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world-generation/BrowserGeneration.ts",
+      "initiator": "script",
+      "startedMs": 99,
+      "durationMs": 57,
+      "requestStartedMs": 99,
+      "responseStartedMs": 0,
+      "responseEndedMs": 156,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/island-loading.css",
+      "initiator": "script",
+      "startedMs": 99,
+      "durationMs": 57,
+      "requestStartedMs": 99,
+      "responseStartedMs": 0,
+      "responseEndedMs": 156,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/node_modules/.vite/deps/three_addons_postprocessing_OutputPass__js.js",
+      "initiator": "script",
+      "startedMs": 156,
+      "durationMs": 0,
+      "requestStartedMs": 156,
+      "responseStartedMs": 0,
+      "responseEndedMs": 156,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/lore/WildlifeBookView.ts",
+      "initiator": "script",
+      "startedMs": 98,
+      "durationMs": 62,
+      "requestStartedMs": 98,
+      "responseStartedMs": 0,
+      "responseEndedMs": 160,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/lore/personal-history.css",
+      "initiator": "script",
+      "startedMs": 106,
+      "durationMs": 55,
+      "requestStartedMs": 106,
+      "responseStartedMs": 0,
+      "responseEndedMs": 161,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/gameplay-lab/updateView.ts",
+      "initiator": "script",
+      "startedMs": 106,
+      "durationMs": 55,
+      "requestStartedMs": 106,
+      "responseStartedMs": 0,
+      "responseEndedMs": 161,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/ui/screen-awake.css",
+      "initiator": "script",
+      "startedMs": 106,
+      "durationMs": 56,
+      "requestStartedMs": 106,
+      "responseStartedMs": 0,
+      "responseEndedMs": 162,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/lore/clan-book.css",
+      "initiator": "script",
+      "startedMs": 107,
+      "durationMs": 55,
+      "requestStartedMs": 107,
+      "responseStartedMs": 0,
+      "responseEndedMs": 162,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/lore/FamilyTreeView.ts",
+      "initiator": "script",
+      "startedMs": 107,
+      "durationMs": 55,
+      "requestStartedMs": 107,
+      "responseStartedMs": 0,
+      "responseEndedMs": 162,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/play/LivestockBreedingView.ts",
+      "initiator": "script",
+      "startedMs": 115,
+      "durationMs": 53,
+      "requestStartedMs": 115,
+      "responseStartedMs": 0,
+      "responseEndedMs": 168,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/HomeImprovements.ts",
+      "initiator": "script",
+      "startedMs": 124,
+      "durationMs": 44,
+      "requestStartedMs": 124,
+      "responseStartedMs": 0,
+      "responseEndedMs": 168,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/mobile-horizon.css",
+      "initiator": "script",
+      "startedMs": 124,
+      "durationMs": 44,
+      "requestStartedMs": 124,
+      "responseStartedMs": 0,
+      "responseEndedMs": 168,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/WorkPlan.ts",
+      "initiator": "script",
+      "startedMs": 124,
+      "durationMs": 44,
+      "requestStartedMs": 124,
+      "responseStartedMs": 0,
+      "responseEndedMs": 168,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/characters/CharacterPortraits.ts",
+      "initiator": "script",
+      "startedMs": 124,
+      "durationMs": 44,
+      "requestStartedMs": 124,
+      "responseStartedMs": 0,
+      "responseEndedMs": 168,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/fjord-interface.css",
+      "initiator": "script",
+      "startedMs": 124,
+      "durationMs": 44,
+      "requestStartedMs": 124,
+      "responseStartedMs": 0,
+      "responseEndedMs": 168,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/FjordWardrobe.ts",
+      "initiator": "script",
+      "startedMs": 124,
+      "durationMs": 51,
+      "requestStartedMs": 124,
+      "responseStartedMs": 0,
+      "responseEndedMs": 175,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/wildlife/CoastalAnimalMotion.ts",
+      "initiator": "script",
+      "startedMs": 132,
+      "durationMs": 44,
+      "requestStartedMs": 132,
+      "responseStartedMs": 0,
+      "responseEndedMs": 176,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/wildlife/AnimalRestMotion.ts",
+      "initiator": "script",
+      "startedMs": 132,
+      "durationMs": 44,
+      "requestStartedMs": 132,
+      "responseStartedMs": 0,
+      "responseEndedMs": 176,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/wildlife/RabbitMotion.ts",
+      "initiator": "script",
+      "startedMs": 132,
+      "durationMs": 44,
+      "requestStartedMs": 132,
+      "responseStartedMs": 0,
+      "responseEndedMs": 176,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/wildlife/GullWings.ts",
+      "initiator": "script",
+      "startedMs": 132,
+      "durationMs": 44,
+      "requestStartedMs": 132,
+      "responseStartedMs": 0,
+      "responseEndedMs": 176,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/wildlife/WildlifeMotionTrack.ts",
+      "initiator": "script",
+      "startedMs": 132,
+      "durationMs": 44,
+      "requestStartedMs": 132,
+      "responseStartedMs": 0,
+      "responseEndedMs": 176,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/wildlife/MarineEffects.ts",
+      "initiator": "script",
+      "startedMs": 132,
+      "durationMs": 59,
+      "requestStartedMs": 132,
+      "responseStartedMs": 0,
+      "responseEndedMs": 191,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/wildlife/MarineMotion.ts",
+      "initiator": "script",
+      "startedMs": 132,
+      "durationMs": 59,
+      "requestStartedMs": 132,
+      "responseStartedMs": 0,
+      "responseEndedMs": 191,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/IslandMapProjection.ts",
+      "initiator": "script",
+      "startedMs": 132,
+      "durationMs": 59,
+      "requestStartedMs": 132,
+      "responseStartedMs": 0,
+      "responseEndedMs": 191,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/island-map.css",
+      "initiator": "script",
+      "startedMs": 132,
+      "durationMs": 59,
+      "requestStartedMs": 132,
+      "responseStartedMs": 0,
+      "responseEndedMs": 191,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world-generation/TerrainPreview.ts",
+      "initiator": "script",
+      "startedMs": 135,
+      "durationMs": 55,
+      "requestStartedMs": 175,
+      "responseStartedMs": 190,
+      "responseEndedMs": 190,
+      "transferBytes": 5083,
+      "encodedBodyBytes": 4783,
+      "decodedBodyBytes": 4783
+    },
+    {
+      "path": "/src/wildlife/WildlifeAssetManifest.ts",
+      "initiator": "script",
+      "startedMs": 132,
+      "durationMs": 60,
+      "requestStartedMs": 132,
+      "responseStartedMs": 0,
+      "responseEndedMs": 192,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/config/GroundBlendConfig.ts",
+      "initiator": "script",
+      "startedMs": 140,
+      "durationMs": 59,
+      "requestStartedMs": 140,
+      "responseStartedMs": 0,
+      "responseEndedMs": 199,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/WaypointQueue.ts",
+      "initiator": "script",
+      "startedMs": 141,
+      "durationMs": 58,
+      "requestStartedMs": 141,
+      "responseStartedMs": 0,
+      "responseEndedMs": 199,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/systems/ResidentPassing.ts",
+      "initiator": "script",
+      "startedMs": 141,
+      "durationMs": 58,
+      "requestStartedMs": 141,
+      "responseStartedMs": 0,
+      "responseEndedMs": 199,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/core/EmissiveSurfaces.ts",
+      "initiator": "script",
+      "startedMs": 141,
+      "durationMs": 58,
+      "requestStartedMs": 141,
+      "responseStartedMs": 0,
+      "responseEndedMs": 199,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/config/TerrainAssets.ts",
+      "initiator": "script",
+      "startedMs": 141,
+      "durationMs": 58,
+      "requestStartedMs": 141,
+      "responseStartedMs": 0,
+      "responseEndedMs": 199,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/systems/SocialEncounters.ts",
+      "initiator": "script",
+      "startedMs": 141,
+      "durationMs": 58,
+      "requestStartedMs": 141,
+      "responseStartedMs": 0,
+      "responseEndedMs": 199,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/World.ts",
+      "initiator": "script",
+      "startedMs": 148,
+      "durationMs": 57,
+      "requestStartedMs": 148,
+      "responseStartedMs": 0,
+      "responseEndedMs": 205,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/core/DirectionalShadowCoverage.ts",
+      "initiator": "script",
+      "startedMs": 148,
+      "durationMs": 58,
+      "requestStartedMs": 148,
+      "responseStartedMs": 0,
+      "responseEndedMs": 206,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/Terrain.ts",
+      "initiator": "script",
+      "startedMs": 148,
+      "durationMs": 58,
+      "requestStartedMs": 148,
+      "responseStartedMs": 0,
+      "responseEndedMs": 206,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/PineModels.ts",
+      "initiator": "script",
+      "startedMs": 148,
+      "durationMs": 58,
+      "requestStartedMs": 148,
+      "responseStartedMs": 0,
+      "responseEndedMs": 206,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/systems/MovementSystem.ts",
+      "initiator": "script",
+      "startedMs": 148,
+      "durationMs": 58,
+      "requestStartedMs": 148,
+      "responseStartedMs": 0,
+      "responseEndedMs": 206,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/WorldGroundMaterials.ts",
+      "initiator": "script",
+      "startedMs": 148,
+      "durationMs": 58,
+      "requestStartedMs": 148,
+      "responseStartedMs": 0,
+      "responseEndedMs": 206,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/VillageNatureModels.ts",
+      "initiator": "script",
+      "startedMs": 148,
+      "durationMs": 68,
+      "requestStartedMs": 148,
+      "responseStartedMs": 0,
+      "responseEndedMs": 216,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/NatureWind.ts",
+      "initiator": "script",
+      "startedMs": 148,
+      "durationMs": 68,
+      "requestStartedMs": 148,
+      "responseStartedMs": 0,
+      "responseEndedMs": 216,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/BlueprintTerrain.ts",
+      "initiator": "script",
+      "startedMs": 148,
+      "durationMs": 68,
+      "requestStartedMs": 148,
+      "responseStartedMs": 0,
+      "responseEndedMs": 216,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/KayKitNature.ts",
+      "initiator": "script",
+      "startedMs": 148,
+      "durationMs": 68,
+      "requestStartedMs": 148,
+      "responseStartedMs": 0,
+      "responseEndedMs": 216,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/FjordsideWater.ts",
+      "initiator": "script",
+      "startedMs": 148,
+      "durationMs": 68,
+      "requestStartedMs": 148,
+      "responseStartedMs": 0,
+      "responseEndedMs": 216,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/BoatFloat.ts",
+      "initiator": "script",
+      "startedMs": 148,
+      "durationMs": 68,
+      "requestStartedMs": 148,
+      "responseStartedMs": 0,
+      "responseEndedMs": 216,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/PlaceSettlement.ts",
+      "initiator": "script",
+      "startedMs": 148,
+      "durationMs": 75,
+      "requestStartedMs": 148,
+      "responseStartedMs": 0,
+      "responseEndedMs": 223,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/BlueprintMovement.ts",
+      "initiator": "script",
+      "startedMs": 148,
+      "durationMs": 75,
+      "requestStartedMs": 148,
+      "responseStartedMs": 0,
+      "responseEndedMs": 223,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/LivestockDeath.ts",
+      "initiator": "script",
+      "startedMs": 149,
+      "durationMs": 74,
+      "requestStartedMs": 149,
+      "responseStartedMs": 0,
+      "responseEndedMs": 223,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/character-lab/HumanPreviewPace.ts",
+      "initiator": "script",
+      "startedMs": 149,
+      "durationMs": 74,
+      "requestStartedMs": 149,
+      "responseStartedMs": 0,
+      "responseEndedMs": 223,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/camera/TouchGestures.ts",
+      "initiator": "script",
+      "startedMs": 149,
+      "durationMs": 75,
+      "requestStartedMs": 149,
+      "responseStartedMs": 0,
+      "responseEndedMs": 224,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/WorldAttachments.ts",
+      "initiator": "script",
+      "startedMs": 148,
+      "durationMs": 76,
+      "requestStartedMs": 148,
+      "responseStartedMs": 0,
+      "responseEndedMs": 224,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/camera/CameraClearance.ts",
+      "initiator": "script",
+      "startedMs": 149,
+      "durationMs": 84,
+      "requestStartedMs": 149,
+      "responseStartedMs": 0,
+      "responseEndedMs": 233,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/characters/MeshyHuman.ts",
+      "initiator": "script",
+      "startedMs": 149,
+      "durationMs": 84,
+      "requestStartedMs": 149,
+      "responseStartedMs": 0,
+      "responseEndedMs": 233,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/StructureSeasonTint.ts",
+      "initiator": "script",
+      "startedMs": 154,
+      "durationMs": 79,
+      "requestStartedMs": 154,
+      "responseStartedMs": 0,
+      "responseEndedMs": 233,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/FjordYardSurface.ts",
+      "initiator": "script",
+      "startedMs": 154,
+      "durationMs": 79,
+      "requestStartedMs": 154,
+      "responseStartedMs": 0,
+      "responseEndedMs": 233,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/fjord-play/LongshipDeck.ts",
+      "initiator": "script",
+      "startedMs": 154,
+      "durationMs": 80,
+      "requestStartedMs": 154,
+      "responseStartedMs": 0,
+      "responseEndedMs": 234,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/NatureVariation.ts",
+      "initiator": "script",
+      "startedMs": 155,
+      "durationMs": 79,
+      "requestStartedMs": 155,
+      "responseStartedMs": 0,
+      "responseEndedMs": 234,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world-generation/GenerationClient.ts",
+      "initiator": "script",
+      "startedMs": 156,
+      "durationMs": 83,
+      "requestStartedMs": 156,
+      "responseStartedMs": 0,
+      "responseEndedMs": 239,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/characters/MeshyBodyFitAdapter.ts",
+      "initiator": "script",
+      "startedMs": 156,
+      "durationMs": 84,
+      "requestStartedMs": 156,
+      "responseStartedMs": 0,
+      "responseEndedMs": 240,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/lore/wildlife-book.css",
+      "initiator": "script",
+      "startedMs": 161,
+      "durationMs": 79,
+      "requestStartedMs": 161,
+      "responseStartedMs": 0,
+      "responseEndedMs": 240,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/lore/family-tree.css",
+      "initiator": "script",
+      "startedMs": 162,
+      "durationMs": 78,
+      "requestStartedMs": 162,
+      "responseStartedMs": 0,
+      "responseEndedMs": 240,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/characters/CharacterPresentation.ts",
+      "initiator": "script",
+      "startedMs": 168,
+      "durationMs": 72,
+      "requestStartedMs": 168,
+      "responseStartedMs": 0,
+      "responseEndedMs": 240,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/Environment.ts",
+      "initiator": "script",
+      "startedMs": 205,
+      "durationMs": 35,
+      "requestStartedMs": 205,
+      "responseStartedMs": 0,
+      "responseEndedMs": 240,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/Water.ts",
+      "initiator": "script",
+      "startedMs": 205,
+      "durationMs": 44,
+      "requestStartedMs": 205,
+      "responseStartedMs": 0,
+      "responseEndedMs": 249,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/Paths.ts",
+      "initiator": "script",
+      "startedMs": 205,
+      "durationMs": 44,
+      "requestStartedMs": 205,
+      "responseStartedMs": 0,
+      "responseEndedMs": 249,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/config/RegionalGroundConfig.ts",
+      "initiator": "script",
+      "startedMs": 206,
+      "durationMs": 43,
+      "requestStartedMs": 206,
+      "responseStartedMs": 0,
+      "responseEndedMs": 249,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/GroundTreatment.ts",
+      "initiator": "script",
+      "startedMs": 206,
+      "durationMs": 44,
+      "requestStartedMs": 206,
+      "responseStartedMs": 0,
+      "responseEndedMs": 250,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/vendor/ez-tree/LeafWind.ts",
+      "initiator": "script",
+      "startedMs": 216,
+      "durationMs": 34,
+      "requestStartedMs": 216,
+      "responseStartedMs": 0,
+      "responseEndedMs": 250,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/TerrainShading.ts",
+      "initiator": "script",
+      "startedMs": 216,
+      "durationMs": 34,
+      "requestStartedMs": 216,
+      "responseStartedMs": 0,
+      "responseEndedMs": 250,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/EnvironmentOverlay.ts",
+      "initiator": "script",
+      "startedMs": 216,
+      "durationMs": 41,
+      "requestStartedMs": 216,
+      "responseStartedMs": 0,
+      "responseEndedMs": 257,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/SpatialOverlay.ts",
+      "initiator": "script",
+      "startedMs": 216,
+      "durationMs": 42,
+      "requestStartedMs": 216,
+      "responseStartedMs": 0,
+      "responseEndedMs": 258,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world/GroundBlending.ts",
+      "initiator": "script",
+      "startedMs": 216,
+      "durationMs": 42,
+      "requestStartedMs": 216,
+      "responseStartedMs": 0,
+      "responseEndedMs": 258,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/water/ReferenceWater.ts",
+      "initiator": "script",
+      "startedMs": 216,
+      "durationMs": 42,
+      "requestStartedMs": 216,
+      "responseStartedMs": 0,
+      "responseEndedMs": 258,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/characters/AssetDigest.ts",
+      "initiator": "script",
+      "startedMs": 234,
+      "durationMs": 24,
+      "requestStartedMs": 234,
+      "responseStartedMs": 0,
+      "responseEndedMs": 258,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/characters/HumanExtraAnimations.ts",
+      "initiator": "script",
+      "startedMs": 234,
+      "durationMs": 24,
+      "requestStartedMs": 234,
+      "responseStartedMs": 0,
+      "responseEndedMs": 258,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/character-lab/SoftBodySpring.ts",
+      "initiator": "script",
+      "startedMs": 234,
+      "durationMs": 34,
+      "requestStartedMs": 234,
+      "responseStartedMs": 0,
+      "responseEndedMs": 268,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/characters/MeshyHumanDynamics.ts",
+      "initiator": "script",
+      "startedMs": 234,
+      "durationMs": 34,
+      "requestStartedMs": 234,
+      "responseStartedMs": 0,
+      "responseEndedMs": 268,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/characters/NativeFacialGeometry.ts",
+      "initiator": "script",
+      "startedMs": 234,
+      "durationMs": 34,
+      "requestStartedMs": 234,
+      "responseStartedMs": 0,
+      "responseEndedMs": 268,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/characters/MeshyModuleRuntime.ts",
+      "initiator": "script",
+      "startedMs": 234,
+      "durationMs": 35,
+      "requestStartedMs": 234,
+      "responseStartedMs": 0,
+      "responseEndedMs": 269,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/characters/BodyFitAdapter.ts",
+      "initiator": "script",
+      "startedMs": 240,
+      "durationMs": 29,
+      "requestStartedMs": 240,
+      "responseStartedMs": 0,
+      "responseEndedMs": 269,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/config/GroundTreatmentConfig.ts",
+      "initiator": "script",
+      "startedMs": 250,
+      "durationMs": 19,
+      "requestStartedMs": 250,
+      "responseStartedMs": 0,
+      "responseEndedMs": 269,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world-generation/WorldSpatialQueries.ts",
+      "initiator": "script",
+      "startedMs": 258,
+      "durationMs": 15,
+      "requestStartedMs": 258,
+      "responseStartedMs": 0,
+      "responseEndedMs": 273,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/water/ReferenceWaterShaders.ts",
+      "initiator": "script",
+      "startedMs": 258,
+      "durationMs": 15,
+      "requestStartedMs": 258,
+      "responseStartedMs": 0,
+      "responseEndedMs": 273,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/water/ReferenceWaterWaves.ts",
+      "initiator": "script",
+      "startedMs": 258,
+      "durationMs": 17,
+      "requestStartedMs": 258,
+      "responseStartedMs": 0,
+      "responseEndedMs": 275,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/water/ReferenceWaterTexture.ts",
+      "initiator": "script",
+      "startedMs": 258,
+      "durationMs": 17,
+      "requestStartedMs": 258,
+      "responseStartedMs": 0,
+      "responseEndedMs": 275,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/characters/NativeHeadwearFit.ts",
+      "initiator": "script",
+      "startedMs": 269,
+      "durationMs": 14,
+      "requestStartedMs": 269,
+      "responseStartedMs": 0,
+      "responseEndedMs": 283,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/characters/NativeHairRig.ts",
+      "initiator": "script",
+      "startedMs": 269,
+      "durationMs": 15,
+      "requestStartedMs": 269,
+      "responseStartedMs": 0,
+      "responseEndedMs": 284,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/characters/BodyCoverage.ts",
+      "initiator": "script",
+      "startedMs": 271,
+      "durationMs": 20,
+      "requestStartedMs": 273,
+      "responseStartedMs": 288,
+      "responseEndedMs": 291,
+      "transferBytes": 43095,
+      "encodedBodyBytes": 42795,
+      "decodedBodyBytes": 42795
+    },
+    {
+      "path": "/src/characters/ModuleRims.ts",
+      "initiator": "script",
+      "startedMs": 269,
+      "durationMs": 23,
+      "requestStartedMs": 269,
+      "responseStartedMs": 0,
+      "responseEndedMs": 292,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/characters/PreparedNativeOutfit.ts",
+      "initiator": "script",
+      "startedMs": 272,
+      "durationMs": 21,
+      "requestStartedMs": 275,
+      "responseStartedMs": 291,
+      "responseEndedMs": 293,
+      "transferBytes": 89337,
+      "encodedBodyBytes": 89037,
+      "decodedBodyBytes": 89037
+    },
+    {
+      "path": "/src/world-generation/SpatialConstraints.ts",
+      "initiator": "script",
+      "startedMs": 273,
+      "durationMs": 21,
+      "requestStartedMs": 273,
+      "responseStartedMs": 0,
+      "responseEndedMs": 294,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/node_modules/.vite/deps/three_addons_utils_BufferGeometryUtils__js.js",
+      "initiator": "script",
+      "startedMs": 294,
+      "durationMs": 0,
+      "requestStartedMs": 294,
+      "responseStartedMs": 0,
+      "responseEndedMs": 294,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/characters/OpeningSections.ts",
+      "initiator": "script",
+      "startedMs": 292,
+      "durationMs": 6,
+      "requestStartedMs": 292,
+      "responseStartedMs": 0,
+      "responseEndedMs": 298,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/src/world-generation/GenerationWorker.ts",
+      "initiator": "other",
+      "startedMs": 338,
+      "durationMs": 16,
+      "requestStartedMs": 338,
+      "responseStartedMs": 0,
+      "responseEndedMs": 354,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/branding/fjordside-mark.png",
+      "initiator": "img",
+      "startedMs": 45177,
+      "durationMs": 37,
+      "requestStartedMs": 45177,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45214,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/game-assets/houses/manifest.json",
+      "initiator": "fetch",
+      "startedMs": 45218,
+      "durationMs": 8,
+      "requestStartedMs": 45218,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45226,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/terrain/spruce-tree.glb",
+      "initiator": "fetch",
+      "startedMs": 45227,
+      "durationMs": 9,
+      "requestStartedMs": 45227,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45236,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/terrain/village-well.glb",
+      "initiator": "fetch",
+      "startedMs": 45227,
+      "durationMs": 16,
+      "requestStartedMs": 45227,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45243,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/terrain/birch-tree.glb",
+      "initiator": "fetch",
+      "startedMs": 45227,
+      "durationMs": 20,
+      "requestStartedMs": 45227,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45247,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/terrain/boulder.glb",
+      "initiator": "fetch",
+      "startedMs": 45227,
+      "durationMs": 24,
+      "requestStartedMs": 45227,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45251,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/terrain/fjord-cliff-rock.glb",
+      "initiator": "fetch",
+      "startedMs": 45227,
+      "durationMs": 24,
+      "requestStartedMs": 45227,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45251,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/terrain/log-pile.glb",
+      "initiator": "fetch",
+      "startedMs": 45227,
+      "durationMs": 24,
+      "requestStartedMs": 45227,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45251,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/terrain/cooking-hearth.glb",
+      "initiator": "fetch",
+      "startedMs": 45227,
+      "durationMs": 24,
+      "requestStartedMs": 45227,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45251,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/terrain/storage-crate.glb",
+      "initiator": "fetch",
+      "startedMs": 45227,
+      "durationMs": 25,
+      "requestStartedMs": 45227,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45252,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/terrain/stabbur-storehouse.glb",
+      "initiator": "fetch",
+      "startedMs": 45227,
+      "durationMs": 27,
+      "requestStartedMs": 45227,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45254,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/terrain/barrel.glb",
+      "initiator": "fetch",
+      "startedMs": 45227,
+      "durationMs": 31,
+      "requestStartedMs": 45227,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45258,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/terrain/faering-rowboat.glb",
+      "initiator": "fetch",
+      "startedMs": 45227,
+      "durationMs": 32,
+      "requestStartedMs": 45227,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45259,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/terrain/jetty-pier.glb",
+      "initiator": "fetch",
+      "startedMs": 45227,
+      "durationMs": 32,
+      "requestStartedMs": 45227,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45259,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/terrain/heather-shrub.glb",
+      "initiator": "fetch",
+      "startedMs": 45227,
+      "durationMs": 32,
+      "requestStartedMs": 45227,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45259,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/terrain/grass-tuft.glb",
+      "initiator": "fetch",
+      "startedMs": 45227,
+      "durationMs": 32,
+      "requestStartedMs": 45227,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45259,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/terrain/fish-drying-rack.glb",
+      "initiator": "fetch",
+      "startedMs": 45227,
+      "durationMs": 34,
+      "requestStartedMs": 45227,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45261,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/terrain/runestone.glb",
+      "initiator": "fetch",
+      "startedMs": 45227,
+      "durationMs": 38,
+      "requestStartedMs": 45227,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45265,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/game-assets/houses/farm-homestead.glb",
+      "initiator": "fetch",
+      "startedMs": 45228,
+      "durationMs": 44,
+      "requestStartedMs": 45228,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45272,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/game-assets/houses/house-hut.glb",
+      "initiator": "fetch",
+      "startedMs": 45228,
+      "durationMs": 49,
+      "requestStartedMs": 45228,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45277,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/game-assets/houses/house-homestead.glb",
+      "initiator": "fetch",
+      "startedMs": 45228,
+      "durationMs": 49,
+      "requestStartedMs": 45228,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45277,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/game-assets/houses/house-longhouse.glb",
+      "initiator": "fetch",
+      "startedMs": 45228,
+      "durationMs": 65,
+      "requestStartedMs": 45228,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45293,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/game-assets/houses/house-greathouse.glb",
+      "initiator": "fetch",
+      "startedMs": 45228,
+      "durationMs": 66,
+      "requestStartedMs": 45228,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45294,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/game-assets/houses/farm-hut.glb",
+      "initiator": "fetch",
+      "startedMs": 45228,
+      "durationMs": 66,
+      "requestStartedMs": 45228,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45294,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/game-assets/houses/farm-hut-terrain.glb",
+      "initiator": "fetch",
+      "startedMs": 45228,
+      "durationMs": 66,
+      "requestStartedMs": 45228,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45294,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/scenery/meshy-campfire-v1/campfire.glb",
+      "initiator": "fetch",
+      "startedMs": 45228,
+      "durationMs": 66,
+      "requestStartedMs": 45228,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45294,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/scenery/meshy-tent-v1/tent.glb",
+      "initiator": "fetch",
+      "startedMs": 45228,
+      "durationMs": 66,
+      "requestStartedMs": 45228,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45294,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/game-assets/houses/farm-homestead-terrain.glb",
+      "initiator": "fetch",
+      "startedMs": 45228,
+      "durationMs": 66,
+      "requestStartedMs": 45228,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45294,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/draco/draco_wasm_wrapper.js",
+      "initiator": "fetch",
+      "startedMs": 45236,
+      "durationMs": 49,
+      "requestStartedMs": 45259,
+      "responseStartedMs": 45269,
+      "responseEndedMs": 45285,
+      "transferBytes": 58756,
+      "encodedBodyBytes": 58456,
+      "decodedBodyBytes": 58456
+    },
+    {
+      "path": "/draco/draco_decoder.wasm",
+      "initiator": "fetch",
+      "startedMs": 45237,
+      "durationMs": 64,
+      "requestStartedMs": 45259,
+      "responseStartedMs": 45269,
+      "responseEndedMs": 45301,
+      "transferBytes": 192720,
+      "encodedBodyBytes": 192420,
+      "decodedBodyBytes": 192420
+    },
+    {
+      "path": "/nature/kaykit-v1/manifest.json",
+      "initiator": "fetch",
+      "startedMs": 45415,
+      "durationMs": 8,
+      "requestStartedMs": 45415,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45423,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-conifer-a.gltf",
+      "initiator": "fetch",
+      "startedMs": 45423,
+      "durationMs": 6,
+      "requestStartedMs": 45423,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45429,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-conifer-a.bin",
+      "initiator": "fetch",
+      "startedMs": 45429,
+      "durationMs": 20,
+      "requestStartedMs": 45429,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45449,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/forest_texture.png",
+      "initiator": "img",
+      "startedMs": 45429,
+      "durationMs": 20,
+      "requestStartedMs": 45429,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45449,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-conifer-b.gltf",
+      "initiator": "fetch",
+      "startedMs": 45450,
+      "durationMs": 7,
+      "requestStartedMs": 45450,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45457,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-conifer-b.bin",
+      "initiator": "fetch",
+      "startedMs": 45457,
+      "durationMs": 5,
+      "requestStartedMs": 45457,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45462,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-conifer-c.gltf",
+      "initiator": "fetch",
+      "startedMs": 45463,
+      "durationMs": 7,
+      "requestStartedMs": 45463,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45470,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-conifer-c.bin",
+      "initiator": "fetch",
+      "startedMs": 45470,
+      "durationMs": 6,
+      "requestStartedMs": 45470,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45476,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-deciduous-a.gltf",
+      "initiator": "fetch",
+      "startedMs": 45476,
+      "durationMs": 6,
+      "requestStartedMs": 45476,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45482,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-deciduous-a.bin",
+      "initiator": "fetch",
+      "startedMs": 45482,
+      "durationMs": 7,
+      "requestStartedMs": 45482,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45489,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-rock-small-a.gltf",
+      "initiator": "fetch",
+      "startedMs": 45489,
+      "durationMs": 6,
+      "requestStartedMs": 45489,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45495,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-rock-small-a.bin",
+      "initiator": "fetch",
+      "startedMs": 45496,
+      "durationMs": 7,
+      "requestStartedMs": 45496,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45503,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-rock-small-b.gltf",
+      "initiator": "fetch",
+      "startedMs": 45503,
+      "durationMs": 7,
+      "requestStartedMs": 45503,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45510,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-rock-small-b.bin",
+      "initiator": "fetch",
+      "startedMs": 45510,
+      "durationMs": 15,
+      "requestStartedMs": 45510,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45525,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-boulder-a.gltf",
+      "initiator": "fetch",
+      "startedMs": 45526,
+      "durationMs": 6,
+      "requestStartedMs": 45526,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45532,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-boulder-a.bin",
+      "initiator": "fetch",
+      "startedMs": 45532,
+      "durationMs": 7,
+      "requestStartedMs": 45532,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45539,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-boulder-b.gltf",
+      "initiator": "fetch",
+      "startedMs": 45539,
+      "durationMs": 12,
+      "requestStartedMs": 45539,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45551,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-boulder-b.bin",
+      "initiator": "fetch",
+      "startedMs": 45551,
+      "durationMs": 6,
+      "requestStartedMs": 45551,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45557,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-rock-cluster-a.gltf",
+      "initiator": "fetch",
+      "startedMs": 45557,
+      "durationMs": 7,
+      "requestStartedMs": 45557,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45564,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-rock-cluster-a.bin",
+      "initiator": "fetch",
+      "startedMs": 45565,
+      "durationMs": 8,
+      "requestStartedMs": 45565,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45573,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-rock-cluster-b.gltf",
+      "initiator": "fetch",
+      "startedMs": 45573,
+      "durationMs": 7,
+      "requestStartedMs": 45573,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45580,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-rock-cluster-b.bin",
+      "initiator": "fetch",
+      "startedMs": 45581,
+      "durationMs": 8,
+      "requestStartedMs": 45581,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45589,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-bush-a.gltf",
+      "initiator": "fetch",
+      "startedMs": 45589,
+      "durationMs": 7,
+      "requestStartedMs": 45589,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45596,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-bush-a.bin",
+      "initiator": "fetch",
+      "startedMs": 45597,
+      "durationMs": 6,
+      "requestStartedMs": 45597,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45603,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-bush-b.gltf",
+      "initiator": "fetch",
+      "startedMs": 45603,
+      "durationMs": 5,
+      "requestStartedMs": 45603,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45608,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-bush-b.bin",
+      "initiator": "fetch",
+      "startedMs": 45609,
+      "durationMs": 6,
+      "requestStartedMs": 45609,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45615,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-grass-cluster-a.gltf",
+      "initiator": "fetch",
+      "startedMs": 45616,
+      "durationMs": 6,
+      "requestStartedMs": 45616,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45622,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-grass-cluster-a.bin",
+      "initiator": "fetch",
+      "startedMs": 45622,
+      "durationMs": 8,
+      "requestStartedMs": 45622,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45630,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-grass-cluster-b.gltf",
+      "initiator": "fetch",
+      "startedMs": 45631,
+      "durationMs": 12,
+      "requestStartedMs": 45631,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45643,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/kaykit-v1/kaykit-grass-cluster-b.bin",
+      "initiator": "fetch",
+      "startedMs": 45643,
+      "durationMs": 8,
+      "requestStartedMs": 45643,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45651,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/ground-materials/iceland-v1/low/Ground037-colour.webp",
+      "initiator": "img",
+      "startedMs": 45653,
+      "durationMs": 10,
+      "requestStartedMs": 45653,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45663,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/ground-materials/iceland-v1/low/Ground054-colour.webp",
+      "initiator": "img",
+      "startedMs": 45663,
+      "durationMs": 9,
+      "requestStartedMs": 45663,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45672,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/ground-materials/iceland-v1/low/mossy_rock-colour.webp",
+      "initiator": "img",
+      "startedMs": 45673,
+      "durationMs": 7,
+      "requestStartedMs": 45673,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45680,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/ground-materials/iceland-v1/low/grass_path_2-colour.webp",
+      "initiator": "img",
+      "startedMs": 45681,
+      "durationMs": 6,
+      "requestStartedMs": 45681,
+      "responseStartedMs": 0,
+      "responseEndedMs": 45687,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/ez-tree-pilot/pine-large.gltf",
+      "initiator": "fetch",
+      "startedMs": 57114,
+      "durationMs": 22,
+      "requestStartedMs": 57114,
+      "responseStartedMs": 0,
+      "responseEndedMs": 57136,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/ez-tree-pilot/pine-large.bin",
+      "initiator": "fetch",
+      "startedMs": 57138,
+      "durationMs": 18,
+      "requestStartedMs": 57138,
+      "responseStartedMs": 0,
+      "responseEndedMs": 57156,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/ez-tree-pilot/texture-713a5cc87d11921a.png",
+      "initiator": "img",
+      "startedMs": 57139,
+      "durationMs": 42,
+      "requestStartedMs": 57139,
+      "responseStartedMs": 0,
+      "responseEndedMs": 57181,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/ez-tree-pilot/texture-be24b5c0a3104eba.png",
+      "initiator": "img",
+      "startedMs": 57139,
+      "durationMs": 42,
+      "requestStartedMs": 57139,
+      "responseStartedMs": 0,
+      "responseEndedMs": 57181,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/ez-tree-pilot/texture-614ef034a298fef1.png",
+      "initiator": "img",
+      "startedMs": 57139,
+      "durationMs": 44,
+      "requestStartedMs": 57139,
+      "responseStartedMs": 0,
+      "responseEndedMs": 57183,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/nature/ez-tree-pilot/texture-00e12de668fe6669.png",
+      "initiator": "img",
+      "startedMs": 57139,
+      "durationMs": 45,
+      "requestStartedMs": 57139,
+      "responseStartedMs": 0,
+      "responseEndedMs": 57184,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/wildlife/lynx.glb",
+      "initiator": "fetch",
+      "startedMs": 58344,
+      "durationMs": 17,
+      "requestStartedMs": 58344,
+      "responseStartedMs": 0,
+      "responseEndedMs": 58361,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/wildlife/reindeer.glb",
+      "initiator": "fetch",
+      "startedMs": 58343,
+      "durationMs": 21,
+      "requestStartedMs": 58343,
+      "responseStartedMs": 0,
+      "responseEndedMs": 58364,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/wildlife/bear.glb",
+      "initiator": "fetch",
+      "startedMs": 58344,
+      "durationMs": 20,
+      "requestStartedMs": 58344,
+      "responseStartedMs": 0,
+      "responseEndedMs": 58364,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/wildlife/moose.glb",
+      "initiator": "fetch",
+      "startedMs": 58344,
+      "durationMs": 20,
+      "requestStartedMs": 58344,
+      "responseStartedMs": 0,
+      "responseEndedMs": 58364,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/wildlife/wolf.glb",
+      "initiator": "fetch",
+      "startedMs": 58344,
+      "durationMs": 20,
+      "requestStartedMs": 58344,
+      "responseStartedMs": 0,
+      "responseEndedMs": 58364,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/wildlife/gull-standing.glb",
+      "initiator": "fetch",
+      "startedMs": 58344,
+      "durationMs": 31,
+      "requestStartedMs": 58344,
+      "responseStartedMs": 0,
+      "responseEndedMs": 58375,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/wildlife/gull-flying.glb",
+      "initiator": "fetch",
+      "startedMs": 58344,
+      "durationMs": 31,
+      "requestStartedMs": 58344,
+      "responseStartedMs": 0,
+      "responseEndedMs": 58375,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/wildlife/puffin.glb",
+      "initiator": "fetch",
+      "startedMs": 58344,
+      "durationMs": 31,
+      "requestStartedMs": 58344,
+      "responseStartedMs": 0,
+      "responseEndedMs": 58375,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/wildlife/otter.glb",
+      "initiator": "fetch",
+      "startedMs": 58344,
+      "durationMs": 31,
+      "requestStartedMs": 58344,
+      "responseStartedMs": 0,
+      "responseEndedMs": 58375,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/wildlife/seal.glb",
+      "initiator": "fetch",
+      "startedMs": 58344,
+      "durationMs": 31,
+      "requestStartedMs": 58344,
+      "responseStartedMs": 0,
+      "responseEndedMs": 58375,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/wildlife/fox.glb",
+      "initiator": "fetch",
+      "startedMs": 58344,
+      "durationMs": 31,
+      "requestStartedMs": 58344,
+      "responseStartedMs": 0,
+      "responseEndedMs": 58375,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/wildlife/rabbit.glb",
+      "initiator": "fetch",
+      "startedMs": 58344,
+      "durationMs": 54,
+      "requestStartedMs": 58344,
+      "responseStartedMs": 0,
+      "responseEndedMs": 58398,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/wildlife/orca.glb",
+      "initiator": "fetch",
+      "startedMs": 58344,
+      "durationMs": 54,
+      "requestStartedMs": 58344,
+      "responseStartedMs": 0,
+      "responseEndedMs": 58398,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/wildlife/humpback.glb",
+      "initiator": "fetch",
+      "startedMs": 58344,
+      "durationMs": 54,
+      "requestStartedMs": 58344,
+      "responseStartedMs": 0,
+      "responseEndedMs": 58398,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/game-assets/human/Human_LOD2.glb",
+      "initiator": "fetch",
+      "startedMs": 63498,
+      "durationMs": 38,
+      "requestStartedMs": 63498,
+      "responseStartedMs": 0,
+      "responseEndedMs": 63536,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/game-assets/human/Human_ExtraAnimations.glb",
+      "initiator": "fetch",
+      "startedMs": 65978,
+      "durationMs": 9,
+      "requestStartedMs": 65978,
+      "responseStartedMs": 0,
+      "responseEndedMs": 65987,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/candidates/meshy-additional-005/low-shoes.binding.json",
+      "initiator": "fetch",
+      "startedMs": 66757,
+      "durationMs": 19,
+      "requestStartedMs": 66757,
+      "responseStartedMs": 0,
+      "responseEndedMs": 66776,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/modules/occupation-tools/farmer.glb",
+      "initiator": "fetch",
+      "startedMs": 66758,
+      "durationMs": 42,
+      "requestStartedMs": 66758,
+      "responseStartedMs": 0,
+      "responseEndedMs": 66800,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/modules/occupation-hats/farmer.binding.json",
+      "initiator": "fetch",
+      "startedMs": 66757,
+      "durationMs": 349,
+      "requestStartedMs": 66757,
+      "responseStartedMs": 0,
+      "responseEndedMs": 67106,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/modules/female-hair/mid-hair-knotted.binding.json",
+      "initiator": "fetch",
+      "startedMs": 66757,
+      "durationMs": 349,
+      "requestStartedMs": 66757,
+      "responseStartedMs": 0,
+      "responseEndedMs": 67106,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/modules/female-hair/mid-hair-knotted.glb",
+      "initiator": "fetch",
+      "startedMs": 66757,
+      "durationMs": 349,
+      "requestStartedMs": 66757,
+      "responseStartedMs": 0,
+      "responseEndedMs": 67106,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/candidates/meshy-additional-005/long-skirt.binding.json",
+      "initiator": "fetch",
+      "startedMs": 66757,
+      "durationMs": 350,
+      "requestStartedMs": 66757,
+      "responseStartedMs": 0,
+      "responseEndedMs": 67107,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/modules/occupation-hats/farmer.glb",
+      "initiator": "fetch",
+      "startedMs": 66757,
+      "durationMs": 350,
+      "requestStartedMs": 66757,
+      "responseStartedMs": 0,
+      "responseEndedMs": 67107,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/candidates/meshy-additional-005/long-skirt.glb",
+      "initiator": "fetch",
+      "startedMs": 66757,
+      "durationMs": 350,
+      "requestStartedMs": 66757,
+      "responseStartedMs": 0,
+      "responseEndedMs": 67107,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/candidates/meshy-additional-005/low-shoes.glb",
+      "initiator": "fetch",
+      "startedMs": 66757,
+      "durationMs": 350,
+      "requestStartedMs": 66757,
+      "responseStartedMs": 0,
+      "responseEndedMs": 67107,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/modules/occupation-tools/farmer.binding.json",
+      "initiator": "fetch",
+      "startedMs": 66758,
+      "durationMs": 349,
+      "requestStartedMs": 66758,
+      "responseStartedMs": 0,
+      "responseEndedMs": 67107,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.binding.json",
+      "initiator": "fetch",
+      "startedMs": 72650,
+      "durationMs": 26,
+      "requestStartedMs": 72650,
+      "responseStartedMs": 0,
+      "responseEndedMs": 72676,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.glb",
+      "initiator": "fetch",
+      "startedMs": 72650,
+      "durationMs": 45,
+      "requestStartedMs": 72650,
+      "responseStartedMs": 0,
+      "responseEndedMs": 72695,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/modules/manual-long-hair/long-2.glb",
+      "initiator": "fetch",
+      "startedMs": 72650,
+      "durationMs": 78,
+      "requestStartedMs": 72656,
+      "responseStartedMs": 72666,
+      "responseEndedMs": 72728,
+      "transferBytes": 358992,
+      "encodedBodyBytes": 358692,
+      "decodedBodyBytes": 358692
+    },
+    {
+      "path": "/character-lab/modules/manual-beards/pointed.glb",
+      "initiator": "fetch",
+      "startedMs": 72650,
+      "durationMs": 87,
+      "requestStartedMs": 72665,
+      "responseStartedMs": 72677,
+      "responseEndedMs": 72737,
+      "transferBytes": 207820,
+      "encodedBodyBytes": 207520,
+      "decodedBodyBytes": 207520
+    },
+    {
+      "path": "/character-lab/modules/manual-beards/pointed.binding.json",
+      "initiator": "fetch",
+      "startedMs": 72650,
+      "durationMs": 398,
+      "requestStartedMs": 72665,
+      "responseStartedMs": 72677,
+      "responseEndedMs": 73048,
+      "transferBytes": 2904904,
+      "encodedBodyBytes": 2904604,
+      "decodedBodyBytes": 2904604
+    },
+    {
+      "path": "/character-lab/modules/manual-long-hair/long-2.binding.json",
+      "initiator": "fetch",
+      "startedMs": 72650,
+      "durationMs": 550,
+      "requestStartedMs": 72665,
+      "responseStartedMs": 72676,
+      "responseEndedMs": 73200,
+      "transferBytes": 5508445,
+      "encodedBodyBytes": 5508145,
+      "decodedBodyBytes": 5508145
+    },
+    {
+      "path": "/character-lab/modules/occupation-hats/hunter.binding.json",
+      "initiator": "fetch",
+      "startedMs": 79767,
+      "durationMs": 26,
+      "requestStartedMs": 79767,
+      "responseStartedMs": 0,
+      "responseEndedMs": 79793,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/modules/occupation-tools/hunter.binding.json",
+      "initiator": "fetch",
+      "startedMs": 79767,
+      "durationMs": 30,
+      "requestStartedMs": 79767,
+      "responseStartedMs": 0,
+      "responseEndedMs": 79797,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/modules/manual-braided-hair/braided.glb",
+      "initiator": "fetch",
+      "startedMs": 79767,
+      "durationMs": 30,
+      "requestStartedMs": 79767,
+      "responseStartedMs": 0,
+      "responseEndedMs": 79797,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/modules/manual-braided-hair/braided.binding.json",
+      "initiator": "fetch",
+      "startedMs": 79767,
+      "durationMs": 112,
+      "requestStartedMs": 79767,
+      "responseStartedMs": 0,
+      "responseEndedMs": 79879,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/modules/occupation-hats/hunter.glb",
+      "initiator": "fetch",
+      "startedMs": 79767,
+      "durationMs": 112,
+      "requestStartedMs": 79767,
+      "responseStartedMs": 0,
+      "responseEndedMs": 79879,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/modules/occupation-tools/hunter.glb",
+      "initiator": "fetch",
+      "startedMs": 79767,
+      "durationMs": 112,
+      "requestStartedMs": 79767,
+      "responseStartedMs": 0,
+      "responseEndedMs": 79879,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/modules/occupation-hats/fisher.binding.json",
+      "initiator": "fetch",
+      "startedMs": 91492,
+      "durationMs": 33,
+      "requestStartedMs": 91492,
+      "responseStartedMs": 0,
+      "responseEndedMs": 91525,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/modules/occupation-tools/fisher.binding.json",
+      "initiator": "fetch",
+      "startedMs": 91492,
+      "durationMs": 44,
+      "requestStartedMs": 91492,
+      "responseStartedMs": 0,
+      "responseEndedMs": 91536,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/candidates/meshy-fisherman-009/shoe.binding.json",
+      "initiator": "fetch",
+      "startedMs": 91492,
+      "durationMs": 44,
+      "requestStartedMs": 91492,
+      "responseStartedMs": 0,
+      "responseEndedMs": 91536,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/candidates/meshy-fisherman-009/trousers.binding.json",
+      "initiator": "fetch",
+      "startedMs": 91492,
+      "durationMs": 44,
+      "requestStartedMs": 91492,
+      "responseStartedMs": 0,
+      "responseEndedMs": 91536,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/modules/female-hair/knotted-braid.glb",
+      "initiator": "fetch",
+      "startedMs": 91492,
+      "durationMs": 45,
+      "requestStartedMs": 91492,
+      "responseStartedMs": 0,
+      "responseEndedMs": 91537,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/modules/occupation-hats/fisher.glb",
+      "initiator": "fetch",
+      "startedMs": 91492,
+      "durationMs": 102,
+      "requestStartedMs": 91492,
+      "responseStartedMs": 0,
+      "responseEndedMs": 91594,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/candidates/meshy-fisherman-009/tunic.binding.json",
+      "initiator": "fetch",
+      "startedMs": 91492,
+      "durationMs": 102,
+      "requestStartedMs": 91492,
+      "responseStartedMs": 0,
+      "responseEndedMs": 91594,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/candidates/meshy-fisherman-009/shoe.glb",
+      "initiator": "fetch",
+      "startedMs": 91492,
+      "durationMs": 102,
+      "requestStartedMs": 91492,
+      "responseStartedMs": 0,
+      "responseEndedMs": 91594,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/candidates/meshy-fisherman-009/tunic.glb",
+      "initiator": "fetch",
+      "startedMs": 91492,
+      "durationMs": 102,
+      "requestStartedMs": 91492,
+      "responseStartedMs": 0,
+      "responseEndedMs": 91594,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/modules/occupation-tools/fisher.glb",
+      "initiator": "fetch",
+      "startedMs": 91492,
+      "durationMs": 102,
+      "requestStartedMs": 91492,
+      "responseStartedMs": 0,
+      "responseEndedMs": 91594,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/modules/female-hair/knotted-braid.binding.json",
+      "initiator": "fetch",
+      "startedMs": 91492,
+      "durationMs": 102,
+      "requestStartedMs": 91492,
+      "responseStartedMs": 0,
+      "responseEndedMs": 91594,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/candidates/meshy-fisherman-009/trousers.glb",
+      "initiator": "fetch",
+      "startedMs": 91492,
+      "durationMs": 102,
+      "requestStartedMs": 91492,
+      "responseStartedMs": 0,
+      "responseEndedMs": 91594,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/modules/manual-hair/short.glb",
+      "initiator": "fetch",
+      "startedMs": 100197,
+      "durationMs": 24,
+      "requestStartedMs": 100197,
+      "responseStartedMs": 0,
+      "responseEndedMs": 100221,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/modules/manual-hair/short.binding.json",
+      "initiator": "fetch",
+      "startedMs": 100197,
+      "durationMs": 135,
+      "requestStartedMs": 100197,
+      "responseStartedMs": 0,
+      "responseEndedMs": 100332,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/character-lab/modules/female-hair/mid-wavy-long.glb",
+      "initiator": "fetch",
+      "startedMs": 104720,
+      "durationMs": 73,
+      "requestStartedMs": 104726,
+      "responseStartedMs": 104736,
+      "responseEndedMs": 104793,
+      "transferBytes": 296672,
+      "encodedBodyBytes": 296372,
+      "decodedBodyBytes": 296372
+    },
+    {
+      "path": "/character-lab/modules/female-hair/mid-wavy-long.binding.json",
+      "initiator": "fetch",
+      "startedMs": 104720,
+      "durationMs": 316,
+      "requestStartedMs": 104740,
+      "responseStartedMs": 104749,
+      "responseEndedMs": 105036,
+      "transferBytes": 3907539,
+      "encodedBodyBytes": 3907239,
+      "decodedBodyBytes": 3907239
+    },
+    {
+      "path": "/game-assets/livestock/sheep/adult-female/manifest.json",
+      "initiator": "fetch",
+      "startedMs": 108148,
+      "durationMs": 20,
+      "requestStartedMs": 108149,
+      "responseStartedMs": 108168,
+      "responseEndedMs": 108168,
+      "transferBytes": 2042,
+      "encodedBodyBytes": 1742,
+      "decodedBodyBytes": 1742
+    },
+    {
+      "path": "/game-assets/livestock/sheep/adult-female/sheep-adult-female.glb",
+      "initiator": "fetch",
+      "startedMs": 108170,
+      "durationMs": 23,
+      "requestStartedMs": 108171,
+      "responseStartedMs": 108187,
+      "responseEndedMs": 108193,
+      "transferBytes": 360216,
+      "encodedBodyBytes": 359916,
+      "decodedBodyBytes": 359916
+    },
+    {
+      "path": "/game-assets/livestock/sheep/adult-male/manifest.json",
+      "initiator": "fetch",
+      "startedMs": 108258,
+      "durationMs": 14,
+      "requestStartedMs": 108259,
+      "responseStartedMs": 108272,
+      "responseEndedMs": 108272,
+      "transferBytes": 2031,
+      "encodedBodyBytes": 1731,
+      "decodedBodyBytes": 1731
+    },
+    {
+      "path": "/game-assets/livestock/sheep/adult-male/sheep-adult-male.glb",
+      "initiator": "fetch",
+      "startedMs": 108273,
+      "durationMs": 28,
+      "requestStartedMs": 108273,
+      "responseStartedMs": 108286,
+      "responseEndedMs": 108301,
+      "transferBytes": 375024,
+      "encodedBodyBytes": 374724,
+      "decodedBodyBytes": 374724
+    },
+    {
+      "path": "/terrain/longship-drakkar.glb",
+      "initiator": "fetch",
+      "startedMs": 108333,
+      "durationMs": 19,
+      "requestStartedMs": 108333,
+      "responseStartedMs": 0,
+      "responseEndedMs": 108352,
+      "transferBytes": 300,
+      "encodedBodyBytes": 0,
+      "decodedBodyBytes": 0
+    },
+    {
+      "path": "/draco/draco_wasm_wrapper.js",
+      "initiator": "fetch",
+      "startedMs": 108352,
+      "durationMs": 10,
+      "requestStartedMs": 108353,
+      "responseStartedMs": 108362,
+      "responseEndedMs": 108362,
+      "transferBytes": 58756,
+      "encodedBodyBytes": 58456,
+      "decodedBodyBytes": 58456
+    },
+    {
+      "path": "/draco/draco_decoder.wasm",
+      "initiator": "fetch",
+      "startedMs": 108352,
+      "durationMs": 24,
+      "requestStartedMs": 108353,
+      "responseStartedMs": 108362,
+      "responseEndedMs": 108376,
+      "transferBytes": 192720,
+      "encodedBodyBytes": 192420,
+      "decodedBodyBytes": 192420
+    }
+  ],
+  "settlementModels": [
+    {
+      "kind": "campfire",
+      "asset": "stoneCampfire",
+      "startedMs": 63461,
+      "durationMs": 15
+    },
+    {
+      "kind": "household",
+      "asset": "tent",
+      "startedMs": 63481,
+      "durationMs": 8
+    },
+    {
+      "kind": "persona",
+      "asset": "human",
+      "startedMs": 63497,
+      "durationMs": 9022
+    },
+    {
+      "kind": "persona",
+      "asset": "human",
+      "startedMs": 72519,
+      "durationMs": 7092
+    },
+    {
+      "kind": "household",
+      "asset": "tent",
+      "startedMs": 79612,
+      "durationMs": 11
+    },
+    {
+      "kind": "persona",
+      "asset": "human",
+      "startedMs": 79623,
+      "durationMs": 11716
+    },
+    {
+      "kind": "household",
+      "asset": "tent",
+      "startedMs": 91340,
+      "durationMs": 12
+    },
+    {
+      "kind": "persona",
+      "asset": "human",
+      "startedMs": 91353,
+      "durationMs": 4429
+    },
+    {
+      "kind": "household",
+      "asset": "tent",
+      "startedMs": 95782,
+      "durationMs": 12
+    },
+    {
+      "kind": "persona",
+      "asset": "human",
+      "startedMs": 95810,
+      "durationMs": 1035
+    },
+    {
+      "kind": "household",
+      "asset": "tent",
+      "startedMs": 96846,
+      "durationMs": 11
+    },
+    {
+      "kind": "persona",
+      "asset": "human",
+      "startedMs": 96857,
+      "durationMs": 1215
+    },
+    {
+      "kind": "persona",
+      "asset": "human",
+      "startedMs": 98074,
+      "durationMs": 1970
+    },
+    {
+      "kind": "household",
+      "asset": "tent",
+      "startedMs": 100045,
+      "durationMs": 11
+    },
+    {
+      "kind": "persona",
+      "asset": "human",
+      "startedMs": 100056,
+      "durationMs": 2821
+    },
+    {
+      "kind": "household",
+      "asset": "tent",
+      "startedMs": 102878,
+      "durationMs": 11
+    },
+    {
+      "kind": "persona",
+      "asset": "human",
+      "startedMs": 102890,
+      "durationMs": 1679
+    },
+    {
+      "kind": "household",
+      "asset": "tent",
+      "startedMs": 104570,
+      "durationMs": 11
+    },
+    {
+      "kind": "persona",
+      "asset": "human",
+      "startedMs": 104581,
+      "durationMs": 3565
+    },
+    {
+      "kind": "cattle",
+      "asset": "sheep/adult-female",
+      "startedMs": 108147,
+      "durationMs": 81
+    },
+    {
+      "kind": "cattle",
+      "asset": "sheep/adult-female",
+      "startedMs": 108243,
+      "durationMs": 14
+    },
+    {
+      "kind": "cattle",
+      "asset": "sheep/adult-male",
+      "startedMs": 108258,
+      "durationMs": 75
+    },
+    {
+      "kind": "longship",
+      "asset": "longship",
+      "startedMs": 108333,
+      "durationMs": 62
+    }
+  ],
+  "preparation": [
+    {
+      "stage": "campaign-founders",
+      "startedMs": 8,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 14,
+      "outcome": "complete"
+    },
+    {
+      "stage": "geography",
+      "startedMs": 23,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 42532,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:terrain",
+      "startedMs": 292,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 6141,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:initial-candidates",
+      "startedMs": 6438,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 228,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:initial-plan",
+      "startedMs": 6666,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 729,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:compartments",
+      "startedMs": 7396,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 436,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 7832,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 1923,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 9759,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 1040,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 10801,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 500,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 11304,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 348,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 11654,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 168,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 11824,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 200,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 12025,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 335,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 12362,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 126,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 12489,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 13,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 12503,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 28,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 12533,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 193,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 12727,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 481,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 13209,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 60,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 13270,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 11,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 13282,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 42,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 13325,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 216,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 13542,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 438,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 13981,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 67,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 14050,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 13,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 14064,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 32,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 14098,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 534,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 14635,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 321,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 14958,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 6,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 14965,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 40,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 15007,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 102,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 15112,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 20,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 15135,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 16,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 15153,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 23,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 15177,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 102,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 15281,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 223,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 15505,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 33,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 15541,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 19,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 15562,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 107,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 15671,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 19,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 15692,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 31,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 15727,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 18,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 15747,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 87,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 15838,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 16,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 15856,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 22,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 15880,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 22,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 15904,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 38,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 15945,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 17,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 15964,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 28,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 15995,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 15,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 16012,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 31,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 16046,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 24,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 16072,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 33,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:foundations",
+      "startedMs": 16106,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 18,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:player-navigation",
+      "startedMs": 16133,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 941,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:access",
+      "startedMs": 17074,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 36,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:harbor",
+      "startedMs": 17110,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 0,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:visibility",
+      "startedMs": 17111,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 177,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:final-navigation",
+      "startedMs": 17288,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 1079,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:final-route",
+      "startedMs": 18367,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 36,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:environment-zoning",
+      "startedMs": 18403,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 1309,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:nature",
+      "startedMs": 19715,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 5211,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:validation-and-freeze",
+      "startedMs": 24926,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 1333,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:campaign-natural-terrain",
+      "startedMs": 26260,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 6784,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:campaign-foundations",
+      "startedMs": 33044,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 501,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:campaign-zoning",
+      "startedMs": 34328,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 1326,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:campaign-nature-and-freeze",
+      "startedMs": 35658,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 5930,
+      "outcome": "complete"
+    },
+    {
+      "stage": "receive-and-freeze",
+      "startedMs": 41736,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 819,
+      "outcome": "complete"
+    },
+    {
+      "stage": "assets-fetch-decode",
+      "startedMs": 44898,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 200,
+      "outcome": "complete"
+    },
+    {
+      "stage": "nature-assets-fetch-decode",
+      "startedMs": 45101,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 237,
+      "outcome": "complete"
+    },
+    {
+      "stage": "ground-textures-fetch-decode",
+      "startedMs": 45338,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 36,
+      "outcome": "complete"
+    },
+    {
+      "stage": "terrain-mesh-and-masks",
+      "startedMs": 45374,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 11418,
+      "outcome": "complete"
+    },
+    {
+      "stage": "pine-assets-fetch-decode",
+      "startedMs": 56793,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 78,
+      "outcome": "complete"
+    },
+    {
+      "stage": "nature-instance-assembly",
+      "startedMs": 56871,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 2,
+      "outcome": "complete"
+    },
+    {
+      "stage": "movement-surface",
+      "startedMs": 56910,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 1,
+      "outcome": "complete"
+    },
+    {
+      "stage": "wildlife-preparation",
+      "startedMs": 56912,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 1323,
+      "outcome": "complete"
+    },
+    {
+      "stage": "initial-character-scene-sync",
+      "startedMs": 58618,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 49474,
+      "outcome": "complete"
+    },
+    {
+      "stage": "initial-ground-wear",
+      "startedMs": 58659,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 4349,
+      "outcome": "complete"
+    },
+    {
+      "stage": "initial-settlement-models",
+      "startedMs": 63133,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 44948,
+      "outcome": "complete"
+    },
+    {
+      "stage": "standing-tree-targets",
+      "startedMs": 108085,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 0,
+      "outcome": "complete"
+    },
+    {
+      "stage": "texture-upload",
+      "startedMs": 108095,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 824,
+      "outcome": "complete"
+    },
+    {
+      "stage": "shader-compilation",
+      "startedMs": 108919,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 109,
+      "outcome": "complete"
+    },
+    {
+      "stage": "initial-gpu-upload-and-draws",
+      "startedMs": 109028,
+      "attempt": "mvjtlle8-1",
+      "durationMs": 6518,
+      "outcome": "complete"
+    }
+  ],
+  "longTasks": [],
+  "support": {
+    "resourceObserver": true,
+    "longTaskObserver": false
+  },
+  "dropped": {
+    "resources": 0,
+    "timings": 0,
+    "models": 0,
+    "longTasks": 0
+  },
+  "limits": [
+    "Capture starts at the selected loading run, before the game module import. Earlier menu files are excluded.",
+    "Resources are window Resource Timing entries, not a complete inventory of worker/cache/internal decoder activity.",
+    "Zero byte sizes or response status may mean cached, restricted or unavailable measurements; cache temperature is not inferred.",
+    "Resource duration is browser loading time. Model durations include waiting, fitting, reconciliation and bounds; they are not pure decode time.",
+    "Preparation timestamps are relative to the loading attempt; resources, models and long tasks are relative to this run.",
+    "Long tasks are browser-dependent main-thread tasks of at least 50 ms. Absence does not prove no CPU stalls.",
+    "No GPU duration, process memory, campaign history or save content is recorded. Process termination may prevent a final download."
+  ]
+}

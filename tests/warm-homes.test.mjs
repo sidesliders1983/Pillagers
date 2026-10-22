@@ -35,16 +35,14 @@ test('UV binding gates whole triangles so filtering cannot illuminate adjacent a
     result.dispose(); source.dispose();
 });
 
-test('Northern Light is the default; baseline comparisons and independent home review remain explicit', () => {
-    assert.deepEqual(fjordLighting(new URLSearchParams()), { northern: true, unified: false, warmHomes: false });
+test('accepted Northern Light and home glow are defaults while explicit comparisons remain available', () => {
+    assert.deepEqual(fjordLighting(new URLSearchParams()), { northern: true, unified: false, warmHomes: true });
     assert.equal(fjordLighting(new URLSearchParams('lighting=baseline')).northern, false);
     assert.equal(fjordLighting(new URLSearchParams('sunlight=unified-v1')).northern, true);
     assert.equal(fjordLighting(new URLSearchParams('homes=warm-v1')).warmHomes, true);
-    assert.equal(fjordLighting(new URLSearchParams(), true).warmHomes, true,
-        'The dedicated candidate server must light ordinary Fjord Play links');
-    assert.equal(fjordLighting(new URLSearchParams('homes=baseline'), true).warmHomes, false,
-        'Explicit baseline comparisons override the candidate server default');
-    assert.equal(fjordLighting(new URLSearchParams('homes=warm-v1'), true).warmHomes, true);
+    assert.equal(fjordLighting(new URLSearchParams('homes=baseline')).warmHomes, false);
+    assert.deepEqual(fjordLighting(new URLSearchParams('lighting=baseline&homes=baseline')),
+        { northern: false, unified: false, warmHomes: false });
 });
 
 test('inhabited emission borrows shared darkness, stays instance-owned, and releases no source resource', async () => {
@@ -202,4 +200,54 @@ test('hidden and mapped-only rival housing never forwards live occupancy to the 
     const changed = { ...prepared, entities: prepared.entities.map(entity =>
         entity.id === house.id ? { ...entity, status: { ...entity.status, inhabited: false } } : entity) };
     assert.deepEqual(inspectRivalSettlement(state, world, changed), mapped);
+});
+
+
+test('home light bindings restore after an upgrade fade and when the scene closes during construction', async () => {
+    for (const complete of [true, false]) {
+        const geometry = new BoxGeometry(6, 4, 5), source = new MeshStandardMaterial(), mask = new Texture();
+        const created = [], released = [], boundMaterials = [];
+        const models = {
+            async create(entity) {
+                const root = new Group(), house = new Group();
+                house.name = entity.asset;
+                house.add(new Mesh(geometry, source));
+                root.add(house); created.push(root); return root;
+            },
+            async reconcile(model) { boundMaterials.push(model.getObjectByProperty('isMesh', true).material); },
+            boundsShape() { return ''; },
+            release(model) { released.push(model); return true; },
+        };
+        const layer = new FjordEntities(models, undefined,
+            new Map([['homestead', mask], ['longhouse', mask]]));
+        const entity = (asset, level) => ({ kind: 'building', id: 'home', selectionKey: 'building:home',
+            asset, transform: { x: 0, y: 0, z: 0, rotation: 0, scale: 1 },
+            status: { living: true, inhabited: true, level } });
+        try {
+            layer.setHomeDarkness(1);
+            await layer.sync([entity('homestead', 0)]);
+            const oldMaterial = boundMaterials[0];
+            assert.equal(oldMaterial.emissiveMap, mask);
+            await layer.sync([entity('longhouse', 1)]);
+            const nextMaterial = boundMaterials[1];
+            assert.equal(layer.inspectConstruction().length, 1);
+            assert.equal(nextMaterial.emissiveMap, mask);
+            if (complete) {
+                for (let frame = 0; frame < 40; frame++) layer.updateConstruction(.1);
+                assert.equal(layer.inspectConstruction().length, 0);
+                assert.equal(oldMaterial.emissiveMap, null, 'The old binding restores before its model is released');
+                assert.equal(nextMaterial.emissiveMap, mask, 'The completed occupied home retains its own binding');
+            }
+            layer.dispose();
+            assert.equal(oldMaterial.emissiveMap, null);
+            assert.equal(nextMaterial.emissiveMap, null);
+            assert.equal(released.filter(model => model === created[0]).length, 1);
+            assert.equal(released.filter(model => model === created[1]).length, 1);
+            assert.equal(source.emissiveMap, null);
+            assert.equal(source.emissive.getHex(), 0, 'Shared source material remains unlit');
+        } finally {
+            if (released.length < created.length) layer.dispose();
+            geometry.dispose(); source.dispose(); mask.dispose();
+        }
+    }
 });

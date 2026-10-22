@@ -1,0 +1,4028 @@
+{
+  "baseline": {
+    "file": "fjordside-loading-run-mvjtlle8-1.json",
+    "sha256": "eaca05e79bcbe55ef8e230ea8730b58cd3600f337098255d6f2ecdadf5ce16ca",
+    "sourceComment": "https://github.com/sidesliders1983/Pillagers/pull/261#issuecomment-6347426190",
+    "attempt": "mvjtlle8-1",
+    "build": "f9feee5406630c88b2b0aa49c20b16c4e9c74484",
+    "seed": 3055065912,
+    "recipe": {
+      "version": "island-pool-v3",
+      "generatorVersion": "fjordside-island-v0.3e-r3",
+      "seed": 7
+    },
+    "quality": "low",
+    "environment": {
+      "browser": "Mozilla/5.0 (iPhone; CPU iPhone OS 27_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/155.0.8059.37 Mobile/15E148 Safari/604.1",
+      "viewport": [
+        393,
+        654
+      ],
+      "pixelRatio": 3
+    },
+    "outcome": "diagnostic-complete",
+    "loadingMs": 118250,
+    "runMs": 118577,
+    "firstFrameMs": 115546,
+    "maxObservationGapMs": 9613,
+    "cache": "browser-managed; cold/warm not inferred",
+    "recording": "not reported",
+    "personasMs": 44544,
+    "support": {
+      "resourceObserver": true,
+      "longTaskObserver": false
+    },
+    "resources": {
+      "geometries": 116,
+      "textures": 111,
+      "programs": 44,
+      "calls": 141,
+      "triangles": 2463802
+    }
+  },
+  "sourceSha256": {
+    "src/characters/MeshyHuman.ts": "58a1463f60ca471eac86de3cda06d16148ebbd9434923ea68885058abc0f2fd3",
+    "src/characters/MeshyModuleRuntime.ts": "d690b0c357eec8ddf660c34b0576eaa1a0c3c66f5c6ea35330a1a045fe0d8d85",
+    "src/characters/NativeHairRig.ts": "7c8b8b3760f2ef177cfb68a60931a9b407ffbf41d513fcc0cc94c45ed6998101",
+    "src/fjord-play/CampaignIsland.ts": "4e679ed3dcfb8cdeca46df009d8c1d334f30876f90ff1dd0cf79be09b0a8c225",
+    "src/world-generation/GenerateWorld.ts": "68f9da5bea0cd670e19166d00590ee1abc8868cac96df4e8284d5d01f14476fb",
+    "src/fjord-play/FjordScene.ts": "56b54df328717e8f70c11dc9d0b153abd0cc67d436ed196ecda5a3324b86201a",
+    "src/world/WorldFactory.ts": "f4692f54e47a8b22488d210d4c88f091c5187779706fc21be93ea99aa0d0b32f"
+  },
+  "persona": {
+    "preparationMs": {
+      "before": [
+        4534.5138,
+        4570.089500000001,
+        4500.7585
+      ],
+      "after": [
+        3660.1994000000013,
+        3698.9137,
+        3631.375200000001
+      ],
+      "beforeMedian": 4534.5138,
+      "afterMedian": 3660.1994000000013,
+      "reductionPercent": 19.281326258175646
+    },
+    "clearanceMs": {
+      "before": [
+        1111.5875999999953,
+        1132.6429999999987,
+        1107.5327999999995
+      ],
+      "after": [
+        217.3907999999983,
+        199.40519999999697,
+        203.52089999999998
+      ],
+      "beforeMedian": 1111.5875999999953,
+      "afterMedian": 203.52089999999998,
+      "reductionPercent": 81.69097064414889
+    },
+    "maxTemporaryCandidateBytes": 8360,
+    "before": [
+      {
+        "platform": "Node v24.19.0, win32/x64; CPU-only, image decode stubbed",
+        "scene": "10 actual seed-3055065912 founder identities/faces; source assets read from disk; world LOD unchanged",
+        "seed": 3055065912,
+        "scenario": "newFjordScenario/summer-800-v1",
+        "sourceSha256": {
+          "src/fjord-play/FjordModels.ts": "6a27a47e50b87422e9c1d230f3fde188ed63c980b29c831bb6948e9d005eb9fa",
+          "src/characters/BodyCoverage.ts": "7adfde895002cae460ddc70d8dad94469161b945e7b27797948dadbea8c0a647",
+          "src/characters/PreparedNativeOutfit.ts": "4bb4386758be11e4b96754a8e850e04111d9d76b3bc5713f6f32ea25bc26c296",
+          "src/characters/MeshyHuman.ts": "58a1463f60ca471eac86de3cda06d16148ebbd9434923ea68885058abc0f2fd3",
+          "src/characters/NativeHairRig.ts": "d5aaf6189c64bee0c19358a3d99753088e96d3671e13d763d3e45c694cfbd4bb"
+        },
+        "elapsedMs": 5051.426100000001,
+        "residents": [
+          {
+            "id": "founder-1",
+            "milliseconds": 622.2806,
+            "modules": {
+              "hair": "hair/manual-female-mid-hair-knotted",
+              "beard": null,
+              "headwear": "headwear/occupation-farmer",
+              "outfit": null,
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": "garment/meshy-long-skirt-005",
+              "top": null,
+              "equipment": "equipment/occupation-farmer"
+            },
+            "pace": 1.0252908646019394,
+            "coverageSha256": "85b0d20d9b5f8f33015f2f7035a61a2f66b5fe9dbc242e52693f879bd0c0edc2",
+            "appearanceSha256": "9678be992556b7bf612ad19e01a1a650b1c2cf31f84a44f322bcb0bbb18807f1"
+          },
+          {
+            "id": "founder-2",
+            "milliseconds": 404.0189999999998,
+            "modules": {
+              "hair": "hair/manual-female-knotted-braid",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.270940824772436,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "424321be632b67f2753672704b71f7a4ecfec042b3a505db9778893d9109f6d5"
+          },
+          {
+            "id": "founder-3",
+            "milliseconds": 256.53060000000005,
+            "modules": {
+              "hair": "hair/manual-female-mid-hair-knotted",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.2119200789898443,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "f42fb2ddbacd85a687bc15ae34688a240bdd73141d1f41609da3cf5cbc141475"
+          },
+          {
+            "id": "founder-4",
+            "milliseconds": 171.35829999999987,
+            "modules": {
+              "hair": "hair/manual-female-mid-hair-knotted",
+              "beard": null,
+              "headwear": "headwear/occupation-farmer",
+              "outfit": null,
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": "garment/meshy-long-skirt-005",
+              "top": null,
+              "equipment": "equipment/occupation-farmer"
+            },
+            "pace": 1.011911735998154,
+            "coverageSha256": "85b0d20d9b5f8f33015f2f7035a61a2f66b5fe9dbc242e52693f879bd0c0edc2",
+            "appearanceSha256": "b3c7a021bb7b326d5f67f23740952fb1a78ace446516f98421b25b5b0a466676"
+          },
+          {
+            "id": "founder-5",
+            "milliseconds": 520.2073999999998,
+            "modules": {
+              "hair": "hair/manual-long-braided",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.0638164383647326,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "3b7d4a4ce3b4aad2d096b129ac913ac9a535ba6a83a9cbc5b41593f0720e99c9"
+          },
+          {
+            "id": "founder-6",
+            "milliseconds": 345.52829999999994,
+            "modules": {
+              "hair": "hair/manual-fitted-short",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.0442707899529324,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "2b78881629c0056b878f8e72c580d0690dcfa574c98ef220e8adf98cc070709c"
+          },
+          {
+            "id": "founder-7",
+            "milliseconds": 450.7611999999999,
+            "modules": {
+              "hair": "hair/manual-long-2",
+              "beard": "beard/manual-fitted-pointed",
+              "headwear": null,
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": null
+            },
+            "pace": 1.092600724571573,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "e2bac551fc2836ab2cef87f450bb1714fcb81d83c622891f3793ffe4ddc07502"
+          },
+          {
+            "id": "founder-8",
+            "milliseconds": 294.7627000000002,
+            "modules": {
+              "hair": "hair/manual-long-2",
+              "beard": null,
+              "headwear": null,
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": null
+            },
+            "pace": 1.1505979652592389,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "faeb97bb42f22cef5e23a7d91f8108643f01cbcf39408617b0d465a0674afec9"
+          },
+          {
+            "id": "founder-9",
+            "milliseconds": 287.8028000000004,
+            "modules": {
+              "hair": "hair/manual-female-mid-wavy-long",
+              "beard": null,
+              "headwear": null,
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": null
+            },
+            "pace": 1.1103545128693997,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "f4664d2047d28f229edd9d3cb06865607076633fc875a311714cdd29da77e867"
+          },
+          {
+            "id": "founder-10",
+            "milliseconds": 1181.2628999999997,
+            "modules": {
+              "hair": "hair/manual-long-braided",
+              "beard": null,
+              "headwear": "headwear/occupation-hunter",
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": "equipment/occupation-hunter"
+            },
+            "pace": 1.125557070306062,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "12f7f493ab0e244e30f5d7f0497b284964d3b9aa367977a2213704638b535929"
+          }
+        ],
+        "operations": {
+          "file-read-and-GLTF-parse": {
+            "calls": 20,
+            "milliseconds": 338.2797999999989
+          },
+          "span/async-inclusive/body-source-wait": {
+            "calls": 10,
+            "milliseconds": 92.89169999999922
+          },
+          "span/synchronous/facial-source-preparation": {
+            "calls": 1,
+            "milliseconds": 71.35850000000028
+          },
+          "span/synchronous/binding-dependency-key": {
+            "calls": 50,
+            "milliseconds": 268.5300999999995
+          },
+          "MeshyBodyFitAdapter.refit": {
+            "calls": 30,
+            "milliseconds": 104.1556000000005
+          },
+          "span/synchronous/hair-garment-clearance": {
+            "calls": 30,
+            "milliseconds": 1111.5875999999953
+          },
+          "MeshyModuleRuntime.refit": {
+            "calls": 30,
+            "milliseconds": 3038.0454000000013
+          },
+          "MeshyHuman.applyDNA": {
+            "calls": 20,
+            "milliseconds": 94.92880000000014
+          },
+          "span/synchronous/body-face-construction": {
+            "calls": 10,
+            "milliseconds": 220.04909999999927
+          },
+          "span/async-inclusive/module-sources-wait": {
+            "calls": 20,
+            "milliseconds": 317.87700000000086
+          },
+          "span/synchronous/module-binding-validation": {
+            "calls": 20,
+            "milliseconds": 306.8466999999996
+          },
+          "MeshyHuman.setNativeModules": {
+            "calls": 20,
+            "milliseconds": 3714.4850000000006
+          },
+          "span/synchronous/clothing-hair-beard-fitting": {
+            "calls": 20,
+            "milliseconds": 3714.585399999999
+          },
+          "span/synchronous/body-face-reconciliation": {
+            "calls": 10,
+            "milliseconds": 11.597600000000966
+          },
+          "MeshyHuman.sampleAnimation": {
+            "calls": 650,
+            "milliseconds": 90.28150000000778
+          },
+          "span/synchronous/walking-pace-preparation": {
+            "calls": 10,
+            "milliseconds": 86.92369999999937
+          },
+          "span/async-inclusive/binding-fetch-read": {
+            "calls": 19,
+            "milliseconds": 145.6231999999991
+          },
+          "span/async-inclusive/binding-digest": {
+            "calls": 19,
+            "milliseconds": 160.23499999999967
+          },
+          "span/synchronous/binding-text-parse": {
+            "calls": 19,
+            "milliseconds": 140.0793999999978
+          },
+          "span/synchronous/module-part-fit": {
+            "calls": 65,
+            "milliseconds": 503.59359999999924
+          },
+          "span/synchronous/hair-beard-face-fit": {
+            "calls": 18,
+            "milliseconds": 126.95389999999952
+          },
+          "span/synchronous/hat-fit": {
+            "calls": 7,
+            "milliseconds": 111.6205000000009
+          },
+          "span/synchronous/body-coverage-preparation": {
+            "calls": 10,
+            "milliseconds": 1174.457800000002
+          }
+        },
+        "preparationElapsedMs": 4534.5138,
+        "clearanceImplementation": "f9feee5406630c88b2b0aa49c20b16c4e9c74484",
+        "clearance": [],
+        "diagnostics": [],
+        "nodeMemory": {
+          "initial": {
+            "rss": 330309632,
+            "heapTotal": 172584960,
+            "heapUsed": 31247552,
+            "external": 32815699,
+            "arrayBuffers": 9292593
+          },
+          "final": {
+            "rss": 510623744,
+            "heapTotal": 272228352,
+            "heapUsed": 191126264,
+            "external": 150417696,
+            "arrayBuffers": 128270497
+          },
+          "maxObservedHeapUsed": 191086000,
+          "maxObservedArrayBuffers": 128171019,
+          "note": "Node checkpoint samples, not true peak memory, browser memory or GPU memory."
+        },
+        "retainedFactorySources": {
+          "bodies": 1,
+          "facialBodies": 1,
+          "modules": 19
+        },
+        "limitations": "Nested timings overlap. No physical iPhone, network/image decoding, GPU or full island load measurement."
+      },
+      {
+        "platform": "Node v24.19.0, win32/x64; CPU-only, image decode stubbed",
+        "scene": "10 actual seed-3055065912 founder identities/faces; source assets read from disk; world LOD unchanged",
+        "seed": 3055065912,
+        "scenario": "newFjordScenario/summer-800-v1",
+        "sourceSha256": {
+          "src/fjord-play/FjordModels.ts": "6a27a47e50b87422e9c1d230f3fde188ed63c980b29c831bb6948e9d005eb9fa",
+          "src/characters/BodyCoverage.ts": "7adfde895002cae460ddc70d8dad94469161b945e7b27797948dadbea8c0a647",
+          "src/characters/PreparedNativeOutfit.ts": "4bb4386758be11e4b96754a8e850e04111d9d76b3bc5713f6f32ea25bc26c296",
+          "src/characters/MeshyHuman.ts": "58a1463f60ca471eac86de3cda06d16148ebbd9434923ea68885058abc0f2fd3",
+          "src/characters/NativeHairRig.ts": "d5aaf6189c64bee0c19358a3d99753088e96d3671e13d763d3e45c694cfbd4bb"
+        },
+        "elapsedMs": 5078.9542,
+        "residents": [
+          {
+            "id": "founder-1",
+            "milliseconds": 617.8303999999998,
+            "modules": {
+              "hair": "hair/manual-female-mid-hair-knotted",
+              "beard": null,
+              "headwear": "headwear/occupation-farmer",
+              "outfit": null,
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": "garment/meshy-long-skirt-005",
+              "top": null,
+              "equipment": "equipment/occupation-farmer"
+            },
+            "pace": 1.0252908646019394,
+            "coverageSha256": "85b0d20d9b5f8f33015f2f7035a61a2f66b5fe9dbc242e52693f879bd0c0edc2",
+            "appearanceSha256": "9678be992556b7bf612ad19e01a1a650b1c2cf31f84a44f322bcb0bbb18807f1"
+          },
+          {
+            "id": "founder-2",
+            "milliseconds": 410.0517,
+            "modules": {
+              "hair": "hair/manual-female-knotted-braid",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.270940824772436,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "424321be632b67f2753672704b71f7a4ecfec042b3a505db9778893d9109f6d5"
+          },
+          {
+            "id": "founder-3",
+            "milliseconds": 278.88120000000026,
+            "modules": {
+              "hair": "hair/manual-female-mid-hair-knotted",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.2119200789898443,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "f42fb2ddbacd85a687bc15ae34688a240bdd73141d1f41609da3cf5cbc141475"
+          },
+          {
+            "id": "founder-4",
+            "milliseconds": 193.83479999999963,
+            "modules": {
+              "hair": "hair/manual-female-mid-hair-knotted",
+              "beard": null,
+              "headwear": "headwear/occupation-farmer",
+              "outfit": null,
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": "garment/meshy-long-skirt-005",
+              "top": null,
+              "equipment": "equipment/occupation-farmer"
+            },
+            "pace": 1.011911735998154,
+            "coverageSha256": "85b0d20d9b5f8f33015f2f7035a61a2f66b5fe9dbc242e52693f879bd0c0edc2",
+            "appearanceSha256": "b3c7a021bb7b326d5f67f23740952fb1a78ace446516f98421b25b5b0a466676"
+          },
+          {
+            "id": "founder-5",
+            "milliseconds": 507.31330000000025,
+            "modules": {
+              "hair": "hair/manual-long-braided",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.0638164383647326,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "3b7d4a4ce3b4aad2d096b129ac913ac9a535ba6a83a9cbc5b41593f0720e99c9"
+          },
+          {
+            "id": "founder-6",
+            "milliseconds": 329.1789000000008,
+            "modules": {
+              "hair": "hair/manual-fitted-short",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.0442707899529324,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "2b78881629c0056b878f8e72c580d0690dcfa574c98ef220e8adf98cc070709c"
+          },
+          {
+            "id": "founder-7",
+            "milliseconds": 469.5011999999997,
+            "modules": {
+              "hair": "hair/manual-long-2",
+              "beard": "beard/manual-fitted-pointed",
+              "headwear": null,
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": null
+            },
+            "pace": 1.092600724571573,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "e2bac551fc2836ab2cef87f450bb1714fcb81d83c622891f3793ffe4ddc07502"
+          },
+          {
+            "id": "founder-8",
+            "milliseconds": 262.59220000000005,
+            "modules": {
+              "hair": "hair/manual-long-2",
+              "beard": null,
+              "headwear": null,
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": null
+            },
+            "pace": 1.1505979652592389,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "faeb97bb42f22cef5e23a7d91f8108643f01cbcf39408617b0d465a0674afec9"
+          },
+          {
+            "id": "founder-9",
+            "milliseconds": 266.47180000000026,
+            "modules": {
+              "hair": "hair/manual-female-mid-wavy-long",
+              "beard": null,
+              "headwear": null,
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": null
+            },
+            "pace": 1.1103545128693997,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "f4664d2047d28f229edd9d3cb06865607076633fc875a311714cdd29da77e867"
+          },
+          {
+            "id": "founder-10",
+            "milliseconds": 1234.4340000000002,
+            "modules": {
+              "hair": "hair/manual-long-braided",
+              "beard": null,
+              "headwear": "headwear/occupation-hunter",
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": "equipment/occupation-hunter"
+            },
+            "pace": 1.125557070306062,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "12f7f493ab0e244e30f5d7f0497b284964d3b9aa367977a2213704638b535929"
+          }
+        ],
+        "operations": {
+          "file-read-and-GLTF-parse": {
+            "calls": 20,
+            "milliseconds": 365.12469999999894
+          },
+          "span/async-inclusive/body-source-wait": {
+            "calls": 10,
+            "milliseconds": 100.00739999999996
+          },
+          "span/synchronous/facial-source-preparation": {
+            "calls": 1,
+            "milliseconds": 70.61529999999993
+          },
+          "span/synchronous/binding-dependency-key": {
+            "calls": 50,
+            "milliseconds": 275.5596000000014
+          },
+          "MeshyBodyFitAdapter.refit": {
+            "calls": 30,
+            "milliseconds": 100.0311000000006
+          },
+          "span/synchronous/hair-garment-clearance": {
+            "calls": 30,
+            "milliseconds": 1132.6429999999987
+          },
+          "MeshyModuleRuntime.refit": {
+            "calls": 30,
+            "milliseconds": 3108.0436000000004
+          },
+          "MeshyHuman.applyDNA": {
+            "calls": 20,
+            "milliseconds": 98.19719999999734
+          },
+          "span/synchronous/body-face-construction": {
+            "calls": 10,
+            "milliseconds": 215.11999999999853
+          },
+          "span/async-inclusive/module-sources-wait": {
+            "calls": 20,
+            "milliseconds": 327.17419999999765
+          },
+          "span/synchronous/module-binding-validation": {
+            "calls": 20,
+            "milliseconds": 258.1034000000004
+          },
+          "MeshyHuman.setNativeModules": {
+            "calls": 20,
+            "milliseconds": 3745.345800000001
+          },
+          "span/synchronous/clothing-hair-beard-fitting": {
+            "calls": 20,
+            "milliseconds": 3745.4438000000014
+          },
+          "span/synchronous/body-face-reconciliation": {
+            "calls": 10,
+            "milliseconds": 10.206199999999171
+          },
+          "MeshyHuman.sampleAnimation": {
+            "calls": 650,
+            "milliseconds": 85.9988999999905
+          },
+          "span/synchronous/walking-pace-preparation": {
+            "calls": 10,
+            "milliseconds": 82.57459999999992
+          },
+          "span/async-inclusive/binding-fetch-read": {
+            "calls": 19,
+            "milliseconds": 157.70589999999947
+          },
+          "span/async-inclusive/binding-digest": {
+            "calls": 19,
+            "milliseconds": 162.44879999999966
+          },
+          "span/synchronous/binding-text-parse": {
+            "calls": 19,
+            "milliseconds": 143.2510999999986
+          },
+          "span/synchronous/module-part-fit": {
+            "calls": 65,
+            "milliseconds": 516.0186000000049
+          },
+          "span/synchronous/hair-beard-face-fit": {
+            "calls": 18,
+            "milliseconds": 139.82200000000103
+          },
+          "span/synchronous/hat-fit": {
+            "calls": 7,
+            "milliseconds": 117.0675999999994
+          },
+          "span/synchronous/body-coverage-preparation": {
+            "calls": 10,
+            "milliseconds": 1192.0758999999985
+          }
+        },
+        "preparationElapsedMs": 4570.089500000001,
+        "clearanceImplementation": "f9feee5406630c88b2b0aa49c20b16c4e9c74484",
+        "clearance": [],
+        "diagnostics": [],
+        "nodeMemory": {
+          "initial": {
+            "rss": 325251072,
+            "heapTotal": 171536384,
+            "heapUsed": 31248472,
+            "external": 32815699,
+            "arrayBuffers": 9292593
+          },
+          "final": {
+            "rss": 465158144,
+            "heapTotal": 265150464,
+            "heapUsed": 186551936,
+            "external": 109031108,
+            "arrayBuffers": 96299389
+          },
+          "maxObservedHeapUsed": 186510656,
+          "maxObservedArrayBuffers": 137995293,
+          "note": "Node checkpoint samples, not true peak memory, browser memory or GPU memory."
+        },
+        "retainedFactorySources": {
+          "bodies": 1,
+          "facialBodies": 1,
+          "modules": 19
+        },
+        "limitations": "Nested timings overlap. No physical iPhone, network/image decoding, GPU or full island load measurement.",
+        "comparison": {
+          "baselineMs": 5051.426100000001,
+          "exactBodyBuffersSelectionsAndPace": true,
+          "reductionPercent": -0.5449569973912771
+        }
+      },
+      {
+        "platform": "Node v24.19.0, win32/x64; CPU-only, image decode stubbed",
+        "scene": "10 actual seed-3055065912 founder identities/faces; source assets read from disk; world LOD unchanged",
+        "seed": 3055065912,
+        "scenario": "newFjordScenario/summer-800-v1",
+        "sourceSha256": {
+          "src/fjord-play/FjordModels.ts": "6a27a47e50b87422e9c1d230f3fde188ed63c980b29c831bb6948e9d005eb9fa",
+          "src/characters/BodyCoverage.ts": "7adfde895002cae460ddc70d8dad94469161b945e7b27797948dadbea8c0a647",
+          "src/characters/PreparedNativeOutfit.ts": "4bb4386758be11e4b96754a8e850e04111d9d76b3bc5713f6f32ea25bc26c296",
+          "src/characters/MeshyHuman.ts": "58a1463f60ca471eac86de3cda06d16148ebbd9434923ea68885058abc0f2fd3",
+          "src/characters/NativeHairRig.ts": "d5aaf6189c64bee0c19358a3d99753088e96d3671e13d763d3e45c694cfbd4bb"
+        },
+        "elapsedMs": 5037.0069,
+        "residents": [
+          {
+            "id": "founder-1",
+            "milliseconds": 642.4852999999998,
+            "modules": {
+              "hair": "hair/manual-female-mid-hair-knotted",
+              "beard": null,
+              "headwear": "headwear/occupation-farmer",
+              "outfit": null,
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": "garment/meshy-long-skirt-005",
+              "top": null,
+              "equipment": "equipment/occupation-farmer"
+            },
+            "pace": 1.0252908646019394,
+            "coverageSha256": "85b0d20d9b5f8f33015f2f7035a61a2f66b5fe9dbc242e52693f879bd0c0edc2",
+            "appearanceSha256": "9678be992556b7bf612ad19e01a1a650b1c2cf31f84a44f322bcb0bbb18807f1"
+          },
+          {
+            "id": "founder-2",
+            "milliseconds": 378.9856,
+            "modules": {
+              "hair": "hair/manual-female-knotted-braid",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.270940824772436,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "424321be632b67f2753672704b71f7a4ecfec042b3a505db9778893d9109f6d5"
+          },
+          {
+            "id": "founder-3",
+            "milliseconds": 258.0293999999999,
+            "modules": {
+              "hair": "hair/manual-female-mid-hair-knotted",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.2119200789898443,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "f42fb2ddbacd85a687bc15ae34688a240bdd73141d1f41609da3cf5cbc141475"
+          },
+          {
+            "id": "founder-4",
+            "milliseconds": 188.7563,
+            "modules": {
+              "hair": "hair/manual-female-mid-hair-knotted",
+              "beard": null,
+              "headwear": "headwear/occupation-farmer",
+              "outfit": null,
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": "garment/meshy-long-skirt-005",
+              "top": null,
+              "equipment": "equipment/occupation-farmer"
+            },
+            "pace": 1.011911735998154,
+            "coverageSha256": "85b0d20d9b5f8f33015f2f7035a61a2f66b5fe9dbc242e52693f879bd0c0edc2",
+            "appearanceSha256": "b3c7a021bb7b326d5f67f23740952fb1a78ace446516f98421b25b5b0a466676"
+          },
+          {
+            "id": "founder-5",
+            "milliseconds": 505.7168000000006,
+            "modules": {
+              "hair": "hair/manual-long-braided",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.0638164383647326,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "3b7d4a4ce3b4aad2d096b129ac913ac9a535ba6a83a9cbc5b41593f0720e99c9"
+          },
+          {
+            "id": "founder-6",
+            "milliseconds": 339.45380000000023,
+            "modules": {
+              "hair": "hair/manual-fitted-short",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.0442707899529324,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "2b78881629c0056b878f8e72c580d0690dcfa574c98ef220e8adf98cc070709c"
+          },
+          {
+            "id": "founder-7",
+            "milliseconds": 445.9389999999994,
+            "modules": {
+              "hair": "hair/manual-long-2",
+              "beard": "beard/manual-fitted-pointed",
+              "headwear": null,
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": null
+            },
+            "pace": 1.092600724571573,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "e2bac551fc2836ab2cef87f450bb1714fcb81d83c622891f3793ffe4ddc07502"
+          },
+          {
+            "id": "founder-8",
+            "milliseconds": 278.4314999999997,
+            "modules": {
+              "hair": "hair/manual-long-2",
+              "beard": null,
+              "headwear": null,
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": null
+            },
+            "pace": 1.1505979652592389,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "faeb97bb42f22cef5e23a7d91f8108643f01cbcf39408617b0d465a0674afec9"
+          },
+          {
+            "id": "founder-9",
+            "milliseconds": 270.7493999999997,
+            "modules": {
+              "hair": "hair/manual-female-mid-wavy-long",
+              "beard": null,
+              "headwear": null,
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": null
+            },
+            "pace": 1.1103545128693997,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "f4664d2047d28f229edd9d3cb06865607076633fc875a311714cdd29da77e867"
+          },
+          {
+            "id": "founder-10",
+            "milliseconds": 1192.2114000000001,
+            "modules": {
+              "hair": "hair/manual-long-braided",
+              "beard": null,
+              "headwear": "headwear/occupation-hunter",
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": "equipment/occupation-hunter"
+            },
+            "pace": 1.125557070306062,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "12f7f493ab0e244e30f5d7f0497b284964d3b9aa367977a2213704638b535929"
+          }
+        ],
+        "operations": {
+          "file-read-and-GLTF-parse": {
+            "calls": 20,
+            "milliseconds": 355.6414000000009
+          },
+          "span/async-inclusive/body-source-wait": {
+            "calls": 10,
+            "milliseconds": 94.10049999999956
+          },
+          "span/synchronous/facial-source-preparation": {
+            "calls": 1,
+            "milliseconds": 76.94389999999976
+          },
+          "span/synchronous/binding-dependency-key": {
+            "calls": 50,
+            "milliseconds": 277.2996999999991
+          },
+          "MeshyBodyFitAdapter.refit": {
+            "calls": 30,
+            "milliseconds": 108.48119999999926
+          },
+          "span/synchronous/hair-garment-clearance": {
+            "calls": 30,
+            "milliseconds": 1107.5327999999995
+          },
+          "MeshyModuleRuntime.refit": {
+            "calls": 30,
+            "milliseconds": 2993.5492999999997
+          },
+          "MeshyHuman.applyDNA": {
+            "calls": 20,
+            "milliseconds": 98.61129999999912
+          },
+          "span/synchronous/body-face-construction": {
+            "calls": 10,
+            "milliseconds": 231.06989999999996
+          },
+          "span/async-inclusive/module-sources-wait": {
+            "calls": 20,
+            "milliseconds": 325.0375000000013
+          },
+          "span/synchronous/module-binding-validation": {
+            "calls": 20,
+            "milliseconds": 282.96929999999793
+          },
+          "MeshyHuman.setNativeModules": {
+            "calls": 20,
+            "milliseconds": 3662.2804000000006
+          },
+          "span/synchronous/clothing-hair-beard-fitting": {
+            "calls": 20,
+            "milliseconds": 3662.380899999999
+          },
+          "span/synchronous/body-face-reconciliation": {
+            "calls": 10,
+            "milliseconds": 12.275100000000293
+          },
+          "MeshyHuman.sampleAnimation": {
+            "calls": 650,
+            "milliseconds": 83.29349999999522
+          },
+          "span/synchronous/walking-pace-preparation": {
+            "calls": 10,
+            "milliseconds": 80.16379999999981
+          },
+          "span/async-inclusive/binding-fetch-read": {
+            "calls": 19,
+            "milliseconds": 158.6401999999989
+          },
+          "span/async-inclusive/binding-digest": {
+            "calls": 19,
+            "milliseconds": 137.99479999999994
+          },
+          "span/synchronous/binding-text-parse": {
+            "calls": 19,
+            "milliseconds": 136.8568999999993
+          },
+          "span/synchronous/module-part-fit": {
+            "calls": 65,
+            "milliseconds": 471.479800000001
+          },
+          "span/synchronous/hair-beard-face-fit": {
+            "calls": 18,
+            "milliseconds": 124.77809999999909
+          },
+          "span/synchronous/hat-fit": {
+            "calls": 7,
+            "milliseconds": 112.20919999999978
+          },
+          "span/synchronous/body-coverage-preparation": {
+            "calls": 10,
+            "milliseconds": 1167.283400000002
+          }
+        },
+        "preparationElapsedMs": 4500.7585,
+        "clearanceImplementation": "f9feee5406630c88b2b0aa49c20b16c4e9c74484",
+        "clearance": [],
+        "diagnostics": [],
+        "nodeMemory": {
+          "initial": {
+            "rss": 327094272,
+            "heapTotal": 172322816,
+            "heapUsed": 31266624,
+            "external": 32815699,
+            "arrayBuffers": 9292593
+          },
+          "final": {
+            "rss": 508772352,
+            "heapTotal": 271704064,
+            "heapUsed": 175975232,
+            "external": 150417904,
+            "arrayBuffers": 128270705
+          },
+          "maxObservedHeapUsed": 175934968,
+          "maxObservedArrayBuffers": 128171227,
+          "note": "Node checkpoint samples, not true peak memory, browser memory or GPU memory."
+        },
+        "retainedFactorySources": {
+          "bodies": 1,
+          "facialBodies": 1,
+          "modules": 19
+        },
+        "limitations": "Nested timings overlap. No physical iPhone, network/image decoding, GPU or full island load measurement.",
+        "comparison": {
+          "baselineMs": 5051.426100000001,
+          "exactBodyBuffersSelectionsAndPace": true,
+          "reductionPercent": 0.28544810345736416
+        }
+      }
+    ],
+    "after": [
+      {
+        "platform": "Node v24.19.0, win32/x64; CPU-only, image decode stubbed",
+        "scene": "10 actual seed-3055065912 founder identities/faces; source assets read from disk; world LOD unchanged",
+        "seed": 3055065912,
+        "scenario": "newFjordScenario/summer-800-v1",
+        "sourceSha256": {
+          "src/fjord-play/FjordModels.ts": "6a27a47e50b87422e9c1d230f3fde188ed63c980b29c831bb6948e9d005eb9fa",
+          "src/characters/BodyCoverage.ts": "7adfde895002cae460ddc70d8dad94469161b945e7b27797948dadbea8c0a647",
+          "src/characters/PreparedNativeOutfit.ts": "4bb4386758be11e4b96754a8e850e04111d9d76b3bc5713f6f32ea25bc26c296",
+          "src/characters/MeshyHuman.ts": "58a1463f60ca471eac86de3cda06d16148ebbd9434923ea68885058abc0f2fd3",
+          "src/characters/NativeHairRig.ts": "7c8b8b3760f2ef177cfb68a60931a9b407ffbf41d513fcc0cc94c45ed6998101"
+        },
+        "elapsedMs": 4174.3848,
+        "residents": [
+          {
+            "id": "founder-1",
+            "milliseconds": 621.2927,
+            "modules": {
+              "hair": "hair/manual-female-mid-hair-knotted",
+              "beard": null,
+              "headwear": "headwear/occupation-farmer",
+              "outfit": null,
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": "garment/meshy-long-skirt-005",
+              "top": null,
+              "equipment": "equipment/occupation-farmer"
+            },
+            "pace": 1.0252908646019394,
+            "coverageSha256": "85b0d20d9b5f8f33015f2f7035a61a2f66b5fe9dbc242e52693f879bd0c0edc2",
+            "appearanceSha256": "9678be992556b7bf612ad19e01a1a650b1c2cf31f84a44f322bcb0bbb18807f1"
+          },
+          {
+            "id": "founder-2",
+            "milliseconds": 431.9191999999998,
+            "modules": {
+              "hair": "hair/manual-female-knotted-braid",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.270940824772436,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "424321be632b67f2753672704b71f7a4ecfec042b3a505db9778893d9109f6d5"
+          },
+          {
+            "id": "founder-3",
+            "milliseconds": 245.66319999999996,
+            "modules": {
+              "hair": "hair/manual-female-mid-hair-knotted",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.2119200789898443,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "f42fb2ddbacd85a687bc15ae34688a240bdd73141d1f41609da3cf5cbc141475"
+          },
+          {
+            "id": "founder-4",
+            "milliseconds": 175.3814000000002,
+            "modules": {
+              "hair": "hair/manual-female-mid-hair-knotted",
+              "beard": null,
+              "headwear": "headwear/occupation-farmer",
+              "outfit": null,
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": "garment/meshy-long-skirt-005",
+              "top": null,
+              "equipment": "equipment/occupation-farmer"
+            },
+            "pace": 1.011911735998154,
+            "coverageSha256": "85b0d20d9b5f8f33015f2f7035a61a2f66b5fe9dbc242e52693f879bd0c0edc2",
+            "appearanceSha256": "b3c7a021bb7b326d5f67f23740952fb1a78ace446516f98421b25b5b0a466676"
+          },
+          {
+            "id": "founder-5",
+            "milliseconds": 409.74040000000014,
+            "modules": {
+              "hair": "hair/manual-long-braided",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.0638164383647326,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "3b7d4a4ce3b4aad2d096b129ac913ac9a535ba6a83a9cbc5b41593f0720e99c9"
+          },
+          {
+            "id": "founder-6",
+            "milliseconds": 337.40450000000055,
+            "modules": {
+              "hair": "hair/manual-fitted-short",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.0442707899529324,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "2b78881629c0056b878f8e72c580d0690dcfa574c98ef220e8adf98cc070709c"
+          },
+          {
+            "id": "founder-7",
+            "milliseconds": 423.27919999999995,
+            "modules": {
+              "hair": "hair/manual-long-2",
+              "beard": "beard/manual-fitted-pointed",
+              "headwear": null,
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": null
+            },
+            "pace": 1.092600724571573,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "e2bac551fc2836ab2cef87f450bb1714fcb81d83c622891f3793ffe4ddc07502"
+          },
+          {
+            "id": "founder-8",
+            "milliseconds": 272.41120000000046,
+            "modules": {
+              "hair": "hair/manual-long-2",
+              "beard": null,
+              "headwear": null,
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": null
+            },
+            "pace": 1.1505979652592389,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "faeb97bb42f22cef5e23a7d91f8108643f01cbcf39408617b0d465a0674afec9"
+          },
+          {
+            "id": "founder-9",
+            "milliseconds": 322.4488000000001,
+            "modules": {
+              "hair": "hair/manual-female-mid-wavy-long",
+              "beard": null,
+              "headwear": null,
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": null
+            },
+            "pace": 1.1103545128693997,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "f4664d2047d28f229edd9d3cb06865607076633fc875a311714cdd29da77e867"
+          },
+          {
+            "id": "founder-10",
+            "milliseconds": 420.65880000000016,
+            "modules": {
+              "hair": "hair/manual-long-braided",
+              "beard": null,
+              "headwear": "headwear/occupation-hunter",
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": "equipment/occupation-hunter"
+            },
+            "pace": 1.125557070306062,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "12f7f493ab0e244e30f5d7f0497b284964d3b9aa367977a2213704638b535929"
+          }
+        ],
+        "operations": {
+          "file-read-and-GLTF-parse": {
+            "calls": 20,
+            "milliseconds": 373.5921999999996
+          },
+          "span/async-inclusive/body-source-wait": {
+            "calls": 10,
+            "milliseconds": 95.35260000000017
+          },
+          "span/synchronous/facial-source-preparation": {
+            "calls": 1,
+            "milliseconds": 77.02170000000024
+          },
+          "span/synchronous/binding-dependency-key": {
+            "calls": 50,
+            "milliseconds": 264.5476999999987
+          },
+          "MeshyBodyFitAdapter.refit": {
+            "calls": 30,
+            "milliseconds": 103.91280000000143
+          },
+          "span/synchronous/hair-garment-clearance": {
+            "calls": 30,
+            "milliseconds": 217.3907999999983
+          },
+          "MeshyModuleRuntime.refit": {
+            "calls": 30,
+            "milliseconds": 2174.5234000000028
+          },
+          "MeshyHuman.applyDNA": {
+            "calls": 20,
+            "milliseconds": 88.75659999999925
+          },
+          "span/synchronous/body-face-construction": {
+            "calls": 10,
+            "milliseconds": 207.38570000000436
+          },
+          "span/async-inclusive/module-sources-wait": {
+            "calls": 20,
+            "milliseconds": 329.92439999999897
+          },
+          "span/synchronous/module-binding-validation": {
+            "calls": 20,
+            "milliseconds": 294.77390000000105
+          },
+          "MeshyHuman.setNativeModules": {
+            "calls": 20,
+            "milliseconds": 2837.7262000000005
+          },
+          "span/synchronous/clothing-hair-beard-fitting": {
+            "calls": 20,
+            "milliseconds": 2837.827599999999
+          },
+          "span/synchronous/body-face-reconciliation": {
+            "calls": 10,
+            "milliseconds": 10.624300000000403
+          },
+          "MeshyHuman.sampleAnimation": {
+            "calls": 650,
+            "milliseconds": 86.56810000001042
+          },
+          "span/synchronous/walking-pace-preparation": {
+            "calls": 10,
+            "milliseconds": 83.56419999999889
+          },
+          "span/async-inclusive/binding-fetch-read": {
+            "calls": 19,
+            "milliseconds": 162.85590000000047
+          },
+          "span/async-inclusive/binding-digest": {
+            "calls": 19,
+            "milliseconds": 119.54060000000118
+          },
+          "span/synchronous/binding-text-parse": {
+            "calls": 19,
+            "milliseconds": 141.54150000000027
+          },
+          "span/synchronous/module-part-fit": {
+            "calls": 65,
+            "milliseconds": 522.846100000002
+          },
+          "span/synchronous/hair-beard-face-fit": {
+            "calls": 18,
+            "milliseconds": 132.99469999999928
+          },
+          "span/synchronous/hat-fit": {
+            "calls": 7,
+            "milliseconds": 113.67499999999927
+          },
+          "span/synchronous/body-coverage-preparation": {
+            "calls": 10,
+            "milliseconds": 1176.5269999999996
+          }
+        },
+        "preparationElapsedMs": 3660.1994000000013,
+        "clearanceImplementation": "current",
+        "clearance": [
+          {
+            "possibleIntersections": 1331379,
+            "testedIntersections": 42084,
+            "temporaryCandidateBytes": 2672
+          },
+          {
+            "possibleIntersections": 11509470,
+            "testedIntersections": 131670,
+            "temporaryCandidateBytes": 8360
+          }
+        ],
+        "diagnostics": [],
+        "nodeMemory": {
+          "initial": {
+            "rss": 325832704,
+            "heapTotal": 172847104,
+            "heapUsed": 31027296,
+            "external": 32803318,
+            "arrayBuffers": 9292593
+          },
+          "final": {
+            "rss": 472940544,
+            "heapTotal": 252420096,
+            "heapUsed": 175524424,
+            "external": 127792267,
+            "arrayBuffers": 111153277
+          },
+          "maxObservedHeapUsed": 175488936,
+          "maxObservedArrayBuffers": 112274501,
+          "note": "Node checkpoint samples, not true peak memory, browser memory or GPU memory."
+        },
+        "retainedFactorySources": {
+          "bodies": 1,
+          "facialBodies": 1,
+          "modules": 19
+        },
+        "limitations": "Nested timings overlap. No physical iPhone, network/image decoding, GPU or full island load measurement.",
+        "comparison": {
+          "baselineMs": 5051.426100000001,
+          "exactBodyBuffersSelectionsAndPace": true,
+          "reductionPercent": 17.362251424404697
+        }
+      },
+      {
+        "platform": "Node v24.19.0, win32/x64; CPU-only, image decode stubbed",
+        "scene": "10 actual seed-3055065912 founder identities/faces; source assets read from disk; world LOD unchanged",
+        "seed": 3055065912,
+        "scenario": "newFjordScenario/summer-800-v1",
+        "sourceSha256": {
+          "src/fjord-play/FjordModels.ts": "6a27a47e50b87422e9c1d230f3fde188ed63c980b29c831bb6948e9d005eb9fa",
+          "src/characters/BodyCoverage.ts": "7adfde895002cae460ddc70d8dad94469161b945e7b27797948dadbea8c0a647",
+          "src/characters/PreparedNativeOutfit.ts": "4bb4386758be11e4b96754a8e850e04111d9d76b3bc5713f6f32ea25bc26c296",
+          "src/characters/MeshyHuman.ts": "58a1463f60ca471eac86de3cda06d16148ebbd9434923ea68885058abc0f2fd3",
+          "src/characters/NativeHairRig.ts": "7c8b8b3760f2ef177cfb68a60931a9b407ffbf41d513fcc0cc94c45ed6998101"
+        },
+        "elapsedMs": 4216.938099999999,
+        "residents": [
+          {
+            "id": "founder-1",
+            "milliseconds": 593.5178999999998,
+            "modules": {
+              "hair": "hair/manual-female-mid-hair-knotted",
+              "beard": null,
+              "headwear": "headwear/occupation-farmer",
+              "outfit": null,
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": "garment/meshy-long-skirt-005",
+              "top": null,
+              "equipment": "equipment/occupation-farmer"
+            },
+            "pace": 1.0252908646019394,
+            "coverageSha256": "85b0d20d9b5f8f33015f2f7035a61a2f66b5fe9dbc242e52693f879bd0c0edc2",
+            "appearanceSha256": "9678be992556b7bf612ad19e01a1a650b1c2cf31f84a44f322bcb0bbb18807f1"
+          },
+          {
+            "id": "founder-2",
+            "milliseconds": 419.1848,
+            "modules": {
+              "hair": "hair/manual-female-knotted-braid",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.270940824772436,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "424321be632b67f2753672704b71f7a4ecfec042b3a505db9778893d9109f6d5"
+          },
+          {
+            "id": "founder-3",
+            "milliseconds": 263.52070000000003,
+            "modules": {
+              "hair": "hair/manual-female-mid-hair-knotted",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.2119200789898443,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "f42fb2ddbacd85a687bc15ae34688a240bdd73141d1f41609da3cf5cbc141475"
+          },
+          {
+            "id": "founder-4",
+            "milliseconds": 180.5340000000001,
+            "modules": {
+              "hair": "hair/manual-female-mid-hair-knotted",
+              "beard": null,
+              "headwear": "headwear/occupation-farmer",
+              "outfit": null,
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": "garment/meshy-long-skirt-005",
+              "top": null,
+              "equipment": "equipment/occupation-farmer"
+            },
+            "pace": 1.011911735998154,
+            "coverageSha256": "85b0d20d9b5f8f33015f2f7035a61a2f66b5fe9dbc242e52693f879bd0c0edc2",
+            "appearanceSha256": "b3c7a021bb7b326d5f67f23740952fb1a78ace446516f98421b25b5b0a466676"
+          },
+          {
+            "id": "founder-5",
+            "milliseconds": 405.32439999999997,
+            "modules": {
+              "hair": "hair/manual-long-braided",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.0638164383647326,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "3b7d4a4ce3b4aad2d096b129ac913ac9a535ba6a83a9cbc5b41593f0720e99c9"
+          },
+          {
+            "id": "founder-6",
+            "milliseconds": 363.15239999999994,
+            "modules": {
+              "hair": "hair/manual-fitted-short",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.0442707899529324,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "2b78881629c0056b878f8e72c580d0690dcfa574c98ef220e8adf98cc070709c"
+          },
+          {
+            "id": "founder-7",
+            "milliseconds": 419.76890000000003,
+            "modules": {
+              "hair": "hair/manual-long-2",
+              "beard": "beard/manual-fitted-pointed",
+              "headwear": null,
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": null
+            },
+            "pace": 1.092600724571573,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "e2bac551fc2836ab2cef87f450bb1714fcb81d83c622891f3793ffe4ddc07502"
+          },
+          {
+            "id": "founder-8",
+            "milliseconds": 266.59609999999975,
+            "modules": {
+              "hair": "hair/manual-long-2",
+              "beard": null,
+              "headwear": null,
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": null
+            },
+            "pace": 1.1505979652592389,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "faeb97bb42f22cef5e23a7d91f8108643f01cbcf39408617b0d465a0674afec9"
+          },
+          {
+            "id": "founder-9",
+            "milliseconds": 318.1352999999999,
+            "modules": {
+              "hair": "hair/manual-female-mid-wavy-long",
+              "beard": null,
+              "headwear": null,
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": null
+            },
+            "pace": 1.1103545128693997,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "f4664d2047d28f229edd9d3cb06865607076633fc875a311714cdd29da77e867"
+          },
+          {
+            "id": "founder-10",
+            "milliseconds": 469.1792000000005,
+            "modules": {
+              "hair": "hair/manual-long-braided",
+              "beard": null,
+              "headwear": "headwear/occupation-hunter",
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": "equipment/occupation-hunter"
+            },
+            "pace": 1.125557070306062,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "12f7f493ab0e244e30f5d7f0497b284964d3b9aa367977a2213704638b535929"
+          }
+        ],
+        "operations": {
+          "file-read-and-GLTF-parse": {
+            "calls": 20,
+            "milliseconds": 338.88449999999875
+          },
+          "span/async-inclusive/body-source-wait": {
+            "calls": 10,
+            "milliseconds": 93.5377999999996
+          },
+          "span/synchronous/facial-source-preparation": {
+            "calls": 1,
+            "milliseconds": 69.06489999999985
+          },
+          "span/synchronous/binding-dependency-key": {
+            "calls": 50,
+            "milliseconds": 277.8820999999971
+          },
+          "MeshyBodyFitAdapter.refit": {
+            "calls": 30,
+            "milliseconds": 117.97850000000199
+          },
+          "span/synchronous/hair-garment-clearance": {
+            "calls": 30,
+            "milliseconds": 199.40519999999697
+          },
+          "MeshyModuleRuntime.refit": {
+            "calls": 30,
+            "milliseconds": 2151.4841000000015
+          },
+          "MeshyHuman.applyDNA": {
+            "calls": 20,
+            "milliseconds": 92.74569999999949
+          },
+          "span/synchronous/body-face-construction": {
+            "calls": 10,
+            "milliseconds": 212.08310000000165
+          },
+          "span/async-inclusive/module-sources-wait": {
+            "calls": 20,
+            "milliseconds": 330.50759999999946
+          },
+          "span/synchronous/module-binding-validation": {
+            "calls": 20,
+            "milliseconds": 334.0799999999995
+          },
+          "MeshyHuman.setNativeModules": {
+            "calls": 20,
+            "milliseconds": 2883.0467
+          },
+          "span/synchronous/clothing-hair-beard-fitting": {
+            "calls": 20,
+            "milliseconds": 2883.179299999999
+          },
+          "span/synchronous/body-face-reconciliation": {
+            "calls": 10,
+            "milliseconds": 10.308300000001054
+          },
+          "MeshyHuman.sampleAnimation": {
+            "calls": 650,
+            "milliseconds": 84.98410000000558
+          },
+          "span/synchronous/walking-pace-preparation": {
+            "calls": 10,
+            "milliseconds": 81.89519999999993
+          },
+          "span/async-inclusive/binding-fetch-read": {
+            "calls": 19,
+            "milliseconds": 139.22840000000087
+          },
+          "span/async-inclusive/binding-digest": {
+            "calls": 19,
+            "milliseconds": 167.88149999999996
+          },
+          "span/synchronous/binding-text-parse": {
+            "calls": 19,
+            "milliseconds": 159.62980000000107
+          },
+          "span/synchronous/module-part-fit": {
+            "calls": 65,
+            "milliseconds": 507.0096999999987
+          },
+          "span/synchronous/hair-beard-face-fit": {
+            "calls": 18,
+            "milliseconds": 119.75910000000113
+          },
+          "span/synchronous/hat-fit": {
+            "calls": 7,
+            "milliseconds": 106.36329999999953
+          },
+          "span/synchronous/body-coverage-preparation": {
+            "calls": 10,
+            "milliseconds": 1209.3112999999994
+          }
+        },
+        "preparationElapsedMs": 3698.9137,
+        "clearanceImplementation": "current",
+        "clearance": [
+          {
+            "possibleIntersections": 1331379,
+            "testedIntersections": 42084,
+            "temporaryCandidateBytes": 2672
+          },
+          {
+            "possibleIntersections": 11509470,
+            "testedIntersections": 131670,
+            "temporaryCandidateBytes": 8360
+          }
+        ],
+        "diagnostics": [],
+        "nodeMemory": {
+          "initial": {
+            "rss": 326074368,
+            "heapTotal": 172584960,
+            "heapUsed": 30975304,
+            "external": 32803318,
+            "arrayBuffers": 9292593
+          },
+          "final": {
+            "rss": 448868352,
+            "heapTotal": 252588032,
+            "heapUsed": 177563672,
+            "external": 103209174,
+            "arrayBuffers": 90479066
+          },
+          "maxObservedHeapUsed": 177528184,
+          "maxObservedArrayBuffers": 110412685,
+          "note": "Node checkpoint samples, not true peak memory, browser memory or GPU memory."
+        },
+        "retainedFactorySources": {
+          "bodies": 1,
+          "facialBodies": 1,
+          "modules": 19
+        },
+        "limitations": "Nested timings overlap. No physical iPhone, network/image decoding, GPU or full island load measurement.",
+        "comparison": {
+          "baselineMs": 5051.426100000001,
+          "exactBodyBuffersSelectionsAndPace": true,
+          "reductionPercent": 16.51984971135183
+        }
+      },
+      {
+        "platform": "Node v24.19.0, win32/x64; CPU-only, image decode stubbed",
+        "scene": "10 actual seed-3055065912 founder identities/faces; source assets read from disk; world LOD unchanged",
+        "seed": 3055065912,
+        "scenario": "newFjordScenario/summer-800-v1",
+        "sourceSha256": {
+          "src/fjord-play/FjordModels.ts": "6a27a47e50b87422e9c1d230f3fde188ed63c980b29c831bb6948e9d005eb9fa",
+          "src/characters/BodyCoverage.ts": "7adfde895002cae460ddc70d8dad94469161b945e7b27797948dadbea8c0a647",
+          "src/characters/PreparedNativeOutfit.ts": "4bb4386758be11e4b96754a8e850e04111d9d76b3bc5713f6f32ea25bc26c296",
+          "src/characters/MeshyHuman.ts": "58a1463f60ca471eac86de3cda06d16148ebbd9434923ea68885058abc0f2fd3",
+          "src/characters/NativeHairRig.ts": "7c8b8b3760f2ef177cfb68a60931a9b407ffbf41d513fcc0cc94c45ed6998101"
+        },
+        "elapsedMs": 4146.860999999999,
+        "residents": [
+          {
+            "id": "founder-1",
+            "milliseconds": 600.3734,
+            "modules": {
+              "hair": "hair/manual-female-mid-hair-knotted",
+              "beard": null,
+              "headwear": "headwear/occupation-farmer",
+              "outfit": null,
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": "garment/meshy-long-skirt-005",
+              "top": null,
+              "equipment": "equipment/occupation-farmer"
+            },
+            "pace": 1.0252908646019394,
+            "coverageSha256": "85b0d20d9b5f8f33015f2f7035a61a2f66b5fe9dbc242e52693f879bd0c0edc2",
+            "appearanceSha256": "9678be992556b7bf612ad19e01a1a650b1c2cf31f84a44f322bcb0bbb18807f1"
+          },
+          {
+            "id": "founder-2",
+            "milliseconds": 396.0209,
+            "modules": {
+              "hair": "hair/manual-female-knotted-braid",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.270940824772436,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "424321be632b67f2753672704b71f7a4ecfec042b3a505db9778893d9109f6d5"
+          },
+          {
+            "id": "founder-3",
+            "milliseconds": 244.60280000000012,
+            "modules": {
+              "hair": "hair/manual-female-mid-hair-knotted",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.2119200789898443,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "f42fb2ddbacd85a687bc15ae34688a240bdd73141d1f41609da3cf5cbc141475"
+          },
+          {
+            "id": "founder-4",
+            "milliseconds": 172.42959999999994,
+            "modules": {
+              "hair": "hair/manual-female-mid-hair-knotted",
+              "beard": null,
+              "headwear": "headwear/occupation-farmer",
+              "outfit": null,
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": "garment/meshy-long-skirt-005",
+              "top": null,
+              "equipment": "equipment/occupation-farmer"
+            },
+            "pace": 1.011911735998154,
+            "coverageSha256": "85b0d20d9b5f8f33015f2f7035a61a2f66b5fe9dbc242e52693f879bd0c0edc2",
+            "appearanceSha256": "b3c7a021bb7b326d5f67f23740952fb1a78ace446516f98421b25b5b0a466676"
+          },
+          {
+            "id": "founder-5",
+            "milliseconds": 408.05170000000044,
+            "modules": {
+              "hair": "hair/manual-long-braided",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.0638164383647326,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "3b7d4a4ce3b4aad2d096b129ac913ac9a535ba6a83a9cbc5b41593f0720e99c9"
+          },
+          {
+            "id": "founder-6",
+            "milliseconds": 346.6368999999995,
+            "modules": {
+              "hair": "hair/manual-fitted-short",
+              "beard": null,
+              "headwear": "headwear/occupation-fisher",
+              "outfit": null,
+              "shoes": "garment/meshy-fisherman-shoe-009",
+              "trousers": "garment/meshy-fisherman-trousers-009",
+              "top": "garment/meshy-fisherman-tunic-009",
+              "equipment": "equipment/occupation-fisher"
+            },
+            "pace": 1.0442707899529324,
+            "coverageSha256": "17d1796f9e100496de17c428f29354d992f8e0dc216288aef162a64477522296",
+            "appearanceSha256": "2b78881629c0056b878f8e72c580d0690dcfa574c98ef220e8adf98cc070709c"
+          },
+          {
+            "id": "founder-7",
+            "milliseconds": 436.6755000000003,
+            "modules": {
+              "hair": "hair/manual-long-2",
+              "beard": "beard/manual-fitted-pointed",
+              "headwear": null,
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": null
+            },
+            "pace": 1.092600724571573,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "e2bac551fc2836ab2cef87f450bb1714fcb81d83c622891f3793ffe4ddc07502"
+          },
+          {
+            "id": "founder-8",
+            "milliseconds": 274.1373000000003,
+            "modules": {
+              "hair": "hair/manual-long-2",
+              "beard": null,
+              "headwear": null,
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": null
+            },
+            "pace": 1.1505979652592389,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "faeb97bb42f22cef5e23a7d91f8108643f01cbcf39408617b0d465a0674afec9"
+          },
+          {
+            "id": "founder-9",
+            "milliseconds": 315.09630000000016,
+            "modules": {
+              "hair": "hair/manual-female-mid-wavy-long",
+              "beard": null,
+              "headwear": null,
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": null
+            },
+            "pace": 1.1103545128693997,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "f4664d2047d28f229edd9d3cb06865607076633fc875a311714cdd29da77e867"
+          },
+          {
+            "id": "founder-10",
+            "milliseconds": 437.35080000000016,
+            "modules": {
+              "hair": "hair/manual-long-braided",
+              "beard": null,
+              "headwear": "headwear/occupation-hunter",
+              "outfit": "garment/meshy-grid-trial-001",
+              "shoes": "garment/meshy-low-shoes-005",
+              "trousers": null,
+              "top": null,
+              "equipment": "equipment/occupation-hunter"
+            },
+            "pace": 1.125557070306062,
+            "coverageSha256": "e1c90c33b181a409145eb4899fad33e3345927f4c2fcdfe529ff626543a96270",
+            "appearanceSha256": "12f7f493ab0e244e30f5d7f0497b284964d3b9aa367977a2213704638b535929"
+          }
+        ],
+        "operations": {
+          "file-read-and-GLTF-parse": {
+            "calls": 20,
+            "milliseconds": 344.71050000000014
+          },
+          "span/async-inclusive/body-source-wait": {
+            "calls": 10,
+            "milliseconds": 98.17439999999851
+          },
+          "span/synchronous/facial-source-preparation": {
+            "calls": 1,
+            "milliseconds": 66.9078999999997
+          },
+          "span/synchronous/binding-dependency-key": {
+            "calls": 50,
+            "milliseconds": 262.8427000000015
+          },
+          "MeshyBodyFitAdapter.refit": {
+            "calls": 30,
+            "milliseconds": 103.34860000000208
+          },
+          "span/synchronous/hair-garment-clearance": {
+            "calls": 30,
+            "milliseconds": 203.52089999999998
+          },
+          "MeshyModuleRuntime.refit": {
+            "calls": 30,
+            "milliseconds": 2155.901999999995
+          },
+          "MeshyHuman.applyDNA": {
+            "calls": 20,
+            "milliseconds": 90.38570000000072
+          },
+          "span/synchronous/body-face-construction": {
+            "calls": 10,
+            "milliseconds": 207.61119999999983
+          },
+          "span/async-inclusive/module-sources-wait": {
+            "calls": 20,
+            "milliseconds": 327.8796000000016
+          },
+          "span/synchronous/module-binding-validation": {
+            "calls": 20,
+            "milliseconds": 297.3711999999987
+          },
+          "MeshyHuman.setNativeModules": {
+            "calls": 20,
+            "milliseconds": 2820.669899999999
+          },
+          "span/synchronous/clothing-hair-beard-fitting": {
+            "calls": 20,
+            "milliseconds": 2820.785100000001
+          },
+          "span/synchronous/body-face-reconciliation": {
+            "calls": 10,
+            "milliseconds": 10.31369999999879
+          },
+          "MeshyHuman.sampleAnimation": {
+            "calls": 650,
+            "milliseconds": 82.89150000000654
+          },
+          "span/synchronous/walking-pace-preparation": {
+            "calls": 10,
+            "milliseconds": 80.37300000000096
+          },
+          "span/async-inclusive/binding-fetch-read": {
+            "calls": 19,
+            "milliseconds": 158.8760999999995
+          },
+          "span/async-inclusive/binding-digest": {
+            "calls": 19,
+            "milliseconds": 149.8711000000003
+          },
+          "span/synchronous/binding-text-parse": {
+            "calls": 19,
+            "milliseconds": 143.7615999999989
+          },
+          "span/synchronous/module-part-fit": {
+            "calls": 65,
+            "milliseconds": 495.89169999999876
+          },
+          "span/synchronous/hair-beard-face-fit": {
+            "calls": 18,
+            "milliseconds": 138.26679999999988
+          },
+          "span/synchronous/hat-fit": {
+            "calls": 7,
+            "milliseconds": 110.95350000000008
+          },
+          "span/synchronous/body-coverage-preparation": {
+            "calls": 10,
+            "milliseconds": 1197.8482000000004
+          }
+        },
+        "preparationElapsedMs": 3631.375200000001,
+        "clearanceImplementation": "current",
+        "clearance": [
+          {
+            "possibleIntersections": 1331379,
+            "testedIntersections": 42084,
+            "temporaryCandidateBytes": 2672
+          },
+          {
+            "possibleIntersections": 11509470,
+            "testedIntersections": 131670,
+            "temporaryCandidateBytes": 8360
+          }
+        ],
+        "diagnostics": [],
+        "nodeMemory": {
+          "initial": {
+            "rss": 325730304,
+            "heapTotal": 172060672,
+            "heapUsed": 30979192,
+            "external": 32803318,
+            "arrayBuffers": 9292593
+          },
+          "final": {
+            "rss": 471310336,
+            "heapTotal": 252956672,
+            "heapUsed": 172596952,
+            "external": 127792267,
+            "arrayBuffers": 111153277
+          },
+          "maxObservedHeapUsed": 172561464,
+          "maxObservedArrayBuffers": 111053799,
+          "note": "Node checkpoint samples, not true peak memory, browser memory or GPU memory."
+        },
+        "retainedFactorySources": {
+          "bodies": 1,
+          "facialBodies": 1,
+          "modules": 19
+        },
+        "limitations": "Nested timings overlap. No physical iPhone, network/image decoding, GPU or full island load measurement.",
+        "comparison": {
+          "baselineMs": 5051.426100000001,
+          "exactBodyBuffersSelectionsAndPace": true,
+          "reductionPercent": 17.90712329731997
+        }
+      }
+    ]
+  },
+  "geography": {
+    "elapsedMs": {
+      "before": [
+        10189.7855,
+        10185.2307,
+        10229.6357
+      ],
+      "after": [
+        9949.0817,
+        9369.6289,
+        9350.6941
+      ],
+      "beforeMedian": 10189.7855,
+      "afterMedian": 9369.6289,
+      "reductionPercent": 8.048811233563258
+    },
+    "before": [
+      {
+        "platform": "Node v24.19.0, win32/x64; synchronous worker-core CPU harness",
+        "seed": 3055065912,
+        "recipe": {
+          "version": "island-pool-v3",
+          "generatorVersion": "fjordside-island-v0.3e-r3",
+          "seed": 7
+        },
+        "retained": false,
+        "sourcePreparedMs": 7188.914999999999,
+        "elapsedMs": 10189.7855,
+        "timings": [
+          {
+            "stage": "terrain",
+            "milliseconds": 991.0920999999998
+          },
+          {
+            "stage": "initial-candidates",
+            "milliseconds": 91.07349999999997
+          },
+          {
+            "stage": "initial-plan",
+            "milliseconds": 183.24980000000005
+          },
+          {
+            "stage": "compartments",
+            "milliseconds": 254.9368000000004
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 471.3162000000002
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 224.57460000000037
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 127.45740000000023
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 79.7131000000004
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 50.435399999999845
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 56.40650000000005
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 82.22370000000001
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 48.07450000000017
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 11.012299999999868
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 18.306099999999788
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 53.31779999999981
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 285.1727999999998
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 33.3738000000003
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 8.82510000000002
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 23.18369999999959
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 106.28179999999975
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 241.4946
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 42.420100000000275
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 10.122000000000298
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 19.997199999999793
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 134.14329999999973
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 203.36509999999998
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 8.08600000000024
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 20.890599999999722
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 50.52509999999984
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 20.936900000000605
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 12.181000000000495
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 17.855400000000373
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 38.56370000000061
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 159.51249999999982
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 37.27810000000045
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 45.60359999999946
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 41.29119999999966
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 20.36329999999998
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 36.127300000000105
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 21.892499999999927
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 56.610100000000784
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 18.2488000000003
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 25.1858000000002
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 20.532900000000154
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 41.36440000000039
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 17.28309999999965
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 30.434699999999793
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 17.747400000000198
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 34.148300000000745
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 22.583999999999833
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 26.837800000000243
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 22.111799999999675
+          },
+          {
+            "stage": "player-navigation",
+            "milliseconds": 209.15599999999995
+          },
+          {
+            "stage": "access",
+            "milliseconds": 9.71180000000004
+          },
+          {
+            "stage": "harbor",
+            "milliseconds": 1.2012999999997191
+          },
+          {
+            "stage": "visibility",
+            "milliseconds": 85.27579999999944
+          },
+          {
+            "stage": "final-navigation",
+            "milliseconds": 233.85689999999977
+          },
+          {
+            "stage": "final-route",
+            "milliseconds": 5.581400000000031
+          },
+          {
+            "stage": "environment-zoning",
+            "milliseconds": 409.41309999999976
+          },
+          {
+            "stage": "nature",
+            "milliseconds": 1217.3932000000004
+          },
+          {
+            "stage": "validation-and-freeze",
+            "milliseconds": 277.83870000000024
+          },
+          {
+            "stage": "campaign-natural-terrain",
+            "milliseconds": 942.2643000000007
+          },
+          {
+            "stage": "campaign-foundations",
+            "milliseconds": 94.48660000000018
+          },
+          {
+            "stage": "campaign-zoning",
+            "milliseconds": 399.7937000000002
+          },
+          {
+            "stage": "campaign-nature-and-freeze",
+            "milliseconds": 1189.7361
+          }
+        ],
+        "canonicalSha256": "6bcccb9a871df5cf1b1af4b648aeafdf0fddf189d236446ad1e884f51d36be8c",
+        "canonicalJsonBytes": 16501586,
+        "naturalHeightSamples": 160801,
+        "memoryBefore": {
+          "rss": 166330368,
+          "heapTotal": 103559168,
+          "heapUsed": 24413088,
+          "external": 29847798,
+          "arrayBuffers": 9270491
+        },
+        "memoryAfter": {
+          "rss": 434089984,
+          "heapTotal": 312102912,
+          "heapUsed": 213533192,
+          "external": 38265874,
+          "arrayBuffers": 17688527
+        },
+        "sourceSha256": {
+          "src/world-generation/GenerateWorld.ts": "68f9da5bea0cd670e19166d00590ee1abc8868cac96df4e8284d5d01f14476fb",
+          "src/fjord-play/CampaignIsland.ts": "4e679ed3dcfb8cdeca46df009d8c1d334f30876f90ff1dd0cf79be09b0a8c225"
+        },
+        "limits": "No browser/download/worker structured-clone timing, first frame, input responsiveness or true peak memory. No extra asset or terrain copy is introduced by the single-use handoff."
+      },
+      {
+        "platform": "Node v24.19.0, win32/x64; synchronous worker-core CPU harness",
+        "seed": 3055065912,
+        "recipe": {
+          "version": "island-pool-v3",
+          "generatorVersion": "fjordside-island-v0.3e-r3",
+          "seed": 7
+        },
+        "retained": false,
+        "sourcePreparedMs": 7285.661500000001,
+        "elapsedMs": 10185.2307,
+        "timings": [
+          {
+            "stage": "terrain",
+            "milliseconds": 999.6954999999999
+          },
+          {
+            "stage": "initial-candidates",
+            "milliseconds": 93.81640000000016
+          },
+          {
+            "stage": "initial-plan",
+            "milliseconds": 205.22530000000006
+          },
+          {
+            "stage": "compartments",
+            "milliseconds": 234.4665
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 469.40329999999994
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 215.0541000000003
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 125.21229999999969
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 79.14260000000013
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 49.52449999999999
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 55.74130000000014
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 80.66089999999986
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 47.94770000000017
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 10.88090000000011
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 18.78800000000001
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 52.427000000000135
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 289.4022
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 35.872100000000046
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 9.443099999999959
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 22.958900000000085
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 108.50390000000061
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 253.95280000000002
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 39.30130000000008
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 10.867499999999382
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 20.48869999999988
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 196.85519999999997
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 230.09410000000025
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 8.835100000000239
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 24.779499999999643
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 46.427999999999884
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 21.66440000000057
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 13.260400000000118
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 17.07630000000063
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 39.80370000000039
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 142.04339999999956
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 41.768200000000434
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 20.50330000000031
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 35.54989999999998
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 19.984400000000278
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 35.55019999999968
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 19.47569999999996
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 56.28989999999976
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 19.5666999999994
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 23.85199999999986
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 20.79699999999957
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 41.633200000000215
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 16.51760000000013
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 30.59389999999985
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 17.64260000000013
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 36.09450000000015
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 24.58730000000014
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 37.93289999999979
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 22.122599999999693
+          },
+          {
+            "stage": "player-navigation",
+            "milliseconds": 207.3729000000003
+          },
+          {
+            "stage": "access",
+            "milliseconds": 17.444000000000415
+          },
+          {
+            "stage": "harbor",
+            "milliseconds": 0.9356999999999971
+          },
+          {
+            "stage": "visibility",
+            "milliseconds": 85.35699999999997
+          },
+          {
+            "stage": "final-navigation",
+            "milliseconds": 235.54260000000068
+          },
+          {
+            "stage": "final-route",
+            "milliseconds": 5.655800000000454
+          },
+          {
+            "stage": "environment-zoning",
+            "milliseconds": 424.6797000000006
+          },
+          {
+            "stage": "nature",
+            "milliseconds": 1215.3936000000003
+          },
+          {
+            "stage": "validation-and-freeze",
+            "milliseconds": 280.83140000000003
+          },
+          {
+            "stage": "campaign-natural-terrain",
+            "milliseconds": 941.0900000000001
+          },
+          {
+            "stage": "campaign-foundations",
+            "milliseconds": 99.28080000000045
+          },
+          {
+            "stage": "campaign-zoning",
+            "milliseconds": 376.8678
+          },
+          {
+            "stage": "campaign-nature-and-freeze",
+            "milliseconds": 1163.7377000000015
+          }
+        ],
+        "canonicalSha256": "6bcccb9a871df5cf1b1af4b648aeafdf0fddf189d236446ad1e884f51d36be8c",
+        "canonicalJsonBytes": 16501586,
+        "naturalHeightSamples": 160801,
+        "memoryBefore": {
+          "rss": 166072320,
+          "heapTotal": 104607744,
+          "heapUsed": 24413144,
+          "external": 29847798,
+          "arrayBuffers": 9270491
+        },
+        "memoryAfter": {
+          "rss": 408915968,
+          "heapTotal": 293605376,
+          "heapUsed": 166271192,
+          "external": 37622670,
+          "arrayBuffers": 17045323
+        },
+        "sourceSha256": {
+          "src/world-generation/GenerateWorld.ts": "68f9da5bea0cd670e19166d00590ee1abc8868cac96df4e8284d5d01f14476fb",
+          "src/fjord-play/CampaignIsland.ts": "4e679ed3dcfb8cdeca46df009d8c1d334f30876f90ff1dd0cf79be09b0a8c225"
+        },
+        "limits": "No browser/download/worker structured-clone timing, first frame, input responsiveness or true peak memory. No extra asset or terrain copy is introduced by the single-use handoff."
+      },
+      {
+        "platform": "Node v24.19.0, win32/x64; synchronous worker-core CPU harness",
+        "seed": 3055065912,
+        "recipe": {
+          "version": "island-pool-v3",
+          "generatorVersion": "fjordside-island-v0.3e-r3",
+          "seed": 7
+        },
+        "retained": false,
+        "sourcePreparedMs": 7310.5266,
+        "elapsedMs": 10229.6357,
+        "timings": [
+          {
+            "stage": "terrain",
+            "milliseconds": 966.1726
+          },
+          {
+            "stage": "initial-candidates",
+            "milliseconds": 115.0619999999999
+          },
+          {
+            "stage": "initial-plan",
+            "milliseconds": 188.48700000000008
+          },
+          {
+            "stage": "compartments",
+            "milliseconds": 282.5459999999998
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 472.6129000000001
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 218.53560000000016
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 138.41710000000012
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 79.43629999999985
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 50.87440000000015
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 55.76650000000018
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 80.50250000000005
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 49.09659999999985
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 10.419300000000021
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 18.564400000000205
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 53.02729999999974
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 292.9585000000002
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 34.602100000000064
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 9.334399999999732
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 23.31829999999991
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 106.79260000000022
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 240.3191999999999
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 40.231400000000576
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 16.91649999999936
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 20.508100000000013
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 130.73739999999998
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 206.91700000000037
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 9.993000000000393
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 23.673099999999977
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 45.483400000000074
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 20.5654999999997
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 12.69380000000001
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 17.031699999999546
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 40.102499999999964
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 144.71329999999944
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 38.22599999999966
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 19.698699999999917
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 36.34299999999985
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 20.743499999999585
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 34.64089999999942
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 20.940099999999802
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 101.3783999999996
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 19.127199999999903
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 24.48279999999977
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 22.662599999999657
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 51.081199999999626
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 17.325399999999718
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 29.979699999999866
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 17.804799999999886
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 33.5634
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 22.675000000000182
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 26.33050000000003
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 20.901499999999942
+          },
+          {
+            "stage": "player-navigation",
+            "milliseconds": 203.0632999999998
+          },
+          {
+            "stage": "access",
+            "milliseconds": 8.681999999999789
+          },
+          {
+            "stage": "harbor",
+            "milliseconds": 0.9220000000004802
+          },
+          {
+            "stage": "visibility",
+            "milliseconds": 81.47980000000007
+          },
+          {
+            "stage": "final-navigation",
+            "milliseconds": 233.3696
+          },
+          {
+            "stage": "final-route",
+            "milliseconds": 5.330600000000231
+          },
+          {
+            "stage": "environment-zoning",
+            "milliseconds": 423.3089
+          },
+          {
+            "stage": "nature",
+            "milliseconds": 1268.4142000000002
+          },
+          {
+            "stage": "validation-and-freeze",
+            "milliseconds": 287.28160000000025
+          },
+          {
+            "stage": "campaign-natural-terrain",
+            "milliseconds": 925.7837
+          },
+          {
+            "stage": "campaign-foundations",
+            "milliseconds": 94.7525999999998
+          },
+          {
+            "stage": "campaign-zoning",
+            "milliseconds": 390.1241000000009
+          },
+          {
+            "stage": "campaign-nature-and-freeze",
+            "milliseconds": 1174.9868000000006
+          }
+        ],
+        "canonicalSha256": "6bcccb9a871df5cf1b1af4b648aeafdf0fddf189d236446ad1e884f51d36be8c",
+        "canonicalJsonBytes": 16501586,
+        "naturalHeightSamples": 160801,
+        "memoryBefore": {
+          "rss": 165998592,
+          "heapTotal": 103559168,
+          "heapUsed": 24413400,
+          "external": 29847798,
+          "arrayBuffers": 9270491
+        },
+        "memoryAfter": {
+          "rss": 430440448,
+          "heapTotal": 317677568,
+          "heapUsed": 215890784,
+          "external": 37622670,
+          "arrayBuffers": 17045323
+        },
+        "sourceSha256": {
+          "src/world-generation/GenerateWorld.ts": "68f9da5bea0cd670e19166d00590ee1abc8868cac96df4e8284d5d01f14476fb",
+          "src/fjord-play/CampaignIsland.ts": "4e679ed3dcfb8cdeca46df009d8c1d334f30876f90ff1dd0cf79be09b0a8c225"
+        },
+        "limits": "No browser/download/worker structured-clone timing, first frame, input responsiveness or true peak memory. No extra asset or terrain copy is introduced by the single-use handoff."
+      }
+    ],
+    "after": [
+      {
+        "platform": "Node v24.19.0, win32/x64; synchronous worker-core CPU harness",
+        "seed": 3055065912,
+        "recipe": {
+          "version": "island-pool-v3",
+          "generatorVersion": "fjordside-island-v0.3e-r3",
+          "seed": 7
+        },
+        "retained": true,
+        "sourcePreparedMs": 7694.7965,
+        "elapsedMs": 9949.0817,
+        "timings": [
+          {
+            "stage": "terrain",
+            "milliseconds": 1053.0682000000002
+          },
+          {
+            "stage": "initial-candidates",
+            "milliseconds": 94.45100000000002
+          },
+          {
+            "stage": "initial-plan",
+            "milliseconds": 209.89529999999968
+          },
+          {
+            "stage": "compartments",
+            "milliseconds": 282.91020000000026
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 478.8361
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 218.51060000000007
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 126.50829999999996
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 86.74459999999999
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 51.00869999999986
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 59.542399999999816
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 83.92579999999998
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 49.00679999999966
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 12.609100000000126
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 17.65209999999979
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 51.26209999999992
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 294.2996000000003
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 33.02970000000005
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 9.447200000000521
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 23.153000000000247
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 109.00560000000041
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 331.8706000000002
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 92.01200000000063
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 15.866899999999987
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 33.66580000000067
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 187.28839999999946
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 262.2612000000008
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 8.684000000000196
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 22.150900000000547
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 44.51230000000032
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 19.662199999999757
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 12.402100000000246
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 23.110599999999977
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 41.29560000000038
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 152.97850000000017
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 39.09600000000046
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 18.807200000000194
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 38.8761999999997
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 18.8121000000001
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 79.95839999999953
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 20.560499999999593
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 48.759799999999814
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 18.472600000000057
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 24.320999999999913
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 21.90980000000036
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 40.14879999999994
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 17.331500000000233
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 30.715300000000752
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 18.133899999999812
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 35.10080000000016
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 21.137300000000323
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 27.10319999999956
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 21.791599999999562
+          },
+          {
+            "stage": "player-navigation",
+            "milliseconds": 201.0057999999999
+          },
+          {
+            "stage": "access",
+            "milliseconds": 9.98620000000028
+          },
+          {
+            "stage": "harbor",
+            "milliseconds": 0.9089999999996508
+          },
+          {
+            "stage": "visibility",
+            "milliseconds": 78.67060000000038
+          },
+          {
+            "stage": "final-navigation",
+            "milliseconds": 232.64010000000053
+          },
+          {
+            "stage": "final-route",
+            "milliseconds": 5.199699999999211
+          },
+          {
+            "stage": "environment-zoning",
+            "milliseconds": 472.1336000000001
+          },
+          {
+            "stage": "nature",
+            "milliseconds": 1279.9157999999998
+          },
+          {
+            "stage": "validation-and-freeze",
+            "milliseconds": 248.54330000000118
+          },
+          {
+            "stage": "campaign-natural-terrain",
+            "milliseconds": 0.01810000000114087
+          },
+          {
+            "stage": "campaign-foundations",
+            "milliseconds": 164.4948000000004
+          },
+          {
+            "stage": "campaign-zoning",
+            "milliseconds": 406.03809999999976
+          },
+          {
+            "stage": "campaign-nature-and-freeze",
+            "milliseconds": 1342.7857999999997
+          }
+        ],
+        "canonicalSha256": "6bcccb9a871df5cf1b1af4b648aeafdf0fddf189d236446ad1e884f51d36be8c",
+        "canonicalJsonBytes": 16501586,
+        "naturalHeightSamples": 160801,
+        "memoryBefore": {
+          "rss": 166572032,
+          "heapTotal": 101462016,
+          "heapUsed": 24411048,
+          "external": 29847798,
+          "arrayBuffers": 9270491
+        },
+        "memoryAfter": {
+          "rss": 409010176,
+          "heapTotal": 299646976,
+          "heapUsed": 188506032,
+          "external": 37564458,
+          "arrayBuffers": 16987111
+        },
+        "sourceSha256": {
+          "src/world-generation/GenerateWorld.ts": "68f9da5bea0cd670e19166d00590ee1abc8868cac96df4e8284d5d01f14476fb",
+          "src/fjord-play/CampaignIsland.ts": "4e679ed3dcfb8cdeca46df009d8c1d334f30876f90ff1dd0cf79be09b0a8c225"
+        },
+        "limits": "No browser/download/worker structured-clone timing, first frame, input responsiveness or true peak memory. No extra asset or terrain copy is introduced by the single-use handoff."
+      },
+      {
+        "platform": "Node v24.19.0, win32/x64; synchronous worker-core CPU harness",
+        "seed": 3055065912,
+        "recipe": {
+          "version": "island-pool-v3",
+          "generatorVersion": "fjordside-island-v0.3e-r3",
+          "seed": 7
+        },
+        "retained": true,
+        "sourcePreparedMs": 7351.7538,
+        "elapsedMs": 9369.6289,
+        "timings": [
+          {
+            "stage": "terrain",
+            "milliseconds": 975.5293
+          },
+          {
+            "stage": "initial-candidates",
+            "milliseconds": 108.26729999999998
+          },
+          {
+            "stage": "initial-plan",
+            "milliseconds": 206.05919999999992
+          },
+          {
+            "stage": "compartments",
+            "milliseconds": 251.41589999999997
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 476.7040999999999
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 223.26569999999992
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 125.80919999999969
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 80.98239999999987
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 49.48720000000003
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 59.61880000000019
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 83.26549999999997
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 51.048699999999826
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 10.665500000000065
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 19.415700000000015
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 51.451100000000224
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 292.3548999999998
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 34.48050000000012
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 9.153299999999945
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 22.721700000000055
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 107.51669999999967
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 238.85210000000006
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 38.564400000000205
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 9.804000000000087
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 22.553499999999985
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 166.94440000000031
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 230.16229999999996
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 31.6242000000002
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 50.05319999999938
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 44.83039999999983
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 20.849199999999655
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 12.706500000000233
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 17.308899999999994
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 38.52949999999964
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 143.21500000000015
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 37.874800000000505
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 18.89509999999973
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 36.02800000000025
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 21.20220000000063
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 35.29860000000008
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 20.111300000000483
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 47.884399999999914
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 20.63040000000001
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 25.13259999999991
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 21.634500000000116
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 41.14270000000033
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 18.223699999999553
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 30.919400000000678
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 17.866899999999987
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 34.03399999999965
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 22.407100000000355
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 24.993099999999686
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 21.54019999999946
+          },
+          {
+            "stage": "player-navigation",
+            "milliseconds": 203.97099999999955
+          },
+          {
+            "stage": "access",
+            "milliseconds": 8.929999999999382
+          },
+          {
+            "stage": "harbor",
+            "milliseconds": 0.9243999999998778
+          },
+          {
+            "stage": "visibility",
+            "milliseconds": 82.22890000000007
+          },
+          {
+            "stage": "final-navigation",
+            "milliseconds": 250.76700000000073
+          },
+          {
+            "stage": "final-route",
+            "milliseconds": 5.227700000000368
+          },
+          {
+            "stage": "environment-zoning",
+            "milliseconds": 425.20620000000054
+          },
+          {
+            "stage": "nature",
+            "milliseconds": 1264.6542
+          },
+          {
+            "stage": "validation-and-freeze",
+            "milliseconds": 277.89120000000094
+          },
+          {
+            "stage": "campaign-natural-terrain",
+            "milliseconds": 0.018899999999121064
+          },
+          {
+            "stage": "campaign-foundations",
+            "milliseconds": 105.73079999999936
+          },
+          {
+            "stage": "campaign-zoning",
+            "milliseconds": 379.08619999999974
+          },
+          {
+            "stage": "campaign-nature-and-freeze",
+            "milliseconds": 1172.371500000001
+          }
+        ],
+        "canonicalSha256": "6bcccb9a871df5cf1b1af4b648aeafdf0fddf189d236446ad1e884f51d36be8c",
+        "canonicalJsonBytes": 16501586,
+        "naturalHeightSamples": 160801,
+        "memoryBefore": {
+          "rss": 166305792,
+          "heapTotal": 100937728,
+          "heapUsed": 24412144,
+          "external": 29847798,
+          "arrayBuffers": 9270491
+        },
+        "memoryAfter": {
+          "rss": 408088576,
+          "heapTotal": 288768000,
+          "heapUsed": 149432456,
+          "external": 38216366,
+          "arrayBuffers": 17639019
+        },
+        "sourceSha256": {
+          "src/world-generation/GenerateWorld.ts": "68f9da5bea0cd670e19166d00590ee1abc8868cac96df4e8284d5d01f14476fb",
+          "src/fjord-play/CampaignIsland.ts": "4e679ed3dcfb8cdeca46df009d8c1d334f30876f90ff1dd0cf79be09b0a8c225"
+        },
+        "limits": "No browser/download/worker structured-clone timing, first frame, input responsiveness or true peak memory. No extra asset or terrain copy is introduced by the single-use handoff."
+      },
+      {
+        "platform": "Node v24.19.0, win32/x64; synchronous worker-core CPU harness",
+        "seed": 3055065912,
+        "recipe": {
+          "version": "island-pool-v3",
+          "generatorVersion": "fjordside-island-v0.3e-r3",
+          "seed": 7
+        },
+        "retained": true,
+        "sourcePreparedMs": 7324.7524,
+        "elapsedMs": 9350.6941,
+        "timings": [
+          {
+            "stage": "terrain",
+            "milliseconds": 1012.7644
+          },
+          {
+            "stage": "initial-candidates",
+            "milliseconds": 98.65620000000013
+          },
+          {
+            "stage": "initial-plan",
+            "milliseconds": 186.03240000000005
+          },
+          {
+            "stage": "compartments",
+            "milliseconds": 262.9285
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 478.64440000000013
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 208.30290000000014
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 126.03579999999965
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 81.01639999999998
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 52.224199999999655
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 57.48040000000037
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 92.30070000000023
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 48.263600000000224
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 11.148400000000038
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 17.87310000000025
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 63.00870000000032
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 287.3719000000001
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 33.413800000000265
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 8.974099999999908
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 22.21419999999989
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 106.9063000000001
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 239.58480000000054
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 39.35999999999967
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 9.504800000000614
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 20.320999999999913
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 162.38400000000001
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 226.03740000000016
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 8.345399999999245
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 21.598700000000463
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 44.31919999999991
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 20.34820000000036
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 12.390799999999217
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 16.88000000000011
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 39.90069999999923
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 142.73079999999936
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 37.310199999999895
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 18.992200000000594
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 39.58939999999984
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 19.49210000000039
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 33.66569999999956
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 22.245600000000195
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 67.60149999999976
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 18.544299999999566
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 24.298400000000584
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 33.795100000000275
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 39.59400000000005
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 18.748500000000604
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 31.385199999999713
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 20.93119999999999
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 41.04120000000057
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 21.14140000000043
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 25.313999999999396
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 22.159300000000258
+          },
+          {
+            "stage": "player-navigation",
+            "milliseconds": 206.6265000000003
+          },
+          {
+            "stage": "access",
+            "milliseconds": 8.749299999999494
+          },
+          {
+            "stage": "harbor",
+            "milliseconds": 1.1742999999996755
+          },
+          {
+            "stage": "visibility",
+            "milliseconds": 80.03579999999965
+          },
+          {
+            "stage": "final-navigation",
+            "milliseconds": 234.46709999999985
+          },
+          {
+            "stage": "final-route",
+            "milliseconds": 5.1185999999997875
+          },
+          {
+            "stage": "environment-zoning",
+            "milliseconds": 450.95730000000003
+          },
+          {
+            "stage": "nature",
+            "milliseconds": 1241.817
+          },
+          {
+            "stage": "validation-and-freeze",
+            "milliseconds": 269.6355000000003
+          },
+          {
+            "stage": "campaign-natural-terrain",
+            "milliseconds": 0.021800000000439468
+          },
+          {
+            "stage": "campaign-foundations",
+            "milliseconds": 103.36830000000009
+          },
+          {
+            "stage": "campaign-zoning",
+            "milliseconds": 396.6995999999999
+          },
+          {
+            "stage": "campaign-nature-and-freeze",
+            "milliseconds": 1198.2862999999998
+          }
+        ],
+        "canonicalSha256": "6bcccb9a871df5cf1b1af4b648aeafdf0fddf189d236446ad1e884f51d36be8c",
+        "canonicalJsonBytes": 16501586,
+        "naturalHeightSamples": 160801,
+        "memoryBefore": {
+          "rss": 166338560,
+          "heapTotal": 102510592,
+          "heapUsed": 24411992,
+          "external": 29847798,
+          "arrayBuffers": 9270491
+        },
+        "memoryAfter": {
+          "rss": 435191808,
+          "heapTotal": 315101184,
+          "heapUsed": 225269904,
+          "external": 38216366,
+          "arrayBuffers": 17639019
+        },
+        "sourceSha256": {
+          "src/world-generation/GenerateWorld.ts": "68f9da5bea0cd670e19166d00590ee1abc8868cac96df4e8284d5d01f14476fb",
+          "src/fjord-play/CampaignIsland.ts": "4e679ed3dcfb8cdeca46df009d8c1d334f30876f90ff1dd0cf79be09b0a8c225"
+        },
+        "limits": "No browser/download/worker structured-clone timing, first frame, input responsiveness or true peak memory. No extra asset or terrain copy is introduced by the single-use handoff."
+      }
+    ]
+  },
+  "terrain": {
+    "elapsedMs": {
+      "before": [
+        1902.8338000000003,
+        1936.2985000000008,
+        1987.5744999999988
+      ],
+      "after": [
+        1455.8467,
+        1455.5733,
+        1942.9797999999992
+      ],
+      "beforeMedian": 1936.2985000000008,
+      "afterMedian": 1455.8467,
+      "reductionPercent": 24.81289945739258
+    },
+    "before": [
+      {
+        "platform": "Node v24.19.0, win32/x64; actual terrain CPU builder, placeholder source materials",
+        "seed": 3055065912,
+        "prepared": false,
+        "terrainMs": 1413.0658000000003,
+        "wearMs": 489.7677999999996,
+        "elapsedMs": 1902.8338000000003,
+        "yields": 1348,
+        "observedMaxBatchMs": 39.730500000001484,
+        "drawnSurfaceSha256": "220aad34bb359a7068e4e3072624b9b67a31ec6ff5177f584214d653998b7b58",
+        "memoryBefore": {
+          "rss": 427962368,
+          "heapTotal": 209690624,
+          "heapUsed": 58393072,
+          "external": 32451352,
+          "arrayBuffers": 9270491
+        },
+        "memoryAfter": {
+          "rss": 682582016,
+          "heapTotal": 388608000,
+          "heapUsed": 264606208,
+          "external": 122060108,
+          "arrayBuffers": 101454315
+        },
+        "resources": {
+          "vertices": 960024,
+          "groups": 6,
+          "drawnIndices": 2108376,
+          "alphaMasks": 5
+        },
+        "limits": "Matched CPU buffers/material alpha, not rendered source pixels, network/image decode, browser yield timers, input responsiveness, first-frame time or GPU/process peak memory."
+      },
+      {
+        "platform": "Node v24.19.0, win32/x64; actual terrain CPU builder, placeholder source materials",
+        "seed": 3055065912,
+        "prepared": false,
+        "terrainMs": 1421.6538,
+        "wearMs": 514.6446000000014,
+        "elapsedMs": 1936.2985000000008,
+        "yields": 1348,
+        "observedMaxBatchMs": 39.64860000000044,
+        "drawnSurfaceSha256": "220aad34bb359a7068e4e3072624b9b67a31ec6ff5177f584214d653998b7b58",
+        "memoryBefore": {
+          "rss": 395784192,
+          "heapTotal": 226729984,
+          "heapUsed": 58357504,
+          "external": 35695776,
+          "arrayBuffers": 9270491
+        },
+        "memoryAfter": {
+          "rss": 651878400,
+          "heapTotal": 387559424,
+          "heapUsed": 264666960,
+          "external": 122060108,
+          "arrayBuffers": 101454315
+        },
+        "resources": {
+          "vertices": 960024,
+          "groups": 6,
+          "drawnIndices": 2108376,
+          "alphaMasks": 5
+        },
+        "limits": "Matched CPU buffers/material alpha, not rendered source pixels, network/image decode, browser yield timers, input responsiveness, first-frame time or GPU/process peak memory."
+      },
+      {
+        "platform": "Node v24.19.0, win32/x64; actual terrain CPU builder, placeholder source materials",
+        "seed": 3055065912,
+        "prepared": false,
+        "terrainMs": 1491.936099999999,
+        "wearMs": 495.6378999999997,
+        "elapsedMs": 1987.5744999999988,
+        "yields": 1348,
+        "observedMaxBatchMs": 46.28520000000026,
+        "drawnSurfaceSha256": "220aad34bb359a7068e4e3072624b9b67a31ec6ff5177f584214d653998b7b58",
+        "memoryBefore": {
+          "rss": 394383360,
+          "heapTotal": 226992128,
+          "heapUsed": 58343784,
+          "external": 35695776,
+          "arrayBuffers": 9270491
+        },
+        "memoryAfter": {
+          "rss": 577396736,
+          "heapTotal": 322826240,
+          "heapUsed": 183861024,
+          "external": 114379916,
+          "arrayBuffers": 93774123
+        },
+        "resources": {
+          "vertices": 960024,
+          "groups": 6,
+          "drawnIndices": 2108376,
+          "alphaMasks": 5
+        },
+        "limits": "Matched CPU buffers/material alpha, not rendered source pixels, network/image decode, browser yield timers, input responsiveness, first-frame time or GPU/process peak memory."
+      }
+    ],
+    "after": [
+      {
+        "platform": "Node v24.19.0, win32/x64; actual terrain CPU builder, placeholder source materials",
+        "seed": 3055065912,
+        "prepared": true,
+        "terrainMs": 1455.8436999999994,
+        "wearMs": 0.001399999999193824,
+        "elapsedMs": 1455.8467,
+        "yields": 969,
+        "observedMaxBatchMs": 44.810600000000704,
+        "drawnSurfaceSha256": "220aad34bb359a7068e4e3072624b9b67a31ec6ff5177f584214d653998b7b58",
+        "memoryBefore": {
+          "rss": 394203136,
+          "heapTotal": 225419264,
+          "heapUsed": 58361000,
+          "external": 35084269,
+          "arrayBuffers": 9270491
+        },
+        "memoryAfter": {
+          "rss": 553230336,
+          "heapTotal": 299536384,
+          "heapUsed": 153074104,
+          "external": 110520692,
+          "arrayBuffers": 89914899
+        },
+        "resources": {
+          "vertices": 960024,
+          "groups": 6,
+          "drawnIndices": 2108376,
+          "alphaMasks": 5
+        },
+        "limits": "Matched CPU buffers/material alpha, not rendered source pixels, network/image decode, browser yield timers, input responsiveness, first-frame time or GPU/process peak memory."
+      },
+      {
+        "platform": "Node v24.19.0, win32/x64; actual terrain CPU builder, placeholder source materials",
+        "seed": 3055065912,
+        "prepared": true,
+        "terrainMs": 1455.5716999999986,
+        "wearMs": 0.0007000000005064066,
+        "elapsedMs": 1455.5733,
+        "yields": 969,
+        "observedMaxBatchMs": 41.29440000000068,
+        "drawnSurfaceSha256": "220aad34bb359a7068e4e3072624b9b67a31ec6ff5177f584214d653998b7b58",
+        "memoryBefore": {
+          "rss": 424259584,
+          "heapTotal": 242196480,
+          "heapUsed": 58386384,
+          "external": 42751784,
+          "arrayBuffers": 9270491
+        },
+        "memoryAfter": {
+          "rss": 582488064,
+          "heapTotal": 299012096,
+          "heapUsed": 152826832,
+          "external": 110520692,
+          "arrayBuffers": 89914899
+        },
+        "resources": {
+          "vertices": 960024,
+          "groups": 6,
+          "drawnIndices": 2108376,
+          "alphaMasks": 5
+        },
+        "limits": "Matched CPU buffers/material alpha, not rendered source pixels, network/image decode, browser yield timers, input responsiveness, first-frame time or GPU/process peak memory."
+      },
+      {
+        "platform": "Node v24.19.0, win32/x64; actual terrain CPU builder, placeholder source materials",
+        "seed": 3055065912,
+        "prepared": true,
+        "terrainMs": 1942.978799999999,
+        "wearMs": 0.0006999999986874172,
+        "elapsedMs": 1942.9797999999992,
+        "yields": 969,
+        "observedMaxBatchMs": 53.66369999999915,
+        "drawnSurfaceSha256": "220aad34bb359a7068e4e3072624b9b67a31ec6ff5177f584214d653998b7b58",
+        "memoryBefore": {
+          "rss": 422907904,
+          "heapTotal": 198418432,
+          "heapUsed": 58389304,
+          "external": 29876244,
+          "arrayBuffers": 9270491
+        },
+        "memoryAfter": {
+          "rss": 583585792,
+          "heapTotal": 278896640,
+          "heapUsed": 150983400,
+          "external": 110520692,
+          "arrayBuffers": 89914899
+        },
+        "resources": {
+          "vertices": 960024,
+          "groups": 6,
+          "drawnIndices": 2108376,
+          "alphaMasks": 5
+        },
+        "limits": "Matched CPU buffers/material alpha, not rendered source pixels, network/image decode, browser yield timers, input responsiveness, first-frame time or GPU/process peak memory."
+      }
+    ]
+  },
+  "rejectedExperiment": {
+    "description": "Per-fragment clipping-plane membership/normal precomputation; reverted because this first comparison showed no gain.",
+    "baseline": 4588.0829,
+    "candidate": 4624.848599999999,
+    "candidateSourceSha256": {
+      "src/fjord-play/FjordModels.ts": "6a27a47e50b87422e9c1d230f3fde188ed63c980b29c831bb6948e9d005eb9fa",
+      "src/characters/BodyCoverage.ts": "f26ef70016f5daf0a3c61ad3e03b690f12152e71e1521c2ae73c70db28969cef",
+      "src/characters/PreparedNativeOutfit.ts": "4bb4386758be11e4b96754a8e850e04111d9d76b3bc5713f6f32ea25bc26c296",
+      "src/characters/MeshyHuman.ts": "58a1463f60ca471eac86de3cda06d16148ebbd9434923ea68885058abc0f2fd3"
+    }
+  },
+  "limits": [
+    "Local Node CPU A/B runs are separate from the physical iPhone baseline. They do not predict a mobile end-to-end reduction.",
+    "All three pairs use seed 3055065912 and the actual new scenario. Persona images are stubbed; terrain materials are placeholders.",
+    "Parent/child spans overlap. Node memory observations are checkpoints, not true peaks or browser/GPU memory.",
+    "Terrain uses Node setImmediate yields, not mobile browser timers. First-frame/playable time and observation gaps need a fresh device run."
+  ]
+}

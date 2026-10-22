@@ -15,8 +15,10 @@ import { FjordModels } from './FjordModels';
 import type { FjordEntity } from './FjordProjection';
 import { livestockPresentation } from '../characters/LivestockPresentation';
 import type { LivestockDeath } from './LivestockDeath';
+import { ConstructionTransitions } from '../construction/ConstructionTransition';
 import { longshipDeckAnchors } from './LongshipDeck';
 import type { PortraitRequest } from '../characters/CharacterPortraits';
+import { characterSync, type CharacterPreparationObserver } from '../characters/CharacterPreparation';
 
 interface YardFloor {
     yard: Object3D;
@@ -30,6 +32,8 @@ interface YardFloor {
 /** Reconcile canonical identities; unchanged objects and the environment remain alive. */
 export class FjordEntities {
     readonly root = new Group();
+    private construction = new ConstructionTransitions();
+    private constructionInitialized = false;
     private entries = new Map<string, {
         signature: string;
         model: Object3D;
@@ -85,7 +89,7 @@ export class FjordEntities {
     private homeDarkness = 0;
     private homeGround?: HomeGroundGlow;
     constructor(private models: FjordModels, private decorateMaterials?: (root: Object3D) => void,
-        private homeMasks?: ReadonlyMap<string, Texture>) {
+        private homeMasks?: ReadonlyMap<string, Texture>, private animateConstruction = true) {
     }
     setHomeDarkness(darkness: number) {
         if (darkness === this.homeDarkness) return;
@@ -112,6 +116,16 @@ export class FjordEntities {
     inspectHomeLighting() {
         return [...this.entries].flatMap(([key, entry]) => entry.homeLight
             ? [{ key, ...entry.homeLight.inspect() }] : []);
+    }
+    resetConstructionBaseline() {
+        for (const transition of this.construction.inspect()) this.construction.finish(transition.key);
+        this.construction.root.removeFromParent();
+        this.constructionInitialized = false;
+    }
+    inspectConstruction() { return this.construction.inspect(); }
+    updateConstruction(delta: number) {
+        this.construction.update(delta);
+        if (!this.construction.root.children.length) this.construction.root.removeFromParent();
     }
     setSeason(progress: number | null) {
         this.seasonAppearance = undefined;
@@ -177,9 +191,13 @@ export class FjordEntities {
         this.root.userData.selection = descriptions.find(marker => marker.role === 'selected') ?? null;
     }
     async sync(entities: readonly FjordEntity[], yieldControl?: () => Promise<void>, current = () => true,
-        livestockDeaths: readonly { id: string }[] = []) {
+        livestockDeaths: readonly { id: string }[] = [],
+        progress?: (completed: number, total: number, entity?: FjordEntity, started?: number) => void,
+        observe?: CharacterPreparationObserver) {
         if (this.disposed || !current()) return;
         const visible = entities.filter(e => e.transform !== null);
+        let prepared = 0;
+        progress?.(prepared, visible.length);
         const nextEntities = new Map(visible.map(entity => [entity.selectionKey, entity]));
         // Retain unchanged attachments. Detach only before removal, hull replacement or landing.
         for (const [key, { model }] of this.entries) {
@@ -195,6 +213,7 @@ export class FjordEntities {
         for (const key of this.deaths.keys()) if (wanted.has(key)) this.finishDeath(key);
         for (const [key, entry] of this.entries)
             if (!wanted.has(key)) {
+                this.construction.finish(key);
                 entry.homeLight?.dispose();
                 entry.season?.dispose();
                 const facts = entry.model.userData.canonical;
@@ -211,8 +230,11 @@ export class FjordEntities {
                 return;
             await yieldControl?.();
             if (this.disposed || !current()) return;
+            const started = progress ? performance.now() : 0;
             const signature = entity.asset + ':' + (entity.terrainAsset ?? '');
             let entry = this.entries.get(entity.selectionKey);
+            let transitionOld: typeof entry;
+            let construct = false;
             if (!entry || entry.signature !== signature) {
                 const model = await this.models.create(entity);
                 model.userData.asset = entity.asset;
@@ -220,7 +242,11 @@ export class FjordEntities {
                     this.remove(model);
                     return;
                 }
-                if (entry) {
+                this.construction.finish(entity.selectionKey);
+                construct = this.animateConstruction && this.constructionInitialized && entity.kind === 'building' &&
+                    (!entry || entity.status.level! > (entry.model.userData.canonical?.level ?? -1));
+                if (entry && construct) transitionOld = entry;
+                else if (entry) {
                     entry.homeLight?.dispose();
                     entry.season?.dispose();
                     this.remove(entry.model);
@@ -248,9 +274,14 @@ export class FjordEntities {
                 entry.model.rotation.set(0, display.rotation, 0);
             }
             await this.models.reconcile(entry.model, entity);
+            if (this.disposed || !current()) {
+                transitionOld?.homeLight?.dispose();
+                transitionOld?.season?.dispose();
+                if (transitionOld) this.remove(transitionOld.model);
+                return;
+            }
             entry.homeLight?.setInhabited(entity.status.inhabited === true);
             this.models.setEmbarked?.(entry.model, !!entity.status.aboardShip);
-            if (this.disposed || !current()) return;
             if (entity.kind === 'persona' && !entry.model.userData.appearance) entry.model.scale.setScalar(p.scale);
             if (entity.kind === 'cattle' && entity.status.assignment) {
                 const home = this.entries.get('building:' + entity.status.assignment)?.model;
@@ -276,13 +307,25 @@ export class FjordEntities {
             } else entry.yardFloor = undefined;
             entry.model.userData.canonical = { kind: entity.kind, id: entity.id, ...entity.status };
             entry.model.updateMatrixWorld(true);
-            const boundsSignature = JSON.stringify([entity.asset, this.models.boundsShape(entry.model) ?? entity.dna, entity.transform!.scale, entity.transform!.rotation, entry.model.userData.clothingSet?.id]);
-            if (entry.boundsSignature !== boundsSignature) {
-                entry.localBounds = new Box3().setFromObject(entry.model, true).translate(entry.model.position.clone().negate());
-                entry.modelBounds = entry.localBounds.clone().translate(entry.model.position)
-                    .applyMatrix4(entry.model.matrixWorld.clone().invert());
-                entry.boundsSignature = boundsSignature;
+            characterSync(observe && (sample => observe({ ...sample, subject: entity.id })), 'reconciliation-bounds-registration', () => {
+                const boundsSignature = JSON.stringify([entity.asset, this.models.boundsShape(entry.model) ?? entity.dna, entity.transform!.scale, entity.transform!.rotation, entry.model.userData.clothingSet?.id]);
+                if (entry.boundsSignature !== boundsSignature) {
+                    entry.localBounds = new Box3().setFromObject(entry.model, true).translate(entry.model.position.clone().negate());
+                    entry.modelBounds = entry.localBounds.clone().translate(entry.model.position)
+                        .applyMatrix4(entry.model.matrixWorld.clone().invert());
+                    entry.boundsSignature = boundsSignature;
+                }
+            }, entity.asset);
+            if (construct) {
+                this.root.add(this.construction.root);
+                const old = transitionOld;
+                this.construction.play(entity.selectionKey, entry.model, old?.model, old ? () => {
+                    old.homeLight?.dispose();
+                    old.season?.dispose();
+                    this.remove(old.model);
+                } : undefined);
             }
+            progress?.(++prepared, visible.length, entity, started);
         }
         // Four stable deck anchors, using the existing characters and their appearance resources.
         for (const { model } of this.entries.values()) {
@@ -296,6 +339,7 @@ export class FjordEntities {
             model.rotation.set(0, 0, 0);
             model.updateMatrixWorld(true);
         }
+        this.constructionInitialized = true;
         this.refreshHomeGround();
     }
     bounds(key: string) {
@@ -505,6 +549,7 @@ export class FjordEntities {
     }
     dispose() {
         this.disposed = true;
+        this.construction.dispose();
         this.homeGround?.dispose();
         for (const { model } of this.entries.values())
             if (model.userData.canonical?.aboardShip && model.parent !== this.root) this.root.attach(model);

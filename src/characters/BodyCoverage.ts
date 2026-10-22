@@ -76,6 +76,13 @@ export function maskedBodyGeometry(
     planes: readonly BodyCutPlane[] = [],
     rims: readonly SurfaceAnchor[] = [],
 ) {
+    return createBodyCoverageBuilder(source)(surface, covered, planes, rims);
+}
+
+/** Decode each source attribute once for a synchronous set of body fragments.
+ * Each fragment still owns its mutable arrays. This is not a cross-resident cache:
+ * the next refit reads fresh geometry, morphs, weights and in-place source edits. */
+export function createBodyCoverageBuilder(source: BufferGeometry) {
     const attributes = Object.entries(source.attributes);
     const morphs = new Map<string, { name: string; index: number }>();
     for (const [name, targets] of Object.entries(source.morphAttributes)) {
@@ -85,13 +92,46 @@ export function maskedBodyGeometry(
             attributes.push([key, attribute]);
         }
     }
-    const arrays = new Map(attributes.map(([name, attribute]) => [name,
-        Array.from({length: attribute.count * attribute.itemSize}, (_, i) =>
-            attribute.getComponent(Math.floor(i / attribute.itemSize), i % attribute.itemSize)),
-    ]));
+    const decoded = new Map(attributes.map(([name, attribute]) => [name, coverageValues(attribute)]));
+    return (
+        surface: Omit<BodySurface, 'regions'> & {regions: readonly string[]},
+        covered: ReadonlySet<number>,
+        planes: readonly BodyCutPlane[] = [],
+        rims: readonly SurfaceAnchor[] = [],
+        retainedPrefix?: number,
+    ) => buildBodyFragment(source, attributes, morphs, decoded, surface, covered, planes, rims, retainedPrefix);
+}
+
+function coverageValues(attribute: BufferAttribute | InterleavedBufferAttribute) {
+    // Float morph buffers already store their final values. Preserve existing accessor
+    // semantics for normalized, interleaved and specialized attributes.
+    if (!attribute.normalized && !('isInterleavedBufferAttribute' in attribute)
+        && !('isFloat16BufferAttribute' in attribute)
+        && attribute.getComponent === BufferAttribute.prototype.getComponent) return Array.from(attribute.array);
+    return Array.from({length: attribute.count * attribute.itemSize}, (_, index) =>
+        attribute.getComponent(Math.floor(index / attribute.itemSize), index % attribute.itemSize));
+}
+
+function buildBodyFragment(
+    source: BufferGeometry,
+    attributes: [string, BufferAttribute | InterleavedBufferAttribute][],
+    morphs: Map<string, {name: string; index: number}>,
+    decoded: ReadonlyMap<string, number[]>,
+    surface: Omit<BodySurface, 'regions'> & {regions: readonly string[]},
+    covered: ReadonlySet<number>,
+    planes: readonly BodyCutPlane[],
+    rims: readonly SurfaceAnchor[],
+    retainedPrefix?: number,
+) {
+    // Native values stay in the read-only decoded snapshot. Only newly cut corners need
+    // append buffers; most fragment vertices are discarded during compaction below.
+    const arrays = new Map(attributes.map(([name]) => [name, [] as number[]]));
     const points = Array.from({length: surface.positions.length / 3}, (_, vertex) =>
         new Vector3().fromArray(surface.positions, vertex * 3));
     const originalCount = points.length;
+    const valueAt = (name: string, vertex: number, component: number, itemSize: number) =>
+        vertex < originalCount ? decoded.get(name)![vertex * itemSize + component]
+            : arrays.get(name)![(vertex - originalCount) * itemSize + component];
     const indices: number[] = [];
     const coverageWeights: {vertex: number; influences: [number, number][]}[] = [];
     const rimPoints = new Map<number, Vector3[]>();
@@ -107,30 +147,33 @@ export function maskedBodyGeometry(
 
     // Keep the full native mixture through successive cuts. Reduce only the final
     // rendered vertex; blending already-reduced cuts discards source influences twice.
-    const nativeInfluences: Map<number, number>[] = points.map((_, vertex) => {
+    const nativeInfluences: Map<number, number>[] = new Array(originalCount);
+    const influencesAt = (vertex: number) => {
+        if (nativeInfluences[vertex]) return nativeInfluences[vertex];
         const values = new Map<number, number>();
         for (let k = 0; k < 4; k++) {
-            const joint = source.getAttribute('skinIndex').getComponent(vertex, k);
-            const weight = source.getAttribute('skinWeight').getComponent(vertex, k);
+            const joint = decoded.get('skinIndex')![vertex * 4 + k];
+            const weight = decoded.get('skinWeight')![vertex * 4 + k];
             values.set(joint, (values.get(joint) ?? 0) + weight);
         }
+        nativeInfluences[vertex] = values;
         return values;
-    });
+    };
     const mix = (a: number, b: number, fraction: number) => {
         const vertex = points.length;
         points.push(points[a].clone().lerp(points[b], fraction));
         for (const [name, attribute] of attributes) {
             const list = arrays.get(name)!;
             for (let k = 0; k < attribute.itemSize; k++) {
-                list.push(list[a * attribute.itemSize + k] * (1 - fraction)
-                    + list[b * attribute.itemSize + k] * fraction);
+                list.push(valueAt(name, a, k, attribute.itemSize) * (1 - fraction)
+                    + valueAt(name, b, k, attribute.itemSize) * fraction);
             }
         }
         const joints = arrays.get('skinIndex')!;
         const weights = arrays.get('skinWeight')!;
         const merged = new Map<number, number>();
         for (const [sourceVertex, amount] of [[a, 1 - fraction], [b, fraction]]) {
-            for (const [joint, weight] of nativeInfluences[sourceVertex]) {
+            for (const [joint, weight] of influencesAt(sourceVertex)) {
                 merged.set(joint, (merged.get(joint) ?? 0) + weight * amount);
             }
         }
@@ -140,13 +183,13 @@ export function maskedBodyGeometry(
             .sort((a, b) => b[1] - a[1] || a[0] - b[0]).slice(0, 4);
         const total = top.reduce((sum, [, weight]) => sum + weight, 0);
         for (let k = 0; k < 4; k++) {
-            joints[vertex * 4 + k] = top[k]?.[0] ?? 0;
-            weights[vertex * 4 + k] = (top[k]?.[1] ?? 0) / total;
+            joints[(vertex - originalCount) * 4 + k] = top[k]?.[0] ?? 0;
+            weights[(vertex - originalCount) * 4 + k] = (top[k]?.[1] ?? 0) / total;
         }
         const normals = arrays.get('normal');
         if (normals) {
-            const normal = new Vector3().fromArray(normals, vertex * 3).normalize();
-            normals.splice(vertex * 3, 3, ...normal.toArray());
+            const normal = new Vector3().fromArray(normals, (vertex - originalCount) * 3).normalize();
+            normals.splice((vertex - originalCount) * 3, 3, ...normal.toArray());
         }
         return vertex;
     };
@@ -203,9 +246,26 @@ export function maskedBodyGeometry(
     }
     const geometry = new BufferGeometry();
     geometry.morphTargetsRelative = source.morphTargetsRelative;
+    const retained: number[] = [];
+    const remap = new Int32Array(points.length).fill(-1);
+    const prefix = retainedPrefix ?? points.length;
+    if (!Number.isInteger(prefix) || prefix < 0 || prefix > points.length)
+        throw new Error('Invalid retained native vertex prefix.');
+    for (let vertex = 0; vertex < prefix; vertex++) {
+        remap[vertex] = retained.length;
+        retained.push(vertex);
+    }
+    for (const vertex of indices) if (remap[vertex] === -1) {
+        remap[vertex] = retained.length;
+        retained.push(vertex);
+    }
     for (const [name, attribute] of attributes) {
-        const values = arrays.get(name)!;
-        const typed = name === 'skinIndex' ? new Uint16Array(values) : new Float32Array(values);
+        const count = retained.length * attribute.itemSize;
+        const typed = name === 'skinIndex' ? new Uint16Array(count) : new Float32Array(count);
+        for (let index = 0; index < retained.length; index++)
+            for (let component = 0; component < attribute.itemSize; component++)
+                typed[index * attribute.itemSize + component] =
+                    valueAt(name, retained[index], component, attribute.itemSize);
         const copied = new BufferAttribute(typed, attribute.itemSize);
         copied.name = attribute.name;
         const morph = morphs.get(name);
@@ -214,8 +274,9 @@ export function maskedBodyGeometry(
             (targets[morph.name] ??= [])[morph.index] = copied;
         } else geometry.setAttribute(name, copied);
     }
-    geometry.setIndex(indices);
-    geometry.userData.coverageWeights = coverageWeights;
+    geometry.setIndex(indices.map(vertex => remap[vertex]));
+    geometry.userData.coverageWeights = coverageWeights.filter(value => remap[value.vertex] !== -1)
+        .map(value => ({...value, vertex: remap[value.vertex]}));
     geometry.computeBoundingSphere();
     return geometry;
 }

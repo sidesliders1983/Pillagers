@@ -8,7 +8,8 @@ import {
     prepareGullWings, gullWingRig, gullWingMotion, poseGullWings,
     gullFoldedWings, poseGroundedGull, gullHeadLook, type GullWingRig,
 } from './GullWings';
-import { AnimationMixer, Frustum, Group, Matrix4, Mesh, Quaternion, Sphere, Texture, Vector3, type Camera, type Bone } from 'three';
+import { AnimationMixer, Frustum, Group, Matrix4, Mesh, Quaternion, Sphere, Texture, Vector3,
+    type AnimationAction, type Camera, type Bone } from 'three';
 import { GLTFLoader, type GLTF } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { clone } from 'three/addons/utils/SkeletonUtils.js';
@@ -86,6 +87,8 @@ interface RenderActor {
     marineTail?: ReturnType<typeof marineTailRig>;
     effects?: MarineEffects;
     mixer?: AnimationMixer;
+    walkAction?: AnimationAction;
+    idleAction?: AnimationAction;
     legs: LegPose[];
     coastal?: CoastalAnimalRig;
     rabbit?: RabbitRig;
@@ -182,11 +185,13 @@ export class WildlifeLayer {
                         }
                     });
                     const mixer = source.animations.length ? new AnimationMixer(model) : undefined;
-                    if (mixer)
-                        mixer.clipAction(source.animations[0]).play();
+                    const walkAction = mixer?.clipAction(source.animations[0]).play();
+                    const idleClip = source.animations.find(clip => clip.name === 'Idle');
+                    const idleAction = idleClip && mixer ? mixer.clipAction(idleClip).play() : undefined;
+                    if (idleAction) idleAction.enabled = false;
                     const coastal = mixer ? undefined : coastalAnimalRig(model as Group, actor.species);
                     const rabbit = actor.species === 'rabbit' ? rabbitRig(model as Group, root) : undefined;
-                    layer.records.push({ actor, root, body, mixer, coastal, rabbit, floating, effects,
+                    layer.records.push({ actor, root, body, mixer, walkAction, idleAction, coastal, rabbit, floating, effects,
                         motion: actor.variant.movement !== 'water'
                             ? new WildlifeMotionTrack(actor.position, actor.heading, actor) : undefined,
                         marineTail: actor.marine ? marineTailRig(model as Group, actor.species) : undefined,
@@ -353,6 +358,10 @@ export class WildlifeLayer {
             else if (record.mixer) {
                 if (record.floating) clearOtterFloat(record.floating);
                 if (record.resting) clearAnimalRest(record.resting);
+                if (record.idleAction) {
+                    record.walkAction!.enabled = moving;
+                    record.idleAction.enabled = !moving;
+                }
                 const gaitTime = record.motion ? actor.phase + record.motion.distance
                     : this.population.time * gaitSpeed + actor.phase;
                 record.mixer.setTime(moving ? gaitTime : 0);

@@ -4,14 +4,13 @@ Northern Light is now the default for Fjord Play following owner acceptance.
 `?lighting=baseline` retains the comparison. #237's water/haze integration remains
 independently selectable with `sunlight=unified-v1`.
 
-The new housing effect remains opt-in with `homes=warm-v1` pending owner visual
-acceptance. No canonical rules, costs, saves, seasonal calendar or RNG change.
+Following owner visual acceptance, supported occupied homes now use the warm
+window and ground glow by default. `homes=baseline` explicitly disables it for
+matched comparisons; `homes=warm-v1` remains a supported explicit link. No
+canonical rules, costs, saves, seasonal calendar or RNG change.
 
-The dedicated review server (`node scripts/dev-warm-home-review.mjs`, port 5229)
-enables the candidate for ordinary `/fjord-play` links as well. This avoids a
-false negative when continuing a real campaign outside the comparison iframe.
-`homes=baseline` still explicitly disables it for matched comparisons. The
-server injects a development-only switch; production defaults remain unchanged.
+The separate review server (`node scripts/dev-warm-home-review.mjs`, port 5229)
+uses the same defaults as production. It no longer injects a development switch.
 
 ## Shared seasonal signal
 
@@ -122,5 +121,7 @@ views. Existing game controls allow fire, vacancy, upgrade and time checks.
 
 See [the QA report](qa/warm-homes-256/REPORT.md) for executed tests and CPU-only
 measurements. Actual paired game captures, GPU timing and physical iPhone/iPad
-checks remain pending. Keep the housing effect opt-in and PR draft until review
-and required current-head checks pass. This change does not merge or publish.
+checks remain separate from owner visual acceptance. The owner has approved the
+appearance and main integration. Historical measurements retain their original
+scope; this integration adds no new GPU or physical-device measurement. PRs still
+require successful checks for their current head before merging.

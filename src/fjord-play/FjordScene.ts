@@ -1,4 +1,5 @@
 import { WildlifeLayer } from '../wildlife/WildlifeLayer';
+import { ConstructionGpuPreparation } from '../construction/ConstructionGpuPreparation';
 import { RivalScene } from './RivalScene';
 import { IslandMap } from './IslandMap';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
@@ -6,6 +7,7 @@ import { intersectNavigationTerrain } from '../world/TerrainNavigation';
 import { DiscoveryFog } from './DiscoveryFog';
 import { discoveryAt, inspectClanDiscovery, type DiscoveryView } from '../simulation/ClanDiscovery';
 import { IslandLoading, yieldForInput } from './IslandLoading';
+import { loadResourceId } from './IslandLoadStatus';
 import { SharedSettlement } from '../play/SharedSettlement';
 import { campaignIslandPlan } from './CampaignIsland';
 import { fjordFogPresentation } from '../config/FjordFog';
@@ -59,8 +61,7 @@ export function createFjordScene(options: {
     const session = shared.session, campaign = shared.fjord;
     const selectionLabels = labels.selection, productionLabels = labels.production;
     const query = new URLSearchParams(location.search);
-    const { unified: unifiedSunlight, northern: northernLight, warmHomes } = fjordLighting(query,
-        import.meta.env.DEV && import.meta.env.VITE_WARM_HOME_PREVIEW === 'true');
+    const { unified: unifiedSunlight, northern: northernLight, warmHomes } = fjordLighting(query);
     canvas.dataset.homeLightingMode = warmHomes ? 'warm-v1' : 'off';
     const atmosphere = unifiedSunlight ? new DirectionalAtmosphere() : undefined;
     const decorateMaterials = atmosphere ? (root: import('three').Object3D) => atmosphere.bind(root) : undefined;
@@ -101,6 +102,8 @@ export function createFjordScene(options: {
     scene.add(targetMarker);
 
     const renderer = createRenderer(canvas);
+    const constructionGpu = new ConstructionGpuPreparation();
+    renderer.localClippingEnabled = true;
     const portraits = new ResidentPortraitStudio(renderer);
     renderer.setPixelRatio(resolvePresentationQuality(
         document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as PresentationQuality,
@@ -139,6 +142,8 @@ export function createFjordScene(options: {
 
     const cleared = new Set<string>();
     let groundSignature = "";
+    let preparedGroundSignature = "";
+    let preparedSoilSamples = 0;
     let arrivalPose: { position: number[]; target: number[] };
     let highlandPose: { position: number[]; target: number[] };
     document.querySelector('#fjord-view-home')!.addEventListener('click', () => {
@@ -167,11 +172,24 @@ export function createFjordScene(options: {
             const revision = ++worldRevision;
             const canonical = session.readSnapshot();
             const discovery = canonical.discovery ? inspectClanDiscovery(canonical.discovery, canonical.clan.id) : undefined;
+            let initialGroundSignature = '';
+            let initialSoilSamples = 0;
             host.built();
             const next = await createWorld(assets!, {
                 mode: 'generated', blueprint, discovery, atmosphere,
                 settlement: 'canonical', groundStyle: campaignIslandPlan(blueprint) ? fjordTerrain.style : undefined, quality: document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
                 anisotropy: renderer.capabilities.getMaxAnisotropy(),
+                initialGroundWeights: () => {
+                    const view = campaign.readProjection();
+                    const ground = { plots: [...view.ground.plots, ...view.rival.ground.plots],
+                        paths: [...view.ground.paths, ...view.rival.ground.paths] };
+                    const grassPlots = [...view.entities, ...view.rival.entities]
+                        .filter(entity => entity.kind === 'household' && entity.plot).map(entity => entity.plot!);
+                    initialGroundSignature = JSON.stringify([ground, grassPlots]);
+                    const weights = fjordGroundWeights(blueprint, ground, grassPlots);
+                    initialSoilSamples = weights.filter(weight => weight > 0).length;
+                    return weights;
+                },
                 preparation: async (stage, operation) => {
                     if (host.loading) return host.loading.measure(stage, operation);
                     await yieldForInput();
@@ -188,10 +206,14 @@ export function createFjordScene(options: {
                 return rebuildWorld();
             }
             let nextWildlife: WildlifeLayer | undefined;
+            host.loading?.complete('world');
             if (wildlife?.population.world !== blueprint) {
                 try {
-                    nextWildlife = await WildlifeLayer.create(blueprint,
+                    const createWildlife = () => WildlifeLayer.create(blueprint,
                         (x, z) => !knownTerrain || discoveryAt(knownTerrain, x, z) !== 'unknown');
+                    nextWildlife = host.loading
+                        ? await host.loading.measure('wildlife-preparation', createWildlife)
+                        : await createWildlife();
                 } catch (error) {
                     next.dispose();
                     throw error;
@@ -203,6 +225,7 @@ export function createFjordScene(options: {
                     return;
                 }
             }
+            host.loading?.complete('wildlife');
             const anchor = next.attachments.find(item => item.key === 'boat')!;
             campaign.setMooring({ x: anchor.x, y: anchor.y, z: anchor.z, rotation: anchor.rotation, scale: 1 });
             weatherTint?.dispose();
@@ -217,6 +240,7 @@ export function createFjordScene(options: {
                 atmosphere?.bind(wildlife.root);
                 scene.add(wildlife.root);
             }
+            if (activeBlueprint !== blueprint) layer!.resetConstructionBaseline();
             activeBlueprint = blueprint;
             wildlife?.setWaterHeightSampler((x, z) => world!.waterHeightAt(x, z));
             appliedRevision = -1;
@@ -259,6 +283,8 @@ export function createFjordScene(options: {
                 warmHomes ? assets!.homeLightMaps : undefined);
             scene.add(rivalScene.root);
             groundSignature = "";
+            preparedGroundSignature = initialGroundSignature;
+            preparedSoilSamples = initialSoilSamples;
             lighting?.dispose();
             lighting = new WorldLighting(scene, renderer, assets!, firePosition, next.center,
                 document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
@@ -300,7 +326,13 @@ export function createFjordScene(options: {
 
     const initialize = async () => {
         assets = new AssetManager();
-        if (host.loading) await host.loading.measure('assets-fetch-decode', () => assets!.loadForSimulation());
+        if (host.loading) await host.loading.measure('assets-fetch-decode', () => assets!.loadForSimulation(event => {
+            const loading = host.loading;
+            if (!loading || loading.signal.aborted) return;
+            loading.units('assets', event.completed, event.total, 'models');
+            if (event.resource) loading.diagnostics.latestResource = loadResourceId(event.resource);
+            if (event.error) loading.diagnostics.problem('asset-fallback', event.error, event.resource);
+        }));
         else await assets.loadForSimulation();
         if (warmHomes) await assets.loadHomeLighting();
         host.loading?.check();
@@ -308,7 +340,10 @@ export function createFjordScene(options: {
             assets.dispose();
             return;
         }
-        models = new FjordModels(assets, decorateMaterials);
+        const preparation = host.loading?.diagnosticRun ?
+            (sample: import('../characters/CharacterPreparation').CharacterPreparationSample) =>
+                host.loading?.diagnosticRun?.character(sample) : undefined;
+        models = new FjordModels(assets, preparation, decorateMaterials);
         layer = new FjordEntities(models, decorateMaterials, warmHomes ? assets.homeLightMaps : undefined);
         scene.add(layer.root);
 
@@ -404,20 +439,27 @@ export function createFjordScene(options: {
                     const grassPlots = observedEntities.filter(e => e.kind === 'household' && e.plot).map(e => e.plot!);
                     const signature = JSON.stringify([observedGround, grassPlots]);
                     if (signature !== groundSignature) {
-                        const weights = fjordGroundWeights(campaign.blueprint, observedGround, grassPlots);
-                        if (host.loading) {
-                            await host.loading.measure('initial-ground-wear',
-                                () => world!.prepareGroundWeights(weights));
-                            if (!current()) return;
-                        } else world!.setGroundWeights(weights);
+                        let soilSamples = preparedSoilSamples;
+                        // Initial masks/index already use this exact projection. Keep plot/UI
+                        // reconciliation, but rebuild wear only if the projection has changed.
+                        if (signature !== preparedGroundSignature) {
+                            const weights = fjordGroundWeights(campaign.blueprint, observedGround, grassPlots);
+                            soilSamples = weights.filter(weight => weight > 0).length;
+                            if (host.loading) {
+                                await host.loading.measure('initial-ground-wear',
+                                    () => world!.prepareGroundWeights(weights));
+                                if (!current()) return;
+                            } else world!.setGroundWeights(weights);
+                        }
                         canvas.dataset.ground = JSON.stringify({
                             plots: observedGround.plots.map(p => p.id),
-                            paths: observedGround.paths, soilSamples: weights.filter(w => w > 0).length
+                            paths: observedGround.paths, soilSamples
                         });
                         for (const path of observedGround.paths)
                             for (const p of path.points)
                                 world!.clearPlot({ ...p, halfWidth: 1.5, halfDepth: 1.5, futureAsset: 'hut' });
                         groundSignature = signature;
+                        preparedGroundSignature = '';
                     }
                     for (const [id, plot] of Object.entries(view.layout.plots))
                         if (!cleared.has(id)) {
@@ -452,7 +494,14 @@ export function createFjordScene(options: {
                     }, knownTerrain);
                     canvas.dataset.dressing = JSON.stringify(dressing!.inspect());
                     layer!.prepareExpeditions(state, campaign.blueprint, host.tickIntervalSeconds);
-                    await layer!.sync(view.entities, host.loading ? yieldForInput : undefined, current, view.livestockDeaths);
+                    const prepareEntities = () => layer!.sync(view.entities, host.loading ? yieldForInput : undefined, current,
+                        view.livestockDeaths, host.loading ? (completed, total, entity, started) => {
+                            host.loading?.units('characters', completed, total, 'settlement models');
+                            if (entity && started !== undefined)
+                                host.loading?.diagnosticRun?.model(entity.kind, entity.asset, started, entity.id);
+                        } : undefined, preparation);
+                    if (host.loading) await host.loading.measure('initial-settlement-models', prepareEntities);
+                    else await prepareEntities();
                     if (!current()) return;
                     campfireEffect!.setLit(inspectCampfire(state).lit);
                     layer!.setCampfireHeat(campfireEffect!.inspect().heat);
@@ -505,6 +554,7 @@ export function createFjordScene(options: {
         if (host.loading) await host.loading.measure('initial-character-scene-sync', syncScene!);
         else await syncScene!();
         if (inactive() || shared.transferring) return;
+        host.loading?.complete('characters');
         document.querySelector('#fjord-quality')!.addEventListener('change', event => {
             const quality = (event.target as HTMLSelectElement).value as PresentationQuality;
             world!.setQuality(quality);
@@ -545,6 +595,7 @@ export function createFjordScene(options: {
         if (seasonAppearance.advance(motionDelta, running)) applySeasonAppearance();
         motion!.advance(motionDelta, running, !document.hidden);
         layer!.advance(motion!, motionDelta, running);
+        layer!.updateConstruction(document.hidden ? 0 : delta);
         rivalScene?.advance(motionDelta, running);
         wildlife?.setHumans([...layer!.humanPositions(), ...(rivalScene?.humanPositions() ?? [])]);
         wildlife?.useCanonical(session.readSnapshot().wildlife, host.tickIntervalSeconds);
@@ -560,6 +611,7 @@ export function createFjordScene(options: {
         if (performance.now() - lastDiagnostics > 500) {
             canvas.dataset.rendered = JSON.stringify(layer!.describe());
             canvas.dataset.dyingLivestock = JSON.stringify(layer!.describeDeaths());
+            canvas.dataset.construction = JSON.stringify(layer!.inspectConstruction());
             if (import.meta.env.DEV && query.has('debugWildlife')) {
                 canvas.dataset.wildlife = JSON.stringify(wildlife?.inspect());
             }
@@ -610,8 +662,12 @@ export function createFjordScene(options: {
         lastFrameMs = performance.now() - frameStarted;
     };
 
-    const prepareGpu = async (loading: Pick<IslandLoading, 'stage' | 'measure' | 'check'>) => {
+    const prepareGpu = async (loading: Pick<IslandLoading, 'stage' | 'measure' | 'check'> & Partial<Pick<IslandLoading, 'complete' | 'units'>>) => {
         loading.stage('Preparing FjordSide');
+        await loading.measure('construction-gpu-preparation', () => constructionGpu.prepare({
+            renderer, scene, models: models!, anchor: controller.focus.clone(),
+            check: () => loading.check(), yieldControl: yieldForInput
+        }));
         const textures = new Set<Texture>();
         scene.traverse(node => {
             if (!(node instanceof Mesh)) return;
@@ -619,17 +675,24 @@ export function createFjordScene(options: {
                 for (const value of Object.values(material)) if (value instanceof Texture) textures.add(value);
         });
         await loading.measure('texture-upload', async () => {
+            let completed = 0;
+            loading.units?.('textures', 0, textures.size, 'textures', true);
             for (const texture of textures) {
                 loading.check();
                 renderer.initTexture(texture);
+                loading.units?.('textures', ++completed, textures.size, 'textures', true);
                 await yieldForInput();
             }
         });
+        loading.complete?.('textures');
         await loading.measure('shader-compilation', () => renderer.compileAsync(scene, camera), { timeoutMs: 120_000 });
+        loading.complete?.('compile');
         await loading.measure('initial-gpu-upload-and-draws', async () => {
             const meshes: Mesh[] = [];
             scene.traverseVisible(node => { if (node instanceof Mesh) meshes.push(node); });
             for (const mesh of meshes) mesh.visible = false;
+            let completed = 0;
+            loading.units?.('draws', 0, meshes.length + 1, 'draw batches', true);
             try {
                 // Upload native geometry and first-use shadow programs in separate input turns.
                 // The opaque preview covers these preparation draws; final scene quality is unchanged.
@@ -638,11 +701,21 @@ export function createFjordScene(options: {
                     mesh.visible = true;
                     renderer.render(scene, camera);
                     mesh.visible = false;
+                    loading.units?.('draws', ++completed, meshes.length + 1, 'draw batches', true);
                     await yieldForInput();
                 }
             } finally { for (const mesh of meshes) mesh.visible = true; }
             renderer.render(scene, camera);
+            loading.units?.('draws', ++completed, meshes.length + 1, 'draw batches', true);
         });
+        loading.complete?.('draws');
+        if (loading instanceof IslandLoading) {
+            loading.diagnostics.firstFrameMs = performance.now() - loading.diagnostics.started;
+            loading.diagnostics.metadata.quality = document.querySelector<HTMLSelectElement>('#fjord-quality')!.value;
+            loading.diagnostics.resources = { ...renderer.info.memory, programs: renderer.info.programs?.length ?? 0,
+                calls: renderer.info.render.calls, triangles: renderer.info.render.triangles,
+                renderPixelRatio: renderer.getPixelRatio(), drawingBuffer: [canvas.width, canvas.height] };
+        }
         loading.check();
     };
 
@@ -669,6 +742,7 @@ export function createFjordScene(options: {
         rivalScene?.dispose();
         dressing?.dispose();
         layer?.dispose();
+        constructionGpu.dispose();
         weatherTint?.dispose();
         campfireEffect?.dispose();
         precipitationEffect?.dispose();

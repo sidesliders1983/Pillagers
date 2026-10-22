@@ -36,6 +36,10 @@ export function fjordHeaderHTML(): string {
                         <button id="fjord-view-home" type="button">View settlement</button><button id="fjord-view-summit" type="button">View highlands</button>
                         <p>Touch: drag to orbit, pinch to zoom, tap open ground to centre the camera. Mouse: left drag to pan, right drag to rotate, wheel to zoom. Select residents, homes and livestock in the world or through Settlement.</p>
                     </details>
+                    <details><summary>Loading diagnostics</summary>
+                        <button id="fjord-load-copy" type="button">Copy last loading diagnostics</button>
+                        <button id="fjord-load-report" type="button">Save last loading diagnostics</button>
+                    </details>
                     <details id="fjord-campaign"><summary>Campaign</summary><div class="fjord-campaign-settings">
                         <button id="fjord-save">Save locally</button><button id="fjord-load">Load locally</button>
                         <button id="fjord-export" disabled>Export Fjord campaign</button>

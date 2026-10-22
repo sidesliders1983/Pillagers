@@ -14,7 +14,8 @@ export class RivalScene {
     private disposed = false;
     constructor(private world: WorldBlueprint, models: FjordModels, private knowledge: () => DiscoveryView | undefined,
         decorateMaterials?: (root: Object3D) => void, homeMasks?: ReadonlyMap<string, Texture>) {
-        this.layer = new FjordEntities(models, decorateMaterials, homeMasks);
+        // Newly observed houses are knowledge updates, not witnessed construction commands.
+        this.layer = new FjordEntities(models, decorateMaterials, homeMasks, false);
         this.layer.setHomeGround(world, (x, z) => {
             const knowledge = this.knowledge();
             return !!knowledge && discoveryAt(knowledge, x, z) === 'visible';

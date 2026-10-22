@@ -6,8 +6,10 @@ import { execFileSync } from 'node:child_process';
 import { loadTypeScript } from './load-typescript.mjs';
 import { terrainIO } from './terrain-io.mjs';
 import { getBounds } from '@gltf-transform/functions';
+import { validatePreparedAssets } from './validate-prepared-assets.mjs';
 
 const root = resolve('public');
+const prepared = await validatePreparedAssets();
 const { generatedHouseFiles } = loadTypeScript(new URL('../src/config/HousingAssets.ts', import.meta.url));
 const { terrainModels, longshipModel } = loadTypeScript(new URL('../src/config/TerrainAssets.ts', import.meta.url));
 const json = async file => JSON.parse(await readFile(resolve(root, file), 'utf8'));
@@ -90,4 +92,5 @@ if (process.argv.includes('--tracked')) {
     assert.deepEqual(missing, [], 'Public runtime files missing from Git');
 }
 console.log('Validated ' + files.length + ' public files, house/human/cattle/wildlife manifests and ' +
-    Object.keys(terrain.assets).length + ' decoded Terrain models without Assets/.');
+    Object.keys(terrain.assets).length + ' decoded Terrain models without Assets/. ' +
+    prepared.islands + ' prepared islands and ' + prepared.characterSources + ' exact character sources.');

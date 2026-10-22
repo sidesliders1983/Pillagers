@@ -119,17 +119,18 @@ It does not add direct/ambient water separation, shadow reception or glow shader
 
 ## Delivery and acceptance
 
-The opt-in annual lighting is `/fjord-play?lighting=northern-v1`; ordinary
-`/fjord-play` retains its baseline. The review launcher is
+Northern annual lighting is the owner-approved default on `/fjord-play`.
+`?lighting=baseline` retains the original comparison, and the explicit
+`?lighting=northern-v1` link remains supported. The review launcher is
 `/scripts/qa/northern-light-236.html`. Keep the developer day/night presets. Provide matched
 saved-scene phase comparisons and a short year-boundary capture, with bounded
 CPU/shadow/resource measurements. Test pause, speed, import/time jumps, restart,
 disposal and canonical-save equivalence. Low/Standard and both existing islands
 are part of the review where relevant.
 
-Actual phone/tablet readability and visual owner acceptance remain explicit
-gates before default rollout. Unavailable hardware/browser evidence must be
-reported as pending, never substituted with emulated or generated imagery.
+The owner accepted the smooth annual light and snow appearance and requested
+default activation. Any missing instrumented phone/tablet or GPU evidence remains
+explicit under #151, never substituted with emulated or generated imagery.
 
 `scripts/check-northern-light-236.mjs` prepares all seven fixed phases for both
 historical production island fixtures (18 and 7), storing saves and a CPU-only
