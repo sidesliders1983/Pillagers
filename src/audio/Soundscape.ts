@@ -23,6 +23,8 @@ export interface SoundEmitter {
     /** Current action marker only; unchanged markers never replay on refresh. */
     event?: string;
     revision?: number;
+    /** Local geography/season blend, independent of canonical rules and bus volume. */
+    weight?: number;
 }
 export interface SoundCamera {
     focus: SoundPoint;
@@ -40,7 +42,9 @@ export function soundGain(cue: SoundCue, source: SoundEmitter, listener: SoundPo
     const separation = source.position ? distance(listener, source.position) : 0;
     const fade = cue.bus === 'world' ? Math.max(0, 1 - separation / cue.range) *
         Math.min(1, 40 / Math.max(40, cameraDistance)) : 1;
-    return cue.gain * fade * (paused && cue.bus === 'ambience' ? .4 : 1);
+    const weight = source.weight === undefined ? 1 :
+        Number.isFinite(source.weight) ? Math.max(0, Math.min(1, source.weight)) : 0;
+    return cue.gain * weight * fade * (paused && cue.bus === 'ambience' ? .4 : 1);
 }
 
 /** Presentation-only decisions in real seconds. Never receives a campaign or Core RNG. */

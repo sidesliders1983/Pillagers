@@ -46,6 +46,12 @@ export class FjordAudio {
     private failure = '';
     private highVoices = 0;
     private highPhysical = 0;
+    private downloadBytes = 0;
+    private selectionMs: number[] = [];
+    private decodeWallMs: number[] = [];
+    private decodeCallMs: number[] = [];
+    private starts = new Map<string, number>();
+    private requestedCues = new Map<string, number>();
     private preferences = { ...defaults };
     private createContext: () => AudioContext;
     private now: () => number;
@@ -150,13 +156,24 @@ export class FjordAudio {
             this.now() - scope.last >= soundLimits.cadence;
         return {
             get due() { return due(); },
-            update: (camera: SoundCamera, sources: readonly SoundEmitter[], paused: boolean) => {
-                try { this.updateWorld(scope, manifest, camera, sources, paused); }
+            prepare: (cueId: string) => {
+                if (!scope.alive || this.current !== scope || !this.audible() || this.loading.size >= 2) return;
+                const cue = manifest.cues.find(cue => cue.id === cueId);
+                const asset = manifest.assets.find(asset => asset.id === cue?.variants[0]);
+                if (asset) void this.buffer(asset).catch(() => {
+                    if (scope.alive && this.current === scope && !this.disposed)
+                        this.failure = 'An audio cue could not be loaded; gameplay is unaffected.';
+                });
+            },
+            update: (camera: SoundCamera, sources: readonly SoundEmitter[], paused: boolean, contact = false) => {
+                const started = performance.now();
+                try { this.updateWorld(scope, manifest, camera, sources, paused, contact); }
                 catch {
                     this.failure = 'Sound interrupted; gameplay is unaffected. Use Enable sound to retry.';
                     this.stopAll();
                     this.changed?.();
                 }
+                finally { this.retainMeasurement(this.selectionMs, performance.now() - started); }
             },
             dispose: () => {
                 scope.alive = false;
@@ -168,14 +185,17 @@ export class FjordAudio {
         };
     }
     private updateWorld(scope: World, manifest: SoundManifest, camera: SoundCamera,
-        sources: readonly SoundEmitter[], paused: boolean) {
+        sources: readonly SoundEmitter[], paused: boolean, contact = false) {
         if (!scope.alive || this.current !== scope || this.disposed) return;
         scope.sources = sources.slice(0, soundLimits.emitters);
         scope.camera = camera;
         scope.paused = paused;
-        if (!this.audible() || this.now() - scope.last < soundLimits.cadence) return;
+        if (!this.audible() || (!contact && this.now() - scope.last < soundLimits.cadence)) return;
         scope.last = this.now();
         const plan = scope.plan.update(this.now(), camera, scope.sources, paused);
+        for (const voice of plan.voices)
+            if (this.requestedCues.has(voice.cue.id) || this.requestedCues.size < 64)
+                this.requestedCues.set(voice.cue.id, (this.requestedCues.get(voice.cue.id) ?? 0) + 1);
         scope.listener = plan.listener;
         this.listener(plan.listener);
         const desired = new Set(plan.voices.map(voice => voice.source.id));
@@ -230,6 +250,8 @@ export class FjordAudio {
         try {
             const asset = manifest.assets.find(asset => asset.id === input.variant);
             if (!asset) throw new Error('Missing cue variant');
+            const key = JSON.stringify(asset);
+            if (this.loading.size >= 2 && !this.loading.has(key) && !this.buffers.has(key)) return;
             const buffer = await this.buffer(asset);
             const latest = scope.sources.find(source => source.id === id);
             const gainNow = latest && scope.listener?.valid && scope.camera ?
@@ -273,7 +295,9 @@ export class FjordAudio {
             };
             gain.gain.value = 0;
             this.adjust(voice, { ...input, gain: gainNow, source: latest! });
-            source.start();
+            source.start(0, Math.max(0, Math.min(buffer.duration, input.cue.contactOffset ?? 0)));
+            if (this.starts.has(input.cue.id) || this.starts.size < 64)
+                this.starts.set(input.cue.id, (this.starts.get(input.cue.id) ?? 0) + 1);
             this.highVoices = Math.max(this.highVoices, this.voices.size);
             this.highPhysical = Math.max(this.highPhysical, this.voices.size + this.retiring.size);
         } catch {
@@ -301,6 +325,7 @@ export class FjordAudio {
                 const { done, value } = await reader.read();
                 if (done) break;
                 size += value.byteLength;
+                this.downloadBytes += value.byteLength;
                 if (size > soundLimits.fileBytes) {
                     await reader.cancel();
                     throw new Error('Audio file too large');
@@ -313,7 +338,11 @@ export class FjordAudio {
                 bytes.set(chunk, offset);
                 offset += chunk.byteLength;
             }
-            return this.context!.decodeAudioData(bytes.buffer);
+            const started = performance.now();
+            const operation = this.context!.decodeAudioData(bytes.buffer);
+            this.retainMeasurement(this.decodeCallMs, performance.now() - started);
+            try { return await operation; }
+            finally { this.retainMeasurement(this.decodeWallMs, performance.now() - started); }
         }
         const rate = this.context!.sampleRate;
         const buffer = this.context!.createBuffer(asset.channels, Math.ceil(asset.seconds * rate), rate);
@@ -399,6 +428,15 @@ export class FjordAudio {
         this.changed?.();
         return this.inspect();
     }
+    private retainMeasurement(samples: number[], value: number) {
+        samples.push(value);
+        if (samples.length > 512) samples.shift();
+    }
+    private timings(samples: number[]) {
+        const sorted = [...samples].sort((a, b) => a - b);
+        const percentile = (p: number) => sorted.length ? sorted[Math.max(0, Math.ceil(sorted.length * p) - 1)] : null;
+        return { samples: sorted.length, p50Ms: percentile(.5), p95Ms: percentile(.95), p99Ms: percentile(.99) };
+    }
     inspect() {
         return { enabled: this.enabled, hidden: this.hidden, state: this.context?.state ?? 'not-enabled',
             playing: this.voices.size, retiring: this.retiring.size,
@@ -407,6 +445,12 @@ export class FjordAudio {
             inflightClients: this.inflightClients,
             highPhysical: this.highPhysical,
             buffers: this.buffers.size,
+            downloadBytes: this.downloadBytes,
+            startedCues: Object.fromEntries(this.starts),
+            requestedCues: Object.fromEntries(this.requestedCues),
+            selectionScheduling: this.timings(this.selectionMs),
+            decodeInvocation: this.timings(this.decodeCallMs),
+            decodeWall: this.timings(this.decodeWallMs),
             decodedBytes: [...this.buffers.values()].reduce((sum, buffer) => sum + buffer.length * buffer.numberOfChannels * 4, 0),
             failure: this.failure };
     }

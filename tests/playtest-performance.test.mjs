@@ -15,7 +15,9 @@ test('playtest measurements distinguish frame cadence, synchronous CPU and proce
     now = 1000;
     const sample = measurements.sample();
     assert.equal(sample.interval.meanMs, 25);
+    assert.equal(sample.interval.p50Ms, 20);
     assert.equal(sample.interval.p95Ms, 40);
+    assert.equal(sample.interval.p99Ms, 40);
     assert.equal(sample.fps, 40);
     assert.equal(sample.cpuFrame.meanMs, 2);
     assert.equal(sample.spans.core.latestMs, 8);

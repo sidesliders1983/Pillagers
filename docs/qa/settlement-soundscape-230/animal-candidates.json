@@ -1,0 +1,118 @@
+{
+  "scope": "Private local opt-in additions, not distribution or listening approval.",
+  "ownerLynxCorrection": "Owner identifies the supplied recording as a bobcat (genus Lynx). Use it as the chosen lynx placeholder in this local review. The saved Pixabay link still describes Tomcat2; do not assert verified bobcat provenance.",
+  "entries": [
+    {
+      "cue": "goat",
+      "sourceFile": "goat.mp3",
+      "sourceSHA256": "38aa2162ea1a32710b16460b2228b6083326c5c050062a4bd5f403c69cf9dac5",
+      "sourceUrl": "https://pixabay.com/sound-effects/nature-goat-baa-390303/",
+      "sourceTitle": "Goat Baa",
+      "recordingOrAI": "unverified; not claimed as a field recording",
+      "preparedFile": "goat-38aa2162-82e9438d.wav",
+      "preparedSHA256": "6047a108b07e1f222cd180f7743f0762ad451b529d3e3adb40d24471bf443c41",
+      "intervalSeconds": [
+        35,
+        75
+      ],
+      "rangeMetres": 40,
+      "trigger": "Currently observed own adult livestock of the matching species"
+    },
+    {
+      "cue": "pig",
+      "sourceFile": "pig.mp3",
+      "sourceSHA256": "1c5c6494d425c7f73e55a236891af35d60ac8ca19dcf62c025a27e34f1dfe5df",
+      "sourceUrl": "https://pixabay.com/sound-effects/nature-pig-grunting-playing-in-mud-sound-effect-440220/",
+      "sourceTitle": "Pig grunting playing in mud sound effect",
+      "recordingOrAI": "AI-generated (source label)",
+      "preparedFile": "pig-1c5c6494-82e9438d.wav",
+      "preparedSHA256": "2620d740c72b8b86d47df7e1e90a119bbf06a21c505dc5201b56c216f71aa340",
+      "intervalSeconds": [
+        40,
+        80
+      ],
+      "rangeMetres": 35,
+      "trigger": "Currently observed own adult livestock of the matching species"
+    },
+    {
+      "cue": "sheep",
+      "sourceFile": "sheep.mp3",
+      "sourceSHA256": "3b6efbb1fa6e2f619713361a8807a4c4e6e50179961b725de8d5d77474355f12",
+      "sourceUrl": "https://pixabay.com/sound-effects/nature-sheep-bleat-122256/",
+      "sourceTitle": "Sheep Bleat",
+      "recordingOrAI": "unverified; not claimed as a field recording",
+      "preparedFile": "sheep-3b6efbb1-82e9438d.wav",
+      "preparedSHA256": "a570d8a5ca2eaed160ae67d3868f5ebf92ac9c08b6c18063913528204dd12fc9",
+      "intervalSeconds": [
+        35,
+        75
+      ],
+      "rangeMetres": 40,
+      "trigger": "Currently observed own adult livestock of the matching species"
+    },
+    {
+      "cue": "seal",
+      "sourceFile": "seal.mp3",
+      "sourceSHA256": "8649966275ec30e9ecf54fb5498c40633ac9b9739ff6013457969ec9f45182b6",
+      "sourceUrl": "https://pixabay.com/sound-effects/nature-sound-of-a-seal-14648/",
+      "sourceTitle": "Sound of a Seal",
+      "recordingOrAI": "unverified; not claimed as a field recording",
+      "preparedFile": "seal-86499662-82e9438d.wav",
+      "preparedSHA256": "7f1c57170c334e99a3870510c175f32370cf6e9006676ff3890655a8aff32c62",
+      "intervalSeconds": [
+        40,
+        90
+      ],
+      "rangeMetres": 55,
+      "trigger": "Currently observed actual shore/haul-out actor; never a swimming seal"
+    },
+    {
+      "cue": "lynx",
+      "sourceFile": "lynx.mp3",
+      "sourceSHA256": "153ea7d45021f16710beb5143ace87e35a68763d8954eacb8bcf8b4a11ca1e8e",
+      "sourceUrl": "https://pixabay.com/sound-effects/nature-tomcat2-41730/",
+      "sourceTitle": "Tomcat2",
+      "recordingOrAI": "unverified; not claimed as a field recording",
+      "preparedFile": "lynx-153ea7d4-82e9438d.wav",
+      "preparedSHA256": "85a11e1fef229592bb8814582792c990cb52742c76e11f76ebc13b6da2cdb7b5",
+      "intervalSeconds": [
+        60,
+        120
+      ],
+      "rangeMetres": 40,
+      "trigger": "Fresh canonical WildlifeSighted event plus currently observed, nearby matching actor"
+    },
+    {
+      "cue": "wolf",
+      "sourceFile": "wolf.mp3",
+      "sourceSHA256": "e16622a63ae33a37748232bb87f911aaa247347c2653a050f8ef9a2381451d3b",
+      "sourceUrl": "https://pixabay.com/sound-effects/nature-wolf-howl-268619/",
+      "sourceTitle": "Wolf howl",
+      "recordingOrAI": "AI-generated (source label)",
+      "preparedFile": "wolf-e16622a6-82e9438d.wav",
+      "preparedSHA256": "4fc431e6b512d93edc11ae2786871515f1372f9d4de2794413eba8ad7711f616",
+      "intervalSeconds": [
+        60,
+        120
+      ],
+      "rangeMetres": 65,
+      "trigger": "Fresh canonical WildlifeSighted event plus currently observed, nearby matching actor"
+    },
+    {
+      "cue": "rabbit",
+      "sourceFile": "rabbit.mp3",
+      "sourceSHA256": "cae20a8a6d52625d95f8424240efc6e47903b61b021a769fde6f7b7f75b57725",
+      "sourceUrl": "https://pixabay.com/sound-effects/nature-rabbit-sounds-358172/",
+      "sourceTitle": "Rabbit sounds",
+      "recordingOrAI": "unverified; not claimed as a field recording",
+      "preparedFile": "rabbit-cae20a8a-82e9438d.wav",
+      "preparedSHA256": "2896abe626be3cda994d7054b2309fc7bd4c05ae177ae5d922f9a264870cb97a",
+      "intervalSeconds": [
+        60,
+        120
+      ],
+      "rangeMetres": 30,
+      "trigger": "Fresh canonical WildlifeSighted event plus currently observed, nearby matching actor"
+    }
+  ]
+}

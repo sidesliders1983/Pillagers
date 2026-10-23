@@ -1,0 +1,57 @@
+{
+  "scope": "Expanded QA fixture derived from the existing owner campaign, using real paid commands only.",
+  "inputSHA256": "a9b7ad4248a2dacb3409d1c9913038f1f818a5c6c8d531cec8b1f26162ea1a8b",
+  "outputSHA256": "e852c012c63a453db0a87c0af54b89617003af4044efe197946617a4806e6e2c",
+  "commands": [
+    {
+      "type": "SetCampfire",
+      "lit": true
+    },
+    {
+      "type": "BuildHouse",
+      "householdId": "founder-6"
+    },
+    {
+      "type": "BuildHouse",
+      "householdId": "founder-9"
+    },
+    {
+      "type": "AssignCattle",
+      "cattleId": "cattle-1",
+      "farmyardId": "house-1"
+    },
+    {
+      "type": "AssignCattle",
+      "cattleId": "cattle-2",
+      "farmyardId": "house-1"
+    },
+    {
+      "type": "AssignCattle",
+      "cattleId": "cattle-3",
+      "farmyardId": "house-1"
+    }
+  ],
+  "before": {
+    "stocks": {
+      "food": 6,
+      "materials": 26
+    },
+    "time": {
+      "winter": 801,
+      "tick": 212
+    }
+  },
+  "after": {
+    "stocks": {
+      "food": 6,
+      "materials": 5
+    },
+    "time": {
+      "winter": 801,
+      "tick": 212
+    }
+  },
+  "farmer": "founder-6",
+  "woodworker": "founder-9",
+  "farmyardId": "house-1"
+}

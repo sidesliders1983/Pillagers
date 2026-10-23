@@ -80,6 +80,9 @@ export async function runFjordEntry(ports: EntryPorts = {
     try { audioStorage = window.localStorage; } catch { /* Optional presentation preferences. */ }
     const audio = new FjordAudio({ storage: audioStorage });
     const audioControls = new AudioControls(audio, new URLSearchParams(window.location.search).get('audioProof') === '1');
+    if (new URLSearchParams(window.location.search).get('audioMix') === '1')
+        audioControls.root.querySelector('[data-audio-pack]')!.textContent =
+            'Settlement mix review: local candidate recordings. Listening and publication review are pending.';
     const showShell = () => {
         const content = shell();
         content.parentElement!.append(diagnostics.settings());

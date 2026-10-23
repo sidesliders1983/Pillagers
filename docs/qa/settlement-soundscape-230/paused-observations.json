@@ -1,0 +1,123 @@
+{
+  "scope": "Exploratory native desktop paused on/off comparison before percentile export extension; no listening or physical-device claim",
+  "cases": [
+    {
+      "at": 1792756729243,
+      "phase": "paused-on",
+      "camera": "{\"world\":[-0.7525766947068779,0,-0.6585046078685182,0,-0.3796258199762472,0.8170993839488747,0.43385807997285397,0,0.5380637094168614,0.5764968315180661,-0.6149299536192705,0,98,34.461789608001716,114,1],\"projection\":[1.3579951288348662,0,0,0,0,2.4142135623730954,0,0,0,0,-1.0000833368057,-1,0,0,-0.20000833368057003,0]}",
+      "ended": 1792756791733,
+      "observation": {
+        "audio": {
+          "buffers": 7,
+          "decodeInvocation": {
+            "p50Ms": 0.09999999403953552,
+            "p95Ms": 0.10000000894069672,
+            "p99Ms": 0.10000000894069672,
+            "samples": 7
+          },
+          "decodeWall": {
+            "p50Ms": 32.1000000089407,
+            "p95Ms": 147.20000000298023,
+            "p99Ms": 147.20000000298023,
+            "samples": 7
+          },
+          "decodedBytes": 15407808,
+          "decodes": 0,
+          "downloadBytes": 3852498,
+          "enabled": true,
+          "failure": "",
+          "hidden": false,
+          "highPhysical": 3,
+          "highVoices": 3,
+          "inflightClients": 0,
+          "pending": 0,
+          "physical": 2,
+          "playing": 2,
+          "retiring": 0,
+          "selectionScheduling": {
+            "p50Ms": 0.09999999403953552,
+            "p95Ms": 0.20000000298023224,
+            "p99Ms": 0.30000001192092896,
+            "samples": 512
+          },
+          "startedCues": {
+            "campfire": 9,
+            "cow": 7,
+            "sea-waves": 14,
+            "wind-normal-winter": 2,
+            "wind-spring": 2,
+            "wind-summer": 1
+          },
+          "state": "running"
+        },
+        "camera": "{\"world\":[-0.7525766947068779,0,-0.658504607868518,0,-0.3796258199762471,0.8170993839488748,0.4338580799728539,0,0.5380637094168615,0.576496831518066,-0.6149299536192705,0,98,34.46178960800171,114,1],\"projection\":[1.3579951288348662,0,0,0,0,2.4142135623730954,0,0,0,0,-1.0000833368057,-1,0,0,-0.20000833368057003,0]}",
+        "mix": {
+          "logicalSources": 5,
+          "projectionLastMs": 0.4000000059604645,
+          "scope": "Local candidate mix",
+          "visualContacts": 0
+        },
+        "status": "\n        Landing party\n            Spring 802\n        \n            Food38\n            Materials6\n            Residents10\n            Livestock4\n        \n        \n            Paused\n            Year length\n                1 min per year\n                    3 min per year5 min per yearExpedition · 10 min / 1,000 ticks\n            \n            +1 Year\n            \n                \n                    FjordSide\n                    \n                    \n                    Clan BookExpedition groups\n                    QualityLow\n                        Standard\n                    Local effectsOff\n                        LowNormal\n                    Snow, rain and fire particles. Visual quality only; burning still uses fuel. Reduced motion disables particles.\n                    \n            Keep screen awake\n            \n        \n                    Debug / Performance overlayOffCompactDetails\n                    Sound\n            Enable sound\n             Mute\n            Sound enabled.\n            Master volume\n            Sound groups\n                Ambience\n                World\n                Interface\n            Settlement mix review: local candidate recordings. Listening and publication review are pending.\n                    Camera views & controls\n                        View settlementView highlands\n                        Touch: drag to orbit, pinch to zoom, tap open ground to centre the camera. Mouse: left drag to pan, right drag to rotate, wheel to zoom. Select residents, homes and livestock in the world or through Settlement.\n                    \n                    Loading diagnostics\n                        Copy last loading diagnostics\n                        Save last loading diagnostics\n                    \n                    Campaign\n                        Save locallyLoad locally\n                        Export Fjord campaign\n                        Export canonical JSON\n                        Import campaign\n                        Campaign seed\n                        Island 18 · validated set v1 · 12 home plots\n                        New campaigns select a validated island from a fixed set. Existing saves keep their geography.\n                         Enable winter weather\n                         Enable exploration & rival clan\n                        Enabled by default for new and restarted islands. Loading a saved campaign keeps its exploration rules.\n                         Use the same founders\n                        New campaign from seed\n                        Restart with same founders\n                        New and restarted campaigns start when ready. Returning to the game or loading a save pauses the clock.\n                            Your browser keeps the campaign locally.\n                    \n                \n            \n        \n    "
+      },
+      "exportPath": "C:\\Users\\Devoteam\\Downloads\\fjordside-performance.json"
+    },
+    {
+      "at": 1792756847839,
+      "phase": "paused-off",
+      "ended": 1792757057593,
+      "observation": {
+        "audio": {
+          "buffers": 7,
+          "decodeInvocation": {
+            "p50Ms": 0.09999999403953552,
+            "p95Ms": 0.10000000894069672,
+            "p99Ms": 0.10000000894069672,
+            "samples": 7
+          },
+          "decodeWall": {
+            "p50Ms": 32.1000000089407,
+            "p95Ms": 147.20000000298023,
+            "p99Ms": 147.20000000298023,
+            "samples": 7
+          },
+          "decodedBytes": 15407808,
+          "decodes": 0,
+          "downloadBytes": 3852498,
+          "enabled": false,
+          "failure": "",
+          "hidden": false,
+          "highPhysical": 3,
+          "highVoices": 3,
+          "inflightClients": 0,
+          "pending": 0,
+          "physical": 0,
+          "playing": 0,
+          "retiring": 0,
+          "selectionScheduling": {
+            "p50Ms": 0.09999999403953552,
+            "p95Ms": 0.20000000298023224,
+            "p99Ms": 0.5,
+            "samples": 512
+          },
+          "startedCues": {
+            "campfire": 9,
+            "cow": 7,
+            "sea-waves": 15,
+            "wind-normal-winter": 2,
+            "wind-spring": 2,
+            "wind-summer": 1
+          },
+          "state": "suspended"
+        },
+        "camera": "{\"world\":[-0.7525766947068779,0,-0.658504607868518,0,-0.3796258199762471,0.8170993839488748,0.4338580799728539,0,0.5380637094168615,0.576496831518066,-0.6149299536192705,0,98,34.46178960800171,114,1],\"projection\":[1.3579951288348662,0,0,0,0,2.4142135623730954,0,0,0,0,-1.0000833368057,-1,0,0,-0.20000833368057003,0]}",
+        "mix": {
+          "logicalSources": 5,
+          "projectionLastMs": 0.29999999701976776,
+          "scope": "Local candidate mix",
+          "visualContacts": 0
+        }
+      },
+      "exportPath": "C:\\Users\\Devoteam\\Downloads\\fjordside-performance (1).json"
+    }
+  ]
+}

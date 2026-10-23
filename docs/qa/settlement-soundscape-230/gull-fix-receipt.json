@@ -1,0 +1,24 @@
+{
+  "recordedUtc": "2026-10-23T13:27:22.897Z",
+  "baseCommit": "8d89c5abfc0b98857b8a2637362b230560b1e208",
+  "scope": "Gull identity fix overlay; previous measurements are preserved unchanged",
+  "sourceSHA256": {
+    "src/audio/SettlementSounds.ts": "76d1e61cebd48812035f5b68b75fe1ccaba49e554b7b007c6f08f9bbed2ac955",
+    "src/wildlife/WildlifeLayer.ts": "5ee7ec395c4611adc07ce9e99791acb74840f0955d53411d572dce45ab615557",
+    "tests/settlement-sounds.test.mjs": "ac7474536e85c83560daf2d0cfd510930c8ed3288b71350944592479416cc272",
+    "tests/wildlife.test.mjs": "bec6ba2f9e129f44dcb75b57ff20c146baee1891430124480959782194a48c2a"
+  },
+  "bundleSHA256": {
+    "dist/index.html": "fba95fbb850f0370b095ddf63b33ee980124799b8d89992550e40d01e139cfa7",
+    "dist/assets/index-PQ5j_6N-.js": "7375186c61d4dfaaa844e78ea48c7d5f0ab87906cf00a45b17adac9e14e6efb2",
+    "dist/assets/FjordEntry-mO7eLXpf.js": "6be51129330cb74d7dd882c065e4c81e48c2d3ec23b500a71c441192cdfd58a3",
+    "dist/assets/FjordPlay-nMgRZi1S.js": "c5f5e5e345fb9d2e9a7a2e0ac35ed5f8a1cc34119decdd806e9c6a7721182bce"
+  },
+  "verification": {
+    "red": "Canonical projection: zero instead of one gull; real wildlife layer: zero instead of nine gulls",
+    "green": "19 focused audio tests and one actual wildlife-layer test; zero skips/failures",
+    "typescript": "passed",
+    "build": "incremental production bundle passed; public files unchanged",
+    "native": "Actual new campaign started the prepared gull cue; no audio failure"
+  }
+}
