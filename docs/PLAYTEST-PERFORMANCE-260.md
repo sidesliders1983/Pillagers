@@ -39,6 +39,7 @@ a disabled/replaced view.
 | Geometries/textures/programs | Actual renderer resource counts and observed high-water marks, not VRAM bytes. |
 | Heap | Optional, non-standard `performance.memory` JS heap, sampled every five seconds. Excludes/unreliably covers workers, native and GPU allocations. VRAM and total app/device RAM remain unavailable. |
 | Hitch | Worst recent main-thread frame scheduling gap, retained for sixty seconds independently of the small event ring. Long Tasks are separately observed only when the API is available. Neither signal proves OOM or a leak. |
+| Load callback gap | #259's maximum observed loader callback gap, with a nominal 250 ms cadence. Kept separate from runtime frame intervals; elapsed/stage/progress ages and first-frame/playable timing are retained in the export. |
 
 CPU time, GPU duration and frame intervals overlap and must not be summed.
 There are no guessed CPU/GPU percentages, device memory limits, forced quality
@@ -93,9 +94,9 @@ screen recorder. Its optional Node heap delta includes harness/Core allocations
 and is not browser or device RAM. Do not use these results as a full-game frame
 regression percentage or physical-device acceptance.
 
-The latest headless run's maximum p95 frame-hook costs were 0.0003 ms Off,
-0.0010 ms Compact and 0.0008 ms Details. Sampled hook-plus-DOM p95 ranged
-0.294–0.852 ms Compact and 0.445–0.644 ms Details across cohorts/repetitions.
+The latest headless run's maximum p95 frame-hook costs were 0.0004 ms Off,
+0.0008 ms Compact and 0.0007 ms Details. Sampled hook-plus-DOM p95 ranged
+0.245–0.732 ms Compact and 0.282–0.705 ms Details across cohorts/repetitions.
 There were zero timers Off, at most one enabled and zero after disposal; reports
 peaked at 28,435 bytes. Node heap deltas had mixed signs and include Core/harness
 allocations; they are not evidence of stable browser memory or a leak. The
@@ -114,12 +115,19 @@ The new regression was fixed and focused tests rerun. No validation or receipt
 was weakened. Current-head GitHub CI remains the delivery gate.
 
 Source formatting is reviewed manually; this repository has no configured
-formatter. The implementation session exposed no connected browser surface
-(`apps: [], browsers: []`). A real desktop/phone capture, developed-village
-Off/Compact/Details comparison at identical camera/quality/DPR, the proposed
-<1 ms sampled overhead / <5% p95 frame-regression device targets, and physical
-iPhone/iPad sign-off are **pending**. Keep the PR draft until these acceptance
-limits are reviewed; #151 remains the integrated performance gate.
+formatter. On 23 October 2026 the owner tested the built LAN overlay at
+`http://192.168.68.115:5180/fjord-play?debugPerf=1` in response to the physical
+iPhone/iPad review request and confirmed: "Getest: leesbaar en bediening werkt."
+This confirms physical-device readability and control usability. The response
+does not specify device model, an exported report or a recorded capture.
+
+The implementation session exposed no connected browser surface
+(`apps: [], browsers: []`); opening the in-app browser also returned unavailable.
+A real desktop/phone capture, developed-village Off/Compact/Details comparison
+at identical camera/quality/DPR, the proposed <1 ms sampled overhead / <5% p95
+frame-regression device targets and context-recovery visual QA remain **pending**.
+Keep the PR draft until these acceptance limits are reviewed; #151 remains the
+integrated performance gate.
 
 For owner review: capture loading → play → pause/resume, move/freeze the block,
 select residents, use camera/Map/story, toggle Off/on, copy/save on HTTP, then

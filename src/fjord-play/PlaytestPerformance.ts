@@ -135,13 +135,18 @@ export class PlaytestPerformance {
         this.view = view;
         if (persist) try { this.storage?.setItem(preference, view); } catch { /* No game save writes. */ }
         if (view === 'off') {
-            this.stopTimer?.(); this.stopTimer = undefined;
-            this.listeners?.abort(); this.listeners = undefined;
-            this.observer?.disconnect(); this.observer = undefined;
+            this.stopTimer?.();
+            this.stopTimer = undefined;
+            this.listeners?.abort();
+            this.listeners = undefined;
+            this.observer?.disconnect();
+            this.observer = undefined;
             this.releaseGpu();
             this.measurements?.dispose();
             this.measurements = undefined;
-            this.workload = {}; this.resources = undefined; this.heap = undefined;
+            this.workload = {};
+            this.resources = undefined;
+            this.heap = undefined;
             this.frozen = false;
             this.frozenAt = '';
             this.root.querySelector('[data-perf-freeze]')!.textContent = 'Freeze display';
@@ -186,7 +191,8 @@ export class PlaytestPerformance {
         if (mode !== this.mode) this.gpu?.reset();
         if (mode === 'Loading' && this.mode !== 'Loading') {
             this.releaseGpu();
-            this.workload = {}; this.resources = undefined;
+            this.workload = {};
+            this.resources = undefined;
         }
         this.mode = mode;
         this.measurements?.setMode(document.hidden ? 'Background' : mode);
@@ -217,7 +223,10 @@ export class PlaytestPerformance {
         finally { this.span('core', this.now() - started, Math.max(0, ticks() - before)); }
     }
     draw(renderer: WebGLRenderer, scope: RenderScope, operation: () => void) {
-        if (!this.measurements) { operation(); return; }
+        if (!this.measurements) {
+            operation();
+            return;
+        }
         // Installed Three r180 uses WebGL2 exclusively; its type retains the older union.
         const gl = renderer.getContext() as WebGL2RenderingContext;
         if (gl !== this.gl) {
@@ -257,7 +266,9 @@ export class PlaytestPerformance {
     }
     releaseGpu() {
         this.gpu?.dispose();
-        this.gpu = undefined; this.gl = undefined; this.gpuSupported = null;
+        this.gpu = undefined;
+        this.gl = undefined;
+        this.gpuSupported = null;
         this.portraitGpu = undefined;
     }
     private listen() {
@@ -278,12 +289,14 @@ export class PlaytestPerformance {
         }, { signal });
         window.addEventListener('pageshow', event => {
             if (!event.persisted) return;
-            this.setMode('Paused'); this.update();
+            this.setMode('Paused');
+            this.update();
         }, { signal });
         document.addEventListener('webglcontextlost', () => {
             this.measurements?.mark('context-loss', 'Graphics context lost; cause unknown');
             this.gpu?.reset(true);
-            this.setMode('Recovering'); this.update();
+            this.setMode('Recovering');
+            this.update();
         }, { capture: true, signal });
         document.addEventListener('webglcontextrestored', () => {
             this.measurements?.mark('context-restored', 'Graphics context restored');
@@ -336,7 +349,8 @@ export class PlaytestPerformance {
             `Interval μ/p95  ${ms(sample.interval.meanMs)} / ${ms(sample.interval.p95Ms)}\n` +
             `CPU frame p95   ${ms(sample.cpuFrame.p95Ms)}\n` +
             `GPU main        ${sample.gpu.status === 'valid' ? ms(sample.gpu.milliseconds) : 'N/A — ' + sample.gpu.status}\n` +
-            `Hitch /60 s     ${ms(sample.worstRecentHitchMs)}\n` +
+            (sample.mode === 'Loading' ? `Load callback gap ${ms(load?.maxObservationGapMs)}\n` :
+                `Hitch /60 s     ${ms(sample.worstRecentHitchMs)}\n`) +
             `Ticks total/rate ${sample.ticks.total} / ${sample.ticks.perSecond.toFixed(1)} /s\n` +
             (sample.mode === 'Loading' ? `Load ${load?.percent ?? 0}% · ${load?.stage ?? 'Starting'}\n` : '') +
             `Heap ${this.heap ? (this.heap.usedBytes / 1048576).toFixed(1) + ' MiB*' : 'N/A'} · VRAM unavailable`;
@@ -353,6 +367,7 @@ export class PlaytestPerformance {
             `Portrait ${this.workload.portrait?.calls ?? 'N/A'} calls (separate)\n` +
             `Geo/Tex/Programs ${this.resources ? [this.resources.geometries, this.resources.textures, this.resources.programs].join('/') : 'N/A'} counts\n` +
             `Heap source: ${this.heap?.source ?? 'unsupported'}\n` +
+            (load ? `Load max gap (250 ms cadence): ${ms(load.maxObservationGapMs)}\n` : '') +
             `${this.longTasks ? 'Long Tasks available' : 'Long Tasks N/A; frame gaps only'}\n` +
             `${sample.latestError?.kind ?? ''}: ${sample.latestError?.message ?? ''}`;
     }
@@ -372,6 +387,10 @@ export class PlaytestPerformance {
             sample: this.measurements?.sample(),
             loading: load ? { attempt: load.attempt, startedUtc: load.startedUtc, percent: load.percent,
                 stage: load.stage, outcome: load.outcome, worker: load.worker,
+                elapsedMs: load.elapsedMs, stageElapsedMs: load.stageElapsedMs,
+                lastProgressAgeMs: load.lastProgressAgeMs, maxObservationGapMs: load.maxObservationGapMs,
+                firstFrameMs: load.firstFrameMs, playableMs: load.playableMs,
+                units: load.units, resources: load.resources, warning: load.warning,
                 error: load.error ? { ...load.error, message: diagnosticMessage(load.error.message) } : undefined,
                 timeline: load.timeline.slice(-128) } : undefined, truncated: false };
         let text = JSON.stringify(report, null, 2);
@@ -392,7 +411,10 @@ export class PlaytestPerformance {
     }
     private fallback(text: string) {
         const area = this.root.querySelector('textarea')!;
-        area.hidden = false; area.value = text; area.focus(); area.select();
+        area.hidden = false;
+        area.value = text;
+        area.focus();
+        area.select();
         this.message('If copy/download is unavailable, select and copy this report. It stays on this device.');
     }
     dispose() { this.configure('off', false); }

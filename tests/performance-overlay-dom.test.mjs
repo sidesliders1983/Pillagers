@@ -92,8 +92,11 @@ test('the touch diagnostic view is opt-in, bounded, freezeable and offers select
         const loading = new IslandLoadStatus('new', 32, () => now);
         loading.enter('compile', 'shader-compilation');
         loading.begin('shader-compilation');
+        loading.maxObservationGapMs = 1234;
         loading.snapshot();
         assert.equal(JSON.parse(overlay.exportJSON()).loading.attempt, loading.attempt);
+        assert.equal(JSON.parse(overlay.exportJSON()).loading.maxObservationGapMs, 1234,
+            'Loading scheduling gaps come from the shared #259 observer, without another timer');
         for (let index = 0; index < 8; index++) { overlay.configure('off'); overlay.configure('compact'); }
         dom.window.dispatchEvent(new dom.window.ErrorEvent('error', { message: 'One failure' }));
         assert.equal(JSON.parse(overlay.exportJSON()).sample.events.filter(event => event.kind === 'exception').length, 1,

@@ -144,7 +144,8 @@ export class PerformanceMeasurements {
     dispose() {
         if (this.disposed) return;
         this.disposed = true;
-        this.intervals.dispose(); this.cpu.dispose();
+        this.intervals.dispose();
+        this.cpu.dispose();
         for (const samples of Object.values(this.spans)) samples.dispose();
         this.hitches = this.hitchTimes = new Float64Array();
         this.history.length = this.events.length = 0;
