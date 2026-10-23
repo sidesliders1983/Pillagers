@@ -33,8 +33,8 @@ export class FjordModels {
     async reconcile(model: Object3D, entity: FjordEntity) {
         const actor = this.actors.get(model);
         if (!actor?.human || !entity.dna) return;
-        const observe = this.preparation && ((sample: Parameters<CharacterPreparationObserver>[0]) =>
-            this.preparation!({ ...sample, subject: entity.id }));
+        const observe = this.preparation && Object.assign((sample: Parameters<CharacterPreparationObserver>[0]) =>
+            this.preparation!({ ...sample, subject: entity.id }), { enabled: this.preparation.enabled });
         const fingerprint = JSON.stringify([entity.dna, entity.visualProfile, entity.facialIdentity]);
         if (actor.fingerprint !== fingerprint) {
             model.scale.setScalar(1);
@@ -200,8 +200,9 @@ export class FjordModels {
         if (entity.kind === 'persona' && entity.dna) {
             try {
                 const human = await this.humans.createWorld({ ...entity.dna, age: Math.min(100, entity.dna.age) },
-                    entity.visualProfile, entity.facialIdentity, this.preparation && (sample =>
-                        this.preparation!({ ...sample, subject: entity.id })));
+                    entity.visualProfile, entity.facialIdentity, this.preparation && Object.assign(
+                        (sample: Parameters<CharacterPreparationObserver>[0]) =>
+                            this.preparation!({ ...sample, subject: entity.id }), { enabled: this.preparation.enabled }));
                 this.actors.set(human.root, { human, pace: 0, groundSpeed: 0, state: 'Idle' });
                 await this.reconcile(human.root, entity);
                 return human.root;

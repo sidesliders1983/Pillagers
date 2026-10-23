@@ -40,6 +40,7 @@ import { dressingHomes } from './SettlementDressing';
 import { SettlementDressingLayer } from './SettlementDressingLayer';
 import { ResidentPortraitStudio } from '../characters/ResidentPortraitStudio';
 import type { PortraitRequest } from '../characters/CharacterPortraits';
+import type { PlaytestPerformance } from './PlaytestPerformance';
 
 export interface FjordSceneHost {
     readonly tickIntervalSeconds: number;
@@ -51,6 +52,7 @@ export interface FjordSceneHost {
 
 /** Owns the active Three.js presentation; the host retains campaign commands and clock intent. */
 export function createFjordScene(options: {
+    diagnostics?: PlaytestPerformance;
     shared: SharedSettlement;
     canvas: HTMLCanvasElement;
     labels: { selection: SelectionLabels; production: ProductionLabels };
@@ -58,6 +60,9 @@ export function createFjordScene(options: {
     restoredCamera?: { position: number[]; target: number[] };
 }) {
     const { shared, canvas, labels, host } = options;
+    const diagnostics = options.diagnostics;
+    const sceneWorkMeasured = <T>(operation: () => Promise<T>) => diagnostics
+        ? diagnostics.operation('scene', operation) : operation();
     const session = shared.session, campaign = shared.fjord;
     const selectionLabels = labels.selection, productionLabels = labels.production;
     const query = new URLSearchParams(location.search);
@@ -104,7 +109,8 @@ export function createFjordScene(options: {
     const renderer = createRenderer(canvas);
     const constructionGpu = new ConstructionGpuPreparation();
     renderer.localClippingEnabled = true;
-    const portraits = new ResidentPortraitStudio(renderer);
+    const portraits = new ResidentPortraitStudio(renderer, undefined, undefined,
+        operation => diagnostics ? diagnostics.draw(renderer, 'portrait', operation) : operation());
     renderer.setPixelRatio(resolvePresentationQuality(
         document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as PresentationQuality,
         document.querySelector<HTMLSelectElement>('#fjord-effects')!.value as EffectQuality,
@@ -340,9 +346,11 @@ export function createFjordScene(options: {
             assets.dispose();
             return;
         }
-        const preparation = host.loading?.diagnosticRun ?
-            (sample: import('../characters/CharacterPreparation').CharacterPreparationSample) =>
-                host.loading?.diagnosticRun?.character(sample) : undefined;
+        const preparation = host.loading?.diagnosticRun || diagnostics ? Object.assign(
+            (sample: import('../characters/CharacterPreparation').CharacterPreparationSample) => {
+                host.loading?.diagnosticRun?.character(sample);
+                diagnostics?.span(sample.mode === 'synchronous' ? 'modelCpu' : 'modelWall', sample.durationMs);
+            }, { enabled: () => !!host.loading?.diagnosticRun || !!diagnostics?.enabled }) : undefined;
         models = new FjordModels(assets, preparation, decorateMaterials);
         layer = new FjordEntities(models, decorateMaterials, warmHomes ? assets.homeLightMaps : undefined);
         scene.add(layer.root);
@@ -609,6 +617,10 @@ export function createFjordScene(options: {
         selectionLabels.setAnchors(layer!.root.userData.markers ?? []);
         productionLabels.setAnchors(layer!.productionAnchors());
         if (performance.now() - lastDiagnostics > 500) {
+            if (diagnostics?.enabled) diagnostics.context({ ...layer!.performanceCounts(),
+                renderedWildlife: wildlife?.renderedCount(),
+                quality: document.querySelector<HTMLSelectElement>('#fjord-quality')!.value,
+                effects: document.querySelector<HTMLSelectElement>('#fjord-effects')!.value });
             canvas.dataset.rendered = JSON.stringify(layer!.describe());
             canvas.dataset.dyingLivestock = JSON.stringify(layer!.describeDeaths());
             canvas.dataset.construction = JSON.stringify(layer!.inspectConstruction());
@@ -658,7 +670,8 @@ export function createFjordScene(options: {
         atmosphere?.update(lighting!, camera);
         world!.update(time, lighting, camera);
         discoveryFog?.update(delta);
-        renderer.render(scene, camera);
+        if (diagnostics) diagnostics.draw(renderer, 'main', () => renderer.render(scene, camera));
+        else renderer.render(scene, camera);
         lastFrameMs = performance.now() - frameStarted;
     };
 
@@ -732,6 +745,7 @@ export function createFjordScene(options: {
         worldRevision++;
         bindings.abort();
         renderer.setAnimationLoop(null);
+        diagnostics?.releaseGpu();
         observer?.disconnect();
         controller.dispose();
         islandMap.dispose();
@@ -763,12 +777,15 @@ export function createFjordScene(options: {
     };
     return {
         root: scene, camera, renderer, controller,
-        initialize: () => inactive() ? Promise.resolve() : track(initialize()),
-        replace: () => inactive() ? Promise.resolve() : track(rebuildWorld()),
-        sync: () => inactive() ? Promise.resolve() : track(syncScene?.() ?? Promise.resolve()),
+        initialize: () => inactive() ? Promise.resolve() : track(sceneWorkMeasured(initialize)),
+        replace: () => inactive() ? Promise.resolve() : track(sceneWorkMeasured(rebuildWorld)),
+        sync: () => inactive() ? Promise.resolve() : track(sceneWorkMeasured(() => syncScene?.() ?? Promise.resolve())),
         frame, prepareGpu, arrive, dispose, highlight,
-        portrait: (input: PortraitRequest) => inactive() || renderer.getContext().isContextLost()
-            ? Promise.resolve(undefined) : portraits.render(input, layer?.residentForPortrait(input)),
+        portrait: (input: PortraitRequest) => {
+            if (inactive() || renderer.getContext().isContextLost()) return Promise.resolve(undefined);
+            const capture = () => portraits.render(input, layer?.residentForPortrait(input));
+            return diagnostics ? diagnostics.operation('portrait', capture) : capture();
+        },
         resetFrameTime: () => {
             clock.start();
             lighting?.finishSeasonTransition();

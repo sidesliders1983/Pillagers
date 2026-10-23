@@ -32,6 +32,7 @@ export function fjordHeaderHTML(): string {
                         <option value="low"${defaultPresentationPreferences.effects === 'low' ? ' selected' : ''}>Low</option><option value="normal"${defaultPresentationPreferences.effects === 'normal' ? ' selected' : ''}>Normal</option></select></label>
                     <small>Snow, rain and fire particles. Visual quality only; burning still uses fuel. Reduced motion disables particles.</small>
                     <span id="screen-awake-slot"></span>
+                    <span id="fjord-performance-setting"></span>
                     <details><summary>Camera views &amp; controls</summary>
                         <button id="fjord-view-home" type="button">View settlement</button><button id="fjord-view-summit" type="button">View highlands</button>
                         <p>Touch: drag to orbit, pinch to zoom, tap open ground to centre the camera. Mouse: left drag to pan, right drag to rotate, wheel to zoom. Select residents, homes and livestock in the world or through Settlement.</p>

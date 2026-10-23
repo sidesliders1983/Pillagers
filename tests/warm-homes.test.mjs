@@ -35,8 +35,10 @@ test('UV binding gates whole triangles so filtering cannot illuminate adjacent a
     result.dispose(); source.dispose();
 });
 
-test('accepted Northern Light and home glow are defaults while explicit comparisons remain available', () => {
-    assert.deepEqual(fjordLighting(new URLSearchParams()), { northern: true, unified: false, warmHomes: true });
+test('accepted Northern Light, unified sunlight and home glow are defaults while explicit comparisons remain available', () => {
+    assert.deepEqual(fjordLighting(new URLSearchParams()), { northern: true, unified: true, warmHomes: true });
+    assert.equal(fjordLighting(new URLSearchParams('lighting=northern-v1')).unified, true);
+    assert.equal(fjordLighting(new URLSearchParams('sunlight=northern-v1')).unified, false);
     assert.equal(fjordLighting(new URLSearchParams('lighting=baseline')).northern, false);
     assert.equal(fjordLighting(new URLSearchParams('sunlight=unified-v1')).northern, true);
     assert.equal(fjordLighting(new URLSearchParams('homes=warm-v1')).warmHomes, true);

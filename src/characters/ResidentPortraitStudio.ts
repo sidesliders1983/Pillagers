@@ -75,7 +75,8 @@ export class ResidentPortraitStudio {
         private encode: (pixels: Uint8Array, size: number) => string = png,
         private create: (input: PortraitRequest) => Promise<MeshyHuman> = input =>
             meshyHumanFactory.create(input.dna, worldResidentDetail.lod, input.profile,
-                input.presentation, input.face)) {
+                input.presentation, input.face),
+        private draw: (operation: () => void) => void = operation => operation()) {
         this.scene.background = new Color('#243e45');
         this.scene.add(new HemisphereLight(0xe1edff, 0x5c5547, 2.2),
             this.key, this.rim, this.key.target, this.rim.target);
@@ -150,10 +151,12 @@ export class ResidentPortraitStudio {
             // setRenderTarget uses its physical viewport. setViewport would
             // multiply that size by the world's DPR a second time on mobile.
             renderer.setScissorTest(false);
-            renderer.render(this.scene, this.camera);
-            // Three intentionally skips display tone mapping on ordinary render
-            // targets. Its standard output pass applies ACES and sRGB once.
-            this.outputPass.render(renderer, this.output!, this.target, 0, false);
+            this.draw(() => {
+                renderer.render(this.scene, this.camera);
+                // Three intentionally skips display tone mapping on ordinary render
+                // targets. Its standard output pass applies ACES and sRGB once.
+                this.outputPass.render(renderer, this.output!, this.target!, 0, false);
+            });
             renderer.readRenderTargetPixels(this.output!, 0, 0, size, size, this.pixels);
             const stride = size * 4;
             for (let row = 0; row < size; row++)
