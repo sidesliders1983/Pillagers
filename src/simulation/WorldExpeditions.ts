@@ -1,3 +1,5 @@
+import { pillageEquipment, equipmentResult, releaseEquipment, validatePillageEquipment,
+    type PillageEquipment, type EquipmentResult } from './Smithery';
 import { validateIslandClans, type IslandClanLink } from './IslandClans';
 import { spatialGroupMission } from './SpatialExpeditions';
 import type { SpatialExpeditions } from './SpatialExpeditions';
@@ -25,8 +27,8 @@ export type Cargo='Food'|'Materials'|'Cattle'|'People';
 export type ExpeditionConfig={durations:Record<MissionType,number>;provisions:Record<MissionType,number>;successBps:Record<MissionType,number>;casualtyBps:Record<MissionType,number>;foodCapacity:number;materialsCapacity:number};
 export const defaultExpeditionConfig:ExpeditionConfig={durations:{Recon:250,Surveillance:400,Pillage:500},provisions:{Recon:2,Surveillance:4,Pillage:5},successBps:{Recon:8000,Surveillance:9000,Pillage:6000},casualtyBps:{Recon:200,Surveillance:300,Pillage:1000},foodCapacity:10,materialsCapacity:5};
 export type ExpeditionGroup={exploration?:true;id:string;name:string;memberIds:string[]};
-export type ExpeditionResult={success:boolean;discovery:Knowledge|null;casualtyIds:string[];survivorIds:string[];food:number;materials:number;cattleIds:string[];personaIds:string[];summary:string};
-export type ExpeditionMission={id:string;groupId:string;groupName:string;regionId:string;type:MissionType;memberIds:string[];memberNames:string[];priorities:Cargo[];shipId:string|null;departedAt:number;returnsAt:number;foodCost:number;successBps:number;casualtyBps:number;status:'Away'|'Returned';returnedAt:number|null;result:ExpeditionResult|null};
+export type ExpeditionResult={success:boolean;discovery:Knowledge|null;casualtyIds:string[];survivorIds:string[];food:number;materials:number;cattleIds:string[];personaIds:string[];summary:string;equipment?:EquipmentResult};
+export type ExpeditionMission={id:string;groupId:string;groupName:string;regionId:string;type:MissionType;memberIds:string[];memberNames:string[];priorities:Cargo[];shipId:string|null;departedAt:number;returnsAt:number;foodCost:number;successBps:number;casualtyBps:number;status:'Away'|'Returned';returnedAt:number|null;result:ExpeditionResult|null;equipment?:PillageEquipment};
 export type ExpeditionCommand={type:'CreateExpeditionGroup';name:string;memberIds:string[]}|{type:'EditExpeditionGroup';groupId:string;name:string;memberIds:string[]}|{type:'DispatchExpedition';groupId:string;regionId:string;mission:MissionType;priorities?:Cargo[]};
 export type WorldState = {
  version: 1 | 2;
@@ -77,6 +79,9 @@ export function validateWorld(state:SimulationState,validateTarget:(target:Simul
  for(const [id,g] of Object.entries(w.groups)){if(g.id!==id||!g.name?.trim()||g.name.length>60||!Array.isArray(g.memberIds)||!g.memberIds.length&&g.exploration!==true)fail();for(const member of g.memberIds){if(!state.personas[member]||grouped.has(member))fail();grouped.add(member);}}
  for(const [id,m] of Object.entries(w.missions)){
   if(m.id!==id||typeof m.groupName!=='string'||!m.groupName.trim()||!w.groups[m.groupId]||!w.regions[m.regionId]||!missionTypes.includes(m.type)||!['Away','Returned'].includes(m.status)||!Array.isArray(m.memberIds)||!m.memberIds.length||new Set(m.memberIds).size!==m.memberIds.length||m.memberIds.some(id=>!state.personas[id])||!Array.isArray(m.memberNames)||m.memberNames.length!==m.memberIds.length||!Array.isArray(m.priorities)||new Set(m.priorities).size!==m.priorities.length||m.priorities.some(p=>!['Food','Materials','Cattle','People'].includes(p)))fail();
+  if(m.result?.equipment && !m.equipment)fail();
+  if(m.equipment && m.type!=='Pillage')fail();
+  validatePillageEquipment(m.equipment,m.memberIds,m.successBps,m.casualtyBps);
   uint(m.departedAt,absoluteTick(state));uint(m.returnsAt);uint(m.foodCost);uint(m.successBps,10000);uint(m.casualtyBps,10000);if(m.returnsAt<=m.departedAt)fail();
   if(m.shipId!==null&&!state.landing?.longships[m.shipId])fail();
   if(m.status==='Away'){
@@ -106,7 +111,9 @@ export function missionOffer(state:SimulationState,groupId:string,regionId:strin
  const weather=weatherProfile(state),duration=Math.ceil(w.config.durations[type]*weather.travelDurationBps/10000);
  const perMember=Math.ceil(w.config.provisions[type]*duration/w.config.durations[type]);
  const foodCost=perMember*g.memberIds.length;if(state.stocks.food<foodCost)throw new Error(`Expedition needs ${foodCost} Food`);
- return {duration,foodCost,foodPerMember:perMember,successBps:w.config.successBps[type],casualtyBps:Math.min(10000,w.config.casualtyBps[type]+weather.travelRiskBps),shipId:ship?.id??null};
+ const casualtyBps=Math.min(10000,w.config.casualtyBps[type]+weather.travelRiskBps);
+ const equipment=type==='Pillage'?pillageEquipment(state,g.memberIds,w.config.successBps[type],casualtyBps):undefined;
+ return {duration,foodCost,foodPerMember:perMember,successBps:equipment?.successBps??w.config.successBps[type],casualtyBps,shipId:ship?.id??null,...(equipment?{equipment}:{})};
 }
 function record(state:SimulationState,type:string,details:Record<string,unknown>,personaId?:string){state.events.push({id:`event-${state.events.length+1}`,time:{...state.time},type,...(personaId?{personaId}:{}),details:eventFacts(state,details,personaId)});}
 export function applyExpeditionCommand(state:SimulationState,command:ExpeditionCommand):void {
@@ -114,7 +121,7 @@ export function applyExpeditionCommand(state:SimulationState,command:ExpeditionC
  if(command.type==='DispatchExpedition'){
   const offer=missionOffer(state,command.groupId,command.regionId,command.mission,command.priorities),g=w.groups[command.groupId],id=`mission-${Object.keys(w.missions).length+1}`;
   state.stocks.food-=offer.foodCost;
-  w.missions[id]={id,groupId:g.id,groupName:g.name,regionId:command.regionId,type:command.mission,memberIds:[...g.memberIds],memberNames:g.memberIds.map(id=>state.personas[id].name),priorities:[...(command.priorities??[])],shipId:offer.shipId,departedAt:absoluteTick(state),returnsAt:absoluteTick(state)+offer.duration,foodCost:offer.foodCost,successBps:offer.successBps,casualtyBps:offer.casualtyBps,status:'Away',returnedAt:null,result:null};
+  w.missions[id]={id,groupId:g.id,groupName:g.name,regionId:command.regionId,type:command.mission,memberIds:[...g.memberIds],memberNames:g.memberIds.map(id=>state.personas[id].name),priorities:[...(command.priorities??[])],shipId:offer.shipId,departedAt:absoluteTick(state),returnsAt:absoluteTick(state)+offer.duration,foodCost:offer.foodCost,successBps:offer.successBps,casualtyBps:offer.casualtyBps,...(offer.equipment?{equipment:offer.equipment}:{}),status:'Away',returnedAt:null,result:null};
   record(state,'ExpeditionDeparted',{missionId:id,groupName:g.name,regionId:command.regionId,mission:command.mission,participants:[...g.memberIds],...offer});return;
  }
  const existing=command.type==='EditExpeditionGroup'?w.groups[command.groupId]:undefined;
@@ -133,23 +140,25 @@ export function stepWorld(state:SimulationState):void {
  const w=state.world;if(!w)return;
  for(const target of Object.values(w.targetClans))stepMechanicsTick(target);
  for(const m of Object.values(w.missions).filter(m=>m.status==='Away'&&m.returnsAt<=absoluteTick(state))){
-  const {live,success}=resolveExpeditionCrew(state,m);
+  const {live,success,equipment}=resolveExpeditionCrew(state,m);
   const discovery=success&&m.type!=='Pillage'?discover(state,w.regions[m.regionId],m.type==='Surveillance'?'Surveyed':w.knowledge[m.regionId]?.level??'Scouted'):null;
   if(discovery)w.knowledge[m.regionId]=discovery;
   const loot=success&&m.type==='Pillage'?recoverExpeditionCargo(state,m,live,w.regions[m.regionId].targetClanId):{food:0,materials:0,cattleIds:[],personaIds:[]};
-  m.status='Returned';m.returnedAt=absoluteTick(state);m.result={success,discovery,casualtyIds:m.memberIds.filter(id=>!live.includes(id)),survivorIds:live,...loot,summary:success?m.type==='Pillage'&&!loot.food&&!loot.materials&&!loot.cattleIds.length&&!loot.personaIds.length?'Raid succeeded but no available assets were recovered.':'Mission completed.':'Mission failed; no discoveries or recovered assets.'};
+  m.status='Returned';m.returnedAt=absoluteTick(state);m.result={success,discovery,casualtyIds:m.memberIds.filter(id=>!live.includes(id)),survivorIds:live,...loot,...(equipment?{equipment}:{}),summary:success?m.type==='Pillage'&&!loot.food&&!loot.materials&&!loot.cattleIds.length&&!loot.personaIds.length?'Raid succeeded but no available assets were recovered.':'Mission completed.':'Mission failed; no discoveries or recovered assets.'};
   record(state,'ExpeditionReturned',{missionId:m.id,groupName:m.groupName,mission:m.type,regionId:m.regionId,participants:[...m.memberIds],...m.result});
  }
 }
 
 /** Both mission adapters use the same mortality order, risk and RNG stream. */
-export function resolveExpeditionCrew(state:SimulationState,m:Pick<ExpeditionMission,'id'|'memberIds'|'casualtyBps'|'successBps'>){
+export function resolveExpeditionCrew(state:SimulationState,m:Pick<ExpeditionMission,'id'|'memberIds'|'casualtyBps'|'successBps'|'equipment'>){
  const previousFarmyards=farmyards(state).map(f=>f.id);
- const casualties=new Set(m.memberIds.filter(id=>state.personas[id]?.deathWinter===null&&chance(state,m.casualtyBps)));
- resolveMortality(state,()=>true,(type,id,details)=>record(state,type,{...details,cause:'Expedition',missionId:m.id,mortalityRiskBps:m.casualtyBps},id),casualties);
+ validatePillageEquipment(m.equipment,m.memberIds,m.successBps,m.casualtyBps);
+ const risk=(id:string)=>m.equipment?.members.find(member=>member.personaId===id)?.casualtyBps??m.casualtyBps;
+ const casualties=new Set(m.memberIds.filter(id=>state.personas[id]?.deathWinter===null&&chance(state,risk(id))));
+ resolveMortality(state,()=>true,(type,id,details)=>record(state,type,{...details,cause:'Expedition',missionId:m.id,mortalityRiskBps:risk(id!)},id),casualties);
  reconcileFarmyards(state,previousFarmyards);
  const live=m.memberIds.filter(id=>state.personas[id]?.deathWinter===null);
- return {live,success:live.length>0&&chance(state,m.successBps)};
+ return {live,success:live.length>0&&chance(state,m.successBps),equipment:equipmentResult(m.equipment,live)};
 }
 export function expeditionCargoMultiplier(state: SimulationState, shipId?: string | null) {
  const ship = shipId ? state.landing?.longships[shipId] : undefined;
@@ -203,6 +212,7 @@ export function namespaceTarget(target:SimulationState,clanId:string):Simulation
 function transferPersona(source:SimulationState,destination:SimulationState,id:string,missionId:string):void {
  const p=source.personas[id],info=source.mechanics!.people[id],formerPartnerId=p.partnerId;
  const previousFarmyards=farmyards(source).map(f=>f.id);
+ releaseEquipment(source,id,'transfer');
  source.personaArchive??={};source.personaArchive[id]=historicalSnapshot(p,source);
  destination.personaArchive??={};const seen=new Set<string>();
  const archiveParents=(parentId:string)=>{if(seen.has(parentId)||destination.personas[parentId])return;seen.add(parentId);const parent=source.personas[parentId]??source.personaArchive?.[parentId];if(parent){destination.personaArchive![parentId]=historicalSnapshot(parent,source);parent.parentIds.forEach(archiveParents);}};

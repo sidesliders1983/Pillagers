@@ -48,6 +48,17 @@ const animalAssigned: Template = (event, details) => {
 };
 /** Registry contains only supported recorded facts; unknown types stay in Raw Events. */
 const templates:Record<string,Template>={
+    EquipmentCrafted: (_e, d) => str(d, 'creatorName') && str(d, 'itemName') &&
+        number(d, 'materials') !== null && number(d, 'hides') !== null ?
+        `${d.creatorName} made ${d.units} ${d.itemName} using ${d.materials} Materials${d.hides ? ` and ${d.hides} Hides` : ''}.` : null,
+    EquipmentAssigned: (_e, d) => str(d, 'name') && str(d, 'slot') && str(d, 'itemName') ?
+        `${d.name} changed their ${d.slot}: ${d.itemName}.` : null,
+    EquipmentLost: (_e, d) => str(d, 'name') && ids(d, 'itemNames') ?
+        `${d.name}'s carried equipment was lost: ${ids(d, 'itemNames')!.join(', ')}.` : null,
+    EquipmentRecovered: (_e, d) => str(d, 'name') && ids(d, 'itemNames') ?
+        `Clan storage recovered equipment assigned to ${d.name}: ${ids(d, 'itemNames')!.join(', ')} (${d.reason}).` : null,
+    EquipmentTargetSet: (_e, d) => str(d, 'itemName') && number(d, 'target') !== null ?
+        `The clan set its ${d.itemName} stock target to ${d.target}.` : null,
     ResidentQuarrelled: (event, details) => {
         const participants = ids(details, 'participants');
         return participants?.length === 2 && str(details, 'incidentId') ?

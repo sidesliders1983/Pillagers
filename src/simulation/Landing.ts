@@ -13,6 +13,7 @@ import {seededRandom} from '../characters/seededRandom';
 import { validateLivestockRules, validateAnimalSpecies, animalSpecies } from './LivestockSpecies';
 import type { LivestockSpecies, LivestockRules } from './LivestockSpecies';
 import { initializeFoundingLivestock } from './FoundingLivestock';
+import { initializeSmithery } from './Smithery';
 import { creditHides, slaughterHides } from './SpecialistStocks';
 
 export type LandingConfig = {initialFood:number;initialMaterials:number;longshipSalvage:number;cattleAdultAge:number;cattleYoungAdultAge:number;adultCattleFood:number;calfFood:number;cowFoodPerWinter:number;exposedProductivityBps:number;farmyardCapacity:number;slaughterFood:number;foundingCoupleChanceBps:number;foundingCoupleCap:number;cattleBirthChanceBps:number;cattleFertileMinAge:number;cattleFertileMaxAge:number;cattleBirthInterval:number;cattleMortalityYoungBps:number;cattleMortalityAdultBps:number;cattleMortalityOlderBps:number;cattleMortalityOldBps:number;cattleCrowdingBps:number;cattleWeatherMortalityBps:number;};
@@ -53,6 +54,7 @@ export function createCampaign(seed:number, overrides:Partial<LandingConfig>={},
     }
     initializeBirthdayCalendar(state, calendarMode);
     state.mechanics=initializeMechanics(state,mechanicsOverrides);
+    state.smithery = initializeSmithery();
     state.landing={version:3,livestock:{version:1,profiles:{}},config,region:{id:'landing-region',settledByClanId:null},founderIds:Object.keys(state.personas),longships:{'founding-longship':{id:'founding-longship',acquiredWinter:800,salvagedWinter:null}},cattle:{}};
     initializeFoundingLivestock(state, livestock);
     state.events.push({id:'event-1',time:{...state.time},type:'FoundingPartyLanded',details:eventFacts(state,{regionId:'landing-region',founderIds:[...state.landing.founderIds],longshipIds:['founding-longship'],cattleIds:Object.keys(state.landing.cattle),stocks:{...state.stocks}})});

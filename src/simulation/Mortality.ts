@@ -1,3 +1,4 @@
+import { releaseEquipment } from './Smithery';
 import { careActive, careEndpoint, endCare } from './CareCalendar';
 import {personaAway} from './WorldExpeditions';
 import {personaWeatherExposure,permanentlySheltered,weatherFacts} from './Weather';
@@ -35,6 +36,7 @@ export function resolveMortality(state:SimulationState,roll:(bps:number)=>boolea
             home.memberIds=home.memberIds.filter(id=>id!==person.id);
             if(home.memberIds.length===0)home.residenceId=null;
         }
+        releaseEquipment(state, person.id, 'death');
         emit('PersonaDied',person.id,{...death,participants:[person.id],name:person.name});
     }
     if(deaths.length){

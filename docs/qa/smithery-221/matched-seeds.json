@@ -1,0 +1,239 @@
+{
+  "issue": 221,
+  "protocol": "Matched seeds 1..10000; same four named adults, same current shared resolver; no weather, 60% base success, 10% base individual casualty risk.",
+  "status": "Owner-approved balance proposal, 2026-10-23; no merge or deployment implied.",
+  "rules": {
+    "recipes": {
+      "woodenSpear": {
+        "materials": 2,
+        "hides": 0,
+        "unitsPerWinter": 4
+      },
+      "woodenShield": {
+        "materials": 3,
+        "hides": 0,
+        "unitsPerWinter": 4
+      },
+      "leatherShield": {
+        "materials": 3,
+        "hides": 1,
+        "unitsPerWinter": 2
+      }
+    },
+    "maximumTarget": 20,
+    "spearBonusBps": 1000,
+    "woodenShieldProtectionBps": 2500,
+    "leatherShieldProtectionBps": 4000
+  },
+  "production": "At 100% effective productivity, ordinary 1000-tick Winters and workPerUnit=10000000: 4 spears or wooden shields/Winter; 2 leather shields/Winter. DNA, tent, care, age, career-switch and specialization modifiers still apply.",
+  "results": [
+    {
+      "name": "none",
+      "samples": 10000,
+      "snapshot": {
+        "version": 1,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "successBps": 6000,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          },
+          {
+            "personaId": "founder-3",
+            "name": "Dervla",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          },
+          {
+            "personaId": "founder-4",
+            "name": "Áilu",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "successPercent": 60,
+      "casualtiesPerHundredMembers": 10.0625,
+      "deathsByMember": [
+        1032,
+        1000,
+        1001,
+        992
+      ],
+      "lostItems": 0
+    },
+    {
+      "name": "partial",
+      "samples": 10000,
+      "snapshot": {
+        "version": 1,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "successBps": 6500,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "woodenSpear",
+            "shield": "woodenShield",
+            "casualtyBps": 750
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": "leatherShield",
+            "casualtyBps": 600
+          },
+          {
+            "personaId": "founder-3",
+            "name": "Dervla",
+            "weapon": "woodenSpear",
+            "shield": null,
+            "casualtyBps": 1000
+          },
+          {
+            "personaId": "founder-4",
+            "name": "Áilu",
+            "weapon": null,
+            "shield": "woodenShield",
+            "casualtyBps": 750
+          }
+        ]
+      },
+      "successPercent": 65.01,
+      "casualtiesPerHundredMembers": 7.7975,
+      "deathsByMember": [
+        773,
+        595,
+        1001,
+        750
+      ],
+      "lostItems": 3892
+    },
+    {
+      "name": "fullWood",
+      "samples": 10000,
+      "snapshot": {
+        "version": 1,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "successBps": 7000,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "woodenSpear",
+            "shield": "woodenShield",
+            "casualtyBps": 750
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": "woodenSpear",
+            "shield": "woodenShield",
+            "casualtyBps": 750
+          },
+          {
+            "personaId": "founder-3",
+            "name": "Dervla",
+            "weapon": "woodenSpear",
+            "shield": "woodenShield",
+            "casualtyBps": 750
+          },
+          {
+            "personaId": "founder-4",
+            "name": "Áilu",
+            "weapon": "woodenSpear",
+            "shield": "woodenShield",
+            "casualtyBps": 750
+          }
+        ]
+      },
+      "successPercent": 69.98,
+      "casualtiesPerHundredMembers": 7.5525,
+      "deathsByMember": [
+        773,
+        747,
+        751,
+        750
+      ],
+      "lostItems": 6042
+    },
+    {
+      "name": "fullLeather",
+      "samples": 10000,
+      "snapshot": {
+        "version": 1,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "successBps": 7000,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "woodenSpear",
+            "shield": "leatherShield",
+            "casualtyBps": 600
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": "woodenSpear",
+            "shield": "leatherShield",
+            "casualtyBps": 600
+          },
+          {
+            "personaId": "founder-3",
+            "name": "Dervla",
+            "weapon": "woodenSpear",
+            "shield": "leatherShield",
+            "casualtyBps": 600
+          },
+          {
+            "personaId": "founder-4",
+            "name": "Áilu",
+            "weapon": "woodenSpear",
+            "shield": "leatherShield",
+            "casualtyBps": 600
+          }
+        ]
+      },
+      "successPercent": 69.99,
+      "casualtiesPerHundredMembers": 6.01,
+      "deathsByMember": [
+        618,
+        595,
+        601,
+        590
+      ],
+      "lostItems": 4808
+    }
+  ]
+}

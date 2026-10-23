@@ -53,3 +53,7 @@ Player-initiated raids come first. CPU reconnaissance/raids and defenses are a l
 ## Physical Pillage adapter (#150)
 
 [Spatial missions v0.4D](../../ISLAND-MISSIONS-V04D.md) connects the existing Pillage rules to the single saved island rival. A group must return from Explore and leave home on a separate confirmed mission. Normal cost is 5 Food per member for 500 ticks, adjusted by existing weather. The real land round trip must fit that duration. A dated Recon opportunity is required; Surveillance remains optional and is only available after a CPU clan has been identified. The existing one-category-per-survivor limits, actual target debits, mortality and identity transfers remain in force. CPU raids and tactical combat are not introduced.
+
+## RAID-004 — Personal Weapon and Shield (#221)
+
+New Pillage dispatches snapshot actual named gear. Spears add at most 10 percentage points to the unchanged 60% baseline according to the equipped share; wooden/leather shields reduce only their own wearer's casualty probability by 25%/40% respectively. Surviving owners retain gear; away deaths lose it permanently. Recon, Surveillance, Food costs and historical unsnapshotted missions retain their rules. See [Smithery v0.1](../SMITHERY-V01.md) for the owner-approved calibration, save and transfer contracts.
