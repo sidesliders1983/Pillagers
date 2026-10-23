@@ -48,3 +48,7 @@ Expeditions contains the reused group selector, **Recon mapped area**, and known
 Known places explains why the selected group cannot depart: an away group must return first, or the player can choose another eligible group at home. **Return group home** is available beside that explanation for an active trip. Returning groups show a homecoming reminder. Sighted settlements explain that Surveillance and Pillage require a successful Recon to return home; disabled actions retain the reason in their title.
 
 Validation and measurements are recorded in [the QA report](qa/island-missions/report.md). Browser touch emulation is not a physical iPad test.
+
+## Personal equipment (#221)
+
+The table above remains the unequipped baseline. Current Smithery-enabled Pillage adds a dispatch-time personal Weapon/Shield snapshot through the same shared resolver. Actual spear holders can raise the base 60% to at most 70%; each wooden/leather shield applies 25%/40% protection only to its wearer's existing casualty risk. Per-person probabilities and returned/lost gear are visible in mission preparation/reports. Historical unsnapshotted missions and other mission types are unchanged. See [Smithery v0.1](gameplay/SMITHERY-V01.md).

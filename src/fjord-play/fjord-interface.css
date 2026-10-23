@@ -336,3 +336,21 @@ body.fjord-play {
 }
 #island-mission-dialog::backdrop { background: #07101399; }
 #island-mission-dialog button { min-height: 44px; margin: 4px; }
+
+.fjord-smithery-products { display: grid; gap: 12px; }
+.fjord-smithery-products article {
+    padding: 12px;
+    border: 1px solid var(--fjord-border, #6c8064);
+    border-radius: 8px;
+}
+.fjord-smithery-products h3 { margin: 0 0 8px; font-size: 1rem; }
+.fjord-smithery-products label { display: grid; grid-template-columns: 1fr 90px; align-items: center; gap: 12px; }
+.fjord-smithery-products input { box-sizing: border-box; width: 100%; min-height: 44px; }
+.fjord-raider-equipment { margin-block: 16px; }
+.fjord-equipment-person { margin-block: 12px; min-width: 0; }
+.fjord-equipment-slots { display: grid; gap: 8px; }
+.fjord-equipment-slots label { display: grid !important; gap: 4px; min-width: 0; }
+.fjord-equipment-slots select { width: 100%; min-height: 44px; }
+@media (min-width: 600px) {
+    .fjord-equipment-slots { grid-template-columns: 1fr 1fr; }
+}

@@ -366,3 +366,37 @@ test('loading an old layout reserves the new middle place and occupied-center im
     wrongIdentity.layout.geographyId = 'other-geography';
     assert.throws(() => campaign.importJSON(JSON.stringify(wrongIdentity)), /identit|match/i);
 });
+
+test('Smith specialization selects supplied houses, preserves real farmyards and falls back at later upgrades', () => {
+    const { createFjordLayout, projectFjordSettlement } = load('../src/fjord-play/FjordProjection.ts');
+    let state = core.createCampaign(32, { initialMaterials: 1000, foundingCoupleChanceBps: 0 });
+    const world = generateWorld({ seed: 32 });
+    state = core.applyCommand(state, { type: 'AssignOccupation', personaId: 'founder-1', occupation: 'smith' });
+    state = core.applyCommand(state, { type: 'BuildHouse', householdId: 'founder-1' });
+    let view = projectFjordSettlement(state, world, createFjordLayout(world));
+    const home = () => view.entities.find(entity => entity.kind === 'building' && entity.id === 'house-1');
+    assert.equal(home().asset, 'hut', 'Occupation does not silently specialize a house');
+    const position = { x: home().transform.x, z: home().transform.z };
+    state = core.applyCommand(state, { type: 'SpecializeBuilding', buildingId: 'house-1', occupation: 'smith' });
+    for (const [level, asset] of ['smithHut', 'smithHomestead', 'longhouse', 'greatHall'].entries()) {
+        if (level) state = core.applyCommand(state, { type: 'UpgradeBuilding', buildingId: 'house-1' });
+        const saved = core.serializeState(state);
+        view = projectFjordSettlement(state, world, view.layout);
+        assert.equal(home().asset, asset);
+        assert.equal(home().status.level, level);
+        assert.deepEqual({ x: home().transform.x, z: home().transform.z }, position);
+        assert.equal(core.serializeState(state), saved, 'Presentation does not change gameplay');
+    }
+    // A farmer can share a specialized Smith home without losing the canonical farmyard.
+    let farm = core.createCampaign(32, { initialMaterials: 1000, foundingCoupleChanceBps: 0 });
+    farm = core.applyCommand(farm, { type: 'AssignOccupation', personaId: 'founder-1', occupation: 'farmer' });
+    farm = core.applyCommand(farm, { type: 'BuildHouse', householdId: 'founder-1' });
+    farm = core.applyCommand(farm, { type: 'SpecializeBuilding', buildingId: 'house-1', occupation: 'smith' });
+    view = projectFjordSettlement(farm, world, createFjordLayout(world));
+    assert.equal(home().asset, 'smithHut');
+    assert.equal(home().status.farmyard, true);
+    assert.equal(home().terrainAsset, 'farmHutTerrain');
+    farm = core.applyCommand(farm, { type: 'SpecializeBuilding', buildingId: 'house-1', occupation: null });
+    view = projectFjordSettlement(farm, world, view.layout);
+    assert.equal(home().asset, 'farmHut');
+});

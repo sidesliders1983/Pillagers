@@ -1,3 +1,4 @@
+import { craftingOccupation, craftingOffer, stepSmitheryWork } from './Smithery';
 import { careActive } from './CareCalendar';
 import { resolveScheduledBirths } from './ScheduledBirths';
 import { stepCampfire } from './Campfire';
@@ -79,7 +80,8 @@ export function occupationAptitude(state:SimulationState,id:string,role:Occupati
 export function inspectWork(state:SimulationState,id:string) {
     const person=state.personas[id];if(!person||!state.mechanics)throw new Error('Gameplay persona required');
     const config=state.mechanics.config,role=person.occupation;
-    const reason=person.deathWinter!==null?'deceased':personaAway(state,id)?'expedition':isProvidingCare(state,id)?'childcare':personaAge(state,id)<config.workAge?'underage':role===null?'unassigned':config.occupations[role].resource===null?'inactive-role':null;
+    const craft = craftingOffer(state, role);
+    const reason=person.deathWinter!==null?'deceased':personaAway(state,id)?'expedition':isProvidingCare(state,id)?'childcare':personaAge(state,id)<config.workAge?'underage':role===null?'unassigned':config.occupations[role].resource===null?craft.reason:null;
     if(role===null)return {aptitudeBps:0,productivityBps:0,unitsPerWinter:0,resource:null,progress:0,reason};
     const job=config.occupations[role];
         let efficiency=aptitude(person.dna.traits,job);
@@ -97,7 +99,7 @@ export function inspectWork(state:SimulationState,id:string) {
 
     if(job.resource==='food')efficiency=Math.floor(efficiency*weatherProfile(state).foodProductionBps/10000);
     if(job.resource==='materials')efficiency=Math.floor(efficiency*(weatherProfile(state).materialsProductionBps??10000)/10000);
-    return {aptitudeBps:aptitude(person.dna.traits,job),productivityBps:reason===null?efficiency:0,unitsPerWinter:job.unitsPerWinter,resource:job.resource,progress:person.workProgress/config.workPerUnit,reason};
+    return {aptitudeBps:aptitude(person.dna.traits,job),productivityBps:reason===null?efficiency:0,unitsPerWinter:job.resource===null?craft.unitsPerWinter:job.unitsPerWinter,resource:job.resource,progress:person.workProgress/config.workPerUnit,reason};
 }
 export function inspectBuilding(state:SimulationState,id:string) {
     const building=state.buildings[id],info=state.mechanics?.buildings[id];if(!building||!info)throw new Error('Unknown gameplay building');
@@ -115,13 +117,20 @@ export function stepMechanicsTick(state:SimulationState):void {
     const nextWinter=state.time.winter+(nextTick===0?1:0);
     let careExpires=false;
     const produced:{id:string;resource:'food'|'materials';units:number}[]=[];
+    const crafted: { id: string; details: Record<string, unknown> }[] = [];
     for(const id of Object.keys(state.personas).sort()) {
         const person=state.personas[id], role=person.occupation;
         const care=state.mechanics!.people[id];
         if(care.childcareUntilTick!==undefined&&care.childcareUntilWinter===nextWinter&&care.childcareUntilTick===nextTick)careExpires=true;
         if(personaAway(state,id) || isProvidingCare(state,id) || person.deathWinter!==null || role===null || personaAge(state,id)<config.workAge)continue;
         const work=inspectWork(state,id),job=config.occupations[role];
-        if(job.resource===null)continue;
+        if (job.resource === null) {
+            if (state.smithery && craftingOccupation(role)) {
+                for (const details of stepSmitheryWork(state, id, work.productivityBps))
+                    crafted.push({ id, details });
+            }
+            continue;
+        }
         const efficiency=work.productivityBps;
         const control=state.mechanics!.people[id];
         person.workProgress+=job.unitsPerWinter*efficiency;
@@ -132,6 +141,7 @@ export function stepMechanicsTick(state:SimulationState):void {
     state.time.tick++;
     if(state.time.tick===state.ticksPerWinter){state.time.tick=0;state.time.winter++;}
     for(const output of produced)emit(state,'ResourceProduced',output.id,{resource:output.resource,units:output.units,...(output.resource==='food'?weatherFacts(state):{})});
+    for (const output of crafted) emit(state, 'EquipmentCrafted', output.id, output.details);
     stepCattleOutput(state);
     if(state.time.tick===0) {
         emit(state,'WinterAdvanced');

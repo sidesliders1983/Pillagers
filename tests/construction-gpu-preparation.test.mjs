@@ -11,13 +11,13 @@ function fixture() {
     const material = new MeshStandardMaterial({ map: texture });
     const scene = new Scene(), root = new Group(); scene.add(root);
     const calls = { created: 0, released: 0, textures: 0, compile: 0, draws: 0, yields: 0 };
-    const compiled = new Set(), disposed = new Set();
+    const compiled = new Set(), disposed = new Set(), assets = new Set();
     const options = {
         scene, anchor: new Vector3(100, 30, -70), check() {},
         async yieldControl() { calls.yields++; },
         models: {
             async create(entity) {
-                calls.created++;
+                calls.created++; assets.add(entity.asset);
                 const model = new Group(), mesh = new Mesh(geometry, material);
                 mesh.name = entity.asset; mesh.position.y = 2; model.add(mesh); return model;
             },
@@ -38,7 +38,7 @@ function fixture() {
             render(value) { assert.equal(value, scene); calls.draws++; }
         }
     };
-    return { options, calls, scene, root, compiled, disposed,
+    return { options, calls, scene, root, compiled, disposed, assets,
         release() { geometry.dispose(); material.dispose(); texture.dispose(); } };
 }
 
@@ -47,17 +47,21 @@ test('loading prepares every house and shader state once, retaining warmed progr
     const first = preparation.prepare(f.options);
     assert.equal(preparation.prepare(f.options), first, 'Coalesce repeated loading hooks');
     await first;
-    assert.equal(f.calls.created, 18, 'Six metric house/farm variants in three material contexts');
-    assert.equal(f.calls.compile, 25, 'Opaque, fade, opaque reveal, fading reveal and instanced scaffold');
+    assert.deepEqual(f.assets, new Set([
+        'hut', 'farmHut', 'smithHut', 'homestead', 'farmHomestead', 'smithHomestead',
+        'longhouse', 'greatHall'
+    ]), 'Prepare both supplied Smith variants as well as the existing house line');
+    assert.equal(f.calls.created, 24, 'Eight metric house/farm/Smith variants in three material contexts');
+    assert.equal(f.calls.compile, 33, 'Opaque, fade, opaque reveal, fading reveal and instanced scaffold');
     assert.equal(f.calls.draws, 9, 'Only first Hut/Farm Hut buffers and scaffold upload eagerly');
     assert.equal(f.calls.textures, 1, 'Shared source texture is uploaded only once');
-    assert.ok(f.calls.yields >= 25, 'Preparation remains interruptible between work chunks');
+    assert.ok(f.calls.yields >= 33, 'Preparation remains interruptible between work chunks');
     assert.equal(f.calls.released, 0); assert.equal(f.disposed.size, 0);
     assert.deepEqual(f.scene.children, [f.root], 'No warmup houses remain in the game scene');
     await preparation.prepare(f.options);
-    assert.equal(f.calls.compile, 25, 'A second prepare does not rebuild GPU state');
+    assert.equal(f.calls.compile, 33, 'A second prepare does not rebuild GPU state');
     preparation.dispose();
-    assert.equal(f.calls.released, 18);
+    assert.equal(f.calls.released, 24);
     assert.equal(f.disposed.size, f.compiled.size, 'Release every retained program owner on exit');
     f.release();
 });

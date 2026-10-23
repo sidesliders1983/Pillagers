@@ -51,13 +51,17 @@ test('upgrade availability and previews use the campaign configuration and actua
     }
 });
 
-test('inactive occupations expose zero output rather than invented upgrade productivity', () => {
-    let { state, buildingId } = homeFixture();
-    state = core.applyCommand(state, { type: 'SpecializeBuilding', buildingId, occupation: 'smith' });
-    const preview = homeImprovements(state, buildingId);
-    assert.ok(preview.matching.length > 0);
-    assert.equal(preview.next.workers[0].before.reason, 'inactive-role');
-    assert.equal(preview.next.workers[0].after.productivityBps, 0);
+test('inactive occupations and Smiths without targets expose no invented upgrade output', () => {
+    for (const occupation of ['boatbuilder', 'textileWorker', 'trader', 'smith', 'leatherAndJewelleryMaker']) {
+        let { state, buildingId, household } = homeFixture();
+        state = core.applyCommand(state, { type: 'AssignOccupation', personaId: household.memberIds[0], occupation });
+        state = core.applyCommand(state, { type: 'SpecializeBuilding', buildingId, occupation });
+        const preview = homeImprovements(state, buildingId);
+        assert.ok(preview.matching.length > 0);
+        assert.equal(preview.next.workers[0].before.reason,
+            ['smith', 'leatherAndJewelleryMaker'].includes(occupation) ? 'target-reached' : 'inactive-role');
+        assert.equal(preview.next.workers[0].after.productivityBps, 0);
+    }
 });
 
 test('changing or removing specialization retains upgrades, upkeep and independent farmyard function', () => {

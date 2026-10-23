@@ -2,6 +2,7 @@ import {
     stepWildlifeSightings, validateWildlife, validateWildlifeSighting, wildlifeSighting, assertWildlifeWorld,
     initializeWildlifeSightings as bindWildlifeSightings, type WildlifeState,
 } from './WildlifeSightings';
+import { applySmitheryCommand, validateSmithery, type SmitheryState, type SmitheryCommand } from './Smithery';
 import { seededRandom } from '../characters/seededRandom';
 import { assertIslandClanWorld, type IslandClanLandscape } from './IslandClans';
 import { applySpatialCommand, stepSpatialExpeditions, requireSpatialAdvance, validateSpatialExpeditions } from './SpatialExpeditions';
@@ -66,6 +67,7 @@ export type SimulationEvent = {id: string; time: GameTime; type: string; persona
 export type SimulationState = {
     wildlife?: WildlifeState;
     specialistStocks?: SpecialistStocks;
+    smithery?: SmitheryState;
     discovery?: ClanDiscovery;
     birthdayCalendar?: BirthdayCalendar;
     foundingPhase?: FoundingPhase;
@@ -188,7 +190,7 @@ export function createSettlement(seed:number, overrides:Partial<PrototypeConfig>
     }
     initializeSocial(state,socialOverrides);validateState(state); return state;
 }
-export type SimulationCommand = LongshipCommand | IslandMissionCommand | SpatialExpeditionCommand | CampfireCommand | ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
+export type SimulationCommand = SmitheryCommand | LongshipCommand | IslandMissionCommand | SpatialExpeditionCommand | CampfireCommand | ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
 function integer(value: number, label: string) {
     if (!Number.isSafeInteger(value) || value < 0) throw new Error(`${label} must be a nonnegative safe integer`);
 }
@@ -198,6 +200,12 @@ function emit(state: SimulationState, type: string, personaId?: string, details?
 }
 export function applyCommand(input: SimulationState, command: SimulationCommand, context?: PhysicalExpeditionContext): SimulationState {
     validateState(input);
+    if (command.type === 'SetSmitheryTarget' || command.type === 'AssignEquipment') {
+        const state = structuredClone(input);
+        applySmitheryCommand(state, command);
+        validateState(state);
+        return state;
+    }
     if (command.type === 'BoardLongship' || command.type === 'DisembarkLongship' || command.type === 'LoadLongshipFood') {
         const state = structuredClone(input);
         applyLongshipCommand(state, command, context);
@@ -295,6 +303,7 @@ function validateState(state: SimulationState): void {
     }
     integer(state.stocks.food, 'Food'); integer(state.stocks.materials, 'Materials');
     validateSpecialistStocks(state);
+    validateSmithery(state);
     validateWildlife(state);
     if (!state.clan.id || !state.clan.name || !Array.isArray(state.events)) throw new Error('Invalid clan/events');
     const occupations = ['farmer', 'herder', 'fisher', 'hunter', 'textileWorker', 'smith', 'woodworker', 'boatbuilder', 'trader', 'leatherAndJewelleryMaker'];

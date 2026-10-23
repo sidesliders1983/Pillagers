@@ -1,3 +1,4 @@
+import { pillageEquipment, validatePillageEquipment, type PillageEquipment } from './Smithery';
 import type { SimulationState } from './SimulationCore';
 import type { PhysicalExpeditionContext, SpatialMission } from './SpatialExpeditions';
 import type { Cargo, ExpeditionResult, Knowledge, MissionType } from './WorldExpeditions';
@@ -32,6 +33,7 @@ export interface IslandMissionTask {
     observedSiteId: string | null;
     visitEventId: string | null;
     result: ExpeditionResult | null;
+    equipment?: PillageEquipment;
 }
 export interface IslandIntel {
     version: 1;
@@ -94,8 +96,12 @@ function prepareMission(state: SimulationState, groupId: string, target: IslandT
     const ref: IslandTargetRef = { version: 1, worldId: context.worldId, kind: target.kind,
         id: target.kind === 'site' ? target.siteId : `area-${Math.round((destination.z - nav.bounds.minZ) / nav.spacing) * nav.columns +
             Math.round((destination.x - nav.bounds.minX) / nav.spacing)}`, position: { ...destination } };
+    const casualtyBps = Math.min(10000, config.casualtyBps[type] + weather.travelRiskBps);
+    const equipment = type === 'Pillage' ? pillageEquipment(state, group.memberIds,
+        config.successBps[type], casualtyBps) : undefined;
     return { ref, group, memberRoutes, route, distance, speed, travelTicks, duration, foodCost, foodPerMember,
-        successBps: config.successBps[type], casualtyBps: Math.min(10000, config.casualtyBps[type] + weather.travelRiskBps) };
+        successBps: equipment?.successBps ?? config.successBps[type], casualtyBps,
+        ...(equipment ? { equipment } : {}) };
 }
 
 export function islandMissionOffer(state: SimulationState, groupId: string, target: IslandTarget,
@@ -103,6 +109,7 @@ export function islandMissionOffer(state: SimulationState, groupId: string, targ
     const offer = prepareMission(state, groupId, target, type, priorities, context, origins);
     return { duration: offer.duration, foodCost: offer.foodCost, foodPerMember: offer.foodPerMember,
         successBps: offer.successBps, casualtyBps: offer.casualtyBps,
+        ...(offer.equipment ? { equipment: structuredClone(offer.equipment) } : {}),
         target: { ...offer.ref.position }, travelTicks: offer.travelTicks };
 }
 
@@ -123,12 +130,14 @@ export function dispatchIslandMission(state: SimulationState, command: IslandMis
         task: { version: 1, type: command.mission, target: offer.ref, priorities: [...(command.priorities ?? [])],
             speed: offer.speed, duration: offer.duration, operateUntil: now + offer.duration - offer.travelTicks,
             successBps: offer.successBps, casualtyBps: offer.casualtyBps,
+            ...(offer.equipment ? { equipment: offer.equipment } : {}),
             observation: null, observedSiteId: null, visitEventId: null, result: null },
     };
     spatial.missions[id] = mission;
     state.stocks.food -= offer.foodCost;
     record(state, 'ExpeditionDeparted', mission, { target: offer.ref, foodCost: offer.foodCost,
-        duration: offer.duration, successBps: offer.successBps, casualtyBps: offer.casualtyBps });
+        duration: offer.duration, successBps: offer.successBps, casualtyBps: offer.casualtyBps,
+        ...(offer.equipment ? { equipment: offer.equipment } : {}) });
 }
 
 function observesSite(state: SimulationState, context: PhysicalExpeditionContext, point: Point2) {
@@ -194,15 +203,15 @@ export function observeIslandMission(state: SimulationState, mission: SpatialMis
 
 export function completeIslandMission(state: SimulationState, mission: SpatialMission) {
     const task = mission.task!;
-    const { live, success: rolled } = resolveExpeditionCrew(state, { id: mission.id,
-        memberIds: mission.memberIds, successBps: task.successBps, casualtyBps: task.casualtyBps });
+    const { live, success: rolled, equipment } = resolveExpeditionCrew(state, { id: mission.id,
+        memberIds: mission.memberIds, successBps: task.successBps, casualtyBps: task.casualtyBps, equipment: task.equipment });
     const success = mission.outcome === 'Completed' && !!task.visitEventId && rolled;
     const discovery = success && task.type !== 'Pillage' ? task.observation : null;
     const loot = success && task.type === 'Pillage' && task.observedSiteId === state.world!.island!.siteId ?
         recoverExpeditionCargo(state, { id: mission.id, priorities: task.priorities }, live, state.world!.island!.clanId) :
         { food: 0, materials: 0, cattleIds: [], personaIds: [] };
     task.result = { success, discovery, survivorIds: live, casualtyIds: mission.memberIds.filter(id => !live.includes(id)),
-        ...loot, summary: success ? task.type === 'Pillage' ?
+        ...loot, ...(equipment ? { equipment } : {}), summary: success ? task.type === 'Pillage' ?
             loot.food || loot.materials || loot.cattleIds.length || loot.personaIds.length ? 'Raid completed.' :
                 'Raid succeeded but no available assets were recovered.' :
             discovery?.settlementName ? 'Settlement observed.' : 'No settlement observed in this area.' :
@@ -221,6 +230,9 @@ export function completeIslandMission(state: SimulationState, mission: SpatialMi
 
 export function validateIslandMission(state: SimulationState, mission: SpatialMission) {
     const task = mission.task!;
+    if (task.result?.equipment && !task.equipment) throw new Error('Equipment result requires its dispatch snapshot.');
+    if (task.equipment && task.type !== 'Pillage') throw new Error('Equipment snapshots belong to Pillage.');
+    validatePillageEquipment(task.equipment, mission.memberIds, task.successBps, task.casualtyBps);
     const bounds = state.discovery!.grid.bounds;
     const validPoint = (p: Point2) => p && Number.isFinite(p.x) && Number.isFinite(p.z);
     const visit = state.events.find(event => event.id === task.visitEventId);

@@ -58,8 +58,8 @@ export class AssetManager {
     private fallback(key: AssetKey, reason: unknown) {
         this.diagnostics.push(key + ': placeholder — ' + String(reason));
         const dimensions = key.endsWith('Terrain') ? [11.5,.05,11.5] : key === 'tent' ? [1.88,1.5,2] :
-            key === 'boat' ? [1.5,.8,4] : key === 'hut' || key === 'farmHut' ? [4.6,3.5,4] :
-            key === 'greatHall' ? [11.2,6,8.8] : key === 'homestead' || key === 'longhouse' ? [9.6,5,6.6] : [.6,.6,.6];
+            key === 'boat' ? [1.5,.8,4] : key === 'hut' || key === 'farmHut' || key === 'smithHut' ? [4.6,3.5,4] :
+            key === 'greatHall' ? [11.2,6,8.8] : key === 'homestead' || key === 'longhouse' || key === 'smithHomestead' ? [9.6,5,6.6] : [.6,.6,.6];
         const root = new Group();
         const mesh = new Mesh(new BoxGeometry(...dimensions as [number,number,number]),
             new MeshStandardMaterial({ color: 0x9d8465, roughness: 1 }));

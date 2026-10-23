@@ -1,3 +1,5 @@
+import { renderRaiderEquipment, renderEquipmentReadiness, renderEquipmentReport } from './SmitheryView';
+import type { Weapon, Shield } from '../simulation/Smithery';
 import { inspectIslandMissions, type IslandTarget } from '../simulation/IslandMissions';
 import { expeditionEligible, groupMission, type Cargo, type MissionType } from '../simulation/WorldExpeditions';
 import type { SimulationCommand } from '../simulation/SimulationCore';
@@ -16,7 +18,7 @@ export class IslandMissionPanel {
     private groupId = '';
     private siteId = '';
     private choosing = false;
-    private pending?: { target: IslandTarget; type: MissionType; food: number; crew: string; priorities: Cargo[] };
+    private pending?: { target: IslandTarget; type: MissionType; food: number; crew: string; priorities: Cargo[]; equipment: string };
     private html = '';
     private message = '';
     private abort = new AbortController();
@@ -60,6 +62,16 @@ export class IslandMissionPanel {
             const input = event.target;
             if (input instanceof HTMLSelectElement && input.id === 'island-mission-group') {
                 this.groupId = input.value; this.refresh();
+            } else if (input instanceof HTMLSelectElement && input.dataset.equipmentPerson) {
+                try {
+                    const personaId = input.dataset.equipmentPerson;
+                    if (input.dataset.equipmentSlot === 'weapon') this.command({ type: 'AssignEquipment',
+                        personaId, slot: 'weapon', item: (input.value || null) as Weapon });
+                    else if (input.dataset.equipmentSlot === 'shield') this.command({ type: 'AssignEquipment',
+                        personaId, slot: 'shield', item: (input.value || null) as Shield });
+                    this.message = 'Personal equipment updated.';
+                } catch (error) { this.message = error instanceof Error ? error.message : String(error); }
+                this.refresh();
             }
         }, { signal: this.abort.signal });
         document.addEventListener('keydown', event => {
@@ -116,8 +128,9 @@ export class IslandMissionPanel {
                 const members = state.world!.groups[this.groupId].memberIds;
                 const origins = this.origins(members);
                 const offer = this.session.islandMissionOffer(this.groupId, pending.target, pending.type, pending.priorities, origins);
-                if (members.join(',') !== pending.crew || offer.foodCost !== pending.food)
-                    throw new Error('Crew or conditions changed. Review the mission again.');
+                if (members.join(',') !== pending.crew || offer.foodCost !== pending.food ||
+                    JSON.stringify(offer.equipment ?? null) !== pending.equipment)
+                    throw new Error('Crew, equipment or conditions changed. Review the mission again.');
                 this.command({ type: 'DispatchIslandMission', groupId: this.groupId, target: pending.target,
                     mission: pending.type, priorities: pending.priorities, origins });
                 this.pending = undefined; this.dialog.close(); this.cancelTarget();
@@ -133,11 +146,13 @@ export class IslandMissionPanel {
             const priorities = type === 'Pillage' ? Array.from(this.root.querySelectorAll<HTMLInputElement>('[data-cargo]:checked'))
                 .map(input => input.dataset.cargo as Cargo) : [];
             const offer = this.session.islandMissionOffer(this.groupId, target, type, priorities, this.origins(members));
-            this.pending = { target, type, food: offer.foodCost, crew: members.join(','), priorities };
+            this.pending = { target, type, food: offer.foodCost, crew: members.join(','), priorities,
+                equipment: JSON.stringify(offer.equipment ?? null) };
             this.dialog.querySelector('#island-mission-title')!.textContent = `Start ${type}`;
             this.dialog.querySelector('#island-mission-summary')!.innerHTML = `<p>${escape(this.session.readSnapshot().world!.groups[this.groupId].name)}</p>
                 <p>This will cost ${offer.foodCost} Food (${offer.foodPerMember} per member). Are you sure?</p>
-                <p class="fjord-caption">${offer.duration} ticks, including travel and return. Success: ${offer.successBps / 100}%. Risk per member: ${offer.casualtyBps / 100}%. No refunds.</p>`;
+                <p class="fjord-caption">${offer.duration} ticks, including travel and return. Success: ${offer.successBps / 100}%. ${type === 'Pillage' && offer.equipment ? 'Personal casualty risks below.' : `Risk per member: ${offer.casualtyBps / 100}%.`} No refunds.</p>
+                ${type === 'Pillage' ? renderEquipmentReadiness(offer.equipment) : ''}`;
             this.dialog.showModal();
             this.dialog.querySelector<HTMLButtonElement>('[data-island-cancel]')!.focus();
         } catch (error) {
@@ -185,6 +200,7 @@ export class IslandMissionPanel {
             ${canRecall ? '<button type="button" data-island-return>Return group home</button>' : ''}
             ${active?.task ? `<p>${escape(active.task.type)} · ${escape(active.status)}</p>` : ''}
             <button type="button" data-island-area title="${escape(groupReason)}" ${available ? '' : 'disabled aria-describedby="island-mission-group-block"'}>Recon mapped area</button>
+            ${group?.memberIds.length ? renderRaiderEquipment(state, group.memberIds) : ''}
             <h4>Known places</h4>${sites.length ? sites.map(s => `<button type="button" data-island-site="${escape(s.id)}"
                 aria-pressed="${s.id === this.siteId}">${escape(s.knowledge?.settlementName ?? 'Unidentified settlement')}</button>`).join('') :
                 '<p>No settlement has been sighted.</p>'}
@@ -200,15 +216,18 @@ export class IslandMissionPanel {
                         `<label><input type="checkbox" data-cargo="${cargo}" checked> ${cargo === 'Cattle' ? 'Livestock' : cargo}</label>`).join('')}</fieldset>
                     <p class="fjord-caption">The next available living animal is taken. Species, sex and age cannot be selected.</p></details>` : ''}` : ''}
             ${latest ? `<article aria-label="Mission report"><h4>Latest mission report</h4><p>${escape(latest.summary)}</p>
-                ${latestMission?.task?.type === 'Pillage' ? renderMissionLivestock(state, latestMission.id) : ''}
+                ${latestMission?.task?.type === 'Pillage' ? renderMissionLivestock(state, latestMission.id) + renderEquipmentReport(latest.equipment) : ''}
                 <details data-island-report-details><summary>Recovered assets &amp; crew</summary><p>${latest.food} Food · ${latest.materials} Materials · ${latest.cattleIds.length} livestock · ${latest.personaIds.length} residents recovered.
                 ${latest.casualtyIds.length} lost · ${latest.survivorIds.length} returned.</p></details></article>` : ''}`;
         if (html !== this.html) {
             const checked = Array.from(this.controls.querySelectorAll<HTMLInputElement>('[data-cargo]'))
                 .map(input => [input.dataset.cargo, input.checked] as const);
+            const equipmentOpen = this.controls.querySelector<HTMLDetailsElement>('[data-island-equipment]')?.open;
             const cargoOpen = this.controls.querySelector<HTMLDetailsElement>('[data-island-cargo-options]')?.open;
             const reportOpen = this.controls.querySelector<HTMLDetailsElement>('[data-island-report-details]')?.open;
             this.controls.innerHTML = html; this.html = html;
+            const equipment = this.controls.querySelector<HTMLDetailsElement>('[data-island-equipment]');
+            if (equipment && equipmentOpen !== undefined) equipment.open = equipmentOpen;
             const options = this.controls.querySelector<HTMLDetailsElement>('[data-island-cargo-options]');
             if (options && cargoOpen) options.open = true;
             const reportDetails = this.controls.querySelector<HTMLDetailsElement>('[data-island-report-details]');

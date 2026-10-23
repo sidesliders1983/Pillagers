@@ -57,3 +57,7 @@ Extinguishing banks unused fuel. Refuelling occurs before the next unpaid burnin
 then work and annual maintenance follow. Empty stock extinguishes the fire instead of
 creating debt. There is no production or shelter bonus. Purchases are recorded in the
 Clan Book Materials ledger. See [the precise timing and save contract](../../SETTLEMENT-CAMPFIRE.md#campfire-fuel--97-spike).
+
+## ECON-005 — Smithery specialist production (#221)
+
+Smiths make Wooden Spears and Wooden Shields; Leatherworkers make Leather-reinforced Shields from real Materials/Hides. Small saved targets count stored plus personally worn stock. Production reuses ordinary work, aptitude, care/age/absence and existing specialized-home upgrades. Hides remain a specialist stock, outside the universal HUD. See [the approved recipes, work/ownership contract and QA](../SMITHERY-V01.md).

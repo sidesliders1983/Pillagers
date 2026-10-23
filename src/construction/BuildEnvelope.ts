@@ -19,8 +19,10 @@ export const housingConstructionProfiles: Record<string, {
 }> = {
     hut: { scaffoldPreset: 'light', materialProfile: 'turf', eaveRatio: .58 },
     farmHut: { scaffoldPreset: 'light', materialProfile: 'turf', eaveRatio: .58 },
+    smithHut: { scaffoldPreset: 'light', materialProfile: 'timber', eaveRatio: .58 },
     homestead: { scaffoldPreset: 'light', materialProfile: 'timber', eaveRatio: .62 },
     farmHomestead: { scaffoldPreset: 'light', materialProfile: 'timber', eaveRatio: .62 },
+    smithHomestead: { scaffoldPreset: 'light', materialProfile: 'timber', eaveRatio: .62 },
     longhouse: { scaffoldPreset: 'heavy', materialProfile: 'timber', eaveRatio: .62 },
     greatHall: { scaffoldPreset: 'heavy', materialProfile: 'timber', eaveRatio: .65 }
 };
