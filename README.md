@@ -15,7 +15,14 @@ npm install
 npm run dev
 ```
 
-Open `/fjord-play` at the local URL printed by Vite for the current game. `/` retains the earlier Fjord prototype. For production:
+Open `/fjord-play` at the local URL printed by Vite for the current game. `/` retains the earlier Fjord prototype.
+
+The opt-in [soundscape foundation](docs/SOUNDSCAPE-228.md) uses one application audio
+owner and the existing scene lifecycle. `/fjord-play?audioProof=1` exposes a labelled
+synthetic signal proof through the normal Sound settings; production recordings
+and the real settlement mix remain the separate #229/#230 slices.
+
+For production:
 
 ```sh
 npm run build

@@ -147,6 +147,7 @@ test('the real campaign entry offers performance settings before opening a campa
         await new Promise(resolve => setTimeout(resolve, 40));
         const select = document.querySelector('select[aria-label="Performance overlay"]');
         assert.ok(select, 'Normal start menu exposes the preference before any world is loaded');
+        assert.ok(document.querySelector('.audio-settings button'), 'Sound activation is available before loading');
         select.value = 'compact';
         select.dispatchEvent(new dom.window.Event('change'));
         document.querySelector('[data-entry="new"]').click();

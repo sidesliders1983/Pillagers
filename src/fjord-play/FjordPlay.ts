@@ -187,6 +187,7 @@ export class FjordPlay {
         this.loading?.mount();
         diagnostics?.mount();
         if (diagnostics) document.querySelector('#fjord-performance-setting')?.append(diagnostics.settings());
+        if (entry.audioControls) document.querySelector('#fjord-audio-setting')?.append(entry.audioControls.root);
         if (this.loading) this.loading.diagnostics.metadata.quality =
             document.querySelector<HTMLSelectElement>('#fjord-quality')!.value;
         this.foundingBook?.restoreScroll(readingPosition);
@@ -332,6 +333,7 @@ export class FjordPlay {
         let desktopUI: FjordInterface | undefined;
         let renderedWildlifeAttention = '';
         const refreshUI = () => {
+            entry.audioControls?.refresh();
             let expeditionPace = cycleField.querySelector<HTMLOptionElement>('option[value="10"]');
             if (!expeditionPace) {
                 expeditionPace = document.createElement('option'); expeditionPace.value = '10';
@@ -704,7 +706,7 @@ export class FjordPlay {
             resetFrameTime();
         }, { signal: lifecycleEvents.signal });
         const owner = this;
-        presentation = createFjordScene({ shared: this.shared, canvas, diagnostics,
+        presentation = createFjordScene({ shared: this.shared, canvas, diagnostics, audio: entry.audio,
             labels: { selection: selectionLabels, production: productionLabels }, restoredCamera,
             host: {
                 tickIntervalSeconds: campaignClockIntervalMs / 1000,

@@ -1,0 +1,6 @@
+.audio-settings { margin:12px 0; padding:12px; max-width:380px; min-width:0; }
+.audio-settings label { display:grid; gap:4px; margin:8px 0; }
+.audio-settings input[type="range"] { width:100%; min-height:44px; }
+.audio-settings button, .audio-settings summary { min-height:44px; }
+.audio-settings small { display:block; margin-top:8px; }
+.audio-settings p { max-width:36ch; }
