@@ -1,0 +1,40 @@
+{
+  "recordedUtc": "2026-10-23T14:21:08.553Z",
+  "branch": "codex/settlement-soundscape-230",
+  "baseCommit": "865f44cf178f648690ad02765ae51dd4637de068",
+  "status": "M docs/qa/settlement-soundscape-230/report.md\n M scripts/audio/prepare-settlement-review.mjs\n M scripts/audio/record-settlement-review.mjs\n M src/audio/SettlementSoundPack.ts\n M src/audio/SettlementSounds.ts\n M src/fjord-play/FjordScene.ts\n M src/wildlife/WildlifeLayer.ts\n M tests/fjord-audio.test.mjs\n M tests/settlement-sounds.test.mjs\n M tests/wildlife.test.mjs\n?? docs/qa/settlement-soundscape-230/animal-candidates.json\n?? src/audio/WildlifeSounds.ts\n?? tests/wildlife-sounds.test.mjs",
+  "scope": "Local review build; dirty base ID is not a claim of current-head CI.",
+  "sourceSHA256": {
+    "src/audio/FjordAudio.ts": "f297de521017729b839b5b1d4c939e614077a8a55dbb090501a1570c9336f3e6",
+    "src/audio/Soundscape.ts": "08cdec713ac0c336817033abb51e50db4b464afa8dd56e25fc5b17ddd9d01fc7",
+    "src/audio/SettlementSounds.ts": "b2a9f9b9932bacb07486747502ff550f2c74fe3a06f15d7b86576ff27f40c67e",
+    "src/audio/WorkContacts.ts": "fab1059583509d815336c3db962d90b77d6964269797b0f670cde0e7def53581",
+    "src/audio/WildlifeSounds.ts": "a9b407be67e26f1bc067735974b4b8b7d143dc765991c64bde52eff39dfb744a",
+    "src/audio/SettlementSoundPack.ts": "8c6a058492d60f07e7ed4d10cc4a259f20d06870e2b2575770a753ca4c3aeeff",
+    "src/fjord-play/FjordScene.ts": "cbd39a312da27f45b6bc8c0cb5b6ad075f5bf721e45261a1a75dec51534831de",
+    "src/fjord-play/FjordEntry.ts": "ffff24cee9d6d021e87001c58eb93cf1eed7e8d4408552741279d92c41605875",
+    "src/fjord-play/FjordEntities.ts": "f33ad7ab1bb0e5ea20b3b8e3d2f39c8ca84d7f9ab094fffa736f6c953811e905",
+    "src/fjord-play/FjordModels.ts": "89670e96c0f1d1f9fd2d18bd67897ff67cdc818a1e77c20761c1124de0f74d20",
+    "src/wildlife/WildlifeLayer.ts": "85cd89509b879eadc35f8371a7d24281b015f0105d0d1ab1f724d7a077ec68bc",
+    "src/fjord-play/PerformanceMeasurements.ts": "90bb263d67f4a483b1b365b9f497e0b79d4d9cb0d447b99484483ce0694cab6f",
+    "pnpm-lock.yaml": "c853a683bbfb2f3b58abfb6b1feb7308387bce165cb554d860e24a41c5debc9d",
+    "scripts/audio/prepare-settlement-review.mjs": "4f055d21fa8ec260297c1143bfcdb925822eb4c2ac8f555e8e5fbee99d213558",
+    "scripts/audio/serve-settlement-review.mjs": "d89c5bf6adca9a1d159c03c74d93aa8c7c8c8ddbc60dfc55f22434874784223b",
+    "scripts/audio/prepare-village-review.mjs": "f65ca1f53a82902f7b4ea6ad612e03218772d92dbfb16f56aeebe1a41e9b4443",
+    "scripts/audio/prepare-work-review.mjs": "54634f6b9cf4f6adc88b343b8ba318ed3311459a63128b8d1d80970a7a5a54d5",
+    "scripts/audio/measure-work-contact.mjs": "82a3d093fef9afe7ef7b123600856c52dabae7d783273e0ce4fa72b0c846688e",
+    "scripts/audio/record-settlement-review.mjs": "95aee3d85285afb43180abd4e30b4959be05af7f59c07dbb76c5065155a620df",
+    "tests/settlement-sounds.test.mjs": "4bae0723170eb7c2e712d13754194b9dd057b62dbe31fd1e2c6e493d37002b88",
+    "tests/fjord-audio.test.mjs": "83e86c5f81daa8a21e3b512d5e2fe0189eb6af4a81fcf918271e255069b8d74d",
+    "tests/wildlife-sounds.test.mjs": "87f79ac5157bcaf1302e4747300ba96487d3a9b760e5ea7adafd6ed367e27738",
+    "tests/wildlife.test.mjs": "f78c12c2f8d1ca3641e16a1f73703e771d34247f721a8d2dc43643b064f4fbac"
+  },
+  "bundleSHA256": {
+    "dist/index.html": "1fb106d3f0982b773946587265e7addede6616710e1aaa47712acca1acd49c78",
+    "dist/assets/index-B8GGakke.js": "449fdcfd44306032a514de78895f8f11b66faafc4d1c51f52dcb948e94b12c2c",
+    "dist/assets/FjordEntry-CFyORRI9.js": "1cea5f1d7610cbd525e342c658a0879e9bda1856b83ffbb98f7f6785022d1a95",
+    "dist/assets/FjordPlay-XICnF4Mi.js": "f5bfe05420426900e03168ecc6c65199eaf6de32a77c498c65d7e9175f09e2f5"
+  },
+  "catalogueSHA256": "895f6f5b3173898e073abbf9ec198b8f8c7d234a10b6755210f964eeb0dab7ba",
+  "manifestSHA256": "75f1015e85cc56853b5ee004ed6de1be7aa358585cea335bb76e7cb8f58c5034"
+}

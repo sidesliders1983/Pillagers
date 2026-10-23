@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "recordedUtc": "2026-10-23T07:04:16.429Z",
+  "node": "v24.19.0",
+  "base": "c4a6794a8dceb73a0ac657cad863d18b80a3c24d",
+  "scope": "Node logical-policy microbenchmark; no browser, Web Audio rendering, real frame rate or listening claim",
+  "syntheticSources": 128,
+  "cadenceHz": 5,
+  "warmupSamples": 100,
+  "actualBrowserFrameDeltaMs": null,
+  "physicalDevice": null,
+  "listened": false,
+  "sourceHashes": {
+    "src/audio/Soundscape.ts": "30da1f276bc3ed71fc63fb785389e32a668d830270b106d12e68b04de3ae7cdc",
+    "src/audio/FjordAudio.ts": "affeb069e86e9c615889b892951a37ff4a63aaa5cd8602c25c9da3f6ac95cf76",
+    "src/audio/AudioControls.ts": "cc07037dea82f2e558d8e8b728db06f50019e19ddcc15678cde19632dd3ec84e",
+    "src/audio/SoundPack.ts": "242abf15b81bf6b824454e2e4a312c2249da0413f0a7595a5e5ccb521b01e759",
+    "src/fjord-play/FjordEntry.ts": "b1589419183b4aba3e1df842eafc6238d3262fa093f728101c888e20ae0117cf",
+    "src/fjord-play/FjordScene.ts": "e3d012acfc4963b44fc26e57a69ed1bbe0474aafa5ee867814ca5a4e8cc564aa",
+    "src/fjord-play/FjordPlay.ts": "76acb300cf97486bf3d3961615060152ee7f018ac71cbc1d681883e5cea8e470",
+    "scripts/qa/measure-soundscape.mjs": "162cde4a2a15044733ffb57f0cbf86bdb2e539706115ddbb21e42228cd2c3db7"
+  },
+  "rows": [
+    {
+      "mode": "off",
+      "count": 1200,
+      "p50Ms": 0.0002000000000066393,
+      "p95Ms": 0.0004000000000132786,
+      "worstMs": 0.07510000000002037,
+      "highSelected": 0
+    },
+    {
+      "mode": "near",
+      "count": 1200,
+      "p50Ms": 0.06200000000001182,
+      "p95Ms": 0.10869999999999891,
+      "worstMs": 1.0989999999999327,
+      "highSelected": 8
+    },
+    {
+      "mode": "overview",
+      "count": 1200,
+      "p50Ms": 0.06000000000005912,
+      "p95Ms": 0.1106000000000904,
+      "worstMs": 0.9519000000000233,
+      "highSelected": 2
+    },
+    {
+      "mode": "overview",
+      "count": 1200,
+      "p50Ms": 0.056500000000028194,
+      "p95Ms": 0.08130000000005566,
+      "worstMs": 0.415300000000002,
+      "highSelected": 2
+    },
+    {
+      "mode": "near",
+      "count": 1200,
+      "p50Ms": 0.059700000000020736,
+      "p95Ms": 0.10410000000001673,
+      "worstMs": 0.496599999999944,
+      "highSelected": 8
+    },
+    {
+      "mode": "off",
+      "count": 1200,
+      "p50Ms": 0.0001999999999497959,
+      "p95Ms": 0.00020000000006348273,
+      "worstMs": 0.003400000000056025,
+      "highSelected": 0
+    }
+  ]
+}

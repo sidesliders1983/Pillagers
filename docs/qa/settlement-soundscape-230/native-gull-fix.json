@@ -1,0 +1,87 @@
+{
+  "audio": {
+    "buffers": 4,
+    "decodeInvocation": {
+      "p50Ms": 0.10000000894069672,
+      "p95Ms": 1.9000000059604645,
+      "p99Ms": 1.9000000059604645,
+      "samples": 4
+    },
+    "decodeWall": {
+      "p50Ms": 81.5,
+      "p95Ms": 466.79999999701977,
+      "p99Ms": 466.79999999701977,
+      "samples": 4
+    },
+    "decodedBytes": 6763008,
+    "decodes": 0,
+    "downloadBytes": 1691064,
+    "enabled": true,
+    "failure": "",
+    "hidden": false,
+    "highPhysical": 3,
+    "highVoices": 3,
+    "inflightClients": 0,
+    "pending": 0,
+    "physical": 0,
+    "playing": 0,
+    "requestedCues": {
+      "gull": 1,
+      "sea-waves": 1,
+      "wind-summer": 234
+    },
+    "retiring": 0,
+    "selectionScheduling": {
+      "p50Ms": 0.10000000894069672,
+      "p95Ms": 0.29999999701976776,
+      "p99Ms": 0.9000000059604645,
+      "samples": 269
+    },
+    "startedCues": {
+      "gull": 1,
+      "sea-waves": 1,
+      "wind-summer": 1
+    },
+    "state": "running"
+  },
+  "camera": {
+    "conservative": false,
+    "eyeY": 32.35734415054321,
+    "focus": [
+      -20,
+      2.357344150543213,
+      -112
+    ],
+    "groundClearance": 30.75735569000244,
+    "invalidSamples": 0,
+    "lift": 0,
+    "maximumMs": 1.5,
+    "milliseconds": 0.09999999403953552,
+    "minimumBoomClearance": 3.1166219538630937,
+    "nearTargetDistance": 3,
+    "requestedEye": [
+      8.000000000000004,
+      32.35734415054321,
+      -144
+    ],
+    "requestedYaw": 2.4227626539681686,
+    "requestedZoom": 48.95365335693702,
+    "requiredLift": 0,
+    "samples": 55
+  },
+  "mix": {
+    "logicalSources": 8,
+    "projectionLastMs": 0.20000000298023224,
+    "scope": "Local candidate mix",
+    "visualContacts": 0
+  },
+  "observedUtc": "2026-10-23T13:26:34.169Z",
+  "scripts": [
+    "http://127.0.0.1:5199/assets/index-PQ5j_6N-.js"
+  ],
+  "time": {
+    "tick": 839,
+    "ticksPerWinter": 1000,
+    "winter": 800
+  }
+}

@@ -19,6 +19,8 @@ import { ConstructionTransitions } from '../construction/ConstructionTransition'
 import { longshipDeckAnchors } from './LongshipDeck';
 import type { PortraitRequest } from '../characters/CharacterPortraits';
 import { characterSync, type CharacterPreparationObserver } from '../characters/CharacterPreparation';
+import type { SoundActor } from '../audio/SettlementSounds';
+import type { WorkSoundActivity } from '../audio/WorkContacts';
 
 interface YardFloor {
     yard: Object3D;
@@ -45,6 +47,7 @@ export class FjordEntities {
         yardFloor?: YardFloor;
     }>();
     private deaths = new Map<string, { model: Object3D; presentation: LivestockDeath }>();
+    private workSounds: WorkSoundActivity[] = [];
     private expeditionSurface?: TerrainSurface;
     private expeditionWorld?: WorldBlueprint;
     private expeditionFrames = new Map<string, { mission: SpatialMission; from: number; elapsed: number; duration: number }>();
@@ -451,6 +454,7 @@ export class FjordEntities {
         }
     }
     advance(motion: LivingWorldController, delta: number, running: boolean) {
+        this.workSounds = [];
         for (const [key, death] of this.deaths) {
             death.presentation.advance(delta, running);
             if (death.presentation.inspect().complete) this.finishDeath(key);
@@ -490,7 +494,33 @@ export class FjordEntities {
             model.position.set(agent.x, agent.y, agent.z);
             model.rotation.y = agent.rotation;
             this.models.animate(model, agent.state, agent.speed, running ? delta : 0);
+            const facts = model.userData.canonical, animation = model.userData.motion;
+            if (facts.workEligible && facts.occupation === 'woodworker' &&
+                agent.visit?.phase === 'activity' && animation?.sourceClip === 'Attack') {
+                this.workSounds.push({ id: agent.key, target: agent.visit.source,
+                    position: { x: agent.x, y: agent.y + 1, z: agent.z },
+                    generation: model.uuid + ':' + animation.generation, loop: animation.loop,
+                    clip: animation.sourceClip, time: animation.clipTime, duration: animation.duration });
+            }
         }
+    }
+    /** Read-only current visual poses. Excludes passengers, removed and hidden actors. */
+    soundActors(visible: (x: number, z: number) => boolean): SoundActor[] {
+        const actors: SoundActor[] = [];
+        for (const [id, { model }] of this.entries) {
+            const facts = model.userData.canonical;
+            if (facts?.kind !== 'cattle' || !facts.living || facts.expedition || facts.aboardShip) continue;
+            const position = model.getWorldPosition(new Vector3());
+            if (!visible(position.x, position.z)) continue;
+            actors.push({ id, kind: 'livestock', species: facts.species ?? 'cattle',
+                sex: facts.sex, stage: facts.stage, observable: true,
+                position: { x: position.x, y: position.y + .5, z: position.z } });
+            if (actors.length >= 64) break;
+        }
+        return actors;
+    }
+    soundActivities(visible: (x: number, z: number) => boolean) {
+        return this.workSounds.filter(source => visible(source.position.x, source.position.z));
     }
     /** Only moving producer anchors are needed each frame; full diagnostics are throttled. */
     productionAnchors() {

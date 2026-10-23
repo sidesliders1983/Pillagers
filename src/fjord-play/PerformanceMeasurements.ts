@@ -41,7 +41,9 @@ class WindowSamples {
         values.sort((a, b) => a - b);
         return { count: values.length, windowMs: now - first, weight,
             meanMs: values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : null,
+            p50Ms: values.length ? values[Math.ceil(values.length * .5) - 1] : null,
             p95Ms: values.length ? values[Math.ceil(values.length * .95) - 1] : null,
+            p99Ms: values.length ? values[Math.ceil(values.length * .99) - 1] : null,
             worstMs: values.at(-1) ?? null, latestMs: values.length ? latest : null };
     }
 }

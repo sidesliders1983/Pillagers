@@ -1,0 +1,57 @@
+{
+  "url": "http://127.0.0.1:5199/fjord-play?audioMix=1&debugPerf=1",
+  "source": "Ordinary restored campaign 467148170; UI selected founding Pig / Sow / female / Adult; native playback then paused. No injected animals.",
+  "audio": {
+    "buffers": 5,
+    "decodeInvocation": {
+      "p50Ms": 0.09999999403953552,
+      "p95Ms": 0.29999999701976776,
+      "p99Ms": 0.29999999701976776,
+      "samples": 5
+    },
+    "decodeWall": {
+      "p50Ms": 59.3999999910593,
+      "p95Ms": 423.90000000596046,
+      "p99Ms": 423.90000000596046,
+      "samples": 5
+    },
+    "decodedBytes": 8495616,
+    "decodes": 0,
+    "downloadBytes": 2124294,
+    "enabled": true,
+    "failure": "",
+    "hidden": false,
+    "highPhysical": 2,
+    "highVoices": 2,
+    "inflightClients": 0,
+    "pending": 0,
+    "physical": 2,
+    "playing": 2,
+    "requestedCues": {
+      "gull": 1,
+      "pig": 1,
+      "sea-waves": 6,
+      "wind-normal-winter": 14
+    },
+    "retiring": 0,
+    "selectionScheduling": {
+      "p50Ms": 0.20000000298023224,
+      "p95Ms": 0.29999999701976776,
+      "p99Ms": 0.5,
+      "samples": 512
+    },
+    "startedCues": {
+      "gull": 1,
+      "pig": 1,
+      "sea-waves": 6,
+      "wind-normal-winter": 1
+    },
+    "state": "running"
+  },
+  "mix": {
+    "logicalSources": 15,
+    "projectionLastMs": 0.800000011920929,
+    "scope": "Local candidate mix",
+    "visualContacts": 0
+  }
+}

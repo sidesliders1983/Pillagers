@@ -1,0 +1,33 @@
+✔ sound controls require explicit activation and keep unavailable audio outside campaign saves (1134.0427ms)
+✔ the actual mixed pack plays a projected nearby work contact through the shared owner (796.2944ms)
+✔ a full decode budget postpones another valid cue without reporting a broken file (49.0033ms)
+✔ preparing a work cue waits for consent and keeps its decoded buffer for the real contact (4.1401ms)
+✔ a current work contact bypasses ambient cadence once and aligns the prepared transient (12.5752ms)
+✔ prepared files load through browser-native fetch with its required global receiver (3.5562ms)
+✔ explicit activation requests media playback even when the device ringer is silent (4.8847ms)
+✔ a delayed source cannot play an obsolete in-place revision (9.0393ms)
+✔ repeated world replacement bounds callbacks waiting on a non-abortable decode (6.1862ms)
+✔ one explicit audio owner survives world replacement and respects mute, hide and disposal (22.3216ms)
+✔ sustained one-shots and higher priorities cannot exceed the physical voice budget (7.2649ms)
+✔ delayed file decoding cannot restart a replaced world and invalid assets fail locally (12.3827ms)
+✔ audio state, presentation randomness and repeated worlds retain exact Core and saved geography (8720.7373ms)
+✔ the expanded mixed pack starts each projected adult livestock and shore-seal cue through one owner (62.1228ms)
+✔ the real lit fire and observed adult cows enter the mix without hidden or invented animals (341.2654ms)
+✔ only a real observable gull receives its call, independently of render culling (7.1053ms)
+✔ a real animation crossing emits once; refresh, late observation and hitches never catch up impacts (75.7681ms)
+✔ known coastline weights an independent shore bed and wind crossfades across seasons (1.2345ms)
+✔ observed adult sheep, goats and pigs use their own calls; young and hidden animals stay silent (4.2687ms)
+✔ strategy listening stays near the ground focus and rejects unknown or distant sources (439.4284ms)
+✔ bounded families prioritize nearby detail, retain quiet spacing and re-anchor camera jumps (44.7135ms)
+✔ a changed source revision uses its current loop variant instead of a retired asset (0.8251ms)
+✔ a real expedition encounter permits one local rabbit call without replaying saved sightings (1234.9097ms)
+✔ real wolf and lynx encounters use their own candidates and never repeat just because the actor remains (7915.3713ms)
+✔ muted, paused, hidden, distant, stale and foreign encounters never replay after returning (1505.3115ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 36682.7544

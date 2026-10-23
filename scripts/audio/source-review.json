@@ -1,0 +1,229 @@
+{
+  "checkedDate": "2026-10-23",
+  "method": "Individual source pages opened in the browser using owner-provided Pixabay IDs; canonical redirects, visible titles, durations and AI labels recorded. Absence of an AI label does not establish a field recording. Binary identity with a downloaded source has not been asserted.",
+  "terms": "https://pixabay.com/service/terms/",
+  "licenseSummary": "https://pixabay.com/service/license-summary/",
+  "entries": [
+    {
+      "file": "wind-spring.mp3",
+      "id": "335141",
+      "url": "https://pixabay.com/sound-effects/nature-swallows-wind-reeds-335141/",
+      "title": "swallows, wind, reeds",
+      "duration": 16,
+      "aiLabel": false,
+      "notes": [
+        "Contains baked-in bird calls and reeds; not an independent clean-wind bed."
+      ]
+    },
+    {
+      "file": "wind-autumn.mp3",
+      "id": "34088",
+      "url": "https://pixabay.com/sound-effects/nature-sea-wave-34088/",
+      "title": "Sea Wave",
+      "duration": 19,
+      "aiLabel": false,
+      "notes": [
+        "Trace points to an ocean wave, not autumn wind. Local file is about 10.7 seconds; source page displays 19 seconds. Owner correction pending."
+      ]
+    },
+    {
+      "file": "wind-summer.mp3",
+      "id": "287906",
+      "url": "https://pixabay.com/sound-effects/nature-summer-field-287906/",
+      "title": "Summer field",
+      "duration": 18,
+      "aiLabel": false,
+      "notes": [
+        "Contains birds/insects; not an independent clean-wind bed."
+      ]
+    },
+    {
+      "file": "wind-normal-winter.mp3",
+      "id": "499654",
+      "url": "https://pixabay.com/sound-effects/nature-freezing-winter-wind-499654/",
+      "title": "Freezing Winter Wind",
+      "duration": 13,
+      "aiLabel": false,
+      "notes": [
+        "Local file is about 19 seconds; source page displays 13 seconds. Source/file mapping needs owner confirmation."
+      ]
+    },
+    {
+      "file": "wind-harsh-winter.mp3",
+      "id": "463217",
+      "url": "https://pixabay.com/sound-effects/nature-blizzard-wind-463217/",
+      "title": "Blizzard Wind",
+      "duration": 18,
+      "aiLabel": false,
+      "notes": []
+    },
+    {
+      "file": "sea-waves.mp3",
+      "id": "376898",
+      "url": "https://pixabay.com/sound-effects/nature-ocean-waves-376898/",
+      "title": "Ocean Waves",
+      "duration": 22,
+      "aiLabel": false,
+      "notes": [
+        "Local file is about 19 seconds; source page displays 22 seconds. Source/file mapping needs owner confirmation."
+      ]
+    },
+    {
+      "file": "campfire.mp3",
+      "id": "375866",
+      "url": "https://pixabay.com/sound-effects/nature-campfire-burning-wood-ambience-hd-375866/",
+      "title": "Campfire Burning Wood Ambience HD",
+      "duration": 9,
+      "aiLabel": true,
+      "notes": [
+        "Source explicitly labels this AI generated; owner preference pending."
+      ]
+    },
+    {
+      "file": "cow.mp3",
+      "id": "356517",
+      "url": "https://pixabay.com/sound-effects/nature-sound-effect-cow-mooing-356517/",
+      "title": "Sound Effect - Cow Mooing",
+      "duration": 3,
+      "aiLabel": false,
+      "notes": []
+    },
+    {
+      "file": "goat.mp3",
+      "id": "390303",
+      "url": "https://pixabay.com/sound-effects/nature-goat-baa-390303/",
+      "title": "Goat Baa",
+      "duration": 2,
+      "aiLabel": false,
+      "notes": []
+    },
+    {
+      "file": "pig.mp3",
+      "id": "440220",
+      "url": "https://pixabay.com/sound-effects/nature-pig-grunting-playing-in-mud-sound-effect-440220/",
+      "title": "Pig grunting playing in mud sound effect",
+      "duration": 9,
+      "aiLabel": true,
+      "notes": [
+        "Source explicitly labels this AI generated; owner preference pending."
+      ]
+    },
+    {
+      "file": "sheep.mp3",
+      "id": "122256",
+      "url": "https://pixabay.com/sound-effects/nature-sheep-bleat-122256/",
+      "title": "Sheep Bleat",
+      "duration": 2,
+      "aiLabel": false,
+      "notes": []
+    },
+    {
+      "file": "gull.mp3",
+      "id": "94139",
+      "url": "https://pixabay.com/sound-effects/nature-gull-94139/",
+      "title": "Gull",
+      "duration": 4,
+      "aiLabel": false,
+      "notes": [
+        "Page credits nigelcoop (Freesound); do not claim a more exact gull species."
+      ]
+    },
+    {
+      "file": "seal.mp3",
+      "id": "14648",
+      "url": "https://pixabay.com/sound-effects/nature-sound-of-a-seal-14648/",
+      "title": "Sound of a Seal",
+      "duration": 2,
+      "aiLabel": false,
+      "notes": [
+        "Page credits florianreichelt (Freesound); exact seal species remains unverified."
+      ]
+    },
+    {
+      "file": "rabbit.mp3",
+      "id": "358172",
+      "url": "https://pixabay.com/sound-effects/nature-rabbit-sounds-358172/",
+      "title": "Rabbit sounds",
+      "duration": 5,
+      "aiLabel": false,
+      "notes": []
+    },
+    {
+      "file": "deer.mp3",
+      "id": "472371",
+      "url": "https://pixabay.com/sound-effects/horror-deer-grunt-472371/",
+      "title": "Deer Grunt",
+      "duration": 2,
+      "aiLabel": false,
+      "notes": [
+        "Source describes a buck/stag mating grunt. Not verified as a generic call for every deer actor."
+      ]
+    },
+    {
+      "file": "elk.mp3",
+      "id": "390425",
+      "url": "https://pixabay.com/sound-effects/film-special-effects-bull-390425/",
+      "title": "Bull",
+      "duration": 8,
+      "aiLabel": true,
+      "notes": [
+        "AI-generated Bull with mixed cattle/moose tags. Not verified as an elk/moose recording."
+      ]
+    },
+    {
+      "file": "fox.mp3",
+      "id": "46664",
+      "url": "https://pixabay.com/sound-effects/nature-26-angry-fox-46664/",
+      "title": "26-angry fox",
+      "duration": 7,
+      "aiLabel": false,
+      "notes": [
+        "Angry growling/panting context. Do not treat as a calm recurring ambience call."
+      ]
+    },
+    {
+      "file": "lynx.mp3",
+      "id": "41730",
+      "url": "https://pixabay.com/sound-effects/nature-tomcat2-41730/",
+      "title": "Tomcat2",
+      "duration": 6,
+      "aiLabel": false,
+      "notes": [
+        "Source is a domestic tomcat, not a verified lynx recording."
+      ]
+    },
+    {
+      "file": "wolf.mp3",
+      "id": "268619",
+      "url": "https://pixabay.com/sound-effects/nature-wolf-howl-268619/",
+      "title": "Wolf howl",
+      "duration": 8,
+      "aiLabel": true,
+      "notes": [
+        "Source explicitly labels this AI generated; owner preference pending."
+      ]
+    },
+    {
+      "file": "orca.mp3",
+      "id": "449902",
+      "url": "https://pixabay.com/sound-effects/baleia-orca-449902/",
+      "title": "Baleia orca",
+      "duration": 5,
+      "aiLabel": true,
+      "notes": [
+        "AI generated; exact call identity and above-water suitability unverified."
+      ]
+    },
+    {
+      "file": "whale.mp3",
+      "id": "515260",
+      "url": "https://pixabay.com/sound-effects/nature-haunting-whale-song-515260/",
+      "title": "Haunting Whale Song",
+      "duration": 4,
+      "aiLabel": false,
+      "notes": [
+        "Source describes underwater whale song, not a verified surface breath/splash."
+      ]
+    }
+  ]
+}

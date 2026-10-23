@@ -7,6 +7,8 @@ import './campaign-start.css';
 import { lastIslandLoad } from './IslandLoadStatus';
 import { LoadingRunDiagnostics } from './LoadingRunDiagnostics';
 import { PlaytestPerformance } from './PlaytestPerformance';
+import { FjordAudio } from '../audio/FjordAudio';
+import { AudioControls } from '../audio/AudioControls';
 
 export interface CampaignStartAttempt {
     kind: 'continue' | 'restart' | 'new';
@@ -19,6 +21,8 @@ export interface CampaignStartAttempt {
     diagnosticRun?: LoadingRunDiagnostics;
     /** Presentation-only diagnostics; never serialized into a campaign. */
     performance?: PlaytestPerformance;
+    audio?: FjordAudio;
+    audioControls?: AudioControls;
     /** Called once, after world, assets and camera are ready. A failed write keeps the prior save. */
     activate(text: string): void;
 }
@@ -72,9 +76,17 @@ export async function runFjordEntry(ports: EntryPorts = {
     },
 }): Promise<void> {
     const diagnostics = new PlaytestPerformance();
+    let audioStorage: Storage | undefined;
+    try { audioStorage = window.localStorage; } catch { /* Optional presentation preferences. */ }
+    const audio = new FjordAudio({ storage: audioStorage });
+    const audioControls = new AudioControls(audio, new URLSearchParams(window.location.search).get('audioProof') === '1');
+    if (new URLSearchParams(window.location.search).get('audioMix') === '1')
+        audioControls.root.querySelector('[data-audio-pack]')!.textContent =
+            'Settlement mix review: local candidate recordings. Listening and publication review are pending.';
     const showShell = () => {
         const content = shell();
         content.parentElement!.append(diagnostics.settings());
+        content.parentElement!.append(audioControls.root);
         diagnostics.setMode('Start menu');
         diagnostics.mount();
         return content;
@@ -245,6 +257,7 @@ export async function runFjordEntry(ports: EntryPorts = {
                 let activated = false;
                 const attempt: CampaignStartAttempt = {
                     performance: diagnostics,
+                    audio, audioControls,
                     kind: choice as CampaignStartAttempt['kind'], seed, source: selected,
                     restart: choice === 'restart' ? restart : undefined,
                     resumePlayback: handoff, signal: lifetime.signal,
@@ -318,7 +331,10 @@ export async function runFjordEntry(ports: EntryPorts = {
             }
         }
     } finally {
-        if (lifetime.signal.aborted) diagnostics.dispose();
+        if (lifetime.signal.aborted) {
+            diagnostics.dispose();
+            audioControls.dispose();
+        }
         window.removeEventListener('pagehide', leaving);
     }
 }

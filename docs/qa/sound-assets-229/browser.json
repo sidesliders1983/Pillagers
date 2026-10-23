@@ -1,0 +1,321 @@
+{
+  "version": 1,
+  "recordedUtc": "2026-10-23T09:15:40.245Z",
+  "scope": "Local candidate audition; decode observations do not prove audible quality or device output.",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "build": {
+    "builtUtc": "2026-10-23T09:14:25.700Z",
+    "catalogueSHA256": "895f6f5b3173898e073abbf9ec198b8f8c7d234a10b6755210f964eeb0dab7ba",
+    "bundleSHA256": "d7181f697c1d89589c86cf62019ea8568d17fe45be7e2aa87866d92b1bc7dfd5",
+    "sourceHashes": {
+      "src/audio/FjordAudio.ts": "c2f6bfecbf1c29578c71e3d8747544151704acf38ab17c0d10db93bf91d8e97e",
+      "src/audio/Soundscape.ts": "30da1f276bc3ed71fc63fb785389e32a668d830270b106d12e68b04de3ae7cdc",
+      "src/audio/AudioControls.ts": "cc07037dea82f2e558d8e8b728db06f50019e19ddcc15678cde19632dd3ec84e",
+      "scripts/audio/audition.ts": "56251a7ad3f63f71a33836fa61a2617c135c48d8b9bd8560000ee979eaa8972d",
+      "scripts/audio/serve.mjs": "8c4c36f1ff179cbd23d866cf456239663104c6e6db096328e0cda320033b51b6"
+    }
+  },
+  "observations": [
+    {
+      "id": "wind-spring",
+      "decoded": true,
+      "state": "running",
+      "playing": 1,
+      "buffers": 1,
+      "decodedBytes": 3840000,
+      "checkedUtc": "2026-10-23T09:15:13.537Z"
+    },
+    {
+      "id": "wind-autumn",
+      "decoded": true,
+      "state": "running",
+      "playing": 1,
+      "buffers": 2,
+      "decodedBytes": 7296000,
+      "checkedUtc": "2026-10-23T09:15:14.553Z"
+    },
+    {
+      "id": "wind-summer",
+      "decoded": true,
+      "state": "running",
+      "playing": 1,
+      "buffers": 3,
+      "decodedBytes": 11136000,
+      "checkedUtc": "2026-10-23T09:15:15.070Z"
+    },
+    {
+      "id": "wind-normal-winter",
+      "decoded": true,
+      "state": "running",
+      "playing": 1,
+      "buffers": 4,
+      "decodedBytes": 14976000,
+      "checkedUtc": "2026-10-23T09:15:15.587Z"
+    },
+    {
+      "id": "wind-harsh-winter",
+      "decoded": true,
+      "state": "running",
+      "playing": 1,
+      "buffers": 5,
+      "decodedBytes": 18816000,
+      "checkedUtc": "2026-10-23T09:15:16.088Z"
+    },
+    {
+      "id": "sea-waves",
+      "decoded": true,
+      "state": "running",
+      "playing": 1,
+      "buffers": 6,
+      "decodedBytes": 20736000,
+      "checkedUtc": "2026-10-23T09:15:16.607Z"
+    },
+    {
+      "id": "campfire",
+      "decoded": true,
+      "state": "running",
+      "playing": 1,
+      "buffers": 7,
+      "decodedBytes": 21888000,
+      "checkedUtc": "2026-10-23T09:15:17.120Z"
+    },
+    {
+      "id": "gull",
+      "decoded": true,
+      "state": "running",
+      "playing": 1,
+      "buffers": 8,
+      "decodedBytes": 22606848,
+      "checkedUtc": "2026-10-23T09:15:17.621Z"
+    },
+    {
+      "id": "cow",
+      "decoded": true,
+      "state": "running",
+      "playing": 1,
+      "buffers": 9,
+      "decodedBytes": 23138496,
+      "checkedUtc": "2026-10-23T09:15:18.136Z"
+    },
+    {
+      "id": "goat",
+      "decoded": true,
+      "state": "running",
+      "playing": 1,
+      "buffers": 10,
+      "decodedBytes": 23444440,
+      "checkedUtc": "2026-10-23T09:15:18.637Z"
+    },
+    {
+      "id": "pig",
+      "decoded": true,
+      "state": "running",
+      "playing": 1,
+      "buffers": 10,
+      "decodedBytes": 21337048,
+      "checkedUtc": "2026-10-23T09:15:19.156Z"
+    },
+    {
+      "id": "sheep",
+      "decoded": true,
+      "state": "running",
+      "playing": 1,
+      "buffers": 11,
+      "decodedBytes": 21663056,
+      "checkedUtc": "2026-10-23T09:15:20.703Z"
+    },
+    {
+      "id": "seal",
+      "decoded": true,
+      "state": "running",
+      "playing": 1,
+      "buffers": 12,
+      "decodedBytes": 22036304,
+      "checkedUtc": "2026-10-23T09:15:34.537Z"
+    },
+    {
+      "id": "deer",
+      "decoded": true,
+      "state": "running",
+      "playing": 1,
+      "buffers": 13,
+      "decodedBytes": 22427984,
+      "checkedUtc": "2026-10-23T09:15:35.054Z"
+    },
+    {
+      "id": "elk",
+      "decoded": true,
+      "state": "running",
+      "playing": 1,
+      "buffers": 14,
+      "decodedBytes": 23982792,
+      "checkedUtc": "2026-10-23T09:15:35.571Z"
+    },
+    {
+      "id": "fox",
+      "decoded": true,
+      "state": "running",
+      "playing": 1,
+      "buffers": 14,
+      "decodedBytes": 21941448,
+      "checkedUtc": "2026-10-23T09:15:36.087Z"
+    },
+    {
+      "id": "lynx",
+      "decoded": true,
+      "state": "running",
+      "playing": 1,
+      "buffers": 15,
+      "decodedBytes": 23051976,
+      "checkedUtc": "2026-10-23T09:15:36.603Z"
+    },
+    {
+      "id": "orca",
+      "decoded": true,
+      "state": "running",
+      "playing": 1,
+      "buffers": 16,
+      "decodedBytes": 24030000,
+      "checkedUtc": "2026-10-23T09:15:37.120Z"
+    },
+    {
+      "id": "whale",
+      "decoded": true,
+      "state": "running",
+      "playing": 1,
+      "buffers": 17,
+      "decodedBytes": 24744240,
+      "checkedUtc": "2026-10-23T09:15:37.621Z"
+    },
+    {
+      "id": "wolf",
+      "decoded": true,
+      "state": "running",
+      "playing": 1,
+      "buffers": 17,
+      "decodedBytes": 22459048,
+      "checkedUtc": "2026-10-23T09:15:38.121Z"
+    },
+    {
+      "id": "rabbit",
+      "decoded": true,
+      "state": "running",
+      "playing": 1,
+      "buffers": 18,
+      "decodedBytes": 23351808,
+      "checkedUtc": "2026-10-23T09:15:38.637Z"
+    },
+    {
+      "id": "axe-a",
+      "decoded": true,
+      "state": "running",
+      "playing": 1,
+      "buffers": 19,
+      "decodedBytes": 23635968,
+      "checkedUtc": "2026-10-23T09:15:39.153Z"
+    },
+    {
+      "id": "axe-b",
+      "decoded": true,
+      "state": "running",
+      "playing": 1,
+      "buffers": 20,
+      "decodedBytes": 23920128,
+      "checkedUtc": "2026-10-23T09:15:39.670Z"
+    }
+  ],
+  "notes": [
+    {
+      "id": "wind-spring",
+      "notes": ""
+    },
+    {
+      "id": "wind-autumn",
+      "notes": ""
+    },
+    {
+      "id": "wind-summer",
+      "notes": ""
+    },
+    {
+      "id": "wind-normal-winter",
+      "notes": ""
+    },
+    {
+      "id": "wind-harsh-winter",
+      "notes": ""
+    },
+    {
+      "id": "sea-waves",
+      "notes": ""
+    },
+    {
+      "id": "campfire",
+      "notes": ""
+    },
+    {
+      "id": "gull",
+      "notes": ""
+    },
+    {
+      "id": "cow",
+      "notes": ""
+    },
+    {
+      "id": "goat",
+      "notes": ""
+    },
+    {
+      "id": "pig",
+      "notes": ""
+    },
+    {
+      "id": "sheep",
+      "notes": ""
+    },
+    {
+      "id": "seal",
+      "notes": ""
+    },
+    {
+      "id": "deer",
+      "notes": ""
+    },
+    {
+      "id": "elk",
+      "notes": ""
+    },
+    {
+      "id": "fox",
+      "notes": ""
+    },
+    {
+      "id": "lynx",
+      "notes": ""
+    },
+    {
+      "id": "orca",
+      "notes": ""
+    },
+    {
+      "id": "whale",
+      "notes": ""
+    },
+    {
+      "id": "wolf",
+      "notes": ""
+    },
+    {
+      "id": "rabbit",
+      "notes": ""
+    },
+    {
+      "id": "axe-a",
+      "notes": ""
+    },
+    {
+      "id": "axe-b",
+      "notes": ""
+    }
+  ]
+}
