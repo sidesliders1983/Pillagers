@@ -159,7 +159,11 @@ test('returning survivors keep their gear, repeated dispatch does not debit it a
     assert.equal(state.smithery.assignments['founder-1'], undefined);
     assert.equal(state.smithery.stored.woodenSpear, 1, 'The carried spear was lost, not refunded');
     assert.equal(state.world.missions['mission-2'].result.equipment.lost.length, 4);
-    assert.equal(state.events.filter(event => event.type === 'EquipmentLost').length, 1);
+    const losses = state.events.filter(event => event.type === 'EquipmentLost');
+    assert.equal(losses.length, 1);
+    assert.equal(losses[0].personaId, 'founder-1');
+    assert.equal(losses[0].details.missionId, 'mission-2');
+    assert.deepEqual(losses[0].details.items, ['woodenSpear']);
 });
 
 test('save/load, rollback and split work advances preserve integer stocks, progress, RNG and factual events', () => {
@@ -188,7 +192,11 @@ test('death at home recovers clan gear and transfer cannot carry a second clan i
     state = advance(state, 900);
     assert.equal(state.smithery.stored.woodenSpear, 2);
     assert.equal(state.smithery.assignments['founder-1'], undefined);
-    assert.equal(state.events.filter(event => event.type === 'EquipmentRecovered').length, 1);
+    const recovered = state.events.filter(event => event.type === 'EquipmentRecovered');
+    assert.equal(recovered.length, 1);
+    assert.equal(recovered[0].details.missionId, null);
+    assert.equal(recovered[0].details.reason, 'death');
+    assert.equal(state.events.some(event => event.type === 'EquipmentLost'), false);
     let looter = campaign();
     const targetClanId = Object.keys(looter.world.targetClans)[0], targetClan = looter.world.targetClans[targetClanId];
     const personId = Object.keys(targetClan.personas).sort()[0];

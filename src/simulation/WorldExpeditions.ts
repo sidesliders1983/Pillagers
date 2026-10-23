@@ -155,7 +155,15 @@ export function resolveExpeditionCrew(state:SimulationState,m:Pick<ExpeditionMis
  validatePillageEquipment(m.equipment,m.memberIds,m.successBps,m.casualtyBps);
  const risk=(id:string)=>m.equipment?.members.find(member=>member.personaId===id)?.casualtyBps??m.casualtyBps;
  const casualties=new Set(m.memberIds.filter(id=>state.personas[id]?.deathWinter===null&&chance(state,risk(id))));
- resolveMortality(state,()=>true,(type,id,details)=>record(state,type,{...details,cause:'Expedition',missionId:m.id,mortalityRiskBps:risk(id!)},id),casualties);
+ resolveMortality(
+  state,
+  () => true,
+  (type, id, details) => record(state, type, {
+   ...details, cause: 'Expedition', missionId: m.id, mortalityRiskBps: risk(id!),
+  }, id),
+  casualties,
+  m.id,
+ );
  reconcileFarmyards(state,previousFarmyards);
  const live=m.memberIds.filter(id=>state.personas[id]?.deathWinter===null);
  return {live,success:live.length>0&&chance(state,m.successBps),equipment:equipmentResult(m.equipment,live)};

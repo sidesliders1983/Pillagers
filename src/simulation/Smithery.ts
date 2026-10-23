@@ -155,10 +155,16 @@ export function applySmitheryCommand(state: SimulationState, command: SmitheryCo
         previousItem: previous }, person.id);
 }
 /** Clan property stays at home on transfer; an expedition death permanently loses carried gear. */
-export function releaseEquipment(state: SimulationState, personaId: string, reason: 'death' | 'transfer') {
+export function releaseEquipment(
+    state: SimulationState,
+    personaId: string,
+    reason: 'death' | 'transfer',
+    expeditionMissionId?: string,
+) {
     const gear = state.smithery?.assignments[personaId];
     if (!gear) return;
-    const lost = reason === 'death' && personaAway(state, personaId);
+    // Physical missions are already Returned when their casualties are resolved.
+    const lost = reason === 'death' && (expeditionMissionId !== undefined || personaAway(state, personaId));
     const mission = Object.values(state.world?.missions ?? {}).find(m =>
         m.status === 'Away' && m.memberIds.includes(personaId)) ??
         Object.values(state.world?.spatial?.missions ?? {}).find(m =>
@@ -168,7 +174,7 @@ export function releaseEquipment(state: SimulationState, personaId: string, reas
     delete state.smithery!.assignments[personaId];
     record(state, lost ? 'EquipmentLost' : 'EquipmentRecovered', {
         name: state.personas[personaId].name, items, itemNames: items.map(item => equipmentLabels[item]),
-        reason, missionId: mission?.id ?? null,
+        reason, missionId: expeditionMissionId ?? mission?.id ?? null,
     }, personaId);
 }
 function protectedRisk(base: number, shield: Shield, rules: Pick<SmitheryConfig,

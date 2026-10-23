@@ -12,7 +12,13 @@ export const defaultMortalityBands:MortalityBand[] = [
 ];
 type EventWriter=(type:string,personaId?:string,details?:Record<string,unknown>)=>void;
 /** Resolve all rolls before cleanup so simultaneous deaths retain factual relationship context. */
-export function resolveMortality(state:SimulationState,roll:(bps:number)=>boolean,emit:EventWriter,eligibleIds?:Set<string>):number {
+export function resolveMortality(
+    state: SimulationState,
+    roll: (bps: number) => boolean,
+    emit: EventWriter,
+    eligibleIds?: Set<string>,
+    expeditionMissionId?: string,
+): number {
     const mechanics=state.mechanics!,bands=mechanics.config.mortalityBands;
     const deaths=Object.keys(state.personas).sort().flatMap(id=>{
         const person=state.personas[id];if(person.deathWinter!==null||(eligibleIds&&!eligibleIds.has(id)))return [];
@@ -36,7 +42,7 @@ export function resolveMortality(state:SimulationState,roll:(bps:number)=>boolea
             home.memberIds=home.memberIds.filter(id=>id!==person.id);
             if(home.memberIds.length===0)home.residenceId=null;
         }
-        releaseEquipment(state, person.id, 'death');
+        releaseEquipment(state, person.id, 'death', expeditionMissionId);
         emit('PersonaDied',person.id,{...death,participants:[person.id],name:person.name});
     }
     if(deaths.length){

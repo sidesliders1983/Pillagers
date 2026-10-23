@@ -82,7 +82,11 @@ saved common risks and success chance.
 
 Survivors keep their assigned gear on homecoming, including after an unsuccessful
 or recalled mission. Death while away permanently loses carried gear; there is no
-refund or free replacement. Death at home returns the clan's gear to storage.
+refund or free replacement. The resolving expedition explicitly identifies that
+loss, even when its physical mission has already reached `Returned`. The
+`EquipmentLost` event identifies the same mission and items as the immutable return
+report; those items never return to inventory.
+Death at home returns the clan's gear to storage, including after an earlier raid.
 On a persona transfer, equipment remains property of the source clan and is returned
 to that clan's store; DNA, experience and identity still transfer through the existing
 mechanism. Returned/lost raid equipment is recorded against the immutable snapshot.

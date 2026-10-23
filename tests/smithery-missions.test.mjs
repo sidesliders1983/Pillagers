@@ -65,6 +65,81 @@ test('physical Pillage freezes named gear at dispatch and preserves it through s
     assert.throws(() => core.serializeState(corrupted), /equipment/);
 });
 
+test('physical Pillage casualties permanently lose carried gear with the correct mission history', () => {
+    let state = knownRival();
+    // Custom saved rules guarantee a casualty even with a leather shield; no RNG is mocked.
+    state.world.config.casualtyBps.Pillage = 10000;
+    state.smithery.config.woodenShieldProtectionBps = 0;
+    state.smithery.config.leatherShieldProtectionBps = 0;
+    const dispatched = depart(state);
+    const mission = Object.values(dispatched.world.spatial.missions).at(-1);
+    assert.equal(mission.task.equipment.members[0].casualtyBps, 10000);
+
+    const checkpoint = core.reconstructState(core.serializeState(advance(dispatched, 120)));
+    const restored = advance(checkpoint, 380);
+    const returned = restored.world.spatial.missions[mission.id];
+    assert.equal(returned.status, 'Returned');
+    assert.deepEqual(returned.task.result.casualtyIds, ['founder-1', 'founder-2']);
+    assert.equal(restored.smithery.assignments['founder-1'], undefined);
+    assert.deepEqual(restored.smithery.stored, {
+        woodenSpear: 0, woodenShield: 0, leatherShield: 0,
+    }, 'Lost gear must never become available for another resident');
+
+    const reportedLoss = returned.task.result.equipment.lost.find(member => member.personaId === 'founder-1');
+    assert.equal(reportedLoss.weapon, 'woodenSpear');
+    assert.equal(reportedLoss.shield, 'leatherShield');
+    assert.deepEqual(returned.task.result.equipment.returned, []);
+    const losses = restored.events.filter(event => event.type === 'EquipmentLost');
+    assert.equal(losses.length, 1);
+    assert.equal(losses[0].personaId, 'founder-1');
+    assert.equal(losses[0].details.missionId, mission.id);
+    assert.deepEqual(losses[0].details.items, [reportedLoss.weapon, reportedLoss.shield]);
+    assert.equal(restored.events.some(event => event.type === 'EquipmentRecovered'), false);
+    const death = restored.events.find(event => event.type === 'PersonaDied' && event.personaId === 'founder-1');
+    assert.equal(death.details.cause, 'Expedition');
+    assert.equal(death.details.missionId, losses[0].details.missionId);
+    const report = restored.events.find(event => event.type === 'ExpeditionReturned' &&
+        event.details.missionId === mission.id);
+    assert.deepEqual(report.details.equipment, returned.task.result.equipment);
+
+    assert.equal(core.serializeState(restored), core.serializeState(advance(dispatched, 500)));
+    assert.equal(core.serializeState(core.reconstructState(core.serializeState(restored))),
+        core.serializeState(restored));
+    assert.throws(() => apply(restored, {
+        type: 'AssignEquipment', personaId: 'founder-3', slot: 'weapon', item: 'woodenSpear',
+    }), /No stored/);
+});
+
+test('physical Pillage survivors retain gear and a later home death recovers it without a mission loss', () => {
+    const dispatched = depart(knownRival());
+    const mission = Object.values(dispatched.world.spatial.missions).at(-1);
+    let state = advance(dispatched, 500);
+    const returned = state.world.spatial.missions[mission.id];
+    assert.equal(returned.status, 'Returned');
+    assert.deepEqual(returned.task.result.casualtyIds, []);
+    assert.deepEqual(returned.task.result.equipment.lost, []);
+    assert.deepEqual(state.smithery.assignments['founder-1'], {
+        weapon: 'woodenSpear', shield: 'leatherShield',
+    });
+    assert.deepEqual(state.smithery.stored, { woodenSpear: 0, woodenShield: 0, leatherShield: 0 });
+    assert.equal(state.events.some(event => ['EquipmentRecovered', 'EquipmentLost'].includes(event.type)), false);
+
+    const immutableReport = structuredClone(returned.task.result);
+    state.mechanics.config.mortalityBands = [{ minAge: 0, chanceBps: 10000 }];
+    state = advance(state, state.ticksPerWinter);
+    assert.equal(state.smithery.assignments['founder-1'], undefined);
+    assert.deepEqual(state.smithery.stored, { woodenSpear: 1, woodenShield: 0, leatherShield: 1 });
+    const recovered = state.events.filter(event => event.type === 'EquipmentRecovered');
+    assert.equal(recovered.length, 1);
+    assert.equal(recovered[0].personaId, 'founder-1');
+    assert.equal(recovered[0].details.missionId, null);
+    assert.deepEqual(recovered[0].details.items, ['woodenSpear', 'leatherShield']);
+    assert.equal(state.events.some(event => event.type === 'EquipmentLost'), false);
+    assert.deepEqual(state.world.spatial.missions[mission.id].task.result, immutableReport);
+    assert.equal(core.serializeState(core.reconstructState(core.serializeState(state))),
+        core.serializeState(state));
+});
+
 test('recalling a physical Pillage preserves surviving gear, consumes no second recipe and refunds no Food', () => {
     let state = depart(knownRival());
     const materials = state.stocks.materials;
