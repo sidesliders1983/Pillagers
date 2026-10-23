@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "recordedUtc": "2026-10-23T06:55:02.931Z",
+  "recordedUtc": "2026-10-23T07:01:16.212Z",
   "node": "v24.19.0",
-  "base": "349f8d0645e142fb7a7f6372609aba4112bc29f6",
+  "base": "b1e49babc8b631948c32e1f4436289b0d828aa5f",
   "scope": "Node logical-policy microbenchmark; no browser, Web Audio rendering, real frame rate or listening claim",
   "syntheticSources": 128,
   "cadenceHz": 5,
@@ -12,11 +12,11 @@
   "listened": false,
   "sourceHashes": {
     "src/audio/Soundscape.ts": "30da1f276bc3ed71fc63fb785389e32a668d830270b106d12e68b04de3ae7cdc",
-    "src/audio/FjordAudio.ts": "bc65106918d7cf68eee482e7d10399d745e3eada807e7e6d62b6c7f55bc7f3e5",
+    "src/audio/FjordAudio.ts": "f222499f3c077c6dcd756e051d2ac48df752da8d4b2ae502e7d129b09421e72c",
     "src/audio/AudioControls.ts": "cc07037dea82f2e558d8e8b728db06f50019e19ddcc15678cde19632dd3ec84e",
     "src/audio/SoundPack.ts": "242abf15b81bf6b824454e2e4a312c2249da0413f0a7595a5e5ccb521b01e759",
     "src/fjord-play/FjordEntry.ts": "b1589419183b4aba3e1df842eafc6238d3262fa093f728101c888e20ae0117cf",
-    "src/fjord-play/FjordScene.ts": "a854b970d540ab893725b0fb133ef7b82d7ae3db6635dc03d1eeba681fb93ab6",
+    "src/fjord-play/FjordScene.ts": "e3d012acfc4963b44fc26e57a69ed1bbe0474aafa5ee867814ca5a4e8cc564aa",
     "src/fjord-play/FjordPlay.ts": "76acb300cf97486bf3d3961615060152ee7f018ac71cbc1d681883e5cea8e470",
     "scripts/qa/measure-soundscape.mjs": "162cde4a2a15044733ffb57f0cbf86bdb2e539706115ddbb21e42228cd2c3db7"
   },
@@ -24,49 +24,49 @@
     {
       "mode": "off",
       "count": 1200,
-      "p50Ms": 0.00020000000006348273,
+      "p50Ms": 0.0002000000000066393,
       "p95Ms": 0.0004000000000132786,
-      "worstMs": 0.043099999999981264,
+      "worstMs": 0.03859999999997399,
       "highSelected": 0
     },
     {
       "mode": "near",
       "count": 1200,
-      "p50Ms": 0.06809999999995853,
-      "p95Ms": 0.11009999999998854,
-      "worstMs": 0.4313999999999396,
+      "p50Ms": 0.06510000000002947,
+      "p95Ms": 0.11210000000005493,
+      "worstMs": 0.37789999999995416,
       "highSelected": 8
     },
     {
       "mode": "overview",
       "count": 1200,
-      "p50Ms": 0.06470000000001619,
-      "p95Ms": 0.15649999999993724,
-      "worstMs": 0.4379999999999882,
+      "p50Ms": 0.06079999999997199,
+      "p95Ms": 0.10469999999997981,
+      "worstMs": 0.40010000000006585,
       "highSelected": 2
     },
     {
       "mode": "overview",
       "count": 1200,
-      "p50Ms": 0.06110000000001037,
-      "p95Ms": 0.09519999999997708,
-      "worstMs": 0.38179999999999836,
+      "p50Ms": 0.06069999999999709,
+      "p95Ms": 0.10530000000005657,
+      "worstMs": 0.4096000000000686,
       "highSelected": 2
     },
     {
       "mode": "near",
       "count": 1200,
-      "p50Ms": 0.06229999999993652,
-      "p95Ms": 0.10160000000007585,
-      "worstMs": 0.39160000000003947,
+      "p50Ms": 0.05809999999996762,
+      "p95Ms": 0.09450000000003911,
+      "worstMs": 0.4561999999999671,
       "highSelected": 8
     },
     {
       "mode": "off",
       "count": 1200,
-      "p50Ms": 0.00020000000006348273,
-      "p95Ms": 0.0004000000000132786,
-      "worstMs": 0.019300000000043838,
+      "p50Ms": 0.0001999999999497959,
+      "p95Ms": 0.00020000000006348273,
+      "worstMs": 0.0004999999999881766,
       "highSelected": 0
     }
   ]

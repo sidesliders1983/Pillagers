@@ -646,7 +646,7 @@ export function createFjordScene(options: {
         selectionLabels.setAnchors(layer!.root.userData.markers ?? []);
         productionLabels.setAnchors(layer!.productionAnchors());
         if (performance.now() - lastDiagnostics > 500) {
-            if (options.audio) canvas.dataset.audio = JSON.stringify(options.audio.inspect());
+            if (options.audio) canvas.dataset.audio = JSON.stringify(options.audio.sample());
             if (diagnostics?.enabled) diagnostics.context({ ...layer!.performanceCounts(),
                 renderedWildlife: wildlife?.renderedCount(),
                 quality: document.querySelector<HTMLSelectElement>('#fjord-quality')!.value,

@@ -379,6 +379,11 @@ export class FjordAudio {
         }
         this.retiring.clear();
     }
+    /** Existing scene diagnostics cadence also refreshes the shared settings view. */
+    sample() {
+        this.changed?.();
+        return this.inspect();
+    }
     inspect() {
         return { enabled: this.enabled, hidden: this.hidden, state: this.context?.state ?? 'not-enabled',
             playing: this.voices.size, retiring: this.retiring.size,
