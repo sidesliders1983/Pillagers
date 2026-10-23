@@ -22,6 +22,9 @@ test('the touch diagnostic view is opt-in, bounded, freezeable and offers select
         assert.equal(timers, 0);
         settings.querySelector('select').value = 'compact';
         settings.querySelector('select').dispatchEvent(new dom.window.Event('change'));
+        dom.window.dispatchEvent(new dom.window.PageTransitionEvent('pageshow', { persisted: false }));
+        assert.equal(JSON.parse(overlay.exportJSON()).sample.mode, 'Start menu',
+            'An ordinary initial pageshow is not a BFCache return or a paused campaign');
         const info = { autoReset: true, memory: { geometries: 9, textures: 7 }, programs: [],
             render: { calls: 0, triangles: 0 }, reset() { this.render.calls = this.render.triangles = 0; } };
         const renderer = { info, getContext: () => ({ getExtension: () => null }), getPixelRatio: () => 1,

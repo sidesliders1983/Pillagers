@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "base": "671270ebfdef32b55d081e5d9cd1d2dcdc623b92",
+  "base": "9cf4a6995d78d56ef03aa1b90890307281373d3e",
   "node": "v24.19.0",
-  "recordedUtc": "2026-10-23T05:17:52.288Z",
+  "recordedUtc": "2026-10-23T05:27:39.020Z",
   "environment": "Node/jsdom; no browser, layout engine, WebGL or recorder controlled by this harness",
   "sourceHashes": {
     "src/fjord-play/PerformanceMeasurements.ts": "56da981f88693b7ba55b7c58ee13a77d5e4043f03af6e74d43505bd4bd1aefd6",
     "src/fjord-play/PerformanceGpuTimer.ts": "4a3bf677852a4992914ba4ed56f3c171406f947772f1749f9318f7b177be8f31",
-    "src/fjord-play/PlaytestPerformance.ts": "bf885136b428211f51b06992b8673bf1d789b1476807b8f9fba58fba57683dc8",
+    "src/fjord-play/PlaytestPerformance.ts": "93072c1eeabdd77131367555ed2eec1c0d4b771f51a09c9b3b38c8424dbff281",
     "src/fjord-play/performance-overlay.css": "321b245cea68fbaa8c03153357f944ed0710a51973f410b502cee67c4ae34550",
     "src/fjord-play/FjordEntry.ts": "922e722861d417b68d2bb82d624bc9075130f4bca08e9e58d5076a08637fa69b",
     "src/fjord-play/FjordHeader.ts": "fea3a8f06e544306f472af0ea6d995e948568fbec86429bcf1f795b3a301f37c",
@@ -37,20 +37,20 @@
       "fixture": "summer-32",
       "mode": "Running",
       "view": "none",
-      "initMs": 0.0033000000003085006,
+      "initMs": 0.002100000000154978,
       "frameHook": {
         "count": 3480,
-        "meanMs": 0.00036137931035055173,
-        "p95Ms": 0.0005999999993946403,
-        "worstMs": 0.011700000000018917
+        "meanMs": 0.00020402298850405882,
+        "p95Ms": 0.0003000000001520675,
+        "worstMs": 0.013800000000173895
       },
       "sampledHookAndDOM": {
         "count": 120,
-        "meanMs": 0.0012800000000197543,
-        "p95Ms": 0.0024000000003070454,
-        "worstMs": 0.006300000000010186
+        "meanMs": 0.0009799999999510571,
+        "p95Ms": 0.001900000000205182,
+        "worstMs": 0.014200000000073487
       },
-      "nodeHeapDeltaAfterDisposeBytes": 806112,
+      "nodeHeapDeltaAfterDisposeBytes": 788792,
       "highTimers": 0,
       "timersAfterDispose": 0,
       "reportBytes": 0,
@@ -60,20 +60,20 @@
       "fixture": "summer-32",
       "mode": "Running",
       "view": "off",
-      "initMs": 59.41790000000037,
+      "initMs": 30.290700000000015,
       "frameHook": {
         "count": 3480,
-        "meanMs": 0.0003718390804547669,
-        "p95Ms": 0.000600000000304135,
-        "worstMs": 0.061899999999695865
+        "meanMs": 0.00018577586206813338,
+        "p95Ms": 0.0003000000001520675,
+        "worstMs": 0.02790000000004511
       },
       "sampledHookAndDOM": {
         "count": 120,
-        "meanMs": 0.003280833333352954,
-        "p95Ms": 0.0033000000003085006,
-        "worstMs": 0.07220000000052096
+        "meanMs": 0.001667499999981222,
+        "p95Ms": 0.001900000000205182,
+        "worstMs": 0.048699999999826105
       },
-      "nodeHeapDeltaAfterDisposeBytes": 1905224,
+      "nodeHeapDeltaAfterDisposeBytes": 1873936,
       "highTimers": 0,
       "timersAfterDispose": 0,
       "reportBytes": 767,
@@ -83,66 +83,66 @@
       "fixture": "summer-32",
       "mode": "Running",
       "view": "compact",
-      "initMs": 11.519100000000435,
+      "initMs": 8.984199999999873,
       "frameHook": {
         "count": 3480,
-        "meanMs": 0.0005648275862164343,
-        "p95Ms": 0.001299999999901047,
-        "worstMs": 0.06640000000061264
-      },
-      "sampledHookAndDOM": {
-        "count": 120,
-        "meanMs": 0.6747749999999466,
-        "p95Ms": 1.1703999999999724,
-        "worstMs": 2.541500000000269
-      },
-      "nodeHeapDeltaAfterDisposeBytes": 1369568,
-      "highTimers": 1,
-      "timersAfterDispose": 0,
-      "reportBytes": 28435,
-      "coreHash": "10679fee36b93109d492a38956f6e9b57c0656f02827edf6a97219ccf6eeed3a"
-    },
-    {
-      "fixture": "summer-32",
-      "mode": "Running",
-      "view": "details",
-      "initMs": 10.625500000000102,
-      "frameHook": {
-        "count": 3480,
-        "meanMs": 0.0005099425287290228,
-        "p95Ms": 0.0007999999997991836,
-        "worstMs": 0.043900000000576256
-      },
-      "sampledHookAndDOM": {
-        "count": 120,
-        "meanMs": 0.6277116666666794,
-        "p95Ms": 0.9166999999997643,
-        "worstMs": 2.9117999999998574
-      },
-      "nodeHeapDeltaAfterDisposeBytes": 948152,
-      "highTimers": 1,
-      "timersAfterDispose": 0,
-      "reportBytes": 28435,
-      "coreHash": "10679fee36b93109d492a38956f6e9b57c0656f02827edf6a97219ccf6eeed3a"
-    },
-    {
-      "fixture": "summer-32",
-      "mode": "Running",
-      "view": "details",
-      "initMs": 9.977300000000469,
-      "frameHook": {
-        "count": 3480,
-        "meanMs": 0.0005142241379302107,
+        "meanMs": 0.00034531609195652695,
         "p95Ms": 0.0010000000002037268,
-        "worstMs": 0.07470000000012078
+        "worstMs": 0.040600000000267755
       },
       "sampledHookAndDOM": {
         "count": 120,
-        "meanMs": 0.5903824999999643,
-        "p95Ms": 0.9423999999999069,
-        "worstMs": 1.9805999999998676
+        "meanMs": 0.4594416666666727,
+        "p95Ms": 0.8522000000002663,
+        "worstMs": 1.0994000000000597
       },
-      "nodeHeapDeltaAfterDisposeBytes": 1039744,
+      "nodeHeapDeltaAfterDisposeBytes": 1345560,
+      "highTimers": 1,
+      "timersAfterDispose": 0,
+      "reportBytes": 28435,
+      "coreHash": "10679fee36b93109d492a38956f6e9b57c0656f02827edf6a97219ccf6eeed3a"
+    },
+    {
+      "fixture": "summer-32",
+      "mode": "Running",
+      "view": "details",
+      "initMs": 8.457299999999577,
+      "frameHook": {
+        "count": 3480,
+        "meanMs": 0.0003554310344734456,
+        "p95Ms": 0.0005000000001018634,
+        "worstMs": 0.1352999999999156
+      },
+      "sampledHookAndDOM": {
+        "count": 120,
+        "meanMs": 0.4059224999999666,
+        "p95Ms": 0.6116000000001804,
+        "worstMs": 0.7670000000007349
+      },
+      "nodeHeapDeltaAfterDisposeBytes": 906208,
+      "highTimers": 1,
+      "timersAfterDispose": 0,
+      "reportBytes": 28435,
+      "coreHash": "10679fee36b93109d492a38956f6e9b57c0656f02827edf6a97219ccf6eeed3a"
+    },
+    {
+      "fixture": "summer-32",
+      "mode": "Running",
+      "view": "details",
+      "initMs": 5.9979999999995925,
+      "frameHook": {
+        "count": 3480,
+        "meanMs": 0.0002856896551661678,
+        "p95Ms": 0.0005000000001018634,
+        "worstMs": 0.026200000000244472
+      },
+      "sampledHookAndDOM": {
+        "count": 120,
+        "meanMs": 0.3707725000000361,
+        "p95Ms": 0.529500000000553,
+        "worstMs": 0.6093999999993684
+      },
+      "nodeHeapDeltaAfterDisposeBytes": 1001272,
       "highTimers": 1,
       "timersAfterDispose": 0,
       "reportBytes": 28435,
@@ -152,20 +152,20 @@
       "fixture": "summer-32",
       "mode": "Running",
       "view": "compact",
-      "initMs": 10.408800000001065,
+      "initMs": 6.652099999999336,
       "frameHook": {
         "count": 3480,
-        "meanMs": 0.0004214655172499884,
-        "p95Ms": 0.0007999999997991836,
-        "worstMs": 0.04020000000127766
+        "meanMs": 0.0003230172413740829,
+        "p95Ms": 0.000600000000304135,
+        "worstMs": 0.08689999999933207
       },
       "sampledHookAndDOM": {
         "count": 120,
-        "meanMs": 0.7491150000000744,
-        "p95Ms": 0.7480999999988853,
-        "worstMs": 31.27009999999973
+        "meanMs": 0.3709266666667039,
+        "p95Ms": 0.6027999999996609,
+        "worstMs": 0.8771000000006097
       },
-      "nodeHeapDeltaAfterDisposeBytes": 911464,
+      "nodeHeapDeltaAfterDisposeBytes": 904976,
       "highTimers": 1,
       "timersAfterDispose": 0,
       "reportBytes": 28435,
@@ -175,20 +175,20 @@
       "fixture": "summer-32",
       "mode": "Running",
       "view": "off",
-      "initMs": 7.479000000001179,
+      "initMs": 5.736700000000383,
       "frameHook": {
         "count": 3480,
-        "meanMs": 0.00020790229882916081,
-        "p95Ms": 0.00030000000151630957,
-        "worstMs": 0.006600000000617001
+        "meanMs": 0.00014017241379306875,
+        "p95Ms": 0.00029999999969732016,
+        "worstMs": 0.005100000000311411
       },
       "sampledHookAndDOM": {
         "count": 120,
-        "meanMs": 0.00152083333327937,
-        "p95Ms": 0.002699999999094871,
-        "worstMs": 0.006999999999607098
+        "meanMs": 0.000962500000006609,
+        "p95Ms": 0.0017000000007101335,
+        "worstMs": 0.003200000000106229
       },
-      "nodeHeapDeltaAfterDisposeBytes": 694816,
+      "nodeHeapDeltaAfterDisposeBytes": 681520,
       "highTimers": 0,
       "timersAfterDispose": 0,
       "reportBytes": 767,
@@ -201,17 +201,17 @@
       "initMs": 0.0005000000001018634,
       "frameHook": {
         "count": 3480,
-        "meanMs": 0.00016402298849358372,
+        "meanMs": 0.00013896551724439172,
         "p95Ms": 0.00029999999969732016,
-        "worstMs": 0.0036000000000058208
+        "worstMs": 0.013399999999819556
       },
       "sampledHookAndDOM": {
         "count": 120,
-        "meanMs": 0.0008624999999634989,
-        "p95Ms": 0.0014000000010128133,
-        "worstMs": 0.002300000000104774
+        "meanMs": 0.0006124999999277254,
+        "p95Ms": 0.00120000000060827,
+        "worstMs": 0.0014999999993960955
       },
-      "nodeHeapDeltaAfterDisposeBytes": 912792,
+      "nodeHeapDeltaAfterDisposeBytes": 906256,
       "highTimers": 0,
       "timersAfterDispose": 0,
       "reportBytes": 0,
@@ -221,158 +221,158 @@
       "fixture": "summer-32",
       "mode": "Paused",
       "view": "none",
-      "initMs": 0.0010000000002037268,
+      "initMs": 0.0005000000001018634,
       "frameHook": {
         "count": 3480,
-        "meanMs": 0.00024140804598991753,
-        "p95Ms": 0.0004000000008090865,
-        "worstMs": 0.0068000000010215444
-      },
-      "sampledHookAndDOM": {
-        "count": 120,
-        "meanMs": 0.0002649999999600065,
-        "p95Ms": 0.0004000000008090865,
-        "worstMs": 0.0010999999994965037
-      },
-      "nodeHeapDeltaAfterDisposeBytes": 903464,
-      "highTimers": 0,
-      "timersAfterDispose": 0,
-      "reportBytes": 0,
-      "coreHash": "64cb6d859c1a26497d2833e16e227a774f1629d8236c8f4ae56ecc5235408969"
-    },
-    {
-      "fixture": "summer-32",
-      "mode": "Paused",
-      "view": "off",
-      "initMs": 17.54240000000027,
-      "frameHook": {
-        "count": 3480,
-        "meanMs": 0.00012022988504872172,
+        "meanMs": 0.0001915804597716153,
         "p95Ms": 0.00020000000040454324,
-        "worstMs": 0.0036000000000058208
+        "worstMs": 0.014100000000325963
       },
       "sampledHookAndDOM": {
         "count": 120,
-        "meanMs": 0.00015999999997499495,
-        "p95Ms": 0.00020000000040454324,
-        "worstMs": 0.0007999999997991836
-      },
-      "nodeHeapDeltaAfterDisposeBytes": 247400,
-      "highTimers": 0,
-      "timersAfterDispose": 0,
-      "reportBytes": 767,
-      "coreHash": "64cb6d859c1a26497d2833e16e227a774f1629d8236c8f4ae56ecc5235408969"
-    },
-    {
-      "fixture": "summer-32",
-      "mode": "Paused",
-      "view": "compact",
-      "initMs": 10.927700000000186,
-      "frameHook": {
-        "count": 3480,
-        "meanMs": 0.00041235632183527523,
-        "p95Ms": 0.0007999999997991836,
-        "worstMs": 0.19369999999980791
-      },
-      "sampledHookAndDOM": {
-        "count": 120,
-        "meanMs": 0.38137499999998,
-        "p95Ms": 0.9200999999993655,
-        "worstMs": 1.3801000000003114
-      },
-      "nodeHeapDeltaAfterDisposeBytes": 637904,
-      "highTimers": 1,
-      "timersAfterDispose": 0,
-      "reportBytes": 28115,
-      "coreHash": "64cb6d859c1a26497d2833e16e227a774f1629d8236c8f4ae56ecc5235408969"
-    },
-    {
-      "fixture": "summer-32",
-      "mode": "Paused",
-      "view": "details",
-      "initMs": 10.33809999999903,
-      "frameHook": {
-        "count": 3480,
-        "meanMs": 0.000467500000039,
-        "p95Ms": 0.0007000000005064066,
-        "worstMs": 0.040899999999965075
-      },
-      "sampledHookAndDOM": {
-        "count": 120,
-        "meanMs": 0.3888575000000098,
-        "p95Ms": 0.5657000000010157,
-        "worstMs": 1.0054000000000087
-      },
-      "nodeHeapDeltaAfterDisposeBytes": 689800,
-      "highTimers": 1,
-      "timersAfterDispose": 0,
-      "reportBytes": 28115,
-      "coreHash": "64cb6d859c1a26497d2833e16e227a774f1629d8236c8f4ae56ecc5235408969"
-    },
-    {
-      "fixture": "summer-32",
-      "mode": "Paused",
-      "view": "details",
-      "initMs": 11.965100000001257,
-      "frameHook": {
-        "count": 3480,
-        "meanMs": 0.00047000000000354766,
-        "p95Ms": 0.0007999999997991836,
-        "worstMs": 0.05430000000160362
-      },
-      "sampledHookAndDOM": {
-        "count": 120,
-        "meanMs": 0.3395091666666455,
-        "p95Ms": 0.497800000001007,
-        "worstMs": 0.7679000000007363
-      },
-      "nodeHeapDeltaAfterDisposeBytes": 598392,
-      "highTimers": 1,
-      "timersAfterDispose": 0,
-      "reportBytes": 28115,
-      "coreHash": "64cb6d859c1a26497d2833e16e227a774f1629d8236c8f4ae56ecc5235408969"
-    },
-    {
-      "fixture": "summer-32",
-      "mode": "Paused",
-      "view": "compact",
-      "initMs": 10.410200000000259,
-      "frameHook": {
-        "count": 3480,
-        "meanMs": 0.00044436781609383404,
-        "p95Ms": 0.0006000000012136297,
-        "worstMs": 0.03690000000096916
-      },
-      "sampledHookAndDOM": {
-        "count": 120,
-        "meanMs": 0.3310783333332589,
-        "p95Ms": 0.4382000000005064,
-        "worstMs": 0.7299999999995634
-      },
-      "nodeHeapDeltaAfterDisposeBytes": 570128,
-      "highTimers": 1,
-      "timersAfterDispose": 0,
-      "reportBytes": 28115,
-      "coreHash": "64cb6d859c1a26497d2833e16e227a774f1629d8236c8f4ae56ecc5235408969"
-    },
-    {
-      "fixture": "summer-32",
-      "mode": "Paused",
-      "view": "off",
-      "initMs": 6.802200000000084,
-      "frameHook": {
-        "count": 3480,
-        "meanMs": 0.00016864942528115336,
-        "p95Ms": 0.0003999999989900971,
-        "worstMs": 0.046399999999266583
-      },
-      "sampledHookAndDOM": {
-        "count": 120,
-        "meanMs": 0.0001766666666602153,
+        "meanMs": 0.00019416666664255898,
         "p95Ms": 0.00029999999969732016,
         "worstMs": 0.0007999999997991836
       },
-      "nodeHeapDeltaAfterDisposeBytes": 506368,
+      "nodeHeapDeltaAfterDisposeBytes": 858112,
+      "highTimers": 0,
+      "timersAfterDispose": 0,
+      "reportBytes": 0,
+      "coreHash": "64cb6d859c1a26497d2833e16e227a774f1629d8236c8f4ae56ecc5235408969"
+    },
+    {
+      "fixture": "summer-32",
+      "mode": "Paused",
+      "view": "off",
+      "initMs": 7.171299999999974,
+      "frameHook": {
+        "count": 3480,
+        "meanMs": 0.00011362068965762115,
+        "p95Ms": 0.00020000000040454324,
+        "worstMs": 0.0003999999998995918
+      },
+      "sampledHookAndDOM": {
+        "count": 120,
+        "meanMs": 0.0001408333333529299,
+        "p95Ms": 0.00020000000040454324,
+        "worstMs": 0.0007000000005064066
+      },
+      "nodeHeapDeltaAfterDisposeBytes": 258848,
+      "highTimers": 0,
+      "timersAfterDispose": 0,
+      "reportBytes": 767,
+      "coreHash": "64cb6d859c1a26497d2833e16e227a774f1629d8236c8f4ae56ecc5235408969"
+    },
+    {
+      "fixture": "summer-32",
+      "mode": "Paused",
+      "view": "compact",
+      "initMs": 7.91190000000006,
+      "frameHook": {
+        "count": 3480,
+        "meanMs": 0.00025620689655823654,
+        "p95Ms": 0.0004999999991923687,
+        "worstMs": 0.028400000000146974
+      },
+      "sampledHookAndDOM": {
+        "count": 120,
+        "meanMs": 0.21620083333333848,
+        "p95Ms": 0.32669999999961874,
+        "worstMs": 0.547299999999268
+      },
+      "nodeHeapDeltaAfterDisposeBytes": 620576,
+      "highTimers": 1,
+      "timersAfterDispose": 0,
+      "reportBytes": 28115,
+      "coreHash": "64cb6d859c1a26497d2833e16e227a774f1629d8236c8f4ae56ecc5235408969"
+    },
+    {
+      "fixture": "summer-32",
+      "mode": "Paused",
+      "view": "details",
+      "initMs": 6.90939999999955,
+      "frameHook": {
+        "count": 3480,
+        "meanMs": 0.0003446264367994445,
+        "p95Ms": 0.0007999999997991836,
+        "worstMs": 0.02760000000034779
+      },
+      "sampledHookAndDOM": {
+        "count": 120,
+        "meanMs": 0.2522125000000263,
+        "p95Ms": 0.5074000000004162,
+        "worstMs": 0.759700000000521
+      },
+      "nodeHeapDeltaAfterDisposeBytes": 679840,
+      "highTimers": 1,
+      "timersAfterDispose": 0,
+      "reportBytes": 28115,
+      "coreHash": "64cb6d859c1a26497d2833e16e227a774f1629d8236c8f4ae56ecc5235408969"
+    },
+    {
+      "fixture": "summer-32",
+      "mode": "Paused",
+      "view": "details",
+      "initMs": 7.022200000000339,
+      "frameHook": {
+        "count": 3480,
+        "meanMs": 0.00045295977010362384,
+        "p95Ms": 0.000600000000304135,
+        "worstMs": 0.07440000000042346
+      },
+      "sampledHookAndDOM": {
+        "count": 120,
+        "meanMs": 0.32228000000001583,
+        "p95Ms": 0.47670000000016444,
+        "worstMs": 0.6761999999998807
+      },
+      "nodeHeapDeltaAfterDisposeBytes": 598296,
+      "highTimers": 1,
+      "timersAfterDispose": 0,
+      "reportBytes": 28115,
+      "coreHash": "64cb6d859c1a26497d2833e16e227a774f1629d8236c8f4ae56ecc5235408969"
+    },
+    {
+      "fixture": "summer-32",
+      "mode": "Paused",
+      "view": "compact",
+      "initMs": 6.105800000000272,
+      "frameHook": {
+        "count": 3480,
+        "meanMs": 0.00028626436781336055,
+        "p95Ms": 0.0005000000001018634,
+        "worstMs": 0.028900000000248838
+      },
+      "sampledHookAndDOM": {
+        "count": 120,
+        "meanMs": 0.21800416666662084,
+        "p95Ms": 0.472700000000259,
+        "worstMs": 0.6660000000001673
+      },
+      "nodeHeapDeltaAfterDisposeBytes": 548208,
+      "highTimers": 1,
+      "timersAfterDispose": 0,
+      "reportBytes": 28115,
+      "coreHash": "64cb6d859c1a26497d2833e16e227a774f1629d8236c8f4ae56ecc5235408969"
+    },
+    {
+      "fixture": "summer-32",
+      "mode": "Paused",
+      "view": "off",
+      "initMs": 10.53229999999985,
+      "frameHook": {
+        "count": 3480,
+        "meanMs": 0.00011681034483047568,
+        "p95Ms": 0.00020000000040454324,
+        "worstMs": 0.00030000000060681487
+      },
+      "sampledHookAndDOM": {
+        "count": 120,
+        "meanMs": 0.00014833333332262555,
+        "p95Ms": 0.00020000000040454324,
+        "worstMs": 0.0007999999997991836
+      },
+      "nodeHeapDeltaAfterDisposeBytes": 504800,
       "highTimers": 0,
       "timersAfterDispose": 0,
       "reportBytes": 767,
@@ -382,20 +382,20 @@
       "fixture": "summer-32",
       "mode": "Paused",
       "view": "none",
-      "initMs": 0.0005999999993946403,
+      "initMs": 0.0010000000002037268,
       "frameHook": {
         "count": 3480,
-        "meanMs": 0.00011778735630736495,
-        "p95Ms": 0.00020000000040454324,
-        "worstMs": 0.0005000000001018634
+        "meanMs": 0.00028497126436429854,
+        "p95Ms": 0.0003999999998995918,
+        "worstMs": 0.01900000000023283
       },
       "sampledHookAndDOM": {
         "count": 120,
-        "meanMs": 0.00013166666672077555,
-        "p95Ms": 0.00020000000040454324,
-        "worstMs": 0.0005999999993946403
+        "meanMs": 0.00025166666665275746,
+        "p95Ms": 0.0005000000001018634,
+        "worstMs": 0.0007999999997991836
       },
-      "nodeHeapDeltaAfterDisposeBytes": 787568,
+      "nodeHeapDeltaAfterDisposeBytes": 842792,
       "highTimers": 0,
       "timersAfterDispose": 0,
       "reportBytes": 0,
@@ -405,250 +405,273 @@
       "fixture": "developed-810",
       "mode": "Running",
       "view": "none",
-      "initMs": 0.0007999999997991836,
+      "initMs": 0.0005000000001018634,
       "frameHook": {
         "count": 3480,
-        "meanMs": 0.0001274425287427785,
+        "meanMs": 0.00012893678161439854,
         "p95Ms": 0.00020000000040454324,
+        "worstMs": 0.02449999999953434
+      },
+      "sampledHookAndDOM": {
+        "count": 120,
+        "meanMs": 0.0006899999999707991,
+        "p95Ms": 0.0010999999994965037,
+        "worstMs": 0.0016000000005078618
+      },
+      "nodeHeapDeltaAfterDisposeBytes": 2783856,
+      "highTimers": 0,
+      "timersAfterDispose": 0,
+      "reportBytes": 0,
+      "coreHash": "1a6730f3a9b27219043b0d4cfd96de711b5a2037542fe2365a6e15fdf8920540"
+    },
+    {
+      "fixture": "developed-810",
+      "mode": "Running",
+      "view": "off",
+      "initMs": 7.907900000000154,
+      "frameHook": {
+        "count": 3480,
+        "meanMs": 0.00016988505746729938,
+        "p95Ms": 0.00029999999969732016,
+        "worstMs": 0.0316000000002532
+      },
+      "sampledHookAndDOM": {
+        "count": 120,
+        "meanMs": 0.0015308333333147555,
+        "p95Ms": 0.002300000000104774,
+        "worstMs": 0.014400000000023283
+      },
+      "nodeHeapDeltaAfterDisposeBytes": -317600,
+      "highTimers": 0,
+      "timersAfterDispose": 0,
+      "reportBytes": 767,
+      "coreHash": "1a6730f3a9b27219043b0d4cfd96de711b5a2037542fe2365a6e15fdf8920540"
+    },
+    {
+      "fixture": "developed-810",
+      "mode": "Running",
+      "view": "compact",
+      "initMs": 7.72190000000046,
+      "frameHook": {
+        "count": 3480,
+        "meanMs": 0.00029698275860801527,
+        "p95Ms": 0.0005999999993946403,
+        "worstMs": 0.031199999999444117
+      },
+      "sampledHookAndDOM": {
+        "count": 120,
+        "meanMs": 0.4221775000000283,
+        "p95Ms": 0.6013000000002648,
+        "worstMs": 0.7739000000001397
+      },
+      "nodeHeapDeltaAfterDisposeBytes": 1077088,
+      "highTimers": 1,
+      "timersAfterDispose": 0,
+      "reportBytes": 28435,
+      "coreHash": "1a6730f3a9b27219043b0d4cfd96de711b5a2037542fe2365a6e15fdf8920540"
+    },
+    {
+      "fixture": "developed-810",
+      "mode": "Running",
+      "view": "details",
+      "initMs": 8.22190000000046,
+      "frameHook": {
+        "count": 3480,
+        "meanMs": 0.00033011494252270664,
+        "p95Ms": 0.0005999999993946403,
+        "worstMs": 0.02750000000014552
+      },
+      "sampledHookAndDOM": {
+        "count": 120,
+        "meanMs": 0.42400499999997315,
+        "p95Ms": 0.6442999999999302,
+        "worstMs": 1.0267999999996391
+      },
+      "nodeHeapDeltaAfterDisposeBytes": 16888,
+      "highTimers": 1,
+      "timersAfterDispose": 0,
+      "reportBytes": 28435,
+      "coreHash": "1a6730f3a9b27219043b0d4cfd96de711b5a2037542fe2365a6e15fdf8920540"
+    },
+    {
+      "fixture": "developed-810",
+      "mode": "Running",
+      "view": "details",
+      "initMs": 6.974799999999959,
+      "frameHook": {
+        "count": 3480,
+        "meanMs": 0.00032321839077677846,
+        "p95Ms": 0.0005999999993946403,
+        "worstMs": 0.030900000001565786
+      },
+      "sampledHookAndDOM": {
+        "count": 120,
+        "meanMs": 0.41786333333341946,
+        "p95Ms": 0.6225999999987835,
+        "worstMs": 1.6970000000001164
+      },
+      "nodeHeapDeltaAfterDisposeBytes": -95432,
+      "highTimers": 1,
+      "timersAfterDispose": 0,
+      "reportBytes": 28435,
+      "coreHash": "1a6730f3a9b27219043b0d4cfd96de711b5a2037542fe2365a6e15fdf8920540"
+    },
+    {
+      "fixture": "developed-810",
+      "mode": "Running",
+      "view": "compact",
+      "initMs": 7.852100000000064,
+      "frameHook": {
+        "count": 3480,
+        "meanMs": 0.00032548850575499954,
+        "p95Ms": 0.0007000000005064066,
+        "worstMs": 0.059300000000803266
+      },
+      "sampledHookAndDOM": {
+        "count": 120,
+        "meanMs": 0.3878166666664583,
+        "p95Ms": 0.6186999999990803,
+        "worstMs": 0.694999999999709
+      },
+      "nodeHeapDeltaAfterDisposeBytes": -108680,
+      "highTimers": 1,
+      "timersAfterDispose": 0,
+      "reportBytes": 28435,
+      "coreHash": "1a6730f3a9b27219043b0d4cfd96de711b5a2037542fe2365a6e15fdf8920540"
+    },
+    {
+      "fixture": "developed-810",
+      "mode": "Running",
+      "view": "off",
+      "initMs": 7.600799999996525,
+      "frameHook": {
+        "count": 3480,
+        "meanMs": 0.00014097701153635475,
+        "p95Ms": 0.00029999999969732016,
+        "worstMs": 0.00210000000151922
+      },
+      "sampledHookAndDOM": {
+        "count": 120,
+        "meanMs": 0.0013608333333346915,
+        "p95Ms": 0.0020000000004074536,
+        "worstMs": 0.004000000000814907
+      },
+      "nodeHeapDeltaAfterDisposeBytes": -943672,
+      "highTimers": 0,
+      "timersAfterDispose": 0,
+      "reportBytes": 767,
+      "coreHash": "1a6730f3a9b27219043b0d4cfd96de711b5a2037542fe2365a6e15fdf8920540"
+    },
+    {
+      "fixture": "developed-810",
+      "mode": "Running",
+      "view": "none",
+      "initMs": 0.000800000001618173,
+      "frameHook": {
+        "count": 3480,
+        "meanMs": 0.00012425287360651286,
+        "p95Ms": 0.00020000000222353265,
+        "worstMs": 0.000800000001618173
+      },
+      "sampledHookAndDOM": {
+        "count": 120,
+        "meanMs": 0.0007991666666991175,
+        "p95Ms": 0.0011000000013154931,
+        "worstMs": 0.001299999999901047
+      },
+      "nodeHeapDeltaAfterDisposeBytes": 790816,
+      "highTimers": 0,
+      "timersAfterDispose": 0,
+      "reportBytes": 0,
+      "coreHash": "1a6730f3a9b27219043b0d4cfd96de711b5a2037542fe2365a6e15fdf8920540"
+    },
+    {
+      "fixture": "developed-810",
+      "mode": "Paused",
+      "view": "none",
+      "initMs": 0.000499999998282874,
+      "frameHook": {
+        "count": 3480,
+        "meanMs": 0.00010563218391367606,
+        "p95Ms": 0.00010000000111176632,
+        "worstMs": 0.013700000003154855
+      },
+      "sampledHookAndDOM": {
+        "count": 120,
+        "meanMs": 0.00010249999998753385,
+        "p95Ms": 0.00010000000111176632,
+        "worstMs": 0.0008999999990919605
+      },
+      "nodeHeapDeltaAfterDisposeBytes": 2490592,
+      "highTimers": 0,
+      "timersAfterDispose": 0,
+      "reportBytes": 0,
+      "coreHash": "d959eea44435e8864c1a1994a17ea9794362f82ba94469806de2ba747c2160c3"
+    },
+    {
+      "fixture": "developed-810",
+      "mode": "Paused",
+      "view": "off",
+      "initMs": 11.286400000000867,
+      "frameHook": {
+        "count": 3480,
+        "meanMs": 0.00012235632184560876,
+        "p95Ms": 0.00020000000222353265,
+        "worstMs": 0.025200000000040745
+      },
+      "sampledHookAndDOM": {
+        "count": 120,
+        "meanMs": 0.00013416666639993007,
+        "p95Ms": 0.00020000000222353265,
         "worstMs": 0.0007000000005064066
       },
-      "sampledHookAndDOM": {
-        "count": 120,
-        "meanMs": 0.0008383333333010038,
-        "p95Ms": 0.001399999999193824,
-        "worstMs": 0.0036999999992985977
-      },
-      "nodeHeapDeltaAfterDisposeBytes": 2778312,
-      "highTimers": 0,
-      "timersAfterDispose": 0,
-      "reportBytes": 0,
-      "coreHash": "1a6730f3a9b27219043b0d4cfd96de711b5a2037542fe2365a6e15fdf8920540"
-    },
-    {
-      "fixture": "developed-810",
-      "mode": "Running",
-      "view": "off",
-      "initMs": 11.774499999999534,
-      "frameHook": {
-        "count": 3480,
-        "meanMs": 0.00018399425293132846,
-        "p95Ms": 0.00030000000151630957,
-        "worstMs": 0.030400000001463923
-      },
-      "sampledHookAndDOM": {
-        "count": 120,
-        "meanMs": 0.0016899999999623106,
-        "p95Ms": 0.0023999999993975507,
-        "worstMs": 0.021000000000640284
-      },
-      "nodeHeapDeltaAfterDisposeBytes": -320016,
+      "nodeHeapDeltaAfterDisposeBytes": -2147368,
       "highTimers": 0,
       "timersAfterDispose": 0,
       "reportBytes": 767,
-      "coreHash": "1a6730f3a9b27219043b0d4cfd96de711b5a2037542fe2365a6e15fdf8920540"
+      "coreHash": "d959eea44435e8864c1a1994a17ea9794362f82ba94469806de2ba747c2160c3"
     },
     {
       "fixture": "developed-810",
-      "mode": "Running",
+      "mode": "Paused",
       "view": "compact",
-      "initMs": 6.284300000001167,
+      "initMs": 7.021300000000338,
       "frameHook": {
         "count": 3480,
-        "meanMs": 0.00033252873565194524,
+        "meanMs": 0.00024836206902332847,
+        "p95Ms": 0.000499999998282874,
+        "worstMs": 0.024999999997817213
+      },
+      "sampledHookAndDOM": {
+        "count": 120,
+        "meanMs": 0.19368833333337535,
+        "p95Ms": 0.35460000000239233,
+        "worstMs": 0.4576000000015483
+      },
+      "nodeHeapDeltaAfterDisposeBytes": -174744,
+      "highTimers": 1,
+      "timersAfterDispose": 0,
+      "reportBytes": 28115,
+      "coreHash": "d959eea44435e8864c1a1994a17ea9794362f82ba94469806de2ba747c2160c3"
+    },
+    {
+      "fixture": "developed-810",
+      "mode": "Paused",
+      "view": "details",
+      "initMs": 5.390800000001036,
+      "frameHook": {
+        "count": 3480,
+        "meanMs": 0.0003434195402531196,
         "p95Ms": 0.0007000000005064066,
-        "worstMs": 0.03620000000046275
+        "worstMs": 0.030900000001565786
       },
       "sampledHookAndDOM": {
         "count": 120,
-        "meanMs": 0.4308750000002571,
-        "p95Ms": 0.6336000000010245,
-        "worstMs": 0.7643000000025495
+        "meanMs": 0.27186583333332237,
+        "p95Ms": 0.44509999999718275,
+        "worstMs": 0.6641999999992549
       },
-      "nodeHeapDeltaAfterDisposeBytes": 1040232,
-      "highTimers": 1,
-      "timersAfterDispose": 0,
-      "reportBytes": 28435,
-      "coreHash": "1a6730f3a9b27219043b0d4cfd96de711b5a2037542fe2365a6e15fdf8920540"
-    },
-    {
-      "fixture": "developed-810",
-      "mode": "Running",
-      "view": "details",
-      "initMs": 8.919799999999668,
-      "frameHook": {
-        "count": 3480,
-        "meanMs": 0.00037275862065122974,
-        "p95Ms": 0.0007999999979801942,
-        "worstMs": 0.042099999998754356
-      },
-      "sampledHookAndDOM": {
-        "count": 120,
-        "meanMs": 0.4855800000002091,
-        "p95Ms": 0.7825000000011642,
-        "worstMs": 0.9184999999997672
-      },
-      "nodeHeapDeltaAfterDisposeBytes": 14112,
-      "highTimers": 1,
-      "timersAfterDispose": 0,
-      "reportBytes": 28435,
-      "coreHash": "1a6730f3a9b27219043b0d4cfd96de711b5a2037542fe2365a6e15fdf8920540"
-    },
-    {
-      "fixture": "developed-810",
-      "mode": "Running",
-      "view": "details",
-      "initMs": 9.988999999997759,
-      "frameHook": {
-        "count": 3480,
-        "meanMs": 0.0004858908045907915,
-        "p95Ms": 0.0008999999990919605,
-        "worstMs": 0.19540000000051805
-      },
-      "sampledHookAndDOM": {
-        "count": 120,
-        "meanMs": 0.5302541666666911,
-        "p95Ms": 0.7626999999993131,
-        "worstMs": 2.1995999999999185
-      },
-      "nodeHeapDeltaAfterDisposeBytes": -28496,
-      "highTimers": 1,
-      "timersAfterDispose": 0,
-      "reportBytes": 28435,
-      "coreHash": "1a6730f3a9b27219043b0d4cfd96de711b5a2037542fe2365a6e15fdf8920540"
-    },
-    {
-      "fixture": "developed-810",
-      "mode": "Running",
-      "view": "compact",
-      "initMs": 8.348300000001473,
-      "frameHook": {
-        "count": 3480,
-        "meanMs": 0.00039181034484102583,
-        "p95Ms": 0.000800000001618173,
-        "worstMs": 0.03919999999925494
-      },
-      "sampledHookAndDOM": {
-        "count": 120,
-        "meanMs": 0.4606391666664725,
-        "p95Ms": 0.666799999999057,
-        "worstMs": 0.7921999999998661
-      },
-      "nodeHeapDeltaAfterDisposeBytes": 11184,
-      "highTimers": 1,
-      "timersAfterDispose": 0,
-      "reportBytes": 28435,
-      "coreHash": "1a6730f3a9b27219043b0d4cfd96de711b5a2037542fe2365a6e15fdf8920540"
-    },
-    {
-      "fixture": "developed-810",
-      "mode": "Running",
-      "view": "off",
-      "initMs": 8.080799999999726,
-      "frameHook": {
-        "count": 3480,
-        "meanMs": 0.00019221264373268712,
-        "p95Ms": 0.0004000000008090865,
-        "worstMs": 0.007999999997991836
-      },
-      "sampledHookAndDOM": {
-        "count": 120,
-        "meanMs": 0.0017058333334110407,
-        "p95Ms": 0.0024999999986903276,
-        "worstMs": 0.008300000001327135
-      },
-      "nodeHeapDeltaAfterDisposeBytes": -1090024,
-      "highTimers": 0,
-      "timersAfterDispose": 0,
-      "reportBytes": 767,
-      "coreHash": "1a6730f3a9b27219043b0d4cfd96de711b5a2037542fe2365a6e15fdf8920540"
-    },
-    {
-      "fixture": "developed-810",
-      "mode": "Running",
-      "view": "none",
-      "initMs": 0.0005999999993946403,
-      "frameHook": {
-        "count": 3480,
-        "meanMs": 0.00014540229898891827,
-        "p95Ms": 0.00020000000222353265,
-        "worstMs": 0.004999999997380655
-      },
-      "sampledHookAndDOM": {
-        "count": 120,
-        "meanMs": 0.0008516666669796299,
-        "p95Ms": 0.0012999999962630682,
-        "worstMs": 0.007700000001932494
-      },
-      "nodeHeapDeltaAfterDisposeBytes": 785792,
-      "highTimers": 0,
-      "timersAfterDispose": 0,
-      "reportBytes": 0,
-      "coreHash": "1a6730f3a9b27219043b0d4cfd96de711b5a2037542fe2365a6e15fdf8920540"
-    },
-    {
-      "fixture": "developed-810",
-      "mode": "Paused",
-      "view": "none",
-      "initMs": 0.0007000000041443855,
-      "frameHook": {
-        "count": 3480,
-        "meanMs": 0.00011729885062014473,
-        "p95Ms": 0.00020000000222353265,
-        "worstMs": 0.0044999999954598024
-      },
-      "sampledHookAndDOM": {
-        "count": 120,
-        "meanMs": 0.00012416666674350079,
-        "p95Ms": 0.00020000000222353265,
-        "worstMs": 0.0009000000063679181
-      },
-      "nodeHeapDeltaAfterDisposeBytes": 2485912,
-      "highTimers": 0,
-      "timersAfterDispose": 0,
-      "reportBytes": 0,
-      "coreHash": "d959eea44435e8864c1a1994a17ea9794362f82ba94469806de2ba747c2160c3"
-    },
-    {
-      "fixture": "developed-810",
-      "mode": "Paused",
-      "view": "off",
-      "initMs": 7.890399999996589,
-      "frameHook": {
-        "count": 3480,
-        "meanMs": 0.00015356321838989133,
-        "p95Ms": 0.00020000000222353265,
-        "worstMs": 0.026400000002468005
-      },
-      "sampledHookAndDOM": {
-        "count": 120,
-        "meanMs": 0.00017166666645304456,
-        "p95Ms": 0.00020000000222353265,
-        "worstMs": 0.0009000000063679181
-      },
-      "nodeHeapDeltaAfterDisposeBytes": -2150600,
-      "highTimers": 0,
-      "timersAfterDispose": 0,
-      "reportBytes": 767,
-      "coreHash": "d959eea44435e8864c1a1994a17ea9794362f82ba94469806de2ba747c2160c3"
-    },
-    {
-      "fixture": "developed-810",
-      "mode": "Paused",
-      "view": "compact",
-      "initMs": 8.048999999999069,
-      "frameHook": {
-        "count": 3480,
-        "meanMs": 0.00034658045975426843,
-        "p95Ms": 0.0005999999993946403,
-        "worstMs": 0.03600000000005821
-      },
-      "sampledHookAndDOM": {
-        "count": 120,
-        "meanMs": 0.25863333333351574,
-        "p95Ms": 0.4092000000018743,
-        "worstMs": 0.7716999999975087
-      },
-      "nodeHeapDeltaAfterDisposeBytes": -174536,
+      "nodeHeapDeltaAfterDisposeBytes": -159664,
       "highTimers": 1,
       "timersAfterDispose": 0,
       "reportBytes": 28115,
@@ -658,43 +681,20 @@
       "fixture": "developed-810",
       "mode": "Paused",
       "view": "details",
-      "initMs": 8.061500000003434,
+      "initMs": 5.863499999999476,
       "frameHook": {
         "count": 3480,
-        "meanMs": 0.0003411494252581722,
-        "p95Ms": 0.0005999999993946403,
-        "worstMs": 0.041199999999662396
+        "meanMs": 0.0003699137931253899,
+        "p95Ms": 0.0007000000005064066,
+        "worstMs": 0.07419999999910942
       },
       "sampledHookAndDOM": {
         "count": 120,
-        "meanMs": 0.25777583333322884,
-        "p95Ms": 0.3922999999995227,
-        "worstMs": 0.6930999999967753
+        "meanMs": 0.29113166666669105,
+        "p95Ms": 0.5635000000002037,
+        "worstMs": 0.9305999999996857
       },
-      "nodeHeapDeltaAfterDisposeBytes": -180568,
-      "highTimers": 1,
-      "timersAfterDispose": 0,
-      "reportBytes": 28115,
-      "coreHash": "d959eea44435e8864c1a1994a17ea9794362f82ba94469806de2ba747c2160c3"
-    },
-    {
-      "fixture": "developed-810",
-      "mode": "Paused",
-      "view": "details",
-      "initMs": 8.61479999999574,
-      "frameHook": {
-        "count": 3480,
-        "meanMs": 0.00042402298852815373,
-        "p95Ms": 0.0007000000041443855,
-        "worstMs": 0.059000000001105946
-      },
-      "sampledHookAndDOM": {
-        "count": 120,
-        "meanMs": 0.3251324999998057,
-        "p95Ms": 0.565600000001723,
-        "worstMs": 0.8606999999974505
-      },
-      "nodeHeapDeltaAfterDisposeBytes": -122648,
+      "nodeHeapDeltaAfterDisposeBytes": -204496,
       "highTimers": 1,
       "timersAfterDispose": 0,
       "reportBytes": 28115,
@@ -704,20 +704,20 @@
       "fixture": "developed-810",
       "mode": "Paused",
       "view": "compact",
-      "initMs": 7.540200000003097,
+      "initMs": 12.794000000001688,
       "frameHook": {
         "count": 3480,
-        "meanMs": 0.0002992528736160301,
-        "p95Ms": 0.0005000000019208528,
-        "worstMs": 0.042099999998754356
+        "meanMs": 0.0002872988506503876,
+        "p95Ms": 0.000499999998282874,
+        "worstMs": 0.03800000000046566
       },
       "sampledHookAndDOM": {
         "count": 120,
-        "meanMs": 0.2279766666667759,
-        "p95Ms": 0.35619999999471474,
-        "worstMs": 0.5086000000010245
+        "meanMs": 0.20161666666681413,
+        "p95Ms": 0.29390000000057626,
+        "worstMs": 0.40680000000065775
       },
-      "nodeHeapDeltaAfterDisposeBytes": -200856,
+      "nodeHeapDeltaAfterDisposeBytes": -192768,
       "highTimers": 1,
       "timersAfterDispose": 0,
       "reportBytes": 28115,
@@ -727,20 +727,20 @@
       "fixture": "developed-810",
       "mode": "Paused",
       "view": "off",
-      "initMs": 10.872999999999593,
+      "initMs": 6.338999999999942,
       "frameHook": {
         "count": 3480,
-        "meanMs": 0.00013850574708565796,
+        "meanMs": 0.000130574712618219,
         "p95Ms": 0.00020000000222353265,
-        "worstMs": 0.005699999994249083
+        "worstMs": 0.000999999996565748
       },
       "sampledHookAndDOM": {
         "count": 120,
-        "meanMs": 0.00017666666687243075,
+        "meanMs": 0.00017499999961122134,
         "p95Ms": 0.00020000000222353265,
-        "worstMs": 0.002499999995052349
+        "worstMs": 0.002799999998387648
       },
-      "nodeHeapDeltaAfterDisposeBytes": -258048,
+      "nodeHeapDeltaAfterDisposeBytes": -246128,
       "highTimers": 0,
       "timersAfterDispose": 0,
       "reportBytes": 767,
@@ -753,17 +753,17 @@
       "initMs": 0.0005999999993946403,
       "frameHook": {
         "count": 3480,
-        "meanMs": 0.00018097701147195332,
-        "p95Ms": 0.0004000000044470653,
+        "meanMs": 0.00008887931034192222,
+        "p95Ms": 0.00010000000111176632,
+        "worstMs": 0.0004000000008090865
+      },
+      "sampledHookAndDOM": {
+        "count": 120,
+        "meanMs": 0.0000983333332442271,
+        "p95Ms": 0.00010000000111176632,
         "worstMs": 0.0011999999987892807
       },
-      "sampledHookAndDOM": {
-        "count": 120,
-        "meanMs": 0.00020416666635962125,
-        "p95Ms": 0.0005000000019208528,
-        "worstMs": 0.0007000000041443855
-      },
-      "nodeHeapDeltaAfterDisposeBytes": 2512920,
+      "nodeHeapDeltaAfterDisposeBytes": 2479424,
       "highTimers": 0,
       "timersAfterDispose": 0,
       "reportBytes": 0,

@@ -93,9 +93,9 @@ screen recorder. Its optional Node heap delta includes harness/Core allocations
 and is not browser or device RAM. Do not use these results as a full-game frame
 regression percentage or physical-device acceptance.
 
-The latest headless run's maximum p95 frame-hook costs were 0.0006 ms Off,
-0.0013 ms Compact and 0.0010 ms Details. Sampled hook-plus-DOM p95 ranged
-0.356–1.170 ms Compact and 0.392–0.942 ms Details across cohorts/repetitions.
+The latest headless run's maximum p95 frame-hook costs were 0.0003 ms Off,
+0.0010 ms Compact and 0.0008 ms Details. Sampled hook-plus-DOM p95 ranged
+0.294–0.852 ms Compact and 0.445–0.644 ms Details across cohorts/repetitions.
 There were zero timers Off, at most one enabled and zero after disposal; reports
 peaked at 28,435 bytes. Node heap deltas had mixed signs and include Core/harness
 allocations; they are not evidence of stable browser memory or a leak. The

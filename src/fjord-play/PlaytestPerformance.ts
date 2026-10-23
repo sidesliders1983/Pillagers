@@ -276,7 +276,10 @@ export class PlaytestPerformance {
             this.setMode('Background');
             if (!event.persisted) this.dispose();
         }, { signal });
-        window.addEventListener('pageshow', () => { this.setMode('Paused'); this.update(); }, { signal });
+        window.addEventListener('pageshow', event => {
+            if (!event.persisted) return;
+            this.setMode('Paused'); this.update();
+        }, { signal });
         document.addEventListener('webglcontextlost', () => {
             this.measurements?.mark('context-loss', 'Graphics context lost; cause unknown');
             this.gpu?.reset(true);
