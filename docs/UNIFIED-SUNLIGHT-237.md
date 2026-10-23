@@ -1,8 +1,14 @@
 # Unified sunlight — #237
 
-Opt-in implementation following Northern Seasonal Light #236 / PR #255, based on
-`e02c41f96cfc2a0050c17d232523c6f638045001`. Main was still `d42b878` when work began.
-This is a separate follow-up branch/PR; it does not merge or publish either change.
+Unified sunlight is the default for Fjord Play following the owner's request on
+23 October 2026. Ordinary URLs, including `?debugPerf=1`, use the integrated water
+sunlight, coastal shadows and directional atmosphere. Explicit
+`?sunlight=northern-v1` preserves the earlier annual-lighting comparison;
+`?lighting=baseline` preserves the original lighting comparison.
+
+The original opt-in implementation followed Northern Seasonal Light #236 /
+PR #255, based on `e02c41f96cfc2a0050c17d232523c6f638045001`. Main was still
+`d42b878` when work began. Historical QA measurements below describe that delivery.
 
 ## Comparison and scope
 
@@ -13,10 +19,10 @@ variants restore the identical paused campaign, camera and quality through the
 existing active-session storage lane. Changing bearing mirrors only the camera's
 horizontal offset about its fixed target; minimum tilt/range limits are unchanged.
 
-- Current annual lighting: `/fjord-play?lighting=northern-v1`.
-- Candidate: `/fjord-play?lighting=northern-v1&sunlight=unified-v1`.
+- Earlier annual lighting: `/fjord-play?lighting=northern-v1&sunlight=northern-v1`.
+- Unified sunlight (now the default): `/fjord-play?sunlight=unified-v1`.
 
-Both retain the accepted light/snow interpolation. Ordinary URLs and other labs
+Both retain the accepted light/snow interpolation. Other labs
 keep their existing water/material behavior. There is no daily calendar, sun
 disc, moon, new skybox, extra light, postprocessing pass or gameplay modifier.
 
@@ -99,10 +105,10 @@ focused contracts and proportional CPU measurements. The comparison exporter
 records light/atmosphere, calendar, camera, quality and renderer resource counts,
 including program counts. It records no invented GPU timings.
 
-No controllable browser is available in this session. Baseline/candidate pixel
-captures and the moving pan sequence are therefore not claimed. Owner review
+At original delivery no controllable browser was available. Baseline/candidate
+pixel captures and the moving pan sequence were therefore not claimed. Visual review
 must check both islands, both qualities, sunward/away/normal cameras, real shadowed
 coasts, summer, returning light, dark winter and applicable weather. Real GPU/frame
 measurements use the existing #151 protocol. Physical iPhone/iPad and visual
-acceptance remain explicit gates. Keep draft/default-off; no automatic merge,
-issue closure or publication is part of this delivery.
+evidence remain under #151. The owner's subsequent request activates the existing
+effect by default; it does not supply new measured GPU/device evidence.

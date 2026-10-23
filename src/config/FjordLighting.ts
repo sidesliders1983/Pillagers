@@ -1,6 +1,7 @@
 /** Presentation switches only; never persisted into the canonical campaign. */
 export function fjordLighting(query: URLSearchParams) {
-    const unified = query.get('sunlight') === 'unified-v1';
+    const unified = query.has('sunlight') ? query.get('sunlight') === 'unified-v1' :
+        query.get('lighting') !== 'baseline';
     return {
         northern: query.get('lighting') !== 'baseline' || unified,
         unified,

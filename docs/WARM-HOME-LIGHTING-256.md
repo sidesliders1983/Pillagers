@@ -1,8 +1,10 @@
 # Warm home lighting — #256
 
 Northern Light is now the default for Fjord Play following owner acceptance.
-`?lighting=baseline` retains the comparison. #237's water/haze integration remains
-independently selectable with `sunlight=unified-v1`.
+Unified sunlight, coastal shadows and directional atmosphere from #237 are also
+enabled by default following the owner's 23 October request. `?lighting=baseline`
+retains the original comparison; `?sunlight=northern-v1` retains annual Northern
+Light without the unified water/haze integration.
 
 Following owner visual acceptance, supported occupied homes now use the warm
 window and ground glow by default. `homes=baseline` explicitly disables it for
