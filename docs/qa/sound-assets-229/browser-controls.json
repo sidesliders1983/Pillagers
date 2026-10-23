@@ -1,0 +1,29 @@
+{
+  "recordedDate": "2026-10-23",
+  "scope": "Native desktop browser UI observations; no human listening or physical Safari claim",
+  "loop": {
+    "cue": "wind-harsh-winter",
+    "elapsedSeconds": 97.354,
+    "state": "running",
+    "playing": 1,
+    "audibleSeamsAssessed": false
+  },
+  "mute": {
+    "state": "suspended",
+    "playing": 0
+  },
+  "unmute": {
+    "state": "running",
+    "playing": 1
+  },
+  "stop": "Stopped.",
+  "export": "23 decoded candidates; source and catalogue hashes verified against the checked-in evidence",
+  "physicalDevice": null,
+  "listenedByOwner": false,
+  "audioRuntimeSourceHashes": {
+    "src/audio/FjordAudio.ts": "c2f6bfecbf1c29578c71e3d8747544151704acf38ab17c0d10db93bf91d8e97e",
+    "src/audio/Soundscape.ts": "30da1f276bc3ed71fc63fb785389e32a668d830270b106d12e68b04de3ae7cdc",
+    "src/audio/AudioControls.ts": "cc07037dea82f2e558d8e8b728db06f50019e19ddcc15678cde19632dd3ec84e"
+  },
+  "note": "Controls were checked before the later owner-choice text update; audio owner, policy, controls and prepared bytes are unchanged."
+}

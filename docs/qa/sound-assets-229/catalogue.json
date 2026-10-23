@@ -1,0 +1,2490 @@
+{
+  "version": 1,
+  "preparedUtc": "2026-10-23T08:47:14.248Z",
+  "ffmpeg": "ffmpeg version 7.1-essentials_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers",
+  "recipeSHA256": "82e9438d8ca98aa4382fd02ac52c437b7e1e0acdc9168f6d1767ee9a199569e8",
+  "sourceSetSHA256": "c51a995c9e40551452300e937a1c1f052decac1c4402f556ec5abd943167e844",
+  "provenanceSHA256": "ca6596d3f65c1360950fc862d41f7d3679e7fc51a3781e53ca9080a75fd73241",
+  "traceWorkbookSHA256": "72efa29295d6361c3796adf1e4347b6b9ec1698fb6d06772640cc4feab33c3d2",
+  "duplicateTraceRowsMerged": [],
+  "preparationSHA256": "ff36d32eb406c42cd47880a1d7fdb5d4392afc8e96544e3a7052ee78ab1bed8a",
+  "entries": [
+    {
+      "id": "wind-spring",
+      "label": "Wind — spring",
+      "trigger": "spring",
+      "source": {
+        "file": "wind-spring.mp3",
+        "sha256": "8e18630779ffe980e78fd68f78dba8ad6e1ec333bd9fef75e918e607a1ae2462",
+        "bytes": 515761,
+        "codec": "mp3 (mp3float)",
+        "sampleRate": 44100,
+        "layout": "stereo",
+        "lossyInput": true,
+        "decodedAtPreparationRate": {
+          "sampleRate": 24000,
+          "channels": 2,
+          "frames": 386821,
+          "seconds": 16.117541666666668,
+          "peakDbFS": 1.7745415659297286,
+          "rmsDbFS": -23.612350567882785,
+          "dc": 0.00038650293484093626,
+          "channelDc": [
+            0.0004815165960708843,
+            0.0002914892736109883
+          ],
+          "clippedSamples": 128,
+          "monoFoldDownRelativeDb": -2.3007018533065255,
+          "boundaryStep": 0.000018382979692561886,
+          "peakAtSeconds": 6.738333333333333,
+          "amplitudeOnsetSeconds": 0.3265416666666667,
+          "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker."
+        }
+      },
+      "prepared": {
+        "file": "wind-spring-8e186307-82e9438d.wav",
+        "sha256": "4c4c48fff0a07ebc2bd7afd63b7f82e7e61e352579c41a7f047f22d0a5270ce0",
+        "bytes": 960078,
+        "codec": "PCM signed 16-bit WAV",
+        "sampleRate": 24000,
+        "channels": 2,
+        "frames": 240000,
+        "seconds": 10,
+        "peakDbFS": -1.63616177600565,
+        "rmsDbFS": -25.354717168531252,
+        "dc": 2.3517608642578126e-7,
+        "channelDc": [
+          4.78363037109375e-7,
+          -8.0108642578125e-9
+        ],
+        "clippedSamples": 0,
+        "monoFoldDownRelativeDb": -2.2982574931855644,
+        "boundaryStep": 0.001068115234375,
+        "peakAtSeconds": 4.39325,
+        "amplitudeOnsetSeconds": 0.476625,
+        "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker.",
+        "truePeakDbFS": -1.6,
+        "integratedLUFS": -23,
+        "loudnessCaution": null,
+        "estimatedPCMAt48kHz": 3840000
+      },
+      "recipe": {
+        "id": "wind-spring",
+        "label": "Wind — spring",
+        "file": "wind-spring.mp3",
+        "bus": "ambience",
+        "trigger": "spring",
+        "loop": true,
+        "start": 2,
+        "duration": 10,
+        "channels": 2,
+        "trimDb": -3,
+        "gain": 0.28,
+        "cooldown": [
+          0,
+          0
+        ],
+        "range": 0,
+        "crossfadeSeconds": 0.35,
+        "ffmpegFilter": "[0:a]atrim=start=2:duration=10.35,asetpts=PTS-STARTPTS,highpass=f=25,volume=-3dB,asplit=3[a][b][c];[a]atrim=end=0.35,asetpts=PTS-STARTPTS,afade=t=in:st=0:d=0.35:curve=qsin[head];[b]atrim=start=0.35:end=10,asetpts=PTS-STARTPTS[middle];[c]atrim=start=10,asetpts=PTS-STARTPTS,afade=t=out:st=0:d=0.35:curve=qsin[tail];[tail][head]amix=inputs=2:normalize=0[cross];[middle][cross]concat=n=2:v=0:a=1[out]"
+      },
+      "provenance": {
+        "file": "wind-spring.mp3",
+        "sourceSHA256": "8e18630779ffe980e78fd68f78dba8ad6e1ec333bd9fef75e918e607a1ae2462",
+        "provider": "Pixabay (owner attribution)",
+        "assetId": "335141",
+        "sourceUrl": "https://pixabay.com/sound-effects/nature-swallows-wind-reeds-335141/",
+        "creator": "Наталья Баранова",
+        "creatorUrl": "https://pixabay.com/users/baranova_n-18974099/",
+        "recordingOrAI": "unverified; not claimed as a field recording",
+        "licenseEvidence": null,
+        "acquisitionDate": null,
+        "traceCells": {
+          "sheet": "Sheet1",
+          "range": "A11:D11"
+        },
+        "sourceTitle": "swallows, wind, reeds",
+        "reviewNotes": [
+          "Contains baked-in bird calls and reeds; not an independent clean-wind bed."
+        ],
+        "sourcePageChecked": "2026-10-23",
+        "generalTermsEvidence": [
+          "https://pixabay.com/service/terms/",
+          "https://pixabay.com/service/license-summary/"
+        ]
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "pending",
+        "distribution": "quarantined"
+      }
+    },
+    {
+      "id": "wind-autumn",
+      "label": "Wind — autumn",
+      "trigger": "autumn",
+      "source": {
+        "file": "wind-autumn.mp3",
+        "sha256": "f31f5ea6581ffcb3d08ad0ed7fe5963c42246ac48f3b5e332772d150b88d728a",
+        "bytes": 342528,
+        "codec": "mp3 (mp3float)",
+        "sampleRate": 48000,
+        "layout": "stereo",
+        "lossyInput": true,
+        "decodedAtPreparationRate": {
+          "sampleRate": 24000,
+          "channels": 2,
+          "frames": 256896,
+          "seconds": 10.704,
+          "peakDbFS": -13.121317217998854,
+          "rmsDbFS": -36.108520817459464,
+          "dc": 2.7897953549277183e-7,
+          "channelDc": [
+            -2.080824497165354e-7,
+            7.660415207020789e-7
+          ],
+          "clippedSamples": 0,
+          "monoFoldDownRelativeDb": -2.220816829525596,
+          "boundaryStep": 2.4346317880296047e-10,
+          "peakAtSeconds": 3.945708333333333,
+          "amplitudeOnsetSeconds": 0.5189166666666667,
+          "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker."
+        }
+      },
+      "prepared": {
+        "file": "wind-autumn-f31f5ea6-82e9438d.wav",
+        "sha256": "7469fd1dbfa61da075e50c3d1227c39c5488c5cc732d2c76721c78cdd7d3e837",
+        "bytes": 864078,
+        "codec": "PCM signed 16-bit WAV",
+        "sampleRate": 24000,
+        "channels": 2,
+        "frames": 216000,
+        "seconds": 9,
+        "peakDbFS": -10.110637005876333,
+        "rmsDbFS": -32.36216191852514,
+        "dc": 1.6940081561053241e-7,
+        "channelDc": [
+          3.9121839735243054e-7,
+          -5.241676613136574e-8
+        ],
+        "clippedSamples": 0,
+        "monoFoldDownRelativeDb": -2.221615253239216,
+        "boundaryStep": 0.013519287109375,
+        "peakAtSeconds": 3.5957083333333335,
+        "amplitudeOnsetSeconds": 0.16891666666666666,
+        "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker.",
+        "truePeakDbFS": -10.1,
+        "integratedLUFS": -24.9,
+        "loudnessCaution": null,
+        "estimatedPCMAt48kHz": 3456000
+      },
+      "recipe": {
+        "id": "wind-autumn",
+        "label": "Wind — autumn",
+        "file": "wind-autumn.mp3",
+        "bus": "ambience",
+        "trigger": "autumn",
+        "loop": true,
+        "start": 0,
+        "duration": 9,
+        "channels": 2,
+        "trimDb": 3,
+        "gain": 0.28,
+        "cooldown": [
+          0,
+          0
+        ],
+        "range": 0,
+        "crossfadeSeconds": 0.35,
+        "ffmpegFilter": "[0:a]atrim=start=0:duration=9.35,asetpts=PTS-STARTPTS,highpass=f=25,volume=3dB,asplit=3[a][b][c];[a]atrim=end=0.35,asetpts=PTS-STARTPTS,afade=t=in:st=0:d=0.35:curve=qsin[head];[b]atrim=start=0.35:end=9,asetpts=PTS-STARTPTS[middle];[c]atrim=start=9,asetpts=PTS-STARTPTS,afade=t=out:st=0:d=0.35:curve=qsin[tail];[tail][head]amix=inputs=2:normalize=0[cross];[middle][cross]concat=n=2:v=0:a=1[out]"
+      },
+      "provenance": {
+        "file": "wind-autumn.mp3",
+        "sourceSHA256": "f31f5ea6581ffcb3d08ad0ed7fe5963c42246ac48f3b5e332772d150b88d728a",
+        "provider": "Pixabay (owner attribution)",
+        "assetId": "34088",
+        "sourceUrl": "https://pixabay.com/sound-effects/nature-sea-wave-34088/",
+        "creator": "freesound_community",
+        "creatorUrl": "https://pixabay.com/users/freesound_community-46691455/",
+        "recordingOrAI": "unverified; not claimed as a field recording",
+        "licenseEvidence": null,
+        "acquisitionDate": null,
+        "traceCells": {
+          "sheet": "Sheet1",
+          "range": "A17:D17"
+        },
+        "sourceTitle": "Sea Wave",
+        "reviewNotes": [
+          "Trace points to an ocean wave, not autumn wind. Local file is about 10.7 seconds; source page displays 19 seconds. Owner correction pending."
+        ],
+        "sourcePageChecked": "2026-10-23",
+        "generalTermsEvidence": [
+          "https://pixabay.com/service/terms/",
+          "https://pixabay.com/service/license-summary/"
+        ]
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "pending",
+        "distribution": "quarantined"
+      }
+    },
+    {
+      "id": "wind-summer",
+      "label": "Wind — summer",
+      "trigger": "summer",
+      "source": {
+        "file": "wind-summer.mp3",
+        "sha256": "c2444dd94451736bbe59c2e6043463a899e0f723b70250380cf465b08fda8251",
+        "bytes": 577619,
+        "codec": "mp3 (mp3float)",
+        "sampleRate": 44100,
+        "layout": "stereo",
+        "lossyInput": true,
+        "decodedAtPreparationRate": {
+          "sampleRate": 24000,
+          "channels": 2,
+          "frames": 433215,
+          "seconds": 18.050625,
+          "peakDbFS": -27.08212128232603,
+          "rmsDbFS": -42.90418270009593,
+          "dc": 0.0000015201035266148055,
+          "channelDc": [
+            0.0000028731556963344244,
+            1.670513568951867e-7
+          ],
+          "clippedSamples": 0,
+          "monoFoldDownRelativeDb": -0.0183498306968295,
+          "boundaryStep": 0,
+          "peakAtSeconds": 15.578166666666666,
+          "amplitudeOnsetSeconds": 0.29441666666666666,
+          "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker."
+        }
+      },
+      "prepared": {
+        "file": "wind-summer-c2444dd9-82e9438d.wav",
+        "sha256": "97b68a2951e3c756a9cacf16ee902f0e4291b86618c642c2da436a8269f3e7e7",
+        "bytes": 960078,
+        "codec": "PCM signed 16-bit WAV",
+        "sampleRate": 24000,
+        "channels": 2,
+        "frames": 240000,
+        "seconds": 10,
+        "peakDbFS": -16.00899935095351,
+        "rmsDbFS": -30.74699054600824,
+        "dc": 1.964569091796875e-8,
+        "channelDc": [
+          -4.704793294270833e-9,
+          4.399617513020833e-8
+        ],
+        "clippedSamples": 0,
+        "monoFoldDownRelativeDb": -0.018275971608913984,
+        "boundaryStep": 0.01800537109375,
+        "peakAtSeconds": 7.039625,
+        "amplitudeOnsetSeconds": 0,
+        "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker.",
+        "truePeakDbFS": -15.8,
+        "integratedLUFS": -25.2,
+        "loudnessCaution": null,
+        "estimatedPCMAt48kHz": 3840000
+      },
+      "recipe": {
+        "id": "wind-summer",
+        "label": "Wind — summer",
+        "file": "wind-summer.mp3",
+        "bus": "ambience",
+        "trigger": "summer",
+        "loop": true,
+        "start": 2,
+        "duration": 10,
+        "channels": 2,
+        "trimDb": 12,
+        "gain": 0.25,
+        "cooldown": [
+          0,
+          0
+        ],
+        "range": 0,
+        "crossfadeSeconds": 0.35,
+        "ffmpegFilter": "[0:a]atrim=start=2:duration=10.35,asetpts=PTS-STARTPTS,highpass=f=25,volume=12dB,asplit=3[a][b][c];[a]atrim=end=0.35,asetpts=PTS-STARTPTS,afade=t=in:st=0:d=0.35:curve=qsin[head];[b]atrim=start=0.35:end=10,asetpts=PTS-STARTPTS[middle];[c]atrim=start=10,asetpts=PTS-STARTPTS,afade=t=out:st=0:d=0.35:curve=qsin[tail];[tail][head]amix=inputs=2:normalize=0[cross];[middle][cross]concat=n=2:v=0:a=1[out]"
+      },
+      "provenance": {
+        "file": "wind-summer.mp3",
+        "sourceSHA256": "c2444dd94451736bbe59c2e6043463a899e0f723b70250380cf465b08fda8251",
+        "provider": "Pixabay (owner attribution)",
+        "assetId": "287906",
+        "sourceUrl": "https://pixabay.com/sound-effects/nature-summer-field-287906/",
+        "creator": "Darina Evstafeva",
+        "creatorUrl": "https://pixabay.com/users/nematoki-32544028/",
+        "recordingOrAI": "unverified; not claimed as a field recording",
+        "licenseEvidence": null,
+        "acquisitionDate": null,
+        "traceCells": {
+          "sheet": "Sheet1",
+          "range": "A4:D4"
+        },
+        "sourceTitle": "Summer field",
+        "reviewNotes": [
+          "Contains birds/insects; not an independent clean-wind bed."
+        ],
+        "sourcePageChecked": "2026-10-23",
+        "generalTermsEvidence": [
+          "https://pixabay.com/service/terms/",
+          "https://pixabay.com/service/license-summary/"
+        ]
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "pending",
+        "distribution": "quarantined"
+      }
+    },
+    {
+      "id": "wind-normal-winter",
+      "label": "Wind — normal winter",
+      "trigger": "winter-non-harsh",
+      "source": {
+        "file": "wind-normal-winter.mp3",
+        "sha256": "e778feaed84cc7508237ceff15290b9e97de06b8fbf2f44d621639dfd34ab7c1",
+        "bytes": 609024,
+        "codec": "mp3 (mp3float)",
+        "sampleRate": 48000,
+        "layout": "stereo",
+        "lossyInput": true,
+        "decodedAtPreparationRate": {
+          "sampleRate": 24000,
+          "channels": 2,
+          "frames": 456768,
+          "seconds": 19.032,
+          "peakDbFS": 0.05703584821427575,
+          "rmsDbFS": -18.14517324790903,
+          "dc": 0.0000014849576028522745,
+          "channelDc": [
+            8.770841178952179e-7,
+            0.000002092831087809332
+          ],
+          "clippedSamples": 20,
+          "monoFoldDownRelativeDb": -3.575930142613813,
+          "boundaryStep": 0.000003854288785202993,
+          "peakAtSeconds": 8.82675,
+          "amplitudeOnsetSeconds": 0.564375,
+          "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker."
+        }
+      },
+      "prepared": {
+        "file": "wind-normal-winter-e778feae-82e9438d.wav",
+        "sha256": "23403a12b9825a1ed7cc2ce42a6db2743755095a56cf4940d209d7a22c1d4b63",
+        "bytes": 960078,
+        "codec": "PCM signed 16-bit WAV",
+        "sampleRate": 24000,
+        "channels": 2,
+        "frames": 240000,
+        "seconds": 10,
+        "peakDbFS": -7.770792807191144,
+        "rmsDbFS": -24.639797761228053,
+        "dc": 5.4779052734375e-7,
+        "channelDc": [
+          6.84356689453125e-7,
+          4.11224365234375e-7
+        ],
+        "clippedSamples": 0,
+        "monoFoldDownRelativeDb": -4.21498673992238,
+        "boundaryStep": 0.010589599609375,
+        "peakAtSeconds": 6.6595,
+        "amplitudeOnsetSeconds": 0.00020833333333333335,
+        "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker.",
+        "truePeakDbFS": -7.8,
+        "integratedLUFS": -21.5,
+        "loudnessCaution": null,
+        "estimatedPCMAt48kHz": 3840000
+      },
+      "recipe": {
+        "id": "wind-normal-winter",
+        "label": "Wind — normal winter",
+        "file": "wind-normal-winter.mp3",
+        "bus": "ambience",
+        "trigger": "winter-non-harsh",
+        "loop": true,
+        "start": 1,
+        "duration": 10,
+        "channels": 2,
+        "trimDb": -8,
+        "gain": 0.28,
+        "cooldown": [
+          0,
+          0
+        ],
+        "range": 0,
+        "crossfadeSeconds": 0.35,
+        "ffmpegFilter": "[0:a]atrim=start=1:duration=10.35,asetpts=PTS-STARTPTS,highpass=f=25,volume=-8dB,asplit=3[a][b][c];[a]atrim=end=0.35,asetpts=PTS-STARTPTS,afade=t=in:st=0:d=0.35:curve=qsin[head];[b]atrim=start=0.35:end=10,asetpts=PTS-STARTPTS[middle];[c]atrim=start=10,asetpts=PTS-STARTPTS,afade=t=out:st=0:d=0.35:curve=qsin[tail];[tail][head]amix=inputs=2:normalize=0[cross];[middle][cross]concat=n=2:v=0:a=1[out]"
+      },
+      "provenance": {
+        "file": "wind-normal-winter.mp3",
+        "sourceSHA256": "e778feaed84cc7508237ceff15290b9e97de06b8fbf2f44d621639dfd34ab7c1",
+        "provider": "Pixabay (owner attribution)",
+        "assetId": "499654",
+        "sourceUrl": "https://pixabay.com/sound-effects/nature-freezing-winter-wind-499654/",
+        "creator": "DRAGON-STUDIO",
+        "creatorUrl": "https://pixabay.com/users/dragon-studio-38165424/",
+        "recordingOrAI": "unverified; not claimed as a field recording",
+        "licenseEvidence": null,
+        "acquisitionDate": null,
+        "traceCells": {
+          "sheet": "Sheet1",
+          "range": "A20:D20"
+        },
+        "sourceTitle": "Freezing Winter Wind",
+        "reviewNotes": [
+          "Local file is about 19 seconds; source page displays 13 seconds. Source/file mapping needs owner confirmation."
+        ],
+        "sourcePageChecked": "2026-10-23",
+        "generalTermsEvidence": [
+          "https://pixabay.com/service/terms/",
+          "https://pixabay.com/service/license-summary/"
+        ]
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "pending",
+        "distribution": "quarantined"
+      }
+    },
+    {
+      "id": "wind-harsh-winter",
+      "label": "Wind — harsh winter",
+      "trigger": "winter-harsh",
+      "source": {
+        "file": "wind-harsh-winter.mp3",
+        "sha256": "65f21e931e6ee233972d765fc7f8323c4319bf3067d2e5724577119ea3c171cc",
+        "bytes": 566784,
+        "codec": "mp3 (mp3float)",
+        "sampleRate": 48000,
+        "layout": "stereo",
+        "lossyInput": true,
+        "decodedAtPreparationRate": {
+          "sampleRate": 24000,
+          "channels": 2,
+          "frames": 425088,
+          "seconds": 17.712,
+          "peakDbFS": 0.014983328467560748,
+          "rmsDbFS": -16.57486444033017,
+          "dc": -0.00001541545086457724,
+          "channelDc": [
+            -0.00005445679177750325,
+            0.000023625890048348786
+          ],
+          "clippedSamples": 3,
+          "monoFoldDownRelativeDb": -1.670229408182951,
+          "boundaryStep": 0.000011018412110410693,
+          "peakAtSeconds": 6.911083333333333,
+          "amplitudeOnsetSeconds": 0.0475,
+          "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker."
+        }
+      },
+      "prepared": {
+        "file": "wind-harsh-winter-65f21e93-82e9438d.wav",
+        "sha256": "4506ccb5d5fdc1aa4e01d6cf101bfa900b2ebe9aff1f4f0e2c1834ed7d616b6d",
+        "bytes": 960078,
+        "codec": "PCM signed 16-bit WAV",
+        "sampleRate": 24000,
+        "channels": 2,
+        "frames": 240000,
+        "seconds": 10,
+        "peakDbFS": -8.252780880856058,
+        "rmsDbFS": -23.035755761730982,
+        "dc": -2.9500325520833334e-8,
+        "channelDc": [
+          -2.1349589029947916e-7,
+          1.544952392578125e-7
+        ],
+        "clippedSamples": 0,
+        "monoFoldDownRelativeDb": -1.6289694800092587,
+        "boundaryStep": 0.00335693359375,
+        "peakAtSeconds": 4.220791666666667,
+        "amplitudeOnsetSeconds": 0.00375,
+        "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker.",
+        "truePeakDbFS": -8.3,
+        "integratedLUFS": -20.7,
+        "loudnessCaution": null,
+        "estimatedPCMAt48kHz": 3840000
+      },
+      "recipe": {
+        "id": "wind-harsh-winter",
+        "label": "Wind — harsh winter",
+        "file": "wind-harsh-winter.mp3",
+        "bus": "ambience",
+        "trigger": "winter-harsh",
+        "loop": true,
+        "start": 2,
+        "duration": 10,
+        "channels": 2,
+        "trimDb": -8,
+        "gain": 0.3,
+        "cooldown": [
+          0,
+          0
+        ],
+        "range": 0,
+        "crossfadeSeconds": 0.35,
+        "ffmpegFilter": "[0:a]atrim=start=2:duration=10.35,asetpts=PTS-STARTPTS,highpass=f=25,volume=-8dB,asplit=3[a][b][c];[a]atrim=end=0.35,asetpts=PTS-STARTPTS,afade=t=in:st=0:d=0.35:curve=qsin[head];[b]atrim=start=0.35:end=10,asetpts=PTS-STARTPTS[middle];[c]atrim=start=10,asetpts=PTS-STARTPTS,afade=t=out:st=0:d=0.35:curve=qsin[tail];[tail][head]amix=inputs=2:normalize=0[cross];[middle][cross]concat=n=2:v=0:a=1[out]"
+      },
+      "provenance": {
+        "file": "wind-harsh-winter.mp3",
+        "sourceSHA256": "65f21e931e6ee233972d765fc7f8323c4319bf3067d2e5724577119ea3c171cc",
+        "provider": "Pixabay (owner attribution)",
+        "assetId": "463217",
+        "sourceUrl": "https://pixabay.com/sound-effects/nature-blizzard-wind-463217/",
+        "creator": "DRAGON-STUDIO",
+        "creatorUrl": "https://pixabay.com/users/dragon-studio-38165424/",
+        "recordingOrAI": "unverified; not claimed as a field recording",
+        "licenseEvidence": null,
+        "acquisitionDate": null,
+        "traceCells": {
+          "sheet": "Sheet1",
+          "range": "A22:D22"
+        },
+        "sourceTitle": "Blizzard Wind",
+        "reviewNotes": [],
+        "sourcePageChecked": "2026-10-23",
+        "generalTermsEvidence": [
+          "https://pixabay.com/service/terms/",
+          "https://pixabay.com/service/license-summary/"
+        ]
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "pending",
+        "distribution": "quarantined"
+      }
+    },
+    {
+      "id": "sea-waves",
+      "label": "Waves — occasional shore texture",
+      "trigger": "near-known-shore",
+      "source": {
+        "file": "sea-waves.mp3",
+        "sha256": "b19277d276ff682d9c42f968d94a53ecb04ee86efca237ca29a1a99f1e695c41",
+        "bytes": 381600,
+        "codec": "mp3 (mp3float)",
+        "sampleRate": 24000,
+        "layout": "stereo",
+        "lossyInput": true,
+        "decodedAtPreparationRate": {
+          "sampleRate": 24000,
+          "channels": 2,
+          "frames": 457920,
+          "seconds": 19.08,
+          "peakDbFS": -2.8696660104053424,
+          "rmsDbFS": -30.05651929134318,
+          "dc": 0.000004537607235542663,
+          "channelDc": [
+            0.0000020498547402584007,
+            0.000007025359730826924
+          ],
+          "clippedSamples": 0,
+          "monoFoldDownRelativeDb": -0.9256218598047606,
+          "boundaryStep": 0.0004544497933238745,
+          "peakAtSeconds": 9.859458333333333,
+          "amplitudeOnsetSeconds": 0.12629166666666666,
+          "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker."
+        }
+      },
+      "prepared": {
+        "file": "sea-waves-b19277d2-82e9438d.wav",
+        "sha256": "1a0ddd6e24003899e355d0f9a888dffcc11c6704fa09a94ab1b15a887557b097",
+        "bytes": 480078,
+        "codec": "PCM signed 16-bit WAV",
+        "sampleRate": 24000,
+        "channels": 1,
+        "frames": 240000,
+        "seconds": 10,
+        "peakDbFS": -9.043082277723952,
+        "rmsDbFS": -33.65676004358977,
+        "dc": 1.6695658365885418e-7,
+        "channelDc": [
+          1.6695658365885418e-7
+        ],
+        "clippedSamples": 0,
+        "monoFoldDownRelativeDb": 0,
+        "boundaryStep": 0,
+        "peakAtSeconds": 6.859458333333333,
+        "amplitudeOnsetSeconds": 0.019166666666666665,
+        "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker.",
+        "truePeakDbFS": -9,
+        "integratedLUFS": -32.6,
+        "loudnessCaution": null,
+        "estimatedPCMAt48kHz": 1920000
+      },
+      "recipe": {
+        "id": "sea-waves",
+        "label": "Waves — occasional shore texture",
+        "file": "sea-waves.mp3",
+        "bus": "world",
+        "trigger": "near-known-shore",
+        "loop": false,
+        "start": 3,
+        "duration": 10,
+        "channels": 1,
+        "trimDb": -3,
+        "gain": 0.35,
+        "cooldown": [
+          40,
+          75
+        ],
+        "range": 70,
+        "crossfadeSeconds": 0,
+        "ffmpegFilter": "[0:a]atrim=start=3:duration=10,asetpts=PTS-STARTPTS,highpass=f=25,volume=-3dB,afade=t=in:st=0:d=0.012,afade=t=out:st=9.965:d=0.035[out]"
+      },
+      "provenance": {
+        "file": "sea-waves.mp3",
+        "sourceSHA256": "b19277d276ff682d9c42f968d94a53ecb04ee86efca237ca29a1a99f1e695c41",
+        "provider": "Pixabay (owner attribution)",
+        "assetId": "376898",
+        "sourceUrl": "https://pixabay.com/sound-effects/nature-ocean-waves-376898/",
+        "creator": "DRAGON-STUDIO",
+        "creatorUrl": "https://pixabay.com/users/dragon-studio-38165424/",
+        "recordingOrAI": "unverified; not claimed as a field recording",
+        "licenseEvidence": null,
+        "acquisitionDate": null,
+        "traceCells": {
+          "sheet": "Sheet1",
+          "range": "A16:D16"
+        },
+        "sourceTitle": "Ocean Waves",
+        "reviewNotes": [
+          "Local file is about 19 seconds; source page displays 22 seconds. Source/file mapping needs owner confirmation."
+        ],
+        "sourcePageChecked": "2026-10-23",
+        "generalTermsEvidence": [
+          "https://pixabay.com/service/terms/",
+          "https://pixabay.com/service/license-summary/"
+        ]
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "pending",
+        "distribution": "quarantined"
+      }
+    },
+    {
+      "id": "campfire",
+      "label": "Campfire — occasional crackle",
+      "trigger": "visible-burning-campfire",
+      "source": {
+        "file": "campfire.mp3",
+        "sha256": "5971f130dc39af553e17a9d1e1f35493513b9dd3d9014a888b808d7958210b27",
+        "bytes": 288391,
+        "codec": "mp3 (mp3float)",
+        "sampleRate": 44100,
+        "layout": "stereo",
+        "lossyInput": true,
+        "decodedAtPreparationRate": {
+          "sampleRate": 24000,
+          "channels": 2,
+          "frames": 216294,
+          "seconds": 9.01225,
+          "peakDbFS": 1.0966761314956581,
+          "rmsDbFS": -29.609458014379122,
+          "dc": 0.0003622951016826737,
+          "channelDc": [
+            0.0003626922880157213,
+            0.0003618979153496273
+          ],
+          "clippedSamples": 15,
+          "monoFoldDownRelativeDb": -0.0011293699774638781,
+          "boundaryStep": 3.908337920606377e-15,
+          "peakAtSeconds": 2.813,
+          "amplitudeOnsetSeconds": 0.059333333333333335,
+          "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker."
+        }
+      },
+      "prepared": {
+        "file": "campfire-5971f130-82e9438d.wav",
+        "sha256": "8d6d2a41af93874796be28bfe79eeaddbf80aeec5497cb86fcf5bc83f38ca951",
+        "bytes": 288078,
+        "codec": "PCM signed 16-bit WAV",
+        "sampleRate": 24000,
+        "channels": 1,
+        "frames": 144000,
+        "seconds": 6,
+        "peakDbFS": -1.7999446767773895,
+        "rmsDbFS": -31.83710131900131,
+        "dc": 0.0000027872721354166667,
+        "channelDc": [
+          0.0000027872721354166667
+        ],
+        "clippedSamples": 0,
+        "monoFoldDownRelativeDb": 0,
+        "boundaryStep": 0.000030517578125,
+        "peakAtSeconds": 1.813,
+        "amplitudeOnsetSeconds": 0.145,
+        "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker.",
+        "truePeakDbFS": -1.6,
+        "integratedLUFS": -29.8,
+        "loudnessCaution": null,
+        "estimatedPCMAt48kHz": 1152000
+      },
+      "recipe": {
+        "id": "campfire",
+        "label": "Campfire — occasional crackle",
+        "file": "campfire.mp3",
+        "bus": "world",
+        "trigger": "visible-burning-campfire",
+        "loop": false,
+        "start": 1,
+        "duration": 6,
+        "channels": 1,
+        "trimDb": -3,
+        "gain": 0.35,
+        "cooldown": [
+          30,
+          60
+        ],
+        "range": 25,
+        "crossfadeSeconds": 0,
+        "ffmpegFilter": "[0:a]atrim=start=1:duration=6,asetpts=PTS-STARTPTS,highpass=f=25,volume=-3dB,afade=t=in:st=0:d=0.012,afade=t=out:st=5.965:d=0.035[out]"
+      },
+      "provenance": {
+        "file": "campfire.mp3",
+        "sourceSHA256": "5971f130dc39af553e17a9d1e1f35493513b9dd3d9014a888b808d7958210b27",
+        "provider": "Pixabay (owner attribution)",
+        "assetId": "375866",
+        "sourceUrl": "https://pixabay.com/sound-effects/nature-campfire-burning-wood-ambience-hd-375866/",
+        "creator": "English",
+        "creatorUrl": "https://pixabay.com/users/virtualzero-34835365/",
+        "recordingOrAI": "AI-generated (source label)",
+        "licenseEvidence": null,
+        "acquisitionDate": null,
+        "traceCells": {
+          "sheet": "Sheet1",
+          "range": "A6:D6"
+        },
+        "sourceTitle": "Campfire Burning Wood Ambience HD",
+        "reviewNotes": [
+          "Source explicitly labels this AI generated; owner preference pending."
+        ],
+        "sourcePageChecked": "2026-10-23",
+        "generalTermsEvidence": [
+          "https://pixabay.com/service/terms/",
+          "https://pixabay.com/service/license-summary/"
+        ]
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "pending",
+        "distribution": "quarantined"
+      }
+    },
+    {
+      "id": "gull",
+      "label": "Gull — occasional visible call",
+      "trigger": "currently-visible-occasional",
+      "source": {
+        "file": "gull.mp3",
+        "sha256": "ef91c26dc62fda42c0edf38ae6dc703398c0dd03540ad4b78312895e14f37134",
+        "bytes": 74880,
+        "codec": "mp3 (mp3float)",
+        "sampleRate": 24000,
+        "layout": "stereo",
+        "lossyInput": true,
+        "decodedAtPreparationRate": {
+          "sampleRate": 24000,
+          "channels": 2,
+          "frames": 89856,
+          "seconds": 3.744,
+          "peakDbFS": -16.133237718823683,
+          "rmsDbFS": -31.809547333592878,
+          "dc": -0.00002890357328252522,
+          "channelDc": [
+            0.00003069117191091011,
+            -0.00008849831847596055
+          ],
+          "clippedSamples": 0,
+          "monoFoldDownRelativeDb": -0.9163822674313283,
+          "boundaryStep": 0.0000017129453908637515,
+          "peakAtSeconds": 1.9339166666666667,
+          "amplitudeOnsetSeconds": 0.09975,
+          "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker."
+        }
+      },
+      "prepared": {
+        "file": "gull-ef91c26d-82e9438d.wav",
+        "sha256": "30943745ceeae8127feeb4f809a390e7ee98d1ff500a51386bf53bcbe0bd58e0",
+        "bytes": 179790,
+        "codec": "PCM signed 16-bit WAV",
+        "sampleRate": 24000,
+        "channels": 1,
+        "frames": 89856,
+        "seconds": 3.744,
+        "peakDbFS": -8.32160217139759,
+        "rmsDbFS": -23.740976515189594,
+        "dc": 0.0000036700159056573852,
+        "channelDc": [
+          0.0000036700159056573852
+        ],
+        "clippedSamples": 0,
+        "monoFoldDownRelativeDb": 0,
+        "boundaryStep": 0,
+        "peakAtSeconds": 1.9366666666666668,
+        "amplitudeOnsetSeconds": 0.098875,
+        "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker.",
+        "truePeakDbFS": -8.3,
+        "integratedLUFS": -22.1,
+        "loudnessCaution": null,
+        "estimatedPCMAt48kHz": 718848
+      },
+      "recipe": {
+        "id": "gull",
+        "label": "Gull — occasional visible call",
+        "file": "gull.mp3",
+        "bus": "world",
+        "trigger": "currently-visible-occasional",
+        "loop": false,
+        "channels": 1,
+        "trimDb": 9,
+        "gain": 0.55,
+        "cooldown": [
+          35,
+          75
+        ],
+        "range": 60,
+        "crossfadeSeconds": 0,
+        "ffmpegFilter": "[0:a]atrim=start=0:duration=3.744,asetpts=PTS-STARTPTS,highpass=f=25,volume=9dB,afade=t=in:st=0:d=0.012,afade=t=out:st=3.709:d=0.035[out]"
+      },
+      "provenance": {
+        "file": "gull.mp3",
+        "sourceSHA256": "ef91c26dc62fda42c0edf38ae6dc703398c0dd03540ad4b78312895e14f37134",
+        "provider": "Pixabay (owner attribution)",
+        "assetId": "94139",
+        "sourceUrl": "https://pixabay.com/sound-effects/nature-gull-94139/",
+        "creator": "freesound_community",
+        "creatorUrl": "https://pixabay.com/users/freesound_community-46691455/",
+        "recordingOrAI": "unverified; not claimed as a field recording",
+        "licenseEvidence": null,
+        "acquisitionDate": null,
+        "traceCells": {
+          "sheet": "Sheet1",
+          "range": "A18:D18"
+        },
+        "sourceTitle": "Gull",
+        "reviewNotes": [
+          "Page credits nigelcoop (Freesound); do not claim a more exact gull species."
+        ],
+        "sourcePageChecked": "2026-10-23",
+        "generalTermsEvidence": [
+          "https://pixabay.com/service/terms/",
+          "https://pixabay.com/service/license-summary/"
+        ]
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "pending",
+        "distribution": "quarantined"
+      }
+    },
+    {
+      "id": "cow",
+      "label": "Cattle — occasional visible call",
+      "trigger": "currently-visible-occasional",
+      "source": {
+        "file": "cow.mp3",
+        "sha256": "38d8c93b7fab2b891e8a8e86f79acb5de1005e85b67513f0544d702216db793e",
+        "bytes": 88607,
+        "codec": "mp3 (mp3float)",
+        "sampleRate": 44100,
+        "layout": "stereo",
+        "lossyInput": true,
+        "decodedAtPreparationRate": {
+          "sampleRate": 24000,
+          "channels": 2,
+          "frames": 66456,
+          "seconds": 2.769,
+          "peakDbFS": -0.2266303374121219,
+          "rmsDbFS": -13.802633792967477,
+          "dc": -0.00007154124158366774,
+          "channelDc": [
+            -0.00009524292285996165,
+            -0.00004783956030737386
+          ],
+          "clippedSamples": 0,
+          "monoFoldDownRelativeDb": -1.0711121804038581,
+          "boundaryStep": 0.000026716441425378434,
+          "peakAtSeconds": 1.425,
+          "amplitudeOnsetSeconds": 0.3705833333333333,
+          "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker."
+        }
+      },
+      "prepared": {
+        "file": "cow-38d8c93b-82e9438d.wav",
+        "sha256": "91df857afdabbffbc1b623d9b44e9fc8201e1664fb648101d185cae53d14258a",
+        "bytes": 132990,
+        "codec": "PCM signed 16-bit WAV",
+        "sampleRate": 24000,
+        "channels": 1,
+        "frames": 66456,
+        "seconds": 2.769,
+        "peakDbFS": -7.728097501435198,
+        "rmsDbFS": -20.873920157959446,
+        "dc": -6.190215377467798e-7,
+        "channelDc": [
+          -6.190215377467798e-7
+        ],
+        "clippedSamples": 0,
+        "monoFoldDownRelativeDb": 0,
+        "boundaryStep": 0,
+        "peakAtSeconds": 1.319625,
+        "amplitudeOnsetSeconds": 0.44866666666666666,
+        "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker.",
+        "truePeakDbFS": -7.7,
+        "integratedLUFS": -18.8,
+        "loudnessCaution": "Short-call LUFS is not a matching target.",
+        "estimatedPCMAt48kHz": 531648
+      },
+      "recipe": {
+        "id": "cow",
+        "label": "Cattle — occasional visible call",
+        "file": "cow.mp3",
+        "bus": "world",
+        "trigger": "currently-visible-occasional",
+        "loop": false,
+        "channels": 1,
+        "trimDb": -6,
+        "gain": 0.6,
+        "cooldown": [
+          35,
+          75
+        ],
+        "range": 45,
+        "crossfadeSeconds": 0,
+        "ffmpegFilter": "[0:a]atrim=start=0:duration=2.769,asetpts=PTS-STARTPTS,highpass=f=25,volume=-6dB,afade=t=in:st=0:d=0.012,afade=t=out:st=2.734:d=0.035[out]"
+      },
+      "provenance": {
+        "file": "cow.mp3",
+        "sourceSHA256": "38d8c93b7fab2b891e8a8e86f79acb5de1005e85b67513f0544d702216db793e",
+        "provider": "Pixabay (owner attribution)",
+        "assetId": "356517",
+        "sourceUrl": "https://pixabay.com/sound-effects/nature-sound-effect-cow-mooing-356517/",
+        "creator": "Scottish Guy",
+        "creatorUrl": "https://pixabay.com/users/scottishperson-16626294/",
+        "recordingOrAI": "unverified; not claimed as a field recording",
+        "licenseEvidence": null,
+        "acquisitionDate": null,
+        "traceCells": {
+          "sheet": "Sheet1",
+          "range": "A7:D7"
+        },
+        "sourceTitle": "Sound Effect - Cow Mooing",
+        "reviewNotes": [],
+        "sourcePageChecked": "2026-10-23",
+        "generalTermsEvidence": [
+          "https://pixabay.com/service/terms/",
+          "https://pixabay.com/service/license-summary/"
+        ]
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "pending",
+        "distribution": "quarantined"
+      }
+    },
+    {
+      "id": "goat",
+      "label": "Goat — occasional visible call",
+      "trigger": "currently-visible-occasional",
+      "source": {
+        "file": "goat.mp3",
+        "sha256": "38aa2162ea1a32710b16460b2228b6083326c5c050062a4bd5f403c69cf9dac5",
+        "bytes": 50991,
+        "codec": "mp3 (mp3float)",
+        "sampleRate": 44100,
+        "layout": "stereo",
+        "lossyInput": true,
+        "decodedAtPreparationRate": {
+          "sampleRate": 24000,
+          "channels": 2,
+          "frames": 38243,
+          "seconds": 1.5934583333333334,
+          "peakDbFS": -7.091565122024872,
+          "rmsDbFS": -25.061210752749574,
+          "dc": -0.00010511658611008168,
+          "channelDc": [
+            -0.000014075353436420708,
+            -0.00019615781878374266
+          ],
+          "clippedSamples": 0,
+          "monoFoldDownRelativeDb": -0.08191904774707795,
+          "boundaryStep": 3.093064430582498e-7,
+          "peakAtSeconds": 0.679,
+          "amplitudeOnsetSeconds": 0.4369166666666667,
+          "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker."
+        }
+      },
+      "prepared": {
+        "file": "goat-38aa2162-82e9438d.wav",
+        "sha256": "6047a108b07e1f222cd180f7743f0762ad451b529d3e3adb40d24471bf443c41",
+        "bytes": 76564,
+        "codec": "PCM signed 16-bit WAV",
+        "sampleRate": 24000,
+        "channels": 1,
+        "frames": 38243,
+        "seconds": 1.5934583333333334,
+        "peakDbFS": -7.241239112558193,
+        "rmsDbFS": -25.155615144819787,
+        "dc": -0.0000027403018403694793,
+        "channelDc": [
+          -0.0000027403018403694793
+        ],
+        "clippedSamples": 0,
+        "monoFoldDownRelativeDb": 0,
+        "boundaryStep": 0,
+        "peakAtSeconds": 0.681375,
+        "amplitudeOnsetSeconds": 0.4412916666666667,
+        "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker.",
+        "truePeakDbFS": -6.7,
+        "integratedLUFS": -20.4,
+        "loudnessCaution": "Short-call LUFS is not a matching target.",
+        "estimatedPCMAt48kHz": 305944
+      },
+      "recipe": {
+        "id": "goat",
+        "label": "Goat — occasional visible call",
+        "file": "goat.mp3",
+        "bus": "world",
+        "trigger": "currently-visible-occasional",
+        "loop": false,
+        "channels": 1,
+        "trimDb": 0,
+        "gain": 0.6,
+        "cooldown": [
+          35,
+          75
+        ],
+        "range": 40,
+        "crossfadeSeconds": 0,
+        "ffmpegFilter": "[0:a]atrim=start=0:duration=1.5934583333333334,asetpts=PTS-STARTPTS,highpass=f=25,volume=0dB,afade=t=in:st=0:d=0.012,afade=t=out:st=1.5584583333333335:d=0.035[out]"
+      },
+      "provenance": {
+        "file": "goat.mp3",
+        "sourceSHA256": "38aa2162ea1a32710b16460b2228b6083326c5c050062a4bd5f403c69cf9dac5",
+        "provider": "Pixabay (owner attribution)",
+        "assetId": "390303",
+        "sourceUrl": "https://pixabay.com/sound-effects/nature-goat-baa-390303/",
+        "creator": "DRAGON-STUDIO",
+        "creatorUrl": "https://pixabay.com/users/dragon-studio-38165424/",
+        "recordingOrAI": "unverified; not claimed as a field recording",
+        "licenseEvidence": null,
+        "acquisitionDate": null,
+        "traceCells": {
+          "sheet": "Sheet1",
+          "range": "A8:D8"
+        },
+        "sourceTitle": "Goat Baa",
+        "reviewNotes": [],
+        "sourcePageChecked": "2026-10-23",
+        "generalTermsEvidence": [
+          "https://pixabay.com/service/terms/",
+          "https://pixabay.com/service/license-summary/"
+        ]
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "pending",
+        "distribution": "quarantined"
+      }
+    },
+    {
+      "id": "pig",
+      "label": "Pig — occasional visible call",
+      "trigger": "currently-visible-occasional",
+      "source": {
+        "file": "pig.mp3",
+        "sha256": "1c5c6494d425c7f73e55a236891af35d60ac8ca19dcf62c025a27e34f1dfe5df",
+        "bytes": 288768,
+        "codec": "mp3 (mp3float)",
+        "sampleRate": 48000,
+        "layout": "stereo",
+        "lossyInput": true,
+        "decodedAtPreparationRate": {
+          "sampleRate": 24000,
+          "channels": 2,
+          "frames": 216576,
+          "seconds": 9.024,
+          "peakDbFS": 0.07723377989509808,
+          "rmsDbFS": -24.264112296568875,
+          "dc": -0.0007179327870263937,
+          "channelDc": [
+            -0.000713435756279491,
+            -0.0007224298177732964
+          ],
+          "clippedSamples": 2,
+          "monoFoldDownRelativeDb": -0.023342931676189255,
+          "boundaryStep": 0.000006588680414214634,
+          "peakAtSeconds": 4.7505,
+          "amplitudeOnsetSeconds": 0.10929166666666666,
+          "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker."
+        }
+      },
+      "prepared": {
+        "file": "pig-1c5c6494-82e9438d.wav",
+        "sha256": "2620d740c72b8b86d47df7e1e90a119bbf06a21c505dc5201b56c216f71aa340",
+        "bytes": 433230,
+        "codec": "PCM signed 16-bit WAV",
+        "sampleRate": 24000,
+        "channels": 1,
+        "frames": 216576,
+        "seconds": 9.024,
+        "peakDbFS": -3.3972116243813755,
+        "rmsDbFS": -27.301170684801956,
+        "dc": 4.692280546147773e-8,
+        "channelDc": [
+          4.692280546147773e-8
+        ],
+        "clippedSamples": 0,
+        "monoFoldDownRelativeDb": 0,
+        "boundaryStep": 0,
+        "peakAtSeconds": 4.7505,
+        "amplitudeOnsetSeconds": 0.10925,
+        "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker.",
+        "truePeakDbFS": -3.4,
+        "integratedLUFS": -25.3,
+        "loudnessCaution": null,
+        "estimatedPCMAt48kHz": 1732607.9999999998
+      },
+      "recipe": {
+        "id": "pig",
+        "label": "Pig — occasional visible call",
+        "file": "pig.mp3",
+        "bus": "world",
+        "trigger": "currently-visible-occasional",
+        "loop": false,
+        "channels": 1,
+        "trimDb": -3,
+        "gain": 0.55,
+        "cooldown": [
+          40,
+          80
+        ],
+        "range": 35,
+        "crossfadeSeconds": 0,
+        "ffmpegFilter": "[0:a]atrim=start=0:duration=9.024,asetpts=PTS-STARTPTS,highpass=f=25,volume=-3dB,afade=t=in:st=0:d=0.012,afade=t=out:st=8.988999999999999:d=0.035[out]"
+      },
+      "provenance": {
+        "file": "pig.mp3",
+        "sourceSHA256": "1c5c6494d425c7f73e55a236891af35d60ac8ca19dcf62c025a27e34f1dfe5df",
+        "provider": "Pixabay (owner attribution)",
+        "assetId": "440220",
+        "sourceUrl": "https://pixabay.com/sound-effects/nature-pig-grunting-playing-in-mud-sound-effect-440220/",
+        "creator": "Mollyroselee",
+        "creatorUrl": "https://pixabay.com/users/mollyroselee-9214707/",
+        "recordingOrAI": "AI-generated (source label)",
+        "licenseEvidence": null,
+        "acquisitionDate": null,
+        "traceCells": {
+          "sheet": "Sheet1",
+          "range": "A9:D9"
+        },
+        "sourceTitle": "Pig grunting playing in mud sound effect",
+        "reviewNotes": [
+          "Source explicitly labels this AI generated; owner preference pending."
+        ],
+        "sourcePageChecked": "2026-10-23",
+        "generalTermsEvidence": [
+          "https://pixabay.com/service/terms/",
+          "https://pixabay.com/service/license-summary/"
+        ]
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "pending",
+        "distribution": "quarantined"
+      }
+    },
+    {
+      "id": "sheep",
+      "label": "Sheep — occasional visible call",
+      "trigger": "currently-visible-occasional",
+      "source": {
+        "file": "sheep.mp3",
+        "sha256": "3b6efbb1fa6e2f619713361a8807a4c4e6e50179961b725de8d5d77474355f12",
+        "bytes": 54334,
+        "codec": "mp3 (mp3float)",
+        "sampleRate": 44100,
+        "layout": "stereo",
+        "lossyInput": true,
+        "decodedAtPreparationRate": {
+          "sampleRate": 24000,
+          "channels": 2,
+          "frames": 40751,
+          "seconds": 1.6979583333333332,
+          "peakDbFS": -2.904476562829148,
+          "rmsDbFS": -19.028622000385486,
+          "dc": -0.000003459711956246401,
+          "channelDc": [
+            -0.0000043469592574799746,
+            -0.000002572464655012827
+          ],
+          "clippedSamples": 0,
+          "monoFoldDownRelativeDb": -4.723882978457106,
+          "boundaryStep": 0.000008096440081287863,
+          "peakAtSeconds": 0.367125,
+          "amplitudeOnsetSeconds": 0.17720833333333333,
+          "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker."
+        }
+      },
+      "prepared": {
+        "file": "sheep-3b6efbb1-82e9438d.wav",
+        "sha256": "a570d8a5ca2eaed160ae67d3868f5ebf92ac9c08b6c18063913528204dd12fc9",
+        "bytes": 81580,
+        "codec": "PCM signed 16-bit WAV",
+        "sampleRate": 24000,
+        "channels": 1,
+        "frames": 40751,
+        "seconds": 1.6979583333333332,
+        "peakDbFS": -6.141784199626778,
+        "rmsDbFS": -20.752521525902555,
+        "dc": 0.0000020040008604083333,
+        "channelDc": [
+          0.0000020040008604083333
+        ],
+        "clippedSamples": 0,
+        "monoFoldDownRelativeDb": 0,
+        "boundaryStep": 0,
+        "peakAtSeconds": 0.367125,
+        "amplitudeOnsetSeconds": 0.17720833333333333,
+        "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker.",
+        "truePeakDbFS": -6,
+        "integratedLUFS": -17.2,
+        "loudnessCaution": "Short-call LUFS is not a matching target.",
+        "estimatedPCMAt48kHz": 326008
+      },
+      "recipe": {
+        "id": "sheep",
+        "label": "Sheep — occasional visible call",
+        "file": "sheep.mp3",
+        "bus": "world",
+        "trigger": "currently-visible-occasional",
+        "loop": false,
+        "channels": 1,
+        "trimDb": 3,
+        "gain": 0.6,
+        "cooldown": [
+          35,
+          75
+        ],
+        "range": 40,
+        "crossfadeSeconds": 0,
+        "ffmpegFilter": "[0:a]atrim=start=0:duration=1.6979583333333332,asetpts=PTS-STARTPTS,highpass=f=25,volume=3dB,afade=t=in:st=0:d=0.012,afade=t=out:st=1.6629583333333333:d=0.035[out]"
+      },
+      "provenance": {
+        "file": "sheep.mp3",
+        "sourceSHA256": "3b6efbb1fa6e2f619713361a8807a4c4e6e50179961b725de8d5d77474355f12",
+        "provider": "Pixabay (owner attribution)",
+        "assetId": "122256",
+        "sourceUrl": "https://pixabay.com/sound-effects/nature-sheep-bleat-122256/",
+        "creator": "Official Profile",
+        "creatorUrl": "https://pixabay.com/users/universfield-28281460/",
+        "recordingOrAI": "unverified; not claimed as a field recording",
+        "licenseEvidence": null,
+        "acquisitionDate": null,
+        "traceCells": {
+          "sheet": "Sheet1",
+          "range": "A19:D19"
+        },
+        "sourceTitle": "Sheep Bleat",
+        "reviewNotes": [],
+        "sourcePageChecked": "2026-10-23",
+        "generalTermsEvidence": [
+          "https://pixabay.com/service/terms/",
+          "https://pixabay.com/service/license-summary/"
+        ]
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "pending",
+        "distribution": "quarantined"
+      }
+    },
+    {
+      "id": "seal",
+      "label": "Seal — occasional visible call",
+      "trigger": "currently-visible-occasional",
+      "source": {
+        "file": "seal.mp3",
+        "sha256": "8649966275ec30e9ecf54fb5498c40633ac9b9739ff6013457969ec9f45182b6",
+        "bytes": 38880,
+        "codec": "mp3 (mp3float)",
+        "sampleRate": 24000,
+        "layout": "stereo",
+        "lossyInput": true,
+        "decodedAtPreparationRate": {
+          "sampleRate": 24000,
+          "channels": 2,
+          "frames": 46656,
+          "seconds": 1.944,
+          "peakDbFS": -9.313999459638127,
+          "rmsDbFS": -29.658400531609452,
+          "dc": -0.00014702645888854505,
+          "channelDc": [
+            -0.00007936813465045831,
+            -0.0002146847831266318
+          ],
+          "clippedSamples": 0,
+          "monoFoldDownRelativeDb": -1.4007912499058848,
+          "boundaryStep": 0.00007549923611804843,
+          "peakAtSeconds": 0.789125,
+          "amplitudeOnsetSeconds": 0.046875,
+          "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker."
+        }
+      },
+      "prepared": {
+        "file": "seal-86499662-82e9438d.wav",
+        "sha256": "7f1c57170c334e99a3870510c175f32370cf6e9006676ff3890655a8aff32c62",
+        "bytes": 93390,
+        "codec": "PCM signed 16-bit WAV",
+        "sampleRate": 24000,
+        "channels": 1,
+        "frames": 46656,
+        "seconds": 1.944,
+        "peakDbFS": -12.821681984593383,
+        "rmsDbFS": -31.24740070800332,
+        "dc": 0.00000560888701178573,
+        "channelDc": [
+          0.00000560888701178573
+        ],
+        "clippedSamples": 0,
+        "monoFoldDownRelativeDb": 0,
+        "boundaryStep": 0,
+        "peakAtSeconds": 0.7922083333333333,
+        "amplitudeOnsetSeconds": 0.04716666666666667,
+        "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker.",
+        "truePeakDbFS": -12.8,
+        "integratedLUFS": -30.9,
+        "loudnessCaution": "Short-call LUFS is not a matching target.",
+        "estimatedPCMAt48kHz": 373248
+      },
+      "recipe": {
+        "id": "seal",
+        "label": "Seal — occasional visible call",
+        "file": "seal.mp3",
+        "bus": "world",
+        "trigger": "currently-visible-occasional",
+        "loop": false,
+        "channels": 1,
+        "trimDb": 0,
+        "gain": 0.55,
+        "cooldown": [
+          40,
+          90
+        ],
+        "range": 55,
+        "crossfadeSeconds": 0,
+        "ffmpegFilter": "[0:a]atrim=start=0:duration=1.944,asetpts=PTS-STARTPTS,highpass=f=25,volume=0dB,afade=t=in:st=0:d=0.012,afade=t=out:st=1.909:d=0.035[out]"
+      },
+      "provenance": {
+        "file": "seal.mp3",
+        "sourceSHA256": "8649966275ec30e9ecf54fb5498c40633ac9b9739ff6013457969ec9f45182b6",
+        "provider": "Pixabay (owner attribution)",
+        "assetId": "14648",
+        "sourceUrl": "https://pixabay.com/sound-effects/nature-sound-of-a-seal-14648/",
+        "creator": "freesound_community",
+        "creatorUrl": "https://pixabay.com/users/freesound_community-46691455/",
+        "recordingOrAI": "unverified; not claimed as a field recording",
+        "licenseEvidence": null,
+        "acquisitionDate": null,
+        "traceCells": {
+          "sheet": "Sheet1",
+          "range": "A15:D15"
+        },
+        "sourceTitle": "Sound of a Seal",
+        "reviewNotes": [
+          "Page credits florianreichelt (Freesound); exact seal species remains unverified."
+        ],
+        "sourcePageChecked": "2026-10-23",
+        "generalTermsEvidence": [
+          "https://pixabay.com/service/terms/",
+          "https://pixabay.com/service/license-summary/"
+        ]
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "pending",
+        "distribution": "quarantined"
+      }
+    },
+    {
+      "id": "deer",
+      "label": "Deer — sighting / contact",
+      "trigger": "new-sighting-or-contact",
+      "source": {
+        "file": "deer.mp3",
+        "sha256": "2a34a819101679f64ab17990369dedf22103180a6ac5a74894f228767c6a5a09",
+        "bytes": 65280,
+        "codec": "mp3 (mp3float)",
+        "sampleRate": 48000,
+        "layout": "stereo",
+        "lossyInput": true,
+        "decodedAtPreparationRate": {
+          "sampleRate": 24000,
+          "channels": 2,
+          "frames": 48960,
+          "seconds": 2.04,
+          "peakDbFS": -8.14482325107328,
+          "rmsDbFS": -24.843450691211565,
+          "dc": 0.00019577928252480264,
+          "channelDc": [
+            0.00012781543351301906,
+            0.00026374313153658624
+          ],
+          "clippedSamples": 0,
+          "monoFoldDownRelativeDb": -0.41273808862592065,
+          "boundaryStep": 5.062847967553501e-7,
+          "peakAtSeconds": 0.6830416666666667,
+          "amplitudeOnsetSeconds": 0.26558333333333334,
+          "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker."
+        }
+      },
+      "prepared": {
+        "file": "deer-2a34a819-82e9438d.wav",
+        "sha256": "be07131a420748058049b8fa211b8781ddbfda98795741f54a68e253586612f7",
+        "bytes": 97998,
+        "codec": "PCM signed 16-bit WAV",
+        "sampleRate": 24000,
+        "channels": 1,
+        "frames": 48960,
+        "seconds": 2.04,
+        "peakDbFS": -11.400611847133096,
+        "rmsDbFS": -28.273704920086537,
+        "dc": 4.562677121629902e-7,
+        "channelDc": [
+          4.562677121629902e-7
+        ],
+        "clippedSamples": 0,
+        "monoFoldDownRelativeDb": 0,
+        "boundaryStep": 0,
+        "peakAtSeconds": 0.696625,
+        "amplitudeOnsetSeconds": 0.30416666666666664,
+        "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker.",
+        "truePeakDbFS": -11.4,
+        "integratedLUFS": -25.6,
+        "loudnessCaution": "Short-call LUFS is not a matching target.",
+        "estimatedPCMAt48kHz": 391680
+      },
+      "recipe": {
+        "id": "deer",
+        "label": "Deer — sighting / contact",
+        "file": "deer.mp3",
+        "bus": "world",
+        "trigger": "new-sighting-or-contact",
+        "loop": false,
+        "channels": 1,
+        "trimDb": -3,
+        "gain": 0.55,
+        "cooldown": [
+          60,
+          120
+        ],
+        "range": 55,
+        "crossfadeSeconds": 0,
+        "ffmpegFilter": "[0:a]atrim=start=0:duration=2.04,asetpts=PTS-STARTPTS,highpass=f=25,volume=-3dB,afade=t=in:st=0:d=0.012,afade=t=out:st=2.005:d=0.035[out]"
+      },
+      "provenance": {
+        "file": "deer.mp3",
+        "sourceSHA256": "2a34a819101679f64ab17990369dedf22103180a6ac5a74894f228767c6a5a09",
+        "provider": "Pixabay (owner attribution)",
+        "assetId": "472371",
+        "sourceUrl": "https://pixabay.com/sound-effects/horror-deer-grunt-472371/",
+        "creator": "DRAGON-STUDIO",
+        "creatorUrl": "https://pixabay.com/users/dragon-studio-38165424/",
+        "recordingOrAI": "unverified; not claimed as a field recording",
+        "licenseEvidence": null,
+        "acquisitionDate": null,
+        "traceCells": {
+          "sheet": "Sheet1",
+          "range": "A5:D5"
+        },
+        "sourceTitle": "Deer Grunt",
+        "reviewNotes": [
+          "Source describes a buck/stag mating grunt. Not verified as a generic call for every deer actor."
+        ],
+        "sourcePageChecked": "2026-10-23",
+        "generalTermsEvidence": [
+          "https://pixabay.com/service/terms/",
+          "https://pixabay.com/service/license-summary/"
+        ]
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "pending",
+        "distribution": "quarantined"
+      }
+    },
+    {
+      "id": "elk",
+      "label": "Elk — sighting / contact",
+      "trigger": "new-sighting-or-contact",
+      "source": {
+        "file": "elk.mp3",
+        "sha256": "7fd365ef183363baf2bdbc37518cc96893ff1956e5b53f594c18175357935020",
+        "bytes": 259134,
+        "codec": "mp3 (mp3float)",
+        "sampleRate": 44100,
+        "layout": "stereo",
+        "lossyInput": true,
+        "decodedAtPreparationRate": {
+          "sampleRate": 24000,
+          "channels": 2,
+          "frames": 194351,
+          "seconds": 8.097958333333333,
+          "peakDbFS": -2.5320968603099447,
+          "rmsDbFS": -23.832998561459622,
+          "dc": -0.000014875311414920863,
+          "channelDc": [
+            -0.000015132996489796124,
+            -0.000014617626340045602
+          ],
+          "clippedSamples": 0,
+          "monoFoldDownRelativeDb": -0.000013607662786755353,
+          "boundaryStep": 0.000002724671506437734,
+          "peakAtSeconds": 4.619,
+          "amplitudeOnsetSeconds": 0.472125,
+          "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker."
+        }
+      },
+      "prepared": {
+        "file": "elk-7fd365ef-82e9438d.wav",
+        "sha256": "cbb949d4e8616c044108438e351774413482678997911621f859182b00bd9ff5",
+        "bytes": 388780,
+        "codec": "PCM signed 16-bit WAV",
+        "sampleRate": 24000,
+        "channels": 1,
+        "frames": 194351,
+        "seconds": 8.097958333333333,
+        "peakDbFS": -5.619159214414592,
+        "rmsDbFS": -26.83349283851312,
+        "dc": -3.8203697216955405e-7,
+        "channelDc": [
+          -3.8203697216955405e-7
+        ],
+        "clippedSamples": 0,
+        "monoFoldDownRelativeDb": 0,
+        "boundaryStep": 0,
+        "peakAtSeconds": 2.544583333333333,
+        "amplitudeOnsetSeconds": 0.44945833333333335,
+        "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker.",
+        "truePeakDbFS": -5.6,
+        "integratedLUFS": -24.8,
+        "loudnessCaution": null,
+        "estimatedPCMAt48kHz": 1554807.9999999998
+      },
+      "recipe": {
+        "id": "elk",
+        "label": "Elk — sighting / contact",
+        "file": "elk.mp3",
+        "bus": "world",
+        "trigger": "new-sighting-or-contact",
+        "loop": false,
+        "channels": 1,
+        "trimDb": -3,
+        "gain": 0.55,
+        "cooldown": [
+          60,
+          120
+        ],
+        "range": 60,
+        "crossfadeSeconds": 0,
+        "ffmpegFilter": "[0:a]atrim=start=0:duration=8.097958333333333,asetpts=PTS-STARTPTS,highpass=f=25,volume=-3dB,afade=t=in:st=0:d=0.012,afade=t=out:st=8.062958333333333:d=0.035[out]"
+      },
+      "provenance": {
+        "file": "elk.mp3",
+        "sourceSHA256": "7fd365ef183363baf2bdbc37518cc96893ff1956e5b53f594c18175357935020",
+        "provider": "Pixabay (owner attribution)",
+        "assetId": "390425",
+        "sourceUrl": "https://pixabay.com/sound-effects/film-special-effects-bull-390425/",
+        "creator": "Mauricio Póvoa",
+        "creatorUrl": "https://pixabay.com/users/magiaz-10236927/",
+        "recordingOrAI": "AI-generated (source label)",
+        "licenseEvidence": null,
+        "acquisitionDate": null,
+        "traceCells": {
+          "sheet": "Sheet1",
+          "range": "A13:D13"
+        },
+        "sourceTitle": "Bull",
+        "reviewNotes": [
+          "AI-generated Bull with mixed cattle/moose tags. Not verified as an elk/moose recording."
+        ],
+        "sourcePageChecked": "2026-10-23",
+        "generalTermsEvidence": [
+          "https://pixabay.com/service/terms/",
+          "https://pixabay.com/service/license-summary/"
+        ]
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "pending",
+        "distribution": "quarantined"
+      }
+    },
+    {
+      "id": "fox",
+      "label": "Fox — sighting / contact",
+      "trigger": "new-sighting-or-contact",
+      "source": {
+        "file": "fox.mp3",
+        "sha256": "d7e14b10c1ce45c7fc1c754440f7865c2c51a2d6a8e934847b35f6a2a23ec2d3",
+        "bytes": 147360,
+        "codec": "mp3 (mp3float)",
+        "sampleRate": 24000,
+        "layout": "stereo",
+        "lossyInput": true,
+        "decodedAtPreparationRate": {
+          "sampleRate": 24000,
+          "channels": 2,
+          "frames": 176832,
+          "seconds": 7.368,
+          "peakDbFS": -3.672343587690736,
+          "rmsDbFS": -33.07359255479871,
+          "dc": 0.000002250022724356244,
+          "channelDc": [
+            0.000002250022724356244,
+            0.000002250022724356244
+          ],
+          "clippedSamples": 0,
+          "monoFoldDownRelativeDb": 3.683730922233478e-13,
+          "boundaryStep": 0.0000013851094990968704,
+          "peakAtSeconds": 2.9638333333333335,
+          "amplitudeOnsetSeconds": 2.805833333333333,
+          "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker."
+        }
+      },
+      "prepared": {
+        "file": "fox-d7e14b10-82e9438d.wav",
+        "sha256": "c311454a262cc7fab9b651a2581c0c7aeff2d1453074eb8c2bb7b98e9c016787",
+        "bytes": 353742,
+        "codec": "PCM signed 16-bit WAV",
+        "sampleRate": 24000,
+        "channels": 1,
+        "frames": 176832,
+        "seconds": 7.368,
+        "peakDbFS": -6.712220138730625,
+        "rmsDbFS": -36.08130820773298,
+        "dc": -1.0579123343413522e-7,
+        "channelDc": [
+          -1.0579123343413522e-7
+        ],
+        "clippedSamples": 0,
+        "monoFoldDownRelativeDb": 0,
+        "boundaryStep": 0,
+        "peakAtSeconds": 2.9638333333333335,
+        "amplitudeOnsetSeconds": 2.805833333333333,
+        "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker.",
+        "truePeakDbFS": -6.7,
+        "integratedLUFS": -32.4,
+        "loudnessCaution": null,
+        "estimatedPCMAt48kHz": 1414656
+      },
+      "recipe": {
+        "id": "fox",
+        "label": "Fox — sighting / contact",
+        "file": "fox.mp3",
+        "bus": "world",
+        "trigger": "new-sighting-or-contact",
+        "loop": false,
+        "channels": 1,
+        "trimDb": -3,
+        "gain": 0.5,
+        "cooldown": [
+          60,
+          120
+        ],
+        "range": 40,
+        "crossfadeSeconds": 0,
+        "ffmpegFilter": "[0:a]atrim=start=0:duration=7.368,asetpts=PTS-STARTPTS,highpass=f=25,volume=-3dB,afade=t=in:st=0:d=0.012,afade=t=out:st=7.333:d=0.035[out]"
+      },
+      "provenance": {
+        "file": "fox.mp3",
+        "sourceSHA256": "d7e14b10c1ce45c7fc1c754440f7865c2c51a2d6a8e934847b35f6a2a23ec2d3",
+        "provider": "Pixabay (owner attribution)",
+        "assetId": "46664",
+        "sourceUrl": "https://pixabay.com/sound-effects/nature-26-angry-fox-46664/",
+        "creator": "freesound_community",
+        "creatorUrl": "https://pixabay.com/users/freesound_community-46691455/",
+        "recordingOrAI": "unverified; not claimed as a field recording",
+        "licenseEvidence": null,
+        "acquisitionDate": null,
+        "traceCells": {
+          "sheet": "Sheet1",
+          "range": "A21:D21"
+        },
+        "sourceTitle": "26-angry fox",
+        "reviewNotes": [
+          "Angry growling/panting context. Do not treat as a calm recurring ambience call."
+        ],
+        "sourcePageChecked": "2026-10-23",
+        "generalTermsEvidence": [
+          "https://pixabay.com/service/terms/",
+          "https://pixabay.com/service/license-summary/"
+        ]
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "pending",
+        "distribution": "quarantined"
+      }
+    },
+    {
+      "id": "lynx",
+      "label": "Lynx — sighting / contact",
+      "trigger": "new-sighting-or-contact",
+      "source": {
+        "file": "lynx.mp3",
+        "sha256": "153ea7d45021f16710beb5143ace87e35a68763d8954eacb8bcf8b4a11ca1e8e",
+        "bytes": 185088,
+        "codec": "mp3 (mp3float)",
+        "sampleRate": 48000,
+        "layout": "mono",
+        "lossyInput": true,
+        "decodedAtPreparationRate": {
+          "sampleRate": 24000,
+          "channels": 1,
+          "frames": 138816,
+          "seconds": 5.784,
+          "peakDbFS": 0.2534382619646173,
+          "rmsDbFS": -21.180065198758857,
+          "dc": 0.000005659573718110934,
+          "channelDc": [
+            0.000005659573718110934
+          ],
+          "clippedSamples": 3,
+          "monoFoldDownRelativeDb": 0,
+          "boundaryStep": 8.147637024693427e-14,
+          "peakAtSeconds": 1.08025,
+          "amplitudeOnsetSeconds": 0.8451666666666666,
+          "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker."
+        }
+      },
+      "prepared": {
+        "file": "lynx-153ea7d4-82e9438d.wav",
+        "sha256": "85a11e1fef229592bb8814582792c990cb52742c76e11f76ebc13b6da2cdb7b5",
+        "bytes": 277710,
+        "codec": "PCM signed 16-bit WAV",
+        "sampleRate": 24000,
+        "channels": 1,
+        "frames": 138816,
+        "seconds": 5.784,
+        "peakDbFS": -2.7094799965419236,
+        "rmsDbFS": -24.18052872532966,
+        "dc": -0.00000125903476488211,
+        "channelDc": [
+          -0.00000125903476488211
+        ],
+        "clippedSamples": 0,
+        "monoFoldDownRelativeDb": 0,
+        "boundaryStep": 0,
+        "peakAtSeconds": 1.08025,
+        "amplitudeOnsetSeconds": 0.8451666666666666,
+        "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker.",
+        "truePeakDbFS": -2.7,
+        "integratedLUFS": -15,
+        "loudnessCaution": null,
+        "estimatedPCMAt48kHz": 1110528
+      },
+      "recipe": {
+        "id": "lynx",
+        "label": "Lynx — sighting / contact",
+        "file": "lynx.mp3",
+        "bus": "world",
+        "trigger": "new-sighting-or-contact",
+        "loop": false,
+        "channels": 1,
+        "trimDb": -3,
+        "gain": 0.5,
+        "cooldown": [
+          60,
+          120
+        ],
+        "range": 40,
+        "crossfadeSeconds": 0,
+        "ffmpegFilter": "[0:a]atrim=start=0:duration=5.784,asetpts=PTS-STARTPTS,highpass=f=25,volume=-3dB,afade=t=in:st=0:d=0.012,afade=t=out:st=5.749:d=0.035[out]"
+      },
+      "provenance": {
+        "file": "lynx.mp3",
+        "sourceSHA256": "153ea7d45021f16710beb5143ace87e35a68763d8954eacb8bcf8b4a11ca1e8e",
+        "provider": "Pixabay (owner attribution)",
+        "assetId": "41730",
+        "sourceUrl": "https://pixabay.com/sound-effects/nature-tomcat2-41730/",
+        "creator": "freesound_community",
+        "creatorUrl": "https://pixabay.com/users/freesound_community-46691455/",
+        "recordingOrAI": "unverified; not claimed as a field recording",
+        "licenseEvidence": null,
+        "acquisitionDate": null,
+        "traceCells": {
+          "sheet": "Sheet1",
+          "range": "A14:D14"
+        },
+        "sourceTitle": "Tomcat2",
+        "reviewNotes": [
+          "Source is a domestic tomcat, not a verified lynx recording."
+        ],
+        "sourcePageChecked": "2026-10-23",
+        "generalTermsEvidence": [
+          "https://pixabay.com/service/terms/",
+          "https://pixabay.com/service/license-summary/"
+        ]
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "pending",
+        "distribution": "quarantined"
+      }
+    },
+    {
+      "id": "orca",
+      "label": "Orca — sighting / contact; recording context unverified",
+      "trigger": "new-sighting-or-contact",
+      "source": {
+        "file": "orca.mp3",
+        "sha256": "887a6e956624f5db4529f5178fd5d1e9a7c001ce381d2b774101ce69658531e2",
+        "bytes": 163004,
+        "codec": "mp3 (mp3float)",
+        "sampleRate": 44100,
+        "layout": "mono",
+        "lossyInput": true,
+        "decodedAtPreparationRate": {
+          "sampleRate": 24000,
+          "channels": 1,
+          "frames": 122253,
+          "seconds": 5.093875,
+          "peakDbFS": -11.535782427899331,
+          "rmsDbFS": -26.818389201681025,
+          "dc": 0.00002504775142558968,
+          "channelDc": [
+            0.00002504775142558968
+          ],
+          "clippedSamples": 0,
+          "monoFoldDownRelativeDb": 0,
+          "boundaryStep": 4.1185916188624105e-7,
+          "peakAtSeconds": 2.719625,
+          "amplitudeOnsetSeconds": 0.27225,
+          "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker."
+        }
+      },
+      "prepared": {
+        "file": "orca-887a6e95-82e9438d.wav",
+        "sha256": "c0f0059b19d41c2fa424ea05bde1f2a50930f529e127ca00dddcb1e8f99fe733",
+        "bytes": 244584,
+        "codec": "PCM signed 16-bit WAV",
+        "sampleRate": 24000,
+        "channels": 1,
+        "frames": 122253,
+        "seconds": 5.093875,
+        "peakDbFS": -14.525848860965564,
+        "rmsDbFS": -29.818523525155953,
+        "dc": 3.587131584961105e-7,
+        "channelDc": [
+          3.587131584961105e-7
+        ],
+        "clippedSamples": 0,
+        "monoFoldDownRelativeDb": 0,
+        "boundaryStep": 0,
+        "peakAtSeconds": 2.6679166666666667,
+        "amplitudeOnsetSeconds": 0.27225,
+        "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker.",
+        "truePeakDbFS": -14.2,
+        "integratedLUFS": -26.5,
+        "loudnessCaution": null,
+        "estimatedPCMAt48kHz": 978024
+      },
+      "recipe": {
+        "id": "orca",
+        "label": "Orca — sighting / contact; recording context unverified",
+        "file": "orca.mp3",
+        "bus": "world",
+        "trigger": "new-sighting-or-contact",
+        "loop": false,
+        "channels": 1,
+        "trimDb": -3,
+        "gain": 0.5,
+        "cooldown": [
+          60,
+          120
+        ],
+        "range": 60,
+        "crossfadeSeconds": 0,
+        "ffmpegFilter": "[0:a]atrim=start=0:duration=5.093875,asetpts=PTS-STARTPTS,highpass=f=25,volume=-3dB,afade=t=in:st=0:d=0.012,afade=t=out:st=5.058875:d=0.035[out]"
+      },
+      "provenance": {
+        "file": "orca.mp3",
+        "sourceSHA256": "887a6e956624f5db4529f5178fd5d1e9a7c001ce381d2b774101ce69658531e2",
+        "provider": "Pixabay (owner attribution)",
+        "assetId": "449902",
+        "sourceUrl": "https://pixabay.com/sound-effects/baleia-orca-449902/",
+        "creator": "Mauricio Póvoa",
+        "creatorUrl": "https://pixabay.com/users/magiaz-10236927/",
+        "recordingOrAI": "AI-generated (source label)",
+        "licenseEvidence": null,
+        "acquisitionDate": null,
+        "traceCells": {
+          "sheet": "Sheet1",
+          "range": "A10:D10"
+        },
+        "sourceTitle": "Baleia orca",
+        "reviewNotes": [
+          "AI generated; exact call identity and above-water suitability unverified."
+        ],
+        "sourcePageChecked": "2026-10-23",
+        "generalTermsEvidence": [
+          "https://pixabay.com/service/terms/",
+          "https://pixabay.com/service/license-summary/"
+        ]
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "pending",
+        "distribution": "quarantined"
+      }
+    },
+    {
+      "id": "whale",
+      "label": "Whale — sighting / contact; recording context unverified",
+      "trigger": "new-sighting-or-contact",
+      "source": {
+        "file": "whale.mp3",
+        "sha256": "fb2e5c2de8583db14e45d48087e6f4968ceef5bc3f50268756f1256c449a1c40",
+        "bytes": 119040,
+        "codec": "mp3 (mp3float)",
+        "sampleRate": 48000,
+        "layout": "stereo",
+        "lossyInput": true,
+        "decodedAtPreparationRate": {
+          "sampleRate": 24000,
+          "channels": 2,
+          "frames": 89280,
+          "seconds": 3.72,
+          "peakDbFS": -8.75704645291935,
+          "rmsDbFS": -24.691736000048586,
+          "dc": -2.31185539683258e-7,
+          "channelDc": [
+            -2.7182060219129114e-7,
+            -1.9055047717522486e-7
+          ],
+          "clippedSamples": 0,
+          "monoFoldDownRelativeDb": -1.202954536762914,
+          "boundaryStep": 7.289378875130655e-7,
+          "peakAtSeconds": 1.6066666666666667,
+          "amplitudeOnsetSeconds": 0.6547916666666667,
+          "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker."
+        }
+      },
+      "prepared": {
+        "file": "whale-fb2e5c2d-82e9438d.wav",
+        "sha256": "f765beaa722d878bde8877a138b4ce0a89d39f4d6f40d6e04551e88cedacfb34",
+        "bytes": 178638,
+        "codec": "PCM signed 16-bit WAV",
+        "sampleRate": 24000,
+        "channels": 1,
+        "frames": 89280,
+        "seconds": 3.72,
+        "peakDbFS": -14.600978199346608,
+        "rmsDbFS": -28.894717014443998,
+        "dc": 2.8678593242467516e-7,
+        "channelDc": [
+          2.8678593242467516e-7
+        ],
+        "clippedSamples": 0,
+        "monoFoldDownRelativeDb": 0,
+        "boundaryStep": 0,
+        "peakAtSeconds": 1.6066666666666667,
+        "amplitudeOnsetSeconds": 0.5893333333333334,
+        "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker.",
+        "truePeakDbFS": -14.6,
+        "integratedLUFS": -26.9,
+        "loudnessCaution": null,
+        "estimatedPCMAt48kHz": 714240
+      },
+      "recipe": {
+        "id": "whale",
+        "label": "Whale — sighting / contact; recording context unverified",
+        "file": "whale.mp3",
+        "bus": "world",
+        "trigger": "new-sighting-or-contact",
+        "loop": false,
+        "channels": 1,
+        "trimDb": -3,
+        "gain": 0.5,
+        "cooldown": [
+          60,
+          120
+        ],
+        "range": 65,
+        "crossfadeSeconds": 0,
+        "ffmpegFilter": "[0:a]atrim=start=0:duration=3.72,asetpts=PTS-STARTPTS,highpass=f=25,volume=-3dB,afade=t=in:st=0:d=0.012,afade=t=out:st=3.685:d=0.035[out]"
+      },
+      "provenance": {
+        "file": "whale.mp3",
+        "sourceSHA256": "fb2e5c2de8583db14e45d48087e6f4968ceef5bc3f50268756f1256c449a1c40",
+        "provider": "Pixabay (owner attribution)",
+        "assetId": "515260",
+        "sourceUrl": "https://pixabay.com/sound-effects/nature-haunting-whale-song-515260/",
+        "creator": "DRAGON-STUDIO",
+        "creatorUrl": "https://pixabay.com/users/dragon-studio-38165424/",
+        "recordingOrAI": "unverified; not claimed as a field recording",
+        "licenseEvidence": null,
+        "acquisitionDate": null,
+        "traceCells": {
+          "sheet": "Sheet1",
+          "range": "A3:D3"
+        },
+        "sourceTitle": "Haunting Whale Song",
+        "reviewNotes": [
+          "Source describes underwater whale song, not a verified surface breath/splash."
+        ],
+        "sourcePageChecked": "2026-10-23",
+        "generalTermsEvidence": [
+          "https://pixabay.com/service/terms/",
+          "https://pixabay.com/service/license-summary/"
+        ]
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "pending",
+        "distribution": "quarantined"
+      }
+    },
+    {
+      "id": "wolf",
+      "label": "Wolf — sighting / contact",
+      "trigger": "new-sighting-or-contact",
+      "source": {
+        "file": "wolf.mp3",
+        "sha256": "e16622a63ae33a37748232bb87f911aaa247347c2653a050f8ef9a2381451d3b",
+        "bytes": 259134,
+        "codec": "mp3 (mp3float)",
+        "sampleRate": 44100,
+        "layout": "stereo",
+        "lossyInput": true,
+        "decodedAtPreparationRate": {
+          "sampleRate": 24000,
+          "channels": 2,
+          "frames": 194351,
+          "seconds": 8.097958333333333,
+          "peakDbFS": -11.910741726044352,
+          "rmsDbFS": -25.226087413906903,
+          "dc": -0.000010103088307725152,
+          "channelDc": [
+            -0.000012962758108584883,
+            -0.000007243418506865423
+          ],
+          "clippedSamples": 0,
+          "monoFoldDownRelativeDb": -0.007348601481101842,
+          "boundaryStep": 6.428935279724804e-8,
+          "peakAtSeconds": 0.251125,
+          "amplitudeOnsetSeconds": 0.07754166666666666,
+          "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker."
+        }
+      },
+      "prepared": {
+        "file": "wolf-e16622a6-82e9438d.wav",
+        "sha256": "4fc431e6b512d93edc11ae2786871515f1372f9d4de2794413eba8ad7711f616",
+        "bytes": 388780,
+        "codec": "PCM signed 16-bit WAV",
+        "sampleRate": 24000,
+        "channels": 1,
+        "frames": 194351,
+        "seconds": 8.097958333333333,
+        "peakDbFS": -15.023981190418894,
+        "rmsDbFS": -28.23349530797442,
+        "dc": 2.8876530695429917e-7,
+        "channelDc": [
+          2.8876530695429917e-7
+        ],
+        "clippedSamples": 0,
+        "monoFoldDownRelativeDb": 0,
+        "boundaryStep": 0,
+        "peakAtSeconds": 0.7530833333333333,
+        "amplitudeOnsetSeconds": 0.07754166666666666,
+        "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker.",
+        "truePeakDbFS": -15,
+        "integratedLUFS": -25.8,
+        "loudnessCaution": null,
+        "estimatedPCMAt48kHz": 1554807.9999999998
+      },
+      "recipe": {
+        "id": "wolf",
+        "label": "Wolf — sighting / contact",
+        "file": "wolf.mp3",
+        "bus": "world",
+        "trigger": "new-sighting-or-contact",
+        "loop": false,
+        "channels": 1,
+        "trimDb": -3,
+        "gain": 0.5,
+        "cooldown": [
+          60,
+          120
+        ],
+        "range": 65,
+        "crossfadeSeconds": 0,
+        "ffmpegFilter": "[0:a]atrim=start=0:duration=8.097958333333333,asetpts=PTS-STARTPTS,highpass=f=25,volume=-3dB,afade=t=in:st=0:d=0.012,afade=t=out:st=8.062958333333333:d=0.035[out]"
+      },
+      "provenance": {
+        "file": "wolf.mp3",
+        "sourceSHA256": "e16622a63ae33a37748232bb87f911aaa247347c2653a050f8ef9a2381451d3b",
+        "provider": "Pixabay (owner attribution)",
+        "assetId": "268619",
+        "sourceUrl": "https://pixabay.com/sound-effects/nature-wolf-howl-268619/",
+        "creator": "FreeEverythingxx",
+        "creatorUrl": "https://pixabay.com/users/freeeverythingxx-47251115/",
+        "recordingOrAI": "AI-generated (source label)",
+        "licenseEvidence": null,
+        "acquisitionDate": null,
+        "traceCells": {
+          "sheet": "Sheet1",
+          "range": "A12:D12"
+        },
+        "sourceTitle": "Wolf howl",
+        "reviewNotes": [
+          "Source explicitly labels this AI generated; owner preference pending."
+        ],
+        "sourcePageChecked": "2026-10-23",
+        "generalTermsEvidence": [
+          "https://pixabay.com/service/terms/",
+          "https://pixabay.com/service/license-summary/"
+        ]
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "pending",
+        "distribution": "quarantined"
+      }
+    },
+    {
+      "id": "rabbit",
+      "label": "Rabbit — sighting / contact",
+      "trigger": "new-sighting-or-contact",
+      "source": {
+        "file": "rabbit.mp3",
+        "sha256": "cae20a8a6d52625d95f8424240efc6e47903b61b021a769fde6f7b7f75b57725",
+        "bytes": 148793,
+        "codec": "mp3 (mp3float)",
+        "sampleRate": 44100,
+        "layout": "stereo",
+        "lossyInput": true,
+        "decodedAtPreparationRate": {
+          "sampleRate": 24000,
+          "channels": 2,
+          "frames": 111595,
+          "seconds": 4.649791666666666,
+          "peakDbFS": 0.21810089050684445,
+          "rmsDbFS": -17.71749296402728,
+          "dc": -0.0018616394346869854,
+          "channelDc": [
+            -0.0018616394346869828,
+            -0.0018616394346869828
+          ],
+          "clippedSamples": 28,
+          "monoFoldDownRelativeDb": 4.243040852834453e-14,
+          "boundaryStep": 1.7157359977204578e-8,
+          "peakAtSeconds": 2.5143333333333335,
+          "amplitudeOnsetSeconds": 0.21333333333333335,
+          "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker."
+        }
+      },
+      "prepared": {
+        "file": "rabbit-cae20a8a-82e9438d.wav",
+        "sha256": "2896abe626be3cda994d7054b2309fc7bd4c05ae177ae5d922f9a264870cb97a",
+        "bytes": 223268,
+        "codec": "PCM signed 16-bit WAV",
+        "sampleRate": 24000,
+        "channels": 1,
+        "frames": 111595,
+        "seconds": 4.649791666666666,
+        "peakDbFS": -2.462799501337984,
+        "rmsDbFS": -20.71907511336583,
+        "dc": -8.939644508322506e-7,
+        "channelDc": [
+          -8.939644508322506e-7
+        ],
+        "clippedSamples": 0,
+        "monoFoldDownRelativeDb": 0,
+        "boundaryStep": 0,
+        "peakAtSeconds": 2.1957916666666666,
+        "amplitudeOnsetSeconds": 0.21333333333333335,
+        "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker.",
+        "truePeakDbFS": -2.5,
+        "integratedLUFS": -18.7,
+        "loudnessCaution": null,
+        "estimatedPCMAt48kHz": 892759.9999999999
+      },
+      "recipe": {
+        "id": "rabbit",
+        "label": "Rabbit — sighting / contact",
+        "file": "rabbit.mp3",
+        "bus": "world",
+        "trigger": "new-sighting-or-contact",
+        "loop": false,
+        "channels": 1,
+        "trimDb": -3,
+        "gain": 0.45,
+        "cooldown": [
+          60,
+          120
+        ],
+        "range": 30,
+        "crossfadeSeconds": 0,
+        "ffmpegFilter": "[0:a]atrim=start=0:duration=4.649791666666666,asetpts=PTS-STARTPTS,highpass=f=25,volume=-3dB,afade=t=in:st=0:d=0.012,afade=t=out:st=4.614791666666666:d=0.035[out]"
+      },
+      "provenance": {
+        "file": "rabbit.mp3",
+        "sourceSHA256": "cae20a8a6d52625d95f8424240efc6e47903b61b021a769fde6f7b7f75b57725",
+        "provider": "Pixabay (owner attribution)",
+        "assetId": "358172",
+        "sourceUrl": "https://pixabay.com/sound-effects/nature-rabbit-sounds-358172/",
+        "creator": "u_51wf53qyw2",
+        "creatorUrl": "https://pixabay.com/users/u_51wf53qyw2-50790724/",
+        "recordingOrAI": "unverified; not claimed as a field recording",
+        "licenseEvidence": null,
+        "acquisitionDate": null,
+        "traceCells": {
+          "sheet": "Sheet1",
+          "range": "A2:D2"
+        },
+        "sourceTitle": "Rabbit sounds",
+        "reviewNotes": [],
+        "sourcePageChecked": "2026-10-23",
+        "generalTermsEvidence": [
+          "https://pixabay.com/service/terms/",
+          "https://pixabay.com/service/license-summary/"
+        ]
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "pending",
+        "distribution": "quarantined"
+      }
+    },
+    {
+      "id": "axe-a",
+      "label": "Axe — impact candidate A",
+      "trigger": "work-contact-pending-review",
+      "source": {
+        "file": "axe-a.mp3",
+        "sha256": "c305cdb2001852dff098b662991a70cb253728c652b38f3c409d6094c1a4161a",
+        "bytes": 41828,
+        "codec": "mp3 (mp3float)",
+        "sampleRate": 44100,
+        "layout": "stereo",
+        "lossyInput": true,
+        "decodedAtPreparationRate": {
+          "sampleRate": 24000,
+          "channels": 2,
+          "frames": 35520,
+          "seconds": 1.48,
+          "peakDbFS": -24.969746689595674,
+          "rmsDbFS": -45.97090055385127,
+          "dc": -7.708792099127694e-7,
+          "channelDc": [
+            1.6772413086504677e-7,
+            -0.0000017094825506905857
+          ],
+          "clippedSamples": 0,
+          "monoFoldDownRelativeDb": -0.0010101020173813903,
+          "boundaryStep": 0.006725430052028969,
+          "peakAtSeconds": 0.0007916666666666666,
+          "amplitudeOnsetSeconds": 0.0004166666666666667,
+          "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker."
+        }
+      },
+      "prepared": {
+        "file": "axe-a-c305cdb2-82e9438d.wav",
+        "sha256": "5c74a868b60da65cc65c568402b05024119c182a990c2c49bb525e5dcbff8ca6",
+        "bytes": 71118,
+        "codec": "PCM signed 16-bit WAV",
+        "sampleRate": 24000,
+        "channels": 1,
+        "frames": 35520,
+        "seconds": 1.48,
+        "peakDbFS": -8.37288330274002,
+        "rmsDbFS": -30.281978868396614,
+        "dc": 0.00008302121549039273,
+        "channelDc": [
+          0.00008302121549039273
+        ],
+        "clippedSamples": 0,
+        "monoFoldDownRelativeDb": 0,
+        "boundaryStep": 0.000274658203125,
+        "peakAtSeconds": 0.07470833333333333,
+        "amplitudeOnsetSeconds": 0.0005416666666666666,
+        "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker.",
+        "truePeakDbFS": -8.2,
+        "integratedLUFS": -32.6,
+        "loudnessCaution": "Short-call LUFS is not a matching target.",
+        "estimatedPCMAt48kHz": 284160
+      },
+      "recipe": {
+        "id": "axe-a",
+        "cue": "axe-impact",
+        "label": "Axe — impact candidate A",
+        "file": "axe-a.mp3",
+        "bus": "world",
+        "trigger": "work-contact-pending-review",
+        "loop": false,
+        "channels": 1,
+        "trimDb": 18,
+        "gain": 0.6,
+        "cooldown": [
+          0.35,
+          0.8
+        ],
+        "range": 25,
+        "fadeIn": 0.002,
+        "crossfadeSeconds": 0,
+        "ffmpegFilter": "[0:a]atrim=start=0:duration=1.48,asetpts=PTS-STARTPTS,highpass=f=25,volume=18dB,afade=t=in:st=0:d=0.002,afade=t=out:st=1.445:d=0.035[out]"
+      },
+      "provenance": {
+        "provider": "ElevenLabs",
+        "sourceUrl": "https://elevenlabs.io/app/flows/XlOdUYSegZh1lM29QN08",
+        "creator": "Custom Foley generated for FjordSide",
+        "recordingOrAI": "AI-generated",
+        "model": "eleven_text_to_sound_v2",
+        "generationId": "pQm9Kv1ditYYjmusvMJZ",
+        "prompt": "One isolated hand axe strike into a dry wooden log outdoors. One firm woody impact at the beginning, a few small chips and a short natural decay. Dry close recording. No voice, music, wind, reverb, footsteps or second strike. Total clip 1.5 seconds.",
+        "parameters": {
+          "duration_seconds": 1.5,
+          "prompt_influence": 0.5,
+          "loop": false,
+          "generations_count": 1
+        },
+        "acquiredDate": "2026-10-23",
+        "licenseEvidence": [
+          "https://elevenlabs.io/creative-terms",
+          "https://help.elevenlabs.io/hc/en-us/articles/13313564601361-Can-I-publish-the-content-I-generate-on-the-platform"
+        ],
+        "commercialAssessment": "Paid plan verified; integrated use permitted, isolated public samples prohibited."
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "pending",
+        "distribution": "quarantined"
+      }
+    },
+    {
+      "id": "axe-b",
+      "label": "Axe — impact candidate B",
+      "trigger": "work-contact-pending-review",
+      "source": {
+        "file": "axe-b.mp3",
+        "sha256": "2d4e9a916be0911f611a4f8d26e65fd341362e8e1d7be8c451d084c7ba2599f2",
+        "bytes": 41828,
+        "codec": "mp3 (mp3float)",
+        "sampleRate": 44100,
+        "layout": "stereo",
+        "lossyInput": true,
+        "decodedAtPreparationRate": {
+          "sampleRate": 24000,
+          "channels": 2,
+          "frames": 35520,
+          "seconds": 1.48,
+          "peakDbFS": 0.651864759535503,
+          "rmsDbFS": -21.18304949544371,
+          "dc": -0.00030001291645308286,
+          "channelDc": [
+            -0.00022861853639693112,
+            -0.00037140729650923457
+          ],
+          "clippedSamples": 20,
+          "monoFoldDownRelativeDb": -0.030367660914981526,
+          "boundaryStep": 0.032454876229166985,
+          "peakAtSeconds": 0.017291666666666667,
+          "amplitudeOnsetSeconds": 0.00008333333333333333,
+          "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker."
+        }
+      },
+      "prepared": {
+        "file": "axe-b-2d4e9a91-82e9438d.wav",
+        "sha256": "ec7049db0b79ae63d52f58f57d925403adae2923c8fba76c369f558fab1ccab9",
+        "bytes": 71118,
+        "codec": "PCM signed 16-bit WAV",
+        "sampleRate": 24000,
+        "channels": 1,
+        "frames": 35520,
+        "seconds": 1.48,
+        "peakDbFS": -4.908938697093169,
+        "rmsDbFS": -27.4352639397706,
+        "dc": 0.00006076623727609446,
+        "channelDc": [
+          0.00006076623727609446
+        ],
+        "clippedSamples": 0,
+        "monoFoldDownRelativeDb": 0,
+        "boundaryStep": 0.00079345703125,
+        "peakAtSeconds": 0.020541666666666666,
+        "amplitudeOnsetSeconds": 0.0004166666666666667,
+        "onsetMethod": "First sample at 15% of absolute peak; not a verified animation contact marker.",
+        "truePeakDbFS": -4.9,
+        "integratedLUFS": -20.8,
+        "loudnessCaution": "Short-call LUFS is not a matching target.",
+        "estimatedPCMAt48kHz": 284160
+      },
+      "recipe": {
+        "id": "axe-b",
+        "cue": "axe-impact",
+        "label": "Axe — impact candidate B",
+        "file": "axe-b.mp3",
+        "bus": "world",
+        "trigger": "work-contact-pending-review",
+        "loop": false,
+        "channels": 1,
+        "trimDb": -6,
+        "gain": 0.6,
+        "cooldown": [
+          0.35,
+          0.8
+        ],
+        "range": 25,
+        "fadeIn": 0.002,
+        "crossfadeSeconds": 0,
+        "ffmpegFilter": "[0:a]atrim=start=0:duration=1.48,asetpts=PTS-STARTPTS,highpass=f=25,volume=-6dB,afade=t=in:st=0:d=0.002,afade=t=out:st=1.445:d=0.035[out]"
+      },
+      "provenance": {
+        "provider": "ElevenLabs",
+        "sourceUrl": "https://elevenlabs.io/app/flows/XlOdUYSegZh1lM29QN08",
+        "creator": "Custom Foley generated for FjordSide",
+        "recordingOrAI": "AI-generated",
+        "model": "eleven_text_to_sound_v2",
+        "generationId": "jT748yIqj0F5Z1TLbbkU",
+        "prompt": "One isolated hand axe chop into a seasoned wood block. A compact blunt wooden impact, a little splitting crack and a brief natural tail. One strike only. Dry close recording. No voices, music, wind, metallic ringing, movement rhythm or second strike. Total clip 1.5 seconds.",
+        "parameters": {
+          "duration_seconds": 1.5,
+          "prompt_influence": 0.5,
+          "loop": false,
+          "generations_count": 1
+        },
+        "acquiredDate": "2026-10-23",
+        "licenseEvidence": [
+          "https://elevenlabs.io/creative-terms",
+          "https://help.elevenlabs.io/hc/en-us/articles/13313564601361-Can-I-publish-the-content-I-generate-on-the-platform"
+        ],
+        "commercialAssessment": "Paid plan verified; integrated use permitted, isolated public samples prohibited."
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "pending",
+        "distribution": "quarantined"
+      }
+    }
+  ],
+  "missing": [
+    "light-rain",
+    "standalone-leaf-rustle",
+    "tool-handling",
+    "interface-accents"
+  ],
+  "notes": [
+    "Only the two recorded, owner-authorized ElevenLabs axe candidates were generated. No validation triggers provider calls.",
+    "Lossy MP3 input converted for bounded delivery, not a recovered lossless master.",
+    "Call labels and underwater/above-water context require source and listening review.",
+    "Only five seasonal wind cues loop. Fire, waves and visible fauna use quiet intervals.",
+    "No production files published. Runtime triggers belong to #230."
+  ]
+}
