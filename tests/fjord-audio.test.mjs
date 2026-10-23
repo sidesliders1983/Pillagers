@@ -28,6 +28,35 @@ const camera = { focus: { x: 0, y: 0, z: 0 }, forward: { x: 0, z: -1 }, distance
 const emitter = { id: 'a', cue: 'local', permitted: true, position: { x: 1, y: 0, z: 0 } };
 const settle = () => new Promise(resolve => setImmediate(resolve));
 
+test('prepared files load through browser-native fetch with its required global receiver', async () => {
+    const { FjordAudio } = load('../src/audio/FjordAudio.ts');
+    const originalFetch = Object.getOwnPropertyDescriptor(globalThis, 'fetch');
+    const context = webAudio();
+    context.decodeAudioData = async () => context.createBuffer(1, 4800, 24000);
+    Object.defineProperty(globalThis, 'fetch', {
+        configurable: true,
+        value: async function (url) {
+            assert.equal(this, globalThis, 'Native Window.fetch requires its browser receiver');
+            assert.equal(url, '/game-assets/audio/test.wav');
+            return new Response(new Uint8Array(4));
+        },
+    });
+    const audio = new FjordAudio({ createContext: () => context });
+    try {
+        await audio.enable();
+        const pack = { ...manifest,
+            assets: [{ id: 'tone', path: 'game-assets/audio/test.wav', seconds: .2, channels: 1 }] };
+        audio.world(pack).update(camera, [emitter], false);
+        await settle();
+        assert.equal(audio.inspect().playing, 1);
+        assert.equal(audio.inspect().failure, '');
+    } finally {
+        await audio.dispose();
+        if (originalFetch) Object.defineProperty(globalThis, 'fetch', originalFetch);
+        else delete globalThis.fetch;
+    }
+});
+
 test('explicit activation requests media playback even when the device ringer is silent', async () => {
     const { FjordAudio } = load('../src/audio/FjordAudio.ts');
     const originalNavigator = Object.getOwnPropertyDescriptor(globalThis, 'navigator');

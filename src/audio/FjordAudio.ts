@@ -55,7 +55,7 @@ export class FjordAudio {
         this.createContext = options.createContext ?? (() => new AudioContext({ latencyHint: 'interactive' }));
         this.now = options.now ?? (() => performance.now() / 1000);
         this.storage = options.storage;
-        this.fetch = options.fetch ?? globalThis.fetch;
+        this.fetch = options.fetch ?? globalThis.fetch?.bind(globalThis);
         this.base = options.base ?? '/';
         try { this.configure(JSON.parse(this.storage?.getItem(preferenceKey) ?? '{}'), false); }
         catch { /* Optional local preference is independent of campaign saves. */ }

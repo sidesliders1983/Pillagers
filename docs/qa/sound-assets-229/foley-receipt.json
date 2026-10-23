@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "date": "2026-10-23",
+  "model": "eleven_text_to_sound_v2",
+  "flowId": "XlOdUYSegZh1lM29QN08",
+  "requests": 2,
+  "requestedSeconds": 3,
+  "initialHardCreditCap": 200,
+  "maximumParallel": 1,
+  "commercialPlanVerified": true,
+  "generations": [
+    {
+      "label": "axe-a",
+      "prompt": "One isolated hand axe strike into a dry wooden log outdoors. One firm woody impact at the beginning, a few small chips and a short natural decay. Dry close recording. No voice, music, wind, reverb, footsteps or second strike. Total clip 1.5 seconds.",
+      "estimate": {
+        "credits": 16.500000000000004,
+        "price_cents": 0.30000000000000004,
+        "generations_count": 1,
+        "currency": "usd",
+        "estimated_runtime_seconds": 8
+      },
+      "id": "pQm9Kv1ditYYjmusvMJZ",
+      "status": "completed",
+      "durationSeconds": 1.48,
+      "price": {
+        "credits": 4.9995,
+        "price_cents": 0.09090000000000001,
+        "cost_fiat_currency": "usd"
+      }
+    },
+    {
+      "label": "axe-b",
+      "prompt": "One isolated hand axe chop into a seasoned wood block. A compact blunt wooden impact, a little splitting crack and a brief natural tail. One strike only. Dry close recording. No voices, music, wind, metallic ringing, movement rhythm or second strike. Total clip 1.5 seconds.",
+      "estimate": {
+        "credits": 16.500000000000004,
+        "price_cents": 0.30000000000000004,
+        "generations_count": 1,
+        "currency": "usd",
+        "estimated_runtime_seconds": 8
+      },
+      "id": "jT748yIqj0F5Z1TLbbkU",
+      "status": "completed",
+      "durationSeconds": 1.48,
+      "price": {
+        "credits": 4.9995,
+        "price_cents": 0.09090000000000001,
+        "cost_fiat_currency": "usd"
+      }
+    }
+  ],
+  "reportedCredits": 9.999,
+  "publication": "Private candidate artifacts only; integrated distribution and listening pending",
+  "rightsSources": [
+    "https://elevenlabs.io/creative-terms",
+    "https://help.elevenlabs.io/hc/en-us/articles/13313564601361-Can-I-publish-the-content-I-generate-on-the-platform"
+  ]
+}

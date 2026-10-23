@@ -1,0 +1,393 @@
+{
+  "version": 1,
+  "sampleRate": 24000,
+  "crossfadeSeconds": 0.35,
+  "entries": [
+    {
+      "id": "wind-spring",
+      "label": "Wind — spring",
+      "file": "wind-spring.mp3",
+      "bus": "ambience",
+      "trigger": "spring",
+      "loop": true,
+      "start": 2,
+      "duration": 10,
+      "channels": 2,
+      "trimDb": -3,
+      "gain": 0.28,
+      "cooldown": [
+        0,
+        0
+      ],
+      "range": 0
+    },
+    {
+      "id": "wind-autumn",
+      "label": "Wind — autumn",
+      "file": "wind-autumn.mp3",
+      "bus": "ambience",
+      "trigger": "autumn",
+      "loop": true,
+      "start": 0,
+      "duration": 9,
+      "channels": 2,
+      "trimDb": 3,
+      "gain": 0.28,
+      "cooldown": [
+        0,
+        0
+      ],
+      "range": 0
+    },
+    {
+      "id": "wind-summer",
+      "label": "Wind — summer",
+      "file": "wind-summer.mp3",
+      "bus": "ambience",
+      "trigger": "summer",
+      "loop": true,
+      "start": 2,
+      "duration": 10,
+      "channels": 2,
+      "trimDb": 12,
+      "gain": 0.25,
+      "cooldown": [
+        0,
+        0
+      ],
+      "range": 0
+    },
+    {
+      "id": "wind-normal-winter",
+      "label": "Wind — normal winter",
+      "file": "wind-normal-winter.mp3",
+      "bus": "ambience",
+      "trigger": "winter-non-harsh",
+      "loop": true,
+      "start": 1,
+      "duration": 10,
+      "channels": 2,
+      "trimDb": -8,
+      "gain": 0.28,
+      "cooldown": [
+        0,
+        0
+      ],
+      "range": 0
+    },
+    {
+      "id": "wind-harsh-winter",
+      "label": "Wind — harsh winter",
+      "file": "wind-harsh-winter.mp3",
+      "bus": "ambience",
+      "trigger": "winter-harsh",
+      "loop": true,
+      "start": 2,
+      "duration": 10,
+      "channels": 2,
+      "trimDb": -8,
+      "gain": 0.3,
+      "cooldown": [
+        0,
+        0
+      ],
+      "range": 0
+    },
+    {
+      "id": "sea-waves",
+      "label": "Waves — occasional shore texture",
+      "file": "sea-waves.mp3",
+      "bus": "world",
+      "trigger": "near-known-shore",
+      "loop": false,
+      "start": 3,
+      "duration": 10,
+      "channels": 1,
+      "trimDb": -3,
+      "gain": 0.35,
+      "cooldown": [
+        40,
+        75
+      ],
+      "range": 70
+    },
+    {
+      "id": "campfire",
+      "label": "Campfire — occasional crackle",
+      "file": "campfire.mp3",
+      "bus": "world",
+      "trigger": "visible-burning-campfire",
+      "loop": false,
+      "start": 1,
+      "duration": 6,
+      "channels": 1,
+      "trimDb": -3,
+      "gain": 0.35,
+      "cooldown": [
+        30,
+        60
+      ],
+      "range": 25
+    },
+    {
+      "id": "gull",
+      "label": "Gull — occasional visible call",
+      "file": "gull.mp3",
+      "bus": "world",
+      "trigger": "currently-visible-occasional",
+      "loop": false,
+      "channels": 1,
+      "trimDb": 9,
+      "gain": 0.55,
+      "cooldown": [
+        35,
+        75
+      ],
+      "range": 60
+    },
+    {
+      "id": "cow",
+      "label": "Cattle — occasional visible call",
+      "file": "cow.mp3",
+      "bus": "world",
+      "trigger": "currently-visible-occasional",
+      "loop": false,
+      "channels": 1,
+      "trimDb": -6,
+      "gain": 0.6,
+      "cooldown": [
+        35,
+        75
+      ],
+      "range": 45
+    },
+    {
+      "id": "goat",
+      "label": "Goat — occasional visible call",
+      "file": "goat.mp3",
+      "bus": "world",
+      "trigger": "currently-visible-occasional",
+      "loop": false,
+      "channels": 1,
+      "trimDb": 0,
+      "gain": 0.6,
+      "cooldown": [
+        35,
+        75
+      ],
+      "range": 40
+    },
+    {
+      "id": "pig",
+      "label": "Pig — occasional visible call",
+      "file": "pig.mp3",
+      "bus": "world",
+      "trigger": "currently-visible-occasional",
+      "loop": false,
+      "channels": 1,
+      "trimDb": -3,
+      "gain": 0.55,
+      "cooldown": [
+        40,
+        80
+      ],
+      "range": 35
+    },
+    {
+      "id": "sheep",
+      "label": "Sheep — occasional visible call",
+      "file": "sheep.mp3",
+      "bus": "world",
+      "trigger": "currently-visible-occasional",
+      "loop": false,
+      "channels": 1,
+      "trimDb": 3,
+      "gain": 0.6,
+      "cooldown": [
+        35,
+        75
+      ],
+      "range": 40
+    },
+    {
+      "id": "seal",
+      "label": "Seal — occasional visible call",
+      "file": "seal.mp3",
+      "bus": "world",
+      "trigger": "currently-visible-occasional",
+      "loop": false,
+      "channels": 1,
+      "trimDb": 0,
+      "gain": 0.55,
+      "cooldown": [
+        40,
+        90
+      ],
+      "range": 55
+    },
+    {
+      "id": "deer",
+      "label": "Deer — sighting / contact",
+      "file": "deer.mp3",
+      "bus": "world",
+      "trigger": "new-sighting-or-contact",
+      "loop": false,
+      "channels": 1,
+      "trimDb": -3,
+      "gain": 0.55,
+      "cooldown": [
+        60,
+        120
+      ],
+      "range": 55
+    },
+    {
+      "id": "elk",
+      "label": "Elk — sighting / contact",
+      "file": "elk.mp3",
+      "bus": "world",
+      "trigger": "new-sighting-or-contact",
+      "loop": false,
+      "channels": 1,
+      "trimDb": -3,
+      "gain": 0.55,
+      "cooldown": [
+        60,
+        120
+      ],
+      "range": 60
+    },
+    {
+      "id": "fox",
+      "label": "Fox — sighting / contact",
+      "file": "fox.mp3",
+      "bus": "world",
+      "trigger": "new-sighting-or-contact",
+      "loop": false,
+      "channels": 1,
+      "trimDb": -3,
+      "gain": 0.5,
+      "cooldown": [
+        60,
+        120
+      ],
+      "range": 40
+    },
+    {
+      "id": "lynx",
+      "label": "Lynx — sighting / contact",
+      "file": "lynx.mp3",
+      "bus": "world",
+      "trigger": "new-sighting-or-contact",
+      "loop": false,
+      "channels": 1,
+      "trimDb": -3,
+      "gain": 0.5,
+      "cooldown": [
+        60,
+        120
+      ],
+      "range": 40
+    },
+    {
+      "id": "orca",
+      "label": "Orca — sighting / contact; recording context unverified",
+      "file": "orca.mp3",
+      "bus": "world",
+      "trigger": "new-sighting-or-contact",
+      "loop": false,
+      "channels": 1,
+      "trimDb": -3,
+      "gain": 0.5,
+      "cooldown": [
+        60,
+        120
+      ],
+      "range": 60
+    },
+    {
+      "id": "whale",
+      "label": "Whale — sighting / contact; recording context unverified",
+      "file": "whale.mp3",
+      "bus": "world",
+      "trigger": "new-sighting-or-contact",
+      "loop": false,
+      "channels": 1,
+      "trimDb": -3,
+      "gain": 0.5,
+      "cooldown": [
+        60,
+        120
+      ],
+      "range": 65
+    },
+    {
+      "id": "wolf",
+      "label": "Wolf — sighting / contact",
+      "file": "wolf.mp3",
+      "bus": "world",
+      "trigger": "new-sighting-or-contact",
+      "loop": false,
+      "channels": 1,
+      "trimDb": -3,
+      "gain": 0.5,
+      "cooldown": [
+        60,
+        120
+      ],
+      "range": 65
+    },
+    {
+      "id": "rabbit",
+      "label": "Rabbit — sighting / contact",
+      "file": "rabbit.mp3",
+      "bus": "world",
+      "trigger": "new-sighting-or-contact",
+      "loop": false,
+      "channels": 1,
+      "trimDb": -3,
+      "gain": 0.45,
+      "cooldown": [
+        60,
+        120
+      ],
+      "range": 30
+    },
+    {
+      "id": "axe-a",
+      "cue": "axe-impact",
+      "label": "Axe — impact candidate A",
+      "file": "axe-a.mp3",
+      "bus": "world",
+      "trigger": "work-contact-pending-review",
+      "loop": false,
+      "channels": 1,
+      "trimDb": 18,
+      "gain": 0.6,
+      "cooldown": [
+        0.35,
+        0.8
+      ],
+      "range": 25,
+      "fadeIn": 0.002
+    },
+    {
+      "id": "axe-b",
+      "cue": "axe-impact",
+      "label": "Axe — impact candidate B",
+      "file": "axe-b.mp3",
+      "bus": "world",
+      "trigger": "work-contact-pending-review",
+      "loop": false,
+      "channels": 1,
+      "trimDb": -6,
+      "gain": 0.6,
+      "cooldown": [
+        0.35,
+        0.8
+      ],
+      "range": 25,
+      "fadeIn": 0.002
+    }
+  ]
+}
