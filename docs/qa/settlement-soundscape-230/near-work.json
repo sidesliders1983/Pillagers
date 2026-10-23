@@ -1,0 +1,94 @@
+{
+  "audio": {
+    "buffers": 7,
+    "decodeInvocation": {
+      "p50Ms": 0.10000000894069672,
+      "p95Ms": 0.20000000298023224,
+      "p99Ms": 0.20000000298023224,
+      "samples": 7
+    },
+    "decodeWall": {
+      "p50Ms": 35.400000005960464,
+      "p95Ms": 78.5,
+      "p99Ms": 78.5,
+      "samples": 7
+    },
+    "decodedBytes": 15407808,
+    "decodes": 0,
+    "downloadBytes": 3852498,
+    "enabled": true,
+    "failure": "",
+    "hidden": false,
+    "highPhysical": 4,
+    "highVoices": 4,
+    "inflightClients": 0,
+    "pending": 0,
+    "physical": 0,
+    "playing": 0,
+    "retiring": 0,
+    "selectionScheduling": {
+      "p50Ms": 0.09999999403953552,
+      "p95Ms": 0.20000000298023224,
+      "p99Ms": 0.20000000298023224,
+      "samples": 512
+    },
+    "startedCues": {
+      "campfire": 9,
+      "cow": 11,
+      "sea-waves": 11,
+      "wind-normal-winter": 2,
+      "wind-spring": 2,
+      "wind-summer": 3
+    },
+    "state": "running"
+  },
+  "camera": "{\"world\":[-0.7525766947068779,0,-0.6585046078685178,0,-0.37962581997624695,0.8170993839488748,0.43385807997285397,0,0.5380637094168613,0.5764968315180659,-0.6149299536192703,0,31.53719287107365,32.59999990463257,8.911209201169505,1],\"projection\":[2.455505698559636,0,0,0,0,2.4142135623730954,0,0,0,0,-1.0000833368057,-1,0,0,-0.20000833368057003,0]}",
+  "mix": {
+    "logicalSources": 4,
+    "projectionLastMs": 0.10000000894069672,
+    "scope": "Local candidate mix",
+    "visualContacts": 4
+  },
+  "motion": [
+    {
+      "activity": null,
+      "cooldown": 0,
+      "destination": {
+        "x": 9.5,
+        "z": 34.5
+      },
+      "key": "persona:founder-5",
+      "kind": "persona",
+      "partnerKey": null,
+      "rotation": -3.1415926535897936,
+      "speed": 1.0341717170659432,
+      "state": "Walk",
+      "visit": {
+        "checkpoint": {
+          "x": 13.557918960662178,
+          "z": 43.322882423199886
+        },
+        "checkpointSeconds": 4.479800000011919,
+        "clip": "Attack",
+        "face": {
+          "x": -8.150782557204366,
+          "z": 45.1974849938415
+        },
+        "phase": "home",
+        "remaining": -0.011072994276881298,
+        "source": "kaykit-conifer-a@-8.150782557204366,45.1974849938415",
+        "target": {
+          "x": -8.150782557204366,
+          "z": 51.322882423199886
+        },
+        "travelRemaining": 36.91054485013672
+      },
+      "walkable": true,
+      "x": 13.849217442795634,
+      "y": 2.5999999046325684,
+      "z": 40.6991608288234
+    }
+  ],
+  "recordedUtc": "2026-10-23T12:22:32.341Z",
+  "time": "{\"winter\":802,\"tick\":982,\"ticksPerWinter\":1000}"
+}

@@ -28,6 +28,100 @@ const camera = { focus: { x: 0, y: 0, z: 0 }, forward: { x: 0, z: -1 }, distance
 const emitter = { id: 'a', cue: 'local', permitted: true, position: { x: 1, y: 0, z: 0 } };
 const settle = () => new Promise(resolve => setImmediate(resolve));
 
+test('the actual mixed pack plays a projected nearby work contact through the shared owner', async () => {
+    const { FjordAudio } = load('../src/audio/FjordAudio.ts');
+    const { WorkContacts } = load('../src/audio/WorkContacts.ts');
+    const { settlementReviewPack } = load('../src/audio/SettlementSoundPack.ts');
+    const context = webAudio();
+    context.decodeAudioData = async () => context.createBuffer(1, 35520, 24000);
+    let now = 1;
+    const audio = new FjordAudio({ createContext: () => context, now: () => now,
+        fetch: async () => new Response(new Uint8Array(4)) });
+    await audio.enable();
+    const world = audio.world(settlementReviewPack);
+    world.prepare('axe-impact');
+    await settle();
+    const contacts = new WorkContacts();
+    const activity = { id: 'persona:worker', position: { x: -3, y: 3.6, z: 42 },
+        target: 'real-tree', generation: 'instance:1', loop: 0, clip: 'Attack', time: .8, duration: 2.8333332538604736 };
+    contacts.sample(now, [activity], true);
+    now += .1;
+    const crossing = contacts.sample(now, [{ ...activity, time: 1.1 }], true);
+    world.update({ ...camera, focus: { x: 3, y: 2.6, z: 40 } }, crossing.sources, false, crossing.fresh);
+    await settle();
+    assert.equal(audio.inspect().startedCues['axe-impact'], 1);
+    assert.equal(audio.inspect().failure, '');
+    await audio.dispose();
+});
+
+test('a full decode budget postpones another valid cue without reporting a broken file', async () => {
+    const { FjordAudio } = load('../src/audio/FjordAudio.ts');
+    const context = webAudio(), decodes = [];
+    context.decodeAudioData = () => new Promise(resolve => decodes.push(resolve));
+    const audio = new FjordAudio({ createContext: () => context,
+        fetch: async () => new Response(new Uint8Array(4)) });
+    await audio.enable();
+    const ids = ['a', 'b', 'c'];
+    const pack = { assets: ids.map(id => ({ id, path: 'game-assets/audio/' + id + '.wav', seconds: .2, channels: 1 })),
+        cues: ids.map(id => ({ ...manifest.cues[0], id, variants: [id] })) };
+    audio.world(pack).update(camera, ids.map(id => ({ ...emitter, id, cue: id })), false);
+    await settle();
+    assert.equal(decodes.length, 2);
+    assert.equal(audio.inspect().failure, '');
+    await audio.dispose();
+    decodes.forEach(resolve => resolve(context.createBuffer(1, 4800, 24000)));
+    await settle();
+});
+
+test('preparing a work cue waits for consent and keeps its decoded buffer for the real contact', async () => {
+    const { FjordAudio } = load('../src/audio/FjordAudio.ts');
+    const context = webAudio();
+    context.decodeAudioData = async () => context.createBuffer(1, 4800, 24000);
+    let requests = 0;
+    const audio = new FjordAudio({ createContext: () => context,
+        fetch: async () => { requests++; return new Response(new Uint8Array(4)); } });
+    const pack = { ...manifest, assets: [{ id: 'tone', path: 'game-assets/audio/test.wav', seconds: .2, channels: 1 }] };
+    const world = audio.world(pack);
+    world.prepare('local');
+    await settle();
+    assert.equal(requests, 0);
+    await audio.enable();
+    world.prepare('local');
+    await settle();
+    assert.equal(requests, 1);
+    assert.equal(audio.inspect().buffers, 1);
+    assert.equal(audio.inspect().downloadBytes, 4, 'Report actual encoded bytes, not decoded PCM or a file estimate');
+    world.update(camera, [emitter], false);
+    await settle();
+    assert.equal(audio.inspect().playing, 1);
+    assert.equal(requests, 1);
+    await audio.dispose();
+});
+
+test('a current work contact bypasses ambient cadence once and aligns the prepared transient', async () => {
+    const { FjordAudio } = load('../src/audio/FjordAudio.ts');
+    const context = webAudio(), starts = [];
+    const createSource = context.createBufferSource;
+    context.createBufferSource = () => ({ ...createSource(), start: (...args) => starts.push(args) });
+    let now = 0;
+    const audio = new FjordAudio({ createContext: () => context, now: () => now });
+    await audio.enable();
+    const pack = { ...manifest, cues: [{ ...manifest.cues[0], loop: false, contactOffset: .00054 }] };
+    const world = audio.world(pack);
+    world.update(camera, [], false);
+    now = .03;
+    world.update(camera, [{ ...emitter, event: 'action-1:contact' }], false, true);
+    await settle();
+    assert.equal(starts.length, 1, 'A real contact must not wait for the next 5 Hz selection');
+    assert.equal(audio.inspect().requestedCues.local, 1);
+    assert.deepEqual(starts[0], [0, .00054]);
+    now = .04;
+    world.update(camera, [{ ...emitter, event: 'action-1:contact' }], false, true);
+    await settle();
+    assert.equal(starts.length, 1, 'Refreshing a source marker does not replay it');
+    await audio.dispose();
+});
+
 test('prepared files load through browser-native fetch with its required global receiver', async () => {
     const { FjordAudio } = load('../src/audio/FjordAudio.ts');
     const originalFetch = Object.getOwnPropertyDescriptor(globalThis, 'fetch');

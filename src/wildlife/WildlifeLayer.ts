@@ -1,4 +1,5 @@
 import { restoreWildlife } from './WildlifeSnapshot';
+import type { SoundActor } from '../audio/SettlementSounds';
 import { prepareFaunaLighting } from '../characters/FaunaLighting';
 import type { WildlifeState } from '../simulation/WildlifeSightings';
 import { animalRestRig, clearAnimalRest, poseAnimalRest, type AnimalRestRig } from './AnimalRestMotion';
@@ -97,6 +98,7 @@ interface RenderActor {
     foldedWings?: Mesh[];
     height: number;
     radius: number;
+    observable?: boolean;
 }
 /** Reuses existing source limb chains for a small procedural walk when no authored clip is supplied. */
 function legPoses(root: Group): LegPose[] {
@@ -311,9 +313,10 @@ export class WildlifeLayer {
             }
             const known = this.known(actor.position.x, actor.position.z);
             let inView = true;
-            root.visible = known
+            record.observable = known
                 && (pose ? pose.renderVisible : wildlifeObservable(actor))
                 && (airborne || this.population.habitats.valid(actor.position, actor.variant));
+            root.visible = record.observable;
             if (camera) {
                 this.sphere.center.copy(root.position).y += record.height * .5;
                 this.sphere.radius = record.radius;
@@ -388,6 +391,19 @@ export class WildlifeLayer {
                 }
         }
         this.canonicalPending = false;
+    }
+    /** Observability is independent of frustum/LOD culling. No hidden actor leaves this seam. */
+    soundActors(visible: (x: number, z: number) => boolean): SoundActor[] {
+        if (this.disposed) return [];
+        const sources: SoundActor[] = [];
+        for (const { actor, root, observable } of this.records) {
+            if (actor.species !== 'gull' || !observable ||
+                !this.known(actor.position.x, actor.position.z) || !visible(root.position.x, root.position.z)) continue;
+            sources.push({ id: actor.id, kind: 'wildlife', species: actor.species, observable: true,
+                position: { x: root.position.x, y: root.position.y, z: root.position.z } });
+            if (sources.length >= 64) break;
+        }
+        return sources;
     }
     renderedCount() { return this.records.reduce((count, record) => count + Number(record.root.visible), 0); }
     inspect() {

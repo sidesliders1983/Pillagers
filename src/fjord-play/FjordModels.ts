@@ -158,7 +158,15 @@ export class FjordModels {
             actor.mixer.timeScale = state === 'Walk' ? Math.max(.05, speed / Math.max(.01, actor.pace)) : 1;
             actor.mixer.update(delta);
         }
-        model.userData.motion = { state, speed, clipTime: actor.human?.animationState.time ?? actor.action?.time, sourceClip: actor.human?.root.userData.clip ?? actor.action?.getClip().name ?? 'static-fallback', clip: actor.human?.animationState.animation ?? actor.action?.getClip().name ?? 'static-fallback' };
+        const previous = model.userData.motion;
+        const sourceClip = actor.human?.root.userData.clip ?? actor.action?.getClip().name ?? 'static-fallback';
+        const clipTime = actor.human?.animationState.time ?? actor.action?.time ?? 0;
+        const same = previous?.state === state && previous?.sourceClip === sourceClip;
+        const generation = same ? previous.generation ?? 0 : (previous?.generation ?? 0) + 1;
+        const loop = same ? (previous.loop ?? 0) + Number(clipTime < previous.clipTime) : 0;
+        model.userData.motion = { state, speed, clipTime, sourceClip, generation, loop,
+            duration: actor.human?.clips.find(clip => clip.name === sourceClip)?.duration ?? actor.action?.getClip().duration,
+            clip: actor.human?.animationState.animation ?? actor.action?.getClip().name ?? 'static-fallback' };
     }
     beginDeath(model: Object3D) {
         const actor = this.actors.get(model);

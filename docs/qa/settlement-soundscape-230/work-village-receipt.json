@@ -1,0 +1,55 @@
+{
+  "scope": "Separate legacy seed-17 positive action control; ordinary founding stocks and real paid commands.",
+  "commands": [
+    {
+      "type": "SalvageLongship",
+      "longshipId": "founding-longship"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-1",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-5",
+      "occupation": "woodworker"
+    },
+    {
+      "type": "BuildHouse",
+      "householdId": "founder-1"
+    },
+    {
+      "type": "AssignCattle",
+      "cattleId": "cattle-1",
+      "farmyardId": "house-1"
+    },
+    {
+      "type": "AssignCattle",
+      "cattleId": "cattle-2",
+      "farmyardId": "house-1"
+    },
+    {
+      "type": "AssignCattle",
+      "cattleId": "cattle-3",
+      "farmyardId": "house-1"
+    },
+    {
+      "type": "SetCampfire",
+      "lit": true
+    }
+  ],
+  "before": {
+    "food": 15,
+    "materials": 5
+  },
+  "after": {
+    "food": 15,
+    "materials": 14
+  },
+  "time": {
+    "winter": 800,
+    "tick": 500
+  },
+  "outputSHA256": "1140b5ffe0bac7bede30162035e4b5344907fca5530b7c45901af707d1f39c8b"
+}

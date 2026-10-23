@@ -22,7 +22,9 @@ owner and the existing scene lifecycle. `/fjord-play?audioProof=1` exposes a lab
 synthetic signal proof through the normal Sound settings. The [#229 candidate pack](docs/qa/sound-assets-229/report.md)
 has a private local audition and source/measurement ledger; its recordings are
 kept outside Git pending source, listening and distribution acceptance. The actual
-settlement mix remains #230.
+settlement mix now has an [opt-in local #230 review](docs/qa/settlement-soundscape-230/report.md)
+using the actual game scene. General activation remains subject to listening and
+publication acceptance.
 
 For production:
 

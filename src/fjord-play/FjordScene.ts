@@ -44,6 +44,9 @@ import type { PlaytestPerformance } from './PlaytestPerformance';
 import type { FjordAudio } from '../audio/FjordAudio';
 import type { SoundEmitter } from '../audio/Soundscape';
 import { approvedSoundPack, proofSoundPack } from '../audio/SoundPack';
+import { settlementReviewPack } from '../audio/SettlementSoundPack';
+import { SettlementSounds, type SettlementSoundFrame } from '../audio/SettlementSounds';
+import { WorkContacts } from '../audio/WorkContacts';
 
 export interface FjordSceneHost {
     readonly tickIntervalSeconds: number;
@@ -71,8 +74,16 @@ export function createFjordScene(options: {
     const selectionLabels = labels.selection, productionLabels = labels.production;
     const query = new URLSearchParams(location.search);
     const proofAudio = query.get('audioProof') === '1';
+    const mixedAudio = !proofAudio && query.get('audioMix') === '1';
     let audioWorld: ReturnType<FjordAudio['world']> | undefined;
     let audioSources: SoundEmitter[] = [];
+    let settlementSounds: SettlementSounds | undefined;
+    let workContacts = new WorkContacts();
+    let soundFire: SettlementSoundFrame['fire'];
+    let soundWeather: string | null = null;
+    let soundProjectionMs = 0, soundContacts = 0;
+    let lastSoundContact: { at: number; focus: import('../audio/Soundscape').SoundPoint;
+        sources: SoundEmitter[] } | undefined;
     const { unified: unifiedSunlight, northern: northernLight, warmHomes } = fjordLighting(query);
     canvas.dataset.homeLightingMode = warmHomes ? 'warm-v1' : 'off';
     const atmosphere = unifiedSunlight ? new DirectionalAtmosphere() : undefined;
@@ -265,7 +276,12 @@ export function createFjordScene(options: {
             if (discoveryFog) scene.add(discoveryFog.root);
             const fire = campaign.readProjection().campfire;
             const firePosition = new Vector3(fire.transform.x, fire.transform.y, fire.transform.z);
-            audioWorld = options.audio?.world(proofAudio ? proofSoundPack : approvedSoundPack, import.meta.env.BASE_URL);
+            audioWorld = options.audio?.world(proofAudio ? proofSoundPack :
+                mixedAudio ? settlementReviewPack : approvedSoundPack, import.meta.env.BASE_URL);
+            settlementSounds = mixedAudio ? new SettlementSounds(blueprint) : undefined;
+            workContacts = new WorkContacts();
+            soundContacts = 0;
+            lastSoundContact = undefined;
             audioSources = proofAudio ? [
                 { id: 'qa-bed', cue: 'qa-bed', permitted: true },
                 ...[-10, 10].map((offset, index) => ({
@@ -278,6 +294,7 @@ export function createFjordScene(options: {
                 halfDepth: fire.clearingRadius, futureAsset: 'hut'
             });
             const fireState = inspectCampfire(session.readSnapshot());
+            soundFire = { id: fire.id, position: fire.transform, lit: fireState.lit };
             campfireEffect = new CampfireEffect(fire.id, firePosition.clone().add(new Vector3(0, .9, 0)),
                 session.readSnapshot().seed, fireState.lit);
             precipitationEffect = new PrecipitationEffect(session.readSnapshot().seed,
@@ -528,7 +545,10 @@ export function createFjordScene(options: {
                     if (host.loading) await host.loading.measure('initial-settlement-models', prepareEntities);
                     else await prepareEntities();
                     if (!current()) return;
-                    campfireEffect!.setLit(inspectCampfire(state).lit);
+                    const fireLit = inspectCampfire(state).lit;
+                    campfireEffect!.setLit(fireLit);
+                    if (soundFire) soundFire.lit = fireLit;
+                    soundWeather = view.weatherVisual.class;
                     layer!.setCampfireHeat(campfireEffect!.inspect().heat);
                     const fireBounds = layer!.bounds('campfire:settlement-campfire')!;
                     canvas.dataset.campfire = JSON.stringify({
@@ -614,7 +634,7 @@ export function createFjordScene(options: {
         time += delta;
         controller.update(delta);
         camera.updateMatrixWorld();
-        if (audioWorld?.due) {
+        if (proofAudio && audioWorld?.due) {
             for (const source of audioSources) if (source.position)
                 source.permitted = !knownTerrain || discoveryAt(knownTerrain, source.position.x, source.position.z) === 'visible';
             const focus = controller.focus;
@@ -637,6 +657,35 @@ export function createFjordScene(options: {
         wildlife?.setHumans([...layer!.humanPositions(), ...(rivalScene?.humanPositions() ?? [])]);
         wildlife?.useCanonical(session.readSnapshot().wildlife, host.tickIntervalSeconds);
         wildlife?.advance(motionDelta, running, camera);
+        if (mixedAudio && audioWorld && settlementSounds) {
+            const visible = (x: number, z: number) =>
+                !knownTerrain || discoveryAt(knownTerrain, x, z) === 'visible';
+            const work = workContacts.sample(frameStarted / 1000,
+                options.audio?.enabled ? layer!.soundActivities(visible) : [],
+                running && !document.hidden && !!options.audio?.enabled);
+            if (work.fresh) soundContacts++;
+            if (audioWorld.due || work.fresh || work.invalidated) {
+                const projectionStarted = performance.now();
+                const focus = controller.focus;
+                const height = world!.movement.heightAt(focus.x, focus.z);
+                const soundCamera = {
+                    focus: { x: focus.x, y: Number.isFinite(height) ? Math.max(campaign.blueprint.waterLevel, height) :
+                        campaign.blueprint.waterLevel, z: focus.z },
+                    forward: { x: focus.x - camera.position.x, z: focus.z - camera.position.z },
+                    distance: camera.position.distanceTo(focus),
+                };
+                if (work.fresh) lastSoundContact = { at: frameStarted, focus: soundCamera.focus, sources: work.sources };
+                audioSources = settlementSounds.project({ focus: soundCamera.focus, season: calendar.season,
+                    weather: soundWeather, now: frameStarted / 1000,
+                    visible, known: (x, z) => !knownTerrain || discoveryAt(knownTerrain, x, z) !== 'unknown',
+                    fire: soundFire,
+                    actors: [...layer!.soundActors(visible), ...(wildlife?.soundActors(visible) ?? [])] });
+                audioSources.push(...work.sources);
+                soundProjectionMs = performance.now() - projectionStarted;
+                audioWorld.prepare('axe-impact');
+                audioWorld.update(soundCamera, audioSources, !running, work.fresh || work.invalidated);
+            }
+        }
         campfireEffect!.update(delta, running && !document.hidden);
         precipitationEffect!.update(delta, running && !document.hidden, controller.focus, camera.position);
         const fireVisual = campfireEffect!.inspect();
@@ -647,6 +696,11 @@ export function createFjordScene(options: {
         productionLabels.setAnchors(layer!.productionAnchors());
         if (performance.now() - lastDiagnostics > 500) {
             if (options.audio) canvas.dataset.audio = JSON.stringify(options.audio.sample());
+            if (mixedAudio) canvas.dataset.audioMix = JSON.stringify({
+                scope: 'Local candidate mix', logicalSources: audioSources.length,
+                projectionLastMs: soundProjectionMs, visualContacts: soundContacts,
+                lastContact: lastSoundContact,
+            });
             if (diagnostics?.enabled) diagnostics.context({ ...layer!.performanceCounts(),
                 renderedWildlife: wildlife?.renderedCount(),
                 quality: document.querySelector<HTMLSelectElement>('#fjord-quality')!.value,

@@ -1,0 +1,151 @@
+{
+  "audio": {
+    "buffers": 6,
+    "decodeInvocation": {
+      "p50Ms": 0.09999999403953552,
+      "p95Ms": 0.20000000298023224,
+      "p99Ms": 0.20000000298023224,
+      "samples": 6
+    },
+    "decodeWall": {
+      "p50Ms": 31.200000002980232,
+      "p95Ms": 129,
+      "p99Ms": 129,
+      "samples": 6
+    },
+    "decodedBytes": 14255808,
+    "decodes": 0,
+    "downloadBytes": 3564420,
+    "enabled": true,
+    "failure": "",
+    "hidden": false,
+    "highPhysical": 3,
+    "highVoices": 3,
+    "inflightClients": 0,
+    "pending": 0,
+    "physical": 1,
+    "playing": 1,
+    "requestedCues": {
+      "axe-impact": 1,
+      "cow": 3,
+      "sea-waves": 4,
+      "wind-normal-winter": 486,
+      "wind-spring": 236,
+      "wind-summer": 43
+    },
+    "retiring": 0,
+    "selectionScheduling": {
+      "p50Ms": 0.10000000894069672,
+      "p95Ms": 0.30000001192092896,
+      "p99Ms": 0.6000000089406967,
+      "samples": 512
+    },
+    "startedCues": {
+      "axe-impact": 1,
+      "cow": 3,
+      "sea-waves": 4,
+      "wind-normal-winter": 1,
+      "wind-spring": 1,
+      "wind-summer": 1
+    },
+    "state": "running"
+  },
+  "camera": {
+    "conservative": false,
+    "eyeY": 32.599999904632575,
+    "focus": [
+      3.537192871073655,
+      2.5999999046325684,
+      40.91120920116952
+    ],
+    "groundClearance": 30.000000000000007,
+    "invalidSamples": 0,
+    "lift": 0,
+    "maximumMs": 3.1000000089406967,
+    "milliseconds": 0,
+    "minimumBoomClearance": 2.1166219538630937,
+    "nearTargetDistance": 3,
+    "requestedEye": [
+      31.53719287107368,
+      32.599999904632575,
+      8.911209201169527
+    ],
+    "requestedYaw": 2.422762653968168,
+    "requestedZoom": 48.95365335693702,
+    "requiredLift": 0,
+    "samples": 54
+  },
+  "mix": {
+    "lastContact": {
+      "at": 645753.5,
+      "focus": {
+        "x": 3.537192871073655,
+        "y": 2.5999999046325684,
+        "z": 40.91120920116952
+      },
+      "sources": [
+        {
+          "cue": "axe-impact",
+          "event": "678ce07d-417d-4a90-ad8a-aadeb9a171ef:31:kaykit-deciduous-a@49.12588444305584,53.751421867636964:0:reach",
+          "id": "work:persona:founder-3",
+          "permitted": true,
+          "position": {
+            "x": 51.44175321101827,
+            "y": 3.5999999046325684,
+            "z": 51.43555309967453
+          }
+        }
+      ]
+    },
+    "logicalSources": 6,
+    "projectionLastMs": 0.20000000298023224,
+    "scope": "Local candidate mix",
+    "visualContacts": 3
+  },
+  "motion": [
+    {
+      "activity": null,
+      "cooldown": 0,
+      "destination": {
+        "x": 9.5,
+        "z": 34.5
+      },
+      "key": "persona:founder-5",
+      "kind": "persona",
+      "partnerKey": null,
+      "rotation": 3.0570416987777667,
+      "speed": 1.1392186326499427,
+      "state": "Walk",
+      "visit": {
+        "checkpoint": {
+          "x": 13.510838104745066,
+          "z": 43.16986621235447
+        },
+        "checkpointSeconds": 3.15220000001043,
+        "clip": "Attack",
+        "face": {
+          "x": -3.239385748747736,
+          "z": 39.57575508044101
+        },
+        "phase": "home",
+        "remaining": -0.020872994273900713,
+        "source": "kaykit-conifer-a@-3.239385748747736,39.57575508044101",
+        "target": {
+          "x": 0.6702630064838893,
+          "z": 43.485403835672635
+        },
+        "travelRemaining": 35.665358850588454
+      },
+      "walkable": true,
+      "x": 15.20389584540116,
+      "y": 2.599999904632569,
+      "z": 41.171265615803975
+    }
+  ],
+  "observedUtc": "2026-10-23T12:41:46.796Z",
+  "time": {
+    "tick": 552,
+    "ticksPerWinter": 1000,
+    "winter": 805
+  }
+}
