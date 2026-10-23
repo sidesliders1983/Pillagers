@@ -204,3 +204,37 @@ actual iPhone/iPad Safari interruption/background behavior, remaining source
 corrections, Interface content and production distribution approval. Keep #230 and
 the epic open. Revert the preview by removing `audioMix=1`; no Core/save migration
 is needed.
+
+## Owner feedback and gull identity correction — 23 October 2026
+
+The owner heard several sounds but no gull or seal, despite deliberately watching
+the flying birds. This is not recorded as a complete sustained/device acceptance.
+The missing gull was an integration defect: both the wildlife sound seam and
+composer filtered `gull`, whereas the actual canonical species ID is
+`great-black-backed-gull`. `gull` is the audio cue/asset ID, not an animal species.
+The initial projection test repeated that incorrect synthetic species name and
+therefore missed the real integration failure.
+
+The corrected public projection test failed first. A new test through the actual
+`WildlifeLayer`, existing habitat fixture and real prepared GLBs also failed
+first: zero sound actors instead of its six flying and three grounded gulls.
+Both filters now use the canonical ID. The real-layer test then passed, including
+retained eligible sound sources when rendering is culled and silence when
+discovery/observability disallows the animal. Nineteen focused audio tests passed
+with no skips or failures; TypeScript and the incremental production bundle passed.
+The historical exports above remain evidence of the preceding version and are
+not relabelled as measurements of this correction.
+
+The rebuilt actual game subsequently started the prepared gull recording in an
+ordinary new campaign: `startedCues.gull = 1`, no audio failure and a four-buffer
+cache. The native observation and screenshot are retained in `native-gull-fix.*`;
+`gull-fix-receipt.json` pins the corrected sources and active build. This confirms
+the real actor-to-playback path, not the owner's subjective balance approval or
+a physical phone test. Reload the local review URL to receive the corrected JS;
+existing open tabs keep the earlier code until refreshed. World calls require
+the simulation to be running and remain occasional (35–75 s family spacing).
+
+Seal audio is prepared in #229 but deliberately absent from this first nine-file
+integration, which covers a gull and cattle before expanding the remaining pack.
+The absence of seal calls is therefore a known scope gap, not an accepted audible
+seal test. No seal is substituted with a gull/cow cue or made to call underwater.

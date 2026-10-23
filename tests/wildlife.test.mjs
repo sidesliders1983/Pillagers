@@ -237,6 +237,32 @@ test('world wildlife shares render resources, owns independent rigs, respects di
         second.dispose();
     }
 });
+test('real gull identities reach audio when drawing is culled, while undiscovered birds stay silent', async () => {
+    const { SettlementSounds } = load('../src/audio/SettlementSounds.ts');
+    const world = worldFixture();
+    let known = true;
+    const layer = await WildlifeLayer.create(world, () => known, sources);
+    try {
+        const camera = new PerspectiveCamera(45, 1, .1, 10);
+        camera.position.set(100000, 100, 100000);
+        camera.lookAt(100100, 100, 100100);
+        layer.advance(0, false, camera);
+        assert.equal(layer.inspect().rendered, 0);
+        const actors = layer.soundActors(() => true);
+        assert.equal(actors.length, 9, 'The actual population has six flying and three grounded gulls');
+        assert.ok(actors.every(actor => actor.species === 'great-black-backed-gull'));
+        const projection = new SettlementSounds(world);
+        const cues = projection.project({ focus: { x: 0, y: 0, z: 0 }, now: 0,
+            season: 'Summer', weather: 'Normal', known: () => true, visible: () => true, actors });
+        assert.deepEqual(cues.filter(cue => cue.cue === 'gull').map(cue => cue.id),
+            actors.map(actor => actor.id));
+        assert.deepEqual(layer.soundActors(() => false), []);
+        known = false;
+        layer.advance(0, false, camera);
+        assert.deepEqual(layer.soundActors(() => true), []);
+    } finally { layer.dispose(); }
+});
+
 test('a failed model load releases every acquired asset after outstanding loads settle', async () => {
     const releases = [];
     const failing = {

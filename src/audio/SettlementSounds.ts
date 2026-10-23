@@ -83,7 +83,7 @@ export class SettlementSounds {
         });
         for (const actor of frame.actors.slice(0, 128)) {
             if (!actor.observable || !visible(actor.position)) continue;
-            if (actor.kind === 'wildlife' && actor.species === 'gull') sources.push({
+            if (actor.kind === 'wildlife' && actor.species === 'great-black-backed-gull') sources.push({
                 id: actor.id, cue: 'gull', position: actor.position, permitted: true,
             });
             if (actor.kind === 'livestock' && actor.species === 'cattle' &&

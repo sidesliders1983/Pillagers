@@ -27,7 +27,8 @@ test('the real lit fire and observed adult cows enter the mix without hidden or 
 test('only a real observable gull receives its call, independently of render culling', () => {
     const { SettlementSounds } = load('../src/audio/SettlementSounds.ts');
     const projection = new SettlementSounds(geography);
-    const gull = { id: 'gull-1', kind: 'wildlife', species: 'gull', observable: true, position: camera };
+    const gull = { id: 'gull-1', kind: 'wildlife', species: 'great-black-backed-gull',
+        observable: true, position: camera };
     assert.deepEqual(projection.project({ ...frame, actors: [gull,
         { ...gull, id: 'submerged', observable: false }, { ...gull, id: 'seal', species: 'seal' }] })
         .filter(s => s.cue === 'gull').map(s => s.id), ['gull-1']);
