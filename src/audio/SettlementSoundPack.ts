@@ -53,6 +53,48 @@ export const settlementReviewPack: SoundManifest = {
             "channels": 1
         },
         {
+            "id": "goat",
+            "path": "game-assets/audio/goat-38aa2162-82e9438d.wav",
+            "seconds": 1.5934583333333334,
+            "channels": 1
+        },
+        {
+            "id": "pig",
+            "path": "game-assets/audio/pig-1c5c6494-82e9438d.wav",
+            "seconds": 9.024,
+            "channels": 1
+        },
+        {
+            "id": "sheep",
+            "path": "game-assets/audio/sheep-3b6efbb1-82e9438d.wav",
+            "seconds": 1.6979583333333332,
+            "channels": 1
+        },
+        {
+            "id": "seal",
+            "path": "game-assets/audio/seal-86499662-82e9438d.wav",
+            "seconds": 1.944,
+            "channels": 1
+        },
+        {
+            "id": "lynx",
+            "path": "game-assets/audio/lynx-153ea7d4-82e9438d.wav",
+            "seconds": 5.784,
+            "channels": 1
+        },
+        {
+            "id": "wolf",
+            "path": "game-assets/audio/wolf-e16622a6-82e9438d.wav",
+            "seconds": 8.097958333333333,
+            "channels": 1
+        },
+        {
+            "id": "rabbit",
+            "path": "game-assets/audio/rabbit-cae20a8a-82e9438d.wav",
+            "seconds": 4.649791666666666,
+            "channels": 1
+        },
+        {
             "id": "axe-a",
             "path": "game-assets/audio/axe-a-c305cdb2-82e9438d.wav",
             "seconds": 1.48,
@@ -221,6 +263,146 @@ export const settlementReviewPack: SoundManifest = {
                 75
             ],
             "range": 45,
+            "priority": 1,
+            "limit": 1,
+            "pitch": [
+                1,
+                1
+            ]
+        },
+        {
+            "id": "goat",
+            "bus": "world",
+            "variants": [
+                "goat"
+            ],
+            "gain": 0.6,
+            "loop": false,
+            "cooldown": [
+                35,
+                75
+            ],
+            "range": 40,
+            "priority": 1,
+            "limit": 1,
+            "pitch": [
+                1,
+                1
+            ]
+        },
+        {
+            "id": "pig",
+            "bus": "world",
+            "variants": [
+                "pig"
+            ],
+            "gain": 0.55,
+            "loop": false,
+            "cooldown": [
+                40,
+                80
+            ],
+            "range": 35,
+            "priority": 1,
+            "limit": 1,
+            "pitch": [
+                1,
+                1
+            ]
+        },
+        {
+            "id": "sheep",
+            "bus": "world",
+            "variants": [
+                "sheep"
+            ],
+            "gain": 0.6,
+            "loop": false,
+            "cooldown": [
+                35,
+                75
+            ],
+            "range": 40,
+            "priority": 1,
+            "limit": 1,
+            "pitch": [
+                1,
+                1
+            ]
+        },
+        {
+            "id": "seal",
+            "bus": "world",
+            "variants": [
+                "seal"
+            ],
+            "gain": 0.55,
+            "loop": false,
+            "cooldown": [
+                40,
+                90
+            ],
+            "range": 55,
+            "priority": 1,
+            "limit": 1,
+            "pitch": [
+                1,
+                1
+            ]
+        },
+        {
+            "id": "lynx",
+            "bus": "world",
+            "variants": [
+                "lynx"
+            ],
+            "gain": 0.5,
+            "loop": false,
+            "cooldown": [
+                60,
+                120
+            ],
+            "range": 40,
+            "priority": 1,
+            "limit": 1,
+            "pitch": [
+                1,
+                1
+            ]
+        },
+        {
+            "id": "wolf",
+            "bus": "world",
+            "variants": [
+                "wolf"
+            ],
+            "gain": 0.5,
+            "loop": false,
+            "cooldown": [
+                60,
+                120
+            ],
+            "range": 65,
+            "priority": 1,
+            "limit": 1,
+            "pitch": [
+                1,
+                1
+            ]
+        },
+        {
+            "id": "rabbit",
+            "bus": "world",
+            "variants": [
+                "rabbit"
+            ],
+            "gain": 0.45,
+            "loop": false,
+            "cooldown": [
+                60,
+                120
+            ],
+            "range": 30,
             "priority": 1,
             "limit": 1,
             "pitch": [

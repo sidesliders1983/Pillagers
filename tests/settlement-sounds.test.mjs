@@ -65,3 +65,24 @@ test('known coastline weights an independent shore bed and wind crossfades acros
     assert.ok(!projection.project({ ...frame, now: 2, known: () => false }).some(s => s.cue === 'sea-waves'));
     assert.ok(!projection.project({ ...frame, focus: { x: 300, y: 0, z: 300 }, now: 3 }).some(s => s.cue === 'sea-waves'));
 });
+
+
+test('observed adult sheep, goats and pigs use their own calls; young and hidden animals stay silent', () => {
+    const { SettlementSounds } = load('../src/audio/SettlementSounds.ts');
+    const projection = new SettlementSounds(geography);
+    const adult = { kind: 'livestock', stage: 'Adult', observable: true, position: camera };
+    const actors = [
+        { ...adult, id: 'sheep-1', species: 'sheep', sex: 'female' },
+        { ...adult, id: 'goat-1', species: 'goat', sex: 'male' },
+        { ...adult, id: 'pig-1', species: 'pig', sex: 'female' },
+        { ...adult, id: 'lamb', species: 'sheep', stage: 'Young' },
+        { ...adult, id: 'hidden-goat', species: 'goat', observable: false },
+        { ...adult, id: 'chicken', species: 'chicken' },
+    ];
+    const calls = projection.project({ ...frame, actors }).filter(source =>
+        ['sheep', 'goat', 'pig'].includes(source.cue));
+    assert.deepEqual(calls.map(source => [source.id, source.cue]),
+        [['sheep-1', 'sheep'], ['goat-1', 'goat'], ['pig-1', 'pig']]);
+    assert.deepEqual(projection.project({ ...frame, actors, visible: () => false })
+        .filter(source => ['sheep', 'goat', 'pig'].includes(source.cue)), []);
+});

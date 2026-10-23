@@ -238,3 +238,90 @@ Seal audio is prepared in #229 but deliberately absent from this first nine-file
 integration, which covers a gull and cattle before expanding the remaining pack.
 The absence of seal calls is therefore a known scope gap, not an accepted audible
 seal test. No seal is substituted with a gull/cow cue or made to call underwater.
+
+
+## Remaining animal integration — D: workspace, 23 October 2026
+
+The owner's request to continue the remaining prepared sounds expands the opt-in
+scene from nine to sixteen hash-checked WAV candidates. Development, dependencies,
+output and the two local servers now run from
+D:/CodexSites/Pillagers/scratch/performance-overlay-260. The original C: copy and
+historical receipts above remain intact. This change does not publish audio bytes,
+change ordinary URLs, spend provider credits or change any Core rule/save field.
+
+New scene sources are adult sheep, goats and pigs, and currently observed hauled-out
+seals. Young livestock do not receive adult recordings. Swimming seals remain
+silent. Existing family spacing stays 35–75 s for sheep/goats, 40–80 s for pigs and
+40–90 s for seals, shared across individuals rather than multiplied by herd size.
+The quiet gull, campfire, waves and work behavior remains in place.
+
+Rabbit, wolf and the owner's chosen lynx placeholder use actual newly published
+WildlifeSighted events. The actor must still match the event's instance/species,
+be observable in currently visible terrain and be within the shared listener's
+finite hearing range. Camera movement alone creates no sighting. The projection
+baselines existing history on scene creation, reads only appended events (at most
+256 per sync), holds at most 32 fresh candidates for one real second and rejects
+sightings over five canonical ticks old. Calls can finish their prepared clip
+while the actual source stays eligible; they do not become repeating ambient loops.
+Pause, mute, background, lost observation and leaving hearing range discard them.
+Reload/import and re-entering visibility do not replay historical encounters.
+
+The wildlife layer projects actual observed poses independently of render culling;
+its former gull-only filter is removed. Audio still explicitly supports only the
+chosen cue families. No missing animal or private rival actor is manufactured.
+Source queries remain on the existing 5 Hz audio cadence, with the same single
+context, voice limits, two concurrent decodes and bounded PCM cache.
+
+The owner corrected the lynx choice: the supplied recording is intended as a bobcat
+placeholder. That choice is retained for local listening. The saved source link
+https://pixabay.com/sound-effects/nature-tomcat2-41730/ was checked again and still
+says Tomcat2/cat yowling. Its binary is unchanged; this is an explicit owner-chosen
+placeholder with unresolved source identification, not a verified bobcat recording.
+The original #229 catalogue is preserved. New source hashes and this distinction
+are recorded in animal-candidates.json. Pig and wolf carry the source pages' AI
+labels; they remain private listening candidates, not newly approved recordings.
+
+Deer rutting calls, the mixed-tag elk/Bull file, the angry fox recording and
+underwater whale/orca candidates remain outside this local mix pending a matching
+situation or replacement. The game currently supplies no rutting/aggression/audio
+underwater context. Autumn wind's conflicting source link and missing Interface
+content also remain open; none is silently relabelled.
+
+Red/green evidence: the public adult livestock projection returned no sheep/goat/pig
+sources before wiring; the real-GLB seal fixture returned no calls before expansion;
+a real Core rabbit expedition first failed because its fresh-encounter projection
+was absent; real wolf/lynx expeditions returned no cue before their addition.
+The corrected tests pass. Actual Core expedition routes create the sighting facts;
+no internal transfer, invented event or forced audio actor is used. Public-owner
+checks play the expanded livestock/seal pack through the shared audio owner.
+Historical raw performance exports above are not measurements of this extension.
+
+Rebuild the private manifest and normal production bundle, then restart the existing
+loopback server so its allowlist contains sixteen files. On this workstation use
+pnpm 10 via node D:/CodexSites/Pillagers/scratch/migration-20261023/tooling/node_modules/pnpm/bin/pnpm.cjs run build.
+The listener URL stays http://127.0.0.1:5199/fjord-play?audioMix=1&debugPerf=1.
+Reload an already open tab; its old JS does not update by itself. Enable sound and
+run the clock. Live wildlife calls need an actual new encounter, not only camera
+observation. Physical iPhone/iPad acceptance, prolonged subjective mix listening and
+production distribution remain open. No merge or general activation is implied.
+
+
+Verification for this extension: 25 focused audio tests and 42 additional real
+wildlife/canonical-sighting tests passed (67 distinct tests, no failures/skips).
+The full public-asset guard, TypeScript and Vite production build passed from D:.
+All sixteen locally served candidate files matched their retained prepared SHA-256;
+encoded size totals 6,566,888 bytes. A non-allowlisted audio path returned 404.
+Formatting and diff whitespace were checked against the existing style manually;
+no formatter is configured. The new source/bundle receipt is animal-source-receipt.json;
+the original source-receipt.json and gull-fix receipts remain unchanged.
+
+Native verification restored the ordinary campaign 467148170, selected its actual
+founding adult sow through Settlement livestock and ran the clock. The shared audio
+owner started pig once, gull once, shoreline six times and normal-winter wind once,
+with no audio failure. The observation retains five buffers / 8,495,616 PCM bytes
+and a high of two physical voices. See native-pig-expansion.json and the matching
+screenshot. The scene was paused afterwards. These counters establish an actual
+new animal-to-playback path, not an audible approval of every species or sound mix.
+The workstation remained slow (roughly 10 fps during play and a three-second hitch
+at the Winter boundary); that unfavorable observation is retained in the screenshot.
+It does not establish new performance acceptance or an audio-specific cause.

@@ -369,3 +369,33 @@ test('audio state, presentation randomness and repeated worlds retain exact Core
     }
     await audio.dispose();
 });
+
+
+test('the expanded mixed pack starts each projected adult livestock and shore-seal cue through one owner', async () => {
+    const { FjordAudio } = load('../src/audio/FjordAudio.ts');
+    const { SettlementSounds } = load('../src/audio/SettlementSounds.ts');
+    const { settlementReviewPack } = load('../src/audio/SettlementSoundPack.ts');
+    const context = webAudio();
+    context.decodeAudioData = async () => context.createBuffer(1, 48000, 24000);
+    let now = 1;
+    const audio = new FjordAudio({ createContext: () => context, now: () => now,
+        fetch: async () => new Response(new Uint8Array(4)) });
+    await audio.enable();
+    try {
+        const world = audio.world(settlementReviewPack);
+        const projection = new SettlementSounds({ waterLevel: 0, coast: [] });
+        const actors = ['sheep', 'goat', 'pig', 'seal'].map(species => ({ id: species + '-1', species,
+            kind: species === 'seal' ? 'wildlife' : 'livestock', stage: 'Adult', movement: 'shore',
+            position: camera.focus, observable: true }));
+        const sources = projection.project({ now, focus: camera.focus, season: 'Autumn', weather: 'Normal',
+            known: () => true, visible: () => true, actors });
+        for (const source of sources) {
+            world.update(camera, [source], false);
+            await settle();
+            now += 1;
+        }
+        assert.deepEqual(audio.inspect().startedCues, { sheep: 1, goat: 1, pig: 1, seal: 1 });
+        assert.equal(audio.inspect().failure, '');
+        assert.equal(audio.inspect().buffers, 4);
+    } finally { await audio.dispose(); }
+});

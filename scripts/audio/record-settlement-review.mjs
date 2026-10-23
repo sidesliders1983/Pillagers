@@ -5,7 +5,7 @@ import { execFileSync } from 'node:child_process';
 const hash = path => createHash('sha256').update(readFileSync(path)).digest('hex');
 const sources = [
     'src/audio/FjordAudio.ts', 'src/audio/Soundscape.ts',
-    'src/audio/SettlementSounds.ts', 'src/audio/WorkContacts.ts',
+    'src/audio/SettlementSounds.ts', 'src/audio/WorkContacts.ts', 'src/audio/WildlifeSounds.ts',
     'src/audio/SettlementSoundPack.ts', 'src/fjord-play/FjordScene.ts',
     'src/fjord-play/FjordEntry.ts', 'src/fjord-play/FjordEntities.ts',
     'src/fjord-play/FjordModels.ts', 'src/wildlife/WildlifeLayer.ts',
@@ -14,6 +14,7 @@ const sources = [
     'scripts/audio/prepare-village-review.mjs', 'scripts/audio/prepare-work-review.mjs',
     'scripts/audio/measure-work-contact.mjs', 'scripts/audio/record-settlement-review.mjs',
     'tests/settlement-sounds.test.mjs', 'tests/fjord-audio.test.mjs',
+    'tests/wildlife-sounds.test.mjs', 'tests/wildlife.test.mjs',
 ];
 // Follow the active HTML/bootstrap/entry references, excluding older retained builds.
 const html = readFileSync('dist/index.html', 'utf8');
@@ -34,7 +35,7 @@ const receipt = {
     catalogueSHA256: hash(candidates + '/catalogue.json'),
     manifestSHA256: hash(candidates + '/manifest.json'),
 };
-writeFileSync('docs/qa/settlement-soundscape-230/source-receipt.json',
+writeFileSync(process.argv[2] ?? 'docs/qa/settlement-soundscape-230/source-receipt.json',
     JSON.stringify(receipt, null, 2) + '\n');
 console.log(JSON.stringify({ sources: sources.length, bundles: bundles.length,
     catalogueSHA256: receipt.catalogueSHA256 }));

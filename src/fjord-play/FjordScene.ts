@@ -47,6 +47,7 @@ import { approvedSoundPack, proofSoundPack } from '../audio/SoundPack';
 import { settlementReviewPack } from '../audio/SettlementSoundPack';
 import { SettlementSounds, type SettlementSoundFrame } from '../audio/SettlementSounds';
 import { WorkContacts } from '../audio/WorkContacts';
+import { WildlifeSounds } from '../audio/WildlifeSounds';
 
 export interface FjordSceneHost {
     readonly tickIntervalSeconds: number;
@@ -79,6 +80,7 @@ export function createFjordScene(options: {
     let audioSources: SoundEmitter[] = [];
     let settlementSounds: SettlementSounds | undefined;
     let workContacts = new WorkContacts();
+    let wildlifeSounds: WildlifeSounds | undefined;
     let soundFire: SettlementSoundFrame['fire'];
     let soundWeather: string | null = null;
     let soundProjectionMs = 0, soundContacts = 0;
@@ -280,6 +282,7 @@ export function createFjordScene(options: {
                 mixedAudio ? settlementReviewPack : approvedSoundPack, import.meta.env.BASE_URL);
             settlementSounds = mixedAudio ? new SettlementSounds(blueprint) : undefined;
             workContacts = new WorkContacts();
+            wildlifeSounds = mixedAudio ? new WildlifeSounds(session.readSnapshot().events, settlementReviewPack) : undefined;
             soundContacts = 0;
             lastSoundContact = undefined;
             audioSources = proofAudio ? [
@@ -407,6 +410,11 @@ export function createFjordScene(options: {
                     // Keep one immutable revision through asynchronous model work. A queued revision
                     // acquires a new pair on the next pass instead of mixing new facts into this scene.
                     const state = session.readSnapshot();
+                    wildlifeSounds?.append(state.events, { clanId: state.clan.id,
+                        worldId: state.wildlife?.worldId ?? '',
+                        tick: state.time.winter * state.ticksPerWinter + state.time.tick,
+                        now: performance.now() / 1000,
+                        active: session.running && !document.hidden && !!options.audio?.enabled });
                     const view = campaign.readProjection();
                     islandMap.setExpeditions(inspectSpatialExpeditions(state).missions);
                     if (state.discovery && discoveryFog) {
@@ -664,6 +672,7 @@ export function createFjordScene(options: {
                 options.audio?.enabled ? layer!.soundActivities(visible) : [],
                 running && !document.hidden && !!options.audio?.enabled);
             if (work.fresh) soundContacts++;
+            if (!running || document.hidden || !options.audio?.enabled) wildlifeSounds?.clear();
             if (audioWorld.due || work.fresh || work.invalidated) {
                 const projectionStarted = performance.now();
                 const focus = controller.focus;
@@ -675,11 +684,14 @@ export function createFjordScene(options: {
                     distance: camera.position.distanceTo(focus),
                 };
                 if (work.fresh) lastSoundContact = { at: frameStarted, focus: soundCamera.focus, sources: work.sources };
+                const soundActors = [...layer!.soundActors(visible), ...(wildlife?.soundActors(visible) ?? [])];
                 audioSources = settlementSounds.project({ focus: soundCamera.focus, season: calendar.season,
                     weather: soundWeather, now: frameStarted / 1000,
                     visible, known: (x, z) => !knownTerrain || discoveryAt(knownTerrain, x, z) !== 'unknown',
                     fire: soundFire,
-                    actors: [...layer!.soundActors(visible), ...(wildlife?.soundActors(visible) ?? [])] });
+                    actors: soundActors });
+                audioSources.push(...(wildlifeSounds?.sample(frameStarted / 1000, soundCamera, soundActors,
+                    running && !document.hidden && !!options.audio?.enabled) ?? []));
                 audioSources.push(...work.sources);
                 soundProjectionMs = performance.now() - projectionStarted;
                 audioWorld.prepare('axe-impact');

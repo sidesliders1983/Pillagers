@@ -3,7 +3,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 const latest = JSON.parse(readFileSync('scratch/sound-assets-229/latest.json'));
 const manifest = JSON.parse(readFileSync(latest.output + '/manifest.json'));
 const ids = ['wind-spring', 'wind-summer', 'wind-normal-winter', 'wind-harsh-winter',
-    'sea-waves', 'campfire', 'gull', 'cow', 'axe-a'];
+    'sea-waves', 'campfire', 'gull', 'cow', 'goat', 'pig', 'sheep', 'seal', 'rabbit', 'wolf', 'lynx', 'axe-a'];
 const assets = manifest.assets.filter(asset => ids.includes(asset.id));
 const cues = manifest.cues.filter(cue => cue.variants.some(id => ids.includes(id))).map(cue => ({
     ...cue, variants: cue.variants.filter(id => ids.includes(id)),

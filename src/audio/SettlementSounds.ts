@@ -9,6 +9,7 @@ export interface SoundActor {
     species: string;
     sex?: string;
     stage?: string;
+    movement?: string;
 }
 export interface SettlementSoundFrame {
     focus: SoundPoint;
@@ -86,10 +87,14 @@ export class SettlementSounds {
             if (actor.kind === 'wildlife' && actor.species === 'great-black-backed-gull') sources.push({
                 id: actor.id, cue: 'gull', position: actor.position, permitted: true,
             });
-            if (actor.kind === 'livestock' && actor.species === 'cattle' &&
-                actor.sex === 'female' && actor.stage === 'Adult') sources.push({
-                id: actor.id, cue: 'cow', position: actor.position, permitted: true,
-            });
+            // The supplied seal recording is an airborne shore call, not underwater audio.
+            if (actor.kind === 'wildlife' && actor.species === 'seal' && actor.movement === 'shore')
+                sources.push({ id: actor.id, cue: 'seal', position: actor.position, permitted: true });
+            if (actor.kind === 'livestock' && actor.stage === 'Adult') {
+                const cue = actor.species === 'cattle' ? (actor.sex === 'female' ? 'cow' : undefined) :
+                    ['sheep', 'goat', 'pig'].includes(actor.species) ? actor.species : undefined;
+                if (cue) sources.push({ id: actor.id, cue, position: actor.position, permitted: true });
+            }
         }
         return sources;
     }

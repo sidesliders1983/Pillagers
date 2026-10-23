@@ -397,9 +397,9 @@ export class WildlifeLayer {
         if (this.disposed) return [];
         const sources: SoundActor[] = [];
         for (const { actor, root, observable } of this.records) {
-            if (actor.species !== 'great-black-backed-gull' || !observable ||
+            if (!observable ||
                 !this.known(actor.position.x, actor.position.z) || !visible(root.position.x, root.position.z)) continue;
-            sources.push({ id: actor.id, kind: 'wildlife', species: actor.species, observable: true,
+            sources.push({ id: actor.id, kind: 'wildlife', species: actor.species, movement: actor.variant.movement, observable: true,
                 position: { x: root.position.x, y: root.position.y, z: root.position.z } });
             if (sources.length >= 64) break;
         }

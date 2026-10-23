@@ -248,7 +248,7 @@ test('real gull identities reach audio when drawing is culled, while undiscovere
         camera.lookAt(100100, 100, 100100);
         layer.advance(0, false, camera);
         assert.equal(layer.inspect().rendered, 0);
-        const actors = layer.soundActors(() => true);
+        const actors = layer.soundActors(() => true).filter(actor => actor.species === 'great-black-backed-gull');
         assert.equal(actors.length, 9, 'The actual population has six flying and three grounded gulls');
         assert.ok(actors.every(actor => actor.species === 'great-black-backed-gull'));
         const projection = new SettlementSounds(world);
@@ -1034,5 +1034,22 @@ test('canonical wildlife is unchanged by render frames, camera culling or render
         layer.advance(.5, false);
         assert.deepEqual(record.root.position, pausedPosition);
         assert.deepEqual(captureWildlife(layer.population), next.actors);
+    } finally { layer.dispose(); }
+});
+
+
+test('actual visible hauled-out seals call occasionally; swimming seals and hidden shores stay silent', async () => {
+    const { SettlementSounds } = load('../src/audio/SettlementSounds.ts');
+    const world = worldFixture();
+    const layer = await WildlifeLayer.create(world, () => true, sources);
+    try {
+        const actors = layer.soundActors(() => true);
+        const projection = new SettlementSounds(world);
+        const frame = { focus: { x: 0, y: 0, z: 0 }, now: 0,
+            season: 'Summer', weather: 'Normal', known: () => true, visible: () => true, actors };
+        const calls = projection.project(frame).filter(source => source.cue === 'seal');
+        assert.deepEqual(calls.map(source => source.id).sort(), ['seal:haul-out:0', 'seal:haul-out:1']);
+        assert.deepEqual(projection.project({ ...frame, visible: () => false })
+            .filter(source => source.cue === 'seal'), []);
     } finally { layer.dispose(); }
 });
