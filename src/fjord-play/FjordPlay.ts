@@ -72,6 +72,9 @@ export class FjordPlay {
         }
     }
     private async initialize(entry: CampaignStartAttempt) {
+        const diagnostics = entry.performance;
+        diagnostics?.setMode('Loading');
+        diagnostics?.context({ seed: entry.seed });
         document.title = 'FjordSide';
         document.body.className = 'fjord-play';
         document.body.innerHTML = '<main class="fjord-bootstrap"><h1>Opening FjordSide…</h1><p role="status">Reading your campaign.</p></main>';
@@ -79,6 +82,7 @@ export class FjordPlay {
             backLabel: 'Back to start menu', mode: entry.kind === 'continue' ? 'resume' : entry.kind, seed: entry.seed,
             diagnosticRun: entry.diagnosticRun,
         });
+        diagnostics?.mount();
         await yieldForInput();
         this.loading.check();
         const query = new URLSearchParams(location.search);
@@ -143,6 +147,12 @@ export class FjordPlay {
         this.shared = this.opened.campaign;
         this.session = this.shared.session;
         this.campaign = this.shared.fjord;
+        const canonicalTicks = () => {
+            const state = this.session.readSnapshot();
+            return state.time.winter * state.ticksPerWinter + state.time.tick;
+        };
+        const core = <T>(operation: () => T) => diagnostics
+            ? diagnostics.core(canonicalTicks, operation) : operation();
         // New islands include physical exploration; restored campaigns retain their saved rules.
         if (entry.kind !== 'continue' && campaignIslandPlan(this.campaign.blueprint) &&
             enableStartDiscovery) this.campaign.enableDiscovery();
@@ -175,6 +185,8 @@ export class FjordPlay {
             document.querySelector<HTMLSelectElement>('#fjord-effects')!.value = savedPresentation.effects;
         }
         this.loading?.mount();
+        diagnostics?.mount();
+        if (diagnostics) document.querySelector('#fjord-performance-setting')?.append(diagnostics.settings());
         if (this.loading) this.loading.diagnostics.metadata.quality =
             document.querySelector<HTMLSelectElement>('#fjord-quality')!.value;
         this.foundingBook?.restoreScroll(readingPosition);
@@ -319,7 +331,7 @@ export class FjordPlay {
         this.startupCleanup.push(() => islandMarkers.dispose());
         let desktopUI: FjordInterface | undefined;
         let renderedWildlifeAttention = '';
-        const refresh = () => {
+        const refreshUI = () => {
             let expeditionPace = cycleField.querySelector<HTMLOptionElement>('option[value="10"]');
             if (!expeditionPace) {
                 expeditionPace = document.createElement('option'); expeditionPace.value = '10';
@@ -335,14 +347,25 @@ export class FjordPlay {
             if (!this.loading) bookReader.update();
             const view = this.campaign.readProjection();
             const state = this.session.readSnapshot();
+            const residentCount = Object.values(state.personas).filter(person => person.deathWinter === null).length;
+            const livestockCount = state.landing ? landingSummary(state).cattle : 0;
+            if (diagnostics?.enabled) {
+                diagnostics.mount();
+                const recipe = campaignIslandPlan(this.campaign.blueprint)?.recipe;
+                diagnostics.context({ seed: state.seed, geographySeed: recipe?.seed, recipe: recipe?.version,
+                    winter: state.time.winter, tick: state.time.tick,
+                    pace: this.session.expeditionMode ? 10 : this.session.minutesPerWinter,
+                    quality: document.querySelector<HTMLSelectElement>('#fjord-quality')!.value,
+                    effects: document.querySelector<HTMLSelectElement>('#fjord-effects')!.value,
+                    residents: residentCount, livestock: livestockCount });
+            }
             calendar = view.calendar;
             canonicalTime = 'Canonical time: Winter ' + view.time.winter + ' · tick ' + view.time.tick + '/' + state.ticksPerWinter;
             productionLabels.enqueue(production.read(state.events));
             productionLabels.suppress(Object.keys(state.personas).filter(id => personaAway(state, id))
                 .map(id => ({ kind: 'persona', id })));
             header.update(view.calendar, view.stocks,
-                Object.values(state.personas).filter(p => p.deathWinter === null).length,
-                state.landing ? landingSummary(state).cattle : 0, this.session.expeditionMode);
+                residentCount, livestockCount, this.session.expeditionMode);
             canvas.dataset.time = JSON.stringify({ ...view.time, ticksPerWinter: state.ticksPerWinter });
             canvas.dataset.calendar = JSON.stringify(view.calendar);
             const workspace = document.querySelector<HTMLElement>('#fjord-workspace')!;
@@ -390,6 +413,7 @@ export class FjordPlay {
                 view.entities.find(e => e.kind === selected.kind && e.id === selected.id)?.label ?? 'Historical or inactive identity.' :
                 'Select a home, resident or animal.';
         };
+        const refresh = () => diagnostics ? diagnostics.measure('ui', refreshUI) : refreshUI();
         let actionWork = Promise.resolve();
         const action = (work: () => void | Promise<void>) => {
             actionWork = actionWork.then(async () => {
@@ -406,7 +430,7 @@ export class FjordPlay {
             action(() => {});
         });
         document.querySelector('#fjord-next')!.addEventListener('click', () => action(() => {
-            if (!this.session.expeditionMode) this.session.command({ type: 'AdvanceWinter' });
+            if (!this.session.expeditionMode) core(() => this.session.command({ type: 'AdvanceWinter' }));
         }));
         document.querySelector('#fjord-save')!.addEventListener('click', () => action(() => {
             this.shared.saveLocal(localStorage);
@@ -415,6 +439,8 @@ export class FjordPlay {
         const restoreInGame = async (read: () => string | Promise<string>, successMessage: string) => {
             const backup = this.campaign.exportJSON();
             const loading = this.loading = new IslandLoading(true, undefined, undefined, { mode: 'resume' });
+            diagnostics?.setMode('Loading');
+            diagnostics?.mount();
             loading.diagnostics.metadata.quality = document.querySelector<HTMLSelectElement>('#fjord-quality')!.value;
             controller.enabled = false;
             drawingReady = false;
@@ -547,6 +573,8 @@ export class FjordPlay {
                         recipe, mode: restart ? 'restart' : 'new', seed: state.seed,
                         founding: { seed: state.seed, time: state.time, ticksPerWinter: state.ticksPerWinter },
                     });
+                    diagnostics?.setMode('Loading');
+                    diagnostics?.mount();
                     loading.complete('campaign');
                     // The existing scene owner already holds decoded scenery; replacement reuses it.
                     loading.complete('assets');
@@ -613,7 +641,7 @@ export class FjordPlay {
             renderPortrait: input => presentation?.portrait(input) ?? Promise.resolve(undefined),
             home: () => controller.home(),
             commit: (commands, done) => action(async () => {
-                this.session.commandBatch(typeof commands === 'function' ? commands() : commands);
+                core(() => this.session.commandBatch(typeof commands === 'function' ? commands() : commands));
                 done();
                 if (syncScene) await syncScene();
             }) });
@@ -641,7 +669,7 @@ export class FjordPlay {
             const command = panelCommand(button, this.shared.selection, field);
             if (command) void desktopUI!.approve(command).then(approved => {
                 if (approved) action(async () => {
-                    this.shared.command(command);
+                    core(() => this.shared.command(command));
                     if (syncScene) await syncScene();
                     say('Action completed.');
                 });
@@ -663,7 +691,7 @@ export class FjordPlay {
             action(() => {
                 // Recheck at execution: this work may have waited behind an asynchronous command.
                 if (intent === clockIntent && this.session.running && canAdvance())
-                    this.session.elapse(elapsed);
+                    core(() => this.session.elapse(elapsed));
             });
         };
         document.addEventListener('visibilitychange', () => {
@@ -676,7 +704,7 @@ export class FjordPlay {
             resetFrameTime();
         }, { signal: lifecycleEvents.signal });
         const owner = this;
-        presentation = createFjordScene({ shared: this.shared, canvas,
+        presentation = createFjordScene({ shared: this.shared, canvas, diagnostics,
             labels: { selection: selectionLabels, production: productionLabels }, restoredCamera,
             host: {
                 tickIntervalSeconds: campaignClockIntervalMs / 1000,
@@ -691,7 +719,7 @@ export class FjordPlay {
         presentation.root.add(islandMarkers.root);
         expeditions = new ExpeditionPanel(document.querySelector<HTMLElement>('#expedition-panel')!,
             this.session, command => action(() => {
-                this.session.command(command);
+                core(() => this.session.command(command));
                 expeditions!.committed(command);
                 islandMissions?.committed(command);
             }), (point, valid) => presentation!.setTarget(point, valid),
@@ -707,7 +735,7 @@ export class FjordPlay {
         this.startupCleanup.push(() => expeditions?.dispose());
         islandMissions = new IslandMissionPanel(document.querySelector<HTMLElement>('#expedition-panel')!,
             this.session, command => action(() => {
-                this.session.command(command);
+                core(() => this.session.command(command));
                 expeditions!.committed(command);
                 islandMissions?.committed(command);
             }), memberIds => presentation!.origins(memberIds),
@@ -915,10 +943,14 @@ export class FjordPlay {
         };
         resetFrameTime = () => { previous = performance.now(); presentation!.resetFrameTime(); };
         // Public camera diagnostics let visual QA locate objects before exercising real pointer picking.
-        renderer.setAnimationLoop(() => {
+        renderer.setAnimationLoop((timestamp: number) => {
+            diagnostics?.setMode(contextLost ? 'Recovering' : this.loading ? 'Loading' :
+                this.session.running && canAdvance() ? 'Running' : 'Paused');
             if (!drawingReady || pageSuspended || contextLost || document.hidden) return;
+            const started = diagnostics?.enabled ? performance.now() : 0;
             presentation!.frame(calendar, this.session.running && canAdvance());
             previewDestination();
+            if (diagnostics?.enabled) diagnostics.frame(timestamp, performance.now() - started);
         });
         const prepareGpu = (loading: Pick<IslandLoading, 'stage' | 'measure' | 'check'> & Partial<Pick<IslandLoading, 'complete' | 'units'>>) =>
             presentation!.prepareGpu(loading);

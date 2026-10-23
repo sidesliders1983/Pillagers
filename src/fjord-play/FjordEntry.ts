@@ -6,6 +6,7 @@ import { projectFjordCalendar } from './FjordCalendar';
 import './campaign-start.css';
 import { lastIslandLoad } from './IslandLoadStatus';
 import { LoadingRunDiagnostics } from './LoadingRunDiagnostics';
+import { PlaytestPerformance } from './PlaytestPerformance';
 
 export interface CampaignStartAttempt {
     kind: 'continue' | 'restart' | 'new';
@@ -16,6 +17,8 @@ export interface CampaignStartAttempt {
     signal: AbortSignal;
     /** Read-only preparation test: dispose before activation, playback or clock ownership. */
     diagnosticRun?: LoadingRunDiagnostics;
+    /** Presentation-only diagnostics; never serialized into a campaign. */
+    performance?: PlaytestPerformance;
     /** Called once, after world, assets and camera are ready. A failed write keeps the prior save. */
     activate(text: string): void;
 }
@@ -68,6 +71,14 @@ export async function runFjordEntry(ports: EntryPorts = {
         await new FjordPlay().start(attempt);
     },
 }): Promise<void> {
+    const diagnostics = new PlaytestPerformance();
+    const showShell = () => {
+        const content = shell();
+        content.parentElement!.append(diagnostics.settings());
+        diagnostics.setMode('Start menu');
+        diagnostics.mount();
+        return content;
+    };
     const lifetime = new AbortController();
     const leaving = (event: PageTransitionEvent) => { if (!event.persisted) lifetime.abort(); };
     window.addEventListener('pagehide', leaving);
@@ -102,7 +113,7 @@ export async function runFjordEntry(ports: EntryPorts = {
             window.history.replaceState(null, '', url);
         };
         const showDiagnosticResult = async (report: ReturnType<LoadingRunDiagnostics['finish']>) => {
-            const content = shell();
+            const content = showShell();
             const completed = report.outcome === 'diagnostic-complete';
             content.innerHTML = `<h2>${completed ? 'Loading diagnostics complete' : 'Loading diagnostics stopped'}</h2>
                 <p role="status" data-diagnostic-summary></p><p data-diagnostic-error></p>
@@ -132,7 +143,7 @@ export async function runFjordEntry(ports: EntryPorts = {
         }
         for (;;) {
             lifetime.signal.throwIfAborted();
-            let content = shell();
+            let content = showShell();
             content.innerHTML = '<p role="status">Checking saved campaigns…</p>';
             await new Promise(resolve => setTimeout(resolve, 0));
             let expectedActive: string | null | undefined;
@@ -157,7 +168,7 @@ export async function runFjordEntry(ports: EntryPorts = {
                     restart = check.proposal;
                     restartReason = check.reason;
                 }
-                content = shell();
+                content = showShell();
                 content.innerHTML = `<p data-context></p><p role="status" data-storage></p>
                     <div class="entry-actions">
                         <button type="button" data-entry="continue">Continue campaign<small>Return to your saved settlement.</small></button>
@@ -233,6 +244,7 @@ export async function runFjordEntry(ports: EntryPorts = {
                 let prepared: string | undefined;
                 let activated = false;
                 const attempt: CampaignStartAttempt = {
+                    performance: diagnostics,
                     kind: choice as CampaignStartAttempt['kind'], seed, source: selected,
                     restart: choice === 'restart' ? restart : undefined,
                     resumePlayback: handoff, signal: lifetime.signal,
@@ -256,7 +268,7 @@ export async function runFjordEntry(ports: EntryPorts = {
                     },
                 };
                 for (;;) {
-                    content = shell();
+                    content = showShell();
                     content.innerHTML = diagnosticMode ? '<p role="status">Starting loading diagnostics…</p>' :
                         '<p role="status">Opening your campaign…</p>';
                     attempt.diagnosticRun = diagnosticMode ? new LoadingRunDiagnostics() : undefined;
@@ -278,7 +290,7 @@ export async function runFjordEntry(ports: EntryPorts = {
                             break;
                         }
                         if (error instanceof DOMException && error.name === 'AbortError') break;
-                        content = shell();
+                        content = showShell();
                         content.innerHTML = `<h2>Campaign not opened</h2><p role="status"></p>
                             <p>Your previous saves have not been replaced.</p><div class="entry-confirm">
                             <button type="button" data-retry>Try again</button>
@@ -306,6 +318,7 @@ export async function runFjordEntry(ports: EntryPorts = {
             }
         }
     } finally {
+        if (lifetime.signal.aborted) diagnostics.dispose();
         window.removeEventListener('pagehide', leaving);
     }
 }

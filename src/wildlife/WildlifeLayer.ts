@@ -389,6 +389,7 @@ export class WildlifeLayer {
         }
         this.canonicalPending = false;
     }
+    renderedCount() { return this.records.reduce((count, record) => count + Number(record.root.visible), 0); }
     inspect() {
         return { version: 'wildlife-v0.2', population: this.population.inspect(),
             diagnostics: [...this.population.diagnostics, ...this.diagnostics],

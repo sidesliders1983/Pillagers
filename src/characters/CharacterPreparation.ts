@@ -7,12 +7,14 @@ export interface CharacterPreparationSample {
     mode: 'synchronous' | 'async-inclusive';
     outcome: 'complete' | 'failed';
 }
-export type CharacterPreparationObserver = (sample: CharacterPreparationSample) => void;
+export type CharacterPreparationObserver = ((sample: CharacterPreparationSample) => void) & {
+    enabled?: () => boolean;
+};
 
 /** Optional elapsed spans: async spans include waiting, and nested spans overlap. */
 export function characterSync<T>(observe: CharacterPreparationObserver | undefined,
     stage: string, operation: () => T, resource?: string): T {
-    if (!observe) return operation();
+    if (!observe || observe.enabled?.() === false) return operation();
     const started = performance.now();
     let outcome: CharacterPreparationSample['outcome'] = 'failed';
     try {
@@ -25,7 +27,7 @@ export function characterSync<T>(observe: CharacterPreparationObserver | undefin
 
 export async function characterAsync<T>(observe: CharacterPreparationObserver | undefined,
     stage: string, operation: () => Promise<T>, resource?: string): Promise<T> {
-    if (!observe) return operation();
+    if (!observe || observe.enabled?.() === false) return operation();
     const started = performance.now();
     let outcome: CharacterPreparationSample['outcome'] = 'failed';
     try {

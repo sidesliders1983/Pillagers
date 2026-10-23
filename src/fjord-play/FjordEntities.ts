@@ -505,6 +505,15 @@ export class FjordEntities {
             model.userData.canonical?.kind === 'persona' && model.visible
                 ? [(() => { const p = model.getWorldPosition(new Vector3()); return { x: p.x, z: p.z }; })()] : []);
     }
+    performanceCounts() {
+        let renderedResidents = 0, renderedLivestock = 0;
+        for (const [key, entry] of this.entries) {
+            if (!entry.model.visible) continue;
+            if (key.startsWith('persona:')) renderedResidents++;
+            if (key.startsWith('cattle:')) renderedLivestock++;
+        }
+        return { renderedResidents, renderedLivestock };
+    }
     describe() {
         this.root.updateMatrixWorld(true);
         return [...this.entries].map(([key, entry]) => ({
