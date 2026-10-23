@@ -99,6 +99,8 @@ test('one explicit audio owner survives world replacement and respects mute, hid
     second.update(camera, [emitter], false);
     await settle();
     assert.equal(audio.inspect().playing, 1);
+    audio.setHidden(false);
+    assert.equal(audio.inspect().playing, 1, 'An ordinary pageshow is not an audio interruption');
     audio.setHidden(true);
     assert.equal(audio.inspect().playing, 0);
     audio.configure({ muted: true });

@@ -106,6 +106,7 @@ export class FjordAudio {
         this.changed?.();
     }
     setHidden(hidden: boolean) {
+        if (hidden === this.hidden) return;
         this.hidden = hidden;
         this.stopAll();
         if (hidden) void this.context?.suspend().catch(() => {});
