@@ -47,7 +47,7 @@ test('desktop and mobile occupational home panels set bounded targets without de
             const refresh = () => ui.refresh(session.readSnapshot(), owner.selection, '', () => '');
             ui = new FjordInterface(owner, { select() {}, refresh, notify: text => notices.push(text),
                 commit(commands, done) {
-                    for (const command of typeof commands === 'function' ? commands() : commands) session.command(command);
+                    session.commandBatch(typeof commands === 'function' ? commands() : commands);
                     done();
                 } });
             owner.select({ kind: 'household', id: Object.values(state.households).find(home => home.memberIds.includes('founder-1')).id });
@@ -108,4 +108,28 @@ test('Pillage preparation selectors assign distinct real stock, disable shortage
         assert.equal(document.querySelector('[data-equipment-slot="body"]'), null);
         assert.match(document.querySelector('[aria-label="Personal Pillage risks"]').textContent, /65%/);
     } finally { panel?.dispose(); fixture.restore(); }
+});
+
+test('real management transactions commit Smithery targets together and reject invalid batches atomically', () => {
+    const session = new GameplaySession(32);
+    const before = session.readSnapshot();
+    session.commandBatch([
+        { type: 'SetSmitheryTarget', item: 'woodenSpear', target: 2 },
+        { type: 'SetSmitheryTarget', item: 'woodenShield', target: 1 }
+    ]);
+    const after = session.readSnapshot();
+    assert.equal(after.smithery.targets.woodenSpear, 2);
+    assert.equal(after.smithery.targets.woodenShield, 1);
+    assert.deepEqual(after.stocks, before.stocks);
+    assert.deepEqual(after.time, before.time);
+    assert.equal(after.rngState, before.rngState);
+    assert.equal(before.smithery.targets.woodenSpear, 0, 'The old UI snapshot stays immutable');
+    const saved = session.saveJSON();
+    assert.throws(() => session.commandBatch([
+        { type: 'SetSmitheryTarget', item: 'woodenSpear', target: 3 },
+        { type: 'SetSmitheryTarget', item: 'woodenShield', target: 21 }
+    ]), /target/);
+    assert.equal(session.saveJSON(), saved);
+    assert.equal(session.readSnapshot(), after, 'A rejected batch does not publish a new UI revision');
+    assert.throws(() => session.commandBatch([{ type: 'AdvanceTicks', ticks: 1 }]), /unsupported/);
 });

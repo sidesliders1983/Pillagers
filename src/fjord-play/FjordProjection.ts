@@ -9,6 +9,7 @@ import { livestockAsset } from '../characters/LivestockPresentation';
 import { animalProfile } from '../simulation/LivestockSpecies';
 export { settlementCampfire } from './SettlementCampfire';
 import { housingName } from '../simulation/HousingNames';
+import { houseAssetFor, type HouseSize } from '../config/HousingAssets';
 import { projectFjordCalendar } from './FjordCalendar';
 import { seasonBlend } from '../config/timeVisualization';
 import type { CharacterDNA } from '../characters/CharacterDNA';
@@ -282,9 +283,9 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
         const plot = allocatePlot(key, halfSize);
         if (plot)
             buildingPlots.set(building.id, plot);
-        let asset = ['hut', 'homestead', 'longhouse', 'greatHall'][Math.min(level, 3)];
-        if (yard && level <= 1)
-            asset = level === 0 ? 'farmHut' : 'farmHomestead';
+        const size: HouseSize = (['hut', 'homestead', 'longhouse', 'greatHouse'] as const)[Math.min(level, 3)];
+        const appearance = building.specialization === 'smith' ? 'smith' : yard ? 'farmer' : undefined;
+        const asset = houseAssetFor(size, appearance);
         const orientedPlot = plot ? {
             ...plot,
             rotation: yard ? Math.PI : Math.atan2(center.x - plot.x, center.z - plot.z)

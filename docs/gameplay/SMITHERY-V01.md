@@ -5,6 +5,21 @@ This slice uses the existing Smith (`smith`) and Leatherworker
 specialization upgrades. No mine, new workplace building, training XP, body armor,
 durability or second combat resolver is introduced.
 
+## Smith house appearance
+
+The existing house specialization selects the supplied Smith Hut at upgrade level 0
+and Smith Homestead at level 1. Longhouse (level 2) and Great House (level 3) retain
+their standard models until dedicated Smith versions are supplied. Changing a
+resident's occupation alone does not specialize the building. A household with a
+Farmer retains its real farmyard and livestock capacity even when its home uses the
+Smith specialization; no new workplace, cost or production bonus is introduced.
+
+Runtime publications preserve the authored metre scale and original textures,
+using the existing 1024px WebP/Meshopt pipeline. Originals remain outside public/.
+Both variants use the existing construction reveal/fade and seasonal snow treatment.
+Existing window emission masks are unchanged; unreviewed door details are not made
+self-lit.
+
 ## Production and ownership
 
 | Product | Worker | Actual inputs per finished item | Items/Winter at 100% effective productivity |

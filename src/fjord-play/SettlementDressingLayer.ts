@@ -47,7 +47,7 @@ export class SettlementDressingLayer {
         this.root.name = 'Settlement dressing';
         const sources: Record<string, import('./SettlementDressing').DressingBounds> = {};
         for (const key of [...dressingAssetKeys, 'tent', 'hut', 'homestead', 'longhouse',
-            'greatHall', 'farmHut', 'farmHomestead'] as AssetKey[]) {
+            'greatHall', 'farmHut', 'farmHomestead', 'smithHut', 'smithHomestead'] as AssetKey[]) {
             if (!assets.has(key)) continue;
             const model = assets.get(key);
             if (model.userData.placeholder) continue;

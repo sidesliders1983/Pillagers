@@ -37,7 +37,7 @@ export async function createPlaytestHandler(workspace) {
     const missingHousing = () => Error('Housing assets missing or incomplete. Run pnpm assets:houses and rebuild the playtest.');
     if (!housing) throw missingHousing();
     const manifest = JSON.parse(await readFile(housing.path, 'utf8'));
-    const required = ['greatHall', 'hut', 'homestead', 'longhouse', 'farmHut', 'farmHomestead', 'farmHutTerrain'];
+    const required = ['greatHall', 'hut', 'homestead', 'longhouse', 'farmHut', 'farmHomestead', 'farmHutTerrain', 'smithHut', 'smithHomestead'];
     if (manifest.schemaVersion !== 1 || !required.every(key => manifest.assets?.[key])) throw missingHousing();
     for (const entry of Object.values(manifest.assets)) {
         if (typeof entry?.file !== 'string' || !/^[a-z0-9-]+\.glb$/.test(entry.file)) throw missingHousing();

@@ -176,6 +176,50 @@
         ]
       },
       "triangles": 45631
+    },
+    "smithHut": {
+      "file": "smith-hut.glb",
+      "source": "Assets/Houses/Smith/Hut/Smith-hut.glb",
+      "sourceBytes": 19781020,
+      "textureLimit": 1024,
+      "sourceTriangles": 6328,
+      "sourceSha256": "86a6b14847c19e551052301cc312d19b80e08546bc36649920f7f628c61366f8",
+      "bytes": 2967648,
+      "bounds": {
+        "min": [
+          -1.7322630882263184,
+          0,
+          -2.2126872539520264
+        ],
+        "max": [
+          1.7386832237243652,
+          4,
+          1.8545902967453003
+        ]
+      },
+      "triangles": 6328
+    },
+    "smithHomestead": {
+      "file": "smith-homestead.glb",
+      "source": "Assets/Houses/Smith/Homestead/Smith-homestead.glb",
+      "sourceBytes": 20471496,
+      "textureLimit": 1024,
+      "sourceTriangles": 7613,
+      "sourceSha256": "f31b050edc1f8a05cf2c6bcba1d043b59f32682c49d937af95eb012f8e16a570",
+      "bytes": 2853348,
+      "bounds": {
+        "min": [
+          -3.8140993118286133,
+          0,
+          -2.829296112060547
+        ],
+        "max": [
+          3.807544231414795,
+          5,
+          2.8449153900146484
+        ]
+      },
+      "triangles": 7613
     }
   }
 }
