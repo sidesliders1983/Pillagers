@@ -33,6 +33,27 @@ unmuted intent, a fresh page requires explicit Enable sound. No unrelated camera
 tap grants consent. Master, Ambience, World and Interface preferences live only
 in `fjordside.audio.v1`, outside canonical campaign saves. Sound never advances time.
 
+### iPhone silent-mode routing
+
+The owner's first listening pass heard the proof on PC but not on iPhone. The
+eight-second iPhone recording shows an active context (`Sound enabled`), nonzero
+volume controls and the silent-mode bell icon. Its recorded audio is digital
+silence; this supports a routing problem but does not establish the device output
+or prove the root cause. The attachment SHA-256 is
+`f03e0086d5afb61fc240ef8e9cddbcd192fea4f325514c34fe95857b4d7de60b`.
+
+Safari's automatic Web Audio route can follow the ringer switch even with a running
+context. After explicit Enable sound, the owner now requests the optional
+`navigator.audioSession.type = 'playback'` before resuming. Unsupported or rejected
+routing falls back to ordinary Web Audio. World replacement preserves the route;
+application disposal restores the previous type if it still owns that setting.
+Mute and hidden-page suspension still apply. No silent media loop, microphone,
+extra context or background playback is introduced. Playback routing may interrupt
+other media according to the browser's policy.
+
+Reference: [WebKit's silent-ringer report and supported playback route](https://bugs.webkit.org/show_bug.cgi?id=237322#c6).
+The correction still needs a physical iPhone listening pass with silent mode on.
+
 ## Listening and scheduling contract
 
 The virtual listener is 1.7 m above the camera's terrain focus. Water/outside-land
@@ -96,17 +117,20 @@ pnpm test
 Tests exercise actual public audio/policy/UI ownership and actual shared-campaign
 commands/save-load. External Web Audio, network, DOM and time are controlled test
 boundaries; native decoding/output and layout are not emulated evidence.
-Thirty-four focused audio/entry/loading/lifecycle/quality tests passed, along with
+Thirty-five focused audio/entry/loading/lifecycle/quality tests passed, along with
 TypeScript, tracked-public-asset and complete character/Lab-preview validation.
 Formatting was reviewed manually and with `git diff --check`; no project formatter
 is configured. The full suite runs in current-head CI; the workstation has only
 about 120 MiB free, so another full local asset-writing suite was not started.
 The [raw policy probe](qa/soundscape-228/policy.json) measures Node JS decisions with
 128 synthetic inputs, not complete game frames, browser audio CPU or audible quality.
+It remains historical evidence from before the iPhone routing correction; no
+per-frame scheduling code changed in that correction.
 
-No controllable browser was available during implementation. Real desktop playback,
-loop boundaries, stereo/mono, background/interruption and iPhone/iPad listening remain
-unverified. The current physical-device/frame-cost gate stays under #151. Keep the PR
+No controllable browser was available during implementation. The owner heard the
+proof on PC; loop boundaries, stereo/mono, background/interruption and successful
+iPhone/iPad listening remain unverified. The current physical-device/frame-cost
+gate stays under #151. Keep the PR
 draft until its checks and first in-game owner listening review are recorded.
 
 Stop at this foundation. #229 supplies reviewed Pixabay recordings and bounded

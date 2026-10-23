@@ -18,6 +18,7 @@ type Voice = { source: AudioBufferSourceNode; gain: GainNode; panner?: PannerNod
     cue: SoundCue; revision?: number; loop: boolean };
 type World = { alive: boolean; sources: readonly SoundEmitter[]; last: number; plan: Soundscape;
     camera?: SoundCamera; paused: boolean; listener?: ReturnType<Soundscape['update']>['listener'] };
+type PlaybackSession = { type: string };
 const preferenceKey = 'fjordside.audio.v1';
 const defaults: SoundPreferences = { muted: true, master: .5, ambience: .35, world: .55, interface: .35 };
 
@@ -25,6 +26,7 @@ const defaults: SoundPreferences = { muted: true, master: .5, ambience: .35, wor
 export class FjordAudio {
     changed?: () => void;
     private context?: AudioContext;
+    private playbackSession?: { session: PlaybackSession; previous: string };
     private master?: GainNode;
     private buses = new Map<SoundBus, GainNode>();
     private voices = new Map<string, Voice>();
@@ -78,6 +80,7 @@ export class FjordAudio {
                     this.changed?.();
                 });
             }
+            this.requestPlaybackSession();
             this.consent = true;
             this.configure({ muted: false });
             await this.resume();
@@ -87,6 +90,17 @@ export class FjordAudio {
             this.changed?.();
             return false;
         }
+    }
+    private requestPlaybackSession() {
+        try {
+            const session = typeof navigator === 'undefined' ? undefined :
+                (navigator as Navigator & { audioSession?: PlaybackSession }).audioSession;
+            if (!session) return;
+            this.playbackSession ??= { session, previous: session.type };
+            // Safari's default ambient route follows the iPhone ringer switch.
+            // Explicit Enable sound requests media playback, still suspended while hidden.
+            session.type = 'playback';
+        } catch { /* Optional routing support must not prevent ordinary Web Audio playback. */ }
     }
     configure(values: Partial<SoundPreferences>, persist = true) {
         if (typeof values.muted === 'boolean') this.preferences.muted = values.muted;
@@ -407,5 +421,10 @@ export class FjordAudio {
         for (const gain of this.buses.values()) gain.disconnect();
         this.buses.clear();
         try { await this.context?.close(); } catch { /* Browser teardown is best effort. */ }
+        const previous = this.playbackSession;
+        this.playbackSession = undefined;
+        try {
+            if (previous?.session.type === 'playback') previous.session.type = previous.previous;
+        } catch { /* Optional device routing may already be unavailable during teardown. */ }
     }
 }

@@ -28,6 +28,40 @@ const camera = { focus: { x: 0, y: 0, z: 0 }, forward: { x: 0, z: -1 }, distance
 const emitter = { id: 'a', cue: 'local', permitted: true, position: { x: 1, y: 0, z: 0 } };
 const settle = () => new Promise(resolve => setImmediate(resolve));
 
+test('explicit activation requests media playback even when the device ringer is silent', async () => {
+    const { FjordAudio } = load('../src/audio/FjordAudio.ts');
+    const originalNavigator = Object.getOwnPropertyDescriptor(globalThis, 'navigator');
+    const session = { type: 'auto' };
+    Object.defineProperty(globalThis, 'navigator', {
+        configurable: true,
+        value: { audioSession: session },
+    });
+    const context = webAudio();
+    context.resume = async function () {
+        assert.equal(session.type, 'playback', 'Media routing must be chosen before resuming sound');
+        this.state = 'running';
+    };
+    const audio = new FjordAudio({ createContext: () => context });
+    try {
+        assert.equal(session.type, 'auto', 'Creating the owner must not change device routing');
+        assert.equal(await audio.enable(), true);
+        const world = audio.world(manifest);
+        world.update(camera, [emitter], false);
+        await settle();
+        assert.equal(audio.inspect().playing, 1);
+        audio.setHidden(true);
+        assert.equal(audio.inspect().playing, 0, 'Playback routing does not permit background sound');
+        world.dispose();
+        assert.equal(session.type, 'playback', 'World replacement preserves the application route');
+        await audio.dispose();
+        assert.equal(session.type, 'auto', 'Application disposal restores the prior route');
+    } finally {
+        await audio.dispose();
+        if (originalNavigator) Object.defineProperty(globalThis, 'navigator', originalNavigator);
+        else delete globalThis.navigator;
+    }
+});
+
 test('a delayed source cannot play an obsolete in-place revision', async () => {
     const { FjordAudio } = load('../src/audio/FjordAudio.ts');
     const context = webAudio();
