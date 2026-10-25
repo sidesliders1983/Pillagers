@@ -192,7 +192,8 @@ export class FirstStepsGuide {
             if (this.progress.status === 'active') this.save({ ...this.progress, status: 'skipped' });
             this.visible = false;
             this.root.hidden = true;
-            document.querySelector<HTMLElement>('#fjord-menu > summary')?.focus({ preventScroll: true });
+            document.querySelector<HTMLElement>(isMobileLayout() ? '#fjord-mobile-menu' : '#fjord-first-steps')
+                ?.focus({ preventScroll: true });
             return;
         }
         if (action === 'replay' || action === 'resume') {
@@ -347,7 +348,7 @@ export class FirstStepsGuide {
                             `data-view-key="objective:${item.id}" data-objective="${item.id}" aria-pressed="${item.id === goal.id}"`)).join('')}
                     </details>
                     <p class="first-steps-muted">Every chapter is open. Longer discoveries, upgrades and conflict never block free play.</p>
-                    <div class="first-steps-footer">${button('skip', 'Close journey')}<span>Journey / Help stays in the game menu.</span></div>`;
+                    <div class="first-steps-footer">${button('skip', 'Close journey')}<span>Open Need help? in the navigation menu to return.</span></div>`;
             }
         }
         const announcement = progress.status === 'active' ?

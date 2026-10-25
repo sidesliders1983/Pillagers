@@ -25,6 +25,7 @@ import { ClanBookReader } from '../lore/ClanBookReader';
 import type { FjordCalendar } from './FjordCalendar';
 import { FjordHeader, fjordHeaderHTML } from './FjordHeader';
 import { MobileShell } from './MobileShell';
+import { fjordNavigationHTML } from './FjordNavigation';
 import { ScreenAwakeControl } from '../ui/ScreenAwakeControl';
 import { SelectionLabels } from './SelectionLabels';
 import { ProductionLabels } from './ProductionLabels';
@@ -173,14 +174,7 @@ export class FjordPlay {
                 <details class="attention-weather"><summary>Weather &amp; exposure</summary><section id="fjord-weather-information" aria-label="Annual weather forecast"></section></details>
                 <details ${query.has('debugLifecycle') ? '' : 'hidden'}><summary>Developer diagnostics</summary><pre id="fjord-diagnostics"></pre></details></div><ul id="fjord-identities" hidden></ul>
             </section></section>
-            <nav id="fjord-navigation" aria-label="Settlement navigation">
-                <button type="button" id="fjord-mobile-menu" aria-label="Settlement navigation" aria-expanded="false" aria-controls="fjord-navigation-drawer">${icon('menu')}</button>
-                <div id="fjord-navigation-drawer">
-                    <button type="button" data-surface="settlement">${icon('home')}Settlement</button>
-                    <button type="button" id="fjord-book">${icon('book')}Clan Book</button>
-                </div>
-                <button type="button" data-surface="expeditions">${icon('route')}Expeditions</button>
-            </nav><button id="fjord-attention" type="button" data-surface="attention">${icon('alert')}<span class="fjord-attention-label">Attention</span> <span id="fjord-attention-count">0</span></button>
+            ${fjordNavigationHTML()}<button id="fjord-attention" type="button" data-surface="attention">${icon('alert')}<span class="fjord-attention-label">Attention</span> <span id="fjord-attention-count">0</span></button>
             <button type="button" id="fjord-attention-toast" aria-label="Open Activity Center" hidden></button><footer><p id="fjord-notice" role="status">Loading the Fjord. Simulation controls remain available.</p></footer></main>`;
         const savedPresentation = this.shared.presentation;
         let restoredCamera = entry.kind !== 'continue' ? undefined : savedPresentation?.camera;

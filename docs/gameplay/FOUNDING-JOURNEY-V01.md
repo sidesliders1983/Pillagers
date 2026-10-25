@@ -24,7 +24,7 @@ produces resources, draws RNG or simulates time while the game is closed.
 ## Optional journey
 
 New histories receive the invitation after the preserved founding story closes.
-Continue/import keep guidance closed; **Game menu → Founding Journey / Help**
+Continue/import keep guidance closed; **Navigation menu → Need help?**
 reopens it manually. Collapse/Escape, Close journey, Resume and Replay guidance
 reuse the existing small card. Mobile navigation folds the card away, and normal
 selection/workspace/map controls retain their space.
@@ -65,6 +65,11 @@ are no extra buildings, items, sightings or raids to repeat for a checkbox.
 | conflict / personal-gear | Actual supported gear assigned to named people, including existing assignments or historical genuine EquipmentAssigned. A target or stored spear alone is not equipped readiness. |
 | conflict / pillage | A genuinely accepted Pillage dispatch. It is optional; no success, taking People/livestock, or particular cargo is required. |
 | conflict / mission-result | Open the real returned Pillage's Activity Center report. Save the actual event ID; the same mission and result remain selected after load. Failure, casualties, lost gear and legitimately empty loot count as consequences. |
+
+Need help? uses the shared question-mark icon in the main navigation. On
+compact/mobile screens it is inside the bottom-right menu, below Clan Book.
+Choosing it closes that drawer and opens the existing Founding Journey with
+saved progress. The initial new-campaign invitation and paused clock are unchanged.
 
 Each objective presents its actual steps as a read-only checklist. An outlined
 box becomes a visible check mark as soon as the corresponding inspection or real

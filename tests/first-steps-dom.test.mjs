@@ -10,22 +10,25 @@ const { SettlementPanel } = loadDOMSource('../src/play/SettlementPanel.ts');
 const { FirstStepsGuide } = loadDOMSource('../src/fjord-play/FirstStepsGuide.ts');
 const { FoundingBookWindow } = loadDOMSource('../src/lore/FoundingBookWindow.ts');
 const { fjordHeaderHTML } = loadDOMSource('../src/fjord-play/FjordHeader.ts');
+const { fjordNavigationHTML } = loadDOMSource('../src/fjord-play/FjordNavigation.ts');
+const { MobileShell } = loadDOMSource('../src/fjord-play/MobileShell.ts');
 
 function fixture(mobile = false, owner = new SharedSettlement(newFjordScenario(32))) {
     const dom = new JSDOM(`<main id="fjord-play">${fjordHeaderHTML()}
         <section id="fjord-management" hidden><div id="entity-panel"></div></section>
         <section id="fjord-workspace" hidden tabindex="-1"><h2 id="fjord-workspace-title"></h2>
             <div id="fjord-directory"></div><section data-workspace-area="expeditions" hidden></section></section>
-        <nav id="fjord-navigation"></nav><button id="fjord-attention"><span id="fjord-attention-count"></span></button></main>`, { pretendToBeVisual: true });
+        ${fjordNavigationHTML()}<button id="fjord-attention"><span id="fjord-attention-count"></span></button></main>`, { pretendToBeVisual: true });
     const previous = {};
     for (const name of ['window', 'document', 'Node', 'Element', 'HTMLElement', 'HTMLInputElement',
         'HTMLSelectElement', 'HTMLOptionElement', 'HTMLDetailsElement', 'HTMLButtonElement',
-        'HTMLDialogElement', 'AbortController', 'CustomEvent']) {
+        'HTMLDialogElement', 'AbortController', 'CustomEvent', 'Event']) {
         previous[name] = globalThis[name];
         globalThis[name] = name === 'window' ? dom.window : dom.window[name];
     }
     previous.matchMedia = globalThis.matchMedia;
-    globalThis.matchMedia = () => ({ matches: mobile });
+    globalThis.matchMedia = () => ({ matches: mobile, addEventListener() {}, removeEventListener() {} });
+    const mobileShell = new MobileShell(document.querySelector('#fjord-play'));
     let guide, writes = 0;
     const navigation = [];
     const legacy = new SettlementPanel();
@@ -74,7 +77,7 @@ function fixture(mobile = false, owner = new SharedSettlement(newFjordScenario(3
     const chapter = id => { guide.open(); click('chapter', `[data-chapter="${id}"]`); };
     return { owner, dom, guide, ui, refresh, click, objective, chapter, navigation, writes: () => writes,
         dispose() {
-            guide.dispose(); ui.dispose(); dom.window.close();
+            mobileShell.dispose(); guide.dispose(); ui.dispose(); dom.window.close();
             for (const [name, value] of Object.entries(previous)) {
                 if (value === undefined) delete globalThis[name]; else globalThis[name] = value;
             }
@@ -82,7 +85,7 @@ function fixture(mobile = false, owner = new SharedSettlement(newFjordScenario(3
 }
 
 test('the actual founding story hands off to an optional journey; both choices stay paused and old callbacks cannot reopen it', () => {
-    const f = fixture();
+    const f = fixture(true);
     let story;
     try {
         const canonical = f.owner.session.saveJSON();
@@ -106,6 +109,18 @@ test('the actual founding story hands off to an optional journey; both choices s
         assert.equal(f.owner.session.running, false);
         assert.equal(f.guide.root.hidden, true);
         assert.equal(f.owner.session.saveJSON(), canonical);
+        const help = document.querySelector('#fjord-navigation-drawer #fjord-first-steps');
+        assert.ok(help);
+        assert.equal(help.textContent.trim(), 'Need help?');
+        assert.ok(help.querySelector('svg[aria-hidden="true"]'), 'Help uses the shared question-mark icon');
+        assert.equal(document.querySelector('#fjord-header #fjord-first-steps'), null);
+        document.querySelector('#fjord-mobile-menu').click();
+        assert.equal(document.querySelector('#fjord-mobile-menu').getAttribute('aria-expanded'), 'true');
+        help.click();
+        assert.equal(document.querySelector('#fjord-mobile-menu').getAttribute('aria-expanded'), 'false');
+        assert.equal(f.guide.root.hidden, false);
+        assert.equal(f.owner.session.running, false);
+        assert.equal(f.owner.session.saveJSON(), canonical, 'Navigation help does not start or change the campaign');
         story = new FoundingBookWindow(f.owner.session.book.snapshot().chapters[0]);
         f.guide.newStart(story);
         f.guide.restore(); story.dispose();

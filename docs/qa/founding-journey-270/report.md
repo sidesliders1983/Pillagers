@@ -36,6 +36,9 @@ completion facts. Desktop/touch DOM checks follow four real inspections through
 completion and preserve progress through save/load. Show me follows the first
 unfinished step. Every model fixture asserts checklist/objective consistency,
 including historical credit, waiting missions, real gear and witnessed species.
+The real shared navigation markup and MobileShell are used to open Need help?:
+the question-mark entry closes the mobile drawer, preserves paused playback and
+does not change canonical campaign bytes.
 
 The fact tests use real Core construction, specialization, upgrades, production,
 equipment assignment, paid exploration, witnessed sightings, Recon, Pillage and
@@ -104,7 +107,7 @@ first-frame recording, screenshot, frame-rate claim or physical iPhone/desktop
 layout certification is claimed. jsdom touch branches are not a physical device.
 
 The owner tested the portrait phone preview and requested explicit automatic
-subobjective checklists; that steering is implemented. This does not complete
+subobjective checklists and a Need help? navigation entry; that steering is implemented. This does not complete
 acceptance of all chapters. The new chapter copy, phone-landscape/desktop layout and a small
 uncoached playtest still need review. Use the questions in the gameplay contract;
 do not wait for a hunt or raid to finish before collecting comprehension feedback.

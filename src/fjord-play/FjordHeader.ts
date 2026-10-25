@@ -25,7 +25,6 @@ export function fjordHeaderHTML(): string {
                     <h1>FjordSide</h1>
                     <span id="fjord-menu-pacing-slot"></span>
                     <span id="fjord-menu-next-slot"></span>
-                    <button id="fjord-first-steps" type="button">Founding Journey / Help</button>
                     <button id="clan-book-open" type="button">Clan Book</button><button id="fjord-expeditions-open" type="button">Expedition groups</button>
                     <label>Quality<select id="fjord-quality"><option value="low"${defaultPresentationPreferences.quality === 'low' ? ' selected' : ''}>Low</option>
                         <option value="standard"${defaultPresentationPreferences.quality === 'standard' ? ' selected' : ''}>Standard</option></select></label>
@@ -57,7 +56,7 @@ export function fjordHeaderHTML(): string {
                         <label class="check"><input id="fjord-founders" type="checkbox" checked> Use the same founders</label>
                         <button id="fjord-new">New campaign from seed</button>
                         <button id="fjord-restart">Restart with same founders</button>
-                        <p>New and restarted campaigns offer First steps when ready. Explore on my own starts play; guidance starts paused. Returning to the game or loading a save pauses the clock.
+                        <p>New and restarted campaigns offer the Founding Journey when ready. Both choices stay paused until you press Play. Returning to the game or loading a save pauses the clock.
                             Your browser keeps the campaign locally.</p>
                     </div></details>
                 </div>
