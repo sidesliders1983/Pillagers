@@ -40,3 +40,31 @@ test('sound controls require explicit activation and keep unavailable audio outs
         }
     }
 });
+
+
+test('ordinary sound settings describe the installed mix and still wait for explicit activation', () => {
+    const dom = new JSDOM('<main></main>', { url: 'http://game.invalid/fjord-play', pretendToBeVisual: true });
+    const names = ['window', 'document', 'HTMLElement', 'AbortController'];
+    const saved = Object.fromEntries(names.map(name => [name, Object.getOwnPropertyDescriptor(globalThis, name)]));
+    for (const name of names) Object.defineProperty(globalThis, name,
+        { configurable: true, value: name === 'window' ? dom.window : dom.window[name] });
+    let controls;
+    try {
+        const { FjordAudio } = loadDOMSource('../src/audio/FjordAudio.ts');
+        const { AudioControls } = loadDOMSource('../src/audio/AudioControls.ts');
+        let attempts = 0;
+        const audio = new FjordAudio({ createContext: () => { attempts++; throw new Error('Not activated'); } });
+        controls = new AudioControls(audio, false);
+        assert.equal(attempts, 0);
+        assert.doesNotMatch(controls.root.textContent, /No approved sound pack/);
+        assert.match(controls.root.textContent, /nearby activity/);
+        assert.equal(controls.root.querySelector('[role="status"]').textContent, 'Sound off.');
+    } finally {
+        controls?.dispose();
+        dom.window.close();
+        for (const name of names) {
+            if (saved[name]) Object.defineProperty(globalThis, name, saved[name]);
+            else delete globalThis[name];
+        }
+    }
+});

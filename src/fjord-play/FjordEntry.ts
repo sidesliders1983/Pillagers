@@ -9,6 +9,7 @@ import { LoadingRunDiagnostics } from './LoadingRunDiagnostics';
 import { PlaytestPerformance } from './PlaytestPerformance';
 import { FjordAudio } from '../audio/FjordAudio';
 import { AudioControls } from '../audio/AudioControls';
+import { selectFjordSoundPack } from '../audio/SoundPack';
 
 export interface CampaignStartAttempt {
     kind: 'continue' | 'restart' | 'new';
@@ -79,10 +80,11 @@ export async function runFjordEntry(ports: EntryPorts = {
     let audioStorage: Storage | undefined;
     try { audioStorage = window.localStorage; } catch { /* Optional presentation preferences. */ }
     const audio = new FjordAudio({ storage: audioStorage });
-    const audioControls = new AudioControls(audio, new URLSearchParams(window.location.search).get('audioProof') === '1');
-    if (new URLSearchParams(window.location.search).get('audioMix') === '1')
+    const soundSelection = selectFjordSoundPack(window.location.search);
+    const audioControls = new AudioControls(audio, soundSelection.mode === 'proof');
+    if (soundSelection.mode === 'review')
         audioControls.root.querySelector('[data-audio-pack]')!.textContent =
-            'Settlement mix review: local candidate recordings. Listening and publication review are pending.';
+            'Sound mix review: explicit QA mode. Ordinary gameplay uses the published mix.';
     const showShell = () => {
         const content = shell();
         content.parentElement!.append(diagnostics.settings());

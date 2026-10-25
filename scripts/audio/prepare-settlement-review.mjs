@@ -13,7 +13,7 @@ const cues = manifest.cues.filter(cue => cue.variants.some(id => ids.includes(id
 if (assets.length !== ids.length) throw new Error('Required private review candidate is missing');
 writeFileSync('src/audio/SettlementSoundPack.ts',
     "import type { SoundManifest } from './FjordAudio';\n\n" +
-    '/** Opt-in local mixed-scene review only. Audio bytes remain outside Git.\n' +
-    ' * Autumn source correction, listening and publication remain open gates. */\n' +
+    '/** Explicit mixed-scene review variant. Accepted v1 files are also published for ordinary gameplay.\n' +
+    ' * Future candidates still require source and owner acceptance before publication. */\n' +
     'export const settlementReviewPack: SoundManifest = ' + JSON.stringify({ assets, cues }, null, 4) + ';\n');
 console.log(JSON.stringify({ assets: assets.length, cues: cues.length }));

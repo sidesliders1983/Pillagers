@@ -1,7 +1,9 @@
 import type { SoundManifest } from './FjordAudio';
+import { publishedSoundPack } from './PublishedSoundPack';
+import { settlementReviewPack } from './SettlementSoundPack';
 
-/** #229 installs reviewed runtime assets here; missing production cues remain silent. */
-export const approvedSoundPack: SoundManifest = { assets: [], cues: [] };
+/** The accepted game mix; playback still requires explicit user activation. */
+export const approvedSoundPack: SoundManifest = publishedSoundPack;
 
 /** Self-authored signal fixtures for mechanics, never passed off as recorded ambience. */
 export const proofSoundPack: SoundManifest = {
@@ -17,3 +19,13 @@ export const proofSoundPack: SoundManifest = {
             cooldown: [3, 5], range: 45, priority: 1, limit: 2, pitch: [1, 1] },
     ],
 };
+
+/** Shared by settings and scene creation so a normal URL cannot select an empty QA path. */
+export function selectFjordSoundPack(search: string): {
+    mode: 'game' | 'proof' | 'review'; manifest: SoundManifest;
+} {
+    const query = new URLSearchParams(search);
+    if (query.get('audioProof') === '1') return { mode: 'proof', manifest: proofSoundPack };
+    if (query.get('audioMix') === '1') return { mode: 'review', manifest: settlementReviewPack };
+    return { mode: 'game', manifest: approvedSoundPack };
+}

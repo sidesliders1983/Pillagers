@@ -59,3 +59,16 @@ test('a changed source revision uses its current loop variant instead of a retir
     assert.equal(sounds.update(0, camera, [source], false).voices[0].variant, 'old');
     assert.equal(sounds.update(1, camera, [{ ...source, cue: 'second', revision: 2 }], false).voices[0].variant, 'new');
 });
+
+
+test('ordinary Fjord audio selects the published game mix and keeps synthetic proof explicitly opt-in', () => {
+    const { selectFjordSoundPack } = load('../src/audio/SoundPack.ts');
+    const game = selectFjordSoundPack('');
+    assert.equal(game.mode, 'game');
+    assert.ok(game.manifest.assets.some(asset => asset.id === 'pig' && asset.path.startsWith('game-assets/audio/')));
+    assert.ok(!game.manifest.assets.some(asset => asset.proof));
+    assert.equal(selectFjordSoundPack('?audioMix=1').mode, 'review');
+    const proof = selectFjordSoundPack('?audioProof=1&audioMix=1');
+    assert.equal(proof.mode, 'proof');
+    assert.ok(proof.manifest.assets.every(asset => asset.proof));
+});

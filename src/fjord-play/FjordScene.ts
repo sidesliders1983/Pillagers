@@ -43,8 +43,7 @@ import type { PortraitRequest } from '../characters/CharacterPortraits';
 import type { PlaytestPerformance } from './PlaytestPerformance';
 import type { FjordAudio } from '../audio/FjordAudio';
 import type { SoundEmitter } from '../audio/Soundscape';
-import { approvedSoundPack, proofSoundPack } from '../audio/SoundPack';
-import { settlementReviewPack } from '../audio/SettlementSoundPack';
+import { selectFjordSoundPack } from '../audio/SoundPack';
 import { SettlementSounds, type SettlementSoundFrame } from '../audio/SettlementSounds';
 import { WorkContacts } from '../audio/WorkContacts';
 import { WildlifeSounds } from '../audio/WildlifeSounds';
@@ -74,8 +73,9 @@ export function createFjordScene(options: {
     const session = shared.session, campaign = shared.fjord;
     const selectionLabels = labels.selection, productionLabels = labels.production;
     const query = new URLSearchParams(location.search);
-    const proofAudio = query.get('audioProof') === '1';
-    const mixedAudio = !proofAudio && query.get('audioMix') === '1';
+    const soundSelection = selectFjordSoundPack(location.search);
+    const proofAudio = soundSelection.mode === 'proof';
+    const settlementAudio = !proofAudio;
     let audioWorld: ReturnType<FjordAudio['world']> | undefined;
     let audioSources: SoundEmitter[] = [];
     let settlementSounds: SettlementSounds | undefined;
@@ -278,11 +278,10 @@ export function createFjordScene(options: {
             if (discoveryFog) scene.add(discoveryFog.root);
             const fire = campaign.readProjection().campfire;
             const firePosition = new Vector3(fire.transform.x, fire.transform.y, fire.transform.z);
-            audioWorld = options.audio?.world(proofAudio ? proofSoundPack :
-                mixedAudio ? settlementReviewPack : approvedSoundPack, import.meta.env.BASE_URL);
-            settlementSounds = mixedAudio ? new SettlementSounds(blueprint) : undefined;
+            audioWorld = options.audio?.world(soundSelection.manifest, import.meta.env.BASE_URL);
+            settlementSounds = settlementAudio ? new SettlementSounds(blueprint) : undefined;
             workContacts = new WorkContacts();
-            wildlifeSounds = mixedAudio ? new WildlifeSounds(session.readSnapshot().events, settlementReviewPack) : undefined;
+            wildlifeSounds = settlementAudio ? new WildlifeSounds(session.readSnapshot().events, soundSelection.manifest) : undefined;
             soundContacts = 0;
             lastSoundContact = undefined;
             audioSources = proofAudio ? [
@@ -665,7 +664,7 @@ export function createFjordScene(options: {
         wildlife?.setHumans([...layer!.humanPositions(), ...(rivalScene?.humanPositions() ?? [])]);
         wildlife?.useCanonical(session.readSnapshot().wildlife, host.tickIntervalSeconds);
         wildlife?.advance(motionDelta, running, camera);
-        if (mixedAudio && audioWorld && settlementSounds) {
+        if (settlementAudio && audioWorld && settlementSounds) {
             const visible = (x: number, z: number) =>
                 !knownTerrain || discoveryAt(knownTerrain, x, z) === 'visible';
             const work = workContacts.sample(frameStarted / 1000,
@@ -708,8 +707,8 @@ export function createFjordScene(options: {
         productionLabels.setAnchors(layer!.productionAnchors());
         if (performance.now() - lastDiagnostics > 500) {
             if (options.audio) canvas.dataset.audio = JSON.stringify(options.audio.sample());
-            if (mixedAudio) canvas.dataset.audioMix = JSON.stringify({
-                scope: 'Local candidate mix', logicalSources: audioSources.length,
+            if (settlementAudio) canvas.dataset.audioMix = JSON.stringify({
+                scope: soundSelection.mode === 'review' ? 'Local candidate mix' : 'Published game mix', logicalSources: audioSources.length,
                 projectionLastMs: soundProjectionMs, visualContacts: soundContacts,
                 lastContact: lastSoundContact,
             });

@@ -8,6 +8,10 @@ import { terrainIO } from './terrain-io.mjs';
 import { getBounds } from '@gltf-transform/functions';
 import { validatePreparedAssets } from './validate-prepared-assets.mjs';
 
+// Public audio must pass the same retained-file and per-source publication gate on every build.
+execFileSync(process.execPath, ['scripts/audio/validate.mjs',
+    'public/game-assets/audio/release.json', '--publication'], { stdio: 'inherit' });
+
 const root = resolve('public');
 const prepared = await validatePreparedAssets();
 const { generatedHouseFiles } = loadTypeScript(new URL('../src/config/HousingAssets.ts', import.meta.url));

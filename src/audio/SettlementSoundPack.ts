@@ -1,7 +1,7 @@
 import type { SoundManifest } from './FjordAudio';
 
-/** Opt-in local mixed-scene review only. Audio bytes remain outside Git.
- * Autumn source correction, listening and publication remain open gates. */
+/** Explicit mixed-scene review variant. Accepted v1 files are also published for ordinary gameplay.
+ * Future candidates still require source and owner acceptance before publication. */
 export const settlementReviewPack: SoundManifest = {
     "assets": [
         {
