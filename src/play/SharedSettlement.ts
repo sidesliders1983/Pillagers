@@ -185,6 +185,7 @@ export function localSettlementText(storage: Pick<Storage, 'getItem'>): string {
     return (saved && saved.campaign.seed === campaign.seed ?
         JSON.stringify({ ...saved, campaign,
             attention: matchingHistory ? saved.attention : undefined,
+            firstSteps: matchingHistory ? saved.firstSteps : undefined,
             wildlifeReadIds: matchingHistory ? saved.wildlifeReadIds : undefined,
             narrative: saved.narrative?.canonicalIdentity === historyIdentity(canonical) ? saved.narrative : undefined }) : canonical);
 }

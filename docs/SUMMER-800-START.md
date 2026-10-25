@@ -20,7 +20,7 @@ Fjord new/restart creation passes the explicit phase through the shared session 
 
 ## Scene and narrative
 
-The normal seasonal projection supplies lighting, ground, foliage, structures and water at the first ready frame. Seasonal snow is absent at tick 500; the separate climate snow-retention study is unchanged. Loading contributes no simulated time, and the existing auto-start runs only after scene readiness. The annual weather panel is labelled **Year 800 · … annual weather**, distinguishing its saved annual rule from the seasonal HUD.
+The normal seasonal projection supplies lighting, ground, foliage, structures and water at the first ready frame. Seasonal snow is absent at tick 500; the separate climate snow-retention study is unchanged. Loading contributes no simulated time, and every ordinary campaign entry stays paused after scene readiness until the player presses Play. The annual weather panel is labelled **Year 800 · … annual weather**, distinguishing its saved annual rule from the seasonal HUD.
 
 The frozen opening records a source-backed Summer arrival. The first five-Winter checkpoint is still 805:0, but its observed interval is 4.5 years (800:500 → 805:0). Its complete factual ledger reconciles that shorter interval; quiet prose does not call it five full elapsed years. Later chapter timing and “winters old” ages remain unchanged. Existing published books are not rewritten.
 
@@ -31,3 +31,12 @@ This updates #32's historical Winter-start baseline only for new Fjord campaigns
 The cinematic top-down loading sequence and camera flight in #153 have not been implemented. This slice establishes the canonical phase and verifies the existing loading/first-scene path. #153 must consume this actual saved phase for preview and arrival, retain the loading pause, and reveal no hidden CPU settlement details. No claim of cinematic acceptance is made here.
 
 See [first-boundary measurements and browser review](qa/summer-founding/report.md). Default activation has owner approval; balance changes still require separate acceptance; historical reports retain their original settings.
+
+## First-steps orientation (#263)
+
+New and restarted campaigns now hold the existing clock while the player reads
+the preserved founding chapter and chooses **Guide me** or **Explore on my own**.
+Both guidance choices stay paused. Ordinary Continue and all New/Restart paths also require an explicit Play; only an intentional internal view handoff may preserve existing playback.
+Continue/import/warm recovery do not automatically reopen the invitation. This
+changes only presentation and pause intent, not the Summer founding state,
+resources or annual rules. See [First steps](gameplay/FIRST-STEPS-V01.md).

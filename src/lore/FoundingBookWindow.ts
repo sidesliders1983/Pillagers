@@ -4,6 +4,13 @@ import type { BookChapter } from './ClanBook';
 export class FoundingBookWindow {
     readonly root = document.createElement('section');
     private closed = false;
+    private closedListeners = new Set<() => void>();
+    get isOpen() { return !this.closed; }
+    whenClosed(listener: () => void) {
+        if (this.closed) listener();
+        else this.closedListeners.add(listener);
+        return () => this.closedListeners.delete(listener);
+    }
     constructor(chapter: BookChapter) {
         this.root.id = 'loading-clan-book';
         this.root.setAttribute('role', 'region');
@@ -60,9 +67,13 @@ export class FoundingBookWindow {
         text.scrollTop = scroll;
     }
     dispose() {
+        if (this.closed) return;
         this.closed = true;
         this.root.closest('#island-loading')?.classList.remove('island-has-book');
         this.root.remove();
         document.removeEventListener('click', this.openFullBook);
+        const listeners = [...this.closedListeners];
+        this.closedListeners.clear();
+        for (const listener of listeners) listener();
     }
 }

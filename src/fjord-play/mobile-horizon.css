@@ -4,6 +4,7 @@
 #fjord-navigation-drawer > [data-surface="settlement"] { order: 1; }
 #fjord-navigation > [data-surface="expeditions"] { order: 2; }
 #fjord-navigation-drawer > #fjord-book { order: 3; }
+#fjord-navigation-drawer > #fjord-first-steps { order: 5; }
 #fjord-next-slot:empty, #fjord-menu-next-slot:empty { display: none; }
 
 #fjord-play.fjord-mobile {

@@ -56,7 +56,7 @@ export function fjordHeaderHTML(): string {
                         <label class="check"><input id="fjord-founders" type="checkbox" checked> Use the same founders</label>
                         <button id="fjord-new">New campaign from seed</button>
                         <button id="fjord-restart">Restart with same founders</button>
-                        <p>New and restarted campaigns start when ready. Returning to the game or loading a save pauses the clock.
+                        <p>New and restarted campaigns offer the Founding Journey when ready. Both choices stay paused until you press Play. Returning to the game or loading a save pauses the clock.
                             Your browser keeps the campaign locally.</p>
                     </div></details>
                 </div>

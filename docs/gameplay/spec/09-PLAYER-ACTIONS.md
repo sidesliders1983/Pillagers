@@ -76,3 +76,16 @@ The panel shows whether it is burning, remaining prepaid fuel, and the cost to r
 Lighting without prepaid fuel requires one Material; an unavailable action explains why.
 [Fuel rules](../../SETTLEMENT-CAMPFIRE.md#campfire-fuel--97-spike) apply throughout the year.
 Ceremonies and the future settlement information panel remain outside this spike.
+
+## The Founding Journey — alpha presentation (#263 / #270)
+
+New players may use three optional chapters about their autonomous community,
+exploration/discovery and preparation for conflict. Every chapter is freely
+accessible. Real homes, upgrades, witnessed species, Recon, personal supported
+equipment and optional Pillage outcomes count, including actions done out of order.
+Show me navigates/reviews existing UI; it never issues Core commands or supplies
+resources. Skip, defer and replay are per-history presentation metadata.
+All ordinary campaign entries stay paused until deliberate Play.
+
+See [The Founding Journey v0.1](../FOUNDING-JOURNEY-V01.md) for the current
+predicates, knowledge limits, paused-entry exception and QA contract.

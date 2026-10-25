@@ -1,3 +1,4 @@
+import { renderMissionOutcome } from '../fjord-play/MissionOutcomeView';
 import { icon, type FjordIcon } from '../fjord-play/FjordIcons';
 import type { SharedSettlement } from '../play/SharedSettlement';
 import { attentionLimits, type AttentionRecord, type AttentionTarget } from './AttentionHistory';
@@ -179,6 +180,7 @@ export class AttentionView {
             const event = state.events[Number(record.eventId.slice(6)) - 1];
             const people = Array.isArray(event.details?.people) ? event.details.people as { id: string; name: string }[] : [];
             html += '<h3>Historical record</h3><small>' + when(record) + '</small><p>' + escape(record.headline) + '</p>';
+            html += renderMissionOutcome(state, event);
             if (resolveAttentionTarget(state, record.target)) html += this.button('target', targetLabels[record.target!.kind], record.eventId);
             else html += '<p>The live destination is unavailable. This historical record is retained.</p>';
             if (record.actorIds.length) html += '<h4>Recorded participants</h4><ul>' + record.actorIds.map(id => {

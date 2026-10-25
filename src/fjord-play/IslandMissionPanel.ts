@@ -93,6 +93,18 @@ export class IslandMissionPanel {
         this.refresh();
         this.root.scrollIntoView({ block: 'nearest' });
     }
+    /** Read-only entry from Help; the existing offer and confirmation still own dispatch. */
+    openPreparation(type: MissionType, siteId?: string) {
+        if (siteId) {
+            this.selectSite(siteId);
+            this.review({ kind: 'site', siteId }, type);
+            return;
+        }
+        this.showGroups();
+        this.refresh();
+        this.root.scrollIntoView({ block: 'nearest' });
+        this.root.querySelector<HTMLElement>('[data-island-area]')?.focus({ preventScroll: true });
+    }
     chooseTarget(point: Point2) {
         if (!this.choosing) return false;
         this.review({ kind: 'area', position: point }, 'Recon');
