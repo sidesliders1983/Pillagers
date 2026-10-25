@@ -19,10 +19,9 @@ export interface AssetPreparationProgress {
     error?: unknown;
 }
 export class AssetManager {
-    constructor(private readonly quality: PresentationQuality = 'standard',
-        private readonly compactModels = false) { }
+    constructor(private readonly quality: PresentationQuality = 'standard') { }
     private assetURL(path: string) {
-        return import.meta.env.BASE_URL + modelTexturePath(path, this.quality, this.compactModels);
+        return import.meta.env.BASE_URL + modelTexturePath(path, this.quality);
     }
     readonly homeLightMaps = new Map<string, Texture>();
     async loadHomeLighting() {

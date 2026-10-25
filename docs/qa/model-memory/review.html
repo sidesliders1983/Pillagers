@@ -21,12 +21,12 @@ td,th { text-align: left; padding: 10px; border-bottom: 1px solid #68716a; }
 <h1>Smaller model textures</h1>
 <p>Twelve existing housing, tent and campfire models: <strong>140 → 35 MiB</strong> of RGBA8 image pixels.
 Geometry, UVs, animation and material bindings are identical. These are calculated image budgets, not measured total browser memory.</p>
-<p class="note">The ordinary game is unchanged. The candidate requires <code>compactModels=1</code> and the existing Low quality setting at scene creation.
+<p class="note">Ordinary Fjord Play now loads compact model images with the existing default Low quality setting. Standard retains original images.
 Use one game tab at a time and reload fully between comparisons. Both versions must use the same campaign and Low setting.
 Full scene appearance, sustained memory and the reported browser crash remain to be checked on a physical device.</p>
 <div class="links">
-<a href="/fjord-play?debugPerf=1&amp;review=model-memory">Open original</a>
-<a href="/fjord-play?compactModels=1&amp;debugPerf=1&amp;review=model-memory">Open compact candidate</a>
+<a href="/fjord-play?originalModelTextures=1&amp;debugPerf=1&amp;review=model-memory">Open original</a>
+<a href="/fjord-play?debugPerf=1&amp;review=model-memory">Open compact default</a>
 <a href="measurements.json">Raw measurements and hashes</a>
 </div>
 <table>

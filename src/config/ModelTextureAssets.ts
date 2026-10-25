@@ -9,8 +9,8 @@ export const compactModelSources: readonly string[] = [
     'scenery/meshy-campfire-v1/campfire.glb',
 ];
 
-export function modelTexturePath(source: string, quality: PresentationQuality, candidate = false) {
-    return candidate && quality === 'low' && compactModelSources.includes(source)
+export function modelTexturePath(source: string, quality: PresentationQuality) {
+    return quality === 'low' && compactModelSources.includes(source)
         ? 'game-assets/compact-models/' + source.split('/').at(-1)!
         : source;
 }

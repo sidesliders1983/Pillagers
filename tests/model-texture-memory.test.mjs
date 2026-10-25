@@ -35,17 +35,16 @@ test('the geometry guard rejects a changed compressed vertex/index payload', () 
     assert.throws(() => verifyModelGeometry(source, changed));
 });
 
-test('the candidate requires explicit opt-in and preserves Standard and unrelated assets', () => {
+test('Low selects compact models by default and preserves Standard and unrelated assets', () => {
     for (const source of compactModelSources) {
-        assert.equal(modelTexturePath(source, 'low'), source);
-        assert.equal(modelTexturePath(source, 'standard', true), source);
-        assert.notEqual(modelTexturePath(source, 'low', true), source);
+        assert.notEqual(modelTexturePath(source, 'low'), source);
+        assert.equal(modelTexturePath(source, 'standard'), source);
     }
-    assert.equal(modelTexturePath('game-assets/human/Human_LOD2.glb', 'low', true),
+    assert.equal(modelTexturePath('game-assets/human/Human_LOD2.glb', 'low'),
         'game-assets/human/Human_LOD2.glb');
 });
 
-test('the real AssetManager requests compact housing/tent/fire files only for the opted-in Low tier', async () => {
+test('the real AssetManager uses compact Low files by default and retains original Standard/Lab files', async () => {
     const nativeRequire = createRequire(import.meta.url);
     const { Group, Mesh, BoxGeometry, MeshStandardMaterial } = nativeRequire('three');
     const requested = [];
@@ -75,15 +74,15 @@ test('the real AssetManager requests compact housing/tent/fire files only for th
     const savedFetch = globalThis.fetch;
     globalThis.fetch = async () => new Response(readFileSync('public/game-assets/houses/manifest.json'));
     try {
-        for (const [quality, candidate] of [['low', true], ['standard', true], ['low', false]]) {
+        for (const quality of ['low', 'standard', undefined]) {
             requested.length = 0;
-            const assets = new module.exports.AssetManager(quality, candidate);
+            const assets = new module.exports.AssetManager(quality);
             await assets.loadForSimulation();
             assert.equal(assets.diagnostics.length, 0);
             for (const source of compactModelSources)
-                assert.ok(requested.includes('/play/' + modelTexturePath(source, quality, candidate)), source);
+                assert.ok(requested.includes('/play/' + modelTexturePath(source, quality ?? 'standard')), source);
             assert.equal(requested.filter(path => path.includes('/compact-models/')).length,
-                quality === 'low' && candidate ? 12 : 0);
+                quality === 'low' ? 12 : 0);
             assert.ok(requested.includes('/play/terrain/boulder.glb'));
             assets.dispose();
         }

@@ -1,4 +1,4 @@
-# Model texture memory audit and compact candidate
+# Model texture memory audit and compact default
 
 The owner reports browser-tab reloads/errors on several devices, both with and without sound.
 This audit identifies asset costs; it does not reproduce the crash or prove an unbounded leak.
@@ -40,10 +40,12 @@ Every non-image payload is byte-identical. Scene graphs, accessors, indices, UVs
 materials, rigging and home-light attachment geometry are unchanged. The ordinary runtime models
 and ignored authoring originals remain intact.
 
-The candidate is explicit: compactModels=1 with the existing Low preset at scene creation.
-Ordinary URLs and Standard retain original assets. Live Quality changes retain the already loaded
-model-image tier, like the existing ground tier; reload to compare. No new quality selector,
-Core/save rule, terrain technology, animal behavior or character identity is introduced.
+The owner approved ordinary Fjord Play activation on 25 October 2026. The existing default Low
+preset uses compact models without an opt-in flag; Standard retains original assets. Live Quality
+changes retain the already loaded model-image tier, like the existing ground tier; reload to compare.
+The QA-only originalModelTextures=1 switch selects original images with all other Low settings
+unchanged. No new quality selector, Core/save rule, terrain technology, animal behavior or character
+identity is introduced.
 
 The existing build validator verifies all candidate identities, dimensions and retained geometry.
 A changed source requires regeneration. Prepared-island dependency provenance includes AssetManager,
@@ -54,7 +56,7 @@ island entries, canonical hashes and compressed payload identities equal the sav
 
 Eight targeted tests passed, including a regression that failed before wiring the real AssetManager:
 it requested original housing rather than the compact candidate. The tests exercise actual public
-load requests, independent instance disposal, explicit opt-in, unchanged Standard/default paths,
+load requests, unchanged campaign/save serialization, default Low requests, unchanged Standard/Lab paths,
 source/variant hashes, all retained compressed data, decoded bounds and exact campaign/save parity.
 A corrupted compressed geometry payload is rejected by the new guard.
 
@@ -64,9 +66,9 @@ does not claim a browser listening/rendering run, measured peak GPU/process memo
 physical-device acceptance or a fix for the reported crash. Human source images and global source
 caches remain follow-up profiling targets, not an assumed second defect.
 
-Per [the current quality policy](../../gameplay/PRESENTATION-QUALITY.md), a changed default needs
-owner visual/performance acceptance before merge. This branch keeps the proposal opt-in.
-No current-main Sites release or automatic publication is changed by this candidate.
+The owner explicitly authorized default activation, merge and Sites publication. Publication still
+requires successful CI for the exact current main commit. This authorization does not establish
+that the reported crashes are fixed or replace the remaining physical-device memory measurements.
 
 Reproduce:
 

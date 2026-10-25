@@ -15,7 +15,7 @@ execFileSync(process.execPath, ['scripts/audio/validate.mjs',
 
 const root = resolve('public');
 const prepared = await validatePreparedAssets();
-console.log('Validated ' + await validateCompactModels() + ' compact model candidates with identical geometry.');
+console.log('Validated ' + await validateCompactModels() + ' compact model variants with identical geometry.');
 const { generatedHouseFiles } = loadTypeScript(new URL('../src/config/HousingAssets.ts', import.meta.url));
 const { terrainModels, longshipModel } = loadTypeScript(new URL('../src/config/TerrainAssets.ts', import.meta.url));
 const json = async file => JSON.parse(await readFile(resolve(root, file), 'utf8'));

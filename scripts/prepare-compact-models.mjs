@@ -9,7 +9,7 @@ const root = resolve('public');
 const entries = [];
 for (const source of compactModelSources) {
     const bytes = await readFile(resolve(root, source));
-    const output = modelTexturePath(source, 'low', true);
+    const output = modelTexturePath(source, 'low');
     const compact = await compactTextures(bytes, compactModelPixels);
     const before = await inspectModel(bytes), after = await inspectModel(compact);
     await mkdir(resolve(root, 'game-assets/compact-models'), { recursive: true });

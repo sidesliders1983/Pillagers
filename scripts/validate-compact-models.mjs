@@ -12,7 +12,7 @@ export async function validateCompactModels() {
     assert.equal(manifest.maximumPixels, compactModelPixels);
     assert.deepEqual(manifest.entries.map(entry => entry.source), compactModelSources);
     for (const entry of manifest.entries) {
-        assert.equal(entry.output, modelTexturePath(entry.source, 'low', true));
+        assert.equal(entry.output, modelTexturePath(entry.source, 'low'));
         const before = await readFile(resolve(root, entry.source));
         const after = await readFile(resolve(root, entry.output));
         assert.deepEqual(await inspectModel(before), entry.before, 'Stale compact source: ' + entry.source);
