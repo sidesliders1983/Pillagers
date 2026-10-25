@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FjordSide · Model texture memory review</title>
+<style>
+:root { color-scheme: dark; font: 17px/1.5 system-ui; background: #122427; color: #f2ecda; }
+body { max-width: 1000px; margin: auto; padding: 24px; }
+h1,h2 { font-family: Georgia,serif; }
+a { color: #f3d794; }
+.links { display: flex; flex-wrap: wrap; gap: 16px; margin: 24px 0; }
+.links a { padding: 12px; border: 1px solid; border-radius: 5px; }
+.comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 36px; }
+figure { margin: 0; }
+img { display: block; width: 100%; background: #223137; }
+figcaption { padding: 8px 0; }
+table { border-collapse: collapse; width: 100%; }
+td,th { text-align: left; padding: 10px; border-bottom: 1px solid #68716a; }
+.note { padding: 16px; background: #233b3e; border-left: 3px solid #d8bd79; }
+</style>
+<h1>Smaller model textures</h1>
+<p>Twelve existing housing, tent and campfire models: <strong>140 → 35 MiB</strong> of RGBA8 image pixels.
+Geometry, UVs, animation and material bindings are identical. These are calculated image budgets, not measured total browser memory.</p>
+<p class="note">Ordinary Fjord Play now loads compact model images with the existing default Low quality setting. Standard retains original images.
+Use one game tab at a time and reload fully between comparisons. Both versions must use the same campaign and Low setting.
+Full scene appearance, sustained memory and the reported browser crash remain to be checked on a physical device.</p>
+<div class="links">
+<a href="/fjord-play?originalModelTextures=1&amp;debugPerf=1&amp;review=model-memory">Open original</a>
+<a href="/fjord-play?debugPerf=1&amp;review=model-memory">Open compact default</a>
+<a href="measurements.json">Raw measurements and hashes</a>
+</div>
+<table>
+<tr><th>Source</th><th>Original image budget</th><th>Compact candidate</th></tr>
+<tr><td>Human source (one loaded LOD)</td><td>48 MiB, shared by residents</td><td>Unchanged</td></tr>
+<tr><td>General outfit source</td><td>32 MiB, shared by matching residents</td><td>Unchanged</td></tr>
+<tr><td>Other garment/shoe sources</td><td>16 MiB each, when loaded</td><td>Unchanged</td></tr>
+<tr><td>Nine housing/Farmyard assets</td><td>12 MiB each</td><td>3 MiB each</td></tr>
+<tr><td>Farm Homestead house</td><td>8 MiB</td><td>2 MiB</td></tr>
+<tr><td>Tent / Campfire</td><td>12 MiB each</td><td>3 MiB each</td></tr>
+<tr><td>Cattle</td><td>5.25 MiB per loaded variant</td><td>Unchanged</td></tr>
+<tr><td>Goat / Pig / Sheep</td><td>4 MiB per loaded variant</td><td>Unchanged</td></tr>
+</table>
+<h2>Texture comparisons</h2>
+<p>These show actual colour atlases at equal display size, not rendered scene screenshots. Normal and material-property images are also reduced.
+No polygon simplification or lighting change is applied.</p>
+<h2>Hut</h2>
+<div class="comparison"><figure><img src="hut-original.webp" alt="Original hut colour atlas"><figcaption>Original · 1024 px</figcaption></figure><figure><img src="hut-compact.webp" alt="Compact hut colour atlas"><figcaption>Compact · 512 px</figcaption></figure></div>
+<h2>Farmyard</h2>
+<div class="comparison"><figure><img src="farmyard-original.webp" alt="Original farmyard colour atlas"><figcaption>Original · 1024 px</figcaption></figure><figure><img src="farmyard-compact.webp" alt="Compact farmyard colour atlas"><figcaption>Compact · 512 px</figcaption></figure></div>
+<h2>Tent</h2>
+<div class="comparison"><figure><img src="tent-original.webp" alt="Original tent colour atlas"><figcaption>Original · 1024 px</figcaption></figure><figure><img src="tent-compact.webp" alt="Compact tent colour atlas"><figcaption>Compact · 512 px</figcaption></figure></div>
+<h2>Campfire</h2>
+<div class="comparison"><figure><img src="campfire-original.webp" alt="Original campfire colour atlas"><figcaption>Original · 1024 px</figcaption></figure><figure><img src="campfire-compact.webp" alt="Compact campfire colour atlas"><figcaption>Compact · 512 px</figcaption></figure></div>
+</html>

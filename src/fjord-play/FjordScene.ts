@@ -367,7 +367,10 @@ export function createFjordScene(options: {
     };
 
     const initialize = async () => {
-        assets = new AssetManager();
+        const textureQuality = query.get('originalModelTextures') === '1' ? 'standard' :
+            document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as PresentationQuality;
+        assets = new AssetManager(textureQuality);
+        canvas.dataset.modelTextures = textureQuality === 'low' ? '512px' : 'Original';
         if (host.loading) await host.loading.measure('assets-fetch-decode', () => assets!.loadForSimulation(event => {
             const loading = host.loading;
             if (!loading || loading.signal.aborted) return;
