@@ -1,0 +1,79 @@
+{
+  "origin": "http://127.0.0.1:5201",
+  "checkedAt": "2026-10-25T14:44:48.806Z",
+  "results": [
+    {
+      "route": "/docs/qa/model-memory/review.html",
+      "status": 200
+    },
+    {
+      "route": "/fjord-play?compactModels=1&debugPerf=1",
+      "status": 200
+    },
+    {
+      "route": "/fjord-play?debugPerf=1",
+      "status": 200
+    },
+    {
+      "route": "game-assets/compact-models/house-greathouse.glb",
+      "status": 200,
+      "sha256": "ffa1ee043223bbbb23540f14e3fc95d7e472bc1531d74e9303e3a5e1ee51fe9d"
+    },
+    {
+      "route": "game-assets/compact-models/house-hut.glb",
+      "status": 200,
+      "sha256": "6d6f50fac7e3038cc9a257910604e12e64db06dff64ec931a693596c7c5aeb68"
+    },
+    {
+      "route": "game-assets/compact-models/house-homestead.glb",
+      "status": 200,
+      "sha256": "ab23f946891448518f2aaa8944b7ffa2b01a679462b9cf08d9a82b2ac806f7e6"
+    },
+    {
+      "route": "game-assets/compact-models/house-longhouse.glb",
+      "status": 200,
+      "sha256": "37b786bdf898c302e6a8ddea6b3c17f3d676ac72f54c2b05e1bccf688f605fe4"
+    },
+    {
+      "route": "game-assets/compact-models/farm-hut.glb",
+      "status": 200,
+      "sha256": "7ceee1e5f97bb7bc3187f6bdcf124d1d8f7795b33ac87ff2e45eb62b8af04694"
+    },
+    {
+      "route": "game-assets/compact-models/farm-homestead.glb",
+      "status": 200,
+      "sha256": "3342dfe394596ed7d7d523d8432388c44ed2f4e973a40645860d75166b0162b9"
+    },
+    {
+      "route": "game-assets/compact-models/farm-hut-terrain.glb",
+      "status": 200,
+      "sha256": "ccc9170412eb61f3ce9a95ad02311fef9e00009ed09c36c403126f8047e94085"
+    },
+    {
+      "route": "game-assets/compact-models/farm-homestead-terrain.glb",
+      "status": 200,
+      "sha256": "9e4e015ec018f422d6a66492fdc13b2bdd5376ad4f55db13cef15c43e2e93631"
+    },
+    {
+      "route": "game-assets/compact-models/smith-hut.glb",
+      "status": 200,
+      "sha256": "f7ece78399b6b85604b7a95c46d2a75d6e07a607bcd83de4f4fe059c9aad044b"
+    },
+    {
+      "route": "game-assets/compact-models/smith-homestead.glb",
+      "status": 200,
+      "sha256": "42fa0abc5a8e0ea97da94b547653ef037850607d81dadd970fa32bf029f41b9b"
+    },
+    {
+      "route": "game-assets/compact-models/tent.glb",
+      "status": 200,
+      "sha256": "c920b2b7025f87671ef0bf4c51c095725f9d477fe2e2f76ee7bb8380f1867aa6"
+    },
+    {
+      "route": "game-assets/compact-models/campfire.glb",
+      "status": 200,
+      "sha256": "5830fbf89a34d6c8ca291522c0b261dc58f675ff139cd74e55cf08937a5cf896"
+    }
+  ],
+  "browserRenderingVerified": false
+}

@@ -7,6 +7,7 @@ import { loadTypeScript } from './load-typescript.mjs';
 import { terrainIO } from './terrain-io.mjs';
 import { getBounds } from '@gltf-transform/functions';
 import { validatePreparedAssets } from './validate-prepared-assets.mjs';
+import { validateCompactModels } from './validate-compact-models.mjs';
 
 // Public audio must pass the same retained-file and per-source publication gate on every build.
 execFileSync(process.execPath, ['scripts/audio/validate.mjs',
@@ -14,6 +15,7 @@ execFileSync(process.execPath, ['scripts/audio/validate.mjs',
 
 const root = resolve('public');
 const prepared = await validatePreparedAssets();
+console.log('Validated ' + await validateCompactModels() + ' compact model candidates with identical geometry.');
 const { generatedHouseFiles } = loadTypeScript(new URL('../src/config/HousingAssets.ts', import.meta.url));
 const { terrainModels, longshipModel } = loadTypeScript(new URL('../src/config/TerrainAssets.ts', import.meta.url));
 const json = async file => JSON.parse(await readFile(resolve(root, file), 'utf8'));

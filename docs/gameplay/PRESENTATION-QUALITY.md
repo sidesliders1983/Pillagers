@@ -64,3 +64,16 @@ Three alternating repetitions of the inhabited-village and observed-rival cases 
 a consistent end-to-end frame improvement. The decision is to retain the existing values above;
 the candidate remains an explicit experiment, not a product setting. See the
 [paired measurements and visual comparison](../qa/presentation-quality-211/report.md).
+
+## Compact model texture candidate
+
+The ordinary source model tier remains unchanged. The explicit `compactModels=1` review
+uses baked 512px house/Farmyard, tent and campfire textures when Low is selected at scene creation.
+Standard retains the existing models. Live quality switches retain the loaded model texture tier;
+reload to compare, as with the existing ground tier.
+
+The twelve source models' calculated RGBA8 image budget falls from 140 to 35 MiB. This is neither
+a measured total browser-memory figure nor proof that the reported tab crashes are fixed.
+Geometry, UVs, materials, animations, character identity and Core/save behavior are unchanged.
+The source files remain available. Current visual/performance acceptance is pending; see the
+[measurements, reproducible checks and candidate review](../qa/model-memory/report.md).
