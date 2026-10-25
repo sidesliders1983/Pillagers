@@ -22,9 +22,13 @@ function project(state, progress = active(), index = new FoundingJourneyIndex(),
         catch (error) { return { allowed: false, reason: error.message }; }
     }, offers);
     for (const objective of view.goals) {
-        assert.ok(objective.checklist.length > 0, objective.id + ' has actionable checks');
-        assert.equal(objective.status === 'completed', objective.checklist.every(check => check.done),
-            objective.id + ' checks reflect its actual completion predicate');
+        if (objective.id === 'sea-travel' && objective.status === 'blocked') {
+            assert.deepEqual(objective.checklist, [], 'A gone ship has on-foot guidance without impossible sailing checks');
+        } else {
+            assert.ok(objective.checklist.length > 0, objective.id + ' has actionable checks');
+            assert.equal(objective.status === 'completed', objective.checklist.every(check => check.done),
+                objective.id + ' checks reflect its actual completion predicate');
+        }
     }
     return view;
 }

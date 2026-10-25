@@ -327,13 +327,13 @@ export class FirstStepsGuide {
                         <h3>${esc(goal.title)}${goal.optional ? ' · Optional' : ''}</h3>
                         <span class="first-steps-status">${goal.status === 'blocked' ? 'Blocked right now' : esc(goal.status)}</span>
                         <p>${esc(goal.why)}</p>
-                        <ul class="first-steps-checklist" aria-label="Objective checklist">
+                        ${goal.checklist.length ? `<ul class="first-steps-checklist" aria-label="Objective checklist">
                             ${goal.checklist.map(check => `<li data-view-key="check:${goal.id}:${check.id}" data-journey-check="${check.id}">
                                 <span class="first-steps-check" role="checkbox" aria-checked="${check.done}" aria-readonly="true"
                                     aria-labelledby="journey-check-${goal.id}-${check.id}"><span aria-hidden="true">${check.done ? '✓' : ''}</span></span>
                                 <span id="journey-check-${goal.id}-${check.id}">${esc(check.label)}</span>
                             </li>`).join('')}
-                        </ul>
+                        </ul>` : ''}
                         ${goal.detail ? `<p class="first-steps-muted">${esc(goal.detail)}</p>` : ''}
                         <div class="first-steps-actions">${button('show', 'Show me')}
                         ${goal.id === 'longship-choice' && view.retained && !view.retained.transport?.groupId ?
@@ -351,7 +351,8 @@ export class FirstStepsGuide {
             }
         }
         const announcement = progress.status === 'active' ?
-            `${copy.title}, ${done} of ${chapterGoals.length} completed. ${goal.title}: ${goal.status}, ${goal.checklist.filter(check => check.done).length} of ${goal.checklist.length} steps completed.` :
+            `${copy.title}, ${done} of ${chapterGoals.length} completed. ${goal.title}: ${goal.status}.${goal.checklist.length ?
+                ` ${goal.checklist.filter(check => check.done).length} of ${goal.checklist.length} steps completed.` : ''}` :
             progress.status === 'offered' ? 'The Founding Journey is ready. Press Play when you want time to pass.' : 'The Founding Journey is set aside.';
         html += `<span class="first-steps-screen-reader" role="status" data-view-key="first-steps-status">${esc(announcement)}</span>`;
         if (html !== this.html) { updateView(this.root, html); this.html = html; }

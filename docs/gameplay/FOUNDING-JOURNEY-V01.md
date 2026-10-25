@@ -72,7 +72,9 @@ campaign fact is recorded. The checklist cannot be toggled by the player and
 does not add completion requirements or saved derived progress. Existing actions
 count, including previously constructed homes and assigned gear. Wildlife checks
 name only species already legitimately witnessed; pending slots reveal no unseen
-species or locations. Show me follows the first unfinished step, and completed
+species or locations. A gone Longship shows on-foot guidance without unfinished
+sailing checks; an earlier completed sea journey retains its real credit.
+Show me follows the first unfinished step, and completed
 objectives link to their existing review.
 
 Show me performs navigation/read-only review only. Construction, work changes,

@@ -319,14 +319,14 @@ export function foundingJourney(state: SimulationState, progress: FirstStepsProg
             Boarding, sailing and landing are recorded separately. No reachable shore is guaranteed.` :
             `The Longship is ${shipState}. Use ordinary on-foot routes and reserve supplies for the return.
             You may set the sailing demonstration aside.`,
-        checklist: [
+        checklist: retained || index.events.seaTrip ? [
             { id: 'embark', label: 'Board the Longship with a provisioned group',
                 done: !!index.events.embarked || !!index.events.seaTrip, action: 'expeditions' },
             { id: 'sail', label: 'Choose a valid sea destination',
                 done: !!index.events.sailed || !!index.events.seaTrip, action: 'expeditions' },
             { id: 'land', label: 'Sail, then disembark on a safe shore',
                 done: !!index.events.seaTrip, action: 'expeditions' },
-        ],
+        ] : [],
         action: 'expeditions', optional: true,
     }, !!index.events.seaTrip,
     !retained ? 'Sea travel is unavailable; on-foot exploration remains playable.' : '');
