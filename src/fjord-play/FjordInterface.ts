@@ -277,6 +277,13 @@ export class FjordInterface {
             if (this.task === 'work-plan' && this.draft) this.hooks.inspected?.('work', this.draft.workerId);
             if (this.task === 'occupation' && selection.kind === 'persona')
                 this.hooks.inspected?.('work', selection.id);
+            if (selection.kind === 'cattle' && (state.landing?.cattle[selection.id] ||
+                state.landing?.cattleArchive?.[selection.id]))
+                this.hooks.inspected?.('livestock', selection.id);
+            const buildingId = this.homeBuildingId();
+            if (buildingId && state.buildings[buildingId] && !this.task && (!isMobileLayout() || this.expanded))
+                this.hooks.inspected?.('improvements', buildingId);
+            if (this.task === 'smithery') this.hooks.inspected?.('smithery');
         }
         if (this.surface) this.renderSurface();
     }
@@ -382,7 +389,19 @@ export class FjordInterface {
             case 'camera-home': this.close(false); this.hooks.home?.(); return true;
             case 'expand-card': this.expanded = true; break;
             case 'collapse-card': this.expanded = false; break;
-            case 'inspect': this.close(false); this.hooks.select(button.dataset.kind!, button.dataset.id!); return true;
+            case 'inspect': {
+                if (button.dataset.kind === 'persona') {
+                    if (home && home.memberIds.includes(button.dataset.id!) &&
+                        ['household', 'building'].includes(this.owner.selection?.kind ?? ''))
+                        this.hooks.inspected?.('home-resident', button.dataset.id);
+                    this.close(false);
+                    this.showResident(button.dataset.id!);
+                } else {
+                    this.close(false);
+                    this.hooks.select(button.dataset.kind!, button.dataset.id!);
+                }
+                return true;
+            }
             case 'close-workspace': this.close(); return true;
             case 'directory': this.directory = button.dataset.kind!; this.search = ''; this.renderSurface(); return true;
             case 'close-card': this.hooks.select('', ''); return true;
@@ -547,13 +566,26 @@ export class FjordInterface {
         this.close(false);
         this.hooks.select('', '');
     }
-    showResident(id: string) {
-        this.hooks.select('persona', id);
-        this.expanded = true;
+    showEntity(kind: NonNullable<SettlementSelection>['kind'], id: string, expanded = false) {
+        this.hooks.select(kind, id);
+        this.expanded = expanded;
         this.hooks.refresh();
+        this.focusHeading();
+    }
+    showResident(id: string) { this.showEntity('persona', id, true); }
+    private focusHeading() {
+        if (this.management.hidden) return;
         const heading = this.panel.querySelector<HTMLElement>('h2');
         heading?.setAttribute('tabindex', '-1');
         heading?.focus({ preventScroll: true });
+    }
+    showHome(id: string, task: 'improvements' | 'smithery') {
+        if (!this.state.households[id]) return;
+        this.hooks.select('household', id);
+        this.expanded = true;
+        this.task = task === 'smithery' ? 'smithery' : null;
+        this.hooks.refresh();
+        this.focusHeading();
     }
     showWork(draft: WorkDraft) {
         this.hooks.select('household', draft.householdId);

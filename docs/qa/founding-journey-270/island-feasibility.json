@@ -1,0 +1,58 @@
+[
+  {
+    "campaignSeed": 0,
+    "islandSeed": 18,
+    "initialFood": 15,
+    "crew": 1,
+    "packFood": 8,
+    "tick": {
+      "winter": 800,
+      "tick": 560
+    },
+    "witnessed": [
+      "great-black-backed-gull",
+      "puffin",
+      "otter",
+      "seal"
+    ],
+    "attempts": [
+      {
+        "toward": "great-black-backed-gull",
+        "ticks": 60,
+        "witnessed": [
+          "great-black-backed-gull",
+          "puffin",
+          "otter",
+          "seal"
+        ]
+      }
+    ]
+  },
+  {
+    "campaignSeed": 1,
+    "islandSeed": 7,
+    "initialFood": 15,
+    "crew": 1,
+    "packFood": 8,
+    "tick": {
+      "winter": 800,
+      "tick": 540
+    },
+    "witnessed": [
+      "otter",
+      "great-black-backed-gull",
+      "seal"
+    ],
+    "attempts": [
+      {
+        "toward": "great-black-backed-gull",
+        "ticks": 40,
+        "witnessed": [
+          "otter",
+          "great-black-backed-gull",
+          "seal"
+        ]
+      }
+    ]
+  }
+]

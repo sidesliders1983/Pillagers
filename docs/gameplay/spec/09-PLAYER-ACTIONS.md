@@ -77,10 +77,15 @@ Lighting without prepaid fuel requires one Material; an unavailable action expla
 [Fuel rules](../../SETTLEMENT-CAMPFIRE.md#campfire-fuel--97-spike) apply throughout the year.
 Ceremonies and the future settlement information panel remain outside this spike.
 
-## First steps — alpha presentation (#263)
+## The Founding Journey — alpha presentation (#263 / #270)
 
-New players may use a short optional guide through real residents, work, housing
-and observed consequences. Guide links navigate to existing UI and never issue
-Core commands or supply resources. It is presentation metadata with explicit
-skip/replay and per-new-start reset, not another progression or event system.
-See [First steps v0.1](../FIRST-STEPS-V01.md) for the current lifecycle and QA contract.
+New players may use three optional chapters about their autonomous community,
+exploration/discovery and preparation for conflict. Every chapter is freely
+accessible. Real homes, upgrades, witnessed species, Recon, personal supported
+equipment and optional Pillage outcomes count, including actions done out of order.
+Show me navigates/reviews existing UI; it never issues Core commands or supplies
+resources. Skip, defer and replay are per-history presentation metadata.
+All ordinary campaign entries stay paused until deliberate Play.
+
+See [The Founding Journey v0.1](../FOUNDING-JOURNEY-V01.md) for the current
+predicates, knowledge limits, paused-entry exception and QA contract.

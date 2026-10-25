@@ -25,7 +25,7 @@ export function fjordHeaderHTML(): string {
                     <h1>FjordSide</h1>
                     <span id="fjord-menu-pacing-slot"></span>
                     <span id="fjord-menu-next-slot"></span>
-                    <button id="fjord-first-steps" type="button">First steps / Help</button>
+                    <button id="fjord-first-steps" type="button">Founding Journey / Help</button>
                     <button id="clan-book-open" type="button">Clan Book</button><button id="fjord-expeditions-open" type="button">Expedition groups</button>
                     <label>Quality<select id="fjord-quality"><option value="low"${defaultPresentationPreferences.quality === 'low' ? ' selected' : ''}>Low</option>
                         <option value="standard"${defaultPresentationPreferences.quality === 'standard' ? ' selected' : ''}>Standard</option></select></label>

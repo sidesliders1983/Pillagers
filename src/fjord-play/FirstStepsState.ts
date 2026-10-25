@@ -2,9 +2,11 @@ import { inspectBuilding, inspectWork, personaAway } from '../simulation/Simulat
 import type { SimulationCommand, SimulationState } from '../simulation/SimulationCore';
 import { commandAvailability } from '../play/SharedSettlement';
 import { previewWork, proposeWork, workCandidates } from './WorkPlan';
+import { newJourney, readJourney, type JourneyProgress } from './JourneyProgress';
 
 export interface FirstStepsProgress {
     version: 1;
+    journey?: JourneyProgress;
     status: 'offered' | 'active' | 'skipped' | 'complete';
     collapsed: boolean;
     residentId: string | null;
@@ -15,7 +17,7 @@ export interface FirstStepsProgress {
     evidenceId: string | null;
 }
 
-export type FirstStepsInspection = 'resident' | 'household' | 'resources' | 'work';
+export type FirstStepsInspection = 'resident' | 'household' | 'resources' | 'work' | 'home-resident' | 'livestock' | 'improvements' | 'smithery';
 
 /** Per-history presentation data. No seed, RNG draw, Core command or event is added. */
 export function newFirstSteps(): FirstStepsProgress {
@@ -37,8 +39,15 @@ export function readFirstSteps(value: unknown, state: SimulationState): FirstSte
         throw new Error('Invalid saved first-steps guidance.');
     if (data.evidenceId !== null && !firstStepsEvidence(state, data))
         throw new Error('Saved first-steps evidence is not present in this campaign.');
+    const journey = readJourney(data.journey);
+    if (journey?.resultEventId) {
+        const event = state.events[Number(journey.resultEventId.slice(6)) - 1];
+        if (event?.id !== journey.resultEventId || event.type !== 'ExpeditionReturned' ||
+            event.details?.mission !== 'Pillage')
+            throw new Error('Saved journey report is not present in this campaign.');
+    }
     // Copy only bounded, known fields; imported extra data never becomes UI state.
-    return { version: 1, status: data.status, collapsed: data.collapsed,
+    return { version: 1, ...(journey ? { journey } : {}), status: data.status, collapsed: data.collapsed,
         residentId: data.residentId, resourcesSeen: data.resourcesSeen, workerId: data.workerId,
         householdId: data.householdId, watch: data.watch ? { kind: data.watch.kind, id: data.watch.id, afterEvent: data.watch.afterEvent } : null,
         evidenceId: data.evidenceId };
@@ -95,6 +104,13 @@ export function inspectFirstSteps(progress: FirstStepsProgress, state: Simulatio
     kind: FirstStepsInspection, id?: string): FirstStepsProgress {
     if (progress.status !== 'active') return progress;
     const next = structuredClone(progress);
+    const journey = next.journey ??= newJourney();
+    if (kind === 'home-resident' && id && journey.householdId &&
+        state.households[journey.householdId]?.memberIds.includes(id)) journey.homeResidentId = id;
+    if (kind === 'livestock' && id &&
+        (state.landing?.cattle[id] || state.landing?.cattleArchive?.[id])) journey.livestockId = id;
+    if (kind === 'improvements' && id && state.buildings[id]) journey.improvementsSeen = true;
+    if (kind === 'smithery') journey.smitherySeen = true;
     if (kind === 'resources') next.resourcesSeen = true;
     if ((kind === 'resident' || kind === 'work') && id && available(state, id)) {
         if (kind === 'resident') next.residentId = id;
@@ -103,6 +119,7 @@ export function inspectFirstSteps(progress: FirstStepsProgress, state: Simulatio
     }
     if (kind === 'household' && id && state.households[id]) {
         next.householdId = id;
+        journey.householdId = id;
         const residence = state.households[id].residenceId;
         const buildingId = residence ? state.residences[residence]?.buildingId : null;
         if (buildingId && !next.watch)

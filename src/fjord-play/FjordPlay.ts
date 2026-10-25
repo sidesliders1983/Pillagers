@@ -674,10 +674,25 @@ export class FjordPlay {
             persist, pause: () => setPlayback(false),
             reveal: () => desktopUI!.closeForHelp(), clockChanged: syncGuideClock,
             resident: id => desktopUI!.showResident(id),
-            household: id => select('household', id),
+            household: id => desktopUI!.showEntity('household', id),
             stocks: resource => desktopUI!.open(resource, true),
             work: draft => desktopUI!.showWork(draft),
             expeditions: () => desktopUI!.open('expeditions', true),
+            livestock: id => desktopUI!.showEntity('cattle', id),
+            ship: id => desktopUI!.showEntity('longship', id),
+            improvements: id => desktopUI!.showHome(id, 'improvements'),
+            smithery: id => desktopUI!.showHome(id, 'smithery'),
+            wildlife: id => bookReader.openWildlife(id),
+            mission: (type, siteId) => islandMissions?.openPreparation(type, siteId),
+            report: id => {
+                if (!this.campaign.attentionSource(id)) return false;
+                desktopUI!.open('attention', true);
+                attentionView.openEvent(id);
+                const heading = document.querySelector<HTMLElement>('#fjord-attention-feed h3');
+                heading?.setAttribute('tabindex', '-1');
+                heading?.focus({ preventScroll: true });
+                return true;
+            },
         }));
         document.querySelector('#fjord-book')!.addEventListener('click', () =>
             document.querySelector<HTMLButtonElement>('#clan-book-open')!.click());
@@ -720,10 +735,10 @@ export class FjordPlay {
             previous = now;
             if (!this.session.running || !canAdvance())
                 return;
-            const intent = clockIntent;
+            const intent = playback.intent;
             action(() => {
                 // Recheck at execution: this work may have waited behind an asynchronous command.
-                if (intent === clockIntent && this.session.running && canAdvance())
+                if (intent === playback.intent && this.session.running && canAdvance())
                     core(() => this.session.elapse(elapsed));
             });
         };

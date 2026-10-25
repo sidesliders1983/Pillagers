@@ -61,3 +61,15 @@
     clip-path: inset(50%);
     white-space: nowrap;
 }
+
+/* Chapters stay freely selectable; the world keeps its normal navigation and input. */
+.first-steps-chapters { display: flex; gap: 4px; margin-top: 8px; }
+.first-steps-chapters button { flex: 1; padding: 7px 4px; }
+#fjord-first-steps-card h3 { margin: 8px 0 4px; font: 600 15px/1.3 system-ui, sans-serif; }
+#fjord-first-steps-card [aria-pressed="true"] { border-color: var(--fjord-accent, #dec582); }
+.first-steps-status { text-transform: capitalize; font-size: 11px; color: var(--fjord-muted, #bec7c1); }
+.first-steps-objectives { margin-top: 8px; }
+.first-steps-objectives summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; }
+.first-steps-objectives button { display: block; width: 100%; text-align: left; margin-top: 4px; }
+#fjord-play.is-choosing-expedition #fjord-first-steps-card,
+#fjord-play:has(#island-mission-target:not([hidden])) #fjord-first-steps-card { display: none; }

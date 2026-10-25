@@ -9,6 +9,7 @@ export class CampaignPlayback {
         this.reset();
     }
 
+    get intent() { return this.epoch; }
     get canPlay() { return this.ready && this.eligible(); }
     get canStep() { return this.played && this.canPlay; }
 
