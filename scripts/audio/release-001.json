@@ -1,0 +1,20 @@
+{
+    "version": 1,
+    "sourceCatalogueSHA256": "895f6f5b3173898e073abbf9ec198b8f8c7d234a10b6755210f964eeb0dab7ba",
+    "ownerAcceptance": {
+        "scope": "The owner accepted the selected animal/village mix and explicitly requested public Sites playback in this conversation.",
+        "lynx": "The owner confirmed the retained Tomcat2 source and chose it as the lynx placeholder. Do not claim a verified lynx recording.",
+        "remainingChecks": "Public playtest approval does not claim completed sustained listening, stereo/mono or physical-device performance acceptance."
+    },
+    "licenseEvidence": {
+        "Pixabay": [
+            "https://pixabay.com/service/terms/",
+            "https://pixabay.com/service/license-summary/"
+        ],
+        "ElevenLabs": [
+            "https://elevenlabs.io/creative-terms",
+            "https://help.elevenlabs.io/hc/en-us/articles/13313564601361-Can-I-publish-the-content-I-generate-on-the-platform"
+        ]
+    },
+    "usage": "Integrated FjordSide gameplay only; no standalone audition, stock-sample library or source MP3 publication."
+}

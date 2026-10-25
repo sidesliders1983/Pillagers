@@ -399,3 +399,36 @@ test('the expanded mixed pack starts each projected adult livestock and shore-se
         assert.equal(audio.inspect().buffers, 4);
     } finally { await audio.dispose(); }
 });
+
+
+test('the ordinary game pack plays a projected pig from committed public assets without review middleware', async () => {
+    const { readFileSync } = await import('node:fs');
+    const { FjordAudio } = load('../src/audio/FjordAudio.ts');
+    const { SettlementSounds } = load('../src/audio/SettlementSounds.ts');
+    const { approvedSoundPack } = load('../src/audio/SoundPack.ts');
+    const context = webAudio();
+    context.decodeAudioData = async () => context.createBuffer(1, 48000, 24000);
+    const requests = [];
+    const audio = new FjordAudio({ createContext: () => context,
+        fetch: async url => {
+            const path = new URL(url, 'http://game.invalid').pathname;
+            requests.push(path);
+            return new Response(readFileSync(new URL('../public' + path, import.meta.url)));
+        } });
+    await audio.enable();
+    try {
+        const world = audio.world(approvedSoundPack, '/');
+        const projection = new SettlementSounds({ waterLevel: 0, coast: [] });
+        const sources = projection.project({ now: 1, focus: camera.focus, season: 'Autumn', weather: 'Normal',
+            known: () => true, visible: () => true,
+            actors: [{ id: 'actual-adult-pig', kind: 'livestock', species: 'pig', stage: 'Adult',
+                observable: true, position: camera.focus }] });
+        world.update(camera, sources, false);
+        await settle();
+        assert.equal(audio.inspect().startedCues.pig, 1);
+        assert.equal(audio.inspect().failure, '');
+        assert.equal(requests.length, 1);
+        assert.ok(requests[0].startsWith('/game-assets/audio/pig-'));
+        assert.ok(requests[0].endsWith('.wav'));
+    } finally { await audio.dispose(); }
+});

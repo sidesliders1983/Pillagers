@@ -20,7 +20,7 @@ export class AudioControls {
             </details><small data-audio-pack></small><small data-audio-counts></small>`;
         this.root.querySelector('[data-audio-pack]')!.textContent = proof ?
             'Synthetic audio proof: test tones near the campfire and quiet noise. These are not nature or animal recordings.' :
-            'No approved sound pack is installed yet. The audio foundation is ready for reviewed recordings.';
+            'Sounds follow nearby activity. Wildlife calls accompany new sightings.';
         this.root.querySelector('button')!.addEventListener('click', () => {
             void this.audio.enable().then(() => this.refresh());
         });

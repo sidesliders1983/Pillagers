@@ -51,3 +51,9 @@ docs/qa/island-loading-259/iphone-follow-up/*.json -text
 public/game-assets/islands/*.bin -text
 public/game-assets/character-sources/*.bin -text
 docs/qa/island-loading-259/prepared-campaigns/*.json -text
+
+# Audio preparation and release receipts pin exact bytes across hosts.
+scripts/audio/*.mjs text eol=lf
+scripts/audio/*.json text eol=lf
+public/game-assets/audio/*.json text eol=lf
+public/game-assets/audio/*.wav -text

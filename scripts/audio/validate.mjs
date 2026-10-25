@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadTypeScript } from '../load-typescript.mjs';
 
 const project = fileURLToPath(new URL('../../', import.meta.url));
 const pointer = resolve(process.argv[2] ?? resolve(project, 'scratch/sound-assets-229/latest.json'));
@@ -60,6 +61,10 @@ for (const entry of catalogue.entries) {
         assert.ok(entry.provenance.sourceUrl && entry.provenance.creator && entry.provenance.licenseEvidence,
             'Individual provenance missing: ' + entry.id);
     }
+}
+if (process.argv.includes('--publication')) {
+    const { approvedSoundPack } = loadTypeScript(new URL('../../src/audio/SoundPack.ts', import.meta.url));
+    assert.deepEqual(approvedSoundPack, manifest, 'Published runtime manifest differs from its validated files');
 }
 console.log(JSON.stringify({ candidates: manifest.assets.length, technical: 'passed',
     publication: process.argv.includes('--publication') ? 'passed' : 'not assessed; separate required gate',

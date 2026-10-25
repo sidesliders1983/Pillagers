@@ -1,5 +1,9 @@
 # Soundscape foundation — #228
 
+The accepted first sound mix is now published with ordinary Fjord gameplay. See
+[the publication record](qa/audio-publication-230/report.md). The historical proof
+and measurements below remain a record of the foundation, not release acceptance.
+
 This is the first implementation slice of #227. It is stacked on PR #262 at
 `349f8d0645e142fb7a7f6372609aba4112bc29f6`, retaining its accepted sunlight defaults
 and opt-in diagnostics. No Core/save format, geography, occupation or fauna rule changes.
@@ -12,7 +16,7 @@ and opt-in diagnostics. No Core/save format, geography, occupation or fauna rule
 | `FjordAudio` | Explicit activation, one Web Audio context, master/three buses, bounded decoded cache and source ownership |
 | `Soundscape` | Presentation-only real-second spacing, variants, priority, listener projection and finite audibility |
 | `createFjordScene` | A disposable audio world, updated from its existing frame loop at most 5 Hz |
-| `SoundPack` | Small typed runtime manifest; currently empty approved pack and separate self-authored QA signal pack |
+| `SoundPack` | Accepted published game manifest, explicit review variant and separate self-authored QA signal pack |
 
 The failed attempt to allocate another complete checkout was rolled back by Git
 when the workstation ran out of disk space. Work continues on a separate branch
@@ -28,7 +32,7 @@ Use a running campaign for the local tones; pause retains only a quieter noise b
 Pan/orbit around the campfire, zoom out, use Map/Home, mute and background/return.
 Check both phone speakers and headphones; the quiet balance still needs listening.
 
-Ordinary URLs have no approved audio pack yet and remain silent. Even with stored
+Ordinary URLs use the accepted nature/animal/village mix from committed public assets. Even with stored
 unmuted intent, a fresh page requires explicit Enable sound. No unrelated camera
 tap grants consent. Master, Ambience, World and Interface preferences live only
 in `fjordside.audio.v1`, outside canonical campaign saves. Sound never advances time.
