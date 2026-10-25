@@ -1,3 +1,5 @@
+import { FirstStepsGuide } from './FirstStepsGuide';
+import { newFirstSteps } from './FirstStepsState';
 import { AttentionToast } from '../lore/AttentionToast';
 import { AttentionView } from '../lore/AttentionView';
 import { createFjordScene, type FjordScene } from './FjordScene';
@@ -147,6 +149,7 @@ export class FjordPlay {
         this.shared = this.opened.campaign;
         this.session = this.shared.session;
         this.campaign = this.shared.fjord;
+        if (entry.kind !== 'continue' && !entry.diagnosticRun) this.campaign.firstSteps = newFirstSteps();
         const canonicalTicks = () => {
             const state = this.session.readSnapshot();
             return state.time.winter * state.ticksPerWinter + state.time.tick;
@@ -283,6 +286,12 @@ export class FjordPlay {
         const attentionToast = this.ownStartup(new AttentionToast(document.querySelector<HTMLElement>('#fjord-attention-toast')!, this.shared,
             () => { desktopUI?.open('attention', true); attentionView.openInbox(); }));
         const personalHistory = this.ownStartup(new PersonalHistoryView(document.querySelector<HTMLElement>('#fjord-play')!, this.shared));
+        let firstSteps: FirstStepsGuide | undefined;
+        const syncGuideClock = () => {
+            const held = !!firstSteps?.blocksClock;
+            document.querySelector<HTMLButtonElement>('#fjord-run')!.disabled = held;
+            document.querySelector<HTMLButtonElement>('#fjord-next')!.disabled = held || this.session.expeditionMode;
+        };
         let clockIntent = 0;
         let previous = performance.now();
         let pageSuspended = false;
@@ -293,15 +302,16 @@ export class FjordPlay {
         this.startupCleanup.push(() => lifecycleEvents.abort());
         let sceneLoads = 1; // Initial assets and models must finish before active time can advance.
         const ownsClock = () => !document.hidden && !this.stopped && !this.shared.transferring && !pageSuspended && !contextLost;
-        const canAdvance = () => !entry.diagnosticRun && ownsClock() && sceneLoads === 0 && !this.loading;
+        const canAdvance = () => !entry.diagnosticRun && ownsClock() && sceneLoads === 0 && !this.loading && !firstSteps?.blocksClock;
         const setPlayback = (running: boolean) => {
             clockIntent++;
             previous = performance.now();
-            this.session.setRunning(running && !entry.diagnosticRun && ownsClock());
+            this.session.setRunning(running && !entry.diagnosticRun && ownsClock() && !firstSteps?.blocksClock);
             const runButton = document.querySelector<HTMLButtonElement>('#fjord-run')!;
             runButton.innerHTML = icon(this.session.running ? 'pause' : 'play') + '<span>' + (this.session.running ? 'Running' : 'Paused') + '</span>';
             runButton.setAttribute('aria-label', this.session.running ? 'Pause simulation' : 'Start simulation');
             runButton.title = this.session.running ? 'Pause simulation' : 'Start simulation';
+            syncGuideClock();
             persist();
         };
         const beginAutoStart = () => {
@@ -311,6 +321,12 @@ export class FjordPlay {
                 if (intent === clockIntent && ownsClock())
                     setPlayback(true);
             };
+        };
+        const inviteFirstSteps = (story: FoundingBookWindow | undefined, ordinaryStart?: () => void) => {
+            // Preserve a deliberate Play choice made while assets were loading, but pause
+            // the actual clock throughout the invitation and respect later lifecycle intent.
+            const resume = this.session.running ? beginAutoStart() : ordinaryStart;
+            firstSteps!.newStart(story, resume);
         };
         const initialAutoStart = this.opened.autoStart ? beginAutoStart() : undefined;
         let presentation: FjordScene | undefined;
@@ -368,6 +384,7 @@ export class FjordPlay {
                 .map(id => ({ kind: 'persona', id })));
             header.update(view.calendar, view.stocks,
                 residentCount, livestockCount, this.session.expeditionMode);
+            syncGuideClock();
             canvas.dataset.time = JSON.stringify({ ...view.time, ticksPerWinter: state.ticksPerWinter });
             canvas.dataset.calendar = JSON.stringify(view.calendar);
             const workspace = document.querySelector<HTMLElement>('#fjord-workspace')!;
@@ -408,6 +425,7 @@ export class FjordPlay {
             desktopUI?.refresh(state, this.shared.selection, personalHistory.render(),
                 () => this.panels.render(state, this.shared.selection, '', { homeImprovements: false }));
             updateManagementAvailability(panel, this.shared);
+            firstSteps?.update(Boolean(this.loading) || !document.querySelector<HTMLElement>('#clan-book-reader')!.hidden);
             document.querySelector('#fjord-clan-name')!.textContent = state.clan.name;
             highlight();
             const selected = this.campaign.selection;
@@ -428,11 +446,13 @@ export class FjordPlay {
         };
         document.querySelector('#fjord-run')!.addEventListener('click', () => {
             // Record intent immediately, even while a queued command is awaiting scene assets.
+            if (firstSteps?.blocksClock) return;
             setPlayback(!this.session.running);
             action(() => {});
         });
         document.querySelector('#fjord-next')!.addEventListener('click', () => action(() => {
-            if (!this.session.expeditionMode) core(() => this.session.command({ type: 'AdvanceWinter' }));
+            if (!firstSteps?.blocksClock && !this.session.expeditionMode)
+                core(() => this.session.command({ type: 'AdvanceWinter' }));
         }));
         document.querySelector('#fjord-save')!.addEventListener('click', () => action(() => {
             this.shared.saveLocal(localStorage);
@@ -457,6 +477,7 @@ export class FjordPlay {
                 else { loading.diagnostics.worker = 'skipped'; loading.complete('geography'); }
                 await loading.measure('campaign-import', () => this.shared.importJSON(text));
                 loading.complete('campaign');
+                firstSteps?.restore();
                 this.foundingBook?.dispose();
                 resetProduction();
                 campaignFields();
@@ -472,6 +493,7 @@ export class FjordPlay {
                 this.loading = undefined;
                 if (this.campaign.exportJSON() !== backup) {
                     this.shared.importJSON(backup);
+                    firstSteps?.restore();
                     resetProduction();
                     campaignFields();
                     await presentation!.replace();
@@ -537,6 +559,7 @@ export class FjordPlay {
             const discoveryEnabled = explorationField.checked;
             const previousPace = this.session.pacing();
             const wasRunning = previousPace.running;
+            firstSteps?.restore();
             this.foundingBook?.dispose();
             const completeAutoStart = beginAutoStart();
             action(async () => {
@@ -549,7 +572,7 @@ export class FjordPlay {
                         resetProduction();
                         campaignFields();
                         if (presentation?.hasWorld) await presentation!.replace();
-                        completeAutoStart();
+                        inviteFirstSteps(undefined, completeAutoStart);
                         say('Campaign restarted.');
                     } finally { campaignChangePending = false; }
                     return;
@@ -595,13 +618,14 @@ export class FjordPlay {
                     canvas.dataset.loadDiagnostics = JSON.stringify(loading.diagnostics.snapshot());
                     loading?.finish();
                     this.loading = undefined;
-                    completeAutoStart();
+                    inviteFirstSteps(this.foundingBook, completeAutoStart);
                     say(restart ? 'Campaign restarted.' : 'New campaign created.');
                 } catch (error) {
                     if (error instanceof Error && error.name !== 'AbortError') loading?.fail(error);
                     this.foundingBook?.dispose();
                     const committed = this.campaign.exportJSON() !== backup;
                     this.shared.importJSON(backup);
+                    firstSteps?.restore();
                     campaignFields();
                     resetProduction();
                     // Restoration itself is not part of the cancelled operation.
@@ -640,6 +664,7 @@ export class FjordPlay {
             refresh();
         };
         desktopUI = new FjordInterface(this.shared, { select, refresh, notify: say,
+            inspected: (kind, id) => firstSteps?.inspected(kind, id),
             renderPortrait: input => presentation?.portrait(input) ?? Promise.resolve(undefined),
             home: () => controller.home(),
             commit: (commands, done) => action(async () => {
@@ -648,6 +673,15 @@ export class FjordPlay {
                 if (syncScene) await syncScene();
             }) });
         this.startupCleanup.push(() => desktopUI?.dispose());
+        firstSteps = this.ownStartup(new FirstStepsGuide(this.shared, {
+            persist, pause: () => setPlayback(false),
+            reveal: () => desktopUI!.closeForHelp(), clockChanged: syncGuideClock,
+            resident: id => desktopUI!.showResident(id),
+            household: id => select('household', id),
+            stocks: resource => desktopUI!.open(resource, true),
+            work: draft => desktopUI!.showWork(draft),
+            expeditions: () => desktopUI!.open('expeditions', true),
+        }));
         document.querySelector('#fjord-book')!.addEventListener('click', () =>
             document.querySelector<HTMLButtonElement>('#clan-book-open')!.click());
         const panelRoot = document.querySelector<HTMLElement>('#entity-panel')!;
@@ -772,6 +806,7 @@ export class FjordPlay {
             this.loading?.finish();
             this.stopped = true;
             desktopUI?.dispose();
+            firstSteps?.dispose();
             expeditions?.dispose();
             islandMissions?.dispose();
             islandMarkers.dispose();
@@ -1002,7 +1037,8 @@ export class FjordPlay {
             this.loading.finish();
             this.loading = undefined;
         }
-        initialAutoStart?.();
+        if (entry.kind !== 'continue') inviteFirstSteps(this.foundingBook, initialAutoStart);
+        else initialAutoStart?.();
         refresh();
         if (query.has('attention')) {
             desktopUI?.open('attention', true);

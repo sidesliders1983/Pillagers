@@ -1,0 +1,63 @@
+/* Reuse the game's panel tokens; the guide occupies one small part of the open world. */
+#fjord-first-steps-card {
+    position: fixed;
+    z-index: 12;
+    top: 118px;
+    left: max(16px, env(safe-area-inset-left));
+    box-sizing: border-box;
+    width: min(332px, calc(100vw - 32px));
+    max-height: calc(100dvh - 202px);
+    overflow: auto;
+    overscroll-behavior: contain;
+    padding: 13px;
+    border: 1px solid var(--fjord-line, #737b6b);
+    border-radius: 6px;
+    background: var(--fjord-panel, #1b2327f5);
+    color: var(--fjord-text, #f0e9dc);
+    font: 13px/1.45 system-ui, sans-serif;
+    touch-action: pan-y;
+}
+#fjord-first-steps-card[hidden],
+#fjord-play:has(#fjord-menu[open]) #fjord-first-steps-card,
+#fjord-play:has(#fjord-management:not([hidden]), #fjord-workspace:not([hidden])) #fjord-first-steps-card { display: none; }
+#fjord-first-steps-card h2 { margin: 0; font: 600 18px/1.25 Georgia, serif; }
+#fjord-first-steps-card p { margin: 9px 0; }
+#fjord-first-steps-card button { min-height: 44px; cursor: pointer; }
+#fjord-first-steps-card button:focus-visible { outline: 2px solid #ddbd87; outline-offset: 2px; }
+.first-steps-heading, .first-steps-actions, .first-steps-footer { display: flex; gap: 8px; align-items: center; }
+.first-steps-heading h2 { flex: 1; }
+.first-steps-heading button { min-width: 44px; }
+.first-steps-actions { flex-wrap: wrap; }
+.first-steps-actions button { flex: 1; }
+.first-steps-footer { margin-top: 9px; font-size: 11px; color: var(--fjord-muted, #bec7c1); }
+.first-steps-muted { color: var(--fjord-muted, #bec7c1); font-size: 12px; }
+#fjord-first-steps-card.first-steps-collapsed { padding: 0; width: auto; max-width: min(380px, calc(100vw - 32px)); }
+#fjord-first-steps-card.first-steps-collapsed button { border: 0; background: transparent; text-align: left; width: 100%; }
+#fjord-play.fjord-mobile #fjord-first-steps-card {
+    top: calc(var(--fjord-safe-top, 0px) + 76px);
+    left: calc(var(--fjord-safe-left, 0px) + 8px);
+    width: min(326px, calc(50vw - 16px));
+    max-height: calc(var(--fjord-viewport-height, 100dvh) - 144px - var(--fjord-safe-top, 0px) - var(--fjord-safe-bottom, 0px));
+}
+@media (max-width: 600px) {
+    #fjord-play.fjord-mobile #fjord-first-steps-card {
+        top: calc(var(--fjord-safe-top, 0px) + 164px);
+        width: calc(100vw - 16px - var(--fjord-safe-left, 0px) - var(--fjord-safe-right, 0px));
+        max-height: calc(var(--fjord-viewport-height, 100dvh) - 260px);
+    }
+}
+@media (max-height: 480px) and (min-width: 601px) {
+    #fjord-play.fjord-mobile #fjord-first-steps-card { font-size: 12px; }
+    #fjord-first-steps-card h2 { font-size: 16px; }
+    #fjord-first-steps-card p { margin: 6px 0; }
+}
+
+.first-steps-screen-reader {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}

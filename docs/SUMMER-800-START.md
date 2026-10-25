@@ -31,3 +31,12 @@ This updates #32's historical Winter-start baseline only for new Fjord campaigns
 The cinematic top-down loading sequence and camera flight in #153 have not been implemented. This slice establishes the canonical phase and verifies the existing loading/first-scene path. #153 must consume this actual saved phase for preview and arrival, retain the loading pause, and reveal no hidden CPU settlement details. No claim of cinematic acceptance is made here.
 
 See [first-boundary measurements and browser review](qa/summer-founding/report.md). Default activation has owner approval; balance changes still require separate acceptance; historical reports retain their original settings.
+
+## First-steps orientation (#263)
+
+New and restarted campaigns now hold the existing clock while the player reads
+the preserved founding chapter and chooses **Guide me** or **Explore on my own**.
+Guidance starts paused; opting out uses the normal scene-ready auto-start intent.
+Continue/import/warm recovery do not automatically reopen the invitation. This
+changes only presentation and pause intent, not the Summer founding state,
+resources or annual rules. See [First steps](gameplay/FIRST-STEPS-V01.md).

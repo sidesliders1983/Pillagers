@@ -1,3 +1,4 @@
+import { readFirstSteps, type FirstStepsProgress } from './FirstStepsState';
 import { migrateWildlifeAttention } from '../lore/WildlifeAttention';
 import { attentionAlerts, eventOrdinal, type AttentionRecord, type AttentionAlert } from '../lore/AttentionHistory';
 import { createAttentionMetadata, validateAttentionMetadata, reconcileAttention, attentionRead,
@@ -21,6 +22,7 @@ export const fjordCampaignKey = 'pillagers.fjord-play.v1';
 /** Presentation adapter around the very same session used by both existing gameplay views. */
 type FjordCampaignProjection = ReturnType<typeof projectFjordSettlement> & { rival: ObservedRivalSettlement };
 export class FjordCampaign {
+    firstSteps?: FirstStepsProgress;
     private rivalLayout?: FjordLayout;
     private fresh = true;
     private attentionMetadata!: AttentionMetadata;
@@ -156,7 +158,8 @@ export class FjordCampaign {
         return { bridgeVersion: island ? 2 : 1, campaign: state,
             ...(island ? { island } : { blueprint: this.blueprint }), layout: this.layout, selection: this.selection,
             ...(this.rivalLayout ? { rivalLayout: this.rivalLayout } : {}),
-            narrative: this.session.book.save(state), attention: this.attentionSave() };
+            narrative: this.session.book.save(state), attention: this.attentionSave(),
+            ...(this.firstSteps ? { firstSteps: this.firstSteps } : {}) };
     }
     exportJSON() {
         return JSON.stringify(this.exportData());
@@ -171,6 +174,7 @@ export class FjordCampaign {
             throw new Error('Unsupported Fjord campaign version.');
         proposal.loadJSON(extended ? JSON.stringify(saved.campaign) : text);
         if (saved.narrative) proposal.book.restore(saved.narrative, proposal.snapshot());
+        const firstSteps = readFirstSteps(saved.firstSteps, proposal.readSnapshot());
         const attention = saved.attention ?? (saved.wildlifeReadIds !== undefined ?
             migrateWildlifeAttention(saved.wildlifeReadIds, proposal.readSnapshot(), proposal.attentionHistory().retained()) :
             createAttentionMetadata(proposal.readSnapshot().events.length));
@@ -238,6 +242,7 @@ export class FjordCampaign {
         this.session.book.restore(proposal.book.save(proposal.snapshot()), this.session.snapshot());
 
         this.blueprint = blueprint;
+        this.firstSteps = firstSteps;
         this.attentionMetadata = structuredClone(attention);
         this.attentionCoreRevision = -1;
         this.attentionCache = undefined;
@@ -283,6 +288,7 @@ export class FjordCampaign {
         saved.layout = createFjordLayout(this.blueprint,
             this.layout.mooringResolved ? this.layout.mooring : undefined, proposal.snapshot().seed);
         saved.selection = null;
+        delete saved.firstSteps;
         delete saved.attention;
         delete saved.wildlifeReadIds;
         delete saved.rivalLayout;

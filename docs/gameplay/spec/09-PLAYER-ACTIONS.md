@@ -76,3 +76,11 @@ The panel shows whether it is burning, remaining prepaid fuel, and the cost to r
 Lighting without prepaid fuel requires one Material; an unavailable action explains why.
 [Fuel rules](../../SETTLEMENT-CAMPFIRE.md#campfire-fuel--97-spike) apply throughout the year.
 Ceremonies and the future settlement information panel remain outside this spike.
+
+## First steps — alpha presentation (#263)
+
+New players may use a short optional guide through real residents, work, housing
+and observed consequences. Guide links navigate to existing UI and never issue
+Core commands or supply resources. It is presentation metadata with explicit
+skip/replay and per-new-start reset, not another progression or event system.
+See [First steps v0.1](../FIRST-STEPS-V01.md) for the current lifecycle and QA contract.

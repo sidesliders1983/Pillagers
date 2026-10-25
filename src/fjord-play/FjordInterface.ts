@@ -1,3 +1,4 @@
+import type { FirstStepsInspection } from './FirstStepsState';
 import { renderSmithery } from './SmitheryView';
 import { craftingOccupation, type EquipmentItem } from '../simulation/Smithery';
 import { applyCommand, inspectWork, inspectCattle, inspectLivestock, occupationAptitude, occupationIds, personaAge, landingSummary } from '../simulation/SimulationCore';
@@ -31,6 +32,7 @@ const meter = (label: string, value: number) => `<div class="fjord-meter"><div><
 interface InterfaceHooks {
     renderPortrait?: (input: PortraitRequest) => Promise<string | undefined>;
     home?: () => void;
+    inspected?: (kind: FirstStepsInspection, id?: string) => void;
     select: (kind: string, id: string) => void;
     refresh: () => void;
     commit: (commands: SimulationCommand[] | (() => SimulationCommand[]), done: () => void) => void;
@@ -228,6 +230,7 @@ export class FjordInterface {
                     ${house && isMobileLayout() && !this.expanded ? `<p>${esc(state.buildings[buildingId!].specialization ? workLabel(state.buildings[buildingId!].specialization!) : 'Unspecialized')} · Level ${homeLevel(homeImprovements(state, buildingId!).upgradeLevel)}</p>` : ''}
                     ${yard ? `<p>${yard.occupants} livestock · space ${yard.occupancy}/${yard.capacity} · overcrowding ${yard.overcrowding}</p>` : ''}
                     ${yard ? renderLivestockBreeding(state, { farmyardId: yard.id }) : ''}
+                    ${home && !house ? `<p class="fjord-caption">Permanent home: ${state.mechanics!.config.houseCost} Materials upfront · ${state.mechanics!.config.baseUpkeep} Materials/year when occupied. Housing keeps current occupations.</p>` : ''}
                     <div class="fjord-actions">${home && !house ? button('build', `Build house · ${state.mechanics!.config.houseCost} Materials`, 'home',
                         this.owner.availability({ type: 'BuildHouse', householdId: home.id }).allowed ? '' : 'disabled title="Insufficient Materials or household unavailable"') : ''}
                     ${home ? button('work-menu', 'Manage work', 'work') : ''}
@@ -265,6 +268,16 @@ export class FjordInterface {
         const count = this.attentionCount(state);
         document.querySelector('#fjord-attention-count')!.textContent = count > 99 ? '99+' : String(count);
         document.querySelector('#fjord-attention')!.setAttribute('aria-label', `Attention: ${count} unread events and current conditions`);
+        if (selection && !this.surface) {
+            if (selection.kind === 'persona' && state.personas[selection.id] && (!isMobileLayout() || this.expanded))
+                this.hooks.inspected?.('resident', selection.id);
+            const home = this.household(selection);
+            if (home && ['household', 'building'].includes(selection.kind) && !this.task)
+                this.hooks.inspected?.('household', home.id);
+            if (this.task === 'work-plan' && this.draft) this.hooks.inspected?.('work', this.draft.workerId);
+            if (this.task === 'occupation' && selection.kind === 'persona')
+                this.hooks.inspected?.('work', selection.id);
+        }
         if (this.surface) this.renderSurface();
     }
 
@@ -530,6 +543,25 @@ export class FjordInterface {
     private attentionCount(_state: SimulationState) {
         return this.owner.fjord.attentionView().unreadCount;
     }
+    closeForHelp() {
+        this.close(false);
+        this.hooks.select('', '');
+    }
+    showResident(id: string) {
+        this.hooks.select('persona', id);
+        this.expanded = true;
+        this.hooks.refresh();
+        const heading = this.panel.querySelector<HTMLElement>('h2');
+        heading?.setAttribute('tabindex', '-1');
+        heading?.focus({ preventScroll: true });
+    }
+    showWork(draft: WorkDraft) {
+        this.hooks.select('household', draft.householdId);
+        this.draft = structuredClone(draft);
+        this.task = 'work-plan';
+        this.hooks.refresh();
+        this.panel.querySelector<HTMLElement>('h2')?.scrollIntoView?.({ block: 'nearest' });
+    }
     open(surface: string, force = false) {
         if (surface === 'livestock') { this.directory = 'cattle'; surface = 'settlement'; force = true; }
         if (surface === this.surface && !force && !this.workspace.hidden) { this.close(); return; }
@@ -538,6 +570,7 @@ export class FjordInterface {
         this.workspace.hidden = false;
         this.management.hidden = true;
         this.renderSurface();
+        if (surface === 'food' || surface === 'materials') this.hooks.inspected?.('resources');
         this.workspace.focus();
         this.hooks.refresh();
     }
