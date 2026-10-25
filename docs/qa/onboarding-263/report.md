@@ -20,7 +20,8 @@ matching sidecars and same-founders/new-history reset. Paired runs assert exact
 canonical serialization at matched commands/ticks, including events and RNG.
 
 Targeted checkpoints: 42 initial checks passed; after the clock/surface fixes,
-30 current focused checks passed with zero failures/skips. The complete female-hair
+33 current focused checks passed with zero failures/skips, including full-book
+reading handoff, non-producing role changes and real unpaid upkeep. The complete female-hair
 suite also passed after the byte-preserving Windows repair below.
 
 Executed commands:

@@ -229,3 +229,30 @@ test('resuming skipped guidance credits genuine production observed since its sa
         assert.equal(f.owner.session.saveJSON(), canonical);
     } finally { f.dispose(); }
 });
+
+test('continuing the founding story in the full Clan Book defers the invitation without stealing its reading focus', () => {
+    const f = fixture();
+    let story;
+    try {
+        story = new FoundingBookWindow(f.owner.session.book.snapshot().chapters[0]);
+        document.body.append(story.root);
+        f.guide.newStart(story);
+        const reader = document.createElement('section');
+        reader.id = 'clan-book-reader';
+        reader.tabIndex = -1;
+        reader.hidden = false;
+        document.body.append(reader);
+        reader.focus();
+        const open = document.querySelector('#clan-book-open');
+        open.click();
+        assert.equal(story.isOpen, false);
+        assert.equal(f.guide.root.hidden, true);
+        assert.equal(f.guide.blocksClock, true);
+        assert.equal(document.activeElement, reader);
+        f.guide.update();
+        assert.equal(f.guide.root.hidden, true);
+        reader.hidden = true;
+        f.guide.update();
+        assert.equal(f.guide.root.hidden, false);
+    } finally { story?.dispose(); f.dispose(); }
+});

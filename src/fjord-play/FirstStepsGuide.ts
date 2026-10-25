@@ -60,6 +60,9 @@ export class FirstStepsGuide {
             { signal: this.abort.signal });
     }
     get blocksClock() { return this.held; }
+    private get obscured() {
+        return this.waitingForStory || document.querySelector<HTMLElement>('#clan-book-reader')?.hidden === false;
+    }
     private get state() { return this.owner.session.readSnapshot(); }
     private get progress() { return this.owner.fjord.firstSteps ?? newFirstSteps(); }
     private save(progress: FirstStepsProgress) {
@@ -117,7 +120,8 @@ export class FirstStepsGuide {
         if (this.progress.status === 'active' && this.progress.watch && !this.progress.evidenceId)
             this.save(observeFirstSteps(this.progress, this.state, this.progress.watch.afterEvent));
         this.render();
-        this.root.querySelector<HTMLButtonElement>('button')?.focus({ preventScroll: true });
+        if (!this.root.hidden)
+            this.root.querySelector<HTMLButtonElement>('button')?.focus({ preventScroll: true });
     }
     inspected(kind: FirstStepsInspection, id?: string) {
         if (!this.owner.fjord.firstSteps) return;
@@ -132,7 +136,7 @@ export class FirstStepsGuide {
             this.cursor = this.state.events.length;
             if (this.visible) this.render();
         }
-        this.root.hidden = !this.visible || this.waitingForStory || suspended;
+        this.root.hidden = !this.visible || this.obscured || suspended;
     }
     private collapse() {
         if (this.progress.status === 'offered') {
@@ -257,6 +261,8 @@ export class FirstStepsGuide {
                     html += `<p>Use Play to let time pass, then pause and inspect what actually changed.</p>`;
                     if (evidence) html += `<p data-first-steps-evidence>${evidence.type === 'BuildingMaintained' ?
                         `${evidence.details!.units} Materials paid for this home’s upkeep.` :
+                        evidence.type === 'MaintenanceDebtIncreased' ?
+                        `This home missed upkeep: ${evidence.details!.reason === 'unpaid' ? 'not enough Materials' : 'the home was vacant'}. Inspect its current maintenance debt before deciding what to do next.` :
                         `${esc(witness?.name ?? 'A resident')} produced ${evidence.details!.units} ${esc(evidence.details!.resource)}.`}
                         Recorded in year ${evidence.time.winter}.</p>${button('understood', 'I see the result')}`;
                     else html += `<p>Waiting for a real production or upkeep result. The clock is controlled by the existing Play / pause button.</p>`;
@@ -278,7 +284,7 @@ export class FirstStepsGuide {
             progress.status === 'offered' ? 'First steps are ready. The game is paused while you choose.' : headingForStatus(progress.status);
         html += `<span class="first-steps-screen-reader" role="status" data-view-key="first-steps-status">${esc(announcement)}</span>`;
         if (html !== this.html) { updateView(this.root, html); this.html = html; }
-        this.root.hidden = !this.visible || this.waitingForStory;
+        this.root.hidden = !this.visible || this.obscured;
     }
     dispose() {
         this.releaseStory?.();

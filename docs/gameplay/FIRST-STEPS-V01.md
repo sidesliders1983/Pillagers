@@ -43,7 +43,7 @@ replacing a loaded campaign; unknown imported fields are not retained.
 | Who are these people? | Open a real available resident's full Character Card | Actual resident profile was presented, with name, work and household; the mobile link expands the existing card |
 | What supports the community? | Inspect stocks and an actual productive worker or task | A resource view and productive worker/task were inspected; suitable work needs no reassignment |
 | Can this household invest? | Inspect its current household, real BuildHouse price and occupied upkeep | The inspected household has a real permanent home, including a home built out of order; otherwise the player may deliberately keep existing Materials production while saving |
-| Did a decision have a consequence? | Use existing Play/pause; inspect resulting production or upkeep | A real appended ResourceProduced or BuildingMaintained event after the watched decision is available; the player acknowledges that actual result |
+| Did a decision have a consequence? | Use existing Play/pause; inspect resulting production or upkeep | A real appended ResourceProduced, BuildingMaintained or MaintenanceDebtIncreased event after the watched decision is available; the player acknowledges that actual result |
 
 The guide only navigates. Build/AssignOccupation and work-plan approval still
 happen in the ordinary UI and use canonical availability/preview checks. Already
@@ -51,7 +51,9 @@ built homes count; no extra building, livestock slaughter, Longship salvage,
 pregnancy, raid or role change is required. Selection facts are recomputed from
 current available people and homes. Dead, absent, moved or removed targets fall
 back to current ones; an unobservable watched target is released rather than
-leaving a permanently waiting instruction.
+leaving a permanently waiting instruction. A former Materials worker who can no
+longer produce Materials also releases that instruction. Actual unpaid maintenance
+is a valid observed consequence, not a tutorial failure or an invented reward.
 
 ### Genuine Materials shortfall
 

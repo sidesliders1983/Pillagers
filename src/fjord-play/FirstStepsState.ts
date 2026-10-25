@@ -116,10 +116,7 @@ export function observeFirstSteps(progress: FirstStepsProgress, state: Simulatio
     cursor: number): FirstStepsProgress {
     if (progress.status !== 'active') return progress;
     const next = structuredClone(progress);
-    if (next.watch && !next.evidenceId && (next.watch.kind === 'home' ?
-        !state.buildings[next.watch.id] || !Object.values(state.households).some(home =>
-            home.residenceId && state.residences[home.residenceId]?.buildingId === next.watch!.id &&
-            home.memberIds.some(id => available(state, id))) : !available(state, next.watch.id))) {
+    if (next.watch && !next.evidenceId && !watchedTargetAvailable(state, next.watch)) {
         next.watch = null;
         next.evidenceId = null;
     }
@@ -136,9 +133,21 @@ export function observeFirstSteps(progress: FirstStepsProgress, state: Simulatio
     return next;
 }
 
+function watchedTargetAvailable(state: SimulationState, watch: NonNullable<FirstStepsProgress['watch']>) {
+    if (watch.kind === 'work') {
+        if (!available(state, watch.id)) return false;
+        const work = inspectWork(state, watch.id);
+        return work.resource === 'materials' && work.productivityBps > 0;
+    }
+    if (!state.buildings[watch.id]) return false;
+    return Object.values(state.households).some(home => home.residenceId &&
+        state.residences[home.residenceId]?.buildingId === watch.id &&
+        home.memberIds.some(id => available(state, id)));
+}
+
 function matchesEvidence(state: SimulationState, watch: NonNullable<FirstStepsProgress['watch']>,
     event: SimulationState['events'][number]) {
-    if (watch.kind === 'home' && event.type === 'BuildingMaintained')
+    if (watch.kind === 'home' && ['BuildingMaintained', 'MaintenanceDebtIncreased'].includes(event.type))
         return event.details?.buildingId === watch.id;
     if (event.type !== 'ResourceProduced' || !event.personaId ||
         !['food', 'materials'].includes(String(event.details?.resource)) ||
@@ -154,7 +163,7 @@ export function firstStepsEvidence(state: SimulationState, progress: FirstStepsP
     if (event?.id !== progress.evidenceId || Number(event.id.slice(6)) <= progress.watch.afterEvent) return undefined;
     if (progress.watch.kind === 'work' && event.personaId !== progress.watch.id) return undefined;
     // Evidence is a historical fact, even if its worker later moves or the home collapses.
-    if (event.type === 'BuildingMaintained' && progress.watch.kind === 'home' &&
+    if (['BuildingMaintained', 'MaintenanceDebtIncreased'].includes(event.type) && progress.watch.kind === 'home' &&
         event.details?.buildingId === progress.watch.id) return event;
     return event.type === 'ResourceProduced' && typeof event.personaId === 'string' &&
         ['food', 'materials'].includes(String(event.details?.resource)) &&

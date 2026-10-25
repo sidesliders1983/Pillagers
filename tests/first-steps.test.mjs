@@ -126,3 +126,34 @@ test('malformed presentation data is rejected before a campaign is replaced, and
     assert.equal(guide.readFirstSteps({ ...active(), arbitrary: 'not retained' }, shared.session.readSnapshot()).arbitrary, undefined);
     assert.ok(JSON.stringify(guide.newFirstSteps()).length < 400);
 });
+
+test('a worker who changes to a non-producing occupation releases the saving instruction', () => {
+    const session = newFjordScenario(32);
+    const facts = guide.firstStepsFacts(session.readSnapshot(), active());
+    const cursor = session.readSnapshot().events.length;
+    const progress = { ...active(), watch: { kind: 'work', id: facts.worker.id, afterEvent: cursor } };
+    session.command({ type: 'AssignOccupation', personaId: facts.worker.id, occupation: 'smith' });
+    const next = guide.observeFirstSteps(progress, session.readSnapshot(), cursor);
+    assert.equal(next.watch, null);
+    assert.equal(next.evidenceId, null);
+    assert.ok(guide.firstStepsFacts(session.readSnapshot(), next).workPlan);
+});
+
+test('real unpaid upkeep is an observable consequence even when the home has no production', () => {
+    const session = new GameplaySession();
+    session.loadJSON(core.serializeState(core.createCampaign(32, { initialMaterials: 10, initialFood: 100 })));
+    for (const person of Object.values(session.readSnapshot().personas))
+        session.command({ type: 'AssignOccupation', personaId: person.id, occupation: 'smith' });
+    const household = Object.values(session.readSnapshot().households)[0];
+    session.command({ type: 'BuildHouse', householdId: household.id });
+    const buildingId = session.readSnapshot().residences[session.readSnapshot().households[household.id].residenceId].buildingId;
+    const cursor = session.readSnapshot().events.length;
+    const progress = { ...active(), householdId: household.id, watch: { kind: 'home', id: buildingId, afterEvent: cursor } };
+    session.command({ type: 'AdvanceTicks', ticks: 1000 });
+    const observed = guide.observeFirstSteps(progress, session.readSnapshot(), cursor);
+    const evidence = guide.firstStepsEvidence(session.readSnapshot(), observed);
+    assert.equal(evidence.type, 'MaintenanceDebtIncreased');
+    assert.equal(evidence.details.reason, 'unpaid');
+    assert.equal(evidence.details.buildingId, buildingId);
+    assert.deepEqual(guide.readFirstSteps(observed, session.readSnapshot()), observed);
+});
