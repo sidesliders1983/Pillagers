@@ -34,7 +34,6 @@ export class FirstStepsGuide {
     private visible = false;
     private waitingForStory = false;
     private releaseStory?: () => void;
-    private ordinaryStart?: () => void;
     private held = false;
     private revision = -1;
     private cursor: number;
@@ -72,12 +71,12 @@ export class FirstStepsGuide {
         return true;
     }
     /** Only explicit new/restarted histories receive an automatic invitation. */
-    newStart(story?: FoundingBookWindow, ordinaryStart?: () => void) {
+    newStart(story?: FoundingBookWindow) {
         this.restore();
         this.save(newFirstSteps());
         this.held = true;
         this.hooks.clockChanged();
-        this.ordinaryStart = ordinaryStart;
+        this.hooks.pause();
         this.waitingForStory = !!story?.isOpen;
         if (this.waitingForStory) {
             this.releaseStory = story!.whenClosed(() => {
@@ -96,7 +95,6 @@ export class FirstStepsGuide {
     restore() {
         this.releaseStory?.();
         this.releaseStory = undefined;
-        this.ordinaryStart = undefined;
         this.held = false;
         this.hooks.clockChanged();
         this.waitingForStory = false;
@@ -148,14 +146,11 @@ export class FirstStepsGuide {
         this.root.querySelector<HTMLButtonElement>('button')?.focus({ preventScroll: true });
     }
     private choose(guided: boolean) {
-        const ordinary = this.ordinaryStart;
-        this.ordinaryStart = undefined;
         this.held = false;
         this.hooks.clockChanged();
         this.save({ ...this.progress, status: guided ? 'active' : 'skipped', collapsed: false });
         this.visible = guided;
-        if (guided) this.hooks.pause();
-        else ordinary?.();
+        this.hooks.pause();
         this.render();
         if (guided) this.focusHeading();
         else document.querySelector<HTMLElement>('#fjord-run')?.focus({ preventScroll: true });
@@ -225,7 +220,7 @@ export class FirstStepsGuide {
             html = `<h2 id="first-steps-title">Build a home for the next generation.</h2>
                 <p>Your people live and work independently. Guide their community through housing, work, resources and expeditions.</p>
                 <p>Residents act on their own. You assign work and housing; you direct expedition groups, not individual footsteps.</p>
-                <p class="first-steps-muted">The game is paused while you choose. The founding story remains in the Clan Book.</p>
+                <p class="first-steps-muted">The campaign stays paused until you press Play. The founding story remains in the Clan Book.</p>
                 <div class="first-steps-actions">${button('guide', 'Guide me')}${button('explore', 'Explore on my own')}</div>`;
         } else if (progress.collapsed) {
             html = button('expand', progress.status === 'active' ? `First steps · ${step + 1}/4 · ${goals[step]}` : 'First steps · Help',
@@ -281,7 +276,7 @@ export class FirstStepsGuide {
             }
         }
         const announcement = progress.status === 'active' ? `First steps ${step + 1} of 4: ${goals[step]}` :
-            progress.status === 'offered' ? 'First steps are ready. The game is paused while you choose.' : headingForStatus(progress.status);
+            progress.status === 'offered' ? 'First steps are ready. The campaign stays paused until you press Play.' : headingForStatus(progress.status);
         html += `<span class="first-steps-screen-reader" role="status" data-view-key="first-steps-status">${esc(announcement)}</span>`;
         if (html !== this.html) { updateView(this.root, html); this.html = html; }
         this.root.hidden = !this.visible || this.obscured;

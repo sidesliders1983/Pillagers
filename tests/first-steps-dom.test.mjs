@@ -61,7 +61,7 @@ function fixture(mobile = false, owner = new SharedSettlement(newFjordScenario(3
         } };
 }
 
-test('the invitation waits for the real founding chapter; guide pauses, opt-out preserves ordinary startup, and disposal fences old callbacks', () => {
+test('the invitation waits for the real founding chapter; guide pauses, opt-out stays paused, and disposal fences old callbacks', () => {
     const f = fixture();
     let story;
     try {
@@ -70,7 +70,7 @@ test('the invitation waits for the real founding chapter; guide pauses, opt-out 
         document.body.append(story.root);
         const text = story.root.querySelector('article').textContent;
         let starts = 0;
-        f.guide.newStart(story, () => { starts++; f.owner.session.setRunning(true); });
+        f.guide.newStart(story);
         assert.equal(f.guide.blocksClock, true);
         assert.equal(document.querySelector('#fjord-run').disabled, true);
         assert.equal(document.querySelector('#fjord-next').disabled, true);
@@ -87,10 +87,10 @@ test('the invitation waits for the real founding chapter; guide pauses, opt-out 
         assert.equal(document.querySelector('#fjord-next').disabled, false);
         assert.equal(starts, 0, 'Guidance releases pause intent only to the real Play control');
         assert.equal(f.owner.session.saveJSON(), canonical);
-        f.guide.newStart(undefined, () => { starts++; f.owner.session.setRunning(true); });
+        f.guide.newStart();
         f.click('explore');
-        assert.equal(starts, 1);
-        assert.equal(f.owner.session.running, true);
+        assert.equal(starts, 0);
+        assert.equal(f.owner.session.running, false);
         assert.equal(f.guide.root.hidden, true);
         story = new FoundingBookWindow(f.owner.session.book.snapshot().chapters[0]);
         f.guide.newStart(story);

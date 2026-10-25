@@ -1,4 +1,5 @@
 import { FirstStepsGuide } from './FirstStepsGuide';
+import { CampaignPlayback } from './CampaignPlayback';
 import { newFirstSteps } from './FirstStepsState';
 import { AttentionToast } from '../lore/AttentionToast';
 import { AttentionView } from '../lore/AttentionView';
@@ -132,7 +133,7 @@ export class FjordPlay {
                 enableStartDiscovery = !!campaign.session.readSnapshot().discovery;
                 campaign.restart(true, undefined, undefined, proposal);
             }
-            this.opened = { campaign, warning: '', autoStart: entry.kind === 'restart' || resumePlayback };
+            this.opened = { campaign, warning: '', autoStart: entry.kind === 'continue' && resumePlayback };
         } else {
             const proposal = await this.loading.measure('campaign-founders', () => newFjordScenario(entry.seed));
             this.foundingBook = new FoundingBookWindow(proposal.book.snapshot().chapters[0]);
@@ -141,7 +142,7 @@ export class FjordPlay {
             await this.loading.prepare(entry.seed);
             entry.signal.throwIfAborted();
             this.opened = { campaign: new SharedSettlement(proposal, undefined, true, currentIslandVersion),
-                warning: '', autoStart: true };
+                warning: '', autoStart: false };
             const preferences = entry.source && JSON.parse(entry.source.text).presentation;
             if (preferences) this.opened.campaign.setPresentation(preferences);
         }
@@ -289,10 +290,9 @@ export class FjordPlay {
         let firstSteps: FirstStepsGuide | undefined;
         const syncGuideClock = () => {
             const held = !!firstSteps?.blocksClock;
-            document.querySelector<HTMLButtonElement>('#fjord-run')!.disabled = held;
-            document.querySelector<HTMLButtonElement>('#fjord-next')!.disabled = held || this.session.expeditionMode;
+            document.querySelector<HTMLButtonElement>('#fjord-run')!.disabled = held || !playback.canPlay;
+            document.querySelector<HTMLButtonElement>('#fjord-next')!.disabled = held || !playback.canStep || this.session.expeditionMode;
         };
-        let clockIntent = 0;
         let previous = performance.now();
         let pageSuspended = false;
         let contextLost = false;
@@ -303,10 +303,12 @@ export class FjordPlay {
         let sceneLoads = 1; // Initial assets and models must finish before active time can advance.
         const ownsClock = () => !document.hidden && !this.stopped && !this.shared.transferring && !pageSuspended && !contextLost;
         const canAdvance = () => !entry.diagnosticRun && ownsClock() && sceneLoads === 0 && !this.loading && !firstSteps?.blocksClock;
+        const playback = new CampaignPlayback(running => this.session.setRunning(running), canAdvance);
+        const initialHandoff = playback.pendingHandoff(this.opened.autoStart);
         const setPlayback = (running: boolean) => {
-            clockIntent++;
             previous = performance.now();
-            this.session.setRunning(running && !entry.diagnosticRun && ownsClock() && !firstSteps?.blocksClock);
+            if (running) playback.play();
+            else playback.pause();
             const runButton = document.querySelector<HTMLButtonElement>('#fjord-run')!;
             runButton.innerHTML = icon(this.session.running ? 'pause' : 'play') + '<span>' + (this.session.running ? 'Running' : 'Paused') + '</span>';
             runButton.setAttribute('aria-label', this.session.running ? 'Pause simulation' : 'Start simulation');
@@ -314,21 +316,7 @@ export class FjordPlay {
             syncGuideClock();
             persist();
         };
-        const beginAutoStart = () => {
-            setPlayback(false);
-            const intent = clockIntent;
-            return () => {
-                if (intent === clockIntent && ownsClock())
-                    setPlayback(true);
-            };
-        };
-        const inviteFirstSteps = (story: FoundingBookWindow | undefined, ordinaryStart?: () => void) => {
-            // Preserve a deliberate Play choice made while assets were loading, but pause
-            // the actual clock throughout the invitation and respect later lifecycle intent.
-            const resume = this.session.running ? beginAutoStart() : ordinaryStart;
-            firstSteps!.newStart(story, resume);
-        };
-        const initialAutoStart = this.opened.autoStart ? beginAutoStart() : undefined;
+        const inviteFirstSteps = (story?: FoundingBookWindow) => firstSteps!.newStart(story);
         let presentation: FjordScene | undefined;
         let syncScene: (() => Promise<void>) | undefined;
         const selectionLabels = new SelectionLabels(document.querySelector<HTMLElement>('#fjord-selection-labels')!,
@@ -446,12 +434,12 @@ export class FjordPlay {
         };
         document.querySelector('#fjord-run')!.addEventListener('click', () => {
             // Record intent immediately, even while a queued command is awaiting scene assets.
-            if (firstSteps?.blocksClock) return;
+            if (!playback.canPlay) return;
             setPlayback(!this.session.running);
             action(() => {});
         });
         document.querySelector('#fjord-next')!.addEventListener('click', () => action(() => {
-            if (!firstSteps?.blocksClock && !this.session.expeditionMode)
+            if (playback.canStep && !this.session.expeditionMode)
                 core(() => this.session.command({ type: 'AdvanceWinter' }));
         }));
         document.querySelector('#fjord-save')!.addEventListener('click', () => action(() => {
@@ -459,6 +447,7 @@ export class FjordPlay {
             say('Campaign and exact Fjord saved locally.');
         }));
         const restoreInGame = async (read: () => string | Promise<string>, successMessage: string) => {
+            playback.reset();
             const backup = this.campaign.exportJSON();
             const loading = this.loading = new IslandLoading(true, undefined, undefined, { mode: 'resume' });
             diagnostics?.setMode('Loading');
@@ -507,6 +496,8 @@ export class FjordPlay {
                 controller.enabled = true;
                 drawingReady = true;
                 resetFrameTime();
+                playback.loaded();
+                syncGuideClock();
             }
         };
         document.querySelector('#fjord-load')!.addEventListener('click', () => {
@@ -558,10 +549,9 @@ export class FjordPlay {
             campaignChangePending = true;
             const discoveryEnabled = explorationField.checked;
             const previousPace = this.session.pacing();
-            const wasRunning = previousPace.running;
             firstSteps?.restore();
             this.foundingBook?.dispose();
-            const completeAutoStart = beginAutoStart();
+            playback.reset();
             action(async () => {
                 // Legacy saves keep their existing restart and geography policy.
                 // Only current island campaigns use the new generation introduction.
@@ -572,9 +562,14 @@ export class FjordPlay {
                         resetProduction();
                         campaignFields();
                         if (presentation?.hasWorld) await presentation!.replace();
-                        inviteFirstSteps(undefined, completeAutoStart);
+                        inviteFirstSteps();
+                        playback.loaded();
                         say('Campaign restarted.');
-                    } finally { campaignChangePending = false; }
+                    } finally {
+                        campaignChangePending = false;
+                        playback.loaded();
+                        syncGuideClock();
+                    }
                     return;
                 }
                 const backup = this.campaign.exportJSON();
@@ -618,7 +613,7 @@ export class FjordPlay {
                     canvas.dataset.loadDiagnostics = JSON.stringify(loading.diagnostics.snapshot());
                     loading?.finish();
                     this.loading = undefined;
-                    inviteFirstSteps(this.foundingBook, completeAutoStart);
+                    inviteFirstSteps(this.foundingBook);
                     say(restart ? 'Campaign restarted.' : 'New campaign created.');
                 } catch (error) {
                     if (error instanceof Error && error.name !== 'AbortError') loading?.fail(error);
@@ -635,7 +630,7 @@ export class FjordPlay {
                         'Loading cancelled. Your campaign is unchanged.' : 'Could not open the new island. Your campaign is retained. ' + String(error));
                     loading?.finish();
                     this.session.restorePacing({ ...previousPace, running: false });
-                    setPlayback(wasRunning);
+                    setPlayback(false);
                 } finally {
                     loading?.finish();
                     this.loading = undefined;
@@ -644,6 +639,8 @@ export class FjordPlay {
                     drawingReady = true;
                     previous = performance.now();
                     campaignChangePending = false;
+                    playback.loaded();
+                    syncGuideClock();
                 }
             });
         };
@@ -1037,8 +1034,9 @@ export class FjordPlay {
             this.loading.finish();
             this.loading = undefined;
         }
-        if (entry.kind !== 'continue') inviteFirstSteps(this.foundingBook, initialAutoStart);
-        else initialAutoStart?.();
+        playback.loaded();
+        if (entry.kind !== 'continue') inviteFirstSteps(this.foundingBook);
+        else initialHandoff();
         refresh();
         if (query.has('attention')) {
             desktopUI?.open('attention', true);

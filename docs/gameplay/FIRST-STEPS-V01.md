@@ -11,8 +11,12 @@ The opening chapter is preserved verbatim. The invitation waits for the player t
 close it; loading completion does not cut off reading. The actual campaign clock
 stays paused through reading and the invitation; Play and +1 Year stay unavailable
 until that choice is made. **Guide me** keeps that pause
-until the player uses Play. **Explore on my own** invokes the existing ordinary
-new-start intent, including its lifecycle/clock-intent fence. Help is available at
+until the player uses Play. **Explore on my own** also stays paused. Only a deliberate playable **Play**
+starts time. Ordinary Continue, local load, import and every in-game New/Restart
+arrive paused; saved speed and canonical state are retained. +1 Year is disabled
+until that first Play. Intentional internal 2D/3D view transfer alone can carry an
+already-running clock after scene readiness, fenced against a newer lifecycle pause
+or user intent. No auto-start callback belongs to a guide choice. Help is available at
 **Game menu → First steps / Help**.
 
 ### Trigger and reset policy
