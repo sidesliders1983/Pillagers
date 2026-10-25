@@ -112,4 +112,16 @@ acceptance of all chapters. The new chapter copy, phone-landscape/desktop layout
 uncoached playtest still need review. Use the questions in the gameplay contract;
 do not wait for a hunt or raid to finish before collecting comprehension feedback.
 
-No merge or Sites publication. Land/rebase on #269 only after its own acceptance.
+## Integration above #272
+
+The owner subsequently requested merging this journey above the latest PR #272.
+That memory optimization is already on main at
+06442ebcc139751649b02589db46ffd97a5e5d02. It merged into the journey branch
+without conflicts. The delivery now targets main directly and includes the
+unchanged #269 ancestor, so both onboarding layers land together.
+
+The owner's merge instruction supersedes the draft-only delivery request.
+The device/uncoached-test limits above remain an honest record, not a claim that
+those tests were performed. Exact-head required CI still gates ready/merge.
+Post-integration focused/build results and CI links are recorded in PR #271.
+No separate Sites publication is part of this merge task.
