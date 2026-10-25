@@ -97,6 +97,12 @@ export const chapterCopy: Record<JourneyChapter, { title: string; why: string }>
 export type JourneyStatus = 'completed' | 'available' | 'later' | 'skipped' | 'blocked';
 export type JourneyAction = 'resident' | 'household' | 'livestock' | 'materials' | 'work' |
     'improvements' | 'ship' | 'expeditions' | 'wildlife' | 'recon' | 'smithery' | 'pillage' | 'report';
+export interface JourneyCheck {
+    id: string;
+    label: string;
+    done: boolean;
+    action: JourneyAction;
+}
 export interface JourneyGoal {
     id: JourneyObjective;
     chapter: JourneyChapter;
@@ -105,6 +111,7 @@ export interface JourneyGoal {
     status: JourneyStatus;
     detail: string;
     action: JourneyAction;
+    checklist: JourneyCheck[];
     optional?: boolean;
 }
 
@@ -148,7 +155,7 @@ export function foundingJourney(state: SimulationState, progress: FirstStepsProg
     const add = (goal: Omit<JourneyGoal, 'status'>, complete: boolean, reason = '', later = false) => {
         const status: JourneyStatus = complete ? 'completed' : journey.skipped.includes(goal.id) ? 'skipped' :
             journey.later.includes(goal.id) || later ? 'later' : reason ? 'blocked' : 'available';
-        goals.push({ ...goal, status, detail: reason && !complete ? goal.detail + ' ' + reason : goal.detail });
+        goals.push({ ...goal, status, detail: reason && !complete ? [goal.detail, reason].filter(Boolean).join(' ') : goal.detail });
     };
     const offerReason = (mission: 'Recon' | 'Pillage') => {
         if (!state.discovery || state.world?.version !== 2) return 'Physical island missions are not enabled in this campaign.';
@@ -170,11 +177,16 @@ export function foundingJourney(state: SimulationState, progress: FirstStepsProg
     add({
         id: 'meet-people', chapter: 'home', title: 'Meet your people',
         why: 'A person has work and family. A household shares a home; livestock are individual animals.',
-        detail: [progress.residentId ? 'Resident met.' : 'Open a resident’s full profile.',
-            journey.householdId ? 'Household inspected.' : 'Inspect their household.',
-            journey.homeResidentId ? 'Resident opened from a home.' : 'Choose a named resident in a home’s resident list.',
-            journey.livestockId ? 'Livestock inspected.' : 'Inspect one of your actual founding animals.'].join(' '),
-        action: !progress.residentId ? 'resident' : !journey.householdId || !journey.homeResidentId ? 'household' : 'livestock',
+        detail: '',
+        checklist: [
+            { id: 'resident', label: 'Inspect a resident’s full profile', done: !!progress.residentId, action: 'resident' },
+            { id: 'household', label: 'Inspect their household', done: !!journey.householdId, action: 'household' },
+            { id: 'home-resident', label: 'Open a named resident from the home’s list',
+                done: !!journey.homeResidentId, action: 'household' },
+            { id: 'livestock', label: 'Inspect an individual founding animal',
+                done: !!journey.livestockId, action: 'livestock' },
+        ],
+        action: 'resident',
     }, !!progress.residentId && !!journey.householdId && !!journey.homeResidentId && !!journey.livestockId,
     !people.length && !progress.residentId ? 'No local living resident is currently available.' :
         !livestock && !journey.livestockId ? 'No living livestock remain. Return later or set this objective aside.' : '');
@@ -184,7 +196,12 @@ export function foundingJourney(state: SimulationState, progress: FirstStepsProg
         detail: `${state.stocks.food} Food · ${state.stocks.materials} Materials. Production takes time;
             setting a target is not finished stock. Keep a suitable occupation.
             ${facts.workPlan ? 'No Materials producer is working: review an eligible woodworker plan.' : ''}`,
-        action: !progress.resourcesSeen ? 'materials' : facts.workPlan ? 'work' : 'resident',
+        checklist: [
+            { id: 'stocks', label: 'Inspect Food and Materials', done: progress.resourcesSeen, action: 'materials' },
+            { id: 'work', label: 'Inspect a resident doing productive work', done: !!progress.workerId,
+                action: facts.workPlan ? 'work' : 'resident' },
+        ],
+        action: 'materials',
     }, progress.resourcesSeen && !!progress.workerId);
     add({
         id: 'permanent-home', chapter: 'home', title: 'Give a family a permanent home',
@@ -192,12 +209,20 @@ export function foundingJourney(state: SimulationState, progress: FirstStepsProg
         detail: building || index.events.home ? 'A real permanent home already counts; no second house is needed.' :
             `${facts.cost} Materials upfront · ${facts.upkeep} Materials/year when occupied.
             ${facts.shortfall ? `Save ${facts.shortfall} more Materials through actual work. Use Play to let production progress.` : ''}`,
-        action: !building && facts.workPlan ? 'work' : 'household',
+        checklist: [
+            { id: 'home', label: 'Give a household a permanent home', done: !!building || !!index.events.home,
+                action: !building && facts.workPlan ? 'work' : 'household' },
+        ],
+        action: 'household',
     }, !!building || !!index.events.home, !building && !index.events.home && !facts.housing.allowed ? facts.housing.reason : '');
     add({
         id: 'specialize-home', chapter: 'home', title: 'Give the home a purpose',
         why: 'Specialization supports matching residents’ work; it does not change their occupation.',
         detail: 'Review the real matching-work bonus and upkeep in Specialization & upgrades. Choose a useful specialization.',
+        checklist: [
+            { id: 'specialization', label: 'Choose a useful home specialization',
+                done: !!index.events.specialization || homes.some(home => !!home.specialization), action: 'improvements' },
+        ],
         action: 'improvements',
     }, !!index.events.specialization || homes.some(home => !!home.specialization),
     !building ? 'Build a permanent home first. Other chapters remain available.' : '');
@@ -211,6 +236,11 @@ export function foundingJourney(state: SimulationState, progress: FirstStepsProg
             `Next upgrade: ${cost} Materials. Occupied upkeep ${inspectBuilding(state, building.id).upkeep} → ${state.mechanics!.config.baseUpkeep + level + 1} Materials/year.
             Open the existing preview for matching residents’ productivity. This can wait.` :
             'Review a permanent home’s actual upgrade preview when one is available. This can wait.',
+        checklist: [
+            { id: 'upgrade', label: 'Upgrade a permanent home',
+                done: !!index.events.upgrade || homes.some(home => inspectBuilding(state, home.id).upgradeLevel > 0),
+                action: 'improvements' },
+        ],
         action: 'improvements',
     }, !!index.events.upgrade || homes.some(home => inspectBuilding(state, home.id).upgradeLevel > 0),
     !building ? 'A permanent home is needed.' : upgrade && !upgrade.allowed && !level ? upgrade.reason : '');
@@ -223,6 +253,11 @@ export function foundingJourney(state: SimulationState, progress: FirstStepsProg
             `Longship ${shipAway ? 'away with an expedition' : 'retained'}.
             ${salvageAmount === undefined ? '' : `Salvage offers ${salvageAmount} Materials under this campaign’s rules.`}
             Keep for now leaves sea travel available. You can reconsider salvage later.`,
+        checklist: [
+            { id: 'choice', label: 'Choose to keep or salvage the Longship',
+                done: !!index.events.salvaged || !!salvaged || !!index.events.kept ||
+                    !!retained && journey.keptShipId === retained.id, action: 'ship' },
+        ],
         action: 'ship',
     }, !!index.events.salvaged || !!salvaged || !!index.events.kept ||
         !!retained && journey.keptShipId === retained.id,
@@ -242,15 +277,27 @@ export function foundingJourney(state: SimulationState, progress: FirstStepsProg
         detail: `${group ? group.name + ': ' + group.memberIds.length + ' selected people.' : 'No Expedition Group yet.'}
             ${prepared ? 'Supplies are packed. Choose a valid destination or board your retained ship.' : 'Review the current Explore offer before packing or departing.'} A new clan’s 15 Food cannot fund a normal two-person 16 Food pack.
             Choose a smaller eligible group or build up Food through ordinary work.`,
+        checklist: [
+            { id: 'group', label: 'Create an Expedition Group with members',
+                done: !!index.events.explore || !!group?.memberIds.length, action: 'expeditions' },
+            { id: 'supplies', label: 'Pack the group’s real Food supplies',
+                done: !!index.events.explore || !!prepared, action: 'expeditions' },
+            { id: 'depart', label: 'Depart to explore on foot or aboard the Longship',
+                done: !!index.events.explore, action: 'expeditions' },
+        ],
         action: 'expeditions',
     }, !!index.events.explore, expeditionReason);
     const seen = [...index.species.keys()].map(id => wildlifeSpecies.find(species => species.id === id)!.label);
     add({
         id: 'wildlife-species', chapter: 'discovery', title: 'Witness three wild species',
         why: 'Discoveries belong to actual expedition witnesses, not the camera. Livestock do not count.',
-        detail: `${Math.min(3, index.species.size)}/3 different species witnessed${seen.length ? ': ' + seen.join(', ') : ''}.
-            Multiple groups and earlier sightings count. Explore beyond familiar ground and review the recorded witnesses in the Clan Book.
-            This longer journey can wait while you explore other chapters.`,
+        detail: 'Multiple groups and earlier sightings count. Explore beyond familiar ground; recorded witnesses remain in the Clan Book. This longer journey can wait.',
+        checklist: ['first', 'second', 'third'].map((ordinal, i) => ({
+            id: `species-${i + 1}`,
+            label: seen[i] ? `Witnessed: ${seen[i]}` : `Witness a ${ordinal} distinct wild species`,
+            done: !!seen[i],
+            action: 'expeditions',
+        })),
         action: 'wildlife',
     }, index.species.size >= 3, !state.wildlife ? 'Witnessed wildlife is not enabled in this save.' : '');
     add({
@@ -258,6 +305,10 @@ export function foundingJourney(state: SimulationState, progress: FirstStepsProg
         why: 'Knowledge comes from exploration and reports. An unseen settlement stays unknown.',
         detail: sites.length ? 'Your clan has legitimately sighted a settlement. Review only its dated known-place record.' :
             'Explore beyond familiar ground. Your group must sight a settlement before you can review its known-place record.',
+        checklist: [
+            { id: 'settlement', label: 'Sight a neighbouring settlement through exploration',
+                done: sites.length > 0, action: 'expeditions' },
+        ],
         action: 'expeditions',
     }, sites.length > 0, !state.discovery ? 'Physical discovery is not enabled in this save.' : '');
     add({
@@ -268,6 +319,14 @@ export function foundingJourney(state: SimulationState, progress: FirstStepsProg
             Boarding, sailing and landing are recorded separately. No reachable shore is guaranteed.` :
             `The Longship is ${shipState}. Use ordinary on-foot routes and reserve supplies for the return.
             You may set the sailing demonstration aside.`,
+        checklist: [
+            { id: 'embark', label: 'Board the Longship with a provisioned group',
+                done: !!index.events.embarked || !!index.events.seaTrip, action: 'expeditions' },
+            { id: 'sail', label: 'Choose a valid sea destination',
+                done: !!index.events.sailed || !!index.events.seaTrip, action: 'expeditions' },
+            { id: 'land', label: 'Sail, then disembark on a safe shore',
+                done: !!index.events.seaTrip, action: 'expeditions' },
+        ],
         action: 'expeditions', optional: true,
     }, !!index.events.seaTrip,
     !retained ? 'Sea travel is unavailable; on-foot exploration remains playable.' : '');
@@ -277,6 +336,12 @@ export function foundingJourney(state: SimulationState, progress: FirstStepsProg
         detail: index.events.reconResult ? 'A real Recon returned. Its existing report records what was learned or missed.' :
             index.events.reconStarted ? 'Recon is underway. Use Play for the real journey and review its return.' :
             'Choose a legitimately sighted site or a mapped Recon area. Show me reviews the exact route and current offer in the existing mission controls.',
+        checklist: [
+            { id: 'depart', label: 'Send a real Recon mission',
+                done: !!index.events.reconStarted || !!index.events.reconResult, action: 'recon' },
+            { id: 'return', label: 'Let Recon return with its actual report',
+                done: !!index.events.reconResult, action: 'expeditions' },
+        ],
         action: 'recon',
     }, !!index.events.reconResult, index.events.reconStarted && !index.events.reconResult ? '' : offerReason('Recon'),
     !!index.events.reconStarted && !index.events.reconResult);
@@ -287,12 +352,23 @@ export function foundingJourney(state: SimulationState, progress: FirstStepsProg
             ${smith ? smith.name + ' can craft through real stock targets and work.' : 'Review an eligible Smith work plan, then actual production targets.'}
             Wooden equipment uses Materials; a Leather-reinforced Shield also needs a Hide.
             Existing gear counts. Assign it to available named residents in Expedition groups.`,
-        action: journey.smitherySeen && owned > 0 ? 'expeditions' : 'smithery',
+        checklist: [
+            { id: 'produce', label: 'Produce or obtain supported gear',
+                done: owned > 0 || !!index.events.crafted || !!index.events.equipped || assigned.length > 0,
+                action: 'smithery' },
+            { id: 'equip', label: 'Assign gear to a named person in Expedition groups',
+                done: !!index.events.equipped || assigned.length > 0, action: 'expeditions' },
+        ],
+        action: 'smithery',
     }, !!index.events.equipped || assigned.length > 0);
     add({
         id: 'pillage', chapter: 'conflict', title: 'Choose whether to raid',
         why: 'Review actual crew, equipment, provisions, risks and cargo priorities. Dispatch is entirely your decision.',
         detail: 'Use a known viable opportunity. Show me reviews the exact route, costs and eligibility. Taking People or livestock is never required. You may postpone all conflict.',
+        checklist: [
+            { id: 'dispatch', label: 'Choose to dispatch a Pillage mission',
+                done: !!index.events.pillage, action: 'pillage' },
+        ],
         action: 'pillage', optional: true,
     }, !!index.events.pillage, offerReason('Pillage'));
     add({
@@ -300,6 +376,12 @@ export function foundingJourney(state: SimulationState, progress: FirstStepsProg
         why: 'Success, loss and legitimately empty loot all count as consequences. A lost raid is not a failed tutorial.',
         detail: result ? 'Open this real mission’s Activity Center report for success/failure, returned crew, casualties, loot and retained/lost gear.' :
             'When a voluntary Pillage returns, open its report to see what happened.',
+        checklist: [
+            { id: 'return', label: 'Let the voluntary raid resolve',
+                done: !!result, action: 'expeditions' },
+            { id: 'read', label: 'Open the returned raid’s Activity Center report',
+                done: !!journey.resultEventId && !!result, action: 'report' },
+        ],
         action: 'report', optional: true,
     }, !!journey.resultEventId && !!result, !result ? 'No returned Pillage report is available yet.' : '');
     return { goals, facts, journey, person: facts.person, home, familyHome, building, livestock, retained, shipState,

@@ -290,7 +290,7 @@ export class FjordPlay {
         let firstSteps: FirstStepsGuide | undefined;
         const syncGuideClock = () => {
             const held = !!firstSteps?.blocksClock;
-            document.querySelector<HTMLButtonElement>('#fjord-run')!.disabled = held || !playback.canPlay;
+            document.querySelector<HTMLButtonElement>('#fjord-run')!.disabled = held || !playback.canToggle(this.session.running);
             document.querySelector<HTMLButtonElement>('#fjord-next')!.disabled = held || !playback.canStep || this.session.expeditionMode;
         };
         let previous = performance.now();
@@ -434,7 +434,7 @@ export class FjordPlay {
         };
         document.querySelector('#fjord-run')!.addEventListener('click', () => {
             // Record intent immediately, even while a queued command is awaiting scene assets.
-            if (!playback.canPlay) return;
+            if (!playback.canToggle(this.session.running)) return;
             setPlayback(!this.session.running);
             action(() => {});
         });

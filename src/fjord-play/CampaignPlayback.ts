@@ -12,6 +12,7 @@ export class CampaignPlayback {
     get intent() { return this.epoch; }
     get canPlay() { return this.ready && this.eligible(); }
     get canStep() { return this.played && this.canPlay; }
+    canToggle(running: boolean) { return running || this.canPlay; }
 
     /** New, restart, Continue and import all need a fresh deliberate Play. */
     reset() {

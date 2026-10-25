@@ -233,7 +233,8 @@ export class FirstStepsGuide {
         }
         if (action !== 'show') return;
         if (isMobileLayout()) this.save({ ...this.progress, collapsed: true });
-        switch (goal.action) {
+        const nextAction = goal.checklist.find(check => !check.done)?.action ?? goal.action;
+        switch (nextAction) {
             case 'resident': {
                 const person = goal.id === 'understand-work' ? view.facts.worker : view.person;
                 if (person) this.hooks.resident(person.id);
@@ -256,7 +257,7 @@ export class FirstStepsGuide {
             case 'wildlife': this.hooks.wildlife?.(view.species[0]?.[1]); break;
             case 'smithery': this.showSmithery(view.smith?.id); break;
             case 'recon': case 'pillage':
-                this.hooks.mission?.(goal.action === 'recon' ? 'Recon' : 'Pillage', view.knownSite?.id);
+                this.hooks.mission?.(nextAction === 'recon' ? 'Recon' : 'Pillage', view.knownSite?.id);
                 break;
             case 'report':
                 if (view.result && this.hooks.report) {
@@ -325,7 +326,15 @@ export class FirstStepsGuide {
                     <article aria-label="Recommended objective" data-journey-status="${goal.status}">
                         <h3>${esc(goal.title)}${goal.optional ? ' · Optional' : ''}</h3>
                         <span class="first-steps-status">${goal.status === 'blocked' ? 'Blocked right now' : esc(goal.status)}</span>
-                        <p>${esc(goal.why)}</p><p class="first-steps-muted">${esc(goal.detail)}</p>
+                        <p>${esc(goal.why)}</p>
+                        <ul class="first-steps-checklist" aria-label="Objective checklist">
+                            ${goal.checklist.map(check => `<li data-view-key="check:${goal.id}:${check.id}" data-journey-check="${check.id}">
+                                <span class="first-steps-check" role="checkbox" aria-checked="${check.done}" aria-readonly="true"
+                                    aria-labelledby="journey-check-${goal.id}-${check.id}"><span aria-hidden="true">${check.done ? '✓' : ''}</span></span>
+                                <span id="journey-check-${goal.id}-${check.id}">${esc(check.label)}</span>
+                            </li>`).join('')}
+                        </ul>
+                        ${goal.detail ? `<p class="first-steps-muted">${esc(goal.detail)}</p>` : ''}
                         <div class="first-steps-actions">${button('show', 'Show me')}
                         ${goal.id === 'longship-choice' && view.retained && !view.retained.transport?.groupId ?
                             button('keep-ship', 'Keep for now') : ''}</div>
@@ -342,7 +351,7 @@ export class FirstStepsGuide {
             }
         }
         const announcement = progress.status === 'active' ?
-            `${copy.title}, ${done} of ${chapterGoals.length} completed. ${goal.title}: ${goal.status}.` :
+            `${copy.title}, ${done} of ${chapterGoals.length} completed. ${goal.title}: ${goal.status}, ${goal.checklist.filter(check => check.done).length} of ${goal.checklist.length} steps completed.` :
             progress.status === 'offered' ? 'The Founding Journey is ready. Press Play when you want time to pass.' : 'The Founding Journey is set aside.';
         html += `<span class="first-steps-screen-reader" role="status" data-view-key="first-steps-status">${esc(announcement)}</span>`;
         if (html !== this.html) { updateView(this.root, html); this.html = html; }

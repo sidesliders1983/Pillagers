@@ -73,3 +73,22 @@
 .first-steps-objectives button { display: block; width: 100%; text-align: left; margin-top: 4px; }
 #fjord-play.is-choosing-expedition #fjord-first-steps-card,
 #fjord-play:has(#island-mission-target:not([hidden])) #fjord-first-steps-card { display: none; }
+
+/* Read-only progress: real actions update each check; these are not form controls. */
+.first-steps-checklist { list-style: none; margin: 10px 0; padding: 0; }
+.first-steps-checklist li { display: flex; align-items: flex-start; gap: 9px; margin: 8px 0; }
+.first-steps-check {
+    flex: 0 0 17px;
+    height: 17px;
+    margin-top: 1px;
+    box-sizing: border-box;
+    border: 1px solid var(--fjord-muted, #bec7c1);
+    border-radius: 3px;
+    text-align: center;
+    font: 700 13px/15px system-ui, sans-serif;
+}
+.first-steps-check[aria-checked="true"] {
+    border-color: var(--fjord-accent, #dec582);
+    background: var(--fjord-accent, #dec582);
+    color: #1b2327;
+}

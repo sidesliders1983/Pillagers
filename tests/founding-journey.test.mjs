@@ -17,10 +17,16 @@ function project(state, progress = active(), index = new FoundingJourneyIndex(),
         startExpeditionOffer: id => core.startExpeditionOffer(state, id, context),
         islandMissionOffer: (id, target, type, priorities) => core.islandMissionOffer(state, id, target, type, priorities, context),
     };
-    return foundingJourney(state, progress, index, command => {
+    const view = foundingJourney(state, progress, index, command => {
         try { core.applyCommand(state, command, context); return { allowed: true, reason: '' }; }
         catch (error) { return { allowed: false, reason: error.message }; }
     }, offers);
+    for (const objective of view.goals) {
+        assert.ok(objective.checklist.length > 0, objective.id + ' has actionable checks');
+        assert.equal(objective.status === 'completed', objective.checklist.every(check => check.done),
+            objective.id + ' checks reflect its actual completion predicate');
+    }
+    return view;
 }
 const goal = (view, id) => view.goals.find(goal => goal.id === id);
 

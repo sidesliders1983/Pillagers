@@ -66,6 +66,15 @@ are no extra buildings, items, sightings or raids to repeat for a checkbox.
 | conflict / pillage | A genuinely accepted Pillage dispatch. It is optional; no success, taking People/livestock, or particular cargo is required. |
 | conflict / mission-result | Open the real returned Pillage's Activity Center report. Save the actual event ID; the same mission and result remain selected after load. Failure, casualties, lost gear and legitimately empty loot count as consequences. |
 
+Each objective presents its actual steps as a read-only checklist. An outlined
+box becomes a visible check mark as soon as the corresponding inspection or real
+campaign fact is recorded. The checklist cannot be toggled by the player and
+does not add completion requirements or saved derived progress. Existing actions
+count, including previously constructed homes and assigned gear. Wildlife checks
+name only species already legitimately witnessed; pending slots reveal no unseen
+species or locations. Show me follows the first unfinished step, and completed
+objectives link to their existing review.
+
 Show me performs navigation/read-only review only. Construction, work changes,
 upgrade, salvage, target setting, equipping, packing and dispatch still require
 the normal user action/confirmation and canonical eligibility. No chapter owns a

@@ -13,14 +13,15 @@
 
 ## Executed focused coverage
 
-23 focused tests passed for the integrated navigation/result implementation:
-three entry/playback contracts, seven real guide/interface DOM journeys,
+24 focused tests passed for the integrated navigation/result and checklist implementation:
+four entry/playback contracts, seven real guide/interface DOM journeys,
 twelve canonical fact/negative-outcome/sea-travel tests, and one actual
 mission-preparation/confirmation DOM test.
 
 The tests cover New/Restart/Continue/import and gated initial Play, slow loading,
 story/invitation, queued callback invalidation, warm/lifecycle pause policy and
-intentional view handoff. The actual preserved founding/full Clan Book controllers
+intentional view handoff. Pause stays reachable during scene work and invalidates
+queued elapsed time. The actual preserved founding/full Clan Book controllers
 are exercised. Source wiring uses the same playback gate for in-game replacement.
 
 The actual desktop and compact/touch FjordInterface is used for profiles,
@@ -28,6 +29,13 @@ households, resident-from-home links, livestock, stocks, eligible work preview,
 home improvements and Smithery targets. Show me alone leaves exact canonical
 bytes unchanged. Only the real work approval or mission confirmation issues its
 normal command. Repeated unchanged refreshes preserve focus and do not save.
+
+The requested subobjective checklist is read-only and derived from the existing
+completion facts. Desktop/touch DOM checks follow four real inspections through
+0/4 → 1/4 → 2/4 → 3/4 → 4/4, confirm visible ticks, reject manual checkbox
+completion and preserve progress through save/load. Show me follows the first
+unfinished step. Every model fixture asserts checklist/objective consistency,
+including historical credit, waiting missions, real gear and witnessed species.
 
 The fact tests use real Core construction, specialization, upgrades, production,
 equipment assignment, paid exploration, witnessed sightings, Recon, Pillage and
@@ -95,8 +103,9 @@ No enabled browser or native app connection is available in this session. HTTP
 first-frame recording, screenshot, frame-rate claim or physical iPhone/desktop
 layout certification is claimed. jsdom touch branches are not a physical device.
 
-The owner approved the earlier optional mechanism and asked for this deeper
-journey. The new chapter copy, actual phone-landscape/desktop layout and a small
+The owner tested the portrait phone preview and requested explicit automatic
+subobjective checklists; that steering is implemented. This does not complete
+acceptance of all chapters. The new chapter copy, phone-landscape/desktop layout and a small
 uncoached playtest still need review. Use the questions in the gameplay contract;
 do not wait for a hunt or raid to finish before collecting comprehension feedback.
 

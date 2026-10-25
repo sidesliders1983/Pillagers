@@ -82,3 +82,21 @@ test('intentional internal handoff preserves pacing only when no newer pause, lo
         assert.equal(owner.session.running, false, 'An old completion callback cannot resume again');
     }
 });
+
+test('a running campaign can always be paused during scene work, invalidating queued elapsed time', () => {
+    const owner = new SharedSettlement(newFjordScenario(32));
+    let eligible = true;
+    const clock = new CampaignPlayback(running => owner.session.setRunning(running), () => eligible);
+    clock.loaded(); clock.play();
+    const canonical = owner.session.saveJSON(), intent = clock.intent;
+    eligible = false; // A legitimate command is awaiting model/scene work.
+    assert.equal(clock.canToggle(owner.session.running), true, 'Pause remains reachable while loading');
+    clock.pause();
+    assert.equal(clock.canToggle(owner.session.running), false, 'A fresh Play cannot be queued while loading');
+    eligible = true;
+    if (intent === clock.intent && owner.session.running) owner.session.elapse(1000);
+    assert.equal(owner.session.running, false);
+    assert.equal(owner.session.saveJSON(), canonical);
+    clock.play();
+    assert.equal(owner.session.running, true, 'A later deliberate Play is still ordinary gameplay');
+});
