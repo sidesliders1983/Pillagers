@@ -1,0 +1,641 @@
+{
+  "maximumPixels": 512,
+  "entries": [
+    {
+      "source": "game-assets/houses/house-greathouse.glb",
+      "output": "game-assets/compact-models/house-greathouse.glb",
+      "before": {
+        "encodedBytes": 2634544,
+        "sha256": "9687f83e1b43a48d4ef9830a292928da3a16873608e474838aa7fd87dc6cbe9d",
+        "images": [
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "6b4c1c40c8ec50b5a6e680025f6989703663bfc40b14b844df3bb674a5fdd4c9"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "26b0c4d30203ccb39835df6f07358c90154b3e8fd06bec56cb3b3a4c157dabd5"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "21dbc9927572fc9428de37894ab4426782b1e43effe08ce25fea4f2767e35141"
+          }
+        ],
+        "rgbaBytes": 12582912
+      },
+      "after": {
+        "encodedBytes": 1067608,
+        "sha256": "ffa1ee043223bbbb23540f14e3fc95d7e472bc1531d74e9303e3a5e1ee51fe9d",
+        "images": [
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "12d6f65c1ef621fb81b9e9c5b2c852560b4074c7128f4cc3b25c57cae3e9ae78"
+          },
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "0d19db188a7c3c95bd7affd4c616f848bb49e6a4f7c3dd7c636dea02c56f59e7"
+          },
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "181d4b26eb59976bb5f0e76e4ceb6d2781fea7d3a23d42c89a448ccf0adbb92d"
+          }
+        ],
+        "rgbaBytes": 3145728
+      }
+    },
+    {
+      "source": "game-assets/houses/house-hut.glb",
+      "output": "game-assets/compact-models/house-hut.glb",
+      "before": {
+        "encodedBytes": 2242716,
+        "sha256": "52c7736abf90942b2e2ecef86d5ad112b2021de7b44577bf0e2f534cb4a4071e",
+        "images": [
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "5424658a166f8ed643ca63446a255e3390d67894071308a94fd773a4f2d9f8fc"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "c4cd4e52240cbc995b2a694778fa1527ab3bc25d7a6e616a72bd7af9c8b1fac3"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "71521f7594046b5155fcb5617c096790790cb85dbc1b8e413f5f34502a8369b1"
+          }
+        ],
+        "rgbaBytes": 12582912
+      },
+      "after": {
+        "encodedBytes": 867188,
+        "sha256": "6d6f50fac7e3038cc9a257910604e12e64db06dff64ec931a693596c7c5aeb68",
+        "images": [
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "a54600084138d0efb045e78f6c5843b0c7dc5bdd594f2256f7c46d41da4d0001"
+          },
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "a1a66c1aba491dae10c4ffeeb9c1da40fd6330fac8a3de89096c387aa81ffde9"
+          },
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "2c7998fa5ffaf99d545bc3f3af08e80e782d24a0cd83d4b45b3f5dabe4eeb672"
+          }
+        ],
+        "rgbaBytes": 3145728
+      }
+    },
+    {
+      "source": "game-assets/houses/house-homestead.glb",
+      "output": "game-assets/compact-models/house-homestead.glb",
+      "before": {
+        "encodedBytes": 2369656,
+        "sha256": "74619d6205e87ab1514a0bdb83a22693224a9f689090d50986236586473e5ccd",
+        "images": [
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "7dfe7c7d93a0c7d624df2caca129cabec64500a2800fcc4b9aea75356bd1cfe8"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "d7fe2473e53caebdedfa9fe1eb8825d66aea4cd8fe0e5512bd2adca7dd3d239b"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "c4e93355387b7ec7799ebd4ba9cf0e204d652383ea66a1a7950a09218e410bd0"
+          }
+        ],
+        "rgbaBytes": 12582912
+      },
+      "after": {
+        "encodedBytes": 961108,
+        "sha256": "ab23f946891448518f2aaa8944b7ffa2b01a679462b9cf08d9a82b2ac806f7e6",
+        "images": [
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "1d290697a6877a950f7a9253236092eb94077c7c5cf770221fde631a8eb65bf8"
+          },
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "e5551b2fb6d364de963b4e396a2b38cc44aa2335a49369dad103d93a2621508d"
+          },
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "e5efed990d604e36b50177d4a408c70245cc231be8f72d931ad6715aeea8f251"
+          }
+        ],
+        "rgbaBytes": 3145728
+      }
+    },
+    {
+      "source": "game-assets/houses/house-longhouse.glb",
+      "output": "game-assets/compact-models/house-longhouse.glb",
+      "before": {
+        "encodedBytes": 2400340,
+        "sha256": "b5fed3a66257fcd37ed1be5470ccaf3d6f461dd08d48af8b616644cad7d7cf91",
+        "images": [
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "3a5efb41d97741f26cc47d7949df8dd4010c2f682058cb064cbd44815630ab26"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "1b795b974c92232bbd0234ef3d6642c1eda16eea5b83a35fb1a9c473dee1f9c1"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "20dd605d78770ef48299740579323c024ec9ed79e6df8b99cfbe464fade636dd"
+          }
+        ],
+        "rgbaBytes": 12582912
+      },
+      "after": {
+        "encodedBytes": 1003404,
+        "sha256": "37b786bdf898c302e6a8ddea6b3c17f3d676ac72f54c2b05e1bccf688f605fe4",
+        "images": [
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "4ea59cc798f1ed12c309e4bc9105b621c8b0d86803237b59b79ce08d0fcc2a8b"
+          },
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "338677aa4f1cd9a45789b5c8ab2af153c920f31a2cb96589efbe1a466a654e9d"
+          },
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "80a6c324c0ed208464fb985559ffab403ed8b4234fef69ec3a8fdabeebe28237"
+          }
+        ],
+        "rgbaBytes": 3145728
+      }
+    },
+    {
+      "source": "game-assets/houses/farm-hut.glb",
+      "output": "game-assets/compact-models/farm-hut.glb",
+      "before": {
+        "encodedBytes": 2653744,
+        "sha256": "6715f69eb3ea6e62cdebc412e5532967952aedbc0e12c2e27471e79d9f57b019",
+        "images": [
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "f5eb425a19262f70d5bab2063578251bf21ffde5b9fec9ca543c7be6c88f973f"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "5426776f791a113659ffd5e418add8b0b894b6009ed072e884716c8898a89169"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "e0da05b39536764356591e3d668416c42796c6abfb819c3228f4bf6946f4d64c"
+          }
+        ],
+        "rgbaBytes": 12582912
+      },
+      "after": {
+        "encodedBytes": 1109920,
+        "sha256": "7ceee1e5f97bb7bc3187f6bdcf124d1d8f7795b33ac87ff2e45eb62b8af04694",
+        "images": [
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "d70541e1f901a629cf3521d3a305225f40ff0be95bcd37fe9d880cf27d97d085"
+          },
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "daae49b944723241771e33c140f223d6ffe11ae9d0f69acb6b0672cf028fd743"
+          },
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "0c58836572fb97070150d4b98ebcf60098599ee2ae6f014c2c3965adc4d5a135"
+          }
+        ],
+        "rgbaBytes": 3145728
+      }
+    },
+    {
+      "source": "game-assets/houses/farm-homestead.glb",
+      "output": "game-assets/compact-models/farm-homestead.glb",
+      "before": {
+        "encodedBytes": 1252884,
+        "sha256": "f3067bc2131c2b48d44627ef47bcdb4a30a26683ab84d364ceb680e951765c45",
+        "images": [
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "518fcf75387d628037268bc256db3410f5745d628e309d577246a101a5b5bb33"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "999e6a17a787cb6a7e9ae7f216095d895bdcc29e9e82935432b96f45c76e1ad6"
+          }
+        ],
+        "rgbaBytes": 8388608
+      },
+      "after": {
+        "encodedBytes": 823372,
+        "sha256": "3342dfe394596ed7d7d523d8432388c44ed2f4e973a40645860d75166b0162b9",
+        "images": [
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "02a53e2edbfa72f7dfd138ad67049f836d28e35ef004857437cd47879fb5254e"
+          },
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "65d24bf5b29688533343e57877d503b4ef617bbd53d5e8d6f7e3b7d8ac086d32"
+          }
+        ],
+        "rgbaBytes": 2097152
+      }
+    },
+    {
+      "source": "game-assets/houses/farm-hut-terrain.glb",
+      "output": "game-assets/compact-models/farm-hut-terrain.glb",
+      "before": {
+        "encodedBytes": 2760368,
+        "sha256": "f5e7dd600d157ae814e186b7a58e4a599fbf53b425dd01a9396b1fa0fbdea538",
+        "images": [
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "03424a93908e6bd38436c89c434fde20364647430d10907799ef08200080c4e0"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "5a152f41a84a83e5f83326d6a33ad1aa5f2e524f0640b37a4bd2f29542395cdc"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "b8877af67a2f78c6c94859ad3cdcf8cc266dec36f4ccaebb29f971f1a50205e3"
+          }
+        ],
+        "rgbaBytes": 12582912
+      },
+      "after": {
+        "encodedBytes": 1305668,
+        "sha256": "ccc9170412eb61f3ce9a95ad02311fef9e00009ed09c36c403126f8047e94085",
+        "images": [
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "5ab3278bfd48478921594fc7730de9dc51046bbbb03cbc79d3f76ff6677e0a8e"
+          },
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "e596374d538a3aae9459fc000231a80fa606fb825b975c3c41b1f92b933bf768"
+          },
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "dc305f90c21922bac9b558eee2a7df2a13a603a6525e0d753de01cc0161c1b84"
+          }
+        ],
+        "rgbaBytes": 3145728
+      }
+    },
+    {
+      "source": "game-assets/houses/farm-homestead-terrain.glb",
+      "output": "game-assets/compact-models/farm-homestead-terrain.glb",
+      "before": {
+        "encodedBytes": 2842728,
+        "sha256": "7238fdf5aa432de73730ee475ba392e932cc51d14dca98bc268dea6778e76538",
+        "images": [
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "2387a6457eef7fad383b772f39ba0a5d3c3a34e3ec30962491fce1b184a1c0e9"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "999e714d3518bfb195aa99acf4a1bdced4b403ec8afcbfad916427678104a557"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "5d5394fee6a4c6b5f62cb8faa4139fe2cd9034921c619589d95f5ea3c5af0e69"
+          }
+        ],
+        "rgbaBytes": 12582912
+      },
+      "after": {
+        "encodedBytes": 1666484,
+        "sha256": "9e4e015ec018f422d6a66492fdc13b2bdd5376ad4f55db13cef15c43e2e93631",
+        "images": [
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "8cf82900f7f10c661c1bb98f4cbb17c240ed2fd02d3bcd49aa1d4c14b77fcefa"
+          },
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "3a1518f45e843cca28303325e5eafe806731830e6ee7be0563d901571dcab3ce"
+          },
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "323e152e4726aaca05a0a30ea75374c5497ad256f93b3a492b3bb155983487c4"
+          }
+        ],
+        "rgbaBytes": 3145728
+      }
+    },
+    {
+      "source": "game-assets/houses/smith-hut.glb",
+      "output": "game-assets/compact-models/smith-hut.glb",
+      "before": {
+        "encodedBytes": 2967648,
+        "sha256": "c1727d65dc0bd1c1ce0084c1dfbfb5beb2b2d211bfff7348682ca949c300fa2d",
+        "images": [
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "ec01bcdc343af6cd738a6d45997f4def60e731df313166a4304e272ca6facd4b"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "bebd17627ee52abd9131b1b809f6edc7dfe4b451f5fb31d5cb88999bd6cf7613"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "1c8c304161d84f30053ba689ba8bac0f365a217479f3071fce0c3ab62b04b38c"
+          }
+        ],
+        "rgbaBytes": 12582912
+      },
+      "after": {
+        "encodedBytes": 1268268,
+        "sha256": "f7ece78399b6b85604b7a95c46d2a75d6e07a607bcd83de4f4fe059c9aad044b",
+        "images": [
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "e5491de79159b567b9de24f88217a1d299788336cac24441d3584e80b07d0d5b"
+          },
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "74e83908813e05f3b5ea8fedaa0bd20ee7ee82e50d1bce7da04dd63684814ecf"
+          },
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "078a172feb9f99456c41710f3e893afad4157b7f79b3e3f4fabef7e2ba7bb73e"
+          }
+        ],
+        "rgbaBytes": 3145728
+      }
+    },
+    {
+      "source": "game-assets/houses/smith-homestead.glb",
+      "output": "game-assets/compact-models/smith-homestead.glb",
+      "before": {
+        "encodedBytes": 2853348,
+        "sha256": "a38847a66266c97d7ff29a8ae7a5e0dbdacbe21813850c8494f4bc0c7b1f2300",
+        "images": [
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "3ec71945fe9ebb55c78871da22798866068bf95734296f10c3c1a2bf8c8f3e04"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "0e702372d2a7572ff0541be6aee86e32fa5271ccefaa42e2e5046cadafd5bfbd"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "100abf6d1a6de72e8a2f6d1f7164f9636de403ab9c9a063049aeb7e8866f3e7f"
+          }
+        ],
+        "rgbaBytes": 12582912
+      },
+      "after": {
+        "encodedBytes": 1255832,
+        "sha256": "42fa0abc5a8e0ea97da94b547653ef037850607d81dadd970fa32bf029f41b9b",
+        "images": [
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "620e1edf2269ae595fbe03e5fe2200ea47bd0172f0ca6718a0f13b2aa0ca582c"
+          },
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "1e4f060c75470ac33dc384c2093736d27a69447d1ece92d6c1f25e3d78a6debe"
+          },
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "bf6bbdfec7cc390baecd26e09571ef541a8711b7375e9d8b9d466153c34c8dc8"
+          }
+        ],
+        "rgbaBytes": 3145728
+      }
+    },
+    {
+      "source": "scenery/meshy-tent-v1/tent.glb",
+      "output": "game-assets/compact-models/tent.glb",
+      "before": {
+        "encodedBytes": 2014824,
+        "sha256": "c2769d0fab2dcd0fb23de903a146a524fe7ceedcded517c48de8edfae52f5dd3",
+        "images": [
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "7f8c9d6f06fd3a58af60bbdc6b350030956b52efb882e6e982cef0819e22ad5b"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "819238607df4f885ba21f5370eda0730ff3adf7df103624aae68e84d665facf3"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "9a45b9292c1dfc0b66ad4ebca5600abc9ef22b1782844c3686a0fcbd19cb9b14"
+          }
+        ],
+        "rgbaBytes": 12582912
+      },
+      "after": {
+        "encodedBytes": 887840,
+        "sha256": "c920b2b7025f87671ef0bf4c51c095725f9d477fe2e2f76ee7bb8380f1867aa6",
+        "images": [
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "909452011d3722f89e9d63752e548ee4f70374b5abc9a96bb892c491d2cb71b5"
+          },
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "3f7562e74b1888ebe9e97d83dd5c6d6d30f486d3df2abb50ec417c4e17c8ad8d"
+          },
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "8e29044c514e36de916d149bd5c83d2b02d2e1985c63f39a4eab80d32ea494ae"
+          }
+        ],
+        "rgbaBytes": 3145728
+      }
+    },
+    {
+      "source": "scenery/meshy-campfire-v1/campfire.glb",
+      "output": "game-assets/compact-models/campfire.glb",
+      "before": {
+        "encodedBytes": 1925060,
+        "sha256": "666150e21cc0faea05c26703e32b41b0cb3d3558e175ed7209a9ea2085a0bf36",
+        "images": [
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "d9cc793ad84f7c73d160b97389cdacd7a40ba5859fa14b319e00bf3dff1693df"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "be88a9f61c583b7f6ca9443c72fb61c1366ccb38e82b8710c2e5070131e37726"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "rgbaBytes": 4194304,
+            "sha256": "4f1acb5a902e5bfa046c8c20fb0908ad4828ddfb7ac27298ebdfef9baf0bfd91"
+          }
+        ],
+        "rgbaBytes": 12582912
+      },
+      "after": {
+        "encodedBytes": 962196,
+        "sha256": "5830fbf89a34d6c8ca291522c0b261dc58f675ff139cd74e55cf08937a5cf896",
+        "images": [
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "61e0a7759c012815057856f2257873b5358a10efd35c6177ca18d1d07368fb5a"
+          },
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "5703cd96aa89c01c5aad2c07d45d67a6a19dc40cce5676026010abaf92045157"
+          },
+          {
+            "width": 512,
+            "height": 512,
+            "rgbaBytes": 1048576,
+            "sha256": "350b68185bcccfa3050849f33e3b172301b29449fada95bd6d1aa9503ea61284"
+          }
+        ],
+        "rgbaBytes": 3145728
+      }
+    }
+  ]
+}

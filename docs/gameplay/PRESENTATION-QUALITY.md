@@ -64,3 +64,17 @@ Three alternating repetitions of the inhabited-village and observed-rival cases 
 a consistent end-to-end frame improvement. The decision is to retain the existing values above;
 the candidate remains an explicit experiment, not a product setting. See the
 [paired measurements and visual comparison](../qa/presentation-quality-211/report.md).
+
+## Compact model textures
+
+The existing default Low profile loads baked 512px house/Farmyard, tent and campfire textures
+in ordinary Fjord Play. Standard retains the original images. The owner approved activation and
+publication on 25 October 2026. No opt-in flag is needed. Live quality switches retain the loaded
+model texture tier; reload to compare, as with the existing ground tier.
+
+The twelve source models' calculated RGBA8 image budget falls from 140 to 35 MiB. This is neither
+a measured total browser-memory figure nor proof that the reported tab crashes are fixed.
+Geometry, UVs, materials, animations, character identity and Core/save behavior are unchanged.
+The source files remain available. The QA-only originalModelTextures=1 comparison keeps all
+other Low settings equal while loading original model images. See the
+[measurements and reproducible checks](../qa/model-memory/report.md).

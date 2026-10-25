@@ -9,6 +9,8 @@ import { splitEmissiveSurfaces } from './EmissiveSurfaces';
 import { terrainModels as registry, terrainAssetPath } from '../config/TerrainAssets';
 import { supportedHomeLights } from '../world/HomeLighting';
 import { homeLightGeometry } from '../world/HomeLightGeometry';
+import { modelTexturePath } from '../config/ModelTextureAssets';
+import type { PresentationQuality } from '../config/PresentationQuality';
 export type AssetKey = keyof typeof registry | keyof typeof generatedHouseFiles | NatureAssetKey | 'tent' | 'stoneCampfire';
 export interface AssetPreparationProgress {
     completed: number;
@@ -17,6 +19,10 @@ export interface AssetPreparationProgress {
     error?: unknown;
 }
 export class AssetManager {
+    constructor(private readonly quality: PresentationQuality = 'standard') { }
+    private assetURL(path: string) {
+        return import.meta.env.BASE_URL + modelTexturePath(path, this.quality);
+    }
     readonly homeLightMaps = new Map<string, Texture>();
     async loadHomeLighting() {
         const loader = new TextureLoader();
@@ -78,18 +84,18 @@ export class AssetManager {
             this.diagnostics.push('House manifest unavailable; registry paths use safe fallbacks.');
             manifest = { assets: Object.fromEntries(Object.entries(generatedHouseFiles).map(([key,file]) => [key,{file}])) };
         }
-        const generated=Object.entries(manifest.assets).map(([key,entry])=>({key:key as AssetKey,url:import.meta.env.BASE_URL+'game-assets/houses/'+entry!.file,authored:true}));
+        const generated=Object.entries(manifest.assets).map(([key,entry])=>({key:key as AssetKey,url:this.assetURL('game-assets/houses/'+entry!.file),authored:true}));
         const scenery = (Object.keys(registry) as (keyof typeof registry)[])
             .filter(key => key !== 'hut' && key !== 'greatHall')
             .map(key => ({
                 key: key as AssetKey,
-                url: import.meta.env.BASE_URL + terrainAssetPath(registry[key]),
+                url: this.assetURL(terrainAssetPath(registry[key])),
                 authored: false
             }));
         const tent = { key: 'tent' as const,
-            url: import.meta.env.BASE_URL + 'scenery/meshy-tent-v1/tent.glb', authored: true };
+            url: this.assetURL('scenery/meshy-tent-v1/tent.glb'), authored: true };
         const campfire = { key: 'stoneCampfire' as const,
-            url: import.meta.env.BASE_URL + 'scenery/meshy-campfire-v1/campfire.glb', authored: true };
+            url: this.assetURL('scenery/meshy-campfire-v1/campfire.glb'), authored: true };
         const entries = [...scenery, ...generated, tent, campfire];
         let completed = 0;
         progress?.({ completed, total: entries.length, resource: '' });
