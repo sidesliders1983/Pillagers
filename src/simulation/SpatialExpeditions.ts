@@ -469,7 +469,7 @@ export function applySpatialCommand(state: SimulationState, command: SpatialExpe
         const bound = requireContext(state, context), mission = spatialGroupMission(state, command.groupId);
         if (!mission || mission.status === 'Returning') throw new Error('No traveling expedition to recall.');
         if (mission.transport?.phase === 'embarked') {
-            mission.outcome = 'Cancelled'; recallLongship(state, mission); return;
+            mission.outcome = 'Cancelled'; recallLongship(state, mission, bound); return;
         }
         if (mission.transport) releaseLongship(state, mission);
         if (mission.provisions || mission.task) {

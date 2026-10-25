@@ -36,6 +36,9 @@ export function longshipPose(state: SimulationState, shipId: string, context: Ph
         if (ship.transport.worldId !== context.worldId) throw new Error('Longship belongs to another island.');
         return { x: ship.transport.x, z: ship.transport.z, rotation: ship.transport.rotation };
     }
+    return foundingLongshipPose(context, shipId);
+}
+function foundingLongshipPose(context: PhysicalExpeditionContext, shipId: string): LongshipPose {
     const initial = context.longshipOrigins?.[shipId];
     if (initial) return { ...initial };
     const harbor = context.world.settlement.harbor;
@@ -115,6 +118,29 @@ function setWaterRoute(mission: SpatialMission, route: Point2[], returning = fal
     if (returning) mission.returnFrom = mission.distance;
     else delete mission.returnFrom;
 }
+/** Reboarding never moves home to the remote landing. Repair legacy anchors once, on a command/tick. */
+function anchorReturnAtHarbour(state: SimulationState, mission: SpatialMission, context: PhysicalExpeditionContext) {
+    const transport = mission.transport;
+    if (transport?.phase !== 'embarked') return false;
+    const homeSea = foundingLongshipPose(context, transport.shipId);
+    if (Math.hypot(homeSea.x - transport.homeSea.x, homeSea.z - transport.homeSea.z) <= 1e-6) return false;
+    const returning = mission.status === 'Returning';
+    const start = returning ? longshipPose(state, transport.shipId, context) : mission.route[0];
+    const seaReturnRoute = planSailingRoute(context, start, homeSea);
+    for (const shore of shoreCandidates(context, homeSea)) {
+        let homeLandRoutes: Record<string, Point2[]>;
+        try {
+            homeLandRoutes = Object.fromEntries(mission.memberIds.map(id => [id,
+                planRoute(context, shore, mission.homeOrigins![id], true).route.reverse()]));
+        } catch { continue; }
+        transport.homeSea = homeSea;
+        transport.homeLandRoutes = homeLandRoutes;
+        transport.seaReturnRoute = seaReturnRoute;
+        if (returning) setWaterRoute(mission, seaReturnRoute, true);
+        return true;
+    }
+    throw new Error('No safe connected shore at the home harbour.');
+}
 /** Called only once all members have reached the canonical coast destination. */
 export function embarkReachedGroup(state: SimulationState, mission: SpatialMission, context: PhysicalExpeditionContext) {
     const boarding = mission.transport;
@@ -128,6 +154,7 @@ export function embarkReachedGroup(state: SimulationState, mission: SpatialMissi
         homeLandRoutes, seaReturnRoute: [{ ...pose }, { ...pose }] };
     mission.lastShipId = ship.id;
     setWaterRoute(mission, [{ x: pose.x, z: pose.z }, { x: pose.x, z: pose.z }]);
+    anchorReturnAtHarbour(state, mission, context);
     recordSpatial(state, 'LongshipEmbarked', mission, { longshipId: ship.id });
 }
 export function sailLongshipOffer(state: SimulationState, groupId: string, target: Point2,
@@ -162,8 +189,9 @@ export function longshipReturnTicks(state: SimulationState, mission: SpatialMiss
     return Math.ceil(sea / (speed * longshipPolicy.speedMultiplier)) +
         Math.max(...Object.values(transport.homeLandRoutes).map(route => Math.ceil(routeLength(route) / speed))) + 2;
 }
-export function recallLongship(state: SimulationState, mission: SpatialMission) {
+export function recallLongship(state: SimulationState, mission: SpatialMission, context: PhysicalExpeditionContext) {
     if (mission.transport?.phase !== 'embarked') return;
+    anchorReturnAtHarbour(state, mission, context);
     const reached = splitRoute(mission.route, mission.travelled).prefix.reverse();
     setWaterRoute(mission, joinRoutes(reached, mission.transport.seaReturnRoute), true);
     recordSpatial(state, 'LongshipReturnStarted', mission, { longshipId: mission.transport.shipId });
@@ -241,10 +269,11 @@ export function applyLongshipCommand(state: SimulationState, command: LongshipCo
 export function stepLongship(state: SimulationState, mission: SpatialMission, context: PhysicalExpeditionContext) {
     const transport = mission.transport;
     if (transport?.phase !== 'embarked') return false;
+    const reanchored = anchorReturnAtHarbour(state, mission, context);
     const previous = mission.travelled, previousStatus = mission.status;
     if (mission.memberIds.some(id => state.personas[id]?.deathWinter === null &&
         supplyEndurance(mission, id) <= longshipReturnTicks(state, mission)) && mission.status !== 'Returning')
-        recallLongship(state, mission);
+        recallLongship(state, mission, context);
     consumeCarriedFood(state, mission);
     const speed = state.world!.spatial!.policy.metresPerTick * longshipPolicy.speedMultiplier;
     if (mission.status === 'Traveling') mission.travelled = Math.min(mission.distance, mission.travelled + speed);
@@ -266,7 +295,7 @@ export function stepLongship(state: SimulationState, mission: SpatialMission, co
         if (!mission.distance) finish(state, mission, mission.outcome ?? 'Completed');
     }
     mission.updatedAt = absoluteTick(state);
-    return previousStatus !== mission.status || Math.floor(previous / 8) !== Math.floor(mission.travelled / 8);
+    return reanchored || previousStatus !== mission.status || Math.floor(previous / 8) !== Math.floor(mission.travelled / 8);
 }
 
 export function visibleLongshipMembers(memberIds: readonly string[]) {
