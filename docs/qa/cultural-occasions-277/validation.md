@@ -72,6 +72,17 @@ Focused current reproduction:
     node docs/qa/cultural-occasions-277/review-fixture-v2/review-year-jump.mjs --verify
     pnpm run build
 
+## LAN review source freshness
+
+The device review exposed stale Vite-transformed modules at port 5190: the review HTML
+was current while cached FjordPlay and gathering modules predated the invitation and
+per-attendee price. This was a server-side mismatch, not evidence that the new Core
+charged a 3-Food wedding. The broad **/scratch/** watcher exclusion also matched the
+worktree's parent folder. Development exclusions now resolve only below the actual
+project root (tools, scratch and artifacts), so a worktree inside scratch remains watched.
+Restart the review server after this correction and verify served source maps against
+the working files, including FjordPlay, the gathering quote and Core, before device review.
+
 ## Remaining delivery gates
 
 Port 5190 serves this revised review. Accepted port 5180 remains the first #275/#276 build.
