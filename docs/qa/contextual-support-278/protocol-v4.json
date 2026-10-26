@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "study": "contextual-support-278-normal-v4",
+  "status": "frozen-before-measurement",
+  "frozenAt": "2026-10-26",
+  "question": "Can actual housing loss produce contextual aid and a real shared weather-support contribution under approved normal probabilities?",
+  "seams": [
+    "Public Simulation Core createCampaign/applyCommand/serializeState/reconstructState",
+    "Public Fjord factory and SharedSettlement persistence for a separately identified playable review replay",
+    "Existing public history/projection tests; no internal stubs"
+  ],
+  "cohort": {
+    "phases": [
+      16,
+      32,
+      64
+    ],
+    "seedOrder": "Positive integer seeds from 1, ascending; two matched arms per seed, disabled then enabled.",
+    "yearsPerArm": 10,
+    "canonicalTicksPerArm": 10000,
+    "extension": "Finish the complete current phase. Extend to the next phase only if no enabled-arm SupportCompleted with actual contribution 1 exists. Stop after the first successful phase or after 64 seeds.",
+    "selection": "First completed contribution in ascending seed order, then earliest canonical event. Preserve every earlier negative and all other results. The selected completion does not truncate the ten-year campaign.",
+    "scope": "Direct public Core campaigns with current Fjord four-species livestock and summer-800 founding rules; ordinary generated legacy graph CPU clans run autonomously. This cohort does not claim the separate physical two-clan Fjord island is initialized.",
+    "factory": "createCampaign(seed, {}, {}, {}, {}, {enabled:true}, {}, 'summer-800-v1', undefined, {player:fjordLivestockRules}, {enabled:true}, arm === 'enabled' ? {} : {enabled:false})"
+  },
+  "rules": {
+    "enabled": {
+      "offerBps": 1000,
+      "acceptanceBps": 5000,
+      "resolutionTicks": 50,
+      "candidateBudget": 128
+    },
+    "disabled": {
+      "enabled": false
+    },
+    "capacity": 2,
+    "approvedEffect": "One existing shared weather-support contribution only when capacity has room; a unique housing-loss source is never rewarded again.",
+    "maximumSourcesReviewedPerClanYear": 1,
+    "unmodified": "All food, production, upkeep, salvage, weather, mortality, family, care, social, birthday, livestock and CPU rules remain canonical. No forced RNG, edited save flags, granted stocks, fabricated events, new housing/care rules or expeditions."
+  },
+  "domesticPolicy": [
+    "At initial Summer 800/tick500, salvage the actual founding-longship through SalvageLongship.",
+    "Rank actual occupied households lexically by ID. Choose the first containing a living reciprocal adult partner pair; if none exists, choose the first occupied household. Choose the first other occupied household lexically as the second home.",
+    "BuildHouse for those two actual households in that order. Specialize the first actual new building as farmer, then UpgradeBuilding exactly once. Spend normal costs: 20 Materials for two houses and 5 Materials for the upgrade; no extra construction afterward.",
+    "At founding and each following Summer/tick500 annual management point before the tenth year, assign every currently available adult to farmer, ascending persona ID, using public AssignOccupation. Availability means living, adult, not away and not providing care. Retain automatic care and career outcomes.",
+    "No gathering, livestock slaughter, expedition, campfire purchase, rebuilding or other management commands."
+  ],
+  "observations": {
+    "tickSchedule": "Each year advance500 to Winter/tick0, observe genuine new source losses and party availability; advance50 to normal pending resolution; advance450 to the next Summer/tick500. Do not advance beyond10000 ticks.",
+    "retention": "Keep ordered public commands; initial rules; all actual housing-loss facts and exact source-window participant states; support chain events; bank before/after at each checkpoint; actual weather-support applications; weather, death, upkeep, production, consumption and shortfall events; endpoint state hashes and exact save-load checks; CPU IDs/seeds and endpoint summaries.",
+    "negatives": "No collapse, no available helper/recipient, care, social participant use, declined, ended, zero contribution/full bank, and no offer all remain valid retained observations. Eligibility diagnostics are descriptive observations, not a replacement for actual events.",
+    "comparison": "Paired ten-year stock, production, shortfall and deaths are exploratory. Equal initial seeds may diverge after a support-related death difference; no prevented-death causal or statistical efficacy claim is inferred from this small cohort.",
+    "status": [
+      "complete",
+      "technical-failure",
+      "resource-limited"
+    ]
+  },
+  "review": {
+    "factory": "Replay selected seed through current newFjordScenario(seed,true), shipped baked island and SharedSettlement; preserve exact public replay commands and differences from the Core-only cohort.",
+    "requirement": "Actual normal1000/5000 loss→SupportOffered→SupportAccepted→SupportCompleted→bank contribution1. Prefer an actual later CultureWeatherSupportApplied within the fixed ten-year bound, without extending or changing policy.",
+    "timing": "Pause exact before-loss, offered and completed states as practical; create the compact completed SharedSettlement.persist review save. Replay split ticks without changing outcomes.",
+    "honesty": "Only SupportCompleted is successful help/notification. No repairs, resource transfer, restored housing, physical route, expedition or rendered-device acceptance is claimed."
+  },
+  "integrity": {
+    "beforeRuns": "Wait for source-owner stable-source confirmation. Freeze transitive Core/config/loader/package/lockfile source hashes, protocol hash and runner hash before the first case.",
+    "duringRuns": "Use one case at a time with bounded memory; save completed per-case files with exclusive-create; resume only complete cases matching the same source/protocol/runner identity. Never overwrite historical evidence.",
+    "sourceChanges": "Verify source fingerprint again after a phase. If source or policy changes, retain the old version and create new versioned evidence; never relabel old outcomes to a new SHA.",
+    "limit": "Bounded64 seeds maximum. If this yields no representative contribution, report the negative result before any new search or policy."
+  },
+  "supersedes": "Identical approved rules/policy/seeds/bound. v3 completed32 source-verified cases before final unrelated-helper validation hardening; v1 source-change interruption and v2 constructor-only failures remain historical. v4 remeasures the same32 campaigns against final Core, without expanded selection."
+}

@@ -51,13 +51,23 @@ function historyIndex(events: readonly SimulationEvent[], version: number): Inde
     return projectChronicle(events).reverse().flatMap(group => group.entries).flatMap(entry => {
         const event = byId.get(entry.sourceEventIds[0]);
         const social = event && ['ResidentQuarrelled', 'MediationAttempted', 'ResidentsReconciled', 'SocialIncidentEnded',
-            'CulturalGatheringHeld', 'CultureWeatherSupportApplied'].includes(event.type);
+            'CulturalGatheringHeld', 'CultureWeatherSupportApplied', 'SupportOffered', 'SupportAccepted',
+            'SupportCompleted', 'SupportDeclined', 'SupportEnded'].includes(event.type);
         const theme: NarrativeTheme | undefined = event && (version >= 3 && social ? 'social' : themes[event.type]);
         return event && theme ? [{ entry, event, theme }] : [];
     });
 }
 function relevantOlder(current: SimulationEvent, earlier: readonly IndexedFact[]): IndexedFact | undefined {
     const details = current.details ?? {};
+    if (current.type === 'CultureWeatherSupportApplied') {
+        const completed = earlier.find(fact => fact.event.type === 'SupportCompleted' &&
+            strings(details.sourceEventIds).includes(fact.event.id));
+        if (completed) return earlier.find(fact => fact.event.type === 'BuildingCollapsed' &&
+            fact.event.id === completed.event.details?.sourceEventId);
+    }
+    if (['SupportOffered', 'SupportAccepted', 'SupportCompleted', 'SupportDeclined', 'SupportEnded'].includes(current.type))
+        return earlier.find(fact => fact.event.type === 'BuildingCollapsed' &&
+            fact.event.id === details.sourceEventId);
     if (current.type === 'CulturalGatheringHeld' && details.occasion === 'wedding')
         return earlier.find(fact => fact.event.type === 'PartnershipFormed' &&
             fact.event.id === details.sourceEventId);
@@ -90,14 +100,21 @@ function relevantOlder(current: SimulationEvent, earlier: readonly IndexedFact[]
     return undefined;
 }
 /** Cultural callbacks name their real source; unrelated facts never share an absent incident ID. */
-function socialGroup(event: SimulationEvent): string {
+function socialGroup(event: SimulationEvent, byId: ReadonlyMap<string, SimulationEvent>): string {
+    if (['SupportOffered', 'SupportAccepted', 'SupportCompleted', 'SupportDeclined', 'SupportEnded'].includes(event.type))
+        return 'support:' + String(event.details?.offerId);
     if (event.type === 'CulturalGatheringHeld') return 'culture:' + event.id;
-    if (event.type === 'CultureWeatherSupportApplied')
-        return 'culture:' + strings(event.details?.sourceEventIds)[0];
+    if (event.type === 'CultureWeatherSupportApplied') {
+        const sourceId = strings(event.details?.sourceEventIds)[0];
+        const source = byId.get(sourceId);
+        return source?.type === 'SupportCompleted' ? 'support:' + String(source.details?.offerId) :
+            'culture:' + sourceId;
+    }
     return 'incident:' + String(event.details?.incidentId);
 }
 export function planNarrative(events: readonly SimulationEvent[], intervalStart: number, version: 1 | 2 | 3 = 2): NarrativePlan {
     const currentIds = new Set(events.slice(intervalStart).map(event => event.id));
+    const byId = new Map(events.map(event => [event.id, event]));
     const index = historyIndex(events, version);
     const older = index.filter(fact => !currentIds.has(fact.event.id));
     const current = index.filter(fact => currentIds.has(fact.event.id));
@@ -105,8 +122,8 @@ export function planNarrative(events: readonly SimulationEvent[], intervalStart:
     const focus = priority.filter(theme => current.some(fact => fact.theme === theme)).slice(0, 3);
     const threads = focus.flatMap(theme => {
         const selected = current.filter(fact => fact.theme === theme);
-        const groups = theme === 'social' ? [...new Set(selected.map(fact => socialGroup(fact.event)))].map(key =>
-            selected.filter(fact => socialGroup(fact.event) === key)) :
+        const groups = theme === 'social' ? [...new Set(selected.map(fact => socialGroup(fact.event, byId)))].map(key =>
+            selected.filter(fact => socialGroup(fact.event, byId) === key)) :
             theme === 'herd' && version >= 2 ?
             livestockGroups(selected.map(fact => fact.event)).map(group =>
                 group.map(event => selected.find(fact => fact.event.id === event.id)!)) :
@@ -114,7 +131,7 @@ export function planNarrative(events: readonly SimulationEvent[], intervalStart:
         return groups.slice(0, 4).map(group => {
             const callbacks = theme === 'social' ? group.flatMap(fact =>
                 [...older.filter(previous => previous.theme === 'social' &&
-                    socialGroup(previous.event) === socialGroup(fact.event))
+                    socialGroup(previous.event, byId) === socialGroup(fact.event, byId))
                     .flatMap(previous => previous.entry.sourceEventIds),
                     ...(relevantOlder(fact.event, older)?.entry.sourceEventIds ?? [])]) :
                 group.flatMap(fact => relevantOlder(fact.event, older)?.entry.sourceEventIds ?? []);

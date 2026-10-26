@@ -1,6 +1,6 @@
 # Cultural Events prototype: gatherings and weather resilience
 
-Status: experimental implementation for #275 + #276 under epic #274, extended by #277 below. On 26 October 2026,
+Status: experimental implementation for #275 + #276 under epic #274, extended by #277 below and [contextual support #278](CONTEXTUAL-SUPPORT-V02.md). On 26 October 2026,
 the owner approved the public test boundaries and the values below as **experimental values**.
 They are not approval for ordinary default-on campaigns. Culture is absent from legacy saves
 and ordinary new Core campaigns unless explicitly enabled at campaign creation.
@@ -105,8 +105,9 @@ node node_modules/typescript/bin/tsc --noEmit
 
 No formatter is configured. Touched source formatting is reviewed manually with `git diff --check`.
 The original #275/#276 transaction did not implement the occasion variants described below.
-Factual assistance after collapse (#278) and prerequisite-gated defence/newcomer integrations
-(#279/#280) remain separate slices. They are not implemented by gathering animations/audio.
+Factual assistance after collapse (#278) uses the same earned-support bank, as documented in
+[Contextual Support v0.2](CONTEXTUAL-SUPPORT-V02.md). Defence/newcomer integrations (#279/#280)
+are deferred. Gathering animations/audio never grant assistance.
 
 ## Current 3D prototype
 

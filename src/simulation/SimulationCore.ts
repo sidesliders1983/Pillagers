@@ -30,6 +30,10 @@ import { initializeCulture, applyCultureCommand, validateCulture, isCulturalEven
 import type { CultureConfig, CultureState, CultureCommand } from './CulturalEvents';
 export { defaultCultureConfig, gatheringOffer, inspectCulture, availableCulturalParticipants, weddingCandidates } from './CulturalEvents';
 export type { CultureConfig, CultureCommand, CultureState, CulturalOccasion, CulturalParticipant, WeddingCandidate } from './CulturalEvents';
+import { initializeContextualSupport, validateContextualSupport } from './ContextualSupport';
+import type { ContextualSupportState, ContextualSupportConfig } from './ContextualSupport';
+export { defaultContextualSupportConfig } from './ContextualSupport';
+export type { ContextualSupportState, ContextualSupportConfig } from './ContextualSupport';
 import {personaIdentity} from './Identity';
 import {initializeWorld,validateWorld,applyExpeditionCommand,personaAway,namespaceTarget} from './WorldExpeditions';
 import type {WorldState,ExpeditionCommand,ExpeditionConfig} from './WorldExpeditions';
@@ -70,6 +74,7 @@ export type Persona = {
 export type SimulationEvent = {id: string; time: GameTime; type: string; personaId?: string; details?: Record<string, unknown>};
 export type SimulationState = {
     culture?: CultureState;
+    contextualSupport?: ContextualSupportState;
     wildlife?: WildlifeState;
     specialistStocks?: SpecialistStocks;
     smithery?: SmitheryState;
@@ -91,6 +96,7 @@ export function createCampaign(
     targetLandingConfigs: Record<string, LandingConfig> = {}, foundingPhase?: FoundingPhase,
     calendarMode?: BirthdayCalendarMode, livestock?: CampaignLivestockRules,
     cultureOverrides: Partial<CultureConfig> = {},
+    contextualSupportOverrides: Partial<ContextualSupportConfig> = {},
 ): SimulationState {
     // Player defaults are separate from the shared Landing factory used by CPU clans and QA.
     const state = generateCampaign(seed, {initialFood: 15, ...overrides}, mechanicsOverrides, foundingPhase, calendarMode, livestock?.player);
@@ -112,6 +118,7 @@ export function createCampaign(
     }, expeditionOverrides);
     initializeSocial(state, socialOverrides);
     initializeCulture(state, cultureOverrides);
+    initializeContextualSupport(state, contextualSupportOverrides);
     validateState(state);
     return state;
 }
@@ -161,6 +168,7 @@ export function initializeIslandClans(input: SimulationState, world: IslandClanL
     initializeWeather(target, state.weather?.config);
     initializeSocial(target, state.social?.config ?? {});
     initializeCulture(target, state.culture?.config);
+    initializeContextualSupport(target, state.contextualSupport?.config ?? { enabled: false });
     const rival = namespaceTarget(target, clanId);
     rival.clan.name = 'Island community';
     state.world = { version: 2, config: structuredClone(input.world.config),
@@ -373,7 +381,7 @@ function validateState(state: SimulationState): void {
     let wildlifeSequence = 0;
     const wildlifeFirsts = new Map<string, string>();
     state.events.forEach((event, index) => {
-        if (isCulturalEvent(event) || (state.culture !== undefined &&
+        if (isCulturalEvent(event) || event.type === 'SupportCompleted' || (state.culture !== undefined &&
             ['PartnershipFormed', 'CampfireFuelConsumed', 'CampfireChanged'].includes(event.type)))
             culturalEvents.push(event);
         validateWildlifeSighting(event, state);
@@ -401,6 +409,7 @@ function validateState(state: SimulationState): void {
     validateCampfire(state);
     validateCulture(state, culturalEvents);
     validateSocial(state);
+    validateContextualSupport(state);
     validateMechanics(state);
     if (state.discovery !== undefined) {
         validateClanDiscovery(state.discovery, state.time.winter * state.ticksPerWinter + state.time.tick);

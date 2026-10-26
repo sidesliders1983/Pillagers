@@ -49,3 +49,10 @@ The Gameplay Lab has a readonly, stable diagnostic disclosure and existing Chron
 [QA report](../qa/personality-life-events/report.md): paired 100-seed × 25-year default domestic cohort, 100 separately labelled controlled shortage/kin/helper fixtures, plus four full-world checks. Enabled and disabled non-social outcomes are compared at every boundary, normalizing sequential event IDs independently per clan. Enabled replay is compared exactly across repeated, batched and saved/restored runs on verification seeds.
 
 Timings are descriptive CPU wall times from this development laptop; no millisecond gate. Physical iPad behavior is not certified by desktop touch emulation. The settled family rules are two complete Winters of birth cooldown and five Winters of childcare. These are independent rules; five-Winter care is correct, not an inherited discrepancy. Saved-rule compatibility is preserved. Historical measurement reports are preserved.
+
+## Contextual support extension
+
+The separately approved #278 experimental loop responds to real occupied-home collapse
+with bounded assistance and the shared cultural weather-support bank. Its exact values,
+availability, history and legacy boundaries are in [Contextual Support v0.2](CONTEXTUAL-SUPPORT-V02.md).
+The quarrel/mediation rules and historical measurements above retain their original scope.

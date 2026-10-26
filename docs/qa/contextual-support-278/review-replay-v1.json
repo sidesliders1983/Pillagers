@@ -1,0 +1,4222 @@
+{
+  "seed": 3,
+  "initialBook": {
+    "version": 1,
+    "id": "f97ef7b5-d37512d0-3880e8e6-9555aa3b",
+    "narrativeSeed": 4276621625,
+    "generatorVersion": 4,
+    "styleVersion": 4,
+    "originWinter": 800,
+    "cursor": {
+      "eventEnd": 4,
+      "stocks": {
+        "food": 15,
+        "materials": 5
+      },
+      "time": {
+        "winter": 800,
+        "tick": 500
+      }
+    },
+    "nextWinter": 805,
+    "chapters": [
+      {
+        "index": 0,
+        "milestoneIndex": 0,
+        "title": "The founding",
+        "text": "Daumantas, Daugirdas, Áila, Dervla, Áila, Æthelred, Kaunikki, Lemmikki, Leofweard and Aodhín were among those who arrived in summer.\n\nDaumantas, Kaunikki and Leofweard worked as hunters. Daugirdas, Æthelred and Aodhín worked as woodworkers. Áila, Dervla and Lemmikki worked as farmers. Áila worked as a fisher.\n\nDaumantas and Dervla were already partners. Daugirdas and Lemmikki were already partners. Their first households lived in tents.\n\nThe founding party had two adult cows and one adult bull and 1 longship.",
+        "facts": {
+          "complete": true,
+          "livestock": {
+            "youngAdultAge": 1,
+            "adultAge": 3,
+            "animals": [
+              {
+                "id": "cattle-1",
+                "sex": "female",
+                "birthWinter": 797,
+                "species": "cattle",
+                "name": "Livestock 1",
+                "youngAdultAge": 1,
+                "adultAge": 3
+              },
+              {
+                "id": "cattle-2",
+                "sex": "female",
+                "birthWinter": 797,
+                "species": "cattle",
+                "name": "Livestock 2",
+                "youngAdultAge": 1,
+                "adultAge": 3
+              },
+              {
+                "id": "cattle-3",
+                "sex": "male",
+                "birthWinter": 797,
+                "species": "cattle",
+                "name": "Livestock 3",
+                "youngAdultAge": 1,
+                "adultAge": 3
+              }
+            ]
+          },
+          "arrival": {
+            "season": "Summer",
+            "winter": 800,
+            "tick": 500
+          },
+          "residences": [
+            {
+              "id": "tent-founder-1",
+              "kind": "tent",
+              "buildingId": null
+            },
+            {
+              "id": "tent-founder-2",
+              "kind": "tent",
+              "buildingId": null
+            },
+            {
+              "id": "tent-founder-3",
+              "kind": "tent",
+              "buildingId": null
+            },
+            {
+              "id": "tent-founder-5",
+              "kind": "tent",
+              "buildingId": null
+            },
+            {
+              "id": "tent-founder-6",
+              "kind": "tent",
+              "buildingId": null
+            },
+            {
+              "id": "tent-founder-7",
+              "kind": "tent",
+              "buildingId": null
+            },
+            {
+              "id": "tent-founder-9",
+              "kind": "tent",
+              "buildingId": null
+            },
+            {
+              "id": "tent-founder-10",
+              "kind": "tent",
+              "buildingId": null
+            }
+          ],
+          "founders": [
+            {
+              "id": "founder-1",
+              "name": "Daumantas",
+              "occupation": "hunter",
+              "partnerId": "founder-4"
+            },
+            {
+              "id": "founder-2",
+              "name": "Daugirdas",
+              "occupation": "woodworker",
+              "partnerId": "founder-8"
+            },
+            {
+              "id": "founder-3",
+              "name": "Áila",
+              "occupation": "farmer",
+              "partnerId": null
+            },
+            {
+              "id": "founder-4",
+              "name": "Dervla",
+              "occupation": "farmer",
+              "partnerId": "founder-1"
+            },
+            {
+              "id": "founder-5",
+              "name": "Áila",
+              "occupation": "fisher",
+              "partnerId": null
+            },
+            {
+              "id": "founder-6",
+              "name": "Æthelred",
+              "occupation": "woodworker",
+              "partnerId": null
+            },
+            {
+              "id": "founder-7",
+              "name": "Kaunikki",
+              "occupation": "hunter",
+              "partnerId": null
+            },
+            {
+              "id": "founder-8",
+              "name": "Lemmikki",
+              "occupation": "farmer",
+              "partnerId": "founder-2"
+            },
+            {
+              "id": "founder-9",
+              "name": "Leofweard",
+              "occupation": "hunter",
+              "partnerId": null
+            },
+            {
+              "id": "founder-10",
+              "name": "Aodhín",
+              "occupation": "woodworker",
+              "partnerId": null
+            }
+          ],
+          "households": [
+            {
+              "id": "founder-1",
+              "memberIds": [
+                "founder-1",
+                "founder-4"
+              ],
+              "residenceId": "tent-founder-1",
+              "displayName": "Daumantas and Dervla’s household",
+              "residenceName": "Daumantas and Dervla’s tent"
+            },
+            {
+              "id": "founder-2",
+              "memberIds": [
+                "founder-2",
+                "founder-8"
+              ],
+              "residenceId": "tent-founder-2",
+              "displayName": "Daugirdas and Lemmikki’s household",
+              "residenceName": "Daugirdas and Lemmikki’s tent"
+            },
+            {
+              "id": "founder-3",
+              "memberIds": [
+                "founder-3"
+              ],
+              "residenceId": "tent-founder-3",
+              "displayName": "Áila’s household",
+              "residenceName": "Áila’s tent"
+            },
+            {
+              "id": "founder-5",
+              "memberIds": [
+                "founder-5"
+              ],
+              "residenceId": "tent-founder-5",
+              "displayName": "Áila’s household",
+              "residenceName": "Áila’s tent"
+            },
+            {
+              "id": "founder-6",
+              "memberIds": [
+                "founder-6"
+              ],
+              "residenceId": "tent-founder-6",
+              "displayName": "Æthelred’s household",
+              "residenceName": "Æthelred’s tent"
+            },
+            {
+              "id": "founder-7",
+              "memberIds": [
+                "founder-7"
+              ],
+              "residenceId": "tent-founder-7",
+              "displayName": "Kaunikki’s household",
+              "residenceName": "Kaunikki’s tent"
+            },
+            {
+              "id": "founder-9",
+              "memberIds": [
+                "founder-9"
+              ],
+              "residenceId": "tent-founder-9",
+              "displayName": "Leofweard’s household",
+              "residenceName": "Leofweard’s tent"
+            },
+            {
+              "id": "founder-10",
+              "memberIds": [
+                "founder-10"
+              ],
+              "residenceId": "tent-founder-10",
+              "displayName": "Aodhín’s household",
+              "residenceName": "Aodhín’s tent"
+            }
+          ],
+          "cattle": [
+            {
+              "id": "cattle-1",
+              "species": "cattle",
+              "sex": "female",
+              "birthWinter": 797,
+              "deathWinter": null,
+              "parentIds": [],
+              "origin": "founding",
+              "lastCalvingWinter": null,
+              "farmyardId": null,
+              "foodProgress": 0
+            },
+            {
+              "id": "cattle-2",
+              "species": "cattle",
+              "sex": "female",
+              "birthWinter": 797,
+              "deathWinter": null,
+              "parentIds": [],
+              "origin": "founding",
+              "lastCalvingWinter": null,
+              "farmyardId": null,
+              "foodProgress": 0
+            },
+            {
+              "id": "cattle-3",
+              "species": "cattle",
+              "sex": "male",
+              "birthWinter": 797,
+              "deathWinter": null,
+              "parentIds": [],
+              "origin": "founding",
+              "lastCalvingWinter": null,
+              "farmyardId": null,
+              "foodProgress": 0
+            }
+          ],
+          "longships": [
+            {
+              "id": "founding-longship",
+              "acquiredWinter": 800,
+              "salvagedWinter": null
+            }
+          ],
+          "stocks": {
+            "food": 15,
+            "materials": 5
+          }
+        },
+        "sourceEventIds": [
+          "event-1",
+          "event-2",
+          "event-3"
+        ],
+        "notified": false,
+        "read": false,
+        "templateVersion": 4,
+        "templateId": "clan-book.opening.v4",
+        "paragraphs": [
+          {
+            "templateId": "clan-book.arrival.people.2",
+            "templateVersion": 4,
+            "text": "Daumantas, Daugirdas, Áila, Dervla, Áila, Æthelred, Kaunikki, Lemmikki, Leofweard and Aodhín were among those who arrived in summer.",
+            "sourceEventIds": [
+              "event-1",
+              "event-2",
+              "event-3"
+            ],
+            "factRefs": [
+              "founders",
+              "arrival"
+            ]
+          },
+          {
+            "templateId": "clan-book.arrival.work",
+            "templateVersion": 4,
+            "text": "Daumantas, Kaunikki and Leofweard worked as hunters. Daugirdas, Æthelred and Aodhín worked as woodworkers. Áila, Dervla and Lemmikki worked as farmers. Áila worked as a fisher.",
+            "sourceEventIds": [
+              "event-1",
+              "event-2",
+              "event-3"
+            ],
+            "factRefs": [
+              "founders"
+            ]
+          },
+          {
+            "templateId": "clan-book.arrival.households",
+            "templateVersion": 4,
+            "text": "Daumantas and Dervla were already partners. Daugirdas and Lemmikki were already partners. Their first households lived in tents.",
+            "sourceEventIds": [
+              "event-1",
+              "event-2",
+              "event-3"
+            ],
+            "factRefs": [
+              "founders",
+              "households",
+              "residences"
+            ]
+          },
+          {
+            "templateId": "clan-book.arrival.reserves",
+            "templateVersion": 4,
+            "text": "The founding party had two adult cows and one adult bull and 1 longship.",
+            "sourceEventIds": [
+              "event-1",
+              "event-2",
+              "event-3"
+            ],
+            "factRefs": [
+              "stocks",
+              "cattle",
+              "livestock",
+              "longships"
+            ]
+          }
+        ],
+        "checkpoint": {
+          "version": 1,
+          "time": {
+            "winter": 800,
+            "tick": 500
+          },
+          "eventEnd": 4,
+          "identity": "114646:776219bd:472e5479"
+        }
+      }
+    ],
+    "memory": {
+      "version": 1,
+      "featuredEventIds": [],
+      "featuredSubjectIds": [],
+      "unresolvedEventIds": [],
+      "recent": [
+        {
+          "chapterIndex": 0,
+          "focus": [],
+          "paragraphIds": [
+            "clan-book.arrival.people.2",
+            "clan-book.arrival.work",
+            "clan-book.arrival.households",
+            "clan-book.arrival.reserves"
+          ]
+        }
+      ]
+    },
+    "canonicalIdentity": "114646:776219bd:472e5479"
+  },
+  "initialRules": {
+    "landing": {
+      "initialFood": 15,
+      "initialMaterials": 5,
+      "longshipSalvage": 20,
+      "cattleAdultAge": 3,
+      "cattleYoungAdultAge": 1,
+      "adultCattleFood": 1,
+      "calfFood": 0,
+      "cowFoodPerWinter": 4,
+      "exposedProductivityBps": 5000,
+      "farmyardCapacity": 4,
+      "slaughterFood": 15,
+      "foundingCoupleChanceBps": 5000,
+      "foundingCoupleCap": 3,
+      "cattleBirthChanceBps": 5000,
+      "cattleFertileMinAge": 3,
+      "cattleFertileMaxAge": 12,
+      "cattleBirthInterval": 2,
+      "cattleMortalityYoungBps": 200,
+      "cattleMortalityAdultBps": 50,
+      "cattleMortalityOlderBps": 500,
+      "cattleMortalityOldBps": 1500,
+      "cattleCrowdingBps": 200,
+      "cattleWeatherMortalityBps": 0
+    },
+    "mechanics": {
+      "mortalityBands": [
+        {
+          "minAge": 0,
+          "chanceBps": 10
+        },
+        {
+          "minAge": 16,
+          "chanceBps": 5
+        },
+        {
+          "minAge": 50,
+          "chanceBps": 50
+        },
+        {
+          "minAge": 60,
+          "chanceBps": 200
+        },
+        {
+          "minAge": 70,
+          "chanceBps": 500
+        },
+        {
+          "minAge": 80,
+          "chanceBps": 1000
+        },
+        {
+          "minAge": 90,
+          "chanceBps": 2000
+        }
+      ],
+      "foodAdultAge": 16,
+      "ageFullProductivityThrough": 49,
+      "agePenaltyBpsPerWinter": 200,
+      "ageProductivityFloorBps": 5000,
+      "collapseDebtWinters": 3,
+      "salvageBps": 5000,
+      "dominantLegacyChanceBps": 2500,
+      "fertilityMinAge": 18,
+      "fertilityMaxAge": 40,
+      "birthCooldownWinters": 2,
+      "childcareWinters": 5,
+      "careerMinimumGainBps": 1000,
+      "experienceRetentionBpsPerWinter": 100,
+      "apprenticeshipBonusBps": 1000,
+      "apprenticeshipTicks": 1000,
+      "switchProductivityBps": 7500,
+      "switchTicks": 1000,
+      "houseCost": 10,
+      "baseUpkeep": 1,
+      "upgradeCosts": [
+        5,
+        10,
+        20
+      ],
+      "upgradeBonusBps": [
+        0,
+        2500,
+        5000,
+        7500
+      ],
+      "tentProductivityBps": 5000,
+      "workAge": 16,
+      "adultAge": 18,
+      "childFood": 1,
+      "adultFood": 2,
+      "workPerUnit": 10000000,
+      "fertilityChanceBps": 2500,
+      "partnershipChanceBps": 1000,
+      "careerReviewWinters": 5,
+      "occupations": {
+        "farmer": {
+          "resource": "food",
+          "unitsPerWinter": 10,
+          "weights": [
+            0.3,
+            0.2,
+            0.2,
+            0.05,
+            0.25
+          ],
+          "preferences": [
+            0.7,
+            0.6,
+            0.6,
+            0.35,
+            0.25
+          ]
+        },
+        "herder": {
+          "resource": null,
+          "unitsPerWinter": 0,
+          "weights": [
+            0.2,
+            0.2,
+            0.2,
+            0.1,
+            0.3
+          ],
+          "preferences": [
+            0.6,
+            0.6,
+            0.6,
+            0.4,
+            0.3
+          ]
+        },
+        "fisher": {
+          "resource": "food",
+          "unitsPerWinter": 10,
+          "weights": [
+            0.25,
+            0.35,
+            0.15,
+            0.05,
+            0.2
+          ],
+          "preferences": [
+            0.7,
+            0.8,
+            0.6,
+            0.4,
+            0.3
+          ]
+        },
+        "hunter": {
+          "resource": "food",
+          "unitsPerWinter": 10,
+          "weights": [
+            0.2,
+            0.35,
+            0.15,
+            0.25,
+            0.05
+          ],
+          "preferences": [
+            0.7,
+            0.85,
+            0.6,
+            0.7,
+            0.35
+          ]
+        },
+        "textileWorker": {
+          "resource": null,
+          "unitsPerWinter": 0,
+          "weights": [
+            0.1,
+            0.35,
+            0.3,
+            0.05,
+            0.2
+          ],
+          "preferences": [
+            0.4,
+            0.8,
+            0.75,
+            0.35,
+            0.3
+          ]
+        },
+        "smith": {
+          "resource": null,
+          "unitsPerWinter": 0,
+          "weights": [
+            0.4,
+            0.1,
+            0.25,
+            0.05,
+            0.2
+          ],
+          "preferences": [
+            0.85,
+            0.5,
+            0.8,
+            0.3,
+            0.55
+          ]
+        },
+        "woodworker": {
+          "resource": "materials",
+          "unitsPerWinter": 5,
+          "weights": [
+            0.25,
+            0.25,
+            0.3,
+            0.05,
+            0.15
+          ],
+          "preferences": [
+            0.7,
+            0.75,
+            0.8,
+            0.35,
+            0.35
+          ]
+        },
+        "boatbuilder": {
+          "resource": null,
+          "unitsPerWinter": 0,
+          "weights": [
+            0.25,
+            0.2,
+            0.4,
+            0.05,
+            0.1
+          ],
+          "preferences": [
+            0.7,
+            0.7,
+            0.9,
+            0.35,
+            0.35
+          ]
+        },
+        "trader": {
+          "resource": null,
+          "unitsPerWinter": 0,
+          "weights": [
+            0.05,
+            0.1,
+            0.3,
+            0.35,
+            0.2
+          ],
+          "preferences": [
+            0.4,
+            0.6,
+            0.8,
+            0.85,
+            0.25
+          ]
+        },
+        "leatherAndJewelleryMaker": {
+          "resource": null,
+          "unitsPerWinter": 0,
+          "weights": [
+            0.1,
+            0.35,
+            0.3,
+            0.1,
+            0.15
+          ],
+          "preferences": [
+            0.45,
+            0.85,
+            0.8,
+            0.45,
+            0.3
+          ]
+        }
+      }
+    },
+    "livestock": {
+      "version": 2,
+      "profiles": {
+        "chicken": {
+          "youngAdultAge": 1,
+          "adultAge": 1,
+          "adultFood": 1,
+          "youngFood": 0,
+          "femaleFoodPerWinter": 4,
+          "maleFoodPerWinter": 0,
+          "femaleMaterialsPerWinter": 0,
+          "maleMaterialsPerWinter": 0,
+          "exposedProductivityBps": 5000,
+          "youngSlaughterFood": 1,
+          "youngAdultSlaughterFood": 2,
+          "slaughterFood": 2,
+          "birthChanceBps": 4500,
+          "fertileMinAge": 1,
+          "fertileMaxAge": 6,
+          "birthInterval": 1,
+          "mortalityBands": [
+            {
+              "minAge": 0,
+              "chanceBps": 300
+            },
+            {
+              "minAge": 1,
+              "chanceBps": 100
+            },
+            {
+              "minAge": 6,
+              "chanceBps": 1000
+            },
+            {
+              "minAge": 9,
+              "chanceBps": 2500
+            }
+          ],
+          "crowdingBps": 200,
+          "weatherMortalityBps": 0,
+          "capacityWeightBps": 1000
+        },
+        "pig": {
+          "youngAdultAge": 1,
+          "adultAge": 2,
+          "adultFood": 1,
+          "youngFood": 0,
+          "femaleFoodPerWinter": 0,
+          "maleFoodPerWinter": 0,
+          "femaleMaterialsPerWinter": 0,
+          "maleMaterialsPerWinter": 0,
+          "exposedProductivityBps": 5000,
+          "youngSlaughterFood": 3,
+          "youngAdultSlaughterFood": 10,
+          "slaughterFood": 20,
+          "birthChanceBps": 4000,
+          "fertileMinAge": 2,
+          "fertileMaxAge": 8,
+          "birthInterval": 1,
+          "mortalityBands": [
+            {
+              "minAge": 0,
+              "chanceBps": 200
+            },
+            {
+              "minAge": 2,
+              "chanceBps": 100
+            },
+            {
+              "minAge": 8,
+              "chanceBps": 800
+            },
+            {
+              "minAge": 12,
+              "chanceBps": 2000
+            }
+          ],
+          "crowdingBps": 200,
+          "weatherMortalityBps": 0,
+          "capacityWeightBps": 10000
+        },
+        "sheep": {
+          "youngAdultAge": 1,
+          "adultAge": 2,
+          "adultFood": 1,
+          "youngFood": 0,
+          "femaleFoodPerWinter": 2,
+          "maleFoodPerWinter": 0,
+          "femaleMaterialsPerWinter": 1,
+          "maleMaterialsPerWinter": 1,
+          "exposedProductivityBps": 5000,
+          "youngSlaughterFood": 2,
+          "youngAdultSlaughterFood": 5,
+          "slaughterFood": 10,
+          "birthChanceBps": 3000,
+          "fertileMinAge": 2,
+          "fertileMaxAge": 10,
+          "birthInterval": 1,
+          "mortalityBands": [
+            {
+              "minAge": 0,
+              "chanceBps": 200
+            },
+            {
+              "minAge": 2,
+              "chanceBps": 100
+            },
+            {
+              "minAge": 10,
+              "chanceBps": 500
+            },
+            {
+              "minAge": 14,
+              "chanceBps": 1500
+            }
+          ],
+          "crowdingBps": 200,
+          "weatherMortalityBps": 0,
+          "capacityWeightBps": 7500
+        },
+        "goat": {
+          "youngAdultAge": 1,
+          "adultAge": 2,
+          "adultFood": 1,
+          "youngFood": 0,
+          "femaleFoodPerWinter": 4,
+          "maleFoodPerWinter": 0,
+          "femaleMaterialsPerWinter": 0,
+          "maleMaterialsPerWinter": 0,
+          "exposedProductivityBps": 5000,
+          "youngSlaughterFood": 2,
+          "youngAdultSlaughterFood": 5,
+          "slaughterFood": 10,
+          "birthChanceBps": 3000,
+          "fertileMinAge": 2,
+          "fertileMaxAge": 10,
+          "birthInterval": 1,
+          "mortalityBands": [
+            {
+              "minAge": 0,
+              "chanceBps": 200
+            },
+            {
+              "minAge": 2,
+              "chanceBps": 100
+            },
+            {
+              "minAge": 9,
+              "chanceBps": 500
+            },
+            {
+              "minAge": 13,
+              "chanceBps": 1500
+            }
+          ],
+          "crowdingBps": 200,
+          "weatherMortalityBps": 0,
+          "capacityWeightBps": 7500
+        },
+        "goose": {
+          "youngAdultAge": 1,
+          "adultAge": 1,
+          "adultFood": 1,
+          "youngFood": 0,
+          "femaleFoodPerWinter": 3,
+          "maleFoodPerWinter": 0,
+          "femaleMaterialsPerWinter": 0,
+          "maleMaterialsPerWinter": 0,
+          "exposedProductivityBps": 5000,
+          "youngSlaughterFood": 1,
+          "youngAdultSlaughterFood": 3,
+          "slaughterFood": 5,
+          "birthChanceBps": 3500,
+          "fertileMinAge": 1,
+          "fertileMaxAge": 8,
+          "birthInterval": 1,
+          "mortalityBands": [
+            {
+              "minAge": 0,
+              "chanceBps": 300
+            },
+            {
+              "minAge": 1,
+              "chanceBps": 100
+            },
+            {
+              "minAge": 8,
+              "chanceBps": 800
+            },
+            {
+              "minAge": 12,
+              "chanceBps": 2000
+            }
+          ],
+          "crowdingBps": 200,
+          "weatherMortalityBps": 0,
+          "capacityWeightBps": 2000
+        }
+      },
+      "founding": {
+        "version": 1,
+        "species": [
+          "cattle",
+          "pig",
+          "sheep",
+          "goat"
+        ]
+      },
+      "breeding": {
+        "requireFed": true,
+        "capacityLimited": false,
+        "unassignedCapacityUnits": 40000
+      },
+      "hides": {
+        "cattle": 1,
+        "chicken": 0,
+        "pig": 1,
+        "sheep": 1,
+        "goat": 1,
+        "goose": 0
+      }
+    },
+    "weather": {
+      "enabled": true,
+      "profiles": {
+        "Mild": {
+          "probabilityBps": 2000,
+          "foodProductionBps": 11000,
+          "cattleConsumptionMultiplier": 1,
+          "tentMortalityBps": 0,
+          "exposedCattleMortalityBps": 0,
+          "travelDurationBps": 10000,
+          "travelRiskBps": 0
+        },
+        "Normal": {
+          "probabilityBps": 5500,
+          "foodProductionBps": 10000,
+          "cattleConsumptionMultiplier": 1,
+          "tentMortalityBps": 0,
+          "exposedCattleMortalityBps": 0,
+          "travelDurationBps": 10000,
+          "travelRiskBps": 0
+        },
+        "Harsh": {
+          "probabilityBps": 2000,
+          "foodProductionBps": 0,
+          "cattleConsumptionMultiplier": 1,
+          "tentMortalityBps": 50,
+          "exposedCattleMortalityBps": 500,
+          "travelDurationBps": 12500,
+          "travelRiskBps": 500,
+          "materialsProductionBps": 0,
+          "residentConsumptionBps": 15000,
+          "cattleConsumptionBps": 15000
+        },
+        "Severe": {
+          "probabilityBps": 500,
+          "foodProductionBps": 5000,
+          "cattleConsumptionMultiplier": 3,
+          "tentMortalityBps": 200,
+          "exposedCattleMortalityBps": 1500,
+          "travelDurationBps": 15000,
+          "travelRiskBps": 1500
+        }
+      }
+    },
+    "social": {
+      "enabled": true,
+      "quarrelMinBps": 500,
+      "quarrelMaxBps": 3000,
+      "mediationMinBps": 1000,
+      "mediationMaxBps": 3000,
+      "mediationSuccessBps": 5000,
+      "reconciliationMinBps": 1000,
+      "reconciliationMaxBps": 2000,
+      "failedMediationCooldownYears": 2,
+      "reconciliationMemoryYears": 3,
+      "reconciledQuarrelMultiplierBps": 5000,
+      "expiryYears": 5,
+      "candidateBudget": 128
+    },
+    "culture": {
+      "enabled": true,
+      "foodCost": 3,
+      "minParticipants": 3,
+      "maxParticipants": 8,
+      "supportCapacity": 2,
+      "exposureReductionBps": 2500
+    },
+    "support": {
+      "enabled": true,
+      "offerBps": 1000,
+      "acceptanceBps": 5000,
+      "resolutionTicks": 50,
+      "candidateBudget": 128
+    }
+  },
+  "commands": [
+    {
+      "type": "SalvageLongship",
+      "longshipId": "founding-longship"
+    },
+    {
+      "type": "BuildHouse",
+      "householdId": "founder-1"
+    },
+    {
+      "type": "BuildHouse",
+      "householdId": "founder-10"
+    },
+    {
+      "type": "SpecializeBuilding",
+      "buildingId": "house-1",
+      "occupation": "farmer"
+    },
+    {
+      "type": "UpgradeBuilding",
+      "buildingId": "house-1"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-1",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-10",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-2",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-3",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-4",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-5",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-6",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-7",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-8",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-9",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 499
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 49
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 450
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-1",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-10",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-2",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-3",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-4",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-5",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-6",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-7",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-8",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-9",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 499
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 49
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 450
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-1",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-10",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-2",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-3",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-4",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-5",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-6",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-7",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-8",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-9",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 499
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 49
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 450
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-1",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-10",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-2",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-3",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-4",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-5",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-6",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-7",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-8",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-9",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 499
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 49
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 450
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-1",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-10",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-2",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-4",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-5",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-6",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-7",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-8",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-9",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 499
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 49
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 450
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-1",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-2",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-5",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-6",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-7",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-8",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-9",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 499
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 49
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 450
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-1",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-2",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-5",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-6",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-7",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-8",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-9",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 499
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 49
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 450
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-1",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-2",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-5",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-6",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-7",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-8",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-9",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 499
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 49
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 450
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-1",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-2",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-5",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-6",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-7",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-8",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-9",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 499
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 49
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 450
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-1",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-2",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-5",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-6",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-7",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-9",
+      "occupation": "farmer"
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 499
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 49
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 450
+    }
+  ],
+  "transactions": [
+    {
+      "commandIndex": 0,
+      "command": {
+        "type": "SalvageLongship",
+        "longshipId": "founding-longship"
+      },
+      "time": {
+        "winter": 800,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 15,
+        "materials": 5
+      },
+      "stocksAfter": {
+        "food": 15,
+        "materials": 25
+      },
+      "foodDelta": 0,
+      "materialsDelta": 20
+    },
+    {
+      "commandIndex": 1,
+      "command": {
+        "type": "BuildHouse",
+        "householdId": "founder-1"
+      },
+      "time": {
+        "winter": 800,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 15,
+        "materials": 25
+      },
+      "stocksAfter": {
+        "food": 15,
+        "materials": 15
+      },
+      "foodDelta": 0,
+      "materialsDelta": -10
+    },
+    {
+      "commandIndex": 2,
+      "command": {
+        "type": "BuildHouse",
+        "householdId": "founder-10"
+      },
+      "time": {
+        "winter": 800,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 15,
+        "materials": 15
+      },
+      "stocksAfter": {
+        "food": 15,
+        "materials": 5
+      },
+      "foodDelta": 0,
+      "materialsDelta": -10
+    },
+    {
+      "commandIndex": 3,
+      "command": {
+        "type": "SpecializeBuilding",
+        "buildingId": "house-1",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 800,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 15,
+        "materials": 5
+      },
+      "stocksAfter": {
+        "food": 15,
+        "materials": 5
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 4,
+      "command": {
+        "type": "UpgradeBuilding",
+        "buildingId": "house-1"
+      },
+      "time": {
+        "winter": 800,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 15,
+        "materials": 5
+      },
+      "stocksAfter": {
+        "food": 15,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": -5
+    },
+    {
+      "commandIndex": 5,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-1",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 800,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 15,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 15,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 6,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-10",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 800,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 15,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 15,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 7,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-2",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 800,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 15,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 15,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 8,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-3",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 800,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 15,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 15,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 9,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-4",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 800,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 15,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 15,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 10,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-5",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 800,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 15,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 15,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 11,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-6",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 800,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 15,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 15,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 12,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-7",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 800,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 15,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 15,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 13,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-8",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 800,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 15,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 15,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 14,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-9",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 800,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 15,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 15,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 20,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-1",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 801,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 11,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 11,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 21,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-10",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 801,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 11,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 11,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 22,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-2",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 801,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 11,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 11,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 23,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-3",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 801,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 11,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 11,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 24,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-4",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 801,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 11,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 11,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 25,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-5",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 801,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 11,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 11,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 26,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-6",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 801,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 11,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 11,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 27,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-7",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 801,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 11,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 11,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 28,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-8",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 801,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 11,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 11,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 29,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-9",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 801,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 11,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 11,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 35,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-1",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 802,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 29,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 29,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 36,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-10",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 802,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 29,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 29,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 37,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-2",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 802,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 29,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 29,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 38,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-3",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 802,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 29,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 29,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 39,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-4",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 802,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 29,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 29,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 40,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-5",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 802,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 29,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 29,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 41,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-6",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 802,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 29,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 29,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 42,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-7",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 802,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 29,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 29,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 43,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-8",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 802,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 29,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 29,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 44,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-9",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 802,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 29,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 29,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 50,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-1",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 803,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 57,
+        "materials": 6
+      },
+      "stocksAfter": {
+        "food": 57,
+        "materials": 6
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 51,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-10",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 803,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 57,
+        "materials": 6
+      },
+      "stocksAfter": {
+        "food": 57,
+        "materials": 6
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 52,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-2",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 803,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 57,
+        "materials": 6
+      },
+      "stocksAfter": {
+        "food": 57,
+        "materials": 6
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 53,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-3",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 803,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 57,
+        "materials": 6
+      },
+      "stocksAfter": {
+        "food": 57,
+        "materials": 6
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 54,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-4",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 803,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 57,
+        "materials": 6
+      },
+      "stocksAfter": {
+        "food": 57,
+        "materials": 6
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 55,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-5",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 803,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 57,
+        "materials": 6
+      },
+      "stocksAfter": {
+        "food": 57,
+        "materials": 6
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 56,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-6",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 803,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 57,
+        "materials": 6
+      },
+      "stocksAfter": {
+        "food": 57,
+        "materials": 6
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 57,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-7",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 803,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 57,
+        "materials": 6
+      },
+      "stocksAfter": {
+        "food": 57,
+        "materials": 6
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 58,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-8",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 803,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 57,
+        "materials": 6
+      },
+      "stocksAfter": {
+        "food": 57,
+        "materials": 6
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 59,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-9",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 803,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 57,
+        "materials": 6
+      },
+      "stocksAfter": {
+        "food": 57,
+        "materials": 6
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 65,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-1",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 804,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 80,
+        "materials": 5
+      },
+      "stocksAfter": {
+        "food": 80,
+        "materials": 5
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 66,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-10",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 804,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 80,
+        "materials": 5
+      },
+      "stocksAfter": {
+        "food": 80,
+        "materials": 5
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 67,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-2",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 804,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 80,
+        "materials": 5
+      },
+      "stocksAfter": {
+        "food": 80,
+        "materials": 5
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 68,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-4",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 804,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 80,
+        "materials": 5
+      },
+      "stocksAfter": {
+        "food": 80,
+        "materials": 5
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 69,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-5",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 804,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 80,
+        "materials": 5
+      },
+      "stocksAfter": {
+        "food": 80,
+        "materials": 5
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 70,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-6",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 804,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 80,
+        "materials": 5
+      },
+      "stocksAfter": {
+        "food": 80,
+        "materials": 5
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 71,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-7",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 804,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 80,
+        "materials": 5
+      },
+      "stocksAfter": {
+        "food": 80,
+        "materials": 5
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 72,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-8",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 804,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 80,
+        "materials": 5
+      },
+      "stocksAfter": {
+        "food": 80,
+        "materials": 5
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 73,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-9",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 804,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 80,
+        "materials": 5
+      },
+      "stocksAfter": {
+        "food": 80,
+        "materials": 5
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 79,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-1",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 805,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 99,
+        "materials": 4
+      },
+      "stocksAfter": {
+        "food": 99,
+        "materials": 4
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 80,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-2",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 805,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 99,
+        "materials": 4
+      },
+      "stocksAfter": {
+        "food": 99,
+        "materials": 4
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 81,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-5",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 805,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 99,
+        "materials": 4
+      },
+      "stocksAfter": {
+        "food": 99,
+        "materials": 4
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 82,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-6",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 805,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 99,
+        "materials": 4
+      },
+      "stocksAfter": {
+        "food": 99,
+        "materials": 4
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 83,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-7",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 805,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 99,
+        "materials": 4
+      },
+      "stocksAfter": {
+        "food": 99,
+        "materials": 4
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 84,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-8",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 805,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 99,
+        "materials": 4
+      },
+      "stocksAfter": {
+        "food": 99,
+        "materials": 4
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 85,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-9",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 805,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 99,
+        "materials": 4
+      },
+      "stocksAfter": {
+        "food": 99,
+        "materials": 4
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 91,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-1",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 806,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 111,
+        "materials": 3
+      },
+      "stocksAfter": {
+        "food": 111,
+        "materials": 3
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 92,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-2",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 806,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 111,
+        "materials": 3
+      },
+      "stocksAfter": {
+        "food": 111,
+        "materials": 3
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 93,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-5",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 806,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 111,
+        "materials": 3
+      },
+      "stocksAfter": {
+        "food": 111,
+        "materials": 3
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 94,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-6",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 806,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 111,
+        "materials": 3
+      },
+      "stocksAfter": {
+        "food": 111,
+        "materials": 3
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 95,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-7",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 806,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 111,
+        "materials": 3
+      },
+      "stocksAfter": {
+        "food": 111,
+        "materials": 3
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 96,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-8",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 806,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 111,
+        "materials": 3
+      },
+      "stocksAfter": {
+        "food": 111,
+        "materials": 3
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 97,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-9",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 806,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 111,
+        "materials": 3
+      },
+      "stocksAfter": {
+        "food": 111,
+        "materials": 3
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 103,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-1",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 807,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 121,
+        "materials": 2
+      },
+      "stocksAfter": {
+        "food": 121,
+        "materials": 2
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 104,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-2",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 807,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 121,
+        "materials": 2
+      },
+      "stocksAfter": {
+        "food": 121,
+        "materials": 2
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 105,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-5",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 807,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 121,
+        "materials": 2
+      },
+      "stocksAfter": {
+        "food": 121,
+        "materials": 2
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 106,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-6",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 807,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 121,
+        "materials": 2
+      },
+      "stocksAfter": {
+        "food": 121,
+        "materials": 2
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 107,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-7",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 807,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 121,
+        "materials": 2
+      },
+      "stocksAfter": {
+        "food": 121,
+        "materials": 2
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 108,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-8",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 807,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 121,
+        "materials": 2
+      },
+      "stocksAfter": {
+        "food": 121,
+        "materials": 2
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 109,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-9",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 807,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 121,
+        "materials": 2
+      },
+      "stocksAfter": {
+        "food": 121,
+        "materials": 2
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 115,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-1",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 808,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 132,
+        "materials": 1
+      },
+      "stocksAfter": {
+        "food": 132,
+        "materials": 1
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 116,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-2",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 808,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 132,
+        "materials": 1
+      },
+      "stocksAfter": {
+        "food": 132,
+        "materials": 1
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 117,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-5",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 808,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 132,
+        "materials": 1
+      },
+      "stocksAfter": {
+        "food": 132,
+        "materials": 1
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 118,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-6",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 808,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 132,
+        "materials": 1
+      },
+      "stocksAfter": {
+        "food": 132,
+        "materials": 1
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 119,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-7",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 808,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 132,
+        "materials": 1
+      },
+      "stocksAfter": {
+        "food": 132,
+        "materials": 1
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 120,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-8",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 808,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 132,
+        "materials": 1
+      },
+      "stocksAfter": {
+        "food": 132,
+        "materials": 1
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 121,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-9",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 808,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 132,
+        "materials": 1
+      },
+      "stocksAfter": {
+        "food": 132,
+        "materials": 1
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 127,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-1",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 809,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 139,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 139,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 128,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-2",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 809,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 139,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 139,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 129,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-5",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 809,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 139,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 139,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 130,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-6",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 809,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 139,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 139,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 131,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-7",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 809,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 139,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 139,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    },
+    {
+      "commandIndex": 132,
+      "command": {
+        "type": "AssignOccupation",
+        "personaId": "founder-9",
+        "occupation": "farmer"
+      },
+      "time": {
+        "winter": 809,
+        "tick": 500
+      },
+      "stocksBefore": {
+        "food": 139,
+        "materials": 0
+      },
+      "stocksAfter": {
+        "food": 139,
+        "materials": 0
+      },
+      "foodDelta": 0,
+      "materialsDelta": 0
+    }
+  ],
+  "actualEndpoint": {
+    "time": {
+      "winter": 810,
+      "tick": 500
+    },
+    "stocks": {
+      "food": 148,
+      "materials": 0
+    },
+    "stateSHA256": "b35cb554a88344540fe4b57f9c78cfcf102e580377ad0ed9147027f7ce4218b6",
+    "saveLoadExact": true,
+    "culture": {
+      "enabled": true,
+      "prototype": true,
+      "foodCost": 3,
+      "minParticipants": 3,
+      "maxParticipants": 8,
+      "supportCount": 1,
+      "supportCapacity": 2,
+      "exposureReductionBps": 2500,
+      "sourceEventIds": [
+        "event-124"
+      ],
+      "lastGatheringEventId": null,
+      "nextSequence": 1
+    },
+    "living": 16,
+    "deaths": [],
+    "cpu": [
+      {
+        "id": "island-rival",
+        "name": "Island community",
+        "seed": 476658155,
+        "time": {
+          "winter": 810,
+          "tick": 500
+        },
+        "stocks": {
+          "food": 98,
+          "materials": 28
+        },
+        "living": 16,
+        "deaths": []
+      }
+    ]
+  },
+  "timeline": [
+    {
+      "id": "event-4",
+      "time": {
+        "winter": 800,
+        "tick": 500
+      },
+      "type": "WinterWeatherDetermined",
+      "details": {
+        "regionId": "landing-region",
+        "winter": 800,
+        "weatherClass": "Normal"
+      }
+    },
+    {
+      "id": "event-47",
+      "time": {
+        "winter": 801,
+        "tick": 0
+      },
+      "type": "WinterWeatherDetermined",
+      "details": {
+        "regionId": "landing-region",
+        "winter": 801,
+        "weatherClass": "Harsh"
+      }
+    },
+    {
+      "id": "event-54",
+      "time": {
+        "winter": 802,
+        "tick": 0
+      },
+      "type": "WinterWeatherDetermined",
+      "details": {
+        "regionId": "landing-region",
+        "winter": 802,
+        "weatherClass": "Normal"
+      }
+    },
+    {
+      "id": "event-117",
+      "time": {
+        "winter": 803,
+        "tick": 0
+      },
+      "type": "BuildingCollapsed",
+      "details": {
+        "buildingId": "house-1",
+        "housingNames": {
+          "version": 1,
+          "building": {
+            "id": "house-1",
+            "name": "Daumantas and Dervla’s home"
+          }
+        },
+        "housingResidents": {
+          "version": 1,
+          "householdIds": [
+            "founder-1"
+          ],
+          "buildingId": "house-1",
+          "residenceId": null,
+          "residentIds": [
+            "founder-1",
+            "founder-4"
+          ],
+          "people": [
+            {
+              "id": "founder-1",
+              "name": "Daumantas",
+              "age": 40
+            },
+            {
+              "id": "founder-4",
+              "name": "Dervla",
+              "age": 29
+            }
+          ]
+        },
+        "salvage": 7
+      }
+    },
+    {
+      "id": "event-120",
+      "time": {
+        "winter": 803,
+        "tick": 0
+      },
+      "type": "WinterWeatherDetermined",
+      "details": {
+        "regionId": "landing-region",
+        "winter": 803,
+        "weatherClass": "Normal"
+      }
+    },
+    {
+      "id": "event-121",
+      "type": "SupportOffered",
+      "time": {
+        "winter": 803,
+        "tick": 0
+      },
+      "details": {
+        "supportVersion": 1,
+        "clanId": "founding-clan",
+        "offerId": "support-1",
+        "sourceEventId": "event-117",
+        "householdId": "founder-1",
+        "recipientId": "founder-4",
+        "helperId": "founder-1",
+        "participants": [
+          "founder-1",
+          "founder-4"
+        ],
+        "resolutionAt": 803050,
+        "supportContribution": 0,
+        "housingResidents": {
+          "version": 1,
+          "householdIds": [
+            "founder-1"
+          ],
+          "buildingId": "house-1",
+          "residenceId": null,
+          "residentIds": [
+            "founder-1",
+            "founder-4"
+          ],
+          "people": [
+            {
+              "id": "founder-1",
+              "name": "Daumantas",
+              "age": 40
+            },
+            {
+              "id": "founder-4",
+              "name": "Dervla",
+              "age": 29
+            }
+          ]
+        },
+        "housingNames": {
+          "version": 1,
+          "building": {
+            "id": "house-1",
+            "name": "Daumantas and Dervla’s home"
+          }
+        },
+        "probabilityBps": 1000,
+        "people": [
+          {
+            "id": "founder-1",
+            "name": "Daumantas",
+            "age": 40
+          },
+          {
+            "id": "founder-4",
+            "name": "Dervla",
+            "age": 29
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-123",
+      "type": "SupportAccepted",
+      "time": {
+        "winter": 803,
+        "tick": 50
+      },
+      "details": {
+        "supportVersion": 1,
+        "clanId": "founding-clan",
+        "offerId": "support-1",
+        "sourceEventId": "event-117",
+        "householdId": "founder-1",
+        "recipientId": "founder-4",
+        "helperId": "founder-1",
+        "participants": [
+          "founder-1",
+          "founder-4"
+        ],
+        "resolutionAt": 803050,
+        "supportContribution": 0,
+        "offeredEventId": "event-121",
+        "housingResidents": {
+          "version": 1,
+          "householdIds": [
+            "founder-1"
+          ],
+          "buildingId": "house-1",
+          "residenceId": null,
+          "residentIds": [
+            "founder-1",
+            "founder-4"
+          ],
+          "people": [
+            {
+              "id": "founder-1",
+              "name": "Daumantas",
+              "age": 40
+            },
+            {
+              "id": "founder-4",
+              "name": "Dervla",
+              "age": 29
+            }
+          ]
+        },
+        "housingNames": {
+          "version": 1,
+          "building": {
+            "id": "house-1",
+            "name": "Daumantas and Dervla’s home"
+          }
+        },
+        "acceptanceBps": 5000,
+        "people": [
+          {
+            "id": "founder-1",
+            "name": "Daumantas",
+            "age": 40
+          },
+          {
+            "id": "founder-4",
+            "name": "Dervla",
+            "age": 29
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-124",
+      "type": "SupportCompleted",
+      "time": {
+        "winter": 803,
+        "tick": 50
+      },
+      "details": {
+        "supportVersion": 1,
+        "clanId": "founding-clan",
+        "offerId": "support-1",
+        "sourceEventId": "event-117",
+        "householdId": "founder-1",
+        "recipientId": "founder-4",
+        "helperId": "founder-1",
+        "participants": [
+          "founder-1",
+          "founder-4"
+        ],
+        "resolutionAt": 803050,
+        "supportContribution": 1,
+        "offeredEventId": "event-121",
+        "housingResidents": {
+          "version": 1,
+          "householdIds": [
+            "founder-1"
+          ],
+          "buildingId": "house-1",
+          "residenceId": null,
+          "residentIds": [
+            "founder-1",
+            "founder-4"
+          ],
+          "people": [
+            {
+              "id": "founder-1",
+              "name": "Daumantas",
+              "age": 40
+            },
+            {
+              "id": "founder-4",
+              "name": "Dervla",
+              "age": 29
+            }
+          ]
+        },
+        "housingNames": {
+          "version": 1,
+          "building": {
+            "id": "house-1",
+            "name": "Daumantas and Dervla’s home"
+          }
+        },
+        "acceptedEventId": "event-123",
+        "cultureVersion": 1,
+        "supportBefore": 0,
+        "supportAfter": 1,
+        "people": [
+          {
+            "id": "founder-1",
+            "name": "Daumantas",
+            "age": 40
+          },
+          {
+            "id": "founder-4",
+            "name": "Dervla",
+            "age": 29
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-178",
+      "time": {
+        "winter": 804,
+        "tick": 0
+      },
+      "type": "WinterWeatherDetermined",
+      "details": {
+        "regionId": "landing-region",
+        "winter": 804,
+        "weatherClass": "Normal"
+      }
+    },
+    {
+      "id": "event-233",
+      "time": {
+        "winter": 805,
+        "tick": 0
+      },
+      "type": "WinterWeatherDetermined",
+      "details": {
+        "regionId": "landing-region",
+        "winter": 805,
+        "weatherClass": "Mild"
+      }
+    },
+    {
+      "id": "event-279",
+      "time": {
+        "winter": 806,
+        "tick": 0
+      },
+      "type": "WinterWeatherDetermined",
+      "details": {
+        "regionId": "landing-region",
+        "winter": 806,
+        "weatherClass": "Normal"
+      }
+    },
+    {
+      "id": "event-325",
+      "time": {
+        "winter": 807,
+        "tick": 0
+      },
+      "type": "WinterWeatherDetermined",
+      "details": {
+        "regionId": "landing-region",
+        "winter": 807,
+        "weatherClass": "Normal"
+      }
+    },
+    {
+      "id": "event-370",
+      "time": {
+        "winter": 808,
+        "tick": 0
+      },
+      "type": "WinterWeatherDetermined",
+      "details": {
+        "regionId": "landing-region",
+        "winter": 808,
+        "weatherClass": "Normal"
+      }
+    },
+    {
+      "id": "event-416",
+      "time": {
+        "winter": 809,
+        "tick": 0
+      },
+      "type": "WinterWeatherDetermined",
+      "details": {
+        "regionId": "landing-region",
+        "winter": 809,
+        "weatherClass": "Normal"
+      }
+    },
+    {
+      "id": "event-462",
+      "time": {
+        "winter": 810,
+        "tick": 0
+      },
+      "type": "WinterWeatherDetermined",
+      "details": {
+        "regionId": "landing-region",
+        "winter": 810,
+        "weatherClass": "Mild"
+      }
+    }
+  ],
+  "sourceDifference": "Current physical two-clan Fjord island and discovery are initialized through SharedSettlement. The normal cohort uses the ordinary Core legacy graph. Neither replay edits canonical saves or disables CPU autonomy.",
+  "comparisonToCoreCohort": {
+    "completionTimeMatched": true,
+    "partiesMatched": true,
+    "cohortCompletedEvent": {
+      "id": "event-124",
+      "type": "SupportCompleted",
+      "time": {
+        "winter": 803,
+        "tick": 50
+      },
+      "details": {
+        "supportVersion": 1,
+        "clanId": "founding-clan",
+        "offerId": "support-1",
+        "sourceEventId": "event-117",
+        "householdId": "founder-1",
+        "recipientId": "founder-4",
+        "helperId": "founder-1",
+        "participants": [
+          "founder-1",
+          "founder-4"
+        ],
+        "resolutionAt": 803050,
+        "supportContribution": 1,
+        "offeredEventId": "event-121",
+        "housingResidents": {
+          "version": 1,
+          "householdIds": [
+            "founder-1"
+          ],
+          "buildingId": "house-1",
+          "residenceId": null,
+          "residentIds": [
+            "founder-1",
+            "founder-4"
+          ],
+          "people": [
+            {
+              "id": "founder-1",
+              "name": "Daumantas",
+              "age": 40
+            },
+            {
+              "id": "founder-4",
+              "name": "Dervla",
+              "age": 29
+            }
+          ]
+        },
+        "housingNames": {
+          "version": 1,
+          "building": {
+            "id": "house-1",
+            "name": "Daumantas and Dervla’s home"
+          }
+        },
+        "acceptedEventId": "event-123",
+        "cultureVersion": 1,
+        "supportBefore": 0,
+        "supportAfter": 1,
+        "people": [
+          {
+            "id": "founder-1",
+            "name": "Daumantas",
+            "age": 40
+          },
+          {
+            "id": "founder-4",
+            "name": "Dervla",
+            "age": 29
+          }
+        ]
+      }
+    },
+    "actualCompletedEvent": {
+      "id": "event-124",
+      "type": "SupportCompleted",
+      "time": {
+        "winter": 803,
+        "tick": 50
+      },
+      "details": {
+        "supportVersion": 1,
+        "clanId": "founding-clan",
+        "offerId": "support-1",
+        "sourceEventId": "event-117",
+        "householdId": "founder-1",
+        "recipientId": "founder-4",
+        "helperId": "founder-1",
+        "participants": [
+          "founder-1",
+          "founder-4"
+        ],
+        "resolutionAt": 803050,
+        "supportContribution": 1,
+        "offeredEventId": "event-121",
+        "housingResidents": {
+          "version": 1,
+          "householdIds": [
+            "founder-1"
+          ],
+          "buildingId": "house-1",
+          "residenceId": null,
+          "residentIds": [
+            "founder-1",
+            "founder-4"
+          ],
+          "people": [
+            {
+              "id": "founder-1",
+              "name": "Daumantas",
+              "age": 40
+            },
+            {
+              "id": "founder-4",
+              "name": "Dervla",
+              "age": 29
+            }
+          ]
+        },
+        "housingNames": {
+          "version": 1,
+          "building": {
+            "id": "house-1",
+            "name": "Daumantas and Dervla’s home"
+          }
+        },
+        "acceptedEventId": "event-123",
+        "cultureVersion": 1,
+        "supportBefore": 0,
+        "supportAfter": 1,
+        "people": [
+          {
+            "id": "founder-1",
+            "name": "Daumantas",
+            "age": 40
+          },
+          {
+            "id": "founder-4",
+            "name": "Dervla",
+            "age": 29
+          }
+        ]
+      }
+    }
+  },
+  "checkpointSummaries": [
+    {
+      "label": "before-annual-loss",
+      "commandCount": 46,
+      "time": {
+        "winter": 802,
+        "tick": 999
+      },
+      "stocks": {
+        "food": 56,
+        "materials": 0
+      },
+      "coreSHA256": "5715fb68fac98c6bcb9e846cd722e07bc673d8f24ea95f7bf72481ec88674fc6",
+      "checkpointSHA256": "16c7b5e7835afe3abb865f59c9a7577eee771425b9e48af44e021a0cb35c109e",
+      "bank": {
+        "enabled": true,
+        "prototype": true,
+        "foodCost": 3,
+        "minParticipants": 3,
+        "maxParticipants": 8,
+        "supportCount": 0,
+        "supportCapacity": 2,
+        "exposureReductionBps": 2500,
+        "sourceEventIds": [],
+        "lastGatheringEventId": null,
+        "nextSequence": 1
+      }
+    },
+    {
+      "label": "offered",
+      "commandCount": 47,
+      "time": {
+        "winter": 803,
+        "tick": 0
+      },
+      "stocks": {
+        "food": 36,
+        "materials": 6
+      },
+      "coreSHA256": "b4af212b3e0d99ffaeea6ba2b69175dec89adfaf3e4d868ee4b9a25583dff4c1",
+      "checkpointSHA256": "775e2e4f17cc39dea241d4484b569eabe9097034aac0543715dad0df6163fad8",
+      "bank": {
+        "enabled": true,
+        "prototype": true,
+        "foodCost": 3,
+        "minParticipants": 3,
+        "maxParticipants": 8,
+        "supportCount": 0,
+        "supportCapacity": 2,
+        "exposureReductionBps": 2500,
+        "sourceEventIds": [],
+        "lastGatheringEventId": null,
+        "nextSequence": 1
+      }
+    },
+    {
+      "label": "completed",
+      "commandCount": 49,
+      "time": {
+        "winter": 803,
+        "tick": 50
+      },
+      "stocks": {
+        "food": 37,
+        "materials": 6
+      },
+      "coreSHA256": "8c4b0529fcdf36f96f1105df5f2917c4bf50e771dcaf6afc78e77d6731fc6cb8",
+      "checkpointSHA256": "09071623b6657288528591c98ec6c77a53c233c142a566c021a474ea69ec673b",
+      "bank": {
+        "enabled": true,
+        "prototype": true,
+        "foodCost": 3,
+        "minParticipants": 3,
+        "maxParticipants": 8,
+        "supportCount": 1,
+        "supportCapacity": 2,
+        "exposureReductionBps": 2500,
+        "sourceEventIds": [
+          "event-124"
+        ],
+        "lastGatheringEventId": null,
+        "nextSequence": 1
+      }
+    }
+  ],
+  "noRepairOrResourceTransfer": true,
+  "allActualHelpWithinTenYearBound": true,
+  "hasActualLaterWeatherUse": false,
+  "physicalRouteClaimed": false
+}

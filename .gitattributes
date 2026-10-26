@@ -80,3 +80,7 @@ tests/fixtures/cultural-flat-receipts-d43fff.json -text
 
 # Preserve raw navigation qualification observations.
 docs/qa/cultural-occasions-277/approach-qualification/*.json -text
+
+# Preserve frozen contextual-support protocol, runner and save evidence.
+docs/qa/contextual-support-278/*.mjs -text
+docs/qa/contextual-support-278/*.json -text

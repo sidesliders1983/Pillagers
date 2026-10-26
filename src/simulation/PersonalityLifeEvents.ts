@@ -306,3 +306,4 @@ export function pruneSocialIncidents(state: SimulationState): void {
         memory.untilWinter > state.time.winter && memory.participants.every(id =>
             !!state.personas[id] && state.personas[id].deathWinter === null));
 }
+export { available as socialParticipantAvailable, tied as socialParticipantsTied };

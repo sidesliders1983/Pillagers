@@ -345,7 +345,13 @@ export function validateCulture(state: SimulationState, culturalEvents: readonly
         const details = event.details;
         if (!details || details.cultureVersion !== 1 || details.clanId !== state.clan.id) fail();
         const ids = peopleFacts(state, details);
-        if (event.type === 'CulturalGatheringHeld') {
+        if (event.type === 'SupportCompleted') {
+            const contribution = sources.length < culture.config.supportCapacity ? 1 : 0;
+            if (!state.contextualSupport || details.supportVersion !== 1 ||
+                details.supportContribution !== contribution || details.supportBefore !== sources.length ||
+                details.supportAfter !== sources.length + contribution) fail();
+            if (contribution) sources.push(event.id);
+        } else if (event.type === 'CulturalGatheringHeld') {
             validateGatheringFire(event, fireLit, fireFuelTicks, recentFireEvents);
             // Missing basis preserves already accepted flat-price prototype receipts unchanged.
             const perParticipant = details.occasion === 'wedding' && details.foodCostBasis === 'per_participant';
