@@ -300,6 +300,30 @@ export class FjordInterface {
         if (this.surface) this.renderSurface();
     }
 
+    /** Family thumbnails and Character Cards share one serial studio and bounded image cache. */
+    async requestPortrait(id: string, signal?: AbortSignal): Promise<string | undefined> {
+        const epoch = this.owner.session.personalHistoryEpoch;
+        if (this.owner.transferring || signal?.aborted) return undefined;
+        try {
+            const input = this.portraitInput(this.state, id);
+            if (!input) return undefined;
+            const image = await this.portraits.request(input, signal);
+            return epoch === this.owner.session.personalHistoryEpoch && !this.owner.transferring && !signal?.aborted
+                ? image : undefined;
+        } catch {
+            return undefined;
+        }
+    }
+
+    private portraitInput(state: SimulationState, id: string): PortraitRequest | undefined {
+        const appearance = projectResidentAppearance(state, id);
+        if (!appearance) return undefined;
+        const person = state.personas[id] ?? state.personaArchive![id];
+        return { residentId: id, ...appearance, presentation: fjordWardrobePresentation({ kind: 'persona',
+            dna: appearance.dna, status: { living: person.deathWinter === null, occupation: person.occupation } }),
+            pixelRatio: presentationProfiles[this.owner.presentation?.quality ?? 'low'].maximumPixelRatio };
+    }
+
     private syncPortrait(state: SimulationState, selection: SettlementSelection) {
         if (selection?.kind !== 'persona' || this.surface || this.task) {
             this.portraitAbort?.abort();
@@ -308,19 +332,15 @@ export class FjordInterface {
             return;
         }
         try {
-            const appearance = projectResidentAppearance(state, selection.id);
-            if (!appearance) return;
-            const person = state.personas[selection.id] ?? state.personaArchive![selection.id];
-            const input = { residentId: selection.id, ...appearance, presentation: fjordWardrobePresentation({ kind: 'persona',
-                dna: appearance.dna, status: { living: person.deathWinter === null, occupation: person.occupation } }),
-                pixelRatio: presentationProfiles[this.owner.presentation?.quality ?? 'low'].maximumPixelRatio };
-            const key = selection.id + JSON.stringify(input);
+            const input = this.portraitInput(state, selection.id);
+            if (!input) return;
+            const key = this.owner.session.personalHistoryEpoch + ':' + JSON.stringify(input);
             if (key === this.portraitKey) return;
             this.portraitAbort?.abort();
             const abort = this.portraitAbort = new AbortController();
             this.portraitKey = key;
             this.portraitImage = undefined;
-            void this.portraits.request(input, abort.signal).then(image => {
+            void this.requestPortrait(selection.id, abort.signal).then(image => {
                 if (!image || abort.signal.aborted) return;
                 this.portraitImage = image;
                 this.hooks.refresh();

@@ -1,0 +1,87 @@
+{
+  "passed": true,
+  "browser": "156.0.4314.42",
+  "scope": "Actual ClanBookReader, FjordInterface cache and ResidentPortraitStudio. UI-only QA harness with a real Core recording fixture. Viewports/touch are simulated; not physical iPhone/tablet or a full-world GPU benchmark.",
+  "checks": [
+    {
+      "mode": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "simulatedTouch": false,
+      "records": 57,
+      "generations": 3,
+      "webglContexts": 1,
+      "visibleImages": 9,
+      "nameFontPx": 15,
+      "checks": [
+        "true founders at left",
+        "deceased retained",
+        "newest header",
+        "shared portraits",
+        "relationship navigation",
+        "selection and scroll retained",
+        "keyboard tabs",
+        "mouse drag pan",
+        "reset/newest",
+        "reachable Close",
+        "Core unchanged"
+      ]
+    },
+    {
+      "mode": "tablet-landscape",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "simulatedTouch": true,
+      "records": 57,
+      "generations": 3,
+      "webglContexts": 1,
+      "visibleImages": 6,
+      "nameFontPx": 15,
+      "checks": [
+        "true founders at left",
+        "deceased retained",
+        "newest header",
+        "shared portraits",
+        "relationship navigation",
+        "selection and scroll retained",
+        "keyboard tabs",
+        "native simulated touch pan",
+        "reset/newest",
+        "reachable Close",
+        "Core unchanged"
+      ]
+    },
+    {
+      "mode": "phone-landscape",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "simulatedTouch": true,
+      "records": 57,
+      "generations": 3,
+      "webglContexts": 1,
+      "visibleImages": 1,
+      "nameFontPx": 15,
+      "checks": [
+        "true founders at left",
+        "deceased retained",
+        "newest header",
+        "shared portraits",
+        "relationship navigation",
+        "selection and scroll retained",
+        "keyboard tabs",
+        "native simulated touch pan",
+        "reset/newest",
+        "reachable Close",
+        "Core unchanged"
+      ]
+    }
+  ],
+  "errors": [],
+  "rawVideo": "D:\\CodexSites\\Pillagers\\scratch\\family-tree-287\\scratch\\qa-287\\raw-video\\page@0648bc46bd8008f298c6aa819123c3f6.webm"
+}

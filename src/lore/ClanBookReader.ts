@@ -1,5 +1,6 @@
 import { WildlifeBookView, type WildlifeNavigation } from './WildlifeBookView';
 import { FamilyTreeView } from './FamilyTreeView';
+import type { FamilyPortraitSource } from './FamilyTreePortraits';
 import { isLivestockEvent, recordedLivestock, livestockAction, livestockGroups, livestockQuantity } from './LivestockNarrative';
 import type { SimulationEvent } from '../simulation/SimulationCore';
 import type { SharedSettlement } from '../play/SharedSettlement';
@@ -117,7 +118,8 @@ export class ClanBookReader {
     private renderedChapter = '';
     private opener: HTMLElement | null = null;
     constructor(private owner: SharedSettlement, private persist: () => void,
-        private wildlifeNavigation: WildlifeNavigation = {}, private wildlifeChanged: () => void = () => {}) {
+        private wildlifeNavigation: WildlifeNavigation = {}, private wildlifeChanged: () => void = () => {},
+        familyPortrait?: FamilyPortraitSource) {
         this.panel.id = 'clan-book-reader';
         this.panel.hidden = true;
         this.panel.setAttribute('role', 'dialog');
@@ -140,7 +142,7 @@ export class ClanBookReader {
                 group: this.wildlifeNavigation.group ? id => { this.close(); this.wildlifeNavigation.group!(id); } : undefined,
             });
         this.panel.querySelector('#clan-book-wildlife-tab')!.addEventListener('click', () => this.setTab('wildlife'));
-        this.familyTree = new FamilyTreeView(this.panel.querySelector<HTMLElement>('#clan-book-tree-panel')!, owner);
+        this.familyTree = new FamilyTreeView(this.panel.querySelector<HTMLElement>('#clan-book-tree-panel')!, owner, familyPortrait);
         this.panel.querySelector('#clan-book-story-tab')!.addEventListener('click', () => this.setTab('story'));
         this.panel.querySelector('#clan-book-family-tab')!.addEventListener('click', () => this.setTab('family'));
         this.panel.querySelector('#clan-book-new-story')!.addEventListener('click', () => {
@@ -160,7 +162,7 @@ export class ClanBookReader {
             this.panel.querySelector<HTMLElement>('#clan-book-' + this.tab + '-tab')!.focus();
         });
         // Internal scrolling/selection must never reach world gesture handlers.
-        for (const type of ['pointerdown', 'pointerup', 'wheel'])
+        for (const type of ['pointerdown', 'pointermove', 'pointerup', 'pointercancel', 'wheel'])
             this.panel.addEventListener(type, event => event.stopPropagation());
         this.panel.querySelector('#clan-book-close')!.addEventListener('click', () => this.close());
         this.panel.querySelector('#clan-book-chapter')!.addEventListener('change', event => {
@@ -226,6 +228,7 @@ export class ClanBookReader {
             this.bookId = book.id;
             this.queuedChapter = null;
             this.panel.hidden = true;
+            this.familyTree.setVisible(false);
             this.renderedChapter = '';
             this.chapterIndex = 0;
         }
@@ -280,6 +283,7 @@ export class ClanBookReader {
     private setTab(tab: 'story' | 'family' | 'wildlife'): void {
         if (this.owner.transferring || document.hidden)
             return;
+        if (tab !== 'family') this.familyTree.setVisible(false);
         this.tab = tab;
         this.panel.dataset.tab = tab;
         for (const value of ['story', 'family', 'wildlife'] as const) {
@@ -290,6 +294,7 @@ export class ClanBookReader {
         (this.panel.querySelector('#clan-book-story-panel') as HTMLElement).hidden = tab !== 'story';
         (this.panel.querySelector('#clan-book-tree-panel') as HTMLElement).hidden = tab !== 'family';
         (this.panel.querySelector('#clan-book-wildlife-panel') as HTMLElement).hidden = tab !== 'wildlife';
+        this.familyTree.setVisible(tab === 'family' && !this.panel.hidden);
         if (tab === 'family')
             this.familyTree.update();
         else if (tab === 'wildlife') this.wildlifeView.update();
@@ -315,6 +320,7 @@ export class ClanBookReader {
         this.persist();
     }
     close(): void {
+        this.familyTree.setVisible(false);
         this.panel.hidden = true;
         this.persist();
         const fallback = document.querySelector<HTMLElement>('#fjord-menu > summary, #play-settings > summary');
