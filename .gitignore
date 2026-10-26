@@ -20,3 +20,7 @@ scripts/sprites/imagegen-input.local.json
 # Everything published for the browser must survive a fresh checkout.
 !public/
 !public/**
+
+# Local ElevenLabs generation credentials; never ship browser-side keys.
+/.env
+/.env.elevenlabs.local
