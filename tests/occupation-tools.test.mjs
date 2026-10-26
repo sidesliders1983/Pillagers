@@ -321,3 +321,59 @@ test('carry overlays do not accumulate and None or switching hands restores the 
         control.dispose();
     }
 });
+
+test('ceremony attendance hides the actual occupation tool and its carry grip without rebuilding the resident', async () => {
+    const { FjordWardrobe } = load('../src/fjord-play/FjordWardrobe.ts');
+    const { factory } = fixture();
+    const human = await factory.create(dna, 2, undefined, bare);
+    const wardrobe = new FjordWardrobe(factory, message => { throw new Error(message); });
+    try {
+        human.sampleAnimation('Idle_02', .25);
+        const natural = human.fit.nativeSkeleton.bones.map(bone => bone.quaternion.clone());
+        const tool = occupationToolAssets.find(asset => asset.id === 'equipment/occupation-farmer');
+        await factory.equip(human, { ...bare, equipment: tool.id });
+        human.sampleAnimation('Idle_02', .25);
+        const group = human.fit.modules.get(tool.id);
+        const revision = human.equipRevision, fits = human.modules.fitRuns;
+        const body = human.fit.mesh.geometry;
+        assert.equal(group.visible, true);
+        wardrobe.setToolsVisible(human, false);
+        human.sampleAnimation('Idle_02', .25);
+        assert.equal(group.visible, false);
+        const binding = JSON.parse(await publicBytes(tool.metadata.nativeBinding.path));
+        const pose = binding.rigidEquipment.gripPose;
+        for (const index of [pose.upperArmJoint, pose.forearmJoint, pose.wristJoint,
+            ...pose.fingers.map(finger => finger.joint)]) {
+            assert.deepEqual(human.fit.nativeSkeleton.bones[index].quaternion.toArray(), natural[index].toArray(),
+                'A hidden tool must not impose a carry grip on the ceremony pose');
+        }
+        wardrobe.setToolsVisible(human, true);
+        human.sampleAnimation('Idle_02', .25);
+        assert.equal(group.visible, true);
+        assert.equal(human.fit.modules.get(tool.id), group);
+        assert.equal(human.equipRevision, revision);
+        assert.equal(human.modules.fitRuns, fits);
+        assert.equal(human.fit.mesh.geometry, body);
+    } finally { human.dispose(); }
+});
+
+test('occupation changes during a ceremony retain hidden tools and restore the current tool afterward', async () => {
+    const { FjordWardrobe } = load('../src/fjord-play/FjordWardrobe.ts');
+    const { factory } = fixture(), human = await factory.create(dna, 2, undefined, bare);
+    const wardrobe = new FjordWardrobe(factory, message => { throw new Error(message); });
+    const entity = occupation => ({ id: 'resident-1', kind: 'persona', dna, status: { occupation } });
+    try {
+        await wardrobe.reconcile(human, entity('farmer'));
+        assert.equal(human.fit.modules.get('equipment/occupation-farmer').visible, true);
+        wardrobe.setToolsVisible(human, false);
+        await wardrobe.reconcile(human, entity('fisher'));
+        const current = human.fit.modules.get('equipment/occupation-fisher');
+        assert.ok(current);
+        assert.equal(current.visible, false);
+        for (const [id, group] of human.fit.modules)
+            if (!id.startsWith('equipment/occupation-')) assert.equal(group.visible, true, id);
+        wardrobe.setToolsVisible(human, true);
+        assert.equal(current.visible, true);
+        assert.equal(human.fit.modules.has('equipment/occupation-farmer'), false);
+    } finally { human.dispose(); }
+});

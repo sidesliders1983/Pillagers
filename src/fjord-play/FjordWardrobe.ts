@@ -81,6 +81,8 @@ export function fjordWardrobePresentation(entity: Pick<FjordEntity, 'kind' | 'dn
         equipment: fjordToolAsset(entity) } as CharacterPresentation;
 }
 interface WardrobeState {
+    toolsVisible?: boolean;
+    toolsRevision?: number;
     installed?: string;
     pending?: string;
     equipRevision?: number;
@@ -92,6 +94,21 @@ interface WardrobeState {
 export class FjordWardrobe {
     private states = new WeakMap<MeshyHuman, WardrobeState>();
     constructor(private factory: MeshyHumanFactory, private report: (message: string) => void) {}
+
+    /** Ceremony visibility changes reuse installed tools, without another equip/refit operation. */
+    setToolsVisible(human: MeshyHuman, visible: boolean) {
+        if (human.isDisposed) return;
+        let state = this.states.get(human);
+        if (!state) {
+            state = { revision: 0 };
+            this.states.set(human, state);
+        }
+        if (state.toolsVisible === visible && state.toolsRevision === human.equipRevision) return;
+        state.toolsVisible = visible;
+        state.toolsRevision = human.equipRevision;
+        for (const [id, group] of human.fit.modules)
+            if (id.startsWith('equipment/occupation-')) group.visible = visible;
+    }
 
     async reconcile(human: MeshyHuman, entity: FjordEntity, observe?: CharacterPreparationObserver) {
         if (human.isDisposed) return;
@@ -119,6 +136,8 @@ export class FjordWardrobe {
         state.task = request.then(() => {
             if (human.isDisposed || state.revision !== revision || human.equipRevision !== equipRevision) return;
             state.installed = key;
+            state.toolsRevision = undefined;
+            this.setToolsVisible(human, state.toolsVisible ?? true);
             human.root.userData.clothingSet = {
                 id: selected,
                 assets: {...human.root.userData.selectedAssets},

@@ -544,6 +544,7 @@ export class MeshyModuleRuntime {
   }
   if (!enabled) return;
   for (const record of this.records.values()) {
+   if (!record.group.visible) continue;
    const pose = record.source.binding.rigidEquipment?.gripPose;
    if (!pose) continue;
    for (const [joint, rotation, blend] of [

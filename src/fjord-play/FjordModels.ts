@@ -32,7 +32,7 @@ export class FjordModels {
         fingerprint?: string; paceSignature?: string; resumeGrazeTime?: number; embarked?: boolean;
         materialRevision?: number;
         culturalEvent?: string;
-        pace: number; groundSpeed: number; state: string }>();
+        pace: number; groundSpeed: number; runPace?: number; runGroundSpeed?: number; state: string }>();
     async reconcile(model: Object3D, entity: FjordEntity) {
         const actor = this.actors.get(model);
         if (!actor?.human || !entity.dna) return;
@@ -51,7 +51,12 @@ export class FjordModels {
             if (!actor.human.lastFitRetained || actor.paceSignature !== paceSignature) {
                 const position = model.position.clone(), rotation = model.quaternion.clone();
                 model.position.set(0, 0, 0); model.quaternion.identity();
-                try { actor.groundSpeed = characterSync(observe, 'walking-pace-preparation', () => humanPreviewGroundSpeed(actor.human!, 'Walk')); }
+                try {
+                    actor.groundSpeed = characterSync(observe, 'walking-pace-preparation', () =>
+                        humanPreviewGroundSpeed(actor.human!, 'Walk'));
+                    actor.runGroundSpeed = characterSync(observe, 'running-pace-preparation', () =>
+                        humanPreviewGroundSpeed(actor.human!, 'Run'));
+                }
                 finally { model.position.copy(position); model.quaternion.copy(rotation); }
                 actor.paceSignature = paceSignature;
             }
@@ -59,6 +64,7 @@ export class FjordModels {
                 this.diagnostics.push(entity.id + ': missing Walking source clip; stable Idle pose fallback.');
             actor.human.setAnimation('Idle');
             actor.pace = actor.groundSpeed * profile.motion.cadence;
+            actor.runPace = (actor.runGroundSpeed ?? 0) * profile.motion.cadence;
             actor.state = 'Idle';
         }
         await this.wardrobe.reconcile(actor.human, entity, observe);
@@ -68,6 +74,7 @@ export class FjordModels {
         }
         model.userData.appearance = model.userData.universalHumanProfile;
         model.userData.pace = actor.pace;
+        model.userData.runPace = actor.runPace ?? 0;
     }
     boundsShape(model: Object3D) { return this.actors.get(model)?.human?.boundsShapeSignature; }
     /** Borrow only a completed instance matching the requested identity/wardrobe. */
@@ -77,7 +84,15 @@ export class FjordModels {
             JSON.stringify(actor.human?.root.userData.presentation) !== JSON.stringify(input.presentation)) return;
         return actor.human;
     }
-    pace(model: Object3D) { return this.actors.get(model)?.pace ?? 0; }
+    pace(model: Object3D, gait: 'Walk' | 'Run' = 'Walk') {
+        const actor = this.actors.get(model);
+        return gait === 'Run' ? actor?.runPace ?? 0 : actor?.pace ?? 0;
+    }
+    /** Hide only carried occupation tools; keep the same actor, clothing and source resources. */
+    setOccupationToolsVisible(model: Object3D, visible: boolean) {
+        const human = this.actors.get(model)?.human;
+        if (human) this.wardrobe.setToolsVisible(human, visible);
+    }
     activityClips(model: Object3D) {
         const actor = this.actors.get(model);
         const available: { Graze?: number; Rest?: number; HumanInteraction?: number } = {};
@@ -162,7 +177,9 @@ export class FjordModels {
             const humanState = state === 'Graze' || state === 'Rest' || state === 'HumanInteraction' ? 'Idle' : state;
             if (actor.human.clips.some(c => c.name === meshyAnimationClips[humanState])) {
                 actor.human.setAnimation(humanState);
-                actor.human.setPlaybackRate(state === 'Walk' ? Math.max(.05, speed / Math.max(.01, actor.groundSpeed)) : null);
+                const groundSpeed = state === 'Run' ? actor.runGroundSpeed ?? 0 : actor.groundSpeed;
+                actor.human.setPlaybackRate(state === 'Walk' || state === 'Run' ?
+                    Math.max(.05, speed / Math.max(.01, groundSpeed)) : null);
                 actor.human.update(delta);
             }
         } else if (actor.mixer) {

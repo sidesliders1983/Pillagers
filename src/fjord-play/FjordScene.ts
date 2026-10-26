@@ -211,6 +211,7 @@ export function createFjordScene(options: {
     };
 
     const updateCeremonyVisuals = (frame: CulturalPresentationFrame | null, active: boolean) => {
+        layer?.setCulturalParticipants(active ? frame : null);
         const fireLit = inspectCampfire(session.readSnapshot()).lit;
         if (frame && frame.occasion !== 'storytelling_music' && active && fireLit)
             ceremonyVisuals ??= new CulturalCeremonyVisuals(scene, canvas.parentElement ?? undefined);

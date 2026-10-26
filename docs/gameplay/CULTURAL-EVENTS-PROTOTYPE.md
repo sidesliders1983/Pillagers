@@ -284,3 +284,16 @@ in these headless cases. See the #277 QA report for provenance and actual device
 A newly confirmed wedding or communal ceremony brings the camera close to the actual campfire
 so the accepted event can be watched even if the player had been viewing another area. Declining,
 failed commands and matching historical retries do not redirect the camera or restart a show.
+
+### Running arrival and ceremony equipment
+
+Following owner review, actual ceremony participants run toward the campfire using the shipped
+Running clip and native measured gait. Ordinary work and return travel retain Walking; existing
+collision/terrain/route limits remain. On the same saved fixture, gathering begins at15.8s
+(previous Walking24.5s), response ends at22.8s and all staged actors return by54.5s.
+
+Occupation tools are temporarily hidden while the actual presentation frame is active, including
+paused approach and gestures. They return when presentation ends/suspends. Clothes/hats stay
+visible; occupation/DNA/work and Core state remain unchanged. Hidden equipment releases its carry
+grip. This reuses installed groups without asset downloads or refitting, including when an
+occupation/wardrobe changes during the ceremony. See the #277 participation-v4 qualification.

@@ -42,7 +42,7 @@ type Agent = {
     y: number;
     z: number;
     rotation: number;
-    state: 'Idle' | 'Walk' | 'Talk' | 'Listen' | 'Graze' | 'Rest' | 'HumanInteraction' | OccupationClip;
+    state: 'Idle' | 'Walk' | 'Run' | 'Talk' | 'Listen' | 'Graze' | 'Rest' | 'HumanInteraction' | OccupationClip;
     visit: Visit | null;
     visitDelay: number;
     occupationClips: Partial<Record<OccupationClip, number>>;
@@ -65,6 +65,7 @@ type Agent = {
     detour: Point2[];
     signature: string;
     pace: number;
+    runPace: number | null;
     failedRoutes: Map<string, { context: string; expires: number; reason: string }>;
 };
 /** Ephemeral presentation only. Neither simulation state nor its random stream enters this controller. */
@@ -308,6 +309,7 @@ export class LivingWorldController {
                     state: 'Idle', interactionSeconds: 0, grazeSeconds: 0,
                     grazeRemaining: 0, grazeNext: true, restNext: false, restSeconds: 0, restRemaining: 0, blockedSeconds: 0,
                     failedRoutes: new Map(), socialEnabled: true, speed: 0, pace: entity.kind === 'persona' ? .8 : .28,
+                    runPace: null,
                 };
                 this.agents.set(agent.key, agent);
             }
@@ -657,10 +659,17 @@ export class LivingWorldController {
         return a.kind === 'persona' ? residentMovementConfig.radius : livestockPresentation(a.entity.asset)?.radius ?? .9;
     }
     private height(a: Agent) { return this.yardSurfaces.get(a.key)?.(a.x, a.z) ?? this.surface.surfaceHeightAt(a.x, a.z); }
-    setPace(key: string, pace: number) {
+    /** Optional native Run pace is used only by an active ceremony approach. */
+    setPace(key: string, pace: number, runPace?: number) {
         const a = this.agents.get(key);
-        if (a && Number.isFinite(pace) && pace > 0)
+        if (a && Number.isFinite(pace) && pace > 0) {
             a.pace = pace;
+            a.runPace = runPace !== undefined && Number.isFinite(runPace) && runPace > 0 ? runPace : null;
+        }
+    }
+    private runningApproach(a: Agent) {
+        const participant = this.gathering?.participants.get(a.key);
+        return a.runPace !== null && Boolean(participant && !participant.dropped && !participant.arrived);
     }
     private random(a: Agent) {
         a.random ^= a.random << 13;
@@ -875,9 +884,10 @@ export class LivingWorldController {
     private encounterActor(a: Agent) {
         const next = a.detour[0] ?? a.path[0];
         const distance = next ? Math.hypot(next.x - a.x, next.z - a.z) : 0;
+        const pace = this.runningApproach(a) ? a.runPace! : a.pace;
         return { key: a.key, x: a.x, z: a.z, radius: this.radius(a),
-            velocity: distance > .15 ? { x: (next.x - a.x) / distance * a.pace,
-                z: (next.z - a.z) / distance * a.pace } : { x: 0, z: 0 },
+            velocity: distance > .15 ? { x: (next.x - a.x) / distance * pace,
+                z: (next.z - a.z) / distance * pace } : { x: 0, z: 0 },
             enabled: a.kind === 'persona' && a.socialEnabled && !this.ownsGathering(a.key), busy: a.visit?.phase === 'activity' };
     }
     private bodyClearance(a: Agent, point: Point2, from: Point2 = a) {
@@ -901,7 +911,9 @@ export class LivingWorldController {
                 if (!this.segment(a, from, point)) return false;
                 from = point;
             }
-            return true;
+            // A retained ceremony corridor cannot be replaced by a route search if a
+            // passing bend ends across a building from its original next waypoint.
+            return !this.ownsGathering(a.key) || this.segment(a, from, a.path[0]);
         };
         const pairs = this.social.activePairs().map(pair => ({
             a: this.agents.get(pair.a)!, b: this.agents.get(pair.b)!,
@@ -1064,7 +1076,9 @@ export class LivingWorldController {
                 a.wait = 0;
             }
             this.planPassing(a);
-            if (a.detour.length && Math.hypot(a.detour[0].x - a.x, a.detour[0].z - a.z) < .15) a.detour.shift();
+            // Native running approaches retain exact bend corners for the slower walk back.
+            if (a.detour.length && Math.hypot(a.detour[0].x - a.x, a.detour[0].z - a.z) <
+                (a.runPace !== null && this.ownsGathering(a.key) ? 1e-7 : .15)) a.detour.shift();
             if (!a.path.length && !a.detour.length) {
                 a.speed = 0;
                 a.state = 'Idle';
@@ -1104,7 +1118,8 @@ export class LivingWorldController {
                     continue;
                 }
             }
-            a.speed = Math.min(a.pace, a.speed + dt * a.pace * 2, Math.sqrt(2 * a.pace * Math.max(.01, distance)));
+            const run = this.runningApproach(a), pace = run ? a.runPace! : a.pace;
+            a.speed = Math.min(pace, a.speed + dt * pace * 2, Math.sqrt(2 * pace * Math.max(.01, distance)));
             const step = Math.min(distance, a.speed * dt), p = { x: a.x + dx / distance * step, z: a.z + dz / distance * step };
             if (!this.segment(a, a, p)) {
                 if (gathering && !gathering.dropped) {
@@ -1157,7 +1172,7 @@ export class LivingWorldController {
             a.x = p.x;
             a.z = p.z;
             a.y = this.height(a);
-            a.state = 'Walk';
+            a.state = run ? 'Run' : 'Walk';
             this.recordGatheringTrail(a, distance <= step + 1e-7);
             if (distance <= step + 1e-7) {
                 if (a.detour.length) a.detour.shift();

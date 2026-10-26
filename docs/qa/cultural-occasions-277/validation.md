@@ -32,6 +32,16 @@ initial flat-price snapshot retained below; historical fixture bytes were preser
   The small ceremony/retained-return correction retains every physical terrain/collision
   check and existing route budgets. Ordinary passing behavior remains unchanged.
 
+## Latest owner review: running and occupation tools
+
+The garland was accepted. Residents now use the actual native Running gait toward the fire;
+occupation tools/grips are hidden during the active presentation and restored afterward,
+without outfit refits or Core changes. The final combined run passed **80/80**, zero skips,
+and production build/typecheck passed. The unchanged-Core/adapter verifier still passes.
+The prior874a5f6 full GitHub checks both succeeded; this new head needs its own checks.
+[Participation qualification](participation-v4/README.md) preserves exact source/input hashes,
+four actual navigation cases and CPU-only preparation evidence. New physical review is pending.
+
 ## Latest missing-invitation repair
 
 The normal V2 regression failed before the fix: reading the actual partnership in the
@@ -75,7 +85,7 @@ Historical Git/helper identities remain provenance, not a requirement to keep th
 at an old commit when the exact normalized dependency bytes are unchanged.
 
 [Navigation qualification](approach-qualification/report.md) preserves the initial failed
-cases. Final Low6/Standard8 gather with both partners at 24.5 seconds, finish the response
+cases. The earlier Walking qualification had Low6/Standard8 gather with both partners at 24.5 seconds, finish the response
 at 31.5 and physically return every staged resident by 55.1. Zero overlaps, retained-route
 cleanup and unchanged Core are checked. With the ordinary clock advancing for 60 seconds,
 both presentation paths retain exact Core parity with matched headless references.

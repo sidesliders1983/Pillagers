@@ -355,6 +355,11 @@ export class FjordEntities {
         }
         return entry?.localBounds?.clone().translate(entry.model.position);
     }
+    setCulturalParticipants(frame: CulturalPresentationFrame | null) {
+        const keys = new Set(frame?.visible ? frame.participantKeys : []);
+        for (const [key, entry] of this.entries)
+            this.models.setOccupationToolsVisible(entry.model, !keys.has(key));
+    }
     playCulture(bank: CulturalMotion, frame: CulturalPresentationFrame) {
         const keys = frame.phase === 'gathering' ? frame.participantKeys.slice(0, 1) : frame.participantKeys;
         const clip = frame.phase === 'gathering' ? 'Storytelling_Gesture' : 'Gathering_Applause';
@@ -439,7 +444,7 @@ export class FjordEntities {
         for (const id of this.yardSamplers.keys())
             if (!this.entries.get('building:' + id)?.model.userData.canonical.farmyard) this.yardSamplers.delete(id);
         for (const [key, entry] of this.entries) {
-            motion.setPace(key, this.models.pace(entry.model));
+            motion.setPace(key, this.models.pace(entry.model), this.models.pace(entry.model, 'Run'));
             motion.setSocialEnabled(key, this.models.socialEnabled(entry.model));
             motion.setActivityClips(key, this.models.activityClips(entry.model));
             motion.setOccupationClips(key, this.models.occupationClips(entry.model));
@@ -495,7 +500,8 @@ export class FjordEntities {
                     entry.model.position.set(pose.x, pose.y, pose.z);
                     entry.model.rotation.set(0, pose.rotation, 0);
                 }
-                this.models.animate(entry.model, !facts.aboardShip && pose?.moving ? 'Run' : 'Idle', 1, running ? delta : 0);
+                this.models.animate(entry.model, !facts.aboardShip && pose?.moving ? 'Run' : 'Idle',
+                    this.models.pace(entry.model, 'Run'), running ? delta : 0);
             }
         }
         for (const agent of motion.inspect()) {

@@ -1,0 +1,172 @@
+{
+  "baseHead": "874a5f6fa5890dc78f4a4c887c3621b71342555e",
+  "sourceHashConvention": "SHA-256 of UTF-8 with CRLF normalized to LF only.",
+  "sourceFiles": {
+    "src/fjord-play/FjordModels.ts": "78f29b1a2ec198a04536b94447e2ac6422948ba54dd00f6ed000693e78335683",
+    "src/fjord-play/FjordWardrobe.ts": "2a3be684b56a76986d4a9d28f340b0a4adf1aba65887ff6e871a898c599a754f",
+    "src/characters/MeshyModuleRuntime.ts": "bfcdd7816e098c9f8826c22840fc5ef9f7a902e28a04b61eefdd1ae556ce5199",
+    "src/characters/MeshyHuman.ts": "913d097e899328396cc39d19e39152260f8d9ff9081323f46734dc3aaf4372a9",
+    "src/character-lab/HumanPreviewPace.ts": "12abd221c1ff3de9cccecd81d413628ea5504062a2ff9a418fa7d2b6098454b7",
+    "docs/qa/cultural-occasions-277/participation-v4/native-preparation.mjs": "ef791b943a0a69aca382abaf224ec790df60a23fc04246e51fbe961ddf8f0c20"
+  },
+  "fixtureSHA256": "69204861159519276cb7a60c8d3eaf83127601cb6b1eda6032176aa09449669c",
+  "method": "Real public FjordModels.create/reconcile, actual committed LOD2 body, face, DNA and wardrobe. Filesystem-backed fetch and inert decoded-image surface for Node. Synchronous CharacterPreparation spans isolate added Running gait sampling; no renderer, GPU, browser or device-performance claim. Source caches warm naturally across the ten residents.",
+  "addedRunningPreparation": {
+    "count": 10,
+    "totalMs": 66.49950000000172,
+    "meanMs": 6.649950000000172,
+    "maximumMs": 9.73779999999988
+  },
+  "existingWalkingPreparation": {
+    "count": 10,
+    "totalMs": 72.81690000000162,
+    "meanMs": 7.281690000000163,
+    "maximumMs": 13.301900000000387
+  },
+  "unchangedReconcileAdditionalRunPreparations": 0,
+  "poseAndRotationPreserved": true,
+  "residents": [
+    {
+      "id": "founder-2",
+      "totalCreateMs": 867.6942999999997,
+      "walkPace": 1.1141373548382838,
+      "runPace": 3.6396370968926233
+    },
+    {
+      "id": "founder-3",
+      "totalCreateMs": 252.78579999999965,
+      "walkPace": 1.0548604256790284,
+      "runPace": 3.4464256521950194
+    },
+    {
+      "id": "founder-10",
+      "totalCreateMs": 513.9206000000004,
+      "walkPace": 1.1954741815503158,
+      "runPace": 3.913507621940015
+    },
+    {
+      "id": "founder-4",
+      "totalCreateMs": 397.35440000000017,
+      "walkPace": 1.0810765735201875,
+      "runPace": 3.439773110122793
+    },
+    {
+      "id": "founder-5",
+      "totalCreateMs": 273.22770000000037,
+      "walkPace": 1.102501186163148,
+      "runPace": 3.4797213642357234
+    },
+    {
+      "id": "founder-7",
+      "totalCreateMs": 241.79659999999967,
+      "walkPace": 1.0681201323951404,
+      "runPace": 3.454639638329583
+    },
+    {
+      "id": "founder-8",
+      "totalCreateMs": 256.6125000000002,
+      "walkPace": 1.1179331932520313,
+      "runPace": 3.4607060783161105
+    },
+    {
+      "id": "founder-9",
+      "totalCreateMs": 185.20240000000013,
+      "walkPace": 1.0205495390116353,
+      "runPace": 3.2978307231907675
+    },
+    {
+      "id": "founder-1",
+      "totalCreateMs": 250.95670000000064,
+      "walkPace": 1.1640246855003646,
+      "runPace": 3.7063123346721705
+    },
+    {
+      "id": "founder-6",
+      "totalCreateMs": 172.6212999999998,
+      "walkPace": 1.0901159891932686,
+      "runPace": 3.5051535998518575
+    }
+  ],
+  "spans": [
+    {
+      "stage": "running-pace-preparation",
+      "started": 4335.1452,
+      "durationMs": 8.61999999999989,
+      "mode": "synchronous",
+      "outcome": "complete",
+      "subject": "founder-2"
+    },
+    {
+      "stage": "running-pace-preparation",
+      "started": 4838.4775,
+      "durationMs": 7.409700000000157,
+      "mode": "synchronous",
+      "outcome": "complete",
+      "subject": "founder-3"
+    },
+    {
+      "stage": "running-pace-preparation",
+      "started": 5091.1604,
+      "durationMs": 5.881800000000112,
+      "mode": "synchronous",
+      "outcome": "complete",
+      "subject": "founder-10"
+    },
+    {
+      "stage": "running-pace-preparation",
+      "started": 5597.1716,
+      "durationMs": 6.876100000000406,
+      "mode": "synchronous",
+      "outcome": "complete",
+      "subject": "founder-4"
+    },
+    {
+      "stage": "running-pace-preparation",
+      "started": 5994.6099,
+      "durationMs": 9.73779999999988,
+      "mode": "synchronous",
+      "outcome": "complete",
+      "subject": "founder-5"
+    },
+    {
+      "stage": "running-pace-preparation",
+      "started": 6263.699,
+      "durationMs": 5.711200000000645,
+      "mode": "synchronous",
+      "outcome": "complete",
+      "subject": "founder-7"
+    },
+    {
+      "stage": "running-pace-preparation",
+      "started": 6508.5868,
+      "durationMs": 5.85990000000038,
+      "mode": "synchronous",
+      "outcome": "complete",
+      "subject": "founder-8"
+    },
+    {
+      "stage": "running-pace-preparation",
+      "started": 6764.0322,
+      "durationMs": 5.512300000000323,
+      "mode": "synchronous",
+      "outcome": "complete",
+      "subject": "founder-9"
+    },
+    {
+      "stage": "running-pace-preparation",
+      "started": 6948.7829,
+      "durationMs": 5.575399999999718,
+      "mode": "synchronous",
+      "outcome": "complete",
+      "subject": "founder-1"
+    },
+    {
+      "stage": "running-pace-preparation",
+      "started": 7196.8143,
+      "durationMs": 5.315300000000207,
+      "mode": "synchronous",
+      "outcome": "complete",
+      "subject": "founder-6"
+    }
+  ]
+}
