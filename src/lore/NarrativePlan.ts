@@ -58,6 +58,9 @@ function historyIndex(events: readonly SimulationEvent[], version: number): Inde
 }
 function relevantOlder(current: SimulationEvent, earlier: readonly IndexedFact[]): IndexedFact | undefined {
     const details = current.details ?? {};
+    if (current.type === 'CulturalGatheringHeld' && details.occasion === 'wedding')
+        return earlier.find(fact => fact.event.type === 'PartnershipFormed' &&
+            fact.event.id === details.sourceEventId);
     if (['BuildingUpgraded', 'BuildingSalvaged', 'BuildingCollapsed'].includes(current.type))
         return earlier.find(fact => fact.event.type === 'HouseBuilt' &&
             fact.event.details?.buildingId === details.buildingId);
@@ -110,8 +113,10 @@ export function planNarrative(events: readonly SimulationEvent[], intervalStart:
             selected.map(fact => [fact]);
         return groups.slice(0, 4).map(group => {
             const callbacks = theme === 'social' ? group.flatMap(fact =>
-                older.filter(previous => previous.theme === 'social' && socialGroup(previous.event) === socialGroup(fact.event))
-                    .flatMap(previous => previous.entry.sourceEventIds)) :
+                [...older.filter(previous => previous.theme === 'social' &&
+                    socialGroup(previous.event) === socialGroup(fact.event))
+                    .flatMap(previous => previous.entry.sourceEventIds),
+                    ...(relevantOlder(fact.event, older)?.entry.sourceEventIds ?? [])]) :
                 group.flatMap(fact => relevantOlder(fact.event, older)?.entry.sourceEventIds ?? []);
             return {
                 theme,

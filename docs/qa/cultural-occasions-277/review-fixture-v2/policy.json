@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "study": "cultural-occasions-277-affordable-wedding-review-v2",
+  "status": "frozen-before-search",
+  "seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "maximumCanonicalTicksPerCampaign": 5000,
+  "observationIntervalTicks": 50,
+  "factory": "newFjordScenario(seed, true)",
+  "initialPhase": {
+    "winter": 800,
+    "tick": 500
+  },
+  "initialStocks": {
+    "food": 15,
+    "materials": 5
+  },
+  "configuration": "All current normal Fjord rules, including the four-species start, weather, social/family/care, annual birthdays and independent CPU. Only culture prototype enablement is explicit.",
+  "geography": "Load the shipped baked island selected normally by the campaign seed, then use SharedSettlement/Fjord physical clan and discovery initialization.",
+  "domesticPolicy": "At founding only, assign every currently available adult to farmer through the public session command. No other economy, housing, expedition or stock commands.",
+  "selection": "Seeds in declared order. Within each campaign, inspect public wedding candidates after each 50 canonical ticks. Select the first candidate whose current public gatheringOffer is allowed, in canonical candidate order. Stop immediately; do not search for a better outcome.",
+  "price": "Wedding quote must equal 3 Food times the actual Core-selected participant count. Current public offer.allowed must also cover any real quoted Material needed for normal campfire ignition. Do not reduce attendance, grant Food/Materials, alter fuel, edit rules or force outcomes.",
+  "candidateRequirements": [
+    "A real PartnershipFormed source from gameplay; founding partnerships are excluded.",
+    "Both actual reciprocal spouses are currently available and reserved in the real roster.",
+    "Elapsed canonical ticks from formation are within [0, 1000).",
+    "Current Food covers the complete current quote; bank has capacity.",
+    "No gathering has already been held in the candidate campaign.",
+    "Current Materials cover any actual quoted ignition need; the existing normal campfire/fuel state is authoritative."
+  ],
+  "physicalQualification": {
+    "required": true,
+    "selectionPolicy": "Evaluate the first affordable candidate separately. A missing or failed physical demonstration is retained, not a reason to silently reroll or shop for another seed.",
+    "paceAuthority": "Use the actual production native actor/model pace and DNA profile through the existing public model/controller contracts. The LivingWorldController default pace is not a measured substitute.",
+    "canonicalState": "Sponsor once through the real quoted command in a separate replay of the recorded candidate. Hold that paid Core state unchanged while evaluating optional presentation; never overwrite the unpaid review checkpoint.",
+    "requirements": [
+      "Both actual spouse keys plus at least one genuine guest physically arrive before the existing 120-active-second approach bound.",
+      "Retain actual initial poses; no teleport or manual actor speed change.",
+      "Use the existing Low six-actor limit with spouse reservation and existing safe navigation.",
+      "Record initial/arrival timing, model pace source, required participant IDs, safety and unchanged paid Core hash.",
+      "Label headless native-model/navigation evidence separately from browser rendering and owner device acceptance."
+    ]
+  },
+  "unfavourableResults": "Retain every attempted seed, rejection reason and resource outcome. If no affordable candidate exists within the bound, report no fixture. If affordability succeeds but physical qualification is incomplete/failed, report that distinction without tweaking rules, poses, costs, pacing or seeds.",
+  "output": "Compact separately versioned search evidence, exact ordered commands, unchanged normal configuration, portable source/asset/policy hashes and paused pre-source and affordable post-source SharedSettlement.persist checkpoints. Affordability is provisional until separate actual-native-gait qualification; no rendered/device acceptance is implied. No hidden rival information in visible review notes.",
+  "preservation": "All original v1 runner, search, manifest, campaign and historical studies remain unchanged. No #278 rules or providers are involved.",
+  "campfire": "Wedding and communal ceremony require the actual canonical campfire to burn. Read the final public offer and use its atomic normal ignition transaction; do not light it for free or substitute a visual fire. Storytelling keeps its existing independent rule.",
+  "invitation": "A new actual PartnershipFormed may create the approved optional invitation with explicit quote, Confirm or Not enough resources, and Not now. A restored post-source checkpoint is existing history, not a fresh invitation. Preserve any pre-source observation checkpoint separately if the final public flow supports review of the real upcoming event."
+}

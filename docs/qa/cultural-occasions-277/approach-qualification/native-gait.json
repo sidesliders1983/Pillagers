@@ -1,0 +1,55 @@
+{
+  "method": "Actual committed native LOD2 body, facial source and DNA gait sampling; images/materials removed for Node. No rendering, wardrobe or browser-performance claim.",
+  "paces": {
+    "founder-2": {
+      "groundSpeed": 1.138734009442236,
+      "cadence": 0.9784,
+      "pace": 1.1141373548382838
+    },
+    "founder-3": {
+      "groundSpeed": 1.1066517264782085,
+      "cadence": 0.9532,
+      "pace": 1.0548604256790284
+    },
+    "founder-10": {
+      "groundSpeed": 1.2012401341944492,
+      "cadence": 0.9952,
+      "pace": 1.1954741815503158
+    },
+    "founder-4": {
+      "groundSpeed": 1.127060647956826,
+      "cadence": 0.9592,
+      "pace": 1.0810765735201875
+    },
+    "founder-5": {
+      "groundSpeed": 1.0532109153258962,
+      "cadence": 1.0468,
+      "pace": 1.102501186163148
+    },
+    "founder-7": {
+      "groundSpeed": 1.0430860667921293,
+      "cadence": 1.024,
+      "pace": 1.0681201323951404
+    },
+    "founder-8": {
+      "groundSpeed": 1.1059885172655632,
+      "cadence": 1.0108,
+      "pace": 1.1179331932520313
+    },
+    "founder-9": {
+      "groundSpeed": 1.067967286533733,
+      "cadence": 0.9556,
+      "pace": 1.0205495390116353
+    },
+    "founder-1": {
+      "groundSpeed": 1.1515875400676343,
+      "cadence": 1.0108,
+      "pace": 1.1640246855003646
+    },
+    "founder-6": {
+      "groundSpeed": 1.1322351362622234,
+      "cadence": 0.9628,
+      "pace": 1.0901159891932686
+    }
+  }
+}

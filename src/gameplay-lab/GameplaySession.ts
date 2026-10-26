@@ -1,5 +1,5 @@
 import { gatheringOffer, inspectCulture } from '../simulation/CulturalEvents';
-import type { CultureConfig } from '../simulation/CulturalEvents';
+import type { CultureConfig, CulturalOccasion } from '../simulation/CulturalEvents';
 import { wildlifeAttentionAdapter } from '../lore/WildlifeAttention';
 import { AttentionHistoryIndex } from '../lore/AttentionHistory';
 import { WildlifeHistoryIndex } from '../lore/WildlifeHistory';
@@ -53,7 +53,9 @@ export class GameplaySession {
         priorities: Cargo[] = [], origins?: Record<string, { x: number; z: number }>) {
         return islandMissionOffer(this.state, groupId, target, type, priorities, this.physicalContext(), origins);
     }
-    gatheringOffer() { return gatheringOffer(this.state); }
+    gatheringOffer(occasion: CulturalOccasion = 'storytelling_music', sourceEventId?: string) {
+        return gatheringOffer(this.state, occasion, sourceEventId);
+    }
     inspectCulture() { return inspectCulture(this.state); }
     get expeditionMode() { return expeditionModeActive(this.state); }
     get effectiveMinutesPerWinter() {

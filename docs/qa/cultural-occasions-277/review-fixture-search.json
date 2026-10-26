@@ -1,0 +1,1753 @@
+{
+  "schemaVersion": 1,
+  "status": "provisional-source-not-frozen",
+  "searchPolicy": {
+    "seeds": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "maximumTicksPerCampaign": 5000,
+    "selection": "First valid uncelebrated wedding by seed, next annual boundary, then canonical candidate order.",
+    "domesticPolicy": "At founding only, assign all currently available adults to farmer through real commands.",
+    "sourceFactory": "newFjordScenario(seed, true)",
+    "phase": "Summer800 tick500",
+    "forbidden": [
+      "rule overrides",
+      "free stocks",
+      "synthetic events",
+      "forced outcomes",
+      "existing celebration"
+    ]
+  },
+  "sourceBefore": {
+    "head": "bbb018013e682b76288ae3a2a44c4bcaa7457b8d",
+    "dirtyStatus": "M docs/gameplay/CULTURAL-EVENTS-PROTOTYPE.md\n M src/fjord-play/CulturalGatheringView.ts\n M src/fjord-play/CulturalPresentation.ts\n M src/fjord-play/FjordInterface.ts\n M src/fjord-play/cultural-gathering.css\n M src/gameplay-lab/GameplaySession.ts\n M src/lore/Chronicle.ts\n M src/lore/NarrativePlan.ts\n M src/lore/PersonalHistory.ts\n M src/simulation/CulturalEvents.ts\n M src/simulation/SimulationCore.ts\n M tests/cultural-gathering-view.test.mjs\n?? docs/qa/cultural-occasions-277/\n?? tests/cultural-occasions-history.test.mjs\n?? tests/cultural-occasions-session.test.mjs\n?? tests/cultural-occasions.test.mjs\n?? tests/cultural-wedding-presentation.test.mjs",
+    "node": "v24.19.0",
+    "typescript": "5.9.3",
+    "files": {
+      "docs/qa/cultural-occasions-277/review-fixture.mjs": "147bef8456bd49e161455df8b793e18650c8c8941c008bf3cf7c6308ac745764",
+      "package.json": "fbafeb1fb344820f0c13320ea10d91da1a15776eab0891c3f2020f8889801ea3",
+      "pnpm-lock.yaml": "c853a683bbfb2f3b58abfb6b1feb7308387bce165cb554d860e24a41c5debc9d",
+      "scripts/load-typescript.mjs": "bb4d96be5cf7ea8ee68298351ec6a4724569326bf8dec34b51dd0d225bf9c1f0",
+      "src/character-lab/ReferenceHeadFrames.ts": "94522f2084aaff8e7cf48d526a381b30b03c08f8a0a1cea6d824d34546bfcf3a",
+      "src/characters/AdditionalOutfitCatalog.ts": "6c3f4f91bae83d33bf7b67f55741535514e75e2914ba2f042689aa7107633d59",
+      "src/characters/AdditionalOutfitMeasurements.ts": "a63d4ca4a699b55f3bc99f534bd139b0c75776003040ddfebc063fee7b4ea076",
+      "src/characters/AppearanceTypes.ts": "be8a9545b12934da8d75b567b406406a815ffce9cd47309e58c2213723634289",
+      "src/characters/AssetDigest.ts": "bb2edce04a03e274097e759fc05e2022edd403c19130b5a9ec17a640683568f2",
+      "src/characters/AttachmentContract.ts": "e52ff883ca493c49618685f06051e78c514ceb825494247a6308eba8efa46f72",
+      "src/characters/BraidedHairCatalog.ts": "cb2c2f40293a929dc2db1e742ca2b60b587cec9155fc2b5d141a62e77d9e1246",
+      "src/characters/BraidedHairMeasurements.ts": "7f4ccaa39a1392607456308b503c10fc22f9e1d392830dcf43b9131b0d8efed2",
+      "src/characters/CattlePresentation.ts": "4d9e4356445c59039602ca9f2c92a7560a268fd6f029b5f5979f8dbe0344e6de",
+      "src/characters/CharacterAppearance.ts": "6036cee6e1f532e491a45d304867d10a7d49fc79b241fa7b29022a03b997b406",
+      "src/characters/CharacterAssetMeasurements.ts": "7353c2b3d0a433bc2f487f7460a813c82bfcb7b1e90819882d5bb536f223fdf5",
+      "src/characters/CharacterAssets.ts": "ecf8e0fc04c9900237e8864734eee0d3dc95eff8ac089b53764e0ac2f1ea0381",
+      "src/characters/CharacterDNA.ts": "24bec3481d8c7c78e4d9542216292c6c012772b3aa5ad97f29b6edfcad763075",
+      "src/characters/FacialIdentity.ts": "da1a039ca86241fe5f8967cf2d516b7ebfd7d7e01c16b261dbcf1ae02bc1fde8",
+      "src/characters/FemaleHairCatalog.ts": "a54932ada77c0df77300c3a9fb070db85964f435a202f4974101390f27fe4b04",
+      "src/characters/FemaleHairMeasurements.ts": "15bbe096e4e34d0090101fbff20eb743c906b66b1edc49e5790c8b4115406963",
+      "src/characters/FishermanOutfitCatalog.ts": "a6175a40fff7adf844264e53355431cffeb1c54f490580a463ab69d5b78f9b44",
+      "src/characters/FishermanOutfitMeasurements.ts": "d97114bf5d49df5e669332a20596cd43dbd364985b5fd930f1876af4fe0fb488",
+      "src/characters/GridTrialOutfitCatalog.ts": "a0cf7f6e2f55ebacac11daa3f2abc59fa8e9c1b0b5004ea62805cedb3d1b08d0",
+      "src/characters/GridTrialOutfitMeasurements.ts": "da28c181f5ad585995583a18383dced1cd96a9f173daaf100b3aeba7160ef88f",
+      "src/characters/LivestockPresentation.ts": "61150c8b7150e7067ab1b910fe807b5da3ba0f50cb406cb37608325573439524",
+      "src/characters/LongHairCatalog.ts": "331aeab426db9c76ffe7ebf231e8404de927473dd3cd21f7973beae3b6381bcd",
+      "src/characters/LongHairMeasurements.ts": "125ed440b56ac13a036acfd20cc75804ddcc5fbdaabbd30726f7d2663ff297e6",
+      "src/characters/ManualBeardCatalog.ts": "2dacf185bda58ae232667fc3c7c92bd798237a0d6dcd93e1084d5f09ffb53fc6",
+      "src/characters/ManualBeardMeasurements.ts": "dbfbc1d114e5d5679eca78ec5cc61c9fc0e2c50166773e56753193a358bd35c2",
+      "src/characters/ManualHairCatalog.ts": "5a24fe37d25a82d900296cd2636b6b5ba5defb3733bf878944a09ef852d9a03e",
+      "src/characters/ManualHairMeasurements.ts": "74fb6a92632e10de37d7ce2b6af45afd2338e778cdceb2b61e41f67b1881d082",
+      "src/characters/MeshyHumanAssetIdentity.ts": "cddbedb997f23933b0610fa42df58ff4b6c14fbe03e8fbcab14d14d91a66b307",
+      "src/characters/MeshyModuleCatalog.ts": "c2ac11e67d9d3d9fa134d1b2a177a0884b12446ef46c3150463079a6fde14347",
+      "src/characters/MeshyModuleMeasurements.ts": "7bb31f5cad1cf0eedcf90f2fed6b5dc70f8bd0eb4958697d789d05c9170bc9c9",
+      "src/characters/MeshyNativeRig.ts": "fc93a1e8f2b328f9929531e7e80d5df0a97794663364f7c111ff5c9a940f1dad",
+      "src/characters/OccupationHatCatalog.ts": "6fb2d932153922da618e99e66e7d5861b9bf2a41f5c8b7638d01f8a7a2a88d2b",
+      "src/characters/OccupationHatMeasurements.ts": "31e64509d97e0bd606c4ea4741dd178790b61d0dce0ca4c917ec04e759fa5dcc",
+      "src/characters/OccupationToolCatalog.ts": "139cc17820384938936946ec3e40aa47762600eee372dcccfcd6869760ae2a48",
+      "src/characters/OccupationToolMeasurements.ts": "e3b8f1255600a5f698b2d8d575678fb068961e6f4505c498ea58ba331d00d21b",
+      "src/characters/Phenotype.ts": "e0911cf3695d822059c9181b29bfda92974403ef62986e46813c0144b5ececfa",
+      "src/characters/ResidentAppearance.ts": "6b38b68d18b899cdde33c8aff7a993ab5a8de6449e50d1750849c02226dfc494",
+      "src/characters/UniversalHumanProfile.ts": "5096a1946a9cf7d51e12e33986d5068d1c14f1057a4fddb5525bd22ec96be24b",
+      "src/characters/V04ModuleCatalog.ts": "c85a2ad04a0adbb1fb30516eb33ffc22abf29ca120d685e08b2d02f72f8b8e64",
+      "src/characters/generateCharacterDNA.ts": "411a33e3008c6b45dca82754a496e2d1c9398d77064d8d379a1fc36324b8146d",
+      "src/characters/generatePhenotype.ts": "921e1326954ee3ed7d7ecd78586db3e6818d23a4887a554fe28a5d19bfdfbf32",
+      "src/characters/heritageProfiles.ts": "08bfc758372fba1b6672f7407f7e2d739598694a7a41ef1cbb9bd1c5fda54fcb",
+      "src/characters/naming/NameProfile.ts": "953e7e4469f340a066a9971505da95fffd69f28b38faf1979745503e072aa3c2",
+      "src/characters/naming/generateName.ts": "d3e363cb0238f093ffc92e1c1719ea62fe825ab4e74a6d841cb7a89bbe4119ac",
+      "src/characters/naming/nameProfiles.ts": "01c1674ec9499353d3adf03f5d7a7f67ea7ce83d197afd7f8317fe3327992db6",
+      "src/characters/seededRandom.ts": "af8ad27c431893db1e86f67f146dade8e7bc548c3b1955f515a0819b0a8e4ce5",
+      "src/config/FjordLivestock.ts": "fe3cf9e810fafa49107522e708c8db20fc7395147dc086c9cfcc4982516d0024",
+      "src/config/FjordWaterConfig.ts": "019d2113344fb6a67355f59ad451a54f96066149e61eb7453772a4f9885b38e5",
+      "src/config/GroundBlendConfig.ts": "8f451369728c89e7bbd0e85e1421067a9a15e0b8eaece064f5cd606c6f3cc4bd",
+      "src/config/HousingAssets.ts": "e499e6250ac0ad2113973aa9ef79fd42fb93d7cdf80d85eebaa0aa9e49d79d32",
+      "src/config/ModelTextureAssets.ts": "9d92e6f256c98105b566fe9ff291f2757ac7c1bdcd5b1e1beab0aeb51c16ceed",
+      "src/config/NatureAssets.ts": "3c03973d3e71dc71eb8711e1cd5301c0f5ec0d8533dd9f37cda44daac51bd391",
+      "src/config/PresentationQuality.ts": "9980d646775fdb5b0c28653ab270f330cdb0d386f0d4ce6b85891aa5b57556a5",
+      "src/config/TerrainAssets.ts": "77c97495bbb0775f2dfbbef12630d6cf79d9b2e8a34d05bd638ae4963fa04565",
+      "src/config/lightingConfig.ts": "eea1e347ac642d60c81d63c898fe1cbb8df4b24c29cfe60f914d0ac91d0157fc",
+      "src/config/timeVisualization.ts": "ed555c28a37230faa97c43a032e10c2803fa705999d01d224961cf9a0d191e3b",
+      "src/config/worldConfig.ts": "02ec6765c289fef0e6a7c4caabb18c93ab297e0103d010a8884ff4096f69c740",
+      "src/core/AssetManager.ts": "b116c40f8d6e061aed25e5a2a013022cc6db6fd1cf95e5653b81d1588143d3f1",
+      "src/core/EmissiveSurfaces.ts": "57a7a4877c706d7b1909e2fb6b06fcbe1e814632482baa8efb3d645951b4f9d0",
+      "src/core/PreparedBytes.ts": "8cfd43bc94301cada8e3704e3285efc515f08b132a8dcecd6245431a0c93d4ec",
+      "src/fjord-play/BakedCampaignIsland.ts": "803a170668cb12dac0b8cc23e6c3e78634d7dda400b46ae159f95cbb4cf3ad64",
+      "src/fjord-play/BakedIslandCatalog.ts": "33b82bd7d488a2e23d5e8a153d946e5f13bf725c71b6fe2b101bc5cdf421938c",
+      "src/fjord-play/CampaignIsland.ts": "32c46b8f02f7d0295dab0a98c720c981d7777a35f216a1c3915a10aca8160352",
+      "src/fjord-play/FirstStepsState.ts": "7c5077e6c7a75905a9ad2155bf5100315793670cbc3e7e0ea7efb387116c3d24",
+      "src/fjord-play/FjordCalendar.ts": "2cd6929bab90a6f25e1a6509339dd3b261ce1748151c8dcc710486ef14df7fee",
+      "src/fjord-play/FjordCampaign.ts": "57e89b519c4df5e953f4f5c7fca1b7db493cb544870d2cadcb5d3a95066d6395",
+      "src/fjord-play/FjordGround.ts": "1caff9c145ad5725c98d6dd5b67336e94837651939c99d76778260a88854816a",
+      "src/fjord-play/FjordProjection.ts": "4787b9bf7cf8cce110e1c836b034b93d38cfc822868333dc63b5b4b1736bdd01",
+      "src/fjord-play/FjordScenario.ts": "268d424f77c68870670071f4591c0fe8b9814c4fd1935af065dec1a421fc72b8",
+      "src/fjord-play/FjordWeather.ts": "19d35446c06f9fe81b3df81aa553f5dbee96680d2eb8f035b2497b24d9155eaa",
+      "src/fjord-play/JourneyProgress.ts": "075f67cf64b59034cd0e78c8efae6e86847dd9ea68591a884cebd2b1267431d6",
+      "src/fjord-play/RivalSettlement.ts": "2b76e5044e2b99ae8b749bd0a1038f2d009e76e703b692b7300282e79d822be3",
+      "src/fjord-play/SettlementCampfire.ts": "439e02fd0aba97507f4c2746fd16b7c145017f07e3b8f59adbc48f74adae4b2f",
+      "src/fjord-play/VillageNature.ts": "5cd838d268ffbad4ac4433b3be3df148482f5bd0d49f7be3a42de308e6ab24b7",
+      "src/fjord-play/WorkPlan.ts": "d9c6f139c7e102acf8b6e744d5790ef3f1cb931fc77e725da89359e5941c995d",
+      "src/gameplay-lab/GameplaySession.ts": "f1866460f08016e45c83aa852217c82fb9061c3474d9a85d72632bd3651c29f7",
+      "src/gameplay-lab/ReadView.ts": "a63ffdc60e6a6884288043171a1ee0463d855ff3603091ac58e050ccf5c33472",
+      "src/lore/AttentionHistory.ts": "bfc31ad24def543107cd60954b868e70f56a194990bbae514f0508d0a6e8c12c",
+      "src/lore/AttentionState.ts": "1a473ed41bf5e6fa81cc4a53be9f469641ec26aee1d48d58db48389e63e980c0",
+      "src/lore/BookLedger.ts": "c34c0e03e6f582ed0809172ecb1505acc9ec8f662fdaac60991dc0534c303b71",
+      "src/lore/Chronicle.ts": "1ab85db4b9009bac7b38091d2ddd156630134db56edfe47a36e6dabfa715dec1",
+      "src/lore/ClanBook.ts": "21454fef4932a08559abdc615a45dc0c1ee40558ca83cc1fb340130f7fbd0633",
+      "src/lore/FamilyTree.ts": "72e3aaa7bb2fc129b3b1262edbfc31ad1c118ea62448b0b337d0d4be6778f131",
+      "src/lore/LegacyNarrativeComposerV2.ts": "85858c0dac798038c06db56b10f11b07950cd40aa6f34899b418b8c7b02644df",
+      "src/lore/LegacyNarrativeComposerV3.ts": "d1c6c3302c61bc269cfc6b20f7beca1232300256adbfa7275cedeb632f378f2b",
+      "src/lore/LivestockNarrative.ts": "d5b56b87d225b91f712e12b3019502f566acef430f0fa5a95080c2f133c1dc7c",
+      "src/lore/NarrativeComposer.ts": "7a28462ebe3115299ce28c1f3e5ad9851ca4f6e67d9676a65925e2df28646a3e",
+      "src/lore/NarrativeMemory.ts": "19316d69d3cbaf99c1226c4a5fc91922ee11ffb298b88d33a349cf71703589c0",
+      "src/lore/NarrativePlan.ts": "b003ae639797dddd0d090aa989daa4ca80b1c3fa8efa521e127467a3c088fcdd",
+      "src/lore/NarrativeTime.ts": "978a5b92bc12fef756cf0ffd6bf9707d7debee4d2b86ea1c4b6f5c16f1152840",
+      "src/lore/PersonalHistory.ts": "c30996fa2840baaf097ebf2ac35825753a1c4cb1bbb8cb895c77af2e2dc5909d",
+      "src/lore/WildlifeAttention.ts": "1df629b4c7a9e6d0a10f977520da9be3550750bb0ca3cd05ae04cc2253fe33f8",
+      "src/lore/WildlifeHistory.ts": "df2bc925eb943151a5134ff3edf5bffd2b220f9db40362b9ff9f90b0ede3fc33",
+      "src/play/SelectionPresentation.ts": "20c39807131de62f29ee9b35d8ba84f2b5c038eb04358384fb4b396c46fd8028",
+      "src/play/SettlementView.ts": "3c300c96ed977ec46fd3d1b4685fad7bd83a041a7f0d5b43a6d1aab802c6a2c9",
+      "src/play/SharedSettlement.ts": "0ce99f88581126797cf52b4ade02e35bc092b138dfcf9eca07ae1c52c2ca1f63",
+      "src/simulation/BirthdayCalendar.ts": "f745a3882e826f5b646eb1d1ddc2a1d673359bff5e79e8559ca1e9f8ae50b764",
+      "src/simulation/Campfire.ts": "a415beb9e7cc56fc6cdc3cbb04bcf81474f5cf4bcff5c1983dfb097980d14367",
+      "src/simulation/CareCalendar.ts": "a4ac6b904be6275e5076e889fa13c69a82399ffc5eaf41741f3c51d83bd10227",
+      "src/simulation/ClanDiscovery.ts": "58652cb642fc82e31f1d0d96f41449bdf324dca54e6a95b1a60e2af6eb9272d6",
+      "src/simulation/CulturalEvents.ts": "d8e617f75b5cd75d23f899ef75c917d0faee9379316d94c5df53456982b155f4",
+      "src/simulation/EventFacts.ts": "6090beb00f5a68655346ce1c97b12e66e45ddb91bf6478a3fd1f5e6a0d5b7e29",
+      "src/simulation/FamilyMechanics.ts": "83cba71ed956db057fdea0da63be992ed0878980aeaf7f052bfa3d2f64fc551d",
+      "src/simulation/Farmyards.ts": "6ff4802f1804f1bbbc2cfa1300a110ac7d76d39fc93f7ec137bbbfaa9d71a966",
+      "src/simulation/FoundingLivestock.ts": "644d184f71d604391babaa401b159ae41129ae3a4842857ee3bb3fdfcdbe40e3",
+      "src/simulation/FoundingPhase.ts": "4d8d68a8ef3c29d0e89c5a3f2091a7fba009e1d54ee96aad110ba23c78a93627",
+      "src/simulation/HousingNames.ts": "6975f2c764b074c909b768357dd6e9cd853815aed35412623577392d7ba45974",
+      "src/simulation/Identity.ts": "cbcf1b001fd71d9246efb7cffda52a69b3d13957df2ea97f0fdf44f2f1841513",
+      "src/simulation/IslandClans.ts": "1d6fd0aacc2db169d68d68c2ebd879eccdc9520331ae30d6d312c9a7155f0c17",
+      "src/simulation/IslandMissions.ts": "f1b7e82cb7da2e85c579e8b054ae05d298c148dc796490d2e77f4fda6d754b85",
+      "src/simulation/Landing.ts": "f84b203dec79b807ac036b21eaf017f0c5bdfb5f39cf24315dc78694c909a8cd",
+      "src/simulation/Livestock.ts": "563f1e96bdcfd136a3381ec0771267513e56f2c6e14ad662770acfd07d072744",
+      "src/simulation/LivestockBreeding.ts": "33690f543f8892d5fbe79b7b9ff9c0466336be4b14bef20db606b16336bb4cc9",
+      "src/simulation/LivestockNames.ts": "341f7e283c5e91a3c5a734e8fed6f8bc6603da3ea94aa1d85dc6da0291378d7c",
+      "src/simulation/LivestockSpecies.ts": "2068b44296ec0ad64541970c586b50d97ba5c40986ebf33fae15cbb23568f0d4",
+      "src/simulation/LongshipNavigation.ts": "758ae0a75530d42ad20d4b1959dbab43553f34547e07539baf9ec7286fc19a52",
+      "src/simulation/LongshipTransport.ts": "4da662526841c9ac54dde175be9ee2c79612bd79c260e8d633f5b6a05c9aa5ad",
+      "src/simulation/Mechanics.ts": "810f478f7adc8daf41c673b2362adb6c93fdcf2f8585fd3c6c3b55bcd4701ade",
+      "src/simulation/MissionLivestock.ts": "1e21bc3b2ae43ff8e6d6e77b7f9e89c74a9cb1e1d3c46fca56dbb8fdf19a13c3",
+      "src/simulation/Mortality.ts": "bffa529c2446220a92f9caeae13fdd216e9870d7e962e588dcc361dd1244d273",
+      "src/simulation/PersonaAge.ts": "2f63153673647cd2afa15df35f38db7faeb166cc243934a3d06feab3d5b4358a",
+      "src/simulation/PersonalityLifeEvents.ts": "7c9cbc4cfd989313149d81982fad68cd3f9574d653826103b6b92dfdad71c8ab",
+      "src/simulation/Random.ts": "15ae0cb079aa5f7210b40bb005dd31e434532b3183e65ea307bf1071fb34005d",
+      "src/simulation/ScheduledBirths.ts": "e44b527805204280829d9cf2a102bc330782ac9aa8963c664284a1c8d959ded8",
+      "src/simulation/SimulationCore.ts": "5d2d002f37ebc8afec347f544e0b453ee1ddf446df0415ca82893ad2152e85c0",
+      "src/simulation/Smithery.ts": "fac4f647560ca768dda8caf8d191b1098999275777705b6cf973593735fa9c6a",
+      "src/simulation/SpatialExpeditions.ts": "d9d9e5f11f0da0e6d726fe2d488ed917c41dd85476e5aa248e67466cd36a16ba",
+      "src/simulation/SpecialistStocks.ts": "42ecb3e529371f671b1ea84e2b49ba1609a2b48aee3f7028eb2fd32d1cf67324",
+      "src/simulation/Weather.ts": "98f012e7918da6290b79b083b3d36d694c45fe0111305205adc595d5c0c5aac6",
+      "src/simulation/WildlifeSightings.ts": "dfad4498faf8b7eed43447d6523035e788cfc9f1071d870807f8acea6596154d",
+      "src/simulation/WorldExpeditions.ts": "c2577e8c5cdd8c0d3b29a6efe7bcce45e136717b55a81571c5ef9315761fbb68",
+      "src/wildlife/MarineEncounters.ts": "ac1bc06e39fb7491d4b8dde9da49a94995755d17e230a7ceea57897663205f30",
+      "src/wildlife/RabbitGait.ts": "c537eb4e25dab1b9efabd0cba7f384e4bdef7b4502b894e7d227d396637fe721",
+      "src/wildlife/WildlifeHabitats.ts": "0ef5ebb0a39a6be4ac44cbc24464c33db24e823f34cd9701ad5494d775580cbe",
+      "src/wildlife/WildlifePopulation.ts": "015547801c64691adf43f95a7fea0ddbec4b9ff3977a316c8c7140dc804edc6a",
+      "src/wildlife/WildlifeSnapshot.ts": "8b4f52bb49b8a6643064b4cc2e9cb631969d29a167df7ab759da3106c03af8c1",
+      "src/wildlife/WildlifeSpecies.ts": "dcbfe7764adbc792ce0cbdc77257564fbf5c5e4ff1bb549e6ec02bd23d6b02bb",
+      "src/wildlife/WildlifeTerritories.ts": "6a62b546b5a7ed018534f4944686100cb5934f518696cbbeb66f350bf91c701b",
+      "src/world-generation/CoastDistance.ts": "bb03ec068c546f0df62ea11cc5bfd3986f538bc32d34317817dde00b44060dd5",
+      "src/world-generation/EnvironmentZoning.ts": "a13a27428ec82e9054610ddad58ec2477832f88bae89381056d757b5b160da1c",
+      "src/world-generation/GenerateWorld.ts": "68f9da5bea0cd670e19166d00590ee1abc8868cac96df4e8284d5d01f14476fb",
+      "src/world-generation/GenerationProfile.ts": "7ee16674b70bf977a41563e38e05eb8ed52d8047e01893e80a94fc7203e69ad2",
+      "src/world-generation/GenerationTask.ts": "d5f62335939d495878b98be559eb231fc4ad10f2737c73b3c91f48400f5a410a",
+      "src/world-generation/HarborClearance.ts": "8ea17a5fd82991c471ee0da207546b021273b14185be13b3e7e5da854980a122",
+      "src/world-generation/IslandDrainage.ts": "7d04314dbb82f247e39c4980b1feef75f98204d43313b115dafa223d145d35c3",
+      "src/world-generation/IslandDrainageV1.ts": "c760b14b26a2ec01e84522b16ef1ca3924a8cf76d1ad4e7f115e683cb8f159f1",
+      "src/world-generation/IslandShape.ts": "34b832daaa23cae097d9495c0fde878d7c024b14b2e3760b5f00605716c9191b",
+      "src/world-generation/IslandShapeQuality.ts": "364b2593460983bb28417d8170a4c1fd8e5a9c28dc6697f57510bc1a59059603",
+      "src/world-generation/IslandShapeV1.ts": "4b5cf74ec33d432f71ef9d3cfabd54e254f0ff470709cf333678942d7fa3b2b0",
+      "src/world-generation/MacroIsland.ts": "5c53839e940b46e449c3b426ed7091d5046c6867fff2e397e56253b30627a3d7",
+      "src/world-generation/NatureFootprints.ts": "5060a39cffc198442b8dea7fc51d6b955ecc8d0dad1fbeb1616abd18d860a9d8",
+      "src/world-generation/PineFootprints.ts": "be5e6bd3e7913831b17b30cbd7f09b818c5593612f06f693a77459e534fcc452",
+      "src/world-generation/PlanIslandSettlements.ts": "c230785937326873bdff69028097aead2ac1dea25b0a8124cb9e43b4630d26dd",
+      "src/world-generation/PlanNature.ts": "8079f0266713d1ab265da544195d128131980446439d1c412b5af1af9d64f392",
+      "src/world-generation/PlanSettlement.ts": "dfe6fb366caff06a2b9a4214928b27fedffce46c7fb4af90242862d73885070b",
+      "src/world-generation/SettlementCompartments.ts": "2c44d7851ae54f4931f02a5d4be188b9ef284eb91bedbb3b12bd7fd0cebf4ad3",
+      "src/world-generation/SettlementSites.ts": "e6daa4e6b4c4c154e58fce79607479f1a16ea10c0120104c7832464672b0a355",
+      "src/world-generation/SettlementVisibility.ts": "3847f8317e50276b9fac6ecef9f7a53527b201f302a2aa3a9a7f5bb10ce4f687",
+      "src/world-generation/SiteNavigation.ts": "30dbff82146367ad80364c1424bbc127ab0531939b738a18e9e4a345a3bb210a",
+      "src/world-generation/TerrainPreview.ts": "db573675a8c729ef2088bd731e48cdaa92f86cf1f39648f835bff5e80700a0bd",
+      "src/world-generation/TerrainQueries.ts": "a788ebf1b18eb6418ba7b874b3f185965a378d3f160ea6ea557e6295e3a8c2b1",
+      "src/world-generation/ValidateEnvironment.ts": "8a2d4a70ff284634439077aa5c139e36f8e6f9d9065327cdd06a70060a2a3ad0",
+      "src/world-generation/ValidateNavigation.ts": "4eb2a4d6a7ed02921c57e2cead8abfdadc07ea6d5da8bb6cbcdf4701419de865",
+      "src/world-generation/ValidateSiteSelection.ts": "add4803725a4851c3fab84ce959d6329f2d633b6bf09d3de1708d1e876aa239f",
+      "src/world-generation/WorldBlueprint.ts": "44be3cd3e077288f1837c0fbc3ddb51ce90c1016e0320a0eb110af4b63d2530a",
+      "src/world-generation/WorldSave.ts": "6a28d744bf62aff4927e7ec334353edcce465f7fa538c6f09d78a205d49b9eb9",
+      "src/world/BuildingPlot.ts": "066eec80f66a3e4ed63426b00f4228cb0bc5199bb9908337d7b6d607e471ae4f",
+      "src/world/HomeLightGeometry.ts": "4e6b345024ae5c05651b86d957647b048ca342db9a10ecf2b7e77c1687a22330",
+      "src/world/HomeLighting.ts": "01251774f5cf04d81fa30082e8495c357791faa1cd424e12c21eb4826891e636",
+      "src/world/SettlementLayout.ts": "d6abe47532f2e0da1d932a4fd0b96b3cdd044f43ad925e2e687619a73cf06d57"
+    },
+    "fingerprint": "4f0449c1b273f6603d42d83666a1154d387c3f01f73ad72194990b584ba31397"
+  },
+  "sourceAfter": {
+    "head": "bbb018013e682b76288ae3a2a44c4bcaa7457b8d",
+    "dirtyStatus": "M docs/gameplay/CULTURAL-EVENTS-PROTOTYPE.md\n M src/fjord-play/CulturalGatheringView.ts\n M src/fjord-play/CulturalPresentation.ts\n M src/fjord-play/FjordInterface.ts\n M src/fjord-play/cultural-gathering.css\n M src/gameplay-lab/GameplaySession.ts\n M src/lore/Chronicle.ts\n M src/lore/NarrativePlan.ts\n M src/lore/PersonalHistory.ts\n M src/simulation/CulturalEvents.ts\n M src/simulation/SimulationCore.ts\n M tests/cultural-gathering-view.test.mjs\n?? docs/qa/cultural-occasions-277/\n?? tests/cultural-occasions-history.test.mjs\n?? tests/cultural-occasions-session.test.mjs\n?? tests/cultural-occasions.test.mjs\n?? tests/cultural-wedding-presentation.test.mjs",
+    "node": "v24.19.0",
+    "typescript": "5.9.3",
+    "files": {
+      "docs/qa/cultural-occasions-277/review-fixture.mjs": "147bef8456bd49e161455df8b793e18650c8c8941c008bf3cf7c6308ac745764",
+      "package.json": "fbafeb1fb344820f0c13320ea10d91da1a15776eab0891c3f2020f8889801ea3",
+      "pnpm-lock.yaml": "c853a683bbfb2f3b58abfb6b1feb7308387bce165cb554d860e24a41c5debc9d",
+      "scripts/load-typescript.mjs": "bb4d96be5cf7ea8ee68298351ec6a4724569326bf8dec34b51dd0d225bf9c1f0",
+      "src/character-lab/ReferenceHeadFrames.ts": "94522f2084aaff8e7cf48d526a381b30b03c08f8a0a1cea6d824d34546bfcf3a",
+      "src/characters/AdditionalOutfitCatalog.ts": "6c3f4f91bae83d33bf7b67f55741535514e75e2914ba2f042689aa7107633d59",
+      "src/characters/AdditionalOutfitMeasurements.ts": "a63d4ca4a699b55f3bc99f534bd139b0c75776003040ddfebc063fee7b4ea076",
+      "src/characters/AppearanceTypes.ts": "be8a9545b12934da8d75b567b406406a815ffce9cd47309e58c2213723634289",
+      "src/characters/AssetDigest.ts": "bb2edce04a03e274097e759fc05e2022edd403c19130b5a9ec17a640683568f2",
+      "src/characters/AttachmentContract.ts": "e52ff883ca493c49618685f06051e78c514ceb825494247a6308eba8efa46f72",
+      "src/characters/BraidedHairCatalog.ts": "cb2c2f40293a929dc2db1e742ca2b60b587cec9155fc2b5d141a62e77d9e1246",
+      "src/characters/BraidedHairMeasurements.ts": "7f4ccaa39a1392607456308b503c10fc22f9e1d392830dcf43b9131b0d8efed2",
+      "src/characters/CattlePresentation.ts": "4d9e4356445c59039602ca9f2c92a7560a268fd6f029b5f5979f8dbe0344e6de",
+      "src/characters/CharacterAppearance.ts": "6036cee6e1f532e491a45d304867d10a7d49fc79b241fa7b29022a03b997b406",
+      "src/characters/CharacterAssetMeasurements.ts": "7353c2b3d0a433bc2f487f7460a813c82bfcb7b1e90819882d5bb536f223fdf5",
+      "src/characters/CharacterAssets.ts": "ecf8e0fc04c9900237e8864734eee0d3dc95eff8ac089b53764e0ac2f1ea0381",
+      "src/characters/CharacterDNA.ts": "24bec3481d8c7c78e4d9542216292c6c012772b3aa5ad97f29b6edfcad763075",
+      "src/characters/FacialIdentity.ts": "da1a039ca86241fe5f8967cf2d516b7ebfd7d7e01c16b261dbcf1ae02bc1fde8",
+      "src/characters/FemaleHairCatalog.ts": "a54932ada77c0df77300c3a9fb070db85964f435a202f4974101390f27fe4b04",
+      "src/characters/FemaleHairMeasurements.ts": "15bbe096e4e34d0090101fbff20eb743c906b66b1edc49e5790c8b4115406963",
+      "src/characters/FishermanOutfitCatalog.ts": "a6175a40fff7adf844264e53355431cffeb1c54f490580a463ab69d5b78f9b44",
+      "src/characters/FishermanOutfitMeasurements.ts": "d97114bf5d49df5e669332a20596cd43dbd364985b5fd930f1876af4fe0fb488",
+      "src/characters/GridTrialOutfitCatalog.ts": "a0cf7f6e2f55ebacac11daa3f2abc59fa8e9c1b0b5004ea62805cedb3d1b08d0",
+      "src/characters/GridTrialOutfitMeasurements.ts": "da28c181f5ad585995583a18383dced1cd96a9f173daaf100b3aeba7160ef88f",
+      "src/characters/LivestockPresentation.ts": "61150c8b7150e7067ab1b910fe807b5da3ba0f50cb406cb37608325573439524",
+      "src/characters/LongHairCatalog.ts": "331aeab426db9c76ffe7ebf231e8404de927473dd3cd21f7973beae3b6381bcd",
+      "src/characters/LongHairMeasurements.ts": "125ed440b56ac13a036acfd20cc75804ddcc5fbdaabbd30726f7d2663ff297e6",
+      "src/characters/ManualBeardCatalog.ts": "2dacf185bda58ae232667fc3c7c92bd798237a0d6dcd93e1084d5f09ffb53fc6",
+      "src/characters/ManualBeardMeasurements.ts": "dbfbc1d114e5d5679eca78ec5cc61c9fc0e2c50166773e56753193a358bd35c2",
+      "src/characters/ManualHairCatalog.ts": "5a24fe37d25a82d900296cd2636b6b5ba5defb3733bf878944a09ef852d9a03e",
+      "src/characters/ManualHairMeasurements.ts": "74fb6a92632e10de37d7ce2b6af45afd2338e778cdceb2b61e41f67b1881d082",
+      "src/characters/MeshyHumanAssetIdentity.ts": "cddbedb997f23933b0610fa42df58ff4b6c14fbe03e8fbcab14d14d91a66b307",
+      "src/characters/MeshyModuleCatalog.ts": "c2ac11e67d9d3d9fa134d1b2a177a0884b12446ef46c3150463079a6fde14347",
+      "src/characters/MeshyModuleMeasurements.ts": "7bb31f5cad1cf0eedcf90f2fed6b5dc70f8bd0eb4958697d789d05c9170bc9c9",
+      "src/characters/MeshyNativeRig.ts": "fc93a1e8f2b328f9929531e7e80d5df0a97794663364f7c111ff5c9a940f1dad",
+      "src/characters/OccupationHatCatalog.ts": "6fb2d932153922da618e99e66e7d5861b9bf2a41f5c8b7638d01f8a7a2a88d2b",
+      "src/characters/OccupationHatMeasurements.ts": "31e64509d97e0bd606c4ea4741dd178790b61d0dce0ca4c917ec04e759fa5dcc",
+      "src/characters/OccupationToolCatalog.ts": "139cc17820384938936946ec3e40aa47762600eee372dcccfcd6869760ae2a48",
+      "src/characters/OccupationToolMeasurements.ts": "e3b8f1255600a5f698b2d8d575678fb068961e6f4505c498ea58ba331d00d21b",
+      "src/characters/Phenotype.ts": "e0911cf3695d822059c9181b29bfda92974403ef62986e46813c0144b5ececfa",
+      "src/characters/ResidentAppearance.ts": "6b38b68d18b899cdde33c8aff7a993ab5a8de6449e50d1750849c02226dfc494",
+      "src/characters/UniversalHumanProfile.ts": "5096a1946a9cf7d51e12e33986d5068d1c14f1057a4fddb5525bd22ec96be24b",
+      "src/characters/V04ModuleCatalog.ts": "c85a2ad04a0adbb1fb30516eb33ffc22abf29ca120d685e08b2d02f72f8b8e64",
+      "src/characters/generateCharacterDNA.ts": "411a33e3008c6b45dca82754a496e2d1c9398d77064d8d379a1fc36324b8146d",
+      "src/characters/generatePhenotype.ts": "921e1326954ee3ed7d7ecd78586db3e6818d23a4887a554fe28a5d19bfdfbf32",
+      "src/characters/heritageProfiles.ts": "08bfc758372fba1b6672f7407f7e2d739598694a7a41ef1cbb9bd1c5fda54fcb",
+      "src/characters/naming/NameProfile.ts": "953e7e4469f340a066a9971505da95fffd69f28b38faf1979745503e072aa3c2",
+      "src/characters/naming/generateName.ts": "d3e363cb0238f093ffc92e1c1719ea62fe825ab4e74a6d841cb7a89bbe4119ac",
+      "src/characters/naming/nameProfiles.ts": "01c1674ec9499353d3adf03f5d7a7f67ea7ce83d197afd7f8317fe3327992db6",
+      "src/characters/seededRandom.ts": "af8ad27c431893db1e86f67f146dade8e7bc548c3b1955f515a0819b0a8e4ce5",
+      "src/config/FjordLivestock.ts": "fe3cf9e810fafa49107522e708c8db20fc7395147dc086c9cfcc4982516d0024",
+      "src/config/FjordWaterConfig.ts": "019d2113344fb6a67355f59ad451a54f96066149e61eb7453772a4f9885b38e5",
+      "src/config/GroundBlendConfig.ts": "8f451369728c89e7bbd0e85e1421067a9a15e0b8eaece064f5cd606c6f3cc4bd",
+      "src/config/HousingAssets.ts": "e499e6250ac0ad2113973aa9ef79fd42fb93d7cdf80d85eebaa0aa9e49d79d32",
+      "src/config/ModelTextureAssets.ts": "9d92e6f256c98105b566fe9ff291f2757ac7c1bdcd5b1e1beab0aeb51c16ceed",
+      "src/config/NatureAssets.ts": "3c03973d3e71dc71eb8711e1cd5301c0f5ec0d8533dd9f37cda44daac51bd391",
+      "src/config/PresentationQuality.ts": "9980d646775fdb5b0c28653ab270f330cdb0d386f0d4ce6b85891aa5b57556a5",
+      "src/config/TerrainAssets.ts": "77c97495bbb0775f2dfbbef12630d6cf79d9b2e8a34d05bd638ae4963fa04565",
+      "src/config/lightingConfig.ts": "eea1e347ac642d60c81d63c898fe1cbb8df4b24c29cfe60f914d0ac91d0157fc",
+      "src/config/timeVisualization.ts": "ed555c28a37230faa97c43a032e10c2803fa705999d01d224961cf9a0d191e3b",
+      "src/config/worldConfig.ts": "02ec6765c289fef0e6a7c4caabb18c93ab297e0103d010a8884ff4096f69c740",
+      "src/core/AssetManager.ts": "b116c40f8d6e061aed25e5a2a013022cc6db6fd1cf95e5653b81d1588143d3f1",
+      "src/core/EmissiveSurfaces.ts": "57a7a4877c706d7b1909e2fb6b06fcbe1e814632482baa8efb3d645951b4f9d0",
+      "src/core/PreparedBytes.ts": "8cfd43bc94301cada8e3704e3285efc515f08b132a8dcecd6245431a0c93d4ec",
+      "src/fjord-play/BakedCampaignIsland.ts": "803a170668cb12dac0b8cc23e6c3e78634d7dda400b46ae159f95cbb4cf3ad64",
+      "src/fjord-play/BakedIslandCatalog.ts": "33b82bd7d488a2e23d5e8a153d946e5f13bf725c71b6fe2b101bc5cdf421938c",
+      "src/fjord-play/CampaignIsland.ts": "32c46b8f02f7d0295dab0a98c720c981d7777a35f216a1c3915a10aca8160352",
+      "src/fjord-play/FirstStepsState.ts": "7c5077e6c7a75905a9ad2155bf5100315793670cbc3e7e0ea7efb387116c3d24",
+      "src/fjord-play/FjordCalendar.ts": "2cd6929bab90a6f25e1a6509339dd3b261ce1748151c8dcc710486ef14df7fee",
+      "src/fjord-play/FjordCampaign.ts": "57e89b519c4df5e953f4f5c7fca1b7db493cb544870d2cadcb5d3a95066d6395",
+      "src/fjord-play/FjordGround.ts": "1caff9c145ad5725c98d6dd5b67336e94837651939c99d76778260a88854816a",
+      "src/fjord-play/FjordProjection.ts": "4787b9bf7cf8cce110e1c836b034b93d38cfc822868333dc63b5b4b1736bdd01",
+      "src/fjord-play/FjordScenario.ts": "268d424f77c68870670071f4591c0fe8b9814c4fd1935af065dec1a421fc72b8",
+      "src/fjord-play/FjordWeather.ts": "19d35446c06f9fe81b3df81aa553f5dbee96680d2eb8f035b2497b24d9155eaa",
+      "src/fjord-play/JourneyProgress.ts": "075f67cf64b59034cd0e78c8efae6e86847dd9ea68591a884cebd2b1267431d6",
+      "src/fjord-play/RivalSettlement.ts": "2b76e5044e2b99ae8b749bd0a1038f2d009e76e703b692b7300282e79d822be3",
+      "src/fjord-play/SettlementCampfire.ts": "439e02fd0aba97507f4c2746fd16b7c145017f07e3b8f59adbc48f74adae4b2f",
+      "src/fjord-play/VillageNature.ts": "5cd838d268ffbad4ac4433b3be3df148482f5bd0d49f7be3a42de308e6ab24b7",
+      "src/fjord-play/WorkPlan.ts": "d9c6f139c7e102acf8b6e744d5790ef3f1cb931fc77e725da89359e5941c995d",
+      "src/gameplay-lab/GameplaySession.ts": "f1866460f08016e45c83aa852217c82fb9061c3474d9a85d72632bd3651c29f7",
+      "src/gameplay-lab/ReadView.ts": "a63ffdc60e6a6884288043171a1ee0463d855ff3603091ac58e050ccf5c33472",
+      "src/lore/AttentionHistory.ts": "bfc31ad24def543107cd60954b868e70f56a194990bbae514f0508d0a6e8c12c",
+      "src/lore/AttentionState.ts": "1a473ed41bf5e6fa81cc4a53be9f469641ec26aee1d48d58db48389e63e980c0",
+      "src/lore/BookLedger.ts": "c34c0e03e6f582ed0809172ecb1505acc9ec8f662fdaac60991dc0534c303b71",
+      "src/lore/Chronicle.ts": "1ab85db4b9009bac7b38091d2ddd156630134db56edfe47a36e6dabfa715dec1",
+      "src/lore/ClanBook.ts": "21454fef4932a08559abdc615a45dc0c1ee40558ca83cc1fb340130f7fbd0633",
+      "src/lore/FamilyTree.ts": "72e3aaa7bb2fc129b3b1262edbfc31ad1c118ea62448b0b337d0d4be6778f131",
+      "src/lore/LegacyNarrativeComposerV2.ts": "85858c0dac798038c06db56b10f11b07950cd40aa6f34899b418b8c7b02644df",
+      "src/lore/LegacyNarrativeComposerV3.ts": "d1c6c3302c61bc269cfc6b20f7beca1232300256adbfa7275cedeb632f378f2b",
+      "src/lore/LivestockNarrative.ts": "d5b56b87d225b91f712e12b3019502f566acef430f0fa5a95080c2f133c1dc7c",
+      "src/lore/NarrativeComposer.ts": "7a28462ebe3115299ce28c1f3e5ad9851ca4f6e67d9676a65925e2df28646a3e",
+      "src/lore/NarrativeMemory.ts": "19316d69d3cbaf99c1226c4a5fc91922ee11ffb298b88d33a349cf71703589c0",
+      "src/lore/NarrativePlan.ts": "b003ae639797dddd0d090aa989daa4ca80b1c3fa8efa521e127467a3c088fcdd",
+      "src/lore/NarrativeTime.ts": "978a5b92bc12fef756cf0ffd6bf9707d7debee4d2b86ea1c4b6f5c16f1152840",
+      "src/lore/PersonalHistory.ts": "c30996fa2840baaf097ebf2ac35825753a1c4cb1bbb8cb895c77af2e2dc5909d",
+      "src/lore/WildlifeAttention.ts": "1df629b4c7a9e6d0a10f977520da9be3550750bb0ca3cd05ae04cc2253fe33f8",
+      "src/lore/WildlifeHistory.ts": "df2bc925eb943151a5134ff3edf5bffd2b220f9db40362b9ff9f90b0ede3fc33",
+      "src/play/SelectionPresentation.ts": "20c39807131de62f29ee9b35d8ba84f2b5c038eb04358384fb4b396c46fd8028",
+      "src/play/SettlementView.ts": "3c300c96ed977ec46fd3d1b4685fad7bd83a041a7f0d5b43a6d1aab802c6a2c9",
+      "src/play/SharedSettlement.ts": "0ce99f88581126797cf52b4ade02e35bc092b138dfcf9eca07ae1c52c2ca1f63",
+      "src/simulation/BirthdayCalendar.ts": "f745a3882e826f5b646eb1d1ddc2a1d673359bff5e79e8559ca1e9f8ae50b764",
+      "src/simulation/Campfire.ts": "a415beb9e7cc56fc6cdc3cbb04bcf81474f5cf4bcff5c1983dfb097980d14367",
+      "src/simulation/CareCalendar.ts": "a4ac6b904be6275e5076e889fa13c69a82399ffc5eaf41741f3c51d83bd10227",
+      "src/simulation/ClanDiscovery.ts": "58652cb642fc82e31f1d0d96f41449bdf324dca54e6a95b1a60e2af6eb9272d6",
+      "src/simulation/CulturalEvents.ts": "d8e617f75b5cd75d23f899ef75c917d0faee9379316d94c5df53456982b155f4",
+      "src/simulation/EventFacts.ts": "6090beb00f5a68655346ce1c97b12e66e45ddb91bf6478a3fd1f5e6a0d5b7e29",
+      "src/simulation/FamilyMechanics.ts": "83cba71ed956db057fdea0da63be992ed0878980aeaf7f052bfa3d2f64fc551d",
+      "src/simulation/Farmyards.ts": "6ff4802f1804f1bbbc2cfa1300a110ac7d76d39fc93f7ec137bbbfaa9d71a966",
+      "src/simulation/FoundingLivestock.ts": "644d184f71d604391babaa401b159ae41129ae3a4842857ee3bb3fdfcdbe40e3",
+      "src/simulation/FoundingPhase.ts": "4d8d68a8ef3c29d0e89c5a3f2091a7fba009e1d54ee96aad110ba23c78a93627",
+      "src/simulation/HousingNames.ts": "6975f2c764b074c909b768357dd6e9cd853815aed35412623577392d7ba45974",
+      "src/simulation/Identity.ts": "cbcf1b001fd71d9246efb7cffda52a69b3d13957df2ea97f0fdf44f2f1841513",
+      "src/simulation/IslandClans.ts": "1d6fd0aacc2db169d68d68c2ebd879eccdc9520331ae30d6d312c9a7155f0c17",
+      "src/simulation/IslandMissions.ts": "f1b7e82cb7da2e85c579e8b054ae05d298c148dc796490d2e77f4fda6d754b85",
+      "src/simulation/Landing.ts": "f84b203dec79b807ac036b21eaf017f0c5bdfb5f39cf24315dc78694c909a8cd",
+      "src/simulation/Livestock.ts": "563f1e96bdcfd136a3381ec0771267513e56f2c6e14ad662770acfd07d072744",
+      "src/simulation/LivestockBreeding.ts": "33690f543f8892d5fbe79b7b9ff9c0466336be4b14bef20db606b16336bb4cc9",
+      "src/simulation/LivestockNames.ts": "341f7e283c5e91a3c5a734e8fed6f8bc6603da3ea94aa1d85dc6da0291378d7c",
+      "src/simulation/LivestockSpecies.ts": "2068b44296ec0ad64541970c586b50d97ba5c40986ebf33fae15cbb23568f0d4",
+      "src/simulation/LongshipNavigation.ts": "758ae0a75530d42ad20d4b1959dbab43553f34547e07539baf9ec7286fc19a52",
+      "src/simulation/LongshipTransport.ts": "4da662526841c9ac54dde175be9ee2c79612bd79c260e8d633f5b6a05c9aa5ad",
+      "src/simulation/Mechanics.ts": "810f478f7adc8daf41c673b2362adb6c93fdcf2f8585fd3c6c3b55bcd4701ade",
+      "src/simulation/MissionLivestock.ts": "1e21bc3b2ae43ff8e6d6e77b7f9e89c74a9cb1e1d3c46fca56dbb8fdf19a13c3",
+      "src/simulation/Mortality.ts": "bffa529c2446220a92f9caeae13fdd216e9870d7e962e588dcc361dd1244d273",
+      "src/simulation/PersonaAge.ts": "2f63153673647cd2afa15df35f38db7faeb166cc243934a3d06feab3d5b4358a",
+      "src/simulation/PersonalityLifeEvents.ts": "7c9cbc4cfd989313149d81982fad68cd3f9574d653826103b6b92dfdad71c8ab",
+      "src/simulation/Random.ts": "15ae0cb079aa5f7210b40bb005dd31e434532b3183e65ea307bf1071fb34005d",
+      "src/simulation/ScheduledBirths.ts": "e44b527805204280829d9cf2a102bc330782ac9aa8963c664284a1c8d959ded8",
+      "src/simulation/SimulationCore.ts": "5d2d002f37ebc8afec347f544e0b453ee1ddf446df0415ca82893ad2152e85c0",
+      "src/simulation/Smithery.ts": "fac4f647560ca768dda8caf8d191b1098999275777705b6cf973593735fa9c6a",
+      "src/simulation/SpatialExpeditions.ts": "d9d9e5f11f0da0e6d726fe2d488ed917c41dd85476e5aa248e67466cd36a16ba",
+      "src/simulation/SpecialistStocks.ts": "42ecb3e529371f671b1ea84e2b49ba1609a2b48aee3f7028eb2fd32d1cf67324",
+      "src/simulation/Weather.ts": "98f012e7918da6290b79b083b3d36d694c45fe0111305205adc595d5c0c5aac6",
+      "src/simulation/WildlifeSightings.ts": "dfad4498faf8b7eed43447d6523035e788cfc9f1071d870807f8acea6596154d",
+      "src/simulation/WorldExpeditions.ts": "c2577e8c5cdd8c0d3b29a6efe7bcce45e136717b55a81571c5ef9315761fbb68",
+      "src/wildlife/MarineEncounters.ts": "ac1bc06e39fb7491d4b8dde9da49a94995755d17e230a7ceea57897663205f30",
+      "src/wildlife/RabbitGait.ts": "c537eb4e25dab1b9efabd0cba7f384e4bdef7b4502b894e7d227d396637fe721",
+      "src/wildlife/WildlifeHabitats.ts": "0ef5ebb0a39a6be4ac44cbc24464c33db24e823f34cd9701ad5494d775580cbe",
+      "src/wildlife/WildlifePopulation.ts": "015547801c64691adf43f95a7fea0ddbec4b9ff3977a316c8c7140dc804edc6a",
+      "src/wildlife/WildlifeSnapshot.ts": "8b4f52bb49b8a6643064b4cc2e9cb631969d29a167df7ab759da3106c03af8c1",
+      "src/wildlife/WildlifeSpecies.ts": "dcbfe7764adbc792ce0cbdc77257564fbf5c5e4ff1bb549e6ec02bd23d6b02bb",
+      "src/wildlife/WildlifeTerritories.ts": "6a62b546b5a7ed018534f4944686100cb5934f518696cbbeb66f350bf91c701b",
+      "src/world-generation/CoastDistance.ts": "bb03ec068c546f0df62ea11cc5bfd3986f538bc32d34317817dde00b44060dd5",
+      "src/world-generation/EnvironmentZoning.ts": "a13a27428ec82e9054610ddad58ec2477832f88bae89381056d757b5b160da1c",
+      "src/world-generation/GenerateWorld.ts": "68f9da5bea0cd670e19166d00590ee1abc8868cac96df4e8284d5d01f14476fb",
+      "src/world-generation/GenerationProfile.ts": "7ee16674b70bf977a41563e38e05eb8ed52d8047e01893e80a94fc7203e69ad2",
+      "src/world-generation/GenerationTask.ts": "d5f62335939d495878b98be559eb231fc4ad10f2737c73b3c91f48400f5a410a",
+      "src/world-generation/HarborClearance.ts": "8ea17a5fd82991c471ee0da207546b021273b14185be13b3e7e5da854980a122",
+      "src/world-generation/IslandDrainage.ts": "7d04314dbb82f247e39c4980b1feef75f98204d43313b115dafa223d145d35c3",
+      "src/world-generation/IslandDrainageV1.ts": "c760b14b26a2ec01e84522b16ef1ca3924a8cf76d1ad4e7f115e683cb8f159f1",
+      "src/world-generation/IslandShape.ts": "34b832daaa23cae097d9495c0fde878d7c024b14b2e3760b5f00605716c9191b",
+      "src/world-generation/IslandShapeQuality.ts": "364b2593460983bb28417d8170a4c1fd8e5a9c28dc6697f57510bc1a59059603",
+      "src/world-generation/IslandShapeV1.ts": "4b5cf74ec33d432f71ef9d3cfabd54e254f0ff470709cf333678942d7fa3b2b0",
+      "src/world-generation/MacroIsland.ts": "5c53839e940b46e449c3b426ed7091d5046c6867fff2e397e56253b30627a3d7",
+      "src/world-generation/NatureFootprints.ts": "5060a39cffc198442b8dea7fc51d6b955ecc8d0dad1fbeb1616abd18d860a9d8",
+      "src/world-generation/PineFootprints.ts": "be5e6bd3e7913831b17b30cbd7f09b818c5593612f06f693a77459e534fcc452",
+      "src/world-generation/PlanIslandSettlements.ts": "c230785937326873bdff69028097aead2ac1dea25b0a8124cb9e43b4630d26dd",
+      "src/world-generation/PlanNature.ts": "8079f0266713d1ab265da544195d128131980446439d1c412b5af1af9d64f392",
+      "src/world-generation/PlanSettlement.ts": "dfe6fb366caff06a2b9a4214928b27fedffce46c7fb4af90242862d73885070b",
+      "src/world-generation/SettlementCompartments.ts": "2c44d7851ae54f4931f02a5d4be188b9ef284eb91bedbb3b12bd7fd0cebf4ad3",
+      "src/world-generation/SettlementSites.ts": "e6daa4e6b4c4c154e58fce79607479f1a16ea10c0120104c7832464672b0a355",
+      "src/world-generation/SettlementVisibility.ts": "3847f8317e50276b9fac6ecef9f7a53527b201f302a2aa3a9a7f5bb10ce4f687",
+      "src/world-generation/SiteNavigation.ts": "30dbff82146367ad80364c1424bbc127ab0531939b738a18e9e4a345a3bb210a",
+      "src/world-generation/TerrainPreview.ts": "db573675a8c729ef2088bd731e48cdaa92f86cf1f39648f835bff5e80700a0bd",
+      "src/world-generation/TerrainQueries.ts": "a788ebf1b18eb6418ba7b874b3f185965a378d3f160ea6ea557e6295e3a8c2b1",
+      "src/world-generation/ValidateEnvironment.ts": "8a2d4a70ff284634439077aa5c139e36f8e6f9d9065327cdd06a70060a2a3ad0",
+      "src/world-generation/ValidateNavigation.ts": "4eb2a4d6a7ed02921c57e2cead8abfdadc07ea6d5da8bb6cbcdf4701419de865",
+      "src/world-generation/ValidateSiteSelection.ts": "add4803725a4851c3fab84ce959d6329f2d633b6bf09d3de1708d1e876aa239f",
+      "src/world-generation/WorldBlueprint.ts": "44be3cd3e077288f1837c0fbc3ddb51ce90c1016e0320a0eb110af4b63d2530a",
+      "src/world-generation/WorldSave.ts": "6a28d744bf62aff4927e7ec334353edcce465f7fa538c6f09d78a205d49b9eb9",
+      "src/world/BuildingPlot.ts": "066eec80f66a3e4ed63426b00f4228cb0bc5199bb9908337d7b6d607e471ae4f",
+      "src/world/HomeLightGeometry.ts": "4e6b345024ae5c05651b86d957647b048ca342db9a10ecf2b7e77c1687a22330",
+      "src/world/HomeLighting.ts": "01251774f5cf04d81fa30082e8495c357791faa1cd424e12c21eb4826891e636",
+      "src/world/SettlementLayout.ts": "d6abe47532f2e0da1d932a4fd0b96b3cdd044f43ad925e2e687619a73cf06d57"
+    },
+    "fingerprint": "4f0449c1b273f6603d42d83666a1154d387c3f01f73ad72194990b584ba31397"
+  },
+  "sourceChangedDuringSearch": false,
+  "assets": {
+    "public/game-assets/islands/island-pool-v3-88-e8d8e41de2ac.json.bin": {
+      "bytes": 2728807,
+      "sha256": "e8d8e41de2ac17435ef0b5dc7d9d1199aba9ff675960a9cc170be60e4772d2f4"
+    },
+    "public/game-assets/islands/island-pool-v3-227-d835cd8694ac.json.bin": {
+      "bytes": 2525272,
+      "sha256": "d835cd8694acabee4ac9171b2444339a6b1bc152e89584dd83e0088a1be469c9"
+    }
+  },
+  "attempts": [
+    {
+      "seed": 1,
+      "commands": [
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-1",
+          "occupation": "farmer"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-10",
+          "occupation": "farmer"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-2",
+          "occupation": "farmer"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-3",
+          "occupation": "farmer"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-4",
+          "occupation": "farmer"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-5",
+          "occupation": "farmer"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-6",
+          "occupation": "farmer"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-7",
+          "occupation": "farmer"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-8",
+          "occupation": "farmer"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-9",
+          "occupation": "farmer"
+        },
+        {
+          "type": "AdvanceTicks",
+          "ticks": 500
+        },
+        {
+          "type": "AdvanceTicks",
+          "ticks": 1000
+        },
+        {
+          "type": "AdvanceTicks",
+          "ticks": 1000
+        },
+        {
+          "type": "AdvanceTicks",
+          "ticks": 1000
+        },
+        {
+          "type": "AdvanceTicks",
+          "ticks": 1000
+        },
+        {
+          "type": "AdvanceTicks",
+          "ticks": 500
+        }
+      ],
+      "elapsedTicks": 5000,
+      "observations": [
+        {
+          "time": {
+            "winter": 801,
+            "tick": 0
+          },
+          "food": 6,
+          "candidateReasons": []
+        },
+        {
+          "time": {
+            "winter": 802,
+            "tick": 0
+          },
+          "food": 21,
+          "candidateReasons": []
+        },
+        {
+          "time": {
+            "winter": 803,
+            "tick": 0
+          },
+          "food": 0,
+          "candidateReasons": []
+        },
+        {
+          "time": {
+            "winter": 804,
+            "tick": 0
+          },
+          "food": 24,
+          "candidateReasons": []
+        },
+        {
+          "time": {
+            "winter": 805,
+            "tick": 0
+          },
+          "food": 21,
+          "candidateReasons": []
+        },
+        {
+          "time": {
+            "winter": 805,
+            "tick": 500
+          },
+          "food": 40,
+          "candidateReasons": []
+        }
+      ],
+      "result": "no-current-valid-wedding-within-bound"
+    },
+    {
+      "seed": 2,
+      "commands": [
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-1",
+          "occupation": "farmer"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-10",
+          "occupation": "farmer"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-2",
+          "occupation": "farmer"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-3",
+          "occupation": "farmer"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-4",
+          "occupation": "farmer"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-5",
+          "occupation": "farmer"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-6",
+          "occupation": "farmer"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-7",
+          "occupation": "farmer"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-8",
+          "occupation": "farmer"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-9",
+          "occupation": "farmer"
+        },
+        {
+          "type": "AdvanceTicks",
+          "ticks": 500
+        }
+      ],
+      "elapsedTicks": 500,
+      "observations": [
+        {
+          "time": {
+            "winter": 801,
+            "tick": 0
+          },
+          "food": 4,
+          "candidateReasons": [
+            {
+              "sourceEventId": "event-28",
+              "allowed": true,
+              "reason": null
+            }
+          ]
+        }
+      ],
+      "result": "usable-wedding"
+    }
+  ],
+  "winner": {
+    "seed": 2,
+    "commands": [
+      {
+        "type": "AssignOccupation",
+        "personaId": "founder-1",
+        "occupation": "farmer"
+      },
+      {
+        "type": "AssignOccupation",
+        "personaId": "founder-10",
+        "occupation": "farmer"
+      },
+      {
+        "type": "AssignOccupation",
+        "personaId": "founder-2",
+        "occupation": "farmer"
+      },
+      {
+        "type": "AssignOccupation",
+        "personaId": "founder-3",
+        "occupation": "farmer"
+      },
+      {
+        "type": "AssignOccupation",
+        "personaId": "founder-4",
+        "occupation": "farmer"
+      },
+      {
+        "type": "AssignOccupation",
+        "personaId": "founder-5",
+        "occupation": "farmer"
+      },
+      {
+        "type": "AssignOccupation",
+        "personaId": "founder-6",
+        "occupation": "farmer"
+      },
+      {
+        "type": "AssignOccupation",
+        "personaId": "founder-7",
+        "occupation": "farmer"
+      },
+      {
+        "type": "AssignOccupation",
+        "personaId": "founder-8",
+        "occupation": "farmer"
+      },
+      {
+        "type": "AssignOccupation",
+        "personaId": "founder-9",
+        "occupation": "farmer"
+      },
+      {
+        "type": "AdvanceTicks",
+        "ticks": 500
+      }
+    ],
+    "initialBook": {
+      "version": 1,
+      "id": "cc7df8ff-22c40947-7fea268a-a71d80d1",
+      "narrativeSeed": 3552772449,
+      "generatorVersion": 4,
+      "styleVersion": 4,
+      "originWinter": 800,
+      "cursor": {
+        "eventEnd": 3,
+        "stocks": {
+          "food": 15,
+          "materials": 5
+        },
+        "time": {
+          "winter": 800,
+          "tick": 500
+        }
+      },
+      "nextWinter": 805,
+      "chapters": [
+        {
+          "index": 0,
+          "milestoneIndex": 0,
+          "title": "The founding",
+          "text": "Thorrik Hakonarson, Biret, Dervla, Áilu, Aodhín, Leofhild, Ingvald Eiriksson, Lemmikki, Dervorgilla and Mieli arrived together in summer.\n\nThorrik Hakonarson, Biret, Aodhín and Dervorgilla worked as woodworkers. Dervla worked as a farmer. Áilu, Leofhild and Lemmikki worked as hunters. Ingvald Eiriksson and Mieli worked as fishers.\n\nMieli and Dervla were already partners. Their first households lived in tents.\n\nThe founding party had two adult cows and one adult bull and 1 longship.",
+          "facts": {
+            "complete": true,
+            "livestock": {
+              "youngAdultAge": 1,
+              "adultAge": 3,
+              "animals": [
+                {
+                  "id": "cattle-1",
+                  "sex": "female",
+                  "birthWinter": 797,
+                  "species": "cattle",
+                  "name": "Livestock 1",
+                  "youngAdultAge": 1,
+                  "adultAge": 3
+                },
+                {
+                  "id": "cattle-2",
+                  "sex": "female",
+                  "birthWinter": 797,
+                  "species": "cattle",
+                  "name": "Livestock 2",
+                  "youngAdultAge": 1,
+                  "adultAge": 3
+                },
+                {
+                  "id": "cattle-3",
+                  "sex": "male",
+                  "birthWinter": 797,
+                  "species": "cattle",
+                  "name": "Livestock 3",
+                  "youngAdultAge": 1,
+                  "adultAge": 3
+                }
+              ]
+            },
+            "arrival": {
+              "season": "Summer",
+              "winter": 800,
+              "tick": 500
+            },
+            "residences": [
+              {
+                "id": "tent-founder-1",
+                "kind": "tent",
+                "buildingId": null
+              },
+              {
+                "id": "tent-founder-2",
+                "kind": "tent",
+                "buildingId": null
+              },
+              {
+                "id": "tent-founder-3",
+                "kind": "tent",
+                "buildingId": null
+              },
+              {
+                "id": "tent-founder-4",
+                "kind": "tent",
+                "buildingId": null
+              },
+              {
+                "id": "tent-founder-5",
+                "kind": "tent",
+                "buildingId": null
+              },
+              {
+                "id": "tent-founder-6",
+                "kind": "tent",
+                "buildingId": null
+              },
+              {
+                "id": "tent-founder-7",
+                "kind": "tent",
+                "buildingId": null
+              },
+              {
+                "id": "tent-founder-8",
+                "kind": "tent",
+                "buildingId": null
+              },
+              {
+                "id": "tent-founder-9",
+                "kind": "tent",
+                "buildingId": null
+              }
+            ],
+            "founders": [
+              {
+                "id": "founder-1",
+                "name": "Thorrik Hakonarson",
+                "occupation": "woodworker",
+                "partnerId": null
+              },
+              {
+                "id": "founder-2",
+                "name": "Biret",
+                "occupation": "woodworker",
+                "partnerId": null
+              },
+              {
+                "id": "founder-3",
+                "name": "Dervla",
+                "occupation": "farmer",
+                "partnerId": "founder-10"
+              },
+              {
+                "id": "founder-4",
+                "name": "Áilu",
+                "occupation": "hunter",
+                "partnerId": null
+              },
+              {
+                "id": "founder-5",
+                "name": "Aodhín",
+                "occupation": "woodworker",
+                "partnerId": null
+              },
+              {
+                "id": "founder-6",
+                "name": "Leofhild",
+                "occupation": "hunter",
+                "partnerId": null
+              },
+              {
+                "id": "founder-7",
+                "name": "Ingvald Eiriksson",
+                "occupation": "fisher",
+                "partnerId": null
+              },
+              {
+                "id": "founder-8",
+                "name": "Lemmikki",
+                "occupation": "hunter",
+                "partnerId": null
+              },
+              {
+                "id": "founder-9",
+                "name": "Dervorgilla",
+                "occupation": "woodworker",
+                "partnerId": null
+              },
+              {
+                "id": "founder-10",
+                "name": "Mieli",
+                "occupation": "fisher",
+                "partnerId": "founder-3"
+              }
+            ],
+            "households": [
+              {
+                "id": "founder-1",
+                "memberIds": [
+                  "founder-1"
+                ],
+                "residenceId": "tent-founder-1",
+                "displayName": "Thorrik Hakonarson’s household",
+                "residenceName": "Thorrik Hakonarson’s tent"
+              },
+              {
+                "id": "founder-2",
+                "memberIds": [
+                  "founder-2"
+                ],
+                "residenceId": "tent-founder-2",
+                "displayName": "Biret’s household",
+                "residenceName": "Biret’s tent"
+              },
+              {
+                "id": "founder-3",
+                "memberIds": [
+                  "founder-3",
+                  "founder-10"
+                ],
+                "residenceId": "tent-founder-3",
+                "displayName": "Dervla and Mieli’s household",
+                "residenceName": "Dervla and Mieli’s tent"
+              },
+              {
+                "id": "founder-4",
+                "memberIds": [
+                  "founder-4"
+                ],
+                "residenceId": "tent-founder-4",
+                "displayName": "Áilu’s household",
+                "residenceName": "Áilu’s tent"
+              },
+              {
+                "id": "founder-5",
+                "memberIds": [
+                  "founder-5"
+                ],
+                "residenceId": "tent-founder-5",
+                "displayName": "Aodhín’s household",
+                "residenceName": "Aodhín’s tent"
+              },
+              {
+                "id": "founder-6",
+                "memberIds": [
+                  "founder-6"
+                ],
+                "residenceId": "tent-founder-6",
+                "displayName": "Leofhild’s household",
+                "residenceName": "Leofhild’s tent"
+              },
+              {
+                "id": "founder-7",
+                "memberIds": [
+                  "founder-7"
+                ],
+                "residenceId": "tent-founder-7",
+                "displayName": "Ingvald Eiriksson’s household",
+                "residenceName": "Ingvald Eiriksson’s tent"
+              },
+              {
+                "id": "founder-8",
+                "memberIds": [
+                  "founder-8"
+                ],
+                "residenceId": "tent-founder-8",
+                "displayName": "Lemmikki’s household",
+                "residenceName": "Lemmikki’s tent"
+              },
+              {
+                "id": "founder-9",
+                "memberIds": [
+                  "founder-9"
+                ],
+                "residenceId": "tent-founder-9",
+                "displayName": "Dervorgilla’s household",
+                "residenceName": "Dervorgilla’s tent"
+              }
+            ],
+            "cattle": [
+              {
+                "id": "cattle-1",
+                "species": "cattle",
+                "sex": "female",
+                "birthWinter": 797,
+                "deathWinter": null,
+                "parentIds": [],
+                "origin": "founding",
+                "lastCalvingWinter": null,
+                "farmyardId": null,
+                "foodProgress": 0
+              },
+              {
+                "id": "cattle-2",
+                "species": "cattle",
+                "sex": "female",
+                "birthWinter": 797,
+                "deathWinter": null,
+                "parentIds": [],
+                "origin": "founding",
+                "lastCalvingWinter": null,
+                "farmyardId": null,
+                "foodProgress": 0
+              },
+              {
+                "id": "cattle-3",
+                "species": "cattle",
+                "sex": "male",
+                "birthWinter": 797,
+                "deathWinter": null,
+                "parentIds": [],
+                "origin": "founding",
+                "lastCalvingWinter": null,
+                "farmyardId": null,
+                "foodProgress": 0
+              }
+            ],
+            "longships": [
+              {
+                "id": "founding-longship",
+                "acquiredWinter": 800,
+                "salvagedWinter": null
+              }
+            ],
+            "stocks": {
+              "food": 15,
+              "materials": 5
+            }
+          },
+          "sourceEventIds": [
+            "event-1",
+            "event-2"
+          ],
+          "notified": false,
+          "read": false,
+          "templateVersion": 4,
+          "templateId": "clan-book.opening.v4",
+          "paragraphs": [
+            {
+              "templateId": "clan-book.arrival.people.0",
+              "templateVersion": 4,
+              "text": "Thorrik Hakonarson, Biret, Dervla, Áilu, Aodhín, Leofhild, Ingvald Eiriksson, Lemmikki, Dervorgilla and Mieli arrived together in summer.",
+              "sourceEventIds": [
+                "event-1",
+                "event-2"
+              ],
+              "factRefs": [
+                "founders",
+                "arrival"
+              ]
+            },
+            {
+              "templateId": "clan-book.arrival.work",
+              "templateVersion": 4,
+              "text": "Thorrik Hakonarson, Biret, Aodhín and Dervorgilla worked as woodworkers. Dervla worked as a farmer. Áilu, Leofhild and Lemmikki worked as hunters. Ingvald Eiriksson and Mieli worked as fishers.",
+              "sourceEventIds": [
+                "event-1",
+                "event-2"
+              ],
+              "factRefs": [
+                "founders"
+              ]
+            },
+            {
+              "templateId": "clan-book.arrival.households",
+              "templateVersion": 4,
+              "text": "Mieli and Dervla were already partners. Their first households lived in tents.",
+              "sourceEventIds": [
+                "event-1",
+                "event-2"
+              ],
+              "factRefs": [
+                "founders",
+                "households",
+                "residences"
+              ]
+            },
+            {
+              "templateId": "clan-book.arrival.reserves",
+              "templateVersion": 4,
+              "text": "The founding party had two adult cows and one adult bull and 1 longship.",
+              "sourceEventIds": [
+                "event-1",
+                "event-2"
+              ],
+              "factRefs": [
+                "stocks",
+                "cattle",
+                "livestock",
+                "longships"
+              ]
+            }
+          ],
+          "checkpoint": {
+            "version": 1,
+            "time": {
+              "winter": 800,
+              "tick": 500
+            },
+            "eventEnd": 3,
+            "identity": "90996:20218121:dd711ae5"
+          }
+        }
+      ],
+      "memory": {
+        "version": 1,
+        "featuredEventIds": [],
+        "featuredSubjectIds": [],
+        "unresolvedEventIds": [],
+        "recent": [
+          {
+            "chapterIndex": 0,
+            "focus": [],
+            "paragraphIds": [
+              "clan-book.arrival.people.0",
+              "clan-book.arrival.work",
+              "clan-book.arrival.households",
+              "clan-book.arrival.reserves"
+            ]
+          }
+        ]
+      },
+      "canonicalIdentity": "90996:20218121:dd711ae5"
+    },
+    "initialRules": {
+      "landing": {
+        "initialFood": 15,
+        "initialMaterials": 5,
+        "longshipSalvage": 20,
+        "cattleAdultAge": 3,
+        "cattleYoungAdultAge": 1,
+        "adultCattleFood": 1,
+        "calfFood": 0,
+        "cowFoodPerWinter": 4,
+        "exposedProductivityBps": 5000,
+        "farmyardCapacity": 4,
+        "slaughterFood": 15,
+        "foundingCoupleChanceBps": 5000,
+        "foundingCoupleCap": 3,
+        "cattleBirthChanceBps": 5000,
+        "cattleFertileMinAge": 3,
+        "cattleFertileMaxAge": 12,
+        "cattleBirthInterval": 2,
+        "cattleMortalityYoungBps": 200,
+        "cattleMortalityAdultBps": 50,
+        "cattleMortalityOlderBps": 500,
+        "cattleMortalityOldBps": 1500,
+        "cattleCrowdingBps": 200,
+        "cattleWeatherMortalityBps": 0
+      },
+      "mechanics": {
+        "mortalityBands": [
+          {
+            "minAge": 0,
+            "chanceBps": 10
+          },
+          {
+            "minAge": 16,
+            "chanceBps": 5
+          },
+          {
+            "minAge": 50,
+            "chanceBps": 50
+          },
+          {
+            "minAge": 60,
+            "chanceBps": 200
+          },
+          {
+            "minAge": 70,
+            "chanceBps": 500
+          },
+          {
+            "minAge": 80,
+            "chanceBps": 1000
+          },
+          {
+            "minAge": 90,
+            "chanceBps": 2000
+          }
+        ],
+        "foodAdultAge": 16,
+        "ageFullProductivityThrough": 49,
+        "agePenaltyBpsPerWinter": 200,
+        "ageProductivityFloorBps": 5000,
+        "collapseDebtWinters": 3,
+        "salvageBps": 5000,
+        "dominantLegacyChanceBps": 2500,
+        "fertilityMinAge": 18,
+        "fertilityMaxAge": 40,
+        "birthCooldownWinters": 2,
+        "childcareWinters": 5,
+        "careerMinimumGainBps": 1000,
+        "experienceRetentionBpsPerWinter": 100,
+        "apprenticeshipBonusBps": 1000,
+        "apprenticeshipTicks": 1000,
+        "switchProductivityBps": 7500,
+        "switchTicks": 1000,
+        "houseCost": 10,
+        "baseUpkeep": 1,
+        "upgradeCosts": [
+          5,
+          10,
+          20
+        ],
+        "upgradeBonusBps": [
+          0,
+          2500,
+          5000,
+          7500
+        ],
+        "tentProductivityBps": 5000,
+        "workAge": 16,
+        "adultAge": 18,
+        "childFood": 1,
+        "adultFood": 2,
+        "workPerUnit": 10000000,
+        "fertilityChanceBps": 2500,
+        "partnershipChanceBps": 1000,
+        "careerReviewWinters": 5,
+        "occupations": {
+          "farmer": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.3,
+              0.2,
+              0.2,
+              0.05,
+              0.25
+            ],
+            "preferences": [
+              0.7,
+              0.6,
+              0.6,
+              0.35,
+              0.25
+            ]
+          },
+          "herder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.2,
+              0.2,
+              0.2,
+              0.1,
+              0.3
+            ],
+            "preferences": [
+              0.6,
+              0.6,
+              0.6,
+              0.4,
+              0.3
+            ]
+          },
+          "fisher": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.25,
+              0.35,
+              0.15,
+              0.05,
+              0.2
+            ],
+            "preferences": [
+              0.7,
+              0.8,
+              0.6,
+              0.4,
+              0.3
+            ]
+          },
+          "hunter": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.2,
+              0.35,
+              0.15,
+              0.25,
+              0.05
+            ],
+            "preferences": [
+              0.7,
+              0.85,
+              0.6,
+              0.7,
+              0.35
+            ]
+          },
+          "textileWorker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.35,
+              0.3,
+              0.05,
+              0.2
+            ],
+            "preferences": [
+              0.4,
+              0.8,
+              0.75,
+              0.35,
+              0.3
+            ]
+          },
+          "smith": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.4,
+              0.1,
+              0.25,
+              0.05,
+              0.2
+            ],
+            "preferences": [
+              0.85,
+              0.5,
+              0.8,
+              0.3,
+              0.55
+            ]
+          },
+          "woodworker": {
+            "resource": "materials",
+            "unitsPerWinter": 5,
+            "weights": [
+              0.25,
+              0.25,
+              0.3,
+              0.05,
+              0.15
+            ],
+            "preferences": [
+              0.7,
+              0.75,
+              0.8,
+              0.35,
+              0.35
+            ]
+          },
+          "boatbuilder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.25,
+              0.2,
+              0.4,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.7,
+              0.7,
+              0.9,
+              0.35,
+              0.35
+            ]
+          },
+          "trader": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.1,
+              0.3,
+              0.35,
+              0.2
+            ],
+            "preferences": [
+              0.4,
+              0.6,
+              0.8,
+              0.85,
+              0.25
+            ]
+          },
+          "leatherAndJewelleryMaker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.35,
+              0.3,
+              0.1,
+              0.15
+            ],
+            "preferences": [
+              0.45,
+              0.85,
+              0.8,
+              0.45,
+              0.3
+            ]
+          }
+        }
+      },
+      "weather": {
+        "enabled": true,
+        "profiles": {
+          "Mild": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 11000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Normal": {
+            "probabilityBps": 5500,
+            "foodProductionBps": 10000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Harsh": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 0,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 50,
+            "exposedCattleMortalityBps": 500,
+            "travelDurationBps": 12500,
+            "travelRiskBps": 500,
+            "materialsProductionBps": 0,
+            "residentConsumptionBps": 15000,
+            "cattleConsumptionBps": 15000
+          },
+          "Severe": {
+            "probabilityBps": 500,
+            "foodProductionBps": 5000,
+            "cattleConsumptionMultiplier": 3,
+            "tentMortalityBps": 200,
+            "exposedCattleMortalityBps": 1500,
+            "travelDurationBps": 15000,
+            "travelRiskBps": 1500
+          }
+        }
+      },
+      "social": {
+        "enabled": true,
+        "quarrelMinBps": 500,
+        "quarrelMaxBps": 3000,
+        "mediationMinBps": 1000,
+        "mediationMaxBps": 3000,
+        "mediationSuccessBps": 5000,
+        "reconciliationMinBps": 1000,
+        "reconciliationMaxBps": 2000,
+        "failedMediationCooldownYears": 2,
+        "reconciliationMemoryYears": 3,
+        "reconciledQuarrelMultiplierBps": 5000,
+        "expiryYears": 5,
+        "candidateBudget": 128
+      },
+      "culture": {
+        "enabled": true,
+        "foodCost": 3,
+        "minParticipants": 3,
+        "maxParticipants": 8,
+        "supportCapacity": 2,
+        "exposureReductionBps": 2500
+      },
+      "livestock": {
+        "version": 2,
+        "profiles": {
+          "chicken": {
+            "youngAdultAge": 1,
+            "adultAge": 1,
+            "adultFood": 1,
+            "youngFood": 0,
+            "femaleFoodPerWinter": 4,
+            "maleFoodPerWinter": 0,
+            "femaleMaterialsPerWinter": 0,
+            "maleMaterialsPerWinter": 0,
+            "exposedProductivityBps": 5000,
+            "youngSlaughterFood": 1,
+            "youngAdultSlaughterFood": 2,
+            "slaughterFood": 2,
+            "birthChanceBps": 4500,
+            "fertileMinAge": 1,
+            "fertileMaxAge": 6,
+            "birthInterval": 1,
+            "mortalityBands": [
+              {
+                "minAge": 0,
+                "chanceBps": 300
+              },
+              {
+                "minAge": 1,
+                "chanceBps": 100
+              },
+              {
+                "minAge": 6,
+                "chanceBps": 1000
+              },
+              {
+                "minAge": 9,
+                "chanceBps": 2500
+              }
+            ],
+            "crowdingBps": 200,
+            "weatherMortalityBps": 0,
+            "capacityWeightBps": 1000
+          },
+          "pig": {
+            "youngAdultAge": 1,
+            "adultAge": 2,
+            "adultFood": 1,
+            "youngFood": 0,
+            "femaleFoodPerWinter": 0,
+            "maleFoodPerWinter": 0,
+            "femaleMaterialsPerWinter": 0,
+            "maleMaterialsPerWinter": 0,
+            "exposedProductivityBps": 5000,
+            "youngSlaughterFood": 3,
+            "youngAdultSlaughterFood": 10,
+            "slaughterFood": 20,
+            "birthChanceBps": 4000,
+            "fertileMinAge": 2,
+            "fertileMaxAge": 8,
+            "birthInterval": 1,
+            "mortalityBands": [
+              {
+                "minAge": 0,
+                "chanceBps": 200
+              },
+              {
+                "minAge": 2,
+                "chanceBps": 100
+              },
+              {
+                "minAge": 8,
+                "chanceBps": 800
+              },
+              {
+                "minAge": 12,
+                "chanceBps": 2000
+              }
+            ],
+            "crowdingBps": 200,
+            "weatherMortalityBps": 0,
+            "capacityWeightBps": 10000
+          },
+          "sheep": {
+            "youngAdultAge": 1,
+            "adultAge": 2,
+            "adultFood": 1,
+            "youngFood": 0,
+            "femaleFoodPerWinter": 2,
+            "maleFoodPerWinter": 0,
+            "femaleMaterialsPerWinter": 1,
+            "maleMaterialsPerWinter": 1,
+            "exposedProductivityBps": 5000,
+            "youngSlaughterFood": 2,
+            "youngAdultSlaughterFood": 5,
+            "slaughterFood": 10,
+            "birthChanceBps": 3000,
+            "fertileMinAge": 2,
+            "fertileMaxAge": 10,
+            "birthInterval": 1,
+            "mortalityBands": [
+              {
+                "minAge": 0,
+                "chanceBps": 200
+              },
+              {
+                "minAge": 2,
+                "chanceBps": 100
+              },
+              {
+                "minAge": 10,
+                "chanceBps": 500
+              },
+              {
+                "minAge": 14,
+                "chanceBps": 1500
+              }
+            ],
+            "crowdingBps": 200,
+            "weatherMortalityBps": 0,
+            "capacityWeightBps": 7500
+          },
+          "goat": {
+            "youngAdultAge": 1,
+            "adultAge": 2,
+            "adultFood": 1,
+            "youngFood": 0,
+            "femaleFoodPerWinter": 4,
+            "maleFoodPerWinter": 0,
+            "femaleMaterialsPerWinter": 0,
+            "maleMaterialsPerWinter": 0,
+            "exposedProductivityBps": 5000,
+            "youngSlaughterFood": 2,
+            "youngAdultSlaughterFood": 5,
+            "slaughterFood": 10,
+            "birthChanceBps": 3000,
+            "fertileMinAge": 2,
+            "fertileMaxAge": 10,
+            "birthInterval": 1,
+            "mortalityBands": [
+              {
+                "minAge": 0,
+                "chanceBps": 200
+              },
+              {
+                "minAge": 2,
+                "chanceBps": 100
+              },
+              {
+                "minAge": 9,
+                "chanceBps": 500
+              },
+              {
+                "minAge": 13,
+                "chanceBps": 1500
+              }
+            ],
+            "crowdingBps": 200,
+            "weatherMortalityBps": 0,
+            "capacityWeightBps": 7500
+          },
+          "goose": {
+            "youngAdultAge": 1,
+            "adultAge": 1,
+            "adultFood": 1,
+            "youngFood": 0,
+            "femaleFoodPerWinter": 3,
+            "maleFoodPerWinter": 0,
+            "femaleMaterialsPerWinter": 0,
+            "maleMaterialsPerWinter": 0,
+            "exposedProductivityBps": 5000,
+            "youngSlaughterFood": 1,
+            "youngAdultSlaughterFood": 3,
+            "slaughterFood": 5,
+            "birthChanceBps": 3500,
+            "fertileMinAge": 1,
+            "fertileMaxAge": 8,
+            "birthInterval": 1,
+            "mortalityBands": [
+              {
+                "minAge": 0,
+                "chanceBps": 300
+              },
+              {
+                "minAge": 1,
+                "chanceBps": 100
+              },
+              {
+                "minAge": 8,
+                "chanceBps": 800
+              },
+              {
+                "minAge": 12,
+                "chanceBps": 2000
+              }
+            ],
+            "crowdingBps": 200,
+            "weatherMortalityBps": 0,
+            "capacityWeightBps": 2000
+          }
+        },
+        "founding": {
+          "version": 1,
+          "species": [
+            "cattle",
+            "pig",
+            "sheep",
+            "goat"
+          ]
+        },
+        "breeding": {
+          "requireFed": true,
+          "capacityLimited": false,
+          "unassignedCapacityUnits": 40000
+        },
+        "hides": {
+          "cattle": 1,
+          "chicken": 0,
+          "pig": 1,
+          "sheep": 1,
+          "goat": 1,
+          "goose": 0
+        }
+      }
+    },
+    "summary": {
+      "time": {
+        "winter": 801,
+        "tick": 0
+      },
+      "stocks": {
+        "food": 4,
+        "materials": 5
+      },
+      "source": {
+        "id": "event-28",
+        "time": {
+          "winter": 801,
+          "tick": 0
+        },
+        "type": "PartnershipFormed",
+        "personaId": "founder-1",
+        "details": {
+          "partnerId": "founder-6",
+          "householdId": "household-1",
+          "participants": [
+            "founder-1",
+            "founder-6"
+          ],
+          "ages": [
+            33,
+            36
+          ],
+          "people": [
+            {
+              "id": "founder-1",
+              "name": "Thorrik Hakonarson",
+              "age": 33
+            },
+            {
+              "id": "founder-6",
+              "name": "Leofhild",
+              "age": 36
+            }
+          ],
+          "housingNames": {
+            "version": 1,
+            "household": {
+              "id": "household-1",
+              "name": "Thorrik Hakonarson and Leofhild’s household"
+            }
+          },
+          "housingResidents": {
+            "version": 1,
+            "householdIds": [
+              "household-1"
+            ],
+            "buildingId": null,
+            "residenceId": null,
+            "residentIds": [
+              "founder-1",
+              "founder-6"
+            ],
+            "people": [
+              {
+                "id": "founder-1",
+                "name": "Thorrik Hakonarson",
+                "age": 33
+              },
+              {
+                "id": "founder-6",
+                "name": "Leofhild",
+                "age": 36
+              }
+            ]
+          }
+        }
+      },
+      "spouseIds": [
+        "founder-1",
+        "founder-6"
+      ],
+      "spouses": [
+        {
+          "id": "founder-1",
+          "name": "Thorrik Hakonarson",
+          "age": 33
+        },
+        {
+          "id": "founder-6",
+          "name": "Leofhild",
+          "age": 36
+        }
+      ],
+      "elapsedTicks": 0,
+      "quotedFood": 3,
+      "participantIds": [
+        "founder-1",
+        "founder-10",
+        "founder-2",
+        "founder-3",
+        "founder-4",
+        "founder-5",
+        "founder-6",
+        "founder-7"
+      ],
+      "stateSHA256": "7d0560b48723929115cf8bc473ad8590f6373db7d4e064f28af7ff0a351efb45",
+      "rulesUnmodified": true,
+      "physicalWorldBound": true,
+      "discoveryBound": true,
+      "noPreviousGathering": true
+    },
+    "campaignBytes": 96784,
+    "campaignSHA256": "bcbd0b52eae7c9758619312963c55fdaa19ae3b100e32a1394d0d927a93a8833"
+  },
+  "sourceHashConvention": "Provisional sourceBefore/sourceAfter files/fingerprint are exact host-specific working bytes. Final freeze records separate CRLF-to-LF portable hashes; this historical bounded-search identity is retained."
+}

@@ -51,8 +51,12 @@ function housingIds(event: SimulationEvent): string[] | null {
 }
 function rolesFor(event: SimulationEvent, personaId: string, byId: ReadonlyMap<string, SimulationEvent>): string[] {
     const details = event.details ?? {};
-    if (event.type === 'CulturalGatheringHeld')
-        return ids(details.participants).includes(personaId) ? ['gathering participant'] : [];
+    if (event.type === 'CulturalGatheringHeld') {
+        if (!ids(details.participants).includes(personaId)) return [];
+        if (details.occasion === 'wedding')
+            return [ids(details.spouseIds).includes(personaId) ? 'celebrated partner' : 'wedding guest'];
+        return [details.occasion === 'communal_ceremony' ? 'ceremony participant' : 'gathering participant'];
+    }
     if (event.type === 'CultureWeatherSupportApplied')
         return ids(details.participants).includes(personaId) ? ['weather support recipient'] : [];
     if (event.type === 'WildlifeSighted')

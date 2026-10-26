@@ -1,6 +1,6 @@
 import type { FirstStepsInspection } from './FirstStepsState';
-import { gatheringOffer } from '../simulation/SimulationCore';
-import { renderGatheringCard, renderGatheringReview, type GatheringOffer } from './CulturalGatheringView';
+import { gatheringOffer, weddingCandidates } from '../simulation/SimulationCore';
+import { renderGatheringCard, renderGatheringReview, type GatheringChoice, type GatheringOffer } from './CulturalGatheringView';
 import { renderSmithery } from './SmitheryView';
 import { craftingOccupation, type EquipmentItem } from '../simulation/Smithery';
 import { applyCommand, inspectWork, inspectCattle, inspectLivestock, occupationAptitude, occupationIds, personaAge, landingSummary } from '../simulation/SimulationCore';
@@ -48,6 +48,7 @@ type Task = 'work-menu' | 'work-plan' | 'occupation' | 'specialization' | 'smith
 export class FjordInterface {
     private task: Task = null;
     private gatheringDraft?: GatheringOffer;
+    private gatheringChoice: GatheringChoice = { occasion: 'storytelling_music' };
     private gatheringPending = false;
     private gatheringError = '';
     private draft?: WorkDraft;
@@ -258,7 +259,7 @@ export class FjordInterface {
                 html += `<div class="fjord-card-body">${this.result ? `<p class="fjord-result" role="status">${esc(this.result)}</p>` : ''}
                     ${['cattle', 'campfire', 'longship'].includes(selection.kind) ? legacy() :
                         `<details data-legacy-management data-view-key="advanced:${esc(key)}"><summary>More management</summary>${this.advanced ? legacy() : ''}</details>`}
-                    ${selection.kind === 'campfire' ? renderGatheringCard(state, !!this.hooks.report) : ''}</div>`;
+                    ${selection.kind === 'campfire' ? renderGatheringCard(state, !!this.hooks.report, this.gatheringChoice) : ''}</div>`;
             }
         }
         const panelEpoch = this.owner.session.personalHistoryEpoch;
@@ -335,7 +336,7 @@ export class FjordInterface {
     private renderTask(state: SimulationState): string {
         if (this.task === 'culture' && this.gatheringDraft) return this.heading('Support gathering',
             'A voluntary community occasion.', 'people') +
-            `<div class="fjord-card-body">${renderGatheringReview(this.gatheringDraft, gatheringOffer(state), this.gatheringError, this.gatheringPending)}</div>`;
+            `<div class="fjord-card-body">${renderGatheringReview(this.gatheringDraft, gatheringOffer(state, this.gatheringDraft.occasion, this.gatheringDraft.sourceEventId), this.gatheringError, this.gatheringPending)}</div>`;
         if (this.task === 'smithery') return this.heading('Crafting & equipment',
             'Shared clan stock, made by actual residents.', 'work') +
             `<div class="fjord-card-body">${renderSmithery(state)}${button('cancel-task', 'Back', 'close')}</div>`;
@@ -426,6 +427,12 @@ export class FjordInterface {
                 document.querySelector<HTMLElement>('#fjord-exploration')!.focus();
                 return true;
             }
+            case 'culture-partnership-record': {
+                const id = button.dataset.cultureEvent;
+                if (id && state.events.some(event => event.id === id && event.type === 'PartnershipFormed'))
+                    this.hooks.report?.(id);
+                return true;
+            }
             case 'culture-record': {
                 const id = button.dataset.cultureEvent;
                 if (id && state.events.some(event => event.id === id && event.type === 'CulturalGatheringHeld'))
@@ -433,7 +440,7 @@ export class FjordInterface {
                 return true;
             }
             case 'culture-review': {
-                const offer = gatheringOffer(state);
+                const offer = gatheringOffer(state, this.gatheringChoice.occasion, this.gatheringChoice.sourceEventId);
                 if (!offer.allowed) { this.hooks.notify(offer.reason ?? 'Gathering unavailable.'); return true; }
                 this.gatheringDraft = offer;
                 this.gatheringError = '';
@@ -449,9 +456,14 @@ export class FjordInterface {
                 this.hooks.refresh();
                 this.hooks.commit([{ type: 'SponsorGathering', occasion: offer.occasion,
                     expectedSequence: offer.expectedSequence, quotedFood: offer.foodCost,
-                    expectedParticipantIds: [...offer.participantIds] }], () => {
+                    expectedParticipantIds: [...offer.participantIds],
+                    ...(offer.requiresCampfire ? { quotedMaterials: offer.materialsCost } : {}),
+                    ...(offer.sourceEventId ? { sourceEventId: offer.sourceEventId } : {}) }], () => {
                     this.gatheringPending = false;
-                    const message = `Gathering supported · ${offer.foodCost} Food spent.`;
+                    const label = offer.occasion === 'wedding' ? 'Wedding celebration' :
+                        offer.occasion === 'communal_ceremony' ? 'Communal ceremony' : 'Gathering';
+                    const fuelCost = offer.materialsCost > 0 ? ` + ${offer.materialsCost} Material` : '';
+                    const message = `${label} supported · ${offer.foodCost} Food${fuelCost} spent.`;
                     if (this.gatheringDraft === offer) {
                         this.gatheringDraft = undefined;
                         this.task = null;
@@ -562,6 +574,24 @@ export class FjordInterface {
     };
     private change = (event: Event) => {
         const target = event.target;
+        if (target instanceof HTMLSelectElement && target.hasAttribute('data-culture-occasion')) {
+            if (target.value === 'storytelling_music' || target.value === 'communal_ceremony' || target.value === 'wedding') {
+                const candidates = target.value === 'wedding' ? weddingCandidates(this.state) : [];
+                const selected = candidates.find(candidate => candidate.allowed) ?? candidates[0];
+                this.gatheringChoice = { occasion: target.value,
+                    ...(selected ? { sourceEventId: selected.sourceEventId } : {}) };
+                this.gatheringError = '';
+                this.hooks.refresh();
+            }
+            return;
+        }
+        if (target instanceof HTMLSelectElement && target.hasAttribute('data-culture-partnership')) {
+            this.gatheringChoice = { occasion: 'wedding',
+                ...(target.value ? { sourceEventId: target.value } : {}) };
+            this.gatheringError = '';
+            this.hooks.refresh();
+            return;
+        }
         if (target instanceof HTMLInputElement && target.dataset.smitheryTarget) {
             const command: SimulationCommand = { type: 'SetSmitheryTarget',
                 item: target.dataset.smitheryTarget as EquipmentItem, target: target.valueAsNumber };

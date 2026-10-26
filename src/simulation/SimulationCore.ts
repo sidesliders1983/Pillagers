@@ -28,8 +28,8 @@ import type {SocialState, SocialConfig} from './PersonalityLifeEvents';
 export {defaultSocialConfig, socialProbabilities} from './PersonalityLifeEvents';
 import { initializeCulture, applyCultureCommand, validateCulture, isCulturalEvent } from './CulturalEvents';
 import type { CultureConfig, CultureState, CultureCommand } from './CulturalEvents';
-export { defaultCultureConfig, gatheringOffer, inspectCulture } from './CulturalEvents';
-export type { CultureConfig, CultureCommand, CultureState, CulturalOccasion } from './CulturalEvents';
+export { defaultCultureConfig, gatheringOffer, inspectCulture, availableCulturalParticipants, weddingCandidates } from './CulturalEvents';
+export type { CultureConfig, CultureCommand, CultureState, CulturalOccasion, CulturalParticipant, WeddingCandidate } from './CulturalEvents';
 import {personaIdentity} from './Identity';
 import {initializeWorld,validateWorld,applyExpeditionCommand,personaAway,namespaceTarget} from './WorldExpeditions';
 import type {WorldState,ExpeditionCommand,ExpeditionConfig} from './WorldExpeditions';
@@ -373,7 +373,9 @@ function validateState(state: SimulationState): void {
     let wildlifeSequence = 0;
     const wildlifeFirsts = new Map<string, string>();
     state.events.forEach((event, index) => {
-        if (isCulturalEvent(event)) culturalEvents.push(event);
+        if (isCulturalEvent(event) || (state.culture !== undefined &&
+            ['PartnershipFormed', 'CampfireFuelConsumed', 'CampfireChanged'].includes(event.type)))
+            culturalEvents.push(event);
         validateWildlifeSighting(event, state);
         const sighting = wildlifeSighting(event);
         if (sighting) {

@@ -30,6 +30,15 @@ export function setCampfire(state: SimulationState, lit: boolean) {
     emit(state, 'CampfireChanged', { lit, reason: 'player' });
 }
 
+/** Ceremony prepayment reuses normal fuel; ordinary on/off and tick timing stay unchanged. */
+export function ensureCampfireBurning(state: SimulationState): void {
+    if (!state.mechanics) throw new Error('Gameplay settlement required');
+    state.campfire ??= { version: 1, lit: false, fuelTicks: 0 };
+    if (state.campfire.fuelTicks === 0 && !refuel(state))
+        throw new Error('Lighting the campfire requires 1 Material');
+    setCampfire(state, true);
+}
+
 /** Pay before a burning tick, ahead of that tick's work and annual building upkeep. */
 export function stepCampfire(state: SimulationState) {
     const fire = state.campfire;

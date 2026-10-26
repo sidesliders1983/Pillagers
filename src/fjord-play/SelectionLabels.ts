@@ -5,6 +5,7 @@ import type { SelectionMarker } from '../play/SelectionPresentation';
 export type SelectionLabel = Pick<SelectionMarker, 'selectionKey' | 'role' | 'label'> & {
     anchor: number[];
     color: string;
+    roleLabel?: string;
 };
 type LabelBox = { left: number; top: number; width: number; height: number };
 const overlaps = (a: LabelBox, b: LabelBox) => a.left < b.left + b.width + 6 &&
@@ -19,7 +20,7 @@ export class SelectionLabels {
 
     sync(markers: readonly SelectionLabel[]) {
         updateView(this.labels, markers.map(marker => `<span data-view-key="${escape(marker.selectionKey)}"
-            class="${marker.role === 'selected' ? 'selected' : 'related'}">${escape(marker.role[0].toUpperCase() + marker.role.slice(1))} · ${escape(marker.label)}</span>`).join(''));
+            class="${marker.role === 'selected' ? 'selected' : 'related'}">${escape(marker.roleLabel ?? marker.role[0].toUpperCase() + marker.role.slice(1))} · ${escape(marker.label)}</span>`).join(''));
         this.leaders.innerHTML = markers.map(marker => `<line stroke="${escape(marker.color)}"/>`).join('');
         this.items = Array.from(this.labels.children).map((element, index) => ({
             element: element as HTMLElement,

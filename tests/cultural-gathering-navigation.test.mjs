@@ -263,3 +263,45 @@ test('a second gathering replaces pending returns without nesting retained inten
     assert.equal(motion.inspectMetrics().returningGatheringActors, 0);
     assert.equal(motion.inspectMetrics().retainedGatheringWaypoints, 0);
 });
+
+test('native Run approach freezes on pause and releases ordinary walking on cancellation and changed eligibility', () => {
+    const { motion, people, entities, view, world } = fixture(3);
+    const keys = people.map(person => person.selectionKey);
+    for (const key of keys) motion.setPace(key, .8, 3.5051535998518575);
+    motion.beginGathering('running-approach-lifecycle', keys, 6);
+    for (let frame = 0; frame < 10; frame++) motion.advance(.1, true, true);
+    assert.ok(motion.inspect().some(actor => actor.state === 'Run'));
+    const paused = motion.inspect();
+    motion.advance(60, false, true);
+    motion.advance(60, true, false);
+    assert.deepEqual(motion.inspect(), paused);
+    motion.releaseGathering();
+    assert.ok(motion.inspect().every(actor => actor.state !== 'Run'));
+    for (let frame = 0; frame < 20; frame++) {
+        const previous = new Map(motion.inspect().map(actor => [actor.key, actor]));
+        motion.advance(.1, true, true);
+        for (const actor of motion.inspect()) {
+            const before = previous.get(actor.key);
+            assert.notEqual(actor.state, 'Run');
+            assert.ok(Math.hypot(actor.x - before.x, actor.z - before.z) <= .081);
+        }
+    }
+    motion.beginGathering('running-approach-ineligible', keys, 6);
+    for (let frame = 0; frame < 10; frame++) motion.advance(.1, true, true);
+    const changed = structuredClone(entities);
+    changed.find(entity => entity.selectionKey === keys[0]).status.indoorReason = 'childcare';
+    changed.find(entity => entity.selectionKey === keys[1]).status.expedition = 'new-expedition';
+    changed.find(entity => entity.selectionKey === keys[2]).status.living = false;
+    motion.reconcile(changed, view.ground);
+    assert.ok(motion.inspectGathering().participants.every(person => person.dropped));
+    assert.ok(motion.inspect().every(actor => actor.state !== 'Run'));
+    motion.releaseGathering();
+    assert.equal(motion.inspectMetrics().retainedGatheringWaypoints, 0);
+    assert.equal(motion.inspectMetrics().returningGatheringActors, 0);
+    const rebuilt = new LivingWorldController(world);
+    rebuilt.reconcile(entities, view.ground);
+    for (const key of keys) rebuilt.setPace(key, .8, 3.5051535998518575);
+    assert.equal(rebuilt.inspectGathering(), null);
+    rebuilt.advance(.1, true, true);
+    assert.ok(rebuilt.inspect().every(actor => actor.state !== 'Run'));
+});

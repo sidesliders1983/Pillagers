@@ -1,0 +1,27 @@
+Final verification, 2026-10-26; source identity retained in manifest.json.
+
+node --max-old-space-size=1024 docs/qa/cultural-occasions-277/review-fixture-v2/review-fixture.mjs --freeze
+PASS: frozen; seed 2; Summer 801/tick 550; 24 Food + 1 Material; Core SHA256 4bc329ed0e31256741272daee46ea51b18be6b4a6a6ed81454ba7e9314d5a9d5.
+
+node --max-old-space-size=1024 docs/qa/cultural-occasions-277/review-fixture-v2/review-fixture.mjs --verify
+PASS: portable source, baked assets, policy, original search and both unchanged checkpoints.
+
+node --max-old-space-size=1024 docs/qa/cultural-occasions-277/review-fixture-v2/review-fixture.mjs --replay
+PASS: exact public-command Core, pre-source transition, genuine unread Attention and SharedSettlement imports reproduced.
+
+node --max-old-space-size=1024 docs/qa/cultural-occasions-277/review-fixture-v2/review-year-jump.mjs --verify
+PASS: Winter 801/tick 950; 38 Food / 5 Materials; elapsed 950; 24 Food + 1 Material; both spouses available; source unread; AdvanceTicks1000 and actual UI AdvanceWinter Core-identical.
+Core SHA256 b4406e4ea0c6b59e997056b461b11d986ffbd050f98df07c3b1b582d7ba04c2b.
+
+No historical v1 files, v2 policy-freeze/search bytes, or either original v2 checkpoint was rewritten.
+Headless source/import/navigation evidence is separate from rendered browser/device acceptance.
+
+Provenance-verifier hardening (same measured outcomes, no new cohort):
+- Preserved original helper exact bytes as review-year-jump-original.mjs; SHA256 5c07cc3a11178d9de788976cfe576a77d713d257cffd3c289b9bc14ff1999a6c.
+- Hardened helper SHA256 be54643d11295a38b88a836cd7d8353c823471164f2e9bf10003beeccd4dab76.
+- node --check: PASS.
+- Hardened review-year-jump.mjs --verify: PASS, identical b4406e4... canonical endpoint and actual UI command equivalence.
+- Main review-fixture.mjs --verify after patch: PASS; no final Core manifest revision needed.
+- Original observation SHA256 unchanged: 2cdf07c6b091362ae5e32119f7625db375e4de78fc85336cb8cd9d6f065df83c.
+- Final Core manifest SHA256 unchanged: a9a4adee9a3c235d7374c815ae6c0874d0dcdad8fa3b211828088952fe0cdf18.
+The historical Git HEAD and original helper hash remain captured provenance, not simulated outcome fields. All measured outputs plus normalized Core dependency fingerprint remain strict comparisons.

@@ -104,7 +104,7 @@ function narrativeLine(event: SimulationEvent, original: string): string {
         return lines.join(' ');
     }
     if (event.type === 'CulturalGatheringHeld')
-        return original.replace(/, using \d+ Food\.$/, '.');
+        return original.replace(/, using \d+ Food(?: and \d+ Materials?)?\.$/, '.');
     if (event.type === 'BuildingCollapsed') original = original.replace(/; \d+ Materials were salvaged/,
         Number(details.salvage) > 0 ? '; some Materials were salvaged' : '; no Materials were salvaged');
     return original.replace(/ for \d+ (Food|Materials)/g, '');

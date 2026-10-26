@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "baseHead": "874a5f6fa5890dc78f4a4c887c3621b71342555e",
+  "sourceContext": "Owner-requested running approach and occupation-tool hiding; exact current portable hashes below.",
+  "sourceHashConvention": "SHA-256 of UTF-8 with CRLF normalized to LF only.",
+  "files": {
+    "src/fjord-play/LivingWorldController.ts": "a130e94f5c04abaa4f34dcc7bfe779dfa089e5e550ec45fa96a479cd4030d1b8",
+    "src/fjord-play/FjordModels.ts": "78f29b1a2ec198a04536b94447e2ac6422948ba54dd00f6ed000693e78335683",
+    "src/fjord-play/FjordEntities.ts": "1b9e8bcfaec0f5cde6616710ffea506aeda66f55ea8602c387d86427e042cffa",
+    "src/fjord-play/FjordScene.ts": "cfe1bb0ed9ab9e59ee34f2e1385658055d3d777eb31d197e4bc9ae37622abc0d",
+    "src/fjord-play/FjordWardrobe.ts": "2a3be684b56a76986d4a9d28f340b0a4adf1aba65887ff6e871a898c599a754f",
+    "src/characters/MeshyModuleRuntime.ts": "bfcdd7816e098c9f8826c22840fc5ef9f7a902e28a04b61eefdd1ae556ce5199",
+    "src/fjord-play/CulturalCeremonyVisuals.ts": "7dbd35f69970da946d6cad07cdfb518ab6d6ee675e1e7e208bf22a1ef6d328c0",
+    "tests/cultural-wedding-navigation.test.mjs": "cc9b168e290373d7c44599a48ca2d239fbc7c887c6f213835ebb44315b18bce5",
+    "tests/cultural-gathering-navigation.test.mjs": "e6b5dbcd3d1fed8fa6c16f8f1d87149b1282f7ef351aa82fbe6897d58d71c546",
+    "tests/occupation-tools.test.mjs": "cd03a4a02ad98ef2819aa133c37a3288940208450d6e840ec592bf1b719c6375"
+  },
+  "fixture": "../review-fixture-v2/review-wedding-campaign.json",
+  "fixtureSHA256": "69204861159519276cb7a60c8d3eaf83127601cb6b1eda6032176aa09449669c",
+  "testCount": 80,
+  "testFailures": 0,
+  "testSkips": 0,
+  "cases": [
+    {
+      "limit": 6,
+      "clockRunning": false,
+      "gatheringAt": 15.8,
+      "endedAt": 22.8,
+      "returnedAt": 54.5,
+      "staged": 6,
+      "returned": 6,
+      "gatheringRoutes": 8,
+      "largestRoute": 2000,
+      "bodyOverlaps": 0,
+      "coreUnchanged": true,
+      "coreParityWithHeadless": true,
+      "canonicalTimeAfter": {
+        "winter": 801,
+        "tick": 550
+      },
+      "navigationOnly": true,
+      "rendererAndAudioMeasured": false
+    },
+    {
+      "limit": 8,
+      "clockRunning": false,
+      "gatheringAt": 15.8,
+      "endedAt": 22.8,
+      "returnedAt": 54.5,
+      "staged": 8,
+      "returned": 8,
+      "gatheringRoutes": 10,
+      "largestRoute": 2000,
+      "bodyOverlaps": 0,
+      "coreUnchanged": true,
+      "coreParityWithHeadless": true,
+      "canonicalTimeAfter": {
+        "winter": 801,
+        "tick": 550
+      },
+      "navigationOnly": true,
+      "rendererAndAudioMeasured": false
+    },
+    {
+      "limit": 6,
+      "clockRunning": true,
+      "gatheringAt": 15.8,
+      "endedAt": 22.8,
+      "returnedAt": 54.5,
+      "staged": 6,
+      "returned": 6,
+      "gatheringRoutes": 8,
+      "largestRoute": 2000,
+      "bodyOverlaps": 0,
+      "coreUnchanged": false,
+      "coreParityWithHeadless": true,
+      "canonicalTimeAfter": {
+        "winter": 801,
+        "tick": 852
+      },
+      "navigationOnly": true,
+      "rendererAndAudioMeasured": false
+    },
+    {
+      "limit": 8,
+      "clockRunning": true,
+      "gatheringAt": 15.8,
+      "endedAt": 22.8,
+      "returnedAt": 54.5,
+      "staged": 8,
+      "returned": 8,
+      "gatheringRoutes": 10,
+      "largestRoute": 2000,
+      "bodyOverlaps": 0,
+      "coreUnchanged": false,
+      "coreParityWithHeadless": true,
+      "canonicalTimeAfter": {
+        "winter": 801,
+        "tick": 852
+      },
+      "navigationOnly": true,
+      "rendererAndAudioMeasured": false
+    }
+  ],
+  "rawTestOutputSHA256": "2b102ab5c6ab71767cd27ae34e3b91b3b1b8f0d42e45a96b069e3ca007e0b4ef",
+  "renderedBrowserOrGPU": false
+}

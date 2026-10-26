@@ -1,0 +1,283 @@
+{
+  "schemaVersion": 1,
+  "status": "actual-one-year-action-eligible",
+  "checkpoint": {
+    "file": "review-before-partnership.json",
+    "bytes": 87395,
+    "sha256": "5c0366a93e1d9f5d1a87878e7ab505c614dbf44327c1e427646e9bb1f3bb78f0",
+    "commandCount": 19,
+    "time": {
+      "winter": 800,
+      "tick": 950
+    },
+    "stateSHA256": "92bfbb00b4b39240270119f98f168f1ed98647ab84de068970757d699e13d4db",
+    "nextCommand": {
+      "type": "AdvanceTicks",
+      "ticks": 50
+    },
+    "sourceEventId": "event-28"
+  },
+  "tickAdvance": {
+    "command": {
+      "type": "AdvanceTicks",
+      "ticks": 1000
+    },
+    "time": {
+      "winter": 801,
+      "tick": 950
+    },
+    "stocks": {
+      "food": 38,
+      "materials": 5
+    },
+    "source": {
+      "id": "event-28",
+      "time": {
+        "winter": 801,
+        "tick": 0
+      },
+      "type": "PartnershipFormed",
+      "personaId": "founder-1",
+      "details": {
+        "partnerId": "founder-6",
+        "householdId": "household-1",
+        "participants": [
+          "founder-1",
+          "founder-6"
+        ],
+        "ages": [
+          33,
+          36
+        ],
+        "people": [
+          {
+            "id": "founder-1",
+            "name": "Thorrik Hakonarson",
+            "age": 33
+          },
+          {
+            "id": "founder-6",
+            "name": "Leofhild",
+            "age": 36
+          }
+        ],
+        "housingNames": {
+          "version": 1,
+          "household": {
+            "id": "household-1",
+            "name": "Thorrik Hakonarson and Leofhild’s household"
+          }
+        },
+        "housingResidents": {
+          "version": 1,
+          "householdIds": [
+            "household-1"
+          ],
+          "buildingId": null,
+          "residenceId": null,
+          "residentIds": [
+            "founder-1",
+            "founder-6"
+          ],
+          "people": [
+            {
+              "id": "founder-1",
+              "name": "Thorrik Hakonarson",
+              "age": 33
+            },
+            {
+              "id": "founder-6",
+              "name": "Leofhild",
+              "age": 36
+            }
+          ]
+        }
+      }
+    },
+    "elapsedTicks": 950,
+    "offer": {
+      "allowed": true,
+      "reason": null,
+      "foodCost": 24,
+      "materialsCost": 1,
+      "requiresCampfire": true,
+      "participantIds": [
+        "founder-1",
+        "founder-10",
+        "founder-2",
+        "founder-3",
+        "founder-4",
+        "founder-5",
+        "founder-6",
+        "founder-7"
+      ],
+      "spouseIds": [
+        "founder-1",
+        "founder-6"
+      ]
+    },
+    "bothSpousesAvailable": true,
+    "sourceAttention": {
+      "eventId": "event-28",
+      "canonicalType": "PartnershipFormed",
+      "category": "life",
+      "severity": "noteworthy",
+      "time": {
+        "winter": 801,
+        "tick": 0
+      },
+      "actorIds": [
+        "founder-1",
+        "founder-6"
+      ],
+      "headline": "Thorrik Hakonarson and Leofhild became partners.",
+      "shortText": "Thorrik Hakonarson and Leofhild became partners.",
+      "target": {
+        "kind": "persona",
+        "id": "founder-1"
+      },
+      "read": false
+    },
+    "stateSHA256": "b4406e4ea0c6b59e997056b461b11d986ffbd050f98df07c3b1b582d7ba04c2b",
+    "stillPaused": true,
+    "gatheringCount": 0
+  },
+  "actualYearButton": {
+    "command": {
+      "type": "AdvanceWinter"
+    },
+    "time": {
+      "winter": 801,
+      "tick": 950
+    },
+    "stocks": {
+      "food": 38,
+      "materials": 5
+    },
+    "source": {
+      "id": "event-28",
+      "time": {
+        "winter": 801,
+        "tick": 0
+      },
+      "type": "PartnershipFormed",
+      "personaId": "founder-1",
+      "details": {
+        "partnerId": "founder-6",
+        "householdId": "household-1",
+        "participants": [
+          "founder-1",
+          "founder-6"
+        ],
+        "ages": [
+          33,
+          36
+        ],
+        "people": [
+          {
+            "id": "founder-1",
+            "name": "Thorrik Hakonarson",
+            "age": 33
+          },
+          {
+            "id": "founder-6",
+            "name": "Leofhild",
+            "age": 36
+          }
+        ],
+        "housingNames": {
+          "version": 1,
+          "household": {
+            "id": "household-1",
+            "name": "Thorrik Hakonarson and Leofhild’s household"
+          }
+        },
+        "housingResidents": {
+          "version": 1,
+          "householdIds": [
+            "household-1"
+          ],
+          "buildingId": null,
+          "residenceId": null,
+          "residentIds": [
+            "founder-1",
+            "founder-6"
+          ],
+          "people": [
+            {
+              "id": "founder-1",
+              "name": "Thorrik Hakonarson",
+              "age": 33
+            },
+            {
+              "id": "founder-6",
+              "name": "Leofhild",
+              "age": 36
+            }
+          ]
+        }
+      }
+    },
+    "elapsedTicks": 950,
+    "offer": {
+      "allowed": true,
+      "reason": null,
+      "foodCost": 24,
+      "materialsCost": 1,
+      "requiresCampfire": true,
+      "participantIds": [
+        "founder-1",
+        "founder-10",
+        "founder-2",
+        "founder-3",
+        "founder-4",
+        "founder-5",
+        "founder-6",
+        "founder-7"
+      ],
+      "spouseIds": [
+        "founder-1",
+        "founder-6"
+      ]
+    },
+    "bothSpousesAvailable": true,
+    "sourceAttention": {
+      "eventId": "event-28",
+      "canonicalType": "PartnershipFormed",
+      "category": "life",
+      "severity": "noteworthy",
+      "time": {
+        "winter": 801,
+        "tick": 0
+      },
+      "actorIds": [
+        "founder-1",
+        "founder-6"
+      ],
+      "headline": "Thorrik Hakonarson and Leofhild became partners.",
+      "shortText": "Thorrik Hakonarson and Leofhild became partners.",
+      "target": {
+        "kind": "persona",
+        "id": "founder-1"
+      },
+      "read": false
+    },
+    "stateSHA256": "b4406e4ea0c6b59e997056b461b11d986ffbd050f98df07c3b1b582d7ba04c2b",
+    "stillPaused": true,
+    "gatheringCount": 0
+  },
+  "source": {
+    "head": "d43fff1a036e04b0ad91c54e43c3d7bc6dadce90",
+    "hashConvention": "SHA-256 of valid UTF-8 with CRLF changed to LF only; raw checkpoint bytes are exact.",
+    "normalizedFingerprint": "0156b78f92d008ba5a928775c77ef27da417269e4f5590e7d500d1a9022ff8ca",
+    "matchesBoundedSearchDependencies": true,
+    "helperNormalizedSHA256": "5c07cc3a11178d9de788976cfe576a77d713d257cffd3c289b9bc14ff1999a6c"
+  },
+  "assets": {
+    "public/game-assets/islands/island-pool-v3-227-d835cd8694ac.json.bin": {
+      "bytes": 2525272,
+      "sha256": "d835cd8694acabee4ac9171b2444339a6b1bc152e89584dd83e0088a1be469c9"
+    }
+  },
+  "limitations": "Headless real public actions/import only; fresh rendered invitation and owner device review remain separate."
+}

@@ -30,7 +30,13 @@ export default defineConfig({
             'three', 'three/addons/loaders/GLTFLoader.js', 'three/addons/controls/OrbitControls.js'
         ]
     },
-    server: { watch: { ignored: ['**/tools/**', '**/scratch/**', '**/artifacts/**'] } },
+    server: {
+        watch: {
+            // A worktree can live under scratch; ignore only this project's generated folders.
+            ignored: ['tools', 'scratch', 'artifacts'].map(directory =>
+                resolve(directory).split(sep).join('/') + '/**'),
+        },
+    },
     plugins: [{
         name: 'three-draco-decoder',
         configureServer(server) {

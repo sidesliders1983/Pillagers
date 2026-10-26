@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FjordSide · Wedding and communal ceremony review</title>
+<style>
+body { margin: 0; background: #172b27; color: #eee6d2; font: 16px/1.6 system-ui; }
+main { max-width: 850px; margin: auto; padding: 24px; }
+a { color: #ebcb7e; }
+section { margin: 28px 0; border-top: 1px solid #708174; padding-top: 14px; }
+.launch { display: inline-block; padding: 12px 18px; border: 1px solid #ebcb7e; border-radius: 6px; }
+li { margin: 10px 0; }
+small { color: #bfc9bb; }
+</style>
+<main>
+<h1>Wedding celebrations and communal ceremonies</h1>
+<p><strong>Already-open game tab?</strong> Fully reload it once before this review
+(Ctrl+Shift+R on desktop). The current campfire card has an <strong>Occasion</strong> selector:
+choose <strong>Wedding celebration</strong> for the per-attendee wedding quote.
+<strong>Storytelling &amp; music</strong> remains a separate 3 Food total occasion.</p>
+<p>Weddings cost <strong>3 Food per attendee</strong>: eight participants cost 24 Food.
+Communal ceremonies cost 3 Food total. Both use a real burning campfire and quote its normal
+1 Material fuel payment when no prepaid fuel remains.</p>
+<p><a class="launch" href="/fjord-play?culture=1&amp;debugPerf=1&amp;review=ceremony-invitations" target="_blank" rel="noopener">Open prototype game</a></p>
+<section>
+<h2>Try the new partnership invitation</h2>
+<p><a class="launch" href="review-fixture-v2/review-before-partnership.json" download="fjordside-before-partnership.json">Download pre-partnership campaign</a></p>
+<ol>
+<li>Open the game, then use <strong>Menu → Campaign → Import campaign</strong> to select this file.
+Export your current campaign first if you want to keep it. Close the menu or Book after loading.</li>
+<li><strong>Keep the clock paused</strong> and click <strong>+1 Year once</strong>. Normal play forms
+Thorrik Hakonarson and Leofhild's actual partnership and earns 38 Food / 5 Materials.
+No extra stocks or relationship chances have been added.</li>
+<li>Optionally open Activity Center, read the new partnership and close it. The unanswered
+wedding invitation must still be available; reading history does not choose Not now.</li>
+<li>The wedding invitation names the couple and quotes <strong>24 Food + 1 Material</strong>.
+Try <strong>Not now</strong>: it dismisses that invitation without spending or changing their
+relationship. The campfire's wedding action remains available during the normal window.</li>
+<li>Reimport and repeat the same +1 Year action to review <strong>Confirm</strong>. It leaves
+<strong>14 Food / 4 Materials</strong>, lights the real campfire, brings the camera there and records one wedding celebration.</li>
+<li>Enable sound, keep the campfire in view and press <strong>Play</strong>. A temporary arch,
+garland and banners mark the ceremony. Both actual partners have <strong>Wedding · Name</strong>
+labels while approaching and celebrating. Labels and static decoration remain visible when paused.</li>
+<li>Check that the pair really arrives with guests, performs the short gesture/response and
+walks back. Residents now run toward the fire with occupation tools hidden. The fixture's headless
+navigation reaches the gathering around 16 seconds;
+actual positions and circumstances can vary. No teleport is used. Check that tools stay
+hidden while paused during the ceremony and return after it ends.</li>
+<li>Pause/resume, move the camera, return from another app and reload. No second payment or
+historical performance should occur. Read the actual ceremony in Activity Center.</li>
+</ol>
+<p>A wedding is optional within one game year after a new partnership. Founding couples are
+excluded. Keep playback paused while deciding in this fast review, because the +1 Year action
+leaves 50 ticks in the source's celebration window.</p>
+</section>
+<section>
+<h2>Review insufficient resources or the communal ceremony</h2>
+<p>Alternatively, import the pre-partnership file and let the clock run normally. The actual
+partnership appears after about nine active seconds at the default pace; its first invitation
+correctly says <strong>Not enough resources</strong>. Production can make it affordable later.</p>
+<p><a class="launch" href="review-fixture-v2/review-wedding-campaign.json" download="fjordside-affordable-wedding.json">Download first affordable checkpoint</a></p>
+<p>This second checkpoint has exactly 24 Food / 5 Materials. A wedding leaves 0 Food / 4 Materials.
+For a separate communal review, reimport it and select the campfire → <strong>Occasion →
+Communal ceremony</strong> → <strong>Support gathering</strong>. Its 3 Food + 1 Material quote
+starts the same real fire and shows temporary banners and a garland. Existing prepaid fuel is reused.</p>
+<p>The culture card stays below the independent campfire lighting controls. Extinguishing the
+fire ends fire-required decoration; it does not refund or repeat the accepted ceremony.</p>
+</section>
+<section>
+<h2>Evidence</h2>
+<p><a href="journey.md">Player journey</a> · <a href="validation.md">Validation and limits</a> ·
+<a href="review-fixture-v2/README.md">Normal-rule fixture and replay</a> ·
+<a href="approach-qualification/report.md">Actual navigation qualification</a> ·
+<a href="invitation-delivery/README.md">Invitation delivery and unchanged-Core qualification</a> ·
+<a href="participation-v4/README.md">Running and occupation-tool qualification</a></p>
+<p><small>The original flat-price fixture remains historical evidence. These new controls,
+ceremony appearance and couple labels still need rendered browser and physical-device review.
+Headless/DOM checks do not establish sound quality, GPU cost or long-duration memory stability.</small></p>
+</section>
+</main>
+</html>
