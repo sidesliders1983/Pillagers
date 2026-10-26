@@ -268,7 +268,7 @@ export class FjordPlay {
         if (query.has('attention') || query.has('notifications')) this.session.book.notifyPending();
         const bookReader = this.ownStartup(new ClanBookReader(this.shared, persist, {
             witness: id => select('persona', id), group: id => expeditions?.openGroup(id),
-        }, () => refresh()));
+        }, () => refresh(), (id, signal) => desktopUI?.requestPortrait(id, signal) ?? Promise.resolve(undefined)));
         const attentionView = this.ownStartup(new AttentionView(document.querySelector<HTMLElement>('#fjord-attention-feed')!, this.shared,
             () => { persist(); refresh(); }, {
                 family: id => { bookReader.openFamily(id); },

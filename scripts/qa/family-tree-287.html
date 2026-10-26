@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Family Tree #287 · QA</title>
+<style>
+body { margin: 0; background: #102a30; color: #eee6d0; font: 13px/1.5 system-ui; }
+.qa-caption { position: fixed; left: 16px; bottom: 12px; max-width: 520px; opacity: .8; }
+.qa-caption a { color: #f2d796; }
+#fjord-management, #fjord-workspace, #fjord-navigation, #fjord-attention { display: none; }
+</style>
+</head>
+<body>
+<p class="qa-caption">Simulated QA campaign · three recorded generations<br>
+Accelerated Core lifecycle; not a physical-device capture.<br>
+<a href="/docs/qa/family-tree-287/legacy-gameplay-save.json" download>Download the paused gameplay test save</a></p>
+<nav id="fjord-navigation"></nav><section id="fjord-management"><div id="entity-panel"></div></section>
+<section id="fjord-workspace" hidden></section><button id="fjord-attention"></button><span id="fjord-attention-count"></span>
+<script type="module">
+import { SharedSettlement } from '/src/play/SharedSettlement';
+import { ClanBookReader } from '/src/lore/ClanBookReader';
+import { FjordInterface } from '/src/fjord-play/FjordInterface';
+import { ResidentPortraitStudio } from '/src/characters/ResidentPortraitStudio';
+import { WebGLRenderer } from 'three';
+const owner = new SharedSettlement(32, 1, false);
+owner.importJSON(await (await fetch('/docs/qa/family-tree-287/legacy-gameplay-save.json')).text());
+owner.session.book.notifyPending();
+let ui;
+let renderer;
+let studio;
+if (new URLSearchParams(location.search).has('portraits')) {
+    renderer = new WebGLRenderer({ antialias: true });
+    studio = new ResidentPortraitStudio(renderer);
+    ui = new FjordInterface(owner, { select() {}, refresh() {}, notify() {}, commit() {},
+        renderPortrait: input => studio.render(input) });
+}
+const reader = new ClanBookReader(owner, () => {}, {}, () => {},
+    ui ? (id, signal) => ui.requestPortrait(id, signal) : undefined);
+reader.update();
+reader.open(0, 'family');
+window.familyQA = { owner, reader, ui };
+window.addEventListener('pagehide', () => { reader.dispose(); ui?.dispose(); studio?.dispose(); renderer?.dispose(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "records": 57,
+  "generations": 3,
+  "scope": "Pure presentation layout on the development workstation, not frame rate or a GPU benchmark.",
+  "firstLayoutMs": 0.8427000000001499,
+  "anchoredUpdates": {
+    "count": 200,
+    "medianMs": 0.03569999999945139,
+    "p95Ms": 0.08079999999972642
+  },
+  "source": "legacy-gameplay-save.json; actual Core kinship",
+  "canonicalStateUnchanged": true
+}

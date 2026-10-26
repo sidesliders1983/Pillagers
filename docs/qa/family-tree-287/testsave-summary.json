@@ -1,0 +1,16 @@
+{
+  "scope": "Explicit recording/test scenario. Actual Core identities and lifecycle events; accelerated test-only births and mortality, normal mechanics restored, prepared supplies and six homes. No invented person or kinship record.",
+  "seed": 32,
+  "time": {
+    "winter": 832,
+    "tick": 500
+  },
+  "founders": 10,
+  "treeRecords": 57,
+  "generations": 3,
+  "living": 53,
+  "deceased": 4,
+  "food": 200,
+  "materials": 60,
+  "running": false
+}

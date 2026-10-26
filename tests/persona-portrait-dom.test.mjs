@@ -36,6 +36,10 @@ test('persona selection uses the supplied scene snapshots, caches them and drops
             assert.ok(document.querySelector('.fjord-portrait img')?.src.endsWith(id));
         }
         assert.deepEqual(rendered, ['founder-1', 'founder-2', 'founder-3']);
+        const sharedImage = await ui.requestPortrait('founder-1');
+        assert.ok(sharedImage.endsWith('founder-1'));
+        assert.deepEqual(rendered, ['founder-1', 'founder-2', 'founder-3'],
+            'The Family Tree API reuses the Character Card cache, rather than rendering a second face');
         select('founder-7');
         select('founder-8');
         await drain();

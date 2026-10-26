@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "records": 57,
+  "webglContexts": 1,
+  "actualCharacterCardImageEqual": true,
+  "canonicalStateUnchanged": true,
+  "errors": [],
+  "scope": "Real /fjord-play on desktop Edge, isolated recording save. Not a physical mobile or hardware FPS test."
+}
