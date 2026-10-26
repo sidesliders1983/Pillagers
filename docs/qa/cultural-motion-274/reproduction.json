@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "status": "offline-reproduced-unregistered",
+  "sourceDirectory": "Assets/Characters/Human/CulturalEvents-274",
+  "sourcesIgnored": true,
+  "originalScratchPreserved": true,
+  "noNetworkOrProviderCalls": true,
+  "runs": [
+    {
+      "directory": "staging/reproduction-001",
+      "bytes": 445676,
+      "sha256": "8fb9ff11a617d53064515f152cab184de2804a23eece4e5456edf66b92ae143f"
+    },
+    {
+      "directory": "staging/reproduction-002",
+      "bytes": 445676,
+      "sha256": "8fb9ff11a617d53064515f152cab184de2804a23eece4e5456edf66b92ae143f"
+    },
+    {
+      "directory": "staging/reproduction-final",
+      "bytes": 445676,
+      "sha256": "8fb9ff11a617d53064515f152cab184de2804a23eece4e5456edf66b92ae143f"
+    }
+  ],
+  "byteIdenticalToInitialCandidate": true,
+  "prepared": {
+    "schemaVersion": 1,
+    "status": "prepared-unregistered",
+    "sourceManifestSha256": "9f2ba2c5842f27b72d177bd95bf9d5fe54adde25b784b1a7cc83814f0911f18c",
+    "preparationSources": {
+      "prepare.mjs": "135a6b411dc09a6ac3227d21a035c9e2de3e5afbe68668b094efd4236fe28500",
+      "build-clips.mjs": "19e3411f2f47ab756ad94e7081759fce93ca0b1f96b0d402459b4f3b1a2cf9a5",
+      "retarget.py": "6d79fd9f86e9b7517e888eba10d8dc3c7ee5ca134d5d7d0e4ffff4d4f6f6d7bc"
+    },
+    "blender": "Blender 5.2.2 LTS",
+    "sourceBodySha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+    "preparedFile": "Human_CulturalAnimations.glb",
+    "sha256": "8fb9ff11a617d53064515f152cab184de2804a23eece4e5456edf66b92ae143f",
+    "bytes": 445676,
+    "conservativeTrackBytes": 480480,
+    "clips": [
+      {
+        "name": "Storytelling_Gesture",
+        "frames": 120,
+        "duration": 3.966666666666667,
+        "channels": 132
+      },
+      {
+        "name": "Gathering_Applause",
+        "frames": 90,
+        "duration": 2.966666666666667,
+        "channels": 132
+      }
+    ],
+    "meshes": 0,
+    "images": 0,
+    "skins": 0,
+    "originalRestHierarchyPreserved": true,
+    "interpretation": "Offline native clip candidate. Exact per-clap audio contact and game/device acceptance remain pending."
+  }
+}

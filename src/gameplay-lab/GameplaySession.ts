@@ -1,3 +1,5 @@
+import { gatheringOffer, inspectCulture } from '../simulation/CulturalEvents';
+import type { CultureConfig } from '../simulation/CulturalEvents';
 import { wildlifeAttentionAdapter } from '../lore/WildlifeAttention';
 import { AttentionHistoryIndex } from '../lore/AttentionHistory';
 import { WildlifeHistoryIndex } from '../lore/WildlifeHistory';
@@ -51,6 +53,8 @@ export class GameplaySession {
         priorities: Cargo[] = [], origins?: Record<string, { x: number; z: number }>) {
         return islandMissionOffer(this.state, groupId, target, type, priorities, this.physicalContext(), origins);
     }
+    gatheringOffer() { return gatheringOffer(this.state); }
+    inspectCulture() { return inspectCulture(this.state); }
     get expeditionMode() { return expeditionModeActive(this.state); }
     get effectiveMinutesPerWinter() {
         return this.expeditionMode ? 10 * this.state.ticksPerWinter / 1000 : this.minutesPerWinter;
@@ -112,8 +116,8 @@ export class GameplaySession {
     running = false;
     minutesPerWinter = 3;
     constructor(seed = 32, narrativeSeed?: number, socialEnabled = true, foundingPhase?: FoundingPhase,
-        calendarMode?: BirthdayCalendarMode, livestock?: CampaignLivestockRules) {
-        this.state = createCampaign(seed, {}, {}, {}, {}, {enabled: socialEnabled}, {}, foundingPhase, calendarMode, livestock);
+        calendarMode?: BirthdayCalendarMode, livestock?: CampaignLivestockRules, culture?: Partial<CultureConfig>) {
+        this.state = createCampaign(seed, {}, {}, {}, {}, {enabled: socialEnabled}, {}, foundingPhase, calendarMode, livestock, culture);
         this.book = new ClanBook(this.state, true, narrativeSeed);
     }
     initializeWildlife(): void {
@@ -175,7 +179,7 @@ export class GameplaySession {
     commandBatch(commands: readonly SimulationCommand[]): void {
         const allowed = new Set([
             'BuildHouse', 'AssignOccupation', 'SpecializeBuilding', 'AssignCattle',
-            'AssignLivestock', 'UpgradeBuilding', 'SetSmitheryTarget'
+            'AssignLivestock', 'UpgradeBuilding', 'SetSmitheryTarget', 'SponsorGathering'
         ]);
         if (commands.length > 64 || commands.some(command => !allowed.has(command.type))) {
             throw new Error('This task contains unsupported management commands.');
@@ -209,8 +213,8 @@ export class GameplaySession {
             throw new Error('This save has no gameplay mechanics');
         this.replace(state, false);
     }
-    newCampaign(seed: number, weatherEnabled = true, socialEnabled = true, foundingPhase = this.state.foundingPhase, calendarMode: BirthdayCalendarMode | undefined = birthdayCalendarMode(this.state), livestock?: CampaignLivestockRules): void {
-        this.replace(createCampaign(seed, {}, {}, { enabled: weatherEnabled }, {}, { enabled: socialEnabled }, {}, foundingPhase, calendarMode, livestock));
+    newCampaign(seed: number, weatherEnabled = true, socialEnabled = true, foundingPhase = this.state.foundingPhase, calendarMode: BirthdayCalendarMode | undefined = birthdayCalendarMode(this.state), livestock?: CampaignLivestockRules, culture?: Partial<CultureConfig>): void {
+        this.replace(createCampaign(seed, {}, {}, { enabled: weatherEnabled }, {}, { enabled: socialEnabled }, {}, foundingPhase, calendarMode, livestock, culture));
     }
     /** Prepare a replay without taking ownership of the current campaign or its read state. */
     restartProposal(): GameplaySession {
@@ -247,7 +251,7 @@ export class GameplaySession {
                 .filter(([, target]) => target.landing?.livestock)
                 .map(([id, target]) => [id, target.landing!.livestock!])),
         };
-        this.replace(createCampaign(seed, this.state.landing?.config, this.state.mechanics?.config, { ...this.state.weather?.config, enabled: weatherEnabled }, this.state.world?.config, { ...this.state.social?.config, enabled: socialEnabled }, targetLandingConfigs, foundingPhase, birthdayCalendarMode(this.state), livestock));
+        this.replace(createCampaign(seed, this.state.landing?.config, this.state.mechanics?.config, { ...this.state.weather?.config, enabled: weatherEnabled }, this.state.world?.config, { ...this.state.social?.config, enabled: socialEnabled }, targetLandingConfigs, foundingPhase, birthdayCalendarMode(this.state), livestock, this.state.culture?.config));
     }
     private replace(state: SimulationState, fresh = true): void {
         this.physicalWorld = undefined;

@@ -1,0 +1,16 @@
+{
+  "schema": "fjordside-motion-test-memory-incident/1",
+  "status": "terminal; independent bounded diagnosis in progress",
+  "command": "node --test tests/cultural-motion.test.mjs",
+  "terminalToolSession": 83615,
+  "ownedProcessesObserved": {"parentPid": 30480, "childPid": 30000},
+  "observedAtPoll": {"childRssMiB": 7958, "childCpuSeconds": 201},
+  "terminal": {"exitCode": 1, "elapsedSecondsApproximate": 230,
+    "diagnostics": ["GC heap approximately 30 MiB", "external memory pressure", "Committing semi space failed", "Allocation failed - JavaScript heap out of memory"]},
+  "failingRedCase": "assert.equal(await motion.prepare({ eventId: '', visible: true }), null)",
+  "missingBehaviorAtFailure": "prepare had no event-ID/visibility guard, so the actual two-AnimationClip array reached a strictEqual mismatch against null",
+  "subsequentBoundedComparison": "Changing only the mismatch to assert.ok(result === null) produced the expected red assertion in approximately 22 ms; the missing gate was implemented afterward",
+  "interpretation": "The failed full-object assertion/diff path is a candidate mechanism, not yet declared the sole cause. The actual encoded clip bundle is 445676 bytes and actual conservative decoded track arrays are 480480 bytes. These payload sizes do not justify treating an 8 GiB process as normal asset memory.",
+  "processSafety": "No rerun while the previous process was live. An exact-PID termination guard found the child already missing/changed and did not terminate another process. Session 83615 was polled to terminal exit 1 before rerunning.",
+  "followUp": "All subsequent isolated Node test children use --max-old-space-size=512 and bounded boolean/count/hash assertions. Independent performance audit owns the Node assert diagnosis and load/reuse/owner-drop measurements. No unbounded mismatch recreation."
+}

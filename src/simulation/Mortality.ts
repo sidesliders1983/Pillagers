@@ -1,4 +1,5 @@
 import { releaseEquipment } from './Smithery';
+import { applyCulturalWeatherSupport } from './CulturalEvents';
 import { careActive, careEndpoint, endCare } from './CareCalendar';
 import {personaAway} from './WorldExpeditions';
 import {personaWeatherExposure,permanentlySheltered,weatherFacts} from './Weather';
@@ -18,16 +19,36 @@ export function resolveMortality(
     emit: EventWriter,
     eligibleIds?: Set<string>,
     expeditionMissionId?: string,
+    settlementAssessment = false,
 ): number {
     const mechanics=state.mechanics!,bands=mechanics.config.mortalityBands;
-    const deaths=Object.keys(state.personas).sort().flatMap(id=>{
-        const person=state.personas[id];if(person.deathWinter!==null||(eligibleIds&&!eligibleIds.has(id)))return [];
-        const age=personaAge(state,id);
-        const band=[...bands].reverse().find(b=>b.minAge<=age);
-        const weatherExposureBps=personaAway(state,id)?0:personaWeatherExposure(state,id),risk=Math.min(10000,(band?.chanceBps??0)+weatherExposureBps);
-        if(!roll(risk))return [];
-        const home=Object.values(state.households).find(h=>h.memberIds.includes(id));
-        return [{id,age,householdId:home?.id??null,residenceId:home?.residenceId??null,occupation:person.occupation,partnerId:person.partnerId,...(state.weather?.config.enabled?{mortalityRiskBps:risk,weatherExposureBps,permanentlySheltered:permanentlySheltered(state,id),...weatherFacts(state)}:{})}];
+    const hasPreparedSupport = settlementAssessment && !!state.culture?.supportSourceEventIds.length;
+    const assessments = hasPreparedSupport ? Object.keys(state.personas).sort().flatMap(id => {
+        const person = state.personas[id];
+        if (person.deathWinter !== null || (eligibleIds && !eligibleIds.has(id))) return [];
+        const age = personaAge(state, id);
+        const naturalRiskBps = [...bands].reverse().find(band => band.minAge <= age)?.chanceBps ?? 0;
+        return [{ personaId: id, naturalRiskBps,
+            baselineWeatherExposureBps: personaAway(state, id) ? 0 : personaWeatherExposure(state, id) }];
+    }) : [];
+    const support = assessments.length ? applyCulturalWeatherSupport(state, assessments) : null;
+    const deaths = Object.keys(state.personas).sort().flatMap(id => {
+        const person = state.personas[id];
+        if (person.deathWinter !== null || (eligibleIds && !eligibleIds.has(id))) return [];
+        const age = personaAge(state, id);
+        const band = [...bands].reverse().find(band => band.minAge <= age);
+        const supported = support?.risks.get(id);
+        const weatherExposureBps = supported?.weatherExposureBps ??
+            (personaAway(state, id) ? 0 : personaWeatherExposure(state, id));
+        const risk = Math.min(10000, (band?.chanceBps ?? 0) + weatherExposureBps);
+        if (!roll(risk)) return [];
+        const home = Object.values(state.households).find(household => household.memberIds.includes(id));
+        return [{ id, age, householdId: home?.id ?? null, residenceId: home?.residenceId ?? null,
+            occupation: person.occupation, partnerId: person.partnerId,
+            ...(state.weather?.config.enabled ? { mortalityRiskBps: risk, weatherExposureBps,
+                permanentlySheltered: permanentlySheltered(state, id), ...weatherFacts(state),
+                ...(supported ? { baselineWeatherExposureBps: supported.baselineWeatherExposureBps,
+                    culturalSupportEventId: support!.eventId } : {}) } : {}) }];
     });
     for(const death of deaths){
         const person=state.personas[death.id],info=mechanics.people[death.id];

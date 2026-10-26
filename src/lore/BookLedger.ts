@@ -50,6 +50,7 @@ export function bookLedger(events: readonly SimulationEvent[], opening: Record<R
             case 'FoundingLongshipSalvaged': add(e, 'materials', 'otherReceipts', 'materials'); break;
             case 'CattleSlaughtered': case 'LivestockSlaughtered':
                 add(e, 'food', 'otherReceipts', 'food'); break;
+            case 'CulturalGatheringHeld':
             case 'LongshipFoodLoaded': case 'ExploreAreaPrepared': case 'ExploreAreaDeparted': case 'ExpeditionDeparted': add(e, 'food', 'spending', 'foodCost'); break;
             case 'ExpeditionReturned':
                 add(e, 'food', 'otherReceipts', 'food'); add(e, 'materials', 'otherReceipts', 'materials'); break;

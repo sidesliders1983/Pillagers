@@ -1,6 +1,6 @@
 import { worldResidentDetail } from '../config/PresentationQuality';
 import {
- AnimationAction, AnimationMixer, Bone, Box3, Group, LoopOnce, LoopRepeat, Material,
+ AnimationAction, AnimationClip, AnimationMixer, Bone, Box3, Group, LoopOnce, LoopRepeat, Material,
  Mesh, MeshStandardMaterial, Color, Object3D, SkinnedMesh, Vector3, Quaternion,
 } from 'three';
 import {GLTF, GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
@@ -355,6 +355,7 @@ export class MeshyHuman {
  private playbackRateOverride: number | null = null;
  private nativeNeutral = false;
  private animationRotations = new Map<Bone, Quaternion>();
+ private presentationClips = new Map<string, AnimationClip>();
  private action:AnimationAction|null=null;private materials:Material[]=[];private baseHeight:number;private disposed=false;
  constructor(source:GLTF,dna:CharacterDNA,readonly lod:number,profile?:HumanProfile,identity?:NativeBodyIdentity,face?:FacialShapeV1,
   private preparationObserver?: CharacterPreparationObserver){
@@ -507,14 +508,41 @@ export class MeshyHuman {
   this.playbackRateOverride = rate;
   this.mixer.timeScale = rate ?? this.profile.motion.cadence;
  }
+ /** Registers shared clip references without extending the cached native source bank. */
+ registerPresentationClips(clips: readonly AnimationClip[]) {
+  if (this.disposed || !clips.length) return false;
+  const names = new Set<string>();
+  for (const clip of clips) {
+   if (!clip.name || names.has(clip.name) || this.clips.some(native => native.name === clip.name)
+       || !Number.isFinite(clip.duration) || clip.duration <= 0 || !clip.tracks.length) return false;
+   names.add(clip.name);
+   for (const track of clip.tracks) {
+    const target = /^(.*)\.(position|quaternion|scale)$/.exec(track.name);
+    if (!target || !this.bones.some(bone => bone.name === target[1])) return false;
+   }
+  }
+  // Validate the whole bank first: an incompatible clip must not leave a partial registration.
+  for (const clip of clips) this.presentationClips.set(clip.name, clip);
+  return true;
+ }
+ playPresentationClip(name: string) {
+  if (this.disposed || this.state === 'Death' || !this.presentationClips.has(name)) return false;
+  this.playClip(name);
+  return true;
+ }
+ stopPresentationClip() {
+  if (this.disposed || !this.presentationClips.has(this.action?.getClip().name ?? '')) return false;
+  this.setAnimation('Idle');
+  return true;
+ }
  setMovementSpeed(speed:number){this.setAnimation(speed<.03?'Idle':speed<1.4?'Walk':'Run');}
  setAnimation(state:MeshyAnimation){this.playClip(meshyAnimationClips[state],state);}
  playClip(name:string,state:MeshyAnimation='Idle'){
   if (this.nativeNeutral) this.applyDNA(this.dna, this.profile);
   const semantic=Object.entries(meshyAnimationClips).find(([,clip])=>clip===name)?.[0] as MeshyAnimation|undefined;if(semantic)state=semantic;
-  const clip=this.clips.find(clip=>clip.name===name);if(!clip)throw new Error('Missing human animation: '+name);
+  const clip=this.clips.find(clip=>clip.name===name) ?? this.presentationClips.get(name);if(!clip)throw new Error('Missing human animation: '+name);
   if(this.action?.getClip()===clip){this.state=state;return;}
-  const next=this.mixer.clipAction(clip),once=meshyOneShotClips.has(name);
+  const next=this.mixer.clipAction(clip),once=meshyOneShotClips.has(name) || this.presentationClips.has(name);
   next.reset().setLoop(once?LoopOnce:LoopRepeat,once?1:Infinity);next.clampWhenFinished=once;
   next.play();if(this.action)this.action.crossFadeTo(next,.15,false);
   this.action=next;this.state=state;this.root.userData.character.state=state;this.root.userData.clip=name;
@@ -592,6 +620,9 @@ export class MeshyHuman {
   // The mixer skips unchanged tracks. Restore its last output, then apply DNA shaping once.
   for (const bone of this.bones) bone.quaternion.copy(this.animationRotations.get(bone)!);
   this.mixer.update(delta);
+  if (this.action && this.presentationClips.has(this.action.getClip().name) && !this.action.isRunning()) {
+   this.setAnimation('Idle');
+  }
   this.captureAnimationRotations();
   this.shapePose();
   this.modules.poseHair();
@@ -608,6 +639,7 @@ export class MeshyHuman {
  dispose(){
   this.preparationObserver = undefined;
   if(this.disposed)return;this.disposed=true;this.lastNeutralFit=undefined;this.normalizedBody=undefined;this.mixer.stopAllAction();this.mixer.uncacheRoot(this.body);
+  this.presentationClips.clear();
   this.modules.clear();this.fit.dispose();
   for(const material of this.materials)material.dispose();
   this.body.traverse(node=>{if((node as SkinnedMesh).isSkinnedMesh)(node as SkinnedMesh).skeleton.dispose();});this.root.clear();

@@ -1,0 +1,1423 @@
+{
+  "checkedAt": "2026-10-26T09:46:05.122Z",
+  "measurementHead": "85301306b57b26656f36df72badd6dec846e0a75",
+  "checkedHead": "85301306b57b26656f36df72badd6dec846e0a75",
+  "fingerprint": "8ae7e8e7e0d5990fc597d6cb1bfbc64fdc8b2ee4e5ac30bdbf6d9986f73042f3",
+  "runnerHash": "1af89e71b096dcdc4f986a381ab8dccbab17328e83f442c48b7e5e215b5235ce",
+  "reportRunnerHash": "83930bcf2b8cc4fe0ce897b0161c62fc80f096c905197b176250f9278440bb75",
+  "protocolHash": "9539e77f434f620f137f1db5d621c51270ca02e6b74c988bcd16687518c31e1a",
+  "sourceRuleAndPolicyHashes": {
+    "rules": "7d73201210e945ecc97790b4f6184859495578940866d87a3339262a913b6da8",
+    "policy": "1fbc4c7dccd9c9b7bdce75c47b15daea609707a1c21adbbe529a950d701ccbd9"
+  },
+  "dependencyFilesVerified": 64,
+  "raw": [
+    {
+      "name": "controlled.jsonl",
+      "uncompressedBytes": 75868447,
+      "sha256": "179e0cdaef340dc059b5142ac2ee1607aec39576bc1ed53fff3b85ea128c985a",
+      "gzipBytes": 2306297,
+      "gzipSHA256": "4ed9151c847fe2a8bb27537b7bf6fbbae697a0ee0243fc5e19190231a043ed46",
+      "records": 6000
+    },
+    {
+      "name": "strategies.jsonl",
+      "uncompressedBytes": 5088024,
+      "sha256": "2c14790d8cf5658cc18db66a5ea5ca127c8ec23f42b347363cf9eebd08c19870",
+      "gzipBytes": 378509,
+      "gzipSHA256": "c6d83101adf3c63d358f63758ba953cdf2ffa4f6b61083b8c1e2d11371d88901",
+      "records": 96
+    }
+  ],
+  "verifiedUniqueCompleteCampaigns": 6096,
+  "controlledPairedSeeds": 2000,
+  "noStackingComparisons": 2000,
+  "strategyPairedSeeds": 32,
+  "offers": {
+    "none": {
+      "initial15FoodCampaigns": 32,
+      "initialAllowed": 32,
+      "initialPayment": 0,
+      "submitted": 0,
+      "reserveSkips": 0,
+      "unavailableOffers": 0,
+      "finalUnusedSupport": 0,
+      "reasons": {}
+    },
+    "one": {
+      "initial15FoodCampaigns": 32,
+      "initialAllowed": 32,
+      "initialPayment": 32,
+      "submitted": 72,
+      "reserveSkips": 20,
+      "unavailableOffers": 4,
+      "finalUnusedSupport": 23,
+      "reasons": {
+        "QA reserve after payment": 20,
+        "Not enough Food for this gathering.": 4
+      }
+    },
+    "two": {
+      "initial15FoodCampaigns": 32,
+      "initialAllowed": 32,
+      "initialPayment": 32,
+      "submitted": 102,
+      "reserveSkips": 82,
+      "unavailableOffers": 16,
+      "finalUnusedSupport": 51,
+      "reasons": {
+        "QA reserve after payment": 82,
+        "Not enough Food for this gathering.": 16
+      }
+    }
+  },
+  "strategyDirection": {
+    "one": {
+      "fewerDeaths": 3,
+      "moreDeaths": 1,
+      "sameDeaths": 28
+    },
+    "two": {
+      "fewerDeaths": 3,
+      "moreDeaths": 1,
+      "sameDeaths": 28
+    }
+  },
+  "sourceCPU": {
+    "replicatedClanInstances": 87,
+    "finalPopulation": 996,
+    "finalFood": 3158,
+    "finalMaterials": 2643,
+    "foodProduced": 20668,
+    "foodConsumed": 20120,
+    "residentShortfall": 3111,
+    "livestockShortfall": 190,
+    "culturalGatherings": 0
+  },
+  "regression": {
+    "fixture": "Controlled Severe, seed1; explicitly quiet family configuration",
+    "arms": {
+      "none": {
+        "paidFood": 0,
+        "actualDeaths": [
+          {
+            "id": "event-21",
+            "personaId": "founder-7",
+            "time": {
+              "winter": 801,
+              "tick": 0
+            },
+            "people": [
+              {
+                "id": "founder-7",
+                "name": "Aodhín",
+                "age": 33
+              }
+            ],
+            "age": 33,
+            "weatherClass": "Severe",
+            "mortalityRiskBps": 205
+          }
+        ],
+        "observedRisk": null,
+        "supportRemaining": 0
+      },
+      "one": {
+        "paidFood": 3,
+        "actualDeaths": [],
+        "observedRisk": {
+          "personaId": "founder-7",
+          "naturalRiskBps": 5,
+          "baselineWeatherExposureBps": 200,
+          "weatherExposureBps": 150,
+          "baselineRiskBps": 205,
+          "mortalityRiskBps": 155
+        },
+        "supportRemaining": 0
+      },
+      "two": {
+        "paidFood": 6,
+        "actualDeaths": [],
+        "observedRisk": {
+          "personaId": "founder-7",
+          "naturalRiskBps": 5,
+          "baselineWeatherExposureBps": 200,
+          "weatherExposureBps": 150,
+          "baselineRiskBps": 205,
+          "mortalityRiskBps": 155
+        },
+        "supportRemaining": 1
+      }
+    }
+  },
+  "timeline": {
+    "selection": "First numeric-seed one-gathering-policy case with a real support assessment; not selected for a favourable death.",
+    "seed": 1,
+    "arm": "one",
+    "held": {
+      "id": "event-6",
+      "time": {
+        "winter": 800,
+        "tick": 500
+      },
+      "type": "CulturalGatheringHeld",
+      "details": {
+        "cultureVersion": 1,
+        "clanId": "founding-clan",
+        "gatheringSequence": 1,
+        "occasion": "storytelling_music",
+        "foodCost": 3,
+        "participants": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7"
+        ],
+        "supportBefore": 0,
+        "supportAfter": 1,
+        "people": [
+          {
+            "id": "founder-1",
+            "name": "Mieppi",
+            "age": 38
+          },
+          {
+            "id": "founder-10",
+            "name": "Tautmantė",
+            "age": 21
+          },
+          {
+            "id": "founder-2",
+            "name": "Leofgifu",
+            "age": 27
+          },
+          {
+            "id": "founder-3",
+            "name": "Beornhild",
+            "age": 30
+          },
+          {
+            "id": "founder-4",
+            "name": "Halldis Sigurdardóttir",
+            "age": 39
+          },
+          {
+            "id": "founder-5",
+            "name": "Helmikki",
+            "age": 29
+          },
+          {
+            "id": "founder-6",
+            "name": "Leofweard",
+            "age": 27
+          },
+          {
+            "id": "founder-7",
+            "name": "Aodhín",
+            "age": 32
+          }
+        ]
+      }
+    },
+    "applied": {
+      "id": "event-95",
+      "time": {
+        "winter": 803,
+        "tick": 0
+      },
+      "cultureVersion": 1,
+      "clanId": "founding-clan",
+      "sourceEventIds": [
+        "event-6"
+      ],
+      "supportBefore": 1,
+      "supportAfter": 0,
+      "exposureReductionBps": 2500,
+      "riskInputs": [
+        {
+          "personaId": "founder-1",
+          "naturalRiskBps": 5,
+          "baselineWeatherExposureBps": 200,
+          "weatherExposureBps": 150,
+          "baselineRiskBps": 205,
+          "mortalityRiskBps": 155
+        },
+        {
+          "personaId": "founder-10",
+          "naturalRiskBps": 5,
+          "baselineWeatherExposureBps": 200,
+          "weatherExposureBps": 150,
+          "baselineRiskBps": 205,
+          "mortalityRiskBps": 155
+        },
+        {
+          "personaId": "founder-2",
+          "naturalRiskBps": 5,
+          "baselineWeatherExposureBps": 200,
+          "weatherExposureBps": 150,
+          "baselineRiskBps": 205,
+          "mortalityRiskBps": 155
+        },
+        {
+          "personaId": "founder-3",
+          "naturalRiskBps": 5,
+          "baselineWeatherExposureBps": 200,
+          "weatherExposureBps": 150,
+          "baselineRiskBps": 205,
+          "mortalityRiskBps": 155
+        },
+        {
+          "personaId": "founder-4",
+          "naturalRiskBps": 5,
+          "baselineWeatherExposureBps": 200,
+          "weatherExposureBps": 150,
+          "baselineRiskBps": 205,
+          "mortalityRiskBps": 155
+        },
+        {
+          "personaId": "founder-5",
+          "naturalRiskBps": 5,
+          "baselineWeatherExposureBps": 200,
+          "weatherExposureBps": 150,
+          "baselineRiskBps": 205,
+          "mortalityRiskBps": 155
+        },
+        {
+          "personaId": "founder-6",
+          "naturalRiskBps": 5,
+          "baselineWeatherExposureBps": 200,
+          "weatherExposureBps": 150,
+          "baselineRiskBps": 205,
+          "mortalityRiskBps": 155
+        },
+        {
+          "personaId": "founder-7",
+          "naturalRiskBps": 5,
+          "baselineWeatherExposureBps": 200,
+          "weatherExposureBps": 150,
+          "baselineRiskBps": 205,
+          "mortalityRiskBps": 155
+        },
+        {
+          "personaId": "founder-8",
+          "naturalRiskBps": 5,
+          "baselineWeatherExposureBps": 200,
+          "weatherExposureBps": 150,
+          "baselineRiskBps": 205,
+          "mortalityRiskBps": 155
+        },
+        {
+          "personaId": "founder-9",
+          "naturalRiskBps": 5,
+          "baselineWeatherExposureBps": 200,
+          "weatherExposureBps": 150,
+          "baselineRiskBps": 205,
+          "mortalityRiskBps": 155
+        }
+      ],
+      "participants": [
+        "founder-1",
+        "founder-10",
+        "founder-2",
+        "founder-3",
+        "founder-4",
+        "founder-5",
+        "founder-6",
+        "founder-7",
+        "founder-8",
+        "founder-9"
+      ],
+      "weatherClass": "Severe",
+      "weatherWinter": 802,
+      "regionId": "landing-region",
+      "people": [
+        {
+          "id": "founder-1",
+          "name": "Mieppi",
+          "age": 41
+        },
+        {
+          "id": "founder-10",
+          "name": "Tautmantė",
+          "age": 24
+        },
+        {
+          "id": "founder-2",
+          "name": "Leofgifu",
+          "age": 30
+        },
+        {
+          "id": "founder-3",
+          "name": "Beornhild",
+          "age": 33
+        },
+        {
+          "id": "founder-4",
+          "name": "Halldis Sigurdardóttir",
+          "age": 42
+        },
+        {
+          "id": "founder-5",
+          "name": "Helmikki",
+          "age": 32
+        },
+        {
+          "id": "founder-6",
+          "name": "Leofweard",
+          "age": 30
+        },
+        {
+          "id": "founder-7",
+          "name": "Aodhín",
+          "age": 35
+        },
+        {
+          "id": "founder-8",
+          "name": "Áilu",
+          "age": 30
+        },
+        {
+          "id": "founder-9",
+          "name": "Mieppi",
+          "age": 21
+        }
+      ]
+    },
+    "actualDeathsInTheInterval": [],
+    "noCounterfactualLore": "These events record participation and risk application, not an averted death."
+  },
+  "groups": [
+    {
+      "phase": "controlled",
+      "weather": "Harsh",
+      "pairedSeeds": 1000,
+      "arms": {
+        "none": {
+          "campaigns": 1000,
+          "totals": {
+            "foodPaid": 0,
+            "foodProduced": 0,
+            "materialsProduced": 0,
+            "foodConsumed": 15000,
+            "materialsSpent": 0,
+            "residentShortfall": 19481,
+            "livestockShortfall": 0,
+            "residentDeaths": 66,
+            "livestockDeaths": 164,
+            "gatherings": 0,
+            "reserveSkips": 0,
+            "unavailableOffers": 0,
+            "supportUsed": 0,
+            "exposedChecks": 10000,
+            "modifiedChecks": 0,
+            "shortageIntervals": 1000,
+            "population": 9934,
+            "food": 0,
+            "materials": 5000
+          },
+          "extinctClans": 0,
+          "starting15Food": 1000,
+          "firstPaid": 0
+        },
+        "one": {
+          "campaigns": 1000,
+          "totals": {
+            "foodPaid": 3000,
+            "foodProduced": 0,
+            "materialsProduced": 0,
+            "foodConsumed": 12000,
+            "materialsSpent": 0,
+            "residentShortfall": 22514,
+            "livestockShortfall": 0,
+            "residentDeaths": 55,
+            "livestockDeaths": 164,
+            "gatherings": 1000,
+            "reserveSkips": 0,
+            "unavailableOffers": 0,
+            "supportUsed": 1000,
+            "exposedChecks": 10000,
+            "modifiedChecks": 10000,
+            "shortageIntervals": 1000,
+            "population": 9945,
+            "food": 0,
+            "materials": 5000
+          },
+          "extinctClans": 0,
+          "starting15Food": 1000,
+          "firstPaid": 1000
+        },
+        "two": {
+          "campaigns": 1000,
+          "totals": {
+            "foodPaid": 6000,
+            "foodProduced": 0,
+            "materialsProduced": 0,
+            "foodConsumed": 9000,
+            "materialsSpent": 0,
+            "residentShortfall": 25514,
+            "livestockShortfall": 0,
+            "residentDeaths": 55,
+            "livestockDeaths": 164,
+            "gatherings": 2000,
+            "reserveSkips": 0,
+            "unavailableOffers": 0,
+            "supportUsed": 1000,
+            "exposedChecks": 10000,
+            "modifiedChecks": 10000,
+            "shortageIntervals": 1000,
+            "population": 9945,
+            "food": 0,
+            "materials": 5000
+          },
+          "extinctClans": 0,
+          "starting15Food": 1000,
+          "firstPaid": 1000
+        }
+      },
+      "comparisons": [
+        {
+          "intervention": "one",
+          "baseline": "none",
+          "deltas": {
+            "residentDeaths": {
+              "pairs": 1000,
+              "mean": -0.011,
+              "lower95": -0.01746796730055132,
+              "upper95": -0.00453203269944868,
+              "limitation": null
+            },
+            "foodPaid": {
+              "pairs": 1000,
+              "mean": 3,
+              "lower95": 3,
+              "upper95": 3,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "food": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "materials": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "residentShortfall": {
+              "pairs": 1000,
+              "mean": 3.033,
+              "lower95": 3.013596098098346,
+              "upper95": 3.052403901901654,
+              "limitation": null
+            },
+            "livestockShortfall": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "population": {
+              "pairs": 1000,
+              "mean": 0.011,
+              "lower95": 0.00453203269944868,
+              "upper95": 0.01746796730055132,
+              "limitation": null
+            },
+            "supportUsed": {
+              "pairs": 1000,
+              "mean": 1,
+              "lower95": 1,
+              "upper95": 1,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "gatherings": {
+              "pairs": 1000,
+              "mean": 1,
+              "lower95": 1,
+              "upper95": 1,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "shortageIntervals": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            }
+          },
+          "changedDeathCount": {
+            "successes": 11,
+            "count": 1000,
+            "lower95": 0.006153110089114165,
+            "upper95": 0.01958959672837577
+          },
+          "weatherDivergences": 0
+        },
+        {
+          "intervention": "two",
+          "baseline": "none",
+          "deltas": {
+            "residentDeaths": {
+              "pairs": 1000,
+              "mean": -0.011,
+              "lower95": -0.01746796730055132,
+              "upper95": -0.00453203269944868,
+              "limitation": null
+            },
+            "foodPaid": {
+              "pairs": 1000,
+              "mean": 6,
+              "lower95": 6,
+              "upper95": 6,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "food": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "materials": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "residentShortfall": {
+              "pairs": 1000,
+              "mean": 6.033,
+              "lower95": 6.013596098098347,
+              "upper95": 6.052403901901654,
+              "limitation": null
+            },
+            "livestockShortfall": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "population": {
+              "pairs": 1000,
+              "mean": 0.011,
+              "lower95": 0.00453203269944868,
+              "upper95": 0.01746796730055132,
+              "limitation": null
+            },
+            "supportUsed": {
+              "pairs": 1000,
+              "mean": 1,
+              "lower95": 1,
+              "upper95": 1,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "gatherings": {
+              "pairs": 1000,
+              "mean": 2,
+              "lower95": 2,
+              "upper95": 2,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "shortageIntervals": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            }
+          },
+          "changedDeathCount": {
+            "successes": 11,
+            "count": 1000,
+            "lower95": 0.006153110089114165,
+            "upper95": 0.01958959672837577
+          },
+          "weatherDivergences": 0
+        },
+        {
+          "intervention": "two",
+          "baseline": "one",
+          "deltas": {
+            "residentDeaths": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "foodPaid": {
+              "pairs": 1000,
+              "mean": 3,
+              "lower95": 3,
+              "upper95": 3,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "food": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "materials": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "residentShortfall": {
+              "pairs": 1000,
+              "mean": 3,
+              "lower95": 3,
+              "upper95": 3,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "livestockShortfall": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "population": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "supportUsed": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "gatherings": {
+              "pairs": 1000,
+              "mean": 1,
+              "lower95": 1,
+              "upper95": 1,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "shortageIntervals": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            }
+          },
+          "changedDeathCount": {
+            "successes": 0,
+            "count": 1000,
+            "lower95": 0,
+            "upper95": 0.003826898586390522
+          },
+          "weatherDivergences": 0
+        }
+      ]
+    },
+    {
+      "phase": "controlled",
+      "weather": "Severe",
+      "pairedSeeds": 1000,
+      "arms": {
+        "none": {
+          "campaigns": 1000,
+          "totals": {
+            "foodPaid": 0,
+            "foodProduced": 11625,
+            "materialsProduced": 3333,
+            "foodConsumed": 25653,
+            "materialsSpent": 0,
+            "residentShortfall": 1529,
+            "livestockShortfall": 0,
+            "residentDeaths": 213,
+            "livestockDeaths": 464,
+            "gatherings": 0,
+            "reserveSkips": 0,
+            "unavailableOffers": 0,
+            "supportUsed": 0,
+            "exposedChecks": 10000,
+            "modifiedChecks": 0,
+            "shortageIntervals": 532,
+            "population": 9787,
+            "food": 972,
+            "materials": 8333
+          },
+          "extinctClans": 0,
+          "starting15Food": 1000,
+          "firstPaid": 0
+        },
+        "one": {
+          "campaigns": 1000,
+          "totals": {
+            "foodPaid": 3000,
+            "foodProduced": 11625,
+            "materialsProduced": 3333,
+            "foodConsumed": 23410,
+            "materialsSpent": 0,
+            "residentShortfall": 3906,
+            "livestockShortfall": 0,
+            "residentDeaths": 146,
+            "livestockDeaths": 464,
+            "gatherings": 1000,
+            "reserveSkips": 0,
+            "unavailableOffers": 0,
+            "supportUsed": 1000,
+            "exposedChecks": 10000,
+            "modifiedChecks": 10000,
+            "shortageIntervals": 851,
+            "population": 9854,
+            "food": 215,
+            "materials": 8333
+          },
+          "extinctClans": 0,
+          "starting15Food": 1000,
+          "firstPaid": 1000
+        },
+        "two": {
+          "campaigns": 1000,
+          "totals": {
+            "foodPaid": 6000,
+            "foodProduced": 11625,
+            "materialsProduced": 3333,
+            "foodConsumed": 20600,
+            "materialsSpent": 0,
+            "residentShortfall": 6716,
+            "livestockShortfall": 0,
+            "residentDeaths": 146,
+            "livestockDeaths": 464,
+            "gatherings": 2000,
+            "reserveSkips": 0,
+            "unavailableOffers": 0,
+            "supportUsed": 1000,
+            "exposedChecks": 10000,
+            "modifiedChecks": 10000,
+            "shortageIntervals": 963,
+            "population": 9854,
+            "food": 25,
+            "materials": 8333
+          },
+          "extinctClans": 0,
+          "starting15Food": 1000,
+          "firstPaid": 1000
+        }
+      },
+      "comparisons": [
+        {
+          "intervention": "one",
+          "baseline": "none",
+          "deltas": {
+            "residentDeaths": {
+              "pairs": 1000,
+              "mean": -0.067,
+              "lower95": -0.08323130656826225,
+              "upper95": -0.05076869343173775,
+              "limitation": null
+            },
+            "foodPaid": {
+              "pairs": 1000,
+              "mean": 3,
+              "lower95": 3,
+              "upper95": 3,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "food": {
+              "pairs": 1000,
+              "mean": -0.757,
+              "lower95": -0.832388194974688,
+              "upper95": -0.681611805025312,
+              "limitation": null
+            },
+            "materials": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "residentShortfall": {
+              "pairs": 1000,
+              "mean": 2.377,
+              "lower95": 2.3014864281527276,
+              "upper95": 2.452513571847272,
+              "limitation": null
+            },
+            "livestockShortfall": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "population": {
+              "pairs": 1000,
+              "mean": 0.067,
+              "lower95": 0.05076869343173775,
+              "upper95": 0.08323130656826225,
+              "limitation": null
+            },
+            "supportUsed": {
+              "pairs": 1000,
+              "mean": 1,
+              "lower95": 1,
+              "upper95": 1,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "gatherings": {
+              "pairs": 1000,
+              "mean": 1,
+              "lower95": 1,
+              "upper95": 1,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "shortageIntervals": {
+              "pairs": 1000,
+              "mean": 0.319,
+              "lower95": 0.29009704646367196,
+              "upper95": 0.34790295353632805,
+              "limitation": null
+            }
+          },
+          "changedDeathCount": {
+            "successes": 64,
+            "count": 1000,
+            "lower95": 0.05043597980625934,
+            "upper95": 0.08090107576107321
+          },
+          "weatherDivergences": 0
+        },
+        {
+          "intervention": "two",
+          "baseline": "none",
+          "deltas": {
+            "residentDeaths": {
+              "pairs": 1000,
+              "mean": -0.067,
+              "lower95": -0.08323130656826225,
+              "upper95": -0.05076869343173775,
+              "limitation": null
+            },
+            "foodPaid": {
+              "pairs": 1000,
+              "mean": 6,
+              "lower95": 6,
+              "upper95": 6,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "food": {
+              "pairs": 1000,
+              "mean": -0.947,
+              "lower95": -1.0503232357054144,
+              "upper95": -0.8436767642945855,
+              "limitation": null
+            },
+            "materials": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "residentShortfall": {
+              "pairs": 1000,
+              "mean": 5.187,
+              "lower95": 5.083382419964118,
+              "upper95": 5.290617580035883,
+              "limitation": null
+            },
+            "livestockShortfall": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "population": {
+              "pairs": 1000,
+              "mean": 0.067,
+              "lower95": 0.05076869343173775,
+              "upper95": 0.08323130656826225,
+              "limitation": null
+            },
+            "supportUsed": {
+              "pairs": 1000,
+              "mean": 1,
+              "lower95": 1,
+              "upper95": 1,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "gatherings": {
+              "pairs": 1000,
+              "mean": 2,
+              "lower95": 2,
+              "upper95": 2,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "shortageIntervals": {
+              "pairs": 1000,
+              "mean": 0.431,
+              "lower95": 0.40029082880317995,
+              "upper95": 0.46170917119682003,
+              "limitation": null
+            }
+          },
+          "changedDeathCount": {
+            "successes": 64,
+            "count": 1000,
+            "lower95": 0.05043597980625934,
+            "upper95": 0.08090107576107321
+          },
+          "weatherDivergences": 0
+        },
+        {
+          "intervention": "two",
+          "baseline": "one",
+          "deltas": {
+            "residentDeaths": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "foodPaid": {
+              "pairs": 1000,
+              "mean": 3,
+              "lower95": 3,
+              "upper95": 3,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "food": {
+              "pairs": 1000,
+              "mean": -0.19,
+              "lower95": -0.22950780057540907,
+              "upper95": -0.15049219942459094,
+              "limitation": null
+            },
+            "materials": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "residentShortfall": {
+              "pairs": 1000,
+              "mean": 2.81,
+              "lower95": 2.770492199424591,
+              "upper95": 2.849507800575409,
+              "limitation": null
+            },
+            "livestockShortfall": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "population": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "supportUsed": {
+              "pairs": 1000,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "gatherings": {
+              "pairs": 1000,
+              "mean": 1,
+              "lower95": 1,
+              "upper95": 1,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "shortageIntervals": {
+              "pairs": 1000,
+              "mean": 0.112,
+              "lower95": 0.09244360405846146,
+              "upper95": 0.13155639594153853,
+              "limitation": null
+            }
+          },
+          "changedDeathCount": {
+            "successes": 0,
+            "count": 1000,
+            "lower95": 0,
+            "upper95": 0.003826898586390522
+          },
+          "weatherDivergences": 0
+        }
+      ]
+    },
+    {
+      "phase": "strategy",
+      "weather": null,
+      "pairedSeeds": 32,
+      "arms": {
+        "none": {
+          "campaigns": 32,
+          "totals": {
+            "foodPaid": 0,
+            "foodProduced": 8052,
+            "materialsProduced": 1447,
+            "foodConsumed": 7255,
+            "materialsSpent": 523,
+            "residentShortfall": 1188,
+            "livestockShortfall": 91,
+            "residentDeaths": 8,
+            "livestockDeaths": 101,
+            "gatherings": 0,
+            "reserveSkips": 0,
+            "unavailableOffers": 0,
+            "supportUsed": 0,
+            "exposedChecks": 2935,
+            "modifiedChecks": 0,
+            "shortageIntervals": 64,
+            "population": 364,
+            "food": 1277,
+            "materials": 1089
+          },
+          "extinctClans": 0,
+          "starting15Food": 32,
+          "firstPaid": 0
+        },
+        "one": {
+          "campaigns": 32,
+          "totals": {
+            "foodPaid": 216,
+            "foodProduced": 8121,
+            "materialsProduced": 1593,
+            "foodConsumed": 7337,
+            "materialsSpent": 485,
+            "residentShortfall": 1008,
+            "livestockShortfall": 85,
+            "residentDeaths": 5,
+            "livestockDeaths": 98,
+            "gatherings": 72,
+            "reserveSkips": 20,
+            "unavailableOffers": 4,
+            "supportUsed": 49,
+            "exposedChecks": 2997,
+            "modifiedChecks": 460,
+            "shortageIntervals": 71,
+            "population": 361,
+            "food": 1048,
+            "materials": 1273
+          },
+          "extinctClans": 0,
+          "starting15Food": 32,
+          "firstPaid": 32
+        },
+        "two": {
+          "campaigns": 32,
+          "totals": {
+            "foodPaid": 306,
+            "foodProduced": 8171,
+            "materialsProduced": 1588,
+            "foodConsumed": 7190,
+            "materialsSpent": 496,
+            "residentShortfall": 1133,
+            "livestockShortfall": 104,
+            "residentDeaths": 5,
+            "livestockDeaths": 96,
+            "gatherings": 102,
+            "reserveSkips": 82,
+            "unavailableOffers": 16,
+            "supportUsed": 51,
+            "exposedChecks": 2995,
+            "modifiedChecks": 472,
+            "shortageIntervals": 77,
+            "population": 363,
+            "food": 1155,
+            "materials": 1257
+          },
+          "extinctClans": 0,
+          "starting15Food": 32,
+          "firstPaid": 32
+        }
+      },
+      "comparisons": [
+        {
+          "intervention": "one",
+          "baseline": "none",
+          "deltas": {
+            "residentDeaths": {
+              "pairs": 32,
+              "mean": -0.09375,
+              "lower95": -0.2550537544810332,
+              "upper95": 0.06755375448103315,
+              "limitation": null
+            },
+            "foodPaid": {
+              "pairs": 32,
+              "mean": 6.75,
+              "lower95": 5.957940618061922,
+              "upper95": 7.542059381938078,
+              "limitation": null
+            },
+            "food": {
+              "pairs": 32,
+              "mean": -7.15625,
+              "lower95": -17.739426486592812,
+              "upper95": 3.426926486592812,
+              "limitation": null
+            },
+            "materials": {
+              "pairs": 32,
+              "mean": 5.75,
+              "lower95": 1.8448466636193195,
+              "upper95": 9.65515333638068,
+              "limitation": null
+            },
+            "residentShortfall": {
+              "pairs": 32,
+              "mean": -5.625,
+              "lower95": -19.5009782857677,
+              "upper95": 8.250978285767703,
+              "limitation": null
+            },
+            "livestockShortfall": {
+              "pairs": 32,
+              "mean": -0.1875,
+              "lower95": -1.514730244142945,
+              "upper95": 1.139730244142945,
+              "limitation": null
+            },
+            "population": {
+              "pairs": 32,
+              "mean": -0.09375,
+              "lower95": -0.4708392739982353,
+              "upper95": 0.2833392739982353,
+              "limitation": null
+            },
+            "supportUsed": {
+              "pairs": 32,
+              "mean": 1.53125,
+              "lower95": 1.2141284481795154,
+              "upper95": 1.8483715518204846,
+              "limitation": null
+            },
+            "gatherings": {
+              "pairs": 32,
+              "mean": 2.25,
+              "lower95": 1.9859802060206408,
+              "upper95": 2.514019793979359,
+              "limitation": null
+            },
+            "shortageIntervals": {
+              "pairs": 32,
+              "mean": 0.21875,
+              "lower95": -0.4081039840654358,
+              "upper95": 0.8456039840654358,
+              "limitation": null
+            }
+          },
+          "changedDeathCount": {
+            "successes": 4,
+            "count": 32,
+            "lower95": 0.04970053844474301,
+            "upper95": 0.2806864978482796
+          },
+          "weatherDivergences": 22
+        },
+        {
+          "intervention": "two",
+          "baseline": "none",
+          "deltas": {
+            "residentDeaths": {
+              "pairs": 32,
+              "mean": -0.09375,
+              "lower95": -0.2550537544810332,
+              "upper95": 0.06755375448103315,
+              "limitation": null
+            },
+            "foodPaid": {
+              "pairs": 32,
+              "mean": 9.5625,
+              "lower95": 8.709528084454314,
+              "upper95": 10.415471915545686,
+              "limitation": null
+            },
+            "food": {
+              "pairs": 32,
+              "mean": -3.8125,
+              "lower95": -14.835985110977177,
+              "upper95": 7.210985110977177,
+              "limitation": null
+            },
+            "materials": {
+              "pairs": 32,
+              "mean": 5.25,
+              "lower95": 1.3927399830048173,
+              "upper95": 9.107260016995182,
+              "limitation": null
+            },
+            "residentShortfall": {
+              "pairs": 32,
+              "mean": -1.71875,
+              "lower95": -16.340625650211294,
+              "upper95": 12.903125650211292,
+              "limitation": null
+            },
+            "livestockShortfall": {
+              "pairs": 32,
+              "mean": 0.40625,
+              "lower95": -1.1726270605013613,
+              "upper95": 1.9851270605013613,
+              "limitation": null
+            },
+            "population": {
+              "pairs": 32,
+              "mean": -0.03125,
+              "lower95": -0.42956493608255714,
+              "upper95": 0.36706493608255714,
+              "limitation": null
+            },
+            "supportUsed": {
+              "pairs": 32,
+              "mean": 1.59375,
+              "lower95": 1.243274013178207,
+              "upper95": 1.944225986821793,
+              "limitation": null
+            },
+            "gatherings": {
+              "pairs": 32,
+              "mean": 3.1875,
+              "lower95": 2.903176028151438,
+              "upper95": 3.471823971848562,
+              "limitation": null
+            },
+            "shortageIntervals": {
+              "pairs": 32,
+              "mean": 0.40625,
+              "lower95": -0.26317526956506365,
+              "upper95": 1.0756752695650635,
+              "limitation": null
+            }
+          },
+          "changedDeathCount": {
+            "successes": 4,
+            "count": 32,
+            "lower95": 0.04970053844474301,
+            "upper95": 0.2806864978482796
+          },
+          "weatherDivergences": 26
+        },
+        {
+          "intervention": "two",
+          "baseline": "one",
+          "deltas": {
+            "residentDeaths": {
+              "pairs": 32,
+              "mean": 0,
+              "lower95": 0,
+              "upper95": 0,
+              "limitation": "No observed variation; do not infer zero uncertainty for rare outcomes."
+            },
+            "foodPaid": {
+              "pairs": 32,
+              "mean": 2.8125,
+              "lower95": 2.3599928712021176,
+              "upper95": 3.2650071287978824,
+              "limitation": null
+            },
+            "food": {
+              "pairs": 32,
+              "mean": 3.34375,
+              "lower95": -0.43296307397651823,
+              "upper95": 7.120463073976518,
+              "limitation": null
+            },
+            "materials": {
+              "pairs": 32,
+              "mean": -0.5,
+              "lower95": -2.0293916142301223,
+              "upper95": 1.0293916142301223,
+              "limitation": null
+            },
+            "residentShortfall": {
+              "pairs": 32,
+              "mean": 3.90625,
+              "lower95": -0.8966526369393906,
+              "upper95": 8.70915263693939,
+              "limitation": null
+            },
+            "livestockShortfall": {
+              "pairs": 32,
+              "mean": 0.59375,
+              "lower95": -0.20734876032254757,
+              "upper95": 1.3948487603225477,
+              "limitation": null
+            },
+            "population": {
+              "pairs": 32,
+              "mean": 0.0625,
+              "lower95": -0.06,
+              "upper95": 0.185,
+              "limitation": null
+            },
+            "supportUsed": {
+              "pairs": 32,
+              "mean": 0.0625,
+              "lower95": -0.16930176110550346,
+              "upper95": 0.29430176110550343,
+              "limitation": null
+            },
+            "gatherings": {
+              "pairs": 32,
+              "mean": 0.9375,
+              "lower95": 0.786664290400706,
+              "upper95": 1.088335709599294,
+              "limitation": null
+            },
+            "shortageIntervals": {
+              "pairs": 32,
+              "mean": 0.1875,
+              "lower95": -0.017717724663658202,
+              "upper95": 0.3927177246636582,
+              "limitation": null
+            }
+          },
+          "changedDeathCount": {
+            "successes": 0,
+            "count": 32,
+            "lower95": 0,
+            "upper95": 0.1071827150573635
+          },
+          "weatherDivergences": 8
+        }
+      ]
+    }
+  ],
+  "invariants": {
+    "accounting": "passed for every complete case",
+    "pairedFounding": "passed",
+    "CPUIsolation": "passed",
+    "CPUFreeSponsorship": "absent",
+    "completeUniqueRecords": "passed",
+    "quotedPaymentAccounting": "passed",
+    "finiteSupportAccounting": "passed",
+    "sourceBytesBeforeAfter": "identical",
+    "compressedRawIdentity": "passed"
+  }
+}

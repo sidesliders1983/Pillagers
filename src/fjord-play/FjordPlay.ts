@@ -136,7 +136,7 @@ export class FjordPlay {
             }
             this.opened = { campaign, warning: '', autoStart: entry.kind === 'continue' && resumePlayback };
         } else {
-            const proposal = await this.loading.measure('campaign-founders', () => newFjordScenario(entry.seed));
+            const proposal = await this.loading.measure('campaign-founders', () => newFjordScenario(entry.seed, query.get('culture') === '1'));
             this.foundingBook = new FoundingBookWindow(proposal.book.snapshot().chapters[0]);
             proposal.book.notifyPending();
             this.loading.configure(this.foundingBook);
@@ -302,7 +302,10 @@ export class FjordPlay {
         const setPlayback = (running: boolean) => {
             previous = performance.now();
             if (running) playback.play();
-            else playback.pause();
+            else {
+                playback.pause();
+                presentation?.suspendCulture();
+            }
             const runButton = document.querySelector<HTMLButtonElement>('#fjord-run')!;
             runButton.innerHTML = icon(this.session.running ? 'pause' : 'play') + '<span>' + (this.session.running ? 'Running' : 'Paused') + '</span>';
             runButton.setAttribute('aria-label', this.session.running ? 'Pause simulation' : 'Start simulation');
@@ -578,7 +581,8 @@ export class FjordPlay {
                         proposal.loadJSON(this.session.saveJSON());
                         proposal.restartCampaign(sameFounders.checked, undefined, weatherField.checked, undefined, foundingPhase);
                     } else if (!replayFounders) proposal.newCampaign(Number(seedField.value), weatherField.checked, true, foundingPhase,
-                        calendarMode ?? birthdayCalendarMode(this.session.readSnapshot()), { player: fjordLivestockRules });
+                        calendarMode ?? birthdayCalendarMode(this.session.readSnapshot()), { player: fjordLivestockRules },
+                        query.get('culture') === '1' ? { enabled: true } : undefined);
                     this.foundingBook = new FoundingBookWindow(proposal.book.snapshot().chapters[0]);
                     proposal.book.notifyPending();
                     const recipe = replayFounders ? campaignIslandPlan(this.campaign.blueprint)?.recipe : undefined;
@@ -658,10 +662,23 @@ export class FjordPlay {
             inspected: (kind, id) => firstSteps?.inspected(kind, id),
             renderPortrait: input => presentation?.portrait(input) ?? Promise.resolve(undefined),
             home: () => controller.home(),
-            commit: (commands, done) => action(async () => {
-                core(() => this.session.commandBatch(typeof commands === 'function' ? commands() : commands));
+            report: id => {
+                if (!this.campaign.attentionSource(id)) return;
+                desktopUI!.open('attention', true);
+                attentionView.openEvent(id);
+            },
+            commit: (commands, done, rejected) => action(async () => {
+                try {
+                    core(() => this.session.commandBatch(typeof commands === 'function' ? commands() : commands));
+                } catch (error) {
+                    rejected?.(error);
+                    say(error instanceof Error ? error.message : String(error));
+                    refresh();
+                    return;
+                }
                 done();
                 if (syncScene) await syncScene();
+                presentation?.acceptGathering();
             }) });
         this.startupCleanup.push(() => desktopUI?.dispose());
         firstSteps = this.ownStartup(new FirstStepsGuide(this.shared, {

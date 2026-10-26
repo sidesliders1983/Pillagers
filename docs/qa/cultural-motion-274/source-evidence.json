@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "issue": 274,
+  "provider": "Meshy",
+  "sourceBody": "public/game-assets/human/Human_LOD2.glb",
+  "sourceBodySha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+  "providerDocs": "https://docs.meshy.ai/en/api/text-to-motion",
+  "credits": {
+    "before": 245,
+    "after": 225,
+    "spent": 20
+  },
+  "targetRig": {
+    "jointCount": 44,
+    "semanticMapping": {
+      "mixamorig:Hips": "Pelvis",
+      "mixamorig:Spine": "Spine1",
+      "mixamorig:Spine1": "Spine2",
+      "mixamorig:Spine2": "Spine3",
+      "mixamorig:Neck": "Neck",
+      "mixamorig:Head": "Head",
+      "mixamorig:LeftShoulder": "L_Collar",
+      "mixamorig:LeftArm": "L_Shoulder",
+      "mixamorig:LeftForeArm": "L_Elbow",
+      "mixamorig:LeftHand": "L_Wrist",
+      "mixamorig:LeftUpLeg": "L_Hip",
+      "mixamorig:LeftLeg": "L_Knee",
+      "mixamorig:LeftFoot": "L_Ankle",
+      "mixamorig:LeftToeBase": "L_Foot",
+      "mixamorig:LeftHandThumb1": "L_Thumb1",
+      "mixamorig:LeftHandThumb2": "L_Thumb2",
+      "mixamorig:LeftHandThumb3": "L_Thumb3",
+      "mixamorig:LeftHandMiddle1": "L_Middle1",
+      "mixamorig:LeftHandMiddle2": "L_Middle2",
+      "mixamorig:LeftHandMiddle3": "L_Middle3",
+      "mixamorig:RightShoulder": "R_Collar",
+      "mixamorig:RightArm": "R_Shoulder",
+      "mixamorig:RightForeArm": "R_Elbow",
+      "mixamorig:RightHand": "R_Wrist",
+      "mixamorig:RightUpLeg": "R_Hip",
+      "mixamorig:RightLeg": "R_Knee",
+      "mixamorig:RightFoot": "R_Ankle",
+      "mixamorig:RightToeBase": "R_Foot",
+      "mixamorig:RightHandThumb1": "R_Thumb1",
+      "mixamorig:RightHandThumb2": "R_Thumb2",
+      "mixamorig:RightHandThumb3": "R_Thumb3",
+      "mixamorig:RightHandMiddle1": "R_Middle1",
+      "mixamorig:RightHandMiddle2": "R_Middle2",
+      "mixamorig:RightHandMiddle3": "R_Middle3"
+    }
+  },
+  "clips": [
+    {
+      "name": "Storytelling_Gesture",
+      "taskId": "01a17715-486a-7724-b3e6-fa677e2adfd7",
+      "status": "SUCCEEDED",
+      "consumedCredits": 10,
+      "sourceFile": "scratch/culture-motion/Storytelling_Gesture.fbx",
+      "sourceSha256": "4d386ed7211985d46c1db59f3ab5ff8df3e91b9555b13dcf9bbd6e225b421cf5",
+      "sourceBytes": 16825904,
+      "sourceAnimation": "SMPLH_Animation",
+      "durationSeconds": 3.9666666984558105,
+      "tracks": 53,
+      "uniqueAnimatedBones": 52,
+      "previewMeshes": 16,
+      "pelvisTranslation": {
+        "units": "provider FBX centimetres",
+        "first": [
+          0.7486704587936401,
+          98.83736419677734,
+          1.2955939769744873
+        ],
+        "last": [
+          14.529659271240234,
+          98.29151153564453,
+          -28.224721908569336
+        ],
+        "ranges": [
+          17.486426830291748,
+          4.655586242675781,
+          33.2286171913147
+        ]
+      },
+      "semanticMappingMissingSource": [],
+      "semanticMappingMissingTarget": [],
+      "parameters": {
+        "prompt": "An adult stands upright facing forward with both feet planted. Calmly tells a story to a small group, using measured open hand gestures near chest height and gentle head nods. No walking, turning, props, dancing or exaggerated motion. Hands return to a relaxed position.",
+        "mode": "prime",
+        "duration": 4
+      }
+    },
+    {
+      "name": "Gathering_Applause",
+      "taskId": "01a17715-4be2-710b-bacd-947b6bc296c9",
+      "status": "SUCCEEDED",
+      "consumedCredits": 10,
+      "sourceFile": "scratch/culture-motion/Gathering_Applause.fbx",
+      "sourceSha256": "3685addfa10c2c0bff1e7f1337a2753804ada66beb61e204977399d20e833446",
+      "sourceBytes": 16768672,
+      "sourceAnimation": "SMPLH_Animation",
+      "durationSeconds": 2.9666666984558105,
+      "tracks": 53,
+      "uniqueAnimatedBones": 52,
+      "previewMeshes": 16,
+      "pelvisTranslation": {
+        "units": "provider FBX centimetres",
+        "first": [
+          -0.18249715864658356,
+          97.78145599365234,
+          3.18052077293396
+        ],
+        "last": [
+          7.70164155960083,
+          97.33416748046875,
+          5.158796310424805
+        ],
+        "ranges": [
+          9.62071669101715,
+          1.8410568237304688,
+          6.289194345474243
+        ]
+      },
+      "semanticMappingMissingSource": [],
+      "semanticMappingMissingTarget": [],
+      "parameters": {
+        "prompt": "An adult stands upright facing forward with both feet planted. Gives a few gentle, restrained claps in front of the chest, then lowers both hands naturally to a relaxed position. Small attentive head nod. No walking, turning, dancing, jumping, props or exaggerated motion.",
+        "mode": "prime",
+        "duration": 3
+      }
+    }
+  ],
+  "qualification": {
+    "downloaded": true,
+    "rawSourceDirectlyCompatible": false,
+    "nativeRetargetCandidate": "scratch/culture-motion/Human_CulturalAnimations.candidate.glb",
+    "offlinePoseReview": "Agent-reviewed upright body and preserved native Idle lower body; actual exported playback measured.",
+    "clapSurfaceContact": "Near-contact windows measured; exact palm contact/audio acceptance remains pending.",
+    "runtimeIntegrated": false,
+    "reason": "Raw SMPL-H source requires explicit native-frame retargeting. Candidate and offline evidence are separate from game/browser/device acceptance."
+  }
+}

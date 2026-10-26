@@ -26,6 +26,10 @@ export { inspectIslandMissionLivestock } from './MissionLivestock';
 import {initializeSocial, validateSocial} from './PersonalityLifeEvents';
 import type {SocialState, SocialConfig} from './PersonalityLifeEvents';
 export {defaultSocialConfig, socialProbabilities} from './PersonalityLifeEvents';
+import { initializeCulture, applyCultureCommand, validateCulture, isCulturalEvent } from './CulturalEvents';
+import type { CultureConfig, CultureState, CultureCommand } from './CulturalEvents';
+export { defaultCultureConfig, gatheringOffer, inspectCulture } from './CulturalEvents';
+export type { CultureConfig, CultureCommand, CultureState, CulturalOccasion } from './CulturalEvents';
 import {personaIdentity} from './Identity';
 import {initializeWorld,validateWorld,applyExpeditionCommand,personaAway,namespaceTarget} from './WorldExpeditions';
 import type {WorldState,ExpeditionCommand,ExpeditionConfig} from './WorldExpeditions';
@@ -65,6 +69,7 @@ export type Persona = {
 };
 export type SimulationEvent = {id: string; time: GameTime; type: string; personaId?: string; details?: Record<string, unknown>};
 export type SimulationState = {
+    culture?: CultureState;
     wildlife?: WildlifeState;
     specialistStocks?: SpecialistStocks;
     smithery?: SmitheryState;
@@ -85,6 +90,7 @@ export function createCampaign(
     expeditionOverrides: Partial<ExpeditionConfig> = {}, socialOverrides: Partial<SocialConfig> = {},
     targetLandingConfigs: Record<string, LandingConfig> = {}, foundingPhase?: FoundingPhase,
     calendarMode?: BirthdayCalendarMode, livestock?: CampaignLivestockRules,
+    cultureOverrides: Partial<CultureConfig> = {},
 ): SimulationState {
     // Player defaults are separate from the shared Landing factory used by CPU clans and QA.
     const state = generateCampaign(seed, {initialFood: 15, ...overrides}, mechanicsOverrides, foundingPhase, calendarMode, livestock?.player);
@@ -101,9 +107,11 @@ export function createCampaign(
         if (targetLivestock?.version === 2) delete targetLivestock.founding.excludedSpecies;
         const target = generateCampaign(targetSeed, targetConfig, mechanicsOverrides, foundingPhase, calendarMode, targetLivestock);
         initializeWeather(target, weatherOverrides);
+        initializeCulture(target, cultureOverrides);
         return target;
     }, expeditionOverrides);
     initializeSocial(state, socialOverrides);
+    initializeCulture(state, cultureOverrides);
     validateState(state);
     return state;
 }
@@ -152,6 +160,7 @@ export function initializeIslandClans(input: SimulationState, world: IslandClanL
         state.foundingPhase, birthdayCalendarMode(state), livestock);
     initializeWeather(target, state.weather?.config);
     initializeSocial(target, state.social?.config ?? {});
+    initializeCulture(target, state.culture?.config);
     const rival = namespaceTarget(target, clanId);
     rival.clan.name = 'Island community';
     state.world = { version: 2, config: structuredClone(input.world.config),
@@ -190,7 +199,7 @@ export function createSettlement(seed:number, overrides:Partial<PrototypeConfig>
     }
     initializeSocial(state,socialOverrides);validateState(state); return state;
 }
-export type SimulationCommand = SmitheryCommand | LongshipCommand | IslandMissionCommand | SpatialExpeditionCommand | CampfireCommand | ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
+export type SimulationCommand = CultureCommand | SmitheryCommand | LongshipCommand | IslandMissionCommand | SpatialExpeditionCommand | CampfireCommand | ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
 function integer(value: number, label: string) {
     if (!Number.isSafeInteger(value) || value < 0) throw new Error(`${label} must be a nonnegative safe integer`);
 }
@@ -200,6 +209,12 @@ function emit(state: SimulationState, type: string, personaId?: string, details?
 }
 export function applyCommand(input: SimulationState, command: SimulationCommand, context?: PhysicalExpeditionContext): SimulationState {
     validateState(input);
+    if (command.type === 'SponsorGathering') {
+        const state = structuredClone(input);
+        applyCultureCommand(state, command);
+        validateState(state);
+        return state;
+    }
     if (command.type === 'SetSmitheryTarget' || command.type === 'AssignEquipment') {
         const state = structuredClone(input);
         applySmitheryCommand(state, command);
@@ -353,10 +368,12 @@ function validateState(state: SimulationState): void {
         if (residence.buildingId !== null && !Object.hasOwn(state.buildings, residence.buildingId)) throw new Error('Unknown building');
     }
     for (const [id, building] of Object.entries(state.buildings)) if (id !== building.id || building.kind !== 'house') throw new Error('Invalid building');
+    const culturalEvents: SimulationEvent[] = [];
     let previousEventTime = 0;
     let wildlifeSequence = 0;
     const wildlifeFirsts = new Map<string, string>();
     state.events.forEach((event, index) => {
+        if (isCulturalEvent(event)) culturalEvents.push(event);
         validateWildlifeSighting(event, state);
         const sighting = wildlifeSighting(event);
         if (sighting) {
@@ -380,6 +397,7 @@ function validateState(state: SimulationState): void {
     for(const [id,p] of Object.entries(state.personaArchive??{})){if(id!==p.id||!p.name||!p.originClanId)throw new Error('Invalid historical identity');parseCharacterDNA(p.dna);integer(p.birthWinter,'Historical birth');validatePersonaDates(state,p);}
     validateBirthdayCalendar(state);
     validateCampfire(state);
+    validateCulture(state, culturalEvents);
     validateSocial(state);
     validateMechanics(state);
     if (state.discovery !== undefined) {

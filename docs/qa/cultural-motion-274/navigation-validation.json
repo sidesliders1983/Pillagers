@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "status": "headless-presentation-qualified-not-device-acceptance",
+  "inputs": [
+    {
+      "path": "src/fjord-play/LivingWorldController.ts",
+      "bytes": 56821,
+      "sha256": "ae4b59c1f87e5e6a1253f5ff3fcb26cb5b1dbd54c3dd38eb67c400764a000197"
+    },
+    {
+      "path": "tests/cultural-gathering-navigation.test.mjs",
+      "bytes": 6335,
+      "sha256": "a41ec4d34a25730071f7306f7581d35be459dc9b99f700a091245a6afba1717e"
+    }
+  ],
+  "publicAPI": {
+    "beginGathering": "(eventId, participantKeys, maximumActors:6|8=6):string[]",
+    "inspectGathering": "{eventId,participants:{key,arrived,dropped}[]}|null",
+    "releaseGathering": "():void"
+  },
+  "limits": {
+    "visualActorsLow": 6,
+    "visualActorsStandard": 8,
+    "ringRadiiMetres": [
+      5.5,
+      6.25,
+      7
+    ],
+    "candidatePoints": 24,
+    "maximumCandidateRoutesPerActor": 4,
+    "existingMaximumNodesPerRoute": 2000
+  },
+  "validation": {
+    "combinedRegressionSuite": {
+      "passed": 52,
+      "failed": 0,
+      "skipped": 0
+    },
+    "finalNavigationAndParentPresentationRerun": {
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0
+    },
+    "typescript": "passed",
+    "managedHeapCapMiB": 512
+  },
+  "ownership": "Existing presentation agents and existing step/route/passing authority; no Core writes, teleport, new frame loop or render-time gathering route search",
+  "parentOwns": [
+    "accepted-event validation",
+    "overall phase durations",
+    "actor animation bridge",
+    "audio timing",
+    "browser/device acceptance"
+  ]
+}

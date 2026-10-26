@@ -57,3 +57,14 @@ scripts/audio/*.mjs text eol=lf
 scripts/audio/*.json text eol=lf
 public/game-assets/audio/*.json text eol=lf
 public/game-assets/audio/*.wav -text
+
+# Cultural media and measurement receipts pin preparation/metadata bytes.
+scripts/audio/culture/* text eol=lf
+scripts/characters/cultural-motion/* text eol=lf
+public/game-assets/audio/culture/*.json text eol=lf
+docs/qa/cultural-events/*.json text eol=lf
+docs/qa/cultural-events/calibration-cultural-events-275-276-v1/*.json text eol=lf
+docs/qa/cultural-motion-274/*.json text eol=lf
+
+# Female-hair provenance also pins the unchanged LF preparation script.
+scripts/prepare-female-hair.mjs text eol=lf

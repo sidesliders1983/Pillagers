@@ -48,6 +48,37 @@ const animalAssigned: Template = (event, details) => {
 };
 /** Registry contains only supported recorded facts; unknown types stay in Raw Events. */
 const templates:Record<string,Template>={
+    CultureWeatherSupportApplied: (_event, d) => {
+        const participants = ids(d, 'participants');
+        const sources = ids(d, 'sourceEventIds');
+        if (d.cultureVersion !== 1 || !['Harsh', 'Severe'].includes(String(d.weatherClass)) ||
+            !participants?.length || !sources?.length || !Array.isArray(d.riskInputs) ||
+            d.riskInputs.length !== participants.length || !d.riskInputs.every((input, index) => {
+                const risk = input as Facts | undefined;
+                return risk && risk.personaId === participants[index] &&
+                    number(risk, 'baselineWeatherExposureBps') !== null &&
+                    number(risk, 'weatherExposureBps') !== null &&
+                    Number(risk.weatherExposureBps) < Number(risk.baselineWeatherExposureBps);
+            })) return null;
+        return 'Prepared community support reduced assessed weather-exposure risk for ' +
+            participants.length + ' residents during ' + d.weatherClass + ' weather.';
+    },
+    CulturalGatheringHeld: (_event, d) => {
+        const participants = ids(d, 'participants');
+        const cost = number(d, 'foodCost');
+        if (d.cultureVersion !== 1 || d.occasion !== 'storytelling_music' || !cost ||
+            !participants || participants.length < 3 || participants.length > 8 ||
+            new Set(participants).size !== participants.length || !Array.isArray(d.people) ||
+            d.people.length !== participants.length) return null;
+        const names: string[] = [];
+        for (const [index, id] of participants.entries()) {
+            const fact = d.people[index] as Facts | undefined;
+            if (!fact || fact.id !== id || !str(fact, 'name') || number(fact, 'age') === null) return null;
+            names.push(str(fact, 'name')!);
+        }
+        const people = names.slice(0, -1).join(', ') + ' and ' + names.at(-1);
+        return people + ' gathered for storytelling and music, using ' + cost + ' Food.';
+    },
     EquipmentCrafted: (_e, d) => str(d, 'creatorName') && str(d, 'itemName') &&
         number(d, 'materials') !== null && number(d, 'hides') !== null ?
         `${d.creatorName} made ${d.units} ${d.itemName} using ${d.materials} Materials${d.hides ? ` and ${d.hides} Hides` : ''}.` : null,

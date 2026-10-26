@@ -1,0 +1,160 @@
+{
+  "measuredAt": "2026-10-26T09:04:28.417Z",
+  "node": "v24.19.0",
+  "command": "node --max-old-space-size=512 --expose-gc --test scratch/perf-motion-memory/bounded-motion.test.mjs",
+  "inputs": {
+    "capturedAt": "2026-10-26T09:01:11.992Z",
+    "node": "v24.19.0",
+    "inputs": [
+      {
+        "path": "src/characters/CulturalMotion.ts",
+        "bytes": 1778,
+        "sha256": "b0b684f78817f60dbc7ff842b808022c3bdda8dba78935ba18b99ddad3bf72f2"
+      },
+      {
+        "path": "src/characters/AssetDigest.ts",
+        "bytes": 2256,
+        "sha256": "bb2edce04a03e274097e759fc05e2022edd403c19130b5a9ec17a640683568f2"
+      },
+      {
+        "path": "src/characters/HumanCulturalAnimations.ts",
+        "bytes": 617,
+        "sha256": "f70421d93d5d8418c4ac0b025ce2a7bf7904d026a208839bb818c64312a2c355"
+      },
+      {
+        "path": "tests/cultural-motion.test.mjs",
+        "bytes": 3177,
+        "sha256": "35edfbedb57437001734567e3e7e8fff30b085fefc3fe458bf684e23ccfa72ec"
+      },
+      {
+        "path": "public/game-assets/human/Human_CulturalAnimations.glb",
+        "bytes": 445676,
+        "sha256": "8fb9ff11a617d53064515f152cab184de2804a23eece4e5456edf66b92ae143f"
+      }
+    ]
+  },
+  "bankMetrics": {
+    "clips": 2,
+    "tracks": 264,
+    "trackArrayBytesConservative": 480480,
+    "uniqueBackingBytes": 370440,
+    "encodedBytes": 445676,
+    "sha256": "8fb9ff11a617d53064515f152cab184de2804a23eece4e5456edf66b92ae143f",
+    "parseWallMs": 30.531299999999987
+  },
+  "formatter": {
+    "actualRenderedBytes": 3198365,
+    "actualLines": 122252,
+    "expectedNullLines": 1,
+    "rowsUntilNoCommonLineDiffCompletes": 122254,
+    "bytesPerTraceRow": 978028,
+    "traceBytesIfUnboundedDiffWereRun": 119567835112,
+    "diffExecuted": false,
+    "assertionSourceSha256": "39da8256911db75f861e8203fc78044e5a9bb48e3da15d7d5e1274e61aa0aaaa",
+    "myersSourceSha256": "6495c1de6d88f767ca25f008f1e4aee21123734ebfa7af337e000e9890d9bdbe",
+    "sourceHasUnlimitedArrayInspection": true,
+    "sourceClonesTraceEveryLevel": true
+  },
+  "sampledMemory": [
+    {
+      "phase": "imports and fixture ready",
+      "rss": 96555008,
+      "heapTotal": 39374848,
+      "heapUsed": 19176624,
+      "external": 33579767,
+      "arrayBuffers": 602271
+    },
+    {
+      "phase": "one bank loaded",
+      "rss": 91869184,
+      "heapTotal": 39112704,
+      "heapUsed": 19740632,
+      "external": 25680398,
+      "arrayBuffers": 972711
+    },
+    {
+      "phase": "100 warm requests one download",
+      "rss": 92422144,
+      "heapTotal": 39374848,
+      "heapUsed": 19727144,
+      "external": 24863959,
+      "arrayBuffers": 972711
+    },
+    {
+      "phase": "formatted line count only no diff",
+      "rss": 113192960,
+      "heapTotal": 67932160,
+      "heapUsed": 39035184,
+      "external": 44470533,
+      "arrayBuffers": 972711
+    },
+    {
+      "phase": "first owner disposed with diagnostic locals still scoped",
+      "rss": 113831936,
+      "heapTotal": 65835008,
+      "heapUsed": 27939264,
+      "external": 24885368,
+      "arrayBuffers": 972711
+    },
+    {
+      "phase": "first owner and diagnostic references released",
+      "rss": 109088768,
+      "heapTotal": 56414208,
+      "heapUsed": 19662192,
+      "external": 24865127,
+      "arrayBuffers": 602271
+    },
+    {
+      "phase": "disposed replacement 1",
+      "rss": 108847104,
+      "heapTotal": 56414208,
+      "heapUsed": 19787888,
+      "external": 25681247,
+      "arrayBuffers": 602271
+    },
+    {
+      "phase": "disposed replacement 5",
+      "rss": 112033792,
+      "heapTotal": 56877056,
+      "heapUsed": 20221608,
+      "external": 29241023,
+      "arrayBuffers": 602271
+    },
+    {
+      "phase": "disposed replacement 10",
+      "rss": 118767616,
+      "heapTotal": 57139200,
+      "heapUsed": 20306440,
+      "external": 30427615,
+      "arrayBuffers": 602271
+    },
+    {
+      "phase": "disposed replacement 20",
+      "rss": 126160896,
+      "heapTotal": 57401344,
+      "heapUsed": 20324248,
+      "external": 29241023,
+      "arrayBuffers": 602271
+    },
+    {
+      "phase": "reset and pending disposal settled",
+      "rss": 126930944,
+      "heapTotal": 57171968,
+      "heapUsed": 20077608,
+      "external": 26867839,
+      "arrayBuffers": 602271
+    },
+    {
+      "phase": "invalid fallback result settled",
+      "rss": 127606784,
+      "heapTotal": 57171968,
+      "heapUsed": 20092464,
+      "external": 25831991,
+      "arrayBuffers": 1493899
+    }
+  ],
+  "sampledMaximumRssBytes": 127606784,
+  "resourceUsageMaxRssKiB": 139036,
+  "repeatedLoadDisposeWallMs": 259.26929999999993,
+  "interpretation": "Actual headless asset bank only. Unlimited assertion diff not executed. Node memory is not browser/device RAM."
+}

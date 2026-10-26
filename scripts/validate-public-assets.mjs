@@ -8,11 +8,13 @@ import { terrainIO } from './terrain-io.mjs';
 import { getBounds } from '@gltf-transform/functions';
 import { validatePreparedAssets } from './validate-prepared-assets.mjs';
 import { validateCompactModels } from './validate-compact-models.mjs';
+import { validateCulturalAudio } from './audio/culture/validate.mjs';
 
 // Public audio must pass the same retained-file and per-source publication gate on every build.
 execFileSync(process.execPath, ['scripts/audio/validate.mjs',
     'public/game-assets/audio/release.json', '--publication'], { stdio: 'inherit' });
 
+validateCulturalAudio();
 const root = resolve('public');
 const prepared = await validatePreparedAssets();
 console.log('Validated ' + await validateCompactModels() + ' compact model variants with identical geometry.');

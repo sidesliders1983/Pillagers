@@ -47,6 +47,10 @@ import { selectFjordSoundPack } from '../audio/SoundPack';
 import { SettlementSounds, type SettlementSoundFrame } from '../audio/SettlementSounds';
 import { WorkContacts } from '../audio/WorkContacts';
 import { WildlifeSounds } from '../audio/WildlifeSounds';
+import { CulturalMotion } from '../characters/CulturalMotion';
+import { CulturalSounds } from '../audio/CulturalSounds';
+import { withCulturalSoundPack } from '../audio/CulturalSoundPack';
+import { CulturalPresentation } from './CulturalPresentation';
 
 export interface FjordSceneHost {
     readonly tickIntervalSeconds: number;
@@ -78,6 +82,7 @@ export function createFjordScene(options: {
     const settlementAudio = !proofAudio;
     let audioWorld: ReturnType<FjordAudio['world']> | undefined;
     let audioSources: SoundEmitter[] = [];
+    let culturalSounds = new CulturalSounds((session.readSnapshot().culture?.nextSequence ?? 1) - 1);
     let settlementSounds: SettlementSounds | undefined;
     let workContacts = new WorkContacts();
     let wildlifeSounds: WildlifeSounds | undefined;
@@ -108,6 +113,19 @@ export function createFjordScene(options: {
     let wildlife: WildlifeLayer | undefined;
     let knownTerrain: DiscoveryView | undefined;
     let motion: LivingWorldController | undefined;
+    const culturalMotion = new CulturalMotion();
+    let culture: CulturalPresentation | undefined;
+    let culturalMotionReady = false;
+    let preparingCultureEvent = '';
+    let lastCulturalPhase = '';
+    let cultureSuspended = false;
+    const culturalVisible = () => {
+        const point = culture?.inspect()?.position;
+        if (!point || document.hidden) return false;
+        const projected = new Vector3(point.x, point.y + 1, point.z).project(camera);
+        return projected.z >= -1 && projected.z <= 1 && Math.abs(projected.x) <= 1.1 && Math.abs(projected.y) <= 1.1 &&
+            (!knownTerrain || discoveryAt(knownTerrain, point.x, point.z) === 'visible');
+    };
     let rivalScene: RivalScene | undefined;
     let liveMarkers: ReturnType<typeof shared.selectionPresentation> = [];
     let sceneEntities: readonly FjordEntity[] = [];
@@ -190,8 +208,26 @@ export function createFjordScene(options: {
         selectionLabels.sync(markers);
     };
 
+    // RAF may stop before a hidden/context-lost frame. Invalidate synchronously at the lifecycle edge.
+    const suspendCulture = () => {
+        culturalMotion.reset();
+        models?.stopCulture();
+        preparingCultureEvent = '';
+        cultureSuspended = true;
+        const frame = culture?.inspect();
+        lastCulturalPhase = frame ? frame.id + ':' + frame.phase : '';
+        culturalSounds.sample({ presentation: frame ?? undefined, running: false, hidden: true,
+            sampleRate: audioWorld?.sampleRate ?? null, ready: () => false });
+        audioWorld?.pause();
+    };
     const rebuildWorld = async (): Promise<void> => {
         if (inactive()) return;
+        culture?.dispose();
+        culturalSounds.clear();
+        culture = undefined;
+        culturalMotion.reset();
+        models?.stopCulture();
+        lastCulturalPhase = '';
         audioWorld?.dispose();
         audioWorld = undefined;
         host.work(1);
@@ -278,7 +314,10 @@ export function createFjordScene(options: {
             if (discoveryFog) scene.add(discoveryFog.root);
             const fire = campaign.readProjection().campfire;
             const firePosition = new Vector3(fire.transform.x, fire.transform.y, fire.transform.z);
-            audioWorld = options.audio?.world(soundSelection.manifest, import.meta.env.BASE_URL);
+            const audioManifest = canonical.culture && !proofAudio
+                ? withCulturalSoundPack(soundSelection.manifest) : soundSelection.manifest;
+            audioWorld = options.audio?.world(audioManifest, import.meta.env.BASE_URL);
+            culturalSounds = new CulturalSounds((canonical.culture?.nextSequence ?? 1) - 1);
             settlementSounds = settlementAudio ? new SettlementSounds(blueprint) : undefined;
             workContacts = new WorkContacts();
             wildlifeSounds = settlementAudio ? new WildlifeSounds(session.readSnapshot().events, soundSelection.manifest) : undefined;
@@ -320,6 +359,7 @@ export function createFjordScene(options: {
             cleared.clear();
             motion = new LivingWorldController(campaign.blueprint, discovery ?
                 (x, z) => !knownTerrain || discoveryAt(knownTerrain, x, z) !== 'unknown' : undefined);
+            culture = new CulturalPresentation(session.readSnapshot(), motion, fire.transform);
             rivalScene?.dispose();
             rivalScene = new RivalScene(blueprint, models!, () => knownTerrain, decorateMaterials,
                 warmHomes ? assets!.homeLightMaps : undefined);
@@ -661,6 +701,32 @@ export function createFjordScene(options: {
         if (running) activeTime += motionDelta;
         if (seasonAppearance.advance(motionDelta, running)) applySeasonAppearance();
         motion!.advance(motionDelta, running, !document.hidden);
+        culture?.advance(motionDelta, running && !document.hidden, culturalVisible());
+        const culturalFrame = culture?.inspect();
+        const phaseKey = culturalFrame ? culturalFrame.id + ':' + culturalFrame.phase : '';
+        const suspended = !running || document.hidden || !culturalFrame?.visible || reducedMotion.matches;
+        if (suspended && !cultureSuspended) {
+            preparingCultureEvent = '';
+            culturalMotion.reset();
+            models!.stopCulture();
+        }
+        cultureSuspended = suspended;
+        if (phaseKey !== lastCulturalPhase) {
+            culturalMotion.reset();
+            models!.stopCulture();
+            lastCulturalPhase = phaseKey;
+            if (culturalFrame && !suspended && !reducedMotion.matches) {
+                if (culturalFrame.phase !== 'approach' && culturalMotionReady && culturalFrame.phaseElapsedSeconds <= .15) {
+                    layer!.playCulture(culturalMotion, culturalFrame);
+                }
+            }
+        }
+        if (culturalFrame?.phase === 'approach' && !suspended && !culturalMotionReady &&
+            preparingCultureEvent !== culturalFrame.id) {
+            preparingCultureEvent = culturalFrame.id;
+            void culturalMotion.prepare({ eventId: culturalFrame.id, visible: true })
+                .then(clips => { if (clips && !inactive()) culturalMotionReady = true; });
+        }
         layer!.advance(motion!, motionDelta, running);
         layer!.updateConstruction(document.hidden ? 0 : delta);
         rivalScene?.advance(motionDelta, running);
@@ -673,9 +739,13 @@ export function createFjordScene(options: {
             const work = workContacts.sample(frameStarted / 1000,
                 options.audio?.enabled ? layer!.soundActivities(visible) : [],
                 running && !document.hidden && !!options.audio?.enabled);
+            const culturalSound = culturalSounds.sample({ presentation: culturalFrame ?? undefined,
+                running: running && !!options.audio?.enabled, hidden: document.hidden,
+                sampleRate: audioWorld.sampleRate, ready: cue => audioWorld!.ready(cue) });
+            for (const cue of culturalSound.prepareCueIds) audioWorld.prepare(cue);
             if (work.fresh) soundContacts++;
             if (!running || document.hidden || !options.audio?.enabled) wildlifeSounds?.clear();
-            if (audioWorld.due || work.fresh || work.invalidated) {
+            if (audioWorld.due || work.fresh || work.invalidated || culturalSound.fresh || culturalSound.invalidated) {
                 const projectionStarted = performance.now();
                 const focus = controller.focus;
                 const height = world!.movement.heightAt(focus.x, focus.z);
@@ -694,10 +764,11 @@ export function createFjordScene(options: {
                     actors: soundActors });
                 audioSources.push(...(wildlifeSounds?.sample(frameStarted / 1000, soundCamera, soundActors,
                     running && !document.hidden && !!options.audio?.enabled) ?? []));
-                audioSources.push(...work.sources);
+                audioSources.push(...work.sources, ...culturalSound.sources);
                 soundProjectionMs = performance.now() - projectionStarted;
                 audioWorld.prepare('axe-impact');
-                audioWorld.update(soundCamera, audioSources, !running, work.fresh || work.invalidated);
+                audioWorld.update(soundCamera, audioSources, !running,
+                    work.fresh || work.invalidated || culturalSound.fresh || culturalSound.invalidated);
             }
         }
         campfireEffect!.update(delta, running && !document.hidden);
@@ -741,6 +812,7 @@ export function createFjordScene(options: {
             canvas.dataset.homeGroundGlow = JSON.stringify(layer!.inspectHomeGround() ?? null);
             canvas.dataset.seasonMaterials = JSON.stringify(weatherTint!.inspect());
             canvas.dataset.motionTime = String(activeTime);
+            canvas.dataset.culture = JSON.stringify(culture?.inspect() ?? null);
             canvas.dataset.cameraClearance = JSON.stringify(controller.inspectClearance());
             canvas.dataset.shadowCoverage = JSON.stringify(lighting!.inspectShadowCoverage());
             canvas.dataset.seasonalLight = JSON.stringify(lighting!.seasonalLightState ?? { profile: 'baseline' });
@@ -842,6 +914,9 @@ export function createFjordScene(options: {
         disposed = true;
         worldRevision++;
         bindings.abort();
+        culture?.dispose();
+        culturalMotion.dispose();
+        models?.stopCulture();
         renderer.setAnimationLoop(null);
         audioWorld?.dispose();
         diagnostics?.releaseGpu();
@@ -879,13 +954,28 @@ export function createFjordScene(options: {
         initialize: () => inactive() ? Promise.resolve() : track(sceneWorkMeasured(initialize)),
         replace: () => inactive() ? Promise.resolve() : track(sceneWorkMeasured(rebuildWorld)),
         sync: () => inactive() ? Promise.resolve() : track(sceneWorkMeasured(() => syncScene?.() ?? Promise.resolve())),
-        frame, prepareGpu, arrive, dispose, highlight,
+        frame, prepareGpu, arrive, dispose, highlight, suspendCulture,
+        acceptGathering: () => {
+            if (inactive() || !culture) return false;
+            // This entry point is called only after a successful live command, never while restoring.
+            const fire = campaign.readProjection().campfire.transform;
+            const projected = new Vector3(fire.x, fire.y + 1, fire.z).project(camera);
+            const visible = !document.hidden && projected.z >= -1 && projected.z <= 1 &&
+                Math.abs(projected.x) <= 1.1 && Math.abs(projected.y) <= 1.1 &&
+                (!knownTerrain || discoveryAt(knownTerrain, fire.x, fire.z) === 'visible');
+            const quality = document.querySelector<HTMLSelectElement>('#fjord-quality')!.value;
+            const accepted = culture.accept(session.readSnapshot(), quality === 'low' ? 6 : 8, visible);
+            const frame = culture.inspect();
+            if (accepted && frame) culturalSounds.start({ id: frame.id, sequence: frame.sequence });
+            return accepted;
+        },
         portrait: (input: PortraitRequest) => {
             if (inactive() || renderer.getContext().isContextLost()) return Promise.resolve(undefined);
             const capture = () => portraits.render(input, layer?.residentForPortrait(input));
             return diagnostics ? diagnostics.operation('portrait', capture) : capture();
         },
         resetFrameTime: () => {
+            suspendCulture();
             clock.start();
             lighting?.finishSeasonTransition();
             if (seasonAppearance.finish()) applySeasonAppearance();

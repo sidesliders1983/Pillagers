@@ -43,7 +43,7 @@ const noteworthy = new Map<string, AttentionCategory>([
 ]);
 
 const formattedTypes = new Set([...noteworthy.keys(), 'FoundingPartyLanded', 'FoundingPartnershipPresent',
-    'OccupationAssigned', 'OccupationReleased', 'CaregiverAssigned', 'ResourceProduced', 'CattleFoodProduced',
+    'CulturalGatheringHeld', 'CultureWeatherSupportApplied', 'OccupationAssigned', 'OccupationReleased', 'CaregiverAssigned', 'ResourceProduced', 'CattleFoodProduced',
     'LivestockResourceProduced', 'FoodConsumed', 'CattleFoodConsumed', 'LivestockFoodConsumed',
     'ExploreAreaPrepared', 'ExploreAreaCancelled', 'ExploreAreaStranded', 'ExploreAreaReturnStarted',
     'ExploreAreaSuppliesConsumed', 'ExploreAreaSuppliesDiscarded', 'ExploreAreaSuppliesLost',
@@ -65,7 +65,8 @@ export function attentionEvent(event: SimulationEvent): AttentionRecord | null {
             'Production recorded: ' + d.units + ' ' + (resource === 'food' ? 'Food' : 'Materials') + '.' : undefined;
     }
     if (!headline) return null;
-    const category = noteworthy.get(event.type) ?? 'settlement';
+    const category: AttentionCategory = noteworthy.get(event.type) ??
+        (['CulturalGatheringHeld', 'CultureWeatherSupportApplied'].includes(event.type) ? 'life' : 'settlement');
     const severity = noteworthy.has(event.type) && !(event.type === 'ExploreAreaDeparted' && d.redirected) ?
         'noteworthy' : 'ambient';
     const actorIds = [...new Set([event.personaId, ...strings(d.participants), ...strings(d.parentIds)]

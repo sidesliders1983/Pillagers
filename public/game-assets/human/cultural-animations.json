@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "issue": 274,
+  "status": "prototype",
+  "provider": "Meshy",
+  "path": "/game-assets/human/Human_CulturalAnimations.glb",
+  "sha256": "8fb9ff11a617d53064515f152cab184de2804a23eece4e5456edf66b92ae143f",
+  "bytes": 445676,
+  "nativeBodySha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+  "rigHash": "258405cfce1884a45478fe89ca7ea8bfa56ede20548ebeaa53f2acbd65b722da",
+  "decodedTrackBytes": 480480,
+  "meshes": 0,
+  "images": 0,
+  "skins": 0,
+  "clips": [
+    {
+      "name": "Storytelling_Gesture",
+      "duration": 3.966666666666667
+    },
+    {
+      "name": "Gathering_Applause",
+      "duration": 2.966666666666667
+    }
+  ],
+  "sources": [
+    {
+      "file": "Storytelling_Gesture.fbx",
+      "taskId": "01a17715-486a-7724-b3e6-fa677e2adfd7",
+      "sha256": "4d386ed7211985d46c1db59f3ab5ff8df3e91b9555b13dcf9bbd6e225b421cf5",
+      "mode": "prime",
+      "consumedCredits": 10
+    },
+    {
+      "file": "Gathering_Applause.fbx",
+      "taskId": "01a17715-4be2-710b-bacd-947b6bc296c9",
+      "sha256": "3685addfa10c2c0bff1e7f1337a2753804ada66beb61e204977399d20e833446",
+      "mode": "prime",
+      "consumedCredits": 10
+    }
+  ],
+  "applause": {
+    "qualification": "near-contact-only",
+    "windows": [
+      0.4666666666666667,
+      0.7333333333333333,
+      1,
+      1.2333333333333334
+    ],
+    "automaticContactSound": false
+  }
+}
