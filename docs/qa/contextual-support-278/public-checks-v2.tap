@@ -1,0 +1,43 @@
+✔ revision reads are deeply immutable isolated copies; public snapshots stay independently owned (134.0609ms)
+✔ projection reads invalidate for state, mooring, layout and campaign replacement without freezing adapter ownership (762.9782ms)
+✔ cached command eligibility remains exactly authoritative after commands, imports, replacement and rejected probes (2171.5225ms)
+✔ developed saves and frozen chapters retain exact Core output through annual/checkpoint commands and handoffs (19971.1513ms)
+✔ book read/notification flags and pacing serialize immediately without a new canonical revision (313.3256ms)
+✔ saved island restores through asynchronous preparation without changing Core, book, layout or fractional pace (18649.0115ms)
+✔ missing or damaged active storage offers recoverable saves without replacing their raw data (117.5257ms)
+✔ incomplete shared saves are rejected rather than constructing an unrelated default campaign (0.6004ms)
+✔ resume checkpoints preserve presentation controls and camera independently of Core (555.7668ms)
+✔ invalid pacing or island identity is rejected before expensive restoration begins (92.2784ms)
+✔ explicit legacy view handoff retains its pace and full saved terrain through the asynchronous restore route (693.319ms)
+✔ manual canonical data remains a recovery choice when its scenery sidecar cannot be used (102.6218ms)
+✔ completed support names its actual helper, recipient and prior loss without rewriting the source (1381.0426ms)
+✔ a delayed support passage links its real loss and offer and survives shared restore without changing published chapters (3589.349ms)
+✔ declined and unavailable support offers remain factual attempts without completed-aid notifications (1835.8248ms)
+✔ support completed at shared capacity records the aid without claiming another prepared assessment (771.5122ms)
+✔ an actual later weather assessment links back to completed aid, acceptance, offer and housing loss (1260.5122ms)
+✔ restarting a legacy cultural campaign preserves the absence of contextual support (196.0642ms)
+✔ fresh sessions accept explicit support configuration and preserve it through founder replay (119.4229ms)
+✔ a real occupied collapse offers co-displaced partners help, then completes after fifty canonical ticks (2108.6198ms)
+✔ load rejects invented aid contribution, missing chains, reused sources and changed source facts (1196.2122ms)
+✔ plausible aid cannot rewrite the real collapse residents behind a matching completion chain (663.354ms)
+✔ ordinary, culture-only and old opt-in saves remain without aid; fresh combined campaigns save approved defaults (631.4423ms)
+✔ zero offer and zero acceptance boundaries grant nothing and never reconsider the old loss (1647.3655ms)
+✔ real loss with no available tied helper or an absent participant offers no false aid (1771.7858ms)
+✔ only the first actual housing loss in a clan year is reviewed, even if it has no eligible helper (1138.5791ms)
+✔ a real departure or expedition death before resolution ends the offer without accepted aid (844.8897ms)
+✔ accepted aid shares the paid gathering FIFO and capacity without changing paid receipts or sequence (825.1123ms)
+✔ aid leaves all economy, housing, work, mechanics/weather/quarrel RNG and CPU outcomes unchanged (884.2ms)
+✔ canonical replay survives split ticks, pending save/load, rollback and unrelated CPU iteration order (2135.7573ms)
+✔ joining a real existing child group as caregiver during the offer prevents acceptance (273.094ms)
+✔ completed contextual aid funds exactly the existing next Severe assessment and cannot reopen after use (821.1996ms)
+✔ explicit malformed empty support state is rejected while genuinely missing legacy state is preserved (24.5271ms)
+✔ an actual source-clan captive transfer during pending aid ends that original offer without a grant (464.8075ms)
+✔ matching source chains cannot invent aid from a different real unrelated adult (657.002ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 30124.8185

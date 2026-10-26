@@ -34,7 +34,7 @@ const string = (value: unknown): string | undefined => typeof value === 'string'
 const strings = (value: unknown) => Array.isArray(value) ? value.filter((id): id is string => typeof id === 'string') : [];
 export const eventOrdinal = (id: string) => /^event-[1-9][0-9]*$/.test(id) ? Number(id.slice(6)) : 0;
 const noteworthy = new Map<string, AttentionCategory>([
-    ['ChildBorn', 'life'], ['PersonaDied', 'life'], ['PartnershipFormed', 'life'],
+    ['ChildBorn', 'life'], ['PersonaDied', 'life'], ['PartnershipFormed', 'life'], ['SupportCompleted', 'life'],
     ['HouseBuilt', 'settlement'], ['BuildingCollapsed', 'settlement'],
     ['ExpeditionDeparted', 'expedition'], ['ExpeditionReturned', 'expedition'],
     ['ExploreAreaDeparted', 'expedition'], ['ExploreAreaReturned', 'expedition'],
@@ -72,7 +72,9 @@ export function attentionEvent(event: SimulationEvent): AttentionRecord | null {
     const actorIds = [...new Set([event.personaId, ...strings(d.participants), ...strings(d.parentIds)]
         .filter((id): id is string => typeof id === 'string'))];
     let target: AttentionTarget | undefined;
-    if (category === 'life' && actorIds.length) target = { kind: 'persona', id: event.personaId ?? actorIds[0] };
+    if (event.type === 'SupportCompleted' && string(d.recipientId))
+        target = { kind: 'persona', id: d.recipientId as string };
+    else if (category === 'life' && actorIds.length) target = { kind: 'persona', id: event.personaId ?? actorIds[0] };
     else if (['HouseBuilt', 'BuildingCollapsed'].includes(event.type) && string(d.buildingId))
         target = { kind: 'building', id: d.buildingId as string };
     else if (string(d.missionId)) target = { kind: 'expedition', id: d.missionId as string };

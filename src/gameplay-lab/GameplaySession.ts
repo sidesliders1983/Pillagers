@@ -1,5 +1,6 @@
 import { gatheringOffer, inspectCulture } from '../simulation/CulturalEvents';
 import type { CultureConfig, CulturalOccasion } from '../simulation/CulturalEvents';
+import type { ContextualSupportConfig } from '../simulation/ContextualSupport';
 import { wildlifeAttentionAdapter } from '../lore/WildlifeAttention';
 import { AttentionHistoryIndex } from '../lore/AttentionHistory';
 import { WildlifeHistoryIndex } from '../lore/WildlifeHistory';
@@ -118,8 +119,10 @@ export class GameplaySession {
     running = false;
     minutesPerWinter = 3;
     constructor(seed = 32, narrativeSeed?: number, socialEnabled = true, foundingPhase?: FoundingPhase,
-        calendarMode?: BirthdayCalendarMode, livestock?: CampaignLivestockRules, culture?: Partial<CultureConfig>) {
-        this.state = createCampaign(seed, {}, {}, {}, {}, {enabled: socialEnabled}, {}, foundingPhase, calendarMode, livestock, culture);
+        calendarMode?: BirthdayCalendarMode, livestock?: CampaignLivestockRules,
+        culture?: Partial<CultureConfig>, contextualSupport?: Partial<ContextualSupportConfig>) {
+        this.state = createCampaign(seed, {}, {}, {}, {}, { enabled: socialEnabled }, {},
+            foundingPhase, calendarMode, livestock, culture, contextualSupport);
         this.book = new ClanBook(this.state, true, narrativeSeed);
     }
     initializeWildlife(): void {
@@ -215,8 +218,14 @@ export class GameplaySession {
             throw new Error('This save has no gameplay mechanics');
         this.replace(state, false);
     }
-    newCampaign(seed: number, weatherEnabled = true, socialEnabled = true, foundingPhase = this.state.foundingPhase, calendarMode: BirthdayCalendarMode | undefined = birthdayCalendarMode(this.state), livestock?: CampaignLivestockRules, culture?: Partial<CultureConfig>): void {
-        this.replace(createCampaign(seed, {}, {}, { enabled: weatherEnabled }, {}, { enabled: socialEnabled }, {}, foundingPhase, calendarMode, livestock, culture));
+    newCampaign(seed: number, weatherEnabled = true, socialEnabled = true,
+        foundingPhase = this.state.foundingPhase,
+        calendarMode: BirthdayCalendarMode | undefined = birthdayCalendarMode(this.state),
+        livestock?: CampaignLivestockRules, culture?: Partial<CultureConfig>,
+        contextualSupport?: Partial<ContextualSupportConfig>): void {
+        this.replace(createCampaign(seed, {}, {}, { enabled: weatherEnabled }, {},
+            { enabled: socialEnabled }, {}, foundingPhase, calendarMode, livestock, culture,
+            contextualSupport));
     }
     /** Prepare a replay without taking ownership of the current campaign or its read state. */
     restartProposal(): GameplaySession {
@@ -253,7 +262,11 @@ export class GameplaySession {
                 .filter(([, target]) => target.landing?.livestock)
                 .map(([id, target]) => [id, target.landing!.livestock!])),
         };
-        this.replace(createCampaign(seed, this.state.landing?.config, this.state.mechanics?.config, { ...this.state.weather?.config, enabled: weatherEnabled }, this.state.world?.config, { ...this.state.social?.config, enabled: socialEnabled }, targetLandingConfigs, foundingPhase, birthdayCalendarMode(this.state), livestock, this.state.culture?.config));
+        this.replace(createCampaign(seed, this.state.landing?.config, this.state.mechanics?.config,
+            { ...this.state.weather?.config, enabled: weatherEnabled }, this.state.world?.config,
+            { ...this.state.social?.config, enabled: socialEnabled }, targetLandingConfigs,
+            foundingPhase, birthdayCalendarMode(this.state), livestock, this.state.culture?.config,
+            this.state.contextualSupport?.config ?? { enabled: false }));
     }
     private replace(state: SimulationState, fresh = true): void {
         this.physicalWorld = undefined;

@@ -1,3 +1,4 @@
+import { stepContextualSupport } from './ContextualSupport';
 import { craftingOccupation, craftingOffer, stepSmitheryWork } from './Smithery';
 import { careActive } from './CareCalendar';
 import { resolveScheduledBirths } from './ScheduledBirths';
@@ -107,6 +108,7 @@ export function inspectBuilding(state:SimulationState,id:string) {
     return {occupied,upkeep:state.mechanics!.config.baseUpkeep+info.upgradeLevel,debtWinters:info.debtWinters,upgradeLevel:info.upgradeLevel,investedMaterials:info.investedMaterials};
 }
 export function stepMechanicsTick(state:SimulationState):void {
+    const tickEventOffset = state.events.length;
     stepCampfire(state);
     const config=state.mechanics!.config;
     let annualFoodEvent;
@@ -184,6 +186,7 @@ export function stepMechanicsTick(state:SimulationState):void {
         resolveCaregivers(state,(type,id,details)=>emit(state,type,id,details));
     pruneSocialIncidents(state);
     if(annualFoodEvent)evaluateSocialYear(state,annualFoodEvent);
+    stepContextualSupport(state, state.events.slice(tickEventOffset));
 }
 
 export type MechanicsCommand = {type:'AssignResidence'; householdId:string; residenceId:string|null}

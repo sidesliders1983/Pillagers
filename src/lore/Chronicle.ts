@@ -46,8 +46,49 @@ const animalAssigned: Template = (event, details) => {
     const home = housingReference(details, 'building', details.farmyardId, 'a Farmyard');
     return animalName(event) + ' was assigned to ' + (home === 'a Farmyard' ? home : 'the Farmyard at ' + home) + '.';
 };
+function supportContext(event: SimulationEvent, details: Facts) {
+    const participants = ids(details, 'participants');
+    const helperId = str(details, 'helperId'), recipientId = str(details, 'recipientId');
+    if (details.supportVersion !== 1 || !str(details, 'offerId') || !str(details, 'sourceEventId') ||
+        !str(details, 'householdId') || !helperId || !recipientId || helperId === recipientId ||
+        participants?.length !== 2 || !participants.includes(helperId) || !participants.includes(recipientId))
+        return null;
+    const housing = details.housingResidents as Facts | undefined;
+    const home = housingReference(details, 'building', housing?.buildingId, 'a home');
+    return { helper: person(event, helperId), recipient: person(event, recipientId),
+        loss: 'after the collapse of ' + home };
+}
 /** Registry contains only supported recorded facts; unknown types stay in Raw Events. */
 const templates:Record<string,Template>={
+    SupportOffered: (event, details) => {
+        const context = supportContext(event, details);
+        return context ? context.helper + ' offered support to ' + context.recipient + ' ' + context.loss + '.' : null;
+    },
+    SupportAccepted: (event, details) => {
+        const context = supportContext(event, details);
+        return context && str(details, 'offeredEventId') ? context.recipient + ' accepted support from ' +
+            context.helper + ' ' + context.loss + '.' : null;
+    },
+    SupportDeclined: (event, details) => {
+        const context = supportContext(event, details);
+        return context && str(details, 'offeredEventId') ? context.recipient + ' declined support from ' +
+            context.helper + ' ' + context.loss + '.' : null;
+    },
+    SupportEnded: (event, details) => {
+        const context = supportContext(event, details);
+        return context && str(details, 'offeredEventId') && details.reason === 'unavailable' ?
+            'The support offer from ' + context.helper + ' to ' + context.recipient + ' ' + context.loss +
+            ' ended because a participant was unavailable.' : null;
+    },
+    SupportCompleted: (event, details) => {
+        const context = supportContext(event, details);
+        if (!context || !str(details, 'offeredEventId') || !str(details, 'acceptedEventId') ||
+            ![0, 1].includes(Number(details.supportContribution))) return null;
+        const contribution = details.supportContribution === 1 ?
+            '; one shared prepared weather assessment was added.' :
+            '; the shared prepared weather assessments were already at capacity.';
+        return context.helper + ' completed support for ' + context.recipient + ' ' + context.loss + contribution;
+    },
     CultureWeatherSupportApplied: (_event, d) => {
         const participants = ids(d, 'participants');
         const sources = ids(d, 'sourceEventIds');
