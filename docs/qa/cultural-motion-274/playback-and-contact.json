@@ -1,0 +1,1793 @@
+{
+  "schemaVersion": 1,
+  "units": "metres",
+  "leftHandVertices": 281,
+  "rightHandVertices": 326,
+  "method": "Actual exported GLTFLoader clips on exact native Three.js skin; palm landmark is mean(wrist,thumb1,middle1), nearest surface uses vertices with at least0.5 hand-weight.",
+  "interpretation": "Near-contact vertices alone are not an authored event or a final audio contact acceptance.",
+  "clips": [
+    {
+      "name": "Storytelling_Gesture",
+      "tracks": 132,
+      "duration": 3.9666666984558105,
+      "decodedTrackBytes": 274560,
+      "maxLowerPositionDifference": 2.5148372437724307e-8,
+      "maxLowerQuaternionAngle": 8.429369702178807e-8,
+      "minimumNativeSurface": {
+        "time": 3.566666666666667,
+        "nativeWristSeparation": 0.32515270134613017,
+        "nativePalmLandmarkSeparation": 0.377444425022389,
+        "nativeHandSurfaceNearest": 0.26924498653216594,
+        "sourceWristSeparation": 0.2999016795108115,
+        "sourcePalmLandmarkSeparation": 0.3264153660989668
+      },
+      "minimumSourceWrist": {
+        "time": 3.566666666666667,
+        "nativeWristSeparation": 0.32515270134613017,
+        "nativePalmLandmarkSeparation": 0.377444425022389,
+        "nativeHandSurfaceNearest": 0.26924498653216594,
+        "sourceWristSeparation": 0.2999016795108115,
+        "sourcePalmLandmarkSeparation": 0.3264153660989668
+      },
+      "minimumSourcePalm": {
+        "time": 3.566666666666667,
+        "nativeWristSeparation": 0.32515270134613017,
+        "nativePalmLandmarkSeparation": 0.377444425022389,
+        "nativeHandSurfaceNearest": 0.26924498653216594,
+        "sourceWristSeparation": 0.2999016795108115,
+        "sourcePalmLandmarkSeparation": 0.3264153660989668
+      },
+      "nearContactLocalMinima": [],
+      "samples": [
+        {
+          "time": 0,
+          "nativeWristSeparation": 0.5131059368529932,
+          "nativePalmLandmarkSeparation": 0.5438594501731886,
+          "nativeHandSurfaceNearest": 0.44825698602698705,
+          "sourceWristSeparation": 0.5101011065848736,
+          "sourcePalmLandmarkSeparation": 0.5158742816339789
+        },
+        {
+          "time": 0.03333333333333333,
+          "nativeWristSeparation": 0.512814453803217,
+          "nativePalmLandmarkSeparation": 0.5436826795027663,
+          "nativeHandSurfaceNearest": 0.4481767986422268,
+          "sourceWristSeparation": 0.5097577081505391,
+          "sourcePalmLandmarkSeparation": 0.5156342842608184
+        },
+        {
+          "time": 0.06666666666666667,
+          "nativeWristSeparation": 0.5123602642414559,
+          "nativePalmLandmarkSeparation": 0.5433753920088136,
+          "nativeHandSurfaceNearest": 0.4480041927415106,
+          "sourceWristSeparation": 0.5092293191035525,
+          "sourcePalmLandmarkSeparation": 0.5152423568818115
+        },
+        {
+          "time": 0.1,
+          "nativeWristSeparation": 0.5118180043550334,
+          "nativePalmLandmarkSeparation": 0.5429721401414722,
+          "nativeHandSurfaceNearest": 0.4477695907001969,
+          "sourceWristSeparation": 0.5086220515378035,
+          "sourcePalmLandmarkSeparation": 0.5147718694706317
+        },
+        {
+          "time": 0.13333333333333333,
+          "nativeWristSeparation": 0.5112054148782206,
+          "nativePalmLandmarkSeparation": 0.5424652960809472,
+          "nativeHandSurfaceNearest": 0.4474655323793984,
+          "sourceWristSeparation": 0.50796787018462,
+          "sourcePalmLandmarkSeparation": 0.5142346067063648
+        },
+        {
+          "time": 0.16666666666666666,
+          "nativeWristSeparation": 0.5105402698732205,
+          "nativePalmLandmarkSeparation": 0.5418498717005131,
+          "nativeHandSurfaceNearest": 0.44708345776601854,
+          "sourceWristSeparation": 0.5072847718334671,
+          "sourcePalmLandmarkSeparation": 0.51362908380533
+        },
+        {
+          "time": 0.2,
+          "nativeWristSeparation": 0.5097868917735566,
+          "nativePalmLandmarkSeparation": 0.5410759814037824,
+          "nativeHandSurfaceNearest": 0.4465850153550352,
+          "sourceWristSeparation": 0.5065154948761056,
+          "sourcePalmLandmarkSeparation": 0.5128824205704713
+        },
+        {
+          "time": 0.23333333333333334,
+          "nativeWristSeparation": 0.5090050809840627,
+          "nativePalmLandmarkSeparation": 0.5402008845847835,
+          "nativeHandSurfaceNearest": 0.4460212550384157,
+          "sourceWristSeparation": 0.5057033611557569,
+          "sourcePalmLandmarkSeparation": 0.5120283238867087
+        },
+        {
+          "time": 0.26666666666666666,
+          "nativeWristSeparation": 0.5085718318545318,
+          "nativePalmLandmarkSeparation": 0.5397154972389725,
+          "nativeHandSurfaceNearest": 0.44579848269028716,
+          "sourceWristSeparation": 0.5052474426650332,
+          "sourcePalmLandmarkSeparation": 0.5115414233685925
+        },
+        {
+          "time": 0.3,
+          "nativeWristSeparation": 0.5085914081402628,
+          "nativePalmLandmarkSeparation": 0.5400397722257593,
+          "nativeHandSurfaceNearest": 0.44615150691113237,
+          "sourceWristSeparation": 0.5052246377055033,
+          "sourcePalmLandmarkSeparation": 0.5117396544283005
+        },
+        {
+          "time": 0.3333333333333333,
+          "nativeWristSeparation": 0.5085138129840459,
+          "nativePalmLandmarkSeparation": 0.5408188485033217,
+          "nativeHandSurfaceNearest": 0.4466582116007375,
+          "sourceWristSeparation": 0.5050031677860534,
+          "sourcePalmLandmarkSeparation": 0.512167930956284
+        },
+        {
+          "time": 0.36666666666666664,
+          "nativeWristSeparation": 0.5074210381620831,
+          "nativePalmLandmarkSeparation": 0.5408560813776964,
+          "nativeHandSurfaceNearest": 0.4463768587232568,
+          "sourceWristSeparation": 0.5036087660147198,
+          "sourcePalmLandmarkSeparation": 0.5116869815308827
+        },
+        {
+          "time": 0.4,
+          "nativeWristSeparation": 0.5041673413792961,
+          "nativePalmLandmarkSeparation": 0.5385263646736016,
+          "nativeHandSurfaceNearest": 0.44396507663232593,
+          "sourceWristSeparation": 0.49978971779366727,
+          "sourcePalmLandmarkSeparation": 0.5087159353161741
+        },
+        {
+          "time": 0.43333333333333335,
+          "nativeWristSeparation": 0.4969549399555596,
+          "nativePalmLandmarkSeparation": 0.5317879179270194,
+          "nativeHandSurfaceNearest": 0.4374715656671754,
+          "sourceWristSeparation": 0.4914482990721519,
+          "sourcePalmLandmarkSeparation": 0.5009991380118001
+        },
+        {
+          "time": 0.4666666666666667,
+          "nativeWristSeparation": 0.48254250258766035,
+          "nativePalmLandmarkSeparation": 0.5173512003701352,
+          "nativeHandSurfaceNearest": 0.42363179850405586,
+          "sourceWristSeparation": 0.4748808024275496,
+          "sourcePalmLandmarkSeparation": 0.4848639951034389
+        },
+        {
+          "time": 0.5,
+          "nativeWristSeparation": 0.45880463825792656,
+          "nativePalmLandmarkSeparation": 0.4930893861940428,
+          "nativeHandSurfaceNearest": 0.4002418472623522,
+          "sourceWristSeparation": 0.44775383547246833,
+          "sourcePalmLandmarkSeparation": 0.4580984105968325
+        },
+        {
+          "time": 0.5333333333333333,
+          "nativeWristSeparation": 0.4296995275009894,
+          "nativePalmLandmarkSeparation": 0.4631402725548125,
+          "nativeHandSurfaceNearest": 0.37127139178500873,
+          "sourceWristSeparation": 0.41454041293338145,
+          "sourcePalmLandmarkSeparation": 0.4252449416726616
+        },
+        {
+          "time": 0.5666666666666667,
+          "nativeWristSeparation": 0.4042806257248968,
+          "nativePalmLandmarkSeparation": 0.4369334269929107,
+          "nativeHandSurfaceNearest": 0.34607745458104955,
+          "sourceWristSeparation": 0.38552376002905947,
+          "sourcePalmLandmarkSeparation": 0.3965465697408527
+        },
+        {
+          "time": 0.6,
+          "nativeWristSeparation": 0.38986491292054926,
+          "nativePalmLandmarkSeparation": 0.4220041964186255,
+          "nativeHandSurfaceNearest": 0.3321413510101373,
+          "sourceWristSeparation": 0.3691834165313472,
+          "sourcePalmLandmarkSeparation": 0.380473881520892
+        },
+        {
+          "time": 0.6333333333333333,
+          "nativeWristSeparation": 0.38890029808338816,
+          "nativePalmLandmarkSeparation": 0.4207256925957964,
+          "nativeHandSurfaceNearest": 0.3318971494698232,
+          "sourceWristSeparation": 0.3683669476830685,
+          "sourcePalmLandmarkSeparation": 0.37985524406706583
+        },
+        {
+          "time": 0.6666666666666666,
+          "nativeWristSeparation": 0.3999708167751599,
+          "nativePalmLandmarkSeparation": 0.43150976613554476,
+          "nativeHandSurfaceNearest": 0.3438825911186956,
+          "sourceWristSeparation": 0.3813609459211075,
+          "sourcePalmLandmarkSeparation": 0.39283929866991224
+        },
+        {
+          "time": 0.7,
+          "nativeWristSeparation": 0.417705336291385,
+          "nativePalmLandmarkSeparation": 0.44900423469091566,
+          "nativeHandSurfaceNearest": 0.3625395319146953,
+          "sourceWristSeparation": 0.401915982875735,
+          "sourcePalmLandmarkSeparation": 0.41311199291514
+        },
+        {
+          "time": 0.7333333333333333,
+          "nativeWristSeparation": 0.4358758926024261,
+          "nativePalmLandmarkSeparation": 0.46693843529853235,
+          "nativeHandSurfaceNearest": 0.3814495450312613,
+          "sourceWristSeparation": 0.42293469024598457,
+          "sourcePalmLandmarkSeparation": 0.4336696751455946
+        },
+        {
+          "time": 0.7666666666666667,
+          "nativeWristSeparation": 0.4510398227455701,
+          "nativePalmLandmarkSeparation": 0.4817006189274995,
+          "nativeHandSurfaceNearest": 0.39706118966112225,
+          "sourceWristSeparation": 0.4405209746276082,
+          "sourcePalmLandmarkSeparation": 0.45067247135866
+        },
+        {
+          "time": 0.8,
+          "nativeWristSeparation": 0.46171392568279757,
+          "nativePalmLandmarkSeparation": 0.4919215656118433,
+          "nativeHandSurfaceNearest": 0.4079607780105308,
+          "sourceWristSeparation": 0.45290295461938274,
+          "sourcePalmLandmarkSeparation": 0.46247202281466215
+        },
+        {
+          "time": 0.8333333333333334,
+          "nativeWristSeparation": 0.4664141684998145,
+          "nativePalmLandmarkSeparation": 0.4963893794795994,
+          "nativeHandSurfaceNearest": 0.4128499894003466,
+          "sourceWristSeparation": 0.4582823749158886,
+          "sourcePalmLandmarkSeparation": 0.4675096779876908
+        },
+        {
+          "time": 0.8666666666666667,
+          "nativeWristSeparation": 0.4635008430129296,
+          "nativePalmLandmarkSeparation": 0.4934452125793902,
+          "nativeHandSurfaceNearest": 0.41012177015237505,
+          "sourceWristSeparation": 0.4548067373392407,
+          "sourcePalmLandmarkSeparation": 0.4640250719258327
+        },
+        {
+          "time": 0.9,
+          "nativeWristSeparation": 0.45453804784371493,
+          "nativePalmLandmarkSeparation": 0.4844249607456797,
+          "nativeHandSurfaceNearest": 0.4013451631442381,
+          "sourceWristSeparation": 0.4444851803530516,
+          "sourcePalmLandmarkSeparation": 0.4539334810006183
+        },
+        {
+          "time": 0.9333333333333333,
+          "nativeWristSeparation": 0.44567378197441526,
+          "nativePalmLandmarkSeparation": 0.4753843371437641,
+          "nativeHandSurfaceNearest": 0.3927174576221302,
+          "sourceWristSeparation": 0.4345044949970494,
+          "sourcePalmLandmarkSeparation": 0.44419601757504534
+        },
+        {
+          "time": 0.9666666666666667,
+          "nativeWristSeparation": 0.44282027464991836,
+          "nativePalmLandmarkSeparation": 0.4723365998012478,
+          "nativeHandSurfaceNearest": 0.3900561762961567,
+          "sourceWristSeparation": 0.4314288328468349,
+          "sourcePalmLandmarkSeparation": 0.4410893503868812
+        },
+        {
+          "time": 1,
+          "nativeWristSeparation": 0.44635021966444,
+          "nativePalmLandmarkSeparation": 0.4759619959017393,
+          "nativeHandSurfaceNearest": 0.3938593932800597,
+          "sourceWristSeparation": 0.4355622489929452,
+          "sourcePalmLandmarkSeparation": 0.4451029746180531
+        },
+        {
+          "time": 1.0333333333333334,
+          "nativeWristSeparation": 0.45271248616999776,
+          "nativePalmLandmarkSeparation": 0.48281036220050255,
+          "nativeHandSurfaceNearest": 0.40061956740249444,
+          "sourceWristSeparation": 0.4429216540412561,
+          "sourcePalmLandmarkSeparation": 0.4524738036100718
+        },
+        {
+          "time": 1.0666666666666667,
+          "nativeWristSeparation": 0.45881169265291977,
+          "nativePalmLandmarkSeparation": 0.489485804537163,
+          "nativeHandSurfaceNearest": 0.4071319563629075,
+          "sourceWristSeparation": 0.4500281837050916,
+          "sourcePalmLandmarkSeparation": 0.4596316848367433
+        },
+        {
+          "time": 1.1,
+          "nativeWristSeparation": 0.4643419095614736,
+          "nativePalmLandmarkSeparation": 0.49547191456511075,
+          "nativeHandSurfaceNearest": 0.4131086799067134,
+          "sourceWristSeparation": 0.4565034541220677,
+          "sourcePalmLandmarkSeparation": 0.46615125142982555
+        },
+        {
+          "time": 1.1333333333333333,
+          "nativeWristSeparation": 0.47030533693570686,
+          "nativePalmLandmarkSeparation": 0.5017563170833048,
+          "nativeHandSurfaceNearest": 0.41952173799052817,
+          "sourceWristSeparation": 0.46337017325036417,
+          "sourcePalmLandmarkSeparation": 0.47304942247037357
+        },
+        {
+          "time": 1.1666666666666667,
+          "nativeWristSeparation": 0.47682411904577415,
+          "nativePalmLandmarkSeparation": 0.508403635562083,
+          "nativeHandSurfaceNearest": 0.4262399577573829,
+          "sourceWristSeparation": 0.4706622233544867,
+          "sourcePalmLandmarkSeparation": 0.48027683114481096
+        },
+        {
+          "time": 1.2,
+          "nativeWristSeparation": 0.48256385855004347,
+          "nativePalmLandmarkSeparation": 0.5141144636394355,
+          "nativeHandSurfaceNearest": 0.43184458139820103,
+          "sourceWristSeparation": 0.47689969777188557,
+          "sourcePalmLandmarkSeparation": 0.48638125247859065
+        },
+        {
+          "time": 1.2333333333333334,
+          "nativeWristSeparation": 0.4849283782172163,
+          "nativePalmLandmarkSeparation": 0.5165160696407011,
+          "nativeHandSurfaceNearest": 0.4340381938595971,
+          "sourceWristSeparation": 0.47932477554282,
+          "sourcePalmLandmarkSeparation": 0.4888269455350993
+        },
+        {
+          "time": 1.2666666666666666,
+          "nativeWristSeparation": 0.48151446184134417,
+          "nativePalmLandmarkSeparation": 0.5133703436033432,
+          "nativeHandSurfaceNearest": 0.43055558033310665,
+          "sourceWristSeparation": 0.475326782965467,
+          "sourcePalmLandmarkSeparation": 0.48517451564568204
+        },
+        {
+          "time": 1.3,
+          "nativeWristSeparation": 0.47059236703407487,
+          "nativePalmLandmarkSeparation": 0.503012082817328,
+          "nativeHandSurfaceNearest": 0.41951357896373975,
+          "sourceWristSeparation": 0.4629367470004984,
+          "sourcePalmLandmarkSeparation": 0.47348938025135273
+        },
+        {
+          "time": 1.3333333333333333,
+          "nativeWristSeparation": 0.45207953616870367,
+          "nativePalmLandmarkSeparation": 0.4852856929623598,
+          "nativeHandSurfaceNearest": 0.40060002640069203,
+          "sourceWristSeparation": 0.4420641317538811,
+          "sourcePalmLandmarkSeparation": 0.45355271563642624
+        },
+        {
+          "time": 1.3666666666666667,
+          "nativeWristSeparation": 0.43095331996888236,
+          "nativePalmLandmarkSeparation": 0.4649681262558486,
+          "nativeHandSurfaceNearest": 0.37875086838875066,
+          "sourceWristSeparation": 0.41830638998371894,
+          "sourcePalmLandmarkSeparation": 0.4306734298153335
+        },
+        {
+          "time": 1.4,
+          "nativeWristSeparation": 0.41784334549537955,
+          "nativePalmLandmarkSeparation": 0.4526263576514645,
+          "nativeHandSurfaceNearest": 0.3649580764958554,
+          "sourceWristSeparation": 0.40346916871212696,
+          "sourcePalmLandmarkSeparation": 0.4164006827121998
+        },
+        {
+          "time": 1.4333333333333333,
+          "nativeWristSeparation": 0.4209448075240051,
+          "nativePalmLandmarkSeparation": 0.4565365591781139,
+          "nativeHandSurfaceNearest": 0.3678541454684891,
+          "sourceWristSeparation": 0.4067961164823853,
+          "sourcePalmLandmarkSeparation": 0.4199290847810122
+        },
+        {
+          "time": 1.4666666666666666,
+          "nativeWristSeparation": 0.44052752772982817,
+          "nativePalmLandmarkSeparation": 0.47678004978387317,
+          "nativeHandSurfaceNearest": 0.3877453059528854,
+          "sourceWristSeparation": 0.4290112423876548,
+          "sourcePalmLandmarkSeparation": 0.44192607960266245
+        },
+        {
+          "time": 1.5,
+          "nativeWristSeparation": 0.47184163509813526,
+          "nativePalmLandmarkSeparation": 0.5081954376841864,
+          "nativeHandSurfaceNearest": 0.41946863810327056,
+          "sourceWristSeparation": 0.4650048047982465,
+          "sourcePalmLandmarkSeparation": 0.47703030822513376
+        },
+        {
+          "time": 1.5333333333333334,
+          "nativeWristSeparation": 0.5094101214466775,
+          "nativePalmLandmarkSeparation": 0.5445004150737328,
+          "nativeHandSurfaceNearest": 0.4568653787790962,
+          "sourceWristSeparation": 0.5086461722629462,
+          "sourcePalmLandmarkSeparation": 0.5185328812565846
+        },
+        {
+          "time": 1.5666666666666667,
+          "nativeWristSeparation": 0.5504623258464457,
+          "nativePalmLandmarkSeparation": 0.5822432026217071,
+          "nativeHandSurfaceNearest": 0.4972519847044674,
+          "sourceWristSeparation": 0.5567764561868608,
+          "sourcePalmLandmarkSeparation": 0.5629783427820211
+        },
+        {
+          "time": 1.6,
+          "nativeWristSeparation": 0.589989059114821,
+          "nativePalmLandmarkSeparation": 0.617533480867979,
+          "nativeHandSurfaceNearest": 0.5325141415228342,
+          "sourceWristSeparation": 0.603320041019372,
+          "sourcePalmLandmarkSeparation": 0.6053644218541544
+        },
+        {
+          "time": 1.6333333333333333,
+          "nativeWristSeparation": 0.6203096076549466,
+          "nativePalmLandmarkSeparation": 0.6443620010881124,
+          "nativeHandSurfaceNearest": 0.5498814291243179,
+          "sourceWristSeparation": 0.6391893217368734,
+          "sourcePalmLandmarkSeparation": 0.6376627875676231
+        },
+        {
+          "time": 1.6666666666666667,
+          "nativeWristSeparation": 0.6391717730708226,
+          "nativePalmLandmarkSeparation": 0.6603110924801773,
+          "nativeHandSurfaceNearest": 0.5576981660196715,
+          "sourceWristSeparation": 0.6615754645151185,
+          "sourcePalmLandmarkSeparation": 0.6569300401815125
+        },
+        {
+          "time": 1.7,
+          "nativeWristSeparation": 0.6499327800870967,
+          "nativePalmLandmarkSeparation": 0.6680639287771639,
+          "nativeHandSurfaceNearest": 0.5585562634504061,
+          "sourceWristSeparation": 0.6742171377377525,
+          "sourcePalmLandmarkSeparation": 0.6666999453267204
+        },
+        {
+          "time": 1.7333333333333334,
+          "nativeWristSeparation": 0.6567819781248495,
+          "nativePalmLandmarkSeparation": 0.6718879693572528,
+          "nativeHandSurfaceNearest": 0.5564603359210062,
+          "sourceWristSeparation": 0.6821159113722571,
+          "sourcePalmLandmarkSeparation": 0.671954717268271
+        },
+        {
+          "time": 1.7666666666666666,
+          "nativeWristSeparation": 0.6621538026873595,
+          "nativePalmLandmarkSeparation": 0.6743239862000803,
+          "nativeHandSurfaceNearest": 0.5536062278612942,
+          "sourceWristSeparation": 0.6881924618455787,
+          "sourcePalmLandmarkSeparation": 0.6753968911193492
+        },
+        {
+          "time": 1.8,
+          "nativeWristSeparation": 0.6670252824896963,
+          "nativePalmLandmarkSeparation": 0.6761661982539283,
+          "nativeHandSurfaceNearest": 0.5509433893857981,
+          "sourceWristSeparation": 0.6934608303727712,
+          "sourcePalmLandmarkSeparation": 0.6778186424387771
+        },
+        {
+          "time": 1.8333333333333333,
+          "nativeWristSeparation": 0.6723109993461353,
+          "nativePalmLandmarkSeparation": 0.6781222791493982,
+          "nativeHandSurfaceNearest": 0.549256771033722,
+          "sourceWristSeparation": 0.6988113699905482,
+          "sourcePalmLandmarkSeparation": 0.6800954696796174
+        },
+        {
+          "time": 1.8666666666666667,
+          "nativeWristSeparation": 0.6789462458527887,
+          "nativePalmLandmarkSeparation": 0.6808150979816802,
+          "nativeHandSurfaceNearest": 0.5491006052886663,
+          "sourceWristSeparation": 0.7051581245251661,
+          "sourcePalmLandmarkSeparation": 0.6830696159322129
+        },
+        {
+          "time": 1.9,
+          "nativeWristSeparation": 0.6871381440257539,
+          "nativePalmLandmarkSeparation": 0.6853183293434509,
+          "nativeHandSurfaceNearest": 0.5519020241555191,
+          "sourceWristSeparation": 0.7129671085290709,
+          "sourcePalmLandmarkSeparation": 0.687975731177648
+        },
+        {
+          "time": 1.9333333333333333,
+          "nativeWristSeparation": 0.6965075002517243,
+          "nativePalmLandmarkSeparation": 0.6934854153725267,
+          "nativeHandSurfaceNearest": 0.5585992905147875,
+          "sourceWristSeparation": 0.7224913970355836,
+          "sourcePalmLandmarkSeparation": 0.6966778411046611
+        },
+        {
+          "time": 1.9666666666666666,
+          "nativeWristSeparation": 0.7050554013353793,
+          "nativePalmLandmarkSeparation": 0.7040622909973073,
+          "nativeHandSurfaceNearest": 0.5720336369832244,
+          "sourceWristSeparation": 0.7318864301398084,
+          "sourcePalmLandmarkSeparation": 0.7074627026155412
+        },
+        {
+          "time": 2,
+          "nativeWristSeparation": 0.7097256604490908,
+          "nativePalmLandmarkSeparation": 0.7116139308266219,
+          "nativeHandSurfaceNearest": 0.5817648845753584,
+          "sourceWristSeparation": 0.737491949028303,
+          "sourcePalmLandmarkSeparation": 0.7145786738737303
+        },
+        {
+          "time": 2.033333333333333,
+          "nativeWristSeparation": 0.7090466891804657,
+          "nativePalmLandmarkSeparation": 0.7119656344717841,
+          "nativeHandSurfaceNearest": 0.5806599011564987,
+          "sourceWristSeparation": 0.7373252993938197,
+          "sourcePalmLandmarkSeparation": 0.7145070280962008
+        },
+        {
+          "time": 2.066666666666667,
+          "nativeWristSeparation": 0.7033703534224334,
+          "nativePalmLandmarkSeparation": 0.7058279774228391,
+          "nativeHandSurfaceNearest": 0.5727458753517324,
+          "sourceWristSeparation": 0.731672434908998,
+          "sourcePalmLandmarkSeparation": 0.7084840322772017
+        },
+        {
+          "time": 2.1,
+          "nativeWristSeparation": 0.693189936453199,
+          "nativePalmLandmarkSeparation": 0.6957252896518734,
+          "nativeHandSurfaceNearest": 0.5650823679085734,
+          "sourceWristSeparation": 0.7208878816597847,
+          "sourcePalmLandmarkSeparation": 0.6985708436689027
+        },
+        {
+          "time": 2.1333333333333333,
+          "nativeWristSeparation": 0.6780098431323528,
+          "nativePalmLandmarkSeparation": 0.6833416139355892,
+          "nativeHandSurfaceNearest": 0.5631671989379293,
+          "sourceWristSeparation": 0.7039686145902967,
+          "sourcePalmLandmarkSeparation": 0.6851916739790418
+        },
+        {
+          "time": 2.1666666666666665,
+          "nativeWristSeparation": 0.6574744513380368,
+          "nativePalmLandmarkSeparation": 0.6687365006651703,
+          "nativeHandSurfaceNearest": 0.5656754754807657,
+          "sourceWristSeparation": 0.6801969006509995,
+          "sourcePalmLandmarkSeparation": 0.6673235203318397
+        },
+        {
+          "time": 2.2,
+          "nativeWristSeparation": 0.6334166346904729,
+          "nativePalmLandmarkSeparation": 0.651539152350607,
+          "nativeHandSurfaceNearest": 0.5634066437393693,
+          "sourceWristSeparation": 0.6518296661149033,
+          "sourcePalmLandmarkSeparation": 0.6450756719687967
+        },
+        {
+          "time": 2.2333333333333334,
+          "nativeWristSeparation": 0.6076730380678708,
+          "nativePalmLandmarkSeparation": 0.6322381258705929,
+          "nativeHandSurfaceNearest": 0.5521597872885319,
+          "sourceWristSeparation": 0.6214463432359749,
+          "sourcePalmLandmarkSeparation": 0.6200695443627059
+        },
+        {
+          "time": 2.2666666666666666,
+          "nativeWristSeparation": 0.5817675775371858,
+          "nativePalmLandmarkSeparation": 0.6119766537147984,
+          "nativeHandSurfaceNearest": 0.5339315110570055,
+          "sourceWristSeparation": 0.5912744812315371,
+          "sourcePalmLandmarkSeparation": 0.594512352406265
+        },
+        {
+          "time": 2.3,
+          "nativeWristSeparation": 0.5592052881211371,
+          "nativePalmLandmarkSeparation": 0.5939499311600234,
+          "nativeHandSurfaceNearest": 0.515967941781965,
+          "sourceWristSeparation": 0.565537159810528,
+          "sourcePalmLandmarkSeparation": 0.5725356174390793
+        },
+        {
+          "time": 2.3333333333333335,
+          "nativeWristSeparation": 0.5437645569196834,
+          "nativePalmLandmarkSeparation": 0.5820044194361521,
+          "nativeHandSurfaceNearest": 0.503674351889384,
+          "sourceWristSeparation": 0.5483457102243576,
+          "sourcePalmLandmarkSeparation": 0.5582498594991712
+        },
+        {
+          "time": 2.3666666666666667,
+          "nativeWristSeparation": 0.5371007101923765,
+          "nativePalmLandmarkSeparation": 0.5779450665208616,
+          "nativeHandSurfaceNearest": 0.4988828041088728,
+          "sourceWristSeparation": 0.5412948245513118,
+          "sourcePalmLandmarkSeparation": 0.5533488824805219
+        },
+        {
+          "time": 2.4,
+          "nativeWristSeparation": 0.5373706948373653,
+          "nativePalmLandmarkSeparation": 0.5801579117956464,
+          "nativeHandSurfaceNearest": 0.5003258609795469,
+          "sourceWristSeparation": 0.5421776416603129,
+          "sourcePalmLandmarkSeparation": 0.5559023726078877
+        },
+        {
+          "time": 2.433333333333333,
+          "nativeWristSeparation": 0.5413489459558631,
+          "nativePalmLandmarkSeparation": 0.5857139044647601,
+          "nativeHandSurfaceNearest": 0.5053150391666589,
+          "sourceWristSeparation": 0.5473279847502185,
+          "sourcePalmLandmarkSeparation": 0.562482355779413
+        },
+        {
+          "time": 2.466666666666667,
+          "nativeWristSeparation": 0.5464925485563745,
+          "nativePalmLandmarkSeparation": 0.59224404089004,
+          "nativeHandSurfaceNearest": 0.5115190229773984,
+          "sourceWristSeparation": 0.553755131938244,
+          "sourcePalmLandmarkSeparation": 0.5701581863933664
+        },
+        {
+          "time": 2.5,
+          "nativeWristSeparation": 0.5510987214763396,
+          "nativePalmLandmarkSeparation": 0.5980370313945106,
+          "nativeHandSurfaceNearest": 0.5172233064870997,
+          "sourceWristSeparation": 0.559314272884705,
+          "sourcePalmLandmarkSeparation": 0.576747828958307
+        },
+        {
+          "time": 2.533333333333333,
+          "nativeWristSeparation": 0.5542278351744981,
+          "nativePalmLandmarkSeparation": 0.6022969530660293,
+          "nativeHandSurfaceNearest": 0.5210934771431674,
+          "sourceWristSeparation": 0.5629372731156811,
+          "sourcePalmLandmarkSeparation": 0.5813410905747877
+        },
+        {
+          "time": 2.566666666666667,
+          "nativeWristSeparation": 0.5557178059808436,
+          "nativePalmLandmarkSeparation": 0.6049596578100944,
+          "nativeHandSurfaceNearest": 0.5232157408478639,
+          "sourceWristSeparation": 0.5646644169054305,
+          "sourcePalmLandmarkSeparation": 0.58408872187833
+        },
+        {
+          "time": 2.6,
+          "nativeWristSeparation": 0.5562417882570766,
+          "nativePalmLandmarkSeparation": 0.6065540846566155,
+          "nativeHandSurfaceNearest": 0.5242042197557327,
+          "sourceWristSeparation": 0.5654148533393905,
+          "sourcePalmLandmarkSeparation": 0.5857775342440908
+        },
+        {
+          "time": 2.6333333333333333,
+          "nativeWristSeparation": 0.5568455952452674,
+          "nativePalmLandmarkSeparation": 0.6079422984430051,
+          "nativeHandSurfaceNearest": 0.5250803205027835,
+          "sourceWristSeparation": 0.5663398929333282,
+          "sourcePalmLandmarkSeparation": 0.5873885576084806
+        },
+        {
+          "time": 2.6666666666666665,
+          "nativeWristSeparation": 0.5577702578341719,
+          "nativePalmLandmarkSeparation": 0.6092960333588582,
+          "nativeHandSurfaceNearest": 0.5260829132721612,
+          "sourceWristSeparation": 0.5676894525010668,
+          "sourcePalmLandmarkSeparation": 0.589083845145589
+        },
+        {
+          "time": 2.7,
+          "nativeWristSeparation": 0.558909825850363,
+          "nativePalmLandmarkSeparation": 0.6106067304175402,
+          "nativeHandSurfaceNearest": 0.5271477858978196,
+          "sourceWristSeparation": 0.5693428134459931,
+          "sourcePalmLandmarkSeparation": 0.5908079408738417
+        },
+        {
+          "time": 2.7333333333333334,
+          "nativeWristSeparation": 0.5606270741250234,
+          "nativePalmLandmarkSeparation": 0.6123423439073583,
+          "nativeHandSurfaceNearest": 0.5287136571587286,
+          "sourceWristSeparation": 0.571585928723412,
+          "sourcePalmLandmarkSeparation": 0.5929607515960182
+        },
+        {
+          "time": 2.7666666666666666,
+          "nativeWristSeparation": 0.5636697971135078,
+          "nativePalmLandmarkSeparation": 0.6151874063311423,
+          "nativeHandSurfaceNearest": 0.531537701013324,
+          "sourceWristSeparation": 0.5750816103004822,
+          "sourcePalmLandmarkSeparation": 0.5961885254524036
+        },
+        {
+          "time": 2.8,
+          "nativeWristSeparation": 0.5691250570219459,
+          "nativePalmLandmarkSeparation": 0.6200336256045749,
+          "nativeHandSurfaceNearest": 0.5365884417407513,
+          "sourceWristSeparation": 0.5809016975402332,
+          "sourcePalmLandmarkSeparation": 0.6014050704677419
+        },
+        {
+          "time": 2.8333333333333335,
+          "nativeWristSeparation": 0.5771441997166054,
+          "nativePalmLandmarkSeparation": 0.6269544092193309,
+          "nativeHandSurfaceNearest": 0.5437927106201421,
+          "sourceWristSeparation": 0.5892339895315714,
+          "sourcePalmLandmarkSeparation": 0.6087377172392285
+        },
+        {
+          "time": 2.8666666666666667,
+          "nativeWristSeparation": 0.5861071820783619,
+          "nativePalmLandmarkSeparation": 0.6346440601197666,
+          "nativeHandSurfaceNearest": 0.5510816466662841,
+          "sourceWristSeparation": 0.59853011204109,
+          "sourcePalmLandmarkSeparation": 0.6169686787843227
+        },
+        {
+          "time": 2.9,
+          "nativeWristSeparation": 0.5941534422529149,
+          "nativePalmLandmarkSeparation": 0.6415937671847725,
+          "nativeHandSurfaceNearest": 0.5576413701144259,
+          "sourceWristSeparation": 0.6069118257225821,
+          "sourcePalmLandmarkSeparation": 0.6245511381073322
+        },
+        {
+          "time": 2.933333333333333,
+          "nativeWristSeparation": 0.6003943324838783,
+          "nativePalmLandmarkSeparation": 0.6471706373937841,
+          "nativeHandSurfaceNearest": 0.5628875405312422,
+          "sourceWristSeparation": 0.6134319391276,
+          "sourcePalmLandmarkSeparation": 0.6307122234780262
+        },
+        {
+          "time": 2.966666666666667,
+          "nativeWristSeparation": 0.6042354990129678,
+          "nativePalmLandmarkSeparation": 0.6510706556374745,
+          "nativeHandSurfaceNearest": 0.5665773854024946,
+          "sourceWristSeparation": 0.6174153841014212,
+          "sourcePalmLandmarkSeparation": 0.6349788282006256
+        },
+        {
+          "time": 3,
+          "nativeWristSeparation": 0.6045581881201638,
+          "nativePalmLandmarkSeparation": 0.6523017567892575,
+          "nativeHandSurfaceNearest": 0.5678455372861062,
+          "sourceWristSeparation": 0.617543265514489,
+          "sourcePalmLandmarkSeparation": 0.6360992276319465
+        },
+        {
+          "time": 3.033333333333333,
+          "nativeWristSeparation": 0.6006400081971359,
+          "nativePalmLandmarkSeparation": 0.6500705516882707,
+          "nativeHandSurfaceNearest": 0.5659969772085217,
+          "sourceWristSeparation": 0.612926752635226,
+          "sourcePalmLandmarkSeparation": 0.633121326814913
+        },
+        {
+          "time": 3.066666666666667,
+          "nativeWristSeparation": 0.5926814056941008,
+          "nativePalmLandmarkSeparation": 0.6443815981316343,
+          "nativeHandSurfaceNearest": 0.5598342811514521,
+          "sourceWristSeparation": 0.6037834771282391,
+          "sourcePalmLandmarkSeparation": 0.6261796376520193
+        },
+        {
+          "time": 3.1,
+          "nativeWristSeparation": 0.5810858114461522,
+          "nativePalmLandmarkSeparation": 0.6353973764229387,
+          "nativeHandSurfaceNearest": 0.5495599442824861,
+          "sourceWristSeparation": 0.5905799395789432,
+          "sourcePalmLandmarkSeparation": 0.6156279248044013
+        },
+        {
+          "time": 3.1333333333333333,
+          "nativeWristSeparation": 0.5658577980663934,
+          "nativePalmLandmarkSeparation": 0.6227904053248379,
+          "nativeHandSurfaceNearest": 0.5345574557187054,
+          "sourceWristSeparation": 0.5732095062858645,
+          "sourcePalmLandmarkSeparation": 0.6010483165195484
+        },
+        {
+          "time": 3.1666666666666665,
+          "nativeWristSeparation": 0.5472007566267374,
+          "nativePalmLandmarkSeparation": 0.6063943950644084,
+          "nativeHandSurfaceNearest": 0.5155535182936432,
+          "sourceWristSeparation": 0.5517360399835821,
+          "sourcePalmLandmarkSeparation": 0.582047448356531
+        },
+        {
+          "time": 3.2,
+          "nativeWristSeparation": 0.5254786941543836,
+          "nativePalmLandmarkSeparation": 0.5865911679208368,
+          "nativeHandSurfaceNearest": 0.4928479299277205,
+          "sourceWristSeparation": 0.526600385134834,
+          "sourcePalmLandmarkSeparation": 0.5589527189303349
+        },
+        {
+          "time": 3.2333333333333334,
+          "nativeWristSeparation": 0.5010590476218463,
+          "nativePalmLandmarkSeparation": 0.5638242744310802,
+          "nativeHandSurfaceNearest": 0.46685626259491947,
+          "sourceWristSeparation": 0.49843304004401306,
+          "sourcePalmLandmarkSeparation": 0.532424907638498
+        },
+        {
+          "time": 3.2666666666666666,
+          "nativeWristSeparation": 0.4746380524400993,
+          "nativePalmLandmarkSeparation": 0.538605585693136,
+          "nativeHandSurfaceNearest": 0.4383315617272877,
+          "sourceWristSeparation": 0.4681327517701035,
+          "sourcePalmLandmarkSeparation": 0.5031988775869782
+        },
+        {
+          "time": 3.3,
+          "nativeWristSeparation": 0.4470626132931957,
+          "nativePalmLandmarkSeparation": 0.5116222588573253,
+          "nativeHandSurfaceNearest": 0.40820905920889516,
+          "sourceWristSeparation": 0.43667177479986846,
+          "sourcePalmLandmarkSeparation": 0.47214217418825716
+        },
+        {
+          "time": 3.3333333333333335,
+          "nativeWristSeparation": 0.4195161079387871,
+          "nativePalmLandmarkSeparation": 0.48392219136663267,
+          "nativeHandSurfaceNearest": 0.37779750978939375,
+          "sourceWristSeparation": 0.40544000509009204,
+          "sourcePalmLandmarkSeparation": 0.4406200785856949
+        },
+        {
+          "time": 3.3666666666666667,
+          "nativeWristSeparation": 0.3936650315697611,
+          "nativePalmLandmarkSeparation": 0.45709619893809467,
+          "nativeHandSurfaceNearest": 0.348904145070077,
+          "sourceWristSeparation": 0.37630357345530574,
+          "sourcePalmLandmarkSeparation": 0.4105330506485763
+        },
+        {
+          "time": 3.4,
+          "nativeWristSeparation": 0.37143838896900033,
+          "nativePalmLandmarkSeparation": 0.43308991700771576,
+          "nativeHandSurfaceNearest": 0.32361345585566365,
+          "sourceWristSeparation": 0.35136832267151397,
+          "sourcePalmLandmarkSeparation": 0.3840752794581853
+        },
+        {
+          "time": 3.433333333333333,
+          "nativeWristSeparation": 0.35376388630748723,
+          "nativePalmLandmarkSeparation": 0.4130978168457201,
+          "nativeHandSurfaceNearest": 0.30313805260263443,
+          "sourceWristSeparation": 0.33165167338379886,
+          "sourcePalmLandmarkSeparation": 0.3625065078745909
+        },
+        {
+          "time": 3.466666666666667,
+          "nativeWristSeparation": 0.3402326819981619,
+          "nativePalmLandmarkSeparation": 0.397282006787245,
+          "nativeHandSurfaceNearest": 0.28744716851469476,
+          "sourceWristSeparation": 0.31661260078571946,
+          "sourcePalmLandmarkSeparation": 0.3457917609960811
+        },
+        {
+          "time": 3.5,
+          "nativeWristSeparation": 0.33069671382331123,
+          "nativePalmLandmarkSeparation": 0.38579049477399746,
+          "nativeHandSurfaceNearest": 0.27642435351889816,
+          "sourceWristSeparation": 0.3059901844329716,
+          "sourcePalmLandmarkSeparation": 0.33391470197792295
+        },
+        {
+          "time": 3.533333333333333,
+          "nativeWristSeparation": 0.32552058984318183,
+          "nativePalmLandmarkSeparation": 0.3790040393624665,
+          "nativeHandSurfaceNearest": 0.2702334332765056,
+          "sourceWristSeparation": 0.3002212467708498,
+          "sourcePalmLandmarkSeparation": 0.3272627637960164
+        },
+        {
+          "time": 3.566666666666667,
+          "nativeWristSeparation": 0.32515270134613017,
+          "nativePalmLandmarkSeparation": 0.377444425022389,
+          "nativeHandSurfaceNearest": 0.26924498653216594,
+          "sourceWristSeparation": 0.2999016795108115,
+          "sourcePalmLandmarkSeparation": 0.3264153660989668
+        },
+        {
+          "time": 3.6,
+          "nativeWristSeparation": 0.33003448759212645,
+          "nativePalmLandmarkSeparation": 0.38165349484379735,
+          "nativeHandSurfaceNearest": 0.2739347840417196,
+          "sourceWristSeparation": 0.3055276735353347,
+          "sourcePalmLandmarkSeparation": 0.33191594736834895
+        },
+        {
+          "time": 3.6333333333333333,
+          "nativeWristSeparation": 0.33988070169938717,
+          "nativePalmLandmarkSeparation": 0.39124575408132606,
+          "nativeHandSurfaceNearest": 0.28392758275593855,
+          "sourceWristSeparation": 0.3167649010483978,
+          "sourcePalmLandmarkSeparation": 0.3433509366791554
+        },
+        {
+          "time": 3.6666666666666665,
+          "nativeWristSeparation": 0.3541710758569844,
+          "nativePalmLandmarkSeparation": 0.40558942602227666,
+          "nativeHandSurfaceNearest": 0.29862745452940404,
+          "sourceWristSeparation": 0.3330193288652163,
+          "sourcePalmLandmarkSeparation": 0.360051562221913
+        },
+        {
+          "time": 3.7,
+          "nativeWristSeparation": 0.37294161792392,
+          "nativePalmLandmarkSeparation": 0.4247990053196827,
+          "nativeHandSurfaceNearest": 0.31819555129470933,
+          "sourceWristSeparation": 0.3542941138556066,
+          "sourcePalmLandmarkSeparation": 0.3821024364847856
+        },
+        {
+          "time": 3.7333333333333334,
+          "nativeWristSeparation": 0.3954875938677881,
+          "nativePalmLandmarkSeparation": 0.4482736527151919,
+          "nativeHandSurfaceNearest": 0.34209261084052495,
+          "sourceWristSeparation": 0.3797742602474986,
+          "sourcePalmLandmarkSeparation": 0.40877191545807495
+        },
+        {
+          "time": 3.7666666666666666,
+          "nativeWristSeparation": 0.41986151342368133,
+          "nativePalmLandmarkSeparation": 0.47402138997574106,
+          "nativeHandSurfaceNearest": 0.3684229644466245,
+          "sourceWristSeparation": 0.40723412965460803,
+          "sourcePalmLandmarkSeparation": 0.43778716897733677
+        },
+        {
+          "time": 3.8,
+          "nativeWristSeparation": 0.4443337362757548,
+          "nativePalmLandmarkSeparation": 0.5001109694728144,
+          "nativeHandSurfaceNearest": 0.39537106696798646,
+          "sourceWristSeparation": 0.43466384780649925,
+          "sourcePalmLandmarkSeparation": 0.46698271908107036
+        },
+        {
+          "time": 3.8333333333333335,
+          "nativeWristSeparation": 0.4678369273442889,
+          "nativePalmLandmarkSeparation": 0.5251898662657887,
+          "nativeHandSurfaceNearest": 0.42167337054525644,
+          "sourceWristSeparation": 0.46078362490245606,
+          "sourcePalmLandmarkSeparation": 0.4948589969775854
+        },
+        {
+          "time": 3.8666666666666667,
+          "nativeWristSeparation": 0.49020488579232435,
+          "nativePalmLandmarkSeparation": 0.5487471633723353,
+          "nativeHandSurfaceNearest": 0.4468444582990728,
+          "sourceWristSeparation": 0.48537023983661404,
+          "sourcePalmLandmarkSeparation": 0.5208936232200001
+        },
+        {
+          "time": 3.9,
+          "nativeWristSeparation": 0.5112876111435105,
+          "nativePalmLandmarkSeparation": 0.5699346088270185,
+          "nativeHandSurfaceNearest": 0.4702085729906412,
+          "sourceWristSeparation": 0.5084411027918855,
+          "sourcePalmLandmarkSeparation": 0.5445981461492189
+        },
+        {
+          "time": 3.933333333333333,
+          "nativeWristSeparation": 0.5294172624666132,
+          "nativePalmLandmarkSeparation": 0.5867554243254255,
+          "nativeHandSurfaceNearest": 0.4898274489092021,
+          "sourceWristSeparation": 0.5284720849476154,
+          "sourcePalmLandmarkSeparation": 0.5642746585370672
+        },
+        {
+          "time": 3.966666666666667,
+          "nativeWristSeparation": 0.5414516340049128,
+          "nativePalmLandmarkSeparation": 0.5971601221560034,
+          "nativeHandSurfaceNearest": 0.5027943029246693,
+          "sourceWristSeparation": 0.5419847883884994,
+          "sourcePalmLandmarkSeparation": 0.5771104285257564
+        }
+      ]
+    },
+    {
+      "name": "Gathering_Applause",
+      "tracks": 132,
+      "duration": 2.9666666984558105,
+      "decodedTrackBytes": 205920,
+      "maxLowerPositionDifference": 2.5118774943019282e-8,
+      "maxLowerQuaternionAngle": 7.300048299977715e-8,
+      "minimumNativeSurface": {
+        "time": 1.3,
+        "nativeWristSeparation": 0.14013387292668608,
+        "nativePalmLandmarkSeparation": 0.12380207043574465,
+        "nativeHandSurfaceNearest": 0.0014821100126058099,
+        "sourceWristSeparation": 0.09566290950930997,
+        "sourcePalmLandmarkSeparation": 0.07698172905943985
+      },
+      "minimumSourceWrist": {
+        "time": 1.2333333333333334,
+        "nativeWristSeparation": 0.08735697949278899,
+        "nativePalmLandmarkSeparation": 0.09044644062700231,
+        "nativeHandSurfaceNearest": 0.003647548302262597,
+        "sourceWristSeparation": 0.033379135904623866,
+        "sourcePalmLandmarkSeparation": 0.02383062286975394
+      },
+      "minimumSourcePalm": {
+        "time": 1.2333333333333334,
+        "nativeWristSeparation": 0.08735697949278899,
+        "nativePalmLandmarkSeparation": 0.09044644062700231,
+        "nativeHandSurfaceNearest": 0.003647548302262597,
+        "sourceWristSeparation": 0.033379135904623866,
+        "sourcePalmLandmarkSeparation": 0.02383062286975394
+      },
+      "nearContactLocalMinima": [
+        {
+          "time": 0.4666666666666667,
+          "nativeWristSeparation": 0.08493249347914002,
+          "nativePalmLandmarkSeparation": 0.10316273043221418,
+          "nativeHandSurfaceNearest": 0.012727938247636773,
+          "sourceWristSeparation": 0.0361614508108066,
+          "sourcePalmLandmarkSeparation": 0.03075787146422004
+        },
+        {
+          "time": 0.7333333333333333,
+          "nativeWristSeparation": 0.08864842752040356,
+          "nativePalmLandmarkSeparation": 0.106645075357791,
+          "nativeHandSurfaceNearest": 0.009858519249535617,
+          "sourceWristSeparation": 0.038993726987047915,
+          "sourcePalmLandmarkSeparation": 0.03729440195748069
+        },
+        {
+          "time": 1,
+          "nativeWristSeparation": 0.08936046664366208,
+          "nativePalmLandmarkSeparation": 0.10100745944264446,
+          "nativeHandSurfaceNearest": 0.0026281373594960766,
+          "sourceWristSeparation": 0.03696350970820559,
+          "sourcePalmLandmarkSeparation": 0.031899138538797216
+        },
+        {
+          "time": 1.3,
+          "nativeWristSeparation": 0.14013387292668608,
+          "nativePalmLandmarkSeparation": 0.12380207043574465,
+          "nativeHandSurfaceNearest": 0.0014821100126058099,
+          "sourceWristSeparation": 0.09566290950930997,
+          "sourcePalmLandmarkSeparation": 0.07698172905943985
+        }
+      ],
+      "samples": [
+        {
+          "time": 0,
+          "nativeWristSeparation": 0.13299858724073418,
+          "nativePalmLandmarkSeparation": 0.1724820044877933,
+          "nativeHandSurfaceNearest": 0.07071672043310641,
+          "sourceWristSeparation": 0.07413101208171066,
+          "sourcePalmLandmarkSeparation": 0.0995225710820015
+        },
+        {
+          "time": 0.03333333333333333,
+          "nativeWristSeparation": 0.1341704963880275,
+          "nativePalmLandmarkSeparation": 0.17723367386967862,
+          "nativeHandSurfaceNearest": 0.0747936464370739,
+          "sourceWristSeparation": 0.0747275289098038,
+          "sourcePalmLandmarkSeparation": 0.10287646596074937
+        },
+        {
+          "time": 0.06666666666666667,
+          "nativeWristSeparation": 0.1301834837213956,
+          "nativePalmLandmarkSeparation": 0.1752495230574049,
+          "nativeHandSurfaceNearest": 0.07242846226659688,
+          "sourceWristSeparation": 0.07024666676686132,
+          "sourcePalmLandmarkSeparation": 0.09926915903718686
+        },
+        {
+          "time": 0.1,
+          "nativeWristSeparation": 0.11609909805622783,
+          "nativePalmLandmarkSeparation": 0.15732005051295408,
+          "nativeHandSurfaceNearest": 0.05443737725133715,
+          "sourceWristSeparation": 0.057077926302794076,
+          "sourcePalmLandmarkSeparation": 0.08042828653905083
+        },
+        {
+          "time": 0.13333333333333333,
+          "nativeWristSeparation": 0.09810114501173048,
+          "nativePalmLandmarkSeparation": 0.1296316213369015,
+          "nativeHandSurfaceNearest": 0.02972140875155788,
+          "sourceWristSeparation": 0.04347888081372436,
+          "sourcePalmLandmarkSeparation": 0.054072038495262466
+        },
+        {
+          "time": 0.16666666666666666,
+          "nativeWristSeparation": 0.08902608366271568,
+          "nativePalmLandmarkSeparation": 0.11092518619116014,
+          "nativeHandSurfaceNearest": 0.018687843915210434,
+          "sourceWristSeparation": 0.03826290362333234,
+          "sourcePalmLandmarkSeparation": 0.03859400018703454
+        },
+        {
+          "time": 0.2,
+          "nativeWristSeparation": 0.09360247418576169,
+          "nativePalmLandmarkSeparation": 0.11265162027264382,
+          "nativeHandSurfaceNearest": 0.017104169371865038,
+          "sourceWristSeparation": 0.039271031796900314,
+          "sourcePalmLandmarkSeparation": 0.04099258252802484
+        },
+        {
+          "time": 0.23333333333333334,
+          "nativeWristSeparation": 0.10728468581221973,
+          "nativePalmLandmarkSeparation": 0.13136000091205793,
+          "nativeHandSurfaceNearest": 0.03143387320173121,
+          "sourceWristSeparation": 0.047925921915603485,
+          "sourcePalmLandmarkSeparation": 0.05805076914547556
+        },
+        {
+          "time": 0.26666666666666666,
+          "nativeWristSeparation": 0.12217717009194612,
+          "nativePalmLandmarkSeparation": 0.15624381287284944,
+          "nativeHandSurfaceNearest": 0.05348833885165179,
+          "sourceWristSeparation": 0.06048047254429074,
+          "sourcePalmLandmarkSeparation": 0.08076284068563941
+        },
+        {
+          "time": 0.3,
+          "nativeWristSeparation": 0.1319907948948426,
+          "nativePalmLandmarkSeparation": 0.1753004092299774,
+          "nativeHandSurfaceNearest": 0.0720751580652489,
+          "sourceWristSeparation": 0.06961334095039505,
+          "sourcePalmLandmarkSeparation": 0.098371352169462
+        },
+        {
+          "time": 0.3333333333333333,
+          "nativeWristSeparation": 0.13145602101208767,
+          "nativePalmLandmarkSeparation": 0.17796913356345706,
+          "nativeHandSurfaceNearest": 0.07528759818575186,
+          "sourceWristSeparation": 0.06917022251190559,
+          "sourcePalmLandmarkSeparation": 0.10037989705346782
+        },
+        {
+          "time": 0.36666666666666664,
+          "nativeWristSeparation": 0.11776181201782095,
+          "nativePalmLandmarkSeparation": 0.16043126305528824,
+          "nativeHandSurfaceNearest": 0.057593205510295835,
+          "sourceWristSeparation": 0.056823873808467505,
+          "sourcePalmLandmarkSeparation": 0.08230353184692692
+        },
+        {
+          "time": 0.4,
+          "nativeWristSeparation": 0.09788544453344775,
+          "nativePalmLandmarkSeparation": 0.13111562773464452,
+          "nativeHandSurfaceNearest": 0.029430345612513186,
+          "sourceWristSeparation": 0.042176930942441876,
+          "sourcePalmLandmarkSeparation": 0.053730788260587706
+        },
+        {
+          "time": 0.43333333333333335,
+          "nativeWristSeparation": 0.08521101703921094,
+          "nativePalmLandmarkSeparation": 0.10820786065749126,
+          "nativeHandSurfaceNearest": 0.015241101534320858,
+          "sourceWristSeparation": 0.036341864959372264,
+          "sourcePalmLandmarkSeparation": 0.03380984604656811
+        },
+        {
+          "time": 0.4666666666666667,
+          "nativeWristSeparation": 0.08493249347914002,
+          "nativePalmLandmarkSeparation": 0.10316273043221418,
+          "nativeHandSurfaceNearest": 0.012727938247636773,
+          "sourceWristSeparation": 0.0361614508108066,
+          "sourcePalmLandmarkSeparation": 0.03075787146422004
+        },
+        {
+          "time": 0.5,
+          "nativeWristSeparation": 0.09452862442985983,
+          "nativePalmLandmarkSeparation": 0.11525755948503907,
+          "nativeHandSurfaceNearest": 0.020811436543377186,
+          "sourceWristSeparation": 0.04047839417961158,
+          "sourcePalmLandmarkSeparation": 0.04245701725685678
+        },
+        {
+          "time": 0.5333333333333333,
+          "nativeWristSeparation": 0.11028210345241732,
+          "nativePalmLandmarkSeparation": 0.13876998322569692,
+          "nativeHandSurfaceNearest": 0.03837048898457866,
+          "sourceWristSeparation": 0.051778687049489326,
+          "sourcePalmLandmarkSeparation": 0.06508346603763575
+        },
+        {
+          "time": 0.5666666666666667,
+          "nativeWristSeparation": 0.12706566442540923,
+          "nativePalmLandmarkSeparation": 0.16454941200087456,
+          "nativeHandSurfaceNearest": 0.06335723279490295,
+          "sourceWristSeparation": 0.06698794166503057,
+          "sourcePalmLandmarkSeparation": 0.09063038859630657
+        },
+        {
+          "time": 0.6,
+          "nativeWristSeparation": 0.13641461916338526,
+          "nativePalmLandmarkSeparation": 0.1786194408692877,
+          "nativeHandSurfaceNearest": 0.07946868741497935,
+          "sourceWristSeparation": 0.07659162757216387,
+          "sourcePalmLandmarkSeparation": 0.10536630109926702
+        },
+        {
+          "time": 0.6333333333333333,
+          "nativeWristSeparation": 0.13139762899105598,
+          "nativePalmLandmarkSeparation": 0.17218666626728904,
+          "nativeHandSurfaceNearest": 0.07381439986228165,
+          "sourceWristSeparation": 0.07299432928115071,
+          "sourcePalmLandmarkSeparation": 0.099499057307768
+        },
+        {
+          "time": 0.6666666666666666,
+          "nativeWristSeparation": 0.11437043906347673,
+          "nativePalmLandmarkSeparation": 0.1485780601951885,
+          "nativeHandSurfaceNearest": 0.04971750364576161,
+          "sourceWristSeparation": 0.058999534805251955,
+          "sourcePalmLandmarkSeparation": 0.07656556144307648
+        },
+        {
+          "time": 0.7,
+          "nativeWristSeparation": 0.09656866446839207,
+          "nativePalmLandmarkSeparation": 0.12141126218070969,
+          "nativeHandSurfaceNearest": 0.025476525703896857,
+          "sourceWristSeparation": 0.045334847189352566,
+          "sourcePalmLandmarkSeparation": 0.05104046644459557
+        },
+        {
+          "time": 0.7333333333333333,
+          "nativeWristSeparation": 0.08864842752040356,
+          "nativePalmLandmarkSeparation": 0.106645075357791,
+          "nativeHandSurfaceNearest": 0.009858519249535617,
+          "sourceWristSeparation": 0.038993726987047915,
+          "sourcePalmLandmarkSeparation": 0.03729440195748069
+        },
+        {
+          "time": 0.7666666666666667,
+          "nativeWristSeparation": 0.09311766034168573,
+          "nativePalmLandmarkSeparation": 0.1114073313475669,
+          "nativeHandSurfaceNearest": 0.0128108282507423,
+          "sourceWristSeparation": 0.040104724687738603,
+          "sourcePalmLandmarkSeparation": 0.04070568416779661
+        },
+        {
+          "time": 0.8,
+          "nativeWristSeparation": 0.10472622820775694,
+          "nativePalmLandmarkSeparation": 0.129903115441904,
+          "nativeHandSurfaceNearest": 0.03202801338461734,
+          "sourceWristSeparation": 0.04759185494950568,
+          "sourcePalmLandmarkSeparation": 0.05692109809392792
+        },
+        {
+          "time": 0.8333333333333334,
+          "nativeWristSeparation": 0.11420080085215842,
+          "nativePalmLandmarkSeparation": 0.14701406106890694,
+          "nativeHandSurfaceNearest": 0.046555844371860756,
+          "sourceWristSeparation": 0.055367917458486675,
+          "sourcePalmLandmarkSeparation": 0.07244372778991928
+        },
+        {
+          "time": 0.8666666666666667,
+          "nativeWristSeparation": 0.11289355612528008,
+          "nativePalmLandmarkSeparation": 0.14727704304032715,
+          "nativeHandSurfaceNearest": 0.047484325237494816,
+          "sourceWristSeparation": 0.054751145381439735,
+          "sourcePalmLandmarkSeparation": 0.07238094632243569
+        },
+        {
+          "time": 0.9,
+          "nativeWristSeparation": 0.10071830193460564,
+          "nativePalmLandmarkSeparation": 0.12942821814047076,
+          "nativeHandSurfaceNearest": 0.0320362003811684,
+          "sourceWristSeparation": 0.045761604357845834,
+          "sourcePalmLandmarkSeparation": 0.05547253398014826
+        },
+        {
+          "time": 0.9333333333333333,
+          "nativeWristSeparation": 0.08803008249703922,
+          "nativePalmLandmarkSeparation": 0.1072912877241325,
+          "nativeHandSurfaceNearest": 0.01641582481434514,
+          "sourceWristSeparation": 0.037645921223268694,
+          "sourcePalmLandmarkSeparation": 0.0357557282396915
+        },
+        {
+          "time": 0.9666666666666667,
+          "nativeWristSeparation": 0.08406091715291522,
+          "nativePalmLandmarkSeparation": 0.09611713970078392,
+          "nativeHandSurfaceNearest": 0.004375133679942287,
+          "sourceWristSeparation": 0.03505210171229454,
+          "sourcePalmLandmarkSeparation": 0.027086417978696924
+        },
+        {
+          "time": 1,
+          "nativeWristSeparation": 0.08936046664366208,
+          "nativePalmLandmarkSeparation": 0.10100745944264446,
+          "nativeHandSurfaceNearest": 0.0026281373594960766,
+          "sourceWristSeparation": 0.03696350970820559,
+          "sourcePalmLandmarkSeparation": 0.031899138538797216
+        },
+        {
+          "time": 1.0333333333333334,
+          "nativeWristSeparation": 0.09956041911988486,
+          "nativePalmLandmarkSeparation": 0.11818939633741148,
+          "nativeHandSurfaceNearest": 0.019046377449809908,
+          "sourceWristSeparation": 0.04305745425556761,
+          "sourcePalmLandmarkSeparation": 0.0468744339264277
+        },
+        {
+          "time": 1.0666666666666667,
+          "nativeWristSeparation": 0.10942913564034035,
+          "nativePalmLandmarkSeparation": 0.1394424339498623,
+          "nativeHandSurfaceNearest": 0.040136310108541726,
+          "sourceWristSeparation": 0.05057427292094202,
+          "sourcePalmLandmarkSeparation": 0.06541983712214273
+        },
+        {
+          "time": 1.1,
+          "nativeWristSeparation": 0.11407431082554728,
+          "nativePalmLandmarkSeparation": 0.1528799131032928,
+          "nativeHandSurfaceNearest": 0.05154743815159439,
+          "sourceWristSeparation": 0.05468798615746546,
+          "sourcePalmLandmarkSeparation": 0.07728580167610422
+        },
+        {
+          "time": 1.1333333333333333,
+          "nativeWristSeparation": 0.11023526472912372,
+          "nativePalmLandmarkSeparation": 0.14970163165442388,
+          "nativeHandSurfaceNearest": 0.048998214731141285,
+          "sourceWristSeparation": 0.05242808240965768,
+          "sourcePalmLandmarkSeparation": 0.07450539413216603
+        },
+        {
+          "time": 1.1666666666666667,
+          "nativeWristSeparation": 0.09860506607150532,
+          "nativePalmLandmarkSeparation": 0.13035402900800142,
+          "nativeHandSurfaceNearest": 0.031189992494273944,
+          "sourceWristSeparation": 0.04479060686682816,
+          "sourcePalmLandmarkSeparation": 0.057514439590256185
+        },
+        {
+          "time": 1.2,
+          "nativeWristSeparation": 0.08683493870507568,
+          "nativePalmLandmarkSeparation": 0.10471675296710911,
+          "nativeHandSurfaceNearest": 0.011061567268415413,
+          "sourceWristSeparation": 0.03608485299361728,
+          "sourcePalmLandmarkSeparation": 0.03533723959881146
+        },
+        {
+          "time": 1.2333333333333334,
+          "nativeWristSeparation": 0.08735697949278899,
+          "nativePalmLandmarkSeparation": 0.09044644062700231,
+          "nativeHandSurfaceNearest": 0.003647548302262597,
+          "sourceWristSeparation": 0.033379135904623866,
+          "sourcePalmLandmarkSeparation": 0.02383062286975394
+        },
+        {
+          "time": 1.2666666666666666,
+          "nativeWristSeparation": 0.10734733651361542,
+          "nativePalmLandmarkSeparation": 0.09912450143822002,
+          "nativeHandSurfaceNearest": 0.002618914933365264,
+          "sourceWristSeparation": 0.055261353984813834,
+          "sourcePalmLandmarkSeparation": 0.041763543741382476
+        },
+        {
+          "time": 1.3,
+          "nativeWristSeparation": 0.14013387292668608,
+          "nativePalmLandmarkSeparation": 0.12380207043574465,
+          "nativeHandSurfaceNearest": 0.0014821100126058099,
+          "sourceWristSeparation": 0.09566290950930997,
+          "sourcePalmLandmarkSeparation": 0.07698172905943985
+        },
+        {
+          "time": 1.3333333333333333,
+          "nativeWristSeparation": 0.1785000780737428,
+          "nativePalmLandmarkSeparation": 0.1565005517426223,
+          "nativeHandSurfaceNearest": 0.002392571839072319,
+          "sourceWristSeparation": 0.14195077863817232,
+          "sourcePalmLandmarkSeparation": 0.11841124027492014
+        },
+        {
+          "time": 1.3666666666666667,
+          "nativeWristSeparation": 0.22014627953430868,
+          "nativePalmLandmarkSeparation": 0.1949489435909754,
+          "nativeHandSurfaceNearest": 0.007434465578380733,
+          "sourceWristSeparation": 0.19109553911744528,
+          "sourcePalmLandmarkSeparation": 0.1642458954155439
+        },
+        {
+          "time": 1.4,
+          "nativeWristSeparation": 0.262671396264044,
+          "nativePalmLandmarkSeparation": 0.23703291447270897,
+          "nativeHandSurfaceNearest": 0.03913538721084882,
+          "sourceWristSeparation": 0.2407425157408909,
+          "sourcePalmLandmarkSeparation": 0.21280020962792756
+        },
+        {
+          "time": 1.4333333333333333,
+          "nativeWristSeparation": 0.3030830432279218,
+          "nativePalmLandmarkSeparation": 0.27983809590540226,
+          "nativeHandSurfaceNearest": 0.08264454839086444,
+          "sourceWristSeparation": 0.28781503504694883,
+          "sourcePalmLandmarkSeparation": 0.2612600655116334
+        },
+        {
+          "time": 1.4666666666666666,
+          "nativeWristSeparation": 0.33985269600573786,
+          "nativePalmLandmarkSeparation": 0.32156027881370125,
+          "nativeHandSurfaceNearest": 0.1340821502959179,
+          "sourceWristSeparation": 0.33066374902638423,
+          "sourcePalmLandmarkSeparation": 0.30776354146369433
+        },
+        {
+          "time": 1.5,
+          "nativeWristSeparation": 0.37156230604532053,
+          "nativePalmLandmarkSeparation": 0.3596465486991472,
+          "nativeHandSurfaceNearest": 0.18096086092968702,
+          "sourceWristSeparation": 0.36698769608198933,
+          "sourcePalmLandmarkSeparation": 0.34915815217575663
+        },
+        {
+          "time": 1.5333333333333334,
+          "nativeWristSeparation": 0.394757703116018,
+          "nativePalmLandmarkSeparation": 0.38880245574951044,
+          "nativeHandSurfaceNearest": 0.21543981191328876,
+          "sourceWristSeparation": 0.39150768801624136,
+          "sourcePalmLandmarkSeparation": 0.3788601553013304
+        },
+        {
+          "time": 1.5666666666666667,
+          "nativeWristSeparation": 0.40854321683338796,
+          "nativePalmLandmarkSeparation": 0.4067677668640693,
+          "nativeHandSurfaceNearest": 0.23893757047884612,
+          "sourceWristSeparation": 0.4029633101380688,
+          "sourcePalmLandmarkSeparation": 0.3946748018894726
+        },
+        {
+          "time": 1.6,
+          "nativeWristSeparation": 0.4161241868310006,
+          "nativePalmLandmarkSeparation": 0.41733384885542235,
+          "nativeHandSurfaceNearest": 0.25696707026421206,
+          "sourceWristSeparation": 0.4067008738358266,
+          "sourcePalmLandmarkSeparation": 0.4025155126538016
+        },
+        {
+          "time": 1.6333333333333333,
+          "nativeWristSeparation": 0.4205707253647317,
+          "nativePalmLandmarkSeparation": 0.42447856570541165,
+          "nativeHandSurfaceNearest": 0.2740022901411908,
+          "sourceWristSeparation": 0.4079201417798625,
+          "sourcePalmLandmarkSeparation": 0.4078793265537793
+        },
+        {
+          "time": 1.6666666666666667,
+          "nativeWristSeparation": 0.42296358589600225,
+          "nativePalmLandmarkSeparation": 0.42882584627110687,
+          "nativeHandSurfaceNearest": 0.286364403415866,
+          "sourceWristSeparation": 0.40830337712092396,
+          "sourcePalmLandmarkSeparation": 0.4112358922222764
+        },
+        {
+          "time": 1.7,
+          "nativeWristSeparation": 0.4223314115068902,
+          "nativePalmLandmarkSeparation": 0.4288390446125085,
+          "nativeHandSurfaceNearest": 0.28947919595874133,
+          "sourceWristSeparation": 0.4064341121088529,
+          "sourcePalmLandmarkSeparation": 0.41042119202915917
+        },
+        {
+          "time": 1.7333333333333334,
+          "nativeWristSeparation": 0.41675699886484374,
+          "nativePalmLandmarkSeparation": 0.42271279588024213,
+          "nativeHandSurfaceNearest": 0.2822825363631315,
+          "sourceWristSeparation": 0.39966507987708144,
+          "sourcePalmLandmarkSeparation": 0.4031424435513219
+        },
+        {
+          "time": 1.7666666666666666,
+          "nativeWristSeparation": 0.40533879304684556,
+          "nativePalmLandmarkSeparation": 0.41009754487071104,
+          "nativeHandSurfaceNearest": 0.26658429024830954,
+          "sourceWristSeparation": 0.3866678176489633,
+          "sourcePalmLandmarkSeparation": 0.38886597861603805
+        },
+        {
+          "time": 1.8,
+          "nativeWristSeparation": 0.38897568297454926,
+          "nativePalmLandmarkSeparation": 0.3924605150251373,
+          "nativeHandSurfaceNearest": 0.2456726794175123,
+          "sourceWristSeparation": 0.36831512199604516,
+          "sourcePalmLandmarkSeparation": 0.36917126188324584
+        },
+        {
+          "time": 1.8333333333333333,
+          "nativeWristSeparation": 0.37028313809632435,
+          "nativePalmLandmarkSeparation": 0.37297545958021555,
+          "nativeHandSurfaceNearest": 0.22421034165241724,
+          "sourceWristSeparation": 0.34733426392588485,
+          "sourcePalmLandmarkSeparation": 0.3474086500444005
+        },
+        {
+          "time": 1.8666666666666667,
+          "nativeWristSeparation": 0.3512666245139096,
+          "nativePalmLandmarkSeparation": 0.353995420645748,
+          "nativeHandSurfaceNearest": 0.20539799131819805,
+          "sourceWristSeparation": 0.32577656893313034,
+          "sourcePalmLandmarkSeparation": 0.326027557282695
+        },
+        {
+          "time": 1.9,
+          "nativeWristSeparation": 0.3326848878868483,
+          "nativePalmLandmarkSeparation": 0.3360260027901922,
+          "nativeHandSurfaceNearest": 0.18939272224415268,
+          "sourceWristSeparation": 0.3045310495367823,
+          "sourcePalmLandmarkSeparation": 0.30573345170717825
+        },
+        {
+          "time": 1.9333333333333333,
+          "nativeWristSeparation": 0.317608998342433,
+          "nativePalmLandmarkSeparation": 0.32135753592342364,
+          "nativeHandSurfaceNearest": 0.17712379859172564,
+          "sourceWristSeparation": 0.2874320747770346,
+          "sourcePalmLandmarkSeparation": 0.28964985433041346
+        },
+        {
+          "time": 1.9666666666666666,
+          "nativeWristSeparation": 0.31031613640051114,
+          "nativePalmLandmarkSeparation": 0.3135051316228393,
+          "nativeHandSurfaceNearest": 0.17021875848949522,
+          "sourceWristSeparation": 0.2797776902643578,
+          "sourcePalmLandmarkSeparation": 0.28223869532441115
+        },
+        {
+          "time": 2,
+          "nativeWristSeparation": 0.31249999269031054,
+          "nativePalmLandmarkSeparation": 0.314070116398125,
+          "nativeHandSurfaceNearest": 0.16909111031856405,
+          "sourceWristSeparation": 0.283615589140523,
+          "sourcePalmLandmarkSeparation": 0.28511231983729174
+        },
+        {
+          "time": 2.033333333333333,
+          "nativeWristSeparation": 0.32233650732587904,
+          "nativePalmLandmarkSeparation": 0.32191783787105355,
+          "nativeHandSurfaceNearest": 0.173148339689575,
+          "sourceWristSeparation": 0.29652312329665,
+          "sourcePalmLandmarkSeparation": 0.2961067965367005
+        },
+        {
+          "time": 2.066666666666667,
+          "nativeWristSeparation": 0.33596634915830514,
+          "nativePalmLandmarkSeparation": 0.33377493717482626,
+          "nativeHandSurfaceNearest": 0.17971407546380866,
+          "sourceWristSeparation": 0.31363775580329234,
+          "sourcePalmLandmarkSeparation": 0.3108273111482641
+        },
+        {
+          "time": 2.1,
+          "nativeWristSeparation": 0.3493689486520899,
+          "nativePalmLandmarkSeparation": 0.3458016371978554,
+          "nativeHandSurfaceNearest": 0.18578499415250838,
+          "sourceWristSeparation": 0.33010434639809283,
+          "sourcePalmLandmarkSeparation": 0.32480398583939946
+        },
+        {
+          "time": 2.1333333333333333,
+          "nativeWristSeparation": 0.35951945848987377,
+          "nativePalmLandmarkSeparation": 0.3552141427785104,
+          "nativeHandSurfaceNearest": 0.19099032046304132,
+          "sourceWristSeparation": 0.34228059580913434,
+          "sourcePalmLandmarkSeparation": 0.3349818973817038
+        },
+        {
+          "time": 2.1666666666666665,
+          "nativeWristSeparation": 0.36537082545160315,
+          "nativePalmLandmarkSeparation": 0.3611655045615432,
+          "nativeHandSurfaceNearest": 0.19530455714686382,
+          "sourceWristSeparation": 0.34888420968068234,
+          "sourcePalmLandmarkSeparation": 0.34068066880844505
+        },
+        {
+          "time": 2.2,
+          "nativeWristSeparation": 0.3677688370966232,
+          "nativePalmLandmarkSeparation": 0.3642428377835019,
+          "nativeHandSurfaceNearest": 0.19901289980427403,
+          "sourceWristSeparation": 0.3511239851775242,
+          "sourcePalmLandmarkSeparation": 0.3431052040053316
+        },
+        {
+          "time": 2.2333333333333334,
+          "nativeWristSeparation": 0.3679560631544242,
+          "nativePalmLandmarkSeparation": 0.3653585698386659,
+          "nativeHandSurfaceNearest": 0.20216749021843677,
+          "sourceWristSeparation": 0.35065510921994913,
+          "sourcePalmLandmarkSeparation": 0.3435397047763057
+        },
+        {
+          "time": 2.2666666666666666,
+          "nativeWristSeparation": 0.3671152945551331,
+          "nativePalmLandmarkSeparation": 0.36549967651902354,
+          "nativeHandSurfaceNearest": 0.20498687278394512,
+          "sourceWristSeparation": 0.34898619193754804,
+          "sourcePalmLandmarkSeparation": 0.34308923400641445
+        },
+        {
+          "time": 2.3,
+          "nativeWristSeparation": 0.3661256752775945,
+          "nativePalmLandmarkSeparation": 0.3652528400749373,
+          "nativeHandSurfaceNearest": 0.2068407083574402,
+          "sourceWristSeparation": 0.3473990859731308,
+          "sourcePalmLandmarkSeparation": 0.34247520893835787
+        },
+        {
+          "time": 2.3333333333333335,
+          "nativeWristSeparation": 0.36522025922783735,
+          "nativePalmLandmarkSeparation": 0.36457747601330154,
+          "nativeHandSurfaceNearest": 0.2061916607373703,
+          "sourceWristSeparation": 0.34642821092834775,
+          "sourcePalmLandmarkSeparation": 0.3417257902552386
+        },
+        {
+          "time": 2.3666666666666667,
+          "nativeWristSeparation": 0.36431702075107997,
+          "nativePalmLandmarkSeparation": 0.36340564569735684,
+          "nativeHandSurfaceNearest": 0.2029565489342388,
+          "sourceWristSeparation": 0.34598406203452986,
+          "sourcePalmLandmarkSeparation": 0.3406995477468236
+        },
+        {
+          "time": 2.4,
+          "nativeWristSeparation": 0.3627970690900577,
+          "nativePalmLandmarkSeparation": 0.3613257400399389,
+          "nativeHandSurfaceNearest": 0.19799153166999256,
+          "sourceWristSeparation": 0.3451124922891949,
+          "sourcePalmLandmarkSeparation": 0.33878470696415486
+        },
+        {
+          "time": 2.433333333333333,
+          "nativeWristSeparation": 0.3597158946839513,
+          "nativePalmLandmarkSeparation": 0.357569032837743,
+          "nativeHandSurfaceNearest": 0.19166524561933593,
+          "sourceWristSeparation": 0.34245197755988444,
+          "sourcePalmLandmarkSeparation": 0.33503876652154974
+        },
+        {
+          "time": 2.466666666666667,
+          "nativeWristSeparation": 0.3544095431292341,
+          "nativePalmLandmarkSeparation": 0.3514910200919454,
+          "nativeHandSurfaceNearest": 0.18346388572409741,
+          "sourceWristSeparation": 0.3371682780777813,
+          "sourcePalmLandmarkSeparation": 0.3287967634248154
+        },
+        {
+          "time": 2.5,
+          "nativeWristSeparation": 0.3471784516830971,
+          "nativePalmLandmarkSeparation": 0.34336098366695633,
+          "nativeHandSurfaceNearest": 0.17332102856553638,
+          "sourceWristSeparation": 0.32968654184213686,
+          "sourcePalmLandmarkSeparation": 0.3204419962230077
+        },
+        {
+          "time": 2.533333333333333,
+          "nativeWristSeparation": 0.33929084899132445,
+          "nativePalmLandmarkSeparation": 0.3345030494807648,
+          "nativeHandSurfaceNearest": 0.16249332689723262,
+          "sourceWristSeparation": 0.3214440218813783,
+          "sourcePalmLandmarkSeparation": 0.31139085321622656
+        },
+        {
+          "time": 2.566666666666667,
+          "nativeWristSeparation": 0.33203468617773796,
+          "nativePalmLandmarkSeparation": 0.32632860755126636,
+          "nativeHandSurfaceNearest": 0.15257828877992757,
+          "sourceWristSeparation": 0.31380646872587786,
+          "sourcePalmLandmarkSeparation": 0.3030563568316885
+        },
+        {
+          "time": 2.6,
+          "nativeWristSeparation": 0.32646435057059214,
+          "nativePalmLandmarkSeparation": 0.3200287731124203,
+          "nativeHandSurfaceNearest": 0.1449928181077204,
+          "sourceWristSeparation": 0.3079104254930581,
+          "sourcePalmLandmarkSeparation": 0.2966399458428821
+        },
+        {
+          "time": 2.6333333333333333,
+          "nativeWristSeparation": 0.32349137993469507,
+          "nativePalmLandmarkSeparation": 0.31663998955618783,
+          "nativeHandSurfaceNearest": 0.14092732282025547,
+          "sourceWristSeparation": 0.30475815722105976,
+          "sourcePalmLandmarkSeparation": 0.29320798238366347
+        },
+        {
+          "time": 2.6666666666666665,
+          "nativeWristSeparation": 0.32366411887628416,
+          "nativePalmLandmarkSeparation": 0.3167710149356474,
+          "nativeHandSurfaceNearest": 0.14103036580532788,
+          "sourceWristSeparation": 0.3049774612946593,
+          "sourcePalmLandmarkSeparation": 0.29341243144286966
+        },
+        {
+          "time": 2.7,
+          "nativeWristSeparation": 0.32653088507371764,
+          "nativePalmLandmarkSeparation": 0.3198783947773992,
+          "nativeHandSurfaceNearest": 0.14461592502067452,
+          "sourceWristSeparation": 0.3081013923145315,
+          "sourcePalmLandmarkSeparation": 0.2967170081909839
+        },
+        {
+          "time": 2.7333333333333334,
+          "nativeWristSeparation": 0.33095827598460015,
+          "nativePalmLandmarkSeparation": 0.32465816658876023,
+          "nativeHandSurfaceNearest": 0.1501196678759916,
+          "sourceWristSeparation": 0.3128902536165609,
+          "sourcePalmLandmarkSeparation": 0.3017676732712488
+        },
+        {
+          "time": 2.7666666666666666,
+          "nativeWristSeparation": 0.33584266442038474,
+          "nativePalmLandmarkSeparation": 0.32992483406293954,
+          "nativeHandSurfaceNearest": 0.1561942430600638,
+          "sourceWristSeparation": 0.3181630105918002,
+          "sourcePalmLandmarkSeparation": 0.3073261168250735
+        },
+        {
+          "time": 2.8,
+          "nativeWristSeparation": 0.3401682468143549,
+          "nativePalmLandmarkSeparation": 0.33464159937800403,
+          "nativeHandSurfaceNearest": 0.16173583611764686,
+          "sourceWristSeparation": 0.3228389433615144,
+          "sourcePalmLandmarkSeparation": 0.3122994910609809
+        },
+        {
+          "time": 2.8333333333333335,
+          "nativeWristSeparation": 0.343307315044038,
+          "nativePalmLandmarkSeparation": 0.338152479340294,
+          "nativeHandSurfaceNearest": 0.1660108180065762,
+          "sourceWristSeparation": 0.3262471583314077,
+          "sourcePalmLandmarkSeparation": 0.31599542894508637
+        },
+        {
+          "time": 2.8666666666666667,
+          "nativeWristSeparation": 0.34515418319942653,
+          "nativePalmLandmarkSeparation": 0.3402986617074716,
+          "nativeHandSurfaceNearest": 0.16876140461593828,
+          "sourceWristSeparation": 0.3282730598017059,
+          "sourcePalmLandmarkSeparation": 0.3182574844939971
+        },
+        {
+          "time": 2.9,
+          "nativeWristSeparation": 0.34611019115264874,
+          "nativePalmLandmarkSeparation": 0.3414537102504698,
+          "nativeHandSurfaceNearest": 0.17032510487400124,
+          "sourceWristSeparation": 0.3293398431963975,
+          "sourcePalmLandmarkSeparation": 0.3194871116873065
+        },
+        {
+          "time": 2.933333333333333,
+          "nativeWristSeparation": 0.34672893237134317,
+          "nativePalmLandmarkSeparation": 0.34220388025637805,
+          "nativeHandSurfaceNearest": 0.17136354168209755,
+          "sourceWristSeparation": 0.3300250326371162,
+          "sourcePalmLandmarkSeparation": 0.32028920597163313
+        },
+        {
+          "time": 2.966666666666667,
+          "nativeWristSeparation": 0.3470599658257988,
+          "nativePalmLandmarkSeparation": 0.3426094348256816,
+          "nativeHandSurfaceNearest": 0.17195681571840749,
+          "sourceWristSeparation": 0.33038416864908277,
+          "sourcePalmLandmarkSeparation": 0.3207271049673285
+        }
+      ]
+    }
+  ]
+}

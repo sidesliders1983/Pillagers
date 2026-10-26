@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "bodySourceSha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+  "bytes": 445676,
+  "sha256": "8fb9ff11a617d53064515f152cab184de2804a23eece4e5456edf66b92ae143f",
+  "conservativeDecodedTrackBytes": 480480,
+  "meshes": 0,
+  "textures": 0,
+  "skins": 0,
+  "clips": [
+    {
+      "name": "Storytelling_Gesture",
+      "frames": 120,
+      "duration": 3.966666666666667,
+      "channels": 132,
+      "lowerLocalPositionDeviation": 0,
+      "reviewTimes": [
+        "Native Idle",
+        "0.40s",
+        "1.20s",
+        "2.00s",
+        "3.77s"
+      ]
+    },
+    {
+      "name": "Gathering_Applause",
+      "frames": 90,
+      "duration": 2.966666666666667,
+      "channels": 132,
+      "lowerLocalPositionDeviation": 0,
+      "reviewTimes": [
+        "Native Idle",
+        "0.40s",
+        "1.20s",
+        "2.00s",
+        "2.77s"
+      ]
+    }
+  ],
+  "poseSource": "Real Meshy SMPL-H motion retargeted offline through Blender bone orientations; native Idle lower-body/root preserved.",
+  "visualStatus": "offline agent-reviewed upright body and stable native Idle legs; applause near-contact only",
+  "runtimeStatus": "not-integrated"
+}

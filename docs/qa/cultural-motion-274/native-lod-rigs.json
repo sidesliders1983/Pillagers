@@ -1,0 +1,26 @@
+{
+  "lods": [
+    {
+      "lod": 0,
+      "file": "public/game-assets/human/Human_LOD0.glb",
+      "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+      "rigHash": "258405cfce1884a45478fe89ca7ea8bfa56ede20548ebeaa53f2acbd65b722da",
+      "joints": 44
+    },
+    {
+      "lod": 1,
+      "file": "public/game-assets/human/Human_LOD1.glb",
+      "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+      "rigHash": "258405cfce1884a45478fe89ca7ea8bfa56ede20548ebeaa53f2acbd65b722da",
+      "joints": 44
+    },
+    {
+      "lod": 2,
+      "file": "public/game-assets/human/Human_LOD2.glb",
+      "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+      "rigHash": "258405cfce1884a45478fe89ca7ea8bfa56ede20548ebeaa53f2acbd65b722da",
+      "joints": 44
+    }
+  ],
+  "identicalRestHierarchy": true
+}

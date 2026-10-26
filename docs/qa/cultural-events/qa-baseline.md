@@ -140,3 +140,11 @@ reported unavailable. No substitute browser automation was installed or used.
 This audit claims no rendered scene, audio listening, mobile layout, iPhone/iPad
 memory, sustained frame rate or new-asset visual acceptance. Those remain
 explicit later gates rather than inferred passes from headless tests.
+
+## Subsequent owner decisions
+
+After this baseline audit, the owner accepted the 3-Food, 3–8-adult, two-assessment,
+25%-exposure-only coefficients as experimental values. This does not authorize ordinary
+default activation before calibration and review. TDD seam confirmation is still pending.
+The connected ElevenLabs Creative Flow route was subsequently verified to support SFX;
+the initial separate-key gate is withdrawn. No sound generation is claimed by this baseline.

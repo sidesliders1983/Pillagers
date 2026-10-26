@@ -1,8 +1,9 @@
 # Cultural gathering audio audit — #274
 
 Date: 2026-10-26. Audited source: `fb327996013b115bff985f7f87b7a69ff37eb24f`.
-Status: design and source audit only. No new audio has been generated, accepted,
-published or integrated by this audit; no runtime code or tests were changed.
+Status: source audit followed by one connected ElevenLabs generation trial. Eight
+cloud candidates completed; local delivery remains blocked by automatic approval
+review. No runtime code or tests were changed, and no media is accepted/published.
 
 ## Existing authority and constraints
 
@@ -98,24 +99,51 @@ Proposed audio-owned files, subject to interface confirmation:
 - Prepared public files only after the applicable acceptance and provenance gates
 - A minimal parent-coordinated `FjordScene.ts` integration
 
-## Credential, generation and evidence gate
+## Connected generation route and evidence gate
 
-The parent verified that the connected ElevenLabs tools do not offer SFX generation
-here and that the current browser route is unavailable. No local API credential was
-found in the inspected process/User/Machine environment or known project `.env`
-locations. The owner has already been asked to configure the ignored worktree
-`.env`; do not repeat that request or search unrelated credential stores.
+Correction recorded 2026-10-26: the connected ElevenLabs general creative-flow
+route supports SFX even though no tool name contains a sound-generation label.
+The earlier missing-SFX conclusion was incomplete. No local API key or browser
+route is needed for this trial; do not request or store a new key.
 
-After the parent confirms configuration, validate access using the local key without
-printing it. Keep keys out of source, browser state, VITE variables, argv and reports.
-Use the official endpoint and skill: `POST /v1/sound-generation`, documented at
-https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert.
-No purchases or unbounded rerolls. Record a fixed bounded generation plan and
-exclusive creation journal; uncertain outcomes must be reconciled before retrying.
+The current-turn model schema verified duration_seconds, prompt_influence and
+loop. The model guide favours short, concrete, single-source prompts, so the
+actual trial uses shorter wording than the initial design examples above.
 
-Retain model, prompt, parameters, returned request/generation IDs when available,
-actual reported credit usage, original/prepared hashes, durations/channel counts,
+One review flow was created: https://elevenlabs.io/app/flows/F7dgNnpBtAMHjzQAKgaW.
+It holds the 3-second murmur and 2-second applause nodes with four default variations
+each. The joint estimate was 220 credits; the eight successful starts reported
+66.66 credits in total, below the 1000 existing-credit cap. No purchases or rerolls.
+All eight generations subsequently completed successfully, with provider-reported
+3-second/2-second durations and 66.66 credits total. Listening, local byte
+inspection and acceptance remain unproven.
+
+The exclusive journal is scratch/cultural-audio-274/generation-journal.json and
+contains exact prompts, model, parameters, flow/node/session/generation handles.
+Uncertain outcomes must be reconciled from those handles, never started again.
+Signed media URLs remain transient and must not enter logs, receipts or source.
+
+Retain original/prepared hashes, durations/channel counts, actual credit usage,
 peak/clipping measurements, tool versions and source/license evidence. Separate
 technical preparation, listening acceptance and distribution clearance. Successful
-generation or a green automated test does not prove audible quality, commercial
+generation or a green automated check does not prove audible quality, commercial
 clearance, sustained physical-device performance or user acceptance.
+
+## Local delivery status
+
+The completed provider results are retained in audio-generation-receipt.json, with
+all eight exact flow/node/session/generation handles and no signed media URLs.
+Automatic approval review rejected passing the signed storage links into the
+local downloader as a credential-bearing transfer outside the managed proxy.
+No workaround was attempted; the owned waiting downloader was stopped without
+requesting any media. No local originals, prepared WAVs or runtime assets exist
+from this trial yet. The owner subsequently approved these exact eight downloads
+to D:/CodexSites/Pillagers/scratch/social-cultural-events-274/scratch/culture-audio/
+with transient signed links kept out of Git and logs. A fresh downloader on that
+exact path was still rejected before its first URL chunk was accepted: automatic
+review distinguishes that consent from permission to transfer the signed link
+into a terminal outside the managed network proxy. The downloader was stopped;
+no alternate interpreter, proxy, file or download route was attempted. The parent
+has the exact reviewer reason and is handling this narrower mechanism approval.
+Returned media URLs can later be refreshed from the retained handles without
+starting or paying for another generation.

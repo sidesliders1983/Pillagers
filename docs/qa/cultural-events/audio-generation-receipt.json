@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "date": "2026-10-26",
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "flowId": "F7dgNnpBtAMHjzQAKgaW",
+  "flowUrl": "https://elevenlabs.io/app/flows/F7dgNnpBtAMHjzQAKgaW",
+  "maximumCredits": 1000,
+  "estimate": {
+    "credits": 220.00000000000003,
+    "price_cents": 4,
+    "generations_count": 4,
+    "currency": "usd",
+    "estimated_runtime_seconds": 8
+  },
+  "generationsCount": 4,
+  "nodes": [
+    {
+      "label": "culture-murmur",
+      "nodeId": "qfjDHumxpirOxgpDOktR",
+      "parameters": {
+        "duration_seconds": 3,
+        "prompt_influence": 0.65,
+        "loop": false
+      },
+      "prompt": "Quiet nonverbal murmuring from three adults outdoors, soft low indistinct voices, dry close recording, no intelligible words, singing, music, fire, wind or room echo."
+    },
+    {
+      "label": "culture-applause",
+      "nodeId": "wczWWRY1WxcsQzQZybHC",
+      "parameters": {
+        "duration_seconds": 2,
+        "prompt_influence": 0.65,
+        "loop": false
+      },
+      "prompt": "A few soft hand claps from three adults outdoors, relaxed uneven timing, dry close recording, brief natural decay, no cheering, stadium crowd, voices, music, fire, wind or reverberation."
+    }
+  ],
+  "generations": [
+    {
+      "id": "5DFc6ujI70yGnu2Zqq1A",
+      "status": "completed",
+      "nodeId": "qfjDHumxpirOxgpDOktR",
+      "sessionId": "T01AQ2hEbDGxUGO0KtsC",
+      "label": "culture-murmur",
+      "reportedDurationSeconds": 3,
+      "model": "eleven_text_to_sound_v2",
+      "price": {
+        "credits": 9.999,
+        "price_cents": 0.18180000000000002,
+        "cost_fiat_currency": "usd"
+      }
+    },
+    {
+      "id": "Uba21h6cTZNVaO7eM8P5",
+      "status": "completed",
+      "nodeId": "qfjDHumxpirOxgpDOktR",
+      "sessionId": "oV1pijxU595ddPGy3mF7",
+      "label": "culture-murmur",
+      "reportedDurationSeconds": 3,
+      "model": "eleven_text_to_sound_v2",
+      "price": {
+        "credits": 9.999,
+        "price_cents": 0.18180000000000002,
+        "cost_fiat_currency": "usd"
+      }
+    },
+    {
+      "id": "Io96ioU24VNrMf00VlJU",
+      "status": "completed",
+      "nodeId": "qfjDHumxpirOxgpDOktR",
+      "sessionId": "An0OmT8Tr6idDJwKPgdd",
+      "label": "culture-murmur",
+      "reportedDurationSeconds": 3,
+      "model": "eleven_text_to_sound_v2",
+      "price": {
+        "credits": 9.999,
+        "price_cents": 0.18180000000000002,
+        "cost_fiat_currency": "usd"
+      }
+    },
+    {
+      "id": "QiAiwQcIu0r5oB2kJZHl",
+      "status": "completed",
+      "nodeId": "qfjDHumxpirOxgpDOktR",
+      "sessionId": "4lVJg0bZbZeeBCV41hn9",
+      "label": "culture-murmur",
+      "reportedDurationSeconds": 3,
+      "model": "eleven_text_to_sound_v2",
+      "price": {
+        "credits": 9.999,
+        "price_cents": 0.18180000000000002,
+        "cost_fiat_currency": "usd"
+      }
+    },
+    {
+      "id": "5wzWo0JLiRv62M3wBVzM",
+      "status": "completed",
+      "nodeId": "wczWWRY1WxcsQzQZybHC",
+      "sessionId": "CmbCmWmGE0r2OpJD0jMm",
+      "label": "culture-applause",
+      "reportedDurationSeconds": 2,
+      "model": "eleven_text_to_sound_v2",
+      "price": {
+        "credits": 6.666,
+        "price_cents": 0.1212,
+        "cost_fiat_currency": "usd"
+      }
+    },
+    {
+      "id": "6Dl8Uf3nWgC30YDyZRXn",
+      "status": "completed",
+      "nodeId": "wczWWRY1WxcsQzQZybHC",
+      "sessionId": "Eny9xptfDuA7PAIos9Wj",
+      "label": "culture-applause",
+      "reportedDurationSeconds": 2,
+      "model": "eleven_text_to_sound_v2",
+      "price": {
+        "credits": 6.666,
+        "price_cents": 0.1212,
+        "cost_fiat_currency": "usd"
+      }
+    },
+    {
+      "id": "Qn4x2YPY0UKuOLzGJFdq",
+      "status": "completed",
+      "nodeId": "wczWWRY1WxcsQzQZybHC",
+      "sessionId": "LHOG3C780kHzBrK6TUta",
+      "label": "culture-applause",
+      "reportedDurationSeconds": 2,
+      "model": "eleven_text_to_sound_v2",
+      "price": {
+        "credits": 6.666,
+        "price_cents": 0.1212,
+        "cost_fiat_currency": "usd"
+      }
+    },
+    {
+      "id": "SXIzsWrhcurElXoURZwW",
+      "status": "completed",
+      "nodeId": "wczWWRY1WxcsQzQZybHC",
+      "sessionId": "lmC6lTSXHsrAfcqRrmOS",
+      "label": "culture-applause",
+      "reportedDurationSeconds": 2,
+      "model": "eleven_text_to_sound_v2",
+      "price": {
+        "credits": 6.666,
+        "price_cents": 0.1212,
+        "cost_fiat_currency": "usd"
+      }
+    }
+  ],
+  "reportedCredits": 66.66,
+  "status": {
+    "generation": "completed",
+    "download": "blocked-by-automatic-approval-review",
+    "preparation": "not-run",
+    "listening": "not-assessed",
+    "distribution": "not-assessed"
+  },
+  "downloadBlocker": "Automatic review rejected transfer of signed media URLs to local downloader as a credential-bearing transfer outside managed network proxy; no workaround attempted.",
+  "licensingEvidence": [
+    "https://elevenlabs.io/creative-terms"
+  ],
+  "downloadAuthorization": {
+    "ownerReply": "Akkoord met deze downloads",
+    "approvedDirectory": "D:/CodexSites/Pillagers/scratch/social-cultural-events-274/scratch/culture-audio/",
+    "scope": "Eight just-generated FjordSide audio clips, transient signed links only in memory, never Git/logs."
+  },
+  "secondDownloadReview": {
+    "outcome": "rejected-before-first-url-chunk",
+    "reason": "The action sends a bearer-style signed storage URL to a terminal outside the managed network proxy; the user authorized downloading the audio files to D:, but not this credential-bearing transfer mechanism.",
+    "localOriginalsExist": false,
+    "preparedFilesExist": false,
+    "ownedDownloaderStopped": true
+  }
+}

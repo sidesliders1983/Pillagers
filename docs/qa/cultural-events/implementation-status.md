@@ -57,9 +57,10 @@ by this working record. Existing published stories and historical measurement re
 - Existing campfire light and snow warming/cooling follow actual fuel. Gathering presentation
   does not require another light or free ignition; the lighting role recommends preserving it.
 
-## Owner-review proposal — not approved balance
+## Owner-approved experimental prototype — not ordinary defaults
 
-The pending proposal is 3 Food, no Materials, 3–8 available adults, one prepared assessment
+The owner accepted these experimental values on 26 October 2026: 3 Food, no Materials,
+3–8 available adults, one prepared assessment
 per accepted gathering, at most two banked. Each qualifying settlement mortality assessment
 reduces only weather exposure by 25%, with an integer-floored reduction (50→38 and 200→150 bps).
 Consume one contribution only with real exposed at-home residents in Harsh/Severe weather;
@@ -72,7 +73,7 @@ proposal or a staged gathering does not prove gameplay value or enjoyment.
 ## Current gates and evidence
 
 - TDD public seams have been proposed to the owner; no new tests are written before confirmation.
-- Prototype coefficients have been proposed separately; no unreviewed ordinary default activation.
+- Prototype coefficients were explicitly accepted as experimental values; ordinary default activation still requires measured benefit and review.
 - Free authenticated Meshy balance/library reads succeeded. Two new prime motion tasks
   succeeded and their FBX outputs were downloaded and SHA-pinned (20 credits total).
   The exclusive journal is `scratch/culture-motion/journal.json`. The raw files include
@@ -81,9 +82,11 @@ proposal or a staged gathering does not prove gameplay value or enjoyment.
 - Existing mortality/weather/personality/resident-social baseline suites passed: 45 tests,
   zero failures or skips. Raw evidence: `scratch/culture-qa/baseline-tests.txt`. These
   baseline tests do not establish the new cultural mechanic.
-- ElevenLabs SFX API configuration is pending. The connected tool set exposes no SFX generator;
-  CUA returned no browser and creation of an in-app browser returned unavailable. Never substitute
-  synthetic audio or another provider while claiming ElevenLabs generation.
+- ElevenLabs SFX is available through the connected Creative Flow tools (verified after the
+  owner selected the plugin). The initial name-based assumption that no SFX generator existed
+  was incorrect. Model discovery confirms `eleven_text_to_sound_v2` with node type `sfx`.
+  No separate API key is needed. Audio generation uses this connection and real receipts.
+  CUA returned no browser; this no longer blocks provider generation.
 - `.env` and `.env.elevenlabs.local` are ignored locally before credential setup. No secret is
   stored in this document, client code, public assets, URLs or command arguments.
 - Browser/device rendering, listening, sustained performance and physical iPhone acceptance
