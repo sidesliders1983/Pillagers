@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FjordSide · Wedding and communal ceremony review</title>
+<style>
+body { margin: 0; background: #172b27; color: #eee6d2; font: 16px/1.6 system-ui; }
+main { max-width: 850px; margin: auto; padding: 24px; }
+a { color: #ebcb7e; }
+section { margin: 28px 0; border-top: 1px solid #708174; padding-top: 14px; }
+.launch { display: inline-block; padding: 12px 18px; border: 1px solid #ebcb7e; border-radius: 6px; }
+li { margin: 10px 0; }
+small { color: #bfc9bb; }
+</style>
+<main>
+<h1>Wedding celebrations and communal ceremonies</h1>
+<p>Optional new occasions for the existing campfire gathering prototype. Each costs 3 Food
+and earns the same single prepared weather assessment. The culture section remains below
+the campfire lighting controls.</p>
+<p><a class="launch" href="/fjord-play?culture=1&amp;debugPerf=1" target="_blank" rel="noopener">Open prototype game</a></p>
+<section>
+<h2>Try a real wedding</h2>
+<p><a class="launch" href="review-wedding-campaign.json" download="fjordside-wedding-review.json">Download wedding review campaign</a></p>
+<ol>
+<li>Open the game, then use <strong>Menu → Import campaign</strong> to select the downloaded file.
+Export your current campaign first if you want to keep it.</li>
+<li>The paused campaign has a genuine new partnership between <strong>Thorrik Hakonarson and
+Leofhild</strong>, with 4 Food remaining. Ordinary rules and real farming commands produced
+this save; it contains no extra Food, forced partnership or previous gathering.</li>
+<li>Select the campfire. Under <strong>Occasion</strong>, choose <strong>Wedding celebration</strong>,
+then the couple. <strong>Read partnership record</strong> should show their real source.</li>
+<li>Choose <strong>Support gathering</strong>, check both names and the 3 Food quote, then try
+<strong>Not now</strong>. The partnership and Food must remain unchanged.</li>
+<li>Review again and choose <strong>Sponsor · 3 Food</strong>. Food becomes 1. The relationship
+keeps its original date; this source cannot be celebrated a second time.</li>
+<li>Enable sound and run the clock with the campfire visible. Both partners must actually
+arrive with at least one guest before the short presentation starts. Pausing freezes it.
+Long or unavailable routes may skip decoration; they never create or undo the paid Core event.</li>
+<li>Use <strong>Read last gathering</strong> to see both partners and actual guests. Reloading must
+preserve the record without replaying the payment or performance.</li>
+</ol>
+<p>A wedding is optional during the first game year after a new partnership. Founding couples
+are excluded. Missing the celebration window never ends the partnership.</p>
+</section>
+<section>
+<h2>Try the communal ceremony</h2>
+<p>Reimport the same untouched review file, or start a new prototype campaign. Select the
+campfire → <strong>Occasion → Communal ceremony</strong>. Review, decline and sponsor through
+the same 3 Food flow. It needs no wedding or invented religion. It adds no faith stock,
+fertility benefit, weather reroll or separate bonus.</p>
+<p>Test the native selectors and buttons on a narrow screen, camera navigation, pause/resume
+and returning from another app. The existing actor, sound, motion and light budgets are reused.</p>
+</section>
+<section>
+<h2>Evidence and limits</h2>
+<p><a href="journey.md">Player journey</a> · <a href="validation.md">Validation and reproduction</a> ·
+<a href="../cultural-events/calibration-report.md">Shared-effect calibration</a></p>
+<p><small>Headless/DOM checks do not prove rendered mobile layout, sound quality or sustained
+GPU/memory behaviour. This new occasion flow still needs its own browser/device review.</small></p>
+</section>
+</main>
+</html>

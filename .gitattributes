@@ -68,3 +68,7 @@ docs/qa/cultural-motion-274/*.json text eol=lf
 
 # Female-hair provenance also pins the unchanged LF preparation script.
 scripts/prepare-female-hair.mjs text eol=lf
+
+# Portable occasion review fixture and its verified metadata.
+docs/qa/cultural-occasions-277/*.mjs text eol=lf
+docs/qa/cultural-occasions-277/*.json text eol=lf

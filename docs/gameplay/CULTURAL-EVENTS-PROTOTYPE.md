@@ -1,6 +1,6 @@
 # Cultural Events prototype: gatherings and weather resilience
 
-Status: experimental implementation for #275 + #276 under epic #274. On 26 October 2026,
+Status: experimental implementation for #275 + #276 under epic #274, extended by #277 below. On 26 October 2026,
 the owner approved the public test boundaries and the values below as **experimental values**.
 They are not approval for ordinary default-on campaigns. Culture is absent from legacy saves
 and ordinary new Core campaigns unless explicitly enabled at campaign creation.
@@ -104,9 +104,9 @@ node node_modules/typescript/bin/tsc --noEmit
 ```
 
 No formatter is configured. Touched source formatting is reviewed manually with `git diff --check`.
-Wedding/communal-ceremony variants (#277), factual assistance after collapse (#278), and the
-prerequisite-gated defence/newcomer integrations (#279/#280) are later slices; they are not
-implemented by this first transaction or by its animations/audio.
+The original #275/#276 transaction did not implement the occasion variants described below.
+Factual assistance after collapse (#278) and prerequisite-gated defence/newcomer integrations
+(#279/#280) remain separate slices. They are not implemented by gathering animations/audio.
 
 ## Current 3D prototype
 
@@ -125,6 +125,84 @@ The motion bank is lazy, shared and animation-only. One group murmur and applaus
 the existing audio owner, require sound consent and have a 2 MiB actual decoded-family cap.
 The existing campfire fuel, light and warming remain their independent controls.
 Pause/background/graphics interruption invalidates pending motion and pauses world audio
-synchronously. Loaded history never starts a performance. Visual, listening and physical
-device acceptance remain open; [measured headless costs](../qa/cultural-events/presentation-headless-report.md)
-include the remaining p95 and startup/tail limits rather than claiming device performance.
+synchronously. Loaded history never starts a performance. The owner accepted the first
+storytelling prototype's device/listening flow. New #277 occasions still need their own
+rendered browser/device review; [measured headless costs](../qa/cultural-events/presentation-headless-report.md)
+retain the remaining p95 and startup/tail limits rather than claiming device performance.
+
+
+## #277 — wedding celebrations and communal ceremonies
+
+The owner selected the wedding policy on 26 October 2026: **only a newly formed partnership
+can be celebrated, within one game year of its actual canonical formation**. Existing founding
+couples are excluded; FoundingPartnershipPresent records presence at arrival, not a formation
+date that the game may invent later.
+
+The shared occasion types are storytelling_music, communal_ceremony and wedding. All three
+use the same optional SponsorGathering transaction, 3-Food quote, 3–8 available adults, two-
+assessment bank, 25% exposure-only benefit and legacy/default policy described above. A full
+bank rejects sponsorship before spending. A separate wedding or ceremony bonus does not exist.
+The neutral Communal Ceremony name establishes no specific gods, practices, priesthood,
+religious affiliation or belief; it grants no weather reroll, fertility or raid modifier.
+
+### Wedding eligibility and the exact window
+
+A wedding must cite a real earlier PartnershipFormed event. Its two actual people must still
+be living reciprocal partners in the clan and both must satisfy the shared cultural eligibility
+rules. Active care and expedition commitments are not overridden. Both partners reserve places
+before the remaining slots are filled; final recorded participants remain sorted by immutable ID.
+They are never replaced by other residents to make an unavailable couple appear to attend.
+
+The celebration interval is [formation tick, formation tick + 1000), using canonical game time.
+Elapsed ticks 0 and 999 qualify; 1000 does not. Real-world absence does not advance it. The
+window limits the optional celebration, not the partnership. Declining or missing it does not
+cancel a relationship, change household assignments or prevent normal family life.
+
+Only the current genuine partnership source is offered; a later newly committed partnership
+cannot reuse an older source for the same pair. Each source can be celebrated once. The
+candidate projection may retain a still-current, in-window but temporarily unavailable or
+already celebrated couple with an explicit disabled reason. Founding, expired, deceased or
+ended partnerships are not listed as current candidates.
+
+### Source facts and replay
+
+The wedding command adds sourceEventId to the existing quote fields. The caller never supplies
+authoritative spouses: Core derives them from the actual source. CulturalGatheringHeld freezes
+sourceEventId and spouseIds alongside the normal real participant snapshots, cost and canonical
+time. It creates no new PartnershipFormed event and does not redate the source, purchase a
+partner, alter fertility, move a household or create children. Communal and storytelling commands
+have no partnership source.
+
+The existing version-1 cultural schema and event ledger remain shared. No persisted wedding
+window, second receipt table or all-pairs relationship graph is added. Candidate/history source
+indices are derived in one pass rather than searching history for every couple. The public
+availableCulturalParticipants projection is shared with presentation, which may further restrict
+physical visibility but cannot invent canonical eligibility or attendance.
+
+Restore validation requires the earlier real formation source, matching spouses and attendance,
+the one-year event-time window and one celebration per source. It deliberately does not require
+the partners to remain together now: later death, departure or a new relationship must not
+invalidate an earlier factual wedding. Matching accepted request retries remain no-ops even
+after the window or current partnership has ended; conflicting occasion/source payloads reject.
+Published historical chapters are not rewritten.
+
+Public Core tests exercise actual new partnerships, the capped spouse roster, founding/window
+exclusions, care/expedition absence, genuine later expedition loss, immutable prior family facts,
+source integrity, CPU isolation, and common weather-support replay across save/load and split
+ticks. Controlled fixtures use existing saved rules; they do not establish population-level
+balance, historical ritual authenticity, animation quality or gameplay enjoyment.
+
+Focused reproduction:
+
+    node --test tests/cultural-occasions.test.mjs tests/cultural-events.test.mjs
+    node node_modules/typescript/bin/tsc --noEmit
+
+Wedding presentation reserves both actual partners before the Low six-actor cap. Both must
+actually arrive, with at least one guest, before it starts. Missing/unavailable/dropped partners
+or the existing two-minute approach limit safely end decoration without changing the accepted
+Core event, costs or support. Existing actors return through the same validated routes.
+
+Chronicle and Personal History distinguish celebrated partners, wedding guests and communal
+ceremony participants. The Clan Book retains the exact real partnership callback, accounts
+for paid Food in its ledger and preserves already published chapters across full campaign
+restore. Presentation changes neither the Family Tree nor the canonical partnership date.

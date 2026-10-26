@@ -1,4 +1,4 @@
-import { gatheringOffer, type SimulationState } from '../simulation/SimulationCore';
+import { availableCulturalParticipants, type SimulationState } from '../simulation/SimulationCore';
 import type { LivingWorldController } from './LivingWorldController';
 
 export interface CulturalPresentationFrame {
@@ -16,6 +16,7 @@ export interface CulturalPresentationFrame {
 export class CulturalPresentation {
     private seenSequence: number;
     private current?: CulturalPresentationFrame;
+    private requiredKeys: string[] = [];
     private disposed = false;
 
     constructor(state: Readonly<SimulationState>, private readonly motion: LivingWorldController,
@@ -31,10 +32,21 @@ export class CulturalPresentation {
         const event = state.events.find(item => item.id === state.culture!.lastGatheringEventId);
         if (!visible || event?.type !== 'CulturalGatheringHeld' ||
             event.details?.gatheringSequence !== this.seenSequence) return false;
-        const available = new Set(gatheringOffer(state).participantIds);
-        const ids = (event.details.participants as string[]).filter(id => available.has(id));
+        const available = new Set(availableCulturalParticipants(state).map(person => person.id));
+        const recorded = event.details.participants as string[];
+        const required = event.details.occasion === 'wedding' && Array.isArray(event.details.spouseIds) ?
+            event.details.spouseIds.filter((id): id is string => typeof id === 'string') : [];
+        if (event.details.occasion === 'wedding' && (required.length !== 2 || new Set(required).size !== 2 ||
+            required.some(id => !recorded.includes(id) || !available.has(id)))) return false;
+        // Low still stages at most six bodies, but it cannot replace the actual couple with guests.
+        const ids = [...required, ...recorded.filter(id => available.has(id) && !required.includes(id))];
+        const requiredKeys = required.map(id => 'persona:' + id);
         const keys = this.motion.beginGathering(event.id, ids.map(id => 'persona:' + id), limit);
-        if (keys.length < 3) { this.motion.releaseGathering(); return false; }
+        if (keys.length < 3 || requiredKeys.some(key => !keys.includes(key))) {
+            this.motion.releaseGathering();
+            return false;
+        }
+        this.requiredKeys = requiredKeys;
         this.current = { id: event.id, sequence: this.seenSequence, phase: 'approach',
             phaseElapsedSeconds: 0, position: { ...this.position }, stagedParticipants: keys.length,
             participantKeys: keys, visible: true };
@@ -46,17 +58,24 @@ export class CulturalPresentation {
         if (!current) return;
         if (!visible) { this.finish(); return; }
         const staged = this.motion.inspectGathering()?.participants.filter(person => !person.dropped) ?? [];
-        if (staged.length < 3) { this.finish(); return; }
+        if (staged.length < 3 || this.requiredKeys.some(key => !staged.some(person => person.key === key))) {
+            this.finish();
+            return;
+        }
         const present = current.phase === 'approach' ? staged : staged.filter(person => person.arrived);
+        if (current.phase !== 'approach' && (present.length < 3 ||
+            this.requiredKeys.some(key => !present.some(person => person.key === key)))) {
+            this.finish();
+            return;
+        }
         current.participantKeys = present.map(person => person.key);
         current.stagedParticipants = present.length;
         if (!running || !Number.isFinite(seconds) || seconds <= 0) return;
         current.phaseElapsedSeconds += Math.min(seconds, 1);
         if (current.phase === 'approach') {
             const arrived = staged.filter(person => person.arrived);
-            // Actual routes can take over a minute. Start with a real small audience;
-            // more distant attendees need not hold everyone at their destination.
-            if (arrived.length >= 3) {
+            // Ordinary guests may still be approaching, but a wedding requires its actual couple.
+            if (arrived.length >= 3 && this.requiredKeys.every(key => arrived.some(person => person.key === key))) {
                 current.participantKeys = arrived.map(person => person.key);
                 current.stagedParticipants = arrived.length;
                 current.phase = 'gathering';
@@ -75,6 +94,7 @@ export class CulturalPresentation {
     private finish() {
         if (this.current) this.motion.releaseGathering();
         this.current = undefined;
+        this.requiredKeys = [];
     }
 
     dispose() {

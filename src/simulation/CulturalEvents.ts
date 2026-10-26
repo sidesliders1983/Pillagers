@@ -4,9 +4,9 @@ import { personaAge } from './PersonaAge';
 import { personaIdentity } from './Identity';
 import { inspectWeather, weatherFacts } from './Weather';
 import { personaAway } from './WorldExpeditions';
-import type { SimulationEvent, SimulationState } from './SimulationCore';
+import type { GameTime, SimulationEvent, SimulationState } from './SimulationCore';
 
-export type CulturalOccasion = 'storytelling_music';
+export type CulturalOccasion = 'storytelling_music' | 'communal_ceremony' | 'wedding';
 export type CultureConfig = {
     enabled: boolean;
     foodCost: number;
@@ -33,6 +33,7 @@ export type CultureCommand = {
     expectedSequence: number;
     quotedFood: number;
     expectedParticipantIds: string[];
+    sourceEventId?: string;
 };
 export function initializeCulture(state: SimulationState, overrides: Partial<CultureConfig> = {}): void {
     const config = { ...defaultCultureConfig, ...overrides };
@@ -52,23 +53,115 @@ export function inspectCulture(state: SimulationState) {
         lastGatheringEventId: culture?.lastGatheringEventId ?? null,
         nextSequence: culture?.nextSequence ?? 1 };
 }
-export function gatheringOffer(state: SimulationState, occasion: CulturalOccasion = 'storytelling_music') {
-    const info = inspectCulture(state);
-    const care = state.mechanics ? providingCareIds(state) : new Set<string>();
-    const participantIds = state.mechanics ? Object.keys(state.personas).sort().filter(id => {
+export type CulturalParticipant = { id: string; name: string; age: number };
+/** Shared canonical eligibility; presentation may further restrict physical visibility. */
+export function availableCulturalParticipants(state: SimulationState): CulturalParticipant[] {
+    if (!state.mechanics) return [];
+    const care = providingCareIds(state);
+    return Object.keys(state.personas).sort().filter(id => {
         const person = state.personas[id];
         return person.deathWinter === null && personaAge(state, id) >= state.mechanics!.config.adultAge &&
             !personaAway(state, id) && !care.has(id);
-    }).slice(0, info.maxParticipants) : [];
-    const participants = participantIds.map(id => ({ id, name: state.personas[id].name,
-        age: personaAge(state, id) }));
-    const reason = !info.enabled || !state.mechanics ? 'Cultural gatherings are not enabled in this campaign.' :
-        occasion !== 'storytelling_music' ? 'This cultural occasion is not available.' :
-        participants.length < info.minParticipants ? 'Not enough available adult residents.' :
+    }).map(id => ({ id, name: state.personas[id].name, age: personaAge(state, id) }));
+}
+export type WeddingCandidate = {
+    sourceEventId: string;
+    spouseIds: [string, string];
+    spouses: CulturalParticipant[];
+    formedAt: GameTime;
+    allowed: boolean;
+    reason: string | null;
+    celebratedEventId?: string;
+};
+type PartnershipSource = { event: SimulationEvent; spouseIds: [string, string] };
+function partnershipPair(event: SimulationEvent): [string, string] | undefined {
+    const ids = event.details?.participants;
+    if (!Array.isArray(ids) || ids.length !== 2 || ids.some(id => typeof id !== 'string') || ids[0] === ids[1]) return;
+    return [...ids].sort() as [string, string];
+}
+const pairKey = (ids: readonly string[]) => JSON.stringify(ids);
+function weddingHistory(state: SimulationState) {
+    const sources = new Map<string, PartnershipSource>();
+    const latestByPair = new Map<string, string>();
+    const celebrations = new Map<string, string>();
+    // One pass, not one history search for every living couple.
+    for (const event of state.events) {
+        if (event.type === 'PartnershipFormed') {
+            const spouseIds = partnershipPair(event);
+            if (!spouseIds) continue;
+            sources.set(event.id, { event, spouseIds });
+            latestByPair.set(pairKey(spouseIds), event.id);
+        } else if (event.type === 'CulturalGatheringHeld' && event.details?.occasion === 'wedding' &&
+            typeof event.details.sourceEventId === 'string') {
+            celebrations.set(event.details.sourceEventId, event.id);
+        }
+    }
+    return { sources, latestByPair, celebrations };
+}
+function inWeddingWindow(state: SimulationState, formedAt: GameTime, at = state.time): boolean {
+    const elapsed = (at.winter - formedAt.winter) * state.ticksPerWinter + at.tick - formedAt.tick;
+    return elapsed >= 0 && elapsed < state.ticksPerWinter;
+}
+function currentPartnership(state: SimulationState, source: PartnershipSource,
+    latestByPair: Map<string, string>): boolean {
+    const [a, b] = source.spouseIds.map(id => state.personas[id]);
+    return !!a && !!b && a.deathWinter === null && b.deathWinter === null &&
+        a.partnerId === b.id && b.partnerId === a.id &&
+        latestByPair.get(pairKey(source.spouseIds)) === source.event.id;
+}
+function weddingReason(state: SimulationState, sourceEventId: string | undefined,
+    history: ReturnType<typeof weddingHistory>, availableIds: Set<string>): string | null {
+    if (!sourceEventId) return 'Select a newly formed partnership.';
+    const source = history.sources.get(sourceEventId);
+    if (!source) return 'A wedding requires a recorded new partnership.';
+    if (!currentPartnership(state, source, history.latestByPair)) return 'This partnership is no longer current.';
+    if (!inWeddingWindow(state, source.event.time)) return 'The one-year wedding celebration window has ended.';
+    if (history.celebrations.has(sourceEventId)) return 'This partnership has already been celebrated.';
+    if (!source.spouseIds.every(id => availableIds.has(id))) return 'Both partners must be available for their wedding.';
+    return null;
+}
+function commonGatheringReason(state: SimulationState, info: ReturnType<typeof inspectCulture>,
+    participantCount: number): string | null {
+    return !info.enabled || !state.mechanics ? 'Cultural gatherings are not enabled in this campaign.' :
+        participantCount < info.minParticipants ? 'Not enough available adult residents.' :
         info.supportCount >= info.supportCapacity ? 'The community already has its maximum prepared support.' :
         state.stocks.food < info.foodCost ? 'Not enough Food for this gathering.' : null;
+}
+export function weddingCandidates(state: SimulationState): WeddingCandidate[] {
+    const history = weddingHistory(state);
+    const available = availableCulturalParticipants(state);
+    const availableIds = new Set(available.map(person => person.id));
+    const info = inspectCulture(state);
+    return [...history.latestByPair.values()].flatMap(sourceEventId => {
+        const source = history.sources.get(sourceEventId)!;
+        if (!currentPartnership(state, source, history.latestByPair) || !inWeddingWindow(state, source.event.time)) return [];
+        const reason = weddingReason(state, sourceEventId, history, availableIds) ??
+            commonGatheringReason(state, info, Math.min(available.length, info.maxParticipants));
+        return [{ sourceEventId, spouseIds: [...source.spouseIds] as [string, string],
+            spouses: source.spouseIds.map(id => ({ id, name: state.personas[id].name, age: personaAge(state, id) })),
+            formedAt: { ...source.event.time }, allowed: reason === null, reason,
+            ...(history.celebrations.has(sourceEventId) ? { celebratedEventId: history.celebrations.get(sourceEventId)! } : {}) }];
+    });
+}
+export function gatheringOffer(state: SimulationState, occasion: CulturalOccasion = 'storytelling_music',
+    sourceEventId?: string) {
+    const info = inspectCulture(state);
+    const available = availableCulturalParticipants(state);
+    const availableIds = new Set(available.map(person => person.id));
+    const history = occasion === 'wedding' ? weddingHistory(state) : undefined;
+    const spouseIds = history?.sources.get(sourceEventId ?? '')?.spouseIds;
+    const selected = new Set(spouseIds?.filter(id => availableIds.has(id)) ?? []);
+    for (const person of available) if (selected.size < info.maxParticipants) selected.add(person.id);
+    const participants = available.filter(person => selected.has(person.id));
+    const participantIds = participants.map(person => person.id);
+    const occasionReason = !['storytelling_music', 'communal_ceremony', 'wedding'].includes(occasion) ?
+        'This cultural occasion is not available.' : occasion === 'wedding' ?
+            weddingReason(state, sourceEventId, history!, availableIds) : sourceEventId !== undefined ?
+                'This occasion does not use a partnership source.' : null;
+    const reason = commonGatheringReason(state, info, participants.length) ?? occasionReason;
     return { ...info, occasion, allowed: reason === null, reason, participantIds, participants,
-        expectedSequence: info.nextSequence };
+        expectedSequence: info.nextSequence,
+        ...(occasion === 'wedding' ? { sourceEventId, spouseIds: spouseIds ? [...spouseIds] as [string, string] : undefined } : {}) };
 }
 export function applyCultureCommand(state: SimulationState, command: CultureCommand): void {
     const culture = state.culture;
@@ -78,12 +171,13 @@ export function applyCultureCommand(state: SimulationState, command: CultureComm
         // A historical retry is rare; ordinary offers never scan the event ledger.
         const receipt = state.events.find(event => event.type === 'CulturalGatheringHeld' &&
             event.details?.gatheringSequence === command.expectedSequence)?.details;
-        if (!receipt || receipt.occasion !== command.occasion || receipt.foodCost !== command.quotedFood ||
+        if (!receipt || receipt.occasion !== command.occasion || receipt.sourceEventId !== command.sourceEventId ||
+            receipt.foodCost !== command.quotedFood ||
             JSON.stringify(receipt.participants) !== JSON.stringify(command.expectedParticipantIds))
             throw new Error('This gathering request does not match its accepted receipt.');
         return;
     }
-    const offer = gatheringOffer(state, command.occasion);
+    const offer = gatheringOffer(state, command.occasion, command.sourceEventId);
     if (!offer.allowed) throw new Error(offer.reason!);
     if (command.expectedSequence !== offer.expectedSequence || command.quotedFood !== offer.foodCost ||
         !Array.isArray(command.expectedParticipantIds) ||
@@ -93,6 +187,7 @@ export function applyCultureCommand(state: SimulationState, command: CultureComm
     const id = 'event-' + (state.events.length + 1);
     const details = eventFacts(state, { cultureVersion: 1, clanId: state.clan.id, gatheringSequence: culture!.nextSequence,
         occasion: command.occasion, foodCost: offer.foodCost, participants: offer.participantIds,
+        ...(command.occasion === 'wedding' ? { sourceEventId: offer.sourceEventId, spouseIds: offer.spouseIds } : {}),
         supportBefore: culture!.supportSourceEventIds.length,
         supportAfter: culture!.supportSourceEventIds.length + 1 });
     state.events.push({ id, time: { ...state.time }, type: 'CulturalGatheringHeld', details });
@@ -160,7 +255,7 @@ export function isCulturalEvent(event: SimulationEvent): boolean {
 export function validateCulture(state: SimulationState, culturalEvents: readonly SimulationEvent[]): void {
     const culture = state.culture;
     if (culture === undefined) {
-        if (culturalEvents.length) fail();
+        if (culturalEvents.some(isCulturalEvent)) fail();
         return;
     }
     if (!culture || typeof culture !== 'object' || Array.isArray(culture)) fail();
@@ -172,16 +267,37 @@ export function validateCulture(state: SimulationState, culturalEvents: readonly
     const sources: string[] = [];
     let nextSequence = 1;
     let lastGathering: string | null = null;
+    const partnershipSources = new Map<string, PartnershipSource>();
+    const latestPartnerships = new Map<string, string>();
+    const celebratedSources = new Set<string>();
     for (const event of culturalEvents) {
+        if (event.type === 'PartnershipFormed') {
+            const spouseIds = partnershipPair(event);
+            if (spouseIds) {
+                partnershipSources.set(event.id, { event, spouseIds });
+                latestPartnerships.set(pairKey(spouseIds), event.id);
+            }
+            continue;
+        }
         const details = event.details;
         if (!details || details.cultureVersion !== 1 || details.clanId !== state.clan.id) fail();
         const ids = peopleFacts(state, details);
         if (event.type === 'CulturalGatheringHeld') {
-            if (details.occasion !== 'storytelling_music' || details.gatheringSequence !== nextSequence++ ||
+            if (typeof details.occasion !== 'string' ||
+                !['storytelling_music', 'communal_ceremony', 'wedding'].includes(details.occasion) || details.gatheringSequence !== nextSequence++ ||
                 details.foodCost !== culture.config.foodCost || details.supportBefore !== sources.length ||
                 details.supportAfter !== sources.length + 1 || sources.length >= culture.config.supportCapacity ||
                 ids.length < culture.config.minParticipants || ids.length > culture.config.maxParticipants ||
                 (details.people as { age: number }[]).some(person => person.age < state.mechanics!.config.adultAge)) fail();
+            if (details.occasion === 'wedding') {
+                const sourceId = typeof details.sourceEventId === 'string' ? details.sourceEventId : '';
+                const source = partnershipSources.get(sourceId);
+                if (!source || JSON.stringify(details.spouseIds) !== JSON.stringify(source.spouseIds) ||
+                    !source.spouseIds.every(id => ids.includes(id)) || celebratedSources.has(sourceId) ||
+                    latestPartnerships.get(pairKey(source.spouseIds)) !== sourceId ||
+                    !inWeddingWindow(state, source.event.time, event.time)) fail();
+                celebratedSources.add(sourceId);
+            } else if (details.sourceEventId !== undefined || details.spouseIds !== undefined) fail();
             sources.push(event.id);
             lastGathering = event.id;
         } else {

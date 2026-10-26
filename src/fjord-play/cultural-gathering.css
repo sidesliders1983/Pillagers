@@ -7,3 +7,5 @@
 #fjord-play:not(.fjord-mobile) .fjord-stage #fjord-management.fjord-culture-task { width: min(440px, calc(100vw - 32px)); }
 #fjord-play .fjord-culture-task .fjord-card-body { overflow: auto; }
 #fjord-play .fjord-culture-task .fjord-culture { margin-top: 0; border-top: 0; padding-top: 0; }
+.fjord-culture-choice { display: grid; gap: 5px; margin: 9px 0; }
+.fjord-culture-choice select { width: 100%; max-width: 100%; min-width: 0; min-height: 44px; }

@@ -233,3 +233,164 @@ test('a full support reserve disables another purchase while keeping real gather
         assert.equal(f.session.saveJSON(), saved);
     } finally { f.dispose(); }
 });
+
+test('desktop and touch choose a communal occasion below campfire fuel without spending before sponsorship', () => {
+    for (const mobile of [false, true]) {
+        const f = fixture(mobile);
+        try {
+            const saved = f.session.saveJSON();
+            const occasion = document.querySelector('[data-culture-occasion]');
+            assert.ok(occasion, 'One shared occasion selector is in the existing campfire card');
+            assert.deepEqual([...occasion.options].map(option => option.value),
+                ['storytelling_music', 'communal_ceremony', 'wedding']);
+            const fuel = document.querySelector('[data-command]');
+            const culture = document.querySelector('[aria-label="Community gathering"]');
+            assert.ok(fuel.compareDocumentPosition(culture) & Node.DOCUMENT_POSITION_FOLLOWING,
+                'Culture stays below the existing campfire fuel controls');
+            occasion.value = 'communal_ceremony';
+            occasion.dispatchEvent(new f.dom.window.Event('change', { bubbles: true }));
+            assert.match(culture.textContent, /Communal ceremony/);
+            f.click('culture-review');
+            const review = document.querySelector('[aria-label="Gathering review"]');
+            assert.match(review.textContent, /Communal ceremony/);
+            assert.match(review.textContent, /3 Food/);
+            assert.equal(document.querySelector('dialog[open]'), null);
+            f.click('culture-cancel');
+            assert.equal(f.session.saveJSON(), saved);
+        } finally { f.dispose(); }
+    }
+});
+
+test('a communal sponsorship records its selected occasion through the same paid session command', () => {
+    const f = fixture(false);
+    try {
+        const choice = document.querySelector('[data-culture-occasion]');
+        choice.value = 'communal_ceremony';
+        choice.dispatchEvent(new f.dom.window.Event('change', { bubbles: true }));
+        f.click('culture-review');
+        f.click('culture-sponsor');
+        const after = f.session.readSnapshot();
+        const event = after.events.find(item => item.type === 'CulturalGatheringHeld');
+        assert.equal(event.details.occasion, 'communal_ceremony');
+        assert.equal(after.stocks.food, 12);
+        assert.equal(f.session.inspectCulture().supportCount, 1);
+        assert.equal(event.details.sourceEventId, undefined);
+    } finally { f.dispose(); }
+});
+
+test('a wedding review is linked to an actual new couple and charges only for that celebration', () => {
+    const f = fixture(true);
+    try {
+        const initial = core.createCampaign(32, { foundingCoupleChanceBps: 0 }, {
+            partnershipChanceBps: 10000, fertilityChanceBps: 0,
+            mortalityBands: [{ minAge: 0, chanceBps: 0 }],
+        }, { enabled: false }, {}, {}, {}, undefined, undefined, undefined, { enabled: true });
+        const paired = core.advanceWinter(initial);
+        const source = paired.events.find(event => event.type === 'PartnershipFormed');
+        assert.ok(source, 'The real annual Core produced a new partnership');
+        f.session.loadJSON(core.serializeState(paired));
+        f.refresh();
+        const choice = document.querySelector('[data-culture-occasion]');
+        choice.value = 'wedding';
+        choice.dispatchEvent(new f.dom.window.Event('change', { bubbles: true }));
+        const couple = document.querySelector('[data-culture-partnership]');
+        assert.ok(couple, 'Wedding selection offers real recent partnerships');
+        couple.value = source.id;
+        couple.dispatchEvent(new f.dom.window.Event('change', { bubbles: true }));
+        const spouses = source.details.participants.map(id => paired.personas[id].name);
+        for (const name of spouses) assert.ok(couple.textContent.includes(name));
+        const before = f.session.readSnapshot();
+        f.click('culture-review');
+        const review = document.querySelector('[aria-label="Gathering review"]');
+        assert.match(review.textContent, /Wedding celebration/);
+        const coupleSummary = review.querySelector('[data-culture-couple]');
+        assert.ok(coupleSummary, 'The review names the real couple without opening the attendance list');
+        for (const name of spouses) assert.ok(coupleSummary.textContent.includes(name));
+        f.click('culture-sponsor');
+        const after = f.session.readSnapshot();
+        const celebration = after.events.find(event => event.type === 'CulturalGatheringHeld');
+        assert.equal(celebration.details.occasion, 'wedding');
+        assert.equal(celebration.details.sourceEventId, source.id);
+        assert.equal(after.stocks.food, before.stocks.food - 3);
+        assert.deepEqual(after.personas, before.personas);
+        assert.deepEqual(after.events.find(event => event.id === source.id), source);
+        assert.equal(document.querySelector('[data-culture-partnership]').value, source.id);
+        assert.equal(document.querySelector('[data-ui="culture-review"]').disabled, true);
+    } finally { f.dispose(); }
+});
+
+test('the wedding card opens its actual partnership source and declining preserves that relationship', () => {
+    const f = fixture(false);
+    try {
+        const initial = core.createCampaign(32, { initialFood: 100, foundingCoupleChanceBps: 0 }, {
+            partnershipChanceBps: 10000, fertilityChanceBps: 0,
+            mortalityBands: [{ minAge: 0, chanceBps: 0 }],
+        }, { enabled: false }, {}, {}, {}, undefined, undefined, undefined, { enabled: true });
+        const paired = core.advanceWinter(initial);
+        const source = paired.events.find(event => event.type === 'PartnershipFormed');
+        f.session.loadJSON(core.serializeState(paired));
+        f.refresh();
+        const choice = document.querySelector('[data-culture-occasion]');
+        choice.value = 'wedding';
+        choice.dispatchEvent(new f.dom.window.Event('change', { bubbles: true }));
+        const before = f.session.saveJSON();
+        f.click('culture-partnership-record');
+        assert.deepEqual(f.reports, [source.id]);
+        f.click('culture-review');
+        f.click('culture-cancel');
+        assert.equal(f.session.saveJSON(), before);
+        assert.deepEqual(f.session.readSnapshot().events.find(event => event.id === source.id), source);
+    } finally { f.dispose(); }
+});
+
+test('founding partnerships never appear as purchasable wedding occasions', () => {
+    const f = fixture(false);
+    try {
+        const state = core.createCampaign(32, { foundingCoupleChanceBps: 10000 }, {
+            partnershipChanceBps: 0, fertilityChanceBps: 0,
+            mortalityBands: [{ minAge: 0, chanceBps: 0 }],
+        }, { enabled: false }, {}, {}, {}, undefined, undefined, undefined, { enabled: true });
+        assert.ok(state.events.some(event => event.type === 'FoundingPartnershipPresent'));
+        f.session.loadJSON(core.serializeState(state));
+        f.refresh();
+        const saved = f.session.saveJSON();
+        const choice = document.querySelector('[data-culture-occasion]');
+        choice.value = 'wedding';
+        choice.dispatchEvent(new f.dom.window.Event('change', { bubbles: true }));
+        const couple = document.querySelector('[data-culture-partnership]');
+        assert.equal(couple.options.length, 1, 'Only the empty recent-partnership prompt is shown');
+        assert.match(document.querySelector('[aria-label="Community gathering"]').textContent, /Founding partnerships are not wedding occasions/);
+        assert.equal(document.querySelector('[data-ui="culture-review"]').disabled, true);
+        assert.equal(f.session.saveJSON(), saved);
+    } finally { f.dispose(); }
+});
+
+test('a wedding quote expires at one game year without cancelling the partnership or spending Food', () => {
+    const f = fixture(true);
+    try {
+        const initial = core.createCampaign(32, { initialFood: 100, foundingCoupleChanceBps: 0 }, {
+            partnershipChanceBps: 10000, fertilityChanceBps: 0,
+            mortalityBands: [{ minAge: 0, chanceBps: 0 }],
+        }, { enabled: false }, {}, {}, {}, undefined, undefined, undefined, { enabled: true });
+        const paired = core.advanceWinter(initial);
+        const source = paired.events.find(event => event.type === 'PartnershipFormed');
+        f.session.loadJSON(core.serializeState(paired));
+        f.refresh();
+        const choice = document.querySelector('[data-culture-occasion]');
+        choice.value = 'wedding';
+        choice.dispatchEvent(new f.dom.window.Event('change', { bubbles: true }));
+        f.click('culture-review');
+        const oldSponsor = document.querySelector('[data-ui="culture-sponsor"]');
+        f.session.command({ type: 'AdvanceTicks', ticks: 1000 });
+        f.refresh();
+        const saved = f.session.saveJSON();
+        assert.equal(document.querySelector('[data-ui="culture-sponsor"]').disabled, true);
+        assert.match(document.querySelector('[aria-label="Gathering review"]').textContent, /one-year wedding celebration window has ended/);
+        f.ui.handle(oldSponsor);
+        assert.equal(f.session.saveJSON(), saved);
+        f.click('culture-cancel');
+        assert.equal(document.querySelector('[data-ui="culture-review"]').disabled, true);
+        assert.deepEqual(f.session.readSnapshot().events.find(event => event.id === source.id), source);
+        assert.equal(f.session.saveJSON(), saved);
+    } finally { f.dispose(); }
+});

@@ -66,7 +66,8 @@ const templates:Record<string,Template>={
     CulturalGatheringHeld: (_event, d) => {
         const participants = ids(d, 'participants');
         const cost = number(d, 'foodCost');
-        if (d.cultureVersion !== 1 || d.occasion !== 'storytelling_music' || !cost ||
+        if (d.cultureVersion !== 1 || typeof d.occasion !== 'string' ||
+            !['storytelling_music', 'communal_ceremony', 'wedding'].includes(d.occasion) || !cost ||
             !participants || participants.length < 3 || participants.length > 8 ||
             new Set(participants).size !== participants.length || !Array.isArray(d.people) ||
             d.people.length !== participants.length) return null;
@@ -76,8 +77,20 @@ const templates:Record<string,Template>={
             if (!fact || fact.id !== id || !str(fact, 'name') || number(fact, 'age') === null) return null;
             names.push(str(fact, 'name')!);
         }
+        if (d.occasion === 'wedding') {
+            const spouses = ids(d, 'spouseIds');
+            if (!str(d, 'sourceEventId') || spouses?.length !== 2 || spouses[0] === spouses[1] ||
+                !spouses.every(id => participants.includes(id))) return null;
+            const spouseNames = spouses.map(id => names[participants.indexOf(id)]);
+            const guests = names.filter((_name, index) => !spouses.includes(participants[index]));
+            const guestNames = guests.length === 1 ? guests[0] :
+                guests.slice(0, -1).join(', ') + ' and ' + guests.at(-1);
+            return spouseNames.join(' and ') + ' held a wedding celebration with ' +
+                guestNames + ', using ' + cost + ' Food.';
+        }
         const people = names.slice(0, -1).join(', ') + ' and ' + names.at(-1);
-        return people + ' gathered for storytelling and music, using ' + cost + ' Food.';
+        const occasion = d.occasion === 'communal_ceremony' ? 'a communal ceremony' : 'storytelling and music';
+        return people + ' gathered for ' + occasion + ', using ' + cost + ' Food.';
     },
     EquipmentCrafted: (_e, d) => str(d, 'creatorName') && str(d, 'itemName') &&
         number(d, 'materials') !== null && number(d, 'hides') !== null ?
