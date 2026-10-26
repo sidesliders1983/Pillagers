@@ -1,0 +1,1153 @@
+{
+  "seed": 91,
+  "profile": "Low",
+  "cadenceSeconds": 0.1,
+  "sourceHashes": {
+    "src/fjord-play/LivingWorldController.ts": "ae4b59c1f87e5e6a1253f5ff3fcb26cb5b1dbd54c3dd38eb67c400764a000197",
+    "src/fjord-play/CulturalPresentation.ts": "1552f42282cab947100bebc69fa5a99782b18c662e8d3ec052314c12b862c291"
+  },
+  "measuredFrame": 846,
+  "note": "Non-timed public-observer diagnostic; no CPU/GPU attribution inferred from concurrent timing.",
+  "rows": [
+    {
+      "arm": "baseline",
+      "endedStep": null,
+      "endedSeconds": null,
+      "phaseChanges": [
+        {
+          "step": 1,
+          "seconds": 0.1,
+          "phase": "none"
+        }
+      ],
+      "routeWindow": [
+        {
+          "benchmarkStep": 847,
+          "agent": "persona:founder-6",
+          "kind": "persona",
+          "purpose": "wander",
+          "target": "",
+          "goal": null,
+          "from": {
+            "x": -25.2,
+            "z": -188
+          },
+          "nodes": 500,
+          "accepted": true,
+          "reason": "accepted",
+          "navigationGeneration": 1,
+          "reservationGeneration": 3,
+          "occupancy": "persona:founder-1:-28.23998964272358:-170|persona:founder-2:-13:-154.21059644256272|persona:founder-3:1:-209.7199938433586|persona:founder-4:9:-182.13394733192203|persona:founder-5:-29:-179.97135088935931|persona:founder-9:-30.200000000000003:-180|persona:founder-7:9:-162.87534689459576|persona:founder-8:-28.000829236474278:-152|persona:founder-10:-22.2:-139.21059644256272|cattle:cattle-1:-20:-175.9406928294839|cattle:cattle-2:-21:-179|cattle:cattle-3:-15:-188.41945482105322",
+          "step": 897,
+          "activeSeconds": 89.69999999999918
+        }
+      ],
+      "frameWindow": [
+        {
+          "step": 830,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 831,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 832,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 833,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 834,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 835,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 836,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Idle",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 837,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Idle",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 838,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 839,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 840,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 841,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 842,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 843,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 844,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 845,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 846,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 847,
+          "phase": "none",
+          "routeAttempts": 1,
+          "targetAttempts": 0,
+          "routeNodes": 500,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 848,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 849,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 850,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 851,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 852,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 853,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 854,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        },
+        {
+          "step": 855,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 1,
+          "visits": [
+            {
+              "key": "persona:founder-3",
+              "state": "Walk",
+              "phase": "approach",
+              "source": "shore:202"
+            }
+          ]
+        }
+      ],
+      "firstOccupationRoutesAfterRelease": []
+    },
+    {
+      "arm": "staged",
+      "endedStep": 646,
+      "endedSeconds": 64.6,
+      "phaseChanges": [
+        {
+          "step": 1,
+          "seconds": 0.1,
+          "phase": "approach"
+        },
+        {
+          "step": 576,
+          "seconds": 57.6,
+          "phase": "gathering"
+        },
+        {
+          "step": 616,
+          "seconds": 61.6,
+          "phase": "response"
+        },
+        {
+          "step": 646,
+          "seconds": 64.6,
+          "phase": "none"
+        }
+      ],
+      "routeWindow": [
+        {
+          "benchmarkStep": 846,
+          "agent": "persona:founder-3",
+          "kind": "persona",
+          "purpose": "occupation",
+          "target": "shore:202",
+          "goal": {
+            "x": 8.957014000100216,
+            "z": -255.52633231007164
+          },
+          "from": {
+            "x": -17.955939062155636,
+            "z": -184.82059045349664
+          },
+          "nodes": 2000,
+          "accepted": false,
+          "reason": "node-cap",
+          "navigationGeneration": 1,
+          "reservationGeneration": 0,
+          "occupancy": "persona:founder-1:-12.326800356525428:-171.1793109600032|persona:founder-2:-8.203023770675971:-172.3357605211135|persona:founder-6:-22.570596442562692:-189|persona:founder-4:3.1111868960593414:-176.42534261959295|persona:founder-5:-19.33633667309497:-173.29056515036757|persona:founder-9:-29.989403557437306:-180|persona:founder-7:9:-162.82197675368275|persona:founder-8:-28.017619446004687:-152|persona:founder-10:-5.410596442562692:-146.17802324631725|cattle:cattle-1:-20:-175.8400499443204|cattle:cattle-2:-21:-179|cattle:cattle-3:-15:-188.31204994432042",
+          "step": 896,
+          "activeSeconds": 89.59999999999918
+        },
+        {
+          "benchmarkStep": 846,
+          "agent": "persona:founder-3",
+          "kind": "persona",
+          "purpose": "occupation",
+          "target": "shore:183",
+          "goal": {
+            "x": 10.237646562709067,
+            "z": -255.5732386700251
+          },
+          "from": {
+            "x": -17.955939062155636,
+            "z": -184.82059045349664
+          },
+          "nodes": 2000,
+          "accepted": false,
+          "reason": "node-cap",
+          "navigationGeneration": 1,
+          "reservationGeneration": 0,
+          "occupancy": "persona:founder-1:-12.326800356525428:-171.1793109600032|persona:founder-2:-8.203023770675971:-172.3357605211135|persona:founder-6:-22.570596442562692:-189|persona:founder-4:3.1111868960593414:-176.42534261959295|persona:founder-5:-19.33633667309497:-173.29056515036757|persona:founder-9:-29.989403557437306:-180|persona:founder-7:9:-162.82197675368275|persona:founder-8:-28.017619446004687:-152|persona:founder-10:-5.410596442562692:-146.17802324631725|cattle:cattle-1:-20:-175.8400499443204|cattle:cattle-2:-21:-179|cattle:cattle-3:-15:-188.31204994432042",
+          "step": 896,
+          "activeSeconds": 89.59999999999918
+        },
+        {
+          "benchmarkStep": 846,
+          "agent": "persona:founder-3",
+          "kind": "persona",
+          "purpose": "occupation",
+          "target": "shore:183",
+          "goal": {
+            "x": 9.49510120708433,
+            "z": -256.243034455948
+          },
+          "from": {
+            "x": -17.955939062155636,
+            "z": -184.82059045349664
+          },
+          "nodes": 2000,
+          "accepted": false,
+          "reason": "node-cap",
+          "navigationGeneration": 1,
+          "reservationGeneration": 0,
+          "occupancy": "persona:founder-1:-12.326800356525428:-171.1793109600032|persona:founder-2:-8.203023770675971:-172.3357605211135|persona:founder-6:-22.570596442562692:-189|persona:founder-4:3.1111868960593414:-176.42534261959295|persona:founder-5:-19.33633667309497:-173.29056515036757|persona:founder-9:-29.989403557437306:-180|persona:founder-7:9:-162.82197675368275|persona:founder-8:-28.017619446004687:-152|persona:founder-10:-5.410596442562692:-146.17802324631725|cattle:cattle-1:-20:-175.8400499443204|cattle:cattle-2:-21:-179|cattle:cattle-3:-15:-188.31204994432042",
+          "step": 896,
+          "activeSeconds": 89.59999999999918
+        },
+        {
+          "benchmarkStep": 846,
+          "agent": "persona:founder-3",
+          "kind": "persona",
+          "purpose": "occupation",
+          "target": "shore:184",
+          "goal": {
+            "x": 11.181910473792419,
+            "z": -256.87688008933037
+          },
+          "from": {
+            "x": -17.955939062155636,
+            "z": -184.82059045349664
+          },
+          "nodes": 2001,
+          "accepted": false,
+          "reason": "node-cap",
+          "navigationGeneration": 1,
+          "reservationGeneration": 0,
+          "occupancy": "persona:founder-1:-12.326800356525428:-171.1793109600032|persona:founder-2:-8.203023770675971:-172.3357605211135|persona:founder-6:-22.570596442562692:-189|persona:founder-4:3.1111868960593414:-176.42534261959295|persona:founder-5:-19.33633667309497:-173.29056515036757|persona:founder-9:-29.989403557437306:-180|persona:founder-7:9:-162.82197675368275|persona:founder-8:-28.017619446004687:-152|persona:founder-10:-5.410596442562692:-146.17802324631725|cattle:cattle-1:-20:-175.8400499443204|cattle:cattle-2:-21:-179|cattle:cattle-3:-15:-188.31204994432042",
+          "step": 896,
+          "activeSeconds": 89.59999999999918
+        },
+        {
+          "benchmarkStep": 846,
+          "agent": "persona:founder-3",
+          "kind": "persona",
+          "purpose": "occupation",
+          "target": "shore:184",
+          "goal": {
+            "x": 10.323327401915103,
+            "z": -257.3895545559129
+          },
+          "from": {
+            "x": -17.955939062155636,
+            "z": -184.82059045349664
+          },
+          "nodes": 2000,
+          "accepted": false,
+          "reason": "node-cap",
+          "navigationGeneration": 1,
+          "reservationGeneration": 0,
+          "occupancy": "persona:founder-1:-12.326800356525428:-171.1793109600032|persona:founder-2:-8.203023770675971:-172.3357605211135|persona:founder-6:-22.570596442562692:-189|persona:founder-4:3.1111868960593414:-176.42534261959295|persona:founder-5:-19.33633667309497:-173.29056515036757|persona:founder-9:-29.989403557437306:-180|persona:founder-7:9:-162.82197675368275|persona:founder-8:-28.017619446004687:-152|persona:founder-10:-5.410596442562692:-146.17802324631725|cattle:cattle-1:-20:-175.8400499443204|cattle:cattle-2:-21:-179|cattle:cattle-3:-15:-188.31204994432042",
+          "step": 896,
+          "activeSeconds": 89.59999999999918
+        },
+        {
+          "benchmarkStep": 846,
+          "agent": "persona:founder-3",
+          "kind": "persona",
+          "purpose": "occupation",
+          "target": "shore:185",
+          "goal": {
+            "x": 11.54642072816909,
+            "z": -257.45951070710186
+          },
+          "from": {
+            "x": -17.955939062155636,
+            "z": -184.82059045349664
+          },
+          "nodes": 2001,
+          "accepted": false,
+          "reason": "node-cap",
+          "navigationGeneration": 1,
+          "reservationGeneration": 0,
+          "occupancy": "persona:founder-1:-12.326800356525428:-171.1793109600032|persona:founder-2:-8.203023770675971:-172.3357605211135|persona:founder-6:-22.570596442562692:-189|persona:founder-4:3.1111868960593414:-176.42534261959295|persona:founder-5:-19.33633667309497:-173.29056515036757|persona:founder-9:-29.989403557437306:-180|persona:founder-7:9:-162.82197675368275|persona:founder-8:-28.017619446004687:-152|persona:founder-10:-5.410596442562692:-146.17802324631725|cattle:cattle-1:-20:-175.8400499443204|cattle:cattle-2:-21:-179|cattle:cattle-3:-15:-188.31204994432042",
+          "step": 896,
+          "activeSeconds": 89.59999999999918
+        },
+        {
+          "benchmarkStep": 846,
+          "agent": "persona:founder-3",
+          "kind": "persona",
+          "purpose": "occupation",
+          "target": "shore:185",
+          "goal": {
+            "x": 10.71384508194136,
+            "z": -258.01342206581234
+          },
+          "from": {
+            "x": -17.955939062155636,
+            "z": -184.82059045349664
+          },
+          "nodes": 2000,
+          "accepted": false,
+          "reason": "node-cap",
+          "navigationGeneration": 1,
+          "reservationGeneration": 0,
+          "occupancy": "persona:founder-1:-12.326800356525428:-171.1793109600032|persona:founder-2:-8.203023770675971:-172.3357605211135|persona:founder-6:-22.570596442562692:-189|persona:founder-4:3.1111868960593414:-176.42534261959295|persona:founder-5:-19.33633667309497:-173.29056515036757|persona:founder-9:-29.989403557437306:-180|persona:founder-7:9:-162.82197675368275|persona:founder-8:-28.017619446004687:-152|persona:founder-10:-5.410596442562692:-146.17802324631725|cattle:cattle-1:-20:-175.8400499443204|cattle:cattle-2:-21:-179|cattle:cattle-3:-15:-188.31204994432042",
+          "step": 896,
+          "activeSeconds": 89.59999999999918
+        },
+        {
+          "benchmarkStep": 846,
+          "agent": "persona:founder-3",
+          "kind": "persona",
+          "purpose": "occupation",
+          "target": "shore:172",
+          "goal": {
+            "x": 11.876662823204999,
+            "z": -257.8914188557851
+          },
+          "from": {
+            "x": -17.955939062155636,
+            "z": -184.82059045349664
+          },
+          "nodes": 2000,
+          "accepted": false,
+          "reason": "node-cap",
+          "navigationGeneration": 1,
+          "reservationGeneration": 0,
+          "occupancy": "persona:founder-1:-12.326800356525428:-171.1793109600032|persona:founder-2:-8.203023770675971:-172.3357605211135|persona:founder-6:-22.570596442562692:-189|persona:founder-4:3.1111868960593414:-176.42534261959295|persona:founder-5:-19.33633667309497:-173.29056515036757|persona:founder-9:-29.989403557437306:-180|persona:founder-7:9:-162.82197675368275|persona:founder-8:-28.017619446004687:-152|persona:founder-10:-5.410596442562692:-146.17802324631725|cattle:cattle-1:-20:-175.8400499443204|cattle:cattle-2:-21:-179|cattle:cattle-3:-15:-188.31204994432042",
+          "step": 896,
+          "activeSeconds": 89.59999999999918
+        }
+      ],
+      "frameWindow": [
+        {
+          "step": 830,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 831,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 832,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 833,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 834,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 835,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 836,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 837,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 838,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 839,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 840,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 841,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 842,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 843,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 844,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 845,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 846,
+          "phase": "none",
+          "routeAttempts": 8,
+          "targetAttempts": 8,
+          "routeNodes": 16002,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 847,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 848,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 849,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 850,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 851,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 852,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 853,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 854,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        },
+        {
+          "step": 855,
+          "phase": "none",
+          "routeAttempts": 0,
+          "targetAttempts": 0,
+          "routeNodes": 0,
+          "visitsStarted": 0,
+          "occupationVisits": 0,
+          "visits": []
+        }
+      ],
+      "firstOccupationRoutesAfterRelease": [
+        {
+          "benchmarkStep": 846,
+          "agent": "persona:founder-3",
+          "kind": "persona",
+          "purpose": "occupation",
+          "target": "shore:202",
+          "goal": {
+            "x": 8.957014000100216,
+            "z": -255.52633231007164
+          },
+          "from": {
+            "x": -17.955939062155636,
+            "z": -184.82059045349664
+          },
+          "nodes": 2000,
+          "accepted": false,
+          "reason": "node-cap",
+          "navigationGeneration": 1,
+          "reservationGeneration": 0,
+          "occupancy": "persona:founder-1:-12.326800356525428:-171.1793109600032|persona:founder-2:-8.203023770675971:-172.3357605211135|persona:founder-6:-22.570596442562692:-189|persona:founder-4:3.1111868960593414:-176.42534261959295|persona:founder-5:-19.33633667309497:-173.29056515036757|persona:founder-9:-29.989403557437306:-180|persona:founder-7:9:-162.82197675368275|persona:founder-8:-28.017619446004687:-152|persona:founder-10:-5.410596442562692:-146.17802324631725|cattle:cattle-1:-20:-175.8400499443204|cattle:cattle-2:-21:-179|cattle:cattle-3:-15:-188.31204994432042",
+          "step": 896,
+          "activeSeconds": 89.59999999999918
+        },
+        {
+          "benchmarkStep": 846,
+          "agent": "persona:founder-3",
+          "kind": "persona",
+          "purpose": "occupation",
+          "target": "shore:183",
+          "goal": {
+            "x": 10.237646562709067,
+            "z": -255.5732386700251
+          },
+          "from": {
+            "x": -17.955939062155636,
+            "z": -184.82059045349664
+          },
+          "nodes": 2000,
+          "accepted": false,
+          "reason": "node-cap",
+          "navigationGeneration": 1,
+          "reservationGeneration": 0,
+          "occupancy": "persona:founder-1:-12.326800356525428:-171.1793109600032|persona:founder-2:-8.203023770675971:-172.3357605211135|persona:founder-6:-22.570596442562692:-189|persona:founder-4:3.1111868960593414:-176.42534261959295|persona:founder-5:-19.33633667309497:-173.29056515036757|persona:founder-9:-29.989403557437306:-180|persona:founder-7:9:-162.82197675368275|persona:founder-8:-28.017619446004687:-152|persona:founder-10:-5.410596442562692:-146.17802324631725|cattle:cattle-1:-20:-175.8400499443204|cattle:cattle-2:-21:-179|cattle:cattle-3:-15:-188.31204994432042",
+          "step": 896,
+          "activeSeconds": 89.59999999999918
+        },
+        {
+          "benchmarkStep": 846,
+          "agent": "persona:founder-3",
+          "kind": "persona",
+          "purpose": "occupation",
+          "target": "shore:183",
+          "goal": {
+            "x": 9.49510120708433,
+            "z": -256.243034455948
+          },
+          "from": {
+            "x": -17.955939062155636,
+            "z": -184.82059045349664
+          },
+          "nodes": 2000,
+          "accepted": false,
+          "reason": "node-cap",
+          "navigationGeneration": 1,
+          "reservationGeneration": 0,
+          "occupancy": "persona:founder-1:-12.326800356525428:-171.1793109600032|persona:founder-2:-8.203023770675971:-172.3357605211135|persona:founder-6:-22.570596442562692:-189|persona:founder-4:3.1111868960593414:-176.42534261959295|persona:founder-5:-19.33633667309497:-173.29056515036757|persona:founder-9:-29.989403557437306:-180|persona:founder-7:9:-162.82197675368275|persona:founder-8:-28.017619446004687:-152|persona:founder-10:-5.410596442562692:-146.17802324631725|cattle:cattle-1:-20:-175.8400499443204|cattle:cattle-2:-21:-179|cattle:cattle-3:-15:-188.31204994432042",
+          "step": 896,
+          "activeSeconds": 89.59999999999918
+        },
+        {
+          "benchmarkStep": 846,
+          "agent": "persona:founder-3",
+          "kind": "persona",
+          "purpose": "occupation",
+          "target": "shore:184",
+          "goal": {
+            "x": 11.181910473792419,
+            "z": -256.87688008933037
+          },
+          "from": {
+            "x": -17.955939062155636,
+            "z": -184.82059045349664
+          },
+          "nodes": 2001,
+          "accepted": false,
+          "reason": "node-cap",
+          "navigationGeneration": 1,
+          "reservationGeneration": 0,
+          "occupancy": "persona:founder-1:-12.326800356525428:-171.1793109600032|persona:founder-2:-8.203023770675971:-172.3357605211135|persona:founder-6:-22.570596442562692:-189|persona:founder-4:3.1111868960593414:-176.42534261959295|persona:founder-5:-19.33633667309497:-173.29056515036757|persona:founder-9:-29.989403557437306:-180|persona:founder-7:9:-162.82197675368275|persona:founder-8:-28.017619446004687:-152|persona:founder-10:-5.410596442562692:-146.17802324631725|cattle:cattle-1:-20:-175.8400499443204|cattle:cattle-2:-21:-179|cattle:cattle-3:-15:-188.31204994432042",
+          "step": 896,
+          "activeSeconds": 89.59999999999918
+        },
+        {
+          "benchmarkStep": 846,
+          "agent": "persona:founder-3",
+          "kind": "persona",
+          "purpose": "occupation",
+          "target": "shore:184",
+          "goal": {
+            "x": 10.323327401915103,
+            "z": -257.3895545559129
+          },
+          "from": {
+            "x": -17.955939062155636,
+            "z": -184.82059045349664
+          },
+          "nodes": 2000,
+          "accepted": false,
+          "reason": "node-cap",
+          "navigationGeneration": 1,
+          "reservationGeneration": 0,
+          "occupancy": "persona:founder-1:-12.326800356525428:-171.1793109600032|persona:founder-2:-8.203023770675971:-172.3357605211135|persona:founder-6:-22.570596442562692:-189|persona:founder-4:3.1111868960593414:-176.42534261959295|persona:founder-5:-19.33633667309497:-173.29056515036757|persona:founder-9:-29.989403557437306:-180|persona:founder-7:9:-162.82197675368275|persona:founder-8:-28.017619446004687:-152|persona:founder-10:-5.410596442562692:-146.17802324631725|cattle:cattle-1:-20:-175.8400499443204|cattle:cattle-2:-21:-179|cattle:cattle-3:-15:-188.31204994432042",
+          "step": 896,
+          "activeSeconds": 89.59999999999918
+        },
+        {
+          "benchmarkStep": 846,
+          "agent": "persona:founder-3",
+          "kind": "persona",
+          "purpose": "occupation",
+          "target": "shore:185",
+          "goal": {
+            "x": 11.54642072816909,
+            "z": -257.45951070710186
+          },
+          "from": {
+            "x": -17.955939062155636,
+            "z": -184.82059045349664
+          },
+          "nodes": 2001,
+          "accepted": false,
+          "reason": "node-cap",
+          "navigationGeneration": 1,
+          "reservationGeneration": 0,
+          "occupancy": "persona:founder-1:-12.326800356525428:-171.1793109600032|persona:founder-2:-8.203023770675971:-172.3357605211135|persona:founder-6:-22.570596442562692:-189|persona:founder-4:3.1111868960593414:-176.42534261959295|persona:founder-5:-19.33633667309497:-173.29056515036757|persona:founder-9:-29.989403557437306:-180|persona:founder-7:9:-162.82197675368275|persona:founder-8:-28.017619446004687:-152|persona:founder-10:-5.410596442562692:-146.17802324631725|cattle:cattle-1:-20:-175.8400499443204|cattle:cattle-2:-21:-179|cattle:cattle-3:-15:-188.31204994432042",
+          "step": 896,
+          "activeSeconds": 89.59999999999918
+        },
+        {
+          "benchmarkStep": 846,
+          "agent": "persona:founder-3",
+          "kind": "persona",
+          "purpose": "occupation",
+          "target": "shore:185",
+          "goal": {
+            "x": 10.71384508194136,
+            "z": -258.01342206581234
+          },
+          "from": {
+            "x": -17.955939062155636,
+            "z": -184.82059045349664
+          },
+          "nodes": 2000,
+          "accepted": false,
+          "reason": "node-cap",
+          "navigationGeneration": 1,
+          "reservationGeneration": 0,
+          "occupancy": "persona:founder-1:-12.326800356525428:-171.1793109600032|persona:founder-2:-8.203023770675971:-172.3357605211135|persona:founder-6:-22.570596442562692:-189|persona:founder-4:3.1111868960593414:-176.42534261959295|persona:founder-5:-19.33633667309497:-173.29056515036757|persona:founder-9:-29.989403557437306:-180|persona:founder-7:9:-162.82197675368275|persona:founder-8:-28.017619446004687:-152|persona:founder-10:-5.410596442562692:-146.17802324631725|cattle:cattle-1:-20:-175.8400499443204|cattle:cattle-2:-21:-179|cattle:cattle-3:-15:-188.31204994432042",
+          "step": 896,
+          "activeSeconds": 89.59999999999918
+        },
+        {
+          "benchmarkStep": 846,
+          "agent": "persona:founder-3",
+          "kind": "persona",
+          "purpose": "occupation",
+          "target": "shore:172",
+          "goal": {
+            "x": 11.876662823204999,
+            "z": -257.8914188557851
+          },
+          "from": {
+            "x": -17.955939062155636,
+            "z": -184.82059045349664
+          },
+          "nodes": 2000,
+          "accepted": false,
+          "reason": "node-cap",
+          "navigationGeneration": 1,
+          "reservationGeneration": 0,
+          "occupancy": "persona:founder-1:-12.326800356525428:-171.1793109600032|persona:founder-2:-8.203023770675971:-172.3357605211135|persona:founder-6:-22.570596442562692:-189|persona:founder-4:3.1111868960593414:-176.42534261959295|persona:founder-5:-19.33633667309497:-173.29056515036757|persona:founder-9:-29.989403557437306:-180|persona:founder-7:9:-162.82197675368275|persona:founder-8:-28.017619446004687:-152|persona:founder-10:-5.410596442562692:-146.17802324631725|cattle:cattle-1:-20:-175.8400499443204|cattle:cattle-2:-21:-179|cattle:cattle-3:-15:-188.31204994432042",
+          "step": 896,
+          "activeSeconds": 89.59999999999918
+        }
+      ]
+    }
+  ]
+}

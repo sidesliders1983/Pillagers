@@ -1,0 +1,112 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-26T09:42:40.063Z",
+  "baseCommit": "85301306b57b26656f36df72badd6dec846e0a75",
+  "state": "Uncommitted integrated worktree; source hashes identify this audio validation",
+  "node": "v24.19.0",
+  "commands": [
+    "node --test --test-concurrency=1 tests/fjord-audio.test.mjs tests/soundscape.test.mjs tests/audio-controls.test.mjs tests/settlement-sounds.test.mjs tests/wildlife-sounds.test.mjs tests/cultural-sounds.test.mjs tests/cultural-audio-budget.test.mjs tests/cultural-sound-assets.test.mjs",
+    "node node_modules/typescript/bin/tsc --noEmit",
+    "node scripts/audio/culture/validate.mjs"
+  ],
+  "tests": {
+    "passed": 36,
+    "failed": 0,
+    "skipped": 0,
+    "testDurationMs": 13139.6966
+  },
+  "typescript": "passed",
+  "assetGuard": "passed",
+  "redGreenEvidence": [
+    "Fresh accepted projection: missing public module failed, then passed after implementation.",
+    "Actual transient Soundscape marker eviction replayed a consumed phase (1 voice versus0); bounded external phase latch fixed it.",
+    "Late first observation produced a group source instead of silence; late-phase cutoff fixed it.",
+    "192kHz context fetched2over-budgetfiles instead of0; actual-rate family preflight fixed it.",
+    "Two actual1.2MB buffers entered a2MiB family; postdecode admission retained onlyone.",
+    "Known actual1.8MB warmbuffer still fetched theother768KB member; actual warmbytes preflight fixed it.",
+    "The real-WAV integration initially lacked the optional pack, then passed with two lazy hash-checked candidates.",
+    "The separate asset validator was absent, then accepted exactbytes and rejected a valid-container payload substitution."
+  ],
+  "limits": {
+    "cultureFamilyMaximumBytes": 2097152,
+    "globalDecodedMaximumBytes": 25165824,
+    "globalBufferCount": 32,
+    "concurrentDecodes": 2,
+    "expectedSelectedPairAt96kBytes": 1920000,
+    "expectedSelectedPairAt192kBytes": 3840000,
+    "note": "Rate examples are metadata calculations; actual browser-buffer admission checks returned lengths/channels. No browser heap/device peak claim."
+  },
+  "acceptedRelease": "Unchanged; optional culture composition is separate.",
+  "pending": [
+    "Owner listening/wordlessness/mix selection",
+    "General-release acceptance",
+    "Physical-device sustained audio/performance verification"
+  ],
+  "files": [
+    {
+      "path": "src/audio/CulturalSounds.ts",
+      "sha256": "5ac64c34941841a8cd5e8d38ee0d23518a415eac9eed01c16eef89bfa6d4efdd",
+      "bytes": 3289
+    },
+    {
+      "path": "src/audio/CulturalSoundPack.ts",
+      "sha256": "1b42b7fd09f8ecd0aef951885e541c7462fc7fe34f56eea528d6b8bc3686ac05",
+      "bytes": 2267
+    },
+    {
+      "path": "src/audio/FjordAudio.ts",
+      "sha256": "003a3800e68d23e4ac0eb73d834f2290444d985e94b656f279af4104ee371227",
+      "bytes": 28028
+    },
+    {
+      "path": "scripts/audio/culture/prepare.mjs",
+      "sha256": "c16e4c0ba7584362d7cad98fa5e31ea635cc4bbe529c28634b48d9e64dc22745",
+      "bytes": 9252
+    },
+    {
+      "path": "scripts/audio/culture/prepare-public-candidate.mjs",
+      "sha256": "72f97fa75d24db639f7b9250b31269fb48dc8e4c0e3a2bcc1de7bba2638bab2e",
+      "bytes": 4638
+    },
+    {
+      "path": "scripts/audio/culture/validate.mjs",
+      "sha256": "03668b7509f724fd40c2496a4f573878edefb113929dc6398e8d3c3782d50760",
+      "bytes": 4768
+    },
+    {
+      "path": "tests/cultural-sounds.test.mjs",
+      "sha256": "0af35caa7f20f4b1ef08affb740886c7a6dba3a6058305131574a9b9a0b89d10",
+      "bytes": 4391
+    },
+    {
+      "path": "tests/cultural-audio-budget.test.mjs",
+      "sha256": "fabff707e1acba15c811c3d207e6f7d185d79663ec29427c51360859ba67a690",
+      "bytes": 8515
+    },
+    {
+      "path": "tests/cultural-sound-assets.test.mjs",
+      "sha256": "ef0f520eaaa196a3512aed116f09e84ce4b927f3ad1ce608deabe77068502046",
+      "bytes": 1852
+    },
+    {
+      "path": "public/game-assets/audio/culture/manifest.json",
+      "sha256": "22fcf381700019a42e143c616b028d9093e9c3d005f0c4063622c0ac6640aa9b",
+      "bytes": 1125
+    },
+    {
+      "path": "public/game-assets/audio/culture/catalogue.json",
+      "sha256": "debf569fce210e0745c1f2fd200ae3fb8de7d413025922af92494b8a7d7ed9f4",
+      "bytes": 2869
+    },
+    {
+      "path": "public/game-assets/audio/culture/culture-murmur-34a6bca1-c16e4c0b.wav",
+      "sha256": "f74c00b7fe0321db12d8beffe0c9652c9d8a7beb00410087ab703b671a9088cf",
+      "bytes": 144044
+    },
+    {
+      "path": "public/game-assets/audio/culture/culture-applause-8180c951-c16e4c0b.wav",
+      "sha256": "80eb7f77c9cfea3c56d9b884ef89e9461c1206af520189a5f68fdd514e434a28",
+      "bytes": 96044
+    }
+  ]
+}

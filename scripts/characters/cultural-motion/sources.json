@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "issue": 274,
+  "provider": "Meshy",
+  "createdAt": "2026-10-26T07:20:45.052Z",
+  "sourceDocs": "https://docs.meshy.ai/en/api/text-to-motion",
+  "blender": {
+    "version": "5.2.2"
+  },
+  "sourceBody": "public/game-assets/human/Human_LOD2.glb",
+  "sourceBodySha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+  "nativeLods": [
+    {
+      "lod": 0,
+      "file": "public/game-assets/human/Human_LOD0.glb",
+      "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+      "rigHash": "258405cfce1884a45478fe89ca7ea8bfa56ede20548ebeaa53f2acbd65b722da",
+      "joints": 44
+    },
+    {
+      "lod": 1,
+      "file": "public/game-assets/human/Human_LOD1.glb",
+      "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+      "rigHash": "258405cfce1884a45478fe89ca7ea8bfa56ede20548ebeaa53f2acbd65b722da",
+      "joints": 44
+    },
+    {
+      "lod": 2,
+      "file": "public/game-assets/human/Human_LOD2.glb",
+      "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+      "rigHash": "258405cfce1884a45478fe89ca7ea8bfa56ede20548ebeaa53f2acbd65b722da",
+      "joints": 44
+    }
+  ],
+  "semanticMapping": {
+    "mixamorig:Hips": "Pelvis",
+    "mixamorig:Spine": "Spine1",
+    "mixamorig:Spine1": "Spine2",
+    "mixamorig:Spine2": "Spine3",
+    "mixamorig:Neck": "Neck",
+    "mixamorig:Head": "Head",
+    "mixamorig:LeftShoulder": "L_Collar",
+    "mixamorig:LeftArm": "L_Shoulder",
+    "mixamorig:LeftForeArm": "L_Elbow",
+    "mixamorig:LeftHand": "L_Wrist",
+    "mixamorig:LeftUpLeg": "L_Hip",
+    "mixamorig:LeftLeg": "L_Knee",
+    "mixamorig:LeftFoot": "L_Ankle",
+    "mixamorig:LeftToeBase": "L_Foot",
+    "mixamorig:LeftHandThumb1": "L_Thumb1",
+    "mixamorig:LeftHandThumb2": "L_Thumb2",
+    "mixamorig:LeftHandThumb3": "L_Thumb3",
+    "mixamorig:LeftHandMiddle1": "L_Middle1",
+    "mixamorig:LeftHandMiddle2": "L_Middle2",
+    "mixamorig:LeftHandMiddle3": "L_Middle3",
+    "mixamorig:RightShoulder": "R_Collar",
+    "mixamorig:RightArm": "R_Shoulder",
+    "mixamorig:RightForeArm": "R_Elbow",
+    "mixamorig:RightHand": "R_Wrist",
+    "mixamorig:RightUpLeg": "R_Hip",
+    "mixamorig:RightLeg": "R_Knee",
+    "mixamorig:RightFoot": "R_Ankle",
+    "mixamorig:RightToeBase": "R_Foot",
+    "mixamorig:RightHandThumb1": "R_Thumb1",
+    "mixamorig:RightHandThumb2": "R_Thumb2",
+    "mixamorig:RightHandThumb3": "R_Thumb3",
+    "mixamorig:RightHandMiddle1": "R_Middle1",
+    "mixamorig:RightHandMiddle2": "R_Middle2",
+    "mixamorig:RightHandMiddle3": "R_Middle3"
+  },
+  "sources": [
+    {
+      "name": "Storytelling_Gesture",
+      "file": "Storytelling_Gesture.fbx",
+      "taskId": "01a17715-486a-7724-b3e6-fa677e2adfd7",
+      "status": "SUCCEEDED",
+      "prompt": "An adult stands upright facing forward with both feet planted. Calmly tells a story to a small group, using measured open hand gestures near chest height and gentle head nods. No walking, turning, props, dancing or exaggerated motion. Hands return to a relaxed position.",
+      "mode": "prime",
+      "requestedDuration": 4,
+      "consumedCredits": 10,
+      "bytes": 16825904,
+      "sha256": "4d386ed7211985d46c1db59f3ab5ff8df3e91b9555b13dcf9bbd6e225b421cf5"
+    },
+    {
+      "name": "Gathering_Applause",
+      "file": "Gathering_Applause.fbx",
+      "taskId": "01a17715-4be2-710b-bacd-947b6bc296c9",
+      "status": "SUCCEEDED",
+      "prompt": "An adult stands upright facing forward with both feet planted. Gives a few gentle, restrained claps in front of the chest, then lowers both hands naturally to a relaxed position. Small attentive head nod. No walking, turning, dancing, jumping, props or exaggerated motion.",
+      "mode": "prime",
+      "requestedDuration": 3,
+      "consumedCredits": 10,
+      "bytes": 16768672,
+      "sha256": "3685addfa10c2c0bff1e7f1337a2753804ada66beb61e204977399d20e833446"
+    }
+  ],
+  "expectedOutput": {
+    "file": "Human_CulturalAnimations.glb",
+    "bytes": 445676,
+    "sha256": "8fb9ff11a617d53064515f152cab184de2804a23eece4e5456edf66b92ae143f",
+    "conservativeDecodedTrackBytes": 480480,
+    "meshes": 0,
+    "images": 0,
+    "skins": 0
+  },
+  "budget": {
+    "maximumEncodedBytes": 1572864,
+    "maximumDecodedTrackBytes": 524288
+  },
+  "interpretation": "Offline native clip candidate. Exact per-clap audio contact and game/device acceptance remain pending.",
+  "intermediateNative": {
+    "uncompressed": {
+      "file": "native-uncompressed.glb",
+      "bytes": 6473104,
+      "sha256": "a884e79400d17883b2c0581cd9816d77395b30ab06db9484ec1b1eb4eb10983a"
+    },
+    "textureless": {
+      "file": "native-no-textures.glb",
+      "bytes": 1222120,
+      "sha256": "5b744d2c4a1cba4ade89151f111501ca4d7d6661cb7773b6e34f542c72275aff"
+    }
+  }
+}

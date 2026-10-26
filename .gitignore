@@ -24,3 +24,6 @@ scripts/sprites/imagegen-input.local.json
 # Local ElevenLabs generation credentials; never ship browser-side keys.
 /.env
 /.env.elevenlabs.local
+
+# Reproducible culture calibration ships verified compressed raw data; preserve local resume files.
+/docs/qa/cultural-events/calibration-cultural-events-275-276-v1/*.jsonl

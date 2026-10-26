@@ -1,0 +1,65 @@
+{
+  "assets": [
+    {
+      "id": "culture-murmur",
+      "path": "game-assets/audio/culture/culture-murmur-34a6bca1-c16e4c0b.wav",
+      "seconds": 3,
+      "channels": 1
+    },
+    {
+      "id": "culture-applause",
+      "path": "game-assets/audio/culture/culture-applause-8180c951-c16e4c0b.wav",
+      "seconds": 2,
+      "channels": 1
+    }
+  ],
+  "cues": [
+    {
+      "id": "culture-murmur",
+      "bus": "world",
+      "variants": [
+        "culture-murmur"
+      ],
+      "gain": 0.4,
+      "loop": false,
+      "cooldown": [
+        0,
+        0
+      ],
+      "range": 36,
+      "priority": 2,
+      "limit": 1,
+      "pitch": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "culture-applause",
+      "bus": "world",
+      "variants": [
+        "culture-applause"
+      ],
+      "gain": 0.4,
+      "loop": false,
+      "cooldown": [
+        0,
+        0
+      ],
+      "range": 36,
+      "priority": 2,
+      "limit": 1,
+      "pitch": [
+        1,
+        1
+      ]
+    }
+  ],
+  "decodedBudget": {
+    "assetIds": [
+      "culture-murmur",
+      "culture-applause"
+    ],
+    "maximumBytes": 2097152
+  }
+}

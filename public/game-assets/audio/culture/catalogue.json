@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "role": "Experimental cultural gathering sound candidates; not a standalone sample library.",
+  "status": {
+    "technical": "prepared",
+    "listening": "owner-accepted-prototype",
+    "generalRelease": "not-approved"
+  },
+  "selectionReason": "The owner accepted the integrated prototype device/listening review on 2026-10-26; the two selected prepared files are unchanged.",
+  "preparationSHA256": "c16e4c0ba7584362d7cad98fa5e31ea635cc4bbe529c28634b48d9e64dc22745",
+  "preparationHashMode": "UTF-8 normalized LF",
+  "tool": "ffmpeg version 7.1-essentials_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers",
+  "entries": [
+    {
+      "id": "culture-murmur",
+      "generationId": "Uba21h6cTZNVaO7eM8P5",
+      "provider": "ElevenLabs",
+      "model": "eleven_text_to_sound_v2",
+      "generatedDate": "2026-10-26",
+      "sourceUrl": "https://elevenlabs.io/sound-effects",
+      "licenseEvidence": [
+        "https://elevenlabs.io/creative-terms"
+      ],
+      "source": {
+        "sha256": "34a6bca1bef22943049713d3c7e6ad348bcf91cf9eb61d1aea5d0b8116b8def9",
+        "bytes": 66070
+      },
+      "prepared": {
+        "file": "culture-murmur-34a6bca1-c16e4c0b.wav",
+        "sha256": "f74c00b7fe0321db12d8beffe0c9652c9d8a7beb00410087ab703b671a9088cf",
+        "bytes": 144044,
+        "sampleRate": 24000,
+        "channels": 1,
+        "bits": 16,
+        "frames": 72000,
+        "seconds": 3,
+        "peakDbFS": -9.871987150507858,
+        "rmsDbFS": -27.87644390690039,
+        "clippedSamples": 0,
+        "truePeakDbFS": -9.9,
+        "integratedLUFS": -24.4,
+        "trimDb": 0
+      }
+    },
+    {
+      "id": "culture-applause",
+      "generationId": "5wzWo0JLiRv62M3wBVzM",
+      "provider": "ElevenLabs",
+      "model": "eleven_text_to_sound_v2",
+      "generatedDate": "2026-10-26",
+      "sourceUrl": "https://elevenlabs.io/sound-effects",
+      "licenseEvidence": [
+        "https://elevenlabs.io/creative-terms"
+      ],
+      "source": {
+        "sha256": "8180c9510994e2c6a3e8071027ab3af78efef70ca13818c51dafdb82b23d832d",
+        "bytes": 50187
+      },
+      "prepared": {
+        "file": "culture-applause-8180c951-c16e4c0b.wav",
+        "sha256": "80eb7f77c9cfea3c56d9b884ef89e9461c1206af520189a5f68fdd514e434a28",
+        "bytes": 96044,
+        "sampleRate": 24000,
+        "channels": 1,
+        "bits": 16,
+        "frames": 48000,
+        "seconds": 2,
+        "peakDbFS": -5.814712608586408,
+        "rmsDbFS": -30.555219498507636,
+        "clippedSamples": 0,
+        "truePeakDbFS": -5.7,
+        "integratedLUFS": -27.5,
+        "trimDb": -8.714649820324826
+      }
+    }
+  ],
+  "decodedBudget": {
+    "assetIds": [
+      "culture-murmur",
+      "culture-applause"
+    ],
+    "maximumBytes": 2097152,
+    "note": "Admission uses the actual AudioContext rate and verifies actual decoded buffers; unsupported budgets skip these cues."
+  },
+  "ownerReview": {
+    "date": "2026-10-26",
+    "reference": "call_e78999fcf4d1484cbb315f6f476750d2",
+    "scope": "Requested iPhone/iPad prototype flow, gathering, gestures, sound and pause reported as working pleasantly. Exact device/browser version and instrumented sustained performance were not supplied.",
+    "generalRelease": false
+  }
+}

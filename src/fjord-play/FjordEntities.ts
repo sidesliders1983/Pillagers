@@ -12,6 +12,8 @@ import type { LivingWorldController } from './LivingWorldController';
 import type { SelectionMarker } from '../play/SelectionPresentation';
 import { Box3, Camera, DoubleSide, Group, Mesh, MeshBasicMaterial, Object3D, Raycaster, RingGeometry, SkinnedMesh, Vector2, Vector3 } from 'three';
 import { FjordModels } from './FjordModels';
+import type { CulturalMotion } from '../characters/CulturalMotion';
+import type { CulturalPresentationFrame } from './CulturalPresentation';
 import type { FjordEntity } from './FjordProjection';
 import { livestockPresentation } from '../characters/LivestockPresentation';
 import type { LivestockDeath } from './LivestockDeath';
@@ -352,6 +354,15 @@ export class FjordEntities {
             return entry.modelBounds?.clone().applyMatrix4(entry.model.matrixWorld);
         }
         return entry?.localBounds?.clone().translate(entry.model.position);
+    }
+    playCulture(bank: CulturalMotion, frame: CulturalPresentationFrame) {
+        const keys = frame.phase === 'gathering' ? frame.participantKeys.slice(0, 1) : frame.participantKeys;
+        const clip = frame.phase === 'gathering' ? 'Storytelling_Gesture' : 'Gathering_Applause';
+        for (const key of keys) {
+            const model = this.entries.get(key)?.model;
+            if (!model?.visible || model.userData.canonical?.expedition) continue;
+            void this.models.playCulture(model, bank, clip, { eventId: frame.id, visible: frame.visible });
+        }
     }
     residentForPortrait(input: PortraitRequest) {
         const model = this.entries.get('persona:' + input.residentId)?.model;

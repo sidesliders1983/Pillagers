@@ -98,7 +98,7 @@ export function populationEngine(candidate = 'baseline15', { detailLimit = 50000
     }
     function instrument(source, url) {
         if (url.pathname.endsWith('/simulation/Mortality.ts')) {
-            source = replace(source, 'if(!roll(risk))return [];',
+            source = replace(source, 'if (!roll(risk)) return [];',
                 'const died=roll(risk); study.humanMortality(state,id,age,band?.chanceBps??0,weatherExposureBps,risk,died); if(!died)return [];');
         }
         if (url.pathname.endsWith('/simulation/Livestock.ts')) {

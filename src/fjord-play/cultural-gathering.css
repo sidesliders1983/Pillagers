@@ -1,0 +1,9 @@
+.fjord-culture { border-top: 1px solid var(--fjord-line); padding-top: 12px; margin-top: 12px; }
+.fjord-culture h3 { margin: 5px 0 8px; }
+.fjord-culture-prototype { color: var(--fjord-accent); }
+.fjord-culture ul { margin: 7px 0; padding-left: 22px; }
+.fjord-culture li { margin: 4px 0; }
+.fjord-culture button { min-height: 44px; }
+#fjord-play:not(.fjord-mobile) .fjord-stage #fjord-management.fjord-culture-task { width: min(440px, calc(100vw - 32px)); }
+#fjord-play .fjord-culture-task .fjord-card-body { overflow: auto; }
+#fjord-play .fjord-culture-task .fjord-culture { margin-top: 0; border-top: 0; padding-top: 0; }

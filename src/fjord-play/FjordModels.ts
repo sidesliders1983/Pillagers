@@ -1,4 +1,6 @@
 import { meshyHumanFactory, meshyAnimationClips, type MeshyHuman } from '../characters/MeshyHuman';
+import type { CulturalMotion, CulturalMotionRequest } from '../characters/CulturalMotion';
+import type { CulturalAnimationName } from '../characters/HumanCulturalAnimations';
 import { universalHumanProfile } from '../characters/UniversalHumanProfile';
 import { livestockPresentation } from '../characters/LivestockPresentation';
 import { prepareFaunaLighting } from '../characters/FaunaLighting';
@@ -29,6 +31,7 @@ export class FjordModels {
         clips?: import('three').AnimationClip[]; action?: import('three').AnimationAction;
         fingerprint?: string; paceSignature?: string; resumeGrazeTime?: number; embarked?: boolean;
         materialRevision?: number;
+        culturalEvent?: string;
         pace: number; groundSpeed: number; state: string }>();
     async reconcile(model: Object3D, entity: FjordEntity) {
         const actor = this.actors.get(model);
@@ -125,10 +128,37 @@ export class FjordModels {
         }
         actor.embarked = embarked;
     }
+    async playCulture(model: Object3D, bank: CulturalMotion, clip: CulturalAnimationName,
+        request: CulturalMotionRequest) {
+        const actor = this.actors.get(model);
+        if (!actor?.human || actor.embarked) return false;
+        actor.culturalEvent = request.eventId;
+        const played = await bank.play(actor.human, clip, request);
+        if (this.actors.get(model) !== actor || actor.culturalEvent !== request.eventId) {
+            if (played && !actor.culturalEvent) actor.human.stopPresentationClip();
+            return false;
+        }
+        if (!played) actor.culturalEvent = undefined;
+        return played;
+    }
+    stopCulture() {
+        for (const actor of this.actors.values()) {
+            if (!actor.culturalEvent) continue;
+            actor.culturalEvent = undefined;
+            actor.human?.stopPresentationClip();
+        }
+    }
     animate(model: Object3D, state: 'Idle' | 'Walk' | 'Run' | 'Talk' | 'Listen' | 'Graze' | 'Rest' | 'HumanInteraction' | 'Farm' | 'Attack' | 'Doze', speed: number, delta: number) {
         const actor = this.actors.get(model);
         if (!actor || actor.embarked) return;
-        if (actor.human) {
+        if (actor.human && actor.culturalEvent && state === 'Idle') {
+            actor.human.setPlaybackRate(1);
+            actor.human.update(delta);
+        } else if (actor.human) {
+            if (actor.culturalEvent) {
+                actor.culturalEvent = undefined;
+                actor.human.stopPresentationClip();
+            }
             const humanState = state === 'Graze' || state === 'Rest' || state === 'HumanInteraction' ? 'Idle' : state;
             if (actor.human.clips.some(c => c.name === meshyAnimationClips[humanState])) {
                 actor.human.setAnimation(humanState);
@@ -177,6 +207,7 @@ export class FjordModels {
     }
     inspectResources() {
         return { actors: this.actors.size, sourceTemplates: this.templates.size,
+            culturalActors: [...this.actors.values()].filter(actor => !!actor.culturalEvent).length,
             ownedInstanceRoots: this.instanceResources.size };
     }
     release(model: Object3D) {

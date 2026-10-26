@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "status": "headless-prototype-qualified-not-browser-acceptance",
+  "inputs": [
+    {
+      "path": "src/characters/CulturalMotion.ts",
+      "bytes": 3220,
+      "sha256": "5257d9398a650941cf85fca125d169cbdd78e33e4b69a2f2406bea3a6895d307"
+    },
+    {
+      "path": "src/characters/HumanCulturalAnimations.ts",
+      "bytes": 617,
+      "sha256": "f70421d93d5d8418c4ac0b025ce2a7bf7904d026a208839bb818c64312a2c355"
+    },
+    {
+      "path": "src/characters/MeshyHuman.ts",
+      "bytes": 34827,
+      "sha256": "913d097e899328396cc39d19e39152260f8d9ff9081323f46734dc3aaf4372a9"
+    },
+    {
+      "path": "tests/cultural-motion.test.mjs",
+      "bytes": 11656,
+      "sha256": "52330d9d28357bbd03ea7b1632e47b5976fb7c74dd953aead6fd491df3438d24"
+    },
+    {
+      "path": "public/game-assets/human/Human_CulturalAnimations.glb",
+      "bytes": 445676,
+      "sha256": "8fb9ff11a617d53064515f152cab184de2804a23eece4e5456edf66b92ae143f"
+    },
+    {
+      "path": "public/game-assets/human/cultural-animations.json",
+      "bytes": 1401,
+      "sha256": "d8813d48ba02d996e039ec5b3b22d9c25bc5005372597cb65388955a1827f74b"
+    }
+  ],
+  "assetContract": {
+    "animations": 2,
+    "nodes": 46,
+    "meshes": 0,
+    "images": 0,
+    "textures": 0,
+    "skins": 0
+  },
+  "validation": {
+    "focusedTests": 11,
+    "existingAnimationTimingTests": 3,
+    "passed": 14,
+    "failed": 0,
+    "existingSourceComparisonsSkipped": 9,
+    "skipReason": "original ignored Assets/Characters/Human/Human-textured.glb absent",
+    "typescript": "passed",
+    "heapCapMiB": 512,
+    "fullObjectAssertionDiffNeverReplayed": true
+  },
+  "limits": [
+    "No new provider generation or charges",
+    "No eager native animation-bank extension",
+    "No exact clap-contact audio qualification",
+    "Parent owns scene scheduler, actor bridge and browser/session acceptance"
+  ]
+}

@@ -1,0 +1,466 @@
+{
+  "seed": 91,
+  "cadenceSeconds": 0.1,
+  "maximumPresentationSeconds": 120,
+  "worldRecipe": {
+    "version": "island-pool-v3",
+    "generatorVersion": "fjordside-island-v0.3e-r3",
+    "seed": 15
+  },
+  "controllerSha256": "ae4b59c1f87e5e6a1253f5ff3fcb26cb5b1dbd54c3dd38eb67c400764a000197",
+  "note": "Additional public-controller trajectory diagnostic, no coordinator timeout, no model-specific pace; not a timing cohort.",
+  "profiles": [
+    {
+      "profile": "Low",
+      "limit": 6,
+      "initialPoseSha256": "e6cca16c90f6db278e9f4c1b80a445badeed5388ced61c2d6c3fee7735ca160b",
+      "elapsedSeconds": 102.9,
+      "people": [
+        {
+          "key": "persona:founder-1",
+          "name": "Halldis Bjarnardóttir",
+          "start": {
+            "x": -26.982634376945406,
+            "z": -152
+          },
+          "target": {
+            "x": -13.574657380407054,
+            "z": -171.17940954650336
+          },
+          "straightDistance": 23.40135888559051,
+          "walkedDistance": 33.61861055762434,
+          "stationaryBeforeArrivalSeconds": 1.3,
+          "firstArrivalSeconds": 62,
+          "firstWithinTargetSeconds": 61.2,
+          "at30": {
+            "walkedDistance": 16.210596442562718,
+            "straightRemaining": 16.97913747494541,
+            "stationaryBeforeArrivalSeconds": 0.7999999999999999,
+            "state": "Walk",
+            "arrived": false,
+            "dropped": false
+          }
+        },
+        {
+          "key": "persona:founder-10",
+          "name": "Rimgirdas",
+          "start": {
+            "x": -15.2,
+            "z": -129
+          },
+          "target": {
+            "x": -8.290565150367565,
+            "z": -172.06366332690502
+          },
+          "straightDistance": 43.614440143997484,
+          "walkedDistance": 56.11070260003136,
+          "stationaryBeforeArrivalSeconds": 1.6000000000000003,
+          "firstArrivalSeconds": 102.9,
+          "firstWithinTargetSeconds": 101.9,
+          "at30": {
+            "walkedDistance": 16.073298221281362,
+            "straightRemaining": 37.11924977145964,
+            "stationaryBeforeArrivalSeconds": 0.9999999999999999,
+            "state": "Walk",
+            "arrived": false,
+            "dropped": false
+          }
+        },
+        {
+          "key": "persona:founder-2",
+          "name": "Daugirdė",
+          "start": {
+            "x": -3.892444927555929,
+            "z": -152
+          },
+          "target": {
+            "x": -9.085444046717372,
+            "z": -173.33573547113966
+          },
+          "straightDistance": 21.958616712945705,
+          "walkedDistance": 26.387255686308745,
+          "stationaryBeforeArrivalSeconds": 0.30000000000000004,
+          "firstArrivalSeconds": 48.1,
+          "firstWithinTargetSeconds": 47.5,
+          "at30": {
+            "walkedDistance": 16.68952968599669,
+            "straightRemaining": 9.64813633347512,
+            "stationaryBeforeArrivalSeconds": 0.2,
+            "state": "Walk",
+            "arrived": false,
+            "dropped": false
+          }
+        },
+        {
+          "key": "persona:founder-3",
+          "name": "Tautmantė",
+          "start": {
+            "x": -15,
+            "z": -194
+          },
+          "target": {
+            "x": -10.425342619592946,
+            "z": -184.82059045349664
+          },
+          "straightDistance": 10.25617130173584,
+          "walkedDistance": 32.46781681907913,
+          "stationaryBeforeArrivalSeconds": 6.799999999999992,
+          "firstArrivalSeconds": 57.6,
+          "firstWithinTargetSeconds": 56.8,
+          "at30": {
+            "walkedDistance": 16.34803063383102,
+            "straightRemaining": 4.754075924867623,
+            "stationaryBeforeArrivalSeconds": 4.000000000000002,
+            "state": "Idle",
+            "arrived": false,
+            "dropped": false
+          }
+        },
+        {
+          "key": "persona:founder-4",
+          "name": "Kauko",
+          "start": {
+            "x": 15.89244492755593,
+            "z": -174
+          },
+          "target": {
+            "x": -5.179409546503353,
+            "z": -176.42534261959295
+          },
+          "straightDistance": 21.210972108754145,
+          "walkedDistance": 23.431369226399482,
+          "stationaryBeforeArrivalSeconds": 1.9000000000000006,
+          "firstArrivalSeconds": 44.4,
+          "firstWithinTargetSeconds": 43.6,
+          "at30": {
+            "walkedDistance": 16.370596442562693,
+            "straightRemaining": 5.29000131390581,
+            "stationaryBeforeArrivalSeconds": 0.6,
+            "state": "Walk",
+            "arrived": false,
+            "dropped": false
+          }
+        },
+        {
+          "key": "persona:founder-5",
+          "name": "Vaigirdė",
+          "start": {
+            "x": -45.37416066201151,
+            "z": -170.8943077345464
+          },
+          "target": {
+            "x": -17.936336673094978,
+            "z": -174.29056515036757
+          },
+          "straightDistance": 27.647219565107882,
+          "walkedDistance": 32.660795456251684,
+          "stationaryBeforeArrivalSeconds": 3.5000000000000018,
+          "firstArrivalSeconds": 61.8,
+          "firstWithinTargetSeconds": 61.3,
+          "at30": {
+            "walkedDistance": 15.310278915531573,
+            "straightRemaining": 15.587682815481285,
+            "stationaryBeforeArrivalSeconds": 3.0000000000000013,
+            "state": "Walk",
+            "arrived": false,
+            "dropped": false
+          }
+        }
+      ],
+      "atEnd": {
+        "eventId": "event-6",
+        "participants": [
+          {
+            "key": "persona:founder-1",
+            "arrived": true,
+            "dropped": false
+          },
+          {
+            "key": "persona:founder-10",
+            "arrived": true,
+            "dropped": false
+          },
+          {
+            "key": "persona:founder-2",
+            "arrived": true,
+            "dropped": false
+          },
+          {
+            "key": "persona:founder-3",
+            "arrived": true,
+            "dropped": false
+          },
+          {
+            "key": "persona:founder-4",
+            "arrived": true,
+            "dropped": false
+          },
+          {
+            "key": "persona:founder-5",
+            "arrived": true,
+            "dropped": false
+          }
+        ]
+      },
+      "overlaps": 0,
+      "outOfZone": 0,
+      "routeAttempts": 41
+    },
+    {
+      "profile": "Standard",
+      "limit": 8,
+      "initialPoseSha256": "e6cca16c90f6db278e9f4c1b80a445badeed5388ced61c2d6c3fee7735ca160b",
+      "elapsedSeconds": 120,
+      "people": [
+        {
+          "key": "persona:founder-1",
+          "name": "Halldis Bjarnardóttir",
+          "start": {
+            "x": -26.982634376945406,
+            "z": -152
+          },
+          "target": {
+            "x": -13.574657380407054,
+            "z": -171.17940954650336
+          },
+          "straightDistance": 23.40135888559051,
+          "walkedDistance": 33.61861055762434,
+          "stationaryBeforeArrivalSeconds": 1.3,
+          "firstArrivalSeconds": 62,
+          "firstWithinTargetSeconds": 61.2,
+          "at30": {
+            "walkedDistance": 16.210596442562718,
+            "straightRemaining": 16.97913747494541,
+            "stationaryBeforeArrivalSeconds": 0.7999999999999999,
+            "state": "Walk",
+            "arrived": false,
+            "dropped": false
+          }
+        },
+        {
+          "key": "persona:founder-10",
+          "name": "Rimgirdas",
+          "start": {
+            "x": -15.2,
+            "z": -129
+          },
+          "target": {
+            "x": -8.290565150367565,
+            "z": -172.06366332690502
+          },
+          "straightDistance": 43.614440143997484,
+          "walkedDistance": 56.11070260003136,
+          "stationaryBeforeArrivalSeconds": 1.6000000000000003,
+          "firstArrivalSeconds": 102.9,
+          "firstWithinTargetSeconds": 101.9,
+          "at30": {
+            "walkedDistance": 16.073298221281362,
+            "straightRemaining": 37.11924977145964,
+            "stationaryBeforeArrivalSeconds": 0.9999999999999999,
+            "state": "Walk",
+            "arrived": false,
+            "dropped": false
+          }
+        },
+        {
+          "key": "persona:founder-2",
+          "name": "Daugirdė",
+          "start": {
+            "x": -3.892444927555929,
+            "z": -152
+          },
+          "target": {
+            "x": -9.085444046717372,
+            "z": -173.33573547113966
+          },
+          "straightDistance": 21.958616712945705,
+          "walkedDistance": 26.387255686308745,
+          "stationaryBeforeArrivalSeconds": 0.30000000000000004,
+          "firstArrivalSeconds": 48.1,
+          "firstWithinTargetSeconds": 47.5,
+          "at30": {
+            "walkedDistance": 16.68952968599669,
+            "straightRemaining": 9.64813633347512,
+            "stationaryBeforeArrivalSeconds": 0.2,
+            "state": "Walk",
+            "arrived": false,
+            "dropped": false
+          }
+        },
+        {
+          "key": "persona:founder-3",
+          "name": "Tautmantė",
+          "start": {
+            "x": -15,
+            "z": -194
+          },
+          "target": {
+            "x": -10.425342619592946,
+            "z": -184.82059045349664
+          },
+          "straightDistance": 10.25617130173584,
+          "walkedDistance": 63.72800056040625,
+          "stationaryBeforeArrivalSeconds": 19.500000000000007,
+          "firstArrivalSeconds": 117.1,
+          "firstWithinTargetSeconds": 116.3,
+          "at30": {
+            "walkedDistance": 16.954293427502407,
+            "straightRemaining": 4.660435582505625,
+            "stationaryBeforeArrivalSeconds": 3.3000000000000016,
+            "state": "Walk",
+            "arrived": false,
+            "dropped": false
+          }
+        },
+        {
+          "key": "persona:founder-4",
+          "name": "Kauko",
+          "start": {
+            "x": 15.89244492755593,
+            "z": -174
+          },
+          "target": {
+            "x": -5.179409546503353,
+            "z": -176.42534261959295
+          },
+          "straightDistance": 21.210972108754145,
+          "walkedDistance": 23.431369226399482,
+          "stationaryBeforeArrivalSeconds": 1.9000000000000006,
+          "firstArrivalSeconds": 44.4,
+          "firstWithinTargetSeconds": 43.6,
+          "at30": {
+            "walkedDistance": 16.370596442562693,
+            "straightRemaining": 5.29000131390581,
+            "stationaryBeforeArrivalSeconds": 0.6,
+            "state": "Walk",
+            "arrived": false,
+            "dropped": false
+          }
+        },
+        {
+          "key": "persona:founder-5",
+          "name": "Vaigirdė",
+          "start": {
+            "x": -45.37416066201151,
+            "z": -170.8943077345464
+          },
+          "target": {
+            "x": -17.936336673094978,
+            "z": -174.29056515036757
+          },
+          "straightDistance": 27.647219565107882,
+          "walkedDistance": 32.660795456251684,
+          "stationaryBeforeArrivalSeconds": 3.5000000000000018,
+          "firstArrivalSeconds": 61.8,
+          "firstWithinTargetSeconds": 61.3,
+          "at30": {
+            "walkedDistance": 15.310278915531573,
+            "straightRemaining": 15.587682815481285,
+            "stationaryBeforeArrivalSeconds": 3.0000000000000013,
+            "state": "Walk",
+            "arrived": false,
+            "dropped": false
+          }
+        },
+        {
+          "key": "persona:founder-6",
+          "name": "Lempi",
+          "start": {
+            "x": -13.2,
+            "z": -195.1578029263434
+          },
+          "target": {
+            "x": -10.762769201108743,
+            "z": -183.3590353563188
+          },
+          "straightDistance": 12.047863301786276,
+          "walkedDistance": 57.146779816133204,
+          "stationaryBeforeArrivalSeconds": 13.899999999999967,
+          "firstArrivalSeconds": 101,
+          "firstWithinTargetSeconds": 99.9,
+          "at30": {
+            "walkedDistance": 17.1903153377214,
+            "straightRemaining": 5.354350571049706,
+            "stationaryBeforeArrivalSeconds": 3.2000000000000015,
+            "state": "Walk",
+            "arrived": false,
+            "dropped": false
+          }
+        },
+        {
+          "key": "persona:founder-7",
+          "name": "MaelSechnaill",
+          "start": {
+            "x": 17.23921887656885,
+            "z": -152
+          },
+          "target": {
+            "x": -6.640964643681206,
+            "z": -176.76276920110874
+          },
+          "straightDistance": 34.40142298609466,
+          "walkedDistance": 65.63732738539024,
+          "stationaryBeforeArrivalSeconds": 8.899999999999984,
+          "firstArrivalSeconds": null,
+          "firstWithinTargetSeconds": null,
+          "at30": {
+            "walkedDistance": 15.89244492755593,
+            "straightRemaining": 23.164589713568443,
+            "stationaryBeforeArrivalSeconds": 1.6000000000000003,
+            "state": "Walk",
+            "arrived": false,
+            "dropped": false
+          }
+        }
+      ],
+      "atEnd": {
+        "eventId": "event-6",
+        "participants": [
+          {
+            "key": "persona:founder-1",
+            "arrived": true,
+            "dropped": false
+          },
+          {
+            "key": "persona:founder-10",
+            "arrived": true,
+            "dropped": false
+          },
+          {
+            "key": "persona:founder-2",
+            "arrived": true,
+            "dropped": false
+          },
+          {
+            "key": "persona:founder-3",
+            "arrived": true,
+            "dropped": false
+          },
+          {
+            "key": "persona:founder-4",
+            "arrived": true,
+            "dropped": false
+          },
+          {
+            "key": "persona:founder-5",
+            "arrived": true,
+            "dropped": false
+          },
+          {
+            "key": "persona:founder-6",
+            "arrived": true,
+            "dropped": false
+          },
+          {
+            "key": "persona:founder-7",
+            "arrived": false,
+            "dropped": false
+          }
+        ]
+      },
+      "overlaps": 0,
+      "outOfZone": 0,
+      "routeAttempts": 44
+    }
+  ]
+}

@@ -12,6 +12,25 @@ export type RouteObservation = { agent: string; kind: string; purpose: string; t
     navigationGeneration: number; reservationGeneration: number; occupancy: string;
     step: number; activeSeconds: number };
 
+const maximumGatheringTrail = 512;
+const maximumSuspendedWaypoints = 4096;
+type SuspendedIntent = Pick<Agent, 'signature' | 'visit' | 'path' | 'detour' | 'homeTrail' | 'wait' | 'visitDelay'> & {
+    occupation: FjordEntity['status']['occupation'];
+    workEligible: FjordEntity['status']['workEligible'];
+    workHomeId: FjordEntity['status']['workHomeId'];
+};
+type GatheringParticipant = {
+    key: string; target: Point2 | null; arrived: boolean; dropped: boolean;
+    origin: Point2 | null; signature: string; trail: Point2[] | null; suspended: SuspendedIntent | null;
+};
+type GatheringReturn = {
+    origin: Point2; signature: string; remaining: number; suspended: SuspendedIntent | null;
+};
+export interface GatheringInspection {
+    eventId: string;
+    participants: { key: string; arrived: boolean; dropped: boolean }[];
+}
+
 type OccupationClip = 'Farm' | 'Attack' | 'Doze';
 type Visit = { target: Point2; face: Point2; source: string; phase: 'approach' | 'activity' | 'home';
     clip: OccupationClip | 'Idle'; remaining: number; travelRemaining?: number;
@@ -68,6 +87,8 @@ export class LivingWorldController {
     setRouteObserver(observer?: (observation: RouteObservation) => void) {
         this.routeObserver = observer;
     }
+    private gathering?: { eventId: string; participants: Map<string, GatheringParticipant> };
+    private gatheringReturns = new Map<string, GatheringReturn>();
     private agents = new Map<string, Agent>();
     private social = new SocialEncounters();
     private surface;
@@ -82,6 +103,150 @@ export class LivingWorldController {
         campfire: SettlementCampfire = settlementCampfire(world)) {
         this.surface = createBlueprintSurface(world);
         this.campfire = campfire;
+    }
+    /** Fresh accepted events alone stage bounded visual participants; canonical attendance is untouched. */
+    beginGathering(eventId: string, participantKeys: readonly string[], maximumActors: 6 | 8 = 6) {
+        if (!eventId.trim()) return [];
+        if (this.gathering?.eventId === eventId)
+            return [...this.gathering.participants.values()].filter(person => !person.dropped).map(person => person.key);
+        this.releaseGathering();
+        const participants = new Map<string, GatheringParticipant>();
+        this.gathering = { eventId, participants };
+        const center = this.campfire.transform;
+        let seed = 0;
+        for (const letter of eventId) seed = Math.imul(seed ^ letter.charCodeAt(0), 16777619) >>> 0;
+        const phase = seed % 360 * Math.PI / 180;
+        const candidates: Point2[] = [];
+        for (const radius of [5.5, 6.25, 7]) for (let direction = 0; direction < 8; direction++) {
+            const angle = phase + direction * Math.PI / 4;
+            candidates.push({ x: center.x + Math.cos(angle) * radius,
+                z: center.z + Math.sin(angle) * radius });
+        }
+        const selectedKeys: string[] = [];
+        for (const key of participantKeys) {
+            if (selectedKeys.includes(key)) continue;
+            selectedKeys.push(key);
+            if (selectedKeys.length >= (maximumActors === 8 ? 8 : 6)) break;
+        }
+        for (const key of selectedKeys) {
+            const person: GatheringParticipant = { key, target: null, arrived: false, dropped: true,
+                origin: null, signature: '', trail: null, suspended: null };
+            participants.set(key, person);
+            const actor = this.agents.get(key);
+            if (!actor || actor.kind !== 'persona' || actor.entity.status.indoorReason ||
+                actor.entity.status.expedition || actor.entity.status.living === false) continue;
+            person.origin = { x: actor.x, z: actor.z };
+            person.signature = actor.signature;
+            // A replaced return is cancelled, not nested into an unbounded stack of old intentions.
+            if (!this.gatheringReturns.delete(key)) person.suspended = this.suspendIntent(actor);
+            this.social.remove(key);
+            this.cancelVisit(actor);
+            const options = candidates.filter(point => this.safe(actor, point) &&
+                [...participants.values()].every(other => !other.target ||
+                    Math.hypot(other.target.x - point.x, other.target.z - point.z) >= 1.2))
+                .sort((first, second) => Math.hypot(first.x - actor.x, first.z - actor.z) -
+                    Math.hypot(second.x - actor.x, second.z - actor.z));
+            // Existing bounded route search is used only at event time, never once per rendered frame.
+            for (const target of options.slice(0, 4)) {
+                const path = this.route(actor, target, 'cultural-gathering', eventId);
+                if (!path.length) continue;
+                person.target = target;
+                person.dropped = false;
+                person.trail = [{ ...person.origin }];
+                actor.path = path;
+                break;
+            }
+            if (person.dropped) {
+                this.resumeIntent(actor, person.suspended);
+                person.suspended = null;
+            }
+        }
+        return [...participants.values()].filter(person => !person.dropped).map(person => person.key);
+    }
+    inspectGathering(): GatheringInspection | null {
+        if (!this.gathering) return null;
+        return { eventId: this.gathering.eventId,
+            participants: [...this.gathering.participants.values()].map(({ key, arrived, dropped }) =>
+                ({ key, arrived, dropped })) };
+    }
+    releaseGathering() {
+        if (!this.gathering) return;
+        for (const person of this.gathering.participants.values()) {
+            const actor = this.agents.get(person.key);
+            if (actor && person.trail) this.beginGatheringReturn(actor, person);
+            else if (actor && !person.dropped && !this.gatheringReturns.has(actor.key)) this.cancelVisit(actor);
+        }
+        this.gathering = undefined;
+    }
+    private ownsGathering(key: string) {
+        const person = this.gathering?.participants.get(key);
+        return Boolean(person && !person.dropped) || this.gatheringReturns.has(key);
+    }
+    private suspendIntent(actor: Agent): SuspendedIntent | null {
+        if (actor.path.length + actor.detour.length + actor.homeTrail.length > maximumSuspendedWaypoints)
+            return null;
+        // cancelVisit replaces these arrays. Retain the finite original corridor, not another copy.
+        return { signature: actor.signature, visit: actor.visit, path: actor.path, detour: actor.detour,
+            homeTrail: actor.homeTrail, wait: actor.wait, visitDelay: actor.visitDelay,
+            occupation: actor.entity.status.occupation, workEligible: actor.entity.status.workEligible,
+            workHomeId: actor.entity.status.workHomeId };
+    }
+    private resumeIntent(actor: Agent, intent: SuspendedIntent | null) {
+        if (!intent || intent.signature !== actor.signature ||
+            intent.occupation !== actor.entity.status.occupation ||
+            intent.workEligible !== actor.entity.status.workEligible ||
+            intent.workHomeId !== actor.entity.status.workHomeId) return;
+        const visit = intent.visit;
+        if (visit) {
+            if (!actor.entity.status.workEligible || visit.clip !== 'Idle' && !actor.occupationClips[visit.clip]) return;
+            if (intent.occupation === 'woodworker' || intent.occupation === 'hunter') {
+                if (!this.trees.some(tree => tree.key === visit.source)) return;
+            } else if (intent.occupation === 'farmer') {
+                if (!this.parcels.some(parcel => parcel.selectionKey === visit.source && parcel.status.farmyard)) return;
+            } else if (intent.occupation === 'fisher') {
+                const index = Number(visit.source.slice('shore:'.length));
+                if (!visit.source.startsWith('shore:') || !Number.isInteger(index) || !this.world.coast[index]) return;
+            }
+            if (!this.safe(actor, visit.phase === 'home' ? actor.anchor : visit.target)) return;
+        }
+        let from: Point2 = actor;
+        for (const point of [...intent.detour, ...intent.path]) {
+            if (!this.segment(actor, from, point)) return;
+            from = point;
+        }
+        actor.visit = visit;
+        actor.path = intent.path;
+        actor.detour = intent.detour;
+        actor.homeTrail = intent.homeTrail;
+        actor.wait = intent.wait;
+        actor.visitDelay = intent.visitDelay;
+    }
+    private recordGatheringTrail(actor: Agent, force = false) {
+        const person = this.gathering?.participants.get(actor.key);
+        if (!person?.trail || person.dropped) return;
+        const last = person.trail[person.trail.length - 1];
+        const distance = Math.hypot(actor.x - last.x, actor.z - last.z);
+        if (distance < .75 && (!force || distance < 1e-7)) return;
+        if (person.trail.length >= maximumGatheringTrail) {
+            // Never truncate a corridor and imply the missing segment was actually traversed.
+            person.trail = null;
+            person.suspended = null;
+            return;
+        }
+        person.trail.push({ x: actor.x, z: actor.z });
+    }
+    private beginGatheringReturn(actor: Agent, person: GatheringParticipant) {
+        if (this.gatheringReturns.has(actor.key) || !person.origin || !person.trail) return;
+        const path = this.retainedTrailPath(actor, person.trail, person.origin, true);
+        const suspended = person.suspended;
+        person.trail = null;
+        person.suspended = null;
+        this.cancelVisit(actor);
+        if (actor.signature !== person.signature || actor.entity.status.indoorReason ||
+            actor.entity.status.expedition || actor.entity.status.living === false || !path) return;
+        this.gatheringReturns.set(actor.key, { origin: person.origin, signature: actor.signature,
+            suspended, remaining: this.visitBudget(actor, path) });
+        actor.path = path;
     }
     reconcile(entities: readonly FjordEntity[], ground: FjordGround) {
         const navigationSignature = JSON.stringify([entities.map(entity => [entity.selectionKey,
@@ -185,6 +350,23 @@ export class LivingWorldController {
                 actor.detour = [];
                 actor.speed = 0;
                 actor.state = 'Idle';
+            }
+        }
+        for (const person of this.gathering?.participants.values() ?? []) {
+            const actor = this.agents.get(person.key);
+            if (!actor || actor.entity.status.indoorReason || actor.entity.status.expedition ||
+                actor.entity.status.living === false) {
+                person.dropped = true;
+                person.arrived = false;
+                if (actor) this.cancelVisit(actor);
+            }
+        }
+        for (const [key, returning] of this.gatheringReturns) {
+            const actor = this.agents.get(key);
+            if (!actor || actor.signature !== returning.signature || actor.entity.status.indoorReason ||
+                actor.entity.status.expedition || actor.entity.status.living === false) {
+                this.gatheringReturns.delete(key);
+                if (actor) this.cancelVisit(actor);
             }
         }
         this.clearReleasedPoses();
@@ -531,22 +713,36 @@ export class LivingWorldController {
     /** A successful outbound trip is already a bounded proof of the static corridor.
      * Revalidate it against today's terrain/parcels/source obstacles before returning.
      * Traffic remains owned by the normal per-step body checks and passing controller. */
-    private homeTrailPath(a: Agent) {
-        if (!a.homeTrail.length) return null;
+    private homeTrailPath(a: Agent) { return this.retainedTrailPath(a, a.homeTrail, a.anchor); }
+    private retainedTrailPath(a: Agent, trail: readonly Point2[], destination: Point2, compact = false) {
+        if (!trail.length) return null;
         let nearest = 0;
-        for (let i = 1; i < a.homeTrail.length; i++)
-            if (Math.hypot(a.x - a.homeTrail[i].x, a.z - a.homeTrail[i].z) <
-                Math.hypot(a.x - a.homeTrail[nearest].x, a.z - a.homeTrail[nearest].z)) nearest = i;
-        if (Math.hypot(a.x - a.homeTrail[nearest].x, a.z - a.homeTrail[nearest].z) > 1) return null;
-        const path = a.homeTrail.slice(0, nearest + 1).reverse().map(point => ({ ...point }));
-        path.push({ ...a.anchor });
+        for (let i = 1; i < trail.length; i++)
+            if (Math.hypot(a.x - trail[i].x, a.z - trail[i].z) <
+                Math.hypot(a.x - trail[nearest].x, a.z - trail[nearest].z)) nearest = i;
+        if (Math.hypot(a.x - trail[nearest].x, a.z - trail[nearest].z) > 1) return null;
+        const path = trail.slice(0, nearest + 1).reverse().map(point => ({ ...point }));
+        path.push({ ...destination });
         let from: Point2 = a;
         for (const point of path) {
             if (!this.segment(a, from, point)) return null;
             from = point;
         }
         while (path.length > 1 && Math.hypot(path[0].x - a.x, path[0].z - a.z) < .15) path.shift();
-        return path;
+        if (!compact) return path;
+        // Historical passing bends need not be replayed around bodies that have since moved.
+        // Only nearby retained points may be joined, through the same current segment authority.
+        const corridor: Point2[] = [];
+        let index = 0;
+        from = a;
+        while (index < path.length) {
+            let next = Math.min(index + 7, path.length - 1);
+            while (next > index && !this.segment(a, from, path[next])) next--;
+            corridor.push(path[next]);
+            from = path[next];
+            index = next + 1;
+        }
+        return corridor;
     }
     private route(a: Agent, goal?: Point2, purpose = goal ?
         (goal === a.anchor ? 'return-home' : a.visit?.phase === 'home' ? 'visit-home' : 'visit-approach') : 'wander',
@@ -674,7 +870,7 @@ export class LivingWorldController {
         return { key: a.key, x: a.x, z: a.z, radius: this.radius(a),
             velocity: distance > .15 ? { x: (next.x - a.x) / distance * a.pace,
                 z: (next.z - a.z) / distance * a.pace } : { x: 0, z: 0 },
-            enabled: a.kind === 'persona' && a.socialEnabled, busy: a.visit?.phase === 'activity' };
+            enabled: a.kind === 'persona' && a.socialEnabled && !this.ownsGathering(a.key), busy: a.visit?.phase === 'activity' };
     }
     private bodyClearance(a: Agent, point: Point2, from: Point2 = a) {
         const dx = point.x - from.x, dz = point.z - from.z;
@@ -713,7 +909,7 @@ export class LivingWorldController {
                 point => this.bodyClearance(a, point)) ?? [];
     }
     private cattleEncounters() {
-        const people = [...this.agents.values()].filter(a => a.kind === 'persona' && a.socialEnabled && a.visit?.phase !== 'activity');
+        const people = [...this.agents.values()].filter(a => a.kind === 'persona' && a.socialEnabled && !this.ownsGathering(a.key) && a.visit?.phase !== 'activity');
         for (const cow of this.agents.values()) {
             if (cow.kind !== 'cattle' || cow.state === 'Rest' || !cow.interactionSeconds || !this.social.available(cow.key)) continue;
             const reference = livestockPresentation(cow.entity.asset);
@@ -748,6 +944,34 @@ export class LivingWorldController {
             this.reservationGeneration++;
         }
         for (const a of this.agents.values()) {
+            const gathering = this.gathering?.participants.get(a.key);
+            const returning = this.gatheringReturns.get(a.key);
+            if (returning) {
+                returning.remaining -= dt;
+                if (returning.remaining <= 0 || !a.path.length && !a.detour.length) {
+                    this.gatheringReturns.delete(a.key);
+                    a.speed = 0;
+                    a.state = 'Idle';
+                    if (Math.hypot(a.x - returning.origin.x, a.z - returning.origin.z) < .15)
+                        this.resumeIntent(a, returning.suspended);
+                    else this.cancelVisit(a);
+                    continue;
+                }
+            }
+            if (gathering && !gathering.dropped && !a.path.length && !a.detour.length) {
+                a.speed = 0;
+                a.state = 'Idle';
+                if (gathering.target && Math.hypot(a.x - gathering.target.x, a.z - gathering.target.z) < .15) {
+                    const center = this.campfire.transform;
+                    const heading = Math.atan2(center.x - a.x, center.z - a.z);
+                    a.rotation = turnToward(a.rotation, heading, dt, residentMovementConfig.turnSpeed);
+                    gathering.arrived = Math.cos(heading - a.rotation) > .99;
+                    continue;
+                }
+                gathering.arrived = false;
+                gathering.dropped = true;
+                this.beginGatheringReturn(a, gathering);
+            }
             const encounter = this.social.inspect(a.key);
             if (encounter.partnerKey !== null) {
                 const partner = this.agents.get(encounter.partnerKey)!;
@@ -803,7 +1027,7 @@ export class LivingWorldController {
                     a.visit = null;
                     a.visitDelay = 20 + this.random(a) * 25;
                 }
-            } else if (a.kind === 'persona') {
+            } else if (a.kind === 'persona' && !this.ownsGathering(a.key)) {
                 a.visitDelay -= dt;
                 if (Math.hypot(a.x - a.anchor.x, a.z - a.anchor.z) > 28 && !a.path.length)
                     a.path = this.route(a, a.anchor);
@@ -869,6 +1093,17 @@ export class LivingWorldController {
             a.speed = Math.min(a.pace, a.speed + dt * a.pace * 2, Math.sqrt(2 * a.pace * Math.max(.01, distance)));
             const step = Math.min(distance, a.speed * dt), p = { x: a.x + dx / distance * step, z: a.z + dz / distance * step };
             if (!this.segment(a, a, p)) {
+                if (gathering && !gathering.dropped) {
+                    gathering.arrived = false;
+                    gathering.dropped = true;
+                    this.beginGatheringReturn(a, gathering);
+                    continue;
+                }
+                if (returning) {
+                    this.gatheringReturns.delete(a.key);
+                    this.cancelVisit(a);
+                    continue;
+                }
                 // A passing detour may finish across a parcel from the old waypoint.
                 // Reconnect to the valid trip goal through the same terrain authority.
                 const goal = a.visit ? a.visit.phase === 'home' ? a.anchor : a.visit.target :
@@ -909,11 +1144,15 @@ export class LivingWorldController {
             a.z = p.z;
             a.y = this.height(a);
             a.state = 'Walk';
+            this.recordGatheringTrail(a, distance <= step + 1e-7);
             if (distance <= step + 1e-7) {
                 if (a.detour.length) a.detour.shift();
                 else a.path.shift();
             }
         }
+    }
+    private intentWaypoints(intent: SuspendedIntent | null) {
+        return intent ? intent.path.length + intent.detour.length + intent.homeTrail.length : 0;
     }
     /** Read-only counters sampled by QA; timing never affects navigation or random choices. */
     inspectMetrics() {
@@ -925,7 +1164,15 @@ export class LivingWorldController {
         }
         return { ...this.metrics, navigationGeneration: this.navigationGeneration,
             reservationGeneration: this.reservationGeneration,
-            retainedHomeWaypoints: actors.reduce((sum, actor) => sum + actor.homeTrail.length, 0), agents: actors.length,
+            retainedHomeWaypoints: actors.reduce((sum, actor) => sum + actor.homeTrail.length, 0),
+            retainedGatheringWaypoints: [...(this.gathering?.participants.values() ?? [])].reduce((sum, person) =>
+                sum + (person.trail?.length ?? 0) + this.intentWaypoints(person.suspended), 0) +
+                [...this.gatheringReturns].reduce((sum, [key, returning]) => {
+                    const actor = this.agents.get(key);
+                    return sum + (actor?.path.length ?? 0) + (actor?.detour.length ?? 0) +
+                        this.intentWaypoints(returning.suspended);
+                }, 0),
+            returningGatheringActors: this.gatheringReturns.size, agents: actors.length,
             reservations: this.social.activePairs().length,
             occupationVisits: actors.filter(a => a.visit).length,
             outOfZone: actors.filter(a => !this.safe(a, a)).length, bodyOverlaps };

@@ -1,4 +1,6 @@
 import type { FirstStepsInspection } from './FirstStepsState';
+import { gatheringOffer } from '../simulation/SimulationCore';
+import { renderGatheringCard, renderGatheringReview, type GatheringOffer } from './CulturalGatheringView';
 import { renderSmithery } from './SmitheryView';
 import { craftingOccupation, type EquipmentItem } from '../simulation/Smithery';
 import { applyCommand, inspectWork, inspectCattle, inspectLivestock, occupationAptitude, occupationIds, personaAge, landingSummary } from '../simulation/SimulationCore';
@@ -32,17 +34,22 @@ const meter = (label: string, value: number) => `<div class="fjord-meter"><div><
 interface InterfaceHooks {
     renderPortrait?: (input: PortraitRequest) => Promise<string | undefined>;
     home?: () => void;
+    report?: (sourceEventId: string) => void;
     inspected?: (kind: FirstStepsInspection, id?: string) => void;
     select: (kind: string, id: string) => void;
     refresh: () => void;
-    commit: (commands: SimulationCommand[] | (() => SimulationCommand[]), done: () => void) => void;
+    commit: (commands: SimulationCommand[] | (() => SimulationCommand[]), done: () => void,
+        rejected?: (error: unknown) => void) => void;
     notify: (message: string) => void;
 }
-type Task = 'work-menu' | 'work-plan' | 'occupation' | 'specialization' | 'smithery' | 'risk' | null;
+type Task = 'work-menu' | 'work-plan' | 'occupation' | 'specialization' | 'smithery' | 'culture' | 'risk' | null;
 
 /** Shared commands and truthful data, with a mobile peek sheet and a focused task view. */
 export class FjordInterface {
     private task: Task = null;
+    private gatheringDraft?: GatheringOffer;
+    private gatheringPending = false;
+    private gatheringError = '';
     private draft?: WorkDraft;
     private pending?: SimulationCommand;
     private result = '';
@@ -101,6 +108,7 @@ export class FjordInterface {
         document.addEventListener('keydown', event => {
             if (event.key !== 'Escape' || document.querySelector('dialog[open]')) return;
             if (this.surface) this.close();
+            else if (this.task === 'culture') this.cancelGatheringReview();
             else if (this.task) { this.task = null; this.hooks.refresh(); }
             else if (this.owner.selection) this.hooks.select('', '');
         }, { signal: this.abort.signal });
@@ -200,6 +208,7 @@ export class FjordInterface {
         if (key !== this.selectionKey) {
             this.selectionKey = key;
             this.task = null;
+            this.gatheringDraft = undefined;
             this.result = '';
             this.advanced = false;
             this.expanded = false;
@@ -207,6 +216,7 @@ export class FjordInterface {
         }
         this.management.hidden = !selection || !!this.surface;
         this.management.classList.toggle('fjord-focus', !!this.task);
+        this.management.classList.toggle('fjord-culture-task', this.task === 'culture');
         this.management.classList.toggle('fjord-expanded', this.expanded || !!this.task);
         this.management.classList.toggle('fjord-home-card', !!selection &&
             ['household', 'building'].includes(selection.kind) && !this.task);
@@ -247,7 +257,8 @@ export class FjordInterface {
                 !['persona', 'building', 'household'].includes(selection.kind))) {
                 html += `<div class="fjord-card-body">${this.result ? `<p class="fjord-result" role="status">${esc(this.result)}</p>` : ''}
                     ${['cattle', 'campfire', 'longship'].includes(selection.kind) ? legacy() :
-                        `<details data-legacy-management data-view-key="advanced:${esc(key)}"><summary>More management</summary>${this.advanced ? legacy() : ''}</details>`}</div>`;
+                        `<details data-legacy-management data-view-key="advanced:${esc(key)}"><summary>More management</summary>${this.advanced ? legacy() : ''}</details>`}
+                    ${selection.kind === 'campfire' ? renderGatheringCard(state, !!this.hooks.report) : ''}</div>`;
             }
         }
         const panelEpoch = this.owner.session.personalHistoryEpoch;
@@ -322,6 +333,9 @@ export class FjordInterface {
         }
     }
     private renderTask(state: SimulationState): string {
+        if (this.task === 'culture' && this.gatheringDraft) return this.heading('Support gathering',
+            'A voluntary community occasion.', 'people') +
+            `<div class="fjord-card-body">${renderGatheringReview(this.gatheringDraft, gatheringOffer(state), this.gatheringError, this.gatheringPending)}</div>`;
         if (this.task === 'smithery') return this.heading('Crafting & equipment',
             'Shared clan stock, made by actual residents.', 'work') +
             `<div class="fjord-card-body">${renderSmithery(state)}${button('cancel-task', 'Back', 'close')}</div>`;
@@ -412,6 +426,50 @@ export class FjordInterface {
                 document.querySelector<HTMLElement>('#fjord-exploration')!.focus();
                 return true;
             }
+            case 'culture-record': {
+                const id = button.dataset.cultureEvent;
+                if (id && state.events.some(event => event.id === id && event.type === 'CulturalGatheringHeld'))
+                    this.hooks.report?.(id);
+                return true;
+            }
+            case 'culture-review': {
+                const offer = gatheringOffer(state);
+                if (!offer.allowed) { this.hooks.notify(offer.reason ?? 'Gathering unavailable.'); return true; }
+                this.gatheringDraft = offer;
+                this.gatheringError = '';
+                this.task = 'culture';
+                this.hooks.refresh();
+                this.focusHeading();
+                return true;
+            }
+            case 'culture-sponsor': {
+                const offer = this.gatheringDraft;
+                if (!offer || this.gatheringPending) return true;
+                this.gatheringPending = true;
+                this.hooks.refresh();
+                this.hooks.commit([{ type: 'SponsorGathering', occasion: offer.occasion,
+                    expectedSequence: offer.expectedSequence, quotedFood: offer.foodCost,
+                    expectedParticipantIds: [...offer.participantIds] }], () => {
+                    this.gatheringPending = false;
+                    const message = `Gathering supported · ${offer.foodCost} Food spent.`;
+                    if (this.gatheringDraft === offer) {
+                        this.gatheringDraft = undefined;
+                        this.task = null;
+                        this.result = message;
+                    }
+                    this.hooks.notify(message);
+                    this.hooks.refresh();
+                }, error => {
+                    this.gatheringPending = false;
+                    this.gatheringError = error instanceof Error ? error.message : String(error);
+                    this.hooks.notify(this.gatheringError);
+                    this.hooks.refresh();
+                });
+                return true;
+            }
+            case 'culture-cancel':
+                if (!this.gatheringPending) this.cancelGatheringReview();
+                return true;
             case 'cancel-task': this.task = null; this.pending = undefined; break;
             case 'smithery': this.task = 'smithery'; break;
             case 'specialization': this.task = 'specialization'; break;
@@ -477,13 +535,20 @@ export class FjordInterface {
         }
         this.hooks.refresh();
         if (isMobileLayout() && ['expand-card', 'collapse-card', 'work-menu', 'occupation', 'specialization',
-            'plan', 'farmyard', 'cancel-task'].includes(action)) {
+            'plan', 'farmyard', 'cancel-task', 'culture-review', 'culture-cancel'].includes(action)) {
             const heading = this.panel.querySelector<HTMLElement>('.fjord-card-heading h2');
             heading?.setAttribute('tabindex', '-1');
             heading?.focus({ preventScroll: true });
             this.management.scrollTop = 0;
         }
         return true;
+    }
+    private cancelGatheringReview() {
+        this.task = null;
+        this.gatheringDraft = undefined;
+        this.gatheringError = '';
+        this.hooks.refresh();
+        this.panel.querySelector<HTMLButtonElement>('[data-ui="culture-review"]')?.focus({ preventScroll: true });
     }
     private run(commands: SimulationCommand[] | (() => SimulationCommand[]), message: string) {
         this.hooks.commit(commands, () => {

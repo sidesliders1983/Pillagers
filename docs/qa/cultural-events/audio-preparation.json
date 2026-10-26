@@ -1,0 +1,413 @@
+{
+  "version": 1,
+  "date": "2026-10-26",
+  "status": {
+    "technical": "prepared",
+    "listening": "not-assessed",
+    "distribution": "not-assessed",
+    "runtime": "not-integrated"
+  },
+  "outputRelative": "prepared-4cc9520db318-c16e4c0b",
+  "catalogueSHA256": "d0fd4e514482ea13c1d4115e72f6d64501f98a4bb8dc68b2bb7653084674621d",
+  "manifestSHA256": "a78f0b48fd4c3498f86c046fc3f7a4afe03c79a93c8ac66e88bff441498c6f68",
+  "preparedAt": "2026-10-26T08:13:53.331Z",
+  "ffmpeg": "ffmpeg version 7.1-essentials_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers",
+  "sourceReceiptSHA256": "4cc9520db318e5da874be372a6626d2a96d270b1d23384d89b691c4b39ef0cca",
+  "preparationSHA256": "c16e4c0ba7584362d7cad98fa5e31ea635cc4bbe529c28634b48d9e64dc22745",
+  "preparationHashMode": "UTF-8 normalized LF",
+  "entries": [
+    {
+      "generationId": "5DFc6ujI70yGnu2Zqq1A",
+      "label": "culture-murmur",
+      "nodeId": "qfjDHumxpirOxgpDOktR",
+      "sessionId": "T01AQ2hEbDGxUGO0KtsC",
+      "reportedPrice": {
+        "credits": 9.999,
+        "price_cents": 0.18180000000000002,
+        "cost_fiat_currency": "usd"
+      },
+      "source": {
+        "file": "culture-murmur-5DFc6ujI70yGnu2Zqq1A.mp3",
+        "sha256": "f11249daa6a1f04287db454f272230d6818ba98fcc1bdfff231062fec71e9ea8",
+        "bytes": 66070,
+        "reportedSeconds": 3,
+        "decodedAtPreparationRate": {
+          "frames": 72000,
+          "seconds": 3,
+          "peakDbFS": -21.98191600236281,
+          "rmsDbFS": -39.04573606458282,
+          "clippedSamples": 0
+        }
+      },
+      "prepared": {
+        "file": "culture-murmur-f11249da-c16e4c0b.wav",
+        "sha256": "0bec83987689826cb50d26cfbf7285a5681d0b71882439a12aabd04fe9e1aac2",
+        "bytes": 144044,
+        "sampleRate": 24000,
+        "channels": 1,
+        "bits": 16,
+        "frames": 72000,
+        "seconds": 3,
+        "peakDbFS": -22.053070124863492,
+        "rmsDbFS": -39.05888591788618,
+        "clippedSamples": 0,
+        "truePeakDbFS": -22,
+        "integratedLUFS": -39.2,
+        "trimDb": 0
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "not-assessed",
+        "distribution": "not-assessed"
+      }
+    },
+    {
+      "generationId": "Uba21h6cTZNVaO7eM8P5",
+      "label": "culture-murmur",
+      "nodeId": "qfjDHumxpirOxgpDOktR",
+      "sessionId": "oV1pijxU595ddPGy3mF7",
+      "reportedPrice": {
+        "credits": 9.999,
+        "price_cents": 0.18180000000000002,
+        "cost_fiat_currency": "usd"
+      },
+      "source": {
+        "file": "culture-murmur-Uba21h6cTZNVaO7eM8P5.mp3",
+        "sha256": "34a6bca1bef22943049713d3c7e6ad348bcf91cf9eb61d1aea5d0b8116b8def9",
+        "bytes": 66070,
+        "reportedSeconds": 3,
+        "decodedAtPreparationRate": {
+          "frames": 72000,
+          "seconds": 3,
+          "peakDbFS": -10.004357667032815,
+          "rmsDbFS": -27.876232537787125,
+          "clippedSamples": 0
+        }
+      },
+      "prepared": {
+        "file": "culture-murmur-34a6bca1-c16e4c0b.wav",
+        "sha256": "f74c00b7fe0321db12d8beffe0c9652c9d8a7beb00410087ab703b671a9088cf",
+        "bytes": 144044,
+        "sampleRate": 24000,
+        "channels": 1,
+        "bits": 16,
+        "frames": 72000,
+        "seconds": 3,
+        "peakDbFS": -9.871987150507858,
+        "rmsDbFS": -27.87644390690039,
+        "clippedSamples": 0,
+        "truePeakDbFS": -9.9,
+        "integratedLUFS": -24.4,
+        "trimDb": 0
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "not-assessed",
+        "distribution": "not-assessed"
+      }
+    },
+    {
+      "generationId": "Io96ioU24VNrMf00VlJU",
+      "label": "culture-murmur",
+      "nodeId": "qfjDHumxpirOxgpDOktR",
+      "sessionId": "An0OmT8Tr6idDJwKPgdd",
+      "reportedPrice": {
+        "credits": 9.999,
+        "price_cents": 0.18180000000000002,
+        "cost_fiat_currency": "usd"
+      },
+      "source": {
+        "file": "culture-murmur-Io96ioU24VNrMf00VlJU.mp3",
+        "sha256": "8f241fa343ee4d533b28d978f601b3afe1517b9f0ccdfb3ad934c393b4404e1f",
+        "bytes": 66070,
+        "reportedSeconds": 3,
+        "decodedAtPreparationRate": {
+          "frames": 72000,
+          "seconds": 3,
+          "peakDbFS": -17.09810232057036,
+          "rmsDbFS": -34.959044894530585,
+          "clippedSamples": 0
+        }
+      },
+      "prepared": {
+        "file": "culture-murmur-8f241fa3-c16e4c0b.wav",
+        "sha256": "91be02bbb9ac5e849cefb4c9a992ecb32f5db1b5b6c94f98a1a316b28e8cbd77",
+        "bytes": 144044,
+        "sampleRate": 24000,
+        "channels": 1,
+        "bits": 16,
+        "frames": 72000,
+        "seconds": 3,
+        "peakDbFS": -17.048179201314873,
+        "rmsDbFS": -34.96019403581382,
+        "clippedSamples": 0,
+        "truePeakDbFS": -17,
+        "integratedLUFS": -34.8,
+        "trimDb": 0
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "not-assessed",
+        "distribution": "not-assessed"
+      }
+    },
+    {
+      "generationId": "QiAiwQcIu0r5oB2kJZHl",
+      "label": "culture-murmur",
+      "nodeId": "qfjDHumxpirOxgpDOktR",
+      "sessionId": "4lVJg0bZbZeeBCV41hn9",
+      "reportedPrice": {
+        "credits": 9.999,
+        "price_cents": 0.18180000000000002,
+        "cost_fiat_currency": "usd"
+      },
+      "source": {
+        "file": "culture-murmur-QiAiwQcIu0r5oB2kJZHl.mp3",
+        "sha256": "1c405ef476c2c4ca05c59de6135cb935ae6f3d0292ca57797bca70f76be397e4",
+        "bytes": 66070,
+        "reportedSeconds": 3,
+        "decodedAtPreparationRate": {
+          "frames": 72000,
+          "seconds": 3,
+          "peakDbFS": -25.216707324486848,
+          "rmsDbFS": -37.866314351530335,
+          "clippedSamples": 0
+        }
+      },
+      "prepared": {
+        "file": "culture-murmur-1c405ef4-c16e4c0b.wav",
+        "sha256": "f3c85d8b5cc10fbc7a253292fe204e54f673f48ce0b83340c7f835df590e9735",
+        "bytes": 144044,
+        "sampleRate": 24000,
+        "channels": 1,
+        "bits": 16,
+        "frames": 72000,
+        "seconds": 3,
+        "peakDbFS": -25.045749399950026,
+        "rmsDbFS": -37.869312793239,
+        "clippedSamples": 0,
+        "truePeakDbFS": -25,
+        "integratedLUFS": -38.1,
+        "trimDb": 0
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "not-assessed",
+        "distribution": "not-assessed"
+      }
+    },
+    {
+      "generationId": "5wzWo0JLiRv62M3wBVzM",
+      "label": "culture-applause",
+      "nodeId": "wczWWRY1WxcsQzQZybHC",
+      "sessionId": "CmbCmWmGE0r2OpJD0jMm",
+      "reportedPrice": {
+        "credits": 6.666,
+        "price_cents": 0.1212,
+        "cost_fiat_currency": "usd"
+      },
+      "source": {
+        "file": "culture-applause-5wzWo0JLiRv62M3wBVzM.mp3",
+        "sha256": "8180c9510994e2c6a3e8071027ab3af78efef70ca13818c51dafdb82b23d832d",
+        "bytes": 50187,
+        "reportedSeconds": 2,
+        "decodedAtPreparationRate": {
+          "frames": 48000,
+          "seconds": 2,
+          "peakDbFS": 2.7146498203248255,
+          "rmsDbFS": -21.839366508187194,
+          "clippedSamples": 76
+        }
+      },
+      "prepared": {
+        "file": "culture-applause-8180c951-c16e4c0b.wav",
+        "sha256": "80eb7f77c9cfea3c56d9b884ef89e9461c1206af520189a5f68fdd514e434a28",
+        "bytes": 96044,
+        "sampleRate": 24000,
+        "channels": 1,
+        "bits": 16,
+        "frames": 48000,
+        "seconds": 2,
+        "peakDbFS": -5.814712608586408,
+        "rmsDbFS": -30.555219498507636,
+        "clippedSamples": 0,
+        "truePeakDbFS": -5.7,
+        "integratedLUFS": -27.5,
+        "trimDb": -8.714649820324826
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "not-assessed",
+        "distribution": "not-assessed"
+      }
+    },
+    {
+      "generationId": "6Dl8Uf3nWgC30YDyZRXn",
+      "label": "culture-applause",
+      "nodeId": "wczWWRY1WxcsQzQZybHC",
+      "sessionId": "Eny9xptfDuA7PAIos9Wj",
+      "reportedPrice": {
+        "credits": 6.666,
+        "price_cents": 0.1212,
+        "cost_fiat_currency": "usd"
+      },
+      "source": {
+        "file": "culture-applause-6Dl8Uf3nWgC30YDyZRXn.mp3",
+        "sha256": "1b006dcb7490765d678f9d468634e36c519aff92287c64cdfdff0eaa237f1f83",
+        "bytes": 50187,
+        "reportedSeconds": 2,
+        "decodedAtPreparationRate": {
+          "frames": 48000,
+          "seconds": 2,
+          "peakDbFS": 3.199603402892717,
+          "rmsDbFS": -21.156568962041085,
+          "clippedSamples": 106
+        }
+      },
+      "prepared": {
+        "file": "culture-applause-1b006dcb-c16e4c0b.wav",
+        "sha256": "89b02901a4cf654327181bfb117f1a8395b2d861a6fb89156c7b3b7257e1079e",
+        "bytes": 96044,
+        "sampleRate": 24000,
+        "channels": 1,
+        "bits": 16,
+        "frames": 48000,
+        "seconds": 2,
+        "peakDbFS": -5.995718786225406,
+        "rmsDbFS": -30.3669860408383,
+        "clippedSamples": 0,
+        "truePeakDbFS": -6,
+        "integratedLUFS": -27.5,
+        "trimDb": -9.199603402892716
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "not-assessed",
+        "distribution": "not-assessed"
+      }
+    },
+    {
+      "generationId": "Qn4x2YPY0UKuOLzGJFdq",
+      "label": "culture-applause",
+      "nodeId": "wczWWRY1WxcsQzQZybHC",
+      "sessionId": "LHOG3C780kHzBrK6TUta",
+      "reportedPrice": {
+        "credits": 6.666,
+        "price_cents": 0.1212,
+        "cost_fiat_currency": "usd"
+      },
+      "source": {
+        "file": "culture-applause-Qn4x2YPY0UKuOLzGJFdq.mp3",
+        "sha256": "2fa3e04d0af5cbd1d64d4139e5450fcecb04e8ab934cd962589c799ba96c3f19",
+        "bytes": 50187,
+        "reportedSeconds": 2,
+        "decodedAtPreparationRate": {
+          "frames": 48000,
+          "seconds": 2,
+          "peakDbFS": 2.909118310020966,
+          "rmsDbFS": -21.74023556865464,
+          "clippedSamples": 75
+        }
+      },
+      "prepared": {
+        "file": "culture-applause-2fa3e04d-c16e4c0b.wav",
+        "sha256": "e4582eb88f71411bde37bf7993c52d96a51b43ee00d21be95e7720940f5587a3",
+        "bytes": 96044,
+        "sampleRate": 24000,
+        "channels": 1,
+        "bits": 16,
+        "frames": 48000,
+        "seconds": 2,
+        "peakDbFS": -6.098347957806426,
+        "rmsDbFS": -30.652389713913717,
+        "clippedSamples": 0,
+        "truePeakDbFS": -5.9,
+        "integratedLUFS": -27.6,
+        "trimDb": -8.909118310020967
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "not-assessed",
+        "distribution": "not-assessed"
+      }
+    },
+    {
+      "generationId": "SXIzsWrhcurElXoURZwW",
+      "label": "culture-applause",
+      "nodeId": "wczWWRY1WxcsQzQZybHC",
+      "sessionId": "lmC6lTSXHsrAfcqRrmOS",
+      "reportedPrice": {
+        "credits": 6.666,
+        "price_cents": 0.1212,
+        "cost_fiat_currency": "usd"
+      },
+      "source": {
+        "file": "culture-applause-SXIzsWrhcurElXoURZwW.mp3",
+        "sha256": "9d5dcdc3b1e13d94518669d3293efa0269a8dd6b2b59348538b7a85d6565d40a",
+        "bytes": 50187,
+        "reportedSeconds": 2,
+        "decodedAtPreparationRate": {
+          "frames": 48000,
+          "seconds": 2,
+          "peakDbFS": 2.4788889057488475,
+          "rmsDbFS": -23.331162372768684,
+          "clippedSamples": 39
+        }
+      },
+      "prepared": {
+        "file": "culture-applause-9d5dcdc3-c16e4c0b.wav",
+        "sha256": "3bafa1791957fc4e3bdcca4056b336bcd96005c1d208b26de07ad6cf2bde69ab",
+        "bytes": 96044,
+        "sampleRate": 24000,
+        "channels": 1,
+        "bits": 16,
+        "frames": 48000,
+        "seconds": 2,
+        "peakDbFS": -5.879149058163897,
+        "rmsDbFS": -31.8113656939472,
+        "clippedSamples": 0,
+        "truePeakDbFS": -5.8,
+        "integratedLUFS": -29.4,
+        "trimDb": -8.478888905748848
+      },
+      "status": {
+        "technical": "prepared",
+        "listening": "not-assessed",
+        "distribution": "not-assessed"
+      }
+    }
+  ],
+  "candidateSelection": {
+    "reason": "First generated variation per category for technical preview only; not listening accepted.",
+    "generationIds": [
+      "5DFc6ujI70yGnu2Zqq1A",
+      "5wzWo0JLiRv62M3wBVzM"
+    ]
+  },
+  "decodedBudget": {
+    "maximumBytes": 2097152,
+    "examples": [
+      {
+        "sampleRate": 44100,
+        "bytes": 882000,
+        "admitted": true
+      },
+      {
+        "sampleRate": 48000,
+        "bytes": 960000,
+        "admitted": true
+      },
+      {
+        "sampleRate": 96000,
+        "bytes": 1920000,
+        "admitted": true
+      },
+      {
+        "sampleRate": 192000,
+        "bytes": 3840000,
+        "admitted": false
+      }
+    ],
+    "admission": "Check actual AudioContext rate before loading and actual decoded bytes afterward; skip cultural cues if the pair cannot fit. Never load all eight review variants as the runtime pack."
+  }
+}

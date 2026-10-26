@@ -50,7 +50,8 @@ function historyIndex(events: readonly SimulationEvent[], version: number): Inde
     const byId = new Map(events.map(event => [event.id, event]));
     return projectChronicle(events).reverse().flatMap(group => group.entries).flatMap(entry => {
         const event = byId.get(entry.sourceEventIds[0]);
-        const social = event && ['ResidentQuarrelled', 'MediationAttempted', 'ResidentsReconciled', 'SocialIncidentEnded'].includes(event.type);
+        const social = event && ['ResidentQuarrelled', 'MediationAttempted', 'ResidentsReconciled', 'SocialIncidentEnded',
+            'CulturalGatheringHeld', 'CultureWeatherSupportApplied'].includes(event.type);
         const theme: NarrativeTheme | undefined = event && (version >= 3 && social ? 'social' : themes[event.type]);
         return event && theme ? [{ entry, event, theme }] : [];
     });
@@ -85,6 +86,13 @@ function relevantOlder(current: SimulationEvent, earlier: readonly IndexedFact[]
             fact.event.details?.householdId === details.householdId);
     return undefined;
 }
+/** Cultural callbacks name their real source; unrelated facts never share an absent incident ID. */
+function socialGroup(event: SimulationEvent): string {
+    if (event.type === 'CulturalGatheringHeld') return 'culture:' + event.id;
+    if (event.type === 'CultureWeatherSupportApplied')
+        return 'culture:' + strings(event.details?.sourceEventIds)[0];
+    return 'incident:' + String(event.details?.incidentId);
+}
 export function planNarrative(events: readonly SimulationEvent[], intervalStart: number, version: 1 | 2 | 3 = 2): NarrativePlan {
     const currentIds = new Set(events.slice(intervalStart).map(event => event.id));
     const index = historyIndex(events, version);
@@ -94,15 +102,15 @@ export function planNarrative(events: readonly SimulationEvent[], intervalStart:
     const focus = priority.filter(theme => current.some(fact => fact.theme === theme)).slice(0, 3);
     const threads = focus.flatMap(theme => {
         const selected = current.filter(fact => fact.theme === theme);
-        const groups = theme === 'social' ? [...new Set(selected.map(fact => fact.event.details?.incidentId))].map(id =>
-            selected.filter(fact => fact.event.details?.incidentId === id)) :
+        const groups = theme === 'social' ? [...new Set(selected.map(fact => socialGroup(fact.event)))].map(key =>
+            selected.filter(fact => socialGroup(fact.event) === key)) :
             theme === 'herd' && version >= 2 ?
             livestockGroups(selected.map(fact => fact.event)).map(group =>
                 group.map(event => selected.find(fact => fact.event.id === event.id)!)) :
             selected.map(fact => [fact]);
         return groups.slice(0, 4).map(group => {
             const callbacks = theme === 'social' ? group.flatMap(fact =>
-                older.filter(previous => previous.event.details?.incidentId === fact.event.details?.incidentId)
+                older.filter(previous => previous.theme === 'social' && socialGroup(previous.event) === socialGroup(fact.event))
                     .flatMap(previous => previous.entry.sourceEventIds)) :
                 group.flatMap(fact => relevantOlder(fact.event, older)?.entry.sourceEventIds ?? []);
             return {

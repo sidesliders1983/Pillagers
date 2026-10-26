@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "study": "cultural-events-275-276-v1",
+  "scope": "Real paid cultural commands and the current exposure-only weather consequence; prototype evidence, not default activation or proof of enjoyment.",
+  "seeds": { "first": 1, "controlledInitialLast": 100, "controlledExpandedLast": 1000, "strategyPilotLast": 8, "strategyFinalLast": 32 },
+  "arms": ["none", "one", "two"],
+  "experimentalCulture": { "enabled": true, "foodCost": 3, "minParticipants": 3, "maxParticipants": 8, "supportCapacity": 2, "exposureReductionBps": 2500 },
+  "controlled": {
+    "weatherClasses": ["Harsh", "Severe"],
+    "foundingPhase": null,
+    "calendarMode": "annual",
+    "landingOverrides": { "foundingCoupleChanceBps": 0 },
+    "mechanicsOverrides": { "fertilityChanceBps": 0, "partnershipChanceBps": 0, "careerReviewWinters": 0 },
+    "weatherProbabilities": "Exactly one selected adverse class receives probabilityBps 10000; all other values remain current default rules.",
+    "interventions": { "none": 0, "one": 1, "two": 2 },
+    "foodReserve": null,
+    "measureAt": "First real outgoing-weather annual mortality assessment; incoming Winter tick zero.",
+    "expansionRule": "After the initial100 seeds per class, expand that class to1000 predeclared seeds only when fewer than10 paired seeds have a different resident death count between none and one. This is a rare-outcome precision rule, not permission to select favourable seeds."
+  },
+  "strategies": {
+    "years": 10,
+    "foundingPhase": "summer-800-v1",
+    "calendarMode": "annual",
+    "livestock": "Current committed FjordLivestock.fjordLivestockRules, independently seeded by the existing Core factory.",
+    "social": { "enabled": true },
+    "domesticManagement": "No manual occupation, building, slaughter, assignment, expedition or purchase commands in any arm. Preserve existing autonomous careers, partnerships, births, care, weather and CPU stepping.",
+    "policy": {
+      "decisionPoint": "Once per Summer tick500, beginning at founding, before advancing the next1000 canonical ticks.",
+      "none": "Never sponsor.",
+      "one": "When the bank is empty, attempt one currently allowed real sponsorship if Food after payment remains at least12.",
+      "two": "At each decision point refill to the saved cap, stopping at the first ineligible, insufficient-stock or reserve-limited offer.",
+      "reserveFoodAfterPayment": 12,
+      "reserveStatus": "QA-only policy choice, not a Core eligibility rule; a15-Food start permits one actual3-Food payment."
+    },
+    "worldScope": "The public headless createCampaign graph and all its independently stepped CPU clans; no physical route, renderer, discovery or expedition assertions.",
+    "fullRunGate": "Pilot seeds1-8 must all complete with source fingerprints unchanged, exact accounting, save roundtrip, repeated representative case and CPU-isolation checks before seeds9-32 are added."
+  },
+  "observation": {
+    "measurements": ["actual paid Food", "offers, commands and policy skips", "real event IDs and participant snapshots", "support bank and FIFO use", "outgoing weather and actual risk inputs", "resident and livestock deaths", "production, consumption, shortages, Food and Materials", "independent CPU states", "final canonical state hashes"],
+    "annualStrategyTime": "Summer tick500; each interval is split only through real AdvanceTicks commands around the annual boundary to observe pre-assessment exposure.",
+    "counterfactualLanguage": "Paired mortality differences are observer diagnostics; do not create Saved/Averted lore events or claim certainty about an individual's alternate fate.",
+    "uncertainty": "Per-seed paired mean differences with95% normal intervals where variable; Wilson95% intervals for the proportion of seeds with any death-count change, including zero observations. Cohorts remain exploratory."
+  },
+  "execution": { "workers": 1, "maxMinutesPerInvocation": 15, "sourceCheckEveryCases": 10, "rawFormat": "One JSONL record per campaign, including bounded annual observations; no per-tick state dumps.", "statuses": ["complete", "technically-failed", "resource-limited"], "resume": "Skip only complete cases with the identical frozen fingerprint. Preserve incomplete-tail evidence before recovery; never drop biological failures or extinct clans." },
+  "interpretation": { "equalSeeds": "Do not claim identical realized multi-year weather after differential death/family draws alter the shared mechanics RNG.", "ordinaryRollout": "Requires measured benefit and separate owner review; this study does not activate defaults.", "outOfScope": ["defence mechanics", "offensive Pillage bonus", "new resources", "free Food", "changed fertility or mortality coefficients", "new CPU bonuses", "gameplay enjoyment claims"] }
+}

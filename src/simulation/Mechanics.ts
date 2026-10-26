@@ -145,7 +145,7 @@ export function stepMechanicsTick(state:SimulationState):void {
     stepCattleOutput(state);
     if(state.time.tick===0) {
         emit(state,'WinterAdvanced');
-        if(resolveMortality(state,bps=>chance(state,bps),(type,id,details)=>emit(state,type,id,details))){
+        if(resolveMortality(state,bps=>chance(state,bps),(type,id,details)=>emit(state,type,id,details), undefined, undefined, true)){
             reconcileFarmyards(state,previousFarmyards);previousFarmyards=farmyards(state).map(f=>f.id);
         }
         resolveCattleMortality(state,bps=>chance(state,bps));

@@ -1,9 +1,10 @@
 # Cultural gathering audio audit — #274
 
 Date: 2026-10-26. Audited source: `fb327996013b115bff985f7f87b7a69ff37eb24f`.
-Status: source audit followed by one connected ElevenLabs generation trial. Eight
-cloud candidates completed; local delivery remains blocked by automatic approval
-review. No runtime code or tests were changed, and no media is accepted/published.
+Status: eight connected ElevenLabs candidates completed and were downloaded with
+explicit mechanism approval. A separate two-file experimental pack and bounded
+public audio integration are now implemented after TDD seam approval. Listening
+selection and general-release acceptance remain pending.
 
 ## Existing authority and constraints
 
@@ -147,3 +148,72 @@ no alternate interpreter, proxy, file or download route was attempted. The paren
 has the exact reviewer reason and is handling this narrower mechanism approval.
 Returned media URLs can later be refreshed from the retained handles without
 starting or paying for another generation.
+
+## Resolved delivery and preparation
+
+The owner then explicitly approved the exact signed-link/hidden-stdin/local-Node/
+outside-managed-proxy mechanism (question call_cb05a2b78ec142099b6e2f19cca09fc2).
+The same eight generations were downloaded successfully, without rerunning or
+paying for generation, to the approved scratch/culture-audio/originals directory.
+Originals total 465,028 bytes. No transient media URL is saved in these records.
+
+The focused scripts/audio/culture/prepare.mjs uses a pinned local FFmpeg 7.1 tool
+(imageio-ffmpeg 0.6.0, tools/cache/temp on D:). It validates source hashes, prepares
+mono 24 kHz PCM16 with short fades and attenuation-only headroom, validates WAV
+structure/frame counts and measures clipping, RMS, integrated loudness and true
+peak. All eight candidates passed these technical checks: total 960,352 WAV
+bytes, exact 3-second/2-second durations, zero clipped samples and true peaks
+between -25 and -5.7 dBFS. Full per-file raw/prepared hashes and metrics are in
+audio-preparation.json; the receipt preserves the earlier review history.
+
+Four options per category remain private review candidates. The generated
+CulturalSoundPack.candidate.ts contains only the first variation of each category
+as a deterministic technical preview, not a listening selection. The first murmur
+is -39.2 LUFS while another is -24.4 LUFS; levels alone do not establish quality,
+wordlessness or the best choice. At that private-preparation stage no candidate was imported or copied to public
+assets; the later separate experimental runtime pair is documented below. All eight loaded together would exceed the proposed
+culture allowance at 96 kHz; an eventual selected pair must still pass admission
+using the actual context rate and actual decoded-buffer lengths/channels.
+
+Reproduce with FFMPEG_PATH pointing to a verified FFmpeg executable, then run
+node scripts/audio/culture/prepare.mjs. Its fixed private staging input is
+scratch/culture-audio and latest-prepared.json locates the current result. The
+preparation fingerprint normalizes source line endings to LF explicitly.
+
+## Implemented optional runtime audio
+
+CulturalSounds consumes explicit fresh acceptance via start({id, sequence}) only.
+A canonical sequence watermark and at most two consumed phase flags stay outside
+the transient Soundscape emitter map. Pauses, hidden/offscreen returns, missing
+actors, cold or late first observations and scene replacement cannot replay an
+old phase. A current accepted group has one stable spatial source ID through its
+gathering/response phases. Visible approach alone may request lazy preparation;
+zero staged participants and unknown context rate produce no source or preload.
+The model uses no Core/Lore access, extra frame loop or per-person voices.
+
+CulturalSoundPack and withCulturalSoundPack(base) compose exactly two candidates
+without changing the accepted sixteen-source release or its validators. The
+experimental public pair is Uba21h6cTZNVaO7eM8P5 (murmur, -24.4LUFS) and
+5wzWo0JLiRv62M3wBVzM (applause, -27.5LUFS), chosen for comparable technical
+levels rather than inferred listening quality. Two WAVs total 240,088 bytes and
+have separate provenance/catalogue/manifest under public/game-assets/audio/culture.
+Other six variations and all source MP3s remain private scratch review material.
+The public catalogue reports listening pending and general release not approved.
+
+The existing FjordAudio owner now exposes each world sampleRate and ready(cueId).
+An optional manifest decodedBudget names the two assets and a 2 MiB cap. It checks
+actual context rate plus known cached actual bytes before fetch/decode, then
+checks actual returned buffer lengths/channels before admitting either buffer
+to the shared LRU. Unsupported family rates skip cues without a broken-file
+warning. Existing 24 MiB/32-buffer/two-decode/global voice limits remain unchanged.
+This bounds retained admitted buffers, not all native decoder/process overhead.
+
+Eight new public tests and the existing audio regressions passed: 36 total, zero
+failures/skips. The real prepared WAVs pass through the public owner in its
+browser-API adapter tests, including consent, cache/world replacement and no
+replay. Metadata-only and actual decoded-budget guards have distinct failing
+regressions; a valid-container payload substitution is rejected by the separate
+asset guard. TypeScript and manual source-format review/diffcheck passed; no
+repository formatter is configured. Full commands, red/green evidence and source
+hashes are retained in audio-runtime-validation.json. These checks do not claim
+physical playback, listening acceptance, total device RAM or frame/GPU measurements.

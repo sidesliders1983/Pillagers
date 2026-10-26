@@ -22,7 +22,7 @@ and resident exposure, split/batch/save/rollback social continuation, and
 presentational encounter movement. They do not prove cultural sponsorship,
 cohesion, new assets, browser usability or device performance.
 
-## Requirement-to-evidence matrix
+## Initial requirement-to-evidence matrix (pre-implementation snapshot)
 
 | Requirement | Existing authority / evidence to collect | Current cultural status |
 | --- | --- | --- |
@@ -148,3 +148,31 @@ After this baseline audit, the owner accepted the 3-Food, 3–8-adult, two-asses
 default activation before calibration and review. TDD seam confirmation is still pending.
 The connected ElevenLabs Creative Flow route was subsequently verified to support SFX;
 the initial separate-key gate is withdrawn. No sound generation is claimed by this baseline.
+
+## Implementation and calibration continuation
+
+The earlier sections are the original pre-implementation audit, not a claim about
+current delivery. The owner subsequently confirmed the public TDD boundaries and
+experimental coefficients. The current headless evidence is in
+[calibration-report.md](calibration-report.md) and its linked frozen protocol,
+manifest, summary and lossless raw delivery files.
+
+- Executed 6,000 controlled one-boundary cases and 96 ten-year strategy campaigns,
+  retaining every predeclared seed and adverse outcome; no technical failures.
+- All 64 frozen dependency/config/runner byte identities remained unchanged.
+- Food/Materials accounting, finite support accounting, CPU isolation, source-event
+  continuity, canonical save roundtrips and a representative deterministic repeat passed.
+- One added public calibration regression was red before the runner existed and is
+  now green: actual 0/3/6 Food payments, identical one/two-support risk strength,
+  a real seeded mortality difference and deterministic repeated output.
+- A completed-case resume was executed: 600 initial jobs were recognized, zero rerun,
+  and the complete raw hashes remained unchanged.
+- Compact delivery is 2.56 MiB gzip versus 80,956,471 expanded raw bytes. Original
+  plain JSONL remains on D:; gzip expansion identities were independently verified.
+
+The controlled effect is measurable, but the 32-seed strategy interval includes
+zero and heavy sponsorship mostly leaves extra support unused. Keep prototype
+labelling and ordinary defaults unchanged pending owner playtesting/calibration.
+No headless result proves browser, listening, touch, physical-device performance
+or entertainment acceptance. #277/#278 and the #279/#280 prerequisite gates remain
+part of the full epic, outside this first benefit-path measurement.

@@ -216,7 +216,7 @@ export class ClanBook {
         const events = state.events.slice(cursor.eventEnd);
         const ledger = bookLedger(events, cursor.stocks, state.stocks);
         this.data.chapters.push({
-            plan: planNarrative(state.events, cursor.eventEnd, state.social ? 3 : 2),
+            plan: planNarrative(state.events, cursor.eventEnd, state.social || state.culture ? 3 : 2),
             index: this.data.chapters.length,
             milestoneIndex: (state.time.winter - this.data.originWinter) / 5,
             title: 'Records ending Winter ' + state.time.winter,

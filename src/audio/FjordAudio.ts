@@ -10,7 +10,12 @@ export interface SoundAsset {
     channels: 1 | 2;
     frequency?: number;
 }
-export interface SoundManifest { cues: readonly SoundCue[]; assets: readonly SoundAsset[] }
+export interface SoundManifest {
+    cues: readonly SoundCue[];
+    assets: readonly SoundAsset[];
+    /** Optional admission budget for a small shared family, inside the existing global cache cap. */
+    decodedBudget?: { assetIds: readonly string[]; maximumBytes: number };
+}
 export interface SoundPreferences {
     muted: boolean; master: number; ambience: number; world: number; interface: number;
 }
@@ -154,13 +159,21 @@ export class FjordAudio {
         this.current = scope;
         const due = () => scope.alive && this.current === scope && this.audible() &&
             this.now() - scope.last >= soundLimits.cadence;
+        const sampleRate = () => this.context?.sampleRate ?? null;
         return {
             get due() { return due(); },
+            get sampleRate() { return sampleRate(); },
+            ready: (cueId: string) => {
+                const cue = manifest.cues.find(cue => cue.id === cueId);
+                const asset = manifest.assets.find(asset => asset.id === cue?.variants[0]);
+                return scope.alive && this.current === scope && this.audible() && !!asset &&
+                    this.budgetAllows(asset, manifest) && this.buffers.has(JSON.stringify(asset));
+            },
             prepare: (cueId: string) => {
                 if (!scope.alive || this.current !== scope || !this.audible() || this.loading.size >= 2) return;
                 const cue = manifest.cues.find(cue => cue.id === cueId);
                 const asset = manifest.assets.find(asset => asset.id === cue?.variants[0]);
-                if (asset) void this.buffer(asset).catch(() => {
+                if (asset && this.budgetAllows(asset, manifest)) void this.buffer(asset, manifest).catch(() => {
                     if (scope.alive && this.current === scope && !this.disposed)
                         this.failure = 'An audio cue could not be loaded; gameplay is unaffected.';
                 });
@@ -175,6 +188,16 @@ export class FjordAudio {
                 }
                 finally { this.retainMeasurement(this.selectionMs, performance.now() - started); }
             },
+            pause: () => {
+                if (!scope.alive || this.current !== scope || this.disposed) return;
+                scope.paused = true;
+                try {
+                    if (scope.camera) this.updateWorld(scope, manifest, scope.camera, scope.sources, true, true);
+                } catch {
+                    this.failure = 'Sound interrupted; gameplay is unaffected. Use Enable sound to retry.';
+                    this.stopAll();
+                }
+            },
             dispose: () => {
                 scope.alive = false;
                 if (this.current === scope) {
@@ -184,6 +207,44 @@ export class FjordAudio {
             },
         };
     }
+    private budgetAllows(asset: SoundAsset, manifest: SoundManifest): boolean {
+        const budget = manifest.decodedBudget;
+        if (!budget) return true;
+        if (!Array.isArray(budget.assetIds)) return false;
+        if (!budget.assetIds.includes(asset.id)) return true;
+        const rate = this.context?.sampleRate;
+        if (!rate || !Number.isFinite(rate) || rate <= 0 ||
+            !Number.isSafeInteger(budget.maximumBytes) || budget.maximumBytes <= 0 ||
+            budget.maximumBytes > soundLimits.decodedBytes || !budget.assetIds.length ||
+            budget.assetIds.length > soundLimits.buffers ||
+            new Set(budget.assetIds).size !== budget.assetIds.length) return false;
+        let bytes = 0;
+        for (const id of budget.assetIds) {
+            const member = manifest.assets.find(candidate => candidate.id === id);
+            if (!member || !Number.isFinite(member.seconds) || member.seconds <= 0 ||
+                member.seconds > 30 || ![1, 2].includes(member.channels)) return false;
+            const cached = this.buffers.get(JSON.stringify(member));
+            bytes += cached ? cached.length * cached.numberOfChannels * 4 :
+                Math.ceil(member.seconds * rate) * member.channels * 4;
+        }
+        return bytes <= budget.maximumBytes && this.decodedFamilyBytes(manifest) <= budget.maximumBytes;
+    }
+
+    private decodedFamilyBytes(manifest: SoundManifest, additional?: { asset: SoundAsset; buffer: AudioBuffer }) {
+        const budget = manifest.decodedBudget;
+        if (!budget) return 0;
+        let bytes = 0;
+        const additionalKey = additional ? JSON.stringify(additional.asset) : undefined;
+        for (const asset of manifest.assets) {
+            if (!budget.assetIds.includes(asset.id)) continue;
+            const key = JSON.stringify(asset);
+            const buffer = additional && key === additionalKey ?
+                additional.buffer : this.buffers.get(key);
+            if (buffer) bytes += buffer.length * buffer.numberOfChannels * 4;
+        }
+        return bytes;
+    }
+
     private updateWorld(scope: World, manifest: SoundManifest, camera: SoundCamera,
         sources: readonly SoundEmitter[], paused: boolean, contact = false) {
         if (!scope.alive || this.current !== scope || this.disposed) return;
@@ -242,6 +303,8 @@ export class FjordAudio {
         }
     }
     private async start(scope: World, manifest: SoundManifest, input: SoundVoice) {
+        const proposed = manifest.assets.find(asset => asset.id === input.variant);
+        if (proposed && !this.budgetAllows(proposed, manifest)) return;
         if (this.inflightClients >= soundLimits.beds + soundLimits.local) return;
         this.inflightClients++;
         const id = input.source.id, reservation = {};
@@ -252,7 +315,7 @@ export class FjordAudio {
             if (!asset) throw new Error('Missing cue variant');
             const key = JSON.stringify(asset);
             if (this.loading.size >= 2 && !this.loading.has(key) && !this.buffers.has(key)) return;
-            const buffer = await this.buffer(asset);
+            const buffer = await this.buffer(asset, manifest);
             const latest = scope.sources.find(source => source.id === id);
             const gainNow = latest && scope.listener?.valid && scope.camera ?
                 soundGain(input.cue, latest, scope.listener.position, scope.camera.distance, scope.paused) : 0;
@@ -359,7 +422,7 @@ export class FjordAudio {
         }
         return buffer;
     }
-    private async buffer(asset: SoundAsset) {
+    private async buffer(asset: SoundAsset, manifest: SoundManifest) {
         const key = JSON.stringify(asset);
         const cached = this.buffers.get(key);
         if (cached) {
@@ -377,6 +440,10 @@ export class FjordAudio {
             if (this.disposed) return buffer;
             const bytes = buffer.length * buffer.numberOfChannels * 4;
             if (bytes > 8 * 1024 * 1024) throw new Error('Decoded audio too large');
+            const budget = manifest.decodedBudget;
+            if (budget?.assetIds.includes(asset.id) &&
+                this.decodedFamilyBytes(manifest, { asset, buffer }) > budget.maximumBytes)
+                throw new Error('Decoded audio family exceeds its budget');
             const held = new Set([...this.voices.values(), ...this.retiring].map(voice => voice.source.buffer));
             let retained = [...this.buffers.values()].reduce((sum, value) =>
                 sum + value.length * value.numberOfChannels * 4, 0);

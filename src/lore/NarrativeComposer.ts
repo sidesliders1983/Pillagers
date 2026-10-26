@@ -103,6 +103,8 @@ function narrativeLine(event: SimulationEvent, original: string): string {
             details.casualtyIds.length + ' casualties were recorded for that expedition.' : 'No casualties were recorded for that expedition.');
         return lines.join(' ');
     }
+    if (event.type === 'CulturalGatheringHeld')
+        return original.replace(/, using \d+ Food\.$/, '.');
     if (event.type === 'BuildingCollapsed') original = original.replace(/; \d+ Materials were salvaged/,
         Number(details.salvage) > 0 ? '; some Materials were salvaged' : '; no Materials were salvaged');
     return original.replace(/ for \d+ (Food|Materials)/g, '');

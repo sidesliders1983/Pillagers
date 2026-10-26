@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "status": "functional-green-source-frozen-v3-performance-pending",
+  "inputs": [
+    {
+      "path": "src/fjord-play/LivingWorldController.ts",
+      "bytes": 64894,
+      "sha256": "45c56c4c51ed4c951723eda3394d98e9db407d47e95050b1d0e6b2a54c89172a"
+    },
+    {
+      "path": "tests/cultural-gathering-navigation.test.mjs",
+      "bytes": 15922,
+      "sha256": "ac19a4b03846a4210f288aae3cee9452d4f088faafcacc2d39f4c81ca1bd49da"
+    }
+  ],
+  "retainedLimits": {
+    "passedGatheringPointsPerActor": 512,
+    "suspendedWaypointsPerActor": 4096,
+    "localShortcutLookahead": 8,
+    "returnActiveSecondsMaximum": 240
+  },
+  "validation": {
+    "command": "node --max-old-space-size=512 --test tests/cultural-gathering-navigation.test.mjs tests/cultural-presentation.test.mjs",
+    "passed": 12,
+    "failed": 0,
+    "skipped": 0,
+    "typescript": "passed",
+    "physicalProductionSeed": 91,
+    "landscapeRecipeSeed": 15,
+    "returnRegression": "red missing actual-origin destination before fix; green physical return, no premature occupation probes, then real shore activity",
+    "homeChangeRegression": "red obsolete return before guard; green cancellation"
+  },
+  "negativeV2EvidencePreserved": "docs/qa/cultural-events/presentation-v2-tail-trace.json",
+  "pending": [
+    "Independent240secondv3CPUmaxima/tailcomparison",
+    "Actual browser/device acceptance"
+  ],
+  "noChanges": [
+    "Core facts/RNG/resources",
+    "Ordinary beginVisit/route budgets",
+    "Global delay policy"
+  ]
+}

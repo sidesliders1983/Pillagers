@@ -1,0 +1,335 @@
+{
+  "schemaVersion": 1,
+  "description": "Exact frozen measurement bytes, including original mixed line endings.",
+  "fingerprint": "8ae7e8e7e0d5990fc597d6cb1bfbc64fdc8b2ee4e5ac30bdbf6d9986f73042f3",
+  "measurementHead": "85301306b57b26656f36df72badd6dec846e0a75",
+  "fileCount": 64,
+  "sourceBytes": 600627,
+  "expandedBytes": 810290,
+  "expandedSHA256": "c351498588970929deccd032c4506e5eabb3b9e7475d4177452f12ee55007995",
+  "archiveBytes": 235005,
+  "archiveSHA256": "efe7fb837cf16090df163ba37282a44102ca9aeac8a2e3a46f06f7cba49f360c",
+  "generatorSHA256": "879755ddbe8feb598621f407905922c1be802f4db185464b00d3106bc94ce52c",
+  "files": [
+    {
+      "path": "docs/qa/cultural-events/calibration-protocol.json",
+      "bytes": 4799,
+      "sha256": "9539e77f434f620f137f1db5d621c51270ca02e6b74c988bcd16687518c31e1a"
+    },
+    {
+      "path": "package.json",
+      "bytes": 2055,
+      "sha256": "fbafeb1fb344820f0c13320ea10d91da1a15776eab0891c3f2020f8889801ea3"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "bytes": 51806,
+      "sha256": "c853a683bbfb2f3b58abfb6b1feb7308387bce165cb554d860e24a41c5debc9d"
+    },
+    {
+      "path": "scripts/load-typescript.mjs",
+      "bytes": 796,
+      "sha256": "bb4d96be5cf7ea8ee68298351ec6a4724569326bf8dec34b51dd0d225bf9c1f0"
+    },
+    {
+      "path": "scripts/qa/cultural-events-study.mjs",
+      "bytes": 29639,
+      "sha256": "1af89e71b096dcdc4f986a381ab8dccbab17328e83f442c48b7e5e215b5235ce"
+    },
+    {
+      "path": "src/characters/CharacterDNA.ts",
+      "bytes": 9445,
+      "sha256": "24bec3481d8c7c78e4d9542216292c6c012772b3aa5ad97f29b6edfcad763075"
+    },
+    {
+      "path": "src/characters/generateCharacterDNA.ts",
+      "bytes": 647,
+      "sha256": "411a33e3008c6b45dca82754a496e2d1c9398d77064d8d379a1fc36324b8146d"
+    },
+    {
+      "path": "src/characters/naming/NameProfile.ts",
+      "bytes": 995,
+      "sha256": "953e7e4469f340a066a9971505da95fffd69f28b38faf1979745503e072aa3c2"
+    },
+    {
+      "path": "src/characters/naming/generateName.ts",
+      "bytes": 3176,
+      "sha256": "d3e363cb0238f093ffc92e1c1719ea62fe825ab4e74a6d841cb7a89bbe4119ac"
+    },
+    {
+      "path": "src/characters/naming/nameProfiles.ts",
+      "bytes": 3880,
+      "sha256": "01c1674ec9499353d3adf03f5d7a7f67ea7ce83d197afd7f8317fe3327992db6"
+    },
+    {
+      "path": "src/characters/seededRandom.ts",
+      "bytes": 667,
+      "sha256": "af8ad27c431893db1e86f67f146dade8e7bc548c3b1955f515a0819b0a8e4ce5"
+    },
+    {
+      "path": "src/config/FjordLivestock.ts",
+      "bytes": 3002,
+      "sha256": "fe3cf9e810fafa49107522e708c8db20fc7395147dc086c9cfcc4982516d0024"
+    },
+    {
+      "path": "src/config/HousingAssets.ts",
+      "bytes": 1044,
+      "sha256": "e499e6250ac0ad2113973aa9ef79fd42fb93d7cdf80d85eebaa0aa9e49d79d32"
+    },
+    {
+      "path": "src/config/NatureAssets.ts",
+      "bytes": 390,
+      "sha256": "3c03973d3e71dc71eb8711e1cd5301c0f5ec0d8533dd9f37cda44daac51bd391"
+    },
+    {
+      "path": "src/config/worldConfig.ts",
+      "bytes": 1238,
+      "sha256": "02ec6765c289fef0e6a7c4caabb18c93ab297e0103d010a8884ff4096f69c740"
+    },
+    {
+      "path": "src/simulation/BirthdayCalendar.ts",
+      "bytes": 4836,
+      "sha256": "f745a3882e826f5b646eb1d1ddc2a1d673359bff5e79e8559ca1e9f8ae50b764"
+    },
+    {
+      "path": "src/simulation/Campfire.ts",
+      "bytes": 2258,
+      "sha256": "a415beb9e7cc56fc6cdc3cbb04bcf81474f5cf4bcff5c1983dfb097980d14367"
+    },
+    {
+      "path": "src/simulation/CareCalendar.ts",
+      "bytes": 1009,
+      "sha256": "a4ac6b904be6275e5076e889fa13c69a82399ffc5eaf41741f3c51d83bd10227"
+    },
+    {
+      "path": "src/simulation/ClanDiscovery.ts",
+      "bytes": 11789,
+      "sha256": "58652cb642fc82e31f1d0d96f41449bdf324dca54e6a95b1a60e2af6eb9272d6"
+    },
+    {
+      "path": "src/simulation/CulturalEvents.ts",
+      "bytes": 12992,
+      "sha256": "d829bc4dfc251f896dc1034a938015b24f56320a396ec6b665bb50819a054c3b"
+    },
+    {
+      "path": "src/simulation/EventFacts.ts",
+      "bytes": 4197,
+      "sha256": "6090beb00f5a68655346ce1c97b12e66e45ddb91bf6478a3fd1f5e6a0d5b7e29"
+    },
+    {
+      "path": "src/simulation/FamilyMechanics.ts",
+      "bytes": 9346,
+      "sha256": "83cba71ed956db057fdea0da63be992ed0878980aeaf7f052bfa3d2f64fc551d"
+    },
+    {
+      "path": "src/simulation/Farmyards.ts",
+      "bytes": 3111,
+      "sha256": "6ff4802f1804f1bbbc2cfa1300a110ac7d76d39fc93f7ec137bbbfaa9d71a966"
+    },
+    {
+      "path": "src/simulation/FoundingLivestock.ts",
+      "bytes": 1767,
+      "sha256": "644d184f71d604391babaa401b159ae41129ae3a4842857ee3bb3fdfcdbe40e3"
+    },
+    {
+      "path": "src/simulation/FoundingPhase.ts",
+      "bytes": 446,
+      "sha256": "4d8d68a8ef3c29d0e89c5a3f2091a7fba009e1d54ee96aad110ba23c78a93627"
+    },
+    {
+      "path": "src/simulation/HousingNames.ts",
+      "bytes": 1389,
+      "sha256": "6975f2c764b074c909b768357dd6e9cd853815aed35412623577392d7ba45974"
+    },
+    {
+      "path": "src/simulation/Identity.ts",
+      "bytes": 293,
+      "sha256": "cbcf1b001fd71d9246efb7cffda52a69b3d13957df2ea97f0fdf44f2f1841513"
+    },
+    {
+      "path": "src/simulation/IslandClans.ts",
+      "bytes": 3084,
+      "sha256": "1d6fd0aacc2db169d68d68c2ebd879eccdc9520331ae30d6d312c9a7155f0c17"
+    },
+    {
+      "path": "src/simulation/IslandMissions.ts",
+      "bytes": 21526,
+      "sha256": "f1b7e82cb7da2e85c579e8b054ae05d298c148dc796490d2e77f4fda6d754b85"
+    },
+    {
+      "path": "src/simulation/Landing.ts",
+      "bytes": 18616,
+      "sha256": "f84b203dec79b807ac036b21eaf017f0c5bdfb5f39cf24315dc78694c909a8cd"
+    },
+    {
+      "path": "src/simulation/Livestock.ts",
+      "bytes": 12485,
+      "sha256": "563f1e96bdcfd136a3381ec0771267513e56f2c6e14ad662770acfd07d072744"
+    },
+    {
+      "path": "src/simulation/LivestockBreeding.ts",
+      "bytes": 5492,
+      "sha256": "33690f543f8892d5fbe79b7b9ff9c0466336be4b14bef20db606b16336bb4cc9"
+    },
+    {
+      "path": "src/simulation/LivestockNames.ts",
+      "bytes": 3398,
+      "sha256": "341f7e283c5e91a3c5a734e8fed6f8bc6603da3ea94aa1d85dc6da0291378d7c"
+    },
+    {
+      "path": "src/simulation/LivestockSpecies.ts",
+      "bytes": 9416,
+      "sha256": "2068b44296ec0ad64541970c586b50d97ba5c40986ebf33fae15cbb23568f0d4"
+    },
+    {
+      "path": "src/simulation/LongshipNavigation.ts",
+      "bytes": 6797,
+      "sha256": "758ae0a75530d42ad20d4b1959dbab43553f34547e07539baf9ec7286fc19a52"
+    },
+    {
+      "path": "src/simulation/LongshipTransport.ts",
+      "bytes": 27186,
+      "sha256": "4da662526841c9ac54dde175be9ee2c79612bd79c260e8d633f5b6a05c9aa5ad"
+    },
+    {
+      "path": "src/simulation/Mechanics.ts",
+      "bytes": 32640,
+      "sha256": "810f478f7adc8daf41c673b2362adb6c93fdcf2f8585fd3c6c3b55bcd4701ade"
+    },
+    {
+      "path": "src/simulation/MissionLivestock.ts",
+      "bytes": 1513,
+      "sha256": "1e21bc3b2ae43ff8e6d6e77b7f9e89c74a9cb1e1d3c46fca56dbb8fdf19a13c3"
+    },
+    {
+      "path": "src/simulation/Mortality.ts",
+      "bytes": 6116,
+      "sha256": "bffa529c2446220a92f9caeae13fdd216e9870d7e962e588dcc361dd1244d273"
+    },
+    {
+      "path": "src/simulation/PersonaAge.ts",
+      "bytes": 1779,
+      "sha256": "2f63153673647cd2afa15df35f38db7faeb166cc243934a3d06feab3d5b4358a"
+    },
+    {
+      "path": "src/simulation/PersonalityLifeEvents.ts",
+      "bytes": 20282,
+      "sha256": "7c9cbc4cfd989313149d81982fad68cd3f9574d653826103b6b92dfdad71c8ab"
+    },
+    {
+      "path": "src/simulation/Random.ts",
+      "bytes": 274,
+      "sha256": "15ae0cb079aa5f7210b40bb005dd31e434532b3183e65ea307bf1071fb34005d"
+    },
+    {
+      "path": "src/simulation/ScheduledBirths.ts",
+      "bytes": 5371,
+      "sha256": "e44b527805204280829d9cf2a102bc330782ac9aa8963c664284a1c8d959ded8"
+    },
+    {
+      "path": "src/simulation/SimulationCore.ts",
+      "bytes": 29862,
+      "sha256": "2f42450ec26d352852ec975cfb1f2b0500a77fc61329fbe57c3154d84f814245"
+    },
+    {
+      "path": "src/simulation/Smithery.ts",
+      "bytes": 18268,
+      "sha256": "fac4f647560ca768dda8caf8d191b1098999275777705b6cf973593735fa9c6a"
+    },
+    {
+      "path": "src/simulation/SpatialExpeditions.ts",
+      "bytes": 68412,
+      "sha256": "d9d9e5f11f0da0e6d726fe2d488ed917c41dd85476e5aa248e67466cd36a16ba"
+    },
+    {
+      "path": "src/simulation/SpecialistStocks.ts",
+      "bytes": 1204,
+      "sha256": "42ecb3e529371f671b1ea84e2b49ba1609a2b48aee3f7028eb2fd32d1cf67324"
+    },
+    {
+      "path": "src/simulation/Weather.ts",
+      "bytes": 6595,
+      "sha256": "98f012e7918da6290b79b083b3d36d694c45fe0111305205adc595d5c0c5aac6"
+    },
+    {
+      "path": "src/simulation/WildlifeSightings.ts",
+      "bytes": 18771,
+      "sha256": "dfad4498faf8b7eed43447d6523035e788cfc9f1071d870807f8acea6596154d"
+    },
+    {
+      "path": "src/simulation/WorldExpeditions.ts",
+      "bytes": 26149,
+      "sha256": "c2577e8c5cdd8c0d3b29a6efe7bcce45e136717b55a81571c5ef9315761fbb68"
+    },
+    {
+      "path": "src/wildlife/MarineEncounters.ts",
+      "bytes": 8927,
+      "sha256": "ac1bc06e39fb7491d4b8dde9da49a94995755d17e230a7ceea57897663205f30"
+    },
+    {
+      "path": "src/wildlife/RabbitGait.ts",
+      "bytes": 3330,
+      "sha256": "c537eb4e25dab1b9efabd0cba7f384e4bdef7b4502b894e7d227d396637fe721"
+    },
+    {
+      "path": "src/wildlife/WildlifeHabitats.ts",
+      "bytes": 9389,
+      "sha256": "0ef5ebb0a39a6be4ac44cbc24464c33db24e823f34cd9701ad5494d775580cbe"
+    },
+    {
+      "path": "src/wildlife/WildlifePopulation.ts",
+      "bytes": 18598,
+      "sha256": "015547801c64691adf43f95a7fea0ddbec4b9ff3977a316c8c7140dc804edc6a"
+    },
+    {
+      "path": "src/wildlife/WildlifeSnapshot.ts",
+      "bytes": 2199,
+      "sha256": "8b4f52bb49b8a6643064b4cc2e9cb631969d29a167df7ab759da3106c03af8c1"
+    },
+    {
+      "path": "src/wildlife/WildlifeSpecies.ts",
+      "bytes": 7374,
+      "sha256": "dcbfe7764adbc792ce0cbdc77257564fbf5c5e4ff1bb549e6ec02bd23d6b02bb"
+    },
+    {
+      "path": "src/wildlife/WildlifeTerritories.ts",
+      "bytes": 2747,
+      "sha256": "6a62b546b5a7ed018534f4944686100cb5934f518696cbbeb66f350bf91c701b"
+    },
+    {
+      "path": "src/world-generation/CoastDistance.ts",
+      "bytes": 2492,
+      "sha256": "bb03ec068c546f0df62ea11cc5bfd3986f538bc32d34317817dde00b44060dd5"
+    },
+    {
+      "path": "src/world-generation/EnvironmentZoning.ts",
+      "bytes": 11849,
+      "sha256": "a13a27428ec82e9054610ddad58ec2477832f88bae89381056d757b5b160da1c"
+    },
+    {
+      "path": "src/world-generation/SettlementSites.ts",
+      "bytes": 5709,
+      "sha256": "e6daa4e6b4c4c154e58fce79607479f1a16ea10c0120104c7832464672b0a355"
+    },
+    {
+      "path": "src/world-generation/SettlementVisibility.ts",
+      "bytes": 4259,
+      "sha256": "3847f8317e50276b9fac6ecef9f7a53527b201f302a2aa3a9a7f5bb10ce4f687"
+    },
+    {
+      "path": "src/world-generation/TerrainQueries.ts",
+      "bytes": 3548,
+      "sha256": "a788ebf1b18eb6418ba7b874b3f185965a378d3f160ea6ea557e6295e3a8c2b1"
+    },
+    {
+      "path": "src/world-generation/WorldBlueprint.ts",
+      "bytes": 5297,
+      "sha256": "44be3cd3e077288f1837c0fbc3ddb51ce90c1016e0320a0eb110af4b63d2530a"
+    },
+    {
+      "path": "src/world/SettlementLayout.ts",
+      "bytes": 2661,
+      "sha256": "d6abe47532f2e0da1d932a4fd0b96b3cdd044f43ad925e2e687619a73cf06d57"
+    }
+  ]
+}

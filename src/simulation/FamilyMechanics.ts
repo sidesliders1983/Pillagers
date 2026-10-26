@@ -79,6 +79,15 @@ export function resolveBirths(state:SimulationState,roll:(bps:number)=>boolean,r
 export function isCaregiver(state:SimulationState,id:string):boolean {
     return Object.values(state.mechanics!.people).some(info=>info.caregiverId===id&&careActive(state,info));
 }
+/** One canonical pass for callers inspecting availability for a whole community. */
+export function providingCareIds(state: SimulationState): Set<string> {
+    const ids = new Set<string>();
+    for (const [id, info] of Object.entries(state.mechanics?.people ?? {})) {
+        if (!careActive(state, info)) continue;
+        ids.add(info.caregiverId ?? id);
+    }
+    return ids;
+}
 export function isProvidingCare(state:SimulationState,id:string):boolean {
     const info=state.mechanics!.people[id];
     return isCaregiver(state,id)||(careActive(state,info)&&info.caregiverId===null);
