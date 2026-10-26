@@ -373,7 +373,8 @@ function validateState(state: SimulationState): void {
     let wildlifeSequence = 0;
     const wildlifeFirsts = new Map<string, string>();
     state.events.forEach((event, index) => {
-        if (isCulturalEvent(event) || (state.culture !== undefined && event.type === 'PartnershipFormed'))
+        if (isCulturalEvent(event) || (state.culture !== undefined &&
+            ['PartnershipFormed', 'CampfireFuelConsumed', 'CampfireChanged'].includes(event.type)))
             culturalEvents.push(event);
         validateWildlifeSighting(event, state);
         const sighting = wildlifeSighting(event);

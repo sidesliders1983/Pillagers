@@ -457,11 +457,13 @@ export class FjordInterface {
                 this.hooks.commit([{ type: 'SponsorGathering', occasion: offer.occasion,
                     expectedSequence: offer.expectedSequence, quotedFood: offer.foodCost,
                     expectedParticipantIds: [...offer.participantIds],
+                    ...(offer.requiresCampfire ? { quotedMaterials: offer.materialsCost } : {}),
                     ...(offer.sourceEventId ? { sourceEventId: offer.sourceEventId } : {}) }], () => {
                     this.gatheringPending = false;
                     const label = offer.occasion === 'wedding' ? 'Wedding celebration' :
                         offer.occasion === 'communal_ceremony' ? 'Communal ceremony' : 'Gathering';
-                    const message = `${label} supported · ${offer.foodCost} Food spent.`;
+                    const fuelCost = offer.materialsCost > 0 ? ` + ${offer.materialsCost} Material` : '';
+                    const message = `${label} supported · ${offer.foodCost} Food${fuelCost} spent.`;
                     if (this.gatheringDraft === offer) {
                         this.gatheringDraft = undefined;
                         this.task = null;

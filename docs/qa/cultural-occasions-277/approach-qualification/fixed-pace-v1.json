@@ -1,0 +1,50 @@
+{
+  "head": "d43fff1a036e04b0ad91c54e43c3d7bc6dadce90",
+  "fixtureSHA256": "bcbd0b52eae7c9758619312963c55fdaa19ae3b100e32a1394d0d927a93a8833",
+  "results": [
+    {
+      "limit": 6,
+      "seed": 2,
+      "terrainSeed": 227,
+      "sourceEventId": "event-28",
+      "spouseIds": [
+        "founder-1",
+        "founder-6"
+      ],
+      "foodAfter": 1,
+      "phases": [
+        "approach"
+      ],
+      "beganAt": null,
+      "endedAt": 120.1,
+      "maximumStaged": 5,
+      "bodyOverlaps": 0,
+      "gatheringAtEnd": null,
+      "coreUnchanged": true,
+      "navigationOnly": true,
+      "rendererAndAudioMeasured": false
+    },
+    {
+      "limit": 8,
+      "seed": 2,
+      "terrainSeed": 227,
+      "sourceEventId": "event-28",
+      "spouseIds": [
+        "founder-1",
+        "founder-6"
+      ],
+      "foodAfter": 1,
+      "phases": [
+        "approach"
+      ],
+      "beganAt": null,
+      "endedAt": 120.1,
+      "maximumStaged": 7,
+      "bodyOverlaps": 0,
+      "gatheringAtEnd": null,
+      "coreUnchanged": true,
+      "navigationOnly": true,
+      "rendererAndAudioMeasured": false
+    }
+  ]
+}

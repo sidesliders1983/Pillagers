@@ -12,6 +12,22 @@ const occasionLabels: Record<GatheringOffer['occasion'], string> = {
 const escape = (value: unknown) => String(value ?? '').replace(/[&<>"']/g,
     character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]!));
 
+function foodQuote(offer: GatheringOffer): string {
+    if (offer.foodCostBasis === 'per_participant' && offer.foodPerParticipant !== null) {
+        return `<p class="fjord-culture-price" data-culture-price><span>${offer.foodPerParticipant} Food per attendee</span>
+            × <span>${offer.participantIds.length} attendees</span> = <strong>${offer.foodCost} Food total</strong></p>`;
+    }
+    return `<p class="fjord-culture-price" data-culture-price><strong>${offer.foodCost} Food total</strong>
+        · ${offer.participants.length} available residents</p>`;
+}
+
+/** Exact shared resource quote, including ordinary campfire fuel when required. */
+export function renderGatheringPrice(offer: GatheringOffer): string {
+    return foodQuote(offer) + (offer.requiresCampfire ?
+        `<p class="fjord-caption" data-culture-materials>+ ${offer.materialsCost} ${offer.materialsCost === 1 ? 'Material' : 'Materials'}
+            · ${offer.materialsCost ? 'campfire fuel' : 'uses existing campfire fuel'}</p>` : '');
+}
+
 function partnershipChoice(state: SimulationState, choice: GatheringChoice, canReadHistory: boolean): string {
     if (choice.occasion !== 'wedding') return '';
     const candidates = weddingCandidates(state);
@@ -45,7 +61,7 @@ export function renderGatheringCard(state: SimulationState, canReadHistory = fal
         <h3>${escape(occasionLabels[offer.occasion])}</h3>
         ${partnershipChoice(state, choice, canReadHistory)}
         <p>Share a gathering with available residents. Sponsorship is optional.</p>
-        <p><strong>${offer.foodCost} Food</strong> · ${offer.participants.length} available residents</p>
+        ${renderGatheringPrice(offer)}
         <p class="fjord-caption">Prepared support: ${offer.supportCount} of ${offer.supportCapacity}.
             One support reduces added Harsh/Severe weather-exposure risk by ${offer.exposureReductionBps / 100}%.
             It does not reduce natural mortality.</p>
@@ -64,6 +80,7 @@ export function renderGatheringReview(offer: GatheringOffer, current = offer, fe
     });
     const changed = offer.expectedSequence !== current.expectedSequence || offer.foodCost !== current.foodCost ||
         offer.occasion !== current.occasion || offer.sourceEventId !== current.sourceEventId ||
+        offer.materialsCost !== current.materialsCost ||
         JSON.stringify(offer.participantIds) !== JSON.stringify(current.participantIds);
     const reason = current.reason ?? (changed ? 'The gathering has changed. Review the updated attendance.' : null);
     return `<section class="fjord-culture" aria-label="Gathering review">
@@ -72,7 +89,7 @@ export function renderGatheringReview(offer: GatheringOffer, current = offer, fe
         ${offer.occasion === 'wedding' ? `${spouseNames.length === 2 ?
             `<p data-culture-couple><strong>${spouseNames.map(escape).join(' &amp; ')}</strong></p>` : ''}
             <p>The partnership is already recorded. This sponsors its celebration.</p>` : ''}
-        <p>This will cost <strong>${offer.foodCost} Food</strong>.</p>
+        ${renderGatheringPrice(offer)}
         <details><summary>${current.participants.length} currently available residents</summary>
             <ul>${current.participants.map(person => `<li>${escape(person.name)}</li>`).join('')}</ul>
         </details>

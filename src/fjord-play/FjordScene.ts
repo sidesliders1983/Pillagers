@@ -50,7 +50,8 @@ import { WildlifeSounds } from '../audio/WildlifeSounds';
 import { CulturalMotion } from '../characters/CulturalMotion';
 import { CulturalSounds } from '../audio/CulturalSounds';
 import { withCulturalSoundPack } from '../audio/CulturalSoundPack';
-import { CulturalPresentation } from './CulturalPresentation';
+import { CulturalPresentation, type CulturalPresentationFrame } from './CulturalPresentation';
+import { CulturalCeremonyVisuals } from './CulturalCeremonyVisuals';
 
 export interface FjordSceneHost {
     readonly tickIntervalSeconds: number;
@@ -115,6 +116,7 @@ export function createFjordScene(options: {
     let motion: LivingWorldController | undefined;
     const culturalMotion = new CulturalMotion();
     let culture: CulturalPresentation | undefined;
+    let ceremonyVisuals: CulturalCeremonyVisuals | undefined;
     let culturalMotionReady = false;
     let preparingCultureEvent = '';
     let lastCulturalPhase = '';
@@ -208,8 +210,27 @@ export function createFjordScene(options: {
         selectionLabels.sync(markers);
     };
 
+    const updateCeremonyVisuals = (frame: CulturalPresentationFrame | null, active: boolean) => {
+        const fireLit = inspectCampfire(session.readSnapshot()).lit;
+        if (frame && frame.occasion !== 'storytelling_music' && active && fireLit)
+            ceremonyVisuals ??= new CulturalCeremonyVisuals(scene, canvas.parentElement ?? undefined);
+        if (!ceremonyVisuals) return;
+        const state = session.readSnapshot();
+        const spouses = (frame?.spouseIds ?? []).flatMap(id => {
+            const person = state.personas[id];
+            const bounds = layer?.bounds('persona:' + id);
+            if (!person || !bounds || !frame?.participantKeys.includes('persona:' + id)) return [];
+            const center = bounds.getCenter(new Vector3());
+            return [{ id, name: person.name,
+                position: { x: center.x, y: bounds.max.y + .25, z: center.z },
+                visible: !knownTerrain || discoveryAt(knownTerrain, center.x, center.z) === 'visible' }];
+        });
+        ceremonyVisuals.update(frame, { active, fireLit, spouses, camera,
+            width: canvas.clientWidth, height: canvas.clientHeight });
+    };
     // RAF may stop before a hidden/context-lost frame. Invalidate synchronously at the lifecycle edge.
     const suspendCulture = () => {
+        updateCeremonyVisuals(null, false);
         culturalMotion.reset();
         models?.stopCulture();
         preparingCultureEvent = '';
@@ -223,6 +244,8 @@ export function createFjordScene(options: {
     const rebuildWorld = async (): Promise<void> => {
         if (inactive()) return;
         culture?.dispose();
+        ceremonyVisuals?.dispose();
+        ceremonyVisuals = undefined;
         culturalSounds.clear();
         culture = undefined;
         culturalMotion.reset();
@@ -701,7 +724,8 @@ export function createFjordScene(options: {
         if (running) activeTime += motionDelta;
         if (seasonAppearance.advance(motionDelta, running)) applySeasonAppearance();
         motion!.advance(motionDelta, running, !document.hidden);
-        culture?.advance(motionDelta, running && !document.hidden, culturalVisible());
+        culture?.advance(motionDelta, running && !document.hidden, culturalVisible(),
+            inspectCampfire(session.readSnapshot()).lit);
         const culturalFrame = culture?.inspect();
         const phaseKey = culturalFrame ? culturalFrame.id + ':' + culturalFrame.phase : '';
         const suspended = !running || document.hidden || !culturalFrame?.visible || reducedMotion.matches;
@@ -728,6 +752,7 @@ export function createFjordScene(options: {
                 .then(clips => { if (clips && !inactive()) culturalMotionReady = true; });
         }
         layer!.advance(motion!, motionDelta, running);
+        updateCeremonyVisuals(culturalFrame ?? null, !document.hidden);
         layer!.updateConstruction(document.hidden ? 0 : delta);
         rivalScene?.advance(motionDelta, running);
         wildlife?.setHumans([...layer!.humanPositions(), ...(rivalScene?.humanPositions() ?? [])]);
@@ -915,6 +940,8 @@ export function createFjordScene(options: {
         worldRevision++;
         bindings.abort();
         culture?.dispose();
+        ceremonyVisuals?.dispose();
+        ceremonyVisuals = undefined;
         culturalMotion.dispose();
         models?.stopCulture();
         renderer.setAnimationLoop(null);
@@ -955,10 +982,16 @@ export function createFjordScene(options: {
         replace: () => inactive() ? Promise.resolve() : track(sceneWorkMeasured(rebuildWorld)),
         sync: () => inactive() ? Promise.resolve() : track(sceneWorkMeasured(() => syncScene?.() ?? Promise.resolve())),
         frame, prepareGpu, arrive, dispose, highlight, suspendCulture,
-        acceptGathering: () => {
+        acceptGathering: (focusCeremony = false) => {
             if (inactive() || !culture) return false;
             // This entry point is called only after a successful live command, never while restoring.
             const fire = campaign.readProjection().campfire.transform;
+            if (focusCeremony) {
+                // Explicit ceremony confirmation brings its actual location into view.
+                controller.setView({ position: [fire.x + 14, fire.y + 17, fire.z - 18],
+                    target: [fire.x, fire.y + 1, fire.z] });
+                camera.updateMatrixWorld();
+            }
             const projected = new Vector3(fire.x, fire.y + 1, fire.z).project(camera);
             const visible = !document.hidden && projected.z >= -1 && projected.z <= 1 &&
                 Math.abs(projected.x) <= 1.1 && Math.abs(projected.y) <= 1.1 &&
@@ -966,7 +999,10 @@ export function createFjordScene(options: {
             const quality = document.querySelector<HTMLSelectElement>('#fjord-quality')!.value;
             const accepted = culture.accept(session.readSnapshot(), quality === 'low' ? 6 : 8, visible);
             const frame = culture.inspect();
-            if (accepted && frame) culturalSounds.start({ id: frame.id, sequence: frame.sequence });
+            if (accepted && frame) {
+                culturalSounds.start({ id: frame.id, sequence: frame.sequence });
+                updateCeremonyVisuals(frame, !document.hidden);
+            }
             return accepted;
         },
         portrait: (input: PortraitRequest) => {

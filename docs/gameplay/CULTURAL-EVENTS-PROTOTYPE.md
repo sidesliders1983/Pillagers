@@ -23,7 +23,7 @@ a conflicting retry is rejected.
 
 | Experimental rule | Value |
 | --- | --- |
-| Upfront gathering cost | 3 Food, no Materials |
+| Upfront storytelling/music cost | 3 Food, no Materials |
 | Minimum available participants | 3 adults |
 | Maximum recorded participants | 8 adults |
 | Contribution per accepted gathering | 1 prepared weather-support assessment |
@@ -35,8 +35,8 @@ a conflicting retry is rejected.
 
 A full bank rejects another sponsorship before spending. No automatic gathering, annual fee,
 missed-festival penalty, Food generation, new faith resource or generic happiness meter exists.
-Campfire lighting remains its independent existing Material/fuel command. Sponsorship neither
-lights the fire nor pays its fuel secretly.
+Storytelling/music leaves campfire lighting to its independent Material/fuel command. The
+#277 wedding and communal occasions below explicitly include their required fire in the quote.
 
 ## Actual weather consequence
 
@@ -139,11 +139,35 @@ couples are excluded; FoundingPartnershipPresent records presence at arrival, no
 date that the game may invent later.
 
 The shared occasion types are storytelling_music, communal_ceremony and wedding. All three
-use the same optional SponsorGathering transaction, 3-Food quote, 3–8 available adults, two-
-assessment bank, 25% exposure-only benefit and legacy/default policy described above. A full
+use the same optional SponsorGathering transaction, 3–8 available adults, two-assessment bank,
+25% exposure-only benefit and legacy/default policy described above. Storytelling/music and
+communal ceremonies cost **3 Food total**. Weddings cost **3 Food per recorded attendee**: eight
+canonical attendees cost 24 Food; seven cost 21 Food. The roster is never reduced to fit available
+Food. The decorative Low six-actor limit does not discount an eight-person Core event. A full
 bank rejects sponsorship before spending. A separate wedding or ceremony bonus does not exist.
 The neutral Communal Ceremony name establishes no specific gods, practices, priesthood,
 religious affiliation or belief; it grants no weather reroll, fertility or raid modifier.
+
+### Reviewed fire and resource costs
+
+The owner additionally requires a burning campfire for new weddings and communal ceremonies.
+The offer exposes total foodCost, foodCostBasis, foodPerParticipant, requiresCampfire and
+materialsCost. SponsorGathering must include the exact reviewed quotedMaterials, including 0,
+for either fire-requiring occasion. A changed roster, price, fuel-dependent Material quote,
+missing resources or full support bank rejects the whole transaction before any resource change.
+
+The shared existing campfire fuel implementation is authoritative. If fuel is 0, the transaction
+buys the normal 1,000 burning ticks for 1 Material and lights the actual fire before committing the
+cultural fact. This also covers the legal already-lit/zero-fuel boundary: the next ordinary purchase
+is prepaid one command earlier, with no tick advance or fuel decrement. With positive prepaid
+fuel, lighting or keeping the fire lit costs 0 Materials and preserves the remaining fuel exactly.
+There is no extra ceremony fuel coefficient, lock, daily fee or guaranteed duration. Ordinary
+SetCampfire and burning-tick purchase behavior are unchanged. The player can extinguish the
+fire afterward; matching accepted request retries do not relight it or charge again.
+
+The real CampfireFuelConsumed and CampfireChanged events precede the cultural receipt whenever
+needed. Materials are debited and accounted for only by the fuel event, never a second time
+from the gathering receipt. Storytelling/music still costs 3 Food total and does not require fire.
 
 ### Wedding eligibility and the exact window
 
@@ -166,15 +190,27 @@ ended partnerships are not listed as current candidates.
 
 ### Source facts and replay
 
-The wedding command adds sourceEventId to the existing quote fields. The caller never supplies
+The wedding command adds sourceEventId and the reviewed Material quote to the existing
+quote fields. The caller never supplies
 authoritative spouses: Core derives them from the actual source. CulturalGatheringHeld freezes
 sourceEventId and spouseIds alongside the normal real participant snapshots, cost and canonical
 time. It creates no new PartnershipFormed event and does not redate the source, purchase a
 partner, alter fertility, move a household or create children. Communal and storytelling commands
 have no partnership source.
 
-The existing version-1 cultural schema and event ledger remain shared. No persisted wedding
-window, second receipt table or all-pairs relationship graph is added. Candidate/history source
+The existing version-1 cultural state/configuration and event ledger remain shared. New wedding
+receipts explicitly record foodCostBasis:per_participant; both new fire-requiring occasions
+record requiresCampfire:true, their actual Material cost and the IDs of any newly emitted fuel/
+light events. One existing history pass validates the preceding real fire state and fuel without
+a second saved fire ledger. New per-attendee receipts cannot omit the explicit pricing marker.
+
+Genuine older unmarked flat-price wedding/communal receipts remain their accepted 3 Food facts,
+without invented fire events, debit, migration or history rewrite. Their original matching
+requests remain no-ops after reload or later changes. A frozen d43fff public-Core save covers
+this compatibility: SHA256 10c4c7be49b3b00d43f9b2aebe1d92506fecd2176b31e0d41d5b894bc3575b13.
+This is format compatibility rather than save authentication: an edited save can imitate the
+legacy representation. No persisted wedding window, second receipt table or all-pairs
+relationship graph is added. Candidate/history source
 indices are derived in one pass rather than searching history for every couple. The public
 availableCulturalParticipants projection is shared with presentation, which may further restrict
 physical visibility but cannot invent canonical eligibility or attendance.
@@ -188,8 +224,9 @@ Published historical chapters are not rewritten.
 
 Public Core tests exercise actual new partnerships, the capped spouse roster, founding/window
 exclusions, care/expedition absence, genuine later expedition loss, immutable prior family facts,
-source integrity, CPU isolation, and common weather-support replay across save/load and split
-ticks. Controlled fixtures use existing saved rules; they do not establish population-level
+source integrity, actual per-attendee affordability, changed-roster requotes, real campfire
+fuel/light accounting, atomic shortages, historical receipt compatibility, CPU isolation, and
+common weather-support replay across save/load and split ticks. Controlled fixtures use existing saved rules; they do not establish population-level
 balance, historical ritual authenticity, animation quality or gameplay enjoyment.
 
 Focused reproduction:
@@ -206,3 +243,39 @@ Chronicle and Personal History distinguish celebrated partners, wedding guests a
 ceremony participants. The Clan Book retains the exact real partnership callback, accounts
 for paid Food in its ledger and preserves already published chapters across full campaign
 restore. Presentation changes neither the Family Tree nor the canonical partnership date.
+
+
+### Owner-requested invitation and ceremony presentation
+
+A new current, uncelebrated partnership can offer one compact non-modal wedding invitation in
+Fjord Play. It names both real people and shows the full per-attendee Food and normal ignition
+Material quote. Confirm commits through the same atomic command; insufficient stocks show
+Not enough resources. Not now, close and Escape acknowledge only the actual partnership in
+the existing Attention metadata, spend nothing and leave the relationship intact. Dismissed or
+evicted notifications do not reappear after reload. The manual campfire opportunity remains
+available within the owner's existing one-year window. Loading, backgrounding and another
+explicit management flow defer delivery without creating a new event or forced pause.
+
+A fresh paid wedding or communal ceremony shows temporary decoration around the real burning
+campfire. Weddings have an arch/garland and standards; communal ceremonies use neutral standards
+and a garland. The two actual celebrating partners receive bounded Wedding name labels at their
+moving head anchors. No attendee model, light, shadow map, texture or frame owner is added.
+Static decoration stays visible when the foreground clock is paused; motion and sound retain
+their existing pause rules. Suspension, hidden views, an extinguished fire, completion and
+scene disposal hide or release presentation. Core costs and support do not depend on decoration.
+
+The one active merged decoration mesh uses one material: 840 triangles for wedding or 616 for
+communal, with 157,248 total attribute bytes if both variants have been cached. These are geometry
+budgets, not measured mobile GPU/frame results. The existing motion/audio banks remain shared.
+
+A real prepared-island fixture exposed short-waypoint passing that could circle a settled
+attendee. Ceremony approach/retained-return actors now evaluate the actual next physical segment
+before anticipatory passing. All existing terrain/body-clearance guards and route/node budgets
+remain. Ordinary passing behavior is unchanged. The normal seed-2/terrain-227 fixture now gathers
+with both partners at 24.5 active seconds, finishes the response at 31.5 and returns all staged
+residents by 55.1 on Low six / Standard eight. No overlaps or renderer-caused Core changes occur
+in these headless cases. See the #277 QA report for provenance and actual device limits.
+
+A newly confirmed wedding or communal ceremony brings the camera close to the actual campfire
+so the accepted event can be watched even if the player had been viewing another area. Declining,
+failed commands and matching historical retries do not redirect the camera or restart a show.

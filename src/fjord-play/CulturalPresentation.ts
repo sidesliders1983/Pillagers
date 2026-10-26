@@ -1,9 +1,11 @@
-import { availableCulturalParticipants, type SimulationState } from '../simulation/SimulationCore';
+import { availableCulturalParticipants, type CulturalOccasion, type SimulationState } from '../simulation/SimulationCore';
 import type { LivingWorldController } from './LivingWorldController';
 
 export interface CulturalPresentationFrame {
     id: string;
     sequence: number;
+    occasion: CulturalOccasion;
+    spouseIds: string[];
     phase: 'approach' | 'gathering' | 'response' | 'ended';
     phaseElapsedSeconds: number;
     position: { x: number; y: number; z: number };
@@ -31,7 +33,8 @@ export class CulturalPresentation {
         this.finish();
         const event = state.events.find(item => item.id === state.culture!.lastGatheringEventId);
         if (!visible || event?.type !== 'CulturalGatheringHeld' ||
-            event.details?.gatheringSequence !== this.seenSequence) return false;
+            event.details?.gatheringSequence !== this.seenSequence ||
+            event.details.occasion !== 'storytelling_music' && !state.campfire?.lit) return false;
         const available = new Set(availableCulturalParticipants(state).map(person => person.id));
         const recorded = event.details.participants as string[];
         const required = event.details.occasion === 'wedding' && Array.isArray(event.details.spouseIds) ?
@@ -47,16 +50,20 @@ export class CulturalPresentation {
             return false;
         }
         this.requiredKeys = requiredKeys;
-        this.current = { id: event.id, sequence: this.seenSequence, phase: 'approach',
+        this.current = { id: event.id, sequence: this.seenSequence,
+            occasion: event.details.occasion as CulturalOccasion, spouseIds: [...required], phase: 'approach',
             phaseElapsedSeconds: 0, position: { ...this.position }, stagedParticipants: keys.length,
             participantKeys: keys, visible: true };
         return true;
     }
 
-    advance(seconds: number, running: boolean, visible: boolean) {
+    advance(seconds: number, running: boolean, visible: boolean, fireLit = true) {
         const current = this.current;
         if (!current) return;
-        if (!visible) { this.finish(); return; }
+        if (!visible || current.occasion !== 'storytelling_music' && !fireLit) {
+            this.finish();
+            return;
+        }
         const staged = this.motion.inspectGathering()?.participants.filter(person => !person.dropped) ?? [];
         if (staged.length < 3 || this.requiredKeys.some(key => !staged.some(person => person.key === key))) {
             this.finish();

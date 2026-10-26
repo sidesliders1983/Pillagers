@@ -8,13 +8,13 @@ or modify the first prototype served on LAN port 5180.
 
 | Player intent | Existing surface and visible choice | Canonical boundary |
 | --- | --- | --- |
-| Inspect community life | Select the settlement campfire. The culture section stays below the existing Light/Extinguish campfire controls. | Lighting fuel and cultural Food remain separate commands. |
+| Inspect community life | Select the settlement campfire. The culture section stays below the existing Light/Extinguish campfire controls. | Manual lighting remains available; fire-requiring occasions quote their ordinary fuel atomically. |
 | Choose an occasion | One Occasion select offers Storytelling & music, Communal ceremony and Wedding celebration. | Selection only changes the local view. All use the same Core culture transaction and support reserve. |
 | Find a wedding occasion | Wedding reveals one Couple select containing actual recent partnership sources and real names. | Only new PartnershipFormed sources within one game year qualify. Founding partnerships are excluded. |
 | Understand the occasion | The wedding card explains that the partnership already exists and links to its recorded source. | Reading the partnership does not recreate it, change its date or spend Food. |
-| Consider sponsorship | Support gathering opens the existing compact in-card review with the selected occasion, real current roster and explicit 3 Food quote. | No modal, forced pause, extra HUD row or automatic annual prompt. |
+| Consider sponsorship | Support gathering opens the existing compact in-card review with the selected occasion, real current roster and explicit total quote: weddings cost 3 Food per attendee; the other occasions cost 3 Food total. | No forced pause or extra HUD row. A new partnership can also offer the optional non-modal invitation described below. |
 | Decline | Not now, Escape or closing the card preserves the campaign and partnership. | No command, spending or penalty. |
-| Sponsor | Sponsor commits the reviewed occasion, expected sequence, Food quote, attendance and wedding source ID through the existing session command queue. | Core revalidates eligibility atomically. The UI cannot choose different spouses or forge a source. |
+| Sponsor | Sponsor commits the reviewed occasion, expected sequence, Food/Material quote, attendance and wedding source ID through the existing session command queue. | Core revalidates eligibility atomically. The UI cannot choose different spouses or forge a source. |
 | Observe/read | Accepted sponsorship reports the actual occasion and links to the real cultural event in Activity Center. | Shared CulturalGatheringHeld facts retain the real source, participants and cost. Existing partnership facts remain unchanged. |
 
 ## Wedding window and unavailable states
@@ -29,10 +29,44 @@ shows changed availability and disables a stale quote. Reaching the one-year lim
 or celebrating that source once disables another purchase; the partnership remains.
 No founding couple is re-dated to create a wedding opportunity.
 
-The Food cost, minimum/maximum actual attendance, two banked supports and the narrow
-weather-exposure consequence remain the existing experimental configuration. There
-is no ceremony-specific buff, new faith stock, fertility bonus, wedding purchase of
+Wedding Food is 3 per actual attendee: eight recorded attendees cost 24 Food.
+Storytelling/music and communal ceremonies remain 3 Food total. The roster is never
+reduced merely to fit the Food stock. Wedding and communal ceremonies also quote
+the ordinary campfire fuel cost: 1 Material when fuel is empty, otherwise 0. The
+accepted command starts or relights the real campfire and prepays its normal fuel
+atomically; viewing or declining does neither. Minimum/maximum actual attendance,
+two banked supports and the narrow weather-exposure consequence keep their existing
+experimental configuration. There is no ceremony-specific buff, new faith stock,
+fertility bonus, wedding purchase of
 love, god, priesthood or invented ritual. A communal ceremony needs no partnership.
+
+## Optional invitation after a real new partnership
+
+The owner requested a dismissible window for newly formed partnerships. It uses the
+intersection of current Core wedding candidates and unread retained PartnershipFormed
+records in the existing Activity Center. One source is shown at a time, with both
+real names, per-attendee Food/count/total and the actual Material quote. The buttons
+are Confirm, or disabled Not enough resources when stock is insufficient, and Not now.
+Other eligibility failures disable Confirm and explain the actual reason.
+
+Not now, X and Escape acknowledge only that partnership source using existing saved
+Attention metadata. There is no Core decline event, relationship penalty or expense;
+the manual campfire opportunity remains available during its ordinary window.
+Confirmation acknowledges the source only after an accepted transaction. A changed
+queued resource quote rejects atomically and displays the updated price for a fresh
+Confirm. A campaign-epoch guard prevents old queued clicks from spending after reload,
+even when deterministic IDs happen to match. Reading Attention cannot cancel an
+already confirmed same-campaign intent.
+
+Loading, backgrounding, the Book and other explicit management flows hide/defer the
+window without dropping unread sources. The window does not pause, trap focus, place
+a backdrop over the scene or create timer-driven acknowledgements. Confirm uses the
+same actual command-settled, scene-sync and accepted-presentation path as manual sponsorship.
+
+Only retained unread records drive automatic delivery. Attention read IDs are pruned
+when their records leave the bounded inbox; consulting all Core candidates with those
+read IDs alone would resurrect dismissed invitations. The manual card still queries
+all current valid candidates. No separate global dismissal history is created.
 
 ## Presentation and accessibility
 
@@ -52,13 +86,16 @@ opening history and the campfire fire effect cannot create or confirm cultural f
 SharedSettlement and FjordInterface DOM. The #277 additions cover selecting/declining
 a communal occasion, its actual paid event, the real annual partnership to source-linked
 wedding path, source navigation, unchanged partners, rejection of a repeated celebration,
-founding exclusion and the exact one-year expiry. Earlier transaction, asynchronous
-rejection, focus, keyboard, insufficient Food and support-cap journeys remain covered.
+founding exclusion and the exact one-year expiry. The invitation journeys additionally
+cover actual fuel spending, stale Material quotes, insufficient Food/Materials without
+roster shrinking, same-ID campaign reloads, read-after-confirm queue independence,
+source-only persisted dismissal and suspension/focus/camera behavior. Earlier
+transaction, asynchronous rejection, keyboard and support-cap journeys remain covered.
 
 Run the focused and neighbouring public DOM journeys with:
 
 ```text
-node --test tests/cultural-gathering-view.test.mjs tests/smithery-dom.test.mjs tests/first-steps-dom.test.mjs
+node --test tests/cultural-gathering-view.test.mjs tests/wedding-invitation.test.mjs tests/smithery-dom.test.mjs tests/first-steps-dom.test.mjs
 node node_modules/typescript/bin/tsc --noEmit
 ```
 

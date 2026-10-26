@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "baseHead": "d43fff1a036e04b0ad91c54e43c3d7bc6dadce90",
+  "sourceContext": "Owner-approved per-attendee/fire changes plus the minimal ceremony passing correction; exact portable hashes below, not a clean-base claim.",
+  "textHashConvention": "SHA-256 of valid UTF-8 with CRLF changed to LF only.",
+  "files": {
+    "src/fjord-play/LivingWorldController.ts": "153cf3ca3c9f396627b822cdb816bab3bd9fb23bfa74976f270c51d706e5517f",
+    "src/fjord-play/CulturalPresentation.ts": "1d65d796748bc24ebb2338a64307a07111ab1959aedff0bf02a8f28b94da2562",
+    "src/fjord-play/FjordProjection.ts": "4feadf6f508d8d02cb13c33599cda07cd6d295aa97142b908d604e9de0b8c9ca",
+    "src/characters/MeshyHuman.ts": "913d097e899328396cc39d19e39152260f8d9ff9081323f46734dc3aaf4372a9",
+    "src/characters/NativeFacialGeometry.ts": "6a4d426d401639c6b3829ec0368c24a2a4508331773b5611aef4ca25c3a5cf08",
+    "src/characters/UniversalHumanProfile.ts": "c9770c8cd485e6fa0cda6a6c2405580b215ad60351d4124386e73f29b27ef66c",
+    "src/character-lab/HumanPreviewPace.ts": "12abd221c1ff3de9cccecd81d413628ea5504062a2ff9a418fa7d2b6098454b7",
+    "tests/cultural-wedding-navigation.test.mjs": "5fbf7d2ef55659765c4d5900227867cdc61c37c8378ebcbae21393c68cd0ac53"
+  },
+  "preparedBody": {
+    "path": "public/game-assets/human/Human_LOD2.glb",
+    "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+  },
+  "campaign": {
+    "path": "docs/qa/cultural-occasions-277/review-fixture-v2/review-wedding-campaign.json",
+    "sha256": "69204861159519276cb7a60c8d3eaf83127601cb6b1eda6032176aa09449669c"
+  },
+  "priorNavigationPortableSHA256": "45c56c4c51ed4c951723eda3394d98e9db407d47e95050b1d0e6b2a54c89172a",
+  "artifacts": {
+    "fixed-pace-v1.json": "c38821da32a5882b9bbf8943d123985ad28ee5d61113f44fa1d9159c8e4e53b7",
+    "native-gait.json": "364c94f8f8792548e2a240f2453d5d22ed562bd941c45ab903dba078020387d4",
+    "native-gait-v2-failed.json": "4b91d0e9eeee049adb226ac82c36c4029cc520234c564049f5ee4f3bf08a0c3b",
+    "native-gait-v3-passed.json": "b6ddd7720a59cc7a23c00a96023c3922c9f98243a92af0fd47861d55d96d08b1",
+    "live-clock-v3-passed.json": "d403890cb167836a9328a036b8630b6f70093b702508c402ba91bf0d0c9be0fc"
+  },
+  "browserOrGpuMeasured": false
+}

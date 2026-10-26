@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { loadTypeScript } from '../scripts/load-typescript.mjs';
 
 const core = loadTypeScript(new URL('../src/simulation/SimulationCore.ts', import.meta.url));
@@ -12,7 +14,7 @@ function campaign(landing = {}, mechanics = {}, expedition = {}) {
 function sponsor(state, occasion, sourceEventId) {
     const offer = core.gatheringOffer(state, occasion, sourceEventId);
     return { type: 'SponsorGathering', occasion: offer.occasion, expectedSequence: offer.expectedSequence,
-        quotedFood: offer.foodCost, expectedParticipantIds: offer.participantIds,
+        quotedFood: offer.foodCost, quotedMaterials: offer.materialsCost, expectedParticipantIds: offer.participantIds,
         ...(sourceEventId ? { sourceEventId } : {}) };
 }
 
@@ -53,7 +55,7 @@ test('the shared cultural availability projection returns real eligible people b
 });
 
 function newPartnerships(expedition = {}) {
-    return core.advanceWinter(campaign({}, { partnershipChanceBps: 10000 }, expedition));
+    return core.advanceWinter(campaign({ initialFood: 100 }, { partnershipChanceBps: 10000 }, expedition));
 }
 
 test('a new canonical partnership offers a wedding with both spouses reserved in the capped real roster', () => {
@@ -78,6 +80,11 @@ test('a wedding marks its actual partnership source without creating or redating
     const input = newPartnerships();
     const candidate = core.weddingCandidates(input)[0];
     const command = sponsor(input, 'wedding', candidate.sourceEventId);
+    assert.equal(command.expectedParticipantIds.length, 8);
+    assert.equal(command.quotedFood, 24);
+    const offer = core.gatheringOffer(input, 'wedding', candidate.sourceEventId);
+    assert.equal(offer.foodCostBasis, 'per_participant');
+    assert.equal(offer.foodPerParticipant, 3);
     const output = core.applyCommand(input, command);
     const celebration = output.events.at(-1);
     assert.equal(celebration.type, 'CulturalGatheringHeld');
@@ -88,8 +95,14 @@ test('a wedding marks its actual partnership source without creating or redating
     assert.deepEqual(output.personas, input.personas);
     assert.deepEqual(output.households, input.households);
     assert.deepEqual(output.families, input.families);
-    assert.deepEqual(output.events.slice(0, -1), input.events);
-    assert.equal(output.stocks.food, input.stocks.food - 3);
+    assert.deepEqual(output.events.slice(0, input.events.length), input.events);
+    assert.deepEqual(output.events.slice(input.events.length, -1).map(event => event.type),
+        ['CampfireFuelConsumed', 'CampfireChanged']);
+    assert.deepEqual(core.inspectCampfire(output), { lit: true, fuelTicks: 1000 });
+    assert.equal(output.stocks.materials, input.stocks.materials - 1);
+    assert.equal(output.stocks.food, input.stocks.food - 24);
+    assert.equal(celebration.details.foodCost, 24);
+    assert.equal(celebration.details.foodCostBasis, 'per_participant');
     assert.equal(core.inspectCulture(output).supportCount, 1);
     assert.equal(output.rngState, input.rngState);
     assert.deepEqual(core.reconstructState(core.serializeState(output)), output);
@@ -97,7 +110,7 @@ test('a wedding marks its actual partnership source without creating or redating
 });
 
 test('founding partnerships are excluded and the new-partnership window ends exactly after one game year', () => {
-    const founding = campaign({ foundingCoupleChanceBps: 10000 });
+    const founding = campaign({ foundingCoupleChanceBps: 10000, initialFood: 100 });
     const oldSource = founding.events.find(event => event.type === 'FoundingPartnershipPresent');
     assert.ok(oldSource);
     assert.deepEqual(core.weddingCandidates(founding), []);
@@ -239,8 +252,228 @@ test('a real CPU partnership can earn its own wedding support without granting i
     const updated = core.applyCommand(target, sponsor(target, 'wedding', candidate.sourceEventId));
     assert.equal(core.inspectCulture(updated).supportCount, 1);
     assert.equal(core.inspectCulture(player).supportCount, 0);
-    assert.equal(updated.stocks.food, target.stocks.food - 3);
+    assert.equal(updated.stocks.food, target.stocks.food - 24);
     assert.equal(updated.events.at(-1).details.clanId, target.clan.id);
     assert.deepEqual(updated.events.at(-1).details.spouseIds, candidate.spouseIds);
     assert.deepEqual(core.reconstructState(core.serializeState(updated)), updated);
+});
+
+
+test('wedding affordability uses the full real roster without reducing attendance to fit Food', () => {
+    const state = core.advanceWinter(campaign({ initialFood: 14 }, { partnershipChanceBps: 10000 }));
+    assert.equal(state.stocks.food, 23);
+    const candidate = core.weddingCandidates(state)[0];
+    const offer = core.gatheringOffer(state, 'wedding', candidate.sourceEventId);
+    assert.equal(offer.participantIds.length, 8);
+    assert.equal(offer.foodCost, 24);
+    assert.equal(offer.allowed, false);
+    assert.equal(candidate.allowed, false);
+    assert.match(offer.reason, /Food/i);
+    const before = core.serializeState(state);
+    assert.throws(() => core.applyCommand(state, sponsor(state, 'wedding', candidate.sourceEventId)), /Food/i);
+    assert.equal(core.serializeState(state), before);
+    assert.equal(core.gatheringOffer(state, 'communal_ceremony').foodCost, 3);
+    assert.equal(core.gatheringOffer(state, 'storytelling_music').foodCost, 3);
+});
+
+test('a changed available wedding roster requires a fresh quote and charges its exact recorded count', () => {
+    let state = newPartnerships();
+    const candidate = core.weddingCandidates(state)[0];
+    const original = sponsor(state, 'wedding', candidate.sourceEventId);
+    const travelers = core.availableCulturalParticipants(state)
+        .filter(person => !candidate.spouseIds.includes(person.id)).slice(0, 3).map(person => person.id);
+    state = core.applyCommand(state, { type: 'CreateExpeditionGroup', name: 'Three actual travelers', memberIds: travelers });
+    const groupId = Object.keys(state.world.groups)[0];
+    const regionId = Object.values(state.world.regions).find(region => !region.requiresShip).id;
+    state = core.applyCommand(state, { type: 'DispatchExpedition', groupId, regionId, mission: 'Recon' });
+    const before = core.serializeState(state);
+    const revised = core.gatheringOffer(state, 'wedding', candidate.sourceEventId);
+    assert.equal(revised.participantIds.length, 7);
+    assert.equal(revised.foodCost, 21);
+    assert.ok(candidate.spouseIds.every(id => revised.participantIds.includes(id)));
+    assert.throws(() => core.applyCommand(state, original), /quote/i);
+    assert.equal(core.serializeState(state), before);
+    const accepted = core.applyCommand(state, sponsor(state, 'wedding', candidate.sourceEventId));
+    assert.equal(accepted.stocks.food, state.stocks.food - 21);
+    assert.equal(accepted.events.at(-1).details.foodCost, 21);
+    assert.deepEqual(accepted.events.at(-1).details.participants, revised.participantIds);
+    assert.deepEqual(core.reconstructState(core.serializeState(accepted)), accepted);
+});
+
+test('per-attendee wedding receipts reject a missing or conflicting cost basis on restore', () => {
+    const state = newPartnerships();
+    const candidate = core.weddingCandidates(state)[0];
+    const accepted = core.applyCommand(state, sponsor(state, 'wedding', candidate.sourceEventId));
+    for (const alter of [
+        details => delete details.foodCostBasis,
+        details => details.foodCostBasis = 'flat',
+        details => details.foodCostBasis = 'unknown',
+        details => details.foodCost = 3,
+        details => details.foodCost = 21,
+    ]) {
+        const invalid = structuredClone(accepted);
+        alter(invalid.events.at(-1).details);
+        assert.throws(() => core.reconstructState(JSON.stringify(invalid)), /cultur/i);
+    }
+    const communal = core.applyCommand(campaign(), sponsor(campaign(), 'communal_ceremony'));
+    communal.events.at(-1).details.foodCostBasis = 'per_participant';
+    assert.throws(() => core.reconstructState(JSON.stringify(communal)), /cultur/i);
+});
+
+
+test('genuine d43fff flat-price wedding and communal receipts restore and retry without a new debit', () => {
+    // Generated through the committed d43fff public Core; provenance and generator are retained
+    // in scratch/legacy-wedding-price-d43fff, with no receipt rewritten into supposed history.
+    const serialized = readFileSync(new URL('./fixtures/cultural-flat-receipts-d43fff.json', import.meta.url), 'utf8');
+    assert.equal(createHash('sha256').update(serialized).digest('hex'),
+        '10c4c7be49b3b00d43f9b2aebe1d92506fecd2176b31e0d41d5b894bc3575b13');
+    const restored = core.reconstructState(serialized);
+    assert.equal(core.serializeState(restored), serialized);
+    assert.equal(restored.campfire, undefined);
+    const receipts = restored.events.filter(event => event.type === 'CulturalGatheringHeld');
+    assert.deepEqual(receipts.map(event => event.details.occasion), ['communal_ceremony', 'wedding']);
+    let later = core.applyCommand(restored, { type: 'AdvanceTicks', ticks: 1000 });
+    for (const receipt of receipts) {
+        assert.equal(receipt.details.foodCost, 3);
+        assert.equal(receipt.details.foodCostBasis, undefined);
+        const command = { type: 'SponsorGathering', occasion: receipt.details.occasion,
+            expectedSequence: receipt.details.gatheringSequence, quotedFood: 3,
+            expectedParticipantIds: receipt.details.participants,
+            ...(receipt.details.sourceEventId ? { sourceEventId: receipt.details.sourceEventId } : {}) };
+        assert.deepEqual(core.applyCommand(later, command), later);
+        assert.throws(() => core.applyCommand(later, { ...command, quotedFood: 24 }), /receipt/i);
+    }
+    assert.deepEqual(later.events.filter(event => event.type === 'CulturalGatheringHeld'), receipts);
+});
+
+
+test('a communal ceremony atomically lights its real unfuelled campfire using the reviewed Material', () => {
+    const input = campaign();
+    const offer = core.gatheringOffer(input, 'communal_ceremony');
+    assert.equal(offer.requiresCampfire, true);
+    assert.equal(offer.materialsCost, 1);
+    const command = sponsor(input, 'communal_ceremony');
+    const output = core.applyCommand(input, command);
+    assert.deepEqual(core.inspectCampfire(output), { lit: true, fuelTicks: 1000 });
+    assert.equal(output.stocks.food, input.stocks.food - 3);
+    assert.equal(output.stocks.materials, input.stocks.materials - 1);
+    const events = output.events.slice(input.events.length);
+    assert.deepEqual(events.map(event => event.type),
+        ['CampfireFuelConsumed', 'CampfireChanged', 'CulturalGatheringHeld']);
+    const receipt = events.at(-1).details;
+    assert.equal(receipt.requiresCampfire, true);
+    assert.equal(receipt.materialsCost, 1);
+    assert.deepEqual(receipt.campfireEventIds, events.slice(0, -1).map(event => event.id));
+    assert.deepEqual(output.time, input.time);
+    assert.equal(output.rngState, input.rngState);
+    const restored = core.reconstructState(core.serializeState(output));
+    assert.deepEqual(core.applyCommand(restored, command), output);
+    assert.equal(input.campfire, undefined);
+});
+
+
+test('ceremonies reuse prepaid fuel with no Materials, whether the real fire is off or already burning', () => {
+    let prepaid = core.applyCommand(campaign({ initialMaterials: 1 }), { type: 'SetCampfire', lit: true });
+    prepaid = core.applyCommand(prepaid, { type: 'AdvanceTicks', ticks: 321 });
+    assert.equal(prepaid.stocks.materials, 0);
+    assert.equal(core.inspectCampfire(prepaid).fuelTicks, 679);
+    for (const lit of [false, true]) {
+        const input = core.applyCommand(prepaid, { type: 'SetCampfire', lit });
+        const offer = core.gatheringOffer(input, 'communal_ceremony');
+        assert.equal(offer.allowed, true);
+        assert.equal(offer.materialsCost, 0);
+        const command = sponsor(input, 'communal_ceremony');
+        const output = core.applyCommand(input, command);
+        assert.deepEqual(core.inspectCampfire(output), { lit: true, fuelTicks: 679 });
+        assert.equal(output.stocks.materials, 0);
+        assert.equal(output.stocks.food, input.stocks.food - 3);
+        assert.deepEqual(output.events.slice(input.events.length).map(event => event.type), lit ?
+            ['CulturalGatheringHeld'] : ['CampfireChanged', 'CulturalGatheringHeld']);
+        let later = core.applyCommand(output, { type: 'SetCampfire', lit: false });
+        later = core.applyCommand(later, { type: 'AdvanceTicks', ticks: 50 });
+        const restored = core.reconstructState(core.serializeState(later));
+        assert.deepEqual(core.applyCommand(restored, command), restored);
+        assert.equal(core.inspectCampfire(restored).lit, false, 'accepted retries do not relight a later extinguished fire');
+    }
+});
+
+function exhaustedBurningCampfire(initialMaterials) {
+    let state = campaign({ initialMaterials, initialFood: 100 });
+    for (const id of Object.keys(state.personas).sort())
+        state = core.applyCommand(state, { type: 'AssignOccupation', personaId: id, occupation: 'farmer' });
+    state = core.applyCommand(state, { type: 'SetCampfire', lit: true });
+    state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 1000 });
+    assert.deepEqual(core.inspectCampfire(state), { lit: true, fuelTicks: 0 });
+    return state;
+}
+
+test('a ceremony prepays normal fuel at the already-lit zero-fuel boundary without advancing time', () => {
+    const input = exhaustedBurningCampfire(2);
+    assert.equal(input.stocks.materials, 1);
+    assert.equal(core.gatheringOffer(input, 'communal_ceremony').materialsCost, 1);
+    const output = core.applyCommand(input, sponsor(input, 'communal_ceremony'));
+    assert.equal(output.stocks.materials, 0);
+    assert.equal(output.stocks.food, input.stocks.food - 3);
+    assert.deepEqual(core.inspectCampfire(output), { lit: true, fuelTicks: 1000 });
+    assert.deepEqual(output.events.slice(input.events.length).map(event => event.type),
+        ['CampfireFuelConsumed', 'CulturalGatheringHeld']);
+    assert.deepEqual(output.time, input.time);
+    const restored = core.reconstructState(core.serializeState(output));
+    const next = core.applyCommand(restored, { type: 'AdvanceTicks', ticks: 1 });
+    assert.deepEqual(core.inspectCampfire(next), { lit: true, fuelTicks: 999 });
+    assert.equal(next.stocks.materials, 0);
+});
+
+test('missing ignition Materials or a changed Material quote reject before Food, fuel, or support changes', () => {
+    for (const input of [campaign({ initialMaterials: 0 }), exhaustedBurningCampfire(1)]) {
+        assert.equal(input.stocks.materials, 0);
+        const offer = core.gatheringOffer(input, 'communal_ceremony');
+        assert.equal(offer.materialsCost, 1);
+        assert.equal(offer.allowed, false);
+        assert.match(offer.reason, /Materials/i);
+        const before = core.serializeState(input);
+        assert.throws(() => core.applyCommand(input, sponsor(input, 'communal_ceremony')), /Materials/i);
+        assert.equal(core.serializeState(input), before);
+    }
+    let state = campaign({ initialMaterials: 1 });
+    const oldQuote = sponsor(state, 'communal_ceremony');
+    state = core.applyCommand(state, { type: 'SetCampfire', lit: true });
+    state = core.applyCommand(state, { type: 'SetCampfire', lit: false });
+    const before = core.serializeState(state);
+    assert.equal(core.gatheringOffer(state, 'communal_ceremony').materialsCost, 0);
+    assert.throws(() => core.applyCommand(state, oldQuote), /quote/i);
+    const fresh = sponsor(state, 'communal_ceremony');
+    const missingMaterialQuote = { ...fresh };
+    delete missingMaterialQuote.quotedMaterials;
+    assert.throws(() => core.applyCommand(state, missingMaterialQuote), /quote/i);
+    assert.equal(core.serializeState(state), before);
+    const output = core.applyCommand(state, fresh);
+    assert.equal(output.stocks.materials, 0);
+    assert.deepEqual(core.inspectCampfire(output), { lit: true, fuelTicks: 1000 });
+    assert.throws(() => core.applyCommand(output, { ...fresh, quotedMaterials: 1 }), /receipt/i);
+});
+
+test('new ceremony receipts validate their real preceding fuel and light events while storytelling stays optional', () => {
+    const input = campaign();
+    const accepted = core.applyCommand(input, sponsor(input, 'communal_ceremony'));
+    for (const alter of [
+        state => state.events.at(-1).details.requiresCampfire = false,
+        state => state.events.at(-1).details.materialsCost = 0,
+        state => state.events.at(-1).details.campfireEventIds = ['event-1'],
+        state => state.events.at(-1).details.campfireEventIds.reverse(),
+        state => state.events.at(-2).details.lit = false,
+        state => state.events.at(-3).details.fuelTicks = 0,
+    ]) {
+        const invalid = structuredClone(accepted);
+        alter(invalid);
+        assert.throws(() => core.reconstructState(JSON.stringify(invalid)), /cultur/i);
+    }
+    const noMaterials = campaign({ initialMaterials: 0 });
+    const offer = core.gatheringOffer(noMaterials, 'storytelling_music');
+    assert.equal(offer.requiresCampfire, false);
+    assert.equal(offer.materialsCost, 0);
+    assert.equal(offer.foodCost, 3);
+    const story = core.applyCommand(noMaterials, sponsor(noMaterials, 'storytelling_music'));
+    assert.equal(story.campfire, undefined);
+    assert.equal(story.events.at(-1).details.requiresCampfire, undefined);
 });

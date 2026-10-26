@@ -22,7 +22,8 @@ function fixture(lateSpouse = true, seed = 32) {
     const offer = core.gatheringOffer(initial, 'wedding', candidate.sourceEventId);
     const paid = core.applyCommand(initial, { type: 'SponsorGathering', occasion: 'wedding',
         sourceEventId: candidate.sourceEventId, expectedSequence: offer.expectedSequence,
-        quotedFood: offer.foodCost, expectedParticipantIds: offer.participantIds });
+        quotedFood: offer.foodCost, quotedMaterials: offer.materialsCost,
+        expectedParticipantIds: offer.participantIds });
     const world = generateWorld({ seed });
     const view = projectFjordSettlement(initial, world, createFjordLayout(world));
     const entities = view.entities.filter(entity => entity.kind !== 'cattle');
@@ -185,4 +186,27 @@ test('the couple alone cannot start a wedding while its third real attendee is s
     assert.equal(f.motion.inspectGathering(), null);
     assert.equal(core.serializeState(f.paid), saved);
     f.show.dispose();
+});
+
+test('the fresh wedding presentation identifies its real occasion and celebrating partners', () => {
+    const f = fixture(false);
+    assert.equal(f.show.accept(f.paid, 6, true), true);
+    const frame = f.show.inspect();
+    assert.equal(frame.occasion, 'wedding');
+    assert.deepEqual(frame.spouseIds, f.candidate.spouseIds);
+    assert.ok(frame.spouseIds.every(id => frame.participantKeys.includes('persona:' + id)));
+    f.show.dispose();
+});
+
+test('extinguishing the actual wedding fire ends decoration without refunding or repeating its receipt', () => {
+    const f = fixture(false);
+    assert.equal(core.inspectCampfire(f.paid).lit, true);
+    assert.equal(f.show.accept(f.paid, 6, true), true);
+    const extinguished = core.applyCommand(f.paid, { type: 'SetCampfire', lit: false });
+    const saved = core.serializeState(extinguished);
+    f.show.advance(.1, true, true, core.inspectCampfire(extinguished).lit);
+    assert.equal(f.show.inspect(), null);
+    assert.equal(f.motion.inspectGathering(), null);
+    assert.equal(f.show.accept(extinguished, 6, true), false);
+    assert.equal(core.serializeState(extinguished), saved);
 });

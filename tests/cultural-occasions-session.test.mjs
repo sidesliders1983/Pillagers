@@ -14,11 +14,13 @@ test('the session reviews and commits a communal ceremony through the same saved
     const time = { ...session.readSnapshot().time };
     session.setRunning(true);
     session.commandBatch([{ type: 'SponsorGathering', occasion: offer.occasion,
-        expectedSequence: offer.expectedSequence, quotedFood: offer.foodCost,
+        expectedSequence: offer.expectedSequence, quotedFood: offer.foodCost, quotedMaterials: offer.materialsCost,
         expectedParticipantIds: offer.participantIds }]);
     assert.equal(session.running, true);
     assert.deepEqual(session.readSnapshot().time, time);
     assert.equal(session.readSnapshot().stocks.food, 12);
+    assert.equal(session.readSnapshot().stocks.materials, 4);
+    assert.equal(session.readSnapshot().campfire.lit, true);
     assert.equal(session.readSnapshot().events.at(-1).details.occasion, 'communal_ceremony');
     const shared = new SharedSettlement(session);
     const restored = SharedSettlement.restore(shared.persist(), 'fjord');

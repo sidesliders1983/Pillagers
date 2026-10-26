@@ -267,21 +267,28 @@ test('a communal sponsorship records its selected occasion through the same paid
         const choice = document.querySelector('[data-culture-occasion]');
         choice.value = 'communal_ceremony';
         choice.dispatchEvent(new f.dom.window.Event('change', { bubbles: true }));
+        const materials = f.session.readSnapshot().stocks.materials;
+        assert.match(document.querySelector('[aria-label="Community gathering"]').textContent, /1 Material/);
         f.click('culture-review');
+        assert.match(document.querySelector('[aria-label="Gathering review"]').textContent, /1 Material/);
         f.click('culture-sponsor');
         const after = f.session.readSnapshot();
+        assert.equal(after.stocks.materials, materials - 1);
+        assert.equal(core.inspectCampfire(after).lit, true);
+        assert.equal(core.inspectCampfire(after).fuelTicks, 1000);
         const event = after.events.find(item => item.type === 'CulturalGatheringHeld');
         assert.equal(event.details.occasion, 'communal_ceremony');
+        assert.match(document.querySelector('#entity-panel [role="status"]').textContent, /Communal ceremony supported.*3 Food.*1 Material/);
         assert.equal(after.stocks.food, 12);
         assert.equal(f.session.inspectCulture().supportCount, 1);
         assert.equal(event.details.sourceEventId, undefined);
     } finally { f.dispose(); }
 });
 
-test('a wedding review is linked to an actual new couple and charges only for that celebration', () => {
+test('a wedding review names its actual couple and quotes 3 Food for each of eight attendees', () => {
     const f = fixture(true);
     try {
-        const initial = core.createCampaign(32, { foundingCoupleChanceBps: 0 }, {
+        const initial = core.createCampaign(32, { initialFood: 100, foundingCoupleChanceBps: 0 }, {
             partnershipChanceBps: 10000, fertilityChanceBps: 0,
             mortalityBands: [{ minAge: 0, chanceBps: 0 }],
         }, { enabled: false }, {}, {}, {}, undefined, undefined, undefined, { enabled: true });
@@ -300,9 +307,15 @@ test('a wedding review is linked to an actual new couple and charges only for th
         const spouses = source.details.participants.map(id => paired.personas[id].name);
         for (const name of spouses) assert.ok(couple.textContent.includes(name));
         const before = f.session.readSnapshot();
+        const card = document.querySelector('[aria-label="Community gathering"]');
+        assert.match(card.textContent, /3 Food per attendee/);
+        assert.match(card.textContent, /8 attendees/);
+        assert.match(card.textContent, /24 Food total/);
         f.click('culture-review');
         const review = document.querySelector('[aria-label="Gathering review"]');
         assert.match(review.textContent, /Wedding celebration/);
+        assert.match(review.textContent, /3 Food per attendee/);
+        assert.equal(document.querySelector('[data-ui="culture-sponsor"]').textContent.trim(), 'Sponsor · 24 Food');
         const coupleSummary = review.querySelector('[data-culture-couple]');
         assert.ok(coupleSummary, 'The review names the real couple without opening the attendance list');
         for (const name of spouses) assert.ok(coupleSummary.textContent.includes(name));
@@ -311,7 +324,7 @@ test('a wedding review is linked to an actual new couple and charges only for th
         const celebration = after.events.find(event => event.type === 'CulturalGatheringHeld');
         assert.equal(celebration.details.occasion, 'wedding');
         assert.equal(celebration.details.sourceEventId, source.id);
-        assert.equal(after.stocks.food, before.stocks.food - 3);
+        assert.equal(after.stocks.food, before.stocks.food - 24);
         assert.deepEqual(after.personas, before.personas);
         assert.deepEqual(after.events.find(event => event.id === source.id), source);
         assert.equal(document.querySelector('[data-culture-partnership]').value, source.id);

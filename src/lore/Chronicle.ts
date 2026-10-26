@@ -77,6 +77,9 @@ const templates:Record<string,Template>={
             if (!fact || fact.id !== id || !str(fact, 'name') || number(fact, 'age') === null) return null;
             names.push(str(fact, 'name')!);
         }
+        const materials = number(d, 'materialsCost') ?? 0;
+        const payment = cost + ' Food' + (materials ? ' and ' + materials +
+            (materials === 1 ? ' Material' : ' Materials') : '');
         if (d.occasion === 'wedding') {
             const spouses = ids(d, 'spouseIds');
             if (!str(d, 'sourceEventId') || spouses?.length !== 2 || spouses[0] === spouses[1] ||
@@ -86,11 +89,11 @@ const templates:Record<string,Template>={
             const guestNames = guests.length === 1 ? guests[0] :
                 guests.slice(0, -1).join(', ') + ' and ' + guests.at(-1);
             return spouseNames.join(' and ') + ' held a wedding celebration with ' +
-                guestNames + ', using ' + cost + ' Food.';
+                guestNames + ', using ' + payment + '.';
         }
         const people = names.slice(0, -1).join(', ') + ' and ' + names.at(-1);
         const occasion = d.occasion === 'communal_ceremony' ? 'a communal ceremony' : 'storytelling and music';
-        return people + ' gathered for ' + occasion + ', using ' + cost + ' Food.';
+        return people + ' gathered for ' + occasion + ', using ' + payment + '.';
     },
     EquipmentCrafted: (_e, d) => str(d, 'creatorName') && str(d, 'itemName') &&
         number(d, 'materials') !== null && number(d, 'hides') !== null ?

@@ -3,6 +3,8 @@ import { CampaignPlayback } from './CampaignPlayback';
 import { newFirstSteps } from './FirstStepsState';
 import { AttentionToast } from '../lore/AttentionToast';
 import { AttentionView } from '../lore/AttentionView';
+import { WeddingInvitation } from './WeddingInvitation';
+import type { SimulationCommand } from '../simulation/SimulationCore';
 import { createFjordScene, type FjordScene } from './FjordScene';
 import { ExpeditionPanel } from './ExpeditionPanel';
 import { IslandMissionPanel } from './IslandMissionPanel';
@@ -282,6 +284,7 @@ export class FjordPlay {
             () => { desktopUI?.open('attention', true); attentionView.openInbox(); }));
         const personalHistory = this.ownStartup(new PersonalHistoryView(document.querySelector<HTMLElement>('#fjord-play')!, this.shared));
         let firstSteps: FirstStepsGuide | undefined;
+        let weddingInvitation: WeddingInvitation | undefined;
         const syncGuideClock = () => {
             const held = !!firstSteps?.blocksClock;
             document.querySelector<HTMLButtonElement>('#fjord-run')!.disabled = held || !playback.canToggle(this.session.running);
@@ -375,6 +378,13 @@ export class FjordPlay {
             const workspace = document.querySelector<HTMLElement>('#fjord-workspace')!;
             attentionToast.update(Boolean(this.loading) || document.hidden || this.shared.transferring || !workspace.hidden ||
                 !document.querySelector<HTMLElement>('#clan-book-reader')!.hidden);
+            weddingInvitation?.update(Boolean(this.loading) || !this.persistenceReady || document.hidden ||
+                this.shared.transferring || !workspace.hidden || this.session.expeditionMode ||
+                !document.querySelector<HTMLElement>('#fjord-management')!.hidden ||
+                !document.querySelector<HTMLElement>('#clan-book-reader')!.hidden ||
+                document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open ||
+                Boolean(firstSteps && !firstSteps.root.hidden) || Boolean(this.foundingBook?.root.isConnected) ||
+                Boolean(document.querySelector('dialog[open], #fjord-context-recovery')));
             if (!workspace.hidden && workspace.dataset.surface === 'attention') {
                 attentionView.render();
                 const profile = view.weather.enabled ? view.weather.modifiers : null;
@@ -658,6 +668,28 @@ export class FjordPlay {
             document.querySelector('#fjord-selected')!.textContent = entity ? entity.label + ' · ' + kind : 'Entity is no longer active.';
             refresh();
         };
+        const commitManagement = (commands: SimulationCommand[] | (() => SimulationCommand[]),
+            done: () => void, rejected?: (error: unknown) => void) => action(async () => {
+                let focusCeremony = false;
+                try {
+                    core(() => {
+                        const planned = typeof commands === 'function' ? commands() : commands;
+                        const sequence = this.session.inspectCulture().nextSequence;
+                        this.session.commandBatch(planned);
+                        focusCeremony = this.session.inspectCulture().nextSequence > sequence &&
+                            planned.some(command => command.type === 'SponsorGathering' &&
+                                (command.occasion === 'wedding' || command.occasion === 'communal_ceremony'));
+                    });
+                } catch (error) {
+                    rejected?.(error);
+                    say(error instanceof Error ? error.message : String(error));
+                    refresh();
+                    return;
+                }
+                done();
+                if (syncScene) await syncScene();
+                presentation?.acceptGathering(focusCeremony);
+            });
         desktopUI = new FjordInterface(this.shared, { select, refresh, notify: say,
             inspected: (kind, id) => firstSteps?.inspected(kind, id),
             renderPortrait: input => presentation?.portrait(input) ?? Promise.resolve(undefined),
@@ -667,20 +699,10 @@ export class FjordPlay {
                 desktopUI!.open('attention', true);
                 attentionView.openEvent(id);
             },
-            commit: (commands, done, rejected) => action(async () => {
-                try {
-                    core(() => this.session.commandBatch(typeof commands === 'function' ? commands() : commands));
-                } catch (error) {
-                    rejected?.(error);
-                    say(error instanceof Error ? error.message : String(error));
-                    refresh();
-                    return;
-                }
-                done();
-                if (syncScene) await syncScene();
-                presentation?.acceptGathering();
-            }) });
+            commit: commitManagement });
         this.startupCleanup.push(() => desktopUI?.dispose());
+        weddingInvitation = this.ownStartup(new WeddingInvitation(document.querySelector<HTMLElement>('#fjord-play')!,
+            this.shared, { commit: commitManagement, changed: () => { persist(); refresh(); } }));
         firstSteps = this.ownStartup(new FirstStepsGuide(this.shared, {
             persist, pause: () => setPlayback(false),
             reveal: () => desktopUI!.closeForHelp(), clockChanged: syncGuideClock,

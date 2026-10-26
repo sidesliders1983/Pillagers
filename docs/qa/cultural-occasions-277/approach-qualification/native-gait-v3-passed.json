@@ -1,0 +1,56 @@
+{
+  "baseHead": "d43fff1a036e04b0ad91c54e43c3d7bc6dadce90",
+  "version": "owner-per-attendee-fire-navigation-v3",
+  "gait": "Measured native LOD2 face/DNA gait; no wardrobe/rendering/real-browser performance claim",
+  "fixtureSHA256": "69204861159519276cb7a60c8d3eaf83127601cb6b1eda6032176aa09449669c",
+  "results": [
+    {
+      "limit": 6,
+      "seed": 2,
+      "terrainSeed": 227,
+      "sourceEventId": "event-28",
+      "spouseIds": [
+        "founder-1",
+        "founder-6"
+      ],
+      "foodAfter": 0,
+      "phases": [
+        "approach",
+        "gathering",
+        "response"
+      ],
+      "beganAt": 24.5,
+      "endedAt": 31.5,
+      "maximumStaged": 6,
+      "bodyOverlaps": 0,
+      "gatheringAtEnd": null,
+      "coreUnchanged": true,
+      "navigationOnly": true,
+      "rendererAndAudioMeasured": false
+    },
+    {
+      "limit": 8,
+      "seed": 2,
+      "terrainSeed": 227,
+      "sourceEventId": "event-28",
+      "spouseIds": [
+        "founder-1",
+        "founder-6"
+      ],
+      "foodAfter": 0,
+      "phases": [
+        "approach",
+        "gathering",
+        "response"
+      ],
+      "beganAt": 24.5,
+      "endedAt": 31.5,
+      "maximumStaged": 8,
+      "bodyOverlaps": 0,
+      "gatheringAtEnd": null,
+      "coreUnchanged": true,
+      "navigationOnly": true,
+      "rendererAndAudioMeasured": false
+    }
+  ]
+}

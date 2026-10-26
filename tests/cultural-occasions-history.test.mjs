@@ -10,7 +10,7 @@ const { attentionEvent } = load('../src/lore/AttentionHistory.ts');
 function commit(session, occasion, sourceEventId) {
     const offer = session.gatheringOffer(occasion, sourceEventId);
     session.commandBatch([{ type: 'SponsorGathering', occasion: offer.occasion,
-        expectedSequence: offer.expectedSequence, quotedFood: offer.foodCost,
+        expectedSequence: offer.expectedSequence, quotedFood: offer.foodCost, quotedMaterials: offer.materialsCost,
         expectedParticipantIds: offer.participantIds, ...(sourceEventId ? { sourceEventId } : {}) }]);
     return session.readSnapshot().events.at(-1);
 }
@@ -23,6 +23,7 @@ test('a communal ceremony is a neutral factual record of actual attendees and pa
     assert.ok(entry, 'The real ceremony must have its own readable factual history');
     assert.match(entry.text, /communal ceremony/);
     assert.match(entry.text, /3 Food/);
+    assert.match(entry.text, /1 Material/);
     assert.doesNotMatch(entry.text, /god|priest|bless|divine|saved|sacrifice/i);
     assert.deepEqual(entry.sourceEventIds, [event.id]);
     assert.equal(attentionEvent(event).severity, 'ambient');
@@ -33,7 +34,7 @@ test('a communal ceremony is a neutral factual record of actual attendees and pa
 });
 
 function weddingSession() {
-    let state = core.createCampaign(32, { foundingCoupleChanceBps: 0 }, {
+    let state = core.createCampaign(32, { foundingCoupleChanceBps: 0, initialFood: 100 }, {
         partnershipChanceBps: 10000, fertilityChanceBps: 0, careerReviewWinters: 0,
         mortalityBands: [{ minAge: 0, chanceBps: 0 }],
     }, { enabled: false }, {}, {}, {}, undefined, undefined, undefined, { enabled: true });
@@ -52,7 +53,7 @@ test('a wedding remembers the actual partners and guests without rewriting the f
     const entry = personalChronicleEntry(event);
     assert.ok(entry, 'A real wedding celebration must have a readable factual record');
     assert.match(entry.text, /held a wedding celebration/);
-    assert.match(entry.text, /3 Food/);
+    assert.match(entry.text, /24 Food/);
     assert.doesNotMatch(entry.text, /became partners|formed a partnership|bless|god|priest/i);
     assert.deepEqual(entry.sourceEventIds, [event.id]);
     assert.equal(event.details.sourceEventId, source.id);
@@ -92,7 +93,8 @@ test('both occasions reach the next Clan Book chapter with exact costs and immut
     session.command({ type: 'AdvanceTicks', ticks: 4000 });
     const chapter = session.book.snapshot().chapters.at(-1);
     assert.equal(chapter.facts.ledger.food.complete, true);
-    assert.equal(chapter.facts.ledger.food.otherSpending, 6);
+    assert.equal(chapter.facts.ledger.food.otherSpending, 27);
+    assert.equal(chapter.facts.ledger.materials.otherSpending, 4);
     const social = chapter.paragraphs.find(part => part.templateId.startsWith('clan-book.thread.social'));
     assert.ok(social);
     assert.ok(social.sourceEventIds.includes(wedding.id));
@@ -100,7 +102,7 @@ test('both occasions reach the next Clan Book chapter with exact costs and immut
     assert.ok(social.sourceEventIds.includes(source.id));
     assert.match(social.text, /wedding celebration/);
     assert.match(social.text, /communal ceremony/);
-    assert.doesNotMatch(social.text, /3 Food|\b80[0-9]\b|bless|god|priest/i);
+    assert.doesNotMatch(social.text, /\d+ Food|\d+ Materials?|\b80[0-9]\b|bless|god|priest/i);
     assert.deepEqual(session.book.snapshot().chapters[0], opening);
     const restored = SharedSettlement.restore(new SharedSettlement(session).persist(), 'fjord');
     assert.deepEqual(restored.session.book.snapshot().chapters, session.book.snapshot().chapters);

@@ -1,0 +1,19 @@
+.fjord-wedding-invitation {
+    position: absolute; right: 16px; bottom: 88px; z-index: 11;
+    width: min(350px, calc(100% - 32px)); max-height: calc(100% - 180px);
+    padding: 14px; box-sizing: border-box; overflow: auto; overscroll-behavior: contain;
+    color: var(--fjord-text); background: var(--fjord-panel);
+    border: 1px solid var(--fjord-accent); border-radius: 6px; pointer-events: auto;
+}
+.fjord-wedding-invitation[hidden] { display: none; }
+.fjord-wedding-invitation header { display: flex; align-items: start; gap: 8px; }
+.fjord-wedding-invitation h2 { font: 21px/1.2 Georgia, serif; margin: 0; flex: 1; }
+.fjord-wedding-invitation button { min-height: 44px; min-width: 44px; }
+.fjord-wedding-couple { font-weight: 600; }
+.fjord-wedding-invitation .fjord-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+#fjord-play.fjord-mobile .fjord-wedding-invitation {
+    right: calc(env(safe-area-inset-right, 0px) + 8px);
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 70px);
+    width: min(350px, calc(100vw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px) - 16px));
+    max-height: calc(var(--fjord-viewport-height, 100dvh) - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 150px);
+}

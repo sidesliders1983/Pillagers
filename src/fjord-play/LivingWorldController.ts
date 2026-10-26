@@ -744,6 +744,14 @@ export class LivingWorldController {
         }
         return corridor;
     }
+    private clearsSegment(point: Point2, from: Point2, to: Point2, clearance: number) {
+        const dx = to.x - from.x, dz = to.z - from.z;
+        const lengthSquared = dx * dx + dz * dz;
+        const fraction = lengthSquared ? Math.max(0, Math.min(1,
+            ((point.x - from.x) * dx + (point.z - from.z) * dz) / lengthSquared)) : 0;
+        return Math.hypot(from.x + dx * fraction - point.x,
+            from.z + dz * fraction - point.z) >= clearance;
+    }
     private route(a: Agent, goal?: Point2, purpose = goal ?
         (goal === a.anchor ? 'return-home' : a.visit?.phase === 'home' ? 'visit-home' : 'visit-approach') : 'wander',
         target = goal === a.anchor ? String(a.entity.status.assignment ?? a.key) : a.visit?.source ?? '') {
@@ -900,7 +908,13 @@ export class LivingWorldController {
             clearance: this.radius(this.agents.get(pair.a)!) + this.radius(this.agents.get(pair.b)!),
         }));
         a.detour = passConversation(a, a.path[0], pairs, residentMovementConfig, clearRoute) ??
-            passNeighbours(a, a.path[0], [...this.agents.values()].filter(other => other !== a).map(other => ({
+            passNeighbours(a, a.path[0], [...this.agents.values()].filter(other => {
+                if (other === a) return false;
+                // Ceremony and retained return corridors already have safe waypoints.
+                // Anticipate bodies on that segment, rather than beyond its next turn.
+                return !this.ownsGathering(a.key) || !this.clearsSegment(other, a, a.path[0],
+                    this.radius(a) + this.radius(other));
+            }).map(other => ({
                 x: other.x, z: other.z, radius: this.radius(other),
                 encounterEligible: this.social.eligible(this.encounterActor(a)) &&
                     this.social.eligible(this.encounterActor(other)) && !this.social.blocked(a.key, other.key) &&

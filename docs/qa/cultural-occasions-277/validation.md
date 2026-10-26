@@ -1,4 +1,93 @@
-# Cultural occasions #277: validation record
+# Cultural occasions #277: current validation
+
+The owner corrected and extended the first draft: weddings cost **3 Food per actual
+recorded attendee**, wedding/communal ceremonies require the actual campfire, ceremonies
+must be visibly recognisable, and a real newly formed partnership offers an optional
+**Confirm / Not enough resources / Not now** invitation. This section supersedes the
+initial flat-price snapshot retained below; historical fixture bytes were preserved.
+
+## Current behavior
+
+- Eight wedding attendees cost 24 Food; seven cost 21. Attendance is not reduced to fit
+  stocks. Storytelling/music and communal ceremonies remain 3 Food total.
+- Wedding/communal quotes include normal fuel: 1 Material if prepaid fuel is empty,
+  otherwise 0. The existing shared refuel operation buys 1,000 ticks, including at a
+  lit/zero-fuel boundary, without advancing time or changing ordinary fire commands.
+  Ignition and Food spending commit atomically; failed/stale quotes spend neither.
+- Exact old flat-price receipts remain historical facts and harmless retries. A genuine
+  frozen d43fff save tests this compatibility; old history is not repriced or charged again.
+- The non-modal invitation is derived from actual current partnership sources and bounded
+  unread Attention records. Dismissal acknowledges only that source; relationships, Core
+  resources and clock intent remain unchanged. Menu/Book/background/load defer delivery.
+  Existing accepted commit → scene sync → fresh presentation ownership is reused.
+  A newly confirmed wedding/communal ceremony brings the camera to its actual campfire;
+  declined, failed and already accepted retries do not redirect it.
+- One temporary merged mesh supplies the wedding arch/garland/standards or neutral communal
+  standards/garland. The actual partners receive Wedding name markers. Static decoration
+  remains visible when paused; suspension, hidden view, fire-off and completion hide it.
+  No additional model, texture, actor, light, shadow map or frame loop is added.
+- The actual prepared-island review exposed short-waypoint passing around settled attendees.
+  The small ceremony/retained-return correction retains every physical terrain/collision
+  check and existing route budgets. Ordinary passing behavior remains unchanged.
+
+## Executed revised verification
+
+The final combined functional invocation passed **117/117**, zero skips: prices/fire,
+current and historical receipts, actual Core replay, contextual DOM, automatic invitation,
+actual prepared-island walking and return, native motion/audio lifecycle and factual history.
+A separate broader history/family/narrative/ordinary-passing invocation passed **92/92**,
+zero skips. These invocations overlap and are not claimed as 209 unique tests or a full
+repository suite. A subsequent communal rear-plane geometry refinement passed all **9**
+public visual/lifecycle/budget tests and TypeScript; the subsequent final production build also passed.
+
+The ordinary asset/build pipeline passed with 621 public files, 14 prepared islands and
+56 prepared character sources. Existing large-chunk warnings remain warnings. No validation
+was bypassed. There is no formatter configured; manual formatting review and diff checks
+are used. Full current-head GitHub checks are required again after this revision; the green
+d43fff jobs validate only the older initial snapshot.
+
+[Normal-rule fixtures](review-fixture-v2/README.md) retain the ordered seed search, genuine
+unread partnership, exact ordinary commands and resource trade-off. The first affordable
+checkpoint has 24 Food/5 Materials and confirmation leaves 0/4. A separate exact existing
++1 Year action from the pre-source checkpoint yields 38/5, so confirmation leaves 14/4.
+Both use actual new PartnershipFormed event-28, never altered probabilities or stock grants.
+The source/asset/artifact verifier, exact replay and actual SharedSettlement imports passed.
+Historical Git/helper identities remain provenance, not a requirement to keep the repository
+at an old commit when the exact normalized dependency bytes are unchanged.
+
+[Navigation qualification](approach-qualification/report.md) preserves the initial failed
+cases. Final Low6/Standard8 gather with both partners at 24.5 seconds, finish the response
+at 31.5 and physically return every staged resident by 55.1. Zero overlaps, retained-route
+cleanup and unchanged Core are checked. With the ordinary clock advancing for 60 seconds,
+both presentation paths retain exact Core parity with matched headless references.
+These are bounded headless cases using measured native gait, not rendered browser or
+physical-device timing. The decoration adds one active mesh/material, 840 or 616 triangles;
+no GPU/frame or sustained device-memory result is inferred from those counts.
+
+Focused current reproduction:
+
+    node --max-old-space-size=1024 --test tests/cultural-occasions.test.mjs tests/wedding-invitation.test.mjs tests/cultural-wedding-navigation.test.mjs tests/cultural-ceremony-visuals.test.mjs tests/cultural-occasions-history.test.mjs
+    node docs/qa/cultural-occasions-277/review-fixture-v2/review-fixture.mjs --verify
+    node docs/qa/cultural-occasions-277/review-fixture-v2/review-fixture.mjs --replay
+    node docs/qa/cultural-occasions-277/review-fixture-v2/review-year-jump.mjs --verify
+    pnpm run build
+
+## Remaining delivery gates
+
+Port 5190 serves this revised review. Accepted port 5180 remains the first #275/#276 build.
+The computer-use inventory exposed no browser, explicit in-app browser creation returned
+unavailable, and opening the page in Codex was queued. HTTP/DOM/headless checks are not
+rendered layout, listening or physical-device acceptance. Review the actual new invitation,
+ceremony appearance and pair labels on a device before acceptance. First-prototype UAT does
+not automatically approve these later changes. Keep the PR draft while exact-head checks or
+that review remain open. No merge, ordinary default activation or Sites release is included.
+
+#278 still needs its open aid-policy decisions; #279/#280 keep their explicit prerequisite
+gates. This #277 work does not declare the epic complete.
+
+---
+
+## Historical initial implementation at d43fff1
 
 This follow-up is based on `bbb018013e682b76288ae3a2a44c4bcaa7457b8d`, the first
 #275/#276 prototype in draft PR #285. Its branch is `codex/cultural-occasions-277`.
