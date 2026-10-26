@@ -1,3 +1,4 @@
+import { WeddingInvitationHistory } from '../fjord-play/WeddingInvitationState';
 import { birthdayCalendarMode } from '../simulation/BirthdayCalendar';
 import type { PresentationQuality, EffectQuality } from '../config/PresentationQuality';
 import { islandRecipe, type IslandRecipe, type CampaignGeography } from '../fjord-play/CampaignIsland';
@@ -159,6 +160,7 @@ export function inspectSettlementSave(text: string): SettlementRestoreMetadata {
     session.loadJSON(saved.bridgeVersion ? JSON.stringify(saved.campaign) : JSON.stringify(saved));
     if (data.sharedVersion === 1) session.restorePacing(data.pace);
     const state = session.readSnapshot();
+    if (saved.weddingInvitations !== undefined) WeddingInvitationHistory.restore(saved.weddingInvitations, state);
     if (saved.narrative) session.book.restore(saved.narrative, session.snapshot());
     if (saved.bridgeVersion === 2) {
         const actual = saved.island, expected = islandRecipe(state.seed, actual?.version);
@@ -185,6 +187,7 @@ export function localSettlementText(storage: Pick<Storage, 'getItem'>): string {
     return (saved && saved.campaign.seed === campaign.seed ?
         JSON.stringify({ ...saved, campaign,
             attention: matchingHistory ? saved.attention : undefined,
+            weddingInvitations: matchingHistory ? saved.weddingInvitations : undefined,
             firstSteps: matchingHistory ? saved.firstSteps : undefined,
             wildlifeReadIds: matchingHistory ? saved.wildlifeReadIds : undefined,
             narrative: saved.narrative?.canonicalIdentity === historyIdentity(canonical) ? saved.narrative : undefined }) : canonical);

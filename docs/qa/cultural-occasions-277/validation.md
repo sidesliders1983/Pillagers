@@ -16,9 +16,11 @@ initial flat-price snapshot retained below; historical fixture bytes were preser
   Ignition and Food spending commit atomically; failed/stale quotes spend neither.
 - Exact old flat-price receipts remain historical facts and harmless retries. A genuine
   frozen d43fff save tests this compatibility; old history is not repriced or charged again.
-- The non-modal invitation is derived from actual current partnership sources and bounded
-  unread Attention records. Dismissal acknowledges only that source; relationships, Core
-  resources and clock intent remain unchanged. Menu/Book/background/load defer delivery.
+- The non-modal invitation retains unresolved actual partnership sources with a saved
+  presentation cursor, separately from generic Attention read status. Dismissal resolves only
+  that question; relationships, Core resources and clock intent remain unchanged. Reading the
+  partnership while another flow defers the window cannot silently decline it. Pending
+  questions survive reload; real receipts/expiry remove them. No-pending refreshes stay cheap.
   Existing accepted commit → scene sync → fresh presentation ownership is reused.
   A newly confirmed wedding/communal ceremony brings the camera to its actual campfire;
   declined, failed and already accepted retries do not redirect it.
@@ -30,9 +32,26 @@ initial flat-price snapshot retained below; historical fixture bytes were preser
   The small ceremony/retained-return correction retains every physical terrain/collision
   check and existing route budgets. Ordinary passing behavior remains unchanged.
 
-## Executed revised verification
+## Latest missing-invitation repair
 
-The final combined functional invocation passed **117/117**, zero skips: prices/fire,
+The normal V2 regression failed before the fix: reading the actual partnership in the
+Attention view while the invitation was deferred permanently suppressed the unanswered
+question. With independent saved presentation decisions, all **13 invitation tests** pass.
+A related campaign/Attention/Core/view/first-steps invocation passed **92/92**; root independently
+ran the invitation and Fjord bridge suites, **29/29**, zero skips. These runs overlap. The
+final production build and typecheck passed with 462 modules through the ordinary public-asset
+pipeline. No required check was skipped or weakened. Current-head full GitHub CI remains its
+own gate; these focused runs are not a claim that the whole repository suite passed.
+
+The adapter compatibility verifier confirms both original V2 file/Core hashes, the unchanged
+actual +1 Year result, pending delivery after history reading and reload, and exact full-history
+Core parity after the 24 Food + 1 Material command. All frozen Simulation Core source hashes
+remain unchanged. Historical V2 source pinning is retained separately below.
+
+## Earlier revised verification
+
+Before the later invitation-delivery repair, the combined functional invocation passed
+**117/117**, zero skips: prices/fire,
 current and historical receipts, actual Core replay, contextual DOM, automatic invitation,
 actual prepared-island walking and return, native motion/audio lifecycle and factual history.
 A separate broader history/family/narrative/ordinary-passing invocation passed **92/92**,
@@ -43,8 +62,8 @@ public visual/lifecycle/budget tests and TypeScript; the subsequent final produc
 The ordinary asset/build pipeline passed with 621 public files, 14 prepared islands and
 56 prepared character sources. Existing large-chunk warnings remain warnings. No validation
 was bypassed. There is no formatter configured; manual formatting review and diff checks
-are used. Full current-head GitHub checks are required again after this revision; the green
-d43fff jobs validate only the older initial snapshot.
+are used. Full current-head GitHub checks are required again after this revision; earlier green
+jobs validate their own snapshots and do not replace the new-head gate.
 
 [Normal-rule fixtures](review-fixture-v2/README.md) retain the ordered seed search, genuine
 unread partnership, exact ordinary commands and resource trade-off. The first affordable
@@ -67,9 +86,7 @@ no GPU/frame or sustained device-memory result is inferred from those counts.
 Focused current reproduction:
 
     node --max-old-space-size=1024 --test tests/cultural-occasions.test.mjs tests/wedding-invitation.test.mjs tests/cultural-wedding-navigation.test.mjs tests/cultural-ceremony-visuals.test.mjs tests/cultural-occasions-history.test.mjs
-    node docs/qa/cultural-occasions-277/review-fixture-v2/review-fixture.mjs --verify
-    node docs/qa/cultural-occasions-277/review-fixture-v2/review-fixture.mjs --replay
-    node docs/qa/cultural-occasions-277/review-fixture-v2/review-year-jump.mjs --verify
+    node docs/qa/cultural-occasions-277/invitation-delivery/verify.mjs --verify
     pnpm run build
 
 ## LAN review source freshness
@@ -82,6 +99,12 @@ worktree's parent folder. Development exclusions now resolve only below the actu
 project root (tools, scratch and artifacts), so a worktree inside scratch remains watched.
 Restart the review server after this correction and verify served source maps against
 the working files, including FjordPlay, the gathering quote and Core, before device review.
+
+The original V2 source verifier includes the two presentation adapters now changed for
+independent invitation persistence. Its pinned search/checkpoints remain historical evidence
+at commit 1bb927d, not a current-adapter pass claim. The separate
+[adapter compatibility qualification](invitation-delivery/README.md) verifies unchanged Core,
+original checkpoint bytes, exact canonical outcomes and the new presentation adapter.
 
 ## Remaining delivery gates
 

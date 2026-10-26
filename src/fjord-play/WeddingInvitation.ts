@@ -1,4 +1,3 @@
-import { gatheringOffer, weddingCandidates } from '../simulation/SimulationCore';
 import type { SimulationCommand } from '../simulation/SimulationCore';
 import type { SharedSettlement } from '../play/SharedSettlement';
 import { renderGatheringPrice, type GatheringOffer } from './CulturalGatheringView';
@@ -11,7 +10,7 @@ interface InvitationHooks {
 const escape = (value: unknown) => String(value ?? '').replace(/[&<>"']/g,
     character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]!));
 
-/** Optional delivery of an unread real partnership; Attention owns persistent acknowledgement. */
+/** Optional delivery of an unresolved real partnership, independently of Attention read state. */
 export class WeddingInvitation {
     readonly root = document.createElement('section');
     private abort = new AbortController();
@@ -42,15 +41,12 @@ export class WeddingInvitation {
         if (this.epoch !== this.owner.session.personalHistoryEpoch) {
             this.epoch = this.owner.session.personalHistoryEpoch;
             this.clear();
+            this.deferRevision = -1;
         }
+        const candidates = this.owner.fjord.weddingInvitations();
         if (suspended || this.owner.transferring) { this.root.hidden = true; return; }
         if (!this.owner.session.inspectCulture().enabled) { this.clear(); return; }
-        const unread = this.owner.fjord.attentionView().records.filter(record =>
-            record.canonicalType === 'PartnershipFormed' && !record.read);
-        if (unread.length === 0) { this.clear(); return; }
         const state = this.owner.session.readSnapshot();
-        const candidates = weddingCandidates(state).filter(candidate => !candidate.celebratedEventId &&
-            unread.some(record => record.eventId === candidate.sourceEventId));
         if (this.sourceId && !candidates.some(candidate => candidate.sourceEventId === this.sourceId)) {
             this.clear(); return;
         }
@@ -60,7 +56,7 @@ export class WeddingInvitation {
         if (!this.sourceId) this.previousFocus = document.activeElement as HTMLElement;
         this.sourceId = candidate.sourceEventId;
         this.root.dataset.weddingSource = this.sourceId;
-        if (!this.pending) this.quote = gatheringOffer(state, 'wedding', this.sourceId);
+        if (!this.pending) this.quote = this.owner.fjord.weddingInvitationOffer(candidate.sourceEventId);
         const quote = this.quote!;
         const resourcesMissing = state.stocks.food < quote.foodCost || state.stocks.materials < quote.materialsCost;
         const html = `<header><h2 id="fjord-wedding-invitation-title">Wedding celebration</h2>
@@ -90,6 +86,7 @@ export class WeddingInvitation {
                 quotedMaterials: quote.materialsCost, expectedParticipantIds: [...quote.participantIds] }];
         }, () => {
             if (epoch !== this.owner.session.personalHistoryEpoch) return;
+            this.owner.fjord.resolveWeddingInvitation(sourceId);
             this.owner.fjord.markAttentionRead([sourceId]);
             if (this.sourceId === sourceId) {
                 this.deferRevision = this.owner.session.revision;
@@ -106,6 +103,7 @@ export class WeddingInvitation {
     }
     private decline(): void {
         if (!this.sourceId || this.pending) return;
+        this.owner.fjord.resolveWeddingInvitation(this.sourceId);
         this.owner.fjord.markAttentionRead([this.sourceId]);
         this.deferRevision = this.owner.session.revision;
         this.clear();

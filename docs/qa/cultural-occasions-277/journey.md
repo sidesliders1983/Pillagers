@@ -42,31 +42,32 @@ love, god, priesthood or invented ritual. A communal ceremony needs no partnersh
 
 ## Optional invitation after a real new partnership
 
-The owner requested a dismissible window for newly formed partnerships. It uses the
-intersection of current Core wedding candidates and unread retained PartnershipFormed
-records in the existing Activity Center. One source is shown at a time, with both
-real names, per-attendee Food/count/total and the actual Material quote. The buttons
-are Confirm, or disabled Not enough resources when stock is insufficient, and Not now.
-Other eligibility failures disable Confirm and explain the actual reason.
+The owner requested a dismissible window for newly formed partnerships. A small saved
+presentation cursor consumes appended real PartnershipFormed events and retains unresolved
+source IDs, independently of whether the Activity Center record has been read. One source is
+shown at a time, with both real names, per-attendee Food/count/total and the actual Material
+quote. Buttons are Confirm, or disabled Not enough resources when stock is insufficient,
+and Not now. Other eligibility failures disable Confirm and explain the actual reason.
 
-Not now, X and Escape acknowledge only that partnership source using existing saved
-Attention metadata. There is no Core decline event, relationship penalty or expense;
-the manual campfire opportunity remains available during its ordinary window.
-Confirmation acknowledges the source only after an accepted transaction. A changed
-queued resource quote rejects atomically and displays the updated price for a fresh
-Confirm. A campaign-epoch guard prevents old queued clicks from spending after reload,
-even when deterministic IDs happen to match. Reading Attention cannot cancel an
-already confirmed same-campaign intent.
+Not now, X and Escape resolve that pending question in the Fjord sidecar and acknowledge its
+Attention record. There is no Core decline event, relationship penalty or expense; the manual
+campfire opportunity remains available during its ordinary window. Reading the partnership
+in Activity Center alone does not answer the question, including while another flow defers it.
+Pending decisions survive save/reload. Real wedding receipts, expiry and no-longer-current
+partnerships remove the opportunity; temporary stock/attendance restrictions do not silently
+decline it. Legacy sidecars initialize once from unread valid sources, without replaying all
+read history. Local sidecars from a different canonical history cannot carry old decisions.
 
-Loading, backgrounding, the Book and other explicit management flows hide/defer the
-window without dropping unread sources. The window does not pause, trap focus, place
-a backdrop over the scene or create timer-driven acknowledgements. Confirm uses the
-same actual command-settled, scene-sync and accepted-presentation path as manual sponsorship.
+Confirmation resolves the source only after an accepted transaction. A changed queued resource
+quote rejects atomically and displays the updated price for a fresh Confirm. A campaign-epoch
+guard prevents old queued clicks from spending after reload, even when deterministic IDs
+happen to match. Reading Attention cannot cancel an already confirmed same-campaign intent.
 
-Only retained unread records drive automatic delivery. Attention read IDs are pruned
-when their records leave the bounded inbox; consulting all Core candidates with those
-read IDs alone would resurrect dismissed invitations. The manual card still queries
-all current valid candidates. No separate global dismissal history is created.
+Loading, backgrounding, the Book and other explicit management flows hide/defer the window
+without dropping unanswered sources. The window does not pause, trap focus, place a backdrop
+over the scene or create timer-driven acknowledgements. Confirm uses the same actual
+command-settled, scene-sync and accepted-presentation path as manual sponsorship. Ordinary
+refreshes with no pending question do not scan historical partnerships or current attendees.
 
 ## Presentation and accessibility
 

@@ -1,3 +1,5 @@
+import { WeddingInvitationHistory } from './WeddingInvitationState';
+import type { WeddingCandidate } from '../simulation/CulturalEvents';
 import { readFirstSteps, type FirstStepsProgress } from './FirstStepsState';
 import { migrateWildlifeAttention } from '../lore/WildlifeAttention';
 import { attentionAlerts, eventOrdinal, type AttentionRecord, type AttentionAlert } from '../lore/AttentionHistory';
@@ -25,6 +27,36 @@ export class FjordCampaign {
     firstSteps?: FirstStepsProgress;
     private rivalLayout?: FjordLayout;
     private fresh = true;
+    private invitationHistory!: WeddingInvitationHistory;
+    private invitationEpoch = -1;
+    private invitationRevision = -1;
+    private invitationCandidates: WeddingCandidate[] = [];
+    weddingInvitations() {
+        const state = this.session.readSnapshot();
+        if (this.invitationEpoch !== this.session.personalHistoryEpoch) {
+            this.invitationHistory = WeddingInvitationHistory.restore(undefined, state, this.attentionView().records);
+            this.invitationEpoch = this.session.personalHistoryEpoch;
+            this.invitationRevision = -1;
+        }
+        if (this.invitationRevision !== this.session.revision) {
+            this.invitationCandidates = this.invitationHistory.reconcile(state);
+            this.invitationRevision = this.session.revision;
+        }
+        return freezeReadView(this.invitationCandidates);
+    }
+    weddingInvitationOffer(sourceId: string) {
+        this.weddingInvitations();
+        return this.invitationHistory.offer(this.session.readSnapshot(), sourceId);
+    }
+    resolveWeddingInvitation(sourceId: string) {
+        this.weddingInvitations();
+        this.invitationHistory.resolve(sourceId);
+        this.invitationRevision = -1;
+    }
+    private weddingInvitationSave() {
+        this.weddingInvitations();
+        return this.invitationHistory.save();
+    }
     private attentionMetadata!: AttentionMetadata;
     private attentionCoreRevision = -1;
     private attentionRecords: AttentionRecord[] = [];
@@ -84,6 +116,8 @@ export class FjordCampaign {
         // Import validates a complete proposal before committing. A known save needs no throwaway geography.
         if (restored !== undefined) { this.importJSON(restored); return; }
         this.attentionMetadata = createAttentionMetadata(session.readSnapshot().events.length);
+        this.invitationHistory = WeddingInvitationHistory.restore(undefined, session.readSnapshot());
+        this.invitationEpoch = session.personalHistoryEpoch;
         this.blueprint = this.createGeography(session.snapshot().seed);
         this.layout = createFjordLayout(this.blueprint, undefined, session.snapshot().seed);
         this.bindExpeditionWorld();
@@ -159,6 +193,7 @@ export class FjordCampaign {
             ...(island ? { island } : { blueprint: this.blueprint }), layout: this.layout, selection: this.selection,
             ...(this.rivalLayout ? { rivalLayout: this.rivalLayout } : {}),
             narrative: this.session.book.save(state), attention: this.attentionSave(),
+            ...(state.culture ? { weddingInvitations: this.weddingInvitationSave() } : {}),
             ...(this.firstSteps ? { firstSteps: this.firstSteps } : {}) };
     }
     exportJSON() {
@@ -179,6 +214,8 @@ export class FjordCampaign {
             migrateWildlifeAttention(saved.wildlifeReadIds, proposal.readSnapshot(), proposal.attentionHistory().retained()) :
             createAttentionMetadata(proposal.readSnapshot().events.length));
         validateAttentionMetadata(attention, proposal.readSnapshot());
+        const invitationHistory = WeddingInvitationHistory.restore(saved.weddingInvitations, proposal.readSnapshot(),
+            proposal.attentionHistory().retained().map(record => ({ ...record, read: attentionRead(attention, record.eventId) })));
         const seed = proposal.snapshot().seed;
         if (saved.bridgeVersion === 2 && !saved.island) throw new Error('Missing campaign island recipe.');
         const blueprint = saved.bridgeVersion === 2 ? createCampaignIsland(seed, saved.island) :
@@ -244,6 +281,9 @@ export class FjordCampaign {
         this.blueprint = blueprint;
         this.firstSteps = firstSteps;
         this.attentionMetadata = structuredClone(attention);
+        this.invitationHistory = invitationHistory;
+        this.invitationEpoch = this.session.personalHistoryEpoch;
+        this.invitationRevision = -1;
         this.attentionCoreRevision = -1;
         this.attentionCache = undefined;
         if (saved.bridgeVersion === 2) this.geography = saved.island.version;
@@ -290,6 +330,7 @@ export class FjordCampaign {
         saved.selection = null;
         delete saved.firstSteps;
         delete saved.attention;
+        delete saved.weddingInvitations;
         delete saved.wildlifeReadIds;
         delete saved.rivalLayout;
         this.importJSON(JSON.stringify(saved));

@@ -250,11 +250,16 @@ restore. Presentation changes neither the Family Tree nor the canonical partners
 A new current, uncelebrated partnership can offer one compact non-modal wedding invitation in
 Fjord Play. It names both real people and shows the full per-attendee Food and normal ignition
 Material quote. Confirm commits through the same atomic command; insufficient stocks show
-Not enough resources. Not now, close and Escape acknowledge only the actual partnership in
-the existing Attention metadata, spend nothing and leave the relationship intact. Dismissed or
-evicted notifications do not reappear after reload. The manual campfire opportunity remains
-available within the owner's existing one-year window. Loading, backgrounding and another
-explicit management flow defer delivery without creating a new event or forced pause.
+Not enough resources. Not now, close and Escape resolve only that invitation in saved presentation
+metadata, also acknowledge its Attention record, spend nothing and leave the relationship intact.
+Reading the partnership in Activity Center does not count as a ceremony decision. A per-history
+cursor ingests appended canonical events and retains unresolved actual source IDs, at most one
+current source per couple within the one-year window. Pending questions survive deferred flows
+and reload; explicit dismissal or a real wedding receipt prevents replay. Legacy sidecars
+initialize from currently unread eligible sources once. The manual campfire opportunity remains
+available within the owner's existing window. Loading, backgrounding and another explicit flow
+defer delivery without creating a new Core event or forced pause. No second economic,
+relationship or cohesion state is introduced.
 
 A fresh paid wedding or communal ceremony shows temporary decoration around the real burning
 campfire. Weddings have an arch/garland and standards; communal ceremonies use neutral standards
