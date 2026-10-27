@@ -1,3 +1,4 @@
+import { stepMerchants } from './VisitingMerchants';
 import { stepContextualSupport } from './ContextualSupport';
 import { craftingOccupation, craftingOffer, stepSmitheryWork } from './Smithery';
 import { careActive } from './CareCalendar';
@@ -187,6 +188,7 @@ export function stepMechanicsTick(state:SimulationState):void {
     pruneSocialIncidents(state);
     if(annualFoodEvent)evaluateSocialYear(state,annualFoodEvent);
     stepContextualSupport(state, state.events.slice(tickEventOffset));
+    stepMerchants(state);
 }
 
 export type MechanicsCommand = {type:'AssignResidence'; householdId:string; residenceId:string|null}

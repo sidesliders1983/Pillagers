@@ -1,3 +1,4 @@
+import type { TradeConfig } from '../simulation/VisitingMerchants';
 import { gatheringOffer, inspectCulture } from '../simulation/CulturalEvents';
 import type { CultureConfig, CulturalOccasion } from '../simulation/CulturalEvents';
 import type { ContextualSupportConfig } from '../simulation/ContextualSupport';
@@ -120,9 +121,9 @@ export class GameplaySession {
     minutesPerWinter = 3;
     constructor(seed = 32, narrativeSeed?: number, socialEnabled = true, foundingPhase?: FoundingPhase,
         calendarMode?: BirthdayCalendarMode, livestock?: CampaignLivestockRules,
-        culture?: Partial<CultureConfig>, contextualSupport?: Partial<ContextualSupportConfig>) {
+        culture?: Partial<CultureConfig>, contextualSupport?: Partial<ContextualSupportConfig>, trade?: Partial<TradeConfig>) {
         this.state = createCampaign(seed, {}, {}, {}, {}, { enabled: socialEnabled }, {},
-            foundingPhase, calendarMode, livestock, culture, contextualSupport);
+            foundingPhase, calendarMode, livestock, culture, contextualSupport, trade);
         this.book = new ClanBook(this.state, true, narrativeSeed);
     }
     initializeWildlife(): void {
@@ -184,7 +185,7 @@ export class GameplaySession {
     commandBatch(commands: readonly SimulationCommand[]): void {
         const allowed = new Set([
             'BuildHouse', 'AssignOccupation', 'SpecializeBuilding', 'AssignCattle',
-            'AssignLivestock', 'UpgradeBuilding', 'SetSmitheryTarget', 'SponsorGathering'
+            'AssignLivestock', 'UpgradeBuilding', 'SetSmitheryTarget', 'SponsorGathering', 'BarterWithMerchant'
         ]);
         if (commands.length > 64 || commands.some(command => !allowed.has(command.type))) {
             throw new Error('This task contains unsupported management commands.');
@@ -222,10 +223,10 @@ export class GameplaySession {
         foundingPhase = this.state.foundingPhase,
         calendarMode: BirthdayCalendarMode | undefined = birthdayCalendarMode(this.state),
         livestock?: CampaignLivestockRules, culture?: Partial<CultureConfig>,
-        contextualSupport?: Partial<ContextualSupportConfig>): void {
+        contextualSupport?: Partial<ContextualSupportConfig>, trade?: Partial<TradeConfig>): void {
         this.replace(createCampaign(seed, {}, {}, { enabled: weatherEnabled }, {},
             { enabled: socialEnabled }, {}, foundingPhase, calendarMode, livestock, culture,
-            contextualSupport));
+            contextualSupport, trade));
     }
     /** Prepare a replay without taking ownership of the current campaign or its read state. */
     restartProposal(): GameplaySession {
@@ -266,7 +267,7 @@ export class GameplaySession {
             { ...this.state.weather?.config, enabled: weatherEnabled }, this.state.world?.config,
             { ...this.state.social?.config, enabled: socialEnabled }, targetLandingConfigs,
             foundingPhase, birthdayCalendarMode(this.state), livestock, this.state.culture?.config,
-            this.state.contextualSupport?.config ?? { enabled: false }));
+            this.state.contextualSupport?.config ?? { enabled: false }, { enabled: !!this.state.trade }));
     }
     private replace(state: SimulationState, fresh = true): void {
         this.physicalWorld = undefined;

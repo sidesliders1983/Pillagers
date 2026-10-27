@@ -1,3 +1,5 @@
+import { MerchantPanel } from './MerchantPanel';
+import './merchant.css';
 import { FirstStepsGuide } from './FirstStepsGuide';
 import { CampaignPlayback } from './CampaignPlayback';
 import { newFirstSteps } from './FirstStepsState';
@@ -138,7 +140,7 @@ export class FjordPlay {
             }
             this.opened = { campaign, warning: '', autoStart: entry.kind === 'continue' && resumePlayback };
         } else {
-            const proposal = await this.loading.measure('campaign-founders', () => newFjordScenario(entry.seed, query.get('culture') === '1'));
+            const proposal = await this.loading.measure('campaign-founders', () => newFjordScenario(entry.seed, query.get('culture') === '1', query.get('trade') === '1'));
             this.foundingBook = new FoundingBookWindow(proposal.book.snapshot().chapters[0]);
             proposal.book.notifyPending();
             this.loading.configure(this.foundingBook);
@@ -288,6 +290,7 @@ export class FjordPlay {
                 target: target => {
                     if (target.kind === 'expedition') expeditions?.openGroup(target.id);
                     else if (target.kind === 'site') islandMissions?.selectSite(target.id);
+                    else if (target.kind === 'surface' && target.id === 'trade') merchantPanel?.open();
                     else if (target.kind === 'surface') desktopUI?.open(target.id, true);
                     else if (target.kind === 'wildlife') bookReader.openWildlife(target.id);
                     else select(target.kind === 'livestock' ? 'cattle' : target.kind, target.id);
@@ -352,6 +355,7 @@ export class FjordPlay {
         const islandMarkers = new IslandMissionMarkers();
         this.startupCleanup.push(() => islandMarkers.dispose());
         let desktopUI: FjordInterface | undefined;
+        let merchantPanel: MerchantPanel | undefined;
         let renderedWildlifeAttention = '';
         const refreshUI = () => {
             entry.audioControls?.refresh();
@@ -437,6 +441,7 @@ export class FjordPlay {
             desktopUI?.refresh(state, this.shared.selection, personalHistory.render(),
                 () => this.panels.render(state, this.shared.selection, '', { homeImprovements: false }));
             updateManagementAvailability(panel, this.shared);
+            merchantPanel?.refresh();
             firstSteps?.update(Boolean(this.loading) || !document.querySelector<HTMLElement>('#clan-book-reader')!.hidden);
             document.querySelector('#fjord-clan-name')!.textContent = state.clan.name;
             highlight();
@@ -609,7 +614,8 @@ export class FjordPlay {
                         proposal.restartCampaign(sameFounders.checked, undefined, weatherField.checked, undefined, foundingPhase);
                     } else if (!replayFounders) proposal.newCampaign(Number(seedField.value), weatherField.checked, true, foundingPhase,
                         calendarMode ?? birthdayCalendarMode(this.session.readSnapshot()), { player: fjordLivestockRules },
-                        query.get('culture') === '1' ? { enabled: true } : undefined);
+                        query.get('culture') === '1' ? { enabled: true } : undefined, undefined,
+                        query.get('trade') === '1' ? { enabled: true } : undefined);
                     this.foundingBook = new FoundingBookWindow(proposal.book.snapshot().chapters[0]);
                     proposal.book.notifyPending();
                     const recipe = replayFounders ? campaignIslandPlan(this.campaign.blueprint)?.recipe : undefined;
@@ -708,10 +714,19 @@ export class FjordPlay {
                 if (syncScene) await syncScene();
                 presentation?.acceptGathering(focusCeremony);
             });
+        merchantPanel = this.ownStartup(new MerchantPanel(document.querySelector<HTMLElement>('#fjord-play')!,
+            () => this.session.readSnapshot(), command => {
+                const epoch = this.session.personalHistoryEpoch;
+                return new Promise<void>((resolve, reject) => commitManagement(() => {
+                    if (epoch !== this.session.personalHistoryEpoch) throw new Error('The campaign changed. Review its current merchant offers.');
+                    return [command];
+                }, resolve, reject));
+            }, () => this.session.personalHistoryEpoch));
         desktopUI = new FjordInterface(this.shared, { select, refresh, notify: say,
             inspected: (kind, id) => firstSteps?.inspected(kind, id),
             renderPortrait: input => presentation?.portrait(input) ?? Promise.resolve(undefined),
             home: () => controller.home(),
+            trade: () => { desktopUI?.close(false); merchantPanel?.open(); },
             report: id => {
                 if (!this.campaign.attentionSource(id)) return;
                 desktopUI!.open('attention', true);

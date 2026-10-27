@@ -11,7 +11,7 @@ export function resolveAttentionTarget(state: SimulationState, target?: Attentio
     if (target.kind === 'building') return state.buildings[target.id] ? target : null;
     if (target.kind === 'livestock') return state.landing?.cattle[target.id]?.deathWinter === null ? target : null;
     if (target.kind === 'site') return state.world?.islandIntel?.sites[target.id] ? target : null;
-    if (target.kind === 'surface') return target;
+    if (target.kind === 'surface') return target.id === 'trade' && !state.trade ? null : target;
     if (target.kind === 'wildlife') return state.events[eventOrdinal(target.id) - 1]?.id === target.id && state.events[eventOrdinal(target.id) - 1]?.type === 'WildlifeSighted' ? target : null;
     const mission = state.world?.spatial?.missions[target.id] ?? state.world?.missions[target.id];
     return mission && mission.status !== 'Returned' && state.world?.groups[mission.groupId] &&

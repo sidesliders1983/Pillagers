@@ -190,7 +190,7 @@ export class AttentionView {
             const people = Array.isArray(event.details?.people) ? event.details.people as { id: string; name: string }[] : [];
             html += '<h3>Historical record</h3><small>' + when(record) + '</small><p>' + escape(record.headline) + '</p>';
             html += renderMissionOutcome(state, event);
-            if (resolveAttentionTarget(state, record.target)) html += this.button('target', targetLabels[record.target!.kind], record.eventId);
+            if (resolveAttentionTarget(state, record.target)) html += this.button('target', record.target?.kind === 'surface' && record.target.id === 'trade' ? 'View visiting trade' : targetLabels[record.target!.kind], record.eventId);
             else html += '<p>The live destination is unavailable. This historical record is retained.</p>';
             if (record.actorIds.length) html += '<h4>Recorded participants</h4><ul>' + record.actorIds.map(id => {
                 const person = people.find(person => person?.id === id), name = person?.name ??

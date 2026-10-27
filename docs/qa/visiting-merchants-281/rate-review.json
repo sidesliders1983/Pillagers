@@ -1,0 +1,2921 @@
+{
+  "schemaVersion": 1,
+  "seeds": [
+    1,
+    30
+  ],
+  "ticks": 2000,
+  "purpose": "First-visit affordability, domestic/CPU parity without trade, and fixed-rate value-loss checks. Not a fun or long-run economy study.",
+  "baseCommit": "872d1b94ea085f992bf342991a66530a61f57de2",
+  "sourceHashes": {
+    "src/simulation/TradeGoods.ts": "905a3fa0eb636bc252b6fdfb258fa39755838f938e87401cbea4de04a559f0a8",
+    "src/simulation/TradeInventory.ts": "82d88b40d415b62c7f9445f80c2c040c0c735e7a00c2ef8b2f37c886365d7ebd",
+    "src/simulation/VisitingMerchants.ts": "f04db6abd43c584e055212fce3b9c18c5a24ddab00fe469f0648c5a54d2615e0",
+    "src/simulation/SimulationCore.ts": "358f2d3f4007316db1757309f0d452145367ad5f601ff9226e9c30606c2ae3b2",
+    "src/simulation/Mechanics.ts": "299c4e9f85e7eabeeb35f41a490634ae8de1b74432676cfd163fbadc85d572eb",
+    "src/config/FjordLivestock.ts": "fe3cf9e810fafa49107522e708c8db20fc7395147dc086c9cfcc4982516d0024",
+    "scripts/measure-visiting-trade.mjs": "9b7320d57447415b0060e434397a37e8429282f78c1e09d418fa613b7ddb89c2"
+  },
+  "policy": {
+    "version": 1,
+    "firstDelayWinters": 2,
+    "visitWinters": 1,
+    "intervalMinWinters": 3,
+    "intervalMaxWinters": 5,
+    "markupBps": 12500,
+    "maximumTraderDiscountBps": 1000,
+    "maximumOffers": 4,
+    "maximumLots": 3
+  },
+  "catalog": {
+    "food": {
+      "goodId": "food",
+      "label": "Food",
+      "cargoUnitsPerUnit": 1,
+      "tradeValue": 2,
+      "inventory": "core"
+    },
+    "materials": {
+      "goodId": "materials",
+      "label": "Materials",
+      "cargoUnitsPerUnit": 1,
+      "tradeValue": 3,
+      "inventory": "core"
+    },
+    "hides": {
+      "goodId": "hides",
+      "label": "Hides",
+      "cargoUnitsPerUnit": 1,
+      "tradeValue": 4,
+      "inventory": "hides"
+    },
+    "woodenSpear": {
+      "goodId": "woodenSpear",
+      "label": "Wooden Spear",
+      "cargoUnitsPerUnit": 1,
+      "tradeValue": 8,
+      "inventory": "smithery"
+    },
+    "woodenShield": {
+      "goodId": "woodenShield",
+      "label": "Wooden Shield",
+      "cargoUnitsPerUnit": 2,
+      "tradeValue": 12,
+      "inventory": "smithery"
+    },
+    "leatherShield": {
+      "goodId": "leatherShield",
+      "label": "Leather-reinforced Shield",
+      "cargoUnitsPerUnit": 2,
+      "tradeValue": 18,
+      "inventory": "smithery"
+    },
+    "horse": {
+      "goodId": "horse",
+      "label": "Horse (future)",
+      "cargoUnitsPerUnit": 10,
+      "tradeValue": 0,
+      "inventory": null
+    }
+  },
+  "summary": {
+    "cases": 30,
+    "supplyVisits": 15,
+    "craftVisits": 15,
+    "offers": 95,
+    "affordableOffers": 60,
+    "improvedWholeQuotes": 15
+  },
+  "rows": [
+    {
+      "seed": 1,
+      "profile": "supply",
+      "stocksAtArrival": {
+        "food": 37,
+        "materials": 5
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Materials.",
+          "remainingLots": 1,
+          "negotiator": "founder-4",
+          "discountBps": 798
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 2,
+          "negotiator": "founder-4",
+          "discountBps": 798
+        }
+      ]
+    },
+    {
+      "seed": 2,
+      "profile": "craft",
+      "stocksAtArrival": {
+        "food": 21,
+        "materials": 10
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 2,
+          "negotiator": "founder-5",
+          "discountBps": 904
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 2,
+          "negotiator": "founder-5",
+          "discountBps": 904
+        },
+        {
+          "id": "offer-3",
+          "receive": [
+            {
+              "goodId": "hides",
+              "quantity": 2
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Spear.",
+          "remainingLots": 1,
+          "negotiator": "founder-5",
+          "discountBps": 904
+        },
+        {
+          "id": "offer-4",
+          "receive": [
+            {
+              "goodId": "leatherShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Shield.",
+          "remainingLots": 1,
+          "negotiator": "founder-5",
+          "discountBps": 904
+        }
+      ]
+    },
+    {
+      "seed": 3,
+      "profile": "supply",
+      "stocksAtArrival": {
+        "food": 16,
+        "materials": 9
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 1,
+          "negotiator": "founder-5",
+          "discountBps": 836
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 2,
+          "negotiator": "founder-5",
+          "discountBps": 836
+        }
+      ]
+    },
+    {
+      "seed": 4,
+      "profile": "craft",
+      "stocksAtArrival": {
+        "food": 13,
+        "materials": 13
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 1,
+          "negotiator": "founder-3",
+          "discountBps": 858
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 1,
+          "negotiator": "founder-3",
+          "discountBps": 858
+        },
+        {
+          "id": "offer-3",
+          "receive": [
+            {
+              "goodId": "hides",
+              "quantity": 2
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Spear.",
+          "remainingLots": 2,
+          "negotiator": "founder-3",
+          "discountBps": 858
+        },
+        {
+          "id": "offer-4",
+          "receive": [
+            {
+              "goodId": "leatherShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Shield.",
+          "remainingLots": 2,
+          "negotiator": "founder-3",
+          "discountBps": 858
+        }
+      ]
+    },
+    {
+      "seed": 5,
+      "profile": "craft",
+      "stocksAtArrival": {
+        "food": 26,
+        "materials": 11
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 1,
+          "negotiator": "founder-8",
+          "discountBps": 800
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 1,
+          "negotiator": "founder-8",
+          "discountBps": 800
+        },
+        {
+          "id": "offer-3",
+          "receive": [
+            {
+              "goodId": "hides",
+              "quantity": 2
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Spear.",
+          "remainingLots": 2,
+          "negotiator": "founder-8",
+          "discountBps": 800
+        },
+        {
+          "id": "offer-4",
+          "receive": [
+            {
+              "goodId": "leatherShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Shield.",
+          "remainingLots": 2,
+          "negotiator": "founder-8",
+          "discountBps": 800
+        }
+      ]
+    },
+    {
+      "seed": 6,
+      "profile": "craft",
+      "stocksAtArrival": {
+        "food": 21,
+        "materials": 9
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 1,
+          "negotiator": "founder-3",
+          "discountBps": 859
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 1,
+          "negotiator": "founder-3",
+          "discountBps": 859
+        },
+        {
+          "id": "offer-3",
+          "receive": [
+            {
+              "goodId": "hides",
+              "quantity": 2
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Spear.",
+          "remainingLots": 2,
+          "negotiator": "founder-3",
+          "discountBps": 859
+        },
+        {
+          "id": "offer-4",
+          "receive": [
+            {
+              "goodId": "leatherShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Shield.",
+          "remainingLots": 3,
+          "negotiator": "founder-3",
+          "discountBps": 859
+        }
+      ]
+    },
+    {
+      "seed": 7,
+      "profile": "supply",
+      "stocksAtArrival": {
+        "food": 19,
+        "materials": 18
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 3,
+          "negotiator": "founder-3",
+          "discountBps": 918
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 3,
+          "negotiator": "founder-3",
+          "discountBps": 918
+        }
+      ]
+    },
+    {
+      "seed": 8,
+      "profile": "supply",
+      "stocksAtArrival": {
+        "food": 15,
+        "materials": 11
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 2,
+          "negotiator": "founder-10",
+          "discountBps": 893
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 2,
+          "negotiator": "founder-10",
+          "discountBps": 893
+        }
+      ]
+    },
+    {
+      "seed": 9,
+      "profile": "supply",
+      "stocksAtArrival": {
+        "food": 22,
+        "materials": 19
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 2,
+          "negotiator": "founder-1",
+          "discountBps": 824
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 1,
+          "negotiator": "founder-1",
+          "discountBps": 824
+        },
+        {
+          "id": "offer-3",
+          "receive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 2,
+          "negotiator": "founder-1",
+          "discountBps": 824
+        }
+      ]
+    },
+    {
+      "seed": 10,
+      "profile": "craft",
+      "stocksAtArrival": {
+        "food": 16,
+        "materials": 13
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 3,
+          "negotiator": "founder-10",
+          "discountBps": 910
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 3,
+          "negotiator": "founder-10",
+          "discountBps": 910
+        },
+        {
+          "id": "offer-3",
+          "receive": [
+            {
+              "goodId": "hides",
+              "quantity": 2
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Spear.",
+          "remainingLots": 3,
+          "negotiator": "founder-10",
+          "discountBps": 910
+        },
+        {
+          "id": "offer-4",
+          "receive": [
+            {
+              "goodId": "leatherShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Shield.",
+          "remainingLots": 1,
+          "negotiator": "founder-10",
+          "discountBps": 910
+        }
+      ]
+    },
+    {
+      "seed": 11,
+      "profile": "supply",
+      "stocksAtArrival": {
+        "food": 12,
+        "materials": 9
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 1,
+          "negotiator": "founder-8",
+          "discountBps": 897
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 3,
+          "negotiator": "founder-8",
+          "discountBps": 897
+        }
+      ]
+    },
+    {
+      "seed": 12,
+      "profile": "craft",
+      "stocksAtArrival": {
+        "food": 14,
+        "materials": 10
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 1,
+          "negotiator": "founder-1",
+          "discountBps": 905
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 3,
+          "negotiator": "founder-1",
+          "discountBps": 905
+        },
+        {
+          "id": "offer-3",
+          "receive": [
+            {
+              "goodId": "hides",
+              "quantity": 2
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Spear.",
+          "remainingLots": 2,
+          "negotiator": "founder-1",
+          "discountBps": 905
+        },
+        {
+          "id": "offer-4",
+          "receive": [
+            {
+              "goodId": "leatherShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Shield.",
+          "remainingLots": 2,
+          "negotiator": "founder-1",
+          "discountBps": 905
+        }
+      ]
+    },
+    {
+      "seed": 13,
+      "profile": "craft",
+      "stocksAtArrival": {
+        "food": 35,
+        "materials": 8
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 1,
+          "negotiator": "founder-10",
+          "discountBps": 783
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 2,
+          "negotiator": "founder-10",
+          "discountBps": 783
+        },
+        {
+          "id": "offer-3",
+          "receive": [
+            {
+              "goodId": "hides",
+              "quantity": 2
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Spear.",
+          "remainingLots": 3,
+          "negotiator": "founder-10",
+          "discountBps": 783
+        },
+        {
+          "id": "offer-4",
+          "receive": [
+            {
+              "goodId": "leatherShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Shield.",
+          "remainingLots": 2,
+          "negotiator": "founder-10",
+          "discountBps": 783
+        }
+      ]
+    },
+    {
+      "seed": 14,
+      "profile": "supply",
+      "stocksAtArrival": {
+        "food": 14,
+        "materials": 20
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 1,
+          "negotiator": "founder-9",
+          "discountBps": 907
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 3,
+          "negotiator": "founder-9",
+          "discountBps": 907
+        },
+        {
+          "id": "offer-3",
+          "receive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 2,
+          "negotiator": "founder-9",
+          "discountBps": 907
+        }
+      ]
+    },
+    {
+      "seed": 15,
+      "profile": "craft",
+      "stocksAtArrival": {
+        "food": 5,
+        "materials": 3
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 1,
+          "negotiator": "founder-9",
+          "discountBps": 850
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Materials.",
+          "remainingLots": 1,
+          "negotiator": "founder-9",
+          "discountBps": 850
+        },
+        {
+          "id": "offer-3",
+          "receive": [
+            {
+              "goodId": "hides",
+              "quantity": 2
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Spear.",
+          "remainingLots": 2,
+          "negotiator": "founder-9",
+          "discountBps": 850
+        },
+        {
+          "id": "offer-4",
+          "receive": [
+            {
+              "goodId": "leatherShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Shield.",
+          "remainingLots": 3,
+          "negotiator": "founder-9",
+          "discountBps": 850
+        }
+      ]
+    },
+    {
+      "seed": 16,
+      "profile": "craft",
+      "stocksAtArrival": {
+        "food": 5,
+        "materials": 11
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 3,
+          "negotiator": "founder-4",
+          "discountBps": 892
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 2,
+          "negotiator": "founder-4",
+          "discountBps": 892
+        },
+        {
+          "id": "offer-3",
+          "receive": [
+            {
+              "goodId": "hides",
+              "quantity": 2
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Spear.",
+          "remainingLots": 3,
+          "negotiator": "founder-4",
+          "discountBps": 892
+        },
+        {
+          "id": "offer-4",
+          "receive": [
+            {
+              "goodId": "leatherShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Shield.",
+          "remainingLots": 3,
+          "negotiator": "founder-4",
+          "discountBps": 892
+        }
+      ]
+    },
+    {
+      "seed": 17,
+      "profile": "craft",
+      "stocksAtArrival": {
+        "food": 2,
+        "materials": 5
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Food.",
+          "remainingLots": 3,
+          "negotiator": "founder-2",
+          "discountBps": 916
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 3,
+          "negotiator": "founder-2",
+          "discountBps": 916
+        },
+        {
+          "id": "offer-3",
+          "receive": [
+            {
+              "goodId": "hides",
+              "quantity": 2
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Spear.",
+          "remainingLots": 2,
+          "negotiator": "founder-2",
+          "discountBps": 916
+        },
+        {
+          "id": "offer-4",
+          "receive": [
+            {
+              "goodId": "leatherShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Shield.",
+          "remainingLots": 2,
+          "negotiator": "founder-2",
+          "discountBps": 916
+        }
+      ]
+    },
+    {
+      "seed": 18,
+      "profile": "supply",
+      "stocksAtArrival": {
+        "food": 21,
+        "materials": 8
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 2,
+          "negotiator": "founder-4",
+          "discountBps": 881
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 1,
+          "negotiator": "founder-4",
+          "discountBps": 881
+        }
+      ]
+    },
+    {
+      "seed": 19,
+      "profile": "supply",
+      "stocksAtArrival": {
+        "food": 25,
+        "materials": 8
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 1,
+          "negotiator": "founder-5",
+          "discountBps": 836
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 1,
+          "negotiator": "founder-5",
+          "discountBps": 836
+        },
+        {
+          "id": "offer-3",
+          "receive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 3,
+          "negotiator": "founder-5",
+          "discountBps": 836
+        }
+      ]
+    },
+    {
+      "seed": 20,
+      "profile": "craft",
+      "stocksAtArrival": {
+        "food": 18,
+        "materials": 14
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 1,
+          "negotiator": "founder-5",
+          "discountBps": 866
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 2,
+          "negotiator": "founder-5",
+          "discountBps": 866
+        },
+        {
+          "id": "offer-3",
+          "receive": [
+            {
+              "goodId": "hides",
+              "quantity": 2
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Spear.",
+          "remainingLots": 3,
+          "negotiator": "founder-5",
+          "discountBps": 866
+        },
+        {
+          "id": "offer-4",
+          "receive": [
+            {
+              "goodId": "leatherShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Shield.",
+          "remainingLots": 1,
+          "negotiator": "founder-5",
+          "discountBps": 866
+        }
+      ]
+    },
+    {
+      "seed": 21,
+      "profile": "supply",
+      "stocksAtArrival": {
+        "food": 22,
+        "materials": 18
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 2,
+          "negotiator": "founder-5",
+          "discountBps": 932
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 3,
+          "negotiator": "founder-5",
+          "discountBps": 932
+        }
+      ]
+    },
+    {
+      "seed": 22,
+      "profile": "supply",
+      "stocksAtArrival": {
+        "food": 19,
+        "materials": 9
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 3,
+          "negotiator": "founder-2",
+          "discountBps": 821
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 2,
+          "negotiator": "founder-2",
+          "discountBps": 821
+        }
+      ]
+    },
+    {
+      "seed": 23,
+      "profile": "supply",
+      "stocksAtArrival": {
+        "food": 18,
+        "materials": 7
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 3,
+          "negotiator": "founder-8",
+          "discountBps": 895
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 2,
+          "negotiator": "founder-8",
+          "discountBps": 895
+        },
+        {
+          "id": "offer-3",
+          "receive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 3,
+          "negotiator": "founder-8",
+          "discountBps": 895
+        }
+      ]
+    },
+    {
+      "seed": 24,
+      "profile": "craft",
+      "stocksAtArrival": {
+        "food": 20,
+        "materials": 8
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 1,
+          "negotiator": "founder-6",
+          "discountBps": 972
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 2,
+          "negotiator": "founder-6",
+          "discountBps": 972
+        },
+        {
+          "id": "offer-3",
+          "receive": [
+            {
+              "goodId": "hides",
+              "quantity": 2
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Spear.",
+          "remainingLots": 3,
+          "negotiator": "founder-6",
+          "discountBps": 972
+        },
+        {
+          "id": "offer-4",
+          "receive": [
+            {
+              "goodId": "leatherShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Shield.",
+          "remainingLots": 3,
+          "negotiator": "founder-6",
+          "discountBps": 972
+        }
+      ]
+    },
+    {
+      "seed": 25,
+      "profile": "craft",
+      "stocksAtArrival": {
+        "food": 36,
+        "materials": 11
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 1,
+          "negotiator": "founder-6",
+          "discountBps": 907
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 2,
+          "negotiator": "founder-6",
+          "discountBps": 907
+        },
+        {
+          "id": "offer-3",
+          "receive": [
+            {
+              "goodId": "hides",
+              "quantity": 2
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Spear.",
+          "remainingLots": 3,
+          "negotiator": "founder-6",
+          "discountBps": 907
+        },
+        {
+          "id": "offer-4",
+          "receive": [
+            {
+              "goodId": "leatherShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Shield.",
+          "remainingLots": 3,
+          "negotiator": "founder-6",
+          "discountBps": 907
+        }
+      ]
+    },
+    {
+      "seed": 26,
+      "profile": "supply",
+      "stocksAtArrival": {
+        "food": 24,
+        "materials": 15
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 3,
+          "negotiator": "founder-2",
+          "discountBps": 881
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 2,
+          "negotiator": "founder-2",
+          "discountBps": 881
+        }
+      ]
+    },
+    {
+      "seed": 27,
+      "profile": "supply",
+      "stocksAtArrival": {
+        "food": 41,
+        "materials": 11
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 3,
+          "negotiator": "founder-1",
+          "discountBps": 886
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 1,
+          "negotiator": "founder-1",
+          "discountBps": 886
+        },
+        {
+          "id": "offer-3",
+          "receive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 2,
+          "negotiator": "founder-1",
+          "discountBps": 886
+        }
+      ]
+    },
+    {
+      "seed": 28,
+      "profile": "craft",
+      "stocksAtArrival": {
+        "food": 16,
+        "materials": 8
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 3,
+          "negotiator": "founder-4",
+          "discountBps": 775
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 1,
+          "negotiator": "founder-4",
+          "discountBps": 775
+        },
+        {
+          "id": "offer-3",
+          "receive": [
+            {
+              "goodId": "hides",
+              "quantity": 2
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Spear.",
+          "remainingLots": 1,
+          "negotiator": "founder-4",
+          "discountBps": 775
+        },
+        {
+          "id": "offer-4",
+          "receive": [
+            {
+              "goodId": "leatherShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Shield.",
+          "remainingLots": 1,
+          "negotiator": "founder-4",
+          "discountBps": 775
+        }
+      ]
+    },
+    {
+      "seed": 29,
+      "profile": "craft",
+      "stocksAtArrival": {
+        "food": 10,
+        "materials": 18
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 1,
+          "negotiator": "founder-4",
+          "discountBps": 894
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 5
+            }
+          ],
+          "affordableAtArrival": true,
+          "reasonAtArrival": null,
+          "remainingLots": 1,
+          "negotiator": "founder-4",
+          "discountBps": 894
+        },
+        {
+          "id": "offer-3",
+          "receive": [
+            {
+              "goodId": "hides",
+              "quantity": 2
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenSpear",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Spear.",
+          "remainingLots": 3,
+          "negotiator": "founder-4",
+          "discountBps": 894
+        },
+        {
+          "id": "offer-4",
+          "receive": [
+            {
+              "goodId": "leatherShield",
+              "quantity": 1
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "woodenShield",
+              "quantity": 2
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Wooden Shield.",
+          "remainingLots": 3,
+          "negotiator": "founder-4",
+          "discountBps": 894
+        }
+      ]
+    },
+    {
+      "seed": 30,
+      "profile": "supply",
+      "stocksAtArrival": {
+        "food": 2,
+        "materials": 2
+      },
+      "rngParity": true,
+      "autonomousCpuParity": true,
+      "offers": [
+        {
+          "id": "offer-1",
+          "receive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "materials",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Materials.",
+          "remainingLots": 1,
+          "negotiator": "founder-9",
+          "discountBps": 866
+        },
+        {
+          "id": "offer-2",
+          "receive": [
+            {
+              "goodId": "materials",
+              "quantity": 4
+            }
+          ],
+          "standardGive": [
+            {
+              "goodId": "food",
+              "quantity": 8
+            }
+          ],
+          "negotiatedGive": [
+            {
+              "goodId": "food",
+              "quantity": 7
+            }
+          ],
+          "affordableAtArrival": false,
+          "reasonAtArrival": "Not enough stored Food.",
+          "remainingLots": 2,
+          "negotiator": "founder-9",
+          "discountBps": 866
+        }
+      ]
+    }
+  ]
+}

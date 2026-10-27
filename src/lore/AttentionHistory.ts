@@ -8,7 +8,7 @@ export type AttentionSeverity = 'critical' | 'noteworthy' | 'ambient';
 export type AttentionTarget =
     | { kind: 'persona' | 'household' | 'building' | 'livestock' | 'site'; id: string }
     | { kind: 'expedition'; id: string }
-    | { kind: 'surface'; id: 'food' }
+    | { kind: 'surface'; id: 'food' | 'trade' }
     | { kind: 'wildlife'; id: string };
 export interface AttentionRecord {
     eventId: string;
@@ -35,6 +35,7 @@ const strings = (value: unknown) => Array.isArray(value) ? value.filter((id): id
 export const eventOrdinal = (id: string) => /^event-[1-9][0-9]*$/.test(id) ? Number(id.slice(6)) : 0;
 const noteworthy = new Map<string, AttentionCategory>([
     ['ChildBorn', 'life'], ['PersonaDied', 'life'], ['PartnershipFormed', 'life'], ['SupportCompleted', 'life'],
+    ['MerchantArrived', 'settlement'], ['MerchantDeparted', 'settlement'],
     ['HouseBuilt', 'settlement'], ['BuildingCollapsed', 'settlement'],
     ['ExpeditionDeparted', 'expedition'], ['ExpeditionReturned', 'expedition'],
     ['ExploreAreaDeparted', 'expedition'], ['ExploreAreaReturned', 'expedition'],
@@ -43,7 +44,7 @@ const noteworthy = new Map<string, AttentionCategory>([
 ]);
 
 const formattedTypes = new Set([...noteworthy.keys(), 'FoundingPartyLanded', 'FoundingPartnershipPresent',
-    'CulturalGatheringHeld', 'CultureWeatherSupportApplied', 'OccupationAssigned', 'OccupationReleased', 'CaregiverAssigned', 'ResourceProduced', 'CattleFoodProduced',
+    'MerchantBartered', 'CulturalGatheringHeld', 'CultureWeatherSupportApplied', 'OccupationAssigned', 'OccupationReleased', 'CaregiverAssigned', 'ResourceProduced', 'CattleFoodProduced',
     'LivestockResourceProduced', 'FoodConsumed', 'CattleFoodConsumed', 'LivestockFoodConsumed',
     'ExploreAreaPrepared', 'ExploreAreaCancelled', 'ExploreAreaStranded', 'ExploreAreaReturnStarted',
     'ExploreAreaSuppliesConsumed', 'ExploreAreaSuppliesDiscarded', 'ExploreAreaSuppliesLost',
@@ -72,7 +73,8 @@ export function attentionEvent(event: SimulationEvent): AttentionRecord | null {
     const actorIds = [...new Set([event.personaId, ...strings(d.participants), ...strings(d.parentIds)]
         .filter((id): id is string => typeof id === 'string'))];
     let target: AttentionTarget | undefined;
-    if (event.type === 'SupportCompleted' && string(d.recipientId))
+    if (event.type === 'MerchantArrived') target = { kind: 'surface', id: 'trade' };
+    else if (event.type === 'SupportCompleted' && string(d.recipientId))
         target = { kind: 'persona', id: d.recipientId as string };
     else if (category === 'life' && actorIds.length) target = { kind: 'persona', id: event.personaId ?? actorIds[0] };
     else if (['HouseBuilt', 'BuildingCollapsed'].includes(event.type) && string(d.buildingId))

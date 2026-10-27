@@ -1,3 +1,4 @@
+import { initializeTrade, validateTrade, applyMerchantCommand, type MerchantCommand, type TradeState, type TradeConfig } from './VisitingMerchants';
 import {
     stepWildlifeSightings, validateWildlife, validateWildlifeSighting, wildlifeSighting, assertWildlifeWorld,
     initializeWildlifeSightings as bindWildlifeSightings, type WildlifeState,
@@ -73,6 +74,7 @@ export type Persona = {
 };
 export type SimulationEvent = {id: string; time: GameTime; type: string; personaId?: string; details?: Record<string, unknown>};
 export type SimulationState = {
+    trade?: TradeState;
     culture?: CultureState;
     contextualSupport?: ContextualSupportState;
     wildlife?: WildlifeState;
@@ -97,6 +99,7 @@ export function createCampaign(
     calendarMode?: BirthdayCalendarMode, livestock?: CampaignLivestockRules,
     cultureOverrides: Partial<CultureConfig> = {},
     contextualSupportOverrides: Partial<ContextualSupportConfig> = {},
+    tradeOverrides: Partial<TradeConfig> = {},
 ): SimulationState {
     // Player defaults are separate from the shared Landing factory used by CPU clans and QA.
     const state = generateCampaign(seed, {initialFood: 15, ...overrides}, mechanicsOverrides, foundingPhase, calendarMode, livestock?.player);
@@ -119,6 +122,7 @@ export function createCampaign(
     initializeSocial(state, socialOverrides);
     initializeCulture(state, cultureOverrides);
     initializeContextualSupport(state, contextualSupportOverrides);
+    initializeTrade(state, tradeOverrides);
     validateState(state);
     return state;
 }
@@ -207,7 +211,7 @@ export function createSettlement(seed:number, overrides:Partial<PrototypeConfig>
     }
     initializeSocial(state,socialOverrides);validateState(state); return state;
 }
-export type SimulationCommand = CultureCommand | SmitheryCommand | LongshipCommand | IslandMissionCommand | SpatialExpeditionCommand | CampfireCommand | ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
+export type SimulationCommand = MerchantCommand | CultureCommand | SmitheryCommand | LongshipCommand | IslandMissionCommand | SpatialExpeditionCommand | CampfireCommand | ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
 function integer(value: number, label: string) {
     if (!Number.isSafeInteger(value) || value < 0) throw new Error(`${label} must be a nonnegative safe integer`);
 }
@@ -217,6 +221,12 @@ function emit(state: SimulationState, type: string, personaId?: string, details?
 }
 export function applyCommand(input: SimulationState, command: SimulationCommand, context?: PhysicalExpeditionContext): SimulationState {
     validateState(input);
+    if (command.type === 'BarterWithMerchant') {
+        const state = structuredClone(input);
+        applyMerchantCommand(state, command);
+        validateState(state);
+        return state;
+    }
     if (command.type === 'SponsorGathering') {
         const state = structuredClone(input);
         applyCultureCommand(state, command);
@@ -377,10 +387,12 @@ function validateState(state: SimulationState): void {
     }
     for (const [id, building] of Object.entries(state.buildings)) if (id !== building.id || building.kind !== 'house') throw new Error('Invalid building');
     const culturalEvents: SimulationEvent[] = [];
+    const merchantEvents: SimulationEvent[] = [];
     let previousEventTime = 0;
     let wildlifeSequence = 0;
     const wildlifeFirsts = new Map<string, string>();
     state.events.forEach((event, index) => {
+        if (['MerchantArrived', 'MerchantDeparted', 'MerchantBartered'].includes(event.type)) merchantEvents.push(event);
         if (isCulturalEvent(event) || event.type === 'SupportCompleted' || (state.culture !== undefined &&
             ['PartnershipFormed', 'CampfireFuelConsumed', 'CampfireChanged'].includes(event.type)))
             culturalEvents.push(event);
@@ -408,6 +420,7 @@ function validateState(state: SimulationState): void {
     validateBirthdayCalendar(state);
     validateCampfire(state);
     validateCulture(state, culturalEvents);
+    validateTrade(state, merchantEvents);
     validateSocial(state);
     validateContextualSupport(state);
     validateMechanics(state);

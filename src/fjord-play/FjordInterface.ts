@@ -34,6 +34,7 @@ const meter = (label: string, value: number) => `<div class="fjord-meter"><div><
 interface InterfaceHooks {
     renderPortrait?: (input: PortraitRequest) => Promise<string | undefined>;
     home?: () => void;
+    trade?: () => void;
     report?: (sourceEventId: string) => void;
     inspected?: (kind: FirstStepsInspection, id?: string) => void;
     select: (kind: string, id: string) => void;
@@ -259,6 +260,7 @@ export class FjordInterface {
                 html += `<div class="fjord-card-body">${this.result ? `<p class="fjord-result" role="status">${esc(this.result)}</p>` : ''}
                     ${['cattle', 'campfire', 'longship'].includes(selection.kind) ? legacy() :
                         `<details data-legacy-management data-view-key="advanced:${esc(key)}"><summary>More management</summary>${this.advanced ? legacy() : ''}</details>`}
+                    ${selection.kind === 'longship' && state.trade ? button('merchant', state.trade.visit ? 'Visiting merchant · View offers' : 'Trade at the shore', 'ship') : ''}
                     ${selection.kind === 'campfire' ? renderGatheringCard(state, !!this.hooks.report, this.gatheringChoice) : ''}</div>`;
             }
         }
@@ -421,6 +423,7 @@ export class FjordInterface {
         const state = this.state;
         const home = this.household();
         switch (action) {
+            case 'merchant': this.hooks.trade?.(); return true;
             case 'camera-home': this.close(false); this.hooks.home?.(); return true;
             case 'expand-card': this.expanded = true; break;
             case 'collapse-card': this.expanded = false; break;
@@ -756,6 +759,7 @@ export class FjordInterface {
                     .filter(ship => ship.salvagedWinter === null)
                     .map(ship => ({ id: ship.id, label: ship.id, detail: 'Longship' }));
             const html = `${this.hooks.home ? button('camera-home', 'View settlement', 'home') : ''}
+                ${state.trade && this.hooks.trade ? button('merchant', state.trade.visit ? 'Visiting merchant · View offers' : 'Trade at the shore', 'ship') : ''}
                 <div class="fjord-tabs">${Object.entries(kinds).map(([kind, label]) => button('directory', label, kind === 'persona' ? 'people' : kind === 'cattle' ? 'cattle' : kind === 'longship' ? 'ship' : 'home', `data-kind="${kind}" aria-pressed="${kind === this.directory}"`)).join('')}</div>
                 <label class="fjord-search-label">Find an identity<input id="fjord-search" type="search" value="${esc(this.search)}" placeholder="Name or identifier"></label>
                 ${this.directory === 'cattle' ? renderLivestockBreeding(state) : ''}
