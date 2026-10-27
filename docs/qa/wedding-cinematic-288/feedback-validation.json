@@ -1,0 +1,81 @@
+{
+  "date": "2026-10-27",
+  "implementationRevision": "efe6ad912d9b18a59f65627aac0dafcf9d8ec428",
+  "targeted": {
+    "command": "node --test --test-concurrency=2 [wedding*, cultural*, fjord-audio*, audio-controls, living-fjord, resident-passing].test.mjs",
+    "tests": 187,
+    "passed": 187,
+    "failed": 0,
+    "skipped": 0,
+    "logSHA256": "295e2fc63af0011825e047a958bd8300745c851506340bf2fe67245c7214c093"
+  },
+  "additionalReleaseCheck": {
+    "command": "node --test --test-name-pattern='shared hand' tests/wedding-ensemble.test.mjs",
+    "passed": 1,
+    "failed": 0,
+    "note": "Adds full couple bone-rotation restoration assertion after the 187-test run.",
+    "logSHA256": "669447ccc188a993ed57c9e0d744313656ea24e466416550c4eb3a2168a8899d"
+  },
+  "typecheck": {
+    "command": "node node_modules/typescript/bin/tsc --noEmit",
+    "passed": true
+  },
+  "manifestSHA256": "9d434b4ba30e4756747cd6855c64acc31a07d3d39f6446c520975f09d69b3b05",
+  "sourceSHA256": {
+    "src/audio/AudioControls.ts": "b1ebcc879c473ee4e00607b7820aa4aac3a2a595d3a4a91d0cf9ead3a292c4f5",
+    "src/audio/FjordAudio.ts": "7170217f485058b0defe6afac95138a26a10b82f0fd00a5d316344eac221f71d",
+    "src/audio/ForegroundTrack.ts": "39672a3d73deafda1a3c0366f0585cd0217dbf7301d71411a340a48f6be45e9e",
+    "src/fjord-play/WeddingEnsemble.ts": "d06c5c0b28dc708a3892ac020b62abf18320614043eab4eb3b2b4f36be6df8a3",
+    "src/fjord-play/WeddingCamera.ts": "db4a82a37a3a1494a8047c15e0c189ff69f60cf595f826f7859131d8c29b3991",
+    "src/fjord-play/WeddingCast.ts": "505a7ad646e16e278ff23cc74bfed8587bdac9142051b7af53e3b954989af961",
+    "src/fjord-play/LivingWorldController.ts": "832ab9195d73c5e1da62af334ba00b1ffe3c742ddf8afafaab7decb4b5e2f762",
+    "src/fjord-play/FjordScene.ts": "0010bd0d81ab35083fc88631bbf421a7a9887fec45f4dd66bda59c45762d4a7c",
+    "src/fjord-play/FjordPlay.ts": "8066504bac3918c13931b8a85c5c84ddba16d43859a0fad320b95795d7cb84f2",
+    "src/fjord-play/CulturalCeremonyVisuals.ts": "538517efc7e98b88f659e7815698a565d475bd9b5401c61ba811355035bd0251",
+    "scripts/prepare-wedding-assets.mjs": "399e7ff26191b84fb5553d66c32d92b4023ab2581c1009000e8e0f67a4892323"
+  },
+  "browser": {
+    "implementationRevision": "efe6ad912d9b18a59f65627aac0dafcf9d8ec428",
+    "normalGestureRestoredSavedSound": true,
+    "enableSoundClicks": 0,
+    "playMusicClicks": 0,
+    "nativeMusicState": "playing",
+    "observedSeconds": 8.038791,
+    "duration": 30.040792,
+    "actors": 6,
+    "instruments": 3,
+    "accessories": 2,
+    "sharedTemplates": 5,
+    "overheadNameBoards": 0,
+    "maximumGripErrorAtPlayback": 0.06080362582708192,
+    "unavailableAssets": [],
+    "skip": {
+      "actors": 0,
+      "instruments": 0,
+      "accessories": 0,
+      "music": null,
+      "controls": 0,
+      "manualClock": "paused",
+      "cameraPosition": [
+        96,
+        32.73252868652344,
+        -28
+      ]
+    },
+    "physicalDeviceListeningVerified": false
+  },
+  "ownerReview": "Owner reported earlier version overall good; new lower camera/hand/accessory and saved-sound refinements await focused device review.",
+  "baseline": "Complete repository suite results remain attributed to 43e0f2e in validation.json; not claimed as an exact-head rerun.",
+  "build": {
+    "command": "pnpm build",
+    "passed": true,
+    "logSHA256": "cd7597cafcf38723178c4e8cc1a5249410064ff8391432ffbb4134ae9defd7d8",
+    "note": "Public assets, TypeScript and Vite passed. Existing chunk-size advisory remains."
+  },
+  "artifactsSHA256": {
+    "desktop-feedback.png": "6f3ee3a0f43623e31b1024a4ba3d113cd9337ced16bc26f1417d1643a75c7fd3",
+    "desktop-feedback-close.png": "f2ec0f4a1aef10992d68f0f751e61f01cb39ac801d86e37767f8ffbbfc119755",
+    "browser-feedback-playing.json": "bbff0808a1cda045e917051296e78785e699cad2d99b41088704a86afebb546e",
+    "browser-feedback-skip.json": "ddc5b2e6ffcd570d967fd32ffb1551a1d8aa3c142d8925c6ec509124d931a7c5"
+  }
+}

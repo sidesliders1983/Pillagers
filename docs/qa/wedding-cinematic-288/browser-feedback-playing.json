@@ -1,0 +1,13 @@
+{
+  "audio": "{\"foreground\":{\"state\":\"playing\",\"seconds\":8.038791,\"duration\":30.040792},\"foregroundDucking\":true,\"enabled\":true,\"hidden\":false,\"state\":\"running\",\"playing\":1,\"retiring\":0,\"physical\":1,\"pending\":0,\"decodes\":0,\"highVoices\":4,\"inflightClients\":0,\"highPhysical\":4,\"buffers\":6,\"downloadBytes\":2112132,\"startedCues\":{\"sea-waves\":3,\"wind-summer\":1,\"cow\":2,\"campfire\":2,\"gull\":2},\"requestedCues\":{\"sea-waves\":3,\"wind-summer\":597,\"cow\":2,\"campfire\":2,\"gull\":2},\"selectionScheduling\":{\"samples\":512,\"p50Ms\":0.10000000149011612,\"p95Ms\":0.30000000447034836,\"p99Ms\":0.5},\"decodeInvocation\":{\"samples\":6,\"p50Ms\":0.09999999403953552,\"p95Ms\":1.3999999985098839,\"p99Ms\":1.3999999985098839},\"decodeWall\":{\"samples\":6,\"p50Ms\":13.800000004470348,\"p95Ms\":69.29999999701977,\"p99Ms\":69.29999999701977},\"decodedBytes\":8446656,\"failure\":\"\"}",
+  "camera": "{\"world\":[-0.24253891005188688,1.3877787807814457e-17,-0.9701416788855339,0,-0.20310067020849998,0.9778404399066988,0.050775898258247534,0,0.9486437660532538,0.20935155619931223,-0.23716435449962825,0,77.73961965280444,3.7350141907756695,-2.677560289103418,1],\"projection\":[1.3579951288348662,0,0,0,0,2.4142135623730954,0,0,0,0,-1.0000833368057,-1,0,0,-0.20000833368057003,0]}",
+  "clock": "Pause simulation",
+  "culture": "{\"id\":\"event-55\",\"sequence\":1,\"occasion\":\"wedding\",\"spouseIds\":[\"founder-1\",\"founder-6\"],\"phase\":\"gathering\",\"phaseElapsedSeconds\":8.065699999995529,\"position\":{\"x\":68,\"y\":1.7325286865234375,\"z\":4,\"rotation\":0,\"scale\":2},\"stagedParticipants\":6,\"participantKeys\":[\"persona:founder-1\",\"persona:founder-6\",\"persona:founder-10\",\"persona:founder-2\",\"persona:founder-3\",\"persona:founder-4\"],\"visible\":true,\"wedding\":{\"duration\":30.040792,\"elapsed\":8.065699999995529,\"rotation\":5.497787143782138,\"roles\":[{\"id\":\"founder-1\",\"role\":\"couple\"},{\"id\":\"founder-6\",\"role\":\"couple\",\"crown\":true},{\"id\":\"founder-10\",\"role\":\"officiant\"},{\"id\":\"founder-2\",\"role\":\"musician\",\"instrument\":\"wedding-lyre\"},{\"id\":\"founder-3\",\"role\":\"musician\",\"instrument\":\"wedding-flute\"},{\"id\":\"founder-4\",\"role\":\"musician\",\"instrument\":\"wedding-frame-drum\"}]}}",
+  "labels": [
+    {
+      "children": 0,
+      "hidden": true
+    }
+  ],
+  "wedding": "{\"active\":true,\"camera\":true,\"actors\":6,\"instruments\":3,\"accessories\":2,\"templates\":5,\"maximumGripError\":0.06080362582708192,\"unavailable\":[],\"music\":{\"state\":\"playing\",\"seconds\":8.038791,\"duration\":30.040792}}"
+}

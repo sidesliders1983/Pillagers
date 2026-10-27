@@ -40,7 +40,7 @@ The accepted Core receipt remains the only authority: 3 Food per canonical atten
 
 One transient director owns the saved camera/input, UI and foreground audio lease. Normal finish, Skip/Escape, selecting another HUD task, backgrounding, context loss, world replacement and disposal release it. Pause keeps the current scene still and suspends music without changing manual clock state. Mute and existing master/world preferences apply. Deferred/failed assets use an honest pose fallback; disposed late downloads cannot restore templates.
 
-A coherent arrangement is selected from eight fixed orientations using the current known-ground/body authorities. Initial routes and up to two delayed stall repairs retain the existing 2,000-node cap. Wedding routes retain the existing 1 m grid. A failed preferred endpoint gets at most one finer retry; stalled repairs may also use 0.5 m spacing. Before movement, at most eight successive route points may be joined only through the existing terrain/body segment checks, avoiding braking at every sampled point; ordinary ceremonies and navigation retain their existing behavior. No per-frame unbounded route search is introduced. Residents physically run out and follow retained trails back. Unavailable actors or an impossible approach end only presentation; they never refund or duplicate the accepted wedding.
+A coherent arrangement is selected from eight fixed orientations using the current known-ground/body authorities. Initial routes and up to two delayed stall repairs retain the existing 2,000-node cap. Wedding routes retain the existing 1 m grid. A failed preferred endpoint gets at most one finer retry; stalled repairs may also use 0.5 m spacing. Before movement, at most ten successive route points may be joined only through the existing terrain/body segment checks, avoiding braking at every sampled point; ordinary ceremonies and navigation retain their existing behavior. No per-frame unbounded route search is introduced. Residents physically run out and follow retained trails back. Unavailable actors or an impossible approach end only presentation; they never refund or duplicate the accepted wedding.
 
 Desktop production rendering and landscape control layout have been checked. These are not a physical iPhone performance certification. Owner iPhone landscape acceptance remains pending.
 
@@ -67,3 +67,28 @@ The initial fine grid caused needless braking: the warm, running-clock fixture n
 The 1,516-pass complete repository run is the `43e0f2e` baseline, before this focused movement refinement. Targeted wedding/culture/audio and ordinary village/passing regressions are rerun for the refinement. Required GitHub CI must pass the final PR head separately. Production captures and DOM diagnostics are in [browser-final.json](browser-final.json), [landscape-layout.json](landscape-layout.json) and [browser-skip.json](browser-skip.json). Skipping left the manual clock paused, no cinematic DOM, no music, zero actor/prop bindings and the exact original camera.
 
 Final refinement rerun: **161 targeted tests passed** and **17 ordinary village/passing regressions passed**, with no failures or skips. The source and output hashes are in validation.json. The final production capture is a composition/pose check, not a physical iPhone performance claim.
+
+
+## Owner feedback pass, 27 October
+
+The owner tested the earlier delivery and reported it was overall good. This follow-up adds shared hand contact, removes cinematic overhead spouse boards, uses the newly supplied crown and open book, lowers the normal camera shots, starts the soundtrack after arrival and restores saved sound intent through ordinary start/control gestures. Explicit mute and browser activation restrictions remain authoritative. A denied stream still offers Play music.
+
+| Added prop | Original bytes | Runtime bytes | Triangles |
+| --- | ---: | ---: | ---: |
+| wedding_book.glb | 40,805,700 | 338,660 | 3,043 |
+| wedding-flower.glb | 49,358,220 | 358,604 | 2,779 |
+
+Both exports retain their original geometry/normals/UVs, with one 512px colour texture. All five shared templates total about 1.62 MiB on disk and about 5 MiB of base decoded pixels, excluding mipmaps/GPU overhead. No extra bodies, rigs or renderers are added.
+
+The real couple stands 1.04 m apart, still respecting actual body-radius and terrain checks. A reversible native spine/clavicle/arm/hand overlay directs their fingers toward shared contact; tests use actual fingertip endpoints rather than assuming wrist distance equals hand distance. They also reject a deep bow, relocation of feet and bone stretching. The real review couple's distinct DNA is tested together at the beginning, middle and end of the music phrase. The elder's book uses both real native hands; the crown is attached to the female spouse's native Head bone.
+
+The five physical staging cases assemble in 24.7–26.1 s after the close-pair refinement, with all six essential roles present, zero body overlaps and full Core serialization parity against the running control. An optional clapper drops in the warm Standard case. Corridor joining is bounded at ten points, retaining all existing segment/body checks and search caps.
+
+Normal camera shots are 2.0–2.6 m above the fire-ground datum, subject to existing terrain/discovery/building checks; a steep site may require the safe higher fallback. Prior screenshots and test counts above remain records of their original revisions. The revised lower perspective and sound restoration still need an owner device check; browser observations are not a physical iPhone listening/performance claim.
+
+
+Feedback validation: **187 targeted tests passed, zero failures/skips**; an additional native-couple release check passed after adding exact original bone-rotation restoration. Production build passed public-asset validation, TypeScript and Vite. The actual committed implementation efe6ad9 was inspected in the production browser: six residents, three instruments, book and crown, five shared templates, no unavailable assets, no overhead boards. Native music was observed playing at 8.039 s without clicking Enable sound or Play music; ordinary recovery/Continue gestures restored the saved unmuted preference. Skip removed all actor/prop bindings and controls, released the stream and restored the original camera while leaving the clock paused. This verifies native playback state, not a physical device listening test.
+
+![Updated lower perspective, actual hand contact, crown and open book](desktop-feedback-close.png)
+
+[Feedback source/log hashes and observations](feedback-validation.json), [native playback](browser-feedback-playing.json), [Skip cleanup](browser-feedback-skip.json). Earlier captures remain historical. Required final-head CI and focused owner iPhone audio/camera review remain pending.
