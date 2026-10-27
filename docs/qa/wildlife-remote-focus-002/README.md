@@ -69,3 +69,26 @@ configured; source formatting and `git diff --check` are reviewed manually.
 
 Executed targeted regressions: **157 passed, 0 failed, 0 skipped**. Raw logs preserve
 the three intentional failing tracer tests and the successful final run.
+
+
+## Production and native browser checks
+
+Runtime build: `e373f7b238d0cc6ce6e013c5ecdfc8bb301098da`. Public validation
+(628 files), TypeScript and production Vite build passed; the existing bundle-size
+advisory remains. The following evidence-only commit does not alter runtime sources.
+
+The native Fjord scene loaded the shared remote checkpoints through the real start
+menu. The seal focused from 689 m away with 30 local obstacles retained and zero
+budget overflow; its approved call started once while tick 30 stayed unchanged.
+The puffin focused from 690 m away with 24 obstacles retained; its live orbit was
+active immediately before the first native wheel gesture. That first gesture
+cancelled the orbit and zoomed normally from about 6.3 m to 24.2 m while tick 40
+remained unchanged. Native terrain/water clearance remained active.
+
+The real fogged lynx checkpoint opened its factual Clan Book encounter with the
+message “That animal is no longer observable by your clan.” The camera matrix
+before and after the click was exactly identical and tick 115 did not advance.
+Browser proof is read-only public debug DOM data and full native screenshots;
+there was no injected application state or synthetic runtime command. The active
+QA game tab was closed afterward to release its renderer. Physical-device review
+and current-head GitHub CI remain separate gates; no device acceptance is claimed.

@@ -1,0 +1,17 @@
+{
+  "before": {
+    "camera": "{\"world\":[-0.7071067811865475,5.551115123125783e-17,0.7071067811865476,0,0.6953638339306636,0.18148905455287734,0.6953638339306636,0,-0.12833214118547476,0.9833929647284969,-0.12833214118547476,0,-368,122.60597610473634,-368,1],\"projection\":[1.3579951288348662,0,0,0,0,2.4142135623730954,0,0,0,0,-1.0000833368057,-1,0,0,-0.20000833368057003,0]}",
+    "time": "{\"winter\":800,\"tick\":40,\"ticksPerWinter\":1000}"
+  },
+  "focus": {
+    "clearance": "{\"eyeY\":4.515616921651317,\"lift\":0,\"requiredLift\":0,\"samples\":16,\"conservative\":false,\"invalidSamples\":0,\"groundClearance\":1.9999999999999996,\"minimumBoomClearance\":1.0880686961661465,\"nearTargetDistance\":3,\"milliseconds\":0,\"maximumMs\":0.3999999910593033,\"focus\":[125.22839896056382,1.5818852936511716,98.6597231172757],\"requestedEye\":[120.83300981514988,4.515616921651317,94.57553969088833],\"requestedZoom\":6.282915538844621,\"requestedYaw\":-2.319510317211525}",
+    "focus": "{\"reason\":\"started\",\"obstacles\":24,\"limited\":false}",
+    "orbit": "{\"active\":true,\"reason\":\"active\",\"elapsed\":1.670800000011921,\"arcRadians\":2.552544031041707,\"target\":{\"worldId\":\"fjordside-island-v0.3e-r3:168:cffd7da8\",\"speciesId\":\"puffin\",\"wildlifeInstanceId\":\"puffin:land:0\"}}",
+    "time": "{\"winter\":800,\"tick\":40,\"ticksPerWinter\":1000}"
+  },
+  "firstWheel": {
+    "clearance": "{\"eyeY\":12.227542111701329,\"lift\":0,\"requiredLift\":0,\"samples\":35,\"conservative\":false,\"invalidSamples\":0,\"groundClearance\":8.458796935676276,\"minimumBoomClearance\":1.0876422004720876,\"nearTargetDistance\":3,\"milliseconds\":0.10000000894069672,\"maximumMs\":0.3999999910593033,\"focus\":[125.22839896056382,1.5818852936511716,98.6597231172757],\"requestedEye\":[107.80803567959283,12.227542111701329,84.10923428213351],\"requestedZoom\":24.23430708933137,\"requestedYaw\":-2.2666690942985537}",
+    "orbit": "{\"active\":false,\"reason\":\"manual-navigation\",\"elapsed\":0,\"arcRadians\":0}",
+    "time": "{\"winter\":800,\"tick\":40,\"ticksPerWinter\":1000}"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "runtimeCommit": "e373f7b238d0cc6ce6e013c5ecdfc8bb301098da",
+  "baselineCommit": "4147ab932deb11738739a9290045981056e83932",
+  "branch": "codex/wedding-cinematic-288",
+  "sources": [
+    {
+      "path": "src/camera/WildlifeCamera.ts",
+      "bytes": 10214,
+      "sha256": "c3bd2de2d2cdb21b2d9c6cfe754487a702109b6471a19e8a0f4c25cc3167548d",
+      "lfSha256": "7a8bed939ad7d6617579cfcfcca3b683353b22fdf2f0c7c59dc9abef21beb5cd"
+    },
+    {
+      "path": "src/fjord-play/FjordScene.ts",
+      "bytes": 79012,
+      "sha256": "7f5805090d0827cffd0fe57d5198ff39cb8c467f09fc7333fbf03e8e302a0aed",
+      "lfSha256": "d5715e6643ce0ec99896aaf16414285d409c778967d6325475e10138c275bc6d"
+    },
+    {
+      "path": "src/fjord-play/FjordPlay.ts",
+      "bytes": 69398,
+      "sha256": "1c5b9f98997d30a06ad648901dcf2880c1945d0eb46d77f12760cd96f7c4daf4",
+      "lfSha256": "3cf94aad7cd7dfa6df50e7d4f2d0e60f5b256110a2315ac9bd26e92300bfe946"
+    },
+    {
+      "path": "src/wildlife/WildlifeLayer.ts",
+      "bytes": 25866,
+      "sha256": "bd426eb07b43914378286a18dc5c14dafc6976fcc533e72d6fd92e3f4e353915",
+      "lfSha256": "18c73849c0d762b96ef764896a3f2f950d61f95807db9bafa2ca49053f9a0748"
+    },
+    {
+      "path": "tests/wildlife-camera.test.mjs",
+      "bytes": 12264,
+      "sha256": "48971b5060c08815a94f1f138a6b146c1d406fa9521f05f276c5bbd267230156",
+      "lfSha256": "5a738edf96d492edd64f3e90a943ce6371128e1c8cfecdac74a850993c2769dc"
+    },
+    {
+      "path": "tests/wildlife-live-anchor.test.mjs",
+      "bytes": 15660,
+      "sha256": "038289d9c794229471a4f2e537f350aaf4a55ca125a1f940707d7768d8a89d55",
+      "lfSha256": "adb500f8d6a4a0cdb2841f3b6d9c16c24aa3606162d8fd22ea256cc6e3ccdb51"
+    },
+    {
+      "path": "scripts/prepare-wildlife-remote-review.mjs",
+      "bytes": 4329,
+      "sha256": "380e869351603d54f4fdcb6e7d6ceae5b70c15d9e932aff51b4482a791fb646b",
+      "lfSha256": "82c8582fadb03f72ff1afe299363bd8fdde474939a8b76f9ebc79c1d2bc61cc3"
+    }
+  ],
+  "unchangedCanonicalContracts": [
+    {
+      "path": "src/simulation/SimulationCore.ts",
+      "bytes": 30372,
+      "sha256": "cea4eb44f584f66863cf41c0b9838f76d9c835397ac7a4fa76a1f2c1fcc6d599",
+      "lfSha256": "cea4eb44f584f66863cf41c0b9838f76d9c835397ac7a4fa76a1f2c1fcc6d599",
+      "matchesBaselineLf": true
+    },
+    {
+      "path": "src/simulation/WildlifeSightings.ts",
+      "bytes": 18771,
+      "sha256": "dfad4498faf8b7eed43447d6523035e788cfc9f1071d870807f8acea6596154d",
+      "lfSha256": "f08fb0b131a94822525eb96db7f370e100842791eb6b880341f4b7c508c1289f",
+      "matchesBaselineLf": true
+    },
+    {
+      "path": "src/simulation/ClanDiscovery.ts",
+      "bytes": 11789,
+      "sha256": "58652cb642fc82e31f1d0d96f41449bdf324dca54e6a95b1a60e2af6eb9272d6",
+      "lfSha256": "e61ef64e1df2be462035e03f233bccad366deb9b6dc5b02a9a5e98e97d0309a4",
+      "matchesBaselineLf": true
+    },
+    {
+      "path": "src/play/SharedSettlement.ts",
+      "bytes": 12186,
+      "sha256": "a577000fe0bf0e50fd05ec4b9679d55e46ac0628a9521cc27776eb71e5e8a646",
+      "lfSha256": "56e37029981c7ff1315c73a418e46f97be279dcf9ca745407bf9aea7a4878c67",
+      "matchesBaselineLf": true
+    }
+  ]
+}
