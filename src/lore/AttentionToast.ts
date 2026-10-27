@@ -16,7 +16,7 @@ export class AttentionToast {
     private timer?: number;
     private disposed = false;
 
-    constructor(private root: HTMLElement, private owner: SharedSettlement, private openActivity: () => void) {
+    constructor(private root: HTMLElement, private owner: SharedSettlement, private openActivity: (eventId?: string) => void) {
         root.innerHTML = '<span class="attention-toast-mark"></span><span class="attention-toast-copy">' +
             '<small></small><span class="attention-toast-text" id="fjord-notification-message" role="status" aria-live="polite" aria-atomic="true"></span></span>';
         root.setAttribute('aria-label', 'Open Activity Center');
@@ -79,6 +79,9 @@ export class AttentionToast {
         this.current = this.pending.shift()!;
         const notice = this.current;
         this.root.hidden = false;
+        const wildlife = this.current.eventId &&
+            this.owner.fjord.attentionSource(this.current.eventId)?.canonicalType === 'WildlifeSighted';
+        this.root.setAttribute('aria-label', wildlife ? 'View wildlife sighting' : 'Open Activity Center');
         this.root.querySelector('.attention-toast-mark')!.innerHTML = icon(notice.glyph);
         this.root.querySelector('small')!.textContent = notice.label;
         this.root.querySelector('.attention-toast-text')!.textContent = notice.text;
@@ -101,8 +104,9 @@ export class AttentionToast {
             this.baseline();
             return;
         }
+        const eventId = this.current.eventId;
         this.clear();
-        this.openActivity();
+        this.openActivity(eventId);
     };
 
     private dismiss() {

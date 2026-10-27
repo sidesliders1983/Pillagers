@@ -141,3 +141,32 @@ Repeat sightings remain ambient. No wildlife-specific timer, badge or read store
 is introduced. The live QA checkpoint is captured before the actual first sighting;
 pressing Play advances that real route and generates a new event, not a scripted
 or replayed example. Saved unread/read checkpoints intentionally do not replay cards.
+
+## View-only sighting focus (#292)
+
+`WildlifeLayer.liveAnchor` returns detached current render coordinates and transformed
+native asset bounds only for the exact observable instance in its canonical world.
+It reuses fog/frustum and marine surfacing rules; the final dive frames are not an
+eligible sighting. It never moves or reveals animals.
+
+The existing RTS controller exposes navigation intent before native camera changes
+and a read-only preview of its ordinary terrain, water, near-plane and world-bounds
+clearance. A single transient WildlifeCamera session uses these seams. Entry lasts
+1.4 seconds; a full safe orbit takes 10 seconds. Reduced motion uses a 2.8-second
+no-spin focus. Following stops beyond 12 metres from the initial animal pivot.
+
+A bounded local snapshot of real trees, rocks, boats and rendered settlement
+structures checks both camera position and line of sight. Unsafe sectors truncate
+the orbit; unavailable/obstructed views end safely. The snapshot retains at most
+256 local bounds, scanning at most 8192 nodes/instances; exceeding that budget
+refuses the focus. No second fauna population, renderer, per-frame whole-world scan
+or persisted terrain values are introduced.
+
+Core, sightings, resources, weather, clock intent and sound preferences remain
+unchanged. Only ordinary read metadata changes on click. An active cinematic uses
+the pre-focus manual camera during ordinary checkpoint capture; the orbit session
+itself is never serialized. Ending keeps the current native view. Backgrounding,
+scene/world replacement, context loss, quality/viewport changes, another task and
+disposal cancel the session and release its caption/listeners.
+
+[Reproducible fixtures and browser evidence](qa/wildlife-cinematic-292/README.md).

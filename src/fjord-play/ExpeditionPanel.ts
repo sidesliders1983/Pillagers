@@ -435,6 +435,14 @@ export class ExpeditionPanel {
             Stranded: 'This group cannot travel or return. Its expedition is stranded.' })[mission.status];
     }
 
+    /** Presentation-only focus hides the toolbar until the player explicitly opens a group again. */
+    collapseControls() {
+        this.clearTarget();
+        for (const mission of Object.values(this.session.readSnapshot().world?.spatial?.missions ?? {}))
+            if (mission.status !== 'Returned') this.hiddenGroups.add(mission.groupId);
+        this.toolbarExpanded = false;
+        this.refresh();
+    }
     openGroup(groupId: string) {
         if (!this.session.readSnapshot().world?.groups[groupId]) return;
         this.groupId = groupId;

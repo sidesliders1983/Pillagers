@@ -1,0 +1,40 @@
+✔ a compact message opens Activity Center with one click, closes immediately and preserves Core, clock and unread state (1105.3792ms)
+✔ passive messages expire even under the pointer; reload, replacement and hidden periods never replay (946.7051ms)
+✔ real multi-year births condense into a bounded catch-up invitation, retaining every unread source (1494.6204ms)
+✔ physical homeward travel and actual return have separate, concise canonical messages (635.1059ms)
+✔ a newly empty Food stock is announced, but expiration never acknowledges its persistent alert (492.7411ms)
+✔ the first wheel navigation intent hands off before the same native zoom, without restoring a prior view (313.4821ms)
+✔ native pan yields presentation ownership on its first meaningful input (25.8888ms)
+✔ native rotate yields presentation ownership on its first meaningful input (42.9005ms)
+✔ native pinch yields presentation ownership on its first meaningful input (37.8825ms)
+✔ native swipe yields presentation ownership on its first meaningful input (30.8883ms)
+✔ native keyboard yields presentation ownership on its first meaningful input (30.0947ms)
+✔ native escape yields presentation ownership on its first meaningful input (33.6629ms)
+✔ native home yields presentation ownership on its first meaningful input (17.5701ms)
+✔ native focus yields presentation ownership on its first meaningful input (25.2391ms)
+✔ UI scrolling and input editing do not count as camera input; authored presentation frames do not cancel themselves (45.3833ms)
+✔ camera view preview applies existing water/terrain clearance and world bounds without moving the live camera (59.4466ms)
+✔ local orbit clearance includes the actual transformed tree instances and rejects blocked eye-to-animal views (5.0661ms)
+✔ current visible house, tent and longship roots block the orbit without including hidden structures (12.1305ms)
+✔ new, same-founders restart and ordinary Continue consume no time until a deliberate playable Play (4355.9446ms)
+✔ story, invitation, slow scene work and warm recovery cannot queue playback or first-year advancement (590.8534ms)
+✔ intentional internal handoff preserves pacing only when no newer pause, loading or lifecycle intent supersedes it (1105.8582ms)
+✔ a running campaign can always be paused during scene work, invalidating queued elapsed time (537.7597ms)
+✔ real Clan Book DOM supports explicit adoption, Attention, witnesses, groups, persistence and stale links (3001.8564ms)
+✔ a short orbit uses the current live anchor and completes at its last ordinary controllable view without restoring the start (369.5289ms)
+✔ the first real wheel event ends an active orbit and zooms from that view with no later restore (59.6364ms)
+✔ reduced motion makes one short static focus without spinning, while an already paused world need not advance (35.484ms)
+✔ an obstruction allows a contiguous partial arc, and moving beyond the bounded local focus ends without a chase (28.0516ms)
+✔ unavailable exact identities and unsafe views never move the camera; replacement and disposal release one session (21.1037ms)
+✔ an in-progress orbit supplies the unchanged pre-cinematic camera for ordinary save capture (28.2661ms)
+✔ a surfaced marine body is framed at the waterline rather than aiming below the sea (15.0991ms)
+✔ a non-blocking wildlife caption keeps an explicit record action and manual Stop, then removes its listeners and DOM (347.0886ms)
+✔ a focus request uses only the selected actual player sighting and its bound physical world, leaving Core bytes unchanged (1561.4669ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 17068.626

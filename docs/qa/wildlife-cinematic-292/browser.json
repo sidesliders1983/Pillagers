@@ -1,0 +1,155 @@
+{
+  "recordedAt": "2026-10-27T12:28:29.543Z",
+  "browser": "Desktop in-app browser; software GPU; not physical-device approval",
+  "oneClick": {
+    "buttons": [
+      {
+        "label": "Open wildlife in Clan Book",
+        "rect": {
+          "bottom": 627,
+          "height": 44,
+          "left": 25,
+          "right": 198.1875,
+          "top": 583,
+          "width": 173.1875,
+          "x": 25,
+          "y": 583
+        }
+      },
+      {
+        "label": "Stop camera",
+        "rect": {
+          "bottom": 627,
+          "height": 44,
+          "left": 204.1875,
+          "right": 297.65625,
+          "top": 583,
+          "width": 93.46875,
+          "x": 204.1875,
+          "y": 583
+        }
+      }
+    ],
+    "camera": "{\"world\":[1,0,0,0,0,0.9419444729132624,-0.3357686851809682,0,0,0.3357686851809682,0.9419444729132624,0,85.55123616594864,4.052536611140939,123.61955278172617,1],\"projection\":[1.3579951288348662,0,0,0,0,2.4142135623730954,0,0,0,0,-1.0000833368057,-1,0,0,-0.20000833368057003,0]}",
+    "caption": {
+      "bottom": 638,
+      "height": 119.484375,
+      "left": 12,
+      "right": 310.65625,
+      "top": 518.515625,
+      "width": 298.65625,
+      "x": 12,
+      "y": 518.515625
+    },
+    "controlsVisible": false,
+    "wildlife": "{\"active\":false,\"reason\":\"another-task\",\"elapsed\":0,\"arcRadians\":0}"
+  },
+  "naturalCompletion": {
+    "camera": "{\"world\":[-0.38268343236508917,0,-0.923879532511287,0,-0.3553382817351106,0.9230769230769229,0.14718593552503448,0,0.8528118761642647,0.3846153846153849,-0.3532462452600824,0,91.09451336101635,3.034665564746624,111.93054869955459,1],\"projection\":[1.3579951288348662,0,0,0,0,2.4142135623730954,0,0,0,0,-1.0000833368057,-1,0,0,-0.20000833368057003,0]}",
+    "controlsVisible": false,
+    "runLabel": "Start simulation",
+    "wildlife": "{\"active\":false,\"reason\":\"complete\",\"elapsed\":0,\"arcRadians\":0}"
+  },
+  "firstNativeWheel": {
+    "before": {
+      "camera": "{\"world\":[-0.38268343236508917,0,-0.923879532511287,0,-0.3553382817351106,0.9230769230769229,0.14718593552503448,0,0.8528118761642647,0.3846153846153849,-0.3532462452600824,0,91.09451336101635,3.034665564746624,111.93054869955459,1],\"projection\":[1.3579951288348662,0,0,0,0,2.4142135623730954,0,0,0,0,-1.0000833368057,-1,0,0,-0.20000833368057003,0]}",
+      "clearance": "{\"eyeY\":3.034665564746624,\"lift\":0,\"requiredLift\":0,\"samples\":17,\"conservative\":false,\"invalidSamples\":0,\"groundClearance\":3.001174737106895,\"minimumBoomClearance\":1.655663800192893,\"nearTargetDistance\":3,\"milliseconds\":0.10000000894069672,\"maximumMs\":1.1000000089406967,\"focus\":[85.55123616594864,0.5346655647466243,114.22664929374513],\"requestedEye\":[91.09451336101635,3.034665564746624,111.93054869955459],\"requestedZoom\":6.114685644493378,\"requestedYaw\":1.9634954084936203}",
+      "wildlife": "{\"active\":true,\"reason\":\"active\",\"elapsed\":0.6545000000000001,\"arcRadians\":0,\"target\":{\"worldId\":\"fjordside-island-v0.3e-r3:168:cffd7da8\",\"speciesId\":\"great-black-backed-gull\",\"wildlifeInstanceId\":\"great-black-backed-gull:grounded:0\"}}"
+    },
+    "after": {
+      "camera": "{\"world\":[-0.3826834323650887,0,-0.923879532511287,0,-0.3553382817351107,0.9230769230769229,0.14718593552503434,0,0.8528118761642647,0.3846153846153849,-0.35324624526008197,0,107.39443877069468,10.385878951739805,105.17889852919602,1],\"projection\":[1.3579951288348662,0,0,0,0,2.4142135623730954,0,0,0,0,-1.0000833368057,-1,0,0,-0.20000833368057003,0]}",
+      "caption": false,
+      "wildlife": "{\"active\":false,\"reason\":\"manual-navigation\",\"elapsed\":0,\"arcRadians\":0}"
+    }
+  },
+  "landscape": {
+    "buttons": [
+      {
+        "label": "Open wildlife in Clan Book",
+        "rect": {
+          "bottom": 300,
+          "height": 44,
+          "left": 23,
+          "right": 184.546875,
+          "top": 256,
+          "width": 161.546875,
+          "x": 23,
+          "y": 256
+        }
+      },
+      {
+        "label": "Stop camera",
+        "rect": {
+          "bottom": 300,
+          "height": 44,
+          "left": 190.546875,
+          "right": 278.515625,
+          "top": 256,
+          "width": 87.96875,
+          "x": 190.546875,
+          "y": 256
+        }
+      }
+    ],
+    "caption": {
+      "bottom": 308,
+      "height": 89.09375,
+      "left": 12,
+      "right": 289.515625,
+      "top": 218.90625,
+      "width": 277.515625,
+      "x": 12,
+      "y": 218.90625
+    },
+    "viewport": [
+      844,
+      390
+    ],
+    "wildlife": "{\"active\":true,\"reason\":\"active\",\"elapsed\":0.9458999999910593,\"arcRadians\":1.9634954084936207,\"target\":{\"worldId\":\"fjordside-island-v0.3e-r3:168:cffd7da8\",\"speciesId\":\"great-black-backed-gull\",\"wildlifeInstanceId\":\"great-black-backed-gull:grounded:0\"}}"
+  },
+  "escape": {
+    "caption": false,
+    "wildlife": "{\"active\":false,\"reason\":\"manual-navigation\",\"elapsed\":0,\"arcRadians\":0}"
+  },
+  "canonicalExport": {
+    "deepEqualToLiveFixture": true,
+    "sha256": "47d28fde530c1387ccb6077b0fd7578f235dda8a9d6591541fd95c52aad118a1",
+    "time": {
+      "winter": 800,
+      "tick": 15
+    },
+    "eventCount": 10,
+    "rngState": 32
+  },
+  "notes": [
+    "Orbit diagnostics are throttled and may display the previous frame immediately after a DOM action. Caption removal and the subsequent settled sample verify cancellation.",
+    "A forest material duplicate shader declaration was reported during scene loading. The atmosphere shader source is unchanged by #292."
+  ],
+  "finalBuildClock": {
+    "caption": true,
+    "runDisabled": false,
+    "runLabel": "Start simulation",
+    "time": "{\"winter\":800,\"tick\":15,\"ticksPerWinter\":1000}",
+    "wildlife": "{\"active\":true,\"reason\":\"active\",\"elapsed\":0.6384000000059604,\"arcRadians\":1.9634954084936207,\"target\":{\"worldId\":\"fjordside-island-v0.3e-r3:168:cffd7da8\",\"speciesId\":\"great-black-backed-gull\",\"wildlifeInstanceId\":\"great-black-backed-gull:grounded:0\"}}"
+  },
+  "finalBuildEscape": {
+    "caption": false,
+    "wildlife": "{\"active\":false,\"reason\":\"manual-navigation\",\"elapsed\":0,\"arcRadians\":0}"
+  },
+  "historical": {
+    "before": {
+      "camera": "{\"world\":[-1,0,-2.3684757858670006e-16,0,0,1,0,0,2.3684757858670006e-16,0,-1,0,85.55123616594865,6.234665564746624,134.22664929374514,1],\"projection\":[1.1155726176842502,0,0,0,0,2.4142135623730954,0,0,0,0,-1.0000833368057,-1,0,0,-0.20000833368057003,0]}",
+      "time": "{\"winter\":801,\"tick\":15,\"ticksPerWinter\":1000}"
+    },
+    "after": {
+      "bookHidden": false,
+      "bookText": "Clan BookCloseStoryFamily TreeWildlifeNew story availableChapterFactual overviewCreatures of the FjordAll recorded speciesGreat black-backed gull · SightedFirst sighting: Year 800 · tick 15 · Coast watch1 recorded encounter.Year 800 · tick 15 · First clan sightingExpedition: Coast watch Open current groupcoast · recorded location 86, 114Expedition witnessesRecorded group participants; no individual spotter was assigned.MaelColuimKauppiSource recordevent-9 · wildlife-1Wildlife instance: great-black-backed-gull:grounded:0Witness IDs: founder-1, founder-2Newer encounters1–1 of 1Older encounters",
+      "camera": "{\"world\":[-1,0,-2.3684757858670006e-16,0,0,1,0,0,2.3684757858670006e-16,0,-1,0,85.55123616594865,6.234665564746624,134.22664929374514,1],\"projection\":[1.1155726176842502,0,0,0,0,2.4142135623730954,0,0,0,0,-1.0000833368057,-1,0,0,-0.20000833368057003,0]}",
+      "caption": false,
+      "notice": "That animal is no longer in view.",
+      "time": "{\"winter\":801,\"tick\":15,\"ticksPerWinter\":1000}",
+      "wildlife": "{\"active\":false,\"reason\":\"replaced\",\"elapsed\":0,\"arcRadians\":0}"
+    },
+    "cameraUnchanged": true
+  }
+}

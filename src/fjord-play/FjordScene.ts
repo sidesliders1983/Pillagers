@@ -1,3 +1,7 @@
+import { WildlifeCamera, wildlifeCameraPivot } from '../camera/WildlifeCamera';
+import { CameraObstacles } from '../camera/CameraObstacles';
+import { WildlifeCinematicView } from './WildlifeCinematicView';
+import { resolveWildlifeFocus } from '../lore/AttentionNavigation';
 import { Box3 } from 'three';
 import { WeddingEnsemble } from './WeddingEnsemble';
 import { WeddingCamera } from './WeddingCamera';
@@ -76,6 +80,8 @@ export function createFjordScene(options: {
     labels: { selection: SelectionLabels; production: ProductionLabels };
     host: FjordSceneHost;
     restoredCamera?: { position: number[]; target: number[] };
+    openWildlifeRecord?: (eventId: string) => void;
+    notify?: (message: string) => void;
 }) {
     const { shared, canvas, labels, host } = options;
     const diagnostics = options.diagnostics;
@@ -144,6 +150,7 @@ export function createFjordScene(options: {
     let rivalScene: RivalScene | undefined;
     let liveMarkers: ReturnType<typeof shared.selectionPresentation> = [];
     let sceneEntities: readonly FjordEntity[] = [];
+    let staticSceneSignature = '';
     let syncScene: (() => Promise<void>) | undefined;
     let sceneWork: Promise<void> | undefined;
 
@@ -154,6 +161,7 @@ export function createFjordScene(options: {
         depthTest: false, depthWrite: false, toneMapped: false, fog: false,
         transparent: true, opacity: 1
     });
+    let targetRequested = false;
     const targetMarker = new Mesh(targetGeometry, targetMaterial);
     targetMarker.rotation.x = -Math.PI / 2;
     targetMarker.renderOrder = 1000; targetMarker.visible = false;
@@ -175,6 +183,36 @@ export function createFjordScene(options: {
             (!knownTerrain || discoveryAt(knownTerrain, point.x, point.z) === 'visible') &&
             !weddingObstacles.some(box => box.containsPoint(new Vector3(point.x, point.y, point.z)));
     });
+    let wildlifeView: WildlifeCinematicView | undefined;
+    let wildlifeObstacles: CameraObstacles | undefined;
+    const queryWildlife = (target: Parameters<WildlifeLayer['liveAnchor']>[0]) => {
+        if (inactive() || shared.transferring || document.hidden || world?.blueprint !== campaign.blueprint ||
+            session.readSnapshot().wildlife?.worldId !== target.worldId) return;
+        const anchor = wildlife?.liveAnchor(target);
+        return anchor && (!knownTerrain || discoveryAt(knownTerrain, anchor.position[0], anchor.position[2]) === 'visible')
+            ? anchor : undefined;
+    };
+    const wildlifeCamera = new WildlifeCamera(camera, controller, queryWildlife, view =>
+        !!wildlifeObstacles?.allows(view) && (!knownTerrain ||
+            discoveryAt(knownTerrain, view.position[0], view.position[2]) !== 'unknown' &&
+            discoveryAt(knownTerrain, view.target[0], view.target[2]) !== 'unknown'));
+    wildlifeCamera.onEnd = reason => {
+        wildlifeView?.dispose();
+        wildlifeView = undefined;
+        wildlifeObstacles = undefined;
+        if (reason === 'animal-unavailable' || reason === 'animal-moved-away')
+            options.notify?.('The animal has moved out of view.');
+    };
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) wildlifeCamera.cancel('hidden');
+    }, { signal: bindings.signal });
+    window.addEventListener('pagehide', () => wildlifeCamera.cancel('page-hidden'), { signal: bindings.signal });
+    canvas.addEventListener('webglcontextlost', () => wildlifeCamera.cancel('context-lost'), { signal: bindings.signal });
+    document.addEventListener('click', event => {
+        const target = event.target as Element | null;
+        if (target && target !== canvas && !target.closest('.wildlife-cinematic, #fjord-run'))
+            wildlifeCamera.cancel('another-task');
+    }, { capture: true, signal: bindings.signal });
     const islandMap = new IslandMap(document.querySelector('#fjord-play')!, {
         focus: point => controller.focusAt(point),
     });
@@ -187,6 +225,7 @@ export function createFjordScene(options: {
     let precipitationEffect: PrecipitationEffect | undefined;
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
     const configureEffects = () => {
+        wildlifeCamera.cancel('effects-changed');
         const quality = document.querySelector<HTMLSelectElement>('#fjord-effects')!.value as EffectQuality;
         campfireEffect?.configure(quality, reducedMotion.matches);
         precipitationEffect?.configure(quality, reducedMotion.matches);
@@ -316,6 +355,7 @@ export function createFjordScene(options: {
     const rebuildWorld = async (): Promise<void> => {
         if (inactive()) return;
         stopWedding();
+        wildlifeCamera.cancel('world-replaced');
         culture?.dispose();
         ceremonyVisuals?.dispose();
         ceremonyVisuals = undefined;
@@ -558,6 +598,7 @@ export function createFjordScene(options: {
                     if (state.discovery && discoveryFog) {
                         knownTerrain = inspectClanDiscovery(state.discovery, state.clan.id);
                         if (world!.setDiscovery(knownTerrain)) {
+                            wildlifeCamera.cancel('scenery-changed');
                             lighting!.includeWorldShadowBounds(world!.root);
                             weatherTint!.refreshFoliage(world!.root);
                             atmosphere?.bind(world!.root);
@@ -620,6 +661,13 @@ export function createFjordScene(options: {
                         });
                     }
                     const observedEntities = [...view.entities, ...view.rival.entities];
+                    const nextStaticSignature = JSON.stringify(observedEntities
+                        .filter(entity => ['building', 'household', 'longship'].includes(entity.kind))
+                        .map(entity => [entity.selectionKey, entity.asset, entity.transform, entity.plot]));
+                    if (nextStaticSignature !== staticSceneSignature) {
+                        wildlifeCamera.cancel('structures-changed');
+                        staticSceneSignature = nextStaticSignature;
+                    }
                     const observedGround = {
                         plots: [...view.ground.plots, ...view.rival.ground.plots],
                         paths: [...view.ground.paths, ...view.rival.ground.paths]
@@ -747,6 +795,7 @@ export function createFjordScene(options: {
         if (inactive() || shared.transferring) return;
         host.loading?.complete('characters');
         document.querySelector('#fjord-quality')!.addEventListener('change', event => {
+            wildlifeCamera.cancel('quality-changed');
             const quality = (event.target as HTMLSelectElement).value as PresentationQuality;
             world!.setQuality(quality);
             dressing!.setQuality(quality);
@@ -758,6 +807,7 @@ export function createFjordScene(options: {
         }, { signal: bindings.signal });
 
         const resize = () => {
+            wildlifeCamera.cancel('viewport-changed');
             const rect = canvas.getBoundingClientRect();
             renderer.setSize(rect.width, rect.height, false);
             camera.aspect = rect.width / Math.max(1, rect.height);
@@ -832,6 +882,9 @@ export function createFjordScene(options: {
         wildlife?.setHumans([...layer!.humanPositions(), ...(rivalScene?.humanPositions() ?? [])]);
         wildlife?.useCanonical(session.readSnapshot().wildlife, host.tickIntervalSeconds);
         wildlife?.advance(motionDelta, running, camera);
+        wildlifeCamera.advance(delta);
+        targetMarker.visible = targetRequested && !wildlifeCamera.active;
+        camera.updateMatrixWorld();
         if (settlementAudio && audioWorld && settlementSounds) {
             const visible = (x: number, z: number) =>
                 !knownTerrain || discoveryAt(knownTerrain, x, z) === 'visible';
@@ -895,6 +948,8 @@ export function createFjordScene(options: {
             if (import.meta.env.DEV && query.has('debugWildlife')) {
                 canvas.dataset.wildlife = JSON.stringify(wildlife?.inspect());
             }
+            if (query.has('debugPerf') || query.has('debugWildlife'))
+                canvas.dataset.wildlifeCamera = JSON.stringify(wildlifeCamera.inspect());
             canvas.dataset.stability = JSON.stringify({
                 ...motion!.inspectMetrics(), ...models!.inspectResources(),
                 lastFrameMs, drawCalls: renderer.info.render.calls,
@@ -1017,6 +1072,7 @@ export function createFjordScene(options: {
         bindings.abort();
         stopWedding();
         weddingEnsemble.dispose();
+        wildlifeCamera.dispose();
         culture?.dispose();
         ceremonyVisuals?.dispose();
         ceremonyVisuals = undefined;
@@ -1060,6 +1116,43 @@ export function createFjordScene(options: {
         replace: () => inactive() ? Promise.resolve() : track(sceneWorkMeasured(rebuildWorld)),
         sync: () => inactive() ? Promise.resolve() : track(sceneWorkMeasured(() => syncScene?.() ?? Promise.resolve())),
         frame, prepareGpu, arrive, dispose, highlight, suspendCulture,
+        get cameraForSave() {
+            return wildlifeCamera.saveView ?? { position: camera.position.toArray(), target: controller.focus.toArray() };
+        },
+        cancelWildlife: () => wildlifeCamera.cancel('another-task'),
+        focusWildlife: (eventId: string): 'started' | 'unavailable' | 'unsafe' => {
+            wildlifeCamera.cancel('replaced');
+            if (inactive() || shared.transferring || document.hidden || host.loading || !world) return 'unavailable';
+            const focus = resolveWildlifeFocus(session.readSnapshot(), eventId);
+            const anchor = focus && queryWildlife(focus.target);
+            if (!focus || !anchor) return 'unavailable';
+            skipWedding();
+            const pivot = wildlifeCameraPivot(anchor);
+            const range = camera.position.distanceTo(pivot) + 64;
+            if (range > 200) return 'unsafe';
+            // These roots contain only the existing rendered player and sanitized observed rival models.
+            wildlifeObstacles = new CameraObstacles([
+                world.root, ...(dressing ? [dressing.root] : []),
+                ...(layer ? [layer.root] : []), ...(rivalScene ? [rivalScene.root] : []),
+            ], pivot.toArray(), range, []);
+            const direct = { position: camera.position.toArray(), target: pivot.toArray() };
+            const preview = controller.previewView(direct);
+            if (!preview || preview.position[1] - camera.position.y > .5 || !wildlifeObstacles.allows(direct) ||
+                !wildlifeCamera.begin(focus.target, reducedMotion.matches)) {
+                wildlifeObstacles = undefined;
+                return 'unsafe';
+            }
+            const epoch = session.personalHistoryEpoch;
+            wildlifeView = new WildlifeCinematicView(canvas.parentElement!, focus.label, {
+                stop: () => wildlifeCamera.cancel('stopped'),
+                book: () => {
+                    wildlifeCamera.cancel('record');
+                    if (epoch === session.personalHistoryEpoch) options.openWildlifeRecord?.(eventId);
+                },
+            });
+            canvas.focus({ preventScroll: true });
+            return 'started';
+        },
         primeWeddingMusic: () => {
             if (inactive()) return;
             const state = session.readSnapshot();
@@ -1141,7 +1234,8 @@ export function createFjordScene(options: {
         get hasWorld() { return !!world; },
         get diagnostics() { return [...(assets?.diagnostics ?? []), ...(models?.diagnostics ?? [])]; },
         setTarget(point: { x: number; z: number } | null | undefined, valid?: boolean) {
-            targetMarker.visible = !!point;
+            targetRequested = !!point;
+            targetMarker.visible = targetRequested && !wildlifeCamera.active;
             targetMaterial.color.set(valid === undefined ? '#ffe09a' : valid ? '#22ff44' : '#ff2030');
             if (import.meta.env.DEV) {
                 canvas.dataset.destinationPreview = JSON.stringify({

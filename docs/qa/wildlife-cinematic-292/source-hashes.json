@@ -1,0 +1,195 @@
+{
+  "baseline": "a2589adf425b371a0afaa3ee6fa5f15530f5979c",
+  "branch": "codex/wedding-cinematic-288",
+  "recordedAt": "2026-10-27T12:32:06.139Z",
+  "normalization": "sha256LF normalizes CRLF to LF to match repository text across Windows/Linux; sha256Bytes records local bytes.",
+  "coreFilesChanged": [],
+  "files": [
+    {
+      "path": "package.json",
+      "bytes": 2055,
+      "sha256Bytes": "fbafeb1fb344820f0c13320ea10d91da1a15776eab0891c3f2020f8889801ea3",
+      "sha256LF": "fe6dd2e1185453027493d4c639246c1798505a5650c43c1c367738f9c0461341"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "bytes": 51806,
+      "sha256Bytes": "c853a683bbfb2f3b58abfb6b1feb7308387bce165cb554d860e24a41c5debc9d",
+      "sha256LF": "b67a5364ad538d19d5265ae57301f1bf11576e432bce48bcb8aa3b9895df9996"
+    },
+    {
+      "path": "scripts/prepare-wildlife-cinematic-review.mjs",
+      "bytes": 4999,
+      "sha256Bytes": "b0579e0d37a8cf6a367a5d655b62bd0248be0da7da7a12be26454eb245c8128a",
+      "sha256LF": "b0579e0d37a8cf6a367a5d655b62bd0248be0da7da7a12be26454eb245c8128a"
+    },
+    {
+      "path": "src/camera/CameraClearance.ts",
+      "bytes": 8111,
+      "sha256Bytes": "7e90d60dcac77a83d88474ad81642d9a96233a0d62afd7878d4abbfa8d6a7ff1",
+      "sha256LF": "38027a8547292d0713e5c0b78b0b3bdcfcc8a4f26ce0c42e114934c5cc46af2c"
+    },
+    {
+      "path": "src/camera/CameraObstacles.ts",
+      "bytes": 2737,
+      "sha256Bytes": "133ceeaa44285487dfa77e0fa34c60757134a92994c1c1b82214f7509b34466f",
+      "sha256LF": "133ceeaa44285487dfa77e0fa34c60757134a92994c1c1b82214f7509b34466f"
+    },
+    {
+      "path": "src/camera/RTSCameraController.ts",
+      "bytes": 17469,
+      "sha256Bytes": "64a864a07ed6e06f73adb9754225373d28afd60d0e7acda4e448b71021d49024",
+      "sha256LF": "64a864a07ed6e06f73adb9754225373d28afd60d0e7acda4e448b71021d49024"
+    },
+    {
+      "path": "src/camera/WildlifeCamera.ts",
+      "bytes": 7467,
+      "sha256Bytes": "cdcdde121e66018d708fc131cd7c6005e0ffdc817abee04e12b6645a05d08304",
+      "sha256LF": "cdcdde121e66018d708fc131cd7c6005e0ffdc817abee04e12b6645a05d08304"
+    },
+    {
+      "path": "src/fjord-play/CampaignPlayback.ts",
+      "bytes": 1314,
+      "sha256Bytes": "c80be220dd283720509ccc0e14687406d866a72dc86ff8aacd1e69cc2703f3a4",
+      "sha256LF": "148af85429d024065f83b6ebd13c5a25bbed037c4bf1ac75c20d9f2c3d6cbff1"
+    },
+    {
+      "path": "src/fjord-play/ExpeditionPanel.ts",
+      "bytes": 41305,
+      "sha256Bytes": "4ca727c0f7a74cedf69532600ec53bdd82937b2f2b948ad5ff3857e261c42215",
+      "sha256LF": "cab48452201d74d8df5c72c921196469bf5f1d243a635ff4aa1901673c1bad15"
+    },
+    {
+      "path": "src/fjord-play/FjordInterface.ts",
+      "bytes": 57332,
+      "sha256Bytes": "916e3e4aff5df25cc34f1037d5624d702fd62b31c3f20f77897b84b2bf7319b1",
+      "sha256LF": "c29322ee185180756e553d1749b3b67eebd786c2daf559cad043802deff538c4"
+    },
+    {
+      "path": "src/fjord-play/FjordPlay.ts",
+      "bytes": 68256,
+      "sha256Bytes": "963a1bc72cf48df04ee6d959fe0a2cf678d46b87ae5d4c5564b8e649e008dcf3",
+      "sha256LF": "963a1bc72cf48df04ee6d959fe0a2cf678d46b87ae5d4c5564b8e649e008dcf3"
+    },
+    {
+      "path": "src/fjord-play/FjordScene.ts",
+      "bytes": 75897,
+      "sha256Bytes": "9b8b5a19fe45becaa2fdf1f889c12313359c97650f23c8e2223c4b36fa145937",
+      "sha256LF": "51b4d7dddd70e295a072341add35fa25d2274cec5233bb095adfc191ec9d648d"
+    },
+    {
+      "path": "src/fjord-play/WildlifeCinematicView.ts",
+      "bytes": 1485,
+      "sha256Bytes": "e85870d6efeb29327cf8462921cdcd8306c2a9d4febce0cd12bcb337a3fb0764",
+      "sha256LF": "e85870d6efeb29327cf8462921cdcd8306c2a9d4febce0cd12bcb337a3fb0764"
+    },
+    {
+      "path": "src/fjord-play/wildlife-cinematic.css",
+      "bytes": 786,
+      "sha256Bytes": "ecbe7ddb7d61908ae75615d5d74c529559d48bf6feac8a4ad00599b500b956aa",
+      "sha256LF": "ecbe7ddb7d61908ae75615d5d74c529559d48bf6feac8a4ad00599b500b956aa"
+    },
+    {
+      "path": "src/lore/AttentionNavigation.ts",
+      "bytes": 2639,
+      "sha256Bytes": "1138a3d53f5e95e9d6e805a2ba2b45f3e3c103fade1584e2f992e2b3bc6743e2",
+      "sha256LF": "c9ea3ff7991be9d7829132d951699a20da353fb5071d6dcd4deea367e5148647"
+    },
+    {
+      "path": "src/lore/AttentionToast.ts",
+      "bytes": 5910,
+      "sha256Bytes": "c97575dc15f91bd65c54b83dcf95bc0ed7c5c4aa382dad29ca14cdabe77c995a",
+      "sha256LF": "9528ada08de052076b5ed4d7d16a23b14650e87e95ce7caf1960e862bb543da8"
+    },
+    {
+      "path": "src/lore/AttentionView.ts",
+      "bytes": 18007,
+      "sha256Bytes": "3af82c83cb9ada1be2d71054cd43f6307861d9379b3e680fbcfc45c2811c2e7a",
+      "sha256LF": "c4826e5ffea4e44d02716908263840cec9dcbfe85adbfce2421b1a12884bb5c6"
+    },
+    {
+      "path": "src/simulation/ClanDiscovery.ts",
+      "bytes": 11789,
+      "sha256Bytes": "58652cb642fc82e31f1d0d96f41449bdf324dca54e6a95b1a60e2af6eb9272d6",
+      "sha256LF": "e61ef64e1df2be462035e03f233bccad366deb9b6dc5b02a9a5e98e97d0309a4"
+    },
+    {
+      "path": "src/simulation/SimulationCore.ts",
+      "bytes": 30372,
+      "sha256Bytes": "cea4eb44f584f66863cf41c0b9838f76d9c835397ac7a4fa76a1f2c1fcc6d599",
+      "sha256LF": "cea4eb44f584f66863cf41c0b9838f76d9c835397ac7a4fa76a1f2c1fcc6d599"
+    },
+    {
+      "path": "src/simulation/WildlifeSightings.ts",
+      "bytes": 18771,
+      "sha256Bytes": "dfad4498faf8b7eed43447d6523035e788cfc9f1071d870807f8acea6596154d",
+      "sha256LF": "f08fb0b131a94822525eb96db7f370e100842791eb6b880341f4b7c508c1289f"
+    },
+    {
+      "path": "src/wildlife/MarineEncounters.ts",
+      "bytes": 8927,
+      "sha256Bytes": "ac1bc06e39fb7491d4b8dde9da49a94995755d17e230a7ceea57897663205f30",
+      "sha256LF": "38b67732e106a5aa6eb2cf2713a58861913a6e65bf4b2c4760c66211f48def16"
+    },
+    {
+      "path": "src/wildlife/WildlifeLayer.ts",
+      "bytes": 25858,
+      "sha256Bytes": "c1710a7f61dbe6087db9b675c90aad3ae6e87c8d6a3baa841d7872344ae5c53c",
+      "sha256LF": "b8738391629b33919eeafe13cf68621b66debc0ad251b6c95b79f2d95e25d6a6"
+    },
+    {
+      "path": "tests/attention-toast.test.mjs",
+      "bytes": 9546,
+      "sha256Bytes": "ac8801af4fca93462a29928102bb44dc5b31dbf122595f0ddaedbfc597899f29",
+      "sha256LF": "66b650a70d77a1b1ff922cffd898b78e984399de31c5d958d7c9a231e1264db5"
+    },
+    {
+      "path": "tests/camera-navigation-intent.test.mjs",
+      "bytes": 6295,
+      "sha256Bytes": "c5cf28473bc34d556ff01a918a190af93f5144de315335f1baef87f4b80b893f",
+      "sha256LF": "c5cf28473bc34d556ff01a918a190af93f5144de315335f1baef87f4b80b893f"
+    },
+    {
+      "path": "tests/camera-obstacles.test.mjs",
+      "bytes": 2471,
+      "sha256Bytes": "1c60d793ad789218f7c8239b4430770ef39c5b5758e9793877d8b3a851845d20",
+      "sha256LF": "c7875d30f977b89e3b7211cd2f0bb0854e51c4b96a049ce74f9472300581429e"
+    },
+    {
+      "path": "tests/longship-transport.test.mjs",
+      "bytes": 23478,
+      "sha256Bytes": "7d8ad0e83067bcbc257057d9c8c7e8097d6c41143a6f4388130df8c2a27eb831",
+      "sha256LF": "d031610ef2290f2a6d072b9f851cb0169fcbcd54fc56bf1130fc89f607c8aec2"
+    },
+    {
+      "path": "tests/wildlife-book-dom.test.mjs",
+      "bytes": 10362,
+      "sha256Bytes": "e892c07ecac11ca33e53ca74f54b57f00863e6100ff11d28d54d50aab26e0781",
+      "sha256LF": "6136781fb100ae5c51b1453ddb8b364d05b112e411052374d27ac83eea4125ec"
+    },
+    {
+      "path": "tests/wildlife-camera.test.mjs",
+      "bytes": 7121,
+      "sha256Bytes": "662a72e18f83f01345796602e38eb146f422c46bb289b8b5288209248e362bf3",
+      "sha256LF": "662a72e18f83f01345796602e38eb146f422c46bb289b8b5288209248e362bf3"
+    },
+    {
+      "path": "tests/wildlife-cinematic-view.test.mjs",
+      "bytes": 1440,
+      "sha256Bytes": "b61af7ea1d382d963695e1c7a4bc43353b282601d58b254fef1f281993e1453a",
+      "sha256LF": "b61af7ea1d382d963695e1c7a4bc43353b282601d58b254fef1f281993e1453a"
+    },
+    {
+      "path": "tests/wildlife-focus.test.mjs",
+      "bytes": 2341,
+      "sha256Bytes": "52fdf6fed4222cee63223bce7f806ee18da2e80a219b940e0b0bed67dd5575e0",
+      "sha256LF": "52fdf6fed4222cee63223bce7f806ee18da2e80a219b940e0b0bed67dd5575e0"
+    },
+    {
+      "path": "tests/wildlife-live-anchor.test.mjs",
+      "bytes": 5309,
+      "sha256Bytes": "44eff7c003fb4f51518c7ae1551f6dc6ce591458ce90e6575809e8c972602d62",
+      "sha256LF": "44eff7c003fb4f51518c7ae1551f6dc6ce591458ce90e6575809e8c972602d62"
+    }
+  ]
+}

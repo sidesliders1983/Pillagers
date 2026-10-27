@@ -5,7 +5,17 @@ import {PerspectiveCamera,Vector2,Vector3,MathUtils,Object3D,Raycaster,Plane,Box
 import {worldConfig} from '../config/worldConfig';
 import {TouchGestures} from './TouchGestures';
 const initialElevation=Math.atan2(.8,.7),orbitScale=Math.hypot(.8,.7);
+export type CameraNavigationIntent = 'wheel' | 'drag' | 'touch' | 'keyboard' | 'focus' | 'home' | 'escape';
 export class RTSCameraController {
+    private readonly navigationListeners = new Set<(intent: CameraNavigationIntent) => void>();
+    /** Presentation owners yield before native input is applied, so the first gesture is preserved. */
+    onNavigationIntent(listener: (intent: CameraNavigationIntent) => void): () => void {
+        this.navigationListeners.add(listener);
+        return () => { this.navigationListeners.delete(listener); };
+    }
+    private navigationIntent(intent: CameraNavigationIntent) {
+        for (const listener of this.navigationListeners) listener(intent);
+    }
     private inputEnabled = true;
     get enabled() { return this.inputEnabled; }
     set enabled(value: boolean) {
@@ -45,18 +55,25 @@ export class RTSCameraController {
         private dragMode: 'pan' | 'rotate' = 'pan') {
         const settings=worldConfig.camera.touch;
         this.touch=new TouchGestures({
-            navigate:(x,y)=>this.navigate(x,y,'touch'),
-            rotate:(dx,dy)=>{this.yaw-=dx*settings.rotationSensitivity;this.targetElevation=MathUtils.clamp(this.targetElevation+dy*settings.elevationSensitivity,settings.minElevation,settings.maxElevation);},
-            zoom:ratio=>this.setZoom(this.zoom/ratio),
+            navigate:(x,y)=>{this.navigationIntent('focus');this.navigate(x,y,'touch');},
+            rotate:(dx,dy)=>{if(dx||dy)this.navigationIntent('touch');this.yaw-=dx*settings.rotationSensitivity;this.targetElevation=MathUtils.clamp(this.targetElevation+dy*settings.elevationSensitivity,settings.minElevation,settings.maxElevation);},
+            zoom:ratio=>{if(ratio!==1)this.navigationIntent('touch');this.setZoom(this.zoom/ratio);},
         },settings.tapThreshold);
         this.listen(window,'keydown',e=>{
             if(e.target instanceof HTMLInputElement || e.target instanceof HTMLSelectElement || e.target instanceof HTMLTextAreaElement)return;
+            if (e.key === 'Escape') this.navigationIntent('escape');
+            else if (['w', 'a', 's', 'd', 'q', 'e', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright'].includes(e.key.toLowerCase()))
+                this.navigationIntent('keyboard');
             if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key))e.preventDefault();
             this.keys.add(e.key.toLowerCase());
         });
         this.listen(window,'keyup',e=>this.keys.delete(e.key.toLowerCase()));
         this.listen(window,'blur',()=>{this.keys.clear();this.drag=false;this.rotateDrag=false;this.mouseStart=null;this.touch.reset();});
-        this.listen(canvas,'wheel',e=>{e.preventDefault();this.setZoom(this.zoom+e.deltaY*.025);},{passive:false});
+        this.listen(canvas, 'wheel', event => {
+            event.preventDefault();
+            if (event.deltaX || event.deltaY) this.navigationIntent('wheel');
+            this.setZoom(this.zoom + event.deltaY * .025);
+        }, { passive: false });
         this.listen(canvas,'pointerdown',e=>{
             canvas.setPointerCapture(e.pointerId);
             if(e.pointerType==='touch'){e.preventDefault();this.touch.down(e.pointerId,e.clientX,e.clientY);}
@@ -76,6 +93,7 @@ export class RTSCameraController {
             const rotating = this.rotateDrag || this.drag && this.dragMode === 'rotate' &&
                 this.mouseStart !== null && this.mouseStart.distance >= settings.tapThreshold;
             if (rotating) {
+                if (event.movementX || event.movementY) this.navigationIntent('drag');
                 event.preventDefault();
                 this.yaw -= event.movementX * settings.rotationSensitivity;
                 this.targetElevation = MathUtils.clamp(
@@ -83,6 +101,7 @@ export class RTSCameraController {
                     settings.minElevation, settings.maxElevation);
             } else if (this.drag && this.dragMode === 'pan' && this.mouseStart &&
                 this.mouseStart.distance >= settings.tapThreshold) {
+                if (event.movementX || event.movementY) this.navigationIntent('drag');
                 this.pan(-event.movementX * this.distance * .0015,
                     -event.movementY * this.distance * .0015);
             }
@@ -92,8 +111,10 @@ export class RTSCameraController {
                 if (!cancelled) this.touch.move(event.pointerId, event.clientX, event.clientY);
                 this.touch.up(event.pointerId, cancelled);
             } else {
-                if (!cancelled && this.mouseStart && this.mouseStart.distance < settings.tapThreshold)
+                if (!cancelled && this.mouseStart && this.mouseStart.distance < settings.tapThreshold) {
+                    this.navigationIntent('focus');
                     this.navigate(event.clientX, event.clientY);
+                }
                 this.mouseStart = null;
                 this.drag = false;
                 this.rotateDrag = false;
@@ -109,7 +130,7 @@ export class RTSCameraController {
         type: K,handler: (event: WindowEventMap[K])=>void,options: AddEventListenerOptions = {}) {
         target.addEventListener(type,((event: WindowEventMap[K]) => { if (this.enabled) handler(event); }) as EventListener,{ ...options,signal:this.listeners.signal });
     }
-    dispose() { this.listeners.abort();this.touch.reset();this.keys.clear(); }
+    dispose() { this.listeners.abort();this.touch.reset();this.keys.clear();this.navigationListeners.clear(); }
     setNavigationSurface(surface: Object3D, center = this.homeFocus,
         bounds?: typeof this.bounds, height?: typeof this.height,
         clearance?: { terrain?: TerrainField; waterLevel?: number }) {
@@ -127,12 +148,34 @@ export class RTSCameraController {
         this.focus.copy(this.desired);
         this.update(0);
     }
-    setView(pose: { position: number[]; target: number[] }, options: { groundClearance?: number } = {}) {
+    /** Read-only bounded planning through the same terrain/water/near-plane solver as native navigation. */
+    previewView(pose: { position: number[]; target: number[] }): { position: number[]; target: number[] } | undefined {
+        if (pose.position.length !== 3 || pose.target.length !== 3 ||
+            ![...pose.position, ...pose.target].every(Number.isFinite)) return;
+        const inside = (point: number[]) => point[0] >= this.bounds.minX && point[0] <= this.bounds.maxX &&
+            point[2] >= this.bounds.minZ && point[2] <= this.bounds.maxZ;
+        if (!inside(pose.position) || !inside(pose.target)) return;
+        const eye = new Vector3().fromArray(pose.position), focus = new Vector3().fromArray(pose.target);
+        if (eye.distanceToSquared(focus) < 1e-6) return;
+        if (this.height && this.clearanceSource) {
+            const correction = solveCameraClearance({ focus, eye, heightAt: this.height, ...this.clearanceSource,
+                nearRadius: this.nearPlaneRadius(), previousLift: 0, deltaSeconds: 0,
+                workspace: this.clearanceWorkspace, settings: { ground: worldConfig.camera.clearance.ground } });
+            eye.y = correction.eyeY;
+        }
+        return { position: eye.toArray(), target: [...pose.target] };
+    }
+    private nearPlaneRadius() {
+        const tangent = Math.tan(MathUtils.degToRad(this.camera.fov) / 2);
+        return this.camera.near * Math.sqrt(1 + tangent * tangent * (1 + this.camera.aspect ** 2));
+    }
+    setView(pose: { position: number[]; target: number[] }, options: { groundClearance?: number; presentation?: boolean } = {}) {
         if (pose.position.length !== 3 || pose.target.length !== 3 ||
             ![...pose.position, ...pose.target].every(value => Number.isFinite(value) && Math.abs(value) <= 1e9) ||
             Math.hypot(...pose.position.map((value, i) => value - pose.target[i])) < 1e-6 ||
             options.groundClearance !== undefined && (!Number.isFinite(options.groundClearance) || options.groundClearance < 0))
             throw new RangeError('Camera view requires finite, distinct position and target points.');
+        if (!options.presentation) this.navigationIntent('focus');
         this.collisionLift = 0;
         this.viewGroundClearance = options.groundClearance ?? worldConfig.camera.clearance.ground;
         const position=new Vector3().fromArray(pose.position);
@@ -148,6 +191,7 @@ export class RTSCameraController {
     }
     setSelectionHandler(select:(x:number,y:number,pointerType:'mouse'|'touch')=>boolean){this.select=select;}
     home() {
+        this.navigationIntent('home');
         this.viewGroundClearance = worldConfig.camera.clearance.ground;
         this.collisionLift = 0;
         this.minimumZoom = worldConfig.camera.minZoom;
@@ -159,6 +203,7 @@ export class RTSCameraController {
     /** Camera-only geographic navigation with existing bounds, terrain clearance and orbit intent. */
     focusAt(point: { x: number; z: number }) {
         if (!Number.isFinite(point.x) || !Number.isFinite(point.z)) throw new RangeError('Camera focus must be finite.');
+        this.navigationIntent('focus');
         this.desired.set(point.x, this.desired.y, point.z);
         this.clampFocus();
         if (this.height) this.desired.y = Math.max(0, this.height(this.desired.x, this.desired.z));
@@ -208,8 +253,7 @@ export class RTSCameraController {
         this.requestedEye.copy(this.camera.position);
         if (this.height && this.clearanceSource) {
             const start = performance.now();
-            const tangent = Math.tan(MathUtils.degToRad(this.camera.fov) / 2);
-            const nearRadius = this.camera.near * Math.sqrt(1 + tangent * tangent * (1 + this.camera.aspect ** 2));
+            const nearRadius = this.nearPlaneRadius();
             const correction = solveCameraClearance({ focus: this.focus, eye: this.requestedEye,
                 heightAt: this.height, ...this.clearanceSource, nearRadius,
                 previousLift: this.collisionLift, deltaSeconds: dt, workspace: this.clearanceWorkspace,
