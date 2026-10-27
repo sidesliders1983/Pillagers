@@ -320,3 +320,18 @@ volume follows the ordinary listener and camera distance; other ambient/world
 sounds keep their chosen volumes. Music consent, explicit mute, pause, background
 cleanup, the existing MP3 and all canonical wedding costs remain unchanged.
 [Feedback validation](../qa/wedding-wildlife-feedback-001/README.md).
+
+
+### Mobile portrait camera follow-up
+
+Once an accepted wedding owns its directed camera, its campfire does not need to
+remain inside that camera's screen rectangle. Portrait shots may frame the actual
+couple while the fire sits outside the image; this is composition, not loss of
+clan visibility. The existing clan fog, page visibility, real participant/arrival,
+fire-fuel, safe-camera, Skip and lifecycle guards remain authoritative. Ordinary
+offscreen gatherings keep their existing suspension behavior.
+
+Food is charged once at the accepted quotation. Reaching zero Food afterward can
+raise the normal stock attention notice, but does not cancel the already accepted
+presentation. The original wedding QA save contains exactly 24 Food, matching its
+eight-person quotation; that fixture and the gameplay cost are unchanged.

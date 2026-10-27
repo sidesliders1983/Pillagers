@@ -1,3 +1,4 @@
+import { culturalVisibility } from './CulturalVisibility';
 import { WildlifeCamera, wildlifeCameraPivot, wildlifeApproachMetres } from '../camera/WildlifeCamera';
 import { CameraObstacles } from '../camera/CameraObstacles';
 import { WildlifeCinematicView } from './WildlifeCinematicView';
@@ -141,11 +142,14 @@ export function createFjordScene(options: {
     let lastCulturalPhase = '';
     let cultureSuspended = false;
     const culturalVisible = () => {
-        const point = culture?.inspect()?.position;
-        if (!point || document.hidden) return false;
-        const projected = new Vector3(point.x, point.y + 1, point.z).project(camera);
-        return projected.z >= -1 && projected.z <= 1 && Math.abs(projected.x) <= 1.1 && Math.abs(projected.y) <= 1.1 &&
-            (!knownTerrain || discoveryAt(knownTerrain, point.x, point.z) === 'visible');
+        const frame = culture?.inspect();
+        if (!frame) return false;
+        const point = frame.position;
+        return culturalVisibility({ x: point.x, y: point.y + 1, z: point.z }, camera, {
+            hidden: document.hidden,
+            known: !knownTerrain || discoveryAt(knownTerrain, point.x, point.z) === 'visible',
+            directedWedding: !!frame.wedding && weddingId === frame.id && weddingCamera.active,
+        });
     };
     let rivalScene: RivalScene | undefined;
     let liveMarkers: ReturnType<typeof shared.selectionPresentation> = [];
@@ -1203,10 +1207,11 @@ export function createFjordScene(options: {
                     target: [fire.x, fire.y + 1, fire.z] });
                 camera.updateMatrixWorld();
             }
-            const projected = new Vector3(fire.x, fire.y + 1, fire.z).project(camera);
-            const visible = !document.hidden && projected.z >= -1 && projected.z <= 1 &&
-                Math.abs(projected.x) <= 1.1 && Math.abs(projected.y) <= 1.1 &&
-                (!knownTerrain || discoveryAt(knownTerrain, fire.x, fire.z) === 'visible');
+            const visible = culturalVisibility({ x: fire.x, y: fire.y + 1, z: fire.z }, camera, {
+                hidden: document.hidden,
+                known: !knownTerrain || discoveryAt(knownTerrain, fire.x, fire.z) === 'visible',
+                directedWedding: false,
+            });
             const quality = document.querySelector<HTMLSelectElement>('#fjord-quality')!.value;
             const accepted = culture.accept(session.readSnapshot(), quality === 'low' ? 6 : 8, visible,
                 { weddingSeconds: weddingAssets.music.seconds });

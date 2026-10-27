@@ -1,0 +1,16 @@
+{
+  "camera": "{\"world\":[-0.7525766947068779,-5.551115123125783e-17,-0.658504607868518,0,-0.37962581997624717,0.8170993839488748,0.43385807997285386,0,0.5380637094168615,0.576496831518066,-0.6149299536192705,0,96,32.732528686523445,-27.999999999999996,1],\"projection\":[5.224605760622801,0,0,0,0,2.4142135623730954,0,0,0,0,-1.0000833368057,-1,0,0,-0.20000833368057003,0]}",
+  "canvas": {
+    "height": 844,
+    "width": 390
+  },
+  "culture": "null",
+  "food": "\n            Food0\n            Materials4\n            Residents10\n            Livestock5\n        ",
+  "notice": "Needs attentionFood stocks are empty.",
+  "time": "{\"winter\":801,\"tick\":550,\"ticksPerWinter\":1000}",
+  "viewport": {
+    "height": 844,
+    "width": 390
+  },
+  "wedding": "{\"active\":false,\"camera\":false,\"actors\":0,\"instruments\":0,\"accessories\":0,\"templates\":5,\"maximumGripError\":0,\"unavailable\":[],\"music\":null}"
+}
