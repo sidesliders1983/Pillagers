@@ -57,3 +57,33 @@ formatting and diff whitespace are reviewed manually.
 
 Targeted final regression run: **176 passed, 0 failed, 0 skipped**, including the
 real running-clock wedding/control serialization comparisons.
+
+
+## Fixed production browser verification
+
+Runtime source/build: `d7d4bf5e58182691ee180ded2d6ca4d8ef873138`. Public validation
+(628 files), TypeScript and Vite production build passed. Later evidence-only
+changes do not alter these runtime sources. `validation.json` records exact hashes
+and confirms the original fixture, Core cultural rules and audio owner are unchanged.
+
+The exact original save was imported again in the production browser at 390 x 844.
+After the same 24 Food + 1 Material payment, the accepted event-55 remained active
+in paused approach at tick 550 while Food was zero and its normal attention notice
+was visible. Starting the real clock assembled all six staged actors with all
+three native instruments, crown and book. The observed gathering reached 8.0265 s
+with native music playing, no ambience ducking and no asset failures.
+
+Pause froze the performance and media (8.190839 s). Changing to 844 x 390 and
+1280 x 720 retained the same six actors, three instruments, event and paused tick
+752. Returning to portrait and resuming completed the normal approximately 30 s
+performance. Media became `released`; actor/instrument/accessory bindings became
+zero and the original camera `[96, 32.73252868652344, -28]` restored within floating
+point precision. The running campaign advanced normally to tick 858; its unchanged
+work rules replenished Food. No free Food or altered quotation was used.
+
+Full native screenshots and read-only public debug DOM snapshots record the
+before/after states, performance timeline, pause/resize and natural cleanup. No
+application state was injected. The active game tab was closed and the temporary
+viewport override reset. This verifies responsive browser behavior, not physical
+iPhone/Safari listening or performance acceptance. Current-head CI and the owner's
+physical device recheck remain pending.

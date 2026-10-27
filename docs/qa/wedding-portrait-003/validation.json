@@ -1,0 +1,69 @@
+{
+  "runtimeCommit": "d7d4bf5e58182691ee180ded2d6ca4d8ef873138",
+  "baselineCommit": "01529b131a8b6e706f12454eeb5114a251b57d99",
+  "branch": "codex/wedding-cinematic-288",
+  "sources": [
+    {
+      "path": "src/fjord-play/CulturalVisibility.ts",
+      "bytes": 800,
+      "sha256": "bb23499c60ed75c5ff8373022a7b59805eff4fcdb31a642f18653bb0e14a7f32",
+      "lfSha256": "3e7e6124d8f5f0c53090d9b6e548b741cfd1cbea3268fa0814b07c31d8537cfd"
+    },
+    {
+      "path": "src/fjord-play/FjordScene.ts",
+      "bytes": 79061,
+      "sha256": "6ad69fc1053662dbc2d78c86ae44169b2e832c3f314e78155f2f9e61363f64bf",
+      "lfSha256": "0a76778b7a7c520f24bd4a562de6506fde2218fa53de069d11b80fc11fca5aa2"
+    },
+    {
+      "path": "tests/cultural-visibility.test.mjs",
+      "bytes": 3100,
+      "sha256": "9aa31c61dbd84ab20e22891807f13c68ca0a7b251b342d33a8b28f80db126bad",
+      "lfSha256": "404d75ad7651326c45b019d0a80a2022a469c46771c4836da47fe70adf5c7423"
+    }
+  ],
+  "unchangedContractsAndFixture": [
+    {
+      "path": "src/simulation/CulturalEvents.ts",
+      "bytes": 25467,
+      "sha256": "ddd132237ead46192acd2a84b3c2a25431207d8098832af0076e7b47679c3523",
+      "lfSha256": "ddd132237ead46192acd2a84b3c2a25431207d8098832af0076e7b47679c3523",
+      "matchesBaselineLf": true
+    },
+    {
+      "path": "src/simulation/SimulationCore.ts",
+      "bytes": 30372,
+      "sha256": "cea4eb44f584f66863cf41c0b9838f76d9c835397ac7a4fa76a1f2c1fcc6d599",
+      "lfSha256": "cea4eb44f584f66863cf41c0b9838f76d9c835397ac7a4fa76a1f2c1fcc6d599",
+      "matchesBaselineLf": true
+    },
+    {
+      "path": "src/fjord-play/CulturalPresentation.ts",
+      "bytes": 7123,
+      "sha256": "233e2fc3b228331cc1ddf66b8dd43f07161effbd368239e03d036611fc0620b1",
+      "lfSha256": "233e2fc3b228331cc1ddf66b8dd43f07161effbd368239e03d036611fc0620b1",
+      "matchesBaselineLf": true
+    },
+    {
+      "path": "src/audio/ForegroundTrack.ts",
+      "bytes": 6380,
+      "sha256": "422ae4551899f4d49e99a216a4c55d8e8f1d910902dbf745fe382f1ec7bb3656",
+      "lfSha256": "d28090af22b23e7e978e6949a9795b576dc6280bd1b55e812976c52b677a7acc",
+      "matchesBaselineLf": true
+    },
+    {
+      "path": "docs/qa/cultural-occasions-277/review-fixture-v2/review-wedding-campaign.json",
+      "bytes": 102194,
+      "sha256": "69204861159519276cb7a60c8d3eaf83127601cb6b1eda6032176aa09449669c",
+      "lfSha256": "69204861159519276cb7a60c8d3eaf83127601cb6b1eda6032176aa09449669c",
+      "matchesBaselineLf": true
+    }
+  ],
+  "tests": {
+    "passed": 176,
+    "failed": 0,
+    "skipped": 0
+  },
+  "productionBuild": "passed",
+  "physicalDevice": "pending owner recheck; portrait browser is not Safari/device certification"
+}

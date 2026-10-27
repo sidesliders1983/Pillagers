@@ -1,0 +1,74 @@
+
+> pillagers-world@0.2.0 build D:\CodexSites\Pillagers\scratch\contextual-support-278
+> node scripts/validate-public-assets.mjs && tsc --noEmit && vite build
+
+{"candidates":16,"technical":"passed","publication":"passed","catalogueSHA256":"39613eb0c656efc58e293dd4e88810cf3d88a263012884542cb9b24ff4c2e6c9"}
+Validated 12 compact model variants with identical geometry.
+Validated 628 public files, house/human/cattle/wildlife manifests and 47 decoded Terrain models without Assets/. 14 prepared islands and 56 exact character sources.
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 477 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                         1.35 kB │ gzip:   0.62 kB
+dist/assets/GenerationWorker-BLt6bcdg.js               76.44 kB
+dist/assets/PreviewGround-BO2hWq-D.css                  0.22 kB │ gzip:   0.13 kB
+dist/assets/ScreenAwakeControl-rxpOnXDJ.css             0.27 kB │ gzip:   0.18 kB
+dist/assets/MeshyCharacterLab-CqNdCCub.css              1.14 kB │ gzip:   0.49 kB
+dist/assets/AssetLab-HQ7TMumO.css                       1.43 kB │ gzip:   0.58 kB
+dist/assets/EnvironmentLab-CqiAP2SL.css                 1.86 kB │ gzip:   0.69 kB
+dist/assets/WaterLab-CamFp8SX.css                       2.60 kB │ gzip:   1.02 kB
+dist/assets/GameplayLab-JhEYIz1p.css                    3.55 kB │ gzip:   1.24 kB
+dist/assets/FjordEntry-D7RHRi1V.css                     4.81 kB │ gzip:   1.52 kB
+dist/assets/index-BPHQuCGE.css                          5.14 kB │ gzip:   1.71 kB
+dist/assets/CharacterLab-DqDWHUDd.css                   8.57 kB │ gzip:   2.53 kB
+dist/assets/PlayUI-BqzHz75C.css                         8.75 kB │ gzip:   2.75 kB
+dist/assets/SettlementBrowser-Cko0Mgpz.css              9.19 kB │ gzip:   2.56 kB
+dist/assets/FjordPlay-DPjMjY7d.css                     67.78 kB │ gzip:  12.41 kB
+dist/assets/CattlePresentation-BsbnPLU9.js              0.29 kB │ gzip:   0.18 kB
+dist/assets/Renderer-BUA9n-BU.js                        0.45 kB │ gzip:   0.30 kB
+dist/assets/Villager-VSCAoDo6.js                        0.76 kB │ gzip:   0.51 kB
+dist/assets/HumanPreviewPace-BSRdAvOq.js                0.92 kB │ gzip:   0.56 kB
+dist/assets/worldConfig-BCznhcbi.js                     0.98 kB │ gzip:   0.64 kB
+dist/assets/BrowserGeneration-YO3Ah7M2.js               1.22 kB │ gzip:   0.63 kB
+dist/assets/NativePortraitRenderer-BjaUHeGQ.js          1.69 kB │ gzip:   0.90 kB
+dist/assets/PreviewGround-DKhLscp_.js                   1.80 kB │ gzip:   0.88 kB
+dist/assets/CharacterPortraits-CbEuASBy.js              1.91 kB │ gzip:   0.95 kB
+dist/assets/world-shell-C_RMA22M.js                     2.38 kB │ gzip:   0.95 kB
+dist/assets/generateName-CXadswaC.js                    4.36 kB │ gzip:   1.79 kB
+dist/assets/ClanDiscovery-DKVjVLuP.js                   4.68 kB │ gzip:   2.07 kB
+dist/assets/generateCharacterDNA-BY2EjofW.js            5.67 kB │ gzip:   2.17 kB
+dist/assets/AssetLab-JOjvDL-X.js                        6.07 kB │ gzip:   2.68 kB
+dist/assets/SettlementLayout-A-hjzhw4.js                6.09 kB │ gzip:   2.65 kB
+dist/assets/index-DCTm4VU-.js                           6.65 kB │ gzip:   2.48 kB
+dist/assets/MeshyCharacterLab-DdpjVT2-.js               7.14 kB │ gzip:   3.04 kB
+dist/assets/CowCharacterPreview-D5P7eM7o.js            10.99 kB │ gzip:   4.31 kB
+dist/assets/CampaignIsland-D3HwkDOV.js                 11.00 kB │ gzip:   4.58 kB
+dist/assets/WaterLab-COIes39N.js                       11.37 kB │ gzip:   3.92 kB
+dist/assets/ReferenceWater-DkWkrLcO.js                 12.29 kB │ gzip:   4.54 kB
+dist/assets/OrbitControls-D1sxIO7I.js                  19.11 kB │ gzip:   4.34 kB
+dist/assets/ScreenAwakeControl-B9RqQGB3.js             19.26 kB │ gzip:   8.10 kB
+dist/assets/GameplayLab-DyqbpCFw.js                    20.66 kB │ gzip:   7.05 kB
+dist/assets/Game-CIA_u0PM.js                           22.38 kB │ gzip:   8.03 kB
+dist/assets/PlayUI-CORTZ2Mx.js                         25.28 kB │ gzip:   9.04 kB
+dist/assets/SeasonTint-DW_5DD3h.js                     38.90 kB │ gzip:  13.92 kB
+dist/assets/SharedSettlement-jscjoL6d.js               45.83 kB │ gzip:  15.47 kB
+dist/assets/SettlementBrowser-BtBNZzEB.js              51.28 kB │ gzip:  16.25 kB
+dist/assets/WorldSave-SydYfav4.js                      65.24 kB │ gzip:  25.69 kB
+dist/assets/FacialIdentity-25NfnZZP.js                 80.50 kB │ gzip:  27.91 kB
+dist/assets/FjordEntry-k-k6wuIp.js                     81.64 kB │ gzip:  24.79 kB
+dist/assets/CharacterFactory-Cci6DJYT.js               94.63 kB │ gzip:  31.71 kB
+dist/assets/Water-ByVgOHKU.js                          95.48 kB │ gzip:  33.15 kB
+dist/assets/EnvironmentLab-YH9DG9GK.js                 95.86 kB │ gzip:  31.14 kB
+dist/assets/CharacterLab-Bykg7GfG.js                  101.04 kB │ gzip:  30.79 kB
+dist/assets/MeshyHuman-B1OjiC7n.js                    187.13 kB │ gzip:  58.85 kB
+dist/assets/GoldenBodySurfaceCalibration-C_5LNdMz.js  314.91 kB │ gzip:  64.61 kB
+dist/assets/GameplaySession-BPNqUxRz.js               322.74 kB │ gzip:  94.03 kB
+dist/assets/three.module-D1QLbwAQ.js                  561.03 kB │ gzip: 143.31 kB
+dist/assets/FjordPlay-f51TZzON.js                     604.39 kB │ gzip: 178.08 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 19.23s

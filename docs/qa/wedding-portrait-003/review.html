@@ -2,11 +2,15 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>FjordSide · Wedding portrait fix</title><style>body{margin:0;background:#182b2d;color:#efe6cf;font:16px/1.6 system-ui}main{max-width:850px;margin:auto;padding:24px}a{color:#e6c679}img{max-width:100%}.launch{display:inline-block;padding:12px;border:1px solid #e6c679;border-radius:4px}</style></head><body><main>
 <h1>Wedding portrait continuation</h1>
-<p><a class="launch" href="/fjord-play?culture=1&debugPerf=1&review=portrait-wedding-003" target="_blank">Open wedding review</a></p>
+<p><a class="launch" href="/fjord-play?culture=1&review=portrait-wedding-003" target="_blank">Open wedding review</a></p>
 <p>Export your own campaign first, then import the <a href="../cultural-occasions-277/review-fixture-v2/review-wedding-campaign.json" download="fjordside-wedding-review.json">unchanged original wedding checkpoint</a> through the start menu: Recover or import → Import campaign → Continue campaign.</p>
 <ol><li>Use portrait orientation. At the selected campfire choose Wedding celebration → Support gathering → Sponsor · 24 Food.</li>
 <li>The wedding should remain active while paused. Press Start to let residents run to the ceremony and perform.</li>
 <li>Try pause/resume, rotating the device and Skip. The ordinary camera and controls should restore safely.</li></ol>
 <p>This test save contains exactly 24 Food and the eight attendees cost 24 Food. “Food stocks are empty” is the expected stock notice after payment; it must not stop the wedding. No additional Food has been added to hide that notice.</p>
 <p><a href="README.md">Diagnosis and validation</a></p>
+<p><a href="/fjord-play?culture=1&debugPerf=1&review=portrait-wedding-003" target="_blank">Optional performance diagnostics</a></p>
+<h2>Recorded browser verification</h2><p>The fixed production scene stayed active in portrait after payment, performed with six residents and three instruments, survived rotation/pause, and completed normally. These are responsive browser checks; the physical iPhone recheck is separate.</p>
+<img src="portrait-playing.png" alt="Actual portrait wedding continuing with both spouses and a 23-second countdown">
+<p><a href="portrait-playing.json">Playing state</a> · <a href="resize-paused.json">Pause and rotation</a> · <a href="portrait-natural-end.json">Natural cleanup and restored camera</a> · <a href="validation.json">Exact runtime hashes</a></p>
 </main></body></html>

@@ -1,0 +1,110 @@
+[
+  {
+    "path": "desktop-paused.png",
+    "bytes": 113293,
+    "sha256": "3ee150768e1d880e77b4f9219d18677152d145f71bc911bd008661eff3a86416",
+    "lfSha256": "110c234173456a4f015e7517a3b63fef25ecc46074d9d52bf4ccdc1987e93ff7"
+  },
+  {
+    "path": "portrait-before-fix.json",
+    "bytes": 920,
+    "sha256": "008b8d76c39e3331d13366cb70df58e8c6fe562fa35b07106820153eca9ea459",
+    "lfSha256": "008b8d76c39e3331d13366cb70df58e8c6fe562fa35b07106820153eca9ea459"
+  },
+  {
+    "path": "portrait-before-fix.png",
+    "bytes": 59215,
+    "sha256": "3c53f01c71c02e58abf6d3147710bc45c7c1ab7a550024f66695091081ec5b00",
+    "lfSha256": "071763639c174cc25fbf582b4816a4507987a59897fdfeca7d042b1e26df35ba"
+  },
+  {
+    "path": "portrait-natural-end.json",
+    "bytes": 8439,
+    "sha256": "e3326fddf83500dab748caf9578b8571af71ea6735d0aa5fcc5a335825aec304",
+    "lfSha256": "e3326fddf83500dab748caf9578b8571af71ea6735d0aa5fcc5a335825aec304"
+  },
+  {
+    "path": "portrait-natural-end.png",
+    "bytes": 56293,
+    "sha256": "c374563011cbfd7ab5c9c815c1bd33b713a27fe6c884e5ca607c6d349e1e94de",
+    "lfSha256": "c374563011cbfd7ab5c9c815c1bd33b713a27fe6c884e5ca607c6d349e1e94de"
+  },
+  {
+    "path": "portrait-paid-paused.json",
+    "bytes": 1448,
+    "sha256": "1a2469f67b0108b0ffdbd80e192b77e02f39b164f381c058916ea529c1f63ca6",
+    "lfSha256": "1a2469f67b0108b0ffdbd80e192b77e02f39b164f381c058916ea529c1f63ca6"
+  },
+  {
+    "path": "portrait-paid-paused.png",
+    "bytes": 52178,
+    "sha256": "999ac6feadfe8683b81decb73c938bcfaa40e53504eeb246239dfb4abdaba338",
+    "lfSha256": "999ac6feadfe8683b81decb73c938bcfaa40e53504eeb246239dfb4abdaba338"
+  },
+  {
+    "path": "portrait-paused.json",
+    "bytes": 2296,
+    "sha256": "5f99b91ee49e5495a8e26cbcdea82cab1e1600b14a5590b3a488b0305532446e",
+    "lfSha256": "5f99b91ee49e5495a8e26cbcdea82cab1e1600b14a5590b3a488b0305532446e"
+  },
+  {
+    "path": "portrait-playing-timeline.json",
+    "bytes": 8734,
+    "sha256": "a0707bbbfae9a449ca2e130ff3ab7a67622e2464cac0a8433261ee3e8111385a",
+    "lfSha256": "a0707bbbfae9a449ca2e130ff3ab7a67622e2464cac0a8433261ee3e8111385a"
+  },
+  {
+    "path": "portrait-playing.json",
+    "bytes": 2189,
+    "sha256": "1ced7a4e0c785d15a3f7c9b82812ef8f8decbb3aed4edefbeefa9a834c18f23a",
+    "lfSha256": "1ced7a4e0c785d15a3f7c9b82812ef8f8decbb3aed4edefbeefa9a834c18f23a"
+  },
+  {
+    "path": "portrait-playing.png",
+    "bytes": 52817,
+    "sha256": "450e4e92c28c8556a6529b3d09f80a4cc749b17bd907c39f778b8ceded49c7bc",
+    "lfSha256": "450e4e92c28c8556a6529b3d09f80a4cc749b17bd907c39f778b8ceded49c7bc"
+  },
+  {
+    "path": "production-build.log",
+    "bytes": 5788,
+    "sha256": "9f668289c70fbb9edd9c045deb9369e0e4e68a1e673c41c3058efaa4cca46b41",
+    "lfSha256": "35c51caa1fe549fec0609998e78289d413830209538a5b4646306f5afb332c79"
+  },
+  {
+    "path": "projection-red.json",
+    "bytes": 1381,
+    "sha256": "b1e9d4acf9c23b266986f7f288467867f119b9c139ffb1af88d11c3ff7a13427",
+    "lfSha256": "b8128184108add761c007a7dd801c1390ff7c146dba354accbcbdb1753b1d96d"
+  },
+  {
+    "path": "README.md",
+    "bytes": 5103,
+    "sha256": "69f607f935804c176666429660e2ec85b990c8a8cffb7c4d2baab06623114513",
+    "lfSha256": "aa957260b6d2c137240ab51f72a12d94d0712cfc566d2b8d75e0284b45dcd785"
+  },
+  {
+    "path": "regressions.log",
+    "bytes": 21308,
+    "sha256": "345a9de885bbf4188e15a0ea1bb2d03b4b5df2851405ffada4ab9ebd211fcecb",
+    "lfSha256": "0b5315434ac75a8cd6f1a13f76577f2ea7c6b8a418badf0a94aa969d4de75140"
+  },
+  {
+    "path": "resize-paused.json",
+    "bytes": 2753,
+    "sha256": "8121bde3c9efc3ae0a2921e104a8f981dea9d0b3c9197d51bd0b17f39bbf8bf9",
+    "lfSha256": "8121bde3c9efc3ae0a2921e104a8f981dea9d0b3c9197d51bd0b17f39bbf8bf9"
+  },
+  {
+    "path": "review.html",
+    "bytes": 2411,
+    "sha256": "780608ad217782f85de67cdd88589af52d7d8f1695132b6e0da96bd364936105",
+    "lfSha256": "119a6bbe48a3e4ab9450afe91f893e02e4d32a3936ba27a0f333ae137bdb7952"
+  },
+  {
+    "path": "validation.json",
+    "bytes": 2743,
+    "sha256": "75e47983010b3dcf609a87c07824108645ec8e57de804c55105880c58e900dee",
+    "lfSha256": "49a43edcd5e74e009acd255764cb89a557dc6450338bfb5b1ffaa06678f67289"
+  }
+]
