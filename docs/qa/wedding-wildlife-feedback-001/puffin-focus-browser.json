@@ -1,0 +1,6 @@
+{
+  "focus": "{\"reason\":\"started\",\"obstacles\":53,\"limited\":false}",
+  "notice": "Fjord ready. Desktop: left-click to select (empty ground clears selection), left-drag to pan, right-drag to rotate, wheel to zoom. Touch: tap empty ground to navigate, drag to rotate, pinch to zoom.",
+  "orbit": "{\"active\":true,\"reason\":\"active\",\"elapsed\":0.6052999999970199,\"arcRadians\":0.19634954084936207,\"target\":{\"worldId\":\"fjordside-island-v0.3e-r3:168:cffd7da8\",\"speciesId\":\"puffin\",\"wildlifeInstanceId\":\"puffin:land:0\"}}",
+  "time": "{\"winter\":800,\"tick\":40,\"ticksPerWinter\":1000}"
+}

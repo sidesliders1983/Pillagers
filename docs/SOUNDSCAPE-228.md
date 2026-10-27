@@ -146,3 +146,22 @@ and the twenty-minute listening pass before broader activation.
 API references: [Web Audio best practices](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Best_practices),
 [context state](https://developer.mozilla.org/en-US/docs/Web/API/BaseAudioContext/state),
 [panner attenuation](https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/distanceModel).
+
+## Owner feedback: world-positioned wedding music and sighting calls
+
+Wedding music is a single streamed source routed through a native Panner and the
+existing World bus. Its position follows the centroid of the actual staged
+musicians (or the ceremony center when no musician is present). The normal listener,
+finite distance/zoom attenuation, Master/World volumes, pause, mute and lifecycle
+remain authoritative. This source does not duck the other buses: wind, shore, fire
+and ordinary nearby sounds can continue at the player's chosen volumes. No decoded
+song buffer or extra AudioContext is created.
+
+An explicit live wildlife focus can play its approved existing recording once per
+source event in the current scene, including when the campaign is paused. Exact
+world/species/instance/observability checks still apply. Historical unavailable
+animals remain silent. Refreshes cannot replay the cue; ordinary pause/background
+rules for automatic wildlife audio remain unchanged. The one-shot replaces the
+same animal's periodic emitter while it plays, avoiding overlapping copies. There
+is no approved puffin recording in the current pack, so no unrelated bird recording
+is substituted. See [feedback validation](qa/wedding-wildlife-feedback-001/README.md).

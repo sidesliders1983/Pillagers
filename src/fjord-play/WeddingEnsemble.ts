@@ -1,4 +1,4 @@
-import { Bone, Group, Mesh, Quaternion, Vector3, type Object3D, type Texture } from 'three';
+import { Bone, Box3, Group, Mesh, Quaternion, Vector3, type Object3D, type Texture } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { assetDigest } from '../characters/AssetDigest';
 import type { MeshyHuman } from '../characters/MeshyHuman';
@@ -10,6 +10,7 @@ type WeddingProp = WeddingInstrument | 'wedding-book' | 'wedding-crown';
 const propFor = (role: WeddingRole): WeddingProp | undefined => role.instrument ??
     (role.role === 'officiant' ? 'wedding-book' : role.crown ? 'wedding-crown' : undefined);
 type Performer = WeddingResident & { role: WeddingRole; prop?: Object3D;
+    headwear?: { node: Object3D; visible: boolean };
     pose?: { bone: Bone; before: Quaternion; applied: Quaternion }[] };
 type JoinedHands = { left: Vector3; right: Vector3; leftContact: Vector3; rightContact: Vector3 };
 const point = (x: number, y: number, z: number) => new Vector3(x, y, z);
@@ -107,8 +108,15 @@ export class WeddingEnsemble {
             const propId = propFor(role);
             if (propId && !performer.prop && this.templates.has(propId)) {
                 performer.prop = this.templates.get(propId)!.clone(true);
-                if (propId === 'wedding-crown') this.attachCrown(resident.human, performer.prop);
-                else resident.human.root.add(performer.prop);
+                if (propId === 'wedding-crown') {
+                    this.attachCrown(resident.human, performer.prop);
+                    const headwearId = resident.human.root.userData.selectedAssets?.headwear;
+                    const node = resident.human.fit.modules.get(headwearId);
+                    if (node && performer.prop.parent) {
+                        performer.headwear = { node, visible: node.visible };
+                        node.visible = false;
+                    }
+                } else resident.human.root.add(performer.prop);
             }
 
         }
@@ -153,16 +161,28 @@ export class WeddingEnsemble {
         }
     }
     private attachCrown(human: MeshyHuman, crown: Object3D) {
-        const head = human.fit.nativeSkeleton.bones.find(bone => bone.name.endsWith('Head'));
-        if (!head) return;
+        const socket = human.fit.sockets.get('socket_head_top');
+        if (!socket) return;
+        // Fit once to the real posed scalp in its fitted socket frame. The native
+        // head joint is behind/below the scalp and is not a hat placement point.
+        const surface = human.fit.surface('posed');
         human.root.updateWorldMatrix(true, true);
-        const scale = (Number(human.root.userData.character?.height) || 1.75) / 1.75;
-        const scalp = head.getWorldPosition(new Vector3()).add(point(0, .14 * scale, 0));
-        crown.position.copy(head.worldToLocal(scalp));
-        crown.quaternion.copy(head.getWorldQuaternion(new Quaternion()).invert()
-            .multiply(human.root.getWorldQuaternion(new Quaternion())));
-        crown.scale.setScalar(.31 * scale);
-        head.add(crown);
+        const toSocket = socket.matrixWorld.clone().invert().multiply(human.fit.mesh.matrixWorld);
+        const scalp = new Box3();
+        for (let vertex = 0; vertex < surface.regions.length; vertex++) {
+            if (surface.regions[vertex] !== 'HEAD') continue;
+            scalp.expandByPoint(new Vector3().fromArray(surface.positions, vertex * 3).applyMatrix4(toSocket));
+        }
+        if (scalp.isEmpty()) return;
+        const asset = new Box3().setFromObject(crown);
+        const size = asset.getSize(new Vector3()), head = scalp.getSize(new Vector3());
+        const center = scalp.getCenter(new Vector3()), assetCenter = asset.getCenter(new Vector3());
+        const sx = (head.x + .045) / size.x, sz = (head.z + .045) / size.z;
+        const sy = Math.min(sx, sz);
+        crown.scale.set(sx, sy, sz);
+        crown.position.set(center.x - assetCenter.x * sx,
+            scalp.max.y - head.y * .19 - asset.min.y * sy, center.z - assetCenter.z * sz);
+        socket.add(crown);
     }
     private preparePose(performer: Performer) {
         const { human } = performer;
@@ -237,6 +257,7 @@ export class WeddingEnsemble {
     }
     private release(performer: Performer) {
         performer.prop?.removeFromParent();
+        if (performer.headwear) performer.headwear.node.visible = performer.headwear.visible;
         if (!performer.human.isDisposed) {
             for (const saved of performer.pose ?? [])
                 if (saved.bone.quaternion.equals(saved.applied)) saved.bone.quaternion.copy(saved.before);

@@ -1,8 +1,9 @@
+import type { SoundPoint } from './Soundscape';
 export interface ForegroundAsset { path: string; seconds: number; }
 export interface ForegroundHost {
     createMedia(): HTMLAudioElement;
     allowed(): boolean;
-    connect(media: HTMLAudioElement): { gain(value: number): void; dispose(): void };
+    connect(media: HTMLAudioElement): { gain(value: number): void; position?(point: SoundPoint): void; dispose(): void };
     duck(active: boolean): void;
     resolve?(path: string): string;
 }
@@ -20,10 +21,18 @@ export class ForegroundTrack {
     private elapsed = 0;
     private running = false;
     private envelope = 1;
+    private position?: SoundPoint;
     constructor(private readonly asset: ForegroundAsset, private readonly host: ForegroundHost) {
         if (!/^game-assets\/wedding\/[a-z0-9-]+\.mp3$/.test(asset.path) ||
             !Number.isFinite(asset.seconds) || asset.seconds <= 0 || asset.seconds > 180)
             throw new Error('Invalid prepared wedding music.');
+    }
+    /** Current presentation source only; keeps the existing stream and application listener. */
+    setPosition(point: SoundPoint) {
+        if (this.disposed || !Object.values(point).every(Number.isFinite)) return;
+        this.position = { ...point };
+        this.route?.position?.(this.position);
+        this.route?.gain(this.envelope);
     }
     get duration() {
         const duration = this.media?.duration;
@@ -62,6 +71,7 @@ export class ForegroundTrack {
             this.media.onended = () => { this.ended = true; this.host.duck(false); };
             this.media.onerror = () => { this.failed = true; this.host.duck(false); };
             this.route = this.host.connect(this.media);
+            if (this.position) this.route.position?.(this.position);
         }
         return this.media;
     }

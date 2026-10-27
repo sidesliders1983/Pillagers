@@ -1,6 +1,6 @@
 import { ForegroundTrack, type ForegroundAsset } from './ForegroundTrack';
 import { Soundscape, soundGain, soundLimits, type SoundBus, type SoundCamera, type SoundEmitter,
-    type SoundCue, type SoundVoice } from './Soundscape';
+    type SoundCue, type SoundPoint, type SoundVoice } from './Soundscape';
 
 export interface SoundAsset {
     id: string;
@@ -186,7 +186,7 @@ export class FjordAudio {
         this.foregroundTrack = undefined;
     }
     /** A single streamed foreground lease shares consent, preferences and the existing context. */
-    foreground(asset: ForegroundAsset): ForegroundTrack {
+    foreground(asset: ForegroundAsset, options: { spatial?: boolean } = {}): ForegroundTrack {
         this.releaseForeground();
         const track = new ForegroundTrack(asset, {
             createMedia: this.createMedia,
@@ -197,11 +197,37 @@ export class FjordAudio {
                 const source = this.context.createMediaElementSource(media);
                 const gain = this.context.createGain();
                 source.connect(gain);
-                gain.connect(this.master);
-                return { gain: value => this.ramp(gain.gain, this.preferences.world * .8 * value),
-                    dispose: () => { source.disconnect(); gain.disconnect(); } };
+                const panner = options.spatial ? this.context.createPanner() : undefined;
+                let position: SoundPoint | undefined;
+                if (panner) {
+                    panner.panningModel = 'equalpower';
+                    panner.rolloffFactor = 0; // Same explicit bounded attenuation as the existing world sounds.
+                    panner.channelCount = 1;
+                    panner.channelCountMode = 'explicit';
+                    gain.connect(panner);
+                    panner.connect(this.buses.get('world')!);
+                } else gain.connect(this.master);
+                return {
+                    position: point => {
+                        position = { ...point };
+                        panner?.positionX.setValueAtTime(point.x, this.context!.currentTime);
+                        panner?.positionY.setValueAtTime(point.y, this.context!.currentTime);
+                        panner?.positionZ.setValueAtTime(point.z, this.context!.currentTime);
+                    },
+                    gain: value => {
+                        const scope = this.current;
+                        const separation = position && scope?.listener?.valid ?
+                            Math.hypot(position.x - scope.listener.position.x, position.y - scope.listener.position.y,
+                                position.z - scope.listener.position.z) : Infinity;
+                        const spatial = Math.max(0, 1 - separation / 100) *
+                            Math.min(1, 40 / Math.max(40, scope?.camera?.distance ?? Infinity));
+                        this.ramp(gain.gain, .8 * value * (panner ? spatial : this.preferences.world));
+                    },
+                    dispose: () => { source.disconnect(); gain.disconnect(); panner?.disconnect(); },
+                };
             },
             duck: active => {
+                if (options.spatial) return;
                 if (this.foregroundTrack !== track || this.foregroundDucking === active) return;
                 this.foregroundDucking = active;
                 this.applyBusGains();

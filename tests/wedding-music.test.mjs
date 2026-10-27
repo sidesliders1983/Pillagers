@@ -108,3 +108,47 @@ test('an arrival request waits for the enabled context to finish resuming withou
     assert.equal(f.inspect().ducked, true);
     f.track.dispose();
 });
+
+test('a wedding stream is a positioned world source, keeps ambience at its chosen volume and fades with listener distance', async () => {
+    const { FjordAudio } = load('../src/audio/FjordAudio.ts');
+    const parameter = () => ({ value: 0, cancelScheduledValues() {}, setValueAtTime(value) { this.value = value; },
+        setTargetAtTime(value) { this.value = value; } });
+    const gains = [], panners = [];
+    const node = () => ({ outputs: [], connect(target) { this.outputs.push(target); }, disconnect() { this.outputs = []; } });
+    const context = { state: 'suspended', currentTime: 0, sampleRate: 24000, destination: node(), addEventListener() {},
+        listener: Object.fromEntries(['positionX','positionY','positionZ','forwardX','forwardY','forwardZ','upX','upY','upZ']
+            .map(name => [name, parameter()])),
+        createGain() { const value = { ...node(), gain: parameter() }; gains.push(value); return value; },
+        createPanner() { const value = { ...node(), positionX: parameter(), positionY: parameter(), positionZ: parameter() }; panners.push(value); return value; },
+        createMediaElementSource() { return node(); },
+        async resume() { this.state = 'running'; }, async suspend() { this.state = 'suspended'; }, async close() {} };
+    const f = fixture();
+    const audio = new FjordAudio({ createContext: () => context, createMedia: () => f.element });
+    await audio.enable(); audio.configure({ ambience: .6, world: .7 });
+    const world = audio.world({ assets: [], cues: [] });
+    const camera = { focus: { x: 0, y: 0, z: 0 }, forward: { x: 0, z: 1 }, distance: 12 };
+    world.update(camera, [], false, true);
+    const ambience = gains[1].gain.value;
+    const track = audio.foreground({ path: 'game-assets/wedding/firelight-vow.mp3', seconds: 30.041 }, { spatial: true });
+    track.setPosition({ x: 8, y: 1.7, z: 2 }); track.update(0, true);
+    try {
+        assert.equal(await track.play(), true);
+        assert.equal(panners.length, 1, 'One existing-context native Panner owns the scene music');
+        assert.equal(panners[0].positionX.value, 8);
+        assert.equal(panners[0].positionZ.value, 2);
+        assert.equal(audio.inspect().foregroundDucking, false, 'Diegetic music leaves the ordinary ambience running');
+        assert.equal(gains[1].gain.value, ambience);
+        const routeGain = gains.at(-1), near = routeGain.gain.value;
+        assert.ok(near > 0);
+        world.update({ ...camera, focus: { x: 300, y: 0, z: 0 } }, [], false, true);
+        track.update(1, true);
+        assert.equal(routeGain.gain.value, 0, 'Walking the listener away silences the source instead of following the menu');
+        world.update(camera, [], false, true); track.update(2, true);
+        assert.ok(routeGain.gain.value > 0);
+        audio.configure({ muted: true });
+        assert.equal(f.element.paused, true);
+        track.dispose();
+        assert.equal(panners[0].outputs.length, 0, 'Spatial route releases on scene cleanup');
+        assert.equal(audio.inspect().decodedBytes, 0, 'The streamed song does not enter the SFX PCM cache');
+    } finally { await audio.dispose(); }
+});

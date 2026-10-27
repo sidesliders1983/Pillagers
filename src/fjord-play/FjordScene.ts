@@ -192,8 +192,9 @@ export function createFjordScene(options: {
         return anchor && (!knownTerrain || discoveryAt(knownTerrain, anchor.position[0], anchor.position[2]) === 'visible')
             ? anchor : undefined;
     };
-    const wildlifeCamera = new WildlifeCamera(camera, controller, queryWildlife, view =>
-        !!wildlifeObstacles?.allows(view) && (!knownTerrain ||
+    const wildlifeCamera = new WildlifeCamera(camera, controller, queryWildlife, (view, phase, previous) =>
+        !!wildlifeObstacles?.allows(view, phase !== 'approach') &&
+        (!previous || wildlifeObstacles.travel(previous, view.position)) && (!knownTerrain ||
             discoveryAt(knownTerrain, view.position[0], view.position[2]) !== 'unknown' &&
             discoveryAt(knownTerrain, view.target[0], view.target[2]) !== 'unknown'));
     wildlifeCamera.onEnd = reason => {
@@ -306,6 +307,14 @@ export function createFjordScene(options: {
     const updateWedding = (current: CulturalPresentationFrame | null, running: boolean) => {
         if (!weddingId) return;
         if (!current?.wedding || current.id !== weddingId || document.hidden) { stopWedding(); return; }
+        const residents = layer?.weddingResidents(current.participantKeys) ?? [];
+        const musicians = current.wedding.roles.filter(role => role.role === 'musician')
+            .flatMap(role => { const resident = residents.find(person => person.id === role.id);
+                return resident ? [resident.human.root.getWorldPosition(new Vector3())] : []; });
+        const musicSource = musicians.length ? musicians.reduce((sum, point) => sum.add(point), new Vector3())
+            .divideScalar(musicians.length).add(new Vector3(0, 1.2, 0)) :
+            new Vector3(current.position.x, current.position.y + 1.2, current.position.z);
+        weddingTrack?.setPosition({ x: musicSource.x, y: musicSource.y, z: musicSource.z });
         const playing = current.phase !== 'approach';
         const elapsed = current.wedding.elapsed;
         weddingTrack?.update(elapsed, playing && running,
@@ -315,7 +324,7 @@ export function createFjordScene(options: {
             void weddingTrack?.play();
         }
         if (weddingTrack) culture?.setWeddingDuration(weddingTrack.duration);
-        const residents = layer?.weddingResidents(current.participantKeys) ?? [];
+
         if (playing) weddingEnsemble.update(current.wedding.roles, residents,
             reducedMotion.matches ? 0 : elapsed);
         else weddingEnsemble.stop();
@@ -896,7 +905,8 @@ export function createFjordScene(options: {
                 sampleRate: audioWorld.sampleRate, ready: cue => audioWorld!.ready(cue) });
             for (const cue of culturalSound.prepareCueIds) audioWorld.prepare(cue);
             if (work.fresh) soundContacts++;
-            if (!running || document.hidden || !options.audio?.enabled) wildlifeSounds?.clear();
+            if (document.hidden || !options.audio?.enabled) wildlifeSounds?.clear();
+            else if (!running) wildlifeSounds?.clearAmbient();
             if (audioWorld.due || work.fresh || work.invalidated || culturalSound.fresh || culturalSound.invalidated) {
                 const projectionStarted = performance.now();
                 const focus = controller.focus;
@@ -914,8 +924,11 @@ export function createFjordScene(options: {
                     visible, known: (x, z) => !knownTerrain || discoveryAt(knownTerrain, x, z) !== 'unknown',
                     fire: soundFire,
                     actors: soundActors });
-                audioSources.push(...(wildlifeSounds?.sample(frameStarted / 1000, soundCamera, soundActors,
-                    running && !document.hidden && !!options.audio?.enabled) ?? []));
+                const wildlifeCalls = wildlifeSounds?.sample(frameStarted / 1000, soundCamera, soundActors,
+                    !document.hidden && !!options.audio?.enabled, !running) ?? [];
+                const callIds = new Set(wildlifeCalls.map(source => source.id));
+                audioSources = audioSources.filter(source => !callIds.has(source.id));
+                audioSources.push(...wildlifeCalls);
                 audioSources.push(...work.sources, ...culturalSound.sources);
                 soundProjectionMs = performance.now() - projectionStarted;
                 audioWorld.prepare('axe-impact');
@@ -1135,12 +1148,22 @@ export function createFjordScene(options: {
                 world.root, ...(dressing ? [dressing.root] : []),
                 ...(layer ? [layer.root] : []), ...(rivalScene ? [rivalScene.root] : []),
             ], pivot.toArray(), range, []);
-            const direct = { position: camera.position.toArray(), target: pivot.toArray() };
-            const preview = controller.previewView(direct);
-            if (!preview || preview.position[1] - camera.position.y > .5 || !wildlifeObstacles.allows(direct) ||
-                !wildlifeCamera.begin(focus.target, reducedMotion.matches)) {
+            const reportFocus = (reason: string) => {
+                if (query.has('debugPerf')) canvas.dataset.wildlifeFocus = JSON.stringify({ reason,
+                    obstacles: wildlifeObstacles?.count, limited: wildlifeObstacles?.limited });
+            };
+            const reason = wildlifeCamera.begin(focus.target, reducedMotion.matches) ? 'started' : 'entry-or-orbit';
+            reportFocus(reason);
+            if (reason !== 'started') {
                 wildlifeObstacles = undefined;
                 return 'unsafe';
+            }
+            if (options.audio?.enabled) {
+                const state = session.readSnapshot(), event = state.events.find(event => event.id === eventId);
+                if (event) wildlifeSounds?.focus(event, { clanId: state.clan.id, worldId: anchor.worldId,
+                    now: performance.now() / 1000 }, { id: anchor.wildlifeInstanceId, kind: 'wildlife',
+                    species: anchor.speciesId, observable: true, movement: anchor.movement,
+                    position: { x: anchor.position[0], y: anchor.position[1], z: anchor.position[2] } });
             }
             const epoch = session.personalHistoryEpoch;
             wildlifeView = new WildlifeCinematicView(canvas.parentElement!, focus.label, {
@@ -1159,7 +1182,7 @@ export function createFjordScene(options: {
             const event = state.events.find(event => event.id === state.culture?.lastGatheringEventId);
             if (event?.type !== 'CulturalGatheringHeld' || event.details?.occasion !== 'wedding') return;
             preparedWeddingMusic?.track.dispose();
-            const track = options.audio?.foreground(weddingAssets.music);
+            const track = options.audio?.foreground(weddingAssets.music, { spatial: true });
             if (track) {
                 preparedWeddingMusic = { id: event.id, track };
                 void track.prime();
@@ -1191,7 +1214,7 @@ export function createFjordScene(options: {
             if (accepted && frame) {
                 if (frame.wedding) {
                     weddingId = frame.id;
-                    weddingTrack = primed?.id === frame.id ? primed.track : options.audio?.foreground(weddingAssets.music);
+                    weddingTrack = primed?.id === frame.id ? primed.track : options.audio?.foreground(weddingAssets.music, { spatial: true });
                     if (primed && primed.track !== weddingTrack) primed.track.dispose();
                     weddingObstacles = sceneEntities.filter(entity => ['building', 'household'].includes(entity.kind))
                         .flatMap(entity => { const box = layer?.bounds(entity.selectionKey); return box ? [box.expandByScalar(.4)] : []; });

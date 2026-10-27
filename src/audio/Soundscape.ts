@@ -23,6 +23,8 @@ export interface SoundEmitter {
     /** Current action marker only; unchanged markers never replay on refresh. */
     event?: string;
     revision?: number;
+    /** A bounded explicit sighting audition can play once while the campaign remains paused. */
+    userInitiated?: boolean;
     /** Local geography/season blend, independent of canonical rules and bus volume. */
     weight?: number;
 }
@@ -37,7 +39,7 @@ export const soundLimits = { cadence: .2, emitters: 128, beds: 3, local: 8, fadi
 const distance = (a: SoundPoint, b: SoundPoint) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
 export function soundGain(cue: SoundCue, source: SoundEmitter, listener: SoundPoint,
     cameraDistance: number, paused: boolean) {
-    if (!source.permitted || (paused && cue.bus === 'world')) return 0;
+    if (!source.permitted || (paused && cue.bus === 'world' && !source.userInitiated)) return 0;
     if (cue.bus === 'world' && (!source.position || !Object.values(source.position).every(Number.isFinite))) return 0;
     const separation = source.position ? distance(listener, source.position) : 0;
     const fade = cue.bus === 'world' ? Math.max(0, 1 - separation / cue.range) *
@@ -84,12 +86,12 @@ export class Soundscape {
         const candidates: { source: SoundEmitter; cue: SoundCue; fade: number; score: number }[] = [];
         for (const source of sources) {
             const cue = this.cues.get(source.cue);
-            if (!valid || !cue || !source.permitted || (paused && cue.bus === 'world')) continue;
+            if (!valid || !cue || !source.permitted || (paused && cue.bus === 'world' && !source.userInitiated)) continue;
             if (cue.bus === 'world' && !source.position) continue;
             if (source.position && !Object.values(source.position).every(Number.isFinite)) continue;
             const gain = soundGain(cue, source, position, camera.distance, paused);
             const fade = cue.gain > 0 ? gain / cue.gain : 0;
-            if (!(fade > 0) || (!cue.loop && now < (this.next.get(cue.id) ?? -Infinity))) continue;
+            if (!(fade > 0) || (!cue.loop && !source.userInitiated && now < (this.next.get(cue.id) ?? -Infinity))) continue;
             const marker = `${source.cue}:${source.revision ?? 0}:${source.event}`;
             if (source.event !== undefined && this.markers.get(source.id) === marker) continue;
             candidates.push({ source, cue, fade,
@@ -103,7 +105,7 @@ export class Soundscape {
             const count = families.get(cue.id) ?? 0;
             if (count >= Math.min(4, cue.limit) ||
                 (cue.bus === 'ambience' ? beds >= soundLimits.beds : local >= localBudget)) continue;
-            if (!cue.loop && now < (this.next.get(cue.id) ?? -Infinity)) continue;
+            if (!cue.loop && !source.userInitiated && now < (this.next.get(cue.id) ?? -Infinity)) continue;
             const last = this.previous.get(cue.id) ?? -1;
             const index = cue.variants.length <= 1 ? 0 :
                 (last + 1 + Math.floor(this.random() * (cue.variants.length - 1))) % cue.variants.length;

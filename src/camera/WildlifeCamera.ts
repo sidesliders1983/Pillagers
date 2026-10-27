@@ -14,6 +14,7 @@ type Session = {
     arc: number;
     elapsed: number;
     reduced: boolean;
+    lastEye: number[];
 };
 const entrySeconds = 1.4;
 const orbitSeconds = 10;
@@ -37,7 +38,7 @@ export class WildlifeCamera {
     onEnd?: (reason: string) => void;
     constructor(private readonly camera: PerspectiveCamera, private readonly controller: RTSCameraController,
         private readonly query: (target: LiveWildlifeTarget) => LiveWildlifeAnchor | undefined,
-        private readonly safe: (view: View) => boolean = () => true) {
+        private readonly safe: (view: View, phase: 'approach' | 'orbit', previous?: number[]) => boolean = () => true) {
         this.releaseInput = controller.onNavigationIntent(() => this.cancel('manual-navigation'));
     }
     private anchor(target: LiveWildlifeTarget) {
@@ -47,9 +48,10 @@ export class WildlifeCamera {
             ![...anchor.position, ...anchor.bounds.min, ...anchor.bounds.max].every(Number.isFinite)) return;
         return anchor;
     }
-    private view(position: Vector3, target: Vector3, maximumLift: number): View | undefined {
+    private view(position: Vector3, target: Vector3, maximumLift: number,
+        phase: 'approach' | 'orbit' = 'orbit', previous?: number[]): View | undefined {
         const view = this.controller.previewView({ position: position.toArray(), target: target.toArray() });
-        if (!view || view.position[1] - position.y > maximumLift || !this.safe(view)) return;
+        if (!view || view.position[1] - position.y > maximumLift || !this.safe(view, phase, previous)) return;
         return view;
     }
     private circle(session: Session, progress: number) {
@@ -71,18 +73,21 @@ export class WildlifeCamera {
         const rise = MathUtils.clamp(size.y * .7 + 2, 2.5, 6);
         const direction = this.camera.position.clone().sub(pivot);
         const startAngle = Math.atan2(direction.x, direction.z);
-        const from = { position: this.camera.position.toArray(), target: this.controller.focus.toArray() };
+        const from: View = { position: this.camera.position.toArray(), target: this.controller.focus.toArray() };
         for (const offset of [0, Math.PI / 4, -Math.PI / 4, Math.PI / 2, -Math.PI / 2, Math.PI]) {
             const session: Session = { target: { ...target }, origin: pivot.clone(), pivot: pivot.clone(),
-                from, radius, rise, angle: startAngle + offset, arc: 0, elapsed: 0, reduced: reducedMotion };
+                from, radius, rise, angle: startAngle + offset, arc: 0, elapsed: 0, reduced: reducedMotion, lastEye: [...from.position] };
             const first = this.view(this.circle(session, 0), pivot, 3);
             if (!first) continue;
             let entrySafe = true;
+            let previous = from.position;
             for (let step = 0; step <= 8; step++) {
                 const t = step / 8;
                 const eye = new Vector3().fromArray(from.position).lerp(new Vector3().fromArray(first.position), t);
                 const focus = new Vector3().fromArray(from.target).lerp(pivot, t);
-                if (!this.view(eye, focus, 3)) { entrySafe = false; break; }
+                const view = this.view(eye, focus, 3, 'approach', previous);
+                if (!view) { entrySafe = false; break; }
+                previous = view.position;
             }
             if (!entrySafe) continue;
             if (!reducedMotion) {
@@ -98,6 +103,27 @@ export class WildlifeCamera {
             this.session = session;
             this.reason = 'active';
             return true;
+        }
+        // A visible animal need not have a clear close orbit. Keep the current safe
+        // side and ease only the framing, rather than declaring a live sighting unavailable.
+        const held = this.view(this.camera.position, pivot, 3);
+        if (held) {
+            const offset = new Vector3().fromArray(held.position).sub(pivot);
+            let entrySafe = true, previous = from.position;
+            for (let step = 0; step <= 8; step++) {
+                const eye = new Vector3().fromArray(from.position).lerp(new Vector3().fromArray(held.position), step / 8);
+                const focus = new Vector3().fromArray(from.target).lerp(pivot, step / 8);
+                const view = this.view(eye, focus, 3, 'approach', previous);
+                if (!view) { entrySafe = false; break; }
+                previous = view.position;
+            }
+            if (entrySafe) {
+                this.session = { target: { ...target }, origin: pivot.clone(), pivot: pivot.clone(), from,
+                    radius: Math.hypot(offset.x, offset.z), rise: offset.y, angle: Math.atan2(offset.x, offset.z),
+                    arc: 0, elapsed: 0, reduced: reducedMotion, lastEye: [...from.position] };
+                this.reason = 'active';
+                return true;
+            }
         }
         this.reason = 'no-safe-view';
         return false;
@@ -120,9 +146,10 @@ export class WildlifeCamera {
             eye.lerp(new Vector3().fromArray(session.from.position), 1 - enter);
             focus.lerp(new Vector3().fromArray(session.from.target), 1 - enter);
         }
-        const view = this.view(eye, focus, 3);
+        const view = this.view(eye, focus, 3, session.elapsed < entrySeconds ? 'approach' : 'orbit', session.lastEye);
         if (!view) { this.cancel('view-obstructed'); return; }
         this.controller.setView(view, { presentation: true });
+        session.lastEye = view.position;
         if (session.elapsed >= (session.reduced ? 2.8 : entrySeconds + orbitSeconds)) this.cancel('complete');
     }
     cancel(reason = 'cancelled') {

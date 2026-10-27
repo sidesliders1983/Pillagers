@@ -307,3 +307,16 @@ The selected owner music streams through the existing audio owner and drives app
 
 
 The spouses extend both hands toward shared fingertip contact using their existing native rigs; feet and bone lengths remain unchanged. The female spouse wears the supplied flower crown and the officiant holds the supplied open book in both hands. These are temporary rigid accessories, removed with the performance. Cinematic overhead name boards are hidden, and normal safe shots use a lower viewpoint. A saved sound-on preference resumes from ordinary start/control gestures; explicit mute remains authoritative. The selected native music element is silently primed during accepted sponsorship and starts automatically once the staged cast arrives. Browser autoplay denial retains the optional Play music fallback.
+
+### Owner fitting and audio follow-up
+
+The flower wreath uses the fitted `socket_head_top`, centered and sized from the
+current native posed HEAD surface. It temporarily hides the existing headwear
+module and restores that module's original visibility on release. It does not
+replace hair, identity, clothing selection or skeletons.
+
+The selected song is now a positioned world stream at the actual musicians. Its
+volume follows the ordinary listener and camera distance; other ambient/world
+sounds keep their chosen volumes. Music consent, explicit mute, pause, background
+cleanup, the existing MP3 and all canonical wedding costs remain unchanged.
+[Feedback validation](../qa/wedding-wildlife-feedback-001/README.md).

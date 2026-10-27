@@ -170,3 +170,16 @@ scene/world replacement, context loss, quality/viewport changes, another task an
 disposal cancel the session and release its caption/listeners.
 
 [Reproducible fixtures and browser evidence](qa/wildlife-cinematic-292/README.md).
+
+### Coastal focus follow-up
+
+Approach safety checks the actual moving eye corridor separately from the old
+camera's intermediate look target. A rock in front of that old target is not by
+itself a camera collision. Native terrain/water clearance, known-area bounds and
+prop collision remain mandatory. The arrived view and orbit still require clear
+sight of the actual animal. When no close orbit fits, a safe existing angle can hold
+with eased framing instead of rejecting an otherwise visible animal.
+
+A focused sighting may play its approved existing animal recording once; no new
+recordings, simulation events or discovery are created. Missing approved recordings
+remain silent. See [owner feedback evidence](qa/wedding-wildlife-feedback-001/README.md).

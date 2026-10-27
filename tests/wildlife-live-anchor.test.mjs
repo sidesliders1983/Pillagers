@@ -85,3 +85,52 @@ test('real surfaced marine instances can focus, but the same naturally diving an
         assert.equal(layer.liveAnchor(target), undefined, 'Drawing the last dive/fluke frames is not a current sighting');
     } finally { layer.dispose(); }
 });
+
+// Actual coastal terrain and native float poses, rather than a flat camera-only anchor.
+test('the real island seal and floating puffin can be framed safely from an ordinary nearby view', async () => {
+    const { JSDOM } = await import('jsdom');
+    const { loadDOMSource } = await import('./load-dom-source.mjs');
+    const { Object3D } = await import('three');
+    const { RTSCameraController } = loadDOMSource('../src/camera/RTSCameraController.ts');
+    const { WildlifeCamera } = loadDOMSource('../src/camera/WildlifeCamera.ts');
+    const { SharedSettlement } = load('../src/play/SharedSettlement.ts');
+    const { createBlueprintSurface } = load('../src/world-generation/TerrainQueries.ts');
+    const checkpoint = await readFile('docs/qa/wildlife-cinematic-292/live-sighting.json', 'utf8');
+    const owner = SharedSettlement.restore(checkpoint, 'fjord');
+    owner.session.command({ type: 'AdvanceTicks', ticks: 10 });
+    const world = owner.fjord.blueprint, surface = createBlueprintSurface(world);
+    const state = owner.session.readSnapshot();
+    const layer = await WildlifeLayer.create(world, () => true, sources);
+    const dom = new JSDOM('<canvas></canvas>', { pretendToBeVisual: true });
+    const names = ['window', 'document', 'AbortController', 'HTMLInputElement', 'HTMLSelectElement', 'HTMLTextAreaElement'];
+    const previous = Object.fromEntries(names.map(name => [name, globalThis[name]]));
+    for (const name of names) globalThis[name] = name === 'window' ? dom.window : dom.window[name];
+
+    try {
+        for (const species of ['seal', 'puffin']) {
+            const actor = state.wildlife.actors.find(actor => actor.id === species + ':water:0');
+            assert.ok(actor, species + ' exists in the actual island population');
+            const camera = new PerspectiveCamera(45, 1.6, .1, 2000);
+            const controller = new RTSCameraController(camera, document.querySelector('canvas'));
+            controller.setNavigationSurface(new Object3D(), new Vector3(actor.position.x, 0, actor.position.z),
+                world.terrain.bounds, surface.surfaceHeightAt, { terrain: world.terrain, waterLevel: world.waterLevel });
+            controller.setView({ position: [actor.position.x + 14, Math.max(actor.position.y + 24, world.waterLevel + 24), actor.position.z + 20],
+                target: [actor.position.x, Math.max(actor.position.y, world.waterLevel), actor.position.z] });
+            camera.updateMatrixWorld();
+            layer.useCanonical(state.wildlife); layer.advance(0, false, camera);
+            const target = { worldId: state.wildlife.worldId, speciesId: species, wildlifeInstanceId: actor.id };
+            const anchor = layer.liveAnchor(target);
+            assert.ok(anchor, species + ' must be genuinely visible to the current native camera');
+            const orbit = new WildlifeCamera(camera, controller, target => layer.liveAnchor(target));
+            try {
+                assert.equal(orbit.begin(target, false), true, species + ' should have a safe coastal framing');
+                for (let frame = 0; frame < 30; frame++) {
+                    orbit.advance(.1);
+                    assert.ok(camera.position.y >= world.waterLevel + 1.9, 'Eye stays safely above water');
+                    camera.updateMatrixWorld(); layer.advance(0, false, camera);
+                }
+                assert.equal(orbit.active, true, species + ' remains in its safe focus');
+            } finally { orbit.dispose(); controller.dispose(); }
+        }
+    } finally { layer.dispose(); dom.window.close(); Object.assign(globalThis, previous); }
+});

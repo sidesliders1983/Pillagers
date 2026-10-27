@@ -1,0 +1,56 @@
+[
+  {
+    "species": "seal",
+    "eventId": "event-11",
+    "instanceId": "seal:water:0",
+    "time": {
+      "winter": 800,
+      "tick": 30
+    },
+    "position": {
+      "x": 115.54638890320737,
+      "y": -0.12,
+      "z": 107.12618763357735
+    },
+    "camera": {
+      "position": [
+        115.54638890320737,
+        23.88,
+        131.12618763357733
+      ],
+      "target": [
+        115.54638890320737,
+        0.28,
+        107.12618763357735
+      ]
+    },
+    "source": "Real paid Explore commands; no rewritten event, actor or discovery mask"
+  },
+  {
+    "species": "puffin",
+    "eventId": "event-13",
+    "instanceId": "puffin:land:0",
+    "time": {
+      "winter": 800,
+      "tick": 40
+    },
+    "position": {
+      "x": 125.22843193957779,
+      "y": 1.4218871782716902,
+      "z": 98.65972900570992
+    },
+    "camera": {
+      "position": [
+        125.22843193957779,
+        25.42188717827169,
+        122.65972900570992
+      ],
+      "target": [
+        125.22843193957779,
+        1.82188717827169,
+        98.65972900570992
+      ]
+    },
+    "source": "Real paid Explore commands; no rewritten event, actor or discovery mask"
+  }
+]

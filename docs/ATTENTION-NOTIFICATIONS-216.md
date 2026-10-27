@@ -169,5 +169,4 @@ notice. Event-time coordinates do not become a tracking destination. The seconda
 
 The orbit yields before the first native wheel, drag, pinch/swipe, camera key,
 Home/focus or Escape action. It leaves the current view in place, including on
-natural completion. There is no simulation pause, extra sighting, discovery, audio
-cue or gameplay command. See [camera QA](qa/wildlife-cinematic-292/README.md).
+natural completion. There is no simulation pause, extra sighting, discovery or gameplay command. An explicit live focus can play the existing approved animal recording once. See [camera QA](qa/wildlife-cinematic-292/README.md).

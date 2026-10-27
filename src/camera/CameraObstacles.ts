@@ -43,12 +43,21 @@ export class CameraObstacles {
         this.limited = limited;
     }
     get count() { return this.boxes.length; }
-    allows(view: View): boolean {
+    allows(view: View, requireSight = true): boolean {
         if (this.limited) return false;
         const eye = new Vector3().fromArray(view.position), target = new Vector3().fromArray(view.target);
         const distance = eye.distanceTo(target);
         this.ray.set(eye, target.sub(eye).normalize());
         return this.boxes.every(box => !box.containsPoint(eye) &&
-            (!this.ray.intersectBox(box, this.hit) || this.hit.distanceTo(eye) >= distance - .2));
+            (!requireSight || !this.ray.intersectBox(box, this.hit) || this.hit.distanceTo(eye) >= distance - .2));
     }
-}
+    /** The moving eye must not pass through a prop even if an intermediate look target is occluded. */
+    travel(from: number[], to: number[]): boolean {
+        if (this.limited) return false;
+        const start = new Vector3().fromArray(from), end = new Vector3().fromArray(to);
+        const distance = start.distanceTo(end);
+        if (distance < 1e-8) return this.boxes.every(box => !box.containsPoint(start));
+        this.ray.set(start, end.sub(start).normalize());
+        return this.boxes.every(box => !box.containsPoint(start) &&
+            (!this.ray.intersectBox(box, this.hit) || this.hit.distanceTo(start) > distance));
+    }}

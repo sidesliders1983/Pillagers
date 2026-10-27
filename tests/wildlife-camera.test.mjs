@@ -1,10 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { JSDOM } from 'jsdom';
-import { PerspectiveCamera, Vector3 } from 'three';
+import { Box3, PerspectiveCamera, Vector3 } from 'three';
 import { loadDOMSource } from './load-dom-source.mjs';
 const { RTSCameraController } = loadDOMSource('../src/camera/RTSCameraController.ts');
 const { WildlifeCamera } = loadDOMSource('../src/camera/WildlifeCamera.ts');
+const { CameraObstacles } = loadDOMSource('../src/camera/CameraObstacles.ts');
 const target = { worldId: 'fixture', speciesId: 'moose', wildlifeInstanceId: 'moose:roaming:0' };
 function fixture(action) {
     const dom = new JSDOM('<canvas></canvas>', { pretendToBeVisual: true });
@@ -130,5 +131,39 @@ test('a surfaced marine body is framed at the waterline rather than aiming below
         assert.equal(orbit.begin(target, false), true);
         for (let frame = 0; frame < 20; frame++) orbit.advance(.1);
         assert.ok(controller.focus.y >= .2, 'The focus stays on the currently visible surface part');
+    });
+});
+
+test('an occluded old ground focus does not reject a visible animal when the actual approach corridor is clear', () => {
+    fixture(({ camera, controller, anchor, orbit }) => {
+        orbit.dispose();
+        controller.setView({ position: [10, 7, 12], target: [-5, 1, 0] });
+        const obstacles = new CameraObstacles([], [0, 1, 0], 40,
+            [new Box3(new Vector3(-5.7, 0, -.7), new Vector3(-4.3, 2, .7))]);
+        const focus = new WildlifeCamera(camera, controller, () => anchor, (view, phase, previous) =>
+            obstacles.allows(view, phase !== 'approach') && (!previous || obstacles.travel(previous, view.position)));
+        try {
+            assert.equal(focus.begin(target, false), true, 'The old focus ray is not an approach collision');
+            for (let frame = 0; frame < 40; frame++) focus.advance(.1);
+            assert.equal(focus.active, true);
+            assert.ok(controller.focus.distanceTo(new Vector3(0, 1, 0)) < .01);
+        } finally { focus.dispose(); }
+    });
+});
+
+test('a visible animal still gets a safe held view when close orbit angles are blocked', () => {
+    fixture(({ camera, controller, anchor, orbit }) => {
+        orbit.dispose();
+        const before = camera.position.clone();
+        const held = new WildlifeCamera(camera, controller, () => anchor,
+            view => Math.hypot(view.position[0], view.position[2]) >= 12);
+        try {
+            assert.equal(held.begin(target, false), true, 'A safe existing viewpoint can hold instead of rejecting the sighting');
+            assert.equal(held.inspect().arcRadians, 0);
+            for (let frame = 0; frame < 30; frame++) held.advance(.1);
+            assert.ok(camera.position.distanceTo(before) < 1e-6);
+            assert.ok(controller.focus.distanceTo(new Vector3(0, 1, 0)) < .01);
+            assert.equal(controller.enabled, true);
+        } finally { held.dispose(); }
     });
 });

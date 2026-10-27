@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { load } from './load-source.mjs';
-import { Vector3 } from 'three';
+import { Box3, Vector3 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 const { MeshyHumanFactory } = load('../src/characters/MeshyHuman.ts');
@@ -167,7 +167,7 @@ test('the delivered open book is supported by both hands and the flower crown fo
     const factory = new MeshyHumanFactory(async path => loader.parseAsync(await read(path), ''), read);
     const bare = { ...defaultCharacterPresentation, hair: 'none', beard: 'none', outfit: 'none' };
     const elder = await factory.create({ ...defaultDNA(), age: 65 }, 2, undefined, bare);
-    const bride = await factory.create({ ...defaultDNA(), age: 25, sex: 'female' }, 2, undefined, bare);
+    const bride = await factory.create({ ...defaultDNA(), age: 25, sex: 'female' }, 2, undefined, { ...bare, headwear: 'headwear/occupation-farmer' });
     const ensemble = new WeddingEnsemble(read);
     try {
         await ensemble.prepare();
@@ -177,7 +177,14 @@ test('the delivered open book is supported by both hands and the flower crown fo
         const crown = bride.root.getObjectByName('wedding-crown');
         assert.ok(book, 'The actual compact open-book export must be used');
         assert.ok(crown, 'The actual flower export must be used');
-        assert.ok(crown.parent.name.endsWith('Head'), 'Crown must follow the native head bone');
+        assert.ok(crown.parent === bride.fit.sockets.get('socket_head_top'), 'The crown uses the fitted scalp socket');
+        const hat = bride.fit.modules.get('headwear/occupation-farmer');
+        assert.ok(hat, 'Use the real occupation cap to reproduce the regression');
+        assert.equal(hat.visible, false, 'A wedding crown temporarily replaces the occupation cap');
+        const frame = crown.parent;
+        const bounds = new Box3().setFromObject(crown);
+        const center = frame.worldToLocal(bounds.getCenter(new Vector3()));
+        assert.ok(Math.abs(center.x) < .08 && Math.abs(center.z) < .10, 'The wreath surrounds the actual scalp');
         for (const [side, x] of [['Left', .55], ['Right', -.55]]) {
             const wrist = elder.fit.nativeSkeleton.bones.find(bone => bone.name.endsWith(side + 'Hand'));
             assert.ok(wrist.getWorldPosition(new Vector3()).distanceTo(book.localToWorld(new Vector3(x, .02, .05))) < .12,
@@ -188,5 +195,6 @@ test('the delivered open book is supported by both hands and the flower crown fo
         ensemble.stop();
         assert.equal(elder.root.getObjectByName('wedding-book'), undefined);
         assert.equal(bride.root.getObjectByName('wedding-crown'), undefined);
+        assert.equal(hat.visible, true, 'The original cap is restored after the ceremony');
     } finally { ensemble.dispose(); elder.dispose(); bride.dispose(); }
 });
