@@ -175,7 +175,9 @@ export class LivingWorldController {
             }
             // Initial searches stay bounded; preferred slots alone allow two delayed stalled-route repairs.
             for (const target of options.slice(0, slot ? 5 : 4)) {
-                const path = this.route(actor, target, 'cultural-gathering', eventId);
+                let path = this.route(actor, target, 'cultural-gathering', eventId);
+                if (!path.length && slot && target === slot.target)
+                    path = this.route(actor, target, 'cultural-gathering', eventId, true);
                 if (!path.length) continue;
                 person.target = target;
                 person.dropped = false;
@@ -787,11 +789,28 @@ export class LivingWorldController {
         return Math.hypot(from.x + dx * fraction - point.x,
             from.z + dz * fraction - point.z) >= clearance;
     }
+    /** Bounded corridor compaction through the same terrain/body segment authorities as routing.
+     * This is the existing retained-trail shortcut pattern, applied once to a wedding approach. */
+    private compactGatheringRoute(actor: Agent, path: Point2[]) {
+        if (!this.gathering?.participants.get(actor.key)?.repair || path.length < 3) return path;
+        const compact: Point2[] = [];
+        let index = 0;
+        let previous: Point2 = actor;
+        while (index < path.length) {
+            let next = Math.min(index + 7, path.length - 1);
+            while (next > index && (!this.segment(actor, previous, path[next]) ||
+                !this.bodyClearance(actor, path[next], previous))) next--;
+            compact.push(path[next]);
+            previous = path[next];
+            index = next + 1;
+        }
+        return compact;
+    }
     private route(a: Agent, goal?: Point2, purpose = goal ?
         (goal === a.anchor ? 'return-home' : a.visit?.phase === 'home' ? 'visit-home' : 'visit-approach') : 'wander',
-        target = goal === a.anchor ? String(a.entity.status.assignment ?? a.key) : a.visit?.source ?? '') {
+        target = goal === a.anchor ? String(a.entity.status.assignment ?? a.key) : a.visit?.source ?? '', fineSearch = false) {
         this.metrics.routeAttempts++;
-        const key = goal ? JSON.stringify([purpose, target, goal.x, goal.z]) : '';
+        const key = goal ? JSON.stringify([purpose, target, goal.x, goal.z, fineSearch]) : '';
         // Moving endpoint blockers invalidate immediately. Other transient traffic is retried
         // within one active second; canonical/static obstacles and reservations invalidate now.
         const context = goal ? JSON.stringify([a.x, a.z, this.navigationGeneration,
@@ -839,8 +858,8 @@ export class LivingWorldController {
         // Every valid final segment must end at a safe, unoccupied point.
         if (goal && (!this.safe(a, goal) || !this.bodyClearance(a, goal, goal))) return measured(0, []);
         // A bounded four-neighbour waypoint search works for tents as well as permanent paths.
-        const spacing = a.entity.status.grazingZone === 'yard' ? .25 :
-            this.gathering?.participants.get(a.key)?.facing ? .5 : 1;
+        const needsFine = fineSearch || (this.gathering?.participants.get(a.key)?.repair?.remaining ?? 2) < 2;
+        const spacing = a.entity.status.grazingZone === 'yard' ? .25 : needsFine ? .5 : 1;
         const nodes: Point2[] = [{ x: a.x, z: a.z }], parents = [-1], seen = new Set(['0,0']);
         const open = [0], depth = [0], priority = new WaypointQueue();
         let cursor = 0;
@@ -853,7 +872,7 @@ export class LivingWorldController {
                 const path: Point2[] = [goal];
                 let end = i;
                 while (end > 0) { path.unshift(nodes[end]); end = parents[end]; }
-                return measured(nodes.length, path);
+                return measured(nodes.length, this.compactGatheringRoute(a, path));
             }
             for (const [dx, dz] of [[1, 0], [0, 1], [-1, 0], [0, -1]]) {
                 const to = { x: from.x + dx * spacing, z: from.z + dz * spacing };

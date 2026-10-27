@@ -1,0 +1,71 @@
+{
+  "date": "2026-10-27",
+  "targeted": {
+    "command": "node --test --test-concurrency=2 tests/wedding*.test.mjs tests/cultural*.test.mjs tests/fjord-audio*.test.mjs",
+    "passed": 161,
+    "failed": 0,
+    "skipped": 0,
+    "logSHA256": "d9d0b76233d4e2d94bc7eb1a133e8f676816d812ffbfcc891e70c452450b4709"
+  },
+  "repository": {
+    "command": "node --test --test-concurrency=2 tests/*.test.mjs",
+    "tests": 1526,
+    "passed": 1516,
+    "failed": 0,
+    "skipped": 10,
+    "logSHA256": "d467e4f944241a65fdcdfbfb2bc28800eacc46e07280c5fc7bf0323bd1a3f002",
+    "skipReasons": [
+      "Nine existing legacy source-model checks require ignored original Human-textured.glb and Human_LOD0.glb.",
+      "One frozen-r3 export evidence test is explicitly opt-in via RUN_R3_EVIDENCE=1."
+    ]
+  },
+  "build": {
+    "command": "pnpm build",
+    "passed": true,
+    "logSHA256": "ac7c8487942640e0d13318adb1503ee154d31e7e18c0b77da7eecabe47d2f61b"
+  },
+  "trackedAssets": {
+    "command": "node scripts/validate-public-assets.mjs --tracked",
+    "passed": true,
+    "logSHA256": "b430001efb8dfc51eaaee3e381e1afcc84051dcf0afbd1e5c6f2baf1f9f5b28a"
+  },
+  "characters": {
+    "command": "node scripts/validate-characters.mjs --lab-previews",
+    "passed": true,
+    "logSHA256": "2d1a8d5c84333650ef6b29d4988345c8ba368b6002184d8ac9afffd13397ffd0"
+  },
+  "physicalIPhoneLandscape": "Pending owner review; resized desktop browser pixels are not physical-device evidence.",
+  "formatting": "No project formatter configured. Manual source-format review and git diff --check passed.",
+  "baselineRevision": "43e0f2e6139a0274c5e1c53f77b4e969292f55a6",
+  "refinedTargeted": {
+    "passed": 161,
+    "failed": 0,
+    "skipped": 0,
+    "logSHA256": "68cdecf3bf2e5132bd65a53a634d920d9f002bf624465905b959c6f426437ed8"
+  },
+  "ordinaryMotion": {
+    "passed": 17,
+    "failed": 0,
+    "skipped": 0,
+    "logSHA256": "032fb81c70da4f7eee98dea3013245562fdc02f926dac53f62fee117182d2c1d"
+  },
+  "approach": {
+    "beforeWarmRunningSeconds": 58,
+    "afterSeconds": [
+      26,
+      26,
+      29.5,
+      26.5,
+      29.5
+    ],
+    "maximumAllowedSeconds": 30,
+    "essentialActors": 6,
+    "standardColdOptionalClapperDropped": true,
+    "logSHA256": "74af154c2133407230ae36179289672f08b7fae2cb66536b4a8f716e5d09d3f5"
+  },
+  "refinementSources": {
+    "encoding": "UTF-8 with LF normalized for Git portability",
+    "motionSHA256": "94aa2d67185a99b87206f5bb406f1961721271e1620b1c6513821724e779d53b",
+    "physicalTestSHA256": "e91dd6fd6b8438fbe9837dfb5cb0ad7e143b5525c633ea1bb50dc44723e0408c"
+  }
+}

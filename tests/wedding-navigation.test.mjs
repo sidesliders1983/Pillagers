@@ -45,7 +45,7 @@ const { world } = await loadBakedCampaignIsland(metadata.fjord.campaign.seed, me
     undefined, async url => new Response(readFileSync(resolve('public', '.' + url.split('?')[0]))));
 
 
-for (const [limit, warmup, clockRunning] of [[6, 0, false], [8, 0, false], [6, 50, false], [8, 50, false], [6, 50, true]]) test('a paid wedding (' + limit + ', warmup ' + warmup + ', running ' + clockRunning + ') keeps the real couple and elder together on the physical island without teleporting or changing Core', () => {
+for (const [limit, warmup, clockRunning] of [[6, 0, false], [8, 0, false], [6, 50, false], [8, 50, false], [6, 50, true]]) test('a paid wedding (' + limit + ', warmup ' + warmup + ', running ' + clockRunning + ') keeps the real couple and elder together on the physical island without teleporting or changing Core', context => {
     const shared = SharedSettlement.restore(checkpoint, 'fjord');
     const initial = shared.session.readSnapshot();
     const view = shared.fjord.readProjection();
@@ -80,6 +80,7 @@ for (const [limit, warmup, clockRunning] of [[6, 0, false], [8, 0, false], [6, 5
     const show = new CulturalPresentation(initial, motion, view.campfire.transform);
     assert.equal(show.accept(paid, limit, true, { weddingSeconds: 30.041 }), true);
     let gathered;
+    let gatheringSeconds;
     for (let frame = 0; frame < 900; frame++) {
         const before = new Map(motion.inspect().map(actor => [actor.key, actor]));
         advance();
@@ -91,15 +92,20 @@ for (const [limit, warmup, clockRunning] of [[6, 0, false], [8, 0, false], [6, 5
             const pace = measuredRunPaces[actor.key.slice(8)] ?? 4;
             assert.ok(Math.hypot(actor.x - previous.x, actor.z - previous.z) <= pace * .1 + 1e-6);
         }
-        if (show.inspect()?.phase === 'gathering') { gathered = show.inspect(); break; }
+        if (show.inspect()?.phase === 'gathering') { gathered = show.inspect(); gatheringSeconds = (frame + 1) / 10; break; }
     }
     assert.ok(gathered, 'A real walkable ceremony must start');
+    assert.ok(gatheringSeconds <= 30, 'Native Run should not brake at every straight half-metre waypoint: ' + gatheringSeconds + ' s');
     const people = new Map(motion.inspect().map(actor => [actor.key.slice(8), actor]));
     const [first, second] = gathered.spouseIds.map(id => people.get(id));
     assert.ok(Math.hypot(first.x - second.x, first.z - second.z) <= 2, 'Couple must share an intimate ceremony spot');
     const elder = people.get(gathered.wedding.roles.find(role => role.role === 'officiant').id);
     assert.ok(Math.hypot(elder.x - (first.x + second.x) / 2, elder.z - (first.z + second.z) / 2) <= 2.5);
-    assert.equal(gathered.stagedParticipants, limit);
+    assert.ok(gathered.stagedParticipants >= 6 && gathered.stagedParticipants <= limit);
+    // Optional clappers may physically drop; no replacement actor may be invented for them.
+    for (const role of gathered.wedding.roles.filter(role => role.role !== 'clapper'))
+        assert.ok(gathered.participantKeys.includes('persona:' + role.id), role.id + ' essential ceremony role');
+    context.diagnostic('Native Run: ' + gatheringSeconds + ' s; ' + gathered.stagedParticipants + ' of at most ' + limit + ' real actors');
     assert.equal(core.serializeState(shared.session.snapshot()), core.serializeState(baseline.session.snapshot()));
     assert.equal(gathered.wedding.duration, 30.041);
     const paused = show.inspect();
