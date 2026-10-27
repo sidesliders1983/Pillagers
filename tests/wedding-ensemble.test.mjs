@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { load } from './load-source.mjs';
+import { Vector3 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 const { MeshyHumanFactory } = load('../src/characters/MeshyHuman.ts');
@@ -62,7 +63,7 @@ test('missing or late real instrument downloads cannot retain templates after th
     const pending = [];
     const ensemble = new WeddingEnsemble(path => new Promise(resolve => pending.push({ path, resolve })));
     const preparation = ensemble.prepare();
-    assert.equal(pending.length, 3);
+    assert.equal(pending.length, 5);
     ensemble.dispose();
     for (const item of pending) item.resolve(await read(item.path));
     await preparation;
@@ -70,7 +71,7 @@ test('missing or late real instrument downloads cannot retain templates after th
     assert.equal(ensemble.inspect().actors, 0);
     const missing = new WeddingEnsemble(async () => { throw new Error('Missing asset'); });
     await missing.prepare();
-    assert.equal(missing.inspect().unavailable.length, 3);
+    assert.equal(missing.inspect().unavailable.length, 5);
     assert.equal(missing.inspect().templates, 0);
     missing.dispose();
 });
@@ -78,7 +79,7 @@ test('missing or late real instrument downloads cannot retain templates after th
 test('the actual review residents keep their instrument grips across native DNA proportions and the final music phrase', async () => {
     const { SharedSettlement } = load('../src/play/SharedSettlement.ts');
     const { weddingCandidates } = load('../src/simulation/SimulationCore.ts');
-    const { weddingCast } = load('../src/fjord-play/WeddingCast.ts');
+    const { weddingCast, weddingSlots } = load('../src/fjord-play/WeddingCast.ts');
     const text = await readFile(new URL('../docs/qa/cultural-occasions-277/review-fixture-v2/review-wedding-campaign.json', import.meta.url), 'utf8');
     const shared = SharedSettlement.restore(text, 'fjord');
     const choice = weddingCandidates(shared.session.snapshot()).find(item => item.allowed);
@@ -104,5 +105,88 @@ test('the actual review residents keep their instrument grips across native DNA 
             assert.ok(ensemble.inspect().maximumGripError < .12, role.id + ' / ' + role.role + ' grip');
             ensemble.stop();
         }
+        const slots = weddingSlots(cast, { x: 0, z: 0 });
+        for (const { id, human } of residents) {
+            const { target, facing } = slots['persona:' + id];
+            human.root.position.set(target.x, 0, target.z);
+            human.root.rotation.y = Math.atan2(facing.x - target.x, facing.z - target.z);
+        }
+        const [first, second] = cast.filter(role => role.role === 'couple')
+            .map(role => residents.find(person => person.id === role.id).human);
+        const hand = (human, side) => human.fit.nativeSkeleton.bones
+            .find(bone => bone.name.endsWith(side + 'HandMiddle4')).getWorldPosition(new Vector3());
+        for (const elapsed of [0, 12, 29]) {
+            for (const person of residents) person.human.update(.1);
+            ensemble.update(cast, residents, elapsed);
+            assert.ok(hand(first, 'Left').distanceTo(hand(second, 'Right')) < .08, 'Actual review couple left fingertip contact');
+            assert.ok(hand(first, 'Right').distanceTo(hand(second, 'Left')) < .08, 'Actual review couple right contact');
+            assert.ok(ensemble.inspect().maximumGripError < .12, 'Actual review cast support targets');
+        }
     } finally { ensemble.dispose(); for (const person of residents) person.human.dispose(); }
+});
+
+test('the actual native couple reaches shared hand contact without relocating feet or stretching bones', async () => {
+    const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
+    const factory = new MeshyHumanFactory(async path => loader.parseAsync(await read(path), ''), read);
+    const bare = { ...defaultCharacterPresentation, hair: 'none', beard: 'none', outfit: 'none' };
+    const first = await factory.create({ ...defaultDNA(), age: 35 }, 2, undefined, bare);
+    const second = await factory.create({ ...defaultDNA(), age: 32, sex: 'female' }, 2, undefined, bare);
+    first.root.position.set(-.52, 0, 0); first.root.rotation.y = Math.PI / 2;
+    second.root.position.set(.52, 0, 0); second.root.rotation.y = -Math.PI / 2;
+    first.update(.1); second.update(.1);
+    const roots = [first.root.position.clone(), second.root.position.clone()];
+    const heads = [first, second].map(human => human.fit.nativeSkeleton.bones.find(bone => bone.name.endsWith('Head')).getWorldPosition(new Vector3()));
+    const scales = [first, second].map(human => human.fit.nativeSkeleton.bones.map(bone => bone.scale.clone()));
+    const rotations = [first, second].map(human => human.fit.nativeSkeleton.bones.map(bone => bone.quaternion.clone()));
+    const ensemble = new WeddingEnsemble(read);
+    const hand = (human, side) => human.fit.nativeSkeleton.bones.find(bone => bone.name.endsWith(side + 'HandMiddle4')).getWorldPosition(new Vector3());
+    try {
+        ensemble.update([{ id: 'a', role: 'couple' }, { id: 'b', role: 'couple' }],
+            [{ id: 'a', human: first }, { id: 'b', human: second }], 2);
+        assert.ok(hand(first, 'Left').distanceTo(hand(second, 'Right')) < .08,
+            'Actual fingertip gap: ' + hand(first, 'Left').distanceTo(hand(second, 'Right')) + '; reach error ' + ensemble.inspect().maximumGripError);
+        assert.ok(hand(first, 'Right').distanceTo(hand(second, 'Left')) < .08);
+        for (const [index, human] of [first, second].entries()) {
+            assert.ok(human.root.position.equals(roots[index]));
+            const head = human.fit.nativeSkeleton.bones.find(bone => bone.name.endsWith('Head')).getWorldPosition(new Vector3());
+            assert.ok(Math.hypot(head.x - heads[index].x, head.z - heads[index].z) < .18,
+                'Hand contact should not require a deep bow');
+            assert.ok(human.fit.nativeSkeleton.bones.every((bone, boneIndex) => bone.scale.equals(scales[index][boneIndex])));
+        }
+        ensemble.stop();
+        for (const [index, human] of [first, second].entries())
+            assert.ok(human.fit.nativeSkeleton.bones.every((bone, boneIndex) =>
+                1 - Math.abs(bone.quaternion.dot(rotations[index][boneIndex])) < 1e-5),
+                'Native spine, clavicles, arms and hands restore completely after the couple pose');
+    } finally { ensemble.dispose(); first.dispose(); second.dispose(); }
+});
+
+
+test('the delivered open book is supported by both hands and the flower crown follows the bride head', async () => {
+    const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
+    const factory = new MeshyHumanFactory(async path => loader.parseAsync(await read(path), ''), read);
+    const bare = { ...defaultCharacterPresentation, hair: 'none', beard: 'none', outfit: 'none' };
+    const elder = await factory.create({ ...defaultDNA(), age: 65 }, 2, undefined, bare);
+    const bride = await factory.create({ ...defaultDNA(), age: 25, sex: 'female' }, 2, undefined, bare);
+    const ensemble = new WeddingEnsemble(read);
+    try {
+        await ensemble.prepare();
+        ensemble.update([{ id: 'elder', role: 'officiant' }, { id: 'bride', role: 'couple', crown: true }],
+            [{ id: 'elder', human: elder }, { id: 'bride', human: bride }], 2);
+        const book = elder.root.getObjectByName('wedding-book');
+        const crown = bride.root.getObjectByName('wedding-crown');
+        assert.ok(book, 'The actual compact open-book export must be used');
+        assert.ok(crown, 'The actual flower export must be used');
+        assert.ok(crown.parent.name.endsWith('Head'), 'Crown must follow the native head bone');
+        for (const [side, x] of [['Left', .55], ['Right', -.55]]) {
+            const wrist = elder.fit.nativeSkeleton.bones.find(bone => bone.name.endsWith(side + 'Hand'));
+            assert.ok(wrist.getWorldPosition(new Vector3()).distanceTo(book.localToWorld(new Vector3(x, .02, .05))) < .12,
+                side + ' hand supports the book');
+        }
+        assert.equal(ensemble.inspect().instruments, 0);
+        assert.equal(ensemble.inspect().accessories, 2);
+        ensemble.stop();
+        assert.equal(elder.root.getObjectByName('wedding-book'), undefined);
+        assert.equal(bride.root.getObjectByName('wedding-crown'), undefined);
+    } finally { ensemble.dispose(); elder.dispose(); bride.dispose(); }
 });

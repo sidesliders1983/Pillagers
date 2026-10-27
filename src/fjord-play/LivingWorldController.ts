@@ -125,7 +125,7 @@ export class LivingWorldController {
     }
     /** Fresh accepted events alone stage bounded visual participants; canonical attendance is untouched. */
     beginGathering(eventId: string, participantKeys: readonly string[], maximumActors: 6 | 8 = 6,
-        preferred: Readonly<Record<string, { target: Point2; facing: Point2 }>> = {}) {
+        preferred: Readonly<Record<string, { target: Point2; facing: Point2; partner?: boolean }>> = {}) {
         if (!eventId.trim()) return [];
         if (this.gathering?.eventId === eventId)
             return [...this.gathering.participants.values()].filter(person => !person.dropped).map(person => person.key);
@@ -168,7 +168,9 @@ export class LivingWorldController {
                     Math.hypot(second.x - actor.x, second.z - actor.z));
             const slot = preferred[key];
             if (slot && this.safe(actor, slot.target) && [...participants.values()].every(other =>
-                !other.target || Math.hypot(other.target.x - slot.target.x, other.target.z - slot.target.z) >= 1.2)) {
+                !other.target || Math.hypot(other.target.x - slot.target.x, other.target.z - slot.target.z) >=
+                    (slot.partner && preferred[other.key]?.partner ?
+                        this.radius(actor) + this.radius(this.agents.get(other.key)!) + .06 : 1.2))) {
                 options.unshift(slot.target);
                 person.facing = slot.facing;
                 person.repair = { checkpoint: { x: actor.x, z: actor.z }, seconds: 5, remaining: 2 };
@@ -797,7 +799,7 @@ export class LivingWorldController {
         let index = 0;
         let previous: Point2 = actor;
         while (index < path.length) {
-            let next = Math.min(index + 7, path.length - 1);
+            let next = Math.min(index + 9, path.length - 1);
             while (next > index && (!this.segment(actor, previous, path[next]) ||
                 !this.bodyClearance(actor, path[next], previous))) next--;
             compact.push(path[next]);

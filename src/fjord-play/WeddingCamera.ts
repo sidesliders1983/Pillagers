@@ -20,8 +20,13 @@ export class WeddingCamera {
         const rotation = frame.wedding.rotation ?? 0;
         const rotate = (offset: number[]) => new Vector3(...offset).applyAxisAngle(new Vector3(0, 1, 0), rotation)
             .add(new Vector3(center.x, center.y, center.z)).toArray();
-        const target = rotate([0, 1.1, -5.8]);
-        this.shots = [[10, 9, -17], [4.5, 3.8, -11.5], [-8, 5.1, -13], [8, 7, -16]]
+        const target = rotate([0, 1.1, -8]);
+        this.shots = [[4, 2.6, -14], [2.2, 2, -11.6], [-3.4, 2.4, -13], [4, 2.6, -14]]
+            .map(offset => ({ position: rotate(offset), target: [...target] }))
+            .filter(view => this.safe({ x: view.position[0], y: view.position[1], z: view.position[2] }));
+        // A steep local slope can rule out every low view. Keep a terrain-safe fallback,
+        // rather than moving a low camera through the ground or undiscovered terrain.
+        if (!this.shots.length) this.shots = [[10, 9, -17], [-8, 5.1, -13]]
             .map(offset => ({ position: rotate(offset), target: [...target] }))
             .filter(view => this.safe({ x: view.position[0], y: view.position[1], z: view.position[2] }));
         if (!this.shots.length) return false;

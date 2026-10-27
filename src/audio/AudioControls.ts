@@ -35,6 +35,16 @@ export class AudioControls {
             field.addEventListener('input', () => this.audio.configure({ [key]: Number(field.value) }));
         }
         const signal = this.events.signal;
+        const restore = (event: Event) => {
+            const target = event.target as Element | null;
+            if (target?.closest?.('#campaign-start, #campaign-recovery, #fjord-play'))
+                void this.audio.restoreFromGesture();
+        };
+        document.addEventListener('pointerdown', restore, { capture: true, signal });
+        document.addEventListener('click', restore, { capture: true, signal });
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Enter' || event.key === ' ') restore(event);
+        }, { capture: true, signal });
         document.addEventListener('visibilitychange', () => this.audio.setHidden(document.hidden), { signal });
         window.addEventListener('pagehide', event => {
             if (event.persisted) this.audio.setHidden(true);

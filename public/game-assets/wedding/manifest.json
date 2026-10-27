@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "source": "Owner-supplied Meshy instruments and selected Firelight Vow, issue #288",
+  "version": 2,
+  "source": "Owner-supplied Meshy wedding props and selected Firelight Vow, issue #288",
   "instruments": [
     {
       "id": "wedding-lyre",
@@ -30,6 +30,28 @@
       "source": "Meshy_AI_viking_instrument_fra_1027065354_image-to-3d-texture.glb",
       "sourceBytes": 47919856,
       "sourceSHA256": "968467cda5dff1a24c5bdb49538f19aac0bc53b69ddb9bce1c0da6d46933b30c",
+      "geometry": "Original Meshy topology/normals/UVs; one 512px colour texture; no extra rig."
+    }
+  ],
+  "accessories": [
+    {
+      "id": "wedding-book",
+      "file": "wedding-book.glb",
+      "bytes": 338660,
+      "sha256": "4e4697a3143f52cee164cb0908ecce43908ebdae4841b61ced5c0644e0504274",
+      "source": "wedding_book.glb",
+      "sourceBytes": 40805700,
+      "sourceSHA256": "6a5510e3c55c55180a33d87d4c57476f152e900ab01a07955fdc4b4d6747fc59",
+      "geometry": "Original Meshy topology/normals/UVs; one 512px colour texture; no extra rig."
+    },
+    {
+      "id": "wedding-crown",
+      "file": "wedding-crown.glb",
+      "bytes": 358604,
+      "sha256": "7302274c0e06451483e76073e3898890b8322f84515f793c493f491f7a6a65bf",
+      "source": "wedding-flower.glb",
+      "sourceBytes": 49358220,
+      "sourceSHA256": "0f14cfd398743d3dc12c5f448d2bde0aec28e5b0395e19455af87a75a02430af",
       "geometry": "Original Meshy topology/normals/UVs; one 512px colour texture; no extra rig."
     }
   ],

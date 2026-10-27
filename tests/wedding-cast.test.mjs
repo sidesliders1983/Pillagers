@@ -26,6 +26,8 @@ test('a real wedding casts its couple, oldest eligible recorded guest and three 
     const cast = weddingCast(state, event);
     assert.equal(cast.filter(item => item.role === 'couple').length, 2);
     assert.deepEqual(cast.filter(item => item.role === 'couple').map(item => item.id).sort(), [...event.details.spouseIds].sort());
+    assert.deepEqual(cast.filter(person => person.crown).map(person => person.id),
+        ['founder-6']);
     const guests = event.details.people.filter(person => !event.details.spouseIds.includes(person.id));
     const oldest = guests.slice().sort((a, b) => b.age - a.age || a.id.localeCompare(b.id))[0];
     assert.equal(cast.find(item => item.role === 'officiant').id, oldest.id);

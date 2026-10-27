@@ -181,7 +181,7 @@ export class CulturalCeremonyVisuals {
     }
 
     private updateLabels(frame: CeremonyFrame, state: CeremonyVisualState): void {
-        if (!this.labels || !this.labelLayer || !this.leaderLayer || frame.occasion !== 'wedding' ||
+        if (frame.wedding || !this.labels || !this.labelLayer || !this.leaderLayer || frame.occasion !== 'wedding' ||
             frame.spouseIds.length !== 2 || new Set(frame.spouseIds).size !== 2 ||
             !state.camera || !state.width || !state.height) {
             this.hideLabels();

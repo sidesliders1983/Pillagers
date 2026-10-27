@@ -24,6 +24,8 @@ test('the real camera controller keeps shots local and restores its exact view/i
             director.update({ ...frame, wedding: { ...frame.wedding, elapsed } }, new Vector3(0, 1, -6), false);
             assert.ok(Math.hypot(camera.position.x, camera.position.z) < 32);
             assert.ok(camera.position.toArray().every(Number.isFinite));
+            assert.ok(camera.position.y >= 1.8 && camera.position.y <= 3.3,
+                'Safe normal wedding shots stay near the couple eye level, not overhead');
         }
         director.restore(); director.restore();
         assert.equal(control.enabled, true);

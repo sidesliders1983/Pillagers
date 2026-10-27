@@ -42,31 +42,53 @@ export class ForegroundTrack {
         if (!running || !this.host.allowed()) {
             this.media?.pause();
             this.host.duck(false);
-        } else if (this.wanted && !this.blocked && !this.failed && !this.ended && !this.pending && this.media?.paused) {
+        } else if (this.wanted && !this.blocked && !this.failed && !this.ended && !this.pending && (!this.media || this.media.paused)) {
             void this.requestPlay();
         }
         this.route?.gain(this.envelope);
     }
     play(): Promise<boolean> {
-        if (this.disposed || !this.host.allowed()) return Promise.resolve(false);
+        if (this.disposed) return Promise.resolve(false);
         this.wanted = true;
         this.blocked = false;
         this.failed = false;
         return this.requestPlay();
     }
+    private openMedia(): HTMLAudioElement {
+        if (!this.media) {
+            this.media = this.host.createMedia();
+            this.media.preload = 'metadata';
+            this.media.src = this.host.resolve?.(this.asset.path) ?? this.asset.path;
+            this.media.onended = () => { this.ended = true; this.host.duck(false); };
+            this.media.onerror = () => { this.failed = true; this.host.duck(false); };
+            this.route = this.host.connect(this.media);
+        }
+        return this.media;
+    }
+    /** Unlock the selected native element inside the paid wedding's user gesture.
+     * Gain stays zero; actual music and ducking wait for the arrived cast. */
+    prime(): Promise<boolean> {
+        if (this.disposed || !this.host.allowed()) return Promise.resolve(false);
+        if (this.pending) return this.pending;
+        try {
+            const media = this.openMedia();
+            this.route!.gain(0);
+            const operation = media.play().then(() => {
+                media.pause();
+                try { media.currentTime = 0; } catch { /* Metadata can arrive later. */ }
+                return !this.disposed;
+            }).catch(() => false).finally(() => {
+                if (this.pending === operation) this.pending = undefined;
+            });
+            this.pending = operation;
+            return operation;
+        } catch { return Promise.resolve(false); }
+    }
     private requestPlay(): Promise<boolean> {
         if (this.pending) return this.pending;
         if (!this.running || !this.host.allowed() || this.disposed) return Promise.resolve(false);
         try {
-            if (!this.media) {
-                this.media = this.host.createMedia();
-                this.media.preload = 'metadata';
-                this.media.src = this.host.resolve?.(this.asset.path) ?? this.asset.path;
-                this.media.onended = () => { this.ended = true; this.host.duck(false); };
-                this.media.onerror = () => { this.failed = true; this.host.duck(false); };
-                this.route = this.host.connect(this.media);
-            }
-            const media = this.media;
+            const media = this.openMedia();
             try { media.currentTime = this.elapsed; } catch { /* Metadata may still be arriving. */ }
             this.route!.gain(this.envelope);
             const operation = media.play().then(() => {

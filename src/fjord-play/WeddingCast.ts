@@ -2,7 +2,7 @@ import { availableCulturalParticipants, type SimulationEvent, type SimulationSta
 
 export type WeddingInstrument = 'wedding-lyre' | 'wedding-flute' | 'wedding-frame-drum';
 export type WeddingRole = { id: string; role: 'couple' | 'officiant' | 'musician' | 'clapper';
-    instrument?: WeddingInstrument };
+    instrument?: WeddingInstrument; crown?: boolean };
 export const weddingInstrumentOrder: readonly WeddingInstrument[] = [
     'wedding-lyre', 'wedding-flute', 'wedding-frame-drum',
 ];
@@ -27,7 +27,8 @@ export function weddingCast(state: Readonly<SimulationState>, event: SimulationE
         return age || first.birthWinter - second.birthWinter ||
             (first.birthTick ?? 0) - (second.birthTick ?? 0) || a.localeCompare(b);
     });
-    const cast: WeddingRole[] = spouses.map(id => ({ id, role: 'couple' }));
+    const cast: WeddingRole[] = spouses.map(id => ({ id, role: 'couple',
+        ...(state.personas[id].dna.sex === 'female' ? { crown: true } : {}) }));
     const officiant = guests.shift();
     if (officiant) cast.push({ id: officiant, role: 'officiant' });
     guests.sort();
@@ -40,16 +41,16 @@ export function weddingCast(state: Readonly<SimulationState>, event: SimulationE
 
 /** Preferred intimate slots still pass the existing terrain, clearance and route authorities. */
 export function weddingSlots(cast: readonly WeddingRole[], center: { x: number; z: number }, rotation = 0) {
-    const offsets = [[-.75, -8], [.75, -8], [0, -6.5], [-3.8, -7.5], [3.8, -7.5],
+    const offsets = [[-.52, -8], [.52, -8], [0, -6.5], [-3.8, -7.5], [3.8, -7.5],
         [-5.8, -4.5], [5.8, -4.5], [7.4, -1.2]];
-    const slots: Record<string, { target: { x: number; z: number }; facing: { x: number; z: number } }> = {};
+    const slots: Record<string, { target: { x: number; z: number }; facing: { x: number; z: number }; partner?: boolean }> = {};
     for (const [index, person] of cast.slice(0, 8).entries()) {
         const [x, z] = offsets[index];
         const rotate = (x: number, z: number) => ({ x: center.x + x * Math.cos(rotation) + z * Math.sin(rotation),
             z: center.z + z * Math.cos(rotation) - x * Math.sin(rotation) });
         const target = rotate(x, z);
-        const facing = rotate(person.role === 'couple' ? (index === 0 ? .75 : -.75) : 0, -8);
-        slots['persona:' + person.id] = { target, facing };
+        const facing = rotate(person.role === 'couple' ? (index === 0 ? .52 : -.52) : 0, -8);
+        slots['persona:' + person.id] = { target, facing, ...(person.role === 'couple' ? { partner: true } : {}) };
     }
     return slots;
 }

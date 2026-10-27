@@ -98,9 +98,9 @@ for (const [limit, warmup, clockRunning] of [[6, 0, false], [8, 0, false], [6, 5
     assert.ok(gatheringSeconds <= 30, 'Native Run should not brake at every straight half-metre waypoint: ' + gatheringSeconds + ' s');
     const people = new Map(motion.inspect().map(actor => [actor.key.slice(8), actor]));
     const [first, second] = gathered.spouseIds.map(id => people.get(id));
-    assert.ok(Math.hypot(first.x - second.x, first.z - second.z) <= 2, 'Couple must share an intimate ceremony spot');
+    assert.ok(Math.hypot(first.x - second.x, first.z - second.z) <= 1.15, 'Couple must be close enough to join hands with their native arms');
     const elder = people.get(gathered.wedding.roles.find(role => role.role === 'officiant').id);
-    assert.ok(Math.hypot(elder.x - (first.x + second.x) / 2, elder.z - (first.z + second.z) / 2) <= 2.5);
+    assert.ok(Math.hypot(elder.x - (first.x + second.x) / 2, elder.z - (first.z + second.z) / 2) <= 2.5, 'The officiant stays next to the actual couple');
     assert.ok(gathered.stagedParticipants >= 6 && gathered.stagedParticipants <= limit);
     // Optional clappers may physically drop; no replacement actor may be invented for them.
     for (const role of gathered.wedding.roles.filter(role => role.role !== 'clapper'))

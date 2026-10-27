@@ -686,6 +686,7 @@ export class FjordPlay {
                     refresh();
                     return;
                 }
+                if (focusCeremony) presentation?.primeWeddingMusic();
                 done();
                 if (syncScene) await syncScene();
                 presentation?.acceptGathering(focusCeremony);

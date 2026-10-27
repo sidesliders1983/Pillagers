@@ -51,6 +51,7 @@ export class FjordAudio {
     private current?: World;
     private hidden = false;
     private consent = false;
+    private gestureActivation?: Promise<boolean>;
     private disposed = false;
     private failure = '';
     private highVoices = 0;
@@ -79,6 +80,18 @@ export class FjordAudio {
     }
     get enabled() { return this.consent && !this.preferences.muted && !this.disposed; }
     get settings() { return { ...this.preferences }; }
+    /** Call only from an actual start/control gesture; a saved unmuted preference is intent,
+     * not an already running browser context. Deliberate mute/volume settings remain authoritative. */
+    restoreFromGesture(): Promise<boolean> {
+        if (this.disposed || this.hidden || this.preferences.muted) return Promise.resolve(false);
+        if (this.audible()) return Promise.resolve(true);
+        if (this.gestureActivation) return this.gestureActivation;
+        const activation = this.enable().finally(() => {
+            if (this.gestureActivation === activation) this.gestureActivation = undefined;
+        });
+        this.gestureActivation = activation;
+        return activation;
+    }
     async enable() {
         if (this.disposed) return false;
         try {
@@ -93,7 +106,10 @@ export class FjordAudio {
                     this.buses.set(bus, gain);
                 }
                 this.context.addEventListener('statechange', () => {
-                    if (String(this.context?.state) !== 'running') this.stopAll();
+                    if (String(this.context?.state) !== 'running') {
+                        this.foregroundTrack?.suspend();
+                        this.stopAll();
+                    }
                     this.changed?.();
                 });
             }

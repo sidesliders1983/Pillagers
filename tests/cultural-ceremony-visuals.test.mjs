@@ -248,3 +248,22 @@ test('communal standards and garland remain behind the campfire inside its exist
         'The placement refinement adds no geometry');
     visuals.dispose();
 });
+
+test('the cinematic wedding keeps its decoration without overhead spouse name boards', () => {
+    withDOM(document => {
+        const host = document.querySelector('main');
+        const visuals = new CulturalCeremonyVisuals(new Scene(), host);
+        const camera = new PerspectiveCamera(50, 1, .1, 100);
+        camera.position.set(30, 9, 5);
+        camera.lookAt(30, 5, -15);
+        camera.updateMatrixWorld();
+        visuals.update({ ...wedding, wedding: { rotation: 0 } }, { active: true, fireLit: true,
+            camera, width: 800, height: 800, spouses: [
+                { id: 'persona-a', name: 'Thorrik', position: { x: 28, y: 6, z: -12 }, visible: true },
+                { id: 'persona-b', name: 'Leofhild', position: { x: 32, y: 6, z: -12 }, visible: true },
+            ] });
+        assert.equal(host.querySelector('.fjord-ceremony-labels').hidden, true);
+        assert.equal(host.querySelector('.fjord-ceremony-labels').children.length, 0);
+        visuals.dispose();
+    });
+});

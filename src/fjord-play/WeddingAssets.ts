@@ -20,6 +20,20 @@ export const weddingAssets = {
       "bytes": 338108
     }
   ],
+  "accessories": [
+    {
+      "id": "wedding-book",
+      "file": "wedding-book.glb",
+      "sha256": "4e4697a3143f52cee164cb0908ecce43908ebdae4841b61ced5c0644e0504274",
+      "bytes": 338660
+    },
+    {
+      "id": "wedding-crown",
+      "file": "wedding-crown.glb",
+      "sha256": "7302274c0e06451483e76073e3898890b8322f84515f793c493f491f7a6a65bf",
+      "bytes": 358604
+    }
+  ],
   "music": {
     "path": "game-assets/wedding/firelight-vow.mp3",
     "seconds": 30.041

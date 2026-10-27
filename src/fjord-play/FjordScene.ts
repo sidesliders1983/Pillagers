@@ -126,6 +126,7 @@ export function createFjordScene(options: {
     const weddingEnsemble = new WeddingEnsemble(undefined, import.meta.env.BASE_URL);
     let weddingView: WeddingCinematicView | undefined;
     let weddingTrack: ForegroundTrack | undefined;
+    let preparedWeddingMusic: { id: string; track: ForegroundTrack } | undefined;
     let weddingId: string | undefined;
     let weddingMusicStarted = false;
     let weddingObstacles: Box3[] = [];
@@ -248,6 +249,8 @@ export function createFjordScene(options: {
             width: canvas.clientWidth, height: canvas.clientHeight });
     };
     const stopWedding = () => {
+        preparedWeddingMusic?.track.dispose();
+        preparedWeddingMusic = undefined;
         weddingEnsemble.stop();
         weddingCamera.restore();
         weddingTrack?.dispose(); weddingTrack = undefined;
@@ -255,7 +258,7 @@ export function createFjordScene(options: {
         weddingId = undefined; weddingMusicStarted = false;
     };
     const skipWedding = () => {
-        if (!weddingId) return;
+        if (!weddingId && !preparedWeddingMusic) return;
         culture?.skip();
         stopWedding();
         updateCeremonyVisuals(null, false);
@@ -1057,8 +1060,23 @@ export function createFjordScene(options: {
         replace: () => inactive() ? Promise.resolve() : track(sceneWorkMeasured(rebuildWorld)),
         sync: () => inactive() ? Promise.resolve() : track(sceneWorkMeasured(() => syncScene?.() ?? Promise.resolve())),
         frame, prepareGpu, arrive, dispose, highlight, suspendCulture,
+        primeWeddingMusic: () => {
+            if (inactive()) return;
+            const state = session.readSnapshot();
+            const event = state.events.find(event => event.id === state.culture?.lastGatheringEventId);
+            if (event?.type !== 'CulturalGatheringHeld' || event.details?.occasion !== 'wedding') return;
+            preparedWeddingMusic?.track.dispose();
+            const track = options.audio?.foreground(weddingAssets.music);
+            if (track) {
+                preparedWeddingMusic = { id: event.id, track };
+                void track.prime();
+            }
+        },
         acceptGathering: (focusCeremony = false) => {
             if (inactive() || !culture) return false;
+            // Keep the element primed before the asynchronous scene sync, on this exact accepted event.
+            const primed = preparedWeddingMusic;
+            preparedWeddingMusic = undefined;
             // This entry point is called only after a successful live command, never while restoring.
             stopWedding();
             const original = { position: camera.position.toArray(), target: controller.focus.toArray() };
@@ -1080,6 +1098,8 @@ export function createFjordScene(options: {
             if (accepted && frame) {
                 if (frame.wedding) {
                     weddingId = frame.id;
+                    weddingTrack = primed?.id === frame.id ? primed.track : options.audio?.foreground(weddingAssets.music);
+                    if (primed && primed.track !== weddingTrack) primed.track.dispose();
                     weddingObstacles = sceneEntities.filter(entity => ['building', 'household'].includes(entity.kind))
                         .flatMap(entity => { const box = layer?.bounds(entity.selectionKey); return box ? [box.expandByScalar(.4)] : []; });
                     if (!weddingCamera.begin(frame, original)) {
@@ -1088,7 +1108,7 @@ export function createFjordScene(options: {
                         controller.setView(original);
                         return accepted;
                     }
-                    weddingTrack = options.audio?.foreground(weddingAssets.music);
+                    if (!primed) void weddingTrack?.prime();
                     weddingView = new WeddingCinematicView(canvas.parentElement!, {
                         skip: skipWedding,
                         play: () => {
@@ -1104,6 +1124,7 @@ export function createFjordScene(options: {
                 culturalSounds.start({ id: frame.id, sequence: frame.sequence });
                 updateCeremonyVisuals(frame, !document.hidden);
             }
+            if (primed && primed.track !== weddingTrack) primed.track.dispose();
             return accepted;
         },
         portrait: (input: PortraitRequest) => {

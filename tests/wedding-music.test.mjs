@@ -81,3 +81,30 @@ test('blocked autoplay and a late native play result cannot leak music or duckin
     assert.equal(f.element.paused, true);
     assert.equal(f.inspect().ducked, false);
 });
+
+test('the wedding gesture primes a silent stream so the same media element plays when the cast arrives', async () => {
+    const f = fixture();
+    f.track.update(0, false, 0);
+    assert.equal(await f.track.prime(), true);
+    assert.equal(f.element.paused, true, 'No soundtrack during the approach');
+    assert.equal(f.element.currentTime, 0);
+    assert.equal(f.inspect().ducked, false);
+    f.track.update(0, true, 0);
+    assert.equal(await f.track.play(), true);
+    assert.equal(f.element.paused, false);
+    assert.equal(f.inspect().connects, 1, 'Priming and the ceremony share one native media source');
+    f.track.dispose();
+});
+
+test('an arrival request waits for the enabled context to finish resuming without another menu click', async () => {
+    const f = fixture();
+    f.allow(false);
+    f.track.update(0, true, 1);
+    assert.equal(await f.track.play(), false);
+    f.allow(true);
+    f.track.update(.2, true, 1);
+    await new Promise(resolve => setImmediate(resolve));
+    assert.equal(f.element.paused, false);
+    assert.equal(f.inspect().ducked, true);
+    f.track.dispose();
+});
