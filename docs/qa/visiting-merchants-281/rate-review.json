@@ -6,7 +6,7 @@
   ],
   "ticks": 2000,
   "purpose": "First-visit affordability, domestic/CPU parity without trade, and fixed-rate value-loss checks. Not a fun or long-run economy study.",
-  "baseCommit": "872d1b94ea085f992bf342991a66530a61f57de2",
+  "baseCommit": "14dce3aaff1ea3b7fc2df73e64cd454b75ba78bb",
   "sourceHashes": {
     "src/simulation/TradeGoods.ts": "905a3fa0eb636bc252b6fdfb258fa39755838f938e87401cbea4de04a559f0a8",
     "src/simulation/TradeInventory.ts": "82d88b40d415b62c7f9445f80c2c040c0c735e7a00c2ef8b2f37c886365d7ebd",
@@ -14,7 +14,8 @@
     "src/simulation/SimulationCore.ts": "358f2d3f4007316db1757309f0d452145367ad5f601ff9226e9c30606c2ae3b2",
     "src/simulation/Mechanics.ts": "299c4e9f85e7eabeeb35f41a490634ae8de1b74432676cfd163fbadc85d572eb",
     "src/config/FjordLivestock.ts": "fe3cf9e810fafa49107522e708c8db20fc7395147dc086c9cfcc4982516d0024",
-    "scripts/measure-visiting-trade.mjs": "9b7320d57447415b0060e434397a37e8429282f78c1e09d418fa613b7ddb89c2"
+    "src/lore/BookLedger.ts": "210523e9630e0eabb93cc3e8e9b5102df59fdaa8dadd3f045bc61c1704eec76d",
+    "scripts/measure-visiting-trade.mjs": "78f42665deb76aec982f98fb6b05fee57756231d7c567d86c0db6294ab042921"
   },
   "policy": {
     "version": 1,

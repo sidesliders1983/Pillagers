@@ -42,7 +42,7 @@ for (let seed = 1; seed <= 30; seed++) {
 }
 const files = ['src/simulation/TradeGoods.ts', 'src/simulation/TradeInventory.ts',
     'src/simulation/VisitingMerchants.ts', 'src/simulation/SimulationCore.ts', 'src/simulation/Mechanics.ts',
-    'src/config/FjordLivestock.ts', 'scripts/measure-visiting-trade.mjs'];
+    'src/config/FjordLivestock.ts', 'src/lore/BookLedger.ts', 'scripts/measure-visiting-trade.mjs'];
 const report = { schemaVersion: 1, seeds: [1, 30], ticks: 2000,
     purpose: 'First-visit affordability, domestic/CPU parity without trade, and fixed-rate value-loss checks. Not a fun or long-run economy study.',
     baseCommit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),

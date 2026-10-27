@@ -36,3 +36,23 @@ test('an actual home Trader can negotiate after a normal role change without wai
     session.command({ type: 'AssignOccupation', personaId: person.id, occupation: 'trader' });
     assert.equal(merchants.merchantOffer(session.snapshot(), 'offer-1').command.traderId, person.id);
 });
+
+
+test('the campaign book reconciles both sides of real barter at its ordinary five-Winter checkpoint', () => {
+    const session = newFjordScenario(1, false, true);
+    session.command({ type: 'AdvanceTicks', ticks: 2000 });
+    session.commandBatch([merchants.merchantOffer(session.snapshot(), 'offer-2').command]);
+    session.commandBatch([merchants.merchantOffer(session.snapshot(), 'offer-1').command]);
+    session.command({ type: 'AdvanceTicks', ticks: 2500 });
+    const ledger = session.book.snapshot().chapters.at(-1).facts.ledger;
+    assert.equal(ledger.food.residual, 0);
+    assert.equal(ledger.materials.residual, 0);
+    assert.equal(ledger.food.complete, true);
+    assert.equal(ledger.materials.complete, true);
+    const trades = ledger.transactions.filter(transaction => transaction.purpose === 'MerchantBartered');
+    assert.equal(trades.length, 4);
+    assert.deepEqual(trades.map(transaction => [transaction.resource, transaction.category, transaction.units]), [
+        ['food', 'spending', 8], ['materials', 'otherReceipts', 4],
+        ['materials', 'spending', 7], ['food', 'otherReceipts', 8],
+    ]);
+});
