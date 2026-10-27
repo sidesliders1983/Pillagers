@@ -1,3 +1,4 @@
+import { ForegroundTrack, type ForegroundAsset } from './ForegroundTrack';
 import { Soundscape, soundGain, soundLimits, type SoundBus, type SoundCamera, type SoundEmitter,
     type SoundCue, type SoundVoice } from './Soundscape';
 
@@ -31,6 +32,9 @@ const defaults: SoundPreferences = { muted: true, master: .5, ambience: .35, wor
 export class FjordAudio {
     changed?: () => void;
     private context?: AudioContext;
+    private foregroundTrack?: ForegroundTrack;
+    private foregroundDucking = false;
+    private createMedia: () => HTMLAudioElement;
     private playbackSession?: { session: PlaybackSession; previous: string };
     private master?: GainNode;
     private buses = new Map<SoundBus, GainNode>();
@@ -62,8 +66,10 @@ export class FjordAudio {
     private now: () => number;
     private storage?: Pick<Storage, 'getItem' | 'setItem'>;
     constructor(options: { createContext?: () => AudioContext; now?: () => number;
-        storage?: Pick<Storage, 'getItem' | 'setItem'>; fetch?: typeof fetch; base?: string } = {}) {
+        storage?: Pick<Storage, 'getItem' | 'setItem'>; fetch?: typeof fetch; base?: string;
+        createMedia?: () => HTMLAudioElement } = {}) {
         this.createContext = options.createContext ?? (() => new AudioContext({ latencyHint: 'interactive' }));
+        this.createMedia = options.createMedia ?? (() => document.createElement('audio'));
         this.now = options.now ?? (() => performance.now() / 1000);
         this.storage = options.storage;
         this.fetch = options.fetch ?? globalThis.fetch?.bind(globalThis);
@@ -123,8 +129,10 @@ export class FjordAudio {
         if (persist) try { this.storage?.setItem(preferenceKey, JSON.stringify(this.preferences)); }
         catch { /* Audio intent never writes a canonical save. */ }
         if (this.master) this.ramp(this.master.gain, this.enabled && !this.hidden ? this.preferences.master * .6 : 0);
-        for (const [bus, gain] of this.buses) this.ramp(gain.gain, this.preferences[bus]);
+        this.applyBusGains();
+        this.foregroundTrack?.refreshVolume();
         if (this.preferences.muted) {
+            this.foregroundTrack?.suspend();
             this.stopAll();
             void this.context?.suspend().catch(() => {});
         }
@@ -133,6 +141,7 @@ export class FjordAudio {
     setHidden(hidden: boolean) {
         if (hidden === this.hidden) return;
         this.hidden = hidden;
+        if (hidden) this.foregroundTrack?.suspend();
         this.stopAll();
         if (hidden) void this.context?.suspend().catch(() => {});
         else if (this.enabled) void this.resume();
@@ -150,7 +159,43 @@ export class FjordAudio {
         parameter.cancelScheduledValues(this.context!.currentTime);
         parameter.setTargetAtTime(value, this.context!.currentTime, .06);
     }
+    private applyBusGains() {
+        for (const [bus, gain] of this.buses) {
+            const duck = this.foregroundDucking ? bus === 'ambience' ? .22 : bus === 'world' ? .35 : 1 : 1;
+            this.ramp(gain.gain, this.preferences[bus] * duck);
+        }
+    }
+    private releaseForeground() {
+        this.foregroundTrack?.dispose();
+        this.foregroundTrack = undefined;
+    }
+    /** A single streamed foreground lease shares consent, preferences and the existing context. */
+    foreground(asset: ForegroundAsset): ForegroundTrack {
+        this.releaseForeground();
+        const track = new ForegroundTrack(asset, {
+            createMedia: this.createMedia,
+            allowed: () => this.audible(),
+            resolve: path => this.base + path,
+            connect: media => {
+                if (!this.context || !this.master) throw new Error('Enable sound before playing music.');
+                const source = this.context.createMediaElementSource(media);
+                const gain = this.context.createGain();
+                source.connect(gain);
+                gain.connect(this.master);
+                return { gain: value => this.ramp(gain.gain, this.preferences.world * .8 * value),
+                    dispose: () => { source.disconnect(); gain.disconnect(); } };
+            },
+            duck: active => {
+                if (this.foregroundTrack !== track || this.foregroundDucking === active) return;
+                this.foregroundDucking = active;
+                this.applyBusGains();
+            },
+        });
+        this.foregroundTrack = track;
+        return track;
+    }
     world(manifest: SoundManifest, base?: string) {
+        this.releaseForeground();
         if (base !== undefined) this.base = base;
         if (this.current) this.current.alive = false;
         this.stopAll();
@@ -505,7 +550,8 @@ export class FjordAudio {
         return { samples: sorted.length, p50Ms: percentile(.5), p95Ms: percentile(.95), p99Ms: percentile(.99) };
     }
     inspect() {
-        return { enabled: this.enabled, hidden: this.hidden, state: this.context?.state ?? 'not-enabled',
+        return { foreground: this.foregroundTrack?.inspect() ?? null, foregroundDucking: this.foregroundDucking,
+            enabled: this.enabled, hidden: this.hidden, state: this.context?.state ?? 'not-enabled',
             playing: this.voices.size, retiring: this.retiring.size,
             physical: this.voices.size + this.retiring.size,
             pending: this.pending.size, decodes: this.loading.size, highVoices: this.highVoices,
@@ -522,6 +568,7 @@ export class FjordAudio {
             failure: this.failure };
     }
     async dispose() {
+        this.releaseForeground();
         this.disposed = true;
         if (this.current) this.current.alive = false;
         this.stopAll();

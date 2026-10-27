@@ -298,3 +298,9 @@ paused approach and gestures. They return when presentation ends/suspends. Cloth
 visible; occupation/DNA/work and Core state remain unchanged. Hidden equipment releases its carry
 grip. This reuses installed groups without asset downloads or refitting, including when an
 occupation/wardrobe changes during the ceremony. See the #277 participation-v4 qualification.
+
+## #288 — Firelight Vow presentation
+
+An accepted wedding can show a skippable presentation using the actual spouses, oldest eligible recorded guest and up to three other recorded attendees as lyre/flute/frame-drum players. Remaining attendees clap. Roles are transient; they do not create occupations or change attendance, family state or Core RNG. Low stages at most six residents; Standard at most eight.
+
+The selected owner music streams through the existing audio owner and drives approximately thirty seconds of local camera/hand choreography after the physical Run approach. Pause, mute, backgrounding and Skip restore safely. There is no extra charge, support contribution or marriage event. The existing 3 Food per canonical attendee and campfire-fuel quotation remain authoritative. Historical saves do not replay the scene automatically. See [#288 validation](../qa/wedding-cinematic-288/README.md).

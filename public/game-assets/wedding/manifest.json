@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "source": "Owner-supplied Meshy instruments and selected Firelight Vow, issue #288",
+  "instruments": [
+    {
+      "id": "wedding-lyre",
+      "file": "wedding-lyre.glb",
+      "bytes": 332568,
+      "sha256": "ab756fd06feb0d456dcfbf4f74f164aa1c18349d20d678b2b4816c34f87becc2",
+      "source": "Meshy_AI_viking_instrument_lyr_1027065406_image-to-3d-texture.glb",
+      "sourceBytes": 48164488,
+      "sourceSHA256": "267998eda52c48e0d71cf07bb101ebafb1100bae57a4b765d1a82b528c8894b8",
+      "geometry": "Original Meshy topology/normals/UVs; one 512px colour texture; no extra rig."
+    },
+    {
+      "id": "wedding-flute",
+      "file": "wedding-flute.glb",
+      "bytes": 333556,
+      "sha256": "58cddae8060259a344b1ff2cec198066c9043e7383aa9f03708e3672bdc03501",
+      "source": "Meshy_AI_viking_instrument_bon_1027065426_image-to-3d-texture.glb",
+      "sourceBytes": 45725328,
+      "sourceSHA256": "fb74b8f3d76b324bbcad28974ae9ac220a14b20e0829d79a921a1ac3e1577bbb",
+      "geometry": "Original Meshy topology/normals/UVs; one 512px colour texture; no extra rig."
+    },
+    {
+      "id": "wedding-frame-drum",
+      "file": "wedding-frame-drum.glb",
+      "bytes": 338108,
+      "sha256": "2291ca1be860157cb233d0c33e161118c7f314a1f4928e86f9deba62b5ed3b00",
+      "source": "Meshy_AI_viking_instrument_fra_1027065354_image-to-3d-texture.glb",
+      "sourceBytes": 47919856,
+      "sourceSHA256": "968467cda5dff1a24c5bdb49538f19aac0bc53b69ddb9bce1c0da6d46933b30c",
+      "geometry": "Original Meshy topology/normals/UVs; one 512px colour texture; no extra rig."
+    }
+  ],
+  "music": {
+    "id": "firelight-vow",
+    "source": "Firelight_Vow_2026-10-26T145442.mp3",
+    "file": "firelight-vow.mp3",
+    "bytes": 737916,
+    "sha256": "a927f51c2975c5164173c2087eb5575fa32b312b3807d86616423afe6d6a70cf",
+    "seconds": 30.041,
+    "frames": 1150,
+    "delivery": "Owner-selected recording, supplied for #288; unchanged MP3. Streamed through the existing audio owner, never added to decoded SFX cache."
+  }
+}

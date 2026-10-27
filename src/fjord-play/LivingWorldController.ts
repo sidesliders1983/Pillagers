@@ -22,6 +22,8 @@ type SuspendedIntent = Pick<Agent, 'signature' | 'visit' | 'path' | 'detour' | '
 type GatheringParticipant = {
     key: string; target: Point2 | null; arrived: boolean; dropped: boolean;
     origin: Point2 | null; signature: string; trail: Point2[] | null; suspended: SuspendedIntent | null;
+    facing?: Point2;
+    repair?: { checkpoint: Point2; seconds: number; remaining: number };
 };
 type GatheringReturn = {
     origin: Point2; signature: string; remaining: number; suspended: SuspendedIntent | null;
@@ -105,8 +107,25 @@ export class LivingWorldController {
         this.surface = createBlueprintSurface(world);
         this.campfire = campfire;
     }
+    /** Choose one coherent arrangement using the existing known-ground and body-clearance authorities.
+     * This bounded check does not route or move anybody; failed routes still use ordinary fallback. */
+    chooseGatheringLayout(layouts: readonly Readonly<Record<string, { target: Point2 }>>[]) {
+        let best = 0, bestScore = -1;
+        for (const [index, layout] of layouts.slice(0, 8).entries()) {
+            let score = 0;
+            for (const [order, [key, slot]] of Object.entries(layout).slice(0, 8).entries()) {
+                const actor = this.agents.get(key);
+                if (actor && this.safe(actor, slot.target) && this.bodyClearance(actor, slot.target, slot.target))
+                    score += (order < 2 ? 100 : order === 2 ? 10 : 1) -
+                        Math.hypot(actor.x - slot.target.x, actor.z - slot.target.z) * .001;
+            }
+            if (score > bestScore) { best = index; bestScore = score; }
+        }
+        return best;
+    }
     /** Fresh accepted events alone stage bounded visual participants; canonical attendance is untouched. */
-    beginGathering(eventId: string, participantKeys: readonly string[], maximumActors: 6 | 8 = 6) {
+    beginGathering(eventId: string, participantKeys: readonly string[], maximumActors: 6 | 8 = 6,
+        preferred: Readonly<Record<string, { target: Point2; facing: Point2 }>> = {}) {
         if (!eventId.trim()) return [];
         if (this.gathering?.eventId === eventId)
             return [...this.gathering.participants.values()].filter(person => !person.dropped).map(person => person.key);
@@ -147,8 +166,15 @@ export class LivingWorldController {
                     Math.hypot(other.target.x - point.x, other.target.z - point.z) >= 1.2))
                 .sort((first, second) => Math.hypot(first.x - actor.x, first.z - actor.z) -
                     Math.hypot(second.x - actor.x, second.z - actor.z));
-            // Existing bounded route search is used only at event time, never once per rendered frame.
-            for (const target of options.slice(0, 4)) {
+            const slot = preferred[key];
+            if (slot && this.safe(actor, slot.target) && [...participants.values()].every(other =>
+                !other.target || Math.hypot(other.target.x - slot.target.x, other.target.z - slot.target.z) >= 1.2)) {
+                options.unshift(slot.target);
+                person.facing = slot.facing;
+                person.repair = { checkpoint: { x: actor.x, z: actor.z }, seconds: 5, remaining: 2 };
+            }
+            // Initial searches stay bounded; preferred slots alone allow two delayed stalled-route repairs.
+            for (const target of options.slice(0, slot ? 5 : 4)) {
                 const path = this.route(actor, target, 'cultural-gathering', eventId);
                 if (!path.length) continue;
                 person.target = target;
@@ -813,7 +839,8 @@ export class LivingWorldController {
         // Every valid final segment must end at a safe, unoccupied point.
         if (goal && (!this.safe(a, goal) || !this.bodyClearance(a, goal, goal))) return measured(0, []);
         // A bounded four-neighbour waypoint search works for tents as well as permanent paths.
-        const spacing = a.entity.status.grazingZone === 'yard' ? .25 : 1;
+        const spacing = a.entity.status.grazingZone === 'yard' ? .25 :
+            this.gathering?.participants.get(a.key)?.facing ? .5 : 1;
         const nodes: Point2[] = [{ x: a.x, z: a.z }], parents = [-1], seen = new Set(['0,0']);
         const open = [0], depth = [0], priority = new WaypointQueue();
         let cursor = 0;
@@ -984,11 +1011,26 @@ export class LivingWorldController {
                     continue;
                 }
             }
+            if (gathering?.repair && !gathering.arrived && !gathering.dropped && gathering.target) {
+                const repair = gathering.repair;
+                repair.seconds -= dt;
+                if (repair.seconds <= 0 && repair.remaining > 0) {
+                    const oldDistance = Math.hypot(repair.checkpoint.x - gathering.target.x, repair.checkpoint.z - gathering.target.z);
+                    const distance = Math.hypot(a.x - gathering.target.x, a.z - gathering.target.z);
+                    if (oldDistance - distance < .3) {
+                        repair.remaining--;
+                        const path = this.route(a, gathering.target, 'cultural-gathering', this.gathering!.eventId);
+                        if (path.length) { a.path = path; a.detour = []; }
+                    }
+                    repair.seconds = 5;
+                    repair.checkpoint = { x: a.x, z: a.z };
+                }
+            }
             if (gathering && !gathering.dropped && !a.path.length && !a.detour.length) {
                 a.speed = 0;
                 a.state = 'Idle';
                 if (gathering.target && Math.hypot(a.x - gathering.target.x, a.z - gathering.target.z) < .15) {
-                    const center = this.campfire.transform;
+                    const center = gathering.facing ?? this.campfire.transform;
                     const heading = Math.atan2(center.x - a.x, center.z - a.z);
                     a.rotation = turnToward(a.rotation, heading, dt, residentMovementConfig.turnSpeed);
                     gathering.arrived = Math.cos(heading - a.rotation) > .99;
@@ -1075,7 +1117,9 @@ export class LivingWorldController {
                 a.state = 'Idle';
                 a.wait = 0;
             }
-            this.planPassing(a);
+            // Compact wedding routes already account for bodies. The ordinary passing detour
+            // can continually bend them around a seated attendee; keep the bounded route instead.
+            if (!gathering?.repair) this.planPassing(a);
             // Native running approaches retain exact bend corners for the slower walk back.
             if (a.detour.length && Math.hypot(a.detour[0].x - a.x, a.detour[0].z - a.z) <
                 (a.runPace !== null && this.ownsGathering(a.key) ? 1e-7 : .15)) a.detour.shift();

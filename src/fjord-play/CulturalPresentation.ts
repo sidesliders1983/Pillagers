@@ -1,3 +1,4 @@
+import { weddingCast, weddingSlots, type WeddingRole } from './WeddingCast';
 import { availableCulturalParticipants, type CulturalOccasion, type SimulationState } from '../simulation/SimulationCore';
 import type { LivingWorldController } from './LivingWorldController';
 
@@ -12,6 +13,7 @@ export interface CulturalPresentationFrame {
     stagedParticipants: number;
     participantKeys: string[];
     visible: boolean;
+    wedding?: { duration: number; elapsed: number; rotation: number; roles: WeddingRole[] };
 }
 
 /** Transient staging of an accepted fact. Loading history never starts another performance. */
@@ -26,7 +28,8 @@ export class CulturalPresentation {
         this.seenSequence = (state.culture?.nextSequence ?? 1) - 1;
     }
 
-    accept(state: Readonly<SimulationState>, limit: 6 | 8, visible: boolean): boolean {
+    accept(state: Readonly<SimulationState>, limit: 6 | 8, visible: boolean,
+        options?: { weddingSeconds: number }): boolean {
         if (this.disposed || !state.culture || state.culture.nextSequence <= this.seenSequence + 1)
             return false;
         this.seenSequence = state.culture.nextSequence - 1;
@@ -42,9 +45,17 @@ export class CulturalPresentation {
         if (event.details.occasion === 'wedding' && (required.length !== 2 || new Set(required).size !== 2 ||
             required.some(id => !recorded.includes(id) || !available.has(id)))) return false;
         // Low still stages at most six bodies, but it cannot replace the actual couple with guests.
-        const ids = [...required, ...recorded.filter(id => available.has(id) && !required.includes(id))];
+        const cinematic = event.details.occasion === 'wedding' && options &&
+            Number.isFinite(options.weddingSeconds) && options.weddingSeconds > 5 && options.weddingSeconds <= 180;
+        const cast = cinematic ? weddingCast(state, event) : [];
+        const ids = cinematic ? cast.map(person => person.id) :
+            [...required, ...recorded.filter(id => available.has(id) && !required.includes(id))];
         const requiredKeys = required.map(id => 'persona:' + id);
-        const keys = this.motion.beginGathering(event.id, ids.map(id => 'persona:' + id), limit);
+        const layouts = cinematic ? Array.from({ length: 8 }, (_, index) =>
+            weddingSlots(cast.slice(0, limit), this.position, index * Math.PI / 4)) : [];
+        const layout = cinematic ? this.motion.chooseGatheringLayout(layouts) : 0;
+        const keys = this.motion.beginGathering(event.id, ids.map(id => 'persona:' + id), limit,
+            layouts[layout]);
         if (keys.length < 3 || requiredKeys.some(key => !keys.includes(key))) {
             this.motion.releaseGathering();
             return false;
@@ -53,7 +64,9 @@ export class CulturalPresentation {
         this.current = { id: event.id, sequence: this.seenSequence,
             occasion: event.details.occasion as CulturalOccasion, spouseIds: [...required], phase: 'approach',
             phaseElapsedSeconds: 0, position: { ...this.position }, stagedParticipants: keys.length,
-            participantKeys: keys, visible: true };
+            participantKeys: keys, visible: true,
+            ...(cinematic ? { wedding: { duration: options!.weddingSeconds, elapsed: 0, rotation: layout * Math.PI / 4,
+                roles: weddingCast(state, event, keys.map(key => key.slice(8))) } } : {}) };
         return true;
     }
 
@@ -79,16 +92,18 @@ export class CulturalPresentation {
         current.stagedParticipants = present.length;
         if (!running || !Number.isFinite(seconds) || seconds <= 0) return;
         current.phaseElapsedSeconds += Math.min(seconds, 1);
+        if (current.wedding && current.phase !== 'approach') current.wedding.elapsed += Math.min(seconds, 1);
         if (current.phase === 'approach') {
             const arrived = staged.filter(person => person.arrived);
             // Ordinary guests may still be approaching, but a wedding requires its actual couple.
-            if (arrived.length >= 3 && this.requiredKeys.every(key => arrived.some(person => person.key === key))) {
+            if (arrived.length >= 3 && (!current.wedding || arrived.length === staged.length) && this.requiredKeys.every(key => arrived.some(person => person.key === key))) {
                 current.participantKeys = arrived.map(person => person.key);
                 current.stagedParticipants = arrived.length;
                 current.phase = 'gathering';
                 current.phaseElapsedSeconds = 0;
             } else if (current.phaseElapsedSeconds >= 120) this.finish();
-        } else if (current.phase === 'gathering' && current.phaseElapsedSeconds >= 4) {
+        } else if (current.phase === 'gathering' &&
+            current.phaseElapsedSeconds >= (current.wedding ? current.wedding.duration - 3 : 4)) {
             current.phase = 'response';
             current.phaseElapsedSeconds = 0;
         } else if (current.phase === 'response' && current.phaseElapsedSeconds >= 3) this.finish();
@@ -98,6 +113,11 @@ export class CulturalPresentation {
         return this.current ? structuredClone(this.current) : null;
     }
 
+    setWeddingDuration(seconds: number) {
+        if (this.current?.wedding && Number.isFinite(seconds) && seconds > 5 && seconds <= 180)
+            this.current.wedding.duration = seconds;
+    }
+    skip() { this.finish(); }
     private finish() {
         if (this.current) this.motion.releaseGathering();
         this.current = undefined;

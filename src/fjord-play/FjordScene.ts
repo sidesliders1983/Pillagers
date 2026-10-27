@@ -1,3 +1,9 @@
+import { Box3 } from 'three';
+import { WeddingEnsemble } from './WeddingEnsemble';
+import { WeddingCamera } from './WeddingCamera';
+import { WeddingCinematicView } from './WeddingCinematicView';
+import { weddingAssets } from './WeddingAssets';
+import type { ForegroundTrack } from '../audio/ForegroundTrack';
 import { WildlifeLayer } from '../wildlife/WildlifeLayer';
 import { ConstructionGpuPreparation } from '../construction/ConstructionGpuPreparation';
 import { RivalScene } from './RivalScene';
@@ -117,6 +123,12 @@ export function createFjordScene(options: {
     const culturalMotion = new CulturalMotion();
     let culture: CulturalPresentation | undefined;
     let ceremonyVisuals: CulturalCeremonyVisuals | undefined;
+    const weddingEnsemble = new WeddingEnsemble(undefined, import.meta.env.BASE_URL);
+    let weddingView: WeddingCinematicView | undefined;
+    let weddingTrack: ForegroundTrack | undefined;
+    let weddingId: string | undefined;
+    let weddingMusicStarted = false;
+    let weddingObstacles: Box3[] = [];
     let culturalMotionReady = false;
     let preparingCultureEvent = '';
     let lastCulturalPhase = '';
@@ -156,6 +168,12 @@ export function createFjordScene(options: {
         document.querySelector<HTMLSelectElement>('#fjord-effects')!.value as EffectQuality,
         devicePixelRatio, 'initial').pixelRatio);
     const controller = new RTSCameraController(camera, canvas, 'pan');
+    const weddingCamera = new WeddingCamera(camera, controller, point => {
+        const ground = world?.movement.heightAt(point.x, point.z);
+        return ground !== undefined && Number.isFinite(ground) && point.y >= ground + 1.8 &&
+            (!knownTerrain || discoveryAt(knownTerrain, point.x, point.z) === 'visible') &&
+            !weddingObstacles.some(box => box.containsPoint(new Vector3(point.x, point.y, point.z)));
+    });
     const islandMap = new IslandMap(document.querySelector('#fjord-play')!, {
         focus: point => controller.focusAt(point),
     });
@@ -229,9 +247,59 @@ export function createFjordScene(options: {
         ceremonyVisuals.update(frame, { active, fireLit, spouses, camera,
             width: canvas.clientWidth, height: canvas.clientHeight });
     };
+    const stopWedding = () => {
+        weddingEnsemble.stop();
+        weddingCamera.restore();
+        weddingTrack?.dispose(); weddingTrack = undefined;
+        weddingView?.dispose(); weddingView = undefined;
+        weddingId = undefined; weddingMusicStarted = false;
+    };
+    const skipWedding = () => {
+        if (!weddingId) return;
+        culture?.skip();
+        stopWedding();
+        updateCeremonyVisuals(null, false);
+        models?.stopCulture();
+    };
+    const updateWedding = (current: CulturalPresentationFrame | null, running: boolean) => {
+        if (!weddingId) return;
+        if (!current?.wedding || current.id !== weddingId || document.hidden) { stopWedding(); return; }
+        const playing = current.phase !== 'approach';
+        const elapsed = current.wedding.elapsed;
+        weddingTrack?.update(elapsed, playing && running,
+            Math.min(1, elapsed / 1.2, Math.max(0, current.wedding.duration - elapsed) / 1.5));
+        if (playing && !weddingMusicStarted && options.audio?.enabled && running) {
+            weddingMusicStarted = true;
+            void weddingTrack?.play();
+        }
+        if (weddingTrack) culture?.setWeddingDuration(weddingTrack.duration);
+        const residents = layer?.weddingResidents(current.participantKeys) ?? [];
+        if (playing) weddingEnsemble.update(current.wedding.roles, residents,
+            reducedMotion.matches ? 0 : elapsed);
+        else weddingEnsemble.stop();
+        const spousePositions = current.spouseIds.flatMap(id => {
+            const resident = residents.find(person => person.id === id);
+            return resident ? [resident.human.root.getWorldPosition(new Vector3())] : [];
+        });
+        const center = spousePositions.length === 2 ? spousePositions[0].add(spousePositions[1]).multiplyScalar(.5)
+            .add(new Vector3(0, 1.1, 0)) : new Vector3(current.position.x, current.position.y + 1.1, current.position.z - 6);
+        weddingCamera.update(current, center, reducedMotion.matches);
+        const names = current.spouseIds.map(id => session.readSnapshot().personas[id]?.name ?? 'Resident');
+        weddingView?.update(names, current.phase, weddingTrack?.inspect().state ?? 'unavailable', running,
+            current.wedding.duration - elapsed);
+    };
+    document.addEventListener('visibilitychange', () => { if (document.hidden) skipWedding(); }, { signal: bindings.signal });
+    canvas.addEventListener('webglcontextlost', skipWedding, { signal: bindings.signal });
+    document.addEventListener('pointerdown', event => {
+        if (!weddingId || !(event.target instanceof Element) || event.target.closest('.wedding-cinematic, #fjord-run')) return;
+        // Choosing another HUD task exits the cosmetic scene before ordinary navigation runs.
+        if (event.target !== canvas) skipWedding();
+    }, { capture: true, signal: bindings.signal });
     // RAF may stop before a hidden/context-lost frame. Invalidate synchronously at the lifecycle edge.
     const suspendCulture = () => {
-        updateCeremonyVisuals(null, false);
+        if (document.hidden || host.stopped || renderer.getContext().isContextLost()) skipWedding();
+        else weddingTrack?.suspend();
+        updateCeremonyVisuals(weddingId ? culture?.inspect() ?? null : null, !!weddingId);
         culturalMotion.reset();
         models?.stopCulture();
         preparingCultureEvent = '';
@@ -244,6 +312,7 @@ export function createFjordScene(options: {
     };
     const rebuildWorld = async (): Promise<void> => {
         if (inactive()) return;
+        stopWedding();
         culture?.dispose();
         ceremonyVisuals?.dispose();
         ceremonyVisuals = undefined;
@@ -741,18 +810,19 @@ export function createFjordScene(options: {
             models!.stopCulture();
             lastCulturalPhase = phaseKey;
             if (culturalFrame && !suspended && !reducedMotion.matches) {
-                if (culturalFrame.phase !== 'approach' && culturalMotionReady && culturalFrame.phaseElapsedSeconds <= .15) {
+                if (!culturalFrame.wedding && culturalFrame.phase !== 'approach' && culturalMotionReady && culturalFrame.phaseElapsedSeconds <= .15) {
                     layer!.playCulture(culturalMotion, culturalFrame);
                 }
             }
         }
-        if (culturalFrame?.phase === 'approach' && !suspended && !culturalMotionReady &&
+        if (!culturalFrame?.wedding && culturalFrame?.phase === 'approach' && !suspended && !culturalMotionReady &&
             preparingCultureEvent !== culturalFrame.id) {
             preparingCultureEvent = culturalFrame.id;
             void culturalMotion.prepare({ eventId: culturalFrame.id, visible: true })
                 .then(clips => { if (clips && !inactive()) culturalMotionReady = true; });
         }
         layer!.advance(motion!, motionDelta, running);
+        updateWedding(culturalFrame ?? null, running && !document.hidden);
         updateCeremonyVisuals(culturalFrame ?? null, !document.hidden);
         layer!.updateConstruction(document.hidden ? 0 : delta);
         rivalScene?.advance(motionDelta, running);
@@ -765,7 +835,7 @@ export function createFjordScene(options: {
             const work = workContacts.sample(frameStarted / 1000,
                 options.audio?.enabled ? layer!.soundActivities(visible) : [],
                 running && !document.hidden && !!options.audio?.enabled);
-            const culturalSound = culturalSounds.sample({ presentation: culturalFrame ?? undefined,
+            const culturalSound = culturalSounds.sample({ presentation: culturalFrame?.wedding ? undefined : culturalFrame ?? undefined,
                 running: running && !!options.audio?.enabled, hidden: document.hidden,
                 sampleRate: audioWorld.sampleRate, ready: cue => audioWorld!.ready(cue) });
             for (const cue of culturalSound.prepareCueIds) audioWorld.prepare(cue);
@@ -839,6 +909,8 @@ export function createFjordScene(options: {
             canvas.dataset.seasonMaterials = JSON.stringify(weatherTint!.inspect());
             canvas.dataset.motionTime = String(activeTime);
             canvas.dataset.culture = JSON.stringify(culture?.inspect() ?? null);
+            canvas.dataset.wedding = JSON.stringify({ active: !!weddingId, camera: weddingCamera.active,
+                ...weddingEnsemble.inspect(), music: weddingTrack?.inspect() ?? null });
             canvas.dataset.cameraClearance = JSON.stringify(controller.inspectClearance());
             canvas.dataset.shadowCoverage = JSON.stringify(lighting!.inspectShadowCoverage());
             canvas.dataset.seasonalLight = JSON.stringify(lighting!.seasonalLightState ?? { profile: 'baseline' });
@@ -940,6 +1012,8 @@ export function createFjordScene(options: {
         disposed = true;
         worldRevision++;
         bindings.abort();
+        stopWedding();
+        weddingEnsemble.dispose();
         culture?.dispose();
         ceremonyVisuals?.dispose();
         ceremonyVisuals = undefined;
@@ -986,6 +1060,8 @@ export function createFjordScene(options: {
         acceptGathering: (focusCeremony = false) => {
             if (inactive() || !culture) return false;
             // This entry point is called only after a successful live command, never while restoring.
+            stopWedding();
+            const original = { position: camera.position.toArray(), target: controller.focus.toArray() };
             const fire = campaign.readProjection().campfire.transform;
             if (focusCeremony) {
                 // Explicit ceremony confirmation brings its actual location into view.
@@ -998,9 +1074,33 @@ export function createFjordScene(options: {
                 Math.abs(projected.x) <= 1.1 && Math.abs(projected.y) <= 1.1 &&
                 (!knownTerrain || discoveryAt(knownTerrain, fire.x, fire.z) === 'visible');
             const quality = document.querySelector<HTMLSelectElement>('#fjord-quality')!.value;
-            const accepted = culture.accept(session.readSnapshot(), quality === 'low' ? 6 : 8, visible);
+            const accepted = culture.accept(session.readSnapshot(), quality === 'low' ? 6 : 8, visible,
+                { weddingSeconds: weddingAssets.music.seconds });
             const frame = culture.inspect();
             if (accepted && frame) {
+                if (frame.wedding) {
+                    weddingId = frame.id;
+                    weddingObstacles = sceneEntities.filter(entity => ['building', 'household'].includes(entity.kind))
+                        .flatMap(entity => { const box = layer?.bounds(entity.selectionKey); return box ? [box.expandByScalar(.4)] : []; });
+                    if (!weddingCamera.begin(frame, original)) {
+                        culture.skip();
+                        stopWedding();
+                        controller.setView(original);
+                        return accepted;
+                    }
+                    weddingTrack = options.audio?.foreground(weddingAssets.music);
+                    weddingView = new WeddingCinematicView(canvas.parentElement!, {
+                        skip: skipWedding,
+                        play: () => {
+                            const track = weddingTrack;
+                            if (!track || culture?.inspect()?.phase === 'approach') return;
+                            void options.audio?.enable().then(() => {
+                                if (track === weddingTrack) { weddingMusicStarted = true; void track.play(); }
+                            });
+                        },
+                    });
+                    void weddingEnsemble.prepare();
+                }
                 culturalSounds.start({ id: frame.id, sequence: frame.sequence });
                 updateCeremonyVisuals(frame, !document.hidden);
             }
