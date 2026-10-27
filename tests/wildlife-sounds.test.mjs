@@ -110,3 +110,25 @@ test('muted, paused, hidden, distant, stale and foreign encounters never replay 
     assert.deepEqual(sounds.sample(1.2, camera, [], true), []);
     assert.deepEqual(sounds.sample(1.4, camera, [actor], true), [], 'Returning visibility cannot restart a tail');
 });
+
+test('opening a real currently visible sighting permits one local call while paused, without replay or a false historical source', () => {
+    const initial = expedition(), state = encounter(initial, 'rabbit');
+    const event = state.events.find(event => event.type === 'WildlifeSighted' && event.details.speciesId === 'rabbit');
+    const actor = actorAt(state, event), camera = cameraAt(actor);
+    const { WildlifeSounds } = load('../src/audio/WildlifeSounds.ts');
+    const { Soundscape } = load('../src/audio/Soundscape.ts');
+    const { settlementReviewPack } = load('../src/audio/SettlementSoundPack.ts');
+    const sounds = new WildlifeSounds(state.events, settlementReviewPack);
+    const scheduler = new Soundscape(settlementReviewPack.cues, () => 0);
+    const saved = core.serializeState(state);
+    assert.equal(sounds.focus(event, observation(state), { ...actor, observable: false }), false);
+    assert.equal(sounds.focus(event, observation(state), { ...actor, id: 'a-different-rabbit' }), false);
+    assert.equal(sounds.focus(event, observation(state), actor), true);
+    sounds.append(state.events, observation(state, 1, false)); // UI refresh while the campaign is paused.
+    const sources = sounds.sample(1, camera, [actor], true, true);
+    assert.equal(scheduler.update(1, camera, sources, true).voices.length, 1);
+    assert.equal(sounds.focus(event, observation(state, 1.1), actor), false, 'The same sighting is a one-off in this scene');
+    assert.equal(scheduler.update(1.1, camera, sounds.sample(1.1, camera, [actor], true, true), true).voices.length, 0);
+    assert.deepEqual(sounds.sample(1.2, camera, [{ ...actor, observable: false }], true, true), []);
+    assert.equal(core.serializeState(state), saved);
+});

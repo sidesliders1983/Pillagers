@@ -1,0 +1,32 @@
+✖ a recorded animal across the island gets a safe local view without flying through intervening terrain or fog (128.7802ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4029.9921
+
+✖ failing tests:
+
+test at tests\wildlife-camera.test.mjs:172:1
+✖ a recorded animal across the island gets a safe local view without flying through intervening terrain or fog (128.7802ms)
+  AssertionError [ERR_ASSERTION]: A distant player camera is not a reason to refuse the sighting
+  
+  false !== true
+  
+      at file:///D:/CodexSites/Pillagers/scratch/contextual-support-278/tests/wildlife-camera.test.mjs:186:20
+      at fixture (file:///D:/CodexSites/Pillagers/scratch/contextual-support-278/tests/wildlife-camera.test.mjs:22:11)
+      at TestContext.<anonymous> (file:///D:/CodexSites/Pillagers/scratch/contextual-support-278/tests/wildlife-camera.test.mjs:173:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

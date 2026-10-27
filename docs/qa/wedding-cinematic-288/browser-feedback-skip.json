@@ -1,0 +1,7 @@
+{
+  "audio": "{\"foreground\":{\"state\":\"released\",\"seconds\":0,\"duration\":30.041},\"foregroundDucking\":false,\"enabled\":true,\"hidden\":false,\"state\":\"running\",\"playing\":1,\"retiring\":0,\"physical\":1,\"pending\":0,\"decodes\":0,\"highVoices\":4,\"inflightClients\":0,\"highPhysical\":4,\"buffers\":6,\"downloadBytes\":2112132,\"startedCues\":{\"sea-waves\":4,\"wind-summer\":1,\"cow\":2,\"campfire\":2,\"gull\":2},\"requestedCues\":{\"sea-waves\":4,\"wind-summer\":856,\"cow\":2,\"campfire\":2,\"gull\":2},\"selectionScheduling\":{\"samples\":512,\"p50Ms\":0.10000000149011612,\"p95Ms\":0.29999999701976776,\"p99Ms\":0.3999999985098839},\"decodeInvocation\":{\"samples\":6,\"p50Ms\":0.09999999403953552,\"p95Ms\":1.3999999985098839,\"p99Ms\":1.3999999985098839},\"decodeWall\":{\"samples\":6,\"p50Ms\":13.800000004470348,\"p95Ms\":69.29999999701977,\"p99Ms\":69.29999999701977},\"decodedBytes\":8446656,\"failure\":\"\"}",
+  "camera": "{\"world\":[-0.7525766947068779,-2.7755575615628914e-17,-0.658504607868518,0,-0.3796258199762471,0.8170993839488749,0.4338580799728538,0,0.5380637094168615,0.5764968315180659,-0.6149299536192705,0,96,32.73252868652344,-27.999999999999996,1],\"projection\":[1.3579951288348662,0,0,0,0,2.4142135623730954,0,0,0,0,-1.0000833368057,-1,0,0,-0.20000833368057003,0]}",
+  "clock": "Start simulation",
+  "controls": 0,
+  "wedding": "{\"active\":false,\"camera\":false,\"actors\":0,\"instruments\":0,\"accessories\":0,\"templates\":5,\"maximumGripError\":0.0785386189717491,\"unavailable\":[],\"music\":null}"
+}

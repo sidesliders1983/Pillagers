@@ -1,0 +1,43 @@
+{
+  "attention": {
+    "bottom": 372,
+    "height": 53,
+    "left": 703.796875,
+    "right": 826,
+    "top": 319,
+    "width": 122.203125,
+    "x": 703.796875,
+    "y": 319
+  },
+  "canvas": {
+    "bottom": 390,
+    "height": 390,
+    "left": 0,
+    "right": 844,
+    "top": 0,
+    "width": 844,
+    "x": 0,
+    "y": 0
+  },
+  "controls": {
+    "bottom": 308,
+    "height": 128.96875,
+    "left": 633.90625,
+    "right": 832,
+    "top": 179.03125,
+    "width": 198.09375,
+    "x": 633.90625,
+    "y": 179.03125
+  },
+  "skip": {
+    "bottom": 299,
+    "height": 44,
+    "left": 736.40625,
+    "right": 800.40625,
+    "top": 255,
+    "width": 64,
+    "x": 736.40625,
+    "y": 255
+  },
+  "wedding": "{\"active\":true,\"camera\":true,\"actors\":6,\"instruments\":3,\"templates\":3,\"maximumGripError\":0.06344827723499907,\"unavailable\":[],\"music\":{\"state\":\"paused\",\"seconds\":0.191565,\"duration\":30.040792}}"
+}

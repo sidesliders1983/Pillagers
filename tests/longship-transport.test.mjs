@@ -341,6 +341,18 @@ test('the real expedition controls board, show contextual disembark, and keep va
         assert.equal(mission(session.readSnapshot()).status, 'Returning');
         assert.equal(mission(session.readSnapshot()).transport?.phase, 'embarked',
             'The real Return home button keeps the remotely reboarded group aboard');
+        workspace.hidden = true;
+        panel.refresh();
+        const toolbar = document.querySelector('#expedition-mode');
+        if (toolbar.hidden) document.querySelector('[data-expedition-toggle="group-1"]').click();
+        assert.equal(toolbar.hidden, false);
+        const beforeCameraFocus = session.saveJSON();
+        panel.collapseControls();
+        panel.refresh();
+        assert.equal(toolbar.hidden, true, 'A wildlife camera can leave expedition controls collapsed');
+        assert.equal(session.saveJSON(), beforeCameraFocus, 'Collapsing controls cannot alter the real expedition');
+        document.querySelector('[data-expedition-toggle="group-1"]').click();
+        assert.equal(toolbar.hidden, false, 'An explicit group toggle brings ordinary controls back');
         panel.dispose();
     } finally {
         for (const key of globals) {

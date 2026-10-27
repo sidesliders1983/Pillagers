@@ -298,3 +298,40 @@ paused approach and gestures. They return when presentation ends/suspends. Cloth
 visible; occupation/DNA/work and Core state remain unchanged. Hidden equipment releases its carry
 grip. This reuses installed groups without asset downloads or refitting, including when an
 occupation/wardrobe changes during the ceremony. See the #277 participation-v4 qualification.
+
+## #288 — Firelight Vow presentation
+
+An accepted wedding can show a skippable presentation using the actual spouses, oldest eligible recorded guest and up to three other recorded attendees as lyre/flute/frame-drum players. Remaining attendees clap. Roles are transient; they do not create occupations or change attendance, family state or Core RNG. Low stages at most six residents; Standard at most eight.
+
+The selected owner music streams through the existing audio owner and drives approximately thirty seconds of local camera/hand choreography after the physical Run approach. Pause, mute, backgrounding and Skip restore safely. There is no extra charge, support contribution or marriage event. The existing 3 Food per canonical attendee and campfire-fuel quotation remain authoritative. Historical saves do not replay the scene automatically. See [#288 validation](../qa/wedding-cinematic-288/README.md).
+
+
+The spouses extend both hands toward shared fingertip contact using their existing native rigs; feet and bone lengths remain unchanged. The female spouse wears the supplied flower crown and the officiant holds the supplied open book in both hands. These are temporary rigid accessories, removed with the performance. Cinematic overhead name boards are hidden, and normal safe shots use a lower viewpoint. A saved sound-on preference resumes from ordinary start/control gestures; explicit mute remains authoritative. The selected native music element is silently primed during accepted sponsorship and starts automatically once the staged cast arrives. Browser autoplay denial retains the optional Play music fallback.
+
+### Owner fitting and audio follow-up
+
+The flower wreath uses the fitted `socket_head_top`, centered and sized from the
+current native posed HEAD surface. It temporarily hides the existing headwear
+module and restores that module's original visibility on release. It does not
+replace hair, identity, clothing selection or skeletons.
+
+The selected song is now a positioned world stream at the actual musicians. Its
+volume follows the ordinary listener and camera distance; other ambient/world
+sounds keep their chosen volumes. Music consent, explicit mute, pause, background
+cleanup, the existing MP3 and all canonical wedding costs remain unchanged.
+[Feedback validation](../qa/wedding-wildlife-feedback-001/README.md).
+
+
+### Mobile portrait camera follow-up
+
+Once an accepted wedding owns its directed camera, its campfire does not need to
+remain inside that camera's screen rectangle. Portrait shots may frame the actual
+couple while the fire sits outside the image; this is composition, not loss of
+clan visibility. The existing clan fog, page visibility, real participant/arrival,
+fire-fuel, safe-camera, Skip and lifecycle guards remain authoritative. Ordinary
+offscreen gatherings keep their existing suspension behavior.
+
+Food is charged once at the accepted quotation. Reaching zero Food afterward can
+raise the normal stock attention notice, but does not cancel the already accepted
+presentation. The original wedding QA save contains exactly 24 Food, matching its
+eight-person quotation; that fixture and the gameplay cost are unchanged.

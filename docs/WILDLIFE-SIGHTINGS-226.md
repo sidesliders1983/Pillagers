@@ -141,3 +141,68 @@ Repeat sightings remain ambient. No wildlife-specific timer, badge or read store
 is introduced. The live QA checkpoint is captured before the actual first sighting;
 pressing Play advances that real route and generates a new event, not a scripted
 or replayed example. Saved unread/read checkpoints intentionally do not replay cards.
+
+## View-only sighting focus (#292)
+
+`WildlifeLayer.liveAnchor` returns detached current render coordinates and transformed
+native asset bounds only for the exact observable instance in its canonical world.
+It reuses current clan fog and marine surfacing rules; the final dive frames are not an
+eligible sighting. It never moves or reveals animals.
+
+The existing RTS controller exposes navigation intent before native camera changes
+and a read-only preview of its ordinary terrain, water, near-plane and world-bounds
+clearance. A single transient WildlifeCamera session uses these seams. Entry lasts
+1.4 seconds; a full safe orbit takes 10 seconds. Reduced motion uses a 2.8-second
+no-spin focus. Following stops beyond 12 metres from the initial animal pivot.
+
+A bounded local snapshot of real trees, rocks, boats and rendered settlement
+structures checks both camera position and line of sight. Unsafe sectors truncate
+the orbit; unavailable/obstructed views end safely. The snapshot retains at most
+256 local bounds, scanning at most 8192 nodes/instances; exceeding that budget
+refuses the focus. No second fauna population, renderer, per-frame whole-world scan
+or persisted terrain values are introduced.
+
+Core, sightings, resources, weather, clock intent and sound preferences remain
+unchanged. Only ordinary read metadata changes on click. An active cinematic uses
+the pre-focus manual camera during ordinary checkpoint capture; the orbit session
+itself is never serialized. Ending keeps the current native view. Backgrounding,
+scene/world replacement, context loss, quality/viewport changes, another task and
+disposal cancel the session and release its caption/listeners.
+
+[Reproducible fixtures and browser evidence](qa/wildlife-cinematic-292/README.md).
+
+### Coastal focus follow-up
+
+Approach safety checks the actual moving eye corridor separately from the old
+camera's intermediate look target. A rock in front of that old target is not by
+itself a camera collision. Native terrain/water clearance, known-area bounds and
+prop collision remain mandatory. The arrived view and orbit still require clear
+sight of the actual animal. When no close orbit fits, a safe existing angle can hold
+with eased framing instead of rejecting an otherwise visible animal.
+
+A focused sighting may play its approved existing animal recording once; no new
+recordings, simulation events or discovery are created. Missing approved recordings
+remain silent. See [owner feedback evidence](qa/wedding-wildlife-feedback-001/README.md).
+
+
+### Focus from anywhere on the island — owner clarification
+
+Sightings still originate only from real confirmed expedition witnesses. Camera
+position, distance and frustum/LOD culling cannot create or suppress those facts.
+The live anchor uses the exact current world/species/instance and current clan fog
+visibility, independently of whether the player's camera currently draws it.
+
+There is no distance refusal. Beyond a 96 m short-approach budget, the camera adopts
+one validated local destination view and starts its bounded orbit there. The same
+local reframe is a fallback if a shorter approach cannot cross safely. This budget
+chooses the presentation transition; it is not a sighting range or gameplay limit.
+The destination still obeys native terrain/water/near-plane/world bounds and real
+local prop clearance. A long flight never crosses intermediate fog or terrain.
+Collision snapshots retain the same bounded 256-box / 8192-node limits and cover
+only the local 64 m destination area for remote focus.
+
+Current fog-hidden, submerged or absent animals still open their factual history.
+Current visible animals may remain observable from the settlement or landing even
+after an expedition leaves; the existing fog policy remains authoritative. All
+manual exit, lifecycle, reduced-motion, save-camera and canonical parity contracts
+remain unchanged. See [remote-focus evidence](qa/wildlife-remote-focus-002/README.md).

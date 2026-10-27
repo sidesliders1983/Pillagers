@@ -1,0 +1,118 @@
+{
+  "method": "Unmodified actual CUA browser screenshots encoded as an animated GIF at measured capture intervals; no generated frames, no audio. Sampled capture, not a frame-rate benchmark.",
+  "frames": [
+    {
+      "file": "frame-000.png",
+      "ms": 1162
+    },
+    {
+      "file": "frame-001.png",
+      "ms": 1770
+    },
+    {
+      "file": "frame-002.png",
+      "ms": 2357
+    },
+    {
+      "file": "frame-003.png",
+      "ms": 2921
+    },
+    {
+      "file": "frame-004.png",
+      "ms": 3477
+    },
+    {
+      "file": "frame-005.png",
+      "ms": 4003
+    },
+    {
+      "file": "frame-006.png",
+      "ms": 4544
+    },
+    {
+      "file": "frame-007.png",
+      "ms": 5090
+    },
+    {
+      "file": "frame-008.png",
+      "ms": 5638
+    },
+    {
+      "file": "frame-009.png",
+      "ms": 6220
+    },
+    {
+      "file": "frame-010.png",
+      "ms": 6720
+    },
+    {
+      "file": "frame-011.png",
+      "ms": 7300
+    },
+    {
+      "file": "frame-012.png",
+      "ms": 7807
+    },
+    {
+      "file": "frame-013.png",
+      "ms": 8281
+    },
+    {
+      "file": "frame-014.png",
+      "ms": 8846
+    },
+    {
+      "file": "frame-015.png",
+      "ms": 9348
+    },
+    {
+      "file": "frame-016.png",
+      "ms": 9855
+    },
+    {
+      "file": "frame-017.png",
+      "ms": 10367
+    },
+    {
+      "file": "frame-018.png",
+      "ms": 10844
+    },
+    {
+      "file": "frame-019.png",
+      "ms": 11424
+    },
+    {
+      "file": "frame-020.png",
+      "ms": 11922
+    },
+    {
+      "file": "frame-021.png",
+      "ms": 12515
+    },
+    {
+      "file": "frame-022.png",
+      "ms": 13036
+    },
+    {
+      "file": "frame-023.png",
+      "ms": 13636
+    },
+    {
+      "file": "frame-024.png",
+      "ms": 14144
+    },
+    {
+      "file": "frame-025.png",
+      "ms": 14745
+    },
+    {
+      "file": "frame-026.png",
+      "ms": 15318
+    }
+  ],
+  "encodedMilliseconds": 14756,
+  "size": [
+    1280,
+    720
+  ]
+}

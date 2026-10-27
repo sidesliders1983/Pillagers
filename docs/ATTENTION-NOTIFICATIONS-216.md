@@ -154,3 +154,27 @@ opening this Overview. No source becomes read merely by opening Activity Center.
 DOM journeys cover ordering, separate confirmation/read state, historical navigation,
 stale campaign guards and unchanged Core/clock. Device visual acceptance remains a
 separate owner review because no browser automation surface is enabled here.
+
+## Wildlife sighting camera (#292)
+
+Selecting an individual recorded wildlife event (or its unambiguous notification)
+tries one short, non-modal camera focus on that exact current world/species/instance.
+Grouped activity still opens its list; the player selects the actual event. Other
+notification navigation is unchanged. Reading uses the existing attention metadata.
+
+An exact currently clan-observable animal is required. Its position on the player's
+camera screen and its distance from that camera do not determine availability.
+Missing, fog-hidden, submerged or other-world animals open their factual Clan Book history with a brief
+notice. Event-time coordinates do not become a tracking destination. The secondary
+**Open wildlife in Clan Book** action remains available.
+
+The orbit yields before the first native wheel, drag, pinch/swipe, camera key,
+Home/focus or Escape action. It leaves the current view in place, including on
+natural completion. There is no simulation pause, extra sighting, discovery or gameplay command. An explicit live focus can play the existing approved animal recording once. See [camera QA](qa/wildlife-cinematic-292/README.md).
+
+
+Owner clarification: a recorded expedition sighting can focus its exact live animal
+from anywhere on the island while that animal remains currently observable under
+the existing clan fog policy. A distant view, or an obstructed approach, uses one
+checked local reframe before the bounded orbit. Historical records never reveal
+currently hidden positions. See [remote-focus QA](qa/wildlife-remote-focus-002/README.md).

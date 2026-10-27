@@ -22,14 +22,15 @@ test('real Clan Book DOM supports explicit adoption, Attention, witnesses, group
         { mortalityBands: [{ minAge: 0, chanceBps: 0 }], fertilityChanceBps: 0 }, { enabled: false })));
     const owner = new SharedSettlement(session);
     owner.session.initializeDiscovery(owner.fjord.blueprint, owner.fjord.layout.geographyId);
-    const selected = [], groups = [], persisted = [];
+    const selected = [], groups = [], persisted = [], sightingClicks = [];
     const attention = document.querySelector('#attention');
     let attentionView;
     const refresh = () => attentionView?.render();
     const reader = new ClanBookReader(owner, () => persisted.push(owner.persist()),
         { witness: id => selected.push(id), group: id => groups.push(id) }, refresh);
     attentionView = new AttentionView(attention, owner, () => { persisted.push(owner.persist()); refresh(); },
-        { target: target => { if (target.kind === 'wildlife') reader.openWildlife(target.id); } });
+        { target: target => { if (target.kind === 'wildlife') reader.openWildlife(target.id); },
+            sighting: eventId => sightingClicks.push(eventId) });
     const panel = document.querySelector('#clan-book-reader');
     const wildlifePanel = document.querySelector('#clan-book-wildlife-panel');
     const click = selector => {
@@ -60,6 +61,7 @@ test('real Clan Book DOM supports explicit adoption, Attention, witnesses, group
         const groupButton = attention.querySelector('[data-attention-action="group"][data-attention-id="WildlifeSighted:' + record.time.winter + '"]');
         if (groupButton) groupButton.click();
         click('#attention [data-attention-action="event"][data-attention-id="' + record.eventId + '"]');
+        assert.deepEqual(sightingClicks, [record.eventId], 'The selected actual sighting activates on the row click');
         click('#attention [data-attention-action="target"]');
         assert.equal(panel.hidden, false);
         assert.equal(panel.dataset.tab, 'wildlife');

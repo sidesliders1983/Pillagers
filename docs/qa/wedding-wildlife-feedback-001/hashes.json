@@ -1,0 +1,277 @@
+{
+  "baselineCommit": "84ce470399e36229d4418ec81117cfd1fd4ada64",
+  "branch": "codex/wedding-cinematic-288",
+  "worktree": "D:/CodexSites/Pillagers/scratch/contextual-support-278",
+  "captureState": "Uncommitted feedback delta on baseline; final style-only cleanup followed the 330-test run. Final branch revision is its enclosing Git commit.",
+  "validation": {
+    "targetedTests": 330,
+    "failed": 0,
+    "skipped": 0,
+    "productionBuild": "passed",
+    "nativeBrowser": "seal, puffin, wedding music/ambient and cleanup verified",
+    "physicalDevice": "pending owner listening/visual check"
+  },
+  "sources": [
+    {
+      "path": "src/audio/FjordAudio.ts",
+      "bytes": 33292,
+      "sha256": "760fb301923dbd6b321a53d44a529523596647d986b9c33e75cd38c1a267fbb9",
+      "lfSha256": "01cd8d273f9492bb918940815f3296bda7abe2376088621971c73a9c697e06f9"
+    },
+    {
+      "path": "src/audio/ForegroundTrack.ts",
+      "bytes": 6380,
+      "sha256": "422ae4551899f4d49e99a216a4c55d8e8f1d910902dbf745fe382f1ec7bb3656",
+      "lfSha256": "d28090af22b23e7e978e6949a9795b576dc6280bd1b55e812976c52b677a7acc"
+    },
+    {
+      "path": "src/audio/Soundscape.ts",
+      "bytes": 7728,
+      "sha256": "88def2f66828de7ef374fa29b47656e4ec091425d2a2a762980cfaf7991fa8a6",
+      "lfSha256": "c43b88765d66e9d3c15f3daddd32962cec8341714e865b37a6c8c146684be0d6"
+    },
+    {
+      "path": "src/audio/WildlifeSounds.ts",
+      "bytes": 6076,
+      "sha256": "caa34b18a195b9e4a196639e07eff8420bddbd6307eaf595abd2f48adfc2d0a4",
+      "lfSha256": "f1024ab13eaac564d137f1128f3eebfa2d2225de03d034a7fe701be42033d8e7"
+    },
+    {
+      "path": "src/camera/CameraObstacles.ts",
+      "bytes": 3420,
+      "sha256": "46a57e7e41869b211488baedb0f54e399156afb3955b5ee9be87da58f386a342",
+      "lfSha256": "46a57e7e41869b211488baedb0f54e399156afb3955b5ee9be87da58f386a342"
+    },
+    {
+      "path": "src/camera/WildlifeCamera.ts",
+      "bytes": 9215,
+      "sha256": "0233c37c1c1f340cbf1df0de83d37983c82d0bf20c71ffb88e11a0aa24c48b27",
+      "lfSha256": "9cc0c961cc0ac16cdc1feb8118f751a2aa69805c523b962ba8aa3d72c239fa5c"
+    },
+    {
+      "path": "src/fjord-play/FjordScene.ts",
+      "bytes": 77670,
+      "sha256": "f9f443b7b5576a1d5a7e3b83522fe7a8137b01134ed337269cca3277371c6e2d",
+      "lfSha256": "ed66d2ab7884364729f6176e7219992e7daa1eecf5867fc425d8ebd04bf08b8a"
+    },
+    {
+      "path": "src/fjord-play/WeddingEnsemble.ts",
+      "bytes": 17967,
+      "sha256": "09b1d636c27713b2d1bdad7f9b7b4b10faf6b0a0e53c55123d2dec94ab01e41e",
+      "lfSha256": "ae77289c96f5b2823f273958a74ca14c903cf8f0f9db9a117ad980b46a284d40"
+    },
+    {
+      "path": "tests/wedding-ensemble.test.mjs",
+      "bytes": 13587,
+      "sha256": "9b6ad7b9611b96a9d4d1f33d0b4635d036de4d6cb67b8e749162be9ca797b40e",
+      "lfSha256": "7e277cecc3e9a6c97df75c9efd0d1e31f75553a6bcbcebb5051b564ed5d49ff2"
+    },
+    {
+      "path": "tests/wedding-music.test.mjs",
+      "bytes": 8504,
+      "sha256": "ef1c7bcfdf336493a51cfc1927a2d4e96ee47b9004502583ef6ca7bfa32901ea",
+      "lfSha256": "fe527c3ff8e5977a1c61816a711c393d31fae7b289b489fdf2e320b09fffcab7"
+    },
+    {
+      "path": "tests/wildlife-camera.test.mjs",
+      "bytes": 9122,
+      "sha256": "25dcf68c60382abc7ba3c019b4255f010a35c56ca2c95c51e6eea2528a9d86b4",
+      "lfSha256": "5bb15b78516ff369fa0b311417eeebd0f726cd44d1c700bd74dfcc90b9bbbd98"
+    },
+    {
+      "path": "tests/wildlife-live-anchor.test.mjs",
+      "bytes": 8923,
+      "sha256": "c2c260a104ea00074dba58012eef265a93aa98453dea56dc86035cd4510f2c13",
+      "lfSha256": "d109f2b5050ae37f1858a3f37018ca1842b065281946d1ee5f0a4ffacf1e1367"
+    },
+    {
+      "path": "tests/wildlife-sounds.test.mjs",
+      "bytes": 8623,
+      "sha256": "d14c6bb6c096ef8e4c0a6fc98fb63a1b7be660125935d628030a62c62e4c9570",
+      "lfSha256": "7d625a7873d01af128598cb928a90dfd610947eca03ff044deb53feaee0ef119"
+    },
+    {
+      "path": "scripts/prepare-wildlife-feedback-review.mjs",
+      "bytes": 3305,
+      "sha256": "9ccba95e361d6e18d18d531e849a713bc9c474e08262a0fa6d2dec323e565ff3",
+      "lfSha256": "378757d058036f14d058182eb6df0006a1fb54af020f67b5d7f6c2f865834d93"
+    }
+  ],
+  "unchangedCore": [
+    {
+      "path": "src/simulation/SimulationCore.ts",
+      "bytes": 30372,
+      "sha256": "cea4eb44f584f66863cf41c0b9838f76d9c835397ac7a4fa76a1f2c1fcc6d599",
+      "lfSha256": "cea4eb44f584f66863cf41c0b9838f76d9c835397ac7a4fa76a1f2c1fcc6d599",
+      "matchesBaselineLf": true
+    },
+    {
+      "path": "src/simulation/WildlifeSightings.ts",
+      "bytes": 18771,
+      "sha256": "dfad4498faf8b7eed43447d6523035e788cfc9f1071d870807f8acea6596154d",
+      "lfSha256": "f08fb0b131a94822525eb96db7f370e100842791eb6b880341f4b7c508c1289f",
+      "matchesBaselineLf": true
+    },
+    {
+      "path": "src/play/SharedSettlement.ts",
+      "bytes": 12186,
+      "sha256": "a577000fe0bf0e50fd05ec4b9679d55e46ac0628a9521cc27776eb71e5e8a646",
+      "lfSha256": "56e37029981c7ff1315c73a418e46f97be279dcf9ca745407bf9aea7a4878c67",
+      "matchesBaselineLf": true
+    }
+  ],
+  "reusedWeddingAssets": [
+    {
+      "path": "public/game-assets/wedding/firelight-vow.mp3",
+      "bytes": 737916,
+      "sha256": "a927f51c2975c5164173c2087eb5575fa32b312b3807d86616423afe6d6a70cf",
+      "lfSha256": "3f15b7421328ef2b060d004b2be36c98593e1f3248f19e5f6dbbb2cf2e8d8276"
+    },
+    {
+      "path": "public/game-assets/wedding/manifest.json",
+      "bytes": 2931,
+      "sha256": "9d434b4ba30e4756747cd6855c64acc31a07d3d39f6446c520975f09d69b3b05",
+      "lfSha256": "9d434b4ba30e4756747cd6855c64acc31a07d3d39f6446c520975f09d69b3b05"
+    },
+    {
+      "path": "public/game-assets/wedding/wedding-book.glb",
+      "bytes": 338660,
+      "sha256": "4e4697a3143f52cee164cb0908ecce43908ebdae4841b61ced5c0644e0504274",
+      "lfSha256": "9546c80c0beca1cd772bb66a2f81c5aba1ed9f1031937514a09b06e9df463dad"
+    },
+    {
+      "path": "public/game-assets/wedding/wedding-crown.glb",
+      "bytes": 358604,
+      "sha256": "7302274c0e06451483e76073e3898890b8322f84515f793c493f491f7a6a65bf",
+      "lfSha256": "9623a40b9740be3decc2f73a62e68cb21c3feef72f78d2e8b764b6a4b139ff11"
+    },
+    {
+      "path": "public/game-assets/wedding/wedding-flute.glb",
+      "bytes": 333556,
+      "sha256": "58cddae8060259a344b1ff2cec198066c9043e7383aa9f03708e3672bdc03501",
+      "lfSha256": "46d52d28305a41adf246a4ecfe95eeea356c78861795ab2092cda83ff64ff2e1"
+    },
+    {
+      "path": "public/game-assets/wedding/wedding-frame-drum.glb",
+      "bytes": 338108,
+      "sha256": "2291ca1be860157cb233d0c33e161118c7f314a1f4928e86f9deba62b5ed3b00",
+      "lfSha256": "650f61d61f90e6d8acc6f99f325af46aa21d31e09da6e680bc945ef38364cfac"
+    },
+    {
+      "path": "public/game-assets/wedding/wedding-lyre.glb",
+      "bytes": 332568,
+      "sha256": "ab756fd06feb0d456dcfbf4f74f164aa1c18349d20d678b2b4816c34f87becc2",
+      "lfSha256": "7144b6286b8498a7fe4ea4488a01ea91563e419f52c861ebc8152be000578bc6"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "docs/qa/wedding-wildlife-feedback-001/fixture-run.log",
+      "bytes": 789,
+      "sha256": "993342c72f1fccbcf7a0bbe968716c769a142f0b2a475bab39ceb43ba7827518",
+      "lfSha256": "b94384533c87483bb5a0f8e2f93dd012141a11ea1e337b22e7d0d6611fcc5350"
+    },
+    {
+      "path": "docs/qa/wedding-wildlife-feedback-001/fixtures.json",
+      "bytes": 1163,
+      "sha256": "363badec4e805302b57d42e304591ebf4e5db9c7f9411183459670611459e75e",
+      "lfSha256": "363badec4e805302b57d42e304591ebf4e5db9c7f9411183459670611459e75e"
+    },
+    {
+      "path": "docs/qa/wedding-wildlife-feedback-001/production-build.log",
+      "bytes": 5788,
+      "sha256": "9ed565fa859dbc2ef9ab4bcba39c6f7b06b51ec60ad632ab7deca14de56993d8",
+      "lfSha256": "074b922c36d81e9743f882092d78dd76ed4b29b8a38cfd7ff913b8515968a65a"
+    },
+    {
+      "path": "docs/qa/wedding-wildlife-feedback-001/puffin-focus-browser.json",
+      "bytes": 610,
+      "sha256": "58311b2e8a94bd9ea0c801d481c42bc4746fb16c0054727f1082b270528fbd5a",
+      "lfSha256": "58311b2e8a94bd9ea0c801d481c42bc4746fb16c0054727f1082b270528fbd5a"
+    },
+    {
+      "path": "docs/qa/wedding-wildlife-feedback-001/puffin-focus.png",
+      "bytes": 61402,
+      "sha256": "d25ca5f0006c4f0ba7f915317e67528d60b23fdd8296d975758893b1294aef87",
+      "lfSha256": "d25ca5f0006c4f0ba7f915317e67528d60b23fdd8296d975758893b1294aef87"
+    },
+    {
+      "path": "docs/qa/wedding-wildlife-feedback-001/puffin-sighting.json",
+      "bytes": 76313,
+      "sha256": "2ebf14c46399d7baaacb74980557f53023e3ca52d3e2421c4678a45eede7c81c",
+      "lfSha256": "2ebf14c46399d7baaacb74980557f53023e3ca52d3e2421c4678a45eede7c81c"
+    },
+    {
+      "path": "docs/qa/wedding-wildlife-feedback-001/README.md",
+      "bytes": 4859,
+      "sha256": "0c68699e3c1c373e83531745050eefc43d84313fd83cb94f0528445e919848be",
+      "lfSha256": "81f08f217aa758262c6a014226df77d8af8871e0174a4da38aaa1915cf70c60e"
+    },
+    {
+      "path": "docs/qa/wedding-wildlife-feedback-001/regressions.log",
+      "bytes": 38578,
+      "sha256": "7f3d1cb5669bf1c3537b880b9ad52fbba0653b9cdc6786ea7b70f01fbc244b5e",
+      "lfSha256": "73e0adb8e7b983929a060b68f56c128ba5090a03a201e5ee47a3038af3639d51"
+    },
+    {
+      "path": "docs/qa/wedding-wildlife-feedback-001/review.html",
+      "bytes": 2890,
+      "sha256": "8a56709dcdfa53fc1f6ec808852d89e54e4d8e2785c5b9f75714fc64272e1cb4",
+      "lfSha256": "ff3f9f810ca654566b2f52032968e2acec9457bdb8cef284f36bd06728a19f54"
+    },
+    {
+      "path": "docs/qa/wedding-wildlife-feedback-001/seal-audio-browser.json",
+      "bytes": 916,
+      "sha256": "2c929e454c0f202746263dcceaad30ece4e2fa1b2475f99c478fb0bf0f2bb4f4",
+      "lfSha256": "2c929e454c0f202746263dcceaad30ece4e2fa1b2475f99c478fb0bf0f2bb4f4"
+    },
+    {
+      "path": "docs/qa/wedding-wildlife-feedback-001/seal-sighting.json",
+      "bytes": 73682,
+      "sha256": "fe991947dacc09278d15150ffb61b610df0f9f57c5c1dea0cea84294a73e9bb4",
+      "lfSha256": "fe991947dacc09278d15150ffb61b610df0f9f57c5c1dea0cea84294a73e9bb4"
+    },
+    {
+      "path": "docs/qa/wedding-wildlife-feedback-001/wedding-cleanup-browser.json",
+      "bytes": 1116,
+      "sha256": "530a30446f5a45448cb5dddcb28b77ff4e3b1b8574198630f8a32f3b02cf493a",
+      "lfSha256": "530a30446f5a45448cb5dddcb28b77ff4e3b1b8574198630f8a32f3b02cf493a"
+    },
+    {
+      "path": "docs/qa/wedding-wildlife-feedback-001/wedding-close.png",
+      "bytes": 114526,
+      "sha256": "1acbc06c3a7842135aef178f42834059c5916e2567b5947e6945587bcc64a0c6",
+      "lfSha256": "1acbc06c3a7842135aef178f42834059c5916e2567b5947e6945587bcc64a0c6"
+    },
+    {
+      "path": "docs/qa/wedding-wildlife-feedback-001/wedding-mid-browser.json",
+      "bytes": 2132,
+      "sha256": "de21b2bce4c99ad6b69827798adfd32100d3b0d14b39b8078bd3e3f284472386",
+      "lfSha256": "de21b2bce4c99ad6b69827798adfd32100d3b0d14b39b8078bd3e3f284472386"
+    },
+    {
+      "path": "docs/qa/wedding-wildlife-feedback-001/wedding-paused.png",
+      "bytes": 113190,
+      "sha256": "204f6a06f3ef2e0f0bd48f7ec2dbd1b1e09fedb55077816c5610086974f46b8a",
+      "lfSha256": "82c82d139c42337da9fceb2d9e0fcd9f98e60d89f7771fbc91323c4e79a83b26"
+    },
+    {
+      "path": "docs/qa/wedding-wildlife-feedback-001/wedding-playing-browser.json",
+      "bytes": 2086,
+      "sha256": "9619a4c24b5e9cb20027c2d45f6ccff093f39217aad482aedf9a65a328762ead",
+      "lfSha256": "9619a4c24b5e9cb20027c2d45f6ccff093f39217aad482aedf9a65a328762ead"
+    },
+    {
+      "path": "docs/qa/wedding-wildlife-feedback-001/wedding-playing.png",
+      "bytes": 113004,
+      "sha256": "fa462d02d1e829df5f39f40dd67012f268e357f3b44e9d5a87bab9d115b2fc57",
+      "lfSha256": "fa462d02d1e829df5f39f40dd67012f268e357f3b44e9d5a87bab9d115b2fc57"
+    },
+    {
+      "path": "docs/qa/wedding-wildlife-feedback-001/wreath-detail.png",
+      "bytes": 81968,
+      "sha256": "f830bafb57be36c340dd21a8c180c3c797d1de26d093f1612e2f14522e69ed05",
+      "lfSha256": "ddbb52e94b84517af811d2c0404a5d13a850fd066728e975124396c6f70887e6"
+    }
+  ]
+}

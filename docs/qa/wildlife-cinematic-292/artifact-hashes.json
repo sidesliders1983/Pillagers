@@ -1,0 +1,89 @@
+{
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 5870,
+      "sha256": "850a2351bbe5d7c1dc0d1796ce73d75ddc85b1b3bf8429f985e98077273f151d"
+    },
+    {
+      "path": "browser.json",
+      "bytes": 7802,
+      "sha256": "63860d0076360429bd73c7d3cc6ccbb0d5ec0ed2ebee259610a47a0bb912998e"
+    },
+    {
+      "path": "desktop-final-view.png",
+      "bytes": 73746,
+      "sha256": "75f2f48640e44afdfe619da90956001708529df56aa1ac78a7c377ce7b18f666"
+    },
+    {
+      "path": "desktop-live-orbit.png",
+      "bytes": 299724,
+      "sha256": "31a235ac244eb9f865c55334bd18babf7fc09a089bba5c7533c004dc600a8f74"
+    },
+    {
+      "path": "desktop-orbit.gif",
+      "bytes": 5581050,
+      "sha256": "afbbb8340e7314a27e19a3f2290e46fd9b9fdc1f5fb230f77f91ddc464c35a08"
+    },
+    {
+      "path": "final-delta-tests.log",
+      "bytes": 2714,
+      "sha256": "8a3b0a4088133a0fea6f5740d4c329c0e69b7191d3437b8fa2e7ffe783d446b4"
+    },
+    {
+      "path": "final-integration-tests.log",
+      "bytes": 3777,
+      "sha256": "4d24de9e12c259fadbd79dc5e2c41e63611f14c011f57172cf2ad4c9646cf919"
+    },
+    {
+      "path": "fixture-manifest.json",
+      "bytes": 729,
+      "sha256": "f7202cd72f977f71688ad6120e42a681c1081eb72e1ca035a60148260dbdc78f"
+    },
+    {
+      "path": "historical-fallback.png",
+      "bytes": 46002,
+      "sha256": "a54062e7dcc8bc6dcbf692ea73152ab2fc2857f1e1c1aa6fd6f33e8b377b914a"
+    },
+    {
+      "path": "historical-sighting.json",
+      "bytes": 91213,
+      "sha256": "135f469fd8f4daad59c275a41fe3fddce85ac7b4cfd68649beb2fd468ec8f41a"
+    },
+    {
+      "path": "landscape-live-orbit.png",
+      "bytes": 42529,
+      "sha256": "4a55122a94473f68390069f0daccb881ea56f7a86f4d829eac762fcf8ce5d1ea"
+    },
+    {
+      "path": "live-sighting.json",
+      "bytes": 71750,
+      "sha256": "4f172943390296b82c83429b2e362708e2084c5e7cacd19fb11aa574315ebd71"
+    },
+    {
+      "path": "production-build.log",
+      "bytes": 5788,
+      "sha256": "c6a3340465b0d2f320639b0b359a35f1bf465923755cc89cb4709a1602bd6b5c"
+    },
+    {
+      "path": "recording-timing.json",
+      "bytes": 2054,
+      "sha256": "ff9afbfcf8b367ae05d039021cae12e0aec88ecee34f3f2a8b02140177845682"
+    },
+    {
+      "path": "review.html",
+      "bytes": 2934,
+      "sha256": "aa886a9270f13eba69d60074eabffc36c2e4d67b43b22a67bab05a80108a4791"
+    },
+    {
+      "path": "source-hashes.json",
+      "bytes": 8300,
+      "sha256": "28b056c8b7bb076b0d468d30b95f514fb6cfc24de370c4fb56d9ddfd3aed9356"
+    },
+    {
+      "path": "targeted-tests.log",
+      "bytes": 36968,
+      "sha256": "108b524d6dfda345c1c0361aa0696d9f88fff48bc6522e883f5f11d5aa3c0b7b"
+    }
+  ]
+}

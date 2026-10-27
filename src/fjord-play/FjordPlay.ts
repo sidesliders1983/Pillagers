@@ -166,7 +166,7 @@ export class FjordPlay {
         document.title = 'FjordSide';
         const readingPosition = this.foundingBook?.scrollTop ?? 0;
         document.body.className = 'fjord-play';
-        document.body.innerHTML = `<main id="fjord-play">${fjordHeaderHTML()}<section class="fjord-stage"><canvas id="fjord-canvas" aria-label="Canonical Fjord settlement"></canvas><svg id="fjord-selection-leaders" aria-hidden="true"></svg><div id="fjord-selection-labels" aria-hidden="true"></div><div id="fjord-production-labels" aria-label="Resident production feedback"></div>
+        document.body.innerHTML = `<main id="fjord-play">${fjordHeaderHTML()}<section class="fjord-stage"><canvas id="fjord-canvas" tabindex="0" aria-label="Canonical Fjord settlement"></canvas><svg id="fjord-selection-leaders" aria-hidden="true"></svg><div id="fjord-selection-labels" aria-hidden="true"></div><div id="fjord-production-labels" aria-label="Resident production feedback"></div>
             <button id="fjord-management-toggle" type="button" aria-label="Toggle management" aria-expanded="false" aria-controls="fjord-management" hidden>▲</button>
             <aside id="fjord-management" aria-label="Selection and tasks" hidden><p id="fjord-selected" hidden></p><section id="entity-panel" aria-label="Settlement management"></section></aside>
             <section id="fjord-workspace" tabindex="-1" aria-label="Settlement workspace" hidden>
@@ -272,6 +272,19 @@ export class FjordPlay {
         const attentionView = this.ownStartup(new AttentionView(document.querySelector<HTMLElement>('#fjord-attention-feed')!, this.shared,
             () => { persist(); refresh(); }, {
                 family: id => { bookReader.openFamily(id); },
+                sighting: id => {
+                    const result = presentation?.focusWildlife(id) ?? 'unavailable';
+                    if (result === 'started') {
+                        this.shared.select(null);
+                        desktopUI?.close(false);
+                        expeditions?.collapseControls();
+                        refresh();
+                    } else {
+                        bookReader.openWildlife(id);
+                        say(result === 'unsafe' ? 'No clear camera view is available. The sighting is in your Clan Book.' :
+                            'That animal is no longer observable by your clan.');
+                    }
+                },
                 target: target => {
                     if (target.kind === 'expedition') expeditions?.openGroup(target.id);
                     else if (target.kind === 'site') islandMissions?.selectSite(target.id);
@@ -281,7 +294,11 @@ export class FjordPlay {
                 },
             }));
         const attentionToast = this.ownStartup(new AttentionToast(document.querySelector<HTMLElement>('#fjord-attention-toast')!, this.shared,
-            () => { desktopUI?.open('attention', true); attentionView.openInbox(); }));
+            eventId => {
+                const record = eventId && this.campaign.attentionSource(eventId);
+                if (record && record.canonicalType === 'WildlifeSighted') attentionView.activateEvent(record.eventId);
+                else { desktopUI?.open('attention', true); attentionView.openInbox(); }
+            }));
         const personalHistory = this.ownStartup(new PersonalHistoryView(document.querySelector<HTMLElement>('#fjord-play')!, this.shared));
         let firstSteps: FirstStepsGuide | undefined;
         let weddingInvitation: WeddingInvitation | undefined;
@@ -686,6 +703,7 @@ export class FjordPlay {
                     refresh();
                     return;
                 }
+                if (focusCeremony) presentation?.primeWeddingMusic();
                 done();
                 if (syncScene) await syncScene();
                 presentation?.acceptGathering(focusCeremony);
@@ -787,11 +805,19 @@ export class FjordPlay {
         const owner = this;
         presentation = createFjordScene({ shared: this.shared, canvas, diagnostics, audio: entry.audio,
             labels: { selection: selectionLabels, production: productionLabels }, restoredCamera,
+            openWildlifeRecord: id => bookReader.openWildlife(id), notify: say,
             host: {
                 tickIntervalSeconds: campaignClockIntervalMs / 1000,
                 get loading() { return owner.loading; },
                 get stopped() { return owner.stopped; },
-                work(delta) { sceneLoads += delta; if (delta < 0) previous = performance.now(); },
+                work(delta) {
+                    sceneLoads += delta;
+                    if (delta < 0) {
+                        previous = performance.now();
+                        // Overlapping notification refreshes may have disabled Play while this work was pending.
+                        syncGuideClock();
+                    }
+                },
                 built: () => trace.record('scene-build'),
             } });
         this.startupCleanup.push(() => presentation?.dispose());
@@ -834,7 +860,7 @@ export class FjordPlay {
         capturePresentation = () => this.shared.setPresentation({
             quality: document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
             effects: document.querySelector<HTMLSelectElement>('#fjord-effects')!.value as EffectQuality,
-            camera: { position: camera.position.toArray(), target: controller.focus.toArray() },
+            camera: presentation!.cameraForSave,
         });
         controller.enabled = !this.loading;
         let drawingReady = false;

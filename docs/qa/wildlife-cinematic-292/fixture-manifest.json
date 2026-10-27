@@ -1,0 +1,30 @@
+{
+  "campaignSeed": 32,
+  "geographySeed": 168,
+  "worldId": "fjordside-island-v0.3e-r3:168:cffd7da8",
+  "eventId": "event-9",
+  "species": "great-black-backed-gull",
+  "instanceId": "great-black-backed-gull:grounded:0",
+  "time": {
+    "winter": 800,
+    "tick": 15
+  },
+  "witnesses": [
+    "founder-1",
+    "founder-2"
+  ],
+  "camera": {
+    "position": [
+      85.55123616594864,
+      4.234665564746624,
+      124.22664929374513
+    ],
+    "target": [
+      85.55123616594864,
+      0.7346655647466244,
+      114.22664929374513
+    ]
+  },
+  "setup": "QA-only initial 5000 Food and quiet demography; actual paid group, route and canonical sighting. No spawned or repositioned animal.",
+  "coreUnchangedByViewCapture": true
+}

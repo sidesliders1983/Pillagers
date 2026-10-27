@@ -156,6 +156,10 @@ export class FjordModels {
         if (!played) actor.culturalEvent = undefined;
         return played;
     }
+    weddingResident(model: Object3D): MeshyHuman | undefined {
+        const actor = this.actors.get(model);
+        return actor?.human && !actor.embarked && !actor.human.isDisposed ? actor.human : undefined;
+    }
     stopCulture() {
         for (const actor of this.actors.values()) {
             if (!actor.culturalEvent) continue;

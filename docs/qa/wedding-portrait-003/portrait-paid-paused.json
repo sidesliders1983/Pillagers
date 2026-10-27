@@ -1,0 +1,11 @@
+{
+  "culture": "{\"id\":\"event-55\",\"sequence\":1,\"occasion\":\"wedding\",\"spouseIds\":[\"founder-1\",\"founder-6\"],\"phase\":\"approach\",\"phaseElapsedSeconds\":0,\"position\":{\"x\":68,\"y\":1.7325286865234375,\"z\":4,\"rotation\":0,\"scale\":2},\"stagedParticipants\":6,\"participantKeys\":[\"persona:founder-1\",\"persona:founder-6\",\"persona:founder-10\",\"persona:founder-2\",\"persona:founder-3\",\"persona:founder-4\"],\"visible\":true,\"wedding\":{\"duration\":30.041,\"elapsed\":0,\"rotation\":5.497787143782138,\"roles\":[{\"id\":\"founder-1\",\"role\":\"couple\"},{\"id\":\"founder-6\",\"role\":\"couple\",\"crown\":true},{\"id\":\"founder-10\",\"role\":\"officiant\"},{\"id\":\"founder-2\",\"role\":\"musician\",\"instrument\":\"wedding-lyre\"},{\"id\":\"founder-3\",\"role\":\"musician\",\"instrument\":\"wedding-flute\"},{\"id\":\"founder-4\",\"role\":\"musician\",\"instrument\":\"wedding-frame-drum\"}]}}",
+  "food": "\n            Food0\n            Materials4\n            Residents10\n            Livestock5\n        ",
+  "notice": "Needs attentionFood stocks are empty.",
+  "time": "{\"winter\":801,\"tick\":550,\"ticksPerWinter\":1000}",
+  "viewport": {
+    "height": 844,
+    "width": 390
+  },
+  "wedding": "{\"active\":true,\"camera\":true,\"actors\":0,\"instruments\":0,\"accessories\":0,\"templates\":0,\"maximumGripError\":0,\"unavailable\":[],\"music\":{\"state\":\"paused\",\"seconds\":0,\"duration\":30.041}}"
+}

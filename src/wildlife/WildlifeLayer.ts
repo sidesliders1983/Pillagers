@@ -9,8 +9,8 @@ import {
     prepareGullWings, gullWingRig, gullWingMotion, poseGullWings,
     gullFoldedWings, poseGroundedGull, gullHeadLook, type GullWingRig,
 } from './GullWings';
-import { AnimationMixer, Frustum, Group, Matrix4, Mesh, Quaternion, Sphere, Texture, Vector3,
-    type AnimationAction, type Camera, type Bone } from 'three';
+import { AnimationMixer, Box3, Frustum, Group, Matrix4, Mesh, Quaternion, Sphere, Texture, Vector3,
+    type AnimationAction, type Camera, type Bone, type Object3D } from 'three';
 import { GLTFLoader, type GLTF } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { clone } from 'three/addons/utils/SkeletonUtils.js';
@@ -24,6 +24,18 @@ import { MarineEffects } from './MarineEffects';
 import { marineTailRig, poseMarineTail, otterFloatRig, clearOtterFloat, poseOtterFloat,
     otterTailPoint, otterBackPoint, type OtterFloatRig } from './MarineMotion';
 import type { WildlifeObstacle } from './WildlifeHabitats';
+export interface LiveWildlifeTarget {
+    worldId: string;
+    speciesId: string;
+    wildlifeInstanceId: string;
+}
+export interface LiveWildlifeAnchor extends LiveWildlifeTarget {
+    position: [number, number, number];
+    bounds: { min: [number, number, number]; max: [number, number, number] };
+    movement: 'ground' | 'shore' | 'air' | 'water';
+    waterLevel: number;
+}
+const tuple = (point: Vector3): [number, number, number] => [point.x, point.y, point.z];
 interface CachedAsset {
     promise: Promise<GLTF>;
     users: number;
@@ -84,6 +96,7 @@ interface RenderActor {
     actor: WildlifeActor;
     root: Group;
     body: Group;
+    model: Object3D;
     floating?: OtterFloatRig;
     marineTail?: ReturnType<typeof marineTailRig>;
     effects?: MarineEffects;
@@ -193,7 +206,7 @@ export class WildlifeLayer {
                     if (idleAction) idleAction.enabled = false;
                     const coastal = mixer ? undefined : coastalAnimalRig(model as Group, actor.species);
                     const rabbit = actor.species === 'rabbit' ? rabbitRig(model as Group, root) : undefined;
-                    layer.records.push({ actor, root, body, mixer, walkAction, idleAction, coastal, rabbit, floating, effects,
+                    layer.records.push({ actor, root, body, model, mixer, walkAction, idleAction, coastal, rabbit, floating, effects,
                         motion: actor.variant.movement !== 'water'
                             ? new WildlifeMotionTrack(actor.position, actor.heading, actor) : undefined,
                         marineTail: actor.marine ? marineTailRig(model as Group, actor.species) : undefined,
@@ -404,6 +417,27 @@ export class WildlifeLayer {
             if (sources.length >= 64) break;
         }
         return sources;
+    }
+    /** Current pose for an exact clan-observable animal; camera frustum/LOD never determine knowledge.
+     * Returned arrays are detached snapshots, not mutable actor or scene references. */
+    liveAnchor(target: LiveWildlifeTarget): LiveWildlifeAnchor | undefined {
+        if (this.disposed || !this.root.visible || this.canonical?.worldId !== target.worldId) return;
+        const record = this.records.find(record => record.actor.id === target.wildlifeInstanceId &&
+            record.actor.species === target.speciesId);
+        if (!record || !record.observable ||
+            !this.canonical.actors.some(actor => actor.id === target.wildlifeInstanceId)) return;
+        const { actor, root, model } = record;
+        if (!this.known(actor.position.x, actor.position.z) || !this.known(root.position.x, root.position.z) ||
+            !wildlifeObservable(actor)) return;
+        const asset = wildlifeAssetManifest.find(asset => asset.id === actor.variant.asset)!;
+        root.updateWorldMatrix(true, true);
+        // Transform the prepared native asset bounds, including the current body/float pose.
+        // No per-frame vertex/skin traversal or another animal population is needed.
+        const bounds = new Box3(new Vector3(...asset.bounds.min), new Vector3(...asset.bounds.max))
+            .applyMatrix4(model.matrixWorld);
+        return { ...target, position: tuple(root.getWorldPosition(new Vector3())),
+            bounds: { min: tuple(bounds.min), max: tuple(bounds.max) },
+            movement: actor.variant.movement, waterLevel: this.population.world.waterLevel };
     }
     renderedCount() { return this.records.reduce((count, record) => count + Number(record.root.visible), 0); }
     inspect() {

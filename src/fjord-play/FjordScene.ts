@@ -1,3 +1,14 @@
+import { culturalVisibility } from './CulturalVisibility';
+import { WildlifeCamera, wildlifeCameraPivot, wildlifeApproachMetres } from '../camera/WildlifeCamera';
+import { CameraObstacles } from '../camera/CameraObstacles';
+import { WildlifeCinematicView } from './WildlifeCinematicView';
+import { resolveWildlifeFocus } from '../lore/AttentionNavigation';
+import { Box3 } from 'three';
+import { WeddingEnsemble } from './WeddingEnsemble';
+import { WeddingCamera } from './WeddingCamera';
+import { WeddingCinematicView } from './WeddingCinematicView';
+import { weddingAssets } from './WeddingAssets';
+import type { ForegroundTrack } from '../audio/ForegroundTrack';
 import { WildlifeLayer } from '../wildlife/WildlifeLayer';
 import { ConstructionGpuPreparation } from '../construction/ConstructionGpuPreparation';
 import { RivalScene } from './RivalScene';
@@ -70,6 +81,8 @@ export function createFjordScene(options: {
     labels: { selection: SelectionLabels; production: ProductionLabels };
     host: FjordSceneHost;
     restoredCamera?: { position: number[]; target: number[] };
+    openWildlifeRecord?: (eventId: string) => void;
+    notify?: (message: string) => void;
 }) {
     const { shared, canvas, labels, host } = options;
     const diagnostics = options.diagnostics;
@@ -117,20 +130,31 @@ export function createFjordScene(options: {
     const culturalMotion = new CulturalMotion();
     let culture: CulturalPresentation | undefined;
     let ceremonyVisuals: CulturalCeremonyVisuals | undefined;
+    const weddingEnsemble = new WeddingEnsemble(undefined, import.meta.env.BASE_URL);
+    let weddingView: WeddingCinematicView | undefined;
+    let weddingTrack: ForegroundTrack | undefined;
+    let preparedWeddingMusic: { id: string; track: ForegroundTrack } | undefined;
+    let weddingId: string | undefined;
+    let weddingMusicStarted = false;
+    let weddingObstacles: Box3[] = [];
     let culturalMotionReady = false;
     let preparingCultureEvent = '';
     let lastCulturalPhase = '';
     let cultureSuspended = false;
     const culturalVisible = () => {
-        const point = culture?.inspect()?.position;
-        if (!point || document.hidden) return false;
-        const projected = new Vector3(point.x, point.y + 1, point.z).project(camera);
-        return projected.z >= -1 && projected.z <= 1 && Math.abs(projected.x) <= 1.1 && Math.abs(projected.y) <= 1.1 &&
-            (!knownTerrain || discoveryAt(knownTerrain, point.x, point.z) === 'visible');
+        const frame = culture?.inspect();
+        if (!frame) return false;
+        const point = frame.position;
+        return culturalVisibility({ x: point.x, y: point.y + 1, z: point.z }, camera, {
+            hidden: document.hidden,
+            known: !knownTerrain || discoveryAt(knownTerrain, point.x, point.z) === 'visible',
+            directedWedding: !!frame.wedding && weddingId === frame.id && weddingCamera.active,
+        });
     };
     let rivalScene: RivalScene | undefined;
     let liveMarkers: ReturnType<typeof shared.selectionPresentation> = [];
     let sceneEntities: readonly FjordEntity[] = [];
+    let staticSceneSignature = '';
     let syncScene: (() => Promise<void>) | undefined;
     let sceneWork: Promise<void> | undefined;
 
@@ -141,6 +165,7 @@ export function createFjordScene(options: {
         depthTest: false, depthWrite: false, toneMapped: false, fog: false,
         transparent: true, opacity: 1
     });
+    let targetRequested = false;
     const targetMarker = new Mesh(targetGeometry, targetMaterial);
     targetMarker.rotation.x = -Math.PI / 2;
     targetMarker.renderOrder = 1000; targetMarker.visible = false;
@@ -156,6 +181,43 @@ export function createFjordScene(options: {
         document.querySelector<HTMLSelectElement>('#fjord-effects')!.value as EffectQuality,
         devicePixelRatio, 'initial').pixelRatio);
     const controller = new RTSCameraController(camera, canvas, 'pan');
+    const weddingCamera = new WeddingCamera(camera, controller, point => {
+        const ground = world?.movement.heightAt(point.x, point.z);
+        return ground !== undefined && Number.isFinite(ground) && point.y >= ground + 1.8 &&
+            (!knownTerrain || discoveryAt(knownTerrain, point.x, point.z) === 'visible') &&
+            !weddingObstacles.some(box => box.containsPoint(new Vector3(point.x, point.y, point.z)));
+    });
+    let wildlifeView: WildlifeCinematicView | undefined;
+    let wildlifeObstacles: CameraObstacles | undefined;
+    const queryWildlife = (target: Parameters<WildlifeLayer['liveAnchor']>[0]) => {
+        if (inactive() || shared.transferring || document.hidden || world?.blueprint !== campaign.blueprint ||
+            session.readSnapshot().wildlife?.worldId !== target.worldId) return;
+        const anchor = wildlife?.liveAnchor(target);
+        return anchor && (!knownTerrain || discoveryAt(knownTerrain, anchor.position[0], anchor.position[2]) === 'visible')
+            ? anchor : undefined;
+    };
+    const wildlifeCamera = new WildlifeCamera(camera, controller, queryWildlife, (view, phase, previous) =>
+        !!wildlifeObstacles?.allows(view, phase !== 'approach') &&
+        (!previous || wildlifeObstacles.travel(previous, view.position)) && (!knownTerrain ||
+            discoveryAt(knownTerrain, view.position[0], view.position[2]) !== 'unknown' &&
+            discoveryAt(knownTerrain, view.target[0], view.target[2]) !== 'unknown'));
+    wildlifeCamera.onEnd = reason => {
+        wildlifeView?.dispose();
+        wildlifeView = undefined;
+        wildlifeObstacles = undefined;
+        if (reason === 'animal-unavailable' || reason === 'animal-moved-away')
+            options.notify?.('The animal has moved out of view.');
+    };
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) wildlifeCamera.cancel('hidden');
+    }, { signal: bindings.signal });
+    window.addEventListener('pagehide', () => wildlifeCamera.cancel('page-hidden'), { signal: bindings.signal });
+    canvas.addEventListener('webglcontextlost', () => wildlifeCamera.cancel('context-lost'), { signal: bindings.signal });
+    document.addEventListener('click', event => {
+        const target = event.target as Element | null;
+        if (target && target !== canvas && !target.closest('.wildlife-cinematic, #fjord-run'))
+            wildlifeCamera.cancel('another-task');
+    }, { capture: true, signal: bindings.signal });
     const islandMap = new IslandMap(document.querySelector('#fjord-play')!, {
         focus: point => controller.focusAt(point),
     });
@@ -168,6 +230,7 @@ export function createFjordScene(options: {
     let precipitationEffect: PrecipitationEffect | undefined;
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
     const configureEffects = () => {
+        wildlifeCamera.cancel('effects-changed');
         const quality = document.querySelector<HTMLSelectElement>('#fjord-effects')!.value as EffectQuality;
         campfireEffect?.configure(quality, reducedMotion.matches);
         precipitationEffect?.configure(quality, reducedMotion.matches);
@@ -229,9 +292,69 @@ export function createFjordScene(options: {
         ceremonyVisuals.update(frame, { active, fireLit, spouses, camera,
             width: canvas.clientWidth, height: canvas.clientHeight });
     };
+    const stopWedding = () => {
+        preparedWeddingMusic?.track.dispose();
+        preparedWeddingMusic = undefined;
+        weddingEnsemble.stop();
+        weddingCamera.restore();
+        weddingTrack?.dispose(); weddingTrack = undefined;
+        weddingView?.dispose(); weddingView = undefined;
+        weddingId = undefined; weddingMusicStarted = false;
+    };
+    const skipWedding = () => {
+        if (!weddingId && !preparedWeddingMusic) return;
+        culture?.skip();
+        stopWedding();
+        updateCeremonyVisuals(null, false);
+        models?.stopCulture();
+    };
+    const updateWedding = (current: CulturalPresentationFrame | null, running: boolean) => {
+        if (!weddingId) return;
+        if (!current?.wedding || current.id !== weddingId || document.hidden) { stopWedding(); return; }
+        const residents = layer?.weddingResidents(current.participantKeys) ?? [];
+        const musicians = current.wedding.roles.filter(role => role.role === 'musician')
+            .flatMap(role => { const resident = residents.find(person => person.id === role.id);
+                return resident ? [resident.human.root.getWorldPosition(new Vector3())] : []; });
+        const musicSource = musicians.length ? musicians.reduce((sum, point) => sum.add(point), new Vector3())
+            .divideScalar(musicians.length).add(new Vector3(0, 1.2, 0)) :
+            new Vector3(current.position.x, current.position.y + 1.2, current.position.z);
+        weddingTrack?.setPosition({ x: musicSource.x, y: musicSource.y, z: musicSource.z });
+        const playing = current.phase !== 'approach';
+        const elapsed = current.wedding.elapsed;
+        weddingTrack?.update(elapsed, playing && running,
+            Math.min(1, elapsed / 1.2, Math.max(0, current.wedding.duration - elapsed) / 1.5));
+        if (playing && !weddingMusicStarted && options.audio?.enabled && running) {
+            weddingMusicStarted = true;
+            void weddingTrack?.play();
+        }
+        if (weddingTrack) culture?.setWeddingDuration(weddingTrack.duration);
+
+        if (playing) weddingEnsemble.update(current.wedding.roles, residents,
+            reducedMotion.matches ? 0 : elapsed);
+        else weddingEnsemble.stop();
+        const spousePositions = current.spouseIds.flatMap(id => {
+            const resident = residents.find(person => person.id === id);
+            return resident ? [resident.human.root.getWorldPosition(new Vector3())] : [];
+        });
+        const center = spousePositions.length === 2 ? spousePositions[0].add(spousePositions[1]).multiplyScalar(.5)
+            .add(new Vector3(0, 1.1, 0)) : new Vector3(current.position.x, current.position.y + 1.1, current.position.z - 6);
+        weddingCamera.update(current, center, reducedMotion.matches);
+        const names = current.spouseIds.map(id => session.readSnapshot().personas[id]?.name ?? 'Resident');
+        weddingView?.update(names, current.phase, weddingTrack?.inspect().state ?? 'unavailable', running,
+            current.wedding.duration - elapsed);
+    };
+    document.addEventListener('visibilitychange', () => { if (document.hidden) skipWedding(); }, { signal: bindings.signal });
+    canvas.addEventListener('webglcontextlost', skipWedding, { signal: bindings.signal });
+    document.addEventListener('pointerdown', event => {
+        if (!weddingId || !(event.target instanceof Element) || event.target.closest('.wedding-cinematic, #fjord-run')) return;
+        // Choosing another HUD task exits the cosmetic scene before ordinary navigation runs.
+        if (event.target !== canvas) skipWedding();
+    }, { capture: true, signal: bindings.signal });
     // RAF may stop before a hidden/context-lost frame. Invalidate synchronously at the lifecycle edge.
     const suspendCulture = () => {
-        updateCeremonyVisuals(null, false);
+        if (document.hidden || host.stopped || renderer.getContext().isContextLost()) skipWedding();
+        else weddingTrack?.suspend();
+        updateCeremonyVisuals(weddingId ? culture?.inspect() ?? null : null, !!weddingId);
         culturalMotion.reset();
         models?.stopCulture();
         preparingCultureEvent = '';
@@ -244,6 +367,8 @@ export function createFjordScene(options: {
     };
     const rebuildWorld = async (): Promise<void> => {
         if (inactive()) return;
+        stopWedding();
+        wildlifeCamera.cancel('world-replaced');
         culture?.dispose();
         ceremonyVisuals?.dispose();
         ceremonyVisuals = undefined;
@@ -486,6 +611,7 @@ export function createFjordScene(options: {
                     if (state.discovery && discoveryFog) {
                         knownTerrain = inspectClanDiscovery(state.discovery, state.clan.id);
                         if (world!.setDiscovery(knownTerrain)) {
+                            wildlifeCamera.cancel('scenery-changed');
                             lighting!.includeWorldShadowBounds(world!.root);
                             weatherTint!.refreshFoliage(world!.root);
                             atmosphere?.bind(world!.root);
@@ -548,6 +674,13 @@ export function createFjordScene(options: {
                         });
                     }
                     const observedEntities = [...view.entities, ...view.rival.entities];
+                    const nextStaticSignature = JSON.stringify(observedEntities
+                        .filter(entity => ['building', 'household', 'longship'].includes(entity.kind))
+                        .map(entity => [entity.selectionKey, entity.asset, entity.transform, entity.plot]));
+                    if (nextStaticSignature !== staticSceneSignature) {
+                        wildlifeCamera.cancel('structures-changed');
+                        staticSceneSignature = nextStaticSignature;
+                    }
                     const observedGround = {
                         plots: [...view.ground.plots, ...view.rival.ground.plots],
                         paths: [...view.ground.paths, ...view.rival.ground.paths]
@@ -675,6 +808,7 @@ export function createFjordScene(options: {
         if (inactive() || shared.transferring) return;
         host.loading?.complete('characters');
         document.querySelector('#fjord-quality')!.addEventListener('change', event => {
+            wildlifeCamera.cancel('quality-changed');
             const quality = (event.target as HTMLSelectElement).value as PresentationQuality;
             world!.setQuality(quality);
             dressing!.setQuality(quality);
@@ -686,6 +820,7 @@ export function createFjordScene(options: {
         }, { signal: bindings.signal });
 
         const resize = () => {
+            wildlifeCamera.cancel('viewport-changed');
             const rect = canvas.getBoundingClientRect();
             renderer.setSize(rect.width, rect.height, false);
             camera.aspect = rect.width / Math.max(1, rect.height);
@@ -741,36 +876,41 @@ export function createFjordScene(options: {
             models!.stopCulture();
             lastCulturalPhase = phaseKey;
             if (culturalFrame && !suspended && !reducedMotion.matches) {
-                if (culturalFrame.phase !== 'approach' && culturalMotionReady && culturalFrame.phaseElapsedSeconds <= .15) {
+                if (!culturalFrame.wedding && culturalFrame.phase !== 'approach' && culturalMotionReady && culturalFrame.phaseElapsedSeconds <= .15) {
                     layer!.playCulture(culturalMotion, culturalFrame);
                 }
             }
         }
-        if (culturalFrame?.phase === 'approach' && !suspended && !culturalMotionReady &&
+        if (!culturalFrame?.wedding && culturalFrame?.phase === 'approach' && !suspended && !culturalMotionReady &&
             preparingCultureEvent !== culturalFrame.id) {
             preparingCultureEvent = culturalFrame.id;
             void culturalMotion.prepare({ eventId: culturalFrame.id, visible: true })
                 .then(clips => { if (clips && !inactive()) culturalMotionReady = true; });
         }
         layer!.advance(motion!, motionDelta, running);
+        updateWedding(culturalFrame ?? null, running && !document.hidden);
         updateCeremonyVisuals(culturalFrame ?? null, !document.hidden);
         layer!.updateConstruction(document.hidden ? 0 : delta);
         rivalScene?.advance(motionDelta, running);
         wildlife?.setHumans([...layer!.humanPositions(), ...(rivalScene?.humanPositions() ?? [])]);
         wildlife?.useCanonical(session.readSnapshot().wildlife, host.tickIntervalSeconds);
         wildlife?.advance(motionDelta, running, camera);
+        wildlifeCamera.advance(delta);
+        targetMarker.visible = targetRequested && !wildlifeCamera.active;
+        camera.updateMatrixWorld();
         if (settlementAudio && audioWorld && settlementSounds) {
             const visible = (x: number, z: number) =>
                 !knownTerrain || discoveryAt(knownTerrain, x, z) === 'visible';
             const work = workContacts.sample(frameStarted / 1000,
                 options.audio?.enabled ? layer!.soundActivities(visible) : [],
                 running && !document.hidden && !!options.audio?.enabled);
-            const culturalSound = culturalSounds.sample({ presentation: culturalFrame ?? undefined,
+            const culturalSound = culturalSounds.sample({ presentation: culturalFrame?.wedding ? undefined : culturalFrame ?? undefined,
                 running: running && !!options.audio?.enabled, hidden: document.hidden,
                 sampleRate: audioWorld.sampleRate, ready: cue => audioWorld!.ready(cue) });
             for (const cue of culturalSound.prepareCueIds) audioWorld.prepare(cue);
             if (work.fresh) soundContacts++;
-            if (!running || document.hidden || !options.audio?.enabled) wildlifeSounds?.clear();
+            if (document.hidden || !options.audio?.enabled) wildlifeSounds?.clear();
+            else if (!running) wildlifeSounds?.clearAmbient();
             if (audioWorld.due || work.fresh || work.invalidated || culturalSound.fresh || culturalSound.invalidated) {
                 const projectionStarted = performance.now();
                 const focus = controller.focus;
@@ -788,8 +928,11 @@ export function createFjordScene(options: {
                     visible, known: (x, z) => !knownTerrain || discoveryAt(knownTerrain, x, z) !== 'unknown',
                     fire: soundFire,
                     actors: soundActors });
-                audioSources.push(...(wildlifeSounds?.sample(frameStarted / 1000, soundCamera, soundActors,
-                    running && !document.hidden && !!options.audio?.enabled) ?? []));
+                const wildlifeCalls = wildlifeSounds?.sample(frameStarted / 1000, soundCamera, soundActors,
+                    !document.hidden && !!options.audio?.enabled, !running) ?? [];
+                const callIds = new Set(wildlifeCalls.map(source => source.id));
+                audioSources = audioSources.filter(source => !callIds.has(source.id));
+                audioSources.push(...wildlifeCalls);
                 audioSources.push(...work.sources, ...culturalSound.sources);
                 soundProjectionMs = performance.now() - projectionStarted;
                 audioWorld.prepare('axe-impact');
@@ -822,6 +965,8 @@ export function createFjordScene(options: {
             if (import.meta.env.DEV && query.has('debugWildlife')) {
                 canvas.dataset.wildlife = JSON.stringify(wildlife?.inspect());
             }
+            if (query.has('debugPerf') || query.has('debugWildlife'))
+                canvas.dataset.wildlifeCamera = JSON.stringify(wildlifeCamera.inspect());
             canvas.dataset.stability = JSON.stringify({
                 ...motion!.inspectMetrics(), ...models!.inspectResources(),
                 lastFrameMs, drawCalls: renderer.info.render.calls,
@@ -839,6 +984,8 @@ export function createFjordScene(options: {
             canvas.dataset.seasonMaterials = JSON.stringify(weatherTint!.inspect());
             canvas.dataset.motionTime = String(activeTime);
             canvas.dataset.culture = JSON.stringify(culture?.inspect() ?? null);
+            canvas.dataset.wedding = JSON.stringify({ active: !!weddingId, camera: weddingCamera.active,
+                ...weddingEnsemble.inspect(), music: weddingTrack?.inspect() ?? null });
             canvas.dataset.cameraClearance = JSON.stringify(controller.inspectClearance());
             canvas.dataset.shadowCoverage = JSON.stringify(lighting!.inspectShadowCoverage());
             canvas.dataset.seasonalLight = JSON.stringify(lighting!.seasonalLightState ?? { profile: 'baseline' });
@@ -940,6 +1087,9 @@ export function createFjordScene(options: {
         disposed = true;
         worldRevision++;
         bindings.abort();
+        stopWedding();
+        weddingEnsemble.dispose();
+        wildlifeCamera.dispose();
         culture?.dispose();
         ceremonyVisuals?.dispose();
         ceremonyVisuals = undefined;
@@ -983,9 +1133,73 @@ export function createFjordScene(options: {
         replace: () => inactive() ? Promise.resolve() : track(sceneWorkMeasured(rebuildWorld)),
         sync: () => inactive() ? Promise.resolve() : track(sceneWorkMeasured(() => syncScene?.() ?? Promise.resolve())),
         frame, prepareGpu, arrive, dispose, highlight, suspendCulture,
+        get cameraForSave() {
+            return wildlifeCamera.saveView ?? { position: camera.position.toArray(), target: controller.focus.toArray() };
+        },
+        cancelWildlife: () => wildlifeCamera.cancel('another-task'),
+        focusWildlife: (eventId: string): 'started' | 'unavailable' | 'unsafe' => {
+            wildlifeCamera.cancel('replaced');
+            if (inactive() || shared.transferring || document.hidden || host.loading || !world) return 'unavailable';
+            const focus = resolveWildlifeFocus(session.readSnapshot(), eventId);
+            const anchor = focus && queryWildlife(focus.target);
+            if (!focus || !anchor) return 'unavailable';
+            skipWedding();
+            const pivot = wildlifeCameraPivot(anchor);
+            const distance = camera.position.distanceTo(pivot);
+            const range = distance > wildlifeApproachMetres ? 64 : distance + 64;
+            // These roots contain only the existing rendered player and sanitized observed rival models.
+            wildlifeObstacles = new CameraObstacles([
+                world.root, ...(dressing ? [dressing.root] : []),
+                ...(layer ? [layer.root] : []), ...(rivalScene ? [rivalScene.root] : []),
+            ], pivot.toArray(), range, []);
+            const reportFocus = (reason: string) => {
+                if (query.has('debugPerf')) canvas.dataset.wildlifeFocus = JSON.stringify({ reason,
+                    obstacles: wildlifeObstacles?.count, limited: wildlifeObstacles?.limited });
+            };
+            const reason = wildlifeCamera.begin(focus.target, reducedMotion.matches) ? 'started' : 'entry-or-orbit';
+            reportFocus(reason);
+            if (reason !== 'started') {
+                wildlifeObstacles = undefined;
+                return 'unsafe';
+            }
+            if (options.audio?.enabled) {
+                const state = session.readSnapshot(), event = state.events.find(event => event.id === eventId);
+                if (event) wildlifeSounds?.focus(event, { clanId: state.clan.id, worldId: anchor.worldId,
+                    now: performance.now() / 1000 }, { id: anchor.wildlifeInstanceId, kind: 'wildlife',
+                    species: anchor.speciesId, observable: true, movement: anchor.movement,
+                    position: { x: anchor.position[0], y: anchor.position[1], z: anchor.position[2] } });
+            }
+            const epoch = session.personalHistoryEpoch;
+            wildlifeView = new WildlifeCinematicView(canvas.parentElement!, focus.label, {
+                stop: () => wildlifeCamera.cancel('stopped'),
+                book: () => {
+                    wildlifeCamera.cancel('record');
+                    if (epoch === session.personalHistoryEpoch) options.openWildlifeRecord?.(eventId);
+                },
+            });
+            canvas.focus({ preventScroll: true });
+            return 'started';
+        },
+        primeWeddingMusic: () => {
+            if (inactive()) return;
+            const state = session.readSnapshot();
+            const event = state.events.find(event => event.id === state.culture?.lastGatheringEventId);
+            if (event?.type !== 'CulturalGatheringHeld' || event.details?.occasion !== 'wedding') return;
+            preparedWeddingMusic?.track.dispose();
+            const track = options.audio?.foreground(weddingAssets.music, { spatial: true });
+            if (track) {
+                preparedWeddingMusic = { id: event.id, track };
+                void track.prime();
+            }
+        },
         acceptGathering: (focusCeremony = false) => {
             if (inactive() || !culture) return false;
+            // Keep the element primed before the asynchronous scene sync, on this exact accepted event.
+            const primed = preparedWeddingMusic;
+            preparedWeddingMusic = undefined;
             // This entry point is called only after a successful live command, never while restoring.
+            stopWedding();
+            const original = { position: camera.position.toArray(), target: controller.focus.toArray() };
             const fire = campaign.readProjection().campfire.transform;
             if (focusCeremony) {
                 // Explicit ceremony confirmation brings its actual location into view.
@@ -993,17 +1207,45 @@ export function createFjordScene(options: {
                     target: [fire.x, fire.y + 1, fire.z] });
                 camera.updateMatrixWorld();
             }
-            const projected = new Vector3(fire.x, fire.y + 1, fire.z).project(camera);
-            const visible = !document.hidden && projected.z >= -1 && projected.z <= 1 &&
-                Math.abs(projected.x) <= 1.1 && Math.abs(projected.y) <= 1.1 &&
-                (!knownTerrain || discoveryAt(knownTerrain, fire.x, fire.z) === 'visible');
+            const visible = culturalVisibility({ x: fire.x, y: fire.y + 1, z: fire.z }, camera, {
+                hidden: document.hidden,
+                known: !knownTerrain || discoveryAt(knownTerrain, fire.x, fire.z) === 'visible',
+                directedWedding: false,
+            });
             const quality = document.querySelector<HTMLSelectElement>('#fjord-quality')!.value;
-            const accepted = culture.accept(session.readSnapshot(), quality === 'low' ? 6 : 8, visible);
+            const accepted = culture.accept(session.readSnapshot(), quality === 'low' ? 6 : 8, visible,
+                { weddingSeconds: weddingAssets.music.seconds });
             const frame = culture.inspect();
             if (accepted && frame) {
+                if (frame.wedding) {
+                    weddingId = frame.id;
+                    weddingTrack = primed?.id === frame.id ? primed.track : options.audio?.foreground(weddingAssets.music, { spatial: true });
+                    if (primed && primed.track !== weddingTrack) primed.track.dispose();
+                    weddingObstacles = sceneEntities.filter(entity => ['building', 'household'].includes(entity.kind))
+                        .flatMap(entity => { const box = layer?.bounds(entity.selectionKey); return box ? [box.expandByScalar(.4)] : []; });
+                    if (!weddingCamera.begin(frame, original)) {
+                        culture.skip();
+                        stopWedding();
+                        controller.setView(original);
+                        return accepted;
+                    }
+                    if (!primed) void weddingTrack?.prime();
+                    weddingView = new WeddingCinematicView(canvas.parentElement!, {
+                        skip: skipWedding,
+                        play: () => {
+                            const track = weddingTrack;
+                            if (!track || culture?.inspect()?.phase === 'approach') return;
+                            void options.audio?.enable().then(() => {
+                                if (track === weddingTrack) { weddingMusicStarted = true; void track.play(); }
+                            });
+                        },
+                    });
+                    void weddingEnsemble.prepare();
+                }
                 culturalSounds.start({ id: frame.id, sequence: frame.sequence });
                 updateCeremonyVisuals(frame, !document.hidden);
             }
+            if (primed && primed.track !== weddingTrack) primed.track.dispose();
             return accepted;
         },
         portrait: (input: PortraitRequest) => {
@@ -1020,7 +1262,8 @@ export function createFjordScene(options: {
         get hasWorld() { return !!world; },
         get diagnostics() { return [...(assets?.diagnostics ?? []), ...(models?.diagnostics ?? [])]; },
         setTarget(point: { x: number; z: number } | null | undefined, valid?: boolean) {
-            targetMarker.visible = !!point;
+            targetRequested = !!point;
+            targetMarker.visible = targetRequested && !wildlifeCamera.active;
             targetMaterial.color.set(valid === undefined ? '#ffe09a' : valid ? '#22ff44' : '#ff2030');
             if (import.meta.env.DEV) {
                 canvas.dataset.destinationPreview = JSON.stringify({

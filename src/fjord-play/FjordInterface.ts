@@ -721,7 +721,7 @@ export class FjordInterface {
         this.workspace.focus();
         this.hooks.refresh();
     }
-    private close(restoreFocus = true) {
+    close(restoreFocus = true) {
         this.surface = '';
         this.workspace.hidden = true;
         if (restoreFocus && this.lastFocus?.isConnected) this.lastFocus.focus();

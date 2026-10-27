@@ -59,6 +59,15 @@ export class AttentionView {
         this.detail = { kind: 'event', id };
         this.owner.fjord.markAttentionRead([id]); this.changed(); this.render();
     }
+    /** A selected wildlife row can focus its live actor; the ordinary detail and read metadata remain. */
+    activateEvent(id: string) {
+        const epoch = this.owner.session.personalHistoryEpoch;
+        const record = this.owner.fjord.attentionSource(id);
+        if (!record) return;
+        this.openEvent(id);
+        if (epoch === this.owner.session.personalHistoryEpoch && record.canonicalType === 'WildlifeSighted')
+            this.navigation.sighting?.(id);
+    }
     private row(action: string, id: string, title: string, meta: string, glyph: FjordIcon,
         unread = false, severity?: 'critical' | 'noteworthy') {
         return '<li' + (severity ? ' data-severity="' + severity + '"' : '') + '><button type="button" class="attention-row" data-attention-action="' + action +
@@ -198,7 +207,7 @@ export class AttentionView {
         if (!button || this.owner.transferring || Number(button.dataset.attentionEpoch) !== this.owner.session.personalHistoryEpoch) return;
         const action = button.dataset.attentionAction!, id = button.dataset.attentionId ?? '';
         if (['unread', 'all', 'chronicle'].includes(action)) { this.mode = action as typeof this.mode; this.detail = undefined; this.page = 0; this.before = undefined; }
-        else if (action === 'event') { this.openEvent(id); return; }
+        else if (action === 'event') { this.activateEvent(id); return; }
         else if (action === 'group') { this.detail = { kind: 'group', id }; this.detailPage = 0; }
         else if (action === 'alert') this.detail = { kind: 'alert', id };
         else if (action === 'back') this.detail = undefined;

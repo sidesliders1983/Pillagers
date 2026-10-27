@@ -1,0 +1,22 @@
+.wildlife-cinematic {
+    position: absolute;
+    left: max(12px, env(safe-area-inset-left));
+    bottom: max(82px, calc(env(safe-area-inset-bottom) + 70px));
+    z-index: 8;
+    display: grid;
+    gap: 5px;
+    max-width: min(330px, calc(100% - 24px));
+    padding: 10px 12px;
+    border: 1px solid #b9a36d;
+    border-radius: 5px;
+    background: #152729ed;
+    color: #f1e7d0;
+    font-size: 13px;
+}
+.wildlife-cinematic strong { font-family: Georgia, serif; font-size: 18px; }
+.wildlife-cinematic > div { display: flex; flex-wrap: wrap; gap: 6px; }
+#fjord-play .wildlife-cinematic button { min-height: 44px; padding: 7px 10px; }
+@media (max-height: 500px) {
+    .wildlife-cinematic { gap: 3px; padding: 7px 10px; font-size: 12px; }
+    .wildlife-cinematic small { display: none; }
+}

@@ -27,10 +27,10 @@ function setup(births = false, food = 0) {
         core.createSettlement(41, quiet, { enabled: true, quarrelMinBps: 10000, quarrelMaxBps: 10000 });
     state.stocks.food = births ? 10000 : food; state.stocks.materials = 1000;
     const session = new GameplaySession(); session.loadJSON(core.serializeState(state));
-    const owner = new SharedSettlement(session), root = document.querySelector('#toast'), targets = [];
+    const owner = new SharedSettlement(session), root = document.querySelector('#toast'), targets = [], noticeIds = [];
     const view = new AttentionView(document.querySelector('#feed'), owner, () => {}, { target: () => {} });
-    const toast = new AttentionToast(root, owner, () => { targets.push('activity'); view.openInbox(); });
-    return { dom, owner, session, root, toast, targets, timers,
+    const toast = new AttentionToast(root, owner, eventId => { noticeIds.push(eventId); targets.push('activity'); view.openInbox(); });
+    return { dom, owner, session, root, toast, targets, noticeIds, timers,
         fire() { const [id, callback] = timers.entries().next().value; timers.delete(id); callback(); },
         dispose() {
             toast.dispose(); view.dispose(); dom.window.close();
@@ -56,6 +56,7 @@ test('a compact message opens Activity Center with one click, closes immediately
         assert.equal(h.root.querySelector('button, a, [data-toast-view], [data-toast-dismiss]'), null);
         h.root.click();
         assert.deepEqual(h.targets, ['activity']);
+        assert.deepEqual(h.noticeIds, [source.id], 'An unambiguous notification carries its exact selected source');
         assert.match(document.querySelector('#feed').textContent, /Needs attention.*New activity/s);
         assert.equal(h.root.hidden, true);
         assert.equal(h.owner.fjord.attentionView().records.find(record => record.eventId === source.id).read, false);

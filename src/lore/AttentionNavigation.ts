@@ -1,3 +1,5 @@
+import { wildlifeSighting } from '../simulation/WildlifeSightings';
+import { wildlifeSpecies } from '../wildlife/WildlifeSpecies';
 import type { SimulationState } from '../simulation/SimulationCore';
 import { eventOrdinal, type AttentionRecord, type AttentionTarget } from './AttentionHistory';
 
@@ -18,4 +20,17 @@ export function resolveAttentionTarget(state: SimulationState, target?: Attentio
 export interface AttentionNavigation {
     target: (target: AttentionTarget, record?: AttentionRecord) => void;
     family?: (personaId: string) => void;
+    sighting?: (eventId: string) => void;
+}
+
+
+/** An on-click request identifies the recorded actor; present-day availability belongs to the live renderer. */
+export function resolveWildlifeFocus(state: Readonly<SimulationState>, eventId: string) {
+    const event = state.events[eventOrdinal(eventId) - 1];
+    const sighting = event?.id === eventId ? wildlifeSighting(event) : undefined;
+    if (!sighting || sighting.clanId !== state.clan.id || sighting.worldId !== state.wildlife?.worldId ||
+        sighting.worldId !== state.discovery?.worldId) return;
+    return { target: { worldId: sighting.worldId, speciesId: sighting.speciesId,
+        wildlifeInstanceId: sighting.wildlifeInstanceId },
+        label: wildlifeSpecies.find(species => species.id === sighting.speciesId)!.label };
 }

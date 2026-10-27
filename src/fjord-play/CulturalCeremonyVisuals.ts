@@ -13,6 +13,7 @@ export type CeremonyFrame = {
     phase: string;
     position: { x: number; y: number; z: number };
     visible: boolean;
+    wedding?: { rotation: number };
     spouseIds: readonly string[];
 };
 export type CeremonySpouseAnchor = {
@@ -169,6 +170,7 @@ export class CulturalCeremonyVisuals {
         }
         this.mesh.geometry = geometry;
         this.root.position.set(frame.position.x, frame.position.y, frame.position.z);
+        this.root.rotation.y = frame.wedding?.rotation ?? 0;
         this.root.visible = true;
         this.updateLabels(frame, state);
     }
@@ -179,7 +181,7 @@ export class CulturalCeremonyVisuals {
     }
 
     private updateLabels(frame: CeremonyFrame, state: CeremonyVisualState): void {
-        if (!this.labels || !this.labelLayer || !this.leaderLayer || frame.occasion !== 'wedding' ||
+        if (frame.wedding || !this.labels || !this.labelLayer || !this.leaderLayer || frame.occasion !== 'wedding' ||
             frame.spouseIds.length !== 2 || new Set(frame.spouseIds).size !== 2 ||
             !state.camera || !state.width || !state.height) {
             this.hideLabels();

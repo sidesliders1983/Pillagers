@@ -369,6 +369,15 @@ export class FjordEntities {
             void this.models.playCulture(model, bank, clip, { eventId: frame.id, visible: frame.visible });
         }
     }
+    weddingResidents(keys: readonly string[]) {
+        return keys.slice(0, 8).flatMap(key => {
+            const model = this.entries.get(key)?.model;
+            const facts = model?.userData.canonical;
+            const human = model && this.models.weddingResident(model);
+            return model?.visible && facts?.kind === 'persona' && facts.living !== false &&
+                !facts.expedition && !facts.aboardShip && human ? [{ id: facts.id as string, human }] : [];
+        });
+    }
     residentForPortrait(input: PortraitRequest) {
         const model = this.entries.get('persona:' + input.residentId)?.model;
         return model ? this.models.residentForPortrait(model, input) : undefined;

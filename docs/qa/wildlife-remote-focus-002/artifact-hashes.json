@@ -1,0 +1,140 @@
+[
+  {
+    "path": "approach-red.log",
+    "bytes": 1348,
+    "sha256": "ee42cb87a561c129c68175154cf3df00eda9e53a6a62a6a5beddf8b5288a79c4",
+    "lfSha256": "f70c8fa4c4c3d64466710ca6a0392ff8b3d1c853ebf79bda767502e5f60538e2"
+  },
+  {
+    "path": "fixture-run.log",
+    "bytes": 1141,
+    "sha256": "0da671e2c45228f514d7e7468c675b1b98d3e21975e9f10d3d0776d66e07a3e9",
+    "lfSha256": "7cd049114cf237207c1f83e67dc15925f9754ecaa9946cce0c4eafcb14940f8a"
+  },
+  {
+    "path": "fixtures.json",
+    "bytes": 1678,
+    "sha256": "c7b2e95d4c67942df6ba8c18a67080981abbb77519b0d96f104439a062ad0557",
+    "lfSha256": "c7b2e95d4c67942df6ba8c18a67080981abbb77519b0d96f104439a062ad0557"
+  },
+  {
+    "path": "fog-fallback-browser.json",
+    "bytes": 5679,
+    "sha256": "9b39771d67ebfaa011e2970e0794c34862d59a6894b650e96d43911ac3013cd6",
+    "lfSha256": "9b39771d67ebfaa011e2970e0794c34862d59a6894b650e96d43911ac3013cd6"
+  },
+  {
+    "path": "fog-fallback.png",
+    "bytes": 93077,
+    "sha256": "1325f0a3c6bdc3b29d1e903642f04d7a6ce19b91fd83a54842b997e45a8639a8",
+    "lfSha256": "1325f0a3c6bdc3b29d1e903642f04d7a6ce19b91fd83a54842b997e45a8639a8"
+  },
+  {
+    "path": "lynx-fogged.json",
+    "bytes": 88342,
+    "sha256": "ff32b420ef04e0ac393c5b088dbd8ac969d710cade603444eccf2ff4cf0f6090",
+    "lfSha256": "ff32b420ef04e0ac393c5b088dbd8ac969d710cade603444eccf2ff4cf0f6090"
+  },
+  {
+    "path": "lynx-remote.json",
+    "bytes": 82063,
+    "sha256": "1ca49e78ba758f79cda4a2d1e9553a4dec035f4df4eecb1dcb4dbf5326fe339d",
+    "lfSha256": "1ca49e78ba758f79cda4a2d1e9553a4dec035f4df4eecb1dcb4dbf5326fe339d"
+  },
+  {
+    "path": "offscreen-red.log",
+    "bytes": 1014,
+    "sha256": "ac2cfb31f043ffce6234d6a77a21461a4cbde2eafd6cb9bc821840eeb37c3828",
+    "lfSha256": "517ab37bcbbaee06fd9b2976761063463bc4b23ae5804d09d68184b18095671e"
+  },
+  {
+    "path": "production-build.log",
+    "bytes": 5788,
+    "sha256": "aa717aaaf39fa01f6c317a34ce46f1823d8b1bd8e46c11a6a22486eb23dd445a",
+    "lfSha256": "ff814d83a645e78bc722bf931e5d9c8d38b5f3a1c6867639d56b771ddf5a9449"
+  },
+  {
+    "path": "puffin-remote.json",
+    "bytes": 76244,
+    "sha256": "44a7668ce7c06e641f5591ec6736436333dd7c1664c5be90af7c0a0e5c4e1974",
+    "lfSha256": "44a7668ce7c06e641f5591ec6736436333dd7c1664c5be90af7c0a0e5c4e1974"
+  },
+  {
+    "path": "README.md",
+    "bytes": 5355,
+    "sha256": "98e867bf8dc0dba27841b026b42fb04502621bd5718c562780371bb8c12dbc65",
+    "lfSha256": "f6cb9fff8c8794fc5c6914b6a65f37f2dc451e26125e3915a1e9daffc287a128"
+  },
+  {
+    "path": "regressions.log",
+    "bytes": 17709,
+    "sha256": "2793f208ec4430fbdc209aacdd8b5d900f108abca741f822c2d1aa8585c6031d",
+    "lfSha256": "7c03537df3f46f3b04bee92088b1bc8fa577f041cc54dd9607a23ede922e5491"
+  },
+  {
+    "path": "remote-before-browser.json",
+    "bytes": 874,
+    "sha256": "c06966d67197b9b07b325d69b906fe2bdb617ca479f50f1f76f36193e2fec0f3",
+    "lfSha256": "c06966d67197b9b07b325d69b906fe2bdb617ca479f50f1f76f36193e2fec0f3"
+  },
+  {
+    "path": "remote-before.png",
+    "bytes": 63030,
+    "sha256": "951231b6ce95d9db2a011e8b7e034ddd1d66a6ec1a7e69ac62f2c79fb85f35c8",
+    "lfSha256": "951231b6ce95d9db2a011e8b7e034ddd1d66a6ec1a7e69ac62f2c79fb85f35c8"
+  },
+  {
+    "path": "remote-exit-browser.json",
+    "bytes": 1381,
+    "sha256": "ad5610a3dac97972af509c3ed83145384edd5d15ecbfe69ddaa5062eb2eb5173",
+    "lfSha256": "ad5610a3dac97972af509c3ed83145384edd5d15ecbfe69ddaa5062eb2eb5173"
+  },
+  {
+    "path": "remote-puffin-browser.json",
+    "bytes": 2099,
+    "sha256": "8a115fd5213acab6adb815b1820f40d57a525fc24504c10290d0b6a845d961b5",
+    "lfSha256": "8a115fd5213acab6adb815b1820f40d57a525fc24504c10290d0b6a845d961b5"
+  },
+  {
+    "path": "remote-puffin.png",
+    "bytes": 61480,
+    "sha256": "ccd03df4c376a9e6caa24921d3cf6d453eeddca50f3524354dda982395e3ee5f",
+    "lfSha256": "ccd03df4c376a9e6caa24921d3cf6d453eeddca50f3524354dda982395e3ee5f"
+  },
+  {
+    "path": "remote-red.log",
+    "bytes": 1352,
+    "sha256": "eef08c7a657f13c6175b02c84a8035ada5f1d8836e64aaad162914e41e55b95e",
+    "lfSha256": "87c0bccebc88d8765ab9b6b7f698347945a4ab4b7490616a2b8c18bde7400a7f"
+  },
+  {
+    "path": "remote-seal-browser.json",
+    "bytes": 2040,
+    "sha256": "99acb03cb95bea6b32c0c1076db9b5cb4083656c32c935903f55ba01ad307d05",
+    "lfSha256": "99acb03cb95bea6b32c0c1076db9b5cb4083656c32c935903f55ba01ad307d05"
+  },
+  {
+    "path": "remote-seal.png",
+    "bytes": 63441,
+    "sha256": "ae4ab1cd11c4016f0ec11540c5fb9d6feab40c67921e5aaed30ca99e26264721",
+    "lfSha256": "ae4ab1cd11c4016f0ec11540c5fb9d6feab40c67921e5aaed30ca99e26264721"
+  },
+  {
+    "path": "review.html",
+    "bytes": 2849,
+    "sha256": "1a3433fdf1620c01ffbd26a62dfc6dae8413b883d42392a4be1cc7bddaad0815",
+    "lfSha256": "812530e7fde477acb1cea0aa52c53977ed0e98a4a7838b7c86e33f69fcf3757f"
+  },
+  {
+    "path": "seal-remote.json",
+    "bytes": 73636,
+    "sha256": "b70afea729fb34fefac675704a8fbd6223058323e1572da4e08fd53cf77aa270",
+    "lfSha256": "b70afea729fb34fefac675704a8fbd6223058323e1572da4e08fd53cf77aa270"
+  },
+  {
+    "path": "source-hashes.json",
+    "bytes": 3228,
+    "sha256": "4c100bc05c724f07384e3b8aaa8269b27a61beb1c422e93a903d741deb023880",
+    "lfSha256": "11de0457ddb8d5d76bc482e757e62888f5baeaed6586a2005e8cfce549aa7f2d"
+  }
+]

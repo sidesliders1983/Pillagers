@@ -1,0 +1,14 @@
+{
+  "culture": "{\"id\":\"event-55\",\"sequence\":1,\"occasion\":\"wedding\",\"spouseIds\":[\"founder-1\",\"founder-6\"],\"phase\":\"gathering\",\"phaseElapsedSeconds\":0.5057999999970197,\"position\":{\"x\":68,\"y\":1.7325286865234375,\"z\":4,\"rotation\":0,\"scale\":2},\"stagedParticipants\":6,\"participantKeys\":[\"persona:founder-1\",\"persona:founder-6\",\"persona:founder-10\",\"persona:founder-2\",\"persona:founder-3\",\"persona:founder-4\"],\"visible\":true,\"wedding\":{\"duration\":30.040792,\"elapsed\":0.5057999999970197,\"rotation\":5.497787143782138,\"roles\":[{\"id\":\"founder-1\",\"role\":\"couple\"},{\"id\":\"founder-6\",\"role\":\"couple\"},{\"id\":\"founder-10\",\"role\":\"officiant\"},{\"id\":\"founder-2\",\"role\":\"musician\",\"instrument\":\"wedding-lyre\"},{\"id\":\"founder-3\",\"role\":\"musician\",\"instrument\":\"wedding-flute\"},{\"id\":\"founder-4\",\"role\":\"musician\",\"instrument\":\"wedding-frame-drum\"}]}}",
+  "skip": {
+    "bottom": 625,
+    "height": 44,
+    "left": 1142.765625,
+    "right": 1206.765625,
+    "top": 581,
+    "width": 64,
+    "x": 1142.765625,
+    "y": 581
+  },
+  "wedding": "{\"active\":true,\"camera\":true,\"actors\":6,\"instruments\":3,\"templates\":3,\"maximumGripError\":0.06344827723499907,\"unavailable\":[],\"music\":{\"state\":\"paused\",\"seconds\":0.191565,\"duration\":30.040792}}"
+}
