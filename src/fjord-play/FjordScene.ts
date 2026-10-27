@@ -1,4 +1,4 @@
-import { WildlifeCamera, wildlifeCameraPivot } from '../camera/WildlifeCamera';
+import { WildlifeCamera, wildlifeCameraPivot, wildlifeApproachMetres } from '../camera/WildlifeCamera';
 import { CameraObstacles } from '../camera/CameraObstacles';
 import { WildlifeCinematicView } from './WildlifeCinematicView';
 import { resolveWildlifeFocus } from '../lore/AttentionNavigation';
@@ -1141,8 +1141,8 @@ export function createFjordScene(options: {
             if (!focus || !anchor) return 'unavailable';
             skipWedding();
             const pivot = wildlifeCameraPivot(anchor);
-            const range = camera.position.distanceTo(pivot) + 64;
-            if (range > 200) return 'unsafe';
+            const distance = camera.position.distanceTo(pivot);
+            const range = distance > wildlifeApproachMetres ? 64 : distance + 64;
             // These roots contain only the existing rendered player and sanitized observed rival models.
             wildlifeObstacles = new CameraObstacles([
                 world.root, ...(dressing ? [dressing.root] : []),

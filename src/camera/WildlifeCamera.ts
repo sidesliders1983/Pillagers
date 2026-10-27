@@ -16,6 +16,8 @@ type Session = {
     reduced: boolean;
     lastEye: number[];
 };
+// Long travel is a local reframe, never a camera flight through unknown terrain.
+export const wildlifeApproachMetres = 96;
 const entrySeconds = 1.4;
 const orbitSeconds = 10;
 const maximumFollowMetres = 12;
@@ -73,40 +75,50 @@ export class WildlifeCamera {
         const rise = MathUtils.clamp(size.y * .7 + 2, 2.5, 6);
         const direction = this.camera.position.clone().sub(pivot);
         const startAngle = Math.atan2(direction.x, direction.z);
+        const remote = direction.length() > wildlifeApproachMetres;
         const from: View = { position: this.camera.position.toArray(), target: this.controller.focus.toArray() };
-        for (const offset of [0, Math.PI / 4, -Math.PI / 4, Math.PI / 2, -Math.PI / 2, Math.PI]) {
-            const session: Session = { target: { ...target }, origin: pivot.clone(), pivot: pivot.clone(),
-                from, radius, rise, angle: startAngle + offset, arc: 0, elapsed: 0, reduced: reducedMotion, lastEye: [...from.position] };
-            const first = this.view(this.circle(session, 0), pivot, 3);
-            if (!first) continue;
-            let entrySafe = true;
-            let previous = from.position;
-            for (let step = 0; step <= 8; step++) {
-                const t = step / 8;
-                const eye = new Vector3().fromArray(from.position).lerp(new Vector3().fromArray(first.position), t);
-                const focus = new Vector3().fromArray(from.target).lerp(pivot, t);
-                const view = this.view(eye, focus, 3, 'approach', previous);
-                if (!view) { entrySafe = false; break; }
-                previous = view.position;
-            }
-            if (!entrySafe) continue;
-            if (!reducedMotion) {
-                // A contiguous safe arc only: never jump across a blocked angle to reach another safe one.
-                for (let step = 1; step <= 32; step++) {
-                    session.arc = step / 32 * Math.PI * 2;
-                    if (!this.view(this.circle(session, 1), pivot, 3)) {
-                        session.arc = (step - 1) / 32 * Math.PI * 2;
-                        break;
+        // Prefer the existing short approach. If it cannot cross safely, adopt a
+        // validated destination view; the player's current viewpoint is not knowledge.
+        for (const reframe of remote ? [true] : [false, true]) {
+            for (const offset of [0, Math.PI / 4, -Math.PI / 4, Math.PI / 2, -Math.PI / 2, Math.PI]) {
+                const session: Session = { target: { ...target }, origin: pivot.clone(), pivot: pivot.clone(),
+                    from, radius, rise, angle: startAngle + offset, arc: 0, elapsed: 0, reduced: reducedMotion, lastEye: [...from.position] };
+                const first = this.view(this.circle(session, 0), pivot, 3);
+                if (!first) continue;
+                let entrySafe = true;
+                let previous = from.position;
+                for (let step = 0; !reframe && step <= 8; step++) {
+                    const t = step / 8;
+                    const eye = new Vector3().fromArray(from.position).lerp(new Vector3().fromArray(first.position), t);
+                    const focus = new Vector3().fromArray(from.target).lerp(pivot, t);
+                    const view = this.view(eye, focus, 3, 'approach', previous);
+                    if (!view) { entrySafe = false; break; }
+                    previous = view.position;
+                }
+                if (!entrySafe) continue;
+                if (!reducedMotion) {
+                    // A contiguous safe arc only: never jump across a blocked angle to reach another safe one.
+                    for (let step = 1; step <= 32; step++) {
+                        session.arc = step / 32 * Math.PI * 2;
+                        if (!this.view(this.circle(session, 1), pivot, 3)) {
+                            session.arc = (step - 1) / 32 * Math.PI * 2;
+                            break;
+                        }
                     }
                 }
+                if (reframe) {
+                    session.elapsed = entrySeconds;
+                    session.lastEye = [...first.position];
+                    this.controller.setView(first, { presentation: true });
+                }
+                this.session = session;
+                this.reason = 'active';
+                return true;
             }
-            this.session = session;
-            this.reason = 'active';
-            return true;
         }
         // A visible animal need not have a clear close orbit. Keep the current safe
         // side and ease only the framing, rather than declaring a live sighting unavailable.
-        const held = this.view(this.camera.position, pivot, 3);
+        const held = !remote && this.view(this.camera.position, pivot, 3);
         if (held) {
             const offset = new Vector3().fromArray(held.position).sub(pivot);
             let entrySafe = true, previous = from.position;

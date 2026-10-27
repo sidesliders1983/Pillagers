@@ -418,13 +418,13 @@ export class WildlifeLayer {
         }
         return sources;
     }
-    /** Current rendered pose only; canonical identity, fog, surfacing and frustum remain authoritative.
+    /** Current pose for an exact clan-observable animal; camera frustum/LOD never determine knowledge.
      * Returned arrays are detached snapshots, not mutable actor or scene references. */
     liveAnchor(target: LiveWildlifeTarget): LiveWildlifeAnchor | undefined {
         if (this.disposed || !this.root.visible || this.canonical?.worldId !== target.worldId) return;
         const record = this.records.find(record => record.actor.id === target.wildlifeInstanceId &&
             record.actor.species === target.speciesId);
-        if (!record || !record.root.visible || !record.observable ||
+        if (!record || !record.observable ||
             !this.canonical.actors.some(actor => actor.id === target.wildlifeInstanceId)) return;
         const { actor, root, model } = record;
         if (!this.known(actor.position.x, actor.position.z) || !this.known(root.position.x, root.position.z) ||

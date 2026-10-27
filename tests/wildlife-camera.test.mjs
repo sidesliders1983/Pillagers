@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { JSDOM } from 'jsdom';
-import { Box3, PerspectiveCamera, Vector3 } from 'three';
+import { Box3, Object3D, PerspectiveCamera, Vector3 } from 'three';
 import { loadDOMSource } from './load-dom-source.mjs';
 const { RTSCameraController } = loadDOMSource('../src/camera/RTSCameraController.ts');
 const { WildlifeCamera } = loadDOMSource('../src/camera/WildlifeCamera.ts');
@@ -165,5 +165,52 @@ test('a visible animal still gets a safe held view when close orbit angles are b
             assert.ok(controller.focus.distanceTo(new Vector3(0, 1, 0)) < .01);
             assert.equal(controller.enabled, true);
         } finally { held.dispose(); }
+    });
+});
+
+
+test('a recorded animal across the island gets a safe local view without flying through intervening terrain or fog', () => {
+    fixture(({ dom, canvas, camera, controller, anchor, orbit }) => {
+        orbit.dispose();
+        controller.setNavigationSurface(new Object3D(), new Vector3(),
+            { minX: -500, maxX: 500, minZ: -500, maxZ: 500 }, () => 0, { waterLevel: 0 });
+        controller.setView({ position: [350, 50, 300], target: [320, 1, 270] });
+        const before = { position: camera.position.toArray(), target: controller.focus.toArray() };
+        const obstacles = new CameraObstacles([], [0, 1, 0], 64, [
+            new Box3(new Vector3(120, 0, -400), new Vector3(180, 80, 400)),
+        ]);
+        const focus = new WildlifeCamera(camera, controller, () => anchor, (view, phase, previous) =>
+            Math.hypot(view.position[0], view.position[2]) < 64 &&
+            obstacles.allows(view, phase !== 'approach') && (!previous || obstacles.travel(previous, view.position)));
+        try {
+            assert.equal(focus.begin(target, false), true, 'A distant player camera is not a reason to refuse the sighting');
+            assert.ok(camera.position.length() < 64, 'Only a checked local view is adopted; no long flight crosses unknown land');
+            assert.deepEqual(focus.saveView, before, 'The transient local view never overwrites the saved manual camera');
+            for (let frame = 0; frame < 20; frame++) focus.advance(.1);
+            assert.equal(focus.active, true);
+            assert.ok(controller.focus.distanceTo(new Vector3(0, 1, 0)) < .01);
+            const last = camera.position.clone();
+            canvas.dispatchEvent(new dom.window.WheelEvent('wheel', { deltaY: 120, cancelable: true }));
+            controller.update(.2);
+            assert.equal(focus.active, false);
+            assert.ok(camera.position.distanceTo(controller.focus) > last.distanceTo(controller.focus),
+                'The first wheel event still zooms normally from the remote focus');
+        } finally { focus.dispose(); }
+    });
+});
+
+
+test('a nearby clan-observable animal can still be reframed when only the intervening camera path is hidden', () => {
+    fixture(({ camera, controller, anchor, orbit }) => {
+        orbit.dispose();
+        const before = { position: camera.position.toArray(), target: controller.focus.toArray() };
+        const focus = new WildlifeCamera(camera, controller, () => anchor,
+            (view, phase) => phase === 'orbit' && Math.hypot(view.position[0], view.position[2]) < 12);
+        try {
+            assert.equal(focus.begin(target, false), true, 'A valid known destination does not require a flight through the old view');
+            assert.deepEqual(focus.saveView, before);
+            assert.ok(camera.position.length() < 12);
+            assert.equal(controller.enabled, true);
+        } finally { focus.dispose(); }
     });
 });

@@ -1,0 +1,32 @@
+✖ a nearby clan-observable animal can still be reframed when only the intervening camera path is hidden (105.7216ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2336.7696
+
+✖ failing tests:
+
+test at tests\wildlife-camera.test.mjs:203:1
+✖ a nearby clan-observable animal can still be reframed when only the intervening camera path is hidden (105.7216ms)
+  AssertionError [ERR_ASSERTION]: A valid known destination does not require a flight through the old view
+  
+  false !== true
+  
+      at file:///D:/CodexSites/Pillagers/scratch/contextual-support-278/tests/wildlife-camera.test.mjs:210:20
+      at fixture (file:///D:/CodexSites/Pillagers/scratch/contextual-support-278/tests/wildlife-camera.test.mjs:22:11)
+      at TestContext.<anonymous> (file:///D:/CodexSites/Pillagers/scratch/contextual-support-278/tests/wildlife-camera.test.mjs:204:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

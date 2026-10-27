@@ -1,0 +1,25 @@
+✖ a live focus resolves the exact currently observable animal independently of the player camera without mutating wildlife (752.4221ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2628.2265
+
+✖ failing tests:
+
+test at tests\wildlife-live-anchor.test.mjs:30:1
+✖ a live focus resolves the exact currently observable animal independently of the player camera without mutating wildlife (752.4221ms)
+  AssertionError [ERR_ASSERTION]: A clan-observable animal remains a valid destination offscreen
+      at TestContext.<anonymous> (file:///D:/CodexSites/Pillagers/scratch/contextual-support-278/tests/wildlife-live-anchor.test.mjs:56:16)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

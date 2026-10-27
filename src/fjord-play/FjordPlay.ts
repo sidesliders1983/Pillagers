@@ -282,7 +282,7 @@ export class FjordPlay {
                     } else {
                         bookReader.openWildlife(id);
                         say(result === 'unsafe' ? 'No clear camera view is available. The sighting is in your Clan Book.' :
-                            'That animal is no longer in view.');
+                            'That animal is no longer observable by your clan.');
                     }
                 },
                 target: target => {
