@@ -1,0 +1,42 @@
+.fjord-merchant {
+    position: fixed;
+    z-index: 70;
+    top: max(5rem, env(safe-area-inset-top));
+    right: max(1rem, env(safe-area-inset-right));
+    width: min(36rem, calc(100vw - 2rem));
+    max-height: calc(100dvh - 7rem - env(safe-area-inset-bottom));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    box-sizing: border-box;
+    padding: 1rem;
+    color: #eee9d8;
+    background: #17282a;
+    border: 1px solid #cfb878;
+    border-radius: .5rem;
+    box-shadow: 0 .5rem 2rem #0008;
+    line-height: 1.5;
+}
+.fjord-merchant[hidden] { display: none; }
+.fjord-merchant header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.fjord-merchant h2, .fjord-merchant h3 { margin: 0; }
+.fjord-merchant button {
+    min-height: 44px;
+    min-width: 44px;
+    padding: .6rem .8rem;
+    background: #293c3c;
+    color: #eee9d8;
+    border: 1px solid #9c9677;
+    border-radius: .25rem;
+    font: inherit;
+    cursor: pointer;
+}
+.fjord-merchant button:disabled { opacity: .55; cursor: default; }
+.fjord-merchant button:focus-visible { outline: 2px solid #f5ce73; outline-offset: 2px; }
+.fjord-merchant-offers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; margin: 1rem 0; }
+.fjord-merchant-offers article { padding: .8rem; border: 1px solid #667771; border-radius: .3rem; }
+.fjord-merchant .fjord-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+.fjord-merchant [role=status] { padding: .7rem; border-left: 2px solid #cfb878; background: #ffffff09; }
+@media (max-width: 560px) {
+    .fjord-merchant { top: max(7rem, env(safe-area-inset-top)); max-height: calc(100dvh - 8rem - env(safe-area-inset-bottom)); }
+    .fjord-merchant-offers { grid-template-columns: 1fr; }
+}

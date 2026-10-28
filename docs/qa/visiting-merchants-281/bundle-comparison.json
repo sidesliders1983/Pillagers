@@ -1,0 +1,34 @@
+{
+  "baselineCommit": "872d1b94ea085f992bf342991a66530a61f57de2",
+  "baselineBuild": "d7d4bf5",
+  "baselineVerification": "git diff --quiet 872d1b94 d7d4bf5 -- src package.json pnpm-lock.yaml vite.config.ts returned 0; executable sources match main.",
+  "scope": "Compressed module size only. No new models, textures, renderer passes or per-frame callbacks.",
+  "comparison": {
+    "FjordPlay": {
+      "before": {
+        "file": "FjordPlay-f51TZzON.js",
+        "bytes": 604394,
+        "gzipBytes": 178083
+      },
+      "after": {
+        "file": "FjordPlay-DWivCUA_.js",
+        "bytes": 610586,
+        "gzipBytes": 179892
+      },
+      "gzipDeltaBytes": 1809
+    },
+    "GameplaySession": {
+      "before": {
+        "file": "GameplaySession-BPNqUxRz.js",
+        "bytes": 322743,
+        "gzipBytes": 94032
+      },
+      "after": {
+        "file": "GameplaySession-DCf9g4jr.js",
+        "bytes": 335234,
+        "gzipBytes": 98099
+      },
+      "gzipDeltaBytes": 4067
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "baseCommit": "872d1b94ea085f992bf342991a66530a61f57de2",
+  "fullLocalSuite": {
+    "command": "node --test --test-concurrency=2 tests/*.test.mjs",
+    "tests": 1576,
+    "passed": 1566,
+    "failed": 0,
+    "skipped": 10,
+    "durationMs": 1804342,
+    "scope": "Broad working-copy regression run. Final receipt/focus/Clan Book ledger refinements were followed by the focused and related Clan Book/Smithery tests; final GitHub checks must cover the eventual PR head.",
+    "skips": "Existing source/export fixture prerequisites are absent; none skipped because of an earlier failure."
+  },
+  "focusedTests": {
+    "command": "node --test tests/trade-goods.test.mjs tests/visiting-merchants.test.mjs tests/merchant-session.test.mjs tests/merchant-panel.test.mjs tests/merchant-history.test.mjs",
+    "passed": 11,
+    "failed": 0
+  },
+  "browser": {
+    "scope": "Real production build in desktop browser and 390x844 responsive viewport. This is not a physical iPhone test.",
+    "desktop": {
+      "initialFood": 115,
+      "initialMaterials": 40,
+      "cancelChangedStocks": false,
+      "confirmedFood": 123,
+      "confirmedMaterials": 33,
+      "purchasedOfferSoldOut": true
+    },
+    "portrait": {
+      "width": 390,
+      "height": 844,
+      "documentScrollWidth": 390,
+      "windowWidth": 358,
+      "windowX": 16,
+      "windowY": 112,
+      "foodAfterSecondExchange": 115,
+      "materialsAfterSecondExchange": 37
+    },
+    "performanceLimit": "Shared browser/GPU was busy (approximately 9\u201314 fps). Those figures are not device or isolated A/B performance evidence. This slice adds no 3D resources or per-render work."
+  },
+  "ownerReview": {
+    "rates": "pending",
+    "physicalIPhone": "pending"
+  },
+  "format": "No project formatter configured; manually followed neighbouring TypeScript style and ran git diff --check."
+}

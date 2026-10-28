@@ -1,3 +1,4 @@
+import { merchantHistoryText } from './MerchantHistory';
 import { wildlifeSightingText } from './WildlifeHistory';
 import type {SimulationEvent} from '../simulation/SimulationCore';
 import { isLivestockEvent, recordedLivestock } from './LivestockNarrative';
@@ -60,6 +61,9 @@ function supportContext(event: SimulationEvent, details: Facts) {
 }
 /** Registry contains only supported recorded facts; unknown types stay in Raw Events. */
 const templates:Record<string,Template>={
+    MerchantArrived: merchantHistoryText,
+    MerchantDeparted: merchantHistoryText,
+    MerchantBartered: merchantHistoryText,
     SupportOffered: (event, details) => {
         const context = supportContext(event, details);
         return context ? context.helper + ' offered support to ' + context.recipient + ' ' + context.loss + '.' : null;

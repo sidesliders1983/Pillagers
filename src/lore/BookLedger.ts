@@ -1,3 +1,4 @@
+import { tradeGoods } from '../simulation/TradeGoods';
 import type { SimulationEvent } from '../simulation/SimulationCore';
 export type Resource = 'food' | 'materials';
 export type LedgerRow = {
@@ -12,8 +13,8 @@ export function bookLedger(events: readonly SimulationEvent[], opening: Record<R
         cattleProduction: 0, otherReceipts: 0, consumption: 0, otherSpending: 0, spending: 0, losses: 0, unmetNeed: 0, residual: 0, complete: true
     }])) as Record<Resource, LedgerRow>;
     const transactions: BookTransaction[] = [];
-    const add = (e: SimulationEvent, resource: Resource, category: 'production' | 'otherReceipts' | 'spending' | 'losses', field: string, actor?: 'resident' | 'cattle') => {
-        const units = e.details?.[field];
+    const add = (e: SimulationEvent, resource: Resource, category: 'production' | 'otherReceipts' | 'spending' | 'losses', source: string | number, actor?: 'resident' | 'cattle') => {
+        const units = typeof source === 'number' ? source : e.details?.[source];
         if (!Number.isSafeInteger(units) || (units as number) < 0) { rows[resource].complete = false; return; }
         rows[resource][category] += units as number;
         if (category === 'spending') {
@@ -42,6 +43,24 @@ export function bookLedger(events: readonly SimulationEvent[], opening: Record<R
                 if (Number.isSafeInteger(e.details?.shortfall) && (e.details!.shortfall as number) >= 0)
                     rows.food.unmetNeed = (rows.food.unmetNeed ?? 0) + (e.details!.shortfall as number);
                 else rows.food.complete = false;
+                break;
+            case 'MerchantBartered':
+                for (const [direction, category] of [['give', 'spending'], ['receive', 'otherReceipts']] as const) {
+                    const manifest = e.details?.[direction];
+                    if (!Array.isArray(manifest) || !manifest.length) {
+                        rows.food.complete = rows.materials.complete = false;
+                        continue;
+                    }
+                    for (const line of manifest) {
+                        if (!line || !Object.hasOwn(tradeGoods, line.goodId) ||
+                            !Number.isSafeInteger(line.quantity) || line.quantity < 1) {
+                            rows.food.complete = rows.materials.complete = false;
+                            continue;
+                        }
+                        if (line.goodId === 'food' || line.goodId === 'materials')
+                            add(e, line.goodId, category, line.quantity);
+                    }
+                }
                 break;
             case 'EquipmentCrafted': add(e, 'materials', 'spending', 'materials'); break;
             case 'HouseBuilt': case 'BuildingUpgraded': add(e, 'materials', 'spending', 'cost'); break;

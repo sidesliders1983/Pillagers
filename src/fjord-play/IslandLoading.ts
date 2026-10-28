@@ -72,7 +72,7 @@ export class IslandLoading {
                 <div class="island-load-summary"><span>Preparing your island</span><strong data-load-percent>0%</strong></div>
                 <progress max="100" value="0" aria-label="Estimated completed preparation"></progress>
                 <p data-load-time>Elapsed 00:00</p><p data-load-warning role="status" hidden></p>
-                <details class="island-load-diagnostics"><summary>Loading diagnostics</summary>
+                <details class="island-load-diagnostics" ${options.diagnosticRun ? '' : 'hidden'}><summary>Loading diagnostics</summary>
                     <p data-load-attempt></p><label>Screen recording <select data-load-recording>
                         <option value="not reported">Not reported</option><option value="on">On</option><option value="off">Off</option>
                     </select></label><p>Preparation estimate, not downloaded bytes or time remaining.</p>
@@ -157,6 +157,7 @@ export class IslandLoading {
         this.worker.cancel();
     };
     fail(error: Error) {
+        this.root.querySelector<HTMLElement>('.island-load-diagnostics')!.hidden = false;
         this.diagnostics.stop('failed', error);
         this.diagnostics.snapshot();
         this.abort.abort(error);
@@ -359,6 +360,7 @@ export class IslandLoading {
                 return;
             } catch (error) {
                 this.check();
+                this.root.querySelector<HTMLElement>('.island-load-diagnostics')!.hidden = false;
                 this.diagnostics.stop('failed', error);
                 this.updateProgress();
                 this.status.textContent = (this.resume ? 'Could not restore the settlement. ' : 'Could not prepare the island. ') + (error instanceof Error ? error.message : String(error));

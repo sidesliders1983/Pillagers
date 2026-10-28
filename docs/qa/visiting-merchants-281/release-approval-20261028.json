@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-28",
+  "ownerApproval": {
+    "mergeAndSites": true,
+    "defaultMerchantsForNewCampaigns": true
+  },
+  "default": "New Fjord scenarios and in-game New campaign enable visiting merchants without a URL flag. Existing saves and faithful restarts retain their stored trade setting. Generic Core defaults and explicit no-trade research controls remain unchanged.",
+  "rules": "Existing goods, prices, initial stocks, Trader eligibility, finite stock and visit schedule are unchanged.",
+  "checks": {
+    "tradeAndOnboarding": {
+      "passed": 18,
+      "failed": 0
+    },
+    "scenarioRestartWeatherLegacyPlayback": {
+      "passed": 11,
+      "failed": 0
+    }
+  },
+  "ciCorrection": "064ac955ce2c7ba7670ea1059f98b668d9a042df failed one unchanged Fjord scenario test: restartProposal lost the recorded weather production timing. GameplaySession now explicitly retains that mode during restart; all 32 founding seeds and the legacy byte fixtures pass. No reference expectations were removed or weakened.",
+  "publishing": "Require successful checks for the final PR head, then the actual merged main commit. Build and package a fresh main export for the existing public Site."
+}

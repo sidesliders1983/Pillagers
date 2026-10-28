@@ -1,3 +1,4 @@
+import { stepMerchants } from './VisitingMerchants';
 import { stepContextualSupport } from './ContextualSupport';
 import { craftingOccupation, craftingOffer, stepSmitheryWork } from './Smithery';
 import { careActive } from './CareCalendar';
@@ -6,7 +7,7 @@ import { stepCampfire } from './Campfire';
 import {evaluateSocialYear, pruneSocialIncidents} from './PersonalityLifeEvents';
 import {personaIdentity} from './Identity';
 import {personaAway,stepWorld} from './WorldExpeditions';
-import {determineWeather,weatherProfile,weatherFacts} from './Weather';
+import {determineWeather,weatherProfile,weatherProductionModifiers,weatherFacts} from './Weather';
 import {randomUint} from './Random';
 import {resolveMortality,defaultMortalityBands} from './Mortality';
 import type {MortalityBand} from './Mortality';
@@ -98,8 +99,11 @@ export function inspectWork(state:SimulationState,id:string) {
     const control=state.mechanics!.people[id];
         if(simulationTick(state)<control.switchedUntilTick)efficiency=Math.floor(efficiency*config.switchProductivityBps/10000);
 
-    if(job.resource==='food')efficiency=Math.floor(efficiency*weatherProfile(state).foodProductionBps/10000);
-    if(job.resource==='materials')efficiency=Math.floor(efficiency*(weatherProfile(state).materialsProductionBps??10000)/10000);
+    if (job.resource !== null) {
+        const production = weatherProductionModifiers(state);
+        const modifier = job.resource === 'food' ? production.foodProductionBps : production.materialsProductionBps;
+        efficiency = Math.floor(efficiency * modifier / 10000);
+    }
     return {aptitudeBps:aptitude(person.dna.traits,job),productivityBps:reason===null?efficiency:0,unitsPerWinter:job.resource===null?craft.unitsPerWinter:job.unitsPerWinter,resource:job.resource,progress:person.workProgress/config.workPerUnit,reason};
 }
 export function inspectBuilding(state:SimulationState,id:string) {
@@ -187,6 +191,7 @@ export function stepMechanicsTick(state:SimulationState):void {
     pruneSocialIncidents(state);
     if(annualFoodEvent)evaluateSocialYear(state,annualFoodEvent);
     stepContextualSupport(state, state.events.slice(tickEventOffset));
+    stepMerchants(state);
 }
 
 export type MechanicsCommand = {type:'AssignResidence'; householdId:string; residenceId:string|null}

@@ -5,7 +5,7 @@ import { isMobileLayout, mobileLayoutQuery } from './MobileShell';
 
 export function fjordHeaderHTML(): string {
     return `<header id="fjord-header" aria-label="Settlement status and controls">
-        <div class="fjord-brand"><img src="/branding/fjordside-mark.png" alt=""><div><strong id="fjord-clan-name">FJORDSIDE</strong>
+        <div class="fjord-brand"><img src="/branding/fjordside-mark.png" alt=""><div>
             <div id="fjord-winter" class="fjord-date" aria-label="Calendar"><span id="fjord-season"></span> <strong id="fjord-year"></strong></div></div></div>
         <dl id="fjord-stocks" class="fjord-kpis" aria-label="Settlement resources and population">
             <div><dt>Food</dt><dd><button type="button" data-stock="food" aria-label="Food stocks">${icon('food')}<strong id="fjord-food"></strong></button></dd></div>
@@ -15,15 +15,15 @@ export function fjordHeaderHTML(): string {
         </dl>
         <div class="fjord-time-controls">
             <button id="fjord-run" type="button" aria-label="Start simulation">${icon('play')}</button>
-            <span id="fjord-pacing-slot"><label id="fjord-pacing">Year length
-                <select id="fjord-cycle"><option value="1">1 min per year</option>
+            <span id="fjord-pacing-slot"><label id="fjord-pacing" title="Year length">${icon('fastForward')}
+                <span id="fjord-cycle-label" aria-hidden="true">1 min per year</span>
+                <select id="fjord-cycle" aria-label="Year length"><option value="1">1 min per year</option>
                     <option value="3">3 min per year</option><option value="5">5 min per year</option></select>
             </label></span>
             <span id="fjord-next-slot"><button id="fjord-next" type="button">+1 Year</button></span>
             <details id="fjord-menu"><summary aria-label="Game menu">${icon('menu')}</summary>
                 <div class="fjord-settings">
                     <h1>FjordSide</h1>
-                    <span id="fjord-menu-pacing-slot"></span>
                     <span id="fjord-menu-next-slot"></span>
                     <button id="clan-book-open" type="button">Clan Book</button><button id="fjord-expeditions-open" type="button">Expedition groups</button>
                     <label>Quality<select id="fjord-quality"><option value="low"${defaultPresentationPreferences.quality === 'low' ? ' selected' : ''}>Low</option>
@@ -56,7 +56,7 @@ export function fjordHeaderHTML(): string {
                         <label class="check"><input id="fjord-founders" type="checkbox" checked> Use the same founders</label>
                         <button id="fjord-new">New campaign from seed</button>
                         <button id="fjord-restart">Restart with same founders</button>
-                        <p>New and restarted campaigns offer the Founding Journey when ready. Both choices stay paused until you press Play. Returning to the game or loading a save pauses the clock.
+                        <p>New and restarted campaigns offer the Founding Journey when ready. Explore on my own starts the clock; Guide me stays paused until Play. Returning to the game or loading a save pauses the clock.
                             Your browser keeps the campaign locally.</p>
                     </div></details>
                 </div>
@@ -70,12 +70,15 @@ export class FjordHeader {
     private narrow = matchMedia(mobileLayoutQuery);
     constructor(private root: HTMLElement) {
         this.placePacing();
+        this.refreshPacing();
+        root.querySelector('#fjord-cycle')!.addEventListener('change', this.refreshPacing);
         this.narrow.addEventListener('change', this.placePacing);
         root.addEventListener('keydown', this.keydown);
         document.addEventListener('pointerdown', this.outside);
     }
     update(calendar: FjordCalendar, stocks: { food: number; materials: number },
         residents: number, cattle: number, expeditionMode = false) {
+        this.refreshPacing();
         const nextYear = this.root.querySelector<HTMLButtonElement>('#fjord-next')!;
         nextYear.disabled = expeditionMode;
         nextYear.title = expeditionMode ? 'Unavailable during Expedition Mode' : '';
@@ -86,10 +89,17 @@ export class FjordHeader {
             this.root.querySelector('#' + id)!.textContent = String(value);
     }
     private placePacing = (): void => {
-        const slot = this.root.querySelector(this.narrow.matches ? '#fjord-menu-pacing-slot' : '#fjord-pacing-slot')!;
-        slot.append(this.root.querySelector('#fjord-pacing')!);
         const nextSlot = this.root.querySelector(isMobileLayout() ? '#fjord-menu-next-slot' : '#fjord-next-slot')!;
         nextSlot.append(this.root.querySelector('#fjord-next')!);
+    };
+    private refreshPacing = (): void => {
+        const field = this.root.querySelector<HTMLSelectElement>('#fjord-cycle')!;
+        const text = field.value === '10' ? 'Expedition · 10 min' :
+            field.selectedOptions[0]?.textContent ?? 'Year length';
+        const label = this.root.querySelector('#fjord-cycle-label')!;
+        if (label.textContent !== text) label.textContent = text;
+        const pacing = this.root.querySelector<HTMLElement>('#fjord-pacing')!;
+        if (pacing.dataset.disabled !== String(field.disabled)) pacing.dataset.disabled = String(field.disabled);
     };
     private keydown = (event: KeyboardEvent): void => {
         // Menu/form keyboard input belongs to the header, not global world navigation.
@@ -106,6 +116,7 @@ export class FjordHeader {
     };
     dispose(): void {
         this.narrow.removeEventListener('change', this.placePacing);
+        this.root.querySelector('#fjord-cycle')!.removeEventListener('change', this.refreshPacing);
         this.root.removeEventListener('keydown', this.keydown);
         document.removeEventListener('pointerdown', this.outside);
     }

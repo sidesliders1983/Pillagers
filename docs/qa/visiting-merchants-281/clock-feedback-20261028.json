@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-28",
+  "changes": [
+    "Explicit Explore on my own starts the guarded playback clock. Guide me and Escape remain paused.",
+    "Year length stays in the upper bar on desktop and mobile with the shared double-play icon; the real native picker and fixed expedition pace are retained."
+  ],
+  "checks": {
+    "onboardingPlaybackSeasons": {
+      "passed": 27,
+      "failed": 0
+    },
+    "weatherLegacyAidBookEconomy": {
+      "passed": 53,
+      "failed": 0
+    },
+    "sourcePinnedRaidsSessionsWeather": {
+      "passed": 22,
+      "failed": 0
+    }
+  },
+  "compatibility": {
+    "previousHead": "b41c888a990674aafda5a608b7b43a4fce2d126c",
+    "ciFailureCount": 8,
+    "cause": "Unconditional seasonal production changed historical annual-economy fixtures.",
+    "correction": "Core retains unmarked saved annual timing. The public idempotent UseSeasonalWeatherProduction command stores winter-quarter-v1 and an adoption event for the live Fjord player and rival. New/opened/imported/restarted Fjord campaigns explicitly adopt it. No historical reference result or fixture was changed."
+  },
+  "limits": "Test groups overlap; counts are not summed as unique tests. Browser connector has no available browser, so no new screenshot or physical-device review is claimed. Full exact-head CI remains required before merge."
+}

@@ -8,8 +8,10 @@ reward economy, tutorial simulation or requirement to complete chapters.
 ## Campaign entry and time
 
 New scenario, same-founders restart, in-game New/Restart, ordinary Continue,
-import and local load arrive paused. Both **Guide me** and **Explore on my own**
-stay paused. Only a deliberate playable **Play** starts time. Play is unavailable
+import and local load arrive paused. **Guide me** stays paused until **Play**.
+Choosing **Explore on my own** explicitly starts the existing playback clock
+immediately after releasing the invitation hold. Dismissing with Escape stays
+paused. Continue/import, replaying guidance and background recovery do not auto-start time. Play is unavailable
 during loading, the founding story and the invitation. +1 Year is unavailable
 before that first Play and during expedition mode. Existing speed and fractional
 pacing are retained where applicable.
@@ -18,8 +20,9 @@ There is one intentional exception: an explicit internal board → Fjord view
 handoff may carry its already-running pacing after scene readiness. A newer pause,
 visibility loss, recovery, reset or player intent invalidates its pending callback.
 Ordinary Continue does not use this exception. Warm-tab/BFCache/WebGL recovery
-keeps the existing pause policy. No entry or guide choice advances Core ticks,
-produces resources, draws RNG or simulates time while the game is closed.
+keeps the existing pause policy. Choosing free play records playback intent without synchronously issuing a Core
+advance command. Active time then uses the ordinary guarded frame loop. No entry
+or guide choice simulates offline time or bypasses loading/lifecycle guards.
 
 ## Optional journey
 

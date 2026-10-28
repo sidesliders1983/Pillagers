@@ -64,3 +64,13 @@ Save/load, import, pause, hidden tabs and view handoff retain canonical season p
 Weather-off still shows seasons. Seasonal weather composition is visual only; the
 configured annual weather modifiers continue to apply across all four quarters.
 See [Fjord calendar and header](../../FJORD-SEASONS-HUD.md).
+
+
+### Compact year-length control (28 October 2026)
+
+The upper status bar keeps one native Year length picker between Play/Pause and
+the game menu, including mobile. Its double-play icon and current `1/3/5 min per
+year` label reflect the existing pacing setting. Expedition Mode shows its fixed
+10-minute pace and disables manual changes; this adds no second clock or speed
+rule. Choosing **Explore on my own** at the new-campaign invitation starts the
+existing guarded clock immediately; guided play and ordinary restore remain paused.

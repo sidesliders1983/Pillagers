@@ -13,6 +13,7 @@ import './first-steps.css';
 interface FirstStepsHooks {
     persist(): void;
     pause(): void;
+    play(): void;
     reveal(): void;
     clockChanged(): void;
     resident(id: string): void;
@@ -148,20 +149,21 @@ export class FirstStepsGuide {
     }
 
     private collapse() {
-        if (this.progress.status === 'offered') { this.choose(false); return; }
+        if (this.progress.status === 'offered') { this.choose('dismiss'); return; }
         this.save({ ...this.progress, collapsed: true });
         this.render();
         this.root.querySelector<HTMLButtonElement>('button')?.focus({ preventScroll: true });
     }
 
-    private choose(guided: boolean) {
+    private choose(mode: 'guided' | 'explore' | 'dismiss') {
+        const guided = mode === 'guided';
         this.held = false;
         this.hooks.clockChanged();
         this.save({ ...this.progress, journey: this.journey,
             status: guided ? 'active' : 'skipped', collapsed: false });
         this.visible = guided;
-        // Both choices remain paused. Only the existing Play button can start time.
-        this.hooks.pause();
+        if (mode === 'explore') this.hooks.play();
+        else this.hooks.pause();
         this.render();
         if (guided) this.focusHeading();
         else document.querySelector<HTMLElement>('#fjord-run')?.focus({ preventScroll: true });
@@ -185,7 +187,7 @@ export class FirstStepsGuide {
         const target = (event.target as Element).closest<HTMLElement>('[data-guide]');
         const action = target?.dataset.guide;
         if (!action) return;
-        if (action === 'guide' || action === 'explore') { this.choose(action === 'guide'); return; }
+        if (action === 'guide' || action === 'explore') { this.choose(action === 'guide' ? 'guided' : 'explore'); return; }
         if (action === 'expand') { this.open(); return; }
         if (action === 'collapse') { this.collapse(); return; }
         if (action === 'skip' || action === 'dismiss') {
@@ -307,7 +309,7 @@ export class FirstStepsGuide {
             html = `<h2 id="first-steps-title">The Founding Journey</h2>
                 <p>Build a home for the next generation. Help an autonomous community, explore the island and choose how to face conflict.</p>
                 <p class="first-steps-muted">Three optional chapters. You can visit any chapter, return later or play freely.
-                The campaign stays paused until you press Play.</p>
+                Explore on my own starts the clock immediately; Guide me keeps it paused.</p>
                 <div class="first-steps-actions">${button('guide', 'Guide me')}${button('explore', 'Explore on my own')}</div>`;
         } else if (progress.collapsed) {
             html = button('expand', `Founding Journey · ${done}/${chapterGoals.length} · ${goal.title}`,
@@ -354,7 +356,7 @@ export class FirstStepsGuide {
         const announcement = progress.status === 'active' ?
             `${copy.title}, ${done} of ${chapterGoals.length} completed. ${goal.title}: ${goal.status}.${goal.checklist.length ?
                 ` ${goal.checklist.filter(check => check.done).length} of ${goal.checklist.length} steps completed.` : ''}` :
-            progress.status === 'offered' ? 'The Founding Journey is ready. Press Play when you want time to pass.' : 'The Founding Journey is set aside.';
+            progress.status === 'offered' ? 'Choose Guide me to stay paused, or Explore on my own to start time.' : 'The Founding Journey is set aside.';
         html += `<span class="first-steps-screen-reader" role="status" data-view-key="first-steps-status">${esc(announcement)}</span>`;
         if (html !== this.html) { updateView(this.root, html); this.html = html; }
         this.root.hidden = !this.visible || this.obscured;

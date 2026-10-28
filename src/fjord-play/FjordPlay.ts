@@ -1,3 +1,5 @@
+import { MerchantPanel } from './MerchantPanel';
+import './merchant.css';
 import { FirstStepsGuide } from './FirstStepsGuide';
 import { CampaignPlayback } from './CampaignPlayback';
 import { newFirstSteps } from './FirstStepsState';
@@ -11,7 +13,7 @@ import { IslandMissionPanel } from './IslandMissionPanel';
 import { IslandMissionMarkers } from './IslandMissionMarkers';
 import { LifecycleTrace } from './LifecycleTrace';
 import type { CampaignStartAttempt } from './FjordEntry';
-import { newFjordScenario } from './FjordScenario';
+import { newFjordScenario, useSeasonalFjordProduction } from './FjordScenario';
 import { fjordLivestockRules } from '../config/FjordLivestock';
 import { resumeCheckpointKey } from '../play/SettlementRecovery';
 import { birthdayCalendarMode } from '../simulation/BirthdayCalendar';
@@ -39,7 +41,7 @@ import { icon } from './FjordIcons';
 import { SettlementPanel, panelCommand, updateManagementAvailability } from '../play/SettlementPanel';
 import { openSettlement, persistSettlement, bindViewSwitch } from '../play/SettlementBrowser';
 import type { EntityKind } from '../play/SettlementView';
-import { inspectWeatherExposure, personaAway, landingSummary } from '../simulation/SimulationCore';
+import { inspectWeatherExposure, weatherProductionModifiers, personaAway, landingSummary } from '../simulation/SimulationCore';
 
 const campaignClockIntervalMs = 500;
 const escape = (value: string) => value.replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]!));
@@ -163,6 +165,7 @@ export class FjordPlay {
         // New islands include physical exploration; restored campaigns retain their saved rules.
         if (entry.kind !== 'continue' && campaignIslandPlan(this.campaign.blueprint) &&
             enableStartDiscovery) this.campaign.enableDiscovery();
+        if (!entry.diagnosticRun) useSeasonalFjordProduction(this.session);
         document.title = 'FjordSide';
         const readingPosition = this.foundingBook?.scrollTop ?? 0;
         document.body.className = 'fjord-play';
@@ -288,6 +291,7 @@ export class FjordPlay {
                 target: target => {
                     if (target.kind === 'expedition') expeditions?.openGroup(target.id);
                     else if (target.kind === 'site') islandMissions?.selectSite(target.id);
+                    else if (target.kind === 'surface' && target.id === 'trade') merchantPanel?.open();
                     else if (target.kind === 'surface') desktopUI?.open(target.id, true);
                     else if (target.kind === 'wildlife') bookReader.openWildlife(target.id);
                     else select(target.kind === 'livestock' ? 'cattle' : target.kind, target.id);
@@ -341,6 +345,7 @@ export class FjordPlay {
         const production = new FjordProduction(this.session.readSnapshot().events);
         const productionLabels = new ProductionLabels(document.querySelector<HTMLElement>('#fjord-production-labels')!);
         const resetProduction = () => {
+            useSeasonalFjordProduction(this.session);
             production.reset(this.session.readSnapshot().events);
             productionLabels.reset();
         };
@@ -352,6 +357,7 @@ export class FjordPlay {
         const islandMarkers = new IslandMissionMarkers();
         this.startupCleanup.push(() => islandMarkers.dispose());
         let desktopUI: FjordInterface | undefined;
+        let merchantPanel: MerchantPanel | undefined;
         let renderedWildlifeAttention = '';
         const refreshUI = () => {
             entry.audioControls?.refresh();
@@ -406,9 +412,10 @@ export class FjordPlay {
                 attentionView.render();
                 const profile = view.weather.enabled ? view.weather.modifiers : null;
                 const exposure = inspectWeatherExposure(state);
+                const production = weatherProductionModifiers(state);
                 const forecast = profile ? '<strong>Year ' + view.time.winter + ' · ' + view.weather.class + ' annual weather</strong>' +
-                    '<p>Food output ' + profile.foodProductionBps / 100 + '% · Materials output ' +
-                    (profile.materialsProductionBps ?? 10000) / 100 + '%<br>Resident Food ×' +
+                    '<p>Current Food output ' + production.foodProductionBps / 100 + '% · Materials output ' +
+                    production.materialsProductionBps / 100 + '%<br>Production modifiers apply during Winter only.<br>Annual resident Food ×' +
                     (profile.residentConsumptionBps ?? 10000) / 10000 + ' · Adult cattle Food ×' +
                     (profile.cattleConsumptionBps ?? profile.cattleConsumptionMultiplier * 10000) / 10000 + '</p>' +
                     '<p>' + exposure.residentIds.length + ' exposed residents · ' + exposure.cattleIds.length + ' exposed livestock</p>' +
@@ -437,8 +444,8 @@ export class FjordPlay {
             desktopUI?.refresh(state, this.shared.selection, personalHistory.render(),
                 () => this.panels.render(state, this.shared.selection, '', { homeImprovements: false }));
             updateManagementAvailability(panel, this.shared);
+            merchantPanel?.refresh();
             firstSteps?.update(Boolean(this.loading) || !document.querySelector<HTMLElement>('#clan-book-reader')!.hidden);
-            document.querySelector('#fjord-clan-name')!.textContent = state.clan.name;
             highlight();
             const selected = this.campaign.selection;
             document.querySelector('#fjord-selected')!.textContent = selected ?
@@ -609,7 +616,8 @@ export class FjordPlay {
                         proposal.restartCampaign(sameFounders.checked, undefined, weatherField.checked, undefined, foundingPhase);
                     } else if (!replayFounders) proposal.newCampaign(Number(seedField.value), weatherField.checked, true, foundingPhase,
                         calendarMode ?? birthdayCalendarMode(this.session.readSnapshot()), { player: fjordLivestockRules },
-                        query.get('culture') === '1' ? { enabled: true } : undefined);
+                        query.get('culture') === '1' ? { enabled: true } : undefined, undefined,
+                        { enabled: true });
                     this.foundingBook = new FoundingBookWindow(proposal.book.snapshot().chapters[0]);
                     proposal.book.notifyPending();
                     const recipe = replayFounders ? campaignIslandPlan(this.campaign.blueprint)?.recipe : undefined;
@@ -708,10 +716,19 @@ export class FjordPlay {
                 if (syncScene) await syncScene();
                 presentation?.acceptGathering(focusCeremony);
             });
+        merchantPanel = this.ownStartup(new MerchantPanel(document.querySelector<HTMLElement>('#fjord-play')!,
+            () => this.session.readSnapshot(), command => {
+                const epoch = this.session.personalHistoryEpoch;
+                return new Promise<void>((resolve, reject) => commitManagement(() => {
+                    if (epoch !== this.session.personalHistoryEpoch) throw new Error('The campaign changed. Review its current merchant offers.');
+                    return [command];
+                }, resolve, reject));
+            }, () => this.session.personalHistoryEpoch));
         desktopUI = new FjordInterface(this.shared, { select, refresh, notify: say,
             inspected: (kind, id) => firstSteps?.inspected(kind, id),
             renderPortrait: input => presentation?.portrait(input) ?? Promise.resolve(undefined),
             home: () => controller.home(),
+            trade: () => { desktopUI?.close(false); merchantPanel?.open(); },
             report: id => {
                 if (!this.campaign.attentionSource(id)) return;
                 desktopUI!.open('attention', true);
@@ -722,7 +739,7 @@ export class FjordPlay {
         weddingInvitation = this.ownStartup(new WeddingInvitation(document.querySelector<HTMLElement>('#fjord-play')!,
             this.shared, { commit: commitManagement, changed: () => { persist(); refresh(); } }));
         firstSteps = this.ownStartup(new FirstStepsGuide(this.shared, {
-            persist, pause: () => setPlayback(false),
+            persist, pause: () => setPlayback(false), play: () => setPlayback(true),
             reveal: () => desktopUI!.closeForHelp(), clockChanged: syncGuideClock,
             resident: id => desktopUI!.showResident(id),
             household: id => desktopUI!.showEntity('household', id),
