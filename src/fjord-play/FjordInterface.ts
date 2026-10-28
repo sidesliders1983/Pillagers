@@ -3,7 +3,7 @@ import { gatheringOffer, weddingCandidates } from '../simulation/SimulationCore'
 import { renderGatheringCard, renderGatheringReview, type GatheringChoice, type GatheringOffer } from './CulturalGatheringView';
 import { renderSmithery } from './SmitheryView';
 import { craftingOccupation, type EquipmentItem } from '../simulation/Smithery';
-import { applyCommand, inspectWork, inspectCattle, inspectLivestock, occupationAptitude, occupationIds, personaAge, landingSummary } from '../simulation/SimulationCore';
+import { applyCommand, inspectWork, inspectCattle, inspectLivestock, occupationAptitude, occupationIds, availableOccupationIds, personaAge, landingSummary } from '../simulation/SimulationCore';
 import { renderLivestockBreeding, slaughterBreedingWarning } from '../play/LivestockBreedingView';
 import type { Occupation, SimulationCommand, SimulationState } from '../simulation/SimulationCore';
 import type { SharedSettlement, SettlementSelection } from '../play/SharedSettlement';
@@ -156,7 +156,7 @@ export class FjordInterface {
         return `<section class="fjord-home-improvements" aria-label="Home specialization and upgrades">
             <div class="fjord-home-specialization">${icon(role ? occupationIcon(role) : 'home')}<strong>${role ? esc(workLabel(role)) : 'Unspecialized'}</strong><span>Level ${homeLevel(home.upgradeLevel)}</span>${button('specialization', 'Change', 'work', 'class="fjord-home-change" aria-label="Change specialization"')}</div>
             <p>${home.matching.length} matching resident${home.matching.length === 1 ? '' : 's'} · +${home.bonusBps / 100}% bonus to matching work</p>
-            ${role && state.mechanics!.config.occupations[role].resource === null && !craftingOccupation(role) ? '<p class="fjord-caption">This occupation has no production output in the current campaign rules.</p>' : ''}
+            ${role && state.mechanics!.config.occupations[role]!.resource === null && !craftingOccupation(role) ? '<p class="fjord-caption">This occupation has no production output in the current campaign rules.</p>' : ''}
             ${role && !home.matching.length ? '<p class="fjord-caption">No resident currently matches this specialization. Changing a specialization keeps every resident’s occupation.</p>' : ''}
             <p>Upkeep: <strong>${maintenance}</strong></p>
             ${home.debtWinters ? `<p class="fjord-risk">Maintenance debt: ${home.debtWinters}/${state.mechanics!.config.collapseDebtWinters} years before collapse.</p>` : ''}
@@ -178,7 +178,7 @@ export class FjordInterface {
                 `<div class="fjord-card-body"><p class="fjord-caption">${person.deathWinter !== null ?
                     'Deceased · Winter ' + person.deathWinter : work.reason ? esc(work.reason.replaceAll('-', ' ')) :
                     'Working · ' + esc(work.resource ?? 'occupation')}</p>
-                <div class="fjord-actions">${button('occupation', 'Change work', 'work')}${craftingOccupation(person.occupation) ? button('smithery', 'Crafting & equipment', 'work') : ''}
+                <div class="fjord-actions">${button('occupation', 'Change work', 'work')}${person.occupation === 'miner' ? `<button type="button" data-mining-resident="${esc(id)}">Assign mining site</button>` : ''}${craftingOccupation(person.occupation) ? button('smithery', 'Crafting & equipment', 'work') : ''}
                     ${button('expand-card', 'Personal details', 'book')}</div></div>`;
         }
         const children = Object.values(state.personas).filter(p => p.parentIds.includes(id));
@@ -197,12 +197,12 @@ export class FjordInterface {
             <dl class="fjord-relations"><div><dt>Household</dt><dd>${home ? this.link('household', home.id, housingName(state, 'household', home.id)) : 'None'}</dd></div>
             <div><dt>Partner</dt><dd>${person.partnerId ? relative(person.partnerId) : 'None'}</dd></div>
             <div><dt>Children</dt><dd>${children.map(child => relative(child.id)).join('') || 'None'}</dd></div></dl>
-            <div class="fjord-actions">${button('occupation', 'Change work', 'work')}${craftingOccupation(person.occupation) ? button('smithery', 'Crafting & equipment', 'work') : ''}
+            <div class="fjord-actions">${button('occupation', 'Change work', 'work')}${person.occupation === 'miner' ? `<button type="button" data-mining-resident="${esc(id)}">Assign mining site</button>` : ''}${craftingOccupation(person.occupation) ? button('smithery', 'Crafting & equipment', 'work') : ''}
                 ${isMobileLayout() ? button('collapse-card', 'Show less', 'back') : ''}</div>
             <details data-view-key="profile-extra:${esc(id)}"><summary>Heritage, parents & occupation aptitudes</summary>
             <p>Parents: ${person.parentIds.map(relative).join('') || 'No recorded parents'}</p>
             ${heritageKeys.filter(key => person.dna.heritage[key] > 0).map(key => meter(heritageLabels[key], person.dna.heritage[key])).join('')}
-            ${occupationIds.map(role => meter(occupationLabel(role), occupationAptitude(state, id, role) / 10000)).join('')}</details>
+            ${availableOccupationIds(state).map(role => meter(occupationLabel(role), occupationAptitude(state, id, role) / 10000)).join('')}</details>
             ${history}</div>`;
     }
     refresh(state: SimulationState, selection: SettlementSelection, history: string, legacy: () => string) {
@@ -373,7 +373,7 @@ export class FjordInterface {
                 `<div class="fjord-card-body"><p>Level ${homeLevel(home.upgradeLevel)} · +${home.bonusBps / 100}% matching-work bonus · ${home.upkeep} Materials/year when occupied.</p>
                 <div class="fjord-choice-grid">${[null, ...occupationIds].map(role => {
                     const matching = home.residents.filter(id => role !== null && state.personas[id].occupation === role);
-                    return button('choose-specialization', `${role ? esc(workLabel(role)) : 'Unspecialized'}<small>${role ? matching.length + ' matching residents · no Materials cost' + (state.mechanics!.config.occupations[role].resource === null && !craftingOccupation(role) ? ' · no production output' : '') : 'No workplace bonus · level and upkeep kept'}</small>`,
+                    return button('choose-specialization', `${role ? esc(workLabel(role)) : 'Unspecialized'}<small>${role ? matching.length + ' matching residents · no Materials cost' + (state.mechanics!.config.occupations[role]!.resource === null && !craftingOccupation(role) ? ' · no production output' : '') : 'No workplace bonus · level and upkeep kept'}</small>`,
                         role ? occupationIcon(role) : 'home', `data-role="${role ?? ''}" aria-pressed="${home.building.specialization === role}"`);
                 }).join('')}</div>${button('cancel-task', 'Back', 'close')}</div>`;
         }
@@ -381,7 +381,7 @@ export class FjordInterface {
         if (this.task === 'occupation' && this.owner.selection?.kind === 'persona') {
             const id = this.owner.selection.id;
             return this.heading('Change work', state.personas[id].name, 'work') + `<div class="fjord-card-body"><div class="fjord-choice-grid">` +
-                occupationIds.map(role => {
+                availableOccupationIds(state).map(role => {
                     const status = this.owner.availability({ type: 'AssignOccupation', personaId: id, occupation: role });
                     return button('choose-occupation', `${esc(occupationLabel(role))}<small>${pct(occupationAptitude(state, id, role))} fit${status.reason ? ' · ' + esc(status.reason) : ''}</small>`,
                         occupationIcon(role), `data-role="${role}" ${status.allowed ? '' : 'disabled'}`);

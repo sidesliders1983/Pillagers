@@ -1,3 +1,4 @@
+import { miningBusy } from './Mining';
 import { ensureCampfireBurning, inspectCampfire } from './Campfire';
 import { eventFacts } from './EventFacts';
 import { providingCareIds } from './FamilyMechanics';
@@ -63,7 +64,7 @@ export function availableCulturalParticipants(state: SimulationState): CulturalP
     return Object.keys(state.personas).sort().filter(id => {
         const person = state.personas[id];
         return person.deathWinter === null && personaAge(state, id) >= state.mechanics!.config.adultAge &&
-            !personaAway(state, id) && !care.has(id);
+            !personaAway(state, id) && !miningBusy(state, id) && !care.has(id);
     }).map(id => ({ id, name: state.personas[id].name, age: personaAge(state, id) }));
 }
 export type WeddingCandidate = {

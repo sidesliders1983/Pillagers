@@ -1,3 +1,7 @@
+export { availableOccupationIds } from './Mechanics';
+import { bindMining, validateMining, applyMiningCommand, requireMiningAdvance, stepMining, migrateMining } from './Mining';
+import type { MiningState, MiningCommand } from './Mining';
+export { inspectMining } from './Mining';
 import { initializeTrade, validateTrade, applyMerchantCommand, type MerchantCommand, type TradeState, type TradeConfig } from './VisitingMerchants';
 import {
     stepWildlifeSightings, validateWildlife, validateWildlifeSighting, wildlifeSighting, assertWildlifeWorld,
@@ -56,14 +60,14 @@ export type CampaignLivestockRules = {
     targetClans?: Record<string, LivestockRules>;
 };
 export {canPartner} from './FamilyMechanics';
-import {initializeMechanics, stepMechanicsTick, isMechanicsCommand, applyMechanicsCommand, recordOccupationChange, validateMechanics, migrateMechanics} from './Mechanics';
+import {availableOccupationIds,initializeMechanics, stepMechanicsTick, isMechanicsCommand, applyMechanicsCommand, recordOccupationChange, validateMechanics, migrateMechanics} from './Mechanics';
 import type {MechanicsState, PrototypeConfig, MechanicsCommand} from './Mechanics';
 import {personaAge} from './PersonaAge';
 export {personaAge} from './PersonaAge';
 import {CharacterDNA, parseCharacterDNA} from '../characters/CharacterDNA';
 import {generateCharacterDNA} from '../characters/generateCharacterDNA';
 export const ticksPerWinter = 1000;
-export type Occupation = 'farmer' | 'herder' | 'fisher' | 'hunter' | 'textileWorker' | 'smith' | 'woodworker' | 'boatbuilder' | 'trader' | 'leatherAndJewelleryMaker';
+export type Occupation = 'farmer' | 'herder' | 'fisher' | 'hunter' | 'textileWorker' | 'smith' | 'woodworker' | 'boatbuilder' | 'trader' | 'leatherAndJewelleryMaker' | 'miner';
 export type GameTime = {winter: number; tick: number};
 export type Persona = {
     id: string; name: string; birthWinter: number; birthTick?: number; deathWinter: number | null; deathTick?: number;
@@ -74,6 +78,7 @@ export type Persona = {
 };
 export type SimulationEvent = {id: string; time: GameTime; type: string; personaId?: string; details?: Record<string, unknown>};
 export type SimulationState = {
+    mining?: MiningState;
     trade?: TradeState;
     culture?: CultureState;
     contextualSupport?: ContextualSupportState;
@@ -123,6 +128,19 @@ export function createCampaign(
     initializeCulture(state, cultureOverrides);
     initializeContextualSupport(state, contextualSupportOverrides);
     initializeTrade(state, tradeOverrides);
+    validateState(state);
+    return state;
+}
+/** Explicit new-campaign binding; importing a historical save never adds deposits. */
+export function initializePhysicalMining(input: SimulationState, world: WorldBlueprint, worldId: string): SimulationState {
+    validateState(input);
+    if (!input.mining) {
+        const start = foundingTime(input.foundingPhase);
+        if (input.time.winter !== start.winter || input.time.tick !== start.tick)
+            throw new Error('Mining must be selected when creating a new campaign.');
+    }
+    const state = structuredClone(input);
+    bindMining(state, world, worldId);
     validateState(state);
     return state;
 }
@@ -211,7 +229,7 @@ export function createSettlement(seed:number, overrides:Partial<PrototypeConfig>
     }
     initializeSocial(state,socialOverrides);validateState(state); return state;
 }
-export type SimulationCommand = {type: 'UseSeasonalWeatherProduction'} | MerchantCommand | CultureCommand | SmitheryCommand | LongshipCommand | IslandMissionCommand | SpatialExpeditionCommand | CampfireCommand | ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
+export type SimulationCommand = MiningCommand | {type: 'UseSeasonalWeatherProduction'} | MerchantCommand | CultureCommand | SmitheryCommand | LongshipCommand | IslandMissionCommand | SpatialExpeditionCommand | CampfireCommand | ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
 function integer(value: number, label: string) {
     if (!Number.isSafeInteger(value) || value < 0) throw new Error(`${label} must be a nonnegative safe integer`);
 }
@@ -236,6 +254,12 @@ export function applyCommand(input: SimulationState, command: SimulationCommand,
     if (command.type === 'SponsorGathering') {
         const state = structuredClone(input);
         applyCultureCommand(state, command);
+        validateState(state);
+        return state;
+    }
+    if (command.type === 'AssignMiner' || command.type === 'RecallMiner' || command.type === 'BuildMine') {
+        const state = structuredClone(input);
+        applyMiningCommand(state, command, context);
         validateState(state);
         return state;
     }
@@ -275,7 +299,7 @@ export function applyCommand(input: SimulationState, command: SimulationCommand,
     if(isLandingCommand(command)){const state=structuredClone(input);applyLandingCommand(state,command as LandingCommand);reconcileFarmyards(state,farmyards(input).map(f=>f.id));validateState(state);return state;}
     if(isMechanicsCommand(command)){const state=structuredClone(input);applyMechanicsCommand(state,command as MechanicsCommand);reconcileFarmyards(state,farmyards(input).map(f=>f.id));validateState(state);return state;}
     if (command.type === 'AssignOccupation') {
-        const occupations: Occupation[] = ['farmer', 'herder', 'fisher', 'hunter', 'textileWorker', 'smith', 'woodworker', 'boatbuilder', 'trader', 'leatherAndJewelleryMaker'];
+        const occupations = availableOccupationIds(input);
         if(personaAway(input,command.personaId))throw new Error('Persona away on expedition');
         const person = input.personas[command.personaId];
         if (!person || person.deathWinter !== null) throw new Error('Persona must be alive');
@@ -299,10 +323,12 @@ export function applyCommand(input: SimulationState, command: SimulationCommand,
     integer(input.time.winter + Math.floor(total / input.ticksPerWinter), 'Winter');
     const state = structuredClone(input);
     if (state.mechanics) {
+        requireMiningAdvance(state, context);
         requireSpatialAdvance(state, context);
         assertWildlifeWorld(state, context);
         for (let index = 0; index < ticks; index++) {
             stepMechanicsTick(state);
+            stepMining(state);
             const missions = stepSpatialExpeditions(state, context);
             stepWildlifeSightings(state, context, missions);
         }
@@ -324,7 +350,7 @@ export function advanceWinter(state: SimulationState): SimulationState {
 export function serializeState(state: SimulationState): string {validateState(state); return JSON.stringify(state);}
 export function reconstructState(serialized: string): SimulationState {
     const state = JSON.parse(serialized) as SimulationState;
-    migrateLanding(state);migrateMechanics(state);
+    migrateLanding(state);migrateMechanics(state);migrateMining(state);
     validateState(state); return state;
 }
 
@@ -342,10 +368,11 @@ function validateState(state: SimulationState): void {
     }
     integer(state.stocks.food, 'Food'); integer(state.stocks.materials, 'Materials');
     validateSpecialistStocks(state);
+    validateMining(state);
     validateSmithery(state);
     validateWildlife(state);
     if (!state.clan.id || !state.clan.name || !Array.isArray(state.events)) throw new Error('Invalid clan/events');
-    const occupations = ['farmer', 'herder', 'fisher', 'hunter', 'textileWorker', 'smith', 'woodworker', 'boatbuilder', 'trader', 'leatherAndJewelleryMaker'];
+    const occupations = availableOccupationIds(state);
     const timeValue = (time: GameTime) => {
         integer(time.winter, 'History Winter'); integer(time.tick, 'History tick');
         if (time.winter < 0 || time.tick >= ticksPerWinter || time.winter > state.time.winter || (time.winter === state.time.winter && time.tick > state.time.tick)) throw new Error('Invalid history time');

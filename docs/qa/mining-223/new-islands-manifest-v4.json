@@ -1,0 +1,184 @@
+{
+  "version": 4,
+  "qaOnly": true,
+  "target": 12,
+  "start": 256,
+  "end": 1023,
+  "sourceSelectionProtocol": "06e99adfa99b518d4cb447864e75f73270f470921fdb998d6ce71c080fe2e5e5",
+  "seeds": [
+    296,
+    299,
+    306,
+    327,
+    329,
+    341,
+    351,
+    352,
+    360,
+    361,
+    369,
+    380
+  ],
+  "existingPool": [
+    18,
+    7,
+    15,
+    79,
+    88,
+    101,
+    112,
+    168,
+    195,
+    227
+  ],
+  "concurrency": 2,
+  "timeoutMs": 120000,
+  "maxHeapMiB": 768,
+  "miningTrial": {
+    "version": 2,
+    "unitsPerYear": 8,
+    "mineCostMaterials": 20,
+    "outcropProductivityBps": 5000
+  },
+  "accessProbe": "Real paid scout, canonical intermediate destinations when one long A* exceeds its existing limit, actual sighting and home return; separate unchanged founding cohort for the Mining proof.",
+  "pierSha256": "3f80cd720c6f61dc2a840c1feb8b02dcd39db3d6981093696f98f269f9142ef3",
+  "routeProbeSha256": "f9c2d3416631f77402d8ec76715d9d88c58348a5a77128d2b8ecf2b919ad91bf",
+  "candidateRunnerSha256": "6a5fd992c76dd368cbf64f7ce10b9b462ee4dae0592329553474679682d81243",
+  "coordinatorSha256": "2332f649a4bb106085c8d7e81028a869f9d5bf6d24c43a41b29fac0abbdb283b",
+  "protocolSha256": "ae69b81b168d8425c36dd849bc47aa82447afb8294c80a3cbea39924a60e9b34",
+  "baseCommit": "4fcbf63ce0b14d227914d7a30c19139fe0baa12e",
+  "branch": "codex/mining-223",
+  "node": "v24.22.1",
+  "startedAt": "2026-10-28T11:56:27.406Z",
+  "rows": [],
+  "completed": 12,
+  "selected": [
+    {
+      "seed": 296,
+      "filename": "island-296-3c1c7162801f.json.bin",
+      "bytes": 2810080,
+      "jsonBytes": 16569778,
+      "sha256": "3c1c7162801f9d96d8cb6ba209d19553f6bca6de0319eb7159b60a07195ec581",
+      "canonicalSha256": "9b9342b025271fd0846bfb3b771af6d697e24a2163c91848363ec042dc865acd"
+    },
+    {
+      "seed": 299,
+      "filename": "island-299-cfc1001ebc9f.json.bin",
+      "bytes": 2783457,
+      "jsonBytes": 16551043,
+      "sha256": "cfc1001ebc9f69483cd8b63c047927388417363399c504216bc30bb90133c7a2",
+      "canonicalSha256": "d72c23242049166472688f23699558c95389d5f6081266752d7b244b4f9ddb71"
+    },
+    {
+      "seed": 306,
+      "filename": "island-306-9dda33a1b058.json.bin",
+      "bytes": 2793374,
+      "jsonBytes": 16556561,
+      "sha256": "9dda33a1b058a342c087defd63579311530ad178e2311726689931e073a7b520",
+      "canonicalSha256": "55f46b2c442a5ece4f144672379c4f041f84ac435a41ad3ffdbd6b5b34aec491"
+    },
+    {
+      "seed": 327,
+      "filename": "island-327-e3b213fc05b5.json.bin",
+      "bytes": 2512970,
+      "jsonBytes": 16500068,
+      "sha256": "e3b213fc05b56d6733f503244fbbd99ec967927fcbae012a439587a1dbfd93aa",
+      "canonicalSha256": "4669b8a0a58a5bb7d46c5a284c5906057c6492d57693ab94d5b536aa9ea75a15"
+    },
+    {
+      "seed": 329,
+      "filename": "island-329-798eb79cec39.json.bin",
+      "bytes": 2687497,
+      "jsonBytes": 16557472,
+      "sha256": "798eb79cec39dc25f01f714a072d2eaca0fa01f652674fb5e950794c59c08df1",
+      "canonicalSha256": "baacdb9f41e2103e67cfcbc130da8bdc5c705e4fe51a7c14bc73140699dc8972"
+    },
+    {
+      "seed": 341,
+      "filename": "island-341-b1dbb80ce1ec.json.bin",
+      "bytes": 2525611,
+      "jsonBytes": 16528007,
+      "sha256": "b1dbb80ce1ecfbf78b8937f8a547ca02c5de3b308be35962931395b5334e333c",
+      "canonicalSha256": "29f9326db955359b721d7c6ff469b78a87425d45fcad5ddac631482a7aec5d98"
+    },
+    {
+      "seed": 351,
+      "filename": "island-351-97b585498e9e.json.bin",
+      "bytes": 2746758,
+      "jsonBytes": 16527025,
+      "sha256": "97b585498e9e16b7f6f74c23a5faf82f358d0201d79c7512f6ced4979a3437da",
+      "canonicalSha256": "cd17d32d3572fff73da0cf7b2474d4c9e92a55526cd134ee0e90ce65f18351f5"
+    },
+    {
+      "seed": 352,
+      "filename": "island-352-dac58919db05.json.bin",
+      "bytes": 2515358,
+      "jsonBytes": 16482686,
+      "sha256": "dac58919db05696a443013bfdfcbe9d458e42d816515ee154432f9d692d882a4",
+      "canonicalSha256": "0b868cc0d6203578604ebe2a02ac3f5e263b7a6432fac392e18dde6745427e2b"
+    },
+    {
+      "seed": 360,
+      "filename": "island-360-496c143e4f99.json.bin",
+      "bytes": 2529165,
+      "jsonBytes": 16481275,
+      "sha256": "496c143e4f998c98d07abe801d1d924a857fc998d2d25ea53e675a4970b6c7be",
+      "canonicalSha256": "9f913683b72528a0e843d8131fd8a41f8de6cd55cb0885da2beff8da4b416b69"
+    },
+    {
+      "seed": 361,
+      "filename": "island-361-56223b19c398.json.bin",
+      "bytes": 2605579,
+      "jsonBytes": 16519901,
+      "sha256": "56223b19c3983f8b1ef1adff432b0b2f3fc60446c1a98cd4a1bfb60332e1f905",
+      "canonicalSha256": "1f05652963517ee3e423acc49ad20a8920870e3982a8ce228e816144c335202c"
+    },
+    {
+      "seed": 369,
+      "filename": "island-369-1235d13cd390.json.bin",
+      "bytes": 2629133,
+      "jsonBytes": 16514146,
+      "sha256": "1235d13cd39002a2de329e0bdb18cd326df50cecc09c76363476f9c04abd07e3",
+      "canonicalSha256": "5b041ac991fed37d2647496335ae1d9aff110b20cfc2099ec1d7172e78740d79"
+    },
+    {
+      "seed": 380,
+      "filename": "island-380-4acc10042caa.json.bin",
+      "bytes": 2504023,
+      "jsonBytes": 16462057,
+      "sha256": "4acc10042caa811389d6c881153d5f15e11bf479873369933bccbe1c476288bd",
+      "canonicalSha256": "afa13c1fdf80cd715bdefe5c11d1e5e40ca5d6a200d57588d3b87ea3992d9b5d"
+    }
+  ],
+  "status": "complete",
+  "updatedAt": "2026-10-28T12:09:13.574Z",
+  "recoveries": [
+    {
+      "seed": 369,
+      "previous": "resource-limited",
+      "status": "qualified-export",
+      "attempt": 2,
+      "runnerSha256": "159db2447fbe9e54ab059d2137c95bad3a3935eb9086f591c29f4d69af24faf1",
+      "concurrency": 1,
+      "timeoutMs": 120000,
+      "maxHeapMiB": 768
+    },
+    {
+      "seed": 380,
+      "previous": "resource-limited",
+      "status": "qualified-export",
+      "attempt": 2,
+      "runnerSha256": "159db2447fbe9e54ab059d2137c95bad3a3935eb9086f591c29f4d69af24faf1",
+      "concurrency": 1,
+      "timeoutMs": 120000,
+      "maxHeapMiB": 768
+    }
+  ],
+  "frozenExecutableSources": 174,
+  "statuses": {
+    "qualified-export": 12
+  },
+  "earlierAttempts": {
+    "resource-limited": 2
+  }
+}

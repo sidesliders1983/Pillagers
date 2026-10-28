@@ -1,0 +1,149 @@
+{
+  "version": 3,
+  "qaOnly": true,
+  "target": 12,
+  "start": 256,
+  "end": 1023,
+  "existingPool": [
+    18,
+    7,
+    15,
+    79,
+    88,
+    101,
+    112,
+    168,
+    195,
+    227
+  ],
+  "concurrency": 2,
+  "timeoutMs": 120000,
+  "maxHeapMiB": 768,
+  "miningTrial": {
+    "version": 2,
+    "unitsPerYear": 8,
+    "mineCostMaterials": 20,
+    "outcropProductivityBps": 5000
+  },
+  "accessProbe": "Real paid scout, canonical intermediate destinations when one long A* exceeds its existing limit, actual sighting and home return; separate unchanged founding cohort for the Mining proof.",
+  "pierSha256": "3f80cd720c6f61dc2a840c1feb8b02dcd39db3d6981093696f98f269f9142ef3",
+  "routeProbeSha256": "f9c2d3416631f77402d8ec76715d9d88c58348a5a77128d2b8ecf2b919ad91bf",
+  "candidateRunnerSha256": "2f7efb2034e45f9673574a4de0f6b9ee34a98298c7efbc10c346cfa7f81a7e8e",
+  "coordinatorSha256": "91cc6c106d53ba83ef4f80c2ab98530d939f8aa4b6e8f83ed4b437b4524aac84",
+  "protocolSha256": "06e99adfa99b518d4cb447864e75f73270f470921fdb998d6ce71c080fe2e5e5",
+  "baseCommit": "4fcbf63ce0b14d227914d7a30c19139fe0baa12e",
+  "branch": "codex/mining-223",
+  "node": "v24.22.1",
+  "startedAt": "2026-10-28T10:38:35.674Z",
+  "rows": [],
+  "completed": 127,
+  "selected": [
+    {
+      "seed": 296,
+      "filename": "island-296-b473f4020498.json.bin",
+      "bytes": 2809707,
+      "jsonBytes": 16568793,
+      "sha256": "b473f4020498c9423193fa47fa14eedb27c7c0f4c0197283d8a61de6a239a747",
+      "canonicalSha256": "094e75c8183af91dfb1bfe3c81d3fd1ce5124c933b5312c844d48fa7072dbbd7"
+    },
+    {
+      "seed": 299,
+      "filename": "island-299-fb0620fe450f.json.bin",
+      "bytes": 2783106,
+      "jsonBytes": 16550124,
+      "sha256": "fb0620fe450faba2b7aec0c9cf539790dabffe563d1c701e3eca44aaab67c73b",
+      "canonicalSha256": "b6be9e0edc060f2597524fd60a2b3a18151f37a4963749422f1ab3e89165ba15"
+    },
+    {
+      "seed": 306,
+      "filename": "island-306-522352f05946.json.bin",
+      "bytes": 2793023,
+      "jsonBytes": 16555632,
+      "sha256": "522352f059465e256064ab396583acde3112444523e720b9ebb4c74b4cc024bf",
+      "canonicalSha256": "14f954228c2a9fd77a5e446928debce4a95afb61a5898c4b94d65c625efe2377"
+    },
+    {
+      "seed": 327,
+      "filename": "island-327-881c69e509bc.json.bin",
+      "bytes": 2512718,
+      "jsonBytes": 16499432,
+      "sha256": "881c69e509bc086435c91a70001eaad936b0cdfb7006f721a72f313720963a16",
+      "canonicalSha256": "cd614df32ecd3782cae456e96a4711eb8d22425379aaf7b590ed5545cde089dd"
+    },
+    {
+      "seed": 329,
+      "filename": "island-329-9b45c4b230a5.json.bin",
+      "bytes": 2687227,
+      "jsonBytes": 16556724,
+      "sha256": "9b45c4b230a5130735c7ae47dc9a933cca0c12a57ec8c645b535b2b209625bc1",
+      "canonicalSha256": "a99d48ec56ca756e52b6027d62662133371bc3317b828cc291782663f81cba75"
+    },
+    {
+      "seed": 341,
+      "filename": "island-341-3677f9ea75f3.json.bin",
+      "bytes": 2525331,
+      "jsonBytes": 16527363,
+      "sha256": "3677f9ea75f362593aac359217c910e30848faf128aa2ba9ef176ce76f756c15",
+      "canonicalSha256": "3f2bf6f25923bee9f836d41f71528b4db01a90a51e23764cc2d23a6606aa4e4e"
+    },
+    {
+      "seed": 351,
+      "filename": "island-351-35a5669e7b39.json.bin",
+      "bytes": 2746393,
+      "jsonBytes": 16526105,
+      "sha256": "35a5669e7b396e4dfba6af12bcde5f52e4dd0a15eb7ab271c61b977ab868512a",
+      "canonicalSha256": "5dcea7fade7a64ef44396d537120a6eb635c15013ba82e1b8edd79c8bd927d9d"
+    },
+    {
+      "seed": 352,
+      "filename": "island-352-b6698b5be6fc.json.bin",
+      "bytes": 2515223,
+      "jsonBytes": 16482360,
+      "sha256": "b6698b5be6fc8356a0ec30d061033ada5ca4d51e4ecaac7f3f545ee30c568087",
+      "canonicalSha256": "808832a6bfd70a39c13cc5eaad520b122a8547b272e3303c6d150c50369f6056"
+    },
+    {
+      "seed": 360,
+      "filename": "island-360-c797748d0d71.json.bin",
+      "bytes": 2529026,
+      "jsonBytes": 16480949,
+      "sha256": "c797748d0d71e77114ef0ca71dcbc7b663192d42357185bd4cc7b0a57069ef02",
+      "canonicalSha256": "68b793ca182e0c04d6e43122d55bf824b99a8909d430b5882ee6d0b433719704"
+    },
+    {
+      "seed": 361,
+      "filename": "island-361-c03f98e7b252.json.bin",
+      "bytes": 2605250,
+      "jsonBytes": 16519118,
+      "sha256": "c03f98e7b252b8057df2277541b6295d88c37291b30e8e9b53f767725f41814a",
+      "canonicalSha256": "9cd30263040b6003d16e343af5fe3fd595752a6f0d90f3162288b36743f06a3f"
+    },
+    {
+      "seed": 369,
+      "filename": "island-369-4bddefbac5cc.json.bin",
+      "bytes": 2628989,
+      "jsonBytes": 16513820,
+      "sha256": "4bddefbac5cc690fe631d8e54e0947d4309d4c10563a7f2c3bbbc28ea0746667",
+      "canonicalSha256": "d0b195193fc92ed64caef46c3511aa449ee2cab056c91b1f2bccd8e06d828b9d"
+    },
+    {
+      "seed": 380,
+      "filename": "island-380-5db574b1f1ed.json.bin",
+      "bytes": 2503800,
+      "jsonBytes": 16461590,
+      "sha256": "5db574b1f1edcf17e10747920ada627faa389abcb4243f8ccb4bbc635454a1a9",
+      "canonicalSha256": "c50dd343eb23b9cf807b9de4e9e989383d72b98a209801855a01fd395cafc0a7"
+    }
+  ],
+  "status": "complete",
+  "updatedAt": "2026-10-28T11:03:48.856Z",
+  "evidenceDirectory": "scratch/mining-223/new-islands-v3",
+  "frozenExecutableSources": 173,
+  "statuses": {
+    "preparation-failure": 79,
+    "invalid-geography": 35,
+    "rival-route-failure": 1,
+    "qualified-export": 12
+  },
+  "changedSinceMeasurement": []
+}

@@ -1,0 +1,22 @@
+{
+  "baseCommit": "4fcbf63ce0b14d227914d7a30c19139fe0baa12e",
+  "branch": "codex/mining-223",
+  "scope": "Owner presentation follow-up; no Core/rule changes",
+  "sources": {
+    "src/fjord-play/FjordEntities.ts": "8a7445e1eb3a5ceccac1b1bfa0477fbac90bb53e1054fe2261823e11466b3ae1",
+    "src/fjord-play/WetLowlandLayer.ts": "78b2d8db3d77bf1293966081155d4f5057e77819892ccde66f91b39c5ce2a7ef",
+    "src/fjord-play/MineWinterLight.ts": "1270a160dd916d6caf54aaa837a64a2db1713aa3a5a3ebe82b4adfdeb9aefd91",
+    "src/world/DirectionalAtmosphere.ts": "ea4c916a5cacc0dda4ce5a26069fd38ecf2e71dcc3f1df935556f400e3d8a8c3",
+    "tests/mining-presentation.test.mjs": "b6bf8ce32260d62729d3e0078caa8925e76a55fb0ba0bb37dc1533b022084ac3",
+    "tests/unified-sunlight.test.mjs": "a834a9e7c982ab467250604e0e4c7522be9ead3f797ab7e014d86305cc253e84"
+  },
+  "tests": {
+    "passed": 49,
+    "failed": 0,
+    "log": "scratch/mining-223/model/visual-v3-tests.log"
+  },
+  "buildLog": "scratch/mining-223/model/build-visuals-v3.log",
+  "frozenMeasurementDifference": [
+    "src/world/DirectionalAtmosphere.ts"
+  ]
+}

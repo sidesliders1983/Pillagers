@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "source": {
+    "file": "bog-ground-imagegen-v1.png",
+    "bytes": 3730803,
+    "sha256": "f094e84fe337ad877e06fab98642d6db41eac3fea0be0ea5a2a03b8337adab43",
+    "width": 1254,
+    "height": 1254,
+    "generation": "Built-in image_gen; owner-approved generated pattern",
+    "prompt": "Seamless top-down Nordic bog base-color texture: interconnected damp chocolate-brown peat, muted olive moss, sedge roots and irregular dark wet depressions. Flat diffuse light, no cast shadows, no isolated discs or regular grid. Readable at 256 pixels; no ore, objects, text or borders."
+  },
+  "runtime": {
+    "file": "bog-ground.webp",
+    "bytes": 19896,
+    "sha256": "6bb0808088d4edc0f6a77b0de0ca5d7954912f2489a9a2d16fcab8dc5574771f",
+    "width": 256,
+    "height": 256,
+    "decodedRGBABytes": 262144
+  }
+}

@@ -202,6 +202,8 @@ body.fjord-play {
     box-sizing: border-box; width: min(690px, calc(100vw - 32px)); padding: 12px 15px;
     border: 1px solid var(--fjord-line); border-top: 2px solid var(--fjord-accent); border-radius: 5px;
     background: var(--fjord-panel); box-shadow: 0 4px 20px #07101240; }
+/* The camera owns drag feedback; native :active can linger after a prevented right-click menu. */
+#fjord-canvas { cursor: grab; }
 .fjord-stage.is-choosing-expedition #fjord-canvas { cursor: crosshair; }
 #expedition-group-shortcuts { position: absolute; bottom: calc(100% + 8px); right: 0;
     display: grid; gap: 6px; justify-items: end; max-height: 144px; overflow: auto; }
@@ -359,3 +361,5 @@ body.fjord-play {
 @media (min-width: 600px) {
     .fjord-equipment-slots { grid-template-columns: 1fr 1fr; }
 }
+
+.fjord-settings .fjord-asset-credits { display: block; margin: 8px 0; color: var(--fjord-muted); font-size: 12px; }

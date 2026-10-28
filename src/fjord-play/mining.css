@@ -1,0 +1,38 @@
+.fjord-mining {
+    position: fixed;
+    right: max(1rem, env(safe-area-inset-right));
+    bottom: max(6rem, calc(env(safe-area-inset-bottom) + 5rem));
+    width: min(26rem, calc(100vw - 2rem));
+    max-height: calc(100dvh - 18rem);
+    box-sizing: border-box;
+    padding: 1rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    z-index: 65;
+    background: #17282af5;
+    color: #eee9d8;
+    border: 1px solid #cfb878;
+    border-radius: .4rem;
+    line-height: 1.5;
+}
+.fjord-mining[hidden] { display: none; }
+.fjord-mining header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.fjord-mining h2 { margin: 0; }
+.fjord-mining button {
+    min-width: 44px;
+    min-height: 44px;
+    padding: .5rem .7rem;
+    margin: .25rem;
+    color: inherit;
+    font: inherit;
+    border: 1px solid #9c9677;
+    border-radius: .25rem;
+    background: #293c3c;
+}
+.fjord-mining button:disabled { opacity: .5; }
+.fjord-mining button:focus-visible { outline: 2px solid #ffe09a; outline-offset: 2px; }
+@media (max-height: 500px) {
+    .fjord-mining { top: 4.5rem; bottom: 4rem; max-height: none; }
+}
+
+.fjord-mining fieldset { padding: 0; margin: 0; border: 0; min-width: 0; }

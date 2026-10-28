@@ -1,3 +1,4 @@
+import { miningWorkerPosition } from '../simulation/Mining';
 import type { HumanProfile } from '../characters/UniversalHumanProfile';
 import { parseFacialShape, type FacialShapeV1 } from '../characters/FacialIdentity';
 import { projectResidentAppearance } from '../characters/ResidentAppearance';
@@ -64,6 +65,7 @@ export interface FjordEntity {
     status: {
         living: boolean;
         expedition?: string;
+        mining?: boolean;
         expeditionWalking?: boolean;
         shipExpedition?: string;
         transportGroup?: string;
@@ -331,20 +333,22 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
             if (!p || p.deathWinter !== null || personaAway(state, id) && !mission)
                 continue;
             const age = personaAge(state, id);
-            const indoorReason = age < 5 ? 'young-child' :
+            const miner = state.mining?.workers[id];
+            const indoorReason = miner ? null : age < 5 ? 'young-child' :
                 state.mechanics && isProvidingCare(state, id) ? 'childcare' : null;
             const key = 'persona:' + id + '@' + (plot ? plot.x + ',' + plot.z : home.id);
+            const miningPoint = miner ? miningWorkerPosition(miner) : undefined;
             const partyPoint = mission ? spatialMemberPosition(mission, id) : undefined;
             const transport = mission?.transport?.phase === 'embarked' ? mission.transport : undefined;
             const deckMembers = transport ? visibleLongshipMembers(mission!.memberIds.filter(member =>
                 state.personas[member]?.deathWinter === null)) : [];
             const aboardAnchor = deckMembers.indexOf(id);
-            const point = transport && aboardAnchor < 0 ? undefined : partyPoint ? { ...partyPoint,
+            const point = miningPoint ? {...miningPoint, rotation: 0, y: surface.surfaceHeightAt(miningPoint.x, miningPoint.z), scale: 1} : transport && aboardAnchor < 0 ? undefined : partyPoint ? { ...partyPoint,
                 y: transport ? world.waterLevel + .15 : surface.surfaceHeightAt(partyPoint.x, partyPoint.z), scale: 1 } : plot && !indoorReason ? allocatePoint(key, { x: plot.x - 3 + index % 5 * 1.8,
                 z: plot.z + plot.halfDepth + 1.5 + Math.floor(index / 5) * 1.8 }) : undefined;
             const growth = .4 + .6 * Math.min(16, Math.max(0, age)) / 16;
             add('persona', id, p.name, 'human', point ? { ...point, scale: growth } : undefined,
-                { living: true, expedition: mission?.id, expeditionWalking: partyPoint?.moving ?? false,
+                { living: true, mining: !!miner, expedition: mission?.id, expeditionWalking: partyPoint?.moving ?? false,
                     aboardShip: transport?.shipId, aboardAnchor: transport ? aboardAnchor : undefined,
                     sex: p.dna.sex, age, indoorReason, occupation: p.occupation,
                     workEligible: state.mechanics ? inspectWork(state, id).reason === null : false,

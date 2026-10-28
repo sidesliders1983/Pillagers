@@ -1,0 +1,936 @@
+{
+  "version": 1,
+  "qaOnly": true,
+  "rules": {
+    "version": 1,
+    "maximumSites": 4,
+    "minimumElevation": 8,
+    "minimumRockExposure": 0.35,
+    "maximumApproachSlope": 0.55,
+    "minimumSeparation": 110,
+    "settlementBuffer": 20,
+    "minimumUnits": 32,
+    "maximumUnits": 96
+  },
+  "mining": {
+    "version": 2,
+    "metresPerTick": 2,
+    "unitsPerYear": 8,
+    "mineCostMaterials": 20,
+    "outcropProductivityBps": 5000
+  },
+  "generatorInputs": {
+    "pnpm-lock.yaml": "b67a5364ad538d19d5265ae57301f1bf11576e432bce48bcb8aa3b9895df9996",
+    "src/config/FjordWaterConfig.ts": "84ac55e55e074e21924d421cd38a87b190132ad2d828255d075720519e51dbb0",
+    "src/config/GroundBlendConfig.ts": "0a5b3425ffeb3a3aed0e75b9ff7bd4f42c6544819ffd5dcd6e61d21bf1ca7139",
+    "src/config/HousingAssets.ts": "0e662c8bcfb83ed2877aee89ede17284128be52fda1cd271248609410c85d3e4",
+    "src/config/ModelTextureAssets.ts": "07179a305c6b1d20c1d5f03dfac73e4efdcad8737a536ac6ee6af850c19d4f05",
+    "src/config/NatureAssets.ts": "00b801b9f21109b5f3281b54e5b271bebc70f426f5397853b90bb2e0c9994d5d",
+    "src/config/PresentationQuality.ts": "de46e365b9bf86acb4e7c5a7e7559fd469bc05554761a51ee8ef30c181e50cbc",
+    "src/config/TerrainAssets.ts": "9ed1cb6b179fdebe1389dc504c28ed76499fd0f1f93950d4fbd90dc4de974680",
+    "src/config/lightingConfig.ts": "90a8db233c0c90aabee248d27c2bef1ff3fec3fe7070b8aac97010d07aea2b86",
+    "src/config/worldConfig.ts": "e3cd430e0aed4f4747537fa49d87001c9427992ce7ba1abbfc655e28f3f819d9",
+    "src/core/AssetManager.ts": "b971feaa38f494ac507520373e43c1adf850f0ad19c79f3cd1b39947348aa446",
+    "src/core/EmissiveSurfaces.ts": "84d0f0a693d46437e0ec2521b1c4459655bce542d6d368531faeb9fa17789f6e",
+    "src/fjord-play/CampaignIsland.ts": "58ee7468a342ccf5af672ceb92da6d5c97ba558a2844c27e8f56a345976cd67f",
+    "src/fjord-play/VillageNature.ts": "dc21173c545ef3e41760e3fe6f56eb02cf3ff0f9bd307835a322ce1a3996bfce",
+    "src/world-generation/CoastDistance.ts": "17140651ce9f6fbd9a6a6e90bc0dc17852e545ba346c9dbe0895dee9a9a48c3a",
+    "src/world-generation/EnvironmentZoning.ts": "595b2fa6bcb09eaa8cd338ea458182d7cbbcf5fedaa19e5b96b31583fc6c11d1",
+    "src/world-generation/GenerateWorld.ts": "08eb9d43ff175a4cd459b22b6151da4b320c287c5f32eb987976055245de9e7e",
+    "src/world-generation/GenerationProfile.ts": "8e1ec235eee0f3c790aecc9c56b59cf438fd7a1d8e202f63bc762b91732f08ac",
+    "src/world-generation/HarborClearance.ts": "aa94e539f26f87e12e035ef330eaafe9f210052882023dfff8ee1ffe569382a3",
+    "src/world-generation/IslandDrainage.ts": "23d942617898a3e2e95aaf72f456cfa2923ac653d128724cc6187e038c9dc1f1",
+    "src/world-generation/IslandDrainageV1.ts": "db8df81b48637512ce0122072e5928c55845a7e0417c074bac34ac296107aa16",
+    "src/world-generation/IslandShape.ts": "9da05b4325c3dce7ec3329dde917a30f8e12a5563130b6bf04dd059d67d2aae4",
+    "src/world-generation/IslandShapeQuality.ts": "cc29d38e123307e71b3e1fb0a76bb1b80e9407dcf8f79f81321341a82d2282f0",
+    "src/world-generation/IslandShapeV1.ts": "b06dd485ccdd82f27ba64f678006cf905cd9d85a0e997e574b0e972b1072c473",
+    "src/world-generation/LandRoutes.ts": "062388811fea5214d08445d986b8f9b72ee3ffb342c015755c0f4e995afdbe66",
+    "src/world-generation/MacroIsland.ts": "4804a88cc9a2a79dd5d661b42faa8c319e19ad3b278b11956becd3f6ab81c5be",
+    "src/world-generation/NatureFootprints.ts": "96f3fbaf8a90414f0ccc7a69725d674600900329ff13e8d05bd739b84f88c37c",
+    "src/world-generation/OreSites.ts": "6aa1852520019696da4fbb04ceaca8f1017204f90873b1a001207d65c65e8a1d",
+    "src/world-generation/PineFootprints.ts": "1bf6253b800cb5f8bd0ebcdb8a4d4ae8bf3ecbaeb98e369dd95025d50b18aba9",
+    "src/world-generation/PlanIslandSettlements.ts": "062ae688044ff372ffed4dc474cef1c8c2b7f2f8ca3d1e966c260ae221c3af5e",
+    "src/world-generation/PlanNature.ts": "101397523f142f362f9dc179c4e107384f9f3eee36d723e329c3926c86597912",
+    "src/world-generation/PlanSettlement.ts": "1ed09e7491de105777d49b0229cc4fedac0d4439fc362f86221d1ee6ac8a5932",
+    "src/world-generation/SettlementCompartments.ts": "c2f844ecc42a11e65dfebef43f3f9f94d97fb433eb0f1d8e904a0c4f8269dc84",
+    "src/world-generation/SettlementSites.ts": "045b92168e2354b1c417a4b4e09cd83f21edb700041a4399eb6070399e5860ee",
+    "src/world-generation/SettlementVisibility.ts": "f1be7a7259398319cd1cb0a18b08ae935368c35c2f8cbd5c20f0af8e21d30122",
+    "src/world-generation/SiteNavigation.ts": "897b6eb741c66dfd58fcda168f58b37bd32fdc5a36943b07185d2decf7bbf4ed",
+    "src/world-generation/TerrainPreview.ts": "e5e8a81d71d4356bbede6cfd4d4f9983dcb935aa76db6a2344a0cc8a17b1df4f",
+    "src/world-generation/TerrainQueries.ts": "8a92207f96388089e440603126c1f029536290eaa9f5ddcd4bf294e38264df54",
+    "src/world-generation/ValidateNavigation.ts": "4bf887833ce8f05026ad83eebbf05aec549b85cb2e9b91fbe5f881f7d382d58c",
+    "src/world-generation/WorldBlueprint.ts": "ad0aba3a126e7a7ece3ba03316bf6d4250a8a940451041172cc5729f10cdc036",
+    "src/world/BuildingPlot.ts": "b2848f022c605712a8dc2b993834debacf2b8b31967f3390680ea9f8145ba444",
+    "src/world/HomeLightGeometry.ts": "792f34f32f141de37a06560877b2a67c98e7f73d4ed9712b126376042fa36bfe",
+    "src/world/HomeLighting.ts": "b3c58a5442aff4ea76a8b1692e1150be257437ea59bb515c9cae75f4f7837ad2",
+    "src/world/SettlementLayout.ts": "cad1c7e988136c674411983777264102dc3674631d743c6fb9d4bdb44868bc5a"
+  },
+  "runnerSha256": "1e30ac45a887382b9abecbf0bc14fd7e5f8447a5f96aceffcf44a70c1ccf5ab8",
+  "note": "All existing current-pool islands were measured; this does not append candidates or activate mining defaults.",
+  "rows": [
+    {
+      "seed": 18,
+      "campaignSeed": 0,
+      "historical": true,
+      "accessibleAroundFoundingPlots": 4,
+      "transportSha256": "c105fc26372b3d12a4946e40a0f4048141d0f92e8f30a557180ed641d2dd30e3",
+      "canonicalSha256": "78a96937455b9fb2c50fa041f5e806c3baf126b9fe860eb004bdac5ef7ba4f79",
+      "status": "mining-suitable",
+      "sites": [
+        {
+          "id": "iron-18-408-424",
+          "ore": "iron",
+          "position": {
+            "x": 27.17492830547199,
+            "y": 8.144193878430778,
+            "z": 6.526965630030055
+          },
+          "approach": {
+            "x": 24,
+            "z": 8
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 80,
+          "rockExposure": 0.7567942338698777,
+          "playerRouteMetres": 157.05382386916227,
+          "foundingRouteMetres": 159.39696961966987
+        },
+        {
+          "id": "iron-18-432-232",
+          "ore": "iron",
+          "position": {
+            "x": -169.96910194385865,
+            "y": 8.18011345966326,
+            "z": 29.106448974928536
+          },
+          "approach": {
+            "x": -168,
+            "z": 32
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 74,
+          "rockExposure": 0.6575691270795221,
+          "playerRouteMetres": 367.7472580451147,
+          "foundingRouteMetres": 370.0904037956225
+        },
+        {
+          "id": "iron-18-392-568",
+          "ore": "iron",
+          "position": {
+            "x": 167.88910951837195,
+            "y": 8.637620162214407,
+            "z": -4.501757112337066
+          },
+          "approach": {
+            "x": 168,
+            "z": -8
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 73,
+          "rockExposure": 0.6514937928482344,
+          "playerRouteMetres": 339.92388155425124,
+          "foundingRouteMetres": 349.23759005323603
+        },
+        {
+          "id": "iron-18-560-320",
+          "ore": "iron",
+          "position": {
+            "x": -77.2946090728018,
+            "y": 9.331758002098098,
+            "z": 157.7794460305965
+          },
+          "approach": {
+            "x": -80,
+            "z": 160
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 65,
+          "rockExposure": 0.5177939306307943,
+          "playerRouteMetres": 215.36248173426424,
+          "foundingRouteMetres": 223.8477631085029
+        }
+      ],
+      "totalUnits": 292,
+      "inspected": 9801,
+      "candidates": 49,
+      "routeChecks": 8,
+      "inaccessible": 4,
+      "reasons": [],
+      "elapsedMs": 966.9508999999998
+    },
+    {
+      "seed": 7,
+      "campaignSeed": 25,
+      "historical": true,
+      "accessibleAroundFoundingPlots": 4,
+      "transportSha256": "794faee6aca8838b3338b4eda13ef7e0c84cad34f75e69b866e11b08f0c39f39",
+      "canonicalSha256": "6bcccb9a871df5cf1b1af4b648aeafdf0fddf189d236446ad1e884f51d36be8c",
+      "status": "mining-suitable",
+      "sites": [
+        {
+          "id": "iron-7-408-392",
+          "ore": "iron",
+          "position": {
+            "x": -8.671074378821004,
+            "y": 8.781911240780284,
+            "z": 11.435063198558362
+          },
+          "approach": {
+            "x": -8,
+            "z": 8
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 85,
+          "rockExposure": 0.8340868012494715,
+          "playerRouteMetres": 302.3675323681476,
+          "foundingRouteMetres": 308.36753236814764
+        },
+        {
+          "id": "iron-7-280-424",
+          "ore": "iron",
+          "position": {
+            "x": 27.080605494138155,
+            "y": 8.701626785039725,
+            "z": -118.33871441663818
+          },
+          "approach": {
+            "x": 24,
+            "z": -120
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 74,
+          "rockExposure": 0.6616971208891129,
+          "playerRouteMetres": 161.1126983722082,
+          "foundingRouteMetres": 167.11269837220823
+        },
+        {
+          "id": "iron-7-384-264",
+          "ore": "iron",
+          "position": {
+            "x": -139.3441001059848,
+            "y": 7.925333345900528,
+            "z": -17.03295424930261
+          },
+          "approach": {
+            "x": -136,
+            "z": -16
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 64,
+          "rockExposure": 0.5139413225334605,
+          "playerRouteMetres": 371.80613254816086,
+          "foundingRouteMetres": 377.8061325481609
+        },
+        {
+          "id": "iron-7-416-576",
+          "ore": "iron",
+          "position": {
+            "x": 173.7964146826149,
+            "y": 9.757385711074301,
+            "z": 13.280770008071253
+          },
+          "approach": {
+            "x": 176,
+            "z": 16
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 61,
+          "rockExposure": 0.4590767267087069,
+          "playerRouteMetres": 171.25483399593918,
+          "foundingRouteMetres": 183.8406204335661
+        }
+      ],
+      "totalUnits": 284,
+      "inspected": 9801,
+      "candidates": 21,
+      "routeChecks": 5,
+      "inaccessible": 1,
+      "reasons": [],
+      "elapsedMs": 585.2183000000005
+    },
+    {
+      "seed": 15,
+      "campaignSeed": 26,
+      "historical": true,
+      "accessibleAroundFoundingPlots": 4,
+      "transportSha256": "7139bc1c465a9e99b38d120e680be5d02b7f93d40e7bc914d94fe7e5534158f4",
+      "canonicalSha256": "8aacf2797a1ab6a2fd9b99cfa29ba4cb0d886410e9c47d10c0c762ced6469867",
+      "status": "mining-suitable",
+      "sites": [
+        {
+          "id": "iron-15-592-248",
+          "ore": "iron",
+          "position": {
+            "x": -148.76792591426548,
+            "y": 8.244734070056028,
+            "z": 193.34301790915958
+          },
+          "approach": {
+            "x": -152,
+            "z": 192
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 80,
+          "rockExposure": 0.7531567560234342,
+          "playerRouteMetres": 427.9898987322343,
+          "foundingRouteMetres": 448.57568516986134
+        },
+        {
+          "id": "iron-15-360-304",
+          "ore": "iron",
+          "position": {
+            "x": -97.55436476854317,
+            "y": 9.561415211618883,
+            "z": -43.13591297173754
+          },
+          "approach": {
+            "x": -96,
+            "z": -40
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 80,
+          "rockExposure": 0.7627627763843855,
+          "playerRouteMetres": 191.5391052434009,
+          "foundingRouteMetres": 212.12489168102798
+        },
+        {
+          "id": "iron-15-600-408",
+          "ore": "iron",
+          "position": {
+            "x": 11.373749648626424,
+            "y": 7.949784708752617,
+            "z": 199.06843502191577
+          },
+          "approach": {
+            "x": 8,
+            "z": 200
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 74,
+          "rockExposure": 0.6629840880791558,
+          "playerRouteMetres": 426.73506473629504,
+          "foundingRouteMetres": 447.32085117392205
+        },
+        {
+          "id": "iron-15-312-112",
+          "ore": "iron",
+          "position": {
+            "x": -284.7250175508159,
+            "y": 8.73862618160124,
+            "z": -86.76529762390444
+          },
+          "approach": {
+            "x": -288,
+            "z": -88
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 68,
+          "rockExposure": 0.568127230775271,
+          "playerRouteMetres": 327.0782104868028,
+          "foundingRouteMetres": 330.5929291125643
+        }
+      ],
+      "totalUnits": 302,
+      "inspected": 9801,
+      "candidates": 60,
+      "routeChecks": 13,
+      "inaccessible": 9,
+      "reasons": [],
+      "elapsedMs": 1893.0707000000011
+    },
+    {
+      "seed": 79,
+      "campaignSeed": 16,
+      "historical": true,
+      "accessibleAroundFoundingPlots": 2,
+      "transportSha256": "8eda20c1b2934c5cc2e4e33d1f96ad91c8515a222ff29a1b23c550abe434b495",
+      "canonicalSha256": "0c1e5a5c229de75c14e3a1527e70fc1b1ddafb64f3410bf821ebd597faf55e95",
+      "status": "mining-suitable",
+      "sites": [
+        {
+          "id": "iron-79-480-280",
+          "ore": "iron",
+          "position": {
+            "x": -117.99348128973598,
+            "y": 31.645191695573732,
+            "z": 82.86773127495593
+          },
+          "approach": {
+            "x": -120,
+            "z": 80
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 60,
+          "rockExposure": 0.4502205521383456,
+          "playerRouteMetres": 354.4579361637702,
+          "foundingRouteMetres": 367.0437226013972
+        },
+        {
+          "id": "iron-79-232-328",
+          "ore": "iron",
+          "position": {
+            "x": -73.31717450307929,
+            "y": 20.32079521143326,
+            "z": -164.75730801209275
+          },
+          "approach": {
+            "x": -72,
+            "z": -168
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 58,
+          "rockExposure": 0.4126687758827662,
+          "playerRouteMetres": 437.4701294725905,
+          "foundingRouteMetres": 438.2985565973367
+        }
+      ],
+      "totalUnits": 118,
+      "inspected": 9801,
+      "candidates": 24,
+      "routeChecks": 9,
+      "inaccessible": 7,
+      "reasons": [],
+      "elapsedMs": 1375.9191999999985
+    },
+    {
+      "seed": 88,
+      "campaignSeed": 1,
+      "historical": true,
+      "accessibleAroundFoundingPlots": 4,
+      "transportSha256": "e8d8e41de2ac17435ef0b5dc7d9d1199aba9ff675960a9cc170be60e4772d2f4",
+      "canonicalSha256": "0934c44a53408e0dfe6b367313c11f97a2fba741409d124f60f7ad45d60e81f8",
+      "status": "mining-suitable",
+      "sites": [
+        {
+          "id": "iron-88-312-272",
+          "ore": "iron",
+          "position": {
+            "x": -130.9701450406035,
+            "y": 9.201584825834578,
+            "z": -86.14844972042931
+          },
+          "approach": {
+            "x": -128,
+            "z": -88
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 77,
+          "rockExposure": 0.7165869487761275,
+          "playerRouteMetres": 117.94112549695424,
+          "foundingRouteMetres": 117.94112549695426
+        },
+        {
+          "id": "iron-88-416-328",
+          "ore": "iron",
+          "position": {
+            "x": -73.72699806109644,
+            "y": 8.092090065864332,
+            "z": 12.95574677515665
+          },
+          "approach": {
+            "x": -72,
+            "z": 16
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 75,
+          "rockExposure": 0.6828769644657224,
+          "playerRouteMetres": 188.16652224137056,
+          "foundingRouteMetres": 196.6518036156092
+        },
+        {
+          "id": "iron-88-424-656",
+          "ore": "iron",
+          "position": {
+            "x": 252.52098561682695,
+            "y": 9.216586240831164,
+            "z": 24.382699518780683
+          },
+          "approach": {
+            "x": 256,
+            "z": 24
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 64,
+          "rockExposure": 0.5102769429397469,
+          "playerRouteMetres": 341.70562748477164,
+          "foundingRouteMetres": 358.39191898578724
+        },
+        {
+          "id": "iron-88-344-144",
+          "ore": "iron",
+          "position": {
+            "x": -253.0056773899907,
+            "y": 9.328583133491634,
+            "z": -54.18781013489559
+          },
+          "approach": {
+            "x": -256,
+            "z": -56
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 62,
+          "rockExposure": 0.48248518444034616,
+          "playerRouteMetres": 260.02438661764,
+          "foundingRouteMetres": 260.0243866176401
+        }
+      ],
+      "totalUnits": 278,
+      "inspected": 9801,
+      "candidates": 38,
+      "routeChecks": 5,
+      "inaccessible": 1,
+      "reasons": [],
+      "elapsedMs": 500.7030999999988
+    },
+    {
+      "seed": 101,
+      "campaignSeed": 5,
+      "historical": true,
+      "accessibleAroundFoundingPlots": 4,
+      "transportSha256": "cbf497fab5fc34e41e647b4d2fdb1dcea07c7b0f2fdcc444c7cce12c07d36fc1",
+      "canonicalSha256": "7de87397eeb199d6f46fa0e6c184ef0e31e6d28d218aba59c9dd51ea0656a208",
+      "status": "mining-suitable",
+      "sites": [
+        {
+          "id": "iron-101-448-312",
+          "ore": "iron",
+          "position": {
+            "x": -88.61359689180493,
+            "y": 9.334652351369815,
+            "z": 51.445794372037795
+          },
+          "approach": {
+            "x": -88,
+            "z": 48
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 89,
+          "rockExposure": 0.9040041911768317,
+          "playerRouteMetres": 173.88225099390868,
+          "foundingRouteMetres": 173.88225099390868
+        },
+        {
+          "id": "iron-101-384-416",
+          "ore": "iron",
+          "position": {
+            "x": 18.823135547954074,
+            "y": 9.63981892701062,
+            "z": -13.931206709727128
+          },
+          "approach": {
+            "x": 16,
+            "z": -16
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 79,
+          "rockExposure": 0.7345861212486273,
+          "playerRouteMetres": 299.4213562373102,
+          "foundingRouteMetres": 299.4213562373102
+        },
+        {
+          "id": "iron-101-600-528",
+          "ore": "iron",
+          "position": {
+            "x": 127.15873999895405,
+            "y": 9.746109621541493,
+            "z": 196.60260664469948
+          },
+          "approach": {
+            "x": 128,
+            "z": 200
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 63,
+          "rockExposure": 0.4889111473900076,
+          "playerRouteMetres": 248.7106781186548,
+          "foundingRouteMetres": 260.7106781186548
+        },
+        {
+          "id": "iron-101-456-672",
+          "ore": "iron",
+          "position": {
+            "x": 269.93124363760035,
+            "y": 33.330225043037295,
+            "z": 53.17683739167739
+          },
+          "approach": {
+            "x": 272,
+            "z": 56
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 57,
+          "rockExposure": 0.3982476806446433,
+          "playerRouteMetres": 468.17366491630827,
+          "foundingRouteMetres": 480.17366491630827
+        }
+      ],
+      "totalUnits": 288,
+      "inspected": 9801,
+      "candidates": 35,
+      "routeChecks": 5,
+      "inaccessible": 1,
+      "reasons": [],
+      "elapsedMs": 765.4951000000001
+    },
+    {
+      "seed": 112,
+      "campaignSeed": 8,
+      "historical": true,
+      "accessibleAroundFoundingPlots": 4,
+      "transportSha256": "2837ddb94ac12fd5ebcf8cc4567f9b48e9ffb5ecef0d37e66c3781a6c1cc1900",
+      "canonicalSha256": "f3368e9c931e700cd7babbbeef2fb6e0b69c679b669627dc5834facfa345128c",
+      "status": "mining-suitable",
+      "sites": [
+        {
+          "id": "iron-112-376-344",
+          "ore": "iron",
+          "position": {
+            "x": -53.619893002124385,
+            "y": 26.38188094859685,
+            "z": -26.566143152410547
+          },
+          "approach": {
+            "x": -56,
+            "z": -24
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 74,
+          "rockExposure": 0.6700466046870834,
+          "playerRouteMetres": 227.19595949289385,
+          "foundingRouteMetres": 231.33809511662483
+        },
+        {
+          "id": "iron-112-304-456",
+          "ore": "iron",
+          "position": {
+            "x": 53.69089678305013,
+            "y": 9.040824671863,
+            "z": -98.63021716469795
+          },
+          "approach": {
+            "x": 56,
+            "z": -96
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 75,
+          "rockExposure": 0.680325268804873,
+          "playerRouteMetres": 299.1959594928938,
+          "foundingRouteMetres": 299.19595949289385
+        },
+        {
+          "id": "iron-112-624-512",
+          "ore": "iron",
+          "position": {
+            "x": 111.95979669078955,
+            "y": 9.933096661112408,
+            "z": 220.50023090848433
+          },
+          "approach": {
+            "x": 112,
+            "z": 224
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 63,
+          "rockExposure": 0.49587057769347564,
+          "playerRouteMetres": 144.8528137423856,
+          "foundingRouteMetres": 160.367532368147
+        },
+        {
+          "id": "iron-112-528-648",
+          "ore": "iron",
+          "position": {
+            "x": 247.04323965006037,
+            "y": 9.029305734657836,
+            "z": 124.6333088005011
+          },
+          "approach": {
+            "x": 248,
+            "z": 128
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 61,
+          "rockExposure": 0.4622830657508457,
+          "playerRouteMetres": 323.5462479183383,
+          "foundingRouteMetres": 339.0609665440997
+        }
+      ],
+      "totalUnits": 273,
+      "inspected": 9801,
+      "candidates": 55,
+      "routeChecks": 12,
+      "inaccessible": 8,
+      "reasons": [],
+      "elapsedMs": 1148.7281999999977
+    },
+    {
+      "seed": 168,
+      "campaignSeed": 9,
+      "historical": true,
+      "accessibleAroundFoundingPlots": 4,
+      "transportSha256": "4d7db82c160cde1be150ea3347afe876a71ceedaa78f9827932de982090cc8de",
+      "canonicalSha256": "a71a1906e3afe9618213865cec9ec3a8229be3d06f2e5a09897d7f438898d7a9",
+      "status": "mining-suitable",
+      "sites": [
+        {
+          "id": "iron-168-632-352",
+          "ore": "iron",
+          "position": {
+            "x": -44.50816574816317,
+            "y": 8.76946973145711,
+            "z": 231.76105741756825
+          },
+          "approach": {
+            "x": -48,
+            "z": 232
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 80,
+          "rockExposure": 0.7607208602551468,
+          "playerRouteMetres": 241.19595949289356,
+          "foundingRouteMetres": 249.6812408671322
+        },
+        {
+          "id": "iron-168-224-336",
+          "ore": "iron",
+          "position": {
+            "x": -61.69301016322494,
+            "y": 9.636347486507184,
+            "z": -178.63207102735024
+          },
+          "approach": {
+            "x": -64,
+            "z": -176
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 73,
+          "rockExposure": 0.6452172855583123,
+          "playerRouteMetres": 408.21529547665125,
+          "foundingRouteMetres": 408.21529547665125
+        },
+        {
+          "id": "iron-168-488-328",
+          "ore": "iron",
+          "position": {
+            "x": -75.286235141216,
+            "y": 19.318600027047058,
+            "z": 86.79556710579747
+          },
+          "approach": {
+            "x": -72,
+            "z": 88
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 66,
+          "rockExposure": 0.5427549993422544,
+          "playerRouteMetres": 114.97056274847711,
+          "foundingRouteMetres": 120.97056274847711
+        },
+        {
+          "id": "iron-168-376-592",
+          "ore": "iron",
+          "position": {
+            "x": 190.2951644128686,
+            "y": 8.849372169072765,
+            "z": -20.94328025150321
+          },
+          "approach": {
+            "x": 192,
+            "z": -24
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 66,
+          "rockExposure": 0.5398788967298557,
+          "playerRouteMetres": 341.722871427475,
+          "foundingRouteMetres": 348.5512985522213
+        }
+      ],
+      "totalUnits": 285,
+      "inspected": 9801,
+      "candidates": 42,
+      "routeChecks": 5,
+      "inaccessible": 1,
+      "reasons": [],
+      "elapsedMs": 838.6681000000026
+    },
+    {
+      "seed": 195,
+      "campaignSeed": 4,
+      "historical": true,
+      "accessibleAroundFoundingPlots": 4,
+      "transportSha256": "8acee4c358053b8a237c8316550a9f453a7a31c56c8720bb5b37a2125fe94869",
+      "canonicalSha256": "e238e4407b455ba65b4899b86857c5a6ce6c4e9cdd50610a40ade7c61ad22a91",
+      "status": "mining-suitable",
+      "sites": [
+        {
+          "id": "iron-195-312-480",
+          "ore": "iron",
+          "position": {
+            "x": 83.3963352830094,
+            "y": 8.296456033710582,
+            "z": -87.1544784772784
+          },
+          "approach": {
+            "x": 80,
+            "z": -88
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 83,
+          "rockExposure": 0.7992257061724877,
+          "playerRouteMetres": 180.24978336205578,
+          "foundingRouteMetres": 196.65180361560925
+        },
+        {
+          "id": "iron-195-264-368",
+          "ore": "iron",
+          "position": {
+            "x": -34.96269514216479,
+            "y": 8.414297310166285,
+            "z": -137.86344774399316
+          },
+          "approach": {
+            "x": -32,
+            "z": -136
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 69,
+          "rockExposure": 0.5854655582858501,
+          "playerRouteMetres": 255.58787847868072,
+          "foundingRouteMetres": 271.9898987322343
+        },
+        {
+          "id": "iron-195-600-504",
+          "ore": "iron",
+          "position": {
+            "x": 106.88786456290265,
+            "y": 9.08733892098422,
+            "z": 198.02256775935783
+          },
+          "approach": {
+            "x": 104,
+            "z": 200
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 62,
+          "rockExposure": 0.47296111327045015,
+          "playerRouteMetres": 202.3259018078047,
+          "foundingRouteMetres": 223.6396103067895
+        },
+        {
+          "id": "iron-195-448-664",
+          "ore": "iron",
+          "position": {
+            "x": 261.41005094188995,
+            "y": 17.33775589638634,
+            "z": 45.64581991419624
+          },
+          "approach": {
+            "x": 264,
+            "z": 48
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 59,
+          "rockExposure": 0.4348637823688269,
+          "playerRouteMetres": 161.0121933088198,
+          "foundingRouteMetres": 171.7401153701777
+        }
+      ],
+      "totalUnits": 273,
+      "inspected": 9801,
+      "candidates": 47,
+      "routeChecks": 9,
+      "inaccessible": 5,
+      "reasons": [],
+      "elapsedMs": 781.4866000000002
+    },
+    {
+      "seed": 227,
+      "campaignSeed": 2,
+      "historical": true,
+      "accessibleAroundFoundingPlots": 4,
+      "transportSha256": "d835cd8694acabee4ac9171b2444339a6b1bc152e89584dd83e0088a1be469c9",
+      "canonicalSha256": "ff98e603c4e8221abf3636ade473ee050ee96390ec5ef75c22487a74df5e1deb",
+      "status": "mining-suitable",
+      "sites": [
+        {
+          "id": "iron-227-592-344",
+          "ore": "iron",
+          "position": {
+            "x": -53.67654257898252,
+            "y": 9.551250834571913,
+            "z": 189.38245427686186
+          },
+          "approach": {
+            "x": -56,
+            "z": 192
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 68,
+          "rockExposure": 0.5713995464915785,
+          "playerRouteMetres": 365.1787155501908,
+          "foundingRouteMetres": 380.6934341759523
+        },
+        {
+          "id": "iron-227-472-336",
+          "ore": "iron",
+          "position": {
+            "x": -65.52214258559218,
+            "y": 27.04175470556715,
+            "z": 68.84832077312319
+          },
+          "approach": {
+            "x": -64,
+            "z": 72
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 63,
+          "rockExposure": 0.4869776686723297,
+          "playerRouteMetres": 339.06096654409987,
+          "foundingRouteMetres": 341.4041122946075
+        },
+        {
+          "id": "iron-227-328-472",
+          "ore": "iron",
+          "position": {
+            "x": 68.51741272239488,
+            "y": 17.39095268207538,
+            "z": -72.34869163147822
+          },
+          "approach": {
+            "x": 72,
+            "z": -72
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 56,
+          "rockExposure": 0.38515722457560353,
+          "playerRouteMetres": 89.3553390593273,
+          "foundingRouteMetres": 91.69848480983495
+        },
+        {
+          "id": "iron-227-584-480",
+          "ore": "iron",
+          "position": {
+            "x": 78.63180596681296,
+            "y": 10.423497354874552,
+            "z": 180.77850266373673
+          },
+          "approach": {
+            "x": 80,
+            "z": 184
+          },
+          "appearance": "rock-outcrop",
+          "initialUnits": 57,
+          "rockExposure": 0.4036614879027324,
+          "playerRouteMetres": 210.36753236814724,
+          "foundingRouteMetres": 225.88225099390874
+        }
+      ],
+      "totalUnits": 244,
+      "inspected": 9801,
+      "candidates": 24,
+      "routeChecks": 7,
+      "inaccessible": 3,
+      "reasons": [],
+      "elapsedMs": 1236.3746000000028
+    }
+  ]
+}

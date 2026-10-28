@@ -1,0 +1,34 @@
+{
+  "seed": 5,
+  "island": 101,
+  "siteId": "bog-iron-wet-101-14763",
+  "foodCharged": 8,
+  "commands": [
+    {
+      "type": "CreateExplorationGroup"
+    },
+    {
+      "type": "SetExplorationMember",
+      "groupId": "group-1",
+      "personaId": "founder-1",
+      "included": true
+    },
+    {
+      "type": "StartExpedition",
+      "groupId": "group-1"
+    },
+    {
+      "type": "ExploreArea",
+      "groupId": "group-1",
+      "target": {
+        "x": -40,
+        "z": -108
+      }
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 179
+    }
+  ],
+  "note": "New v2 Mining world, actual paid scout. Wetland patches are geographical; only a subset contains finite iron."
+}

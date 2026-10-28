@@ -1,3 +1,4 @@
+import { miningBusy } from './Mining';
 import { pillageEquipment, equipmentResult, releaseEquipment, validatePillageEquipment,
     type PillageEquipment, type EquipmentResult } from './Smithery';
 import { validateIslandClans, type IslandClanLink } from './IslandClans';
@@ -96,7 +97,7 @@ export const absoluteTick=(state:SimulationState)=>state.time.winter*state.ticks
 export function groupMission(state:SimulationState,groupId:string){return spatialGroupMission(state,groupId)??Object.values(state.world?.missions??{}).find(m=>m.groupId===groupId&&m.status==='Away');}
 export function personaAway(state:SimulationState,id:string):boolean{return Object.values(state.world?.spatial?.missions??{}).some(m=>m.status!=='Returned'&&m.status!=='Prepared'&&m.memberIds.includes(id))||Object.values(state.world?.missions??{}).some(m=>m.status==='Away'&&m.memberIds.includes(id));}
 export function expeditionEligible(state:SimulationState,id:string,groupId?:string):boolean {
- const p=state.personas[id];return !!p&&p.deathWinter===null&&personaAge(state,id)>=(state.mechanics?.config.workAge??16)&&!isProvidingCare(state,id)&&!personaAway(state,id)&&!Object.values(state.world?.groups??{}).some(g=>g.id!==groupId&&g.memberIds.includes(id));
+ const p=state.personas[id];return !!p&&p.deathWinter===null&&personaAge(state,id)>=(state.mechanics?.config.workAge??16)&&!isProvidingCare(state,id)&&!personaAway(state,id)&&!miningBusy(state,id)&&!Object.values(state.world?.groups??{}).some(g=>g.id!==groupId&&g.memberIds.includes(id));
 }
 export function missionOffer(state:SimulationState,groupId:string,regionId:string,type:MissionType,priorities:Cargo[]=[]){
  const w=state.world,g=w?.groups[groupId],r=w?.regions[regionId];

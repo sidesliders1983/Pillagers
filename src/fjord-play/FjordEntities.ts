@@ -1,3 +1,4 @@
+import { miningWorkerPosition, type MiningWorker } from '../simulation/Mining';
 import { spatialMemberPosition, type SpatialMission } from '../simulation/SpatialExpeditions';
 import type { SimulationState } from '../simulation/SimulationCore';
 import { createBlueprintSurface, type TerrainSurface } from '../world-generation/TerrainQueries';
@@ -82,6 +83,43 @@ export class FjordEntities {
         const point = spatialMemberPosition({ ...frame.mission, travelled }, personaId ?? frame.mission.memberIds[0]);
         return { ...point, y: frame.mission.transport?.phase === 'embarked' ? this.expeditionWorld!.waterLevel + .15 :
             this.expeditionSurface!.surfaceHeightAt(point.x, point.z) };
+    }
+    private miningSurface?: TerrainSurface;
+    private miningHeight?: (x: number,z: number,natural: number) => number;
+    private miningWorld?: WorldBlueprint;
+    private miningFrames = new Map<string, {worker: MiningWorker; from: number; elapsed: number; duration: number; inside: boolean; face: {x: number; z: number}}>();
+    prepareMining(state: SimulationState, world: WorldBlueprint, interval = .5, height?: (x: number,z: number,natural: number) => number) {
+        this.miningHeight = height;
+        if (this.miningWorld !== world) {
+            this.miningWorld = world; this.miningSurface = createBlueprintSurface(world); this.miningFrames.clear();
+        }
+        const workers = state.mining?.workers ?? {};
+        for (const id of this.miningFrames.keys()) if (!workers[id]) this.miningFrames.delete(id);
+        for (const [id, worker] of Object.entries(workers)) {
+            const previous = this.miningFrames.get(id);
+            const site = state.mining!.sites.find(s => s.id === worker.siteId)!;
+            const inside = !!site.mine && worker.phase === 'Working';
+            if (previous?.worker === worker && previous.inside === inside) continue;
+            const ratio = previous ? Math.min(1, previous.elapsed / previous.duration) : 1;
+            const from = previous ? previous.from + (previous.worker.travelled - previous.from) * ratio : worker.travelled;
+            const face = site.position;
+            this.miningFrames.set(id, {worker, from, inside, elapsed: 0,
+                duration: Math.min(1, Math.max(interval, previous?.elapsed ?? interval)), face});
+        }
+    }
+    private miningPose(id: string) {
+        const frame = this.miningFrames.get(id);
+        if (!frame) return;
+        const distance = frame.from + (frame.worker.travelled - frame.from) * Math.min(1, frame.elapsed / frame.duration);
+        const point = miningWorkerPosition({...frame.worker, travelled: distance});
+        const next = frame.worker.phase === 'Working' ? frame.face : miningWorkerPosition({...frame.worker,
+            travelled: Math.max(0, Math.min(frame.worker.distance, distance + (frame.worker.phase === 'Returning' ? -.1 : .1)))});
+        const natural = this.miningSurface!.surfaceHeightAt(point.x,point.z);
+        const inside = frame.inside && distance >= frame.worker.distance - 1e-4;
+        return {...point, inside, y: this.miningHeight?.(point.x,point.z,natural) ?? natural,
+            rotation: Math.atan2(next.x-point.x, next.z-point.z),
+            moving: !frame.worker.blockedReason && frame.worker.phase !== 'Working',
+            working: !frame.worker.blockedReason && frame.worker.phase === 'Working'};
     }
     private disposed = false;
     private seasonProgress: number | null = null;
@@ -272,8 +310,9 @@ export class FjordEntities {
             }
             const p = entity.transform!;
             entry.model.name = entity.selectionKey;
-            const display = entity.status.shipExpedition ? this.expeditionPose(entity.status.shipExpedition) ?? p :
-                entity.status.expedition ? this.expeditionPose(entity.status.expedition, entity.id) ?? p : p;
+            const miningDisplay = entity.status.mining ? this.miningPose(entity.id) : undefined;
+            const display = miningDisplay ?? (entity.status.shipExpedition ? this.expeditionPose(entity.status.shipExpedition) ?? p :
+                entity.status.expedition ? this.expeditionPose(entity.status.expedition, entity.id) ?? p : p);
             if (!entity.status.aboardShip || entry.model.parent === this.root) {
                 entry.model.position.set(display.x, display.y, display.z);
                 entry.model.rotation.set(0, display.rotation, 0);
@@ -284,6 +323,10 @@ export class FjordEntities {
                 transitionOld?.season?.dispose();
                 if (transitionOld) this.remove(transitionOld.model);
                 return;
+            }
+            if (entity.status.mining || entry.model.userData.insideMine) {
+                entry.model.userData.insideMine = miningDisplay?.inside ?? false;
+                entry.model.visible = !entry.model.userData.insideMine;
             }
             entry.homeLight?.setInhabited(entity.status.inhabited === true);
             this.models.setEmbarked?.(entry.model, !!entity.status.aboardShip);
@@ -365,7 +408,7 @@ export class FjordEntities {
         const clip = frame.phase === 'gathering' ? 'Storytelling_Gesture' : 'Gathering_Applause';
         for (const key of keys) {
             const model = this.entries.get(key)?.model;
-            if (!model?.visible || model.userData.canonical?.expedition) continue;
+            if (!model?.visible || (model.userData.canonical?.expedition || model.userData.canonical?.mining)) continue;
             void this.models.playCulture(model, bank, clip, { eventId: frame.id, visible: frame.visible });
         }
     }
@@ -375,7 +418,7 @@ export class FjordEntities {
             const facts = model?.userData.canonical;
             const human = model && this.models.weddingResident(model);
             return model?.visible && facts?.kind === 'persona' && facts.living !== false &&
-                !facts.expedition && !facts.aboardShip && human ? [{ id: facts.id as string, human }] : [];
+                !facts.expedition && !facts.mining && !facts.aboardShip && human ? [{ id: facts.id as string, human }] : [];
         });
     }
     residentForPortrait(input: PortraitRequest) {
@@ -484,6 +527,7 @@ export class FjordEntities {
             death.presentation.advance(delta, running);
             if (death.presentation.inspect().complete) this.finishDeath(key);
         }
+        for (const frame of this.miningFrames.values()) frame.elapsed += running ? delta : 0;
         for (const frame of this.expeditionFrames.values()) frame.elapsed += running ? delta : 0;
         for (const { model } of this.entries.values()) {
             const facts = model.userData.canonical;
@@ -503,6 +547,18 @@ export class FjordEntities {
                 }
                 continue;
             }
+            if (facts?.mining) {
+                const pose = this.miningPose(facts.id);
+                if (pose) {
+                    entry.model.position.set(pose.x, pose.y, pose.z);
+                    entry.model.rotation.set(0, pose.rotation, 0);
+                    entry.model.userData.insideMine = pose.inside;
+                    entry.model.visible = !pose.inside;
+                    if (pose.inside) continue;
+                    this.models.animate(entry.model, pose.moving ? 'Run' : pose.working ? 'Attack' : 'Idle',
+                        pose.moving ? this.models.pace(entry.model, 'Run') : 1, running ? delta : 0);
+                }
+            }
             if (facts?.expedition) {
                 const pose = this.expeditionPose(facts.expedition, facts.id);
                 if (pose && !facts.aboardShip) {
@@ -516,7 +572,7 @@ export class FjordEntities {
         for (const agent of motion.inspect()) {
             const model = this.entries.get(agent.key)?.model;
             // A stale autonomous frame must never move a passenger or an expedition member.
-            if (!model || model.userData.canonical?.aboardShip || model.userData.canonical?.expedition) continue;
+            if (!model || model.userData.canonical?.aboardShip || (model.userData.canonical?.expedition || model.userData.canonical?.mining)) continue;
             model.position.set(agent.x, agent.y, agent.z);
             model.rotation.y = agent.rotation;
             this.models.animate(model, agent.state, agent.speed, running ? delta : 0);
@@ -552,7 +608,7 @@ export class FjordEntities {
     productionAnchors() {
         return [...this.entries].flatMap(([key, entry]) => {
             const facts = entry.model.userData.canonical;
-            if (facts.kind !== 'persona' && facts.kind !== 'cattle') return [];
+            if (!entry.model.visible || facts.kind !== 'persona' && facts.kind !== 'cattle') return [];
             return [{ id: facts.id, kind: facts.kind, bounds: this.bounds(key)! }];
         });
     }
@@ -574,6 +630,7 @@ export class FjordEntities {
         this.root.updateMatrixWorld(true);
         return [...this.entries].map(([key, entry]) => ({
             key, renderId: entry.model.uuid, ...entry.model.userData.canonical,
+            visible: entry.model.visible, insideMine: entry.model.userData.insideMine === true,
             position: entry.model.getWorldPosition(new Vector3()).toArray(),
             asset: entry.model.userData.asset, scale: entry.model.scale.toArray(),
             bounds: this.bounds(key),

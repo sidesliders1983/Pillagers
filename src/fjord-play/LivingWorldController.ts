@@ -154,7 +154,7 @@ export class LivingWorldController {
             participants.set(key, person);
             const actor = this.agents.get(key);
             if (!actor || actor.kind !== 'persona' || actor.entity.status.indoorReason ||
-                actor.entity.status.expedition || actor.entity.status.living === false) continue;
+                (actor.entity.status.expedition || actor.entity.status.mining) || actor.entity.status.living === false) continue;
             person.origin = { x: actor.x, z: actor.z };
             person.signature = actor.signature;
             // A replaced return is cancelled, not nested into an unbounded stack of old intentions.
@@ -274,7 +274,7 @@ export class LivingWorldController {
         person.suspended = null;
         this.cancelVisit(actor);
         if (actor.signature !== person.signature || actor.entity.status.indoorReason ||
-            actor.entity.status.expedition || actor.entity.status.living === false || !path) return;
+            (actor.entity.status.expedition || actor.entity.status.mining) || actor.entity.status.living === false || !path) return;
         this.gatheringReturns.set(actor.key, { origin: person.origin, signature: actor.signature,
             suspended, remaining: this.visitBudget(actor, path) });
         actor.path = path;
@@ -288,7 +288,7 @@ export class LivingWorldController {
         }
         this.parcels = entities.filter(e => e.plot);
         this.ground = ground;
-        const active = entities.filter(e => e.transform && !e.status.expedition && (e.kind === 'persona' || e.kind === 'cattle'));
+        const active = entities.filter(e => e.transform && !e.status.expedition && !e.status.mining && (e.kind === 'persona' || e.kind === 'cattle'));
         // These are the same plot/anchor/path clearances applied by the scene's nature reconciler.
         const cleared = [{ ...this.campfire.transform, halfWidth: this.campfire.clearingRadius,
             halfDepth: this.campfire.clearingRadius }, ...this.parcels.map(e => e.plot!), ...active.map(e => ({ ...e.transform!, halfWidth: 1, halfDepth: 1 })),
@@ -386,7 +386,7 @@ export class LivingWorldController {
         }
         for (const person of this.gathering?.participants.values() ?? []) {
             const actor = this.agents.get(person.key);
-            if (!actor || actor.entity.status.indoorReason || actor.entity.status.expedition ||
+            if (!actor || actor.entity.status.indoorReason || (actor.entity.status.expedition || actor.entity.status.mining) ||
                 actor.entity.status.living === false) {
                 person.dropped = true;
                 person.arrived = false;
@@ -396,7 +396,7 @@ export class LivingWorldController {
         for (const [key, returning] of this.gatheringReturns) {
             const actor = this.agents.get(key);
             if (!actor || actor.signature !== returning.signature || actor.entity.status.indoorReason ||
-                actor.entity.status.expedition || actor.entity.status.living === false) {
+                (actor.entity.status.expedition || actor.entity.status.mining) || actor.entity.status.living === false) {
                 this.gatheringReturns.delete(key);
                 if (actor) this.cancelVisit(actor);
             }

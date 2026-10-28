@@ -1,0 +1,15 @@
+{
+  "command": {
+    "type": "AdvanceTicks",
+    "ticks": 371
+  },
+  "before": {
+    "winter": 804,
+    "tick": 630
+  },
+  "after": {
+    "winter": 805,
+    "tick": 1
+  },
+  "note": "Same genuinely funded developed mine; ordinary Core ticks advance into Winter. No stocks, wildlife or histories are injected."
+}

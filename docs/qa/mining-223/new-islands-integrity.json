@@ -1,0 +1,112 @@
+{
+  "status": "verified",
+  "protocolSha256": "06e99adfa99b518d4cb447864e75f73270f470921fdb998d6ce71c080fe2e5e5",
+  "baseCommit": "4fcbf63ce0b14d227914d7a30c19139fe0baa12e",
+  "frozenExecutableSources": 173,
+  "tested": 127,
+  "statuses": {
+    "preparation-failure": 79,
+    "invalid-geography": 35,
+    "rival-route-failure": 1,
+    "qualified-export": 12
+  },
+  "changedSinceMeasurement": [],
+  "exports": [
+    {
+      "seed": 296,
+      "bytes": 2809707,
+      "sites": 4,
+      "initialUnits": 245,
+      "foodCharged": 8,
+      "provenOre": 1
+    },
+    {
+      "seed": 299,
+      "bytes": 2783106,
+      "sites": 3,
+      "initialUnits": 174,
+      "foodCharged": 8,
+      "provenOre": 2
+    },
+    {
+      "seed": 306,
+      "bytes": 2793023,
+      "sites": 4,
+      "initialUnits": 274,
+      "foodCharged": 8,
+      "provenOre": 1
+    },
+    {
+      "seed": 327,
+      "bytes": 2512718,
+      "sites": 1,
+      "initialUnits": 86,
+      "foodCharged": 8,
+      "provenOre": 2
+    },
+    {
+      "seed": 329,
+      "bytes": 2687227,
+      "sites": 2,
+      "initialUnits": 122,
+      "foodCharged": 8,
+      "provenOre": 1
+    },
+    {
+      "seed": 341,
+      "bytes": 2525331,
+      "sites": 4,
+      "initialUnits": 277,
+      "foodCharged": 8,
+      "provenOre": 2
+    },
+    {
+      "seed": 351,
+      "bytes": 2746393,
+      "sites": 4,
+      "initialUnits": 276,
+      "foodCharged": 8,
+      "provenOre": 1
+    },
+    {
+      "seed": 352,
+      "bytes": 2515223,
+      "sites": 4,
+      "initialUnits": 246,
+      "foodCharged": 8,
+      "provenOre": 2
+    },
+    {
+      "seed": 360,
+      "bytes": 2529026,
+      "sites": 2,
+      "initialUnits": 145,
+      "foodCharged": 8,
+      "provenOre": 2
+    },
+    {
+      "seed": 361,
+      "bytes": 2605250,
+      "sites": 4,
+      "initialUnits": 258,
+      "foodCharged": 8,
+      "provenOre": 1
+    },
+    {
+      "seed": 369,
+      "bytes": 2628989,
+      "sites": 4,
+      "initialUnits": 232,
+      "foodCharged": 8,
+      "provenOre": 1
+    },
+    {
+      "seed": 380,
+      "bytes": 2503800,
+      "sites": 4,
+      "initialUnits": 278,
+      "foodCharged": 8,
+      "provenOre": 1
+    }
+  ]
+}

@@ -123,7 +123,7 @@ export function populationEngine(candidate = 'baseline15', { detailLimit = 50000
                 "if(!canPartner(state,aId,bId))continue;const partnered=roll(state.mechanics!.config.partnershipChanceBps);" +
                 "study.record(state,'partnership',{aId,bId,formed:partnered});if(!partnered)continue;");
             const conditions = [
-                ['personaAway(state,motherId)', 'away'], ['unavailable.has(motherId)', 'outgoing-proxy-care'],
+                ['personaAway(state,motherId)', 'away'], ['miningBusy(state,motherId)', 'mining-away'], ['unavailable.has(motherId)', 'outgoing-proxy-care'],
                 ['isCaregiver(state,motherId)', 'proxy-care'], ['mother.deathWinter!==null', 'dead'],
                 ["mother.dna.sex!=='female'", 'sex'], ['age<config.fertilityMinAge', 'too-young'],
                 ['age>config.fertilityMaxAge', 'too-old'], ['mother.partnerId===null', 'no-partner'],
@@ -131,8 +131,8 @@ export function populationEngine(candidate = 'baseline15', { detailLimit = 50000
             const before = 'if(' + conditions.map(([condition]) => condition).join('||') + ')continue;';
             const after = conditions.map(([condition, reason]) => `if(${condition}){study.fertility(state,motherId,unavailable,'${reason}');continue;}`).join('\n');
             source = replace(source, before, after);
-            source = replace(source, "if(personaAway(state,father.id)||father.deathWinter!==null||father.dna.sex!=='male')continue;",
-                "if(personaAway(state,father.id)||father.deathWinter!==null||father.dna.sex!=='male'){study.fertility(state,motherId,unavailable,'partner-unavailable');continue;}");
+            source = replace(source, "if(personaAway(state,father.id)||miningBusy(state,father.id)||father.deathWinter!==null||father.dna.sex!=='male')continue;",
+                "if(personaAway(state,father.id)||miningBusy(state,father.id)||father.deathWinter!==null||father.dna.sex!=='male'){study.fertility(state,motherId,unavailable,'partner-unavailable');continue;}");
             source = replace(source, 'if(info.lastBirthWinter!==null&&state.time.winter-info.lastBirthWinter<=config.birthCooldownWinters)continue;',
                 "if(info.lastBirthWinter!==null&&state.time.winter-info.lastBirthWinter<=config.birthCooldownWinters){study.fertility(state,motherId,unavailable,'cooldown');continue;}");
             source = replace(source, 'if(state.stocks.food<foodNeed()||!roll(config.fertilityChanceBps))continue;',

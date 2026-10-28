@@ -11,7 +11,7 @@ import { inspectRivalSettlement, projectRivalSettlement, type ObservedRivalSettl
 import { assertDiscoveryWorld } from '../simulation/ClanDiscovery';
 import { freezeReadView } from '../gameplay-lab/ReadView';
 import type { SimulationState } from '../simulation/SimulationCore';
-import { createCampaignIsland, campaignIslandPlan, islandRecipe, type CampaignGeography } from './CampaignIsland';
+import { createCampaignIsland, campaignIslandPlan, prepareMiningIsland, islandRecipe, type CampaignGeography } from './CampaignIsland';
 import { GameplaySession } from '../gameplay-lab/GameplaySession';
 import { generateWorld } from '../world-generation/GenerateWorld';
 import { parseWorld } from '../world-generation/WorldSave';
@@ -140,6 +140,15 @@ export class FjordCampaign {
         }, () => Object.fromEntries(Object.keys(this.session.readSnapshot().landing?.longships ?? {})
             .map(id => [id, longshipBerth(this.layout.mooring)])));
     }
+    /** Prepare new-campaign deposits before discovery/founding; historical worlds stay unchanged. */
+    prepareMining(): void {
+        const state = this.session.readSnapshot(), founding = foundingTime(state.foundingPhase);
+        if (!this.fresh || state.discovery || state.time.winter !== founding.winter || state.time.tick !== founding.tick)
+            throw new Error('Choose Mining when creating a new island campaign.');
+        this.blueprint = prepareMiningIsland(this.blueprint);
+        this.layout = createFjordLayout(this.blueprint, undefined, state.seed);
+        this.bindExpeditionWorld();
+    }
     enableDiscovery(): void {
         if (!campaignIslandPlan(this.blueprint)) throw new Error('Discovery requires a physical island campaign.');
         const state = this.session.readSnapshot(), worldId = geographyIdentity(this.blueprint);
@@ -190,7 +199,7 @@ export class FjordCampaign {
         const state = this.session.readSnapshot();
         const island = campaignIslandPlan(this.blueprint)?.recipe;
         return { bridgeVersion: island ? 2 : 1, campaign: state,
-            ...(island ? { island } : { blueprint: this.blueprint }), layout: this.layout, selection: this.selection,
+            ...(island ? { island, ...(this.blueprint.oreSites ? {oreSites: this.blueprint.oreSites} : {}) } : { blueprint: this.blueprint }), layout: this.layout, selection: this.selection,
             ...(this.rivalLayout ? { rivalLayout: this.rivalLayout } : {}),
             narrative: this.session.book.save(state), attention: this.attentionSave(),
             ...(state.culture ? { weddingInvitations: this.weddingInvitationSave() } : {}),
@@ -218,9 +227,10 @@ export class FjordCampaign {
             proposal.attentionHistory().retained().map(record => ({ ...record, read: attentionRead(attention, record.eventId) })));
         const seed = proposal.snapshot().seed;
         if (saved.bridgeVersion === 2 && !saved.island) throw new Error('Missing campaign island recipe.');
-        const blueprint = saved.bridgeVersion === 2 ? createCampaignIsland(seed, saved.island) :
+        const baseBlueprint = saved.bridgeVersion === 2 ? createCampaignIsland(seed, saved.island) :
             extended ? parseWorld(JSON.stringify({ schemaVersion: 1, blueprint: saved.blueprint })) :
                 seed === this.layout?.seed ? this.blueprint : this.createGeography(seed);
+        const blueprint = saved.oreSites ? prepareMiningIsland(baseBlueprint, saved.oreSites) : baseBlueprint;
         if (!campaignIslandPlan(blueprint) && blueprint.config.seed !== seed)
             throw new Error('Campaign and geography seed identities do not match.');
         let layout = extended ? saved.layout as FjordLayout :

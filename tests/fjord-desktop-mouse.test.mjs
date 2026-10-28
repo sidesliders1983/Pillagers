@@ -6,6 +6,7 @@ import { load } from './load-source.mjs';
 const { RTSCameraController } = load('../src/camera/RTSCameraController.ts');
 
 class PointerCanvas extends EventTarget {
+    style = {cursor: ''};
     setPointerCapture() {}
     getBoundingClientRect() {
         return { left: 0, top: 0, width: 800, height: 600 };
@@ -118,4 +119,37 @@ test('touch tap on empty ground still follows existing navigation fallback', () 
     } finally {
         close();
     }
+});
+
+
+test('mouse hover identifies selectable targets, yields to dragging and clears on leaving or disabling input', () => {
+    const {canvas, controller, close} = fixture();
+    try {
+        controller.setHoverHandler((x, y) => x >= 420 && x <= 460 && y >= 300 && y <= 340);
+        dispatch(canvas, 'pointermove', {clientX: 430, clientY: 315});
+        controller.update(.2);
+        assert.equal(canvas.style.cursor, 'pointer', 'A selectable target has a pointing finger');
+        dispatch(canvas, 'pointermove', {clientX: 100, clientY: 100});
+        controller.update(.2);
+        assert.equal(canvas.style.cursor, '', 'Empty landscape uses the existing open-hand cursor');
+        dispatch(canvas, 'pointerdown', {clientX: 430, clientY: 315});
+        dispatch(canvas, 'pointermove', {clientX: 455, clientY: 315, movementX: 25, buttons: 1});
+        controller.update(.2);
+        assert.equal(canvas.style.cursor, 'grabbing', 'Drag feedback wins over target hover');
+        dispatch(canvas, 'pointerup', {clientX: 430, clientY: 315});
+        controller.update(.2);
+        assert.equal(canvas.style.cursor, 'pointer');
+        dispatch(canvas, 'pointerleave');
+        assert.equal(canvas.style.cursor, '', 'Leaving the canvas cannot leave a stale target cursor');
+        dispatch(canvas, 'pointermove', {clientX: 430, clientY: 315});
+        controller.update(.2);
+        controller.enabled = false;
+        assert.equal(canvas.style.cursor, '', 'Scene replacement and input suspension clear hover feedback');
+        controller.enabled = true;
+        dispatch(canvas, 'pointermove', {clientX: 430, clientY: 315});
+        controller.update(.2);
+        dispatch(canvas, 'pointerdown', {pointerType: 'touch'});
+        assert.equal(canvas.style.cursor, '', 'Touch keeps its existing navigation instead of mouse hover');
+    } finally {close();}
+    assert.equal(canvas.style.cursor, '', 'Disposal releases the owned cursor override');
 });

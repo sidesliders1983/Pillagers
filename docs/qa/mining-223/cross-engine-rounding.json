@@ -1,0 +1,102 @@
+[
+  {
+    "seed": 18,
+    "direction": -1,
+    "status": "passed"
+  },
+  {
+    "seed": 18,
+    "direction": 1,
+    "status": "passed"
+  },
+  {
+    "seed": 7,
+    "direction": -1,
+    "status": "passed"
+  },
+  {
+    "seed": 7,
+    "direction": 1,
+    "status": "passed"
+  },
+  {
+    "seed": 15,
+    "direction": -1,
+    "status": "passed"
+  },
+  {
+    "seed": 15,
+    "direction": 1,
+    "status": "passed"
+  },
+  {
+    "seed": 79,
+    "direction": -1,
+    "status": "passed"
+  },
+  {
+    "seed": 79,
+    "direction": 1,
+    "status": "passed"
+  },
+  {
+    "seed": 88,
+    "direction": -1,
+    "status": "passed"
+  },
+  {
+    "seed": 88,
+    "direction": 1,
+    "status": "passed"
+  },
+  {
+    "seed": 101,
+    "direction": -1,
+    "status": "passed"
+  },
+  {
+    "seed": 101,
+    "direction": 1,
+    "status": "passed"
+  },
+  {
+    "seed": 112,
+    "direction": -1,
+    "status": "passed"
+  },
+  {
+    "seed": 112,
+    "direction": 1,
+    "status": "passed"
+  },
+  {
+    "seed": 168,
+    "direction": -1,
+    "status": "passed"
+  },
+  {
+    "seed": 168,
+    "direction": 1,
+    "status": "passed"
+  },
+  {
+    "seed": 195,
+    "direction": -1,
+    "status": "passed"
+  },
+  {
+    "seed": 195,
+    "direction": 1,
+    "status": "passed"
+  },
+  {
+    "seed": 227,
+    "direction": -1,
+    "status": "passed"
+  },
+  {
+    "seed": 227,
+    "direction": 1,
+    "status": "passed"
+  }
+]

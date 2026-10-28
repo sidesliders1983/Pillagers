@@ -1,0 +1,148 @@
+{
+  "status": "verified",
+  "protocolSha256": "ae69b81b168d8425c36dd849bc47aa82447afb8294c80a3cbea39924a60e9b34",
+  "baseCommit": "4fcbf63ce0b14d227914d7a30c19139fe0baa12e",
+  "frozenExecutableSources": 174,
+  "tested": 12,
+  "statuses": {
+    "qualified-export": 12
+  },
+  "earlierAttempts": {
+    "resource-limited": 2
+  },
+  "changedSinceMeasurement": [],
+  "exports": [
+    {
+      "seed": 296,
+      "bytes": 2810080,
+      "sites": 5,
+      "initialUnits": 340,
+      "wetPatches": 3,
+      "bogSites": 1,
+      "proofSource": "bog-iron",
+      "foodCharged": 8,
+      "provenOre": 1
+    },
+    {
+      "seed": 299,
+      "bytes": 2783457,
+      "sites": 3,
+      "initialUnits": 174,
+      "wetPatches": 4,
+      "bogSites": 0,
+      "proofSource": "rock-outcrop",
+      "foodCharged": 8,
+      "provenOre": 2
+    },
+    {
+      "seed": 306,
+      "bytes": 2793374,
+      "sites": 4,
+      "initialUnits": 274,
+      "wetPatches": 4,
+      "bogSites": 0,
+      "proofSource": "rock-outcrop",
+      "foodCharged": 8,
+      "provenOre": 1
+    },
+    {
+      "seed": 327,
+      "bytes": 2512970,
+      "sites": 1,
+      "initialUnits": 86,
+      "wetPatches": 2,
+      "bogSites": 0,
+      "proofSource": "rock-outcrop",
+      "foodCharged": 8,
+      "provenOre": 2
+    },
+    {
+      "seed": 329,
+      "bytes": 2687497,
+      "sites": 2,
+      "initialUnits": 122,
+      "wetPatches": 3,
+      "bogSites": 0,
+      "proofSource": "rock-outcrop",
+      "foodCharged": 8,
+      "provenOre": 1
+    },
+    {
+      "seed": 341,
+      "bytes": 2525611,
+      "sites": 4,
+      "initialUnits": 277,
+      "wetPatches": 2,
+      "bogSites": 0,
+      "proofSource": "rock-outcrop",
+      "foodCharged": 8,
+      "provenOre": 2
+    },
+    {
+      "seed": 351,
+      "bytes": 2746758,
+      "sites": 4,
+      "initialUnits": 276,
+      "wetPatches": 4,
+      "bogSites": 0,
+      "proofSource": "rock-outcrop",
+      "foodCharged": 8,
+      "provenOre": 1
+    },
+    {
+      "seed": 352,
+      "bytes": 2515358,
+      "sites": 4,
+      "initialUnits": 246,
+      "wetPatches": 0,
+      "bogSites": 0,
+      "proofSource": "rock-outcrop",
+      "foodCharged": 8,
+      "provenOre": 2
+    },
+    {
+      "seed": 360,
+      "bytes": 2529165,
+      "sites": 2,
+      "initialUnits": 145,
+      "wetPatches": 0,
+      "bogSites": 0,
+      "proofSource": "rock-outcrop",
+      "foodCharged": 8,
+      "provenOre": 2
+    },
+    {
+      "seed": 361,
+      "bytes": 2605579,
+      "sites": 4,
+      "initialUnits": 258,
+      "wetPatches": 3,
+      "bogSites": 0,
+      "proofSource": "rock-outcrop",
+      "foodCharged": 8,
+      "provenOre": 1
+    },
+    {
+      "seed": 369,
+      "bytes": 2629133,
+      "sites": 4,
+      "initialUnits": 232,
+      "wetPatches": 0,
+      "bogSites": 0,
+      "proofSource": "rock-outcrop",
+      "foodCharged": 8,
+      "provenOre": 1
+    },
+    {
+      "seed": 380,
+      "bytes": 2504023,
+      "sites": 4,
+      "initialUnits": 278,
+      "wetPatches": 1,
+      "bogSites": 0,
+      "proofSource": "rock-outcrop",
+      "foodCharged": 8,
+      "provenOre": 1
+    }
+  ]
+}

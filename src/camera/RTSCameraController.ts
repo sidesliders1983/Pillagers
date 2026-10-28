@@ -23,6 +23,7 @@ export class RTSCameraController {
         if (!value) {
             this.keys.clear(); this.drag = false; this.rotateDrag = false; this.mouseStart = null;
             this.touch.reset();
+            this.clearHover();
         }
     }
     readonly focus=new Vector3(0,0,16);
@@ -51,6 +52,10 @@ export class RTSCameraController {
     private touch:TouchGestures;
     private select:((x:number,y:number,pointerType:'mouse'|'touch')=>boolean)|null=null;
     private mouseStart:{x:number;y:number;distance:number}|null=null;
+    private hover: ((x: number, y: number) => boolean) | null = null;
+    private hoverPointer?: {x: number; y: number};
+    private hoverElapsed = 0;
+    private originalCursor = '';
     constructor(readonly camera: PerspectiveCamera, private canvas: HTMLCanvasElement,
         private dragMode: 'pan' | 'rotate' = 'pan') {
         const settings=worldConfig.camera.touch;
@@ -68,7 +73,7 @@ export class RTSCameraController {
             this.keys.add(e.key.toLowerCase());
         });
         this.listen(window,'keyup',e=>this.keys.delete(e.key.toLowerCase()));
-        this.listen(window,'blur',()=>{this.keys.clear();this.drag=false;this.rotateDrag=false;this.mouseStart=null;this.touch.reset();});
+        this.listen(window,'blur',()=>{this.keys.clear();this.drag=false;this.rotateDrag=false;this.mouseStart=null;this.touch.reset();this.clearHover();});
         this.listen(canvas, 'wheel', event => {
             event.preventDefault();
             if (event.deltaX || event.deltaY) this.navigationIntent('wheel');
@@ -76,16 +81,22 @@ export class RTSCameraController {
         }, { passive: false });
         this.listen(canvas,'pointerdown',e=>{
             canvas.setPointerCapture(e.pointerId);
-            if(e.pointerType==='touch'){e.preventDefault();this.touch.down(e.pointerId,e.clientX,e.clientY);}
+            if(e.pointerType==='touch'){this.clearHover();e.preventDefault();this.touch.down(e.pointerId,e.clientX,e.clientY);}
             else if(e.button===2){e.preventDefault();this.rotateDrag=true;this.drag=false;this.mouseStart=null;}
             else if(e.button===0){this.rotateDrag=false;this.drag=true;this.mouseStart={x:e.clientX,y:e.clientY,distance:0};}
+            if (e.pointerType !== 'touch') {
+                this.rememberHover(e.clientX, e.clientY);
+                this.updateHover(0);
+            }
         });
         this.listen(canvas, 'pointermove', event => {
             if (event.pointerType === 'touch') {
                 event.preventDefault();
                 this.touch.move(event.pointerId, event.clientX, event.clientY);
+                this.clearHover();
                 return;
             }
+            this.rememberHover(event.clientX, event.clientY);
             if (this.drag && this.mouseStart) {
                 this.mouseStart.distance = Math.max(this.mouseStart.distance,
                     Math.hypot(event.clientX - this.mouseStart.x, event.clientY - this.mouseStart.y));
@@ -118,8 +129,15 @@ export class RTSCameraController {
                 this.mouseStart = null;
                 this.drag = false;
                 this.rotateDrag = false;
+                if (cancelled && event.type !== 'lostpointercapture') this.clearHover();
+                else {
+                    if (event.type !== 'lostpointercapture') this.rememberHover(event.clientX, event.clientY);
+                    this.hoverElapsed = .12;
+                    this.updateHover(0);
+                }
             }
         };
+        this.listen(canvas, 'pointerleave', () => this.clearHover());
         this.listen(canvas,'pointerup',e=>release(e,false));
         this.listen(canvas,'pointercancel',e=>release(e,true));
         this.listen(canvas,'lostpointercapture',e=>release(e,true));
@@ -130,7 +148,11 @@ export class RTSCameraController {
         type: K,handler: (event: WindowEventMap[K])=>void,options: AddEventListenerOptions = {}) {
         target.addEventListener(type,((event: WindowEventMap[K]) => { if (this.enabled) handler(event); }) as EventListener,{ ...options,signal:this.listeners.signal });
     }
-    dispose() { this.listeners.abort();this.touch.reset();this.keys.clear();this.navigationListeners.clear(); }
+    dispose() {
+        this.clearHover();
+        this.hover = null;
+        this.listeners.abort(); this.touch.reset(); this.keys.clear(); this.navigationListeners.clear();
+    }
     setNavigationSurface(surface: Object3D, center = this.homeFocus,
         bounds?: typeof this.bounds, height?: typeof this.height,
         clearance?: { terrain?: TerrainField; waterLevel?: number }) {
@@ -190,6 +212,40 @@ export class RTSCameraController {
         this.update(0);
     }
     setSelectionHandler(select:(x:number,y:number,pointerType:'mouse'|'touch')=>boolean){this.select=select;}
+    /** Read-only target query, shared with the scene's real click picking. */
+    setHoverHandler(hover: (x: number, y: number) => boolean) {
+        if (!this.hover) this.originalCursor = this.canvas.style.cursor;
+        this.hover = hover;
+        this.hoverElapsed = .12;
+    }
+    private rememberHover(x: number, y: number) {
+        if (!this.hoverPointer) this.hoverElapsed = .12;
+        this.hoverPointer = {x, y};
+    }
+    private clearHover() {
+        this.hoverPointer = undefined;
+        this.hoverElapsed = 0;
+        if (this.hover) this.canvas.style.cursor = this.originalCursor;
+    }
+    private updateHover(delta: number) {
+        if (!this.hover) return;
+        if (!this.enabled || !this.hoverPointer) {
+            this.canvas.style.cursor = this.originalCursor;
+            return;
+        }
+        if (this.drag || this.rotateDrag) {
+            this.canvas.style.cursor = 'grabbing';
+            return;
+        }
+        // Coalesce mouse events and refresh stationary pointers for moving actors/cameras.
+        // Touch never enters this path; no extra raycast is performed every rendered frame.
+        this.hoverElapsed += Math.max(0, delta);
+        if (this.hoverElapsed < .12) return;
+        this.hoverElapsed = 0;
+        this.canvas.style.cursor = this.hover(this.hoverPointer.x, this.hoverPointer.y)
+            ? 'pointer' : this.originalCursor;
+    }
+
     home() {
         this.navigationIntent('home');
         this.viewGroundClearance = worldConfig.camera.clearance.ground;
@@ -265,5 +321,6 @@ export class RTSCameraController {
             this.clearanceDiagnostic = { ...correction, milliseconds, maximumMs: this.maximumClearanceMs };
         } else this.clearanceDiagnostic = null;
         this.camera.lookAt(this.focus);
+        this.updateHover(dt);
     }
 }

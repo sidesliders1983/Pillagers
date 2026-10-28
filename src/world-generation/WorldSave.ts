@@ -1,3 +1,4 @@
+import { assertOreSitePlan } from './OreSites';
 import { validateEnvironment } from './ValidateEnvironment';
 import { validateSavedSites } from './ValidateSiteSelection';
 import { isSettlementGeneratorVersion, isFoundationRotation } from './SettlementSites';
@@ -108,5 +109,9 @@ export function parseWorld(text: string): WorldBlueprint {
     if (isSettlementGeneratorVersion(normalized.generatorVersion)) validateSavedSites(world, requireValid);
     else requireValid(world.siteSelection === undefined && world.rivalSite === undefined);
     validateEnvironment(world, requireValid);
+    if (world.oreSites !== undefined) {
+        requireValid(!!world.oreSites && [1, 2].includes(world.oreSites.version));
+        assertOreSitePlan(world, world.oreSites);
+    }
     return freezeBlueprint(world);
 }

@@ -1,3 +1,4 @@
+import { miningBusy, miningWorkReason, miningProductionBps } from './Mining';
 import { stepMerchants } from './VisitingMerchants';
 import { stepContextualSupport } from './ContextualSupport';
 import { craftingOccupation, craftingOffer, stepSmitheryWork } from './Smithery';
@@ -20,6 +21,9 @@ import type {CoreTraits, TraitKey} from '../characters/CharacterDNA';
 import type {Occupation, SimulationState} from './SimulationCore';
 import {personaAge} from './PersonaAge';
 export const occupationIds: Occupation[] = ['farmer','herder','fisher','hunter','textileWorker','smith','woodworker','boatbuilder','trader','leatherAndJewelleryMaker'];
+export function availableOccupationIds(state: SimulationState): Occupation[] {
+    return state.mining ? [...occupationIds, 'miner'] : occupationIds;
+}
 export type JobPrototype = {resource:'food'|'materials'|null; unitsPerWinter:number; weights:number[]; preferences:number[]};
 export type PrototypeConfig = {
     mortalityBands:MortalityBand[];
@@ -32,7 +36,7 @@ export type PrototypeConfig = {
     houseCost:number; baseUpkeep:number; upgradeCosts:number[]; upgradeBonusBps:number[]; tentProductivityBps:number;
     workAge:number; adultAge:number; childFood:number; adultFood:number; workPerUnit:number;
     fertilityChanceBps:number; partnershipChanceBps:number; careerReviewWinters:number;
-    occupations:Record<Occupation,JobPrototype>;
+    occupations:Record<Exclude<Occupation,'miner'>,JobPrototype> & Partial<Record<'miner',JobPrototype>>;
 };
 const job = (resource:JobPrototype['resource'], unitsPerWinter:number, weights:number[], preferences:number[]):JobPrototype => ({resource,unitsPerWinter,weights,preferences});
 export const defaultPrototypeConfig: PrototypeConfig = {
@@ -76,16 +80,16 @@ export function foodNeed(state:SimulationState):number {
     return cattleFoodNeed(state)+Math.ceil((weatherProfile(state).residentConsumptionBps??10000)/10000*Object.keys(state.personas).sort().reduce((total,id)=>total+(state.personas[id].deathWinter===null&&!personaAway(state,id)?(personaAge(state,id)<config.foodAdultAge?config.childFood:config.adultFood):0),0));
 }
 export function occupationAptitude(state:SimulationState,id:string,role:Occupation):number {
-    if(!state.mechanics||!Object.hasOwn(state.personas,id)||!occupationIds.includes(role))throw new Error('Unknown persona/occupation');
-    return aptitude(state.personas[id].dna.traits,state.mechanics.config.occupations[role]);
+    if(!state.mechanics||!Object.hasOwn(state.personas,id)||!availableOccupationIds(state).includes(role))throw new Error('Unknown persona/occupation');
+    return aptitude(state.personas[id].dna.traits,state.mechanics.config.occupations[role]!);
 }
 export function inspectWork(state:SimulationState,id:string) {
     const person=state.personas[id];if(!person||!state.mechanics)throw new Error('Gameplay persona required');
     const config=state.mechanics.config,role=person.occupation;
     const craft = craftingOffer(state, role);
-    const reason=person.deathWinter!==null?'deceased':personaAway(state,id)?'expedition':isProvidingCare(state,id)?'childcare':personaAge(state,id)<config.workAge?'underage':role===null?'unassigned':config.occupations[role].resource===null?craft.reason:null;
+    const reason=person.deathWinter!==null?'deceased':personaAway(state,id)?'expedition':isProvidingCare(state,id)?'childcare':personaAge(state,id)<config.workAge?'underage':role===null?'unassigned':role==='miner'?miningWorkReason(state,id):miningBusy(state,id)?'returning-from-mine':config.occupations[role]!.resource===null?craft.reason:null;
     if(role===null)return {aptitudeBps:0,productivityBps:0,unitsPerWinter:0,resource:null,progress:0,reason};
-    const job=config.occupations[role];
+    const job=config.occupations[role]!;
         let efficiency=aptitude(person.dna.traits,job);
         const parentExperience=person.parentIds.some(parent=>occupationExperience(state,parent,role)>=config.apprenticeshipTicks);
         if(parentExperience)efficiency=Math.floor(efficiency*(10000+config.apprenticeshipBonusBps)/10000);
@@ -104,7 +108,8 @@ export function inspectWork(state:SimulationState,id:string) {
         const modifier = job.resource === 'food' ? production.foodProductionBps : production.materialsProductionBps;
         efficiency = Math.floor(efficiency * modifier / 10000);
     }
-    return {aptitudeBps:aptitude(person.dna.traits,job),productivityBps:reason===null?efficiency:0,unitsPerWinter:job.resource===null?craft.unitsPerWinter:job.unitsPerWinter,resource:job.resource,progress:person.workProgress/config.workPerUnit,reason};
+    if (role === 'miner') efficiency = Math.floor(efficiency * miningProductionBps(state, id) / 10000);
+    return {aptitudeBps:aptitude(person.dna.traits,job),productivityBps:reason===null?efficiency:0,unitsPerWinter:role==='miner'?state.mining!.policy.unitsPerYear:job.resource===null?craft.unitsPerWinter:job.unitsPerWinter,resource:job.resource,progress:person.workProgress/config.workPerUnit,reason};
 }
 export function inspectBuilding(state:SimulationState,id:string) {
     const building=state.buildings[id],info=state.mechanics?.buildings[id];if(!building||!info)throw new Error('Unknown gameplay building');
@@ -129,7 +134,7 @@ export function stepMechanicsTick(state:SimulationState):void {
         const care=state.mechanics!.people[id];
         if(care.childcareUntilTick!==undefined&&care.childcareUntilWinter===nextWinter&&care.childcareUntilTick===nextTick)careExpires=true;
         if(personaAway(state,id) || isProvidingCare(state,id) || person.deathWinter!==null || role===null || personaAge(state,id)<config.workAge)continue;
-        const work=inspectWork(state,id),job=config.occupations[role];
+        const work=inspectWork(state,id),job=config.occupations[role]!;
         if (job.resource === null) {
             if (state.smithery && craftingOccupation(role)) {
                 for (const details of stepSmitheryWork(state, id, work.productivityBps))
@@ -295,11 +300,11 @@ function reviewCareers(state:SimulationState):void {
     const resource=foodShort?'food':state.stocks.materials<materialNeed?'materials':null;if(resource===null)return;
     for(const id of Object.keys(state.personas).sort()){
         const person=state.personas[id],info=state.mechanics!.people[id];
-        if(personaAway(state,id)||isProvidingCare(state,id)||person.deathWinter!==null||personaAge(state,id)<config.workAge||info.occupationLocked)continue;
-        const candidates=occupationIds.filter(role=>config.occupations[role].resource===resource).map(role=>({role,fit:aptitude(person.dna.traits,config.occupations[role])})).sort((a,b)=>b.fit-a.fit||occupationIds.indexOf(a.role)-occupationIds.indexOf(b.role));
+        if(miningBusy(state,id)||personaAway(state,id)||isProvidingCare(state,id)||person.deathWinter!==null||personaAge(state,id)<config.workAge||info.occupationLocked)continue;
+        const candidates=occupationIds.filter(role=>config.occupations[role]!.resource===resource).map(role=>({role,fit:aptitude(person.dna.traits,config.occupations[role]!)})).sort((a,b)=>b.fit-a.fit||occupationIds.indexOf(a.role)-occupationIds.indexOf(b.role));
         const best=candidates[0];if(!best||best.role===person.occupation)continue;
         if(person.occupation!==null){
-            const currentFit=aptitude(person.dna.traits,config.occupations[person.occupation]);
+            const currentFit=aptitude(person.dna.traits,config.occupations[person.occupation]!);
             const retention=Math.floor(occupationExperience(state,id,person.occupation)/state.ticksPerWinter)*config.experienceRetentionBpsPerWinter;
             if(best.fit-currentFit<config.careerMinimumGainBps+retention)continue;
         }
@@ -343,9 +348,10 @@ export function validateMechanics(state:SimulationState):void {
     for(const key of Object.keys(config))if(!Object.hasOwn(defaultPrototypeConfig,key))fail('Unknown prototype option');
     if(!Array.isArray(config.upgradeCosts)||config.upgradeCosts.length!==3||!Array.isArray(config.upgradeBonusBps)||config.upgradeBonusBps.length!==4)fail('Invalid upgrade prototype');
     config.upgradeCosts.forEach(n=>uint(n,'upgrade cost',1000000000));config.upgradeBonusBps.forEach(n=>uint(n,'upgrade bonus',10000));
-    if(Object.keys(config.occupations).length!==occupationIds.length)fail('Invalid occupation prototypes');
-    for(const role of occupationIds){
-        const job=config.occupations[role];if(!job||![null,'food','materials'].includes(job.resource))fail('Invalid job resource');
+    const configuredRoles = availableOccupationIds(state);
+    if(Object.keys(config.occupations).length!==configuredRoles.length)fail('Invalid occupation prototypes');
+    for(const role of configuredRoles){
+        const job=config.occupations[role]!;if(!job||![null,'food','materials'].includes(job.resource))fail('Invalid job resource');
         uint(job.unitsPerWinter,'job units',1000000);
         if(job.resource===null&&job.unitsPerWinter!==0)fail('Inactive role cannot produce');
         for(const vector of [job.weights,job.preferences])if(!Array.isArray(vector)||vector.length!==traitKeys.length||vector.some(n=>typeof n!=='number'||!Number.isFinite(n)||n<0||n>1))fail('Invalid aptitude vector');
@@ -371,7 +377,7 @@ export function validateMechanics(state:SimulationState):void {
         if(info.caregiverWorkedWinter!==null){uint(info.caregiverWorkedWinter,'caregiver participation');if(info.caregiverWorkedWinter>state.time.winter)fail('Future caregiving');}
         if(info.lastBirthWinter!==null){uint(info.lastBirthWinter,'last birth');if(info.lastBirthWinter>state.time.winter||info.lastBirthWinter<person.birthWinter)fail('Invalid last birth');}
         if(!info.progress||!info.dominantLegacy)fail('Missing work/legacy records');
-        for(const [role,progress] of Object.entries(info.progress)){if(!occupationIds.includes(role as Occupation))fail('Unknown work progress role');uint(progress,'work progress',config.workPerUnit-1);}
+        for(const [role,progress] of Object.entries(info.progress)){if(!configuredRoles.includes(role as Occupation))fail('Unknown work progress role');uint(progress,'work progress',config.workPerUnit-1);}
         uint(person.workProgress,'active work progress',config.workPerUnit-1);
         if(person.occupation!==null&&person.workProgress!==(info.progress[person.occupation]??0))fail('Inconsistent work progress');
         for(const [trait,parent] of Object.entries(info.dominantLegacy))if(!traitKeys.includes(trait as TraitKey)||!person.parentIds.includes(parent))fail('Invalid dominant legacy source');

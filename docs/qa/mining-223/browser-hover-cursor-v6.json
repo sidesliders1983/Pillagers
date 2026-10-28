@@ -1,0 +1,30 @@
+{
+  "scenario": "genuine developed mine campaign, seed 0, Summer 804 tick 630; clock paused",
+  "empty": {
+    "cursor": "grab",
+    "inline": "",
+    "nativeActive": false,
+    "time": {
+      "tick": 630,
+      "ticksPerWinter": 1000,
+      "winter": 804
+    }
+  },
+  "resident": {
+    "cursor": "pointer",
+    "inline": "pointer",
+    "time": {
+      "tick": 630,
+      "ticksPerWinter": 1000,
+      "winter": 804
+    }
+  },
+  "home": {
+    "cursor": "pointer"
+  },
+  "campfire": {
+    "cursor": "pointer"
+  },
+  "clickedHome": "Tent; Mingirdas household",
+  "errors": []
+}

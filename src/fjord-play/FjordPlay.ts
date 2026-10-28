@@ -1,3 +1,4 @@
+import { MiningPanel } from './MiningPanel';
 import { MerchantPanel } from './MerchantPanel';
 import './merchant.css';
 import { FirstStepsGuide } from './FirstStepsGuide';
@@ -162,9 +163,12 @@ export class FjordPlay {
         };
         const core = <T>(operation: () => T) => diagnostics
             ? diagnostics.core(canonicalTicks, operation) : operation();
+        if (entry.kind === 'new') this.campaign.prepareMining();
         // New islands include physical exploration; restored campaigns retain their saved rules.
         if (entry.kind !== 'continue' && campaignIslandPlan(this.campaign.blueprint) &&
             enableStartDiscovery) this.campaign.enableDiscovery();
+        if (entry.kind === 'new' && this.campaign.blueprint.oreSites)
+            this.session.initializeMining(this.campaign.blueprint, this.session.readSnapshot().discovery!.worldId);
         if (!entry.diagnosticRun) useSeasonalFjordProduction(this.session);
         document.title = 'FjordSide';
         const readingPosition = this.foundingBook?.scrollTop ?? 0;
@@ -358,6 +362,7 @@ export class FjordPlay {
         this.startupCleanup.push(() => islandMarkers.dispose());
         let desktopUI: FjordInterface | undefined;
         let merchantPanel: MerchantPanel | undefined;
+        let miningPanel: MiningPanel | undefined;
         let renderedWildlifeAttention = '';
         const refreshUI = () => {
             entry.audioControls?.refresh();
@@ -445,6 +450,7 @@ export class FjordPlay {
                 () => this.panels.render(state, this.shared.selection, '', { homeImprovements: false }));
             updateManagementAvailability(panel, this.shared);
             merchantPanel?.refresh();
+            miningPanel?.refresh();
             firstSteps?.update(Boolean(this.loading) || !document.querySelector<HTMLElement>('#clan-book-reader')!.hidden);
             highlight();
             const selected = this.campaign.selection;
@@ -635,7 +641,10 @@ export class FjordPlay {
                     loading.check();
                     if (replayFounders) this.campaign.restart(true, undefined, undefined, proposal);
                     else this.campaign.startCampaign(proposal, currentIslandVersion);
+                    if (!replayFounders && discoveryEnabled) this.campaign.prepareMining();
                     if (discoveryEnabled) this.campaign.enableDiscovery();
+                    if (this.campaign.blueprint.oreSites) this.session.initializeMining(
+                        this.campaign.blueprint, this.session.readSnapshot().discovery!.worldId);
                     resetProduction();
                     campaignFields();
                     await presentation!.replace();
@@ -696,11 +705,16 @@ export class FjordPlay {
         const commitManagement = (commands: SimulationCommand[] | (() => SimulationCommand[]),
             done: () => void, rejected?: (error: unknown) => void) => action(async () => {
                 let focusCeremony = false;
+                let assignMiningResident: string | undefined;
                 try {
                     core(() => {
                         const planned = typeof commands === 'function' ? commands() : commands;
                         const sequence = this.session.inspectCulture().nextSequence;
                         this.session.commandBatch(planned);
+                        if (!planned.some(command => command.type === 'AssignMiner')) {
+                            const occupation = planned.find(command => command.type === 'AssignOccupation' && command.occupation === 'miner');
+                            if (occupation?.type === 'AssignOccupation') assignMiningResident = occupation.personaId;
+                        }
                         focusCeremony = this.session.inspectCulture().nextSequence > sequence &&
                             planned.some(command => command.type === 'SponsorGathering' &&
                                 (command.occasion === 'wedding' || command.occasion === 'communal_ceremony'));
@@ -713,6 +727,7 @@ export class FjordPlay {
                 }
                 if (focusCeremony) presentation?.primeWeddingMusic();
                 done();
+                if (assignMiningResident) miningPanel?.openForResident(assignMiningResident);
                 if (syncScene) await syncScene();
                 presentation?.acceptGathering(focusCeremony);
             });
@@ -722,6 +737,14 @@ export class FjordPlay {
                 return new Promise<void>((resolve, reject) => commitManagement(() => {
                     if (epoch !== this.session.personalHistoryEpoch) throw new Error('The campaign changed. Review its current merchant offers.');
                     return [command];
+                }, resolve, reject));
+            }, () => this.session.personalHistoryEpoch));
+        miningPanel = this.ownStartup(new MiningPanel(document.querySelector<HTMLElement>('#fjord-play')!,
+            () => this.session.readSnapshot(), commands => {
+                const epoch = this.session.personalHistoryEpoch;
+                return new Promise<void>((resolve, reject) => commitManagement(() => {
+                    if (epoch !== this.session.personalHistoryEpoch) throw new Error('The campaign changed.');
+                    return commands;
                 }, resolve, reject));
             }, () => this.session.personalHistoryEpoch));
         desktopUI = new FjordInterface(this.shared, { select, refresh, notify: say,
@@ -786,6 +809,7 @@ export class FjordPlay {
             if (command) void desktopUI!.approve(command).then(approved => {
                 if (approved) action(async () => {
                     core(() => this.shared.command(command));
+                    if (command.type === 'AssignOccupation' && command.occupation === 'miner') miningPanel?.openForResident(command.personaId);
                     if (syncScene) await syncScene();
                     say('Action completed.');
                 });
@@ -1008,6 +1032,13 @@ export class FjordPlay {
         }, { signal: lifecycleEvents.signal });
         await presentation.initialize();
         if (this.stopped || this.shared.transferring) return;
+        controller.setHoverHandler((x, y) => {
+            // Destination mode retains its crosshair. Ordinary hover uses the same
+            // known, visible targets and exact mouse hit tests as an actual click.
+            if (expeditions?.targeting || islandMissions?.targeting) return false;
+            return !!(presentation!.pickMine(x, y) || presentation!.pick(x, y, 'mouse') ||
+                islandMarkers.pick(camera, x, y, canvas.getBoundingClientRect()));
+        });
         controller.setSelectionHandler((x, y, pointerType) => {
             if (expeditions?.targeting || islandMissions?.targeting) {
                 const picked = expeditions?.targeting && !expeditions.sailing
@@ -1021,8 +1052,13 @@ export class FjordPlay {
                 }
                 return true;
             }
+            const mine = presentation!.pickMine(x, y);
+            if (mine) { miningPanel?.open(mine); return true; }
+            miningPanel?.close();
             const selected = presentation!.pick(x, y, pointerType);
             if (!selected) {
+                const assistedMine = pointerType === 'touch' ? presentation!.pickMine(x,y,'touch') : undefined;
+                if (assistedMine) { miningPanel?.open(assistedMine); return true; }
                 const siteId = islandMarkers.pick(camera, x, y, canvas.getBoundingClientRect());
                 if (siteId) { islandMissions?.selectSite(siteId); return true; }
                 if (this.shared.selection) {
