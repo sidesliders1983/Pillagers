@@ -47,11 +47,16 @@ Sequence:
 
 Possible response: housing priority, slaughter cattle, postpone raid, preserve Food/resources.
 
-## Implemented Harsh Winter production
+## Current seasonal production (owner correction, 28 October 2026)
 
-New campaigns stop all Food and Materials production during Harsh Winters, including cattle Food output. Work progress is retained. Slaughter and salvage remain explicit player commands. Existing saves preserve their stored weather profiles; a missing Materials production modifier means normal Materials output.
+The saved annual weather class affects **production during the Winter calendar quarter only**: ticks 0–249 in a 1,000-tick year. Spring starts at tick 250. Food and Materials work and all livestock output resume their ordinary rates from that point through Summer and Autumn. Harsh Winter stops Food and Materials production; Severe Winter retains its saved Food reduction (50% by default). Mild's saved production bonus also applies only in Winter. Existing work and livestock production remainders survive the transition.
 
+Every production tick uses the season in which the work occurred, including the final Winter tick and the final Autumn tick. Inspection shows the rate for the next tick. Batch advancement, split advancement and save/load use the same canonical boundaries, without an extra weather roll or clock.
 
-## Current Harsh Winter economy
+This timing correction applies when continuing existing campaigns too. Saved profile coefficients, previous events and historical measurement reports are retained; previous annual output is not recalculated. Historical reports made before this correction used year-long production modifiers and are not current balance measurements.
 
-New campaigns stop all Food and Materials production during Harsh Winters, including cow output. Resident and livestock Food consumption is 150% of baseline. Round each category total upward to whole Food units: three adult cattle require 5 instead of 3 Food. Calves with a zero baseline still consume zero. Work progress is preserved. The announced Winter rules apply through annual resolution. Existing saves retain their stored weather profiles; disabling weather preserves baseline rules.
+## Annual consumption and exposure
+
+Only production timing changes. The saved annual weather class still governs annual consumption, mortality/exposure and existing mission duration/risk. The outgoing year's class remains active through annual resolution before the next class is drawn.
+
+Harsh resident and livestock Food consumption remains 150% of baseline. Each category total rounds up to whole Food units: three adult cattle require 5 instead of 3 Food. Calves with zero baseline still consume zero. Severe retains normal resident consumption and the saved livestock modifier (three times adult cattle Food by default). Existing campaigns retain their saved coefficients; missing Materials production modifiers mean ordinary output. Disabling weather preserves baseline rules. Slaughter and salvage remain explicit player commands.

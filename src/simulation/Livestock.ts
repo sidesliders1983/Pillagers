@@ -1,4 +1,4 @@
-import {weatherProfile,weatherFacts} from './Weather';
+import {weatherProfile,weatherProductionModifiers,weatherFacts} from './Weather';
 import {farmyards, livestockHerdSpace} from './Farmyards';
 import type {SimulationState, GameTime} from './SimulationCore';
 import type {Cattle} from './Landing';
@@ -37,7 +37,8 @@ export function stepCattleOutput(state: SimulationState): void {
     if (!landing) return;
     const winter = state.time.tick === 0 ? state.time.winter - 1 : state.time.winter;
     const shelteredIds = new Set(farmyards(state).map(yard => yard.id));
-    const weather = weatherProfile(state), scale = state.ticksPerWinter * 10000;
+    const workedTick = (state.time.tick + state.ticksPerWinter - 1) % state.ticksPerWinter;
+    const weather = weatherProductionModifiers(state, workedTick), scale = state.ticksPerWinter * 10000;
     for (const id of Object.keys(landing.cattle).sort()) {
         const animal = landing.cattle[id];
         if (animal.deathWinter !== null) continue;

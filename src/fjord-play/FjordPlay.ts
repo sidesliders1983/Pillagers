@@ -41,7 +41,7 @@ import { icon } from './FjordIcons';
 import { SettlementPanel, panelCommand, updateManagementAvailability } from '../play/SettlementPanel';
 import { openSettlement, persistSettlement, bindViewSwitch } from '../play/SettlementBrowser';
 import type { EntityKind } from '../play/SettlementView';
-import { inspectWeatherExposure, personaAway, landingSummary } from '../simulation/SimulationCore';
+import { inspectWeatherExposure, weatherProductionModifiers, personaAway, landingSummary } from '../simulation/SimulationCore';
 
 const campaignClockIntervalMs = 500;
 const escape = (value: string) => value.replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]!));
@@ -410,9 +410,10 @@ export class FjordPlay {
                 attentionView.render();
                 const profile = view.weather.enabled ? view.weather.modifiers : null;
                 const exposure = inspectWeatherExposure(state);
+                const production = weatherProductionModifiers(state);
                 const forecast = profile ? '<strong>Year ' + view.time.winter + ' · ' + view.weather.class + ' annual weather</strong>' +
-                    '<p>Food output ' + profile.foodProductionBps / 100 + '% · Materials output ' +
-                    (profile.materialsProductionBps ?? 10000) / 100 + '%<br>Resident Food ×' +
+                    '<p>Current Food output ' + production.foodProductionBps / 100 + '% · Materials output ' +
+                    production.materialsProductionBps / 100 + '%<br>Production modifiers apply during Winter only.<br>Annual resident Food ×' +
                     (profile.residentConsumptionBps ?? 10000) / 10000 + ' · Adult cattle Food ×' +
                     (profile.cattleConsumptionBps ?? profile.cattleConsumptionMultiplier * 10000) / 10000 + '</p>' +
                     '<p>' + exposure.residentIds.length + ' exposed residents · ' + exposure.cattleIds.length + ' exposed livestock</p>' +
@@ -443,7 +444,6 @@ export class FjordPlay {
             updateManagementAvailability(panel, this.shared);
             merchantPanel?.refresh();
             firstSteps?.update(Boolean(this.loading) || !document.querySelector<HTMLElement>('#clan-book-reader')!.hidden);
-            document.querySelector('#fjord-clan-name')!.textContent = state.clan.name;
             highlight();
             const selected = this.campaign.selection;
             document.querySelector('#fjord-selected')!.textContent = selected ?

@@ -47,6 +47,16 @@ export function weatherProfile(state:SimulationState):WeatherProfile {
     const current=state.landing?state.weather?.regions[state.landing.region.id]:undefined;
     return state.weather?.config.enabled&&current?state.weather.config.profiles[current.class]:defaultWeatherConfig.profiles.Normal;
 }
+/** Production uses Winter's first quarter; annual consumption/exposure keep the saved profile.
+ * A producer stepping after clock advancement passes the tick it actually worked. */
+export function weatherProductionModifiers(state: SimulationState, tick = state.time.tick) {
+    const winter = tick * 4 < state.ticksPerWinter;
+    const profile = weatherProfile(state);
+    return {
+        foodProductionBps: winter ? profile.foodProductionBps : 10000,
+        materialsProductionBps: winter ? (profile.materialsProductionBps ?? 10000) : 10000,
+    };
+}
 /** Outcomes on an incoming boundary still carry the outgoing weather Winter. */
 export function weatherFacts(state:SimulationState):Record<string,unknown> {
     const w=inspectWeather(state);return w.enabled?{weatherClass:w.class,weatherWinter:w.winter,regionId:w.regionId}:{};

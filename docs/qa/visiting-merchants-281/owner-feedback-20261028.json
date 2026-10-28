@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-28",
+  "ownerReview": "Merchant gameplay works; mobile screenshots supplied. No merge or default activation requested.",
+  "followUpIssue": "https://github.com/sidesliders1983/Pillagers/issues/294",
+  "corrections": [
+    "Hide Loading diagnostics during normal loading; retain diagnostic runs, failures and menu exports.",
+    "Remove clan name above the calendar.",
+    "Apply saved weather production coefficients to the Winter quarter only; Spring/Summer/Autumn resume normal resident and livestock output, including continued saves. Annual feeding, mortality and mission weather rules remain unchanged."
+  ],
+  "regression": "Observed red before green: Harsh Spring productivity 0 instead of baseline 3678. Harsh/Severe now pass Winter/Spring and Autumn/Winter boundaries, batch/split stepping and save/load.",
+  "verification": {
+    "focusedCommand": "node --test tests/weather.test.mjs tests/weather-campaign.test.mjs tests/island-loading-lifecycle.test.mjs tests/loading-run-entry.test.mjs tests/first-steps-dom.test.mjs",
+    "passed": 30,
+    "failed": 0,
+    "build": "Public assets, TypeScript and Vite production build passed.",
+    "browser": "Browser connector returned no available browsers after workstation restart. No new physical-device or visual review claimed.",
+    "relatedCommand": "node --test --test-concurrency=2 tests/visiting-merchants.test.mjs tests/merchant-session.test.mjs tests/merchant-history.test.mjs tests/trade-goods.test.mjs tests/merchant-panel.test.mjs tests/weather-risk-calibration.test.mjs tests/cultural-events.test.mjs tests/livestock-species.test.mjs tests/world-expeditions.test.mjs",
+    "relatedPassed": 54,
+    "relatedFailed": 0
+  },
+  "historicalEvidence": "Original rate-review.json, checkpoints, validation.json and screenshots remain evidence of their original source/rules. The corrected seasonal economy has not been recalibrated across 30 seeds."
+}

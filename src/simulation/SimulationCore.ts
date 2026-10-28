@@ -41,7 +41,7 @@ import type {WorldState,ExpeditionCommand,ExpeditionConfig} from './WorldExpedit
 export {inspectWorld,missionOffer,defaultExpeditionConfig,missionTypes,personaAway} from './WorldExpeditions';
 import {initializeWeather,validateWeather} from './Weather';
 import type {WeatherState,WeatherConfig} from './Weather';
-export {inspectWeather,inspectWeatherExposure,defaultWeatherConfig,weatherClasses} from './Weather';
+export {inspectWeather,inspectWeatherExposure,weatherProductionModifiers,defaultWeatherConfig,weatherClasses} from './Weather';
 import {eventFacts} from './EventFacts';
 import {farmyards,reconcileFarmyards} from './Farmyards';
 export {inspectBuilding, inspectWork, occupationAptitude, occupationIds} from './Mechanics';

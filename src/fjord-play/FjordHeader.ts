@@ -5,7 +5,7 @@ import { isMobileLayout, mobileLayoutQuery } from './MobileShell';
 
 export function fjordHeaderHTML(): string {
     return `<header id="fjord-header" aria-label="Settlement status and controls">
-        <div class="fjord-brand"><img src="/branding/fjordside-mark.png" alt=""><div><strong id="fjord-clan-name">FJORDSIDE</strong>
+        <div class="fjord-brand"><img src="/branding/fjordside-mark.png" alt=""><div>
             <div id="fjord-winter" class="fjord-date" aria-label="Calendar"><span id="fjord-season"></span> <strong id="fjord-year"></strong></div></div></div>
         <dl id="fjord-stocks" class="fjord-kpis" aria-label="Settlement resources and population">
             <div><dt>Food</dt><dd><button type="button" data-stock="food" aria-label="Food stocks">${icon('food')}<strong id="fjord-food"></strong></button></dd></div>
