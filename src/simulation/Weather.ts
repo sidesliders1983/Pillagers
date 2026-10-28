@@ -6,7 +6,7 @@ export const weatherClasses=['Mild','Normal','Harsh','Severe'] as const;
 export type WeatherClass=typeof weatherClasses[number];
 export type WeatherProfile={probabilityBps:number;foodProductionBps:number;materialsProductionBps?:number;residentConsumptionBps?:number;cattleConsumptionBps?:number;cattleConsumptionMultiplier:number;tentMortalityBps:number;exposedCattleMortalityBps:number;travelDurationBps:number;travelRiskBps:number};
 export type WeatherConfig={enabled:boolean;profiles:Record<WeatherClass,WeatherProfile>};
-export type WeatherState={version:1;config:WeatherConfig;regions:Record<string,{winter:number;class:WeatherClass}>};
+export type WeatherState={version:1;productionTiming?:'winter-quarter-v1';config:WeatherConfig;regions:Record<string,{winter:number;class:WeatherClass}>};
 const profile=(probabilityBps:number,foodProductionBps:number,cattleConsumptionMultiplier:number,tentMortalityBps:number,exposedCattleMortalityBps:number,travelDurationBps:number,travelRiskBps:number):WeatherProfile=>({probabilityBps,foodProductionBps,cattleConsumptionMultiplier,tentMortalityBps,exposedCattleMortalityBps,travelDurationBps,travelRiskBps});
 export const defaultWeatherConfig:WeatherConfig={enabled:true,profiles:{Mild:profile(2000,11000,1,0,0,10000,0),Normal:profile(5500,10000,1,0,0,10000,0),Harsh:{...profile(2000,0,1,50,500,12500,500),materialsProductionBps:0,residentConsumptionBps:15000,cattleConsumptionBps:15000},Severe:profile(500,5000,3,200,1500,15000,1500)}};
 export function initializeWeather(state:SimulationState,overrides:Partial<WeatherConfig>={}):void {
@@ -28,6 +28,8 @@ export function inspectWeather(state:SimulationState){
 }
 export function validateWeather(state:SimulationState,requireCurrent=true):void {
     const weather=state.weather;if(!weather)return;
+    if (weather.productionTiming !== undefined && weather.productionTiming !== 'winter-quarter-v1')
+        throw new Error('Invalid weather production timing');
     if(weather.version!==1||!state.landing||!weather.config||typeof weather.config.enabled!=='boolean'||Object.keys(weather.config).sort().join(',')!=='enabled,profiles')throw new Error('Invalid weather configuration');
     if(!weather.config.profiles||Object.keys(weather.config.profiles).sort().join(',')!==[...weatherClasses].sort().join(','))throw new Error('Invalid weather classes');
     let total=0;
@@ -47,10 +49,22 @@ export function weatherProfile(state:SimulationState):WeatherProfile {
     const current=state.landing?state.weather?.regions[state.landing.region.id]:undefined;
     return state.weather?.config.enabled&&current?state.weather.config.profiles[current.class]:defaultWeatherConfig.profiles.Normal;
 }
-/** Production uses Winter's first quarter; annual consumption/exposure keep the saved profile.
+/** Explicit, idempotent Fjord compatibility upgrade; never rewrites prior outcomes. */
+export function useSeasonalWeatherProduction(state: SimulationState): void {
+    if (state.weather && state.weather.productionTiming !== 'winter-quarter-v1') {
+        state.weather.productionTiming = 'winter-quarter-v1';
+        state.events.push({ id: `event-${state.events.length + 1}`, time: { ...state.time },
+            type: 'WeatherProductionTimingChanged', details: {
+                from: 'annual-v1', to: 'winter-quarter-v1',
+            } });
+    }
+    for (const target of Object.values(state.world?.targetClans ?? {}))
+        useSeasonalWeatherProduction(target);
+}
+/** Opted-in production uses Winter's first quarter; legacy campaigns retain annual timing.
  * A producer stepping after clock advancement passes the tick it actually worked. */
 export function weatherProductionModifiers(state: SimulationState, tick = state.time.tick) {
-    const winter = tick * 4 < state.ticksPerWinter;
+    const winter = state.weather?.productionTiming !== 'winter-quarter-v1' || tick * 4 < state.ticksPerWinter;
     const profile = weatherProfile(state);
     return {
         foodProductionBps: winter ? profile.foodProductionBps : 10000,

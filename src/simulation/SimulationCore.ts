@@ -39,7 +39,7 @@ import {personaIdentity} from './Identity';
 import {initializeWorld,validateWorld,applyExpeditionCommand,personaAway,namespaceTarget} from './WorldExpeditions';
 import type {WorldState,ExpeditionCommand,ExpeditionConfig} from './WorldExpeditions';
 export {inspectWorld,missionOffer,defaultExpeditionConfig,missionTypes,personaAway} from './WorldExpeditions';
-import {initializeWeather,validateWeather} from './Weather';
+import {initializeWeather,validateWeather,useSeasonalWeatherProduction} from './Weather';
 import type {WeatherState,WeatherConfig} from './Weather';
 export {inspectWeather,inspectWeatherExposure,weatherProductionModifiers,defaultWeatherConfig,weatherClasses} from './Weather';
 import {eventFacts} from './EventFacts';
@@ -211,7 +211,7 @@ export function createSettlement(seed:number, overrides:Partial<PrototypeConfig>
     }
     initializeSocial(state,socialOverrides);validateState(state); return state;
 }
-export type SimulationCommand = MerchantCommand | CultureCommand | SmitheryCommand | LongshipCommand | IslandMissionCommand | SpatialExpeditionCommand | CampfireCommand | ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
+export type SimulationCommand = {type: 'UseSeasonalWeatherProduction'} | MerchantCommand | CultureCommand | SmitheryCommand | LongshipCommand | IslandMissionCommand | SpatialExpeditionCommand | CampfireCommand | ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
 function integer(value: number, label: string) {
     if (!Number.isSafeInteger(value) || value < 0) throw new Error(`${label} must be a nonnegative safe integer`);
 }
@@ -221,6 +221,12 @@ function emit(state: SimulationState, type: string, personaId?: string, details?
 }
 export function applyCommand(input: SimulationState, command: SimulationCommand, context?: PhysicalExpeditionContext): SimulationState {
     validateState(input);
+    if (command.type === 'UseSeasonalWeatherProduction') {
+        const state = structuredClone(input);
+        useSeasonalWeatherProduction(state);
+        validateState(state);
+        return state;
+    }
     if (command.type === 'BarterWithMerchant') {
         const state = structuredClone(input);
         applyMerchantCommand(state, command);

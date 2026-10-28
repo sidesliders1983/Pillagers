@@ -53,7 +53,7 @@ The saved annual weather class affects **production during the Winter calendar q
 
 Every production tick uses the season in which the work occurred, including the final Winter tick and the final Autumn tick. Inspection shows the rate for the next tick. Batch advancement, split advancement and save/load use the same canonical boundaries, without an extra weather roll or clock.
 
-This timing correction applies when continuing existing campaigns too. Saved profile coefficients, previous events and historical measurement reports are retained; previous annual output is not recalculated. Historical reports made before this correction used year-long production modifiers and are not current balance measurements.
+Fjord records the versioned `winter-quarter-v1` timing via the idempotent public `UseSeasonalWeatherProduction` command for new campaigns and when continuing/importing existing campaigns. Each changed clan records the adoption time in `WeatherProductionTimingChanged`, including the physical rival. Ordinary Core loading never silently opts in: unmarked historical saves and headless research retain their original annual timing and exact replay. This timing correction applies when continuing existing campaigns in Fjord too. Saved profile coefficients, previous events and historical measurement reports are retained; previous annual output is not recalculated. Historical reports made before this correction used year-long production modifiers and are not current balance measurements.
 
 ## Annual consumption and exposure
 

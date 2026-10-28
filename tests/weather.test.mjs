@@ -20,6 +20,7 @@ test('weather is revealed once per Winter only after outgoing resolution and spl
  assert.deepEqual(next,core.applyCommand(initial,{type:'AdvanceWinter'}));
  assert.equal(next.events.filter(e=>e.type==='WinterWeatherDetermined').length,2);
 });
+const seasonal = state => core.applyCommand(state, {type: 'UseSeasonalWeatherProduction'});
 function forced(kind){const config=structuredClone(core.defaultWeatherConfig);for(const c of core.weatherClasses)config.profiles[c].probabilityBps=c===kind?10000:0;return config;}
 test('weather modifies Food work and cow output using fixed point; Materials and slaughter are unchanged',()=>{
  const normal=core.createCampaign(32,{}, {},forced('Normal'));
@@ -109,7 +110,7 @@ test('Severe weather leaves calves free until the saved Adult age threshold',()=
 
 test('the Harsh Winter quarter stops Food, Materials and cattle production without losing saved progress',()=>{
  const config=forced('Harsh');config.profiles.Harsh.tentMortalityBps=0;config.profiles.Harsh.exposedCattleMortalityBps=0;
- const initial=core.createCampaign(32,{}, {},config);
+ const initial=seasonal(core.createCampaign(32,{}, {},config));
  const food=Object.values(initial.personas).find(p=>core.inspectWork(initial,p.id).resource==='food');
  const wood=Object.values(initial.personas).find(p=>p.occupation==='woodworker');
  assert.equal(core.inspectWork(initial,food.id).productivityBps,0);
@@ -121,7 +122,7 @@ test('the Harsh Winter quarter stops Food, Materials and cattle production witho
 
 test('Harsh consumption adds 50% for residents and cattle after save/load, rounding each total up',()=>{
  const config=forced('Harsh');config.profiles.Harsh.tentMortalityBps=0;config.profiles.Harsh.exposedCattleMortalityBps=0;
- const initial=core.createCampaign(32,{...staticCattle,initialFood:100,foundingCoupleChanceBps:0},{mortalityBands:[{minAge:0,chanceBps:0}],fertilityChanceBps:0,partnershipChanceBps:0},config);
+ const initial=seasonal(core.createCampaign(32,{...staticCattle,initialFood:100,foundingCoupleChanceBps:0},{mortalityBands:[{minAge:0,chanceBps:0}],fertilityChanceBps:0,partnershipChanceBps:0},config));
  const next=core.advanceWinter(core.reconstructState(core.serializeState(initial)));
  assert.equal(next.events.filter(e=>e.type==='CattleFoodConsumed').at(-1).details.required,5);
  assert.equal(next.events.filter(e=>e.type==='FoodConsumed').at(-1).details.units,30);
@@ -134,8 +135,8 @@ test('Harsh consumption adds 50% for residents and cattle after save/load, round
 
 test('Harsh and Severe production recovers at Spring with exact split/save-load boundaries', () => {
  for (const kind of ['Harsh', 'Severe']) {
-  const initial = core.createCampaign(32, staticCattle, {}, forced(kind));
-  const normal = core.createCampaign(32, staticCattle, {}, forced('Normal'));
+  const initial = seasonal(core.createCampaign(32, staticCattle, {}, forced(kind)));
+  const normal = seasonal(core.createCampaign(32, staticCattle, {}, forced('Normal')));
   const worker = Object.values(normal.personas).find(p => core.inspectWork(normal, p.id).resource === 'food');
   const wood = Object.values(normal.personas).find(p => p.occupation === 'woodworker');
   const baseline = core.inspectWork(normal, worker.id).productivityBps;
@@ -168,4 +169,28 @@ test('Harsh and Severe production recovers at Spring with exact split/save-load 
   assert.equal(core.inspectWork(nextWinter, worker.id).productivityBps,
    kind === 'Harsh' ? 0 : Math.floor(baseline / 2), 'The incoming Winter uses its own class');
  }
+});
+
+
+test('the explicit seasonal upgrade preserves legacy saves, prior facts, clocks and RNG', () => {
+ const legacy = core.createCampaign(32, {}, {}, forced('Harsh'));
+ const spring = core.applyCommand(legacy, {type: 'AdvanceTicks', ticks: 250});
+ const worker = Object.values(spring.personas).find(p => core.inspectWork(spring, p.id).resource === 'food');
+ assert.equal(core.inspectWork(spring, worker.id).productivityBps, 0, 'Legacy timing remains annual until explicitly upgraded');
+ const upgraded = seasonal(spring);
+ assert.ok(core.inspectWork(upgraded, worker.id).productivityBps > 0);
+ assert.deepEqual(upgraded.events.slice(0, spring.events.length), spring.events);
+ assert.deepEqual(upgraded.stocks, spring.stocks);
+ assert.deepEqual(upgraded.time, spring.time);
+ assert.equal(upgraded.rngState, spring.rngState);
+ assert.equal(upgraded.events.at(-1).type, 'WeatherProductionTimingChanged');
+ for (const [id, target] of Object.entries(upgraded.world?.targetClans ?? {})) {
+  assert.equal(target.weather?.productionTiming, 'winter-quarter-v1');
+  assert.equal(target.rngState, spring.world.targetClans[id].rngState);
+  assert.deepEqual(target.stocks, spring.world.targetClans[id].stocks);
+ }
+ assert.deepEqual(seasonal(upgraded), upgraded, 'Repeated adoption is idempotent');
+ assert.deepEqual(core.reconstructState(core.serializeState(upgraded)), upgraded);
+ const corrupt = structuredClone(upgraded); corrupt.weather.productionTiming = 'unsupported';
+ assert.throws(() => core.reconstructState(JSON.stringify(corrupt)), /weather production timing/i);
 });

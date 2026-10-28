@@ -44,9 +44,15 @@ body.fjord-play {
 #fjord-play .fjord-time-controls { justify-self: end; padding: 6px; gap: 6px; align-items: center; }
 #fjord-play .fjord-time-controls > button, #fjord-play #fjord-menu > summary { background: none; border-color: transparent; }
 #fjord-play #fjord-run { min-width: 44px; font-size: 12px; border: 0; }
-#fjord-play #fjord-pacing-slot { max-width: 110px; }
-#fjord-play #fjord-pacing { font-size: 10px; }
-#fjord-play #fjord-cycle { width: 110px; font-size: 11px; min-height: 28px; padding: 3px; }
+#fjord-play #fjord-pacing-slot { display: inline-flex; }
+#fjord-play #fjord-pacing { position: relative; display: inline-flex; align-items: center; gap: 5px;
+    min-height: 44px; padding: 0 5px; font-size: 11px; white-space: nowrap; }
+#fjord-play #fjord-pacing .fjord-glyph { width: 20px; height: 20px; color: var(--fjord-accent); }
+/* Retain the native touch/keyboard picker, with one compact visible speed label. */
+#fjord-play #fjord-pacing #fjord-cycle { position: absolute; inset: 0; width: 100%; height: 100%;
+    margin: 0; opacity: 0; cursor: pointer; font-size: 16px; }
+#fjord-play #fjord-pacing:focus-within { outline: 2px solid var(--fjord-accent); outline-offset: 2px; }
+#fjord-play #fjord-pacing[data-disabled="true"] { opacity: .48; }
 #fjord-play #fjord-next { font-size: 11px; padding: 6px; }
 #fjord-play #fjord-menu > summary { display: grid; place-items: center; }
 #fjord-menu .fjord-settings { top: 78px; right: 0; }
@@ -286,7 +292,6 @@ body.fjord-play {
     .fjord-brand img { display: none; } .fjord-brand { padding: 8px; }
     .fjord-brand strong { max-width: 13ch; font-size: 15px; }
     #fjord-play .fjord-time-controls #fjord-next { display: none; }
-    #fjord-play .fjord-time-controls #fjord-pacing-slot { display: none; }
     #fjord-play #fjord-navigation { left: 8px; bottom: 10px; padding: 3px; }
     #fjord-play #fjord-navigation button { padding: 8px; font-size: 10px; gap: 4px; }
     #fjord-play #fjord-navigation .fjord-glyph { width: 17px; }

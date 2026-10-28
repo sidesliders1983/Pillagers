@@ -13,6 +13,7 @@ const paths = {
     close: 'm5 5 14 14M19 5 5 19',
     play: 'm7 3 14 9-14 9V3Z',
     pause: 'M7 3v18M17 3v18',
+    fastForward: 'M2 4l10 8-10 8V4Zm10 0 10 8-10 8V4Z',
     menu: 'M4 5h16M4 12h16M4 19h16',
     alert: 'm12 2 10 19H2L12 2Zm0 6v6m0 3v.1',
     work: 'm4 20 12-12m-1-6 7 7-3 3-7-7 3-3ZM2 7l5-5m-3 2 16 16',

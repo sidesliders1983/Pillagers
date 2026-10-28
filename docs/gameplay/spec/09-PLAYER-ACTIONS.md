@@ -85,7 +85,9 @@ accessible. Real homes, upgrades, witnessed species, Recon, personal supported
 equipment and optional Pillage outcomes count, including actions done out of order.
 Show me navigates/reviews existing UI; it never issues Core commands or supplies
 resources. Skip, defer and replay are per-history presentation metadata.
-All ordinary campaign entries stay paused until deliberate Play.
+Ordinary campaign entries stay paused until deliberate Play or the explicit
+**Explore on my own** invitation choice. **Guide me**, Continue/import and recovery
+remain paused.
 
 See [The Founding Journey v0.1](../FOUNDING-JOURNEY-V01.md) for the current
 predicates, knowledge limits, paused-entry exception and QA contract.

@@ -13,7 +13,7 @@ import { IslandMissionPanel } from './IslandMissionPanel';
 import { IslandMissionMarkers } from './IslandMissionMarkers';
 import { LifecycleTrace } from './LifecycleTrace';
 import type { CampaignStartAttempt } from './FjordEntry';
-import { newFjordScenario } from './FjordScenario';
+import { newFjordScenario, useSeasonalFjordProduction } from './FjordScenario';
 import { fjordLivestockRules } from '../config/FjordLivestock';
 import { resumeCheckpointKey } from '../play/SettlementRecovery';
 import { birthdayCalendarMode } from '../simulation/BirthdayCalendar';
@@ -165,6 +165,7 @@ export class FjordPlay {
         // New islands include physical exploration; restored campaigns retain their saved rules.
         if (entry.kind !== 'continue' && campaignIslandPlan(this.campaign.blueprint) &&
             enableStartDiscovery) this.campaign.enableDiscovery();
+        if (!entry.diagnosticRun) useSeasonalFjordProduction(this.session);
         document.title = 'FjordSide';
         const readingPosition = this.foundingBook?.scrollTop ?? 0;
         document.body.className = 'fjord-play';
@@ -344,6 +345,7 @@ export class FjordPlay {
         const production = new FjordProduction(this.session.readSnapshot().events);
         const productionLabels = new ProductionLabels(document.querySelector<HTMLElement>('#fjord-production-labels')!);
         const resetProduction = () => {
+            useSeasonalFjordProduction(this.session);
             production.reset(this.session.readSnapshot().events);
             productionLabels.reset();
         };
@@ -737,7 +739,7 @@ export class FjordPlay {
         weddingInvitation = this.ownStartup(new WeddingInvitation(document.querySelector<HTMLElement>('#fjord-play')!,
             this.shared, { commit: commitManagement, changed: () => { persist(); refresh(); } }));
         firstSteps = this.ownStartup(new FirstStepsGuide(this.shared, {
-            persist, pause: () => setPlayback(false),
+            persist, pause: () => setPlayback(false), play: () => setPlayback(true),
             reveal: () => desktopUI!.closeForHelp(), clockChanged: syncGuideClock,
             resident: id => desktopUI!.showResident(id),
             household: id => desktopUI!.showEntity('household', id),
