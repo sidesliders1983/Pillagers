@@ -91,3 +91,9 @@ remain paused.
 
 See [The Founding Journey v0.1](../FOUNDING-JOURNEY-V01.md) for the current
 predicates, knowledge limits, paused-entry exception and QA contract.
+
+
+Visiting merchants are enabled by default for new Fjord campaigns (owner approval,
+28 October 2026); no URL flag is needed. Continued/imported historical campaigns
+and faithful restarts preserve their saved trade setting. See [Trade v0.1A](../TRADE-V01A.md)
+for exact costs, finite stock, Trader eligibility and visit timing.

@@ -140,7 +140,7 @@ export class FjordPlay {
             }
             this.opened = { campaign, warning: '', autoStart: entry.kind === 'continue' && resumePlayback };
         } else {
-            const proposal = await this.loading.measure('campaign-founders', () => newFjordScenario(entry.seed, query.get('culture') === '1', query.get('trade') === '1'));
+            const proposal = await this.loading.measure('campaign-founders', () => newFjordScenario(entry.seed, query.get('culture') === '1'));
             this.foundingBook = new FoundingBookWindow(proposal.book.snapshot().chapters[0]);
             proposal.book.notifyPending();
             this.loading.configure(this.foundingBook);
@@ -617,7 +617,7 @@ export class FjordPlay {
                     } else if (!replayFounders) proposal.newCampaign(Number(seedField.value), weatherField.checked, true, foundingPhase,
                         calendarMode ?? birthdayCalendarMode(this.session.readSnapshot()), { player: fjordLivestockRules },
                         query.get('culture') === '1' ? { enabled: true } : undefined, undefined,
-                        query.get('trade') === '1' ? { enabled: true } : undefined);
+                        { enabled: true });
                     this.foundingBook = new FoundingBookWindow(proposal.book.snapshot().chapters[0]);
                     proposal.book.notifyPending();
                     const recipe = replayFounders ? campaignIslandPlan(this.campaign.blueprint)?.recipe : undefined;

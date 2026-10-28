@@ -12,7 +12,7 @@ const hash = value => createHash('sha256').update(value).digest('hex');
 const value = manifest => manifest.reduce((sum, line) => sum + tradeGoods[line.goodId].tradeValue * line.quantity, 0);
 const rows = [];
 for (let seed = 1; seed <= 30; seed++) {
-    const active = newFjordScenario(seed, false, true), control = newFjordScenario(seed);
+    const active = newFjordScenario(seed, false, true), control = newFjordScenario(seed, false, false);
     active.command({ type: 'AdvanceTicks', ticks: 2000 });
     control.command({ type: 'AdvanceTicks', ticks: 2000 });
     const state = active.snapshot(), domestic = control.snapshot();

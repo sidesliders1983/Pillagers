@@ -263,11 +263,14 @@ export class GameplaySession {
                 .filter(([, target]) => target.landing?.livestock)
                 .map(([id, target]) => [id, target.landing!.livestock!])),
         };
-        this.replace(createCampaign(seed, this.state.landing?.config, this.state.mechanics?.config,
+        let restarted = createCampaign(seed, this.state.landing?.config, this.state.mechanics?.config,
             { ...this.state.weather?.config, enabled: weatherEnabled }, this.state.world?.config,
             { ...this.state.social?.config, enabled: socialEnabled }, targetLandingConfigs,
             foundingPhase, birthdayCalendarMode(this.state), livestock, this.state.culture?.config,
-            this.state.contextualSupport?.config ?? { enabled: false }, { enabled: !!this.state.trade }));
+            this.state.contextualSupport?.config ?? { enabled: false }, { enabled: !!this.state.trade });
+        if (this.state.weather?.productionTiming === 'winter-quarter-v1')
+            restarted = applyCommand(restarted, { type: 'UseSeasonalWeatherProduction' });
+        this.replace(restarted);
     }
     private replace(state: SimulationState, fresh = true): void {
         this.physicalWorld = undefined;

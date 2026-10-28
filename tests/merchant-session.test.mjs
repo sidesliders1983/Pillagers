@@ -5,10 +5,10 @@ const { newFjordScenario } = loadTypeScript(new URL('../src/fjord-play/FjordScen
 const { GameplaySession } = loadTypeScript(new URL('../src/gameplay-lab/GameplaySession.ts', import.meta.url));
 const merchants = loadTypeScript(new URL('../src/simulation/VisitingMerchants.ts', import.meta.url));
 
-test('new-campaign trade is explicit; session commands, pause, restart and old-save import retain their meaning', () => {
-    const ordinary = newFjordScenario(1);
+test('new Fjord campaigns include merchants by default; pause, restart and old-save import retain their meaning', () => {
+    const ordinary = newFjordScenario(1, false, false);
     assert.equal(ordinary.snapshot().trade, undefined);
-    const session = newFjordScenario(1, false, true);
+    const session = newFjordScenario(1);
     assert.ok(session.snapshot().trade);
     session.command({ type: 'AdvanceTicks', ticks: 2000 });
     const saved = session.saveJSON();
