@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "provider": "Owner-supplied Meshy mine, issue #223",
+  "source": {
+    "file": "Assets/Mining/Meshy_AI_Timberdeep_Mine_1028104608_texture.glb",
+    "bytes": 23927404,
+    "sha256": "bb66ae14e417504d36227142869186526717a7e14432118287c423b53e51e586",
+    "bounds": {
+      "min": [
+        -1.927202582359314,
+        0,
+        -2.682628631591797
+      ],
+      "max": [
+        1.9437689781188965,
+        3,
+        2.884876012802124
+      ]
+    },
+    "triangles": 6731,
+    "geometrySha256": "575e57b1d676b2b80768303b42748c6e5322f0133fbdb81e477d244c9252af9c",
+    "texturePixelsRGBA": 100663296
+  },
+  "runtime": {
+    "file": "mine.glb",
+    "bytes": 1451832,
+    "sha256": "ba77499eec7234c481f277ea56157608ad44f05ad9e007a0a1ee6dc1e8741c65",
+    "bounds": {
+      "min": [
+        -1.927202582359314,
+        0,
+        -2.682628631591797
+      ],
+      "max": [
+        1.9437689781188965,
+        3,
+        2.884876012802124
+      ]
+    },
+    "triangles": 6731,
+    "geometrySha256": "575e57b1d676b2b80768303b42748c6e5322f0133fbdb81e477d244c9252af9c",
+    "encoding": "meshopt-lossless",
+    "textures": [
+      {
+        "name": "normal",
+        "sourceWidth": 2048,
+        "sourceHeight": 2048,
+        "width": 512,
+        "height": 512,
+        "bytes": 553294
+      },
+      {
+        "name": "texture_0",
+        "sourceWidth": 2048,
+        "sourceHeight": 2048,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 222714
+      },
+      {
+        "name": "texture_0_metallic_roughness",
+        "sourceWidth": 4096,
+        "sourceHeight": 4096,
+        "width": 512,
+        "height": 512,
+        "bytes": 264586
+      }
+    ],
+    "texturePixelsRGBA": 6291456
+  },
+  "notes": "Original topology, winding, positions, normals and UVs retained. No simplification. Colour 1024px; data maps 512px; original source untouched."
+}

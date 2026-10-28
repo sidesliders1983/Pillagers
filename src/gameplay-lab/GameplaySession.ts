@@ -1,3 +1,4 @@
+import { assertMiningWorld } from '../simulation/Mining';
 import type { TradeConfig } from '../simulation/VisitingMerchants';
 import { gatheringOffer, inspectCulture } from '../simulation/CulturalEvents';
 import type { CultureConfig, CulturalOccasion } from '../simulation/CulturalEvents';
@@ -16,7 +17,7 @@ import { freezeReadView } from './ReadView';
 import { FamilyTreeIndex } from '../lore/FamilyTree';
 import { PersonalHistoryIndex } from '../lore/PersonalHistory';
 import { ClanBook } from '../lore/ClanBook';
-import { createCampaign, applyCommand, serializeState, reconstructState, initializePhysicalDiscovery, initializeIslandClans } from '../simulation/SimulationCore';
+import { createCampaign, applyCommand, serializeState, reconstructState, initializePhysicalMining, initializePhysicalDiscovery, initializeIslandClans } from '../simulation/SimulationCore';
 import type { BirthdayCalendarMode, CampaignLivestockRules, FoundingPhase, SimulationCommand, SimulationState } from '../simulation/SimulationCore';
 /** Browser pacing is transient; only explicit commands change canonical state. */
 export class GameplaySession {
@@ -29,6 +30,7 @@ export class GameplaySession {
         ships?: () => PhysicalExpeditionContext['longshipOrigins']): void {
         const fullWorld = world as WorldBlueprint;
         const context = { world, worldId, ...(fullWorld.config && fullWorld.coast && fullWorld.biomes && fullWorld.placementPlan ? { wildlifeWorld: fullWorld } : {}) };
+        assertMiningWorld(this.state, world, worldId);
         assertSpatialWorld(this.state, context);
         assertWildlifeWorld(this.state, context);
         this.physicalWorld = context;
@@ -132,6 +134,11 @@ export class GameplaySession {
         this.state = initializeWildlifeSightings(this.state, world, this.physicalWorld.worldId);
         this.invalidateRead();
     }
+    initializeMining(world: WorldBlueprint, worldId: string): void {
+        this.state = initializePhysicalMining(this.state, world, worldId);
+        this.bindPhysicalWorld(world, worldId, this.physicalExclusions, this.physicalShips);
+        this.invalidateRead();
+    }
     initializeDiscovery(world: WorldBlueprint, worldId: string): void {
         this.state = initializePhysicalDiscovery(this.state, world, worldId);
         this.bindPhysicalWorld(world, worldId);
@@ -184,7 +191,7 @@ export class GameplaySession {
     /** UI task transaction: existing zero-time management rules, committed only after all succeed. */
     commandBatch(commands: readonly SimulationCommand[]): void {
         const allowed = new Set([
-            'BuildHouse', 'AssignOccupation', 'SpecializeBuilding', 'AssignCattle',
+            'BuildHouse', 'AssignOccupation', 'SpecializeBuilding', 'AssignCattle', 'AssignMiner', 'RecallMiner', 'BuildMine',
             'AssignLivestock', 'UpgradeBuilding', 'SetSmitheryTarget', 'SponsorGathering', 'BarterWithMerchant'
         ]);
         if (commands.length > 64 || commands.some(command => !allowed.has(command.type))) {
@@ -263,7 +270,10 @@ export class GameplaySession {
                 .filter(([, target]) => target.landing?.livestock)
                 .map(([id, target]) => [id, target.landing!.livestock!])),
         };
-        let restarted = createCampaign(seed, this.state.landing?.config, this.state.mechanics?.config,
+        // Miner belongs to a physical-world extension, which is rebound after founding.
+        const mechanics = this.state.mechanics ? structuredClone(this.state.mechanics.config) : undefined;
+        if (mechanics) delete mechanics.occupations.miner;
+        let restarted = createCampaign(seed, this.state.landing?.config, mechanics,
             { ...this.state.weather?.config, enabled: weatherEnabled }, this.state.world?.config,
             { ...this.state.social?.config, enabled: socialEnabled }, targetLandingConfigs,
             foundingPhase, birthdayCalendarMode(this.state), livestock, this.state.culture?.config,

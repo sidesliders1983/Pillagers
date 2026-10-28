@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FjordSide Mining review</title>
+<style>body{margin:0;background:#14292e;color:#eee9d8;font:18px/1.6 system-ui}main{max-width:48rem;margin:auto;padding:1.5rem}a{color:#ffe09a}button{font:inherit;min-height:48px;padding:.7rem;background:#304a48;color:inherit;border:1px solid #cfb878;border-radius:6px}li{margin:.6rem 0}pre{white-space:pre-wrap}</style>
+<main><h1>Mining trial</h1><p>Real finite outcrops, resident travel and Iron Ore extraction. This trial is separate from ordinary campaign defaults.</p>
+<p><a href="/fjord-play?entry=qa-new&amp;seed=0&amp;mining=1">Start a new Mining campaign</a></p>
+<p><button id="load" data-save="scouted-campaign.json">Open the genuinely scouted test campaign</button></p>
+<p><button data-save="developed-campaign.json">Open the developed mine model sample</button></p>
+<p><button data-save="winter-mine-campaign.json">Open the winter mine lighting sample</button></p>
+<p><button data-save="bog-campaign.json">Open the genuinely scouted Bog Iron campaign</button></p>
+<p>The Bog Iron sample uses island 101. Open Expeditions &rarr; Group 1 &rarr; Show group to see the wet lowland. Select the low rusty deposit and assign a Miner. Other mud patches need not contain iron. The flat peat and moss interior is covered by a connected horizontal water layer. Higher banks stay dry and the pattern remains visible underneath; the runtime pattern is 256 by 256 pixels. Rotate and zoom around the patch: peat and water should remain visible from every unobstructed angle.</p>
+<p>The marsh now combines taller procedural grass (about 0.9–1.15 m) and Cattails in irregular clumps. Check shallow-water roots, clear open water, camera rotation, wind pause/resume, and selection through the plants. Source credits are in Game menu &rarr; Nature asset credits.</p>
+<p>The model sample has a real built mine and Daugirdas working inside, hidden from view. Recall him to see him emerge and return home. At bare rock and Bog Iron, workers remain visible. Three Woodworkers earned the 20 Materials through normal production. No resources or knowledge were injected. Use Map to focus the northern end of the explored trail; rotate to face the entrance (Q/E on desktop, drag on touch).</p>
+<p>The winter sample advances the same real developed-mine campaign into winter. Check the warm shaft glow and the small cylindrical light inside the outside lantern. These lights switch off outside winter.</p>
+<p>On desktop, a pointing finger marks an object that a click can select. Empty ground keeps the open hand; dragging uses the closed hand. Expedition destination mode keeps its crosshair.</p>
+<p>The test campaign has paid for one scout and reached the first outcrop. It replaces the active local campaign after keeping a downloadable copy.</p>
+<p><a href="scouted-campaign.json" download>Download the test save</a> · <a href="existing-islands.json">Current island measurements</a> · <a href="historical-islands.json">Historical geography comparison</a></p>
+<ol><li>Open Expeditions → Group 1 → Show group. A dark outcrop with rusty seams is nearby.</li>
+<li>Select the outcrop. Its exact reserve must remain unassessed. Choose another resident to become a Miner. You can also select a resident, assign Miner and choose a known site.</li>
+<li>Start the clock. The worker must run here before any Iron Ore appears. On arrival, the finite reserve becomes visible.</li>
+<li>Build the mine for 20 Materials. The authored entrance must face the level forecourt, with its rear in the hillside. Bare outcrops work at 50%; a developed mine works at full productivity.</li>
+<li>Recall the Miner, or change their work. They must walk home without producing from home or during return.</li>
+<li>Save and reload. Check the same reserve, worker position and stock. Also try the close button, camera and Map on touch.</li></ol>
+<p id="status" role="status"></p></main>
+<script type="module">
+const key = 'pillagers.fjord-play.active.v1';
+for (const button of document.querySelectorAll('[data-save]')) button.onclick = async () => {
+ const status = document.querySelector('#status');
+ try {
+  const response = await fetch('./' + button.dataset.save);
+  if (!response.ok) throw new Error('Test save unavailable.');
+  const text = await response.text(); JSON.parse(text);
+  const previous = sessionStorage.getItem(key);
+  if (previous) {
+   const url = URL.createObjectURL(new Blob([previous],{type:'application/json'}));
+   const link=document.createElement('a'); link.href=url; link.download='fjordside-before-mining-review.json'; link.click();
+   setTimeout(()=>URL.revokeObjectURL(url),1000);
+  }
+  sessionStorage.setItem(key,text);
+  location.href='/fjord-play?entry=qa-continue&debugPerf=1';
+ } catch (error) {status.textContent=error.message;}
+};
+</script></html>

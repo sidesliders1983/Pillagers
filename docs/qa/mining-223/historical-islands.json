@@ -1,0 +1,86 @@
+[
+  {
+    "version": "island-pool-v3",
+    "seed": 18,
+    "canonicalUnchanged": true,
+    "transportUnchanged": true
+  },
+  {
+    "version": "island-pool-v3",
+    "seed": 7,
+    "canonicalUnchanged": true,
+    "transportUnchanged": true
+  },
+  {
+    "version": "island-pool-v3",
+    "seed": 15,
+    "canonicalUnchanged": true,
+    "transportUnchanged": true
+  },
+  {
+    "version": "island-pool-v3",
+    "seed": 79,
+    "canonicalUnchanged": true,
+    "transportUnchanged": true
+  },
+  {
+    "version": "island-pool-v3",
+    "seed": 88,
+    "canonicalUnchanged": true,
+    "transportUnchanged": true
+  },
+  {
+    "version": "island-pool-v3",
+    "seed": 101,
+    "canonicalUnchanged": true,
+    "transportUnchanged": true
+  },
+  {
+    "version": "island-pool-v3",
+    "seed": 112,
+    "canonicalUnchanged": true,
+    "transportUnchanged": true
+  },
+  {
+    "version": "island-pool-v3",
+    "seed": 168,
+    "canonicalUnchanged": true,
+    "transportUnchanged": true
+  },
+  {
+    "version": "island-pool-v3",
+    "seed": 195,
+    "canonicalUnchanged": true,
+    "transportUnchanged": true
+  },
+  {
+    "version": "island-pool-v3",
+    "seed": 227,
+    "canonicalUnchanged": true,
+    "transportUnchanged": true
+  },
+  {
+    "version": "island-pool-v1",
+    "seed": 18,
+    "canonicalUnchanged": true,
+    "transportUnchanged": true
+  },
+  {
+    "version": "island-pool-v1",
+    "seed": 7,
+    "canonicalUnchanged": true,
+    "transportUnchanged": true
+  },
+  {
+    "version": "island-pool-v2",
+    "seed": 18,
+    "canonicalUnchanged": true,
+    "transportUnchanged": true
+  },
+  {
+    "version": "island-pool-v2",
+    "seed": 7,
+    "canonicalUnchanged": true,
+    "transportUnchanged": true
+  }
+]

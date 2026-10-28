@@ -61,3 +61,15 @@ Clan Book Materials ledger. See [the precise timing and save contract](../../SET
 ## ECON-005 — Smithery specialist production (#221)
 
 Smiths make Wooden Spears and Wooden Shields; Leatherworkers make Leather-reinforced Shields from real Materials/Hides. Small saved targets count stored plus personally worn stock. Production reuses ordinary work, aptitude, care/age/absence and existing specialized-home upgrades. Hides remain a specialist stock, outside the universal HUD. See [the approved recipes, work/ownership contract and QA](../SMITHERY-V01.md).
+
+
+## WORK 005 Mining
+
+**Status:** Owner UAT approved; enabled for new physical island campaigns
+
+[Mining v0.1](../MINING-V01.md) adds actual Miner assignments to discovered,
+finite physical outcrops. It reuses the canonical aptitude, occupation history,
+parental apprenticeship and integer work progress. Real travel precedes work;
+blocked paths, unavailability and exhaustion stop extraction. Iron Ore is a
+specialist integer stock with exact site-to-clan accounting. No historical
+geography, base ten-occupation founder distribution or CPU automation is changed.

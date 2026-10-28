@@ -1,0 +1,19 @@
+{
+  "state": {
+    "time": {
+      "tick": 679,
+      "ticksPerWinter": 1000,
+      "winter": 800
+    },
+    "wetLowlands": {
+      "cells": 24,
+      "drawCalls": 3,
+      "reedInstances": 30,
+      "textureBytes": 262144,
+      "textureResolution": 256,
+      "triangles": 1416,
+      "waterPatches": 2
+    }
+  },
+  "errors": []
+}

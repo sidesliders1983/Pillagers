@@ -1,0 +1,33 @@
+{
+  "url": "http://127.0.0.1:5181/fjord-play?debugPerf=1",
+  "observed": {
+    "loadingOutcome": "playable",
+    "mining": {
+      "asset": {
+        "state": "idle"
+      },
+      "developedSites": 0,
+      "maximumTrianglesPerSite": 6741,
+      "placements": [],
+      "sites": [
+        "iron-101-448-312",
+        "bog-iron-wet-101-14763"
+      ],
+      "trianglesPerSite": 60
+    },
+    "ready": "true",
+    "time": {
+      "tick": 26,
+      "ticksPerWinter": 1000,
+      "winter": 801
+    },
+    "wetLowlands": {
+      "cells": 24,
+      "drawCalls": 2,
+      "reedInstances": 48,
+      "textureBytes": 4096,
+      "triangles": 768
+    }
+  },
+  "accessibility": "Browser tab: 2, Title: \"FjordSide\", URL: \"http://127.0.0.1:5181/fjord-play?debugPerf=1\".\nThe following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.\n~\t\t77 text 4fcbf63ce0b1 · 12:35:38 · 295 s\nPaused · low / low · DPR 1\n~\t\t78 text 18.1 fps · window 5.0 s\nInterval μ/p95  55.3 ms / 66.7 ms\nCPU frame p95   11.3 ms\nGPU main        51.4 ms\nHitch /60 s     0.0 ms\nTicks total/rate 0 / 0.0 /s\nHeap 417.6 MiB* · VRAM unavailable\nThe focused UI element is 54 container Bog Iron deposit"
+}

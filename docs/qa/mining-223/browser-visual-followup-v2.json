@@ -1,0 +1,146 @@
+{
+  "bog": {
+    "mining": {
+      "asset": {
+        "state": "idle"
+      },
+      "developedSites": 0,
+      "maximumTrianglesPerSite": 6769,
+      "placements": [],
+      "shadowLights": 0,
+      "sites": [
+        "iron-101-448-312",
+        "bog-iron-wet-101-14763"
+      ],
+      "trianglesPerSite": 60,
+      "winterLights": 0
+    },
+    "time": {
+      "tick": 679,
+      "ticksPerWinter": 1000,
+      "winter": 800
+    },
+    "wetLowlands": {
+      "cells": 24,
+      "drawCalls": 3,
+      "reedInstances": 30,
+      "textureBytes": 262144,
+      "textureResolution": 256,
+      "triangles": 1416,
+      "waterPatches": 2
+    }
+  },
+  "winterInside": {
+    "miners": [
+      {
+        "id": "founder-2",
+        "insideMine": true,
+        "position": [
+          24,
+          6.056471197480447,
+          8
+        ],
+        "visible": false
+      }
+    ],
+    "mining": {
+      "asset": {
+        "estimatedTextureMiB": 8,
+        "state": "ready"
+      },
+      "developedSites": 1,
+      "maximumTrianglesPerSite": 6769,
+      "placements": [
+        {
+          "clearing": {
+            "halfDepth": 3.2163143157958984,
+            "halfWidth": 2.735485780239105,
+            "rotation": -0.743696408022383,
+            "scale": 1,
+            "x": 24.72190863253063,
+            "y": 6.056471197480447,
+            "z": 7.215223505481319
+          },
+          "forecourt": {
+            "back": 0.5,
+            "center": {
+              "x": 24,
+              "z": 8
+            },
+            "forward": 1.65,
+            "front": {
+              "x": -0.6770129799784198,
+              "z": 0.7359710761577113
+            },
+            "height": 6.056471197480447,
+            "right": {
+              "x": 0.7359710761577113,
+              "z": 0.6770129799784198
+            },
+            "width": 4.47097156047821
+          },
+          "id": "iron-18-408-424",
+          "model": {
+            "rotation": -0.743696408022383,
+            "x": 25.08322076796547,
+            "y": 6.056471197480447,
+            "z": 6.822446278147662
+          },
+          "rearTerrainHeight": 9.2051589095496
+        }
+      ],
+      "shadowLights": 0,
+      "sites": [
+        "iron-18-408-424"
+      ],
+      "trianglesPerSite": 60,
+      "winterLights": 1
+    },
+    "time": {
+      "tick": 1,
+      "ticksPerWinter": 1000,
+      "winter": 805
+    }
+  },
+  "returnOrder": {
+    "miners": [
+      {
+        "id": "founder-2",
+        "insideMine": false,
+        "position": [
+          24,
+          6.056471197480447,
+          8
+        ],
+        "visible": true
+      }
+    ],
+    "time": {
+      "tick": 1,
+      "ticksPerWinter": 1000,
+      "winter": 805
+    }
+  },
+  "walk": {
+    "miners": [],
+    "time": {
+      "tick": 83,
+      "ticksPerWinter": 1000,
+      "winter": 805
+    }
+  },
+  "currentBuildErrors": [
+    {
+      "level": "error",
+      "message": "THREE.WebGLProgram: Shader Error 0 - VALIDATE_STATUS false\n\nMaterial Name: forest\nMaterial Type: MeshStandardMaterial\n\nProgram Info Log: Vertex shader is not compiled.\nVERTEX\n\nERROR: 0:77: 'vFjordAtmospherePosition' : redefinition\nERROR: 0:604: 'fjordPosition' : redefinition\n\n  72: \tattribute vec4 skinWeight;\n  73: #endif\n  74: \n  75: varying vec3 vFjordAtmospherePosition;\n  76: varying vec3 vStructureWorldNormal;\n> 77: varying vec3 vFjordAtmospherePosition;\n  78: #define STANDARD\n  79: varying vec3 vViewPosition;\n  80: #ifdef USE_TRANSMISSION\n  81: \tvarying vec3 vWorldPosition;\n  82: #endif\n  83: #define PI 3.141592653589793\nFRAGMENT\n\nERROR: 0:752: 'uFjordSunDirection' : redefinition\nERROR: 0:753: 'uFjordSunColor' : redefinition\nERROR: 0:754: 'uFjordFogLinear' : redefinition\nERROR: 0:755: 'uFjordSolarStrength' : redefinition\nERROR: 0:756: 'uFjordGlowStrength' : redefinition\nERROR: 0:757: 'uFjordViewDown' : redefinition\nERROR: 0:758: 'vFjordAtmospherePosition' : redefinition\nERROR: 0:760: 'fjordAtmosphere' : function already has a body\nERROR: 0:2005: 'fjordLit' : redefinition\n\n  747:             return color;\n  748:         #endif\n  749:     }\n  750: \n  751: \n> 752:     uniform vec3 uFjordSunDirection;\n  753:     uniform vec3 uFjordSunColor;\n  754:     uniform vec3 uFjordFogLinear;\n  755:     uniform float uFjordSolarStrength;\n  756:     uniform float uFjordGlowStrength;\n  757:     uniform float uFjordViewDown;\n  758:     varying vec3 vFjordAtmospherePosition;",
+      "timestamp": "2026-10-28T13:30:10.380Z",
+      "url": "http://127.0.0.1:5181/assets/three.module-Ciz4K0ye.js"
+    },
+    {
+      "level": "error",
+      "message": "THREE.WebGLProgram: Shader Error 0 - VALIDATE_STATUS false\n\nMaterial Name: forest\nMaterial Type: MeshStandardMaterial\n\nProgram Info Log: Vertex shader is not compiled.\nVERTEX\n\nERROR: 0:77: 'vFjordAtmospherePosition' : redefinition\nERROR: 0:604: 'fjordPosition' : redefinition\n\n  72: \tattribute vec4 skinWeight;\n  73: #endif\n  74: \n  75: varying vec3 vFjordAtmospherePosition;\n  76: varying vec3 vStructureWorldNormal;\n> 77: varying vec3 vFjordAtmospherePosition;\n  78: #define STANDARD\n  79: varying vec3 vViewPosition;\n  80: #ifdef USE_TRANSMISSION\n  81: \tvarying vec3 vWorldPosition;\n  82: #endif\n  83: #define PI 3.141592653589793\nFRAGMENT\n\nERROR: 0:752: 'uFjordSunDirection' : redefinition\nERROR: 0:753: 'uFjordSunColor' : redefinition\nERROR: 0:754: 'uFjordFogLinear' : redefinition\nERROR: 0:755: 'uFjordSolarStrength' : redefinition\nERROR: 0:756: 'uFjordGlowStrength' : redefinition\nERROR: 0:757: 'uFjordViewDown' : redefinition\nERROR: 0:758: 'vFjordAtmospherePosition' : redefinition\nERROR: 0:760: 'fjordAtmosphere' : function already has a body\nERROR: 0:2013: 'fjordLit' : redefinition\n\n  747:             return color;\n  748:         #endif\n  749:     }\n  750: \n  751: \n> 752:     uniform vec3 uFjordSunDirection;\n  753:     uniform vec3 uFjordSunColor;\n  754:     uniform vec3 uFjordFogLinear;\n  755:     uniform float uFjordSolarStrength;\n  756:     uniform float uFjordGlowStrength;\n  757:     uniform float uFjordViewDown;\n  758:     varying vec3 vFjordAtmospherePosition;",
+      "timestamp": "2026-10-28T13:33:32.609Z",
+      "url": "http://127.0.0.1:5181/assets/three.module-Ciz4K0ye.js"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "state": {
+    "miners": [
+      {
+        "id": "founder-2",
+        "insideMine": true,
+        "visible": false
+      }
+    ],
+    "mining": {
+      "asset": {
+        "estimatedTextureMiB": 8,
+        "state": "ready"
+      },
+      "developedSites": 1,
+      "maximumTrianglesPerSite": 6769,
+      "placements": [
+        {
+          "clearing": {
+            "halfDepth": 3.2163143157958984,
+            "halfWidth": 2.735485780239105,
+            "rotation": -0.743696408022383,
+            "scale": 1,
+            "x": 24.72190863253063,
+            "y": 6.056471197480447,
+            "z": 7.215223505481319
+          },
+          "forecourt": {
+            "back": 0.5,
+            "center": {
+              "x": 24,
+              "z": 8
+            },
+            "forward": 1.65,
+            "front": {
+              "x": -0.6770129799784198,
+              "z": 0.7359710761577113
+            },
+            "height": 6.056471197480447,
+            "right": {
+              "x": 0.7359710761577113,
+              "z": 0.6770129799784198
+            },
+            "width": 4.47097156047821
+          },
+          "id": "iron-18-408-424",
+          "model": {
+            "rotation": -0.743696408022383,
+            "x": 25.08322076796547,
+            "y": 6.056471197480447,
+            "z": 6.822446278147662
+          },
+          "rearTerrainHeight": 9.2051589095496
+        }
+      ],
+      "shadowLights": 0,
+      "sites": [
+        "iron-18-408-424"
+      ],
+      "trianglesPerSite": 60,
+      "winterLights": 1
+    },
+    "time": {
+      "tick": 1,
+      "ticksPerWinter": 1000,
+      "winter": 805
+    }
+  },
+  "errors": []
+}

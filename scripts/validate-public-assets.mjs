@@ -1,3 +1,4 @@
+import sharp from 'sharp';
 import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve, dirname, relative, sep } from 'node:path';
@@ -36,6 +37,16 @@ for (const [key, file] of Object.entries(generatedHouseFiles)) {
     assert.equal(houses.assets[key]?.file, file, 'Missing house publication: ' + key);
     await verifyEntry('game-assets/houses', houses.assets[key]);
 }
+const mining = await json('game-assets/mining/manifest.json');
+await verifyEntry('game-assets/mining', mining.runtime);
+assert.ok(mining.runtime.texturePixelsRGBA <= 6*1024*1024, 'Mine texture budget exceeded.');
+const wetland = await json('game-assets/wetlands/manifest.json');
+const peatBytes = await readFile(resolve(root,'game-assets/wetlands',wetland.runtime.file));
+assert.equal(sha256(peatBytes),wetland.runtime.sha256,'Wetland texture hash');
+assert.equal(peatBytes.length,wetland.runtime.bytes,'Wetland texture bytes');
+assert.ok(peatBytes.length<32*1024,'Wetland download budget exceeded.');
+const peatInfo = await sharp(peatBytes).metadata();
+assert.equal(peatInfo.width,256);assert.equal(peatInfo.height,256);
 const humans = await json('game-assets/human/manifest.json');
 for (const lod of humans.lods) await verifyEntry('game-assets/human', lod);
 for (const variant of ['adult-female', 'adult-male', 'baby', 'young-adult']) {
@@ -50,6 +61,14 @@ for (const species of ['goat', 'pig', 'sheep']) {
         await verifyEntry(directory, await json(directory + '/manifest.json'));
     }
 }
+
+const cattail = await json('game-assets/wetlands/cattail-manifest.json');
+const cattailBytes = await verifyEntry('game-assets/wetlands', cattail.runtime);
+assert.ok(cattailBytes.length < 65536, 'Cattail runtime budget');
+assert.equal(cattail.source.license, 'CC-BY-3.0');
+assert.equal(cattail.runtime.triangles, 473);
+assert.ok(cattail.runtime.texturePixelsRGBA <= 65536);
+assert.match(await readFile(resolve(root, 'game-assets/wetlands/ATTRIBUTION.txt'), 'utf8'), /Poly by Google/);
 
 const wildlife = await json('wildlife/manifest.json');
 for (const entry of wildlife.entries) await verifyEntry('wildlife', entry);

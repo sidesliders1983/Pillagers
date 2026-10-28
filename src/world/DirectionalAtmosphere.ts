@@ -73,6 +73,9 @@ export class DirectionalAtmosphere {
                 material.onBeforeCompile = (shader, renderer) => {
                     compile.call(material, shader, renderer);
                     Object.assign(shader.uniforms, this.uniforms);
+                    // Seasonal copies can retain an already decorated compile hook. Rebind this
+                    // scene's uniforms, but never emit duplicate GLSL declarations or lighting.
+                    if (shader.vertexShader.includes('varying vec3 vFjordAtmospherePosition;')) return;
                     shader.vertexShader = 'varying vec3 vFjordAtmospherePosition;\n' + shader.vertexShader;
                     // Match native batching/instancing after skinning and authored wind deformation.
                     shader.vertexShader = shader.vertexShader.replace('#include <project_vertex>', `

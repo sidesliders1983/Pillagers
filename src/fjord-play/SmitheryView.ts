@@ -22,7 +22,7 @@ export function renderSmithery(state: SimulationState): string {
     const workers = Object.values(state.personas).filter(person => person.deathWinter === null &&
         craftingOccupation(person.occupation));
     return `<section class="fjord-smithery" aria-label="Smithery production">
-        <p><strong>${state.stocks.materials} Materials</strong> · ${state.specialistStocks?.hides ?? 0} Hides</p>
+        <p><strong>${state.stocks.materials} Materials</strong> · ${state.specialistStocks?.hides ?? 0} Hides${state.mining ? ` · ${state.specialistStocks?.ironOre ?? 0} Iron Ore` : ''}</p>
         <p class="fjord-caption">Set small clan stock targets. Eligible Smiths and Leatherworkers craft over time.
         Targets include stored and worn items, including equipment away on expedition.</p>
         ${state.landing?.livestock?.version !== 2 ?

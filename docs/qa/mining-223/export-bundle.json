@@ -1,0 +1,13 @@
+{
+  "path": "scratch/mining-223/mining-islands-12-v3.zip",
+  "bytes": 31993695,
+  "sha256": "e9b3859afcc49ece831c22851c552879ab6e7ad275efe1eb86302f6dca23ba2e",
+  "includes": [
+    "12 exports",
+    "127 raw result files",
+    "frozen executable source",
+    "complete manifest",
+    "integrity report"
+  ],
+  "qaOnly": true
+}

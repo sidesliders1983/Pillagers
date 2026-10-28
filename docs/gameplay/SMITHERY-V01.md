@@ -126,3 +126,12 @@ were 10.0625%, 7.7975%, 7.5525% and 6.0100%. These are observations for the stat
 fixed cohort and no-weather conditions, not guaranteed outcomes in every campaign.
 The next roadmap step is #222 Apprenticeship, then #223 Mining and #224 Metalworking;
 none of those additional systems is enabled by this PR.
+
+
+## Mining integration
+
+New physical Mining campaigns display their persistent Iron Ore beside
+Hides in the Smithery context. Existing recipes keep their original inputs and
+outputs; no Iron Ore is consumed or fabricated by Smithery. Historical campaigns
+retain their original inventories. See [Mining v0.1](MINING-V01.md) for the
+finite outcrops and real Miner occupation.

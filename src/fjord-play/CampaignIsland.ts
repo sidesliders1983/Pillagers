@@ -1,3 +1,4 @@
+import { planMiningSites, assertOreSitePlan, type OreSitePlan } from '../world-generation/OreSites';
 import { measureGeneration, type GenerationObserver } from '../world-generation/GenerationProfile';
 import { siteRoutes } from '../world-generation/SiteNavigation';
 import { harborDepth } from '../world-generation/HarborClearance';
@@ -175,6 +176,17 @@ export function adoptCampaignIsland(seed: number, world: WorldBlueprint, plan: C
     freezeBlueprint(world);
     plans.set(world, freezeBlueprint(plan));
     cacheWorld(expected.version + ':' + expected.seed, world);
+}
+
+/** Explicit new-campaign/authoring extension. Existing pool recipes and geography stay exact. */
+export function prepareMiningIsland(world: WorldBlueprint, saved?: OreSitePlan): WorldBlueprint {
+    const plan = plans.get(world);
+    if (!plan) throw new Error('Mining requires a prepared physical island.');
+    if (saved) assertOreSitePlan(world, saved);
+    const oreSites = saved ?? planMiningSites(world);
+    const result = freezeBlueprint({...world, oreSites});
+    plans.set(result, plan);
+    return result;
 }
 
 interface Foundation extends Point2 {

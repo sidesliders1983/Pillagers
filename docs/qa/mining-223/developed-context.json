@@ -1,0 +1,518 @@
+{
+  "siteId": "iron-18-408-424",
+  "miner": "founder-2",
+  "minerName": "Daugirdas",
+  "commands": [
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-3",
+      "occupation": "woodworker"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-5",
+      "occupation": "woodworker"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-9",
+      "occupation": "woodworker"
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 100
+    },
+    {
+      "type": "BuildMine",
+      "siteId": "iron-18-408-424"
+    },
+    {
+      "type": "AssignOccupation",
+      "personaId": "founder-2",
+      "occupation": "miner"
+    },
+    {
+      "type": "AssignMiner",
+      "personaId": "founder-2",
+      "siteId": "iron-18-408-424"
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    },
+    {
+      "type": "AdvanceTicks",
+      "ticks": 1
+    }
+  ],
+  "paidFrom": {
+    "food": 10,
+    "materials": 22
+  },
+  "stocks": {
+    "food": 11,
+    "materials": 2
+  },
+  "time": {
+    "winter": 804,
+    "tick": 630
+  },
+  "travelTicks": 80,
+  "note": "Original scouted campaign; three actual Woodworkers earned the construction Materials. No Food, Materials, reserve or discovery was injected."
+}

@@ -24,6 +24,7 @@ export function fjordHeaderHTML(): string {
             <details id="fjord-menu"><summary aria-label="Game menu">${icon('menu')}</summary>
                 <div class="fjord-settings">
                     <h1>FjordSide</h1>
+                    <a class="fjord-asset-credits" href="/game-assets/wetlands/ATTRIBUTION.txt" target="_blank" rel="noopener">Nature asset credits</a>
                     <span id="fjord-menu-next-slot"></span>
                     <button id="clan-book-open" type="button">Clan Book</button><button id="fjord-expeditions-open" type="button">Expedition groups</button>
                     <label>Quality<select id="fjord-quality"><option value="low"${defaultPresentationPreferences.quality === 'low' ? ' selected' : ''}>Low</option>

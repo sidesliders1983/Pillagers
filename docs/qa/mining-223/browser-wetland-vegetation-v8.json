@@ -1,0 +1,115 @@
+{
+  "pausedBefore": {
+    "time": {
+      "tick": 679,
+      "ticksPerWinter": 1000,
+      "winter": 800
+    },
+    "wetLowlands": {
+      "cattailAsset": {
+        "state": "ready",
+        "texturePixelsRGBA": 65536
+      },
+      "cells": 24,
+      "drawCalls": 4,
+      "grassTufts": 60,
+      "reedInstances": 20,
+      "textureBytes": 262144,
+      "textureResolution": 256,
+      "triangles": 11596,
+      "waterPatches": 2,
+      "windTime": 0
+    }
+  },
+  "runningA": {
+    "time": {
+      "tick": 711,
+      "ticksPerWinter": 1000,
+      "winter": 800
+    },
+    "wetLowlands": {
+      "cattailAsset": {
+        "state": "ready",
+        "texturePixelsRGBA": 65536
+      },
+      "cells": 24,
+      "drawCalls": 4,
+      "grassTufts": 60,
+      "reedInstances": 20,
+      "textureBytes": 262144,
+      "textureResolution": 256,
+      "triangles": 11596,
+      "waterPatches": 2,
+      "windTime": 20.68760000002382
+    }
+  },
+  "runningB": {
+    "time": {
+      "tick": 774,
+      "ticksPerWinter": 1000,
+      "winter": 800
+    },
+    "wetLowlands": {
+      "cattailAsset": {
+        "state": "ready",
+        "texturePixelsRGBA": 65536
+      },
+      "cells": 24,
+      "drawCalls": 4,
+      "grassTufts": 60,
+      "reedInstances": 20,
+      "textureBytes": 262144,
+      "textureResolution": 256,
+      "triangles": 11596,
+      "waterPatches": 2,
+      "windTime": 60.78040000000582
+    }
+  },
+  "pausedAfter": {
+    "time": {
+      "tick": 774,
+      "ticksPerWinter": 1000,
+      "winter": 800
+    },
+    "wetLowlands": {
+      "cattailAsset": {
+        "state": "ready",
+        "texturePixelsRGBA": 65536
+      },
+      "cells": 24,
+      "drawCalls": 4,
+      "grassTufts": 60,
+      "reedInstances": 20,
+      "textureBytes": 262144,
+      "textureResolution": 256,
+      "triangles": 11596,
+      "waterPatches": 2,
+      "windTime": 61.25849999999986
+    }
+  },
+  "pausedHeld": {
+    "time": {
+      "tick": 774,
+      "ticksPerWinter": 1000,
+      "winter": 800
+    },
+    "wetLowlands": {
+      "cattailAsset": {
+        "state": "ready",
+        "texturePixelsRGBA": 65536
+      },
+      "cells": 24,
+      "drawCalls": 4,
+      "grassTufts": 60,
+      "reedInstances": 20,
+      "textureBytes": 262144,
+      "textureResolution": 256,
+      "triangles": 11596,
+      "waterPatches": 2,
+      "windTime": 61.25849999999986
+    }
+  },
+  "selection": "Real Bog Iron deposit panel opened through vegetation",
+  "credits": "/game-assets/wetlands/ATTRIBUTION.txt",
+  "errors": []
+}

@@ -1,3 +1,6 @@
+import { WetLowlandLayer } from './WetLowlandLayer';
+import { MiningModelAsset } from './MiningModelAsset';
+import { MiningLayer } from './MiningLayer';
 import { culturalVisibility } from './CulturalVisibility';
 import { WildlifeCamera, wildlifeCameraPivot, wildlifeApproachMetres } from '../camera/WildlifeCamera';
 import { CameraObstacles } from '../camera/CameraObstacles';
@@ -158,7 +161,10 @@ export function createFjordScene(options: {
     let syncScene: (() => Promise<void>) | undefined;
     let sceneWork: Promise<void> | undefined;
 
+    const wetLowlandLayer = new WetLowlandLayer(decorateMaterials, import.meta.env.BASE_URL);
+    const miningLayer = new MiningLayer(new MiningModelAsset(import.meta.env.BASE_URL), decorateMaterials);
     const scene = new Scene(), camera = new PerspectiveCamera(45, 1, .1, 2400);
+    scene.add(miningLayer.root, wetLowlandLayer.root);
     const targetGeometry = new RingGeometry(2.7, 3, 48);
     const targetMaterial = new MeshBasicMaterial({
         color: '#ffe09a', side: DoubleSide,
@@ -245,6 +251,8 @@ export function createFjordScene(options: {
         const appearance = seasonAppearance.current;
         weatherTint?.applyAppearance(appearance);
         layer?.setSeasonAppearance(appearance);
+        miningLayer.setSnowAmount(appearance.snowAmount);
+        wetLowlandLayer.setSnowAmount(appearance.snowAmount);
         dressing?.setSeasonAppearance(appearance);
         rivalScene?.setSeasonAppearance(appearance);
     };
@@ -742,6 +750,15 @@ export function createFjordScene(options: {
                         ground: view.ground, campfire: view.campfire
                     }, knownTerrain);
                     canvas.dataset.dressing = JSON.stringify(dressing!.inspect());
+                    wetLowlandLayer.sync(state,campaign.blueprint);
+                    miningLayer.setWinterWeight(view.calendar.winterWeight);
+                    miningLayer.sync(state,campaign.blueprint);
+                    for (const plot of miningLayer.clearingPlots()) {
+                        const key='mine:'+plot.id;
+                        if (!cleared.has(key)) { world!.clearPlot({...plot,futureAsset:'hut'}); cleared.add(key); }
+                    }
+                    layer!.prepareMining(state, campaign.blueprint, host.tickIntervalSeconds,
+                        (x,z,natural)=>miningLayer.heightAt(x,z,natural));
                     layer!.prepareExpeditions(state, campaign.blueprint, host.tickIntervalSeconds);
                     const prepareEntities = () => layer!.sync(view.entities, host.loading ? yieldForInput : undefined, current,
                         view.livestockDeaths, host.loading ? (completed, total, entity, started) => {
@@ -858,6 +875,8 @@ export function createFjordScene(options: {
         islandMap.update(camera, controller.focus, frameStarted);
         const motionDelta = Math.min(elapsed, 1);
         if (running) activeTime += motionDelta;
+        wetLowlandLayer.setTime(activeTime);
+        if (lighting) wetLowlandLayer.setLighting(lighting);
         if (seasonAppearance.advance(motionDelta, running)) applySeasonAppearance();
         motion!.advance(motionDelta, running, !document.hidden);
         culture?.advance(motionDelta, running && !document.hidden, culturalVisible(),
@@ -975,6 +994,8 @@ export function createFjordScene(options: {
                 programs: renderer.info.programs?.length ?? null
             });
             canvas.dataset.islandMap = JSON.stringify(islandMap.inspect());
+            canvas.dataset.mining = JSON.stringify(miningLayer.inspect());
+            canvas.dataset.wetLowlands = JSON.stringify(wetLowlandLayer.inspect());
             canvas.dataset.motion = JSON.stringify(motion!.inspect());
             canvas.dataset.campfireEffect = JSON.stringify(fireVisual);
             canvas.dataset.precipitation = JSON.stringify(precipitationEffect!.inspect());
@@ -1101,6 +1122,8 @@ export function createFjordScene(options: {
         observer?.disconnect();
         controller.dispose();
         islandMap.dispose();
+        miningLayer.dispose();
+        wetLowlandLayer.dispose();
         targetGeometry.dispose(); targetMaterial.dispose();
         reducedMotion.removeEventListener('change', configureEffects);
         discoveryFog?.dispose();
@@ -1280,6 +1303,9 @@ export function createFjordScene(options: {
                 if (!person) throw new Error('A group member is not currently on the island.');
                 return [id, { x: person.position[0], z: person.position[2] }];
             }));
+        },
+        pickMine(x: number, y: number, pointerType: 'mouse'|'touch' = 'mouse') {
+            return miningLayer.pick(camera, x, y, canvas.getBoundingClientRect(),pointerType);
         },
         pick(x: number, y: number, pointerType: 'mouse' | 'touch', targetKind?: 'longship') {
             return layer!.pick(camera, x, y, canvas.getBoundingClientRect(), pointerType, targetKind);

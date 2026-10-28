@@ -39,7 +39,7 @@ export const occupationLabel = (role: Occupation | null) => role === null ? 'No 
         Partial<Record<Occupation, string>>)[role] ?? role[0].toUpperCase() + role.slice(1);
 export const workLabel = (role: Occupation) => ({ farmer: 'Farming', herder: 'Herding', fisher: 'Fishing',
     hunter: 'Hunting', textileWorker: 'Textile work', smith: 'Smithing', woodworker: 'Woodworking',
-    boatbuilder: 'Boatbuilding', trader: 'Trading', leatherAndJewelleryMaker: 'Leather & jewellery' })[role];
+    boatbuilder: 'Boatbuilding', miner: 'Mining', trader: 'Trading', leatherAndJewelleryMaker: 'Leather & jewellery' })[role];
 export const occupationIcon = (role: Occupation | null): FjordIcon => ({ farmer: 'food', herder: 'cattle',
     fisher: 'fisher', hunter: 'hunter', textileWorker: 'textile', woodworker: 'wood', boatbuilder: 'ship',
     trader: 'materials', leatherAndJewelleryMaker: 'jewel' } as Partial<Record<Occupation, FjordIcon>>)[role ?? 'smith'] ?? 'work';

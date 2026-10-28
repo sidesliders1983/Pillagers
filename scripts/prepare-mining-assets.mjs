@@ -1,0 +1,83 @@
+import assert from 'node:assert/strict';
+import {readFile, writeFile, mkdir, readdir} from 'node:fs/promises';
+import {resolve, join} from 'node:path';
+import {createHash} from 'node:crypto';
+import {EXTTextureWebP, EXTMeshoptCompression} from '@gltf-transform/extensions';
+import {dedup, getBounds} from '@gltf-transform/functions';
+import {MeshoptEncoder} from 'meshoptimizer';
+import sharp from 'sharp';
+import {terrainIO} from './terrain-io.mjs';
+const directory = resolve(process.argv[2] ?? 'Assets/Mining');
+const files = (await readdir(directory)).filter(file => file.toLowerCase().endsWith('.glb'));
+assert.equal(files.length, 1, 'Supply exactly one original mine GLB.');
+const original = await readFile(join(directory, files[0]));
+const hash = bytes => createHash('sha256').update(bytes).digest('hex');
+const io = await terrainIO();
+const document = await io.readBinary(original);
+function geometryHash(doc) {
+    const faces = [];
+    for (const mesh of doc.getRoot().listMeshes()) for (const primitive of mesh.listPrimitives()) {
+        const attributes = primitive.listSemantics().sort().map(name => {
+            const accessor = primitive.getAttribute(name);
+            return {name, size: accessor.getElementSize(), data: accessor.getArray()};
+        });
+        const indices = primitive.getIndices()?.getArray();
+        const count = indices?.length ?? primitive.getAttribute('POSITION').getCount();
+        for (let i = 0; i < count; i += 3) {
+            const vertices = [0,1,2].map(offset => {
+                const index = indices ? indices[i+offset] : i+offset;
+                return JSON.stringify(attributes.map(a => [a.name, ...a.data.slice(index*a.size,(index+1)*a.size)]));
+            });
+            // Cyclic rotations preserve winding, unlike sorting the three vertices.
+            faces.push([0,1,2].map(n => [...vertices.slice(n),...vertices.slice(0,n)].join('|')).sort()[0]);
+        }
+    }
+    return hash(faces.sort().join('\n'));
+}
+function stats(doc) {
+    return {bounds: getBounds(doc.getRoot().listScenes()[0]),
+        triangles: doc.getRoot().listMeshes().reduce((n,m) => n+m.listPrimitives().reduce((n,p) =>
+            n+(p.getIndices()?.getCount()??p.getAttribute('POSITION').getCount())/3,0),0),
+        geometrySha256: geometryHash(doc)};
+}
+const source = {file: 'Assets/Mining/'+files[0], bytes: original.length, sha256: hash(original), ...stats(document)};
+const colours = new Set(document.getRoot().listMaterials().map(m => m.getBaseColorTexture()));
+const textureStats = [];
+document.createExtension(EXTTextureWebP).setRequired(true);
+for (const texture of document.getRoot().listTextures()) {
+    const input = texture.getImage(), before = await sharp(input).metadata();
+    const edge = colours.has(texture) ? 1024 : 512;
+    const bytes = await sharp(input).resize({width: edge,height: edge,fit: 'inside',withoutEnlargement: true})
+        .webp(colours.has(texture) ? {quality:85,effort:4} : {lossless:true,effort:4}).toBuffer();
+    texture.setImage(bytes).setMimeType('image/webp');
+    const after = await sharp(bytes).metadata();
+    textureStats.push({name:texture.getName(),sourceWidth:before.width,sourceHeight:before.height,
+        width:after.width,height:after.height,bytes:bytes.length});
+}
+await document.transform(dedup());
+assert.equal(geometryHash(document), source.geometrySha256, 'Source geometry changed.');
+const plain = await io.writeBinary(document);
+document.createExtension(EXTMeshoptCompression).setRequired(true).setEncoderOptions({
+    method: EXTMeshoptCompression.EncoderMethod.QUANTIZE});
+const compressed = await io.writeBinary(document);
+const decoded = await io.readBinary(compressed);
+const lossless = geometryHash(decoded) === source.geometrySha256;
+const bytes = lossless && compressed.length < plain.length ? compressed : plain;
+const published = await io.readBinary(bytes);
+const runtime = {file:'mine.glb',bytes:bytes.length,sha256:hash(bytes),...stats(published),
+    encoding:bytes===compressed?'meshopt-lossless':'gltf-exact',textures:textureStats};
+assert.equal(runtime.geometrySha256,source.geometrySha256);
+assert.ok(bytes.length<2*1024*1024 && bytes.length<original.length/8,'Mine runtime exceeds its budget.');
+source.texturePixelsRGBA = textureStats.reduce((n,t)=>n+t.sourceWidth*t.sourceHeight*4,0);
+runtime.texturePixelsRGBA = textureStats.reduce((n,t)=>n+t.width*t.height*4,0);
+const manifest = {version:1,provider:'Owner-supplied Meshy mine, issue #223',
+    source,runtime,notes:'Original topology, winding, positions, normals and UVs retained. No simplification. Colour 1024px; data maps 512px; original source untouched.'};
+const output = 'public/game-assets/mining';
+await mkdir(output,{recursive:true});
+await writeFile(output+'/mine.glb',bytes);
+await writeFile(output+'/manifest.json',JSON.stringify(manifest,null,2)+'\n');
+await writeFile('src/fjord-play/MiningAssets.ts','// Generated by scripts/prepare-mining-assets.mjs.\nexport const miningAsset = '+
+    JSON.stringify({path:'game-assets/mining/mine.glb',bytes:runtime.bytes,sha256:runtime.sha256,
+        bounds:runtime.bounds,triangles:runtime.triangles,texturePixelsRGBA:runtime.texturePixelsRGBA},null,4)+' as const;\n');
+console.log(JSON.stringify({sourceBytes:source.bytes,runtimeBytes:runtime.bytes,triangles:runtime.triangles,
+    sourcePixelsMiB:source.texturePixelsRGBA/1048576,runtimePixelsMiB:runtime.texturePixelsRGBA/1048576,encoding:runtime.encoding}));

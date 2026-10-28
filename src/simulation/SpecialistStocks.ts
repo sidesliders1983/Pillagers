@@ -3,7 +3,7 @@ import type { LivestockAnimal } from './Landing';
 import { animalProfile, animalSpecies } from './LivestockSpecies';
 
 /** Clan-owned crafting inputs, separate from the two universal HUD resources. */
-export type SpecialistStocks = { version: 1; hides: number };
+export type SpecialistStocks = { version: 1; hides: number; ironOre?: number };
 
 export function slaughterHides(state: SimulationState, animal: LivestockAnimal): number {
     const rules = state.landing?.livestock;
@@ -20,7 +20,8 @@ export function creditHides(state: SimulationState, units: number): void {
 
 export function validateSpecialistStocks(state: SimulationState): void {
     const stocks = state.specialistStocks;
-    if (stocks !== undefined && (!stocks || stocks.version !== 1 || Object.keys(stocks).length !== 2 ||
-        !Number.isSafeInteger(stocks.hides) || stocks.hides < 0))
+    if (stocks !== undefined && (!stocks || stocks.version !== 1 || Object.keys(stocks).some(key => !['version', 'hides', 'ironOre'].includes(key)) ||
+        !Number.isSafeInteger(stocks.hides) || stocks.hides < 0 ||
+        stocks.ironOre !== undefined && (!Number.isSafeInteger(stocks.ironOre) || stocks.ironOre < 0)))
         throw new Error('Invalid specialist stocks');
 }

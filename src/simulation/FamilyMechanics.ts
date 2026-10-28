@@ -1,3 +1,4 @@
+import { miningBusy } from './Mining';
 import { birthdayCalendarMode } from './BirthdayCalendar';
 import { careActive } from './CareCalendar';
 import { scheduleBirth } from './ScheduledBirths';
@@ -11,7 +12,7 @@ import type {SimulationState} from './SimulationCore';
 import {personaAge} from './PersonaAge';
 export function canPartner(state:SimulationState,aId:string,bId:string):boolean {
     const a=state.personas[aId],b=state.personas[bId];
-    if(!a||!b||aId===bId||a.deathWinter!==null||b.deathWinter!==null||a.partnerId!==null||b.partnerId!==null||personaAway(state,aId)||personaAway(state,bId)||a.dna.sex===b.dna.sex)return false;
+    if(!a||!b||aId===bId||a.deathWinter!==null||b.deathWinter!==null||a.partnerId!==null||b.partnerId!==null||personaAway(state,aId)||miningBusy(state,aId)||personaAway(state,bId)||miningBusy(state,bId)||a.dna.sex===b.dna.sex)return false;
     const adultAge=state.mechanics?.config.adultAge??18;
     if(personaAge(state,aId)<adultAge||personaAge(state,bId)<adultAge)return false;
     return !prohibitedKinship(state,aId,bId);
@@ -52,8 +53,8 @@ export function resolveBirths(state:SimulationState,roll:(bps:number)=>boolean,r
         const mother=state.personas[motherId],info=state.mechanics!.people[motherId];
         const age=personaAge(state,motherId);
         if(state.birthdayCalendar?.pendingBirths.some(birth => birth.motherId === motherId))continue;
-        if(personaAway(state,motherId)||unavailable.has(motherId)||isCaregiver(state,motherId)||mother.deathWinter!==null||mother.dna.sex!=='female'||age<config.fertilityMinAge||age>config.fertilityMaxAge||mother.partnerId===null)continue;
-        const father=state.personas[mother.partnerId];if(personaAway(state,father.id)||father.deathWinter!==null||father.dna.sex!=='male')continue;
+        if(personaAway(state,motherId)||miningBusy(state,motherId)||unavailable.has(motherId)||isCaregiver(state,motherId)||mother.deathWinter!==null||mother.dna.sex!=='female'||age<config.fertilityMinAge||age>config.fertilityMaxAge||mother.partnerId===null)continue;
+        const father=state.personas[mother.partnerId];if(personaAway(state,father.id)||miningBusy(state,father.id)||father.deathWinter!==null||father.dna.sex!=='male')continue;
         if(info.lastBirthWinter!==null&&state.time.winter-info.lastBirthWinter<=config.birthCooldownWinters)continue;
         if(state.stocks.food<foodNeed()||!roll(config.fertilityChanceBps))continue;
         const home=Object.values(state.households).find(h=>h.memberIds.includes(motherId));if(!home)continue;
@@ -94,7 +95,7 @@ export function isProvidingCare(state:SimulationState,id:string):boolean {
 }
 export function caregiverEligible(state:SimulationState,id:string):boolean {
     const person=state.personas[id];
-    return !!person&&!personaAway(state,id)&&person.deathWinter===null&&person.dna.sex==='female'&&personaAge(state,id)>=state.mechanics!.config.adultAge&&person.occupation===null&&!isProvidingCare(state,id);
+    return !!person&&!personaAway(state,id)&&!miningBusy(state,id)&&person.deathWinter===null&&person.dna.sex==='female'&&personaAge(state,id)>=state.mechanics!.config.adultAge&&person.occupation===null&&!isProvidingCare(state,id);
 }
 export function assignCaregiver(state:SimulationState,motherId:string,caregiverId:string|null,locked:boolean,emit:EventWriter):void {
     const mother=state.personas[motherId],info=state.mechanics!.people[motherId];

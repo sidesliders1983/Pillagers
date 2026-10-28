@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "source": {
+    "url": "https://poly.pizza/m/9vCk81sIPve",
+    "title": "Cattail",
+    "author": "Poly by Google",
+    "license": "CC-BY-3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "download": "https://static.poly.pizza/049b2eb3-13d5-4b9a-85be-5dec11d97eb4.glb.br",
+    "bytes": 179704,
+    "sha256": "4274703fe73864749644939c94e7a03c53987322a2eee8556f684e78649b7eac",
+    "bounds": {
+      "min": [
+        -0.21130900084972382,
+        -0.8891519904136658,
+        -0.15841799974441528
+      ],
+      "max": [
+        0.201431006193161,
+        1.127364993095398,
+        0.1568489968776703
+      ]
+    },
+    "triangles": 473
+  },
+  "runtime": {
+    "file": "cattail.glb",
+    "bytes": 41916,
+    "sha256": "91c54401846af8f6d1d84a914070410461d6feacd786a2d3dbfd335dcee4daa9",
+    "bounds": {
+      "min": [
+        -0.10233982652425766,
+        0,
+        -0.07817117124795914
+      ],
+      "max": [
+        0.10233982652425766,
+        1,
+        0.07817117124795914
+      ]
+    },
+    "triangles": 473,
+    "texturePixelsRGBA": 65536,
+    "textures": [
+      {
+        "width": 128,
+        "height": 128,
+        "bytes": 5804
+      }
+    ],
+    "encoding": "gltf-exact"
+  },
+  "modifications": "Grounded and centered at unit height; original triangle topology retained; 512px colour texture reduced to 128px WebP."
+}

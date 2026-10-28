@@ -166,3 +166,26 @@ test('render updates only touch shared uniforms and preserve one authoritative s
         assert.deepEqual(item.scene.children, resources);
     } finally { item.dispose(); }
 });
+
+
+test('seasonal copies of an atmosphere-bound material compile lighting once for their current scene', () => {
+    const root = new Group(), geometry = new BoxGeometry(), source = new MeshStandardMaterial();
+    const mesh = new Mesh(geometry, source); root.add(mesh);
+    const originalAtmosphere = new DirectionalAtmosphere(), currentAtmosphere = new DirectionalAtmosphere();
+    originalAtmosphere.bind(root);
+    const snow = new StructureSeasonTint(root);
+    try {
+        currentAtmosphere.bind(root);
+        const shader = {uniforms: {}, vertexShader: ShaderLib.standard.vertexShader,
+            fragmentShader: ShaderLib.standard.fragmentShader};
+        mesh.material.onBeforeCompile(shader);
+        assert.equal((shader.vertexShader.match(/varying vec3 vFjordAtmospherePosition;/g) ?? []).length, 1);
+        assert.equal((shader.fragmentShader.match(/vec3 fjordAtmosphere\(/g) ?? []).length, 1);
+        assert.equal((shader.fragmentShader.match(/float fjordLit =/g) ?? []).length, 1);
+        assert.equal(shader.uniforms.uFjordSunDirection, currentAtmosphere.uniforms.uFjordSunDirection);
+        snow.setSnowAmount(.65);
+        assert.equal(shader.uniforms.structureSnowAmount.value, .65);
+    } finally {
+        currentAtmosphere.dispose(); snow.dispose(); originalAtmosphere.dispose(); geometry.dispose(); source.dispose();
+    }
+});

@@ -1,0 +1,22 @@
+{
+  "branch": "codex/mining-223",
+  "baseCommit": "4fcbf63ce0b14d227914d7a30c19139fe0baa12e",
+  "scope": "Water over flat marsh bed; read-only mouse selection cursor; explicit idle cursor after right-click",
+  "sources": {
+    "src/fjord-play/WetLowlandLayer.ts": "d3d4633c5d351d8f62da2f491ce108726612c1de22825ebeed95002c7550ad27",
+    "src/camera/RTSCameraController.ts": "dee2f960d298b0e544fa2aa95a35a8130d5b4f65f35f68e28558b62b5853fb04",
+    "src/fjord-play/FjordPlay.ts": "26ceea4a89dc2ab80861979a71768ae5334efa846c510226edad78240d13213f",
+    "src/fjord-play/fjord-interface.css": "96c72c3efe54c4e75019c956c4eefe05689fe049ab33ffca6244a99c581fef46",
+    "tests/mining-presentation.test.mjs": "3dda0df40885abf5b98963dc8b6794d6d8b0d2a13a67faee3ff6e3930e678c08",
+    "tests/fjord-desktop-mouse.test.mjs": "a4603bad39b427169bf0d42bc1322a5f528196fce730e5bf7fa95894acc7d5df"
+  },
+  "tests": {
+    "miningWater": 15,
+    "cameraInput": 45,
+    "failed": 0
+  },
+  "build": "scratch/mining-223/model/build-hover-water-v6.log",
+  "frozenMeasurementChangedInputs": [
+    "src/world/DirectionalAtmosphere.ts"
+  ]
+}
