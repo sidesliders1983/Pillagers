@@ -32,3 +32,18 @@ test('existing preference defaults remain separate from canonical campaigns and 
     assert.equal(restored.session.saveJSON(), before);
     assert.deepEqual(restored.presentation, shared.presentation);
 });
+
+
+test('optional HDR preference survives a campaign handoff without changing Core or old preferences', () => {
+    const { SharedSettlement } = load('../src/play/SharedSettlement.ts');
+    const shared = new SharedSettlement(32), before = shared.session.saveJSON();
+    const controls = { quality: 'low', effects: 'low',
+        camera: { position: [28, 31, -32], target: [0, 1, 0] } };
+    shared.setPresentation({ ...controls, hdr: true });
+    const restored = SharedSettlement.restore(shared.persist(), 'fjord');
+    assert.equal(restored.presentation.hdr, true);
+    assert.equal(restored.session.saveJSON(), before);
+    shared.setPresentation(controls);
+    assert.deepEqual(shared.presentation, controls, 'Older preferences remain valid and do not enable HDR');
+    assert.throws(() => shared.setPresentation({ ...controls, hdr: 'true' }), /presentation/i);
+});

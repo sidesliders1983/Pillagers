@@ -1,3 +1,4 @@
+import { FjordHdrLighting, loadHdrEnvironment } from './FjordHdrLighting';
 import { WetLowlandLayer } from './WetLowlandLayer';
 import { MiningModelAsset } from './MiningModelAsset';
 import { MiningLayer } from './MiningLayer';
@@ -37,7 +38,7 @@ import { fjordTerrain, fjordSnowLine } from '../config/FjordTerrain';
 import { fjordPresentation } from '../config/FjordPresentation';
 import { fjordLighting } from '../config/FjordLighting';
 import { resolvePresentationQuality, type PresentationQuality } from '../config/PresentationQuality';
-import { Vector2, Vector3, Plane, Raycaster, RingGeometry, MeshBasicMaterial, DoubleSide, Clock, PerspectiveCamera, Scene, Mesh, Texture } from 'three';
+import { Color, Vector2, Vector3, Plane, Raycaster, RingGeometry, MeshBasicMaterial, DoubleSide, Clock, PerspectiveCamera, Scene, Mesh, Texture } from 'three';
 import { AssetManager } from '../core/AssetManager';
 import { createRenderer } from '../core/Renderer';
 import { WorldLighting } from '../core/WorldLighting';
@@ -178,6 +179,18 @@ export function createFjordScene(options: {
     scene.add(targetMarker);
 
     const renderer = createRenderer(canvas);
+    const hdr = new FjordHdrLighting(scene, document.querySelector<HTMLInputElement>('#fjord-hdr')!,
+        document.querySelector<HTMLElement>('#fjord-hdr-status')!,
+        signal => loadHdrEnvironment(renderer, import.meta.env.BASE_URL, signal));
+    const hdrDirection = new Vector3(), hdrColor = new Color();
+    const syncHdr = () => {
+        if (!lighting) return;
+        if (lighting.copySeasonalSun(hdrDirection, hdrColor) === undefined)
+            hdrDirection.copy(lighting.directional.position).sub(lighting.directional.target.position);
+        hdr.update(hdrDirection, lighting.darkness);
+    };
+    canvas.addEventListener('webglcontextlost', () => hdr.suspend(), { signal: bindings.signal });
+    canvas.addEventListener('webglcontextrestored', () => hdr.resume(), { signal: bindings.signal });
     const constructionGpu = new ConstructionGpuPreparation();
     renderer.localClippingEnabled = true;
     const portraits = new ResidentPortraitStudio(renderer, undefined, undefined,
@@ -665,6 +678,7 @@ export function createFjordScene(options: {
                             northernLight ? view.calendar.progress : undefined, northernLight ? transition : 0);
                         lightSignature = nextLight;
                     }
+                    syncHdr();
                     // Discovery can replace foliage during a paused or partial transition.
                     // New bindings receive the current displayed appearance, never the endpoint.
                     if (weatherChanged || appearanceChanged) applySeasonAppearance();
@@ -854,6 +868,11 @@ export function createFjordScene(options: {
         observer = new ResizeObserver(resize);
         observer.observe(canvas);
         resize();
+        if (document.querySelector<HTMLInputElement>('#fjord-hdr')!.checked) {
+            if (host.loading) await host.loading.measure('optional-hdr-lighting', () => hdr.ready);
+            else await hdr.ready;
+        }
+        syncHdr();
 
     };
     const clock = new Clock();
@@ -1036,6 +1055,7 @@ export function createFjordScene(options: {
         lighting!.setFogViewDistance(campaignIslandPlan(campaign.blueprint) ?
             camera.position.distanceTo(controller.focus) : 60);
         lighting!.update(time, calendar.visualProgress, motionDelta, running);
+        syncHdr();
         layer!.setHomeDarkness(lighting!.darkness);
         rivalScene?.setHomeDarkness(lighting!.darkness);
         lighting!.updateShadowView(camera);
@@ -1146,6 +1166,7 @@ export function createFjordScene(options: {
         world?.dispose();
         lighting?.dispose();
         portraits.dispose();
+        hdr.dispose();
         atmosphere?.dispose();
         renderer.dispose();
         scene.clear();

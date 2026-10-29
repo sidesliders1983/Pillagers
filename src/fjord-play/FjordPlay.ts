@@ -193,6 +193,7 @@ export class FjordPlay {
         if (savedPresentation) {
             document.querySelector<HTMLSelectElement>('#fjord-quality')!.value = savedPresentation.quality;
             document.querySelector<HTMLSelectElement>('#fjord-effects')!.value = savedPresentation.effects;
+            document.querySelector<HTMLInputElement>('#fjord-hdr')!.checked = savedPresentation.hdr === true;
         }
         this.loading?.mount();
         diagnostics?.mount();
@@ -903,6 +904,7 @@ export class FjordPlay {
             desktopUI?.open('expeditions');
         });
         capturePresentation = () => this.shared.setPresentation({
+            hdr: document.querySelector<HTMLInputElement>('#fjord-hdr')!.checked,
             quality: document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
             effects: document.querySelector<HTMLSelectElement>('#fjord-effects')!.value as EffectQuality,
             camera: presentation!.cameraForSave,

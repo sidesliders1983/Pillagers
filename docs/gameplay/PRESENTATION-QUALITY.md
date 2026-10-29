@@ -78,3 +78,36 @@ Geometry, UVs, materials, animations, character identity and Core/save behavior 
 The source files remain available. The QA-only originalModelTextures=1 comparison keeps all
 other Low settings equal while loading original model images. See the
 [measurements and reproducible checks](../qa/model-memory/report.md).
+
+
+## Optional HDR material lighting — 2026-10-29
+
+The in-game menu places **HDR lighting** directly below **Quality**. It is off by
+default at both Low and Standard. The existing presentation sidecar can retain an
+explicit boolean `hdr` choice alongside quality, effects and camera; old saves
+without that property remain valid and do not enable it. Core/save rules, clocks,
+resources, discovery, weather and sunlight/shadow settings remain unchanged.
+
+This reuses the earlier native HDR pilot's original Poly Haven CC0 **Lonely Road
+Afternoon Pure Sky**, 1024 x 512, with base material-lighting intensity 0.15 and the
+same source-peak alignment to the current sun. Source and license remain locked in
+`public/lighting/lonely-road/source-lock.json`. No new image or model is added.
+The option changes material environment lighting; it retains the current sky
+background and adds no scene-geometry reflections to the custom water shader.
+It is not an HDR monitor/output mode.
+
+The source is fetched only after enabling, with cancellation and a 15-second
+network timeout. Native HDRLoader decoding and PMREM retain one active output
+render target; the original data texture and temporary generator are disposed
+after conversion. Turning the option off releases that output too. A late load
+cannot re-enable an old scene. Failure falls back to ordinary lighting and waits
+for an explicit off/on retry instead of retrying each frame.
+
+HDR intensity follows daylight weight and is suppressed at night, retaining the
+checkbox preference. Returning to daylight reuses the current output. Context
+loss releases the invalid target; restoration rebuilds it only when requested.
+Scene disposal removes the control listener, cancels loading and releases resources.
+World replacement within the same renderer retains the option and follows the new
+sun authority. Existing Low/Standard budgets and the default Low texture tier are
+unchanged. Historical spike timings remain historical; current physical-device
+visual/performance acceptance is still required for this new menu integration.

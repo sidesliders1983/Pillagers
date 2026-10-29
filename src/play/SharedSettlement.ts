@@ -194,6 +194,7 @@ export function localSettlementText(storage: Pick<Storage, 'getItem'>): string {
 }
 
 export interface SettlementPresentation {
+    hdr?: boolean;
     quality: PresentationQuality;
     effects: EffectQuality;
     camera: { position: number[]; target: number[] };
@@ -201,10 +202,11 @@ export interface SettlementPresentation {
 function copyPresentation(value: SettlementPresentation): SettlementPresentation {
     const point = (coordinates: number[]) => Array.isArray(coordinates) && coordinates.length === 3 &&
         coordinates.every(coordinate => Number.isFinite(coordinate) && Math.abs(coordinate) <= 20000);
-    if (!value || !['low', 'standard'].includes(value.quality) || !['off', 'low', 'normal'].includes(value.effects) ||
+    if (!value || (value.hdr !== undefined && typeof value.hdr !== 'boolean') || !['low', 'standard'].includes(value.quality) || !['off', 'low', 'normal'].includes(value.effects) ||
         !value.camera || !point(value.camera.position) || !point(value.camera.target) ||
         Math.hypot(...value.camera.position.map((coordinate, axis) => coordinate - value.camera.target[axis])) < 1e-6)
         throw new Error('Invalid saved presentation controls or camera.');
     return { quality: value.quality, effects: value.effects,
+        ...(value.hdr === undefined ? {} : { hdr: value.hdr }),
         camera: { position: [...value.camera.position], target: [...value.camera.target] } };
 }

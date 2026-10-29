@@ -92,3 +92,36 @@ full-suite baseline completed with 1,616 tests: 1,606 passed, no failures and te
 existing optional authoring-fixture skips. That baseline is not claimed as an
 exact-head full-suite pass for the subsequent collision integration; GitHub CI
 must validate the final commit before this draft PR can be merged.
+
+
+## Additional owner request: optional HDR menu control
+
+The collision fix at `6d4cd8339180fb8a91026212b1596ad55b218146` received owner
+UAT acceptance and both exact-head GitHub checks succeeded. Before merge the owner
+requested the earlier HDR spike as an optional in-game quality setting. Merge and
+publication therefore wait for the expanded head, rather than publishing that old
+head while implementation continues.
+
+HDR uses the exact pre-existing 1K source (SHA-256
+`162e8a4a42db3b26c8a5e4558db5355df156212a55127577725692f683106fa4`).
+No generated source, new texture or source-model addition is involved. Existing
+quality/presentation, renderer asset/loading lifecycle and Core/save seams are
+reused. Tests cover the actual menu control, opt-in/lazy loading, day/night,
+off-time resource release, late loads, failed loads without retry loops, context
+restoration, twenty toggles and sidecar compatibility with unchanged Core.
+The native loader decodes the actual source at 1024 x 512. Headless ownership tests
+use the resource-loading boundary; they do not constitute a real GPU or device
+performance measurement. Browser automation remains disabled; HDR visual UAT is
+separate from the already accepted expedition collision repair.
+
+```sh
+node --test tests/hdr-lighting.test.mjs tests/presentation-quality.test.mjs
+```
+
+
+HDR validation completed locally: 29 focused tests passed across the new control,
+presentation preferences, shared settlement handoff/import, Fjord lifecycle,
+lighting and island loading. TypeScript, production build/public asset validation
+and manual source-format/diff checks passed. There is no configured formatter.
+The same LAN preview was rebuilt and a separate owner HDR review was requested.
+The accepted expedition behavior was not changed by this additional slice.
