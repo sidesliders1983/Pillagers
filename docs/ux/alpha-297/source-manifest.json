@@ -201,7 +201,7 @@
     },
     {
       "path": "docs/ux/alpha-297/wireframes/game-desktop.svg",
-      "sha256": "7509f2dfa3304575e2fbd8ee0741715b6b86551b3dab73b13a515de3ecba2ff5",
+      "sha256": "ce294b2b4d11394248733c9791b87bfa1d569b1c7bb3c98671440ef3884d7404",
       "kind": "proposed information architecture; not runtime evidence",
       "width": 1280,
       "height": 800
@@ -213,7 +213,7 @@
     },
     {
       "path": "docs/ux/alpha-297/wireframes/game-mobile-landscape.svg",
-      "sha256": "eab66f14277d6a0dfbceba01fc5d398086bd8cc7cb530bdc5d0b1e4220f433ce",
+      "sha256": "c123006a19a1a1bcea8299fdcb4c022ead02084f50cca16259596e2e9cfe9be7",
       "kind": "proposed information architecture; not runtime evidence",
       "width": 852,
       "height": 393
@@ -225,7 +225,7 @@
     },
     {
       "path": "docs/ux/alpha-297/wireframes/start-desktop.svg",
-      "sha256": "5b6bd42a408daae010603e5be62b3940fe2017772c2fe70b06ef1f8d7bbb5888",
+      "sha256": "80ae6011a0852622162410c2c187c6bf1ffc7e4890284b138482ff4adfe8f4a1",
       "kind": "proposed information architecture; not runtime evidence",
       "width": 1280,
       "height": 800
@@ -237,7 +237,7 @@
     },
     {
       "path": "docs/ux/alpha-297/wireframes/start-mobile-landscape.svg",
-      "sha256": "3d0b8944672a20bd407988ae059c8ae92694d73472b1c8d74e38e5ce89b6116c",
+      "sha256": "69b2539d927bb3e401d7efd8d7bd780f4572c7671c5b2d6056df5498e6c79bda",
       "kind": "proposed information architecture; not runtime evidence",
       "width": 852,
       "height": 393
@@ -253,5 +253,6 @@
     "branch": "codex/prototype-menu-flow-297",
     "commit": "17ee56fcdb00df6b858d8c67994a58306d5e3f0a",
     "status": "throwaway model manually traversed; owner review pending; not merged into audit/game"
-  }
+  },
+  "artifact_hash_note": "Proposal/runtime hashes identify committed bytes; text SVG and runtime JSON/TXT are LF-normalized by scoped .gitattributes. Source local-byte hashes separately include checkout line endings."
 }

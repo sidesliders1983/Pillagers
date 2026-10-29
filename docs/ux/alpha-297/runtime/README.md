@@ -38,3 +38,7 @@ Requested sizes are recorded separately from document content and screenshot
 pixels. Narrow UI was mouse/keyboard automation, not a physical iPhone or touch
 emulation. One transient frame immediately after resize (16) is preserved in local
 scratch, not used as evidence. No screenshots were fabricated from source.
+
+Artifact hashes identify committed bytes. Scoped attributes keep runtime JSON/TXT
+and wireframe SVG line endings at LF across checkouts. Source-local byte hashes
+remain separately labelled in the source manifest.

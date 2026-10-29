@@ -377,8 +377,8 @@
   },
   {
     "path": "build-identity.json",
-    "sha256": "6df9f65c00f20e02427b9a53bf33c931647921599afd60f459f66b8c8c8dbea2",
-    "bytes": 1654,
+    "sha256": "c69551aae9c36b07f9b933078a11f43963968e38dff8a512b1bdac3f31ad42b1",
+    "bytes": 1628,
     "kind": "real browser audit evidence or supporting artifact"
   },
   {
