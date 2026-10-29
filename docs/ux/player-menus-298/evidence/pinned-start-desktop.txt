@@ -1,0 +1,10 @@
+- main:
+  - paragraph: A new shore. A shared history.
+  - heading "FjordSide" [level=1]
+  - region "Campaign start":
+    - paragraph: Begin a new campaign.
+    - button "New game" [active]
+    - button "Load game"
+    - button "Settings"
+    - button "Help & support"
+    - generic "About / Credits"

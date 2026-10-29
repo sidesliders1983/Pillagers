@@ -1,0 +1,122 @@
+- main:
+  - generic "Settlement status and controls":
+    - generic "Calendar":
+      - generic: Summer
+      - strong: "800"
+    - generic "Settlement resources and population":
+      - term: Food
+      - definition:
+        - button "Food stocks":
+          - strong: "9"
+      - term: Materials
+      - definition:
+        - button "Materials stocks":
+          - strong: "5"
+      - term: Residents
+      - definition:
+        - button "Settlement residents":
+          - strong: "10"
+      - term: Livestock
+      - definition:
+        - button "Settlement livestock":
+          - strong: "3"
+    - button "Start simulation":
+      - generic: Paused
+    - generic "Year length":
+      - generic: 3 min per year
+      - combobox "Year length":
+        - option "1 min per year"
+        - option "3 min per year" [selected]
+        - option "5 min per year"
+    - button "+1 Year" [disabled]
+    - generic "Game menu":
+    - option "Low"
+    - option "Standard" [selected]
+    - option "Off"
+    - option "Low" [selected]
+    - option "Normal"
+    - option "Off"
+    - option "Compact"
+    - option "Details" [selected]
+  - generic "Canonical Fjord settlement"
+  - generic "Resident production feedback"
+  - complementary "Selection and tasks":
+    - region "Settlement management":
+      - text: Settlement
+      - heading "Leofgifu" [level=2]
+      - paragraph: 34 Winters · Female · Fisher
+      - button "Close selection":
+      - paragraph: Working · food
+      - generic: Productivity
+      - strong: 40%
+      - meter: 40%
+      - generic: Occupation fit
+      - strong: 80%
+      - meter: 80%
+      - paragraph: 1.2 recorded years in current occupation · Autonomous career
+      - generic: Physicality
+      - strong: 14%
+      - meter: 14%
+      - generic: Agility
+      - strong: 92%
+      - meter: 92%
+      - generic: Intelligence
+      - strong: 49%
+      - meter: 49%
+      - generic: Cunning
+      - strong: 51%
+      - meter: 51%
+      - generic: Temperament
+      - strong: 16%
+      - meter: 16%
+      - term: Household
+      - definition:
+        - button "Leofgifu and Hallrik Eiriksson’s household":
+          - generic: Leofgifu and Hallrik Eiriksson’s household
+      - term: Partner
+      - definition:
+        - button "Hallrik Eiriksson":
+          - generic: Hallrik Eiriksson
+      - term: Children
+      - definition: None
+      - button "Change work":
+        - generic: Change work
+      - generic "Heritage, parents & occupation aptitudes"
+      - generic "Personal history"
+      - generic "More management"
+  - text: ⌄
+  - navigation "Settlement navigation":
+    - button "Settlement":
+      - text: Settlement
+    - button "Clan Book":
+      - text: Clan Book
+    - button "Need help?":
+      - text: Need help?
+    - button "Expeditions":
+      - text: Expeditions
+    - button "Show island map":
+      - generic: Map
+    - generic "Active expedition controls"
+  - 'button "Attention: 4 unread events and current conditions"':
+    - generic: Attention
+    - generic: "4"
+- complementary "Performance diagnostics":
+  - generic: 4086baac26c6 · 18:38:10 · 19 s Paused · standard / low · DPR 1
+  - generic: 16.2 fps · window 5.0 s Interval μ/p95 61.8 ms / 71.8 ms CPU frame p95 28.3 ms GPU main 57.1 ms Hitch /60 s 0.0 ms Ticks total/rate 0 / 0.0 /s Heap 460.7 MiB* · VRAM unavailable
+  - generic: "Seed 2089668634 / island N/A Year/tick N/A/N/A · pace N/A min Own R/L N/A/N/A · visible R/L/W 10/3/0 Core/UI p95 N/A / N/A Scene submit CPU N/A Scene async wall N/A Model CPU/wall N/A / N/A Portrait CPU/wall N/A / N/A Main+shadows 232 calls / 4986269 tris Portrait N/A calls (separate) Geo/Tex/Programs 133/112/60 counts Heap source: performance.memory (non-standard) Load max gap (250 ms cadence): 19.5 ms Long Tasks available load failure: Unsupported simulation save"
+  - button "Freeze display"
+  - generic "Options" [active]
+  - button "Move corner"
+  - button "Copy diagnostics"
+  - button "Save JSON"
+  - text: External screen recorder
+  - combobox "External screen recorder":
+    - option "not reported" [selected]
+    - option "on"
+    - option "off"
+  - generic: This labels your report; it does not record the screen.
+  - text: View
+  - combobox "View":
+    - option "Off"
+    - option "Compact"
+    - option "Details" [selected]
