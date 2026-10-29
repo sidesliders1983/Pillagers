@@ -1,0 +1,158 @@
+{
+  "application_code_commit": "7dfb602dff63f49a8445008d2ea14fd6f0cda2b8",
+  "runner_path": "scripts/qa/check-player-menus-headless.mjs",
+  "runner_sha256": "999f447facf760ce656d1e4ba2d3e237dd352f920786fedfa7294c5c891b8636",
+  "source_sha256": "71920149479ca72855a6745fc2122664884d4ee8c5cf173f34b74fc451c35c71",
+  "browser": "Google Chrome headless",
+  "chromium_sandbox": true,
+  "result": "passed",
+  "cases": 8,
+  "physical_device": false,
+  "artifacts": [
+    {
+      "path": "after-cancel.json",
+      "bytes": 81826,
+      "sha256": "7ad6493d42197a5fd16a77c794d6220a64c6b957bc0db394512b66e7ec8403a2"
+    },
+    {
+      "path": "before.json",
+      "bytes": 81826,
+      "sha256": "7ad6493d42197a5fd16a77c794d6220a64c6b957bc0db394512b66e7ec8403a2"
+    },
+    {
+      "path": "build.txt",
+      "bytes": 5708,
+      "sha256": "7cb29d576b16e185d7bbea89bbe9092287f0cfa20ab07c6ef6bd094cc1e4d817"
+    },
+    {
+      "path": "cancel-preserved.png",
+      "bytes": 97546,
+      "sha256": "36d3a926fd161ecb4ab2784fc82fbdaed6e1f5140bb7b379adf49d4894201c90",
+      "width": 590,
+      "height": 360
+    },
+    {
+      "path": "copied-diagnostics.json",
+      "bytes": 8680,
+      "sha256": "6d7c60ea0f81fa6c2b8ead685bc5ec54c38a4292fd7f67e259c56f733195be0d"
+    },
+    {
+      "path": "diagnostics.png",
+      "bytes": 117591,
+      "sha256": "da7ceaec4fd3789f3b79d8846977e8c00b1b2050b4e768d3c0ea8e731cd9ac78",
+      "width": 590,
+      "height": 360
+    },
+    {
+      "path": "fresh-arrival.json",
+      "bytes": 81452,
+      "sha256": "eaa825d144f3d99ccc3862c079ead076cf074c6064d11d13a57f0ef955e0a484"
+    },
+    {
+      "path": "fresh-start.png",
+      "bytes": 61760,
+      "sha256": "84dbbb306dcb52de665e406598bc4e26e89f4682ca4695d59f3e563b7423c219",
+      "width": 590,
+      "height": 360
+    },
+    {
+      "path": "game-menu-desktop.png",
+      "bytes": 1385437,
+      "sha256": "50c64dba1e7da686daafcb7795904b4088e21312189cd81eceb5565c1027ab01",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "game-menu-landscape.png",
+      "bytes": 101120,
+      "sha256": "5a727aa3bd2273edbaa9529ba97c9759f5bae6d8dae45e09925cd89b7ec235d2",
+      "width": 590,
+      "height": 360
+    },
+    {
+      "path": "new-arrival-founding-short-screen.png",
+      "bytes": 189208,
+      "sha256": "0f8ea92b5d839beee42d44037394788f9a8675e3d3b94fe0433a7e19ad9ee88c",
+      "width": 590,
+      "height": 360
+    },
+    {
+      "path": "README.md",
+      "bytes": 5912,
+      "sha256": "b474133e83ae53bfcff12c4c1b1b47b6bb36f8148dce650a2ebd0afcc3919668"
+    },
+    {
+      "path": "recovered-device.json",
+      "bytes": 81826,
+      "sha256": "7ad6493d42197a5fd16a77c794d6220a64c6b957bc0db394512b66e7ec8403a2"
+    },
+    {
+      "path": "replay-founding-short-screen.png",
+      "bytes": 192764,
+      "sha256": "c5fb4a8e0ba324d0ed05fbacb314d12aa7c4e441f83de2962fa677b911868028",
+      "width": 590,
+      "height": 360
+    },
+    {
+      "path": "replay-red.json",
+      "bytes": 1557,
+      "sha256": "8e45f803f2a075004183405a894ef45789a9c262eb7f23597c37c51a66a9a89a"
+    },
+    {
+      "path": "replay-red.png",
+      "bytes": 154950,
+      "sha256": "b1fcdc0e8fac4bcab9e5f05772a911e20e0dcbdc7f442b0ea19ea6de1a48397f",
+      "width": 590,
+      "height": 360
+    },
+    {
+      "path": "replayed.json",
+      "bytes": 81796,
+      "sha256": "be00a090b9400f93c77651a54d2fb054f430902e93f220fd7c963644af362f08"
+    },
+    {
+      "path": "result.json",
+      "bytes": 5057,
+      "sha256": "3d4ef46b6c561c68432d0ca2e36a52beb8ec86fff312cb669dcf4f11f5bdd9a5"
+    },
+    {
+      "path": "runner-output.txt",
+      "bytes": 1372,
+      "sha256": "6bfb07fc64c16168ce9bd24bdd5dacae531bf7d7a4403f264fdaebe052345aa4"
+    },
+    {
+      "path": "saved-diagnostics.json",
+      "bytes": 8667,
+      "sha256": "aca58d87538badb6cabeb30e082070e1c8d36cc6f0b32248d1f6c26e554a2fa5"
+    },
+    {
+      "path": "settings-landscape.png",
+      "bytes": 102258,
+      "sha256": "3da6efa185f2f78fecec9a9ba9961ebaa355d4043b639f3fe125b88f935746e2",
+      "width": 590,
+      "height": 360
+    },
+    {
+      "path": "touch-family-tree.png",
+      "bytes": 63849,
+      "sha256": "a508d43cfccf122b813ded8e2960bee0cf060a709490b96bd8361dc69f935a12",
+      "width": 852,
+      "height": 393
+    },
+    {
+      "path": "touch-landscape-menu.png",
+      "bytes": 255563,
+      "sha256": "c1ac75ffca72fabcc790e9a7db3685384450dbdf93631a6678d826d56f244a9f",
+      "width": 852,
+      "height": 393
+    }
+  ],
+  "hash_scope": "UTF-8 LF text including JSON; original PNG bytes; excludes manifest itself",
+  "original_clipboard": {
+    "bytes": 9031,
+    "sha256": "ddb9ea1a448e9ff799ca71ae4068766f16e887ebba687914038cad64588c4351",
+    "crlf_count": 351,
+    "committed_json": "copied-diagnostics.json",
+    "text_normalization": "CRLF to LF only; parsed JSON equal"
+  }
+}

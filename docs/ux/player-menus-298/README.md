@@ -2,7 +2,7 @@
 
 The start screen now leads with beginning/continuing a campaign. The game menu leads with managing the current session. Diagnostics remains available deliberately inside one Help & support entry. This implements the reviewed IA from #297 without importing the throwaway prototype.
 
-> Current review status: [the later browser follow-up](followup/README.md) adds real clean-build journeys, exact Core-state parity and the short-screen founding-panel repair. The initial snapshot below is retained with its original provenance. Native replacement-dialog automation, OS-clipboard inspection and physical/novice acceptance still have explicit limits.
+> Current review status: [headless Chrome verification](headless/README.md) now passes the native confirmations, real Copy/Save, short-screen close and coarse-pointer touch journeys. It also found and fixed the menu obscuring guidance after confirmed replacement. Earlier evidence below remains labelled by its original build; real feedback configuration and physical/novice readiness remain separate.
 
 ## Source and review boundary
 

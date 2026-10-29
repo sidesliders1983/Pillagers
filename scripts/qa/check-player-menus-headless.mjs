@@ -41,7 +41,7 @@ async function stage(name, action) {
     }
 }
 
-const options = { headless: true, downloadsPath: join(output, 'downloads') };
+const options = { headless: true, chromiumSandbox: true, downloadsPath: join(output, 'downloads') };
 if (process.env.CHROME_PATH) options.executablePath = process.env.CHROME_PATH;
 else options.channel = 'chrome';
 const browser = await chromium.launch(options);
@@ -58,11 +58,12 @@ report.chrome = browser.version();
 report.playwright = require((process.env.PLAYWRIGHT_MODULE || 'playwright') + '/package.json').version;
 report.node = process.version;
 report.headless = true;
+report.chromiumSandbox = true;
 
-async function capture(name) {
+async function capture(name, target = page) {
     const filename = `${name}.png`;
-    await page.screenshot({ path: join(output, filename), fullPage: false });
-    report.screenshots.push({ filename, viewport: page.viewportSize() });
+    await target.screenshot({ path: join(output, filename), fullPage: false });
+    report.screenshots.push({ filename, viewport: target.viewportSize() });
 }
 async function menu() {
     if (!(await page.locator('#fjord-menu').evaluate(node => node.open)))
@@ -86,9 +87,9 @@ async function campaign(filename) {
     await section('Save game');
     return exportJSON('Download campaign file', filename);
 }
-async function ready() {
-    await page.locator('#fjord-canvas[data-ready="true"]').waitFor({ timeout: 180000 });
-    await page.locator('#island-loading').waitFor({ state: 'hidden', timeout: 180000 });
+async function ready(target = page) {
+    await target.locator('#fjord-canvas[data-ready="true"]').waitFor({ timeout: 180000 });
+    await target.locator('#island-loading').waitFor({ state: 'hidden', timeout: 180000 });
 }
 async function replacement(action, accept) {
     const pending = page.waitForEvent('dialog');
@@ -101,7 +102,7 @@ async function replacement(action, accept) {
     else await dialog.dismiss();
     await clicking;
 }
-async function closeFounding() {
+async function closeFounding(name) {
     const card = page.locator('#loading-clan-book.founding-book-ready');
     await card.waitFor({ timeout: 180000 });
     const bounds = await card.evaluate(node => {
@@ -113,7 +114,7 @@ async function closeFounding() {
     assert.ok(bounds.close.top >= bounds.card.top && bounds.close.bottom <= bounds.card.bottom);
     assert.ok(bounds.close.top >= 0 && bounds.close.bottom <= bounds.viewport.height);
     assert.ok(bounds.close.left >= 0 && bounds.close.right <= bounds.viewport.width);
-    await capture('founding-short-screen');
+    await capture(`${name}-founding-short-screen`);
     await page.getByRole('button', { name: 'Close founding chapter', exact: true }).click();
     await card.waitFor({ state: 'detached' });
     await page.getByRole('button', { name: 'Guide me', exact: true }).click();
@@ -189,7 +190,7 @@ try {
     await stage('native founding replay preserves original founders and closes on short screen', async () => {
         await section('New game / Replay');
         await replacement('Replay original founding', true);
-        const bounds = await closeFounding();
+        const bounds = await closeFounding('replay');
         const replay = await campaign('replayed.json');
         assert.equal(replay.campaign.seed, before.campaign.seed);
         assert.deepEqual(replay.campaign.time, { winter: 800, tick: 500 });
@@ -199,7 +200,7 @@ try {
     await stage('native fresh arrival changes seed and device checkpoint remains recoverable', async () => {
         await section('New game / Replay');
         await replacement('New arrival', true);
-        await closeFounding();
+        await closeFounding('new-arrival');
         const fresh = await campaign('fresh-arrival.json');
         assert.notEqual(fresh.campaign.seed, before.campaign.seed);
         assert.deepEqual(fresh.campaign.time, { winter: 800, tick: 500 });
@@ -215,6 +216,38 @@ try {
         await capture('game-menu-desktop');
         return { originalSeed: before.campaign.seed, newSeed: fresh.campaign.seed,
             originalCheckpointCoreEqual: true };
+    });
+    await stage('coarse-pointer landscape menu and Family Tree touch navigation', async () => {
+        const mobile = await browser.newContext({
+            viewport: { width: 852, height: 393 }, hasTouch: true, isMobile: true,
+        });
+        try {
+            const touch = await mobile.newPage();
+            touch.setDefaultTimeout(15000);
+            touch.on('pageerror', error => {
+                if (report.errors.length < 30) report.errors.push(error.message);
+            });
+            await touch.goto(origin + '/fjord-play', { waitUntil: 'domcontentloaded' });
+            await touch.getByRole('button', { name: 'Load game', exact: true }).tap();
+            await touch.locator('input[type="file"]').setInputFiles(fixturePath);
+            await touch.locator('[data-entry="continue"]').tap();
+            await ready(touch);
+            assert.equal(await touch.evaluate(() => matchMedia('(pointer: coarse)').matches), true);
+            await touch.locator('#fjord-menu > summary').tap();
+            assert.equal(await touch.locator('#fjord-next').evaluate(node => node.closest('#fjord-menu') !== null), true);
+            await capture('touch-landscape-menu', touch);
+            await touch.getByText('Settings', { exact: true }).tap();
+            await touch.getByRole('button', { name: 'Back', exact: true }).tap();
+            await touch.getByRole('button', { name: 'Close game menu', exact: true }).tap();
+            await touch.getByRole('button', { name: 'Settlement navigation', exact: true }).tap();
+            await touch.getByRole('button', { name: 'Clan Book', exact: true }).tap();
+            await touch.getByRole('tab', { name: 'Family Tree', exact: true }).tap();
+            await capture('touch-family-tree', touch);
+            await touch.getByRole('button', { name: 'Close Clan Book', exact: true }).tap();
+            assert.equal(await touch.getByRole('button', { name: 'Start simulation', exact: true }).isEnabled(), true);
+            assert.equal(await touch.locator('#fjord-food').textContent(), '15');
+            return { viewport: touch.viewportSize(), coarsePointer: true, input: 'emulated touch', physicalDevice: false };
+        } finally { await mobile.close(); }
     });
     assert.deepEqual(report.errors, []);
     report.status = 'passed';

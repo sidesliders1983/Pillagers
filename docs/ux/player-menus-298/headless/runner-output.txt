@@ -1,0 +1,9 @@
+PASS fresh start and real file recovery
+PASS portable baseline and device checkpoint
+PASS native New arrival cancellation keeps seed and complete Core state
+PASS short-screen Back and Close retain manual pause
+PASS real Copy and Save diagnostics through an isolated permission scope
+PASS native founding replay preserves original founders and closes on short screen
+PASS native fresh arrival changes seed and device checkpoint remains recoverable
+PASS coarse-pointer landscape menu and Family Tree touch navigation
+{"status":"passed","output":"D:\\CodexSites\\Pillagers\\scratch\\player-menus-298\\scratch\\headless-menu-run-4","chrome":"156.0.8078.48","stages":[{"name":"fresh start and real file recovery","status":"passed"},{"name":"portable baseline and device checkpoint","status":"passed"},{"name":"native New arrival cancellation keeps seed and complete Core state","status":"passed"},{"name":"short-screen Back and Close retain manual pause","status":"passed"},{"name":"real Copy and Save diagnostics through an isolated permission scope","status":"passed"},{"name":"native founding replay preserves original founders and closes on short screen","status":"passed"},{"name":"native fresh arrival changes seed and device checkpoint remains recoverable","status":"passed"},{"name":"coarse-pointer landscape menu and Family Tree touch navigation","status":"passed"}]}
