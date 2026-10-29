@@ -34,6 +34,13 @@ interface YardFloor {
     height?: number;
 }
 
+/** A slow Core tick may skip an entire presentation update. Cover that bounded gap
+ * using confirmed positions only, so a runner does not finish a segment too early. */
+function travelInterpolationWindow(updateInterval: number, secondsPerTick: number): number {
+    return Math.max(updateInterval,
+        Math.ceil(secondsPerTick / updateInterval - 1e-9) * updateInterval);
+}
+
 /** Reconcile canonical identities; unchanged objects and the environment remain alive. */
 export class FjordEntities {
     readonly root = new Group();
@@ -54,7 +61,8 @@ export class FjordEntities {
     private expeditionSurface?: TerrainSurface;
     private expeditionWorld?: WorldBlueprint;
     private expeditionFrames = new Map<string, { mission: SpatialMission; from: number; elapsed: number; duration: number }>();
-    prepareExpeditions(state: SimulationState, world: WorldBlueprint, updateIntervalSeconds = .5) {
+    prepareExpeditions(state: SimulationState, world: WorldBlueprint, updateIntervalSeconds = .5,
+        secondsPerTick = updateIntervalSeconds) {
         if (this.expeditionWorld !== world) {
             this.expeditionWorld = world;
             this.expeditionSurface = createBlueprintSurface(world);
@@ -71,8 +79,8 @@ export class FjordEntities {
             // A new route starts at an authoritative reached position, not a distance on the old path.
             const sameRoute = previous && JSON.stringify(previous.mission.route) === JSON.stringify(mission.route);
             const from = sameRoute ? previous.from + (previous.mission.travelled - previous.from) * ratio : mission.travelled;
-            // Spread a coalesced Core update across its actual cadence, instead of one 180ms tick.
-            const duration = Math.min(1, Math.max(updateIntervalSeconds, previous?.elapsed ?? updateIntervalSeconds));
+            const cadence = travelInterpolationWindow(updateIntervalSeconds, secondsPerTick);
+            const duration = Math.max(cadence, Math.min(cadence * 2, previous?.elapsed ?? cadence));
             this.expeditionFrames.set(mission.id, { mission, from, elapsed: 0, duration });
         }
     }
@@ -88,7 +96,8 @@ export class FjordEntities {
     private miningHeight?: (x: number,z: number,natural: number) => number;
     private miningWorld?: WorldBlueprint;
     private miningFrames = new Map<string, {worker: MiningWorker; from: number; elapsed: number; duration: number; inside: boolean; face: {x: number; z: number}}>();
-    prepareMining(state: SimulationState, world: WorldBlueprint, interval = .5, height?: (x: number,z: number,natural: number) => number) {
+    prepareMining(state: SimulationState, world: WorldBlueprint, interval = .5,
+        height?: (x: number,z: number,natural: number) => number, secondsPerTick = interval) {
         this.miningHeight = height;
         if (this.miningWorld !== world) {
             this.miningWorld = world; this.miningSurface = createBlueprintSurface(world); this.miningFrames.clear();
@@ -103,8 +112,9 @@ export class FjordEntities {
             const ratio = previous ? Math.min(1, previous.elapsed / previous.duration) : 1;
             const from = previous ? previous.from + (previous.worker.travelled - previous.from) * ratio : worker.travelled;
             const face = site.position;
+            const cadence = travelInterpolationWindow(interval, secondsPerTick);
             this.miningFrames.set(id, {worker, from, inside, elapsed: 0,
-                duration: Math.min(1, Math.max(interval, previous?.elapsed ?? interval)), face});
+                duration: Math.max(cadence, Math.min(cadence * 2, previous?.elapsed ?? cadence)), face});
         }
     }
     private miningPose(id: string) {

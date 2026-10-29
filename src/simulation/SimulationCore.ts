@@ -31,7 +31,7 @@ export { inspectIslandMissionLivestock } from './MissionLivestock';
 import {initializeSocial, validateSocial} from './PersonalityLifeEvents';
 import type {SocialState, SocialConfig} from './PersonalityLifeEvents';
 export {defaultSocialConfig, socialProbabilities} from './PersonalityLifeEvents';
-import { initializeCulture, applyCultureCommand, validateCulture, isCulturalEvent } from './CulturalEvents';
+import { initializeCulture, useCulturalOccasions, applyCultureCommand, validateCulture, isCulturalEvent } from './CulturalEvents';
 import type { CultureConfig, CultureState, CultureCommand } from './CulturalEvents';
 export { defaultCultureConfig, gatheringOffer, inspectCulture, availableCulturalParticipants, weddingCandidates } from './CulturalEvents';
 export type { CultureConfig, CultureCommand, CultureState, CulturalOccasion, CulturalParticipant, WeddingCandidate } from './CulturalEvents';
@@ -229,7 +229,7 @@ export function createSettlement(seed:number, overrides:Partial<PrototypeConfig>
     }
     initializeSocial(state,socialOverrides);validateState(state); return state;
 }
-export type SimulationCommand = MiningCommand | {type: 'UseSeasonalWeatherProduction'} | MerchantCommand | CultureCommand | SmitheryCommand | LongshipCommand | IslandMissionCommand | SpatialExpeditionCommand | CampfireCommand | ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
+export type SimulationCommand = MiningCommand | {type: 'UseSeasonalWeatherProduction'} | {type: 'UseCulturalOccasions'} | MerchantCommand | CultureCommand | SmitheryCommand | LongshipCommand | IslandMissionCommand | SpatialExpeditionCommand | CampfireCommand | ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
 function integer(value: number, label: string) {
     if (!Number.isSafeInteger(value) || value < 0) throw new Error(`${label} must be a nonnegative safe integer`);
 }
@@ -239,6 +239,12 @@ function emit(state: SimulationState, type: string, personaId?: string, details?
 }
 export function applyCommand(input: SimulationState, command: SimulationCommand, context?: PhysicalExpeditionContext): SimulationState {
     validateState(input);
+    if (command.type === 'UseCulturalOccasions') {
+        const state = structuredClone(input);
+        useCulturalOccasions(state);
+        validateState(state);
+        return state;
+    }
     if (command.type === 'UseSeasonalWeatherProduction') {
         const state = structuredClone(input);
         useSeasonalWeatherProduction(state);

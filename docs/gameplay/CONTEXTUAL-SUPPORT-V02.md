@@ -60,8 +60,10 @@ movement or dialogue is not required to resolve the episode and grants no reward
 
 ## Campaign compatibility and validation
 
-Fresh campaigns require both the explicitly enabled Culture prototype and social life.
-The ordinary Fjord opt-in remains ?culture=1. Older saves without contextualSupport stay
+The contextual-help pilot requires enabled Culture and social life and is explicitly
+opted in with ?culture=1 in Fjord. Cultural ceremonies themselves became ordinary Fjord
+features after owner approval on 29 October 2026; that rollout does not automatically
+enable contextual help. Older saves without contextualSupport stay
 without it on load and founder replay. Explicit disabled QA campaigns also remain disabled.
 No historical save or frozen chapter is upgraded by inventing a past offer. CPU clans
 require their own enabled social/cultural state and actual loss; initialization grants

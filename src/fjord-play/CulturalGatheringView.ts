@@ -52,7 +52,7 @@ export function renderGatheringCard(state: SimulationState, canReadHistory = fal
     const offer = gatheringOffer(state, choice.occasion, choice.sourceEventId);
     if (!offer.enabled) return '';
     return `<section class="fjord-culture" aria-label="Community gathering">
-        <small class="fjord-culture-prototype">Cultural gathering prototype</small>
+        <small class="fjord-culture-prototype">Community occasions</small>
         <label class="fjord-culture-choice">Occasion
             <select data-culture-occasion aria-label="Cultural occasion">
                 ${Object.entries(occasionLabels).map(([value, label]) => `<option value="${value}"${
@@ -84,7 +84,7 @@ export function renderGatheringReview(offer: GatheringOffer, current = offer, fe
         JSON.stringify(offer.participantIds) !== JSON.stringify(current.participantIds);
     const reason = current.reason ?? (changed ? 'The gathering has changed. Review the updated attendance.' : null);
     return `<section class="fjord-culture" aria-label="Gathering review">
-        <small class="fjord-culture-prototype">Cultural gathering prototype</small>
+        <small class="fjord-culture-prototype">Community occasions</small>
         <h3>${escape(occasionLabels[offer.occasion])}</h3>
         ${offer.occasion === 'wedding' ? `${spouseNames.length === 2 ?
             `<p data-culture-couple><strong>${spouseNames.map(escape).join(' &amp; ')}</strong></p>` : ''}

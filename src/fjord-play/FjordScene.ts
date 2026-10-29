@@ -757,9 +757,10 @@ export function createFjordScene(options: {
                         const key='mine:'+plot.id;
                         if (!cleared.has(key)) { world!.clearPlot({...plot,futureAsset:'hut'}); cleared.add(key); }
                     }
+                    const secondsPerTick = session.effectiveMinutesPerWinter * 60 / state.ticksPerWinter;
                     layer!.prepareMining(state, campaign.blueprint, host.tickIntervalSeconds,
-                        (x,z,natural)=>miningLayer.heightAt(x,z,natural));
-                    layer!.prepareExpeditions(state, campaign.blueprint, host.tickIntervalSeconds);
+                        (x,z,natural)=>miningLayer.heightAt(x,z,natural), secondsPerTick);
+                    layer!.prepareExpeditions(state, campaign.blueprint, host.tickIntervalSeconds, secondsPerTick);
                     const prepareEntities = () => layer!.sync(view.entities, host.loading ? yieldForInput : undefined, current,
                         view.livestockDeaths, host.loading ? (completed, total, entity, started) => {
                             host.loading?.units('characters', completed, total, 'settlement models');

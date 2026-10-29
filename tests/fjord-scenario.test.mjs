@@ -64,3 +64,27 @@ test('four-species physical rivals exclude the player species; invalid saved poo
         assert.throws(() => core.serializeState(bad), /species pool/);
     }
 });
+
+
+test('ordinary Fjord starts and restored sessions expose optional ceremonies without a QA flag', () => {
+    const { newFjordScenario, useFjordCulturalOccasions } = load('../src/fjord-play/FjordScenario.ts');
+    const { GameplaySession } = load('../src/gameplay-lab/GameplaySession.ts');
+    const fresh = newFjordScenario(32);
+    assert.equal(fresh.inspectCulture().enabled, true);
+    assert.equal(fresh.snapshot().contextualSupport, undefined, 'The separate autonomous-help pilot stays opt-in');
+    assert.equal(newFjordScenario(32, true).snapshot().contextualSupport.config.enabled, true);
+    const legacy = new GameplaySession(32);
+    const original = legacy.saveJSON();
+    const restored = new GameplaySession();
+    restored.loadJSON(original);
+    assert.equal(restored.inspectCulture().enabled, false, 'Raw save loading preserves historical rules');
+    useFjordCulturalOccasions(restored);
+    assert.equal(restored.gatheringOffer('communal_ceremony').allowed, true);
+    assert.equal(restored.inspectCulture().supportCount, 0);
+    const adopted = restored.saveJSON();
+    useFjordCulturalOccasions(restored);
+    assert.equal(restored.saveJSON(), adopted);
+    restored.loadJSON(adopted);
+    assert.equal(restored.inspectCulture().enabled, true);
+    assert.equal(legacy.saveJSON(), original);
+});
