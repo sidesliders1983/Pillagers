@@ -17,7 +17,7 @@ export type CultureConfig = {
     supportCapacity: number;
     exposureReductionBps: number;
 };
-/** Owner-approved experimental values; ordinary campaigns remain disabled. */
+/** Reviewed values; raw Core remains opt-in and Fjord explicitly adopts these occasions. */
 export const defaultCultureConfig: Readonly<CultureConfig> = {
     enabled: false, foodCost: 3, minParticipants: 3, maxParticipants: 8,
     supportCapacity: 2, exposureReductionBps: 2500,
@@ -45,6 +45,17 @@ export function initializeCulture(state: SimulationState, overrides: Partial<Cul
     state.culture = { version: 1, config, nextSequence: 1,
         supportSourceEventIds: [], lastGatheringEventId: null };
 }
+/** Explicit Fjord adoption: preserve historical outcomes and existing custom culture rules. */
+export function useCulturalOccasions(state: SimulationState): void {
+    if (!state.culture) {
+        if (!state.mechanics) throw new Error('Cultural occasions require gameplay mechanics.');
+        initializeCulture(state, { enabled: true });
+        state.events.push({ id: `event-${state.events.length + 1}`, time: { ...state.time },
+            type: 'CulturalOccasionsEnabled', details: eventFacts(state, { rulesVersion: 1 }) });
+    }
+    for (const target of Object.values(state.world?.targetClans ?? {})) useCulturalOccasions(target);
+}
+
 export function inspectCulture(state: SimulationState) {
     const culture = state.culture;
     const config = culture?.config ?? defaultCultureConfig;

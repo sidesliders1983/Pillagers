@@ -56,12 +56,15 @@ test('save and founder replay preserve cultural rules while a replay clears earn
     assert.equal(restored.saveJSON(), beforeReplay);
 });
 
-test('the Fjord scenario opts into the prototype without changing founders or ordinary defaults', () => {
+test('Fjord exposes ceremonies by default while raw Core and the separate help pilot remain opt-in', () => {
     const { newFjordScenario } = load('../src/fjord-play/FjordScenario.ts');
     const ordinary = newFjordScenario(32);
     const prototype = newFjordScenario(32, true);
 
-    assert.equal(ordinary.gatheringOffer().enabled, false);
+    assert.equal(ordinary.gatheringOffer().enabled, true);
+    assert.equal(new GameplaySession(32).gatheringOffer().enabled, false);
+    assert.equal(ordinary.readSnapshot().contextualSupport, undefined);
+    assert.equal(prototype.readSnapshot().contextualSupport.config.enabled, true);
     assert.equal(prototype.gatheringOffer().enabled, true);
     assert.deepEqual(prototype.readSnapshot().personas, ordinary.readSnapshot().personas);
     assert.equal(prototype.readSnapshot().rngState, ordinary.readSnapshot().rngState);

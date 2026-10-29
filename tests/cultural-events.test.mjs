@@ -263,3 +263,40 @@ test('missing culture is legacy-compatible but explicit malformed empty culture 
         assert.throws(() => core.reconstructState(JSON.stringify(state)), /cultur/i);
     }
 });
+
+
+test('Fjord can adopt optional cultural occasions once without replaying history or granting support', () => {
+    const old = core.createCampaign(32);
+    const before = core.serializeState(old);
+    assert.equal(old.culture, undefined);
+    const adopted = core.applyCommand(old, { type: 'UseCulturalOccasions' });
+    for (const [clan, previous] of [[adopted, old], ...Object.keys(old.world.targetClans)
+        .map(id => [adopted.world.targetClans[id], old.world.targetClans[id]])]) {
+        assert.equal(core.inspectCulture(clan).enabled, true);
+        assert.equal(core.inspectCulture(clan).supportCount, 0);
+        assert.equal(core.inspectCulture(clan).nextSequence, 1);
+        assert.equal(core.inspectCulture(clan).lastGatheringEventId, null);
+        assert.deepEqual(clan.stocks, previous.stocks);
+        assert.deepEqual(clan.personas, previous.personas);
+        assert.deepEqual(clan.time, previous.time);
+        assert.equal(clan.rngState, previous.rngState);
+        assert.deepEqual(clan.events.slice(0, -1), previous.events);
+        assert.equal(clan.events.at(-1).type, 'CulturalOccasionsEnabled');
+        assert.deepEqual(clan.events.at(-1).time, previous.time);
+    }
+    assert.equal(core.serializeState(old), before);
+    assert.deepEqual(core.applyCommand(adopted, { type: 'UseCulturalOccasions' }), adopted);
+    assert.deepEqual(core.reconstructState(core.serializeState(adopted)), adopted);
+    const offer = core.gatheringOffer(adopted, 'communal_ceremony');
+    assert.equal(offer.allowed, true);
+    const sponsored = core.applyCommand(adopted, {
+        type: 'SponsorGathering', occasion: offer.occasion, expectedSequence: offer.expectedSequence,
+        quotedFood: offer.foodCost, quotedMaterials: offer.materialsCost,
+        expectedParticipantIds: offer.participantIds,
+    });
+    assert.equal(sponsored.stocks.food, old.stocks.food - offer.foodCost);
+    assert.equal(sponsored.stocks.materials, old.stocks.materials - offer.materialsCost);
+    assert.equal(core.inspectCulture(sponsored).supportCount, 1);
+    assert.equal(core.inspectCulture(sponsored.world.targetClans[Object.keys(old.world.targetClans)[0]]).supportCount, 0);
+    assert.deepEqual(core.reconstructState(core.serializeState(sponsored)), sponsored);
+});

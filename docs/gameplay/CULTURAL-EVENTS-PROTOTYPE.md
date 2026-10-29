@@ -2,8 +2,10 @@
 
 Status: experimental implementation for #275 + #276 under epic #274, extended by #277 below and [contextual support #278](CONTEXTUAL-SUPPORT-V02.md). On 26 October 2026,
 the owner approved the public test boundaries and the values below as **experimental values**.
-They are not approval for ordinary default-on campaigns. Culture is absent from legacy saves
-and ordinary new Core campaigns unless explicitly enabled at campaign creation.
+On 29 October 2026, after Sites playtesting, the owner approved making these occasions
+available in ordinary new and existing Fjord campaigns. The approved costs and weather
+contributions below are unchanged. Raw Core creation/import remains opt-in, preserving
+headless research and historical replay until the explicit Fjord adoption command.
 
 ## One optional, atomic gathering
 
@@ -111,7 +113,10 @@ are deferred. Gathering animations/audio never grant assistance.
 
 ## Current 3D prototype
 
-Explicit new Fjord campaigns opened with `?culture=1` expose the campfire sponsorship.
+Ordinary Fjord campaigns expose the campfire sponsorship below Light campfire, including
+Wedding celebration and Communal ceremony in the occasion selector. Weddings still require
+a genuine partnership formed during the preceding game year; founding couples remain
+ineligible. The separate autonomous contextual-help pilot remains behind `?culture=1`.
 Existing or imported saves keep their stored rules. The compact in-card review shows
 actual cost and people; Not now, Escape and closing the card leave resources unchanged.
 
@@ -335,3 +340,20 @@ Food is charged once at the accepted quotation. Reaching zero Food afterward can
 raise the normal stock attention notice, but does not cancel the already accepted
 presentation. The original wedding QA save contains exactly 24 Food, matching its
 eight-person quotation; that fixture and the gameplay cost are unchanged.
+
+
+## Fjord rollout and existing campaigns (29 October 2026)
+
+New Fjord scenarios initialize the reviewed cultural rules. Continuing, importing, loading
+locally or restarting a historical Fjord campaign uses the public idempotent
+`UseCulturalOccasions` command for the player and existing CPU clans when needed. Each
+newly enabled clan records `CulturalOccasionsEnabled` at its current canonical time and
+starts with zero prepared support, sequence 1 and no previous gathering. Existing custom
+culture configuration, previous events, relationships, time, RNG and stocks are retained.
+No ceremony is bought or replayed by adoption. A real subsequent SponsorGathering command
+still validates eligibility and spends the current quote. Save/load preserves adoption.
+
+This rollout does not add contextualSupport to historical campaigns that lacked it, nor
+activate that separate autonomous-help pilot in ordinary new Fjord scenarios. Explicit QA
+campaigns and existing enabled support states retain their own configuration. Core loading
+on its own never invokes the Fjord adoption command.

@@ -14,7 +14,7 @@ import { IslandMissionPanel } from './IslandMissionPanel';
 import { IslandMissionMarkers } from './IslandMissionMarkers';
 import { LifecycleTrace } from './LifecycleTrace';
 import type { CampaignStartAttempt } from './FjordEntry';
-import { newFjordScenario, useSeasonalFjordProduction } from './FjordScenario';
+import { newFjordScenario, useSeasonalFjordProduction, useFjordCulturalOccasions } from './FjordScenario';
 import { fjordLivestockRules } from '../config/FjordLivestock';
 import { resumeCheckpointKey } from '../play/SettlementRecovery';
 import { birthdayCalendarMode } from '../simulation/BirthdayCalendar';
@@ -169,7 +169,10 @@ export class FjordPlay {
             enableStartDiscovery) this.campaign.enableDiscovery();
         if (entry.kind === 'new' && this.campaign.blueprint.oreSites)
             this.session.initializeMining(this.campaign.blueprint, this.session.readSnapshot().discovery!.worldId);
-        if (!entry.diagnosticRun) useSeasonalFjordProduction(this.session);
+        if (!entry.diagnosticRun) {
+            useSeasonalFjordProduction(this.session);
+            useFjordCulturalOccasions(this.session);
+        }
         document.title = 'FjordSide';
         const readingPosition = this.foundingBook?.scrollTop ?? 0;
         document.body.className = 'fjord-play';
@@ -350,6 +353,7 @@ export class FjordPlay {
         const productionLabels = new ProductionLabels(document.querySelector<HTMLElement>('#fjord-production-labels')!);
         const resetProduction = () => {
             useSeasonalFjordProduction(this.session);
+            useFjordCulturalOccasions(this.session);
             production.reset(this.session.readSnapshot().events);
             productionLabels.reset();
         };
@@ -622,7 +626,7 @@ export class FjordPlay {
                         proposal.restartCampaign(sameFounders.checked, undefined, weatherField.checked, undefined, foundingPhase);
                     } else if (!replayFounders) proposal.newCampaign(Number(seedField.value), weatherField.checked, true, foundingPhase,
                         calendarMode ?? birthdayCalendarMode(this.session.readSnapshot()), { player: fjordLivestockRules },
-                        query.get('culture') === '1' ? { enabled: true } : undefined, undefined,
+                        { enabled: true }, { enabled: query.get('culture') === '1' },
                         { enabled: true });
                     this.foundingBook = new FoundingBookWindow(proposal.book.snapshot().chapters[0]);
                     proposal.book.notifyPending();

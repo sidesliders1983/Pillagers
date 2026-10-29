@@ -79,7 +79,7 @@ test('desktop and touch campfire review quote real Food and Not now changes no c
         const f = fixture(mobile);
         try {
             const before = f.session.saveJSON();
-            assert.match(document.querySelector('#entity-panel').textContent, /prototype/i);
+            assert.match(document.querySelector('#entity-panel').textContent, /Community occasions/);
             f.click('culture-review');
             const review = document.querySelector('[aria-label="Gathering review"]');
             assert.ok(review);
