@@ -6,14 +6,11 @@ export interface ExpeditionStandingGround {
     known?: (x: number, z: number) => boolean;
     plots?: readonly FjordPlot[];
 }
-export const expeditionStandingSpeed = 1.6;
-type Offset = Point2 & { moving: boolean; rotation?: number };
 
-/** Small render-only steps around an already reached destination. Core still owns the journey. */
+/** Reserve safe arrival targets; the shared resident controller owns every physical step. */
 export class ExpeditionStanding {
     private surface;
     private natureCells = new Map<string, Array<{ x: number; z: number; clearance: number }>>();
-    private offsets = new Map<string, Map<string, Offset>>();
     private goals = new Map<string, Map<string, Point2>>();
     private ground: ExpeditionStandingGround = {};
     constructor(private world: WorldBlueprint) {
@@ -28,10 +25,9 @@ export class ExpeditionStanding {
                 }
         }
     }
-    prepare(activeIds: ReadonlySet<string>, ground: ExpeditionStandingGround) {
+    prepare(ground: ExpeditionStandingGround) {
         this.ground = ground;
         this.goals.clear();
-        for (const id of this.offsets.keys()) if (!activeIds.has(id)) this.offsets.delete(id);
     }
     private safe(p: Point2) {
         const b = this.surface.bounds, nav = this.world.navigation;
@@ -55,10 +51,7 @@ export class ExpeditionStanding {
                 z: from.z + (to.z - from.z) * i / steps })) return false;
         return true;
     }
-    advance(missionId: string, points: ReadonlyMap<string, Point2>, arrived: boolean, delta: number) {
-        if (delta <= 0) return;
-        let offsets = this.offsets.get(missionId);
-        if (!offsets) { offsets = new Map(); this.offsets.set(missionId, offsets); }
+    targets(missionId: string, points: ReadonlyMap<string, Point2>, arrived: boolean) {
         let goals = this.goals.get(missionId);
         if (arrived && !goals) {
             goals = new Map();
@@ -74,27 +67,6 @@ export class ExpeditionStanding {
             }
             this.goals.set(missionId, goals);
         }
-        for (const [id, anchor] of points) {
-            const offset = offsets.get(id) ?? { x: 0, z: 0, moving: false };
-            const goal = arrived ? goals?.get(id) ?? anchor : anchor;
-            const tx = goal.x - anchor.x, tz = goal.z - anchor.z;
-            const distance = Math.hypot(tx - offset.x, tz - offset.z);
-            const step = Math.min(distance, delta * expeditionStandingSpeed), fraction = distance ? step / distance : 0;
-            const next = { x: offset.x + (tx - offset.x) * fraction,
-                z: offset.z + (tz - offset.z) * fraction };
-            const from = { x: anchor.x + offset.x, z: anchor.z + offset.z };
-            const to = { x: anchor.x + next.x, z: anchor.z + next.z };
-            if (this.segment(from, to)) {
-                offsets.set(id, { ...next, moving: step > .001,
-                    rotation: Math.atan2(tx - offset.x, tz - offset.z) });
-            } else {
-                // Canonical routing is the fallback if a local obstacle or knowledge changes.
-                offsets.set(id, { x: 0, z: 0, moving: false });
-                this.goals.delete(missionId);
-            }
-        }
-    }
-    offset(missionId: string, personaId: string): Offset {
-        return this.offsets.get(missionId)?.get(personaId) ?? { x: 0, z: 0, moving: false };
+        return arrived ? goals ?? points : points;
     }
 }

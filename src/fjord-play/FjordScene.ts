@@ -914,7 +914,7 @@ export function createFjordScene(options: {
             void culturalMotion.prepare({ eventId: culturalFrame.id, visible: true })
                 .then(clips => { if (clips && !inactive()) culturalMotionReady = true; });
         }
-        layer!.advance(motion!, motionDelta, running);
+        layer!.advance(motion!, motionDelta, running && !document.hidden);
         updateWedding(culturalFrame ?? null, running && !document.hidden);
         updateCeremonyVisuals(culturalFrame ?? null, !document.hidden);
         layer!.updateConstruction(document.hidden ? 0 : delta);

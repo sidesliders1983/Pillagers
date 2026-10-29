@@ -33,6 +33,8 @@ export interface GatheringInspection {
     participants: { key: string; arrived: boolean; dropped: boolean }[];
 }
 
+export type ExpeditionMotionTarget = { key: string; point: Point2; settled: boolean; speed: number };
+
 type OccupationClip = 'Farm' | 'Attack' | 'Doze';
 type Visit = { target: Point2; face: Point2; source: string; phase: 'approach' | 'activity' | 'home';
     clip: OccupationClip | 'Idle'; remaining: number; travelRemaining?: number;
@@ -68,6 +70,7 @@ type Agent = {
     signature: string;
     pace: number;
     runPace: number | null;
+    expeditionGoal?: Point2;
     failedRoutes: Map<string, { context: string; expires: number; reason: string }>;
 };
 /** Ephemeral presentation only. Neither simulation state nor its random stream enters this controller. */
@@ -288,7 +291,7 @@ export class LivingWorldController {
         }
         this.parcels = entities.filter(e => e.plot);
         this.ground = ground;
-        const active = entities.filter(e => e.transform && !e.status.expedition && !e.status.mining && (e.kind === 'persona' || e.kind === 'cattle'));
+        const active = entities.filter(e => e.transform && !e.status.aboardShip && !e.status.mining && (e.kind === 'persona' || e.kind === 'cattle'));
         // These are the same plot/anchor/path clearances applied by the scene's nature reconciler.
         const cleared = [{ ...this.campfire.transform, halfWidth: this.campfire.clearingRadius,
             halfDepth: this.campfire.clearingRadius }, ...this.parcels.map(e => e.plot!), ...active.map(e => ({ ...e.transform!, halfWidth: 1, halfDepth: 1 })),
@@ -317,6 +320,15 @@ export class LivingWorldController {
         for (const entity of active) {
             const p = entity.transform!, signature = JSON.stringify([p.x, p.z, entity.status.assignment, entity.status.grazingZone]);
             let agent = this.agents.get(entity.selectionKey);
+            if (agent && entity.status.expedition) {
+                agent.anchor = { x: p.x, z: p.z };
+                agent.signature = signature;
+            }
+            if (agent && agent.entity.status.expedition !== entity.status.expedition) {
+                this.social.remove(agent.key);
+                this.cancelVisit(agent);
+                agent.expeditionGoal = undefined;
+            }
             if (agent && agent.signature !== signature && entity.kind === 'persona') {
                 // A new home changes navigation intent, not an already safe moving body.
                 this.social.remove(agent.key);
@@ -350,7 +362,7 @@ export class LivingWorldController {
                 this.cancelVisit(agent);
             }
             agent.entity = entity;
-            if (!this.safe(agent, agent)) {
+            if (!entity.status.expedition && !this.safe(agent, agent)) {
                 this.social.remove(agent.key);
                 agent.x = p.x;
                 agent.z = p.z;
@@ -713,11 +725,11 @@ export class LivingWorldController {
             this.campfire.obstacleRadius + this.radius(a)) return false;
         if (this.yardSurfaces.has(a.key) && this.yardSurfaces.get(a.key)!(p.x, p.z) === null)
             return false;
-        if (a.kind === 'persona' && Math.hypot(p.x - a.anchor.x, p.z - a.anchor.z) > 75)
+        if (a.kind === 'persona' && !a.entity.status.expedition && Math.hypot(p.x - a.anchor.x, p.z - a.anchor.z) > 75)
             return false;
         const b = this.world.terrain.bounds;
         if (p.x < b.minX + 1 || p.x > b.maxX - 1 || p.z < b.minZ + 1 || p.z > b.maxZ - 1 ||
-            this.surface.surfaceHeightAt(p.x, p.z) <= this.world.waterLevel + .2 || this.surface.slopeAt(p.x, p.z) > .55)
+            this.surface.surfaceHeightAt(p.x, p.z) <= this.world.waterLevel + .2 || this.surface.slopeAt(p.x, p.z) > (a.entity.status.expedition ? .65 : .55))
             return false;
         const farm = this.parcels.find(e => e.id === a.entity.status.assignment && e.kind === 'building')?.plot;
         if (a.entity.status.grazingZone === 'overflow' && farm && Math.hypot(p.x - farm.x, p.z - farm.z) > 20)
@@ -929,6 +941,88 @@ export class LivingWorldController {
         this.metrics.maxUpdateMs = Math.max(this.metrics.maxUpdateMs, cost);
         this.metrics.totalUpdateMs += cost;
     }
+    /** Confirmed travel targets use the same bodies, swept checks and passing as home residents.
+     * Waiting changes presentation only; no route, discovery, provision or Core clock is advanced here. */
+    followExpeditions(targets: readonly ExpeditionMotionTarget[], seconds: number) {
+        const started = performance.now();
+        for (const target of targets) {
+            const a = this.agents.get(target.key);
+            if (!a?.entity.status.expedition) continue;
+            const changed = !a.expeditionGoal || Math.hypot(target.point.x - a.expeditionGoal.x,
+                target.point.z - a.expeditionGoal.z) > .01;
+            if (!changed) continue;
+            if (target.settled && Math.hypot(target.point.x - a.x, target.point.z - a.z) < 8 &&
+                this.segment(a, a, target.point)) {
+                a.path = [{ ...target.point }];
+                a.detour = [];
+                a.expeditionGoal = { ...target.point };
+            } else {
+                const last = a.path.at(-1), previous = a.path.at(-2);
+                if (last && previous && Math.abs((last.x - previous.x) * (target.point.z - last.z) -
+                    (last.z - previous.z) * (target.point.x - last.x)) < 1e-6 &&
+                    (last.x - previous.x) * (target.point.x - last.x) +
+                    (last.z - previous.z) * (target.point.z - last.z) >= 0) a.path.pop();
+                // Retain confirmed bends when traffic delays a body; never grow an unlimited trail.
+                if (a.path.length < 256) {
+                    a.path.push({ ...target.point });
+                    a.expeditionGoal = { ...target.point };
+                }
+            }
+        }
+        if (!Number.isFinite(seconds) || seconds <= 0) return;
+        const elapsed = Math.min(seconds, 1), steps = Math.ceil(elapsed / .05);
+        for (let step = 0; step < steps; step++) for (const target of targets) {
+            const a = this.agents.get(target.key);
+            if (a?.entity.status.expedition) this.stepExpedition(a, target, elapsed / steps);
+        }
+        const cost = performance.now() - started;
+        this.metrics.lastUpdateMs += cost;
+        this.metrics.totalUpdateMs += cost;
+        this.metrics.maxUpdateMs = Math.max(this.metrics.maxUpdateMs, this.metrics.lastUpdateMs);
+    }
+    private stepExpedition(a: Agent, target: ExpeditionMotionTarget, dt: number) {
+        while (a.path.length && Math.hypot(a.path[0].x - a.x, a.path[0].z - a.z) < .01) a.path.shift();
+        if (!a.path.length && !a.detour.length) {
+            a.speed = 0;
+            a.state = 'Idle';
+            return;
+        }
+        this.planPassing(a);
+        const next = a.detour[0] ?? a.path[0];
+        const dx = next.x - a.x, dz = next.z - a.z, distance = Math.hypot(dx, dz);
+        if (distance < .01) {
+            if (a.detour.length) a.detour.shift();
+            else a.path.shift();
+            a.speed = 0;
+            a.state = 'Idle';
+            return;
+        }
+        const heading = Math.atan2(dx, dz);
+        a.rotation = turnToward(a.rotation, heading, dt, residentMovementConfig.turnSpeed);
+        if (Math.cos(heading - a.rotation) < residentMovementConfig.walkAlignment) {
+            a.speed = 0;
+            a.state = 'Idle';
+            return;
+        }
+        const pace = target.settled ? 1.6 : target.speed;
+        const speed = Math.min(pace, distance / dt), amount = speed * dt;
+        const p = { x: a.x + dx / distance * amount, z: a.z + dz / distance * amount };
+        if (!this.segment(a, a, p) || !this.bodyClearance(a, p)) {
+            a.detour = [];
+            a.speed = 0;
+            a.state = 'Idle';
+            return;
+        }
+        a.x = p.x;
+        a.z = p.z;
+        a.y = this.height(a);
+        a.speed = speed;
+        a.state = target.settled ? 'Walk' : 'Run';
+        if (amount >= distance - 1e-7) {
+            if (a.detour.length) a.detour.shift();
+            else a.path.shift();
+        }
+    }
     private encounterActor(a: Agent) {
         const next = a.detour[0] ?? a.path[0];
         const distance = next ? Math.hypot(next.x - a.x, next.z - a.z) : 0;
@@ -936,7 +1030,7 @@ export class LivingWorldController {
         return { key: a.key, x: a.x, z: a.z, radius: this.radius(a),
             velocity: distance > .15 ? { x: (next.x - a.x) / distance * pace,
                 z: (next.z - a.z) / distance * pace } : { x: 0, z: 0 },
-            enabled: a.kind === 'persona' && a.socialEnabled && !this.ownsGathering(a.key), busy: a.visit?.phase === 'activity' };
+            enabled: a.kind === 'persona' && a.socialEnabled && !a.entity.status.expedition && !this.ownsGathering(a.key), busy: a.visit?.phase === 'activity' };
     }
     private bodyClearance(a: Agent, point: Point2, from: Point2 = a) {
         const dx = point.x - from.x, dz = point.z - from.z;
@@ -983,7 +1077,7 @@ export class LivingWorldController {
                 point => this.bodyClearance(a, point)) ?? [];
     }
     private cattleEncounters() {
-        const people = [...this.agents.values()].filter(a => a.kind === 'persona' && a.socialEnabled && !this.ownsGathering(a.key) && a.visit?.phase !== 'activity');
+        const people = [...this.agents.values()].filter(a => a.kind === 'persona' && a.socialEnabled && !a.entity.status.expedition && !this.ownsGathering(a.key) && a.visit?.phase !== 'activity');
         for (const cow of this.agents.values()) {
             if (cow.kind !== 'cattle' || cow.state === 'Rest' || !cow.interactionSeconds || !this.social.available(cow.key)) continue;
             const reference = livestockPresentation(cow.entity.asset);
@@ -1018,6 +1112,7 @@ export class LivingWorldController {
             this.reservationGeneration++;
         }
         for (const a of this.agents.values()) {
+            if (a.entity.status.expedition) continue;
             const gathering = this.gathering?.participants.get(a.key);
             const returning = this.gatheringReturns.get(a.key);
             if (returning) {
@@ -1266,6 +1361,8 @@ export class LivingWorldController {
                     return sum + (actor?.path.length ?? 0) + (actor?.detour.length ?? 0) +
                         this.intentWaypoints(returning.suspended);
                 }, 0),
+            expeditionWaypoints: actors.filter(a => a.entity.status.expedition)
+                .reduce((total, actor) => total + actor.path.length + actor.detour.length, 0),
             returningGatheringActors: this.gatheringReturns.size, agents: actors.length,
             reservations: this.social.activePairs().length,
             occupationVisits: actors.filter(a => a.visit).length,

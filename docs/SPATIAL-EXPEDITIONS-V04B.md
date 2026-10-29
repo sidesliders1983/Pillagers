@@ -102,14 +102,28 @@ unchanged. The live actor and portrait use the same presentation; actual homecom
 restores the occupation ensemble. Prepared crews are still at home and keep it.
 No helmet or shield presentation is introduced in this change.
 
-After arrival, members step to distinct safe standing slots within 4.8 m of their
-confirmed destination. Candidate slots and their short connectors must remain on
-known, navigable dry ground, clear of steep terrain, scenery and visible plots.
-Tight terrain can leave insufficient safe slots; the renderer then keeps canonical
-positions rather than crossing a barrier. These local visual steps spend no Core
-ticks or provisions, reveal no terrain and do not change route geometry. Pause
-holds them; returning or redirecting releases the offsets onto the real journey.
-The display cache is transient and cleared on world replacement or disposal.
+Expedition residents participate in the same body registry, swept body-clearance
+checks and neighbour-passing controller as home residents and livestock. Every
+travel step, crossing, turn and approach to a standing slot is checked before
+moving; a blocked resident waits with an Idle animation. Core reconciliation never
+snaps an existing travel body onto a new canonical point. Confirmed route samples
+retain bends in a bounded, transient queue (at most 256 waypoints per resident).
+Away residents do not wander, visit work targets or start social encounters.
+
+After arrival, members walk to distinct safe standing slots within 4.8 m of their
+confirmed destination through that same collision controller. Candidate slots and
+their short connectors remain on known, navigable dry ground, clear of steep
+terrain, scenery and visible plots. Insufficient safe room causes waiting rather
+than overlapping bodies or crossing a barrier. An already overlapping historical
+arrival is separated during initial reconciliation before the first displayed
+frame. Subsequent movement always uses swept checks.
+
+Traffic and standing targets remain presentation state. They spend no Core ticks
+or provisions, reveal no terrain and do not change route geometry, simulation
+speed, mission outcomes or the save format. Visible bodies may briefly trail the
+confirmed journey while yielding. Pause holds them; recall and a new destination
+retain those bodies and feed the next confirmed path. Actual homecoming returns
+them to ordinary resident movement. The caches are cleared with the scene.
 
 **Disband group** is available only when the crew is home with no active or
 Prepared mission. It releases the residents for another crew without changing
