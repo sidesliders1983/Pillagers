@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+  <title>Proposed menu flow; not implemented and not a game screenshot</title>
+  <style>text { font-family: Arial, sans-serif; }</style>
+  <rect x="0" y="0" width="1280" height="800" rx="0" fill="#14292c" stroke="#14292c"/>
+  <rect x="32" y="60" width="1216" height="64" rx="8" fill="#1b3032" stroke="#71817a"/>
+  <text x="56" y="102" font-size="18" fill="#efe6cf" font-weight="400">Season / year</text>
+  <text x="460" y="102" font-size="18" fill="#efe6cf" font-weight="400">Existing resource counters</text>
+  <text x="930" y="102" font-size="17" fill="#efe6cf" font-weight="400">Play   Pace   +1 Year   Menu</text>
+  <text x="60" y="220" font-size="36" fill="#8baba2" font-weight="700">Existing 3D world</text>
+  <text x="60" y="260" font-size="19" fill="#b8c7bc" font-weight="400">Desktop: time actions stay in the header.</text>
+  <text x="60" y="290" font-size="19" fill="#b8c7bc" font-weight="400">No extra desktop Time submenu.</text>
+  <rect x="60" y="390" width="700" height="252" rx="8" fill="#1b3032" stroke="#71817a"/>
+  <text x="84" y="430" font-size="23" fill="#efe6cf" font-weight="700">Help &amp; support — inside, after opening</text>
+  <text x="84" y="473" font-size="18" fill="#b8c7bc" font-weight="400">How to play / Controls / camera shortcuts / Problem help</text>
+  <text x="84" y="509" font-size="18" fill="#b8c7bc" font-weight="400">Quiet About / Credits</text>
+  <text x="84" y="545" font-size="18" fill="#b8c7bc" font-weight="400">Diagnostics &gt;  Performance / loading reports / developer data</text>
+  <text x="84" y="602" font-size="16" fill="#b8c7bc" font-weight="400">Closing a menu never changes manually paused/running intent.</text>
+  <rect x="834" y="146" width="390" height="588" rx="8" fill="#1b3032" stroke="#71817a"/>
+  <text x="858" y="183" font-size="25" fill="#efe6cf" font-weight="700">Game menu</text>
+  <text x="1154" y="182" font-size="16" fill="#efe6cf" font-weight="400">Close</text>
+  <rect x="858" y="207" width="342" height="48" rx="8" fill="#354d49" stroke="#e4c67d"/>
+  <text x="874" y="237.0" font-size="18" fill="#efe6cf" font-weight="400">Save game &gt;</text>
+  <rect x="858" y="265" width="342" height="48" rx="8" fill="#243b3d" stroke="#71817a"/>
+  <text x="874" y="295.0" font-size="18" fill="#efe6cf" font-weight="400">Load game &gt;</text>
+  <rect x="858" y="323" width="342" height="48" rx="8" fill="#243b3d" stroke="#71817a"/>
+  <text x="874" y="353.0" font-size="18" fill="#efe6cf" font-weight="400">Settings &gt;</text>
+  <rect x="858" y="381" width="342" height="48" rx="8" fill="#243b3d" stroke="#71817a"/>
+  <text x="874" y="411.0" font-size="18" fill="#efe6cf" font-weight="400">Help &amp; support &gt;</text>
+  <rect x="858" y="451" width="342" height="72" rx="8" fill="#1b3032" stroke="#71817a" stroke-dasharray="6 4"/>
+  <text x="874" y="478" font-size="18" fill="#b8c7bc" font-weight="400">Give feedback</text>
+  <text x="874" y="505" font-size="14" fill="#b8c7bc" font-weight="400">CONDITIONAL / no URL configured</text>
+  <rect x="858" y="547" width="342" height="1" rx="0" fill="#71817a" stroke="#71817a"/>
+  <text x="858" y="578" font-size="15" fill="#b8c7bc" font-weight="400">New campaign</text>
+  <rect x="858" y="592" width="342" height="48" rx="8" fill="#243b3d" stroke="#71817a"/>
+  <text x="874" y="622.0" font-size="18" fill="#efe6cf" font-weight="400">New game / Replay...</text>
+  <text x="858" y="670" font-size="14" fill="#b8c7bc" font-weight="400">Replacement review and rollback stay.</text>
+  <text x="858" y="693" font-size="14" fill="#b8c7bc" font-weight="400">Return to start: pending safe handoff.</text>
+  <rect x="40" y="714" width="750" height="52" rx="8" fill="#1b3032" stroke="#71817a"/>
+  <text x="58" y="747" font-size="18" fill="#efe6cf" font-weight="400">Settlement   Expeditions   Clan Book   Map / Home   Attention</text>
+  <rect x="0" y="0" width="1280" height="32" rx="0" fill="#e4c67d" stroke="#e4c67d"/>
+  <text x="16" y="22" font-size="13" fill="#172b2d" font-weight="700">PROPOSED IA / NOT IMPLEMENTED / NOT A GAME SCREENSHOT</text>
+</svg>

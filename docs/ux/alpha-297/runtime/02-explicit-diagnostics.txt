@@ -1,0 +1,43 @@
+Browser tab: 3, Title: "FjordSide", URL: "http://127.0.0.1:5192/fjord-play?diagnostics=load".
+0 AXWebArea FjordSide, URL: 127.0.0.1:5192/fjord-play?diagnostics=load
+	1 container campaign-start
+		2 container
+			3 text A new shore. A shared history.
+			4 heading FjordSide, Value: 1
+				5 text FjordSide
+		6 container Campaign start
+			7 text No valid saved campaign is available.
+			8 button (disabled) Test saved campaign Measure loading your current settlement.
+				9 text Test saved campaign
+				10 text Measure loading your current settlement.
+			11 text Select a valid save to continue.
+			12 button (disabled) Test original arrival Measure a replay with the same founders and island.
+				13 text Test original arrival
+				14 text Measure a replay with the same founders and island.
+			15 text A valid founding campaign is needed.
+			16 button Test a new scenario Prepare a new island without saving or starting it.
+				17 text Test a new scenario
+				18 text Prepare a new island without saving or starting it.
+			19 text Loading diagnostics only. Prepare the island, download a JSON report and stop. Saved campaigns are unchanged.
+			20 button Recover or import a campaign
+			21 button Back to normal play
+		22 container
+			23 text Debug / Performance overlay
+			24 pop up button (collapsed, settable) Description: Performance overlay, Value: Off, Secondary Actions: Expand
+				25 menu
+					26 (selected) Off
+					27 Compact
+					28 Details
+		29 container Sound
+			30 text Sound
+			31 button Enable sound
+			32 checkbox (settable, integer) Description: Mute, Value: 1
+			33 text Sound off.
+			34 container
+				35 text Master volume
+				36 slider (settable, float) Master volume, Value: 0.5
+			37 button (collapsed) Sound groups, Secondary Actions: Expand
+				38 text Sound groups
+			39 text Sounds follow nearby activity. Wildlife calls accompany new sightings.
+
+The focused UI element is 16 button Test a new scenario Prepare a new island without saving or starting it.

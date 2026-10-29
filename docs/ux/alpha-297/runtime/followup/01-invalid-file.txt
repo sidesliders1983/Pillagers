@@ -1,0 +1,18 @@
+- main:
+  - heading "Return to your settlement" [level=1]
+  - status: "Could not read that campaign. Error: Unsupported simulation save"
+  - paragraph: Choose a saved campaign or import a file. Your existing saves have not been replaced.
+  - region "Available saved campaigns":
+    - paragraph:
+      - button "Use last resume checkpoint"
+      - text: Summer 800 · campaign 2089668634
+    - paragraph:
+      - button "Use local save"
+      - text: Summer 800 · campaign 2089668634
+    - paragraph:
+      - button "Use local campaign data only"
+      - text: Summer 800 · campaign 2089668634 This copy contains campaign data only; saved scenery and published book passages are not included.
+  - text: Import campaign
+  - button "Import campaign" [active]
+  - region "Damaged save recovery files"
+  - button "Back to start menu"

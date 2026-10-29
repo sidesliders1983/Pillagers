@@ -1,0 +1,28 @@
+Browser tab: 3, Title: "FjordSide", URL: "http://127.0.0.1:5192/fjord-play".
+0 AXWebArea FjordSide, URL: 127.0.0.1:5192/fjord-play
+	1 container Description: Preparing a new island campaign, ID: island-loading
+		2 image Top-down preview of the prepared island
+		3 container
+			4 text FJORDSIDE · A NEW SHORE
+			18 text Arriving at your settlement
+			6 container Island preparation
+				7 text Preparing your island
+				19 text 99%
+				9 progress indicator Description: Estimated completed preparation, Value: 99
+				20 text Elapsed 00:29 · 5 s in this step
+			11 button Back to start menu, ID: island-loading-cancel
+			21 button Skip camera arrival, ID: island-loading-skip
+		12 container The founding, ID: loading-clan-book
+			13 container
+				14 heading The founding, Value: 2, ID: loading-clan-book-title
+					15 text The founding
+				16 button Close founding chapter
+			17 text Niilá, Minmantė, Kaunikki, Leofgifu, Leofburh, Hallrik Eiriksson, Áilu, Mingirdė, Arnhild Bjarnardóttir and Mieli arrived together in summer.
+
+The founding party had two adult does and one adult buck and 1 longship.
+
+Leofgifu and Hallrik Eiriksson were already partners. Their first households lived in tents.
+
+Niilá, Minmantė, Kaunikki and Leofburh worked as farmers. Leofgifu worked as a fisher. Hallrik Eiriksson, Mingirdė, Arnhild Bjarnardóttir and Mieli worked as hunters. Áilu worked as a woodworker.
+
+The focused UI element is 0 AXWebArea FjordSide, URL: 127.0.0.1:5192/fjord-play
