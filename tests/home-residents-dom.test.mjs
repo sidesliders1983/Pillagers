@@ -12,7 +12,7 @@ const { FjordInterface } = load('fjord-play/FjordInterface');
 test('selecting a home immediately shows every resident and their person link on desktop and mobile', () => {
     const dom = new JSDOM(`<main id="fjord-play"><nav id="fjord-navigation"></nav>
         <section id="fjord-management"><div id="entity-panel"></div></section>
-        <section id="fjord-workspace" hidden></section>
+        <section id="fjord-workspace" hidden><h2 id="fjord-workspace-title"></h2><div id="fjord-directory" data-workspace-area="settlement"></div></section>
         <button id="fjord-attention"><span id="fjord-attention-count"></span></button></main>`,
     { pretendToBeVisual: true });
     const previous = {};
@@ -51,10 +51,16 @@ test('selecting a home immediately shows every resident and their person link on
                 const links = [...list.querySelectorAll('button[data-kind="persona"]')];
                 assert.deepEqual(links.map(link => link.dataset.id), household.memberIds);
                 assert.deepEqual(links.map(link => link.textContent.trim()),
-                    household.memberIds.map(id => state.personas[id].name));
+                    household.memberIds.map(id => `${state.personas[id].name} (${core.personaAge(state, id)})`));
                 ui.handle(links[0]);
                 assert.deepEqual(selected.at(-1), { kind: 'persona', id: household.memberIds[0] });
             }
+        }
+        ui.open('settlement', true);
+        for (const person of Object.values(state.personas)) {
+            const link = document.querySelector(`#fjord-directory button[data-kind="persona"][data-id="${person.id}"]`);
+            assert.ok(link);
+            assert.equal(link.textContent.trim(), `${person.name} (${core.personaAge(state, person.id)})`);
         }
         assert.equal(core.serializeState(session.readSnapshot()), saved);
     } finally {

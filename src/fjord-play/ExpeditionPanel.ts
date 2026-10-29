@@ -211,6 +211,7 @@ export class ExpeditionPanel {
             this.groupId = '';
             this.command({ type: 'CreateExplorationGroup' });
         }
+        if (target.dataset.disband) this.command({ type: 'DisbandExpeditionGroup', groupId: target.dataset.disband });
         if (target.dataset.start) this.reviewDeparture(target.dataset.start);
         if (target.id === 'expedition-start-cancel') this.dialog.close();
         if (target.id === 'expedition-start-confirm' && this.pendingStart) {
@@ -274,6 +275,12 @@ export class ExpeditionPanel {
     }
 
     committed(command: SimulationCommand) {
+        if (command.type === 'DisbandExpeditionGroup') {
+            this.clearTarget();
+            this.hiddenGroups.delete(command.groupId);
+            this.testFoodDrafts.delete(command.groupId);
+            this.message = 'Group disbanded. Residents are available for another crew.';
+        }
         const state = this.session.readSnapshot();
         if (command.type === 'CreateExplorationGroup') this.groupId = Object.keys(state.world!.groups).at(-1)!;
         if ('groupId' in command) this.groupId = command.groupId;
@@ -495,7 +502,9 @@ export class ExpeditionPanel {
             else {
                 html += this.journey(group, mission);
                 if (!mission && groupMission(state, group.id)) html += '<p>This group is away on an earlier expedition. Its crew can be edited after it returns.</p>';
-                else if (!mission) html += this.preparation(state, group);
+                else if (!mission) html += this.preparation(state, group) +
+                    `<div class="fjord-expedition-actions">${button('Disband group', 'close',
+                        `data-disband="${escape(group.id)}"`)}</div>`;
                 else html += `<p class="fjord-expedition-description">${this.missionDescription(mission)}</p>
                     <p class="fjord-expedition-crew">${icon('people')}${group.memberIds.map(id => escape(state.personas[id]?.name ?? id)).join(', ')}</p>
                     ${this.supplies(mission)}<div class="fjord-expedition-actions">${this.actions(mission)}

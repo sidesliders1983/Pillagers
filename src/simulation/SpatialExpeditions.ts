@@ -8,7 +8,7 @@ import type { Bounds2, Point2, WorldBlueprint } from '../world-generation/WorldB
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
 import { commitClanObservation, assertDiscoveryWorld } from './ClanDiscovery';
 import type { SimulationState } from './SimulationCore';
-import { absoluteTick, expeditionEligible, groupMission } from './WorldExpeditions';
+import { absoluteTick, expeditionEligible, groupMission, nextExpeditionGroupId } from './WorldExpeditions';
 import { eventFacts } from './EventFacts';
 import { completeIslandMission, observeIslandMission, recordIslandSightings, validateIslandMission, type IslandMissionTask } from './IslandMissions';
 
@@ -277,8 +277,8 @@ export function applySpatialCommand(state: SimulationState, command: SpatialExpe
         requireContext(state, context);
         const groups = state.world!.groups;
         if (command.type === 'CreateExplorationGroup') {
-            const number = Object.keys(groups).length + 1;
-            const id = 'group-' + number;
+            const id = nextExpeditionGroupId(state);
+            const number = Number(id.slice(6));
             groups[id] = { id, name: 'Group ' + number, memberIds: [], exploration: true };
         } else {
             if (typeof command.included !== 'boolean' || !state.personas[command.personaId])
@@ -693,7 +693,7 @@ export function validateSpatialExpeditions(state: SimulationState) {
         const group = state.world!.groups[mission.groupId];
         if (mission.routeMode !== undefined &&
             (mission.routeMode !== 'eight-way-v1' || !mission.provisions && !mission.task)) fail();
-        if (mission.id !== id || !id.startsWith('explore-') || !group || !mission.groupName?.trim() ||
+        if (mission.id !== id || !id.startsWith('explore-') || (!group && !(mission.status === 'Returned' && state.world!.groupArchive?.groups[mission.groupId])) || !mission.groupName?.trim() ||
             !Array.isArray(mission.memberIds) || !mission.memberIds.length ||
             new Set(mission.memberIds).size !== mission.memberIds.length ||
             mission.memberIds.some(member => !state.personas[member]) || !finitePoint(mission.target) ||

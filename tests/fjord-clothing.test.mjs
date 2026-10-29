@@ -401,3 +401,41 @@ test('all four beards equip on world residents, follow Head and reconcile aging 
         assert.deepEqual(owner.diagnostics, []);
     } finally {human.dispose();}
 });
+
+
+test('expedition residents use their neutral tunic without occupation hat or tools and recover their work outfit at home', () => {
+    const { fjordWardrobePresentation } = load('../src/fjord-play/FjordWardrobe.ts');
+    for (const sex of ['female', 'male']) for (const occupation of ['farmer', 'fisher', 'hunter', 'smith', 'woodworker']) {
+        const home = entity(occupation, sex), before = structuredClone(home);
+        const away = { ...home, status: { ...home.status, expedition: 'explore-1' } };
+        const neutral = fjordWardrobePresentation(entity(null, sex));
+        assert.deepEqual(fjordWardrobePresentation(away), neutral);
+        assert.equal(fjordWardrobePresentation(away).headwear, 'none');
+        assert.equal(fjordWardrobePresentation(away).equipment, 'none');
+        assert.equal(fjordClothingSet(away), 'generic');
+        assert.deepEqual(home, before);
+        assert.deepEqual(fjordWardrobePresentation(home), fjordWardrobePresentation(before));
+    }
+});
+
+
+test('the live wardrobe removes the entire occupation ensemble on departure and restores it at home', async () => {
+    const owner = fixture(), person = entity('fisher', 'female');
+    const human = await owner.factory.createWorld(person.dna);
+    try {
+        await owner.wardrobe.reconcile(human, person);
+        expectSet(human, 'fisherman', fisherman);
+        const root = human.root, hair = human.root.userData.selectedAssets.hair;
+        await owner.wardrobe.reconcile(human, { ...person,
+            status: { ...person.status, expedition: 'explore-1' } });
+        expectSet(human, 'generic', [tunic, low]);
+        assert.equal(human.root.userData.selectedAssets.headwear, null);
+        assert.equal(human.root.userData.selectedAssets.equipment, null);
+        assert.equal(human.root.userData.selectedAssets.hair, hair);
+        assert.equal(human.root, root);
+        assert.deepEqual(human.dna, person.dna);
+        await owner.wardrobe.reconcile(human, person);
+        expectSet(human, 'fisherman', fisherman);
+        assert.deepEqual(owner.diagnostics, []);
+    } finally { human.dispose(); }
+});

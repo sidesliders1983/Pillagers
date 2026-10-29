@@ -29,6 +29,9 @@ export function fjordHeaderHTML(): string {
                     <button id="clan-book-open" type="button">Clan Book</button><button id="fjord-expeditions-open" type="button">Expedition groups</button>
                     <label>Quality<select id="fjord-quality"><option value="low"${defaultPresentationPreferences.quality === 'low' ? ' selected' : ''}>Low</option>
                         <option value="standard"${defaultPresentationPreferences.quality === 'standard' ? ' selected' : ''}>Standard</option></select></label>
+                    <label class="check"><input id="fjord-hdr" type="checkbox" aria-describedby="fjord-hdr-description fjord-hdr-status"> HDR lighting</label>
+                    <small id="fjord-hdr-description">Adds daylight sky lighting to materials.</small>
+                    <small id="fjord-hdr-status" role="status">HDR lighting off.</small>
                     <label>Local effects<select id="fjord-effects"><option value="off"${defaultPresentationPreferences.effects === 'off' ? ' selected' : ''}>Off</option>
                         <option value="low"${defaultPresentationPreferences.effects === 'low' ? ' selected' : ''}>Low</option><option value="normal"${defaultPresentationPreferences.effects === 'normal' ? ' selected' : ''}>Normal</option></select></label>
                     <small>Snow, rain and fire particles. Visual quality only; burning still uses fuel. Reduced motion disables particles.</small>

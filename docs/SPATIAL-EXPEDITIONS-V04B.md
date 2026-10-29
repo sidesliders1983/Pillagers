@@ -92,3 +92,47 @@ Existing version-1 spatial missions and old four-region Recon/Surveillance/Pilla
 ## Physical mission adapter (#150)
 
 The [v0.4D physical mission contract](ISLAND-MISSIONS-V04D.md) now connects the same groups to separate Recon, Surveillance and Pillage journeys from home. It retains the existing mission prices/durations and actual recovery limits; it does not extend an Explore pack or change its endurance. Spatial version 3 allows old Explore packets and new versioned mission tasks to coexist without changing the old records.
+
+
+## Expedition presentation and home crews — 2026-10-29
+
+Away residents use the ordinary tunic without occupation clothing, hats or tools.
+DNA, face, hair, occupation, work history and any canonical raid equipment remain
+unchanged. The live actor and portrait use the same presentation; actual homecoming
+restores the occupation ensemble. Prepared crews are still at home and keep it.
+No helmet or shield presentation is introduced in this change.
+
+Expedition residents participate in the same body registry, swept body-clearance
+checks and neighbour-passing controller as home residents and livestock. Every
+travel step, crossing, turn and approach to a standing slot is checked before
+moving; a blocked resident waits with an Idle animation. Core reconciliation never
+snaps an existing travel body onto a new canonical point. Confirmed route samples
+retain bends in a bounded, transient queue (at most 256 waypoints per resident).
+Away residents do not wander, visit work targets or start social encounters.
+
+After arrival, members walk to distinct safe standing slots within 4.8 m of their
+confirmed destination through that same collision controller. Candidate slots and
+their short connectors remain on known, navigable dry ground, clear of steep
+terrain, scenery and visible plots. Insufficient safe room causes waiting rather
+than overlapping bodies or crossing a barrier. An already overlapping historical
+arrival is separated during initial reconciliation before the first displayed
+frame. Subsequent movement always uses swept checks.
+
+Traffic and standing targets remain presentation state. They spend no Core ticks
+or provisions, reveal no terrain and do not change route geometry, simulation
+speed, mission outcomes or the save format. Visible bodies may briefly trail the
+confirmed journey while yielding. Pause holds them; recall and a new destination
+retain those bodies and feed the next confirmed path. Actual homecoming returns
+them to ordinary resident movement. The caches are cleared with the scene.
+
+**Disband group** is available only when the crew is home with no active or
+Prepared mission. It releases the residents for another crew without changing
+their occupations or stocks. The full last roster and dated disband event remain
+in a validated optional group archive; returned mission records remain readable.
+New crews never reuse an archived group ID. Old saves need no migration and gain
+this archive only when a group is actually disbanded. Cancel a Prepared expedition
+first; its already paid provisions retain the existing accounting rules.
+
+Settlement resident cards and home/tent resident links show the canonical age in
+parentheses after the culturally spelled name, including archived ages in the
+directory. No age, birthday or identity data is rewritten.

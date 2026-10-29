@@ -427,3 +427,38 @@ test('departed members produce neither Food nor Materials until their actual hom
     assert.ok(resumed.some(event => event.personaId === members[0] && event.details.resource === 'food'));
     assert.ok(resumed.some(event => event.personaId === members[1] && event.details.resource === 'materials'));
 });
+
+
+test('returned expedition groups disband without deleting their history or reusing their identity', () => {
+    let state = campaign(['founder-1', 'founder-2']);
+    state = core.applyCommand(state, { type: 'CreateExpeditionGroup', name: 'Other crew', memberIds: ['founder-3'] });
+    state = core.applyCommand(state, start, context);
+    const packed = core.serializeState(state);
+    assert.throws(() => core.applyCommand(state, { type: 'DisbandExpeditionGroup', groupId: 'group-1' }, context), /home|mission|active/i);
+    assert.equal(core.serializeState(state), packed);
+    state = core.applyCommand(state, goal, context);
+    state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 10 }, context);
+    state = core.applyCommand(state, { type: 'RecallExpedition', groupId: 'group-1' }, context);
+    assert.throws(() => core.applyCommand(state, { type: 'DisbandExpeditionGroup', groupId: 'group-1' }, context), /home|mission|active/i);
+    state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 30 }, context);
+    const mission = structuredClone(state.world.spatial.missions['explore-1']);
+    assert.equal(mission.status, 'Returned');
+    const before = core.serializeState(state), other = structuredClone(state.world.groups['group-2']);
+    const disbanded = core.applyCommand(state, { type: 'DisbandExpeditionGroup', groupId: 'group-1' }, context);
+    assert.equal(disbanded.world.groups['group-1'], undefined);
+    assert.deepEqual(disbanded.world.groups['group-2'], other);
+    assert.deepEqual(disbanded.world.spatial.missions['explore-1'], mission);
+    assert.deepEqual(disbanded.stocks, state.stocks);
+    assert.equal(disbanded.rngState, state.rngState);
+    assert.equal(disbanded.events.at(-1).type, 'ExpeditionGroupDisbanded');
+    assert.equal(core.serializeState(state), before);
+    assert.deepEqual(core.applyCommand(disbanded, { type: 'DisbandExpeditionGroup', groupId: 'group-1' }), disbanded);
+    const restored = core.reconstructState(core.serializeState(disbanded));
+    spatial.assertSpatialWorld(restored, context);
+    let next = core.applyCommand(restored, { type: 'CreateExplorationGroup' }, context);
+    assert.ok(next.world.groups['group-3']);
+    assert.deepEqual(next.world.groups['group-2'], other);
+    next = core.applyCommand(next, { type: 'SetExplorationMember', groupId: 'group-3', personaId: 'founder-1', included: true }, context);
+    assert.deepEqual(next.world.groups['group-3'].memberIds, ['founder-1']);
+    assert.deepEqual(core.reconstructState(core.serializeState(next)), next);
+});

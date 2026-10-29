@@ -1,3 +1,4 @@
+import { ExpeditionStanding, type ExpeditionStandingGround } from './ExpeditionStanding';
 import { miningWorkerPosition, type MiningWorker } from '../simulation/Mining';
 import { spatialMemberPosition, type SpatialMission } from '../simulation/SpatialExpeditions';
 import type { SimulationState } from '../simulation/SimulationCore';
@@ -9,7 +10,7 @@ import { HomeGroundGlow } from '../world/HomeGroundGlow';
 import type { Texture } from 'three';
 import type { SeasonAppearance } from '../world/SeasonAppearanceTransition';
 import { createFjordYardSurface } from './FjordYardSurface';
-import type { LivingWorldController } from './LivingWorldController';
+import type { LivingWorldController, ExpeditionMotionTarget } from './LivingWorldController';
 import type { SelectionMarker } from '../play/SelectionPresentation';
 import { Box3, Camera, DoubleSide, Group, Mesh, MeshBasicMaterial, Object3D, Raycaster, RingGeometry, SkinnedMesh, Vector2, Vector3 } from 'three';
 import { FjordModels } from './FjordModels';
@@ -58,19 +59,24 @@ export class FjordEntities {
     }>();
     private deaths = new Map<string, { model: Object3D; presentation: LivestockDeath }>();
     private workSounds: WorkSoundActivity[] = [];
+    private expeditionTickSeconds = .5;
     private expeditionSurface?: TerrainSurface;
     private expeditionWorld?: WorldBlueprint;
+    private expeditionStanding?: ExpeditionStanding;
     private expeditionFrames = new Map<string, { mission: SpatialMission; from: number; elapsed: number; duration: number }>();
     prepareExpeditions(state: SimulationState, world: WorldBlueprint, updateIntervalSeconds = .5,
-        secondsPerTick = updateIntervalSeconds) {
+        secondsPerTick = updateIntervalSeconds, standingGround: ExpeditionStandingGround = {}) {
+        this.expeditionTickSeconds = secondsPerTick;
         if (this.expeditionWorld !== world) {
             this.expeditionWorld = world;
             this.expeditionSurface = createBlueprintSurface(world);
+            this.expeditionStanding = new ExpeditionStanding(world);
             this.expeditionFrames.clear();
             for (const entry of this.entries.values()) entry.yardFloor = undefined;
         }
         const active = Object.values(state.world?.spatial?.missions ?? {}).filter(m => m.status !== 'Returned' && m.status !== 'Prepared');
         const ids = new Set(active.map(m => m.id));
+        this.expeditionStanding!.prepare(standingGround);
         for (const id of this.expeditionFrames.keys()) if (!ids.has(id)) this.expeditionFrames.delete(id);
         for (const mission of active) {
             const previous = this.expeditionFrames.get(mission.id);
@@ -78,6 +84,11 @@ export class FjordEntities {
             const ratio = previous ? Math.min(1, previous.elapsed / previous.duration) : 1;
             // A new route starts at an authoritative reached position, not a distance on the old path.
             const sameRoute = previous && JSON.stringify(previous.mission.route) === JSON.stringify(mission.route);
+            if (sameRoute && previous.mission.travelled === mission.travelled &&
+                previous.mission.status === mission.status) {
+                previous.mission = mission;
+                continue;
+            }
             const from = sameRoute ? previous.from + (previous.mission.travelled - previous.from) * ratio : mission.travelled;
             const cadence = travelInterpolationWindow(updateIntervalSeconds, secondsPerTick);
             const duration = Math.max(cadence, Math.min(cadence * 2, previous?.elapsed ?? cadence));
@@ -89,9 +100,11 @@ export class FjordEntities {
         if (!frame) return;
         const travelled = frame.from + (frame.mission.travelled - frame.from) * Math.min(1, frame.elapsed / frame.duration);
         const point = spatialMemberPosition({ ...frame.mission, travelled }, personaId ?? frame.mission.memberIds[0]);
-        return { ...point, y: frame.mission.transport?.phase === 'embarked' ? this.expeditionWorld!.waterLevel + .15 :
-            this.expeditionSurface!.surfaceHeightAt(point.x, point.z) };
+        return { ...point, y: frame.mission.transport?.phase === 'embarked'
+            ? this.expeditionWorld!.waterLevel + .15
+            : this.expeditionSurface!.surfaceHeightAt(point.x, point.z) };
     }
+
     private miningSurface?: TerrainSurface;
     private miningHeight?: (x: number,z: number,natural: number) => number;
     private miningWorld?: WorldBlueprint;
@@ -323,7 +336,9 @@ export class FjordEntities {
             const miningDisplay = entity.status.mining ? this.miningPose(entity.id) : undefined;
             const display = miningDisplay ?? (entity.status.shipExpedition ? this.expeditionPose(entity.status.shipExpedition) ?? p :
                 entity.status.expedition ? this.expeditionPose(entity.status.expedition, entity.id) ?? p : p);
-            if (!entity.status.aboardShip || entry.model.parent === this.root) {
+            const retainedTravelBody = entity.status.expedition && entry.model.userData.canonical?.expedition &&
+                !entity.status.aboardShip && !entry.model.userData.canonical?.aboardShip;
+            if ((!entity.status.aboardShip || entry.model.parent === this.root) && !retainedTravelBody) {
                 entry.model.position.set(display.x, display.y, display.z);
                 entry.model.rotation.set(0, display.rotation, 0);
             }
@@ -418,7 +433,7 @@ export class FjordEntities {
         const clip = frame.phase === 'gathering' ? 'Storytelling_Gesture' : 'Gathering_Applause';
         for (const key of keys) {
             const model = this.entries.get(key)?.model;
-            if (!model?.visible || (model.userData.canonical?.expedition || model.userData.canonical?.mining)) continue;
+            if (!model?.visible || model.userData.canonical?.expedition || model.userData.canonical?.mining) continue;
             void this.models.playCulture(model, bank, clip, { eventId: frame.id, visible: frame.visible });
         }
     }
@@ -538,7 +553,20 @@ export class FjordEntities {
             if (death.presentation.inspect().complete) this.finishDeath(key);
         }
         for (const frame of this.miningFrames.values()) frame.elapsed += running ? delta : 0;
-        for (const frame of this.expeditionFrames.values()) frame.elapsed += running ? delta : 0;
+        const travelTargets: ExpeditionMotionTarget[] = [];
+        for (const frame of this.expeditionFrames.values()) {
+            frame.elapsed += running ? delta : 0;
+            if (frame.mission.transport?.phase === 'embarked') continue;
+            const points = new Map(frame.mission.memberIds.filter(id =>
+                this.entries.get('persona:' + id)?.model.userData.canonical?.expedition === frame.mission.id)
+                .map(id => [id, this.expeditionPose(frame.mission.id, id)!]));
+            const arrived = frame.mission.status === 'Exploring' &&
+                (frame.from === frame.mission.travelled || frame.elapsed >= frame.duration);
+            const goals = this.expeditionStanding!.targets(frame.mission.id, points, arrived);
+            for (const [id, point] of goals) travelTargets.push({ key: 'persona:' + id, point,
+                settled: arrived, speed: Math.max(4, 3 / this.expeditionTickSeconds) });
+        }
+        if (travelTargets.length) motion.followExpeditions(travelTargets, running ? delta : 0);
         for (const { model } of this.entries.values()) {
             const facts = model.userData.canonical;
             const frame = facts?.shipExpedition && this.expeditionFrames.get(facts.shipExpedition);
@@ -569,20 +597,12 @@ export class FjordEntities {
                         pose.moving ? this.models.pace(entry.model, 'Run') : 1, running ? delta : 0);
                 }
             }
-            if (facts?.expedition) {
-                const pose = this.expeditionPose(facts.expedition, facts.id);
-                if (pose && !facts.aboardShip) {
-                    entry.model.position.set(pose.x, pose.y, pose.z);
-                    entry.model.rotation.set(0, pose.rotation, 0);
-                }
-                this.models.animate(entry.model, !facts.aboardShip && pose?.moving ? 'Run' : 'Idle',
-                    this.models.pace(entry.model, 'Run'), running ? delta : 0);
-            }
         }
+
         for (const agent of motion.inspect()) {
             const model = this.entries.get(agent.key)?.model;
-            // A stale autonomous frame must never move a passenger or an expedition member.
-            if (!model || model.userData.canonical?.aboardShip || (model.userData.canonical?.expedition || model.userData.canonical?.mining)) continue;
+            // Passengers and miners retain their own physical owners; residents share body traffic.
+            if (!model || model.userData.canonical?.aboardShip || model.userData.canonical?.mining) continue;
             model.position.set(agent.x, agent.y, agent.z);
             model.rotation.y = agent.rotation;
             this.models.animate(model, agent.state, agent.speed, running ? delta : 0);
@@ -694,6 +714,7 @@ export class FjordEntities {
         this.select([]);
         this.entries.clear();
         this.expeditionFrames.clear();
+        this.expeditionStanding = undefined;
         this.yardSamplers.clear();
         this.root.removeFromParent();
     }
