@@ -1,3 +1,4 @@
+import { organizeCampaignEntry } from './CampaignEntryMenu';
 import { GameplaySession } from '../gameplay-lab/GameplaySession';
 import { activeSettlementKey, inspectSettlementSave } from '../play/SharedSettlement';
 import { readRecoverySources, type RecoveryCandidate } from '../play/SettlementRecovery';
@@ -87,8 +88,6 @@ export async function runFjordEntry(ports: EntryPorts = {
             'Sound mix review: explicit QA mode. Ordinary gameplay uses the published mix.';
     const showShell = () => {
         const content = shell();
-        content.parentElement!.append(diagnostics.settings());
-        content.parentElement!.append(audioControls.root);
         diagnostics.setMode('Start menu');
         diagnostics.mount();
         return content;
@@ -218,7 +217,16 @@ export async function runFjordEntry(ports: EntryPorts = {
                 content.querySelector('[data-unavailable]')!.textContent = selected ? '' : 'Select a valid save to continue.';
                 content.querySelector<HTMLButtonElement>('[data-entry="restart"]')!.disabled = !restart;
                 content.querySelector('[data-restart-reason]')!.textContent = restart ? '' : restartReason;
-                content.querySelector<HTMLButtonElement>('button:not(:disabled)')!.focus();
+                if (diagnosticMode) {
+                    content.parentElement!.append(diagnostics.settings(), audioControls.root);
+                    content.querySelector<HTMLButtonElement>('button:not(:disabled)')!.focus();
+                } else {
+                    const context = content.querySelector<HTMLElement>('[data-context]')!;
+                    const details = selected ? context.textContent! : undefined;
+                    context.textContent = selected ? `${summary!.season} ${summary!.year} · Saved campaign` :
+                        sources.candidates.length ? 'Choose Load game to return to a saved campaign.' : 'Begin a new campaign.';
+                    organizeCampaignEntry(content, audioControls.root, diagnostics.settings(), details);
+                }
                 const choice = bypass === 'handoff' || bypass === 'recovery' || bypass === 'qa-continue' ?
                     (selected ? 'continue' : 'recover') : bypass === 'qa-new' ? 'new' :
                     await waitForChoice(content, target => target.dataset.entry ??

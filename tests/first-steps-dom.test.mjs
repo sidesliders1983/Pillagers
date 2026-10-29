@@ -300,7 +300,7 @@ test('the full Clan Book defers the invitation and keeps reading focus', () => {
         const reader = document.createElement('section');
         reader.id = 'clan-book-reader'; reader.tabIndex = -1; reader.hidden = false;
         document.body.append(reader); reader.focus();
-        document.querySelector('#clan-book-open').click();
+        document.querySelector('#fjord-book').click();
         assert.equal(story.isOpen, false);
         assert.equal(f.guide.root.hidden, true);
         assert.equal(f.guide.blocksClock, true);

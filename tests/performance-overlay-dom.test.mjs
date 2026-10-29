@@ -17,6 +17,9 @@ test('the touch diagnostic view is opt-in, bounded, freezeable and offers select
             timers++; callback = work; return () => { timers--; };
         } });
         const settings = overlay.settings();
+        const recordingLabel = overlay.root.querySelector('[data-perf-recording]').closest('label');
+        assert.match(recordingLabel.textContent, /External screen recorder/);
+        assert.match(overlay.root.textContent, /does not record the screen/);
         document.querySelector('main').append(settings);
         assert.equal(document.querySelector('#performance-overlay'), null);
         assert.equal(timers, 0);
@@ -145,11 +148,18 @@ test('the real campaign entry offers performance settings before opening a campa
             local: { getItem: () => null }, drawSeed: () => 32,
             open: async attempt => { active = attempt.performance; } });
         await new Promise(resolve => setTimeout(resolve, 40));
+        document.querySelector('[data-start-view="settings"]').click();
+        assert.ok(document.querySelector('.audio-settings button'), 'Sound remains available in Settings before loading');
+        document.querySelector('[data-start-panel="settings"] [data-start-back]').click();
+        document.querySelector('[data-start-view="help"]').click();
+        document.querySelector('[data-start-view="diagnostics"]').click();
         const select = document.querySelector('select[aria-label="Performance overlay"]');
-        assert.ok(select, 'Normal start menu exposes the preference before any world is loaded');
-        assert.ok(document.querySelector('.audio-settings button'), 'Sound activation is available before loading');
+        assert.ok(select, 'Deliberate pre-start Diagnostics retains the existing preference');
         select.value = 'compact';
         select.dispatchEvent(new dom.window.Event('change'));
+        document.querySelector('[data-start-panel="diagnostics"] [data-start-back]').click();
+        document.querySelector('[data-start-panel="help"] [data-start-back]').click();
+        document.querySelector('[data-start-view="new"]').click();
         document.querySelector('[data-entry="new"]').click();
         await running;
         assert.ok(active?.enabled, 'The same opt-in owner accompanies the loading attempt');

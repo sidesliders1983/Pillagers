@@ -67,7 +67,8 @@ export class PlaytestPerformance {
                 <button type="button" data-perf-move>Move corner</button>
                 <button type="button" data-perf-copy>Copy diagnostics</button>
                 <button type="button" data-perf-export>Save JSON</button>
-                <label>Screen recording<select data-perf-recording><option>not reported</option><option>on</option><option>off</option></select></label>
+                <label>External screen recorder<select data-perf-recording><option>not reported</option><option>on</option><option>off</option></select></label>
+                <small>This labels your report; it does not record the screen.</small>
                 <label>View<select data-perf-view><option value="off">Off</option><option value="compact">Compact</option><option value="details">Details</option></select></label>
             </div></details></div><p data-perf-message role="status" hidden></p>
             <textarea aria-label="Selectable diagnostics JSON" readonly hidden></textarea>`;

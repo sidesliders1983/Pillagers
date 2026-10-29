@@ -19,7 +19,10 @@ function sourceBuild() {
 
 // Scenery is committed in public/. Only the locked Three.js decoder needs a build copy.
 export default defineConfig({
-    define: { 'globalThis.__FJORD_BUILD__': JSON.stringify(sourceBuild()) },
+    define: {
+        'globalThis.__FJORD_BUILD__': JSON.stringify(sourceBuild()),
+        'globalThis.__FJORD_FEEDBACK_URL__': JSON.stringify(process.env.FJORD_FEEDBACK_URL ?? ''),
+    },
     optimizeDeps: {
         entries: [
             'index.html', 'src/core/Game.ts', 'src/environment-lab/EnvironmentLab.ts',
