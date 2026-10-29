@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "recordedUtc": "2026-10-29T08:55:32.759640+00:00",
+  "issue": "https://github.com/sidesliders1983/Pillagers/issues/301",
+  "sourceCommit": "c5fcecd1959a7264c1a98924964bebac9b08cddb",
+  "servedVersion": {
+    "repository": "https://github.com/sidesliders1983/Pillagers.git",
+    "branch": "main",
+    "commit": "c5fcecd1959a7264c1a98924964bebac9b08cddb",
+    "entry_route": "/fjord-play",
+    "routes": [
+      "/",
+      "/fjord-play"
+    ]
+  },
+  "upstreamCI": {
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/sidesliders1983/Pillagers/actions/runs/40724828102"
+  },
+  "testerReported": {
+    "cpu": "Ryzen 5 9600X",
+    "gpu": "Radeon RX 7900 GRE",
+    "browser": null,
+    "os": null,
+    "driver": null,
+    "viewport": null,
+    "activeRunningJson": null,
+    "preparingIslandApproxSeconds": 35,
+    "gameplay": "Severe lag; unable to meaningfully play",
+    "backgroundLoading": "Much slower or stops"
+  },
+  "screenshotObserved": {
+    "mode": "Paused",
+    "quality": "low",
+    "effects": "low",
+    "dpr": 1,
+    "fps": null,
+    "intervalWindowSeconds": 0,
+    "cpuCallbackP95Ms": 12.5,
+    "recentHitchMs": 361.1,
+    "ticksTotal": 0,
+    "ticksPerSecond": 0,
+    "jsHeapMiB": 416,
+    "gpuTimer": "unsupported",
+    "vram": null
+  },
+  "browserAutomation": {
+    "available": false,
+    "reason": "Local browser use is disabled in Work settings"
+  },
+  "targetHardwareReproduced": false,
+  "runtimeMeasurements": {
+    "activeFps": null,
+    "intervalP50P95P99": null,
+    "framesOver33Or50Ms": null,
+    "actualGpuMs": null,
+    "drawCalls": null,
+    "triangles": null,
+    "rendererIdentity": null,
+    "contextLossObserved": null,
+    "trueHiddenLoadingStallReproduced": null
+  },
+  "matrix": [
+    {
+      "scenario": "AMD foreground Paused / Running, stationary camera, Low/Low DPR 1",
+      "status": "not tested",
+      "reason": "No enabled browser surface or tester JSON"
+    },
+    {
+      "scenario": "AMD foreground Paused / Running, matched moving camera",
+      "status": "not tested",
+      "reason": "No enabled browser surface or tester JSON"
+    },
+    {
+      "scenario": "AMD half-width and half-height viewport",
+      "status": "not tested",
+      "reason": "No enabled browser surface or tester JSON"
+    },
+    {
+      "scenario": "AMD cold Standard vs Low, matched pixels",
+      "status": "not tested",
+      "reason": "No enabled browser surface or tester JSON"
+    },
+    {
+      "scenario": "AMD Chrome/Edge vs Firefox",
+      "status": "not tested",
+      "reason": "No enabled browser surface or tester JSON"
+    },
+    {
+      "scenario": "New campaign hidden during worker / textures / shader / draws / arrival",
+      "status": "not tested",
+      "reason": "No enabled browser surface or tester JSON"
+    },
+    {
+      "scenario": "Continue hidden during worker / textures / shader / draws; foreground recovery",
+      "status": "not tested",
+      "reason": "No enabled browser surface or tester JSON"
+    },
+    {
+      "scenario": "Physical iPhone / iPad comparison",
+      "status": "not tested",
+      "reason": "No enabled browser surface or tester JSON"
+    }
+  ]
+}

@@ -141,3 +141,18 @@ its visual behavior from jsdom.
 - [Three renderer info/reset scope](https://threejs.org/docs/pages/WebGLRenderer.html), checked against installed r180 source
 - [MDN performance.memory limits](https://developer.mozilla.org/en-US/docs/Web/API/Performance/memory)
 - [MDN Long Tasks availability and meaning](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming)
+
+## Desktop discrepancy follow-up (#301)
+
+Copy diagnostics / Save JSON additionally inspect the existing WebGL context at
+export time: `graphics` includes WebGL version, masked and optional unmasked
+vendor/renderer identity, actual drawing-buffer pixels, canvas attribute size,
+CSS bounds and selected context attributes. There is no new frame/poll work.
+Identity may be `unsupported-or-hidden` or `unavailable`; an absent/lost context
+is labelled explicitly. Driver strings are bounded. A requested power preference
+is not proof of GPU selection, utilization or the browser acceleration setting.
+
+Export during foreground **Running**, before pausing: the final interval
+distribution is a rolling five-second window, while bounded summary history
+covers up to sixty seconds. Read the [#301 investigation and tester request](qa/desktop-lag-301/report.md)
+for controlled comparisons and untested target-device limitations.

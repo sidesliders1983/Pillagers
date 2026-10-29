@@ -88,7 +88,8 @@ try {
     }
     const files = [
         'src/fjord-play/PerformanceMeasurements.ts', 'src/fjord-play/PerformanceGpuTimer.ts',
-        'src/fjord-play/PlaytestPerformance.ts', 'src/fjord-play/performance-overlay.css',
+        'src/fjord-play/PlaytestPerformance.ts', 'src/fjord-play/PerformanceRendererInfo.ts',
+        'src/fjord-play/performance-overlay.css',
         'src/fjord-play/FjordEntry.ts', 'src/fjord-play/FjordHeader.ts', 'src/fjord-play/FjordPlay.ts',
         'src/fjord-play/FjordScene.ts', 'src/fjord-play/FjordModels.ts', 'src/fjord-play/FjordEntities.ts',
         'src/characters/CharacterPreparation.ts', 'src/characters/ResidentPortraitStudio.ts',

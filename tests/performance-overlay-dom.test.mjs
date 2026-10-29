@@ -27,7 +27,18 @@ test('the touch diagnostic view is opt-in, bounded, freezeable and offers select
             'An ordinary initial pageshow is not a BFCache return or a paused campaign');
         const info = { autoReset: true, memory: { geometries: 9, textures: 7 }, programs: [],
             render: { calls: 0, triangles: 0 }, reset() { this.render.calls = this.render.triangles = 0; } };
-        const renderer = { info, getContext: () => ({ getExtension: () => null }), getPixelRatio: () => 1,
+        let identityReads = 0;
+        const gl = { VERSION: 1, VENDOR: 2, RENDERER: 3, isContextLost: () => false,
+            drawingBufferWidth: 390, drawingBufferHeight: 600,
+            canvas: { width: 390, height: 600, getBoundingClientRect: () => ({ width: 390, height: 600 }) },
+            getContextAttributes: () => null,
+            getParameter: key => key === 1 ? 'WebGL 2.0' : 'Test backend',
+            getExtension(name) {
+                if (name !== 'WEBGL_debug_renderer_info') return null;
+                identityReads++;
+                return { UNMASKED_VENDOR_WEBGL: 4, UNMASKED_RENDERER_WEBGL: 5 };
+            } };
+        const renderer = { info, getContext: () => gl, getPixelRatio: () => 1,
             domElement: { width: 390, height: 600 } };
         overlay.draw(renderer, 'main', () => { info.render.calls = 5; info.render.triangles = 200; });
         overlay.draw(renderer, 'portrait', () => { info.render.calls = 2; info.render.triangles = 20; });
@@ -45,6 +56,7 @@ test('the touch diagnostic view is opt-in, bounded, freezeable and offers select
         callback();
         assert.equal(document.querySelector('[data-perf-statistics]').textContent, before);
         assert.match(document.querySelector('[data-perf-freeze]').textContent, /Unfreeze/);
+        assert.equal(identityReads, 0, 'Frames and periodic display updates never inspect driver identity');
         document.querySelector('[data-perf-copy]').click();
         await new Promise(resolve => setImmediate(resolve));
         const fallback = document.querySelector('textarea');
@@ -53,6 +65,10 @@ test('the touch diagnostic view is opt-in, bounded, freezeable and offers select
         assert.equal(report.context.seed, 32);
         assert.equal(report.context.tick, 500);
         assert.equal(report.capabilities.gpuTimer, false);
+        assert.equal(report.graphics.identity.status, 'available', 'Driver identity is independent of GPU timer support');
+        assert.equal(report.graphics.identity.renderer, 'Test backend');
+        assert.deepEqual(report.graphics.drawingBuffer, [390, 600]);
+        assert.equal(identityReads, 1, 'Identity is read only when the user exports diagnostics');
         assert.equal(report.build, 'local/unknown');
         assert.equal(report.workload.main.calls, 5);
         assert.equal(report.workload.portrait.calls, 2, 'Portrait draws never overwrite the main scope');
@@ -87,6 +103,8 @@ test('the touch diagnostic view is opt-in, bounded, freezeable and offers select
         assert.equal(JSON.parse(overlay.exportJSON()).sample.spans.sceneWall.count, 0,
             'A late operation cannot repopulate a disabled/replaced collector');
         assert.equal(timers, 1);
+        assert.equal(JSON.parse(overlay.exportJSON()).graphics.status, 'unavailable',
+            'Off releases the context; a new collector cannot export the previous scene identity');
         assert.ok(fallback.value.length < 128 * 1024);
         const { IslandLoadStatus } = loadDOMSource('../src/fjord-play/IslandLoadStatus.ts');
         const loading = new IslandLoadStatus('new', 32, () => now);

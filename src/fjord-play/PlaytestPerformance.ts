@@ -3,6 +3,7 @@ import { PerformanceMeasurements, performanceLimits, diagnosticMessage, type Per
     type PerformanceSpan } from './PerformanceMeasurements';
 import { PerformanceGpuTimer, type RenderScope } from './PerformanceGpuTimer';
 import { lastIslandLoad } from './IslandLoadStatus';
+import { performanceRendererInfo } from './PerformanceRendererInfo';
 import './performance-overlay.css';
 
 export type PerformanceView = 'off' | 'compact' | 'details';
@@ -383,6 +384,7 @@ export class PlaytestPerformance {
             capabilities: { gpuTimer: this.gpuSupported, jsHeap: !!this.heap, longTasks: this.longTasks },
             units: { cpu: 'synchronous JS ms; async submit excludes resumed continuations', gpu: 'query ms; main includes native shadows; portrait separate',
                 memory: 'optional JS heap only; resource counts are not bytes; VRAM unavailable' },
+            graphics: performanceRendererInfo(this.gl),
             resources: this.resources, workload: this.workload, portraitGpu: this.portraitGpu, heap: this.heap,
             sample: this.measurements?.sample(),
             loading: load ? { attempt: load.attempt, startedUtc: load.startedUtc, percent: load.percent,
