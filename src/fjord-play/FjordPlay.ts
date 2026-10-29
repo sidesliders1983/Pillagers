@@ -589,6 +589,8 @@ export class FjordPlay {
         const startNewCampaign = (restart: boolean, freshArrival = false) => {
             if (campaignChangePending || !window.confirm('Replace the active campaign? Manually saved checkpoints are kept.')) return;
             campaignChangePending = true;
+            // A confirmed replacement leaves settings so the founding and journey can be seen.
+            document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open = false;
             if (freshArrival) {
                 // A menu choice draws independently of the current campaign's canonical RNG.
                 const currentSeed = this.session.readSnapshot().seed;
