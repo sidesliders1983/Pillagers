@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "created_utc": "2026-10-29T15:17:31.356099+00:00",
   "phase": "review-revised source inventory plus observed agent journeys and empathy hypotheses; no UI implementation",
   "issue": 297,
@@ -244,7 +244,7 @@
     }
   ],
   "inventory_items": 67,
-  "updated_utc": "2026-10-29T16:44:10.802067+00:00",
+  "updated_utc": "2026-10-29T18:00:55.010005+00:00",
   "initial_browser_error": "Local browser use is disabled in Work settings",
   "browser_error": null,
   "owner_followup_scope": "Browser enabled; journey/empathy maps before implementation; prototype skill explicitly requested.",
@@ -254,5 +254,13 @@
     "commit": "17ee56fcdb00df6b858d8c67994a58306d5e3f0a",
     "status": "throwaway model manually traversed; owner review pending; not merged into audit/game"
   },
-  "artifact_hash_note": "Proposal/runtime hashes identify committed bytes; text SVG and runtime JSON/TXT are LF-normalized by scoped .gitattributes. Source local-byte hashes separately include checkout line endings."
+  "artifact_hash_note": "Proposal/runtime hashes identify committed bytes; text SVG and runtime JSON/TXT are LF-normalized by scoped .gitattributes. Source local-byte hashes separately include checkout line endings.",
+  "focused_followup": {
+    "path": "runtime/followup/manifest.json",
+    "sha256": "17fa0bee0af7a7ec864297670aa8c96a5671dadad1c476814d46f61b4117ad5c",
+    "successful_discovery": true,
+    "successful_return": false,
+    "owner_touch_report": "requested interactions reported working; exact device/OS/browser unreported",
+    "existing_regressions": "21 passed, 0 failed, 0 skipped; unchanged main public storage/start/save seams"
+  }
 }

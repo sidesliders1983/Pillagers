@@ -197,3 +197,11 @@ those screens already exist or a replacement for the real journey attempts.
   comprehension, for #300. Do not infer fun or desirability from these agent checks.
 - Owner review of the proposed hierarchy/flow. No #298/#299 production change,
   merge or release is authorized by this document.
+
+## Later focused observation
+
+The [review follow-up](runtime/followup/README.md) preserves the original attempts
+and adds a real gull discovery, followed by a failed confirmed return route.
+It also records invalid-file recovery, 21 existing storage/save regressions and
+the owner-reported touch checklist. Read these as separate outcomes; no completed
+successful round trip or fully identified physical-device test is claimed.

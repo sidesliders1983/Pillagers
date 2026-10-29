@@ -14,3 +14,12 @@ Addresses the [owner review of head 796681d](https://github.com/sidesliders1983/
 #297 stays open. #298 owns both menus, #284 portable-save completeness, #299 at
 most three observed non-menu repairs (one candidate here), #300 the external-alpha
 readiness gate. The prototype is separate throwaway work, not game implementation.
+
+## Second review / focused follow-up
+
+The [follow-up review](https://github.com/sidesliders1983/Pillagers/pull/312#issuecomment-6503099183) accepts the revised direction for #298.
+[Focused evidence](runtime/followup/README.md) adds invalid-file recovery, 21 passing
+existing storage/save regressions, the owner-reported landscape interactions and
+a real gull sighting followed by a stranded return. This preserves the original
+evidence and distinguishes technical route risk (M01) from outcome clarity (R01).
+#297 remains open; #298 proceeds separately without treating this as alpha sign-off.

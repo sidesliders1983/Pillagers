@@ -1,6 +1,6 @@
 # FjordSide alpha player experience audit — #297
 
-Version 0.2 · 29 October 2026 · source inventory and proposed information architecture.
+Version 0.3 · 29 October 2026 · source inventory and proposed information architecture.
 Parent: [#296](https://github.com/sidesliders1983/Pillagers/issues/296).
 
 **Status: source inventory revised after owner review; five real journey attempts
@@ -253,6 +253,22 @@ three. Menu hierarchy, support placement and opening-route parity stay with #298
 **#300** still owns uncoached unfamiliar-player evidence and the final external-alpha
 Go/Conditional/No-Go gate. Source review and a code/documentation merge do not
 establish concept desirability or device readiness.
+
+## Focused follow-up after the second owner review
+
+The [follow-up evidence](alpha-297/runtime/followup/README.md) records a refused
+invalid import followed by a successful load of the preserved save; 21 existing
+storage/quota/start/save regressions pass. The owner reports the requested LAN
+landscape navigation/scroll/Family Tree/pause checks working; exact device/OS/browser
+remain unreported.
+
+A second real expedition reaches Exploring and records a first gull sighting.
+Its commanded return then becomes Stranded with a confirmed-route-blocked reason.
+Discovery and successful homecoming must therefore remain separate outcomes.
+R01 stays the single bounded #299 wording/projection candidate; M01 is a separate
+technical route case for the #151 baseline owner, supported by the unedited export.
+#297 remains open; clearer menus do not resolve or waive that technical finding.
+The reviewed menu direction can proceed to separate #298 UI implementation.
 
 ## Runtime protocol and remaining completion checklist
 
