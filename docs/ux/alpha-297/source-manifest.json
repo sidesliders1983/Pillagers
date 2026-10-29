@@ -1,0 +1,233 @@
+{
+  "version": 1,
+  "created_utc": "2026-10-29T15:17:31.356099+00:00",
+  "phase": "source inventory; runtime deferred at owner request",
+  "issue": 297,
+  "epic": 296,
+  "source_commit": "4086baac26c6953b879b439546b68f2406ca767a",
+  "source_branch": "main",
+  "audit_branch": "codex/ui-audit-297",
+  "workspace": "D:/CodexSites/Pillagers/scratch/ui-audit-297",
+  "local_changes_at_start": "none; worktree created from fetched origin/main",
+  "live_identity_url": "https://pillagers-test.sidesliders.chatgpt.site/site-version.json",
+  "live_identity": {
+    "repository": "https://github.com/sidesliders1983/Pillagers.git",
+    "branch": "main",
+    "commit": "4086baac26c6953b879b439546b68f2406ca767a",
+    "entry_route": "/fjord-play",
+    "routes": [
+      "/",
+      "/fjord-play"
+    ]
+  },
+  "live_ui_status": "unverified: metadata read only; no fresh asset-parity or browser journey claim",
+  "browser_error": "Local browser use is disabled in Work settings",
+  "owner_scope_reply": "Werk eerst de broninventaris uit",
+  "desktop_runtime": {
+    "status": "not run",
+    "viewport": null,
+    "screenshots": []
+  },
+  "touch_runtime": {
+    "status": "not run",
+    "viewport": null,
+    "emulation": null,
+    "physical_device": null,
+    "screenshots": []
+  },
+  "evidence_legend": {
+    "S": "source-confirmed",
+    "H": "historical only",
+    "P": "proposal/hypothesis",
+    "U": "current runtime unverified"
+  },
+  "source_hash_note": "git_blob identifies canonical repository content; sha256_local_bytes includes current checkout line endings",
+  "sources": [
+    {
+      "path": "src/fjord-play/FjordEntry.ts",
+      "git_blob": "83d650d144b482783ccd14b8b35d6004678eacd4",
+      "sha256_local_bytes": "59268cfb5db16a16950275b06f53ed20c6e5de259e766789ebdd7e33f10a8551"
+    },
+    {
+      "path": "src/fjord-play/FjordHeader.ts",
+      "git_blob": "9a7dd2bc189ea47a040da349647595ac6826f76b",
+      "sha256_local_bytes": "f335791a64fef96c1c5eb5e8fccaf7b3b344f15d3c4a41f28cb87ec61527cc10"
+    },
+    {
+      "path": "src/fjord-play/FjordPlay.ts",
+      "git_blob": "1bee262217b5628e4f72236fe7763607532c0f56",
+      "sha256_local_bytes": "4b677c6221afcb8de187521403979220c409525761b01c94d5e7e32d3acd75ea"
+    },
+    {
+      "path": "src/fjord-play/FjordScene.ts",
+      "git_blob": "011f1c0c71813cb0f63b48f48a33b77de6c02489",
+      "sha256_local_bytes": "d5a26c6e7687ce5a1de93b0479d5cdc1a9f18c954403cf9d2713d33468c1566e"
+    },
+    {
+      "path": "src/fjord-play/FjordInterface.ts",
+      "git_blob": "939fcc0d79778b746317c19f9804a0f314967584",
+      "sha256_local_bytes": "4916c0f437075a903238367050510988078817847c503023ebe014ca511a05bc"
+    },
+    {
+      "path": "src/fjord-play/FjordNavigation.ts",
+      "git_blob": "c54e374861bc4a818bd68e344880e632cf05d2b0",
+      "sha256_local_bytes": "cac948589e13f0193af058637b3ee2ca73cd71c8277e094248e8c34e3f52cbbf"
+    },
+    {
+      "path": "src/fjord-play/MobileShell.ts",
+      "git_blob": "1da7208f8075c66be9ff4ef271cfd7c3730526de",
+      "sha256_local_bytes": "a8c7bfaa8ad68cb363ce11bf629bc9ac7d62cdb7292c50d990f6788caecfda01"
+    },
+    {
+      "path": "src/fjord-play/IslandMap.ts",
+      "git_blob": "25269faf324bc2cf1d3b30a160fb58dfb81fd4ff",
+      "sha256_local_bytes": "55a968cd8669e9e1857fc94066cd03df51b735487f2c3bd7ce8f1eb534dfe75e"
+    },
+    {
+      "path": "src/fjord-play/ExpeditionPanel.ts",
+      "git_blob": "84058f7ba500303d564fe1e87fc0512202175713",
+      "sha256_local_bytes": "5bf1247dff69f95f1395a18ad7e9c2efe9dbd255c21ff0bf9e91e1e24898d5eb"
+    },
+    {
+      "path": "src/fjord-play/FirstStepsGuide.ts",
+      "git_blob": "1cc5bdcb6231dee0220b17069b8bcd53efc9d203",
+      "sha256_local_bytes": "459dfd3a383bbddc8076d2f911eb80046015e76ddfa1181a218a010637cea434"
+    },
+    {
+      "path": "src/fjord-play/IslandLoading.ts",
+      "git_blob": "95c1114c38f544436ac13f475946e48fc25860a9",
+      "sha256_local_bytes": "a799d6f5beaebde3e9d873ba6c27ee181c14ce7cfc75d231adffd8b82c8acf40"
+    },
+    {
+      "path": "src/fjord-play/CampaignRecovery.ts",
+      "git_blob": "320756f4ddac9c8dff0f4e5f1aee52ebe46a551d",
+      "sha256_local_bytes": "5fe7f03e6d639907d58f7d595ec0bfd79663fac5815bcc3be98ad92d41f00f76"
+    },
+    {
+      "path": "src/fjord-play/PlaytestPerformance.ts",
+      "git_blob": "004a5424a4e556a3450e5973f453e0fb02241f05",
+      "sha256_local_bytes": "756168fb68dbcbb0268830b3df534ebd3c336b3f2b395602fdaeea7a47dd6056"
+    },
+    {
+      "path": "src/audio/AudioControls.ts",
+      "git_blob": "f5d1a39e2358baf596beecd2e022f8dc18b42053",
+      "sha256_local_bytes": "54c221bc9c9d659761e920ce8f39ec5e649e4516c72c0f383a21a7a4804abdcf"
+    },
+    {
+      "path": "src/ui/ScreenAwakeControl.ts",
+      "git_blob": "3308a9a426d1a06890545ca6794c670c526e70c7",
+      "sha256_local_bytes": "d44e69f569956567d6c2c8d52c2796d1d9a0271e4834ea04d965b2e7940918ba"
+    },
+    {
+      "path": "src/play/SharedSettlement.ts",
+      "git_blob": "c3d17f39fb9f41d2aeace6e77efea9a978dc56b9",
+      "sha256_local_bytes": "5f081d7639ee17243bc3f2878a89af6122caa32189cd95380c9fbb52dc574dff"
+    },
+    {
+      "path": "src/play/SettlementBrowser.ts",
+      "git_blob": "747b9635d4c7bc045cbc3fb05d6396f11a9b7a71",
+      "sha256_local_bytes": "9041d84e673394e1830b84e303957056bf6bc978bb0002e71a1a5d9a457e7ad2"
+    },
+    {
+      "path": "src/play/SettlementRecovery.ts",
+      "git_blob": "c10f843494262d3f9dfff0727a547600e12c8d20",
+      "sha256_local_bytes": "282d689f62dfa14e3113dcb8c205d5c0ac61aaa3196ebcc7d28a3fdb6c73ae49"
+    },
+    {
+      "path": "src/fjord-play/FjordCampaign.ts",
+      "git_blob": "afc0dc15089b8af21aecbe1f567b6142dabd50bf",
+      "sha256_local_bytes": "b5bf87fbe5aefeaeef93c8dcfb58647e1756c885c2ecd081bb8322dd1e5ba2f4"
+    },
+    {
+      "path": "src/fjord-play/CampaignIsland.ts",
+      "git_blob": "4e8035d3024068fe4d34d2fdb6ef7d26de437bfa",
+      "sha256_local_bytes": "f58ee5651020d9e058b15bc9f37e97ff6b7a7cdedd4503d754579f227c7fa1d1"
+    },
+    {
+      "path": "src/gameplay-lab/GameplaySession.ts",
+      "git_blob": "73250d39cd3b06562153d190de525da62bcd9654",
+      "sha256_local_bytes": "f0f0884d81d4ec7ddf33dccc8a02b82230380c8d3ce2096772a0329f79d9bfd6"
+    },
+    {
+      "path": "src/lore/ClanBookReader.ts",
+      "git_blob": "9186023981af78a3c4934ca3480f0f5e01cd6789",
+      "sha256_local_bytes": "8c6ef755fe15bd57cb73248a38553bbd143b275ed683d5e465bc4051ba0558cd"
+    },
+    {
+      "path": "src/lore/FamilyTreeView.ts",
+      "git_blob": "0514cdfc0ac1cd389eef7a36462b3e53c340a6c2",
+      "sha256_local_bytes": "067201060d3a7b8754c971eec68ef9488a016587fe3e73294d11159b554bb43e"
+    },
+    {
+      "path": "src/fjord-play/campaign-start.css",
+      "git_blob": "11b0ef8631606fb7acee9c52cdbee797fb29f4eb",
+      "sha256_local_bytes": "e58565e8efa53c344eb16113c796b8715b0687ab5b08f502a6dfbf4711244500"
+    },
+    {
+      "path": "src/fjord-play/fjord-play.css",
+      "git_blob": "cac8f7ca9aabe202d0c8e190b80442921a0a09e1",
+      "sha256_local_bytes": "ce0e831a6add178595360182e976e35b36b5f897affbbd637416e31922b832d7"
+    },
+    {
+      "path": "src/fjord-play/desktop-foundations.css",
+      "git_blob": "ce2bdc9bd2a8dae5963cae8c2356b9613470d83b",
+      "sha256_local_bytes": "ba17aa79d85a242c61e2e5223991440dbbe1791d5b2cee7ef4b9645422128a01"
+    },
+    {
+      "path": "src/config/PresentationQuality.ts",
+      "git_blob": "cce45bf1eeba99ed9cb6202d3530dab659bd98c6",
+      "sha256_local_bytes": "9980d646775fdb5b0c28653ab270f330cdb0d386f0d4ce6b85891aa5b57556a5"
+    }
+  ],
+  "proposals": [
+    {
+      "path": "docs/ux/alpha-297/wireframes/game-desktop.png",
+      "sha256": "c00a9377311b0fb59638a5ff0f2f66285e80cf23c0f5478ae499a9ab96f80476",
+      "kind": "proposed information architecture; not runtime evidence"
+    },
+    {
+      "path": "docs/ux/alpha-297/wireframes/game-desktop.svg",
+      "sha256": "5dbe2bda08bdb04aa22db0a8eac9ed430a64d8cf818b0beeda5414f8d5b40cfc",
+      "kind": "proposed information architecture; not runtime evidence",
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "path": "docs/ux/alpha-297/wireframes/game-mobile-landscape.png",
+      "sha256": "0b3c3936074468c4414290e3704f0f1329f1b3a1302c41dce12a33e79679979f",
+      "kind": "proposed information architecture; not runtime evidence"
+    },
+    {
+      "path": "docs/ux/alpha-297/wireframes/game-mobile-landscape.svg",
+      "sha256": "bfbf1644ded8637800b7c66f21a18d7a74987345309cbcb2740b552c83c3b8b9",
+      "kind": "proposed information architecture; not runtime evidence",
+      "width": 852,
+      "height": 393
+    },
+    {
+      "path": "docs/ux/alpha-297/wireframes/start-desktop.png",
+      "sha256": "245ce8d026d00b3600bd824c358b7f060441529642d01f3fbad6da53b25eb039",
+      "kind": "proposed information architecture; not runtime evidence"
+    },
+    {
+      "path": "docs/ux/alpha-297/wireframes/start-desktop.svg",
+      "sha256": "1b8bee00547f94892fcc5996f286156282ac54252666dd26286810f952903836",
+      "kind": "proposed information architecture; not runtime evidence",
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "path": "docs/ux/alpha-297/wireframes/start-mobile-landscape.png",
+      "sha256": "4e6f14f13be78db8ac7da3d3b9e1422b7274d108809de96a1283a0750de243ab",
+      "kind": "proposed information architecture; not runtime evidence"
+    },
+    {
+      "path": "docs/ux/alpha-297/wireframes/start-mobile-landscape.svg",
+      "sha256": "70e44487622f14ecce5dc6dfc352083fa551ad031a2f279497f51597e573110f",
+      "kind": "proposed information architecture; not runtime evidence",
+      "width": 852,
+      "height": 393
+    }
+  ],
+  "inventory_items": 67
+}

@@ -1,0 +1,10 @@
+{
+  "repository": "https://github.com/sidesliders1983/Pillagers.git",
+  "branch": "main",
+  "commit": "4086baac26c6953b879b439546b68f2406ca767a",
+  "entry_route": "/fjord-play",
+  "routes": [
+    "/",
+    "/fjord-play"
+  ]
+}
