@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FjordSide — throwaway menu-flow prototype</title>
+    <style>
+        :root { color-scheme: dark; font: 17px/1.5 system-ui, sans-serif; background: #14292c; color: #efe6cf; }
+        body { max-width: 1100px; margin: auto; padding: 24px; }
+        h1 { font-size: 1.8rem; margin-bottom: 8px; }
+        h2 { font-size: 1.25rem; }
+        .flag { color: #e4c67d; font-weight: 700; }
+        section { padding: 20px; margin: 20px 0; border: 1px solid #71817a; border-radius: 8px; }
+        dl { display: grid; grid-template-columns: 180px 1fr; gap: 8px 20px; }
+        dd { margin: 0; }
+        dt, .muted { color: #b8c7bc; }
+        button { font: inherit; padding: 10px 16px; min-height: 44px; background: #243b3d; color: inherit; border: 1px solid #71817a; border-radius: 5px; cursor: pointer; }
+        button:hover, button:focus-visible, [aria-selected="true"] { outline: 2px solid #e4c67d; }
+        .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+        #change { border-left: 4px solid #e4c67d; padding-left: 14px; }
+        #steps { display: grid; gap: 10px; margin-top: 16px; }
+        #steps button { text-align: left; }
+        @media (max-width: 600px) { body { padding: 12px; } dl { grid-template-columns: 1fr; } dd { padding-bottom: 12px; } }
+    </style>
+</head>
+<body>
+    <p class="flag">THROWAWAY PROTOTYPE · NOT THE GAME · NOTHING IS SAVED</p>
+    <h1>Can the menu flow preserve the player's intention?</h1>
+    <p>This navigation-state sketch asks whether one Help &amp; support entry, a separate
+        replacement review and an explicit import handoff make sense before we implement
+        #298. It models menu transitions only. It does not simulate FjordSide, test real
+        saves or demonstrate actual new game screens.</p>
+    <p class="muted">Based on the #297 journey/empathy maps. Graphics/audio stay in Settings;
+        Help contains Controls, problem help and deliberately opened Diagnostics.
+        Desktop time controls stay in the header; only Horizon keeps +1 Year in overflow.
+        Give feedback is not configured. Return to start needs a safe real-session handoff.</p>
+    <section aria-labelledby="state-title">
+        <h2 id="state-title">Current proposed state</h2>
+        <dl id="state"></dl>
+        <p id="change" role="status"></p>
+    </section>
+    <section aria-labelledby="free-title">
+        <h2 id="free-title">Free play</h2>
+        <p>Try actions in any order. An action outside its context explains why it cannot apply.</p>
+        <div class="actions" id="free"></div>
+    </section>
+    <section aria-labelledby="walk-title">
+        <h2 id="walk-title">Guided walkthroughs</h2>
+        <div role="tablist" aria-label="Scenarios" class="actions" id="tabs"></div>
+        <p id="scenario"></p>
+        <div id="steps"></div>
+    </section>
+    <p class="muted">No localStorage, cookies, network, audio, Core or real campaign commands.
+        This prototype remains on a separate throwaway branch. Review the model, then
+        discard the shell; it is not a production implementation to merge.</p>
+    <script>
+        // Pure navigation model. No DOM, storage or simulation dependency.
+        const initialState = () => ({
+            screen: 'Start', backTo: 'Start', clock: 'Paused', campaign: 'Existing saved campaign',
+            selection: 'Previously selected resident', saved: true, candidate: false,
+            replacement: '', message: 'A returning player has a saved campaign. Nothing has started.'
+        });
+
+        function transition(previous, action) {
+            const state = { ...previous };
+            const reject = reason => ({ ...previous, message: reason });
+            switch (action) {
+                case 'reset': return initialState();
+                case 'continue':
+                    if (state.screen !== 'Start' || !state.saved) return reject('Continue needs a selected valid campaign on Start.');
+                    state.screen = 'World';
+                    state.clock = 'Paused';
+                    if (state.candidate) state.campaign = 'Imported campaign';
+                    state.candidate = false;
+                    state.message = 'Continue activates the selected campaign, paused. Import selection alone did not do this.';
+                    break;
+                case 'menu':
+                    if (state.screen !== 'World') return reject('Open the game menu from the world.');
+                    state.screen = 'Game menu';
+                    state.message = 'Routine actions come first. Clock and selected resident stay as they were.';
+                    break;
+                case 'clock':
+                    if (state.screen !== 'World') return reject('Time is controlled in World & Time, not by closing a menu.');
+                    state.clock = state.clock === 'Paused' ? 'Running' : 'Paused';
+                    state.message = 'The player explicitly changed clock intent.';
+                    break;
+                case 'help':
+                    if (!['Start', 'Game menu'].includes(state.screen)) return reject('One Help & support entry is available on Start and in the game menu.');
+                    state.backTo = state.screen;
+                    state.screen = 'Help & support';
+                    state.message = 'Controls / How to play, problem help and quiet credits; Diagnostics is a secondary choice here.';
+                    break;
+                case 'diagnostics':
+                    if (state.screen !== 'Help & support') return reject('Open Help & support first, then deliberately open Diagnostics.');
+                    state.screen = 'Diagnostics';
+                    state.message = 'Loading tests, performance preferences and report exports remain available, including before play.';
+                    break;
+                case 'new':
+                    if (!['Start', 'Game menu'].includes(state.screen)) return reject('New game is reached from Start or the separate lower section of the game menu.');
+                    state.backTo = state.screen;
+                    state.screen = 'New game';
+                    state.message = 'Choose New arrival or Replay original founding. Advanced seed/scenario options belong inside this flow.';
+                    break;
+                case 'arrival':
+                case 'replay':
+                    if (state.screen !== 'New game') return reject('Choose arrival or replay inside New game.');
+                    state.replacement = action === 'arrival' ? 'New arrival' : 'Original founding replay';
+                    state.screen = 'Replacement review';
+                    state.message = 'Existing progress is not replaced by choosing an option. Review first; Cancel remains safe.';
+                    break;
+                case 'confirm':
+                    if (state.screen !== 'Replacement review') return reject('Confirm applies only to an explicit replacement review.');
+                    state.campaign = state.replacement;
+                    state.selection = 'None in the proposed new campaign';
+                    state.replacement = '';
+                    state.screen = 'World';
+                    state.clock = 'Paused';
+                    state.message = 'Illustrative successful preparation/activation only. Real generation and storage failure safeguards are not modeled.';
+                    break;
+                case 'load':
+                    if (state.screen !== 'Start') return reject('This walkthrough models start-menu file import. In-game rollback/load stays with the existing owner and #284.');
+                    state.screen = 'Load game';
+                    state.message = 'Choose a browser checkpoint or campaign file. Raw Core JSON is a separate developer destination.';
+                    break;
+                case 'import':
+                    if (state.screen !== 'Load game') return reject('Choose Load game on Start first.');
+                    state.screen = 'Start';
+                    state.saved = true;
+                    state.candidate = true;
+                    state.message = 'A valid imported candidate is selected. The existing campaign is still unchanged; Continue is the activation step.';
+                    break;
+                case 'back':
+                    if (state.screen === 'Diagnostics') state.screen = 'Help & support';
+                    else if (state.screen === 'Help & support' || state.screen === 'New game') state.screen = state.backTo;
+                    else if (state.screen === 'Replacement review') {
+                        state.screen = 'New game';
+                        state.replacement = '';
+                    } else if (state.screen === 'Game menu') state.screen = 'World';
+                    else if (state.screen === 'Load game') state.screen = 'Start';
+                    else return reject('There is no open menu or review to close.');
+                    state.message = 'Back / Cancel changed navigation only. Campaign, selected resident and clock intent are preserved.';
+                    break;
+            }
+            return state;
+        }
+
+        const actions = [
+            ['continue', 'Continue'], ['menu', 'Open game menu'], ['clock', 'Play / Pause explicitly'],
+            ['help', 'Help & support'], ['diagnostics', 'Open Diagnostics'], ['new', 'New game / Replay'],
+            ['arrival', 'Choose New arrival'], ['replay', 'Choose original founding'],
+            ['confirm', 'Confirm replacement'], ['load', 'Start: Load game'], ['import', 'Choose a valid file'],
+            ['back', 'Back / Cancel / Close'], ['reset', 'Reset to returning player']
+        ];
+        const scenarios = [
+            { title: 'Help before play', description: 'Reach support deliberately before starting, then return to ordinary Continue.',
+                steps: ['help', 'diagnostics', 'back', 'back', 'continue'] },
+            { title: 'Keep pause and progress', description: 'Open and close the menu, then choose a replacement and cancel. Watch the paused clock, campaign and selection.',
+                steps: ['continue', 'menu', 'back', 'menu', 'new', 'arrival', 'back', 'back', 'back'] },
+            { title: 'Import handoff', description: 'Selecting a file does not yet activate it. The separate Continue step should be understandable.',
+                steps: ['load', 'import', 'continue'] },
+            { title: 'Explicit replay', description: 'Replay is a legitimate New game choice. Confirm replacement deliberately; the prototype does not execute real founding.',
+                steps: ['continue', 'menu', 'new', 'replay', 'confirm'] }
+        ];
+        let state = initialState();
+        let scenarioIndex = 0;
+        let stepIndex = 0;
+        const labels = Object.fromEntries(actions);
+
+        function render() {
+            const fields = {
+                'Current screen': state.screen, 'Clock intent': state.clock, 'Campaign': state.campaign,
+                'World selection': state.selection, 'Valid save selected': state.saved ? 'Yes' : 'No',
+                'Imported candidate': state.candidate ? 'Selected; not activated' : 'None',
+                'Pending replacement': state.replacement || 'None', 'Feedback link': 'Not configured; no working button',
+                'Return to start': 'Conditional; real safe handoff not implemented'
+            };
+            const list = document.querySelector('#state');
+            list.replaceChildren();
+            for (const [label, value] of Object.entries(fields)) {
+                const term = document.createElement('dt');
+                const definition = document.createElement('dd');
+                term.textContent = label;
+                definition.textContent = value;
+                list.append(term, definition);
+            }
+            document.querySelector('#change').textContent = state.message;
+            document.querySelector('#scenario').textContent = scenarios[scenarioIndex].description;
+            const steps = document.querySelector('#steps');
+            steps.replaceChildren();
+            scenarios[scenarioIndex].steps.forEach((action, index) => {
+                const button = document.createElement('button');
+                button.textContent = `${index < stepIndex ? 'Done' : index + 1}. ${labels[action]}`;
+                button.disabled = index !== stepIndex;
+                button.addEventListener('click', () => {
+                    state = transition(state, action);
+                    stepIndex += 1;
+                    render();
+                });
+                steps.append(button);
+            });
+            document.querySelectorAll('[role="tab"]').forEach((tab, index) => {
+                tab.setAttribute('aria-selected', String(index === scenarioIndex));
+            });
+        }
+
+        for (const [action, label] of actions) {
+            const button = document.createElement('button');
+            button.textContent = label;
+            button.addEventListener('click', () => { state = transition(state, action); render(); });
+            document.querySelector('#free').append(button);
+        }
+        scenarios.forEach((scenario, index) => {
+            const button = document.createElement('button');
+            button.textContent = scenario.title;
+            button.setAttribute('role', 'tab');
+            button.addEventListener('click', () => {
+                state = initialState();
+                scenarioIndex = index;
+                stepIndex = 0;
+                render();
+            });
+            document.querySelector('#tabs').append(button);
+        });
+        render();
+    </script>
+</body>
+</html>
