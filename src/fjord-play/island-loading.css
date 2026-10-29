@@ -111,6 +111,8 @@ body.island-preparing #fjord-canvas { border-radius:0; }
     margin:0;
     width:min(var(--founding-book-width,480px),calc(100vw - 24px));
     height:var(--founding-book-height,60dvh);
+    /* A short loading grid can measure only its border; keep the close control reachable. */
+    min-height:min(240px,60dvh);
     max-height:60dvh;
 }
 @media (min-width:900px) {
