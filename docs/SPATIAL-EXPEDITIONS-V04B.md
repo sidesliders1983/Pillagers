@@ -92,3 +92,33 @@ Existing version-1 spatial missions and old four-region Recon/Surveillance/Pilla
 ## Physical mission adapter (#150)
 
 The [v0.4D physical mission contract](ISLAND-MISSIONS-V04D.md) now connects the same groups to separate Recon, Surveillance and Pillage journeys from home. It retains the existing mission prices/durations and actual recovery limits; it does not extend an Explore pack or change its endurance. Spatial version 3 allows old Explore packets and new versioned mission tasks to coexist without changing the old records.
+
+
+## Expedition presentation and home crews — 2026-10-29
+
+Away residents use the ordinary tunic without occupation clothing, hats or tools.
+DNA, face, hair, occupation, work history and any canonical raid equipment remain
+unchanged. The live actor and portrait use the same presentation; actual homecoming
+restores the occupation ensemble. Prepared crews are still at home and keep it.
+No helmet or shield presentation is introduced in this change.
+
+After arrival, members step to distinct safe standing slots within 4.8 m of their
+confirmed destination. Candidate slots and their short connectors must remain on
+known, navigable dry ground, clear of steep terrain, scenery and visible plots.
+Tight terrain can leave insufficient safe slots; the renderer then keeps canonical
+positions rather than crossing a barrier. These local visual steps spend no Core
+ticks or provisions, reveal no terrain and do not change route geometry. Pause
+holds them; returning or redirecting releases the offsets onto the real journey.
+The display cache is transient and cleared on world replacement or disposal.
+
+**Disband group** is available only when the crew is home with no active or
+Prepared mission. It releases the residents for another crew without changing
+their occupations or stocks. The full last roster and dated disband event remain
+in a validated optional group archive; returned mission records remain readable.
+New crews never reuse an archived group ID. Old saves need no migration and gain
+this archive only when a group is actually disbanded. Cancel a Prepared expedition
+first; its already paid provisions retain the existing accounting rules.
+
+Settlement resident cards and home/tent resident links show the canonical age in
+parentheses after the culturally spelled name, including archived ages in the
+directory. No age, birthday or identity data is rewritten.

@@ -1,3 +1,4 @@
+import { ExpeditionStanding, type ExpeditionStandingGround } from './ExpeditionStanding';
 import { miningWorkerPosition, type MiningWorker } from '../simulation/Mining';
 import { spatialMemberPosition, type SpatialMission } from '../simulation/SpatialExpeditions';
 import type { SimulationState } from '../simulation/SimulationCore';
@@ -60,17 +61,20 @@ export class FjordEntities {
     private workSounds: WorkSoundActivity[] = [];
     private expeditionSurface?: TerrainSurface;
     private expeditionWorld?: WorldBlueprint;
+    private expeditionStanding?: ExpeditionStanding;
     private expeditionFrames = new Map<string, { mission: SpatialMission; from: number; elapsed: number; duration: number }>();
     prepareExpeditions(state: SimulationState, world: WorldBlueprint, updateIntervalSeconds = .5,
-        secondsPerTick = updateIntervalSeconds) {
+        secondsPerTick = updateIntervalSeconds, standingGround: ExpeditionStandingGround = {}) {
         if (this.expeditionWorld !== world) {
             this.expeditionWorld = world;
             this.expeditionSurface = createBlueprintSurface(world);
+            this.expeditionStanding = new ExpeditionStanding(world);
             this.expeditionFrames.clear();
             for (const entry of this.entries.values()) entry.yardFloor = undefined;
         }
         const active = Object.values(state.world?.spatial?.missions ?? {}).filter(m => m.status !== 'Returned' && m.status !== 'Prepared');
         const ids = new Set(active.map(m => m.id));
+        this.expeditionStanding!.prepare(ids, standingGround);
         for (const id of this.expeditionFrames.keys()) if (!ids.has(id)) this.expeditionFrames.delete(id);
         for (const mission of active) {
             const previous = this.expeditionFrames.get(mission.id);
@@ -78,19 +82,31 @@ export class FjordEntities {
             const ratio = previous ? Math.min(1, previous.elapsed / previous.duration) : 1;
             // A new route starts at an authoritative reached position, not a distance on the old path.
             const sameRoute = previous && JSON.stringify(previous.mission.route) === JSON.stringify(mission.route);
+            if (sameRoute && previous.mission.travelled === mission.travelled &&
+                previous.mission.status === mission.status) {
+                previous.mission = mission;
+                continue;
+            }
             const from = sameRoute ? previous.from + (previous.mission.travelled - previous.from) * ratio : mission.travelled;
             const cadence = travelInterpolationWindow(updateIntervalSeconds, secondsPerTick);
             const duration = Math.max(cadence, Math.min(cadence * 2, previous?.elapsed ?? cadence));
             this.expeditionFrames.set(mission.id, { mission, from, elapsed: 0, duration });
         }
     }
-    private expeditionPose(missionId: string, personaId?: string) {
+    private expeditionPose(missionId: string, personaId?: string, standing = true) {
         const frame = this.expeditionFrames.get(missionId);
         if (!frame) return;
         const travelled = frame.from + (frame.mission.travelled - frame.from) * Math.min(1, frame.elapsed / frame.duration);
         const point = spatialMemberPosition({ ...frame.mission, travelled }, personaId ?? frame.mission.memberIds[0]);
-        return { ...point, y: frame.mission.transport?.phase === 'embarked' ? this.expeditionWorld!.waterLevel + .15 :
-            this.expeditionSurface!.surfaceHeightAt(point.x, point.z) };
+        const offset = standing && personaId && frame.mission.transport?.phase !== 'embarked'
+            ? this.expeditionStanding!.offset(missionId, personaId) : { x: 0, z: 0, moving: false };
+        const x = point.x + offset.x, z = point.z + offset.z;
+        return { ...point, x, z,
+            rotation: offset.moving && !point.moving && 'rotation' in offset ? offset.rotation! : point.rotation,
+            moving: point.moving || offset.moving,
+            steppingAside: !point.moving && offset.moving,
+            y: frame.mission.transport?.phase === 'embarked' ? this.expeditionWorld!.waterLevel + .15 :
+                this.expeditionSurface!.surfaceHeightAt(x, z) };
     }
     private miningSurface?: TerrainSurface;
     private miningHeight?: (x: number,z: number,natural: number) => number;
@@ -538,7 +554,15 @@ export class FjordEntities {
             if (death.presentation.inspect().complete) this.finishDeath(key);
         }
         for (const frame of this.miningFrames.values()) frame.elapsed += running ? delta : 0;
-        for (const frame of this.expeditionFrames.values()) frame.elapsed += running ? delta : 0;
+        for (const frame of this.expeditionFrames.values()) {
+            frame.elapsed += running ? delta : 0;
+            if (frame.mission.transport?.phase === 'embarked') continue;
+            const points = new Map(frame.mission.memberIds.map(id => [id,
+                this.expeditionPose(frame.mission.id, id, false)!]));
+            const arrived = frame.mission.status === 'Exploring' &&
+                (frame.from === frame.mission.travelled || frame.elapsed >= frame.duration);
+            this.expeditionStanding?.advance(frame.mission.id, points, arrived, running ? delta : 0);
+        }
         for (const { model } of this.entries.values()) {
             const facts = model.userData.canonical;
             const frame = facts?.shipExpedition && this.expeditionFrames.get(facts.shipExpedition);
@@ -575,7 +599,7 @@ export class FjordEntities {
                     entry.model.position.set(pose.x, pose.y, pose.z);
                     entry.model.rotation.set(0, pose.rotation, 0);
                 }
-                this.models.animate(entry.model, !facts.aboardShip && pose?.moving ? 'Run' : 'Idle',
+                this.models.animate(entry.model, pose?.steppingAside ? 'Walk' : !facts.aboardShip && pose?.moving ? 'Run' : 'Idle',
                     this.models.pace(entry.model, 'Run'), running ? delta : 0);
             }
         }
@@ -694,6 +718,7 @@ export class FjordEntities {
         this.select([]);
         this.entries.clear();
         this.expeditionFrames.clear();
+        this.expeditionStanding = undefined;
         this.yardSamplers.clear();
         this.root.removeFromParent();
     }

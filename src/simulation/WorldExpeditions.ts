@@ -30,7 +30,7 @@ export const defaultExpeditionConfig:ExpeditionConfig={durations:{Recon:250,Surv
 export type ExpeditionGroup={exploration?:true;id:string;name:string;memberIds:string[]};
 export type ExpeditionResult={success:boolean;discovery:Knowledge|null;casualtyIds:string[];survivorIds:string[];food:number;materials:number;cattleIds:string[];personaIds:string[];summary:string;equipment?:EquipmentResult};
 export type ExpeditionMission={id:string;groupId:string;groupName:string;regionId:string;type:MissionType;memberIds:string[];memberNames:string[];priorities:Cargo[];shipId:string|null;departedAt:number;returnsAt:number;foodCost:number;successBps:number;casualtyBps:number;status:'Away'|'Returned';returnedAt:number|null;result:ExpeditionResult|null;equipment?:PillageEquipment};
-export type ExpeditionCommand={type:'CreateExpeditionGroup';name:string;memberIds:string[]}|{type:'EditExpeditionGroup';groupId:string;name:string;memberIds:string[]}|{type:'DispatchExpedition';groupId:string;regionId:string;mission:MissionType;priorities?:Cargo[]};
+export type ExpeditionCommand={type:'DisbandExpeditionGroup';groupId:string}|{type:'CreateExpeditionGroup';name:string;memberIds:string[]}|{type:'EditExpeditionGroup';groupId:string;name:string;memberIds:string[]}|{type:'DispatchExpedition';groupId:string;regionId:string;mission:MissionType;priorities?:Cargo[]};
 export type WorldState = {
  version: 1 | 2;
  spatial?: SpatialExpeditions;
@@ -38,6 +38,9 @@ export type WorldState = {
  islandIntel?: IslandIntel;
  config: ExpeditionConfig;
  groups: Record<string, ExpeditionGroup>;
+ groupArchive?: { version: 1; groups: Record<string, {
+  group: ExpeditionGroup; disbandedAt: number; eventId: string;
+ }> };
  missions: Record<string, ExpeditionMission>;
  regions: Record<string, Region>;
  knowledge: Record<string, Knowledge>;
@@ -63,6 +66,39 @@ export function inspectWorld(state:SimulationState){
   return {id:region.id,direction,requiresShip:region.requiresShip,knowledge:known?.level??'Unknown',terrain:known?.terrain??null,resources:known?.resources? [...known.resources]:null,settlementName:known?.settlementName??null,opportunity:known?.opportunity??null,resistance:known?.resistance??null,observedAt:known?.observedAt??null};
  }):[]};
 }
+/** Current and archived group identities are never assigned to a new crew. */
+export function nextExpeditionGroupId(state: SimulationState): string {
+    const world = state.world!;
+    let number = 1;
+    while (world.groups['group-' + number] || world.groupArchive?.groups['group-' + number]) number++;
+    return 'group-' + number;
+}
+
+function validateGroupArchive(state: SimulationState): void {
+    const world = state.world!, archive = world.groupArchive;
+    if (archive === undefined) return;
+    const fail = () => { throw new Error('Invalid expedition group archive.'); };
+    if (!archive || archive.version !== 1 || !archive.groups || typeof archive.groups !== 'object' || Array.isArray(archive.groups) ||
+        Object.keys(archive).sort().join(',') !== 'groups,version') fail();
+    for (const [id, entry] of Object.entries(archive.groups)) {
+        if (!entry || Object.keys(entry).sort().join(',') !== 'disbandedAt,eventId,group' ||
+            !entry.group || entry.group.id !== id || world.groups[id] ||
+            !entry.group.name?.trim() || entry.group.name.length > 60 ||
+            !Array.isArray(entry.group.memberIds) || new Set(entry.group.memberIds).size !== entry.group.memberIds.length ||
+            entry.group.memberIds.some(member => typeof member !== 'string' || !state.personas[member] && !state.personaArchive?.[member]) ||
+            !Number.isSafeInteger(entry.disbandedAt) || entry.disbandedAt < 0 || entry.disbandedAt > absoluteTick(state) ||
+            typeof entry.eventId !== 'string' || !/^event-[1-9][0-9]*$/.test(entry.eventId)) fail();
+        const receipt = state.events[Number(entry.eventId.slice(6)) - 1];
+        if (!receipt || receipt.id !== entry.eventId || receipt.type !== 'ExpeditionGroupDisbanded' ||
+            absoluteEventTick(state, receipt.time) !== entry.disbandedAt ||
+            receipt.details?.groupId !== id || receipt.details?.groupName !== entry.group.name ||
+            JSON.stringify(receipt.details?.participants) !== JSON.stringify(entry.group.memberIds)) fail();
+    }
+}
+function absoluteEventTick(state: SimulationState, time: SimulationState['time']): number {
+    return time.winter * state.ticksPerWinter + time.tick;
+}
+
 export function validateWorld(state:SimulationState,validateTarget:(target:SimulationState)=>void):void {
  const w=state.world;if(!w)return;
  if(![1,2].includes(w.version)||!w.regions||!w.knowledge||!w.targetClans)throw new Error('Invalid world graph');
@@ -74,12 +110,13 @@ export function validateWorld(state:SimulationState,validateTarget:(target:Simul
  const fail=()=>{throw new Error('Invalid expedition state');};
  const uint=(v:number,max=Number.MAX_SAFE_INTEGER)=>{if(!Number.isSafeInteger(v)||v<0||v>max)fail();};
  if(!w.config||!w.groups||!w.missions)fail();
+ validateGroupArchive(state);
  for(const kind of missionTypes){uint(w.config.durations[kind],1000000);if(w.config.durations[kind]===0)fail();uint(w.config.provisions[kind],1000000);uint(w.config.successBps[kind],10000);uint(w.config.casualtyBps[kind],10000);}
  uint(w.config.foodCapacity,1000000);uint(w.config.materialsCapacity,1000000);if(!w.config.foodCapacity||!w.config.materialsCapacity)fail();
  const grouped=new Set<string>(),away=new Set<string>(),ships=new Set<string>();
  for(const [id,g] of Object.entries(w.groups)){if(g.id!==id||!g.name?.trim()||g.name.length>60||!Array.isArray(g.memberIds)||!g.memberIds.length&&g.exploration!==true)fail();for(const member of g.memberIds){if(!state.personas[member]||grouped.has(member))fail();grouped.add(member);}}
  for(const [id,m] of Object.entries(w.missions)){
-  if(m.id!==id||typeof m.groupName!=='string'||!m.groupName.trim()||!w.groups[m.groupId]||!w.regions[m.regionId]||!missionTypes.includes(m.type)||!['Away','Returned'].includes(m.status)||!Array.isArray(m.memberIds)||!m.memberIds.length||new Set(m.memberIds).size!==m.memberIds.length||m.memberIds.some(id=>!state.personas[id])||!Array.isArray(m.memberNames)||m.memberNames.length!==m.memberIds.length||!Array.isArray(m.priorities)||new Set(m.priorities).size!==m.priorities.length||m.priorities.some(p=>!['Food','Materials','Cattle','People'].includes(p)))fail();
+  if(m.id!==id||typeof m.groupName!=='string'||!m.groupName.trim()||(!w.groups[m.groupId]&&!(m.status==='Returned'&&w.groupArchive?.groups[m.groupId]))||!w.regions[m.regionId]||!missionTypes.includes(m.type)||!['Away','Returned'].includes(m.status)||!Array.isArray(m.memberIds)||!m.memberIds.length||new Set(m.memberIds).size!==m.memberIds.length||m.memberIds.some(id=>!state.personas[id])||!Array.isArray(m.memberNames)||m.memberNames.length!==m.memberIds.length||!Array.isArray(m.priorities)||new Set(m.priorities).size!==m.priorities.length||m.priorities.some(p=>!['Food','Materials','Cattle','People'].includes(p)))fail();
   if(m.result?.equipment && !m.equipment)fail();
   if(m.equipment && m.type!=='Pillage')fail();
   validatePillageEquipment(m.equipment,m.memberIds,m.successBps,m.casualtyBps);
@@ -119,6 +156,21 @@ export function missionOffer(state:SimulationState,groupId:string,regionId:strin
 function record(state:SimulationState,type:string,details:Record<string,unknown>,personaId?:string){state.events.push({id:`event-${state.events.length+1}`,time:{...state.time},type,...(personaId?{personaId}:{}),details:eventFacts(state,details,personaId)});}
 export function applyExpeditionCommand(state:SimulationState,command:ExpeditionCommand):void {
  const w=state.world;if(!w)throw new Error('World expeditions unavailable in this legacy campaign; start a new campaign');
+ if (command.type === 'DisbandExpeditionGroup') {
+  const group = w.groups[command.groupId];
+  if (!group) {
+   if (w.groupArchive?.groups[command.groupId]) return;
+   throw new Error('Choose an existing expedition group.');
+  }
+  if (groupMission(state, group.id)) throw new Error('The group must return home before it can be disbanded.');
+  record(state, 'ExpeditionGroupDisbanded', { groupId: group.id, groupName: group.name,
+   participants: [...group.memberIds] });
+  const archive = w.groupArchive ??= { version: 1, groups: {} };
+  archive.groups[group.id] = { group: structuredClone(group), disbandedAt: absoluteTick(state),
+   eventId: state.events.at(-1)!.id };
+  delete w.groups[group.id];
+  return;
+ }
  if(command.type==='DispatchExpedition'){
   const offer=missionOffer(state,command.groupId,command.regionId,command.mission,command.priorities),g=w.groups[command.groupId],id=`mission-${Object.keys(w.missions).length+1}`;
   state.stocks.food-=offer.foodCost;
@@ -128,7 +180,7 @@ export function applyExpeditionCommand(state:SimulationState,command:ExpeditionC
  const existing=command.type==='EditExpeditionGroup'?w.groups[command.groupId]:undefined;
  if(command.type==='EditExpeditionGroup'&&(!existing||groupMission(state,command.groupId)))throw new Error('Cannot edit a missing group or a group on a mission');
  if(typeof command.name!=='string'||!command.name.trim()||command.name.trim().length>60||!Array.isArray(command.memberIds)||!command.memberIds.length||new Set(command.memberIds).size!==command.memberIds.length||command.memberIds.some(id=>!expeditionEligible(state,id,existing?.id)))throw new Error('Group requires a name and distinct eligible members');
- const id=existing?.id??`group-${Object.keys(w.groups).length+1}`;
+ const id=existing?.id??nextExpeditionGroupId(state);
  w.groups[id]={id,name:command.name.trim(),memberIds:[...command.memberIds]};record(state,existing?'ExpeditionGroupEdited':'ExpeditionGroupCreated',{groupId:id,groupName:command.name.trim(),participants:[...command.memberIds]});
 }
 const chance=(state:SimulationState,bps:number)=>randomUint(state)<Math.floor(bps*4294967296/10000);

@@ -23,6 +23,7 @@ export type FjordClothingSet = keyof typeof fjordClothingSets;
 /** Render-only sets use canonical sex/occupation; adult clothing is never resized onto children. */
 export function fjordClothingSet(entity: Pick<FjordEntity, 'kind' | 'dna' | 'status'>): FjordClothingSet {
     if (entity.kind !== 'persona' || !entity.dna || entity.dna.age < 18) return 'native';
+    if (entity.status.expedition) return 'generic';
     if (entity.status.occupation === 'fisher') return 'fisherman';
     if (entity.status.occupation !== 'farmer') return 'generic';
     return entity.dna.sex === 'female' ? 'farmerFemale' : 'farmerMale';
@@ -63,6 +64,7 @@ export function fjordBeardAsset(entity: Pick<FjordEntity, 'kind' | 'dna'>): stri
 /** Hats remain independent of hair and carried tools. */
 function occupationModuleAsset(entity: Pick<FjordEntity, 'kind' | 'dna' | 'status'>, type: 'headwear' | 'equipment'): string {
     if (entity.kind !== 'persona' || !entity.dna || entity.dna.age < 18) return 'none';
+    if (entity.status.expedition) return 'none';
     const occupation = entity.status.occupation;
     return occupation && ['farmer', 'fisher', 'hunter', 'smith'].includes(occupation)
         ? type + '/occupation-' + occupation : 'none';

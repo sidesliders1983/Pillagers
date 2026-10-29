@@ -362,3 +362,43 @@ test('the real expedition controls board, show contextual disembark, and keep va
         dom.window.close();
     }
 });
+
+
+test('expedition controls offer disband only at home and remove the current group after the real command', () => {
+    const dom = new JSDOM('<main class="fjord-stage"><div id="fjord-workspace" data-surface="expeditions"><section id="panel"></section></div><nav id="fjord-navigation"></nav></main>',
+        { url: 'http://localhost/fjord-play', pretendToBeVisual: true });
+    const globals = ['window', 'document', 'HTMLElement', 'HTMLInputElement', 'Element', 'AbortController', 'matchMedia'];
+    const previous = Object.fromEntries(globals.map(key => [key, globalThis[key]]));
+    for (const key of globals) globalThis[key] = key === 'window' ? dom.window : dom.window[key];
+    globalThis.matchMedia = () => ({ matches: false });
+    let panel;
+    try {
+        const { GameplaySession } = loadDOMSource('../src/gameplay-lab/GameplaySession.ts');
+        const { ExpeditionPanel } = loadDOMSource('../src/fjord-play/ExpeditionPanel.ts');
+        const session = new GameplaySession();
+        session.loadJSON(core.serializeState(prepared()));
+        session.bindPhysicalWorld(world, context.worldId, undefined, () => context.longshipOrigins);
+        const workspace = document.querySelector('#fjord-workspace');
+        panel = new ExpeditionPanel(document.querySelector('#panel'), session,
+            action => { session.command(action); panel.committed(action); }, () => {}, () => ({}),
+            { showMap() {}, showGroups() { workspace.hidden = false; }, focus() {}, toggleClock() {} });
+        panel.openGroup('group-1');
+        assert.equal(document.querySelector('[data-disband]'), null);
+        session.command({ type: 'CancelExpedition', groupId: 'group-1' });
+        panel.openGroup('group-1');
+        const disband = document.querySelector('[data-disband="group-1"]');
+        assert.ok(disband);
+        const missions = structuredClone(session.readSnapshot().world.spatial.missions);
+        disband.click();
+        assert.equal(session.readSnapshot().world.groups['group-1'], undefined);
+        assert.deepEqual(session.readSnapshot().world.spatial.missions, missions);
+        assert.equal(document.querySelector('[data-expedition-group="group-1"]'), null);
+        document.querySelector('#expedition-create').click();
+        assert.ok(session.readSnapshot().world.groups['group-2']);
+    } finally {
+        panel?.dispose(); dom.window.close();
+        for (const key of globals) {
+            if (previous[key] === undefined) delete globalThis[key]; else globalThis[key] = previous[key];
+        }
+    }
+});

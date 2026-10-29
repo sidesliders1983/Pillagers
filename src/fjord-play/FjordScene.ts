@@ -760,7 +760,14 @@ export function createFjordScene(options: {
                     const secondsPerTick = session.effectiveMinutesPerWinter * 60 / state.ticksPerWinter;
                     layer!.prepareMining(state, campaign.blueprint, host.tickIntervalSeconds,
                         (x,z,natural)=>miningLayer.heightAt(x,z,natural), secondsPerTick);
-                    layer!.prepareExpeditions(state, campaign.blueprint, host.tickIntervalSeconds, secondsPerTick);
+                    layer!.prepareExpeditions(state, campaign.blueprint, host.tickIntervalSeconds, secondsPerTick, {
+                        known: (x, z) => !knownTerrain || discoveryAt(knownTerrain, x, z) !== 'unknown',
+                        plots: [
+                            ...[...view.entities, ...view.rival.entities].flatMap(entity => entity.plot ? [entity.plot] : []),
+                            { ...view.campfire.transform, halfWidth: view.campfire.obstacleRadius,
+                                halfDepth: view.campfire.obstacleRadius },
+                        ],
+                    });
                     const prepareEntities = () => layer!.sync(view.entities, host.loading ? yieldForInput : undefined, current,
                         view.livestockDeaths, host.loading ? (completed, total, entity, started) => {
                             host.loading?.units('characters', completed, total, 'settlement models');

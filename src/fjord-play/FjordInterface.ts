@@ -3,7 +3,7 @@ import { gatheringOffer, weddingCandidates } from '../simulation/SimulationCore'
 import { renderGatheringCard, renderGatheringReview, type GatheringChoice, type GatheringOffer } from './CulturalGatheringView';
 import { renderSmithery } from './SmitheryView';
 import { craftingOccupation, type EquipmentItem } from '../simulation/Smithery';
-import { applyCommand, inspectWork, inspectCattle, inspectLivestock, occupationAptitude, occupationIds, availableOccupationIds, personaAge, landingSummary } from '../simulation/SimulationCore';
+import { applyCommand, inspectWork, inspectCattle, inspectLivestock, occupationAptitude, occupationIds, availableOccupationIds, personaAge, personaAway, landingSummary } from '../simulation/SimulationCore';
 import { renderLivestockBreeding, slaughterBreedingWarning } from '../play/LivestockBreedingView';
 import type { Occupation, SimulationCommand, SimulationState } from '../simulation/SimulationCore';
 import type { SharedSettlement, SettlementSelection } from '../play/SharedSettlement';
@@ -237,7 +237,7 @@ export class FjordInterface {
                 const yard = house && state.landing ? landingSummary(state).farmyards.find(y => y.id === buildingId) : null;
                 html = this.heading(house ? 'Home' : home ? 'Tent' : 'Building',
                     `${buildingId ?? selection.id} · ` + (house ? 'Permanent home' + (yard ? ' · Active farmyard' : '') : home ? 'Household in a tent' : 'Vacant building'), house ? 'home' : 'tent') +
-                    `<div class="fjord-card-body">${home ? `<section class="fjord-home-residents" aria-label="Residents" data-view-key="home-residents:${esc(home.id)}"><div class="fjord-home-residents-heading"><span title="${esc(housingName(state, 'household', home.id))}">${esc(housingName(state, 'household', home.id))}</span><small>Residents · ${home.memberIds.length}</small></div>${home.memberIds.map(id => `<div class="fjord-member">${this.link('persona', id, state.personas[id].name)}<small>${esc(occupationLabel(state.personas[id].occupation))}</small></div>`).join('')}</section>` : '<p class="fjord-caption">Vacant home</p>'}
+                    `<div class="fjord-card-body">${home ? `<section class="fjord-home-residents" aria-label="Residents" data-view-key="home-residents:${esc(home.id)}"><div class="fjord-home-residents-heading"><span title="${esc(housingName(state, 'household', home.id))}">${esc(housingName(state, 'household', home.id))}</span><small>Residents · ${home.memberIds.length}</small></div>${home.memberIds.map(id => `<div class="fjord-member">${this.link('persona', id, `${state.personas[id].name} (${personaAge(state, id)})`)}<small>${esc(occupationLabel(state.personas[id].occupation))}</small></div>`).join('')}</section>` : '<p class="fjord-caption">Vacant home</p>'}
                     ${house && (!isMobileLayout() || this.expanded) ? this.improvements(state, buildingId!) : ''}
                     ${house && isMobileLayout() && !this.expanded ? `<p>${esc(state.buildings[buildingId!].specialization ? workLabel(state.buildings[buildingId!].specialization!) : 'Unspecialized')} · Level ${homeLevel(homeImprovements(state, buildingId!).upgradeLevel)}</p>` : ''}
                     ${yard ? `<p>${yard.occupants} livestock · space ${yard.occupancy}/${yard.capacity} · overcrowding ${yard.overcrowding}</p>` : ''}
@@ -322,7 +322,8 @@ export class FjordInterface {
         if (!appearance) return undefined;
         const person = state.personas[id] ?? state.personaArchive![id];
         return { residentId: id, ...appearance, presentation: fjordWardrobePresentation({ kind: 'persona',
-            dna: appearance.dna, status: { living: person.deathWinter === null, occupation: person.occupation } }),
+            dna: appearance.dna, status: { living: person.deathWinter === null, occupation: person.occupation,
+                expedition: state.personas[id] && personaAway(state, id) ? 'away' : undefined } }),
             pixelRatio: presentationProfiles[this.owner.presentation?.quality ?? 'low'].maximumPixelRatio };
     }
 
@@ -745,7 +746,7 @@ export class FjordInterface {
         } else if (this.surface === 'settlement') {
             const kinds = { persona: 'Residents', household: 'Homes', cattle: 'Livestock', longship: 'Vehicles' };
             const records = this.directory === 'persona' ? Object.values({ ...state.personaArchive, ...state.personas }).map(p =>
-                ({ id: p.id, label: p.name, detail: state.personas[p.id] ? occupationLabel(p.occupation) + (p.deathWinter !== null ? ' · deceased' : '') : 'Historical record' })) :
+                ({ id: p.id, label: `${p.name} (${personaAge(state, p.id)})`, detail: state.personas[p.id] ? occupationLabel(p.occupation) + (p.deathWinter !== null ? ' · deceased' : '') : 'Historical record' })) :
                 this.directory === 'household' ? Object.values(state.households).map(h => ({ id: h.id, label: housingName(state, 'household', h.id),
                     detail: h.residenceId && state.residences[h.residenceId]?.kind === 'house' ? 'Permanent home' : 'Tent' })) :
                 this.directory === 'cattle' ? Object.values({ ...state.landing?.cattleArchive, ...state.landing?.cattle }).map(c => {

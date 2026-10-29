@@ -154,3 +154,27 @@ test('underage residents and active caregivers cannot join an expedition group',
  assert.throws(()=>core.applyCommand(state,{type:'CreateExpeditionGroup',name:'Providing care',memberIds:[motherId]}),/eligible/i);
  assert.equal(core.inspectWorld(state).eligible.some(p=>p.id===childId||p.id===motherId),false);
 });
+
+
+test('returned legacy crews disband with validated historical receipts and no reused group ID', () => {
+    let { state } = scout(peaceful());
+    const history = structuredClone(state.world.missions);
+    state = core.applyCommand(state, { type: 'DisbandExpeditionGroup', groupId: 'group-1' });
+    assert.deepEqual(state.world.groups, {});
+    assert.deepEqual(state.world.missions, history);
+    assert.deepEqual(core.reconstructState(core.serializeState(state)), state);
+    const next = core.applyCommand(state, { type: 'CreateExpeditionGroup', name: 'New scouts',
+        memberIds: ['founder-1'] });
+    assert.ok(next.world.groups['group-2']);
+    for (const corrupt of [
+        s => { delete s.world.groupArchive; },
+        s => { s.world.groupArchive.groups['group-1'].eventId = 'event-1'; },
+        s => { s.world.groupArchive.groups['group-1'].group.name = 'Rewritten'; },
+        s => { s.world.groupArchive.groups['group-1'].group.memberIds = ['founder-2']; },
+        s => { s.world.groupArchive.groups['group-1'].disbandedAt = -1; },
+    ]) {
+        const invalid = structuredClone(state);
+        corrupt(invalid);
+        assert.throws(() => core.reconstructState(JSON.stringify(invalid)), /expedition|archive/i);
+    }
+});

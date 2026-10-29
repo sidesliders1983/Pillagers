@@ -301,7 +301,7 @@ export function applyCommand(input: SimulationState, command: SimulationCommand,
         validateState(state);
         return state;
     }
-    if(['CreateExpeditionGroup','EditExpeditionGroup','DispatchExpedition'].includes(command.type)){const state=structuredClone(input);applyExpeditionCommand(state,command as ExpeditionCommand);validateState(state);return state;}
+    if(['CreateExpeditionGroup','EditExpeditionGroup','DisbandExpeditionGroup','DispatchExpedition'].includes(command.type)){const state=structuredClone(input);applyExpeditionCommand(state,command as ExpeditionCommand);validateState(state);return state;}
     if(isLandingCommand(command)){const state=structuredClone(input);applyLandingCommand(state,command as LandingCommand);reconcileFarmyards(state,farmyards(input).map(f=>f.id));validateState(state);return state;}
     if(isMechanicsCommand(command)){const state=structuredClone(input);applyMechanicsCommand(state,command as MechanicsCommand);reconcileFarmyards(state,farmyards(input).map(f=>f.id));validateState(state);return state;}
     if (command.type === 'AssignOccupation') {
