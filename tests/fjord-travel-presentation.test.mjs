@@ -20,7 +20,7 @@ const models = {
         return root;
     },
     async reconcile() {}, boundsShape: () => 'fixed', pace: () => 1,
-    animate(model, clip) { model.userData.testClip = clip; },
+    animate(model, clip, speed) { model.userData.testClip = clip; model.userData.testSpeed = speed; },
     release(root) {
         root.traverse(node => { node.geometry?.dispose(); node.material?.dispose(); });
         return true;
@@ -101,8 +101,14 @@ test('arrived expedition members settle beside one another on known safe land wi
         await refresh();
         const before = core.serializeState(state);
         for (let i = 0; i < 45; i++) {
+            const previous = positions();
             layer.advance(emptyMotion, .1, true);
-            for (const p of positions()) {
+            for (const [index, p] of positions().entries()) {
+                const actor = layer.root.getObjectByName('persona:founder-' + (index + 1));
+                const speed = p.distanceTo(previous[index]) / .1;
+                if (actor.userData.testClip === 'Walk' && speed > 1.5)
+                    assert.ok(Math.abs(actor.userData.testSpeed - speed) < .01,
+                        'Step-aside animation follows the actual walking speed');
                 assert.ok(p.x <= 217, 'Standing slots cannot enter unexplored ground');
                 assert.ok(Math.hypot(p.x - 216, p.z - 65.6) >= .9, 'A tree keeps its body clearance');
                 assert.ok(Math.hypot(p.x - 216, p.z - 64) <= 5, 'Spacing stays local to the reached goal');

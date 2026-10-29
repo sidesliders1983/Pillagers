@@ -1,4 +1,4 @@
-import { ExpeditionStanding, type ExpeditionStandingGround } from './ExpeditionStanding';
+import { ExpeditionStanding, expeditionStandingSpeed, type ExpeditionStandingGround } from './ExpeditionStanding';
 import { miningWorkerPosition, type MiningWorker } from '../simulation/Mining';
 import { spatialMemberPosition, type SpatialMission } from '../simulation/SpatialExpeditions';
 import type { SimulationState } from '../simulation/SimulationCore';
@@ -600,7 +600,7 @@ export class FjordEntities {
                     entry.model.rotation.set(0, pose.rotation, 0);
                 }
                 this.models.animate(entry.model, pose?.steppingAside ? 'Walk' : !facts.aboardShip && pose?.moving ? 'Run' : 'Idle',
-                    this.models.pace(entry.model, 'Run'), running ? delta : 0);
+                    pose?.steppingAside ? expeditionStandingSpeed : this.models.pace(entry.model, 'Run'), running ? delta : 0);
             }
         }
         for (const agent of motion.inspect()) {

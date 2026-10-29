@@ -6,6 +6,7 @@ export interface ExpeditionStandingGround {
     known?: (x: number, z: number) => boolean;
     plots?: readonly FjordPlot[];
 }
+export const expeditionStandingSpeed = 1.6;
 type Offset = Point2 & { moving: boolean; rotation?: number };
 
 /** Small render-only steps around an already reached destination. Core still owns the journey. */
@@ -78,7 +79,7 @@ export class ExpeditionStanding {
             const goal = arrived ? goals?.get(id) ?? anchor : anchor;
             const tx = goal.x - anchor.x, tz = goal.z - anchor.z;
             const distance = Math.hypot(tx - offset.x, tz - offset.z);
-            const step = Math.min(distance, delta * 1.6), fraction = distance ? step / distance : 0;
+            const step = Math.min(distance, delta * expeditionStandingSpeed), fraction = distance ? step / distance : 0;
             const next = { x: offset.x + (tx - offset.x) * fraction,
                 z: offset.z + (tz - offset.z) * fraction };
             const from = { x: anchor.x + offset.x, z: anchor.z + offset.z };
