@@ -1,13 +1,17 @@
 # FjordSide alpha player experience audit — #297
 
-Version 0.1 · 29 October 2026 · source inventory and proposed information architecture.
+Version 0.2 · 29 October 2026 · source inventory and proposed information architecture.
 Parent: [#296](https://github.com/sidesliders1983/Pillagers/issues/296).
 
-**Status: source-inventory phase complete; current-build browser and device journeys
-are not performed.** The owner explicitly chose “Werk eerst de broninventaris uit”
-when browser use was unavailable. This report does not close #297, authorize #298
-implementation or certify external-player readiness. No player UI, Core, RNG,
-Lore, save, runtime asset, dependency or gameplay behavior changed in this branch.
+**Status: source inventory revised after owner review; five real journey attempts
+and a narrow Horizon-layout check recorded.** The owner initially chose source
+inventory first, then enabled the browser and requested journey/empathy maps before
+implementation, using the prototype skill. See the [observed journeys and empathy
+maps](alpha-297/journey-empathy-maps.md). These are informed-agent attempts, not
+uncoached player research or physical-device approval. C ended in a blocked-route
+return; the discovery goal remains incomplete. #297 remains open for the gaps
+listed below. No player UI, Core, RNG, Lore, save format, runtime asset, dependency
+or gameplay behavior changed in this branch.
 
 ## Scope and evidence
 
@@ -23,14 +27,15 @@ justification, handler, implementation owner, source commit and file hash.
 | Pinned source | `main` / `4086baac26c6953b879b439546b68f2406ca767a` | Exact source inspected; a separate documentation-only branch starts here. |
 | Published identity | `https://pillagers-test.sidesliders.chatgpt.site/site-version.json` reports the same main commit, routes `/` and `/fjord-play` | HTTP metadata observation. It does not independently prove every deployed asset matches source or that a UI journey works. |
 | Workspace | `D:/CodexSites/Pillagers/scratch/ui-audit-297`, branch `codex/ui-audit-297` | Isolated from the unmerged marine/recording branch and its LAN playtest. |
-| Browser | Local browser use disabled in Work settings; browser inventory empty | No current screenshots, viewports, click counts or device observations were captured. Owner deferred this phase. |
+| Browser | Owner subsequently enabled the Windows in-app browser; isolated origin `http://127.0.0.1:5192/fjord-play` | Actual screenshots and agent journeys at requested 1440×900 and 390×844; 852×393 start-layout check. Narrow Horizon layout with mouse automation, not physical touch or coarse-pointer emulation. |
+| Served source | Fresh Vite build of the preserved Sites export for pinned main; 1,854 inputs compared | 1,853 match main content; only `src/main.ts` has the existing Sites entry-route transform (root opens Fjord; labs omitted). `/fjord-play` modules are unchanged. [Build identity](alpha-297/runtime/build-identity.json) records this difference and output hashes. No whole-live-site parity claim. |
 | Historical patterns | Merged [PR #192](https://github.com/sidesliders1983/Pillagers/pull/192), [Horizon report](../qa/mobile-horizon-182/README.md), [integrated report](../qa/integrated-playtest-180/README.md) | Existing Context & Focus/Horizon intent and historical evidence only; not current-build validation. |
 | Proposals | Four [annotated wireframes](alpha-297/wireframes/README.md) | Proposed navigation structure, explicitly not game screenshots or implemented controls. |
 
 Source hashes and the observed public version document are retained in the
 [source manifest](alpha-297/source-manifest.json). Evidence labels used below:
 **S** = source-confirmed; **H** = historical evidence; **P** = proposal/hypothesis;
-**U** = unverified current runtime/device behavior. No usability score is invented.
+**R** = observed in this agent browser audit; **U** = unverified behavior. No usability score, participant quote, emotion score or independent player result is invented.
 
 ## Start menu — current structure before the proposal
 
@@ -62,15 +67,17 @@ Start
 ├─ Continue                                 [only when a valid save exists]
 │  └─ useful campaign/date summary; source/seed under details
 ├─ New game
-│  ├─ New arrival                            [new people and seed; validated island pool]
-│  ├─ Replay original founding               [same founders/island; eligible saves only]
+│  ├─ New arrival                            [new people/seed; island can repeat]
+│  ├─ Replay original founding               [eligible saves only]
 │  └─ Advanced: seed / existing generation options
 ├─ Load game / file                          [existing recovery/import owner]
-├─ Settings                                 [ordinary sound / display preferences]
-├─ Help & credits
-└─ Support & diagnostics                     [deliberately opened, secondary]
-   ├─ Performance overlay
-   └─ Run loading test → result / download / retry / normal-play exit
+├─ Settings                                 [ordinary sound/display; graphics where supported]
+├─ Help & support
+│  ├─ How to play / Controls / Problem help
+│  └─ Diagnostics                            [explicitly opened secondary section]
+│     ├─ Performance overlay preferences     [available before starting]
+│     └─ Loading test → result / report export / retry / normal-play exit
+└─ About / Credits                           [quiet link or help subentry]
 ```
 
 New game must not promise a unique new island: a new seed can select the same
@@ -114,37 +121,49 @@ Two important handler distinctions are confirmed in source:
 
 - The ordinary navigation Clan Book button forwards to the existing reader opener.
   That is a shared destination, not evidence of two books.
-- The game-menu Expedition groups button opens management, clears selection and
-  refreshes `ExpeditionPanel`. The established Expeditions navigation opens
-  `FjordInterface`. These are different routes/state transitions. #298 must inventory
-  parity before choosing one primary path; merely hiding one button is insufficient.
+- The game-menu Expedition groups handler closes the hamburger, calls
+  `showManagement(true)`, `shared.select(null)`, `refresh()`, `expeditions.refresh()`,
+  **then `desktopUI?.open('expeditions')`**. Established navigation calls
+  `FjordInterface.open` directly. These entry paths converge on the same interface
+  with different preceding state transitions; they are not proven separate final
+  screens. #298 must determine which side effects are required, then consolidate
+  the opening path while preserving capabilities and selection expectations.
 
 ### Proposed game-menu structure — owner review, not implemented
 
 ```text
 Game menu                                   [Close / Escape; no implicit clock resume]
 ├─ Save game
-│  ├─ Save on this device                    [existing browser-local checkpoint]
-│  └─ Download campaign file                 [existing Fjord export; coordinate #284]
+│  ├─ Save on this device                    [browser-local checkpoint]
+│  └─ Download campaign file                 [Fjord export; coordinate #284]
 ├─ Load game
 │  ├─ Saved on this device
 │  └─ Campaign file                          [validation, backup and explicit intent]
-├─ New game / Replay…                        [replacement review, not live settings]
 ├─ Settings
 │  ├─ Graphics: Quality / HDR / local effects
 │  ├─ Sound: enable/mute / master / groups
-│  └─ Display: keep screen awake; existing reduced-motion explanation
-├─ Controls & help                           [camera views; existing Need help? entry]
-├─ Time                                     [mobile +1 Year when needed]
-├─ Help & credits
-└─ Support & diagnostics
-   ├─ Performance overlay / last loading report
-   └─ Advanced developer data: Core JSON / lifecycle recovery
+│  └─ Display: keep awake / reduced-motion explanation
+├─ Help & support
+│  ├─ How to play / Controls / camera shortcuts / Problem help
+│  ├─ About / Credits                        [quiet subentry or footer link]
+│  └─ Diagnostics                            [explicitly opened secondary section]
+│     ├─ Performance overlay / last loading report
+│     └─ Developer data: Core JSON / lifecycle recovery
+├─ Give feedback                             [CONDITIONAL: no URL configured; do not ship yet]
+├─ +1 Year                                   [Horizon overflow ONLY; not desktop]
+├─ ── New campaign ──                        [separate lower replacement section]
+│  └─ New game / Replay…                     [existing safeguards preserved]
+└─ Return to start                           [CONDITIONAL: safe handoff not implemented]
 ```
 
 Keep primary Settlement, Expeditions, Clan Book, Map/Home and Attention in their
 established Context & Focus/Horizon places. No new six-button hub is proposed.
-`+1 Year` remains a real time action and keeps its expedition restriction.
+**One responsive time rule:** desktop keeps Play/Pause, pace and `+1 Year`
+together in the existing World & Time header, with no extra Time submenu. Horizon
+keeps compact Play/Pace in the header and the existing direct `+1 Year` overflow
+row in the hamburger, because header width is constrained. The wireframes show
+that row as mobile-only. No second Time flow is proposed; preserve its expedition
+restriction and current eligibility. Verify coarse-pointer landscape separately.
 Generation weather/exploration inputs belong with the campaign they create,
 not beside settings that immediately change the currently running scene.
 
@@ -179,14 +198,17 @@ Neither proposal is represented as already available.
 | World & Time | Header Play/Pause, year pace, +1 Year; IslandMap and Return Home/camera controls. | Camera shortcuts in game menu are optional secondary access. Keep #194 owner/contracts; #298 owns their menu grouping. |
 | Settlement | Settlement directory, resource counters, resident/home/livestock selection; work/build/upgrade context. | No new global management hub. Existing `FjordInterface`, work offers and command review remain. |
 | People & Legacy | Resident card → Personal details/relatives/history; Clan Book → Family Tree. | Reuse #198/#287 and current identity/history; do not invent Health/Mood or new family state. |
-| Exploration | Established Expeditions navigation → group/crew/eligibility/pack → real destination order and return. | Legacy game-menu management route differs. #298 owns entry consolidation; #299 cannot independently redesign these menus. |
+| Exploration | Established Expeditions navigation → group/crew/eligibility/pack → real destination order and return. | Hamburger route reaches the same interface after extra state changes. #298 owns entry consolidation; #299 cannot independently redesign these menus. |
 | Chronicle & Events | Attention/Activity Center plus Clan Book Story/Family/Wildlife and real event links. | Menu Clan Book duplicates access to the same reader; preserve event and witness deep links (#216/#287). |
 | Game & Support | Entry choices; browser/file save routes; ordinary settings; deliberate diagnostic tools. | #298 owns both menus and immediate destinations; #284 owns portable-save completeness; #260 diagnostics stays available. |
 
-## Five journey maps — source traces, not completed attempts
+## Five journey maps — source baseline and observed attempts
 
-No clicks/taps or completion times are reported. The following are reproducible
-candidate routes for the browser phase, with actual outcomes explicitly U.
+The table below preserves the original source-derived expectations. Current
+[observed journey/empathy maps](alpha-297/journey-empathy-maps.md) add actual actions,
+results, evidence, friction and exit/recovery. U entries below still name the
+original questions, not new claims that the recorded attempts were never run.
+No completion times are inferred from automation/file-transfer delays.
 
 | Journey | Entry → source-derived steps | Decision/context and expected canonical result | Exit/recovery and pending observation |
 | --- | --- | --- | --- |
@@ -202,13 +224,14 @@ candidate routes for the browser phase, with actual outcomes explicitly U.
 | --- | --- | --- | --- |
 | A01 · P1 candidate | S: entry appends the performance selector/audio controls and offers Run loading diagnostics in normal mode. | A; #298 | The mixed starting hierarchy is source-confirmed. How strongly it impedes unfamiliar players is P/U, not measured. |
 | A02 · P1 candidate | S: game Campaign mixes checkpoint/file operations, Core export, generation options and replacement actions. | E/A; #298 with #284 | Task-placement confusion is a supported design hypothesis. Keep legitimate seed/year capabilities. |
-| A03 · P1 candidate | S: two expedition entries invoke different owners and one clears selection. | C; #298 | Genuine handler divergence; ability/visibility parity and player impact still U. #299 must not redesign the same menu. |
+| A03 · P1 candidate | S: two expedition entries converge on `FjordInterface.open`; the hamburger first opens management, clears selection and refreshes state/panel. | C; #298 | Different opening side effects; shared destination. #298 must establish required behavior and consistent selection expectations, not preserve redundant flows. #299 must not redesign the same menu. |
 | A04 · P1 dependency | S: no configured Give feedback route found in inspected player shell. | E; #298 / owner | Missing inspected configuration; do not invent a URL, destination or live collection claim. |
 | A05 · P2 candidate | S: New scenario and raw seed/source/geography terminology coexist with ordinary actions; geography summary hardcodes validated set v1 while recipe v3 is current. | A/E; #298 | Rename/reclassify after checking context; a new seed is not a unique-island guarantee. |
 | A06 · P2 candidate | S: game-menu generation weather/founder inputs have different new/replay/legacy branches. | A/E; #298 | Exact option semantics need a scenario matrix before moving/relabeling; no live weather toggle is proven. |
 | A07 · already delivered, retest U | S/H: loading diagnostics disclosure is hidden in ordinary loading; performance overlay defaults Off absent opt-in; diagnostics, onboarding, map and Family Tree owners already exist. | A/D; #151/#259/#260/#263/#194/#287 | Do not reopen accepted loading optimization or build a second tutorial/map/book. |
-| A08 · P0 not reproduced | No new crash, save loss, failed essential journey or inability to enter is reproduced by this source-only phase. | All; #151 if a new blocker is reproduced | This is not evidence that no P0 exists. Technical and device acceptance remain U. |
-| A09 · not verified | Current desktop/touch layout, hit targets, scrolling/focus, manual-pause preservation, click-through and all five actual journeys. | #297 browser phase; later #300 | No runtime screenshot, successful tap count or physical-device result is claimed. |
+| A08 · P0 not reproduced | No new crash, save loss or inability to enter was reproduced in these recorded attempts; C ended in a route-blocked return and successful discovery remains open. | All; #151 if a new blocker is reproduced | This is not evidence that no P0 exists. Technical and device acceptance remain U. |
+| A09 · partially observed | R: desktop/narrow layouts, normal/technical entry, work, family, save/local load/file import and Escape pause behavior. U: physical touch, coarse landscape, full keyboard/hit-target sweep, successful discovery and failure recovery. | #297 browser phase; later #300 | Actual screenshots and agent actions are recorded; no physical-device, uncoached-player or touch-gesture result is claimed. |
+| R01 · P1 candidate | R: after paying 8 Food for one person, an accepted land order returned with `outward-route-blocked`; the later summary said `Completed`. [Evidence](alpha-297/runtime/11-expedition-return-reason.jpg). | C; #299, navigation/explanation only | Show the actual outcome and actionable next step consistently; do not alter navigation physics or refund/balance rules in this audit. One observed case, not a measured prevalence. |
 
 ## Boundary for follow-up work
 
@@ -219,18 +242,19 @@ replacement protection. Keep current diagnostics deliberately reachable and real
 recovery warnings visible. Do not move every technically named control into a
 hidden developer bucket by default.
 
-**#299 has no selected implementation items yet.** Its required top-three ranking
-must come from current runtime observations. Candidates to inspect after the menu
-audit are: (1) work/build quote → consequence → return; (2) expedition quote/flag →
-discovery/return handoff; (3) resident → family/history → return orientation.
-These are checks, not claims of failures or permission for three speculative fixes.
-The start/menu duplication in A03 stays with #298.
+**#299 receives one observed non-menu candidate:** route-blocked return and
+contradictory/technical outcome wording (R01). The field attempt is recorded in
+Journey C; no successful discovery is claimed. Confirm repeatability and the
+explanation owner before implementation; do not change simulation pathfinding to
+make the UI test pass. Work assignment and Family Tree return succeeded in this
+sample. There is no evidence here to invent two further repairs merely to reach
+three. Menu hierarchy, support placement and opening-route parity stay with #298.
 
 **#300** still owns uncoached unfamiliar-player evidence and the final external-alpha
 Go/Conditional/No-Go gate. Source review and a code/documentation merge do not
 establish concept desirability or device readiness.
 
-## Deferred runtime protocol and completion checklist
+## Runtime protocol and remaining completion checklist
 
 Use a fresh isolated test origin or protect/export an existing campaign before
 replacement. Pin the exact compiled source and served version separately; preserve
@@ -252,10 +276,13 @@ friction on the pinned build; preserve historical reports as historical.
 - [x] Provide annotated structures, desktop/mobile proposal wireframes and six-cluster overlap map.
 - [x] Trace five candidate journeys without invented click counts/outcomes.
 - [x] Identify menu ownership and explicit #284/#299/#300 boundaries.
-- [ ] Revalidate visibility/actions on current normal and technical served states.
-- [ ] Capture current screenshots/video and actual desktop/touch journeys.
-- [ ] Rank up to three non-menu problems for #299 from observed failures.
+- [x] Revalidate normal start/game-menu visibility and deliberately enabled technical entry states; full loading-test execution remains U.
+- [x] Capture current screenshots and five agent journey attempts, including narrow Horizon layout.
+- [ ] Observe successful discovery/return, physical touch/coarse landscape and invalid-file/storage recovery.
+- [x] Propose one observed non-menu candidate for #299; no forced top-three list.
 - [ ] Complete #297 acceptance and any subsequent owner implementation decision.
 
-The scope of this revision ends at the owner-requested source inventory. It is a
-documentation-only draft for review, with runtime work deliberately deferred.
+This revision remains an audit-only draft. The [review response](alpha-297/review-response.md)
+links each requested correction to the artifact. A separate throwaway navigation
+prototype explores the proposed flow; it is not an implemented game menu. Owner
+review and the remaining observations precede any #298/#299 production change.

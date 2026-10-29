@@ -1,7 +1,7 @@
 {
-  "version": 1,
+  "version": 2,
   "created_utc": "2026-10-29T15:17:31.356099+00:00",
-  "phase": "source inventory; runtime deferred at owner request",
+  "phase": "review-revised source inventory plus observed agent journeys and empathy hypotheses; no UI implementation",
   "issue": 297,
   "epic": 296,
   "source_commit": "4086baac26c6953b879b439546b68f2406ca767a",
@@ -21,25 +21,39 @@
     ]
   },
   "live_ui_status": "unverified: metadata read only; no fresh asset-parity or browser journey claim",
-  "browser_error": "Local browser use is disabled in Work settings",
   "owner_scope_reply": "Werk eerst de broninventaris uit",
   "desktop_runtime": {
-    "status": "not run",
-    "viewport": null,
-    "screenshots": []
+    "status": "observed agent attempts A-E; C discovery goal incomplete",
+    "viewport_requested": {
+      "width": 1440,
+      "height": 900
+    },
+    "platform": "Windows host / ChatGPT in-app browser",
+    "browser_version": null,
+    "dpr": null,
+    "screenshots": "runtime/evidence-manifest.json"
   },
   "touch_runtime": {
-    "status": "not run",
-    "viewport": null,
-    "emulation": null,
+    "status": "narrow Horizon layout observed using mouse/keyboard; no actual touch",
+    "viewport_requested": {
+      "width": 390,
+      "height": 844
+    },
+    "document_content_width_observed": 375,
+    "landscape_start_viewport_requested": {
+      "width": 852,
+      "height": 393
+    },
+    "emulation": "viewport only; no touch or coarse-pointer override",
     "physical_device": null,
-    "screenshots": []
+    "screenshots": "runtime/evidence-manifest.json"
   },
   "evidence_legend": {
     "S": "source-confirmed",
     "H": "historical only",
     "P": "proposal/hypothesis",
-    "U": "current runtime unverified"
+    "U": "current runtime unverified",
+    "R": "observed agent browser action; not independent-player evidence"
   },
   "source_hash_note": "git_blob identifies canonical repository content; sha256_local_bytes includes current checkout line endings",
   "sources": [
@@ -182,52 +196,62 @@
   "proposals": [
     {
       "path": "docs/ux/alpha-297/wireframes/game-desktop.png",
-      "sha256": "c00a9377311b0fb59638a5ff0f2f66285e80cf23c0f5478ae499a9ab96f80476",
+      "sha256": "809a7a144c1414efaca4da482fe26d1366814f4ea3a97792bfb0e293a50e212c",
       "kind": "proposed information architecture; not runtime evidence"
     },
     {
       "path": "docs/ux/alpha-297/wireframes/game-desktop.svg",
-      "sha256": "5dbe2bda08bdb04aa22db0a8eac9ed430a64d8cf818b0beeda5414f8d5b40cfc",
+      "sha256": "7509f2dfa3304575e2fbd8ee0741715b6b86551b3dab73b13a515de3ecba2ff5",
       "kind": "proposed information architecture; not runtime evidence",
       "width": 1280,
       "height": 800
     },
     {
       "path": "docs/ux/alpha-297/wireframes/game-mobile-landscape.png",
-      "sha256": "0b3c3936074468c4414290e3704f0f1329f1b3a1302c41dce12a33e79679979f",
+      "sha256": "b949d6cad5441a4793466dd56c987a512c2a83165e10915fa4db0b122cd69124",
       "kind": "proposed information architecture; not runtime evidence"
     },
     {
       "path": "docs/ux/alpha-297/wireframes/game-mobile-landscape.svg",
-      "sha256": "bfbf1644ded8637800b7c66f21a18d7a74987345309cbcb2740b552c83c3b8b9",
+      "sha256": "eab66f14277d6a0dfbceba01fc5d398086bd8cc7cb530bdc5d0b1e4220f433ce",
       "kind": "proposed information architecture; not runtime evidence",
       "width": 852,
       "height": 393
     },
     {
       "path": "docs/ux/alpha-297/wireframes/start-desktop.png",
-      "sha256": "245ce8d026d00b3600bd824c358b7f060441529642d01f3fbad6da53b25eb039",
+      "sha256": "9dadd7f6dd10d8d337f3598ca1636675fc6f770d0e907ffba7c96c18c47b8442",
       "kind": "proposed information architecture; not runtime evidence"
     },
     {
       "path": "docs/ux/alpha-297/wireframes/start-desktop.svg",
-      "sha256": "1b8bee00547f94892fcc5996f286156282ac54252666dd26286810f952903836",
+      "sha256": "5b6bd42a408daae010603e5be62b3940fe2017772c2fe70b06ef1f8d7bbb5888",
       "kind": "proposed information architecture; not runtime evidence",
       "width": 1280,
       "height": 800
     },
     {
       "path": "docs/ux/alpha-297/wireframes/start-mobile-landscape.png",
-      "sha256": "4e6f14f13be78db8ac7da3d3b9e1422b7274d108809de96a1283a0750de243ab",
+      "sha256": "3917e381d2d782373ed8df54e4fa4842d8bf45f39fe3137be940b62ad5490005",
       "kind": "proposed information architecture; not runtime evidence"
     },
     {
       "path": "docs/ux/alpha-297/wireframes/start-mobile-landscape.svg",
-      "sha256": "70e44487622f14ecce5dc6dfc352083fa551ad031a2f279497f51597e573110f",
+      "sha256": "3d0b8944672a20bd407988ae059c8ae92694d73472b1c8d74e38e5ce89b6116c",
       "kind": "proposed information architecture; not runtime evidence",
       "width": 852,
       "height": 393
     }
   ],
-  "inventory_items": 67
+  "inventory_items": 67,
+  "updated_utc": "2026-10-29T16:44:10.802067+00:00",
+  "initial_browser_error": "Local browser use is disabled in Work settings",
+  "browser_error": null,
+  "owner_followup_scope": "Browser enabled; journey/empathy maps before implementation; prototype skill explicitly requested.",
+  "review_addressed": "https://github.com/sidesliders1983/Pillagers/pull/312#issuecomment-6501157589",
+  "prototype": {
+    "branch": "codex/prototype-menu-flow-297",
+    "commit": "17ee56fcdb00df6b858d8c67994a58306d5e3f0a",
+    "status": "throwaway model manually traversed; owner review pending; not merged into audit/game"
+  }
 }

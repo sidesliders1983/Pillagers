@@ -7,9 +7,9 @@
   "required_fields": "passed",
   "source_hashes": "passed",
   "runtime_files_changed": false,
-  "visual_review": "four rendered proposal wireframes inspected; no current game screenshots",
-  "browser_and_device_tests": "not run; owner explicitly deferred",
-  "runtime_build_and_tests": "not rerun for documentation-only change; no new runtime success claim",
+  "visual_review": "four revised wireframes and key real/prototype screenshots inspected",
+  "browser_and_device_tests": "A-E actual agent attempts; C blocked-route return, no successful discovery; narrow Horizon with mouse/keyboard only; physical device not tested",
+  "runtime_build_and_tests": "fresh Vite production build of preserved main Sites export passed (existing large-chunk warning); 1854 inputs compared; only existing src/main.ts route transform differs; runtime unit tests not rerun for docs",
   "header_menu_control_ids_covered": [
     "clan-book-open",
     "fjord-expeditions-open",
@@ -33,5 +33,9 @@
     "fjord-new",
     "fjord-restart"
   ],
-  "missing_header_menu_controls": []
+  "missing_header_menu_controls": [],
+  "proposal_hashes": "passed",
+  "runtime_evidence_hashes": "passed",
+  "prototype": "four guided model walkthroughs manually traversed; separate throwaway branch; no automated tests or production adoption",
+  "review_comment": "https://github.com/sidesliders1983/Pillagers/pull/312#issuecomment-6501157589"
 }

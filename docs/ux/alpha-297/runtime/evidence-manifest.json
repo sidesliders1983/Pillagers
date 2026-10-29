@@ -1,0 +1,390 @@
+[
+  {
+    "path": "01-start-desktop.jpg",
+    "sha256": "1f8ae236d496b92d89bb2b1104464d8fa892be75b79d3c0cfe502c829b82f3b9",
+    "bytes": 55294,
+    "kind": "real browser audit evidence or supporting artifact",
+    "width": 1425,
+    "height": 891
+  },
+  {
+    "path": "02-explicit-diagnostics.jpg",
+    "sha256": "8e2bd176b83366bf67fa42dd7249d99c2ab02c0f171f101c177f6caff9ac5042",
+    "bytes": 54423,
+    "kind": "real browser audit evidence or supporting artifact",
+    "width": 1425,
+    "height": 891
+  },
+  {
+    "path": "02-explicit-diagnostics.txt",
+    "sha256": "b963d6d6a16a33514b4c55885bb5425e0d58f85caf5f7305d9a13db575ba2d88",
+    "bytes": 1977,
+    "kind": "real browser audit evidence or supporting artifact",
+    "collected_sha256": "dabcd565826fdec9e71e6449a06f2e1d713421bbd1668aed6e5c7008dcf4410d",
+    "normalization": "Trailing whitespace trimmed and final LF added; original local capture retained in ignored scratch."
+  },
+  {
+    "path": "03-loading-founding.jpg",
+    "sha256": "4ab939df8ba608449c91c500d50e512b5f1a685ed7ebf713360150207797f482",
+    "bytes": 154940,
+    "kind": "real browser audit evidence or supporting artifact",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "path": "03-loading-founding.txt",
+    "sha256": "a252bf72623db7666f304befedd337d0ba99514cc8737155cd65bbc051d85cc7",
+    "bytes": 1480,
+    "kind": "real browser audit evidence or supporting artifact",
+    "collected_sha256": "cdd4744f059bb8cc5ed20b0b1911e35f26aa1dcca33d8012487f7fa2394643ab",
+    "normalization": "Trailing whitespace trimmed and final LF added; original local capture retained in ignored scratch."
+  },
+  {
+    "path": "04-founding-over-world.jpg",
+    "sha256": "7c74e333b528ee4ad1833102138d02a043e84d47cf6935120ab3f666f777ec39",
+    "bytes": 181730,
+    "kind": "real browser audit evidence or supporting artifact",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "path": "04-founding-over-world.txt",
+    "sha256": "adf84240bd2e65860d6faa9271706040e334db4d15a5e5ecfe4a9b4df3547cb7",
+    "bytes": 2880,
+    "kind": "real browser audit evidence or supporting artifact",
+    "collected_sha256": "1dce81390d558a9ad27a3b30d5dd2241eb47ea293232d54901ba64b04761d70d",
+    "normalization": "Trailing whitespace trimmed and final LF added; original local capture retained in ignored scratch."
+  },
+  {
+    "path": "05-onboarding-choice.jpg",
+    "sha256": "f5c5980d62d14d090ec33097cfd6d72e7249e538b00fbe32343dbae0bd7e3185",
+    "bytes": 183556,
+    "kind": "real browser audit evidence or supporting artifact",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "path": "05-onboarding-choice.txt",
+    "sha256": "4677141d80df83eadd03f933c2950740a552d8b30e7aecb842f0c04bc8f2266f",
+    "bytes": 2788,
+    "kind": "real browser audit evidence or supporting artifact",
+    "collected_sha256": "b52054f0ba1156110c7398d94e4d788fec3449e1b1dfef1016576a43cb357381",
+    "normalization": "Trailing whitespace trimmed and final LF added; original local capture retained in ignored scratch."
+  },
+  {
+    "path": "06-game-menu-desktop.jpg",
+    "sha256": "bf5ab8fdc64eeee485da92a0dd595d2d23b4f5e54b23b0721c637a9c5085ea57",
+    "bytes": 169562,
+    "kind": "real browser audit evidence or supporting artifact",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "path": "06-game-menu-desktop.txt",
+    "sha256": "8dd8632f5bbce3fae558ed109f7921722bc6eca3bda1f9a507f983ef4cc05ece",
+    "bytes": 2918,
+    "kind": "real browser audit evidence or supporting artifact",
+    "collected_sha256": "5ee4ee76c03d2c0dba9b2641aeada0ba1ce3567ac5476fc66414df26c0d93600",
+    "normalization": "Trailing whitespace trimmed and final LF added; original local capture retained in ignored scratch."
+  },
+  {
+    "path": "07-work-consequence.jpg",
+    "sha256": "2a8f883d49476163c8aa4131147b08c708e9280063348b3868f5f60ffe63dd37",
+    "bytes": 169428,
+    "kind": "real browser audit evidence or supporting artifact",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "path": "07-work-consequence.txt",
+    "sha256": "d89bab148f365e980590e1505420985a162f97dbc29ac71f36bf9cd89471ab5d",
+    "bytes": 3785,
+    "kind": "real browser audit evidence or supporting artifact",
+    "collected_sha256": "1ce1fd2df30164c5a2a1143fdd2f4cf834da11c2b0e75b01518f500f93b2c437",
+    "normalization": "Trailing whitespace trimmed and final LF added; original local capture retained in ignored scratch."
+  },
+  {
+    "path": "08-expedition-quote.jpg",
+    "sha256": "c6e7a22b7ecc8f1480dea8475286c542209253e741ec1935d3f3e0a2dea5c760",
+    "bytes": 89063,
+    "kind": "real browser audit evidence or supporting artifact",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "path": "08-expedition-quote.txt",
+    "sha256": "4e532b0d9535798b405e479f74bda1c23133f52ea08418f69b5d495c937e5834",
+    "bytes": 850,
+    "kind": "real browser audit evidence or supporting artifact",
+    "collected_sha256": "1d31f9c14bcb42aad1c791a74005ca465a115c922098c8b7778854faeb69c450",
+    "normalization": "Trailing whitespace trimmed and final LF added; original local capture retained in ignored scratch."
+  },
+  {
+    "path": "09-expedition-order-paused.jpg",
+    "sha256": "a72d5943e13dfe960dba334803dc208003c11f6500ba15e41a20f5d4ccac7364",
+    "bytes": 176474,
+    "kind": "real browser audit evidence or supporting artifact",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "path": "09-expedition-order-paused.txt",
+    "sha256": "b37bc1bdc4064a5a93ad0dbaf8a6a68325cff8c57df7abac1e486c45db9f9835",
+    "bytes": 2486,
+    "kind": "real browser audit evidence or supporting artifact",
+    "collected_sha256": "b21a66583acb837a122cd56e261aa0d7e55f52540d516a5f2a9a03b82b820d9e",
+    "normalization": "Trailing whitespace trimmed and final LF added; original local capture retained in ignored scratch."
+  },
+  {
+    "path": "10-family-tree-person.jpg",
+    "sha256": "b5372b4ccf749464d74e81a5dc1840dfd8843684f2f711d4df53928253d3e463",
+    "bytes": 104012,
+    "kind": "real browser audit evidence or supporting artifact",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "path": "10-family-tree-person.txt",
+    "sha256": "8662e90862b57296a1bd41d6946378c3de64fe832417ad02e230712d71959c59",
+    "bytes": 8764,
+    "kind": "real browser audit evidence or supporting artifact",
+    "collected_sha256": "d5e9a1f753b818b73ff99f7c5ee5b977598575800c1a70d0c3ae684cbde747da",
+    "normalization": "Trailing whitespace trimmed and final LF added; original local capture retained in ignored scratch."
+  },
+  {
+    "path": "11-expedition-return-reason.jpg",
+    "sha256": "ef8d07d6d1e8c2a53cd22fe937e71d827d5932d947aea1dd010ed3e22f46ce6c",
+    "bytes": 112251,
+    "kind": "real browser audit evidence or supporting artifact",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "path": "11-expedition-return-reason.txt",
+    "sha256": "261e696876533f79538f766d2f5932835cdfcb6136afdd89e8c74f9876700119",
+    "bytes": 4332,
+    "kind": "real browser audit evidence or supporting artifact",
+    "collected_sha256": "358b1a46d2e75512031d48283d3d370afe03244f72f3e9809fd054dd9af91c93",
+    "normalization": "Trailing whitespace trimmed and final LF added; original local capture retained in ignored scratch."
+  },
+  {
+    "path": "12-expedition-historical-detail.jpg",
+    "sha256": "b07d03d86c6d8eebb7f62d44fb3f5717357af52892087f78ba8213d1013da43a",
+    "bytes": 104844,
+    "kind": "real browser audit evidence or supporting artifact",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "path": "12-expedition-historical-detail.txt",
+    "sha256": "dcfdb04d890de20f1e2bc71679d276268d64345cf871592b924cf19d49a95a28",
+    "bytes": 3292,
+    "kind": "real browser audit evidence or supporting artifact",
+    "collected_sha256": "a750440e02f6fd0b77e5fcbbb22cfd69ebb5bd221ba85e55ae74007750fa26e1",
+    "normalization": "Trailing whitespace trimmed and final LF added; original local capture retained in ignored scratch."
+  },
+  {
+    "path": "13-save-local-result.jpg",
+    "sha256": "4f219f70cd8128198ac5ee868458c5e5bdda2e0051ee5dc1f0d555b002e3020e",
+    "bytes": 138251,
+    "kind": "real browser audit evidence or supporting artifact",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "path": "13-save-local-result.txt",
+    "sha256": "b974755d7b3ab29d9ce3a26691a35f4d5294cc924fcf3301221a06d97f9c4972",
+    "bytes": 5768,
+    "kind": "real browser audit evidence or supporting artifact",
+    "collected_sha256": "8572b4f8562011d45cfe6c111c8ae3bd2e8cd3935368169b1467ca177a507667",
+    "normalization": "Trailing whitespace trimmed and final LF added; original local capture retained in ignored scratch."
+  },
+  {
+    "path": "14-restored-local.jpg",
+    "sha256": "616847c65218e641fadb7f84c2bdd0a38f4ab4d58e8ffce399fe2d84706ca348",
+    "bytes": 134028,
+    "kind": "real browser audit evidence or supporting artifact",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "path": "14-restored-local.txt",
+    "sha256": "0eeadbc5287c8f8eb2a5bb9f4ce16668efb7730912c3fb9a5a194d503bfa8114",
+    "bytes": 4826,
+    "kind": "real browser audit evidence or supporting artifact",
+    "collected_sha256": "906381a2afefe95923ff39e222400a4db7e02cc79a6686115f159ce0f1768b91",
+    "normalization": "Trailing whitespace trimmed and final LF added; original local capture retained in ignored scratch."
+  },
+  {
+    "path": "15-returning-start.jpg",
+    "sha256": "401bfecf02f8db487e0234afb5b567e9c1979042c796e3fb193cec92b01b1630",
+    "bytes": 56374,
+    "kind": "real browser audit evidence or supporting artifact",
+    "width": 1425,
+    "height": 891
+  },
+  {
+    "path": "15-returning-start.txt",
+    "sha256": "38c695b05561fcdc006a5bf1d28e1feea3e4ff29ab7f32f12c29f271682ca4e6",
+    "bytes": 1759,
+    "kind": "real browser audit evidence or supporting artifact",
+    "collected_sha256": "161ff0a20e3712dfa3a3b943a3d674b77495405d76e931c2e824433e5b56ef91",
+    "normalization": "Trailing whitespace trimmed and final LF added; original local capture retained in ignored scratch."
+  },
+  {
+    "path": "17-recovery-narrow.jpg",
+    "sha256": "aad5c6a633bb113efb6493269d2ea3aa12855b40ea92b0e92d23c3b5ae6c7e5c",
+    "bytes": 26108,
+    "kind": "real browser audit evidence or supporting artifact",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "path": "17-recovery-narrow.txt",
+    "sha256": "bfa8d09430f394dfdd276cfff2506c26378031112886c2cc5bbe4670edf89bff",
+    "bytes": 726,
+    "kind": "real browser audit evidence or supporting artifact",
+    "collected_sha256": "cac226e7abb064cdf0a3359ea7fa3c39ceed920dd561ee6566b7e180dc974943",
+    "normalization": "Trailing whitespace trimmed and final LF added; original local capture retained in ignored scratch."
+  },
+  {
+    "path": "18-imported-before-continue.jpg",
+    "sha256": "ef51e2ffbd9a83f16babdedaffcda94525c3465cdc3f462d0b76b64d3f0a23ed",
+    "bytes": 37489,
+    "kind": "real browser audit evidence or supporting artifact",
+    "width": 375,
+    "height": 812
+  },
+  {
+    "path": "18-imported-before-continue.txt",
+    "sha256": "31b1314264597a8a0cc60ef9b4f0da2421b309e0f6c80951ebf900bed67ab79b",
+    "bytes": 1762,
+    "kind": "real browser audit evidence or supporting artifact",
+    "collected_sha256": "9d33f9e657b8be1f31ee70e5da54dedcfd2c9a30a18182f51ac474c98f989f4f",
+    "normalization": "Trailing whitespace trimmed and final LF added; original local capture retained in ignored scratch."
+  },
+  {
+    "path": "19-import-restored-narrow.jpg",
+    "sha256": "b0e3104b82b4f9bdeef54174ada671b75e0690b35701ee46de26ee17260d51f7",
+    "bytes": 36653,
+    "kind": "real browser audit evidence or supporting artifact",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "path": "19-import-restored-narrow.txt",
+    "sha256": "91ff91d4801ab7e958fdd8fa7c3610868012b5cbedd7df9004b8d4f6d40df53b",
+    "bytes": 2211,
+    "kind": "real browser audit evidence or supporting artifact",
+    "collected_sha256": "4471798abf48a13fc84574734aa4945fa727c9146690f858219116f3076c99b5",
+    "normalization": "Trailing whitespace trimmed and final LF added; original local capture retained in ignored scratch."
+  },
+  {
+    "path": "20-game-menu-narrow.jpg",
+    "sha256": "34e45f273d9f6b73e855db05523e3db9d5fa91d8c7cd2cf41630eb9a99504c7a",
+    "bytes": 39240,
+    "kind": "real browser audit evidence or supporting artifact",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "path": "20-game-menu-narrow.txt",
+    "sha256": "d07ffc6228e1656521cd4e8fa0577961a9c40e610fefe7d1cccd634e8a65fd1a",
+    "bytes": 2988,
+    "kind": "real browser audit evidence or supporting artifact",
+    "collected_sha256": "665de0a719705f9af6aca1f5f8ab6980876797a08d5f242fa3c74a4e90f155a9",
+    "normalization": "Trailing whitespace trimmed and final LF added; original local capture retained in ignored scratch."
+  },
+  {
+    "path": "21-personal-details-narrow.jpg",
+    "sha256": "c32063d77ebfc19b68299d45dc869a42a5d7f75f885da1f50990e444d6a55b8e",
+    "bytes": 39423,
+    "kind": "real browser audit evidence or supporting artifact",
+    "width": 390,
+    "height": 844
+  },
+  {
+    "path": "21-personal-details-narrow.txt",
+    "sha256": "bfe2244972634455b16fb62347d3cb3866a088029e626baa3061f4404be651c5",
+    "bytes": 3509,
+    "kind": "real browser audit evidence or supporting artifact",
+    "collected_sha256": "a39b79082494835b1322b74f3a71fb85ae22e0e4fdd62d06050c6fc5d895b761",
+    "normalization": "Trailing whitespace trimmed and final LF added; original local capture retained in ignored scratch."
+  },
+  {
+    "path": "22-start-narrow.jpg",
+    "sha256": "334226fade2fbb8e57dd50db89259fbd936e5ed4021da2ff61b5f75d891744db",
+    "bytes": 39306,
+    "kind": "real browser audit evidence or supporting artifact",
+    "width": 375,
+    "height": 812
+  },
+  {
+    "path": "22-start-narrow.txt",
+    "sha256": "38c695b05561fcdc006a5bf1d28e1feea3e4ff29ab7f32f12c29f271682ca4e6",
+    "bytes": 1759,
+    "kind": "real browser audit evidence or supporting artifact",
+    "collected_sha256": "161ff0a20e3712dfa3a3b943a3d674b77495405d76e931c2e824433e5b56ef91",
+    "normalization": "Trailing whitespace trimmed and final LF added; original local capture retained in ignored scratch."
+  },
+  {
+    "path": "23-opt-in-performance-narrow.jpg",
+    "sha256": "95f85286576e78eea118b6660b25442dd8c8ef8d9f6a772a059cb604f8b02d6d",
+    "bytes": 45956,
+    "kind": "real browser audit evidence or supporting artifact",
+    "width": 375,
+    "height": 812
+  },
+  {
+    "path": "23-opt-in-performance-narrow.txt",
+    "sha256": "e403fbf5aab193cb3215e5cb5350807b1ee889ee04f1ab16491a9db053b97e53",
+    "bytes": 2261,
+    "kind": "real browser audit evidence or supporting artifact",
+    "collected_sha256": "01637e2f4ea3b500052e24514c71a4f56a64699301108a34fb1b66e2e893582f",
+    "normalization": "Trailing whitespace trimmed and final LF added; original local capture retained in ignored scratch."
+  },
+  {
+    "path": "24-start-landscape.jpg",
+    "sha256": "dd528abeedc1244f31af4c076709f2fdf0b12e2d9e5d3d12bfb91aefbf9789af",
+    "bytes": 32484,
+    "kind": "real browser audit evidence or supporting artifact",
+    "width": 837,
+    "height": 386
+  },
+  {
+    "path": "24-start-landscape.txt",
+    "sha256": "38c695b05561fcdc006a5bf1d28e1feea3e4ff29ab7f32f12c29f271682ca4e6",
+    "bytes": 1759,
+    "kind": "real browser audit evidence or supporting artifact",
+    "collected_sha256": "161ff0a20e3712dfa3a3b943a3d674b77495405d76e931c2e824433e5b56ef91",
+    "normalization": "Trailing whitespace trimmed and final LF added; original local capture retained in ignored scratch."
+  },
+  {
+    "path": "25-prototype-import-candidate.jpg",
+    "sha256": "c18bb18ae60d065d7287877aab05edd9700e19bd28b61411408b1294eee337fa",
+    "bytes": 80178,
+    "kind": "throwaway prototype screenshot; not real-game evidence",
+    "width": 1265,
+    "height": 712
+  },
+  {
+    "path": "26-prototype-overview.jpg",
+    "sha256": "0ec158dfd97c6748a59d93041874a4d510aa52d05ca3b918aded24e38a6f52e7",
+    "bytes": 83661,
+    "kind": "throwaway prototype screenshot; not real-game evidence",
+    "width": 1265,
+    "height": 712
+  },
+  {
+    "path": "build-identity.json",
+    "sha256": "6df9f65c00f20e02427b9a53bf33c931647921599afd60f459f66b8c8c8dbea2",
+    "bytes": 1654,
+    "kind": "real browser audit evidence or supporting artifact"
+  },
+  {
+    "path": "campaign-2089668634.json",
+    "sha256": "b7c3d395cd74ec157f42b6d8e9b4a4ee862c5c2b34c40d81540ca8cc187bc9a7",
+    "bytes": 88033,
+    "kind": "real browser audit evidence or supporting artifact"
+  }
+]

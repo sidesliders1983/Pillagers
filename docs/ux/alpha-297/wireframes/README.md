@@ -1,21 +1,31 @@
-# Proposed menu wireframes
+# Proposed menu wireframes — revised after owner review
 
-These are source-based information-architecture proposals for #298, not actual
-screenshots, implemented UI, device measurements or an alternative runtime shell.
-The existing Context & Focus / Horizon owners remain. The source inventory and
-before/after trees are authoritative about what already exists versus what is proposed.
+These are information-architecture proposals for #298, not actual game
+screenshots, implemented controls, usability results or an alternative game shell.
+They follow the [observed journeys and empathy hypotheses](../journey-empathy-maps.md)
+and [review corrections](../review-response.md). Existing Context & Focus / Horizon
+owners remain. Actual browser evidence is separately [indexed](../runtime/README.md).
 
-- [Start, desktop](start-desktop.png) ([editable SVG](start-desktop.svg)) — three player actions; New game owns replay/advanced choices; ordinary settings separate from technical support.
-- [Game menu, desktop](game-desktop.png) ([editable SVG](game-desktop.svg)) — current-session management; gameplay stays in existing contextual/navigation surfaces.
-- [Start, landscape touch proposal](start-mobile-landscape.png) ([editable SVG](start-mobile-landscape.svg)) — secondary support remains secondary; no required diagnostic preflight.
-- [Game menu, landscape touch proposal](game-mobile-landscape.png) ([editable SVG](game-mobile-landscape.svg)) — 44 px proposed rows and a scrollable menu. Lower items are not removed.
+- [Start, desktop](start-desktop.png) ([SVG](start-desktop.svg)): Continue/New/Load,
+  Settings, one Help & support, quiet credits. Nested help keeps deliberate
+  pre-start diagnostics/report access; New game owns arrival/replay/advanced options.
+- [Game menu, desktop](game-desktop.png) ([SVG](game-desktop.svg)): Save/Load/Settings/
+  Help first; conditional feedback; separate lower replacement section. Play/Pace/
+  +1 Year stay in the header; there is no duplicate desktop Time submenu.
+- [Start, landscape](start-mobile-landscape.png) ([SVG](start-mobile-landscape.svg)):
+  no prominent diagnostics button. Help opens problem help and then Diagnostics.
+- [Game menu, Horizon landscape](game-mobile-landscape.png) ([SVG](game-mobile-landscape.svg)):
+  scroll retains lower entries. Compact Play/Pace in header; existing direct
+  +1 Year overflow only on Horizon, preserving expedition restriction.
 
-Desktop canvases are 1280×800; mobile diagrams are 852×393. These dimensions
-are drawing coordinates, not claimed browser or physical-device observations.
-Actual safe areas, touch hit targets, text scaling, keyboard/focus, scrolling and
-portrait fallback remain in the deferred runtime protocol.
+Give feedback is shown only as a conditional design destination: **no URL is
+configured**. A dashed annotation is not a proposed dead button to ship. Return
+to start is conditional on implementing and verifying safe session handoff.
+Neither currently has a working ordinary in-game route in the inspected source.
 
-Give feedback is deliberately not shown as a working external link because no
-owner-configured destination was found. Return to start is not shown as a working
-session action until checkpoint/error/clock handling is implemented and verified.
-No new renderer, graphical asset or gameplay framework is proposed.
+Desktop drawing coordinates: 1280×800. Landscape: 852×393. They are not device
+measurements. Ordinary settings stay out of Diagnostics; genuine corruption/storage
+warnings stay immediate. No capability is deleted by simplifying the hierarchy.
+
+The separate [throwaway flow prototype](../prototype/README.md) explores state and
+back/cancel behavior. It answers a flow question, not an art/style redesign.

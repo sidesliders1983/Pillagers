@@ -1,0 +1,18 @@
+Browser tab: 3, Title: "FjordSide", URL: "http://127.0.0.1:5192/fjord-play".
+1 AXWebArea FjordSide, URL: 127.0.0.1:5192/fjord-play
+	2 container campaign-recovery
+		3 heading Return to your settlement, Value: 1
+			4 text Return to your settlement
+		5 text Choose a saved campaign or import a file.
+		6 text Choose a saved campaign or import a file. Your existing saves have not been replaced.
+		7 container Available saved campaigns
+			8 container
+				9 button Use active session
+				10 text  Summer 800 · campaign 2089668634
+		11 container
+			12 text Import campaign
+			13 button Import campaign
+		14 container Damaged save recovery files
+		15 button Back to start menu
+
+The focused UI element is 9 button Use active session

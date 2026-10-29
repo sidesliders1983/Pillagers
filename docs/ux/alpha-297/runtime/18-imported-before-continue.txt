@@ -1,0 +1,41 @@
+Browser tab: 3, Title: "FjordSide", URL: "http://127.0.0.1:5192/fjord-play".
+1 AXWebArea FjordSide, URL: 127.0.0.1:5192/fjord-play
+	2 container campaign-start
+		3 container
+			4 text A new shore. A shared history.
+			5 heading FjordSide, Value: 1
+				6 text FjordSide
+		7 container Campaign start
+			8 text Imported campaign · Summer 800 · Seed 2089668634
+			9 button Continue campaign Return to your saved settlement.
+				10 text Continue campaign
+				11 text Return to your saved settlement.
+			12 button New campaign — same founders Replay their original arrival on the same island.
+				13 text New campaign — same founders
+				14 text Replay their original arrival on the same island.
+			15 button New scenario A new seed, new people and a new history.
+				16 text New scenario
+				17 text A new seed, new people and a new history.
+			18 text Start with cattle, pigs, sheep or goats. Terrain comes from the validated island pool.
+			19 button Recover or import a campaign
+			20 button Run loading diagnostics
+		21 container
+			22 text Debug / Performance overlay
+			23 pop up button (collapsed, settable) Description: Performance overlay, Value: Off, Secondary Actions: Expand
+				24 menu
+					25 (selected) Off
+					26 Compact
+					27 Details
+		28 container Sound
+			29 text Sound
+			30 button Enable sound
+			31 checkbox (settable, integer) Description: Mute, Value: 1
+			32 text Sound off.
+			33 container
+				34 text Master volume
+				35 slider (settable, float) Master volume, Value: 0.5
+			36 button (collapsed) Sound groups, Secondary Actions: Expand
+				37 text Sound groups
+			38 text Sounds follow nearby activity. Wildlife calls accompany new sightings.
+
+The focused UI element is 9 button Continue campaign Return to your saved settlement.
