@@ -1,0 +1,727 @@
+{
+  "version": 1,
+  "build": "2893628d9c3fbc509aa8f977ad04235f4345a754",
+  "context": {
+    "seed": 3802174487,
+    "geographySeed": 227,
+    "recipe": "island-pool-v3",
+    "winter": 800,
+    "tick": 500,
+    "pace": 3,
+    "quality": "low",
+    "effects": "low",
+    "residents": 10,
+    "livestock": 3,
+    "renderedResidents": 10,
+    "renderedLivestock": 3,
+    "renderedWildlife": 0,
+    "dpr": 1,
+    "width": 1440,
+    "height": 900
+  },
+  "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+  "viewport": [
+    1440,
+    900
+  ],
+  "recording": "off",
+  "frozenDisplayAt": "19:41:22",
+  "capabilities": {
+    "gpuTimer": true,
+    "jsHeap": true,
+    "longTasks": true
+  },
+  "units": {
+    "cpu": "synchronous JS ms; async submit excludes resumed continuations",
+    "gpu": "query ms; main includes native shadows; portrait separate",
+    "memory": "optional JS heap only; resource counts are not bytes; VRAM unavailable"
+  },
+  "resources": {
+    "geometries": 131,
+    "textures": 114,
+    "programs": 72,
+    "highGeometries": 131,
+    "highTextures": 114,
+    "highPrograms": 72
+  },
+  "workload": {
+    "main": {
+      "calls": 232,
+      "triangles": 3343052,
+      "at": 2979644.1000000015
+    }
+  },
+  "heap": {
+    "source": "performance.memory (non-standard)",
+    "usedBytes": 565662907,
+    "allocatedBytes": 594742267
+  },
+  "sample": {
+    "elapsedMs": 29932.70000000298,
+    "sampledUtc": "2026-10-29T19:41:23.135Z",
+    "mode": "Paused",
+    "fps": 17.339408847131583,
+    "interval": {
+      "count": 86,
+      "windowMs": 4931.9000000031665,
+      "weight": 0,
+      "meanMs": 57.672093023253645,
+      "p50Ms": 52.5,
+      "p95Ms": 69.8000000002794,
+      "p99Ms": 72.5,
+      "worstMs": 72.5,
+      "latestMs": 68.89999999990687
+    },
+    "cpuFrame": {
+      "count": 86,
+      "windowMs": 4931.9000000031665,
+      "weight": 0,
+      "meanMs": 10.44186046511628,
+      "p50Ms": 9.800000004470348,
+      "p95Ms": 15.5,
+      "p99Ms": 17.899999998509884,
+      "worstMs": 17.899999998509884,
+      "latestMs": 10.600000001490116
+    },
+    "spans": {
+      "core": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "ui": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "sceneCpu": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "sceneWall": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "modelCpu": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "modelWall": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "portraitCpu": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "portraitWall": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      }
+    },
+    "gpu": {
+      "status": "valid",
+      "milliseconds": 59.648677,
+      "at": 2979466.3999999985
+    },
+    "ticks": {
+      "total": 0,
+      "perSecond": 0
+    },
+    "worstRecentHitchMs": 100.70000000018626,
+    "history": [
+      {
+        "elapsedMs": 0.7000000029802322,
+        "mode": "Paused",
+        "fps": null,
+        "intervalP95Ms": null,
+        "cpuP95Ms": null,
+        "gpuMs": null,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 523.5,
+        "mode": "Paused",
+        "fps": 18.389865140992466,
+        "intervalP95Ms": 100.70000000018626,
+        "cpuP95Ms": 16.100000001490116,
+        "gpuMs": null,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 1502.8999999985099,
+        "mode": "Paused",
+        "fps": 17.815540633138042,
+        "intervalP95Ms": 70.70000000018626,
+        "cpuP95Ms": 16.100000001490116,
+        "gpuMs": 51.692041,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 2009.7000000029802,
+        "mode": "Paused",
+        "fps": 17.878122286358987,
+        "intervalP95Ms": 70.70000000018626,
+        "cpuP95Ms": 16.100000001490116,
+        "gpuMs": 55.480194,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 3000.39999999851,
+        "mode": "Paused",
+        "fps": 17.774498624992727,
+        "intervalP95Ms": 70.70000000018626,
+        "cpuP95Ms": 16.100000001490116,
+        "gpuMs": 55.827776,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 3513.89999999851,
+        "mode": "Paused",
+        "fps": 17.773191147804628,
+        "intervalP95Ms": 70.60000000009313,
+        "cpuP95Ms": 15.700000002980232,
+        "gpuMs": 52.32904,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 4513.20000000298,
+        "mode": "Paused",
+        "fps": 17.785982844407542,
+        "intervalP95Ms": 70.60000000009313,
+        "cpuP95Ms": 15.5,
+        "gpuMs": 53.8807,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 5514.29999999702,
+        "mode": "Paused",
+        "fps": 17.724068479355488,
+        "intervalP95Ms": 70.5,
+        "cpuP95Ms": 14.899999998509884,
+        "gpuMs": 53.499285,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 6515.89999999851,
+        "mode": "Paused",
+        "fps": 17.67486197720174,
+        "intervalP95Ms": 69.89999999990687,
+        "cpuP95Ms": 14.5,
+        "gpuMs": 55.59786,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 7504.29999999702,
+        "mode": "Paused",
+        "fps": 17.680978883285118,
+        "intervalP95Ms": 69.89999999990687,
+        "cpuP95Ms": 14.200000002980232,
+        "gpuMs": 53.00737,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 8506.20000000298,
+        "mode": "Paused",
+        "fps": 17.671392425399272,
+        "intervalP95Ms": 69.79999999981374,
+        "cpuP95Ms": 14.200000002980232,
+        "gpuMs": 52.572789,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 9511.10000000149,
+        "mode": "Paused",
+        "fps": 17.63109411834657,
+        "intervalP95Ms": 69.79999999981374,
+        "cpuP95Ms": 14.899999998509884,
+        "gpuMs": 53.664118,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 10011.29999999702,
+        "mode": "Paused",
+        "fps": 17.63138386327795,
+        "intervalP95Ms": 69.60000000009313,
+        "cpuP95Ms": 15.100000001490116,
+        "gpuMs": 53.045703,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 11004.29999999702,
+        "mode": "Paused",
+        "fps": 17.557510823806062,
+        "intervalP95Ms": 69.6999999997206,
+        "cpuP95Ms": 15.100000001490116,
+        "gpuMs": 52.322706,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 11507,
+        "mode": "Paused",
+        "fps": 17.52371744516219,
+        "intervalP95Ms": 69.8000000002794,
+        "cpuP95Ms": 15.100000001490116,
+        "gpuMs": 57.476519,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 12503.20000000298,
+        "mode": "Paused",
+        "fps": 17.523597116572397,
+        "intervalP95Ms": 69.8000000002794,
+        "cpuP95Ms": 14.899999998509884,
+        "gpuMs": 53.67445,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 13507.70000000298,
+        "mode": "Paused",
+        "fps": 17.526738234181447,
+        "intervalP95Ms": 69.8000000002794,
+        "cpuP95Ms": 15.100000001490116,
+        "gpuMs": 52.866286,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 14015.29999999702,
+        "mode": "Paused",
+        "fps": 17.528483786152822,
+        "intervalP95Ms": 69.8000000002794,
+        "cpuP95Ms": 16.799999997019768,
+        "gpuMs": 53.442869,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 15012.79999999702,
+        "mode": "Paused",
+        "fps": 17.532546048124804,
+        "intervalP95Ms": 70.5,
+        "cpuP95Ms": 13.799999997019768,
+        "gpuMs": 52.423373,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 16002.79999999702,
+        "mode": "Paused",
+        "fps": 17.678492506730542,
+        "intervalP95Ms": 69.70000000018626,
+        "cpuP95Ms": 13.799999997019768,
+        "gpuMs": 52.624122,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 16504.39999999851,
+        "mode": "Paused",
+        "fps": 17.70791882212495,
+        "intervalP95Ms": 69.70000000018626,
+        "cpuP95Ms": 13.799999997019768,
+        "gpuMs": 53.139036,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 17007.20000000298,
+        "mode": "Paused",
+        "fps": 17.715673394642163,
+        "intervalP95Ms": 69.70000000018626,
+        "cpuP95Ms": 13.799999997019768,
+        "gpuMs": 54.272198,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 17518.10000000149,
+        "mode": "Paused",
+        "fps": 17.714615553034047,
+        "intervalP95Ms": 69.70000000018626,
+        "cpuP95Ms": 14.300000004470348,
+        "gpuMs": 53.98345,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 18506.20000000298,
+        "mode": "Paused",
+        "fps": 17.698047181383878,
+        "intervalP95Ms": 69.70000000018626,
+        "cpuP95Ms": 14.099999994039536,
+        "gpuMs": 55.62186,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 19014.5,
+        "mode": "Paused",
+        "fps": 17.73442695632864,
+        "intervalP95Ms": 69.70000000018626,
+        "cpuP95Ms": 14.099999994039536,
+        "gpuMs": 52.726705,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 20012,
+        "mode": "Paused",
+        "fps": 17.734736170889803,
+        "intervalP95Ms": 69.70000000018626,
+        "cpuP95Ms": 14.300000004470348,
+        "gpuMs": 52.710872,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 21014.5,
+        "mode": "Paused",
+        "fps": 17.728377355483186,
+        "intervalP95Ms": 69.89999999990687,
+        "cpuP95Ms": 14.799999997019768,
+        "gpuMs": 52.632039,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 22000.60000000149,
+        "mode": "Paused",
+        "fps": 17.713365539452496,
+        "intervalP95Ms": 69.79999999981374,
+        "cpuP95Ms": 15.299999997019768,
+        "gpuMs": 52.309373,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 22511.70000000298,
+        "mode": "Paused",
+        "fps": 17.70944436618268,
+        "intervalP95Ms": 69.79999999981374,
+        "cpuP95Ms": 15.299999997019768,
+        "gpuMs": 51.978208,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 23504.10000000149,
+        "mode": "Paused",
+        "fps": 17.78825974856661,
+        "intervalP95Ms": 69.89999999990687,
+        "cpuP95Ms": 14.899999998509884,
+        "gpuMs": 52.631039,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 24005.89999999851,
+        "mode": "Paused",
+        "fps": 17.747467496211875,
+        "intervalP95Ms": 69.89999999990687,
+        "cpuP95Ms": 14.899999998509884,
+        "gpuMs": 52.27279,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 24509.10000000149,
+        "mode": "Paused",
+        "fps": 17.74322169059011,
+        "intervalP95Ms": 70,
+        "cpuP95Ms": 15.899999998509884,
+        "gpuMs": 51.733792,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 25013.70000000298,
+        "mode": "Paused",
+        "fps": 17.730496453902024,
+        "intervalP95Ms": 70,
+        "cpuP95Ms": 16.399999998509884,
+        "gpuMs": 52.793288,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 26012.29999999702,
+        "mode": "Paused",
+        "fps": 17.707662588537982,
+        "intervalP95Ms": 69.90000000037253,
+        "cpuP95Ms": 16.399999998509884,
+        "gpuMs": 51.342877,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 27006.10000000149,
+        "mode": "Paused",
+        "fps": 17.717789456919235,
+        "intervalP95Ms": 69.89999999990687,
+        "cpuP95Ms": 16.200000002980232,
+        "gpuMs": 51.868875,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 27515.29999999702,
+        "mode": "Paused",
+        "fps": 17.721317350961073,
+        "intervalP95Ms": 69.89999999990687,
+        "cpuP95Ms": 16.200000002980232,
+        "gpuMs": 52.318457,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 28515.20000000298,
+        "mode": "Paused",
+        "fps": 17.64446404940483,
+        "intervalP95Ms": 69.8000000002794,
+        "cpuP95Ms": 16.900000005960464,
+        "gpuMs": 53.184036,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 29024.5,
+        "mode": "Paused",
+        "fps": 17.51313485113738,
+        "intervalP95Ms": 69.8000000002794,
+        "cpuP95Ms": 17.5,
+        "gpuMs": 52.394373,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 29932.70000000298,
+        "mode": "Paused",
+        "fps": 17.339408847131583,
+        "intervalP95Ms": 69.8000000002794,
+        "cpuP95Ms": 15.5,
+        "gpuMs": 59.648677,
+        "ticks": 0
+      }
+    ],
+    "events": [
+      {
+        "elapsedMs": 273.70000000298023,
+        "kind": "long frame",
+        "message": "Main-thread frame scheduling gap",
+        "durationMs": 100.70000000018626
+      }
+    ]
+  },
+  "loading": {
+    "attempt": "mvty6hsv-5",
+    "startedUtc": "2026-10-29T19:39:51.583Z",
+    "percent": 100,
+    "stage": "Preparing the first frame",
+    "outcome": "playable",
+    "worker": "received",
+    "elapsedMs": 11621.59999999404,
+    "stageElapsedMs": 1236.3999999985099,
+    "lastProgressAgeMs": 0.20000000298023224,
+    "maxObservationGapMs": 1416.7000000029802,
+    "firstFrameMs": 11621.19999999553,
+    "playableMs": 11621.59999999404,
+    "units": {
+      "completed": 147,
+      "total": 147,
+      "kind": "draw batches"
+    },
+    "resources": {
+      "geometries": 131,
+      "textures": 114,
+      "programs": 72,
+      "calls": 146,
+      "triangles": 2128434,
+      "renderPixelRatio": 1,
+      "drawingBuffer": [
+        1440,
+        900
+      ]
+    },
+    "warning": "",
+    "timeline": [
+      {
+        "stage": "campaign-read",
+        "startedMs": 4.5999999940395355,
+        "durationMs": 19.5,
+        "outcome": "complete"
+      },
+      {
+        "stage": "campaign-inspect",
+        "startedMs": 24.19999999552965,
+        "durationMs": 14.100000001490116,
+        "outcome": "complete"
+      },
+      {
+        "stage": "geography",
+        "startedMs": 38.599999994039536,
+        "durationMs": 946,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:island-download",
+        "startedMs": 61.79999999701977,
+        "durationMs": 32.19999999552965,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:island-unpack",
+        "startedMs": 93.99995116889477,
+        "durationMs": 175.30000000447035,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:island-verify",
+        "startedMs": 269.29999999701977,
+        "durationMs": 133.39999999850988,
+        "outcome": "complete"
+      },
+      {
+        "stage": "receive-and-freeze",
+        "startedMs": 959,
+        "durationMs": 25.599999994039536,
+        "outcome": "complete"
+      },
+      {
+        "stage": "campaign-import",
+        "startedMs": 984.7999999970198,
+        "durationMs": 1416.7000000029802,
+        "outcome": "complete"
+      },
+      {
+        "stage": "nature-assets-fetch-decode",
+        "startedMs": 2401.89999999851,
+        "durationMs": 6.100000001490116,
+        "outcome": "complete"
+      },
+      {
+        "stage": "ground-textures-fetch-decode",
+        "startedMs": 2408.0999999940395,
+        "durationMs": 3.4000000059604645,
+        "outcome": "complete"
+      },
+      {
+        "stage": "terrain-mesh-and-masks",
+        "startedMs": 2411.6999999955297,
+        "durationMs": 6541.30000000447,
+        "outcome": "complete"
+      },
+      {
+        "stage": "pine-assets-fetch-decode",
+        "startedMs": 8953.09999999404,
+        "durationMs": 82.30000000447035,
+        "outcome": "complete"
+      },
+      {
+        "stage": "nature-instance-assembly",
+        "startedMs": 9035.5,
+        "durationMs": 1.2999999970197678,
+        "outcome": "complete"
+      },
+      {
+        "stage": "movement-surface",
+        "startedMs": 9041.19999999553,
+        "durationMs": 1.3999999985098839,
+        "outcome": "complete"
+      },
+      {
+        "stage": "wildlife-preparation",
+        "startedMs": 9043,
+        "durationMs": 397.09999999403954,
+        "outcome": "complete"
+      },
+      {
+        "stage": "initial-settlement-models",
+        "startedMs": 9616.89999999851,
+        "durationMs": 111.39999999850988,
+        "outcome": "complete"
+      },
+      {
+        "stage": "standing-tree-targets",
+        "startedMs": 9730.5,
+        "durationMs": 4.699999995529652,
+        "outcome": "complete"
+      },
+      {
+        "stage": "initial-character-scene-sync",
+        "startedMs": 9749.59999999404,
+        "durationMs": 138.30000000447035,
+        "outcome": "complete"
+      },
+      {
+        "stage": "initial-settlement-models",
+        "startedMs": 9755.59999999404,
+        "durationMs": 123.20000000298023,
+        "outcome": "complete"
+      },
+      {
+        "stage": "standing-tree-targets",
+        "startedMs": 9880.19999999553,
+        "durationMs": 4.700000002980232,
+        "outcome": "complete"
+      },
+      {
+        "stage": "construction-gpu-preparation",
+        "startedMs": 9888,
+        "durationMs": 5,
+        "outcome": "complete"
+      },
+      {
+        "stage": "texture-upload",
+        "startedMs": 9894.59999999404,
+        "durationMs": 374.90000000596046,
+        "outcome": "complete"
+      },
+      {
+        "stage": "shader-compilation",
+        "startedMs": 10269.5,
+        "durationMs": 115.69999999552965,
+        "outcome": "complete"
+      },
+      {
+        "stage": "initial-gpu-upload-and-draws",
+        "startedMs": 10385.5,
+        "durationMs": 1235.5999999940395,
+        "outcome": "complete"
+      }
+    ]
+  },
+  "truncated": false
+}

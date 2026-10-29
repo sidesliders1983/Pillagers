@@ -1,0 +1,8 @@
+{
+  "public_ui_criterion": "close control lies wholly inside both the rendered card and viewport",
+  "fits_viewport": true,
+  "fits_card": true,
+  "measured_card_height": 216,
+  "retained_loading_height": "2px",
+  "click_acceptance": "not verified: native-dialog tool failure recurred"
+}

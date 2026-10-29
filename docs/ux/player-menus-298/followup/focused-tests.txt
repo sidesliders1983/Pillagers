@@ -1,0 +1,24 @@
+✔ entry is read-only until a confirmed choice is ready; cancel and repeated clicks are safe (5381.0592ms)
+✔ failed assets and quota retry the same attempt, protecting saves and exposing export (850.5514ms)
+✔ fresh entry has no invented save; leaving fences late activation (126.0002ms)
+✔ a changed active session fences a stale loaded campaign before any write (1155.6129ms)
+✔ the founding invitation keeps guidance paused, starts explicit free play and fences stale callbacks (1086.5284ms)
+✔ desktop and touch journeys connect real resident, household, resident-from-home and individual livestock controls (1998.4929ms)
+✔ a missing Materials producer opens the real work proposal; target stock, time and house construction remain ordinary actions (1656.4655ms)
+✔ chapter navigation, real preparation links, a read-only keep choice and skip/replay change only bounded presentation state (1035.249ms)
+✔ home upgrades and Smithery help use existing full panels and do not execute construction or production (618.6821ms)
+✔ keyboard collapse, unique keyed chapter buttons and unchanged revisions preserve focus without repeated saves (582.2755ms)
+✔ the full Clan Book defers the invitation and keeps reading focus (526.9908ms)
+✔ the game menu prioritizes session actions and retains setting values when returning and closing (574.0818ms)
+✔ New game offers a fresh arrival and founding replay without requiring a seed choice (82.6944ms)
+✔ feedback links require an owner-configured HTTPS destination and add no campaign data (144.7731ms)
+✔ a first arrival can find New game and Load game without navigating technical choices (3017.9536ms)
+✔ returning players see their campaign date, can inspect seed details, and cancel a replacement safely (686.2538ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 20297.5102

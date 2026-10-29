@@ -2,6 +2,8 @@
 
 The start screen now leads with beginning/continuing a campaign. The game menu leads with managing the current session. Diagnostics remains available deliberately inside one Help & support entry. This implements the reviewed IA from #297 without importing the throwaway prototype.
 
+> Current review status: [the later browser follow-up](followup/README.md) adds real clean-build journeys, exact Core-state parity and the short-screen founding-panel repair. The initial snapshot below is retained with its original provenance. Native replacement-dialog automation, OS-clipboard inspection and physical/novice acceptance still have explicit limits.
+
 ## Source and review boundary
 
 - Fresh base: main `4086baac26c6953b879b439546b68f2406ca767a`.
@@ -77,3 +79,7 @@ pnpm preview:lan --port 5193 --strictPort
 ```
 
 Open `/fjord-play`. Use the reviewed audit's preserved QA file for restoration. For a clean first-arrival view, use a browser profile/origin with no Fjord save. Never clear a player's browser storage to run this check. In the running test campaign, test Save → Load, invalid file, Settings → Back/Close, Help → diagnostics → Off and New arrival/replay Cancel while comparing paused clock/selection/resources. Test a real owner-configured feedback destination only when supplied. GitHub required checks must independently pass on the draft PR's exact head.
+
+## Later browser follow-up
+
+[Additional executed journeys, canonical save parity and the short-screen repair](followup/README.md) supersede the initial blanket tool-block status above. Earlier working-tree and code-build evidence remains as originally labelled. Native replacement confirmation and virtual-clipboard content still have explicit verification limits. The minimum-height fix has a separate pinned code build and real geometry evidence.

@@ -170,9 +170,11 @@
     },
     {
       "path": "README.md",
-      "bytes": 10103,
-      "sha256": "f2bc41ea9eb7f27d571a264e008f57714a3bad22901973051bcb8ef84df58f25"
+      "bytes": 10919,
+      "sha256": "4a3576c0edee04c9f1414b8c557848557a376b37eebe395c75e34e693edd767e"
     }
   ],
-  "artifact_hash_scope": "UTF-8 LF text / original binary bytes, excludes manifest itself and .gitattributes"
+  "artifact_hash_scope": "UTF-8 LF text / original binary bytes, excludes manifest itself and .gitattributes",
+  "followup": "followup/manifest.json",
+  "original_readme_sha256_at_85cbaa9": "f2bc41ea9eb7f27d571a264e008f57714a3bad22901973051bcb8ef84df58f25"
 }

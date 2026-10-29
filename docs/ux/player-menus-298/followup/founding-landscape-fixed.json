@@ -1,0 +1,28 @@
+{
+  "box": {
+    "bottom": 348,
+    "height": 216,
+    "left": 296,
+    "right": 578,
+    "top": 132,
+    "width": 282,
+    "x": 296,
+    "y": 132
+  },
+  "className": "founding-book-ready",
+  "close": {
+    "bottom": 188,
+    "height": 45,
+    "left": 517,
+    "right": 561,
+    "top": 143,
+    "width": 44,
+    "x": 517,
+    "y": 143
+  },
+  "style": "--founding-book-width: 282px; --founding-book-height: 2px;",
+  "viewport": {
+    "height": 360,
+    "width": 590
+  }
+}

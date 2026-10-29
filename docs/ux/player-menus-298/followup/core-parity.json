@@ -1,0 +1,15 @@
+{
+  "before": "campaign-before.json campaign member",
+  "after": "core-after.json",
+  "equal": true,
+  "canonical_sha256": "a6b0b013b503103faf3aca257d168d3a8bbca01a1c557428632f808c6f57faad",
+  "seed": 3802174487,
+  "time": {
+    "winter": 800,
+    "tick": 500
+  },
+  "stocks": {
+    "food": 15,
+    "materials": 5
+  }
+}
