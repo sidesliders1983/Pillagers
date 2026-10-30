@@ -47,6 +47,15 @@ try {
         await page.goto(origin + route, { waitUntil: 'domcontentloaded' });
         await page.locator(selector).first().waitFor({ timeout: 60000 });
         const style = await sample(page, selector);
+        if (name === 'character-lab' && expectStyle) {
+            const swatch = await page.locator('.lab-color-swatch').evaluate(node => ({
+                data: node.style.getPropertyValue('--lab-swatch'),
+                text: node.parentElement.textContent,
+                labelColor: getComputedStyle(node.parentElement).color,
+            }));
+            assert.ok(swatch.text.includes(swatch.data), 'DNA color value is retained');
+            assert.equal(swatch.labelColor, 'rgb(244, 248, 250)', 'DNA label stays readable');
+        }
         if (field && await page.locator(field).count()) {
             await page.locator(field).focus();
             const outline = await page.locator(field).evaluate(node => getComputedStyle(node).outlineColor);

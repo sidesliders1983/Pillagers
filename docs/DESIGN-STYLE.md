@@ -36,7 +36,7 @@ Gold is an accent, not the default label color. Actions, names and headings use 
 
 ## Data and scene exceptions
 
-UI styling does not recolor terrain, water, models, DNA hair/skin swatches, or weather overlays. Food/Materials production labels retain their distinct colors. Map symbols and family edges retain their encoded meaning and shape; related and deceased residents remain distinguishable by their existing cues. Scalar meters use `--fs-chart-fill`, `--fs-chart-track` and `--fs-chart-reference`; low supplies remain a warning, not an ordinary accent.
+UI styling does not recolor terrain, water, models, DNA hair/skin swatches, or weather overlays. A data-color readout uses its actual color in a swatch next to a white text value; do not use potentially dark trait colors as the label itself. Food/Materials production labels retain their distinct colors. Map symbols and family edges retain their encoded meaning and shape; related and deceased residents remain distinguishable by their existing cues. Scalar meters use `--fs-chart-fill`, `--fs-chart-track` and `--fs-chart-reference`; low supplies remain a warning, not an ordinary accent.
 
 The initial HTML loader and web manifest use matching fallback/theme colors before CSS loads; keep these metadata values aligned when changing `--fs-canvas`.
 

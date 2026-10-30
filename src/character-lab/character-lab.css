@@ -26,3 +26,15 @@
 }
 .lab-portrait-panel { display: grid; justify-items: start; gap: 12px; }
 .lab-portrait-panel img { border-radius: var(--fs-radius-panel); max-width: 100%; background: var(--fs-panel); }
+
+/* Keep the DNA readout legible even when its actual color is almost black. */
+.lab-color-swatch {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-right: .4em;
+    vertical-align: -.1em;
+    border: 1px solid var(--fs-border);
+    border-radius: 3px;
+    background: var(--lab-swatch);
+}
