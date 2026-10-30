@@ -9,7 +9,7 @@
 }
 
 .book-tabs { display: flex; flex-shrink: 0; gap: 8px; margin-bottom: 12px; }
-.book-tabs [aria-selected="true"] { border-color: var(--fs-accent); box-shadow: var(--fs-shadow-small); }
+#clan-book-reader .book-tabs [aria-selected="true"] { border-color: var(--fs-accent); box-shadow: inset 0 -3px var(--fs-accent); }
 .book-tabs [role="tab"] { flex: 1; }
 #clan-book-tree-panel[hidden], #clan-book-story-panel[hidden] { display: none; }
 #clan-book-reader[data-tab="family"] > header { flex-shrink: 0; z-index: 5; }

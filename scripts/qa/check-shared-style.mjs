@@ -91,6 +91,13 @@ try {
         if (touch) await page.getByRole('button', { name: 'Settlement navigation', exact: true }).click();
         await page.getByRole('button', { name: 'Clan Book', exact: true }).click();
         await page.getByRole('tab', { name: 'Family Tree', exact: true }).click();
+        if (expectStyle) {
+            const tab = await page.getByRole('tab', { name: 'Family Tree', exact: true }).evaluate(node => ({
+                selected: node.getAttribute('aria-selected'), border: getComputedStyle(node).borderColor,
+            }));
+            assert.equal(tab.selected, 'true');
+            assert.equal(tab.border, 'rgb(216, 174, 96)', 'Selected book tab has the gold boundary');
+        }
         await screenshot(page, 'family-tree-' + name);
         await page.getByRole('button', { name: 'Close Clan Book', exact: true }).click();
         assert.equal(await page.locator('#fjord-food').textContent(), '15');
