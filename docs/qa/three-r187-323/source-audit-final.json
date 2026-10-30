@@ -1,0 +1,913 @@
+{
+  "recordedUtc": "2026-10-30T17:36:16.400Z",
+  "root": "D:\\CodexSites\\Pillagers\\scratch\\three-r187-spike-323",
+  "baseCommit": "01dc5f79c9b8ee4024c0fbed338af4778a5f4c97",
+  "sourceCommit": "1c04d4b1a0213bc38ae1e4bbefc608af78f25bf4",
+  "note": "Lexical inventory includes Labs and diagnostics; the report distinguishes actual live Fjord paths. Final QA additions are uncommitted at capture; per-file hashes and compiled runtime identities are authoritative.",
+  "node": "v24.22.1",
+  "versions": {
+    "three": "0.187.0",
+    "@types/three": "0.186.0",
+    "three.quarks": "0.16.0",
+    "quarks.core": "0.16.0",
+    "typescript": "5.9.3",
+    "vite": "7.3.6"
+  },
+  "sourceHashes": {
+    "package.json": "30cb099e258c43426ad5081d551e7a97e1d59cb9f28cde699b73ea507f3891f2",
+    "pnpm-lock.yaml": "c427b14c241c9f628ac5989c85086625a49a53ba515e5acdb2387764a5aae313",
+    "src/core/Renderer.ts": "cdf7d0357df849512268d76861af2d6c81ff67935cdb26857a539e5d7653d09f",
+    "src/fjord-play/FjordScene.ts": "d5a26c6e7687ce5a1de93b0479d5cdc1a9f18c954403cf9d2713d33468c1566e",
+    "src/fjord-play/FjordHdrLighting.ts": "41066f1adf88338181104544b089c20f22330fb0f3b4838e5532b8d6a2cbe2fa",
+    "src/characters/ResidentPortraitStudio.ts": "12cc1b30cd24cf6c9108eaa9f8b5665242a4ce63378277acdd224ac30788603e",
+    "src/config/PresentationQuality.ts": "9980d646775fdb5b0c28653ab270f330cdb0d386f0d4ce6b85891aa5b57556a5",
+    "src/fjord-play/entry-motion/EntryBackdropRenderer.ts": "b7c5f3ab827a013fd784aadd47e5f2e1b53a9571015fd21ad39fc9cc15906920",
+    "docs/qa/three-r187-323/protocol.json": "6b8321639ce7135dc10142b77b709bb9290036466211fb1066dca2697f289df3",
+    "scripts/qa/benchmark-three-r187.mjs": "72d25a1d5b80f7a18671f1e677d81c1abb1a2368b086b7fb888dabdf57885e29",
+    "scripts/qa/three-r187-probe.mjs": "c1b06498874110ab6cc914f79a38eb7b8900fc6c559deb6dd7b0a5da2d986778",
+    "scripts/qa/check-three-r187-lifecycle.mjs": "2c41d37fa345a5bf6362f04fbdc3183b40df8df885b00dd5c6f7c3aadac0a683",
+    "scripts/qa/check-three-r187-warm.mjs": "828903541081c393f60054c05f0199d2c477470cda891fa3798a59911dbd93a3",
+    "scripts/qa/collect-three-r187-device.mjs": "01cd5140575ab5631603f8db5e5cb841981587234e1ff06c564f3ea7c0cc2993",
+    "scripts/qa/run-three-r187-matrix.mjs": "803ac694d6c7a03a42d586e3d11f06d3a9f8a567d74ca881062cefe86e8243d4",
+    "scripts/qa/stage-three-r187-review.mjs": "bdb38d81b0b175a7cc41161310213d517b495f90320e12b9ad8c48afcca5fed5",
+    "scripts/qa/summarize-three-r187.mjs": "a94c26dd828ffa0ab3aad9398a317420e1796c51bb07ffe8b2a1e7e5fd013c02",
+    "scripts/qa/archive-three-r187-evidence.mjs": "b4074bb9e900b8fe9f2f6aacc0b0cb97d2042c7b00315a2f9c3bb8d82293354f",
+    "docs/qa/three-r187-323/review/index.html": "429c6bccd296a73e52f9f0e3f7031cf0f3b1a9717563623000f720e10ef38ab5",
+    "scripts/qa/audit-three-r187.mjs": "42e6d69bac17ad9773c5f8ff44b7db3d4646ac51d35ece52f5a7977d448df3f5"
+  },
+  "sourceReferences": {
+    "docs/qa/three-r187-323/sources/issue.json": "3a954045ca5c015a230178127d8f4ce51e38333cdb176cc2a3be4db5ae37f563",
+    "docs/qa/three-r187-323/sources/migration-180-187.md": "ec31c2152a6812624bea6e68ad30aa3e45702212caca2d4d6f043f28b2c9ef6d",
+    "docs/qa/three-r187-323/sources/r187-release.json": "5ef3ab863c8d9edd75191584ca56e11193ebc90df56e0f63ee8734b5e0f56aeb"
+  },
+  "engineArtifactHashes": {
+    "node_modules/three/src/core/Object3D.js": "5cd0ab0914f006ad4c5a88eeefbe114e964409be46ee005938875b11408613f0",
+    "node_modules/three/src/renderers/webgl/WebGLObjects.js": "60829abba98579b02a84177ce86b3eea127a7decac487b69c70f0e3e83a1d923",
+    "node_modules/three/src/renderers/WebGLRenderer.js": "d0cee0351c6dab0d57e6de2ca2560378c69605ce3a85e6fb0f3912639e3c4c11",
+    "node_modules/three.quarks/dist/three.quarks.esm.js": "49205c717d3f3c07a63afcc7932ecfe1899d130411f335c2c1c67ff286a5da81"
+  },
+  "compiledBuilds": {
+    "../three-r187-spike-323-baseline": {
+      "sha256": "2bad7094dfe7df04bd4b2a8e04b868ba0c80945fbc8cbd7615576b4636da23fe",
+      "value": {
+        "schemaVersion": 1,
+        "version": "0.1.0-alpha",
+        "channel": "alpha",
+        "displayVersion": "v0.1 alpha",
+        "origin": "local",
+        "buildNumber": null,
+        "buildId": "local-215d22400d3413d43570",
+        "builtAt": "2026-10-30T15:35:20.914Z",
+        "source": {
+          "commit": "01dc5f79c9b8ee4024c0fbed338af4778a5f4c97",
+          "dirty": false,
+          "provenance": "git"
+        },
+        "legacyBuild": "01dc5f79c9b8ee4024c0fbed338af4778a5f4c97",
+        "configuration": {
+          "feedbackURL": ""
+        }
+      }
+    },
+    ".": {
+      "sha256": "60c70866d0a9759e17b1181066482969115b055cdf4c7b60b06ee394daaeadaa",
+      "value": {
+        "schemaVersion": 1,
+        "version": "0.1.0-alpha",
+        "channel": "alpha",
+        "displayVersion": "v0.1 alpha",
+        "origin": "local",
+        "buildNumber": null,
+        "buildId": "local-b3a19ab1297836dff8dc",
+        "builtAt": "2026-10-30T15:56:01.600Z",
+        "source": {
+          "commit": "1c04d4b1a0213bc38ae1e4bbefc608af78f25bf4",
+          "dirty": false,
+          "provenance": "git"
+        },
+        "legacyBuild": "1c04d4b1a0213bc38ae1e4bbefc608af78f25bf4",
+        "configuration": {
+          "feedbackURL": ""
+        }
+      }
+    }
+  },
+  "counts": {
+    "customShader": 21,
+    "instancing": 14,
+    "batchedMesh": 0,
+    "webgpu": 0,
+    "renderer": 19,
+    "disposal": 93,
+    "viewport": 1,
+    "explicitMatrix": 3,
+    "environment": 2,
+    "postprocessing": 1
+  },
+  "files": [
+    {
+      "file": "src/asset-lab/AssetLab.ts",
+      "sha256": "f727bb7d3372f7bf3820c563d86060745d231af770350c1354918d5073a6dcf2",
+      "matches": [
+        "renderer"
+      ]
+    },
+    {
+      "file": "src/audio/AudioControls.ts",
+      "sha256": "54c221bc9c9d659761e920ce8f39ec5e649e4516c72c0f383a21a7a4804abdcf",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/audio/FjordAudio.ts",
+      "sha256": "90d9792e58c308d163e9781f9155d5ad5648ba63b9e46f7b10f3f3624b8e4ea8",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/audio/ForegroundTrack.ts",
+      "sha256": "2ba132e92a9cb24920a4dca4716e336e3ac05ba52f39d5bed7958f19a05e4a87",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/camera/CameraObstacles.ts",
+      "sha256": "a45c1c4a467278f5369a47f86a08481467c4cad563ddbfde8df8404154f0ed65",
+      "matches": [
+        "instancing"
+      ]
+    },
+    {
+      "file": "src/character-lab/AppearanceModules.ts",
+      "sha256": "5d0a6f57ecc12abe6e2d80bd26fd58c810d7bdd102ca3a7eba17d335584612bd",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/character-lab/CharacterPreview.ts",
+      "sha256": "3b503b26ffdb8bb80e7f8fd6a8e26890d9157709b62610afbbedc47008698029",
+      "matches": [
+        "renderer",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/character-lab/CowCharacterPreview.ts",
+      "sha256": "f0584ea2fe5c183ac12d40c8c39e2c0395098de4f9640ef1bea867674377b03f",
+      "matches": [
+        "renderer"
+      ]
+    },
+    {
+      "file": "src/character-lab/Mannequin.ts",
+      "sha256": "d7c423d48c71f799bba66b99697fd52a0b8702c3d44ba3e08d05aefd77d99fa6",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/character-lab/MeshyCharacterLab.ts",
+      "sha256": "2a5c530249c87c0ba9cee40324d1069098dcd93d507ddcaead5eeb331a29fd6c",
+      "matches": [
+        "renderer",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/character-lab/PreviewGround.ts",
+      "sha256": "563627ddd729af340f1ed1c4371c3eb6e5064ca5d241bdd82c5edce1d7ad0369",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/character-lab/StaticPoseExport.ts",
+      "sha256": "c31fc5bcfeb0615f0b2e4f3aa984ab790bc6c3db71fa770e8d4d32a75ab97e21",
+      "matches": [
+        "disposal",
+        "explicitMatrix"
+      ]
+    },
+    {
+      "file": "src/characters/CharacterFactory.ts",
+      "sha256": "57078e0116dc25afbb0f84c2f80b09ef3065030bb182a4cded15bb70bc10af26",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/characters/CharacterFitSystem.ts",
+      "sha256": "bf6b5b3440f368d68e95edb9eb8022731e893b7b4638d5d2127dafa49099d72e",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/characters/CharacterPortraits.ts",
+      "sha256": "3cb88de227abc9f76e119c9bad3470abd48ea506a990266e5ba4b721427f8727",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/characters/GarmentFit.ts",
+      "sha256": "e8a23d956558506630e22464a76d45ad602aa6cc34f3ef85a19593f2a7565121",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/characters/MeshyBodyFitAdapter.ts",
+      "sha256": "25a2b579e4d2d50b8af587acb4217346d977a59780134eb25a285634d31b5a3d",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/characters/MeshyHuman.ts",
+      "sha256": "0ee66a36151381385780a1b908f948616651b7e06e34044d2d6aa9657182f994",
+      "matches": [
+        "customShader",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/characters/MeshyModuleRuntime.ts",
+      "sha256": "3d4c99c008a6c4f556f7515acce9f2aac9a312c8f9cdc852abd6595dc4581694",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/characters/NativeFacialGeometry.ts",
+      "sha256": "be4b31b4b285055a0e0ae0f1c044c33a0f83e1c32289df0c7738ffb7b18edbff",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/characters/NativeHairRig.ts",
+      "sha256": "7c8b8b3760f2ef177cfb68a60931a9b407ffbf41d513fcc0cc94c45ed6998101",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/characters/NativePortraitRenderer.ts",
+      "sha256": "5c28450392cffa2ed69682ab66111b79b0e7c65f86ae73051f01a23102bde3e1",
+      "matches": [
+        "renderer",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/characters/PreparedNativeOutfit.ts",
+      "sha256": "4bb4386758be11e4b96754a8e850e04111d9d76b3bc5713f6f32ea25bc26c296",
+      "matches": [
+        "customShader",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/characters/ResidentPortraitStudio.ts",
+      "sha256": "12cc1b30cd24cf6c9108eaa9f8b5665242a4ce63378277acdd224ac30788603e",
+      "matches": [
+        "renderer",
+        "disposal",
+        "viewport",
+        "explicitMatrix",
+        "postprocessing"
+      ]
+    },
+    {
+      "file": "src/characters/UniversalHuman.ts",
+      "sha256": "09de1c633ef25c4839096bca2dee287a4deeceb7505f0d6e31898d6b34c401c7",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/construction/ConstructionGpuPreparation.ts",
+      "sha256": "7770c9662962b5bb437e567a6b79acbb19c602e8673103ca465bab289892bfc0",
+      "matches": [
+        "renderer",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/construction/ConstructionMaterials.ts",
+      "sha256": "e4e09cc2d0fc47fd93e1ca56a78e469b0f79e1124fb3b8cd7f5efda2263305c0",
+      "matches": [
+        "customShader",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/construction/ConstructionTransition.ts",
+      "sha256": "7fd41b1b802b7f3d0d4d953ae580b64e1f671e0c1aa924d95aaa017669f0ee91",
+      "matches": [
+        "instancing",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/core/AssetManager.ts",
+      "sha256": "b116c40f8d6e061aed25e5a2a013022cc6db6fd1cf95e5653b81d1588143d3f1",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/core/Game.ts",
+      "sha256": "401057fac4ef576cf294637e66eff1c2a4c3e4c9e4aab80d3981aee5bf4f9625",
+      "matches": [
+        "renderer",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/core/Renderer.ts",
+      "sha256": "cdf7d0357df849512268d76861af2d6c81ff67935cdb26857a539e5d7653d09f",
+      "matches": [
+        "renderer"
+      ]
+    },
+    {
+      "file": "src/core/WorldLighting.ts",
+      "sha256": "759b0a500b12da272b05a4230f4565198a09135be4ab80e82306953f41dcd0c2",
+      "matches": [
+        "customShader",
+        "renderer",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/effects/CampfireEffect.ts",
+      "sha256": "38b1771acc3fb273f9a4edebfe4bdbbeb77b0b2b798e0206bbb1cafaa31d5e60",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/effects/PrecipitationEffect.ts",
+      "sha256": "0762fc9ee845ebcada652fc8da2bd9b4f958ce05c1e581aa2e7060b39bc4a13d",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/environment-lab/EnvironmentLab.ts",
+      "sha256": "895ac6e0a8155353caba27d19775801623ee91a0d793bb6438852a64d42ea4ba",
+      "matches": [
+        "instancing",
+        "renderer",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/environment-lab/LabEnvironment.ts",
+      "sha256": "bd7a94210de887a525a371ef6c0fa8d97305da2134d69a624bd6eb2dfa028f6d",
+      "matches": [
+        "renderer",
+        "disposal",
+        "environment"
+      ]
+    },
+    {
+      "file": "src/environment-lab/LabLighting.ts",
+      "sha256": "e717032b91a16af9c1ed9eb02f0fc5fc747403e14d2059f8b3a5699ded08ed9b",
+      "matches": [
+        "renderer"
+      ]
+    },
+    {
+      "file": "src/environment-lab/LabSceneAudit.ts",
+      "sha256": "2773725a9d2fee0a0faf6c121c6a8a7314915a4c6a5cadb00649b9d30f435017",
+      "matches": [
+        "instancing"
+      ]
+    },
+    {
+      "file": "src/environment-lab/LabWorldGeneration.ts",
+      "sha256": "3d2095e77cfc1895ea224b1cd4e2113237454d4939d4aa320e36a198fe5405fd",
+      "matches": [
+        "instancing",
+        "renderer",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/environment-lab/MacroOverlay.ts",
+      "sha256": "2fe135bcacc9959cd6cd722a88e2b5b879a7eae4cd72e2464f1b51547da50769",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/CulturalCeremonyVisuals.ts",
+      "sha256": "fd723feb923e8714b4b9b2c00e16d8324d918b1e78d738e7c5bb63352d981a15",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/DiscoveryFog.ts",
+      "sha256": "3a8d5df715b248d260e81f18434816b5f93b5e8982cfd0b4e916d531c6ebc1ec",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/entry-motion/EntryMotion.ts",
+      "sha256": "b4ae452fd34c0df2abd533b26ab5077d6f81792aff52fd68715661d4f643b84e",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/FjordEntities.ts",
+      "sha256": "192b0ea7bcb482e02deb77b3c909787df3c7f521a74cd61643e777cfd26b79f4",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/FjordEntry.ts",
+      "sha256": "9665a584d0eeb1d4caf6c90bcd2cce137efa649b6888e5e94d259bf9170ad4a6",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/FjordHdrLighting.ts",
+      "sha256": "41066f1adf88338181104544b089c20f22330fb0f3b4838e5532b8d6a2cbe2fa",
+      "matches": [
+        "renderer",
+        "disposal",
+        "environment"
+      ]
+    },
+    {
+      "file": "src/fjord-play/FjordInterface.ts",
+      "sha256": "4916c0f437075a903238367050510988078817847c503023ebe014ca511a05bc",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/FjordModels.ts",
+      "sha256": "54988b94352616dc39d27dc9a7059080b452d4115213f16664617743060e37f5",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/FjordPlay.ts",
+      "sha256": "9cac0b9c034e6f1ae4272549b97650d871bcf9de6cfe8ee46eef62295bc2ee64",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/FjordScene.ts",
+      "sha256": "d5a26c6e7687ce5a1de93b0479d5cdc1a9f18c954403cf9d2713d33468c1566e",
+      "matches": [
+        "renderer",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/IslandLoading.ts",
+      "sha256": "a799d6f5beaebde3e9d873ba6c27ee181c14ce7cfc75d231adffd8b82c8acf40",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/IslandMissionMarkers.ts",
+      "sha256": "e1a719c903a6964db35402a32dbbdcde4f4d1f944f71d5a3636fa1e68eac5b99",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/LivestockDeath.ts",
+      "sha256": "1b79d0a5ab4c583bcf4dd919e3d8c654a631d9b8ec971ca331e09cad7ef479c9",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/MineWinterLight.ts",
+      "sha256": "1270a160dd916d6caf54aaa837a64a2db1713aa3a5a3ebe82b4adfdeb9aefd91",
+      "matches": [
+        "customShader",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/MiningLayer.ts",
+      "sha256": "aecbc82e3ec6dace806206f5beb11349ccb1be3e0bfa85a145b8270065fb5796",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/MiningModelAsset.ts",
+      "sha256": "f5166b9ba1f6d9d843c201a71f6779a575822e6fb1cd28643095565c4c4ce2d4",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/PerformanceMeasurements.ts",
+      "sha256": "90bb263d67f4a483b1b365b9f497e0b79d4d9cb0d447b99484483ce0694cab6f",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/PlaytestPerformance.ts",
+      "sha256": "fc7f95ec34a434ef1b8aded942da0af54dcac5a36c6430b5686749159528f6dd",
+      "matches": [
+        "renderer",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/RivalScene.ts",
+      "sha256": "83677446fcde1624b058fd8ead7967560df407896931c54fdc9c79fe6f40857b",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/SettlementDressingLayer.ts",
+      "sha256": "a6653d91c0283b8ab0575efd3d986a74a0aa5d6fee459f931e4b6e8d755dd60f",
+      "matches": [
+        "instancing",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/WeddingEnsemble.ts",
+      "sha256": "09b1d636c27713b2d1bdad7f9b7b4b10faf6b0a0e53c55123d2dec94ab01e41e",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/WetlandModelAsset.ts",
+      "sha256": "9122645a78fe185e40ef8d3b15cd58f760ff18e79a975d346389db137d0c0a4a",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/WetlandTextureAsset.ts",
+      "sha256": "cce5f6f00f8421a4722e09b001e236634175b8f201f50cb8c2f79c3a91b2bbe4",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/WetlandVegetation.ts",
+      "sha256": "c4e163389709ba75f5203a99bb9eaed286c1b6f30779aea44806ceab94fc12bc",
+      "matches": [
+        "customShader",
+        "instancing",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/fjord-play/WetLowlandLayer.ts",
+      "sha256": "efc53c337ab54f364a600eaa0c09b909fdcb0f4df6b15605056ea40a47cebd59",
+      "matches": [
+        "customShader",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/lore/ClanBookReader.ts",
+      "sha256": "8c6ef755fe15bd57cb73248a38553bbd143b275ed683d5e465bc4051ba0558cd",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/lore/FamilyTreeView.ts",
+      "sha256": "067201060d3a7b8754c971eec68ef9488a016587fe3e73294d11159b554bb43e",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/lore/FoundingBookWindow.ts",
+      "sha256": "278905a0fd1145495f34eca21b4df70c799c9a925128fbca1e698c446adda9a0",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/play/PlayUI.ts",
+      "sha256": "f731a8c54b02620090cdbdec2535ea401e9e0c4a861101a15a59d53db179d0ed",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/ui/CharacterProfileCard.ts",
+      "sha256": "f158393edde3a9932b9da62a86f96b1d52e894021811ef4500940e3a19989676",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/ui/MovementDebug.ts",
+      "sha256": "8cd92cc8570ad791f0aee34d7bb2e5814fef6a03f4db64c2118ba53344593152",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/ui/ScreenAwakeControl.ts",
+      "sha256": "d44e69f569956567d6c2c8d52c2796d1d9a0271e4834ea04d965b2e7940918ba",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/vendor/boona13-grass/GrassField.ts",
+      "sha256": "96b64c1b718021cec21dfa1c970655c6d4d99fbd701801404a376f38779cccc6",
+      "matches": [
+        "customShader",
+        "instancing",
+        "disposal",
+        "explicitMatrix"
+      ]
+    },
+    {
+      "file": "src/vendor/boona13-grass/grassShader.glsl.ts",
+      "sha256": "f541dc9cb2f4dfa881c477443c215be073fd11e0367f8a872cdd10ffa53d39ff",
+      "matches": [
+        "customShader"
+      ]
+    },
+    {
+      "file": "src/vendor/boona13-water/WaterMask.ts",
+      "sha256": "cbb4835515d591991ebb9b570f867970c6e501bcecc329ccd7bce6e75505da75",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/vendor/boona13-water/WaterNoiseLUT.ts",
+      "sha256": "c5363984998c6d3356d7bb1038654022031863b62d785e32403ae9404a8bad35",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/vendor/boona13-water/WaterPlane.ts",
+      "sha256": "78d1c8e996b98fb413bade93ef6b8c2b746ae35fb592a7bc1f149a1709f3cca0",
+      "matches": [
+        "customShader",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/vendor/ez-tree/LeafWind.ts",
+      "sha256": "427004021afac6736fc4c561dee0d5a6d8d40ace8d914dd1e4b00d83e7629ae1",
+      "matches": [
+        "customShader"
+      ]
+    },
+    {
+      "file": "src/water/ReferenceWater.ts",
+      "sha256": "dc6dcd2f093b956662635159c9f97aa75c4e01827eb96e3ed869792938e55404",
+      "matches": [
+        "customShader",
+        "renderer",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/water-lab/FloatingSample.ts",
+      "sha256": "d62192d21cb9173c6c1b750c0e69d7d4240dd475252c7c28589dadbc11ced9cc",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/water-lab/WaterLab.ts",
+      "sha256": "6be5b30fb88bb258e9c6a608bdbf8f5d2b05e93e8404573116fb2541b9cbe5d4",
+      "matches": [
+        "renderer",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/wildlife/GullWings.ts",
+      "sha256": "bc28c69d98f15325f78d53acee1aacbdc98c3c4805bd8690bc88cf0b0022c17d",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/wildlife/MarineEffects.ts",
+      "sha256": "3f0bf61edafd8dd00b0b5b26da9faaade5b957abf193794156607e7b9ac3acec",
+      "matches": [
+        "customShader",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/wildlife/WildlifeLayer.ts",
+      "sha256": "12c402fb7782a9ba759cafb49d53f9b35663c49e6eef6c6688f39326c35c680f",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/world/BlueprintTerrain.ts",
+      "sha256": "4347b0f3e30092c5aee0f6f54ee764b27e7406e9f090f3fad865ea4535756f28",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/world/BuildingPlot.ts",
+      "sha256": "066eec80f66a3e4ed63426b00f4228cb0bc5199bb9908337d7b6d607e471ae4f",
+      "matches": [
+        "instancing"
+      ]
+    },
+    {
+      "file": "src/world/DirectionalAtmosphere.ts",
+      "sha256": "4f79f2dca9129d737107e0d58b2eb768a958732d8c1a8ded43bab1174710f936",
+      "matches": [
+        "customShader",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/world/Environment.ts",
+      "sha256": "620be0186b9220b77e48f6502cb3d2fc3e8a9cdc63bf0a7dac028b1f3556891f",
+      "matches": [
+        "instancing"
+      ]
+    },
+    {
+      "file": "src/world/FjordsideWater.ts",
+      "sha256": "7561ed20c715a6651a0b2ae2bad02d0e9d63d53ec936de4f4f4109381975d598",
+      "matches": [
+        "customShader",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/world/FjordWater.ts",
+      "sha256": "c727a1178c1c7d14f82a7c3a65d588b39b55a00ee76b8b21339a2c9dc55ca81d",
+      "matches": [
+        "customShader",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/world/GroundBlending.ts",
+      "sha256": "06f42e6813834c745b500b9628432704d1cb62148624a8988954bd846fafcc52",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/world/GroundMaterials.ts",
+      "sha256": "100e79717373743c566cb7370077d40fe3bde677c3d55446bacb961d76aeabbf",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/world/HomeGroundGlow.ts",
+      "sha256": "b92442efc12cadcff283ea156bb835d22b272621567b7abf022d7bb52d436a44",
+      "matches": [
+        "customShader",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/world/KayKitNature.ts",
+      "sha256": "d16e33040bc9ca852dd0def53c07f0f07c3c65fc8120b99e89c9935f54ff92f4",
+      "matches": [
+        "instancing"
+      ]
+    },
+    {
+      "file": "src/world/NatureWind.ts",
+      "sha256": "524180476fc071a227aca596c35ff8c081d1b02133502875f855348d3c3d9669",
+      "matches": [
+        "customShader",
+        "instancing",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/world/PineModels.ts",
+      "sha256": "a0f3fee4c7e7c56314ef0df0967af5c7ce550263923afbfd16dc39d91a147ed4",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/world/RegionalGroundMaterials.ts",
+      "sha256": "bdf1bfc6bbba60e54241d48a1cbe60b18fac5933679c1de9601421723bfee05f",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/world/SeasonTint.ts",
+      "sha256": "f37d653635298e01c3a84c8f5605d03d5f1dc3ec2524b3d9f2ce46f8ca394434",
+      "matches": [
+        "customShader",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/world/SettlementGrass.ts",
+      "sha256": "e7fdb5a10abed725e1668e7149ec9ddb897be7e7537c27c55212f6f30d885d16",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/world/StructureSeasonTint.ts",
+      "sha256": "b4098a4d24e8d0503c2c95ccc13713a86fb6a69e31404d14bd7efc9a78af2edb",
+      "matches": [
+        "customShader",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/world/Terrain.ts",
+      "sha256": "9a2a7bd8d14ad5147f32f7b2b6d1b1d1e4e9351652007800867d0521eeda660e",
+      "matches": [
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/world/UnifiedWaterLighting.ts",
+      "sha256": "21af6fa86d4c54ce7e052d8d05e3ffe5797fd9c5c2dd82b958c024125ecd7e8b",
+      "matches": [
+        "customShader"
+      ]
+    },
+    {
+      "file": "src/world/World.ts",
+      "sha256": "a6bc6b8638621159d68b49133be63d162e04807ea3a22a16d7ea08dcd81fa3dd",
+      "matches": [
+        "instancing",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/world/WorldFactory.ts",
+      "sha256": "fab2c784d40145b7e069c12a53596750d59ab4e1122e36da8d9afe6e2ffd02a9",
+      "matches": [
+        "instancing",
+        "disposal"
+      ]
+    },
+    {
+      "file": "src/world/WorldGroundMaterials.ts",
+      "sha256": "a60186155c299af0b8ef888501462c77023249c7b53ec2e7861f4b72b72c2836",
+      "matches": [
+        "disposal"
+      ]
+    }
+  ],
+  "branch": "codex/three-r187-spike-323",
+  "workingTreeStatus": [
+    "M docs/qa/three-r187-323/README.md",
+    " M docs/qa/three-r187-323/sources/migration-180-187.md",
+    " M scripts/qa/audit-three-r187.mjs",
+    " M scripts/qa/benchmark-three-r187.mjs",
+    "?? docs/qa/three-r187-323/comparison.json",
+    "?? docs/qa/three-r187-323/environment.json",
+    "?? docs/qa/three-r187-323/evidence/",
+    "?? docs/qa/three-r187-323/review/",
+    "?? docs/qa/three-r187-323/source-audit-final.json",
+    "?? output/island-loading-259/",
+    "?? scripts/qa/archive-three-r187-evidence.mjs",
+    "?? scripts/qa/check-three-r187-lifecycle.mjs",
+    "?? scripts/qa/check-three-r187-warm.mjs",
+    "?? scripts/qa/collect-three-r187-device.mjs",
+    "?? scripts/qa/run-three-r187-matrix.mjs",
+    "?? scripts/qa/stage-three-r187-review.mjs",
+    "?? scripts/qa/summarize-three-r187.mjs"
+  ]
+}

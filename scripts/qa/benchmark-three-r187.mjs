@@ -1,3 +1,4 @@
+import { existsSync } from 'node:fs';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
@@ -22,9 +23,25 @@ const output = path.resolve(options.output || `scratch/three-r187-323/pilot-${ar
 const sourceRoot = path.resolve(options.source || (arm === 'A' ? '../three-r187-spike-323-baseline' : '.'));
 const sourceCommit = execFileSync('git', ['-C', sourceRoot, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
 const fixtureDirectory = path.resolve('docs/qa/three-r187-323/fixtures');
-const fixtureText = await readFile(path.join(fixtureDirectory, fixture), 'utf8');
+let fixtureText = await readFile(path.join(fixtureDirectory, fixture), 'utf8');
+let requestedPresentation;
+if (options.siteView === 'true' || options.quality || options.hdr) {
+    const save = JSON.parse(fixtureText);
+    requestedPresentation = { ...save.presentation, quality:options.quality || 'low', effects:'low', hdr:options.hdr === 'true' };
+    if (options.siteView === 'true') {
+        const sites = save.fjord.campaign.mining.sites;
+        const site = fixture === 'marsh.json' ? sites.find(item => item.appearance === 'bog-iron') : sites[0];
+        const {x,y,z} = site.position;
+        requestedPresentation.camera = { target:[x,y+1,z], position:[x+36,y+32,z+44] };
+    }
+    save.presentation = requestedPresentation;
+    fixtureText = JSON.stringify(save);
+}
 const protocolText = await readFile('docs/qa/three-r187-323/protocol.json', 'utf8');
 const sha256 = value => createHash('sha256').update(value).digest('hex');
+if (existsSync(path.join(output, 'run.json'))) {
+    throw new Error(`Preserve existing measured evidence; choose a new --output directory: ${output}`);
+}
 await mkdir(output, { recursive: true });
 const temporary = path.resolve('scratch/three-r187-323/tmp');
 await mkdir(temporary, { recursive: true });
@@ -33,10 +50,12 @@ const browser = await chromium.launch({ headless: true, chromiumSandbox: true,
     executablePath: process.env.QA_CHROME || 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
     args: ['--enable-precise-memory-info'] });
 const engineVersion = JSON.parse(await readFile(path.join(sourceRoot, 'node_modules/three/package.json'), 'utf8')).version;
-const report = { schemaVersion: 1, arm, fixture, origin, sourceRoot, sourceCommit, engineVersion,
+const report = { schemaVersion: 1, arm, fixture, origin, sourceRoot, sourceCommit, engineVersion, requestedPresentation,
     sourceLockSHA256: sha256(await readFile(path.join(sourceRoot, 'pnpm-lock.yaml'))),
     compiledBuildInfo: JSON.parse(await readFile(path.join(sourceRoot, 'dist/build-info.json'), 'utf8')),
     startedUtc: new Date().toISOString(),
+    runnerSHA256: sha256(await readFile('scripts/qa/benchmark-three-r187.mjs')),
+    probeSHA256: sha256(await readFile('scripts/qa/three-r187-probe.mjs')),
     fixtureSHA256: sha256(fixtureText), protocolSHA256: sha256(protocolText),
     settings: { viewport: [1440, 900], deviceScaleFactor: 1, warmupSeconds: warmup, sampleSeconds: seconds },
     browser: browser.version(), headless: true, thermalState: 'not measurable on this workstation',
@@ -134,7 +153,18 @@ try {
     } else await page.evaluate(() => window.fjordSpikeProbe.stop());
     report.raw = await page.evaluate(() => window.fjordSpikeProbe.snapshot());
     report.after = await diagnostics();
+    report.hdrStatus = await page.locator('#fjord-hdr-status').innerText();
+    const checkpoint = await page.evaluate(() => sessionStorage.getItem('pillagers.fjord-play.active.v1'));
+    if (!checkpoint) throw new Error('The public active checkpoint was not persisted.');
+    const canonical = JSON.parse(checkpoint).fjord.campaign;
+    report.canonicalSHA256 = sha256(JSON.stringify(canonical));
+    report.canonicalTime = canonical.time;
+    await writeFile(path.join(output, 'checkpoint.json'), checkpoint);
     report.afterScene = await page.locator('#fjord-canvas').evaluate(canvas => ({ ...canvas.dataset }));
+    if (options.hideDiagnosticsShot === 'true') {
+        await page.locator('#performance-overlay').evaluate(element => { element.style.visibility = 'hidden'; });
+        report.screenshotDiagnosticsHidden = true;
+    }
     await page.screenshot({ path: path.join(output, 'after.png') });
     const intervals = report.raw.frames.map(frame => frame[1]).sort((a, b) => a - b);
     const percentile = p => intervals[Math.ceil(intervals.length * p) - 1] ?? null;

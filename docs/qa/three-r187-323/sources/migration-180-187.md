@@ -84,4 +84,3 @@
 - The `damp` property of `AfterImageNode` is now of type `Node<float>`. When creating an effect node via `afterImage()`, it is not required to pass in a number anymore. A node constant or a uniform node are accepted as well.
 - The `resolution` property of `WaterMesh` has been renamed to `resolutionScale`.
 - three.js has a new API documentation which is now generated based on JSDoc. The new documentation covers the entire API, provides a better search and better type information. However, i18n (internationalization) isn't supported anymore meaning the docs are only available in English.
-
