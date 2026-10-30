@@ -1,0 +1,147 @@
+{
+  "visibilityMode": "Explicitly emulated document.hidden getter and visibilitychange events; not a physical background-tab test",
+  "initial": {
+    "state": {
+      "variant": "rendered",
+      "eligible": true,
+      "desktop": true,
+      "finePointer": true,
+      "motionAllowed": true,
+      "enabled": true,
+      "hidden": true,
+      "exiting": false,
+      "canvases": 0
+    },
+    "requests": []
+  },
+  "running": {
+    "variant": "rendered",
+    "eligible": true,
+    "desktop": true,
+    "finePointer": true,
+    "motionAllowed": true,
+    "enabled": true,
+    "hidden": false,
+    "exiting": false,
+    "canvases": 1,
+    "frames": 5,
+    "pixels": 900000,
+    "cpuP95": 0.5,
+    "paused": false,
+    "phase": 0.15009999999999993,
+    "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  },
+  "paused": {
+    "variant": "rendered",
+    "eligible": true,
+    "desktop": true,
+    "finePointer": true,
+    "motionAllowed": true,
+    "enabled": true,
+    "hidden": true,
+    "exiting": false,
+    "canvases": 1,
+    "frames": 5,
+    "pixels": 900000,
+    "cpuP95": 0.5,
+    "paused": true,
+    "phase": 0.15009999999999993,
+    "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  },
+  "stillPaused": {
+    "variant": "rendered",
+    "eligible": true,
+    "desktop": true,
+    "finePointer": true,
+    "motionAllowed": true,
+    "enabled": true,
+    "hidden": true,
+    "exiting": false,
+    "canvases": 1,
+    "frames": 5,
+    "pixels": 900000,
+    "cpuP95": 0.5,
+    "paused": true,
+    "phase": 0.15009999999999993,
+    "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  },
+  "resumed": {
+    "variant": "rendered",
+    "eligible": true,
+    "desktop": true,
+    "finePointer": true,
+    "motionAllowed": true,
+    "enabled": true,
+    "hidden": false,
+    "exiting": false,
+    "canvases": 1,
+    "frames": 22,
+    "pixels": 900000,
+    "cpuP95": 0.2999999988824129,
+    "paused": false,
+    "phase": 0.7500340000000002,
+    "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  },
+  "changes": [
+    {
+      "name": "mountain",
+      "box": {
+        "left": 1020,
+        "top": 320,
+        "width": 60,
+        "height": 60
+      },
+      "changedChannels": 0,
+      "maxDifference": 0
+    },
+    {
+      "name": "foreground-post",
+      "box": {
+        "left": 810,
+        "top": 735,
+        "width": 45,
+        "height": 45
+      },
+      "changedChannels": 0,
+      "maxDifference": 0
+    },
+    {
+      "name": "village",
+      "box": {
+        "left": 1330,
+        "top": 510,
+        "width": 50,
+        "height": 40
+      },
+      "changedChannels": 0,
+      "maxDifference": 0
+    },
+    {
+      "name": "water",
+      "box": {
+        "left": 1210,
+        "top": 675,
+        "width": 80,
+        "height": 60
+      },
+      "changedChannels": 12442,
+      "maxDifference": 143
+    },
+    {
+      "name": "sky",
+      "box": {
+        "left": 1050,
+        "top": 80,
+        "width": 80,
+        "height": 60
+      },
+      "changedChannels": 10160,
+      "maxDifference": 27
+    }
+  ],
+  "normalState": {
+    "effectRequests": [],
+    "canvas": 0
+  },
+  "errors": []
+}

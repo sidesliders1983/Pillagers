@@ -1,0 +1,18 @@
+.entry-motion-layer { position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0; }
+.entry-motion-layer[data-ready] { opacity: 1; }
+.entry-motion-layer canvas { display: block; width: 100%; height: 100%; }
+.motion-prototype-bar {
+    position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); z-index: 1000;
+    width: max-content; max-width: calc(100vw - 24px); padding: 10px 14px;
+    border: 1px solid var(--fs-accent); border-radius: var(--fs-radius-card);
+    background: var(--fs-surface-solid); color: var(--fs-text); font: 12px/1.4 var(--fs-font-body);
+    box-shadow: var(--fs-shadow-panel);
+}
+.motion-prototype-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+.motion-prototype-bar button { min-height: 34px; padding: 5px 10px; font: inherit; }
+.motion-prototype-bar p { margin: 5px 0 0; }
+.motion-prototype-bar a { color: var(--fs-text); }
+.motion-prototype-bar pre { max-height: 40vh; overflow: auto; white-space: pre-wrap; margin: 5px 0; }
+.motion-prototype-bar details { margin-top: 4px; }
+.motion-prototype-bar summary { cursor: pointer; }
+@media (max-width: 700px) { .motion-prototype-bar { bottom: 6px; } }

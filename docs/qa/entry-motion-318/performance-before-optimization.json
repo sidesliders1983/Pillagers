@@ -1,0 +1,131 @@
+[
+  {
+    "variant": "static",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "browser": "156.0.8078.74",
+    "elapsed": 30007.60000000149,
+    "draws": 0,
+    "cpuSubmissionP95Ms": 0,
+    "rafGapP50Ms": 16.69999999999891,
+    "rafGapP95Ms": 16.800000000000182,
+    "rafGapsOver50Ms": 0,
+    "gpuTimerSupported": false,
+    "gpuP95Ms": null,
+    "gpuSamples": 0,
+    "disjoint": 0,
+    "longTasks": [],
+    "delta": {
+      "TaskDuration": 0.396803,
+      "ScriptDuration": 0.042211,
+      "LayoutDuration": 0.000262,
+      "RecalcStyleDuration": 0.00005,
+      "JSHeapUsedSize": -360692,
+      "Nodes": -51
+    },
+    "state": {
+      "variant": "static",
+      "eligible": true,
+      "desktop": true,
+      "finePointer": true,
+      "motionAllowed": true,
+      "enabled": true,
+      "hidden": false,
+      "exiting": false,
+      "canvases": 0
+    },
+    "errors": []
+  },
+  {
+    "variant": "layered",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "browser": "156.0.8078.74",
+    "elapsed": 30017.099999999627,
+    "draws": 838,
+    "cpuSubmissionP95Ms": 0.10000000149011612,
+    "rafGapP50Ms": 16.69999999999891,
+    "rafGapP95Ms": 16.800000000000182,
+    "rafGapsOver50Ms": 0,
+    "gpuTimerSupported": true,
+    "gpuP95Ms": 2.49424,
+    "gpuSamples": 28,
+    "disjoint": 0,
+    "longTasks": [],
+    "delta": {
+      "TaskDuration": 0.688854,
+      "ScriptDuration": 0.103544,
+      "LayoutDuration": 0.000585,
+      "RecalcStyleDuration": 0.00011,
+      "JSHeapUsedSize": -330304,
+      "Nodes": -61
+    },
+    "state": {
+      "variant": "layered",
+      "eligible": true,
+      "desktop": true,
+      "finePointer": true,
+      "motionAllowed": true,
+      "enabled": true,
+      "hidden": false,
+      "exiting": false,
+      "canvases": 1,
+      "frames": 893,
+      "pixels": 900000,
+      "cpuP95": 0.10000000149011612,
+      "paused": false,
+      "phase": 31.933286000000138,
+      "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    "errors": []
+  },
+  {
+    "variant": "rendered",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "browser": "156.0.8078.74",
+    "elapsed": 30008.699999999255,
+    "draws": 825,
+    "cpuSubmissionP95Ms": 0.10000000149011612,
+    "rafGapP50Ms": 16.69999999999891,
+    "rafGapP95Ms": 16.80000000000109,
+    "rafGapsOver50Ms": 0,
+    "gpuTimerSupported": true,
+    "gpuP95Ms": 8.940214,
+    "gpuSamples": 28,
+    "disjoint": 0,
+    "longTasks": [],
+    "delta": {
+      "TaskDuration": 0.697608,
+      "ScriptDuration": 0.104703,
+      "LayoutDuration": 0.000768,
+      "RecalcStyleDuration": 0.000154,
+      "JSHeapUsedSize": -298224,
+      "Nodes": -61
+    },
+    "state": {
+      "variant": "rendered",
+      "eligible": true,
+      "desktop": true,
+      "finePointer": true,
+      "motionAllowed": true,
+      "enabled": true,
+      "hidden": false,
+      "exiting": false,
+      "canvases": 1,
+      "frames": 886,
+      "pixels": 900000,
+      "cpuP95": 0.10000000149011612,
+      "paused": false,
+      "phase": 32.21680000000009,
+      "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    "errors": []
+  }
+]

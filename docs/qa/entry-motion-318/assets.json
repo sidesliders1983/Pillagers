@@ -1,0 +1,49 @@
+{
+  "cutout": {
+    "path": "D:/CodexSites/Pillagers/Assets/Background-startgame/upscalemedia-transformed (3).png",
+    "sha256": "14cd041dfa07d7b7eb3b45763089168dc994675657d0c5bd07af6da29a61284d"
+  },
+  "reference": {
+    "path": "D:/CodexSites/Pillagers/Assets/Background-startgame/Noorderlicht boven het Vikingfjord.png",
+    "sha256": "561f42950cf94da625df97028674cd0952953f316db24a305d0390a4f648f350"
+  },
+  "mask": {
+    "path": "src/fjord-play/prototypes/entry-motion-318/land-mask.png",
+    "sha256": "ac32a7848f07c05373ed060b04a1dd6553237e8747e4be4cb5385b7b6faacfbb",
+    "bytes": 120398,
+    "channels": "R: original land alpha; G: conservative sky opening; B: conservative water opening"
+  },
+  "effectSource": [
+    {
+      "file": "Backdrop.prototype.ts",
+      "bytes": 7781,
+      "gzip": 2693,
+      "sha256": "4cd6538a9955f29285bbb77ef30a6c8d6c4587f47f94ee747c8e64501028f9da"
+    },
+    {
+      "file": "EntryMotion.prototype.ts",
+      "bytes": 9367,
+      "gzip": 3108,
+      "sha256": "efba1aa8c0464d20a8db112646200f63df0135fe6332325f4a56b0935a97cf1b"
+    },
+    {
+      "file": "motion.frag",
+      "bytes": 3990,
+      "gzip": 1459,
+      "sha256": "a98923bdcda5ee98214f75b5d3cbebe17838965ad6577937143161fba5eff53e"
+    },
+    {
+      "file": "prototype.css",
+      "bytes": 1178,
+      "gzip": 547,
+      "sha256": "c14051446a7c0dc497ce44b63e25a419b786ae92859abe88a6117f0d9b7898b3"
+    }
+  ],
+  "sourceGzipSum": 7807,
+  "runtimePhoto": {
+    "path": "public/branding/fjordside/start/fjordside-twilight-2560.webp",
+    "sha256": "f98fbdc7b71d694b92cba873b05cb67065945d39b24889927b558886c7c522e3",
+    "bytes": 405640,
+    "reused": true
+  }
+}

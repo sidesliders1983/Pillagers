@@ -25,7 +25,8 @@
     "validate:public": "node scripts/validate-public-assets.mjs",
     "assets:tent": "node scripts/prepare-meshy-tent.mjs",
     "assets:cow": "node scripts/prepare-meshy-cow.mjs",
-    "assets:livestock": "node scripts/prepare-livestock.mjs"
+    "assets:livestock": "node scripts/prepare-livestock.mjs",
+    "prototype:entry-motion": "node scripts/qa/entry-motion-prototype-server.mjs"
   },
   "dependencies": {
     "nosleep.js": "0.12.0",
