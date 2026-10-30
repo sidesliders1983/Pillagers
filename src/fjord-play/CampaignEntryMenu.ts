@@ -99,7 +99,6 @@ export function organizeCampaignEntry(
     decorateAction(loadButton, 'Load game', 'book', 'Open a saved campaign or file.');
     decorateAction(panels.querySelector<HTMLElement>('[data-start-view="settings"]')!, 'Settings', 'settings');
     decorateAction(panels.querySelector<HTMLElement>('[data-start-view="help"]')!, 'Help & support', 'help');
-    (continueButton.hidden ? newMenuButton : continueButton).classList.add('entry-menu-primary');
     panels.querySelector('[data-start-primary]')!.append(continueButton, newMenuButton, loadButton);
     panels.querySelector('[data-start-choices]')!.append(newButton, replayButton, replayReason, rules);
     panels.querySelector('[data-start-audio]')!.append(audio);
@@ -146,5 +145,4 @@ export function organizeCampaignEntry(
             back();
         }
     });
-    (continueButton.hidden ? newMenuButton : continueButton).focus();
 }

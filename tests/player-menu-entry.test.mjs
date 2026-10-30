@@ -39,6 +39,7 @@ async function entry(run, saved = null) {
 
 test('a first arrival can find New game and Load game without navigating technical choices', async () => {
     await entry(async ({ writes, attempts }) => {
+        assert.equal(document.activeElement, document.body, 'Entry does not choose an action for the player');
         assert.ok(button('New game'));
         assert.ok(button('Load game'));
         assert.ok(button('Settings'));

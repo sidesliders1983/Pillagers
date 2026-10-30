@@ -78,7 +78,7 @@ try {
         await Promise.all(pending);
         await noWorld(page);
         assert.equal(await page.getByRole('button', { name: 'Continue campaign', exact: true }).isVisible(), false);
-        assert.equal(await page.locator('.entry-menu-primary').getAttribute('aria-label'), 'New game');
+        assert.equal(await page.evaluate(() => document.activeElement.tagName), 'BODY', 'No action is automatically focused');
         assert.equal(images.length, 1, 'One matching background is fetched');
         const expected = manifest.files.find(file => file.width === (width >= 1100 ? 2560 : 1280));
         assert.equal(images[0].sha256, expected.sha256);
@@ -104,7 +104,7 @@ try {
         await screenshot(page, name + '-import-error');
         await page.locator('input[type="file"]').setInputFiles(fixture);
         await page.getByRole('button', { name: 'Continue campaign', exact: true }).waitFor();
-        assert.equal(await page.locator('.entry-menu-primary').getAttribute('aria-label'), 'Continue campaign');
+        assert.equal(await page.evaluate(() => document.activeElement.tagName), 'BODY', 'Choosing a file does not preselect an action');
         await page.getByText('Campaign details', { exact: true }).click();
         assert.match(await page.locator('.entry-save-details').textContent(), /3802174487/);
         await screenshot(page, name + '-continue');

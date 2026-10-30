@@ -24,6 +24,8 @@ This is the current visual contract for FjordSide and its labs. The owner approv
 
 Apply alpha to the **background color**, not to a whole panel: text and icons remain fully opaque. Use the 94% panel for HUD groups, management, books, menus, dialogs and floating controls; 92% cards for grouped choices. Solid inner surfaces are appropriate for nested/sticky sections. Do not stack transparent text containers or add backdrop blur. Panel colors stay readable over bright snow and water; secondary text over even pure white scenery under the panel is approximately 10.37:1, and its essential control border 4.59:1. Preserve at least 4.5:1 normal text and 3:1 large text/control contrast when adding variants.
 
+Entry actions start neutral, with no forced action focus or selected-looking default card. A panel heading may receive silent reading focus for screen-reader context; its next interactive control receives the visible outline when reached with Tab.
+
 Gold is an accent, not the default label color. Actions, names and headings use white; metadata uses cool white. Selected controls use both a gold boundary and their existing pressed/selected state. Hover has its own darker fill. Keyboard focus is cyan and must remain visible independently of selection. Disabled controls use `--fs-disabled-opacity` (.65) and retain native disabled semantics.
 
 ## Type, shape and interaction
