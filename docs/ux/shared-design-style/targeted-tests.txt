@@ -1,0 +1,27 @@
+✔ entry is read-only until a confirmed choice is ready; cancel and repeated clicks are safe (8889.5597ms)
+✔ failed assets and quota retry the same attempt, protecting saves and exposing export (750.638ms)
+✔ fresh entry has no invented save; leaving fences late activation (112.4105ms)
+✔ a changed active session fences a stale loaded campaign before any write (1185.1417ms)
+✔ guided crew and supplies steps preserve the complete campaign and manual pause (1027.8016ms)
+✔ packing exposes destination controls and cancelling a map choice preserves the paid pack (386.6426ms)
+✔ Explore and Known places share the selected group without dispatching or changing the clock (416.4818ms)
+✔ ending a paid pack and disbanding at home each require a real confirmation with a safe Back (302.4713ms)
+✔ book cards are named avatar profiles, with a factual generation header and reused relationships/history (5177.9663ms)
+✔ portraits are requested only for visible cards; Close/tab change aborts work and broken images keep initials (998.23ms)
+✔ late portraits and selected people from an abandoned campaign never enter the rebuilt tree (1992.5297ms)
+✔ world gestures are contained while native scrolling and keyboard controls remain available (757.1331ms)
+✔ a large tree bounds visible thumbnail work and ignores callbacks from a previous campaign (3189.6757ms)
+✔ the game menu prioritizes session actions and retains setting values when returning and closing (663.311ms)
+✔ New game offers a fresh arrival and founding replay without requiring a seed choice (101.0125ms)
+✔ feedback links require an owner-configured HTTPS destination and add no campaign data (237.1069ms)
+✔ a first arrival can find New game and Load game without navigating technical choices (9566.4396ms)
+✔ returning players see their campaign date, can inspect seed details, and cancel a replacement safely (1583.4416ms)
+✔ real Clan Book DOM supports explicit adoption, Attention, witnesses, groups, persistence and stale links (3316.8392ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 67329.6297

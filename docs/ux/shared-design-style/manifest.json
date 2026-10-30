@@ -1,0 +1,373 @@
+{
+  "application_code_commit": "cb7c060d832702c05336b440912bebcffb5ea40d",
+  "sources": [
+    {
+      "path": "AGENTS.md",
+      "sha256_git_bytes": "aa769f6302a6b2894850d98c169a4dd42227ab7dc52cf2e9091ae1a0df78bc57"
+    },
+    {
+      "path": "docs/DESIGN-STYLE.md",
+      "sha256_git_bytes": "121bc32160c6de1dd11091791ce8c95376731e163ce2974bc3470bfa49a5b8fa"
+    },
+    {
+      "path": "index.html",
+      "sha256_git_bytes": "baabd9614cc8f659739e5fd807c6217626191269a1502e3a9f4c30a98396b91d"
+    },
+    {
+      "path": "public/fjordside.webmanifest",
+      "sha256_git_bytes": "be6d3d13bce70f15784241fc038823d415bb6255bab407de370cc37dd862843f"
+    },
+    {
+      "path": "scripts/qa/check-shared-style.mjs",
+      "sha256_git_bytes": "7b3ec4193ee814e43b5ab5d549ac4d386bd892ee872854171ce9e971a5ce9aea"
+    },
+    {
+      "path": "src/asset-lab/asset-lab.css",
+      "sha256_git_bytes": "cfe71dc50d6d0d87e972845b2e99dbe479bee3f16b9abb412698d0f1642c6e48"
+    },
+    {
+      "path": "src/character-lab/CharacterLabUI.ts",
+      "sha256_git_bytes": "616963ad9755370a832ae3230b9f17a32a05c657e9def711e8a8cc296f7a405b"
+    },
+    {
+      "path": "src/character-lab/character-lab.css",
+      "sha256_git_bytes": "53a9d06bf0e198d5e47119e962767912a957c42cc39c18bb9398d9a7fd46b8a0"
+    },
+    {
+      "path": "src/character-lab/meshy-lab.css",
+      "sha256_git_bytes": "86c4425ffe5675aa27dd3649a633dcffe665228eaf5ee20eb06b010209be2df8"
+    },
+    {
+      "path": "src/environment-lab/environment-lab.css",
+      "sha256_git_bytes": "3532cfa1c37e6a0dfefeaef506dafa5130eebc76d7984a1c70942cdfd3d757cb"
+    },
+    {
+      "path": "src/fjord-play/campaign-start.css",
+      "sha256_git_bytes": "d821607d49bb1c92dd6f3f14b25c30da84cbef550929ecf4d612af5df2c1d537"
+    },
+    {
+      "path": "src/fjord-play/cultural-ceremony.css",
+      "sha256_git_bytes": "cdcbda31d770a7c73cee9ea68c7742de8faeac8994b481d2b42d35de9b573088"
+    },
+    {
+      "path": "src/fjord-play/cultural-gathering.css",
+      "sha256_git_bytes": "61f729eef6423b3a51339149d42cc559135e8a42b01c17fd5791863a903e34d2"
+    },
+    {
+      "path": "src/fjord-play/desktop-foundations.css",
+      "sha256_git_bytes": "07535eb1ad58198464243b703534befc88b5ec30b5bcbcb087f9a365332536e9"
+    },
+    {
+      "path": "src/fjord-play/expedition-guided.css",
+      "sha256_git_bytes": "fd9ef9a1093836e7b7f2cd91ed6a820a081775a64cf217056c14cb15fcf494e1"
+    },
+    {
+      "path": "src/fjord-play/first-steps.css",
+      "sha256_git_bytes": "2b881488162f2afcb831d279b09fb2639c47560bff838a5a60ebbe0c652420ca"
+    },
+    {
+      "path": "src/fjord-play/fjord-interface.css",
+      "sha256_git_bytes": "9b188c5143cc590afc4b513916b70deead787f5a7a50f00e98427ae95536f525"
+    },
+    {
+      "path": "src/fjord-play/fjord-play.css",
+      "sha256_git_bytes": "bf631a6884ac53ba468a1441b24e9be5ab6e428094c071302da9cd295db951b5"
+    },
+    {
+      "path": "src/fjord-play/island-loading.css",
+      "sha256_git_bytes": "db3c27f238cd6f2612a6ef871439859e06c425011da6970fa7aefffd5a622c63"
+    },
+    {
+      "path": "src/fjord-play/island-map.css",
+      "sha256_git_bytes": "401453ab70b135ae8d60e3796f9edaaef2edaf6a515ca1da8a4b5b137823d0cd"
+    },
+    {
+      "path": "src/fjord-play/merchant.css",
+      "sha256_git_bytes": "b694dfd5ecb12e2e34f2e57ac4edfd1a326078ec11226fa64247146b8db5af66"
+    },
+    {
+      "path": "src/fjord-play/mining.css",
+      "sha256_git_bytes": "48ed646d93d98506118e3f2db86cdf72c2e7c2b3b7c739c15aff8ff60f54b7f6"
+    },
+    {
+      "path": "src/fjord-play/mobile-horizon.css",
+      "sha256_git_bytes": "c72df3af27de70f4a8fe1154f6f54d6cea70a3938ef415220b1e58b67b34b189"
+    },
+    {
+      "path": "src/fjord-play/performance-overlay.css",
+      "sha256_git_bytes": "dcdc606abd9eb46bac7451fe24a89600898f5cefe872ad413b62e359b0824337"
+    },
+    {
+      "path": "src/fjord-play/player-menu.css",
+      "sha256_git_bytes": "1efca312c5d51357d241b1b14456ff3dadf64c73f736823024438cd6c9e36b4d"
+    },
+    {
+      "path": "src/fjord-play/start-screen-theme.css",
+      "sha256_git_bytes": "6d21672957769280ab4221be70ece36a15b3b814861eb9b6baebd13f3fe549b9"
+    },
+    {
+      "path": "src/fjord-play/wedding-cinematic.css",
+      "sha256_git_bytes": "d5901228626693502f3b3cc058add8b59ef72778bb2e08a8ea4206f463df2e2f"
+    },
+    {
+      "path": "src/fjord-play/wedding-invitation.css",
+      "sha256_git_bytes": "26481cd705a1620f3129db55b54affc6c900a1c93552a35a244c65256a840868"
+    },
+    {
+      "path": "src/fjord-play/wildlife-cinematic.css",
+      "sha256_git_bytes": "2067de1600480c0ffd662ba10d39fde9a079537a15472192a50644837afddc40"
+    },
+    {
+      "path": "src/gameplay-lab/gameplay-lab.css",
+      "sha256_git_bytes": "3af84c05f1b631a2f5bf52d9208be72367237ec5c08f0555225bdac3a9746de9"
+    },
+    {
+      "path": "src/lore/attention.css",
+      "sha256_git_bytes": "3c0d9165ba01f742748154f11c152538ba3fad88f76c90ac75e8a71c5146a3a9"
+    },
+    {
+      "path": "src/lore/clan-book.css",
+      "sha256_git_bytes": "a2249cf37a9dc39d69260800f02e327f8ee40380eed6347ae4ae4ed7d8e0e20d"
+    },
+    {
+      "path": "src/lore/family-tree.css",
+      "sha256_git_bytes": "7f67ae4f85c775e31b22ebaa5410d0e333540af7fd2d9654fa9b8abe33ea5c7a"
+    },
+    {
+      "path": "src/lore/personal-history.css",
+      "sha256_git_bytes": "59394be1f2ab1f892f60e19fa3c0985dbf15fd976e958e1ec7ead26c35e81573"
+    },
+    {
+      "path": "src/lore/wildlife-book.css",
+      "sha256_git_bytes": "3fbf45c5db476000ced5e21298d20ddf1ea08a252e7b73c914ea2bc88bb377b0"
+    },
+    {
+      "path": "src/play/play.css",
+      "sha256_git_bytes": "c1876f2aa9e41205f0dd4fae596d5c91b8189aab22359696023110fa65e7705a"
+    },
+    {
+      "path": "src/style.css",
+      "sha256_git_bytes": "9a6ab89edf13072c7a665b02b6932532c948ee2e82a214d5b847e56aac5938c7"
+    },
+    {
+      "path": "src/ui/fjord-theme.css",
+      "sha256_git_bytes": "69877c638737bd167897b450da2a3a55c8fde88360a7dd9922bdc4f6a02a619b"
+    },
+    {
+      "path": "src/water-lab/water-lab.css",
+      "sha256_git_bytes": "caa4477d61ace46ae93d0de1240e9afab03e9bb9e08c6c5b22e100099435226d"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": ".gitattributes",
+      "bytes": 81,
+      "sha256": "5b47be33f42747caeec6ec5e2d5150159339b4d6c2a3310980f0ee86a982d482"
+    },
+    {
+      "path": "asset-lab-desktop.jpg",
+      "bytes": 44944,
+      "sha256": "16fbe060b66a7dfbe2c5c5c479069fa430967868c269acda3b182620dcdbf9d9"
+    },
+    {
+      "path": "asset-lab-narrow.jpg",
+      "bytes": 44017,
+      "sha256": "eeacad6331d5407ae165cfb755320517f46288f2f52cb418bcdbd058297ceb28"
+    },
+    {
+      "path": "before-character-lab.jpg",
+      "bytes": 89213,
+      "sha256": "decf46e3ccf20ec21cde83b1c92aea17f4bc9a5064c7dad631d2c7031da7ab0d"
+    },
+    {
+      "path": "before-family-tree-touch.jpg",
+      "bytes": 35852,
+      "sha256": "9df3ed9ba14430ad52117b106a176add1feb9a36b4207de5204a3be69ce7d191"
+    },
+    {
+      "path": "before-game-result.json",
+      "bytes": 1083,
+      "sha256": "753e8bbceb83bf09a0f5ace1c4acb2205d0702e49e17732034a3870396cf595f"
+    },
+    {
+      "path": "before-gameplay-lab.jpg",
+      "bytes": 131692,
+      "sha256": "2c8c1220af137c5a7e663e91addae51cbfbb194ade9b999e187efaf1201cb7da"
+    },
+    {
+      "path": "before-resident.jpg",
+      "bytes": 190517,
+      "sha256": "af72dd3e79eba2de8973210389c1e74bc6cbaee9124c98d7be525a62b71f01f2"
+    },
+    {
+      "path": "build-final.txt",
+      "bytes": 6923,
+      "sha256": "a7395347a942862420a363a85c8e5f8046c8a417a7d781e365bf6b36a8787b8d"
+    },
+    {
+      "path": "build-identity-8f7d641.json",
+      "bytes": 818,
+      "sha256": "abc70d9ad67ebb269250707894bb892fdc357f646234560493cbd19ec217bea9"
+    },
+    {
+      "path": "character-lab-desktop.jpg",
+      "bytes": 102118,
+      "sha256": "9e2f830395b883f38520f86a01318d23dafaecf529a7b304b8b0a9134c543a8b"
+    },
+    {
+      "path": "character-lab-narrow.jpg",
+      "bytes": 43698,
+      "sha256": "4e92c47051d95924a0abcb5c3b775c27ab955899284ade97b849818a53d9420a"
+    },
+    {
+      "path": "entry-8897c15.json",
+      "bytes": 37301,
+      "sha256": "b8a302a33cd3da28a84858134b8bf6e97ee4d84fe92f7b1db9f2353f7a0644c6"
+    },
+    {
+      "path": "environment-lab-desktop.jpg",
+      "bytes": 49381,
+      "sha256": "781c44cfe438e21cbc3513a62f9111dbc40c8d2c48c9aebdec1e8b9dbbad45af"
+    },
+    {
+      "path": "environment-lab-narrow.jpg",
+      "bytes": 22406,
+      "sha256": "a4dd38e2ef98800a3476e1542cf97f40441ce1f04e1b6f3d3889454eda496616"
+    },
+    {
+      "path": "expedition-8897c15.json",
+      "bytes": 653,
+      "sha256": "7a7224d5275565b8a745a0fe58f762dd376cf261ce195b6d1afdbf91453832a6"
+    },
+    {
+      "path": "family-tree-desktop.jpg",
+      "bytes": 131955,
+      "sha256": "d276fbe7b6139e56585e1aa154544330577c39dff15cbf25fe64c01a07909a51"
+    },
+    {
+      "path": "family-tree-touch.jpg",
+      "bytes": 38366,
+      "sha256": "ac3da2b55194bfda930632a1b18126f01f579fc47ec0b6f350d14483ae2a5c75"
+    },
+    {
+      "path": "final-build-identity.json",
+      "bytes": 299,
+      "sha256": "e678354aa73de2a927428694ac2c4be44ca87e44242ea7e17a211163feddd5cf"
+    },
+    {
+      "path": "fjord-desktop.jpg",
+      "bytes": 196995,
+      "sha256": "70cd1a23aa32b472e6bbbf84ee27248001c89554b2aef38eb4079dd235660521"
+    },
+    {
+      "path": "fjord-touch.jpg",
+      "bytes": 54087,
+      "sha256": "fb60b6c7d8a363990c09404598a57ff070244bedd4de1f56a45a878ade370a49"
+    },
+    {
+      "path": "game-final-result.json",
+      "bytes": 1076,
+      "sha256": "b9a407026357c52fccbaa2d449f7c084622d1ac6213ad81999df21aca2e1bac9"
+    },
+    {
+      "path": "gameplay-lab-desktop.jpg",
+      "bytes": 149966,
+      "sha256": "0311468ec637fd581bbdf76770a1828bd3c04c29aab12f26e0be85c9b6c37735"
+    },
+    {
+      "path": "gameplay-lab-narrow.jpg",
+      "bytes": 58843,
+      "sha256": "8e66e6cb4b83f356553e2717fe2bec79d8b453afa403b09e9edfc71515166c0c"
+    },
+    {
+      "path": "initial-before-harness-failure.json",
+      "bytes": 2995,
+      "sha256": "058bb37e18d11b03d0846691425cd332cc6e3569b4fcf90fc77c6388aea76218"
+    },
+    {
+      "path": "initial-touch-harness-failure.json",
+      "bytes": 845,
+      "sha256": "58e4c579db825609a42c82988687ecb2d86e930c4010757dacb9b0657e313c62"
+    },
+    {
+      "path": "labs-and-game-8f7d641.json",
+      "bytes": 3743,
+      "sha256": "994928ca9508f294de8729b30002e0fd0dab58f783223fc4e8cabde01b9d7e58"
+    },
+    {
+      "path": "meshy-lab-desktop.jpg",
+      "bytes": 49414,
+      "sha256": "b3210a5c1e594da9b4bc091a3d86cb1e6c49ae20bfd214a1b33774eaee155fe8"
+    },
+    {
+      "path": "meshy-lab-narrow.jpg",
+      "bytes": 27713,
+      "sha256": "198eec1d412072b754b63838af54c6ef7abfc8bc9340c3dbb362cc09938b3853"
+    },
+    {
+      "path": "README.md",
+      "bytes": 7139,
+      "sha256": "f88ae790f096595da3a58beb0d2c8e13eb028683d1796300a798734285d40fac"
+    },
+    {
+      "path": "resident-desktop.jpg",
+      "bytes": 197028,
+      "sha256": "0fe489398ea8c271680a6a545c321007ac5585be94178c156fefceb49f9a2dd5"
+    },
+    {
+      "path": "resident-touch.jpg",
+      "bytes": 54272,
+      "sha256": "60046f9fe07abd3789120ad00cf09916ab717d74581597d521faa08e0484fef5"
+    },
+    {
+      "path": "settings-desktop.jpg",
+      "bytes": 202737,
+      "sha256": "a40680fe606f15a671d02f7612e2a9d8e42ac1b4c1cefc2b605227ef8c3b0900"
+    },
+    {
+      "path": "settings-touch.jpg",
+      "bytes": 52818,
+      "sha256": "5cc5360f9cb1b1ec7a633454e0e8ec6d3fe361cef059b83cf13d9043eac08c9b"
+    },
+    {
+      "path": "settlement-desktop.jpg",
+      "bytes": 169847,
+      "sha256": "bb51d435d562ced02eeed83dc78c13c02b778c555d6d40f0196005703b1e1b31"
+    },
+    {
+      "path": "settlement-lab-desktop.jpg",
+      "bytes": 164816,
+      "sha256": "e3ea1c90e825d430e12f6cca0128cce99b466b75d3d54a7394b8892044bc15e6"
+    },
+    {
+      "path": "settlement-lab-narrow.jpg",
+      "bytes": 65553,
+      "sha256": "b49826862d5afb0d74bfb34b8269280fb64097fed13bf74fb8200e7427c1aac5"
+    },
+    {
+      "path": "settlement-touch.jpg",
+      "bytes": 54021,
+      "sha256": "5f25c9871814e31ccf2bb239a9773e8e1bbd2cfa1cdb750fa16afe261f0a59bd"
+    },
+    {
+      "path": "targeted-tests.txt",
+      "bytes": 2152,
+      "sha256": "de0fe7c9eadce9cc8baa8e7e8ea92e5d7725abc0ebec739d0b9f6f2e9ac23676"
+    },
+    {
+      "path": "tests-final.txt",
+      "bytes": 2149,
+      "sha256": "627daf4fc66f2a780811028af98e470c776e9ad5cdd3f25a5902a0f310b01f6a"
+    },
+    {
+      "path": "water-lab-desktop.jpg",
+      "bytes": 161791,
+      "sha256": "95807ffc3233495172f08a982073bfc34c56afdbdeb2175f52d923e2ada82498"
+    },
+    {
+      "path": "water-lab-narrow.jpg",
+      "bytes": 51474,
+      "sha256": "0bde3fed7340a51bb5675c241ca80f7cd493deb208776aeb32b512fae220a5a8"
+    }
+  ]
+}
