@@ -186,3 +186,11 @@ body.fjord-entry #campaign-start .entry-action-icon svg {
 
 /* Reading focus announces a new panel; a heading is not a selectable action. */
 body.fjord-entry #campaign-start [data-start-panel] > h2:focus { outline: none; }
+
+body.fjord-entry #campaign-start header > div { min-width: 0; }
+body.fjord-entry #campaign-start .entry-build {
+    margin: 7px 0 0;
+    color: var(--fs-muted);
+    font: 14px/1.5 var(--fs-font-body);
+    overflow-wrap: anywhere;
+}

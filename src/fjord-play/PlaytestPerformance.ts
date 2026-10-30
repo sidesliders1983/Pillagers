@@ -1,3 +1,4 @@
+import { getBuildInfo } from '../build/BuildInfo';
 import type { WebGLRenderer } from 'three';
 import { PerformanceMeasurements, performanceLimits, diagnosticMessage, type PerformanceMode,
     type PerformanceSpan } from './PerformanceMeasurements';
@@ -373,12 +374,12 @@ export class PlaytestPerformance {
             `${sample.latestError?.kind ?? ''}: ${sample.latestError?.message ?? ''}`;
     }
     private build() {
-        const build = (globalThis as typeof globalThis & { __FJORD_BUILD__?: string }).__FJORD_BUILD__;
+        const build = getBuildInfo().legacyBuild;
         return build && /^[a-f0-9]{7,40}/.test(build) ? build : 'local/unknown';
     }
     exportJSON() {
         const load = lastIslandLoad();
-        const report = { version: 1, build: this.build(), context: { ...this.metadata },
+        const report = { version: 1, build: this.build(), buildInfo: getBuildInfo(), context: { ...this.metadata },
             browser: navigator.userAgent.slice(0, 240), viewport: [window.innerWidth, window.innerHeight],
             recording: this.recording, frozenDisplayAt: this.frozenAt || null,
             capabilities: { gpuTimer: this.gpuSupported, jsHeap: !!this.heap, longTasks: this.longTasks },

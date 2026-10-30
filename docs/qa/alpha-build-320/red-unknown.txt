@@ -1,0 +1,23 @@
+✖ an export without usable provenance stays explicitly unknown for local use (1205.1656ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1491.1399
+
+✖ failing tests:
+
+test at tests\build-identity.test.mjs:127:1
+✖ an export without usable provenance stays explicitly unknown for local use (1205.1656ms)
+  SyntaxError [Error]: Expected property name or '}' in JSON at position 1 (line 1 column 2)
+      at JSON.parse (<anonymous>)
+      at exportedSource (file:///D:/CodexSites/Pillagers/scratch/alpha-build-identity-320/scripts/build-info.mjs:33:25)
+      at resolveBuildInfo (file:///D:/CodexSites/Pillagers/scratch/alpha-build-identity-320/scripts/build-info.mjs:92:20)
+      at TestContext.<anonymous> (file:///D:/CodexSites/Pillagers/scratch/alpha-build-identity-320/tests/build-identity.test.mjs:133:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)

@@ -1,0 +1,212 @@
+{
+  "version": 1,
+  "attempt": "mvuu64p5-1",
+  "startedUtc": "2026-10-30T10:35:22.313Z",
+  "mode": "resume",
+  "seed": 3802174487,
+  "build": "9d9d9c83303773ad47e9800da6b3aaa31d36a305",
+  "buildInfo": {
+    "schemaVersion": 1,
+    "version": "0.1.0-alpha",
+    "channel": "alpha",
+    "displayVersion": "v0.1 alpha",
+    "origin": "preview",
+    "buildNumber": 1,
+    "buildId": "alpha-41040333720-1",
+    "builtAt": "2026-10-30T10:23:44.186Z",
+    "source": {
+      "commit": "9d9d9c83303773ad47e9800da6b3aaa31d36a305",
+      "dirty": false,
+      "provenance": "sites-export",
+      "branch": "codex/alpha-build-identity-320"
+    },
+    "legacyBuild": "9d9d9c83303773ad47e9800da6b3aaa31d36a305",
+    "sequence": {
+      "authority": "sidesliders1983/Pillagers/.github/workflows/alpha-package.yml",
+      "runId": "41040333720",
+      "attempt": 1
+    },
+    "inputHash": "0320cf6875e669201e46b1499f7651115893f2c0ca27adab806ddaa2ccc8310d",
+    "versionTag": "0.1.0-alpha+build.1.attempt.1"
+  },
+  "cache": "browser-managed; cold/warm not inferred",
+  "screenRecording": "not reported",
+  "environment": {
+    "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "viewport": [
+      1440,
+      900
+    ],
+    "pixelRatio": 1
+  },
+  "recipe": {
+    "version": "island-pool-v3",
+    "generatorVersion": "fjordside-island-v0.3e-r3",
+    "seed": 227
+  },
+  "quality": "low",
+  "outcome": "playable",
+  "percent": 100,
+  "stage": "Preparing the first frame",
+  "substage": "initial-gpu-upload-and-draws",
+  "worker": "received",
+  "elapsedMs": 33716.20000000112,
+  "stageElapsedMs": 1328.7000000011176,
+  "lastProgressAgeMs": 0.09999999962747097,
+  "warning": "",
+  "units": {
+    "completed": 155,
+    "total": 155,
+    "kind": "draw batches"
+  },
+  "latestResource": "/terrain/fish-drying-rack.glb",
+  "resources": {
+    "geometries": 131,
+    "textures": 122,
+    "programs": 58,
+    "calls": 154,
+    "triangles": 2154658,
+    "renderPixelRatio": 1,
+    "drawingBuffer": [
+      1440,
+      900
+    ]
+  },
+  "firstFrameMs": 33710.09999999963,
+  "playableMs": 33716.20000000112,
+  "maxObservationGapMs": 8787.5,
+  "measurements": {
+    "gpuTime": "unsupported",
+    "processMemory": "unsupported",
+    "cacheTemperature": "not observable reliably",
+    "killedProcess": "may leave no final event"
+  },
+  "timeline": [
+    {
+      "stage": "campaign-restore-inclusive",
+      "startedMs": 52.20000000111759,
+      "durationMs": 3112.199999999255,
+      "outcome": "complete"
+    },
+    {
+      "stage": "geography",
+      "startedMs": 85.5,
+      "durationMs": 1153,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:island-download",
+      "startedMs": 120.80009765736759,
+      "durationMs": 80.69999999925494,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:island-unpack",
+      "startedMs": 201.5000488292426,
+      "durationMs": 178.7000000011176,
+      "outcome": "complete"
+    },
+    {
+      "stage": "worker:island-verify",
+      "startedMs": 380.3999511729926,
+      "durationMs": 103.19999999925494,
+      "outcome": "complete"
+    },
+    {
+      "stage": "receive-and-freeze",
+      "startedMs": 1149.5,
+      "durationMs": 88.70000000111759,
+      "outcome": "complete"
+    },
+    {
+      "stage": "assets-fetch-decode",
+      "startedMs": 3251.4000000003725,
+      "durationMs": 863.5,
+      "outcome": "complete"
+    },
+    {
+      "stage": "nature-assets-fetch-decode",
+      "startedMs": 4181.200000001118,
+      "durationMs": 3333,
+      "outcome": "complete"
+    },
+    {
+      "stage": "ground-textures-fetch-decode",
+      "startedMs": 7514.4000000003725,
+      "durationMs": 28,
+      "outcome": "complete"
+    },
+    {
+      "stage": "terrain-mesh-and-masks",
+      "startedMs": 7542.700000001118,
+      "durationMs": 6824.0999999996275,
+      "outcome": "complete"
+    },
+    {
+      "stage": "pine-assets-fetch-decode",
+      "startedMs": 14366.900000000373,
+      "durationMs": 152.80000000074506,
+      "outcome": "complete"
+    },
+    {
+      "stage": "nature-instance-assembly",
+      "startedMs": 14520,
+      "durationMs": 4.200000001117587,
+      "outcome": "complete"
+    },
+    {
+      "stage": "movement-surface",
+      "startedMs": 14546.800000000745,
+      "durationMs": 1.199999999254942,
+      "outcome": "complete"
+    },
+    {
+      "stage": "wildlife-preparation",
+      "startedMs": 14549.099999999627,
+      "durationMs": 768,
+      "outcome": "complete"
+    },
+    {
+      "stage": "initial-character-scene-sync",
+      "startedMs": 15473.599999999627,
+      "durationMs": 4903.800000000745,
+      "outcome": "complete"
+    },
+    {
+      "stage": "initial-settlement-models",
+      "startedMs": 15563.5,
+      "durationMs": 4788,
+      "outcome": "complete"
+    },
+    {
+      "stage": "standing-tree-targets",
+      "startedMs": 20360.900000000373,
+      "durationMs": 1.900000000372529,
+      "outcome": "complete"
+    },
+    {
+      "stage": "construction-gpu-preparation",
+      "startedMs": 20393.900000000373,
+      "durationMs": 11317.199999999255,
+      "outcome": "complete"
+    },
+    {
+      "stage": "texture-upload",
+      "startedMs": 31713.200000001118,
+      "durationMs": 315.59999999962747,
+      "outcome": "complete"
+    },
+    {
+      "stage": "shader-compilation",
+      "startedMs": 32029.700000001118,
+      "durationMs": 357.69999999925494,
+      "outcome": "complete"
+    },
+    {
+      "stage": "initial-gpu-upload-and-draws",
+      "startedMs": 32387.599999999627,
+      "durationMs": 1322.4000000003725,
+      "outcome": "complete"
+    }
+  ]
+}

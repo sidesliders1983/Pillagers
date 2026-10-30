@@ -1,3 +1,5 @@
+import { getBuildInfo, type GameBuildInfo } from '../build/BuildInfo';
+
 /** Presentation-only loading evidence. No campaign objects, renderer references or telemetry. */
 export type LoadMode = 'new' | 'restart' | 'resume';
 export type LoadStep = keyof typeof loadPlan;
@@ -49,7 +51,7 @@ export class IslandLoadStatus {
     readonly timeline: LoadTiming[] = [];
     observeTiming?: (timing: LoadTiming) => void;
     readonly metadata: {
-        mode: LoadMode; seed?: number; recipe?: unknown; build: string;
+        mode: LoadMode; seed?: number; recipe?: unknown; build: string; buildInfo: GameBuildInfo;
         cache: 'browser-managed; cold/warm not inferred'; quality?: string;
         screenRecording: 'not reported' | 'on' | 'off';
         environment?: { browser: string; viewport: [number, number]; pixelRatio: number };
@@ -78,8 +80,9 @@ export class IslandLoadStatus {
     isComplete(step: LoadStep) { return this.completed.has(step); }
     constructor(mode: LoadMode, seed?: number, private now = () => performance.now()) {
         this.started = this.stageStarted = this.lastProgress = now();
-        const build = (globalThis as typeof globalThis & { __FJORD_BUILD__?: string }).__FJORD_BUILD__;
-        this.metadata = { mode, seed, build: build ?? 'unidentified local build',
+        const info = getBuildInfo();
+        const build = info.legacyBuild === 'unidentified-source' ? undefined : info.legacyBuild;
+        this.metadata = { mode, seed, build: build ?? 'unidentified local build', buildInfo: info,
             cache: 'browser-managed; cold/warm not inferred', screenRecording: 'not reported' };
     }
     enter(step: LoadStep, substage: string, label = loadPlan[step].label as string) {

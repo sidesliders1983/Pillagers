@@ -1,0 +1,30 @@
+✖ local, preview, retry and concurrent builds cannot borrow an unrelated official identity (5589.2348ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6186.3968
+
+✖ failing tests:
+
+test at tests\build-identity.test.mjs:105:1
+✖ local, preview, retry and concurrent builds cannot borrow an unrelated official identity (5589.2348ms)
+  AssertionError [ERR_ASSERTION]: Clean prepared source stays clean in development
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///D:/CodexSites/Pillagers/scratch/alpha-build-identity-320/tests/build-identity.test.mjs:118:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

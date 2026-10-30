@@ -1,0 +1,35 @@
+✔ a normal local build identifies its own source and the deliberate public version (4262.9497ms)
+✔ the designated packaging sequence binds a number and attempt to the exported source (3644.6605ms)
+✔ a sealed artifact can be rehosted unchanged and rejects substituted bytes or a different source (4394.5014ms)
+✖ the compiled accessor reports its own artifact and ignores a newer server manifest (6024.377ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 3
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 18719.72
+
+✖ failing tests:
+
+test at tests\build-identity.test.mjs:78:1
+✖ the compiled accessor reports its own artifact and ignores a newer server manifest (6024.377ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'v0.1 alpha · local unknown source'
+  - 'v0.1 alpha · build 53'
+                  ^
+  
+      at TestContext.<anonymous> (file:///D:/CodexSites/Pillagers/scratch/alpha-build-identity-320/tests/build-identity.test.mjs:91:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'v0.1 alpha · local unknown source',
+    expected: 'v0.1 alpha · build 53',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

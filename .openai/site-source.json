@@ -1,0 +1,12 @@
+{
+  "repository": "https://github.com/sidesliders1983/Pillagers.git",
+  "branch": "main",
+  "project_id": "appgprj_6ad5bc329114819186d9cfbd1a5816a3",
+  "url": "https://pillagers-test.sidesliders.chatgpt.site",
+  "entry_route": "/fjord-play",
+  "update_mode": "automatic",
+  "automation_id": "Automation_2a6983a5ff488191b9c87a7fd4aa8010",
+  "validation_workflow": "Character contracts",
+  "check_interval_minutes": 60,
+  "last_published_commit": "752d5e178a14a0ee562e4a1340a5decc94460be4"
+}

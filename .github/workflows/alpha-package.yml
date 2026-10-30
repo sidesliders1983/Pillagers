@@ -1,0 +1,43 @@
+name: Alpha package
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  package:
+    if: ${{ github.event_name != 'pull_request' || contains(github.event.pull_request.labels.*.name, 'alpha-preview') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Validate build and hosting boundaries
+        run: node --test tests/build-identity.test.mjs scripts/sites-prepared-bindings.test.mjs
+      - name: Prepare the allocated build from the actual checked-out source
+        id: prepare
+        run: node scripts/prepare-alpha-build.mjs --output scratch/alpha-package
+      - name: Compile the stamped public game
+        env:
+          ALPHA_SOURCE: ${{ steps.prepare.outputs.source }}
+        run: pnpm --dir "$ALPHA_SOURCE" run build
+      - name: Seal output identity and hashes
+        env:
+          ALPHA_SOURCE: ${{ steps.prepare.outputs.source }}
+        run: node scripts/prepare-alpha-build.mjs --seal "$ALPHA_SOURCE"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: fjordside-alpha-${{ github.run_number }}-${{ github.run_attempt }}
+          path: ${{ steps.prepare.outputs.source }}/dist/
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 0

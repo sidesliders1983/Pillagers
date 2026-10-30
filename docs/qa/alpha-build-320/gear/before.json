@@ -1,0 +1,15 @@
+{
+  "path": {
+    "x": 4,
+    "y": 2,
+    "width": 16,
+    "height": 15
+  },
+  "vectorOffset": [
+    0,
+    -2.5
+  ],
+  "controlOffsetY": 0,
+  "status": "failed",
+  "error": "AssertionError [ERR_ASSERTION]: Gear shape is centred inside its own viewBox"
+}

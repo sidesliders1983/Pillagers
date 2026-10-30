@@ -1,0 +1,191 @@
+{
+  "version": 1,
+  "build": "9d9d9c83303773ad47e9800da6b3aaa31d36a305",
+  "buildInfo": {
+    "schemaVersion": 1,
+    "version": "0.1.0-alpha",
+    "channel": "alpha",
+    "displayVersion": "v0.1 alpha",
+    "origin": "preview",
+    "buildNumber": 1,
+    "buildId": "alpha-41040333720-1",
+    "builtAt": "2026-10-30T10:23:44.186Z",
+    "source": {
+      "commit": "9d9d9c83303773ad47e9800da6b3aaa31d36a305",
+      "dirty": false,
+      "provenance": "sites-export",
+      "branch": "codex/alpha-build-identity-320"
+    },
+    "legacyBuild": "9d9d9c83303773ad47e9800da6b3aaa31d36a305",
+    "sequence": {
+      "authority": "sidesliders1983/Pillagers/.github/workflows/alpha-package.yml",
+      "runId": "41040333720",
+      "attempt": 1
+    },
+    "inputHash": "0320cf6875e669201e46b1499f7651115893f2c0ca27adab806ddaa2ccc8310d",
+    "versionTag": "0.1.0-alpha+build.1.attempt.1"
+  },
+  "context": {},
+  "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+  "viewport": [
+    1440,
+    900
+  ],
+  "recording": "not reported",
+  "frozenDisplayAt": null,
+  "capabilities": {
+    "gpuTimer": null,
+    "jsHeap": true,
+    "longTasks": true
+  },
+  "units": {
+    "cpu": "synchronous JS ms; async submit excludes resumed continuations",
+    "gpu": "query ms; main includes native shadows; portrait separate",
+    "memory": "optional JS heap only; resource counts are not bytes; VRAM unavailable"
+  },
+  "workload": {},
+  "heap": {
+    "source": "performance.memory (non-standard)",
+    "usedBytes": 5602386,
+    "allocatedBytes": 8089702
+  },
+  "sample": {
+    "elapsedMs": 185.2999999988824,
+    "sampledUtc": "2026-10-30T10:35:20.364Z",
+    "mode": "Start menu",
+    "fps": null,
+    "interval": {
+      "count": 0,
+      "windowMs": 0,
+      "weight": 0,
+      "meanMs": null,
+      "p50Ms": null,
+      "p95Ms": null,
+      "p99Ms": null,
+      "worstMs": null,
+      "latestMs": null
+    },
+    "cpuFrame": {
+      "count": 0,
+      "windowMs": 0,
+      "weight": 0,
+      "meanMs": null,
+      "p50Ms": null,
+      "p95Ms": null,
+      "p99Ms": null,
+      "worstMs": null,
+      "latestMs": null
+    },
+    "spans": {
+      "core": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "ui": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "sceneCpu": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "sceneWall": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "modelCpu": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "modelWall": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "portraitCpu": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "portraitWall": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      }
+    },
+    "gpu": {
+      "status": "uninitialized"
+    },
+    "ticks": {
+      "total": 0,
+      "perSecond": 0
+    },
+    "worstRecentHitchMs": 0,
+    "history": [
+      {
+        "elapsedMs": 1.3999999985098839,
+        "mode": "Start menu",
+        "fps": null,
+        "intervalP95Ms": null,
+        "cpuP95Ms": null,
+        "gpuMs": null,
+        "ticks": 0
+      }
+    ],
+    "events": []
+  },
+  "truncated": false
+}

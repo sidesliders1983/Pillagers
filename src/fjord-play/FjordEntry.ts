@@ -1,3 +1,4 @@
+import { formatBuildLabel } from '../build/BuildInfo';
 import { organizeCampaignEntry } from './CampaignEntryMenu';
 import { GameplaySession } from '../gameplay-lab/GameplaySession';
 import { activeSettlementKey, inspectSettlementSave } from '../play/SharedSettlement';
@@ -62,8 +63,9 @@ function shell() {
     const root = document.createElement('main');
     root.id = 'campaign-start';
     root.innerHTML = `<header><img src="/branding/fjordside/app-192.png" width="72" height="72" alt="">
-        <div><p class="entry-eyebrow">A new shore. A shared history.</p><h1>FjordSide</h1></div></header>
+        <div><p class="entry-eyebrow">A new shore. A shared history.</p><h1>FjordSide</h1><p class="entry-build" data-game-version></p></div></header>
         <section class="entry-content" aria-label="Campaign start"></section>`;
+    root.querySelector('[data-game-version]')!.textContent = formatBuildLabel();
     document.body.replaceChildren(root);
     return root.querySelector<HTMLElement>('.entry-content')!;
 }

@@ -9,6 +9,7 @@ export function loadDOMSource(path) {
     return moduleAt(url);
 }
 function moduleAt(url) {
+    if (url.pathname.endsWith('.json')) return JSON.parse(readFileSync(url, 'utf8'));
     if (cache.has(url.href)) return cache.get(url.href);
     const module = { exports: {} };
     cache.set(url.href, module.exports);
@@ -17,7 +18,7 @@ function moduleAt(url) {
         module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022,
     } }).outputText;
     const require = name => name.endsWith('.css') ? {} : name.startsWith('.') ?
-        moduleAt(new URL(name + '.ts', url)) : nativeRequire(name);
+        moduleAt(new URL(name.endsWith('.json') ? name : name + '.ts', url)) : nativeRequire(name);
     new Function('require', 'module', 'exports', source)(require, module, module.exports);
     return module.exports;
 }

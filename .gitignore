@@ -27,3 +27,7 @@ scripts/sprites/imagegen-input.local.json
 
 # Reproducible culture calibration ships verified compressed raw data; preserve local resume files.
 /docs/qa/cultural-events/calibration-cultural-events-275-276-v1/*.jsonl
+
+# Artifact-owned build stamps; local source must not inherit an allocated alpha identity.
+/.fjord-build.json
+/.sites-main.json

@@ -1,3 +1,4 @@
+import { buildDetailsHTML } from './BuildDetails';
 import { playerFeedbackLinkHTML } from './PlayerFeedback';
 import './player-menu.css';
 import type { FjordCalendar } from './FjordCalendar';
@@ -59,7 +60,7 @@ export function fjordHeaderHTML(feedbackURL?: string): string {
                         <button id="fjord-view-home" type="button">View settlement</button><button id="fjord-view-summit" type="button">View highlands</button>
                         <p>Touch: drag to orbit, pinch to zoom, tap open ground to centre the camera. Mouse: left drag to pan, right drag to rotate, wheel to zoom. Select residents, homes and livestock in the world or through Settlement.</p>
                         <p>Use Save game to protect progress before replacing a campaign or clearing browser data.</p>
-                        <details><summary>About / Credits</summary>
+                        <details><summary>About / Credits</summary>${buildDetailsHTML()}
                             <p>FjordSide · A new shore. A shared history.</p>
                             <a class="fjord-asset-credits" href="/game-assets/wetlands/ATTRIBUTION.txt" target="_blank" rel="noopener">Nature asset credits</a>
                         </details>
