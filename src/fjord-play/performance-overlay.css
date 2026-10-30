@@ -1,8 +1,8 @@
 #performance-overlay {
     position:fixed; z-index:12000; top:max(90px,env(safe-area-inset-top)); left:max(8px,env(safe-area-inset-left));
     width:282px; max-width:calc(100vw - 16px); max-height:calc(100dvh - 170px); padding:8px;
-    box-sizing:border-box; color:#fff6d9; background:#071b20f5; border:1px solid #d6bf80;
-    border-radius:6px; font:11px/1.45 ui-monospace,monospace; font-variant-numeric:tabular-nums;
+    box-sizing:border-box; color:var(--fs-text); background:var(--fs-panel); border:1px solid var(--fs-border);
+    border-radius:var(--fs-radius-card); font:11px/1.45 ui-monospace,monospace; font-variant-numeric:tabular-nums;
     pointer-events:none; white-space:normal;
     overflow:auto; overscroll-behavior:contain;
 }
@@ -12,18 +12,18 @@
 #performance-overlay[data-corner="2"] { top:auto; bottom:max(76px,env(safe-area-inset-bottom)); left:auto; right:8px; }
 #performance-overlay[data-corner="3"] { top:auto; bottom:max(76px,env(safe-area-inset-bottom)); }
 #island-loading #performance-overlay { top:max(8px,env(safe-area-inset-top)); }
-#performance-overlay .perf-controls { display:flex; gap:6px; align-items:start; position:sticky; bottom:0; background:#071b20; }
+#performance-overlay .perf-controls { display:flex; gap:6px; align-items:start; position:sticky; bottom:0; background:var(--fs-surface-solid); }
 #performance-overlay button, #performance-overlay summary, #performance-overlay select {
     pointer-events:auto; min-height:44px; padding:7px; box-sizing:border-box; color:inherit;
-    background:#213c40; border:1px solid #d6bf80; border-radius:4px; font:12px system-ui,sans-serif;
+    background:var(--fs-input); border:1px solid var(--fs-border); border-radius:var(--fs-radius-control); font:12px var(--fs-font-body);
 }
 #performance-overlay details[open] { pointer-events:auto; }
 #performance-overlay .perf-options { display:grid; gap:4px; max-height:40dvh; overflow:auto; }
 #performance-overlay label { display:block; }
 #performance-overlay textarea { pointer-events:auto; width:100%; height:110px; box-sizing:border-box; }
 #performance-overlay [hidden] { display:none; }
-#performance-overlay :focus-visible { outline:2px solid #fff; outline-offset:2px; }
-.performance-setting { display:grid; gap:4px; margin:12px 0; font:14px system-ui,sans-serif; }
+#performance-overlay :focus-visible { outline:3px solid var(--fs-focus); outline-offset:2px; }
+.performance-setting { display:grid; gap:4px; margin:12px 0; font:14px var(--fs-font-body); }
 .performance-setting select { min-height:44px; padding:8px; }
 @media (max-height:500px) {
     #performance-overlay { top:72px; max-height:calc(100dvh - 140px); font-size:10px; }

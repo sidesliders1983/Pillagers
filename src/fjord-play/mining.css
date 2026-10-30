@@ -9,10 +9,10 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     z-index: 65;
-    background: #17282af5;
-    color: #eee9d8;
-    border: 1px solid #cfb878;
-    border-radius: .4rem;
+    background: var(--fs-panel);
+    color: var(--fs-text);
+    border: 1px solid var(--fs-border);
+    border-radius: var(--fs-radius-panel);
     line-height: 1.5;
 }
 .fjord-mining[hidden] { display: none; }
@@ -25,12 +25,12 @@
     margin: .25rem;
     color: inherit;
     font: inherit;
-    border: 1px solid #9c9677;
-    border-radius: .25rem;
-    background: #293c3c;
+    border: 1px solid var(--fs-border);
+    border-radius: var(--fs-radius-control);
+    background: var(--fs-card);
 }
-.fjord-mining button:disabled { opacity: .5; }
-.fjord-mining button:focus-visible { outline: 2px solid #ffe09a; outline-offset: 2px; }
+.fjord-mining button:disabled { opacity: var(--fs-disabled-opacity); }
+.fjord-mining button:focus-visible { outline: 3px solid var(--fs-focus); outline-offset: 2px; }
 @media (max-height: 500px) {
     .fjord-mining { top: 4.5rem; bottom: 4rem; max-height: none; }
 }

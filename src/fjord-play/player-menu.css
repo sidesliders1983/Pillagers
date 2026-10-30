@@ -7,7 +7,7 @@
 }
 .player-menu-heading h2 {
     margin: 0;
-    font: 600 22px/1.25 Georgia, serif;
+    font: 600 22px/1.25 var(--fs-font-heading);
 }
 #fjord-menu .player-menu-heading button {
     min-width: 44px;
@@ -21,12 +21,12 @@
     box-sizing: border-box;
     min-height: 44px;
     padding: 12px;
-    border: 1px solid var(--fjord-line, #737b6b);
-    border-radius: 5px;
+    border: 1px solid var(--fjord-line, var(--fs-border));
+    border-radius: var(--fs-radius-control);
     cursor: pointer;
 }
 #fjord-menu [data-menu-section][open] > summary {
-    border-color: var(--fjord-accent, #ddbd87);
+    border-color: var(--fjord-accent, var(--fs-border));
 }
 #fjord-menu .player-menu-actions {
     display: grid;
@@ -48,12 +48,12 @@
     min-height: 44px;
 }
 #fjord-menu .player-menu-replacement {
-    border-top: 1px solid var(--fjord-line, #737b6b);
+    border-top: 1px solid var(--fjord-line, var(--fs-divider));
     margin-top: 18px;
     padding-top: 8px;
 }
 #fjord-menu .player-menu-replacement > p {
-    color: var(--fjord-muted, #bec7c1);
+    color: var(--fjord-muted, var(--fs-text));
     font-size: 12px;
     margin: 4px 0;
 }
@@ -89,11 +89,11 @@
 }
 #campaign-start .entry-about, #campaign-start .entry-save-details {
     font-size: 13px;
-    color: #c4cfc3;
+    color: var(--fs-text);
     margin-top: 12px;
 }
 #campaign-start a {
-    color: #d7c296;
+    color: var(--fs-text);
 }
 #campaign-start .entry-actions:empty {
     display: none;
@@ -114,7 +114,7 @@
     min-height: 44px;
     box-sizing: border-box;
     padding: 12px 0;
-    color: var(--fjord-accent, #d7c296);
+    color: var(--fs-text);
 }
 .player-menu-link-note {
     font-size: 12px;

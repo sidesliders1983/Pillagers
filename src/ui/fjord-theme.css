@@ -1,0 +1,79 @@
+/* FjordSide design contract. Keep palette values here; components select roles. */
+:root {
+    color-scheme: dark;
+    --fs-text: #f4f8fa;
+    --fs-muted: #c8d6dc;
+    --fs-canvas: #091d28;
+    --fs-surface-solid: #071920;
+    --fs-panel: rgba(7, 25, 32, .94);
+    --fs-card: rgba(14, 37, 46, .92);
+    --fs-input: #132f3a;
+    --fs-hover: #203c47;
+    --fs-selected: #183a40;
+    --fs-border: #789098;
+    --fs-divider: rgba(120, 144, 152, .5);
+    --fs-accent: #d8ae60;
+    --fs-accent-faint: #d8ae6015;
+    --fs-accent-halo: #d8ae6025;
+    --fs-accent-inset: #d8ae6012;
+    --fs-focus: #a9edff;
+    --fs-warning: #f5d9ad;
+    --fs-warning-surface: #493421;
+    --fs-danger: #ffb0a3;
+    --fs-danger-surface: #422c30;
+    --fs-chart-fill: var(--fs-accent);
+    --fs-chart-track: var(--fs-hover);
+    --fs-chart-reference: var(--fs-focus);
+    --fs-deceased: #2a3635;
+    --fs-success: #cbe9a0;
+    --fs-scrim: rgba(3, 15, 23, .65);
+    --fs-entry-scrim-mobile: rgba(3, 18, 29, .4);
+    --fs-shadow-color: #0005;
+    --fs-shadow: 0 10px 30px var(--fs-shadow-color);
+    --fs-shadow-small: 0 3px 14px var(--fs-shadow-color);
+    --fs-text-shadow: 0 2px 6px var(--fs-surface-solid);
+    --fs-radius-control: 9px;
+    --fs-radius-card: 14px;
+    --fs-radius-panel: 18px;
+    --fs-font-body: system-ui, sans-serif;
+    --fs-font-heading: Georgia, serif;
+    --fs-disabled-opacity: .65;
+
+    /* Existing Fjord components keep their public styling hooks. */
+    --fjord-surface: var(--fs-surface-solid);
+    --fjord-panel: var(--fs-panel);
+    --fjord-control: var(--fs-card);
+    --fjord-control-hover: var(--fs-hover);
+    --fjord-text: var(--fs-text);
+    --fjord-muted: var(--fs-muted);
+    --fjord-accent: var(--fs-accent);
+    --fjord-line: var(--fs-border);
+}
+
+/* Low specificity allows existing component geometry and scene interactions to win. */
+:where(button, select, textarea, input) {
+    font-family: var(--fs-font-body);
+    color: var(--fs-text);
+    accent-color: var(--fs-accent);
+}
+:where(button, select, textarea, input:not([type='checkbox']):not([type='radio'])) {
+    min-height: 44px;
+}
+:where(input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']), select, textarea) {
+    background: var(--fs-input);
+    border: 1px solid var(--fs-border);
+    border-radius: var(--fs-radius-control);
+}
+:where(button, input, select, textarea, summary, a):focus-visible {
+    outline: 3px solid var(--fs-focus);
+    outline-offset: 3px;
+}
+:where(button, input, select, textarea):disabled {
+    opacity: var(--fs-disabled-opacity);
+    cursor: not-allowed;
+}
+:where(input, textarea)::placeholder { color: var(--fs-muted); opacity: 1; }
+:where(dialog)::backdrop { background: var(--fs-scrim); }
+:where(a) { text-underline-offset: 3px; }
+
+:where(h1, h2) { font-family: var(--fs-font-heading); }

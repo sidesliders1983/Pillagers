@@ -10,27 +10,27 @@
     overflow: auto;
     overscroll-behavior: contain;
     padding: 13px;
-    border: 1px solid var(--fjord-line, #737b6b);
-    border-radius: 6px;
-    background: var(--fjord-panel, #1b2327f5);
-    color: var(--fjord-text, #f0e9dc);
-    font: 13px/1.45 system-ui, sans-serif;
+    border: 1px solid var(--fjord-line, var(--fs-border));
+    border-radius: var(--fs-radius-card);
+    background: var(--fjord-panel, var(--fs-card));
+    color: var(--fjord-text, var(--fs-text));
+    font: 13px/1.45 var(--fs-font-body);
     touch-action: pan-y;
 }
 #fjord-first-steps-card[hidden],
 #fjord-play:has(#fjord-menu[open]) #fjord-first-steps-card,
 #fjord-play:has(#fjord-management:not([hidden]), #fjord-workspace:not([hidden])) #fjord-first-steps-card { display: none; }
-#fjord-first-steps-card h2 { margin: 0; font: 600 18px/1.25 Georgia, serif; }
+#fjord-first-steps-card h2 { margin: 0; font: 600 18px/1.25 var(--fs-font-heading); }
 #fjord-first-steps-card p { margin: 9px 0; }
 #fjord-first-steps-card button { min-height: 44px; cursor: pointer; }
-#fjord-first-steps-card button:focus-visible { outline: 2px solid #ddbd87; outline-offset: 2px; }
+#fjord-first-steps-card button:focus-visible { outline: 3px solid var(--fs-focus); outline-offset: 2px; }
 .first-steps-heading, .first-steps-actions, .first-steps-footer { display: flex; gap: 8px; align-items: center; }
 .first-steps-heading h2 { flex: 1; }
 .first-steps-heading button { min-width: 44px; }
 .first-steps-actions { flex-wrap: wrap; }
 .first-steps-actions button { flex: 1; }
-.first-steps-footer { margin-top: 9px; font-size: 11px; color: var(--fjord-muted, #bec7c1); }
-.first-steps-muted { color: var(--fjord-muted, #bec7c1); font-size: 12px; }
+.first-steps-footer { margin-top: 9px; font-size: 11px; color: var(--fjord-muted, var(--fs-text)); }
+.first-steps-muted { color: var(--fjord-muted, var(--fs-muted)); font-size: 12px; }
 #fjord-first-steps-card.first-steps-collapsed { padding: 0; width: auto; max-width: min(380px, calc(100vw - 32px)); }
 #fjord-first-steps-card.first-steps-collapsed button { border: 0; background: transparent; text-align: left; width: 100%; }
 #fjord-play.fjord-mobile #fjord-first-steps-card {
@@ -65,9 +65,9 @@
 /* Chapters stay freely selectable; the world keeps its normal navigation and input. */
 .first-steps-chapters { display: flex; gap: 4px; margin-top: 8px; }
 .first-steps-chapters button { flex: 1; padding: 7px 4px; }
-#fjord-first-steps-card h3 { margin: 8px 0 4px; font: 600 15px/1.3 system-ui, sans-serif; }
-#fjord-first-steps-card [aria-pressed="true"] { border-color: var(--fjord-accent, #dec582); }
-.first-steps-status { text-transform: capitalize; font-size: 11px; color: var(--fjord-muted, #bec7c1); }
+#fjord-first-steps-card h3 { margin: 8px 0 4px; font: 600 15px/1.3 var(--fs-font-body); }
+#fjord-first-steps-card [aria-pressed="true"] { border-color: var(--fjord-accent, var(--fs-accent)); }
+.first-steps-status { text-transform: capitalize; font-size: 11px; color: var(--fjord-muted, var(--fs-muted)); }
 .first-steps-objectives { margin-top: 8px; }
 .first-steps-objectives summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; }
 .first-steps-objectives button { display: block; width: 100%; text-align: left; margin-top: 4px; }
@@ -82,13 +82,13 @@
     height: 17px;
     margin-top: 1px;
     box-sizing: border-box;
-    border: 1px solid var(--fjord-muted, #bec7c1);
-    border-radius: 3px;
+    border: 1px solid var(--fjord-muted, var(--fs-border));
+    border-radius: var(--fs-radius-card);
     text-align: center;
-    font: 700 13px/15px system-ui, sans-serif;
+    font: 700 13px/15px var(--fs-font-body);
 }
 .first-steps-check[aria-checked="true"] {
-    border-color: var(--fjord-accent, #dec582);
-    background: var(--fjord-accent, #dec582);
-    color: #1b2327;
+    border-color: var(--fjord-accent, var(--fs-border));
+    background: var(--fjord-accent, var(--fs-surface-solid));
+    color: var(--fs-text);
 }

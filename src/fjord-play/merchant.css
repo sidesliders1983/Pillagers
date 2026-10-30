@@ -9,11 +9,11 @@
     overscroll-behavior: contain;
     box-sizing: border-box;
     padding: 1rem;
-    color: #eee9d8;
-    background: #17282a;
-    border: 1px solid #cfb878;
-    border-radius: .5rem;
-    box-shadow: 0 .5rem 2rem #0008;
+    color: var(--fs-text);
+    background: var(--fs-panel);
+    border: 1px solid var(--fs-border);
+    border-radius: var(--fs-radius-panel);
+    box-shadow: var(--fs-shadow-small);
     line-height: 1.5;
 }
 .fjord-merchant[hidden] { display: none; }
@@ -23,19 +23,19 @@
     min-height: 44px;
     min-width: 44px;
     padding: .6rem .8rem;
-    background: #293c3c;
-    color: #eee9d8;
-    border: 1px solid #9c9677;
-    border-radius: .25rem;
+    background: var(--fs-card);
+    color: var(--fs-text);
+    border: 1px solid var(--fs-border);
+    border-radius: var(--fs-radius-control);
     font: inherit;
     cursor: pointer;
 }
-.fjord-merchant button:disabled { opacity: .55; cursor: default; }
-.fjord-merchant button:focus-visible { outline: 2px solid #f5ce73; outline-offset: 2px; }
+.fjord-merchant button:disabled { opacity: var(--fs-disabled-opacity); cursor: default; }
+.fjord-merchant button:focus-visible { outline: 3px solid var(--fs-focus); outline-offset: 2px; }
 .fjord-merchant-offers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; margin: 1rem 0; }
-.fjord-merchant-offers article { padding: .8rem; border: 1px solid #667771; border-radius: .3rem; }
+.fjord-merchant-offers article { padding: .8rem; border: 1px solid var(--fs-border); border-radius: var(--fs-radius-panel); }
 .fjord-merchant .fjord-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
-.fjord-merchant [role=status] { padding: .7rem; border-left: 2px solid #cfb878; background: #ffffff09; }
+.fjord-merchant [role=status] { padding: .7rem; border-left: 2px solid var(--fs-border); background: var(--fs-surface-solid); }
 @media (max-width: 560px) {
     .fjord-merchant { top: max(7rem, env(safe-area-inset-top)); max-height: calc(100dvh - 8rem - env(safe-area-inset-bottom)); }
     .fjord-merchant-offers { grid-template-columns: 1fr; }

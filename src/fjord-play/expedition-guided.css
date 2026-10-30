@@ -11,15 +11,15 @@
 }
 #fjord-play .fjord-expedition-tabs button[aria-pressed="true"] {
     border-color: var(--fjord-accent);
-    background: #dcbf8418;
+    background: var(--fs-selected);
     color: var(--fjord-text);
 }
 #fjord-play #expedition-supplies-heading {
     margin: 18px 0 10px;
-    font: 23px/1.2 Georgia, serif;
+    font: 23px/1.2 var(--fs-font-heading);
 }
 #fjord-play #expedition-supplies-heading:focus-visible {
-    outline: 2px solid var(--fjord-accent);
+    outline: 3px solid var(--fs-focus);
     outline-offset: 4px;
 }
 #fjord-play #expedition-crew-next, #fjord-play #expedition-supplies-back {
@@ -38,14 +38,14 @@
     color: var(--fjord-text);
     background: var(--fjord-panel);
     border: 1px solid var(--fjord-accent);
-    border-radius: 7px;
+    border-radius: var(--fs-radius-panel);
 }
 #expedition-group-dialog::backdrop {
-    background: #07101399;
+    background: var(--fs-scrim);
 }
 #expedition-group-dialog h2 {
     margin: 0 0 14px;
-    font: 26px/1.2 Georgia, serif;
+    font: 26px/1.2 var(--fs-font-heading);
 }
 #fjord-play #expedition-group-dialog button {
     min-height: 44px;

@@ -1,6 +1,6 @@
 .fjord-culture { border-top: 1px solid var(--fjord-line); padding-top: 12px; margin-top: 12px; }
 .fjord-culture h3 { margin: 5px 0 8px; }
-.fjord-culture-prototype { color: var(--fjord-accent); }
+.fjord-culture-prototype { color: var(--fs-text); }
 .fjord-culture ul { margin: 7px 0; padding-left: 22px; }
 .fjord-culture li { margin: 4px 0; }
 .fjord-culture button { min-height: 44px; }
