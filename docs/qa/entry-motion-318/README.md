@@ -1,3 +1,5 @@
+> Initial revision evidence at `cdfd5f1`. See the [live-tuning and water-edge follow-up](v2/README.md) for the current prototype.
+
 # Desktop entry motion — throwaway prototype #318
 
 Question: can the approved start artwork gain calm aurora/cloud movement and moving water reflections without loading the game world or moving the menu?

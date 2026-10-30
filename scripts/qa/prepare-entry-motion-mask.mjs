@@ -18,22 +18,27 @@ const skyEdge = [
 const waterEdge = [
     [.31,.68],[.325,.71],[.385,.73],[.395,.77],[.455,.78],[.465,.80],
     [.615,.80],[.625,.895],[.795,.895],[.81,1],[1,1],
-    [1,.705],[.56,.675],[.45,.67],[.32,.67],
+    [1,.705],[.56,.66],[.45,.655],[.32,.655],
 ];
-async function gate(points) {
+async function gate(points, blur = 3) {
     const path = points.map(([x,y]) => `${x*width},${y*height}`).join(' ');
-    const svg = `<svg width="${width}" height="${height}"><defs><filter id="soft"><feGaussianBlur stdDeviation="3"/></filter></defs><rect width="100%" height="100%" fill="black"/><polygon points="${path}" fill="white" filter="url(#soft)"/></svg>`;
+    const svg = `<svg width="${width}" height="${height}"><defs><filter id="soft"><feGaussianBlur stdDeviation="${blur}"/></filter></defs><rect width="100%" height="100%" fill="black"/><polygon points="${path}" fill="white" filter="url(#soft)"/></svg>`;
     return sharp(Buffer.from(svg)).removeAlpha().raw().toBuffer();
 }
 const alpha = await sharp(source).resize(width,height,{fit:'fill'}).extractChannel('alpha').raw().toBuffer();
 const sky = await gate([[0,0],[1,0],...skyEdge.toReversed()]);
-const water = await gate(waterEdge);
+const water = await gate(waterEdge, 18);
+const waterBounds = await gate(waterEdge, 0);
 const rgb = Buffer.alloc(width*height*3);
 for(let i=0;i<alpha.length;i++) {
     const free = Math.max(0, 1 - alpha[i] / 247);
     rgb[i*3] = alpha[i];
     rgb[i*3+1] = Math.round(free*sky[i*3]);
-    rgb[i*3+2] = Math.round(free*water[i*3]);
+    // The source cutout's shifted shore made a hard stripe beneath the village.
+    // Trace the real photograph instead; fade only inward to keep structures still.
+    const inward = Math.max(0, Math.min(1, (water[i*3] / 255 - .5) / .46));
+    const fade = inward * inward * (3 - 2 * inward);
+    rgb[i*3+2] = waterBounds[i*3] === 255 ? Math.round(fade * 255) : 0;
 }
 await sharp(rgb,{raw:{width,height,channels:3}}).png({compressionLevel:9}).toFile(target);
 const bytes = await readFile(target);

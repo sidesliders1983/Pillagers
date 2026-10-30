@@ -1,11 +1,14 @@
 // THROWAWAY #318: one isolated quad; no Three.js, scene, game clock or model imports.
 import fragmentSource from './motion.frag?raw';
+import type { MotionSettings } from './MotionControls.prototype';
 
 export interface BackdropStats {
     frames: number; pixels: number; cpuP95: number; paused: boolean; phase: number; renderer: string;
 }
 
-export function createBackdrop(host: HTMLElement, variant: string, failed: (error: unknown) => void) {
+export function createBackdrop(
+    host: HTMLElement, variant: string, settings: MotionSettings, failed: (error: unknown) => void,
+) {
     const layer = document.createElement('div');
     layer.className = 'entry-motion-layer';
     layer.setAttribute('aria-hidden', 'true');
@@ -43,35 +46,53 @@ export function createBackdrop(host: HTMLElement, variant: string, failed: (erro
     gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
     const view = gl.getUniformLocation(program, 'u_view'), time = gl.getUniformLocation(program, 'u_time');
     gl.uniform1f(gl.getUniformLocation(program, 'u_variant'), variant === 'rendered' ? 1 : 0);
+    const controlUniforms = Object.keys(settings).map(key => ({
+        key: key as keyof MotionSettings,
+        location: gl.getUniformLocation(program, 'u_' + key),
+    }));
+    function setControls(values: MotionSettings) {
+        if (disposed) return;
+        for (const control of controlUniforms) gl!.uniform1f(control.location, values[control.key]);
+        if (ready && paused && !document.hidden) renderFrame();
+    }
     const debug = gl.getExtension('WEBGL_debug_renderer_info');
     const renderer = debug ? String(gl.getParameter(debug.UNMASKED_RENDERER_WEBGL)) : 'Unavailable';
     function resize() {
-        if (disposed || paused) return;
-        const width = innerWidth, height = innerHeight;
+        if (disposed) return;
+        // Match the CSS background even when the tuning panel adds a scrollbar.
+        const { width, height } = layer.getBoundingClientRect();
         const scale = Math.min(1, 1280 / width, Math.sqrt(900000 / (width * height)));
         canvas.width = Math.max(1, Math.floor(width * scale));
         canvas.height = Math.max(1, Math.floor(height * scale));
         gl!.viewport(0, 0, canvas.width, canvas.height);
         gl!.uniform2f(view, width, height);
+        if (ready && paused && !document.hidden) renderFrame();
     }
-    function draw(now: number) {
-        if (disposed || paused || !ready) return;
-        frame = requestAnimationFrame(draw);
-        if (now - last < 1000 / 30 - .1) return;
+    function renderFrame() {
         const started = performance.now();
-        phase += last ? Math.min(.1, (now - last) / 1000) : 0;
-        last = now;
         gl!.uniform1f(time, phase);
         gl!.drawArrays(gl!.TRIANGLES, 0, 6);
         frames++;
         times.push(performance.now() - started);
         if (times.length > 900) times.shift();
     }
+    function draw(now: number) {
+        if (disposed || paused || !ready) return;
+        frame = requestAnimationFrame(draw);
+        if (now - last < 1000 / 30 - .1) return;
+        phase += last ? Math.min(.1, (now - last) / 1000) : 0;
+        last = now;
+        renderFrame();
+    }
     function setPaused(value: boolean) {
+        if (disposed) return;
         paused = value;
         cancelAnimationFrame(frame);
         last = 0;
-        if (!paused && ready && !disposed) { resize(); frame = requestAnimationFrame(draw); }
+        if (ready) {
+            resize();
+            if (!paused) frame = requestAnimationFrame(draw);
+        }
     }
     function lost(event: Event) { event.preventDefault(); if (!disposed) { dispose(); failed(new Error('Graphics context lost')); } }
     canvas.addEventListener('webglcontextlost', lost);
@@ -111,6 +132,7 @@ export function createBackdrop(host: HTMLElement, variant: string, failed: (erro
         if (disposed) { result.close(); throw new DOMException('Disposed', 'AbortError'); }
         return { result, width: image.naturalWidth, height: image.naturalHeight };
     }
+    setControls(settings);
     const loaded = (async () => {
         const photo = await bitmap('/branding/fjordside/start/fjordside-twilight-2560.webp', 1280);
         gl!.uniform2f(gl!.getUniformLocation(program, 'u_photoSize'), photo.width, photo.height);
@@ -128,14 +150,14 @@ export function createBackdrop(host: HTMLElement, variant: string, failed: (erro
             data.close();
         }
         texture(photo.result, 0, 'u_photo');
-        const mask = await bitmap('/src/fjord-play/prototypes/entry-motion-318/land-mask.png', 1024);
+        const mask = await bitmap('/src/fjord-play/prototypes/entry-motion-318/land-mask.png?shore=2', 1024);
         texture(mask.result, 1, 'u_land');
         if (disposed) return;
         ready = true;
         layer.dataset.ready = 'true';
-        setPaused(document.hidden);
+        setPaused(paused || document.hidden);
     })().catch(error => { if (!disposed) { dispose(); failed(error); } });
-    return { dispose, resize, setPaused, loaded,
+    return { dispose, resize, setPaused, setControls, loaded,
         stats(): BackdropStats {
             const sorted = [...times].sort((a, b) => a - b);
             return { frames, pixels: canvas.width * canvas.height, cpuP95: sorted[Math.floor(sorted.length * .95)] ?? 0,

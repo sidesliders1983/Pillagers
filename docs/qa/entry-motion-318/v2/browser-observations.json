@@ -1,0 +1,178 @@
+{
+  "expected": {
+    "auroraBrightness": 1.1,
+    "auroraSpeed": 0.2,
+    "auroraSway": 1.75,
+    "cloudDrift": 0.1,
+    "cloudCoverage": 0.8,
+    "waveStrength": 2.5,
+    "waveSpeed": 1,
+    "reflectionStrength": 3
+  },
+  "paused": {
+    "revision": 2,
+    "controls": {
+      "auroraBrightness": 1.1,
+      "auroraSpeed": 0.2,
+      "auroraSway": 1.75,
+      "cloudDrift": 0.1,
+      "cloudCoverage": 0.8,
+      "waveStrength": 2.5,
+      "waveSpeed": 1,
+      "reflectionStrength": 3
+    },
+    "userPaused": true,
+    "variant": "rendered",
+    "eligible": true,
+    "desktop": true,
+    "finePointer": true,
+    "motionAllowed": true,
+    "enabled": true,
+    "hidden": false,
+    "exiting": false,
+    "canvases": 1,
+    "frames": 14,
+    "pixels": 784640,
+    "cpuP95": 0.4000000022351742,
+    "paused": true,
+    "phase": 0.44980000000000014,
+    "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  },
+  "adjusted": {
+    "revision": 2,
+    "controls": {
+      "auroraBrightness": 1.1,
+      "auroraSpeed": 0.2,
+      "auroraSway": 1.75,
+      "cloudDrift": 0.1,
+      "cloudCoverage": 0.8,
+      "waveStrength": 1.5,
+      "waveSpeed": 1,
+      "reflectionStrength": 3
+    },
+    "userPaused": true,
+    "variant": "rendered",
+    "eligible": true,
+    "desktop": true,
+    "finePointer": true,
+    "motionAllowed": true,
+    "enabled": true,
+    "hidden": false,
+    "exiting": false,
+    "canvases": 1,
+    "frames": 15,
+    "pixels": 784640,
+    "cpuP95": 0.4000000022351742,
+    "paused": true,
+    "phase": 0.44980000000000014,
+    "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  },
+  "shared": "http://127.0.0.1:5194/fjord-play?motionPrototype=318&variant=rendered&tune=1&revision=3&auroraBrightness=1.1&auroraSpeed=0.2&auroraSway=1.75&cloudDrift=0.1&cloudCoverage=0.8&waveStrength=1.5&waveSpeed=1&reflectionStrength=3",
+  "temporal": [
+    {
+      "name": "mountain",
+      "box": {
+        "left": 1280,
+        "top": 300,
+        "width": 70,
+        "height": 60
+      },
+      "changedChannels": 0,
+      "maxDifference": 0
+    },
+    {
+      "name": "pier",
+      "box": {
+        "left": 1030,
+        "top": 815,
+        "width": 60,
+        "height": 65
+      },
+      "changedChannels": 0,
+      "maxDifference": 0
+    },
+    {
+      "name": "village",
+      "box": {
+        "left": 1710,
+        "top": 530,
+        "width": 60,
+        "height": 40
+      },
+      "changedChannels": 0,
+      "maxDifference": 0
+    },
+    {
+      "name": "water",
+      "box": {
+        "left": 1630,
+        "top": 765,
+        "width": 90,
+        "height": 55
+      },
+      "changedChannels": 14489,
+      "maxDifference": 234
+    },
+    {
+      "name": "sky",
+      "box": {
+        "left": 1500,
+        "top": 70,
+        "width": 80,
+        "height": 70
+      },
+      "changedChannels": 16404,
+      "maxDifference": 45
+    }
+  ],
+  "ineligible": [
+    {
+      "name": "reduced",
+      "requests": [],
+      "canvases": 0
+    },
+    {
+      "name": "phone",
+      "requests": [],
+      "canvases": 0
+    }
+  ],
+  "profiles": [
+    {
+      "x": 0.6,
+      "start": 0.6684027777777778,
+      "half": 0.6840277777777778,
+      "full": 0.703125,
+      "fadeSpan": 19.999999999999993
+    },
+    {
+      "x": 0.7,
+      "start": 0.6788194444444444,
+      "half": 0.6927083333333334,
+      "full": 0.7135416666666666,
+      "fadeSpan": 19.999999999999993
+    },
+    {
+      "x": 0.8,
+      "start": 0.6892361111111112,
+      "half": 0.703125,
+      "full": 0.7222222222222222,
+      "fadeSpan": 18.999999999999964
+    },
+    {
+      "x": 0.9,
+      "start": 0.6996527777777778,
+      "half": 0.7135416666666666,
+      "full": 0.7326388888888888,
+      "fadeSpan": 18.999999999999964
+    },
+    {
+      "x": 0.95,
+      "start": 0.7048611111111112,
+      "half": 0.71875,
+      "full": 0.7378472222222222,
+      "fadeSpan": 18.999999999999964
+    }
+  ],
+  "errors": []
+}
