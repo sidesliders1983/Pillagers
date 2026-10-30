@@ -1,17 +1,12 @@
 import './style.css';
 const route=location.pathname.replace(/\/+$/, '');
 if (route === '/fjord-play') {
-    if (import.meta.env.DEV && new URLSearchParams(location.search).get('motionPrototype') === '318') {
-        import('./fjord-play/prototypes/entry-motion-318/EntryMotion.prototype')
-            .then(({ runEntryMotionPrototype }) => runEntryMotionPrototype());
-    } else {
-        import('./fjord-play/FjordEntry').then(({ runFjordEntry }) => runFjordEntry()).catch(error => {
-            console.error(error);
-            const status = document.querySelector('#fjord-notice');
-            if (status) status.textContent = 'Fjord rendering unavailable. Simulation controls remain available. ' + error.message;
-            else document.body.textContent = 'Could not open Fjord settlement. ' + error.message;
-        });
-    }
+    import('./fjord-play/FjordEntry').then(({ runFjordEntry }) => runFjordEntry()).catch(error => {
+        console.error(error);
+        const status = document.querySelector('#fjord-notice');
+        if (status) status.textContent = 'Fjord rendering unavailable. Simulation controls remain available. ' + error.message;
+        else document.body.textContent = 'Could not open Fjord settlement. ' + error.message;
+    });
 } else if(route === '/water-lab') {
     import('./water-lab/WaterLab').then(({ WaterLab }) => new WaterLab().start()).catch(error => {
         console.error(error);

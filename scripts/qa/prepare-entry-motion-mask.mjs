@@ -1,11 +1,11 @@
-// THROWAWAY #318: data mask, not a new copy of the artwork.
+// #318: reproducible sampling data, not a second copy of the scenery.
 // The supplied cutout was recomposed slightly. Conservative vector gates keep the
 // actual approved photograph's ridge, shore and pier outside the moving areas.
 import sharp from 'sharp';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 const source = process.argv[2] ?? 'D:/CodexSites/Pillagers/Assets/Background-startgame/upscalemedia-transformed (3).png';
-const target = 'src/fjord-play/prototypes/entry-motion-318/land-mask.png';
+const target = 'public/branding/fjordside/start/motion-mask.png';
 const width = 1024, height = 576;
 const skyEdge = [
     [0,.15],[.20,.18],[.22,.375],[.25,.40],[.28,.40],[.30,.42],

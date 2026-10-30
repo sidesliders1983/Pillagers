@@ -103,3 +103,20 @@ test('the public version stays below the brand and agrees with About and diagnos
         assert.equal(attempts.length, 0);
     });
 });
+
+test('animated entry background is a persistent presentation preference, never a campaign write', async () => {
+    await entry(async ({ dom, writes, attempts }) => {
+        button('Settings').click();
+        const preference = document.querySelector('[data-entry-motion]');
+        assert.ok(preference, 'Settings exposes the desktop background motion preference');
+        assert.equal(preference.checked, true);
+        preference.click();
+        assert.equal(dom.window.localStorage.getItem('fjordside.entry-motion'), 'off');
+        assert.equal(writes.length, 0);
+        assert.equal(attempts.length, 0);
+        button('Back').click();
+        button('Settings').click();
+        assert.equal(document.querySelector('[data-entry-motion]').checked, false);
+        assert.equal(writes.length, 0);
+    });
+});
