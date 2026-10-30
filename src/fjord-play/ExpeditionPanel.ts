@@ -1,3 +1,4 @@
+import './expedition-guided.css';
 import { recentGroupWildlife } from '../lore/WildlifeBookView';
 import { expeditionEligible, groupMission, personaAway } from '../simulation/WorldExpeditions';
 import { defaultExpeditionFoodPerMember, inspectSpatialExpeditions,
@@ -16,6 +17,7 @@ interface ExpeditionNavigation {
     showGroups: () => void;
     focus: (point: Point2) => void;
     toggleClock: () => void;
+    workspaceChanged?: () => void;
 }
 const escape = (value: string) => value.replace(/[&<>"']/g,
     char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]!));
@@ -30,8 +32,11 @@ const phase = (mission?: Mission) => mission?.transport?.phase === 'boarding' ? 
 /** A preparation workspace and a persistent map toolbar, backed by the same Core commands. */
 export class ExpeditionPanel {
     private groupId = '';
+    private preparationStep: 'crew' | 'supplies' = 'crew';
+    private view: 'explore' | 'places' = 'explore';
     private choosing = false;
     private pendingStart = '';
+    private pendingGroupAction?: Extract<SimulationCommand, { type: 'CancelExpedition' | 'DisbandExpeditionGroup' }>;
     private pendingCrew = '';
     private pendingFood = 0;
     private pendingTestFoodPerMember?: number;
@@ -55,7 +60,10 @@ export class ExpeditionPanel {
         private origins: (memberIds: readonly string[]) => Record<string, Point2>,
         private navigation: ExpeditionNavigation,
     ) {
-        root.innerHTML = `<div id="expedition-controls"></div>
+        root.innerHTML = `<nav class="fjord-expedition-tabs" aria-label="Expedition purpose">
+            ${button('Explore island', 'route', 'data-expedition-view="explore" aria-pressed="true"')}
+            ${button('Known places', 'map', 'data-expedition-view="places" aria-pressed="false"')}
+            </nav><div id="expedition-controls"></div>
             <p id="expedition-status" class="fjord-expedition-message" role="status" aria-live="polite"></p>
             <dialog id="expedition-start-dialog" aria-labelledby="expedition-start-title">
                 <span class="fjord-expedition-eyebrow">Expedition supplies</span>
@@ -64,6 +72,13 @@ export class ExpeditionPanel {
                 <div class="fjord-expedition-actions">
                     ${button('Pack supplies', 'food', 'id="expedition-start-confirm" class="fjord-primary"')}
                     ${button('Back', 'back', 'id="expedition-start-cancel"')}
+                </div>
+            </dialog>
+            <dialog id="expedition-group-dialog" aria-labelledby="expedition-group-title">
+                <h2 id="expedition-group-title"></h2><p id="expedition-group-summary"></p>
+                <div class="fjord-expedition-actions">
+                    ${button('Confirm', 'check', 'id="expedition-group-confirm" class="fjord-primary"')}
+                    ${button('Back', 'back', 'id="expedition-group-back"')}
                 </div>
             </dialog>`;
         this.toolbar = document.createElement('aside');
@@ -94,6 +109,12 @@ export class ExpeditionPanel {
         }, { signal: this.abort.signal });
         root.querySelector('dialog')!.addEventListener('close', () => { this.pendingStart = ''; },
             { signal: this.abort.signal });
+        this.groupDialog.addEventListener('close', () => {
+            const command = this.pendingGroupAction;
+            this.pendingGroupAction = undefined;
+            if (command) this.root.querySelector<HTMLButtonElement>(command.type === 'CancelExpedition' ?
+                `[data-cancel-expedition="${command.groupId}"]` : `[data-disband="${command.groupId}"]`)?.focus();
+        }, { signal: this.abort.signal });
         document.addEventListener('keydown', event => {
             if (event.key !== 'Escape' || !this.choosing || document.querySelector('dialog[open]')) return;
             event.preventDefault();
@@ -104,13 +125,25 @@ export class ExpeditionPanel {
     }
 
     dispose() {
+        for (const dialog of Array.from(this.root.querySelectorAll<HTMLDialogElement>('dialog[open]')))
+            dialog.close();
         this.abort.abort();
         this.clearTarget();
         this.root.closest('.fjord-stage')?.classList.remove('is-choosing-expedition');
         this.toolbar.remove(); this.shortcuts.remove();
     }
+    get selectedGroupId() { return this.groupId; }
+    get missionsOpen() { return this.view === 'places'; }
+    openMissions() {
+        this.clearTarget();
+        this.view = 'places';
+        this.navigation.showGroups();
+        this.refresh();
+        this.navigation.workspaceChanged?.();
+    }
     get targeting() { return this.choosing; }
     get targetingGroup() { return this.choosing ? this.groupId : undefined; }
+    private get groupDialog() { return this.root.querySelector<HTMLDialogElement>('#expedition-group-dialog')!; }
     private get dialog() { return this.root.querySelector<HTMLDialogElement>('#expedition-start-dialog')!; }
     private activeMission(state = this.session.readSnapshot(), groupId = this.groupId) {
         return inspectSpatialExpeditions(state).missions
@@ -176,7 +209,8 @@ export class ExpeditionPanel {
     }
     private beginTargeting(groupId: string) {
         this.groupId = groupId;
-        this.hiddenGroups.add(groupId);
+        // Packing hands off to a visible order step, including Cancel and its cost explanation.
+        this.hiddenGroups.delete(groupId);
         this.choosing = true;
         this.message = '';
         this.showTarget();
@@ -189,6 +223,20 @@ export class ExpeditionPanel {
     private click = (event: Event) => {
         const target = (event.target as Element).closest<HTMLButtonElement>('button');
         if (!target || target.disabled) return;
+        if (target.dataset.expeditionView) {
+            this.clearTarget();
+            this.view = target.dataset.expeditionView === 'places' ? 'places' : 'explore';
+            this.refresh();
+            this.navigation.workspaceChanged?.();
+            return;
+        }
+        if (target.id === 'expedition-crew-next' || target.id === 'expedition-supplies-back') {
+            this.preparationStep = target.id === 'expedition-crew-next' ? 'supplies' : 'crew';
+            this.refresh();
+            this.root.querySelector<HTMLElement>(this.preparationStep === 'crew' ?
+                '#expedition-crew-next' : '#expedition-supplies-heading')?.focus();
+            return;
+        }
         if (target.dataset.expeditionToggle) {
             const groupId = target.dataset.expeditionToggle;
             const hide = !this.toolbar.hidden && this.toolbar.dataset.group === groupId;
@@ -203,16 +251,25 @@ export class ExpeditionPanel {
         if (target.dataset.expeditionGroup) {
             this.clearTarget();
             this.groupId = target.dataset.expeditionGroup;
+            this.preparationStep = 'crew';
             this.message = '';
             this.refresh();
+            this.navigation.workspaceChanged?.();
             return;
         }
         if (target.id === 'expedition-create') {
             this.groupId = '';
             this.command({ type: 'CreateExplorationGroup' });
         }
-        if (target.dataset.disband) this.command({ type: 'DisbandExpeditionGroup', groupId: target.dataset.disband });
+        if (target.dataset.disband) this.reviewGroupAction({ type: 'DisbandExpeditionGroup', groupId: target.dataset.disband });
         if (target.dataset.start) this.reviewDeparture(target.dataset.start);
+        if (target.id === 'expedition-group-back') this.groupDialog.close();
+        if (target.id === 'expedition-group-confirm' && this.pendingGroupAction) {
+            const command = this.pendingGroupAction;
+            this.pendingGroupAction = undefined;
+            this.groupDialog.close();
+            this.command(command);
+        }
         if (target.id === 'expedition-start-cancel') this.dialog.close();
         if (target.id === 'expedition-start-confirm' && this.pendingStart) {
             try {
@@ -233,7 +290,7 @@ export class ExpeditionPanel {
         if (target.dataset.disembark) this.command({ type: 'DisembarkLongship', groupId: target.dataset.disembark });
         if (target.dataset.loadShipFood) this.command({ type: 'LoadLongshipFood', groupId: target.dataset.loadShipFood });
         if (target.dataset.cancelExpedition)
-            this.command({ type: 'CancelExpedition', groupId: target.dataset.cancelExpedition });
+            this.reviewGroupAction({ type: 'CancelExpedition', groupId: target.dataset.cancelExpedition });
         if (target.id === 'expedition-cancel') this.cancelTarget();
         if (target.id === 'expedition-details') {
             this.toolbarExpanded = !this.toolbarExpanded;
@@ -254,6 +311,20 @@ export class ExpeditionPanel {
         }
         if (target.dataset.expeditionAction === 'clock') this.navigation.toggleClock();
     };
+
+    private reviewGroupAction(command: NonNullable<ExpeditionPanel['pendingGroupAction']>) {
+        const end = command.type === 'CancelExpedition';
+        this.pendingGroupAction = command;
+        this.groupDialog.querySelector('#expedition-group-title')!.textContent = end ?
+            'End this expedition?' : 'Disband this group?';
+        this.groupDialog.querySelector('#expedition-group-summary')!.textContent = end ?
+            'Unused supplies will be discarded. No Food is refunded. The residents remain at home.' :
+            'The residents remain at home and keep their occupations and households.';
+        this.groupDialog.querySelector('#expedition-group-confirm span')!.textContent = end ?
+            'End expedition' : 'Disband group';
+        this.groupDialog.showModal();
+        this.groupDialog.querySelector<HTMLButtonElement>('#expedition-group-back')!.focus();
+    }
 
     private reviewDeparture(groupId: string) {
         try {
@@ -282,9 +353,14 @@ export class ExpeditionPanel {
             this.message = 'Group disbanded. Residents are available for another crew.';
         }
         const state = this.session.readSnapshot();
-        if (command.type === 'CreateExplorationGroup') this.groupId = Object.keys(state.world!.groups).at(-1)!;
+        if (command.type === 'CreateExplorationGroup') {
+            this.groupId = Object.keys(state.world!.groups).at(-1)!;
+            this.preparationStep = 'crew';
+            this.view = 'explore';
+        }
         if ('groupId' in command) this.groupId = command.groupId;
-        if (command.type === 'StartExpedition') { this.beginTargeting(command.groupId); return; }
+        if (command.type === 'DispatchIslandMission') this.view = 'explore';
+        if (command.type === 'StartExpedition') { this.preparationStep = 'crew'; this.beginTargeting(command.groupId); return; }
         if (['ExploreArea', 'RecallExpedition', 'CancelExpedition', 'BoardLongship', 'DisembarkLongship'].includes(command.type)) this.clearTarget();
         if (command.type === 'BoardLongship') {
             this.hiddenGroups.add(command.groupId);
@@ -336,7 +412,7 @@ export class ExpeditionPanel {
             return `<label class="fjord-crew-choice ${included ? 'is-selected' : ''}">
                 <input type="checkbox" data-member="${escape(id)}" data-member-group="${escape(group.id)}"
                     ${included ? 'checked' : ''} ${available || included ? '' : 'disabled'}>
-                ${icon(occupationIcon(person.occupation))}<span><strong>${escape(person.name)}</strong>
+                ${icon(occupationIcon(person.occupation))}<span><strong>${escape(person.name)} (${personaAge(state, person.id)})</strong>
                     <small>${escape(available ? occupationLabel(person.occupation) : this.unavailableReason(state, id, group.id))}</small></span>
             </label>`;
         };
@@ -389,9 +465,9 @@ export class ExpeditionPanel {
                     `data-recall="${escape(mission.groupId)}" ${stranded || mission.status === 'Returning' ? 'disabled' : ''}`));
     }
     private journey(group: Group, mission?: Mission) {
-        const step = !mission ? 0 : mission.status === 'Prepared' ? 1 : 2;
+        const step = !mission ? (this.preparationStep === 'crew' ? 0 : 1) : mission.status === 'Prepared' ? 2 : 3;
         return `<ol class="fjord-expedition-steps" aria-label="Expedition steps">${[
-            ['people', 'Crew'], ['destination', 'Destination'], ['route', mission?.missionType ? 'Mission & return' : 'Explore & return'],
+            ['people', 'Crew'], ['food', 'Supplies'], ['destination', 'Destination'],
         ].map(([glyph, label], index) => `<li ${index === step ? 'aria-current="step"' : ''} class="${index < step ? 'is-complete' : ''}">
             ${icon(index < step ? 'check' : glyph as FjordIcon)}<span>${label}</span></li>`).join('')}</ol>
             <div class="fjord-expedition-group-heading"><h3>${escape(group.name)}</h3>
@@ -403,13 +479,19 @@ export class ExpeditionPanel {
         return amount === defaultExpeditionFoodPerMember ? undefined : amount;
     }
     private preparation(state: SimulationState, group: Group) {
+        if (this.preparationStep === 'crew') return `${this.crew(state, group)}
+            <p class="fjord-caption">Residents are unavailable for work at home while away.</p>
+            <div class="fjord-expedition-actions">${button('Continue to supplies', 'route',
+                `id="expedition-crew-next" class="fjord-primary" ${group.memberIds.length ? '' : 'disabled'}`)}</div>`;
         let offer: ReturnType<GameplaySession['startExpeditionOffer']> | undefined;
         let reason = 'Choose at least one available resident.';
         if (group.memberIds.length) {
             try { offer = this.session.startExpeditionOffer(group.id, this.testFoodPerMember(group.id)); reason = ''; }
             catch (error) { reason = error instanceof Error ? error.message : String(error); }
         }
-        return `${this.crew(state, group)}
+        return `<h3 id="expedition-supplies-heading" tabindex="-1">Review supplies</h3>
+            <p class="fjord-expedition-crew">${group.memberIds.map(id => escape(state.personas[id].name)).join(', ')}</p>
+            ${button('Back to crew', 'back', 'id="expedition-supplies-back"')}
             <details class="fjord-expedition-test-supplies" data-expedition-test-options>
                 <summary>Test supplies</summary>
                 <label><span>Food per resident (test)</span>
@@ -419,9 +501,15 @@ export class ExpeditionPanel {
             </details><div class="fjord-expedition-departure">
             <div>${icon('food')}<span>${offer ? `<strong>${offer.foodCost} Food</strong><small>${offer.foodPerMember} per resident · paid once</small>` :
                 '<strong>Prepare supplies</strong><small>Food is confirmed before packing</small>'}</span></div>
-            ${button('Prepare expedition', 'route', `data-start="${escape(group.id)}" class="fjord-primary" ${offer ? '' : 'disabled'}`)}
+            ${button('Review supplies', 'route', `data-start="${escape(group.id)}" class="fjord-primary" ${offer ? '' : 'disabled'}`)}
             ${reason ? `<p class="fjord-caption">${escape(reason)}</p>` : ''}
         </div>`;
+    }
+    private finishedDescription(mission: Mission) {
+        if (mission.outcome === 'Lost') return 'Expedition lost';
+        if (mission.returnReason === 'outward-route-blocked') return 'Returned early — route blocked';
+        if (mission.returnReason === 'low-supplies') return 'Returned — exploration supplies used';
+        return mission.outcome === 'Cancelled' ? 'Expedition ended' : 'Returned home';
     }
     private missionDescription(mission: Mission) {
         if (mission.transport?.phase === 'boarding') return 'Walking to shore. The group boards together when everyone arrives.';
@@ -453,12 +541,17 @@ export class ExpeditionPanel {
     openGroup(groupId: string) {
         if (!this.session.readSnapshot().world?.groups[groupId]) return;
         this.groupId = groupId;
+        this.view = 'explore';
         this.navigation.showGroups();
         this.toolbarExpanded = true;
         this.refresh();
     }
     refresh() {
         const state = this.session.readSnapshot();
+        for (const tab of Array.from(this.root.querySelectorAll<HTMLButtonElement>('[data-expedition-view]'))) {
+            tab.setAttribute('aria-pressed', String(tab.dataset.expeditionView === this.view));
+            tab.disabled = tab.dataset.expeditionView === 'places' && state.world?.version !== 2;
+        }
         const groups = Object.values(state.world?.groups ?? {});
         const rawMissions = Object.values(state.world?.spatial?.missions ?? {});
         const activeGroups = new Set(rawMissions.filter(mission => mission.status !== 'Returned').map(mission => mission.groupId));
@@ -500,7 +593,7 @@ export class ExpeditionPanel {
             if (!group) html += `<div class="fjord-expedition-empty">${icon('route')}<h3>Your first expedition</h3>
                 <p>Create a group, choose available residents and pack supplies. Tap a valid destination to begin travelling.</p></div>`;
             else {
-                html += this.journey(group, mission);
+                html += `<section aria-label="Explore preparation" ${this.view === 'explore' ? '' : 'hidden'}>` + this.journey(group, mission);
                 if (!mission && groupMission(state, group.id)) html += '<p>This group is away on an earlier expedition. Its crew can be edited after it returns.</p>';
                 else if (!mission) html += this.preparation(state, group) +
                     `<div class="fjord-expedition-actions">${button('Disband group', 'close',
@@ -515,7 +608,8 @@ export class ExpeditionPanel {
                         'The clock is running.'} ${mission.missionType ? 'Return home before starting another mission.' : 'New destinations use the same carried supplies.'}</p>`;
                 html += recentGroupWildlife(this.session, group.id);
                 const latest = missions.filter(candidate => candidate.groupId === group.id).at(-1);
-                if (!mission && latest) html += `<p class="fjord-expedition-history">${icon('check')}Previous expedition: ${escape(latest.outcome ?? latest.status)} · ${latest.foodCost} Food supplied</p>`;
+                if (!mission && latest) html += `<p class="fjord-expedition-history">${icon('check')}Previous expedition: ${escape(this.finishedDescription(latest))} · ${latest.foodCost} Food supplied</p>`;
+                html += '</section>';
             }
         }
         this.replace(controls, html, this.controlsHTML);

@@ -10,6 +10,12 @@ import { renderMissionLivestock } from '../play/MissionLivestockView';
 const escape = (value: string) => value.replace(/[&<>"']/g,
     char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]!));
 
+interface IslandMissionWorkspace {
+    groupId: () => string;
+    visible: () => boolean;
+    open: () => void;
+}
+
 /** Mission-specific controls reuse existing groups, movement and Core offers. */
 export class IslandMissionPanel {
     private root: HTMLElement;
@@ -29,7 +35,8 @@ export class IslandMissionPanel {
         private origins: (members: readonly string[]) => Record<string, Point2>,
         private showMap: () => void, private showGroups: () => void,
         private focus: (point: Point2) => void,
-        private inspectAnimal: (id: string) => void = () => {}) {
+        private inspectAnimal: (id: string) => void = () => {},
+        private workspace?: IslandMissionWorkspace) {
         this.root = document.createElement('section');
         this.root.id = 'island-mission-panel';
         this.root.setAttribute('aria-label', 'Physical island missions');
@@ -88,6 +95,7 @@ export class IslandMissionPanel {
     selectSite(id: string) {
         if (!inspectIslandMissions(this.session.readSnapshot()).sites.some(site => site.id === id)) return;
         this.siteId = id;
+        this.workspace?.open();
         this.cancelTarget();
         this.showGroups();
         this.refresh();
@@ -95,6 +103,7 @@ export class IslandMissionPanel {
     }
     /** Read-only entry from Help; the existing offer and confirmation still own dispatch. */
     openPreparation(type: MissionType, siteId?: string) {
+        this.workspace?.open();
         if (siteId) {
             this.selectSite(siteId);
             this.review({ kind: 'site', siteId }, type);
@@ -175,8 +184,9 @@ export class IslandMissionPanel {
     }
     refresh() {
         const state = this.session.readSnapshot();
-        this.root.hidden = state.world?.version !== 2;
+        this.root.hidden = state.world?.version !== 2 || this.workspace?.visible() === false;
         if (this.root.hidden) return;
+        if (this.workspace) this.groupId = this.workspace.groupId();
         const groups = Object.values(state.world!.groups), sites = inspectIslandMissions(state).sites;
         if (!groups.some(group => group.id === this.groupId)) this.groupId = groups[0]?.id ?? '';
         if (!sites.some(site => site.id === this.siteId)) this.siteId = sites[0]?.id ?? '';
@@ -206,8 +216,8 @@ export class IslandMissionPanel {
         const observationAge = site?.knowledge ? Math.floor((state.time.winter * state.ticksPerWinter +
             state.time.tick - site.knowledge.observedAt) / state.ticksPerWinter) : 0;
         const html = `<h3>Island missions</h3><p class="fjord-caption">Separate missions depart from home. Explore first to map possible destinations.</p>
-            <label>Mission group <select id="island-mission-group"><option value="" ${group ? 'hidden' : ''}>Create a group above</option>${groups.map(g =>
-                `<option value="${escape(g.id)}" ${g.id === this.groupId ? 'selected' : ''}>${escape(g.name)}</option>`).join('')}</select></label>
+            ${this.workspace ? `<p class="fjord-caption">Selected group: <strong>${escape(group?.name ?? 'None')}</strong></p>` : `<label>Mission group <select id="island-mission-group"><option value="" ${group ? 'hidden' : ''}>Create a group above</option>${groups.map(g =>
+                `<option value="${escape(g.id)}" ${g.id === this.groupId ? 'selected' : ''}>${escape(g.name)}</option>`).join('')}</select></label>`}
             ${groupReason ? `<p class="fjord-caption" id="island-mission-group-block">${escape(groupReason)}</p>` : ''}
             ${canRecall ? '<button type="button" data-island-return>Return group home</button>' : ''}
             ${active?.task ? `<p>${escape(active.task.type)} · ${escape(active.status)}</p>` : ''}

@@ -1,0 +1,65 @@
+/* Guided expedition preparation; the world, Core commands and global clock retain ownership. */
+#fjord-play .fjord-expedition-tabs {
+    display: flex;
+    gap: 8px;
+    margin: 0 0 16px;
+}
+#fjord-play .fjord-expedition-tabs button {
+    flex: 1;
+    min-height: 44px;
+    justify-content: center;
+}
+#fjord-play .fjord-expedition-tabs button[aria-pressed="true"] {
+    border-color: var(--fjord-accent);
+    background: #dcbf8418;
+    color: var(--fjord-text);
+}
+#fjord-play #expedition-supplies-heading {
+    margin: 18px 0 10px;
+    font: 23px/1.2 Georgia, serif;
+}
+#fjord-play #expedition-supplies-heading:focus-visible {
+    outline: 2px solid var(--fjord-accent);
+    outline-offset: 4px;
+}
+#fjord-play #expedition-crew-next, #fjord-play #expedition-supplies-back {
+    min-height: 44px;
+}
+#fjord-play #expedition-crew-next {
+    flex: 1;
+    justify-content: center;
+}
+#fjord-play #expedition-group-dialog {
+    box-sizing: border-box;
+    width: min(460px, calc(100% - 32px));
+    max-height: 85dvh;
+    overflow: auto;
+    padding: 24px;
+    color: var(--fjord-text);
+    background: var(--fjord-panel);
+    border: 1px solid var(--fjord-accent);
+    border-radius: 7px;
+}
+#expedition-group-dialog::backdrop {
+    background: #07101399;
+}
+#expedition-group-dialog h2 {
+    margin: 0 0 14px;
+    font: 26px/1.2 Georgia, serif;
+}
+#fjord-play #expedition-group-dialog button {
+    min-height: 44px;
+}
+#fjord-play #expedition-panel #island-mission-panel {
+    border-top: none;
+    margin-top: 0;
+    padding-top: 0;
+}
+@media (max-height: 550px) {
+    #fjord-play .fjord-expedition-tabs {
+        margin-bottom: 10px;
+    }
+    #fjord-play #expedition-panel .fjord-expedition-steps {
+        padding-bottom: 8px;
+    }
+}

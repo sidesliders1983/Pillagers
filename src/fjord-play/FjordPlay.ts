@@ -896,6 +896,7 @@ export class FjordPlay {
                 showGroups: () => desktopUI?.open('expeditions', true),
                 focus: point => controller.focusAt(point),
                 toggleClock: () => document.querySelector<HTMLButtonElement>('#fjord-run')!.click(),
+                workspaceChanged: () => islandMissions?.refresh(),
             });
         this.startupCleanup.push(() => expeditions?.dispose());
         islandMissions = new IslandMissionPanel(document.querySelector<HTMLElement>('#expedition-panel')!,
@@ -905,7 +906,11 @@ export class FjordPlay {
                 islandMissions?.committed(command);
             }), memberIds => presentation!.origins(memberIds),
             () => desktopUI?.showExplorationMap(), () => desktopUI?.open('expeditions', true),
-            point => controller.focusAt(point), id => select('cattle', id));
+            point => controller.focusAt(point), id => select('cattle', id), {
+                groupId: () => expeditions!.selectedGroupId,
+                visible: () => expeditions!.missionsOpen,
+                open: () => expeditions!.openMissions(),
+            });
         this.startupCleanup.push(() => islandMissions?.dispose());
 
         capturePresentation = () => this.shared.setPresentation({
