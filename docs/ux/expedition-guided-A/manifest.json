@@ -1,0 +1,136 @@
+{
+  "application_code_commit": "723ece8812ea9742123f7c13dc40057af89a38db",
+  "parent_menu_commit": "4bbb0e96ccc9bd3c206ecc8d6e6928771e62286a",
+  "sources": [
+    {
+      "path": "src/fjord-play/ExpeditionPanel.ts",
+      "sha256_git_bytes": "88d3dac737fff6748549ba126129d3c85af24e017f16fcc8dc9f987e7d501203"
+    },
+    {
+      "path": "src/fjord-play/IslandMissionPanel.ts",
+      "sha256_git_bytes": "9506f9b6305d89ea29419147bec59382d568c3107548d45097933250f1dffd28"
+    },
+    {
+      "path": "src/fjord-play/FjordPlay.ts",
+      "sha256_git_bytes": "54e407da1549b2eaa1dda5f542a80c94ce5b1cdf77e566efb46cae48270f6774"
+    },
+    {
+      "path": "src/fjord-play/expedition-guided.css",
+      "sha256_git_bytes": "21e361e1c5932c4afdfed3cd060e51c42f52bc667df63f4e0e1b09fbb2c45dca"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": ".gitattributes",
+      "bytes": 54,
+      "sha256": "c645b08b1b46706f8bbe7431f7e60efc448477e58e8ccf4049981a11d43302dd"
+    },
+    {
+      "path": "after-navigation.json",
+      "bytes": 82300,
+      "sha256": "daab74d69854bc740d4c2057c82de875ffb3ec94819d7a33cdc5c95fd1780b47"
+    },
+    {
+      "path": "before-navigation.json",
+      "bytes": 82300,
+      "sha256": "daab74d69854bc740d4c2057c82de875ffb3ec94819d7a33cdc5c95fd1780b47"
+    },
+    {
+      "path": "build.txt",
+      "bytes": 7208,
+      "sha256": "47a7c495ea3a5f5484819f25bfd71a544895b0aa07b398a036e99b9d10c6eb14"
+    },
+    {
+      "path": "crew-desktop.jpg",
+      "bytes": 163545,
+      "sha256": "9d7555fc2d74374561847b7702c34165e840ab904367a8debbc787c80a6cd908"
+    },
+    {
+      "path": "crew-touch.jpg",
+      "bytes": 48286,
+      "sha256": "009e06aba90693b779cb0162f46b59e9120e27360dc174929122f815c18d112e"
+    },
+    {
+      "path": "destination-desktop.jpg",
+      "bytes": 193653,
+      "sha256": "1534791d8cde2aee03a76a84a81b91f879fb9fffc6dc7cafebd69ce3780e7ee4"
+    },
+    {
+      "path": "destination-touch.jpg",
+      "bytes": 48089,
+      "sha256": "147f83a20e6e2e64f9e4ca169212dbbdb782d2da8e8f2dbab3e2c8f349cb1517"
+    },
+    {
+      "path": "disbanded.json",
+      "bytes": 84604,
+      "sha256": "06b7e59146b7acebdfb9d7ad489918d8f0b590ffca44485edaef156c707178e4"
+    },
+    {
+      "path": "end-back.json",
+      "bytes": 83712,
+      "sha256": "7bb3cacf03920995d52e5a55c250d7b08094c916bc5067c6acf7bd0750fdd3c0"
+    },
+    {
+      "path": "end-confirmation.jpg",
+      "bytes": 108671,
+      "sha256": "d32e0da694af2e4fd371b04224efab1cd8a4c9ec42d5cb82794f82c9957c9469"
+    },
+    {
+      "path": "known-places-desktop.jpg",
+      "bytes": 162534,
+      "sha256": "ad9ae4255753280f7c70810170dd7c0c4928199e99e0ef9831291f64efbd13f1"
+    },
+    {
+      "path": "map-cancel.json",
+      "bytes": 83712,
+      "sha256": "7bb3cacf03920995d52e5a55c250d7b08094c916bc5067c6acf7bd0750fdd3c0"
+    },
+    {
+      "path": "pack-touch.jpg",
+      "bytes": 38972,
+      "sha256": "46f61299be09c83df73a054e820f24d65a87cd0a083fe5e042e7b2e0da127396"
+    },
+    {
+      "path": "prepared.json",
+      "bytes": 83712,
+      "sha256": "7bb3cacf03920995d52e5a55c250d7b08094c916bc5067c6acf7bd0750fdd3c0"
+    },
+    {
+      "path": "README.md",
+      "bytes": 5311,
+      "sha256": "cbce88d550ef27a7073de3e61c2e8737dafd334f85e3426c88ec0e9b98316003"
+    },
+    {
+      "path": "result.json",
+      "bytes": 654,
+      "sha256": "1e8836fcb8e30f60d094f6cb33242cb1c229e7f4326cccb95b6711d3f566be0d"
+    },
+    {
+      "path": "shortage-desktop.jpg",
+      "bytes": 163416,
+      "sha256": "010672231b848db8c8d0b8193ff09f2684035083e298853d63c4e9c10dd24f4e"
+    },
+    {
+      "path": "supplies-desktop.jpg",
+      "bytes": 164529,
+      "sha256": "17711cefe1b5bd64f1deeb534d07b294e6ada70ae6db00cbddeb6271d1e59576"
+    },
+    {
+      "path": "supplies-touch.jpg",
+      "bytes": 46369,
+      "sha256": "4df829c123e57d100706e8feb73fde8edec196f302ebc70309dff2cc0a253a28"
+    },
+    {
+      "path": "targeted-tests.txt",
+      "bytes": 4869,
+      "sha256": "fa120c36e9fa4659d320b48c52d388976e18d0f49c6b33560575292d781a72cf"
+    }
+  ],
+  "served_bundles": [
+    {
+      "url": "http://127.0.0.1:5195/assets/FjordEntry-WGOUgz8e.js",
+      "sha256": "5d35ab9065806908f33ec3f06cc12c3c8ad36e8a763d866e442e290dd5e0c90b",
+      "contains_clean_code_marker": true
+    }
+  ]
+}

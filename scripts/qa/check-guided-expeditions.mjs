@@ -1,0 +1,90 @@
+import {execFileSync} from 'node:child_process';
+import {createRequire} from 'node:module';
+import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import {resolve,join} from 'node:path';
+import assert from 'node:assert/strict';
+const require=createRequire(import.meta.url);
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const origin=process.env.QA_ORIGIN || 'http://127.0.0.1:5195';
+const output=resolve(process.env.QA_OUTPUT || 'scratch/guided-expedition-check');
+await mkdir(output,{recursive:true});await mkdir(join(output,'temporary'),{recursive:true});
+process.env.TEMP=process.env.TMP=process.env.TMPDIR=join(output,'temporary');
+const browser=await chromium.launch({headless:true,chromiumSandbox:true,executablePath:process.env.CHROME_PATH || 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe'});
+const report={status:'running',browser:browser.version(),headless:true,physicalDevice:false,build:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),cases:[],errors:[]};
+const fixture=resolve('docs/ux/player-menus-298/followup/campaign-before.json');
+const context=await browser.newContext({viewport:{width:1440,height:900},acceptDownloads:true});
+const page=await context.newPage();page.setDefaultTimeout(15000);page.on('pageerror',e=>report.errors.push(e.message));
+async function load(page,path){
+ await page.goto(`${origin}/fjord-play`,{waitUntil:'domcontentloaded'});
+ await page.getByRole('button',{name:'Load game',exact:true}).click();
+ await page.locator('input[type="file"]').setInputFiles(path);
+ await page.locator('[data-entry="continue"]').click();
+ await page.locator('#fjord-canvas[data-ready="true"]').waitFor({timeout:180000});
+ await page.locator('#island-loading').waitFor({state:'hidden',timeout:180000});
+}
+async function image(name,target=page){await target.screenshot({path:join(output,name+'.jpg'),quality:85});}
+async function exportSave(name){
+ if(!await page.locator('#fjord-menu').evaluate(n=>n.open))await page.locator('#fjord-menu > summary').click();
+ for(const summary of await page.locator('#fjord-menu [data-menu-section][open] > summary').all())await summary.click();
+ await page.getByText('Save game',{exact:true}).click();
+ const pending=page.waitForEvent('download');
+ await page.getByRole('button',{name:'Download campaign file',exact:true}).click();
+ const download=await pending;await download.saveAs(join(output,name+'.json'));
+ const data=JSON.parse(await readFile(join(output,name+'.json'),'utf8'));
+ await page.getByRole('button',{name:'Close game menu',exact:true}).click();return data;
+}
+try{
+ await load(page,fixture);await page.getByRole('button',{name:'Expeditions',exact:true}).click();
+ await page.getByRole('button',{name:'New group',exact:true}).click();
+ await page.locator('#expedition-controls input[data-member]').nth(0).check();
+ await image('crew-desktop');
+ const before=await exportSave('before-navigation');
+ await page.getByRole('button',{name:'Continue to supplies',exact:true}).click();await image('supplies-desktop');
+ await page.getByRole('button',{name:'Back to crew',exact:true}).click();
+ const after=await exportSave('after-navigation');assert.deepEqual(after.campaign,before.campaign);assert.deepEqual(after.selection,before.selection);
+ report.cases.push({name:'crew/supplies/Back and save navigation',coreAndSelectionEqual:true});
+ await page.locator('#expedition-controls input[data-member]').nth(1).check();
+ await page.getByRole('button',{name:'Continue to supplies',exact:true}).click();
+ assert.equal(await page.getByRole('button',{name:'Review supplies',exact:true}).isDisabled(),true);
+ await image('shortage-desktop');await page.getByRole('button',{name:'Back to crew',exact:true}).click();
+ await page.locator('#expedition-controls input[data-member]').nth(1).uncheck();
+ await page.getByRole('button',{name:'Continue to supplies',exact:true}).click();
+ await page.getByRole('button',{name:'Review supplies',exact:true}).click();
+ await page.locator('#expedition-start-dialog').getByRole('button',{name:'Back',exact:true}).click();
+ assert.equal(await page.locator('#fjord-food').textContent(),'15');
+ await page.getByRole('button',{name:'Review supplies',exact:true}).click();await page.getByRole('button',{name:'Pack supplies',exact:true}).click();
+ assert.equal(await page.locator('#expedition-mode').isVisible(),true);assert.equal(await page.locator('#fjord-food').textContent(),'7');
+ await image('destination-desktop');
+ const prepared=await exportSave('prepared');
+ await page.getByRole('button',{name:'Cancel',exact:true}).click();
+ const cancelled=await exportSave('map-cancel');assert.deepEqual(cancelled.campaign,prepared.campaign);
+ report.cases.push({name:'one paid pack and map cancel',food:7,canonicalUnchangedByCancel:true});
+ await page.getByRole('button',{name:'Expeditions',exact:true}).click();await page.getByRole('button',{name:'Known places',exact:true}).click();
+ assert.equal(await page.locator('#island-mission-panel').isVisible(),true);assert.equal(await page.locator('#island-mission-group').count(),0);
+ await image('known-places-desktop');await page.getByRole('button',{name:'Explore island',exact:true}).click();
+ await page.getByRole('button',{name:'End expedition',exact:true}).click();await image('end-confirmation');
+ await page.locator('#expedition-group-dialog').getByRole('button',{name:'Back',exact:true}).click();
+ const back=await exportSave('end-back');assert.deepEqual(back.campaign,prepared.campaign);
+ await page.getByRole('button',{name:'End expedition',exact:true}).click();
+ await page.locator('#expedition-group-dialog').getByRole('button',{name:'End expedition',exact:true}).click();
+ assert.equal(await page.locator('#fjord-food').textContent(),'7');
+ await page.getByRole('button',{name:'Disband group',exact:true}).click();
+ await page.locator('#expedition-group-dialog').getByRole('button',{name:'Disband group',exact:true}).click();
+ const disbanded=await exportSave('disbanded');assert.equal(Object.keys(disbanded.campaign.world.groups).length,0);
+ assert.equal(Object.keys(disbanded.campaign.world.spatial.missions).length,1);
+ report.cases.push({name:'end/disband confirmation',food:7,groupRemoved:true,missionHistoryRetained:true});
+ const mobile=await browser.newContext({viewport:{width:852,height:393},hasTouch:true,isMobile:true});
+ const touch=await mobile.newPage();touch.on('pageerror',e=>report.errors.push(e.message));
+ await load(touch,fixture);await touch.getByRole('button',{name:'Settlement navigation',exact:true}).tap();
+ await touch.getByRole('button',{name:'Expeditions',exact:true}).tap();await touch.getByRole('button',{name:'New group',exact:true}).tap();
+ await touch.locator('#expedition-controls input[data-member]').first().check();await image('crew-touch',touch);
+ await touch.getByRole('button',{name:'Continue to supplies',exact:true}).tap();await image('supplies-touch',touch);
+ const exit=await touch.locator('.fjord-workspace-heading button').boundingBox();
+ assert.ok(exit && exit.y>=0 && exit.y+exit.height<=393,'Task close stays in the visible viewport');
+ await touch.getByRole('button',{name:'Review supplies',exact:true}).tap();await image('pack-touch',touch);
+ await touch.getByRole('button',{name:'Pack supplies',exact:true}).tap();await image('destination-touch',touch);
+ assert.equal(await touch.locator('#expedition-mode').isVisible(),true);
+ report.cases.push({name:'landscape touch preparation',coarsePointer:await touch.evaluate(()=>matchMedia('(pointer:coarse)').matches),food:await touch.locator('#fjord-food').textContent()});
+ await mobile.close();assert.deepEqual(report.errors,[]);report.status='passed';
+}catch(e){report.status='failed';report.failure=String(e);await image('failure');process.exitCode=1;}
+finally{await writeFile(join(output,'result.json'),JSON.stringify(report,null,2));await browser.close();console.log(JSON.stringify(report));}
