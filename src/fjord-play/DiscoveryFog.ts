@@ -93,7 +93,7 @@ export class DiscoveryFog {
     inspect() {
         return { active: this.root.visible, cellSize: this.view.cellSize, ...this.mask.inspect(),
             maskBytes: (this.view.explored.length + this.view.visible.length) / 2,
-            textureBytes: this.current.material.alphaMap!.image.data.byteLength,
+            textureBytes: (this.current.material.alphaMap as import('three').DataTexture).image.data!.byteLength,
             drawCalls: 1, triangles: this.geometry.index!.count / 3,
             nativeMaterial: true,
             geometryBytes: this.geometry.getAttribute('position').array.byteLength +

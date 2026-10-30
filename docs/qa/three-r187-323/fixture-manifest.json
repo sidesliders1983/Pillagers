@@ -1,0 +1,30 @@
+{
+  "source": "docs/qa/fjord-runtime-performance/fixtures/developed-810.json",
+  "sourceSHA256": "b1128c7a19f792294949d097aca5f206de4c1747c648920f9432162698bf6766",
+  "note": "Existing rich QA stocks; legal current physical exploration commands; no rendering/rule changes.",
+  "campaignSeed": 32,
+  "recipe": {
+    "version": "island-pool-v3",
+    "generatorVersion": "fjordside-island-v0.3e-r3",
+    "seed": 168
+  },
+  "geographySHA256": "a71a1906e3afe9618213865cec9ec3a8229be3d06f2e5a09897d7f438898d7a9",
+  "residents": 17,
+  "adultMembers": 10,
+  "buildings": 5,
+  "group": "group-1",
+  "members": [
+    "founder-1",
+    "founder-2"
+  ],
+  "destination": {
+    "x": 74,
+    "z": 100
+  },
+  "rejectedDestinations": [],
+  "fixtures": {
+    "marsh.json": "9ad2d9516061f0a8ace57118c49b2f37399b5ae82f67cbdf4a38a3f4ee599d91",
+    "settlement-expedition.json": "fc15f2754b5cea06fcd4c62857756e401c6f527102893622a023298571b92944",
+    "winter.json": "1b01d4708f167792a09aac26092b1abb9921cff6527dbda0bde3fa86c85287b1"
+  }
+}

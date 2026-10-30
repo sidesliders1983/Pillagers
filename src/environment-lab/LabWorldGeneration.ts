@@ -410,7 +410,7 @@ export class LabWorldGeneration {
                 .reduce((sum, attribute) => sum + attribute.array.byteLength, 0) : 0,
             indexBytes: terrain?.geometry.getIndex()?.array.byteLength ?? 0,
             maskBytes: layers.reduce((sum, material) => sum +
-                ((material as import('three').MeshStandardMaterial).alphaMap?.image?.data?.byteLength ?? 0), 0),
+                (((material as import('three').MeshStandardMaterial).alphaMap as import('three').DataTexture | null)?.image.data?.byteLength ?? 0), 0),
             shading: terrain?.userData.terrainShading ?? null,
             flatShading: layers.map(material => (material as import('three').MeshStandardMaterial).flatShading),
             nativeLayers: layers.length, snowStudy: (document.querySelector('#world-snow-study') as HTMLInputElement).checked,
@@ -423,8 +423,8 @@ export class LabWorldGeneration {
                 normalScale: material.normalScale.toArray(), roughness: material.roughness,
                 textures: [material.map, material.normalMap, material.roughnessMap]
                     .filter(texture => texture !== null).map(texture => ({
-                        file: texture!.image.src.split('/ground-materials/')[1],
-                        width: texture!.image.width, height: texture!.image.height,
+                        file: (texture!.image as HTMLImageElement).src.split('/ground-materials/')[1],
+                        width: (texture!.image as HTMLImageElement).width, height: (texture!.image as HTMLImageElement).height,
                         colourSpace: texture!.colorSpace, mipmaps: texture!.generateMipmaps,
                         anisotropy: texture!.anisotropy,
                     })),
