@@ -37,8 +37,8 @@
   "artifacts": [
     {
       "path": ".gitattributes",
-      "bytes": 72,
-      "sha256": "30ab726267e5d1350862be496d8f4ce3c1b7ad483a4533b592a6a5792b8901d9"
+      "bytes": 99,
+      "sha256": "e6d31477420430635a4a8a6d3127707c17ef127b5c0f5f16150f2858b2e79f56"
     },
     {
       "path": "background-missing.jpg",
