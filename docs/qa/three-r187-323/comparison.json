@@ -1,0 +1,2885 @@
+{
+  "generatedUtc": "2026-10-30T17:30:18.887Z",
+  "rows": [
+    {
+      "name": "1-A",
+      "arm": "A",
+      "status": "complete",
+      "fixtureSHA256": "fc15f2754b5cea06fcd4c62857756e401c6f527102893622a023298571b92944",
+      "protocolSHA256": "6b8321639ce7135dc10142b77b709bb9290036466211fb1066dca2697f289df3",
+      "sourceCommit": "01dc5f79c9b8ee4024c0fbed338af4778a5f4c97",
+      "engine": "0.180.0",
+      "loadMs": 31351.793199999996,
+      "firstFrameMs": 30248.89999999851,
+      "playableMs": 30280.39999999851,
+      "geometryMs": 6788.699999999255,
+      "shaderCompilationMs": 203.59999999776483,
+      "constructionGpuPreparationMs": 11403.60000000149,
+      "meanFPS": 10.156138136798312,
+      "frameP50Ms": 100,
+      "frameP95Ms": 116.70000000001164,
+      "frameP99Ms": 116.89999999999418,
+      "longTasks": 0,
+      "longTaskTotalMs": 0,
+      "sampledCpuFrameP95Ms": 16.050000000745058,
+      "sampledGpuMs": 87.76144,
+      "unforcedHeapBytes": 408668609,
+      "resources": {
+        "geometries": 113,
+        "textures": 127,
+        "programs": 58,
+        "highGeometries": 113,
+        "highTextures": 127,
+        "highPrograms": 58
+      },
+      "workload": {
+        "main": {
+          "calls": 240,
+          "triangles": 4290289,
+          "at": 107909.29999999702
+        }
+      },
+      "browser": "156.0.8078.74",
+      "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "console": []
+    },
+    {
+      "name": "2-B",
+      "arm": "B",
+      "status": "complete",
+      "fixtureSHA256": "fc15f2754b5cea06fcd4c62857756e401c6f527102893622a023298571b92944",
+      "protocolSHA256": "6b8321639ce7135dc10142b77b709bb9290036466211fb1066dca2697f289df3",
+      "sourceCommit": "1c04d4b1a0213bc38ae1e4bbefc608af78f25bf4",
+      "engine": "0.187.0",
+      "loadMs": 32016.7923,
+      "firstFrameMs": 30694.10000000149,
+      "playableMs": 30726.800000000745,
+      "geometryMs": 6675.10000000149,
+      "shaderCompilationMs": 205.40000000223517,
+      "constructionGpuPreparationMs": 10703,
+      "meanFPS": 10.439867510378791,
+      "frameP50Ms": 99.90000000000873,
+      "frameP95Ms": 116.69999999999709,
+      "frameP99Ms": 116.80000000000291,
+      "longTasks": 0,
+      "longTaskTotalMs": 0,
+      "sampledCpuFrameP95Ms": 16.300000000745058,
+      "sampledGpuMs": 91.12796800000001,
+      "unforcedHeapBytes": 426077070,
+      "resources": {
+        "geometries": 113,
+        "textures": 129,
+        "programs": 61,
+        "highGeometries": 113,
+        "highTextures": 129,
+        "highPrograms": 61
+      },
+      "workload": {
+        "main": {
+          "calls": 240,
+          "triangles": 4290289,
+          "at": 109387.39999999851
+        }
+      },
+      "browser": "156.0.8078.74",
+      "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "console": [
+        {
+          "type": "warning",
+          "text": "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead."
+        }
+      ]
+    },
+    {
+      "name": "3-B",
+      "arm": "B",
+      "status": "complete",
+      "fixtureSHA256": "fc15f2754b5cea06fcd4c62857756e401c6f527102893622a023298571b92944",
+      "protocolSHA256": "6b8321639ce7135dc10142b77b709bb9290036466211fb1066dca2697f289df3",
+      "sourceCommit": "1c04d4b1a0213bc38ae1e4bbefc608af78f25bf4",
+      "engine": "0.187.0",
+      "loadMs": 30832.4682,
+      "firstFrameMs": 29301.099999997765,
+      "playableMs": 29344.599999997765,
+      "geometryMs": 6663.5,
+      "shaderCompilationMs": 217.60000000149012,
+      "constructionGpuPreparationMs": 10448.300000000745,
+      "meanFPS": 10.552769646457236,
+      "frameP50Ms": 99.90000000000146,
+      "frameP95Ms": 116.60000000000582,
+      "frameP99Ms": 116.80000000000291,
+      "longTasks": 0,
+      "longTaskTotalMs": 0,
+      "sampledCpuFrameP95Ms": 16.199999999254942,
+      "sampledGpuMs": 87.39244099999999,
+      "unforcedHeapBytes": 403645326,
+      "resources": {
+        "geometries": 113,
+        "textures": 129,
+        "programs": 61,
+        "highGeometries": 113,
+        "highTextures": 129,
+        "highPrograms": 61
+      },
+      "workload": {
+        "main": {
+          "calls": 240,
+          "triangles": 4290289,
+          "at": 107658
+        }
+      },
+      "browser": "156.0.8078.74",
+      "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "console": [
+        {
+          "type": "warning",
+          "text": "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead."
+        }
+      ]
+    },
+    {
+      "name": "4-A",
+      "arm": "A",
+      "status": "complete",
+      "fixtureSHA256": "fc15f2754b5cea06fcd4c62857756e401c6f527102893622a023298571b92944",
+      "protocolSHA256": "6b8321639ce7135dc10142b77b709bb9290036466211fb1066dca2697f289df3",
+      "sourceCommit": "01dc5f79c9b8ee4024c0fbed338af4778a5f4c97",
+      "engine": "0.180.0",
+      "loadMs": 31694.9792,
+      "firstFrameMs": 30304.20000000298,
+      "playableMs": 30332.60000000149,
+      "geometryMs": 6624.800000000745,
+      "shaderCompilationMs": 188.69999999925494,
+      "constructionGpuPreparationMs": 10891.39999999851,
+      "meanFPS": 10.148585270575879,
+      "frameP50Ms": 100,
+      "frameP95Ms": 116.70000000000437,
+      "frameP99Ms": 133.3000000000029,
+      "longTasks": 0,
+      "longTaskTotalMs": 0,
+      "sampledCpuFrameP95Ms": 16.34999999962747,
+      "sampledGpuMs": 92.8817525,
+      "unforcedHeapBytes": 426912880,
+      "resources": {
+        "geometries": 113,
+        "textures": 127,
+        "programs": 58,
+        "highGeometries": 113,
+        "highTextures": 127,
+        "highPrograms": 58
+      },
+      "workload": {
+        "main": {
+          "calls": 240,
+          "triangles": 4290289,
+          "at": 108268.89999999851
+        }
+      },
+      "browser": "156.0.8078.74",
+      "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "console": []
+    },
+    {
+      "name": "5-A",
+      "arm": "A",
+      "status": "complete",
+      "fixtureSHA256": "fc15f2754b5cea06fcd4c62857756e401c6f527102893622a023298571b92944",
+      "protocolSHA256": "6b8321639ce7135dc10142b77b709bb9290036466211fb1066dca2697f289df3",
+      "sourceCommit": "01dc5f79c9b8ee4024c0fbed338af4778a5f4c97",
+      "engine": "0.180.0",
+      "loadMs": 31729.8547,
+      "firstFrameMs": 30268.400000002235,
+      "playableMs": 30302.800000000745,
+      "geometryMs": 6593.79999999702,
+      "shaderCompilationMs": 194.69999999925494,
+      "constructionGpuPreparationMs": 10924.39999999851,
+      "meanFPS": 10.083714800597285,
+      "frameP50Ms": 100,
+      "frameP95Ms": 116.79999999998836,
+      "frameP99Ms": 133.20000000000437,
+      "longTasks": 3,
+      "longTaskTotalMs": 183,
+      "sampledCpuFrameP95Ms": 17.75,
+      "sampledGpuMs": 92.8859185,
+      "unforcedHeapBytes": 410023785,
+      "resources": {
+        "geometries": 113,
+        "textures": 127,
+        "programs": 58,
+        "highGeometries": 113,
+        "highTextures": 127,
+        "highPrograms": 58
+      },
+      "workload": {
+        "main": {
+          "calls": 240,
+          "triangles": 4290289,
+          "at": 108347.09999999776
+        }
+      },
+      "browser": "156.0.8078.74",
+      "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "console": []
+    },
+    {
+      "name": "6-B",
+      "arm": "B",
+      "status": "complete",
+      "fixtureSHA256": "fc15f2754b5cea06fcd4c62857756e401c6f527102893622a023298571b92944",
+      "protocolSHA256": "6b8321639ce7135dc10142b77b709bb9290036466211fb1066dca2697f289df3",
+      "sourceCommit": "1c04d4b1a0213bc38ae1e4bbefc608af78f25bf4",
+      "engine": "0.187.0",
+      "loadMs": 30813.0371,
+      "firstFrameMs": 29616.39999999851,
+      "playableMs": 29651.79999999702,
+      "geometryMs": 6649.5,
+      "shaderCompilationMs": 202.19999999925494,
+      "constructionGpuPreparationMs": 11464.099999997765,
+      "meanFPS": 10.326199018516228,
+      "frameP50Ms": 100,
+      "frameP95Ms": 116.69999999999709,
+      "frameP99Ms": 133.29999999998836,
+      "longTasks": 2,
+      "longTaskTotalMs": 114,
+      "sampledCpuFrameP95Ms": 17.300000000745058,
+      "sampledGpuMs": 89.71489,
+      "unforcedHeapBytes": 406757728,
+      "resources": {
+        "geometries": 113,
+        "textures": 129,
+        "programs": 61,
+        "highGeometries": 113,
+        "highTextures": 129,
+        "highPrograms": 61
+      },
+      "workload": {
+        "main": {
+          "calls": 240,
+          "triangles": 4290289,
+          "at": 107918
+        }
+      },
+      "browser": "156.0.8078.74",
+      "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "console": [
+        {
+          "type": "warning",
+          "text": "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead."
+        }
+      ]
+    }
+  ],
+  "arms": {
+    "A": {
+      "loadMs": {
+        "n": 3,
+        "median": 31694.9792,
+        "min": 31351.793199999996,
+        "max": 31729.8547
+      },
+      "firstFrameMs": {
+        "n": 3,
+        "median": 30268.400000002235,
+        "min": 30248.89999999851,
+        "max": 30304.20000000298
+      },
+      "geometryMs": {
+        "n": 3,
+        "median": 6624.800000000745,
+        "min": 6593.79999999702,
+        "max": 6788.699999999255
+      },
+      "shaderCompilationMs": {
+        "n": 3,
+        "median": 194.69999999925494,
+        "min": 188.69999999925494,
+        "max": 203.59999999776483
+      },
+      "constructionGpuPreparationMs": {
+        "n": 3,
+        "median": 10924.39999999851,
+        "min": 10891.39999999851,
+        "max": 11403.60000000149
+      },
+      "meanFPS": {
+        "n": 3,
+        "median": 10.148585270575879,
+        "min": 10.083714800597285,
+        "max": 10.156138136798312
+      },
+      "frameP50Ms": {
+        "n": 3,
+        "median": 100,
+        "min": 100,
+        "max": 100
+      },
+      "frameP95Ms": {
+        "n": 3,
+        "median": 116.70000000001164,
+        "min": 116.70000000000437,
+        "max": 116.79999999998836
+      },
+      "frameP99Ms": {
+        "n": 3,
+        "median": 133.20000000000437,
+        "min": 116.89999999999418,
+        "max": 133.3000000000029
+      },
+      "sampledCpuFrameP95Ms": {
+        "n": 3,
+        "median": 16.34999999962747,
+        "min": 16.050000000745058,
+        "max": 17.75
+      },
+      "sampledGpuMs": {
+        "n": 3,
+        "median": 92.8817525,
+        "min": 87.76144,
+        "max": 92.8859185
+      },
+      "unforcedHeapBytes": {
+        "n": 3,
+        "median": 410023785,
+        "min": 408668609,
+        "max": 426912880
+      }
+    },
+    "B": {
+      "loadMs": {
+        "n": 3,
+        "median": 30832.4682,
+        "min": 30813.0371,
+        "max": 32016.7923
+      },
+      "firstFrameMs": {
+        "n": 3,
+        "median": 29616.39999999851,
+        "min": 29301.099999997765,
+        "max": 30694.10000000149
+      },
+      "geometryMs": {
+        "n": 3,
+        "median": 6663.5,
+        "min": 6649.5,
+        "max": 6675.10000000149
+      },
+      "shaderCompilationMs": {
+        "n": 3,
+        "median": 205.40000000223517,
+        "min": 202.19999999925494,
+        "max": 217.60000000149012
+      },
+      "constructionGpuPreparationMs": {
+        "n": 3,
+        "median": 10703,
+        "min": 10448.300000000745,
+        "max": 11464.099999997765
+      },
+      "meanFPS": {
+        "n": 3,
+        "median": 10.439867510378791,
+        "min": 10.326199018516228,
+        "max": 10.552769646457236
+      },
+      "frameP50Ms": {
+        "n": 3,
+        "median": 99.90000000000873,
+        "min": 99.90000000000146,
+        "max": 100
+      },
+      "frameP95Ms": {
+        "n": 3,
+        "median": 116.69999999999709,
+        "min": 116.60000000000582,
+        "max": 116.69999999999709
+      },
+      "frameP99Ms": {
+        "n": 3,
+        "median": 116.80000000000291,
+        "min": 116.80000000000291,
+        "max": 133.29999999998836
+      },
+      "sampledCpuFrameP95Ms": {
+        "n": 3,
+        "median": 16.300000000745058,
+        "min": 16.199999999254942,
+        "max": 17.300000000745058
+      },
+      "sampledGpuMs": {
+        "n": 3,
+        "median": 89.71489,
+        "min": 87.39244099999999,
+        "max": 91.12796800000001
+      },
+      "unforcedHeapBytes": {
+        "n": 3,
+        "median": 406757728,
+        "min": 403645326,
+        "max": 426077070
+      }
+    }
+  },
+  "pairs": [
+    {
+      "A": "1-A",
+      "B": "2-B",
+      "differences": {
+        "loadMs": {
+          "absolute": 664.9991000000045,
+          "percent": 2.121087925522569
+        },
+        "firstFrameMs": {
+          "absolute": 445.20000000298023,
+          "percent": 1.4717890568020753
+        },
+        "geometryMs": {
+          "absolute": -113.59999999776483,
+          "percent": -1.673368980773604
+        },
+        "shaderCompilationMs": {
+          "absolute": 1.8000000044703484,
+          "percent": 0.8840864462132059
+        },
+        "constructionGpuPreparationMs": {
+          "absolute": -700.6000000014901,
+          "percent": -6.143673927543924
+        },
+        "meanFPS": {
+          "absolute": 0.28372937358047956,
+          "percent": 2.793673833092658
+        },
+        "frameP50Ms": {
+          "absolute": -0.09999999999126885,
+          "percent": -0.09999999999127374
+        },
+        "frameP95Ms": {
+          "absolute": -1.4551915228366852e-11,
+          "percent": -1.2467804566540508e-11
+        },
+        "frameP99Ms": {
+          "absolute": -0.09999999999126885,
+          "percent": -0.08554319930819121
+        },
+        "sampledCpuFrameP95Ms": {
+          "absolute": 0.25,
+          "percent": 1.5576323986815854
+        },
+        "sampledGpuMs": {
+          "absolute": 3.3665280000000166,
+          "percent": 3.8359990446829695
+        },
+        "unforcedHeapBytes": {
+          "absolute": 17408461,
+          "percent": 4.25979892182029
+        }
+      }
+    },
+    {
+      "A": "4-A",
+      "B": "3-B",
+      "differences": {
+        "loadMs": {
+          "absolute": -862.5110000000022,
+          "percent": -2.721285900070891
+        },
+        "firstFrameMs": {
+          "absolute": -1003.1000000052154,
+          "percent": -3.3101022300707994
+        },
+        "geometryMs": {
+          "absolute": 38.69999999925494,
+          "percent": 0.5841685786627693
+        },
+        "shaderCompilationMs": {
+          "absolute": 28.900000002235174,
+          "percent": 15.315315316560296
+        },
+        "constructionGpuPreparationMs": {
+          "absolute": -443.0999999977648,
+          "percent": -4.068347503514936
+        },
+        "meanFPS": {
+          "absolute": 0.404184375881357,
+          "percent": 3.9826671906006528
+        },
+        "frameP50Ms": {
+          "absolute": -0.09999999999854481,
+          "percent": -0.0999999999985457
+        },
+        "frameP95Ms": {
+          "absolute": -0.09999999999854481,
+          "percent": -0.0856898029122033
+        },
+        "frameP99Ms": {
+          "absolute": -16.5,
+          "percent": -12.378094523630633
+        },
+        "sampledCpuFrameP95Ms": {
+          "absolute": -0.15000000037252903,
+          "percent": -0.9174311949599168
+        },
+        "sampledGpuMs": {
+          "absolute": -5.489311500000014,
+          "percent": -5.909999921674613
+        },
+        "unforcedHeapBytes": {
+          "absolute": -23267554,
+          "percent": -5.450187869712431
+        }
+      }
+    },
+    {
+      "A": "5-A",
+      "B": "6-B",
+      "differences": {
+        "loadMs": {
+          "absolute": -916.8175999999985,
+          "percent": -2.8894478360154574
+        },
+        "firstFrameMs": {
+          "absolute": -652.0000000037253,
+          "percent": -2.1540616616790964
+        },
+        "geometryMs": {
+          "absolute": 55.70000000298023,
+          "percent": 0.8447329309807072
+        },
+        "shaderCompilationMs": {
+          "absolute": 7.5,
+          "percent": 3.8520801232813096
+        },
+        "constructionGpuPreparationMs": {
+          "absolute": 539.6999999992549,
+          "percent": 4.940317088346524
+        },
+        "meanFPS": {
+          "absolute": 0.2424842179189426,
+          "percent": 2.4047111874344163
+        },
+        "frameP50Ms": {
+          "absolute": 0,
+          "percent": 0
+        },
+        "frameP95Ms": {
+          "absolute": -0.09999999999126885,
+          "percent": -0.08561643834870125
+        },
+        "frameP99Ms": {
+          "absolute": 0.0999999999839929,
+          "percent": 0.075075075063058
+        },
+        "sampledCpuFrameP95Ms": {
+          "absolute": -0.44999999925494194,
+          "percent": -2.5352112634081214
+        },
+        "sampledGpuMs": {
+          "absolute": -3.1710285000000056,
+          "percent": -3.4138958317993073
+        },
+        "unforcedHeapBytes": {
+          "absolute": -3266057,
+          "percent": -0.7965530585012259
+        }
+      }
+    }
+  ],
+  "lifecycle": {
+    "A": {
+      "status": "complete",
+      "initial": {
+        "usedSize": 135474376,
+        "totalSize": 141414400,
+        "embedderHeapUsedSize": 6715336,
+        "backingStorageSize": 260530002
+      },
+      "initialResources": {
+        "geometries": 113,
+        "textures": 127,
+        "programs": 58,
+        "highGeometries": 113,
+        "highTextures": 127,
+        "highPrograms": 58
+      },
+      "imports": [
+        {
+          "fixture": "settlement-expedition.json",
+          "heap": {
+            "usedSize": 136922424,
+            "totalSize": 142520320,
+            "embedderHeapUsedSize": 9169248,
+            "backingStorageSize": 260532697
+          },
+          "resources": {
+            "geometries": 113,
+            "textures": 119,
+            "programs": 58,
+            "highGeometries": 113,
+            "highTextures": 119,
+            "highPrograms": 58
+          }
+        },
+        {
+          "fixture": "marsh.json",
+          "heap": {
+            "usedSize": 163216236,
+            "totalSize": 169271296,
+            "embedderHeapUsedSize": 10767488,
+            "backingStorageSize": 292326349
+          },
+          "resources": {
+            "geometries": 138,
+            "textures": 111,
+            "programs": 64,
+            "highGeometries": 138,
+            "highTextures": 111,
+            "highPrograms": 64
+          }
+        },
+        {
+          "fixture": "winter.json",
+          "heap": {
+            "usedSize": 185876232,
+            "totalSize": 191369216,
+            "embedderHeapUsedSize": 12931144,
+            "backingStorageSize": 298696437
+          },
+          "resources": {
+            "geometries": 133,
+            "textures": 120,
+            "programs": 82,
+            "highGeometries": 133,
+            "highTextures": 120,
+            "highPrograms": 82
+          }
+        },
+        {
+          "fixture": "settlement-expedition.json",
+          "heap": {
+            "usedSize": 186092108,
+            "totalSize": 191324160,
+            "embedderHeapUsedSize": 13284912,
+            "backingStorageSize": 269209290
+          },
+          "resources": {
+            "geometries": 121,
+            "textures": 132,
+            "programs": 83,
+            "highGeometries": 121,
+            "highTextures": 132,
+            "highPrograms": 83
+          }
+        }
+      ],
+      "hdr": {
+        "geometries": 121,
+        "textures": 133,
+        "programs": 109,
+        "highGeometries": 121,
+        "highTextures": 133,
+        "highPrograms": 109
+      },
+      "hdrDpr": 1.5,
+      "final": {
+        "usedSize": 187283708,
+        "totalSize": 192897024,
+        "embedderHeapUsedSize": 16422848,
+        "backingStorageSize": 269839824
+      },
+      "portraits": [
+        {
+          "id": "founder-3",
+          "calls": 7
+        },
+        {
+          "id": "founder-4",
+          "calls": 12
+        },
+        {
+          "id": "founder-5",
+          "calls": 9
+        }
+      ],
+      "errors": []
+    },
+    "B": {
+      "status": "complete",
+      "initial": {
+        "usedSize": 137193940,
+        "totalSize": 141414400,
+        "embedderHeapUsedSize": 7214440,
+        "backingStorageSize": 260593135
+      },
+      "initialResources": {
+        "geometries": 113,
+        "textures": 129,
+        "programs": 61,
+        "highGeometries": 113,
+        "highTextures": 129,
+        "highPrograms": 61
+      },
+      "imports": [
+        {
+          "fixture": "settlement-expedition.json",
+          "heap": {
+            "usedSize": 138755036,
+            "totalSize": 143306752,
+            "embedderHeapUsedSize": 9164720,
+            "backingStorageSize": 260595023
+          },
+          "resources": {
+            "geometries": 113,
+            "textures": 121,
+            "programs": 61,
+            "highGeometries": 113,
+            "highTextures": 121,
+            "highPrograms": 61
+          }
+        },
+        {
+          "fixture": "marsh.json",
+          "heap": {
+            "usedSize": 163695952,
+            "totalSize": 169271296,
+            "embedderHeapUsedSize": 10616568,
+            "backingStorageSize": 292386921
+          },
+          "resources": {
+            "geometries": 138,
+            "textures": 113,
+            "programs": 67,
+            "highGeometries": 138,
+            "highTextures": 113,
+            "highPrograms": 67
+          }
+        },
+        {
+          "fixture": "winter.json",
+          "heap": {
+            "usedSize": 187084704,
+            "totalSize": 192155648,
+            "embedderHeapUsedSize": 12790496,
+            "backingStorageSize": 298755101
+          },
+          "resources": {
+            "geometries": 133,
+            "textures": 122,
+            "programs": 85,
+            "highGeometries": 133,
+            "highTextures": 122,
+            "highPrograms": 85
+          }
+        },
+        {
+          "fixture": "settlement-expedition.json",
+          "heap": {
+            "usedSize": 185708932,
+            "totalSize": 191324160,
+            "embedderHeapUsedSize": 13221088,
+            "backingStorageSize": 269270386
+          },
+          "resources": {
+            "geometries": 121,
+            "textures": 134,
+            "programs": 86,
+            "highGeometries": 121,
+            "highTextures": 134,
+            "highPrograms": 86
+          }
+        }
+      ],
+      "hdr": {
+        "geometries": 121,
+        "textures": 135,
+        "programs": 112,
+        "highGeometries": 121,
+        "highTextures": 135,
+        "highPrograms": 112
+      },
+      "hdrDpr": 1.5,
+      "final": {
+        "usedSize": 188346468,
+        "totalSize": 192634880,
+        "embedderHeapUsedSize": 16755360,
+        "backingStorageSize": 269899933
+      },
+      "portraits": [
+        {
+          "id": "founder-3",
+          "calls": 7
+        },
+        {
+          "id": "founder-4",
+          "calls": 12
+        },
+        {
+          "id": "founder-5",
+          "calls": 9
+        }
+      ],
+      "errors": []
+    }
+  },
+  "cacheFollowup": {
+    "A": {
+      "status": "complete",
+      "followup": "Two extra identical returns after the observed cross-island retention; same follow-up in both arms, primary evidence preserved.",
+      "imports": [
+        {
+          "fixture": "settlement-expedition.json",
+          "heap": {
+            "usedSize": 137496244,
+            "totalSize": 142782464,
+            "embedderHeapUsedSize": 10005144,
+            "backingStorageSize": 260536107
+          },
+          "resources": {
+            "geometries": 113,
+            "textures": 119,
+            "programs": 58,
+            "highGeometries": 113,
+            "highTextures": 119,
+            "highPrograms": 58
+          }
+        },
+        {
+          "fixture": "marsh.json",
+          "heap": {
+            "usedSize": 163242200,
+            "totalSize": 168747008,
+            "embedderHeapUsedSize": 10991120,
+            "backingStorageSize": 292329139
+          },
+          "resources": {
+            "geometries": 138,
+            "textures": 111,
+            "programs": 64,
+            "highGeometries": 138,
+            "highTextures": 111,
+            "highPrograms": 64
+          }
+        },
+        {
+          "fixture": "winter.json",
+          "heap": {
+            "usedSize": 185772508,
+            "totalSize": 192155648,
+            "embedderHeapUsedSize": 13330896,
+            "backingStorageSize": 298698755
+          },
+          "resources": {
+            "geometries": 133,
+            "textures": 120,
+            "programs": 82,
+            "highGeometries": 133,
+            "highTextures": 120,
+            "highPrograms": 82
+          }
+        },
+        {
+          "fixture": "settlement-expedition.json",
+          "heap": {
+            "usedSize": 186027012,
+            "totalSize": 191324160,
+            "embedderHeapUsedSize": 13318560,
+            "backingStorageSize": 269209580
+          },
+          "resources": {
+            "geometries": 121,
+            "textures": 132,
+            "programs": 83,
+            "highGeometries": 121,
+            "highTextures": 132,
+            "highPrograms": 83
+          }
+        },
+        {
+          "fixture": "settlement-expedition.json",
+          "heap": {
+            "usedSize": 185534176,
+            "totalSize": 191848448,
+            "embedderHeapUsedSize": 14319208,
+            "backingStorageSize": 269209716
+          },
+          "resources": {
+            "geometries": 120,
+            "textures": 132,
+            "programs": 83,
+            "highGeometries": 120,
+            "highTextures": 132,
+            "highPrograms": 83
+          }
+        },
+        {
+          "fixture": "settlement-expedition.json",
+          "heap": {
+            "usedSize": 186582476,
+            "totalSize": 191586304,
+            "embedderHeapUsedSize": 13575016,
+            "backingStorageSize": 269209736
+          },
+          "resources": {
+            "geometries": 120,
+            "textures": 132,
+            "programs": 83,
+            "highGeometries": 120,
+            "highTextures": 132,
+            "highPrograms": 83
+          }
+        }
+      ],
+      "errors": []
+    },
+    "B": {
+      "status": "complete",
+      "followup": "Two extra identical returns after the observed cross-island retention; same follow-up in both arms, primary evidence preserved.",
+      "imports": [
+        {
+          "fixture": "settlement-expedition.json",
+          "heap": {
+            "usedSize": 138760240,
+            "totalSize": 143044608,
+            "embedderHeapUsedSize": 9790176,
+            "backingStorageSize": 260596621
+          },
+          "resources": {
+            "geometries": 113,
+            "textures": 121,
+            "programs": 61,
+            "highGeometries": 113,
+            "highTextures": 121,
+            "highPrograms": 61
+          }
+        },
+        {
+          "fixture": "marsh.json",
+          "heap": {
+            "usedSize": 164246884,
+            "totalSize": 169795584,
+            "embedderHeapUsedSize": 10831928,
+            "backingStorageSize": 292388423
+          },
+          "resources": {
+            "geometries": 138,
+            "textures": 113,
+            "programs": 67,
+            "highGeometries": 138,
+            "highTextures": 113,
+            "highPrograms": 67
+          }
+        },
+        {
+          "fixture": "winter.json",
+          "heap": {
+            "usedSize": 186832276,
+            "totalSize": 192417792,
+            "embedderHeapUsedSize": 12301744,
+            "backingStorageSize": 298757635
+          },
+          "resources": {
+            "geometries": 133,
+            "textures": 122,
+            "programs": 85,
+            "highGeometries": 133,
+            "highTextures": 122,
+            "highPrograms": 85
+          }
+        },
+        {
+          "fixture": "settlement-expedition.json",
+          "heap": {
+            "usedSize": 185631860,
+            "totalSize": 191848448,
+            "embedderHeapUsedSize": 14186568,
+            "backingStorageSize": 269270594
+          },
+          "resources": {
+            "geometries": 121,
+            "textures": 134,
+            "programs": 86,
+            "highGeometries": 121,
+            "highTextures": 134,
+            "highPrograms": 86
+          }
+        },
+        {
+          "fixture": "settlement-expedition.json",
+          "heap": {
+            "usedSize": 186807104,
+            "totalSize": 191848448,
+            "embedderHeapUsedSize": 14439280,
+            "backingStorageSize": 269271164
+          },
+          "resources": {
+            "geometries": 120,
+            "textures": 134,
+            "programs": 86,
+            "highGeometries": 120,
+            "highTextures": 134,
+            "highPrograms": 86
+          }
+        },
+        {
+          "fixture": "settlement-expedition.json",
+          "heap": {
+            "usedSize": 187027996,
+            "totalSize": 192897024,
+            "embedderHeapUsedSize": 13717160,
+            "backingStorageSize": 269271272
+          },
+          "resources": {
+            "geometries": 120,
+            "textures": 134,
+            "programs": 86,
+            "highGeometries": 120,
+            "highTextures": 134,
+            "highPrograms": 86
+          }
+        }
+      ],
+      "errors": []
+    }
+  },
+  "sustained": {
+    "A": {
+      "status": "complete",
+      "summary": {
+        "frames": 6826,
+        "meanFPS": 10.004477538658161,
+        "frameP50Ms": 100,
+        "frameP95Ms": 116.70000000006985,
+        "frameP99Ms": 133.29999999998836,
+        "worstFrameMs": 2216.100000000035,
+        "longTasks": 1043,
+        "longTaskTotalMs": 74791,
+        "droppedSamples": 0
+      },
+      "simulation": {
+        "start": {
+          "winter": 810,
+          "tick": 500,
+          "ticksPerWinter": 1000,
+          "absolute": 810500
+        },
+        "target": 811500,
+        "requestedTicks": 1000,
+        "end": {
+          "winter": 811,
+          "tick": 500,
+          "ticksPerWinter": 1000,
+          "absolute": 811500
+        }
+      },
+      "canonicalSHA256": "43b3e40e01c5f0366e268ddbd5538b5b27c49834c9c5bb9cea95e461af8235b1",
+      "canonicalTime": {
+        "winter": 811,
+        "tick": 500
+      },
+      "errors": [],
+      "resources": {
+        "geometries": 115,
+        "textures": 131,
+        "programs": 58,
+        "highGeometries": 115,
+        "highTextures": 131,
+        "highPrograms": 58
+      }
+    },
+    "B": {
+      "status": "complete",
+      "summary": {
+        "frames": 7074,
+        "meanFPS": 10.370774997723949,
+        "frameP50Ms": 99.90000000002328,
+        "frameP95Ms": 116.69999999999709,
+        "frameP99Ms": 133.10000000000582,
+        "worstFrameMs": 2083.2999999999884,
+        "longTasks": 1061,
+        "longTaskTotalMs": 74658,
+        "droppedSamples": 0
+      },
+      "simulation": {
+        "start": {
+          "winter": 810,
+          "tick": 500,
+          "ticksPerWinter": 1000,
+          "absolute": 810500
+        },
+        "target": 811500,
+        "requestedTicks": 1000,
+        "end": {
+          "winter": 811,
+          "tick": 500,
+          "ticksPerWinter": 1000,
+          "absolute": 811500
+        }
+      },
+      "canonicalSHA256": "43b3e40e01c5f0366e268ddbd5538b5b27c49834c9c5bb9cea95e461af8235b1",
+      "canonicalTime": {
+        "winter": 811,
+        "tick": 500
+      },
+      "errors": [],
+      "resources": {
+        "geometries": 115,
+        "textures": 133,
+        "programs": 61,
+        "highGeometries": 115,
+        "highTextures": 133,
+        "highPrograms": 61
+      }
+    }
+  },
+  "warm": {
+    "A": {
+      "status": "complete",
+      "errors": [],
+      "rows": [
+        {
+          "cache": "fresh-context",
+          "toReadyMs": 31215.901700000002,
+          "firstFrameMs": 29915.60000000149,
+          "playableMs": 29947.5,
+          "stages": [
+            {
+              "stage": "campaign-restore-inclusive",
+              "startedMs": 79.39999999850988,
+              "durationMs": 1876.8999999985099,
+              "outcome": "complete"
+            },
+            {
+              "stage": "geography",
+              "startedMs": 138.19999999925494,
+              "durationMs": 927.6999999992549,
+              "outcome": "complete"
+            },
+            {
+              "stage": "worker:island-download",
+              "startedMs": 226.79990234225988,
+              "durationMs": 42,
+              "outcome": "complete"
+            },
+            {
+              "stage": "worker:island-unpack",
+              "startedMs": 268.8999999985099,
+              "durationMs": 174.60000000149012,
+              "outcome": "complete"
+            },
+            {
+              "stage": "worker:island-verify",
+              "startedMs": 443.5999511703849,
+              "durationMs": 108.30000000074506,
+              "outcome": "complete"
+            },
+            {
+              "stage": "receive-and-freeze",
+              "startedMs": 995.5999999977648,
+              "durationMs": 69.80000000074506,
+              "outcome": "complete"
+            },
+            {
+              "stage": "assets-fetch-decode",
+              "startedMs": 2033.2999999970198,
+              "durationMs": 626.4000000022352,
+              "outcome": "complete"
+            },
+            {
+              "stage": "nature-assets-fetch-decode",
+              "startedMs": 2700.39999999851,
+              "durationMs": 400.69999999925494,
+              "outcome": "complete"
+            },
+            {
+              "stage": "ground-textures-fetch-decode",
+              "startedMs": 3101.199999999255,
+              "durationMs": 24.300000000745058,
+              "outcome": "complete"
+            },
+            {
+              "stage": "terrain-mesh-and-masks",
+              "startedMs": 3125.699999999255,
+              "durationMs": 6684.999999996275,
+              "outcome": "complete"
+            },
+            {
+              "stage": "pine-assets-fetch-decode",
+              "startedMs": 9810.79999999702,
+              "durationMs": 133.89999999850988,
+              "outcome": "complete"
+            },
+            {
+              "stage": "nature-instance-assembly",
+              "startedMs": 9944.89999999851,
+              "durationMs": 5.5,
+              "outcome": "complete"
+            },
+            {
+              "stage": "movement-surface",
+              "startedMs": 9973.19999999553,
+              "durationMs": 1.7000000029802322,
+              "outcome": "complete"
+            },
+            {
+              "stage": "wildlife-preparation",
+              "startedMs": 9976.5,
+              "durationMs": 913.6999999955297,
+              "outcome": "complete"
+            },
+            {
+              "stage": "initial-character-scene-sync",
+              "startedMs": 11040.69999999553,
+              "durationMs": 5778.9000000059605,
+              "outcome": "complete"
+            },
+            {
+              "stage": "initial-settlement-models",
+              "startedMs": 11144.39999999851,
+              "durationMs": 5342.60000000149,
+              "outcome": "complete"
+            },
+            {
+              "stage": "standing-tree-targets",
+              "startedMs": 16497.39999999851,
+              "durationMs": 0.5,
+              "outcome": "complete"
+            },
+            {
+              "stage": "construction-gpu-preparation",
+              "startedMs": 16836.19999999553,
+              "durationMs": 11017.10000000149,
+              "outcome": "complete"
+            },
+            {
+              "stage": "texture-upload",
+              "startedMs": 27861.39999999851,
+              "durationMs": 387,
+              "outcome": "complete"
+            },
+            {
+              "stage": "shader-compilation",
+              "startedMs": 28248.60000000149,
+              "durationMs": 222.69999999552965,
+              "outcome": "complete"
+            },
+            {
+              "stage": "initial-gpu-upload-and-draws",
+              "startedMs": 28471.39999999851,
+              "durationMs": 1444.1000000014901,
+              "outcome": "complete"
+            }
+          ]
+        },
+        {
+          "cache": "same-context-reload",
+          "toReadyMs": 22327.983799999998,
+          "firstFrameMs": 21289.89999999851,
+          "playableMs": 21320.70000000298,
+          "stages": [
+            {
+              "stage": "campaign-restore-inclusive",
+              "startedMs": 10.399999998509884,
+              "durationMs": 1847.6000000014901,
+              "outcome": "complete"
+            },
+            {
+              "stage": "geography",
+              "startedMs": 74.10000000149012,
+              "durationMs": 859.1000000014901,
+              "outcome": "complete"
+            },
+            {
+              "stage": "worker:island-download",
+              "startedMs": 98.79990234225988,
+              "durationMs": 39.900000005960464,
+              "outcome": "complete"
+            },
+            {
+              "stage": "worker:island-unpack",
+              "startedMs": 138.69980468600988,
+              "durationMs": 169.69999999552965,
+              "outcome": "complete"
+            },
+            {
+              "stage": "worker:island-verify",
+              "startedMs": 308.3999999985099,
+              "durationMs": 107,
+              "outcome": "complete"
+            },
+            {
+              "stage": "receive-and-freeze",
+              "startedMs": 854.1000000014901,
+              "durationMs": 78.89999999850988,
+              "outcome": "complete"
+            },
+            {
+              "stage": "assets-fetch-decode",
+              "startedMs": 1921.1000000014901,
+              "durationMs": 621.3999999985099,
+              "outcome": "complete"
+            },
+            {
+              "stage": "nature-assets-fetch-decode",
+              "startedMs": 2577.60000000149,
+              "durationMs": 462.6000000014901,
+              "outcome": "complete"
+            },
+            {
+              "stage": "ground-textures-fetch-decode",
+              "startedMs": 3040.2999999970198,
+              "durationMs": 25.80000000447035,
+              "outcome": "complete"
+            },
+            {
+              "stage": "terrain-mesh-and-masks",
+              "startedMs": 3066.2000000029802,
+              "durationMs": 6631.5999999940395,
+              "outcome": "complete"
+            },
+            {
+              "stage": "pine-assets-fetch-decode",
+              "startedMs": 9697.79999999702,
+              "durationMs": 131.20000000298023,
+              "outcome": "complete"
+            },
+            {
+              "stage": "nature-instance-assembly",
+              "startedMs": 9829.20000000298,
+              "durationMs": 11,
+              "outcome": "complete"
+            },
+            {
+              "stage": "movement-surface",
+              "startedMs": 9868.5,
+              "durationMs": 0.7999999970197678,
+              "outcome": "complete"
+            },
+            {
+              "stage": "wildlife-preparation",
+              "startedMs": 9870,
+              "durationMs": 873.5,
+              "outcome": "complete"
+            },
+            {
+              "stage": "initial-character-scene-sync",
+              "startedMs": 10886.20000000298,
+              "durationMs": 5668.5,
+              "outcome": "complete"
+            },
+            {
+              "stage": "initial-settlement-models",
+              "startedMs": 10963.89999999851,
+              "durationMs": 5303.80000000447,
+              "outcome": "complete"
+            },
+            {
+              "stage": "standing-tree-targets",
+              "startedMs": 16275.5,
+              "durationMs": 0.3999999985098839,
+              "outcome": "complete"
+            },
+            {
+              "stage": "construction-gpu-preparation",
+              "startedMs": 16569.70000000298,
+              "durationMs": 3073.6999999955297,
+              "outcome": "complete"
+            },
+            {
+              "stage": "texture-upload",
+              "startedMs": 19646.39999999851,
+              "durationMs": 374.6000000014901,
+              "outcome": "complete"
+            },
+            {
+              "stage": "shader-compilation",
+              "startedMs": 20021.60000000149,
+              "durationMs": 42.100000001490116,
+              "outcome": "complete"
+            },
+            {
+              "stage": "initial-gpu-upload-and-draws",
+              "startedMs": 20063.89999999851,
+              "durationMs": 1225.8000000044703,
+              "outcome": "complete"
+            }
+          ]
+        }
+      ]
+    },
+    "B": {
+      "status": "complete",
+      "errors": [],
+      "rows": [
+        {
+          "cache": "fresh-context",
+          "toReadyMs": 30094.363999999998,
+          "firstFrameMs": 29106,
+          "playableMs": 29152.5,
+          "stages": [
+            {
+              "stage": "campaign-restore-inclusive",
+              "startedMs": 34.20000000298023,
+              "durationMs": 1850.2999999970198,
+              "outcome": "complete"
+            },
+            {
+              "stage": "geography",
+              "startedMs": 104.10000000149012,
+              "durationMs": 890.5,
+              "outcome": "complete"
+            },
+            {
+              "stage": "worker:island-download",
+              "startedMs": 136.50009766221046,
+              "durationMs": 48.30000000447035,
+              "outcome": "complete"
+            },
+            {
+              "stage": "worker:island-unpack",
+              "startedMs": 184.90000000596046,
+              "durationMs": 175,
+              "outcome": "complete"
+            },
+            {
+              "stage": "worker:island-verify",
+              "startedMs": 360.00009766221046,
+              "durationMs": 116.20000000298023,
+              "outcome": "complete"
+            },
+            {
+              "stage": "receive-and-freeze",
+              "startedMs": 923.2000000029802,
+              "durationMs": 71.20000000298023,
+              "outcome": "complete"
+            },
+            {
+              "stage": "assets-fetch-decode",
+              "startedMs": 1967.7000000029802,
+              "durationMs": 670.8999999985099,
+              "outcome": "complete"
+            },
+            {
+              "stage": "nature-assets-fetch-decode",
+              "startedMs": 2678.7000000029802,
+              "durationMs": 350.6000000014901,
+              "outcome": "complete"
+            },
+            {
+              "stage": "ground-textures-fetch-decode",
+              "startedMs": 3029.4000000059605,
+              "durationMs": 25.399999998509884,
+              "outcome": "complete"
+            },
+            {
+              "stage": "terrain-mesh-and-masks",
+              "startedMs": 3054.9000000059605,
+              "durationMs": 6568.39999999851,
+              "outcome": "complete"
+            },
+            {
+              "stage": "pine-assets-fetch-decode",
+              "startedMs": 9623.40000000596,
+              "durationMs": 143.5,
+              "outcome": "complete"
+            },
+            {
+              "stage": "nature-instance-assembly",
+              "startedMs": 9767.10000000149,
+              "durationMs": 9.300000004470348,
+              "outcome": "complete"
+            },
+            {
+              "stage": "movement-surface",
+              "startedMs": 9798.60000000149,
+              "durationMs": 2,
+              "outcome": "complete"
+            },
+            {
+              "stage": "wildlife-preparation",
+              "startedMs": 9802.20000000298,
+              "durationMs": 898.7999999970198,
+              "outcome": "complete"
+            },
+            {
+              "stage": "initial-character-scene-sync",
+              "startedMs": 10848.90000000596,
+              "durationMs": 5534,
+              "outcome": "complete"
+            },
+            {
+              "stage": "initial-settlement-models",
+              "startedMs": 10953.20000000298,
+              "durationMs": 5151.5,
+              "outcome": "complete"
+            },
+            {
+              "stage": "standing-tree-targets",
+              "startedMs": 16116.60000000149,
+              "durationMs": 2.100000001490116,
+              "outcome": "complete"
+            },
+            {
+              "stage": "construction-gpu-preparation",
+              "startedMs": 16398.30000000447,
+              "durationMs": 10848.39999999851,
+              "outcome": "complete"
+            },
+            {
+              "stage": "texture-upload",
+              "startedMs": 27250.90000000596,
+              "durationMs": 379.19999999552965,
+              "outcome": "complete"
+            },
+            {
+              "stage": "shader-compilation",
+              "startedMs": 27630.30000000447,
+              "durationMs": 186.29999999701977,
+              "outcome": "complete"
+            },
+            {
+              "stage": "initial-gpu-upload-and-draws",
+              "startedMs": 27816.80000000447,
+              "durationMs": 1288.8999999985099,
+              "outcome": "complete"
+            }
+          ]
+        },
+        {
+          "cache": "same-context-reload",
+          "toReadyMs": 21854.044799999996,
+          "firstFrameMs": 20831.09999999404,
+          "playableMs": 20860.5,
+          "stages": [
+            {
+              "stage": "campaign-restore-inclusive",
+              "startedMs": 18.299999997019768,
+              "durationMs": 1871.7000000029802,
+              "outcome": "complete"
+            },
+            {
+              "stage": "geography",
+              "startedMs": 66.89999999850988,
+              "durationMs": 916.6999999955297,
+              "outcome": "complete"
+            },
+            {
+              "stage": "worker:island-download",
+              "startedMs": 101.30019530653954,
+              "durationMs": 64.19999999552965,
+              "outcome": "complete"
+            },
+            {
+              "stage": "worker:island-unpack",
+              "startedMs": 165.60024413466454,
+              "durationMs": 199.80000000447035,
+              "outcome": "complete"
+            },
+            {
+              "stage": "worker:island-verify",
+              "startedMs": 365.60024413466454,
+              "durationMs": 122.89999999850988,
+              "outcome": "complete"
+            },
+            {
+              "stage": "receive-and-freeze",
+              "startedMs": 917.5999999940395,
+              "durationMs": 65.90000000596046,
+              "outcome": "complete"
+            },
+            {
+              "stage": "assets-fetch-decode",
+              "startedMs": 1978.6999999955297,
+              "durationMs": 618.5,
+              "outcome": "complete"
+            },
+            {
+              "stage": "nature-assets-fetch-decode",
+              "startedMs": 2624.39999999851,
+              "durationMs": 412.19999999552965,
+              "outcome": "complete"
+            },
+            {
+              "stage": "ground-textures-fetch-decode",
+              "startedMs": 3036.6999999955297,
+              "durationMs": 34.899999998509884,
+              "outcome": "complete"
+            },
+            {
+              "stage": "terrain-mesh-and-masks",
+              "startedMs": 3071.89999999851,
+              "durationMs": 6609.39999999851,
+              "outcome": "complete"
+            },
+            {
+              "stage": "pine-assets-fetch-decode",
+              "startedMs": 9681.39999999851,
+              "durationMs": 136.29999999701977,
+              "outcome": "complete"
+            },
+            {
+              "stage": "nature-instance-assembly",
+              "startedMs": 9817.69999999553,
+              "durationMs": 5.899999998509884,
+              "outcome": "complete"
+            },
+            {
+              "stage": "movement-surface",
+              "startedMs": 9852.79999999702,
+              "durationMs": 1.2999999970197678,
+              "outcome": "complete"
+            },
+            {
+              "stage": "wildlife-preparation",
+              "startedMs": 9855.79999999702,
+              "durationMs": 867.7999999970198,
+              "outcome": "complete"
+            },
+            {
+              "stage": "initial-character-scene-sync",
+              "startedMs": 10861.39999999851,
+              "durationMs": 5379.89999999851,
+              "outcome": "complete"
+            },
+            {
+              "stage": "initial-settlement-models",
+              "startedMs": 10935.59999999404,
+              "durationMs": 5048.30000000447,
+              "outcome": "complete"
+            },
+            {
+              "stage": "standing-tree-targets",
+              "startedMs": 15991.5,
+              "durationMs": 1.7999999970197678,
+              "outcome": "complete"
+            },
+            {
+              "stage": "construction-gpu-preparation",
+              "startedMs": 16256,
+              "durationMs": 2914.7999999970198,
+              "outcome": "complete"
+            },
+            {
+              "stage": "texture-upload",
+              "startedMs": 19173.89999999851,
+              "durationMs": 379.1000000014901,
+              "outcome": "complete"
+            },
+            {
+              "stage": "shader-compilation",
+              "startedMs": 19553.19999999553,
+              "durationMs": 34.399999998509884,
+              "outcome": "complete"
+            },
+            {
+              "stage": "initial-gpu-upload-and-draws",
+              "startedMs": 19588,
+              "durationMs": 1242.8999999985099,
+              "outcome": "complete"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "geography": {
+    "A": {
+      "platform": "Node v24.22.1, win32/x64; synchronous worker-core CPU harness",
+      "seed": 3055065912,
+      "recipe": {
+        "version": "island-pool-v3",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 7
+      },
+      "retained": true,
+      "sourcePreparedMs": 9927.715799999998,
+      "elapsedMs": 13125.609199999999,
+      "timings": [
+        {
+          "stage": "terrain",
+          "milliseconds": 1069.0912999999998
+        },
+        {
+          "stage": "initial-candidates",
+          "milliseconds": 121.9948000000004
+        },
+        {
+          "stage": "initial-plan",
+          "milliseconds": 232.60069999999996
+        },
+        {
+          "stage": "compartments",
+          "milliseconds": 355.5854999999997
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 654.9804000000004
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 261.6265999999996
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 151.83479999999963
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 89.95309999999972
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 67.69409999999971
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 71.07210000000032
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 108.32560000000012
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 63.442400000000816
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 15.01550000000043
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 21.821799999999712
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 72.26509999999962
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 617.3855999999996
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 41.83460000000014
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 11.545500000000175
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 23.521099999999933
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 154.83879999999954
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 471.66349999999966
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 52.63380000000052
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 11.267499999999927
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 23.514900000000125
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 169.76530000000002
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 477.6734999999999
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 12.760699999999815
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 32.61360000000059
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 62.22350000000006
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 23.668900000000576
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 15.453400000000329
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 21.729199999999764
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 49.08860000000004
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 367.14999999999964
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 50.3738000000003
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 29.601300000000265
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 65.32169999999951
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 27.676100000000588
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 41.74369999999999
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 29.089599999999336
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 67.32800000000043
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 24.871399999999994
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 34.91350000000057
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 23.29439999999977
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 69.0551000000005
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 27.039200000000164
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 42.725500000000466
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 23.330799999999726
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 43.74120000000039
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 26.745599999998376
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 28.239400000000387
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 28.28490000000056
+        },
+        {
+          "stage": "player-navigation",
+          "milliseconds": 231.26800000000003
+        },
+        {
+          "stage": "access",
+          "milliseconds": 21.428799999999683
+        },
+        {
+          "stage": "harbor",
+          "milliseconds": 1.1020000000007713
+        },
+        {
+          "stage": "visibility",
+          "milliseconds": 103.3726999999999
+        },
+        {
+          "stage": "final-navigation",
+          "milliseconds": 255.62259999999878
+        },
+        {
+          "stage": "final-route",
+          "milliseconds": 5.110800000000381
+        },
+        {
+          "stage": "environment-zoning",
+          "milliseconds": 559.6660000000011
+        },
+        {
+          "stage": "nature",
+          "milliseconds": 1696.1245
+        },
+        {
+          "stage": "validation-and-freeze",
+          "milliseconds": 338.2531000000017
+        },
+        {
+          "stage": "campaign-natural-terrain",
+          "milliseconds": 0.04260000000067521
+        },
+        {
+          "stage": "campaign-foundations",
+          "milliseconds": 184.4409999999989
+        },
+        {
+          "stage": "campaign-zoning",
+          "milliseconds": 978.0584999999992
+        },
+        {
+          "stage": "campaign-nature-and-freeze",
+          "milliseconds": 1543.6055000000015
+        }
+      ],
+      "canonicalSha256": "6bcccb9a871df5cf1b1af4b648aeafdf0fddf189d236446ad1e884f51d36be8c",
+      "canonicalJsonBytes": 16501586,
+      "naturalHeightSamples": 160801,
+      "memoryBefore": {
+        "rss": 165834752,
+        "heapTotal": 104402944,
+        "heapUsed": 24804768,
+        "external": 29906139,
+        "arrayBuffers": 9270511
+      },
+      "memoryAfter": {
+        "rss": 440643584,
+        "heapTotal": 307838976,
+        "heapUsed": 175631992,
+        "external": 37622799,
+        "arrayBuffers": 16987131
+      },
+      "sourceSha256": {
+        "src/world-generation/GenerateWorld.ts": "68f9da5bea0cd670e19166d00590ee1abc8868cac96df4e8284d5d01f14476fb",
+        "src/fjord-play/CampaignIsland.ts": "f58ee5651020d9e058b15bc9f37e97ff6b7a7cdedd4503d754579f227c7fa1d1"
+      },
+      "limits": "No browser/download/worker structured-clone timing, first frame, input responsiveness or true peak memory. No extra asset or terrain copy is introduced by the single-use handoff."
+    },
+    "B": {
+      "platform": "Node v24.22.1, win32/x64; synchronous worker-core CPU harness",
+      "seed": 3055065912,
+      "recipe": {
+        "version": "island-pool-v3",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 7
+      },
+      "retained": true,
+      "sourcePreparedMs": 9684.831199999999,
+      "elapsedMs": 12260.477799999999,
+      "timings": [
+        {
+          "stage": "terrain",
+          "milliseconds": 1078.2486000000001
+        },
+        {
+          "stage": "initial-candidates",
+          "milliseconds": 127.17470000000003
+        },
+        {
+          "stage": "initial-plan",
+          "milliseconds": 219.9318000000003
+        },
+        {
+          "stage": "compartments",
+          "milliseconds": 345.97739999999976
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 595.8802999999998
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 273.3028000000004
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 163.6291000000001
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 103.09740000000056
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 68.26010000000042
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 82.4372999999996
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 110.51639999999952
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 58.8175999999994
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 14.621799999999894
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 23.011599999999817
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 63.46529999999984
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 555.1781000000001
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 50.1832000000004
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 11.888299999999617
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 31.97860000000037
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 228.6271000000006
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 498.91339999999946
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 51.71219999999994
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 12.907000000000153
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 28.591300000000047
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 176.59870000000046
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 497.65729999999985
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 11.187600000000202
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 26.835699999999633
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 55.31700000000001
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 30.02140000000054
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 15.874300000000403
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 34.627700000000004
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 54.440200000000004
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 298.70910000000003
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 56.986800000000585
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 21.64680000000044
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 44.986799999999675
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 22.050399999999172
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 52.525800000000345
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 29.28349999999955
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 65.69729999999981
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 25.180599999999686
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 41.75080000000071
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 60.9371000000001
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 59.71099999999933
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 25.794799999999668
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 44.24279999999999
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 21.77310000000034
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 47.34490000000005
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 25.15520000000015
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 39.3137999999999
+        },
+        {
+          "stage": "foundations",
+          "milliseconds": 34.046400000000176
+        },
+        {
+          "stage": "player-navigation",
+          "milliseconds": 244.57150000000001
+        },
+        {
+          "stage": "access",
+          "milliseconds": 8.938099999999395
+        },
+        {
+          "stage": "harbor",
+          "milliseconds": 1.000400000000809
+        },
+        {
+          "stage": "visibility",
+          "milliseconds": 90.09409999999843
+        },
+        {
+          "stage": "final-navigation",
+          "milliseconds": 250.67059999999947
+        },
+        {
+          "stage": "final-route",
+          "milliseconds": 6.426100000000588
+        },
+        {
+          "stage": "environment-zoning",
+          "milliseconds": 526.3060000000005
+        },
+        {
+          "stage": "nature",
+          "milliseconds": 1482.8791999999994
+        },
+        {
+          "stage": "validation-and-freeze",
+          "milliseconds": 304.21650000000045
+        },
+        {
+          "stage": "campaign-natural-terrain",
+          "milliseconds": 0.02530000000115251
+        },
+        {
+          "stage": "campaign-foundations",
+          "milliseconds": 187.46690000000126
+        },
+        {
+          "stage": "campaign-zoning",
+          "milliseconds": 526.4661999999989
+        },
+        {
+          "stage": "campaign-nature-and-freeze",
+          "milliseconds": 1451.8532000000014
+        }
+      ],
+      "canonicalSha256": "6bcccb9a871df5cf1b1af4b648aeafdf0fddf189d236446ad1e884f51d36be8c",
+      "canonicalJsonBytes": 16501586,
+      "naturalHeightSamples": 160801,
+      "memoryBefore": {
+        "rss": 165429248,
+        "heapTotal": 99213312,
+        "heapUsed": 21666264,
+        "external": 34331486,
+        "arrayBuffers": 9271535
+      },
+      "memoryAfter": {
+        "rss": 404246528,
+        "heapTotal": 302305280,
+        "heapUsed": 178661008,
+        "external": 40573347,
+        "arrayBuffers": 16988155
+      },
+      "sourceSha256": {
+        "src/world-generation/GenerateWorld.ts": "68f9da5bea0cd670e19166d00590ee1abc8868cac96df4e8284d5d01f14476fb",
+        "src/fjord-play/CampaignIsland.ts": "f58ee5651020d9e058b15bc9f37e97ff6b7a7cdedd4503d754579f227c7fa1d1"
+      },
+      "limits": "No browser/download/worker structured-clone timing, first frame, input responsiveness or true peak memory. No extra asset or terrain copy is introduced by the single-use handoff."
+    }
+  },
+  "visuals": {
+    "winter": {
+      "A": {
+        "status": "complete",
+        "errors": [],
+        "requestedPresentation": {
+          "quality": "low",
+          "effects": "low",
+          "hdr": false,
+          "camera": {
+            "target": [
+              27.17492830547199,
+              9.144193878430778,
+              6.526965630030055
+            ],
+            "position": [
+              63.174928305471994,
+              40.14419387843078,
+              50.526965630030055
+            ]
+          }
+        },
+        "canonicalSHA256": "bb2cd989b41f1260695cbdc65c8c5d2be76d9ad64b17d5312294a67684d69316",
+        "fixtureSHA256": "157369d108e713f171a4d165045fd992fb7551f7ecbf43dba91491888bf59b02",
+        "screenshotDiagnosticsHidden": true
+      },
+      "B": {
+        "status": "complete",
+        "errors": [],
+        "requestedPresentation": {
+          "quality": "low",
+          "effects": "low",
+          "hdr": false,
+          "camera": {
+            "target": [
+              27.17492830547199,
+              9.144193878430778,
+              6.526965630030055
+            ],
+            "position": [
+              63.174928305471994,
+              40.14419387843078,
+              50.526965630030055
+            ]
+          }
+        },
+        "canonicalSHA256": "bb2cd989b41f1260695cbdc65c8c5d2be76d9ad64b17d5312294a67684d69316",
+        "fixtureSHA256": "157369d108e713f171a4d165045fd992fb7551f7ecbf43dba91491888bf59b02",
+        "screenshotDiagnosticsHidden": true
+      }
+    },
+    "marsh": {
+      "A": {
+        "status": "complete",
+        "errors": [],
+        "requestedPresentation": {
+          "quality": "low",
+          "effects": "low",
+          "hdr": false,
+          "camera": {
+            "target": [
+              -40,
+              6.254486083984375,
+              -108
+            ],
+            "position": [
+              -4,
+              37.254486083984375,
+              -64
+            ]
+          }
+        },
+        "canonicalSHA256": "efa6447349f87fdcd9ed67cfe6bb04c4650b36d6c1a4e0813b74af047a563933",
+        "fixtureSHA256": "a84c47c498b4d53553aa1c47fc4229e338284058995c49e854fce143e43c6402",
+        "screenshotDiagnosticsHidden": true
+      },
+      "B": {
+        "status": "complete",
+        "errors": [],
+        "requestedPresentation": {
+          "quality": "low",
+          "effects": "low",
+          "hdr": false,
+          "camera": {
+            "target": [
+              -40,
+              6.254486083984375,
+              -108
+            ],
+            "position": [
+              -4,
+              37.254486083984375,
+              -64
+            ]
+          }
+        },
+        "canonicalSHA256": "efa6447349f87fdcd9ed67cfe6bb04c4650b36d6c1a4e0813b74af047a563933",
+        "fixtureSHA256": "a84c47c498b4d53553aa1c47fc4229e338284058995c49e854fce143e43c6402",
+        "screenshotDiagnosticsHidden": true
+      }
+    }
+  },
+  "sustainedCoreParity": true,
+  "geographyParity": true,
+  "iPhoneChrome": [
+    {
+      "file": "1793378173346-A-0e66a579-3b6c-4c0b-8b63-deaacad1062e.json",
+      "arm": "A",
+      "status": "complete",
+      "device": "Iphone 16",
+      "thermalBefore": "Cool",
+      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 27_2_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/156.0.8078.54 Mobile/15E148 Safari/604.1",
+      "startedUtc": "2026-10-30T16:32:22.952Z",
+      "finishedUtc": "2026-10-30T16:36:13.145Z",
+      "commit": "01dc5f79c9b8ee4024c0fbed338af4778a5f4c97",
+      "engineVersion": "0.180.0",
+      "fixtureSHA256": "fc15f2754b5cea06fcd4c62857756e401c6f527102893622a023298571b92944",
+      "viewport": [
+        393,
+        654
+      ],
+      "dpr": 3,
+      "elapsedMs": 157890,
+      "summary": {
+        "frames": 2459,
+        "fps": 15.574133890683388,
+        "p50Ms": 44,
+        "p95Ms": 108
+      },
+      "startTick": 810500,
+      "endTick": 810700,
+      "loading": {
+        "version": 1,
+        "attempt": "mvv6x9bh-1",
+        "startedUtc": "2026-10-30T16:32:23.404Z",
+        "mode": "resume",
+        "seed": 32,
+        "build": "01dc5f79c9b8ee4024c0fbed338af4778a5f4c97",
+        "buildInfo": {
+          "schemaVersion": 1,
+          "version": "0.1.0-alpha",
+          "channel": "alpha",
+          "displayVersion": "v0.1 alpha",
+          "origin": "local",
+          "buildNumber": null,
+          "buildId": "local-215d22400d3413d43570",
+          "builtAt": "2026-10-30T15:35:20.914Z",
+          "source": {
+            "commit": "01dc5f79c9b8ee4024c0fbed338af4778a5f4c97",
+            "dirty": false,
+            "provenance": "git"
+          },
+          "legacyBuild": "01dc5f79c9b8ee4024c0fbed338af4778a5f4c97",
+          "configuration": {
+            "feedbackURL": ""
+          }
+        },
+        "cache": "browser-managed; cold/warm not inferred",
+        "screenRecording": "not reported",
+        "environment": {
+          "browser": "Mozilla/5.0 (iPhone; CPU iPhone OS 27_2_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/156.0.8078.54 Mobile/15E148 Safari/604.1",
+          "viewport": [
+            393,
+            654
+          ],
+          "pixelRatio": 3
+        },
+        "recipe": {
+          "version": "island-pool-v3",
+          "generatorVersion": "fjordside-island-v0.3e-r3",
+          "seed": 168
+        },
+        "quality": "low",
+        "outcome": "playable",
+        "percent": 100,
+        "stage": "Preparing the first frame",
+        "substage": "initial-gpu-upload-and-draws",
+        "worker": "received",
+        "elapsedMs": 56446,
+        "stageElapsedMs": 1328,
+        "lastProgressAgeMs": 0,
+        "warning": "",
+        "units": {
+          "completed": 144,
+          "total": 144,
+          "kind": "draw batches"
+        },
+        "latestResource": "/terrain/fish-drying-rack.glb",
+        "resources": {
+          "geometries": 112,
+          "textures": 127,
+          "programs": 58,
+          "calls": 144,
+          "triangles": 2604437,
+          "renderPixelRatio": 1,
+          "drawingBuffer": [
+            393,
+            654
+          ]
+        },
+        "firstFrameMs": 56404,
+        "playableMs": 56446,
+        "maxObservationGapMs": 5789,
+        "measurements": {
+          "gpuTime": "unsupported",
+          "processMemory": "unsupported",
+          "cacheTemperature": "not observable reliably",
+          "killedProcess": "may leave no final event"
+        },
+        "timeline": [
+          {
+            "stage": "campaign-restore-inclusive",
+            "startedMs": 7,
+            "durationMs": 4372,
+            "outcome": "complete"
+          },
+          {
+            "stage": "geography",
+            "startedMs": 96,
+            "durationMs": 2601,
+            "outcome": "complete"
+          },
+          {
+            "stage": "worker:island-download",
+            "startedMs": 118,
+            "durationMs": 1068,
+            "outcome": "complete"
+          },
+          {
+            "stage": "worker:island-unpack",
+            "startedMs": 1186,
+            "durationMs": 47,
+            "outcome": "complete"
+          },
+          {
+            "stage": "worker:island-verify",
+            "startedMs": 1233,
+            "durationMs": 707,
+            "outcome": "complete"
+          },
+          {
+            "stage": "receive-and-freeze",
+            "startedMs": 2014,
+            "durationMs": 682,
+            "outcome": "complete"
+          },
+          {
+            "stage": "assets-fetch-decode",
+            "startedMs": 4415,
+            "durationMs": 872,
+            "outcome": "complete"
+          },
+          {
+            "stage": "nature-assets-fetch-decode",
+            "startedMs": 5330,
+            "durationMs": 338,
+            "outcome": "complete"
+          },
+          {
+            "stage": "ground-textures-fetch-decode",
+            "startedMs": 5668,
+            "durationMs": 61,
+            "outcome": "complete"
+          },
+          {
+            "stage": "terrain-mesh-and-masks",
+            "startedMs": 5729,
+            "durationMs": 12990,
+            "outcome": "complete"
+          },
+          {
+            "stage": "pine-assets-fetch-decode",
+            "startedMs": 18719,
+            "durationMs": 500,
+            "outcome": "complete"
+          },
+          {
+            "stage": "nature-instance-assembly",
+            "startedMs": 19220,
+            "durationMs": 7,
+            "outcome": "complete"
+          },
+          {
+            "stage": "movement-surface",
+            "startedMs": 19291,
+            "durationMs": 1,
+            "outcome": "complete"
+          },
+          {
+            "stage": "wildlife-preparation",
+            "startedMs": 19293,
+            "durationMs": 1396,
+            "outcome": "complete"
+          },
+          {
+            "stage": "initial-character-scene-sync",
+            "startedMs": 21028,
+            "durationMs": 26957,
+            "outcome": "complete"
+          },
+          {
+            "stage": "initial-settlement-models",
+            "startedMs": 21211,
+            "durationMs": 25440,
+            "outcome": "complete"
+          },
+          {
+            "stage": "standing-tree-targets",
+            "startedMs": 46657,
+            "durationMs": 1,
+            "outcome": "complete"
+          },
+          {
+            "stage": "construction-gpu-preparation",
+            "startedMs": 47987,
+            "durationMs": 6446,
+            "outcome": "complete"
+          },
+          {
+            "stage": "texture-upload",
+            "startedMs": 54435,
+            "durationMs": 636,
+            "outcome": "complete"
+          },
+          {
+            "stage": "shader-compilation",
+            "startedMs": 55071,
+            "durationMs": 46,
+            "outcome": "complete"
+          },
+          {
+            "stage": "initial-gpu-upload-and-draws",
+            "startedMs": 55118,
+            "durationMs": 1286,
+            "outcome": "complete"
+          }
+        ]
+      },
+      "resources": {
+        "geometries": 113,
+        "textures": 127,
+        "programs": 58,
+        "highGeometries": 113,
+        "highTextures": 127,
+        "highPrograms": 58
+      },
+      "errors": [],
+      "gpuStatus": "unsupported"
+    },
+    {
+      "file": "1793378448512-B-a3792af2-5648-48a5-b612-f1d67ea0298a.json",
+      "arm": "B",
+      "status": "complete",
+      "device": "Iphone 16",
+      "thermalBefore": "Cool",
+      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 27_2_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/156.0.8078.54 Mobile/15E148 Safari/604.1",
+      "startedUtc": "2026-10-30T16:36:44.792Z",
+      "finishedUtc": "2026-10-30T16:40:48.393Z",
+      "commit": "1c04d4b1a0213bc38ae1e4bbefc608af78f25bf4",
+      "engineVersion": "0.187.0",
+      "fixtureSHA256": "fc15f2754b5cea06fcd4c62857756e401c6f527102893622a023298571b92944",
+      "viewport": [
+        393,
+        654
+      ],
+      "dpr": 3,
+      "elapsedMs": 157876,
+      "summary": {
+        "frames": 2473,
+        "fps": 15.664192150801895,
+        "p50Ms": 45,
+        "p95Ms": 109
+      },
+      "startTick": 810500,
+      "endTick": 810700,
+      "loading": {
+        "version": 1,
+        "attempt": "mvv72vew-1",
+        "startedUtc": "2026-10-30T16:36:45.319Z",
+        "mode": "resume",
+        "seed": 32,
+        "build": "1c04d4b1a0213bc38ae1e4bbefc608af78f25bf4",
+        "buildInfo": {
+          "schemaVersion": 1,
+          "version": "0.1.0-alpha",
+          "channel": "alpha",
+          "displayVersion": "v0.1 alpha",
+          "origin": "local",
+          "buildNumber": null,
+          "buildId": "local-b3a19ab1297836dff8dc",
+          "builtAt": "2026-10-30T15:56:01.600Z",
+          "source": {
+            "commit": "1c04d4b1a0213bc38ae1e4bbefc608af78f25bf4",
+            "dirty": false,
+            "provenance": "git"
+          },
+          "legacyBuild": "1c04d4b1a0213bc38ae1e4bbefc608af78f25bf4",
+          "configuration": {
+            "feedbackURL": ""
+          }
+        },
+        "cache": "browser-managed; cold/warm not inferred",
+        "screenRecording": "not reported",
+        "environment": {
+          "browser": "Mozilla/5.0 (iPhone; CPU iPhone OS 27_2_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/156.0.8078.54 Mobile/15E148 Safari/604.1",
+          "viewport": [
+            393,
+            654
+          ],
+          "pixelRatio": 3
+        },
+        "recipe": {
+          "version": "island-pool-v3",
+          "generatorVersion": "fjordside-island-v0.3e-r3",
+          "seed": 168
+        },
+        "quality": "low",
+        "outcome": "playable",
+        "percent": 100,
+        "stage": "Preparing the first frame",
+        "substage": "initial-gpu-upload-and-draws",
+        "worker": "received",
+        "elapsedMs": 69935,
+        "stageElapsedMs": 1304,
+        "lastProgressAgeMs": 0,
+        "warning": "",
+        "units": {
+          "completed": 144,
+          "total": 144,
+          "kind": "draw batches"
+        },
+        "latestResource": "/terrain/fish-drying-rack.glb",
+        "resources": {
+          "geometries": 112,
+          "textures": 129,
+          "programs": 61,
+          "calls": 266,
+          "triangles": 4380849,
+          "renderPixelRatio": 1,
+          "drawingBuffer": [
+            393,
+            654
+          ]
+        },
+        "firstFrameMs": 69889,
+        "playableMs": 69935,
+        "maxObservationGapMs": 14241,
+        "measurements": {
+          "gpuTime": "unsupported",
+          "processMemory": "unsupported",
+          "cacheTemperature": "not observable reliably",
+          "killedProcess": "may leave no final event"
+        },
+        "timeline": [
+          {
+            "stage": "campaign-restore-inclusive",
+            "startedMs": 2,
+            "durationMs": 4764,
+            "outcome": "complete"
+          },
+          {
+            "stage": "geography",
+            "startedMs": 164,
+            "durationMs": 2757,
+            "outcome": "complete"
+          },
+          {
+            "stage": "worker:island-download",
+            "startedMs": 180,
+            "durationMs": 1170,
+            "outcome": "complete"
+          },
+          {
+            "stage": "worker:island-unpack",
+            "startedMs": 1350,
+            "durationMs": 38,
+            "outcome": "complete"
+          },
+          {
+            "stage": "worker:island-verify",
+            "startedMs": 1388,
+            "durationMs": 728,
+            "outcome": "complete"
+          },
+          {
+            "stage": "receive-and-freeze",
+            "startedMs": 2193,
+            "durationMs": 728,
+            "outcome": "complete"
+          },
+          {
+            "stage": "assets-fetch-decode",
+            "startedMs": 4789,
+            "durationMs": 681,
+            "outcome": "complete"
+          },
+          {
+            "stage": "nature-assets-fetch-decode",
+            "startedMs": 5529,
+            "durationMs": 314,
+            "outcome": "complete"
+          },
+          {
+            "stage": "ground-textures-fetch-decode",
+            "startedMs": 5843,
+            "durationMs": 54,
+            "outcome": "complete"
+          },
+          {
+            "stage": "terrain-mesh-and-masks",
+            "startedMs": 5897,
+            "durationMs": 13066,
+            "outcome": "complete"
+          },
+          {
+            "stage": "pine-assets-fetch-decode",
+            "startedMs": 18964,
+            "durationMs": 409,
+            "outcome": "complete"
+          },
+          {
+            "stage": "nature-instance-assembly",
+            "startedMs": 19373,
+            "durationMs": 7,
+            "outcome": "complete"
+          },
+          {
+            "stage": "movement-surface",
+            "startedMs": 19443,
+            "durationMs": 1,
+            "outcome": "complete"
+          },
+          {
+            "stage": "wildlife-preparation",
+            "startedMs": 19446,
+            "durationMs": 1431,
+            "outcome": "complete"
+          },
+          {
+            "stage": "initial-character-scene-sync",
+            "startedMs": 21205,
+            "durationMs": 28350,
+            "outcome": "complete"
+          },
+          {
+            "stage": "initial-settlement-models",
+            "startedMs": 21413,
+            "durationMs": 27234,
+            "outcome": "complete"
+          },
+          {
+            "stage": "standing-tree-targets",
+            "startedMs": 48653,
+            "durationMs": 1,
+            "outcome": "complete"
+          },
+          {
+            "stage": "construction-gpu-preparation",
+            "startedMs": 49557,
+            "durationMs": 17999,
+            "outcome": "complete"
+          },
+          {
+            "stage": "texture-upload",
+            "startedMs": 67558,
+            "durationMs": 666,
+            "outcome": "complete"
+          },
+          {
+            "stage": "shader-compilation",
+            "startedMs": 68225,
+            "durationMs": 406,
+            "outcome": "complete"
+          },
+          {
+            "stage": "initial-gpu-upload-and-draws",
+            "startedMs": 68631,
+            "durationMs": 1258,
+            "outcome": "complete"
+          }
+        ]
+      },
+      "resources": {
+        "geometries": 113,
+        "textures": 129,
+        "programs": 61,
+        "highGeometries": 113,
+        "highTextures": 129,
+        "highPrograms": 61
+      },
+      "errors": [],
+      "gpuStatus": "unsupported"
+    }
+  ],
+  "thermalObservation": {
+    "source": "Owner message",
+    "observation": "After B, the phone felt a bit warm.",
+    "temperatureDegrees": null,
+    "thermalStateAfterA": "not reported",
+    "classification": "Qualitative owner observation; no temperature measurement or demonstrated throttling."
+  },
+  "physical": [],
+  "smokeCount": 1,
+  "limits": [
+    "Three repetitions on one GPU; no statistical generalization or pooled per-window p95 claim.",
+    "Primary heap is unforced Chromium JS heap; lifecycle CDP heap and backing storage are separate, not process/VRAM bytes.",
+    "Source/build identity and renderer are retained in raw runs; headless Chrome and Chrome iOS are not physical Safari.",
+    "Single CPU-generation, warm-cache and phone pairs are exploratory observations, not isolated causal engine effects."
+  ]
+}

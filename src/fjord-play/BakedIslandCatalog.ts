@@ -3,7 +3,7 @@ export const campaignIslandCatalog = {
     "version": 1,
     "generatorVersion": "fjordside-island-v0.3e-r3",
     "inputs": {
-        "pnpm-lock.yaml": "b67a5364ad538d19d5265ae57301f1bf11576e432bce48bcb8aa3b9895df9996",
+        "pnpm-lock.yaml": "c427b14c241c9f628ac5989c85086625a49a53ba515e5acdb2387764a5aae313",
         "src/config/FjordWaterConfig.ts": "84ac55e55e074e21924d421cd38a87b190132ad2d828255d075720519e51dbb0",
         "src/config/GroundBlendConfig.ts": "0a5b3425ffeb3a3aed0e75b9ff7bd4f42c6544819ffd5dcd6e61d21bf1ca7139",
         "src/config/HousingAssets.ts": "0e662c8bcfb83ed2877aee89ede17284128be52fda1cd271248609410c85d3e4",

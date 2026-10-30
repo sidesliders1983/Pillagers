@@ -28,6 +28,6 @@ export class WetlandTextureAsset {
     dispose() {
         if (this.disposed) return;
         this.disposed = true; this.abort.abort();
-        this.texture?.dispose(); this.texture?.image?.close?.(); this.texture = undefined;
+        this.texture?.dispose(); (this.texture?.image as ImageBitmap | undefined)?.close?.(); this.texture = undefined;
     }
 }

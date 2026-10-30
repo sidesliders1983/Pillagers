@@ -76,7 +76,7 @@ function release(id: string) {
         });
         geometry.forEach(value => value.dispose());
         materials.forEach(value => value.dispose());
-        textures.forEach(value => { value.dispose(); value.image?.close?.(); });
+        textures.forEach(value => { value.dispose(); (value.image as { close?: () => void } | undefined)?.close?.(); });
     }, () => { });
 }
 export interface WildlifeSources {

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "issue": 323,
+  "baselineCommit": "01dc5f79c9b8ee4024c0fbed338af4778a5f4c97",
+  "engines": { "A": "0.180.0", "B": "0.187.0" },
+  "renderer": "native WebGLRenderer / WebGL2, no WebGPU or software-renderer substitution",
+  "viewport": { "width": 1440, "height": 900, "deviceScaleFactor": 1 },
+  "primary": { "fixture": "settlement-expedition.json", "quality": "low", "effects": "low", "hdr": false, "warmupSeconds": 15, "sampleSeconds": 60, "order": ["A", "B", "B", "A", "A", "B"] },
+  "sustained": { "fixture": "settlement-expedition.json", "canonicalTicks": 1000, "nominalSeconds": 600, "running": true, "order": ["B", "A"] },
+  "visuals": ["settlement-expedition.json", "winter.json", "marsh.json"],
+  "variants": ["low/HDR off", "standard/HDR on"],
+  "lifecycle": { "importsPerArm": 4, "sequence": ["settlement-expedition.json", "marsh.json", "winter.json", "settlement-expedition.json"] },
+  "cache": "Fresh browser context per primary repetition; one warm reload recorded separately. OS and GPU driver caches are not controlled. Alternating order reduces order bias.",
+  "measurement": "Real browser rAF intervals, long tasks and public performance/loading JSON. Resource counts are not bytes. Heap is optional Chromium JS heap; process/GPU memory and physical thermal state are not inferred.",
+  "decisionGates": { "criticalRegressions": 0, "required": ["desktop and actual iPhone Safari pass", "visual review including HDR/shadows/portraits", "no repeatable unbounded resource growth", "all relevant existing checks pass"], "investigateRegressionPercent": 10, "meaningfulRepeatedFrameGainPercent": 5, "meaningfulRetainedHeapReductionPercent": 10 },
+  "interpretation": "Explore three repetitions per arm, not a population estimate. Report each raw run and order, medians/ranges and paired differences. Defer adoption while device evidence, compatible typings or critical validation remains incomplete. Separate engine/type-only migration changes from any application fix. No automatic production merge."
+}

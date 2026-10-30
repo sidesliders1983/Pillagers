@@ -1,0 +1,187 @@
+{
+  "count": 14,
+  "sameEntries": true,
+  "beforeInputs": {
+    "pnpm-lock.yaml": "b67a5364ad538d19d5265ae57301f1bf11576e432bce48bcb8aa3b9895df9996",
+    "src/config/FjordWaterConfig.ts": "84ac55e55e074e21924d421cd38a87b190132ad2d828255d075720519e51dbb0",
+    "src/config/GroundBlendConfig.ts": "0a5b3425ffeb3a3aed0e75b9ff7bd4f42c6544819ffd5dcd6e61d21bf1ca7139",
+    "src/config/HousingAssets.ts": "0e662c8bcfb83ed2877aee89ede17284128be52fda1cd271248609410c85d3e4",
+    "src/config/ModelTextureAssets.ts": "07179a305c6b1d20c1d5f03dfac73e4efdcad8737a536ac6ee6af850c19d4f05",
+    "src/config/NatureAssets.ts": "00b801b9f21109b5f3281b54e5b271bebc70f426f5397853b90bb2e0c9994d5d",
+    "src/config/PresentationQuality.ts": "de46e365b9bf86acb4e7c5a7e7559fd469bc05554761a51ee8ef30c181e50cbc",
+    "src/config/TerrainAssets.ts": "9ed1cb6b179fdebe1389dc504c28ed76499fd0f1f93950d4fbd90dc4de974680",
+    "src/config/lightingConfig.ts": "90a8db233c0c90aabee248d27c2bef1ff3fec3fe7070b8aac97010d07aea2b86",
+    "src/config/worldConfig.ts": "e3cd430e0aed4f4747537fa49d87001c9427992ce7ba1abbfc655e28f3f819d9",
+    "src/core/AssetManager.ts": "b971feaa38f494ac507520373e43c1adf850f0ad19c79f3cd1b39947348aa446",
+    "src/core/EmissiveSurfaces.ts": "84d0f0a693d46437e0ec2521b1c4459655bce542d6d368531faeb9fa17789f6e",
+    "src/fjord-play/CampaignIsland.ts": "9fbe79ce43ea258e664c68d70d5deaf4161e345c7897936abaffb3a7f78fb9d2",
+    "src/fjord-play/VillageNature.ts": "dc21173c545ef3e41760e3fe6f56eb02cf3ff0f9bd307835a322ce1a3996bfce",
+    "src/world-generation/CoastDistance.ts": "17140651ce9f6fbd9a6a6e90bc0dc17852e545ba346c9dbe0895dee9a9a48c3a",
+    "src/world-generation/EnvironmentZoning.ts": "595b2fa6bcb09eaa8cd338ea458182d7cbbcf5fedaa19e5b96b31583fc6c11d1",
+    "src/world-generation/GenerateWorld.ts": "08eb9d43ff175a4cd459b22b6151da4b320c287c5f32eb987976055245de9e7e",
+    "src/world-generation/GenerationProfile.ts": "8e1ec235eee0f3c790aecc9c56b59cf438fd7a1d8e202f63bc762b91732f08ac",
+    "src/world-generation/HarborClearance.ts": "aa94e539f26f87e12e035ef330eaafe9f210052882023dfff8ee1ffe569382a3",
+    "src/world-generation/IslandDrainage.ts": "23d942617898a3e2e95aaf72f456cfa2923ac653d128724cc6187e038c9dc1f1",
+    "src/world-generation/IslandDrainageV1.ts": "db8df81b48637512ce0122072e5928c55845a7e0417c074bac34ac296107aa16",
+    "src/world-generation/IslandShape.ts": "9da05b4325c3dce7ec3329dde917a30f8e12a5563130b6bf04dd059d67d2aae4",
+    "src/world-generation/IslandShapeQuality.ts": "cc29d38e123307e71b3e1fb0a76bb1b80e9407dcf8f79f81321341a82d2282f0",
+    "src/world-generation/IslandShapeV1.ts": "b06dd485ccdd82f27ba64f678006cf905cd9d85a0e997e574b0e972b1072c473",
+    "src/world-generation/LandRoutes.ts": "062388811fea5214d08445d986b8f9b72ee3ffb342c015755c0f4e995afdbe66",
+    "src/world-generation/MacroIsland.ts": "4804a88cc9a2a79dd5d661b42faa8c319e19ad3b278b11956becd3f6ab81c5be",
+    "src/world-generation/NatureFootprints.ts": "96f3fbaf8a90414f0ccc7a69725d674600900329ff13e8d05bd739b84f88c37c",
+    "src/world-generation/OreSites.ts": "780d57a15fcf7b0b51ce9d6db2719d7407857ddc02ac5d961d644eaa6351084a",
+    "src/world-generation/PineFootprints.ts": "1bf6253b800cb5f8bd0ebcdb8a4d4ae8bf3ecbaeb98e369dd95025d50b18aba9",
+    "src/world-generation/PlanIslandSettlements.ts": "062ae688044ff372ffed4dc474cef1c8c2b7f2f8ca3d1e966c260ae221c3af5e",
+    "src/world-generation/PlanNature.ts": "101397523f142f362f9dc179c4e107384f9f3eee36d723e329c3926c86597912",
+    "src/world-generation/PlanSettlement.ts": "1ed09e7491de105777d49b0229cc4fedac0d4439fc362f86221d1ee6ac8a5932",
+    "src/world-generation/SettlementCompartments.ts": "c2f844ecc42a11e65dfebef43f3f9f94d97fb433eb0f1d8e904a0c4f8269dc84",
+    "src/world-generation/SettlementSites.ts": "045b92168e2354b1c417a4b4e09cd83f21edb700041a4399eb6070399e5860ee",
+    "src/world-generation/SettlementVisibility.ts": "f1be7a7259398319cd1cb0a18b08ae935368c35c2f8cbd5c20f0af8e21d30122",
+    "src/world-generation/SiteNavigation.ts": "897b6eb741c66dfd58fcda168f58b37bd32fdc5a36943b07185d2decf7bbf4ed",
+    "src/world-generation/TerrainPreview.ts": "e5e8a81d71d4356bbede6cfd4d4f9983dcb935aa76db6a2344a0cc8a17b1df4f",
+    "src/world-generation/TerrainQueries.ts": "8a92207f96388089e440603126c1f029536290eaa9f5ddcd4bf294e38264df54",
+    "src/world-generation/ValidateNavigation.ts": "4bf887833ce8f05026ad83eebbf05aec549b85cb2e9b91fbe5f881f7d382d58c",
+    "src/world-generation/WetLowlands.ts": "30a65ee94921148fb99243c74e68014f5b4e77af2f4773de9794bf4f3a0ac8ff",
+    "src/world-generation/WorldBlueprint.ts": "ad0aba3a126e7a7ece3ba03316bf6d4250a8a940451041172cc5729f10cdc036",
+    "src/world/BuildingPlot.ts": "b2848f022c605712a8dc2b993834debacf2b8b31967f3390680ea9f8145ba444",
+    "src/world/HomeLightGeometry.ts": "792f34f32f141de37a06560877b2a67c98e7f73d4ed9712b126376042fa36bfe",
+    "src/world/HomeLighting.ts": "b3c58a5442aff4ea76a8b1692e1150be257437ea59bb515c9cae75f4f7837ad2",
+    "src/world/SettlementLayout.ts": "cad1c7e988136c674411983777264102dc3674631d743c6fb9d4bdb44868bc5a"
+  },
+  "afterInputs": {
+    "pnpm-lock.yaml": "c427b14c241c9f628ac5989c85086625a49a53ba515e5acdb2387764a5aae313",
+    "src/config/FjordWaterConfig.ts": "84ac55e55e074e21924d421cd38a87b190132ad2d828255d075720519e51dbb0",
+    "src/config/GroundBlendConfig.ts": "0a5b3425ffeb3a3aed0e75b9ff7bd4f42c6544819ffd5dcd6e61d21bf1ca7139",
+    "src/config/HousingAssets.ts": "0e662c8bcfb83ed2877aee89ede17284128be52fda1cd271248609410c85d3e4",
+    "src/config/ModelTextureAssets.ts": "07179a305c6b1d20c1d5f03dfac73e4efdcad8737a536ac6ee6af850c19d4f05",
+    "src/config/NatureAssets.ts": "00b801b9f21109b5f3281b54e5b271bebc70f426f5397853b90bb2e0c9994d5d",
+    "src/config/PresentationQuality.ts": "de46e365b9bf86acb4e7c5a7e7559fd469bc05554761a51ee8ef30c181e50cbc",
+    "src/config/TerrainAssets.ts": "9ed1cb6b179fdebe1389dc504c28ed76499fd0f1f93950d4fbd90dc4de974680",
+    "src/config/lightingConfig.ts": "90a8db233c0c90aabee248d27c2bef1ff3fec3fe7070b8aac97010d07aea2b86",
+    "src/config/worldConfig.ts": "e3cd430e0aed4f4747537fa49d87001c9427992ce7ba1abbfc655e28f3f819d9",
+    "src/core/AssetManager.ts": "b971feaa38f494ac507520373e43c1adf850f0ad19c79f3cd1b39947348aa446",
+    "src/core/EmissiveSurfaces.ts": "84d0f0a693d46437e0ec2521b1c4459655bce542d6d368531faeb9fa17789f6e",
+    "src/fjord-play/CampaignIsland.ts": "9fbe79ce43ea258e664c68d70d5deaf4161e345c7897936abaffb3a7f78fb9d2",
+    "src/fjord-play/VillageNature.ts": "dc21173c545ef3e41760e3fe6f56eb02cf3ff0f9bd307835a322ce1a3996bfce",
+    "src/world-generation/CoastDistance.ts": "17140651ce9f6fbd9a6a6e90bc0dc17852e545ba346c9dbe0895dee9a9a48c3a",
+    "src/world-generation/EnvironmentZoning.ts": "595b2fa6bcb09eaa8cd338ea458182d7cbbcf5fedaa19e5b96b31583fc6c11d1",
+    "src/world-generation/GenerateWorld.ts": "08eb9d43ff175a4cd459b22b6151da4b320c287c5f32eb987976055245de9e7e",
+    "src/world-generation/GenerationProfile.ts": "8e1ec235eee0f3c790aecc9c56b59cf438fd7a1d8e202f63bc762b91732f08ac",
+    "src/world-generation/HarborClearance.ts": "aa94e539f26f87e12e035ef330eaafe9f210052882023dfff8ee1ffe569382a3",
+    "src/world-generation/IslandDrainage.ts": "23d942617898a3e2e95aaf72f456cfa2923ac653d128724cc6187e038c9dc1f1",
+    "src/world-generation/IslandDrainageV1.ts": "db8df81b48637512ce0122072e5928c55845a7e0417c074bac34ac296107aa16",
+    "src/world-generation/IslandShape.ts": "9da05b4325c3dce7ec3329dde917a30f8e12a5563130b6bf04dd059d67d2aae4",
+    "src/world-generation/IslandShapeQuality.ts": "cc29d38e123307e71b3e1fb0a76bb1b80e9407dcf8f79f81321341a82d2282f0",
+    "src/world-generation/IslandShapeV1.ts": "b06dd485ccdd82f27ba64f678006cf905cd9d85a0e997e574b0e972b1072c473",
+    "src/world-generation/LandRoutes.ts": "062388811fea5214d08445d986b8f9b72ee3ffb342c015755c0f4e995afdbe66",
+    "src/world-generation/MacroIsland.ts": "4804a88cc9a2a79dd5d661b42faa8c319e19ad3b278b11956becd3f6ab81c5be",
+    "src/world-generation/NatureFootprints.ts": "96f3fbaf8a90414f0ccc7a69725d674600900329ff13e8d05bd739b84f88c37c",
+    "src/world-generation/OreSites.ts": "780d57a15fcf7b0b51ce9d6db2719d7407857ddc02ac5d961d644eaa6351084a",
+    "src/world-generation/PineFootprints.ts": "1bf6253b800cb5f8bd0ebcdb8a4d4ae8bf3ecbaeb98e369dd95025d50b18aba9",
+    "src/world-generation/PlanIslandSettlements.ts": "062ae688044ff372ffed4dc474cef1c8c2b7f2f8ca3d1e966c260ae221c3af5e",
+    "src/world-generation/PlanNature.ts": "101397523f142f362f9dc179c4e107384f9f3eee36d723e329c3926c86597912",
+    "src/world-generation/PlanSettlement.ts": "1ed09e7491de105777d49b0229cc4fedac0d4439fc362f86221d1ee6ac8a5932",
+    "src/world-generation/SettlementCompartments.ts": "c2f844ecc42a11e65dfebef43f3f9f94d97fb433eb0f1d8e904a0c4f8269dc84",
+    "src/world-generation/SettlementSites.ts": "045b92168e2354b1c417a4b4e09cd83f21edb700041a4399eb6070399e5860ee",
+    "src/world-generation/SettlementVisibility.ts": "f1be7a7259398319cd1cb0a18b08ae935368c35c2f8cbd5c20f0af8e21d30122",
+    "src/world-generation/SiteNavigation.ts": "897b6eb741c66dfd58fcda168f58b37bd32fdc5a36943b07185d2decf7bbf4ed",
+    "src/world-generation/TerrainPreview.ts": "e5e8a81d71d4356bbede6cfd4d4f9983dcb935aa76db6a2344a0cc8a17b1df4f",
+    "src/world-generation/TerrainQueries.ts": "8a92207f96388089e440603126c1f029536290eaa9f5ddcd4bf294e38264df54",
+    "src/world-generation/ValidateNavigation.ts": "4bf887833ce8f05026ad83eebbf05aec549b85cb2e9b91fbe5f881f7d382d58c",
+    "src/world-generation/WetLowlands.ts": "30a65ee94921148fb99243c74e68014f5b4e77af2f4773de9794bf4f3a0ac8ff",
+    "src/world-generation/WorldBlueprint.ts": "ad0aba3a126e7a7ece3ba03316bf6d4250a8a940451041172cc5729f10cdc036",
+    "src/world/BuildingPlot.ts": "b2848f022c605712a8dc2b993834debacf2b8b31967f3390680ea9f8145ba444",
+    "src/world/HomeLightGeometry.ts": "792f34f32f141de37a06560877b2a67c98e7f73d4ed9712b126376042fa36bfe",
+    "src/world/HomeLighting.ts": "b3c58a5442aff4ea76a8b1692e1150be257437ea59bb515c9cae75f4f7837ad2",
+    "src/world/SettlementLayout.ts": "cad1c7e988136c674411983777264102dc3674631d743c6fb9d4bdb44868bc5a"
+  },
+  "changedInputs": [
+    "pnpm-lock.yaml"
+  ],
+  "rows": [
+    {
+      "version": "island-pool-v3",
+      "seed": 18,
+      "canonicalSha256": "78a96937455b9fb2c50fa041f5e806c3baf126b9fe860eb004bdac5ef7ba4f79",
+      "unchanged": true
+    },
+    {
+      "version": "island-pool-v3",
+      "seed": 7,
+      "canonicalSha256": "6bcccb9a871df5cf1b1af4b648aeafdf0fddf189d236446ad1e884f51d36be8c",
+      "unchanged": true
+    },
+    {
+      "version": "island-pool-v3",
+      "seed": 15,
+      "canonicalSha256": "8aacf2797a1ab6a2fd9b99cfa29ba4cb0d886410e9c47d10c0c762ced6469867",
+      "unchanged": true
+    },
+    {
+      "version": "island-pool-v3",
+      "seed": 79,
+      "canonicalSha256": "0c1e5a5c229de75c14e3a1527e70fc1b1ddafb64f3410bf821ebd597faf55e95",
+      "unchanged": true
+    },
+    {
+      "version": "island-pool-v3",
+      "seed": 88,
+      "canonicalSha256": "0934c44a53408e0dfe6b367313c11f97a2fba741409d124f60f7ad45d60e81f8",
+      "unchanged": true
+    },
+    {
+      "version": "island-pool-v3",
+      "seed": 101,
+      "canonicalSha256": "7de87397eeb199d6f46fa0e6c184ef0e31e6d28d218aba59c9dd51ea0656a208",
+      "unchanged": true
+    },
+    {
+      "version": "island-pool-v3",
+      "seed": 112,
+      "canonicalSha256": "f3368e9c931e700cd7babbbeef2fb6e0b69c679b669627dc5834facfa345128c",
+      "unchanged": true
+    },
+    {
+      "version": "island-pool-v3",
+      "seed": 168,
+      "canonicalSha256": "a71a1906e3afe9618213865cec9ec3a8229be3d06f2e5a09897d7f438898d7a9",
+      "unchanged": true
+    },
+    {
+      "version": "island-pool-v3",
+      "seed": 195,
+      "canonicalSha256": "e238e4407b455ba65b4899b86857c5a6ce6c4e9cdd50610a40ade7c61ad22a91",
+      "unchanged": true
+    },
+    {
+      "version": "island-pool-v3",
+      "seed": 227,
+      "canonicalSha256": "ff98e603c4e8221abf3636ade473ee050ee96390ec5ef75c22487a74df5e1deb",
+      "unchanged": true
+    },
+    {
+      "version": "island-pool-v1",
+      "seed": 18,
+      "canonicalSha256": "8ffa0c69b03d174c0c2d931184d4c73deb73cf0d951b703037cddc6062ee146b",
+      "unchanged": true
+    },
+    {
+      "version": "island-pool-v1",
+      "seed": 7,
+      "canonicalSha256": "c9bf0343274e49065387cf18effdda291764bf727a6cae1dab10db78eeea39a8",
+      "unchanged": true
+    },
+    {
+      "version": "island-pool-v2",
+      "seed": 18,
+      "canonicalSha256": "39b090270b29b060afafd84eb76cab06beec31aa96629881edcdd14ea1bcee92",
+      "unchanged": true
+    },
+    {
+      "version": "island-pool-v2",
+      "seed": 7,
+      "canonicalSha256": "a9e773bbe719b1573e30b96703b8c67a4a098f3c7e935ed1fafcc9b5a8b5b645",
+      "unchanged": true
+    }
+  ]
+}
