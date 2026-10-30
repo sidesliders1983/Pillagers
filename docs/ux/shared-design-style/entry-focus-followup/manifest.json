@@ -1,0 +1,96 @@
+{
+  "application_code_commit": "a52d8d184b4e667dde4f07ed1aa330c72faec40f",
+  "sources": [
+    {
+      "path": "src/fjord-play/CampaignEntryMenu.ts",
+      "sha256_git_bytes": "0be945135be26977b966c3ff0e9aa26a896e5340c30423bdc04ba4a68fc9f42d"
+    },
+    {
+      "path": "src/fjord-play/start-screen-theme.css",
+      "sha256_git_bytes": "318b8c2b7118009349eb66fe39f33d1fb35e86d23867a72d128e7b25bee1acbb"
+    },
+    {
+      "path": "tests/player-menu-entry.test.mjs",
+      "sha256_git_bytes": "a61b3084dbea41e7c2798c0c6911099355c03d052afc8d3e7d09e47d9c88a035"
+    },
+    {
+      "path": "scripts/qa/check-start-screen.mjs",
+      "sha256_git_bytes": "940a141243bd034219f48c0d9c1d87624e4aba6c98c89008ef2d5070360005a8"
+    },
+    {
+      "path": "scripts/qa/check-entry-focus.mjs",
+      "sha256_git_bytes": "71f9ffb38bb4a6d78939c5331ff716464882628093ef419b6f6a4def4bbcc0ff"
+    },
+    {
+      "path": "docs/DESIGN-STYLE.md",
+      "sha256_git_bytes": "011e90ef217ed687c69074ace209025f0ee04080bc69120d5dfc3271917f9948"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "after.json",
+      "bytes": 1820,
+      "sha256": "e01ce9a87a25055c29052217e6f382d8428878d196a91cfa4d603ad0cd41b395"
+    },
+    {
+      "path": "before.json",
+      "bytes": 1182,
+      "sha256": "87eb6238f2adc5e5bef041e07afeca3b9cd02a0230761e7cf2cc8fa73402adc6"
+    },
+    {
+      "path": "build-identity.json",
+      "bytes": 211,
+      "sha256": "3e33859ec9e106b15cd652af8903bbb5f7aeaed88338b7665afad05424ff598e"
+    },
+    {
+      "path": "build.txt",
+      "bytes": 6923,
+      "sha256": "3b209c82dbf7aee8ae3759350967c9f06aadcb787c6da559b3ee5d8d353ac506"
+    },
+    {
+      "path": "desktop-home.jpg",
+      "bytes": 243054,
+      "sha256": "cd168de0c9abcfa71c231b5711e6c6af6013db6af760f99831beb14b1821b6f5"
+    },
+    {
+      "path": "desktop-new.jpg",
+      "bytes": 242550,
+      "sha256": "4bd40ca830519a552e425bb3db659082025a3e2f8ec2cfc8a90b4e7212d74272"
+    },
+    {
+      "path": "entry-matrix.json",
+      "bytes": 37301,
+      "sha256": "f69837c568d2c32b7072f1b6b623936d04e3b525b479a307c1af30adf4d883a0"
+    },
+    {
+      "path": "keyboard-action.jpg",
+      "bytes": 172442,
+      "sha256": "868026e0ede41067de39a263836cf312298a586bb4245cddfe716e85da57811b"
+    },
+    {
+      "path": "portrait-touch-home.jpg",
+      "bytes": 61073,
+      "sha256": "0a887b69ba7a914fcec0ca4704c41f05f98562eb23416dde87335b577c800e6f"
+    },
+    {
+      "path": "portrait-touch-new.jpg",
+      "bytes": 59491,
+      "sha256": "0b1e23963aca3873f8af99543d65e4c4b4c64adca99e5201c16323275cc2b7de"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2102,
+      "sha256": "78da641e03438348a39908591d7cf2fe0507dff133675b79bb4e9d8dab1f666c"
+    },
+    {
+      "path": "returning-neutral.jpg",
+      "bytes": 165960,
+      "sha256": "638fb0ffe79ceaecc00979371eaf4d1e246d0320c4d2959455617d11fdfeefc6"
+    },
+    {
+      "path": "tests.txt",
+      "bytes": 1037,
+      "sha256": "b091bd0b3d9676e922739431261b541f690506c9923a81aa6ee2cc8a08177aad"
+    }
+  ]
+}

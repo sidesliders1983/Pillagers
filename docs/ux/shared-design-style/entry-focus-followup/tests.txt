@@ -1,0 +1,17 @@
+✔ entry is read-only until a confirmed choice is ready; cancel and repeated clicks are safe (4762.5359ms)
+✔ failed assets and quota retry the same attempt, protecting saves and exposing export (1944.3879ms)
+✔ fresh entry has no invented save; leaving fences late activation (319.3066ms)
+✔ a changed active session fences a stale loaded campaign before any write (4412.4519ms)
+✔ the game menu prioritizes session actions and retains setting values when returning and closing (609.6952ms)
+✔ New game offers a fresh arrival and founding replay without requiring a seed choice (70.7865ms)
+✔ feedback links require an owner-configured HTTPS destination and add no campaign data (169.2567ms)
+✔ a first arrival can find New game and Load game without navigating technical choices (6596.8972ms)
+✔ returning players see their campaign date, can inspect seed details, and cancel a replacement safely (5274.7871ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 18852.4085
