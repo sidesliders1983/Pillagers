@@ -1,12 +1,12 @@
 # Expedition menu — clickable design study
 
-30 October 2026. **Prototype only; owner review is pending.** No expedition UI, Core, save format, balance or default has been changed. PR #314 and main remain untouched.
+30 October 2026. **Prototype only; A is the owner's preferred structure. Implementation has not started.** No expedition UI, Core, save format, balance or default has been changed. PR #314 and main remain untouched.
 
 Question: which structure makes it easiest to choose a group, understand its costs, issue a valid order, and understand where that group actually ended up?
 
 ## Open and compare
 
-- [LAN preview](http://192.168.68.100:5194/expedition-menu.prototype.html?variant=B).
+- [LAN preview](http://192.168.68.100:5194/expedition-menu.prototype.html?variant=A).
 - [A — Guided preparation](expedition-menu.prototype.html?variant=A): a focused crew → supplies → destination sequence.
 - [B — Groups & tasks](expedition-menu.prototype.html?variant=B): a persistent group list beside the selected group's current task. Fewer step transitions; more information together.
 - [C — Map & orders](expedition-menu.prototype.html?variant=C): known-place pins and a compact order sheet; crew editing is secondary.
@@ -57,8 +57,8 @@ The prototype has no automated/unit test suite and was not added to CI. These ar
 
 ![Map-first landscape concept](evidence/prototype-review-final/touch-C.jpg)
 
-## Review decision — not yet made
+## Review decision — A preferred
 
-Suggested comparison: can you find (1) who is going and the Food cost, (2) why Recon is unavailable while the group is away, and (3) what to do after a blocked journey? B is a reasonable starting point for comparison because group state remains visible, but no winning layout is declared. It is valid to combine A's preparation steps with B's overview or C's order sheet.
+The owner selected A as the preferred structure: a guided crew → supplies → destination sequence. [Decision and scope](review-decision.md) preserve that feedback. B and C remain as comparison material; no hybrid was requested. This preference does not establish that all edge cases or physical-device behavior have been approved.
 
-Only after the owner's prototype feedback should an implementation proposal be scoped. #299's existing R01 concerns truthful outcome presentation. The broader menu study follows the owner's new request; it does not silently authorize all of #299 or make the separate M01 return-route defect disappear. No PR, merge, main update or Sites publication is performed for this throwaway design branch.
+A is now the design basis for a bounded implementation proposal. Production implementation is a separate next step; this commit records the preference only. #299's existing R01 concerns truthful outcome presentation. The broader menu study follows the owner's new request; it does not silently authorize all of #299 or make the separate M01 return-route defect disappear. No PR, merge, main update or Sites publication is performed for this throwaway design branch.

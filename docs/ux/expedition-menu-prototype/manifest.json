@@ -1,6 +1,6 @@
 {
   "prototype_only": true,
-  "owner_review": "pending",
+  "owner_review": "Variant A preferred on 2026-10-30; preference recorded, implementation not started",
   "base_commit": "4bbb0e96ccc9bd3c206ecc8d6e6928771e62286a",
   "observed_application_code": "7dfb602dff63f49a8445008d2ea14fd6f0cda2b8",
   "original_main_baseline": "4086baac26c6953b879b439546b68f2406ca767a",
@@ -235,8 +235,13 @@
     },
     {
       "path": "README.md",
-      "bytes": 8393,
-      "sha256": "24ef02bdb329d5a9ef9fa1c62d24e52f0fa6dfbc3800b60edad2744a49bc8750"
+      "bytes": 8469,
+      "sha256": "aa005f02972a9e03273748e6082abf16aa8397ae807095c3f88c39eb73ff61d8"
+    },
+    {
+      "path": "review-decision.md",
+      "bytes": 986,
+      "sha256": "1521280bffc9ff096d006a61db64ba61fec8564345333537f1477946aa5ceb71"
     }
   ],
   "artifact_normalization": "UTF-8 LF; trailing line whitespace removed from captured text; original observer text retained in local scratch/revisions"
