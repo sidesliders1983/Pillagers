@@ -17,7 +17,7 @@ body.fjord-entry::before {
     inset: 0;
     z-index: -1;
     pointer-events: none;
-    background-image: linear-gradient(90deg, rgba(3, 15, 23, .5), transparent 72%),
+    background-image: linear-gradient(90deg, rgba(3, 15, 23, .65), transparent 72%),
         url('/branding/fjordside/start/fjordside-twilight-1280.webp');
     background-size: cover;
     background-position: center;
@@ -144,7 +144,7 @@ body.fjord-entry #campaign-recovery :is(input, label) { display: block; max-widt
 body.fjord-entry #campaign-recovery input { padding: 8px 0; }
 body.fjord-entry #campaign-recovery input::file-selector-button { min-height: 44px; font: inherit; cursor: pointer; }
 @media (min-width: 1100px) {
-    body.fjord-entry::before { background-image: linear-gradient(90deg, rgba(3, 15, 23, .5), transparent 72%), url('/branding/fjordside/start/fjordside-twilight-2560.webp'); }
+    body.fjord-entry::before { background-image: linear-gradient(90deg, rgba(3, 15, 23, .65), transparent 72%), url('/branding/fjordside/start/fjordside-twilight-2560.webp'); }
 }
 @media (max-width: 699px) {
     body.fjord-entry::before { background-position: 57% center; background-image: linear-gradient(180deg, #03121d66, transparent 48%), url('/branding/fjordside/start/fjordside-twilight-1280.webp'); }
