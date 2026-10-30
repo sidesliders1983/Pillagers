@@ -32,6 +32,20 @@ async function verifyEntry(directory, entry) {
     return bytes;
 }
 
+// Entry artwork is decorative and uses bounded same-source derivatives.
+const startArt = await json('branding/fjordside/start/manifest.json');
+for (const entry of startArt.files) {
+    assert.match(entry.filename, /^[\w.-]+\.webp$/, 'Start artwork must be a local WebP.');
+    const bytes = await readFile(resolve(root, 'branding/fjordside/start', entry.filename));
+    assert.equal(bytes.length, entry.bytes, 'Start artwork bytes');
+    assert.equal(sha256(bytes), entry.sha256, 'Start artwork hash');
+    const metadata = await sharp(bytes).metadata();
+    assert.equal(metadata.width, entry.width);
+    assert.equal(metadata.height, entry.height);
+    assert.ok(entry.width <= startArt.source.width, 'Start artwork must not be enlarged.');
+    assert.ok(bytes.length < 512 * 1024, 'Start artwork exceeds its download budget.');
+}
+
 const houses = await json('game-assets/houses/manifest.json');
 for (const [key, file] of Object.entries(generatedHouseFiles)) {
     assert.equal(houses.assets[key]?.file, file, 'Missing house publication: ' + key);

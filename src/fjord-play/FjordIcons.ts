@@ -1,6 +1,7 @@
 import type { Occupation } from '../simulation/SimulationCore';
 
 const paths = {
+    settings: 'M10 2h4l1 3 3-1 2 3-2 2 2 3-2 3-3-1-1 3h-4l-1-3-3 1-2-3 2-3-2-2 2-3 3 1 1-3Zm2 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z',
     map: 'm2 5 6-3 8 3 6-3v17l-6 3-8-3-6 3V5Zm6-3v17m8-14v17',
     food: 'M12 21V4M12 7C5 8 4 3 5 2c4 0 7 1 7 5Zm0 5c7 0 8-4 7-6-4 0-7 2-7 6Zm0 5c-7 0-8-4-7-6 4 0 7 2 7 6Z',
     materials: 'm3 8 6-4 12 5-6 4L3 8Zm0 0v7l12 5 6-4V9M9 4v7m6 2v7M3 12l12 5 6-4',

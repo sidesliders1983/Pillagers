@@ -1,0 +1,34 @@
+{
+  "source": {
+    "description": "Owner-selected generated twilight fjord artwork, supplied as an upscale on 2026-10-30. Decorative branding, not a saved-settlement screenshot.",
+    "filename": "upscalemedia-transformed (3).png",
+    "width": 3344,
+    "height": 1882,
+    "bytes": 9249975,
+    "sha256": "f30358104ab57e32bf870b31282139fca98e64a0b89382a0274316f8991dcdb1",
+    "supersedes": "The earlier 1672px master reference in issue #315; latest explicit owner-supplied source.",
+    "native4K": false
+  },
+  "recipe": {
+    "format": "WebP",
+    "quality": 84,
+    "effort": 6,
+    "fit": "preserve aspect ratio; no enlargement"
+  },
+  "files": [
+    {
+      "filename": "fjordside-twilight-1280.webp",
+      "width": 1280,
+      "height": 720,
+      "bytes": 173572,
+      "sha256": "29628a5c10d2ae96682c12fd988fc5ce90f621bcd6422ab51e98d1586fd91a2e"
+    },
+    {
+      "filename": "fjordside-twilight-2560.webp",
+      "width": 2560,
+      "height": 1441,
+      "bytes": 405640,
+      "sha256": "f98fbdc7b71d694b92cba873b05cb67065945d39b24889927b558886c7c522e3"
+    }
+  ]
+}

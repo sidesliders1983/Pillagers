@@ -1,5 +1,33 @@
 import './player-menu.css';
+import { icon, type FjordIcon } from './FjordIcons';
 import { playerFeedbackLinkHTML } from './PlayerFeedback';
+
+/** Decorative cards retain the existing buttons, accessible names and event owners. */
+function decorateAction(button: HTMLElement, label: string, glyph: FjordIcon, description?: string) {
+    button.classList.add('entry-menu-action');
+    button.setAttribute('aria-label', label);
+    const mark = document.createElement('span');
+    mark.className = 'entry-action-icon';
+    mark.setAttribute('aria-hidden', 'true');
+    mark.innerHTML = icon(glyph);
+    const copy = document.createElement('span');
+    copy.className = 'entry-action-copy';
+    const title = document.createElement('span');
+    title.textContent = label;
+    copy.append(title);
+    if (description) {
+        const hint = document.createElement('small');
+        hint.id = 'entry-' + label.toLowerCase().replace(/[^a-z]+/g, '-') + '-description';
+        hint.textContent = description;
+        button.setAttribute('aria-describedby', hint.id);
+        copy.append(hint);
+        const arrow = document.createElement('span');
+        arrow.className = 'entry-action-arrow';
+        arrow.setAttribute('aria-hidden', 'true');
+        arrow.textContent = '›';
+        button.replaceChildren(mark, copy, arrow);
+    } else button.replaceChildren(mark, copy);
+}
 
 /** Reuses the entry owner's existing actions; navigation never prepares or activates a campaign. */
 export function organizeCampaignEntry(
@@ -66,6 +94,12 @@ export function organizeCampaignEntry(
     newMenuButton.type = 'button';
     newMenuButton.dataset.startView = 'new';
     newMenuButton.textContent = 'New game';
+    decorateAction(continueButton, 'Continue campaign', 'ship', 'Return to your saved settlement.');
+    decorateAction(newMenuButton, 'New game', 'work', 'Start a new settlement.');
+    decorateAction(loadButton, 'Load game', 'book', 'Open a saved campaign or file.');
+    decorateAction(panels.querySelector<HTMLElement>('[data-start-view="settings"]')!, 'Settings', 'settings');
+    decorateAction(panels.querySelector<HTMLElement>('[data-start-view="help"]')!, 'Help & support', 'help');
+    (continueButton.hidden ? newMenuButton : continueButton).classList.add('entry-menu-primary');
     panels.querySelector('[data-start-primary]')!.append(continueButton, newMenuButton, loadButton);
     panels.querySelector('[data-start-choices]')!.append(newButton, replayButton, replayReason, rules);
     panels.querySelector('[data-start-audio]')!.append(audio);

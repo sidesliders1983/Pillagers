@@ -5,6 +5,7 @@ import { readRecoverySources, type RecoveryCandidate } from '../play/SettlementR
 import { chooseSettlementRecovery } from './CampaignRecovery';
 import { projectFjordCalendar } from './FjordCalendar';
 import './campaign-start.css';
+import './start-screen-theme.css';
 import { lastIslandLoad } from './IslandLoadStatus';
 import { LoadingRunDiagnostics } from './LoadingRunDiagnostics';
 import { PlaytestPerformance } from './PlaytestPerformance';

@@ -13,7 +13,7 @@ function available(element) {
 }
 function button(label) {
     return [...document.querySelectorAll('button')].find(element =>
-        available(element) && element.textContent.trim() === label);
+        available(element) && (element.getAttribute('aria-label') ?? element.textContent.trim()) === label);
 }
 async function entry(run, saved = null) {
     const dom = new JSDOM('<!doctype html>', { url: 'http://localhost/fjord-play', pretendToBeVisual: true });
