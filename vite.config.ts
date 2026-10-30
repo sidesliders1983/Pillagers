@@ -10,7 +10,7 @@ export default defineConfig(({ command }) => {
         define: {
             'globalThis.__FJORD_BUILD__': JSON.stringify(buildInfo.legacyBuild),
             'globalThis.__FJORD_BUILD_INFO__': JSON.stringify(buildInfo),
-            'globalThis.__FJORD_FEEDBACK_URL__': JSON.stringify(process.env.FJORD_FEEDBACK_URL ?? ''),
+            'globalThis.__FJORD_FEEDBACK_URL__': JSON.stringify(buildInfo.configuration?.feedbackURL ?? ''),
         },
         optimizeDeps: {
             entries: [

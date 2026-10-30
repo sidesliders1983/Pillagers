@@ -11,6 +11,7 @@ export interface GameBuildInfo {
     readonly buildId: string;
     readonly builtAt: string | null;
     readonly legacyBuild: string;
+    readonly configuration?: Readonly<{ feedbackURL: string }>;
     readonly versionTag?: string;
     readonly inputHash?: string;
     readonly source: Readonly<{ commit: string | null; dirty: boolean | null;
@@ -27,6 +28,7 @@ const fallback: GameBuildInfo = { schemaVersion: 1, ...describeGameVersion(gameV
 const identity = (globalThis as BuildGlobals).__FJORD_BUILD_INFO__ ?? fallback;
 Object.freeze(identity.source);
 if (identity.sequence) Object.freeze(identity.sequence);
+if (identity.configuration) Object.freeze(identity.configuration);
 Object.freeze(identity);
 
 /** The loaded bundle owns this identity, even when a server later hosts a newer manifest. */

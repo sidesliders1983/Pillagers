@@ -115,7 +115,9 @@ test('local, preview, retry and concurrent builds cannot borrow an unrelated off
     const development = resolveBuildInfo(first.sourceDirectory, { mode: 'serve' });
     assert.equal(development.origin, 'local');
     assert.equal(development.buildNumber, null);
-    assert.equal(development.source.dirty, true);
+    assert.equal(development.source.dirty, false, 'Clean prepared source stays clean in development');
+    writeFileSync(join(first.sourceDirectory, 'src/main.ts'), '// changed development source');
+    assert.equal(resolveBuildInfo(first.sourceDirectory, { mode: 'serve' }).source.dirty, true);
     const child = join(root, 'export-without-provenance');
     mkdirSync(child);
     writeFileSync(join(child, 'game-version.json'), JSON.stringify({ version: '0.1.0-alpha' }));
@@ -141,4 +143,26 @@ test('an export without usable provenance stays explicitly unknown for local use
     assert.equal(local.buildNumber, null);
     assert.equal(local.source.commit, null);
     assert.equal(local.legacyBuild, 'unidentified-source');
+});
+
+test('the prepared artifact freezes public feedback configuration before Vite compilation', async () => {
+    const { root, commit } = fixture();
+    const env = { ...workflow(commit, 58), FJORD_FEEDBACK_URL: 'https://feedback.example.test/alpha' };
+    const prepared = prepareAlphaSource(root, resolve(root, '../configuration'), env);
+    assert.equal(prepared.buildInfo.configuration.feedbackURL, 'https://feedback.example.test/alpha');
+    const { loadConfigFromFile } = await import('vite');
+    const configPath = resolve('vite.config.ts');
+    const before = process.cwd();
+    const oldURL = process.env.FJORD_FEEDBACK_URL;
+    try {
+        process.chdir(prepared.sourceDirectory);
+        process.env.FJORD_FEEDBACK_URL = 'https://other.example.test/changed-later';
+        const loaded = await loadConfigFromFile({ command: 'build', mode: 'production' }, configPath);
+        assert.equal(JSON.parse(loaded.config.define['globalThis.__FJORD_FEEDBACK_URL__']), 'https://feedback.example.test/alpha');
+        assert.equal(JSON.parse(loaded.config.define['globalThis.__FJORD_BUILD_INFO__']).buildId, prepared.buildInfo.buildId);
+    } finally {
+        process.chdir(before);
+        if (oldURL === undefined) delete process.env.FJORD_FEEDBACK_URL;
+        else process.env.FJORD_FEEDBACK_URL = oldURL;
+    }
 });

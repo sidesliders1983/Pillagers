@@ -1,8 +1,6 @@
 # Alpha identity #320 — executed evidence
 
-Application revision: **9d9d9c83303773ad47e9800da6b3aaa31d36a305**. Later changes
-in this PR retain QA code, evidence and documentation; runtime application code is
-unchanged. No merge, tag, release or Sites deployment was performed.
+Original application revision: **9d9d9c83303773ad47e9800da6b3aaa31d36a305**. The retained two-artifact browser matrix below describes that exact revision. Subsequent review hardening and the owner-reported gear correction are recorded separately below; the original receipts are preserved. No merge, tag, release or Sites deployment was performed.
 
 ## Real numbered artifacts
 
@@ -89,3 +87,28 @@ PLAYWRIGHT_MODULE to the installed Playwright package, and run
 `node scripts/qa/check-alpha-build-320.mjs`.
 The script uses a private browser context, an ephemeral loopback server and
 ignored bounded evidence output on D:. Large downloaded artifacts stay ignored.
+
+## Review and owner-feedback follow-up
+
+The owner reported the Settings glyph looked vertically misaligned. Browser
+measurement found the outer vector at (12, 9.5) inside the 24×24 viewBox, while
+the hole and viewBox were centred at (12, 12). The SVG element was already centred
+in its button. A symmetric eight-tooth outline now shares the hole's centre.
+[Before](gear/before.jpg) / [after](gear/after.jpg), [before metric](gear/before.json)
+/ [after metric](gear/after.json): vector centre offset changed from -2.5 SVG units
+to rounding noise (<0.000001), control offset stays zero. Settings navigation
+passed. This is a code-native SVG fix, with existing colours, styles and owner.
+
+Review also corrected clean prepared dev source being marked dirty, and froze
+the public feedback configuration at preparation rather than reading ambient
+values during later Vite compilation. Both have red/green public-boundary
+receipts. The [updated focused run](targeted-review-fixes.txt) passed 24 tests,
+zero failures/skips, and build/assets/TypeScript passed. Full output and source
+identity of the updated numbered preview are added to the PR after CI; old
+artifacts 1/2 retain their original identity and metadata.
+
+To keep artifact storage bounded, ordinary branch pushes no longer produce
+another 326 MiB game artifact. Main pushes and explicitly labelled alpha-preview
+PRs still package automatically; manual dispatch is available after main integration.
+Character contracts remains mandatory and unfiltered. This changes the trigger
+policy of the same Alpha package sequence, not its authority or past run numbers.

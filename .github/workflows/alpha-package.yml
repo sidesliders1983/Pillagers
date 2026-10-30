@@ -1,12 +1,15 @@
 name: Alpha package
 on:
   push:
+    branches: [main]
   pull_request:
+    types: [opened, synchronize, reopened, labeled]
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
   package:
+    if: ${{ github.event_name != 'pull_request' || contains(github.event.pull_request.labels.*.name, 'alpha-preview') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

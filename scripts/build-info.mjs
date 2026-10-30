@@ -67,42 +67,43 @@ export function inputHash(root) {
     return hash.digest('hex');
 }
 
+function compileConfiguration(environment) {
+    try {
+        const url = new URL(environment.FJORD_FEEDBACK_URL);
+        if (url.protocol === 'https:' && !url.username && !url.password) return { feedbackURL: url.href };
+    } catch { /* An absent/invalid destination has the existing no-feedback-link behavior. */ }
+    return { feedbackURL: '' };
+}
+
 function positive(value) {
     return typeof value === 'string' && /^[1-9][0-9]*$/.test(value) && Number.isSafeInteger(Number(value));
 }
 
 function verifyStamp(root, info, source) {
-    const version = publicVersion(root);
-    if (info.schemaVersion !== 1 || info.version !== version.version || info.channel !== version.channel
-        || info.displayVersion !== version.displayVersion || !['distributable', 'preview'].includes(info.origin)
-        || !Number.isSafeInteger(info.buildNumber) || info.buildNumber < 1
-        || info.sequence?.authority !== alphaAuthority || !positive(info.sequence?.runId)
-        || !Number.isSafeInteger(info.sequence?.attempt) || info.sequence.attempt < 1
-        || info.buildId !== 'alpha-' + info.sequence.runId + '-' + info.sequence.attempt
-        || info.versionTag !== info.version + '+build.' + info.buildNumber + '.attempt.' + info.sequence.attempt
-        || info.legacyBuild !== info.source.commit + (info.source.branch === 'main' ? '-sites-main' : '')
-        || !Number.isFinite(Date.parse(info.builtAt)) || !info.builtAt.endsWith('Z')
-        || info.source?.commit !== source.commit || info.source?.dirty !== false
-        || info.source?.branch !== source.branch || info.source?.provenance !== 'sites-export'
-        || (info.origin === 'distributable' && source.branch !== 'main')
-        || info.inputHash !== inputHash(root))
+    artifactIdentity(info, { commit: source.commit, version: publicVersion(root).version });
+    if (info.source.commit !== source.commit || info.source.branch !== source.branch
+        || !info.configuration || info.inputHash !== inputHash(root))
         throw new Error('Numbered build stamp does not match this source: build inputs or identity changed.');
     return info;
 }
 
 /** Resolve once per Vite build. Serve mode cannot inherit an official number from edited source. */
-export function resolveBuildInfo(root, { now = new Date().toISOString(), mode = 'build' } = {}) {
+export function resolveBuildInfo(root, { now = new Date().toISOString(), mode = 'build', environment = process.env } = {}) {
     const version = publicVersion(root);
     const source = exportedSource(root) ?? gitSource(root);
     const stampPath = join(root, '.fjord-build.json');
     if (existsSync(stampPath) && mode !== 'serve')
         return verifyStamp(root, JSON.parse(readFileSync(stampPath, 'utf8')), source);
-    if (existsSync(stampPath)) source.dirty = true;
-    const identity = createHash('sha256').update(JSON.stringify({ source, now, version })).digest('hex');
+    if (existsSync(stampPath)) {
+        try { source.dirty = JSON.parse(readFileSync(stampPath, 'utf8')).inputHash !== inputHash(root); }
+        catch { source.dirty = true; }
+    }
+    const configuration = compileConfiguration(environment);
+    const identity = createHash('sha256').update(JSON.stringify({ source, now, version, configuration })).digest('hex');
     const legacyBuild = source.commit ? source.commit + (source.dirty ? '-dirty' :
         source.provenance === 'sites-export' && source.branch === 'main' ? '-sites-main' : '') : 'unidentified-source';
     return { schemaVersion: 1, ...version, origin: 'local', buildNumber: null,
-        buildId: 'local-' + identity.slice(0, 20), builtAt: now, source, legacyBuild };
+        buildId: 'local-' + identity.slice(0, 20), builtAt: now, source, legacyBuild, configuration };
 }
 
 /** The same committed entry transform is used by CI and fresh-main Sites validation. */
@@ -143,7 +144,7 @@ export function prepareAlphaSource(repositoryRoot, outputParent, env = process.e
     const provenance = { repository: 'https://github.com/sidesliders1983/Pillagers.git', branch,
         commit: source.commit, entry_route: '/fjord-play', routes: ['/', '/fjord-play'] };
     writeFileSync(join(sourceDirectory, '.sites-main.json'), JSON.stringify(provenance, null, 2) + '\n');
-    const info = { ...resolveBuildInfo(sourceDirectory), source: { ...exportedSource(sourceDirectory), dirty: false },
+    const info = { ...resolveBuildInfo(sourceDirectory, { environment: env }), source: { ...exportedSource(sourceDirectory), dirty: false },
         origin: branch === 'main' && env.GITHUB_EVENT_NAME !== 'pull_request' ? 'distributable' : 'preview',
         buildNumber: Number(env.GITHUB_RUN_NUMBER), buildId: 'alpha-' + env.GITHUB_RUN_ID + '-' + env.GITHUB_RUN_ATTEMPT,
         sequence: { authority: alphaAuthority, runId: env.GITHUB_RUN_ID, attempt: Number(env.GITHUB_RUN_ATTEMPT) },
@@ -179,11 +180,15 @@ function artifactIdentity(info, expected) {
         || info.sequence?.authority !== alphaAuthority || !positive(info.sequence?.runId)
         || !Number.isSafeInteger(info.sequence?.attempt) || info.sequence.attempt < 1
         || info.buildId !== 'alpha-' + info.sequence.runId + '-' + info.sequence.attempt
+        || info.versionTag !== info.version + '+build.' + info.buildNumber + '.attempt.' + info.sequence.attempt
+        || info.legacyBuild !== info.source.commit + (info.source.branch === 'main' ? '-sites-main' : '')
         || !/^[a-f0-9]{64}$/.test(info.inputHash) || !Number.isFinite(Date.parse(info.builtAt))
         || !info.builtAt.endsWith('Z')
         || (expected.commit && expected.commit !== info.source.commit)
         || (expected.version && expected.version !== info.version)
-        || (expected.distributable && info.origin !== 'distributable'))
+        || (info.configuration !== undefined && (typeof info.configuration.feedbackURL !== 'string'
+            || info.configuration.feedbackURL !== compileConfiguration({ FJORD_FEEDBACK_URL: info.configuration.feedbackURL }).feedbackURL))
+        || (expected.distributable && (info.origin !== 'distributable' || !info.configuration)))
         throw new Error('Alpha artifact source/build identity does not match the requested commit or version.');
 }
 

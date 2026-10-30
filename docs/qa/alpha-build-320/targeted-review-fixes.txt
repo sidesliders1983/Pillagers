@@ -1,0 +1,32 @@
+✔ a published prepared binding reproduces the exact omitted JSON without reading the original URL (74.0853ms)
+✔ a missing, corrupt or substituted prepared binding cannot remove the original publication (6.3622ms)
+✔ a runtime that falls back to the omitted JSON fails publication (2.1114ms)
+✔ publication rejects stale source identities and paths outside the reviewed binding directories (2.2486ms)
+✔ a normal local build identifies its own source and the deliberate public version (2537.3673ms)
+✔ the designated packaging sequence binds a number and attempt to the exported source (2702.7119ms)
+✔ a sealed artifact can be rehosted unchanged and rejects substituted bytes or a different source (3070.3867ms)
+✔ the compiled accessor reports its own artifact and ignores a newer server manifest (8109.439ms)
+✔ local, preview, retry and concurrent builds cannot borrow an unrelated official identity (7175.4699ms)
+✔ an export without usable provenance stays explicitly unknown for local use (1703.1538ms)
+✔ the prepared artifact freezes public feedback configuration before Vite compilation (2197.5144ms)
+✔ diagnostic loading records browser resources, model work and nested spans, then disconnects (11.5445ms)
+✔ diagnostic records are bounded and failed preparation never reports a playable island (72.3354ms)
+✔ unsupported observers and cancellation remain downloadable, without invented CPU or cache evidence (2.1031ms)
+✔ saved-campaign diagnostics auto-download a report, allow manual export, and never activate storage (12456.1646ms)
+✔ new diagnostic scenarios skip replacement, export failures, and retry with a fresh recorder on the same seed (1133.9023ms)
+✔ the touch diagnostic view is opt-in, bounded, freezeable and offers selectable export on HTTP (8632.3496ms)
+✔ the real campaign entry offers performance settings before opening a campaign (3211.6687ms)
+✔ the game menu prioritizes session actions and retains setting values when returning and closing (2677.6706ms)
+✔ New game offers a fresh arrival and founding replay without requiring a seed choice (311.3218ms)
+✔ feedback links require an owner-configured HTTPS destination and add no campaign data (604.4495ms)
+✔ a first arrival can find New game and Load game without navigating technical choices (11332.9286ms)
+✔ returning players see their campaign date, can inspect seed details, and cancel a replacement safely (1507.9021ms)
+✔ the public version stays below the brand and agrees with About and diagnostics without activating a save (105.2943ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 27898.5976

@@ -15,17 +15,19 @@ The **Alpha package** workflow, `.github/workflows/alpha-package.yml`, is the on
 allocator. GitHub's `GITHUB_RUN_NUMBER` is its sequence; it starts with that
 workflow's first run. It is not the Character contracts counter, a commit count,
 a PR number, the Sites version number or browser storage. Failed attempts may
-leave gaps. `GITHUB_RUN_ID` and `GITHUB_RUN_ATTEMPT` form the unique build ID
+leave gaps. Unselected optional preview runs also leave gaps. `GITHUB_RUN_ID` and `GITHUB_RUN_ATTEMPT` form the unique build ID
 `alpha-<run ID>-<attempt>`. A retry keeps the sequence number and changes its
 attempt/ID; distinct concurrent runs get different numbers and IDs. The friendly
 label also shows the attempt when greater than one. This follows the
 [GitHub variable contract](https://docs.github.com/en/actions/reference/workflows-and-actions/variables).
 
-Push/PR builds produce artifacts; **nothing in this workflow tags, releases,
+Main pushes, manual runs and opt-in PR previews (label `alpha-preview`) produce artifacts; **nothing in this workflow tags, releases,
 merges or deploys**. Only a clean main push/manual main run produces a
 `distributable` origin. Other refs, including PR merge revisions, say
 `preview build N`. Character contracts remains the validation authority; all
 checks for the exact current main must pass before publication.
+
+Only main is packaged automatically on push. Other branch pushes do not upload a large game artifact. Add the `alpha-preview` PR label to request a numbered preview (this PR uses it), or use workflow_dispatch after the workflow is on main. The full Character contracts validation still runs on every push/PR; preview selection never bypasses it.
 
 The workflow runs these steps on its actual checkout, never whichever main is
 latest later:
@@ -42,6 +44,8 @@ latest later:
 4. The workflow uploads `fjordside-alpha-<number>-<attempt>` for 14 days.
    Retain a downloaded artifact when longer archival is needed. An expired
    artifact requires a new workflow attempt, not a guessed old build number.
+
+The prepared record freezes the existing public feedback destination before Vite reads it; changing the surrounding environment later cannot produce different configured bytes under the same stamp. Invalid/non-public destinations keep the existing no-link behavior. Clean prepared source in dev mode is local and clean; edited source is local and dirty. Historical preview records without configuration remain readable, while new numbered source requires the captured configuration.
 
 The record includes public version/channel, number/origin, ID, full actual SHA,
 clean/dirty/unknown provenance, input SHA-256, UTC build time and sequence attempt.
