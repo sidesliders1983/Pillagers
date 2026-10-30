@@ -1,0 +1,8 @@
+{
+  "expected": "Approved static twilight backdrop without game setup",
+  "status": "failed",
+  "images": [],
+  "canStart": true,
+  "canvasCount": 0,
+  "failure": "AssertionError [ERR_ASSERTION]: The approved decorative backdrop is requested by the start screen"
+}
