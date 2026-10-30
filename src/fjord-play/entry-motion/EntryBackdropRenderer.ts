@@ -11,6 +11,7 @@ export interface EntryBackdrop {
 
 /** One decorative quad. No game renderer, model, audio, clock or simulation imports. */
 export function createEntryBackdrop(onFailure: () => void): EntryBackdrop {
+    if (typeof createImageBitmap !== 'function') throw new Error('Decorative decoding unavailable.');
     const layer = document.createElement('div');
     layer.className = 'entry-motion-layer';
     layer.setAttribute('aria-hidden', 'true');
@@ -22,7 +23,7 @@ export function createEntryBackdrop(onFailure: () => void): EntryBackdrop {
         gl = canvas.getContext('webgl', { alpha: true, antialias: false, depth: false,
             stencil: false, premultipliedAlpha: false, powerPreference: 'low-power' });
     } catch { gl = null; }
-    if (!gl || typeof createImageBitmap !== 'function') {
+    if (!gl) {
         layer.remove();
         throw new Error('Decorative rendering unavailable.');
     }

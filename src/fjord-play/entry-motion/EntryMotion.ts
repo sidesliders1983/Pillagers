@@ -12,7 +12,13 @@ export class EntryMotion {
     private readonly queries = [
         '(min-width: 1100px)', '(hover: hover) and (pointer: fine)',
         '(prefers-reduced-motion: no-preference)',
-    ].map(value => typeof window.matchMedia === 'function' ? window.matchMedia(value) : undefined);
+    ].map(value => {
+        if (typeof window.matchMedia !== 'function') return undefined;
+        try {
+            const query = window.matchMedia(value);
+            return typeof query.addEventListener === 'function' ? query : undefined;
+        } catch { return undefined; }
+    });
     private renderer?: EntryBackdrop;
     private enabled = true;
     private active = false;
