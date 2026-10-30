@@ -574,6 +574,7 @@ export class ExpeditionPanel {
         const group = groups.find(candidate => candidate.id === this.groupId);
         const missions = inspectSpatialExpeditions(state).missions;
         const mission = missions.find(candidate => candidate.groupId === this.groupId && candidate.status !== 'Returned');
+        this.root.dataset.expeditionStep = this.view === 'places' ? 'places' : mission ? 'journey' : this.preparationStep;
         if (this.choosing && (!mission || mission.status === 'Stranded')) this.clearTarget();
         this.renderToolbar(group, mission, groups.filter(candidate => activeGroups.has(candidate.id)));
         if (!open) return;

@@ -63,3 +63,15 @@
         padding-bottom: 8px;
     }
 }
+
+/* Keep a reachable exit when the Horizon task sheet scrolls through preparation. */
+#fjord-play #fjord-workspace[data-surface="expeditions"] .fjord-workspace-heading {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    background: var(--fjord-panel);
+}
+#expedition-panel[data-expedition-step="supplies"] .fjord-expedition-intro,
+#expedition-panel[data-expedition-step="supplies"] .fjord-expedition-groups {
+    display: none;
+}
