@@ -1,0 +1,159 @@
+{
+  "status": "passed",
+  "browser": "156.0.8078.74",
+  "physicalDevice": false,
+  "builds": [
+    {
+      "schemaVersion": 1,
+      "version": "0.1.0-alpha",
+      "channel": "alpha",
+      "displayVersion": "v0.1 alpha",
+      "origin": "preview",
+      "buildNumber": 1,
+      "buildId": "alpha-41040333720-1",
+      "builtAt": "2026-10-30T10:23:44.186Z",
+      "source": {
+        "commit": "9d9d9c83303773ad47e9800da6b3aaa31d36a305",
+        "dirty": false,
+        "provenance": "sites-export",
+        "branch": "codex/alpha-build-identity-320"
+      },
+      "legacyBuild": "9d9d9c83303773ad47e9800da6b3aaa31d36a305",
+      "sequence": {
+        "authority": "sidesliders1983/Pillagers/.github/workflows/alpha-package.yml",
+        "runId": "41040333720",
+        "attempt": 1
+      },
+      "inputHash": "0320cf6875e669201e46b1499f7651115893f2c0ca27adab806ddaa2ccc8310d",
+      "versionTag": "0.1.0-alpha+build.1.attempt.1"
+    },
+    {
+      "schemaVersion": 1,
+      "version": "0.1.0-alpha",
+      "channel": "alpha",
+      "displayVersion": "v0.1 alpha",
+      "origin": "preview",
+      "buildNumber": 2,
+      "buildId": "alpha-41040478274-1",
+      "builtAt": "2026-10-30T10:24:46.541Z",
+      "source": {
+        "commit": "ff96726cb943f9b1e5c11693b92a02e854981a7e",
+        "dirty": false,
+        "provenance": "sites-export",
+        "branch": "refs/pull/321/merge"
+      },
+      "legacyBuild": "ff96726cb943f9b1e5c11693b92a02e854981a7e",
+      "sequence": {
+        "authority": "sidesliders1983/Pillagers/.github/workflows/alpha-package.yml",
+        "runId": "41040478274",
+        "attempt": 1
+      },
+      "inputHash": "3c3caa8480f779a016249ddba391d23d1ad94a3cc53fc3abadfd06fa8585a376",
+      "versionTag": "0.1.0-alpha+build.2.attempt.1"
+    }
+  ],
+  "cases": [
+    {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "touchEmulation": false,
+      "geometry": {
+        "titleBottom": 127.03125,
+        "labelTop": 134.03125,
+        "labelBottom": 155.03125,
+        "width": 1440,
+        "font": "14px",
+        "color": "rgb(200, 214, 220)",
+        "text": "v0.1 alpha · preview build 1"
+      },
+      "importAndReloadStable": true,
+      "noWorldOrVersionFetch": true
+    },
+    {
+      "name": "wide",
+      "width": 1920,
+      "height": 1080,
+      "touchEmulation": false,
+      "geometry": {
+        "titleBottom": 130.390625,
+        "labelTop": 137.390625,
+        "labelBottom": 158.390625,
+        "width": 1920,
+        "font": "14px",
+        "color": "rgb(200, 214, 220)",
+        "text": "v0.1 alpha · preview build 1"
+      },
+      "importAndReloadStable": true,
+      "noWorldOrVersionFetch": true
+    },
+    {
+      "name": "phone",
+      "width": 390,
+      "height": 844,
+      "touchEmulation": true,
+      "geometry": {
+        "titleBottom": 87.4375,
+        "labelTop": 94.4375,
+        "labelBottom": 115.4375,
+        "width": 390,
+        "font": "14px",
+        "color": "rgb(200, 214, 220)",
+        "text": "v0.1 alpha · preview build 1"
+      },
+      "importAndReloadStable": true,
+      "noWorldOrVersionFetch": true
+    },
+    {
+      "name": "short-landscape",
+      "width": 844,
+      "height": 390,
+      "touchEmulation": true,
+      "geometry": {
+        "titleBottom": 170,
+        "labelTop": 177,
+        "labelBottom": 198,
+        "width": 844,
+        "font": "14px",
+        "color": "rgb(200, 214, 220)",
+        "text": "v0.1 alpha · preview build 1"
+      },
+      "importAndReloadStable": true,
+      "noWorldOrVersionFetch": true
+    },
+    {
+      "name": "tablet",
+      "width": 768,
+      "height": 1024,
+      "touchEmulation": true,
+      "geometry": {
+        "titleBottom": 105.1875,
+        "labelTop": 112.1875,
+        "labelBottom": 133.1875,
+        "width": 768,
+        "font": "14px",
+        "color": "rgb(200, 214, 220)",
+        "text": "v0.1 alpha · preview build 1"
+      },
+      "importAndReloadStable": true,
+      "noWorldOrVersionFetch": true
+    },
+    {
+      "name": "Actual game, About, performance/loading exports and paused campaign",
+      "sameEmbeddedInfo": true,
+      "canonicalCampaignUnchanged": true,
+      "clockPaused": true
+    },
+    {
+      "name": "Two real numbered artifacts and old loaded bundle/new server",
+      "numbers": [
+        1,
+        2
+      ],
+      "oldBundleRetainedItsOwnIdentity": true,
+      "reloadUsesNewArtifact": true
+    }
+  ],
+  "errors": [],
+  "badResponses": []
+}

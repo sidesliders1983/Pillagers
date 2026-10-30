@@ -1,0 +1,29 @@
+✔ a first arrival can find New game and Load game without navigating technical choices (6516.8387ms)
+✔ returning players see their campaign date, can inspect seed details, and cancel a replacement safely (990.4629ms)
+✖ the public version stays below the brand and agrees with About and diagnostics without activating a save (60.7274ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 2
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12714.2169
+
+✖ failing tests:
+
+test at tests\player-menu-entry.test.mjs:85:1
+✖ the public version stays below the brand and agrees with About and diagnostics without activating a save (60.7274ms)
+  AssertionError [ERR_ASSERTION]: The brand includes a selectable version line
+      at file:///D:/CodexSites/Pillagers/scratch/alpha-build-identity-320/tests/player-menu-entry.test.mjs:88:16
+      at entry (file:///D:/CodexSites/Pillagers/scratch/alpha-build-identity-320/tests/player-menu-entry.test.mjs:31:33)
+      at async TestContext.<anonymous> (file:///D:/CodexSites/Pillagers/scratch/alpha-build-identity-320/tests/player-menu-entry.test.mjs:86:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

@@ -13,7 +13,8 @@ function fixture() {
     mkdirSync(join(root, 'src'));
     writeFileSync(join(root, 'src/main.ts'), "const route = location.pathname;\nif (route === '/fjord-play') {\n import('./fjord-play/FjordEntry');\n} else if (route === '/lab') {}\n");
     const git = (...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8', stdio: 'pipe' }).trim();
-    git('init', '-b', 'main');
+    git('init');
+    git('symbolic-ref', 'HEAD', 'refs/heads/main');
     git('-c', 'user.name=Build test', '-c', 'user.email=build@example.invalid', 'add', '.');
     git('-c', 'user.name=Build test', '-c', 'user.email=build@example.invalid', 'commit', '-m', 'Test source');
     return { root, git, commit: git('rev-parse', 'HEAD') };

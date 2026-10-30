@@ -1,0 +1,18 @@
+✔ a published prepared binding reproduces the exact omitted JSON without reading the original URL (59.5786ms)
+✔ a missing, corrupt or substituted prepared binding cannot remove the original publication (3.6226ms)
+✔ a runtime that falls back to the omitted JSON fails publication (1.2103ms)
+✔ publication rejects stale source identities and paths outside the reviewed binding directories (1.7886ms)
+✔ a normal local build identifies its own source and the deliberate public version (1392.0184ms)
+✔ the designated packaging sequence binds a number and attempt to the exported source (1822.2255ms)
+✔ a sealed artifact can be rehosted unchanged and rejects substituted bytes or a different source (2106.1303ms)
+✔ the compiled accessor reports its own artifact and ignores a newer server manifest (3109.3154ms)
+✔ local, preview, retry and concurrent builds cannot borrow an unrelated official identity (5660.3089ms)
+✔ an export without usable provenance stays explicitly unknown for local use (1640.7743ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 16077.7388

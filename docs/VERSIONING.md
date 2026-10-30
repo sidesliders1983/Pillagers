@@ -49,6 +49,8 @@ clean/dirty/unknown provenance, input SHA-256, UTC build time and sequence attem
 content hash or save-compatibility claim. The output inventory provides byte
 verification; select artifacts from the trusted exact workflow/run as well.
 
+The first two real allocations are preview builds 1 and 2; [executed evidence](qa/alpha-build-320/README.md) records their actual runs, source revisions and screenshots. No official main alpha has been published by this issue.
+
 ## Local builds
 
 Use the existing pnpm 10 commands: `pnpm dev`, `pnpm run build`, then
