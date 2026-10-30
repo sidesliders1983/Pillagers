@@ -1,0 +1,40 @@
+Summer
+800
+Food
+7
+Materials
+5
+Residents
+10
+Livestock
+3
+Paused
+Expedition · 10 min
+1 min per year
+3 min per year
+5 min per year
+Expedition · 10 min / 1,000 ticks
++1 Year
+EXPLORATION MODE
+Group 1
+Clock paused
+Choose a destination
+
+Choose walkable land or the longship. Drag to pan · scroll to zoom · Esc to cancel.
+
+Exploration supplies
+100%
+≈ 20m 00s exploration remaining Supplies for the journey home are reserved.
+Cancel
+Show group
+
+No extra Food charged. Travel, exploration and the return share this pack.
+
+Settlement
+Clan Book
+Need help?
+Expeditions
+Map
+Group 1
+Attention
+2

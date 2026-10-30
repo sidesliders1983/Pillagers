@@ -1,0 +1,108 @@
+Summer
+800
+Food
+15
+Materials
+5
+Residents
+10
+Livestock
+3
+Paused
+3 min per year
+1 min per year
+3 min per year
+5 min per year
+Expedition · 10 min / 1,000 ticks
++1 Year
+Expeditions
+×
+
+Prepare a crew. Place a flag. Discover your island.
+
+New group
+Group 1
+2 residents
+Crew
+Destination
+Explore & return
+Group 1
+At home
+Choose your crew
+2 selected
+Hallmund Eiriksson
+Fisher
+Kauppi
+Farmer
+Minvydė
+Farmer
+Vaigirdė
+Farmer
+Áila
+Hunter
+Kauko
+Farmer
+Aodhán
+Farmer
+Vaivydė
+Fisher
+Thorfrid Ketilsdóttir
+Farmer
+Eadric
+Fisher
+Test supplies
+Prepare supplies
+Food is confirmed before packing
+Prepare expedition
+
+Start Expedition needs 16 Food (15 available).
+
+Disband group
+Island missions
+
+Separate missions depart from home. Explore first to map possible destinations.
+
+Mission group
+Create a group above
+Group 1
+Recon mapped area
+Pillage equipment
+
+Assign existing gear to named residents at home. Craft stock through a Smith or Leatherworker's home.
+
+Hallmund Eiriksson
+Weapon
+None
+Wooden Spear (0 stored)
+Shield
+None
+Wooden Shield (0 stored)
+Leather-reinforced Shield (0 stored)
+Kauppi
+Weapon
+None
+Wooden Spear (0 stored)
+Shield
+None
+Wooden Shield (0 stored)
+Leather-reinforced Shield (0 stored)
+
+Success: 60% · 0/2 spear holders
+
+Shields protect only their wearer. Casualty risk per member:
+
+Hallmund Eiriksson · 10% · No shield
+
+Kauppi · 10% · No shield
+
+Known places
+
+No settlement has been sighted.
+
+Settlement
+Clan Book
+Need help?
+Expeditions
+Map
+Attention
+2

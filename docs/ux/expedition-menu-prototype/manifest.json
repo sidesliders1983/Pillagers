@@ -1,0 +1,243 @@
+{
+  "prototype_only": true,
+  "owner_review": "pending",
+  "base_commit": "4bbb0e96ccc9bd3c206ecc8d6e6928771e62286a",
+  "observed_application_code": "7dfb602dff63f49a8445008d2ea14fd6f0cda2b8",
+  "original_main_baseline": "4086baac26c6953b879b439546b68f2406ca767a",
+  "fixture_seed": 3802174487,
+  "browser": "156.0.8078.74",
+  "physical_device": false,
+  "sources": [
+    {
+      "path": "src/fjord-play/ExpeditionPanel.ts",
+      "sha256_git_bytes": "bd2deaf1067008afa3312e496d5fd4c9e7f4da7f9a92e0e14787d634de8e5949"
+    },
+    {
+      "path": "src/fjord-play/IslandMissionPanel.ts",
+      "sha256_git_bytes": "d4d2d0283910cf55179b138d62539f13db075d84d8076fcf43f7f1e490f52588"
+    },
+    {
+      "path": "src/simulation/SpatialExpeditions.ts",
+      "sha256_git_bytes": "3f085a6ead18cd862da9f58313c4aa06590ce0c203e6847f7b661a466e41f99a"
+    },
+    {
+      "path": "src/simulation/IslandMissions.ts",
+      "sha256_git_bytes": "41ba71132aac34d355ebfe9ca0682bbcfb3424ff3ba0233b763b9956a8773469"
+    },
+    {
+      "path": "src/simulation/WorldExpeditions.ts",
+      "sha256_git_bytes": "1045d13ac8197f1eb55e76b68faa0d45965e0e63cb39fb4ae50e53d89ef340b9"
+    },
+    {
+      "path": "src/fjord-play/MobileShell.ts",
+      "sha256_git_bytes": "b45b653b1547676f64c977199f1275b48239141f41e5e645f33530b1ef6b811b"
+    },
+    {
+      "path": "src/fjord-play/FjordInterface.ts",
+      "sha256_git_bytes": "e06c5f3e3bfa6cde05ce89da574e291d3c77c63c7ef4f82c1189379ab483a345"
+    },
+    {
+      "path": "src/lore/Chronicle.ts",
+      "sha256_git_bytes": "d511cf3b3e01b97b99de552d1942507b3d9be1ccfa78fd1a4534ce9fd974095d"
+    },
+    {
+      "path": "src/lore/AttentionHistory.ts",
+      "sha256_git_bytes": "36aa676eaeeef1803c62ad25a6272523837017dbec8e30d63c5a227fe463ce8e"
+    }
+  ],
+  "walkthrough_events": 18,
+  "prototype_html_sha256": "b3ac044e09712bd3b7a9393c4ccb70639bc0b41e546ddbe5677d1fbf2a9bf13e",
+  "artifacts": [
+    {
+      "path": ".gitattributes",
+      "bytes": 73,
+      "sha256": "cc2f99ee934fd087f50143576b4b434026d2481f2c01a3bc2115041ee6418496"
+    },
+    {
+      "path": "evidence/current-run-3/01-current-empty.jpg",
+      "bytes": 140167,
+      "sha256": "aad31ddc046b961d640ad7e2032135188149da00ef419b37e8223aed06f78b7f"
+    },
+    {
+      "path": "evidence/current-run-3/01-current-empty.txt",
+      "bytes": 680,
+      "sha256": "609146787e9672f60d848a30e974bb37a87ccff295da8242efca8764e09608b2"
+    },
+    {
+      "path": "evidence/current-run-3/02-current-insufficient.jpg",
+      "bytes": 142233,
+      "sha256": "7aeb60bd59803b196e545f5a067b3c38cce49324c8e5c631c6627c39df983865"
+    },
+    {
+      "path": "evidence/current-run-3/02-current-insufficient.txt",
+      "bytes": 1463,
+      "sha256": "7ff5d255168a4a941e795704a642ce9d31657432a09e153a5a8b770ff3d7a595"
+    },
+    {
+      "path": "evidence/current-run-3/03-current-pack-review.jpg",
+      "bytes": 86744,
+      "sha256": "bc2f70745d279124ebad13f8ecff5ce19692da75bc79f92bb47712afa7dad5b8"
+    },
+    {
+      "path": "evidence/current-run-3/03-current-pack-review.txt",
+      "bytes": 1576,
+      "sha256": "ce68a1f1a8d87c327699704660e5f36103afd121af5cd88f310a504e7b814576"
+    },
+    {
+      "path": "evidence/current-run-3/04-current-target-controls.jpg",
+      "bytes": 171266,
+      "sha256": "f029f6698b9cda09a30baa84a37be76f79b5bf132a0e0e80febb8accb169c11d"
+    },
+    {
+      "path": "evidence/current-run-3/04-current-target-controls.txt",
+      "bytes": 585,
+      "sha256": "e4a6802f3cb256968b6e06ec5b70f42e59a51fdb149fffaa3e778c8f6a10c5e1"
+    },
+    {
+      "path": "evidence/current-run-3/05-current-prepared-after-map-cancel.jpg",
+      "bytes": 152089,
+      "sha256": "4d809617d2e5e65b63cc9bbf66b7121d430ad59b675686ece64b6864ece4dbcc"
+    },
+    {
+      "path": "evidence/current-run-3/05-current-prepared-after-map-cancel.txt",
+      "bytes": 1499,
+      "sha256": "0900d128b8d4aaaa057fa53f858dd50a309a4e8fd16e00af6c7c78eceae91531"
+    },
+    {
+      "path": "evidence/current-run-3/canvas-context.jpg",
+      "bytes": 183335,
+      "sha256": "7b6194dde26297847e5a94ade275ff6d701c28b656d9727bc88f82a16f5bfe73"
+    },
+    {
+      "path": "evidence/current-run-3/observations.json",
+      "bytes": 8852,
+      "sha256": "13465866b032c5f74382716b114c0951ec9cce8707d0795c8b26867e9053cde1"
+    },
+    {
+      "path": "evidence/current-run-3/world-context.jpg",
+      "bytes": 172577,
+      "sha256": "3908b92fe42bbd3d352622dbebf374e0a2fca47a9156d7fed76dd965a1e760fb"
+    },
+    {
+      "path": "evidence/prototype-review-final/cancel-map-keeps-paid-pack.jpg",
+      "bytes": 183505,
+      "sha256": "84611ac9ce99f0d19c0debb0964bb5fa8d6bb7e8371c2cfc752cffdbd01bbe10"
+    },
+    {
+      "path": "evidence/prototype-review-final/close-reopen-keeps-clock.jpg",
+      "bytes": 175539,
+      "sha256": "be05c00d0d106e74da2231e8afb0db98a9235dcf91e6203e2925d0e4cfb355a8"
+    },
+    {
+      "path": "evidence/prototype-review-final/desktop-A.jpg",
+      "bytes": 181192,
+      "sha256": "fc0cfd9d1e026af4dd907ed74025b581d29ca2102b3ad6c04ef2684b8c458299"
+    },
+    {
+      "path": "evidence/prototype-review-final/desktop-B.jpg",
+      "bytes": 156084,
+      "sha256": "1198f1d7cbdad907892fe69c434efa64f4d00f3821990bada31dbb6204ad60e7"
+    },
+    {
+      "path": "evidence/prototype-review-final/desktop-C.jpg",
+      "bytes": 170897,
+      "sha256": "46ca7d37e88f7ef844f88b34c72b902172544943e8fc7d082c6c48e8d63e46f4"
+    },
+    {
+      "path": "evidence/prototype-review-final/early-return-not-success.jpg",
+      "bytes": 179553,
+      "sha256": "7216fc2442251ac399b7052824fda9ea1e0386d0f1cbf085b5746ad3038918fe"
+    },
+    {
+      "path": "evidence/prototype-review-final/file-and-disband.json",
+      "bytes": 728,
+      "sha256": "8bb98b0cf27cc979d8f330b5c1c2876c090bf3d1fec73576b890fe51520aad78"
+    },
+    {
+      "path": "evidence/prototype-review-final/home-after-example-return.jpg",
+      "bytes": 179958,
+      "sha256": "df56bf27280b8d232b4622d7d7c48d84344abcc7f864957c597f5ee76d2d1866"
+    },
+    {
+      "path": "evidence/prototype-review-final/invalid-map-point.jpg",
+      "bytes": 197663,
+      "sha256": "e69fc9ce2c7fd3c52e05860bb5069acc3d60b6b10f076aab952713a2de94ae94"
+    },
+    {
+      "path": "evidence/prototype-review-final/map-order-is-next.jpg",
+      "bytes": 193349,
+      "sha256": "e74a56f70641ac32f2063c5ca1229b0398e633cec26cc82bda67302def3ed5ec"
+    },
+    {
+      "path": "evidence/prototype-review-final/pack-back-keeps-food.jpg",
+      "bytes": 176462,
+      "sha256": "1435cf44745cf8593af4bc6d4012ea35c1cdc88977068efde3960ea857d598f9"
+    },
+    {
+      "path": "evidence/prototype-review-final/returned-recon-unlocks-missions.jpg",
+      "bytes": 179445,
+      "sha256": "3561edfae9ee095803183be99003b0fa45f63ae8d572c84ec06d411efd0478d0"
+    },
+    {
+      "path": "evidence/prototype-review-final/sighted-away-recon-blocked.jpg",
+      "bytes": 192829,
+      "sha256": "54c90829789c62a52cab2739ed02c51c62c1fc14524fc0a2e0acf554e074a439"
+    },
+    {
+      "path": "evidence/prototype-review-final/stranded-no-fake-rescue.jpg",
+      "bytes": 184772,
+      "sha256": "0bcc13b9eb88850bfa2373a9604b83e591770b9f886347450b0a7a3ff07ec2ac"
+    },
+    {
+      "path": "evidence/prototype-review-final/touch-A.jpg",
+      "bytes": 52126,
+      "sha256": "bdafd19b2eef7ecc5229a19e55f776064479c9e576e444b451ca398a65cd9ac4"
+    },
+    {
+      "path": "evidence/prototype-review-final/touch-B.jpg",
+      "bytes": 46847,
+      "sha256": "01d912e148ded70745efa4d947606edb5930db34a77caea1e779e0060cecb2d4"
+    },
+    {
+      "path": "evidence/prototype-review-final/touch-C.jpg",
+      "bytes": 52345,
+      "sha256": "b34a52fc83a2c7ec32feefbfd86594e4f44bf08cf644a114adf990e260663754"
+    },
+    {
+      "path": "evidence/prototype-review-final/touch-stranded-C.jpg",
+      "bytes": 55607,
+      "sha256": "ea3d3127fd911b941f1328bb6b168979325a42f45e9d6d14ac1ca12778177c8f"
+    },
+    {
+      "path": "evidence/prototype-review-final/travel-no-second-charge.jpg",
+      "bytes": 178491,
+      "sha256": "6b1a1a47419b538d286b27c0cb395227bd04bbd8433755cddb45ec8f61f02974"
+    },
+    {
+      "path": "evidence/prototype-review-final/two-residents-one-food-short.jpg",
+      "bytes": 184941,
+      "sha256": "d0be1e2a444801eb8aba26f3c967b997ade4501999930e014cd8af885a0f8ad4"
+    },
+    {
+      "path": "evidence/prototype-review-final/walkthrough.json",
+      "bytes": 5043,
+      "sha256": "92ff2bddb9c8c8dc6771134b5ae83b456586896f56183e3b3d1ec55bbfd54193"
+    },
+    {
+      "path": "expedition-menu.prototype.html",
+      "bytes": 37070,
+      "sha256": "b3ac044e09712bd3b7a9393c4ccb70639bc0b41e546ddbe5677d1fbf2a9bf13e"
+    },
+    {
+      "path": "journey-empathy-maps.md",
+      "bytes": 6675,
+      "sha256": "0e73f86e87cfa127b5f55f1776cff7d1e85c2d9f2f7f2318bbff3159a4ad1068"
+    },
+    {
+      "path": "README.md",
+      "bytes": 8393,
+      "sha256": "24ef02bdb329d5a9ef9fa1c62d24e52f0fa6dfbc3800b60edad2744a49bc8750"
+    }
+  ],
+  "artifact_normalization": "UTF-8 LF; trailing line whitespace removed from captured text; original observer text retained in local scratch/revisions"
+}

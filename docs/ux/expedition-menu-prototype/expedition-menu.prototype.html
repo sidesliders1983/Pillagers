@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FjordSide · Expedition menu prototype</title>
+<style>
+:root { color-scheme: dark; --ink:#f3eedb; --muted:#bdc9c3; --gold:#e4c77f; --line:#62746b; --panel:rgba(19,40,42,.97); font:15px/1.45 system-ui,sans-serif; }
+* { box-sizing:border-box; }
+body { margin:0; background:#12272c; color:var(--ink); }
+button, select, input { font:inherit; }
+button, select { min-height:44px; color:inherit; border:1px solid var(--line); background:#294144; border-radius:5px; padding:9px 13px; }
+button { cursor:pointer; }
+button:hover:not(:disabled) { background:#3c5352; border-color:var(--gold); }
+button:disabled { opacity:.53; cursor:not-allowed; }
+button:focus-visible, select:focus-visible, input:focus-visible { outline:3px solid var(--gold); outline-offset:3px; }
+button.primary { background:#d8bf7c; color:#192e30; border-color:#f4d994; font-weight:700; }
+h1,h2,h3 { font-family:Georgia,serif; margin:0 0 10px; line-height:1.15; }
+h1 { font-size:27px; } h2 { font-size:23px; } h3 { font-size:19px; }
+p { margin:9px 0; } small,.muted { color:var(--muted); } small { display:block; font-size:12px; }
+.eyebrow { font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); }
+.review { padding:9px 18px; background:#162a39; border-bottom:1px solid #6c8b97; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.review strong { font-size:13px; } .review p { font-size:12px; margin:2px 0; } .review label { font-size:12px; }
+.review select { margin-left:8px; max-width:270px; }
+.scene { height:calc(100dvh - 133px); min-height:330px; position:relative; overflow:hidden; isolation:isolate; background:#345048 url('evidence/current-run-3/canvas-context.jpg') center/cover; }
+.scene:before { content:""; position:absolute; inset:0; background:linear-gradient(180deg,#0b1c1e60,transparent 45%,#091a1c40); z-index:-1; }
+.hud { position:absolute; top:12px; left:12px; right:12px; min-height:55px; padding:9px 14px; display:flex; align-items:center; justify-content:space-between; gap:12px; background:var(--panel); border:1px solid var(--line); border-radius:6px; z-index:1; }
+.hud .stocks { display:flex; gap:22px; } .hud strong { color:var(--gold); }
+.nav { position:absolute; bottom:12px; left:12px; display:flex; gap:4px; padding:5px; background:var(--panel); border:1px solid var(--line); border-radius:5px; z-index:2; }
+.nav button[aria-pressed=true] { border-color:var(--gold); color:var(--gold); }
+.workspace { position:absolute; top:82px; bottom:79px; right:18px; width:min(620px,calc(100% - 36px)); display:flex; flex-direction:column; background:var(--panel); border:1px solid var(--line); border-radius:7px; box-shadow:0 12px 38px #06131970; z-index:2; }
+.workspace header { display:flex; justify-content:space-between; align-items:center; padding:16px 20px; border-bottom:1px solid var(--line); gap:12px; }
+.workspace header h1 { margin:0; } .content { padding:18px 20px; overflow:auto; min-height:0; scrollbar-gutter:stable; }
+.actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; } .actions>* { flex:1; min-width:max-content; }
+.status { border:1px solid #728d78; background:#354b3a; padding:12px; border-radius:5px; margin:12px 0; }
+.warning { border-color:#b79a61; background:#4b402c; } .danger { border-color:#b58573; background:#4b3430; }
+.pill { border:1px solid #8a946f; border-radius:20px; padding:4px 9px; color:#e6dbb6; font-size:12px; display:inline-block; }
+.section { padding:15px 0; border-top:1px solid #536763; margin-top:14px; }
+.steps { display:flex; list-style:none; padding:0; margin:0 0 20px; gap:6px; font-size:12px; }
+.steps li { flex:1; border-bottom:2px solid #4e625d; padding:6px 0; color:var(--muted); }
+.steps li.active { color:var(--gold); border-color:var(--gold); }
+.crew { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:14px 0; }
+.person { border:1px solid #536963; display:flex; align-items:center; gap:10px; padding:10px; border-radius:5px; min-height:62px; }
+.person.selected { border-color:var(--gold); background:#35483c; }
+.person input { width:20px; height:20px; accent-color:var(--gold); } .person strong { font-size:14px; }
+.cost { display:flex; align-items:center; justify-content:space-between; gap:16px; background:#263d3c; border:1px solid var(--line); border-radius:5px; padding:12px 15px; margin:14px 0; }
+.cost b { font-size:25px; color:var(--gold); }
+.groups { display:flex; flex-direction:column; gap:8px; } .group { text-align:left; }
+.group[aria-pressed=true] { border-color:var(--gold); background:#3c4e41; } .group strong { display:block; } .group small { font-size:11px; }
+.tabs { display:flex; gap:6px; margin:0 0 18px; } .tabs button { flex:1; }
+.tabs button[aria-pressed=true] { border-color:var(--gold); color:var(--gold); }
+.vB { left:18px; right:18px; width:auto; max-width:930px; }
+.vB .content { display:grid; grid-template-columns:180px 1fr; gap:20px; }
+.vB .groups { border-right:1px solid var(--line); padding-right:15px; }
+.vC { top:auto; left:18px; right:18px; bottom:79px; width:auto; max-width:900px; max-height:58%; }
+.vC .content { display:grid; grid-template-columns:1fr 1.15fr; gap:24px; } .vC .crew { grid-template-columns:1fr; }
+.vC header { padding:10px 16px; }  .vC header h1 { font-size:21px; }
+.map-surface { position:absolute; inset:78px 18px 85px; z-index:1; pointer-events:none; }
+.map-surface .pin { position:absolute; pointer-events:auto; max-width:220px; box-shadow:0 4px 18px #10202299; }
+.pin.land { top:22%; left:50%; } .pin.cliff { top:9%; left:36%; } .pin.ship { top:7%; left:72%; }
+.pin.settlement { top:18%; left:18%; } .pin.home { bottom:23%; left:27%; }
+.pin.focused { outline:3px solid var(--gold); outline-offset:5px; }
+.map-notice { position:absolute; top:82px; left:18px; width:min(390px,calc(100% - 36px)); background:var(--panel); padding:13px 16px; border:1px solid var(--gold); border-radius:6px; z-index:3; }
+.map-notice p { font-size:13px; } .map-only .map-surface { inset:140px 20px 90px; }
+.map-only .pin.land { left:58%; top:40%; } .map-only .pin.ship { left:75%; top:15%; }
+.map-only .pin.cliff { left:34%; top:23%; } .map-only .pin.settlement { left:20%; top:20%; }
+.journal { border-left:2px solid var(--gold); padding:0 0 0 14px; margin:16px 0; } .journal li { margin:9px 0; list-style:none; }
+progress { width:100%; height:11px; accent-color:#c2cf9a; }
+.dock { position:fixed; bottom:8px; left:50%; transform:translateX(-50%); width:min(980px,calc(100% - 20px)); border-radius:12px; box-shadow:0 6px 25px #0007; min-height:62px; background:#e8dfc9; color:#172c32; display:flex; align-items:center; justify-content:center; gap:12px; padding:8px 14px; z-index:5; }
+.dock button,.dock select { background:#183c4c; color:white; border-color:#466577; } .dock label { font-size:12px; }
+.variant-name { min-width:180px; text-align:center; font-size:13px; } .variant-name strong { display:block; }
+.dock .active-variant { font-size:11px; } .live-state { margin-left:auto; } .live-state summary { cursor:pointer; font-size:12px; }
+.state-panel { position:absolute; bottom:65px; right:12px; background:#f4ecd9; color:#18323a; border:1px solid #a49470; border-radius:5px; width:310px; max-height:65vh; overflow:auto; padding:16px; box-shadow:0 8px 35px #0008; }
+.state-panel dl { display:grid; grid-template-columns:1fr 1fr; font-size:13px; gap:8px; margin:0; } .state-panel dt { font-weight:700; } .state-panel dd { margin:0; }
+.toast { position:absolute; bottom:80px; left:18px; max-width:390px; padding:12px; background:#172e32; border:1px solid var(--gold); border-radius:5px; z-index:4; font-size:13px; } .toast:empty { display:none; }
+dialog { background:#1c3438; color:var(--ink); border:1px solid var(--gold); border-radius:9px; max-width:480px; width:calc(100% - 32px); padding:24px; max-height:85dvh; overflow:auto; }
+dialog::backdrop { background:#07151ac9; } dialog .actions { margin-top:23px; }
+.demo-button { border-style:dashed!important; background:#4f5365!important; color:white!important; }
+.world-note { position:absolute; top:76px; left:18px; font-size:10px; color:#e8e5d7; background:#163235b0; padding:2px 5px; border-radius:3px; }
+.report-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; } .report-grid b { display:block; font-size:20px; }
+#proposal-question { font-size:11px; max-width:520px; } .compact-note { font-size:12px; color:var(--muted); }
+@media(max-height:550px) {
+ .review { padding:5px 12px; min-height:55px; } .review p { display:none; } .review select { min-height:40px; padding:5px; }
+ .scene { height:calc(100dvh - 115px); min-height:250px; }
+ .hud { top:6px; left:8px; right:8px; min-height:44px; padding:3px 10px; font-size:12px; }
+ .hud button { min-height:36px; padding:5px 9px; }
+ .workspace { top:59px; bottom:8px; right:10px; width:min(520px,calc(100% - 20px)); }
+ .workspace header { padding:4px 12px; } .workspace header .eyebrow { display:none; } .scene:has(.workspace) .nav { display:none; } .workspace header h1 { font-size:21px; }
+ .content { padding:12px; } .steps { margin-bottom:8px; } .tabs { margin-bottom:10px; } .workspace header button { min-height:44px; padding:5px 12px; }
+ .nav { bottom:7px; left:8px; padding:3px; } .nav button { min-height:38px; padding:5px 9px; font-size:12px; }
+ .vB { left:10px; max-width:740px; width:auto; } .vB .content { grid-template-columns:140px 1fr; gap:12px; }
+ .vC { top:59px; bottom:8px; left:10px; max-height:none; width:calc(100% - 20px); max-width:720px; }
+ .vA { width:62%; } .vC { left:auto; width:68%; } .vC .content { display:grid; grid-template-columns:130px 1fr; gap:12px; } .vC .crew { grid-template-columns:1fr 1fr; }
+ .map-notice { top:59px; left:10px; padding:8px 12px; } .world-note { top:52px; font-size:9px; }
+ .dock { min-height:60px; padding:6px 10px; gap:8px; } .dock button { min-height:42px; padding:7px 11px; }
+ .map-surface { inset:60px 10px 60px; } .toast { bottom:65px; left:10px; max-width:300px; font-size:11px; padding:7px; }
+ .map-only .map-surface { inset:125px 20px 70px; } .map-only .pin.land { top:35%; }
+}
+@media(max-width:650px) {
+ .review { align-items:flex-start; gap:6px; } .review strong { font-size:12px; } .review label { font-size:11px; }
+ .review select { display:block; margin:3px 0 0; max-width:185px; font-size:12px; } .review p { max-width:230px; }
+ .hud .stocks { gap:12px; } .hud .materials,.hud .livestock { display:none; } .hud { font-size:12px; } .hud button { padding:5px 8px; }
+ .workspace { left:10px; right:10px; width:auto; } .vB .content { display:block; }
+ .vB .groups { flex-direction:row; overflow:auto; border:0; padding:0 0 12px; } .vB .groups button { min-width:110px; }
+ .vC .content { display:block; } .crew { grid-template-columns:1fr; } .variant-name { min-width:135px; }
+ .dock { gap:5px; flex-wrap:wrap; padding:6px; } .live-state { margin-left:4px; }
+ .map-surface .pin { font-size:12px; max-width:170px; } .map-surface .pin.ship { left:65%; }
+ .nav button { font-size:12px; padding:7px; } .nav .other-nav { display:none; } .vC { max-height:62%; }
+}
+</style>
+</head>
+<body>
+<section class="review" aria-label="Prototype review controls">
+ <div><strong>PROTOTYPE · Expedition menu</strong><p id="proposal-question">Which layout makes crew, supplies, orders and outcomes easiest to understand?</p></div>
+ <label>Review situation <select id="scenario" aria-label="Review situation"></select></label>
+</section>
+<main class="scene" id="scene" aria-label="FjordSide expedition prototype">
+ <div class="hud"><span>Summer 800</span><div class="stocks"><span>Food <strong id="food">15</strong></span><span class="materials">Materials <strong>5</strong></span><span>Residents <strong>10</strong></span><span class="livestock">Livestock <strong>3</strong></span></div><button id="clock">▷ Paused</button></div>
+ <span class="world-note">Static game backdrop · all actions use example data</span>
+ <div id="map"></div><div id="view"></div><p class="toast" id="notice" role="status" aria-live="polite"></p>
+ <nav class="nav" aria-label="Game navigation"><button data-action="open" aria-pressed="true">⚑ Expeditions</button><button class="other-nav" data-action="home-focus">⌂ Home</button><button class="other-nav" data-action="reports">▤ Latest report</button></nav>
+</main>
+<footer class="dock" aria-label="Prototype variant switcher">
+ <button id="previous" aria-label="Previous variant">←</button><div class="variant-name"><span class="active-variant">Compare layouts · arrow keys</span><strong id="variant-label"></strong></div><button id="next" aria-label="Next variant">→</button>
+ <label>Demo time <button id="advance" class="demo-button">Advance example</button></label>
+ <details class="live-state"><summary>Review state</summary><div class="state-panel" id="state"></div></details>
+</footer>
+<dialog id="review-dialog" aria-labelledby="review-title"><div id="dialog-content"></div></dialog>
+<script>
+// Three structural UI variants share an illustrative in-memory state.
+// No Simulation Core import, storage, game commands, real routes or network calls.
+const variants = { A:'Guided preparation', B:'Groups & tasks', C:'Map & orders' };
+let variant = new URLSearchParams(location.search).get('variant') || 'A';
+if (!variants[variant]) variant='A';
+const residents = [
+ { id:'p1', name:'Hallmund Eiriksson', age:21, role:'Fisher' },
+ { id:'p2', name:'Kauppi', age:24, role:'Farmer' },
+ { id:'p3', name:'Minvydė', age:31, role:'Farmer' },
+ { id:'p4', name:'Vaigirdė', age:39, role:'Providing childcare', unavailable:true }
+];
+const scenarios = {
+ fresh:'First journey · 15 Food', shortage:'Two residents · not enough Food',
+ exploring:'Exploring · 56% supplies', sighted:'Settlement sighted · group away',
+ recon:'Settlement sighted · group at home', identified:'Identified settlement · mission choices',
+ returned:'Returned early · outward route blocked', stranded:'Stranded · return route blocked',
+ sea:'Aboard the longship · coast reached'
+};
+let model, open=true, choosing=false, tab='explore', step=0, message='', focus='home';
+const dialog=document.getElementById('review-dialog');
+const current=()=>model.groups.find(g=>g.id===model.selected);
+const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const btn=(action,label,disabled=false,primary=false)=>`<button data-action="${action}" ${disabled?'disabled':''} ${primary?'class="primary"':''}>${label}</button>`;
+function loadScenario(name) {
+ const group={id:'g1',name:'Group 1',members:['p1'],phase:'home',pack:0,paid:0,task:'Explore'};
+ model={scenario:name,food:15,groups:[group],selected:'g1',knowledge:'unknown',running:false,report:null};
+ if(name==='shortage') group.members=['p1','p2'];
+ if(['exploring','sighted','sea'].includes(name)) {
+  model.food=7; group.phase=name==='sea'?'aboard':'exploring'; group.pack=56; group.paid=8;
+ }
+ if(['sighted','recon'].includes(name)) model.knowledge='sighted';
+ if(name==='identified') { model.knowledge='identified'; model.food=24; }
+ if(name==='returned') { model.food=7; group.paid=8; model.report='early'; }
+ if(name==='stranded') { model.food=7; group.phase='stranded'; group.paid=8; model.report='stranded'; }
+ open=true; choosing=false; step=0; tab=['sighted','recon','identified'].includes(name)?'places':'explore';
+ message=''; focus='home'; dialog.close(); render();
+}
+function memberNames(group=current()) {
+ return group.members.map(id=>residents.find(p=>p.id===id)?.name).join(', ');
+}
+function atHome(group=current()) { return group?.phase==='home'; }
+function groupButtons() {
+ return model.groups.map(g=>`<button class="group" data-group="${g.id}" aria-pressed="${model.selected===g.id}"><strong>${g.name}</strong><small>${g.members.length} resident${g.members.length===1?'':'s'} · ${phase(g)}</small></button>`).join('')+btn('new-group','+ New group');
+}
+function phase(g=current()) {
+ return ({home:'At home',prepared:'Supplies packed',travelling:'Travelling',exploring:'Exploring',returning:'Returning home',mission:'On '+g?.task,aboard:'Aboard longship',stranded:'Stranded'})[g?.phase]||'No group';
+}
+function crew() {
+ const g=current();
+ return `<div class="crew">${residents.map(p=>{
+  const other=model.groups.find(x=>x.id!==g.id&&x.members.includes(p.id));
+  const disabled=!atHome(g)||p.unavailable||!!other;
+  return `<label class="person ${g.members.includes(p.id)?'selected':''}"><input data-person="${p.id}" type="checkbox" ${g.members.includes(p.id)?'checked':''} ${disabled?'disabled':''}><span><strong>${escape(p.name)} (${p.age})</strong><small>${other?'Assigned to '+other.name:escape(p.role)}</small></span></label>`;
+ }).join('')}</div><small>Available residents only. Names and roles illustrate the audit fixture.</small>`;
+}
+function supplies() {
+ const g=current(),cost=g.members.length*8,short=Math.max(0,cost-model.food);
+ return `<div class="cost"><span><b>${cost} Food</b><small>${g.members.length} × 8 per resident · paid when packed</small></span><span>${model.food} available</span></div>
+ ${short?`<div class="status warning"><strong>${short} more Food needed</strong><p>Choose a smaller crew or return later with enough Food.</p></div>`:''}
+ <p class="compact-note">The crew is unavailable for home work while away. Travel, exploration and the return share one pack. Unused supplies are discarded when the expedition ends.</p>
+ ${btn('pack-review',short?'Not enough Food':'Review supplies',!g.members.length||short>0,true)}`;
+}
+function taskTabs() {
+ return `<div class="tabs" aria-label="Expedition purpose"><button data-tab="explore" aria-pressed="${tab==='explore'}">Explore island</button><button data-tab="places" aria-pressed="${tab==='places'}">Known places${model.knowledge==='unknown'?'':' · 1'}</button></div>`;
+}
+function knownPlaces() {
+ const g=current(),known=model.knowledge!=='unknown',identified=model.knowledge==='identified';
+ if(!known) return `<h2>Discover neighbouring clans</h2><p>No settlement has been sighted.</p><p class="muted">Explore with a group first. Recon can also review mapped land.</p><div class="actions">${btn('explore-tab','Prepare Explore',false,true)}${btn('area','Recon mapped area',!atHome()||!g.members.length)}</div>`;
+ return `<span class="pill">${identified?'Identified · this year':'Sighted · not identified'}</span><h2 style="margin-top:12px">${identified?'Neighbouring clan':'Unidentified settlement'}</h2>
+ <p>${identified?'Knowledge can age; mission success and safe return are not guaranteed.':'A sighting records a place. A successful Recon must return home to identify the clan.'}</p>
+ ${!atHome()?`<div class="status warning"><strong>${g.name} is ${phase().toLowerCase()}.</strong><p>Recon, Surveillance and Pillage start from home. Return this group first, or choose another group at home.</p><div class="actions">${btn('return','Return group home',g.phase==='returning'||g.phase==='stranded',true)}${btn('groups','Choose another group')}</div></div>`:''}
+ <div class="actions">${btn('focus-place','Show place on map')}${btn('mission-Recon','Recon',!atHome()||!g.members.length,true)}</div>
+ <div class="actions">${btn('mission-Surveillance','Surveillance',!identified||!atHome()||!g.members.length)}${btn('mission-Pillage','Pillage',!identified||!atHome()||!g.members.length)}</div>
+ ${!identified?'<small>Surveillance and Pillage unlock after a successful Recon returns home.</small>':'<small>This review fixture includes a reported Pillage opportunity.</small>'}`;
+}
+function reportContent() {
+ if(!model.report) return '<p class="muted">No returned journey is recorded in this example.</p>';
+ const stranded=model.report==='stranded';
+ return `<div class="status ${stranded?'danger':'warning'}"><h3>${stranded?'Return blocked — group stranded':model.report==='recon'?'Recon returned':'Returned early — route blocked'}</h3>
+ <p>${stranded?'The group has not arrived home. Its confirmed return route is blocked.':model.report==='recon'?'This example report identifies the settlement. The group is available at home.':'The mission finished, but the onward route was blocked. This was not a successful exploration.'}</p></div>
+ <div class="report-grid"><div><small>Clan Food paid</small><b>${current().paid}</b></div><div><small>Group home</small><b>${stranded?'No':'Yes'}</b></div></div>
+ <ol class="journal"><li>Supplies paid before the journey.</li><li>${stranded?'Return ordered, then route rejected.':'Journey ended; actual outcome shown above.'}</li><li>No automatic refund or rescue is promised.</li></ol>
+ <details><summary>Recorded state</summary><p>Journey: ${stranded?'Stranded':'Returned'}<br>Lifecycle outcome: ${stranded?'Cancelled':'Completed'}<br>${stranded?'returnedAt is absent. A cancelled lifecycle does not mean the crew is home.':'Lifecycle completion alone does not establish success.'}</p></details>`;
+}
+function active() {
+ const g=current();
+ if(g.phase==='stranded') return reportContent()+`<div class="actions">${btn('focus-group','Show group on map')}${btn('return','Return home',true)}</div><small>Disbanding is available only after the group is home. This prototype adds no rescue mechanic.</small>`;
+ if(g.phase==='prepared') return `<h2>Supplies packed. Choose where to go.</h2><p>${escape(memberNames())}</p><div class="status"><strong>${g.paid} Food already paid</strong><p>Choose a valid destination to depart. Closing this menu does not end the expedition.</p></div><div class="actions">${btn('choose','Choose destination',false,true)}${btn('end-review','End expedition')}</div><small>Ending discards the unused pack. Selecting or cancelling a map point does not charge Food again.</small>`;
+ return `<span class="pill">${phase()}</span><h2 style="margin-top:12px">${g.name}</h2><p>${escape(memberNames())}</p>
+ ${g.phase==='mission'?`<p>${g.task} · example quote includes travel and return.</p>`:`<div class="status"><strong>Exploration supplies · ${g.pack}%</strong><progress max="100" value="${g.pack}" aria-label="Exploration supplies"></progress><small>Return allowance is protected; reachability is not guaranteed.</small></div>`}
+ <div class="actions">${btn('choose',g.phase==='aboard'?'Choose sailing destination':'Change destination',g.phase==='mission',true)}${btn('return',g.phase==='returning'?'Returning home':'Return home',g.phase==='returning')}${btn('focus-group','Show group')}</div>
+ ${g.phase==='aboard'?`<div class="actions">${btn('disembark','Disembark at this safe coast')}</div><small>A safe-coast fixture. Disembark is unavailable away from a safe coast.</small>`:''}
+ <p class="compact-note">${model.running?'Clock running.':'Clock paused. Press Play in the header to let time advance.'} Menu opening and closing never changes that intent.</p>`;
+}
+function groupHeading() {
+ const g=current();
+ return `<div style="display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:14px"><h2 style="margin:0">${g.name}</h2><span class="pill">${phase()}</span></div>`;
+}
+function normalContent() {
+ const g=current();
+ if(tab==='reports') return reportContent();
+ if(tab==='places') return knownPlaces();
+ if(g.phase!=='home') return active();
+ return `${groupHeading()}<h3>Choose your crew</h3>${crew()}${supplies()}<div class="actions">${btn('disband-review','Disband group')}</div>${model.report?`<div class="section">${btn('reports','Read latest report')}</div>`:''}`;
+}
+function frame(css,body,title='Expeditions') {
+ return `<section class="workspace ${css}" aria-label="Expedition workspace"><header><div><span class="eyebrow">${variants[variant]}</span><h1>${title}</h1></div><button data-action="close" aria-label="Close expeditions">×</button></header><div class="content">${body}</div></section>`;
+}
+function VariantA() {
+ const g=current();
+ let body=taskTabs();
+ if(tab!=='explore'||!atHome(g)) body+=normalContent();
+ else {
+  body+=`<ol class="steps"><li class="${step===0?'active':''}">1 · Crew</li><li class="${step===1?'active':''}">2 · Supplies</li><li>3 · Destination</li></ol>`;
+  if(step===0) body+=`${groupHeading()}<label class="muted" ${model.groups.length===1?'hidden':''}>Group <select id="group-select">${model.groups.map(x=>`<option value="${x.id}" ${g.id===x.id?'selected':''}>${x.name}</option>`).join('')}</select></label><h3 style="margin-top:16px">Who is going?</h3>${crew()}<div class="actions">${btn('step-next','Continue to supplies',!g.members.length,true)}${btn('new-group','New group')}${btn('disband-review','Disband group')}</div>`;
+  else body+=`<h2>What will this journey cost?</h2>${supplies()}<div class="actions">${btn('step-back','Back to crew')}</div>`;
+ }
+ return frame('vA',body);
+}
+function VariantB() {
+ return frame('vB',`<aside class="groups" aria-label="Your groups">${groupButtons()}</aside><div>${taskTabs()}${normalContent()}</div>`);
+}
+function VariantC() {
+ const g=current();
+ return frame('vC',`<aside><label>Selected group<select id="group-select" style="display:block;width:100%;margin-top:7px">${model.groups.map(x=>`<option value="${x.id}" ${g.id===x.id?'selected':''}>${x.name} · ${phase(x)}</option>`).join('')}</select></label><div class="actions">${btn('new-group','New group')}</div><p class="compact-note">Known places appear on the map. Unknown terrain reveals no settlement markers.</p>${taskTabs()}</aside><div>${mapOrders()}</div>`,'Orders on the island');
+}
+function mapOrders() {
+ const g=current();
+ if(tab!=='explore'||!atHome()) return normalContent();
+ return `${groupHeading()}<p>${escape(memberNames())||'No residents selected'}</p>
+ <details><summary>Change crew · ${g.members.length} selected</summary>${crew()}</details>
+ ${supplies()}<details class="section"><summary>Group actions</summary><div class="actions">${btn('disband-review','Disband group')}</div></details>`;
+}
+function mapView() {
+ if(!choosing&&variant!=='C'&&open) return '';
+ return `<div class="map-surface" aria-label="Illustrative map choices">
+ ${choosing?`<button class="pin land" data-action="land">⚑ ${current().phase==='aboard'?'Open water':'Nearby walkable land'}</button><button class="pin cliff" data-action="blocked">Steep cliff</button>${current()?.phase!=='aboard'?'<button class="pin ship" data-action="ship">⚓ Retained longship</button>':''}`:''}
+ ${model.knowledge!=='unknown'?`<button class="pin settlement ${focus==='place'?'focused':''}" data-action="open-place">⌂ ${model.knowledge==='identified'?'Neighbouring clan':'Unidentified settlement'}</button>`:''}
+ <button class="pin home ${focus==='home'?'focused':''}" data-action="home-focus">⌂ Home</button></div>
+ ${choosing?`<section class="map-notice"><strong>${current().name} · ${current().phase==='aboard'?'Choose where to sail':'Choose destination'}</strong><p>A valid map click issues the order immediately. No additional Food is charged.</p>${btn('cancel-target','Cancel destination selection')}</section>`:''}`;
+}
+function render() {
+ document.getElementById('food').textContent=model.food;
+ document.getElementById('clock').textContent=model.running?'Ⅱ Running':'▷ Paused';
+ const empty=frame('v'+variant,`<h2>No expedition groups</h2><p>Create a group, choose available residents, then review supplies.</p>${btn('new-group','Create group',false,true)}`);
+ document.getElementById('view').innerHTML=open&&!choosing?(!current()?empty:variant==='A'?VariantA():variant==='B'?VariantB():VariantC()):'';
+ document.getElementById('map').innerHTML=mapView();
+ document.getElementById('scene').classList.toggle('map-only',choosing);
+ document.getElementById('notice').textContent=message;
+ document.getElementById('variant-label').textContent=variant+' · '+variants[variant];
+ document.querySelector('.nav [data-action="open"]').setAttribute('aria-pressed',open);
+ const g=current();
+ document.getElementById('state').innerHTML=`<strong>In-memory example only</strong><p>No real Food, route, save or campaign is changed.</p><dl><dt>Situation</dt><dd>${scenarios[model.scenario]}</dd><dt>Selected group</dt><dd>${g?.name||'None'}</dd><dt>State</dt><dd>${phase()}</dd><dt>Residents</dt><dd>${g?.members.length||0}</dd><dt>Clan Food</dt><dd>${model.food}</dd><dt>Food paid</dt><dd>${g?.paid||0}</dd><dt>Knowledge</dt><dd>${model.knowledge}</dd><dt>Clock</dt><dd>${model.running?'Running':'Paused'}</dd><dt>Map choice</dt><dd>${choosing?'In progress':'None'}</dd></dl>`;
+}
+function showDialog(title,html,action,label,disabled=false) {
+ document.getElementById('dialog-content').innerHTML=`<h2 id="review-title">${title}</h2>${html}<div class="actions">${btn(action,label,disabled,true)}${btn('dialog-back','Back')}</div>`;
+ dialog.showModal();
+ dialog.querySelector('[data-action="dialog-back"]').focus();
+}
+function showMission(type,area=false) {
+ const g=current(),base=({Recon:2,Surveillance:4,Pillage:5})[type],cost=base*g.members.length;
+ const success=({Recon:80,Surveillance:90,Pillage:60})[type],risk=({Recon:2,Surveillance:3,Pillage:10})[type];
+ model.pending={type,area,cost};
+ showDialog(`Review ${type}`,`<span class="eyebrow">Illustrative Normal-weather quote</span><p>${g.name} · ${escape(memberNames())}</p><div class="cost"><span><b>${cost} Food</b><small>${base} per resident · separate mission</small></span><span>${model.food} available</span></div><p>${success}% example success · ${risk}% casualty risk per resident. Travel and return are included. No refunds.</p><p class="compact-note">This fixture assumes a valid round trip. The real game computes its offer from current rules, weather, equipment and route at confirmation.</p>${type==='Pillage'?'<details><summary>Equipment and cargo</summary><p>No stored equipment is assigned in this example.</p><p>Priority: Food → Materials → Livestock → People. One category per survivor.</p><p>The next available living animal is taken. Species, sex and age cannot be selected.</p></details>':''}`,'mission-confirm',cost>model.food?'Not enough Food':'Start '+type,cost>model.food||!g.members.length||!atHome());
+}
+function act(action) {
+ const g=current(); message='';
+ if(action==='close') { open=false; choosing=false; message='Menu closed. Clock and expedition are unchanged.'; }
+ if(action==='open') { open=true; choosing=false; }
+ if(action==='groups') { open=true; tab='explore'; step=0; }
+ if(action==='step-next') step=1;
+ if(action==='step-back') step=0;
+ if(action==='explore-tab') { tab='explore'; step=0; }
+ if(action==='reports') { tab='reports'; open=true; choosing=false; }
+ if(action==='new-group') {
+  const n=Math.max(...model.groups.map(x=>Number(x.id.slice(1))),0)+1;
+  model.groups.push({id:'g'+n,name:'Group '+n,members:[],phase:'home',paid:0,pack:0,task:'Explore'});
+  model.selected='g'+n; tab='explore'; step=0;
+ }
+ if(action==='pack-review') {
+  const cost=g.members.length*8;
+  showDialog('Pack exploration supplies',`<div class="cost"><b>${cost} Food</b><span>${g.members.length} × 8 per resident</span></div><p>Pay once from clan stocks. Then choose a valid destination to depart.</p><p>The clock stays ${model.running?'running':'paused'}. Unused supplies are discarded when this expedition ends.</p>`,'pack-confirm','Pack '+cost+' Food');
+ }
+ if(action==='pack-confirm') {
+  const cost=g.members.length*8;
+  if(cost<=model.food&&g.members.length&&atHome()) {
+   model.food-=cost; g.paid=cost; g.pack=100; g.phase='prepared'; choosing=true; dialog.close();
+  }
+ }
+ if(action==='choose') { choosing=true; open=true; }
+ if(action==='cancel-target') { choosing=false; open=true; message='Destination selection cancelled. The paid pack and expedition are unchanged.'; }
+ if(action==='blocked') message='This cliff is not a valid destination. Choose walkable land. No order or extra charge.';
+ if(action==='land') { g.phase=g.phase==='aboard'?'aboard':'travelling'; g.task='Explore'; choosing=false; open=true; message='Destination set. No extra Food charged. Start the clock to travel.'; }
+ if(action==='ship') { g.phase='aboard'; choosing=false; open=true; message='Boarding and sailing are condensed in this example. The real group must walk to shore and board together.'; }
+ if(action==='disembark') { g.phase='exploring'; message='Safe-coast example: the crew is ashore. The longship remains here.'; }
+ if(action==='return'&&!['home','prepared','stranded','returning'].includes(g.phase)) {
+  g.phase='returning'; message='Return ordered. Arrival still depends on the actual route and clock.';
+ }
+ if(action==='end-review') showDialog('End this expedition?',`<p>${g.name} has not departed. The unused pack will be discarded; clan Food is not refunded.</p>`,'end-confirm','End expedition');
+ if(action==='end-confirm'&&g.phase==='prepared') { g.phase='home'; g.pack=0; dialog.close(); message='Expedition ended. Unused supplies discarded; no refund.'; }
+ if(action==='disband-review') showDialog('Disband '+g.name+'?',`<p>The residents are home. Their occupations and households remain.</p>`,'disband-confirm','Disband group',!atHome());
+ if(action==='disband-confirm'&&atHome()) {
+  model.groups=model.groups.filter(x=>x.id!==g.id);
+
+  model.selected=model.groups[0]?.id||''; dialog.close(); message='Group disbanded. The residents remain at home.';
+ }
+ if(action==='dialog-back') dialog.close();
+ if(action==='focus-group') { open=false; focus='group'; message=g.name+' is focused. Its route and clock have not changed.'; }
+ if(action==='home-focus') { open=false; choosing=false; focus='home'; message='Home focused. The group keeps its current order.'; }
+ if(action==='focus-place') { open=false; focus='place'; message='Known place focused. This does not dispatch a mission.'; }
+ if(action==='open-place') { open=true; choosing=false; tab='places'; }
+ if(action==='area') showMission('Recon',true);
+ if(action.startsWith('mission-')&&action!=='mission-confirm') showMission(action.slice(8));
+ if(action==='mission-confirm') {
+  const p=model.pending;
+  if(p&&atHome()&&p.cost<=model.food&&g.members.length) {
+   model.food-=p.cost; g.paid=p.cost; g.task=p.type; g.phase='mission'; dialog.close(); tab='explore';
+   message=p.type+' dispatched in this example. Start the clock to travel.';
+  }
+ }
+ render();
+}
+document.addEventListener('click',event=>{
+ const button=event.target.closest('button'); if(!button||button.disabled) return;
+ if(button.dataset.action) act(button.dataset.action);
+ if(button.dataset.group) { model.selected=button.dataset.group; step=0; choosing=false; render(); }
+ if(button.dataset.tab) { tab=button.dataset.tab; step=0; render(); }
+});
+document.addEventListener('change',event=>{
+ const node=event.target;
+ if(node.dataset.person&&atHome()) {
+  const g=current();
+  g.members=node.checked?[...g.members,node.dataset.person]:g.members.filter(id=>id!==node.dataset.person);
+  render();
+ }
+ if(node.id==='group-select') { model.selected=node.value; step=0; render(); }
+});
+function switchVariant(direction) {
+ const keys=Object.keys(variants);
+ variant=keys[(keys.indexOf(variant)+direction+keys.length)%keys.length];
+ const url=new URL(location.href); url.searchParams.set('variant',variant);
+ history.replaceState(null,'',url); render();
+}
+document.getElementById('previous').onclick=()=>switchVariant(-1);
+document.getElementById('next').onclick=()=>switchVariant(1);
+document.addEventListener('keydown',event=>{
+ if(['INPUT','TEXTAREA','SELECT'].includes(event.target.tagName)||event.target.isContentEditable||dialog.open) return;
+ if(event.key==='ArrowLeft'||event.key==='ArrowRight') { event.preventDefault(); switchVariant(event.key==='ArrowLeft'?-1:1); }
+ if(event.key==='Escape') { event.preventDefault(); if(choosing) act('cancel-target'); else if(open) act('close'); else act('open'); }
+});
+document.getElementById('clock').onclick=()=>{ model.running=!model.running; render(); };
+document.getElementById('advance').onclick=()=>{
+ const g=current();
+ if(!g) { message='Create a group before advancing an example journey.'; render(); return; }
+ if(!model.running) { message='Example time is paused. Press Play in the header first.'; render(); return; }
+ if(g.phase==='travelling') { g.phase='exploring'; g.pack=56; message='Example jump: destination reached. This does not prove physical reachability.'; }
+ else if(g.phase==='exploring') { model.knowledge='sighted'; message='Example jump: an expedition witness sights a settlement. Recon still requires a group at home.'; }
+ else if(g.phase==='returning') { g.phase='home'; g.pack=0; message='Example jump: safe return. Unused carried supplies discarded; no refund.'; }
+ else if(g.phase==='mission') {
+  g.phase='home'; if(g.task==='Recon') { model.knowledge='identified'; model.report='recon'; }
+  message='Illustrative returned mission. Success was selected for this walkthrough, not guaranteed by the game.';
+ } else message='No travel step is available in this example.';
+ render();
+};
+const select=document.getElementById('scenario');
+select.innerHTML=Object.entries(scenarios).map(([key,label])=>`<option value="${key}">${label}</option>`).join('');
+select.onchange=()=>loadScenario(select.value);
+loadScenario('fresh');
+</script>
+</body>
+</html>

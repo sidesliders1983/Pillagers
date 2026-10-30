@@ -1,0 +1,18 @@
+{
+  "errors": [],
+  "steps": [
+    {
+      "action": "switch file variant",
+      "url": "file:///D:/CodexSites/Pillagers/scratch/expedition-menu-prototype/docs/ux/expedition-menu-prototype/expedition-menu.prototype.html?variant=C"
+    },
+    {
+      "action": "disband at home",
+      "text": "Expeditions\n×\nNo expedition groups\n\nCreate a group, choose available residents, then review supplies.\n\nCreate group",
+      "state": "In-memory example onlyNo real Food, route, save or campaign is changed.SituationFirst journey · 15 FoodSelected groupNoneStateNo groupResidents0Clan Food15Food paid0KnowledgeunknownClockPausedMap choiceNone"
+    },
+    {
+      "action": "create after disband",
+      "food": "15"
+    }
+  ]
+}

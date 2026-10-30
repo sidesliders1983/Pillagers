@@ -1,0 +1,100 @@
+{
+  "browser": "156.0.8078.74",
+  "headless": true,
+  "physicalDevice": false,
+  "events": [
+    {
+      "name": "desktop-A",
+      "state": "In-memory example onlyNo real Food, route, save or campaign is changed.SituationFirst journey · 15 FoodSelected groupGroup 1StateAt homeResidents1Clan Food15Food paid0KnowledgeunknownClockPausedMap choiceNone",
+      "food": "15"
+    },
+    {
+      "name": "desktop-B",
+      "state": "In-memory example onlyNo real Food, route, save or campaign is changed.SituationFirst journey · 15 FoodSelected groupGroup 1StateAt homeResidents1Clan Food15Food paid0KnowledgeunknownClockPausedMap choiceNone",
+      "food": "15"
+    },
+    {
+      "name": "desktop-C",
+      "state": "In-memory example onlyNo real Food, route, save or campaign is changed.SituationFirst journey · 15 FoodSelected groupGroup 1StateAt homeResidents1Clan Food15Food paid0KnowledgeunknownClockPausedMap choiceNone",
+      "food": "15"
+    },
+    {
+      "name": "two-residents-one-food-short",
+      "state": "In-memory example onlyNo real Food, route, save or campaign is changed.SituationFirst journey · 15 FoodSelected groupGroup 1StateAt homeResidents2Clan Food15Food paid0KnowledgeunknownClockPausedMap choiceNone",
+      "food": "15"
+    },
+    {
+      "name": "pack-back-keeps-food",
+      "state": "In-memory example onlyNo real Food, route, save or campaign is changed.SituationFirst journey · 15 FoodSelected groupGroup 1StateAt homeResidents1Clan Food15Food paid0KnowledgeunknownClockPausedMap choiceNone",
+      "food": "15"
+    },
+    {
+      "name": "map-order-is-next",
+      "state": "In-memory example onlyNo real Food, route, save or campaign is changed.SituationFirst journey · 15 FoodSelected groupGroup 1StateSupplies packedResidents1Clan Food7Food paid8KnowledgeunknownClockPausedMap choiceIn progress",
+      "food": "7"
+    },
+    {
+      "name": "invalid-map-point",
+      "state": "In-memory example onlyNo real Food, route, save or campaign is changed.SituationFirst journey · 15 FoodSelected groupGroup 1StateSupplies packedResidents1Clan Food7Food paid8KnowledgeunknownClockPausedMap choiceIn progress",
+      "food": "7"
+    },
+    {
+      "name": "cancel-map-keeps-paid-pack",
+      "state": "In-memory example onlyNo real Food, route, save or campaign is changed.SituationFirst journey · 15 FoodSelected groupGroup 1StateSupplies packedResidents1Clan Food7Food paid8KnowledgeunknownClockPausedMap choiceNone",
+      "food": "7"
+    },
+    {
+      "name": "travel-no-second-charge",
+      "state": "In-memory example onlyNo real Food, route, save or campaign is changed.SituationFirst journey · 15 FoodSelected groupGroup 1StateTravellingResidents1Clan Food7Food paid8KnowledgeunknownClockPausedMap choiceNone",
+      "food": "7"
+    },
+    {
+      "name": "close-reopen-keeps-clock",
+      "state": "In-memory example onlyNo real Food, route, save or campaign is changed.SituationFirst journey · 15 FoodSelected groupGroup 1StateTravellingResidents1Clan Food7Food paid8KnowledgeunknownClockPausedMap choiceNone",
+      "food": "7"
+    },
+    {
+      "name": "sighted-away-recon-blocked",
+      "state": "In-memory example onlyNo real Food, route, save or campaign is changed.SituationSettlement sighted · group awaySelected groupGroup 1StateExploringResidents1Clan Food7Food paid8KnowledgesightedClockPausedMap choiceNone",
+      "food": "7"
+    },
+    {
+      "name": "home-after-example-return",
+      "state": "In-memory example onlyNo real Food, route, save or campaign is changed.SituationSettlement sighted · group awaySelected groupGroup 1StateAt homeResidents1Clan Food7Food paid8KnowledgesightedClockRunningMap choiceNone",
+      "food": "7"
+    },
+    {
+      "name": "returned-recon-unlocks-missions",
+      "state": "In-memory example onlyNo real Food, route, save or campaign is changed.SituationSettlement sighted · group awaySelected groupGroup 1StateAt homeResidents1Clan Food5Food paid2KnowledgeidentifiedClockRunningMap choiceNone",
+      "food": "5"
+    },
+    {
+      "name": "stranded-no-fake-rescue",
+      "state": "In-memory example onlyNo real Food, route, save or campaign is changed.SituationStranded · return route blockedSelected groupGroup 1StateStrandedResidents1Clan Food7Food paid8KnowledgeunknownClockPausedMap choiceNone",
+      "food": "7"
+    },
+    {
+      "name": "early-return-not-success",
+      "state": "In-memory example onlyNo real Food, route, save or campaign is changed.SituationReturned early · outward route blockedSelected groupGroup 1StateAt homeResidents1Clan Food7Food paid8KnowledgeunknownClockPausedMap choiceNone",
+      "food": "7"
+    },
+    {
+      "name": "touch-A",
+      "coarsePointer": true,
+      "food": "15"
+    },
+    {
+      "name": "touch-B",
+      "coarsePointer": true,
+      "food": "15"
+    },
+    {
+      "name": "touch-C",
+      "coarsePointer": true,
+      "food": "15"
+    }
+  ],
+  "errors": [],
+  "variantURL": "http://127.0.0.1:5194/expedition-menu.prototype.html?variant=B",
+  "status": "walked-through"
+}
