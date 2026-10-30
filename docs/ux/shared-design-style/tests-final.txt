@@ -1,0 +1,27 @@
+✔ entry is read-only until a confirmed choice is ready; cancel and repeated clicks are safe (3637.1486ms)
+✔ failed assets and quota retry the same attempt, protecting saves and exposing export (648.184ms)
+✔ fresh entry has no invented save; leaving fences late activation (111.6414ms)
+✔ a changed active session fences a stale loaded campaign before any write (1050.0969ms)
+✔ guided crew and supplies steps preserve the complete campaign and manual pause (328.7998ms)
+✔ packing exposes destination controls and cancelling a map choice preserves the paid pack (181.7125ms)
+✔ Explore and Known places share the selected group without dispatching or changing the clock (119.9433ms)
+✔ ending a paid pack and disbanding at home each require a real confirmation with a safe Back (117.5673ms)
+✔ book cards are named avatar profiles, with a factual generation header and reused relationships/history (3844.3804ms)
+✔ portraits are requested only for visible cards; Close/tab change aborts work and broken images keep initials (497.8768ms)
+✔ late portraits and selected people from an abandoned campaign never enter the rebuilt tree (826.3313ms)
+✔ world gestures are contained while native scrolling and keyboard controls remain available (371.5674ms)
+✔ a large tree bounds visible thumbnail work and ignores callbacks from a previous campaign (1474.2091ms)
+✔ the game menu prioritizes session actions and retains setting values when returning and closing (602.4296ms)
+✔ New game offers a fresh arrival and founding replay without requiring a seed choice (42.2961ms)
+✔ feedback links require an owner-configured HTTPS destination and add no campaign data (84.9053ms)
+✔ a first arrival can find New game and Load game without navigating technical choices (2624.0722ms)
+✔ returning players see their campaign date, can inspect seed details, and cancel a replacement safely (709.6128ms)
+✔ real Clan Book DOM supports explicit adoption, Attention, witnesses, groups, persistence and stale links (1961.104ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 20784.7362

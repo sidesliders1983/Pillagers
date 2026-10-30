@@ -1,0 +1,15 @@
+- main:
+  - paragraph: A new shore. A shared history.
+  - heading "FjordSide" [level=1]
+  - region "Campaign start":
+    - paragraph: Begin a new campaign.
+    - button "Back"
+    - heading "New game" [active] [level=2]
+    - button "New arrival A new seed, new people and a new history. The island may repeat.":
+      - text: New arrival
+      - generic: A new seed, new people and a new history. The island may repeat.
+    - button "Replay original founding The original founders and island, when available." [disabled]:
+      - text: Replay original founding
+      - generic: The original founders and island, when available.
+    - paragraph: A valid founding campaign is needed.
+    - paragraph: Start with cattle, pigs, sheep or goats. Terrain comes from the validated island pool.

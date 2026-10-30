@@ -2,10 +2,10 @@
 .wedding-cinematic__shield { position: absolute; inset: 0; pointer-events: auto; }
 .wedding-cinematic__controls { position: absolute; right: max(12px, env(safe-area-inset-right));
   bottom: max(82px, calc(env(safe-area-inset-bottom) + 70px)); display: grid; gap: 5px; max-width: min(320px, calc(100% - 24px));
-  padding: 12px 14px; color: #f1e7d0; background: #152729ed; border: 1px solid #b9a36d;
-  border-radius: 5px; pointer-events: auto; font-size: 13px; }
+  padding: 12px 14px; color: var(--fs-text); background: var(--fs-panel); border: 1px solid var(--fs-border);
+  border-radius: var(--fs-radius-card); pointer-events: auto; font-size: 13px; }
 .wedding-cinematic__controls strong { font-family: Georgia, serif; font-size: 19px; }
-.wedding-cinematic__names { color: #e5c575; }
+.wedding-cinematic__names { color: var(--fs-text); }
 .wedding-cinematic__controls > div { display: flex; gap: 8px; }
 #fjord-play .wedding-cinematic__controls button { min-width: 64px; min-height: 44px; padding: 8px 12px; }
 @media (max-height: 500px) { .wedding-cinematic__controls { gap: 3px; padding: 8px 12px; font-size: 12px; }

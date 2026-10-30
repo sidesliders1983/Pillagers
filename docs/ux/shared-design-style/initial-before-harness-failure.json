@@ -1,0 +1,102 @@
+{
+  "status": "failed",
+  "origin": "http://127.0.0.1:5192",
+  "browser": "156.0.8078.74",
+  "physicalDevice": false,
+  "expectStyle": false,
+  "cases": [
+    {
+      "name": "character-lab",
+      "style": {
+        "selector": "lab-panel lab-controls",
+        "color": "rgb(57, 75, 66)",
+        "background": "rgb(250, 250, 243)",
+        "border": "rgb(220, 224, 211)",
+        "radius": "9px",
+        "font": "system-ui, sans-serif"
+      },
+      "narrowHorizontalOverflow": false,
+      "interaction": "Public control focused"
+    },
+    {
+      "name": "gameplay-lab",
+      "style": {
+        "selector": "weather-summary",
+        "color": "rgb(36, 42, 41)",
+        "background": "rgb(255, 255, 255)",
+        "border": "rgb(201, 204, 197)",
+        "radius": "8px",
+        "font": "system-ui, sans-serif"
+      },
+      "narrowHorizontalOverflow": false,
+      "interaction": "Existing public UI opened"
+    },
+    {
+      "name": "environment-lab",
+      "style": {
+        "selector": "environment-lab",
+        "color": "rgb(41, 62, 55)",
+        "background": "rgb(232, 235, 224)",
+        "border": "rgb(41, 62, 55)",
+        "radius": "0px",
+        "font": "system-ui"
+      },
+      "narrowHorizontalOverflow": false,
+      "interaction": "Public control focused"
+    },
+    {
+      "name": "water-lab",
+      "style": {
+        "selector": "water-panel",
+        "color": "rgb(231, 243, 237)",
+        "background": "rgba(20, 54, 58, 0.94)",
+        "border": "rgba(255, 255, 255, 0.125)",
+        "radius": "16px",
+        "font": "Inter, ui-sans-serif, system-ui, sans-serif"
+      },
+      "narrowHorizontalOverflow": false,
+      "interaction": "Public control focused"
+    },
+    {
+      "name": "asset-lab",
+      "style": {
+        "selector": "asset-lab",
+        "color": "rgb(40, 50, 44)",
+        "background": "rgb(238, 240, 233)",
+        "border": "rgb(40, 50, 44)",
+        "radius": "0px",
+        "font": "system-ui, sans-serif"
+      },
+      "narrowHorizontalOverflow": false,
+      "interaction": "Public control focused"
+    },
+    {
+      "name": "meshy-lab",
+      "style": {
+        "selector": "",
+        "color": "rgb(38, 52, 45)",
+        "background": "rgb(242, 241, 233)",
+        "border": "rgb(38, 52, 45)",
+        "radius": "0px",
+        "font": "system-ui"
+      },
+      "narrowHorizontalOverflow": false,
+      "interaction": "Existing public UI opened"
+    },
+    {
+      "name": "settlement-lab",
+      "style": {
+        "selector": "play-body",
+        "color": "rgb(231, 228, 216)",
+        "background": "rgb(24, 41, 36)",
+        "border": "rgb(231, 228, 216)",
+        "radius": "0px",
+        "font": "system-ui, sans-serif"
+      },
+      "narrowHorizontalOverflow": false,
+      "interaction": "Existing public UI opened"
+    }
+  ],
+  "errors": [],
+  "failure": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Close', exact: true })\u001b[22m\n"
+}

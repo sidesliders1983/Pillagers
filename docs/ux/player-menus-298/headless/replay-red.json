@@ -1,0 +1,38 @@
+{
+  "status": "failed",
+  "started": "2026-10-29T20:39:27.181Z",
+  "finished": "2026-10-29T20:40:28.987Z",
+  "appBuild": "71cfb83f4305ac5c21ec3fb536d9813150f3f20c",
+  "failure": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Guide me', exact: true })\u001b[22m\n",
+  "failureUI": {
+    "menuOpen": true,
+    "guidanceHidden": false,
+    "guidance": "The Founding Journey\n                Build a home for the next generation. Help an autonomous community, explore the island and choose how to face conflict.\n                Three optional chapters. You can visit any chapter, return later or play freely.\n                Explore on my own starts the clock immediately; Guide me keeps it paused.\n                Guide meExplore on my ownChoose Guide me to stay paused, or Explore on my own to start time.",
+    "statuses": [
+      "HDR lighting off.",
+      "Sound off.",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Campaign restarted.",
+      "Choose Guide me to stay paused, or Explore on my own to start time.",
+      "Choose explored ground to move the camera."
+    ]
+  },
+  "dialogs": [
+    {
+      "action": "New arrival",
+      "accepted": false,
+      "type": "confirm",
+      "message": "Replace the active campaign? Manually saved checkpoints are kept."
+    },
+    {
+      "action": "Replay original founding",
+      "accepted": true,
+      "type": "confirm",
+      "message": "Replace the active campaign? Manually saved checkpoints are kept."
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "origin": "http://127.0.0.1:5197",
+  "browser": "156.0.8078.74",
+  "physicalDevice": false,
+  "sourceRevision": "cb7c060d832702c05336b440912bebcffb5ea40d",
+  "expectStyle": true,
+  "cases": [
+    {
+      "name": "Fjord desktop",
+      "style": {
+        "selector": "fjord-brand",
+        "color": "rgb(244, 248, 250)",
+        "background": "rgba(7, 25, 32, 0.94)",
+        "border": "rgb(120, 144, 152)",
+        "radius": "18px",
+        "font": "system-ui, sans-serif"
+      },
+      "food": 15,
+      "paused": true,
+      "journeys": "Import, play, Settings, Settlement, resident, Family Tree, Close"
+    },
+    {
+      "name": "Fjord touch",
+      "style": {
+        "selector": "fjord-brand",
+        "color": "rgb(244, 248, 250)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(244, 248, 250)",
+        "radius": "18px",
+        "font": "system-ui, sans-serif"
+      },
+      "food": 15,
+      "paused": true,
+      "journeys": "Import, play, Settings, Settlement, resident, Family Tree, Close"
+    }
+  ],
+  "errors": []
+}

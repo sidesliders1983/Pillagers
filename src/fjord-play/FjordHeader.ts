@@ -1,9 +1,11 @@
+import { playerFeedbackLinkHTML } from './PlayerFeedback';
+import './player-menu.css';
 import type { FjordCalendar } from './FjordCalendar';
 import { defaultPresentationPreferences } from '../config/PresentationQuality';
 import { icon } from './FjordIcons';
 import { isMobileLayout, mobileLayoutQuery } from './MobileShell';
 
-export function fjordHeaderHTML(): string {
+export function fjordHeaderHTML(feedbackURL?: string): string {
     return `<header id="fjord-header" aria-label="Settlement status and controls">
         <div class="fjord-brand"><img src="/branding/fjordside-mark.png" alt=""><div>
             <div id="fjord-winter" class="fjord-date" aria-label="Calendar"><span id="fjord-season"></span> <strong id="fjord-year"></strong></div></div></div>
@@ -23,46 +25,84 @@ export function fjordHeaderHTML(): string {
             <span id="fjord-next-slot"><button id="fjord-next" type="button">+1 Year</button></span>
             <details id="fjord-menu"><summary aria-label="Game menu">${icon('menu')}</summary>
                 <div class="fjord-settings">
-                    <h1>FjordSide</h1>
-                    <a class="fjord-asset-credits" href="/game-assets/wetlands/ATTRIBUTION.txt" target="_blank" rel="noopener">Nature asset credits</a>
-                    <span id="fjord-menu-next-slot"></span>
-                    <button id="clan-book-open" type="button">Clan Book</button><button id="fjord-expeditions-open" type="button">Expedition groups</button>
-                    <label>Quality<select id="fjord-quality"><option value="low"${defaultPresentationPreferences.quality === 'low' ? ' selected' : ''}>Low</option>
-                        <option value="standard"${defaultPresentationPreferences.quality === 'standard' ? ' selected' : ''}>Standard</option></select></label>
-                    <label class="check"><input id="fjord-hdr" type="checkbox" aria-describedby="fjord-hdr-description fjord-hdr-status"> HDR lighting</label>
-                    <small id="fjord-hdr-description">Adds daylight sky lighting to materials.</small>
-                    <small id="fjord-hdr-status" role="status">HDR lighting off.</small>
-                    <label>Local effects<select id="fjord-effects"><option value="off"${defaultPresentationPreferences.effects === 'off' ? ' selected' : ''}>Off</option>
-                        <option value="low"${defaultPresentationPreferences.effects === 'low' ? ' selected' : ''}>Low</option><option value="normal"${defaultPresentationPreferences.effects === 'normal' ? ' selected' : ''}>Normal</option></select></label>
-                    <small>Snow, rain and fire particles. Visual quality only; burning still uses fuel. Reduced motion disables particles.</small>
-                    <span id="screen-awake-slot"></span>
-                    <span id="fjord-performance-setting"></span>
-                    <div id="fjord-audio-setting"></div>
-                    <details><summary>Camera views &amp; controls</summary>
+                    <div class="player-menu-heading"><h2>Game menu</h2>
+                        <button type="button" data-menu-close aria-label="Close game menu">×</button></div>
+                    <details data-menu-section><summary>Save game</summary><div class="player-menu-actions">
+                        <button id="fjord-save" type="button">Save on this device</button>
+                        <button id="fjord-export" type="button" disabled>Download campaign file</button>
+                        <p>Device saves stay in this browser. Download a campaign file to keep a separate copy.</p>
+                        <button type="button" data-menu-back>Back</button>
+                    </div></details>
+                    <details data-menu-section><summary>Load game</summary><div class="player-menu-actions">
+                        <button id="fjord-load" type="button">Load device save</button>
+                        <label>Load campaign file<input id="fjord-import" type="file" accept="application/json,.json"></label>
+                        <p>Loading pauses the game. An invalid file leaves your current campaign intact.</p>
+                        <button type="button" data-menu-back>Back</button>
+                    </div></details>
+                    <details data-menu-section><summary>Settings</summary>
+                        <h3>Graphics</h3>
+                        <label>Quality<select id="fjord-quality"><option value="low"${defaultPresentationPreferences.quality === 'low' ? ' selected' : ''}>Low</option>
+                            <option value="standard"${defaultPresentationPreferences.quality === 'standard' ? ' selected' : ''}>Standard</option></select></label>
+                        <label class="check"><input id="fjord-hdr" type="checkbox" aria-describedby="fjord-hdr-description fjord-hdr-status"> HDR lighting</label>
+                        <small id="fjord-hdr-description">Adds daylight sky lighting to materials.</small>
+                        <small id="fjord-hdr-status" role="status">HDR lighting off.</small>
+                        <label>Local effects<select id="fjord-effects"><option value="off"${defaultPresentationPreferences.effects === 'off' ? ' selected' : ''}>Off</option>
+                            <option value="low"${defaultPresentationPreferences.effects === 'low' ? ' selected' : ''}>Low</option><option value="normal"${defaultPresentationPreferences.effects === 'normal' ? ' selected' : ''}>Normal</option></select></label>
+                        <small>Snow, rain and fire particles. Visual quality only; burning still uses fuel. Reduced motion disables particles.</small>
+                        <h3>Sound</h3><div id="fjord-audio-setting"></div>
+                        <h3>Display</h3><span id="screen-awake-slot"></span>
+                        <button type="button" data-menu-back>Back</button>
+                    </details>
+                    <details data-menu-section><summary>Help &amp; support</summary>
+                        <button type="button" data-menu-guide>How to play</button>
+                        <h3>Camera views &amp; controls</h3>
                         <button id="fjord-view-home" type="button">View settlement</button><button id="fjord-view-summit" type="button">View highlands</button>
                         <p>Touch: drag to orbit, pinch to zoom, tap open ground to centre the camera. Mouse: left drag to pan, right drag to rotate, wheel to zoom. Select residents, homes and livestock in the world or through Settlement.</p>
+                        <p>Use Save game to protect progress before replacing a campaign or clearing browser data.</p>
+                        <details><summary>About / Credits</summary>
+                            <p>FjordSide · A new shore. A shared history.</p>
+                            <a class="fjord-asset-credits" href="/game-assets/wetlands/ATTRIBUTION.txt" target="_blank" rel="noopener">Nature asset credits</a>
+                        </details>
+                        <details id="fjord-support"><summary>Diagnostics</summary>
+                            <p>Optional troubleshooting tools. Reports stay on this device until you share them.</p>
+                            <span id="fjord-performance-setting"></span>
+                            <small>The overlay preference is saved in this browser. Choose Off to stop it.</small>
+                            <details><summary>Loading diagnostics</summary>
+                                <button id="fjord-load-copy" type="button">Copy last loading diagnostics</button>
+                                <button id="fjord-load-report" type="button">Save last loading diagnostics</button>
+                            </details>
+                            <details id="fjord-developer-data"><summary>Developer data</summary>
+                                <p>Core JSON contains simulation data only. Use Save game for a player campaign file.</p>
+                                <button id="fjord-export-core" type="button">Export Core JSON</button>
+                            </details>
+                        </details>
+                        <button type="button" data-menu-back>Back</button>
                     </details>
-                    <details><summary>Loading diagnostics</summary>
-                        <button id="fjord-load-copy" type="button">Copy last loading diagnostics</button>
-                        <button id="fjord-load-report" type="button">Save last loading diagnostics</button>
-                    </details>
-                    <details id="fjord-campaign"><summary>Campaign</summary><div class="fjord-campaign-settings">
-                        <button id="fjord-save">Save locally</button><button id="fjord-load">Load locally</button>
-                        <button id="fjord-export" disabled>Export Fjord campaign</button>
-                        <button id="fjord-export-core">Export canonical JSON</button>
-                        <label>Import campaign<input id="fjord-import" type="file" accept="application/json,.json"></label>
-                        <label>Campaign seed<input id="fjord-seed" type="number" min="0" max="4294967295"></label>
-                        <small id="fjord-geography"></small>
-                        <small>New campaigns select a validated island from a fixed set. Existing saves keep their geography.</small>
-                        <label class="check"><input id="fjord-weather" type="checkbox"> Enable winter weather</label>
-                        <label class="check"><input id="fjord-exploration" type="checkbox" checked> Enable exploration &amp; rival clan</label>
-                        <small>Enabled by default for new and restarted islands. Loading a saved campaign keeps its exploration rules.</small>
-                        <label class="check"><input id="fjord-founders" type="checkbox" checked> Use the same founders</label>
-                        <button id="fjord-new">New campaign from seed</button>
-                        <button id="fjord-restart">Restart with same founders</button>
-                        <p>New and restarted campaigns offer the Founding Journey when ready. Explore on my own starts the clock; Guide me stays paused until Play. Returning to the game or loading a save pauses the clock.
-                            Your browser keeps the campaign locally.</p>
-                    </div></details>
+                    ${playerFeedbackLinkHTML(feedbackURL)}
+                    <span id="fjord-menu-next-slot"></span>
+                    <section class="player-menu-replacement" aria-label="New campaign">
+                        <p>New campaign</p>
+                        <details id="fjord-campaign" data-menu-section><summary>New game / Replay</summary>
+                            <div class="fjord-campaign-settings player-menu-actions">
+                                <p>These choices replace the current campaign only after confirmation.</p>
+                                <button id="fjord-new-arrival" type="button">New arrival</button>
+                                <small>A new seed, new people and a new history. The island can repeat.</small>
+                                <button id="fjord-restart" type="button">Replay original founding</button>
+                                <details><summary>Seed &amp; scenario options</summary>
+                                    <label class="check"><input id="fjord-founders" type="checkbox" checked> Use the original founders for replay</label>
+                                    <label>Campaign seed<input id="fjord-seed" type="number" min="0" max="4294967295"></label>
+                                    <small id="fjord-geography"></small>
+                                    <small>New seeds select from a validated island pool; the island can repeat. Existing saves keep their geography.</small>
+                                    <label class="check"><input id="fjord-weather" type="checkbox"> Enable winter weather</label>
+                                    <label class="check"><input id="fjord-exploration" type="checkbox" checked> Enable exploration &amp; rival clan</label>
+                                    <small>Scenario options apply only to the new campaign. Original-founding replay retains its saved founding rules.</small>
+                                    <button id="fjord-new" type="button">Start from this seed</button>
+                                </details>
+                                <p>New campaigns offer the optional Founding Journey. Explore on my own starts time; Guide me stays paused. Loading a save pauses the clock.</p>
+                                <button type="button" data-menu-back>Back</button>
+                            </div>
+                        </details>
+                    </section>
                 </div>
             </details>
         </div>
@@ -78,6 +118,7 @@ export class FjordHeader {
         root.querySelector('#fjord-cycle')!.addEventListener('change', this.refreshPacing);
         this.narrow.addEventListener('change', this.placePacing);
         root.addEventListener('keydown', this.keydown);
+        root.addEventListener('click', this.menuAction);
         document.addEventListener('pointerdown', this.outside);
     }
     update(calendar: FjordCalendar, stocks: { food: number; materials: number },
@@ -113,6 +154,17 @@ export class FjordHeader {
             this.root.querySelector<HTMLElement>('#fjord-menu > summary')!.focus();
         }
     };
+    private menuAction = (event: MouseEvent): void => {
+        const button = (event.target as Element).closest<HTMLButtonElement>('button');
+        if (button?.hasAttribute('data-menu-close')) {
+            this.root.querySelector<HTMLDetailsElement>('#fjord-menu')!.open = false;
+            this.root.querySelector<HTMLElement>('#fjord-menu > summary')!.focus();
+        } else if (button?.hasAttribute('data-menu-back')) {
+            const section = button.closest('details')!;
+            section.open = false;
+            section.querySelector<HTMLElement>('summary')!.focus();
+        }
+    };
     private outside = (event: PointerEvent): void => {
         const menu = this.root.querySelector<HTMLDetailsElement>('#fjord-menu')!;
         if (event.target instanceof Node && !menu.contains(event.target))
@@ -122,6 +174,7 @@ export class FjordHeader {
         this.narrow.removeEventListener('change', this.placePacing);
         this.root.querySelector('#fjord-cycle')!.removeEventListener('change', this.refreshPacing);
         this.root.removeEventListener('keydown', this.keydown);
+        this.root.removeEventListener('click', this.menuAction);
         document.removeEventListener('pointerdown', this.outside);
     }
 }

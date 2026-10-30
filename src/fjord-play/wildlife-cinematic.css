@@ -7,10 +7,10 @@
     gap: 5px;
     max-width: min(330px, calc(100% - 24px));
     padding: 10px 12px;
-    border: 1px solid #b9a36d;
-    border-radius: 5px;
-    background: #152729ed;
-    color: #f1e7d0;
+    border: 1px solid var(--fs-border);
+    border-radius: var(--fs-radius-card);
+    background: var(--fs-panel);
+    color: var(--fs-text);
     font-size: 13px;
 }
 .wildlife-cinematic strong { font-family: Georgia, serif; font-size: 18px; }

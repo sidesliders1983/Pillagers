@@ -1,0 +1,49 @@
+- main:
+  - generic "Settlement status and controls":
+    - generic "Calendar":
+      - generic: Summer
+      - strong: "800"
+    - generic "Settlement resources and population":
+      - definition:
+        - button "Food stocks":
+          - strong: "15"
+      - definition:
+        - button "Materials stocks":
+          - strong: "5"
+      - definition:
+        - button "Settlement residents":
+          - strong: "10"
+      - definition:
+        - button "Settlement livestock":
+          - strong: "3"
+    - button "Start simulation" [disabled]:
+    - generic "Year length":
+      - generic: 3 min per year
+      - combobox "Year length":
+        - option "1 min per year"
+        - option "3 min per year" [selected]
+        - option "5 min per year"
+    - generic "Game menu":
+    - option "Low" [selected]
+    - option "Standard"
+    - option "Off"
+    - option "Low" [selected]
+    - option "Normal"
+    - option "Off" [selected]
+    - option "Compact"
+    - option "Details"
+  - generic "Canonical Fjord settlement"
+  - generic "Resident production feedback"
+  - text: ⌄
+  - navigation "Settlement navigation":
+    - button "Settlement navigation":
+    - button "Expeditions":
+      - text: Expeditions
+    - button "Show island map":
+    - generic "Active expedition controls"
+  - 'button "Attention: 2 unread events and current conditions"':
+    - generic: "2"
+- region "The founding":
+  - heading "The founding" [level=2]
+  - button "Close founding chapter": ×
+  - article: Hallmund Eiriksson, Kauppi, Minvydė, Vaigirdė, Áila, Kauko, Aodhán, Vaivydė, Thorfrid Ketilsdóttir and Eadric arrived together in summer. Hallmund Eiriksson, Vaivydė and Eadric worked as fishers. Kauppi, Minvydė, Vaigirdė, Kauko, Aodhán and Thorfrid Ketilsdóttir worked as farmers. Áila worked as a hunter. Vaigirdė and Aodhán were already partners. Kauko and Thorfrid Ketilsdóttir were already partners. Their first households lived in tents. The founding party had two adult does and one adult buck and 1 longship.

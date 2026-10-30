@@ -1,0 +1,22 @@
+- main:
+  - paragraph: A new shore. A shared history.
+  - heading "FjordSide" [level=1]
+  - region "Campaign start":
+    - heading "Loading diagnostics complete" [level=2]
+    - status: 24.4 s · 167 observed resources · 24 settlement models
+    - paragraph: The game has not started. Your saved campaigns are unchanged.
+    - button "Download diagnostics JSON" [active]
+    - button "Run again"
+    - button "Back to start menu"
+    - paragraph: If the download did not start automatically, use Download diagnostics JSON. The report stays on this device until you share it.
+- complementary "Performance diagnostics":
+  - generic: 2893628d9c3f · 19:21:22 · 70 s Start menu · low / low · DPR 1
+  - generic: N/A fps · window 0.0 s Interval μ/p95 N/A / N/A CPU frame p95 N/A GPU main N/A — pending Hitch /60 s 0.0 ms Ticks total/rate 0 / 0.0 /s Heap 271.2 MiB* · VRAM unavailable
+  - button "Freeze display"
+  - generic "Options"
+  - option "not reported" [selected]
+  - option "on"
+  - option "off"
+  - option "Off"
+  - option "Compact" [selected]
+  - option "Details"

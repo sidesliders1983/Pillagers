@@ -1,0 +1,67 @@
+- main:
+  - generic "Settlement status and controls":
+    - generic "Calendar":
+      - generic: Summer
+      - strong: "800"
+    - generic "Settlement resources and population":
+      - definition:
+        - button "Food stocks":
+          - strong: "15"
+      - definition:
+        - button "Materials stocks":
+          - strong: "5"
+      - definition:
+        - button "Settlement residents":
+          - strong: "10"
+      - definition:
+        - button "Settlement livestock":
+          - strong: "3"
+    - button "Start simulation":
+    - generic "Year length":
+      - generic: 3 min per year
+      - combobox "Year length":
+        - option "1 min per year"
+        - option "3 min per year" [selected]
+        - option "5 min per year"
+    - generic "Game menu":
+    - option "Low" [selected]
+    - option "Standard"
+    - option "Off" [selected]
+    - option "Low"
+    - option "Normal"
+    - option "Off" [selected]
+    - option "Compact"
+    - option "Details"
+  - generic "Canonical Fjord settlement"
+  - generic: Selected · Hallmund Eiriksson
+  - generic "Resident production feedback"
+  - region "Settlement workspace" [active]:
+    - heading "Expeditions" [level=2]
+    - button "Close workspace": ×
+    - region "Expedition groups":
+      - paragraph: Prepare a crew. Place a flag. Discover your island.
+      - button "New group":
+        - generic: New group
+      - navigation "Exploration groups"
+      - heading "Your first expedition" [level=3]
+      - paragraph: Create a group, choose available residents and pack supplies. Tap a valid destination to begin travelling.
+      - region "Physical island missions":
+        - heading "Island missions" [level=3]
+        - paragraph: Separate missions depart from home. Explore first to map possible destinations.
+        - text: Mission group
+        - combobox "Mission group":
+          - option "Create a group above" [selected]
+        - paragraph: Create or choose a group to send a mission.
+        - button "Recon mapped area" [disabled]
+        - heading "Known places" [level=4]
+        - paragraph: No settlement has been sighted.
+        - status
+    - text: ⌄
+  - navigation "Settlement navigation":
+    - button "Settlement navigation":
+    - button "Expeditions":
+      - text: Expeditions
+    - button "Show island map":
+    - generic "Active expedition controls"
+  - 'button "Attention: 2 unread events and current conditions"':
+    - generic: "2"

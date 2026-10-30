@@ -42,7 +42,7 @@
     gap: 3px;
     padding: 3px;
     border: 1px solid var(--fjord-line);
-    border-radius: 6px;
+    border-radius: var(--fs-radius-panel);
     background: var(--fjord-panel);
     pointer-events: auto;
 }
@@ -121,7 +121,7 @@
     gap: 4px;
     background: var(--fjord-panel);
     border: 1px solid var(--fjord-line);
-    border-radius: 6px;
+    border-radius: var(--fs-radius-panel);
 }
 #fjord-play.fjord-mobile #fjord-navigation-drawer button { justify-content: start; padding: 8px 12px; }
 #fjord-play.fjord-mobile #fjord-attention {
@@ -151,7 +151,7 @@
     transform: none;
     padding: 0;
     display: block;
-    border-radius: 7px;
+    border-radius: var(--fs-radius-panel);
     box-sizing: border-box;
     overflow: auto;
     scrollbar-width: thin;
@@ -165,7 +165,7 @@
 #fjord-play.fjord-mobile #fjord-workspace { padding: 12px; }
 #fjord-play.fjord-mobile .fjord-focus #entity-panel { display: block; max-height: none; }
 #fjord-play.fjord-mobile .fjord-card-heading { gap: 8px; padding: 8px 10px; }
-#fjord-play.fjord-mobile .fjord-card-heading h2 { font: 20px/1.15 Georgia,serif; margin: 2px 0 4px; }
+#fjord-play.fjord-mobile .fjord-card-heading h2 { font: 20px/1.15 var(--fs-font-heading); margin: 2px 0 4px; }
 #fjord-play.fjord-mobile .fjord-card-heading small { display: none; }
 #fjord-play.fjord-mobile .fjord-emblem { border: 0; width: 28px; height: 36px; }
 #fjord-play.fjord-mobile .fjord-portrait { width: 52px; height: 60px; }
@@ -187,7 +187,7 @@
 #fjord-play.fjord-mobile .fjord-home-specialization { flex-wrap: wrap; }
 #fjord-play.fjord-mobile .fjord-home-change { font-size: 12px; }
 #fjord-play.fjord-mobile .fjord-workspace-heading { align-items: center; margin-bottom: 8px; }
-#fjord-play.fjord-mobile .fjord-workspace-heading h2 { font: 22px Georgia,serif; }
+#fjord-play.fjord-mobile .fjord-workspace-heading h2 { font: 22px var(--fs-font-heading); }
 #fjord-play.fjord-mobile #expedition-panel button { min-height: 44px; }
 #fjord-play.fjord-mobile .fjord-expedition-intro { align-items: start; }
 #fjord-play.fjord-mobile .fjord-expedition-steps { gap: 5px; }

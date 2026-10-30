@@ -1,0 +1,1458 @@
+{
+  "status": "passed",
+  "browser": "156.0.8078.74",
+  "headless": true,
+  "physicalDevice": false,
+  "sourceRevision": "8897c15c4a279404f0fb97a3d8c373f8d3ce6a88",
+  "cases": [
+    {
+      "name": "desktop-1440",
+      "touchEmulation": false,
+      "images": [
+        {
+          "file": "fjordside-twilight-2560.webp",
+          "status": 200,
+          "bytes": 405640,
+          "sha256": "f98fbdc7b71d694b92cba873b05cb67065945d39b24889927b558886c7c522e3"
+        }
+      ],
+      "geometry": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "targets": [
+          {
+            "name": "New game",
+            "height": 82.796875
+          },
+          {
+            "name": "Load game",
+            "height": 80.796875
+          },
+          {
+            "name": "Settings",
+            "height": 60
+          },
+          {
+            "name": "Help & support",
+            "height": 60
+          },
+          {
+            "name": "About / Credits",
+            "height": 46
+          }
+        ]
+      },
+      "journeys": "Fresh, Settings/Back focus, Help/Diagnostics, invalid/valid import, Continue metadata and replacement cancel"
+    },
+    {
+      "name": "desktop-1920",
+      "touchEmulation": false,
+      "images": [
+        {
+          "file": "fjordside-twilight-2560.webp",
+          "status": 200,
+          "bytes": 405640,
+          "sha256": "f98fbdc7b71d694b92cba873b05cb67065945d39b24889927b558886c7c522e3"
+        }
+      ],
+      "geometry": {
+        "width": 1920,
+        "documentWidth": 1920,
+        "targets": [
+          {
+            "name": "New game",
+            "height": 82.796875
+          },
+          {
+            "name": "Load game",
+            "height": 80.796875
+          },
+          {
+            "name": "Settings",
+            "height": 60
+          },
+          {
+            "name": "Help & support",
+            "height": 60
+          },
+          {
+            "name": "About / Credits",
+            "height": 46
+          }
+        ]
+      },
+      "journeys": "Fresh, Settings/Back focus, Help/Diagnostics, invalid/valid import, Continue metadata and replacement cancel"
+    },
+    {
+      "name": "phone-portrait",
+      "touchEmulation": true,
+      "images": [
+        {
+          "file": "fjordside-twilight-1280.webp",
+          "status": 200,
+          "bytes": 173572,
+          "sha256": "29628a5c10d2ae96682c12fd988fc5ce90f621bcd6422ab51e98d1586fd91a2e"
+        }
+      ],
+      "geometry": {
+        "width": 390,
+        "documentWidth": 390,
+        "targets": [
+          {
+            "name": "New game",
+            "height": 79.5
+          },
+          {
+            "name": "Load game",
+            "height": 77.5
+          },
+          {
+            "name": "Settings",
+            "height": 63.59375
+          },
+          {
+            "name": "Help & support",
+            "height": 63.59375
+          },
+          {
+            "name": "About / Credits",
+            "height": 46
+          }
+        ]
+      },
+      "journeys": "Fresh, Settings/Back focus, Help/Diagnostics, invalid/valid import, Continue metadata and replacement cancel"
+    },
+    {
+      "name": "phone-landscape",
+      "touchEmulation": true,
+      "images": [
+        {
+          "file": "fjordside-twilight-1280.webp",
+          "status": 200,
+          "bytes": 173572,
+          "sha256": "29628a5c10d2ae96682c12fd988fc5ce90f621bcd6422ab51e98d1586fd91a2e"
+        }
+      ],
+      "geometry": {
+        "width": 852,
+        "documentWidth": 852,
+        "targets": [
+          {
+            "name": "New game",
+            "height": 82.796875
+          },
+          {
+            "name": "Load game",
+            "height": 80.796875
+          },
+          {
+            "name": "Settings",
+            "height": 60
+          },
+          {
+            "name": "Help & support",
+            "height": 60
+          },
+          {
+            "name": "About / Credits",
+            "height": 46
+          }
+        ]
+      },
+      "journeys": "Fresh, Settings/Back focus, Help/Diagnostics, invalid/valid import, Continue metadata and replacement cancel"
+    },
+    {
+      "name": "tablet",
+      "touchEmulation": true,
+      "images": [
+        {
+          "file": "fjordside-twilight-1280.webp",
+          "status": 200,
+          "bytes": 173572,
+          "sha256": "29628a5c10d2ae96682c12fd988fc5ce90f621bcd6422ab51e98d1586fd91a2e"
+        }
+      ],
+      "geometry": {
+        "width": 1024,
+        "documentWidth": 1024,
+        "targets": [
+          {
+            "name": "New game",
+            "height": 82.796875
+          },
+          {
+            "name": "Load game",
+            "height": 80.796875
+          },
+          {
+            "name": "Settings",
+            "height": 60
+          },
+          {
+            "name": "Help & support",
+            "height": 60
+          },
+          {
+            "name": "About / Credits",
+            "height": 46
+          }
+        ]
+      },
+      "journeys": "Fresh, Settings/Back focus, Help/Diagnostics, invalid/valid import, Continue metadata and replacement cancel"
+    },
+    {
+      "name": "Background missing",
+      "controlsUsable": true,
+      "worldNotInitialized": true
+    },
+    {
+      "name": "Background slow",
+      "controlsUsable": true,
+      "worldNotInitialized": true
+    },
+    {
+      "name": "200% key action/body text CSS approximation",
+      "noHorizontalOverflow": true,
+      "physicalBrowserTextScaling": false
+    }
+  ],
+  "timings": [
+    {
+      "name": "before",
+      "sample": 1,
+      "temperature": "cold-context",
+      "controlsReadyMs": 650,
+      "resources": [
+        {
+          "name": "index-cuFhZfOE.js",
+          "transferSize": 2776,
+          "decodedBodySize": 6641
+        },
+        {
+          "name": "index-BPHQuCGE.css",
+          "transferSize": 2006,
+          "decodedBodySize": 5135
+        },
+        {
+          "name": "FjordEntry-BYqM_oTI.js",
+          "transferSize": 28443,
+          "decodedBodySize": 90330
+        },
+        {
+          "name": "GameplaySession-D3_yXot7.js",
+          "transferSize": 100342,
+          "decodedBodySize": 344955
+        },
+        {
+          "name": "generateCharacterDNA-BY2EjofW.js",
+          "transferSize": 2474,
+          "decodedBodySize": 5668
+        },
+        {
+          "name": "generateName-CXadswaC.js",
+          "transferSize": 2094,
+          "decodedBodySize": 4356
+        },
+        {
+          "name": "SettlementLayout-DZv0Cw1M.js",
+          "transferSize": 10275,
+          "decodedBodySize": 24748
+        },
+        {
+          "name": "worldConfig-BCznhcbi.js",
+          "transferSize": 1275,
+          "decodedBodySize": 975
+        },
+        {
+          "name": "ClanDiscovery-BHC853Do.js",
+          "transferSize": 2370,
+          "decodedBodySize": 4684
+        },
+        {
+          "name": "SharedSettlement-OtPHw9Nb.js",
+          "transferSize": 15948,
+          "decodedBodySize": 46453
+        },
+        {
+          "name": "CampaignIsland-B-4T3FY8.js",
+          "transferSize": 4958,
+          "decodedBodySize": 11196
+        },
+        {
+          "name": "WorldSave-BOXOREEO.js",
+          "transferSize": 23352,
+          "decodedBodySize": 58870
+        },
+        {
+          "name": "three.module-BGJuE7lp.js",
+          "transferSize": 143607,
+          "decodedBodySize": 561025
+        },
+        {
+          "name": "FacialIdentity-25NfnZZP.js",
+          "transferSize": 28213,
+          "decodedBodySize": 80499
+        },
+        {
+          "name": "CattlePresentation-BsbnPLU9.js",
+          "transferSize": 587,
+          "decodedBodySize": 287
+        },
+        {
+          "name": "FjordEntry-RELkpy95.css",
+          "transferSize": 3734,
+          "decodedBodySize": 15272
+        },
+        {
+          "name": "favicon-32.png",
+          "transferSize": 3366,
+          "decodedBodySize": 3066
+        },
+        {
+          "name": "app-192.png",
+          "transferSize": 94782,
+          "decodedBodySize": 94482
+        },
+        {
+          "name": "fjordside-twilight-2560.webp",
+          "transferSize": 405940,
+          "decodedBodySize": 405640
+        }
+      ]
+    },
+    {
+      "name": "before",
+      "sample": 1,
+      "temperature": "same-context-reload",
+      "controlsReadyMs": 142,
+      "resources": [
+        {
+          "name": "index-cuFhZfOE.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "index-BPHQuCGE.css",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "FjordEntry-BYqM_oTI.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "GameplaySession-D3_yXot7.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "generateCharacterDNA-BY2EjofW.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "generateName-CXadswaC.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "SettlementLayout-DZv0Cw1M.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "worldConfig-BCznhcbi.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "ClanDiscovery-BHC853Do.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "SharedSettlement-OtPHw9Nb.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "CampaignIsland-B-4T3FY8.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "WorldSave-BOXOREEO.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "three.module-BGJuE7lp.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "FacialIdentity-25NfnZZP.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "CattlePresentation-BsbnPLU9.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "FjordEntry-RELkpy95.css",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "app-192.png",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "fjordside-twilight-2560.webp",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "favicon-32.png",
+          "transferSize": 300,
+          "decodedBodySize": 3066
+        }
+      ]
+    },
+    {
+      "name": "before",
+      "sample": 2,
+      "temperature": "cold-context",
+      "controlsReadyMs": 462,
+      "resources": [
+        {
+          "name": "index-cuFhZfOE.js",
+          "transferSize": 2776,
+          "decodedBodySize": 6641
+        },
+        {
+          "name": "index-BPHQuCGE.css",
+          "transferSize": 2006,
+          "decodedBodySize": 5135
+        },
+        {
+          "name": "FjordEntry-BYqM_oTI.js",
+          "transferSize": 28443,
+          "decodedBodySize": 90330
+        },
+        {
+          "name": "GameplaySession-D3_yXot7.js",
+          "transferSize": 100342,
+          "decodedBodySize": 344955
+        },
+        {
+          "name": "generateCharacterDNA-BY2EjofW.js",
+          "transferSize": 2474,
+          "decodedBodySize": 5668
+        },
+        {
+          "name": "generateName-CXadswaC.js",
+          "transferSize": 2094,
+          "decodedBodySize": 4356
+        },
+        {
+          "name": "SettlementLayout-DZv0Cw1M.js",
+          "transferSize": 10275,
+          "decodedBodySize": 24748
+        },
+        {
+          "name": "worldConfig-BCznhcbi.js",
+          "transferSize": 1275,
+          "decodedBodySize": 975
+        },
+        {
+          "name": "ClanDiscovery-BHC853Do.js",
+          "transferSize": 2370,
+          "decodedBodySize": 4684
+        },
+        {
+          "name": "SharedSettlement-OtPHw9Nb.js",
+          "transferSize": 15948,
+          "decodedBodySize": 46453
+        },
+        {
+          "name": "CampaignIsland-B-4T3FY8.js",
+          "transferSize": 4958,
+          "decodedBodySize": 11196
+        },
+        {
+          "name": "WorldSave-BOXOREEO.js",
+          "transferSize": 23352,
+          "decodedBodySize": 58870
+        },
+        {
+          "name": "three.module-BGJuE7lp.js",
+          "transferSize": 143607,
+          "decodedBodySize": 561025
+        },
+        {
+          "name": "FacialIdentity-25NfnZZP.js",
+          "transferSize": 28213,
+          "decodedBodySize": 80499
+        },
+        {
+          "name": "CattlePresentation-BsbnPLU9.js",
+          "transferSize": 587,
+          "decodedBodySize": 287
+        },
+        {
+          "name": "FjordEntry-RELkpy95.css",
+          "transferSize": 3734,
+          "decodedBodySize": 15272
+        },
+        {
+          "name": "favicon-32.png",
+          "transferSize": 3366,
+          "decodedBodySize": 3066
+        },
+        {
+          "name": "app-192.png",
+          "transferSize": 94782,
+          "decodedBodySize": 94482
+        },
+        {
+          "name": "fjordside-twilight-2560.webp",
+          "transferSize": 405940,
+          "decodedBodySize": 405640
+        }
+      ]
+    },
+    {
+      "name": "before",
+      "sample": 2,
+      "temperature": "same-context-reload",
+      "controlsReadyMs": 154,
+      "resources": [
+        {
+          "name": "index-cuFhZfOE.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "index-BPHQuCGE.css",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "FjordEntry-BYqM_oTI.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "GameplaySession-D3_yXot7.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "generateCharacterDNA-BY2EjofW.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "generateName-CXadswaC.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "SettlementLayout-DZv0Cw1M.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "worldConfig-BCznhcbi.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "ClanDiscovery-BHC853Do.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "SharedSettlement-OtPHw9Nb.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "CampaignIsland-B-4T3FY8.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "WorldSave-BOXOREEO.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "three.module-BGJuE7lp.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "FacialIdentity-25NfnZZP.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "CattlePresentation-BsbnPLU9.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "FjordEntry-RELkpy95.css",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "app-192.png",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "fjordside-twilight-2560.webp",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "favicon-32.png",
+          "transferSize": 300,
+          "decodedBodySize": 3066
+        }
+      ]
+    },
+    {
+      "name": "before",
+      "sample": 3,
+      "temperature": "cold-context",
+      "controlsReadyMs": 464,
+      "resources": [
+        {
+          "name": "index-cuFhZfOE.js",
+          "transferSize": 2776,
+          "decodedBodySize": 6641
+        },
+        {
+          "name": "index-BPHQuCGE.css",
+          "transferSize": 2006,
+          "decodedBodySize": 5135
+        },
+        {
+          "name": "FjordEntry-BYqM_oTI.js",
+          "transferSize": 28443,
+          "decodedBodySize": 90330
+        },
+        {
+          "name": "GameplaySession-D3_yXot7.js",
+          "transferSize": 100342,
+          "decodedBodySize": 344955
+        },
+        {
+          "name": "generateCharacterDNA-BY2EjofW.js",
+          "transferSize": 2474,
+          "decodedBodySize": 5668
+        },
+        {
+          "name": "generateName-CXadswaC.js",
+          "transferSize": 2094,
+          "decodedBodySize": 4356
+        },
+        {
+          "name": "SettlementLayout-DZv0Cw1M.js",
+          "transferSize": 10275,
+          "decodedBodySize": 24748
+        },
+        {
+          "name": "worldConfig-BCznhcbi.js",
+          "transferSize": 1275,
+          "decodedBodySize": 975
+        },
+        {
+          "name": "ClanDiscovery-BHC853Do.js",
+          "transferSize": 2370,
+          "decodedBodySize": 4684
+        },
+        {
+          "name": "SharedSettlement-OtPHw9Nb.js",
+          "transferSize": 15948,
+          "decodedBodySize": 46453
+        },
+        {
+          "name": "CampaignIsland-B-4T3FY8.js",
+          "transferSize": 4958,
+          "decodedBodySize": 11196
+        },
+        {
+          "name": "WorldSave-BOXOREEO.js",
+          "transferSize": 23352,
+          "decodedBodySize": 58870
+        },
+        {
+          "name": "three.module-BGJuE7lp.js",
+          "transferSize": 143607,
+          "decodedBodySize": 561025
+        },
+        {
+          "name": "FacialIdentity-25NfnZZP.js",
+          "transferSize": 28213,
+          "decodedBodySize": 80499
+        },
+        {
+          "name": "CattlePresentation-BsbnPLU9.js",
+          "transferSize": 587,
+          "decodedBodySize": 287
+        },
+        {
+          "name": "FjordEntry-RELkpy95.css",
+          "transferSize": 3734,
+          "decodedBodySize": 15272
+        },
+        {
+          "name": "favicon-32.png",
+          "transferSize": 3366,
+          "decodedBodySize": 3066
+        },
+        {
+          "name": "app-192.png",
+          "transferSize": 94782,
+          "decodedBodySize": 94482
+        },
+        {
+          "name": "fjordside-twilight-2560.webp",
+          "transferSize": 405940,
+          "decodedBodySize": 405640
+        }
+      ]
+    },
+    {
+      "name": "before",
+      "sample": 3,
+      "temperature": "same-context-reload",
+      "controlsReadyMs": 124,
+      "resources": [
+        {
+          "name": "index-cuFhZfOE.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "index-BPHQuCGE.css",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "FjordEntry-BYqM_oTI.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "GameplaySession-D3_yXot7.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "generateCharacterDNA-BY2EjofW.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "generateName-CXadswaC.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "SettlementLayout-DZv0Cw1M.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "worldConfig-BCznhcbi.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "ClanDiscovery-BHC853Do.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "SharedSettlement-OtPHw9Nb.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "CampaignIsland-B-4T3FY8.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "WorldSave-BOXOREEO.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "three.module-BGJuE7lp.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "FacialIdentity-25NfnZZP.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "CattlePresentation-BsbnPLU9.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "FjordEntry-RELkpy95.css",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "app-192.png",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "fjordside-twilight-2560.webp",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "favicon-32.png",
+          "transferSize": 300,
+          "decodedBodySize": 3066
+        }
+      ]
+    },
+    {
+      "name": "after",
+      "sample": 1,
+      "temperature": "cold-context",
+      "controlsReadyMs": 425,
+      "resources": [
+        {
+          "name": "index-CAySJLBV.js",
+          "transferSize": 2773,
+          "decodedBodySize": 6641
+        },
+        {
+          "name": "index-H1N_9foj.css",
+          "transferSize": 2615,
+          "decodedBodySize": 7748
+        },
+        {
+          "name": "FjordEntry-Bf1YU6yD.js",
+          "transferSize": 28445,
+          "decodedBodySize": 90330
+        },
+        {
+          "name": "GameplaySession-D3_yXot7.js",
+          "transferSize": 100342,
+          "decodedBodySize": 344955
+        },
+        {
+          "name": "generateCharacterDNA-BY2EjofW.js",
+          "transferSize": 2474,
+          "decodedBodySize": 5668
+        },
+        {
+          "name": "generateName-CXadswaC.js",
+          "transferSize": 2094,
+          "decodedBodySize": 4356
+        },
+        {
+          "name": "SettlementLayout-DZv0Cw1M.js",
+          "transferSize": 10275,
+          "decodedBodySize": 24748
+        },
+        {
+          "name": "worldConfig-BCznhcbi.js",
+          "transferSize": 1275,
+          "decodedBodySize": 975
+        },
+        {
+          "name": "ClanDiscovery-BHC853Do.js",
+          "transferSize": 2370,
+          "decodedBodySize": 4684
+        },
+        {
+          "name": "SharedSettlement-OtPHw9Nb.js",
+          "transferSize": 15948,
+          "decodedBodySize": 46453
+        },
+        {
+          "name": "CampaignIsland-B-4T3FY8.js",
+          "transferSize": 4958,
+          "decodedBodySize": 11196
+        },
+        {
+          "name": "WorldSave-BOXOREEO.js",
+          "transferSize": 23352,
+          "decodedBodySize": 58870
+        },
+        {
+          "name": "three.module-BGJuE7lp.js",
+          "transferSize": 143607,
+          "decodedBodySize": 561025
+        },
+        {
+          "name": "FacialIdentity-25NfnZZP.js",
+          "transferSize": 28213,
+          "decodedBodySize": 80499
+        },
+        {
+          "name": "CattlePresentation-BsbnPLU9.js",
+          "transferSize": 587,
+          "decodedBodySize": 287
+        },
+        {
+          "name": "FjordEntry-CzbNJAzj.css",
+          "transferSize": 4203,
+          "decodedBodySize": 18235
+        },
+        {
+          "name": "favicon-32.png",
+          "transferSize": 3366,
+          "decodedBodySize": 3066
+        },
+        {
+          "name": "app-192.png",
+          "transferSize": 94782,
+          "decodedBodySize": 94482
+        },
+        {
+          "name": "fjordside-twilight-2560.webp",
+          "transferSize": 405940,
+          "decodedBodySize": 405640
+        }
+      ]
+    },
+    {
+      "name": "after",
+      "sample": 1,
+      "temperature": "same-context-reload",
+      "controlsReadyMs": 129,
+      "resources": [
+        {
+          "name": "index-CAySJLBV.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "index-H1N_9foj.css",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "FjordEntry-Bf1YU6yD.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "GameplaySession-D3_yXot7.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "generateCharacterDNA-BY2EjofW.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "generateName-CXadswaC.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "SettlementLayout-DZv0Cw1M.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "worldConfig-BCznhcbi.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "ClanDiscovery-BHC853Do.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "SharedSettlement-OtPHw9Nb.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "CampaignIsland-B-4T3FY8.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "WorldSave-BOXOREEO.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "three.module-BGJuE7lp.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "FacialIdentity-25NfnZZP.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "CattlePresentation-BsbnPLU9.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "FjordEntry-CzbNJAzj.css",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "app-192.png",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "fjordside-twilight-2560.webp",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "favicon-32.png",
+          "transferSize": 300,
+          "decodedBodySize": 3066
+        }
+      ]
+    },
+    {
+      "name": "after",
+      "sample": 2,
+      "temperature": "cold-context",
+      "controlsReadyMs": 445,
+      "resources": [
+        {
+          "name": "index-CAySJLBV.js",
+          "transferSize": 2773,
+          "decodedBodySize": 6641
+        },
+        {
+          "name": "index-H1N_9foj.css",
+          "transferSize": 2615,
+          "decodedBodySize": 7748
+        },
+        {
+          "name": "FjordEntry-Bf1YU6yD.js",
+          "transferSize": 28445,
+          "decodedBodySize": 90330
+        },
+        {
+          "name": "GameplaySession-D3_yXot7.js",
+          "transferSize": 100342,
+          "decodedBodySize": 344955
+        },
+        {
+          "name": "generateCharacterDNA-BY2EjofW.js",
+          "transferSize": 2474,
+          "decodedBodySize": 5668
+        },
+        {
+          "name": "generateName-CXadswaC.js",
+          "transferSize": 2094,
+          "decodedBodySize": 4356
+        },
+        {
+          "name": "SettlementLayout-DZv0Cw1M.js",
+          "transferSize": 10275,
+          "decodedBodySize": 24748
+        },
+        {
+          "name": "worldConfig-BCznhcbi.js",
+          "transferSize": 1275,
+          "decodedBodySize": 975
+        },
+        {
+          "name": "ClanDiscovery-BHC853Do.js",
+          "transferSize": 2370,
+          "decodedBodySize": 4684
+        },
+        {
+          "name": "SharedSettlement-OtPHw9Nb.js",
+          "transferSize": 15948,
+          "decodedBodySize": 46453
+        },
+        {
+          "name": "CampaignIsland-B-4T3FY8.js",
+          "transferSize": 4958,
+          "decodedBodySize": 11196
+        },
+        {
+          "name": "WorldSave-BOXOREEO.js",
+          "transferSize": 23352,
+          "decodedBodySize": 58870
+        },
+        {
+          "name": "three.module-BGJuE7lp.js",
+          "transferSize": 143607,
+          "decodedBodySize": 561025
+        },
+        {
+          "name": "FacialIdentity-25NfnZZP.js",
+          "transferSize": 28213,
+          "decodedBodySize": 80499
+        },
+        {
+          "name": "CattlePresentation-BsbnPLU9.js",
+          "transferSize": 587,
+          "decodedBodySize": 287
+        },
+        {
+          "name": "FjordEntry-CzbNJAzj.css",
+          "transferSize": 4203,
+          "decodedBodySize": 18235
+        },
+        {
+          "name": "favicon-32.png",
+          "transferSize": 3366,
+          "decodedBodySize": 3066
+        },
+        {
+          "name": "app-192.png",
+          "transferSize": 94782,
+          "decodedBodySize": 94482
+        },
+        {
+          "name": "fjordside-twilight-2560.webp",
+          "transferSize": 405940,
+          "decodedBodySize": 405640
+        }
+      ]
+    },
+    {
+      "name": "after",
+      "sample": 2,
+      "temperature": "same-context-reload",
+      "controlsReadyMs": 127,
+      "resources": [
+        {
+          "name": "index-CAySJLBV.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "index-H1N_9foj.css",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "FjordEntry-Bf1YU6yD.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "GameplaySession-D3_yXot7.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "generateCharacterDNA-BY2EjofW.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "generateName-CXadswaC.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "SettlementLayout-DZv0Cw1M.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "worldConfig-BCznhcbi.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "ClanDiscovery-BHC853Do.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "SharedSettlement-OtPHw9Nb.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "CampaignIsland-B-4T3FY8.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "WorldSave-BOXOREEO.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "three.module-BGJuE7lp.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "FacialIdentity-25NfnZZP.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "CattlePresentation-BsbnPLU9.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "FjordEntry-CzbNJAzj.css",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "app-192.png",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "fjordside-twilight-2560.webp",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "favicon-32.png",
+          "transferSize": 300,
+          "decodedBodySize": 3066
+        }
+      ]
+    },
+    {
+      "name": "after",
+      "sample": 3,
+      "temperature": "cold-context",
+      "controlsReadyMs": 419,
+      "resources": [
+        {
+          "name": "index-CAySJLBV.js",
+          "transferSize": 2773,
+          "decodedBodySize": 6641
+        },
+        {
+          "name": "index-H1N_9foj.css",
+          "transferSize": 2615,
+          "decodedBodySize": 7748
+        },
+        {
+          "name": "FjordEntry-Bf1YU6yD.js",
+          "transferSize": 28445,
+          "decodedBodySize": 90330
+        },
+        {
+          "name": "GameplaySession-D3_yXot7.js",
+          "transferSize": 100342,
+          "decodedBodySize": 344955
+        },
+        {
+          "name": "generateCharacterDNA-BY2EjofW.js",
+          "transferSize": 2474,
+          "decodedBodySize": 5668
+        },
+        {
+          "name": "generateName-CXadswaC.js",
+          "transferSize": 2094,
+          "decodedBodySize": 4356
+        },
+        {
+          "name": "SettlementLayout-DZv0Cw1M.js",
+          "transferSize": 10275,
+          "decodedBodySize": 24748
+        },
+        {
+          "name": "worldConfig-BCznhcbi.js",
+          "transferSize": 1275,
+          "decodedBodySize": 975
+        },
+        {
+          "name": "ClanDiscovery-BHC853Do.js",
+          "transferSize": 2370,
+          "decodedBodySize": 4684
+        },
+        {
+          "name": "SharedSettlement-OtPHw9Nb.js",
+          "transferSize": 15948,
+          "decodedBodySize": 46453
+        },
+        {
+          "name": "CampaignIsland-B-4T3FY8.js",
+          "transferSize": 4958,
+          "decodedBodySize": 11196
+        },
+        {
+          "name": "WorldSave-BOXOREEO.js",
+          "transferSize": 23352,
+          "decodedBodySize": 58870
+        },
+        {
+          "name": "three.module-BGJuE7lp.js",
+          "transferSize": 143607,
+          "decodedBodySize": 561025
+        },
+        {
+          "name": "FacialIdentity-25NfnZZP.js",
+          "transferSize": 28213,
+          "decodedBodySize": 80499
+        },
+        {
+          "name": "CattlePresentation-BsbnPLU9.js",
+          "transferSize": 587,
+          "decodedBodySize": 287
+        },
+        {
+          "name": "FjordEntry-CzbNJAzj.css",
+          "transferSize": 4203,
+          "decodedBodySize": 18235
+        },
+        {
+          "name": "favicon-32.png",
+          "transferSize": 3366,
+          "decodedBodySize": 3066
+        },
+        {
+          "name": "app-192.png",
+          "transferSize": 94782,
+          "decodedBodySize": 94482
+        },
+        {
+          "name": "fjordside-twilight-2560.webp",
+          "transferSize": 405940,
+          "decodedBodySize": 405640
+        }
+      ]
+    },
+    {
+      "name": "after",
+      "sample": 3,
+      "temperature": "same-context-reload",
+      "controlsReadyMs": 134,
+      "resources": [
+        {
+          "name": "index-CAySJLBV.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "index-H1N_9foj.css",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "FjordEntry-Bf1YU6yD.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "GameplaySession-D3_yXot7.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "generateCharacterDNA-BY2EjofW.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "generateName-CXadswaC.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "SettlementLayout-DZv0Cw1M.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "worldConfig-BCznhcbi.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "ClanDiscovery-BHC853Do.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "SharedSettlement-OtPHw9Nb.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "CampaignIsland-B-4T3FY8.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "WorldSave-BOXOREEO.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "three.module-BGJuE7lp.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "FacialIdentity-25NfnZZP.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "CattlePresentation-BsbnPLU9.js",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "FjordEntry-CzbNJAzj.css",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "app-192.png",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "fjordside-twilight-2560.webp",
+          "transferSize": 300,
+          "decodedBodySize": 0
+        },
+        {
+          "name": "favicon-32.png",
+          "transferSize": 300,
+          "decodedBodySize": 3066
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

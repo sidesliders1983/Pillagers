@@ -1,0 +1,187 @@
+{
+  "base_commit": "4086baac26c6953b879b439546b68f2406ca767a",
+  "implementation_commit": "2893628d9c3fbc509aa8f977ad04235f4345a754",
+  "branch": "codex/player-menus-298",
+  "audit_commit": "c3c6e987e5754d9f4b83bb647923ef99d2053f96",
+  "build": {
+    "command": "pnpm build",
+    "exit_code": 0,
+    "marker": "2893628d9c3fbc509aa8f977ad04235f4345a754",
+    "observed_browser_assets": [
+      "/assets/index-CsrKOl6B.js",
+      "/assets/index-BPHQuCGE.css",
+      "/assets/FjordEntry-BpxPCbGl.css"
+    ],
+    "bundles": [
+      {
+        "path": "dist/assets/FjordEntry-BU3K6B2D.js",
+        "bytes": 86626,
+        "sha256": "f7156e73c78a18cc411c8f614ee227054a2aa14d3d5ace812363310b1d9bf17e",
+        "contains_clean_source_marker": true,
+        "contains_dirty_source_marker": false
+      },
+      {
+        "path": "dist/assets/index-CsrKOl6B.js",
+        "bytes": 6641,
+        "sha256": "98f3ff7c204578213eaaba800e819ed20a8fefdd2f028352a5163962fbd77c69",
+        "contains_clean_source_marker": false,
+        "contains_dirty_source_marker": false
+      },
+      {
+        "path": "dist/assets/index-BPHQuCGE.css",
+        "bytes": 5135,
+        "sha256": "47394b5c52d218ba0967b7944bc420d4ac3cd2535375e296c889fa992c295731"
+      },
+      {
+        "path": "dist/assets/FjordEntry-BpxPCbGl.css",
+        "bytes": 7078,
+        "sha256": "b38f097361aeb57fab4b747d0e43c789a22cf0cd1394163ae1bf15ffe52935e7"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "path": "src/fjord-play/CampaignEntryMenu.ts",
+      "sha256_git_bytes": "6dd0002a938f67b721cd6366ea1953eca9c9f9b2f32c9361dc7e43ed6a128c87"
+    },
+    {
+      "path": "src/fjord-play/FjordEntry.ts",
+      "sha256_git_bytes": "3c9dbde94b67c1c034b8807cbf9d7013268e4b48cf7a0e05490a31efcca6c443"
+    },
+    {
+      "path": "src/fjord-play/FjordHeader.ts",
+      "sha256_git_bytes": "027d7aadf9a7be3db0bb4e418b354f620d5c77cb66521ff78621bfdc33270f94"
+    },
+    {
+      "path": "src/fjord-play/FjordPlay.ts",
+      "sha256_git_bytes": "8dd9a0b87bd4000a016dd9659404b27eb0761ba49cacdb38740324f6bc6d26ca"
+    },
+    {
+      "path": "src/fjord-play/PlayerFeedback.ts",
+      "sha256_git_bytes": "84cbb88e306565dbeba8cca002ef20dfb0920677309750ae5e43d7e5d669efee"
+    },
+    {
+      "path": "src/fjord-play/PlaytestPerformance.ts",
+      "sha256_git_bytes": "3c9047c579f7776f4b336f42b1a803f0cec8df2607bce57858d2b34b74472c0a"
+    },
+    {
+      "path": "src/fjord-play/player-menu.css",
+      "sha256_git_bytes": "2b07ddefc04745b5e6cb591b9b8c503157d36c67249ec29a7d56c87322a2f2ef"
+    },
+    {
+      "path": "src/lore/FoundingBookWindow.ts",
+      "sha256_git_bytes": "18e2be4194da131ee6fcfdd4dd7d449313a40d47a118961c8f83a1cb0afe9f40"
+    },
+    {
+      "path": "tests/first-steps-dom.test.mjs",
+      "sha256_git_bytes": "7fb0a3a220fab063a46e9a0359f3a3662e9aee647aa101e2c01759f8dab4949d"
+    },
+    {
+      "path": "tests/performance-overlay-dom.test.mjs",
+      "sha256_git_bytes": "6e909efcfdeab2ede54b5c6fc06c5c5812265fff574980f18708981e70a01230"
+    },
+    {
+      "path": "tests/player-game-menu.test.mjs",
+      "sha256_git_bytes": "2abdde4ff112c04f5b1e25c28e8e841ecdcd1e975677064d608f258d79d9f17a"
+    },
+    {
+      "path": "tests/player-menu-entry.test.mjs",
+      "sha256_git_bytes": "f777d8b33eaedda0afe3fe6e2b514690b45d70822dd4e82d3c8ae7dc821df0c6"
+    },
+    {
+      "path": "vite.config.ts",
+      "sha256_git_bytes": "c661ab95491ace5d9a453c58d63455955fbf5789baa4f043cfc9857dd284c99a"
+    }
+  ],
+  "evidence_provenance": {
+    "pinned-start": "exact clean-code build; normal start and responsive static screenshots",
+    "integration": "precommit working build; report identifies 4086baac26c6953b879b439546b68f2406ca767a-dirty; not pinned-head acceptance",
+    "responsive": "requested 590x360 viewport override; mouse/keyboard, no physical/coarse-pointer evidence",
+    "tests": "66 pass, 0 fail/skipped before formatting-only changes; pinned build follows",
+    "clipboard_load_report": "toast succeeded; adapter returned empty text; empty file excluded",
+    "browser_limit": "existing native replacement confirmation stalls control; fresh tab read/resize works but clicks do not alter state",
+    "feedback": "unconfigured, CTA absent; no real external journey claimed"
+  },
+  "artifacts": [
+    {
+      "path": "action-map.md",
+      "bytes": 12231,
+      "sha256": "f1ddf18688ef25f73811c00044ba623cfc71175e5354e3975429e633d88bfec8"
+    },
+    {
+      "path": "evidence/copied-performance-report.json",
+      "bytes": 11929,
+      "sha256": "df8c880422cbea7a8ebf6bb43383e4e0986bdbe7763d5639d6545692ab585064"
+    },
+    {
+      "path": "evidence/details-recorder.jpg",
+      "bytes": 109402,
+      "sha256": "fcc68e8bebe88bacc9a88402100946d10e1f89665e7ff1ba5330ba2742901e52"
+    },
+    {
+      "path": "evidence/details-recorder.txt",
+      "bytes": 4294,
+      "sha256": "036319a2ffd941ea09de24cd6f37c6631e2d981375dcc2da0417b4f29ea98909"
+    },
+    {
+      "path": "evidence/invalid-in-game.jpg",
+      "bytes": 95821,
+      "sha256": "38e9dc748b6cb51f0c9a490e77449dad9a7449befd3cc50de816c4b867fe6470"
+    },
+    {
+      "path": "evidence/invalid-in-game.txt",
+      "bytes": 3623,
+      "sha256": "00f49076aa052911979572e3f66ea4b91c6cb8daff0894aa5acaf279a56fad04"
+    },
+    {
+      "path": "evidence/loading-test-complete.jpg",
+      "bytes": 54020,
+      "sha256": "2563f0dfedc5b5c50c4994dcdde0a917638ad296029ec1ca486c7a5ade059858"
+    },
+    {
+      "path": "evidence/loading-test.json",
+      "bytes": 223102,
+      "sha256": "c3b10a1d9bf0a5804977811a50c29acbe1994023ed740fe3af5940fd61cfd421"
+    },
+    {
+      "path": "evidence/pinned-build.txt",
+      "bytes": 5708,
+      "sha256": "07137c5a66b9ed71de4d321ad2b51b6d5a0f9b43ad40b3de671b1eed2b0fd194"
+    },
+    {
+      "path": "evidence/pinned-start-desktop.jpg",
+      "bytes": 28198,
+      "sha256": "79108ba426d83757cc1b43cc5b94685e220fe250ea1a6a785af0d38c1a3fa8fb"
+    },
+    {
+      "path": "evidence/pinned-start-desktop.txt",
+      "bytes": 300,
+      "sha256": "b01363129e77e4b3435dc7021b8dc24e3c9e5aa2ee2af1a07bc492d7ff8801d1"
+    },
+    {
+      "path": "evidence/pinned-start-landscape.jpg",
+      "bytes": 16521,
+      "sha256": "9a5f957a657485e53d2240f2ab269a19f6632accf64a3c1108790c1e612187c9"
+    },
+    {
+      "path": "evidence/targeted-tests.txt",
+      "bytes": 7497,
+      "sha256": "de7149ae31f59d4f6085da1b04fdac8302a44c5b2883bd863e7af421b1664455"
+    },
+    {
+      "path": "README.md",
+      "bytes": 10956,
+      "sha256": "3f4f9bd3e6665b511da80d4213f5124871f70b578477c1a7e0ec0672af9db623"
+    }
+  ],
+  "artifact_hash_scope": "UTF-8 LF text / original binary bytes, excludes manifest itself and .gitattributes",
+  "followup": "followup/manifest.json",
+  "original_readme_sha256_at_85cbaa9": "f2bc41ea9eb7f27d571a264e008f57714a3bad22901973051bcb8ef84df58f25",
+  "readme_history": [
+    {
+      "commit": "71cfb83f4305ac5c21ec3fb536d9813150f3f20c",
+      "sha256": "4a3576c0edee04c9f1414b8c557848557a376b37eebe395c75e34e693edd767e"
+    }
+  ],
+  "headless_followup": "headless/manifest.json"
+}

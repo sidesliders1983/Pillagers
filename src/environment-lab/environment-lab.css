@@ -1,11 +1,13 @@
+@import "../ui/fjord-theme.css";
+
 .environment-lab {
     margin: 0;
     overflow-x: hidden;
     overflow-y: auto;
     overscroll-behavior-y: auto;
-    background: #e8ebe0;
-    color: #293e37;
-    font: 15px system-ui;
+    background: var(--fs-canvas);
+    color: var(--fs-text);
+    font: 15px var(--fs-font-body);
 }
 
 .environment-lab main {
@@ -34,7 +36,7 @@
 }
 
 .environment-lab a {
-    color: #37584d;
+    color: var(--fs-text);
 }
 
 .environment-lab label {
@@ -51,8 +53,8 @@
     box-sizing: border-box;
     max-width: 100%;
     padding: 8px;
-    border: 1px solid #a6b6a7;
-    border-radius: 5px;
+    border: 1px solid var(--fs-border);
+    border-radius: var(--fs-radius-control);
 }
 
 .environment-lab input[type='checkbox'] {
@@ -69,9 +71,9 @@
 
 .environment-lab details {
     margin-top: 12px;
-    border: 1px solid #a6b6a7;
-    border-radius: 5px;
-    background: #f5f6f0;
+    border: 1px solid var(--fs-border);
+    border-radius: var(--fs-radius-card);
+    background: var(--fs-surface-solid);
 }
 
 .environment-lab summary {
@@ -80,7 +82,7 @@
 }
 
 .environment-lab summary:focus-visible {
-    outline: 2px solid #37584d;
+    outline: 3px solid var(--fs-focus);
     outline-offset: 2px;
 }
 
@@ -92,8 +94,8 @@
     min-width: 0;
     margin: 12px 0 0;
     padding: 12px;
-    border: 1px solid #a6b6a7;
-    border-radius: 5px;
+    border: 1px solid var(--fs-border);
+    border-radius: var(--fs-radius-card);
 }
 
 .environment-lab canvas {
@@ -106,7 +108,7 @@
 
 .environment-lab pre {
     padding: 12px;
-    background: #f5f6f0;
+    background: var(--fs-surface-solid);
     line-height: 1.5;
     white-space: pre-wrap;
     overflow-wrap: anywhere;

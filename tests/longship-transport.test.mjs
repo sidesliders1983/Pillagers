@@ -371,6 +371,10 @@ test('expedition controls offer disband only at home and remove the current grou
     const previous = Object.fromEntries(globals.map(key => [key, globalThis[key]]));
     for (const key of globals) globalThis[key] = key === 'window' ? dom.window : dom.window[key];
     globalThis.matchMedia = () => ({ matches: false });
+    dom.window.HTMLDialogElement.prototype.showModal = function () { this.setAttribute('open', ''); };
+    dom.window.HTMLDialogElement.prototype.close = function () {
+        this.removeAttribute('open'); this.dispatchEvent(new dom.window.Event('close'));
+    };
     let panel;
     try {
         const { GameplaySession } = loadDOMSource('../src/gameplay-lab/GameplaySession.ts');
@@ -390,6 +394,8 @@ test('expedition controls offer disband only at home and remove the current grou
         assert.ok(disband);
         const missions = structuredClone(session.readSnapshot().world.spatial.missions);
         disband.click();
+        assert.ok(session.readSnapshot().world.groups['group-1'], 'Review alone does not remove the group');
+        document.querySelector('#expedition-group-confirm').click();
         assert.equal(session.readSnapshot().world.groups['group-1'], undefined);
         assert.deepEqual(session.readSnapshot().world.spatial.missions, missions);
         assert.equal(document.querySelector('[data-expedition-group="group-1"]'), null);

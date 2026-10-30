@@ -1,0 +1,352 @@
+{
+  "version": 1,
+  "build": "7dfb602dff63f49a8445008d2ea14fd6f0cda2b8",
+  "context": {
+    "seed": 3802174487,
+    "dpr": 1,
+    "width": 590,
+    "height": 360,
+    "quality": "low",
+    "effects": "off",
+    "renderedResidents": 10,
+    "renderedLivestock": 3,
+    "renderedWildlife": 0
+  },
+  "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+  "viewport": [
+    590,
+    360
+  ],
+  "recording": "off",
+  "frozenDisplayAt": "20:52:17",
+  "capabilities": {
+    "gpuTimer": true,
+    "jsHeap": true,
+    "longTasks": true
+  },
+  "units": {
+    "cpu": "synchronous JS ms; async submit excludes resumed continuations",
+    "gpu": "query ms; main includes native shadows; portrait separate",
+    "memory": "optional JS heap only; resource counts are not bytes; VRAM unavailable"
+  },
+  "resources": {
+    "geometries": 131,
+    "textures": 122,
+    "programs": 58,
+    "highGeometries": 131,
+    "highTextures": 122,
+    "highPrograms": 58
+  },
+  "workload": {
+    "main": {
+      "calls": 228,
+      "triangles": 3335052,
+      "at": 28479.79999999702
+    }
+  },
+  "heap": {
+    "source": "performance.memory (non-standard)",
+    "usedBytes": 415770832,
+    "allocatedBytes": 507516300
+  },
+  "sample": {
+    "elapsedMs": 485.79999999701977,
+    "sampledUtc": "2026-10-29T20:52:18.066Z",
+    "mode": "Paused",
+    "fps": 21.635655560363446,
+    "interval": {
+      "count": 10,
+      "windowMs": 425.0999999985106,
+      "weight": 0,
+      "meanMs": 46.22000000000007,
+      "p50Ms": 52.5,
+      "p95Ms": 54.099999999998545,
+      "p99Ms": 54.099999999998545,
+      "worstMs": 54.099999999998545,
+      "latestMs": 54
+    },
+    "cpuFrame": {
+      "count": 11,
+      "windowMs": 479.19999999850916,
+      "weight": 0,
+      "meanMs": 12.07272727110169,
+      "p50Ms": 11.199999995529652,
+      "p95Ms": 19.69999999552965,
+      "p99Ms": 19.69999999552965,
+      "worstMs": 19.69999999552965,
+      "latestMs": 6.799999997019768
+    },
+    "spans": {
+      "core": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "ui": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "sceneCpu": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "sceneWall": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "modelCpu": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "modelWall": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "portraitCpu": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "portraitWall": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      }
+    },
+    "gpu": {
+      "status": "pending",
+      "at": 28028.79999999702
+    },
+    "ticks": {
+      "total": 0,
+      "perSecond": 0
+    },
+    "worstRecentHitchMs": 0,
+    "history": [
+      {
+        "elapsedMs": 0.6999999955296516,
+        "mode": "Paused",
+        "fps": null,
+        "intervalP95Ms": null,
+        "cpuP95Ms": null,
+        "gpuMs": null,
+        "ticks": 0
+      }
+    ],
+    "events": []
+  },
+  "loading": {
+    "attempt": "mvu0r24o-1",
+    "startedUtc": "2026-10-29T20:51:50.281Z",
+    "percent": 100,
+    "stage": "Preparing the first frame",
+    "outcome": "playable",
+    "worker": "received",
+    "elapsedMs": 23836.29999999702,
+    "stageElapsedMs": 997,
+    "lastProgressAgeMs": 0.20000000298023224,
+    "maxObservationGapMs": 5534.80000000447,
+    "firstFrameMs": 23827.10000000149,
+    "playableMs": 23836.29999999702,
+    "units": {
+      "completed": 155,
+      "total": 155,
+      "kind": "draw batches"
+    },
+    "resources": {
+      "geometries": 131,
+      "textures": 122,
+      "programs": 58,
+      "calls": 154,
+      "triangles": 2154658,
+      "renderPixelRatio": 1,
+      "drawingBuffer": [
+        590,
+        360
+      ]
+    },
+    "warning": "",
+    "timeline": [
+      {
+        "stage": "campaign-restore-inclusive",
+        "startedMs": 14,
+        "durationMs": 1992.1000000014901,
+        "outcome": "complete"
+      },
+      {
+        "stage": "geography",
+        "startedMs": 26.299999997019768,
+        "durationMs": 678.2000000029802,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:island-download",
+        "startedMs": 45.399999998509884,
+        "durationMs": 37.100000001490116,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:island-unpack",
+        "startedMs": 82.59995117038488,
+        "durationMs": 117.10000000149012,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:island-verify",
+        "startedMs": 199.70004882663488,
+        "durationMs": 82.60000000149012,
+        "outcome": "complete"
+      },
+      {
+        "stage": "receive-and-freeze",
+        "startedMs": 657.2999999970198,
+        "durationMs": 46.899999998509884,
+        "outcome": "complete"
+      },
+      {
+        "stage": "assets-fetch-decode",
+        "startedMs": 2076.5,
+        "durationMs": 586.7999999970198,
+        "outcome": "complete"
+      },
+      {
+        "stage": "nature-assets-fetch-decode",
+        "startedMs": 2695.89999999851,
+        "durationMs": 2127.2999999970198,
+        "outcome": "complete"
+      },
+      {
+        "stage": "ground-textures-fetch-decode",
+        "startedMs": 4823.19999999553,
+        "durationMs": 16.200000002980232,
+        "outcome": "complete"
+      },
+      {
+        "stage": "terrain-mesh-and-masks",
+        "startedMs": 4839.5,
+        "durationMs": 6416.60000000149,
+        "outcome": "complete"
+      },
+      {
+        "stage": "pine-assets-fetch-decode",
+        "startedMs": 11256.10000000149,
+        "durationMs": 102.5,
+        "outcome": "complete"
+      },
+      {
+        "stage": "nature-instance-assembly",
+        "startedMs": 11358.69999999553,
+        "durationMs": 2.8000000044703484,
+        "outcome": "complete"
+      },
+      {
+        "stage": "movement-surface",
+        "startedMs": 11374.5,
+        "durationMs": 1.1999999955296516,
+        "outcome": "complete"
+      },
+      {
+        "stage": "wildlife-preparation",
+        "startedMs": 11376.29999999702,
+        "durationMs": 498.5,
+        "outcome": "complete"
+      },
+      {
+        "stage": "initial-character-scene-sync",
+        "startedMs": 11999.60000000149,
+        "durationMs": 3517.5,
+        "outcome": "complete"
+      },
+      {
+        "stage": "initial-settlement-models",
+        "startedMs": 12052.39999999851,
+        "durationMs": 3441.7000000029802,
+        "outcome": "complete"
+      },
+      {
+        "stage": "standing-tree-targets",
+        "startedMs": 15502.29999999702,
+        "durationMs": 1.8999999985098839,
+        "outcome": "complete"
+      },
+      {
+        "stage": "construction-gpu-preparation",
+        "startedMs": 15525.19999999553,
+        "durationMs": 6785.9000000059605,
+        "outcome": "complete"
+      },
+      {
+        "stage": "texture-upload",
+        "startedMs": 22313,
+        "durationMs": 312.8999999985099,
+        "outcome": "complete"
+      },
+      {
+        "stage": "shader-compilation",
+        "startedMs": 22626.10000000149,
+        "durationMs": 213.19999999552965,
+        "outcome": "complete"
+      },
+      {
+        "stage": "initial-gpu-upload-and-draws",
+        "startedMs": 22839.5,
+        "durationMs": 987.3999999985099,
+        "outcome": "complete"
+      }
+    ]
+  },
+  "truncated": false
+}

@@ -8,10 +8,10 @@
     padding: 0 8px 0 0;
     list-style: none;
 }
-.personal-history-records > li { padding-block: 12px; border-bottom: 1px solid #697562; }
+.personal-history-records > li { padding-block: 12px; border-bottom: 1px solid var(--fs-divider); }
 .personal-history-records small { display: block; margin-top: 6px; }
-.personal-history-records blockquote { margin: 8px 0; padding-left: 10px; border-left: 2px solid #bdab75; }
+.personal-history-records blockquote { margin: 8px 0; padding-left: 10px; border-left: 2px solid var(--fs-border); }
 .personal-history-content nav { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .personal-history-content button { min-height: 44px; }
-.personal-history-content :focus-visible { outline: 2px solid #f7d57f; outline-offset: 2px; }
-#clan-book-story [data-history-target] { border-left: 3px solid #f7d57f; padding-left: 12px; }
+.personal-history-content :focus-visible { outline: 3px solid var(--fs-focus); outline-offset: 2px; }
+#clan-book-story [data-history-target] { border-left: 3px solid var(--fs-border); padding-left: 12px; }

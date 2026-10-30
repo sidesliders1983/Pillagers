@@ -1,12 +1,12 @@
-#island-loading { position:fixed; inset:0; z-index:10000; display:grid; grid-template-areas:"preview" "status"; grid-template-rows:minmax(0,1fr) auto; color:#eee7d1; background:#163b48; font-family:Georgia,serif; }
+#island-loading { position:fixed; inset:0; z-index:10000; display:grid; grid-template-areas:"preview" "status"; grid-template-rows:minmax(0,1fr) auto; color:var(--fs-text); background:var(--fs-panel); font-family:Georgia,serif; }
 #island-loading > canvas { position:absolute; inset:0; width:100%; height:100%; transition:opacity .6s ease; }
 .island-loading-copy { grid-area:status; position:relative; text-align:center; padding:24px max(20px,env(safe-area-inset-left)) max(32px,env(safe-area-inset-bottom)); background:linear-gradient(transparent,#102c36eb); }
-.island-loading-eyebrow { text-transform:uppercase; letter-spacing:.24em; font:12px system-ui,sans-serif; }
+.island-loading-eyebrow { text-transform:uppercase; letter-spacing:.24em; font:12px var(--fs-font-body); }
 #island-loading h1 { font-size:clamp(22px,3vw,34px); margin:12px 0; }
-.island-loading-help { font:14px/1.5 system-ui,sans-serif; }
+.island-loading-help { font:14px/1.5 var(--fs-font-body); }
 .island-loading-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; }
-#island-loading button { min-height:44px; border:1px solid #b3b895; border-radius:6px; padding:10px 18px; background:#1a3439; color:#f5ebce; font:15px system-ui,sans-serif; cursor:pointer; }
-#island-loading button:focus-visible { outline:3px solid #ffd780; outline-offset:3px; }
+#island-loading button { min-height:44px; border:1px solid var(--fs-border); border-radius:var(--fs-radius-control); padding:10px 18px; background:var(--fs-panel); color:var(--fs-text); font:15px var(--fs-font-body); cursor:pointer; }
+#island-loading button:focus-visible { outline:3px solid var(--fs-focus); outline-offset:3px; }
 #island-loading [hidden] { display:none; }
 #island-loading.island-loading-arrival { background:transparent; }
 .island-loading-arrival > canvas { opacity:0; }
@@ -17,23 +17,23 @@ body.island-preparing #fjord-header, body.island-preparing #fjord-play footer,
 body.island-preparing #fjord-management, body.island-preparing #fjord-management-toggle,
 body.island-preparing #fjord-selection-labels, body.island-preparing #fjord-selection-leaders { display:none; }
 body.island-preparing #fjord-canvas { border-radius:0; }
-.fjord-load-error { max-width:40rem; padding:32px; margin:auto; font:18px/1.5 system-ui,sans-serif; }
+.fjord-load-error { max-width:40rem; padding:32px; margin:auto; font:18px/1.5 var(--fs-font-body); }
 .fjord-load-error button { min-height:44px; padding:8px 16px; }
 
-.island-load-progress { max-width:36rem; margin:10px auto; text-align:left; font:13px/1.4 system-ui,sans-serif; }
+.island-load-progress { max-width:36rem; margin:10px auto; text-align:left; font:13px/1.4 var(--fs-font-body); }
 .island-load-summary { display:flex; justify-content:space-between; gap:16px; margin-bottom:6px; }
 .island-load-summary strong { font-variant-numeric:tabular-nums; }
-.island-load-progress progress { display:block; width:100%; height:8px; border:0; border-radius:4px; accent-color:#e5c47d; background:#31545b; }
-.island-load-progress progress::-webkit-progress-bar { background:#31545b; border-radius:4px; }
-.island-load-progress progress::-webkit-progress-value { background:#e5c47d; border-radius:4px; }
-.island-load-progress progress::-moz-progress-bar { background:#e5c47d; border-radius:4px; }
+.island-load-progress progress { display:block; width:100%; height:8px; border:0; border-radius:var(--fs-radius-card); accent-color:var(--fs-accent); background:var(--fs-chart-track); }
+.island-load-progress progress::-webkit-progress-bar { background:var(--fs-chart-track); border-radius:var(--fs-radius-card); }
+.island-load-progress progress::-webkit-progress-value { background:var(--fs-chart-fill); border-radius:var(--fs-radius-card); }
+.island-load-progress progress::-moz-progress-bar { background:var(--fs-chart-fill); border-radius:var(--fs-radius-card); }
 .island-load-progress p { margin:5px 0; }
-[data-load-time] { color:#d1dccf; font-variant-numeric:tabular-nums; }
-[data-load-warning] { color:#ffe6a5; }
-.island-load-diagnostics summary { min-height:32px; display:flex; align-items:center; cursor:pointer; color:#d1dccf; }
+[data-load-time] { color:var(--fs-text); font-variant-numeric:tabular-nums; }
+[data-load-warning] { color:var(--fs-warning); }
+.island-load-diagnostics summary { min-height:32px; display:flex; align-items:center; cursor:pointer; color:var(--fs-text); }
 .island-load-diagnostics { overflow-wrap:anywhere; }
-.island-load-diagnostics[open] { padding:8px; background:#102c36; border:1px solid #7e9385; border-radius:5px; }
-.island-load-diagnostics select { min-height:44px; color:inherit; background:#1a3439; }
+.island-load-diagnostics[open] { padding:8px; background:var(--fs-surface-solid); border:1px solid var(--fs-border); border-radius:var(--fs-radius-card); }
+.island-load-diagnostics select { min-height:44px; color:inherit; background:var(--fs-input); }
 .island-load-diagnostics button { margin:4px 0; }
 .island-loading-copy { max-height:60dvh; overflow:auto; overscroll-behavior:contain; touch-action:pan-y; }
 #island-loading { padding-top:env(safe-area-inset-top); box-sizing:border-box; }
@@ -66,12 +66,12 @@ body.island-preparing #fjord-canvas { border-radius:0; }
     min-width:0;
     margin:0 16px;
     overflow:hidden;
-    border:1px solid #bdab75;
-    border-radius:8px;
-    background:#192c26;
-    color:#f0ead7;
-    box-shadow:0 6px 24px #0006;
-    font:16px/1.6 Georgia,serif;
+    border:1px solid var(--fs-border);
+    border-radius:var(--fs-radius-panel);
+    background:var(--fs-panel);
+    color:var(--fs-text);
+    box-shadow:var(--fs-shadow-small);
+    font:16px/1.6 var(--fs-font-heading);
 }
 #loading-clan-book header {
     display:flex;
@@ -79,7 +79,7 @@ body.island-preparing #fjord-canvas { border-radius:0; }
     justify-content:space-between;
     gap:16px;
     padding:10px 16px;
-    border-bottom:1px solid #506154;
+    border-bottom:1px solid var(--fs-divider);
 }
 #loading-clan-book h2 { margin:0; font-size:22px; }
 #loading-clan-book button {
@@ -87,11 +87,11 @@ body.island-preparing #fjord-canvas { border-radius:0; }
     min-width:44px;
     min-height:44px;
     padding:4px;
-    border:1px solid #95855e;
-    border-radius:4px;
-    background:#31463b;
+    border:1px solid var(--fs-border);
+    border-radius:var(--fs-radius-control);
+    background:var(--fs-panel);
     color:inherit;
-    font:26px system-ui,sans-serif;
+    font:26px var(--fs-font-body);
     cursor:pointer;
 }
 #loading-clan-book-text {
@@ -102,7 +102,7 @@ body.island-preparing #fjord-canvas { border-radius:0; }
     touch-action:pan-y;
     white-space:pre-wrap;
 }
-#loading-clan-book :focus-visible { outline:2px solid #ffd780; outline-offset:-3px; }
+#loading-clan-book :focus-visible { outline:3px solid var(--fs-focus); outline-offset:-3px; }
 #loading-clan-book.founding-book-ready {
     position:fixed;
     z-index:410;
@@ -111,6 +111,8 @@ body.island-preparing #fjord-canvas { border-radius:0; }
     margin:0;
     width:min(var(--founding-book-width,480px),calc(100vw - 24px));
     height:var(--founding-book-height,60dvh);
+    /* A short loading grid can measure only its border; keep the close control reachable. */
+    min-height:min(240px,60dvh);
     max-height:60dvh;
 }
 @media (min-width:900px) {
@@ -129,19 +131,19 @@ body.island-preparing #fjord-canvas { border-radius:0; }
 }
 
 .fjord-bootstrap { position:fixed; inset:0; margin:0; display:grid; align-content:center;
-    justify-items:center; padding:24px; color:#eee7d1; background:#163b48; text-align:center; }
-.fjord-bootstrap h1 { font:clamp(24px,4vw,36px) Georgia,serif; }
-.fjord-bootstrap p { font:16px/1.5 system-ui,sans-serif; }
+    justify-items:center; padding:24px; color:var(--fs-text); background:var(--fs-surface-solid); text-align:center; }
+.fjord-bootstrap h1 { font:clamp(24px,4vw,36px) var(--fs-font-heading); }
+.fjord-bootstrap p { font:16px/1.5 var(--fs-font-body); }
 #campaign-recovery { display:block; overflow:auto; overscroll-behavior:contain; touch-action:pan-y;
     padding:max(24px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)); }
 #campaign-recovery h1, #campaign-recovery p, #campaign-recovery section, #campaign-recovery > label {
     display:block; max-width:42rem; margin:16px auto; }
 #campaign-recovery button, #campaign-recovery input { min-height:44px; padding:10px 14px; }
-#campaign-recovery button { margin:4px; color:#eee7d1; background:#253f3a; border:1px solid #acaa83; border-radius:6px; }
-#campaign-recovery :focus-visible { outline:3px solid #ffd780; outline-offset:3px; }
+#campaign-recovery button { margin:4px; color:var(--fs-text); background:var(--fs-card); border:1px solid var(--fs-border); border-radius:var(--fs-radius-control); }
+#campaign-recovery :focus-visible { outline:3px solid var(--fs-focus); outline-offset:3px; }
 #fjord-context-recovery { position:fixed; inset:0; z-index:11000; display:grid; place-items:center;
-    padding:20px; background:#102c3699; color:#eee7d1; font:16px/1.5 system-ui,sans-serif; }
-#fjord-context-recovery > div { max-width:36rem; padding:24px; border:1px solid #bdab75; border-radius:8px; background:#192c26; }
-#fjord-context-recovery button { min-height:44px; margin:4px; padding:10px 14px; color:inherit; background:#31463b;
-    border:1px solid #95855e; border-radius:6px; }
-#fjord-context-recovery :focus-visible { outline:3px solid #ffd780; outline-offset:3px; }
+    padding:20px; background:var(--fs-scrim); color:var(--fs-text); font:16px/1.5 var(--fs-font-body); }
+#fjord-context-recovery > div { max-width:36rem; padding:24px; border:1px solid var(--fs-border); border-radius:var(--fs-radius-card); background:var(--fs-panel); }
+#fjord-context-recovery button { min-height:44px; margin:4px; padding:10px 14px; color:inherit; background:var(--fs-card);
+    border:1px solid var(--fs-border); border-radius:var(--fs-radius-control); }
+#fjord-context-recovery :focus-visible { outline:3px solid var(--fs-focus); outline-offset:3px; }

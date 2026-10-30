@@ -1,0 +1,329 @@
+{
+  "base_commit": "4086baac26c6953b879b439546b68f2406ca767a",
+  "menu_code_commit": "2893628d9c3fbc509aa8f977ad04235f4345a754",
+  "repair_code_commit": "cc8ad6295df1b22e84ed65e5d7da292d77ac06f6",
+  "prior_full_ci": {
+    "head": "85cbaa9aaf709dc14aadde21621688a602fe78f7",
+    "run": 40935818919,
+    "conclusion": "success"
+  },
+  "focused_tests": {
+    "count": 16,
+    "fail": 0,
+    "skipped": 0,
+    "source": "cc8ad6295df1b22e84ed65e5d7da292d77ac06f6"
+  },
+  "build": {
+    "exit_code": 0,
+    "bundles": [
+      {
+        "path": "dist/assets/index-CNVmGQEQ.js",
+        "bytes": 6641,
+        "sha256": "e11089a17a1dd89eb4605b8fcd15bf97b3e3eced6ebb3e1e0976f1a57d45f908",
+        "clean_code_marker": false
+      },
+      {
+        "path": "dist/assets/index-BPHQuCGE.css",
+        "bytes": 5135,
+        "sha256": "47394b5c52d218ba0967b7944bc420d4ac3cd2535375e296c889fa992c295731",
+        "clean_code_marker": false
+      },
+      {
+        "path": "dist/assets/FjordEntry-BpxPCbGl.css",
+        "bytes": 7078,
+        "sha256": "b38f097361aeb57fab4b747d0e43c789a22cf0cd1394163ae1bf15ffe52935e7",
+        "clean_code_marker": false
+      },
+      {
+        "path": "dist/assets/ScreenAwakeControl-rxpOnXDJ.css",
+        "bytes": 273,
+        "sha256": "0b212458d53b269499671b8416e5007e223b2c726bcaa6cd6bd0ef949be82403",
+        "clean_code_marker": false
+      },
+      {
+        "path": "dist/assets/SettlementBrowser-Cko0Mgpz.css",
+        "bytes": 9194,
+        "sha256": "10e93f54a515750ce1c05610236dc218319146f57d52759999f342464e831b03",
+        "clean_code_marker": false
+      },
+      {
+        "path": "dist/assets/FjordPlay-BdxCG8qJ.css",
+        "bytes": 70724,
+        "sha256": "12202023266fcb1b3324ca2b004c5cb10e13a2ca4d573411014b6f29f65a8c2a",
+        "clean_code_marker": false
+      },
+      {
+        "path": "dist/assets/FjordEntry-BNl60EsY.js",
+        "bytes": 86626,
+        "sha256": "9ef686388669f39f0a1d8174d292e8c47dd7ca45fa556902b47b16d8c1f5c283",
+        "clean_code_marker": true
+      }
+    ],
+    "marker_dependency": "observed index imports the clean-code-marker FjordEntry bundle"
+  },
+  "sources": [
+    {
+      "path": "src/fjord-play/CampaignEntryMenu.ts",
+      "sha256_git_bytes": "6dd0002a938f67b721cd6366ea1953eca9c9f9b2f32c9361dc7e43ed6a128c87"
+    },
+    {
+      "path": "src/fjord-play/FjordEntry.ts",
+      "sha256_git_bytes": "3c9dbde94b67c1c034b8807cbf9d7013268e4b48cf7a0e05490a31efcca6c443"
+    },
+    {
+      "path": "src/fjord-play/FjordHeader.ts",
+      "sha256_git_bytes": "027d7aadf9a7be3db0bb4e418b354f620d5c77cb66521ff78621bfdc33270f94"
+    },
+    {
+      "path": "src/fjord-play/FjordPlay.ts",
+      "sha256_git_bytes": "8dd9a0b87bd4000a016dd9659404b27eb0761ba49cacdb38740324f6bc6d26ca"
+    },
+    {
+      "path": "src/fjord-play/PlayerFeedback.ts",
+      "sha256_git_bytes": "84cbb88e306565dbeba8cca002ef20dfb0920677309750ae5e43d7e5d669efee"
+    },
+    {
+      "path": "src/fjord-play/PlaytestPerformance.ts",
+      "sha256_git_bytes": "3c9047c579f7776f4b336f42b1a803f0cec8df2607bce57858d2b34b74472c0a"
+    },
+    {
+      "path": "src/fjord-play/island-loading.css",
+      "sha256_git_bytes": "177a7493be9049f8ff551f91b9b97965bb2c8f8f9e2f1f1a3e222f43dc02edee"
+    },
+    {
+      "path": "src/fjord-play/player-menu.css",
+      "sha256_git_bytes": "2b07ddefc04745b5e6cb591b9b8c503157d36c67249ec29a7d56c87322a2f2ef"
+    },
+    {
+      "path": "src/lore/FoundingBookWindow.ts",
+      "sha256_git_bytes": "18e2be4194da131ee6fcfdd4dd7d449313a40d47a118961c8f83a1cb0afe9f40"
+    },
+    {
+      "path": "tests/first-steps-dom.test.mjs",
+      "sha256_git_bytes": "7fb0a3a220fab063a46e9a0359f3a3662e9aee647aa101e2c01759f8dab4949d"
+    },
+    {
+      "path": "tests/performance-overlay-dom.test.mjs",
+      "sha256_git_bytes": "6e909efcfdeab2ede54b5c6fc06c5c5812265fff574980f18708981e70a01230"
+    },
+    {
+      "path": "tests/player-game-menu.test.mjs",
+      "sha256_git_bytes": "2abdde4ff112c04f5b1e25c28e8e841ecdcd1e975677064d608f258d79d9f17a"
+    },
+    {
+      "path": "tests/player-menu-entry.test.mjs",
+      "sha256_git_bytes": "f777d8b33eaedda0afe3fe6e2b514690b45d70822dd4e82d3c8ae7dc821df0c6"
+    },
+    {
+      "path": "vite.config.ts",
+      "sha256_git_bytes": "c661ab95491ace5d9a453c58d63455955fbf5789baa4f043cfc9857dd284c99a"
+    }
+  ],
+  "provenance": {
+    "menu_integration": "clean 2893628 code; only founding CSS changed afterwards",
+    "layout_red": "normal New arrival on 590x360, retained 2px panel",
+    "layout_green": "clean cc8ad62; real game via existing QA-only entry on a fresh origin, seed3802174487; viewport set while loading",
+    "input": "mouse/keyboard, not physical touch/coarse pointer",
+    "core_equality": "actual portable campaign member equals subsequent raw Core export after menu actions/import/invalid rollback/local restore",
+    "clipboard": "Copy UI success; actual OS content not readable through tool virtual clipboard; Save JSON has real data",
+    "native_confirmation": "not proven; documented dialog/input/closure APIs failed again; no safeguard changed"
+  },
+  "artifacts": [
+    {
+      "path": "build.txt",
+      "bytes": 5708,
+      "sha256": "5464ff6b514ee0fc38a045264b09c12c9f9648e68e288a370267aabe2fd9a425"
+    },
+    {
+      "path": "campaign-before.json",
+      "bytes": 81826,
+      "sha256": "9f05db73f213498faa7ac087989836a44fb3cdb498a6fa41873c2abee0c7793b"
+    },
+    {
+      "path": "closed-paused-selection.txt",
+      "bytes": 3040,
+      "sha256": "9af3d77e0a675693a39180499eb841fc403defe1cad209612ff53741a2191561"
+    },
+    {
+      "path": "core-after.json",
+      "bytes": 67752,
+      "sha256": "c414b97fea99830b4737e8440e5652266e4204edb12c737528ed37c94cfabb12"
+    },
+    {
+      "path": "core-parity.json",
+      "bytes": 320,
+      "sha256": "40cbba5515e0a359eaaa3ff414ccb43794fc4505607d2afa1ad23f24cfb0e6d5"
+    },
+    {
+      "path": "details-report.jpg",
+      "bytes": 185587,
+      "sha256": "72d209cc6e55403028878d65f4e629ed5447bc19b789e833ae23a8a44d61c204",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "details-report.txt",
+      "bytes": 19529,
+      "sha256": "385a7c5492caf63fd054b7364162f1da81d577d166ac8c9349d1237b22ca6be5"
+    },
+    {
+      "path": "developer-data-separate.txt",
+      "bytes": 4335,
+      "sha256": "f21f9eda5c0427c769390085ba735d713f67b48faa9ee3f719ad72adc6c16c2d"
+    },
+    {
+      "path": "expeditions-landscape.txt",
+      "bytes": 2441,
+      "sha256": "6ec34903a96a5fe7a6d54c5f7ca5c5781dd1308e7b2e6ab5835dec63561a69f6"
+    },
+    {
+      "path": "family-tree-landscape.jpg",
+      "bytes": 27091,
+      "sha256": "436936991f5cf55b1dd3b56465ac17c0d5c034bd97aeba664fcbd7c9439d699b",
+      "width": 590,
+      "height": 360
+    },
+    {
+      "path": "family-tree-landscape.txt",
+      "bytes": 4321,
+      "sha256": "5c1793cc87eba70d407e0b33e18563d941c99ddb669b7db9dc98ac78f4b8f889"
+    },
+    {
+      "path": "file-restored-paused.txt",
+      "bytes": 3528,
+      "sha256": "66ed6350a72f7f921e033e0b79886f83e87fed67b0d12cd81da9e8ad5cb77f24"
+    },
+    {
+      "path": "fixed-build-assets.json",
+      "bytes": 314,
+      "sha256": "d1da22e6de255a01fae751911809c6f73dc9fde1034f6238b0cc29609fd5d288"
+    },
+    {
+      "path": "focused-tests.txt",
+      "bytes": 1899,
+      "sha256": "b7550853c5d9bde899e3aac27ac49a54055cd2e1b161e9f0c1b364cbc0a2b937"
+    },
+    {
+      "path": "founding-close-attempt.txt",
+      "bytes": 2022,
+      "sha256": "3e447157a725b55ee5bdd6cc99e5d451d7d71c0a06c3f3d814d1eb547c1600c5"
+    },
+    {
+      "path": "founding-landscape-collapsed.jpg",
+      "bytes": 25374,
+      "sha256": "ecf820a803470d270a0d725d430fb9b2065e782984b0e08d8c954c2aa9d6d2bf",
+      "width": 590,
+      "height": 360
+    },
+    {
+      "path": "founding-landscape-fixed.jpg",
+      "bytes": 32809,
+      "sha256": "2ea10dacdaf645590694f5e9e88d33d2d5c93a6859471cd7feb8ea42f8ad7ddd",
+      "width": 590,
+      "height": 360
+    },
+    {
+      "path": "founding-landscape-fixed.json",
+      "bytes": 470,
+      "sha256": "e8a9ebbffe19a2fd3aada587a78e8158dc882698bca046ddb511d37ca9383af0"
+    },
+    {
+      "path": "game-menu-desktop.jpg",
+      "bytes": 167500,
+      "sha256": "21e44051d6e8253b9f4d26c0dbc62b4350224197b7b9bcd968fb6c42cd1f0941",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "game-menu-landscape-primary.jpg",
+      "bytes": 25912,
+      "sha256": "f24cdb900262c5ca6973386252dc9333870c561a14eb4281b962963f6ee2d8cb",
+      "width": 590,
+      "height": 360
+    },
+    {
+      "path": "game-menu-landscape-primary.txt",
+      "bytes": 3017,
+      "sha256": "794f7a01c5240902fc3fabd27f35b3f11771bd22c4d8cd258b800433cef04d85"
+    },
+    {
+      "path": "invalid-retained.jpg",
+      "bytes": 168543,
+      "sha256": "9e9610428092e3a243bb8c11cb2362457bf76968f952e218b86a23ef1f3ac960",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "invalid-retained.txt",
+      "bytes": 3634,
+      "sha256": "f43d762ad02bbd95f5dcc2dc07d7e11470c2391213062de56a2d28425c5710a7"
+    },
+    {
+      "path": "layout-check.json",
+      "bytes": 288,
+      "sha256": "f5e6767f5c500fad441eed5fc48fc96a3cbe7df39971720d32d51f3fae513e56"
+    },
+    {
+      "path": "load-test-complete.jpg",
+      "bytes": 27135,
+      "sha256": "3bafdd5ab154a9f40aebf7e734bd3ef524f62e419e70052f8966e4f750071d4a",
+      "width": 575,
+      "height": 351
+    },
+    {
+      "path": "load-test-complete.txt",
+      "bytes": 1077,
+      "sha256": "8e7bf44edae09346d457b605b656938783ed7e20dfeb7da218f7a05f9f1c6f80"
+    },
+    {
+      "path": "loading-test.json",
+      "bytes": 213226,
+      "sha256": "d9f8302d9386a54a0cfea15dc3c511a6fb3313d728c08ee09543366898ae0b27"
+    },
+    {
+      "path": "local-restored-paused.txt",
+      "bytes": 3528,
+      "sha256": "2fe855d7f6406542a64f768dd2925af724cdac4a692b7ab86f6fe5f72453d644"
+    },
+    {
+      "path": "new-landscape.jpg",
+      "bytes": 6851,
+      "sha256": "77e4a7a2425020e71b9e0a697a7b6123693b5c91fd6ce1ab14d2c924bf25d7bd",
+      "width": 575,
+      "height": 323
+    },
+    {
+      "path": "new-landscape.txt",
+      "bytes": 787,
+      "sha256": "df94b58102a4540a9c07cd8726028295af42441fe7ca49e87cb1693163abd113"
+    },
+    {
+      "path": "README.md",
+      "bytes": 8115,
+      "sha256": "3184995c25b210b6ebf376dcfb1cf6991224c5cc6ab7ac704b643647b1109243"
+    },
+    {
+      "path": "saved-performance.json",
+      "bytes": 18758,
+      "sha256": "bf7741574ac2e4543e30f7e1fc1ae728e33b74a185d5c29d4e1e1d4ebd48fef2"
+    },
+    {
+      "path": "settings-desktop.txt",
+      "bytes": 4193,
+      "sha256": "f161d1917d0de379171b482d9d5dc07e46359ef86802531208030d7269112155"
+    },
+    {
+      "path": "settings-landscape.jpg",
+      "bytes": 26129,
+      "sha256": "97d5d7d7954043e2ef068acd1093b76dcdc9998381b62fd2fc5f60a1e09be106",
+      "width": 590,
+      "height": 360
+    },
+    {
+      "path": "settings-landscape.txt",
+      "bytes": 3888,
+      "sha256": "e07cf11839c621a4d8785b82c8df1613e2e8895ceb723aed5a2fd7b4e91ce9eb"
+    }
+  ],
+  "hash_scope": "UTF-8 LF text / original binary bytes; manifest excludes itself"
+}

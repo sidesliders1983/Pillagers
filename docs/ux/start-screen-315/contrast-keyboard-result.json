@@ -1,0 +1,70 @@
+{
+  "status": "passed",
+  "headers": [
+    {
+      "width": 1440,
+      "height": 900,
+      "label": "P",
+      "contrastAgainstBrightestUnderlyingPixel": 7.3798211892239305
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "label": "H1",
+      "contrastAgainstBrightestUnderlyingPixel": 5.979095260773503
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "label": "P",
+      "contrastAgainstBrightestUnderlyingPixel": 6.983624754293732
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "label": "H1",
+      "contrastAgainstBrightestUnderlyingPixel": 9.817496822442289
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "label": "P",
+      "contrastAgainstBrightestUnderlyingPixel": 5.624512801394504
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "label": "H1",
+      "contrastAgainstBrightestUnderlyingPixel": 4.117800957540123
+    },
+    {
+      "width": 852,
+      "height": 393,
+      "label": "P",
+      "contrastAgainstBrightestUnderlyingPixel": 5.643365326093092
+    },
+    {
+      "width": 852,
+      "height": 393,
+      "label": "H1",
+      "contrastAgainstBrightestUnderlyingPixel": 3.698526519925504
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "label": "P",
+      "contrastAgainstBrightestUnderlyingPixel": 6.721696358652316
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "label": "H1",
+      "contrastAgainstBrightestUnderlyingPixel": 4.9197946507036585
+    }
+  ],
+  "panelWorstWhiteBackground": {
+    "ordinaryText": 10.374183364890383,
+    "border": 4.589506001875708
+  },
+  "keyboard": true
+}

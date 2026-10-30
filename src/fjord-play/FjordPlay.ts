@@ -238,7 +238,7 @@ export class FjordPlay {
             seedField.value = String(this.session.readSnapshot().seed);
             const island = campaignIslandPlan(this.campaign.blueprint);
             document.querySelector('#fjord-geography')!.textContent = island ?
-                'Island ' + island.recipe.seed + ' · validated set v1 · ' + island.plots.length + ' home plots' :
+                'Island ' + island.recipe.seed + ' · ' + island.recipe.version + ' · ' + island.plots.length + ' home plots' :
                 'Original saved geography';
             weatherField.checked = this.session.readSnapshot().weather?.config.enabled ?? false;
             cycleField.value = String(this.session.minutesPerWinter);
@@ -247,7 +247,7 @@ export class FjordPlay {
         if (query.has('discovery')) explorationField.checked = query.get('discovery') !== '0';
         sameFounders.addEventListener('change', () => {
             document.querySelector('#fjord-restart')!.textContent = sameFounders.checked ?
-                'Restart with same founders' : 'Restart with new founders';
+                'Replay original founding' : 'Restart with new founders';
         });
         cycleField.addEventListener('change', () => {
             this.session.setMinutesPerWinter(Number(cycleField.value));
@@ -571,7 +571,7 @@ export class FjordPlay {
             button.type = 'button';
             button.textContent = 'Download recovery diagnostics';
             button.addEventListener('click', () => download(JSON.stringify(trace.snapshot(), null, 2), 'fjordside-recovery-diagnostics.json'));
-            document.querySelector('#fjord-menu .fjord-settings')!.append(button);
+            document.querySelector('#fjord-developer-data')!.append(button);
         }
         document.querySelector('#fjord-export')!.addEventListener('click', () => download(this.campaign.exportJSON(), 'fjordside-campaign.json'));
         document.querySelector('#fjord-export-core')!.addEventListener('click', () => download(this.session.saveJSON(), 'fjordside-core.json'));
@@ -586,9 +586,17 @@ export class FjordPlay {
             });
         });
         let campaignChangePending = false;
-        const startNewCampaign = (restart: boolean) => {
+        const startNewCampaign = (restart: boolean, freshArrival = false) => {
             if (campaignChangePending || !window.confirm('Replace the active campaign? Manually saved checkpoints are kept.')) return;
             campaignChangePending = true;
+            // A confirmed replacement leaves settings so the founding and journey can be seen.
+            document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open = false;
+            if (freshArrival) {
+                // A menu choice draws independently of the current campaign's canonical RNG.
+                const currentSeed = this.session.readSnapshot().seed;
+                const drawnSeed = crypto.getRandomValues(new Uint32Array(1))[0];
+                seedField.value = String(drawnSeed === currentSeed ? (drawnSeed + 1) >>> 0 : drawnSeed);
+            }
             const discoveryEnabled = explorationField.checked;
             const previousPace = this.session.pacing();
             firstSteps?.restore();
@@ -693,6 +701,7 @@ export class FjordPlay {
         };
         document.querySelector('#fjord-restart')!.addEventListener('click', () => startNewCampaign(true));
         document.querySelector('#fjord-new')!.addEventListener('click', () => startNewCampaign(false));
+        document.querySelector('#fjord-new-arrival')!.addEventListener('click', () => startNewCampaign(false, true));
         const select = (kind: string, id: string) => {
             const picked = this.campaign.readProjection().entities.find(e => e.kind === kind && e.id === id);
             const ship = picked?.status.aboardShip ? this.campaign.readProjection().entities.find(e =>
@@ -790,8 +799,11 @@ export class FjordPlay {
                 return true;
             },
         }));
-        document.querySelector('#fjord-book')!.addEventListener('click', () =>
-            document.querySelector<HTMLButtonElement>('#clan-book-open')!.click());
+        document.querySelector('#fjord-book')!.addEventListener('click', () => bookReader.open());
+        document.querySelector('[data-menu-guide]')!.addEventListener('click', () => {
+            document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open = false;
+            document.querySelector<HTMLButtonElement>('#fjord-first-steps')!.click();
+        });
         const panelRoot = document.querySelector<HTMLElement>('#entity-panel')!;
         panelRoot.addEventListener('change', () => updateManagementAvailability(panelRoot, this.shared));
         panelRoot.addEventListener('click', event => {
@@ -884,6 +896,7 @@ export class FjordPlay {
                 showGroups: () => desktopUI?.open('expeditions', true),
                 focus: point => controller.focusAt(point),
                 toggleClock: () => document.querySelector<HTMLButtonElement>('#fjord-run')!.click(),
+                workspaceChanged: () => islandMissions?.refresh(),
             });
         this.startupCleanup.push(() => expeditions?.dispose());
         islandMissions = new IslandMissionPanel(document.querySelector<HTMLElement>('#expedition-panel')!,
@@ -893,16 +906,13 @@ export class FjordPlay {
                 islandMissions?.committed(command);
             }), memberIds => presentation!.origins(memberIds),
             () => desktopUI?.showExplorationMap(), () => desktopUI?.open('expeditions', true),
-            point => controller.focusAt(point), id => select('cattle', id));
+            point => controller.focusAt(point), id => select('cattle', id), {
+                groupId: () => expeditions!.selectedGroupId,
+                visible: () => expeditions!.missionsOpen,
+                open: () => expeditions!.openMissions(),
+            });
         this.startupCleanup.push(() => islandMissions?.dispose());
-        document.querySelector('#fjord-expeditions-open')!.addEventListener('click', () => {
-            document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open = false;
-            showManagement(true);
-            this.shared.select(null);
-            refresh();
-            expeditions!.refresh();
-            desktopUI?.open('expeditions');
-        });
+
         capturePresentation = () => this.shared.setPresentation({
             hdr: document.querySelector<HTMLInputElement>('#fjord-hdr')!.checked,
             quality: document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',

@@ -1,0 +1,121 @@
+/* Menu hierarchy reuses the existing entry and Horizon/Context & Focus owners. */
+.player-menu-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+.player-menu-heading h2 {
+    margin: 0;
+    font: 600 22px/1.25 var(--fs-font-heading);
+}
+#fjord-menu .player-menu-heading button {
+    min-width: 44px;
+    min-height: 44px;
+    margin: 0;
+}
+#fjord-menu [data-menu-section] {
+    margin: 8px 0 0;
+}
+#fjord-menu [data-menu-section] > summary {
+    box-sizing: border-box;
+    min-height: 44px;
+    padding: 12px;
+    border: 1px solid var(--fjord-line, var(--fs-border));
+    border-radius: var(--fs-radius-control);
+    cursor: pointer;
+}
+#fjord-menu [data-menu-section][open] > summary {
+    border-color: var(--fjord-accent, var(--fs-border));
+}
+#fjord-menu .player-menu-actions {
+    display: grid;
+    gap: 8px;
+    padding: 8px 0;
+}
+#fjord-menu .player-menu-actions button {
+    width: 100%;
+    margin: 0;
+    text-align: left;
+}
+#fjord-menu [data-menu-back] {
+    display: block;
+    min-height: 44px;
+    margin: 12px 0 4px;
+}
+#fjord-menu input[type="file"] {
+    max-width: 100%;
+    min-height: 44px;
+}
+#fjord-menu .player-menu-replacement {
+    border-top: 1px solid var(--fjord-line, var(--fs-divider));
+    margin-top: 18px;
+    padding-top: 8px;
+}
+#fjord-menu .player-menu-replacement > p {
+    color: var(--fjord-muted, var(--fs-text));
+    font-size: 12px;
+    margin: 4px 0;
+}
+#fjord-menu #fjord-menu-next-slot:not(:empty) {
+    display: block;
+    margin-top: 8px;
+}
+#fjord-menu #fjord-menu-next-slot button {
+    width: 100%;
+    min-height: 44px;
+    margin: 0;
+}
+#fjord-menu h3 {
+    font-size: 16px;
+    margin: 16px 0 8px;
+}
+#campaign-start [data-start-panel] > h2 {
+    margin-top: 16px;
+}
+#campaign-start .entry-secondary-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+#campaign-start .entry-secondary-actions button, #campaign-start [data-start-back] {
+    background: transparent;
+}
+#campaign-start details > summary {
+    cursor: pointer;
+    min-height: 44px;
+    padding: 10px 0;
+    box-sizing: border-box;
+}
+#campaign-start .entry-about, #campaign-start .entry-save-details {
+    font-size: 13px;
+    color: var(--fs-text);
+    margin-top: 12px;
+}
+#campaign-start a {
+    color: var(--fs-text);
+}
+#campaign-start .entry-actions:empty {
+    display: none;
+}
+@media (max-height: 500px) and (min-width: 600px) {
+    #campaign-start .entry-actions {
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    }
+    #campaign-start [data-start-panel="new"] .entry-actions {
+        grid-template-columns: 1fr 1fr;
+    }
+    #campaign-start [data-start-panel="new"] .entry-rules {
+        grid-column: 1 / -1;
+    }
+}
+#fjord-menu [data-player-feedback], #campaign-start [data-player-feedback] {
+    display: block;
+    min-height: 44px;
+    box-sizing: border-box;
+    padding: 12px 0;
+    color: var(--fs-text);
+}
+.player-menu-link-note {
+    font-size: 12px;
+}

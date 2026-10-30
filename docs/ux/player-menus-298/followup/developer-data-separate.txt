@@ -1,0 +1,128 @@
+- main:
+  - generic "Settlement status and controls":
+    - generic "Calendar":
+      - generic: Summer
+      - strong: "800"
+    - generic "Settlement resources and population":
+      - term: Food
+      - definition:
+        - button "Food stocks":
+          - strong: "15"
+      - term: Materials
+      - definition:
+        - button "Materials stocks":
+          - strong: "5"
+      - term: Residents
+      - definition:
+        - button "Settlement residents":
+          - strong: "10"
+      - term: Livestock
+      - definition:
+        - button "Settlement livestock":
+          - strong: "3"
+    - button "Start simulation":
+      - generic: Paused
+    - generic "Year length":
+      - generic: 3 min per year
+      - combobox "Year length":
+        - option "1 min per year"
+        - option "3 min per year" [selected]
+        - option "5 min per year"
+    - button "+1 Year" [disabled]
+    - generic "Game menu":
+    - heading "Game menu" [level=2]
+    - button "Close game menu": ×
+    - generic "Save game"
+    - generic "Load game"
+    - generic "Settings"
+    - option "Low" [selected]
+    - option "Standard"
+    - option "Off"
+    - option "Low" [selected]
+    - option "Normal"
+    - generic "Help & support"
+    - button "How to play"
+    - heading "Camera views & controls" [level=3]
+    - button "View settlement"
+    - button "View highlands"
+    - paragraph: "Touch: drag to orbit, pinch to zoom, tap open ground to centre the camera. Mouse: left drag to pan, right drag to rotate, wheel to zoom. Select residents, homes and livestock in the world or through Settlement."
+    - paragraph: Use Save game to protect progress before replacing a campaign or clearing browser data.
+    - generic "About / Credits"
+    - generic "Diagnostics"
+    - paragraph: Optional troubleshooting tools. Reports stay on this device until you share them.
+    - text: Debug / Performance overlay
+    - combobox "Performance overlay":
+      - option "Off" [selected]
+      - option "Compact"
+      - option "Details"
+    - text: The overlay preference is saved in this browser. Choose Off to stop it.
+    - generic "Loading diagnostics"
+    - generic "Developer data"
+    - paragraph: Core JSON contains simulation data only. Use Save game for a player campaign file.
+    - button "Export Core JSON" [active]
+    - button "Back"
+    - region "New campaign":
+      - paragraph: New campaign
+      - generic "New game / Replay"
+  - generic "Canonical Fjord settlement"
+  - generic: Selected · Hallmund Eiriksson
+  - generic: Home · Hallmund Eiriksson’s household
+  - generic "Resident production feedback"
+  - complementary "Selection and tasks":
+    - region "Settlement management":
+      - text: Settlement
+      - heading "Hallmund Eiriksson" [level=2]
+      - paragraph: 21 Winters · Male · Fisher
+      - button "Close selection":
+      - paragraph: Working · food
+      - generic: Productivity
+      - strong: 30%
+      - meter: 30%
+      - generic: Occupation fit
+      - strong: 59%
+      - meter: 59%
+      - paragraph: 0.0 recorded years in current occupation · Autonomous career
+      - generic: Physicality
+      - strong: 10%
+      - meter: 10%
+      - generic: Agility
+      - strong: 17%
+      - meter: 17%
+      - generic: Intelligence
+      - strong: 74%
+      - meter: 74%
+      - generic: Cunning
+      - strong: 45%
+      - meter: 45%
+      - generic: Temperament
+      - strong: 72%
+      - meter: 72%
+      - term: Household
+      - definition:
+        - button "Hallmund Eiriksson’s household":
+          - generic: Hallmund Eiriksson’s household
+      - term: Partner
+      - definition: None
+      - term: Children
+      - definition: None
+      - button "Change work":
+        - generic: Change work
+      - generic "Heritage, parents & occupation aptitudes"
+      - generic "Personal history"
+      - generic "More management"
+  - text: ⌄
+  - navigation "Settlement navigation":
+    - button "Settlement":
+      - text: Settlement
+    - button "Clan Book":
+      - text: Clan Book
+    - button "Need help?":
+      - text: Need help?
+    - button "Expeditions":
+      - text: Expeditions
+    - button "Show island map":
+      - generic: Map
+    - generic "Active expedition controls"
+  - 'button "Attention: 2 unread events and current conditions"':
+    - generic: Attention
+    - generic: "2"

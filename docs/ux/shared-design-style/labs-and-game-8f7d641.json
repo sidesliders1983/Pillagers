@@ -1,0 +1,130 @@
+{
+  "status": "passed",
+  "origin": "http://127.0.0.1:5197",
+  "browser": "156.0.8078.74",
+  "physicalDevice": false,
+  "sourceRevision": "8f7d641fbbbe424987b4029e15fc5d3d419ec9ec",
+  "expectStyle": true,
+  "cases": [
+    {
+      "name": "character-lab",
+      "style": {
+        "selector": "lab-panel lab-controls",
+        "color": "rgb(244, 248, 250)",
+        "background": "rgba(7, 25, 32, 0.94)",
+        "border": "rgb(120, 144, 152)",
+        "radius": "18px",
+        "font": "system-ui, sans-serif"
+      },
+      "narrowHorizontalOverflow": false,
+      "interaction": "Public control focused"
+    },
+    {
+      "name": "gameplay-lab",
+      "style": {
+        "selector": "weather-summary",
+        "color": "rgb(244, 248, 250)",
+        "background": "rgba(14, 37, 46, 0.92)",
+        "border": "rgb(120, 144, 152)",
+        "radius": "14px",
+        "font": "system-ui, sans-serif"
+      },
+      "narrowHorizontalOverflow": false,
+      "interaction": "Existing public UI opened"
+    },
+    {
+      "name": "environment-lab",
+      "style": {
+        "selector": "environment-lab",
+        "color": "rgb(244, 248, 250)",
+        "background": "rgb(9, 29, 40)",
+        "border": "rgb(244, 248, 250)",
+        "radius": "0px",
+        "font": "system-ui, sans-serif"
+      },
+      "narrowHorizontalOverflow": false,
+      "interaction": "Public control focused"
+    },
+    {
+      "name": "water-lab",
+      "style": {
+        "selector": "water-panel",
+        "color": "rgb(244, 248, 250)",
+        "background": "rgba(7, 25, 32, 0.94)",
+        "border": "rgb(120, 144, 152)",
+        "radius": "18px",
+        "font": "system-ui, sans-serif"
+      },
+      "narrowHorizontalOverflow": false,
+      "interaction": "Public control focused"
+    },
+    {
+      "name": "asset-lab",
+      "style": {
+        "selector": "asset-lab",
+        "color": "rgb(244, 248, 250)",
+        "background": "rgb(9, 29, 40)",
+        "border": "rgb(244, 248, 250)",
+        "radius": "0px",
+        "font": "system-ui, sans-serif"
+      },
+      "narrowHorizontalOverflow": false,
+      "interaction": "Public control focused"
+    },
+    {
+      "name": "meshy-lab",
+      "style": {
+        "selector": "",
+        "color": "rgb(244, 248, 250)",
+        "background": "rgba(7, 25, 32, 0.94)",
+        "border": "rgb(244, 248, 250)",
+        "radius": "0px",
+        "font": "system-ui, sans-serif"
+      },
+      "narrowHorizontalOverflow": false,
+      "interaction": "Existing public UI opened"
+    },
+    {
+      "name": "settlement-lab",
+      "style": {
+        "selector": "play-body",
+        "color": "rgb(244, 248, 250)",
+        "background": "rgb(9, 29, 40)",
+        "border": "rgb(244, 248, 250)",
+        "radius": "0px",
+        "font": "system-ui, sans-serif"
+      },
+      "narrowHorizontalOverflow": false,
+      "interaction": "Existing public UI opened"
+    },
+    {
+      "name": "Fjord desktop",
+      "style": {
+        "selector": "fjord-brand",
+        "color": "rgb(244, 248, 250)",
+        "background": "rgba(7, 25, 32, 0.94)",
+        "border": "rgb(120, 144, 152)",
+        "radius": "18px",
+        "font": "system-ui, sans-serif"
+      },
+      "food": 15,
+      "paused": true,
+      "journeys": "Import, play, Settings, Settlement, resident, Family Tree, Close"
+    },
+    {
+      "name": "Fjord touch",
+      "style": {
+        "selector": "fjord-brand",
+        "color": "rgb(244, 248, 250)",
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(244, 248, 250)",
+        "radius": "18px",
+        "font": "system-ui, sans-serif"
+      },
+      "food": 15,
+      "paused": true,
+      "journeys": "Import, play, Settings, Settlement, resident, Family Tree, Close"
+    }
+  ],
+  "errors": []
+}

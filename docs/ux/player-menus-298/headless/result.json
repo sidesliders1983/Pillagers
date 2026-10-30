@@ -1,0 +1,218 @@
+{
+  "version": 1,
+  "status": "passed",
+  "started": "2026-10-29T20:51:48.707Z",
+  "origin": "http://127.0.0.1:5193",
+  "expectedBuild": "7dfb602dff63f49a8445008d2ea14fd6f0cda2b8",
+  "runnerSHA256": "999f447facf760ce656d1e4ba2d3e237dd352f920786fedfa7294c5c891b8636",
+  "stages": [
+    {
+      "name": "fresh start and real file recovery",
+      "status": "passed",
+      "elapsedMs": 24659
+    },
+    {
+      "name": "portable baseline and device checkpoint",
+      "status": "passed",
+      "elapsedMs": 713,
+      "result": {
+        "seed": 3802174487,
+        "time": {
+          "winter": 800,
+          "tick": 500
+        }
+      }
+    },
+    {
+      "name": "native New arrival cancellation keeps seed and complete Core state",
+      "status": "passed",
+      "elapsedMs": 1097,
+      "result": {
+        "seed": 3802174487,
+        "time": {
+          "winter": 800,
+          "tick": 500
+        },
+        "stocks": {
+          "food": 15,
+          "materials": 5
+        }
+      }
+    },
+    {
+      "name": "short-screen Back and Close retain manual pause",
+      "status": "passed",
+      "elapsedMs": 1047
+    },
+    {
+      "name": "real Copy and Save diagnostics through an isolated permission scope",
+      "status": "passed",
+      "elapsedMs": 1471,
+      "result": {
+        "build": "7dfb602dff63f49a8445008d2ea14fd6f0cda2b8",
+        "bytes": 9031,
+        "copiedAndSaved": true
+      }
+    },
+    {
+      "name": "native founding replay preserves original founders and closes on short screen",
+      "status": "passed",
+      "elapsedMs": 17245,
+      "result": {
+        "seed": 3802174487,
+        "bounds": {
+          "measuredHeight": "2px",
+          "card": {
+            "x": 296,
+            "y": 132,
+            "width": 282,
+            "height": 216,
+            "top": 132,
+            "right": 578,
+            "bottom": 348,
+            "left": 296
+          },
+          "close": {
+            "x": 517,
+            "y": 143,
+            "width": 44,
+            "height": 45,
+            "top": 143,
+            "right": 561,
+            "bottom": 188,
+            "left": 517
+          },
+          "viewport": {
+            "width": 590,
+            "height": 360
+          }
+        },
+        "foundersEqual": true
+      }
+    },
+    {
+      "name": "native fresh arrival changes seed and device checkpoint remains recoverable",
+      "status": "passed",
+      "elapsedMs": 39374,
+      "result": {
+        "originalSeed": 3802174487,
+        "newSeed": 293578764,
+        "originalCheckpointCoreEqual": true
+      }
+    },
+    {
+      "name": "coarse-pointer landscape menu and Family Tree touch navigation",
+      "status": "passed",
+      "elapsedMs": 57211,
+      "result": {
+        "viewport": {
+          "width": 852,
+          "height": 393
+        },
+        "coarsePointer": true,
+        "input": "emulated touch",
+        "physicalDevice": false
+      }
+    }
+  ],
+  "errors": [],
+  "dialogs": [
+    {
+      "action": "New arrival",
+      "accepted": false,
+      "type": "confirm",
+      "message": "Replace the active campaign? Manually saved checkpoints are kept."
+    },
+    {
+      "action": "Replay original founding",
+      "accepted": true,
+      "type": "confirm",
+      "message": "Replace the active campaign? Manually saved checkpoints are kept."
+    },
+    {
+      "action": "New arrival",
+      "accepted": true,
+      "type": "confirm",
+      "message": "Replace the active campaign? Manually saved checkpoints are kept."
+    }
+  ],
+  "screenshots": [
+    {
+      "filename": "fresh-start.png",
+      "viewport": {
+        "width": 590,
+        "height": 360
+      }
+    },
+    {
+      "filename": "cancel-preserved.png",
+      "viewport": {
+        "width": 590,
+        "height": 360
+      }
+    },
+    {
+      "filename": "settings-landscape.png",
+      "viewport": {
+        "width": 590,
+        "height": 360
+      }
+    },
+    {
+      "filename": "game-menu-landscape.png",
+      "viewport": {
+        "width": 590,
+        "height": 360
+      }
+    },
+    {
+      "filename": "diagnostics.png",
+      "viewport": {
+        "width": 590,
+        "height": 360
+      }
+    },
+    {
+      "filename": "replay-founding-short-screen.png",
+      "viewport": {
+        "width": 590,
+        "height": 360
+      }
+    },
+    {
+      "filename": "new-arrival-founding-short-screen.png",
+      "viewport": {
+        "width": 590,
+        "height": 360
+      }
+    },
+    {
+      "filename": "game-menu-desktop.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "filename": "touch-landscape-menu.png",
+      "viewport": {
+        "width": 852,
+        "height": 393
+      }
+    },
+    {
+      "filename": "touch-family-tree.png",
+      "viewport": {
+        "width": 852,
+        "height": 393
+      }
+    }
+  ],
+  "chrome": "156.0.8078.48",
+  "playwright": "1.62.1",
+  "node": "v24.22.1",
+  "headless": true,
+  "chromiumSandbox": true,
+  "appBuild": "7dfb602dff63f49a8445008d2ea14fd6f0cda2b8",
+  "finished": "2026-10-29T20:54:12.610Z"
+}

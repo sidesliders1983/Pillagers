@@ -47,7 +47,7 @@ export class FoundingBookWindow {
         this.root.querySelector<HTMLElement>('article')!.scrollTop = position;
     }
     private openFullBook = (event: MouseEvent) => {
-        if ((event.target as Element).closest('#clan-book-open')) this.dispose();
+        if ((event.target as Element).closest('#clan-book-open, #fjord-book')) this.dispose();
     };
     private close() {
         const loading = this.root.closest<HTMLElement>('#island-loading');

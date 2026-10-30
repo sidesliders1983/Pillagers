@@ -1,0 +1,83 @@
+{
+  "status": "passed",
+  "baseline": false,
+  "browser": "156.0.8078.74",
+  "physicalDevice": false,
+  "cases": [
+    {
+      "name": "desktop",
+      "initial": {
+        "active": "BODY",
+        "textSelection": "",
+        "actions": [
+          {
+            "name": "New game",
+            "focus": false,
+            "border": "rgb(120, 144, 152)"
+          },
+          {
+            "name": "Load game",
+            "focus": false,
+            "border": "rgb(120, 144, 152)"
+          }
+        ]
+      },
+      "title": {
+        "readingFocus": true,
+        "outline": "none",
+        "outlineWidth": "3px"
+      }
+    },
+    {
+      "name": "portrait-touch",
+      "initial": {
+        "active": "BODY",
+        "textSelection": "",
+        "actions": [
+          {
+            "name": "New game",
+            "focus": false,
+            "border": "rgb(120, 144, 152)"
+          },
+          {
+            "name": "Load game",
+            "focus": false,
+            "border": "rgb(120, 144, 152)"
+          }
+        ]
+      },
+      "title": {
+        "readingFocus": true,
+        "outline": "none",
+        "outlineWidth": "3px"
+      }
+    },
+    {
+      "name": "Keyboard navigation and returning entry",
+      "returning": {
+        "active": "BODY",
+        "textSelection": "",
+        "actions": [
+          {
+            "name": "Continue campaign",
+            "focus": false,
+            "border": "rgb(120, 144, 152)"
+          },
+          {
+            "name": "New game",
+            "focus": false,
+            "border": "rgb(120, 144, 152)"
+          },
+          {
+            "name": "Load game",
+            "focus": false,
+            "border": "rgb(120, 144, 152)"
+          }
+        ]
+      },
+      "keyboardFocusVisible": true,
+      "noWorld": true
+    }
+  ],
+  "errors": []
+}

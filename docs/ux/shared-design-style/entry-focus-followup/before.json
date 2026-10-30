@@ -1,0 +1,57 @@
+{
+  "status": "passed",
+  "baseline": true,
+  "browser": "156.0.8078.74",
+  "physicalDevice": false,
+  "cases": [
+    {
+      "name": "desktop",
+      "initial": {
+        "active": "BUTTON",
+        "textSelection": "",
+        "actions": [
+          {
+            "name": "New game",
+            "focus": true,
+            "border": "rgb(216, 174, 96)"
+          },
+          {
+            "name": "Load game",
+            "focus": false,
+            "border": "rgb(120, 144, 152)"
+          }
+        ]
+      },
+      "title": {
+        "readingFocus": true,
+        "outline": "auto",
+        "outlineWidth": "1px"
+      }
+    },
+    {
+      "name": "portrait-touch",
+      "initial": {
+        "active": "BUTTON",
+        "textSelection": "",
+        "actions": [
+          {
+            "name": "New game",
+            "focus": true,
+            "border": "rgb(216, 174, 96)"
+          },
+          {
+            "name": "Load game",
+            "focus": false,
+            "border": "rgb(120, 144, 152)"
+          }
+        ]
+      },
+      "title": {
+        "readingFocus": true,
+        "outline": "auto",
+        "outlineWidth": "1px"
+      }
+    }
+  ],
+  "errors": []
+}

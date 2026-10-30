@@ -1,0 +1,264 @@
+{
+  "application_code_commit": "d61f5082e8cfb96ede6b50d1d1caf66098485319",
+  "sources": [
+    {
+      "path": "src/fjord-play/CampaignEntryMenu.ts",
+      "sha256_git_bytes": "7df3886c2410807a2fd5b2ceb834b2f3bb46382e3b128a504354e74aff84aa73"
+    },
+    {
+      "path": "src/fjord-play/FjordEntry.ts",
+      "sha256_git_bytes": "666a25d70dc6c277a0f918ff407fca0de79d4411444cce33c94a03ded0d1ae7f"
+    },
+    {
+      "path": "src/fjord-play/FjordIcons.ts",
+      "sha256_git_bytes": "0b015e62bb27e9297ce991d780e8c99e7832993d3ef89cbf918fdd7765be7fa0"
+    },
+    {
+      "path": "src/fjord-play/start-screen-theme.css",
+      "sha256_git_bytes": "7bfa5fc41eb1b27239edbb9bb0b672acbfd8718a50907447252e7fe043b4ebec"
+    },
+    {
+      "path": "scripts/prepare-start-art.mjs",
+      "sha256_git_bytes": "b5358e1e7c9cf7ab513494945196a0d8f75cc7bf162f0404124b19efcff6598c"
+    },
+    {
+      "path": "scripts/qa/check-start-screen.mjs",
+      "sha256_git_bytes": "032ef56e04816c75b5e1a02817e2e05ba2f2da6578662f8c482a6e47121bbc95"
+    },
+    {
+      "path": "scripts/validate-public-assets.mjs",
+      "sha256_git_bytes": "6a03ffe1fa120ae9aee88d1a9c59e0e4084d7c94341f340d46265858e6ee39c1"
+    },
+    {
+      "path": "public/branding/fjordside/start/manifest.json",
+      "sha256_git_bytes": "eac7e8a6f2a099574706f4f6d0c253317f0f566ac0e5902ad1881c65434a143f"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": ".gitattributes",
+      "bytes": 99,
+      "sha256": "e6d31477420430635a4a8a6d3127707c17ef127b5c0f5f16150f2858b2e79f56"
+    },
+    {
+      "path": "background-missing.jpg",
+      "bytes": 35775,
+      "sha256": "404006a4eff7534b46be8b10be380d3b8142ddd6f6699de3299f8333ea512de6"
+    },
+    {
+      "path": "background-slow.jpg",
+      "bytes": 35775,
+      "sha256": "404006a4eff7534b46be8b10be380d3b8142ddd6f6699de3299f8333ea512de6"
+    },
+    {
+      "path": "before-red.json",
+      "bytes": 264,
+      "sha256": "49c1c1c09482929c1511b5ca1bd5081c2085ac7958ae771a248cb786a44240c6"
+    },
+    {
+      "path": "browser-result.json",
+      "bytes": 36472,
+      "sha256": "958811b254054ef0336a19878130912cf83a74eccc35e2b690c5b1e1681c61e9"
+    },
+    {
+      "path": "build-identity.json",
+      "bytes": 562,
+      "sha256": "83fbd31c17c962ebce74bc2259df7a635212ac2b51aa4d5b41605bc9f3225f8a"
+    },
+    {
+      "path": "build.txt",
+      "bytes": 7037,
+      "sha256": "effdc4b05b443eff8e8a2d767f5e04c741660c95715358d7a74258be005fbe02"
+    },
+    {
+      "path": "check-contrast.mjs",
+      "bytes": 3975,
+      "sha256": "2cae99f133ef5cf5e33350111feff06adc72ad8137d3d2b1694d79a503d48e69"
+    },
+    {
+      "path": "contrast-initial-failure-c6a27fb.json",
+      "bytes": 1320,
+      "sha256": "71edf13b8cda8cd6d12da75abc2fedd8464f1940b123d4aeda537e46038d9d38"
+    },
+    {
+      "path": "contrast-keyboard-result.json",
+      "bytes": 1599,
+      "sha256": "fd5bc49827ba1b349a075a632b1d08cc6ff6e781a063e3737ecdc9a86ea3bdd1"
+    },
+    {
+      "path": "desktop-1440-continue.jpg",
+      "bytes": 235534,
+      "sha256": "ba37cb6029a2729287fabd7a086512ee12b533943702c675dbaa5f16e44d1f9f"
+    },
+    {
+      "path": "desktop-1440-fresh.jpg",
+      "bytes": 245626,
+      "sha256": "925508c179d2c3e6fad48a410e4bac85b9fbface9a55c272b65c9af4a14bf31a"
+    },
+    {
+      "path": "desktop-1440-help.jpg",
+      "bytes": 240026,
+      "sha256": "cd4ea4bb43153d8ba122473e92967330b0b19080c1e5f8aa8a8d49b61c2ed892"
+    },
+    {
+      "path": "desktop-1440-import-error.jpg",
+      "bytes": 232106,
+      "sha256": "19315e675201f7ab34205beff4469fd75d1d0facd76aa6b2b518dde0f0fc6cbd"
+    },
+    {
+      "path": "desktop-1440-replacement.jpg",
+      "bytes": 250614,
+      "sha256": "ff98b91592dbc765538b1f78f6d5cf539c6aa0a8aaf22a2434463ca391bc584d"
+    },
+    {
+      "path": "desktop-1440-settings.jpg",
+      "bytes": 220550,
+      "sha256": "0b81e6a087ac7217ebc28c68ba237b55279713474d670a9adf409736baf997d1"
+    },
+    {
+      "path": "desktop-1920-continue.jpg",
+      "bytes": 349416,
+      "sha256": "d423cc98e39a510765bba82585f789c06b9da3c5c595fad7b6d6eda28aae4351"
+    },
+    {
+      "path": "desktop-1920-fresh.jpg",
+      "bytes": 355282,
+      "sha256": "0f40cf9b02197cd9140fca1623a7d78cf99c848460dd03f8b061f53d6a04cbb3"
+    },
+    {
+      "path": "desktop-1920-help.jpg",
+      "bytes": 356943,
+      "sha256": "118a10f7090032f90bf46dcd15341642d7d283eb6207539e34586f8907e42591"
+    },
+    {
+      "path": "desktop-1920-import-error.jpg",
+      "bytes": 342430,
+      "sha256": "1fb5a61d229e9b6eda7370f0295c134e9b1b464188c3d758c9773e2b38adbafc"
+    },
+    {
+      "path": "desktop-1920-replacement.jpg",
+      "bytes": 358528,
+      "sha256": "da9b9187dd472ca71cff20d184188782d04477908c27a20bf3b8722bc06ed16b"
+    },
+    {
+      "path": "desktop-1920-settings.jpg",
+      "bytes": 335121,
+      "sha256": "f90c9457dbbd752d09fbbbc1230646932b3c08dcd9d20149aad674276b741ec3"
+    },
+    {
+      "path": "desktop-before.jpg",
+      "bytes": 34306,
+      "sha256": "4a6214fd3a9d4beeac2e372375d8066c7b09bd05a2d17b724cafc42d4bea6a2c"
+    },
+    {
+      "path": "expedition-integration-c6a27fb.json",
+      "bytes": 653,
+      "sha256": "f21fab8791bdb83f399de456abab4021fd538e65a8898bdd0efbff5221409688"
+    },
+    {
+      "path": "large-text-approximation.jpg",
+      "bytes": 56626,
+      "sha256": "a93867a8e70e101253883830ddfe7f79338aee5dc466a96acff1eea93513ab08"
+    },
+    {
+      "path": "phone-landscape-continue.jpg",
+      "bytes": 53808,
+      "sha256": "7a521dbb68473ad77da276bea91baa5764de644da00a7f5bad87ddf7949b3d79"
+    },
+    {
+      "path": "phone-landscape-fresh.jpg",
+      "bytes": 62332,
+      "sha256": "6ce9cdd1dea05924febcc3ea7ad53a78c710605580de33596bdb292bd043c609"
+    },
+    {
+      "path": "phone-landscape-help.jpg",
+      "bytes": 65729,
+      "sha256": "fbf6a2d4da66d9d26138280e6931162bddda264ebac675972fc5ebe6623e7146"
+    },
+    {
+      "path": "phone-landscape-import-error.jpg",
+      "bytes": 58445,
+      "sha256": "58658d0e2e9d370449a5d35d3449b2fb9b32d9ac6e7530e113a449d766bee234"
+    },
+    {
+      "path": "phone-landscape-replacement.jpg",
+      "bytes": 78027,
+      "sha256": "f50d5239c44ce8c21f02a385bb7e6fb3b621409c7b2d37fdd91c47fd30d2aefd"
+    },
+    {
+      "path": "phone-landscape-settings.jpg",
+      "bytes": 52458,
+      "sha256": "c0c2b949bae2233dfa46264a9acc4cf54148308e20e7799f185c62a8b3148648"
+    },
+    {
+      "path": "phone-portrait-continue.jpg",
+      "bytes": 58121,
+      "sha256": "238837ee61ad2b329501dcc4cf4af432e5d34f76704505febe8fbe93c6f52732"
+    },
+    {
+      "path": "phone-portrait-fresh.jpg",
+      "bytes": 62610,
+      "sha256": "670ca8e1cd04837df8b29ab89f6e1978b1608ec61b338b3037a97fea8f3f1547"
+    },
+    {
+      "path": "phone-portrait-help.jpg",
+      "bytes": 67493,
+      "sha256": "ccc36e1b3c64842c5c91f46beed38c2b03215860e0b2da19f75717cf11475991"
+    },
+    {
+      "path": "phone-portrait-import-error.jpg",
+      "bytes": 65214,
+      "sha256": "17e7152cac09cda381611fa19f68d0ec2da5d96b0b402e3eca4b1db4e2bd8138"
+    },
+    {
+      "path": "phone-portrait-replacement.jpg",
+      "bytes": 66029,
+      "sha256": "e411deef17ce6d4ea59c795c63828ec12df5f26d6293028232d3afffc21944f9"
+    },
+    {
+      "path": "phone-portrait-settings.jpg",
+      "bytes": 50231,
+      "sha256": "029fb0b3be024b58a1df772af678e669a0e782f94605ae15573de3e7ceddbc86"
+    },
+    {
+      "path": "README.md",
+      "bytes": 9481,
+      "sha256": "bf9a2a9c180edc26baa5afd8dd70bf9cf4eea3cabe6984d647acd3308654a0aa"
+    },
+    {
+      "path": "tablet-continue.jpg",
+      "bytes": 135440,
+      "sha256": "1a0cc50d475b118b8b85e3ed307e65306b8107753dc50db4f388ce0ea020b888"
+    },
+    {
+      "path": "tablet-fresh.jpg",
+      "bytes": 143774,
+      "sha256": "3cfb366c9171b8009bc523da48d3aca1bd4391cf3e7d93404605a6286a10896d"
+    },
+    {
+      "path": "tablet-help.jpg",
+      "bytes": 142851,
+      "sha256": "c6b871a47cb5865029c3ecd50fc25dcf4a775243a035b0e32856dd700f435371"
+    },
+    {
+      "path": "tablet-import-error.jpg",
+      "bytes": 135847,
+      "sha256": "d94c3930e4a4de7afc60c807914c405107bf093f69cd2da59d28a2bb343c6452"
+    },
+    {
+      "path": "tablet-replacement.jpg",
+      "bytes": 149352,
+      "sha256": "da93f624eb4f17e55b3bbcb438169e4f3edf46b1dfdcb558eae350864139498b"
+    },
+    {
+      "path": "tablet-settings.jpg",
+      "bytes": 123694,
+      "sha256": "f78333f1bae4944ae5ee9d1f3a132d9e884a3ab8f9555572e085aa8cc6a77455"
+    },
+    {
+      "path": "targeted-entry-tests-c6a27fb.txt",
+      "bytes": 4486,
+      "sha256": "2eb70cd58220e46ef5629463490cf77c2bc6ae373225ecc825d8ae64f0cc58be"
+    }
+  ]
+}

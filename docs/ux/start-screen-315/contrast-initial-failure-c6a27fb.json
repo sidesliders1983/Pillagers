@@ -1,0 +1,53 @@
+{
+  "status": "failed",
+  "headers": [
+    {
+      "width": 1440,
+      "height": 900,
+      "label": "P",
+      "contrastAgainstBrightestUnderlyingPixel": 6.29075179193634
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "label": "H1",
+      "contrastAgainstBrightestUnderlyingPixel": 5.082988926076486
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "label": "P",
+      "contrastAgainstBrightestUnderlyingPixel": 5.856333245710309
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "label": "H1",
+      "contrastAgainstBrightestUnderlyingPixel": 8.688850771679258
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "label": "P",
+      "contrastAgainstBrightestUnderlyingPixel": 5.624512801394504
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "label": "H1",
+      "contrastAgainstBrightestUnderlyingPixel": 4.117800957540123
+    },
+    {
+      "width": 852,
+      "height": 393,
+      "label": "P",
+      "contrastAgainstBrightestUnderlyingPixel": 4.211091746001245
+    }
+  ],
+  "panelWorstWhiteBackground": {
+    "ordinaryText": 10.374183364890383,
+    "border": 4.589506001875708
+  },
+  "keyboard": false,
+  "failure": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(ratio >= (rect.label === 'H1' ? 3 : 4.5))\n"
+}

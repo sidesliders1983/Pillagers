@@ -1,0 +1,475 @@
+{
+  "version": 1,
+  "build": "4086baac26c6953b879b439546b68f2406ca767a-dirty",
+  "context": {
+    "seed": 2089668634,
+    "quality": "standard",
+    "effects": "low",
+    "renderedResidents": 10,
+    "renderedLivestock": 3,
+    "renderedWildlife": 0,
+    "dpr": 1,
+    "width": 877,
+    "height": 892
+  },
+  "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+  "viewport": [
+    877,
+    892
+  ],
+  "recording": "not reported",
+  "frozenDisplayAt": null,
+  "capabilities": {
+    "gpuTimer": true,
+    "jsHeap": true,
+    "longTasks": true
+  },
+  "units": {
+    "cpu": "synchronous JS ms; async submit excludes resumed continuations",
+    "gpu": "query ms; main includes native shadows; portrait separate",
+    "memory": "optional JS heap only; resource counts are not bytes; VRAM unavailable"
+  },
+  "resources": {
+    "geometries": 133,
+    "textures": 112,
+    "programs": 60,
+    "highGeometries": 133,
+    "highTextures": 112,
+    "highPrograms": 60
+  },
+  "workload": {
+    "main": {
+      "calls": 232,
+      "triangles": 4986269,
+      "at": 479229.799999997
+    }
+  },
+  "heap": {
+    "source": "performance.memory (non-standard)",
+    "usedBytes": 483125846,
+    "allocatedBytes": 547039126
+  },
+  "sample": {
+    "elapsedMs": 19781.40000000596,
+    "sampledUtc": "2026-10-29T18:38:11.451Z",
+    "mode": "Paused",
+    "fps": 15.985932379505961,
+    "interval": {
+      "count": 80,
+      "windowMs": 4960.60000000149,
+      "weight": 0,
+      "meanMs": 62.55500000000029,
+      "p50Ms": 68.89999999996508,
+      "p95Ms": 71.90000000002328,
+      "p99Ms": 80.70000000001164,
+      "worstMs": 80.70000000001164,
+      "latestMs": 70
+    },
+    "cpuFrame": {
+      "count": 80,
+      "windowMs": 4960.60000000149,
+      "weight": 0,
+      "meanMs": 19.301249999459834,
+      "p50Ms": 17.799999997019768,
+      "p95Ms": 28.899999998509884,
+      "p99Ms": 32.899999998509884,
+      "worstMs": 32.899999998509884,
+      "latestMs": 16.799999997019768
+    },
+    "spans": {
+      "core": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "ui": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "sceneCpu": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "sceneWall": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "modelCpu": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "modelWall": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "portraitCpu": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      },
+      "portraitWall": {
+        "count": 0,
+        "windowMs": 0,
+        "weight": 0,
+        "meanMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "p99Ms": null,
+        "worstMs": null,
+        "latestMs": null
+      }
+    },
+    "gpu": {
+      "status": "valid",
+      "milliseconds": 61.131587,
+      "at": 478928
+    },
+    "ticks": {
+      "total": 0,
+      "perSecond": 0
+    },
+    "worstRecentHitchMs": 0,
+    "history": [
+      {
+        "elapsedMs": 2.600000001490116,
+        "mode": "Paused",
+        "fps": null,
+        "intervalP95Ms": null,
+        "cpuP95Ms": null,
+        "gpuMs": null,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 522,
+        "mode": "Paused",
+        "fps": 15.712682379349046,
+        "intervalP95Ms": 71.09999999997672,
+        "cpuP95Ms": 25.100000001490116,
+        "gpuMs": null,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 1027.9000000059605,
+        "mode": "Paused",
+        "fps": 15.58765457757475,
+        "intervalP95Ms": 85.60000000003492,
+        "cpuP95Ms": 28.5,
+        "gpuMs": 61.973751,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 2007.5,
+        "mode": "Paused",
+        "fps": 14.920765589627674,
+        "intervalP95Ms": 75.79999999998836,
+        "cpuP95Ms": 34.099999994039536,
+        "gpuMs": 61.701919,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 2536.4000000059605,
+        "mode": "Paused",
+        "fps": 15.060853991126237,
+        "intervalP95Ms": 75.79999999998836,
+        "cpuP95Ms": 34.099999994039536,
+        "gpuMs": 63.970742,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 3501.7000000029802,
+        "mode": "Paused",
+        "fps": 15.20378925209047,
+        "intervalP95Ms": 73,
+        "cpuP95Ms": 30,
+        "gpuMs": 61.57892,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 4008.3000000044703,
+        "mode": "Paused",
+        "fps": 15.300267754685708,
+        "intervalP95Ms": 73.09999999997672,
+        "cpuP95Ms": 29.30000000447035,
+        "gpuMs": 58.952513,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 5022.4000000059605,
+        "mode": "Paused",
+        "fps": 15.51699816617298,
+        "intervalP95Ms": 73.60000000003492,
+        "cpuP95Ms": 29.30000000447035,
+        "gpuMs": 55.127028,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 6002.70000000298,
+        "mode": "Paused",
+        "fps": 15.691954855452916,
+        "intervalP95Ms": 73.09999999997672,
+        "cpuP95Ms": 29.30000000447035,
+        "gpuMs": 57.05827,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 6514.80000000447,
+        "mode": "Paused",
+        "fps": 15.926456061125187,
+        "intervalP95Ms": 73.09999999997672,
+        "cpuP95Ms": 29.200000002980232,
+        "gpuMs": 57.35052,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 7494.20000000298,
+        "mode": "Paused",
+        "fps": 16.112789526686807,
+        "intervalP95Ms": 72.89999999996508,
+        "cpuP95Ms": 27.5,
+        "gpuMs": 55.225278,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 8011.20000000298,
+        "mode": "Paused",
+        "fps": 16.16651510558755,
+        "intervalP95Ms": 72.80000000004657,
+        "cpuP95Ms": 27.299999997019768,
+        "gpuMs": 61.744252,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 9018.60000000149,
+        "mode": "Paused",
+        "fps": 16.058130432164546,
+        "intervalP95Ms": 72.79999999998836,
+        "cpuP95Ms": 27.299999997019768,
+        "gpuMs": 57.23352,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 10002.90000000596,
+        "mode": "Paused",
+        "fps": 16.070711128967456,
+        "intervalP95Ms": 72.60000000003492,
+        "cpuP95Ms": 26.900000005960464,
+        "gpuMs": 58.137517,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 10503.70000000298,
+        "mode": "Paused",
+        "fps": 16.079109217349473,
+        "intervalP95Ms": 72.60000000003492,
+        "cpuP95Ms": 27.299999997019768,
+        "gpuMs": 59.092428,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 11035,
+        "mode": "Paused",
+        "fps": 16.08557526038536,
+        "intervalP95Ms": 72.60000000003492,
+        "cpuP95Ms": 27.399999998509884,
+        "gpuMs": 57.17302,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 12040.90000000596,
+        "mode": "Paused",
+        "fps": 16.026604162910395,
+        "intervalP95Ms": 72.80000000004657,
+        "cpuP95Ms": 27.399999998509884,
+        "gpuMs": 57.347352,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 13014.70000000298,
+        "mode": "Paused",
+        "fps": 15.989313471502628,
+        "intervalP95Ms": 73,
+        "cpuP95Ms": 28.299999997019768,
+        "gpuMs": 58.057434,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 14001.20000000298,
+        "mode": "Paused",
+        "fps": 16.05877511692792,
+        "intervalP95Ms": 73,
+        "cpuP95Ms": 28.700000002980232,
+        "gpuMs": 59.545177,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 14515.30000000447,
+        "mode": "Paused",
+        "fps": 16.116035455278002,
+        "intervalP95Ms": 73,
+        "cpuP95Ms": 28.700000002980232,
+        "gpuMs": 57.244686,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 15027.20000000298,
+        "mode": "Paused",
+        "fps": 16.102087233057624,
+        "intervalP95Ms": 73,
+        "cpuP95Ms": 28.700000002980232,
+        "gpuMs": 56.346273,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 16003.90000000596,
+        "mode": "Paused",
+        "fps": 16.052974816895755,
+        "intervalP95Ms": 73,
+        "cpuP95Ms": 28.700000002980232,
+        "gpuMs": 57.176937,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 16508.20000000298,
+        "mode": "Paused",
+        "fps": 16.101439066116534,
+        "intervalP95Ms": 72.90000000002328,
+        "cpuP95Ms": 28.700000002980232,
+        "gpuMs": 60.404257,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 17014.60000000149,
+        "mode": "Paused",
+        "fps": 16.041065126724565,
+        "intervalP95Ms": 72.80000000004657,
+        "cpuP95Ms": 28.700000002980232,
+        "gpuMs": 57.871851,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 18023.90000000596,
+        "mode": "Paused",
+        "fps": 16.12188142356209,
+        "intervalP95Ms": 71.79999999998836,
+        "cpuP95Ms": 27.899999998509884,
+        "gpuMs": 60.064759,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 19014.70000000298,
+        "mode": "Paused",
+        "fps": 16.177351707609347,
+        "intervalP95Ms": 71.79999999998836,
+        "cpuP95Ms": 28.299999997019768,
+        "gpuMs": 57.060937,
+        "ticks": 0
+      },
+      {
+        "elapsedMs": 19781.40000000596,
+        "mode": "Paused",
+        "fps": 15.985932379505961,
+        "intervalP95Ms": 71.90000000002328,
+        "cpuP95Ms": 28.899999998509884,
+        "gpuMs": 61.131587,
+        "ticks": 0
+      }
+    ],
+    "events": [
+      {
+        "elapsedMs": 2.2000000029802322,
+        "kind": "load failure",
+        "message": "Unsupported simulation save"
+      },
+      {
+        "elapsedMs": 159.20000000298023,
+        "kind": "long task",
+        "message": "PerformanceLongTaskTiming main-thread task",
+        "durationMs": 76
+      }
+    ],
+    "latestError": {
+      "elapsedMs": 2.3000000044703484,
+      "kind": "load failure",
+      "message": "Unsupported simulation save"
+    }
+  },
+  "loading": {
+    "attempt": "mvtvxwsq-3",
+    "startedUtc": "2026-10-29T18:37:11.882Z",
+    "percent": 0,
+    "stage": "Reading your campaign",
+    "outcome": "failed",
+    "worker": "not-started",
+    "elapsedMs": 47.5,
+    "stageElapsedMs": 24.599999994039536,
+    "lastProgressAgeMs": 24.599999994039536,
+    "maxObservationGapMs": 19.5,
+    "warning": "",
+    "error": {
+      "kind": "failed",
+      "message": "Unsupported simulation save"
+    },
+    "timeline": [
+      {
+        "stage": "campaign-read",
+        "startedMs": 7.5,
+        "durationMs": 19.400000005960464,
+        "outcome": "complete"
+      },
+      {
+        "stage": "campaign-inspect",
+        "startedMs": 27,
+        "durationMs": 20.100000001490116,
+        "outcome": "failed"
+      }
+    ]
+  },
+  "truncated": false
+}

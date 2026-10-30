@@ -6,8 +6,8 @@
   "start_url": "/fjord-play",
   "scope": "/fjord-play",
   "display": "standalone",
-  "background_color": "#172b27",
-  "theme_color": "#172b27",
+  "background_color": "#091d28",
+  "theme_color": "#091d28",
   "icons": [
     {
       "src": "/branding/fjordside/app-192.png",

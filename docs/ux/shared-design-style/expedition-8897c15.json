@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "browser": "156.0.8078.74",
+  "headless": true,
+  "physicalDevice": false,
+  "build": "8897c15c4a279404f0fb97a3d8c373f8d3ce6a88",
+  "cases": [
+    {
+      "name": "crew/supplies/Back and save navigation",
+      "coreAndSelectionEqual": true
+    },
+    {
+      "name": "one paid pack and map cancel",
+      "food": 7,
+      "canonicalUnchangedByCancel": true
+    },
+    {
+      "name": "end/disband confirmation",
+      "food": 7,
+      "groupRemoved": true,
+      "missionHistoryRetained": true
+    },
+    {
+      "name": "landscape touch preparation",
+      "coarsePointer": true,
+      "food": "7"
+    }
+  ],
+  "errors": []
+}

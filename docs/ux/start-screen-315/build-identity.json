@@ -1,0 +1,22 @@
+[
+  {
+    "name": "before",
+    "file": "FjordEntry-N7nKeifL.js",
+    "bytes": 86626,
+    "sha256": "a0baaf429317cddef86508a9602e825092b9aa02966eb2cf9a862929addd0a9c",
+    "httpMatchesDisk": true,
+    "revisionStrings": [
+      "7dfb602dff63f49a8445008d2ea14fd6f0cda2b8"
+    ]
+  },
+  {
+    "name": "after",
+    "file": "FjordEntry-BYqM_oTI.js",
+    "bytes": 90330,
+    "sha256": "b290fdcc43309267aeb7f7b02e46341f99d5d6fc700f6b4983ab526cafb701f9",
+    "httpMatchesDisk": true,
+    "revisionStrings": [
+      "d61f5082e8cfb96ede6b50d1d1caf66098485319"
+    ]
+  }
+]
