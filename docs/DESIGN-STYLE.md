@@ -38,6 +38,8 @@ Gold is an accent, not the default label color. Actions, names and headings use 
 
 UI styling does not recolor terrain, water, models, DNA hair/skin swatches, or weather overlays. Food/Materials production labels retain their distinct colors. Map symbols and family edges retain their encoded meaning and shape; related and deceased residents remain distinguishable by their existing cues. Scalar meters use `--fs-chart-fill`, `--fs-chart-track` and `--fs-chart-reference`; low supplies remain a warning, not an ordinary accent.
 
+The initial HTML loader and web manifest use matching fallback/theme colors before CSS loads; keep these metadata values aligned when changing `--fs-canvas`.
+
 The same rules apply to entry/recovery, the live desktop/mobile HUD, Settlement and resident/house details, expeditions, Activity Center, Clan Book/Family Tree, merchant/mining, loading, ceremonies/cinematics, performance/audio controls, Character/Meshy/Asset/Environment/Water/Gameplay Labs and the older settlement/world views.
 
 ## Making future changes
