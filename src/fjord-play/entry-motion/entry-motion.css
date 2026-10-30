@@ -1,0 +1,4 @@
+.entry-motion-layer { position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0; }
+.entry-motion-layer[data-ready] { opacity: 1; }
+.entry-motion-layer canvas { display: block; width: 100%; height: 100%; }
+.entry-motion-setting small { display: block; color: var(--fs-muted); }

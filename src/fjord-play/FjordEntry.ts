@@ -1,5 +1,6 @@
 import { formatBuildLabel } from '../build/BuildInfo';
 import { organizeCampaignEntry } from './CampaignEntryMenu';
+import { EntryMotion } from './entry-motion/EntryMotion';
 import { GameplaySession } from '../gameplay-lab/GameplaySession';
 import { activeSettlementKey, inspectSettlementSave } from '../play/SharedSettlement';
 import { readRecoverySources, type RecoveryCandidate } from '../play/SettlementRecovery';
@@ -84,13 +85,16 @@ export async function runFjordEntry(ports: EntryPorts = {
     let audioStorage: Storage | undefined;
     try { audioStorage = window.localStorage; } catch { /* Optional presentation preferences. */ }
     const audio = new FjordAudio({ storage: audioStorage });
+    const motion = new EntryMotion(audioStorage);
     const soundSelection = selectFjordSoundPack(window.location.search);
     const audioControls = new AudioControls(audio, soundSelection.mode === 'proof');
     if (soundSelection.mode === 'review')
         audioControls.root.querySelector('[data-audio-pack]')!.textContent =
             'Sound mix review: explicit QA mode. Ordinary gameplay uses the published mix.';
-    const showShell = () => {
+    const showShell = (animated = true) => {
         const content = shell();
+        if (animated) motion.mount();
+        else motion.suspend();
         diagnostics.setMode('Start menu');
         diagnostics.mount();
         return content;
@@ -229,6 +233,7 @@ export async function runFjordEntry(ports: EntryPorts = {
                     context.textContent = selected ? `${summary!.season} ${summary!.year} · Saved campaign` :
                         sources.candidates.length ? 'Choose Load game to return to a saved campaign.' : 'Begin a new campaign.';
                     organizeCampaignEntry(content, audioControls.root, diagnostics.settings(), details);
+                    content.querySelector('[data-start-audio]')!.append(motion.settings);
                 }
                 const choice = bypass === 'handoff' || bypass === 'recovery' || bypass === 'qa-continue' ?
                     (selected ? 'continue' : 'recover') : bypass === 'qa-new' ? 'new' :
@@ -294,7 +299,7 @@ export async function runFjordEntry(ports: EntryPorts = {
                     },
                 };
                 for (;;) {
-                    content = showShell();
+                    content = showShell(false);
                     content.innerHTML = diagnosticMode ? '<p role="status">Starting loading diagnostics…</p>' :
                         '<p role="status">Opening your campaign…</p>';
                     attempt.diagnosticRun = diagnosticMode ? new LoadingRunDiagnostics() : undefined;
@@ -344,6 +349,7 @@ export async function runFjordEntry(ports: EntryPorts = {
             }
         }
     } finally {
+        motion.dispose();
         if (lifetime.signal.aborted) {
             diagnostics.dispose();
             audioControls.dispose();

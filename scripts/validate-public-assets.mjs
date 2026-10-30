@@ -46,6 +46,16 @@ for (const entry of startArt.files) {
     assert.ok(bytes.length < 512 * 1024, 'Start artwork exceeds its download budget.');
 }
 
+const entryMotion = await json('branding/fjordside/start/motion.json');
+const motionMask = await readFile(resolve(root, 'branding/fjordside/start', entryMotion.mask.filename));
+assert.equal(motionMask.length, entryMotion.mask.bytes, 'Entry motion mask bytes');
+assert.equal(sha256(motionMask), entryMotion.mask.sha256, 'Entry motion mask hash');
+assert.ok(motionMask.length <= 150 * 1024, 'Entry motion data exceeds its download budget');
+const motionMetadata = await sharp(motionMask).metadata();
+assert.equal(motionMetadata.width, entryMotion.mask.width);
+assert.equal(motionMetadata.height, entryMotion.mask.height);
+assert.equal(motionMetadata.channels, 3, 'Entry motion mask stores RGB data');
+
 const houses = await json('game-assets/houses/manifest.json');
 for (const [key, file] of Object.entries(generatedHouseFiles)) {
     assert.equal(houses.assets[key]?.file, file, 'Missing house publication: ' + key);

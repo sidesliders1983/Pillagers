@@ -49,3 +49,7 @@ The same rules apply to entry/recovery, the live desktop/mobile HUD, Settlement 
 Import the shared theme through the owning root stylesheet, choose tokens by role and reuse the existing component owner. Do not introduce a second local palette or desktop-only color override. Update this document with intentional visual-contract changes. New semantic/data colors need an explicit meaning and a readable contrast, rather than being replaced by the decorative accent.
 
 Use real browser checks on representative desktop, portrait and short landscape layouts, including selected/hover/focus/disabled states, text over bright scenery and nested panels. Verify behavior through the existing public menu, book, campaign and scene contracts. Do not add tests that assert CSS text against itself or alter gameplay merely to demonstrate a style.
+
+## Desktop start background motion
+
+The owner-approved start artwork may animate aurora/cloud movement and water reflections on desktop (at least 1100 CSS px, hover and fine primary pointer). Use the fixed reviewed preset and the soft diagonal shoreline mask in `src/fjord-play/entry-motion/`. The Settings switch is a browser-local presentation preference. Reduced motion, touch layouts, unsupported graphics and asset/context failure retain the static image. The lightweight decorative owner pauses while hidden and releases all graphics resources before campaign loading; it adds no renderer work to the running world. Other UI surfaces retain the shared CSS-only styling contract.

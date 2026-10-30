@@ -15,11 +15,12 @@ function button(label) {
     return [...document.querySelectorAll('button')].find(element =>
         available(element) && (element.getAttribute('aria-label') ?? element.textContent.trim()) === label);
 }
-async function entry(run, saved = null) {
+async function entry(run, saved = null, setup) {
     const dom = new JSDOM('<!doctype html>', { url: 'http://localhost/fjord-play', pretendToBeVisual: true });
     const names = ['window', 'document', 'HTMLElement', 'Element', 'DOMException', 'AbortController'];
     const previous = Object.fromEntries(names.map(name => [name, globalThis[name]]));
     for (const name of names) globalThis[name] = name === 'window' ? dom.window : dom.window[name];
+    setup?.(dom);
     const { activeSettlementKey } = loadDOMSource('../src/play/SharedSettlement.ts');
     const { runFjordEntry } = loadDOMSource('../src/fjord-play/FjordEntry.ts');
     const writes = [], attempts = [];
@@ -101,5 +102,35 @@ test('the public version stays below the brand and agrees with About and diagnos
         } finally { performance.dispose(); }
         assert.equal(writes.length, 0);
         assert.equal(attempts.length, 0);
+    });
+});
+
+test('animated entry background is a persistent presentation preference, never a campaign write', async () => {
+    await entry(async ({ dom, writes, attempts }) => {
+        button('Settings').click();
+        const preference = document.querySelector('[data-entry-motion]');
+        assert.ok(preference, 'Settings exposes the desktop background motion preference');
+        assert.equal(preference.checked, true);
+        preference.click();
+        assert.equal(dom.window.localStorage.getItem('fjordside.entry-motion'), 'off');
+        assert.equal(writes.length, 0);
+        assert.equal(attempts.length, 0);
+        button('Back').click();
+        button('Settings').click();
+        assert.equal(document.querySelector('[data-entry-motion]').checked, false);
+        assert.equal(writes.length, 0);
+    });
+});
+
+test('entry remains usable when media queries lack the change-event API', async () => {
+    await entry(async ({ writes, attempts }) => {
+        assert.ok(button('New game'));
+        button('Settings').click();
+        assert.equal(document.querySelector('[data-entry-motion]').checked, true);
+        assert.equal(document.querySelectorAll('canvas').length, 0);
+        assert.equal(writes.length, 0);
+        assert.equal(attempts.length, 0);
+    }, null, dom => {
+        dom.window.matchMedia = media => ({ media, matches: true, addListener() {}, removeListener() {} });
     });
 });

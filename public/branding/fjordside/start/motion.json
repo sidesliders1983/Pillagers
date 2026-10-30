@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "description": "Owner-reviewed desktop start motion; static on touch/reduced motion. Mask is data, not scenery.",
+  "source": {
+    "filename": "upscalemedia-transformed (3).png",
+    "sha256": "14cd041dfa07d7b7eb3b45763089168dc994675657d0c5bd07af6da29a61284d"
+  },
+  "mask": {
+    "filename": "motion-mask.png",
+    "width": 1024,
+    "height": 576,
+    "bytes": 130648,
+    "sha256": "21a63676aad378f4dfc9d17bc7bd3802451c50e3073be45b1fc9ad431f2d3822",
+    "channels": "R cutout alpha, G sky opening, B inward-feathered traced water"
+  }
+}
