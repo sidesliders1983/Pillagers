@@ -4,9 +4,10 @@ import ts from 'typescript';
 const nativeRequire=createRequire(import.meta.url),cache=new Map();
 /** Load the same dependency-light TS contracts in Node tooling and tests. */
 export function loadTypeScript(url){
+    if(new URL(url).pathname.endsWith('.json'))return JSON.parse(readFileSync(new URL(url),'utf8'));
     const key=new URL(url).href;if(cache.has(key))return cache.get(key);
     const module={exports:{}};cache.set(key,module.exports);
     const source=ts.transpileModule(readFileSync(new URL(key),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
-    new Function('require','module','exports',source)(name=>name.startsWith('.')?loadTypeScript(new URL(name+'.ts',key)):nativeRequire(name),module,module.exports);
+    new Function('require','module','exports',source)(name=>name.startsWith('.')?loadTypeScript(new URL(name.endsWith('.json')?name:name+'.ts',key)):nativeRequire(name),module,module.exports);
     return module.exports;
 }

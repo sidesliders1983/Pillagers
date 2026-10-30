@@ -81,3 +81,25 @@ test('returning players see their campaign date, can inspect seed details, and c
         assert.ok(button('New game'));
     }, saved);
 });
+
+test('the public version stays below the brand and agrees with About and diagnostics without activating a save', async () => {
+    await entry(async ({ writes, attempts }) => {
+        const label = document.querySelector('header [data-game-version]');
+        assert.ok(label, 'The brand includes a selectable version line');
+        assert.match(label.textContent, /^v0\.1 alpha · local /);
+        const about = document.querySelector('.entry-about');
+        about.open = true;
+        assert.equal(about.querySelector('[data-build-label]').textContent, label.textContent);
+        const { PlaytestPerformance } = loadDOMSource('../src/fjord-play/PlaytestPerformance.ts');
+        const performance = new PlaytestPerformance();
+        try {
+            const report = JSON.parse(performance.exportJSON());
+            assert.equal(report.buildInfo.version, '0.1.0-alpha');
+            assert.match(about.textContent, new RegExp(report.buildInfo.buildId));
+            const { IslandLoadStatus } = loadDOMSource('../src/fjord-play/IslandLoadStatus.ts');
+            assert.deepEqual(new IslandLoadStatus('new').snapshot().buildInfo, report.buildInfo);
+        } finally { performance.dispose(); }
+        assert.equal(writes.length, 0);
+        assert.equal(attempts.length, 0);
+    });
+});

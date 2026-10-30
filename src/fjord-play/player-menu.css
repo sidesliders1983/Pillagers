@@ -119,3 +119,10 @@
 .player-menu-link-note {
     font-size: 12px;
 }
+
+.fjord-build-details pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    color: var(--fs-muted);
+    font-size: 12px;
+}

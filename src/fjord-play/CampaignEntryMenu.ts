@@ -1,3 +1,4 @@
+import { buildDetailsHTML } from './BuildDetails';
 import './player-menu.css';
 import { icon, type FjordIcon } from './FjordIcons';
 import { playerFeedbackLinkHTML } from './PlayerFeedback';
@@ -53,7 +54,7 @@ export function organizeCampaignEntry(
             <button type="button" data-start-view="settings">Settings</button>
             <button type="button" data-start-view="help">Help &amp; support</button>
         </div>
-        <details class="entry-about"><summary>About / Credits</summary><p>FjordSide · A new shore. A shared history.</p>
+        <details class="entry-about"><summary>About / Credits</summary><p>FjordSide · A new shore. A shared history.</p>${buildDetailsHTML()}
             <a href="/game-assets/wetlands/ATTRIBUTION.txt" target="_blank" rel="noopener">Nature asset credits</a></details>
     </section>
     <section data-start-panel="new" hidden>
@@ -76,6 +77,7 @@ export function organizeCampaignEntry(
         <h3>Having trouble?</h3>
         <p>Load game lets you choose a saved campaign or import a campaign file.
             Keep a downloaded campaign file before replacing progress or clearing browser data.</p>
+        <details><summary>Build details</summary>${buildDetailsHTML()}</details>
         ${playerFeedbackLinkHTML()}
         <button type="button" data-start-view="diagnostics">Diagnostics</button>
     </section>
