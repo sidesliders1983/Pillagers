@@ -1,0 +1,82 @@
+- main:
+  - generic "Settlement status and controls":
+    - generic "Calendar":
+      - generic: Autumn
+      - strong: "800"
+    - generic "Settlement resources and population":
+      - term: Food
+      - definition:
+        - button "Food stocks":
+          - strong: "6"
+      - term: Materials
+      - definition:
+        - button "Materials stocks":
+          - strong: "5"
+      - term: Residents
+      - definition:
+        - button "Settlement residents":
+          - strong: "10"
+      - term: Livestock
+      - definition:
+        - button "Settlement livestock":
+          - strong: "3"
+    - button "Pause simulation":
+      - generic: Running
+    - generic "Year length":
+      - generic: Expedition · 10 min
+      - combobox "Year length" [disabled]:
+        - option "1 min per year"
+        - option "3 min per year"
+        - option "5 min per year"
+        - option "Expedition · 10 min / 1,000 ticks" [selected]
+    - button "+1 Year" [disabled]
+    - generic "Game menu":
+    - option "Low" [selected]
+    - option "Standard"
+    - option "Off"
+    - option "Low" [selected]
+    - option "Normal"
+    - option "Off" [selected]
+    - option "Compact"
+    - option "Details"
+  - generic "Canonical Fjord settlement"
+  - generic "Resident production feedback"
+  - text: ⌄
+  - complementary "Exploration controls":
+    - generic: Exploration mode
+    - button "Group 1":
+      - generic: Group 1
+    - generic: Clock running
+    - heading "Exploring" [level=2]
+    - paragraph: The group is revealing nearby land. Choose another destination to continue.
+    - generic: Exploration supplies
+    - strong: 95%
+    - meter "Exploration supplies": 95%
+    - text: ≈ 18m 57s exploration remaining Supplies for the journey home are reserved.
+    - button "Change destination":
+      - generic: Change destination
+    - button "Return home":
+      - generic: Return home
+    - button "Pause travel":
+      - generic: Pause travel
+    - button "Show group":
+      - generic: Show group
+    - paragraph: Travel, exploration and the return share this pack.
+    - status: Destination set. No extra Food was charged.
+  - navigation "Settlement navigation":
+    - button "Settlement":
+      - text: Settlement
+    - button "Clan Book":
+      - text: Clan Book
+    - button "Need help?":
+      - text: Need help?
+    - button "Expeditions":
+      - text: Expeditions
+    - button "Show island map":
+      - generic: Map
+    - generic "Active expedition controls":
+      - button "Toggle Group 1 controls" [expanded] [active]:
+        - generic: Group 1
+  - 'button "Attention: 6 unread events and current conditions"':
+    - generic: Attention
+    - generic: "6"

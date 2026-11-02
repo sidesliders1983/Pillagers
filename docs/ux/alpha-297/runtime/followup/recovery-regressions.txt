@@ -1,0 +1,29 @@
+✔ saved island restores through asynchronous preparation without changing Core, book, layout or fractional pace (15504.2676ms)
+✔ missing or damaged active storage offers recoverable saves without replacing their raw data (108.2946ms)
+✔ incomplete shared saves are rejected rather than constructing an unrelated default campaign (0.6168ms)
+✔ resume checkpoints preserve presentation controls and camera independently of Core (586.9314ms)
+✔ invalid pacing or island identity is rejected before expensive restoration begins (80.0898ms)
+✔ explicit legacy view handoff retains its pace and full saved terrain through the asynchronous restore route (684.1599ms)
+✔ manual canonical data remains a recovery choice when its scenery sidecar cannot be used (99.8479ms)
+✔ entry is read-only until a confirmed choice is ready; cancel and repeated clicks are safe (3509.9746ms)
+✔ failed assets and quota retry the same attempt, protecting saves and exposing export (731.7097ms)
+✔ fresh entry has no invented save; leaving fences late activation (104.6581ms)
+✔ a changed active session fences a stale loaded campaign before any write (842.9619ms)
+✔ a restart proposal reproduces original founders and rules without changing the saved campaign (656.7006ms)
+✔ a prepared founder replay retains its visible founding chapter and read state without old Attention (2183.7777ms)
+✔ saved-campaign diagnostics auto-download a report, allow manual export, and never activate storage (3553.5365ms)
+✔ new diagnostic scenarios skip replacement, export failures, and retry with a fresh recorder on the same seed (712.108ms)
+✔ view handoff preserves selection, running pace, fractional time and exact Fjord (4856.3359ms)
+✔ shared commands use Core availability and update both projections without moving the plot (742.7542ms)
+✔ shared import is atomic and new/restart campaigns reset both presentations while retaining saved rules (1261.7809ms)
+✔ paired 2D/Fjord ownership transfers retain deterministic replay through Winters and exact local saves (2479.8439ms)
+✔ same-seed saves from an earlier campaign clear unavailable identities from the Fjord sidecar (380.9333ms)
+✔ resident selection identifies the canonical partner, child and home; home selection identifies its occupants (1230.2369ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 29586.2538

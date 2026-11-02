@@ -1,0 +1,16 @@
+Browser tab: 3, Title: "FjordSide", URL: "http://127.0.0.1:5192/fjord-play".
+0 AXWebArea FjordSide, URL: 127.0.0.1:5192/fjord-play
+	1 container Prepare for the island, ID: expedition-start-dialog
+		2 text EXPEDITION SUPPLIES
+		3 heading Prepare for the island, Value: 2, ID: expedition-start-title
+			4 text Prepare for the island
+		5 container expedition-start-summary
+			6 text 8
+			7 text Food from clan stocks
+			8 text Group 1 · 1 residents · 8 Food each · packed once.
+			9 text Next, choose a destination on the island. Travel, exploration and returning home share this pack.
+			10 text Unused supplies are discarded when the expedition ends. The clock stays paused.
+		11 button Pack supplies, ID: expedition-start-confirm
+		12 button Back, ID: expedition-start-cancel
+
+The focused UI element is 12 button Back, ID: expedition-start-cancel

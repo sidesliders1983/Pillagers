@@ -1,0 +1,26 @@
+{
+  "source_commit": "4086baac26c6953b879b439546b68f2406ca767a",
+  "export_workspace": "D:\\CodexSites\\Pillagers\\scratch\\sites\\main-builds\\main-4086baac26c6-4rftiP",
+  "compared_files": 1854,
+  "content_mismatches": [
+    "src/main.ts"
+  ],
+  "build": "Vite production build; no runtime code changes; existing >500 kB warning",
+  "local_origin": "http://127.0.0.1:5192",
+  "asset_sha256": {
+    "assets/FjordEntry-BLpF0KE8.js": "24a03179c7bf9ff6b2f1450da9d48f0745b81276dccb1380509cec0f62450ac1",
+    "assets/FjordEntry-D7RHRi1V.css": "9d11e1f66fb95dd06d74a2523e23a238c87c691e889af305a4f55dfb231cb70f",
+    "assets/FjordPlay-DHwni0Q3.js": "b33fe2522248510a8ca42789cb6bb896bcdf40560d6b74a5d19949cd4be03a38",
+    "assets/FjordPlay-JEIGhwuG.css": "82a3b6d892b127b951c361751ec6adc0308d764989144875f862cccee96de2f0",
+    "assets/GenerationWorker-C5Bkeq6m.js": "7b6ae55026857c656d0bffd0b2050995e22418873199a71d16be6cd42949a722",
+    "assets/index-BPHQuCGE.css": "47394b5c52d218ba0967b7944bc420d4ac3cd2535375e296c889fa992c295731",
+    "assets/index-B_WAkg5A.js": "77350ef4f818eacb95e66c6abf3d957fa8b7bce002b7c85a2025938cb4aa8d79",
+    "assets/NativePortraitRenderer-DhVLdPEP.js": "c1df761228f2162129f1c34904a808e3519a2cdb9869bc5d83718e100d4d1ae1"
+  },
+  "site_route_transform": {
+    "path": "src/main.ts",
+    "description": "Existing Sites export maps root and /fjord-play to FjordEntry and omits lab routes; unchanged Fjord modules.",
+    "main_sha256_local_bytes": "cc58e873406f4b64a1cd203ca7b11a91ba18471f708aad770926c059c660fc7e",
+    "export_sha256": "c7a3ec0df6e046c4c38a40aac13e9bc00a0d06989378fcb1e78190c83a02cc1c"
+  }
+}

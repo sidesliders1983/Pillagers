@@ -1,0 +1,124 @@
+- main:
+  - generic "Settlement status and controls":
+    - generic "Calendar":
+      - generic: Winter
+      - strong: "801"
+    - generic "Settlement resources and population":
+      - term: Food
+      - definition:
+        - button "Food stocks":
+          - strong: "0"
+      - term: Materials
+      - definition:
+        - button "Materials stocks":
+          - strong: "6"
+      - term: Residents
+      - definition:
+        - button "Settlement residents":
+          - strong: "10"
+      - term: Livestock
+      - definition:
+        - button "Settlement livestock":
+          - strong: "3"
+    - button "Start simulation":
+      - generic: Paused
+    - generic "Year length":
+      - generic: 3 min per year
+      - combobox "Year length":
+        - option "1 min per year"
+        - option "3 min per year" [selected]
+        - option "5 min per year"
+    - button "+1 Year"
+    - generic "Game menu":
+    - option "Low" [selected]
+    - option "Standard"
+    - option "Off"
+    - option "Low" [selected]
+    - option "Normal"
+    - option "Off" [selected]
+    - option "Compact"
+    - option "Details"
+  - generic "Canonical Fjord settlement"
+  - generic "Resident production feedback"
+  - region "Settlement workspace" [active]:
+    - heading "Expeditions" [level=2]
+    - button "Close workspace": ×
+    - region "Expedition groups":
+      - paragraph: Prepare a crew. Place a flag. Discover your island.
+      - button "New group":
+        - generic: New group
+      - navigation "Exploration groups":
+        - button "Group 1 1 residents · active" [pressed]:
+          - strong: Group 1
+          - generic: 1 residents · active
+      - list "Expedition steps":
+        - generic: Crew
+        - generic: Destination
+        - generic: Explore & return
+      - heading "Group 1" [level=3]
+      - generic: Stranded
+      - paragraph: This group cannot travel or return. Its expedition is stranded.
+      - paragraph:
+        - text: Minmantė
+      - generic: Exploration supplies
+      - strong: 0%
+      - meter "Exploration supplies": 0%
+      - text: Movement unavailable Supplies for the journey home are reserved.
+      - button "Change destination" [disabled]:
+        - generic: Change destination
+      - button "Return home" [disabled]:
+        - generic: Return home
+      - button "Show group on map":
+        - generic: Show group on map
+      - paragraph: Clock paused. Resume travel when you are ready. New destinations use the same carried supplies.
+      - region "Recent wildlife sightings":
+        - heading "Recent wildlife sightings" [level=4]
+        - list:
+          - button "Great black-backed gull · Year 800 · tick 745"
+      - status: Return home ordered.
+      - region "Physical island missions":
+        - heading "Island missions" [level=3]
+        - paragraph: Separate missions depart from home. Explore first to map possible destinations.
+        - text: Mission group
+        - combobox "Mission group":
+          - option "Group 1" [selected]
+        - paragraph: Group 1 is stranded and cannot start another mission.
+        - button "Recon mapped area" [disabled]
+        - generic "Pillage equipment"
+        - paragraph: Assign existing gear to named residents at home. Craft stock through a Smith or Leatherworker's home.
+        - group "Minmantė":
+          - generic: Minmantė
+          - text: Weapon
+          - combobox "Minmantė Weapon" [disabled]:
+            - option "None" [selected]
+            - option "Wooden Spear (0 stored)" [disabled]
+          - text: Shield
+          - combobox "Minmantė Shield" [disabled]:
+            - option "None" [selected]
+            - option "Wooden Shield (0 stored)" [disabled]
+            - option "Leather-reinforced Shield (0 stored)" [disabled]
+        - region "Personal Pillage risks":
+          - paragraph: "Success: 60% · 0/1 spear holders"
+          - paragraph: "Shields protect only their wearer. Casualty risk per member:"
+          - paragraph: Minmantė · 10% · No shield
+        - heading "Known places" [level=4]
+        - paragraph: No settlement has been sighted.
+        - status
+    - text: ⌄
+  - navigation "Settlement navigation":
+    - button "Settlement":
+      - text: Settlement
+    - button "Clan Book":
+      - text: Clan Book
+    - button "Need help?":
+      - text: Need help?
+    - button "Expeditions":
+      - text: Expeditions
+    - button "Show island map":
+      - generic: Map
+    - generic "Active expedition controls":
+      - button "Toggle Group 1 controls":
+        - generic: Group 1
+  - 'button "Attention: 9 unread events and current conditions"':
+    - generic: Attention
+    - generic: "9"

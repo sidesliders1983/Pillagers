@@ -1,0 +1,72 @@
+Browser tab: 3, Title: "FjordSide", URL: "http://127.0.0.1:5192/fjord-play".
+1 AXWebArea FjordSide, URL: 127.0.0.1:5192/fjord-play
+	2 container fjord-play
+		3 container Description: Settlement status and controls, ID: fjord-header
+			4 container Description: Calendar, ID: fjord-winter
+				5 text Summer
+				6 text 800
+			7 definition list Description: Settlement resources and population, ID: fjord-stocks
+				8 button Food stocks
+					9 text 9
+				10 button Materials stocks
+					11 text 5
+				12 button Settlement residents
+					13 text 10
+				14 button Settlement livestock
+					15 text 3
+			16 button Description: Start simulation, ID: fjord-run
+			17 container Description: Year length, ID: fjord-pacing
+				18 pop up button (collapsed, settable) Description: Year length, Value: 3 min per year, ID: fjord-cycle, Secondary Actions: Expand
+					19 menu
+						20 1 min per year
+						21 (selected) 3 min per year
+						22 5 min per year
+						23 Expedition · 10 min / 1,000 ticks
+			24 container fjord-menu
+				25 button (expanded) Description: Game menu, Secondary Actions: Collapse
+				45 container
+					46 heading 1
+					47 link 127.0.0.1:5192/game-assets/wetlands/ATTRIBUTION.txt
+					48 button
+					49 button
+					50 pop up button (collapsed) Secondary Actions: Expand
+						51 menu
+							52 (selected)
+					53 checkbox 0
+					54 pop up button (collapsed) Secondary Actions: Expand
+						55 menu
+							56 (selected)
+					57 checkbox 0
+					58 container
+						59 pop up button (collapsed) Secondary Actions: Expand
+							60 menu
+								61 (selected)
+					62 container
+						63 button
+						64 checkbox 1
+						65 slider
+						66 button (collapsed) Secondary Actions: Expand
+					67 button (collapsed) Secondary Actions: Expand
+					68 button (collapsed) Secondary Actions: Expand
+					69 button (collapsed) Secondary Actions: Expand
+		26 container
+			27 image Description: Canonical Fjord settlement, ID: fjord-canvas
+			28 container Description: Resident production feedback, ID: fjord-production-labels
+			29 container Description: Selection and tasks, ID: fjord-management
+				30 container Description: Settlement management, ID: entity-panel
+					31 heading Leofgifu, Value: 2
+						32 text Leofgifu
+					33 text 34 Winters · Fisher
+					34 button Close selection
+					35 text Working · food
+					36 button Change work
+					37 button Personal details
+		38 container Description: Settlement navigation, ID: fjord-navigation
+			39 button (collapsed) Description: Settlement navigation, ID: fjord-mobile-menu, Secondary Actions: Expand
+			40 button Expeditions
+			41 button (collapsed) Description: Show island map, Help: Map, ID: fjord-map-toggle, Secondary Actions: Expand
+			42 container Description: Active expedition controls, ID: expedition-group-shortcuts
+		43 button Description: Attention: 4 unread events and current conditions, ID: fjord-attention
+			44 text 4
+
+The focused UI element is 25 button (expanded) Description: Game menu, Secondary Actions: Collapse

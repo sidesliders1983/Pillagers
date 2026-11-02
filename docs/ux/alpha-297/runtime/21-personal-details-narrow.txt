@@ -1,0 +1,85 @@
+Browser tab: 3, Title: "FjordSide", URL: "http://127.0.0.1:5192/fjord-play".
+1 AXWebArea FjordSide, URL: 127.0.0.1:5192/fjord-play
+	2 container fjord-play
+		3 container Description: Settlement status and controls, ID: fjord-header
+			4 container Description: Calendar, ID: fjord-winter
+				44 text Summer
+				45 text 800
+			7 definition list Description: Settlement resources and population, ID: fjord-stocks
+				8 button Food stocks
+					46 text 9
+				10 button Materials stocks
+					47 text 5
+				12 button Settlement residents
+					48 text 10
+				14 button Settlement livestock
+					49 text 3
+			16 button Description: Start simulation, ID: fjord-run
+			17 container Description: Year length, ID: fjord-pacing
+				18 pop up button (collapsed, settable) Description: Year length, Value: 3 min per year, ID: fjord-cycle, Secondary Actions: Expand
+					19 menu
+						20 1 min per year
+						21 (selected) 3 min per year
+						22 5 min per year
+						23 Expedition · 10 min / 1,000 ticks
+			24 container fjord-menu
+				25 button (collapsed) Description: Game menu, Secondary Actions: Expand
+		26 container
+			27 image Description: Canonical Fjord settlement, ID: fjord-canvas
+			28 container Description: Resident production feedback, ID: fjord-production-labels
+			29 container Description: Selection and tasks, ID: fjord-management
+				30 container Description: Settlement management, ID: entity-panel
+					31 heading Leofgifu, Value: 2
+						32 text Leofgifu
+					33 text 34 Winters · Female · Fisher
+					34 button Close selection
+					35 text Working · food
+					50 text Productivity
+					51 text 40%
+					52 level indicator 0.40139999985694885
+					53 text Occupation fit
+					54 text 80%
+					55 level indicator 0.8027999997138977
+					56 text 1.2 recorded years in current occupation · Autonomous career
+					57 text Physicality
+					58 text 14%
+					59 level indicator 0.14000000059604645
+					60 text Agility
+					61 text 92%
+					62 level indicator 0.9200000166893005
+					63 text Intelligence
+					64 text 49%
+					65 level indicator 0.49000000953674316
+					66 text Cunning
+					67 text 51%
+					68 level indicator 0.5099999904632568
+					69 text Temperament
+					70 text 16%
+					71 level indicator 0.1599999964237213
+					72 definition list
+						73 container Household
+							74 text Household
+						75 button Leofgifu and Hallrik Eiriksson’s household
+						76 container Partner
+							77 text Partner
+						78 button Hallrik Eiriksson
+						79 container Children
+							80 text Children
+						81 text None
+					82 button Change work
+					83 button Show less
+					84 button (collapsed) Heritage, parents & occupation aptitudes, Secondary Actions: Expand
+						85 text Heritage, parents & occupation aptitudes
+					86 button (collapsed) Personal history, Secondary Actions: Expand
+						87 text Personal history
+					88 button (collapsed) More management, Secondary Actions: Expand
+						89 text More management
+		38 container Description: Settlement navigation, ID: fjord-navigation
+			39 button (collapsed) Description: Settlement navigation, ID: fjord-mobile-menu, Secondary Actions: Expand
+			40 button Expeditions
+			41 button (collapsed) Description: Show island map, Help: Map, ID: fjord-map-toggle, Secondary Actions: Expand
+			42 container Description: Active expedition controls, ID: expedition-group-shortcuts
+		43 button Description: Attention: 4 unread events and current conditions, ID: fjord-attention
+			90 text 4
+
+The focused UI element is 31 heading Leofgifu, Value: 2

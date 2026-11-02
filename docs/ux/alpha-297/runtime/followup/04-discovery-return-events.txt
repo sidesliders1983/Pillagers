@@ -1,0 +1,116 @@
+- main:
+  - generic "Settlement status and controls":
+    - generic "Calendar":
+      - generic: Winter
+      - strong: "801"
+    - generic "Settlement resources and population":
+      - term: Food
+      - definition:
+        - button "Food stocks":
+          - strong: "0"
+      - term: Materials
+      - definition:
+        - button "Materials stocks":
+          - strong: "6"
+      - term: Residents
+      - definition:
+        - button "Settlement residents":
+          - strong: "10"
+      - term: Livestock
+      - definition:
+        - button "Settlement livestock":
+          - strong: "3"
+    - button "Start simulation":
+      - generic: Paused
+    - generic "Year length":
+      - generic: 3 min per year
+      - combobox "Year length":
+        - option "1 min per year"
+        - option "3 min per year" [selected]
+        - option "5 min per year"
+    - button "+1 Year"
+    - generic "Game menu":
+    - option "Low" [selected]
+    - option "Standard"
+    - option "Off"
+    - option "Low" [selected]
+    - option "Normal"
+    - option "Off" [selected]
+    - option "Compact"
+    - option "Details"
+  - generic "Canonical Fjord settlement"
+  - generic "Resident production feedback"
+  - region "Settlement workspace" [active]:
+    - heading "Activity Center" [level=2]
+    - button "Close workspace": ×
+    - region "Activity Center":
+      - navigation "Activity Center views":
+        - button "Overview" [pressed]
+        - button "History"
+      - region "Needs attention":
+        - heading "Needs attention" [level=3]
+        - generic: 4 to review
+        - list:
+          - button "Critical · Review Food stocks are empty. Unread":
+            - generic: Critical · Review
+            - text: Food stocks are empty.
+            - generic "Unread"
+            - generic: ›
+          - button "Critical · Review Group 1 is stranded. Cancelled Unread":
+            - generic: Critical · Review
+            - text: Group 1 is stranded. Cancelled
+            - generic "Unread"
+            - generic: ›
+          - button "Current condition · Review 8 households need a permanent home. Unread":
+            - generic: Current condition · Review
+            - text: 8 households need a permanent home.
+            - generic "Unread"
+            - generic: ›
+          - button "Current condition · Review 3 livestock without shelter. Unread":
+            - generic: Current condition · Review
+            - text: 3 livestock without shelter.
+            - generic "Unread"
+            - generic: ›
+      - region "New activity":
+        - heading "New activity" [level=3]
+        - button "Mark updates read"
+        - list:
+          - button "Clan life · Year 801 · 1 unread Niilá and Leofburh became partners. Unread":
+            - generic: Clan life · Year 801 · 1 unread
+            - text: Niilá and Leofburh became partners.
+            - generic "Unread"
+            - generic: ›
+          - button "Discoveries · Year 800 · 1 unread Group 1 sighted a great black-backed gull, the clan’s first recorded encounter with this species. Unread":
+            - generic: Discoveries · Year 800 · 1 unread
+            - text: Group 1 sighted a great black-backed gull, the clan’s first recorded encounter with this species.
+            - generic "Unread"
+            - generic: ›
+          - button "Expeditions · Year 800 · 2 unread 2 exploration departures Unread":
+            - generic: Expeditions · Year 800 · 2 unread
+            - text: 2 exploration departures
+            - generic "Unread"
+            - generic: ›
+          - 'button "Expeditions · Year 800 · 1 unread Group 1 exploration ended: Completed. Unread"':
+            - generic: Expeditions · Year 800 · 1 unread
+            - text: "Group 1 exploration ended: Completed."
+            - generic "Unread"
+            - generic: ›
+        - navigation "Activity pages"
+    - generic "Weather & exposure ⌄"
+  - navigation "Settlement navigation":
+    - button "Settlement":
+      - text: Settlement
+    - button "Clan Book":
+      - text: Clan Book
+    - button "Need help?":
+      - text: Need help?
+    - button "Expeditions":
+      - text: Expeditions
+    - button "Show island map":
+      - generic: Map
+    - generic "Active expedition controls":
+      - button "Toggle Group 1 controls":
+        - generic: Group 1
+  - 'button "Attention: 9 unread events and current conditions"':
+    - generic: Attention
+    - generic: "9"

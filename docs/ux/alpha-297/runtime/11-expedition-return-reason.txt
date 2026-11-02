@@ -1,0 +1,93 @@
+Browser tab: 3, Title: "FjordSide", URL: "http://127.0.0.1:5192/fjord-play".
+0 AXWebArea FjordSide, URL: 127.0.0.1:5192/fjord-play
+	1 container fjord-play
+		2 container Description: Settlement status and controls, ID: fjord-header
+			3 container Description: Calendar, ID: fjord-winter
+				133 text Summer
+				134 text 800
+			6 definition list Description: Settlement resources and population, ID: fjord-stocks
+				7 container Food
+					8 text Food
+				9 button Food stocks
+					135 text 9
+				11 container Materials
+					12 text Materials
+				13 button Materials stocks
+					136 text 5
+				15 container Residents
+					16 text Residents
+				17 button Settlement residents
+					137 text 10
+				19 container Livestock
+					20 text Livestock
+				21 button Settlement livestock
+					138 text 3
+			23 button Description: Start simulation, ID: fjord-run
+			24 container Description: Year length, ID: fjord-pacing
+				25 pop up button (collapsed, settable) Description: Year length, Value: 3 min per year, ID: fjord-cycle, Secondary Actions: Expand
+					26 menu
+						27 (disabled) 1 min per year
+						28 (disabled) 3 min per year
+						29 (disabled) 5 min per year
+						30 (disabled) Expedition · 10 min / 1,000 ticks
+			31 button +1 Year, ID: fjord-next
+			32 container fjord-menu
+				33 button (collapsed) Description: Game menu, Secondary Actions: Expand
+		34 container
+			35 image Description: Canonical Fjord settlement, ID: fjord-canvas
+			36 container Description: Resident production feedback, ID: fjord-production-labels
+			139 container Description: Settlement workspace, ID: fjord-workspace
+				140 heading Activity Center, Value: 2, ID: fjord-workspace-title
+					141 text Activity Center
+				142 button Close workspace
+				143 container Description: Activity Center, ID: fjord-attention-feed
+					144 container Activity Center views
+						145 checkbox Overview, Value: 1
+						146 checkbox History, Value: 0
+					147 container Needs attention
+						148 heading Needs attention, Value: 3, ID: attention-conditions-title
+							149 text Needs attention
+						150 text 2 to review
+						151 content list
+							152 button Current condition · Review 9 households need a permanent home. Unread
+								153 text Current condition · Review
+								154 text 9 households need a permanent home.
+								155 container Unread
+							156 button Current condition · Review 3 livestock without shelter. Unread
+								157 text Current condition · Review
+								158 text 3 livestock without shelter.
+								159 container Unread
+					160 container New activity
+						161 heading New activity, Value: 3, ID: attention-activity-title
+							162 text New activity
+						163 button Mark updates read
+						164 content list
+							165 button Expeditions · Year 800 · 1 unread Group 1 exploration ended: Completed. Unread
+								166 text Expeditions · Year 800 · 1 unread
+								167 text Group 1 exploration ended: Completed.
+								168 container Unread
+							169 button Expeditions · Year 800 · 1 unread Group 1 began returning home: outward-route-blocked. Unread
+								170 text Expeditions · Year 800 · 1 unread
+								171 text Group 1 began returning home: outward-route-blocked.
+								172 container Unread
+							173 button Expeditions · Year 800 · 1 unread Group 1 set out to explore using the same carried supplies. Unread
+								174 text Expeditions · Year 800 · 1 unread
+								175 text Group 1 set out to explore using the same carried supplies.
+								176 container Unread
+						177 container Activity pages
+				178 button (collapsed) Weather & exposure ⌄, Secondary Actions: Expand
+					179 text Weather & exposure
+					180 text ⌄
+		37 container Description: Settlement navigation, ID: fjord-navigation
+			38 container fjord-navigation-drawer
+				39 button Settlement
+				40 button Clan Book, ID: fjord-book
+				41 button Need help?, ID: fjord-first-steps
+			42 button Expeditions
+			43 button (collapsed) Description: Show island map, ID: fjord-map-toggle, Secondary Actions: Expand
+			44 container Description: Active expedition controls, ID: expedition-group-shortcuts
+		46 button Description: Attention: 5 unread events and current conditions, ID: fjord-attention
+			47 text Attention
+			181 text 5
+
+The focused UI element is 139 container Description: Settlement workspace, ID: fjord-workspace

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+  <title>Proposed menu flow; not implemented and not a game screenshot</title>
+  <style>text { font-family: Arial, sans-serif; }</style>
+  <rect x="0" y="0" width="1280" height="800" rx="0" fill="#14292c" stroke="#14292c"/>
+  <text x="60" y="114" font-size="42" fill="#efe6cf" font-weight="700">FjordSide</text>
+  <text x="60" y="155" font-size="18" fill="#b8c7bc" font-weight="400">Start or return to play.</text>
+  <text x="60" y="185" font-size="18" fill="#b8c7bc" font-weight="400">Real recovery warnings</text>
+  <text x="60" y="215" font-size="18" fill="#b8c7bc" font-weight="400">stay immediately visible.</text>
+  <rect x="390" y="90" width="430" height="620" rx="8" fill="#1b3032" stroke="#71817a"/>
+  <text x="420" y="140" font-size="30" fill="#efe6cf" font-weight="700">Start</text>
+  <rect x="420" y="165" width="370" height="48" rx="8" fill="#354d49" stroke="#e4c67d"/>
+  <text x="436" y="195.0" font-size="18" fill="#efe6cf" font-weight="400">Continue</text>
+  <text x="420" y="238" font-size="15" fill="#b8c7bc" font-weight="400">Only when a valid save exists.</text>
+  <rect x="420" y="265" width="370" height="48" rx="8" fill="#243b3d" stroke="#71817a"/>
+  <text x="436" y="295.0" font-size="18" fill="#efe6cf" font-weight="400">New game &gt;</text>
+  <rect x="420" y="330" width="370" height="48" rx="8" fill="#243b3d" stroke="#71817a"/>
+  <text x="436" y="360.0" font-size="18" fill="#efe6cf" font-weight="400">Load game / file &gt;</text>
+  <rect x="420" y="410" width="370" height="48" rx="8" fill="#243b3d" stroke="#71817a"/>
+  <text x="436" y="440.0" font-size="18" fill="#efe6cf" font-weight="400">Settings &gt;</text>
+  <rect x="420" y="475" width="370" height="48" rx="8" fill="#243b3d" stroke="#71817a"/>
+  <text x="436" y="505.0" font-size="18" fill="#efe6cf" font-weight="400">Help &amp; support &gt;</text>
+  <text x="420" y="570" font-size="16" fill="#b8c7bc" font-weight="400">About / Credits</text>
+  <text x="420" y="625" font-size="15" fill="#b8c7bc" font-weight="400">No seed or test choice required to start.</text>
+  <rect x="870" y="90" width="350" height="216" rx="8" fill="#1b3032" stroke="#71817a"/>
+  <text x="892" y="127" font-size="22" fill="#efe6cf" font-weight="700">Inside New game</text>
+  <text x="892" y="169" font-size="16" fill="#b8c7bc" font-weight="400">New arrival</text>
+  <text x="892" y="199" font-size="16" fill="#b8c7bc" font-weight="400">Replay original founding</text>
+  <text x="892" y="229" font-size="16" fill="#b8c7bc" font-weight="400">Advanced: seed / scenario options</text>
+  <text x="892" y="259" font-size="16" fill="#b8c7bc" font-weight="400">Review before replacing a campaign.</text>
+  <rect x="870" y="335" width="350" height="320" rx="8" fill="#1b3032" stroke="#71817a"/>
+  <text x="892" y="373" font-size="22" fill="#efe6cf" font-weight="700">Inside Help &amp; support</text>
+  <text x="892" y="411" font-size="16" fill="#b8c7bc" font-weight="400">How to play / Controls</text>
+  <text x="892" y="442" font-size="16" fill="#b8c7bc" font-weight="400">Problem help</text>
+  <text x="892" y="473" font-size="16" fill="#b8c7bc" font-weight="400">Diagnostics &gt;  (open deliberately)</text>
+  <text x="892" y="504" font-size="16" fill="#b8c7bc" font-weight="400">   Performance preferences</text>
+  <text x="892" y="535" font-size="16" fill="#b8c7bc" font-weight="400">   Loading test / report exports</text>
+  <text x="892" y="566" font-size="16" fill="#b8c7bc" font-weight="400">Give feedback: only if configured</text>
+  <text x="892" y="624" font-size="14" fill="#b8c7bc" font-weight="400">Feedback is not configured yet.</text>
+  <text x="60" y="758" font-size="16" fill="#b8c7bc" font-weight="400">Hierarchy proposal. Help owns secondary diagnostics; ordinary graphics/audio stay in Settings.</text>
+  <rect x="0" y="0" width="1280" height="32" rx="0" fill="#e4c67d" stroke="#e4c67d"/>
+  <text x="16" y="22" font-size="13" fill="#172b2d" font-weight="700">PROPOSED IA / NOT IMPLEMENTED / NOT A GAME SCREENSHOT</text>
+</svg>

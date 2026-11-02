@@ -1,0 +1,102 @@
+{
+  "source_commit": "4086baac26c6953b879b439546b68f2406ca767a",
+  "source": "same main Sites route export as initial audit",
+  "owner_touch": "requested LAN landscape checklist reported working; exact device/OS/browser unreported",
+  "successful_discovery": true,
+  "successful_return": false,
+  "sources": [
+    {
+      "path": "src/lore/Chronicle.ts",
+      "sha256_git_content": "d511cf3b3e01b97b99de552d1942507b3d9be1ccfa78fd1a4534ce9fd974095d"
+    },
+    {
+      "path": "src/fjord-play/ExpeditionPanel.ts",
+      "sha256_git_content": "bd2deaf1067008afa3312e496d5fd4c9e7f4da7f9a92e0e14787d634de8e5949"
+    },
+    {
+      "path": "src/lore/AttentionHistory.ts",
+      "sha256_git_content": "36aa676eaeeef1803c62ad25a6272523837017dbec8e30d63c5a227fe463ce8e"
+    },
+    {
+      "path": "src/simulation/SpatialExpeditions.ts",
+      "sha256_git_content": "3f085a6ead18cd862da9f58313c4aa06590ce0c203e6847f7b661a466e41f99a"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "01-invalid-file.jpg",
+      "bytes": 44791,
+      "sha256": "f9e7a54121f9e8b630d8c5d97d20884f9063dbd739a0599912cb7fbbf2071441",
+      "width": 877,
+      "height": 892
+    },
+    {
+      "path": "01-invalid-file.txt",
+      "bytes": 831,
+      "sha256": "4ee5f191f988b873913c8130e67c7713526acf91df9897d09f403078dbe1207b"
+    },
+    {
+      "path": "02-successful-exploration.jpg",
+      "bytes": 71133,
+      "sha256": "8a445ef2764f56566112dff01324bb3a47d75e928c98fe697561bcc3da838a32",
+      "width": 877,
+      "height": 892
+    },
+    {
+      "path": "02-successful-exploration.txt",
+      "bytes": 2671,
+      "sha256": "97287c7d7dd40004a40757f04b38ecd40c66720722b855e20af85b710d430406"
+    },
+    {
+      "path": "03-stranded-after-return-order.jpg",
+      "bytes": 65249,
+      "sha256": "73c55494f89ebf2e34fc054cdabbd7c89d57b888b3cb4dcaeedffe3838ea0bed",
+      "width": 877,
+      "height": 892
+    },
+    {
+      "path": "03-stranded-after-return-order.txt",
+      "bytes": 4660,
+      "sha256": "1b72103dd8c7228d8efd0f27e3a1d5a861126e159d56d5f0c152db2095e418f2"
+    },
+    {
+      "path": "04-discovery-return-events.jpg",
+      "bytes": 64074,
+      "sha256": "b53ef9b99438de15183836b8831fd1099b5d3b2456862e4960a28abd1f26eb0a",
+      "width": 877,
+      "height": 892
+    },
+    {
+      "path": "04-discovery-return-events.txt",
+      "bytes": 4467,
+      "sha256": "fb43c577b25f5b005d2a63d1510addf0644c480e35f273bf6322be6df35e2779"
+    },
+    {
+      "path": "canonical-events.json",
+      "bytes": 5327,
+      "sha256": "dd6c3adff32a00429afa7c8ea8c4b57b092869d42cea1548f6fc204906c0d5ff"
+    },
+    {
+      "path": "invalid-campaign.json",
+      "bytes": 27,
+      "sha256": "2773b415359617716a89ee71193051c2165186003618193015ca4f66a1e7c151"
+    },
+    {
+      "path": "post-return-attempt.json",
+      "bytes": 100469,
+      "sha256": "860bd8cc97bbd708d417bb55b5db2e9ef0b2286a210facb809fcacbe5f14568e"
+    },
+    {
+      "path": "README.md",
+      "bytes": 5227,
+      "sha256": "5c3905f0a2b6eff8b73d49faf3d211a091f7353390ec491b4cd94c517bad7a5b"
+    },
+    {
+      "path": "recovery-regressions.txt",
+      "bytes": 2425,
+      "sha256": "ef3e3881050a4d838c42e3f945a05001b24a17dc4cb2b3b79f5477ca257bfd99"
+    }
+  ],
+  "browser": "Windows host / ChatGPT in-app browser; mouse/keyboard agent",
+  "viewport": "default viewport; actual screenshot dimensions recorded below; no touch emulation"
+}

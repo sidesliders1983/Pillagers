@@ -1,0 +1,278 @@
+[
+  {
+    "id": "event-8",
+    "time": {
+      "winter": 800,
+      "tick": 525
+    },
+    "type": "ExploreAreaPrepared",
+    "details": {
+      "missionId": "explore-1",
+      "groupName": "Group 1",
+      "participants": [
+        "founder-2"
+      ],
+      "foodCost": 8,
+      "foodPerMember": 8,
+      "people": [
+        {
+          "id": "founder-2",
+          "name": "Minmantė",
+          "age": 20
+        }
+      ]
+    }
+  },
+  {
+    "id": "event-9",
+    "time": {
+      "winter": 800,
+      "tick": 525
+    },
+    "type": "ExploreAreaDeparted",
+    "details": {
+      "groupName": "Group 1",
+      "missionId": "explore-1",
+      "participants": [
+        "founder-2"
+      ],
+      "foodCost": 0,
+      "carriedSupplies": true,
+      "people": [
+        {
+          "id": "founder-2",
+          "name": "Minmantė",
+          "age": 20
+        }
+      ]
+    }
+  },
+  {
+    "id": "event-10",
+    "time": {
+      "winter": 800,
+      "tick": 526
+    },
+    "type": "ExploreAreaReturnStarted",
+    "details": {
+      "missionId": "explore-1",
+      "groupName": "Group 1",
+      "participants": [
+        "founder-2"
+      ],
+      "reason": "outward-route-blocked",
+      "people": [
+        {
+          "id": "founder-2",
+          "name": "Minmantė",
+          "age": 20
+        }
+      ]
+    }
+  },
+  {
+    "id": "event-11",
+    "time": {
+      "winter": 800,
+      "tick": 526
+    },
+    "type": "ExploreAreaSuppliesDiscarded",
+    "details": {
+      "missionId": "explore-1",
+      "groupName": "Group 1",
+      "participants": [
+        "founder-2"
+      ],
+      "units": 8,
+      "people": [
+        {
+          "id": "founder-2",
+          "name": "Minmantė",
+          "age": 20
+        }
+      ]
+    }
+  },
+  {
+    "id": "event-12",
+    "time": {
+      "winter": 800,
+      "tick": 526
+    },
+    "type": "ExploreAreaReturned",
+    "details": {
+      "missionId": "explore-1",
+      "groupName": "Group 1",
+      "outcome": "Completed",
+      "participants": [
+        "founder-2"
+      ],
+      "survivorIds": [
+        "founder-2"
+      ],
+      "casualtyIds": [],
+      "people": [
+        {
+          "id": "founder-2",
+          "name": "Minmantė",
+          "age": 20
+        }
+      ]
+    }
+  },
+  {
+    "id": "event-15",
+    "time": {
+      "winter": 800,
+      "tick": 733
+    },
+    "type": "ExploreAreaPrepared",
+    "details": {
+      "missionId": "explore-2",
+      "groupName": "Group 1",
+      "participants": [
+        "founder-2"
+      ],
+      "foodCost": 8,
+      "foodPerMember": 8,
+      "people": [
+        {
+          "id": "founder-2",
+          "name": "Minmantė",
+          "age": 20
+        }
+      ]
+    }
+  },
+  {
+    "id": "event-16",
+    "time": {
+      "winter": 800,
+      "tick": 733
+    },
+    "type": "ExploreAreaDeparted",
+    "details": {
+      "groupName": "Group 1",
+      "missionId": "explore-2",
+      "participants": [
+        "founder-2"
+      ],
+      "foodCost": 0,
+      "carriedSupplies": true,
+      "people": [
+        {
+          "id": "founder-2",
+          "name": "Minmantė",
+          "age": 20
+        }
+      ]
+    }
+  },
+  {
+    "id": "event-17",
+    "time": {
+      "winter": 800,
+      "tick": 734
+    },
+    "type": "ExploreAreaSuppliesConsumed",
+    "details": {
+      "missionId": "explore-2",
+      "groupName": "Group 1",
+      "participants": [
+        "founder-2"
+      ],
+      "units": 1,
+      "people": [
+        {
+          "id": "founder-2",
+          "name": "Minmantė",
+          "age": 20
+        }
+      ]
+    }
+  },
+  {
+    "id": "event-19",
+    "type": "WildlifeSighted",
+    "time": {
+      "winter": 800,
+      "tick": 745
+    },
+    "details": {
+      "version": 1,
+      "sightingId": "wildlife-1",
+      "clanId": "founding-clan",
+      "worldId": "fjordside-island-v0.3e-r3:112:c4018b52",
+      "speciesId": "great-black-backed-gull",
+      "wildlifeInstanceId": "great-black-backed-gull:airborne:4",
+      "expeditionGroupId": "group-1",
+      "groupName": "Group 1",
+      "missionId": "explore-2",
+      "witnessPersonaIds": [
+        "founder-2"
+      ],
+      "position": {
+        "x": 15.922772077681728,
+        "y": 30.057515771143642,
+        "z": 217.04997822141576
+      },
+      "habitat": "fjord_water",
+      "occurredAtTick": 800745,
+      "encounterKey": "wildlife-1",
+      "firstForClan": true,
+      "people": [
+        {
+          "id": "founder-2",
+          "name": "Minmantė",
+          "age": 20
+        }
+      ]
+    }
+  },
+  {
+    "id": "event-24",
+    "time": {
+      "winter": 800,
+      "tick": 837
+    },
+    "type": "ExploreAreaSuppliesLost",
+    "details": {
+      "missionId": "explore-2",
+      "groupName": "Group 1",
+      "participants": [
+        "founder-2"
+      ],
+      "units": 7,
+      "people": [
+        {
+          "id": "founder-2",
+          "name": "Minmantė",
+          "age": 20
+        }
+      ]
+    }
+  },
+  {
+    "id": "event-25",
+    "time": {
+      "winter": 800,
+      "tick": 837
+    },
+    "type": "ExploreAreaStranded",
+    "details": {
+      "missionId": "explore-2",
+      "groupName": "Group 1",
+      "participants": [
+        "founder-2"
+      ],
+      "reason": "The confirmed return route is blocked.",
+      "people": [
+        {
+          "id": "founder-2",
+          "name": "Minmantė",
+          "age": 20
+        }
+      ]
+    }
+  }
+]
