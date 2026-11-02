@@ -59,6 +59,14 @@ function fixture(mobile = false, owner = new SharedSettlement(newFjordScenario(3
         resident: id => ui.showResident(id), household: id => ui.showEntity('household', id),
         stocks: resource => ui.open(resource, true), work: draft => ui.showWork(draft),
         expeditions: () => ui.open('expeditions', true),
+        settlement: () => ui.open('settlement', true),
+        clock: () => document.querySelector('#fjord-run').focus(),
+        menu: () => {
+            const menu = document.querySelector('#fjord-menu');
+            menu.open = true;
+            menu.querySelector('summary').focus();
+        },
+        activity: () => ui.open('attention', true),
         livestock: id => ui.showEntity('cattle', id), ship: id => ui.showEntity('longship', id),
         improvements: id => ui.showHome(id, 'improvements'), smithery: id => ui.showHome(id, 'smithery'),
         wildlife: id => navigation.push(['wildlife', id]),
@@ -72,6 +80,11 @@ function fixture(mobile = false, owner = new SharedSettlement(newFjordScenario(3
     };
     const objective = id => {
         guide.open();
+        const targetChapter = id.startsWith('ui-') ? 'orientation' :
+            ['recon', 'personal-gear', 'pillage', 'mission-result'].includes(id) ? 'conflict' :
+            ['prepare-expedition', 'wildlife-species', 'find-neighbours', 'sea-travel'].includes(id) ? 'discovery' : 'home';
+        if (guide.root.dataset.chapter !== targetChapter)
+            click('chapter', `[data-chapter="${targetChapter}"]`);
         guide.root.querySelector('details').open = true;
         click('objective', `[data-objective="${id}"]`);
     };
@@ -138,7 +151,7 @@ test('desktop and touch journeys connect real resident, household, resident-from
         const f = fixture(mobile);
         try {
             const canonical = f.owner.session.saveJSON();
-            f.guide.newStart(); f.click('guide');
+            f.guide.newStart(); f.click('guide'); f.chapter('home');
             const checks = () => [...f.guide.root.querySelectorAll('[data-journey-check] [role="checkbox"]')]
                 .map(check => check.getAttribute('aria-checked') === 'true');
             assert.deepEqual(checks(), [false, false, false, false]);
@@ -310,4 +323,146 @@ test('the full Clan Book defers the invitation and keeps reading focus', () => {
         reader.hidden = true; f.guide.update();
         assert.equal(f.guide.root.hidden, false);
     } finally { story?.dispose(); f.dispose(); }
+});
+test('Guide me opens freely selectable Chapter 0 before the existing chapters without starting time', () => {
+    const f = fixture();
+    try {
+        const canonical = f.owner.session.saveJSON();
+        f.guide.newStart();
+        f.click('guide');
+        assert.equal(f.guide.root.dataset.chapter, 'orientation');
+        assert.equal(f.guide.root.dataset.objective, 'ui-camera');
+        assert.deepEqual([...f.guide.root.querySelectorAll('[data-guide="chapter"]')]
+            .map(button => button.dataset.chapter), ['orientation', 'home', 'discovery', 'conflict']);
+        assert.match(f.guide.root.textContent, /left[- ]drag (?:pans|to pan)/i);
+        assert.equal(f.owner.session.running, false);
+        assert.equal(f.owner.session.saveJSON(), canonical);
+    } finally { f.dispose(); }
+});
+
+test('camera and clock acknowledgments advance only the optional guidance on mouse and touch', () => {
+    for (const mobile of [false, true]) {
+        const f = fixture(mobile);
+        try {
+            const canonical = f.owner.session.saveJSON();
+            f.guide.newStart(); f.click('guide');
+            assert.match(f.guide.root.textContent, mobile ? /drag (?:to orbit|rotates)/i : /left[- ]drag.*pan/i);
+            f.click('acknowledge');
+            assert.equal(f.guide.root.dataset.objective, 'ui-resident');
+            f.objective('ui-time');
+            f.click('acknowledge');
+            assert.ok(f.owner.fjord.firstSteps.journey.orientation.includes('ui-time'));
+            f.chapter('conflict');
+            assert.equal(f.guide.root.dataset.chapter, 'conflict');
+            assert.equal(f.owner.session.running, false);
+            assert.equal(f.owner.session.saveJSON(), canonical);
+        } finally { f.dispose(); }
+    }
+});
+
+
+test('orientation Show me focuses existing clock and menu without activating time, including touch collapse', () => {
+    for (const mobile of [false, true]) {
+        const f = fixture(mobile);
+        try {
+            const canonical = f.owner.session.saveJSON();
+            f.guide.newStart(); f.click('guide');
+            f.objective('ui-time'); f.click('show');
+            assert.equal(document.activeElement, document.querySelector('#fjord-run'));
+            assert.equal(f.owner.session.running, false);
+            f.guide.open(); f.objective('ui-navigation'); f.click('show');
+            assert.equal(document.querySelector('#fjord-menu').open, true);
+            assert.equal(document.activeElement, document.querySelector('#fjord-menu > summary'));
+            if (mobile) assert.equal(f.owner.fjord.firstSteps.collapsed, true);
+            assert.equal(f.owner.session.saveJSON(), canonical);
+        } finally { f.dispose(); }
+    }
+});
+
+test('completed Basics offers an explicit Chapter I transition and preserves earlier chapter choices', () => {
+    const owner = new SharedSettlement(newFjordScenario(32));
+    const { newFirstSteps } = loadDOMSource('../src/fjord-play/FirstStepsState.ts');
+    const { newJourney } = loadDOMSource('../src/fjord-play/JourneyProgress.ts');
+    owner.fjord.firstSteps = { ...newFirstSteps(), status: 'active', journey: {
+        ...newJourney('orientation'),
+        orientation: ['ui-camera', 'ui-resident', 'ui-connections', 'ui-home', 'ui-time', 'ui-navigation'],
+        keptShipId: 'founding-longship', later: ['wildlife-species'], skipped: ['upgrade-home'],
+    } };
+    const f = fixture(false, owner);
+    try {
+        const canonical = owner.session.saveJSON();
+        f.guide.restore(); f.guide.open();
+        assert.equal(f.guide.root.dataset.chapter, 'orientation');
+        assert.match(f.guide.root.textContent, /Basics complete/);
+        assert.equal(owner.session.running, false);
+        f.click('continue-home');
+        assert.equal(f.guide.root.dataset.chapter, 'home');
+        assert.equal(owner.fjord.firstSteps.journey.keptShipId, 'founding-longship');
+        assert.deepEqual(owner.fjord.firstSteps.journey.later, ['wildlife-species']);
+        assert.deepEqual(owner.fjord.firstSteps.journey.skipped, ['upgrade-home']);
+        assert.equal(owner.session.saveJSON(), canonical);
+        assert.equal(owner.session.running, false);
+    } finally { f.dispose(); }
+});
+
+test('guide keyboard controls keep their keys out of world navigation while preserving Escape', () => {
+    const f = fixture();
+    try {
+        f.guide.newStart(); f.click('guide');
+        const reachedWorld = [];
+        window.addEventListener('keydown', event => reachedWorld.push(event.key));
+        const control = f.guide.root.querySelector('[data-guide="acknowledge"]');
+        control.focus();
+        for (const key of [' ', 'ArrowDown', 'w'])
+            control.dispatchEvent(new window.KeyboardEvent('keydown', {key, bubbles:true}));
+        assert.deepEqual(reachedWorld, [], 'Guide controls never move the camera or toggle recording');
+        control.dispatchEvent(new window.KeyboardEvent('keydown', {key:'Escape', bubbles:true}));
+        assert.equal(f.owner.fjord.firstSteps.collapsed, true);
+        assert.ok(document.activeElement.closest('#fjord-first-steps-card'));
+    } finally { f.dispose(); }
+});
+
+test('completed Basics lessons remain reviewable through the chapter objective controls', () => {
+    const owner = new SharedSettlement(newFjordScenario(32));
+    const { newFirstSteps } = loadDOMSource('../src/fjord-play/FirstStepsState.ts');
+    const { newJourney } = loadDOMSource('../src/fjord-play/JourneyProgress.ts');
+    owner.fjord.firstSteps = { ...newFirstSteps(), status:'active', journey: {
+        ...newJourney('orientation'),
+        orientation:['ui-camera','ui-resident','ui-connections','ui-home','ui-time','ui-navigation'],
+    }};
+    const f = fixture(false, owner);
+    try {
+        const canonical = owner.session.saveJSON();
+        f.guide.restore(); f.guide.open();
+        f.objective('ui-time');
+        assert.equal(f.guide.root.querySelector('article h3').textContent, 'Control time');
+        f.click('show');
+        assert.equal(document.activeElement, document.querySelector('#fjord-run'));
+        f.chapter('orientation');
+        assert.match(f.guide.root.textContent, /Basics complete/);
+        assert.equal(owner.session.running, false);
+        assert.equal(owner.session.saveJSON(), canonical);
+    } finally { f.dispose(); }
+});
+
+test('acknowledging the selected final lesson shows completion and retains keyboard focus inside guidance', () => {
+    const owner = new SharedSettlement(newFjordScenario(32));
+    const { newFirstSteps } = loadDOMSource('../src/fjord-play/FirstStepsState.ts');
+    const { newJourney } = loadDOMSource('../src/fjord-play/JourneyProgress.ts');
+    owner.fjord.firstSteps = { ...newFirstSteps(), status:'active', journey: {
+        ...newJourney('orientation'), selected:'ui-time',
+        orientation:['ui-camera','ui-resident','ui-connections','ui-home','ui-navigation'],
+    }};
+    const f = fixture(false, owner);
+    try {
+        const canonical = owner.session.saveJSON();
+        f.guide.restore(); f.guide.open();
+        f.guide.root.querySelector('[data-guide="acknowledge"]').focus();
+        f.click('acknowledge');
+        assert.ok(document.activeElement.closest('#fjord-first-steps-card'), 'Completion does not drop keyboard focus to the world');
+        assert.ok(f.guide.root.querySelector('[data-guide="continue-home"]'));
+        assert.match(f.guide.root.textContent, /Basics complete/);
+        assert.equal(owner.session.saveJSON(),canonical);
+        assert.equal(owner.session.running,false);
+    } finally { f.dispose(); }
 });

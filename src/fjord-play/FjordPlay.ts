@@ -478,6 +478,7 @@ export class FjordPlay {
             // Record intent immediately, even while a queued command is awaiting scene assets.
             if (!playback.canToggle(this.session.running)) return;
             setPlayback(!this.session.running);
+            firstSteps?.inspected('time');
             action(() => {});
         });
         document.querySelector('#fjord-next')!.addEventListener('click', () => action(() => {
@@ -764,7 +765,7 @@ export class FjordPlay {
         desktopUI = new FjordInterface(this.shared, { select, refresh, notify: say,
             inspected: (kind, id) => firstSteps?.inspected(kind, id),
             renderPortrait: input => presentation?.portrait(input) ?? Promise.resolve(undefined),
-            home: () => controller.home(),
+            home: () => { controller.home(); firstSteps?.inspected('home'); },
             trade: () => { desktopUI?.close(false); merchantPanel?.open(); },
             report: id => {
                 if (!this.campaign.attentionSource(id)) return;
@@ -775,14 +776,31 @@ export class FjordPlay {
         this.startupCleanup.push(() => desktopUI?.dispose());
         weddingInvitation = this.ownStartup(new WeddingInvitation(document.querySelector<HTMLElement>('#fjord-play')!,
             this.shared, { commit: commitManagement, changed: () => { persist(); refresh(); } }));
+        const openJourneyBook = () => {
+            bookReader.open();
+            if (document.querySelector<HTMLElement>('#clan-book-reader')?.hidden === false)
+                firstSteps?.inspected('interface');
+        };
+        const orientationMenu = document.querySelector<HTMLDetailsElement>('#fjord-menu')!;
         firstSteps = this.ownStartup(new FirstStepsGuide(this.shared, {
-            persist, pause: () => setPlayback(false), play: () => setPlayback(true),
+            persist, pause: () => setPlayback(false),
             reveal: () => desktopUI!.closeForHelp(), clockChanged: syncGuideClock,
             resident: id => desktopUI!.showResident(id),
             household: id => desktopUI!.showEntity('household', id),
             stocks: resource => desktopUI!.open(resource, true),
             work: draft => desktopUI!.showWork(draft),
             expeditions: () => desktopUI!.open('expeditions', true),
+            home: () => {
+                desktopUI!.closeForHelp();
+                controller.home();
+                firstSteps?.inspected('home');
+            },
+            settlement: () => desktopUI!.open('settlement', true),
+            clock: () => document.querySelector<HTMLButtonElement>('#fjord-run')!.focus({ preventScroll: true }),
+            menu: () => {
+                orientationMenu.open = true;
+                orientationMenu.querySelector<HTMLElement>(':scope > summary')!.focus({ preventScroll: true });
+            },
             livestock: id => desktopUI!.showEntity('cattle', id),
             ship: id => desktopUI!.showEntity('longship', id),
             improvements: id => desktopUI!.showHome(id, 'improvements'),
@@ -799,7 +817,23 @@ export class FjordPlay {
                 return true;
             },
         }));
-        document.querySelector('#fjord-book')!.addEventListener('click', () => bookReader.open());
+        document.querySelector('#fjord-book')!.addEventListener('click', openJourneyBook);
+        orientationMenu.addEventListener('toggle', () => {
+            if (orientationMenu.open) firstSteps?.inspected('interface');
+        }, { signal: lifecycleEvents.signal });
+        // Native map/menu owners apply their view before the queued observation.
+        // New history and loading fences prevent an old UI action earning credit.
+        document.querySelector('#fjord-play')!.addEventListener('click', event => {
+            const button = (event.target as Element).closest<HTMLButtonElement>('#fjord-view-home, #fjord-map-toggle');
+            if (!button || button.disabled) return;
+            const epoch = this.session.personalHistoryEpoch;
+            queueMicrotask(() => {
+                if (this.stopped || this.loading || epoch !== this.session.personalHistoryEpoch ||
+                    canvas.dataset.ready !== 'true') return;
+                if (button.id === 'fjord-view-home' || button.getAttribute('aria-expanded') === 'true')
+                    firstSteps?.inspected('home');
+            });
+        }, { signal: lifecycleEvents.signal });
         document.querySelector('[data-menu-guide]')!.addEventListener('click', () => {
             document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open = false;
             document.querySelector<HTMLButtonElement>('#fjord-first-steps')!.click();

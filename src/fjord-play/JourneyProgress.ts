@@ -1,6 +1,11 @@
-export const journeyChapters = ['home', 'discovery', 'conflict'] as const;
+export const journeyChapters = ['orientation', 'home', 'discovery', 'conflict'] as const;
 export type JourneyChapter = typeof journeyChapters[number];
+export const orientationObjectives = [
+    'ui-camera', 'ui-resident', 'ui-connections', 'ui-home', 'ui-time', 'ui-navigation',
+] as const;
+export type OrientationObjective = typeof orientationObjectives[number];
 export const journeyObjectives = [
+    ...orientationObjectives,
     'meet-people', 'understand-work', 'permanent-home', 'specialize-home', 'upgrade-home', 'longship-choice',
     'prepare-expedition', 'wildlife-species', 'find-neighbours', 'sea-travel',
     'recon', 'personal-gear', 'pillage', 'mission-result',
@@ -21,11 +26,12 @@ export interface JourneyProgress {
     resultEventId: string | null;
     skipped: JourneyObjective[];
     later: JourneyObjective[];
+    orientation?: OrientationObjective[];
 }
 
-export function newJourney(): JourneyProgress {
+export function newJourney(chapter: JourneyChapter = 'home'): JourneyProgress {
     return {
-        version: 1, chapter: 'home', selected: null, householdId: null, homeResidentId: null,
+        version: 1, chapter, selected: null, householdId: null, homeResidentId: null,
         livestockId: null, improvementsSeen: false, smitherySeen: false, keptShipId: null,
         resultEventId: null, skipped: [], later: [],
     };
@@ -44,7 +50,11 @@ export function readJourney(value: unknown): JourneyProgress | undefined {
         ![data.householdId, data.homeResidentId, data.livestockId, data.keptShipId, data.resultEventId].every(id) ||
         typeof data.improvementsSeen !== 'boolean' || typeof data.smitherySeen !== 'boolean' ||
         !objectives(data.skipped) || !objectives(data.later) ||
-        data.skipped.some(id => data.later.includes(id)))
+        data.skipped.some(id => data.later.includes(id)) ||
+        data.orientation !== undefined && (!Array.isArray(data.orientation) ||
+            data.orientation.length > orientationObjectives.length ||
+            new Set(data.orientation).size !== data.orientation.length ||
+            !data.orientation.every(id => orientationObjectives.includes(id))))
         throw new Error('Invalid saved Founding Journey.');
     return {
         version: 1, chapter: data.chapter, selected: data.selected,
@@ -52,5 +62,6 @@ export function readJourney(value: unknown): JourneyProgress | undefined {
         improvementsSeen: data.improvementsSeen, smitherySeen: data.smitherySeen,
         keptShipId: data.keptShipId, resultEventId: data.resultEventId,
         skipped: [...data.skipped], later: [...data.later],
+        ...(data.orientation !== undefined ? { orientation: [...data.orientation] } : {}),
     };
 }

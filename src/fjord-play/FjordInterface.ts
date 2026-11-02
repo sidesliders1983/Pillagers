@@ -63,6 +63,8 @@ export class FjordInterface {
     private expanded = false;
     private abort = new AbortController();
     private lastFocus?: HTMLElement;
+    private selectionOpener?: HTMLElement;
+    private residentCardId?: string;
     private panelHTML?: string;
     private panelEpoch = -1;
     private panelWorld?: SharedSettlement['fjord']['blueprint'];
@@ -112,7 +114,7 @@ export class FjordInterface {
             if (this.surface) this.close();
             else if (this.task === 'culture') this.cancelGatheringReview();
             else if (this.task) { this.task = null; this.hooks.refresh(); }
-            else if (this.owner.selection) this.hooks.select('', '');
+            else if (this.owner.selection) this.closeSelection();
         }, { signal: this.abort.signal });
     }
     dispose() {
@@ -208,6 +210,8 @@ export class FjordInterface {
     refresh(state: SimulationState, selection: SettlementSelection, history: string, legacy: () => string) {
         const key = selection ? selection.kind + ':' + selection.id : '';
         if (key !== this.selectionKey) {
+            if (selection && document.activeElement instanceof HTMLElement)
+                this.selectionOpener = document.activeElement;
             this.selectionKey = key;
             this.task = null;
             this.gatheringDraft = undefined;
@@ -282,6 +286,8 @@ export class FjordInterface {
         const count = this.attentionCount(state);
         document.querySelector('#fjord-attention-count')!.textContent = count > 99 ? '99+' : String(count);
         document.querySelector('#fjord-attention')!.setAttribute('aria-label', `Attention: ${count} unread events and current conditions`);
+        this.residentCardId = selection?.kind === 'persona' && state.personas[selection.id] &&
+            !this.surface && !this.task && (!isMobileLayout() || this.expanded) ? selection.id : undefined;
         if (selection && !this.surface) {
             if (selection.kind === 'persona' && state.personas[selection.id] && (!isMobileLayout() || this.expanded))
                 this.hooks.inspected?.('resident', selection.id);
@@ -443,7 +449,9 @@ export class FjordInterface {
             }
             case 'close-workspace': this.close(); return true;
             case 'directory': this.directory = button.dataset.kind!; this.search = ''; this.renderSurface(); return true;
-            case 'close-card': this.hooks.select('', ''); return true;
+            case 'close-card':
+                if (button.isConnected && this.panel.contains(button)) this.closeSelection();
+                return true;
             case 'campaign-settings': {
                 this.close(false);
                 document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open = true;
@@ -681,6 +689,25 @@ export class FjordInterface {
     private attentionCount(_state: SimulationState) {
         return this.owner.fjord.attentionView().unreadCount;
     }
+    private closeSelection() {
+        const selection = this.owner.selection;
+        const residentId = selection?.kind === 'persona' && this.residentCardId === selection.id &&
+            this.panelEpoch === this.owner.session.personalHistoryEpoch && this.panelWorld === this.owner.fjord.blueprint &&
+            !this.management.hidden && !this.surface && !this.task && (!isMobileLayout() || this.expanded) &&
+            this.state.personas[selection.id] ? selection.id : undefined;
+        this.hooks.select('', '');
+        if (this.owner.selection) return;
+        if (residentId) this.hooks.inspected?.('resident-closed', residentId);
+        const competingPanel = document.querySelector('dialog[open], [aria-modal="true"]:not([hidden]), ' +
+            '#clan-book-reader:not([hidden]), #fjord-menu[open]');
+        if (!this.workspace.hidden || competingPanel) return;
+        const candidates = [this.selectionOpener,
+            document.querySelector<HTMLElement>('#fjord-first-steps-card button'),
+            document.querySelector<HTMLElement>(isMobileLayout() ? '#fjord-mobile-menu' : '#fjord-first-steps'),
+            document.querySelector<HTMLElement>('#fjord-run')];
+        candidates.find(target => target?.isConnected && !target.closest('[hidden]') &&
+            !target.matches(':disabled') && target.getClientRects().length)?.focus({ preventScroll: true });
+    }
     closeForHelp() {
         this.close(false);
         this.hooks.select('', '');
@@ -722,6 +749,7 @@ export class FjordInterface {
         this.management.hidden = true;
         this.renderSurface();
         if (surface === 'food' || surface === 'materials') this.hooks.inspected?.('resources');
+        if (surface === 'settlement' || surface === 'attention') this.hooks.inspected?.('interface');
         this.workspace.focus();
         this.hooks.refresh();
     }

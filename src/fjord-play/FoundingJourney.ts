@@ -80,6 +80,10 @@ export function journeyEvent(state: SimulationState, id?: string | null): Simula
 }
 
 export const chapterCopy: Record<JourneyChapter, { title: string; why: string }> = {
+    orientation: {
+        title: '0 · UI Basics & Navigation',
+        why: 'Before you guide your people, learn how to explore their world. Look around, meet a resident, and find your way back whenever you need to.',
+    },
     home: {
         title: 'I · A Home for Your People',
         why: 'Your people live, work and grow older on their own. You choose how to help them endure.',
@@ -96,7 +100,8 @@ export const chapterCopy: Record<JourneyChapter, { title: string; why: string }>
 
 export type JourneyStatus = 'completed' | 'available' | 'later' | 'skipped' | 'blocked';
 export type JourneyAction = 'resident' | 'household' | 'livestock' | 'materials' | 'work' |
-    'improvements' | 'ship' | 'expeditions' | 'wildlife' | 'recon' | 'smithery' | 'pillage' | 'report';
+    'improvements' | 'ship' | 'expeditions' | 'wildlife' | 'recon' | 'smithery' | 'pillage' | 'report' |
+    'settlement' | 'clock' | 'menu';
 export interface JourneyCheck {
     id: string;
     label: string;
@@ -118,12 +123,14 @@ export interface JourneyGoal {
 /** Public, dated knowledge only. Never consult targetClans or generated rival locations. */
 export function foundingJourney(state: SimulationState, progress: FirstStepsProgress,
     index: FoundingJourneyIndex, availability: (command: SimulationCommand) => { allowed: boolean; reason: string },
-    session?: Pick<GameplaySession, 'startExpeditionOffer'>) {
+    session?: Pick<GameplaySession, 'startExpeditionOffer'>, inputKind: 'mouse' | 'touch' = 'mouse') {
     const journey = progress.journey ?? newJourney();
     const facts = firstStepsFacts(state, progress, availability);
     const people = Object.values(state.personas).filter(person =>
         person.deathWinter === null && !personaAway(state, person.id));
     const animals = Object.values({ ...state.landing?.cattleArchive, ...state.landing?.cattle });
+    const orientationLivestock = Object.values(state.landing?.cattle ?? {})
+        .find(animal => animal.deathWinter === null);
     const livestock = animals.find(animal => animal.deathWinter === null && animal.origin === 'founding') ??
         animals.find(animal => animal.origin === 'founding') ?? animals.find(animal => animal.deathWinter === null);
     const homes = Object.values(state.buildings).filter(building => building.kind === 'house');
@@ -173,6 +180,62 @@ export function foundingJourney(state: SimulationState, progress: FirstStepsProg
         const food = Math.ceil(config.provisions[mission] * duration / config.durations[mission]) * group.memberIds.length;
         return state.stocks.food < food ? `Mission needs ${food} Food.` : '';
     };
+
+    const orientation = journey.orientation ?? [];
+    const residentAction: JourneyAction = facts.person ? 'resident' : 'settlement';
+    const connectionAction: JourneyAction = facts.person ? 'resident' : orientationLivestock ? 'livestock' : 'settlement';
+    add({
+        id: 'ui-camera', chapter: 'orientation', title: 'Explore your world',
+        why: 'Look around without giving orders to your residents.',
+        detail: inputKind === 'touch' ?
+            'One-finger drag rotates the view. Pinch to zoom. Tap open ground to centre the view. Choose Got it when you are ready.' :
+            'Left-drag pans the view. Right-drag rotates it. Use the wheel to zoom. Choose Got it when you are ready.',
+        checklist: [{ id: 'camera', label: 'Acknowledge the camera controls',
+            done: orientation.includes('ui-camera'), action: 'settlement' }],
+        action: 'settlement',
+    }, orientation.includes('ui-camera'));
+    add({
+        id: 'ui-resident', chapter: 'orientation', title: 'Meet your people',
+        why: 'A Character Card shows who this person is and what they do.',
+        detail: 'Choose a resident, read their full Character Card and close it with the close button or Escape. Residents act on their own.',
+        checklist: [{ id: 'resident-card', label: 'Read and close a resident’s Character Card',
+            done: orientation.includes('ui-resident'), action: residentAction }],
+        action: residentAction,
+    }, orientation.includes('ui-resident'), facts.person ? '' :
+        'No local living resident is available. Return later or skip this lesson.');
+    add({
+        id: 'ui-connections', chapter: 'orientation', title: 'Discover connections',
+        why: 'Follow existing links to understand who lives together.',
+        detail: 'From a resident’s profile, open their household; from a home, open a listed resident. You can also inspect an individual living animal.',
+        checklist: [{ id: 'connection', label: 'Follow a real household, resident or livestock connection',
+            done: orientation.includes('ui-connections'), action: connectionAction }],
+        action: connectionAction,
+    }, orientation.includes('ui-connections'), facts.person || orientationLivestock ? '' :
+        'No local living resident or livestock is available. Return later or skip this lesson.');
+    add({
+        id: 'ui-home', chapter: 'orientation', title: 'Find your way home',
+        why: 'You can always find your way back after looking around.',
+        detail: 'Choose View settlement in Settlement to return the view, or open Map to find your bearings. These controls move or explain the view without ordering your residents.',
+        checklist: [{ id: 'home', label: 'Use View settlement or open Map',
+            done: orientation.includes('ui-home'), action: 'settlement' }],
+        action: 'settlement',
+    }, orientation.includes('ui-home'));
+    add({
+        id: 'ui-time', chapter: 'orientation', title: 'Control time',
+        why: 'You choose whether the community’s time passes.',
+        detail: 'The calendar shows the season and Winter. Year length changes pacing. Use Play/Pause deliberately, or choose Got it without advancing time.',
+        checklist: [{ id: 'time', label: 'Review and acknowledge the time controls',
+            done: orientation.includes('ui-time'), action: 'clock' }],
+        action: 'clock',
+    }, orientation.includes('ui-time'));
+    add({
+        id: 'ui-navigation', chapter: 'orientation', title: 'Navigate the interface',
+        why: 'Use existing panels for people, history, news and help.',
+        detail: 'Open Settlement, Clan Book, Activity Center or the Game menu. Need help? and How to play reopen this journey whenever you choose.',
+        checklist: [{ id: 'interface', label: 'Open an interface destination or acknowledge where to find it',
+            done: orientation.includes('ui-navigation'), action: 'menu' }],
+        action: 'menu',
+    }, orientation.includes('ui-navigation'));
 
     add({
         id: 'meet-people', chapter: 'home', title: 'Meet your people',
@@ -384,6 +447,6 @@ export function foundingJourney(state: SimulationState, progress: FirstStepsProg
         ],
         action: 'report', optional: true,
     }, !!journey.resultEventId && !!result, !result ? 'No returned Pillage report is available yet.' : '');
-    return { goals, facts, journey, person: facts.person, home, familyHome, building, livestock, retained, shipState,
+    return { goals, facts, journey, person: facts.person, home, familyHome, building, livestock, orientationLivestock, retained, shipState,
         smith, group, knownSite, result, species: [...index.species.entries()] };
 }

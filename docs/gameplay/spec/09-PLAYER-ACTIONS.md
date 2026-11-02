@@ -77,17 +77,24 @@ Lighting without prepaid fuel requires one Material; an unavailable action expla
 [Fuel rules](../../SETTLEMENT-CAMPFIRE.md#campfire-fuel--97-spike) apply throughout the year.
 Ceremonies and the future settlement information panel remain outside this spike.
 
-## The Founding Journey — alpha presentation (#263 / #270)
+## The Founding Journey — alpha presentation (#263 / #270 / #325)
 
-New players may use three optional chapters about their autonomous community,
-exploration/discovery and preparation for conflict. Every chapter is freely
-accessible. Real homes, upgrades, witnessed species, Recon, personal supported
+New players may use Chapter 0 for UI Basics & Navigation before the three
+optional chapters about their autonomous community, exploration/discovery and
+preparation for conflict. Every chapter is freely accessible. Real homes, upgrades, witnessed species, Recon, personal supported
 equipment and optional Pillage outcomes count, including actions done out of order.
 Show me navigates/reviews existing UI; it never issues Core commands or supplies
 resources. Skip, defer and replay are per-history presentation metadata.
-Ordinary campaign entries stay paused until an actual Play click. Both
-**Guide me** and **Explore on my own** leave time paused; Continue/import and
-recovery do the same.
+Chapter 0 accepts real inspections/navigation or explicit acknowledgments; it
+never creates residents, reveals unknown locations or advances time. Its six
+lessons remain independently available and existing v1 chapter choices survive.
+Its compact card shows one lesson with short instructions and actions; the
+selectable lesson list is inside **Chapter objectives**. The read-only objective
+checklists remain in Chapters I–III; Basics does not repeat them.
+
+Ordinary Fjord campaign entries, including new/restarted campaigns, stay paused
+until an actual Play click. Both **Guide me** and **Explore on my own** leave
+time paused; Continue/import and recovery do the same.
 
 See [The Founding Journey v0.1](../FOUNDING-JOURNEY-V01.md) for the current
 predicates, knowledge limits, paused-entry exception and QA contract.

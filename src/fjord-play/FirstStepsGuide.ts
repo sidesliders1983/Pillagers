@@ -2,10 +2,10 @@ import type { SharedSettlement } from '../play/SharedSettlement';
 import type { FoundingBookWindow } from '../lore/FoundingBookWindow';
 import { updateView } from '../gameplay-lab/updateView';
 import { isMobileLayout } from './MobileShell';
-import { inspectFirstSteps, newFirstSteps, type FirstStepsInspection, type FirstStepsProgress } from './FirstStepsState';
+import { acknowledgeOrientation, inspectFirstSteps, newFirstSteps, type FirstStepsInspection, type FirstStepsProgress } from './FirstStepsState';
 import { chapterCopy, foundingJourney, FoundingJourneyIndex } from './FoundingJourney';
 import type { JourneyGoal } from './FoundingJourney';
-import { journeyChapters, journeyObjectives, newJourney, type JourneyChapter, type JourneyObjective } from './JourneyProgress';
+import { journeyChapters, journeyObjectives, orientationObjectives, newJourney, type JourneyChapter, type JourneyObjective, type OrientationObjective } from './JourneyProgress';
 import type { WorkDraft } from './WorkPlan';
 import { proposeWork, previewWork, workCandidates } from './WorkPlan';
 import './first-steps.css';
@@ -13,7 +13,6 @@ import './first-steps.css';
 interface FirstStepsHooks {
     persist(): void;
     pause(): void;
-    play(): void;
     reveal(): void;
     clockChanged(): void;
     resident(id: string): void;
@@ -21,6 +20,10 @@ interface FirstStepsHooks {
     stocks(resource: 'food' | 'materials'): void;
     work(draft: WorkDraft): void;
     expeditions(): void;
+    home?(): void;
+    settlement?(): void;
+    clock?(): void;
+    menu?(): void;
     livestock?(id: string): void;
     ship?(id: string): void;
     improvements?(householdId: string): void;
@@ -53,9 +56,10 @@ export class FirstStepsGuide {
         this.root.setAttribute('aria-label', 'The Founding Journey');
         this.root.addEventListener('click', this.click, { signal: this.abort.signal });
         this.root.addEventListener('keydown', event => {
+            // Native buttons keep their activation and Tab behavior; world shortcuts do not see them.
+            event.stopPropagation();
             if (event.key === 'Escape') {
                 event.preventDefault();
-                event.stopPropagation();
                 this.collapse();
             }
         }, { signal: this.abort.signal });
@@ -75,6 +79,15 @@ export class FirstStepsGuide {
     private get journey() { return this.progress.journey ?? newJourney(); }
 
     private save(progress: FirstStepsProgress) {
+        if (progress.journey?.chapter === 'orientation') {
+            const before = this.owner.fjord.firstSteps?.journey?.orientation ?? [];
+            const after = progress.journey.orientation ?? [];
+            const selected = progress.journey.selected as OrientationObjective | null;
+            const selectedCompleted = !!selected && after.includes(selected) && !before.includes(selected);
+            const chapterCompleted = after.length === orientationObjectives.length && before.length < after.length;
+            if (selectedCompleted || chapterCompleted)
+                progress = { ...progress, journey: { ...progress.journey, selected: null } };
+        }
         if (JSON.stringify(progress) === JSON.stringify(this.owner.fjord.firstSteps)) return false;
         this.owner.fjord.firstSteps = progress;
         this.hooks.persist();
@@ -85,7 +98,7 @@ export class FirstStepsGuide {
     newStart(story?: FoundingBookWindow) {
         this.restore();
         this.hooks.pause();
-        this.save({ ...newFirstSteps(), journey: newJourney() });
+        this.save({ ...newFirstSteps(), journey: newJourney('orientation') });
         this.held = true;
         this.hooks.clockChanged();
         this.waitingForStory = !!story?.isOpen;
@@ -135,7 +148,10 @@ export class FirstStepsGuide {
 
     inspected(kind: FirstStepsInspection, id?: string) {
         if (!this.owner.fjord.firstSteps) return;
-        const changed = this.save(inspectFirstSteps(this.progress, this.state, kind, id));
+        const observed = inspectFirstSteps(this.progress, this.state, kind, id);
+        const progress = this.visible && observed.status === 'active' && isMobileLayout() &&
+            ['home', 'interface'].includes(kind) ? { ...observed, collapsed: true } : observed;
+        const changed = this.save(progress);
         if (changed && this.visible) this.render();
     }
 
@@ -171,7 +187,8 @@ export class FirstStepsGuide {
     private projection() {
         this.index.update(this.state);
         return foundingJourney(this.state, this.progress, this.index,
-            command => this.owner.availability(command), this.owner.session);
+            command => this.owner.availability(command), this.owner.session,
+            typeof matchMedia === 'function' && matchMedia('(pointer: coarse)').matches ? 'touch' : 'mouse');
     }
 
     private recommended(goals: JourneyGoal[]) {
@@ -200,7 +217,7 @@ export class FirstStepsGuide {
         if (action === 'replay' || action === 'resume') {
             this.hooks.pause();
             const progress = action === 'replay' ? newFirstSteps() : this.progress;
-            this.save({ ...progress, journey: action === 'replay' ? newJourney() : this.journey,
+            this.save({ ...progress, journey: action === 'replay' ? newJourney('orientation') : this.journey,
                 status: 'active', collapsed: false });
             this.render();
             this.focusHeading();
@@ -218,6 +235,21 @@ export class FirstStepsGuide {
             return;
         }
         const view = this.projection(), goal = this.recommended(view.goals);
+        if (action === 'continue-home') {
+            const basics = view.goals.filter(item => item.chapter === 'orientation');
+            if (this.journey.chapter === 'orientation' && basics.every(item => item.status === 'completed')) {
+                this.save({ ...this.progress, journey: { ...this.journey, chapter: 'home', selected: null } });
+                this.render();
+                this.focusHeading();
+            }
+            return;
+        }
+        if (action === 'acknowledge') {
+            this.save(acknowledgeOrientation(this.progress, goal.id as OrientationObjective));
+            this.render();
+            this.focusHeading();
+            return;
+        }
         if (action === 'later' || action === 'skip-objective' || action === 'try-again') {
             const skipped = this.journey.skipped.filter(id => id !== goal.id);
             const later = this.journey.later.filter(id => id !== goal.id);
@@ -240,6 +272,7 @@ export class FirstStepsGuide {
             case 'resident': {
                 const person = goal.id === 'understand-work' ? view.facts.worker : view.person;
                 if (person) this.hooks.resident(person.id);
+                else if (goal.chapter === 'orientation') this.hooks.settlement?.();
                 break;
             }
             case 'household': {
@@ -247,7 +280,17 @@ export class FirstStepsGuide {
                 if (home) this.hooks.household(home.id);
                 break;
             }
-            case 'livestock': if (view.livestock) this.hooks.livestock?.(view.livestock.id); break;
+            case 'livestock': {
+                const animal = goal.id === 'ui-connections' ? view.orientationLivestock : view.livestock;
+                if (animal) this.hooks.livestock?.(animal.id);
+                break;
+            }
+            case 'settlement':
+                if (goal.id === 'ui-camera') this.hooks.home?.();
+                else this.hooks.settlement?.();
+                break;
+            case 'clock': this.hooks.clock?.(); break;
+            case 'menu': this.hooks.menu?.(); break;
             case 'materials': this.hooks.stocks('materials'); break;
             case 'work': if (view.facts.workPlan) this.hooks.work(view.facts.workPlan); break;
             case 'improvements': if (view.home) this.hooks.improvements?.(view.home.id); break;
@@ -288,6 +331,7 @@ export class FirstStepsGuide {
     }
 
     private focusHeading() {
+        this.root.scrollTop = 0;
         const heading = this.root.querySelector<HTMLElement>('h2');
         heading?.setAttribute('tabindex', '-1');
         heading?.focus({ preventScroll: true });
@@ -300,6 +344,8 @@ export class FirstStepsGuide {
         const goal = this.recommended(view.goals);
         const chapterGoals = view.goals.filter(goal => goal.chapter === chapter);
         const done = chapterGoals.filter(goal => goal.status === 'completed').length;
+        const previousObjective = this.root.dataset.objective;
+        const orientationComplete = chapter === 'orientation' && done === chapterGoals.length && !this.journey.selected;
         this.root.dataset.chapter = chapter;
         this.root.dataset.objective = goal.id;
         this.root.classList.toggle('first-steps-collapsed', progress.collapsed);
@@ -307,7 +353,7 @@ export class FirstStepsGuide {
         if (progress.status === 'offered') {
             html = `<h2 id="first-steps-title">The Founding Journey</h2>
                 <p>Build a home for the next generation. Help an autonomous community, explore the island and choose how to face conflict.</p>
-                <p class="first-steps-muted">Three optional chapters. You can visit any chapter, return later or play freely.
+                <p class="first-steps-muted">Four optional chapters, starting with the interface basics. You can visit any chapter, return later or play freely.
                 Both choices keep the clock paused. Press Play when you are ready.</p>
                 <div class="first-steps-actions">${button('guide', 'Guide me')}${button('explore', 'Explore on my own')}</div>`;
         } else if (progress.collapsed) {
@@ -320,16 +366,24 @@ export class FirstStepsGuide {
                 html += `<p>Your campaign and its real discoveries are kept. Resume whenever you want a hand.</p>
                     <div class="first-steps-actions">${button('resume', 'Resume journey')}${button('replay', 'Replay guidance')}</div>`;
             } else {
-                html += `<nav class="first-steps-chapters" aria-label="Journey chapters">${journeyChapters.map((id, i) =>
-                    button('chapter', ['Home', 'Discovery', 'Conflict'][i],
+                html += `<nav class="first-steps-chapters" aria-label="Journey chapters">${journeyChapters.map(id =>
+                    button('chapter', ({ orientation: '0 · Basics', home: 'I · Home', discovery: 'II · Discovery', conflict: 'III · Conflict' })[id],
                         `data-view-key="chapter:${id}" data-chapter="${id}" aria-pressed="${id === chapter}"`)).join('')}</nav>
                     <p class="first-steps-muted">${esc(copy.title)} · ${done}/${chapterGoals.length} completed</p>
-                    <p>${esc(copy.why)}</p>
-                    <article aria-label="Recommended objective" data-journey-status="${goal.status}">
+                    ${chapter === 'orientation' ? '' : `<p>${esc(copy.why)}</p>`}`;
+                if (orientationComplete) {
+                    html += `<article aria-label="Basics complete" data-journey-status="completed">
+                        <h3>Basics complete</h3>
+                        <p>You can look around, inspect your people and choose when time passes.</p>
+                        <p class="first-steps-muted">Continue when you are ready, or keep exploring. Every chapter stays open.</p>
+                        <div class="first-steps-actions">${button('continue-home', 'Continue to Chapter I — A Home for Your People')}</div>
+                    </article>`;
+                } else {
+                    html += `<article aria-label="Recommended objective" data-journey-status="${goal.status}">
                         <h3>${esc(goal.title)}${goal.optional ? ' · Optional' : ''}</h3>
                         <span class="first-steps-status">${goal.status === 'blocked' ? 'Blocked right now' : esc(goal.status)}</span>
                         <p>${esc(goal.why)}</p>
-                        ${goal.checklist.length ? `<ul class="first-steps-checklist" aria-label="Objective checklist">
+                        ${goal.chapter !== 'orientation' && goal.checklist.length ? `<ul class="first-steps-checklist" aria-label="Objective checklist">
                             ${goal.checklist.map(check => `<li data-view-key="check:${goal.id}:${check.id}" data-journey-check="${check.id}">
                                 <span class="first-steps-check" role="checkbox" aria-checked="${check.done}" aria-readonly="true"
                                     aria-labelledby="journey-check-${goal.id}-${check.id}"><span aria-hidden="true">${check.done ? '✓' : ''}</span></span>
@@ -338,13 +392,17 @@ export class FirstStepsGuide {
                         </ul>` : ''}
                         ${goal.detail ? `<p class="first-steps-muted">${esc(goal.detail)}</p>` : ''}
                         <div class="first-steps-actions">${button('show', 'Show me')}
+                        ${goal.chapter === 'orientation' && ['ui-camera', 'ui-time', 'ui-navigation'].includes(goal.id) &&
+                            goal.status !== 'completed' ? button('acknowledge', 'Got it') : ''}
                         ${goal.id === 'longship-choice' && view.retained && !view.retained.transport?.groupId ?
                             button('keep-ship', 'Keep for now') : ''}</div>
                         <div class="first-steps-actions">${goal.status === 'completed' ? '' :
                             goal.status === 'later' || goal.status === 'skipped' ? button('try-again', 'Consider again') :
                             button('later', 'Return later') + button('skip-objective', 'Skip objective')}</div>
-                    </article>
-                    <details class="first-steps-objectives" data-view-key="journey-objectives"><summary>Chapter objectives</summary>
+                    </article>`;
+                }
+                html += `<details class="first-steps-objectives" data-view-key="journey-objectives"><summary>Chapter objectives</summary>
+                        ${chapter === 'orientation' ? `<p class="first-steps-muted">${esc(copy.why)}</p>` : ''}
                         ${chapterGoals.map(item => button('objective', `${item.title} · ${item.status}`,
                             `data-view-key="objective:${item.id}" data-objective="${item.id}" aria-pressed="${item.id === goal.id}"`)).join('')}
                     </details>
@@ -352,12 +410,14 @@ export class FirstStepsGuide {
                     <div class="first-steps-footer">${button('skip', 'Close journey')}<span>Open Need help? in the navigation menu to return.</span></div>`;
             }
         }
-        const announcement = progress.status === 'active' ?
+        const announcement = orientationComplete ? 'Basics complete. Continue to Chapter I whenever you choose. Time stays under your control.' :
+            progress.status === 'active' ?
             `${copy.title}, ${done} of ${chapterGoals.length} completed. ${goal.title}: ${goal.status}.${goal.checklist.length ?
                 ` ${goal.checklist.filter(check => check.done).length} of ${goal.checklist.length} steps completed.` : ''}` :
             progress.status === 'offered' ? 'Choose Guide me or Explore on my own. The clock stays paused until you press Play.' : 'The Founding Journey is set aside.';
         html += `<span class="first-steps-screen-reader" role="status" data-view-key="first-steps-status">${esc(announcement)}</span>`;
         if (html !== this.html) { updateView(this.root, html); this.html = html; }
+        if (chapter === 'orientation' && previousObjective !== goal.id) this.root.scrollTop = 0;
         this.root.hidden = !this.visible || this.obscured;
     }
 
