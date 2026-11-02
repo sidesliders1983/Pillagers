@@ -80,25 +80,53 @@ included here and this prototype is not owner approval.
 
 ## Evidence and provisional verdict
 
-Evidence collected here: both inline scripts parsed successfully, the included
-walkthrough actions were replayed against the pure reducer, source was reviewed,
-and Git whitespace checks were used. No prototype tests were added. Local CUA
-browser access is disabled in Work settings; no browser geometry, target-click,
-visual accessibility or physical-device acceptance is claimed by this record.
-The parent task owns the real browser/production checks and owner review.
+Both inline scripts parsed successfully, the included walkthrough actions were
+replayed against the pure reducer, source was reviewed, and Git whitespace checks
+were used. No prototype tests or test-framework changes were added.
+
+The explicitly authorized repository-local headless review used native Chrome
+156.0.8078.74 through the existing Playwright installation, with Chrome sandboxing
+enabled and no software-rendering override. At 1440 × 900 desktop and 844 × 390
+with Chrome touch emulation, all four included scenarios were driven through real
+mock controls. Each viewport produced 47 state observations, including 38 active
+callout geometry observations. Both runs passed: zero callout/target overlap,
+callout and halo within viewport bounds, unobstructed target centres, every
+visible stage button at least 44 × 44px, and no page errors. Real actions traversed
+Settlement, resident row, card details/Close and the later connection/home/menu
+surfaces. Missing-target fallback, resize, Escape, replay and paused completion
+were exercised. The two runs saved 33 screenshots. A supplemental 844 × 390 run
+used six genuine Chrome touch-pointer taps through Guide me, camera acknowledgment,
+Settlement, resident, Next and Close. The mock card did not overflow; the attempted
+internal scroll had no movement, so actual internal-scroll re-anchoring remains
+unverified.
+
+Visual inspection found a defect the initial geometry checks missed: assigning
+SVG.hidden did not remove the connector's hidden attribute. The prototype now
+uses toggleAttribute; the repeated walkthroughs check rendered connector visibility,
+and the 844 × 390 Close-control screenshot visibly confirms the arrow. The earlier
+report is preserved as report-before-arrow-fix.json; its geometric pass must not
+be read as a successful visual arrow check.
+
+Local evidence lives at
+`D:/CodexSites/Pillagers/scratch/onboarding-ui-basics-325/anchored-prototype-review-20261102-1537/`:
+`report.json`, the earlier report, review.cjs and the named viewport screenshots.
+These checks cover prototype mock surfaces. They establish neither production
+event wiring, physical iPhone behavior, full accessibility conformance, an
+uncoached playtest nor owner approval. The parent owns those follow-ups.
 
 | Included walkthrough | Observed reducer result |
 | --- | --- |
 | Fresh target-to-target | Six completions; anchor intents traverse canvas, Settlement, resident row, details, Close, household link/result, Map/home, time and menu/Close. Only explicit Continue selects Chapter I. Time stays paused. |
 | Skip, Back and replay | Back retains completed facts; Skip closes the tour; Replay clears tour observations. The final replay leaves Chapter III selected and time paused. |
-| Missing target | Hiding the current resident target awards no completion; restoring it permits selection and moves the anchor intent to card details. DOM fallback/geometry still needs browser inspection. |
+| Missing target | Hiding the current resident target awards no completion; restoring it permits selection and moves the anchor intent to card details. Chrome confirmed the live Settlement-entry fallback, retained progress and real target clicks. |
 | No resident / legacy | Chapter II and paused state remain. Missing resident stays incomplete; the existing mock animal link completes connections. Progress is 2/6 and the cursor advances to home. |
 
 Provisional verdict: the flow model can express the owner's requested action-driven
 substeps while preserving optional chapters and explicit time control. The earlier
-persistent-card verdict did not establish the desired UX. This revision supplies
-an inspectable anchored alternative; target collision, real event wiring, mobile
-fit, uncoached comprehension and owner visual approval remain open.
+persistent-card verdict did not establish the desired UX. Native Chrome review
+supports this anchored alternative within the measured
+viewports. Real event wiring, physical-device fit, uncoached comprehension and
+owner visual approval remain open.
 
 Only the prototype HTML and this record changed. No production files, tests,
 canonical rules or balances changed. No formatter is configured for this standalone

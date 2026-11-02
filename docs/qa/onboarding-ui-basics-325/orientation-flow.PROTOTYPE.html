@@ -302,7 +302,7 @@
         const hint = anchoredBasics.prompt(state, matchMedia('(pointer: coarse)').matches);
         if (state.targetHidden) { hiddenTarget = $(hint.target); if (hiddenTarget) hiddenTarget.hidden = true; }
         $('callout').hidden = !state.active;
-        $('halo').hidden = !state.active; $('connector').hidden = !state.active;
+        $('halo').hidden = !state.active; $('connector').toggleAttribute('hidden', !state.active);
         $('callout').innerHTML = `<div class="step">${state.cursor === 6 ? '6/6 complete' : `Step ${state.cursor + 1}/6`}</div><h3 tabindex="-1">${hint.title}</h3><p id="hint-copy">${hint.text}</p><div class="controls"></div>`;
         const controls = $('callout').querySelector('.controls');
         controls.append(button('Back', () => dispatch({ type: 'BACK' }), state.cursor === 0));
