@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PROTOTYPE — Optional Basics orientation</title>
+    <style>
+        /* Snapshot of the shared src/ui/fjord-theme.css roles at 01dc5f79. */
+        :root {
+            color-scheme: dark;
+            --fs-text: #f4f8fa;
+            --fs-muted: #c8d6dc;
+            --fs-canvas: #091d28;
+            --fs-surface-solid: #071920;
+            --fs-panel: rgba(7, 25, 32, .94);
+            --fs-card: rgba(14, 37, 46, .92);
+            --fs-hover: #203c47;
+            --fs-selected: #183a40;
+            --fs-border: #789098;
+            --fs-divider: rgba(120, 144, 152, .5);
+            --fs-accent: #d8ae60;
+            --fs-focus: #a9edff;
+            --fs-success: #cbe9a0;
+            --fs-radius-control: 9px;
+            --fs-radius-card: 14px;
+            --fs-radius-panel: 18px;
+            --fs-font-body: system-ui, sans-serif;
+            --fs-font-heading: Georgia, serif;
+        }
+        * { box-sizing: border-box; }
+        body { margin: 0; background: var(--fs-canvas); color: var(--fs-text); font: 15px/1.5 var(--fs-font-body); }
+        main { max-width: 1180px; margin: auto; padding: 28px 20px 60px; }
+        h1, h2, h3 { margin: 0 0 10px; font-family: var(--fs-font-heading); }
+        h1 { font-size: 30px; } h2 { font-size: 22px; } h3 { font-size: 19px; }
+        p { margin: 8px 0 16px; } small, .muted { color: var(--fs-muted); }
+        .eyebrow { color: var(--fs-accent); letter-spacing: .12em; font-size: 12px; font-weight: 700; }
+        .layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 20px; align-items: start; }
+        .panel { padding: 20px; border: 1px solid var(--fs-divider); border-radius: var(--fs-radius-panel); background: var(--fs-panel); margin-bottom: 20px; }
+        .world { min-height: 370px; background: linear-gradient(160deg, var(--fs-selected), var(--fs-canvas)); }
+        .card { max-width: 420px; padding: 18px; background: var(--fs-card); border: 1px solid var(--fs-border); border-radius: var(--fs-radius-card); }
+        button { min-height: 44px; padding: 9px 13px; background: var(--fs-card); color: var(--fs-text); border: 1px solid var(--fs-border); border-radius: var(--fs-radius-control); cursor: pointer; font: inherit; }
+        button:hover { background: var(--fs-hover); }
+        button[aria-selected="true"], button.primary { background: var(--fs-selected); border-color: var(--fs-accent); }
+        button:disabled { opacity: .5; cursor: default; }
+        button:focus-visible { outline: 3px solid var(--fs-focus); outline-offset: 3px; }
+        .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 12px 0; }
+        .tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 16px 0; }
+        .tabs button { padding: 9px 6px; }
+        .progress { display: grid; gap: 5px; margin: 14px 0; padding: 0; list-style: none; }
+        .progress li { display: flex; justify-content: space-between; gap: 10px; }
+        .done { color: var(--fs-success); }
+        .state { display: grid; grid-template-columns: 100px 1fr; gap: 7px 12px; }
+        .state dt { color: var(--fs-muted); } .state dd { margin: 0; }
+        .notice { padding: 10px 12px; border-left: 3px solid var(--fs-accent); background: var(--fs-card); }
+        .mock { border: 1px dashed var(--fs-accent); margin-top: 16px; padding: 16px; border-radius: var(--fs-radius-card); }
+        .actions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+        .walkthrough { padding-top: 10px; }
+        .steps { display: grid; gap: 7px; }
+        .steps button { text-align: left; }
+        @media (max-width: 820px) { .layout { grid-template-columns: 1fr; } }
+        @media (max-width: 480px) { main { padding: 20px 12px; } .panel { padding: 14px; } .actions { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+<main>
+    <div class="eyebrow">PROTOTYPE · #325 · THROWAWAY · IN MEMORY ONLY</div>
+    <h1>Find your feet, at your own pace</h1>
+    <p>Can six optional Basics steps help players feel oriented before Chapters I–III, while keeping
+        progress clear when they explore out of order, return later, skip, or revisit?</p>
+    <p class="muted">This is a clickable flow model. The resident card, household link, Settlement panel,
+        camera and time controls below simulate existing game surfaces. They do not run the game.
+        Refreshing resets everything.</p>
+    <div class="layout">
+        <div>
+            <section class="panel world" aria-label="Simulated Fjord Play">
+                <div class="eyebrow">SIMULATED FJORD PLAY</div>
+                <nav class="tabs" role="tablist" aria-label="Chapters" id="chapters"></nav>
+                <div id="objective"></div>
+                <div id="surface"></div>
+            </section>
+            <section class="panel" aria-labelledby="free-title">
+                <h2 id="free-title">Free play</h2>
+                <p class="muted">Try these actions in any order. Opening a chapter never opens a panel,
+                    changes time, or awards a step.</p>
+                <div class="actions" id="free-actions"></div>
+            </section>
+            <section class="panel" aria-labelledby="walk-title">
+                <h2 id="walk-title">Guided walkthroughs</h2>
+                <p class="muted">Choose a scenario to reset the demo, then click its actions in order.</p>
+                <div class="row" role="tablist" aria-label="Walkthroughs" id="scenarios"></div>
+                <div class="walkthrough" id="walkthrough"></div>
+            </section>
+        </div>
+        <aside class="panel" aria-labelledby="state-title">
+            <h2 id="state-title">What changed?</h2>
+            <p class="notice" id="last-action" role="status" aria-live="polite"></p>
+            <dl class="state" id="state"></dl>
+            <h3>Basics progress</h3>
+            <ol class="progress" id="progress"></ol>
+            <p class="muted">Completed steps stay complete when you revisit. Skipping does not pretend
+                that the remaining steps are complete. Basics never changes game time. A fresh campaign starts paused; the time control is your choice.</p>
+        </aside>
+    </div>
+</main>
+<script>
+    // Pure flow model: no DOM, persistence, timers or gameplay effects.
+    const basicsFlow = (() => {
+        const labels = [
+            'Explore your world',
+            'Meet your people',
+            'Discover connections',
+            'Find your way home',
+            'Control time',
+            'Navigate the interface',
+        ];
+
+        function initial(legacy = false) {
+            return {
+                chapter: legacy ? 2 : 0,
+                disposition: legacy ? 'Not started' : 'In progress',
+                visible: !legacy,
+                completed: labels.map(() => false),
+                selected: 0,
+                residentOpened: false,
+                surface: 'None',
+                paused: !legacy,
+                camera: 'Starting view',
+                legacy,
+                last: legacy
+                    ? 'Existing campaign loaded in Chapter II with time playing. Basics has not interrupted it.'
+                    : 'Fresh campaign. Basics is available; time is paused and no panel is open.',
+            };
+        }
+
+        function reduce(previous, action) {
+            const state = { ...previous, completed: [...previous.completed] };
+            function complete(index, message) {
+                state.completed[index] = true;
+                state.last = message;
+                if (state.completed.every(Boolean)) {
+                    state.disposition = 'Complete';
+                }
+                if (state.completed[state.selected]) {
+                    const next = state.completed.findIndex(done => !done);
+                    if (next >= 0) state.selected = next;
+                }
+            }
+            switch (action.type) {
+                case 'CHAPTER':
+                    state.chapter = action.chapter;
+                    state.visible = action.chapter === 0;
+                    if (action.chapter === 0 && !state.completed.every(Boolean)) {
+                        state.disposition = 'In progress';
+                    }
+                    state.last = `Opened ${['0 Basics', 'I Home', 'II Discovery', 'III Conflict'][action.chapter]}. Time and panels did not change.`;
+                    break;
+                case 'SELECT':
+                    state.selected = action.index;
+                    state.last = `Reviewing “${labels[action.index]}”. No progress awarded.`;
+                    break;
+                case 'ACKNOWLEDGE':
+                    if ([0, 4, 5].includes(action.index)) {
+                        complete(action.index, `“${labels[action.index]}” acknowledged with Got it.`);
+                    }
+                    break;
+                case 'OPEN_RESIDENT':
+                    state.residentOpened = true;
+                    state.surface = 'Resident card';
+                    state.last = 'Resident card opened. Close it to complete Meet your people.';
+                    break;
+                case 'CLOSE_SURFACE':
+                    if (state.surface === 'Resident card' && state.residentOpened) {
+                        complete(1, 'Resident card opened and closed. Meet your people is complete.');
+                    } else {
+                        state.last = 'Simulated panel closed. No Basics step awarded.';
+                    }
+                    state.surface = 'None';
+                    break;
+                case 'HOUSEHOLD_LINK':
+                    state.surface = 'Settlement panel';
+                    complete(2, 'Followed the existing household → Settlement link. Discover connections is complete.');
+                    break;
+                case 'HOME':
+                    state.camera = 'Home settlement';
+                    complete(3, 'Chose Return home. Find your way home is complete.');
+                    break;
+                case 'CAMERA':
+                    state.camera = 'Exploring';
+                    state.last = 'Simulated camera movement. Read the controls and choose Got it to acknowledge them.';
+                    break;
+                case 'TIME':
+                    state.paused = !state.paused;
+                    state.last = state.paused ? 'You chose Pause. Basics progress did not change.' : 'You chose Play. Basics progress did not change.';
+                    break;
+                case 'LATER':
+                    state.visible = false;
+                    state.disposition = state.completed.every(Boolean) ? 'Complete' : 'Return later';
+                    state.last = 'Basics tucked away. Your progress is kept; reopen 0 Basics whenever you want.';
+                    break;
+                case 'SKIP':
+                    state.visible = false;
+                    state.disposition = state.completed.every(Boolean) ? 'Complete' : 'Skipped';
+                    state.last = 'Basics skipped. Unfinished steps stay unfinished; 0 Basics remains available.';
+                    break;
+                case 'CONTINUE':
+                    if (state.completed.every(Boolean)) {
+                        state.chapter = 1;
+                        state.visible = false;
+                        state.last = 'You explicitly chose Continue to Chapter I. Time and open panels did not change.';
+                    } else {
+                        state.last = 'Continue is unavailable until Basics is complete. You can still choose any chapter tab.';
+                    }
+                    break;
+            }
+            return state;
+        }
+        return { labels, initial, reduce };
+    })();
+</script>
+<script>
+    // Thin, disposable demo shell.
+    const chapterNames = ['0 Basics', 'I Home', 'II Discovery', 'III Conflict'];
+    const stepHints = [
+        'Mouse: left-drag to pan, right-drag to rotate, wheel to zoom. Touch: drag to orbit, pinch to zoom, tap the ground to centre.',
+        'Open a resident card, then close it to return to the world. The mock card below represents the existing resident surface.',
+        'Follow the existing household link into Settlement. The mock link represents an existing connection; it does not create a family or building.',
+        'Choose Return home to centre the view on your settlement. Looking at a home does not count until you choose this action.',
+        'Use Pause, Play and the time controls at your own pace. You can acknowledge this without starting time.',
+        'Use the interface to open the panels you need, then close them to return to the world. The chapter tabs let you revisit your objectives.',
+    ];
+    const action = (type, extra = {}) => ({ type, ...extra });
+    const steps = (...entries) => entries.map(([label, type, extra]) => ({ label, action: action(type, extra) }));
+    const scenarios = [
+        {
+            title: 'Fresh start', legacy: false,
+            description: 'Follow all six steps. Watch the chapter and paused state when the last step completes.',
+            steps: steps(
+                ['Read camera controls → Got it', 'ACKNOWLEDGE', { index: 0 }],
+                ['Open a resident card', 'OPEN_RESIDENT'],
+                ['Close the resident card', 'CLOSE_SURFACE'],
+                ['Follow household → Settlement', 'HOUSEHOLD_LINK'],
+                ['Close Settlement', 'CLOSE_SURFACE'],
+                ['Choose Return home', 'HOME'],
+                ['Read time controls → Got it', 'ACKNOWLEDGE', { index: 4 }],
+                ['Read interface guidance → Got it', 'ACKNOWLEDGE', { index: 5 }],
+                ['Choose Continue to Chapter I', 'CONTINUE'],
+            ),
+        },
+        {
+            title: 'Existing campaign', legacy: true,
+            description: 'An existing campaign stays in Chapter II with time playing. Opening Basics is a choice, and returning later preserves progress.',
+            steps: steps(
+                ['Choose 0 Basics', 'CHAPTER', { chapter: 0 }],
+                ['Read camera controls → Got it', 'ACKNOWLEDGE', { index: 0 }],
+                ['Choose Return later', 'LATER'],
+                ['Return to Chapter II', 'CHAPTER', { chapter: 2 }],
+                ['Revisit 0 Basics', 'CHAPTER', { chapter: 0 }],
+                ['Review the completed camera step', 'SELECT', { index: 0 }],
+            ),
+        },
+        {
+            title: 'Out of order', legacy: false,
+            description: 'Explore connections and home before reading the first step. No next-step order is enforced.',
+            steps: steps(
+                ['Follow household → Settlement first', 'HOUSEHOLD_LINK'],
+                ['Close Settlement', 'CLOSE_SURFACE'],
+                ['Choose Return home next', 'HOME'],
+                ['Close with no resident card open', 'CLOSE_SURFACE'],
+                ['Open a resident card', 'OPEN_RESIDENT'],
+                ['Close the resident card', 'CLOSE_SURFACE'],
+                ['Move the camera without Got it', 'CAMERA'],
+                ['Read camera controls → Got it', 'ACKNOWLEDGE', { index: 0 }],
+            ),
+        },
+        {
+            title: 'Skip & revisit', legacy: false,
+            description: 'Skip with partial progress, use Chapter III, then revisit Basics. Completion is not fabricated.',
+            steps: steps(
+                ['Read time controls → Got it', 'ACKNOWLEDGE', { index: 4 }],
+                ['Choose Skip Basics', 'SKIP'],
+                ['Open Chapter III', 'CHAPTER', { chapter: 3 }],
+                ['Revisit 0 Basics', 'CHAPTER', { chapter: 0 }],
+                ['Read camera controls → Got it', 'ACKNOWLEDGE', { index: 0 }],
+                ['Choose Return later', 'LATER'],
+                ['Revisit again', 'CHAPTER', { chapter: 0 }],
+            ),
+        },
+    ];
+    let state = basicsFlow.initial();
+    let scenarioIndex = 0;
+    let scenarioStep = 0;
+    const byId = id => document.getElementById(id);
+
+    function button(label, click, options = {}) {
+        const element = document.createElement('button');
+        element.textContent = label;
+        element.addEventListener('click', click);
+        if (options.selected !== undefined) {
+            element.setAttribute('role', 'tab');
+            element.setAttribute('aria-selected', String(options.selected));
+        }
+        if (options.disabled) element.disabled = true;
+        if (options.primary) element.className = 'primary';
+        return element;
+    }
+
+    function dispatch(nextAction) {
+        state = basicsFlow.reduce(state, nextAction);
+        render();
+    }
+
+    function render() {
+        byId('chapters').replaceChildren(...chapterNames.map((name, chapter) =>
+            button(name, () => dispatch(action('CHAPTER', { chapter })), { selected: state.chapter === chapter })));
+        const objective = byId('objective');
+        objective.replaceChildren();
+        const card = document.createElement('div');
+        card.className = 'card';
+        if (state.chapter === 0 && state.visible) {
+            const count = state.completed.filter(Boolean).length;
+            const complete = count === 6;
+            card.innerHTML = `<div class="eyebrow">OPTIONAL · BASICS · ${count}/6 COMPLETE</div>
+                <h3>${complete ? 'Basics complete' : basicsFlow.labels[state.selected]}</h3>
+                <p>${complete ? 'You are ready to continue whenever you choose. You can also stay here and explore.' : stepHints[state.selected]}</p>`;
+            const controls = document.createElement('div');
+            controls.className = 'row';
+            if (complete) {
+                controls.append(button('Continue to Chapter I', () => dispatch(action('CONTINUE')), { primary: true }));
+            } else if ([0, 4, 5].includes(state.selected)) {
+                controls.append(button('Got it', () => dispatch(action('ACKNOWLEDGE', { index: state.selected })), { primary: true }));
+            } else if (state.selected === 1) {
+                controls.append(button('Open resident card', () => dispatch(action('OPEN_RESIDENT')), { primary: true }));
+            } else if (state.selected === 2) {
+                controls.append(button('Follow household → Settlement', () => dispatch(action('HOUSEHOLD_LINK')), { primary: true }));
+            } else {
+                controls.append(button('Return home', () => dispatch(action('HOME')), { primary: true }));
+            }
+            controls.append(button(complete ? 'Stay and explore' : 'Return later', () => dispatch(action('LATER'))));
+            if (!complete) controls.append(button('Skip Basics', () => dispatch(action('SKIP'))));
+            card.append(controls);
+        } else {
+            card.innerHTML = `<div class="eyebrow">${chapterNames[state.chapter]}</div>
+                <h3>${state.chapter === 0 ? 'Explore at your own pace' : ['','Build your home','Discover the fjord','Face new challenges'][state.chapter]}</h3>
+                <p>${state.chapter === 0 ? 'Basics is tucked away. Your progress is kept.' : 'This stands in for the existing chapter objective. Basics does not change its progress.'}</p>`;
+            card.append(button('Revisit Basics', () => dispatch(action('CHAPTER', { chapter: 0 }))));
+        }
+        objective.append(card);
+        byId('surface').replaceChildren();
+        if (state.surface !== 'None') {
+            const surface = document.createElement('section');
+            surface.className = 'mock';
+            surface.innerHTML = `<div class="eyebrow">SIMULATED EXISTING SURFACE</div><h3>${state.surface}</h3>`;
+            if (state.surface === 'Resident card') {
+                surface.insertAdjacentHTML('beforeend', '<p>Ása · Resident<br><small>Example resident and household connection only.</small></p>');
+                surface.append(button('Household → Settlement', () => dispatch(action('HOUSEHOLD_LINK'))));
+            } else {
+                surface.insertAdjacentHTML('beforeend', '<p>Household connections and settlement information would appear here in the game.</p>');
+            }
+            surface.append(button(`Close ${state.surface.toLowerCase()}`, () => dispatch(action('CLOSE_SURFACE'))));
+            byId('surface').append(surface);
+        }
+        byId('last-action').textContent = state.last;
+        byId('state').innerHTML = [
+            ['Campaign', state.legacy ? 'Existing campaign' : 'Fresh campaign'],
+            ['Chapter', chapterNames[state.chapter]],
+            ['Basics', state.disposition],
+            ['Reviewing', basicsFlow.labels[state.selected]],
+            ['Guide card', state.chapter === 0 && state.visible ? 'Open' : 'Tucked away'],
+            ['Progress', `${state.completed.filter(Boolean).length} of 6 complete`],
+            ['Time', state.paused ? 'Paused' : 'Playing'],
+            ['Camera', state.camera],
+            ['Open surface', state.surface],
+            ['Resident', state.residentOpened ? 'Opened at least once' : 'Not opened'],
+        ].map(([label, value]) => `<dt>${label}</dt><dd>${value}</dd>`).join('');
+        byId('progress').replaceChildren(...basicsFlow.labels.map((label, index) => {
+            const item = document.createElement('li');
+            const review = button(label, () => {
+                state = basicsFlow.reduce(state, action('CHAPTER', { chapter: 0 }));
+                dispatch(action('SELECT', { index }));
+            });
+            const status = document.createElement('span');
+            status.textContent = state.completed[index] ? 'Complete' : 'To do';
+            if (state.completed[index]) status.className = 'done';
+            item.append(review, status);
+            return item;
+        }));
+        const freeActions = [
+            ['Move camera (simulation)', action('CAMERA')],
+            ['Camera controls: Got it', action('ACKNOWLEDGE', { index: 0 })],
+            ['Open resident card', action('OPEN_RESIDENT')],
+            ['Close current surface', action('CLOSE_SURFACE')],
+            ['Household → Settlement', action('HOUSEHOLD_LINK')],
+            ['Return home', action('HOME')],
+            [state.paused ? 'Play (simulation)' : 'Pause (simulation)', action('TIME')],
+            ['Time controls: Got it', action('ACKNOWLEDGE', { index: 4 })],
+            ['Interface guidance: Got it', action('ACKNOWLEDGE', { index: 5 })],
+            ['Return later', action('LATER')],
+            ['Skip Basics', action('SKIP')],
+            ['Continue to Chapter I', action('CONTINUE')],
+        ];
+        byId('free-actions').replaceChildren(...freeActions.map(([label, next]) => button(label, () => dispatch(next))));
+        byId('scenarios').replaceChildren(...scenarios.map((scenario, index) =>
+            button(scenario.title, () => {
+                scenarioIndex = index;
+                scenarioStep = 0;
+                state = basicsFlow.initial(scenario.legacy);
+                render();
+            }, { selected: index === scenarioIndex })));
+        const scenario = scenarios[scenarioIndex];
+        byId('walkthrough').innerHTML = `<p>${scenario.description}</p><div class="steps"></div>`;
+        byId('walkthrough').querySelector('.steps').replaceChildren(...scenario.steps.map((step, index) =>
+            button(`${index < scenarioStep ? '✓ ' : ''}${index + 1}. ${step.label}`, () => {
+                scenarioStep += 1;
+                dispatch(step.action);
+            }, { disabled: index !== scenarioStep, primary: index === scenarioStep })));
+    }
+    render();
+</script>
+</body>
+</html>
