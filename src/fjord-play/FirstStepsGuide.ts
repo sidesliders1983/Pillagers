@@ -162,8 +162,7 @@ export class FirstStepsGuide {
         this.save({ ...this.progress, journey: this.journey,
             status: guided ? 'active' : 'skipped', collapsed: false });
         this.visible = guided;
-        if (mode === 'explore') this.hooks.play();
-        else this.hooks.pause();
+        this.hooks.pause();
         this.render();
         if (guided) this.focusHeading();
         else document.querySelector<HTMLElement>('#fjord-run')?.focus({ preventScroll: true });
@@ -309,7 +308,7 @@ export class FirstStepsGuide {
             html = `<h2 id="first-steps-title">The Founding Journey</h2>
                 <p>Build a home for the next generation. Help an autonomous community, explore the island and choose how to face conflict.</p>
                 <p class="first-steps-muted">Three optional chapters. You can visit any chapter, return later or play freely.
-                Explore on my own starts the clock immediately; Guide me keeps it paused.</p>
+                Both choices keep the clock paused. Press Play when you are ready.</p>
                 <div class="first-steps-actions">${button('guide', 'Guide me')}${button('explore', 'Explore on my own')}</div>`;
         } else if (progress.collapsed) {
             html = button('expand', `Founding Journey · ${done}/${chapterGoals.length} · ${goal.title}`,
@@ -356,7 +355,7 @@ export class FirstStepsGuide {
         const announcement = progress.status === 'active' ?
             `${copy.title}, ${done} of ${chapterGoals.length} completed. ${goal.title}: ${goal.status}.${goal.checklist.length ?
                 ` ${goal.checklist.filter(check => check.done).length} of ${goal.checklist.length} steps completed.` : ''}` :
-            progress.status === 'offered' ? 'Choose Guide me to stay paused, or Explore on my own to start time.' : 'The Founding Journey is set aside.';
+            progress.status === 'offered' ? 'Choose Guide me or Explore on my own. The clock stays paused until you press Play.' : 'The Founding Journey is set aside.';
         html += `<span class="first-steps-screen-reader" role="status" data-view-key="first-steps-status">${esc(announcement)}</span>`;
         if (html !== this.html) { updateView(this.root, html); this.html = html; }
         this.root.hidden = !this.visible || this.obscured;

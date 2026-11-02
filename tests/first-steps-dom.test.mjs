@@ -85,7 +85,7 @@ function fixture(mobile = false, owner = new SharedSettlement(newFjordScenario(3
         } };
 }
 
-test('the founding invitation keeps guidance paused, starts explicit free play and fences stale callbacks', () => {
+test('the founding invitation keeps guided and free play paused and fences stale callbacks', () => {
     const f = fixture(true);
     let story;
     try {
@@ -107,7 +107,7 @@ test('the founding invitation keeps guidance paused, starts explicit free play a
         assert.equal(document.querySelector('#fjord-run').disabled, false);
         f.guide.newStart();
         f.click('explore');
-        assert.equal(f.owner.session.running, true);
+        assert.equal(f.owner.session.running, false, 'Guidance and free-play choices do not start time');
         assert.equal(f.guide.root.hidden, true);
         assert.equal(f.owner.session.saveJSON(), canonical);
         const help = document.querySelector('#fjord-navigation-drawer #fjord-first-steps');
@@ -120,7 +120,7 @@ test('the founding invitation keeps guidance paused, starts explicit free play a
         help.click();
         assert.equal(document.querySelector('#fjord-mobile-menu').getAttribute('aria-expanded'), 'false');
         assert.equal(f.guide.root.hidden, false);
-        assert.equal(f.owner.session.running, true);
+        assert.equal(f.owner.session.running, false, 'Guidance and free-play choices do not start time');
         assert.equal(f.owner.session.saveJSON(), canonical, 'Navigation help does not start or change the campaign');
         story = new FoundingBookWindow(f.owner.session.book.snapshot().chapters[0]);
         f.guide.newStart(story);
