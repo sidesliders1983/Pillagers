@@ -217,7 +217,8 @@ export class FirstStepsTour {
         }
     }
 
-    private place(width: number, height: number, bounds: Bounds, anchor: Bounds | undefined, avoid: Bounds[], cornersFirst = false) {
+    private place(width: number, height: number, bounds: Bounds, anchor: Bounds | undefined, avoid: Bounds[],
+        cornersFirst = false, protectedRects: Bounds[] = []) {
         const viewport = this.viewport();
         const header = this.visibleRect(document.getElementById('fjord-header'), viewport);
         const belowHeader = Math.max(bounds.top, (header?.bottom ?? bounds.top - 12) + 12);
@@ -245,11 +246,17 @@ export class FirstStepsTour {
         points.push({ x: bounds.right - width, y: bounds.bottom - height },
             { x: bounds.left, y: bounds.bottom - height }, { x: bounds.right - width, y: bounds.top },
             { x: bounds.left, y: bounds.top });
+        const basePoints = [...points];
+        for (const region of protectedRects) {
+            for (const point of basePoints) points.push({ x: point.x, y: region.bottom + 14 },
+                { x: point.x, y: region.top - height - 14 });
+        }
         const important = ['#entity-panel [data-ui="close-card"]', '#fjord-workspace [data-ui="close-workspace"]',
             '#clan-book-close', '#fjord-menu [data-menu-close]', '#fjord-island-map [data-map-close]']
             .map(selector => this.visibleRect(document.querySelector<HTMLElement>(selector), viewport))
             .filter((control): control is DOMRect => !!control);
-        if (header) important.push(header);
+        const protectedControls: Bounds[] = [...important, ...protectedRects];
+        if (header) protectedControls.push(header);
         const positions = points.map(point => {
             const x = clamp(point.x, bounds.left, bounds.right - width);
             const y = clamp(point.y, bounds.top, bounds.bottom - height);
@@ -262,7 +269,7 @@ export class FirstStepsTour {
             const obstruction = avoid.reduce((sum, region, i) =>
                 sum + Math.min(1, area(box, region) / Math.max(1, width * height)) * (i === 0 ? 600 : 220), 0);
             return { x, y, overlap: anchor ? area(box, anchor) : 0,
-                controls: important.reduce((sum, region) => sum + area(box, region), 0),
+                controls: protectedControls.reduce((sum, region) => sum + area(box, region), 0),
                 coversOwner: panels.some(panel => area(box, panel) > 0),
                 proximity: distance + obstruction };
         });
@@ -321,7 +328,7 @@ export class FirstStepsTour {
         if (note.textContent !== notice) note.textContent = notice;
         const box = this.callout.getBoundingClientRect();
         const height = box.height;
-        const position = this.place(width, height, bounds, anchor, [chipRegion, ...avoid]);
+        const position = this.place(width, height, bounds, anchor, [chipRegion, ...avoid], false, [chipRegion]);
         this.callout.style.left = `${position.x - origin.left}px`;
         this.callout.style.top = `${position.y - origin.top}px`;
         this.callout.dataset.anchor = target ? target.id || target.dataset.ui || target.tagName.toLowerCase() : 'fallback';

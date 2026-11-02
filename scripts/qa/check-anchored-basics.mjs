@@ -123,6 +123,10 @@ async function geometry(label, allowFallback = false) {
         const targetRect = target ? rect(target) : null;
         const haloRect = haloVisible ? rect(halo) : null;
         const calloutRect = rect(callout);
+        const chip = document.querySelector('#fjord-basics-chip');
+        const chipRect = visible(chip) ? rect(chip) : null;
+        const chipHit = chipRect ? document.elementFromPoint(chipRect.x + chipRect.width / 2,
+            chipRect.y + chipRect.height / 2) : null;
         const viewport = visualViewport;
         const bounds = { x: viewport?.offsetLeft ?? 0, y: viewport?.offsetTop ?? 0,
             right: (viewport?.offsetLeft ?? 0) + (viewport?.width ?? innerWidth),
@@ -142,8 +146,13 @@ async function geometry(label, allowFallback = false) {
             complete: callout.dataset.complete === 'true', source, targetCount: targets.length,
             target: target ? { id: target.id, tag: target.tagName, ui: target.dataset.ui,
                 kind: target.dataset.kind, entityId: target.dataset.id } : null,
-            targetRect, haloRect, calloutRect, bounds, targetOverlap: overlap(calloutRect, protectedRect),
-            calloutInBounds: inBounds(calloutRect), haloInBounds: !haloVisible || inBounds(haloRect),
+            targetRect, haloRect, calloutRect, chipRect, bounds,
+            targetOverlap: overlap(calloutRect, protectedRect),
+            calloutChipOverlap: overlap(calloutRect, chipRect),
+            chipCentreReceivesInput: !!chip && (chip === chipHit || chip.contains(chipHit)),
+            chipHitElement: chipHit?.id || chipHit?.tagName,
+            calloutInBounds: inBounds(calloutRect), chipInBounds: inBounds(chipRect),
+            haloInBounds: !haloVisible || inBounds(haloRect),
             haloVisible, arrowVisible, haloPointerEvents: halo ? getComputedStyle(halo).pointerEvents : null,
             arrowPointerEvents: arrow ? getComputedStyle(arrow).pointerEvents : null,
             targetCentreReceivesInput: !!target && (target === hit || target.contains(hit)),
@@ -164,6 +173,11 @@ async function geometry(label, allowFallback = false) {
     assert.ok(observation.haloInBounds, `${label}: halo outside viewport`);
     assert.ok(observation.buttons.every(button => button.width >= 43.9 && button.height >= 43.9),
         `${label}: tour button smaller than 44 × 44px`);
+    assert.ok(observation.chipRect && observation.chipRect.width >= 43.9 && observation.chipRect.height >= 43.9,
+        `${label}: Journey chip must retain its full 44px target`);
+    assert.ok(observation.chipInBounds, `${label}: Journey chip outside viewport`);
+    assert.ok(observation.calloutChipOverlap <= .1, `${label}: callout covers the Journey chip`);
+    assert.ok(observation.chipCentreReceivesInput, `${label}: Journey chip centre is intercepted`);
     assert.equal(observation.haloPointerEvents, 'none', `${label}: halo intercepts input`);
     assert.equal(observation.arrowPointerEvents, 'none', `${label}: arrow intercepts input`);
     if (!allowFallback) {
@@ -187,7 +201,7 @@ async function capture(label, annotation = true) {
         const image = await sharp(raw).metadata();
         const rectangle = (box, colour) => box ? `<rect x="${box.x}" y="${box.y}" width="${box.width}" height="${box.height}" fill="none" stroke="${colour}" stroke-width="3"/>` : '';
         const description = current?.visible ? `${current.step}/${current.phase} · ${current.source || 'fallback'}` : 'Tour hidden / paused entry';
-        const svg = `<svg width="${image.width}" height="${image.height}" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="8" width="${Math.min(image.width - 16, 700)}" height="28" rx="5" fill="#071920"/><text x="16" y="27" fill="#f4f8fa" font-size="14" font-family="sans-serif">QA annotation · ${escapeXML(description)}</text>${rectangle(current?.haloRect, '#a9edff')}${rectangle(current?.calloutRect, '#d8ae60')}</svg>`;
+        const svg = `<svg width="${image.width}" height="${image.height}" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="8" width="${Math.min(image.width - 16, 700)}" height="28" rx="5" fill="#071920"/><text x="16" y="27" fill="#f4f8fa" font-size="14" font-family="sans-serif">QA annotation · ${escapeXML(description)}</text>${rectangle(current?.haloRect, '#a9edff')}${rectangle(current?.calloutRect, '#d8ae60')}${rectangle(current?.chipRect, '#cbe9a0')}</svg>`;
         item.annotated = `${name}-annotated.png`;
         await sharp(raw).composite([{ input: Buffer.from(svg) }]).png().toFile(path.join(output, item.annotated));
     }
