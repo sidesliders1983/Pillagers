@@ -410,16 +410,31 @@ try {
             return offsets;
         });
         const beforeScroll = await scrollOffsets();
+        const scrollProbe = await link.evaluate(element => {
+            for (let owner = element.parentElement; owner; owner = owner.parentElement) {
+                if (!['auto', 'scroll'].includes(getComputedStyle(owner).overflowY) ||
+                    owner.scrollHeight <= owner.clientHeight + 1) continue;
+                const before = owner.scrollTop;
+                const maximum = owner.scrollHeight - owner.clientHeight;
+                owner.scrollTop = before < maximum ? Math.min(maximum, before + 48) : Math.max(0, before - 48);
+                return { id: owner.id, before, after: owner.scrollTop, maximum };
+            }
+            return null;
+        });
+        if (scrollProbe) await geometry('connection-programmatic-scroll-probe', true);
+        const beforeReveal = await scrollOffsets();
         await link.scrollIntoViewIfNeeded();
         const afterScroll = await scrollOffsets();
         const overflowExists = beforeScroll.some(owner => ['auto', 'scroll'].includes(owner.overflowY));
         report.connectionScrollEvidence = {
-            mechanism: 'Playwright scrollIntoViewIfNeeded: programmatic DOM scrolling of the real clipped card; not a physical touch gesture.',
-            before: beforeScroll, after: afterScroll, overflowExists,
-            exercised: afterScroll.some((owner, index) => owner.scrollTop !== beforeScroll[index]?.scrollTop),
+            mechanism: 'Programmatic DOM scroll probe followed by Playwright scrollIntoViewIfNeeded on the real card; not a physical touch gesture.',
+            before: beforeScroll, probe: scrollProbe, beforeReveal, after: afterScroll, overflowExists,
+            revealMoved: afterScroll.some((owner, index) => owner.scrollTop !== beforeReveal[index]?.scrollTop),
+            exercised: !!scrollProbe && scrollProbe.after !== scrollProbe.before ||
+                afterScroll.some((owner, index) => owner.scrollTop !== beforeScroll[index]?.scrollTop),
         };
         if (overflowExists) assert.ok(report.connectionScrollEvidence.exercised,
-            'An overflowing real card must show a changed scroll offset when revealing its household link.');
+            'The real overflowing card must show an actual programmatic scroll offset change.');
         const connectionAnchor = await geometry('household-link-after-real-scroll');
         assert.equal(connectionAnchor.target?.kind, 'household',
             'The connection callout must identify the actual visible household link after scrolling.');

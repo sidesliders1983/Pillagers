@@ -682,3 +682,17 @@ test('a household sharing another person identifier remains the connection targe
         assert.equal(callout.dataset.step, 'ui-home');
     } finally { f.dispose(); }
 });
+
+
+test('following a real household link keeps keyboard reading focus in the resulting card', () => {
+    const f = fixture();
+    try {
+        const canonical = f.owner.session.saveJSON();
+        f.ui.open('settlement', true);
+        document.querySelector('.fjord-directory-list [data-kind="persona"]').click();
+        const link = document.querySelector('#entity-panel .fjord-relations [data-kind="household"]');
+        link.focus(); link.click();
+        assert.equal(document.activeElement, document.querySelector('#entity-panel .fjord-card-heading h2'));
+        assert.equal(f.owner.session.saveJSON(), canonical);
+    } finally { f.dispose(); }
+});

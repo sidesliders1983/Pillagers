@@ -468,8 +468,11 @@ export class FjordInterface {
                 } else {
                     this.close(false);
                     this.hooks.select(kind, id);
-                    if (activeControl && currentAction() && this.isCurrentConnection(kind, id))
-                        this.hooks.navigated?.('connection', id);
+                    if (activeControl && currentAction() && this.isCurrentConnection(kind, id)) {
+                        this.focusHeading();
+                        if (currentAction() && this.isCurrentConnection(kind, id))
+                            this.hooks.navigated?.('connection', id);
+                    }
                 }
                 return true;
             }
