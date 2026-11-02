@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 1,
+  "generatedUtc": "2026-11-02T14:12:39.585Z",
+  "sourceRevision": "e8c06cdf",
+  "files": [
+    {
+      "original": "D:\\CodexSites\\Pillagers\\scratch\\onboarding-ui-basics-325\\scratch\\onboarding-ui-basics-325\\browser-desktop-20261102135638266-30828\\result.json",
+      "artifact": "evidence/desktop-result.json.gz",
+      "classification": "Final actual UI journey",
+      "originalBytes": 344021,
+      "originalSHA256": "6024c6494d24fc74836aeafbe094dec670b382e44b318c33a9036333e781ffe2",
+      "artifactBytes": 35762,
+      "artifactSHA256": "7125b0b1bcbc7984f432857c5e4013f4d45b735253ecf2830a24c9f56958d112",
+      "encoding": "lossless gzip; decompression verified byte-for-byte"
+    },
+    {
+      "original": "D:\\CodexSites\\Pillagers\\scratch\\onboarding-ui-basics-325\\scratch\\onboarding-ui-basics-325\\browser-desktop-20261102135638266-30828\\basics-camera.png",
+      "artifact": "evidence/desktop-basics-camera.webp",
+      "classification": "Final actual UI screenshot",
+      "width": 1440,
+      "height": 900,
+      "originalBytes": 1680774,
+      "originalSHA256": "145b5578d56968d228d4767e5c03dcd450ef64ce5dcf0615d41e82c15bbd68a2",
+      "artifactBytes": 106870,
+      "artifactSHA256": "77e11cfe3b9adc668b4c9ccdd8d5e2486d5ed45a3b46ae3138149a06cf431afb",
+      "encoding": "WebP quality 80, same dimensions; original PNG preserved locally"
+    },
+    {
+      "original": "D:\\CodexSites\\Pillagers\\scratch\\onboarding-ui-basics-325\\scratch\\onboarding-ui-basics-325\\browser-desktop-20261102135638266-30828\\resident-card.png",
+      "artifact": "evidence/desktop-resident-card.webp",
+      "classification": "Final actual UI screenshot",
+      "width": 1440,
+      "height": 900,
+      "originalBytes": 1632803,
+      "originalSHA256": "cc3cb45e9765ef061014085dc56c24409f14fca3503e43ddc871601cb0976869",
+      "artifactBytes": 103178,
+      "artifactSHA256": "91785d7a24358fbc332b39f9e47ad7e08cc1c7fa6783e64d662abd40b53de390",
+      "encoding": "WebP quality 80, same dimensions; original PNG preserved locally"
+    },
+    {
+      "original": "D:\\CodexSites\\Pillagers\\scratch\\onboarding-ui-basics-325\\scratch\\onboarding-ui-basics-325\\browser-desktop-20261102135638266-30828\\basics-complete.png",
+      "artifact": "evidence/desktop-basics-complete.webp",
+      "classification": "Final actual UI screenshot",
+      "width": 1440,
+      "height": 900,
+      "originalBytes": 1690327,
+      "originalSHA256": "1e072f687d0e2836d0933bb22d2a3729ed5ad7c116e243b94f5315dd4ee2a6e9",
+      "artifactBytes": 102816,
+      "artifactSHA256": "514509d142fc2003e13dc2148f46ff247274a17c0bc54c013aa5372b8c9a72db",
+      "encoding": "WebP quality 80, same dimensions; original PNG preserved locally"
+    },
+    {
+      "original": "D:\\CodexSites\\Pillagers\\scratch\\onboarding-ui-basics-325\\scratch\\onboarding-ui-basics-325\\browser-desktop-20261102135638266-30828\\map-return.png",
+      "artifact": "evidence/desktop-map-return.webp",
+      "classification": "Final actual UI screenshot",
+      "width": 1440,
+      "height": 900,
+      "originalBytes": 1622302,
+      "originalSHA256": "0e33a3f3f533d356e2c25d42cb0434a8f922c4294c93db6008dd65126b2c7275",
+      "artifactBytes": 102800,
+      "artifactSHA256": "0b1b7947ed6122859267c3a6cace23a91e49495e6302ef4ef30f213f333314fd",
+      "encoding": "WebP quality 80, same dimensions; original PNG preserved locally"
+    },
+    {
+      "original": "D:\\CodexSites\\Pillagers\\scratch\\onboarding-ui-basics-325\\scratch\\onboarding-ui-basics-325\\browser-touch-20261102140047443-25636\\result.json",
+      "artifact": "evidence/touch-result.json.gz",
+      "classification": "Final actual UI journey",
+      "originalBytes": 347087,
+      "originalSHA256": "a59a0785da020da074810fb563e54d1c03572ddfcb87d8f6c0cb02cc487f8294",
+      "artifactBytes": 36176,
+      "artifactSHA256": "3bea5f8a1916847627e7d160ef67f660ba3de1d9ccb4c289886d4e24fe009b90",
+      "encoding": "lossless gzip; decompression verified byte-for-byte"
+    },
+    {
+      "original": "D:\\CodexSites\\Pillagers\\scratch\\onboarding-ui-basics-325\\scratch\\onboarding-ui-basics-325\\browser-touch-20261102140047443-25636\\basics-camera.png",
+      "artifact": "evidence/touch-basics-camera.webp",
+      "classification": "Final actual UI screenshot",
+      "width": 844,
+      "height": 390,
+      "originalBytes": 405744,
+      "originalSHA256": "dc6f6e25827a37c1971dd2ff0c1a1f4c40eaabb16809e6e623d46d7f4c12312a",
+      "artifactBytes": 31622,
+      "artifactSHA256": "f07f914488df477057d706ca3cc60985aff74c91e2ac4c3c65b3c11d7b78456e",
+      "encoding": "WebP quality 80, same dimensions; original PNG preserved locally"
+    },
+    {
+      "original": "D:\\CodexSites\\Pillagers\\scratch\\onboarding-ui-basics-325\\scratch\\onboarding-ui-basics-325\\browser-touch-20261102140047443-25636\\resident-card.png",
+      "artifact": "evidence/touch-resident-card.webp",
+      "classification": "Final actual UI screenshot",
+      "width": 844,
+      "height": 390,
+      "originalBytes": 359741,
+      "originalSHA256": "1a354b197d4261ddd38240a0432f1b85ebbdee7eccf4ef301d7aab971a8422ad",
+      "artifactBytes": 27100,
+      "artifactSHA256": "30535072044051540d006b1bdfd84801f4b6ea08045f63fd474dfce5948bdb6a",
+      "encoding": "WebP quality 80, same dimensions; original PNG preserved locally"
+    },
+    {
+      "original": "D:\\CodexSites\\Pillagers\\scratch\\onboarding-ui-basics-325\\scratch\\onboarding-ui-basics-325\\browser-touch-20261102140047443-25636\\basics-complete.png",
+      "artifact": "evidence/touch-basics-complete.webp",
+      "classification": "Final actual UI screenshot",
+      "width": 844,
+      "height": 390,
+      "originalBytes": 405617,
+      "originalSHA256": "4f4c5c2e5ed8231ad3f87067ca945bcfad5b0940b5e00c1efa6e0f35ed6cf82a",
+      "artifactBytes": 29510,
+      "artifactSHA256": "4fde2eb0774dc2171db6c22445cd925aef08582069b534f48756ceffc8b2e472",
+      "encoding": "WebP quality 80, same dimensions; original PNG preserved locally"
+    },
+    {
+      "original": "D:\\CodexSites\\Pillagers\\scratch\\onboarding-ui-basics-325\\scratch\\onboarding-ui-basics-325\\browser-touch-20261102140047443-25636\\map-return.png",
+      "artifact": "evidence/touch-map-return.webp",
+      "classification": "Final actual UI screenshot",
+      "width": 844,
+      "height": 390,
+      "originalBytes": 198813,
+      "originalSHA256": "0ea8aaf292f5db01898ea01c4869f9ce5f89a0b44267cffd6943022a339d210f",
+      "artifactBytes": 11780,
+      "artifactSHA256": "55ef8c2dfcc8654968068482177ded2aa45b53f3170964e1c45a7a0834a0d2b0",
+      "encoding": "WebP quality 80, same dimensions; original PNG preserved locally"
+    },
+    {
+      "original": "D:\\CodexSites\\Pillagers\\scratch\\onboarding-ui-basics-325\\scratch\\onboarding-ui-basics-325\\browser-touch-20261102133833338\\result.json",
+      "artifact": "evidence/touch-runner-failure-result.json.gz",
+      "classification": "Earlier runner navigation failure, not completed coverage",
+      "originalBytes": 177454,
+      "originalSHA256": "be4d26bca4141d2cb597c745237229c55ffab06daa1d68043ab1114c71010eec",
+      "artifactBytes": 19311,
+      "artifactSHA256": "226800a7b711ae5fe9cf0fd45486984696a6a0244cfaef101efb1082465172b5",
+      "encoding": "lossless gzip; decompression verified byte-for-byte"
+    },
+    {
+      "original": "D:\\CodexSites\\Pillagers\\scratch\\onboarding-ui-basics-325\\scratch\\onboarding-ui-basics-325\\prototype-review\\walkthrough.json",
+      "artifact": "evidence/prototype-walkthrough.json.gz",
+      "classification": "Throwaway prototype UI walkthrough, not production or human evidence",
+      "originalBytes": 32487,
+      "originalSHA256": "1ed6553f42328086a1037ddd87403b6a9f0a8953a9031f05f961322d14d9f11f",
+      "artifactBytes": 1326,
+      "artifactSHA256": "86e951ac9fdd18fe82c73cd652406c782e36be5be7b060a602813f97d72140f7",
+      "encoding": "lossless gzip; decompression verified byte-for-byte"
+    },
+    {
+      "original": "D:\\CodexSites\\Pillagers\\scratch\\onboarding-ui-basics-325\\scratch\\onboarding-ui-basics-325\\prototype-review\\initial-1440.png",
+      "artifact": "evidence/prototype-1440.webp",
+      "classification": "Throwaway prototype, not production UI",
+      "width": 1440,
+      "height": 1806,
+      "originalBytes": 227612,
+      "originalSHA256": "66f9a2fa886f67e7ec169c2f5fdac2edf37c9a5209ce01faae1302e004a53ae9",
+      "artifactBytes": 123874,
+      "artifactSHA256": "2bec7c7e0e919d846ea83ac7bb5da8096c50d531f244db9d5afba7fd544c5b2e",
+      "encoding": "WebP quality 80, same dimensions; original PNG preserved locally"
+    },
+    {
+      "original": "D:\\CodexSites\\Pillagers\\scratch\\onboarding-ui-basics-325\\scratch\\onboarding-ui-basics-325\\prototype-review\\initial-844.png",
+      "artifact": "evidence/prototype-844.webp",
+      "classification": "Throwaway prototype, not production UI",
+      "width": 844,
+      "height": 1969,
+      "originalBytes": 183772,
+      "originalSHA256": "d13d01f5d9b48a4c93e6d5ef02b839e0f5639c48b3a1b438d27b67a5d17e0f74",
+      "artifactBytes": 123242,
+      "artifactSHA256": "245150aa23420ff1f3ee7f717ab49ee5a74899ec799f45ca707e66d21a7e2c8d",
+      "encoding": "WebP quality 80, same dimensions; original PNG preserved locally"
+    },
+    {
+      "original": "D:\\CodexSites\\Pillagers\\scratch\\onboarding-ui-basics-325\\scratch\\onboarding-ui-basics-325\\final-build.log",
+      "artifact": "evidence/final-build.log.gz",
+      "classification": "Local required-check output",
+      "originalBytes": 5960,
+      "originalSHA256": "02e2ae71d4e6bf046e49dca9f88e9cd0569dc0f3c4d338163760a70caab682f3",
+      "artifactBytes": 2095,
+      "artifactSHA256": "a78dd843493b08d9ebca399b1a56b0dc627c9717e07a3209155fb03bd6173be4",
+      "encoding": "lossless gzip; decompression verified byte-for-byte"
+    },
+    {
+      "original": "D:\\CodexSites\\Pillagers\\scratch\\onboarding-ui-basics-325\\scratch\\onboarding-ui-basics-325\\final-public.log",
+      "artifact": "evidence/final-public.log.gz",
+      "classification": "Local required-check output",
+      "originalBytes": 376,
+      "originalSHA256": "c41eef6ffa93185e8c0a249b46e2459e00f8bd4124f56a574ec85ca4f5d1eee4",
+      "artifactBytes": 281,
+      "artifactSHA256": "146879bc07fd035438add83f0e8ae4fffc197216a2b40ab003805fcb9852094f",
+      "encoding": "lossless gzip; decompression verified byte-for-byte"
+    },
+    {
+      "original": "D:\\CodexSites\\Pillagers\\scratch\\onboarding-ui-basics-325\\scratch\\onboarding-ui-basics-325\\final-characters.log",
+      "artifact": "evidence/final-characters.log.gz",
+      "classification": "Local required-check output",
+      "originalBytes": 182,
+      "originalSHA256": "2d1a8d5c84333650ef6b29d4988345c8ba368b6002184d8ac9afffd13397ffd0",
+      "artifactBytes": 164,
+      "artifactSHA256": "93200fef54249e68a40439b1b3ee9395cafa3de4c4c4a654c776a63e4708d38b",
+      "encoding": "lossless gzip; decompression verified byte-for-byte"
+    },
+    {
+      "original": "D:\\CodexSites\\Pillagers\\scratch\\onboarding-ui-basics-325\\scratch\\onboarding-ui-basics-325\\final-tests.log",
+      "artifact": "evidence/final-tests.log.gz",
+      "classification": "Local required-check output",
+      "originalBytes": 191126,
+      "originalSHA256": "c3f47bb53a08f7e4e24e56a7dff10260bf4b17ddfe520a75df974045e39005d5",
+      "artifactBytes": 66386,
+      "artifactSHA256": "e6b11db29055f6f873ca4854517f90a69454f2ed2d460c63985dd0d81263d5ba",
+      "encoding": "lossless gzip; decompression verified byte-for-byte"
+    }
+  ]
+}

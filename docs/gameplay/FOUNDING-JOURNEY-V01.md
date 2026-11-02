@@ -193,7 +193,8 @@ its UI observations are retained when manually opening the chapter layer.
 
 ## Acceptance
 
-See [implementation QA](../qa/founding-journey-270/report.md). Automated checks do
+See the [original chapter QA](../qa/founding-journey-270/report.md) and the
+[Chapter 0 implementation/browser QA](../qa/onboarding-ui-basics-325/report.md). Automated checks do
 not prove novice understanding or physical phone layout. Owner review of authored
 copy, desktop/phone visual checks and a small uncoached playtest remain required
 before merge/release. A hunt or raid need not finish during that test.
