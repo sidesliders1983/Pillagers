@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { load } from './load-source.mjs';
 
 const { newJourney, readJourney } = load('../src/fjord-play/JourneyProgress.ts');
-const { newFirstSteps, acknowledgeOrientation, inspectFirstSteps } = load('../src/fjord-play/FirstStepsState.ts');
+const { newFirstSteps, acknowledgeOrientation, inspectFirstSteps, replayOrientation } = load('../src/fjord-play/FirstStepsState.ts');
 const { newFjordScenario } = load('../src/fjord-play/FjordScenario.ts');
 const { SharedSettlement, commandAvailability } = load('../src/play/SharedSettlement.ts');
 const { FoundingJourneyIndex, foundingJourney } = load('../src/fjord-play/FoundingJourney.ts');
@@ -172,4 +172,50 @@ test('unavailable residents get a truthful block or living animal connection wit
     assert.equal(lesson(project(state), 'ui-resident').status, 'blocked');
     assert.equal(lesson(project(state), 'ui-connections').status, 'blocked');
     assert.equal(progress.journey.orientation, undefined);
+});
+
+test('bounded saved tour choices and Replay basics preserve existing campaign guidance and evidence', () => {
+    const session = newFjordScenario(32);
+    session.command({ type: 'AdvanceTicks', ticks: 1000 });
+    const owner = new SharedSettlement(session), state = session.readSnapshot();
+    const evidence = state.events.find(event => event.type === 'ResourceProduced' && event.details.units > 0);
+    const residentId = evidence.personaId;
+    const householdId = Object.values(state.households).find(home => home.memberIds.includes(residentId)).id;
+    const livestockId = Object.keys(state.landing.cattle)[0];
+    const progress = { ...newFirstSteps(), status: 'skipped', collapsed: false, residentId,
+        resourcesSeen: true, workerId: residentId, householdId,
+        watch: { kind: 'work', id: residentId, afterEvent: 0 }, evidenceId: evidence.id,
+        journey: { ...newJourney('conflict'), selected: 'pillage', householdId, homeResidentId: residentId,
+            livestockId, improvementsSeen: true, smitherySeen: true, keptShipId: 'founding-longship',
+            orientation: ['ui-camera', 'ui-resident'], skipped: ['ui-home', 'pillage'],
+            later: ['ui-time', 'upgrade-home'], tour: { step: 'ui-connections', dismissed: true } } };
+    owner.fjord.firstSteps = progress;
+    const canonical = session.saveJSON(), before = owner.persist();
+    const restored = SharedSettlement.restore(before, 'fjord');
+    assert.deepEqual(restored.fjord.firstSteps, progress, 'The finite tour cursor survives a matching save');
+    assert.equal(Object.hasOwn(readJourney(newJourney()), 'tour'), false, 'Older version-one metadata remains absent');
+
+    const saved = JSON.parse(owner.fjord.exportJSON());
+    for (const invalid of [null, [], {}, { step: 'unknown', dismissed: false },
+        { step: 'ui-camera', dismissed: 'false' }, { step: 'ui-camera', dismissed: false, target: '#arbitrary' }]) {
+        saved.firstSteps.journey.tour = invalid;
+        assert.throws(() => owner.importJSON(JSON.stringify(saved)), /journey|Journey/);
+        assert.equal(owner.persist(), before, 'Malformed tour metadata cannot replace the campaign');
+    }
+
+    const replayed = replayOrientation(progress);
+    assert.equal(replayed.status, 'active');
+    assert.equal(replayed.collapsed, true);
+    assert.equal(replayed.journey.chapter, 'orientation');
+    assert.equal(replayed.journey.selected, null);
+    assert.deepEqual(replayed.journey.orientation, []);
+    assert.deepEqual(replayed.journey.tour, { step: 'ui-camera', dismissed: false });
+    assert.deepEqual(replayed.journey.skipped, ['pillage']);
+    assert.deepEqual(replayed.journey.later, ['upgrade-home']);
+    for (const field of ['residentId', 'resourcesSeen', 'workerId', 'householdId', 'watch', 'evidenceId'])
+        assert.deepEqual(replayed[field], progress[field], `Replay basics retains ${field}`);
+    for (const field of ['householdId', 'homeResidentId', 'livestockId', 'improvementsSeen', 'smitherySeen', 'keptShipId', 'resultEventId'])
+        assert.deepEqual(replayed.journey[field], progress.journey[field], `Replay basics retains journey ${field}`);
+    assert.equal(owner.persist(), before, 'Replay returns a new presentation snapshot without mutating its source');
+    assert.equal(session.saveJSON(), canonical);
 });

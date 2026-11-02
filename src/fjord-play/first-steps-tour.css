@@ -1,0 +1,46 @@
+/* Chapter 0 only: shared Fjord roles, no scrim or world-input layer. */
+#fjord-basics-tour {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100dvh;
+    box-sizing: border-box;
+    padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px)
+        env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+    z-index: 450;
+    pointer-events: none;
+    color: var(--fs-text);
+    font: 13px/1.4 var(--fs-font-body);
+}
+#fjord-basics-tour[hidden], #fjord-basics-tour [hidden] { display: none; }
+#fjord-basics-chip, #fjord-basics-callout {
+    position: absolute;
+    box-sizing: border-box;
+    pointer-events: auto;
+    border: 1px solid var(--fs-accent);
+    border-radius: var(--fs-radius-card);
+    background: var(--fs-panel);
+    box-shadow: var(--fs-shadow-small);
+}
+#fjord-basics-chip { width: 210px; max-width: calc(100vw - 24px); padding: 8px 10px; min-height: 44px; }
+#fjord-basics-callout {
+    width: min(292px, calc(100vw - 24px));
+    max-height: calc(100dvh - 24px);
+    overflow: auto;
+    overscroll-behavior: contain;
+    padding: 8px 10px 10px;
+    touch-action: pan-y;
+}
+#fjord-basics-callout .basics-callout-heading { display: flex; justify-content: space-between; align-items: center; gap: 8px; color: var(--fs-muted); font-size: 12px; }
+#fjord-basics-callout h2 { font: 600 16px/1.25 var(--fs-font-body); margin: 2px 0 6px; }
+#fjord-basics-callout p { margin: 0 0 8px; }
+#fjord-basics-callout .basics-fallback-note { color: var(--fs-muted); font-size: 12px; }
+#fjord-basics-callout button { min-height: 44px; padding: 6px 10px; }
+#fjord-play #fjord-basics-tour button { min-width: 44px; min-height: 44px; }
+#fjord-basics-callout .basics-callout-heading button { border-color: transparent; background: transparent; color: var(--fs-muted); }
+.basics-actions { display: flex; gap: 6px; }
+.basics-actions button { flex: 1; }
+.basics-target-halo { position: absolute; box-sizing: border-box; border: 2px solid var(--fs-accent); border-radius: var(--fs-radius-control); box-shadow: 0 0 0 3px var(--fs-accent-halo); pointer-events: none; }
+.basics-target-arrow { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.basics-target-arrow > path { fill: none; stroke: var(--fs-accent); stroke-width: 1.5; }
+.basics-target-arrow marker path { fill: var(--fs-accent); }

@@ -2,13 +2,16 @@ import type { SharedSettlement } from '../play/SharedSettlement';
 import type { FoundingBookWindow } from '../lore/FoundingBookWindow';
 import { updateView } from '../gameplay-lab/updateView';
 import { isMobileLayout } from './MobileShell';
-import { acknowledgeOrientation, inspectFirstSteps, newFirstSteps, type FirstStepsInspection, type FirstStepsProgress } from './FirstStepsState';
+import { acknowledgeOrientation, inspectFirstSteps, newFirstSteps, replayOrientation, type FirstStepsInspection, type FirstStepsProgress } from './FirstStepsState';
 import { chapterCopy, foundingJourney, FoundingJourneyIndex } from './FoundingJourney';
 import type { JourneyGoal } from './FoundingJourney';
 import { journeyChapters, journeyObjectives, orientationObjectives, newJourney, type JourneyChapter, type JourneyObjective, type OrientationObjective } from './JourneyProgress';
 import type { WorkDraft } from './WorkPlan';
 import { proposeWork, previewWork, workCandidates } from './WorkPlan';
+import { FirstStepsTour, type BasicsCallout } from './FirstStepsTour';
 import './first-steps.css';
+
+type GuideEntityKind = NonNullable<SharedSettlement['selection']>['kind'];
 
 interface FirstStepsHooks {
     persist(): void;
@@ -49,6 +52,17 @@ export class FirstStepsGuide {
     private revision = -1;
     private index = new FoundingJourneyIndex();
     private html = '';
+    private touring = false;
+    private tour: FirstStepsTour;
+    private tourPhase: 'entry' | 'card' | 'close' | 'result' = 'entry';
+    private tourEntityId?: string;
+    private tourEntityKind?: GuideEntityKind;
+    private tourSurface?: string;
+    private tourFinished = false;
+    private tourEpoch = -1;
+    private tourGeneration = 0;
+    private tourTimers = new Set<number>();
+    private tourSuspended = false;
 
     constructor(private owner: SharedSettlement, private hooks: FirstStepsHooks) {
         this.root.id = 'fjord-first-steps-card';
@@ -66,11 +80,15 @@ export class FirstStepsGuide {
         for (const type of ['pointerdown', 'pointerup', 'wheel'])
             this.root.addEventListener(type, event => event.stopPropagation(), { signal: this.abort.signal });
         document.querySelector('#fjord-play')!.append(this.root);
+        this.tour = new FirstStepsTour(document.querySelector<HTMLElement>('#fjord-play')!, this.tourAction, this.reanchorTour);
+        document.addEventListener('click', this.observeTourControl, { capture: true, signal: this.abort.signal });
+        document.addEventListener('keydown', this.observeTourControl, { capture: true, signal: this.abort.signal });
         document.querySelector('#fjord-first-steps')!.addEventListener('click', () => this.open(),
             { signal: this.abort.signal });
     }
 
     get blocksClock() { return this.held; }
+    get isPresenting() { return !this.root.hidden || !this.tour.root.hidden; }
     private get obscured() {
         return this.waitingForStory || document.querySelector<HTMLElement>('#clan-book-reader')?.hidden === false;
     }
@@ -118,18 +136,31 @@ export class FirstStepsGuide {
 
     /** Continue/import/context recovery preserve saved progress without automatic guidance. */
     restore() {
+        this.tourGeneration++;
+        for (const timer of this.tourTimers) window.clearTimeout(timer);
+        this.tourTimers.clear();
         this.releaseStory?.();
         this.releaseStory = undefined;
         this.held = false;
         this.hooks.clockChanged();
         this.waitingForStory = false;
         this.visible = false;
+        this.tourFinished = false;
+        this.tourSurface = undefined;
+        this.tourPhase = 'entry';
+        this.tourEntityId = undefined;
+        this.tourEntityKind = undefined;
+        this.touring = false;
+        this.tour.hide();
         this.index = new FoundingJourneyIndex();
         this.revision = -1;
         this.root.hidden = true;
     }
 
     open() {
+        this.tourGeneration++;
+        this.touring = false;
+        this.tour.hide();
         const menu = document.querySelector<HTMLDetailsElement>('#fjord-menu');
         if (menu) menu.open = false;
         if (this.waitingForStory) return;
@@ -161,7 +192,12 @@ export class FirstStepsGuide {
             if (this.owner.fjord.firstSteps) this.index.update(this.state);
             if (this.visible) this.render();
         }
-        this.root.hidden = !this.visible || this.obscured || suspended;
+        this.root.hidden = !this.visible || this.obscured || suspended || this.touring;
+        if (suspended !== this.tourSuspended) {
+            this.tourSuspended = suspended;
+            if (suspended) this.tour.hide();
+            else if (this.touring) this.renderTour();
+        }
     }
 
     private collapse() {
@@ -178,9 +214,15 @@ export class FirstStepsGuide {
         this.save({ ...this.progress, journey: this.journey,
             status: guided ? 'active' : 'skipped', collapsed: false });
         this.visible = guided;
+        this.tourEpoch = this.owner.session.personalHistoryEpoch;
+        this.tourGeneration++;
+        this.touring = guided && this.journey.chapter === 'orientation';
+        if (this.touring) this.save({ ...this.progress, collapsed: true, journey: { ...this.journey,
+            tour: { step: 'ui-camera', dismissed: false } } });
         this.hooks.pause();
         this.render();
-        if (guided) this.focusHeading();
+        if (this.touring) this.tour.focus();
+        else if (guided) this.focusHeading();
         else document.querySelector<HTMLElement>('#fjord-run')?.focus({ preventScroll: true });
     }
 
@@ -212,6 +254,25 @@ export class FirstStepsGuide {
             this.root.hidden = true;
             document.querySelector<HTMLElement>(isMobileLayout() ? '#fjord-mobile-menu' : '#fjord-first-steps')
                 ?.focus({ preventScroll: true });
+            return;
+        }
+        if (action === 'replay-basics' || action === 'resume-tour') {
+            if (action === 'replay-basics') this.save(replayOrientation(this.progress));
+            this.hooks.reveal();
+            this.visible = true;
+            this.touring = true;
+            this.tourEpoch = this.owner.session.personalHistoryEpoch;
+            this.tourGeneration++;
+            this.tourPhase = 'entry';
+            this.tourEntityId = undefined;
+            this.tourEntityKind = undefined;
+            this.tourSurface = undefined;
+            this.tourFinished = false;
+            const step = this.journey.tour?.step ?? orientationObjectives.find(id => !this.journey.orientation?.includes(id)) ?? 'ui-camera';
+            this.save({ ...this.progress, status: 'active', collapsed: true, journey: { ...this.journey,
+                chapter: 'orientation', tour: { step, dismissed: false } } });
+            this.render();
+            this.tour.focus();
             return;
         }
         if (action === 'replay' || action === 'resume') {
@@ -370,7 +431,7 @@ export class FirstStepsGuide {
                     button('chapter', ({ orientation: '0 · Basics', home: 'I · Home', discovery: 'II · Discovery', conflict: 'III · Conflict' })[id],
                         `data-view-key="chapter:${id}" data-chapter="${id}" aria-pressed="${id === chapter}"`)).join('')}</nav>
                     <p class="first-steps-muted">${esc(copy.title)} · ${done}/${chapterGoals.length} completed</p>
-                    ${chapter === 'orientation' ? '' : `<p>${esc(copy.why)}</p>`}`;
+                    ${chapter === 'orientation' ? `<div class="first-steps-actions">${button('resume-tour', 'Resume tour')}${button('replay-basics', 'Replay basics')}</div>` : `<p>${esc(copy.why)}</p>`}`;
                 if (orientationComplete) {
                     html += `<article aria-label="Basics complete" data-journey-status="completed">
                         <h3>Basics complete</h3>
@@ -418,12 +479,288 @@ export class FirstStepsGuide {
         html += `<span class="first-steps-screen-reader" role="status" data-view-key="first-steps-status">${esc(announcement)}</span>`;
         if (html !== this.html) { updateView(this.root, html); this.html = html; }
         if (chapter === 'orientation' && previousObjective !== goal.id) this.root.scrollTop = 0;
-        this.root.hidden = !this.visible || this.obscured;
+        this.root.hidden = !this.visible || this.obscured || this.touring;
+        if (this.touring) this.renderTour(view);
+        else this.tour.hide();
     }
 
+    /** Observe accepted native controls after their owners and default actions finish. */
+    private observeTourControl = (event: Event) => {
+        if (!this.touring || this.tourSuspended) return;
+        const target = event.target instanceof Element ? event.target : null;
+        if (!target || target.closest('[data-basics]')) return;
+        const escape = event.type === 'keydown' && (event as KeyboardEvent).key === 'Escape';
+        if (event.type === 'keydown' && !escape) return;
+        let surface: string | undefined;
+        if (target.closest('#fjord-menu > summary, #fjord-menu [data-menu-close]') ||
+            escape && target.closest('#fjord-menu')) surface = 'menu';
+        else if (target.closest('#fjord-map-toggle, [data-map-close]') ||
+            escape && target.closest('#fjord-island-map')) surface = 'map';
+        else if (target.closest('#fjord-book, #clan-book-close') ||
+            escape && target.closest('#clan-book-reader')) surface = 'book';
+        else if (target.closest('#fjord-attention, [data-ui="close-workspace"]') ||
+            escape && target.closest('#fjord-workspace')) surface = 'activity';
+        if (!surface) return;
+        const generation = this.tourGeneration, epoch = this.owner.session.personalHistoryEpoch;
+        const timer = window.setTimeout(() => {
+            this.tourTimers.delete(timer);
+            const canvas = document.querySelector<HTMLElement>('#fjord-canvas');
+            if (!this.touring || this.abort.signal.aborted || this.tourSuspended ||
+                generation !== this.tourGeneration || epoch !== this.owner.session.personalHistoryEpoch ||
+                canvas && canvas.dataset.ready !== 'true') return;
+            if (this.surfaceOpen(surface)) {
+                if (surface === 'map') this.navigated('home', 'map');
+                else this.navigated('interface-open', surface);
+            } else this.navigated('surface-closed', surface);
+            this.renderTour();
+        }, 0);
+        this.tourTimers.add(timer);
+    };
+
+    /** Accepted user actions; merely rendering a card never performs an exercise. */
+    navigated(kind: 'camera' | 'resident' | 'connection' | 'closed' | 'home' | 'time' | 'interface-open' | 'surface-closed', id?: string, entityKind?: GuideEntityKind) {
+        if (!this.touring || this.tourSuspended || this.progress.status !== 'active' ||
+            this.tourEpoch !== this.owner.session.personalHistoryEpoch) return;
+        const step = this.journey.tour?.step ?? 'ui-camera';
+        if (kind === 'camera' && step === 'ui-camera') {
+            this.save(acknowledgeOrientation(this.progress, 'ui-camera'));
+            this.tourStep('ui-resident');
+        } else if (kind === 'resident' && ['ui-resident', 'ui-connections'].includes(step) && id &&
+            this.owner.selection?.kind === 'persona' && this.owner.selection.id === id &&
+            document.querySelector('#entity-panel .fjord-relations')) {
+            this.tourEntityId = id;
+            this.tourEntityKind = 'persona';
+            this.tourPhase = 'card';
+            this.render();
+        } else if (kind === 'closed' && step === 'ui-resident' && id === this.tourEntityId &&
+            entityKind === this.tourEntityKind &&
+            this.journey.orientation?.includes('ui-resident')) {
+            this.tourStep('ui-connections');
+        } else if (kind === 'connection' && step === 'ui-connections' && id &&
+            this.owner.selection?.id === id && this.journey.orientation?.includes('ui-connections')) {
+            this.tourEntityId = id;
+            this.tourEntityKind = this.owner.selection.kind;
+            this.tourPhase = 'result';
+            this.render();
+        } else if (kind === 'closed' && step === 'ui-connections' &&
+            this.tourPhase === 'result' && id === this.tourEntityId && entityKind === this.tourEntityKind) {
+            this.tourStep('ui-home');
+        } else if (kind === 'home' && step === 'ui-home') {
+            if (id === 'map' && document.querySelector<HTMLDialogElement>('#fjord-island-map')?.open) {
+                this.inspected('home');
+                this.tourSurface = 'map';
+                this.tourPhase = 'result';
+                this.render();
+            } else if (id === 'focus') {
+                this.inspected('home');
+                this.tourStep('ui-time');
+            }
+        } else if (kind === 'time' && step === 'ui-time') {
+            this.inspected('time');
+            this.tourStep('ui-navigation');
+        } else if (kind === 'interface-open' && step === 'ui-navigation' && id && this.surfaceOpen(id)) {
+            this.inspected('interface');
+            this.tourSurface = id;
+            this.tourPhase = 'result';
+            this.render();
+        } else if (kind === 'surface-closed' && id === this.tourSurface && !this.surfaceOpen(id)) {
+            if (step === 'ui-home' && id === 'map') this.tourStep('ui-time');
+            else if (step === 'ui-navigation') { this.tourFinished = true; this.render(); }
+        }
+    }
+
+    private surfaceOpen(id?: string) {
+        if (id === 'map') return !!document.querySelector<HTMLDialogElement>('#fjord-island-map')?.open;
+        if (id === 'menu') return !!document.querySelector<HTMLDetailsElement>('#fjord-menu')?.open;
+        if (id === 'book') return document.querySelector<HTMLElement>('#clan-book-reader')?.hidden === false;
+        const workspace = document.querySelector<HTMLElement>('#fjord-workspace');
+        return id === 'activity' && workspace?.hidden === false && workspace.dataset.surface === 'attention';
+    }
+
+    private tourStep(step: OrientationObjective) {
+        this.tourFinished = false;
+        this.tourSurface = undefined;
+        this.tourPhase = 'entry';
+        this.tourEntityId = undefined;
+        this.tourEntityKind = undefined;
+        this.save({ ...this.progress, journey: { ...this.journey, tour: { step, dismissed: false } } });
+        this.render();
+    }
+
+    private reanchorTour = () => {
+        if (!this.touring || this.tourSuspended) return;
+        if (this.tourEpoch !== this.owner.session.personalHistoryEpoch) {
+            this.touring = false;
+            this.tour.hide();
+            return;
+        }
+        const management = document.querySelector<HTMLElement>('#fjord-management');
+        const selectedPersonLost = this.tourEntityKind === 'persona' && this.tourEntityId &&
+            this.projection().person?.id !== this.tourEntityId;
+        const cardLost = this.tourEntityId && (this.owner.selection?.id !== this.tourEntityId ||
+            this.owner.selection?.kind !== this.tourEntityKind ||
+            management?.hidden || selectedPersonLost);
+        if (cardLost || this.tourSurface && !this.surfaceOpen(this.tourSurface)) this.tourPhase = 'entry';
+        // Keep earned facts and action identity; disappearing UI is not a completed exercise.
+        this.renderTour();
+    };
+
+    private residentEntry(view = this.projection()) {
+        const workspace = document.querySelector<HTMLElement>('#fjord-workspace');
+        if (workspace && !workspace.hidden && workspace.dataset.surface === 'settlement') {
+            const id = view.person?.id;
+            const row = Array.from(workspace.querySelectorAll<HTMLElement>('.fjord-directory-list [data-kind="persona"]'))
+                .find(button => button.dataset.id === id);
+            return row ?? workspace.querySelector<HTMLElement>('[data-ui="directory"][data-kind="persona"]');
+        }
+        return document.querySelector<HTMLElement>('[data-stock="settlement"]');
+    }
+
+    private livestockEntry(view = this.projection()) {
+        const workspace = document.querySelector<HTMLElement>('#fjord-workspace');
+        if (workspace && !workspace.hidden && workspace.dataset.surface === 'settlement') {
+            const row = Array.from(workspace.querySelectorAll<HTMLElement>('.fjord-directory-list [data-kind="cattle"]'))
+                .find(button => button.dataset.id === view.orientationLivestock?.id);
+            return row ?? workspace.querySelector<HTMLElement>('[data-ui="directory"][data-kind="cattle"]');
+        }
+        return document.querySelector<HTMLElement>('[data-stock="livestock"]');
+    }
+
+    private renderTour(view = this.projection()) {
+        if (!this.touring || this.tourSuspended) return;
+        const step = this.journey.tour?.step ?? 'ui-camera';
+        const card = this.tourPhase === 'card';
+        const close = this.tourPhase === 'close';
+        const person = this.tourEntityId ? this.state.personas[this.tourEntityId] : undefined;
+        const model: BasicsCallout = {
+            step, phase: this.tourPhase, title: 'Select a resident',
+            text: 'Open Residents, then choose a real person from the list.',
+            done: this.journey.orientation?.length ?? 0, anchor: this.residentEntry(view),
+            back: step !== 'ui-camera',
+            fallbackAnchor: document.querySelector<HTMLElement>('[data-stock="settlement"]'),
+        };
+        const select = <T extends HTMLElement>(selector: string) => document.querySelector<T>(selector);
+        if (step === 'ui-camera') {
+            model.title = 'Drag to look around';
+            model.text = typeof matchMedia === 'function' && matchMedia('(pointer: coarse)').matches ?
+                'Drag to orbit · Pinch to zoom. Looking around does not order your residents.' :
+                'Left-drag to pan · Right-drag to rotate · Wheel to zoom.';
+            model.anchor = select('#fjord-canvas');
+            model.next = 'Got it';
+        } else if (step === 'ui-resident' && !view.person) {
+            model.title = 'No local resident is available';
+            model.text = 'Residents may be away or unavailable. Open Journey to choose another chapter, or return later.';
+        } else if (step === 'ui-resident' && (card || close)) {
+            model.title = card ? 'This is ' + (person?.name ?? 'a real resident') : 'Close the Character Card';
+            model.text = card ? (select('#entity-panel .fjord-card-heading p')?.textContent?.trim() ??
+                'The card shows their occupation and current context.') + ' Choose Next to find Close.' :
+                'Use this close control to return to the world.';
+            model.anchor = close ? select('#entity-panel [data-ui="close-card"]') :
+                select('#entity-panel .fjord-card-heading h2');
+            if (card) model.next = 'Next';
+        } else if (step === 'ui-connections') {
+            if (this.tourPhase === 'result') {
+                model.title = 'You followed a real connection';
+                model.text = 'This view belongs to the same community. Close it to return to the world.';
+                model.anchor = select('#entity-panel [data-ui="close-card"]');
+            } else if (card && select('#entity-panel .fjord-relations [data-kind="household"]')) {
+                model.title = 'Follow the household link';
+                model.text = 'A household is the group this person lives with. Choose its link; scroll this card if needed.';
+                model.fallbackAnchor = select('#entity-panel .fjord-card-heading h2');
+                model.anchor = select('#entity-panel .fjord-relations [data-kind="household"]');
+            } else if (!view.person && !view.orientationLivestock) {
+                model.title = 'No local connection is available';
+                model.text = 'No available resident or living animal can be inspected now. Open Journey to choose another chapter, or return later.';
+                model.anchor = select('[data-stock="settlement"]');
+            } else if (!view.person) {
+                model.title = 'Meet an animal in the settlement';
+                model.text = 'Open Livestock and choose a living animal. You can follow real records without a permanent house.';
+                model.anchor = this.livestockEntry(view);
+            } else {
+                model.title = 'Discover a connection';
+                model.text = 'Open Residents again, choose a person and follow their Household link.';
+            }
+        } else if (step === 'ui-home') {
+            model.title = 'Find your way home';
+            model.text = 'Open Map to see explored ground, or use View settlement. These controls never order an expedition.';
+            if (this.tourPhase === 'result') {
+                model.title = 'Return from the map';
+                model.text = 'Dark ground remains unexplored. Close the map to return to the world.';
+                model.anchor = select('#fjord-island-map [data-map-close]');
+            } else model.anchor = select('#fjord-map-toggle') ?? select('[data-stock="settlement"]');
+        } else if (step === 'ui-time') {
+            model.title = 'You control time';
+            model.text = 'Play advances the community; Pause stops it. Pacing changes year length. Choose Got it to keep time as it is.';
+            model.anchor = select('#fjord-run');
+            model.next = 'Got it';
+        } else if (step === 'ui-navigation') {
+            if (this.tourFinished) {
+                model.title = 'Basics complete';
+                model.text = 'You can look around, inspect people and control time. Continue when you choose.';
+                model.anchor = select('[data-stock="settlement"]');
+                model.next = 'Continue to Chapter I';
+                model.complete = true;
+            } else if (this.tourPhase === 'result') {
+                model.title = 'Find help, then return';
+                model.text = this.tourSurface === 'menu' ?
+                    'The Game menu holds settings and Help. Close it to return; Activity Center and Clan Book stay in navigation.' :
+                    'This existing panel keeps its own records and controls. Close it to return to the world.';
+                model.anchor = this.tourSurface === 'book' ? select('#clan-book-close') :
+                    this.tourSurface === 'activity' ? select('#fjord-workspace [data-ui="close-workspace"]') :
+                    select('#fjord-menu [data-menu-close]');
+            } else {
+                model.title = 'Open the Game menu';
+                model.text = 'Find settings and Help here. Activity Center and Clan Book have their own entries; you need not open them all.';
+                model.anchor = select('#fjord-menu > summary');
+            }
+        }
+        this.tour.show(model);
+    }
+
+    private tourAction = (action: string) => {
+        if (action === 'browse') { this.open(); return; }
+        if (action === 'show') {
+            this.tour.anchorElement?.scrollIntoView?.({ block: 'nearest', inline: 'nearest', behavior: 'auto' });
+            if (!this.tour.focusTarget()) this.tour.focus();
+            return;
+        }
+        if (action === 'back') {
+            const index = orientationObjectives.indexOf(this.journey.tour?.step ?? 'ui-camera');
+            this.tourStep(orientationObjectives[Math.max(0, index - 1)]);
+            this.tour.focus();
+            return;
+        }
+        if (action === 'next') {
+            if (this.tourFinished && orientationObjectives.every(id => this.journey.orientation?.includes(id))) {
+                this.touring = false;
+                this.save({ ...this.progress, collapsed: false, journey: { ...this.journey,
+                    chapter: 'home', selected: null, tour: { step: 'ui-navigation', dismissed: true } } });
+                this.render();
+                this.focusHeading();
+            } else if (this.journey.tour?.step === 'ui-time') {
+                this.save(acknowledgeOrientation(this.progress, 'ui-time'));
+                this.tourStep('ui-navigation');
+            } else if (this.journey.tour?.step === 'ui-camera') this.navigated('camera');
+            else if (this.tourPhase === 'card') { this.tourPhase = 'close'; this.render(); }
+            return;
+        }
+        if (action === 'skip') {
+            const restoredFocus = this.tour.focusTarget();
+            this.tourGeneration++;
+            this.touring = false;
+            this.save({ ...this.progress, collapsed: true, journey: { ...this.journey,
+                tour: { step: this.journey.tour?.step ?? 'ui-camera', dismissed: true } } });
+            this.render();
+            if (!restoredFocus) this.root.querySelector<HTMLButtonElement>('button')?.focus({ preventScroll: true });
+        }
+    };
+
     dispose() {
+        for (const timer of this.tourTimers) window.clearTimeout(timer);
+        this.tourTimers.clear();
         this.releaseStory?.();
         this.abort.abort();
+        this.tour.dispose();
         this.root.remove();
     }
 }

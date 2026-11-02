@@ -31,9 +31,11 @@ or guide choice simulates offline time or bypasses loading/lifecycle guards.
 
 New histories receive the invitation after the preserved founding story closes.
 Continue/import keep guidance closed; **Navigation menu → Need help?**
-reopens it manually. Collapse/Escape, Close journey, Resume and Replay guidance
-reuse the existing small card. Mobile navigation folds the card away, and normal
-selection/workspace/map controls retain their space.
+reopens the regular guide manually. Collapse/Escape, Close journey, Resume and
+Replay guidance retain their existing browsing behavior. Chapter 0 additionally
+offers **Resume tour** and **Replay basics**. Its tour uses one anchored callout
+and a progress chip while normal selection/workspace/map controls retain their
+space. All four chapters and longer copy remain in the regular guide.
 
 Every chapter is immediately selectable. One objective is recommended at a time,
 with authored purpose, real progress and **Show me**. Expand **Chapter objectives**
@@ -50,9 +52,11 @@ a declined raid never blocks another chapter or actual gameplay.
 | Skipped | The player deliberately skipped this objective |
 | Blocked right now | Current knowledge, supplies, people or another actual prerequisite is unavailable |
 
-Real completion takes precedence over a previous skip/defer. Replay resets UI
-observations/acknowledgments; it still credits real historical Core actions. There
-are no extra buildings, items, sightings or raids to repeat for a checkbox.
+Real completion takes precedence over a previous skip/defer. The existing
+Replay guidance action resets UI observations/acknowledgments and still credits
+real historical Core actions. **Replay basics** has the narrower Chapter 0 reset
+described below. There are no extra buildings, items, sightings or raids to repeat
+for a checkbox.
 
 ## Chapter 0 — UI Basics & Navigation
 
@@ -64,42 +68,73 @@ the invitation. A player can select Basics or explicitly replay guidance later.
 *Before you guide your people, learn how to explore their world. Look around,
 meet a resident, and find your way back whenever you need to.*
 
-The six short lessons are independent. One compact card shows the recommended
-lesson, its status, short instructions and actions. Basics does not repeat a
-read-only checklist beneath those instructions. The supporting chapter explanation
-and all six selectable lessons are inside **Chapter objectives**, which starts
-collapsed. Chapters I–III keep their existing checklists.
+After **Guide me**, the Journey collapses to a small progress chip and shows
+**one concise anchored callout at a time**, with **Step 1/6** through **Step 6/6**.
+A live arrow and subtle target halo point to the actual canvas edge, control or
+opened panel. The player uses the real control; accepted player actions move the
+callout through each lesson's substeps. Merely opening a Character Card through
+a programmatic navigation hook, or refreshing its projection, is not a tour
+action. **Show me** can focus or reveal an existing entry when the player is lost;
+it does not perform the highlighted exercise.
+
+**Back** returns to an earlier lesson without erasing earned facts. **Skip tour**
+dismisses the callout, **Resume tour** returns to its saved lesson, and
+**Replay basics** starts the six lessons again. **Got it/Next** is available where
+an explanation or safely unobservable interaction needs acknowledgment; it never
+stands in for a required resident close or connection action. The chip opens the
+regular guide, where all four chapters, the longer copy and **Chapter objectives**
+remain accessible without finishing the tour. Chapters I–III keep their existing
+checklists.
 
 The lessons are orientation, not gameplay goals:
 
 | Stable objective ID | Existing interaction and recognition |
 | --- | --- |
-| orientation / ui-camera | Explain actual input-specific controls. Mouse: left drag pans, right drag rotates, wheel zooms. Touch: drag orbits, pinch zooms, tap open ground centres. Got it acknowledges the explanation; no precise gesture is required or inferred. |
-| orientation / ui-resident | Open a real available resident's full Character Card and close it using Close or Escape. Peek/collapse, work tasks, switching cards and stale cards do not substitute. The real resident inspection also credits Chapter I's existing resident check. |
-| orientation / ui-connections | Follow the inspected resident's real household or a household's real resident link, or inspect a living individual animal. Use currently available local records. No permanent home is assumed and no record is invented. |
-| orientation / ui-home | Use the actual View settlement return or successfully open Map. These change only the view; hidden geography and rival coordinates stay hidden. |
+| orientation / ui-camera | Anchor a lightweight hint at the canvas edge. Mouse: left drag pans, right drag rotates, wheel zooms. Touch: drag orbits, pinch zooms, tap open ground centres. Advance on genuine supported camera input, or Got it when gesture recognition is unavailable. No exact camera pose is required. |
+| orientation / ui-resident | Point to a real selectable resident or the existing Settlement/Residents entry and list. After actual selection, move to the full Character Card's real name/occupation, then its Close control. Close or Escape completes the return to the world. Mobile peek/collapse, work tasks, switching cards and stale cards do not substitute. The real inspection also credits Chapter I's resident check. |
+| orientation / ui-connections | Point to an actual resident-to-household link, a household's real resident link or a valid local livestock/list fallback. Follow the resulting view and wait for its actual close before moving on. Handle missing houses and away/dead residents through available local records; no permanent home or invented link is assumed. |
+| orientation / ui-home | Point to actual Map or View settlement. A real View settlement action returns the camera; Map must actually open and then close before the tour continues. These change only the view; hidden geography and rival coordinates stay hidden. |
 | orientation / ui-time | Recognize an accepted deliberate Play/Pause control action, or choose Got it while remaining paused. Show me focuses the existing control; it never activates it, changes speed or advances a year. |
-| orientation / ui-navigation | Open an existing Settlement, Activity Center, Clan Book or Game menu surface, or acknowledge where they are. No need to open every panel; Help/Need help? reopens the same guide. |
+| orientation / ui-navigation | Point to an existing Game menu/Help, Activity Center or Clan Book entry, follow the actual opened panel and its close control, and finish after the real open/close pair. One existing surface is enough; opening every panel is not required. The regular guide retains its explicit acknowledgment fallback and Help/Need help? entry. |
 
-All existing chapter tabs remain open. Return later, Skip objective and Consider
-again retain their presentation-only semantics. Completed lessons can be selected
-again to review their copy and Show me destination. Finishing all six shows
+All four chapters remain available in the regular guide. Return later,
+Skip objective and Consider again retain their presentation-only semantics.
+Completed lessons can be selected again to review their copy and Show me
+destination. Finishing all six shows
 **Basics complete** and offers **Continue to Chapter I — A Home for Your People**.
 Only an explicit choice changes chapter; completion never starts time, grants a
 reward or adds a canonical event.
 
-On compact screens the guide folds away for competing surfaces. Character Cards
-and existing panels keep focus ownership; guide buttons do not pass movement or
-recording shortcuts to the world. Explicit acknowledgments return reading focus
-to the guide, while external observations never steal another panel's focus.
-Camera and menu help add no new scene renderer or per-frame world scan.
+The callout resolves stable live DOM references and re-anchors after scrolling,
+panel open/close, responsive layout changes and viewport resize. Placement stays
+within viewport/safe-area bounds, away from its target. A vanished or clipped
+target falls back to a visible entry or compact explanation. Mobile menu/drawer
+visibility and the existing Map dialog retain their normal owners.
 
-The optional journey.orientation array contains at most the six known objective
-IDs, without duplicates. It is version-1 UI metadata; old absent fields stay
-absent on read, and existing chapter, selection, skip/later and inspection facts
-are retained. New/restarted histories and Replay guidance select Chapter 0;
-restoring saved guidance does not change its chapter. Core, RNG, save events,
-economics and physical discovery are unchanged.
+Only the small chip and callout controls receive pointer input; the halo, arrow
+and surrounding layer are transparent to world clicks, touch and wheel gestures.
+There is no screen dimming, modal tour or gameplay input trap. Existing panels
+keep focus ownership, native Escape behavior and accessible control labels;
+callout buttons keep movement shortcuts out of the world. Live status announces
+the current step, and reduced-motion preferences remain respected. External
+observations do not steal another panel's focus. No scene renderer or per-frame
+world scan is added.
+
+The optional `journey.orientation` array contains at most the six known objective
+IDs, without duplicates. Optional `journey.tour` is a strict
+`{ step, dismissed }` object: `step` is one of those six IDs and `dismissed` is a
+boolean; extra keys and invalid values are rejected. Both are version-1
+presentation metadata. Old absent fields stay absent on read, preserving the
+saved chapter, selection, skip/later and inspection facts. Continue/import keep
+both guide and tour closed regardless of the saved cursor, and stay paused until
+explicit Play; reopening/resuming is a separate player choice.
+
+**Replay basics** clears only the six orientation observations/acknowledgments
+and their entries in `skipped`/`later`, selects Basics and resets the cursor to
+`ui-camera` with `dismissed: false`. Chapter I–III inspections/completion and
+skip/defer facts, retained ship/report facts, legacy watch/evidence, Core history,
+RNG, current time and playback choice remain intact. New/restarted histories
+still start a fresh per-history guide; ordinary restoration never resets it.
 
 ## Authored chapters and predicates
 
@@ -170,9 +205,10 @@ re-resolve the raid or create a second event feed.
 
 The optional per-history firstSteps envelope retains version 1 compatibility.
 Its bounded optional journey version 1 contains the selected chapter/objective,
-UI inspections, retained-ship acknowledgment, viewed report event ID, and at
-most the 20 stable skip/defer IDs across all four chapters (six Basics IDs and
-14 existing IDs). No chapter authority is added to Core.
+UI inspections, retained-ship acknowledgment, viewed report event ID, optional
+orientation facts and the optional bounded tour cursor. At most the 20 stable
+skip/defer IDs span all four chapters (six Basics IDs and 14 existing IDs).
+No chapter authority is added to Core.
 
 A small in-memory index reconstructs facts once on history restore, then consumes
 only appended events on session revisions. It retains a bounded set of evidence
@@ -193,11 +229,22 @@ its UI observations are retained when manually opening the chapter layer.
 
 ## Acceptance
 
-See the [original chapter QA](../qa/founding-journey-270/report.md) and the
-[Chapter 0 implementation/browser QA](../qa/onboarding-ui-basics-325/report.md). Automated checks do
-not prove novice understanding or physical phone layout. Owner review of authored
-copy, desktop/phone visual checks and a small uncoached playtest remain required
-before merge/release. A hunt or raid need not finish during that test.
+The [original chapter QA](../qa/founding-journey-270/report.md) and earlier
+[Chapter 0 implementation/browser QA](../qa/onboarding-ui-basics-325/report.md)
+remain historical records of their original implementations. The owner review on
+[PR #326](https://github.com/sidesliders1983/Pillagers/pull/326) identified the
+earlier card/checklist presentation as a blocking contextual-tour UX gap. Its
+passing automated results do not establish acceptance of this anchored revision.
+New technical and annotated visual evidence must be recorded separately against
+the revised source.
+
+That evidence must show at least three real target-to-target transitions,
+action-driven progression, touch hit targets, resize/reflow, close/replay,
+paused entry and saved/imported progress on desktop and 844×390 landscape.
+Chrome touch emulation does not establish physical iPhone acceptance. Owner
+visual approval and a small uncoached playtest remain open before merge/release;
+automated checks do not prove novice understanding. A hunt or raid need not
+finish during that test.
 
 Ask the player, without coaching:
 1. What do you control, and what happens autonomously?
@@ -205,3 +252,5 @@ Ask the player, without coaching:
 3. What do exploration and Recon tell you, and what remains unknown?
 4. Who would you equip/send, or why would you postpone conflict?
 5. What actual next action would you choose independently?
+
+The [anchored-tour revision QA](../qa/onboarding-ui-basics-325/anchored-tour/report.md) records source-specific technical and browser evidence for the PR #326 owner review; owner visual approval and the uncoached test remain separate gates.

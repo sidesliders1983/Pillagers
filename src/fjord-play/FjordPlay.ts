@@ -329,6 +329,14 @@ export class FjordPlay {
         let sceneLoads = 1; // Initial assets and models must finish before active time can advance.
         const ownsClock = () => !document.hidden && !this.stopped && !this.shared.transferring && !pageSuspended && !contextLost;
         const canAdvance = () => !entry.diagnosticRun && ownsClock() && sceneLoads === 0 && !this.loading && !firstSteps?.blocksClock;
+        // A valid selection starts ordinary scene synchronization before its UI callback.
+        // That pending visual work fences the clock, not accepted actions in this ready world.
+        const canObserveJourney = () => !entry.diagnosticRun && ownsClock() &&
+            !this.loading && this.persistenceReady && canvas.dataset.ready === 'true';
+        const journeyNavigated = (kind: Parameters<FirstStepsGuide['navigated']>[0], id?: string,
+            entityKind?: Parameters<FirstStepsGuide['navigated']>[2]) => {
+            if (canObserveJourney()) firstSteps?.navigated(kind, id, entityKind);
+        };
         const playback = new CampaignPlayback(running => this.session.setRunning(running), canAdvance);
         const initialHandoff = playback.pendingHandoff(this.opened.autoStart);
         const setPlayback = (running: boolean) => {
@@ -416,7 +424,7 @@ export class FjordPlay {
                 !document.querySelector<HTMLElement>('#fjord-management')!.hidden ||
                 !document.querySelector<HTMLElement>('#clan-book-reader')!.hidden ||
                 document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open ||
-                Boolean(firstSteps && !firstSteps.root.hidden) || Boolean(this.foundingBook?.root.isConnected) ||
+                Boolean(firstSteps?.isPresenting) || Boolean(this.foundingBook?.root.isConnected) ||
                 Boolean(document.querySelector('dialog[open], #fjord-context-recovery')));
             if (!workspace.hidden && workspace.dataset.surface === 'attention') {
                 attentionView.render();
@@ -456,7 +464,7 @@ export class FjordPlay {
             updateManagementAvailability(panel, this.shared);
             merchantPanel?.refresh();
             miningPanel?.refresh();
-            firstSteps?.update(Boolean(this.loading) || !document.querySelector<HTMLElement>('#clan-book-reader')!.hidden);
+            firstSteps?.update(Boolean(this.loading));
             highlight();
             const selected = this.campaign.selection;
             document.querySelector('#fjord-selected')!.textContent = selected ?
@@ -479,6 +487,7 @@ export class FjordPlay {
             if (!playback.canToggle(this.session.running)) return;
             setPlayback(!this.session.running);
             firstSteps?.inspected('time');
+            journeyNavigated('time');
             action(() => {});
         });
         document.querySelector('#fjord-next')!.addEventListener('click', () => action(() => {
@@ -764,8 +773,13 @@ export class FjordPlay {
             }, () => this.session.personalHistoryEpoch));
         desktopUI = new FjordInterface(this.shared, { select, refresh, notify: say,
             inspected: (kind, id) => firstSteps?.inspected(kind, id),
+            navigated: (kind, id, entityKind) => journeyNavigated(kind, id, entityKind),
             renderPortrait: input => presentation?.portrait(input) ?? Promise.resolve(undefined),
-            home: () => { controller.home(); firstSteps?.inspected('home'); },
+            home: () => {
+                controller.home();
+                firstSteps?.inspected('home');
+                journeyNavigated('home', 'focus');
+            },
             trade: () => { desktopUI?.close(false); merchantPanel?.open(); },
             report: id => {
                 if (!this.campaign.attentionSource(id)) return;
@@ -778,8 +792,10 @@ export class FjordPlay {
             this.shared, { commit: commitManagement, changed: () => { persist(); refresh(); } }));
         const openJourneyBook = () => {
             bookReader.open();
-            if (document.querySelector<HTMLElement>('#clan-book-reader')?.hidden === false)
+            if (document.querySelector<HTMLElement>('#clan-book-reader')?.hidden === false) {
                 firstSteps?.inspected('interface');
+                journeyNavigated('interface-open', 'book');
+            }
         };
         const orientationMenu = document.querySelector<HTMLDetailsElement>('#fjord-menu')!;
         firstSteps = this.ownStartup(new FirstStepsGuide(this.shared, {
@@ -827,11 +843,16 @@ export class FjordPlay {
             const button = (event.target as Element).closest<HTMLButtonElement>('#fjord-view-home, #fjord-map-toggle');
             if (!button || button.disabled) return;
             const epoch = this.session.personalHistoryEpoch;
+            const world = this.campaign.blueprint;
             queueMicrotask(() => {
-                if (this.stopped || this.loading || epoch !== this.session.personalHistoryEpoch ||
-                    canvas.dataset.ready !== 'true') return;
-                if (button.id === 'fjord-view-home' || button.getAttribute('aria-expanded') === 'true')
+                if (!canObserveJourney() || epoch !== this.session.personalHistoryEpoch ||
+                    world !== this.campaign.blueprint || !button.isConnected) return;
+                const mapOpen = button.id === 'fjord-map-toggle' && button.getAttribute('aria-expanded') === 'true' &&
+                    document.querySelector<HTMLDialogElement>('#fjord-island-map')?.open;
+                if (button.id === 'fjord-view-home' || mapOpen) {
                     firstSteps?.inspected('home');
+                    journeyNavigated('home', mapOpen ? 'map' : 'focus');
+                }
             });
         }, { signal: lifecycleEvents.signal });
         document.querySelector('[data-menu-guide]')!.addEventListener('click', () => {
@@ -914,6 +935,10 @@ export class FjordPlay {
             } });
         this.startupCleanup.push(() => presentation?.dispose());
         const { camera, renderer, controller } = presentation;
+        const releaseJourneyCamera = controller.onNavigationIntent(intent => {
+            if (['drag', 'wheel', 'touch', 'keyboard'].includes(intent)) journeyNavigated('camera');
+        });
+        this.startupCleanup.push(releaseJourneyCamera);
         syncScene = () => presentation!.sync();
         presentation.root.add(islandMarkers.root);
         expeditions = new ExpeditionPanel(document.querySelector<HTMLElement>('#expedition-panel')!,
@@ -967,6 +992,7 @@ export class FjordPlay {
             this.loading?.cancel();
             this.loading?.finish();
             this.stopped = true;
+            releaseJourneyCamera();
             desktopUI?.dispose();
             firstSteps?.dispose();
             expeditions?.dispose();
@@ -1119,7 +1145,15 @@ export class FjordPlay {
                 // Preserve the existing touch tap-on-empty-ground navigation.
                 return pointerType === 'mouse';
             }
+            const epoch = this.session.personalHistoryEpoch;
+            const world = this.campaign.blueprint;
             select(selected.kind, selected.id);
+            const actual = this.shared.selection;
+            const state = this.session.readSnapshot();
+            if (selected.kind === 'persona' && actual?.kind === 'persona' && actual.id === selected.id &&
+                epoch === this.session.personalHistoryEpoch && world === this.campaign.blueprint &&
+                state.personas[selected.id]?.deathWinter === null && !personaAway(state, selected.id))
+                journeyNavigated('resident', selected.id);
             return true;
         });
         let destinationPointer: { x: number; y: number } | undefined;

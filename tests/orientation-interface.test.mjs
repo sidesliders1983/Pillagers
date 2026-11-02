@@ -11,7 +11,7 @@ const { newJourney } = loadDOMSource('../src/fjord-play/JourneyProgress.ts');
 const { fjordHeaderHTML } = loadDOMSource('../src/fjord-play/FjordHeader.ts');
 const { fjordNavigationHTML } = loadDOMSource('../src/fjord-play/FjordNavigation.ts');
 
-function fixture(mobile = false) {
+function fixture(mobile = false, callbacks = {}) {
     const dom = new JSDOM(`<main id="fjord-play">${fjordHeaderHTML()}
         <section id="fjord-management" hidden><div id="entity-panel"></div></section>
         <section id="fjord-workspace" hidden tabindex="-1"><h2 id="fjord-workspace-title"></h2>
@@ -30,6 +30,7 @@ function fixture(mobile = false) {
     const owner = new SharedSettlement(newFjordScenario(32));
     owner.fjord.firstSteps = { ...newFirstSteps(), journey: newJourney(), status: 'active' };
     const canonical = owner.session.saveJSON();
+    const navigation = { residentId: null, connectionId: null, closedId: null };
     let ui;
     const refresh = () => ui.refresh(owner.session.readSnapshot(), owner.selection, '', () => '');
     const select = (kind, id) => { owner.select(kind ? { kind, id } : null); refresh(); };
@@ -38,6 +39,13 @@ function fixture(mobile = false) {
         commit() { assert.fail('Orientation cannot issue a gameplay command'); },
         inspected(kind, id) {
             owner.fjord.firstSteps = inspectFirstSteps(owner.fjord.firstSteps, owner.session.readSnapshot(), kind, id);
+            callbacks.inspected?.(kind, id, owner, ui);
+        },
+        navigated(kind, id, entityKind) {
+            if (kind === 'resident') navigation.residentId = id;
+            if (kind === 'connection') navigation.connectionId = id;
+            if (kind === 'closed') navigation.closedId = id;
+            callbacks.navigated?.(kind, id, owner, ui, entityKind);
         },
     });
     document.querySelector('#entity-panel').addEventListener('click', event => {
@@ -51,7 +59,7 @@ function fixture(mobile = false) {
     refresh();
 
     return {
-        owner, ui, dom, opener, refresh, select, canonical,
+        owner, ui, dom, opener, refresh, select, canonical, navigation,
         completed: id => owner.fjord.firstSteps.journey.orientation?.includes(id) ?? false,
         close() { document.querySelector('#entity-panel [data-ui="close-card"]').click(); },
         escape() { document.activeElement.dispatchEvent(new dom.window.KeyboardEvent('keydown', { key: 'Escape', bubbles: true })); },
@@ -169,6 +177,7 @@ test('peek, collapse, card switching and workspaces never substitute for closing
         document.querySelector('[data-ui="occupation"]').click();
         f.close();
         assert.equal(f.completed('ui-resident'), false, 'Closing a work task does not close the full Character Card');
+        assert.deepEqual(f.navigation, { residentId: null, connectionId: null, closedId: null });
         assert.equal(f.owner.session.saveJSON(), f.canonical);
     } finally {
         f.dispose();
@@ -183,6 +192,7 @@ test('a stale card cannot complete meeting a different selected resident', () =>
         f.owner.select({ kind: 'persona', id: 'founder-2' });
         f.close();
         assert.equal(f.completed('ui-resident'), false);
+        assert.equal(f.navigation.closedId, null);
         assert.equal(f.owner.session.saveJSON(), f.canonical);
     } finally {
         f.dispose();
@@ -196,6 +206,7 @@ test('a card from before campaign restoration cannot complete meeting a resident
         f.owner.session.loadJSON(f.canonical);
         f.close();
         assert.equal(f.completed('ui-resident'), false);
+        assert.equal(f.navigation.closedId, null);
         assert.equal(f.owner.session.saveJSON(), f.canonical);
     } finally {
         f.dispose();
@@ -237,5 +248,237 @@ test('closing a Character Card uses a visible world control when its opener has 
         } finally {
             f.dispose();
         }
+    }
+});
+
+test('actual resident-list selection reports navigation while programmatic presentation does not', () => {
+    for (const mobile of [false, true]) {
+        const f = fixture(mobile);
+        try {
+            f.ui.showResident('founder-1');
+            f.ui.showEntity('persona', 'founder-2', true);
+            f.refresh();
+            f.ui.open('settlement', true);
+            assert.deepEqual(f.navigation, { residentId: null, connectionId: null, closedId: null });
+
+            document.querySelector('#fjord-directory [data-ui="inspect"][data-kind="persona"][data-id="founder-1"]').click();
+
+            assert.equal(f.navigation.residentId, 'founder-1');
+            assert.deepEqual(f.owner.selection, { kind: 'persona', id: 'founder-1' });
+            assert.equal(document.querySelector('#fjord-workspace').hidden, true);
+            assert.equal(document.querySelector('#fjord-management').hidden, false);
+            assert.ok(document.querySelector('#entity-panel .fjord-relations'));
+            assert.equal(f.navigation.connectionId, null);
+            assert.equal(f.owner.session.saveJSON(), f.canonical);
+        } finally {
+            f.dispose();
+        }
+    }
+});
+
+test('expanding an actual mobile resident peek reports the resulting full Character Card', () => {
+    const f = fixture(true);
+    try {
+        f.select('persona', 'founder-1');
+        assert.equal(f.navigation.residentId, null);
+        assert.equal(document.querySelector('#entity-panel .fjord-relations'), null);
+
+        document.querySelector('#entity-panel [data-ui="expand-card"]').click();
+
+        assert.equal(f.navigation.residentId, 'founder-1');
+        assert.deepEqual(f.owner.selection, { kind: 'persona', id: 'founder-1' });
+        assert.ok(document.querySelector('#entity-panel .fjord-relations'));
+        assert.equal(f.owner.session.saveJSON(), f.canonical);
+    } finally {
+        f.dispose();
+    }
+});
+
+test('following a real resident household link reports the selected local connection', () => {
+    for (const mobile of [false, true]) {
+        const f = fixture(mobile);
+        try {
+            f.ui.showResident('founder-1');
+            const link = document.querySelector('#entity-panel .fjord-relations [data-kind="household"]');
+            const householdId = link.dataset.id;
+            assert.equal(f.navigation.connectionId, null);
+
+            link.click();
+
+            assert.equal(f.navigation.connectionId, householdId);
+            assert.deepEqual(f.owner.selection, { kind: 'household', id: householdId });
+            assert.ok(document.querySelector('#entity-panel .fjord-home-residents'));
+            assert.equal(f.owner.session.saveJSON(), f.canonical);
+        } finally {
+            f.dispose();
+        }
+    }
+});
+
+test('a real household member link reports both the person and their actual connection', () => {
+    const f = fixture(true);
+    try {
+        const home = Object.values(f.owner.session.readSnapshot().households)
+            .find(item => item.memberIds.includes('founder-1'));
+        f.ui.showEntity('household', home.id);
+        assert.deepEqual(f.navigation, { residentId: null, connectionId: null, closedId: null });
+
+        document.querySelector('#entity-panel .fjord-home-residents [data-kind="persona"][data-id="founder-1"]').click();
+
+        assert.equal(f.navigation.residentId, 'founder-1');
+        assert.equal(f.navigation.connectionId, 'founder-1');
+        assert.deepEqual(f.owner.selection, { kind: 'persona', id: 'founder-1' });
+        assert.ok(document.querySelector('#entity-panel .fjord-relations'));
+        assert.equal(f.owner.session.saveJSON(), f.canonical);
+    } finally {
+        f.dispose();
+    }
+});
+
+test('actual full Character Card close reports the cleared live selection', () => {
+    for (const mobile of [false, true]) {
+        const f = fixture(mobile);
+        try {
+            f.ui.showResident('founder-1');
+            assert.equal(f.navigation.closedId, null);
+
+            f.close();
+
+            assert.equal(f.navigation.closedId, 'founder-1');
+            assert.equal(f.owner.selection, null);
+            assert.equal(document.querySelector('#fjord-management').hidden, true);
+            assert.equal(f.owner.session.saveJSON(), f.canonical);
+        } finally {
+            f.dispose();
+        }
+    }
+});
+
+test('a navigation callback opening another resident cannot credit the previous household connection', () => {
+    const f = fixture(true, {
+        navigated(kind, _id, _owner, ui) {
+            if (kind === 'resident') ui.showResident('founder-2');
+        },
+    });
+    try {
+        const home = Object.values(f.owner.session.readSnapshot().households)
+            .find(item => item.memberIds.includes('founder-1'));
+        f.ui.showEntity('household', home.id);
+        document.querySelector('#entity-panel .fjord-home-residents [data-id="founder-1"]').click();
+        assert.equal(f.navigation.residentId, 'founder-1');
+        assert.equal(f.navigation.connectionId, null);
+        assert.deepEqual(f.owner.selection, { kind: 'persona', id: 'founder-2' });
+        assert.equal(f.owner.session.saveJSON(), f.canonical);
+    } finally {
+        f.dispose();
+    }
+});
+
+test('a history restoration during real selection cannot credit an action from the earlier history', () => {
+    let restored = false;
+    const f = fixture(false, {
+        inspected(kind, id, owner, ui) {
+            if (kind !== 'resident' || restored) return;
+            restored = true;
+            owner.session.loadJSON(owner.session.saveJSON());
+            ui.showResident(id);
+        },
+    });
+    try {
+        f.ui.open('settlement', true);
+        document.querySelector('#fjord-directory [data-ui="inspect"][data-kind="persona"][data-id="founder-1"]').click();
+        assert.deepEqual(f.owner.selection, { kind: 'persona', id: 'founder-1' });
+        assert.equal(f.navigation.residentId, null);
+        assert.equal(f.owner.session.saveJSON(), f.canonical);
+    } finally {
+        f.dispose();
+    }
+});
+
+test('a real local livestock-list link and its close report only that selected connection', () => {
+    const f = fixture(true);
+    try {
+        const animal = Object.values(f.owner.session.readSnapshot().landing.cattle)
+            .find(item => item.deathWinter === null);
+        document.querySelector('[data-stock="livestock"]').click();
+        assert.deepEqual(f.navigation, { residentId: null, connectionId: null, closedId: null });
+
+        document.querySelector(`#fjord-directory [data-ui="inspect"][data-kind="cattle"][data-id="${animal.id}"]`).click();
+
+        assert.equal(f.navigation.connectionId, animal.id);
+        assert.equal(f.navigation.residentId, null);
+        assert.deepEqual(f.owner.selection, { kind: 'cattle', id: animal.id });
+        assert.equal(document.querySelector('#fjord-management').hidden, false);
+        f.close();
+        assert.equal(f.navigation.closedId, animal.id);
+        assert.equal(f.owner.selection, null);
+        assert.equal(f.owner.session.saveJSON(), f.canonical);
+    } finally {
+        f.dispose();
+    }
+});
+
+test('a close notification may open another card without its heading losing focus', () => {
+    const f = fixture(true, {
+        navigated(kind, _id, _owner, ui) {
+            if (kind === 'closed') ui.showResident('founder-2');
+        },
+    });
+    try {
+        f.ui.showResident('founder-1');
+        f.close();
+        assert.equal(f.navigation.closedId, 'founder-1');
+        assert.deepEqual(f.owner.selection, { kind: 'persona', id: 'founder-2' });
+        assert.equal(document.activeElement, document.querySelector('#entity-panel h2'));
+        assert.equal(f.owner.session.saveJSON(), f.canonical);
+    } finally {
+        f.dispose();
+    }
+});
+
+test('a close notification restoring history keeps focus chosen for the replacement view', () => {
+    const f = fixture(false, {
+        navigated(kind, _id, owner) {
+            if (kind !== 'closed') return;
+            owner.session.loadJSON(owner.session.saveJSON());
+            document.querySelector('#fjord-run').focus();
+        },
+    });
+    try {
+        f.opener.focus();
+        f.opener.click();
+        f.close();
+        assert.equal(f.navigation.closedId, 'founder-1');
+        assert.equal(f.owner.selection, null);
+        assert.equal(document.activeElement, document.querySelector('#fjord-run'));
+        assert.equal(f.owner.session.saveJSON(), f.canonical);
+    } finally {
+        f.dispose();
+    }
+});
+
+test('closing real resident and household cards with the same ID identifies the actual closed view', () => {
+    let closedView;
+    const f = fixture(true, {
+        navigated(kind, id, _owner, _ui, entityKind) {
+            if (kind === 'closed') closedView = { id, entityKind };
+        },
+    });
+    try {
+        const home = Object.values(f.owner.session.readSnapshot().households)[0];
+        assert.ok(f.owner.session.readSnapshot().personas[home.id]);
+        f.ui.showResident(home.id);
+        assert.ok(document.querySelector('#entity-panel .fjord-relations'));
+        f.close();
+        assert.deepEqual(closedView, { id: home.id, entityKind: 'persona' });
+
+        f.ui.showEntity('household', home.id);
+        assert.ok(document.querySelector('#entity-panel .fjord-home-residents'));
+        f.close();
+        assert.deepEqual(closedView, { id: home.id, entityKind: 'household' });
+        assert.equal(f.owner.selection, null);
+        assert.equal(f.owner.session.saveJSON(), f.canonical);
+    } finally {
+        f.dispose();
     }
 });

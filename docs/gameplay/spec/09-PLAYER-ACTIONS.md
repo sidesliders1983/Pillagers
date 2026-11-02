@@ -85,19 +85,43 @@ preparation for conflict. Every chapter is freely accessible. Real homes, upgrad
 equipment and optional Pillage outcomes count, including actions done out of order.
 Show me navigates/reviews existing UI; it never issues Core commands or supplies
 resources. Skip, defer and replay are per-history presentation metadata.
-Chapter 0 accepts real inspections/navigation or explicit acknowledgments; it
-never creates residents, reveals unknown locations or advances time. Its six
-lessons remain independently available and existing v1 chapter choices survive.
-Its compact card shows one lesson with short instructions and actions; the
-selectable lesson list is inside **Chapter objectives**. The read-only objective
-checklists remain in Chapters I–III; Basics does not repeat them.
+After **Guide me**, Chapter 0 collapses the Journey into a progress chip and one
+concise callout anchored beside a real control/panel, with a live arrow, subtle
+target halo and **Step 1/6** through **Step 6/6**. Actual player actions move the
+callout through camera gestures or Got it; resident selection, name/occupation
+and close; real household or livestock connections and result close; Map open/close
+or View settlement; Play/Pause or Got it; and one existing navigation panel's
+open/close. It never
+creates residents, reveals unknown locations or advances time on the player's
+behalf. Programmatic card opening and refresh do not count as tour actions;
+Show me focuses or reveals an existing entry.
+
+Stable live DOM references follow panel changes, scrolling and responsive reflow
+within viewport/safe-area bounds. Missing/clipped targets use a visible-entry or
+informative fallback. The halo/arrow/layer pass scene clicks, touch and wheel
+through; there is no modal tour, screen dimming or gameplay input trap.
+**Back**, **Skip tour**, **Resume tour** and **Replay basics** are optional. Longer
+copy, all four chapters and selectable objectives remain in the regular guide;
+the read-only objective checklists remain in Chapters I–III.
+
+Replay basics resets only the six orientation facts, their skip/defer IDs and
+the tour cursor; Chapter I–III facts, legacy watch/evidence and campaign time
+and playback choice are retained. Existing v1 saves remain readable. Optional
+`journey.tour` accepts only `{ step, dismissed }`, with a known Basics step and
+boolean dismissal flag; old absence remains absent on read.
 
 Ordinary Fjord campaign entries, including new/restarted campaigns, stay paused
 until an actual Play click. Both **Guide me** and **Explore on my own** leave
-time paused; Continue/import and recovery do the same.
+time paused; Continue/import and recovery do the same. Continue/import retain
+their saved chapter, facts and cursor but keep both guide and tour closed until
+the player chooses to reopen/resume them.
 
 See [The Founding Journey v0.1](../FOUNDING-JOURNEY-V01.md) for the current
 predicates, knowledge limits, paused-entry exception and QA contract.
+The earlier Chapter 0 technical report remains historical: the owner identified
+its missing anchored interaction as a blocking UX gap on PR #326. Revised
+technical/visual QA is separate; owner visual approval and an uncoached playtest
+remain open.
 
 
 Visiting merchants are enabled by default for new Fjord campaigns (owner approval,

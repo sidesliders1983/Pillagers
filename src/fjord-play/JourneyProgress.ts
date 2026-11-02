@@ -27,6 +27,7 @@ export interface JourneyProgress {
     skipped: JourneyObjective[];
     later: JourneyObjective[];
     orientation?: OrientationObjective[];
+    tour?: { step: OrientationObjective; dismissed: boolean };
 }
 
 export function newJourney(chapter: JourneyChapter = 'home'): JourneyProgress {
@@ -54,7 +55,10 @@ export function readJourney(value: unknown): JourneyProgress | undefined {
         data.orientation !== undefined && (!Array.isArray(data.orientation) ||
             data.orientation.length > orientationObjectives.length ||
             new Set(data.orientation).size !== data.orientation.length ||
-            !data.orientation.every(id => orientationObjectives.includes(id))))
+            !data.orientation.every(id => orientationObjectives.includes(id))) ||
+        data.tour !== undefined && (!data.tour || typeof data.tour !== 'object' || Array.isArray(data.tour) ||
+            Object.keys(data.tour).sort().join(',') !== 'dismissed,step' ||
+            !orientationObjectives.includes(data.tour.step) || typeof data.tour.dismissed !== 'boolean'))
         throw new Error('Invalid saved Founding Journey.');
     return {
         version: 1, chapter: data.chapter, selected: data.selected,
@@ -63,5 +67,6 @@ export function readJourney(value: unknown): JourneyProgress | undefined {
         keptShipId: data.keptShipId, resultEventId: data.resultEventId,
         skipped: [...data.skipped], later: [...data.later],
         ...(data.orientation !== undefined ? { orientation: [...data.orientation] } : {}),
+        ...(data.tour !== undefined ? { tour: { step: data.tour.step, dismissed: data.tour.dismissed } } : {}),
     };
 }

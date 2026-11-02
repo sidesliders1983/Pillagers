@@ -41,6 +41,7 @@ function fixture(mobile = false, owner = new SharedSettlement(newFjordScenario(3
     const ui = new FjordInterface(owner, {
         select, refresh, notify() {}, renderPortrait: async () => undefined,
         inspected: (kind, id) => guide?.inspected(kind, id),
+        navigated: (kind, id, entityKind) => guide?.navigated(kind, id, entityKind),
         commit(commands, done) { owner.session.commandBatch(typeof commands === 'function' ? commands() : commands); done(); refresh(); },
     });
     document.querySelector('#entity-panel').addEventListener('click', event => {
@@ -287,7 +288,7 @@ test('home upgrades and Smithery help use existing full panels and do not execut
 test('keyboard collapse, unique keyed chapter buttons and unchanged revisions preserve focus without repeated saves', () => {
     const f = fixture();
     try {
-        f.guide.newStart(); f.click('guide');
+        f.guide.newStart(); f.click('guide'); f.guide.open();
         const target = f.guide.root.querySelector('[data-guide="show"]');
         target.focus();
         const writes = f.writes(), canonical = f.owner.session.saveJSON();
@@ -332,6 +333,7 @@ test('Guide me opens freely selectable Chapter 0 before the existing chapters wi
         f.click('guide');
         assert.equal(f.guide.root.dataset.chapter, 'orientation');
         assert.equal(f.guide.root.dataset.objective, 'ui-camera');
+        document.querySelector('#fjord-basics-chip').click();
         assert.deepEqual([...f.guide.root.querySelectorAll('[data-guide="chapter"]')]
             .map(button => button.dataset.chapter), ['orientation', 'home', 'discovery', 'conflict']);
         assert.match(f.guide.root.textContent, /left[- ]drag (?:pans|to pan)/i);
@@ -345,7 +347,7 @@ test('camera and clock acknowledgments advance only the optional guidance on mou
         const f = fixture(mobile);
         try {
             const canonical = f.owner.session.saveJSON();
-            f.guide.newStart(); f.click('guide');
+            f.guide.newStart(); f.click('guide'); f.guide.open();
             assert.match(f.guide.root.textContent, mobile ? /drag (?:to orbit|rotates)/i : /left[- ]drag.*pan/i);
             f.click('acknowledge');
             assert.equal(f.guide.root.dataset.objective, 'ui-resident');
@@ -408,7 +410,7 @@ test('completed Basics offers an explicit Chapter I transition and preserves ear
 test('guide keyboard controls keep their keys out of world navigation while preserving Escape', () => {
     const f = fixture();
     try {
-        f.guide.newStart(); f.click('guide');
+        f.guide.newStart(); f.click('guide'); f.guide.open();
         const reachedWorld = [];
         window.addEventListener('keydown', event => reachedWorld.push(event.key));
         const control = f.guide.root.querySelector('[data-guide="acknowledge"]');
@@ -464,5 +466,219 @@ test('acknowledging the selected final lesson shows completion and retains keybo
         assert.match(f.guide.root.textContent, /Basics complete/);
         assert.equal(owner.session.saveJSON(),canonical);
         assert.equal(owner.session.running,false);
+    } finally { f.dispose(); }
+});
+
+
+test('Guide me uses a single non-modal callout and a compact chip instead of the long chapter card', () => {
+    const f = fixture();
+    try {
+        const canonical = f.owner.session.saveJSON();
+        f.guide.newStart(); f.click('guide');
+        const callout = document.querySelector('#fjord-basics-callout');
+        assert.ok(callout, 'Guidance appears next to the actual control instead of in the long card');
+        assert.equal(callout.hidden, false);
+        assert.match(callout.textContent, /Step 1[/]6/);
+        assert.equal(callout.getAttribute('aria-modal'), null);
+        assert.ok(document.querySelector('#fjord-basics-chip'));
+        assert.equal(f.guide.root.hidden, true, 'The full chapter browser stays out of the guided exercise');
+        assert.ok(callout.querySelector('[data-basics="skip"]'));
+        assert.ok(callout.querySelector('[data-basics="next"]'));
+        assert.equal(f.owner.session.running, false);
+        assert.equal(f.owner.session.saveJSON(), canonical);
+    } finally { f.dispose(); }
+});
+
+
+test('the anchored resident exercise follows actual selection and closing, never programmatic card opening', () => {
+    const f = fixture();
+    try {
+        const canonical = f.owner.session.saveJSON();
+        f.guide.newStart(); f.click('guide');
+        f.guide.navigated('camera');
+        const callout = document.querySelector('#fjord-basics-callout');
+        assert.equal(callout.dataset.step, 'ui-resident');
+        const person = Object.values(f.owner.session.readSnapshot().personas)[0];
+        f.ui.showResident(person.id);
+        assert.match(callout.textContent, /Select a resident/);
+        assert.equal(callout.dataset.phase, 'entry', 'Programmatic Show me is not a selection exercise');
+        f.ui.open('settlement', true);
+        document.querySelector('.fjord-directory-list [data-kind="persona"]').click();
+        assert.equal(callout.dataset.phase, 'card');
+        assert.match(callout.textContent, /This is/);
+        callout.querySelector('[data-basics="next"]').click();
+        assert.equal(callout.dataset.phase, 'close');
+        document.querySelector('#entity-panel [data-ui="close-card"]').click();
+        assert.equal(callout.dataset.step, 'ui-connections');
+        assert.ok(f.owner.fjord.firstSteps.journey.orientation.includes('ui-resident'));
+        assert.equal(f.owner.session.running, false);
+        assert.equal(f.owner.session.saveJSON(), canonical);
+    } finally { f.dispose(); }
+});
+
+
+test('the connection callout follows a real household link and waits for the resulting card to close', () => {
+    const f = fixture();
+    try {
+        const canonical = f.owner.session.saveJSON();
+        f.guide.newStart(); f.click('guide'); f.guide.navigated('camera');
+        f.ui.open('settlement', true);
+        document.querySelector('.fjord-directory-list [data-kind="persona"]').click();
+        document.querySelector('#entity-panel [data-ui="close-card"]').click();
+        f.ui.open('settlement', true);
+        document.querySelector('.fjord-directory-list [data-kind="persona"]').click();
+        const callout = document.querySelector('#fjord-basics-callout');
+        assert.equal(callout.dataset.step, 'ui-connections');
+        assert.match(callout.textContent, /Follow the household link/);
+        document.querySelector('#entity-panel .fjord-relations [data-kind="household"]').click();
+        assert.equal(callout.dataset.phase, 'result');
+        assert.equal(callout.dataset.step, 'ui-connections', 'Opening the resulting view does not skip learning how to return');
+        assert.ok(f.owner.fjord.firstSteps.journey.orientation.includes('ui-connections'));
+        document.querySelector('#entity-panel [data-ui="close-card"]').click();
+        assert.equal(callout.dataset.step, 'ui-home');
+        assert.equal(f.owner.session.saveJSON(), canonical);
+    } finally { f.dispose(); }
+});
+
+
+test('tour Back, Skip, Resume and Replay basics preserve earned facts and the existing chapters and clock', () => {
+    const f = fixture();
+    try {
+        const canonical = f.owner.session.saveJSON();
+        f.guide.newStart(); f.click('guide');
+        const callout = document.querySelector('#fjord-basics-callout');
+        callout.querySelector('[data-basics="next"]').click();
+        assert.equal(callout.dataset.step, 'ui-resident');
+        callout.querySelector('[data-basics="back"]').click();
+        assert.equal(callout.dataset.step, 'ui-camera');
+        assert.deepEqual(f.owner.fjord.firstSteps.journey.orientation, ['ui-camera']);
+        callout.querySelector('[data-basics="next"]').click();
+        callout.querySelector('[data-basics="skip"]').click();
+        assert.equal(document.querySelector('#fjord-basics-tour').hidden, true);
+        assert.equal(f.owner.fjord.firstSteps.journey.tour.dismissed, true);
+        f.guide.open(); f.click('resume-tour');
+        assert.equal(callout.dataset.step, 'ui-resident');
+        callout.querySelector('[data-basics="skip"]').click();
+        f.owner.fjord.firstSteps.journey.later = ['wildlife-species'];
+        f.owner.fjord.firstSteps.journey.skipped = ['upgrade-home'];
+        f.owner.fjord.firstSteps.journey.smitherySeen = true;
+        f.owner.session.setRunning(true);
+        f.guide.open(); f.click('replay-basics');
+        assert.equal(callout.dataset.step, 'ui-camera');
+        assert.deepEqual(f.owner.fjord.firstSteps.journey.orientation, []);
+        assert.deepEqual(f.owner.fjord.firstSteps.journey.later, ['wildlife-species']);
+        assert.deepEqual(f.owner.fjord.firstSteps.journey.skipped, ['upgrade-home']);
+        assert.equal(f.owner.fjord.firstSteps.journey.smitherySeen, true);
+        assert.equal(f.owner.session.running, true, 'Replaying only Basics does not take ownership of time');
+        assert.equal(f.owner.session.saveJSON(), canonical);
+    } finally { f.dispose(); }
+});
+
+
+test('home, time acknowledgment and actual navigation open/close finish the tour without running or switching chapters', () => {
+    const owner = new SharedSettlement(newFjordScenario(32));
+    const { newFirstSteps } = loadDOMSource('../src/fjord-play/FirstStepsState.ts');
+    const { newJourney } = loadDOMSource('../src/fjord-play/JourneyProgress.ts');
+    owner.fjord.firstSteps = { ...newFirstSteps(), status: 'active', journey: {
+        ...newJourney('orientation'), orientation: ['ui-camera', 'ui-resident', 'ui-connections'],
+        tour: { step: 'ui-home', dismissed: true },
+    } };
+    const f = fixture(false, owner);
+    try {
+        const canonical = owner.session.saveJSON();
+        f.guide.restore(); f.guide.open(); f.click('resume-tour');
+        const callout = document.querySelector('#fjord-basics-callout');
+        f.guide.navigated('home', 'focus');
+        assert.equal(callout.dataset.step, 'ui-time');
+        callout.querySelector('[data-basics="next"]').click();
+        assert.equal(callout.dataset.step, 'ui-navigation');
+        assert.equal(owner.session.running, false);
+        const menu = document.querySelector('#fjord-menu');
+        menu.open = true; f.guide.navigated('interface-open', 'menu');
+        assert.equal(callout.dataset.phase, 'result');
+        assert.equal(callout.dataset.complete, 'false');
+        menu.open = false; f.guide.navigated('surface-closed', 'menu');
+        assert.equal(callout.dataset.complete, 'true');
+        assert.match(callout.textContent, /Basics complete/);
+        assert.equal(owner.fjord.firstSteps.journey.chapter, 'orientation');
+        assert.equal(owner.fjord.firstSteps.journey.orientation.length, 6);
+        assert.equal(owner.session.saveJSON(), canonical);
+        callout.querySelector('[data-basics="next"]').click();
+        assert.equal(owner.fjord.firstSteps.journey.chapter, 'home');
+        assert.equal(owner.session.running, false);
+        assert.equal(owner.session.saveJSON(), canonical);
+    } finally { f.dispose(); }
+});
+
+
+test('the navigation callout follows native menu actions and ignores programmatic opening', async () => {
+    const owner = new SharedSettlement(newFjordScenario(32));
+    const { newFirstSteps } = loadDOMSource('../src/fjord-play/FirstStepsState.ts');
+    const { newJourney } = loadDOMSource('../src/fjord-play/JourneyProgress.ts');
+    owner.fjord.firstSteps = { ...newFirstSteps(), status: 'active', journey: {
+        ...newJourney('orientation'), orientation: ['ui-camera', 'ui-resident', 'ui-connections', 'ui-home', 'ui-time'],
+        tour: { step: 'ui-navigation', dismissed: true },
+    } };
+    const f = fixture(false, owner);
+    try {
+        f.guide.restore(); f.guide.open(); f.click('resume-tour');
+        const menu = document.querySelector('#fjord-menu');
+        const callout = document.querySelector('#fjord-basics-callout');
+        const settle = () => new Promise(resolve => f.dom.window.setTimeout(resolve, 10));
+        menu.open = true; await settle();
+        assert.equal(callout.dataset.phase, 'entry', 'A rendered/programmatically opened surface is not a user exercise');
+        menu.open = false;
+        menu.querySelector(':scope > summary').click(); await settle();
+        assert.equal(callout.dataset.phase, 'result');
+        menu.querySelector(':scope > summary').click(); await settle();
+        assert.equal(callout.dataset.complete, 'true');
+        assert.equal(owner.session.running, false);
+    } finally { f.dispose(); }
+});
+
+
+test('callout keyboard actions keep world shortcuts out and retain focus when Next disappears', () => {
+    const f = fixture();
+    try {
+        f.guide.newStart(); f.click('guide');
+        const callout = document.querySelector('#fjord-basics-callout');
+        const next = callout.querySelector('[data-basics="next"]');
+        const leaked = [];
+        window.addEventListener('keydown', event => leaked.push(event.key));
+        next.focus();
+        next.dispatchEvent(new f.dom.window.KeyboardEvent('keydown', { key: 'w', bubbles: true }));
+        assert.deepEqual(leaked, []);
+        next.click();
+        assert.notEqual(document.activeElement, document.body, 'Removing Next must not drop keyboard focus into the world');
+        assert.equal(callout.dataset.step, 'ui-resident');
+        const skip = callout.querySelector('[data-basics="skip"]');
+        skip.focus();
+        skip.dispatchEvent(new f.dom.window.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+        assert.equal(document.querySelector('#fjord-basics-tour').hidden, true);
+        assert.deepEqual(leaked, []);
+        assert.equal(f.owner.session.running, false);
+    } finally { f.dispose(); }
+});
+
+
+test('a household sharing another person identifier remains the connection target after reflow', async () => {
+    const f = fixture();
+    try {
+        const state = f.owner.session.readSnapshot();
+        const home = Object.values(state.households).find(home => home.memberIds.length > 1);
+        const member = home.memberIds.find(id => id !== home.id);
+        assert.ok(member, 'Use the real retained founding couple');
+        f.guide.newStart(); f.click('guide'); f.guide.navigated('camera');
+        f.ui.open('settlement', true);
+        document.querySelector('.fjord-directory-list [data-kind="persona"][data-id="' + member + '"]').click();
+        document.querySelector('#entity-panel [data-ui="close-card"]').click();
+        f.ui.open('settlement', true);
+        document.querySelector('.fjord-directory-list [data-kind="persona"][data-id="' + member + '"]').click();
+        document.querySelector('#entity-panel .fjord-relations [data-kind="household"]').click();
+        await new Promise(resolve => f.dom.window.setTimeout(resolve, 50));
+        const callout = document.querySelector('#fjord-basics-callout');
+        assert.equal(callout.dataset.phase, 'result', 'Entity kind, not an overlapping ID, determines the live target');
+        document.querySelector('#entity-panel [data-ui="close-card"]').click();
+        assert.equal(callout.dataset.step, 'ui-home');
     } finally { f.dispose(); }
 });

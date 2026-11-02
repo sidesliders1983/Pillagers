@@ -2,7 +2,7 @@ import { inspectBuilding, inspectWork, personaAway } from '../simulation/Simulat
 import type { SimulationCommand, SimulationState } from '../simulation/SimulationCore';
 import { commandAvailability } from '../play/SharedSettlement';
 import { previewWork, proposeWork, workCandidates } from './WorkPlan';
-import { newJourney, readJourney, type JourneyProgress, type OrientationObjective } from './JourneyProgress';
+import { newJourney, readJourney, orientationObjectives, type JourneyProgress, type OrientationObjective } from './JourneyProgress';
 
 export interface FirstStepsProgress {
     version: 1;
@@ -72,6 +72,17 @@ export function acknowledgeOrientation(progress: FirstStepsProgress, objective: 
     const acknowledgments: readonly OrientationObjective[] = ['ui-camera', 'ui-time', 'ui-navigation'];
     if (progress.status !== 'active' || !acknowledgments.includes(objective)) return progress;
     return recordOrientation(progress, objective);
+}
+
+/** Replay only Basics; later chapter observations and historical evidence remain earned. */
+export function replayOrientation(progress: FirstStepsProgress): FirstStepsProgress {
+    const journey = progress.journey ?? newJourney();
+    const basics = new Set<string>(orientationObjectives);
+    return { ...progress, status: 'active', collapsed: true, journey: { ...journey,
+        chapter: 'orientation', selected: null, orientation: [],
+        skipped: journey.skipped.filter(id => !basics.has(id)),
+        later: journey.later.filter(id => !basics.has(id)),
+        tour: { step: 'ui-camera', dismissed: false } } };
 }
 
 function available(state: SimulationState, id: string) {
