@@ -1,82 +1,105 @@
-# Optional Basics orientation — prototype decision record
+# Anchored Basics tour — prototype revision after owner feedback
 
-This is a throwaway flow prototype for #325, created before production UI changes.
-Open `orientation-flow.PROTOTYPE.html` directly in a browser; it has no dependencies,
-server, network requests or persistence. Branch: `codex/prototype-ui-basics-325`.
-Base: `01dc5f79c9b8ee4024c0fbed338af4778a5f4c97` (`origin/main` when created).
+Open `orientation-flow.PROTOTYPE.html` directly. This remains one self-contained,
+throwaway HTML file with in-memory state and no dependencies or server. Its base
+is `01dc5f79c9b8ee4024c0fbed338af4778a5f4c97`; the earlier card-based prototype is
+preserved at commit `9a4dfa5` on branch `codex/prototype-ui-basics-325`.
 
-Question: can six optional Basics steps ahead of Chapters I–III retain clear progress
-when a player explores out of order, returns later, skips, revisits or finishes?
+## Question and owner feedback delta
 
-## Journey map
+Can one anchored callout guide genuine target-to-target actions across six optional
+Basics objectives without taking control of game time, chapter choice or input?
 
-These are design hypotheses, not observed player research.
+The owner's blocking PR #326 review on 2026-11-02 says the prior persistent Journey
+card is a help checklist rather than the requested interactive guided tour. The
+revision therefore explores a compact progress chip, one concise floating callout,
+an arrow and a pointer-transparent target halo. It deliberately keeps a single
+requested flow rather than proposing competing layouts. No production code is
+included here and this prototype is not owner approval.
 
-| Moment | Player's likely aim | Friction to avoid | Prototype response |
-| --- | --- | --- | --- |
-| Arrive | Understand the world without losing control | Time advancing during unfamiliar guidance | Fresh campaign starts paused; guidance never changes time |
-| Look around | Learn the mouse or touch controls | A gesture challenge before exploring | Accurate device instructions and an explicit Got it |
-| Meet residents | Open a person, understand how to return | A card that feels like a dead end | Open and close the mock existing resident card |
-| Understand connections | Find the household and settlement context | An invented second navigation system | Follow the mock existing household → Settlement link |
-| Get home | Recover after roaming | Guessing how to restore the camera | Explicit Return home action |
-| Manage pace | Learn the time controls safely | Being required to press Play | Got it is sufficient; Play remains a separate choice |
-| Continue or leave | Choose the next activity | A forced chapter change or lost progress | Return later, Skip Basics, revisit and explicit Continue to Chapter I |
+## Journey map: hypotheses changed by the review
 
-## Empathy map
-
-All statements below are hypotheses to check with players, not quotations.
-
-| Lens | Fresh player | Returning player |
+| Moment | Previous hypothesis | Revised design hypothesis |
 | --- | --- | --- |
-| Thinks | How do I move, select someone and get back? | Can I keep playing my current chapter? |
-| Feels | Curious, with limited confidence about unfamiliar controls | Confident about some systems, uncertain about newer ones |
-| Does | Explores, opens a resident and follows a connection out of order | Skips familiar guidance, returns only when useful |
-| Needs | One clear next objective, visible progress and a safe return path | Preserved chapter/time state and revisitable guidance |
+| Begin | A small Journey card is enough context | The chip should leave the world visible and the first callout should point beside the canvas |
+| Move | Reading controls is sufficient | A reliable genuine gesture should move the hint; Got it remains a deliberate fallback |
+| Select a person | Show me can open the right surface | Highlight Settlement, then an actual resident row; the player opens the card |
+| Understand the card | Instructions can stay in the guide | Move the callout to name/occupation, then to the real Close control |
+| Follow connections | Mention existing links | Point to the actual household link and move to its resulting record |
+| Recover position | Explain home navigation | Point to Map, then View settlement, observing the explicit return |
+| Set pace | Explain time without starting it | Attach to Play/Pause; Got it must allow continuing while paused |
+| Navigate | List panel names | Point to the actual menu entry, then its Close control |
+| Leave or revisit | Preserve objective facts | Back moves only the cursor; Skip preserves progress; Replay resets tour observations and preserves time/chapter |
 
-## Model decisions
+## Empathy map: hypotheses, not player quotations
 
-- Four freely selectable chapter tabs: 0 Basics, I Home, II Discovery, III Conflict.
-  Selecting a chapter opens no game panel and changes neither time nor progress.
-- One objective card recommends the first unfinished Basics step. Completed steps
-  remain individually revisitable through the progress list.
-- Only camera, time and interface guidance use Got it. Acknowledging controls does
-  not pretend the player performed a gesture or pressed Play.
-- Meet your people completes only after the resident mock card is opened and closed.
-  Closing another surface or closing with none open cannot award it.
-- Discover connections completes on the mock existing household → Settlement link.
-  Find your way home completes on the explicit Return home action.
-- Each objective tracks its own progress. Relevant actions count out of order.
-- Return later hides the card and retains completed steps. Skip Basics records Skipped
-  without marking unfinished steps complete. Both remain revisitable.
-- Finishing Basics changes no chapter, panel or time state. Continue to Chapter I is
-  an explicit action; all chapter tabs remain available before completion too.
-- A fresh scenario begins paused; an existing campaign begins in Chapter II with
-  time playing. Basics preserves either state.
-- Theme values are an inline snapshot of `src/ui/fjord-theme.css` at the base commit,
-  allowing a single shareable file while keeping the established palette/card roles.
+| Lens | Hypothesis informed by owner feedback | Response explored here |
+| --- | --- | --- |
+| Thinks | Where exactly is the thing I should use? | One live element ref, outline and arrow |
+| Feels | A persistent text card competes with the world | One compact chip and concise callout; no dimmer |
+| Does | Tries the highlighted control before finishing the text | Keep the actual target clickable; external evidence moves the hint without focus theft |
+| Needs | Control of pace and a clear exit | Back, Skip tour, Replay basics, safe acknowledgment and every chapter available |
+| Encounters change | A resident or anchor can disappear | Visible-entry fallback, truthful missing-person copy and no invented completion |
 
-## Walkthrough evidence and verdict
+## Flow and presentation decisions
 
-Evidence is an agent replay of the HTML's included walkthrough actions through its
-pure reducer, plus source inspection. It is **not a human playtest**, a visual browser
-review or proof of production integration. CUA browser access reported
-`Local browser use is disabled in Work settings`. No prototype tests were added.
+- Six objective labels remain unchanged. Substeps are presentation state, not new
+  gameplay objectives: canvas → Settlement → resident row → Character Card details
+  → Close → actual household link → resulting view → Map → View settlement → time
+  → Game menu → Close.
+- The mock controls emit the same actions used by the walkthrough buttons. The
+  callout never triggers an action on the player's behalf. Camera gestures are
+  simulated pointer/wheel events; no production camera signal is claimed.
+- Camera and time support Got it because safe observation must not require a
+  precise gesture or running time. Reading the resident details uses Next; closing
+  the card still requires the actual Close control or Escape.
+- A completed household/animal navigation shows its resulting view before Next.
+  The final menu lesson requires opening and closing its actual mock surface.
+- A missing resident is left incomplete. The next connection lesson can use an
+  actual mock local animal record. No person, house or link is fabricated.
+- All ordinary fresh and existing-campaign scenarios begin paused. This supersedes
+  the earlier prototype's legacy-playing fixture to match the current paused-entry
+  contract. Only the explicit mock Play/Pause control changes time.
+- Continue to Chapter I is explicit. Selecting any chapter closes the tour and
+  preserves its facts. Replay may run while Chapter III remains selected.
+- The shell holds stable live DOM refs. It recalculates placement from current
+  bounds after render, resize and captured scroll. Candidates avoid the target,
+  HUD, navigation rail, open panel and chip; safe-area padding bounds the result.
+  The diagnostics report actual target overlap for browser inspection.
+- Arrow and halo layers use `pointer-events: none`. Only the small callout itself
+  accepts input. There is no full-screen overlay, dimmer, keyboard trap or animation.
+- A hidden/disappeared anchor falls back to the visible Settlement entry, or to
+  the chip if that entry is unavailable. The fallback explains that the target
+  disappeared and does not award progress.
+- Escape closes an open mock panel; otherwise it tucks away the tour. Explicit
+  tour-navigation buttons move reading focus to the new heading. External actions
+  do not move focus into the tour. Live status reports the current instruction.
+- The stage fills the viewport and includes a 44px control minimum. 844 × 390
+  landscape is an intended inspection size, not a certified physical-device result.
+  The shared Fjord theme remains inlined for standalone sharing.
 
-| Walkthrough | Observed result |
+## Evidence and provisional verdict
+
+Evidence collected here: both inline scripts parsed successfully, the included
+walkthrough actions were replayed against the pure reducer, source was reviewed,
+and Git whitespace checks were used. No prototype tests were added. Local CUA
+browser access is disabled in Work settings; no browser geometry, target-click,
+visual accessibility or physical-device acceptance is claimed by this record.
+The parent task owns the real browser/production checks and owner review.
+
+| Included walkthrough | Observed reducer result |
 | --- | --- |
-| Fresh start | The six steps reach 6/6 while Chapter 0 remains selected and time remains paused. Only Continue changes to I Home. |
-| Existing campaign | Choosing Basics is explicit. Return later preserves 1/6; Chapter II remains selectable; revisiting retains the completed camera step. Playing time remains playing. |
-| Out of order | Connection and home count first. Closing no resident card adds no progress. Opening and closing a resident brings progress to 3/6. Camera movement alone adds nothing; Got it makes 4/6. |
-| Skip and revisit | Skip at 1/6 records Skipped. Chapter III can be selected. Revisit keeps 1/6; another completion gives 2/6; Return later and revisit preserve both. |
-| Premature Continue | At 0/6, Continue leaves Chapter 0 and progress unchanged, with an explanation that chapter tabs remain available. |
+| Fresh target-to-target | Six completions; anchor intents traverse canvas, Settlement, resident row, details, Close, household link/result, Map/home, time and menu/Close. Only explicit Continue selects Chapter I. Time stays paused. |
+| Skip, Back and replay | Back retains completed facts; Skip closes the tour; Replay clears tour observations. The final replay leaves Chapter III selected and time paused. |
+| Missing target | Hiding the current resident target awards no completion; restoring it permits selection and moves the anchor intent to card details. DOM fallback/geometry still needs browser inspection. |
+| No resident / legacy | Chapter II and paused state remain. Missing resident stays incomplete; the existing mock animal link completes connections. Progress is 2/6 and the cursor advances to home. |
 
-Provisional verdict: the state model can support the optional six-step orientation
-without imposing action order or taking control of time/chapter navigation. Keep
-progress separate from whether the guide is visible or skipped. Implement these
-state decisions behind existing game surfaces, then verify real event wiring and
-responsive presentation in production. Whether the guidance actually improves
-first-session confidence still requires player feedback.
+Provisional verdict: the flow model can express the owner's requested action-driven
+substeps while preserving optional chapters and explicit time control. The earlier
+persistent-card verdict did not establish the desired UX. This revision supplies
+an inspectable anchored alternative; target collision, real event wiring, mobile
+fit, uncoached comprehension and owner visual approval remain open.
 
-No formatter is configured in the inspected root/package files. Source formatting
-was checked manually, and Git whitespace checks were used. No production files,
-gameplay rules or balance values changed.
+Only the prototype HTML and this record changed. No production files, tests,
+canonical rules or balances changed. No formatter is configured for this standalone
+prototype; formatting was reviewed manually.
