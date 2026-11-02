@@ -29,7 +29,12 @@ or guide choice simulates offline time or bypasses loading/lifecycle guards.
 
 ## Optional journey
 
-New histories receive the invitation after the preserved founding story closes.
+New histories receive the **Guide me / Explore on my own** invitation directly
+after the island camera arrival. Preparation retains its progress, cancellation
+and optional founding reader; the camera arrival removes that temporary reader,
+progress and return-to-menu controls so the island stays visible. Only **Skip
+camera arrival** remains at the bottom. The opening is still available in Clan
+Book. The invitation does not require closing another story window.
 Continue/import keep guidance closed; **Navigation menu → Need help?**
 reopens the regular guide manually. Collapse/Escape, Close journey, Resume and
 Replay guidance retain their existing browsing behavior. Chapter 0 additionally

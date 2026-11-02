@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { JSDOM } from 'jsdom';
+import { PerspectiveCamera } from 'three';
 import { loadDOMSource } from './load-dom-source.mjs';
 
 async function withLoading(run) {
@@ -173,5 +174,39 @@ test('a finished child stage restores its parent and new landings omit redundant
                 assert.equal(loading.diagnostics.substage, 'initial-settlement-models');
             });
         });
+    });
+});
+
+test('arrival closes the loading story before guidance and moves focus off hidden loading controls', async () => {
+    await withLoading(async loading => {
+        const { FoundingBookWindow } = loadDOMSource('../src/lore/FoundingBookWindow.ts');
+        const { RTSCameraController } = loadDOMSource('../src/camera/RTSCameraController.ts');
+        const story = new FoundingBookWindow({ title: 'The founding', text: 'Our retained founding chapter.' });
+        loading.configure(story);
+        const camera = new PerspectiveCamera(45, 1, .1, 1000);
+        const controller = new RTSCameraController(camera, document.createElement('canvas'));
+        const previousMatchMedia = globalThis.matchMedia;
+        globalThis.matchMedia = () => ({ matches: true });
+        try {
+            const arrival = loading.arrive(controller, {
+                config: { width: 100, depth: 100 },
+                terrain: { bounds: { minX: 0, maxX: 100, minZ: 0, maxZ: 100 }, heights: [0] },
+            }, { position: [50, 40, 75], target: [50, 0, 50] }, () => 0);
+            assert.equal(story.isOpen, false, 'The next invitation cannot wait for a hidden story');
+            assert.equal(document.querySelector('#loading-clan-book'), null);
+            assert.equal(document.activeElement, loading.root);
+            await arrival;
+            story.release();
+            assert.equal(document.querySelector('#loading-clan-book'), null, 'Handoff cannot reopen the story');
+            assert.equal(camera.far, 1000);
+            assert.equal(document.querySelector('#previous').inert, true, 'Keep input fenced until handoff');
+            loading.finish();
+            assert.equal(Boolean(document.querySelector('#previous').inert), false);
+        } finally {
+            story.dispose();
+            controller.dispose();
+            if (previousMatchMedia === undefined) delete globalThis.matchMedia;
+            else globalThis.matchMedia = previousMatchMedia;
+        }
     });
 });

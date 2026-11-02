@@ -7,20 +7,23 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 // Native-browser acceptance evidence, separate from the historical card-based runner.
-// Run each size independently: node scripts/qa/check-anchored-basics.mjs desktop|touch
+// Run each size independently: node scripts/qa/check-anchored-basics.mjs desktop|touch|portrait [--arrival-only]
 const require = createRequire(import.meta.url);
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE ||
     'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const sharp = require(process.env.SHARP_MODULE || 'sharp');
 const variant = process.argv[2] || 'desktop';
-assert.ok(['desktop', 'touch'].includes(variant), 'Use desktop or touch as the run argument.');
-const mobile = variant === 'touch';
-const viewport = mobile ? { width: 844, height: 390 } : { width: 1440, height: 900 };
+const arrivalOnly = process.argv.includes('--arrival-only');
+assert.ok(['desktop', 'touch', 'portrait'].includes(variant), 'Use desktop, touch or portrait as the run argument.');
+assert.ok(variant !== 'portrait' || arrivalOnly, 'Portrait is a focused arrival review; add --arrival-only.');
+const mobile = variant !== 'desktop';
+const viewport = variant === 'portrait' ? { width: 390, height: 844 } :
+    mobile ? { width: 844, height: 390 } : { width: 1440, height: 900 };
 const repositoryRoot = fileURLToPath(new URL('../../', import.meta.url));
 const origin = (process.env.QA_ORIGIN || 'http://127.0.0.1:5195').replace(/\/$/, '');
 const stamp = new Date().toISOString().replace(/[^0-9]/g, '');
 const output = path.resolve(process.env.QA_OUTPUT || path.join(repositoryRoot,
-    'scratch/onboarding-ui-basics-325', `anchored-browser-${variant}-${stamp}-${process.pid}`));
+    'scratch/onboarding-ui-basics-325', `${arrivalOnly ? 'arrival' : 'anchored'}-browser-${variant}-${stamp}-${process.pid}`));
 const git = process.env.QA_GIT || (process.platform === 'win32'
     ? 'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/git/cmd/git.exe'
     : 'git');
@@ -29,7 +32,8 @@ const sourcePaths = [
     'src/fjord-play/FirstStepsState.ts', 'src/fjord-play/JourneyProgress.ts',
     'src/fjord-play/FoundingJourney.ts', 'src/fjord-play/FjordInterface.ts',
     'src/fjord-play/FjordPlay.ts', 'src/fjord-play/FjordHeader.ts',
-    'src/fjord-play/CampaignPlayback.ts', 'src/fjord-play/first-steps.css',
+    'src/fjord-play/CampaignPlayback.ts', 'src/fjord-play/IslandLoading.ts',
+    'src/lore/FoundingBookWindow.ts', 'src/fjord-play/island-loading.css', 'src/fjord-play/first-steps.css',
     'src/fjord-play/first-steps-tour.css', 'scripts/qa/check-anchored-basics.mjs',
 ];
 const hash = value => createHash('sha256').update(value).digest('hex');
@@ -46,7 +50,7 @@ process.env.TEMP = temporaryDirectory;
 process.env.TMP = temporaryDirectory;
 process.env.TMPDIR = temporaryDirectory;
 const report = {
-    schemaVersion: 1, variant, viewport, origin, startedUtc: new Date().toISOString(),
+    schemaVersion: 1, variant, viewport, scope: arrivalOnly ? 'arrival-handoff' : 'anchored-tour', origin, startedUtc: new Date().toISOString(),
     initialGitRevision: gitRead(['rev-parse', 'HEAD']),
     initialGitStatus: gitRead(['status', '--porcelain=v1', '--untracked-files=no']),
     initialSourceSHA256: await sourceHashes(), status: 'running', stages: [],
@@ -223,10 +227,124 @@ async function stage(name, action) {
     }
 }
 
-async function closeStory() {
-    await page.locator('#loading-clan-book.founding-book-ready').waitFor({ timeout: 180000 });
-    await activate(page.getByRole('button', { name: 'Close founding chapter', exact: true }));
-    await page.locator('[data-guide="guide"]').waitFor();
+async function observeArrival() {
+    await page.evaluate(() => {
+        const review = window.__arrivalReview = {
+            samples: [], violations: [], firstArrivalAt: null, renderedFrames: 0,
+            invitationAt: null, running: true,
+        };
+        const visible = element => {
+            if (!element || !element.getClientRects().length) return false;
+            for (let current = element; current; current = current.parentElement) {
+                const style = getComputedStyle(current);
+                if (current.hidden || style.display === 'none' || style.visibility === 'hidden' ||
+                    style.visibility === 'collapse' || style.opacity === '0') return false;
+            }
+            return true;
+        };
+        const sample = source => {
+            const loading = document.querySelector('#island-loading');
+            const arriving = !!loading?.classList.contains('island-loading-arrival');
+            if (arriving && review.firstArrivalAt === null) review.firstArrivalAt = performance.now();
+            if (review.firstArrivalAt === null) return;
+            if (arriving && source === 'animation-frame') review.renderedFrames++;
+            const guide = document.querySelector('[data-guide="guide"]');
+            const explore = document.querySelector('[data-guide="explore"]');
+            const invitation = visible(guide) && visible(explore) && !visible(loading);
+            const unwanted = {
+                progress: visible(document.querySelector('#island-loading .island-load-progress')),
+                title: visible(document.querySelector('#island-loading-status')),
+                eyebrow: visible(document.querySelector('#island-loading .island-loading-eyebrow')),
+                help: visible(document.querySelector('#island-loading .island-loading-help')),
+                back: visible(document.querySelector('#island-loading-cancel')),
+                retry: visible(document.querySelector('#island-loading-retry')),
+                foundingBook: !!document.querySelector('#loading-clan-book'),
+            };
+            const buttons = [...(loading?.querySelectorAll('button') ?? [])].filter(visible)
+                .map(button => button.textContent.trim());
+            const unexpectedButtons = buttons.filter(label => label !== 'Skip camera arrival');
+            const skip = document.querySelector('#island-loading-skip');
+            const bounds = skip?.getBoundingClientRect();
+            const skipHit = bounds ? document.elementFromPoint(bounds.x + bounds.width / 2,
+                bounds.y + bounds.height / 2) : null;
+            const skipControl = arriving ? {
+                visible: visible(skip), rect: bounds ? { x: bounds.x, y: bounds.y, width: bounds.width,
+                    height: bounds.height, right: bounds.right, bottom: bounds.bottom } : null,
+                inBounds: !!bounds && bounds.x >= 0 && bounds.y >= 0 &&
+                    bounds.right <= innerWidth && bounds.bottom <= innerHeight,
+                centreReceivesInput: !!skip && (skip === skipHit || skip.contains(skipHit)),
+            } : null;
+            const badSkip = arriving && (!skipControl.visible || !skipControl.inBounds ||
+                !skipControl.centreReceivesInput || skipControl.rect.width < 44 || skipControl.rect.height < 44);
+            const item = { at: performance.now(), source, arriving, invitation,
+                renderedFrames: review.renderedFrames, unwanted, visibleLoadingButtons: buttons, skipControl,
+                camera: document.querySelector('#fjord-canvas')?.dataset.camera,
+                ready: document.querySelector('#fjord-canvas')?.dataset.ready };
+            if (review.samples.length < 256) review.samples.push(item);
+            if (Object.values(unwanted).some(Boolean) || unexpectedButtons.length || badSkip)
+                if (review.violations.length < 32) review.violations.push({ ...item, unexpectedButtons });
+            if (invitation && review.invitationAt === null) review.invitationAt = performance.now();
+        };
+        const observer = new MutationObserver(() => sample('mutation'));
+        observer.observe(document.body, { subtree: true, childList: true, attributes: true,
+            attributeFilter: ['class', 'hidden', 'open', 'aria-hidden', 'data-stage'] });
+        const frame = () => {
+            if (!review.running) return;
+            sample('animation-frame');
+            review.frame = requestAnimationFrame(frame);
+        };
+        review.stop = () => {
+            review.running = false;
+            observer.disconnect();
+            cancelAnimationFrame(review.frame);
+        };
+        review.frame = requestAnimationFrame(frame);
+    });
+}
+
+async function arriveAtInvitation() {
+    await page.waitForFunction(() => window.__arrivalReview?.firstArrivalAt !== null,
+        undefined, { timeout: 180000, polling: 20 });
+    const reduced = await page.evaluate(() => matchMedia('(prefers-reduced-motion: reduce)').matches);
+    if (!reduced) {
+        await page.waitForFunction(() => window.__arrivalReview.renderedFrames > 0 &&
+            performance.now() - window.__arrivalReview.firstArrivalAt >= 750,
+            undefined, { timeout: 20000, polling: 20 });
+        assert.equal(await page.locator('#island-loading.island-loading-arrival').isVisible(), true,
+            'The arrival screenshot must come from the real camera movement, not a recreated state.');
+        await capture('actual-camera-arrival', false);
+    } else report.arrivalCaptureLimit = 'Reduced motion can complete before a screenshot; mutation evidence is retained.';
+    await page.locator('[data-guide="guide"]').waitFor({ timeout: 180000 });
+    await page.locator('[data-guide="explore"]').waitFor();
+    await ready();
+    await settled();
+    report.arrival = await page.evaluate(() => {
+        window.__arrivalReview.stop();
+        const { stop, frame, ...review } = window.__arrivalReview;
+        return review;
+    });
+    assert.ok(report.arrival.firstArrivalAt !== null, 'The actual arrival lifecycle was observed.');
+    if (!reduced) assert.ok(report.arrival.renderedFrames > 0, 'Actual camera-arrival frames were observed.');
+    assert.deepEqual(report.arrival.violations, [], 'Loading progress, Back, title or founding book leaked into arrival.');
+    assert.ok(report.arrival.invitationAt >= report.arrival.firstArrivalAt,
+        'The next handoff is the direct Guide me / Explore invitation.');
+    assert.equal(await page.locator('#loading-clan-book').count(), 0,
+        'The founding book must not reopen between camera arrival and the invitation.');
+    assert.equal(await page.locator('#island-loading').count(), 0);
+    report.invitationControls = await page.evaluate(() => ['guide', 'explore'].map(action => {
+        const button = document.querySelector(`[data-guide="${action}"]`);
+        const rect = button.getBoundingClientRect();
+        const hit = document.elementFromPoint(rect.x + rect.width / 2, rect.y + rect.height / 2);
+        return { action, disabled: button.disabled, text: button.textContent.trim(),
+            rect: { x: rect.x, y: rect.y, width: rect.width, height: rect.height,
+                right: rect.right, bottom: rect.bottom },
+            inBounds: rect.x >= 0 && rect.y >= 0 && rect.right <= innerWidth && rect.bottom <= innerHeight,
+            centreReceivesInput: button === hit || button.contains(hit) };
+    }));
+    assert.ok(report.invitationControls.every(control => !control.disabled && control.inBounds &&
+        control.centreReceivesInput && control.rect.width > 0 && control.rect.height > 0),
+    'Both Guide me and Explore on my own must be visible, enabled and reachable at the handoff.');
+    await paused();
 }
 
 async function openHelp() {
@@ -312,7 +430,7 @@ try {
         executablePath: report.launch.executablePath });
     report.browser = browser.version();
     context = await browser.newContext({ viewport, deviceScaleFactor: 1, hasTouch: mobile,
-        isMobile: mobile, reducedMotion: mobile ? 'reduce' : 'no-preference' });
+        isMobile: mobile, reducedMotion: arrivalOnly ? 'no-preference' : mobile ? 'reduce' : 'no-preference' });
     await context.addInitScript(() => localStorage.setItem('fjordside.entry-motion', 'off'));
     page = await context.newPage();
     page.setDefaultTimeout(20000);
@@ -323,234 +441,246 @@ try {
         else await dialog.dismiss();
     });
     let originalCore;
-    await stage('real New game and Guide me keep the first frame paused', async () => {
+    await stage(arrivalOnly ? 'clean camera arrival leads directly to paused guidance choice' :
+        'real New game and Guide me keep the first frame paused', async () => {
         await page.goto(`${origin}/fjord-play?debugLifecycle=1`);
+        await observeArrival();
         await activate(page.getByRole('button', { name: 'New game', exact: true }));
         await activate(page.locator('[data-entry="new"]'));
-        await ready();
-        await closeStory();
+        await arriveAtInvitation();
         await paused();
         const initial = await snapshot();
         originalCore = canonical(initial);
         report.seed = initial.fjord.campaign.seed;
         report.initialCoreSHA256 = hash(originalCore);
         await capture('paused-invitation', false);
-        await activate(page.locator('[data-guide="guide"]'));
-        await waitModel('ui-camera');
-        assert.equal(await page.locator('#fjord-first-steps-card').isVisible(), false);
-        await geometry('camera-initial');
-        await capture('camera-initial');
+        if (arrivalOnly && mobile) {
+            await activate(page.locator('[data-guide="explore"]'));
+            assert.equal(await page.locator('#fjord-basics-tour').isVisible(), false);
+            assert.equal((await snapshot()).fjord.firstSteps.status, 'skipped');
+            await capture('explore-remains-paused', false);
+        } else {
+            await activate(page.locator('[data-guide="guide"]'));
+            await waitModel('ui-camera');
+            assert.equal(await page.locator('#fjord-first-steps-card').isVisible(), false);
+            await geometry('camera-initial');
+            await capture('camera-initial');
+        }
+        await paused();
+        assert.equal(canonical(await snapshot()), originalCore);
         return { seed: report.seed, coreSHA256: report.initialCoreSHA256, paused: true };
     });
-    await stage('camera gesture or deliberate acknowledgment moves the real anchor', async () => {
-        if (mobile) await next();
-        else {
-            const box = await page.locator('#fjord-canvas').boundingBox();
-            const start = { x: box.x + box.width * .45, y: box.y + box.height * .65 };
-            const clear = await page.evaluate(point => document.elementFromPoint(point.x, point.y)?.id === 'fjord-canvas', start);
-            assert.ok(clear, 'The actual camera gesture start must be free of UI.');
-            await page.mouse.move(start.x, start.y); await page.mouse.down();
-            await page.mouse.move(start.x + 60, start.y + 20, { steps: 6 }); await page.mouse.up();
-        }
-        await waitModel('ui-resident', 'entry');
-        await geometry('camera-to-resident-entry'); await capture('resident-entry');
-        assert.equal(canonical(await snapshot()), originalCore);
-    });
-    await stage('Show me reveals an entry without pretending the player inspected a resident', async () => {
-        const before = await snapshot();
-        await activate(page.locator('#fjord-basics-callout [data-basics="show"]'));
-        assert.equal(await page.locator('#entity-panel .fjord-relations').isVisible(), false);
-        assert.deepEqual((await snapshot()).fjord.firstSteps.journey.orientation,
-            before.fjord.firstSteps.journey.orientation);
-        assert.equal(canonical(await snapshot()), originalCore);
-        if (await page.locator('#fjord-workspace').isVisible())
-            await activate(page.locator('#fjord-workspace [data-ui="close-workspace"]'));
-        await waitModel('ui-resident', 'entry');
-        await geometry('show-me-does-not-inspect');
-    });
-    await stage('Back and invisible-anchor fallback preserve progress', async () => {
-        const before = await snapshot();
-        await activate(page.locator('#fjord-basics-callout [data-basics="back"]'));
-        await waitModel('ui-camera');
-        assert.deepEqual((await snapshot()).fjord.firstSteps.journey.orientation,
-            before.fjord.firstSteps.journey.orientation);
-        await next(); await waitModel('ui-resident', 'entry');
-        await page.locator('[data-basics-target]').evaluate(element => {
-            element.dataset.qaPreviousStyle = element.getAttribute('style') ?? '';
-            element.dataset.qaHiddenAnchor = 'true';
-            element.style.setProperty('display', 'none', 'important');
-            document.dispatchEvent(new Event('fjord-layout-change'));
-        });
-        try {
-            await geometry('invisible-anchor-fallback', true); await capture('invisible-anchor-fallback');
+    if (!arrivalOnly) {
+        await stage('camera gesture or deliberate acknowledgment moves the real anchor', async () => {
+            if (mobile) await next();
+            else {
+                const box = await page.locator('#fjord-canvas').boundingBox();
+                const start = { x: box.x + box.width * .45, y: box.y + box.height * .65 };
+                const clear = await page.evaluate(point => document.elementFromPoint(point.x, point.y)?.id === 'fjord-canvas', start);
+                assert.ok(clear, 'The actual camera gesture start must be free of UI.');
+                await page.mouse.move(start.x, start.y); await page.mouse.down();
+                await page.mouse.move(start.x + 60, start.y + 20, { steps: 6 }); await page.mouse.up();
+            }
+            await waitModel('ui-resident', 'entry');
+            await geometry('camera-to-resident-entry'); await capture('resident-entry');
             assert.equal(canonical(await snapshot()), originalCore);
-        } finally {
-            await page.locator('[data-qa-hidden-anchor]').evaluate(element => {
-                element.setAttribute('style', element.dataset.qaPreviousStyle);
-                delete element.dataset.qaPreviousStyle; delete element.dataset.qaHiddenAnchor;
+        });
+        await stage('Show me reveals an entry without pretending the player inspected a resident', async () => {
+            const before = await snapshot();
+            await activate(page.locator('#fjord-basics-callout [data-basics="show"]'));
+            assert.equal(await page.locator('#entity-panel .fjord-relations').isVisible(), false);
+            assert.deepEqual((await snapshot()).fjord.firstSteps.journey.orientation,
+                before.fjord.firstSteps.journey.orientation);
+            assert.equal(canonical(await snapshot()), originalCore);
+            if (await page.locator('#fjord-workspace').isVisible())
+                await activate(page.locator('#fjord-workspace [data-ui="close-workspace"]'));
+            await waitModel('ui-resident', 'entry');
+            await geometry('show-me-does-not-inspect');
+        });
+        await stage('Back and invisible-anchor fallback preserve progress', async () => {
+            const before = await snapshot();
+            await activate(page.locator('#fjord-basics-callout [data-basics="back"]'));
+            await waitModel('ui-camera');
+            assert.deepEqual((await snapshot()).fjord.firstSteps.journey.orientation,
+                before.fjord.firstSteps.journey.orientation);
+            await next(); await waitModel('ui-resident', 'entry');
+            await page.locator('[data-basics-target]').evaluate(element => {
+                element.dataset.qaPreviousStyle = element.getAttribute('style') ?? '';
+                element.dataset.qaHiddenAnchor = 'true';
+                element.style.setProperty('display', 'none', 'important');
                 document.dispatchEvent(new Event('fjord-layout-change'));
             });
-        }
-        await geometry('anchor-restored');
-    });
-    await stage('actual Settlement row opens the card and targets its real close control', async () => {
-        const id = await openResident(true);
-        await waitModel('ui-resident', 'card');
-        await geometry('real-resident-card'); await capture('real-resident-card');
-        const alternate = mobile ? { width: 390, height: 844 } : { width: 844, height: 390 };
-        await page.setViewportSize(alternate); await geometry('card-resize-reflow'); await capture('card-resize-reflow');
-        await page.setViewportSize(viewport); await geometry('card-size-restored');
-        await next(); await waitModel('ui-resident', 'close');
-        await geometry('actual-card-close'); await capture('actual-card-close');
-        await activate(page.locator('#entity-panel [data-ui="close-card"]'));
-        await waitModel('ui-connections', 'entry');
-        assert.ok((await snapshot()).fjord.firstSteps.journey.orientation.includes('ui-resident'));
-        assert.equal(canonical(await snapshot()), originalCore);
-        return { residentId: id };
-    });
-    await stage('real household link result closes through the existing panel', async () => {
-        await openResident();
-        const link = page.locator('#entity-panel .fjord-relations [data-kind="household"]').first();
-        await link.waitFor();
-        const scrollOffsets = () => link.evaluate(element => {
-            const offsets = [];
-            for (let parent = element.parentElement; parent; parent = parent.parentElement) {
-                if (parent.scrollHeight > parent.clientHeight + 1) offsets.push({
-                    id: parent.id, className: parent.className, scrollTop: parent.scrollTop,
-                    clientHeight: parent.clientHeight, scrollHeight: parent.scrollHeight,
-                    overflowY: getComputedStyle(parent).overflowY,
+            try {
+                await geometry('invisible-anchor-fallback', true); await capture('invisible-anchor-fallback');
+                assert.equal(canonical(await snapshot()), originalCore);
+            } finally {
+                await page.locator('[data-qa-hidden-anchor]').evaluate(element => {
+                    element.setAttribute('style', element.dataset.qaPreviousStyle);
+                    delete element.dataset.qaPreviousStyle; delete element.dataset.qaHiddenAnchor;
+                    document.dispatchEvent(new Event('fjord-layout-change'));
                 });
             }
-            return offsets;
+            await geometry('anchor-restored');
         });
-        const beforeScroll = await scrollOffsets();
-        const scrollProbe = await link.evaluate(element => {
-            for (let owner = element.parentElement; owner; owner = owner.parentElement) {
-                if (!['auto', 'scroll'].includes(getComputedStyle(owner).overflowY) ||
-                    owner.scrollHeight <= owner.clientHeight + 1) continue;
-                const before = owner.scrollTop;
-                const maximum = owner.scrollHeight - owner.clientHeight;
-                owner.scrollTop = before < maximum ? Math.min(maximum, before + 48) : Math.max(0, before - 48);
-                return { id: owner.id, before, after: owner.scrollTop, maximum };
-            }
-            return null;
+        await stage('actual Settlement row opens the card and targets its real close control', async () => {
+            const id = await openResident(true);
+            await waitModel('ui-resident', 'card');
+            await geometry('real-resident-card'); await capture('real-resident-card');
+            const alternate = mobile ? { width: 390, height: 844 } : { width: 844, height: 390 };
+            await page.setViewportSize(alternate); await geometry('card-resize-reflow'); await capture('card-resize-reflow');
+            await page.setViewportSize(viewport); await geometry('card-size-restored');
+            await next(); await waitModel('ui-resident', 'close');
+            await geometry('actual-card-close'); await capture('actual-card-close');
+            await activate(page.locator('#entity-panel [data-ui="close-card"]'));
+            await waitModel('ui-connections', 'entry');
+            assert.ok((await snapshot()).fjord.firstSteps.journey.orientation.includes('ui-resident'));
+            assert.equal(canonical(await snapshot()), originalCore);
+            return { residentId: id };
         });
-        if (scrollProbe) await geometry('connection-programmatic-scroll-probe', true);
-        const beforeReveal = await scrollOffsets();
-        await link.scrollIntoViewIfNeeded();
-        const afterScroll = await scrollOffsets();
-        const overflowExists = beforeScroll.some(owner => ['auto', 'scroll'].includes(owner.overflowY));
-        report.connectionScrollEvidence = {
-            mechanism: 'Programmatic DOM scroll probe followed by Playwright scrollIntoViewIfNeeded on the real card; not a physical touch gesture.',
-            before: beforeScroll, probe: scrollProbe, beforeReveal, after: afterScroll, overflowExists,
-            revealMoved: afterScroll.some((owner, index) => owner.scrollTop !== beforeReveal[index]?.scrollTop),
-            exercised: !!scrollProbe && scrollProbe.after !== scrollProbe.before ||
-                afterScroll.some((owner, index) => owner.scrollTop !== beforeScroll[index]?.scrollTop),
-        };
-        if (overflowExists) assert.ok(report.connectionScrollEvidence.exercised,
-            'The real overflowing card must show an actual programmatic scroll offset change.');
-        const connectionAnchor = await geometry('household-link-after-real-scroll');
-        assert.equal(connectionAnchor.target?.kind, 'household',
-            'The connection callout must identify the actual visible household link after scrolling.');
-        await capture('household-link-after-real-scroll');
-        await activate(link);
-        await page.locator('#entity-panel .fjord-home-residents').waitFor();
-        await waitModel('ui-connections', 'result');
-        await geometry('household-result'); await capture('household-result');
-        await activate(page.locator('#entity-panel [data-ui="close-card"]'));
-        await waitModel('ui-home');
-        assert.equal(canonical(await snapshot()), originalCore);
-    });
-    await stage('actual Map opens and closes without revealing or advancing Core', async () => {
-        await geometry('map-entry'); await capture('map-entry');
-        await activate(page.locator('#fjord-map-toggle'));
-        await page.locator('#fjord-island-map').waitFor();
-        await geometry('map-result'); await capture('map-result');
-        await activate(page.locator('[data-map-close]'));
-        await waitModel('ui-time');
-        assert.equal(canonical(await snapshot()), originalCore);
-    });
-    await stage('time Got it and actual menu open-close finish without starting time', async () => {
-        await geometry('time-control'); await capture('time-control');
-        await paused(); await next(); await waitModel('ui-navigation');
-        await geometry('navigation-entry');
-        await activate(page.locator('#fjord-menu > summary'));
-        await waitModel('ui-navigation', 'result');
-        await geometry('menu-result'); await capture('menu-result');
-        await activate(page.locator('#fjord-menu [data-menu-close]'));
-        await page.waitForFunction(() => document.querySelector('#fjord-basics-callout')?.dataset.complete === 'true');
-        const complete = await snapshot();
-        assert.equal(complete.fjord.firstSteps.journey.orientation.length, 6);
-        assert.equal(complete.fjord.firstSteps.journey.chapter, 'orientation');
-        assert.equal(canonical(complete), originalCore); await paused();
-        await geometry('basics-complete'); await capture('basics-complete');
-        assert.match(await page.locator('#fjord-basics-callout [data-basics="next"]').innerText(), /Continue to Chapter I/);
-        await next();
-        assert.equal(await page.locator('#fjord-first-steps-card').getAttribute('data-chapter'), 'home');
-        assert.ok(report.targetTransitions.length >= 3, 'At least three actual target changes must be recorded.');
-        return { completed: complete.fjord.firstSteps.journey.orientation, explicitContinue: true };
-    });
-    await stage('Replay Basics and Skip retain all old chapter inspection facts', async () => {
-        const before = await snapshot();
-        await activate(page.locator('[data-guide="chapter"][data-chapter="orientation"]'));
-        await activate(page.locator('[data-guide="replay-basics"]'));
-        await waitModel('ui-camera');
-        const replayed = await snapshot();
-        assert.deepEqual(laterChapterFacts(replayed.fjord.firstSteps), laterChapterFacts(before.fjord.firstSteps));
-        assert.deepEqual(replayed.fjord.firstSteps.journey.orientation, []);
-        assert.equal(canonical(replayed), originalCore); await paused();
-        await activate(page.locator('#fjord-basics-chip'));
-        assert.equal(await page.locator('#fjord-basics-tour').isVisible(), false);
-        assert.equal(await page.locator('#fjord-first-steps-card').getAttribute('data-chapter'), 'orientation');
-        await activate(page.locator('[data-guide="replay-basics"]'));
-        await waitModel('ui-camera');
-        await activate(page.locator('#fjord-basics-callout [data-basics="skip"]'));
-        assert.equal(await page.locator('#fjord-basics-tour').isVisible(), false);
-        await openHelp();
-        await activate(page.locator('[data-guide="chapter"][data-chapter="conflict"]'));
-        assert.equal(await page.locator('#fjord-first-steps-card').getAttribute('data-chapter'), 'conflict');
-        assert.equal(canonical(await snapshot()), originalCore);
-    });
-    await stage('ordinary Continue remains paused and does not reopen the tour', async () => {
-        const before = await snapshot();
-        await page.reload(); await activate(page.locator('[data-entry="continue"]')); await ready();
-        await paused();
-        assert.equal(await page.locator('#fjord-basics-tour').isVisible(), false);
-        assert.equal(await page.locator('#fjord-first-steps-card').isVisible(), false);
-        const continued = await snapshot();
-        assert.equal(canonical(continued), canonical(before));
-        assert.equal(continued.fjord.firstSteps.journey.chapter, 'conflict');
-        await openHelp();
-        assert.equal(await page.locator('#fjord-first-steps-card').getAttribute('data-chapter'), 'conflict');
-        await capture('continue-paused', false);
-    });
-    await stage('real v1 file import preserves old chapters, UI facts and paused entry', async () => {
-        const legacy = structuredClone((await snapshot()).fjord);
-        legacy.firstSteps.status = 'active';
-        legacy.firstSteps.journey.chapter = 'discovery';
-        legacy.firstSteps.journey.selected = 'wildlife-species';
-        legacy.firstSteps.journey.later = ['wildlife-species'];
-        legacy.firstSteps.journey.skipped = ['pillage'];
-        delete legacy.firstSteps.journey.orientation; delete legacy.firstSteps.journey.tour;
-        await writeFile(path.join(output, 'legacy-v1-presentation-fixture.json'), JSON.stringify(legacy, null, 2));
-        await menuSection('Load game');
-        const previous = JSON.parse(await page.locator('#fjord-canvas').getAttribute('data-load-diagnostics')).attempt;
-        await page.locator('#fjord-import').setInputFiles({ name: 'legacy-v1-presentation-fixture.json',
-            mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(legacy)) });
-        await ready(previous); await paused();
-        assert.equal(await page.locator('#fjord-basics-tour').isVisible(), false);
-        const imported = await snapshot();
-        assert.deepEqual(imported.fjord.campaign, legacy.campaign);
-        assert.deepEqual(laterChapterFacts(imported.fjord.firstSteps), laterChapterFacts(legacy.firstSteps));
-        await openHelp();
-        assert.equal(await page.locator('#fjord-first-steps-card').getAttribute('data-chapter'), 'discovery');
-        await capture('legacy-v1-import-paused', false);
-        await activate(page.locator('[data-guide="chapter"][data-chapter="orientation"]'));
-        await activate(page.locator('[data-guide="replay-basics"]'));
-        await waitModel('ui-camera');
-        assert.deepEqual(laterChapterFacts((await snapshot()).fjord.firstSteps), laterChapterFacts(legacy.firstSteps));
-        await geometry('legacy-replay-preserves-I-III');
-    });
+        await stage('real household link result closes through the existing panel', async () => {
+            await openResident();
+            const link = page.locator('#entity-panel .fjord-relations [data-kind="household"]').first();
+            await link.waitFor();
+            const scrollOffsets = () => link.evaluate(element => {
+                const offsets = [];
+                for (let parent = element.parentElement; parent; parent = parent.parentElement) {
+                    if (parent.scrollHeight > parent.clientHeight + 1) offsets.push({
+                        id: parent.id, className: parent.className, scrollTop: parent.scrollTop,
+                        clientHeight: parent.clientHeight, scrollHeight: parent.scrollHeight,
+                        overflowY: getComputedStyle(parent).overflowY,
+                    });
+                }
+                return offsets;
+            });
+            const beforeScroll = await scrollOffsets();
+            const scrollProbe = await link.evaluate(element => {
+                for (let owner = element.parentElement; owner; owner = owner.parentElement) {
+                    if (!['auto', 'scroll'].includes(getComputedStyle(owner).overflowY) ||
+                        owner.scrollHeight <= owner.clientHeight + 1) continue;
+                    const before = owner.scrollTop;
+                    const maximum = owner.scrollHeight - owner.clientHeight;
+                    owner.scrollTop = before < maximum ? Math.min(maximum, before + 48) : Math.max(0, before - 48);
+                    return { id: owner.id, before, after: owner.scrollTop, maximum };
+                }
+                return null;
+            });
+            if (scrollProbe) await geometry('connection-programmatic-scroll-probe', true);
+            const beforeReveal = await scrollOffsets();
+            await link.scrollIntoViewIfNeeded();
+            const afterScroll = await scrollOffsets();
+            const overflowExists = beforeScroll.some(owner => ['auto', 'scroll'].includes(owner.overflowY));
+            report.connectionScrollEvidence = {
+                mechanism: 'Programmatic DOM scroll probe followed by Playwright scrollIntoViewIfNeeded on the real card; not a physical touch gesture.',
+                before: beforeScroll, probe: scrollProbe, beforeReveal, after: afterScroll, overflowExists,
+                revealMoved: afterScroll.some((owner, index) => owner.scrollTop !== beforeReveal[index]?.scrollTop),
+                exercised: !!scrollProbe && scrollProbe.after !== scrollProbe.before ||
+                    afterScroll.some((owner, index) => owner.scrollTop !== beforeScroll[index]?.scrollTop),
+            };
+            if (overflowExists) assert.ok(report.connectionScrollEvidence.exercised,
+                'The real overflowing card must show an actual programmatic scroll offset change.');
+            const connectionAnchor = await geometry('household-link-after-real-scroll');
+            assert.equal(connectionAnchor.target?.kind, 'household',
+                'The connection callout must identify the actual visible household link after scrolling.');
+            await capture('household-link-after-real-scroll');
+            await activate(link);
+            await page.locator('#entity-panel .fjord-home-residents').waitFor();
+            await waitModel('ui-connections', 'result');
+            await geometry('household-result'); await capture('household-result');
+            await activate(page.locator('#entity-panel [data-ui="close-card"]'));
+            await waitModel('ui-home');
+            assert.equal(canonical(await snapshot()), originalCore);
+        });
+        await stage('actual Map opens and closes without revealing or advancing Core', async () => {
+            await geometry('map-entry'); await capture('map-entry');
+            await activate(page.locator('#fjord-map-toggle'));
+            await page.locator('#fjord-island-map').waitFor();
+            await geometry('map-result'); await capture('map-result');
+            await activate(page.locator('[data-map-close]'));
+            await waitModel('ui-time');
+            assert.equal(canonical(await snapshot()), originalCore);
+        });
+        await stage('time Got it and actual menu open-close finish without starting time', async () => {
+            await geometry('time-control'); await capture('time-control');
+            await paused(); await next(); await waitModel('ui-navigation');
+            await geometry('navigation-entry');
+            await activate(page.locator('#fjord-menu > summary'));
+            await waitModel('ui-navigation', 'result');
+            await geometry('menu-result'); await capture('menu-result');
+            await activate(page.locator('#fjord-menu [data-menu-close]'));
+            await page.waitForFunction(() => document.querySelector('#fjord-basics-callout')?.dataset.complete === 'true');
+            const complete = await snapshot();
+            assert.equal(complete.fjord.firstSteps.journey.orientation.length, 6);
+            assert.equal(complete.fjord.firstSteps.journey.chapter, 'orientation');
+            assert.equal(canonical(complete), originalCore); await paused();
+            await geometry('basics-complete'); await capture('basics-complete');
+            assert.match(await page.locator('#fjord-basics-callout [data-basics="next"]').innerText(), /Continue to Chapter I/);
+            await next();
+            assert.equal(await page.locator('#fjord-first-steps-card').getAttribute('data-chapter'), 'home');
+            assert.ok(report.targetTransitions.length >= 3, 'At least three actual target changes must be recorded.');
+            return { completed: complete.fjord.firstSteps.journey.orientation, explicitContinue: true };
+        });
+        await stage('Replay Basics and Skip retain all old chapter inspection facts', async () => {
+            const before = await snapshot();
+            await activate(page.locator('[data-guide="chapter"][data-chapter="orientation"]'));
+            await activate(page.locator('[data-guide="replay-basics"]'));
+            await waitModel('ui-camera');
+            const replayed = await snapshot();
+            assert.deepEqual(laterChapterFacts(replayed.fjord.firstSteps), laterChapterFacts(before.fjord.firstSteps));
+            assert.deepEqual(replayed.fjord.firstSteps.journey.orientation, []);
+            assert.equal(canonical(replayed), originalCore); await paused();
+            await activate(page.locator('#fjord-basics-chip'));
+            assert.equal(await page.locator('#fjord-basics-tour').isVisible(), false);
+            assert.equal(await page.locator('#fjord-first-steps-card').getAttribute('data-chapter'), 'orientation');
+            await activate(page.locator('[data-guide="replay-basics"]'));
+            await waitModel('ui-camera');
+            await activate(page.locator('#fjord-basics-callout [data-basics="skip"]'));
+            assert.equal(await page.locator('#fjord-basics-tour').isVisible(), false);
+            await openHelp();
+            await activate(page.locator('[data-guide="chapter"][data-chapter="conflict"]'));
+            assert.equal(await page.locator('#fjord-first-steps-card').getAttribute('data-chapter'), 'conflict');
+            assert.equal(canonical(await snapshot()), originalCore);
+        });
+        await stage('ordinary Continue remains paused and does not reopen the tour', async () => {
+            const before = await snapshot();
+            await page.reload(); await activate(page.locator('[data-entry="continue"]')); await ready();
+            await paused();
+            assert.equal(await page.locator('#fjord-basics-tour').isVisible(), false);
+            assert.equal(await page.locator('#fjord-first-steps-card').isVisible(), false);
+            const continued = await snapshot();
+            assert.equal(canonical(continued), canonical(before));
+            assert.equal(continued.fjord.firstSteps.journey.chapter, 'conflict');
+            await openHelp();
+            assert.equal(await page.locator('#fjord-first-steps-card').getAttribute('data-chapter'), 'conflict');
+            await capture('continue-paused', false);
+        });
+        await stage('real v1 file import preserves old chapters, UI facts and paused entry', async () => {
+            const legacy = structuredClone((await snapshot()).fjord);
+            legacy.firstSteps.status = 'active';
+            legacy.firstSteps.journey.chapter = 'discovery';
+            legacy.firstSteps.journey.selected = 'wildlife-species';
+            legacy.firstSteps.journey.later = ['wildlife-species'];
+            legacy.firstSteps.journey.skipped = ['pillage'];
+            delete legacy.firstSteps.journey.orientation; delete legacy.firstSteps.journey.tour;
+            await writeFile(path.join(output, 'legacy-v1-presentation-fixture.json'), JSON.stringify(legacy, null, 2));
+            await menuSection('Load game');
+            const previous = JSON.parse(await page.locator('#fjord-canvas').getAttribute('data-load-diagnostics')).attempt;
+            await page.locator('#fjord-import').setInputFiles({ name: 'legacy-v1-presentation-fixture.json',
+                mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(legacy)) });
+            await ready(previous); await paused();
+            assert.equal(await page.locator('#fjord-basics-tour').isVisible(), false);
+            const imported = await snapshot();
+            assert.deepEqual(imported.fjord.campaign, legacy.campaign);
+            assert.deepEqual(laterChapterFacts(imported.fjord.firstSteps), laterChapterFacts(legacy.firstSteps));
+            await openHelp();
+            assert.equal(await page.locator('#fjord-first-steps-card').getAttribute('data-chapter'), 'discovery');
+            await capture('legacy-v1-import-paused', false);
+            await activate(page.locator('[data-guide="chapter"][data-chapter="orientation"]'));
+            await activate(page.locator('[data-guide="replay-basics"]'));
+            await waitModel('ui-camera');
+            assert.deepEqual(laterChapterFacts((await snapshot()).fjord.firstSteps), laterChapterFacts(legacy.firstSteps));
+            await geometry('legacy-replay-preserves-I-III');
+        });
+    }
     assert.deepEqual(report.errors, []);
     report.finalCoreSHA256 = hash(canonical(await snapshot()));
     assert.equal(report.finalCoreSHA256, report.initialCoreSHA256);

@@ -26,7 +26,10 @@ and the campaign's time and playback choice are preserved.
 Existing version-1 firstSteps/journey saves remain readable with their previous
 chapter and progress. The optional bounded `journey.orientation` array and strict
 `journey.tour: { step, dismissed }` cursor do not require migration; absent fields
-stay absent on read. New/restarted histories offer Basics first. Continue/import
+stay absent on read. New/restarted histories offer Basics first, with the
+Guide me / Explore on my own choice directly after the unobstructed island
+camera arrival. The temporary loading reader closes before the flyover; the
+founding chapter remains in Clan Book. Continue/import
 retain the saved chapter, facts and cursor but keep both guide and tour closed;
 the player can reopen the guide and explicitly resume the tour.
 
@@ -45,3 +48,6 @@ not establish acceptance of this anchored revision. New technical/visual evidenc
 is recorded in the [anchored tour QA](../qa/onboarding-ui-basics-325/anchored-tour/report.md). The Founding Journey contract records the current
 predicates and acceptance questions. Owner visual approval and an uncoached
 playtest remain open. No automatic merge/deploy.
+
+The subsequent [clear-arrival QA](../qa/onboarding-ui-basics-325/clear-arrival/report.md)
+records the unobstructed camera reveal and direct guidance-choice handoff.

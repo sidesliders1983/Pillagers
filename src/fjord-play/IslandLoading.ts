@@ -52,7 +52,7 @@ export class IslandLoading {
     private displayed = '';
     private workerTimings = new Map<string, ReturnType<IslandLoadStatus['begin']>>();
     private measureContext?: MeasureContext;
-    constructor(private canReturnToGame = false, book?: FoundingBookWindow, private resume?: SettlementRestoreMetadata,
+    constructor(private canReturnToGame = false, private book?: FoundingBookWindow, private resume?: SettlementRestoreMetadata,
         private options: { backLabel?: string; recipe?: IslandRecipe; founding?: SettlementRestoreMetadata;
             mode?: LoadMode; seed?: number; diagnosticRun?: LoadingRunDiagnostics } = {}) {
         this.signal = this.abort.signal;
@@ -150,6 +150,7 @@ export class IslandLoading {
         (this.root.querySelector<HTMLButtonElement>('button:not([hidden])') ?? this.root).focus();
     }
     cancel = () => {
+        this.restoreLoadingControls();
         this.diagnostics.stop('cancelled');
         this.diagnostics.snapshot();
         if (!this.finished) this.status.textContent = 'Cancelled. Finishing pending resource work…';
@@ -157,11 +158,16 @@ export class IslandLoading {
         this.worker.cancel();
     };
     fail(error: Error) {
+        this.restoreLoadingControls();
         this.root.querySelector<HTMLElement>('.island-load-diagnostics')!.hidden = false;
         this.diagnostics.stop('failed', error);
         this.diagnostics.snapshot();
         this.abort.abort(error);
         this.worker.cancel();
+    }
+    private restoreLoadingControls() {
+        this.root.classList.remove('island-loading-arrival');
+        this.skip.hidden = true;
     }
     check() { this.signal.throwIfAborted(); }
     configure(book?: FoundingBookWindow, resume?: SettlementRestoreMetadata,
@@ -169,6 +175,7 @@ export class IslandLoading {
         this.resume = resume;
         this.options = { ...this.options, ...options };
         if (book) {
+            this.book = book;
             this.root.classList.add('island-has-book');
             this.root.append(book.root);
         }
@@ -449,8 +456,12 @@ export class IslandLoading {
         if (this.resume) return;
         this.diagnostics.enter('handoff', 'arrival');
         this.stage('Arriving at your settlement');
+        // The opening remains in Clan Book. Close this loading-only window so
+        // the journey choice follows arrival without waiting for a hidden reader.
+        this.book?.dispose();
         this.skip.hidden = false;
         this.root.classList.add('island-loading-arrival');
+        this.root.focus({ preventScroll: true });
         const { camera } = controller;
         const bounds = world.terrain.bounds;
         const maxHeight = world.terrain.heights.reduce((a, b) => Math.max(a, b), 0);

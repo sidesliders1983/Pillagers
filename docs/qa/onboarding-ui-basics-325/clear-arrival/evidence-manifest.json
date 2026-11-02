@@ -1,0 +1,138 @@
+{
+  "date": "2026-11-02",
+  "scope": "Island reveal to guidance invitation",
+  "runs": [
+    {
+      "variant": "desktop",
+      "directory": "arrival-browser-desktop-20261102165934137-44440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "renderedFrames": 87,
+      "coreSHA256": "367120acb3753538f80ce1869c6adcad0d568daf4846801e5e37af2fc5cc67f7",
+      "sourceSHA256": {
+        "src/fjord-play/FirstStepsGuide.ts": "b77c91b367816a9fc3a0d8a18c2e6bc44d2b078eb4e879f5520ef5e9202b23e2",
+        "src/fjord-play/FirstStepsTour.ts": "7942d351072b88ae3274ac4753a52e37e630b036e4473b034dfb2b54b3b4d001",
+        "src/fjord-play/FirstStepsState.ts": "e34c39f503a776b0b93a89281f156427676bd91f6da675765214e8906adcd078",
+        "src/fjord-play/JourneyProgress.ts": "86b9c1e79272d5a7e54e3a1d756cb0c956e0e09fdc8fa259107b3c92ef5bc760",
+        "src/fjord-play/FoundingJourney.ts": "1ff89eb5a6704586f7b8db5fed3e66b2f0d076d7a9c43878f0f9f6dc14d4b31b",
+        "src/fjord-play/FjordInterface.ts": "3d2aeef205b29e74ef4c62d69dff1d7e9ad4df5a774191dc2638f6053f1360e7",
+        "src/fjord-play/FjordPlay.ts": "3b42a07c466164d35435f76717382740ef18f2c90d7199aaaa6ed2ed406cbffc",
+        "src/fjord-play/FjordHeader.ts": "5ae360a9da8ae470748fc6f2aec7d59abf8d5c911569f5e80887c7c669a60b26",
+        "src/fjord-play/CampaignPlayback.ts": "c80be220dd283720509ccc0e14687406d866a72dc86ff8aacd1e69cc2703f3a4",
+        "src/fjord-play/IslandLoading.ts": "61286fa16b6d60dab5a78fa6b74a9bc89e72083438d6d8dae5afd8dc3375a224",
+        "src/lore/FoundingBookWindow.ts": "278905a0fd1145495f34eca21b4df70c799c9a925128fbca1e698c446adda9a0",
+        "src/fjord-play/island-loading.css": "c7d0f1f992b36d6898690e34c427978cc09f635f1c0749ce461862389cbd27ed",
+        "src/fjord-play/first-steps.css": "bf5ed6d3e9ae8b5cd25f2374b47a5902f4ec03d4b547bd8b3827752c3f69c10b",
+        "src/fjord-play/first-steps-tour.css": "4b1514bffae9b0ef8f36ccd4e1349e8d29c9f3c9a69906042c173e1f30154e9f",
+        "scripts/qa/check-anchored-basics.mjs": "4b25491ac173b132b16eb7f6e272f885762b5379fb4d64ceeb507395105d9964"
+      }
+    },
+    {
+      "variant": "touch",
+      "directory": "arrival-browser-touch-20261102170055455-30060",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "renderedFrames": 88,
+      "coreSHA256": "f74c0c9353653cff3fbbd115ce59ba5dec653dc868d5079c779a7631fa3ddea7",
+      "sourceSHA256": {
+        "src/fjord-play/FirstStepsGuide.ts": "b77c91b367816a9fc3a0d8a18c2e6bc44d2b078eb4e879f5520ef5e9202b23e2",
+        "src/fjord-play/FirstStepsTour.ts": "7942d351072b88ae3274ac4753a52e37e630b036e4473b034dfb2b54b3b4d001",
+        "src/fjord-play/FirstStepsState.ts": "e34c39f503a776b0b93a89281f156427676bd91f6da675765214e8906adcd078",
+        "src/fjord-play/JourneyProgress.ts": "86b9c1e79272d5a7e54e3a1d756cb0c956e0e09fdc8fa259107b3c92ef5bc760",
+        "src/fjord-play/FoundingJourney.ts": "1ff89eb5a6704586f7b8db5fed3e66b2f0d076d7a9c43878f0f9f6dc14d4b31b",
+        "src/fjord-play/FjordInterface.ts": "3d2aeef205b29e74ef4c62d69dff1d7e9ad4df5a774191dc2638f6053f1360e7",
+        "src/fjord-play/FjordPlay.ts": "3b42a07c466164d35435f76717382740ef18f2c90d7199aaaa6ed2ed406cbffc",
+        "src/fjord-play/FjordHeader.ts": "5ae360a9da8ae470748fc6f2aec7d59abf8d5c911569f5e80887c7c669a60b26",
+        "src/fjord-play/CampaignPlayback.ts": "c80be220dd283720509ccc0e14687406d866a72dc86ff8aacd1e69cc2703f3a4",
+        "src/fjord-play/IslandLoading.ts": "61286fa16b6d60dab5a78fa6b74a9bc89e72083438d6d8dae5afd8dc3375a224",
+        "src/lore/FoundingBookWindow.ts": "278905a0fd1145495f34eca21b4df70c799c9a925128fbca1e698c446adda9a0",
+        "src/fjord-play/island-loading.css": "c7d0f1f992b36d6898690e34c427978cc09f635f1c0749ce461862389cbd27ed",
+        "src/fjord-play/first-steps.css": "bf5ed6d3e9ae8b5cd25f2374b47a5902f4ec03d4b547bd8b3827752c3f69c10b",
+        "src/fjord-play/first-steps-tour.css": "4b1514bffae9b0ef8f36ccd4e1349e8d29c9f3c9a69906042c173e1f30154e9f",
+        "scripts/qa/check-anchored-basics.mjs": "4b25491ac173b132b16eb7f6e272f885762b5379fb4d64ceeb507395105d9964"
+      }
+    },
+    {
+      "variant": "portrait",
+      "directory": "arrival-browser-portrait-20261102170203006-30444",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "renderedFrames": 88,
+      "coreSHA256": "168b074114e51c2addb0ebf66e4749db353b5cc53aa4837ac3a54bea8517a447",
+      "sourceSHA256": {
+        "src/fjord-play/FirstStepsGuide.ts": "b77c91b367816a9fc3a0d8a18c2e6bc44d2b078eb4e879f5520ef5e9202b23e2",
+        "src/fjord-play/FirstStepsTour.ts": "7942d351072b88ae3274ac4753a52e37e630b036e4473b034dfb2b54b3b4d001",
+        "src/fjord-play/FirstStepsState.ts": "e34c39f503a776b0b93a89281f156427676bd91f6da675765214e8906adcd078",
+        "src/fjord-play/JourneyProgress.ts": "86b9c1e79272d5a7e54e3a1d756cb0c956e0e09fdc8fa259107b3c92ef5bc760",
+        "src/fjord-play/FoundingJourney.ts": "1ff89eb5a6704586f7b8db5fed3e66b2f0d076d7a9c43878f0f9f6dc14d4b31b",
+        "src/fjord-play/FjordInterface.ts": "3d2aeef205b29e74ef4c62d69dff1d7e9ad4df5a774191dc2638f6053f1360e7",
+        "src/fjord-play/FjordPlay.ts": "3b42a07c466164d35435f76717382740ef18f2c90d7199aaaa6ed2ed406cbffc",
+        "src/fjord-play/FjordHeader.ts": "5ae360a9da8ae470748fc6f2aec7d59abf8d5c911569f5e80887c7c669a60b26",
+        "src/fjord-play/CampaignPlayback.ts": "c80be220dd283720509ccc0e14687406d866a72dc86ff8aacd1e69cc2703f3a4",
+        "src/fjord-play/IslandLoading.ts": "61286fa16b6d60dab5a78fa6b74a9bc89e72083438d6d8dae5afd8dc3375a224",
+        "src/lore/FoundingBookWindow.ts": "278905a0fd1145495f34eca21b4df70c799c9a925128fbca1e698c446adda9a0",
+        "src/fjord-play/island-loading.css": "c7d0f1f992b36d6898690e34c427978cc09f635f1c0749ce461862389cbd27ed",
+        "src/fjord-play/first-steps.css": "bf5ed6d3e9ae8b5cd25f2374b47a5902f4ec03d4b547bd8b3827752c3f69c10b",
+        "src/fjord-play/first-steps-tour.css": "4b1514bffae9b0ef8f36ccd4e1349e8d29c9f3c9a69906042c173e1f30154e9f",
+        "scripts/qa/check-anchored-basics.mjs": "4b25491ac173b132b16eb7f6e272f885762b5379fb4d64ceeb507395105d9964"
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "evidence/desktop-result.json.gz",
+      "sha256": "dea888432ec30efb13a3abbe5756868a7950ff944460e79f09fff4c7f87e300a",
+      "originalSHA256": "50358483b0db48d5a371430075483979f4e0112860103d3b06ed0f0a8fdec4bc"
+    },
+    {
+      "path": "evidence/desktop-arrival.webp",
+      "sha256": "0e7b0cef79f5325c2eba97fe7d91d9d2dff102caa07fd3974b0f6278f1f08c1b",
+      "source": "01-actual-camera-arrival.png"
+    },
+    {
+      "path": "evidence/desktop-invitation.webp",
+      "sha256": "abba68d2d2ee79a601e003a70edfca2bbe2225eff9e23dd202b8b0ad9ae9434c",
+      "source": "02-paused-invitation.png"
+    },
+    {
+      "path": "evidence/touch-result.json.gz",
+      "sha256": "cc684a87b2cb00a69af7b547f7ec6b898ebb09d6b64ab7e8ca067761ac01d720",
+      "originalSHA256": "32e50bf703ba5018cc2f97d216e05b752e388d6b2445387968b1824b7d09c6ed"
+    },
+    {
+      "path": "evidence/touch-arrival.webp",
+      "sha256": "7670d51c510fddd1b5949c9d1c729a6a9a55112498171ef16c27e548efa145ad",
+      "source": "01-actual-camera-arrival.png"
+    },
+    {
+      "path": "evidence/touch-invitation.webp",
+      "sha256": "03fd71bfc5b6eda6ab855b093889c8176bbb8dc979205460d80501450ae928e7",
+      "source": "02-paused-invitation.png"
+    },
+    {
+      "path": "evidence/portrait-result.json.gz",
+      "sha256": "76d4be05631041f814e8cc87f1148cbb22e0a2aa0ef6cca72ca4e1b1ee3e4596",
+      "originalSHA256": "e7a6a891573620e42f38308fe5e20a563855ff77541f2ea69554da3e461e5911"
+    },
+    {
+      "path": "evidence/portrait-arrival.webp",
+      "sha256": "7828a8eb981562b3a13fd46ea1f198430df1af8cf1b59b02d41e795625ec0a79",
+      "source": "01-actual-camera-arrival.png"
+    },
+    {
+      "path": "evidence/portrait-invitation.webp",
+      "sha256": "520ace4d2b05dcb4e59a70e5bb9cc0b54c2760f04c931716b28a0eda8e644cc7",
+      "source": "02-paused-invitation.png"
+    },
+    {
+      "path": "evidence/production-build.log.gz",
+      "sha256": "e17b75bbca6357f8add9b97a34e762d746a2964871f19c000aaaad1f12e0c89e"
+    }
+  ]
+}
