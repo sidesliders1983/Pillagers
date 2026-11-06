@@ -1,0 +1,29 @@
+{
+  "recordedAfterDesktopRunsUtc": "2026-10-30T17:19:02.4072693Z",
+  "os": {
+    "Caption": "Microsoft Windows 10 Pro",
+    "Version": "10.0.19045",
+    "BuildNumber": "19045",
+    "TotalVisibleMemorySize": 16625404
+  },
+  "cpu": {
+    "Name": "Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz",
+    "NumberOfCores": 4,
+    "NumberOfLogicalProcessors": 8
+  },
+  "gpuInventory": [
+    {
+      "Name": "NVIDIA GeForce GTX 1050",
+      "DriverVersion": "32.0.15.8278",
+      "AdapterRAM": 4293918720
+    },
+    {
+      "Name": "Intel(R) HD Graphics 630",
+      "DriverVersion": "27.20.100.9664",
+      "AdapterRAM": 1073741824
+    }
+  ],
+  "rendererActuallyMeasured": "ANGLE Intel HD Graphics 630, D3D11; see each run hardware record",
+  "thermalState": "Not measured; do not infer from this inventory",
+  "powerPlan": "Power Scheme GUID: 49ef8fc0-bb7f-488e-b6a0-f1fc77ec649b  (Dell)"
+}

@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FjordSide · Three.js device comparison</title>
+<link rel="stylesheet" href="fjord-theme.css">
+<style>
+body { margin:0; background:var(--fs-canvas); color:var(--fs-text); font-family:var(--fs-font-body); }
+main { max-width:42rem; margin:2rem auto; padding:1.25rem; }
+section { background:var(--fs-panel); border:1px solid var(--fs-border); border-radius:var(--fs-radius-panel); padding:1rem; }
+label { display:block; margin:1rem 0; } input,select { box-sizing:border-box; width:100%; padding:.5rem; }
+button,a { padding:.75rem; margin:.3rem 0; } button { background:var(--fs-card); border:1px solid var(--fs-accent); border-radius:var(--fs-radius-control); }
+a { color:var(--fs-accent); } iframe { position:fixed; inset:0; width:100%; height:100dvh; border:0; background:var(--fs-canvas); }
+#progress { position:fixed; z-index:10; left:50%; transform:translateX(-50%); bottom:.5rem; max-width:90%; background:var(--fs-panel); border:1px solid var(--fs-accent); border-radius:var(--fs-radius-control); padding:.5rem .75rem; }
+[hidden] { display:none !important; } p { line-height:1.5; }
+</style>
+</head>
+<body><main><section>
+<h1>Three.js device comparison</h1><p id="identity"></p>
+<p>Use Safari on the same iPhone for both links. Let the phone cool between runs,
+keep it in the same orientation, and close other heavy pages. This test uses a separate local QA save. Its measurements are sent only to this local test computer.</p>
+<label>Device model and iOS version<input id="device" required placeholder="For example: iPhone 15, iOS 26.1"></label>
+<label>Phone temperature before the run<select id="thermal"><option value="not-reported">Not reported</option><option>Cool</option><option>Warm</option><option>Hot</option></select></label>
+<p>Press Start once. Loading and a 15-second warm-up are followed by 200 real
+simulation ticks (about two minutes). Do not move the camera during this measurement.
+The result can be saved as JSON, then repeat the other link.</p>
+<button id="start" type="button">Start automatic device check</button>
+<button id="save" type="button" hidden>Save device result JSON</button>
+<button id="backup" type="button" hidden>Download previous QA-origin campaign</button>
+<p id="message" role="status"></p><p><a id="other">Open the other engine</a></p>
+</section></main><iframe id="game" title="FjordSide benchmark" hidden></iframe><div id="progress" role="status" hidden></div>
+<script type="module">
+const smoke = new URLSearchParams(location.search).get('smoke') === '1';
+const requestedTicks = smoke ? 2 : 200;
+const metadata = await (await fetch('review-build.json')).json();
+const game = document.querySelector('#game');
+const status = document.querySelector('#progress');
+const message = document.querySelector('#message');
+const startButton = document.querySelector('#start');
+const saveButton = document.querySelector('#save');
+const key = 'pillagers.fjord-play.active.v1';
+const backup = sessionStorage.getItem(key);
+let result;
+function download(data, name) {
+    const url = URL.createObjectURL(new Blob([data], {type:'application/json'}));
+    const link = document.createElement('a'); link.href = url; link.download = name; link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+document.querySelector('#identity').textContent = `${metadata.arm} · Three.js ${metadata.engineVersion} · ${metadata.commit.slice(0,7)}`;
+const other = new URL(location.href); other.port = metadata.arm === 'A' ? '5207' : '5206';
+document.querySelector('#other').href = other.href;
+if (backup) {
+    const button = document.querySelector('#backup'); button.hidden = false;
+    button.onclick = () => download(backup, 'fjordside-before-three-323.json');
+}
+saveButton.onclick = () => download(JSON.stringify(result,null,2), `fjordside-three-${metadata.arm}-device.json`);
+startButton.onclick = async () => {
+    if (!document.querySelector('#device').reportValidity()) return;
+    startButton.disabled = true;
+    const text = await (await fetch('settlement-expedition.json')).text();
+    if (backup) sessionStorage.setItem('fjordside.qa-three323.backup', backup);
+    sessionStorage.setItem(key, text);
+    const fixture = JSON.parse(text).fjord.campaign;
+    result = { ...metadata, userAgent:navigator.userAgent, device:document.querySelector('#device').value,
+        thermalBefore:document.querySelector('#thermal').value, fixtureSHA256:metadata.fixtureSHA256,
+        startedUtc:new Date().toISOString(), protocol:smoke ? 'Runner smoke: 1 s warm-up and 2 actual ticks; not device acceptance' : '15 s paused warm-up; 200 real expedition ticks; no camera input',
+        viewport:[innerWidth,innerHeight], dpr:devicePixelRatio, frames:[], diagnostics:[], errors:[], status:'running' };
+    game.hidden = status.hidden = false;
+    status.textContent = 'Loading the fixed campaign…';
+    game.src = '/fjord-play?debugPerf=1&debugLifecycle=1';
+    const w = game.contentWindow;
+    const sleep = ms => new Promise(resolve => setTimeout(resolve,ms));
+    const clock = () => {
+        const match = w.document.querySelector('#fjord-diagnostics')?.textContent.match(/Canonical time: Winter (\d+) · tick (\d+)\/(\d+)/);
+        return match ? Number(match[1]) * Number(match[3]) + Number(match[2]) : undefined;
+    };
+    const report = () => {
+        w.document.querySelector('[data-perf-export]').click();
+        return JSON.parse(w.document.querySelector('#performance-overlay textarea').value);
+    };
+    let previous, recording = false, stopped = false;
+    function sample(at) {
+        if (recording && previous !== undefined && result.frames.length < 30000) result.frames.push(at - previous);
+        previous = recording ? at : undefined;
+        if (!stopped) w.requestAnimationFrame(sample);
+    }
+    try {
+        const deadline = performance.now() + 180000;
+        while (!w.document.querySelector('[data-entry="continue"]')) {
+            if (performance.now() > deadline) throw new Error('Start menu did not become ready.');
+            await sleep(250);
+        }
+        const anchorClick = w.HTMLAnchorElement.prototype.click;
+        w.HTMLAnchorElement.prototype.click = function () {
+            if (this.download === 'fjordside-performance.json') return;
+            return anchorClick.call(this);
+        };
+        w.addEventListener('error', event => result.errors.push(event.message));
+        w.addEventListener('unhandledrejection', event => result.errors.push(String(event.reason)));
+        w.document.querySelector('[data-entry="continue"]').click();
+        while (!w.document.querySelector('#fjord-canvas[data-ready="true"]')) {
+            if (performance.now() > deadline) throw new Error('Campaign did not become ready.');
+            await sleep(250);
+        }
+        result.loading = JSON.parse(w.document.querySelector('#fjord-canvas').dataset.loadDiagnostics);
+        status.textContent = 'Warming up for 15 seconds…';
+        await sleep(smoke ? 1000 : 15000);
+        result.before = report();
+        result.startTick = clock();
+        const target = result.startTick + requestedTicks;
+        const started = performance.now();
+        let completed = false;
+        const observer = new w.MutationObserver(() => {
+            if (clock() < target) return;
+            recording = false; stopped = true;
+            result.elapsedMs = performance.now() - started;
+            result.endTick = clock();
+            result.after = report();
+            w.document.querySelector('#fjord-run').click();
+            completed = true;
+            observer.disconnect();
+        });
+        observer.observe(w.document.querySelector('#fjord-diagnostics'), {childList:true});
+        recording = true; w.requestAnimationFrame(sample);
+        w.document.querySelector('#fjord-run').click();
+        while (!completed) {
+            if (performance.now() - started > 240000) throw new Error('Device run exceeded four minutes; evidence retained.');
+            await sleep(500);
+            status.textContent = `${metadata.arm} · ${clock() - result.startTick}/${requestedTicks} ticks · keep the camera still`;
+            if (result.diagnostics.length < Math.floor((performance.now() - started) / 5000)) result.diagnostics.push(report());
+        }
+        result.scene = {...w.document.querySelector('#fjord-canvas').dataset};
+        result.status = result.errors.length ? 'runtime-failure' : result.endTick === target ? 'complete' : 'tick-duration-mismatch';
+        const sorted = [...result.frames].sort((a,b) => a-b);
+        result.summary = {frames:sorted.length, fps:sorted.length/(result.elapsedMs/1000), p50Ms:sorted[Math.ceil(sorted.length*.5)-1], p95Ms:sorted[Math.ceil(sorted.length*.95)-1]};
+    } catch (error) { result.status = 'technical-failure'; result.failure = error.message; }
+    finally {
+        recording = false; stopped = true; result.finishedUtc = new Date().toISOString();
+        game.hidden = status.hidden = true; game.src = 'about:blank';
+        let recorded = false;
+        try {
+            const endpoint = new URL(location.href);
+            endpoint.port = '5208'; endpoint.pathname = '/results'; endpoint.search = '';
+            const abort = new AbortController();
+            const timer = setTimeout(() => abort.abort(), 5000);
+            let response;
+            try { response = await fetch(endpoint, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(result), signal:abort.signal}); }
+            finally { clearTimeout(timer); }
+            recorded = response.ok && (await response.json()).saved;
+        } catch (error) { result.collectionFailure = error.message; }
+        saveButton.hidden = false; saveButton.dataset.status = result.status;
+        message.textContent = `${result.status}. ${recorded ? 'Measurements saved on the test PC.' : 'Automatic save unavailable; keep the result JSON.'} Now test the other engine. ${result.failure ?? ''}`;
+        if (backup) sessionStorage.setItem(key,backup); else sessionStorage.removeItem(key);
+    }
+};
+</script></body></html>

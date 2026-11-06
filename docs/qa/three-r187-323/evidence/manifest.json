@@ -1,0 +1,590 @@
+{
+  "schemaVersion": 1,
+  "archivedUtc": "2026-10-30T17:36:16.993Z",
+  "measuredCommits": {
+    "A": "01dc5f79c9b8ee4024c0fbed338af4778a5f4c97",
+    "B": "1c04d4b1a0213bc38ae1e4bbefc608af78f25bf4"
+  },
+  "records": [
+    {
+      "file": "matrix/1-A.json.gz",
+      "source": "scratch/three-r187-323/matrix/1-A/run.json",
+      "classification": "primary-paused",
+      "status": "complete",
+      "arm": "A",
+      "startedUtc": "2026-10-30T15:57:14.518Z",
+      "rawBytes": 815233,
+      "rawSHA256": "3835eb19b4d765385af7c3fce10288f4c368f011b5bfa19aed5d72d41d330bcd",
+      "archiveBytes": 99697,
+      "archiveSHA256": "cd87844ebfc134b120949bc343a7e0c7c9d2523e933849487870339c3057466f",
+      "verifiedLossless": true
+    },
+    {
+      "file": "matrix/2-B.json.gz",
+      "source": "scratch/three-r187-323/matrix/2-B/run.json",
+      "classification": "primary-paused",
+      "status": "complete",
+      "arm": "B",
+      "startedUtc": "2026-10-30T15:59:06.450Z",
+      "rawBytes": 825500,
+      "rawSHA256": "803d77a6a69ceb8ab99b3608a9f4eef41e6c8bf42ef62911836074bab9fa86bf",
+      "archiveBytes": 101406,
+      "archiveSHA256": "255d72e563ab9074fb6b85c5a5d47f4dda4e97bcc69b5c77ad884ab643b8de5e",
+      "verifiedLossless": true
+    },
+    {
+      "file": "matrix/3-B.json.gz",
+      "source": "scratch/three-r187-323/matrix/3-B/run.json",
+      "classification": "primary-paused",
+      "status": "complete",
+      "arm": "B",
+      "startedUtc": "2026-10-30T16:01:00.135Z",
+      "rawBytes": 823215,
+      "rawSHA256": "4db182292f5f39d714ecc083ae766677fdcc9e9d3e88a73bd2b648e4f32cfab3",
+      "archiveBytes": 100706,
+      "archiveSHA256": "9c5967f570858d4b63d56709530403cfc3ab33b7dec9df389b4bfa1b1b990151",
+      "verifiedLossless": true
+    },
+    {
+      "file": "matrix/4-A.json.gz",
+      "source": "scratch/three-r187-323/matrix/4-A/run.json",
+      "classification": "primary-paused",
+      "status": "complete",
+      "arm": "A",
+      "startedUtc": "2026-10-30T16:02:51.544Z",
+      "rawBytes": 818837,
+      "rawSHA256": "2089a9a13560c2b3242028a06fd1f8ff3f95a7231f4dd45c50028316feed19e6",
+      "archiveBytes": 100985,
+      "archiveSHA256": "712743038cab7848a3c0167d69c60409218913a3934114143655b0685da5c70e",
+      "verifiedLossless": true
+    },
+    {
+      "file": "matrix/5-A.json.gz",
+      "source": "scratch/three-r187-323/matrix/5-A/run.json",
+      "classification": "primary-paused",
+      "status": "complete",
+      "arm": "A",
+      "startedUtc": "2026-10-30T16:04:43.672Z",
+      "rawBytes": 812051,
+      "rawSHA256": "4650b629c41c52199f1dd1aaf745fa9732652a14a3c075cc0557c73333f70711",
+      "archiveBytes": 100436,
+      "archiveSHA256": "9dccebdcff23c98429d82f9a70438abf8e3cef9341cf6a4c04dbd4b6b4399839",
+      "verifiedLossless": true
+    },
+    {
+      "file": "matrix/6-B.json.gz",
+      "source": "scratch/three-r187-323/matrix/6-B/run.json",
+      "classification": "primary-paused",
+      "status": "complete",
+      "arm": "B",
+      "startedUtc": "2026-10-30T16:06:36.176Z",
+      "rawBytes": 808669,
+      "rawSHA256": "9ed3b0f470c59ddf31bda9de54c159a798572893e74dd352ab50a8fe3a826878",
+      "archiveBytes": 100959,
+      "archiveSHA256": "fbecfd96a9f4fe0065b09028755eab733f45d3a580f88e3bd216948d63655d8b",
+      "verifiedLossless": true
+    },
+    {
+      "file": "matrix/manifest.json.gz",
+      "source": "scratch/three-r187-323/matrix/manifest.json",
+      "classification": "primary-completeness",
+      "status": "record",
+      "startedUtc": "2026-10-30T15:57:13.269Z",
+      "rawBytes": 3409,
+      "rawSHA256": "52b2ce3663e57d5004cab45f80ca6a3dae0b714a7c8b2961cd8820416173df1b",
+      "archiveBytes": 637,
+      "archiveSHA256": "0a03244d005411a9999c4f6d0f0d6787c956ee2c5e3a34306d0a0c1c50a89ba0",
+      "verifiedLossless": true
+    },
+    {
+      "file": "sustained-A.json.gz",
+      "source": "scratch/three-r187-323/sustained-A/run.json",
+      "classification": "sustained",
+      "status": "complete",
+      "arm": "A",
+      "startedUtc": "2026-10-30T16:42:45.171Z",
+      "rawBytes": 8147284,
+      "rawSHA256": "b8b5a6ac38388ac51f4784b0d90161a36b3df4932c51e0b9fd014639e7178e80",
+      "archiveBytes": 876723,
+      "archiveSHA256": "7416abb676251f0a9da93042f8839f7f24fcc9202cbcfc76a508674dade306b3",
+      "verifiedLossless": true
+    },
+    {
+      "file": "lifecycle-A.json.gz",
+      "source": "scratch/three-r187-323/lifecycle-A/run.json",
+      "classification": "lifecycle",
+      "status": "complete",
+      "arm": "A",
+      "startedUtc": "2026-10-30T16:27:54.094Z",
+      "rawBytes": 1147960,
+      "rawSHA256": "72a728c84a260b8cab092be5b4aecfc5e46db60348be8a9f471db69736d9cbb8",
+      "archiveBytes": 273500,
+      "archiveSHA256": "69010b06b0fc1ec2211d110dd8cb930d3df4a73ad4a29c48421ebe357f7ebf60",
+      "verifiedLossless": true
+    },
+    {
+      "file": "warm-A.json.gz",
+      "source": "scratch/three-r187-323/warm-A/run.json",
+      "classification": "warm",
+      "status": "complete",
+      "arm": "A",
+      "startedUtc": "2026-10-30T17:12:42.636Z",
+      "rawBytes": 15796,
+      "rawSHA256": "d38127b09549b6bff46352b3e1b3cb1ed93a36449f159189e2c700421d6971b3",
+      "archiveBytes": 2418,
+      "archiveSHA256": "9ac7aa34fd29e81e06196309750f377bcfda7f7312cc6b6271a0ce56db74d569",
+      "verifiedLossless": true
+    },
+    {
+      "file": "sustained-A-checkpoint.json.gz",
+      "source": "scratch/three-r187-323/sustained-A/checkpoint.json",
+      "classification": "canonical-state",
+      "status": "record",
+      "rawBytes": 523588,
+      "rawSHA256": "fba8c713a404881ae230a8200433f3d7a68409f7cc79dea0e39d486d62d42532",
+      "archiveBytes": 36986,
+      "archiveSHA256": "b6fba08f6f19bdfc2c6e5c3e2ec5bfbb1276eb0ba3f90857558ebbf18d43a3f5",
+      "verifiedLossless": true
+    },
+    {
+      "file": "lifecycle-A-cache.json.gz",
+      "source": "scratch/three-r187-323/lifecycle-A-cache/run.json",
+      "classification": "bounded-cache-followup",
+      "status": "complete",
+      "arm": "A",
+      "startedUtc": "2026-10-30T16:56:52.190Z",
+      "rawBytes": 1425033,
+      "rawSHA256": "11a17dbc9e0f95803fc0c0b67ab62dbf4ef7db8922e695c96ba09f75f6905f6f",
+      "archiveBytes": 317472,
+      "archiveSHA256": "5c2d07b16b2718e56799317a03b5707dd58f178771abdf843204d5592c56e21e",
+      "verifiedLossless": true
+    },
+    {
+      "file": "pilot-A.json.gz",
+      "source": "scratch/three-r187-323/pilot-A/run.json",
+      "classification": "excluded-runner-pilot",
+      "status": "complete",
+      "arm": "A",
+      "startedUtc": "2026-10-30T15:48:52.264Z",
+      "rawBytes": 252503,
+      "rawSHA256": "c147bfef11d249b6e76351163cf9cefcd4a4fd563e650dabcc24e121bdd791a2",
+      "archiveBytes": 44812,
+      "archiveSHA256": "f1ece915aafd5854a292eb910bb850db39afa9daf8fe62e371748601b758bf41",
+      "verifiedLossless": true
+    },
+    {
+      "file": "visual-winter-A.json.gz",
+      "source": "scratch/three-r187-323/visual-winter-A/run.json",
+      "classification": "visual-only",
+      "status": "complete",
+      "arm": "A",
+      "startedUtc": "2026-10-30T17:09:57.331Z",
+      "rawBytes": 189913,
+      "rawSHA256": "0e249727282968b7ab56dd2272dd2efa555051bf0f982b2af17295f0b0cb6bb6",
+      "archiveBytes": 37611,
+      "archiveSHA256": "555081afe570787b4b616027d2784ee9dcc31025452500a6a7e6ae0425944311",
+      "verifiedLossless": true
+    },
+    {
+      "file": "visual-marsh-A.json.gz",
+      "source": "scratch/three-r187-323/visual-marsh-A/run.json",
+      "classification": "visual-only",
+      "status": "complete",
+      "arm": "A",
+      "startedUtc": "2026-10-30T17:12:00.908Z",
+      "rawBytes": 195610,
+      "rawSHA256": "fbf41e858ec3e07c5437511efe5faaf24de115937261b4f383f2e0c924c9640e",
+      "archiveBytes": 38282,
+      "archiveSHA256": "31fb5f5ddd83f47f3a58323732750f5201c439097bff9304fc322a271a9de54b",
+      "verifiedLossless": true
+    },
+    {
+      "file": "phone-owner-A.json.gz",
+      "source": "scratch/three-r187-323/device-results/user-attachments/A.json",
+      "classification": "physical-Chrome-iOS",
+      "status": "complete",
+      "arm": "A",
+      "startedUtc": "2026-10-30T16:32:22.952Z",
+      "rawBytes": 1504426,
+      "rawSHA256": "b6edd604c1a1c4d73b97c516f10aa03a9ed10754c1833418f71823c1ee883c8e",
+      "archiveBytes": 171399,
+      "archiveSHA256": "5b468691dbcf80d5beecee7b901ad2bd0ad3da113614b2fe634042de869a11ae",
+      "verifiedLossless": true
+    },
+    {
+      "file": "geography-A.json.gz",
+      "source": "../three-r187-spike-323-baseline/output/island-loading-259/geography-three323-A.json",
+      "classification": "single-CPU-generation",
+      "status": "record",
+      "rawBytes": 6722,
+      "rawSHA256": "eea7aeaa5275d4e26c6d01b0657dc9cbbc8c4375286bbe40d9e78c45e3a5a0e4",
+      "archiveBytes": 1501,
+      "archiveSHA256": "ae1a0617d7d06baf608dc3612a7e3d01fc334354575ff7b390a6f6cfdc45a536",
+      "verifiedLossless": true
+    },
+    {
+      "file": "sustained-B.json.gz",
+      "source": "scratch/three-r187-323/sustained-B/run.json",
+      "classification": "sustained",
+      "status": "complete",
+      "arm": "B",
+      "startedUtc": "2026-10-30T16:30:30.378Z",
+      "rawBytes": 8117551,
+      "rawSHA256": "ec116fa1eb10a2447b3557a441eebe47c50e2800be3424e33abf2fde839a9ade",
+      "archiveBytes": 882486,
+      "archiveSHA256": "21a56b5c24a1c1ad38960cf421d7c0c52ede3ddea77ab174292ef88daf86d028",
+      "verifiedLossless": true
+    },
+    {
+      "file": "lifecycle-B.json.gz",
+      "source": "scratch/three-r187-323/lifecycle-B/run.json",
+      "classification": "lifecycle",
+      "status": "complete",
+      "arm": "B",
+      "startedUtc": "2026-10-30T16:23:48.062Z",
+      "rawBytes": 1145136,
+      "rawSHA256": "2a931a04383b51caaff369b34378bf3e29ce0cdd60f3ae51d55a2a611b91a248",
+      "archiveBytes": 272362,
+      "archiveSHA256": "135dfd2caa631dbe58f52c7d4296754a45c28a06f9ee9c35b6f159e053900800",
+      "verifiedLossless": true
+    },
+    {
+      "file": "warm-B.json.gz",
+      "source": "scratch/three-r187-323/warm-B/run.json",
+      "classification": "warm",
+      "status": "complete",
+      "arm": "B",
+      "startedUtc": "2026-10-30T17:13:38.730Z",
+      "rawBytes": 15781,
+      "rawSHA256": "5ded7a9f1ba4f54d3baf334bc1809099ccb7a6992e801b53713c7fc2dbfec992",
+      "archiveBytes": 2395,
+      "archiveSHA256": "bf843e14dd76a904ae7ced47d69691ffb9f48864bb457fff6f3ce270f782db11",
+      "verifiedLossless": true
+    },
+    {
+      "file": "sustained-B-checkpoint.json.gz",
+      "source": "scratch/three-r187-323/sustained-B/checkpoint.json",
+      "classification": "canonical-state",
+      "status": "record",
+      "rawBytes": 523588,
+      "rawSHA256": "3ea796cb93a485c790e87599ed3beefb464640dd88c53e346b87eb4ffaecbcc8",
+      "archiveBytes": 36987,
+      "archiveSHA256": "82ce84eb386c39c3a9afa9456849751026a88fc2e5316f0e3f68cb798a2e9c47",
+      "verifiedLossless": true
+    },
+    {
+      "file": "lifecycle-B-cache.json.gz",
+      "source": "scratch/three-r187-323/lifecycle-B-cache/run.json",
+      "classification": "bounded-cache-followup",
+      "status": "complete",
+      "arm": "B",
+      "startedUtc": "2026-10-30T17:00:01.632Z",
+      "rawBytes": 1421174,
+      "rawSHA256": "1aedcc03f16a27bebcdb0f22e9ce9ae72e0b88bace493927151aa203dce24dec",
+      "archiveBytes": 316819,
+      "archiveSHA256": "63105a30e60b038390f290d5325178bb3fb41cb2948fd3c968ea61c3cb05939c",
+      "verifiedLossless": true
+    },
+    {
+      "file": "pilot-B.json.gz",
+      "source": "scratch/three-r187-323/pilot-B/run.json",
+      "classification": "excluded-runner-pilot",
+      "status": "complete",
+      "arm": "B",
+      "startedUtc": "2026-10-30T15:47:47.572Z",
+      "rawBytes": 253790,
+      "rawSHA256": "845117f57725d33e31302721e5471f90fd1131d018befb35fc3ccf6c27ef8481",
+      "archiveBytes": 45093,
+      "archiveSHA256": "afd4fcb1eb7a0a2d4b04b6295384baba6a7a54ffbf775627793f157dfef5c9d8",
+      "verifiedLossless": true
+    },
+    {
+      "file": "visual-winter-B.json.gz",
+      "source": "scratch/three-r187-323/visual-winter-B/run.json",
+      "classification": "visual-only",
+      "status": "complete",
+      "arm": "B",
+      "startedUtc": "2026-10-30T17:10:39.421Z",
+      "rawBytes": 190535,
+      "rawSHA256": "c8677410f7768cd57fe2c88bf15aeab6b59979ddc086d8ea6e75ad2ab215ede4",
+      "archiveBytes": 37742,
+      "archiveSHA256": "d3c22974de8bc7fc7217d5482ada407e075a0885b6e3357e13e5835e30e0dce3",
+      "verifiedLossless": true
+    },
+    {
+      "file": "visual-marsh-B.json.gz",
+      "source": "scratch/three-r187-323/visual-marsh-B/run.json",
+      "classification": "visual-only",
+      "status": "complete",
+      "arm": "B",
+      "startedUtc": "2026-10-30T17:11:19.643Z",
+      "rawBytes": 195605,
+      "rawSHA256": "c7da75243dd7469e2d8eab8459e6f2540ae06f091eccd73c73d276c1b593e1a9",
+      "archiveBytes": 38423,
+      "archiveSHA256": "3013724208d5201911cb452f392d9048b608864c7c9ea128c917e83743d43755",
+      "verifiedLossless": true
+    },
+    {
+      "file": "phone-owner-B.json.gz",
+      "source": "scratch/three-r187-323/device-results/user-attachments/B.json",
+      "classification": "physical-Chrome-iOS",
+      "status": "complete",
+      "arm": "B",
+      "startedUtc": "2026-10-30T16:36:44.792Z",
+      "rawBytes": 1518592,
+      "rawSHA256": "e70c7235697a3b9420d0545a3392c3beeb49da6fb37e2872f22a5a43cec7cf05",
+      "archiveBytes": 171287,
+      "archiveSHA256": "b8866d518daab6aabe7f2739015ff9b4e37a1e8de992c9b5995536979e4467e6",
+      "verifiedLossless": true
+    },
+    {
+      "file": "geography-B.json.gz",
+      "source": "output/island-loading-259/geography-three323-B.json",
+      "classification": "single-CPU-generation",
+      "status": "record",
+      "rawBytes": 6726,
+      "rawSHA256": "69526c7c4249dc48a9de74210398defb28d7154818d541bfd6fb9b9b7e1eb9d3",
+      "archiveBytes": 1501,
+      "archiveSHA256": "228e962c09347f2e3b3719378bdae24968ab41c4ba9f5ea3994a0c1167fbbf6b",
+      "verifiedLossless": true
+    },
+    {
+      "file": "device-results/1793376806220-B-b4e3e318-92c3-4e5d-a7e1-261c71cd8b92.json.gz",
+      "source": "scratch/three-r187-323/device-results/1793376806220-B-b4e3e318-92c3-4e5d-a7e1-261c71cd8b92.json",
+      "classification": "excluded-wrapper-smoke",
+      "status": "complete",
+      "arm": "B",
+      "startedUtc": "2026-10-30T16:12:55.475Z",
+      "rawBytes": 114599,
+      "rawSHA256": "b2d331d02f86a3381c7468e130f8dda6328081bf3f807b9dd3e0fc455a8e147b",
+      "archiveBytes": 21898,
+      "archiveSHA256": "b8fb654518e26f6276f7418fd81f4dd0ea57c2e423ec745c604370fe83ee566f",
+      "verifiedLossless": true
+    },
+    {
+      "file": "device-results/1793378173346-A-0e66a579-3b6c-4c0b-8b63-deaacad1062e.json.gz",
+      "source": "scratch/three-r187-323/device-results/1793378173346-A-0e66a579-3b6c-4c0b-8b63-deaacad1062e.json",
+      "classification": "duplicate-phone-session",
+      "status": "complete",
+      "arm": "A",
+      "startedUtc": "2026-10-30T16:32:22.952Z",
+      "rawBytes": 819539,
+      "rawSHA256": "d1ccf2704fe67913a784784fd0d3a8ff81f7030e7602a41dd63d03dae4bbddd8",
+      "archiveBytes": 47455,
+      "archiveSHA256": "b2a62ff263a0e12428971e94f8e0d5b32528add4239f5d2e897938c8b858e4ce",
+      "verifiedLossless": true
+    },
+    {
+      "file": "device-results/1793378448512-B-a3792af2-5648-48a5-b612-f1d67ea0298a.json.gz",
+      "source": "scratch/three-r187-323/device-results/1793378448512-B-a3792af2-5648-48a5-b612-f1d67ea0298a.json",
+      "classification": "duplicate-phone-session",
+      "status": "complete",
+      "arm": "B",
+      "startedUtc": "2026-10-30T16:36:44.792Z",
+      "rawBytes": 827905,
+      "rawSHA256": "60a575aa2d489ee35d43681c66fda7680591a6e1ea2d3e8a662794e4a80ece8b",
+      "archiveBytes": 47551,
+      "archiveSHA256": "ebf88138b921637f994259396839059dea76559615c107764d8cfd99d509bdfe",
+      "verifiedLossless": true
+    },
+    {
+      "file": "device-results/thermal-observation.json.gz",
+      "source": "scratch/three-r187-323/device-results/thermal-observation.json",
+      "classification": "qualitative-owner-observation",
+      "status": "record",
+      "rawBytes": 266,
+      "rawSHA256": "4a025f24b85cbc8db6604d8a78f280dd91c56d9ea546c9253ca3ffc1d67446fa",
+      "archiveBytes": 192,
+      "archiveSHA256": "7b5ff1f3a6cf0de834227637be42ecf508cefadf633ed183748163ffa10e8fb7",
+      "verifiedLossless": true
+    },
+    {
+      "file": "excluded/lifecycle-B-001.json.gz",
+      "source": "scratch/three-r187-323/lifecycle-B-failed-001/run.json",
+      "classification": "excluded-runner-wrong-file-envelope",
+      "status": "technical-failure",
+      "arm": "B",
+      "startedUtc": "2026-10-30T16:15:28.090Z",
+      "rawBytes": 108032,
+      "rawSHA256": "99d2469c0476dd20c61e6543a0d59ccce96ce7d6802b79ff42971b0ac19730c8",
+      "archiveBytes": 21077,
+      "archiveSHA256": "b3fa77c538ef86f2c3156c57eb46d6f595421f6e8f108e8334b6c1ccc1eb2595",
+      "verifiedLossless": true
+    },
+    {
+      "file": "excluded/lifecycle-B-002.json.gz",
+      "source": "scratch/three-r187-323/lifecycle-B-failed-002/run.json",
+      "classification": "excluded-runner-wrong-file-envelope",
+      "status": "technical-failure",
+      "arm": "B",
+      "startedUtc": "2026-10-30T16:19:25.597Z",
+      "rawBytes": 189650,
+      "rawSHA256": "60c1371c88374610066815c59ad09d4bf4bc1103f268950cc141d05f8bdbc545",
+      "archiveBytes": 38289,
+      "archiveSHA256": "f272efaea151a916596d67a0c13454d5450c668c11cd90a730b2fc395da1e96b",
+      "verifiedLossless": true
+    },
+    {
+      "file": "excluded/lifecycle-B-003.json.gz",
+      "source": "scratch/three-r187-323/lifecycle-B-interrupted-003/reason.json",
+      "classification": "excluded-interrupted-known-runner-error",
+      "status": "interrupted",
+      "rawBytes": 237,
+      "rawSHA256": "c878ccf1748ac33f3e29c4ebc361ffe6e4469fc7b0402de56b385d6cc29c20ee",
+      "archiveBytes": 189,
+      "archiveSHA256": "67fc52015ca33bc768c7a09f2107da4c1ded71ae6f66f03d7b8db8c97424c865",
+      "verifiedLossless": true
+    }
+  ],
+  "images": [
+    {
+      "file": "images/settlement-A.webp",
+      "source": "matrix/1-A/after.png",
+      "originalSHA256": "4744e17d1ab79a6a335565c387ef6dda6ced40e4d02e728715346b0f6a040384",
+      "originalBytes": 1130666,
+      "width": 1440,
+      "height": 900,
+      "derivativeSHA256": "817400cf927a58f45e817c813129380b9bb991ac841e04d09a4d32a03584568e",
+      "derivativeBytes": 151818
+    },
+    {
+      "file": "images/settlement-B.webp",
+      "source": "matrix/2-B/after.png",
+      "originalSHA256": "20913dffdc474c9fa5d889de128edea20f39ffa1395bdf33e878fb4efa42d162",
+      "originalBytes": 1126681,
+      "width": 1440,
+      "height": 900,
+      "derivativeSHA256": "d048d8c3de3c92dfdfcf668bc95661096dcfb48ec2ee1d22e4e4a3fb546b632b",
+      "derivativeBytes": 151670
+    },
+    {
+      "file": "images/winter-A.webp",
+      "source": "visual-winter-A/after.png",
+      "originalSHA256": "74e8b5539511c16c84147a12d58e8e4eb0755773f977b0eb814321fa0a20835f",
+      "originalBytes": 514018,
+      "width": 1440,
+      "height": 900,
+      "derivativeSHA256": "03e060b2b37aee6af74e618a8ac4752b30b7df990c33cac522ccbf6b2af5791e",
+      "derivativeBytes": 61628
+    },
+    {
+      "file": "images/winter-B.webp",
+      "source": "visual-winter-B/after.png",
+      "originalSHA256": "8d45b23f8d94b876daf0fd46093303059acbe8e64fceb9aa499688b26937470c",
+      "originalBytes": 559646,
+      "width": 1440,
+      "height": 900,
+      "derivativeSHA256": "d672c8ed28e64f6e45296cf3038a9f950167760a324a66d9ea1ddbcc25a15858",
+      "derivativeBytes": 62090
+    },
+    {
+      "file": "images/marsh-A.webp",
+      "source": "visual-marsh-A/after.png",
+      "originalSHA256": "f5fa8102b287e8a424e4ab4cc2ab7f9b6b046c2d57988914c200f26fedd57aca",
+      "originalBytes": 895676,
+      "width": 1440,
+      "height": 900,
+      "derivativeSHA256": "f728068ce07b8c318b19bf533cb8ae6b55553fa693b3d6b5778ee0d0700e062a",
+      "derivativeBytes": 117238
+    },
+    {
+      "file": "images/marsh-B.webp",
+      "source": "visual-marsh-B/after.png",
+      "originalSHA256": "1e45d0ac7710bc106b22c6302e4afcced02d976350d3d9e7814fcf0c18bf8b71",
+      "originalBytes": 889441,
+      "width": 1440,
+      "height": 900,
+      "derivativeSHA256": "25a1a9bbd508c06e9c8253fd263ed366f18416eb1cad3dd0f5a8bc4309dc7baa",
+      "derivativeBytes": 115742
+    },
+    {
+      "file": "images/hdr-A.webp",
+      "source": "lifecycle-A/standard-hdr.png",
+      "originalSHA256": "98dda3e063e956f72b9fde5167be1b4316657945a8fdfeabbfd9bf7732067859",
+      "originalBytes": 3487840,
+      "width": 2160,
+      "height": 1350,
+      "derivativeSHA256": "3a9cfe80dc687d71e18041e6191b2a5104f4f1868eb18bf6ce5c027d0b31bfb6",
+      "derivativeBytes": 494088
+    },
+    {
+      "file": "images/hdr-B.webp",
+      "source": "lifecycle-B/standard-hdr.png",
+      "originalSHA256": "8f1f8c9e8c2f20d3d1f424c81a142197fb8e15eb338ae24f3196ee16a6e4a25e",
+      "originalBytes": 3430309,
+      "width": 2160,
+      "height": 1350,
+      "derivativeSHA256": "872706b5dadadba4512bd96a5cf02937bb1867b5fa59207b0eb52baa24a987ff",
+      "derivativeBytes": 472828
+    },
+    {
+      "file": "images/portrait-A.webp",
+      "source": "lifecycle-A/portrait-founder-4.png",
+      "originalSHA256": "5e947d53ad88636ed2823e6ef92b6995a81877997482eab3ce99e6178dc6556a",
+      "originalBytes": 3101153,
+      "width": 2160,
+      "height": 1350,
+      "derivativeSHA256": "3ad680833b3b6523eaa9e57665d8fe0e07e51087ff56828ced9def47f8cfd3c9",
+      "derivativeBytes": 448876
+    },
+    {
+      "file": "images/portrait-B.webp",
+      "source": "lifecycle-B/portrait-founder-4.png",
+      "originalSHA256": "1f53e0c9fb90243ba164158d80b38d12b4f6944e959ad34b0c58f55689623de1",
+      "originalBytes": 3047223,
+      "width": 2160,
+      "height": 1350,
+      "derivativeSHA256": "7abebe3b1ce3b4e9517a0da0dfe3107519ec8006c83352259375460e28779a0f",
+      "derivativeBytes": 435496
+    }
+  ],
+  "notes": [
+    "Raw JSON is gzip-compressed losslessly; hashes refer to original and archived bytes separately.",
+    "Images are display derivatives; original PNG hashes and dimensions are retained.",
+    "Automatic phone uploads and owner attachments describe the same sessions and must not be counted twice.",
+    "Chrome iOS is not the required physical Safari acceptance. No temperature/VRAM/unsupported API values are inferred."
+  ],
+  "completeness": {
+    "primaryPaused": {
+      "expected": 6,
+      "complete": 6
+    },
+    "sustained": {
+      "expected": 2,
+      "complete": 2
+    },
+    "lifecycle": {
+      "expected": 2,
+      "complete": 2
+    },
+    "cacheFollowup": {
+      "expected": 2,
+      "complete": 2
+    },
+    "warm": {
+      "expected": 2,
+      "complete": 2
+    },
+    "visuals": {
+      "expected": 4,
+      "complete": 4
+    },
+    "physicalChromeIOS": {
+      "expected": 2,
+      "complete": 2
+    },
+    "physicalSafari": {
+      "expected": 2,
+      "complete": 0,
+      "status": "awaiting-device-evidence"
+    },
+    "resourceLimited": 0,
+    "runnerTechnicalFailuresExcluded": 2,
+    "interruptedKnownRunnerErrorExcluded": 1
+  },
+  "totals": {
+    "rawJsonBytes": 33764455,
+    "archivedJsonBytes": 4387276,
+    "displayImageBytes": 2511474
+  }
+}

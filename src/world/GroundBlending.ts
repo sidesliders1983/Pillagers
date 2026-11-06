@@ -74,7 +74,7 @@ export function* groundLayerIndexSteps(geometry: BufferGeometry, world: WorldBlu
     geometry.clearGroups();
     for (let layer = 0; layer < masks.length; layer++) {
         const start = indices.length;
-        const data = masks[layer].image.data;
+        const data = masks[layer].image.data!;
         for (let row = 0; row < rows - 1; row++) for (let col = 0; col < columns - 1; col++) {
             if (col === 0 && row % 8 === 0) yield;
             const sample = row * columns + col;
