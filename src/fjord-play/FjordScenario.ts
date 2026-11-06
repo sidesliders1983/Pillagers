@@ -1,6 +1,12 @@
 import { GameplaySession } from '../gameplay-lab/GameplaySession';
 import { fjordLivestockRules } from '../config/FjordLivestock';
 
+/** Explicit preview opt-in. The rule then travels with the campaign save. */
+export function useFjordCommunityHearth(session: GameplaySession, preview: boolean): void {
+    if (preview && !session.readSnapshot().communityHearth)
+        session.command({ type: 'EnableCommunityHearth' });
+}
+
 /** Approved fresh Fjord start. Replay/restore use the selected save's own rules instead. */
 export function newFjordScenario(seed: number, contextualSupportPrototype = false, tradeEnabled = true): GameplaySession {
     const session = new GameplaySession(seed, undefined, true, 'summer-800-v1', undefined,

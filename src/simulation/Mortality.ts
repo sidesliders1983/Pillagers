@@ -1,3 +1,4 @@
+import { communityHearthHeatReduction, recordCommunityHearthAssessment } from './CommunityHearth';
 import { releaseEquipment } from './Smithery';
 import { applyCulturalWeatherSupport } from './CulturalEvents';
 import { careActive, careEndpoint, endCare } from './CareCalendar';
@@ -23,22 +24,35 @@ export function resolveMortality(
 ): number {
     const mechanics=state.mechanics!,bands=mechanics.config.mortalityBands;
     const hasPreparedSupport = settlementAssessment && !!state.culture?.supportSourceEventIds.length;
-    const assessments = hasPreparedSupport ? Object.keys(state.personas).sort().flatMap(id => {
+    const hasHearth = settlementAssessment && !!state.communityHearth;
+    const heatReductionBps = hasHearth ? communityHearthHeatReduction(state) : 0;
+    const assessments = hasPreparedSupport || hasHearth ? Object.keys(state.personas).sort().flatMap(id => {
         const person = state.personas[id];
         if (person.deathWinter !== null || (eligibleIds && !eligibleIds.has(id))) return [];
         const age = personaAge(state, id);
         const naturalRiskBps = [...bands].reverse().find(band => band.minAge <= age)?.chanceBps ?? 0;
-        return [{ personaId: id, naturalRiskBps,
-            baselineWeatherExposureBps: personaAway(state, id) ? 0 : personaWeatherExposure(state, id) }];
+        const baselineWeatherExposureBps = personaAway(state, id) ? 0 : personaWeatherExposure(state, id);
+        return [{ personaId: id, naturalRiskBps, baselineWeatherExposureBps,
+            ...(hasHearth ? { heatReductionBps, heatedWeatherExposureBps: baselineWeatherExposureBps -
+                Math.floor(baselineWeatherExposureBps * heatReductionBps / 10000) } : {}) }];
     }) : [];
     const support = assessments.length ? applyCulturalWeatherSupport(state, assessments) : null;
+    const assessed = new Map(assessments.map(row => [row.personaId, row]));
+    if (hasHearth) recordCommunityHearthAssessment(state, assessments.map(row => {
+        const weatherExposureBps = support?.risks.get(row.personaId)?.weatherExposureBps ??
+            row.heatedWeatherExposureBps ?? row.baselineWeatherExposureBps;
+        return { personaId: row.personaId, naturalRiskBps: row.naturalRiskBps,
+            baselineWeatherExposureBps: row.baselineWeatherExposureBps,
+            heatedWeatherExposureBps: row.heatedWeatherExposureBps ?? row.baselineWeatherExposureBps,
+            weatherExposureBps, mortalityRiskBps: Math.min(10000, row.naturalRiskBps + weatherExposureBps) };
+    }), support?.eventId ?? null);
     const deaths = Object.keys(state.personas).sort().flatMap(id => {
         const person = state.personas[id];
         if (person.deathWinter !== null || (eligibleIds && !eligibleIds.has(id))) return [];
         const age = personaAge(state, id);
         const band = [...bands].reverse().find(band => band.minAge <= age);
         const supported = support?.risks.get(id);
-        const weatherExposureBps = supported?.weatherExposureBps ??
+        const weatherExposureBps = supported?.weatherExposureBps ?? assessed.get(id)?.heatedWeatherExposureBps ??
             (personaAway(state, id) ? 0 : personaWeatherExposure(state, id));
         const risk = Math.min(10000, (band?.chanceBps ?? 0) + weatherExposureBps);
         if (!roll(risk)) return [];

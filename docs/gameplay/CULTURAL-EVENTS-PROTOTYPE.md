@@ -357,3 +357,51 @@ This rollout does not add contextualSupport to historical campaigns that lacked 
 activate that separate autonomous-help pilot in ordinary new Fjord scenarios. Explicit QA
 campaigns and existing enabled support states retain their own configuration. Core loading
 on its own never invokes the Fjord adoption command.
+
+## Community Hearth trial (#313)
+
+The owner approved the following values for the first playtest. Open Fjord Play
+with `?communityHearth=1` to adopt these rules in a new or existing campaign.
+Once adopted, the rule, tier, reserved site and measured winter operation travel
+with the save. Ordinary campaigns start with their existing campfire rules.
+
+| Tier | Upgrade cost | Full cold-window heat reduction | Newly earned occasion support |
+| --- | ---: | ---: | ---: |
+| Campfire | — | 10% | ×1.00 (25% with the usual culture rule) |
+| Gathering Shelter | 15 Materials | 20% | ×1.25 (31.25%) |
+| Clan Hall | 30 Materials | 30% | ×1.50 (37.5%) |
+
+A basic home costs 10 Materials and removes extra exposure for its residents.
+The shared site buys no housing capacity. Its two paid upgrades reuse the same
+fire, fuel balance and gathering court. The Gathering Shelter fits over the fire.
+The Clan Hall fits around it with the fire in its open forecourt. Each upgrade
+fits the visible fire bowl and its effects to the authored opening. Ground stays
+visible around the structures, with small stone supports added only where their
+feet need them. Cultural gatherings take place in the open area by the fire.
+A blocked footprint or a ceremony in progress prevents purchase before any
+Materials are spent. Earlier trial saves retain their paid tier and receipts and
+use the corrected campfire layout wherever the existing settlement has room.
+
+Direct heat is a settlement-level benefit for eligible local residents. Each
+paid burning tick in the first quarter of the weather year adds that tick's
+actual tier strength to a saved accumulator. The denominator is all 250 cold
+window ticks, including unheated or unobserved time. A Summer founding earns
+no heat for the preceding cold quarter. A late adoption or upgrade contributes
+only from its actual tick. Turning off the fire after the cold quarter preserves
+coverage already earned. The assessment uses the outgoing weather year and
+then begins the next year's coverage.
+
+Warmth reduces existing extra weather exposure before one qualifying prepared
+support reduces the remainder. Each step subtracts the floor of the reduction
+in basis points. For example, 200 bps of exposure becomes 140 with full Clan
+Hall heat, then 88 with Clan Hall occasion support. Natural mortality enters
+the existing roll separately. Housing, absence, weather settings and eligibility
+are evaluated through the existing settlement assessment. Birthdays and expedition
+returns do not create additional hearth assessments.
+
+Support remains limited to two prepared sources. The accepted gathering records
+its venue tier, rule version and effective reduction. Upgrading the hearth never
+revalues old support. Older gathering receipts and contextual support use the
+original rule. Ceremony pricing, attendance and optional sponsorship continue to
+use the existing gathering commands. The Community Hearth panel shows current
+coverage, actual exposed local residents and the last assessed risk components.

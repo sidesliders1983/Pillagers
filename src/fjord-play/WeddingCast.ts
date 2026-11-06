@@ -3,6 +3,8 @@ import { availableCulturalParticipants, type SimulationEvent, type SimulationSta
 export type WeddingInstrument = 'wedding-lyre' | 'wedding-flute' | 'wedding-frame-drum';
 export type WeddingRole = { id: string; role: 'couple' | 'officiant' | 'musician' | 'clapper';
     instrument?: WeddingInstrument; crown?: boolean };
+export const weddingArch = { halfSpan: 2.15, depth: -3.25, outdoorDepth: -5.25, clearance: .35 };
+
 export const weddingInstrumentOrder: readonly WeddingInstrument[] = [
     'wedding-lyre', 'wedding-flute', 'wedding-frame-drum',
 ];

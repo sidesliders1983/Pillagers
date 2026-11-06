@@ -4,16 +4,18 @@ import {
 } from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { SelectionLabels, type SelectionLabel } from './SelectionLabels';
+import { weddingArch } from './WeddingCast';
 import './cultural-ceremony.css';
 
 export type CeremonyOccasion = 'wedding' | 'communal_ceremony';
+type CeremonyDecoration = CeremonyOccasion | 'outdoor_wedding';
 export type CeremonyFrame = {
     id: string;
     occasion: string;
     phase: string;
     position: { x: number; y: number; z: number };
     visible: boolean;
-    wedding?: { rotation: number };
+    wedding?: { rotation: number; outdoorArch?: boolean };
     spouseIds: readonly string[];
 };
 export type CeremonySpouseAnchor = {
@@ -38,8 +40,9 @@ const blossom = '#e8d5a6';
 const gold = '#d4ae64';
 const cloth = '#854a43';
 
-/** One static, vertex-coloured mesh; decoration stays inside the fire's existing obstacle. */
-function ceremonyGeometry(occasion: CeremonyOccasion): BufferGeometry {
+/** One static, vertex-coloured mesh for the flags and garland or wedding arch. */
+function ceremonyGeometry(decoration: CeremonyDecoration): BufferGeometry {
+    const wedding = decoration !== 'communal_ceremony';
     const parts: BufferGeometry[] = [];
     const add = (shape: BufferGeometry, color: string, position: Vector3,
         rotation = new Vector3()) => {
@@ -76,8 +79,8 @@ function ceremonyGeometry(occasion: CeremonyOccasion): BufferGeometry {
         }
     };
 
-    const standardHalfSpan = occasion === 'wedding' ? 3.55 : 2.15;
-    const standardDepth = occasion === 'wedding' ? .4 : -3.25;
+    const standardHalfSpan = wedding ? 3.55 : 2.15;
+    const standardDepth = wedding ? .4 : -3.25;
     for (const side of [-1, 1]) {
         const x = side * standardHalfSpan;
         beam(new Vector3(x, 0, standardDepth), new Vector3(x, 2.6, standardDepth), .07, wood);
@@ -86,13 +89,17 @@ function ceremonyGeometry(occasion: CeremonyOccasion): BufferGeometry {
         add(new BoxGeometry(.035, 1.05, .045), gold, new Vector3(x - .32, 1.9, standardDepth));
         add(new BoxGeometry(.035, 1.05, .045), gold, new Vector3(x + .32, 1.9, standardDepth));
     }
-    if (occasion === 'wedding') {
-        for (const side of [-1, 1])
-            beam(new Vector3(side * 2.15, 0, -3.25), new Vector3(side * 2.15, 2.7, -3.25), .09, wood);
-        let previous = new Vector3(-2.15, 2.7, -3.25);
+    if (wedding) {
+        const { halfSpan } = weddingArch;
+        const depth = decoration === 'outdoor_wedding' ? weddingArch.outdoorDepth : weddingArch.depth;
+        for (const side of [-1, 1]) {
+            const x = side * halfSpan;
+            beam(new Vector3(x, 0, depth), new Vector3(x, 2.7, depth), .09, wood);
+        }
+        let previous = new Vector3(-halfSpan, 2.7, depth);
         for (let segment = 1; segment <= 12; segment++) {
-            const x = -2.15 + 4.3 * segment / 12;
-            const next = new Vector3(x, 2.7 + Math.sin(segment / 12 * Math.PI) * .65, -3.25);
+            const x = -halfSpan + 2 * halfSpan * segment / 12;
+            const next = new Vector3(x, 2.7 + Math.sin(segment / 12 * Math.PI) * .65, depth);
             beam(previous, next, .075, foliage);
             add(new OctahedronGeometry(.18, 0), foliage,
                 next.clone().add(new Vector3(0, -.11, .02)), new Vector3(0, .4, segment));
@@ -121,7 +128,7 @@ function ceremonyGeometry(occasion: CeremonyOccasion): BufferGeometry {
 export class CulturalCeremonyVisuals {
     private readonly root = new Group();
     private readonly material = new MeshStandardMaterial({ color: '#ffffff', vertexColors: true, roughness: 1 });
-    private readonly geometries = new Map<CeremonyOccasion, BufferGeometry>();
+    private readonly geometries = new Map<CeremonyDecoration, BufferGeometry>();
     private mesh?: Mesh;
     private disposed = false;
     private labelLayer?: HTMLElement;
@@ -157,10 +164,11 @@ export class CulturalCeremonyVisuals {
             this.hideLabels();
             return;
         }
-        let geometry = this.geometries.get(occasion);
+        const decoration = occasion === 'wedding' && frame.wedding?.outdoorArch ? 'outdoor_wedding' : occasion;
+        let geometry = this.geometries.get(decoration);
         if (!geometry) {
-            geometry = ceremonyGeometry(occasion);
-            this.geometries.set(occasion, geometry);
+            geometry = ceremonyGeometry(decoration);
+            this.geometries.set(decoration, geometry);
         }
         if (!this.mesh) {
             this.mesh = new Mesh(geometry, this.material);

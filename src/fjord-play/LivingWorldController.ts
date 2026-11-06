@@ -3,10 +3,11 @@ import { livestockPresentation } from '../characters/LivestockPresentation';
 import { passConversation, passNeighbours } from '../systems/ResidentPassing';
 import { SocialEncounters, residentMovementConfig, turnToward } from '../systems/SocialEncounters';
 import { settlementCampfire, type SettlementCampfire } from './SettlementCampfire';
-import type { FjordEntity } from './FjordProjection';
+import type { FjordEntity, FjordPlot } from './FjordProjection';
 import type { FjordGround } from './FjordGround';
 import type { Point2, WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
+import { communityHearthContains, communityHearthObstacleBounds } from './CommunityHearthGeometry';
 export type RouteObservation = { agent: string; kind: string; purpose: string; target: string;
     goal: Point2 | null; from: Point2; reason: string; nodes: number; accepted: boolean;
     navigationGeneration: number; reservationGeneration: number; occupancy: string;
@@ -99,6 +100,7 @@ export class LivingWorldController {
     private social = new SocialEncounters();
     private surface;
     private campfire;
+    private communityReservations: readonly FjordPlot[] = [];
     private yardSurfaces = new Map<string, (x: number, z: number) => number | null>();
     private trees: { key: string; x: number; z: number; clearance: number }[] = [];
     private parcels: FjordEntity[] = [];
@@ -128,7 +130,8 @@ export class LivingWorldController {
     }
     /** Fresh accepted events alone stage bounded visual participants; canonical attendance is untouched. */
     beginGathering(eventId: string, participantKeys: readonly string[], maximumActors: 6 | 8 = 6,
-        preferred: Readonly<Record<string, { target: Point2; facing: Point2; partner?: boolean }>> = {}) {
+        preferred: Readonly<Record<string, { target: Point2; facing: Point2; partner?: boolean }>> = {},
+        outdoorRotation?: number) {
         if (!eventId.trim()) return [];
         if (this.gathering?.eventId === eventId)
             return [...this.gathering.participants.values()].filter(person => !person.dropped).map(person => person.key);
@@ -142,8 +145,12 @@ export class LivingWorldController {
         const candidates: Point2[] = [];
         for (const radius of [5.5, 6.25, 7]) for (let direction = 0; direction < 8; direction++) {
             const angle = phase + direction * Math.PI / 4;
-            candidates.push({ x: center.x + Math.cos(angle) * radius,
-                z: center.z + Math.sin(angle) * radius });
+            const candidate = { x: center.x + Math.cos(angle) * radius,
+                z: center.z + Math.sin(angle) * radius };
+            if (outdoorRotation !== undefined &&
+                (candidate.x - center.x) * Math.sin(outdoorRotation) +
+                (candidate.z - center.z) * Math.cos(outdoorRotation) > -1) continue;
+            candidates.push(candidate);
         }
         const selectedKeys: string[] = [];
         for (const key of participantKeys) {
@@ -282,19 +289,23 @@ export class LivingWorldController {
             suspended, remaining: this.visitBudget(actor, path) });
         actor.path = path;
     }
-    reconcile(entities: readonly FjordEntity[], ground: FjordGround) {
+    reconcile(entities: readonly FjordEntity[], ground: FjordGround,
+        communityReservations: readonly FjordPlot[] = [], campfire: SettlementCampfire = this.campfire) {
         const navigationSignature = JSON.stringify([entities.map(entity => [entity.selectionKey,
-            entity.asset, entity.transform, entity.plot, entity.status]), ground]);
+            entity.asset, entity.transform, entity.plot, entity.status]), ground, communityReservations, campfire]);
         if (navigationSignature !== this.navigationSignature) {
             this.navigationSignature = navigationSignature;
             this.navigationGeneration++;
         }
         this.parcels = entities.filter(e => e.plot);
+        this.campfire = campfire;
+        this.communityReservations = communityReservations;
         this.ground = ground;
         const active = entities.filter(e => e.transform && !e.status.aboardShip && !e.status.mining && (e.kind === 'persona' || e.kind === 'cattle'));
         // These are the same plot/anchor/path clearances applied by the scene's nature reconciler.
         const cleared = [{ ...this.campfire.transform, halfWidth: this.campfire.clearingRadius,
-            halfDepth: this.campfire.clearingRadius }, ...this.parcels.map(e => e.plot!), ...active.map(e => ({ ...e.transform!, halfWidth: 1, halfDepth: 1 })),
+            halfDepth: this.campfire.clearingRadius }, ...communityReservations.map(communityHearthObstacleBounds),
+            ...this.parcels.map(e => e.plot!), ...active.map(e => ({ ...e.transform!, halfWidth: 1, halfDepth: 1 })),
             ...ground.paths.flatMap(p => p.points.map(point => ({ ...point, halfWidth: 1.5, halfDepth: 1.5 })))];
         this.nature = this.world.placementPlan.filter(p => !cleared.some(c => Math.abs(p.x - c.x) <= c.halfWidth + p.clearance && Math.abs(p.z - c.z) <= c.halfDepth + p.clearance));
         this.natureCells.clear();
@@ -721,6 +732,7 @@ export class LivingWorldController {
     }
     private safe(a: Agent, p: Point2) {
         if (this.mapped && !this.mapped(p.x, p.z)) return false;
+        if (this.communityReservations.some(plot => communityHearthContains(plot, p, this.radius(a)))) return false;
         if (Math.hypot(p.x - this.campfire.transform.x, p.z - this.campfire.transform.z) <=
             this.campfire.obstacleRadius + this.radius(a)) return false;
         if (this.yardSurfaces.has(a.key) && this.yardSurfaces.get(a.key)!(p.x, p.z) === null)

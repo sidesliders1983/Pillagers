@@ -210,3 +210,34 @@ test('extinguishing the actual wedding fire ends decoration without refunding or
     assert.equal(f.show.accept(extinguished, 6, true), false);
     assert.equal(core.serializeState(extinguished), saved);
 });
+
+test('a community court keeps a finite wedding layout and its real cast outdoors around the fire', () => {
+    const f = fixture(false);
+    const saved = core.serializeState(f.paid);
+    const rotation = 0;
+    f.show.setVenueRotation(rotation);
+    assert.equal(f.show.accept(f.paid, 6, true, { weddingSeconds: 30 }), true);
+    assert.equal(f.show.active, true);
+    assert.ok(Number.isFinite(f.show.inspect().wedding.rotation));
+    let gathered = false;
+    for (let frame = 0; frame < 1300 && f.show.active; frame++) {
+        f.motion.advance(.1, true, true);
+        f.show.advance(.1, true, true);
+        const current = f.show.inspect();
+        if (!current) break;
+        assert.ok(Number.isFinite(current.wedding.rotation));
+        if (current.phase === 'approach') continue;
+        gathered = true;
+        const actors = new Map(f.motion.inspect().map(actor => [actor.key, actor]));
+        for (const key of current.participantKeys) {
+            const actor = actors.get(key);
+            assert.ok(actor.walkable);
+            assert.ok(Math.hypot(actor.x - f.view.campfire.transform.x,
+                actor.z - f.view.campfire.transform.z) < 8.75);
+        }
+    }
+    assert.equal(gathered, true, 'The fixed outdoor court must remain reachable');
+    assert.equal(f.show.active, false);
+    assert.equal(core.serializeState(f.paid), saved);
+    f.show.dispose();
+});

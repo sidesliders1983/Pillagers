@@ -63,7 +63,9 @@ export function renderGatheringCard(state: SimulationState, canReadHistory = fal
         <p>Share a gathering with available residents. Sponsorship is optional.</p>
         ${renderGatheringPrice(offer)}
         <p class="fjord-caption">Prepared support: ${offer.supportCount} of ${offer.supportCapacity}.
-            One support reduces added Harsh/Severe weather-exposure risk by ${offer.exposureReductionBps / 100}%.
+            ${offer.earnedExposureReductionBps === undefined ?
+                `One support reduces added Harsh/Severe weather-exposure risk by ${offer.exposureReductionBps / 100}%.` :
+                `Support from this occasion reduces remaining weather exposure by ${offer.earnedExposureReductionBps / 100}% when used.`}
             It does not reduce natural mortality.</p>
         <button type="button" data-ui="culture-review"${offer.allowed ? '' : ' disabled aria-describedby="culture-unavailable"'}>Support gathering</button>
         ${canReadHistory && offer.lastGatheringEventId ? `<button type="button" data-ui="culture-record"
@@ -80,7 +82,8 @@ export function renderGatheringReview(offer: GatheringOffer, current = offer, fe
     });
     const changed = offer.expectedSequence !== current.expectedSequence || offer.foodCost !== current.foodCost ||
         offer.occasion !== current.occasion || offer.sourceEventId !== current.sourceEventId ||
-        offer.materialsCost !== current.materialsCost ||
+        offer.materialsCost !== current.materialsCost || offer.venueTier !== current.venueTier ||
+        offer.earnedExposureReductionBps !== current.earnedExposureReductionBps ||
         JSON.stringify(offer.participantIds) !== JSON.stringify(current.participantIds);
     const reason = current.reason ?? (changed ? 'The gathering has changed. Review the updated attendance.' : null);
     return `<section class="fjord-culture" aria-label="Gathering review">
@@ -93,6 +96,8 @@ export function renderGatheringReview(offer: GatheringOffer, current = offer, fe
         <details><summary>${current.participants.length} currently available residents</summary>
             <ul>${current.participants.map(person => `<li>${escape(person.name)}</li>`).join('')}</ul>
         </details>
+        ${offer.earnedExposureReductionBps === undefined ? '' : `<p class="fjord-caption">
+            This occasion prepares a ${offer.earnedExposureReductionBps / 100}% reduction of remaining weather exposure.</p>`}
         <p class="fjord-caption">One prepared support is used when it can reduce a real resident’s weather-exposure risk.
             Up to ${offer.supportCapacity} supports can be kept; their strength does not stack. No penalty for declining.</p>
         <p class="fjord-culture-feedback" role="status">${escape(feedback || (pending ? 'Supporting gathering…' : reason ?? ''))}</p>

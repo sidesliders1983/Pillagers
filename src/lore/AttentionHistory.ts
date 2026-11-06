@@ -44,7 +44,7 @@ const noteworthy = new Map<string, AttentionCategory>([
 ]);
 
 const formattedTypes = new Set([...noteworthy.keys(), 'FoundingPartyLanded', 'FoundingPartnershipPresent',
-    'MerchantBartered', 'CulturalGatheringHeld', 'CultureWeatherSupportApplied', 'OccupationAssigned', 'OccupationReleased', 'CaregiverAssigned', 'ResourceProduced', 'CattleFoodProduced',
+    'CommunityHearthUpgraded', 'MerchantBartered', 'CulturalGatheringHeld', 'CultureWeatherSupportApplied', 'OccupationAssigned', 'OccupationReleased', 'CaregiverAssigned', 'ResourceProduced', 'CattleFoodProduced',
     'LivestockResourceProduced', 'FoodConsumed', 'CattleFoodConsumed', 'LivestockFoodConsumed',
     'ExploreAreaPrepared', 'ExploreAreaCancelled', 'ExploreAreaStranded', 'ExploreAreaReturnStarted',
     'ExploreAreaSuppliesConsumed', 'ExploreAreaSuppliesDiscarded', 'ExploreAreaSuppliesLost',

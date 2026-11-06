@@ -1,3 +1,4 @@
+import { stepCommunityHearth, resetCommunityHearthWinter } from './CommunityHearth';
 import { miningBusy, miningWorkReason, miningProductionBps } from './Mining';
 import { stepMerchants } from './VisitingMerchants';
 import { stepContextualSupport } from './ContextualSupport';
@@ -118,7 +119,7 @@ export function inspectBuilding(state:SimulationState,id:string) {
 }
 export function stepMechanicsTick(state:SimulationState):void {
     const tickEventOffset = state.events.length;
-    stepCampfire(state);
+    stepCommunityHearth(state, stepCampfire(state));
     const config=state.mechanics!.config;
     let annualFoodEvent;
     let previousFarmyards=farmyards(state).map(f=>f.id);
@@ -188,6 +189,7 @@ export function stepMechanicsTick(state:SimulationState):void {
         reconcileFarmyards(state,previousFarmyards);
         resolveCattleBirths(state,bps=>chance(state,bps));
         determineWeather(state);
+        resetCommunityHearthWinter(state);
     }
     if(careExpires&&state.time.tick!==0)resolveCaregivers(state,(type,id,details)=>emit(state,type,id,details));
     stepWorld(state);

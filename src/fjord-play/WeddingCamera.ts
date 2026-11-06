@@ -3,7 +3,8 @@ import type { RTSCameraController } from '../camera/RTSCameraController';
 
 type View = { position: number[]; target: number[] };
 type Frame = { id: string; phase: string; phaseElapsedSeconds?: number;
-    position: { x: number; y: number; z: number }; wedding?: { elapsed: number; duration: number; rotation?: number } };
+    position: { x: number; y: number; z: number };
+    wedding?: { elapsed: number; duration: number; rotation?: number; outdoorArch?: boolean } };
 const ease = (value: number) => { const x = Math.max(0, Math.min(1, value)); return x * x * (3 - 2 * x); };
 
 /** The existing presentation clock selects bounded local shots; Core and game speed are absent. */
@@ -20,15 +21,18 @@ export class WeddingCamera {
         const rotation = frame.wedding.rotation ?? 0;
         const rotate = (offset: number[]) => new Vector3(...offset).applyAxisAngle(new Vector3(0, 1, 0), rotation)
             .add(new Vector3(center.x, center.y, center.z)).toArray();
+        // In portrait the nearer outdoor arch needs a wider, straighter view behind the couple.
+        const portraitArch = frame.wedding.outdoorArch && this.camera.aspect < .7;
         const target = rotate([0, 1.1, -8]);
-        this.shots = [[4, 2.6, -14], [2.2, 2, -11.6], [-3.4, 2.4, -13], [4, 2.6, -14]]
+        const safeShots = (offsets: number[][]) => offsets
             .map(offset => ({ position: rotate(offset), target: [...target] }))
-            .filter(view => this.safe({ x: view.position[0], y: view.position[1], z: view.position[2] }));
-        // A steep local slope can rule out every low view. Keep a terrain-safe fallback,
-        // rather than moving a low camera through the ground or undiscovered terrain.
-        if (!this.shots.length) this.shots = [[10, 9, -17], [-8, 5.1, -13]]
-            .map(offset => ({ position: rotate(offset), target: [...target] }))
-            .filter(view => this.safe({ x: view.position[0], y: view.position[1], z: view.position[2] }));
+            .filter(({ position: [x, y, z] }) => this.safe({ x, y, z }));
+        this.shots = safeShots(portraitArch
+            ? [[.45, 4.8, -19.5], [.35, 4.4, -18.5], [-.45, 4.8, -19.5], [.45, 4.8, -19.5]]
+            : [[4, 2.6, -14], [2.2, 2, -11.6], [-3.4, 2.4, -13], [4, 2.6, -14]]);
+        // Keep a safe portrait fallback framed for the whole ceremony.
+        if (!this.shots.length && portraitArch) this.shots = safeShots([[.45, 7.6, -20]]);
+        if (!this.shots.length) this.shots = safeShots([[10, 9, -17], [-8, 5.1, -13]]);
         if (!this.shots.length) return false;
         this.previous = { ...(original ?? { position: this.camera.position.toArray(), target: this.controller.focus.toArray() }),
             enabled: this.controller.enabled };

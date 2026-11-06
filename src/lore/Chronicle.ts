@@ -93,6 +93,11 @@ const templates:Record<string,Template>={
             '; the shared prepared weather assessments were already at capacity.';
         return context.helper + ' completed support for ' + context.recipient + ' ' + context.loss + contribution;
     },
+    CommunityHearthUpgraded: (_event, details) => {
+        const name = details.tier === 1 ? 'Gathering Shelter' : details.tier === 2 ? 'Clan Hall' : null;
+        const cost = number(details, 'cost');
+        return name && cost ? 'The settlement built the ' + name + ' for ' + cost + ' Materials.' : null;
+    },
     CultureWeatherSupportApplied: (_event, d) => {
         const participants = ids(d, 'participants');
         const sources = ids(d, 'sourceEventIds');

@@ -42,6 +42,44 @@ test('a fire-backed active ceremony adds bounded temporary decoration inside the
     assert.equal(scene.children.length, 0);
 });
 
+test('the outdoor wedding arch clears the Shelter while the flags keep their positions', () => {
+    const scene = new Scene();
+    const visuals = new CulturalCeremonyVisuals(scene);
+    const state = { active: true, fireLit: true, spouses: [] };
+    const frame = { ...wedding, wedding: { rotation: Math.PI / 4 } };
+    visuals.update(frame, state);
+    const graph = scene.children[0], mesh = graph.children[0];
+    const points = () => {
+        const positions = mesh.geometry.attributes.position;
+        return Array.from({ length: positions.count }, (_, index) =>
+            [positions.getX(index), positions.getY(index), positions.getZ(index)]);
+    };
+    const original = points();
+    const flags = original.filter(point => point[2] > 0);
+    assert.ok(flags.length > 0);
+
+    visuals.update({ ...frame, wedding: { ...frame.wedding, outdoorArch: true } }, state);
+    assert.equal(graph.visible, true);
+    assert.deepEqual(graph.children, [mesh]);
+    assert.deepEqual(graph.position.toArray(), Object.values(wedding.position));
+    assert.equal(graph.rotation.y, frame.wedding.rotation);
+
+    const outdoor = points();
+    assert.deepEqual(outdoor.filter(point => point[2] > 0), flags);
+    const originalArch = original.filter(point => point[2] < 0);
+    const outdoorArch = outdoor.filter(point => point[2] < 0);
+    assert.ok(originalArch.some(point => point[2] > -3.25));
+    assert.ok(outdoorArch.every(point => point[2] < -4.75), 'Arch must clear the Shelter roof');
+    assert.equal(outdoorArch.length, originalArch.length);
+    for (const [index, [x, y, z]] of outdoorArch.entries()) {
+        const [oldX, oldY, oldZ] = originalArch[index];
+        assert.equal(x, oldX);
+        assert.equal(y, oldY);
+        assert.ok(Math.abs(z - oldZ + 2) < .00001);
+    }
+    visuals.dispose();
+});
+
 function withDOM(action) {
     const dom = new JSDOM('<main></main>');
     const previous = new Map();

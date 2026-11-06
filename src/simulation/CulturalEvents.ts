@@ -1,3 +1,5 @@
+import { communityHearthVenue, validateCommunityHearthVenue } from './CommunityHearth';
+import type { CommunityHearthVenue } from './CommunityHearth';
 import { miningBusy } from './Mining';
 import { ensureCampfireBurning, inspectCampfire } from './Campfire';
 import { eventFacts } from './EventFacts';
@@ -187,7 +189,10 @@ export function gatheringOffer(state: SimulationState, occasion: CulturalOccasio
                 'This occasion does not use a partnership source.' : null;
     const price = gatheringPrice(state, info, occasion, participants.length);
     const reason = commonGatheringReason(state, info, participants.length, price.foodCost, price.materialsCost) ?? occasionReason;
-    return { ...info, ...price, occasion, allowed: reason === null, reason, participantIds, participants,
+    const venue = communityHearthVenue(state);
+    return { ...info, ...price, ...(venue ? { venueTier: venue.tier,
+        venueMultiplierBps: venue.multiplierBps, earnedExposureReductionBps: venue.effectiveReductionBps } : {}),
+        occasion, allowed: reason === null, reason, participantIds, participants,
         expectedSequence: info.nextSequence,
         ...(occasion === 'wedding' ? { sourceEventId, spouseIds: spouseIds ? [...spouseIds] as [string, string] : undefined } : {}) };
 }
@@ -224,6 +229,7 @@ export function applyCultureCommand(state: SimulationState, command: CultureComm
         occasion: command.occasion, foodCost: offer.foodCost, participants: offer.participantIds,
         ...(offer.requiresCampfire ? { requiresCampfire: true, materialsCost: offer.materialsCost, campfireEventIds } : {}),
         ...(command.occasion === 'wedding' ? { sourceEventId: offer.sourceEventId, spouseIds: offer.spouseIds, foodCostBasis: 'per_participant' } : {}),
+        ...(communityHearthVenue(state) ? { venue: communityHearthVenue(state)! } : {}),
         supportBefore: culture!.supportSourceEventIds.length,
         supportAfter: culture!.supportSourceEventIds.length + 1 });
     state.events.push({ id, time: { ...state.time }, type: 'CulturalGatheringHeld', details });
@@ -235,6 +241,8 @@ export type CulturalWeatherRisk = {
     personaId: string;
     naturalRiskBps: number;
     baselineWeatherExposureBps: number;
+    heatReductionBps?: number;
+    heatedWeatherExposureBps?: number;
 };
 /** Called only by the existing annual settlement mortality assessment, never by expedition returns. */
 export function applyCulturalWeatherSupport(state: SimulationState, assessments: CulturalWeatherRisk[]) {
@@ -242,13 +250,18 @@ export function applyCulturalWeatherSupport(state: SimulationState, assessments:
     const weather = inspectWeather(state);
     if (!culture?.supportSourceEventIds.length || !weather.enabled ||
         (weather.class !== 'Harsh' && weather.class !== 'Severe')) return null;
+    // Canonical event IDs are contiguous and validated; bounded source lookup needs no history scan.
+    const source = state.events[Number(culture.supportSourceEventIds[0].slice(6)) - 1];
+    const venue = source.type === 'CulturalGatheringHeld' ? source.details?.venue as CommunityHearthVenue | undefined : undefined;
+    const exposureReductionBps = venue?.effectiveReductionBps ?? culture.config.exposureReductionBps;
     const riskInputs = assessments.flatMap(assessment => {
         const { naturalRiskBps, baselineWeatherExposureBps } = assessment;
-        const weatherExposureBps = baselineWeatherExposureBps -
-            Math.floor(baselineWeatherExposureBps * culture.config.exposureReductionBps / 10000);
+        const heatedWeatherExposureBps = assessment.heatedWeatherExposureBps ?? baselineWeatherExposureBps;
+        const weatherExposureBps = heatedWeatherExposureBps -
+            Math.floor(heatedWeatherExposureBps * exposureReductionBps / 10000);
         const baselineRiskBps = Math.min(10000, naturalRiskBps + baselineWeatherExposureBps);
         const mortalityRiskBps = Math.min(10000, naturalRiskBps + weatherExposureBps);
-        return mortalityRiskBps < baselineRiskBps ? [{ ...assessment, weatherExposureBps,
+        return mortalityRiskBps < Math.min(10000, naturalRiskBps + heatedWeatherExposureBps) ? [{ ...assessment, weatherExposureBps,
             baselineRiskBps, mortalityRiskBps }] : [];
     });
     if (!riskInputs.length) return null;
@@ -257,7 +270,7 @@ export function applyCulturalWeatherSupport(state: SimulationState, assessments:
     const id = 'event-' + (state.events.length + 1);
     const details = eventFacts(state, { cultureVersion: 1, clanId: state.clan.id,
         sourceEventIds: [sourceEventId], supportBefore, supportAfter: supportBefore - 1,
-        exposureReductionBps: culture.config.exposureReductionBps, riskInputs,
+        exposureReductionBps, riskInputs,
         participants: riskInputs.map(risk => risk.personaId), ...weatherFacts(state) });
     state.events.push({ id, time: { ...state.time }, type: 'CultureWeatherSupportApplied', details });
     return { eventId: id, risks: new Map(riskInputs.map(risk => [risk.personaId, risk])) };
@@ -323,6 +336,8 @@ export function validateCulture(state: SimulationState, culturalEvents: readonly
         !uint(culture.nextSequence, 1) || !Array.isArray(culture.supportSourceEventIds) ||
         culture.supportSourceEventIds.length > culture.config.supportCapacity) fail();
     const sources: string[] = [];
+    let hearthTier: number | null = null;
+    const sourceReductions = new Map<string, number>();
     let nextSequence = 1;
     let lastGathering: string | null = null;
     const partnershipSources = new Map<string, PartnershipSource>();
@@ -346,6 +361,15 @@ export function validateCulture(state: SimulationState, culturalEvents: readonly
             if (recentFireEvents.length > 2) recentFireEvents.shift();
             continue;
         }
+        if (event.type === 'CommunityHearthEnabled') {
+            // The Hearth validator has checked this immutable adoption snapshot, including legacy imported fuel.
+            const fire = event.details!.campfire as { lit: boolean; fuelTicks: number };
+            fireLit = fire.lit;
+            fireFuelTicks = fire.fuelTicks;
+            hearthTier = 0;
+            continue;
+        }
+        if (event.type === 'CommunityHearthUpgraded') { hearthTier = Number(event.details?.tier); continue; }
         if (event.type === 'PartnershipFormed') {
             const spouseIds = partnershipPair(event);
             if (spouseIds) {
@@ -358,12 +382,18 @@ export function validateCulture(state: SimulationState, culturalEvents: readonly
         if (!details || details.cultureVersion !== 1 || details.clanId !== state.clan.id) fail();
         const ids = peopleFacts(state, details);
         if (event.type === 'SupportCompleted') {
+            if (details.venue !== undefined) fail();
+            sourceReductions.set(event.id, culture.config.exposureReductionBps);
             const contribution = sources.length < culture.config.supportCapacity ? 1 : 0;
             if (!state.contextualSupport || details.supportVersion !== 1 ||
                 details.supportContribution !== contribution || details.supportBefore !== sources.length ||
                 details.supportAfter !== sources.length + contribution) fail();
             if (contribution) sources.push(event.id);
         } else if (event.type === 'CulturalGatheringHeld') {
+            if (hearthTier !== null) validateCommunityHearthVenue(details.venue, hearthTier, culture.config.exposureReductionBps);
+            else if (details.venue !== undefined) fail();
+            sourceReductions.set(event.id, (details.venue as CommunityHearthVenue | undefined)?.effectiveReductionBps ??
+                culture.config.exposureReductionBps);
             validateGatheringFire(event, fireLit, fireFuelTicks, recentFireEvents);
             // Missing basis preserves already accepted flat-price prototype receipts unchanged.
             const perParticipant = details.occasion === 'wedding' && details.foodCostBasis === 'per_participant';
@@ -393,19 +423,25 @@ export function validateCulture(state: SimulationState, culturalEvents: readonly
                 details.regionId !== state.landing?.region.id || !sources.length ||
                 JSON.stringify(details.sourceEventIds) !== JSON.stringify([sources[0]]) ||
                 details.supportBefore !== sources.length || details.supportAfter !== sources.length - 1 ||
-                details.exposureReductionBps !== culture.config.exposureReductionBps) fail();
+                details.exposureReductionBps !== sourceReductions.get(sources[0])) fail();
             const risks = details.riskInputs;
             const baseExposure = state.weather.config.profiles[kind].tentMortalityBps;
-            const exposure = baseExposure - Math.floor(baseExposure * culture.config.exposureReductionBps / 10000);
+            const reduction = sourceReductions.get(sources[0])!;
             if (!Array.isArray(risks) || risks.length !== ids.length || risks.some((risk, index) => {
                 const age = (details.people as { age: number }[])[index].age;
                 const naturalRisk = [...state.mechanics!.config.mortalityBands].reverse()
                     .find(band => band.minAge <= age)?.chanceBps ?? 0;
-                return !risk || risk.personaId !== ids[index] || risk.naturalRiskBps !== naturalRisk ||
+                if (!risk) return true;
+                const hasHeat = risk.heatedWeatherExposureBps !== undefined || risk.heatReductionBps !== undefined;
+                if (hasHeat && (hearthTier === null || !uint(risk.heatReductionBps, 0, 3000))) return true;
+                const heated = baseExposure - Math.floor(baseExposure * Number(risk.heatReductionBps ?? 0) / 10000);
+                const exposure = heated - Math.floor(heated * reduction / 10000);
+                return risk.personaId !== ids[index] || risk.naturalRiskBps !== naturalRisk ||
+                    (hasHeat && risk.heatedWeatherExposureBps !== heated) ||
                     risk.baselineWeatherExposureBps !== baseExposure || risk.weatherExposureBps !== exposure ||
                     risk.baselineRiskBps !== Math.min(10000, naturalRisk + baseExposure) ||
                     risk.mortalityRiskBps !== Math.min(10000, naturalRisk + exposure) ||
-                    risk.mortalityRiskBps >= risk.baselineRiskBps;
+                    risk.mortalityRiskBps >= Math.min(10000, naturalRisk + heated);
             })) fail();
             sources.shift();
         }

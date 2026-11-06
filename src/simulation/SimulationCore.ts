@@ -1,3 +1,7 @@
+import { applyCommunityHearthCommand, validateCommunityHearth, isCommunityHearthEvent } from './CommunityHearth';
+import type { CommunityHearthState, CommunityHearthCommand } from './CommunityHearth';
+export { inspectCommunityHearth, communityHearthRules, communityHearthTiers } from './CommunityHearth';
+export type { CommunityHearthTier, CommunityHearthPlacement, CommunityHearthAssessment, CommunityHearthRisk } from './CommunityHearth';
 export { availableOccupationIds } from './Mechanics';
 import { bindMining, validateMining, applyMiningCommand, requireMiningAdvance, stepMining, migrateMining } from './Mining';
 import type { MiningState, MiningCommand } from './Mining';
@@ -78,6 +82,7 @@ export type Persona = {
 };
 export type SimulationEvent = {id: string; time: GameTime; type: string; personaId?: string; details?: Record<string, unknown>};
 export type SimulationState = {
+    communityHearth?: CommunityHearthState;
     mining?: MiningState;
     trade?: TradeState;
     culture?: CultureState;
@@ -229,7 +234,7 @@ export function createSettlement(seed:number, overrides:Partial<PrototypeConfig>
     }
     initializeSocial(state,socialOverrides);validateState(state); return state;
 }
-export type SimulationCommand = MiningCommand | {type: 'UseSeasonalWeatherProduction'} | {type: 'UseCulturalOccasions'} | MerchantCommand | CultureCommand | SmitheryCommand | LongshipCommand | IslandMissionCommand | SpatialExpeditionCommand | CampfireCommand | ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
+export type SimulationCommand = CommunityHearthCommand | MiningCommand | {type: 'UseSeasonalWeatherProduction'} | {type: 'UseCulturalOccasions'} | MerchantCommand | CultureCommand | SmitheryCommand | LongshipCommand | IslandMissionCommand | SpatialExpeditionCommand | CampfireCommand | ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
 function integer(value: number, label: string) {
     if (!Number.isSafeInteger(value) || value < 0) throw new Error(`${label} must be a nonnegative safe integer`);
 }
@@ -292,6 +297,12 @@ export function applyCommand(input: SimulationState, command: SimulationCommand,
         command.type === 'CreateExplorationGroup' || command.type === 'SetExplorationMember') {
         const state = structuredClone(input);
         applySpatialCommand(state, command, context);
+        validateState(state);
+        return state;
+    }
+    if (command.type === 'EnableCommunityHearth' || command.type === 'UpgradeCommunityHearth') {
+        const state = structuredClone(input);
+        applyCommunityHearthCommand(state, command);
         validateState(state);
         return state;
     }
@@ -425,14 +436,18 @@ function validateState(state: SimulationState): void {
         if (residence.buildingId !== null && !Object.hasOwn(state.buildings, residence.buildingId)) throw new Error('Unknown building');
     }
     for (const [id, building] of Object.entries(state.buildings)) if (id !== building.id || building.kind !== 'house') throw new Error('Invalid building');
+    const hearthEvents: SimulationEvent[] = [];
     const culturalEvents: SimulationEvent[] = [];
     const merchantEvents: SimulationEvent[] = [];
     let previousEventTime = 0;
     let wildlifeSequence = 0;
     const wildlifeFirsts = new Map<string, string>();
     state.events.forEach((event, index) => {
+        if (isCommunityHearthEvent(event) || (state.communityHearth !== undefined &&
+            ['CampfireFuelConsumed', 'CampfireChanged'].includes(event.type))) hearthEvents.push(event);
         if (['MerchantArrived', 'MerchantDeparted', 'MerchantBartered'].includes(event.type)) merchantEvents.push(event);
-        if (isCulturalEvent(event) || event.type === 'SupportCompleted' || (state.culture !== undefined &&
+        if (event.type === 'CommunityHearthEnabled' || event.type === 'CommunityHearthUpgraded' ||
+            isCulturalEvent(event) || event.type === 'SupportCompleted' || (state.culture !== undefined &&
             ['PartnershipFormed', 'CampfireFuelConsumed', 'CampfireChanged'].includes(event.type)))
             culturalEvents.push(event);
         validateWildlifeSighting(event, state);
@@ -458,6 +473,7 @@ function validateState(state: SimulationState): void {
     for(const [id,p] of Object.entries(state.personaArchive??{})){if(id!==p.id||!p.name||!p.originClanId)throw new Error('Invalid historical identity');parseCharacterDNA(p.dna);integer(p.birthWinter,'Historical birth');validatePersonaDates(state,p);}
     validateBirthdayCalendar(state);
     validateCampfire(state);
+    validateCommunityHearth(state, hearthEvents);
     validateCulture(state, culturalEvents);
     validateTrade(state, merchantEvents);
     validateSocial(state);

@@ -110,6 +110,46 @@ for (const entry of Object.values(terrain.assets)) {
         assert.ok(Math.abs(bounds[key][axis] - entry.bounds[key][axis]) <= 1e-6, 'Terrain bounds: ' + entry.file);
 }
 
+const hearthDirectory = 'game-assets/community-hearth';
+const hearth = await json(hearthDirectory + '/manifest.json');
+const { communityHearthAssets } = loadTypeScript(
+    new URL('../src/fjord-play/CommunityHearthAssets.ts', import.meta.url),
+);
+assert.deepEqual(hearth.assets, communityHearthAssets, 'Community hearth runtime metadata differs');
+assert.deepEqual(Object.keys(hearth.assets), ['1', '2']);
+assert.equal(hearth.front, '+Z');
+assert.equal(hearth.up, '+Y');
+assert.equal(hearth.units, 'metres');
+assert.equal(hearth.textureLimit, 512);
+for (const [tier, file] of Object.entries({ 1: 'gathering-shelter.glb', 2: 'clan-hall.glb' })) {
+    const entry = hearth.assets[tier];
+    assert.equal(entry.path, hearthDirectory + '/' + file);
+    const bytes = await verifyEntry(hearthDirectory, { ...entry, file });
+    assert.ok(bytes.length < 1_500_000, 'Community hearth download budget: ' + file);
+
+    const model = (await io.readBinary(bytes)).getRoot();
+    const bounds = getBounds(model.listScenes()[0]);
+    for (const corner of ['min', 'max']) for (let axis = 0; axis < 3; axis++) {
+        assert.ok(Math.abs(bounds[corner][axis] - entry.bounds[corner][axis]) < 1e-6,
+            'Community hearth footprint differs: ' + file);
+    }
+    const triangles = model.listMeshes().reduce((sum, mesh) => sum + mesh.listPrimitives()
+        .reduce((count, primitive) => count + (primitive.getIndices()?.getCount() ??
+            primitive.getAttribute('POSITION').getCount()) / 3, 0), 0);
+    assert.equal(triangles, entry.triangles, 'Community hearth triangle count: ' + file);
+
+    let textureBytes = 0;
+    for (const texture of model.listTextures()) {
+        const { width, height, format } = await sharp(texture.getImage()).metadata();
+        assert.equal(format, 'webp');
+        assert.ok(width <= hearth.textureLimit && height <= hearth.textureLimit);
+        textureBytes += width * height * 4;
+    }
+    assert.equal(textureBytes, entry.texturePixelsRGBA, 'Community hearth texture estimate: ' + file);
+    assert.ok(textureBytes <= 3 * 1024 * 1024, 'Community hearth texture budget: ' + file);
+}
+
+
 async function filesIn(directory) {
     const entries = await readdir(directory, { withFileTypes: true });
     const groups = await Promise.all(entries.map(entry => entry.isDirectory()

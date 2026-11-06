@@ -1,0 +1,87 @@
+{
+    "schemaVersion": 1,
+    "units": "metres",
+    "up": "+Y",
+    "front": "+Z",
+    "textureLimit": 512,
+    "assets": {
+        "1": {
+            "path": "game-assets/community-hearth/gathering-shelter.glb",
+            "bytes": 1053464,
+            "sha256": "6814b320d3eb136dfb474dd6f6b09eb13a60e5e3beec121308cb6133f889ced8",
+            "bounds": {
+                "min": [
+                    -2.1268936887041936,
+                    0.00013448709854690932,
+                    -2.513866662979126
+                ],
+                "max": [
+                    2.1268936887041936,
+                    2.999865512901453,
+                    2.513866662979126
+                ]
+            },
+            "triangles": 6486,
+            "texturePixelsRGBA": 3145728
+        },
+        "2": {
+            "path": "game-assets/community-hearth/clan-hall.glb",
+            "bytes": 1081632,
+            "sha256": "e29cf20dae622e5516527224156be324386e00bfcc7ebbc9504dcf0be30a2488",
+            "bounds": {
+                "min": [
+                    -6.995018005371094,
+                    -0.00007091562614114366,
+                    -6.259801415188957
+                ],
+                "max": [
+                    6.995018005371094,
+                    4.000070915626141,
+                    6.259801415188957
+                ]
+            },
+            "triangles": 6642,
+            "texturePixelsRGBA": 3145728
+        }
+    },
+    "provenance": {
+        "1": {
+            "provider": "Meshy",
+            "file": "Meshy_AI_Timber_Hall_1105102350_texture.glb",
+            "bytes": 14272172,
+            "sha256": "c45a4dce559cf3c41c13485e82d3ea5f54138f4d2a69be262556c1e2653ff310",
+            "bounds": {
+                "min": [
+                    -2.1332831382751465,
+                    0,
+                    -2.5143425464630127
+                ],
+                "max": [
+                    2.1204757690429688,
+                    3,
+                    2.5133907794952393
+                ]
+            },
+            "scale": 1
+        },
+        "2": {
+            "provider": "Meshy",
+            "file": "Meshy_AI_Nordic_Hearth_Hall_1105102323_texture.glb",
+            "bytes": 15375728,
+            "sha256": "c5f8593db3367e60bdfe74a7f904cb6ce373dfca0b62da0ae8a22626b24b27c0",
+            "bounds": {
+                "min": [
+                    -8.745244979858398,
+                    0,
+                    -7.9773969650268555
+                ],
+                "max": [
+                    8.742300033569336,
+                    5,
+                    7.67297887802124
+                ]
+            },
+            "scale": 0.8
+        }
+    }
+}

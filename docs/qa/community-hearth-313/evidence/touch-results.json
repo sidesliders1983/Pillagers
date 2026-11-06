@@ -1,0 +1,201 @@
+{
+  "status": "passed",
+  "origin": "http://127.0.0.1:5196",
+  "chrome": "156.0.8078.80",
+  "phases": [
+    {
+      "stage": "paid-upgrade-1",
+      "cost": 15,
+      "stocks": {
+        "food": 94,
+        "materials": 44
+      },
+      "fire": {
+        "version": 1,
+        "lit": true,
+        "fuelTicks": 1000
+      },
+      "placement": {
+        "x": -20,
+        "z": -74,
+        "rotation": 3.141592653589793,
+        "worldId": "fjordside-island-v0.3e-r3:88:bb64c9d8"
+      },
+      "model": {
+        "state": "ready",
+        "tier": 1,
+        "bounds": {
+          "min": [
+            -22.226893663406372,
+            2.751163059473038,
+            -77.5138666510582
+          ],
+          "max": [
+            -17.773106336593628,
+            5.840558414512781,
+            -71.3861334323883
+          ]
+        }
+      }
+    },
+    {
+      "stage": "paid-upgrade-2",
+      "cost": 30,
+      "stocks": {
+        "food": 94,
+        "materials": 14
+      },
+      "fire": {
+        "version": 1,
+        "lit": true,
+        "fuelTicks": 1000
+      },
+      "placement": {
+        "x": -20,
+        "z": -74,
+        "rotation": 3.141592653589793,
+        "worldId": "fjordside-island-v0.3e-r3:88:bb64c9d8"
+      },
+      "model": {
+        "state": "ready",
+        "tier": 2,
+        "bounds": {
+          "min": [
+            -27.095017910003662,
+            2.5547969877719883,
+            -81.25980140326803
+          ],
+          "max": [
+            -12.904982089996338,
+            6.84076381723747,
+            -67.64019870758057
+          ]
+        }
+      }
+    },
+    {
+      "stage": "native-touch-hall-selects-hearth",
+      "viewport": "1024×768",
+      "touch": true
+    },
+    {
+      "stage": "paid-wedding-accepted",
+      "partnership": "event-23",
+      "eventId": "event-43",
+      "spouses": [
+        "founder-1",
+        "founder-10"
+      ],
+      "foodCost": 24,
+      "startingCast": {
+        "id": "event-43",
+        "sequence": 1,
+        "occasion": "wedding",
+        "spouseIds": [
+          "founder-1",
+          "founder-10"
+        ],
+        "phase": "approach",
+        "phaseElapsedSeconds": 0,
+        "position": {
+          "x": -20,
+          "y": 1.357344150543213,
+          "z": -112,
+          "rotation": 0,
+          "scale": 2
+        },
+        "stagedParticipants": 6,
+        "participantKeys": [
+          "persona:founder-1",
+          "persona:founder-10",
+          "persona:founder-4",
+          "persona:founder-2",
+          "persona:founder-3",
+          "persona:founder-5"
+        ],
+        "visible": true,
+        "wedding": {
+          "duration": 30.041,
+          "elapsed": 0,
+          "rotation": 8.63937979737193,
+          "roles": [
+            {
+              "id": "founder-1",
+              "role": "couple"
+            },
+            {
+              "id": "founder-10",
+              "role": "couple",
+              "crown": true
+            },
+            {
+              "id": "founder-4",
+              "role": "officiant"
+            },
+            {
+              "id": "founder-2",
+              "role": "musician",
+              "instrument": "wedding-lyre"
+            },
+            {
+              "id": "founder-3",
+              "role": "musician",
+              "instrument": "wedding-flute"
+            },
+            {
+              "id": "founder-5",
+              "role": "musician",
+              "instrument": "wedding-frame-drum"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "stage": "actual-outdoor-occasion-wedding",
+      "eventId": "event-43",
+      "venue": {
+        "rulesVersion": "community-hearth-v1",
+        "tier": 2,
+        "multiplierBps": 15000,
+        "baseReductionBps": 2500,
+        "effectiveReductionBps": 3750
+      },
+      "phase": "gathering",
+      "participantCount": 5,
+      "structureBounds": {
+        "min": [
+          -27.095017910003662,
+          2.5547969877719883,
+          -81.25980140326803
+        ],
+        "max": [
+          -12.904982089996338,
+          6.84076381723747,
+          -67.64019870758057
+        ]
+      }
+    },
+    {
+      "stage": "actual-couple-in-hall-wedding",
+      "partnership": "event-23",
+      "eventId": "event-43",
+      "spouses": [
+        "founder-1",
+        "founder-10"
+      ],
+      "foodCost": 24
+    }
+  ],
+  "models": [
+    {
+      "path": "/game-assets/community-hearth/gathering-shelter.glb",
+      "status": 200
+    },
+    {
+      "path": "/game-assets/community-hearth/clan-hall.glb",
+      "status": 200
+    }
+  ],
+  "errors": []
+}

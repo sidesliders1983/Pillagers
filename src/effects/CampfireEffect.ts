@@ -18,11 +18,14 @@ class SeededRange extends IntervalValue {
     genValue() { return this.a + (this.b - this.a) * this.random(); }
 }
 class HearthEmitter extends ConeEmitter {
+    size = 1;
     constructor(radius: number, private random: () => number) { super({ radius }); }
     initialize(particle: Particle) {
         const angle = this.random() * Math.PI * 2, radius = Math.sqrt(this.random()) * this.radius;
         particle.position.set(Math.cos(angle) * radius, 0, Math.sin(angle) * radius);
-        particle.velocity.set((this.random() - .5) * .3, particle.startSpeed, (this.random() - .5) * .3);
+        const drift = .3 * this.size;
+        particle.velocity.set((this.random() - .5) * drift, particle.startSpeed * this.size,
+            (this.random() - .5) * drift);
     }
 }
 
@@ -45,7 +48,7 @@ export class CampfireEffect {
     readonly root = new Group();
     private renderer = new BatchedRenderer();
     private texture = particleTexture();
-    private systems: { system: ParticleSystem; rate: number; cap: number }[] = [];
+    private systems: { system: ParticleSystem; rate: number; cap: number; height: number }[] = [];
     private materials: MeshBasicMaterial[] = [];
     private lit: boolean;
     private quality: EffectQuality = 'low';
@@ -53,29 +56,30 @@ export class CampfireEffect {
     private disposed = false;
     private heat: number;
     private time = 0;
+    private size = 1;
     private random: () => number;
 
-    constructor(readonly key: string, anchor: Vector3, seed: number, lit: boolean) {
+    constructor(readonly key: string, private readonly ground: Vector3, seed: number, lit: boolean) {
         this.root.name = key + ':effects';
         this.root.add(this.renderer);
         this.random = stream(seed);
         this.lit = lit;
         // Restoring a burning save starts warm; no historical emissions are replayed.
         this.heat = lit ? 1 : 0;
-        this.createSystem(anchor, 'flame', 22, 36, [.7, 1.3], [1.3, 2.2], [.75, 1.2], .8,
+        this.createSystem(.9, 'flame', 22, 36, [.7, 1.3], [1.3, 2.2], [.75, 1.2], .8,
             [[new ColorVector(1, .8, .25), 0], [new ColorVector(1, .18, .015), .55], [new ColorVector(.35, .035, .005), 1]],
             [[0, 0], [.9, .12], [.7, .5], [0, 1]], true, new Bezier(.6, 1, .6, 0));
-        this.createSystem(anchor.clone().add(new Vector3(0, .6, 0)), 'smoke', 5, 26,
+        this.createSystem(1.5, 'smoke', 5, 26,
             [2.5, 4.5], [.5, .8], [.8, 1.2], .45,
             [[new ColorVector(.18, .17, .16), 0], [new ColorVector(.36, .35, .34), 1]],
             [[0, 0], [.22, .2], [.12, .6], [0, 1]], false, new Bezier(.5, 1, 1.6, 2.3));
-        this.createSystem(anchor, 'sparks', 2, 6, [1, 2], [1.8, 3], [.07, .12], .55,
+        this.createSystem(.9, 'sparks', 2, 6, [1, 2], [1.8, 3], [.07, .12], .55,
             [[new ColorVector(1, .65, .15), 0], [new ColorVector(1, .12, .01), 1]],
             [[1, 0], [.8, .6], [0, 1]], true, new Bezier(1, 1, .6, 0));
         this.configure('low', false);
     }
 
-    private createSystem(anchor: Vector3, name: string, rate: number, cap: number,
+    private createSystem(height: number, name: string, rate: number, cap: number,
         life: [number, number], speed: [number, number], size: [number, number], radius: number,
         colors: [ColorVector, number][], alpha: [number, number][], additive: boolean, sizeCurve: Bezier) {
         const material = new MeshBasicMaterial({ map: this.texture, transparent: true,
@@ -91,11 +95,12 @@ export class CampfireEffect {
             behaviors: [new ColorOverLife(new Gradient(colors, alpha)),
                 new SizeOverLife(new PiecewiseBezier([[sizeCurve, 0]]))] });
         system.emitter.name = this.key + ':' + name;
-        system.emitter.position.copy(anchor);
+        system.emitter.position.copy(this.ground);
+        system.emitter.position.y += height;
         system.emitter.raycast = () => { };
         this.root.add(system.emitter);
         this.renderer.addSystem(system);
-        this.systems.push({ system, rate, cap });
+        this.systems.push({ system, rate, cap, height });
         for (const batch of this.renderer.batches) batch.raycast = () => { };
     }
 
@@ -111,6 +116,21 @@ export class CampfireEffect {
     }
     private get enabled() { return effectProfiles[this.quality].enabled && !this.reducedMotion; }
     setLit(lit: boolean) { this.lit = lit; }
+    /** Update the existing emitters when the same fire fits a different venue. */
+    setSize(size: number) {
+        if (size === this.size) return;
+        this.size = size;
+        for (const { system, height } of this.systems) {
+            system.emitter.position.y = this.ground.y + height * size;
+            system.emitter.scale.setScalar(size);
+            system.emitter.updateMatrixWorld(true);
+            // The world-space normal transform cancels uniform emitter scale in velocity.
+            (system.emitterShape as HearthEmitter).size = size;
+            // Existing world-space particles retain their old dimensions until cleared.
+            system.restart();
+        }
+        for (const batch of this.renderer.batches) batch.update();
+    }
     update(delta: number, active: boolean) {
         if (this.disposed || !active) return;
         const step = Math.max(0, Math.min(.1, delta));
@@ -129,7 +149,7 @@ export class CampfireEffect {
     }
     inspect() {
         return { key: this.key, lit: this.lit, heat: this.heat, time: this.time,
-            quality: this.quality, reducedMotion: this.reducedMotion,
+            quality: this.quality, reducedMotion: this.reducedMotion, size: this.size,
             particles: this.systems.reduce((sum, entry) => sum + entry.system.particleNum, 0),
             systems: this.systems.length, batches: this.renderer.batches.length,
             visible: this.enabled, snowMultiplier: 1 - this.heat };

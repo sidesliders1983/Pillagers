@@ -192,7 +192,8 @@ export class GameplaySession {
     commandBatch(commands: readonly SimulationCommand[]): void {
         const allowed = new Set([
             'BuildHouse', 'AssignOccupation', 'SpecializeBuilding', 'AssignCattle', 'AssignMiner', 'RecallMiner', 'BuildMine',
-            'AssignLivestock', 'UpgradeBuilding', 'SetSmitheryTarget', 'SponsorGathering', 'BarterWithMerchant'
+            'AssignLivestock', 'UpgradeBuilding', 'SetSmitheryTarget', 'SponsorGathering', 'BarterWithMerchant',
+            'UpgradeCommunityHearth'
         ]);
         if (commands.length > 64 || commands.some(command => !allowed.has(command.type))) {
             throw new Error('This task contains unsupported management commands.');

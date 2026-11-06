@@ -1,6 +1,7 @@
 import type { FirstStepsInspection } from './FirstStepsState';
-import { gatheringOffer, weddingCandidates } from '../simulation/SimulationCore';
+import { gatheringOffer, inspectCommunityHearth, weddingCandidates } from '../simulation/SimulationCore';
 import { renderGatheringCard, renderGatheringReview, type GatheringChoice, type GatheringOffer } from './CulturalGatheringView';
+import { renderCommunityHearth, type HearthUpgradeOffer } from './CommunityHearthView';
 import { renderSmithery } from './SmitheryView';
 import { craftingOccupation, type EquipmentItem } from '../simulation/Smithery';
 import { applyCommand, inspectWork, inspectCattle, inspectLivestock, occupationAptitude, occupationIds, availableOccupationIds, personaAge, personaAway, landingSummary } from '../simulation/SimulationCore';
@@ -37,6 +38,8 @@ interface InterfaceHooks {
     renderPortrait?: (input: PortraitRequest) => Promise<string | undefined>;
     home?: () => void;
     trade?: () => void;
+    hearthUpgrade?: () => HearthUpgradeOffer;
+    focusHearth?: () => void;
     report?: (sourceEventId: string) => void;
     inspected?: (kind: FirstStepsInspection, id?: string) => void;
     /** Accepted actions on rendered local cards; programmatic navigation stays silent. */
@@ -261,7 +264,8 @@ export class FjordInterface {
                     ${home && !house && !this.owner.availability({ type: 'BuildHouse', householdId: home.id }).allowed ?
                         `<p class="fjord-caption">${esc(this.owner.availability({ type: 'BuildHouse', householdId: home.id }).reason)}</p>` : ''}</div>`;
             } else html = this.heading(selection.kind === 'cattle' ? inspectLivestock(state, selection.id).name :
-                selection.kind === 'campfire' ? 'Settlement campfire' : 'Longship', 'Current settlement record',
+                selection.kind === 'campfire' ? state.communityHearth ? 'Community Hearth' : 'Settlement campfire' : 'Longship',
+                selection.kind === 'campfire' && state.communityHearth ? inspectCommunityHearth(state).name : 'Current settlement record',
                 selection.kind === 'cattle' ? 'cattle' : selection.kind === 'longship' ? 'ship' : 'home');
             if (!this.task && (!isMobileLayout() || this.expanded ||
                 !['persona', 'building', 'household'].includes(selection.kind))) {
@@ -269,7 +273,9 @@ export class FjordInterface {
                     ${['cattle', 'campfire', 'longship'].includes(selection.kind) ? legacy() :
                         `<details data-legacy-management data-view-key="advanced:${esc(key)}"><summary>More management</summary>${this.advanced ? legacy() : ''}</details>`}
                     ${selection.kind === 'longship' && state.trade ? button('merchant', state.trade.visit ? 'Visiting merchant · View offers' : 'Trade at the shore', 'ship') : ''}
-                    ${selection.kind === 'campfire' ? renderGatheringCard(state, !!this.hooks.report, this.gatheringChoice) : ''}</div>`;
+                    ${selection.kind === 'campfire' ? renderCommunityHearth(state,
+                        this.hooks.hearthUpgrade?.() ?? {}, Boolean(this.hooks.focusHearth)) +
+                        renderGatheringCard(state, !!this.hooks.report, this.gatheringChoice) : ''}</div>`;
             }
         }
         const panelEpoch = this.owner.session.personalHistoryEpoch;
@@ -486,6 +492,25 @@ export class FjordInterface {
                 document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open = true;
                 document.querySelector<HTMLDetailsElement>('#fjord-campaign')!.open = true;
                 document.querySelector<HTMLElement>('#fjord-exploration')!.focus();
+                return true;
+            }
+            case 'hearth-focus':
+                if (this.owner.selection?.kind === 'campfire' && this.hooks.focusHearth) {
+                    this.closeSelection();
+                    this.hooks.focusHearth();
+                }
+                return true;
+            case 'hearth-upgrade': {
+                if (this.owner.selection?.kind !== 'campfire' || !button.dataset.hearthCommand) return true;
+                const command = JSON.parse(button.dataset.hearthCommand) as SimulationCommand;
+                if (command.type !== 'UpgradeCommunityHearth') return true;
+                const epoch = this.owner.session.personalHistoryEpoch;
+                const world = this.owner.fjord.blueprint;
+                this.run(() => {
+                    if (epoch !== this.owner.session.personalHistoryEpoch || world !== this.owner.fjord.blueprint)
+                        throw new Error('The campaign changed. Review its Community Hearth again.');
+                    return [command];
+                }, 'Community Hearth upgraded.');
                 return true;
             }
             case 'culture-partnership-record': {

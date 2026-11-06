@@ -3,6 +3,7 @@ import type { FjordEntity, FjordPlot } from './FjordProjection';
 import type { Point2, WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
 import { suitability } from '../world-generation/PlanSettlement';
+import { communityHearthContains } from './CommunityHearthGeometry';
 export interface FjordGround {
     plots: {
         id: string;
@@ -22,10 +23,10 @@ const cached = new WeakMap<WorldBlueprint, Map<string, {
 /** Presentation paths use the authoritative terrain and the existing walking thresholds.
  * They never alter geography, navigation, household assignments or simulation rules. */
 export function projectFjordGround(world: WorldBlueprint, entities: readonly FjordEntity[],
-    campfire: SettlementCampfire = settlementCampfire(world)): FjordGround {
+    campfire: SettlementCampfire = settlementCampfire(world), reservations: readonly FjordPlot[] = []): FjordGround {
     const parcels = entities.filter(e => e.plot);
     const plots = parcels.filter(e => e.kind === 'building').map(e => ({ id: e.id, plot: e.plot! }));
-    const signature = JSON.stringify([campfire, parcels.map(e => [e.selectionKey, e.plot])]);
+    const signature = JSON.stringify([campfire, parcels.map(e => [e.selectionKey, e.plot]), reservations]);
     // Home and rival projections alternate on the same island. Each nucleus keeps its latest layout.
     const known = cached.get(world)?.get(campfire.id);
     if (known?.signature === signature)
@@ -44,6 +45,7 @@ export function projectFjordGround(world: WorldBlueprint, entities: readonly Fjo
             return Math.hypot(p.x - campfire.transform.x, p.z - campfire.transform.z) > campfire.obstacleRadius + .65 &&
                 surface.surfaceHeightAt(p.x, p.z) >= world.waterLevel + suitability.walkingElevation &&
                 surface.slopeAt(p.x, p.z) <= suitability.walkingSlope &&
+                reservations.every(plot => !communityHearthContains(plot, p, 1.5)) &&
                 parcels.every(e => Math.abs(p.x - e.plot!.x) > e.plot!.halfWidth + .65 ||
                     Math.abs(p.z - e.plot!.z) > e.plot!.halfDepth + .65);
         });

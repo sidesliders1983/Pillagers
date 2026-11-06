@@ -42,13 +42,14 @@ export function ensureCampfireBurning(state: SimulationState): void {
 /** Pay before a burning tick, ahead of that tick's work and annual building upkeep. */
 export function stepCampfire(state: SimulationState) {
     const fire = state.campfire;
-    if (!fire?.lit) return;
+    if (!fire?.lit) return false;
     if (fire.fuelTicks === 0 && !refuel(state)) {
         fire.lit = false;
         emit(state, 'CampfireChanged', { lit: false, reason: 'out-of-fuel' });
-        return;
+        return false;
     }
     fire.fuelTicks--;
+    return true;
 }
 
 export function validateCampfire(state: SimulationState) {
