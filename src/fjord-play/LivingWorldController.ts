@@ -7,6 +7,7 @@ import type { FjordEntity, FjordPlot } from './FjordProjection';
 import type { FjordGround } from './FjordGround';
 import type { Point2, WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
+import { communityHearthContains, communityHearthObstacleBounds } from './CommunityHearthGeometry';
 export type RouteObservation = { agent: string; kind: string; purpose: string; target: string;
     goal: Point2 | null; from: Point2; reason: string; nodes: number; accepted: boolean;
     navigationGeneration: number; reservationGeneration: number; occupancy: string;
@@ -289,20 +290,21 @@ export class LivingWorldController {
         actor.path = path;
     }
     reconcile(entities: readonly FjordEntity[], ground: FjordGround,
-        communityReservations: readonly FjordPlot[] = []) {
+        communityReservations: readonly FjordPlot[] = [], campfire: SettlementCampfire = this.campfire) {
         const navigationSignature = JSON.stringify([entities.map(entity => [entity.selectionKey,
-            entity.asset, entity.transform, entity.plot, entity.status]), ground, communityReservations]);
+            entity.asset, entity.transform, entity.plot, entity.status]), ground, communityReservations, campfire]);
         if (navigationSignature !== this.navigationSignature) {
             this.navigationSignature = navigationSignature;
             this.navigationGeneration++;
         }
         this.parcels = entities.filter(e => e.plot);
+        this.campfire = campfire;
         this.communityReservations = communityReservations;
         this.ground = ground;
         const active = entities.filter(e => e.transform && !e.status.aboardShip && !e.status.mining && (e.kind === 'persona' || e.kind === 'cattle'));
         // These are the same plot/anchor/path clearances applied by the scene's nature reconciler.
         const cleared = [{ ...this.campfire.transform, halfWidth: this.campfire.clearingRadius,
-            halfDepth: this.campfire.clearingRadius }, ...communityReservations,
+            halfDepth: this.campfire.clearingRadius }, ...communityReservations.map(communityHearthObstacleBounds),
             ...this.parcels.map(e => e.plot!), ...active.map(e => ({ ...e.transform!, halfWidth: 1, halfDepth: 1 })),
             ...ground.paths.flatMap(p => p.points.map(point => ({ ...point, halfWidth: 1.5, halfDepth: 1.5 })))];
         this.nature = this.world.placementPlan.filter(p => !cleared.some(c => Math.abs(p.x - c.x) <= c.halfWidth + p.clearance && Math.abs(p.z - c.z) <= c.halfDepth + p.clearance));
@@ -730,8 +732,7 @@ export class LivingWorldController {
     }
     private safe(a: Agent, p: Point2) {
         if (this.mapped && !this.mapped(p.x, p.z)) return false;
-        if (this.communityReservations.some(plot => Math.abs(p.x - plot.x) <= plot.halfWidth + this.radius(a) &&
-            Math.abs(p.z - plot.z) <= plot.halfDepth + this.radius(a))) return false;
+        if (this.communityReservations.some(plot => communityHearthContains(plot, p, this.radius(a)))) return false;
         if (Math.hypot(p.x - this.campfire.transform.x, p.z - this.campfire.transform.z) <=
             this.campfire.obstacleRadius + this.radius(a)) return false;
         if (this.yardSurfaces.has(a.key) && this.yardSurfaces.get(a.key)!(p.x, p.z) === null)

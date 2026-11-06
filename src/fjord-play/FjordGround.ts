@@ -3,6 +3,7 @@ import type { FjordEntity, FjordPlot } from './FjordProjection';
 import type { Point2, WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
 import { suitability } from '../world-generation/PlanSettlement';
+import { communityHearthContains } from './CommunityHearthGeometry';
 export interface FjordGround {
     plots: {
         id: string;
@@ -44,8 +45,7 @@ export function projectFjordGround(world: WorldBlueprint, entities: readonly Fjo
             return Math.hypot(p.x - campfire.transform.x, p.z - campfire.transform.z) > campfire.obstacleRadius + .65 &&
                 surface.surfaceHeightAt(p.x, p.z) >= world.waterLevel + suitability.walkingElevation &&
                 surface.slopeAt(p.x, p.z) <= suitability.walkingSlope &&
-                reservations.every(plot => Math.abs(p.x - plot.x) > plot.halfWidth + 1.5 ||
-                    Math.abs(p.z - plot.z) > plot.halfDepth + 1.5) &&
+                reservations.every(plot => !communityHearthContains(plot, p, 1.5)) &&
                 parcels.every(e => Math.abs(p.x - e.plot!.x) > e.plot!.halfWidth + .65 ||
                     Math.abs(p.z - e.plot!.z) > e.plot!.halfDepth + .65);
         });

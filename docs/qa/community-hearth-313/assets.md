@@ -36,6 +36,13 @@ chain), versus 48 MiB before mipmaps for the source maps. The adjacent manifest
 and generated TypeScript use the bounds measured after runtime decoding,
 including Meshopt's submillimetre rounding.
 
+Run `node scripts/prepare-community-hearth-profiles.mjs` after preparing the
+runtime models. It samples the decoded geometry to describe occupied ground
+and contact points for local supports. The authored fire sockets put the
+Gathering Shelter over the fire and the Clan Hall behind its open forecourt.
+In FjordSide, the Shelter scales to 135% of the prepared mesh and the Hall
+to 90%. The extraction checks clearance around the fitted fire ring.
+
 The asset guard checks the encoded byte count, SHA-256, decoded footprint,
 triangle count, image dimensions, and texture budget. Outdoor staging,
 placement on the saved island, and actual device acceptance are separate

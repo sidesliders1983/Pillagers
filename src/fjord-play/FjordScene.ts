@@ -1,5 +1,6 @@
 import { FjordHdrLighting, loadHdrEnvironment } from './FjordHdrLighting';
 import { CommunityHearthLayer } from './CommunityHearthLayer';
+import { communityHearthObstacleBounds } from './CommunityHearthGeometry';
 import { WetLowlandLayer } from './WetLowlandLayer';
 import { MiningModelAsset } from './MiningModelAsset';
 import { MiningLayer } from './MiningLayer';
@@ -509,8 +510,8 @@ export function createFjordScene(options: {
             });
             const fireState = inspectCampfire(session.readSnapshot());
             soundFire = { id: fire.id, position: fire.transform, lit: fireState.lit };
-            campfireEffect = new CampfireEffect(fire.id, firePosition.clone().add(new Vector3(0, .9, 0)),
-                session.readSnapshot().seed, fireState.lit);
+            campfireEffect = new CampfireEffect(fire.id, firePosition.clone(), session.readSnapshot().seed, fireState.lit);
+            campfireEffect.setSize(fire.transform.scale / 2);
             precipitationEffect = new PrecipitationEffect(session.readSnapshot().seed,
                 (x, z) => Math.max(blueprint.waterLevel, next.movement.heightAt(x, z)));
             scene.add(precipitationEffect.root);
@@ -699,7 +700,8 @@ export function createFjordScene(options: {
                         });
                     }
                     const observedEntities = [...view.entities, ...view.rival.entities];
-                    const communityReservations = view.communityHearthSite ? [view.communityHearthSite.reservation] : [];
+                    const communityReservations = view.communityHearthSite?.occupancy ?? [];
+                    const communityBounds = communityReservations.map(communityHearthObstacleBounds);
                     // The UI rejects paid upgrades during a performance. Also retain its geometry
                     // if an external command arrives until the real cast has released the court.
                     if (!culture?.active) {
@@ -778,7 +780,7 @@ export function createFjordScene(options: {
                         }
                     }
                     sceneEntities = view.entities;
-                    wildlife?.setObstacles([...communityReservations, ...view.entities.flatMap(entity =>
+                    wildlife?.setObstacles([...communityBounds, ...view.entities.flatMap(entity =>
                         entity.kind === 'building' && entity.plot ? [entity.plot] : [])]);
                     dressing!.sync({
                         seed: state.seed, homes: dressingHomes(state, view.entities),
@@ -798,7 +800,7 @@ export function createFjordScene(options: {
                     layer!.prepareExpeditions(state, campaign.blueprint, host.tickIntervalSeconds, secondsPerTick, {
                         known: (x, z) => !knownTerrain || discoveryAt(knownTerrain, x, z) !== 'unknown',
                         plots: [
-                            ...communityReservations,
+                            ...communityBounds,
                             ...[...view.entities, ...view.rival.entities].flatMap(entity => entity.plot ? [entity.plot] : []),
                             { ...view.campfire.transform, halfWidth: view.campfire.obstacleRadius,
                                 halfDepth: view.campfire.obstacleRadius },
@@ -814,6 +816,7 @@ export function createFjordScene(options: {
                     else await prepareEntities();
                     if (!current()) return;
                     const fireLit = inspectCampfire(state).lit;
+                    campfireEffect!.setSize(view.campfire.transform.scale / 2);
                     campfireEffect!.setLit(fireLit);
                     if (soundFire) soundFire.lit = fireLit;
                     soundWeather = view.weatherVisual.class;
@@ -826,7 +829,7 @@ export function createFjordScene(options: {
                     });
                     canvas.dataset.structureSnow = JSON.stringify(layer!.inspectSeason());
                     canvas.dataset.campfireEffect = JSON.stringify(campfireEffect!.inspect());
-                    motion!.reconcile(view.entities, view.ground, communityReservations);
+                    motion!.reconcile(view.entities, view.ground, communityReservations, view.campfire);
                     const trees = host.loading
                         ? await host.loading.measure('standing-tree-targets', () => world!.standingTrees())
                         : world!.standingTrees();
@@ -1206,9 +1209,10 @@ export function createFjordScene(options: {
         const view = campaign.readProjection(), fire = view.campfire.transform;
         const rotation = view.communityHearthSite?.placement.rotation ?? Math.PI;
         const forward = { x: Math.sin(rotation), z: Math.cos(rotation) };
-        controller.setView({ position: [fire.x + forward.x * 28 + forward.z * 12,
-            fire.y + 26, fire.z + forward.z * 28 - forward.x * 12],
-            target: [fire.x - forward.x * 8, fire.y + 1, fire.z - forward.z * 8] });
+        const fit = Math.max(1, .9 / camera.aspect);
+        controller.setView({ position: [fire.x + (forward.x * 22 + forward.z * 6) * fit,
+            fire.y + 12 * fit, fire.z + (forward.z * 22 - forward.x * 6) * fit],
+            target: [fire.x - forward.x * 2, fire.y + .6, fire.z - forward.z * 2] });
     };
     return {
         root: scene, camera, renderer, controller,

@@ -735,7 +735,11 @@ export class FjordPlay {
         const hearthUpgrade = (): HearthUpgradeOffer => {
             const state = this.session.readSnapshot();
             const hearth = inspectCommunityHearth(state);
-            if (!hearth.enabled || hearth.tier === 2 || hearth.upgradeMaterials === null) return {};
+            if (!hearth.enabled) return {};
+            const status = this.campaign.readProjection().communityHearthStatus;
+            if (status && !status.available && hearth.placement)
+                return { reason: status.reason ?? 'This hearth layout is unavailable.' };
+            if (hearth.tier === 2 || hearth.upgradeMaterials === null) return {};
             if (!presentation?.hasWorld || this.loading) return { reason: 'Preparing the settlement.' };
             if (presentation.communityHearthBusy)
                 return { reason: 'Wait for the current ceremony to finish.' };

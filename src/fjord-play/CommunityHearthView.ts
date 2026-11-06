@@ -32,7 +32,8 @@ export function renderCommunityHearth(state: SimulationState, offer: HearthUpgra
             ${offer.command ? `data-hearth-command="${escape(JSON.stringify(offer.command))}"` : 'disabled'}>
             Upgrade to ${escape(next.name)} · ${hearth.upgradeMaterials} Materials</button>
         ${offer.reason ? `<p class="fjord-caption">${escape(offer.reason)}</p>` : ''}
-        </div>` : '<p class="fjord-caption">Clan Hall is the final upgrade.</p>';
+        </div>` : `<p class="fjord-caption">Clan Hall is the final upgrade.</p>
+        ${offer.reason ? `<p class="fjord-caption">${escape(offer.reason)}</p>` : ''}`;
     return `<section class="fjord-culture" aria-label="Community Hearth" data-view-key="community-hearth">
         <small class="fjord-culture-prototype">Community Hearth trial</small>
         <h3>Winter warmth</h3>

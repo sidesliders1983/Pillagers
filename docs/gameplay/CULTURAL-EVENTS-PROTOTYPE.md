@@ -373,9 +373,14 @@ with the save. Ordinary campaigns start with their existing campfire rules.
 
 A basic home costs 10 Materials and removes extra exposure for its residents.
 The shared site buys no housing capacity. Its two paid upgrades reuse the same
-fire, fuel balance and outdoor gathering court. The shelter and hall face the
-fire from a single reserved site. A blocked footprint or a ceremony in progress
-prevents purchase before any Materials are spent.
+fire, fuel balance and gathering court. The Gathering Shelter fits over the fire.
+The Clan Hall fits around it with the fire in its open forecourt. Each upgrade
+fits the visible fire bowl and its effects to the authored opening. Ground stays
+visible around the structures, with small stone supports added only where their
+feet need them. Cultural gatherings take place in the open area by the fire.
+A blocked footprint or a ceremony in progress prevents purchase before any
+Materials are spent. Earlier trial saves retain their paid tier and receipts and
+use the corrected campfire layout wherever the existing settlement has room.
 
 Direct heat is a settlement-level benefit for eligible local residents. Each
 paid burning tick in the first quarter of the weather year adds that tick's

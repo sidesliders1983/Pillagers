@@ -4,22 +4,13 @@ import { createBlueprintSurface } from '../world-generation/TerrainQueries';
 import { suitability } from '../world-generation/PlanSettlement';
 import type { FjordPlot } from './FjordProjection';
 import { settlementCampfire } from './SettlementCampfire';
-import { communityHearthAssets } from './CommunityHearthAssets';
-import { campaignIslandPlan } from './CampaignIsland';
+import { communityHearthContains, communityHearthGeometry, communityHearthLocalPoint,
+    communityHearthOverlapsPlot } from './CommunityHearthGeometry';
 
-/** Both upgrades reserve the final authored Hall, including fences and roof overhangs.
- * This is an independent community reservation, never a household or a graded island plot. */
-const hallBounds = communityHearthAssets[2].bounds;
-export const communityHearthFootprint = Object.freeze({
-    halfWidth: Math.max(Math.abs(hallBounds.min[0]), Math.abs(hallBounds.max[0])) + .15,
-    halfDepth: Math.max(Math.abs(hallBounds.min[2]), Math.abs(hallBounds.max[2])) + 1.1,
-});
 export const communityHearthCourtRadius = 8.75;
 export const communityHearthMaximumFooting = .6;
-const supports = new WeakMap<WorldBlueprint, Map<string,
-    { low: number; high: number; slope: number; floor: number }>>();
 const accessRoutes = new WeakMap<WorldBlueprint, Map<string, Point2[]>>();
-
+const resolvedSites = new WeakMap<WorldBlueprint, Map<string, CommunityHearthStatus>>();
 export interface CommunityHearthPlacementContext {
     world: WorldBlueprint;
     worldId: string;
@@ -31,58 +22,34 @@ export interface CommunityHearthPlacementResult {
     reason: string | null;
     placement?: CommunityHearthPlacement;
 }
-
-/** The small stone footing supports the authored model without changing saved terrain. */
-export function communityHearthSupport(world: WorldBlueprint, placement: CommunityHearthPlacement) {
-    const key = JSON.stringify([placement.x, placement.z, placement.rotation]);
-    const cache = supports.get(world) ?? new Map();
-    const cached = cache.get(key);
-    if (cached) return { ...cached };
-    const reservation = communityHearthReservation(world, placement);
-    const bounds = communityHearthBounds(reservation);
-    const surface = createBlueprintSurface(world);
-    let low = Infinity, high = -Infinity, slope = 0;
-    const columns = Math.ceil(bounds.maxX - bounds.minX);
-    const rows = Math.ceil(bounds.maxZ - bounds.minZ);
-    for (let column = 0; column <= columns; column++) {
-        for (let row = 0; row <= rows; row++) {
-            const x = bounds.minX + (bounds.maxX - bounds.minX) * column / columns;
-            const z = bounds.minZ + (bounds.maxZ - bounds.minZ) * row / rows;
-            const height = surface.surfaceHeightAt(x, z);
-            low = Math.min(low, height);
-            high = Math.max(high, height);
-            slope = Math.max(slope, surface.slopeAt(x, z));
-        }
-    }
-    const result = { low, high, slope, floor: high + .025 };
-    if (cache.size >= 512) cache.delete(cache.keys().next().value!);
-    cache.set(key, result);
-    supports.set(world, cache);
-    return { ...result };
-}
-
-export function communityHearthReservation(world: WorldBlueprint,
-    placement: CommunityHearthPlacement): FjordPlot {
-    const sine = Math.abs(Math.sin(placement.rotation));
-    const cosine = Math.abs(Math.cos(placement.rotation));
-    return {
-        ...placement,
-        y: createBlueprintSurface(world).surfaceHeightAt(placement.x, placement.z),
-        scale: 1,
-        halfWidth: communityHearthFootprint.halfWidth * cosine + communityHearthFootprint.halfDepth * sine,
-        halfDepth: communityHearthFootprint.halfWidth * sine + communityHearthFootprint.halfDepth * cosine,
-    };
-}
+export interface CommunityHearthStatus extends CommunityHearthPlacementResult { legacy: boolean }
 
 export function communityHearthBounds(plot: FjordPlot): Bounds2 {
     return { minX: plot.x - plot.halfWidth, maxX: plot.x + plot.halfWidth,
         minZ: plot.z - plot.halfDepth, maxZ: plot.z + plot.halfDepth };
 }
-
 export function overlapsCommunityHearth(first: Pick<FjordPlot, 'x' | 'z' | 'halfWidth' | 'halfDepth'>,
     second: Pick<FjordPlot, 'x' | 'z' | 'halfWidth' | 'halfDepth'>, margin = 0): boolean {
     return Math.abs(first.x - second.x) < first.halfWidth + second.halfWidth + margin &&
         Math.abs(first.z - second.z) < first.halfDepth + second.halfDepth + margin;
+}
+
+/** Housing reserves both envelopes; walkers reserve only walls, posts and props. */
+export function communityHearthReservation(world: WorldBlueprint, placement: CommunityHearthPlacement): FjordPlot {
+    const plots = [1, 2].map(tier => communityHearthGeometry(world, placement, tier as 1 | 2).envelope);
+    const minX = Math.min(...plots.map(plot => plot.x - plot.halfWidth));
+    const maxX = Math.max(...plots.map(plot => plot.x + plot.halfWidth));
+    const minZ = Math.min(...plots.map(plot => plot.z - plot.halfDepth));
+    const maxZ = Math.max(...plots.map(plot => plot.z + plot.halfDepth));
+    return { x: (minX + maxX) / 2, z: (minZ + maxZ) / 2,
+        y: createBlueprintSurface(world).surfaceHeightAt(placement.x, placement.z), rotation: 0, scale: 1,
+        halfWidth: (maxX - minX) / 2, halfDepth: (maxZ - minZ) / 2 };
+}
+export function communityHearthSupport(world: WorldBlueprint, placement: CommunityHearthPlacement, tier: 1 | 2 = 2) {
+    return { ...communityHearthGeometry(world, placement, tier).support };
+}
+export function communityHearthOccupancy(world: WorldBlueprint, placement: CommunityHearthPlacement) {
+    return [1, 2].flatMap(tier => communityHearthGeometry(world, placement, tier as 1 | 2).occupancy);
 }
 
 function segmentTouchesBounds(first: Point2, second: Point2, bounds: Bounds2, margin: number) {
@@ -102,64 +69,56 @@ function segmentTouchesBounds(first: Point2, second: Point2, bounds: Bounds2, ma
     }
     return true;
 }
+export function pathTouchesCommunityHearth(path: readonly Point2[], occupancy: readonly FjordPlot[], margin = 1.5) {
+    return occupancy.some(plot => path.some((point, index) => segmentTouchesBounds(
+        communityHearthLocalPoint(plot, point), communityHearthLocalPoint(plot, path[index + 1] ?? point),
+        { minX: -plot.halfWidth, maxX: plot.halfWidth, minZ: -plot.halfDepth, maxZ: plot.halfDepth }, margin)));
+}
 
-/** A bounded outdoor approach uses the same walking limits as village paths. */
+/** A short exterior approach reaches the original fire through the open forecourt. */
 export function communityHearthAccess(context: CommunityHearthPlacementContext,
-    placement: CommunityHearthPlacement): Point2[] {
+    placement: CommunityHearthPlacement, tier: 1 | 2 = 2): Point2[] {
     const { world, plots } = context;
-    const key = JSON.stringify([placement, plots, context.paths]);
+    const key = JSON.stringify([placement, tier, plots, context.paths]);
     const cache = accessRoutes.get(world) ?? new Map<string, Point2[]>();
     const cached = cache.get(key);
     if (cached) return cached.map(point => ({ ...point }));
-    const surface = createBlueprintSurface(world);
-    const fire = settlementCampfire(world);
+    const surface = createBlueprintSurface(world), fire = settlementCampfire(world);
     const reservation = communityHearthReservation(world, placement);
-    const forward = { x: Math.sin(placement.rotation), z: Math.cos(placement.rotation) };
-    const exitDistance = Math.min(Math.abs(forward.x) > 1e-6 ? reservation.halfWidth / Math.abs(forward.x) : Infinity,
-        Math.abs(forward.z) > 1e-6 ? reservation.halfDepth / Math.abs(forward.z) : Infinity) + 3;
-    const preferred = { x: placement.x + forward.x * exitDistance,
-        z: placement.z + forward.z * exitDistance };
-    const start = { x: Math.round(preferred.x), z: Math.round(preferred.z) };
-    const bounds = { minX: Math.floor(Math.min(fire.transform.x, start.x) - 18),
-        maxX: Math.ceil(Math.max(fire.transform.x, start.x) + 18),
-        minZ: Math.floor(Math.min(fire.transform.z, start.z) - 18),
-        maxZ: Math.ceil(Math.max(fire.transform.z, start.z) + 18) };
+    const geometry = communityHearthGeometry(world, placement, tier);
+    const occupancy = geometry.occupancy, radius = geometry.fireObstacleRadius;
+    const shoreEntry = world.settlement.accessPaths[0]?.find(point =>
+        Math.hypot(point.x - placement.x, point.z - placement.z) >= 5);
+    const start = shoreEntry ? { x: shoreEntry.x, z: shoreEntry.z } :
+        { x: Math.round(placement.x + Math.sin(placement.rotation) * 8),
+            z: Math.round(placement.z + Math.cos(placement.rotation) * 8) };
     const cleared = [reservation, ...plots,
         { ...fire.transform, halfWidth: fire.clearingRadius, halfDepth: fire.clearingRadius },
         ...context.paths.flatMap(path => path.map(point => ({ ...point, halfWidth: 1.5, halfDepth: 1.5 })))];
     const nature = world.placementPlan.filter(item => !item.assetId.includes('grass') &&
         !cleared.some(plot => overlapsCommunityHearth(plot,
             { ...item, halfWidth: item.clearance, halfDepth: item.clearance })));
-    const walkable = new Map<string, boolean>();
+    const safe = (point: Point2) => Math.abs(point.x - placement.x) <= 18 && Math.abs(point.z - placement.z) <= 18 &&
+        point.x >= world.terrain.bounds.minX + 1 && point.x <= world.terrain.bounds.maxX - 1 &&
+        point.z >= world.terrain.bounds.minZ + 1 && point.z <= world.terrain.bounds.maxZ - 1 &&
+        surface.surfaceHeightAt(point.x, point.z) > world.waterLevel + suitability.walkingElevation &&
+        surface.slopeAt(point.x, point.z) <= suitability.walkingSlope &&
+        Math.hypot(point.x - placement.x, point.z - placement.z) > radius + .45 &&
+        !occupancy.some(plot => communityHearthContains(plot, point, .45)) &&
+        !plots.some(plot => overlapsCommunityHearth(plot, { ...point, halfWidth: .65, halfDepth: .65 })) &&
+        !nature.some(item => Math.hypot(point.x - item.x, point.z - item.z) < item.clearance + .65);
     const pointKey = (point: Point2) => point.x + ',' + point.z;
-    const safe = (point: Point2) => {
-        const id = pointKey(point);
-        if (walkable.has(id)) return walkable.get(id)!;
-        const valid = point.x >= bounds.minX && point.x <= bounds.maxX &&
-            point.z >= bounds.minZ && point.z <= bounds.maxZ &&
-            point.x >= world.terrain.bounds.minX + 1 && point.x <= world.terrain.bounds.maxX - 1 &&
-            point.z >= world.terrain.bounds.minZ + 1 && point.z <= world.terrain.bounds.maxZ - 1 &&
-            surface.surfaceHeightAt(point.x, point.z) > world.waterLevel + suitability.walkingElevation &&
-            surface.slopeAt(point.x, point.z) <= suitability.walkingSlope &&
-            Math.hypot(point.x - fire.transform.x, point.z - fire.transform.z) > fire.obstacleRadius + .65 &&
-            ![reservation, ...plots].some(plot => overlapsCommunityHearth(plot,
-                { ...point, halfWidth: .65, halfDepth: .65 })) &&
-            !nature.some(item => Math.hypot(point.x - item.x, point.z - item.z) < item.clearance + .65);
-        walkable.set(id, valid);
-        return valid;
-    };
-    const queue: Point2[] = safe(start) ? [start] : [];
+    // The shelter's authored front bench occupies the closer ring; its approach ends outside it.
+    const arrivalRadius = tier === 1 ? 3.75 : 3;
+    const queue = safe(start) ? [start] : [];
     const parents = new Map<string, Point2 | null>();
     if (queue.length) parents.set(pointKey(start), null);
     let goal: Point2 | undefined;
-    for (let cursor = 0; cursor < queue.length && cursor < 20000; cursor++) {
+    for (let cursor = 0; cursor < queue.length && cursor < 6000; cursor++) {
         const point = queue[cursor];
-        if (Math.hypot(point.x - fire.transform.x, point.z - fire.transform.z) <= 6.25) {
-            goal = point;
-            break;
-        }
-        for (const next of [{ x: point.x + 1, z: point.z }, { x: point.x, z: point.z + 1 },
-            { x: point.x - 1, z: point.z }, { x: point.x, z: point.z - 1 }]) {
+        if (Math.hypot(point.x - placement.x, point.z - placement.z) <= arrivalRadius) { goal = point; break; }
+        for (const next of [{ x: point.x + .5, z: point.z }, { x: point.x, z: point.z + .5 },
+            { x: point.x - .5, z: point.z }, { x: point.x, z: point.z - .5 }]) {
             const id = pointKey(next);
             if (parents.has(id) || !safe(next)) continue;
             parents.set(id, point);
@@ -175,88 +134,103 @@ export function communityHearthAccess(context: CommunityHearthPlacementContext,
     return route.map(point => ({ ...point }));
 }
 
-/** Validate the complete upgrade envelope against saved geography and live home reservations.
- * No grading, home relocation, recipe mutation or navigation-grid editing is permitted here. */
+/** One fire anchor and orientation serve both paid tiers, without moving homes or terrain. */
 export function inspectCommunityHearthPlacement(context: CommunityHearthPlacementContext,
     placement: CommunityHearthPlacement): CommunityHearthPlacementResult {
     const reject = (reason: string): CommunityHearthPlacementResult => ({ available: false, reason });
+    const { world } = context, fire = settlementCampfire(world).transform;
     if (!placement || placement.worldId !== context.worldId ||
         ![placement.x, placement.z, placement.rotation].every(Number.isFinite))
         return reject('The community site does not belong to this island.');
-    const { world } = context;
-    const fire = settlementCampfire(world).transform;
-    const rotation = Math.atan2(fire.x - placement.x, fire.z - placement.z);
-    if (Math.abs(Math.atan2(Math.sin(rotation - placement.rotation),
-        Math.cos(rotation - placement.rotation))) > 1e-6)
-        return reject('The community entrance must face the existing campfire.');
-    const distance = Math.hypot(fire.x - placement.x, fire.z - placement.z);
-    if (distance > 64) return reject('Choose a community site within reach of the existing gathering court.');
+    if (Math.hypot(placement.x - fire.x, placement.z - fire.z) > 1e-6)
+        return reject('The community structure must stay anchored to the existing campfire.');
     const reservation = communityHearthReservation(world, placement);
-    const bounds = communityHearthBounds(reservation);
-    const terrain = world.terrain.bounds;
+    const bounds = communityHearthBounds(reservation), terrain = world.terrain.bounds;
     if (bounds.minX < terrain.minX + 1 || bounds.maxX > terrain.maxX - 1 ||
         bounds.minZ < terrain.minZ + 1 || bounds.maxZ > terrain.maxZ - 1)
-        return reject('The full Clan Hall footprint must stay on the island.');
-    if (Math.hypot(Math.max(0, Math.abs(fire.x - reservation.x) - reservation.halfWidth),
-        Math.max(0, Math.abs(fire.z - reservation.z) - reservation.halfDepth)) < communityHearthCourtRadius)
-        return reject('Keep the fire and outdoor ceremony court clear.');
-    if (context.plots.some(plot => overlapsCommunityHearth(reservation, plot, 1)))
-        return reject('The Clan Hall upgrade footprint overlaps a household plot.');
+        return reject('Both community structures must stay on the island.');
+    if ([1, 2].some(tier => context.plots.some(plot => communityHearthOverlapsPlot(
+        communityHearthGeometry(world, placement, tier as 1 | 2).footprint, plot, 1))))
+        return reject('The community upgrade envelope overlaps a household plot.');
     const rival = world.rivalSite?.bounds;
     if (rival && bounds.minX < rival.maxX + 1 && bounds.maxX > rival.minX - 1 &&
         bounds.minZ < rival.maxZ + 1 && bounds.maxZ > rival.minZ - 1)
         return reject('The community site must stay outside the neighbouring settlement.');
-    const paths = [...context.paths, ...world.settlement.accessPaths,
+    // Baked shore routes end at the nucleus, even inside the original solid fire ring.
+    // Preserve their exterior; the last metres use the verified open-court approach.
+    const exteriorShorePaths = world.settlement.accessPaths.flatMap(path => path.slice(0, -1).flatMap((point, index) => {
+        const next = path[index + 1];
+        return Math.hypot(point.x - fire.x, point.z - fire.z) >= 5 &&
+            Math.hypot(next.x - fire.x, next.z - fire.z) >= 5 ? [[point, next]] : [];
+    }));
+    const paths = [...exteriorShorePaths,
         ...(world.siteSelection?.connection ? [world.siteSelection.connection] : [])];
-    if (paths.some(path => path.some((point, index) =>
-        segmentTouchesBounds(point, path[index + 1] ?? point, bounds, 1.5))))
-        return reject('Keep existing settlement paths and shore access clear.');
+    const occupancy = communityHearthOccupancy(world, placement);
+    if (paths.some(path => pathTouchesCommunityHearth(path, occupancy)))
+        return reject('Keep existing settlement paths and shore access clear of community walls and props.');
     const harbor = world.settlement.harbor;
-    if (harbor && segmentTouchesBounds(harbor, harbor, bounds, 5))
-        return reject('Keep the coastal landing clear.');
+    if (harbor && segmentTouchesBounds(harbor, harbor, bounds, 5)) return reject('Keep the coastal landing clear.');
     if (world.oreSites?.sites.some(site => segmentTouchesBounds(site.position, site.approach, bounds, 10)))
         return reject('Keep mineral deposits and their working approaches clear.');
     const environment = world.environment;
     if (environment && world.oreSites?.wetLowlands?.patches.some(patch => patch.cells.some(cell => {
-        const point = { x: world.terrain.bounds.minX + cell % environment.columns * environment.spacing,
-            z: world.terrain.bounds.minZ + Math.floor(cell / environment.columns) * environment.spacing };
+        const point = { x: terrain.minX + cell % environment.columns * environment.spacing,
+            z: terrain.minZ + Math.floor(cell / environment.columns) * environment.spacing };
         return segmentTouchesBounds(point, point, bounds, environment.spacing / 2 + 1);
     }))) return reject('The community structure cannot cover a wet lowland.');
-    const support = communityHearthSupport(world, placement);
-    if (support.low <= world.waterLevel + suitability.foundationElevation)
-        return reject('The full Clan Hall footprint needs dry ground.');
-    if (support.slope > suitability.foundationSlope)
-        return reject('The full Clan Hall footprint is too steep.');
-    if (support.high - support.low > communityHearthMaximumFooting)
-        return reject('The ground exceeds the community site’s 0.6 m stone-footing limit.');
-    if (!communityHearthAccess(context, placement).length)
-        return reject('No dry outdoor approach connects this site to the existing campfire.');
+    for (const tier of [1, 2] as const) {
+        const support = communityHearthSupport(world, placement, tier);
+        if (support.low <= world.waterLevel + suitability.foundationElevation)
+            return reject('Both community structures need dry supporting ground.');
+        // Independent stone feet support the untouched grade; this is not a flat household slab.
+        if (support.slope > suitability.walkingSlope) return reject('The community supports are on ground that is too steep.');
+        if (support.high - support.low > communityHearthMaximumFooting)
+            return reject('The ground exceeds the community site’s 0.6 m local-support limit.');
+    }
+    if (![1, 2].every(tier => communityHearthAccess(context, placement, tier as 1 | 2).length))
+        return reject('No dry outdoor approach reaches the fire through both community structures.');
     return { available: true, reason: null, placement: { ...placement } };
 }
 
-/** A bounded deterministic offer. An unavailable result leaves the original fire operational. */
 export function findCommunityHearthPlacement(context: CommunityHearthPlacementContext,
-    preferred?: Point2): CommunityHearthPlacementResult {
+    preferred?: Point2, preferredRotation = 0): CommunityHearthPlacementResult {
     const center = settlementCampfire(context.world).transform;
-    const at = (point: Point2) => inspectCommunityHearthPlacement(context, {
-        x: point.x, z: point.z,
-        rotation: Math.atan2(center.x - point.x, center.z - point.z), worldId: context.worldId,
-    });
-    if (preferred) return at(preferred);
-    const candidates: Point2[] = [...(campaignIslandPlan(context.world)?.plots ?? [])];
-    for (const distance of [16, 18, 20, 22, 24, 27, 30, 33, 38, 44, 50, 56, 62]) {
-        for (let direction = 0; direction < 32; direction++) {
-            const angle = direction * Math.PI / 16;
-            candidates.push({ x: center.x + Math.sin(angle) * distance,
-                z: center.z + Math.cos(angle) * distance });
-        }
-    }
-    candidates.sort((first, second) => Math.hypot(first.x - center.x, first.z - center.z) -
-        Math.hypot(second.x - center.x, second.z - center.z));
-    for (const candidate of candidates) {
-        const result = at(candidate);
+    if (preferred && Math.hypot(preferred.x - center.x, preferred.z - center.z) > 1e-6)
+        return { available: false, reason: 'The community structure stays at the existing campfire.' };
+    for (let index = 0; index < 32; index++) {
+        const angle = preferredRotation + index * Math.PI / 16;
+        const result = inspectCommunityHearthPlacement(context, { x: center.x, z: center.z,
+            rotation: Math.atan2(Math.sin(angle), Math.cos(angle)), worldId: context.worldId });
         if (result.available) return result;
     }
     return { available: false,
-        reason: 'No legal space for both community upgrades beside this campfire. Existing homes, paths and terrain are kept.' };
+        reason: 'No legal space for both community structures around this campfire. Existing homes, paths and terrain are kept.' };
+}
+
+/** Detached trial receipts stay history; their display is resolved around the original fire. */
+export function resolveCommunityHearthPlacement(context: CommunityHearthPlacementContext,
+    receipt: CommunityHearthPlacement): CommunityHearthStatus {
+    const key = JSON.stringify([receipt, context.worldId, context.plots, context.paths]);
+    const cache = resolvedSites.get(context.world) ?? new Map<string, CommunityHearthStatus>();
+    let result = cache.get(key);
+    if (!result) {
+        result = resolvePlacement(context, receipt);
+        if (cache.size >= 32) cache.delete(cache.keys().next().value!);
+        cache.set(key, result);
+        resolvedSites.set(context.world, cache);
+    }
+    return { ...result, ...(result.placement ? { placement: { ...result.placement } } : {}) };
+}
+function resolvePlacement(context: CommunityHearthPlacementContext,
+    receipt: CommunityHearthPlacement): CommunityHearthStatus {
+    const fire = settlementCampfire(context.world).transform;
+    const distance = Math.hypot(receipt.x - fire.x, receipt.z - fire.z);
+    const legacy = distance > 1e-6;
+    if (!legacy) return { ...inspectCommunityHearthPlacement(context, receipt), legacy: false };
+    const facing = Math.atan2(fire.x - receipt.x, fire.z - receipt.z);
+    if (receipt.worldId !== context.worldId || ![receipt.x, receipt.z, receipt.rotation].every(Number.isFinite) ||
+        distance < 16 - 1e-6 || distance > 64 || Math.abs(Math.atan2(Math.sin(facing - receipt.rotation),
+            Math.cos(facing - receipt.rotation))) > 1e-6)
+        return { available: false, reason: 'Invalid historical Community Hearth placement.', legacy: true };
+    return { ...findCommunityHearthPlacement(context, undefined, receipt.rotation), legacy: true };
 }

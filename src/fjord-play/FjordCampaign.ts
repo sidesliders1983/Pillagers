@@ -1,6 +1,8 @@
 import { WeddingInvitationHistory } from './WeddingInvitationState';
-import { communityHearthBounds, communityHearthReservation, findCommunityHearthPlacement,
-    inspectCommunityHearthPlacement, type CommunityHearthPlacementResult } from './CommunityHearthPlacement';
+import { communityHearthBounds, findCommunityHearthPlacement,
+    inspectCommunityHearthPlacement, resolveCommunityHearthPlacement,
+    type CommunityHearthPlacementResult } from './CommunityHearthPlacement';
+import { communityHearthGeometry, communityHearthObstacleBounds } from './CommunityHearthGeometry';
 import type { WeddingCandidate } from '../simulation/CulturalEvents';
 import { readFirstSteps, type FirstStepsProgress } from './FirstStepsState';
 import { migrateWildlifeAttention } from '../lore/WildlifeAttention';
@@ -133,14 +135,20 @@ export class FjordCampaign {
             this.rivalLayout = rival?.layout;
             const rivalFire = rival?.campfire.transform;
             const community = state.communityHearth;
-            const communityBounds = community && community.tier > 0 && community.placement
-                ? [communityHearthBounds(communityHearthReservation(this.blueprint, community.placement))] : [];
+            const resolved = community && community.tier > 0 && community.placement
+                ? resolveCommunityHearthPlacement({ world: this.blueprint, worldId: geographyIdentity(this.blueprint),
+                    plots: Object.values(this.layout.plots), paths: [] }, community.placement) : undefined;
+            const geometry = resolved?.available && resolved.placement && community && community.tier > 0
+                ? communityHearthGeometry(this.blueprint, resolved.placement, community.tier as 1 | 2) : undefined;
+            const communityBounds = geometry?.occupancy.map(plot =>
+                communityHearthBounds(communityHearthObstacleBounds(plot))) ?? [];
+            const fireRadius = geometry ? geometry.fireObstacleRadius + .2 : 5;
             return [...Object.values(this.layout.plots), ...(campaignIslandPlan(this.blueprint)?.plots ?? []),
                 ...Object.values(this.rivalLayout?.plots ?? {})]
                 .map(plot => ({ minX: plot.x-plot.halfWidth, maxX: plot.x+plot.halfWidth,
                     minZ: plot.z-plot.halfDepth, maxZ: plot.z+plot.halfDepth }))
-                .concat(communityBounds, [{ minX: fire.transform.x-5, maxX: fire.transform.x+5,
-                    minZ: fire.transform.z-5, maxZ: fire.transform.z+5 }], rivalFire ? [{
+                .concat(communityBounds, [{ minX: fire.transform.x-fireRadius, maxX: fire.transform.x+fireRadius,
+                    minZ: fire.transform.z-fireRadius, maxZ: fire.transform.z+fireRadius }], rivalFire ? [{
                         minX: rivalFire.x-5, maxX: rivalFire.x+5, minZ: rivalFire.z-5, maxZ: rivalFire.z+5
                     }] : []);
         }, () => Object.fromEntries(Object.keys(this.session.readSnapshot().landing?.longships ?? {})
@@ -178,7 +186,7 @@ export class FjordCampaign {
         this.rivalLayout = rival?.layout;
         return { ...view, rival: inspectRivalSettlement(state, this.blueprint, rival) };
     }
-    /** One prospective Hall envelope serves both upgrades. Existing sites never choose a new spot. */
+    /** A new receipt stores the fire anchor. Detached trial receipts remain unchanged history. */
     communityHearthPlacement(preferred?: { x: number; z: number }): CommunityHearthPlacementResult {
         const view = this.readProjection();
         const stored = this.session.readSnapshot().communityHearth?.placement;
@@ -187,8 +195,11 @@ export class FjordCampaign {
             paths: view.ground.paths.filter(path => path.from !== 'community-hearth').map(path => path.points) };
         const key = JSON.stringify([context.worldId, context.plots, context.paths, stored, preferred]);
         if (this.hearthOffer?.key === key) return structuredClone(this.hearthOffer.result);
-        const result = stored ? inspectCommunityHearthPlacement(context, stored) :
-            findCommunityHearthPlacement(context, preferred);
+        const resolved = stored ? view.communityHearthStatus : undefined;
+        const result: CommunityHearthPlacementResult = stored && resolved
+            ? { available: resolved.available, reason: resolved.reason,
+                ...(resolved.available ? { placement: { ...stored } } : {}) }
+            : findCommunityHearthPlacement(context, preferred);
         this.hearthOffer = { key, result };
         return structuredClone(result);
     }
@@ -303,11 +314,13 @@ export class FjordCampaign {
         const view = projectFjordSettlement(proposal.snapshot(), blueprint, layout);
         const community = proposal.readSnapshot().communityHearth;
         if (community && community.tier > 0 && community.placement) {
-            const result = inspectCommunityHearthPlacement({ world: blueprint,
+            const result = view.communityHearthSite ? inspectCommunityHearthPlacement({ world: blueprint,
                 worldId: geographyIdentity(blueprint), plots: Object.values(view.layout.plots),
                 paths: view.ground.paths.filter(path => path.from !== 'community-hearth').map(path => path.points) },
-                community.placement);
-            if (!result.available) throw new Error('Invalid Community Hearth placement: ' + result.reason);
+                view.communityHearthSite.placement) : view.communityHearthStatus!;
+            if (!result.available && (!view.communityHearthStatus?.legacy ||
+                result.reason === 'Invalid historical Community Hearth placement.'))
+                throw new Error('Invalid Community Hearth placement: ' + result.reason);
         }
         const rivalLink = proposal.readSnapshot().world?.island;
         if (!rivalLink && saved.rivalLayout) throw new Error('Unexpected rival layout in a legacy campaign.');

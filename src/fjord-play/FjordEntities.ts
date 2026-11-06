@@ -355,7 +355,8 @@ export class FjordEntities {
             }
             entry.homeLight?.setInhabited(entity.status.inhabited === true);
             this.models.setEmbarked?.(entry.model, !!entity.status.aboardShip);
-            if (entity.kind === 'persona' && !entry.model.userData.appearance) entry.model.scale.setScalar(p.scale);
+            if (entity.kind === 'campfire' || (entity.kind === 'persona' && !entry.model.userData.appearance))
+                entry.model.scale.setScalar(p.scale);
             if (entity.kind === 'cattle' && entity.status.assignment) {
                 const home = this.entries.get('building:' + entity.status.assignment)?.model;
                 const yard = home?.getObjectByName('farmHutTerrain') ?? home?.getObjectByName('farmyardMarker');
