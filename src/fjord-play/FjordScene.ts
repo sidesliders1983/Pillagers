@@ -1,4 +1,5 @@
 import { FjordHdrLighting, loadHdrEnvironment } from './FjordHdrLighting';
+import { CommunityHearthLayer } from './CommunityHearthLayer';
 import { WetLowlandLayer } from './WetLowlandLayer';
 import { MiningModelAsset } from './MiningModelAsset';
 import { MiningLayer } from './MiningLayer';
@@ -164,8 +165,9 @@ export function createFjordScene(options: {
 
     const wetLowlandLayer = new WetLowlandLayer(decorateMaterials, import.meta.env.BASE_URL);
     const miningLayer = new MiningLayer(new MiningModelAsset(import.meta.env.BASE_URL), decorateMaterials);
+    const communityHearthLayer = new CommunityHearthLayer(import.meta.env.BASE_URL, decorateMaterials);
     const scene = new Scene(), camera = new PerspectiveCamera(45, 1, .1, 2400);
-    scene.add(miningLayer.root, wetLowlandLayer.root);
+    scene.add(miningLayer.root, wetLowlandLayer.root, communityHearthLayer.root);
     const targetGeometry = new RingGeometry(2.7, 3, 48);
     const targetMaterial = new MeshBasicMaterial({
         color: '#ffe09a', side: DoubleSide,
@@ -265,6 +267,7 @@ export function createFjordScene(options: {
         weatherTint?.applyAppearance(appearance);
         layer?.setSeasonAppearance(appearance);
         miningLayer.setSnowAmount(appearance.snowAmount);
+        communityHearthLayer.setSnowAmount(appearance.snowAmount);
         wetLowlandLayer.setSnowAmount(appearance.snowAmount);
         dressing?.setSeasonAppearance(appearance);
         rivalScene?.setSeasonAppearance(appearance);
@@ -696,12 +699,23 @@ export function createFjordScene(options: {
                         });
                     }
                     const observedEntities = [...view.entities, ...view.rival.entities];
-                    const nextStaticSignature = JSON.stringify(observedEntities
+                    const communityReservations = view.communityHearthSite ? [view.communityHearthSite.reservation] : [];
+                    // The UI rejects paid upgrades during a performance. Also retain its geometry
+                    // if an external command arrives until the real cast has released the court.
+                    if (!culture?.active) {
+                        await communityHearthLayer.sync(view.communityHearthSite, campaign.blueprint);
+                        if (!current()) return;
+                        culture?.setVenueRotation(view.communityHearthSite
+                            ? view.communityHearthSite.placement.rotation + Math.PI : undefined);
+                    }
+                    canvas.dataset.communityHearth = JSON.stringify(communityHearthLayer.inspect());
+                    const nextStaticSignature = JSON.stringify([view.communityHearthSite, observedEntities
                         .filter(entity => ['building', 'household', 'longship'].includes(entity.kind))
-                        .map(entity => [entity.selectionKey, entity.asset, entity.transform, entity.plot]));
+                        .map(entity => [entity.selectionKey, entity.asset, entity.transform, entity.plot])]);
                     if (nextStaticSignature !== staticSceneSignature) {
                         wildlifeCamera.cancel('structures-changed');
                         staticSceneSignature = nextStaticSignature;
+                        if (view.communityHearthSite) lighting!.includeWorldShadowBounds(communityHearthLayer.root);
                     }
                     const observedGround = {
                         plots: [...view.ground.plots, ...view.rival.ground.plots],
@@ -737,6 +751,13 @@ export function createFjordScene(options: {
                             world!.clearPlot({ ...plot, futureAsset: 'hut' });
                             cleared.add(id);
                         }
+                    if (view.communityHearthSite) {
+                        const key = 'community-hearth:' + JSON.stringify(view.communityHearthSite.placement);
+                        if (!cleared.has(key)) {
+                            world!.clearPlot({ ...view.communityHearthSite.reservation, futureAsset: 'hut' });
+                            cleared.add(key);
+                        }
+                    }
                     for (const entity of observedEntities)
                         if (entity.transform && !entity.status.expedition &&
                             (entity.kind === 'persona' || entity.kind === 'cattle')) {
@@ -757,11 +778,11 @@ export function createFjordScene(options: {
                         }
                     }
                     sceneEntities = view.entities;
-                    wildlife?.setObstacles(view.entities.flatMap(entity =>
-                        entity.kind === 'building' && entity.plot ? [entity.plot] : []));
+                    wildlife?.setObstacles([...communityReservations, ...view.entities.flatMap(entity =>
+                        entity.kind === 'building' && entity.plot ? [entity.plot] : [])]);
                     dressing!.sync({
                         seed: state.seed, homes: dressingHomes(state, view.entities),
-                        ground: view.ground, campfire: view.campfire
+                        ground: view.ground, campfire: view.campfire, reservations: communityReservations
                     }, knownTerrain);
                     canvas.dataset.dressing = JSON.stringify(dressing!.inspect());
                     wetLowlandLayer.sync(state,campaign.blueprint);
@@ -777,6 +798,7 @@ export function createFjordScene(options: {
                     layer!.prepareExpeditions(state, campaign.blueprint, host.tickIntervalSeconds, secondsPerTick, {
                         known: (x, z) => !knownTerrain || discoveryAt(knownTerrain, x, z) !== 'unknown',
                         plots: [
+                            ...communityReservations,
                             ...[...view.entities, ...view.rival.entities].flatMap(entity => entity.plot ? [entity.plot] : []),
                             { ...view.campfire.transform, halfWidth: view.campfire.obstacleRadius,
                                 halfDepth: view.campfire.obstacleRadius },
@@ -804,7 +826,7 @@ export function createFjordScene(options: {
                     });
                     canvas.dataset.structureSnow = JSON.stringify(layer!.inspectSeason());
                     canvas.dataset.campfireEffect = JSON.stringify(campfireEffect!.inspect());
-                    motion!.reconcile(view.entities, view.ground);
+                    motion!.reconcile(view.entities, view.ground, communityReservations);
                     const trees = host.loading
                         ? await host.loading.measure('standing-tree-targets', () => world!.standingTrees())
                         : world!.standingTrees();
@@ -1151,6 +1173,7 @@ export function createFjordScene(options: {
         controller.dispose();
         islandMap.dispose();
         miningLayer.dispose();
+        communityHearthLayer.dispose();
         wetLowlandLayer.dispose();
         targetGeometry.dispose(); targetMaterial.dispose();
         reducedMotion.removeEventListener('change', configureEffects);
@@ -1179,6 +1202,14 @@ export function createFjordScene(options: {
         if (pending.size) void Promise.allSettled([...pending]).then(releaseSources);
         else releaseSources();
     };
+    const focusCommunityHearth = () => {
+        const view = campaign.readProjection(), fire = view.campfire.transform;
+        const rotation = view.communityHearthSite?.placement.rotation ?? Math.PI;
+        const forward = { x: Math.sin(rotation), z: Math.cos(rotation) };
+        controller.setView({ position: [fire.x + forward.x * 28 + forward.z * 12,
+            fire.y + 26, fire.z + forward.z * 28 - forward.x * 12],
+            target: [fire.x - forward.x * 8, fire.y + 1, fire.z - forward.z * 8] });
+    };
     return {
         root: scene, camera, renderer, controller,
         initialize: () => inactive() ? Promise.resolve() : track(sceneWorkMeasured(initialize)),
@@ -1201,7 +1232,7 @@ export function createFjordScene(options: {
             const range = distance > wildlifeApproachMetres ? 64 : distance + 64;
             // These roots contain only the existing rendered player and sanitized observed rival models.
             wildlifeObstacles = new CameraObstacles([
-                world.root, ...(dressing ? [dressing.root] : []),
+                world.root, communityHearthLayer.root, ...(dressing ? [dressing.root] : []),
                 ...(layer ? [layer.root] : []), ...(rivalScene ? [rivalScene.root] : []),
             ], pivot.toArray(), range, []);
             const reportFocus = (reason: string) => {
@@ -1255,7 +1286,8 @@ export function createFjordScene(options: {
             const fire = campaign.readProjection().campfire.transform;
             if (focusCeremony) {
                 // Explicit ceremony confirmation brings its actual location into view.
-                controller.setView({ position: [fire.x + 14, fire.y + 17, fire.z - 18],
+                if (campaign.readProjection().communityHearthSite) focusCommunityHearth();
+                else controller.setView({ position: [fire.x + 14, fire.y + 17, fire.z - 18],
                     target: [fire.x, fire.y + 1, fire.z] });
                 camera.updateMatrixWorld();
             }
@@ -1275,6 +1307,8 @@ export function createFjordScene(options: {
                     if (primed && primed.track !== weddingTrack) primed.track.dispose();
                     weddingObstacles = sceneEntities.filter(entity => ['building', 'household'].includes(entity.kind))
                         .flatMap(entity => { const box = layer?.bounds(entity.selectionKey); return box ? [box.expandByScalar(.4)] : []; });
+                    const communityBounds = communityHearthLayer.obstacleBounds;
+                    if (communityBounds) weddingObstacles.push(communityBounds.expandByScalar(.4));
                     if (!weddingCamera.begin(frame, original)) {
                         culture.skip();
                         stopWedding();
@@ -1312,6 +1346,8 @@ export function createFjordScene(options: {
             if (seasonAppearance.finish()) applySeasonAppearance();
         },
         get hasWorld() { return !!world; },
+        get communityHearthBusy() { return culture?.active ?? false; },
+        focusCommunityHearth,
         get diagnostics() { return [...(assets?.diagnostics ?? []), ...(models?.diagnostics ?? [])]; },
         setTarget(point: { x: number; z: number } | null | undefined, valid?: boolean) {
             targetRequested = !!point;
@@ -1337,6 +1373,8 @@ export function createFjordScene(options: {
             return miningLayer.pick(camera, x, y, canvas.getBoundingClientRect(),pointerType);
         },
         pick(x: number, y: number, pointerType: 'mouse' | 'touch', targetKind?: 'longship') {
+            if (!targetKind && communityHearthLayer.pick(camera, x, y, canvas.getBoundingClientRect()))
+                return { kind: 'campfire' as const, id: 'settlement-campfire' };
             return layer!.pick(camera, x, y, canvas.getBoundingClientRect(), pointerType, targetKind);
         },
         groundPoint(x: number, y: number, fallbackToWater = false, waterOnly = false) {

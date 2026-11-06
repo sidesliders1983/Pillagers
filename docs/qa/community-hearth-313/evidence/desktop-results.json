@@ -1,0 +1,202 @@
+{
+  "status": "passed",
+  "origin": "http://127.0.0.1:5196",
+  "chrome": "156.0.8078.80",
+  "phases": [
+    {
+      "stage": "ordinary-paid-fire",
+      "campfire": {
+        "version": 1,
+        "lit": true,
+        "fuelTicks": 1000
+      },
+      "stocks": {
+        "food": 100,
+        "materials": 99
+      },
+      "position": {
+        "x": -20,
+        "y": 1.357344150543213,
+        "z": -112,
+        "rotation": 0,
+        "scale": 2
+      }
+    },
+    {
+      "stage": "paid-upgrade-1",
+      "cost": 15,
+      "stocks": {
+        "food": 100,
+        "materials": 84
+      },
+      "fire": {
+        "version": 1,
+        "lit": true,
+        "fuelTicks": 1000
+      },
+      "placement": {
+        "x": -20,
+        "z": -74,
+        "rotation": 3.141592653589793,
+        "worldId": "fjordside-island-v0.3e-r3:88:bb64c9d8"
+      },
+      "model": {
+        "state": "ready",
+        "tier": 1,
+        "bounds": {
+          "min": [
+            -22.226893663406372,
+            2.751163059473038,
+            -77.5138666510582
+          ],
+          "max": [
+            -17.773106336593628,
+            5.840558414512781,
+            -71.3861334323883
+          ]
+        }
+      }
+    },
+    {
+      "stage": "active-occasion-blocks-upgrade",
+      "reason": "Wait for the current ceremony to finish.",
+      "tier": 1,
+      "materialStock": 84
+    },
+    {
+      "stage": "actual-outdoor-occasion-shelter",
+      "eventId": "event-11",
+      "venue": {
+        "rulesVersion": "community-hearth-v1",
+        "tier": 1,
+        "multiplierBps": 12500,
+        "baseReductionBps": 2500,
+        "effectiveReductionBps": 3125
+      },
+      "phase": "gathering",
+      "participantCount": 3,
+      "structureBounds": {
+        "min": [
+          -22.226893663406372,
+          2.751163059473038,
+          -77.5138666510582
+        ],
+        "max": [
+          -17.773106336593628,
+          5.840558414512781,
+          -71.3861334323883
+        ]
+      }
+    },
+    {
+      "stage": "paid-upgrade-2",
+      "cost": 30,
+      "stocks": {
+        "food": 97,
+        "materials": 54
+      },
+      "fire": {
+        "version": 1,
+        "lit": true,
+        "fuelTicks": 906
+      },
+      "placement": {
+        "x": -20,
+        "z": -74,
+        "rotation": 3.141592653589793,
+        "worldId": "fjordside-island-v0.3e-r3:88:bb64c9d8"
+      },
+      "model": {
+        "state": "ready",
+        "tier": 2,
+        "bounds": {
+          "min": [
+            -27.095017910003662,
+            2.5547969877719883,
+            -81.25980140326803
+          ],
+          "max": [
+            -12.904982089996338,
+            6.84076381723747,
+            -67.64019870758057
+          ]
+        }
+      }
+    },
+    {
+      "stage": "actual-outdoor-occasion-hall",
+      "eventId": "event-13",
+      "venue": {
+        "rulesVersion": "community-hearth-v1",
+        "tier": 2,
+        "multiplierBps": 15000,
+        "baseReductionBps": 2500,
+        "effectiveReductionBps": 3750
+      },
+      "phase": "gathering",
+      "participantCount": 3,
+      "structureBounds": {
+        "min": [
+          -27.095017910003662,
+          2.5547969877719883,
+          -81.25980140326803
+        ],
+        "max": [
+          -12.904982089996338,
+          6.84076381723747,
+          -67.64019870758057
+        ]
+      }
+    },
+    {
+      "stage": "same-paused-campaign-after-reload",
+      "tier": 2,
+      "time": {
+        "winter": 800,
+        "tick": 605
+      },
+      "fire": {
+        "version": 1,
+        "lit": true,
+        "fuelTicks": 895
+      }
+    },
+    {
+      "stage": "older-shelter-export-imported",
+      "tier": 1,
+      "stocks": {
+        "food": 100,
+        "materials": 84
+      },
+      "fire": {
+        "version": 1,
+        "lit": true,
+        "fuelTicks": 1000
+      }
+    },
+    {
+      "stage": "truthful-blocked-placement",
+      "geography": 101,
+      "reason": "No legal space for both community upgrades beside this campfire. Existing homes, paths and terrain are kept."
+    }
+  ],
+  "models": [
+    {
+      "path": "/game-assets/community-hearth/gathering-shelter.glb",
+      "status": 200
+    },
+    {
+      "path": "/game-assets/community-hearth/clan-hall.glb",
+      "status": 200
+    },
+    {
+      "path": "/game-assets/community-hearth/clan-hall.glb",
+      "status": 200
+    },
+    {
+      "path": "/game-assets/community-hearth/gathering-shelter.glb",
+      "status": 200
+    }
+  ],
+  "errors": []
+}

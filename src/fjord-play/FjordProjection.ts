@@ -1,4 +1,6 @@
 import { miningWorkerPosition } from '../simulation/Mining';
+import { communityHearthAccess, communityHearthReservation, communityHearthSupport,
+    overlapsCommunityHearth } from './CommunityHearthPlacement';
 import type { HumanProfile } from '../characters/UniversalHumanProfile';
 import { parseFacialShape, type FacialShapeV1 } from '../characters/FacialIdentity';
 import { projectResidentAppearance } from '../characters/ResidentAppearance';
@@ -190,6 +192,12 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
     const entities: FjordEntity[] = [];
     const diagnostics: string[] = [];
     const campfire = settlementCampfire(world, site ? { id: site.id + ':campfire', center: site.center } : undefined);
+    const hearth = !site ? state.communityHearth : undefined;
+    const communityHearthSite = hearth && hearth.tier > 0 && hearth.placement ? {
+        tier: hearth.tier as 1 | 2, placement: hearth.placement,
+        reservation: communityHearthReservation(world, hearth.placement),
+        support: communityHearthSupport(world, hearth.placement),
+    } : undefined;
     const center = campfire.transform;
     let candidates = site?.candidates ?? plotCandidates.get(world);
     if (!candidates) {
@@ -213,7 +221,8 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
             return stored;
         delete layout.plots[key];
         const halfWidth = halfSize, halfDepth = halfSize;
-        const found = candidates.find(p => Math.hypot(
+        const found = candidates.find(p => (!communityHearthSite || !overlapsCommunityHearth(
+            { ...p, halfWidth, halfDepth }, communityHearthSite.reservation, 1)) && Math.hypot(
             Math.max(0, Math.abs(p.x - center.x) - halfWidth),
             Math.max(0, Math.abs(p.z - center.z) - halfDepth)) >= campfire.clearingRadius &&
             Object.values(layout.plots).every(q => Math.abs(p.x - q.x) > halfWidth + q.halfWidth + 1 ||
@@ -240,7 +249,9 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
     }, yard?: FjordPlot, obstacle = { halfWidth: 3.5, halfDepth: 4 },
         permitted: (p: { x: number; z: number }) => boolean = () => true) => {
         usedPoints.add(key);
-        if (layout.points[key] && permitted(layout.points[key]) &&
+        const outsideCommunitySite = (point: { x: number; z: number }) => !communityHearthSite ||
+            !overlapsCommunityHearth({ ...point, halfWidth: .8, halfDepth: .8 }, communityHearthSite.reservation);
+        if (layout.points[key] && outsideCommunitySite(layout.points[key]) && permitted(layout.points[key]) &&
             Math.hypot(layout.points[key].x - center.x, layout.points[key].z - center.z) > campfire.obstacleRadius + 1)
             return layout.points[key];
         delete layout.points[key];
@@ -258,7 +269,7 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
         const bounds = site?.bounds ?? world.settlement.bounds;
         const point = options.find(p => (!(site || campaignIslandPlan(world)) ||
             p.x >= bounds.minX + 1 && p.x <= bounds.maxX - 1 &&
-            p.z >= bounds.minZ + 1 && p.z <= bounds.maxZ - 1) && permitted(p) &&
+            p.z >= bounds.minZ + 1 && p.z <= bounds.maxZ - 1) && outsideCommunitySite(p) && permitted(p) &&
             Math.hypot(p.x - center.x, p.z - center.z) > campfire.obstacleRadius + 1 &&
             surface.surfaceHeightAt(p.x, p.z) > world.waterLevel + .25 &&
             surface.slopeAt(p.x, p.z) <= suitability.walkingSlope &&
@@ -400,7 +411,13 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
             shipExpedition: mission?.id, transportGroup: ship.transport?.groupId ?? undefined });
     }
     for (const key of Object.keys(layout.points)) if (!usedPoints.has(key)) delete layout.points[key];
-    const ground = projectFjordGround(world, entities, campfire);
+    const ground = projectFjordGround(world, entities, campfire,
+        communityHearthSite ? [communityHearthSite.reservation] : []);
+    if (communityHearthSite) {
+        const points = communityHearthAccess({ world, worldId: geographyIdentity(world),
+            plots: Object.values(layout.plots), paths: ground.paths.map(path => path.points) }, communityHearthSite.placement);
+        if (points.length) ground.paths.push({ from: 'community-hearth', to: campfire.id, points });
+    }
     if (ground.plots.length > 0 && ground.paths.length < ground.plots.length)
         diagnostics.push('Some permanent homes have no safe connecting path; no route across water or steep terrain is drawn.');
     const calendar = projectFjordCalendar(state.time, state.ticksPerWinter);
@@ -410,7 +427,8 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
         rain: from.name === 'Autumn' ? 1 - mix : to.name === 'Autumn' ? mix : 0
     };
     return { calendar, precipitation,
-        campfire, entities, livestockDeaths, layout, diagnostics, ground, time: { ...state.time }, stocks: { ...state.stocks },
+        campfire, communityHearthSite, entities, livestockDeaths, layout, diagnostics, ground,
+        time: { ...state.time }, stocks: { ...state.stocks },
         weather: inspectWeather(state),
         weatherVisual: projectFjordWeather(inspectWeather(state).enabled ? inspectWeather(state).class : null) };
 }

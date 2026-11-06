@@ -34,7 +34,8 @@ export class SettlementPanel {
             const fire = inspectCampfire(state);
             const label = fire.lit ? 'Extinguish campfire' : fire.fuelTicks > 0
                 ? 'Relight campfire' : 'Light campfire (1 Material)';
-            return '<h2>Settlement campfire</h2><p>' + (fire.lit ? 'Burning' : 'Unlit') + '</p>' +
+            const heading = state.communityHearth ? '<h3>Fire and fuel</h3>' : '<h2>Settlement campfire</h2>';
+            return heading + '<p>' + (fire.lit ? 'Burning' : 'Unlit') + '</p>' +
                 '<p>Fuel remaining: ' + Math.round(fire.fuelTicks / state.ticksPerWinter * 100) + '% of a year.</p>' +
                 this.button(state, { type: 'SetCampfire', lit: !fire.lit }, label) +
                 '<p class="muted">1 Material per burning year. Unused fuel is kept when extinguished. ' +

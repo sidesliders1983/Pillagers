@@ -1,4 +1,6 @@
 import { WeddingInvitationHistory } from './WeddingInvitationState';
+import { communityHearthBounds, communityHearthReservation, findCommunityHearthPlacement,
+    inspectCommunityHearthPlacement, type CommunityHearthPlacementResult } from './CommunityHearthPlacement';
 import type { WeddingCandidate } from '../simulation/CulturalEvents';
 import { readFirstSteps, type FirstStepsProgress } from './FirstStepsState';
 import { migrateWildlifeAttention } from '../lore/WildlifeAttention';
@@ -106,6 +108,7 @@ export class FjordCampaign {
     private readRevision = -1;
     private readBlueprint?: WorldBlueprint;
     private readLayout = '';
+    private hearthOffer?: { key: string; result: CommunityHearthPlacementResult };
     blueprint!: WorldBlueprint;
     layout!: FjordLayout;
     selection: {
@@ -129,11 +132,14 @@ export class FjordCampaign {
             const rival = link ? projectRivalSettlement(state.world!.targetClans[link.clanId], this.blueprint, this.rivalLayout) : undefined;
             this.rivalLayout = rival?.layout;
             const rivalFire = rival?.campfire.transform;
+            const community = state.communityHearth;
+            const communityBounds = community && community.tier > 0 && community.placement
+                ? [communityHearthBounds(communityHearthReservation(this.blueprint, community.placement))] : [];
             return [...Object.values(this.layout.plots), ...(campaignIslandPlan(this.blueprint)?.plots ?? []),
                 ...Object.values(this.rivalLayout?.plots ?? {})]
                 .map(plot => ({ minX: plot.x-plot.halfWidth, maxX: plot.x+plot.halfWidth,
                     minZ: plot.z-plot.halfDepth, maxZ: plot.z+plot.halfDepth }))
-                .concat([{ minX: fire.transform.x-5, maxX: fire.transform.x+5,
+                .concat(communityBounds, [{ minX: fire.transform.x-5, maxX: fire.transform.x+5,
                     minZ: fire.transform.z-5, maxZ: fire.transform.z+5 }], rivalFire ? [{
                         minX: rivalFire.x-5, maxX: rivalFire.x+5, minZ: rivalFire.z-5, maxZ: rivalFire.z+5
                     }] : []);
@@ -171,6 +177,20 @@ export class FjordCampaign {
         const rival = link ? projectRivalSettlement(state.world!.targetClans[link.clanId], this.blueprint, this.rivalLayout) : undefined;
         this.rivalLayout = rival?.layout;
         return { ...view, rival: inspectRivalSettlement(state, this.blueprint, rival) };
+    }
+    /** One prospective Hall envelope serves both upgrades. Existing sites never choose a new spot. */
+    communityHearthPlacement(preferred?: { x: number; z: number }): CommunityHearthPlacementResult {
+        const view = this.readProjection();
+        const stored = this.session.readSnapshot().communityHearth?.placement;
+        const context = { world: this.blueprint, worldId: geographyIdentity(this.blueprint),
+            plots: Object.values(view.layout.plots),
+            paths: view.ground.paths.filter(path => path.from !== 'community-hearth').map(path => path.points) };
+        const key = JSON.stringify([context.worldId, context.plots, context.paths, stored, preferred]);
+        if (this.hearthOffer?.key === key) return structuredClone(this.hearthOffer.result);
+        const result = stored ? inspectCommunityHearthPlacement(context, stored) :
+            findCommunityHearthPlacement(context, preferred);
+        this.hearthOffer = { key, result };
+        return structuredClone(result);
     }
     /** Cached immutable presentation read; the public project() remains an owned mutable result. */
     readProjection() {
@@ -281,6 +301,14 @@ export class FjordCampaign {
         if (discovery) assertDiscoveryWorld(discovery, blueprint, geographyIdentity(blueprint));
         proposal.bindPhysicalWorld(blueprint, geographyIdentity(blueprint));
         const view = projectFjordSettlement(proposal.snapshot(), blueprint, layout);
+        const community = proposal.readSnapshot().communityHearth;
+        if (community && community.tier > 0 && community.placement) {
+            const result = inspectCommunityHearthPlacement({ world: blueprint,
+                worldId: geographyIdentity(blueprint), plots: Object.values(view.layout.plots),
+                paths: view.ground.paths.filter(path => path.from !== 'community-hearth').map(path => path.points) },
+                community.placement);
+            if (!result.available) throw new Error('Invalid Community Hearth placement: ' + result.reason);
+        }
         const rivalLink = proposal.readSnapshot().world?.island;
         if (!rivalLink && saved.rivalLayout) throw new Error('Unexpected rival layout in a legacy campaign.');
         const rival = rivalLink ? projectRivalSettlement(proposal.readSnapshot().world!.targetClans[rivalLink.clanId],

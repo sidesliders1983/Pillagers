@@ -29,6 +29,7 @@ export interface DressingInput {
     homes: DressingHome[];
     ground: FjordGround;
     campfire: SettlementCampfire;
+    reservations?: readonly FjordPlot[];
 }
 export interface DressingPlacement extends FjordTransform {
     id: string;
@@ -118,6 +119,7 @@ export function planSettlementDressing(world: WorldBlueprint, input: DressingInp
         if (!source) return;
         const transform = { ...point, y: 0, rotation, scale };
         const bounds = transformedBounds(source, transform);
+        if (input.reservations?.some(plot => overlaps(bounds, parcelBounds(plot), .3))) return;
         const radius = Math.hypot(bounds.maxX - bounds.minX, bounds.maxZ - bounds.minZ) / 2;
         const samples = [point, ...[bounds.minX, bounds.maxX].flatMap(x =>
             [bounds.minZ, bounds.maxZ].map(z => ({ x, z })))];

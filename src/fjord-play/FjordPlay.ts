@@ -14,7 +14,10 @@ import { IslandMissionPanel } from './IslandMissionPanel';
 import { IslandMissionMarkers } from './IslandMissionMarkers';
 import { LifecycleTrace } from './LifecycleTrace';
 import type { CampaignStartAttempt } from './FjordEntry';
-import { newFjordScenario, useSeasonalFjordProduction, useFjordCulturalOccasions } from './FjordScenario';
+import { newFjordScenario, useSeasonalFjordProduction, useFjordCulturalOccasions,
+    useFjordCommunityHearth } from './FjordScenario';
+import { inspectCommunityHearth } from '../simulation/CommunityHearth';
+import type { HearthUpgradeOffer } from './CommunityHearthView';
 import { fjordLivestockRules } from '../config/FjordLivestock';
 import { resumeCheckpointKey } from '../play/SettlementRecovery';
 import { birthdayCalendarMode } from '../simulation/BirthdayCalendar';
@@ -95,6 +98,7 @@ export class FjordPlay {
         await yieldForInput();
         this.loading.check();
         const query = new URLSearchParams(location.search);
+        const hearthPreview = query.get('communityHearth') === '1';
         let tracedBook: GameplaySession['book'] | undefined, tracedBookId: string | undefined;
         const trace = this.trace = new LifecycleTrace(query.has('debugLifecycle'), () => {
             if (!this.session) return {};
@@ -172,6 +176,7 @@ export class FjordPlay {
         if (!entry.diagnosticRun) {
             useSeasonalFjordProduction(this.session);
             useFjordCulturalOccasions(this.session);
+            useFjordCommunityHearth(this.session, hearthPreview);
         }
         document.title = 'FjordSide';
         const readingPosition = this.foundingBook?.scrollTop ?? 0;
@@ -360,9 +365,10 @@ export class FjordPlay {
             document.querySelector<SVGSVGElement>('#fjord-selection-leaders')!);
         const production = new FjordProduction(this.session.readSnapshot().events);
         const productionLabels = new ProductionLabels(document.querySelector<HTMLElement>('#fjord-production-labels')!);
-        const resetProduction = () => {
+        const resetProduction = (adoptHearth = true) => {
             useSeasonalFjordProduction(this.session);
             useFjordCulturalOccasions(this.session);
+            useFjordCommunityHearth(this.session, adoptHearth && hearthPreview);
             production.reset(this.session.readSnapshot().events);
             productionLabels.reset();
         };
@@ -535,7 +541,7 @@ export class FjordPlay {
                 if (this.campaign.exportJSON() !== backup) {
                     this.shared.importJSON(backup);
                     firstSteps?.restore();
-                    resetProduction();
+                    resetProduction(false);
                     campaignFields();
                     await presentation!.replace();
                     await presentation!.sync();
@@ -687,7 +693,7 @@ export class FjordPlay {
                     this.shared.importJSON(backup);
                     firstSteps?.restore();
                     campaignFields();
-                    resetProduction();
+                    resetProduction(false);
                     // Restoration itself is not part of the cancelled operation.
                     this.loading = undefined;
                     if (committed && !this.stopped) await presentation!.replace();
@@ -726,6 +732,21 @@ export class FjordPlay {
             document.querySelector('#fjord-selected')!.textContent = entity ? entity.label + ' · ' + kind : 'Entity is no longer active.';
             refresh();
         };
+        const hearthUpgrade = (): HearthUpgradeOffer => {
+            const state = this.session.readSnapshot();
+            const hearth = inspectCommunityHearth(state);
+            if (!hearth.enabled || hearth.tier === 2 || hearth.upgradeMaterials === null) return {};
+            if (!presentation?.hasWorld || this.loading) return { reason: 'Preparing the settlement.' };
+            if (presentation.communityHearthBusy)
+                return { reason: 'Wait for the current ceremony to finish.' };
+            if (state.stocks.materials < hearth.upgradeMaterials)
+                return { reason: 'Not enough Materials for this upgrade.' };
+            const site = this.campaign.communityHearthPlacement();
+            if (!site.available || !site.placement)
+                return { reason: site.reason ?? 'No clear site is available by the campfire.' };
+            return { command: { type: 'UpgradeCommunityHearth', expectedTier: hearth.tier,
+                quotedMaterials: hearth.upgradeMaterials, placement: site.placement } };
+        };
         const commitManagement = (commands: SimulationCommand[] | (() => SimulationCommand[]),
             done: () => void, rejected?: (error: unknown) => void) => action(async () => {
                 let focusCeremony = false;
@@ -733,6 +754,13 @@ export class FjordPlay {
                 try {
                     core(() => {
                         const planned = typeof commands === 'function' ? commands() : commands;
+                        const upgrade = planned.find(command => command.type === 'UpgradeCommunityHearth');
+                        if (upgrade) {
+                            const offer = hearthUpgrade();
+                            if (!offer.command) throw new Error(offer.reason ?? 'This upgrade is unavailable.');
+                            if (planned.length !== 1 || JSON.stringify(upgrade) !== JSON.stringify(offer.command))
+                                throw new Error('The upgrade quote has changed. Review it again.');
+                        }
                         const sequence = this.session.inspectCulture().nextSequence;
                         this.session.commandBatch(planned);
                         if (!planned.some(command => command.type === 'AssignMiner')) {
@@ -781,6 +809,8 @@ export class FjordPlay {
                 journeyNavigated('home', 'focus');
             },
             trade: () => { desktopUI?.close(false); merchantPanel?.open(); },
+            hearthUpgrade,
+            focusHearth: () => presentation?.focusCommunityHearth(),
             report: id => {
                 if (!this.campaign.attentionSource(id)) return;
                 desktopUI!.open('attention', true);
@@ -1187,6 +1217,7 @@ export class FjordPlay {
             expeditions.previewTarget(point ? { x: point.x, z: point.z } : undefined);
         };
         resetFrameTime = () => { previous = performance.now(); presentation!.resetFrameTime(); };
+        let hearthBusy = false;
         // Public camera diagnostics let visual QA locate objects before exercising real pointer picking.
         renderer.setAnimationLoop((timestamp: number) => {
             diagnostics?.setMode(contextLost ? 'Recovering' : this.loading ? 'Loading' :
@@ -1194,6 +1225,12 @@ export class FjordPlay {
             if (!drawingReady || pageSuspended || contextLost || document.hidden) return;
             const started = diagnostics?.enabled ? performance.now() : 0;
             presentation!.frame(calendar, this.session.running && canAdvance());
+            const busy = presentation!.communityHearthBusy;
+            if (busy !== hearthBusy) {
+                hearthBusy = busy;
+                if (!this.loading && this.shared.selection?.kind === 'campfire' &&
+                    this.session.readSnapshot().communityHearth) refresh();
+            }
             previewDestination();
             if (diagnostics?.enabled) diagnostics.frame(timestamp, performance.now() - started);
         });
