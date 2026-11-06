@@ -1,4 +1,6 @@
-import { weddingCast, weddingSlots, type WeddingRole } from './WeddingCast';
+import { weddingArch, weddingCast, weddingSlots, type WeddingRole } from './WeddingCast';
+import { pathTouchesCommunityHearth } from './CommunityHearthPlacement';
+import type { FjordPlot } from './FjordProjection';
 import { availableCulturalParticipants, type CulturalOccasion, type SimulationState } from '../simulation/SimulationCore';
 import type { LivingWorldController } from './LivingWorldController';
 
@@ -13,7 +15,7 @@ export interface CulturalPresentationFrame {
     stagedParticipants: number;
     participantKeys: string[];
     visible: boolean;
-    wedding?: { duration: number; elapsed: number; rotation: number; roles: WeddingRole[] };
+    wedding?: { duration: number; elapsed: number; rotation: number; roles: WeddingRole[]; outdoorArch?: boolean };
 }
 
 /** Transient staging of an accepted fact. Loading history never starts another performance. */
@@ -23,6 +25,7 @@ export class CulturalPresentation {
     private requiredKeys: string[] = [];
     private disposed = false;
     private venueRotation?: number;
+    private venueFootprint?: FjordPlot;
 
     constructor(state: Readonly<SimulationState>, private readonly motion: LivingWorldController,
         private readonly position: { x: number; y: number; z: number }) {
@@ -30,8 +33,18 @@ export class CulturalPresentation {
     }
 
     /** The venue-facing layout is considered first; every alternate stays in the same outdoor court. */
-    setVenueRotation(rotation: number | undefined) {
+    setVenueRotation(rotation: number | undefined, footprint?: FjordPlot) {
         this.venueRotation = rotation !== undefined && Number.isFinite(rotation) ? rotation : undefined;
+        this.venueFootprint = footprint;
+    }
+
+    private clearsVenueArch(rotation: number, footprint: FjordPlot) {
+        const sine = Math.sin(rotation), cosine = Math.cos(rotation);
+        const span = [-weddingArch.halfSpan, weddingArch.halfSpan].map(x => ({
+            x: this.position.x + x * cosine + weddingArch.outdoorDepth * sine,
+            z: this.position.z - x * sine + weddingArch.outdoorDepth * cosine,
+        }));
+        return !pathTouchesCommunityHearth(span, [footprint], weddingArch.clearance);
     }
 
     accept(state: Readonly<SimulationState>, limit: 6 | 8, visible: boolean,
@@ -59,11 +72,15 @@ export class CulturalPresentation {
         const requiredKeys = required.map(id => 'persona:' + id);
         const rotations = Array.from({ length: 8 }, (_, index) =>
             (this.venueRotation ?? 0) + index * Math.PI / 4);
-        const layouts = cinematic ? rotations.map(rotation =>
+        const footprint = this.venueFootprint;
+        const outdoorRotations = cinematic && footprint
+            ? rotations.filter(rotation => this.clearsVenueArch(rotation, footprint)) : [];
+        const availableRotations = outdoorRotations.length ? outdoorRotations : rotations;
+        const layouts = cinematic ? availableRotations.map(rotation =>
             weddingSlots(cast.slice(0, limit), this.position, rotation)) : [];
         const layout = cinematic ? this.motion.chooseGatheringLayout(layouts) : 0;
         const outdoorRotation = this.venueRotation === undefined ? undefined :
-            cinematic ? rotations[layout] : this.venueRotation;
+            cinematic ? availableRotations[layout] : this.venueRotation;
         const keys = this.motion.beginGathering(event.id, ids.map(id => 'persona:' + id), limit,
             layouts[layout], outdoorRotation);
         if (keys.length < 3 || requiredKeys.some(key => !keys.includes(key))) {
@@ -75,8 +92,9 @@ export class CulturalPresentation {
             occasion: event.details.occasion as CulturalOccasion, spouseIds: [...required], phase: 'approach',
             phaseElapsedSeconds: 0, position: { ...this.position }, stagedParticipants: keys.length,
             participantKeys: keys, visible: true,
-            ...(cinematic ? { wedding: { duration: options!.weddingSeconds, elapsed: 0, rotation: rotations[layout],
-                roles: weddingCast(state, event, keys.map(key => key.slice(8))) } } : {}) };
+            ...(cinematic ? { wedding: { duration: options!.weddingSeconds, elapsed: 0,
+                rotation: availableRotations[layout], roles: weddingCast(state, event, keys.map(key => key.slice(8))),
+                ...(outdoorRotations.length ? { outdoorArch: true } : {}) } } : {}) };
         return true;
     }
 

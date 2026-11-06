@@ -707,8 +707,8 @@ export function createFjordScene(options: {
                     if (!culture?.active) {
                         await communityHearthLayer.sync(view.communityHearthSite, campaign.blueprint);
                         if (!current()) return;
-                        culture?.setVenueRotation(view.communityHearthSite
-                            ? view.communityHearthSite.placement.rotation + Math.PI : undefined);
+                        const venue = view.communityHearthSite;
+                        culture?.setVenueRotation(venue ? venue.placement.rotation + Math.PI : undefined, venue?.footprint);
                     }
                     canvas.dataset.communityHearth = JSON.stringify(communityHearthLayer.inspect());
                     const nextStaticSignature = JSON.stringify([view.communityHearthSite, observedEntities
