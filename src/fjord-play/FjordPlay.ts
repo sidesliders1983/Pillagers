@@ -329,6 +329,14 @@ export class FjordPlay {
         let sceneLoads = 1; // Initial assets and models must finish before active time can advance.
         const ownsClock = () => !document.hidden && !this.stopped && !this.shared.transferring && !pageSuspended && !contextLost;
         const canAdvance = () => !entry.diagnosticRun && ownsClock() && sceneLoads === 0 && !this.loading && !firstSteps?.blocksClock;
+        // A valid selection starts ordinary scene synchronization before its UI callback.
+        // That pending visual work fences the clock, not accepted actions in this ready world.
+        const canObserveJourney = () => !entry.diagnosticRun && ownsClock() &&
+            !this.loading && this.persistenceReady && canvas.dataset.ready === 'true';
+        const journeyNavigated = (kind: Parameters<FirstStepsGuide['navigated']>[0], id?: string,
+            entityKind?: Parameters<FirstStepsGuide['navigated']>[2]) => {
+            if (canObserveJourney()) firstSteps?.navigated(kind, id, entityKind);
+        };
         const playback = new CampaignPlayback(running => this.session.setRunning(running), canAdvance);
         const initialHandoff = playback.pendingHandoff(this.opened.autoStart);
         const setPlayback = (running: boolean) => {
@@ -416,7 +424,7 @@ export class FjordPlay {
                 !document.querySelector<HTMLElement>('#fjord-management')!.hidden ||
                 !document.querySelector<HTMLElement>('#clan-book-reader')!.hidden ||
                 document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open ||
-                Boolean(firstSteps && !firstSteps.root.hidden) || Boolean(this.foundingBook?.root.isConnected) ||
+                Boolean(firstSteps?.isPresenting) || Boolean(this.foundingBook?.root.isConnected) ||
                 Boolean(document.querySelector('dialog[open], #fjord-context-recovery')));
             if (!workspace.hidden && workspace.dataset.surface === 'attention') {
                 attentionView.render();
@@ -456,7 +464,7 @@ export class FjordPlay {
             updateManagementAvailability(panel, this.shared);
             merchantPanel?.refresh();
             miningPanel?.refresh();
-            firstSteps?.update(Boolean(this.loading) || !document.querySelector<HTMLElement>('#clan-book-reader')!.hidden);
+            firstSteps?.update(Boolean(this.loading));
             highlight();
             const selected = this.campaign.selection;
             document.querySelector('#fjord-selected')!.textContent = selected ?
@@ -478,6 +486,8 @@ export class FjordPlay {
             // Record intent immediately, even while a queued command is awaiting scene assets.
             if (!playback.canToggle(this.session.running)) return;
             setPlayback(!this.session.running);
+            firstSteps?.inspected('time');
+            journeyNavigated('time');
             action(() => {});
         });
         document.querySelector('#fjord-next')!.addEventListener('click', () => action(() => {
@@ -763,8 +773,13 @@ export class FjordPlay {
             }, () => this.session.personalHistoryEpoch));
         desktopUI = new FjordInterface(this.shared, { select, refresh, notify: say,
             inspected: (kind, id) => firstSteps?.inspected(kind, id),
+            navigated: (kind, id, entityKind) => journeyNavigated(kind, id, entityKind),
             renderPortrait: input => presentation?.portrait(input) ?? Promise.resolve(undefined),
-            home: () => controller.home(),
+            home: () => {
+                controller.home();
+                firstSteps?.inspected('home');
+                journeyNavigated('home', 'focus');
+            },
             trade: () => { desktopUI?.close(false); merchantPanel?.open(); },
             report: id => {
                 if (!this.campaign.attentionSource(id)) return;
@@ -775,14 +790,33 @@ export class FjordPlay {
         this.startupCleanup.push(() => desktopUI?.dispose());
         weddingInvitation = this.ownStartup(new WeddingInvitation(document.querySelector<HTMLElement>('#fjord-play')!,
             this.shared, { commit: commitManagement, changed: () => { persist(); refresh(); } }));
+        const openJourneyBook = () => {
+            bookReader.open();
+            if (document.querySelector<HTMLElement>('#clan-book-reader')?.hidden === false) {
+                firstSteps?.inspected('interface');
+                journeyNavigated('interface-open', 'book');
+            }
+        };
+        const orientationMenu = document.querySelector<HTMLDetailsElement>('#fjord-menu')!;
         firstSteps = this.ownStartup(new FirstStepsGuide(this.shared, {
-            persist, pause: () => setPlayback(false), play: () => setPlayback(true),
+            persist, pause: () => setPlayback(false),
             reveal: () => desktopUI!.closeForHelp(), clockChanged: syncGuideClock,
             resident: id => desktopUI!.showResident(id),
             household: id => desktopUI!.showEntity('household', id),
             stocks: resource => desktopUI!.open(resource, true),
             work: draft => desktopUI!.showWork(draft),
             expeditions: () => desktopUI!.open('expeditions', true),
+            home: () => {
+                desktopUI!.closeForHelp();
+                controller.home();
+                firstSteps?.inspected('home');
+            },
+            settlement: () => desktopUI!.open('settlement', true),
+            clock: () => document.querySelector<HTMLButtonElement>('#fjord-run')!.focus({ preventScroll: true }),
+            menu: () => {
+                orientationMenu.open = true;
+                orientationMenu.querySelector<HTMLElement>(':scope > summary')!.focus({ preventScroll: true });
+            },
             livestock: id => desktopUI!.showEntity('cattle', id),
             ship: id => desktopUI!.showEntity('longship', id),
             improvements: id => desktopUI!.showHome(id, 'improvements'),
@@ -799,7 +833,28 @@ export class FjordPlay {
                 return true;
             },
         }));
-        document.querySelector('#fjord-book')!.addEventListener('click', () => bookReader.open());
+        document.querySelector('#fjord-book')!.addEventListener('click', openJourneyBook);
+        orientationMenu.addEventListener('toggle', () => {
+            if (orientationMenu.open) firstSteps?.inspected('interface');
+        }, { signal: lifecycleEvents.signal });
+        // Native map/menu owners apply their view before the queued observation.
+        // New history and loading fences prevent an old UI action earning credit.
+        document.querySelector('#fjord-play')!.addEventListener('click', event => {
+            const button = (event.target as Element).closest<HTMLButtonElement>('#fjord-view-home, #fjord-map-toggle');
+            if (!button || button.disabled) return;
+            const epoch = this.session.personalHistoryEpoch;
+            const world = this.campaign.blueprint;
+            queueMicrotask(() => {
+                if (!canObserveJourney() || epoch !== this.session.personalHistoryEpoch ||
+                    world !== this.campaign.blueprint || !button.isConnected) return;
+                const mapOpen = button.id === 'fjord-map-toggle' && button.getAttribute('aria-expanded') === 'true' &&
+                    document.querySelector<HTMLDialogElement>('#fjord-island-map')?.open;
+                if (button.id === 'fjord-view-home' || mapOpen) {
+                    firstSteps?.inspected('home');
+                    journeyNavigated('home', mapOpen ? 'map' : 'focus');
+                }
+            });
+        }, { signal: lifecycleEvents.signal });
         document.querySelector('[data-menu-guide]')!.addEventListener('click', () => {
             document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open = false;
             document.querySelector<HTMLButtonElement>('#fjord-first-steps')!.click();
@@ -880,6 +935,10 @@ export class FjordPlay {
             } });
         this.startupCleanup.push(() => presentation?.dispose());
         const { camera, renderer, controller } = presentation;
+        const releaseJourneyCamera = controller.onNavigationIntent(intent => {
+            if (['drag', 'wheel', 'touch', 'keyboard'].includes(intent)) journeyNavigated('camera');
+        });
+        this.startupCleanup.push(releaseJourneyCamera);
         syncScene = () => presentation!.sync();
         presentation.root.add(islandMarkers.root);
         expeditions = new ExpeditionPanel(document.querySelector<HTMLElement>('#expedition-panel')!,
@@ -933,6 +992,7 @@ export class FjordPlay {
             this.loading?.cancel();
             this.loading?.finish();
             this.stopped = true;
+            releaseJourneyCamera();
             desktopUI?.dispose();
             firstSteps?.dispose();
             expeditions?.dispose();
@@ -1085,7 +1145,15 @@ export class FjordPlay {
                 // Preserve the existing touch tap-on-empty-ground navigation.
                 return pointerType === 'mouse';
             }
+            const epoch = this.session.personalHistoryEpoch;
+            const world = this.campaign.blueprint;
             select(selected.kind, selected.id);
+            const actual = this.shared.selection;
+            const state = this.session.readSnapshot();
+            if (selected.kind === 'persona' && actual?.kind === 'persona' && actual.id === selected.id &&
+                epoch === this.session.personalHistoryEpoch && world === this.campaign.blueprint &&
+                state.personas[selected.id]?.deathWinter === null && !personaAway(state, selected.id))
+                journeyNavigated('resident', selected.id);
             return true;
         });
         let destinationPointer: { x: number; y: number } | undefined;

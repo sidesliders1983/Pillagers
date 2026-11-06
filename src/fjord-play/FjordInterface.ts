@@ -31,12 +31,16 @@ const button = (action: string, label: string, glyph: FjordIcon, attrs = '') =>
 const meter = (label: string, value: number) => `<div class="fjord-meter"><div><span>${esc(label)}</span>
     <strong>${Math.round(value * 100)}%</strong></div><meter min="0" max="1" value="${value}">${Math.round(value * 100)}%</meter></div>`;
 
+export type FjordNavigationKind = 'resident' | 'connection' | 'closed';
+
 interface InterfaceHooks {
     renderPortrait?: (input: PortraitRequest) => Promise<string | undefined>;
     home?: () => void;
     trade?: () => void;
     report?: (sourceEventId: string) => void;
     inspected?: (kind: FirstStepsInspection, id?: string) => void;
+    /** Accepted actions on rendered local cards; programmatic navigation stays silent. */
+    navigated?: (kind: FjordNavigationKind, id?: string, entityKind?: NonNullable<SettlementSelection>['kind']) => void;
     select: (kind: string, id: string) => void;
     refresh: () => void;
     commit: (commands: SimulationCommand[] | (() => SimulationCommand[]), done: () => void,
@@ -63,6 +67,8 @@ export class FjordInterface {
     private expanded = false;
     private abort = new AbortController();
     private lastFocus?: HTMLElement;
+    private selectionOpener?: HTMLElement;
+    private residentCardId?: string;
     private panelHTML?: string;
     private panelEpoch = -1;
     private panelWorld?: SharedSettlement['fjord']['blueprint'];
@@ -112,7 +118,7 @@ export class FjordInterface {
             if (this.surface) this.close();
             else if (this.task === 'culture') this.cancelGatheringReview();
             else if (this.task) { this.task = null; this.hooks.refresh(); }
-            else if (this.owner.selection) this.hooks.select('', '');
+            else if (this.owner.selection) this.closeSelection();
         }, { signal: this.abort.signal });
     }
     dispose() {
@@ -208,6 +214,8 @@ export class FjordInterface {
     refresh(state: SimulationState, selection: SettlementSelection, history: string, legacy: () => string) {
         const key = selection ? selection.kind + ':' + selection.id : '';
         if (key !== this.selectionKey) {
+            if (selection && document.activeElement instanceof HTMLElement)
+                this.selectionOpener = document.activeElement;
             this.selectionKey = key;
             this.task = null;
             this.gatheringDraft = undefined;
@@ -282,6 +290,8 @@ export class FjordInterface {
         const count = this.attentionCount(state);
         document.querySelector('#fjord-attention-count')!.textContent = count > 99 ? '99+' : String(count);
         document.querySelector('#fjord-attention')!.setAttribute('aria-label', `Attention: ${count} unread events and current conditions`);
+        this.residentCardId = selection?.kind === 'persona' && state.personas[selection.id] &&
+            !this.surface && !this.task && (!isMobileLayout() || this.expanded) ? selection.id : undefined;
         if (selection && !this.surface) {
             if (selection.kind === 'persona' && state.personas[selection.id] && (!isMobileLayout() || this.expanded))
                 this.hooks.inspected?.('resident', selection.id);
@@ -423,27 +433,54 @@ export class FjordInterface {
         if (!action) return false;
         const state = this.state;
         const home = this.household();
+        const selected = this.owner.selection;
+        const selectedKey = selected ? selected.kind + ':' + selected.id : '';
+        const actionEpoch = this.owner.session.personalHistoryEpoch;
+        const actionWorld = this.owner.fjord.blueprint;
+        const currentAction = () => !this.owner.transferring &&
+            actionEpoch === this.owner.session.personalHistoryEpoch && actionWorld === this.owner.fjord.blueprint;
+        const inPanel = this.panel.contains(button) && !this.management.hidden && this.selectionKey === selectedKey;
+        const inWorkspace = this.workspace.contains(button) && !this.workspace.hidden;
+        const activeControl = button.isConnected && !button.disabled && !button.closest('[hidden]') &&
+            this.panelEpoch === actionEpoch && this.panelWorld === actionWorld &&
+            (inPanel || inWorkspace);
         switch (action) {
             case 'merchant': this.hooks.trade?.(); return true;
             case 'camera-home': this.close(false); this.hooks.home?.(); return true;
             case 'expand-card': this.expanded = true; break;
             case 'collapse-card': this.expanded = false; break;
             case 'inspect': {
-                if (button.dataset.kind === 'persona') {
-                    if (home && home.memberIds.includes(button.dataset.id!) &&
-                        ['household', 'building'].includes(this.owner.selection?.kind ?? ''))
-                        this.hooks.inspected?.('home-resident', button.dataset.id);
+                const kind = button.dataset.kind!;
+                const id = button.dataset.id!;
+                if (kind === 'persona') {
+                    const homeResident = home && home.memberIds.includes(id) &&
+                        ['household', 'building'].includes(this.owner.selection?.kind ?? '');
+                    if (homeResident)
+                        this.hooks.inspected?.('home-resident', id);
                     this.close(false);
-                    this.showResident(button.dataset.id!);
+                    this.showResident(id);
+                    if (activeControl && currentAction() && this.isCurrentResident(id)) {
+                        this.hooks.navigated?.('resident', id);
+                        if (homeResident && currentAction() && this.isCurrentResident(id) &&
+                            this.state.households[home.id]?.memberIds.includes(id))
+                            this.hooks.navigated?.('connection', id);
+                    }
                 } else {
                     this.close(false);
-                    this.hooks.select(button.dataset.kind!, button.dataset.id!);
+                    this.hooks.select(kind, id);
+                    if (activeControl && currentAction() && this.isCurrentConnection(kind, id)) {
+                        this.focusHeading();
+                        if (currentAction() && this.isCurrentConnection(kind, id))
+                            this.hooks.navigated?.('connection', id);
+                    }
                 }
                 return true;
             }
             case 'close-workspace': this.close(); return true;
             case 'directory': this.directory = button.dataset.kind!; this.search = ''; this.renderSurface(); return true;
-            case 'close-card': this.hooks.select('', ''); return true;
+            case 'close-card':
+                if (button.isConnected && this.panel.contains(button)) this.closeSelection();
+                return true;
             case 'campaign-settings': {
                 this.close(false);
                 document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open = true;
@@ -577,6 +614,9 @@ export class FjordInterface {
             heading?.focus({ preventScroll: true });
             this.management.scrollTop = 0;
         }
+        if (action === 'expand-card' && activeControl && currentAction() && selected?.kind === 'persona' &&
+            this.isCurrentResident(selected.id))
+            this.hooks.navigated?.('resident', selected.id);
         return true;
     }
     private cancelGatheringReview() {
@@ -681,6 +721,55 @@ export class FjordInterface {
     private attentionCount(_state: SimulationState) {
         return this.owner.fjord.attentionView().unreadCount;
     }
+    private isCurrentResident(id: string) {
+        const selection = this.owner.selection;
+        const state = this.state;
+        return selection?.kind === 'persona' && selection.id === id && this.residentCardId === id &&
+            this.panelEpoch === this.owner.session.personalHistoryEpoch && this.panelWorld === this.owner.fjord.blueprint &&
+            !this.management.hidden && !this.surface && !this.task && (!isMobileLayout() || this.expanded) &&
+            state.personas[id]?.deathWinter === null && !personaAway(state, id);
+    }
+    private isCurrentConnection(kind: string, id: string) {
+        const selection = this.owner.selection;
+        if (selection?.kind !== kind || selection.id !== id || this.selectionKey !== kind + ':' + id ||
+            this.panelEpoch !== this.owner.session.personalHistoryEpoch || this.panelWorld !== this.owner.fjord.blueprint ||
+            this.management.hidden || this.surface || this.task) return false;
+        const state = this.state;
+        if (kind === 'household') return !!state.households[id]?.memberIds.some(memberId =>
+            state.personas[memberId]?.deathWinter === null && !personaAway(state, memberId));
+        if (kind === 'building') return !!state.buildings[id];
+        if (kind === 'cattle') return state.landing?.cattle[id]?.deathWinter === null;
+        return false;
+    }
+    private closeSelection() {
+        const selection = this.owner.selection;
+        const closedKind = selection?.kind;
+        const epoch = this.owner.session.personalHistoryEpoch;
+        const world = this.owner.fjord.blueprint;
+        const closedId = selection && (selection.kind === 'persona' ? this.isCurrentResident(selection.id) :
+            this.isCurrentConnection(selection.kind, selection.id)) ? selection.id : undefined;
+        const residentId = selection?.kind === 'persona' && this.residentCardId === selection.id &&
+            this.panelEpoch === this.owner.session.personalHistoryEpoch && this.panelWorld === this.owner.fjord.blueprint &&
+            !this.management.hidden && !this.surface && !this.task && (!isMobileLayout() || this.expanded) &&
+            this.state.personas[selection.id] ? selection.id : undefined;
+        this.hooks.select('', '');
+        if (this.owner.selection) return;
+        if (residentId) this.hooks.inspected?.('resident-closed', residentId);
+        if (closedId && !this.owner.selection && !this.owner.transferring &&
+            epoch === this.owner.session.personalHistoryEpoch && world === this.owner.fjord.blueprint)
+            this.hooks.navigated?.('closed', closedId, closedKind);
+        if (this.owner.selection || this.owner.transferring || epoch !== this.owner.session.personalHistoryEpoch ||
+            world !== this.owner.fjord.blueprint) return;
+        const competingPanel = document.querySelector('dialog[open], [aria-modal="true"]:not([hidden]), ' +
+            '#clan-book-reader:not([hidden]), #fjord-menu[open]');
+        if (!this.workspace.hidden || competingPanel) return;
+        const candidates = [this.selectionOpener,
+            document.querySelector<HTMLElement>('#fjord-first-steps-card button'),
+            document.querySelector<HTMLElement>(isMobileLayout() ? '#fjord-mobile-menu' : '#fjord-first-steps'),
+            document.querySelector<HTMLElement>('#fjord-run')];
+        candidates.find(target => target?.isConnected && !target.closest('[hidden]') &&
+            !target.matches(':disabled') && target.getClientRects().length)?.focus({ preventScroll: true });
+    }
     closeForHelp() {
         this.close(false);
         this.hooks.select('', '');
@@ -722,6 +811,7 @@ export class FjordInterface {
         this.management.hidden = true;
         this.renderSurface();
         if (surface === 'food' || surface === 'materials') this.hooks.inspected?.('resources');
+        if (surface === 'settlement' || surface === 'attention') this.hooks.inspected?.('interface');
         this.workspace.focus();
         this.hooks.refresh();
     }

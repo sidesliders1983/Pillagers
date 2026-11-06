@@ -10,7 +10,14 @@
 #island-loading [hidden] { display:none; }
 #island-loading.island-loading-arrival { background:transparent; }
 .island-loading-arrival > canvas { opacity:0; }
-.island-loading-arrival:not(.island-has-book) .island-loading-eyebrow, .island-loading-arrival:not(.island-has-book) .island-loading-help { display:none; }
+/* Keep the reveal clear; only the optional arrival skip remains available. */
+#island-loading.island-loading-arrival .island-loading-copy {
+    position:absolute; inset:auto 0 0; background:transparent;
+    padding:12px max(16px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));
+}
+#island-loading.island-loading-arrival .island-loading-copy > :not(.island-loading-actions),
+#island-loading.island-loading-arrival #island-loading-cancel,
+#island-loading.island-loading-arrival #island-loading-retry { display:none; }
 @media (prefers-reduced-motion:reduce) { #island-loading > canvas { transition:none; } }
 body.island-preparing #fjord-play { grid-template-rows:minmax(0,1fr); padding:0; gap:0; }
 body.island-preparing #fjord-header, body.island-preparing #fjord-play footer,

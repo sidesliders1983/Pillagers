@@ -34,14 +34,14 @@ function project(state, progress = active(), index = new FoundingJourneyIndex(),
 }
 const goal = (view, id) => view.goals.find(goal => goal.id === id);
 
-test('20 real founding seeds share three freely available chapters and truthful costs without changing Core', () => {
+test('20 real founding seeds share orientation and three freely available campaign chapters with truthful costs without changing Core', () => {
     const species = new Set();
     for (let seed = 0; seed < 20; seed++) {
         const session = newFjordScenario(seed), state = session.readSnapshot();
         const canonical = session.saveJSON(), view = project(state);
         species.add(view.livestock.species);
-        assert.deepEqual([...new Set(view.goals.map(goal => goal.chapter))], ['home', 'discovery', 'conflict']);
-        assert.equal(view.goals.length, 14);
+        assert.deepEqual([...new Set(view.goals.map(goal => goal.chapter))], ['orientation', 'home', 'discovery', 'conflict']);
+        assert.equal(view.goals.length, 20);
         assert.equal(goal(view, 'permanent-home').status, 'blocked');
         assert.match(goal(view, 'permanent-home').detail, /5 more Materials/);
         assert.match(goal(view, 'longship-choice').detail, /20 Materials/);

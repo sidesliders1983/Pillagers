@@ -99,7 +99,7 @@ export function fjordHeaderHTML(feedbackURL?: string): string {
                                     <small>Scenario options apply only to the new campaign. Original-founding replay retains its saved founding rules.</small>
                                     <button id="fjord-new" type="button">Start from this seed</button>
                                 </details>
-                                <p>New campaigns offer the optional Founding Journey. Explore on my own starts time; Guide me stays paused. Loading a save pauses the clock.</p>
+                                <p>New campaigns offer the optional Founding Journey. Guide me and Explore on my own keep the clock paused until you press Play. Loading a save also pauses the clock.</p>
                                 <button type="button" data-menu-back>Back</button>
                             </div>
                         </details>

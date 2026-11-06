@@ -2,7 +2,7 @@ import { inspectBuilding, inspectWork, personaAway } from '../simulation/Simulat
 import type { SimulationCommand, SimulationState } from '../simulation/SimulationCore';
 import { commandAvailability } from '../play/SharedSettlement';
 import { previewWork, proposeWork, workCandidates } from './WorkPlan';
-import { newJourney, readJourney, type JourneyProgress } from './JourneyProgress';
+import { newJourney, readJourney, orientationObjectives, type JourneyProgress, type OrientationObjective } from './JourneyProgress';
 
 export interface FirstStepsProgress {
     version: 1;
@@ -17,7 +17,8 @@ export interface FirstStepsProgress {
     evidenceId: string | null;
 }
 
-export type FirstStepsInspection = 'resident' | 'household' | 'resources' | 'work' | 'home-resident' | 'livestock' | 'improvements' | 'smithery';
+export type FirstStepsInspection = 'resident' | 'resident-closed' | 'household' | 'resources' | 'work' |
+    'home-resident' | 'livestock' | 'improvements' | 'smithery' | 'home' | 'time' | 'interface';
 
 /** Per-history presentation data. No seed, RNG draw, Core command or event is added. */
 export function newFirstSteps(): FirstStepsProgress {
@@ -58,6 +59,30 @@ export function firstStepsStep(progress: FirstStepsProgress): number {
     if (!progress.resourcesSeen || !progress.workerId) return 1;
     if (!progress.watch) return 2;
     return 3;
+}
+
+function recordOrientation(progress: FirstStepsProgress, objective: OrientationObjective): FirstStepsProgress {
+    const journey = progress.journey ?? newJourney();
+    if (journey.orientation?.includes(objective)) return progress;
+    return { ...progress, journey: { ...journey, orientation: [...(journey.orientation ?? []), objective] } };
+}
+
+/** Only explanations with no reliable inspection signal accept an explicit acknowledgment. */
+export function acknowledgeOrientation(progress: FirstStepsProgress, objective: OrientationObjective): FirstStepsProgress {
+    const acknowledgments: readonly OrientationObjective[] = ['ui-camera', 'ui-time', 'ui-navigation'];
+    if (progress.status !== 'active' || !acknowledgments.includes(objective)) return progress;
+    return recordOrientation(progress, objective);
+}
+
+/** Replay only Basics; later chapter observations and historical evidence remain earned. */
+export function replayOrientation(progress: FirstStepsProgress): FirstStepsProgress {
+    const journey = progress.journey ?? newJourney();
+    const basics = new Set<string>(orientationObjectives);
+    return { ...progress, status: 'active', collapsed: true, journey: { ...journey,
+        chapter: 'orientation', selected: null, orientation: [],
+        skipped: journey.skipped.filter(id => !basics.has(id)),
+        later: journey.later.filter(id => !basics.has(id)),
+        tour: { step: 'ui-camera', dismissed: false } } };
 }
 
 function available(state: SimulationState, id: string) {
@@ -105,10 +130,21 @@ export function inspectFirstSteps(progress: FirstStepsProgress, state: Simulatio
     if (progress.status !== 'active') return progress;
     const next = structuredClone(progress);
     const journey = next.journey ??= newJourney();
+    let orientation: OrientationObjective | undefined;
+    if (kind === 'resident-closed' && id === next.residentId && id && state.personas[id])
+        orientation = 'ui-resident';
     if (kind === 'home-resident' && id && journey.householdId &&
-        state.households[journey.householdId]?.memberIds.includes(id)) journey.homeResidentId = id;
+        state.households[journey.householdId]?.memberIds.includes(id)) {
+        journey.homeResidentId = id;
+        if (state.personas[id]) orientation = 'ui-connections';
+    }
     if (kind === 'livestock' && id &&
         (state.landing?.cattle[id] || state.landing?.cattleArchive?.[id])) journey.livestockId = id;
+    if (kind === 'livestock' && id && state.landing?.cattle[id]?.deathWinter === null)
+        orientation = 'ui-connections';
+    if (kind === 'home') orientation = 'ui-home';
+    if (kind === 'time') orientation = 'ui-time';
+    if (kind === 'interface') orientation = 'ui-navigation';
     if (kind === 'improvements' && id && state.buildings[id]) journey.improvementsSeen = true;
     if (kind === 'smithery') journey.smitherySeen = true;
     if (kind === 'resources') next.resourcesSeen = true;
@@ -120,12 +156,14 @@ export function inspectFirstSteps(progress: FirstStepsProgress, state: Simulatio
     if (kind === 'household' && id && state.households[id]) {
         next.householdId = id;
         journey.householdId = id;
+        if (next.residentId && state.personas[next.residentId] &&
+            state.households[id].memberIds.includes(next.residentId)) orientation = 'ui-connections';
         const residence = state.households[id].residenceId;
         const buildingId = residence ? state.residences[residence]?.buildingId : null;
         if (buildingId && !next.watch)
             next.watch = { kind: 'home', id: buildingId, afterEvent: state.events.length };
     }
-    return next;
+    return orientation ? recordOrientation(next, orientation) : next;
 }
 
 /** Only newly appended facts are visited, once per canonical revision, never once per frame. */
