@@ -1,0 +1,78 @@
+{
+  "finalSource": "e78658217023a048c06449f2e35310c140229fbb",
+  "allFinalExecutedScriptsUnchangedSincePackaging": true,
+  "files": [
+    {
+      "file": "generate-populations.mjs",
+      "sameAsPackagedOriginal": true,
+      "sha256": "94086d75ec1d6f44cb9f43dba9afdcdaac2140263fe4c84ef6b2d753ecef2ec7"
+    },
+    {
+      "file": "generate-default-care.mjs",
+      "sameAsPackagedOriginal": true,
+      "sha256": "27e3b839f8d3fb78c2c1dde3a333c0418c188c8b891b135331822bde0019c48f"
+    },
+    {
+      "file": "fixture-tools.mjs",
+      "sameAsPackagedOriginal": true,
+      "sha256": "1ad879dc722265eda59a7405b1513427c9ede2f6dd87282e4ddc480c662f4bbf"
+    },
+    {
+      "file": "prepare-scenarios.mjs",
+      "sameAsPackagedOriginal": true,
+      "sha256": "745407221dc7fe68c9a877924e2e114cf6fbfc020b7f62bc896ca98805a37fe2"
+    },
+    {
+      "file": "measure-core-child.mjs",
+      "sameAsPackagedOriginal": true,
+      "sha256": "1664a14f6429862febd7ff0df0cd7af178abdb33fcf8a3306d91ecce678dbf2e"
+    },
+    {
+      "file": "run-measurements.mjs",
+      "sameAsPackagedOriginal": true,
+      "sha256": "5939e5b0d3cb7f5fa33beaae00a19c88f06892565255bc3fad827c3ff93612bc"
+    },
+    {
+      "file": "profile-core.mjs",
+      "sameAsPackagedOriginal": true,
+      "sha256": "4a6368b047549ed91574d2eab6487a5957ec8c865200f52a9bdb15282741e97e"
+    },
+    {
+      "file": "make-parity-trace.mjs",
+      "sameAsPackagedOriginal": true,
+      "sha256": "c5496976451fca56ed421eec1e5dda3ee81936396ccaf7fc672e8dcef49a1979"
+    },
+    {
+      "file": "replay-fixture.mjs",
+      "sameAsPackagedOriginal": true,
+      "sha256": "47263c4d250fcd251554be57c6a0936e9b5b85fa044f04a659af53546add378a"
+    },
+    {
+      "file": "summarize-route-profile.mjs",
+      "sameAsPackagedOriginal": true,
+      "sha256": "99a94adcd88b38d0e2a9e1e568160d26da1d504cb39f59a358d5782506fb0c71"
+    },
+    {
+      "file": "repair-presence-metadata.mjs",
+      "sameAsPackagedOriginal": true,
+      "sha256": "422358bb097b411dfe73d5e9ce6475197816b436764e5b1bd6ad8d9886f3ffc2"
+    },
+    {
+      "file": "inspect-context-difference.mjs",
+      "sameAsPackagedOriginal": true,
+      "sha256": "d92ef7def9d3f424985e881566addf4076267b0ae6050026e2d174113c5fc62c"
+    },
+    {
+      "file": "inspect-route-failure.mjs",
+      "sameAsPackagedOriginal": true,
+      "sha256": "094c269a0d57311f527e1ea1f40c1ef7e7ca6288da4d7593e59323556715a046"
+    },
+    {
+      "file": "write-protocol.mjs",
+      "sameAsPackagedOriginal": true,
+      "sha256": "4be346a3abf2b621ffd4a362ce080537d02ffa7dffaa69cfc25bab374d7e5aaf"
+    }
+  ],
+  "portableManifest": "reproduce-portable/manifest.json",
+  "historicalNote": "Early unoptimized50 raw reports used a prior untimed presence-count definition; the sidecar correction preserves raw timings. Current original hashes describe the scripts packaged here; final optimized timing will use these originals."
+}

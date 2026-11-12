@@ -228,3 +228,8 @@ slots or protective statistics.
 The [pinned validation record](../qa/territory-306/README.md) contains the 97-test
 focused run, all ten current island adoption checks, native Chrome desktop/touch
 journeys, captures and explicit physical-device and terrain limits.
+
+The [review follow-up record](../qa/territory-306-review/README.md) documents the
+observed multi-member and placement failures, final 110-test/browser checks,
+source-pinned large-population CPU/memory/save measurements and their remaining
+performance and physical-device limits.

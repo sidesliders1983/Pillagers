@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "source": "e78658217023a048c06449f2e35310c140229fbb",
+  "byteExactArchives": [
+    {
+      "file": "default-care-25.shared.json.gz",
+      "uncompressedBytes": 1173103,
+      "uncompressedSHA256": "3637e8804b682fb2ed90dae116cd378648ed9369c7129df710a79c3ca83bef3b",
+      "compressedSHA256": "c745f88e3f413a4cad4eef27bad1959a947cb4caacb069c2eb4ceeadbf8da320"
+    },
+    {
+      "file": "population-50.shared.json.gz",
+      "uncompressedBytes": 900536,
+      "uncompressedSHA256": "1d7e6fc79989c5cb9604129ddabe5626f0da4496b387dc179b63f6e4a389f930",
+      "compressedSHA256": "78b4e5d5d22322a4115467f347b889991dfbb8c5fe84e005fc197f9a4b799edd"
+    },
+    {
+      "file": "performance-raw.json.gz",
+      "uncompressedBytes": 1041917,
+      "uncompressedSHA256": "1bc1cb03c63f6c90befc1bd63bae60c06ed1d449aa20471ad376849bfbe94855",
+      "compressedSHA256": "e342d11c2951e3af591d79ed90cf9af2d6127a947466baf039cdaa79c8110d46"
+    },
+    {
+      "file": "historical-routing.cpuprofile.gz",
+      "uncompressedBytes": 204388,
+      "uncompressedSHA256": "c6f41c1cb87f4cecba6c2a74e13125029454d0efcc516ab07182ad3dd426e230",
+      "compressedSHA256": "46e6f64c68256b7491d3a22bcf3f1aa96164927f4fadb63843252262bf7ab456"
+    },
+    {
+      "file": "population-100.shared.json.gz",
+      "uncompressedBytes": 1764626,
+      "uncompressedSHA256": "4b9bb77c77d6f8878731a548befc8ee5337feceaa50902e1aaf285a18d566570",
+      "compressedSHA256": "ef6f0f2de560a08c8fe5ad7260bdde87388693b7845d1f5f6381ff80ea11f240"
+    }
+  ]
+}

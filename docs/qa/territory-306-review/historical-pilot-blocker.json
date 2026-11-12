@@ -1,0 +1,23 @@
+{
+  "status": "blocked",
+  "source": "7cdc0227d828ae06cc17aa3a9563fb850b16ebbe",
+  "scope": "Pre-fix preliminary pilot only; no enabled comparison completed",
+  "disabledOnly": {
+    "p50Milliseconds": 30.980400000000373,
+    "p95Milliseconds": 43.48019999999997,
+    "file": "pilot-7cdc-population-50-groups-1-disabled-measure.json"
+  },
+  "blocker": {
+    "error": "Saved resident route crosses blocked island terrain",
+    "detail": "pilot-route-failure-detail.json",
+    "reproducedThrough": "Public GameplaySession.command AdvanceTicks1",
+    "completedTicks": 77,
+    "timeBeforeFailure": {
+      "winter": 816,
+      "tick": 577
+    },
+    "checkpoint": "pilot-7cdc-50-g1-before-failure.shared.json"
+  },
+  "comparisonClaim": false,
+  "finalMeasurements": "Held until review fixes are frozen"
+}

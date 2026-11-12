@@ -1,0 +1,70 @@
+{
+  "meaning": "Logical end-state comparison for these no-mining benchmark fixtures; not proof that timing changes are causal or insignificant.",
+  "allEightEndStatesIdentical": true,
+  "states": [
+    {
+      "threshold": 50,
+      "groups": 1,
+      "variant": "disabled",
+      "ce43SHA256": "6eeb8aef4d004387418549eda942006df116473159a4d1800dbb0a931253d97a",
+      "e786SHA256": "6eeb8aef4d004387418549eda942006df116473159a4d1800dbb0a931253d97a",
+      "identical": true
+    },
+    {
+      "threshold": 50,
+      "groups": 1,
+      "variant": "enabled",
+      "ce43SHA256": "bfd5c1c2f6e6497df6af5237a11042d627d5fa25a4e96009c32ce2ef33c41cc7",
+      "e786SHA256": "bfd5c1c2f6e6497df6af5237a11042d627d5fa25a4e96009c32ce2ef33c41cc7",
+      "identical": true
+    },
+    {
+      "threshold": 50,
+      "groups": 2,
+      "variant": "disabled",
+      "ce43SHA256": "ea848fe21c8454abb43e722e229aee898d131b0e32a261be195fd06d6b5427a4",
+      "e786SHA256": "ea848fe21c8454abb43e722e229aee898d131b0e32a261be195fd06d6b5427a4",
+      "identical": true
+    },
+    {
+      "threshold": 50,
+      "groups": 2,
+      "variant": "enabled",
+      "ce43SHA256": "90bc1c57abed758d733142e0ed4f4b42b16cfb499f120bbfba48f2a7da2f478f",
+      "e786SHA256": "90bc1c57abed758d733142e0ed4f4b42b16cfb499f120bbfba48f2a7da2f478f",
+      "identical": true
+    },
+    {
+      "threshold": 100,
+      "groups": 1,
+      "variant": "disabled",
+      "ce43SHA256": "b74bf4eb2d76d03541aa2d67f2fb128fe8be2b05aa9cc9b072c1f1457ecf4fe7",
+      "e786SHA256": "b74bf4eb2d76d03541aa2d67f2fb128fe8be2b05aa9cc9b072c1f1457ecf4fe7",
+      "identical": true
+    },
+    {
+      "threshold": 100,
+      "groups": 1,
+      "variant": "enabled",
+      "ce43SHA256": "f09313d3f9748be4351464a3495099707a65ad3154c82edce50d8edeab0bdbca",
+      "e786SHA256": "f09313d3f9748be4351464a3495099707a65ad3154c82edce50d8edeab0bdbca",
+      "identical": true
+    },
+    {
+      "threshold": 100,
+      "groups": 2,
+      "variant": "disabled",
+      "ce43SHA256": "6cf571bf11a4af8d771d4eed3c8ef526df7a0d780d50f8f7f3efbe3148ca8bf8",
+      "e786SHA256": "6cf571bf11a4af8d771d4eed3c8ef526df7a0d780d50f8f7f3efbe3148ca8bf8",
+      "identical": true
+    },
+    {
+      "threshold": 100,
+      "groups": 2,
+      "variant": "enabled",
+      "ce43SHA256": "4680dc333d3ee9226541fa4360987c5ae0c06dca2ded4e14eec3a07408afa6b4",
+      "e786SHA256": "4680dc333d3ee9226541fa4360987c5ae0c06dca2ded4e14eec3a07408afa6b4",
+      "identical": true
+    }
+  ]
+}

@@ -1,0 +1,568 @@
+{
+  "status": "passed",
+  "label": "final-e7865821",
+  "pin": {
+    "head": "e78658217023a048c06449f2e35310c140229fbb",
+    "sourceHashes": {
+      "src/simulation/TerritorialAwareness.ts": "39c7bbb07ebbded0bc22fa274746b7171371fcad32cecffe4dec10a376a829be",
+      "src/simulation/ResidentPresence.ts": "d842ec193d84b152a3e739735f85448975afd8d194ea464dd4f69ea60be1c7a4",
+      "src/simulation/SimulationCore.ts": "0def97b1e66d11949eb79fe112d2d2aa73c3b67068ab98d2075bf2f410bfdea1",
+      "src/fjord-play/FjordCampaign.ts": "0ad15961e27d3e15b4c55d0d439c2df1302fc7a3cee3f03dbc5c30e31cf54ebc",
+      "src/world-generation/LandRoutes.ts": "1a2dc21920bc51908947de1c9149b686f7153fbbf9566205eeb9ba6e580cbebe"
+    },
+    "dirtyTracked": null,
+    "bakedSHA256": "b8a1f5444187113b825fe1ead69ec5da49b65451bae5d7a6e43d300fd7b67c39",
+    "bakedCanonicalSHA256": "c9bf0343274e49065387cf18effdda291764bf727a6cae1dab10db78eeea39a8"
+  },
+  "scenarios": [
+    {
+      "threshold": 50,
+      "groups": 1,
+      "files": {
+        "disabled": {
+          "file": "final-e7865821-population-50-groups-1-disabled.shared.json",
+          "sha256": "917af48a82e944a16f2e078cdf5c1b37093a6d634f02acfb5b7d087b5d5e65e5",
+          "sharedBytes": 912694,
+          "coreBytes": 705867
+        },
+        "enabled": {
+          "file": "final-e7865821-population-50-groups-1-enabled.shared.json",
+          "sha256": "5f6aa6674b71b4fb1c8d0020799e685db6cf989c49547f3b32738817cdf20323",
+          "sharedBytes": 939761,
+          "coreBytes": 743235
+        }
+      },
+      "time": {
+        "winter": 816,
+        "tick": 500
+      },
+      "population": [
+        {
+          "id": "founding-clan",
+          "living": 72,
+          "indoorUnder5": 18,
+          "outdoorAge5plus": 54,
+          "workAge": 10,
+          "adultAge": 10,
+          "providingCare": 0,
+          "pendingBirths": 0,
+          "births": 62,
+          "secondGeneration": 0,
+          "households": 5,
+          "events": 1084
+        },
+        {
+          "id": "island-rival",
+          "living": 51,
+          "indoorUnder5": 5,
+          "outdoorAge5plus": 46,
+          "workAge": 10,
+          "adultAge": 10,
+          "providingCare": 0,
+          "pendingBirths": 0,
+          "births": 41,
+          "secondGeneration": 0,
+          "households": 6,
+          "events": 917
+        }
+      ],
+      "groupMembers": [
+        {
+          "id": "founder-1",
+          "name": "Bireha"
+        },
+        {
+          "id": "founder-2",
+          "name": "Mieppi"
+        }
+      ],
+      "origins": {
+        "founder-1": {
+          "x": 155,
+          "z": -120
+        },
+        "founder-2": {
+          "x": 157,
+          "z": -120
+        }
+      },
+      "offers": [
+        {
+          "enabled": false,
+          "groupId": "group-1",
+          "offer": {
+            "target": {
+              "x": 26,
+              "z": -64
+            },
+            "adjusted": false,
+            "foodCost": 0,
+            "members": 2,
+            "estimate": "Using carried supplies; the group returns safely before they run out."
+          }
+        },
+        {
+          "enabled": true,
+          "groupId": "group-1",
+          "offer": {
+            "target": {
+              "x": 26,
+              "z": -64
+            },
+            "adjusted": false,
+            "foodCost": 0,
+            "members": 2,
+            "estimate": "Using carried supplies; the group returns safely before they run out."
+          }
+        }
+      ],
+      "roundTrips": {
+        "disabled": {
+          "canonicalEqual": true,
+          "sharedByteEqual": true,
+          "changedPaths": []
+        },
+        "enabled": {
+          "canonicalEqual": true,
+          "sharedByteEqual": true,
+          "changedPaths": []
+        }
+      },
+      "physicalContextFile": "final-e7865821-population-50-groups-1-physical-context.json"
+    },
+    {
+      "threshold": 50,
+      "groups": 2,
+      "files": {
+        "disabled": {
+          "file": "final-e7865821-population-50-groups-2-disabled.shared.json",
+          "sha256": "490136d6d02792370d04030d45005b0698eb2137e049e5aa7036726f5f31335d",
+          "sharedBytes": 924582,
+          "coreBytes": 717944
+        },
+        "enabled": {
+          "file": "final-e7865821-population-50-groups-2-enabled.shared.json",
+          "sha256": "3728757b5df87d09d34ab6351779f8166334e03ea2f1694b5b89ef722fc76779",
+          "sharedBytes": 951859,
+          "coreBytes": 755333
+        }
+      },
+      "time": {
+        "winter": 816,
+        "tick": 500
+      },
+      "population": [
+        {
+          "id": "founding-clan",
+          "living": 72,
+          "indoorUnder5": 18,
+          "outdoorAge5plus": 54,
+          "workAge": 10,
+          "adultAge": 10,
+          "providingCare": 0,
+          "pendingBirths": 0,
+          "births": 62,
+          "secondGeneration": 0,
+          "households": 5,
+          "events": 1087
+        },
+        {
+          "id": "island-rival",
+          "living": 51,
+          "indoorUnder5": 5,
+          "outdoorAge5plus": 46,
+          "workAge": 10,
+          "adultAge": 10,
+          "providingCare": 0,
+          "pendingBirths": 0,
+          "births": 41,
+          "secondGeneration": 0,
+          "households": 6,
+          "events": 917
+        }
+      ],
+      "groupMembers": [
+        {
+          "id": "founder-1",
+          "name": "Bireha"
+        },
+        {
+          "id": "founder-2",
+          "name": "Mieppi"
+        },
+        {
+          "id": "founder-3",
+          "name": "Ragnfrid Hakonardóttir"
+        },
+        {
+          "id": "founder-4",
+          "name": "MaelSechnaill"
+        }
+      ],
+      "origins": {
+        "founder-1": {
+          "x": 155,
+          "z": -120
+        },
+        "founder-2": {
+          "x": 157,
+          "z": -120
+        },
+        "founder-3": {
+          "x": 163,
+          "z": -98
+        },
+        "founder-4": {
+          "x": 165,
+          "z": -98
+        }
+      },
+      "offers": [
+        {
+          "enabled": false,
+          "groupId": "group-1",
+          "offer": {
+            "target": {
+              "x": 26,
+              "z": -64
+            },
+            "adjusted": false,
+            "foodCost": 0,
+            "members": 2,
+            "estimate": "Using carried supplies; the group returns safely before they run out."
+          }
+        },
+        {
+          "enabled": true,
+          "groupId": "group-1",
+          "offer": {
+            "target": {
+              "x": 26,
+              "z": -64
+            },
+            "adjusted": false,
+            "foodCost": 0,
+            "members": 2,
+            "estimate": "Using carried supplies; the group returns safely before they run out."
+          }
+        },
+        {
+          "enabled": false,
+          "groupId": "group-2",
+          "offer": {
+            "target": {
+              "x": 20,
+              "z": -72
+            },
+            "adjusted": false,
+            "foodCost": 0,
+            "members": 2,
+            "estimate": "Using carried supplies; the group returns safely before they run out."
+          }
+        },
+        {
+          "enabled": true,
+          "groupId": "group-2",
+          "offer": {
+            "target": {
+              "x": 20,
+              "z": -72
+            },
+            "adjusted": false,
+            "foodCost": 0,
+            "members": 2,
+            "estimate": "Using carried supplies; the group returns safely before they run out."
+          }
+        }
+      ],
+      "roundTrips": {
+        "disabled": {
+          "canonicalEqual": true,
+          "sharedByteEqual": true,
+          "changedPaths": []
+        },
+        "enabled": {
+          "canonicalEqual": true,
+          "sharedByteEqual": true,
+          "changedPaths": []
+        }
+      },
+      "physicalContextFile": "final-e7865821-population-50-groups-2-physical-context.json"
+    },
+    {
+      "threshold": 100,
+      "groups": 1,
+      "files": {
+        "disabled": {
+          "file": "final-e7865821-population-100-groups-1-disabled.shared.json",
+          "sha256": "d8289a7b51ace51aac35d04e98d03c2eae8ed35570b6aed01ebdbe313829293b",
+          "sharedBytes": 1776785,
+          "coreBytes": 1389854
+        },
+        "enabled": {
+          "file": "final-e7865821-population-100-groups-1-enabled.shared.json",
+          "sha256": "92f0640c16783bad4987c473fa7ee9a2238a1298a3e6668ef312e49e723a6dc6",
+          "sharedBytes": 1832978,
+          "coreBytes": 1457993
+        }
+      },
+      "time": {
+        "winter": 826,
+        "tick": 500
+      },
+      "population": [
+        {
+          "id": "founding-clan",
+          "living": 126,
+          "indoorUnder5": 43,
+          "outdoorAge5plus": 83,
+          "workAge": 49,
+          "adultAge": 41,
+          "providingCare": 0,
+          "pendingBirths": 4,
+          "births": 116,
+          "secondGeneration": 46,
+          "households": 16,
+          "events": 1993
+        },
+        {
+          "id": "island-rival",
+          "living": 102,
+          "indoorUnder5": 45,
+          "outdoorAge5plus": 57,
+          "workAge": 40,
+          "adultAge": 35,
+          "providingCare": 0,
+          "pendingBirths": 5,
+          "births": 92,
+          "secondGeneration": 51,
+          "households": 17,
+          "events": 1756
+        }
+      ],
+      "groupMembers": [
+        {
+          "id": "founder-1",
+          "name": "Bireha"
+        },
+        {
+          "id": "founder-2",
+          "name": "Mieppi"
+        }
+      ],
+      "origins": {
+        "founder-1": {
+          "x": 155,
+          "z": -120
+        },
+        "founder-2": {
+          "x": 157,
+          "z": -120
+        }
+      },
+      "offers": [
+        {
+          "enabled": false,
+          "groupId": "group-1",
+          "offer": {
+            "target": {
+              "x": 26,
+              "z": -64
+            },
+            "adjusted": false,
+            "foodCost": 0,
+            "members": 2,
+            "estimate": "Using carried supplies; the group returns safely before they run out."
+          }
+        },
+        {
+          "enabled": true,
+          "groupId": "group-1",
+          "offer": {
+            "target": {
+              "x": 26,
+              "z": -64
+            },
+            "adjusted": false,
+            "foodCost": 0,
+            "members": 2,
+            "estimate": "Using carried supplies; the group returns safely before they run out."
+          }
+        }
+      ],
+      "roundTrips": {
+        "disabled": {
+          "canonicalEqual": true,
+          "sharedByteEqual": true,
+          "changedPaths": []
+        },
+        "enabled": {
+          "canonicalEqual": true,
+          "sharedByteEqual": true,
+          "changedPaths": []
+        }
+      },
+      "physicalContextFile": "final-e7865821-population-100-groups-1-physical-context.json"
+    },
+    {
+      "threshold": 100,
+      "groups": 2,
+      "files": {
+        "disabled": {
+          "file": "final-e7865821-population-100-groups-2-disabled.shared.json",
+          "sha256": "93da2011259514efc31f4e043e7e5d89a3bc71f2e86dc8a77af57b6c6ab6da35",
+          "sharedBytes": 1788672,
+          "coreBytes": 1401931
+        },
+        "enabled": {
+          "file": "final-e7865821-population-100-groups-2-enabled.shared.json",
+          "sha256": "67c408097ae948326bcc6ca4f3841b6945a73d9471c4bd6a2cc1c7397d8d516a",
+          "sharedBytes": 1845076,
+          "coreBytes": 1470091
+        }
+      },
+      "time": {
+        "winter": 826,
+        "tick": 500
+      },
+      "population": [
+        {
+          "id": "founding-clan",
+          "living": 126,
+          "indoorUnder5": 43,
+          "outdoorAge5plus": 83,
+          "workAge": 49,
+          "adultAge": 41,
+          "providingCare": 0,
+          "pendingBirths": 4,
+          "births": 116,
+          "secondGeneration": 46,
+          "households": 16,
+          "events": 1996
+        },
+        {
+          "id": "island-rival",
+          "living": 102,
+          "indoorUnder5": 45,
+          "outdoorAge5plus": 57,
+          "workAge": 40,
+          "adultAge": 35,
+          "providingCare": 0,
+          "pendingBirths": 5,
+          "births": 92,
+          "secondGeneration": 51,
+          "households": 17,
+          "events": 1756
+        }
+      ],
+      "groupMembers": [
+        {
+          "id": "founder-1",
+          "name": "Bireha"
+        },
+        {
+          "id": "founder-2",
+          "name": "Mieppi"
+        },
+        {
+          "id": "founder-3",
+          "name": "Ragnfrid Hakonardóttir"
+        },
+        {
+          "id": "founder-4",
+          "name": "MaelSechnaill"
+        }
+      ],
+      "origins": {
+        "founder-1": {
+          "x": 155,
+          "z": -120
+        },
+        "founder-2": {
+          "x": 157,
+          "z": -120
+        },
+        "founder-3": {
+          "x": 163,
+          "z": -98
+        },
+        "founder-4": {
+          "x": 165,
+          "z": -98
+        }
+      },
+      "offers": [
+        {
+          "enabled": false,
+          "groupId": "group-1",
+          "offer": {
+            "target": {
+              "x": 26,
+              "z": -64
+            },
+            "adjusted": false,
+            "foodCost": 0,
+            "members": 2,
+            "estimate": "Using carried supplies; the group returns safely before they run out."
+          }
+        },
+        {
+          "enabled": true,
+          "groupId": "group-1",
+          "offer": {
+            "target": {
+              "x": 26,
+              "z": -64
+            },
+            "adjusted": false,
+            "foodCost": 0,
+            "members": 2,
+            "estimate": "Using carried supplies; the group returns safely before they run out."
+          }
+        },
+        {
+          "enabled": false,
+          "groupId": "group-2",
+          "offer": {
+            "target": {
+              "x": 20,
+              "z": -72
+            },
+            "adjusted": false,
+            "foodCost": 0,
+            "members": 2,
+            "estimate": "Using carried supplies; the group returns safely before they run out."
+          }
+        },
+        {
+          "enabled": true,
+          "groupId": "group-2",
+          "offer": {
+            "target": {
+              "x": 20,
+              "z": -72
+            },
+            "adjusted": false,
+            "foodCost": 0,
+            "members": 2,
+            "estimate": "Using carried supplies; the group returns safely before they run out."
+          }
+        }
+      ],
+      "roundTrips": {
+        "disabled": {
+          "canonicalEqual": true,
+          "sharedByteEqual": true,
+          "changedPaths": []
+        },
+        "enabled": {
+          "canonicalEqual": true,
+          "sharedByteEqual": true,
+          "changedPaths": []
+        }
+      },
+      "physicalContextFile": "final-e7865821-population-100-groups-2-physical-context.json"
+    }
+  ],
+  "blockers": []
+}

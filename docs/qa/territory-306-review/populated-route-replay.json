@@ -1,0 +1,91 @@
+{
+  "time": {
+    "winter": 816,
+    "tick": 800
+  },
+  "ticksCompleted": 300,
+  "milliseconds": 34310.1094,
+  "actorId": "island-rival:persona-16",
+  "before": {
+    "x": -30,
+    "z": -51
+  },
+  "after": {
+    "x": -33.71715728752538,
+    "z": -53.28284271247462
+  },
+  "samples": [
+    {
+      "tick": 76,
+      "time": {
+        "winter": 816,
+        "tick": 576
+      },
+      "position": {
+        "x": -30.6,
+        "z": -51
+      }
+    },
+    {
+      "tick": 77,
+      "time": {
+        "winter": 816,
+        "tick": 577
+      },
+      "position": {
+        "x": -30.6,
+        "z": -51
+      }
+    },
+    {
+      "tick": 78,
+      "time": {
+        "winter": 816,
+        "tick": 578
+      },
+      "position": {
+        "x": -30.6,
+        "z": -51
+      }
+    },
+    {
+      "tick": 100,
+      "time": {
+        "winter": 816,
+        "tick": 600
+      },
+      "position": {
+        "x": -31.8,
+        "z": -51
+      }
+    },
+    {
+      "tick": 200,
+      "time": {
+        "winter": 816,
+        "tick": 700
+      },
+      "position": {
+        "x": -26,
+        "z": -51
+      }
+    },
+    {
+      "tick": 300,
+      "time": {
+        "winter": 816,
+        "tick": 800
+      },
+      "position": {
+        "x": -33.71715728752538,
+        "z": -53.28284271247462
+      }
+    }
+  ],
+  "currentRoutesValidated": true,
+  "exactCoreRestore": true,
+  "living": [
+    72,
+    51
+  ]
+}

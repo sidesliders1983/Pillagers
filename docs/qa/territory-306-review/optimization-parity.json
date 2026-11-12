@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "before": "0041b92b49dd2f0a1865eb158100a20e20e5df0c",
+  "after": "ce43e3dbc0360ea829596eea3aa268b483e05f6d",
+  "comparedStates": 271,
+  "firstTick": {
+    "tick": 500,
+    "winter": 816,
+    "sha256": "bcd1d1b73752987934de85818a23a949d45721b3fa741cd9f4308e5eef7b1714"
+  },
+  "lastTick": {
+    "tick": 770,
+    "winter": 816,
+    "sha256": "90bc1c57abed758d733142e0ed4f4b42b16cfb499f120bbfba48f2a7da2f478f"
+  },
+  "everyTickCoreSHAIdentical": true,
+  "endCoreSHA256": "90bc1c57abed758d733142e0ed4f4b42b16cfb499f120bbfba48f2a7da2f478f",
+  "limits": "One genuinely progressed72/51-resident2-group fixture over270 individual public Core ticks; no timing claim from this parity replay."
+}

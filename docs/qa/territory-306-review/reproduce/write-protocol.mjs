@@ -1,0 +1,30 @@
+import os from 'node:os';
+import { writeFile } from 'node:fs/promises';
+const protocol = {
+    status: 'prepared; final measurements await frozen review source',
+    sourceBaseline: '7cdc0227d828ae06cc17aa3a9563fb850b16ebbe',
+    hardware: { platform: process.platform, architecture: process.arch, node: process.version,
+        cpu: os.cpus()[0]?.model, logicalProcessors: os.availableParallelism(),
+        totalMemoryBytes: os.totalmem() },
+    comparison: 'The same real progressed public save is forked into feature-disabled and publicly adopted variants on the same source revision. Domestic RNG, biology/economy rules, time, clan populations, physical context and accepted expedition member routes must match at dispatch.',
+    cases: [{ thresholdPerClan: 50, actualLiving: [72, 51], groups: [1, 2] },
+        { thresholdPerClan: 100, actualLiving: [126, 102], groups: [1, 2] }],
+    timing: { publicBoundary: 'SimulationCore.applyCommand(state, {type: AdvanceTicks, ticks:1}, physicalContext)',
+        includes: ['state clone', 'one Core tick including both clans', 'canonical validation'],
+        excludes: ['source/transpilation bootstrap', '20 warmup ticks', 'public inspector reads', 'GC calls', 'serialization'],
+        samplesPerVariant: 250, warmupTicks: 20, p95: 'nearest-rank ceil(.95*n)',
+        annualBoundary: 'The window begins at year tick520 and ends770, with no Winter transition.',
+        garbageCollection: 'No forced GC during timed windows; natural GC caused by commands remains included.' },
+    memory: 'Fresh Node --expose-gc child per variant;3 explicit GC calls before and after the timed window. Record heapUsed and RSS, raw serialized Core bytes, and OS peak RSS. RSS includes runtime/modules/terrain and allocation arenas; it is not a precise retained-state allocation count.',
+    activity: 'Public inspectTerritory reports phases on every measured tick. Public per-defending-clan responderCount records active response reservations; other residents withdrawing are not included in this responder count.',
+    correctness: ['Both clans grew through genuine public AdvanceWinter progression and individual birthdays.',
+        'Every saved fixture is restored through the public Shared adapter; canonical Core equality is mandatory.',
+        'A separate25-year save retains default fertility/partnership/cooldown/care/age rules; funding,mortality and weather are explicitly controlled.',
+        'Accepted routes and canonical departures come from actual public expedition commands; no persona/event/body-state injection.'],
+    knownPreFixBlocker: 'Pre-fix7cdc enabled50-threshold case fails public ordinary continuation from816577 when an ambient saved route cuts a blocked navcell. No completed enabled7cdc timing comparison is claimed.',
+    limits: ['Node Core measurements only; no browser FPS, GPU, thermals or physical-device claim.',
+        'Stress-growth saves use boosted birth/partnership chance,zero care/cooldown and mortality control; they are setup fixtures, not production balance evidence.',
+        'The host is a normal workstation; fresh processes reduce memory carry-over but do not establish a dedicated isolated hardware benchmark.',
+        'The public island is production seed7/v1; measurements do not cover every island or occupation.'],
+};
+await writeFile(new URL('benchmark-protocol.json', import.meta.url), JSON.stringify(protocol, null, 2));
