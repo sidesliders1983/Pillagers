@@ -1,0 +1,61 @@
+{
+  "purpose": "Exact executed harness bytes in gzip; readable copies normalize line endings only. Windows host paths remain explicit.",
+  "files": [
+    {
+      "file": "check-baseline.mjs",
+      "readableSHA256": "3aa4f41161619f9e46561874620a58f865fd8954a4a3e82c23702511d4b90c52",
+      "executedArchive": "check-baseline.mjs.gz",
+      "executedSHA256": "04050a3062536c8b5bbe4b97ab70b88b917c514832503351c1b2e4c131ae4282",
+      "archiveSHA256": "348d1af328bd328774b963ed6ccb78c5e25fa4f9e15b6b6c5465a3ba193f9c57",
+      "byteExactArchive": true
+    },
+    {
+      "file": "check-native-f1a67cff.mjs",
+      "readableSHA256": "a4dc2735deb05c1473a2bbd0f0cb77a1894084aba1fed7b4d58c067785789960",
+      "executedArchive": "check-native-f1a67cff.mjs.gz",
+      "executedSHA256": "c4b0d87436bb4c7a07bf83c97a4bf80fb743a1660541b47880e02f74c1a237ff",
+      "archiveSHA256": "354e5c2aec3c8783b121901c8f673843f65354ee4942fdbd4a3b93f74be7d038",
+      "byteExactArchive": true
+    },
+    {
+      "file": "check-native.mjs",
+      "readableSHA256": "8d0280bbd7e5a0d81e5a77e467664859c44bc2e25376d754428c5d27fc42ee7f",
+      "executedArchive": "check-native.mjs.gz",
+      "executedSHA256": "9da1811c7da5d63d5cfbd88e9a77538f344b973a9b7bd7fda0328f63a32c5e59",
+      "archiveSHA256": "d73d9521f1006b0eb5c68f2078555b194770b1d433a961035b38dca657575c82",
+      "byteExactArchive": true
+    },
+    {
+      "file": "fixture-tools-f1a67cff.mjs",
+      "readableSHA256": "568bc556bc2192e5797e833242fdf4870343e8e8291208a7ff320f48b5e29e73",
+      "executedArchive": "fixture-tools-f1a67cff.mjs.gz",
+      "executedSHA256": "568bc556bc2192e5797e833242fdf4870343e8e8291208a7ff320f48b5e29e73",
+      "archiveSHA256": "ea2c2674c438b74cea657790b7ad433a95bfbd1f8abbeb0b23e22b4b99e03409",
+      "byteExactArchive": true
+    },
+    {
+      "file": "fixture-tools.mjs",
+      "readableSHA256": "568bc556bc2192e5797e833242fdf4870343e8e8291208a7ff320f48b5e29e73",
+      "executedArchive": "fixture-tools.mjs.gz",
+      "executedSHA256": "568bc556bc2192e5797e833242fdf4870343e8e8291208a7ff320f48b5e29e73",
+      "archiveSHA256": "ea2c2674c438b74cea657790b7ad433a95bfbd1f8abbeb0b23e22b4b99e03409",
+      "byteExactArchive": true
+    },
+    {
+      "file": "prepare-fixtures-f1a67cff.mjs",
+      "readableSHA256": "e5d6ea096cb318680e805df1daa123a35eb0a720511d20ee7cd583f256e4c0e8",
+      "executedArchive": "prepare-fixtures-f1a67cff.mjs.gz",
+      "executedSHA256": "92e636587da19dd522769998b9996ffa4073c779df5eec2c65578e48c64a3762",
+      "archiveSHA256": "2b0f62ebc4d13b6688043f4edf8c299af962e92c97df3c90d8acd379acff3e94",
+      "byteExactArchive": true
+    },
+    {
+      "file": "prepare-fixtures.mjs",
+      "readableSHA256": "e5d6ea096cb318680e805df1daa123a35eb0a720511d20ee7cd583f256e4c0e8",
+      "executedArchive": "prepare-fixtures.mjs.gz",
+      "executedSHA256": "92e636587da19dd522769998b9996ffa4073c779df5eec2c65578e48c64a3762",
+      "archiveSHA256": "2b0f62ebc4d13b6688043f4edf8c299af962e92c97df3c90d8acd379acff3e94",
+      "byteExactArchive": true
+    }
+  ]
+}

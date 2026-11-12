@@ -1,0 +1,24 @@
+{
+  "red": {
+    "file": "status-red.log",
+    "fail": 1,
+    "excerpt": true,
+    "toolChunk": "1f323e",
+    "pass": 3
+  },
+  "note": "Captured tool-returned output. No source was changed again to recreate the failure, and no post-pin rerun is claimed.",
+  "testedSourceSHA256": "1e1056c2d9a900ebada48c6bcae0010677fd683e69a9c6b36d80a9d466478a9a",
+  "baselineRuntime": "f1a67cfff7b64f208d56d8ef53443738b375cb1a",
+  "green": {
+    "file": "status-green.log",
+    "fail": 0,
+    "skipped": 0,
+    "pass": 10,
+    "toolChunks": [
+      "6f862a",
+      "582ffb"
+    ]
+  },
+  "testedDOMSHA256": "f33855dea38409339ee5c1065d346de8480fc7e06ab3bdbf88830119ab1872dd",
+  "status": "passed"
+}

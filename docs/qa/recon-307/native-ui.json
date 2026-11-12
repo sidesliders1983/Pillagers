@@ -1,0 +1,69 @@
+{
+  "status": "passed",
+  "source": {
+    "head": "d33ca3a9ceae581a7be91e04b84c30e359f73e7d",
+    "sourceHashes": {
+      "src/simulation/TerritorialAwareness.ts": "39c7bbb07ebbded0bc22fa274746b7171371fcad32cecffe4dec10a376a829be",
+      "src/simulation/ResidentPresence.ts": "1a997fe061c418df62a389034cf58408f33904c4b314cbaf41ef207ef4207db6",
+      "src/simulation/SimulationCore.ts": "0def97b1e66d11949eb79fe112d2d2aa73c3b67068ab98d2075bf2f410bfdea1",
+      "src/fjord-play/FjordCampaign.ts": "0ad15961e27d3e15b4c55d0d439c2df1302fc7a3cee3f03dbc5c30e31cf54ebc",
+      "src/world-generation/LandRoutes.ts": "6f6b59266d5421b38c469aabf600169cee866939f26a9e7382055374e4dedf35",
+      "src/simulation/ReconRoutes.ts": "6c0e4aaa806cbf5ea13f9f8270dae0034dccc340e91ef01838b729d017255c4b",
+      "src/simulation/IslandMissions.ts": "41815276c401f78050dfbd804a5bec0dff1927a218cf7795d35cda012fa7608e",
+      "src/simulation/SpatialExpeditions.ts": "123d25dfc5f60f9aa751eedf3648424dd4c2ebb33821411b2aa2e412bf3f4982",
+      "src/fjord-play/IslandMissionPanel.ts": "1e1056c2d9a900ebada48c6bcae0010677fd683e69a9c6b36d80a9d466478a9a",
+      "src/fjord-play/ExpeditionPanel.ts": "a19f9e379df089955c4b5b5221dfe3148f1da391fe178241eba079cea24d2d27",
+      "src/fjord-play/BakedIslandCatalog.ts": "0f84407cad013b429f6a6d9a090c531c5be12dc8d1fca92d3e8aae5b3ab365d7"
+    },
+    "dirtyTracked": null,
+    "bakedSHA256": "b8a1f5444187113b825fe1ead69ec5da49b65451bae5d7a6e43d300fd7b67c39",
+    "bakedCanonicalSHA256": "c9bf0343274e49065387cf18effdda291764bf727a6cae1dab10db78eeea39a8"
+  },
+  "origin": "http://127.0.0.1:5199",
+  "startedAt": "2026-11-12T13:14:54.048Z",
+  "chrome": "157.0.8103.52",
+  "scenarios": [
+    {
+      "mode": "desktop",
+      "kind": "real-file-import-known-quote-area-touch-target-back-one-dispatch-recall",
+      "foodBefore": 1984,
+      "foodAfter": 1980,
+      "missionId": "explore-2"
+    },
+    {
+      "mode": "desktop",
+      "kind": "area-circuit-mid-unobstructed-world-read-only",
+      "missionId": "explore-2",
+      "reached": 2
+    },
+    {
+      "mode": "desktop",
+      "kind": "partial-arc-mid-unobstructed-world-read-only",
+      "missionId": "explore-2",
+      "reached": 2
+    },
+    {
+      "mode": "touch-landscape",
+      "kind": "real-file-import-known-quote-area-touch-target-back-one-dispatch-recall",
+      "foodBefore": 1984,
+      "foodAfter": 1980,
+      "missionId": "explore-2"
+    }
+  ],
+  "screenshots": [
+    "D:\\CodexSites\\Pillagers\\scratch\\recon-standoff-307\\scratch\\recon-307\\native-d33ca3a9-1794489294044\\desktop-known-site-refusal.jpg",
+    "D:\\CodexSites\\Pillagers\\scratch\\recon-standoff-307\\scratch\\recon-307\\native-d33ca3a9-1794489294044\\desktop-mapped-area-circuit-quote.jpg",
+    "D:\\CodexSites\\Pillagers\\scratch\\recon-standoff-307\\scratch\\recon-307\\native-d33ca3a9-1794489294044\\desktop-paid-dispatch.jpg",
+    "D:\\CodexSites\\Pillagers\\scratch\\recon-standoff-307\\scratch\\recon-307\\native-d33ca3a9-1794489294044\\desktop-area-circuit-mid-world.jpg",
+    "D:\\CodexSites\\Pillagers\\scratch\\recon-standoff-307\\scratch\\recon-307\\native-d33ca3a9-1794489294044\\desktop-partial-arc-mid-world.jpg",
+    "D:\\CodexSites\\Pillagers\\scratch\\recon-standoff-307\\scratch\\recon-307\\native-d33ca3a9-1794489294044\\touch-landscape-known-site-refusal.jpg",
+    "D:\\CodexSites\\Pillagers\\scratch\\recon-standoff-307\\scratch\\recon-307\\native-d33ca3a9-1794489294044\\touch-landscape-mapped-area-circuit-quote.jpg",
+    "D:\\CodexSites\\Pillagers\\scratch\\recon-standoff-307\\scratch\\recon-307\\native-d33ca3a9-1794489294044\\touch-landscape-paid-dispatch.jpg"
+  ],
+  "errors": [],
+  "scope": "UI corrective follow-up: quote/Back/dispatch/Recall on desktop and touch; prior full journeys are pinned to f1a67cff.",
+  "requestFailures": [],
+  "badResponses": [],
+  "limits": "Native Chrome desktop and coarse-pointer touch emulation. Physical iPhone Safari acceptance remains pending. Synthetic Core fixtures prove full known-site coverage; production area circuit is labelled separately.",
+  "finishedAt": "2026-11-12T13:17:13.098Z"
+}

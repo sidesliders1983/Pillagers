@@ -3,9 +3,10 @@ import { pillageEquipment, validatePillageEquipment, type PillageEquipment } fro
 import type { SimulationState } from './SimulationCore';
 import type { PhysicalExpeditionContext, SpatialMission } from './SpatialExpeditions';
 import type { Cargo, ExpeditionResult, Knowledge, MissionType } from './WorldExpeditions';
-import type { Point2 } from '../world-generation/WorldBlueprint';
+import type { Bounds2, Point2 } from '../world-generation/WorldBlueprint';
+import { planReconRoute, type ReconRoutePlan } from './ReconRoutes';
 import { discoveryAt, inspectClanDiscovery } from './ClanDiscovery';
-import { planRoute, prototypeExplorePolicy, routeLength, requireReadyExpeditionGroup } from './SpatialExpeditions';
+import { planRoute, prototypeExplorePolicy, routeLength, requireReadyExpeditionGroup, spatialMemberPosition, spatialMissionPosition } from './SpatialExpeditions';
 import { absoluteTick, missionTypes, recoverExpeditionCargo, resolveExpeditionCrew } from './WorldExpeditions';
 import { weatherProfile } from './Weather';
 import { eventFacts } from './EventFacts';
@@ -35,6 +36,21 @@ export interface IslandMissionTask {
     visitEventId: string | null;
     result: ExpeditionResult | null;
     equipment?: PillageEquipment;
+    /** Absent on historical direct-route missions. */
+    recon?: ReconRoutePlan & {
+        outwardRoutes: Record<string, Point2[]>;
+        reachedViewpoints: number;
+        pauseUntil: number | null;
+        samples: ReconObservation[];
+    };
+}
+export interface ReconObservation {
+    viewpoint: number;
+    tick: number;
+    witnesses: Record<string, Point2>;
+    observedSiteId: string | null;
+    sourceEventId: string;
+    knowledge: Knowledge;
 }
 export interface IslandIntel {
     version: 1;
@@ -54,12 +70,40 @@ export function inspectIslandMissions(state: SimulationState) {
     })) };
 }
 
+/** Only presently observed external obstacles and our own homes may influence a proposal. */
+function knownRouteContext(state: SimulationState, context: PhysicalExpeditionContext): PhysicalExpeditionContext {
+    const view = inspectClanDiscovery(state.discovery!, state.clan.id);
+    const own = state.residentPresence!.site.bounds;
+    const visible = (bounds: Bounds2) => {
+        if (bounds.minX >= own.minX && bounds.maxX <= own.maxX &&
+            bounds.minZ >= own.minZ && bounds.maxZ <= own.maxZ) return true;
+        const spacing = view.cellSize;
+        const firstX = Math.floor((bounds.minX - view.grid.bounds.minX) / spacing);
+        const lastX = Math.floor((bounds.maxX - view.grid.bounds.minX) / spacing);
+        const firstZ = Math.floor((bounds.minZ - view.grid.bounds.minZ) / spacing);
+        const lastZ = Math.floor((bounds.maxZ - view.grid.bounds.minZ) / spacing);
+        for (let row = firstZ; row <= lastZ; row++) for (let col = firstX; col <= lastX; col++) {
+            if (discoveryAt(view, view.grid.bounds.minX + (col + .5) * spacing,
+                view.grid.bounds.minZ + (row + .5) * spacing) !== 'visible') return false;
+        }
+        return true;
+    };
+    return { ...context, exclusions: context.exclusions?.filter(visible) };
+}
+function routeQuoteKey(value: unknown) {
+    const text = JSON.stringify(value);
+    let hash = 2166136261;
+    for (let i = 0; i < text.length; i++) hash = Math.imul(hash ^ text.charCodeAt(i), 16777619);
+    return 'recon-' + (hash >>> 0).toString(16) + '-' + text.length;
+}
+
 function prepareMission(state: SimulationState, groupId: string, target: IslandTarget,
     type: MissionType, priorities: Cargo[], context?: PhysicalExpeditionContext, origins?: Record<string, Point2>) {
     if (!context || state.world?.version !== 2 || !state.discovery ||
         state.world.island?.worldId !== context.worldId || !missionTypes.includes(type))
         throw new Error('Physical missions require the bound island campaign.');
     const known = target.kind === 'site' ? state.world.islandIntel?.sites[target.siteId] : undefined;
+    const protectedSite = known ?? (type === 'Recon' ? Object.values(state.world.islandIntel?.sites ?? {})[0] : undefined);
     if (type !== 'Recon' && !known?.knowledge?.settlementName)
         throw new Error('A discovered CPU clan is required for this mission.');
     if (target.kind === 'site' && !known) throw new Error('Choose a known site.');
@@ -79,11 +123,6 @@ function prepareMission(state: SimulationState, groupId: string, target: IslandT
         !origins[id] || !Number.isFinite(origins[id].x) || !Number.isFinite(origins[id].z) ||
         Math.hypot(origins[id].x - home.x, origins[id].z - home.z) > state.discovery!.policy.settlementRadius)))
         throw new Error('Every member must depart from home.');
-    const plans = group.memberIds.map(id => planRoute(context, position, origins?.[id], true));
-    const memberRoutes = Object.fromEntries(group.memberIds.map((id, i) => [id, plans[i].route]));
-    const route = plans.reduce((a, b) => routeLength(a.route) >= routeLength(b.route) ? a : b).route;
-    const distance = routeLength(route);
-    if (!distance) throw new Error('Choose a destination outside the group’s departure point.');
     const config = state.world.config, weather = weatherProfile(state);
     const duration = Math.ceil(config.durations[type] * weather.travelDurationBps / 10000);
     const foodPerMember = Math.ceil(config.provisions[type] * duration / config.durations[type]);
@@ -91,17 +130,33 @@ function prepareMission(state: SimulationState, groupId: string, target: IslandT
     if (state.stocks.food < foodCost) throw new Error(`Mission needs ${foodCost} Food.`);
     const speed = (state.world.spatial?.policy.metresPerTick ?? prototypeExplorePolicy.metresPerTick) *
         10000 / weather.travelDurationBps;
-    const travelTicks = Math.ceil(distance / speed);
-    if (travelTicks * 2 + 1 > duration)
+    const standoff = !!state.world.territory && type !== 'Pillage';
+    const itinerary = standoff ? planReconRoute(knownRouteContext(state, context), {
+        focus: position,
+        ...(protectedSite && context.world.rivalSite ? { protectedBounds: context.world.rivalSite.bounds } : {}),
+        origins: origins!, speed, duration, surveillance: type === 'Surveillance',
+        ...(context.reconSafetyMargin !== undefined ? { safetyMargin: context.reconSafetyMargin } : {}),
+    }) : null;
+    if (itinerary && known && !itinerary.plan.viewpoints.some(view => observesSite(state, context, view.position)))
+        throw new Error('No safe observation route fits this mission.');
+    const plans = itinerary ? null : group.memberIds.map(id => planRoute(context, position, origins?.[id], true));
+    const memberRoutes = itinerary?.memberRoutes ?? Object.fromEntries(group.memberIds.map((id, i) => [id, plans![i].route]));
+    const route = itinerary?.route ?? plans!.reduce((a, b) => routeLength(a.route) >= routeLength(b.route) ? a : b).route;
+    const distance = routeLength(route);
+    if (!distance) throw new Error('Choose a destination outside the group’s departure point.');
+    const travelTicks = itinerary?.outwardTicks ?? Math.ceil(distance / speed);
+    const returnTicks = itinerary?.returnTicks ?? travelTicks;
+    if (travelTicks + returnTicks + (itinerary?.plan.observationTicks ?? 1) > duration)
         throw new Error('The land round trip does not fit this mission’s duration.');
-    const nav = context.world.navigation, destination = plans[0].target;
+    const nav = context.world.navigation, destination = itinerary ? position : plans![0].target;
     const ref: IslandTargetRef = { version: 1, worldId: context.worldId, kind: target.kind,
         id: target.kind === 'site' ? target.siteId : `area-${Math.round((destination.z - nav.bounds.minZ) / nav.spacing) * nav.columns +
             Math.round((destination.x - nav.bounds.minX) / nav.spacing)}`, position: { ...destination } };
     const casualtyBps = Math.min(10000, config.casualtyBps[type] + weather.travelRiskBps);
     const equipment = type === 'Pillage' ? pillageEquipment(state, group.memberIds,
         config.successBps[type], casualtyBps) : undefined;
-    return { ref, group, memberRoutes, route, distance, speed, travelTicks, duration, foodCost, foodPerMember,
+    return { ref, group, memberRoutes, route, distance, speed, travelTicks, returnTicks, duration, foodCost, foodPerMember,
+        ...(itinerary ? { recon: itinerary.plan, returnRoutes: itinerary.returnRoutes } : {}),
         successBps: equipment?.successBps ?? config.successBps[type], casualtyBps,
         ...(equipment ? { equipment } : {}) };
 }
@@ -112,6 +167,13 @@ export function islandMissionOffer(state: SimulationState, groupId: string, targ
     return { duration: offer.duration, foodCost: offer.foodCost, foodPerMember: offer.foodPerMember,
         successBps: offer.successBps, casualtyBps: offer.casualtyBps,
         ...(offer.equipment ? { equipment: structuredClone(offer.equipment) } : {}),
+        ...(offer.recon ? { observationRoute: {
+            version: 1 as const, coverage: offer.recon.coverage,
+            viewpointCount: offer.recon.viewpoints.length, coverageDegrees: offer.recon.coverageDegrees,
+            travelTicks: offer.travelTicks + offer.returnTicks,
+            observationTicks: offer.duration - offer.travelTicks - offer.returnTicks,
+            planKey: routeQuoteKey([offer.recon, offer.memberRoutes, offer.returnRoutes]),
+        } } : {}),
         target: { ...offer.ref.position }, travelTicks: offer.travelTicks };
 }
 
@@ -125,16 +187,17 @@ export function dispatchIslandMission(state: SimulationState, command: IslandMis
     const mission: SpatialMission = {
         id, routeMode: 'eight-way-v1', groupId: offer.group.id, groupName: offer.group.name, memberIds: [...offer.group.memberIds],
         ...(state.world!.territory ? { territoryVersion: 1 as const } : {}),
-        target: offer.ref.position, route: offer.route, memberRoutes: offer.memberRoutes,
+        target: { ...offer.route.at(-1)! }, route: offer.route, memberRoutes: offer.memberRoutes,
         homeOrigins: Object.fromEntries(offer.group.memberIds.map(id => [id, { ...offer.memberRoutes[id][0] }])),
-        returnRoutes: Object.fromEntries(offer.group.memberIds.map(id => [id, [...offer.memberRoutes[id]].reverse()])),
+        returnRoutes: offer.returnRoutes ?? Object.fromEntries(offer.group.memberIds.map(id => [id, [...offer.memberRoutes[id]].reverse()])),
         distance: offer.distance, travelled: 0, departedAt: now, updatedAt: now,
         exploringUntil: null, returnedAt: null, foodCost: offer.foodCost, status: 'Traveling', outcome: null,
         task: { version: 1, type: command.mission, target: offer.ref, priorities: [...(command.priorities ?? [])],
-            speed: offer.speed, duration: offer.duration, operateUntil: now + offer.duration - offer.travelTicks,
+            speed: offer.speed, duration: offer.duration, operateUntil: now + offer.duration - offer.returnTicks,
             successBps: offer.successBps, casualtyBps: offer.casualtyBps,
             ...(offer.equipment ? { equipment: offer.equipment } : {}),
-            observation: null, observedSiteId: null, visitEventId: null, result: null },
+            observation: null, observedSiteId: null, visitEventId: null, result: null,
+            ...(offer.recon ? { recon: { ...offer.recon, outwardRoutes: offer.memberRoutes, reachedViewpoints: 0, pauseUntil: null, samples: [] } } : {}) },
     };
     spatial.missions[id] = mission;
     state.stocks.food -= offer.foodCost;
@@ -180,6 +243,7 @@ function record(state: SimulationState, type: string, mission: SpatialMission, d
 /** A visit records what this group could observe then, never a future remote inventory. */
 export function observeIslandMission(state: SimulationState, mission: SpatialMission, context: PhysicalExpeditionContext) {
     const task = mission.task!, site = context.world.rivalSite;
+    if (task.recon) return;
     const seesSite = !!site && mission.memberIds.some(id => {
         if (state.personas[id]?.deathWinter !== null) return false;
         const point = mission.memberRoutes![id].at(-1)!;
@@ -244,7 +308,7 @@ export function validateIslandMission(state: SimulationState, mission: SpatialMi
     if (state.world?.spatial?.version !== 3 || state.world.version !== 2 || task.version !== 1 ||
         !task.target || task.target.version !== 1 || task.target.worldId !== state.world.island!.worldId || !task.target.id ||
         !validPoint(task.target.position) || !validPoint(mission.target) ||
-        task.target.position.x !== mission.target.x || task.target.position.z !== mission.target.z ||
+        !task.recon && (task.target.position.x !== mission.target.x || task.target.position.z !== mission.target.z) ||
         task.target.position.x < bounds.minX || task.target.position.x > bounds.maxX ||
         task.target.position.z < bounds.minZ || task.target.position.z > bounds.maxZ ||
         !['area', 'site'].includes(task.target.kind) || !missionTypes.includes(task.type) ||
@@ -271,6 +335,7 @@ export function validateIslandMission(state: SimulationState, mission: SpatialMi
             task.result.discovery !== null && (!task.result.success || task.type === 'Pillage' ||
                 JSON.stringify(task.result.discovery) !== JSON.stringify(task.observation))))
         throw new Error('Invalid physical mission.');
+    if (task.recon !== undefined) validateReconMission(state, mission);
 }
 
 function validKnowledge(value: Knowledge, now: number) {
@@ -305,4 +370,131 @@ export function validateIslandIntel(state: SimulationState) {
                 JSON.stringify(report.details?.discovery) !== JSON.stringify(site.knowledge)) fail();
         } else if (site.reportEventId !== undefined) fail();
     }
+}
+
+/** Each receipt samples actual living witnesses at a confirmed, clipped waypoint tick. */
+export function sampleReconMission(state: SimulationState, mission: SpatialMission,
+    context: PhysicalExpeditionContext) {
+    const task = mission.task!, recon = task.recon!;
+    const index = recon.reachedViewpoints;
+    const viewpoint = recon.viewpoints[index];
+    if (!viewpoint || Math.abs(mission.travelled - viewpoint.distance) > 1e-6) return;
+    const witnesses = Object.fromEntries(mission.memberIds.filter(id => state.personas[id]?.deathWinter === null)
+        .sort().map(id => {
+            const point = spatialMemberPosition(mission, id);
+            return [id, { x: point.x, z: point.z }];
+        }));
+    const site = context.world.rivalSite;
+    const seesSite = !!site && Object.values(witnesses).some(point => observesSite(state, context, point));
+    const target = seesSite ? state.world!.targetClans[state.world!.island!.clanId] : undefined;
+    const population = target ? Object.values(target.personas).filter(person => person.deathWinter === null).length : 0;
+    const field = context.world.terrain;
+    const reached = Object.values(witnesses)[0];
+    const biome = reached && context.world.biomes?.cells[
+        Math.round((reached.z - field.bounds.minZ) / field.spacing) * field.columns +
+        Math.round((reached.x - field.bounds.minX) / field.spacing)];
+    const terrain = ({ water: 'Water', shore: 'Shore', clearing: 'Clearing', grass: 'Grassland',
+        forest: 'Forest', rock: 'Rock' } as const)[biome ?? 'grass'];
+    const knowledge: Knowledge = {
+        level: task.type === 'Surveillance' ? 'Surveyed' :
+            state.world!.islandIntel?.sites[site?.candidateId ?? '']?.knowledge?.level ?? 'Scouted',
+        observedAt: absoluteTick(state), terrain: biome ? terrain : 'Land', resources: [],
+        settlementName: target?.clan.name ?? null,
+        opportunity: !!target && (target.stocks.food > 0 || target.stocks.materials > 0 || population > 0 ||
+            Object.values(target.landing!.cattle).some(animal => animal.deathWinter === null)),
+        resistance: task.type === 'Surveillance' && target ? population < 5 ? 'Low' :
+            population < 15 ? 'Medium' : 'High' : null,
+    };
+    const observedSiteId = seesSite ? site!.candidateId : null;
+    const sourceEventId = record(state, 'IslandMissionVisited', mission, {
+        target: task.target, viewpoint: index, witnesses, observedSiteId, observedAt: knowledge.observedAt,
+    });
+    recon.samples.push({ viewpoint: index, tick: absoluteTick(state), witnesses,
+        observedSiteId, sourceEventId, knowledge });
+    recon.reachedViewpoints++;
+    recon.pauseUntil = absoluteTick(state) + 1;
+    // An occluded later view cannot erase an earlier genuine settlement observation.
+    if (seesSite || !task.observedSiteId) {
+        task.observation = structuredClone(knowledge);
+        task.observedSiteId = observedSiteId;
+        task.visitEventId = sourceEventId;
+    }
+}
+function validateReconMission(state: SimulationState, mission: SpatialMission) {
+    const task = mission.task!, recon = task.recon;
+    const fail = () => { throw new Error('Invalid Recon observation route.'); };
+    const bounds = state.discovery!.grid.bounds;
+    const point = (value: Point2) => value && Number.isFinite(value.x) && Number.isFinite(value.z) &&
+        value.x >= bounds.minX && value.x < bounds.maxX && value.z >= bounds.minZ && value.z < bounds.maxZ;
+    if (!recon || recon.version !== 1 || mission.territoryVersion !== 1 || task.type === 'Pillage' ||
+        !point(recon.focus) || JSON.stringify(recon.focus) !== JSON.stringify(task.target.position) ||
+        !Number.isFinite(recon.safetyMargin) || recon.safetyMargin < 0 || recon.safetyMargin > 32 ||
+        !['circuit', 'partial'].includes(recon.coverage) || !Number.isFinite(recon.coverageDegrees) ||
+        recon.coverageDegrees < 1 || recon.coverageDegrees > 360 ||
+        (recon.coverage === 'circuit') !== (recon.coverageDegrees === 360) ||
+        !Array.isArray(recon.viewpoints) || recon.viewpoints.length < 2 || recon.viewpoints.length > 9 ||
+        !Number.isSafeInteger(recon.observationTicks) || recon.observationTicks < recon.viewpoints.length ||
+        !Number.isSafeInteger(recon.reachedViewpoints) || recon.reachedViewpoints < 0 ||
+        recon.reachedViewpoints > recon.viewpoints.length || !Array.isArray(recon.samples) ||
+        recon.samples.length !== recon.reachedViewpoints ||
+        recon.pauseUntil !== null && (!Number.isSafeInteger(recon.pauseUntil) || recon.pauseUntil > absoluteTick(state) + 1 ||
+            recon.pauseUntil < mission.departedAt) || !recon.outwardRoutes ||
+        Object.keys(recon.outwardRoutes).sort().join() !== [...mission.memberIds].sort().join()) fail();
+    if (recon!.protectedBounds !== null) {
+        const area = recon!.protectedBounds;
+        if (!area || ![area.minX, area.maxX, area.minZ, area.maxZ].every(Number.isFinite) ||
+            area.minX >= area.maxX || area.minZ >= area.maxZ || area.minX < bounds.minX ||
+            area.maxX > bounds.maxX || area.minZ < bounds.minZ || area.maxZ > bounds.maxZ ||
+            !Object.values(state.world!.islandIntel?.sites ?? {}).some(site => site.sightedAt <= mission.departedAt)) fail();
+    }
+    let previousDistance = -1;
+    for (const view of recon!.viewpoints) {
+        if (!point(view.position) || !Number.isFinite(view.distance) || view.distance <= previousDistance) fail();
+        previousDistance = view.distance;
+    }
+    for (const id of mission.memberIds) {
+        const route = recon!.outwardRoutes[id];
+        if (!Array.isArray(route) || route.length < 2 || route.length > 40002 || !route.every(point) ||
+            JSON.stringify(route[0]) !== JSON.stringify(mission.homeOrigins?.[id]) ||
+            JSON.stringify(route.at(-1)) !== JSON.stringify(recon!.viewpoints.at(-1)!.position) ||
+            routeLength(route) > previousDistance + 1e-6) fail();
+    }
+    if (Math.abs(Math.max(...Object.values(recon!.outwardRoutes).map(routeLength)) - previousDistance) > 1e-6) fail();
+    for (const view of recon!.viewpoints) {
+        const actuallyReached = Object.values(recon!.outwardRoutes).some(route => {
+            const distance = routeLength(route);
+            const reached = spatialMissionPosition({ ...mission, homeOrigins: undefined, returnFrom: undefined,
+                status: 'Traveling', route, distance, travelled: Math.min(distance, view.distance) });
+            return Math.hypot(reached.x - view.position.x, reached.z - view.position.z) <= 1e-6;
+        });
+        if (!actuallyReached) fail();
+    }
+    if (recon!.coverage === 'circuit' && JSON.stringify(recon!.viewpoints[0].position) !==
+        JSON.stringify(recon!.viewpoints.at(-1)!.position)) fail();
+    if (['Traveling', 'Exploring'].includes(mission.status) &&
+        (JSON.stringify(mission.memberRoutes) !== JSON.stringify(recon!.outwardRoutes) ||
+            JSON.stringify(mission.target) !== JSON.stringify(recon!.viewpoints.at(-1)!.position))) fail();
+    for (let index = 0; index < recon!.samples.length; index++) {
+        const sample = recon!.samples[index], event = state.events.find(value => value.id === sample.sourceEventId);
+        if (sample.viewpoint !== index || !Number.isSafeInteger(sample.tick) || sample.tick <= mission.departedAt ||
+            sample.tick > absoluteTick(state) || index > 0 && sample.tick <= recon!.samples[index - 1].tick ||
+            !sample.witnesses || !Object.keys(sample.witnesses).length ||
+            !validKnowledge(sample.knowledge, sample.tick) || sample.knowledge.observedAt !== sample.tick ||
+            !event || event.type !== 'IslandMissionVisited' || event.details?.missionId !== mission.id ||
+            event.details?.viewpoint !== index || event.details?.observedAt !== sample.tick ||
+            JSON.stringify(event.details?.witnesses) !== JSON.stringify(sample.witnesses) ||
+            event.details?.observedSiteId !== sample.observedSiteId ||
+            sample.observedSiteId !== null && sample.observedSiteId !== state.world!.island!.siteId ||
+            !!sample.knowledge.settlementName !== !!sample.observedSiteId) fail();
+        for (const [id, position] of Object.entries(sample.witnesses)) {
+            if (!mission.memberIds.includes(id) || !point(position)) fail();
+            const route = recon!.outwardRoutes[id], distance = routeLength(route);
+            const reached = spatialMissionPosition({ ...mission, homeOrigins: undefined, returnFrom: undefined,
+                status: 'Traveling', route, distance, travelled: Math.min(distance, recon!.viewpoints[index].distance) });
+            if (Math.hypot(position.x - reached.x, position.z - reached.z) > 1e-6) fail();
+        }
+    }
+    const aggregate = [...recon!.samples].reverse().find(sample => sample.observedSiteId) ?? recon!.samples.at(-1);
+    if (aggregate ? task.visitEventId !== aggregate.sourceEventId ||
+        JSON.stringify(task.observation) !== JSON.stringify(aggregate.knowledge) : task.visitEventId !== null) fail();
 }

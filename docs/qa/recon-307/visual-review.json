@@ -1,0 +1,36 @@
+{
+  "status": "passed after recorded UI correction",
+  "reviewedAt": "2026-11-12",
+  "baseline": "c5340a9310cf2c2c651a3ca6ac5fe26f5198c96d",
+  "fullCoreJourneys": "f1a67cfff7b64f208d56d8ef53443738b375cb1a",
+  "correctedUI": "d33ca3a9ceae581a7be91e04b84c30e359f73e7d",
+  "observedRegression": {
+    "source": "f1a67cfff7b64f208d56d8ef53443738b375cb1a",
+    "trigger": "Known-site safe refusal, then a valid mapped-area Recon quote",
+    "finding": "The target bar retained the previous no-safe-route text below a valid circuit quote.",
+    "proof": "native-f1a67cff-1794488582504/desktop-mapped-area-circuit-quote.jpg",
+    "resolution": "The two-line UI correction clears status when targeting restarts and when a valid quote opens; public DOM and native desktop/touch assertions pass on d33ca3a9."
+  },
+  "capturesReviewed": [
+    "baseline-c5340a93-1794488304355/baseline-direct-recon-quote.jpg",
+    "baseline-c5340a93-1794488304355/baseline-direct-dispatch.jpg",
+    "baseline-c5340a93-1794488304355/baseline-direct-warning-world.jpg",
+    "native-f1a67cff-1794488582504/desktop-known-site-refusal.jpg",
+    "native-f1a67cff-1794488582504/desktop-area-circuit-mid-reached.jpg",
+    "native-f1a67cff-1794488582504/desktop-partial-arc-mid-reached.jpg",
+    "native-d33ca3a9-1794489294044/desktop-mapped-area-circuit-quote.jpg",
+    "native-d33ca3a9-1794489294044/desktop-area-circuit-mid-world.jpg",
+    "native-d33ca3a9-1794489294044/desktop-partial-arc-mid-world.jpg",
+    "native-d33ca3a9-1794489294044/touch-landscape-mapped-area-circuit-quote.jpg",
+    "native-d33ca3a9-1794489294044/touch-landscape-known-site-refusal.jpg"
+  ],
+  "limits": [
+    "Native Chrome uses Vite served source and actual game controls, with isolated contexts.",
+    "Touch is Chrome emulation; physical iPhone Safari UAT is pending.",
+    "The production full circuit surveys mapped land. The coastal production arc is only 45 degrees; neither claims full enemy-site observation.",
+    "Known production site2 safely refuses the existing 250-tick mission budget; no new cost, speed or range was introduced.",
+    "The touch refusal status can require scrolling in the existing task panel. The valid quote and 44px confirmation controls are fully visible.",
+    "Initial baseline source-label assertion raced the Loading screen; the corrected awaited-entry baseline then passed.",
+    "The first final-source navigation hit 30 seconds before any scenario. Its report is preserved. With a 180-second scene/navigation allowance, all six full journeys passed. A cause was not independently established."
+  ]
+}

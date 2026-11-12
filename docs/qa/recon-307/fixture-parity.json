@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "before": "f1a67cfff7b64f208d56d8ef53443738b375cb1a",
+  "after": "d33ca3a9ceae581a7be91e04b84c30e359f73e7d",
+  "method": "Regenerated every genuine public-command checkpoint on both clean pins; exact Shared-save SHA256 equality.",
+  "fixtures": [
+    {
+      "name": "legacy-direct-warning",
+      "sharedBytes": 89849,
+      "sha256": "d74126e4d412dc00227190975f1821bee7819bc4aa231974333a6220e77e7f6d",
+      "identical": true
+    },
+    {
+      "name": "ready-at-home",
+      "sharedBytes": 95786,
+      "sha256": "23316c7f8eacbf9818d599ad0927e80db6f230994b326ea05b1f1ac7bee5a743",
+      "identical": true
+    },
+    {
+      "name": "area-circuit-mid",
+      "sharedBytes": 116048,
+      "sha256": "1e166270aef177178bd29fb1dafbb7556dcc33f50e302e0d4e17022a392a393a",
+      "identical": true
+    },
+    {
+      "name": "partial-arc-mid",
+      "sharedBytes": 117799,
+      "sha256": "3406db709fa66c20b99d31b17c3b5bf0fd582e2f7c501f403f369a0739cba558",
+      "identical": true
+    }
+  ]
+}

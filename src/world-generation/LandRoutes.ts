@@ -8,9 +8,30 @@ export interface LandRouteContext {
 export const maximumTargetCorrection = 8;
 export interface LandRouteOptions {
     strictNavigation?: boolean;
+    /** Reject edges that intersect an exclusion between otherwise free grid vertices. */
+    strictExclusions?: boolean;
     allowTargetAdjustment?: boolean;
 }
 
+/** Closed segment/rectangle intersection with optional caller-supplied clearance. */
+export function segmentIntersectsBounds(start: Point2, end: Point2, bounds: Bounds2, clearance = 0) {
+    let first = 0, last = 1;
+    for (let axis = 0; axis < 2; axis++) {
+        const origin = axis === 0 ? start.x : start.z;
+        const delta = axis === 0 ? end.x - start.x : end.z - start.z;
+        const minimum = (axis === 0 ? bounds.minX : bounds.minZ) - clearance;
+        const maximum = (axis === 0 ? bounds.maxX : bounds.maxZ) + clearance;
+        if (Math.abs(delta) < 1e-12) {
+            if (origin < minimum || origin > maximum) return false;
+            continue;
+        }
+        const a = (minimum - origin) / delta, b = (maximum - origin) / delta;
+        first = Math.max(first, Math.min(a, b));
+        last = Math.min(last, Math.max(a, b));
+        if (first > last) return false;
+    }
+    return true;
+}
 /** Bounded search on the existing grid. Diagonals cannot cut blocked cell or building corners. */
 export function planRoute(context: LandRouteContext, target: Point2, origin?: Point2, eightWay = false,
     options: LandRouteOptions = {}) {
@@ -70,6 +91,8 @@ export function planRoute(context: LandRouteContext, target: Point2, origin?: Po
     const exits = context.exclusions?.filter(b => home.x >= b.minX - .4 && home.x <= b.maxX + .4 &&
         home.z >= b.minZ - .4 && home.z <= b.maxZ + .4) ?? [];
     const connectorSafe = (p: Point2) => {
+        if (options.strictExclusions && context.exclusions?.some(bounds =>
+            !exits.includes(bounds) && segmentIntersectsBounds(home, p, bounds, .4))) return false;
         const length = Math.hypot(p.x - home.x, p.z - home.z), steps = Math.max(1, Math.ceil(length * sampleRate));
         let previous = surface.surfaceHeightAt(home.x, home.z);
         for (let i = 0; i <= steps; i++) {
@@ -150,6 +173,8 @@ export function planRoute(context: LandRouteContext, target: Point2, origin?: Po
             const nextCost = costs[i] + (diagonal ? Math.SQRT2 : 1);
             if (costs[next] <= nextCost) continue;
             const a = point(i), b = point(next);
+            if (options.strictExclusions && context.exclusions?.some(bounds =>
+                segmentIntersectsBounds(a, b, bounds, .4))) continue;
             let passable = true;
             const distance = Math.hypot(b.x - a.x, b.z - a.z);
             const samples = Math.max(1, Math.ceil(distance * sampleRate));

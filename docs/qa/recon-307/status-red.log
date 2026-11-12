@@ -1,0 +1,21 @@
+Captured stdout/stderr excerpt from tool chunk 1f323e, before the two-assignment fix.
+Command: node --test tests/recon-standoff-dom.test.mjs
+Baseline runtime: f1a67cfff7b64f208d56d8ef53443738b375cb1a
+
+✔ Recon review explains planned observation coverage before payment and Back preserves the campaign (288.7881ms)
+✔ a changed safe Recon route requires a new review even when its Food and duration are unchanged (114.104ms)
+✔ active Recon shows reached viewpoints and truthful settlement sightings, then recalls through the existing action (535.2267ms)
+✖ a valid Recon quote clears the previous target refusal without paying or changing the campaign (105.3911ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 3
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6742.3125
+
+AssertionError [ERR_ASSERTION]: A valid proposal supersedes the previous targeting error
++ actual - expected
++ 'Choose a mapped area for Recon.'
+- ''

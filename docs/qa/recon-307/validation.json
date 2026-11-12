@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "engineSource": "f1a67cfff7b64f208d56d8ef53443738b375cb1a",
+  "finalUISource": "d33ca3a9ceae581a7be91e04b84c30e359f73e7d",
+  "unchangedEngine": "git diff --exit-code confirms identical simulation, world-generation and baked catalog files",
+  "focusedTests": {
+    "pass": 162,
+    "fail": 0,
+    "skipped": 0,
+    "files": 28,
+    "log": "focused-tests-engine.log"
+  },
+  "finalUICorrection": {
+    "pass": 10,
+    "fail": 0,
+    "skipped": 0,
+    "overlap": "Includes already counted UI regressions; do not sum runs.",
+    "proof": "status-proof.json"
+  },
+  "builds": [
+    "build-engine.log",
+    "build-ui.log"
+  ],
+  "native": {
+    "baseline": {
+      "pass": 2,
+      "record": "native-baseline.json"
+    },
+    "engine": {
+      "pass": 6,
+      "record": "native-engine.json",
+      "visualFinding": "Stale targeting refusal; corrected on final UI pin."
+    },
+    "correctiveUI": {
+      "pass": 4,
+      "record": "native-ui.json"
+    },
+    "physicalSafari": "pending; owner deferred to combined offense QA"
+  },
+  "limits": "No FPS, GPU or mobile thermal claim; large-population Core overhead from #328 remains relevant."
+}

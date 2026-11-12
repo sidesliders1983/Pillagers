@@ -52,3 +52,54 @@ Validation and measurements are recorded in [the QA report](qa/island-missions/r
 ## Personal equipment (#221)
 
 The table above remains the unequipped baseline. Current Smithery-enabled Pillage adds a dispatch-time personal Weapon/Shield snapshot through the same shared resolver. Actual spear holders can raise the base 60% to at most 70%; each wooden/leather shield applies 25%/40% protection only to its wearer's existing casualty risk. Per-person probabilities and returned/lost gear are visible in mission preparation/reports. Historical unsnapshotted missions and other mission types are unchanged. See [Smithery v0.1](gameplay/SMITHERY-V01.md).
+
+## Perimeter observation for new awareness-enabled missions (#307)
+
+New Recon and Surveillance dispatches in an explicitly awareness-adopted physical
+campaign save an optional `task.recon.version = 1` itinerary. Existing in-flight
+missions, unadopted campaigns, regional missions and Pillage retain their saved
+rules. Loading a campaign does not rebuild a historical route or reroll evidence.
+
+A mapped-area click is an investigation centre. The planner evaluates eight
+bounded surrounding candidates on the existing navigation grid, clockwise and
+counterclockwise. Recon prefers the broadest feasible circuit; Surveillance uses
+at most a short three-viewpoint arc. A closed circuit returns to its first
+viewpoint. A partial arc reports its actual planned angular coverage and count.
+At least two distinct useful reachable viewpoints must fit; otherwise the offer
+and dispatch refuse atomically with a geographic explanation.
+
+For a legitimately sighted site, its fixed blueprint parcel is a conservative
+geographic exclusion, not knowledge of its current houses or inhabitants. The
+saved default safety margin is 8 metres, configurable from 0–32 metres through
+the bound physical context. Approach, connecting and homeward segments must all
+avoid the parcel and margin. Other external building exclusions affect a quote
+only when every intersected discovery cell is currently visible; our own home
+exclusions remain known. An unknown mapped-area plan never uses unseen rival
+parcels, homes, stocks or population to choose its route.
+
+The original weather-adjusted mission duration, speed and flat Food charge stay
+unchanged. Dispatch reserves each clipped outward leg, at least one observation
+tick per viewpoint and an actual safe return to each exact home. The quote shows
+total travel/return ticks and the remaining observation allocation. A changed
+route, crew, equipment or conditions requires a fresh confirmation even when
+Food is unchanged. Early Recall conservatively reverses the reached trail under
+the existing no-refund policy; it may take longer than the originally planned
+shorter homeward connection.
+
+Movement stops at saved viewpoint distances. At that canonical tick, only living
+members' actual reached positions can witness a sighting. Each sample retains
+its member positions, timestamp, coarse knowledge and source event. A later
+occluded sample cannot erase an earlier real site observation. Homecoming uses
+these dated samples, never a live remote refresh. Cancelled or failed missions
+retain their private receipts but publish no new knowledge. Detection and
+withdrawal reuse the same territorial incident and Recall controls; #307 adds no
+combat dice, equipment, casualty timing change or extra navigation engine.
+
+The existing panels show planned coverage and reached viewpoint/settlement-
+sighting counts. These describe geography and actual evidence, not a guarantee
+of stealth or a successful report. Normal save validation checks the version,
+progress, route identities and witness/event references.
+
+Source-pinned route, compatibility and desktop/touch-emulation evidence for this
+slice is recorded in [the Recon QA report](qa/recon-307/README.md). Physical
+Safari acceptance is deferred to the combined combat/offense QA.

@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "method": "Full generator run; no repack",
+  "entries": 14,
+  "allPayloadAndCanonicalMetadataIdentical": true,
+  "changedInputs": [
+    "src/world-generation/LandRoutes.ts"
+  ]
+}
