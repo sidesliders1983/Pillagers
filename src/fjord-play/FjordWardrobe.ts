@@ -24,7 +24,7 @@ export const fjordClothingSets = Object.freeze({
 export type FjordClothingSet = keyof typeof fjordClothingSets;
 
 function fieldClothing(entity: Pick<FjordEntity, 'status'>): boolean {
-    return !!entity.status.expedition || !!entity.status.encounter ||
+    return !!entity.status.combatDeath || !!entity.status.expedition || !!entity.status.encounter ||
         entity.status.presence?.duty?.role === 'mobilise';
 }
 
@@ -87,9 +87,11 @@ export function fjordToolAsset(entity: Pick<FjordEntity, 'kind' | 'dna' | 'statu
 
 /** Only items occupying a free authored hand are visible; stowed assignments remain private. */
 export function fjordVisibleEquipment(entity: Pick<FjordEntity, 'kind' | 'dna' | 'status'>): PersonalEquipment {
-    if (entity.kind !== 'persona' || !entity.dna || entity.dna.age < 16 || !entity.status.living)
+    if (entity.kind !== 'persona' || !entity.dna || entity.dna.age < 16 ||
+        (!entity.status.living && !entity.status.combatDeath))
         return { weapon: null, shield: null };
-    const gear = entity.status.equipment, tool = fjordToolAsset(entity);
+    const gear = entity.status.combatDeath?.equipment ?? entity.status.equipment;
+    const tool = fjordToolAsset(entity);
     const workHand = tool === 'none' ? undefined : characterAsset(tool).metadata?.anchor;
     return { weapon: workHand === 'socket_hand_R' ? null : gear?.weapon ?? null,
         shield: workHand === 'socket_hand_L' ? null : gear?.shield ?? null };

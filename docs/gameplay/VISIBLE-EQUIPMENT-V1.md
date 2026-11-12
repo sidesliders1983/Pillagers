@@ -50,7 +50,7 @@ shield extraction, replacement sword, new generation or paid generation is used.
 Independent rigid modules share the resident's existing 44-bone skeleton and
 measured native hand/finger grips. They do not mask or replace the tunic. Native
 Idle/Walk/Run carry posing reuses the existing clock; combat action authoring and
-its arm/finger precedence are the next animation slice (#310).
+its arm/finger precedence follow [encounter presentation](ENCOUNTER-PRESENTATION-V1.md).
 
 ## Reconciliation, portraits and privacy
 

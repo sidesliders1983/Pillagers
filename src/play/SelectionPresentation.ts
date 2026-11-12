@@ -15,7 +15,7 @@ export function projectSelection(state: SimulationState, selection: SettlementSe
         return [];
     const markers: SelectionMarker[] = [];
     const add = (kind: EntityKind, id: string, role: SelectionMarker['role']) => {
-        const entity = visible.find(e => e.kind === kind && e.id === id && e.transform);
+        const entity = visible.find(e => e.kind === kind && e.id === id && e.transform && !e.status.combatDeath);
         if (entity && !markers.some(m => m.selectionKey === entity.selectionKey))
             markers.push({ kind, id, role, selectionKey: entity.selectionKey, label: entity.label });
     };

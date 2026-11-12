@@ -308,7 +308,7 @@ export class LivingWorldController {
         this.campfire = campfire;
         this.communityReservations = communityReservations;
         this.ground = ground;
-        const active = entities.filter(e => e.transform && !e.status.aboardShip && !e.status.mining && (e.kind === 'persona' || e.kind === 'cattle'));
+        const active = entities.filter(e => e.transform && e.status.living && !e.status.aboardShip && !e.status.mining && (e.kind === 'persona' || e.kind === 'cattle'));
         // These are the same plot/anchor/path clearances applied by the scene's nature reconciler.
         const cleared = [{ ...this.campfire.transform, halfWidth: this.campfire.clearingRadius,
             halfDepth: this.campfire.clearingRadius }, ...communityReservations.map(communityHearthObstacleBounds),

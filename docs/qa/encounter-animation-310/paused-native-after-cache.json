@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "environment": {
+    "node": "v24.22.1",
+    "platform": "win32",
+    "architecture": "x64"
+  },
+  "participants": 16,
+  "warmupFrames": 10,
+  "measuredFrames": 60,
+  "sameRecordedKeyAndTick": true,
+  "medianMilliseconds": 0.12399999999979627,
+  "p95Milliseconds": 0.2807999999995445,
+  "minimumMilliseconds": 0.08939999999984138,
+  "maximumMilliseconds": 0.43249999999989086,
+  "actualScene": {
+    "participants": 16,
+    "productionModelAndMovementOwners": true,
+    "medianMilliseconds": 0.17840000000069267,
+    "p95Milliseconds": 0.3006999999997788
+  },
+  "gpuRendering": false,
+  "physicalDeviceAcceptance": false,
+  "limitation": "CPU-only production model sampling, no renderer, not a device/frame-rate certification."
+}

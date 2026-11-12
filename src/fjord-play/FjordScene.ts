@@ -841,7 +841,7 @@ export function createFjordScene(options: {
                     layer!.configureMotion(motion!);
                     layer!.advance(motion!, 0, false);
                     await rivalScene?.sync(view.rival, view.calendar.visualProgress, trees,
-                        seasonAppearance.current, presenceTickSeconds);
+                        seasonAppearance.current, presenceTickSeconds, state.time.winter * state.ticksPerWinter + state.time.tick);
                     if (!current()) return;
                     canvas.dataset.territory = JSON.stringify(inspectTerritory(state));
                     canvas.dataset.rival = JSON.stringify({
@@ -969,7 +969,7 @@ export function createFjordScene(options: {
         updateWedding(culturalFrame ?? null, running && !document.hidden);
         updateCeremonyVisuals(culturalFrame ?? null, !document.hidden);
         layer!.updateConstruction(document.hidden ? 0 : delta);
-        rivalScene?.advance(motionDelta, running);
+        rivalScene?.advance(motionDelta, running && !document.hidden);
         wildlife?.setHumans([...layer!.humanPositions(), ...(rivalScene?.humanPositions() ?? [])]);
         wildlife?.useCanonical(session.readSnapshot().wildlife, host.tickIntervalSeconds);
         wildlife?.advance(motionDelta, running, camera);

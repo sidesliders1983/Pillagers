@@ -28,8 +28,9 @@ export class RivalScene {
     setSeasonAppearance(appearance: SeasonAppearance) { this.layer.setSeasonAppearance(appearance); }
     async sync(view: ObservedRivalSettlement, season: number,
         trees: Parameters<LivingWorldController['setStandingTrees']>[0], appearance?: SeasonAppearance,
-        presenceTickSeconds = .5) {
+        presenceTickSeconds = .5, canonicalTick?: number) {
         if (this.disposed) return;
+        if (canonicalTick !== undefined) this.layer.prepareEncounterPresentation(canonicalTick, presenceTickSeconds);
         if (appearance) this.layer.setSeasonAppearance(appearance);
         else this.layer.setSeason(season);
         const knowledge = this.knowledge();

@@ -1,3 +1,4 @@
+import { projectEncounterCue, projectCombatDeaths, type FjordEncounterCue, type FjordCombatDeath } from './EncounterPresentation';
 import { equipmentFor, type PersonalEquipment } from '../simulation/Smithery';
 import { miningWorkerPosition } from '../simulation/Mining';
 import { inspectResidentPresence } from '../simulation/ResidentPresence';
@@ -89,7 +90,8 @@ export interface FjordEntity {
         mining?: boolean;
         presence?: FjordResidentPresence;
         expeditionWalking?: boolean;
-        encounter?: { id: string; phase: 'engaging' | 'withdrawing'; facing: Point2 | null };
+        encounter?: FjordEncounterCue;
+        combatDeath?: FjordCombatDeath;
         shipExpedition?: string;
         transportGroup?: string;
         aboardShip?: string;
@@ -131,25 +133,6 @@ function residentPresenceView(state: SimulationState, id: string): FjordResident
         mode: actor.mode, incidentId: actor.incidentId, facing: actor.facing ? { ...actor.facing } : null,
         suspended: actor.ceremonyUntil !== null && actor.ceremonyUntil > state.time.winter * state.ticksPerWinter + state.time.tick,
         ...(actor.duty ? { duty: { ...actor.duty } } : {}) };
-}
-/** Ready-facing is tied to a committed participant that this party can currently observe. */
-function attackerEncounterView(state: SimulationState, id: string, position: Point2 | undefined) {
-    if (!position || !state.discovery) return;
-    const entry = Object.values(state.world?.encounters?.records ?? {}).find(record =>
-        record.attackingClanId === state.clan.id && record.attackerIds.includes(id) &&
-        (record.phase === 'engaging' || record.phase === 'withdrawing'));
-    if (!entry || entry.phase !== 'engaging' && entry.phase !== 'withdrawing') return;
-    const defender = state.world!.targetClans[entry.defendingClanId];
-    const knowledge = inspectClanDiscovery(state.discovery, state.clan.id);
-    const candidates = entry.defenderIds.filter(personaId => defender.personas[personaId]?.deathWinter === null)
-        .map(personaId => ({ id: personaId, point: defender.residentPresence?.residents[personaId]?.position }))
-        .filter((candidate): candidate is { id: string; point: Point2 } => !!candidate.point &&
-            discoveryAt(knowledge, candidate.point.x, candidate.point.z) === 'visible');
-    candidates.sort((first, second) =>
-        Math.hypot(first.point.x - position.x, first.point.z - position.z) -
-        Math.hypot(second.point.x - position.x, second.point.z - position.z) || first.id.localeCompare(second.id));
-    return { id: entry.id, phase: entry.phase,
-        facing: candidates[0] ? { ...candidates[0].point } : null };
 }
 /** Custody movement exposes only the last actually crossed segment, never its remaining route. */
 function custodyPresenceView(record: CustodyRecord): FjordResidentPresence {
@@ -432,7 +415,7 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
             const key = 'persona:' + id + '@' + (plot ? plot.x + ',' + plot.z : home.id);
             const miningPoint = miner ? miningWorkerPosition(miner) : undefined;
             const partyPoint = mission ? spatialMemberPosition(mission, id) : undefined;
-            const encounter = attackerEncounterView(state, id, partyPoint);
+            const encounter = partyPoint ? projectEncounterCue(state, state.clan.id, id, partyPoint) : undefined;
             const presence = custody ? custodyPresenceView(custody) :
                 !miner && !mission && !indoorReason ? residentPresenceView(state, id) : undefined;
             const transport = mission?.transport?.phase === 'embarked' ? mission.transport : undefined;
@@ -539,6 +522,7 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
     }
     if (ground.plots.length > 0 && ground.paths.length < ground.plots.length)
         diagnostics.push('Some permanent homes have no safe connecting path; no route across water or steep terrain is drawn.');
+    entities.push(...projectCombatDeaths(state, state, world));
     const calendar = projectFjordCalendar(state.time, state.ticksPerWinter);
     const { from, to, mix } = seasonBlend(calendar.visualProgress);
     const precipitation: FjordPrecipitation = {

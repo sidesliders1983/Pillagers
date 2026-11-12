@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "scope": "Read-only supplied native clips evaluated through the actual factory, full normal tunic, low shoes, wooden spear and wooden shield before new combat layers",
+  "visualAcceptance": false,
+  "attack": {
+    "sourceClip": "Attack",
+    "durationSeconds": 2.8333332538604736,
+    "tracks": 88,
+    "sampledAges": [16, 32],
+    "samplesPerAge": 17,
+    "motionRefits": 0,
+    "maximumSleeveRatio": 3.769,
+    "severeSleeveTriangles": 0,
+    "sourceMotion": "Two-arm overhead swing. Adult right-hand height rises from 0.740m to 1.570m, then the hand extends forward and drops.",
+    "withMeasuredGripAndSourceArms": [
+      { "phase": 0, "spearAxis": [0.472, 0.856, 0.213], "tip": [0.483, 1.442, 0.483], "rightHand": [0.008, 0.740, 0.313] },
+      { "phase": 0.125, "spearAxis": [0.367, 0.261, -0.893], "tip": [0.362, 1.432, -0.508], "rightHand": [-0.024, 1.235, 0.240] },
+      { "phase": 0.25, "spearAxis": [-0.039, -0.547, -0.836], "tip": [0.147, 1.108, -0.595], "rightHand": [0.103, 1.570, 0.134] },
+      { "phase": 0.375, "spearAxis": [0.276, 0.281, -0.919], "tip": [0.462, 1.100, 0.177], "rightHand": [0.155, 0.893, 0.959] },
+      { "phase": 0.5, "spearAxis": [0.045, 0.887, -0.459], "tip": [0.150, 1.208, 0.103], "rightHand": [0.116, 0.480, 0.568] },
+      { "phase": 0.625, "spearAxis": [0.112, 0.949, -0.294], "tip": [0.216, 1.310, 0.251], "rightHand": [0.101, 0.517, 0.576] },
+      { "phase": 0.75, "spearAxis": [0.582, 0.781, 0.227], "tip": [0.509, 1.424, 0.628], "rightHand": [-0.050, 0.801, 0.410] },
+      { "phase": 0.875, "spearAxis": [0.388, 0.898, 0.209], "tip": [0.398, 1.510, 0.438], "rightHand": [-0.009, 0.764, 0.273] },
+      { "phase": 1, "spearAxis": [0.469, 0.857, 0.213], "tip": [0.481, 1.444, 0.482], "rightHand": [0.007, 0.741, 0.312] }
+    ],
+    "decision": "Reuse the existing full Attack source for unarmed strike. A spear action reuses its bounded initial torso/leg wind-up with an original-rig arm/hand correction because the measured grip plus unmodified source arms points the real spear backward during the swing. No new source animation was requested."
+  },
+  "death": {
+    "sourceClip": "Fall_Dead_from_Abdominal_Injury",
+    "durationSeconds": 3.5,
+    "sourceFinalHeadHeightMetres": 0.38926365113255396,
+    "sourceFinalHipsHeightMetres": 0.37035887671797835,
+    "sourceFinalHipsLocalZ": 0.897996723651886,
+    "sourceFinalHipsWorldZ": 0.8042515566145183,
+    "exactAndBeyondEndpointSameFallenPose": true,
+    "rootPositionUnchanged": true,
+    "decision": "Reuse the existing source death, clamp the sample endpoint, and constrain horizontal hip translation to the native anchor while retaining its vertical fall and rotations."
+  },
+  "limitations": "Numeric rig/garment evidence, not whole-garment penetration certification, GPU/device performance or owner visual approval. The source assessment preceded the new native presentation layers."
+}

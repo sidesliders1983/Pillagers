@@ -1,3 +1,4 @@
+import { projectEncounterCue, projectCombatDeaths } from './EncounterPresentation';
 import { fjordVisibleEquipment } from './FjordWardrobe';
 import { universalHumanProfile } from '../characters/UniversalHumanProfile';
 import { discoveryAt, inspectClanDiscovery } from '../simulation/ClanDiscovery';
@@ -84,7 +85,8 @@ export function inspectRivalSettlement(state: SimulationState, world: WorldBluep
     const site = visibility === 'unknown' ? undefined : { id: link.siteId, center: { ...center } };
     const target = state.world!.targetClans[link.clanId];
     const projection = prepared ?? projectRivalSettlement(target, world);
-    const visible = projection.entities.filter(entity => entity.transform &&
+    const presented = [...projection.entities, ...projectCombatDeaths(state, target, world)];
+    const visible = presented.filter(entity => entity.transform &&
         discoveryAt(knowledge, entity.transform.x, entity.transform.z) === 'visible');
     // Each actor has its own LOS cell. An unseen centre must not suppress observed outskirts.
     if (!visible.length && visibility === 'unknown') return empty;
@@ -95,7 +97,10 @@ export function inspectRivalSettlement(state: SimulationState, world: WorldBluep
         const { naming: _naming, ...dna } = entity.dna ?? {};
         const visualProfile = entity.dna ? universalHumanProfile({ ...entity.dna, age: Math.min(100, entity.dna.age) }) : undefined;
         const status: FjordEntity['status'] = { living: entity.status.living, workEligible: false,
+            combatDeath: entity.status.combatDeath ? structuredClone(entity.status.combatDeath) : undefined,
             equipment: entity.kind === 'persona' ? fjordVisibleEquipment(entity) : undefined,
+            encounter: entity.kind === 'persona' && entity.transform
+                ? projectEncounterCue(state, target.clan.id, entity.id, entity.transform) : undefined,
             inhabited: entity.kind === 'building' ? entity.status.inhabited : undefined,
             sex: entity.status.sex, stage: entity.status.stage, species: entity.status.species,
             occupation: entity.status.occupation === 'farmer' ? 'farmer' : undefined,

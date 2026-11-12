@@ -1,3 +1,4 @@
+import type { NativeEncounterPoseRequest } from '../characters/NativeEncounterPose';
 import { meshyHumanFactory, meshyAnimationClips, type MeshyHuman } from '../characters/MeshyHuman';
 import type { CulturalMotion, CulturalMotionRequest } from '../characters/CulturalMotion';
 import type { CulturalAnimationName } from '../characters/HumanCulturalAnimations';
@@ -166,6 +167,25 @@ export class FjordModels {
             actor.culturalEvent = undefined;
             actor.human?.stopPresentationClip();
         }
+    }
+    /** Recorded combat uses its canonical presentation sample rather than a render-owned clock. */
+    animateEncounter(model: Object3D, request: NativeEncounterPoseRequest): boolean {
+        const actor = this.actors.get(model);
+        if (!actor?.human || actor.embarked) return false;
+        if (actor.culturalEvent) {
+            actor.culturalEvent = undefined;
+            actor.human.stopPresentationClip();
+        }
+        if (!actor.human.sampleEncounterPose(request)) return false;
+        actor.state = request.action;
+        const previous = model.userData.motion;
+        model.userData.motion = { state: request.action, speed: 0,
+            sourceClip: actor.human.root.userData.clip,
+            clip: actor.human.animationState.animation, clipTime: actor.human.animationState.time,
+            duration: actor.human.duration, presentationTick: request.tick, eventKey: request.key,
+            generation: previous?.eventKey === request.key ? previous.generation : (previous?.generation ?? 0) + 1,
+            loop: 0 };
+        return true;
     }
     animate(model: Object3D, state: 'Idle' | 'Walk' | 'Run' | 'Talk' | 'Listen' | 'Graze' | 'Rest' | 'HumanInteraction' | 'Farm' | 'Attack' | 'Doze', speed: number, delta: number) {
         const actor = this.actors.get(model);
