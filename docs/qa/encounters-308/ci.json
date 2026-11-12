@@ -1,0 +1,14 @@
+{
+  "source": "ce7076a6e5a5b8ca55d4f7026ee5967e91f5cee7",
+  "workflow": "Character contracts",
+  "runId": 43253109848,
+  "runNumber": 924,
+  "jobId": 131304007166,
+  "conclusion": "success",
+  "tests": 1817,
+  "passed": 1807,
+  "failed": 0,
+  "skipped": 10,
+  "skips": "Existing original-source-dependent fixture tests; no new validation bypass",
+  "alphaPackage": "intentionally skipped without preview packaging label"
+}
