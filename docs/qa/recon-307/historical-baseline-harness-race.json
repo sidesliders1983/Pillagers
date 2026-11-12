@@ -1,0 +1,16 @@
+{
+  "status": "failed",
+  "source": "c5340a9310cf2c2c651a3ca6ac5fe26f5198c96d",
+  "origin": "http://127.0.0.1:5198",
+  "chrome": "157.0.8103.52",
+  "screenshots": [
+    "D:\\CodexSites\\Pillagers\\scratch\\recon-standoff-307\\scratch\\recon-307\\baseline-c5340a93-1794488232698\\failure.jpg"
+  ],
+  "scenarios": [],
+  "errors": [],
+  "startedAt": "2026-11-12T12:57:12.708Z",
+  "limitation": "Native headless Chrome desktop only; no physical device claim.",
+  "entryVersion": "Loading FjordSide…",
+  "failure": "AssertionError [ERR_ASSERTION]: The live baseline entry identifies the expected parent commit.\n    at importFile (file:///D:/CodexSites/Pillagers/scratch/recon-standoff-307/scratch/recon-307/check-baseline.mjs:48:16)\n    at async file:///D:/CodexSites/Pillagers/scratch/recon-standoff-307/scratch/recon-307/check-baseline.mjs:56:5",
+  "finishedAt": "2026-11-12T12:57:19.855Z"
+}

@@ -1,0 +1,474 @@
+{
+  "status": "passed",
+  "source": {
+    "head": "d33ca3a9ceae581a7be91e04b84c30e359f73e7d",
+    "sourceHashes": {
+      "src/simulation/TerritorialAwareness.ts": "39c7bbb07ebbded0bc22fa274746b7171371fcad32cecffe4dec10a376a829be",
+      "src/simulation/ResidentPresence.ts": "1a997fe061c418df62a389034cf58408f33904c4b314cbaf41ef207ef4207db6",
+      "src/simulation/SimulationCore.ts": "0def97b1e66d11949eb79fe112d2d2aa73c3b67068ab98d2075bf2f410bfdea1",
+      "src/fjord-play/FjordCampaign.ts": "0ad15961e27d3e15b4c55d0d439c2df1302fc7a3cee3f03dbc5c30e31cf54ebc",
+      "src/world-generation/LandRoutes.ts": "6f6b59266d5421b38c469aabf600169cee866939f26a9e7382055374e4dedf35",
+      "src/simulation/ReconRoutes.ts": "6c0e4aaa806cbf5ea13f9f8270dae0034dccc340e91ef01838b729d017255c4b",
+      "src/simulation/IslandMissions.ts": "41815276c401f78050dfbd804a5bec0dff1927a218cf7795d35cda012fa7608e",
+      "src/simulation/SpatialExpeditions.ts": "123d25dfc5f60f9aa751eedf3648424dd4c2ebb33821411b2aa2e412bf3f4982",
+      "src/fjord-play/IslandMissionPanel.ts": "1e1056c2d9a900ebada48c6bcae0010677fd683e69a9c6b36d80a9d466478a9a",
+      "src/fjord-play/ExpeditionPanel.ts": "a19f9e379df089955c4b5b5221dfe3148f1da391fe178241eba079cea24d2d27",
+      "src/fjord-play/BakedIslandCatalog.ts": "0f84407cad013b429f6a6d9a090c531c5be12dc8d1fca92d3e8aae5b3ab365d7"
+    },
+    "dirtyTracked": null,
+    "bakedSHA256": "b8a1f5444187113b825fe1ead69ec5da49b65451bae5d7a6e43d300fd7b67c39",
+    "bakedCanonicalSHA256": "c9bf0343274e49065387cf18effdda291764bf727a6cae1dab10db78eeea39a8"
+  },
+  "input": {
+    "path": "D:/CodexSites/Pillagers/scratch/territorial-awareness-306/scratch/territory-review-306/warning.original.shared.json",
+    "sha256": "d74126e4d412dc00227190975f1821bee7819bc4aa231974333a6220e77e7f6d"
+  },
+  "method": "Historical genuine production seed7 checkpoint; all new progress and Recon use public GameplaySession commands.",
+  "preparedAt": "2026-11-12T13:13:31.663Z",
+  "fixtures": [
+    {
+      "name": "legacy-direct-warning",
+      "sha256": "d74126e4d412dc00227190975f1821bee7819bc4aa231974333a6220e77e7f6d",
+      "bytes": 89849,
+      "time": {
+        "winter": 800,
+        "tick": 595
+      },
+      "historical": true
+    },
+    {
+      "name": "ready-at-home",
+      "sha256": "23316c7f8eacbf9818d599ad0927e80db6f230994b326ea05b1f1ac7bee5a743",
+      "bytes": 95786,
+      "time": {
+        "winter": 800,
+        "tick": 690
+      },
+      "groupId": "group-1",
+      "knownSite": {
+        "id": "site-2",
+        "position": {
+          "x": -10,
+          "z": -70
+        },
+        "sightedAt": 800572,
+        "sourceEventId": "event-12",
+        "reportEventId": null,
+        "knowledge": null
+      },
+      "knownSiteResult": {
+        "target": {
+          "kind": "site",
+          "siteId": "site-2"
+        },
+        "error": "No safe observation route fits this mission."
+      },
+      "full": {
+        "target": {
+          "kind": "area",
+          "position": {
+            "x": 144,
+            "z": -160
+          }
+        },
+        "quote": {
+          "duration": 250,
+          "foodCost": 4,
+          "foodPerMember": 2,
+          "successBps": 8000,
+          "casualtyBps": 200,
+          "observationRoute": {
+            "version": 1,
+            "coverage": "circuit",
+            "viewpointCount": 9,
+            "coverageDegrees": 360,
+            "travelTicks": 115,
+            "observationTicks": 135,
+            "planKey": "recon-481a5733-7268"
+          },
+          "target": {
+            "x": 144,
+            "z": -160
+          },
+          "travelTicks": 86
+        }
+      },
+      "partial": {
+        "target": {
+          "kind": "area",
+          "position": {
+            "x": 158,
+            "z": -206
+          }
+        },
+        "quote": {
+          "duration": 250,
+          "foodCost": 4,
+          "foodPerMember": 2,
+          "successBps": 8000,
+          "casualtyBps": 200,
+          "observationRoute": {
+            "version": 1,
+            "coverage": "partial",
+            "viewpointCount": 2,
+            "coverageDegrees": 45,
+            "travelTicks": 122,
+            "observationTicks": 128,
+            "planKey": "recon-e281ed3c-8320"
+          },
+          "target": {
+            "x": 158,
+            "z": -206
+          },
+          "travelTicks": 68
+        }
+      },
+      "refused": {
+        "target": {
+          "kind": "site",
+          "siteId": "site-2"
+        },
+        "error": "No safe observation route fits this mission."
+      }
+    },
+    {
+      "name": "area-circuit-mid",
+      "sha256": "1e166270aef177178bd29fb1dafbb7556dcc33f50e302e0d4e17022a392a393a",
+      "bytes": 116048,
+      "time": {
+        "winter": 800,
+        "tick": 727
+      },
+      "groupId": "group-1",
+      "target": {
+        "kind": "area",
+        "position": {
+          "x": 144,
+          "z": -160
+        }
+      },
+      "quote": {
+        "duration": 250,
+        "foodCost": 4,
+        "foodPerMember": 2,
+        "successBps": 8000,
+        "casualtyBps": 200,
+        "observationRoute": {
+          "version": 1,
+          "coverage": "circuit",
+          "viewpointCount": 9,
+          "coverageDegrees": 360,
+          "travelTicks": 115,
+          "observationTicks": 135,
+          "planKey": "recon-481a5733-7268"
+        },
+        "target": {
+          "x": 144,
+          "z": -160
+        },
+        "travelTicks": 86
+      },
+      "reached": 2,
+      "samples": [
+        {
+          "viewpoint": 0,
+          "tick": 800719,
+          "witnesses": {
+            "founder-1": {
+              "x": 128,
+              "z": -159.17157287525382
+            },
+            "founder-2": {
+              "x": 144,
+              "z": -144
+            }
+          },
+          "observedSiteId": null,
+          "sourceEventId": "event-21",
+          "knowledge": {
+            "level": "Scouted",
+            "observedAt": 800719,
+            "terrain": "Forest",
+            "resources": [],
+            "settlementName": null,
+            "opportunity": false,
+            "resistance": null
+          }
+        },
+        {
+          "viewpoint": 1,
+          "tick": 800727,
+          "witnesses": {
+            "founder-1": {
+              "x": 132.4142135623731,
+              "z": -170.4142135623731
+            },
+            "founder-2": {
+              "x": 133,
+              "z": -149
+            }
+          },
+          "observedSiteId": null,
+          "sourceEventId": "event-22",
+          "knowledge": {
+            "level": "Scouted",
+            "observedAt": 800727,
+            "terrain": "Grassland",
+            "resources": [],
+            "settlementName": null,
+            "opportunity": false,
+            "resistance": null
+          }
+        }
+      ],
+      "missionId": "explore-2"
+    },
+    {
+      "name": "partial-arc-mid",
+      "sha256": "3406db709fa66c20b99d31b17c3b5bf0fd582e2f7c501f403f369a0739cba558",
+      "bytes": 117799,
+      "time": {
+        "winter": 800,
+        "tick": 759
+      },
+      "groupId": "group-1",
+      "target": {
+        "kind": "area",
+        "position": {
+          "x": 158,
+          "z": -206
+        }
+      },
+      "quote": {
+        "duration": 250,
+        "foodCost": 4,
+        "foodPerMember": 2,
+        "successBps": 8000,
+        "casualtyBps": 200,
+        "observationRoute": {
+          "version": 1,
+          "coverage": "partial",
+          "viewpointCount": 2,
+          "coverageDegrees": 45,
+          "travelTicks": 122,
+          "observationTicks": 128,
+          "planKey": "recon-e281ed3c-8320"
+        },
+        "target": {
+          "x": 158,
+          "z": -206
+        },
+        "travelTicks": 68
+      },
+      "reached": 2,
+      "samples": [
+        {
+          "viewpoint": 0,
+          "tick": 800751,
+          "witnesses": {
+            "founder-1": {
+              "x": 169,
+              "z": -195
+            },
+            "founder-2": {
+              "x": 174,
+              "z": -206
+            }
+          },
+          "observedSiteId": null,
+          "sourceEventId": "event-22",
+          "knowledge": {
+            "level": "Scouted",
+            "observedAt": 800751,
+            "terrain": "Grassland",
+            "resources": [],
+            "settlementName": null,
+            "opportunity": false,
+            "resistance": null
+          }
+        },
+        {
+          "viewpoint": 1,
+          "tick": 800759,
+          "witnesses": {
+            "founder-1": {
+              "x": 169,
+              "z": -195
+            },
+            "founder-2": {
+              "x": 169,
+              "z": -195.00000000000003
+            }
+          },
+          "observedSiteId": null,
+          "sourceEventId": "event-23",
+          "knowledge": {
+            "level": "Scouted",
+            "observedAt": 800759,
+            "terrain": "Grassland",
+            "resources": [],
+            "settlementName": null,
+            "opportunity": false,
+            "resistance": null
+          }
+        }
+      ],
+      "missionId": "explore-2"
+    }
+  ],
+  "probes": [
+    {
+      "target": {
+        "kind": "site",
+        "siteId": "site-2"
+      },
+      "elapsedMs": 494.9987000000001,
+      "error": "No safe observation route fits this mission."
+    },
+    {
+      "target": {
+        "kind": "area",
+        "position": {
+          "x": 176,
+          "z": -176
+        }
+      },
+      "elapsedMs": 137.01910000000044,
+      "quote": {
+        "duration": 250,
+        "foodCost": 4,
+        "foodPerMember": 2,
+        "successBps": 8000,
+        "casualtyBps": 200,
+        "observationRoute": {
+          "version": 1,
+          "coverage": "partial",
+          "viewpointCount": 6,
+          "coverageDegrees": 225,
+          "travelTicks": 126,
+          "observationTicks": 124,
+          "planKey": "recon-c107f13e-8390"
+        },
+        "target": {
+          "x": 176,
+          "z": -176
+        },
+        "travelTicks": 81
+      }
+    },
+    {
+      "target": {
+        "kind": "area",
+        "position": {
+          "x": 152,
+          "z": -168
+        }
+      },
+      "elapsedMs": 80.58169999999973,
+      "quote": {
+        "duration": 250,
+        "foodCost": 4,
+        "foodPerMember": 2,
+        "successBps": 8000,
+        "casualtyBps": 200,
+        "observationRoute": {
+          "version": 1,
+          "coverage": "partial",
+          "viewpointCount": 7,
+          "coverageDegrees": 270,
+          "travelTicks": 123,
+          "observationTicks": 127,
+          "planKey": "recon-2683f688-8132"
+        },
+        "target": {
+          "x": 152,
+          "z": -168
+        },
+        "travelTicks": 77
+      }
+    },
+    {
+      "target": {
+        "kind": "area",
+        "position": {
+          "x": 144,
+          "z": -160
+        }
+      },
+      "elapsedMs": 144.64540000000034,
+      "quote": {
+        "duration": 250,
+        "foodCost": 4,
+        "foodPerMember": 2,
+        "successBps": 8000,
+        "casualtyBps": 200,
+        "observationRoute": {
+          "version": 1,
+          "coverage": "circuit",
+          "viewpointCount": 9,
+          "coverageDegrees": 360,
+          "travelTicks": 115,
+          "observationTicks": 135,
+          "planKey": "recon-481a5733-7268"
+        },
+        "target": {
+          "x": 144,
+          "z": -160
+        },
+        "travelTicks": 86
+      }
+    },
+    {
+      "target": {
+        "kind": "area",
+        "position": {
+          "x": 158,
+          "z": -206
+        }
+      },
+      "elapsedMs": 34.53030000000035,
+      "quote": {
+        "duration": 250,
+        "foodCost": 4,
+        "foodPerMember": 2,
+        "successBps": 8000,
+        "casualtyBps": 200,
+        "observationRoute": {
+          "version": 1,
+          "coverage": "partial",
+          "viewpointCount": 2,
+          "coverageDegrees": 45,
+          "travelTicks": 122,
+          "observationTicks": 128,
+          "planKey": "recon-e281ed3c-8320"
+        },
+        "target": {
+          "x": 158,
+          "z": -206
+        },
+        "travelTicks": 68
+      }
+    }
+  ],
+  "limits": "Production parcel may permit only a partial arc or refusal within the existing250tick budget. Full mapped-area circuits do not imply full known-site coverage.",
+  "geography": {
+    "bounds": {
+      "minX": -400,
+      "maxX": 400,
+      "minZ": -400,
+      "maxZ": 400
+    },
+    "points": [
+      {
+        "x": 144,
+        "z": -160,
+        "height": 1.6286063194274902
+      },
+      {
+        "x": 158,
+        "z": -206,
+        "height": 0.1808435022830963
+      }
+    ]
+  }
+}

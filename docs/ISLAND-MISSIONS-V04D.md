@@ -99,3 +99,7 @@ The existing panels show planned coverage and reached viewpoint/settlement-
 sighting counts. These describe geography and actual evidence, not a guarantee
 of stealth or a successful report. Normal save validation checks the version,
 progress, route identities and witness/event references.
+
+Source-pinned route, compatibility and desktop/touch-emulation evidence for this
+slice is recorded in [the Recon QA report](qa/recon-307/README.md). Physical
+Safari acceptance is deferred to the combined combat/offense QA.

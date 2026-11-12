@@ -1,0 +1,21 @@
+Captured stdout from tool chunks 6f862a and 582ffb, after the two-assignment fix.
+Command: node --test --test-concurrency=1 tests/recon-standoff-dom.test.mjs tests/journey-mission-dom.test.mjs tests/expedition-guided-dom.test.mjs tests/territory-ui.test.mjs
+
+✔ guided crew and supplies steps preserve the complete campaign and manual pause (315.9877ms)
+✔ packing exposes destination controls and cancelling a map choice preserves the paid pack (182.523ms)
+✔ Explore and Known places share the selected group without dispatching or changing the clock (125.9688ms)
+✔ ending a paid pack and disbanding at home each require a real confirmation with a safe Back (180.9928ms)
+✔ Show me uses the actual mission offer and confirmation; unavailable routes show real reasons without dispatch (807.1624ms)
+✔ Recon review explains planned observation coverage before payment and Back preserves the campaign (277.9879ms)
+✔ a changed safe Recon route requires a new review even when its Food and duration are unchanged (105.2019ms)
+✔ active Recon shows reached viewpoints and truthful settlement sightings, then recalls through the existing action (449.2191ms)
+✔ a valid Recon quote clears the previous target refusal without paying or changing the campaign (100.3393ms)
+✔ an actual intrusion warning offers group withdrawal without exposing enemy identities (319.5838ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 16713.9364
