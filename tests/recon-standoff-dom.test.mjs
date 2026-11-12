@@ -148,3 +148,20 @@ test('active Recon shows reached viewpoints and truthful settlement sightings, t
         assert.equal(session.readSnapshot().events.filter(event => event.type === 'ExpeditionReturned').length, 1);
     });
 });
+
+test('a valid Recon quote clears the previous target refusal without paying or changing the campaign', () => {
+    withPanel(({ session, panel }) => {
+        const before = session.saveJSON();
+        document.querySelector('[data-island-area]').click();
+        panel.chooseTarget({ x: 500, z: 248 });
+        const status = document.querySelector('#island-mission-target [role="status"]');
+        assert.match(status.textContent, /Choose a mapped area/);
+        assert.equal(document.querySelector('dialog').hasAttribute('open'), false);
+        panel.chooseTarget({ x: 128, z: 128 });
+        assert.equal(document.querySelector('dialog').hasAttribute('open'), true);
+        assert.match(document.querySelector('#island-mission-summary').textContent, /Planned observation/);
+        assert.equal(status.textContent, '', 'A valid proposal supersedes the previous targeting error');
+        assert.equal(document.querySelector('.island-mission-status').textContent, '');
+        assert.equal(session.saveJSON(), before, 'Refusal and successful review are both read-only');
+    });
+});

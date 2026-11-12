@@ -180,6 +180,8 @@ export class IslandMissionPanel {
             const priorities = type === 'Pillage' ? Array.from(this.root.querySelectorAll<HTMLInputElement>('[data-cargo]:checked'))
                 .map(input => input.dataset.cargo as Cargo) : [];
             const offer = this.session.islandMissionOffer(this.groupId, target, type, priorities, this.origins(members));
+            this.message = '';
+            this.targetBar.querySelector('[role="status"]')!.textContent = '';
             this.pending = { target, type, food: offer.foodCost, crew: members.join(','), priorities,
                 equipment: JSON.stringify(offer.equipment ?? null), duration: offer.duration,
                 observationPlan: offer.observationRoute?.planKey ?? null };
