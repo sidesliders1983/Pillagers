@@ -286,6 +286,7 @@ export function reconcileResidentPresence(state: SimulationState) {
 }
 function updateIndoorPlacement(state: SimulationState, id: string, context: PhysicalExpeditionContext,
     visitors: readonly Point2[]) {
+    if (!residentAtHome(state, id)) return false;
     const actor = state.residentPresence!.residents[id];
     const reason = personaAge(state, id) < 5 ? 'young-child' : isProvidingCare(state, id) ? 'childcare' : null;
     if (reason && !actor.placement) actor.placement = { version: 1, phase: 'indoor', reason,

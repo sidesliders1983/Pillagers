@@ -159,6 +159,8 @@ clear of bodies and blockers and an existing terrain route connects it to that h
 Movement then follows the ordinary swept route; the person cannot jump through an
 obstacle. Young children and caregivers use the same safe emergence gate. Space
 exhaustion never stops other residents, births, aging or the campaign clock.
+An existing mining or expedition return retains its actual outdoor body until home;
+a scheduled delivery does not interrupt the mining return or move the mother indoors early.
 
 Indoor people have no outdoor body, observation, response duty, expedition departure,
 mining assignment or ceremony attendance. An otherwise work-age adult waiting for
