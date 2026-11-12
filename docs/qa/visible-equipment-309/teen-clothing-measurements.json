@@ -1,0 +1,3136 @@
+{
+  "schemaVersion": 1,
+  "qualification": "Numeric native fit qualification, not visual UAT",
+  "changedGeometry": false,
+  "supportedMinimumAge": 16,
+  "scope": "Existing generic tunic/low shoes at ages16/17 with both actual supplied props; age18 controls",
+  "limitations": "No whole-garment penetration certification, authored combat-pose qualification or physical device acceptance.",
+  "bindings": [
+    {
+      "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.binding.json",
+      "measurements": "src/characters/GridTrialOutfitMeasurements.ts",
+      "previousSha256": "f3073f071dc8fa7955d55db9833a01cadd7d7b02a9ccd95a843eb03b88efeb03",
+      "candidateSha256": "1b59e5dea6a0ab5203361d593106ab94c0cbb9e1db496c3c022afa4b883e4076",
+      "moduleSha256": "79794137e3e2bb33da24429d084cec0e5fb84711fdc4fd87c1568b1dabb4d52e"
+    },
+    {
+      "path": "/character-lab/candidates/meshy-additional-005/low-shoes.binding.json",
+      "measurements": "src/characters/AdditionalOutfitMeasurements.ts",
+      "previousSha256": "ad27c923a926d59c8c1de43649129749e7856108d45cf440bb31eed35d5ded97",
+      "candidateSha256": "0a1dd118c8d6224a3783a723b9b5e0a081e1ac80e08d5a401a99953397073bb8",
+      "moduleSha256": "0bd55b3eeb8abadaecc1e9ab4d824a5beaee454833473524173e17b14d7c2e2c"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/MeshyHuman.ts",
+      "sourceSha256": "9a35bb9f1ea176c9beb578fd2816f1767d09c1571fbdcb8484aee39d3fa9188f",
+      "candidateSha256": "9a35bb9f1ea176c9beb578fd2816f1767d09c1571fbdcb8484aee39d3fa9188f"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/config/PresentationQuality.ts",
+      "sourceSha256": "9980d646775fdb5b0c28653ab270f330cdb0d386f0d4ce6b85891aa5b57556a5",
+      "candidateSha256": "9980d646775fdb5b0c28653ab270f330cdb0d386f0d4ce6b85891aa5b57556a5"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/config/GroundBlendConfig.ts",
+      "sourceSha256": "8f451369728c89e7bbd0e85e1421067a9a15e0b8eaece064f5cd606c6f3cc4bd",
+      "candidateSha256": "8f451369728c89e7bbd0e85e1421067a9a15e0b8eaece064f5cd606c6f3cc4bd"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/AssetDigest.ts",
+      "sourceSha256": "bb2edce04a03e274097e759fc05e2022edd403c19130b5a9ec17a640683568f2",
+      "candidateSha256": "bb2edce04a03e274097e759fc05e2022edd403c19130b5a9ec17a640683568f2"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/PreparedCharacterBytes.ts",
+      "sourceSha256": "1b552ad662ba2d5eb382cc8974c9cd728a0efbc43322e51bc996a14adf9ce9ec",
+      "candidateSha256": "1b552ad662ba2d5eb382cc8974c9cd728a0efbc43322e51bc996a14adf9ce9ec"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/PreparedCharacterCatalog.ts",
+      "sourceSha256": "b28567d771959206db519ff791c61b7aab16ea832513475a554160d87d1bdd02",
+      "candidateSha256": "b28567d771959206db519ff791c61b7aab16ea832513475a554160d87d1bdd02"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/CharacterPreparation.ts",
+      "sourceSha256": "2819615d87e73714e0aaed874e398dac24c7bea6c694f5504e604534e1bf8a0e",
+      "candidateSha256": "2819615d87e73714e0aaed874e398dac24c7bea6c694f5504e604534e1bf8a0e"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/core/PreparedBytes.ts",
+      "sourceSha256": "8cfd43bc94301cada8e3704e3285efc515f08b132a8dcecd6245431a0c93d4ec",
+      "candidateSha256": "8cfd43bc94301cada8e3704e3285efc515f08b132a8dcecd6245431a0c93d4ec"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/MeshyModuleRuntime.ts",
+      "sourceSha256": "3d4c99c008a6c4f556f7515acce9f2aac9a312c8f9cdc852abd6595dc4581694",
+      "candidateSha256": "3d4c99c008a6c4f556f7515acce9f2aac9a312c8f9cdc852abd6595dc4581694"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/MeshyBodyFitAdapter.ts",
+      "sourceSha256": "25a2b579e4d2d50b8af587acb4217346d977a59780134eb25a285634d31b5a3d",
+      "candidateSha256": "25a2b579e4d2d50b8af587acb4217346d977a59780134eb25a285634d31b5a3d"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/BodyFitAdapter.ts",
+      "sourceSha256": "6dc13f4941799c8a560f9067253f6edeaf7bd738474ca4cac232acd07b1fff2f",
+      "candidateSha256": "6dc13f4941799c8a560f9067253f6edeaf7bd738474ca4cac232acd07b1fff2f"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/MeshyHumanAssetIdentity.ts",
+      "sourceSha256": "cddbedb997f23933b0610fa42df58ff4b6c14fbe03e8fbcab14d14d91a66b307",
+      "candidateSha256": "cddbedb997f23933b0610fa42df58ff4b6c14fbe03e8fbcab14d14d91a66b307"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/MeshyNativeRig.ts",
+      "sourceSha256": "fc93a1e8f2b328f9929531e7e80d5df0a97794663364f7c111ff5c9a940f1dad",
+      "candidateSha256": "fc93a1e8f2b328f9929531e7e80d5df0a97794663364f7c111ff5c9a940f1dad"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/NativeHeadwearFit.ts",
+      "sourceSha256": "27f5620cb4d6c6859b369f0e9ab50496e284cbf7a3c935e3ea71611ff62bfd55",
+      "candidateSha256": "27f5620cb4d6c6859b369f0e9ab50496e284cbf7a3c935e3ea71611ff62bfd55"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/NativeFacialGeometry.ts",
+      "sourceSha256": "be4b31b4b285055a0e0ae0f1c044c33a0f83e1c32289df0c7738ffb7b18edbff",
+      "candidateSha256": "be4b31b4b285055a0e0ae0f1c044c33a0f83e1c32289df0c7738ffb7b18edbff"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/FacialIdentity.ts",
+      "sourceSha256": "da1a039ca86241fe5f8967cf2d516b7ebfd7d7e01c16b261dbcf1ae02bc1fde8",
+      "candidateSha256": "da1a039ca86241fe5f8967cf2d516b7ebfd7d7e01c16b261dbcf1ae02bc1fde8"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/seededRandom.ts",
+      "sourceSha256": "af8ad27c431893db1e86f67f146dade8e7bc548c3b1955f515a0819b0a8e4ce5",
+      "candidateSha256": "af8ad27c431893db1e86f67f146dade8e7bc548c3b1955f515a0819b0a8e4ce5"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/NativeHairRig.ts",
+      "sourceSha256": "7c8b8b3760f2ef177cfb68a60931a9b407ffbf41d513fcc0cc94c45ed6998101",
+      "candidateSha256": "7c8b8b3760f2ef177cfb68a60931a9b407ffbf41d513fcc0cc94c45ed6998101"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/BodyCoverage.ts",
+      "sourceSha256": "7adfde895002cae460ddc70d8dad94469161b945e7b27797948dadbea8c0a647",
+      "candidateSha256": "7adfde895002cae460ddc70d8dad94469161b945e7b27797948dadbea8c0a647"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/ModuleRims.ts",
+      "sourceSha256": "2c669257a4c5715d014d148e6e5ebe497122088647fd75cc79c43d929a121c3a",
+      "candidateSha256": "2c669257a4c5715d014d148e6e5ebe497122088647fd75cc79c43d929a121c3a"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/OpeningSections.ts",
+      "sourceSha256": "86ed26d359be2cd5ffd567437d5e32fe462ded417cf0f9867d2427a801255728",
+      "candidateSha256": "86ed26d359be2cd5ffd567437d5e32fe462ded417cf0f9867d2427a801255728"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/CharacterAssets.ts",
+      "sourceSha256": "fe5068d4984fb38e7e5359a2896f6bf71594c2bdc20a66dffc12dbd36bf1c597",
+      "candidateSha256": "fe5068d4984fb38e7e5359a2896f6bf71594c2bdc20a66dffc12dbd36bf1c597"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/NativeCombatEquipmentCatalog.ts",
+      "sourceSha256": "d62793457c12d026669d7ecfc365004f252e49bff4a6cfefa1441e33e6ee399d",
+      "candidateSha256": "d62793457c12d026669d7ecfc365004f252e49bff4a6cfefa1441e33e6ee399d"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/NativeCombatEquipmentMeasurements.ts",
+      "sourceSha256": "73a9386f6c82a44153d7e56337ed91f93bce48cacef95e043d671a03197b2d8a",
+      "candidateSha256": "73a9386f6c82a44153d7e56337ed91f93bce48cacef95e043d671a03197b2d8a"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/AttachmentContract.ts",
+      "sourceSha256": "e52ff883ca493c49618685f06051e78c514ceb825494247a6308eba8efa46f72",
+      "candidateSha256": "e52ff883ca493c49618685f06051e78c514ceb825494247a6308eba8efa46f72"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/MeshyModuleCatalog.ts",
+      "sourceSha256": "c2ac11e67d9d3d9fa134d1b2a177a0884b12446ef46c3150463079a6fde14347",
+      "candidateSha256": "c2ac11e67d9d3d9fa134d1b2a177a0884b12446ef46c3150463079a6fde14347"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/MeshyModuleMeasurements.ts",
+      "sourceSha256": "7bb31f5cad1cf0eedcf90f2fed6b5dc70f8bd0eb4958697d789d05c9170bc9c9",
+      "candidateSha256": "7bb31f5cad1cf0eedcf90f2fed6b5dc70f8bd0eb4958697d789d05c9170bc9c9"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/GridTrialOutfitCatalog.ts",
+      "sourceSha256": "a0cf7f6e2f55ebacac11daa3f2abc59fa8e9c1b0b5004ea62805cedb3d1b08d0",
+      "candidateSha256": "a0cf7f6e2f55ebacac11daa3f2abc59fa8e9c1b0b5004ea62805cedb3d1b08d0"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/GridTrialOutfitMeasurements.ts",
+      "sourceSha256": "da28c181f5ad585995583a18383dced1cd96a9f173daaf100b3aeba7160ef88f",
+      "candidateSha256": "de8962fbe56aee12e01f653607baa823afb812b9b836fd9ea7cb22aaa61a1930"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/AdditionalOutfitCatalog.ts",
+      "sourceSha256": "6c3f4f91bae83d33bf7b67f55741535514e75e2914ba2f042689aa7107633d59",
+      "candidateSha256": "6c3f4f91bae83d33bf7b67f55741535514e75e2914ba2f042689aa7107633d59"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/AdditionalOutfitMeasurements.ts",
+      "sourceSha256": "a63d4ca4a699b55f3bc99f534bd139b0c75776003040ddfebc063fee7b4ea076",
+      "candidateSha256": "bd25dd7f7ba1edb243141e03c4cdae2cc870c289063c47d97bfca1f3d5cb5f70"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/FishermanOutfitCatalog.ts",
+      "sourceSha256": "a6175a40fff7adf844264e53355431cffeb1c54f490580a463ab69d5b78f9b44",
+      "candidateSha256": "a6175a40fff7adf844264e53355431cffeb1c54f490580a463ab69d5b78f9b44"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/FishermanOutfitMeasurements.ts",
+      "sourceSha256": "d97114bf5d49df5e669332a20596cd43dbd364985b5fd930f1876af4fe0fb488",
+      "candidateSha256": "d97114bf5d49df5e669332a20596cd43dbd364985b5fd930f1876af4fe0fb488"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/OccupationToolCatalog.ts",
+      "sourceSha256": "139cc17820384938936946ec3e40aa47762600eee372dcccfcd6869760ae2a48",
+      "candidateSha256": "139cc17820384938936946ec3e40aa47762600eee372dcccfcd6869760ae2a48"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/OccupationToolMeasurements.ts",
+      "sourceSha256": "e3b8f1255600a5f698b2d8d575678fb068961e6f4505c498ea58ba331d00d21b",
+      "candidateSha256": "e3b8f1255600a5f698b2d8d575678fb068961e6f4505c498ea58ba331d00d21b"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/OccupationHatCatalog.ts",
+      "sourceSha256": "6fb2d932153922da618e99e66e7d5861b9bf2a41f5c8b7638d01f8a7a2a88d2b",
+      "candidateSha256": "6fb2d932153922da618e99e66e7d5861b9bf2a41f5c8b7638d01f8a7a2a88d2b"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/OccupationHatMeasurements.ts",
+      "sourceSha256": "31e64509d97e0bd606c4ea4741dd178790b61d0dce0ca4c917ec04e759fa5dcc",
+      "candidateSha256": "31e64509d97e0bd606c4ea4741dd178790b61d0dce0ca4c917ec04e759fa5dcc"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/ManualBeardCatalog.ts",
+      "sourceSha256": "2dacf185bda58ae232667fc3c7c92bd798237a0d6dcd93e1084d5f09ffb53fc6",
+      "candidateSha256": "2dacf185bda58ae232667fc3c7c92bd798237a0d6dcd93e1084d5f09ffb53fc6"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/ManualBeardMeasurements.ts",
+      "sourceSha256": "dbfbc1d114e5d5679eca78ec5cc61c9fc0e2c50166773e56753193a358bd35c2",
+      "candidateSha256": "dbfbc1d114e5d5679eca78ec5cc61c9fc0e2c50166773e56753193a358bd35c2"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/ManualHairCatalog.ts",
+      "sourceSha256": "5a24fe37d25a82d900296cd2636b6b5ba5defb3733bf878944a09ef852d9a03e",
+      "candidateSha256": "5a24fe37d25a82d900296cd2636b6b5ba5defb3733bf878944a09ef852d9a03e"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/ManualHairMeasurements.ts",
+      "sourceSha256": "74fb6a92632e10de37d7ce2b6af45afd2338e778cdceb2b61e41f67b1881d082",
+      "candidateSha256": "74fb6a92632e10de37d7ce2b6af45afd2338e778cdceb2b61e41f67b1881d082"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/FemaleHairCatalog.ts",
+      "sourceSha256": "a54932ada77c0df77300c3a9fb070db85964f435a202f4974101390f27fe4b04",
+      "candidateSha256": "a54932ada77c0df77300c3a9fb070db85964f435a202f4974101390f27fe4b04"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/FemaleHairMeasurements.ts",
+      "sourceSha256": "15bbe096e4e34d0090101fbff20eb743c906b66b1edc49e5790c8b4115406963",
+      "candidateSha256": "15bbe096e4e34d0090101fbff20eb743c906b66b1edc49e5790c8b4115406963"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/BraidedHairCatalog.ts",
+      "sourceSha256": "cb2c2f40293a929dc2db1e742ca2b60b587cec9155fc2b5d141a62e77d9e1246",
+      "candidateSha256": "cb2c2f40293a929dc2db1e742ca2b60b587cec9155fc2b5d141a62e77d9e1246"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/BraidedHairMeasurements.ts",
+      "sourceSha256": "7f4ccaa39a1392607456308b503c10fc22f9e1d392830dcf43b9131b0d8efed2",
+      "candidateSha256": "7f4ccaa39a1392607456308b503c10fc22f9e1d392830dcf43b9131b0d8efed2"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/LongHairCatalog.ts",
+      "sourceSha256": "331aeab426db9c76ffe7ebf231e8404de927473dd3cd21f7973beae3b6381bcd",
+      "candidateSha256": "331aeab426db9c76ffe7ebf231e8404de927473dd3cd21f7973beae3b6381bcd"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/LongHairMeasurements.ts",
+      "sourceSha256": "125ed440b56ac13a036acfd20cc75804ddcc5fbdaabbd30726f7d2663ff297e6",
+      "candidateSha256": "125ed440b56ac13a036acfd20cc75804ddcc5fbdaabbd30726f7d2663ff297e6"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/V04ModuleCatalog.ts",
+      "sourceSha256": "c85a2ad04a0adbb1fb30516eb33ffc22abf29ca120d685e08b2d02f72f8b8e64",
+      "candidateSha256": "c85a2ad04a0adbb1fb30516eb33ffc22abf29ca120d685e08b2d02f72f8b8e64"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/CharacterAssetMeasurements.ts",
+      "sourceSha256": "7353c2b3d0a433bc2f487f7460a813c82bfcb7b1e90819882d5bb536f223fdf5",
+      "candidateSha256": "7353c2b3d0a433bc2f487f7460a813c82bfcb7b1e90819882d5bb536f223fdf5"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/character-lab/ReferenceHeadFrames.ts",
+      "sourceSha256": "94522f2084aaff8e7cf48d526a381b30b03c08f8a0a1cea6d824d34546bfcf3a",
+      "candidateSha256": "94522f2084aaff8e7cf48d526a381b30b03c08f8a0a1cea6d824d34546bfcf3a"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/PreparedNativeOutfit.ts",
+      "sourceSha256": "4bb4386758be11e4b96754a8e850e04111d9d76b3bc5713f6f32ea25bc26c296",
+      "candidateSha256": "4bb4386758be11e4b96754a8e850e04111d9d76b3bc5713f6f32ea25bc26c296"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/CharacterPresentation.ts",
+      "sourceSha256": "d783c5a603892fbc5118cf4d8fa40c616d7e46da14bdad47d0ee32b013149d5f",
+      "candidateSha256": "d783c5a603892fbc5118cf4d8fa40c616d7e46da14bdad47d0ee32b013149d5f"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/UniversalHumanProfile.ts",
+      "sourceSha256": "5096a1946a9cf7d51e12e33986d5068d1c14f1057a4fddb5525bd22ec96be24b",
+      "candidateSha256": "5096a1946a9cf7d51e12e33986d5068d1c14f1057a4fddb5525bd22ec96be24b"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/CharacterAppearance.ts",
+      "sourceSha256": "6036cee6e1f532e491a45d304867d10a7d49fc79b241fa7b29022a03b997b406",
+      "candidateSha256": "6036cee6e1f532e491a45d304867d10a7d49fc79b241fa7b29022a03b997b406"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/CharacterDNA.ts",
+      "sourceSha256": "24bec3481d8c7c78e4d9542216292c6c012772b3aa5ad97f29b6edfcad763075",
+      "candidateSha256": "24bec3481d8c7c78e4d9542216292c6c012772b3aa5ad97f29b6edfcad763075"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/generatePhenotype.ts",
+      "sourceSha256": "921e1326954ee3ed7d7ecd78586db3e6818d23a4887a554fe28a5d19bfdfbf32",
+      "candidateSha256": "921e1326954ee3ed7d7ecd78586db3e6818d23a4887a554fe28a5d19bfdfbf32"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/heritageProfiles.ts",
+      "sourceSha256": "08bfc758372fba1b6672f7407f7e2d739598694a7a41ef1cbb9bd1c5fda54fcb",
+      "candidateSha256": "08bfc758372fba1b6672f7407f7e2d739598694a7a41ef1cbb9bd1c5fda54fcb"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/character-lab/SoftBodySpring.ts",
+      "sourceSha256": "e784e20ee64af460a3f0f947b31b1f3b8812e93e46e01a55b03b53c355c84a95",
+      "candidateSha256": "e784e20ee64af460a3f0f947b31b1f3b8812e93e46e01a55b03b53c355c84a95"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/HumanExtraAnimations.ts",
+      "sourceSha256": "94c99cf03caf5f8c9eacaa4e86a43e2735492cd222ac8ebfc2f9bd4b98fffe92",
+      "candidateSha256": "94c99cf03caf5f8c9eacaa4e86a43e2735492cd222ac8ebfc2f9bd4b98fffe92"
+    },
+    {
+      "path": "/D:/CodexSites/Pillagers/scratch/visible-equipment-309/src/characters/MeshyHumanDynamics.ts",
+      "sourceSha256": "40d841f77619d306a4936149c2cd317530a230990987572ed352536c05693222",
+      "candidateSha256": "40d841f77619d306a4936149c2cd317530a230990987572ed352536c05693222"
+    }
+  ],
+  "rows": [
+    {
+      "age": 16,
+      "sex": "male",
+      "childWeight": 0.10666666666666667,
+      "nativeBones": 44,
+      "coverageIndices": 4347,
+      "sourceIndices": 9657,
+      "frames": [
+        {
+          "clip": "Idle_02",
+          "phase": 0,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7446744036000161,
+          "sampledBounds": {
+            "min": [
+              -0.5483109310078474,
+              -0.03847208804419066,
+              -0.5410332734563321
+            ],
+            "max": [
+              0.5862217890170138,
+              1.5813349803095853,
+              0.3063320019040241
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 1,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7512997704775095,
+          "sampledBounds": {
+            "min": [
+              -0.5582507987768841,
+              -0.03806590063813209,
+              -0.5811669321561643
+            ],
+            "max": [
+              0.5966168935485513,
+              1.5615782700068337,
+              0.3124521103333877
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 2,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7572347925125698,
+          "sampledBounds": {
+            "min": [
+              -0.5702720551456687,
+              -0.037471055374925566,
+              -0.6163670322187655
+            ],
+            "max": [
+              0.6014706368762479,
+              1.5353643523514469,
+              0.31901902731211224
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 3,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7567328597686824,
+          "sampledBounds": {
+            "min": [
+              -0.5782917046929896,
+              -0.039253636494613775,
+              -0.6182233120478091
+            ],
+            "max": [
+              0.5881061574075909,
+              1.511935418068443,
+              0.32500991150909814
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 4,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7537171865537666,
+          "sampledBounds": {
+            "min": [
+              -0.5786317507160053,
+              -0.038846171490151016,
+              -0.6064958743791942
+            ],
+            "max": [
+              0.5804083987188702,
+              1.5124772391092576,
+              0.322393056075546
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 5,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7493588479222486,
+          "sampledBounds": {
+            "min": [
+              -0.5736200698472336,
+              -0.03979133318637562,
+              -0.5845274436839506
+            ],
+            "max": [
+              0.5735889846801155,
+              1.530625120722214,
+              0.3117663268388394
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 6,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.746386569451877,
+          "sampledBounds": {
+            "min": [
+              -0.5658554132301405,
+              -0.040352555079416146,
+              -0.5653527297161989
+            ],
+            "max": [
+              0.5727279389288195,
+              1.5498679454654278,
+              0.3058538186733212
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 7,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.744455515340112,
+          "sampledBounds": {
+            "min": [
+              -0.5545730255536487,
+              -0.038610142807148806,
+              -0.5470974538600599
+            ],
+            "max": [
+              0.5811648937224745,
+              1.5726077034827988,
+              0.30417891005868436
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 0,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.765881455819822,
+          "sampledBounds": {
+            "min": [
+              -0.5585147454459417,
+              -0.005939793115758221,
+              -0.6084610383785484
+            ],
+            "max": [
+              0.35560149072317665,
+              1.3056527698105889,
+              0.6062904558929625
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 1,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7631585373832648,
+          "sampledBounds": {
+            "min": [
+              -0.44851846705942156,
+              -0.0036535008698779237,
+              -0.555172607440984
+            ],
+            "max": [
+              0.38887732880815495,
+              1.2992468368341021,
+              0.6788834097677873
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 2,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.752565976573187,
+          "sampledBounds": {
+            "min": [
+              -0.369591949560197,
+              -0.025110574584146894,
+              -0.5019396003170349
+            ],
+            "max": [
+              0.4131360787025203,
+              1.2684337451563774,
+              0.7273104363227033
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 3,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7657594177714435,
+          "sampledBounds": {
+            "min": [
+              -0.410951195841476,
+              -0.024755381650246593,
+              -0.5192401014947338
+            ],
+            "max": [
+              0.4111894643902787,
+              1.2679200601091425,
+              0.7066498790372725
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 4,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7978115087725437,
+          "sampledBounds": {
+            "min": [
+              -0.5545329208210835,
+              -0.017706338192574052,
+              -0.5905091554533343
+            ],
+            "max": [
+              0.3774008666592027,
+              1.295313811602505,
+              0.5859483640475265
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 5,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.8697184123459214,
+          "sampledBounds": {
+            "min": [
+              -0.6606588114533769,
+              -0.011720265727197865,
+              -0.6105869935329474
+            ],
+            "max": [
+              0.37856953389323117,
+              1.2903112040399891,
+              0.48064091703448375
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 6,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.8950475709212613,
+          "sampledBounds": {
+            "min": [
+              -0.7084972118721988,
+              -0.03343570557495962,
+              -0.5995402569773892
+            ],
+            "max": [
+              0.3679709290386062,
+              1.2623468618605322,
+              0.4754696626885467
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 7,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.8143940818204263,
+          "sampledBounds": {
+            "min": [
+              -0.6777803079583833,
+              0.00009067715209276628,
+              -0.5869127633401071
+            ],
+            "max": [
+              0.3527906950107304,
+              1.269176731020445,
+              0.5044040968575525
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 0,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9567683908263347,
+          "sampledBounds": {
+            "min": [
+              -0.38787895460804783,
+              -0.009574776609879935,
+              -0.4110437222292277
+            ],
+            "max": [
+              0.5111154048563292,
+              1.308064955856778,
+              0.7411676774775205
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 1,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9873687203766897,
+          "sampledBounds": {
+            "min": [
+              -0.4198733819103982,
+              0.017816609589858787,
+              -0.6074378519216007
+            ],
+            "max": [
+              0.5048972874551144,
+              1.4305936946346307,
+              0.7384278530347121
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 2,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9947562272000043,
+          "sampledBounds": {
+            "min": [
+              -0.39685468525304485,
+              -0.03475195963357224,
+              -0.6226076818465782
+            ],
+            "max": [
+              0.44186811316221053,
+              1.3192653734037223,
+              0.7491107320730157
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 3,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.0808574082321467,
+          "sampledBounds": {
+            "min": [
+              -0.49803207970313407,
+              -0.020280905126127236,
+              -0.6062955466707228
+            ],
+            "max": [
+              0.41039450940421923,
+              1.2382038826914858,
+              0.6646792693954988
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 4,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.0811636900330988,
+          "sampledBounds": {
+            "min": [
+              -0.5997377891661435,
+              -0.010193455409600198,
+              -0.6732240341044277
+            ],
+            "max": [
+              0.4363395193442347,
+              1.271441489737434,
+              0.5607637981453217
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 5,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.134047483854402,
+          "sampledBounds": {
+            "min": [
+              -0.6204791505082574,
+              0.034598803014719064,
+              -0.6944951324141633
+            ],
+            "max": [
+              0.4318618383221179,
+              1.3076541500866457,
+              0.5332329582202584
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 6,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.048207810094629,
+          "sampledBounds": {
+            "min": [
+              -0.5723860668150967,
+              -0.012059798269040814,
+              -0.6153121860941629
+            ],
+            "max": [
+              0.42526397894905216,
+              1.284990977719626,
+              0.5991279244948096
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 7,
+          "checkedSleeveTriangles": 21109,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9252992446304493,
+          "sampledBounds": {
+            "min": [
+              -0.44767691284361466,
+              -0.005317305091097062,
+              -0.5075686754957405
+            ],
+            "max": [
+              0.4710694116030328,
+              1.2566563872297252,
+              0.7150613197971899
+            ]
+          }
+        }
+      ],
+      "maximumSleeveRatio": 2.134047483854402,
+      "motionRefits": 0
+    },
+    {
+      "age": 16,
+      "sex": "female",
+      "childWeight": 0.10666666666666667,
+      "nativeBones": 44,
+      "coverageIndices": 4347,
+      "sourceIndices": 9657,
+      "frames": [
+        {
+          "clip": "Idle_02",
+          "phase": 0,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.744674398321503,
+          "sampledBounds": {
+            "min": [
+              -0.5478018537069889,
+              -0.03847744415372545,
+              -0.5409751405596822
+            ],
+            "max": [
+              0.5857323348701492,
+              1.581584651781168,
+              0.30650810552072
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 1,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7512997649850994,
+          "sampledBounds": {
+            "min": [
+              -0.5577442315722666,
+              -0.03807120019800402,
+              -0.581098479859509
+            ],
+            "max": [
+              0.5961257153738687,
+              1.5618174771518845,
+              0.3126449728282828
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 2,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7572347868256903,
+          "sampledBounds": {
+            "min": [
+              -0.569770456207037,
+              -0.03747627212007054,
+              -0.6162915572215152
+            ],
+            "max": [
+              0.600979641888825,
+              1.5355995356753476,
+              0.3192247273376625
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 3,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7567328540541103,
+          "sampledBounds": {
+            "min": [
+              -0.5777968457018641,
+              -0.03925910141180977,
+              -0.6181540151919472
+            ],
+            "max": [
+              0.587619340843819,
+              1.5121864317925304,
+              0.32521052588030974
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 4,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7537171809140013,
+          "sampledBounds": {
+            "min": [
+              -0.5781394859355262,
+              -0.038851579679815666,
+              -0.6064288082466256
+            ],
+            "max": [
+              0.5799241366398749,
+              1.5127379865513824,
+              0.322589442702068
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 5,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.749358842440601,
+          "sampledBounds": {
+            "min": [
+              -0.5731267823710187,
+              -0.0397968729620386,
+              -0.5844589289843504
+            ],
+            "max": [
+              0.5731070478206339,
+              1.5308901375210766,
+              0.3119596241139777
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 6,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7463865640826672,
+          "sampledBounds": {
+            "min": [
+              -0.565358220383979,
+              -0.040358172988739664,
+              -0.5652857182484633
+            ],
+            "max": [
+              0.5722456327516136,
+              1.5501316981162603,
+              0.30604212005794507
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 7,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7444555100442276,
+          "sampledBounds": {
+            "min": [
+              -0.5540680118704557,
+              -0.03861551813675357,
+              -0.5470355199945947
+            ],
+            "max": [
+              0.5806781605120548,
+              1.5728627810446827,
+              0.30435935914837436
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 0,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.765881450695,
+          "sampledBounds": {
+            "min": [
+              -0.5581590555068392,
+              -0.005940620058983097,
+              -0.6084206633381581
+            ],
+            "max": [
+              0.35521901640512676,
+              1.3055172257802263,
+              0.6064999493910275
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 1,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.763158532219549,
+          "sampledBounds": {
+            "min": [
+              -0.44809910692101684,
+              -0.0036540095140760176,
+              -0.5552153275973566
+            ],
+            "max": [
+              0.3885221074250715,
+              1.2991025706142298,
+              0.6790124956567657
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 2,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7525659715500224,
+          "sampledBounds": {
+            "min": [
+              -0.3691506140368315,
+              -0.025114070495477196,
+              -0.5020349206405464
+            ],
+            "max": [
+              0.4128028672171389,
+              1.268282357672263,
+              0.7273862529529418
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 3,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7657594129166168,
+          "sampledBounds": {
+            "min": [
+              -0.41052926771457754,
+              -0.02475882811139629,
+              -0.5192975437725624
+            ],
+            "max": [
+              0.41084924716869264,
+              1.2677699252995038,
+              0.7067631059240953
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 4,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7978115038002709,
+          "sampledBounds": {
+            "min": [
+              -0.5541640011776557,
+              -0.017708803281514134,
+              -0.5904638212391192
+            ],
+            "max": [
+              0.37697912759027197,
+              1.2951714535446235,
+              0.586157485408459
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 5,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.869681176614969,
+          "sampledBounds": {
+            "min": [
+              -0.6603484137963118,
+              -0.01172189743141094,
+              -0.6104570679655038
+            ],
+            "max": [
+              0.37813618285325284,
+              1.2901648319750447,
+              0.48092276402954215
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 6,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.895009365492715,
+          "sampledBounds": {
+            "min": [
+              -0.7082134314672612,
+              -0.033440360516198614,
+              -0.5993793392929682
+            ],
+            "max": [
+              0.3675310340762194,
+              1.2621937063255237,
+              0.47553590859308437
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 7,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.8143940765921556,
+          "sampledBounds": {
+            "min": [
+              -0.6774854499041554,
+              0.00009068977468473793,
+              -0.5867894778351908
+            ],
+            "max": [
+              0.3524002515273842,
+              1.2690253483139975,
+              0.504679316173706
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 0,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9567267581129189,
+          "sampledBounds": {
+            "min": [
+              -0.3873892890649283,
+              -0.009576109617765154,
+              -0.41110089726886906
+            ],
+            "max": [
+              0.5106950846264131,
+              1.308436457972184,
+              0.7411902538298515
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 1,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9873256924689389,
+          "sampledBounds": {
+            "min": [
+              -0.4194413724964208,
+              0.01781909002777682,
+              -0.6075223690739839
+            ],
+            "max": [
+              0.504497684083425,
+              1.4309435573119627,
+              0.7383819151556387
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 2,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9947128115236497,
+          "sampledBounds": {
+            "min": [
+              -0.3963680351320755,
+              -0.0347567978245189,
+              -0.6226943109521074
+            ],
+            "max": [
+              0.4414842830677481,
+              1.3196109273767944,
+              0.7491305170052237
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 3,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.080810402074484,
+          "sampledBounds": {
+            "min": [
+              -0.4975948744071721,
+              -0.020283728647875303,
+              -0.6063016630756755
+            ],
+            "max": [
+              0.40997363440412177,
+              1.2380458408521635,
+              0.6648500988940087
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 4,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.081116480805296,
+          "sampledBounds": {
+            "min": [
+              -0.5993118721675996,
+              -0.010194874550331981,
+              -0.6730860425419949
+            ],
+            "max": [
+              0.43589274385954035,
+              1.2712601868397198,
+              0.5610735862603528
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 5,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.1339983052592517,
+          "sampledBounds": {
+            "min": [
+              -0.6200656950237962,
+              0.03460361988003113,
+              -0.6945917697352193
+            ],
+            "max": [
+              0.43142690384784077,
+              1.3074881653538635,
+              0.5335507405898018
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 6,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.0481623206601847,
+          "sampledBounds": {
+            "min": [
+              -0.5719774138079944,
+              -0.012061477243185424,
+              -0.6153977995162415
+            ],
+            "max": [
+              0.42483228673857587,
+              1.2848307817873528,
+              0.5993610223389808
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 7,
+          "checkedSleeveTriangles": 21097,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9252588798717647,
+          "sampledBounds": {
+            "min": [
+              -0.4472453128202979,
+              -0.005318045371152491,
+              -0.5076265876714962
+            ],
+            "max": [
+              0.47064560477349227,
+              1.256494791685541,
+              0.7151736229289154
+            ]
+          }
+        }
+      ],
+      "maximumSleeveRatio": 2.1339983052592517,
+      "motionRefits": 0
+    },
+    {
+      "age": 17,
+      "sex": "male",
+      "childWeight": 0.053333333333333344,
+      "nativeBones": 44,
+      "coverageIndices": 4347,
+      "sourceIndices": 9657,
+      "frames": [
+        {
+          "clip": "Idle_02",
+          "phase": 0,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9707407040566114,
+          "sampledBounds": {
+            "min": [
+              -0.5624932322080713,
+              -0.0389439669262972,
+              -0.5517159151613185
+            ],
+            "max": [
+              0.601030971867608,
+              1.6136414657106706,
+              0.31238758372226993
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 1,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.031848538296984,
+          "sampledBounds": {
+            "min": [
+              -0.5726316648938472,
+              -0.038517139000997416,
+              -0.5927839649251442
+            ],
+            "max": [
+              0.6116670823251945,
+              1.5935394500422126,
+              0.31848696360782125
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 2,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.0711023323936573,
+          "sampledBounds": {
+            "min": [
+              -0.5848640616467291,
+              -0.03788935295951913,
+              -0.6288001166569236
+            ],
+            "max": [
+              0.616634482850629,
+              1.5668143606983636,
+              0.3250628635127952
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 3,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.039243343997546,
+          "sampledBounds": {
+            "min": [
+              -0.5929721579958833,
+              -0.0396935406041109,
+              -0.6306796372287103
+            ],
+            "max": [
+              0.6029646889874886,
+              1.542818989734593,
+              0.3311855140098214
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 4,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.010541737328088,
+          "sampledBounds": {
+            "min": [
+              -0.5932905015706154,
+              -0.039277032935743694,
+              -0.6186842752631557
+            ],
+            "max": [
+              0.5950848278502924,
+              1.5433161565797366,
+              0.32855323637411554
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 5,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.975294868730261,
+          "sampledBounds": {
+            "min": [
+              -0.588188040375371,
+              -0.04025047752384493,
+              -0.596231864198372
+            ],
+            "max": [
+              0.5880953558306355,
+              1.5618136006688061,
+              0.3177666269563919
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 6,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.957589360886247,
+          "sampledBounds": {
+            "min": [
+              -0.5802986675685167,
+              -0.04083888605314502,
+              -0.5766214422328694
+            ],
+            "max": [
+              0.5872100396085295,
+              1.581455663562798,
+              0.3117942724582155
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 7,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.963555019303436,
+          "sampledBounds": {
+            "min": [
+              -0.5688500379404116,
+              -0.03907355453764329,
+              -0.5579348120732424
+            ],
+            "max": [
+              0.5958509302835956,
+              1.6047071967812832,
+              0.3101570321037139
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 0,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.76085962697112,
+          "sampledBounds": {
+            "min": [
+              -0.5690895849689694,
+              -0.0022683224376991266,
+              -0.6201241596721728
+            ],
+            "max": [
+              0.3641198710332204,
+              1.3347292888370785,
+              0.6189432872506766
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 1,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.758043928682773,
+          "sampledBounds": {
+            "min": [
+              -0.4562572015816756,
+              0.0016021821041682892,
+              -0.563877567315845
+            ],
+            "max": [
+              0.3971523919336694,
+              1.32826287030791,
+              0.6928908636697987
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 2,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7470990488056954,
+          "sampledBounds": {
+            "min": [
+              -0.37637490235421456,
+              -0.020863248162692808,
+              -0.5091712761359471
+            ],
+            "max": [
+              0.42184890045649354,
+              1.2969895396834519,
+              0.7421778294972693
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 3,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7607334014092846,
+          "sampledBounds": {
+            "min": [
+              -0.41880606101455736,
+              -0.022321687074155393,
+              -0.5285335115132699
+            ],
+            "max": [
+              0.4198631471043145,
+              1.2964661417146914,
+              0.721300051319078
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 4,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.793926654416462,
+          "sampledBounds": {
+            "min": [
+              -0.5659789566940203,
+              -0.016950252679476478,
+              -0.602845601999668
+            ],
+            "max": [
+              0.3870497299023936,
+              1.3242592861437683,
+              0.5980766755452064
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 5,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.8725795989124252,
+          "sampledBounds": {
+            "min": [
+              -0.6742329519331138,
+              -0.011180710764441722,
+              -0.6243001215453502
+            ],
+            "max": [
+              0.3881829898576338,
+              1.3192152285654999,
+              0.4901804585420017
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 6,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.898705968800827,
+          "sampledBounds": {
+            "min": [
+              -0.7229683950862934,
+              -0.031102188383201317,
+              -0.613377057736576
+            ],
+            "max": [
+              0.3774786319053724,
+              1.2908341096442515,
+              0.4956053593320186
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 7,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.811125353471503,
+          "sampledBounds": {
+            "min": [
+              -0.6910716592295947,
+              0.002803477204383892,
+              -0.5997762801528594
+            ],
+            "max": [
+              0.361061717733194,
+              1.2977716781525284,
+              0.5147721738196543
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 0,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9623215798428608,
+          "sampledBounds": {
+            "min": [
+              -0.3978250308917962,
+              -0.007190716590774981,
+              -0.4241192388016929
+            ],
+            "max": [
+              0.5223033822135966,
+              1.3406614288293333,
+              0.7537384214605701
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 1,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.993867460853292,
+          "sampledBounds": {
+            "min": [
+              -0.42975618814433403,
+              0.024382345731799236,
+              -0.6264068168367825
+            ],
+            "max": [
+              0.5161453201206533,
+              1.4666219914240368,
+              0.7492354068013481
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 2,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.0014830612546906,
+          "sampledBounds": {
+            "min": [
+              -0.40674011203551463,
+              -0.03147734124304637,
+              -0.6336586165896931
+            ],
+            "max": [
+              0.45143328375214814,
+              1.3509722626670004,
+              0.7619570143326326
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 3,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.09023219070619,
+          "sampledBounds": {
+            "min": [
+              -0.5076755765519849,
+              -0.01799386650626612,
+              -0.6169642917657183
+            ],
+            "max": [
+              0.4182133948747671,
+              1.2663272723714452,
+              0.6770114711792582
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 4,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.090573079717593,
+          "sampledBounds": {
+            "min": [
+              -0.6108817808518471,
+              -0.005422093505577541,
+              -0.6872761422910574
+            ],
+            "max": [
+              0.4439618198121683,
+              1.3003979300249926,
+              0.5709911443090205
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 5,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.145038901423147,
+          "sampledBounds": {
+            "min": [
+              -0.6324974071668806,
+              0.0417911990209598,
+              -0.7183863424203467
+            ],
+            "max": [
+              0.44047932693604847,
+              1.3371205538575461,
+              0.5423917497137936
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 6,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.0565829919448975,
+          "sampledBounds": {
+            "min": [
+              -0.5836682283708822,
+              -0.0039426154441614125,
+              -0.6190133807010987
+            ],
+            "max": [
+              0.432963392564597,
+              1.3138844535304068,
+              0.6096215595930865
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 7,
+          "checkedSleeveTriangles": 21215,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9298744830297179,
+          "sampledBounds": {
+            "min": [
+              -0.45610502030146205,
+              -0.003145390385248279,
+              -0.5134439257245723
+            ],
+            "max": [
+              0.48122937263224996,
+              1.2851754710012895,
+              0.7282212844850993
+            ]
+          }
+        }
+      ],
+      "maximumSleeveRatio": 2.145038901423147,
+      "motionRefits": 0
+    },
+    {
+      "age": 17,
+      "sex": "female",
+      "childWeight": 0.053333333333333344,
+      "nativeBones": 44,
+      "coverageIndices": 4347,
+      "sourceIndices": 9657,
+      "frames": [
+        {
+          "clip": "Idle_02",
+          "phase": 0,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.972632266936772,
+          "sampledBounds": {
+            "min": [
+              -0.5619510661206374,
+              -0.03894963668852726,
+              -0.5516539738049319
+            ],
+            "max": [
+              0.6005097106786353,
+              1.6139078574542847,
+              0.31257532787633036
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 1,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.0338845783597232,
+          "sampledBounds": {
+            "min": [
+              -0.5720921754440574,
+              -0.03852274662235322,
+              -0.592711045714706
+            ],
+            "max": [
+              0.6111439890458338,
+              1.593794692202806,
+              0.3186925526111675
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 2,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.0732427408894276,
+          "sampledBounds": {
+            "min": [
+              -0.5843298652249732,
+              -0.03789486918298057,
+              -0.628719730608277
+            ],
+            "max": [
+              0.6161115876956823,
+              1.567065313004718,
+              0.3252821202310522
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 3,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.0413405842908974,
+          "sampledBounds": {
+            "min": [
+              -0.5924451366676935,
+              -0.039699319495011265,
+              -0.6306058352884444
+            ],
+            "max": [
+              0.6024462413553905,
+              1.543086801092135,
+              0.33139935163697815
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 4,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.0125892103853307,
+          "sampledBounds": {
+            "min": [
+              -0.5927662415792987,
+              -0.03928275118827196,
+              -0.6186128453983348
+            ],
+            "max": [
+              0.594569098545562,
+              1.5435943361546867,
+              0.3287625723221536
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 5,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9772721452020403,
+          "sampledBounds": {
+            "min": [
+              -0.5876626911110312,
+              -0.040256337497882724,
+              -0.5961588817014782
+            ],
+            "max": [
+              0.5875820997279704,
+              1.5620963310839213,
+              0.3179726763456262
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 6,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.959515520244153,
+          "sampledBounds": {
+            "min": [
+              -0.579769158900539,
+              -0.04084483169219767,
+              -0.5765500528943799
+            ],
+            "max": [
+              0.586696388706476,
+              1.5817370501836083,
+              0.3119950041527421
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 7,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9654543957490755,
+          "sampledBounds": {
+            "min": [
+              -0.5683121998238047,
+              -0.03907924316622925,
+              -0.5578688242486849
+            ],
+            "max": [
+              0.5953325659893128,
+              1.6049793459771486,
+              0.3103494033797631
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 0,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7608596217225017,
+          "sampledBounds": {
+            "min": [
+              -0.5687106043502798,
+              -0.002268652679039921,
+              -0.6200825276573183
+            ],
+            "max": [
+              0.36371299976089344,
+              1.3345853337091864,
+              0.6191653121831978
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 1,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7580439233914935,
+          "sampledBounds": {
+            "min": [
+              -0.4558103296970546,
+              0.001602415360487993,
+              -0.5639247190359674
+            ],
+            "max": [
+              0.3967744585724846,
+              1.3281096301423665,
+              0.693026681912013
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 2,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7470990436610718,
+          "sampledBounds": {
+            "min": [
+              -0.37590476159402714,
+              -0.020866285595569693,
+              -0.5092743348082714
+            ],
+            "max": [
+              0.42149437741479107,
+              1.2968287309476516,
+              0.7422569518004396
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 3,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.760733396436954,
+          "sampledBounds": {
+            "min": [
+              -0.41835667802407095,
+              -0.022324936837726305,
+              -0.528595826398309
+            ],
+            "max": [
+              0.41950095884022826,
+              1.2963066643927101,
+              0.7214196967652192
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 4,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7939266493204666,
+          "sampledBounds": {
+            "min": [
+              -0.5655861005756807,
+              -0.01695272042853724,
+              -0.6027981805034068
+            ],
+            "max": [
+              0.3866006364473211,
+              1.3241080777865346,
+              0.5982989364935696
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 5,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.872540686684614,
+          "sampledBounds": {
+            "min": [
+              -0.6739025108005325,
+              -0.011182338539453947,
+              -0.6241623873383083
+            ],
+            "max": [
+              0.38772180246172994,
+              1.3190597481130244,
+              0.49048044735755886
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 6,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.898666012699,
+          "sampledBounds": {
+            "min": [
+              -0.722666304653318,
+              -0.031106716479322383,
+              -0.6132062772177399
+            ],
+            "max": [
+              0.3770105138599825,
+              1.2906714182093575,
+              0.4956775663940043
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 7,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.8111253481085061,
+          "sampledBounds": {
+            "min": [
+              -0.6907574570439395,
+              0.0028038853544340957,
+              -0.599645940490513
+            ],
+            "max": [
+              0.36064657761410335,
+              1.2976108671730444,
+              0.515064777972116
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 0,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.962277960569706,
+          "sampledBounds": {
+            "min": [
+              -0.39730411882160344,
+              -0.0071917634719122076,
+              -0.42418093228250553
+            ],
+            "max": [
+              0.5218561246128783,
+              1.3410579706625145,
+              0.7537596211701414
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 1,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9938223433097104,
+          "sampledBounds": {
+            "min": [
+              -0.4292978660612791,
+              0.02438589549860563,
+              -0.6264979608906854
+            ],
+            "max": [
+              0.5157200610726063,
+              1.4669951958229837,
+              0.749183408092493
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 2,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.001437526660582,
+          "sampledBounds": {
+            "min": [
+              -0.40622263748754595,
+              -0.031481923956790725,
+              -0.6337508164160797
+            ],
+            "max": [
+              0.45102480582617976,
+              1.3513412221535273,
+              0.761976121367315
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 3,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.0901827849610477,
+          "sampledBounds": {
+            "min": [
+              -0.5072103222036881,
+              -0.017996486192611082,
+              -0.6169716003761756
+            ],
+            "max": [
+              0.4177658960287135,
+              1.266159371799055,
+              0.6771925494591572
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 4,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.0905234361493648,
+          "sampledBounds": {
+            "min": [
+              -0.6104283435247561,
+              -0.005422882897036317,
+              -0.6871300035456285
+            ],
+            "max": [
+              0.4434871574047656,
+              1.300205341097615,
+              0.571320471231653
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 5,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.1449871484508374,
+          "sampledBounds": {
+            "min": [
+              -0.6320573597911279,
+              0.04179728330180396,
+              -0.7184908775572186
+            ],
+            "max": [
+              0.44001782281222146,
+              1.3369442554223965,
+              0.5427295511700719
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 6,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.0565352222235402,
+          "sampledBounds": {
+            "min": [
+              -0.583233279002338,
+              -0.00394318944188593,
+              -0.6191034483620099
+            ],
+            "max": [
+              0.4325045801816299,
+              1.3137142397315318,
+              0.6098686394390707
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 7,
+          "checkedSleeveTriangles": 21183,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.929832225156733,
+          "sampledBounds": {
+            "min": [
+              -0.45564573469062936,
+              -0.003145848316850386,
+              -0.5135071870869786
+            ],
+            "max": [
+              0.4807784905339214,
+              1.2850242108903356,
+              0.7283387942426113
+            ]
+          }
+        }
+      ],
+      "maximumSleeveRatio": 2.1449871484508374,
+      "motionRefits": 0
+    },
+    {
+      "age": 18,
+      "sex": "male",
+      "childWeight": 0,
+      "nativeBones": 44,
+      "coverageIndices": 4347,
+      "sourceIndices": 9657,
+      "frames": [
+        {
+          "clip": "Idle_02",
+          "phase": 0,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9549332031118,
+          "sampledBounds": {
+            "min": [
+              -0.5767820440214366,
+              -0.039407604764356556,
+              -0.5624045322622089
+            ],
+            "max": [
+              0.6159438580234773,
+              1.645997360561646,
+              0.3184464293227559
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 1,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.015114041332887,
+          "sampledBounds": {
+            "min": [
+              -0.5871192167491943,
+              -0.038959752574764035,
+              -0.6044116683536298
+            ],
+            "max": [
+              0.6268221600917445,
+              1.6255511756047871,
+              0.3245208897250695
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 2,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.0537485696203563,
+          "sampledBounds": {
+            "min": [
+              -0.5995620937196744,
+              -0.038298382195436693,
+              -0.641247885324336
+            ],
+            "max": [
+              0.6319038052724866,
+              1.5983148283318622,
+              0.33110221438980736
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 3,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.022335394439281,
+          "sampledBounds": {
+            "min": [
+              -0.6077566208188325,
+              -0.0401237867739277,
+              -0.6431502632156836
+            ],
+            "max": [
+              0.617927308983243,
+              1.5737496494401402,
+              0.3373571001709691
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 4,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9939947975632464,
+          "sampledBounds": {
+            "min": [
+              -0.6080524112526972,
+              -0.03969820211827824,
+              -0.6308857586896108
+            ],
+            "max": [
+              0.6098643581459532,
+              1.5742005037516404,
+              0.3347104621948582
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 5,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.959177683089873,
+          "sampledBounds": {
+            "min": [
+              -0.6028593621123792,
+              -0.04070022890423287,
+              -0.6079476235569093
+            ],
+            "max": [
+              0.602703690960659,
+              1.5930474401024,
+              0.3237653608958282
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 6,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9417396388066308,
+          "sampledBounds": {
+            "min": [
+              -0.5948460501181063,
+              -0.041316314238326705,
+              -0.5878995725356191
+            ],
+            "max": [
+              0.6017938765548795,
+              1.6130895260733438,
+              0.3177348075865499
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 7,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9477479074405755,
+          "sampledBounds": {
+            "min": [
+              -0.5832327577988888,
+              -0.03952839018844811,
+              -0.5687792619109189
+            ],
+            "max": [
+              0.6106399158420195,
+              1.636854964162214,
+              0.3161373443466282
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 0,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7558386857274508,
+          "sampledBounds": {
+            "min": [
+              -0.579626800150365,
+              0.0017291764225591047,
+              -0.6317375555158035
+            ],
+            "max": [
+              0.37266950342817823,
+              1.3639189955388413,
+              0.6316410460623746
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 1,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7529297085795181,
+          "sampledBounds": {
+            "min": [
+              -0.46392862554928727,
+              0.00735213853107675,
+              -0.572446192234714
+            ],
+            "max": [
+              0.4054274003006444,
+              1.3573939206745174,
+              0.706927719611788
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 2,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7416311248444767,
+          "sampledBounds": {
+            "min": [
+              -0.3860652203301451,
+              -0.01616676350420098,
+              -0.5162570546713618
+            ],
+            "max": [
+              0.43056312052917606,
+              1.3256644195590408,
+              0.757070548165925
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 3,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7557082491774922,
+          "sampledBounds": {
+            "min": [
+              -0.42662269160427824,
+              -0.019667579693905646,
+              -0.5377641897833626
+            ],
+            "max": [
+              0.42854079764367886,
+              1.3251314314560505,
+              0.7359892082595884
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 4,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7900515879272672,
+          "sampledBounds": {
+            "min": [
+              -0.5774198322100571,
+              -0.016112422971973128,
+              -0.615191192526439
+            ],
+            "max": [
+              0.39676322564312105,
+              1.3533200551616962,
+              0.6102453426337033
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 5,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.875450858384003,
+          "sampledBounds": {
+            "min": [
+              -0.6878071950765172,
+              -0.010928593940993547,
+              -0.6380628167503435
+            ],
+            "max": [
+              0.3978464318110119,
+              1.3482361843533315,
+              0.5022024331693108
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 6,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9023747924094017,
+          "sampledBounds": {
+            "min": [
+              -0.7374401967625828,
+              -0.028503949928782434,
+              -0.627276229309012
+            ],
+            "max": [
+              0.3870371596903624,
+              1.3194420178711186,
+              0.5161460893744828
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 7,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.807872546611825,
+          "sampledBounds": {
+            "min": [
+              -0.7043444092851853,
+              0.005744996377355486,
+              -0.6126649065836877
+            ],
+            "max": [
+              0.37017081142183006,
+              1.3264866909599327,
+              0.5251790872979858
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 0,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.967883168954403,
+          "sampledBounds": {
+            "min": [
+              -0.4078217145031193,
+              -0.004541561079898265,
+              -0.43733633225909174
+            ],
+            "max": [
+              0.5334980643891399,
+              1.3735305854546749,
+              0.7661875076991014
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 1,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.0003737226393037,
+          "sampledBounds": {
+            "min": [
+              -0.4395454659450142,
+              0.03140699177025284,
+              -0.6454131602460728
+            ],
+            "max": [
+              0.5274092171612448,
+              1.502955507867207,
+              0.7598299910430422
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 2,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.0082172231347015,
+          "sampledBounds": {
+            "min": [
+              -0.41666427660761,
+              -0.027792577183836986,
+              -0.6431309761441566
+            ],
+            "max": [
+              0.4610037083705911,
+              1.382923912826391,
+              0.7746972017599826
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 3,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.099610659381337,
+          "sampledBounds": {
+            "min": [
+              -0.517298682464457,
+              -0.015449491795025527,
+              -0.6275481011191256
+            ],
+            "max": [
+              0.4259640854537933,
+              1.2945748305816913,
+              0.6893117841852161
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 4,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.099987581026284,
+          "sampledBounds": {
+            "min": [
+              -0.6219811509422027,
+              -0.0003137488347276611,
+              -0.7013072606123079
+            ],
+            "max": [
+              0.45204801983181647,
+              1.3294817828659442,
+              0.5811854812033056
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 5,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.156030474827561,
+          "sampledBounds": {
+            "min": [
+              -0.644489816182183,
+              0.04948067917840718,
+              -0.7420201270208668
+            ],
+            "max": [
+              0.44897502189618993,
+              1.3667090567299833,
+              0.5514987262747071
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 6,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.0649635512909352,
+          "sampledBounds": {
+            "min": [
+              -0.5949387089425144,
+              0.004872966961882615,
+              -0.6204856575726585
+            ],
+            "max": [
+              0.44057428962750783,
+              1.3428979403208594,
+              0.620057929975109
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 7,
+          "checkedSleeveTriangles": 21304,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9344586236554149,
+          "sampledBounds": {
+            "min": [
+              -0.46450882136129884,
+              -0.0007289989802539143,
+              -0.5190929877899394
+            ],
+            "max": [
+              0.4913871417322962,
+              1.3138519184105577,
+              0.7413298996059989
+            ]
+          }
+        }
+      ],
+      "maximumSleeveRatio": 2.156030474827561,
+      "motionRefits": 0
+    },
+    {
+      "age": 18,
+      "sex": "female",
+      "childWeight": 0,
+      "nativeBones": 44,
+      "coverageIndices": 4347,
+      "sourceIndices": 9657,
+      "frames": [
+        {
+          "clip": "Idle_02",
+          "phase": 0,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9568442573296108,
+          "sampledBounds": {
+            "min": [
+              -0.5762061362692592,
+              -0.039413590974331836,
+              -0.5623387043520398
+            ],
+            "max": [
+              0.6153901628232414,
+              1.6462808509323372,
+              0.3186460628109823
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 1,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.017172101866063,
+          "sampledBounds": {
+            "min": [
+              -0.5865461557958754,
+              -0.03896567075379709,
+              -0.6043341923521227
+            ],
+            "max": [
+              0.6262665229995497,
+              1.6258228171130922,
+              0.3247394751347866
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 2,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.055912876635058,
+          "sampledBounds": {
+            "min": [
+              -0.5989946571451321,
+              -0.038304199909067624,
+              -0.6411624907963025
+            ],
+            "max": [
+              0.6313483818348409,
+              1.5985819082613644,
+              0.33133531366341173
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 3,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.0244559885757214,
+          "sampledBounds": {
+            "min": [
+              -0.6071968027810488,
+              -0.040129881775460605,
+              -0.6430718672065239
+            ],
+            "max": [
+              0.6173766072323807,
+              1.5740346373400478,
+              0.3375844400540295
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 4,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9960646492230962,
+          "sampledBounds": {
+            "min": [
+              -0.6074955248288383,
+              -0.03970423247141608,
+              -0.6308098785388885
+            ],
+            "max": [
+              0.6093165415820379,
+              1.5744965070679406,
+              0.3349330211438566
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 5,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9611758237617503,
+          "sampledBounds": {
+            "min": [
+              -0.6023013185142768,
+              -0.040706411470150194,
+              -0.6078700836802431
+            ],
+            "max": [
+              0.602158498191091,
+              1.593348281688537,
+              0.323984432541097
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 6,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9436856470969002,
+          "sampledBounds": {
+            "min": [
+              -0.5942835880512031,
+              -0.04132259039062558,
+              -0.5878237167525507
+            ],
+            "max": [
+              0.6012482628561207,
+              1.6133889428954387,
+              0.31794823367041347
+            ]
+          }
+        },
+        {
+          "clip": "Idle_02",
+          "phase": 7,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.949666745101475,
+          "sampledBounds": {
+            "min": [
+              -0.5826614476091072,
+              -0.039534394746321255,
+              -0.568709137342233
+            ],
+            "max": [
+              0.610089296878383,
+              1.6371445702778205,
+              0.31634189208472235
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 0,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7558386803626715,
+          "sampledBounds": {
+            "min": [
+              -0.5792240551763456,
+              0.001729439091254819,
+              -0.6316947817815751
+            ],
+            "max": [
+              0.37223780450008176,
+              1.3637665026448424,
+              0.631875733197918
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 1,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7529297031681896,
+          "sampledBounds": {
+            "min": [
+              -0.46345368098794015,
+              0.007353255355274535,
+              -0.5724980291122442
+            ],
+            "max": [
+              0.40502634653724595,
+              1.357231569211673,
+              0.707070225901595
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 2,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.741631119585826,
+          "sampledBounds": {
+            "min": [
+              -0.38552103892281286,
+              -0.016169219316486853,
+              -0.5163681588303259
+            ],
+            "max": [
+              0.4301869015810184,
+              1.325494044932646,
+              0.7571528687103267
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 3,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7557082440948697,
+          "sampledBounds": {
+            "min": [
+              -0.42614531203342765,
+              -0.019670567297328075,
+              -0.5378315888884776
+            ],
+            "max": [
+              0.42815622068568887,
+              1.32496246822769,
+              0.7361152985382179
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 4,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.7900515827147272,
+          "sampledBounds": {
+            "min": [
+              -0.5770025721602065,
+              -0.016114870529665867,
+              -0.6151417311949672
+            ],
+            "max": [
+              0.3962862469155863,
+              1.3531598615046554,
+              0.6104809537806504
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 5,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.875410284807941,
+          "sampledBounds": {
+            "min": [
+              -0.687456328262539,
+              -0.010930254049651086,
+              -0.637917185732044
+            ],
+            "max": [
+              0.3973569024999205,
+              1.348071455755037,
+              0.5022787755241982
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 6,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9023330986601152,
+          "sampledBounds": {
+            "min": [
+              -0.7371194484146706,
+              -0.0285082798201501,
+              -0.6270954532686507
+            ],
+            "max": [
+              0.3865403108558162,
+              1.3192696436680658,
+              0.5162245498390846
+            ]
+          }
+        },
+        {
+          "clip": "Walking",
+          "phase": 7,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.8078725411214351,
+          "sampledBounds": {
+            "min": [
+              -0.7040104630767076,
+              0.00574586906878316,
+              -0.612527473050862
+            ],
+            "max": [
+              0.3696729620698444,
+              1.3263163061689491,
+              0.5254893649099809
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 0,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.967837572454928,
+          "sampledBounds": {
+            "min": [
+              -0.4072690058668374,
+              -0.004542250966961758,
+              -0.43740271044729095
+            ],
+            "max": [
+              0.5330233818662558,
+              1.3739527282024233,
+              0.7662070061452166
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 1,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.000326522288553,
+          "sampledBounds": {
+            "min": [
+              -0.43906049177436857,
+              0.031411762644548695,
+              -0.6455111463242141
+            ],
+            "max": [
+              0.5269578337137861,
+              1.5033525423511203,
+              0.7597714995968315
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 2,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.0081695756340268,
+          "sampledBounds": {
+            "min": [
+              -0.41611545833179725,
+              -0.027796799014198185,
+              -0.6432286155473479
+            ],
+            "max": [
+              0.46057013280015896,
+              1.38331681986111,
+              0.7747154141000885
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 3,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.099558851307344,
+          "sampledBounds": {
+            "min": [
+              -0.5168048712341013,
+              -0.015451838650223596,
+              -0.6275567020509343
+            ],
+            "max": [
+              0.42548952486527897,
+              1.2943969174268923,
+              0.6895032207238291
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 4,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.0999354971709168,
+          "sampledBounds": {
+            "min": [
+              -0.6214996761499727,
+              -0.00031379649639091955,
+              -0.7011528953303472
+            ],
+            "max": [
+              0.45154514392915623,
+              1.3292777352260385,
+              0.5815346634181604
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 5,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.155976138693914,
+          "sampledBounds": {
+            "min": [
+              -0.6440226882033689,
+              0.04948819553439852,
+              -0.7421327881707256
+            ],
+            "max": [
+              0.44848661264396755,
+              1.3665222885197446,
+              0.5518568682095724
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 6,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 2.064913502339903,
+          "sampledBounds": {
+            "min": [
+              -0.5944769782482795,
+              0.00487370718776866,
+              -0.6205798570409755
+            ],
+            "max": [
+              0.4400879284998137,
+              1.342717549762769,
+              0.620319140019261
+            ]
+          }
+        },
+        {
+          "clip": "Running",
+          "phase": 7,
+          "checkedSleeveTriangles": 21292,
+          "stretchedSleeveTriangles": 0,
+          "maximumRatio": 1.9344144842404698,
+          "sampledBounds": {
+            "min": [
+              -0.4640213519176654,
+              -0.000729109720449303,
+              -0.5191618559352376
+            ],
+            "max": [
+              0.4909087028857647,
+              1.31369176780512,
+              0.7414524958745462
+            ]
+          }
+        }
+      ],
+      "maximumSleeveRatio": 2.155976138693914,
+      "motionRefits": 0
+    }
+  ]
+}

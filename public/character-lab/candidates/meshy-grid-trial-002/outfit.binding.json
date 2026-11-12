@@ -6,7 +6,14 @@
   "recipe": {
     "id": "accepted-grid-trial-preparation",
     "version": 1,
-    "blender": "not-used"
+    "blender": "not-used",
+    "ageRangeQualification": {
+      "id": "field-teen-native-16-17",
+      "version": 1,
+      "predecessorBindingSha256": "f3073f071dc8fa7955d55db9833a01cadd7d7b02a9ccd95a843eb03b88efeb03",
+      "geometryChanged": false,
+      "qualification": "Native factory geometry and sleeve-stretch checks; visual owner QA remains pending"
+    }
   },
   "coordinateFrame": {
     "up": "+Y",
@@ -135,7 +142,7 @@
     }
   },
   "supportedAges": {
-    "min": 18,
+    "min": 16,
     "max": 100
   },
   "lods": {

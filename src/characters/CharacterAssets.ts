@@ -1,3 +1,5 @@
+import { nativeCombatEquipmentAssets } from './NativeCombatEquipmentCatalog';
+import { nativeCombatEquipmentMeasurements } from './NativeCombatEquipmentMeasurements';
 import { ModuleMetadata, appearanceMetadata, validateModule } from './AttachmentContract';
 import {meshyCharacterModules} from './MeshyModuleCatalog';
 import {gridTrialOutfitAsset, gridTrialOutfitPath} from './GridTrialOutfitCatalog';
@@ -60,7 +62,7 @@ export const availableHairStyles=characterAssets.filter(asset=>asset.type==='hai
 export const availableBeardStyles=characterAssets.filter(asset=>asset.type==='beard'&&!asset.scope).map(asset=>asset.style as BeardStyle);
 /** Lab discovery adds explicit review candidates without publishing them to the world manifest. */
 export function availableCharacterAssets(): readonly CharacterAsset[] {
-    return [...characterAssets, gridTrialOutfitAsset, ...additionalOutfitAssets, ...fishermanOutfitAssets, ...occupationHatAssets, ...occupationToolAssets, ...manualHairAssets, ...femaleHairAssets, ...manualBeardAssets, braidedHairAsset, longHairAsset];
+    return [...characterAssets, gridTrialOutfitAsset, ...additionalOutfitAssets, ...fishermanOutfitAssets, ...occupationHatAssets, ...occupationToolAssets, ...nativeCombatEquipmentAssets, ...manualHairAssets, ...femaleHairAssets, ...manualBeardAssets, braidedHairAsset, longHairAsset];
 }
 export function characterAsset(id:string){const asset=availableCharacterAssets().find(asset=>asset.id===id);if(!asset)throw new Error(`Unknown character asset: ${id}`);return asset;}
 /** Compatibility is source identity, not a family name or a fallback fit guess. */
@@ -74,6 +76,7 @@ export function assetMeasurement(path: string): AssetMeasurement {
         ?? (path === longHairRecord.path ? longHairMeasurement : undefined)
         ?? occupationHatMeasurements[path]
         ?? occupationToolMeasurements[path]
+        ?? nativeCombatEquipmentMeasurements[path]
         ?? (manualHairMeasurements as Record<string, AssetMeasurement>)[path]
         ?? (femaleHairMeasurements as Record<string, AssetMeasurement>)[path]
         ?? (manualBeardMeasurements as Record<string, AssetMeasurement>)[path]

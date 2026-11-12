@@ -195,7 +195,7 @@ export class MeshyHumanFactory {
   }
   const request = ++model.equipRevision;
   const selected = resolveCharacterPresentation(model.dna, value, model.fit.body);
-  const ids = [selected.hairId, selected.beardId, selected.headwearId, ...selected.garmentIds, selected.equipmentId]
+  const ids = [selected.hairId, selected.beardId, selected.headwearId, ...selected.garmentIds, ...selected.equipmentIds]
    .filter((id): id is string => !!id);
   const sources = await characterAsync(observe, 'module-sources-wait', () => Promise.all(ids.map(id => {
    let promise = this.modules.get(id);
@@ -344,6 +344,7 @@ export class MeshyHuman {
    outfit: garmentAt('full'), shoes: garmentAt('footwear'),
    trousers: garmentAt('lower'), top: garmentAt('upper', 'over'),
    equipment: assetOfType('equipment'),
+   equipmentItems: installed.filter(source => source.asset.type === 'equipment').map(source => source.asset.id),
   };
  }
  readonly root=new Group();readonly clips:GLTF['animations'];

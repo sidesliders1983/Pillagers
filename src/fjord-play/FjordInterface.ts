@@ -3,7 +3,7 @@ import { gatheringOffer, inspectCommunityHearth, weddingCandidates } from '../si
 import { renderGatheringCard, renderGatheringReview, type GatheringChoice, type GatheringOffer } from './CulturalGatheringView';
 import { renderCommunityHearth, type HearthUpgradeOffer } from './CommunityHearthView';
 import { renderSmithery } from './SmitheryView';
-import { craftingOccupation, type EquipmentItem } from '../simulation/Smithery';
+import { craftingOccupation, equipmentFor, type EquipmentItem } from '../simulation/Smithery';
 import { applyCommand, inspectWork, inspectCattle, inspectLivestock, occupationAptitude, occupationIds, availableOccupationIds, personaAge, personaAway, landingSummary } from '../simulation/SimulationCore';
 import { renderLivestockBreeding, slaughterBreedingWarning } from '../play/LivestockBreedingView';
 import type { Occupation, SimulationCommand, SimulationState } from '../simulation/SimulationCore';
@@ -337,9 +337,15 @@ export class FjordInterface {
         const appearance = projectResidentAppearance(state, id);
         if (!appearance) return undefined;
         const person = state.personas[id] ?? state.personaArchive![id];
-        return { residentId: id, ...appearance, presentation: fjordWardrobePresentation({ kind: 'persona',
-            dna: appearance.dna, status: { living: person.deathWinter === null, occupation: person.occupation,
-                expedition: state.personas[id] && personaAway(state, id) ? 'away' : undefined } }),
+        const view = state.personas[id] ? state === this.owner.session.readSnapshot()
+            ? this.owner.fjord.readProjection() : this.owner.fjord.project(state) : undefined;
+        const projected = view?.entities.find(entity => entity.kind === 'persona' && entity.id === id);
+        const status = projected?.status ?? { living: person.deathWinter === null, occupation: person.occupation,
+            equipment: equipmentFor(state, id),
+            expedition: state.personas[id] && personaAway(state, id) ? 'away' : undefined };
+        const presentation = fjordWardrobePresentation({ kind: 'persona', dna: appearance.dna, status });
+        return { residentId: id, ...appearance, presentation,
+            ...(presentation.equipmentItems?.length ? { framing: 'equipment' as const } : {}),
             pixelRatio: presentationProfiles[this.owner.presentation?.quality ?? 'low'].maximumPixelRatio };
     }
 

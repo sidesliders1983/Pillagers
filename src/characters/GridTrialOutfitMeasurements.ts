@@ -18,4 +18,4 @@ export const gridTrialOutfitMeasurement = {
         ]
     }
 };
-export const gridTrialBindingHash = "f3073f071dc8fa7955d55db9833a01cadd7d7b02a9ccd95a843eb03b88efeb03";
+export const gridTrialBindingHash = "1b59e5dea6a0ab5203361d593106ab94c0cbb9e1db496c3c022afa4b883e4076";

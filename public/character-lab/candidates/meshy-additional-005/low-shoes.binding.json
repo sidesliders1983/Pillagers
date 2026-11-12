@@ -7,7 +7,14 @@
     "id": "approved-additional-outfit-native",
     "version": 1,
     "blender": "not-used",
-    "heelCorrection": "posterior-sole-envelope/1"
+    "heelCorrection": "posterior-sole-envelope/1",
+    "ageRangeQualification": {
+      "id": "field-teen-native-16-17",
+      "version": 1,
+      "predecessorBindingSha256": "ad27c923a926d59c8c1de43649129749e7856108d45cf440bb31eed35d5ded97",
+      "geometryChanged": false,
+      "qualification": "Native factory geometry and sleeve-stretch checks; visual owner QA remains pending"
+    }
   },
   "coordinateFrame": {
     "up": "+Y",
@@ -82,7 +89,7 @@
     ]
   },
   "supportedAges": {
-    "min": 18,
+    "min": 16,
     "max": 100
   },
   "lods": {

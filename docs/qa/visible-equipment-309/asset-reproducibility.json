@@ -1,0 +1,16 @@
+{
+  "identical": true,
+  "changed": [],
+  "sha256": {
+    "src/characters/NativeCombatEquipmentMeasurements.ts": "73a9386f6c82a44153d7e56337ed91f93bce48cacef95e043d671a03197b2d8a",
+    "public/character-lab/modules/native-combat-equipment/wooden-spear.glb": "8522a3ce8115fbbd66fa9739d9f55760013cc09e4ee4142cff36e5dae16c4904",
+    "public/character-lab/modules/native-combat-equipment/wooden-spear.binding.json": "098b961762a54292559b9302a52000b31edfd57b7862b76f6815345e3f49496b",
+    "public/character-lab/modules/native-combat-equipment/wooden-spear.provenance.json": "98bee131b0312a3ee52cb43f5c79a51ae3e7faacd7338816e1dc3f23fcad1fd4",
+    "public/character-lab/modules/native-combat-equipment/wooden-shield.glb": "20cdce10db815db5b9937d45f5d789e7a177d67bffdb1031920d38981b1c0626",
+    "public/character-lab/modules/native-combat-equipment/wooden-shield.binding.json": "c8a868da67a7e47e0865cd313fc4dc2b573f51da00efd1ed22b318c489eb876a",
+    "public/character-lab/modules/native-combat-equipment/wooden-shield.provenance.json": "4d18f5fa9e6a78c56a5c5c4d0818113605a9097f69b711a795aef4e2ce2e0db2",
+    "public/character-lab/modules/native-combat-equipment/leather-shield.glb": "b8bdaa375ebf4330613db7f47f4c962f87f2e20942a1969ef1c403a98d6d28f3",
+    "public/character-lab/modules/native-combat-equipment/leather-shield.binding.json": "4daebf543c0a37ec47436b6019c64fbaa5d71533dacab3b8e81b293962cdf22d",
+    "public/character-lab/modules/native-combat-equipment/leather-shield.provenance.json": "77ace78cd6e225b627baa30795b0a911c3422da6e00af27011b73e1bcbc03f03"
+  }
+}
