@@ -1,3 +1,4 @@
+import { equipmentPortraitFrame } from './EquipmentPortraitFraming';
 import { ACESFilmicToneMapping, Color, DirectionalLight, HalfFloatType, HemisphereLight,
     PerspectiveCamera, Scene, SRGBColorSpace, Vector3, Vector4, WebGLRenderTarget,
     type WebGLRenderer } from 'three';
@@ -84,20 +85,20 @@ export class ResidentPortraitStudio {
 
     async render(input: PortraitRequest, resident?: MeshyHuman) {
         if (this.disposed) return undefined;
-        if (resident) return this.capture(resident, input.pixelRatio);
+        if (resident) return this.capture(resident, input.pixelRatio, input.framing);
         // An archived/indoor resident may have no live world model. Keep that
         // portrait on the same renderer and existing world LOD, with owned cleanup.
         const historical = await this.create(input);
         try {
             if (this.disposed) return undefined;
             historical.sampleAnimation('Idle', .4);
-            return this.capture(historical, input.pixelRatio);
+            return this.capture(historical, input.pixelRatio, input.framing);
         } finally {
             historical.dispose();
         }
     }
 
-    capture(human: MeshyHuman, pixelRatio = 1) {
+    capture(human: MeshyHuman, pixelRatio = 1, framing: PortraitRequest['framing'] = 'face') {
         if (this.disposed) throw new Error('Portrait studio is disposed.');
         const size = Math.round(128 * Math.min(1.5, Math.max(1, pixelRatio)));
         if (!this.target || this.target.width !== size) {
@@ -129,18 +130,21 @@ export class ResidentPortraitStudio {
             this.scene.updateMatrixWorld(true);
             const frame = headFrame(human);
             const height = human.root.userData.universalHumanProfile.height as number;
-            const distance = .56 * Math.max(.75, height / 1.4) * root.getWorldScale(new Vector3()).y;
-            this.camera.position.copy(frame.target)
+            const equipment = framing !== 'face'
+                ? equipmentPortraitFrame(human, frame, this.camera.fov, framing === 'equipment-full') : undefined;
+            const target = equipment?.target ?? frame.target;
+            const distance = equipment?.distance ?? .56 * Math.max(.75, height / 1.4) * root.getWorldScale(new Vector3()).y;
+            this.camera.position.copy(target)
                 .addScaledVector(frame.forward, Math.SQRT1_2 * distance)
                 .addScaledVector(frame.across, Math.SQRT1_2 * distance)
                 .addScaledVector(frame.up, distance * .03);
             this.camera.up.copy(frame.up);
-            this.camera.lookAt(frame.target);
-            this.key.target.position.copy(frame.target);
-            this.rim.target.position.copy(frame.target);
-            this.key.position.copy(frame.target).addScaledVector(frame.across, 2)
+            this.camera.lookAt(target);
+            this.key.target.position.copy(target);
+            this.rim.target.position.copy(target);
+            this.key.position.copy(target).addScaledVector(frame.across, 2)
                 .addScaledVector(frame.up, 4).addScaledVector(frame.forward, 4);
-            this.rim.position.copy(frame.target).addScaledVector(frame.across, -3)
+            this.rim.position.copy(target).addScaledVector(frame.across, -3)
                 .addScaledVector(frame.up, 2).addScaledVector(frame.forward, -2);
             renderer.toneMapping = ACESFilmicToneMapping;
             renderer.toneMappingExposure = 1;

@@ -1,3 +1,6 @@
+import type { PersonalEquipment } from '../simulation/Smithery';
+import { characterAsset } from '../characters/CharacterAssets';
+import { nativeCombatEquipmentByItem } from '../characters/NativeCombatEquipmentCatalog';
 import {defaultCharacterPresentation, type CharacterPresentation} from '../characters/CharacterPresentation';
 import {gridTrialOutfitId} from '../characters/GridTrialOutfitCatalog';
 import type { CharacterPreparationObserver } from '../characters/CharacterPreparation';
@@ -20,10 +23,16 @@ export const fjordClothingSets = Object.freeze({
 });
 export type FjordClothingSet = keyof typeof fjordClothingSets;
 
-/** Render-only sets use canonical sex/occupation; adult clothing is never resized onto children. */
+function fieldClothing(entity: Pick<FjordEntity, 'status'>): boolean {
+    return !!entity.status.expedition || !!entity.status.encounter ||
+        entity.status.presence?.duty?.role === 'mobilise';
+}
+
+/** Field clothing is source-qualified from sixteen; younger/civilian clothing keeps its existing contract. */
 export function fjordClothingSet(entity: Pick<FjordEntity, 'kind' | 'dna' | 'status'>): FjordClothingSet {
-    if (entity.kind !== 'persona' || !entity.dna || entity.dna.age < 18) return 'native';
-    if (entity.status.expedition) return 'generic';
+    if (entity.kind !== 'persona' || !entity.dna) return 'native';
+    if (fieldClothing(entity) && entity.dna.age >= 16) return 'generic';
+    if (entity.dna.age < 18) return 'native';
     if (entity.status.occupation === 'fisher') return 'fisherman';
     if (entity.status.occupation !== 'farmer') return 'generic';
     return entity.dna.sex === 'female' ? 'farmerFemale' : 'farmerMale';
@@ -64,7 +73,7 @@ export function fjordBeardAsset(entity: Pick<FjordEntity, 'kind' | 'dna'>): stri
 /** Hats remain independent of hair and carried tools. */
 function occupationModuleAsset(entity: Pick<FjordEntity, 'kind' | 'dna' | 'status'>, type: 'headwear' | 'equipment'): string {
     if (entity.kind !== 'persona' || !entity.dna || entity.dna.age < 18) return 'none';
-    if (entity.status.expedition) return 'none';
+    if (fieldClothing(entity)) return 'none';
     const occupation = entity.status.occupation;
     return occupation && ['farmer', 'fisher', 'hunter', 'smith'].includes(occupation)
         ? type + '/occupation-' + occupation : 'none';
@@ -76,11 +85,24 @@ export function fjordToolAsset(entity: Pick<FjordEntity, 'kind' | 'dna' | 'statu
     return occupationModuleAsset(entity, 'equipment');
 }
 
-/** Portraits and live residents use exactly the same wardrobe choices. */
+/** Only items occupying a free authored hand are visible; stowed assignments remain private. */
+export function fjordVisibleEquipment(entity: Pick<FjordEntity, 'kind' | 'dna' | 'status'>): PersonalEquipment {
+    if (entity.kind !== 'persona' || !entity.dna || entity.dna.age < 16 || !entity.status.living)
+        return { weapon: null, shield: null };
+    const gear = entity.status.equipment, tool = fjordToolAsset(entity);
+    const workHand = tool === 'none' ? undefined : characterAsset(tool).metadata?.anchor;
+    return { weapon: workHand === 'socket_hand_R' ? null : gear?.weapon ?? null,
+        shield: workHand === 'socket_hand_L' ? null : gear?.shield ?? null };
+}
+
+/** Portraits and live residents use exactly the same wardrobe choices and actual personal items. */
 export function fjordWardrobePresentation(entity: Pick<FjordEntity, 'kind' | 'dna' | 'status'>): CharacterPresentation {
+    const gear = fjordVisibleEquipment(entity), tool = fjordToolAsset(entity);
+    // Home work keeps its real tool; missions remove that tool before exposing personal gear.
+    const items = [gear.weapon, gear.shield].flatMap(item => item ? [nativeCombatEquipmentByItem[item]] : []);
     return { ...fjordClothingSets[fjordClothingSet(entity)], hair: fjordHairAsset(entity),
         beard: fjordBeardAsset(entity), headwear: fjordHeadwearAsset(entity),
-        equipment: fjordToolAsset(entity) } as CharacterPresentation;
+        equipment: tool, equipmentItems: items } as CharacterPresentation;
 }
 interface WardrobeState {
     toolsVisible?: boolean;
@@ -115,11 +137,8 @@ export class FjordWardrobe {
     async reconcile(human: MeshyHuman, entity: FjordEntity, observe?: CharacterPreparationObserver) {
         if (human.isDisposed) return;
         const selected = fjordClothingSet(entity);
-        const hair = fjordHairAsset(entity);
-        const beard = fjordBeardAsset(entity);
-        const headwear = fjordHeadwearAsset(entity);
-        const equipment = fjordToolAsset(entity);
-        const key = selected + ':' + hair + ':' + beard + ':' + headwear + ':' + equipment;
+        const presentation = fjordWardrobePresentation(entity);
+        const key = JSON.stringify(presentation);
         let state = this.states.get(human);
         if (!state) {
             state = {revision: 0};
@@ -132,7 +151,7 @@ export class FjordWardrobe {
         }
         const revision = ++state.revision;
         state.pending = key;
-        const request = this.factory.equip(human, fjordWardrobePresentation(entity), observe);
+        const request = this.factory.equip(human, presentation, observe);
         const equipRevision = human.equipRevision;
         state.equipRevision = equipRevision;
         state.task = request.then(() => {

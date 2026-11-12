@@ -1,3 +1,4 @@
+import { fjordVisibleEquipment } from './FjordWardrobe';
 import { universalHumanProfile } from '../characters/UniversalHumanProfile';
 import { discoveryAt, inspectClanDiscovery } from '../simulation/ClanDiscovery';
 import { assertIslandClanWorld } from '../simulation/IslandClans';
@@ -94,6 +95,7 @@ export function inspectRivalSettlement(state: SimulationState, world: WorldBluep
         const { naming: _naming, ...dna } = entity.dna ?? {};
         const visualProfile = entity.dna ? universalHumanProfile({ ...entity.dna, age: Math.min(100, entity.dna.age) }) : undefined;
         const status: FjordEntity['status'] = { living: entity.status.living, workEligible: false,
+            equipment: entity.kind === 'persona' ? fjordVisibleEquipment(entity) : undefined,
             inhabited: entity.kind === 'building' ? entity.status.inhabited : undefined,
             sex: entity.status.sex, stage: entity.status.stage, species: entity.status.species,
             occupation: entity.status.occupation === 'farmer' ? 'farmer' : undefined,

@@ -14,6 +14,7 @@ export interface PortraitRequest {
     presentation?: Partial<CharacterPresentation>;
     profile?: HumanProfile;
     pixelRatio?: number;
+    framing?: 'face' | 'equipment' | 'equipment-full';
 }
 
 function portraitKey(input: PortraitRequest) {
@@ -21,7 +22,7 @@ function portraitKey(input: PortraitRequest) {
     const selected = resolveCharacterPresentation(input.dna, input.presentation ??
         { hair: 'none', beard: 'none', outfit: 'none', equipment: 'none' }, body);
     const modules = [selected.hairId, selected.beardId, selected.headwearId,
-        ...selected.garmentIds, selected.equipmentId].filter((id): id is string => !!id)
+        ...selected.garmentIds, ...selected.equipmentIds].filter((id): id is string => !!id)
         .map(id => [id, characterAssetURL(id, 0), characterAsset(id).metadata?.nativeBinding]);
     return JSON.stringify(['portrait-shape-v1', body, modules, input]);
 }

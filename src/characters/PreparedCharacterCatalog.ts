@@ -36,11 +36,11 @@ export const preparedCharacterCatalog = {
         },
         {
             "originalPath": "/character-lab/candidates/meshy-additional-005/low-shoes.binding.json",
-            "originalSha256": "ad27c923a926d59c8c1de43649129749e7856108d45cf440bb31eed35d5ded97",
-            "originalBytes": 3251,
-            "path": "/game-assets/character-sources/ded9fe1e4a3960cc580b.bin",
-            "sha256": "ded9fe1e4a3960cc580bf355245667aa66fbb9463fabdfa8ce74d95e08dbbc99",
-            "bytes": 1094
+            "originalSha256": "0a1dd118c8d6224a3783a723b9b5e0a081e1ac80e08d5a401a99953397073bb8",
+            "originalBytes": 3590,
+            "path": "/game-assets/character-sources/7e621d4c74831b28d7a3.bin",
+            "sha256": "7e621d4c74831b28d7a3db2e5ea99f723ded7cfdc350fec5bef4ab4a92b4416e",
+            "bytes": 1262
         },
         {
             "originalPath": "/character-lab/candidates/meshy-additional-005/low-shoes.glb",
@@ -100,11 +100,11 @@ export const preparedCharacterCatalog = {
         },
         {
             "originalPath": "/character-lab/candidates/meshy-grid-trial-002/outfit.binding.json",
-            "originalSha256": "f3073f071dc8fa7955d55db9833a01cadd7d7b02a9ccd95a843eb03b88efeb03",
-            "originalBytes": 4518,
-            "path": "/game-assets/character-sources/6498d532942e4aca17e6.bin",
-            "sha256": "6498d532942e4aca17e67648755db875df3f6ca5d8dfb36bbbc1e3a58b2eb1df",
-            "bytes": 1404
+            "originalSha256": "1b59e5dea6a0ab5203361d593106ab94c0cbb9e1db496c3c022afa4b883e4076",
+            "originalBytes": 4857,
+            "path": "/game-assets/character-sources/14f5bf53d98ac68c0a85.bin",
+            "sha256": "14f5bf53d98ac68c0a8583c222a083b356c5f21128fd50aaa4098a515e54bfb0",
+            "bytes": 1571
         },
         {
             "originalPath": "/character-lab/candidates/meshy-grid-trial-002/outfit.glb",
@@ -305,6 +305,54 @@ export const preparedCharacterCatalog = {
             "path": "/game-assets/character-sources/fad05276bcb98cbc719f.bin",
             "sha256": "fad05276bcb98cbc719fc6b562f873dfda7eab961aa8aafbe50081965cc620e8",
             "bytes": 169238
+        },
+        {
+            "originalPath": "/character-lab/modules/native-combat-equipment/leather-shield.binding.json",
+            "originalSha256": "4daebf543c0a37ec47436b6019c64fbaa5d71533dacab3b8e81b293962cdf22d",
+            "originalBytes": 5336,
+            "path": "/game-assets/character-sources/4908f37397fa4e3c4a76.bin",
+            "sha256": "4908f37397fa4e3c4a76eb73bf9a26527be795072ab2e53e76ddc2b8cd304aa5",
+            "bytes": 1722
+        },
+        {
+            "originalPath": "/character-lab/modules/native-combat-equipment/leather-shield.glb",
+            "originalSha256": "b8bdaa375ebf4330613db7f47f4c962f87f2e20942a1969ef1c403a98d6d28f3",
+            "originalBytes": 850132,
+            "path": "/game-assets/character-sources/73dd3a3629977605beee.bin",
+            "sha256": "73dd3a3629977605beee5e1309c1d1f2b78c85c88a65fb7e0959e687e39032f1",
+            "bytes": 590657
+        },
+        {
+            "originalPath": "/character-lab/modules/native-combat-equipment/wooden-shield.binding.json",
+            "originalSha256": "c8a868da67a7e47e0865cd313fc4dc2b573f51da00efd1ed22b318c489eb876a",
+            "originalBytes": 5333,
+            "path": "/game-assets/character-sources/3328455813003320a7e1.bin",
+            "sha256": "3328455813003320a7e1adff09ca2e6fb5d87d28fed1a8987a0775ad506e0c29",
+            "bytes": 1722
+        },
+        {
+            "originalPath": "/character-lab/modules/native-combat-equipment/wooden-shield.glb",
+            "originalSha256": "20cdce10db815db5b9937d45f5d789e7a177d67bffdb1031920d38981b1c0626",
+            "originalBytes": 801080,
+            "path": "/game-assets/character-sources/ab3c4dbd2146894b9d4b.bin",
+            "sha256": "ab3c4dbd2146894b9d4b5747674e5319e1931cec264514816a363fa5479f2d88",
+            "bytes": 608231
+        },
+        {
+            "originalPath": "/character-lab/modules/native-combat-equipment/wooden-spear.binding.json",
+            "originalSha256": "098b961762a54292559b9302a52000b31edfd57b7862b76f6815345e3f49496b",
+            "originalBytes": 5327,
+            "path": "/game-assets/character-sources/518e96af3e11e69ba37d.bin",
+            "sha256": "518e96af3e11e69ba37db66b3a21b7b1a72a5389a17e6d6d0b5959dad9ececeb",
+            "bytes": 1716
+        },
+        {
+            "originalPath": "/character-lab/modules/native-combat-equipment/wooden-spear.glb",
+            "originalSha256": "8522a3ce8115fbbd66fa9739d9f55760013cc09e4ee4142cff36e5dae16c4904",
+            "originalBytes": 684740,
+            "path": "/game-assets/character-sources/f0c53cbe4cdade0a41ea.bin",
+            "sha256": "f0c53cbe4cdade0a41eaddb84beb428f7ba9f48c939118a9504b2c955371d9ad",
+            "bytes": 524006
         },
         {
             "originalPath": "/character-lab/modules/occupation-hats/farmer.binding.json",

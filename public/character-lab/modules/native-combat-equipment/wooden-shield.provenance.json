@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "item": "woodenShield",
+    "id": "equipment/native-wooden-shield",
+    "label": "Wooden Shield · source review",
+    "name": "wooden-shield",
+    "path": "Assets/Combat/wooden-shield-original.glb",
+    "bytes": 48778112,
+    "sha256": "30b7d88b41b7b78550a54a217518561939ebbf745f6b50c9deb862c8916b9ea1",
+    "driveFileId": "19_uZueCmDECT1QBUZ-lVaAUeEpyXjACA",
+    "provider": "Meshy",
+    "triangles": 2914,
+    "scale": 0.78,
+    "hand": "left",
+    "rights": "User-supplied Meshy export from the owner-provided Drive folder for Pillagers #309.",
+    "driveFolderId": "1KLQh4TMMHZmr6WPw2UpUOzJRMUouGaVV"
+  },
+  "reviewRequired": true,
+  "reviewStatus": "pending-combined-owner-QA",
+  "output": {
+    "sha256": "20cdce10db815db5b9937d45f5d789e7a177d67bffdb1031920d38981b1c0626",
+    "triangles": 2914,
+    "materials": 1,
+    "bytes": 801080,
+    "bounds": {
+      "min": [
+        0.1291422142777185,
+        0.446612486737511,
+        -0.2872183821931999
+      ],
+      "max": [
+        0.5306072018016805,
+        1.1507975272261608,
+        0.3129968018727513
+      ]
+    }
+  },
+  "bindingSha256": "c8a868da67a7e47e0865cd313fc4dc2b573f51da00efd1ed22b318c489eb876a",
+  "nativeRig": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+  "bodyBindings": [
+    {
+      "lod": 0,
+      "bodySha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+      "topology": "411df128"
+    },
+    {
+      "lod": 1,
+      "bodySha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+      "topology": "0cf34010"
+    },
+    {
+      "lod": 2,
+      "bodySha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+      "topology": "74f95fa6"
+    },
+    {
+      "lod": 0,
+      "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+      "topology": "8216f232"
+    },
+    {
+      "lod": 1,
+      "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+      "topology": "8216f232"
+    },
+    {
+      "lod": 2,
+      "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+      "topology": "8216f232"
+    }
+  ],
+  "grip": {
+    "localSource": [
+      -0.00031651556491851807,
+      0.44999998807907104,
+      -0.05457906484603882
+    ],
+    "nativeTarget": [
+      0.3175929624977574,
+      0.7984115182434144,
+      0.020897263010556714
+    ],
+    "transform": [
+      -0.3624899218689339,
+      -0.37139737892960906,
+      -0.582292918957178,
+      0,
+      -0.1962779795233832,
+      0.685903773808117,
+      -0.31529504885107545,
+      0,
+      0.6621752119323652,
+      -2.1649348980190547e-17,
+      -0.4122183750178143,
+      0,
+      0.4419442210725625,
+      0.48963727515517075,
+      0.14009723304191296,
+      1
+    ]
+  },
+  "operations": [
+    "Preserve all supplied source triangles, UVs and material colours; no mannequin/body replacement",
+    "Resize albedo to 1024 and metallic/roughness to 512; remove normal/occlusion/emissive maps",
+    "Bind rigidly to the measured native hand/finger cavity without new bones, body masks or clips"
+  ],
+  "originalBounds": {
+    "min": [
+      -0.4506121873855591,
+      0,
+      -0.06957906484603882
+    ],
+    "max": [
+      0.44997915625572205,
+      0.8999999761581421,
+      0.06847474724054337
+    ]
+  },
+  "scale": 0.78
+}

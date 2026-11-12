@@ -1,3 +1,4 @@
+import { equipmentFor, type PersonalEquipment } from '../simulation/Smithery';
 import { miningWorkerPosition } from '../simulation/Mining';
 import { inspectResidentPresence } from '../simulation/ResidentPresence';
 import type { CustodyRecord } from '../simulation/TransitCargo';
@@ -94,6 +95,7 @@ export interface FjordEntity {
         aboardShip?: string;
         aboardAnchor?: number;
         occupation?: string | null;
+        equipment?: PersonalEquipment;
         workEligible?: boolean;
         workHomeId?: string;
         stage?: string;
@@ -448,7 +450,7 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
             add('persona', id, p.name, 'human', point ? { ...point, scale: growth } : undefined,
                 { living: true, mining: !!miner, presence, encounter, expedition: mission?.id, expeditionWalking: partyPoint?.moving ?? false,
                     aboardShip: transport?.shipId, aboardAnchor: transport ? aboardAnchor : undefined,
-                    sex: p.dna.sex, age, indoorReason, occupation: p.occupation,
+                    sex: p.dna.sex, age, indoorReason, occupation: p.occupation, equipment: equipmentFor(state, id),
                     workEligible: state.mechanics ? inspectWork(state, id).reason === null : false,
                     workHomeId: residence?.buildingId ?? undefined });
             const appearance = projectResidentAppearance(state, id)!;

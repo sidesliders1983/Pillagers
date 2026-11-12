@@ -29,6 +29,8 @@ export interface CharacterPresentation {
     trousers: string;
     top: string;
     equipment: string;
+    /** Additional independently authored native hand modules; old single-item payloads stay valid. */
+    equipmentItems?: readonly string[];
     equipmentSocket: EquipmentSocket | 'auto';
     hairColor: string | null;
     technicalWaistWrap: boolean;
@@ -36,7 +38,7 @@ export interface CharacterPresentation {
 export const defaultCharacterPresentation: Readonly<CharacterPresentation> = Object.freeze({
     hair: 'auto', beard: 'auto', headwear: 'none', outfit: 'auto',
     shoes: 'none', trousers: 'none', top: 'none',
-    equipment: 'none', equipmentSocket: 'auto', hairColor: null, technicalWaistWrap: false,
+    equipment: 'none', equipmentItems: Object.freeze([]), equipmentSocket: 'auto', hairColor: null, technicalWaistWrap: false,
 });
 
 export function garmentFitsChoice(asset: CharacterAsset, choice: GarmentChoiceKey) {
@@ -81,6 +83,16 @@ export function parseCharacterPresentation(value: unknown = defaultCharacterPres
             throw new Error(id + ': garment does not occupy the ' + key + ' slot.');
         }
     }
+    const equipmentItems = result.equipmentItems;
+    if (!Array.isArray(equipmentItems) || equipmentItems.length > 2 ||
+        new Set(equipmentItems).size !== equipmentItems.length || equipmentItems.some(id => {
+            if (typeof id !== 'string' || id === 'auto' || id === 'none') return true;
+            const asset = characterAsset(id);
+            return asset.type !== 'equipment' || !asset.metadata?.equipmentBindings ||
+                !['socket_hand_L', 'socket_hand_R'].includes(asset.metadata.anchor);
+        })) throw new Error('Choose up to two distinct native hand equipment modules.');
+    if (Object.hasOwn(input, 'equipmentItems')) result.equipmentItems = [...equipmentItems];
+    else delete result.equipmentItems;
     const separateRequested = separateGarmentKeys.some(key => result[key] !== 'none');
     if (separateRequested && result.outfit !== 'auto' && result.outfit !== 'none'
         && !complementaryFootwear(result)) {
@@ -128,6 +140,10 @@ export function resolveCharacterPresentation(
             !characterAssetFitsBody(characterAsset(choice), body)) {
             throw new Error(choice + ': module is not compatible with this exact body source.');
         }
+    }
+    for (const id of presentation.equipmentItems ?? []) {
+        if (body?.id !== 'body/meshy-human' || !characterAssetFitsBody(characterAsset(id), body))
+            throw new Error(id + ': additional hand modules require this exact native Meshy body source.');
     }
     const separateRequested = separateGarmentKeys.some(key => presentation[key] !== 'none');
     if (separateRequested && body?.id !== 'body/meshy-human') {
@@ -178,11 +194,20 @@ export function resolveCharacterPresentation(
             ? moduleAtEquipmentSocket(characterAsset(equipmentId).metadata!).anchor
             : moduleAtEquipmentSocket(characterAsset(equipmentId).metadata!, presentation.equipmentSocket).anchor)
         : null;
+    const equipmentIds = [equipmentId, ...(presentation.equipmentItems ?? [])]
+        .filter((id): id is string => !!id);
+    if (new Set(equipmentIds).size !== equipmentIds.length)
+        throw new Error('Equipment modules must be distinct.');
+    const occupiedHands = equipmentIds.map(id => id === equipmentId ? equipmentSocket :
+        characterAsset(id).metadata!.anchor).filter(socket =>
+        socket === 'socket_hand_L' || socket === 'socket_hand_R');
+    if (new Set(occupiedHands).size !== occupiedHands.length)
+        throw new Error('Only one equipment module can occupy each native hand.');
     const profile = {...base, appearance: {...base.appearance,
         hairStyle: hairId ? characterAsset(hairId).style as HairStyle : base.appearance.hairStyle,
         beardStyle: beardId ? characterAsset(beardId).style as BeardStyle : 'none' as const,
         color: presentation.hairColor ?? base.appearance.color,
     }};
     return {presentation, profile, hairId, beardId, headwearId, outfitId, shoesId, trousersId, topId,
-        garmentIds, equipmentId, equipmentSocket, beardEligible};
+        garmentIds, equipmentId, equipmentIds, equipmentSocket, beardEligible};
 }

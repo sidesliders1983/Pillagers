@@ -89,7 +89,7 @@ export const additionalOutfitRecords = [
         "label": "Low leather shoes",
         "path": "/character-lab/candidates/meshy-additional-005/low-shoes.glb",
         "bindingPath": "/character-lab/candidates/meshy-additional-005/low-shoes.binding.json",
-        "bindingSha256": "ad27c923a926d59c8c1de43649129749e7856108d45cf440bb31eed35d5ded97",
+        "bindingSha256": "0a1dd118c8d6224a3783a723b9b5e0a081e1ac80e08d5a401a99953397073bb8",
         "slot": "footwear",
         "triangles": 55064,
         "materials": 1

@@ -1,3 +1,4 @@
+import { equipmentPortraitFrame } from './EquipmentPortraitFraming';
 import { ACESFilmicToneMapping, Color, DirectionalLight, HemisphereLight,
     PerspectiveCamera, Scene, Vector3, WebGLRenderer } from 'three';
 import { meshyHumanFactory } from './MeshyHuman';
@@ -37,9 +38,13 @@ export class NativePortraitRenderer {
             const across = landmark([.045, 1.54, .12]).sub(landmark([-.045, 1.54, .12])).normalize();
             const up = forehead.clone().sub(chin).normalize();
             const forward = new Vector3().crossVectors(across, up).normalize();
-            const target = chin.clone().lerp(forehead, .6);
+            const head = chin.clone().lerp(forehead, .6);
+            const equipment = input.framing && input.framing !== 'face'
+                ? equipmentPortraitFrame(human, { target: head, across, up, forward }, this.camera.fov,
+                    input.framing === 'equipment-full') : undefined;
+            const target = equipment?.target ?? head;
             const height = human.root.userData.universalHumanProfile.height as number;
-            const distance = .56 * Math.max(.75, height / 1.4);
+            const distance = equipment?.distance ?? .56 * Math.max(.75, height / 1.4);
             this.camera.position.copy(target)
                 .addScaledVector(forward, Math.SQRT1_2 * distance)
                 .addScaledVector(across, Math.SQRT1_2 * distance)

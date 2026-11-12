@@ -96,10 +96,14 @@ Save validation rejects detached away assignments or altered return reports.
 
 An existing Smith/Leatherworker home or resident opens **Crafting & equipment**.
 It shows real Materials/Hides, stored/worn totals, targets and actual workers' status.
-Expedition mission preparation has named Weapon/Shield selectors, available stock,
-wearer-specific risk and derived group success. The return report distinguishes gear
-returned with its owner from permanent losses. Native 3D item attachments are a later
-visual follow-up; the headless state and consequences are complete without new meshes.
+Mission preparation has named Weapon/Shield selectors and available stock.
+Regional/historical missions retain wearer-specific risk and derived group success;
+new on-site missions distinguish actual equipment readiness from the separately
+quoted travel hazard without claiming an exact combat success probability. The return report distinguishes gear
+returned with its owner from permanent losses. The native visual follow-up now
+uses each actual assignment through [visible personal equipment](VISIBLE-EQUIPMENT-V1.md);
+its source props remain pending combined owner fit review. Rendering changes no
+inventory, crafting inputs or combat coefficients.
 
 New campaigns initialize empty saved Smithery state for player and CPU clans using
 the same factory. Old saves retain absent Smithery state and historical mission

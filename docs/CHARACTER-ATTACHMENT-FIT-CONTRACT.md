@@ -254,3 +254,21 @@ Cuff coverage is not a whole-triangle approximation. Fixed source-space planes c
 Neck coverage uses the same partial-cut contract. Semantic head/neck classification precedes dominant limb-weight classification, so original arm-weighted neck vertices cannot be hidden as sleeve skin. A cut plane may select original faces with regionMatch any (at least one named region) or the default all (every source corner); prior cuts never determine that selection. Follow actual section edges in topological order, including concave notches, rather than sorting a polar approximation. The neck opening is a single closed section at all supported body LODs.
 
 Opening contacts and all inserted body-LOD corners are sewn into the owned clothing boundary. Their raw bind positions and reduced native influences are welded to the visible owned body corners, avoiding quantization round-trip cracks in posed geometry. A dense authored collar band uses the corresponding rim influences. Recursive body clipping/subdivision propagates full original native mixtures until the final four-influence reduction; it does not interpolate previously reduced mixtures. The 8mm transport bound and 10-micron shared-rim continuity checks are retained. Source geometry, weights and skeleton remain immutable; fitting still runs only on equip/body changes.
+
+
+### Native personal equipment collection (#309)
+
+Native Meshy presentations may add `equipmentItems`, a validated collection of up
+to two additional independent hand modules. The existing scalar `equipment` and
+`equipmentSocket` remain compatible. The shared resolver rejects duplicate IDs,
+same-hand stacks and incompatible body sources before fetching/installing them.
+Native module records retain the same skeleton, coverage and existing carry-pose
+owner; no per-frame refitting or second body/renderer is introduced. Source asset
+and binding hashes also enter portrait and Lab snapshot keys for every item.
+
+Fjord selects these props from actual personal Weapon/Shield assignments, with
+work-tool precedence at home and the normal fitted tunic underneath field gear.
+The existing generic tunic/low shoes are source-qualified from sixteen for field
+use without changing body geometry or gameplay eligibility. See
+[visible personal equipment](gameplay/VISIBLE-EQUIPMENT-V1.md) for source review
+status, teen qualification, privacy and remaining combined QA.
