@@ -16,6 +16,12 @@ export interface FjordEncounterAction {
     outcome: 'death' | 'blocked' | 'survived';
 }
 
+export interface FjordEncounterWindow {
+    tick: number;
+    outgoing?: FjordEncounterAction;
+    incoming?: FjordEncounterAction;
+}
+
 /** Per-person facts only. Random rolls, hidden participants and future exchanges stay in Core. */
 export interface FjordEncounterCue {
     version: 1;
@@ -31,6 +37,7 @@ export interface FjordEncounterCue {
     facing: Point2 | null;
     outgoing?: FjordEncounterAction;
     incoming?: FjordEncounterAction;
+    windows?: readonly FjordEncounterWindow[];
 }
 
 export interface FjordCombatDeath {
@@ -63,21 +70,31 @@ export function projectEncounterCue(owner: SimulationState, clanId: string, pers
         discoveryAt(knowledge, point.x, point.z) === 'visible';
     const exchange = entry.exchanges.at(-1);
     const recent = exchange && tick >= exchange.tick && tick < exchange.tick + rules.policy.exchangeTicks;
+    const retainedTail = exchange && tick >= exchange.tick &&
+        tick < exchange.tick + 2 * rules.policy.exchangeTicks;
     const active = entry.phase === 'engaging' || entry.phase === 'withdrawing';
-    if (!active && entry.phase !== 'contact' && !recent) return;
-    const actions = recent ? exchange.actions : [];
-    const summarize = (index: number, target: boolean): FjordEncounterAction | undefined => {
-        if (index < 0 || !exchange) return;
-        const action = actions[index];
-        const point = target ? action.actorPosition : action.targetPosition;
-        return { key: entry.id + ':' + (entry.exchanges.length - 1) + ':' + index,
-            tick: exchange.tick, facing: observable(point) ? { x: point.x, z: point.z } : null,
-            outcome: action.outcome };
-    };
-    const outgoing = summarize(actions.findIndex(action => action.actorClanId === clanId &&
-        action.actorId === personaId), false);
-    const incoming = summarize(actions.findIndex(action => action.targetClanId === clanId &&
-        action.targetId === personaId), true);
+    if (!active && entry.phase !== 'contact' && !retainedTail) return;
+    const firstExchangeIndex = Math.max(0, entry.exchanges.length - 2);
+    // A newly known exchange may arrive while interpolation is still inside its predecessor.
+    // Keep only those two recorded windows, retaining their original source indices and keys.
+    const windows: FjordEncounterWindow[] = entry.exchanges.slice(-2).map((recorded, offset) => {
+        const actions = recorded.actions;
+        const summarize = (index: number, target: boolean): FjordEncounterAction | undefined => {
+            if (index < 0) return;
+            const action = actions[index];
+            const point = target ? action.actorPosition : action.targetPosition;
+            return { key: entry.id + ':' + (firstExchangeIndex + offset) + ':' + index,
+                tick: recorded.tick, facing: observable(point) ? { x: point.x, z: point.z } : null,
+                outcome: action.outcome };
+        };
+        const outgoing = summarize(actions.findIndex(action => action.actorClanId === clanId &&
+            action.actorId === personaId), false);
+        const incoming = summarize(actions.findIndex(action => action.targetClanId === clanId &&
+            action.targetId === personaId), true);
+        return { tick: recorded.tick, ...(outgoing ? { outgoing } : {}), ...(incoming ? { incoming } : {}) };
+    });
+    const latest = recent ? windows.at(-1) : undefined;
+    const outgoing = latest?.outgoing, incoming = latest?.incoming;
     const phaseEventType = entry.phase === 'contact' ? 'EncounterContact' :
         entry.phase === 'engaging' ? 'EncounterCommitted' :
         entry.phase === 'withdrawing' ? 'EncounterWithdrawalRequested' : 'EncounterResolved';
@@ -97,7 +114,7 @@ export function projectEncounterCue(owner: SimulationState, clanId: string, pers
         Math.hypot(second.x - position.x, second.z - position.z));
     const facing = outgoing?.facing ?? incoming?.facing ?? points[0];
     return { version: 1, id: entry.id, phase: entry.phase, active, snapshotTick: tick, startedAt,
-        exchangeTicks: rules.policy.exchangeTicks,
+        exchangeTicks: rules.policy.exchangeTicks, windows,
         withdrawing: entry.withdrawingSide === (clanId === entry.attackingClanId ? 'attacker' : 'defender'),
         withdrawalStartedAt: rules.withdrawalRequestedAt, withdrawalTicks: rules.policy.disengageTicks,
         facing: facing ? { x: facing.x, z: facing.z } : null, ...(outgoing ? { outgoing } : {}), ...(incoming ? { incoming } : {}) };

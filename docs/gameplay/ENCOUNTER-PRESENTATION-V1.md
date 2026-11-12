@@ -10,14 +10,22 @@ and field clothing follow [visible equipment](VISIBLE-EQUIPMENT-V1.md).
 
 The root campaign's saved encounter records and linked source receipts supply the
 participant, phase and exact tick. A resident receives only a bounded presentation
-cue for its actual participation and the latest registered exchange. Rival cues
-pass the existing per-body current line-of-sight boundary; map knowledge does not
+cue for its actual participation and at most the latest two registered exchange
+windows. Rival cues pass the existing per-body current line-of-sight boundary; map knowledge does not
 reveal hidden residents, their routes, loadout or opponent positions. Scene data
 must not contain rolls, probabilities or future exchange deadlines.
 
 An exchange can record both an outgoing attempt and an incoming result for the
 same person. Its outgoing and response portions are presentation of that same
 registered exchange, not additional attacks or a more detailed invented history.
+The capped display tick selects a recorded window with its original stable keys,
+keeping the prior response while newer facts wait for interpolation to catch up.
+The final exchange remains available for one extra span after its normal end;
+a pose still plays only inside its own recorded interval. This bounded retention
+prevents a final response disappearing at resolution and adds no queued replay.
+An action faces its own currently observable recorded point; an unobserved point
+never falls back to another exchange's opponent.
+
 Actual equipment selects a spear action or an unarmed strike; an actual blocked
 result and actual shield permit shield defence. A survived result permits a brief
 brace, without inventing an injury, blood or an injured walk.
@@ -46,7 +54,15 @@ sampling must not refit or reinstall the body, garment or equipment each frame.
 Priority is recorded casualty, registered exchange action/response, active ready
 or disengagement stance, canonical route locomotion, then ordinary work/culture.
 A recent terminal exchange cue cannot hold a returning party or keep combat
-clothes active indefinitely. Contact readiness cannot stop an unfinished route.
+clothes active indefinitely. Contact readiness cannot stop an unfinished route. A newly committed party first
+finishes any lagging, already confirmed display segment through the existing
+collision controller. It holds the actual reached source point, without a new
+formation offset, teleport or navigation route. Ordinary Walk/Run and route
+facing remain visible during that catch-up; recorded action poses retain priority. A resolved encounter retains
+its final two source windows only until two exchange spans after its final
+exchange, allowing a lagging display tick to finish the known response. The
+resolved cue is inactive; only the window containing that actual display tick
+can pose an action, and homeward movement remains under its existing owner.
 
 Pose age follows known canonical ticks using the existing render interpolation.
 It never advances beyond the known snapshot. Pausing or hiding the page freezes

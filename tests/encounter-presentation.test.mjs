@@ -23,8 +23,8 @@ function projectionWorld(physicalWorld, seed) {
     };
 }
 
-function firstExchange(policy = {}) {
-    const setup = encounterFixture({ defenders: true,
+function firstExchange(policy = {}, fixture = {}) {
+    const setup = encounterFixture({ defenders: true, ...fixture,
         policy: { actionLethalityBps: 0, maximumExchanges: 8, ...policy } });
     const world = projectionWorld(setup.context.world, setup.state.seed);
     setup.context.world = world;
@@ -239,4 +239,186 @@ test('sparse and dense render-only scene requests preserve exact Core snapshots,
     assert.equal(await rendered(1), expected);
     assert.equal(await rendered(15), expected);
     assert.equal(core.serializeState(first.state), saved);
+});
+
+test('consecutive recorded exchanges preserve the previous response while the display catches up to the new known attempt', async () => {
+    const first = firstExchange();
+    const initial = projectFjordSettlement(first.state, first.world, createFjordLayout(first.world));
+    const actor = initial.entities.find(entity => entity.kind === 'persona' && entity.id === 'founder-1');
+    const trace = await sceneTrace(first.state, first.world, actor);
+    try {
+        let state = core.applyCommand(first.state, { type: 'AdvanceTicks', ticks: 4 }, first.setup.context);
+        let view = projectFjordSettlement(state, first.world, initial.layout);
+        let sample = view.entities.find(entity => entity.kind === 'persona' && entity.id === actor.id);
+        trace.layer.prepareExpeditions(state, first.world);
+        await trace.layer.sync([sample]);
+        trace.motion.reconcile([sample], view.ground);
+        trace.layer.advance(trace.motion, .4375, true);
+        assert.equal(trace.requests.at(-1).action, 'brace');
+        assert.equal(trace.requests.at(-1).tick, 800318.5);
+        const previousKey = trace.requests.at(-1).key;
+        state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 1 }, first.setup.context);
+        const before = core.serializeState(state);
+        const entry = state.world.encounters.records[first.encounter.id];
+        assert.equal(entry.exchanges.length, 2, 'The second attempt is an actual consecutive Core exchange');
+        view = projectFjordSettlement(state, first.world, view.layout);
+        sample = view.entities.find(entity => entity.kind === 'persona' && entity.id === actor.id);
+        trace.layer.prepareExpeditions(state, first.world);
+        await trace.layer.sync([sample]);
+        trace.motion.reconcile([sample], view.ground);
+        trace.layer.advance(trace.motion, 0, false);
+        assert.equal(trace.requests.at(-1).action, 'brace', 'The newly known attempt cannot erase the already displayed prior response');
+        assert.equal(trace.requests.at(-1).key, previousKey, 'Retained history keeps its original exchange/action identity');
+        assert.equal(trace.requests.at(-1).tick, 800318.5);
+        const restored = core.reconstructState(before);
+        const loaded = projectFjordSettlement(restored, first.world, view.layout).entities
+            .find(entity => entity.kind === 'persona' && entity.id === actor.id);
+        assert.deepEqual(loaded.status.encounter, sample.status.encounter);
+        assert.ok(sample.status.encounter.windows.length <= 2);
+        assert.doesNotMatch(JSON.stringify(sample.status.encounter.windows),
+            /actorId|targetId|ClanId|probabilityBps|roll|nextExchangeAt/);
+        trace.layer.advance(trace.motion, .5, true);
+        assert.equal(trace.requests.at(-1).action, 'strike', 'Catching up selects the new already registered attempt');
+        assert.equal(trace.requests.at(-1).tick, 800320);
+        assert.notEqual(trace.requests.at(-1).key, previousKey);
+        assert.equal(core.serializeState(state), before);
+    } finally { trace.layer.dispose(); }
+});
+
+test('a real resolved final exchange retains its last response for the capped display tail and then expires', async () => {
+    const first = firstExchange({ maximumExchanges: 1 });
+    let view = projectFjordSettlement(first.state, first.world, createFjordLayout(first.world));
+    const actor = view.entities.find(entity => entity.kind === 'persona' && entity.id === 'founder-1');
+    const trace = await sceneTrace(first.state, first.world, actor);
+    try {
+        let state = core.applyCommand(first.state, { type: 'AdvanceTicks', ticks: 4 }, first.setup.context);
+        view = projectFjordSettlement(state, first.world, view.layout);
+        let sample = view.entities.find(entity => entity.kind === 'persona' && entity.id === actor.id);
+        trace.layer.prepareExpeditions(state, first.world);
+        await trace.layer.sync([sample]);
+        trace.motion.reconcile([sample], view.ground);
+        trace.layer.advance(trace.motion, .4375, true);
+        const previous = trace.layer.describe()[0].encounterPose;
+        assert.equal(previous.action, 'brace');
+        assert.equal(previous.tick, 800318.5);
+        state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 1 }, first.setup.context);
+        const before = core.serializeState(state);
+        assert.equal(state.world.encounters.records[first.encounter.id].phase, 'resolved');
+        view = projectFjordSettlement(state, first.world, view.layout);
+        sample = view.entities.find(entity => entity.kind === 'persona' && entity.id === actor.id);
+        assert.equal(sample.status.encounter?.active, false, 'A retained final response does not hold a resolved participant');
+        trace.layer.prepareExpeditions(state, first.world);
+        await trace.layer.sync([sample]);
+        trace.motion.reconcile([sample], view.ground);
+        trace.layer.advance(trace.motion, 0, false);
+        const tail = trace.layer.describe()[0].encounterPose;
+        assert.equal(tail?.action, 'brace', 'Resolution cannot truncate the previous known response while its display tick is still inside it');
+        assert.equal(tail.key, previous.key);
+        assert.equal(tail.tick, previous.tick);
+        const restored = core.reconstructState(before);
+        assert.deepEqual(projectFjordSettlement(restored, first.world, view.layout).entities
+            .find(entity => entity.kind === 'persona' && entity.id === actor.id).status.encounter, sample.status.encounter);
+        trace.layer.advance(trace.motion, .5, true);
+        assert.equal(trace.layer.describe()[0].encounterPose, undefined, 'No action replays after its actual visual interval');
+        state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 5 }, first.setup.context);
+        assert.equal(projectFjordSettlement(state, first.world, view.layout).entities
+            .find(entity => entity.kind === 'persona' && entity.id === actor.id).status.encounter, undefined,
+            'The extra source-tail allowance is finite');
+    } finally { trace.layer.dispose(); }
+});
+
+test('a newly committed party finishes its confirmed last display segment through existing traffic before holding the actual contact point', async () => {
+    const setup = encounterFixture({ defenders: true, policy: { actionLethalityBps: 0 } });
+    const world = projectionWorld(setup.context.world, setup.state.seed);
+    setup.context.world = world;
+    let state = core.applyCommand(setup.state, { type: 'DispatchIslandMission', groupId: 'group-1',
+        target: setup.target, mission: 'Pillage', priorities: ['Food'] }, setup.context);
+    let previous, entry;
+    for (let tick = 0; tick < 450; tick++) {
+        previous = state;
+        state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 1 }, setup.context);
+        entry = Object.values(state.world.encounters?.records ?? {}).find(record => record.phase === 'engaging');
+        if (entry) break;
+    }
+    assert.ok(entry);
+    assert.equal(entry.exchanges.length, 0, 'The body must settle during the real pre-exchange interval');
+    const oldView = projectFjordSettlement(previous, world, createFjordLayout(world));
+    const oldActor = oldView.entities.find(entity => entity.kind === 'persona' && entity.id === 'founder-1');
+    const view = projectFjordSettlement(state, world, oldView.layout);
+    const actor = view.entities.find(entity => entity.kind === 'persona' && entity.id === oldActor.id);
+    const expected = { x: actor.transform.x, z: actor.transform.z };
+    assert.ok(Math.hypot(oldActor.transform.x - expected.x, oldActor.transform.z - expected.z) > .1,
+        'This real consecutive source sample has an actual display segment left to interpolate');
+    const before = core.serializeState(state);
+    const trace = await sceneTrace(previous, world, oldActor);
+    try {
+        const original = trace.layer.describe()[0].position;
+        trace.layer.prepareExpeditions(state, world);
+        await trace.layer.sync([actor]);
+        trace.motion.reconcile([actor], view.ground);
+        trace.layer.advance(trace.motion, 0, false);
+        assert.deepEqual(trace.layer.describe()[0].position, original, 'Receiving contact never teleports the displayed root');
+        for (let frame = 0; frame < 12; frame++) {
+            const previousPosition = trace.layer.describe()[0].position;
+            trace.layer.advance(trace.motion, .1, true);
+            const position = trace.layer.describe()[0].position;
+            const moved = Math.hypot(position[0] - previousPosition[0], position[2] - previousPosition[2]);
+            if (moved > .001) {
+                const actual = trace.motion.inspect().find(agent => agent.key === actor.selectionKey);
+                assert.ok(['Walk', 'Run'].includes(actual.state), 'An actually moved frame retains its real locomotion gait');
+                assert.ok(Math.abs(actual.speed - moved / .1) < 1e-7,
+                    'Reported locomotion speed follows actual frame distance, not one substep speed');
+            }
+        }
+        const reached = trace.layer.describe()[0].position;
+        assert.ok(Math.hypot(reached[0] - expected.x, reached[2] - expected.z) < .02,
+            'Active contact cannot freeze the root behind the actual confirmed contact point');
+        assert.ok(trace.gaits.some(gait => gait === 'Run' || gait === 'Walk'),
+            'A body still completing its confirmed segment uses ordinary locomotion, rather than a sliding ready pose');
+        for (let frame = 0; frame < 30; frame++) trace.layer.advance(trace.motion, .1, true);
+        const held = trace.layer.describe()[0].position;
+        assert.ok(Math.hypot(held[0] - expected.x, held[2] - expected.z) < .02,
+            'After catching up, the controller holds the actual source point with no formation offset');
+        assert.equal(trace.layer.describe().length, 1, 'No distant crew members are gathered or invented');
+        assert.equal(core.serializeState(state), before);
+    } finally { trace.layer.dispose(); }
+});
+
+test('a retained prior response faces its own actually recorded opponent rather than the newest exchange target', async () => {
+    const first = firstExchange({}, { rivalHomes: rival => Object.fromEntries(Object.keys(rival.personas).sort()
+        .map((id, index) => [id, index < 2 ? { x: 159 + index * 2, z: 129 - index * 2 } :
+            { x: 232 + index % 4 * 4, z: 116 + Math.floor(index / 4) * 8 }])) });
+    const initial = projectFjordSettlement(first.state, first.world, createFjordLayout(first.world));
+    const actor = initial.entities.find(entity => entity.kind === 'persona' && entity.id === 'founder-1');
+    assert.equal(first.encounter.defenderIds.length, 2, 'Both real nearby source residents reach the committed encounter');
+    const previousResponse = actor.status.encounter.incoming;
+    assert.ok(previousResponse?.facing);
+    const trace = await sceneTrace(first.state, first.world, actor);
+    try {
+        let state = core.applyCommand(first.state, { type: 'AdvanceTicks', ticks: 4 }, first.setup.context);
+        let view = projectFjordSettlement(state, first.world, initial.layout);
+        let sample = view.entities.find(entity => entity.kind === 'persona' && entity.id === actor.id);
+        trace.layer.prepareExpeditions(state, first.world);
+        await trace.layer.sync([sample]);
+        trace.motion.reconcile([sample], view.ground);
+        trace.layer.advance(trace.motion, .4375, true);
+        state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 1 }, first.setup.context);
+        view = projectFjordSettlement(state, first.world, view.layout);
+        sample = view.entities.find(entity => entity.kind === 'persona' && entity.id === actor.id);
+        assert.notDeepEqual(sample.status.encounter.outgoing.facing, previousResponse.facing,
+            'The next real exchange selected the other actual reachable defender');
+        const before = core.serializeState(state);
+        trace.layer.prepareExpeditions(state, first.world);
+        await trace.layer.sync([sample]);
+        trace.motion.reconcile([sample], view.ground);
+        trace.layer.advance(trace.motion, 0, false);
+        const displayed = trace.layer.describe()[0];
+        assert.equal(displayed.encounterPose.key, previousResponse.key + ':response');
+        const body = trace.layer.root.getObjectByName(actor.selectionKey);
+        const expected = Math.atan2(previousResponse.facing.x - body.position.x,
+            previousResponse.facing.z - body.position.z);
+        const difference = Math.atan2(Math.sin(body.rotation.y - expected), Math.cos(body.rotation.y - expected));
+        assert.ok(Math.abs(difference) < 1e-7, 'The prior response keeps its own source-facing point');
+        assert.equal(core.serializeState(state), before);
+    } finally { trace.layer.dispose(); }
 });

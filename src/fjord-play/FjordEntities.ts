@@ -4,7 +4,7 @@ import { miningWorkerPosition, type MiningWorker } from '../simulation/Mining';
 import { spatialMemberPosition, type SpatialMission } from '../simulation/SpatialExpeditions';
 import type { SimulationState } from '../simulation/SimulationCore';
 import { createBlueprintSurface, type TerrainSurface } from '../world-generation/TerrainQueries';
-import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
+import type { Point2, WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { StructureSeasonTint } from '../world/StructureSeasonTint';
 import { HomeLighting } from '../world/HomeLighting';
 import { HomeGroundGlow } from '../world/HomeGroundGlow';
@@ -87,8 +87,11 @@ export class FjordEntities {
         if (death) return { ...base, key: death.key, action: 'death',
             startedAt: death.tick, durationTicks: death.durationTicks };
         if (!cue || cue.phase === 'contact' && !stationary) return;
-        const outgoing = cue.outgoing, incoming = cue.incoming;
         const span = cue.exchangeTicks;
+        const window = cue.windows?.find((recorded: { tick: number }) =>
+            tick >= recorded.tick && tick < recorded.tick + span);
+        const outgoing = cue.windows ? window?.outgoing : cue.outgoing;
+        const incoming = cue.windows ? window?.incoming : cue.incoming;
         const outgoingSpan = incoming ? span * .6 : span;
         if (outgoing && tick >= outgoing.tick && tick < outgoing.tick + outgoingSpan)
             return { ...base, key: outgoing.key + ':attempt', action: base.hasSpear ? 'spear' : 'strike',
@@ -98,7 +101,7 @@ export class FjordEntities {
             return { ...base, key: incoming.key + ':response',
                 action: incoming.outcome === 'blocked' && base.hasShield ? 'shield' : 'brace',
                 startedAt: incomingStart, durationTicks: outgoing ? span * .4 : span };
-        if (!cue.active && cue.phase !== 'contact') return;
+        if (!stationary || !cue.active && cue.phase !== 'contact') return;
         return { ...base, key: cue.id + ':' + cue.phase,
             action: cue.phase === 'withdrawing' && cue.withdrawing ? 'withdraw' : 'ready',
             startedAt: cue.phase === 'withdrawing' ? cue.withdrawalStartedAt ?? cue.startedAt : cue.startedAt,
@@ -629,9 +632,14 @@ export class FjordEntities {
                 const entry = this.entries.get(key);
                 const encounter = entry?.model.userData.canonical?.encounter;
                 const body = entry?.model.position;
-                // Contact holds the reached body in the existing collision controller; it adds no formation offset.
-                travelTargets.push({ key, point: encounter?.active && body ? { x: body.x, z: body.z } : point,
-                    settled: arrived || !!encounter?.active, speed: Math.max(4, 3 / this.expeditionTickSeconds) });
+                // Finish the already confirmed segment through existing traffic, then hold its actual point.
+                // Contact adds neither a standing-formation offset nor a target at the lagging display body.
+                const reached = encounter?.active ? points.get(id) ?? point : point;
+                const caughtUp = body && Math.hypot(reached.x - body.x, reached.z - body.z) < .01 &&
+                    frame.elapsed >= frame.duration;
+                travelTargets.push({ key, point: reached,
+                    settled: encounter?.active ? !!caughtUp : arrived,
+                    speed: Math.max(4, 3 / this.expeditionTickSeconds) });
             }
         }
         if (travelTargets.length) motion.followExpeditions(travelTargets, running ? delta : 0);
@@ -673,11 +681,27 @@ export class FjordEntities {
             if (!model || model.userData.canonical?.aboardShip || model.userData.canonical?.mining || model.userData.canonical?.combatDeath) continue;
             model.position.set(agent.x, agent.y, agent.z);
             const encounter = model.userData.canonical?.encounter;
-            const facing = encounter?.active || agent.state === 'Idle' ? encounter?.facing : null;
+            const presented = this.presentEncounter(model, agent.state === 'Idle');
+            const pose: NativeEncounterPoseRequest | undefined = presented ? model.userData.encounterPose : undefined;
+            let facing: Point2 | null = null;
+            if (pose?.action === 'ready' || pose?.action === 'withdraw') {
+                facing = encounter?.facing ?? null;
+            } else if (pose) {
+                const windows = encounter?.windows ?? [{ outgoing: encounter?.outgoing, incoming: encounter?.incoming }];
+                for (const recorded of windows) {
+                    if (recorded.outgoing && pose.key === recorded.outgoing.key + ':attempt') {
+                        facing = recorded.outgoing.facing;
+                        break;
+                    }
+                    if (recorded.incoming && pose.key === recorded.incoming.key + ':response') {
+                        facing = recorded.incoming.facing;
+                        break;
+                    }
+                }
+            }
             model.rotation.y = facing ? Math.atan2(facing.x - agent.x, facing.z - agent.z) : agent.rotation;
-            if (!this.presentEncounter(model, agent.state === 'Idle'))
-                this.models.animate(model, encounter?.active ? 'Idle' : agent.state, encounter?.active ? 0 : agent.speed,
-                    running ? delta : 0);
+            if (!presented)
+                this.models.animate(model, agent.state, agent.speed, running ? delta : 0);
             const facts = model.userData.canonical, animation = model.userData.motion;
             if (facts.workEligible && facts.occupation === 'woodworker' &&
                 agent.visit?.phase === 'activity' && animation?.sourceClip === 'Attack') {
@@ -716,7 +740,8 @@ export class FjordEntities {
     }
     humanPositions() {
         return [...this.entries.values()].flatMap(({ model }) =>
-            model.userData.canonical?.kind === 'persona' && model.userData.canonical.living && model.visible
+            model.userData.canonical?.kind === 'persona' && model.userData.canonical.living !== false &&
+                !model.userData.canonical.combatDeath && model.visible
                 ? [(() => { const p = model.getWorldPosition(new Vector3()); return { x: p.x, z: p.z }; })()] : []);
     }
     performanceCounts() {

@@ -308,7 +308,7 @@ export class LivingWorldController {
         this.campfire = campfire;
         this.communityReservations = communityReservations;
         this.ground = ground;
-        const active = entities.filter(e => e.transform && e.status.living && !e.status.aboardShip && !e.status.mining && (e.kind === 'persona' || e.kind === 'cattle'));
+        const active = entities.filter(e => e.transform && e.status.living !== false && !e.status.combatDeath && !e.status.aboardShip && !e.status.mining && (e.kind === 'persona' || e.kind === 'cattle'));
         // These are the same plot/anchor/path clearances applied by the scene's nature reconciler.
         const cleared = [{ ...this.campfire.transform, halfWidth: this.campfire.clearingRadius,
             halfDepth: this.campfire.clearingRadius }, ...communityReservations.map(communityHearthObstacleBounds),
@@ -1073,9 +1073,23 @@ export class LivingWorldController {
         }
         if (!Number.isFinite(seconds) || seconds <= 0) return;
         const elapsed = Math.min(seconds, 1), steps = Math.ceil(elapsed / .05);
+        const moved = new Map<Agent, { distance: number; gait: 'Walk' | 'Run' }>();
         for (let step = 0; step < steps; step++) for (const target of targets) {
             const a = this.agents.get(target.key);
-            if (a?.entity.status.expedition) this.stepExpedition(a, target, elapsed / steps);
+            if (!a?.entity.status.expedition) continue;
+            const x = a.x, z = a.z;
+            this.stepExpedition(a, target, elapsed / steps);
+            const distance = Math.hypot(a.x - x, a.z - z);
+            if (distance > 0 && (a.state === 'Walk' || a.state === 'Run')) {
+                const previous = moved.get(a);
+                moved.set(a, { distance: (previous?.distance ?? 0) + distance, gait: a.state });
+            }
+        }
+        // A later empty-path substep must not erase motion that actually happened this frame.
+        // Average the crossed distance over the whole frame so a short final step does not double cadence.
+        for (const [actor, movement] of moved) {
+            actor.state = movement.gait;
+            actor.speed = movement.distance / elapsed;
         }
         const cost = performance.now() - started;
         this.metrics.lastUpdateMs += cost;
