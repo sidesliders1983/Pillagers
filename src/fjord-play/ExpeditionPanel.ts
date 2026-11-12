@@ -515,10 +515,18 @@ export class ExpeditionPanel {
     private missionDescription(mission: Mission) {
         if (mission.transport?.phase === 'boarding') return 'Walking to shore. The group boards together when everyone arrives.';
         if (mission.transport?.phase === 'embarked') return 'Longship · 2× speed · 2× Food and cargo capacity. Choose water to sail; disembark near safe shore.';
-        if (mission.missionType) return mission.status === 'Exploring' ? `${mission.missionType} in progress. Results are reported after returning home.` :
-            mission.status === 'Traveling' ? `Travelling for ${mission.missionType}. Return home to change missions.` :
-            mission.status === 'Returning' ? 'The group is returning home with its report.' :
-            mission.status === 'Stranded' ? 'The return route is blocked. The group is stranded.' : 'Mission completed.';
+        if (mission.missionType) {
+            const description = mission.status === 'Exploring' ? `${mission.missionType} in progress. Results are reported after returning home.` :
+                mission.status === 'Traveling' ? `Travelling for ${mission.missionType}. Return home to change missions.` :
+                mission.status === 'Returning' ? 'The group is returning home with its report.' :
+                mission.status === 'Stranded' ? 'The return route is blocked. The group is stranded.' : 'Mission completed.';
+            if (!mission.recon) return description;
+            const observation = mission.recon;
+            const coverage = observation.coverage === 'circuit' ? 'circuit' : 'partial arc';
+            const progress = `${observation.reachedViewpoints}/${observation.plannedViewpoints} viewpoints reached`;
+            return `${description} Observation ${coverage}: ${progress}; ` +
+                `${observation.observedViewpoints} settlement sightings.`;
+        }
         if (mission.returnReason === 'low-supplies')
             return 'Returning home — supplies needed for the journey home. No exploration time remains.';
         if (mission.returnReason === 'outward-route-blocked')

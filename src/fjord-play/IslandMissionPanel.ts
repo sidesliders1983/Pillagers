@@ -2,6 +2,7 @@ import { territoryNotice } from './TerritoryView';
 import { renderRaiderEquipment, renderEquipmentReadiness, renderEquipmentReport } from './SmitheryView';
 import type { Weapon, Shield } from '../simulation/Smithery';
 import { inspectIslandMissions, type IslandTarget } from '../simulation/IslandMissions';
+import { inspectSpatialExpeditions } from '../simulation/SpatialExpeditions';
 import { expeditionEligible, groupMission, type Cargo, type MissionType } from '../simulation/WorldExpeditions';
 import type { SimulationCommand } from '../simulation/SimulationCore';
 import type { GameplaySession } from '../gameplay-lab/GameplaySession';
@@ -25,7 +26,16 @@ export class IslandMissionPanel {
     private groupId = '';
     private siteId = '';
     private choosing = false;
-    private pending?: { target: IslandTarget; type: MissionType; food: number; crew: string; priorities: Cargo[]; equipment: string };
+    private pending?: {
+        target: IslandTarget;
+        type: MissionType;
+        food: number;
+        crew: string;
+        priorities: Cargo[];
+        equipment: string;
+        duration: number;
+        observationPlan: string | null;
+    };
     private html = '';
     private message = '';
     private abort = new AbortController();
@@ -151,8 +161,10 @@ export class IslandMissionPanel {
                 const origins = this.origins(members);
                 const offer = this.session.islandMissionOffer(this.groupId, pending.target, pending.type, pending.priorities, origins);
                 if (members.join(',') !== pending.crew || offer.foodCost !== pending.food ||
-                    JSON.stringify(offer.equipment ?? null) !== pending.equipment)
-                    throw new Error('Crew, equipment or conditions changed. Review the mission again.');
+                    JSON.stringify(offer.equipment ?? null) !== pending.equipment ||
+                    offer.duration !== pending.duration ||
+                    (offer.observationRoute?.planKey ?? null) !== pending.observationPlan)
+                    throw new Error('Crew, equipment, route or conditions changed. Review the mission again.');
                 this.command({ type: 'DispatchIslandMission', groupId: this.groupId, target: pending.target,
                     mission: pending.type, priorities: pending.priorities, origins });
                 this.pending = undefined; this.dialog.close(); this.cancelTarget();
@@ -169,11 +181,14 @@ export class IslandMissionPanel {
                 .map(input => input.dataset.cargo as Cargo) : [];
             const offer = this.session.islandMissionOffer(this.groupId, target, type, priorities, this.origins(members));
             this.pending = { target, type, food: offer.foodCost, crew: members.join(','), priorities,
-                equipment: JSON.stringify(offer.equipment ?? null) };
+                equipment: JSON.stringify(offer.equipment ?? null), duration: offer.duration,
+                observationPlan: offer.observationRoute?.planKey ?? null };
             this.dialog.querySelector('#island-mission-title')!.textContent = `Start ${type}`;
             this.dialog.querySelector('#island-mission-summary')!.innerHTML = `<p>${escape(this.session.readSnapshot().world!.groups[this.groupId].name)}</p>
                 <p>This will cost ${offer.foodCost} Food (${offer.foodPerMember} per member). Are you sure?</p>
                 <p class="fjord-caption">${offer.duration} ticks, including travel and return. Success: ${offer.successBps / 100}%. ${type === 'Pillage' && offer.equipment ? 'Personal casualty risks below.' : `Risk per member: ${offer.casualtyBps / 100}%.`} No refunds.</p>
+                ${offer.observationRoute ? `<p class="fjord-caption">Planned observation: ${offer.observationRoute.coverage === 'circuit' ? 'circuit' : 'partial arc'} · ${offer.observationRoute.coverageDegrees}° · ${offer.observationRoute.viewpointCount} viewpoints.</p>
+                    <p class="fjord-caption">${offer.observationRoute.travelTicks} travel and return ticks · ${offer.observationRoute.observationTicks} observation ticks. Knowledge depends on reached viewpoints and actual visibility.</p>` : ''}
                 ${type === 'Pillage' ? renderEquipmentReadiness(offer.equipment) : ''}`;
             this.dialog.showModal();
             this.dialog.querySelector<HTMLButtonElement>('[data-island-cancel]')!.focus();
@@ -195,6 +210,9 @@ export class IslandMissionPanel {
         const available = !!group?.memberIds.length && !groupMission(state, this.groupId) &&
             group.memberIds.every(id => expeditionEligible(state, id, group.id));
         const active = Object.values(state.world!.spatial?.missions ?? {}).find(m => m.groupId === this.groupId && m.status !== 'Returned');
+        const activeView = active ? inspectSpatialExpeditions(state).missions.find(mission =>
+            mission.id === active.id) : undefined;
+        const observation = activeView?.recon;
         let groupReason = '';
         if (!group) groupReason = 'Create or choose a group to send a mission.';
         else if (!group.memberIds.length) groupReason = 'Add eligible residents to this group first.';
@@ -223,6 +241,7 @@ export class IslandMissionPanel {
             ${groupReason ? `<p class="fjord-caption" id="island-mission-group-block">${escape(groupReason)}</p>` : ''}
             ${canRecall ? '<button type="button" data-island-return>Return group home</button>' : ''}
             ${active?.task ? `<p>${escape(active.task.type)} · ${escape(active.status)}</p>` : ''}
+            ${observation ? `<p class="fjord-caption">Observation ${observation.coverage === 'circuit' ? 'circuit' : 'partial arc'} · ${observation.reachedViewpoints}/${observation.plannedViewpoints} viewpoints reached · ${observation.observedViewpoints} settlement sightings.</p>` : ''}
             <button type="button" data-island-area title="${escape(groupReason)}" ${available ? '' : 'disabled aria-describedby="island-mission-group-block"'}>Recon mapped area</button>
             ${group?.memberIds.length ? renderRaiderEquipment(state, group.memberIds) : ''}
             <h4>Known places</h4>${sites.length ? sites.map(s => `<button type="button" data-island-site="${escape(s.id)}"

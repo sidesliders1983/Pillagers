@@ -1,5 +1,5 @@
 import { canonicalDepartureOrigins } from './ResidentPresence';
-import { planRoute, maximumTargetCorrection } from '../world-generation/LandRoutes';
+import { planRoute, maximumTargetCorrection, segmentIntersectsBounds } from '../world-generation/LandRoutes';
 export { planRoute } from '../world-generation/LandRoutes';
 import { assertIslandClanWorld } from './IslandClans';
 import { embarkReachedGroup, longshipReturnTicks, recallLongship, releaseLongship, sailLongship,
@@ -11,9 +11,11 @@ import { commitClanObservation, assertDiscoveryWorld } from './ClanDiscovery';
 import type { SimulationState } from './SimulationCore';
 import { absoluteTick, expeditionEligible, groupMission, nextExpeditionGroupId } from './WorldExpeditions';
 import { eventFacts } from './EventFacts';
-import { completeIslandMission, observeIslandMission, recordIslandSightings, validateIslandMission, type IslandMissionTask } from './IslandMissions';
+import { completeIslandMission, observeIslandMission, sampleReconMission, recordIslandSightings, validateIslandMission, type IslandMissionTask } from './IslandMissions';
 
 export interface PhysicalExpeditionContext {
+    /** Snapshotted for new observation missions; existing routes keep their saved margin. */
+    reconSafetyMargin?: number;
     presenceSites?: import('./ResidentPresence').PresenceSite[];
     longshipOrigins?: Record<string, LongshipPose>;
     wildlifeWorld?: WorldBlueprint;
@@ -486,6 +488,13 @@ export function inspectSpatialExpeditions(state: SimulationState) {
             departedAt: mission.departedAt, returnedAt: mission.returnedAt,
             position: spatialMissionPosition(mission), supplies: inspectSupplies(state, mission),
             missionType: mission.task?.type ?? null,
+            ...(mission.task?.recon ? { recon: {
+                coverage: mission.task.recon.coverage,
+                plannedViewpoints: mission.task.recon.viewpoints.length,
+                reachedViewpoints: mission.task.recon.reachedViewpoints,
+                observedViewpoints: mission.task.recon.samples.filter(sample => sample.observedSiteId).length,
+                coverageDegrees: mission.task.recon.coverageDegrees,
+            } } : {}),
             result: mission.status === 'Returned' ? structuredClone(mission.task?.result ?? null) : null,
         }))
     };
@@ -518,6 +527,8 @@ function modeStepPassable(state: SimulationState, mission: SpatialMission, conte
         const route = mission.memberRoutes![id], total = routeLength(route);
         let progress = mission.travelled;
         let advance = mission.status === 'Traveling' ? speed : 0;
+        const waypoint = mission.task?.recon?.viewpoints[mission.task.recon.reachedViewpoints];
+        if (waypoint && mission.status === 'Traveling') advance = Math.min(advance, waypoint.distance - mission.travelled);
         if (mission.status === 'Returning') {
             progress = mission.homeOrigins ? (mission.returnFrom ?? mission.distance) - mission.travelled : mission.travelled;
             advance = mission.homeOrigins ? speed : -speed;
@@ -537,6 +548,22 @@ function modeStepPassable(state: SimulationState, mission: SpatialMission, conte
             const end = edgeLength ? Math.min(1, (high - edgeStart) / edgeLength) : 0;
             const from = { x: a.x + (b.x - a.x) * start, z: a.z + (b.z - a.z) * start };
             const to = { x: a.x + (b.x - a.x) * end, z: a.z + (b.z - a.z) * end };
+            if (mission.task?.recon) {
+                const newlyKnown = context.world.rivalSite;
+                const protectedArea = mission.task.recon.protectedBounds ?? (newlyKnown &&
+                    state.world!.islandIntel?.sites[newlyKnown.candidateId] ? newlyKnown.bounds : null);
+                // A new legitimate sighting may abort an unknown-area survey. A party already
+                // inside that newly learned margin must still be able to retrace its real exit.
+                if (mission.status !== 'Returning' && protectedArea &&
+                    segmentIntersectsBounds(from, to, protectedArea, mission.task.recon.safetyMargin + .4)) return false;
+                const home = mission.homeOrigins![id];
+                if (context.exclusions?.some(box => {
+                    const homeExit = home.x >= box.minX - .4 && home.x <= box.maxX + .4 &&
+                        home.z >= box.minZ - .4 && home.z <= box.maxZ + .4 &&
+                        (mission.status === 'Traveling' && edge === 1 || mission.status === 'Returning' && edge === route.length - 1);
+                    return !homeExit && segmentIntersectsBounds(from, to, box, .4);
+                })) return false;
+            }
             const length = Math.hypot(to.x - from.x, to.z - from.z), samples = Math.max(1, Math.ceil(length));
             let previous = surface.surfaceHeightAt(from.x, from.z);
             for (let step = 1; step <= samples; step++) {
@@ -597,6 +624,11 @@ export function stepSpatialExpeditions(state: SimulationState, context?: Physica
             observe = stepLongship(state, mission, bound) || observe;
             continue;
         }
+        const recon = mission.task?.recon;
+        if (recon?.pauseUntil !== null && recon?.pauseUntil !== undefined) {
+            if (now <= recon.pauseUntil && mission.status !== 'Returning') { mission.updatedAt = now; continue; }
+            recon.pauseUntil = null;
+        }
         if (mission.task && !modeStepPassable(state, mission, bound)) {
             if (mission.status === 'Returning') {
                 strand(state, mission, 'The confirmed return route is blocked.');
@@ -617,7 +649,10 @@ export function stepSpatialExpeditions(state: SimulationState, context?: Physica
             consumeCarriedFood(state, mission);
         }
         if (status === 'Traveling') {
-            mission.travelled = Math.min(mission.distance, mission.travelled + (mission.task?.speed ?? spatial!.policy.metresPerTick));
+            const nextViewpoint = recon?.viewpoints[recon.reachedViewpoints];
+            mission.travelled = Math.min(mission.distance, nextViewpoint?.distance ?? Infinity,
+                mission.travelled + (mission.task?.speed ?? spatial!.policy.metresPerTick));
+            if (nextViewpoint && mission.travelled === nextViewpoint.distance) sampleReconMission(state, mission, bound);
             if (mission.travelled === mission.distance) {
                 mission.status = 'Exploring'; mission.exploringUntil = mission.task?.operateUntil ?? (mission.provisions ? null : now + spatial!.policy.exploringTicks);
                 if (mission.transport?.phase === 'boarding') embarkReachedGroup(state, mission, bound);
@@ -815,6 +850,9 @@ export function assertSpatialWorld(state: SimulationState, context: PhysicalExpe
             const cellId = `area-${Math.round((ref.position.z - nav.bounds.minZ) / nav.spacing) * nav.columns +
                 Math.round((ref.position.x - nav.bounds.minX) / nav.spacing)}`;
             const site = context.world.rivalSite;
+            const recon = mission.task.recon;
+            if (recon && recon.protectedBounds && JSON.stringify(recon.protectedBounds) !== JSON.stringify(site?.bounds))
+                throw new Error('Invalid Recon protected geography.');
             if (ref.kind === 'area' ? ref.id !== cellId : !site || ref.id !== site.candidateId ||
                 Math.hypot(ref.position.x - site.center.x, ref.position.z - site.center.z) >
                     Math.max(maximumTargetCorrection, nav.spacing / Math.SQRT2) + 1e-6)
