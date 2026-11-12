@@ -344,7 +344,9 @@ export class MeshyHuman {
    outfit: garmentAt('full'), shoes: garmentAt('footwear'),
    trousers: garmentAt('lower'), top: garmentAt('upper', 'over'),
    equipment: assetOfType('equipment'),
-   equipmentItems: installed.filter(source => source.asset.type === 'equipment').map(source => source.asset.id),
+   ...(this.root.userData.presentation?.equipmentItems?.length ? {
+    equipmentItems: installed.filter(source => source.asset.type === 'equipment').map(source => source.asset.id),
+   } : {}),
   };
  }
  readonly root=new Group();readonly clips:GLTF['animations'];

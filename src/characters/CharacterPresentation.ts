@@ -91,7 +91,8 @@ export function parseCharacterPresentation(value: unknown = defaultCharacterPres
             return asset.type !== 'equipment' || !asset.metadata?.equipmentBindings ||
                 !['socket_hand_L', 'socket_hand_R'].includes(asset.metadata.anchor);
         })) throw new Error('Choose up to two distinct native hand equipment modules.');
-    result.equipmentItems = [...equipmentItems];
+    if (Object.hasOwn(input, 'equipmentItems')) result.equipmentItems = [...equipmentItems];
+    else delete result.equipmentItems;
     const separateRequested = separateGarmentKeys.some(key => result[key] !== 'none');
     if (separateRequested && result.outfit !== 'auto' && result.outfit !== 'none'
         && !complementaryFootwear(result)) {
