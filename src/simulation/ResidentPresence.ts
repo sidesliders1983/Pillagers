@@ -215,6 +215,22 @@ export function releasePresence(actor: ResidentPresence) {
     actor.facing = null;
     freezePresence(actor);
 }
+/** Custody owns this body's motion until the actual source-home or destination handoff. */
+export function syncCustodyPresence(state: SimulationState, personaId: string, motion: {
+    position: Point2; previousPosition: Point2; reachedRoute: Point2[]; updatedAt: number;
+}) {
+    const actor = state.residentPresence?.residents[personaId];
+    if (!actor) return;
+    releasePresence(actor);
+    delete actor.placement;
+    actor.position = { ...motion.position };
+    actor.previousPosition = { ...motion.previousPosition };
+    actor.route = motion.reachedRoute.map(point => ({ ...point }));
+    actor.distance = presenceRouteLength(actor.route);
+    actor.travelled = actor.distance;
+    actor.previousTravelled = 0;
+    actor.updatedAt = motion.updatedAt;
+}
 /** An indoor reference comes from saved household facts or the crew that actually returned this resident. */
 function residentAnchor(state: SimulationState, id: string): Point2 {
     const saved = state.residentPresence!;
@@ -223,10 +239,12 @@ function residentAnchor(state: SimulationState, id: string): Point2 {
     const household = Object.values(state.households).find(home => home.memberIds.includes(id));
     const relative = household?.memberIds.slice().sort().filter(member => member !== id)
         .map(member => saved.residents[member]?.home).find(Boolean);
-    if (relative) return relative;
     for (let index = state.events.length - 1; index >= 0; index--) {
         const event = state.events[index];
         if (event.type !== 'PersonaTransferredIn' || event.personaId !== id) continue;
+        const arrival = event.details?.arrivalPosition as Point2 | undefined;
+        if (arrival && point(arrival)) return { ...arrival };
+        if (relative) return relative;
         const missionId = event.details?.missionId;
         const mission = typeof missionId === 'string' ? state.world?.spatial?.missions[missionId] : undefined;
         const crew = mission?.memberIds.slice().sort().find(member => state.personas[member]?.deathWinter === null);
@@ -236,7 +254,7 @@ function residentAnchor(state: SimulationState, id: string): Point2 {
         }
         break;
     }
-    return saved.site.center;
+    return relative ?? saved.site.center;
 }
 /** New identities reserve a dry, reachable exterior from saved household facts, never later scene facts. */
 function allocateResidentHome(state: SimulationState, id: string, context: PhysicalExpeditionContext) {

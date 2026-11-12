@@ -1,3 +1,4 @@
+import { assertLivestockWorld } from '../simulation/LivestockPresence';
 import { assertMiningWorld } from '../simulation/Mining';
 import type { TradeConfig } from '../simulation/VisitingMerchants';
 import { gatheringOffer, inspectCulture } from '../simulation/CulturalEvents';
@@ -30,27 +31,33 @@ export class GameplaySession {
     private physicalExclusions?: () => PhysicalExpeditionContext['exclusions'];
     private physicalShips?: () => PhysicalExpeditionContext['longshipOrigins'];
     private physicalResidents?: () => PresenceSite[];
+    private physicalLivestock?: () => PhysicalExpeditionContext['livestockPositionsByClan'];
     bindPhysicalWorld(world: PhysicalExpeditionContext['world'], worldId: string,
         exclusions?: () => PhysicalExpeditionContext['exclusions'],
         ships?: () => PhysicalExpeditionContext['longshipOrigins'],
-        residents?: () => PresenceSite[]): void {
+        residents?: () => PresenceSite[],
+        livestock?: () => PhysicalExpeditionContext['livestockPositionsByClan']): void {
         const fullWorld = world as WorldBlueprint;
         const context = { world, worldId, ...(fullWorld.config && fullWorld.coast && fullWorld.biomes && fullWorld.placementPlan ? { wildlifeWorld: fullWorld } : {}) };
         assertMiningWorld(this.state, world, worldId);
         assertSpatialWorld(this.state, context);
         assertWildlifeWorld(this.state, context);
         assertTerritorialWorld(this.state, context);
+        assertLivestockWorld(this.state, context);
         this.physicalWorld = context;
         this.physicalExclusions = exclusions;
         this.physicalShips = ships;
         this.physicalResidents = residents;
+        this.physicalLivestock = livestock;
     }
-    private physicalContext() {
+    private physicalContext(adoptingLivestock = false) {
         return this.physicalWorld && { ...this.physicalWorld, exclusions: this.physicalExclusions?.(),
-            longshipOrigins: this.physicalShips?.() };
+            longshipOrigins: this.physicalShips?.(),
+            livestockPositionsByClan: adoptingLivestock || this.state.world?.territory
+                ? this.physicalLivestock?.() : undefined };
     }
     initializeTerritory(): void {
-        const context = this.physicalContext();
+        const context = this.physicalContext(true);
         const next = initializeTerritorialAwareness(this.state, context && {
             ...context, ...(!this.state.world?.territory ? { presenceSites: this.physicalResidents?.() } : {}),
         });
@@ -152,7 +159,8 @@ export class GameplaySession {
     }
     initializeMining(world: WorldBlueprint, worldId: string): void {
         this.state = initializePhysicalMining(this.state, world, worldId);
-        this.bindPhysicalWorld(world, worldId, this.physicalExclusions, this.physicalShips, this.physicalResidents);
+        this.bindPhysicalWorld(world, worldId, this.physicalExclusions, this.physicalShips,
+            this.physicalResidents, this.physicalLivestock);
         this.invalidateRead();
     }
     initializeDiscovery(world: WorldBlueprint, worldId: string): void {
@@ -302,6 +310,7 @@ export class GameplaySession {
     private replace(state: SimulationState, fresh = true): void {
         this.physicalWorld = undefined;
         this.physicalExclusions = undefined;
+        this.physicalLivestock = undefined;
         this.attentionIndex = new AttentionHistoryIndex([wildlifeAttentionAdapter, territoryAttentionAdapter]);
         this.familyIndex = new FamilyTreeIndex();
         this.personalIndex = new PersonalHistoryIndex();

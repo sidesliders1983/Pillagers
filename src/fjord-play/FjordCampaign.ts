@@ -219,6 +219,33 @@ export class FjordCampaign {
     enableTerritorialAwareness(): void {
         this.session.initializeTerritory();
     }
+    private livestockBinding?: {
+        revision: number;
+        blueprint: WorldBlueprint;
+        positions: Record<string, Record<string, Point2>>;
+    };
+    private livestockPositions(): Record<string, Record<string, Point2>> | undefined {
+        const state = this.session.readSnapshot(), link = state.world?.island;
+        if (!link) return undefined;
+        const target = state.world!.targetClans[link.clanId];
+        if (state.livestockPresence && target.livestockPresence) return undefined;
+        if (this.livestockBinding?.revision === this.session.revision &&
+            this.livestockBinding.blueprint === this.blueprint) return this.livestockBinding.positions;
+        // Saved layout and actual identities supply static positions without a renderer or grazing poses.
+        const local = projectFjordSettlement(state, this.blueprint, this.layout);
+        const remote = projectRivalSettlement(target, this.blueprint, this.rivalLayout);
+        this.layout = local.layout;
+        this.rivalLayout = remote.layout;
+        const positions: Record<string, Record<string, Point2>> = {};
+        for (const { clan, view } of [{ clan: state, view: local }, { clan: target, view: remote }]) {
+            const cattle = view.entities.filter(entity => entity.kind === 'cattle' &&
+                entity.status.living && entity.transform);
+            positions[clan.clan.id] = Object.fromEntries(cattle.map(entity =>
+                [entity.id, { x: entity.transform!.x, z: entity.transform!.z }]));
+        }
+        this.livestockBinding = { revision: this.session.revision, blueprint: this.blueprint, positions };
+        return positions;
+    }
     private bindExpeditionWorld() {
         this.session.bindPhysicalWorld(this.blueprint, geographyIdentity(this.blueprint), () => {
             const fire = settlementCampfire(this.blueprint);
@@ -244,7 +271,8 @@ export class FjordCampaign {
                         minX: rivalFire.x-5, maxX: rivalFire.x+5, minZ: rivalFire.z-5, maxZ: rivalFire.z+5
                     }] : []);
         }, () => Object.fromEntries(Object.keys(this.session.readSnapshot().landing?.longships ?? {})
-            .map(id => [id, longshipBerth(this.layout.mooring)])), () => this.presenceSites());
+            .map(id => [id, longshipBerth(this.layout.mooring)])), () => this.presenceSites(),
+            () => this.livestockPositions());
     }
     /** Prepare new-campaign deposits before discovery/founding; historical worlds stay unchanged. */
     prepareMining(): void {

@@ -74,7 +74,7 @@ export class FjordEntities {
             this.expeditionFrames.clear();
             for (const entry of this.entries.values()) entry.yardFloor = undefined;
         }
-        const active = Object.values(state.world?.spatial?.missions ?? {}).filter(m => m.status !== 'Returned' && m.status !== 'Prepared');
+        const active = Object.values(state.world?.spatial?.missions ?? {}).filter(m => m.status !== 'Returned' && m.status !== 'Lost' && m.status !== 'Prepared');
         const ids = new Set(active.map(m => m.id));
         this.expeditionStanding!.prepare(standingGround);
         for (const id of this.expeditionFrames.keys()) if (!ids.has(id)) this.expeditionFrames.delete(id);
@@ -564,8 +564,15 @@ export class FjordEntities {
             const arrived = frame.mission.status === 'Exploring' &&
                 (frame.from === frame.mission.travelled || frame.elapsed >= frame.duration);
             const goals = this.expeditionStanding!.targets(frame.mission.id, points, arrived);
-            for (const [id, point] of goals) travelTargets.push({ key: 'persona:' + id, point,
-                settled: arrived, speed: Math.max(4, 3 / this.expeditionTickSeconds) });
+            for (const [id, point] of goals) {
+                const key = 'persona:' + id;
+                const entry = this.entries.get(key);
+                const encounter = entry?.model.userData.canonical?.encounter;
+                const body = entry?.model.position;
+                // Contact holds the reached body in the existing collision controller; it adds no formation offset.
+                travelTargets.push({ key, point: encounter && body ? { x: body.x, z: body.z } : point,
+                    settled: arrived || !!encounter, speed: Math.max(4, 3 / this.expeditionTickSeconds) });
+            }
         }
         if (travelTargets.length) motion.followExpeditions(travelTargets, running ? delta : 0);
         for (const { model } of this.entries.values()) {
@@ -605,8 +612,11 @@ export class FjordEntities {
             // Passengers and miners retain their own physical owners; residents share body traffic.
             if (!model || model.userData.canonical?.aboardShip || model.userData.canonical?.mining) continue;
             model.position.set(agent.x, agent.y, agent.z);
-            model.rotation.y = agent.rotation;
-            this.models.animate(model, agent.state, agent.speed, running ? delta : 0);
+            const encounter = model.userData.canonical?.encounter;
+            const facing = encounter?.facing;
+            model.rotation.y = facing ? Math.atan2(facing.x - agent.x, facing.z - agent.z) : agent.rotation;
+            this.models.animate(model, encounter ? 'Idle' : agent.state, encounter ? 0 : agent.speed,
+                running ? delta : 0);
             const facts = model.userData.canonical, animation = model.userData.motion;
             if (facts.workEligible && facts.occupation === 'woodworker' &&
                 agent.visit?.phase === 'activity' && animation?.sourceClip === 'Attack') {

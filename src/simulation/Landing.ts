@@ -8,6 +8,7 @@ import {initializeMechanics} from './Mechanics';
 import type {PrototypeConfig} from './Mechanics';
 import {generateCharacterDNA} from '../characters/generateCharacterDNA';
 import {characterName, fullName} from '../characters/naming/generateName';
+import { livestockInCustody } from './TransitCargo';
 import {cattleSheltered,inspectCattle} from './Livestock';
 import {seededRandom} from '../characters/seededRandom';
 import { validateLivestockRules, validateAnimalSpecies, animalSpecies } from './LivestockSpecies';
@@ -98,6 +99,7 @@ export function applyLandingCommand(state:SimulationState,command:LandingCommand
     if (command.type === 'SlaughterCattle' || command.type === 'SlaughterLivestock') {
         const id = command.type === 'SlaughterCattle' ? command.cattleId : command.livestockId;
         const animal = landing.cattle[id];
+        if (livestockInCustody(state, id)) throw new Error('Livestock in custody is unavailable.');
         if (!animal || animal.deathWinter !== null)
             throw new Error(command.type === 'SlaughterCattle' ? 'Living cattle required' : 'Living livestock required');
         const food = inspectCattle(state, id).slaughterFood, farmyardId = animal.farmyardId;
@@ -117,6 +119,7 @@ export function applyLandingCommand(state:SimulationState,command:LandingCommand
     if (command.type === 'AssignCattle' || command.type === 'AssignLivestock') {
         const id = command.type === 'AssignCattle' ? command.cattleId : command.livestockId;
         const animal = landing.cattle[id];
+        if (livestockInCustody(state, id)) throw new Error('Livestock in custody is unavailable.');
         if (!animal || animal.deathWinter !== null)
             throw new Error(command.type === 'AssignCattle' ? 'Living cattle required' : 'Living livestock required');
         if (command.farmyardId !== null && !farmyards(state).some(yard => yard.id === command.farmyardId))

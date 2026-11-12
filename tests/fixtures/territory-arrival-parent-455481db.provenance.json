@@ -1,0 +1,18 @@
+{
+  "fixtureVersion": 1,
+  "parentCommit": "455481db00105fdaf67e8e213314eb79da37c7bc",
+  "source": "tests/territory-arrival-presence.test.mjs#capturedArrival",
+  "sourceFunctionSha256": "d2bb5b06ee6de6b8d9436a89710b137b1fb033f3a98a6250c71a6209ccd6005e",
+  "stateSha256": "971356309dca6d462433148fc005747f848ac34d2df110ee958785710b67d405",
+  "fixtureSha256": "7939bf566ca04e0d7d5cf612b257f08dfa4804763d027beb9c737b8bf7d04a32",
+  "contextSha256": "0eb6d7ddc1bf480da193b3c0c77377944385f91b462ab1f6ed288f7fb9907ac0",
+  "receiptId": "event-48",
+  "receivedPersonaId": "island-rival:founder-1",
+  "bytes": 12163,
+  "uncompressedBytes": 109505,
+  "time": {
+    "winter": 800,
+    "tick": 700
+  },
+  "qualification": "Actual public parent commands, preserved without rewriting encounter fields or outcome facts."
+}

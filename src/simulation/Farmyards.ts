@@ -1,3 +1,4 @@
+import { livestockInCustody } from './TransitCargo';
 import {eventFacts} from './EventFacts';
 import type {SimulationState} from './SimulationCore';
 import { animalProfile } from './LivestockSpecies';
@@ -5,6 +6,7 @@ import type { LivestockAnimal } from './Landing';
 
 /** The outdoor herd has explicit space only under the new, saved breeding contract. */
 export function livestockHerdSpace(state: SimulationState, animal: LivestockAnimal) {
+    if (livestockInCustody(state, animal.id)) return null;
     if (animal.farmyardId !== null) {
         const yard = farmyards(state).find(yard => yard.id === animal.farmyardId);
         if (!yard) return null;
@@ -14,7 +16,7 @@ export function livestockHerdSpace(state: SimulationState, animal: LivestockAnim
     const rules = state.landing?.livestock;
     if (rules?.version !== 2) return null;
     const occupiedUnits = Object.values(state.landing!.cattle)
-        .filter(member => member.deathWinter === null && member.farmyardId === null)
+        .filter(member => member.deathWinter === null && member.farmyardId === null && !livestockInCustody(state, member.id))
         .reduce((units, member) => units + animalProfile(state, member).capacityWeightBps, 0);
     const capacityUnits = rules.breeding.unassignedCapacityUnits;
     return { occupiedUnits, capacityUnits, overcrowdingUnits: Math.max(0, occupiedUnits - capacityUnits) };
@@ -27,7 +29,7 @@ export function farmyards(state:SimulationState) {
         const building=residence?.buildingId?state.buildings[residence.buildingId]:null;
         if(residence?.kind!=='house'||building?.kind!=='house'||!home.memberIds.some(id=>state.personas[id].deathWinter===null&&state.personas[id].occupation==='farmer'))return [];
         const animals = Object.values(state.landing?.cattle ?? {})
-            .filter(animal => animal.deathWinter === null && animal.farmyardId === building.id);
+            .filter(animal => animal.deathWinter === null && animal.farmyardId === building.id && !livestockInCustody(state, animal.id));
         const occupants = animals.length;
         const occupiedUnits = animals.reduce((units, animal) =>
             units + animalProfile(state, animal).capacityWeightBps, 0);

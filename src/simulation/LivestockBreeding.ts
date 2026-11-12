@@ -1,3 +1,4 @@
+import { livestockInCustody } from './TransitCargo';
 import type { SimulationState } from './SimulationCore';
 import type { Cattle } from './Landing';
 import { animalProfile, animalSpecies, livestockSpecies, livestockSpeciesIds } from './LivestockSpecies';
@@ -11,7 +12,7 @@ export function livestockBreedingAge(state: SimulationState, animal: Cattle) {
 }
 
 export function ageEligibleForBreeding(state: SimulationState, animal: Cattle) {
-    return animal.deathWinter === null && livestockBreedingAge(state, animal) === 'within-window';
+    return animal.deathWinter === null && !livestockInCustody(state, animal.id) && livestockBreedingAge(state, animal) === 'within-window';
 }
 
 /** Same-boundary facts only. An old shortage is not a persistent biological flag. */
@@ -48,7 +49,7 @@ export type BreedingConstraint = 'missing-male' | 'missing-female' | 'birth-inte
 
 /** Own-clan read model. It never reads rival state, draws randomness or stores derived biology. */
 export function inspectLivestockBreeding(state: SimulationState) {
-    const living = Object.values(state.landing?.cattle ?? {}).filter(animal => animal.deathWinter === null);
+    const living = Object.values(state.landing?.cattle ?? {}).filter(animal => animal.deathWinter === null && !livestockInCustody(state, animal.id));
     const feedingBlocked = livestockFeedingBlocked(state);
     const species = livestockSpeciesIds.flatMap(species => {
         const animals = living.filter(animal => animalSpecies(animal) === species);

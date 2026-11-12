@@ -1,5 +1,6 @@
 import { miningWorkerPosition } from '../simulation/Mining';
 import { inspectResidentPresence } from '../simulation/ResidentPresence';
+import type { CustodyRecord } from '../simulation/TransitCargo';
 import { communityHearthAccess, communityHearthOccupancy, communityHearthReservation,
     resolveCommunityHearthPlacement } from './CommunityHearthPlacement';
 import { communityHearthContains, communityHearthGeometry, communityHearthOverlapsPlot } from './CommunityHearthGeometry';
@@ -7,6 +8,7 @@ import type { HumanProfile } from '../characters/UniversalHumanProfile';
 import { parseFacialShape, type FacialShapeV1 } from '../characters/FacialIdentity';
 import { projectResidentAppearance } from '../characters/ResidentAppearance';
 import { spatialMemberPosition } from '../simulation/SpatialExpeditions';
+import { discoveryAt, inspectClanDiscovery } from '../simulation/ClanDiscovery';
 import { visibleLongshipMembers } from '../simulation/LongshipTransport';
 import { campaignIslandPlan } from './CampaignIsland';
 import { settlementCampfire } from './SettlementCampfire';
@@ -86,6 +88,7 @@ export interface FjordEntity {
         mining?: boolean;
         presence?: FjordResidentPresence;
         expeditionWalking?: boolean;
+        encounter?: { id: string; phase: 'engaging' | 'withdrawing'; facing: Point2 | null };
         shipExpedition?: string;
         transportGroup?: string;
         aboardShip?: string;
@@ -126,6 +129,35 @@ function residentPresenceView(state: SimulationState, id: string): FjordResident
         mode: actor.mode, incidentId: actor.incidentId, facing: actor.facing ? { ...actor.facing } : null,
         suspended: actor.ceremonyUntil !== null && actor.ceremonyUntil > state.time.winter * state.ticksPerWinter + state.time.tick,
         ...(actor.duty ? { duty: { ...actor.duty } } : {}) };
+}
+/** Ready-facing is tied to a committed participant that this party can currently observe. */
+function attackerEncounterView(state: SimulationState, id: string, position: Point2 | undefined) {
+    if (!position || !state.discovery) return;
+    const entry = Object.values(state.world?.encounters?.records ?? {}).find(record =>
+        record.attackingClanId === state.clan.id && record.attackerIds.includes(id) &&
+        (record.phase === 'engaging' || record.phase === 'withdrawing'));
+    if (!entry || entry.phase !== 'engaging' && entry.phase !== 'withdrawing') return;
+    const defender = state.world!.targetClans[entry.defendingClanId];
+    const knowledge = inspectClanDiscovery(state.discovery, state.clan.id);
+    const candidates = entry.defenderIds.filter(personaId => defender.personas[personaId]?.deathWinter === null)
+        .map(personaId => ({ id: personaId, point: defender.residentPresence?.residents[personaId]?.position }))
+        .filter((candidate): candidate is { id: string; point: Point2 } => !!candidate.point &&
+            discoveryAt(knowledge, candidate.point.x, candidate.point.z) === 'visible');
+    candidates.sort((first, second) =>
+        Math.hypot(first.point.x - position.x, first.point.z - position.z) -
+        Math.hypot(second.point.x - position.x, second.point.z - position.z) || first.id.localeCompare(second.id));
+    return { id: entry.id, phase: entry.phase,
+        facing: candidates[0] ? { ...candidates[0].point } : null };
+}
+/** Custody movement exposes only the last actually crossed segment, never its remaining route. */
+function custodyPresenceView(record: CustodyRecord): FjordResidentPresence {
+    const dx = record.position.x - record.previousPosition.x;
+    const dz = record.position.z - record.previousPosition.z;
+    const moving = Math.hypot(dx, dz) > 1e-8;
+    return { position: { ...record.position }, previousPosition: { ...record.previousPosition },
+        route: record.reachedRoute.map(point => ({ ...point })), home: { ...record.home },
+        rotation: moving ? Math.atan2(dx, dz) : 0, moving, updatedAt: record.updatedAt,
+        mode: 'return', incidentId: null, facing: null, suspended: false };
 }
 const geographyIds = new WeakMap<WorldBlueprint, string>();
 const plotCandidates = new WeakMap<WorldBlueprint, { x: number; z: number }[]>();
@@ -386,18 +418,21 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
         for (const [index, id] of home.memberIds.entries()) {
             const p = state.personas[id];
             const mission = Object.values(state.world?.spatial?.missions ?? {}).find(m =>
-                m.status !== 'Returned' && m.status !== 'Prepared' && m.memberIds.includes(id));
-            if (!p || p.deathWinter !== null || personaAway(state, id) && !mission)
+                m.status !== 'Returned' && m.status !== 'Lost' && m.status !== 'Prepared' && m.memberIds.includes(id));
+            const custody = state.custody?.people[id];
+            if (!p || p.deathWinter !== null || personaAway(state, id) && !mission && !custody)
                 continue;
             const age = personaAge(state, id);
-            const miner = state.mining?.workers[id];
-            const indoorReason = miner ? null : age < 5 ? 'young-child' :
+            const miner = custody ? undefined : state.mining?.workers[id];
+            const indoorReason = miner || custody ? null : age < 5 ? 'young-child' :
                 state.mechanics && isProvidingCare(state, id) ? 'childcare' :
                     state.residentPresence?.residents[id]?.placement ? 'awaiting-exterior' : null;
             const key = 'persona:' + id + '@' + (plot ? plot.x + ',' + plot.z : home.id);
             const miningPoint = miner ? miningWorkerPosition(miner) : undefined;
             const partyPoint = mission ? spatialMemberPosition(mission, id) : undefined;
-            const presence = !miner && !mission && !indoorReason ? residentPresenceView(state, id) : undefined;
+            const encounter = attackerEncounterView(state, id, partyPoint);
+            const presence = custody ? custodyPresenceView(custody) :
+                !miner && !mission && !indoorReason ? residentPresenceView(state, id) : undefined;
             const transport = mission?.transport?.phase === 'embarked' ? mission.transport : undefined;
             const deckMembers = transport ? visibleLongshipMembers(mission!.memberIds.filter(member =>
                 state.personas[member]?.deathWinter === null)) : [];
@@ -407,9 +442,11 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
                 ...presence.position, y: surface.surfaceHeightAt(presence.position.x, presence.position.z),
                 rotation: presence.rotation, scale: 1 } : plot && !indoorReason ? allocatePoint(key, { x: plot.x - 3 + index % 5 * 1.8,
                 z: plot.z + plot.halfDepth + 1.5 + Math.floor(index / 5) * 1.8 }) : undefined;
+            if (point && encounter?.facing) point.rotation = Math.atan2(
+                encounter.facing.x - point.x, encounter.facing.z - point.z);
             const growth = .4 + .6 * Math.min(16, Math.max(0, age)) / 16;
             add('persona', id, p.name, 'human', point ? { ...point, scale: growth } : undefined,
-                { living: true, mining: !!miner, presence, expedition: mission?.id, expeditionWalking: partyPoint?.moving ?? false,
+                { living: true, mining: !!miner, presence, encounter, expedition: mission?.id, expeditionWalking: partyPoint?.moving ?? false,
                     aboardShip: transport?.shipId, aboardAnchor: transport ? aboardAnchor : undefined,
                     sex: p.dna.sex, age, indoorReason, occupation: p.occupation,
                     workEligible: state.mechanics ? inspectWork(state, id).reason === null : false,
@@ -422,10 +459,28 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
     const livingCattle = Object.values(state.landing?.cattle ?? {})
         .filter(c => c.deathWinter === null)
         .sort((a, b) => a.id.localeCompare(b.id));
+    const livestockArrivals = new Map<string, Point2>();
+    for (const event of state.events) {
+        if (event.type !== 'LivestockTransferredIn' || typeof event.details?.livestockId !== 'string') continue;
+        const position = event.details.arrivalPosition as Point2 | undefined;
+        if (position && Number.isFinite(position.x) && Number.isFinite(position.z))
+            livestockArrivals.set(event.details.livestockId, { ...position });
+    }
     for (const [index, c] of livingCattle.entries()) {
         const view = inspectCattle(state, c.id);
         const asset = livestockAsset(c.species ?? 'cattle', c.sex, view.stage);
         if (!asset) continue;
+        const custody = state.custody?.livestock[c.id];
+        if (custody) {
+            const presence = custodyPresenceView(custody);
+            add('cattle', c.id, view.name, asset, { ...presence.position,
+                y: surface.surfaceHeightAt(presence.position.x, presence.position.z),
+                rotation: presence.rotation, scale: 1 },
+                { living: true, presence, sex: c.sex, species: view.species, sexTerm: view.sexTerm,
+                    age: view.age, stage: view.stage, assignment: null, sheltered: false,
+                    parentIds: [...view.parentIds], grazingZone: 'exposed' });
+            continue;
+        }
         const assigned = c.farmyardId ? buildingPlots.get(c.farmyardId) : null;
         const level = c.farmyardId ? state.mechanics?.buildings[c.farmyardId]?.upgradeLevel ?? 0 : 0;
         const herd = livingCattle.filter(member => member.farmyardId === c.farmyardId);
@@ -444,11 +499,22 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
                 Math.hypot(p.x - assigned.x, p.z - assigned.z) <= 20 &&
                 (Math.abs(p.x - assigned.x) > assigned.halfWidth + .8 ||
                     Math.abs(p.z - assigned.z) > assigned.halfDepth + .8));
-        const point = allocatePoint(key, { x, z }, assigned ?? undefined, {
-            halfWidth: widths[Math.min(level, 3)] + .7, halfDepth: depths[Math.min(level, 3)] + .7
-        }, permitted);
+        const arrival = !assigned ? livestockArrivals.get(c.id) : undefined;
+        const body = state.livestockPresence?.animals[c.id];
+        const point = state.livestockPresence ? body ? { ...body.position,
+            y: surface.surfaceHeightAt(body.position.x, body.position.z), rotation: 0, scale: 1 } : undefined :
+            arrival ? { ...arrival, y: surface.surfaceHeightAt(arrival.x, arrival.z),
+                rotation: 0, scale: 1 } : allocatePoint(key, { x, z }, assigned ?? undefined, {
+                    halfWidth: widths[Math.min(level, 3)] + .7, halfDepth: depths[Math.min(level, 3)] + .7
+                }, permitted);
+        const presence: FjordResidentPresence | undefined = body ? {
+            position: { ...body.position }, previousPosition: { ...body.position },
+            route: [{ ...body.position }, { ...body.position }], home: { ...body.home },
+            rotation: 0, moving: false, updatedAt: state.livestockPresence!.adoptedAt,
+            mode: 'local', incidentId: null, facing: null, suspended: false,
+        } : undefined;
         add('cattle', c.id, view.name, asset, point,
-            { living: true, sex: c.sex, species: view.species, sexTerm: view.sexTerm,
+            { living: true, ...(presence ? { presence } : {}), sex: c.sex, species: view.species, sexTerm: view.sexTerm,
                 age: view.age, stage: view.stage, assignment: c.farmyardId,
                 sheltered: view.sheltered, overcrowding: view.overcrowding, parentIds: [...view.parentIds], grazingZone });
     }

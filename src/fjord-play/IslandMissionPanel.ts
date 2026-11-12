@@ -1,4 +1,5 @@
 import { territoryNotice } from './TerritoryView';
+import { encounterDescription, renderTransitManifest } from './MissionOutcomeView';
 import { renderRaiderEquipment, renderEquipmentReadiness, renderEquipmentReport } from './SmitheryView';
 import type { Weapon, Shield } from '../simulation/Smithery';
 import { inspectIslandMissions, type IslandTarget } from '../simulation/IslandMissions';
@@ -188,10 +189,13 @@ export class IslandMissionPanel {
             this.dialog.querySelector('#island-mission-title')!.textContent = `Start ${type}`;
             this.dialog.querySelector('#island-mission-summary')!.innerHTML = `<p>${escape(this.session.readSnapshot().world!.groups[this.groupId].name)}</p>
                 <p>This will cost ${offer.foodCost} Food (${offer.foodPerMember} per member). Are you sure?</p>
-                <p class="fjord-caption">${offer.duration} ticks, including travel and return. Success: ${offer.successBps / 100}%. ${type === 'Pillage' && offer.equipment ? 'Personal casualty risks below.' : `Risk per member: ${offer.casualtyBps / 100}%.`} No refunds.</p>
+                <p class="fjord-caption">${offer.duration} ticks, including travel and return. No refunds.</p>
+                ${offer.encounter ? `<p class="fjord-caption">Combat depends on actual present defenders and personal equipment. Provisional trial rules.</p>
+                    <p class="fjord-caption">Travel hazard: ${offer.encounter.travelRiskBps / 100}% per member. Combat losses are resolved on site.</p>` :
+                    `<p class="fjord-caption">Success: ${offer.successBps / 100}%. ${type === 'Pillage' && offer.equipment ? 'Personal casualty risks below.' : `Risk per member: ${offer.casualtyBps / 100}%.`}</p>`}
                 ${offer.observationRoute ? `<p class="fjord-caption">Planned observation: ${offer.observationRoute.coverage === 'circuit' ? 'circuit' : 'partial arc'} · ${offer.observationRoute.coverageDegrees}° · ${offer.observationRoute.viewpointCount} viewpoints.</p>
                     <p class="fjord-caption">${offer.observationRoute.travelTicks} travel and return ticks · ${offer.observationRoute.observationTicks} observation ticks. Knowledge depends on reached viewpoints and actual visibility.</p>` : ''}
-                ${type === 'Pillage' ? renderEquipmentReadiness(offer.equipment) : ''}`;
+                ${type === 'Pillage' ? renderEquipmentReadiness(offer.equipment, !!offer.encounter) : ''}`;
             this.dialog.showModal();
             this.dialog.querySelector<HTMLButtonElement>('[data-island-cancel]')!.focus();
         } catch (error) {
@@ -211,10 +215,11 @@ export class IslandMissionPanel {
         const group = state.world!.groups[this.groupId], site = sites.find(site => site.id === this.siteId);
         const available = !!group?.memberIds.length && !groupMission(state, this.groupId) &&
             group.memberIds.every(id => expeditionEligible(state, id, group.id));
-        const active = Object.values(state.world!.spatial?.missions ?? {}).find(m => m.groupId === this.groupId && m.status !== 'Returned');
+        const active = Object.values(state.world!.spatial?.missions ?? {}).find(m => m.groupId === this.groupId && m.status !== 'Returned' && m.status !== 'Lost');
         const activeView = active ? inspectSpatialExpeditions(state).missions.find(mission =>
             mission.id === active.id) : undefined;
         const observation = activeView?.recon;
+        const onSiteEquipment = !!state.world!.territory && (!active?.task || !!activeView?.encounter);
         let groupReason = '';
         if (!group) groupReason = 'Create or choose a group to send a mission.';
         else if (!group.memberIds.length) groupReason = 'Add eligible residents to this group first.';
@@ -234,6 +239,7 @@ export class IslandMissionPanel {
         const reports = Object.values(state.world!.spatial?.missions ?? {}).filter(m => m.groupId === this.groupId && m.task?.result);
         const latestMission = reports.at(-1);
         const latest = latestMission?.task?.result;
+        const lostReport = !active && latestMission?.status === 'Lost';
         const observationAge = site?.knowledge ? Math.floor((state.time.winter * state.ticksPerWinter +
             state.time.tick - site.knowledge.observedAt) / state.ticksPerWinter) : 0;
         const html = `<h3>Island missions</h3><p class="fjord-caption">Separate missions depart from home. Explore first to map possible destinations.</p>
@@ -243,9 +249,11 @@ export class IslandMissionPanel {
             ${groupReason ? `<p class="fjord-caption" id="island-mission-group-block">${escape(groupReason)}</p>` : ''}
             ${canRecall ? '<button type="button" data-island-return>Return group home</button>' : ''}
             ${active?.task ? `<p>${escape(active.task.type)} · ${escape(active.status)}</p>` : ''}
+            ${activeView?.encounter ? `<p role="status">${escape(encounterDescription(activeView))}</p>` : ''}
+            ${renderTransitManifest(activeView)}
             ${observation ? `<p class="fjord-caption">Observation ${observation.coverage === 'circuit' ? 'circuit' : 'partial arc'} · ${observation.reachedViewpoints}/${observation.plannedViewpoints} viewpoints reached · ${observation.observedViewpoints} settlement sightings.</p>` : ''}
             <button type="button" data-island-area title="${escape(groupReason)}" ${available ? '' : 'disabled aria-describedby="island-mission-group-block"'}>Recon mapped area</button>
-            ${group?.memberIds.length ? renderRaiderEquipment(state, group.memberIds) : ''}
+            ${group?.memberIds.length ? renderRaiderEquipment(state, group.memberIds, onSiteEquipment) : ''}
             <h4>Known places</h4>${sites.length ? sites.map(s => `<button type="button" data-island-site="${escape(s.id)}"
                 aria-pressed="${s.id === this.siteId}">${escape(s.knowledge?.settlementName ?? 'Unidentified settlement')}</button>`).join('') :
                 '<p>No settlement has been sighted.</p>'}
@@ -260,7 +268,7 @@ export class IslandMissionPanel {
                     <fieldset><legend>Choose cargo</legend>${(['Food', 'Materials', 'Cattle', 'People'] as const).map(cargo =>
                         `<label><input type="checkbox" data-cargo="${cargo}" checked> ${cargo === 'Cattle' ? 'Livestock' : cargo}</label>`).join('')}</fieldset>
                     <p class="fjord-caption">The next available living animal is taken. Species, sex and age cannot be selected.</p></details>` : ''}` : ''}
-            ${latest ? `<article aria-label="Mission report"><h4>Latest mission report</h4><p>${escape(latest.summary)}</p>
+            ${latest ? `<article aria-label="Mission report"><h4>Latest mission report</h4>${lostReport ? '<p role="status">No survivors. No party returned.</p>' : ''}<p>${escape(latest.summary)}</p>
                 ${latestMission?.task?.type === 'Pillage' ? renderMissionLivestock(state, latestMission.id) + renderEquipmentReport(latest.equipment) : ''}
                 <details data-island-report-details><summary>Recovered assets &amp; crew</summary><p>${latest.food} Food · ${latest.materials} Materials · ${latest.cattleIds.length} livestock · ${latest.personaIds.length} residents recovered.
                 ${latest.casualtyIds.length} lost · ${latest.survivorIds.length} returned.</p></details></article>` : ''}`;
