@@ -1,6 +1,6 @@
 import { inspectWork, type JobPrototype } from './Mechanics';
 import { isProvidingCare } from './FamilyMechanics';
-import { territorialDuty } from './ResidentPresence';
+import { presenceIndoors, territorialDuty } from './ResidentPresence';
 import { personaAge } from './PersonaAge';
 import { personaAway } from './WorldExpeditions';
 import { routeLength, splitRoute, type PhysicalExpeditionContext } from './SpatialExpeditions';
@@ -194,7 +194,7 @@ export function applyMiningCommand(state: SimulationState, command: MiningComman
     const person = state.personas[command.personaId];
     if (!person || person.deathWinter !== null || person.occupation !== 'miner' ||
         personaAge(state, person.id) < state.mechanics!.config.workAge || isProvidingCare(state, person.id) ||
-        personaAway(state, person.id) || miningBusy(state, person.id) || territorialDuty(state, person.id))
+        personaAway(state, person.id) || miningBusy(state, person.id) || territorialDuty(state, person.id) || presenceIndoors(state, person.id))
         throw new Error('Choose an available adult Miner at home.');
     if (!site.remainingUnits) throw new Error('This ore site is exhausted.');
     const plan = planRoute(bound, site.approach, bound.world.settlement.center, true);

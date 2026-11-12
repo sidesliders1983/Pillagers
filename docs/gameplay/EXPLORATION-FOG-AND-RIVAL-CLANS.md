@@ -109,3 +109,10 @@ facts without exposing an unseen rival roster. Earlier campaigns retain their
 saved rules unless explicitly adopted; already active historical missions retain
 their outcome rules. See [Territorial awareness v0.1](TERRITORIAL-AWARENESS-V01.md)
 for the versioned policy, cultural reservation, persistence and evidence contract.
+
+A group's actually observed interior member authorizes an intrusion warning even
+when another observed member remains at the perimeter. Unseen members cannot supply
+that evidence. At crowded homes, residents remain in saved indoor placement until a
+clear exit and connected exterior exist; canonical retries preserve aging, births,
+identities and history while the rest of the campaign advances normally. Otherwise
+work-age residents awaiting that exterior suspend outdoor work and assignments.

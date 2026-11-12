@@ -9,7 +9,7 @@ import { personaAge } from './PersonaAge';
 import { isProvidingCare } from './FamilyMechanics';
 import { bindResidentPresence, assertPresenceSite, assertResidentRoutes, validateResidentPresence,
     inspectResidentPresence, territorialDuty, advanceResidentPresence, reconcileResidentPresence,
-    eligibleTerritorialObserver, residentAtHome, freezePresence, releasePresence, setPresenceRoute, type PresenceSite } from './ResidentPresence';
+    eligibleTerritorialObserver, residentAtHome, presenceIndoors, freezePresence, releasePresence, setPresenceRoute, type PresenceSite } from './ResidentPresence';
 export { inspectResidentPresence, territorialDuty } from './ResidentPresence';
 
 export interface TerritorialPolicy {
@@ -235,6 +235,7 @@ export function validateTerritorialAwareness(state: SimulationState) {
         if (!clan.residentPresence || clan.residentPresence.worldId !== saved.worldId) fail();
         for (const [actorId, actor] of Object.entries(clan.residentPresence!.residents)) {
             if (!actor.incidentId) continue;
+            if (presenceIndoors(clan, actorId)) fail();
             const incident = saved.incidents[actor.incidentId];
             if (!incident || incident.phase === 'Closed' || incident.defendingClanId !== clan.clan.id ||
                 actor.mode !== 'withdraw' && !incident.responderIds.includes(actorId))
@@ -290,7 +291,8 @@ export function territorialContact(root: SimulationState, context: PhysicalExped
         candidate.territoryVersion === 1 && !['Prepared', 'Returned'].includes(candidate.status) &&
         candidate.transport?.phase !== 'embarked' && candidate.memberIds.includes(intruderId));
     const position = mission ? spatialMemberPosition(mission, intruderId) :
-        residentAtHome(intruder, intruderId) ? intruder.residentPresence?.residents[intruderId]?.position : undefined;
+        residentAtHome(intruder, intruderId) && !presenceIndoors(intruder, intruderId)
+            ? intruder.residentPresence?.residents[intruderId]?.position : undefined;
     if (!position) return;
     const residents = defender.residentPresence?.residents ?? {};
     for (const id of Object.keys(residents).sort()) {
@@ -303,11 +305,16 @@ export function territorialContact(root: SimulationState, context: PhysicalExped
 
 function observeVisitor(root: SimulationState, defender: SimulationState,
     visitor: ReturnType<typeof activeVisitors>[number], context: PhysicalExpeditionContext) {
-    for (const intruder of visitor.people) {
+    const observations: TerritoryObservation[] = [];
+    for (const intruder of visitor.people.slice().sort((first, second) => first.id.localeCompare(second.id))) {
         const observation = territorialContact(root, context, defender.clan.id, visitor.clan.clan.id, intruder.id);
-        if (observation) return observation;
+        if (observation) observations.push(observation);
     }
-    return undefined;
+    const bounds = defender.residentPresence!.site.bounds;
+    // A visible intrusion takes priority over a party member seen only at the perimeter.
+    return observations.find(observation => inSettlement(observation.intruderPosition, bounds, -2)) ??
+        observations.find(observation => inSettlement(observation.intruderPosition, bounds,
+            root.world!.territory!.policy.sightRadius)) ?? observations[0];
 }
 function recordIncident(root: SimulationState, incident: TerritorialIncident,
     type: 'TerritoryIncidentOpened' | 'TerritoryIncidentChanged' | 'TerritoryIncidentClosed') {
@@ -377,7 +384,7 @@ function assignResponders(root: SimulationState, incident: TerritorialIncident, 
     }
     if (incident.phase !== 'Suspicious') {
         for (const [id, actor] of Object.entries(residents)) {
-            if (!residentAtHome(defender, id) || isProvidingCare(defender, id) ||
+            if (!residentAtHome(defender, id) || presenceIndoors(defender, id) || isProvidingCare(defender, id) ||
                 actor.ceremonyUntil !== null && actor.ceremonyUntil > now(defender) ||
                 eligibleTerritorialObserver(defender, id) ||
                 personaAge(defender, id) < 5 || actor.incidentId && actor.incidentId !== incident.id ||
@@ -461,7 +468,7 @@ export function stepTerritorialAwareness(root: SimulationState, context?: Physic
                 item.defendingClanId === defender.clan.id && item.intrudingClanId === visitor.clan.clan.id &&
                 item.missionId === visitor.mission.id);
             const observation = observeVisitor(root, defender, visitor, context);
-            const nearby = visitor.people.some(person => inSettlement(person.position, site.bounds, saved.policy.sightRadius));
+            const nearby = observation && inSettlement(observation.intruderPosition, site.bounds, saved.policy.sightRadius);
             if (!observation || !nearby) {
                 if (incident && now(root) - incident.lastSeenAt >= saved.policy.lostContactTicks)
                     closeIncident(root, incident, 'lost-contact');

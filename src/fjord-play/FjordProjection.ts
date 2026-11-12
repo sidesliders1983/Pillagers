@@ -105,7 +105,7 @@ export interface FjordEntity {
         sheltered?: boolean;
         overcrowding?: number;
         parentIds?: string[];
-        indoorReason?: 'young-child' | 'childcare' | null;
+        indoorReason?: 'young-child' | 'childcare' | 'awaiting-exterior' | null;
         grazingZone?: 'yard' | 'overflow' | 'exposed';
     };
 }
@@ -392,7 +392,8 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
             const age = personaAge(state, id);
             const miner = state.mining?.workers[id];
             const indoorReason = miner ? null : age < 5 ? 'young-child' :
-                state.mechanics && isProvidingCare(state, id) ? 'childcare' : null;
+                state.mechanics && isProvidingCare(state, id) ? 'childcare' :
+                    state.residentPresence?.residents[id]?.placement ? 'awaiting-exterior' : null;
             const key = 'persona:' + id + '@' + (plot ? plot.x + ',' + plot.z : home.id);
             const miningPoint = miner ? miningWorkerPosition(miner) : undefined;
             const partyPoint = mission ? spatialMemberPosition(mission, id) : undefined;

@@ -44,7 +44,10 @@ clan, mission and group. Two groups receive separate incidents and share one
 responder reservation authority.
 
 Each observed transition records the observer identity, intruder identity,
-canonical tick and their confirmed positions. Distance and exact
+canonical tick and their confirmed positions. All legitimately seen group members
+are considered: an observed member inside the settlement takes priority over a
+member seen only at its perimeter. Stable identity order breaks equivalent ties.
+An unseen member cannot supply proximity or escalation evidence. Distance and exact
 `traceTerrainSightline` checks authorize detection. A camera, a settlement-wide
 discovery mask or an unseen mission order cannot authorize it.
 
@@ -67,6 +70,7 @@ trial policy saves these bounded values.
 | Local ambient destination interval | 25 ticks |
 | Local ambient radius | 4 m |
 | New-resident exterior search | At most 16 m from the saved household anchor |
+| Indoor placement retry | Every 25 canonical ticks |
 
 A visiting group must be actually observed within this radius. The selected
 destination alone cannot cause a warning. An outside destination can still
@@ -143,8 +147,34 @@ validated home exteriors only at adoption. Afterwards, saved positions and homes
 are authoritative; new identities receive a deterministic safe exterior through
 the existing terrain router. Initial home normalization is bounded to 8 m; a new
 identity searches at most 16 m from its saved household anchor inside the saved
-settlement bounds. Exhausting those reachable separate exteriors raises an explicit
-error rather than placing overlapping residents. Rendered positions cannot become departure origins
+settlement bounds. If no separate connected exterior exists, the named resident
+stays in a saved indoor placement state. The household anchor is a reference,
+not an outdoor body. A captured arrival without a saved household relative uses
+the actual returned crew position recorded by its transfer receipt and mission.
+The campfire is not an invented arrival doorway.
+
+Indoor placement retries every 25 canonical ticks. It reserves a separate dry home
+when possible, but the person appears outside only after the exact saved exit is
+clear of bodies and blockers and an existing terrain route connects it to that home.
+Movement then follows the ordinary swept route; the person cannot jump through an
+obstacle. Young children and caregivers use the same safe emergence gate. Space
+exhaustion never stops other residents, births, aging or the campaign clock.
+
+Indoor people have no outdoor body, observation, response duty, expedition departure,
+mining assignment or ceremony attendance. An otherwise work-age adult waiting for
+an exterior has zero productivity with reason `awaiting-exterior`. Normal childcare
+and underage reasons keep their existing precedence. Indoor residents can still
+provide ordinary household care. No fertility or aging rule is changed.
+
+The optional actor `placement` records version, indoor phase, current reason, anchor,
+need for an allocated home, entry tick and next retry. Earlier actor records without
+this field remain valid and preserve their serialized representation on import.
+Canonical resident route planning uses the existing solver's strict-navigation mode
+and validates immutable terrain before saving a new route. The same strict route
+checks still apply on world bind; invalid future connectors are not committed.
+Other callers retain the solver's existing default behavior.
+
+Rendered positions cannot become departure origins
 for newly participating exploration, island missions or longship boarding.
 
 `world.territory` stores version 1, world/adoption identity, the adoption receipt,
