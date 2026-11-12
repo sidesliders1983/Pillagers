@@ -190,3 +190,9 @@ Its current inventory contains seven weapon/shield GLBs, four helmet/bust GLBs
 and one octopus GLB. Weapon and shield fitting belongs to #309. The epic defers
 body-armour and helmet mechanics, so these files do not approve new equipment
 slots or protective statistics.
+
+## Recorded validation
+
+The [pinned validation record](../qa/territory-306/README.md) contains the 97-test
+focused run, all ten current island adoption checks, native Chrome desktop/touch
+journeys, captures and explicit physical-device and terrain limits.

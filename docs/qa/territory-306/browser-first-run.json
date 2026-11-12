@@ -1,0 +1,85 @@
+{
+  "status": "failed",
+  "origin": "http://127.0.0.1:5198",
+  "chrome": "157.0.8103.52",
+  "scenarios": [
+    {
+      "mode": "desktop-new-game",
+      "kind": "normal-new-game-default-adoption",
+      "activation": {
+        "canvasReady": false,
+        "hasTerritory": true,
+        "hasOwnPresence": true,
+        "hasRivalPresence": true,
+        "adoptionEventId": "event-5",
+        "eventTypes": [
+          "FoundingPartyLanded",
+          "FoundingPartnershipPresent",
+          "WinterWeatherDetermined",
+          "WeatherProductionTimingChanged",
+          "TerritorialAwarenessEnabled"
+        ],
+        "seed": 1044826607
+      }
+    },
+    {
+      "mode": "desktop",
+      "kind": "benign",
+      "time": {
+        "winter": 800,
+        "tick": 598
+      },
+      "incidents": 0
+    },
+    {
+      "mode": "desktop",
+      "kind": "perimeter",
+      "incidents": [
+        {
+          "id": "incident-1",
+          "defendingClanId": "island-rival",
+          "intrudingClanId": "founding-clan",
+          "missionId": "explore-1",
+          "groupId": "group-1",
+          "groupName": "Coast watch",
+          "phase": "Suspicious",
+          "reason": "perimeter-sighting",
+          "openedAt": 800590,
+          "changedAt": 800590,
+          "lastSeenAt": 800590,
+          "warnedAt": null,
+          "closedAt": null,
+          "position": {
+            "x": 18,
+            "z": -88
+          },
+          "observation": {
+            "tick": 800590,
+            "observerId": "island-rival:founder-7",
+            "intruderId": "founder-1",
+            "observerPosition": {
+              "x": 12,
+              "z": -61
+            },
+            "intruderPosition": {
+              "x": 18,
+              "z": -88
+            }
+          },
+          "responderIds": [
+            "island-rival:founder-7",
+            "island-rival:founder-2"
+          ],
+          "sourceEventIds": [
+            "event-15"
+          ],
+          "observedByPlayer": true,
+          "engagement": null
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "limitation": "Touch input is native Chrome emulation, not a physical iPhone.",
+  "failure": "locator.waitFor: Timeout 180000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#fjord-canvas[data-ready=\"true\"]') to be visible\u001b[22m\n\n    at history (D:\\CodexSites\\Pillagers\\scratch\\territorial-awareness-306\\scratch\\territory-306\\check-territory.mjs:59:57)\n    at async file:///D:/CodexSites/Pillagers/scratch/territorial-awareness-306/scratch/territory-306/check-territory.mjs:124:55"
+}
