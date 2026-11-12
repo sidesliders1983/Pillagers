@@ -227,3 +227,19 @@ test('public caregiver reassignment synchronizes an indoor reason without moving
     assert.deepEqual(waiting, before);
     assert.equal(core.serializeState(core.reconstructState(core.serializeState(released))), core.serializeState(released));
 });
+test('target adjustment remains available by default and can be rejected for an exact resident destination', () => {
+    const { planRoute } = load('../src/world-generation/LandRoutes.ts');
+    const bounds = { minX: 0, maxX: 40, minZ: 0, maxZ: 40 };
+    const cells = Array(36).fill(true);
+    cells[14] = false;
+    const world = { waterLevel: -1,
+        terrain: { bounds, spacing: 8, columns: 6, rows: 6, heights: Array(36).fill(0) },
+        navigation: { bounds, spacing: 8, columns: 6, rows: 6, cells },
+        settlement: { center: { x: 8, z: 8 }, harbor: null } };
+    const context = { world }, target = { x: 16, z: 16 };
+    const legacy = planRoute(context, target, world.settlement.center, true);
+    assert.equal(legacy.adjusted, true);
+    assert.deepEqual(legacy.target, { x: 16, z: 8 });
+    assert.throws(() => planRoute(context, target, world.settlement.center, true,
+        { strictNavigation: true, allowTargetAdjustment: false }), /exact|adjust|destination/i);
+});

@@ -187,7 +187,8 @@ export function validateResidentPresence(state: SimulationState) {
 /** Reuse the island's saved dry-land solver for every local movement. */
 export function setPresenceRoute(actor: ResidentPresence, target: Point2, context: PhysicalExpeditionContext) {
     try {
-        const plan = planRoute(context, target, actor.position, true, { strictNavigation: true });
+        const plan = planRoute(context, target, actor.position, true,
+            { strictNavigation: true, allowTargetAdjustment: false });
         if (plan.adjusted || !samePoint(plan.route[0], actor.position) || !residentRouteSupported(context, plan.route)) return false;
         actor.route = plan.route.map(p => ({ ...p }));
         actor.travelled = 0;
@@ -261,7 +262,8 @@ function allocateResidentHome(state: SimulationState, id: string, context: Physi
         Math.hypot(second.x - anchor.x, second.z - anchor.z) || first.x - second.x || first.z - second.z);
     for (const target of candidates) {
         try {
-            const plan = planRoute(context, target, anchor, true, { strictNavigation: true });
+            const plan = planRoute(context, target, anchor, true,
+                { strictNavigation: true, allowTargetAdjustment: false });
             if (!plan.adjusted && samePoint(plan.target, target) && residentRouteSupported(context, plan.route)) return { ...target };
         } catch { /* The next bounded candidate may have a valid dry connection. */ }
     }

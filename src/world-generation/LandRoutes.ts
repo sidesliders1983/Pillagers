@@ -6,7 +6,10 @@ export interface LandRouteContext {
     exclusions?: readonly Bounds2[];
 }
 export const maximumTargetCorrection = 8;
-export interface LandRouteOptions { strictNavigation?: boolean }
+export interface LandRouteOptions {
+    strictNavigation?: boolean;
+    allowTargetAdjustment?: boolean;
+}
 
 /** Bounded search on the existing grid. Diagonals cannot cut blocked cell or building corners. */
 export function planRoute(context: LandRouteContext, target: Point2, origin?: Point2, eightWay = false,
@@ -32,6 +35,8 @@ export function planRoute(context: LandRouteContext, target: Point2, origin?: Po
     const adjusted = !safe(end);
     if (surface.surfaceHeightAt(target.x, target.z) <= world.waterLevel + .25)
         throw new Error('Choose a land destination. This spot is in the water.');
+    if (adjusted && options.allowTargetAdjustment === false)
+        throw new Error('The exact land destination is blocked.');
     if (adjusted) {
         // Touch need not hit one exact free cell. Propose nearby ground without crossing a shore or cliff.
         const radius = maximumTargetCorrection, candidates: number[] = [];
