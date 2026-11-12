@@ -1,4 +1,5 @@
 import { merchantHistoryText } from './MerchantHistory';
+import { encounterHistoryText } from './EncounterHistory';
 import { territoryHistoryText } from './TerritoryAttention';
 import { wildlifeSightingText } from './WildlifeHistory';
 import type {SimulationEvent} from '../simulation/SimulationCore';
@@ -185,7 +186,13 @@ const templates:Record<string,Template>={
         return details.reason === 'expired-unresolved' ? 'The quarrel between ' + pair + ' expired unresolved.' :
             details.reason === 'inactive' ? 'The quarrel between ' + pair + ' became inactive after death or departure.' : null;
     },
-    PersonaDied:(e,d)=>{const name=person(e,e.personaId);return name?name+' died'+(str(d,'cause')?' ('+d.cause+')':'')+'.':null;},
+    PersonaDied: (event, details) => {
+        const name = person(event, event.personaId);
+        if (!name) return null;
+        if (details.cause === 'Combat') return name + ' died in combat.';
+        if (details.cause === 'TravelWeather') return name + ' died during hazardous travel weather.';
+        return name + ' died' + (str(details, 'cause') ? ' (' + details.cause + ')' : '') + '.';
+    },
     CattleBorn: animalBorn, LivestockBorn: animalBorn,
     CattleDied: animalDied, LivestockDied: animalDied,
     FoundingPartyLanded:(_e,d)=>{const founders=ids(d,'founderIds');return founders?`The founding party of ${founders.length} residents arrived.`:null;},
@@ -297,7 +304,7 @@ export function projectChronicle(events:readonly SimulationEvent[],currentWinter
                     if (parts.length) text = 'The herd produced ' + parts.join(' and ') + ' this Winter.';
                 }
                 else {const total=(resource:string)=>aggregate.filter(e=>e.details!.resource===resource).reduce((n,e)=>n+Number(e.details!.units),0);const food=total('food'),materials=total('materials');if(Number.isSafeInteger(food)&&Number.isSafeInteger(materials)){const parts=[];if(aggregate.some(e=>e.details!.resource==='food'))parts.push(`${food} Food`);if(aggregate.some(e=>e.details!.resource==='materials'))parts.push(`${materials} Materials`);text=`The settlement produced ${parts.join(' and ')} this Winter.`;}}
-            }else {text=event.type === 'WildlifeSighted' ? wildlifeSightingText(event) : Object.hasOwn(templates,event.type)?templates[event.type](event,d):null;routine=['FoodConsumed','CattleFoodConsumed','LivestockFoodConsumed'].includes(event.type) ||
+            }else {text=encounterHistoryText(event) ?? (event.type === 'WildlifeSighted' ? wildlifeSightingText(event) : Object.hasOwn(templates,event.type)?templates[event.type](event,d):null);routine=['FoodConsumed','CattleFoodConsumed','LivestockFoodConsumed'].includes(event.type) ||
                 event.type === 'WildlifeSighted' && !event.details?.firstForClan;}
             if (text) {
                 const templateVersion = ['FoundingLongshipKept', 'FoundingLongshipSalvaged']

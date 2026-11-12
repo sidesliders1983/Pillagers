@@ -49,8 +49,13 @@ export function renderSmithery(state: SimulationState): string {
     </section>`;
 }
 
-export function renderEquipmentReadiness(snapshot: PillageEquipment | undefined): string {
+export function renderEquipmentReadiness(snapshot: PillageEquipment | undefined, onSite = false): string {
     if (!snapshot) return '<p class="fjord-caption">Historical mission rules: personal equipment is not tracked.</p>';
+    if (onSite) return `<section aria-label="Assigned Pillage equipment">
+        <p>${snapshot.members.filter(member => member.weapon).length}/${snapshot.members.length} spear holders</p>
+        ${snapshot.members.map(member => `<p class="fjord-caption">${escape(member.name)} ·
+            ${member.weapon ? equipmentLabels[member.weapon] : 'No weapon'} ·
+            ${member.shield ? equipmentLabels[member.shield] : 'No shield'}</p>`).join('')}</section>`;
     return `<section aria-label="Personal Pillage risks"><p>Success: ${percent(snapshot.successBps)} ·
         ${snapshot.members.filter(member => member.weapon).length}/${snapshot.members.length} spear holders</p>
         <p class="fjord-caption">Shields protect only their wearer. Casualty risk per member:</p>
@@ -58,7 +63,7 @@ export function renderEquipmentReadiness(snapshot: PillageEquipment | undefined)
             ${percent(member.casualtyBps)}${member.shield ? ` · ${equipmentLabels[member.shield]}` : ' · No shield'}</p>`).join('')}</section>`;
 }
 
-export function renderRaiderEquipment(state: SimulationState, memberIds: readonly string[]): string {
+export function renderRaiderEquipment(state: SimulationState, memberIds: readonly string[], onSite = false): string {
     const options = (items: readonly EquipmentItem[], current: string | null) =>
         `<option value="" ${!current ? 'selected' : ''}>None</option>` + items.map(item => {
             const available = state.smithery?.stored[item] ?? 0;
@@ -78,7 +83,7 @@ export function renderRaiderEquipment(state: SimulationState, memberIds: readonl
                 <label>Shield<select data-equipment-person="${escape(id)}" data-equipment-slot="shield"
                     aria-label="${escape(state.personas[id].name)} Shield" ${disabled}>
                     ${options(['woodenShield', 'leatherShield'], gear.shield)}</select></label></div></fieldset>`;
-        }).join('')}${renderEquipmentReadiness(snapshot)}</details>`;
+        }).join('')}${renderEquipmentReadiness(snapshot, onSite)}</details>`;
 }
 
 export function renderEquipmentReport(result: EquipmentResult | undefined): string {

@@ -130,7 +130,7 @@ test('ignoring a real warning requests engagement once and withdrawal closes it 
     state = core.applyCommand(state, { type: 'CreateExpeditionGroup', name: 'Visitors', memberIds: ['founder-1'] });
     state = core.applyCommand(state, { type: 'StartExpedition', groupId: 'group-1' }, setup.context);
     state = core.applyCommand(state, { type: 'ExploreArea', groupId: 'group-1', target: { x: 224, z: 128 } }, setup.context);
-    state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 130 }, setup.context);
+    state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 100 }, setup.context);
     const active = core.inspectTerritory(state).incidents[0];
     assert.equal(active.phase, 'Hostile');
     assert.equal(active.engagementRequested, true);

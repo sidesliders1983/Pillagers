@@ -1,3 +1,4 @@
+import type { Point2 } from '../world-generation/WorldBlueprint';
 import { miningBusy } from './Mining';
 import { presenceAtGathering, presenceIndoors, territorialDuty } from './ResidentPresence';
 import type { TerritorialState } from './TerritorialAwareness';
@@ -34,6 +35,7 @@ export type ExpeditionResult={success:boolean;discovery:Knowledge|null;casualtyI
 export type ExpeditionMission={id:string;groupId:string;groupName:string;regionId:string;type:MissionType;memberIds:string[];memberNames:string[];priorities:Cargo[];shipId:string|null;departedAt:number;returnsAt:number;foodCost:number;successBps:number;casualtyBps:number;status:'Away'|'Returned';returnedAt:number|null;result:ExpeditionResult|null;equipment?:PillageEquipment};
 export type ExpeditionCommand={type:'DisbandExpeditionGroup';groupId:string}|{type:'CreateExpeditionGroup';name:string;memberIds:string[]}|{type:'EditExpeditionGroup';groupId:string;name:string;memberIds:string[]}|{type:'DispatchExpedition';groupId:string;regionId:string;mission:MissionType;priorities?:Cargo[]};
 export type WorldState = {
+ encounters?: import('./OnSiteEncounters').EncounterState;
  territory?: TerritorialState;
  version: 1 | 2;
  spatial?: SpatialExpeditions;
@@ -135,7 +137,7 @@ export function validateWorld(state:SimulationState,validateTarget:(target:Simul
 }
 export const absoluteTick=(state:SimulationState)=>state.time.winter*state.ticksPerWinter+state.time.tick;
 export function groupMission(state:SimulationState,groupId:string){return spatialGroupMission(state,groupId)??Object.values(state.world?.missions??{}).find(m=>m.groupId===groupId&&m.status==='Away');}
-export function personaAway(state:SimulationState,id:string):boolean{return Object.values(state.world?.spatial?.missions??{}).some(m=>m.status!=='Returned'&&m.status!=='Prepared'&&m.memberIds.includes(id))||Object.values(state.world?.missions??{}).some(m=>m.status==='Away'&&m.memberIds.includes(id));}
+export function personaAway(state:SimulationState,id:string):boolean{return !!state.custody?.people[id]||Object.values(state.world?.spatial?.missions??{}).some(m=>m.status!=='Returned'&&m.status!=='Lost'&&m.status!=='Prepared'&&m.memberIds.includes(id))||Object.values(state.world?.missions??{}).some(m=>m.status==='Away'&&m.memberIds.includes(id));}
 export function expeditionEligible(state:SimulationState,id:string,groupId?:string):boolean {
  const p=state.personas[id];return !!p&&p.deathWinter===null&&personaAge(state,id)>=(state.mechanics?.config.workAge??16)&&!isProvidingCare(state,id)&&!personaAway(state,id)&&!miningBusy(state,id)&&!territorialDuty(state,id)&&!presenceAtGathering(state,id)&&!presenceIndoors(state,id)&&!Object.values(state.world?.groups??{}).some(g=>g.id!==groupId&&g.memberIds.includes(id));
 }
@@ -273,7 +275,19 @@ export function namespaceTarget(target:SimulationState,clanId:string):Simulation
  const walk=(v:unknown):unknown=>typeof v==='string'?rename(v):Array.isArray(v)?v.map(walk):v&&typeof v==='object'?Object.fromEntries(Object.entries(v).map(([k,x])=>[rename(k),walk(x)])):v;
  const next=walk(target) as SimulationState;next.entityPrefix=`${clanId}:`;return next;
 }
-function transferPersona(source:SimulationState,destination:SimulationState,id:string,missionId:string):void {
+/** Suspend real care responsibilities while preserving identity and occupational history. */
+export function releasePersonaCare(source: SimulationState, id: string): void {
+    const info = source.mechanics!.people[id];
+    for (const control of Object.values(source.mechanics!.people)) {
+        if (control.caregiverId === id) { control.caregiverId = null; control.caregiverLocked = false; }
+    }
+    if (info.childcareUntilTick !== undefined) endCare(source, info);
+    else {
+        info.caregiverId = null; info.caregiverLocked = false;
+        info.childcareUntilWinter = Math.min(info.childcareUntilWinter, source.time.winter);
+    }
+}
+export function transferPersona(source:SimulationState,destination:SimulationState,id:string,missionId:string,arrivalPosition?:Point2):void {
  const p=source.personas[id],info=source.mechanics!.people[id],formerPartnerId=p.partnerId;
  const previousFarmyards=farmyards(source).map(f=>f.id);
  releaseEquipment(source,id,'transfer');
@@ -290,9 +304,7 @@ function transferPersona(source:SimulationState,destination:SimulationState,id:s
  }
  if(p.partnerId!==null&&source.personas[p.partnerId]){source.personas[p.partnerId].partnerId=null;p.partnerId=null;}
  for(const home of Object.values(source.households)){home.memberIds=home.memberIds.filter(x=>x!==id);if(!home.memberIds.length)home.residenceId=null;}
- for(const control of Object.values(source.mechanics!.people))if(control.caregiverId===id){control.caregiverId=null;control.caregiverLocked=false;}
- if(info.childcareUntilTick!==undefined)endCare(source,info);
- else {info.caregiverId=null;info.caregiverLocked=false;info.childcareUntilWinter=Math.min(info.childcareUntilWinter,source.time.winter);}
+ releasePersonaCare(source,id);
  delete source.personas[id];delete source.mechanics!.people[id];
  delete destination.personaArchive[id];destination.personas[id]=p;destination.mechanics!.people[id]=info;
  const householdId=`arrival-${id}`,residenceId=`tent-${householdId}`;
@@ -300,10 +312,10 @@ function transferPersona(source:SimulationState,destination:SimulationState,id:s
  destination.families[householdId]={id:householdId,memberIds:[id]};
  reconcileFarmyards(source,previousFarmyards);
  record(source,'PersonaTransferredOut',{missionId,personaId:id,name:p.name,formerPartnerId,destinationClanId:destination.clan.id});
- record(destination,'PersonaTransferredIn',{missionId,personaId:id,name:p.name,formerPartnerId,originClanId:p.originClanId},id);
+ record(destination,'PersonaTransferredIn',{missionId,personaId:id,name:p.name,formerPartnerId,originClanId:p.originClanId,...(arrivalPosition?{arrivalPosition:{...arrivalPosition}}:{})},id);
  pruneSocialIncidents(source);
 }
-function transferCattle(source:SimulationState,destination:SimulationState,id:string):void {
+export function transferCattle(source:SimulationState,destination:SimulationState,id:string):void {
  const from=source.landing!,to=destination.landing!,c=from.cattle[id];
  from.cattleArchive??={};from.cattleArchive[id]=structuredClone(c);to.cattleArchive??={};const seen=new Set<string>();
  const archiveParents=(parentId:string)=>{if(seen.has(parentId)||to.cattle[parentId])return;seen.add(parentId);const parent=from.cattle[parentId]??from.cattleArchive?.[parentId];if(parent){to.cattleArchive![parentId]=structuredClone(parent);parent.parentIds.forEach(archiveParents);}};

@@ -1,3 +1,4 @@
+import { cancelUnavailableBirthPlans } from './ScheduledBirths';
 import { communityHearthHeatReduction, recordCommunityHearthAssessment } from './CommunityHearth';
 import { releaseEquipment } from './Smithery';
 import { applyCulturalWeatherSupport } from './CulturalEvents';
@@ -12,7 +13,40 @@ export const defaultMortalityBands:MortalityBand[] = [
     {minAge:0,chanceBps:10},{minAge:16,chanceBps:5},{minAge:50,chanceBps:50},
     {minAge:60,chanceBps:200},{minAge:70,chanceBps:500},{minAge:80,chanceBps:1000},{minAge:90,chanceBps:2000},
 ];
-type EventWriter=(type:string,personaId?:string,details?:Record<string,unknown>)=>void;
+export type EventWriter = (type: string, personaId?: string, details?: Record<string, unknown>) => void;
+export interface DeathCommitOptions {
+    missionId?: string;
+    /** New on-site consequences retain the exact tick even for historical birth-year identities. */
+    exactTick?: boolean;
+}
+interface DeathRecord {
+    id: string;
+    age: number;
+    householdId: string | null;
+    residenceId: string | null;
+    occupation: SimulationState['personas'][string]['occupation'];
+    partnerId: string | null;
+    [key: string]: unknown;
+}
+function deathSnapshot(state: SimulationState, id: string, age = personaAge(state, id)): DeathRecord {
+    const person = state.personas[id];
+    const home = Object.values(state.households).find(household => household.memberIds.includes(id));
+    return { id, age, householdId: home?.id ?? null, residenceId: home?.residenceId ?? null,
+        occupation: person.occupation, partnerId: person.partnerId };
+}
+
+/** Commit already selected factual deaths. This boundary selects no risk, outcome or RNG. */
+export function commitPersonaDeaths(state: SimulationState, ids: readonly string[], emit: EventWriter,
+    options: DeathCommitOptions = {}): number {
+    const deaths = [...new Set(ids)].sort().flatMap(id => {
+        const person = state.personas[id];
+        if (!person) throw new Error('Unknown persona selected for death.');
+        return person.deathWinter === null ? [deathSnapshot(state, id)] : [];
+    });
+    const count = applyDeathRecords(state, deaths, emit, options);
+    if (count) cancelUnavailableBirthPlans(state, emit);
+    return count;
+}
 /** Resolve all rolls before cleanup so simultaneous deaths retain factual relationship context. */
 export function resolveMortality(
     state: SimulationState,
@@ -56,50 +90,67 @@ export function resolveMortality(
             (personaAway(state, id) ? 0 : personaWeatherExposure(state, id));
         const risk = Math.min(10000, (band?.chanceBps ?? 0) + weatherExposureBps);
         if (!roll(risk)) return [];
-        const home = Object.values(state.households).find(household => household.memberIds.includes(id));
-        return [{ id, age, householdId: home?.id ?? null, residenceId: home?.residenceId ?? null,
-            occupation: person.occupation, partnerId: person.partnerId,
+        return [{ ...deathSnapshot(state, id, age),
             ...(state.weather?.config.enabled ? { mortalityRiskBps: risk, weatherExposureBps,
                 permanentlySheltered: permanentlySheltered(state, id), ...weatherFacts(state),
                 ...(supported ? { baselineWeatherExposureBps: supported.baselineWeatherExposureBps,
                     culturalSupportEventId: support!.eventId } : {}) } : {}) }];
     });
-    for(const death of deaths){
-        const person=state.personas[death.id],info=mechanics.people[death.id];
-        person.deathWinter=state.time.winter;
-        if(person.birthTick!==undefined)person.deathTick=state.time.tick;
-        const active=person.occupationHistory.at(-1);if(active?.endedAt===null)active.endedAt={...state.time};
-        if(person.occupation!==null)info.progress[person.occupation]=person.workProgress;
-        person.occupation=null;info.occupationLocked=false;
-        if(person.partnerId!==null)state.personas[person.partnerId].partnerId=null;
-        person.partnerId=null;
-        for(const home of Object.values(state.households)){
-            home.memberIds=home.memberIds.filter(id=>id!==person.id);
-            if(home.memberIds.length===0)home.residenceId=null;
+    return applyDeathRecords(state, deaths, emit, { missionId: expeditionMissionId });
+}
+
+/** Every cause shares household, work, relationship, care and equipment cleanup. */
+function applyDeathRecords(state: SimulationState, deaths: DeathRecord[], emit: EventWriter,
+    options: DeathCommitOptions): number {
+    const mechanics = state.mechanics!;
+    for (const death of deaths) {
+        const person = state.personas[death.id], info = mechanics.people[death.id];
+        person.deathWinter = state.time.winter;
+        if (options.exactTick || person.birthTick !== undefined) person.deathTick = state.time.tick;
+        const active = person.occupationHistory.at(-1);
+        if (active?.endedAt === null) active.endedAt = { ...state.time };
+        if (person.occupation !== null) info.progress[person.occupation] = person.workProgress;
+        person.occupation = null;
+        info.occupationLocked = false;
+        if (person.partnerId !== null) state.personas[person.partnerId].partnerId = null;
+        person.partnerId = null;
+        for (const home of Object.values(state.households)) {
+            home.memberIds = home.memberIds.filter(id => id !== person.id);
+            if (home.memberIds.length === 0) home.residenceId = null;
         }
-        releaseEquipment(state, person.id, 'death', expeditionMissionId);
-        emit('PersonaDied',person.id,{...death,participants:[person.id],name:person.name});
+        releaseEquipment(state, person.id, 'death', options.missionId);
+        emit('PersonaDied', person.id, { ...death, participants: [person.id], name: person.name });
     }
-    if(deaths.length){
-        const deadIds=new Set(deaths.map(d=>d.id));
-        for(const id of Object.keys(mechanics.people).sort()){
-            const person=state.personas[id],info=mechanics.people[id];
-            if(person.deathWinter!==null){endCare(state,info);continue;}
-            if(info.caregiverId!==null&&deadIds.has(info.caregiverId)){info.caregiverId=null;info.caregiverLocked=false;}
-            if(careActive(state,info)&&deaths.some(d=>state.personas[d.id].parentIds.includes(id))){
-                if(info.childcareUntilTick!==undefined){
-                    const now=state.time.winter*state.ticksPerWinter+state.time.tick;
-                    const endpoints=Object.values(state.personas).filter(child=>child.deathWinter===null&&child.parentIds.includes(id))
-                        .map(child=>(child.birthWinter+mechanics.config.childcareWinters)*state.ticksPerWinter+(child.birthTick??0));
-                    const endpoint=Math.min(careEndpoint(state,info),Math.max(now,...endpoints));
-                    info.childcareUntilWinter=Math.floor(endpoint/state.ticksPerWinter);
-                    info.childcareUntilTick=endpoint%state.ticksPerWinter;
-                    if(!careActive(state,info))endCare(state,info);
+    if (deaths.length) {
+        const deadIds = new Set(deaths.map(death => death.id));
+        for (const id of Object.keys(mechanics.people).sort()) {
+            const person = state.personas[id], info = mechanics.people[id];
+            if (person.deathWinter !== null) { endCare(state, info); continue; }
+            if (info.caregiverId !== null && deadIds.has(info.caregiverId)) {
+                info.caregiverId = null;
+                info.caregiverLocked = false;
+            }
+            if (careActive(state, info) && deaths.some(death => state.personas[death.id].parentIds.includes(id))) {
+                if (info.childcareUntilTick !== undefined) {
+                    const now = state.time.winter * state.ticksPerWinter + state.time.tick;
+                    const endpoints = Object.values(state.personas)
+                        .filter(child => child.deathWinter === null && child.parentIds.includes(id))
+                        .map(child => (child.birthWinter + mechanics.config.childcareWinters) * state.ticksPerWinter +
+                            (child.birthTick ?? 0));
+                    const endpoint = Math.min(careEndpoint(state, info), Math.max(now, ...endpoints));
+                    info.childcareUntilWinter = Math.floor(endpoint / state.ticksPerWinter);
+                    info.childcareUntilTick = endpoint % state.ticksPerWinter;
+                    if (!careActive(state, info)) endCare(state, info);
                     continue;
                 }
-                const endpoints=Object.values(state.personas).filter(child=>child.deathWinter===null&&child.parentIds.includes(id)).map(child=>child.birthWinter+mechanics.config.childcareWinters);
-                info.childcareUntilWinter=Math.min(info.childcareUntilWinter,Math.max(state.time.winter,...endpoints));
-                if(info.childcareUntilWinter<=state.time.winter){info.caregiverId=null;info.caregiverLocked=false;}
+                const endpoints = Object.values(state.personas)
+                    .filter(child => child.deathWinter === null && child.parentIds.includes(id))
+                    .map(child => child.birthWinter + mechanics.config.childcareWinters);
+                info.childcareUntilWinter = Math.min(info.childcareUntilWinter, Math.max(state.time.winter, ...endpoints));
+                if (info.childcareUntilWinter <= state.time.winter) {
+                    info.caregiverId = null;
+                    info.caregiverLocked = false;
+                }
             }
         }
     }

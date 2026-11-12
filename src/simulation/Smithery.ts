@@ -2,6 +2,8 @@ import type { Occupation, SimulationState } from './SimulationCore';
 import { personaAway } from './WorldExpeditions';
 import { personaAge } from './PersonaAge';
 import { eventFacts } from './EventFacts';
+import { territorialDuty } from './ResidentPresence';
+import { miningBusy } from './Mining';
 
 export const equipmentItems = ['woodenSpear', 'woodenShield', 'leatherShield'] as const;
 export type EquipmentItem = typeof equipmentItems[number];
@@ -135,6 +137,10 @@ export function applySmitheryCommand(state: SimulationState, command: SmitheryCo
         personaAge(state, person.id) < state.mechanics.config.workAge)
         throw new Error('Choose a living resident of expedition age.');
     if (personaAway(state, person.id)) throw new Error('Equipment can only be changed while the resident is home.');
+    if (miningBusy(state, person.id))
+        throw new Error('Equipment can only be changed after the resident returns from mining.');
+    if (territorialDuty(state, person.id))
+        throw new Error('Equipment cannot be changed while the resident is on territorial duty.');
     if (command.slot !== 'weapon' && command.slot !== 'shield' ||
         command.slot === 'weapon' && command.item !== null && command.item !== 'woodenSpear' ||
         command.slot === 'shield' && command.item !== null &&
@@ -154,7 +160,7 @@ export function applySmitheryCommand(state: SimulationState, command: SmitheryCo
         item: command.item, itemName: command.item ? equipmentLabels[command.item] : 'None',
         previousItem: previous }, person.id);
 }
-/** Clan property stays at home on transfer; an expedition death permanently loses carried gear. */
+/** Clan property stays home on transfer; mission casualties permanently lose their carried gear. */
 export function releaseEquipment(
     state: SimulationState,
     personaId: string,
@@ -163,7 +169,8 @@ export function releaseEquipment(
 ) {
     const gear = state.smithery?.assignments[personaId];
     if (!gear) return;
-    // Physical missions are already Returned when their casualties are resolved.
+    // Legacy physical missions are already Returned at resolution.
+    // An explicit mission ID also identifies on-site losses.
     const lost = reason === 'death' && (expeditionMissionId !== undefined || personaAway(state, personaId));
     const mission = Object.values(state.world?.missions ?? {}).find(m =>
         m.status === 'Away' && m.memberIds.includes(personaId)) ??

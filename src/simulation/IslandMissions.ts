@@ -1,3 +1,4 @@
+import { createEncounterRules, onSiteOffer, completeOnSiteMission, type PhysicalEncounterRules } from './OnSiteEncounters';
 import { canonicalDepartureOrigins } from './ResidentPresence';
 import { pillageEquipment, validatePillageEquipment, type PillageEquipment } from './Smithery';
 import type { SimulationState } from './SimulationCore';
@@ -22,6 +23,8 @@ export interface IslandTargetRef {
     position: Point2;
 }
 export interface IslandMissionTask {
+    /** Absent on every already-dispatched historical mission. */
+    encounterRules?: PhysicalEncounterRules;
     version: 1;
     type: MissionType;
     target: IslandTargetRef;
@@ -174,6 +177,7 @@ export function islandMissionOffer(state: SimulationState, groupId: string, targ
             observationTicks: offer.duration - offer.travelTicks - offer.returnTicks,
             planKey: routeQuoteKey([offer.recon, offer.memberRoutes, offer.returnRoutes]),
         } } : {}),
+        ...(onSiteOffer(state, context!) ? { encounter: onSiteOffer(state, context!) } : {}),
         target: { ...offer.ref.position }, travelTicks: offer.travelTicks };
 }
 
@@ -197,13 +201,18 @@ export function dispatchIslandMission(state: SimulationState, command: IslandMis
             successBps: offer.successBps, casualtyBps: offer.casualtyBps,
             ...(offer.equipment ? { equipment: offer.equipment } : {}),
             observation: null, observedSiteId: null, visitEventId: null, result: null,
+            ...(state.world!.territory ? { encounterRules: createEncounterRules(state, context!, offer.group.memberIds) } : {}),
             ...(offer.recon ? { recon: { ...offer.recon, outwardRoutes: offer.memberRoutes, reachedViewpoints: 0, pauseUntil: null, samples: [] } } : {}) },
     };
     spatial.missions[id] = mission;
     state.stocks.food -= offer.foodCost;
     record(state, 'ExpeditionDeparted', mission, { target: offer.ref, foodCost: offer.foodCost,
         duration: offer.duration, successBps: offer.successBps, casualtyBps: offer.casualtyBps,
-        ...(offer.equipment ? { equipment: offer.equipment } : {}) });
+        ...(offer.equipment ? { equipment: offer.equipment } : {}),
+        ...(mission.task!.encounterRules ? { onSiteVersion: 1,
+            encounterPolicy: structuredClone(mission.task!.encounterRules.policy),
+            attackerEquipment: structuredClone(mission.task!.encounterRules.attackerEquipment),
+            travelRiskBps: mission.task!.encounterRules.travelRiskBps } : {}) });
 }
 
 function observesSite(state: SimulationState, context: PhysicalExpeditionContext, point: Point2) {
@@ -269,6 +278,7 @@ export function observeIslandMission(state: SimulationState, mission: SpatialMis
 }
 
 export function completeIslandMission(state: SimulationState, mission: SpatialMission) {
+    if (mission.task?.encounterRules) { completeOnSiteMission(state, mission); return; }
     const task = mission.task!;
     const { live, success: rolled, equipment } = resolveExpeditionCrew(state, { id: mission.id,
         memberIds: mission.memberIds, successBps: task.successBps, casualtyBps: task.casualtyBps, equipment: task.equipment });
@@ -321,7 +331,7 @@ export function validateIslandMission(state: SimulationState, mission: SpatialMi
         !Number.isSafeInteger(task.operateUntil) || task.operateUntil <= mission.departedAt ||
         task.operateUntil >= mission.departedAt + task.duration || mission.provisions ||
         ![task.successBps, task.casualtyBps].every(n => Number.isSafeInteger(n) && n >= 0 && n <= 10000) ||
-        (mission.status === 'Returned') !== !!task.result ||
+        (mission.status === 'Returned' || mission.status === 'Lost') !== !!task.result ||
         (task.observation === null) !== (task.visitEventId === null) ||
         task.observation !== null && (!validKnowledge(task.observation, absoluteTick(state)) || !visit ||
             visit.type !== 'IslandMissionVisited' || visit.details?.missionId !== mission.id ||

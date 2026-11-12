@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FjordSide · On-site encounter review</title><link rel="stylesheet" href="../../../src/ui/fjord-theme.css"><style>
+body{margin:0;padding:24px;background:var(--fs-canvas);color:var(--fs-text);font:16px/1.5 var(--fs-font-body)}main{max-width:960px;margin:auto}h1,h2{font-family:var(--fs-font-heading)}section{margin:20px 0;padding:20px;border:1px solid var(--fs-border);border-radius:var(--fs-radius-panel);background:var(--fs-panel)}p{max-width:78ch}a{color:var(--fs-accent)}button{cursor:pointer;padding:10px 16px;border:1px solid var(--fs-border);border-radius:var(--fs-radius-control);background:var(--fs-card)}button:hover{background:var(--fs-hover)}nav{display:flex;gap:12px;flex-wrap:wrap}video{width:100%;max-width:800px}small,#status{color:var(--fs-muted)}.cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.cases section{margin:0}img{max-width:100%;height:auto}</style></head><body><main>
+<h1>On-site encounters</h1><p>Real seed72 / island195 checkpoints for the combined combat QA. Download a checkpoint, then use <strong>Load game → Import file</strong> in a separate local test session. This page only downloads files.</p>
+<nav><a href="/fjord-play" target="_blank" rel="noopener">Open FjordSide</a><a href="README.md">Evidence and test matrix</a></nav><p id="status" aria-live="polite">Checkpoints are paused and retain their actual prior history.</p>
+<div class="cases">
+<section><h2>1. Depart from home</h2><p>Four real residents are ready. Review the Pillage cost, go Back, then confirm once. Return home before contact to check an early recall.</p><button data-checkpoint="ready-at-home">Download home checkpoint</button></section>
+<section><h2>2. Observe combat</h2><p>Use Show group, then resume. A real combat loss appears while the party is still away. Three living members remain. You can instead try Withdraw group at contact.</p><button data-checkpoint="actual-contact">Download contact checkpoint</button></section>
+<section><h2>3. Inspect the loss</h2><p>The recorded death already exists before homecoming. Inspect the party and its history; opening a report must not add stock or revive anyone.</p><button data-checkpoint="after-combat-casualty">Download loss checkpoint</button></section>
+<section><h2>4. Check carried stock</h2><p>The party is carrying 30 Food. Those assets remain unavailable to home stocks until the actual survivors arrive.</p><button data-checkpoint="actual-cargo-in-transit">Download transit checkpoint</button></section>
+<section><h2>5. Watch homecoming</h2><p>Resume the near-home party. Only three return; 30 Food is delivered once, and the ordinary pace resumes. Export/reload and check for duplication.</p><button data-checkpoint="three-survivors-near-home">Download near-home checkpoint</button></section>
+<section><h2>6. Review the result</h2><p>Inspect the real survivor/casualty names and arrival receipt. The battle is not rolled again.</p><button data-checkpoint="after-journey">Download completed checkpoint</button></section>
+</div><section><h2>Recorded desktop continuation</h2><video controls preload="none" src="media/desktop-on-site-casualty.webm"></video><p><small>Actual on-site casualty; normal clock continuation from a genuine contact save.</small></p></section><section><h2>Recorded landscape continuation</h2><video controls preload="none" src="media/touch-physical-homecoming.webm"></video><p><small>Native Chrome touch emulation; physical Safari is reserved for owner QA.</small></p></section>
+</main><script type="module">
+const status = document.querySelector('#status');
+for (const button of document.querySelectorAll('[data-checkpoint]')) {
+    button.addEventListener('click', async () => {
+        button.disabled = true;
+        status.textContent = 'Preparing the original checkpoint…';
+        try {
+            const response = await fetch('saves/' + button.dataset.checkpoint + '.shared.json.gz');
+            if (!response.ok) throw Error('Checkpoint download failed.');
+            const bytes = new Uint8Array(await response.arrayBuffer());
+            // The dev server may already apply Content-Encoding: gzip.
+            const packed = bytes[0] === 0x1f && bytes[1] === 0x8b;
+            const text = packed ? await new Response(new Blob([bytes]).stream()
+                .pipeThrough(new DecompressionStream('gzip'))).text() : new TextDecoder().decode(bytes);
+            JSON.parse(text);
+            const url = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'fjordside-308-' + button.dataset.checkpoint + '.json';
+            link.click();
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+            status.textContent = 'Downloaded. Open FjordSide and choose Load game → Import file.';
+        } catch (error) {
+            status.textContent = String(error);
+        } finally {
+            button.disabled = false;
+        }
+    });
+}
+</script>
+</body>
+</html>

@@ -1,4 +1,5 @@
 import { personalChronicleEntry } from './Chronicle';
+import { encounterHistoryTypes } from './EncounterHistory';
 import { inspectCattle } from '../simulation/SimulationCore';
 import type { GameTime, SimulationEvent, SimulationState } from '../simulation/SimulationCore';
 
@@ -39,12 +40,15 @@ const noteworthy = new Map<string, AttentionCategory>([
     ['MerchantArrived', 'settlement'], ['MerchantDeparted', 'settlement'],
     ['HouseBuilt', 'settlement'], ['BuildingCollapsed', 'settlement'],
     ['ExpeditionDeparted', 'expedition'], ['ExpeditionReturned', 'expedition'],
+    ['EncounterCommitted', 'expedition'], ['EncounterWithdrawalRequested', 'expedition'],
+    ['EncounterResolved', 'expedition'], ['MissionCargoCaptured', 'expedition'],
+    ['MissionCargoLost', 'expedition'], ['ExpeditionLost', 'expedition'], ['ExploreAreaLost', 'expedition'],
     ['ExploreAreaDeparted', 'expedition'], ['ExploreAreaReturned', 'expedition'],
     ['IslandSiteSighted', 'discovery'], ['IslandMissionVisited', 'discovery'],
     ['ExploreAreaReturnStarted', 'expedition'], ['ResidentQuarrelled', 'life'], ['ResidentsReconciled', 'life'],
 ]);
 
-const formattedTypes = new Set([...noteworthy.keys(), 'FoundingPartyLanded', 'FoundingPartnershipPresent',
+const formattedTypes = new Set([...noteworthy.keys(), ...encounterHistoryTypes, 'FoundingPartyLanded', 'FoundingPartnershipPresent',
     'CommunityHearthUpgraded', 'MerchantBartered', 'CulturalGatheringHeld', 'CultureWeatherSupportApplied', 'OccupationAssigned', 'OccupationReleased', 'CaregiverAssigned', 'ResourceProduced', 'CattleFoodProduced',
     'LivestockResourceProduced', 'FoodConsumed', 'CattleFoodConsumed', 'LivestockFoodConsumed',
     'ExploreAreaPrepared', 'ExploreAreaCancelled', 'ExploreAreaStranded', 'ExploreAreaReturnStarted',
@@ -68,8 +72,9 @@ export function attentionEvent(event: SimulationEvent): AttentionRecord | null {
     }
     if (!headline) return null;
     const category: AttentionCategory = noteworthy.get(event.type) ??
+        (encounterHistoryTypes.has(event.type) ? 'expedition' : undefined) ??
         (['CulturalGatheringHeld', 'CultureWeatherSupportApplied'].includes(event.type) ? 'life' : 'settlement');
-    const severity = noteworthy.has(event.type) && !(event.type === 'ExploreAreaDeparted' && d.redirected) ?
+    const severity: AttentionSeverity = ['ExpeditionLost', 'ExploreAreaLost'].includes(event.type) ? 'critical' : noteworthy.has(event.type) && !(event.type === 'ExploreAreaDeparted' && d.redirected) ?
         'noteworthy' : 'ambient';
     const actorIds = [...new Set([event.personaId, ...strings(d.participants), ...strings(d.parentIds)]
         .filter((id): id is string => typeof id === 'string'))];

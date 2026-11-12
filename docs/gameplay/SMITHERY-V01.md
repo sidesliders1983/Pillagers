@@ -135,3 +135,14 @@ Hides in the Smithery context. Existing recipes keep their original inputs and
 outputs; no Iron Ore is consumed or fabricated by Smithery. Historical campaigns
 retain their original inventories. See [Mining v0.1](MINING-V01.md) for the
 finite outcrops and real Miner occupation.
+
+## Versioned on-site encounters (#308)
+
+New awareness-enabled physical orders snapshot the actual dispatched personal
+gear. Actual present defenders commit their own equipped items at contact. Spears
+and shields modify each real exchange once; the legacy raid success bonus and
+combined return casualty roll are not applied again. Casualty gear is lost through
+the existing EquipmentLost owner at the on-site death tick; surviving assignments
+remain theirs. Expedition members, miners away at work, territorial responders and
+residents in custody cannot be re-equipped remotely. Old in-flight missions retain
+their original snapshots and resolver. See [on-site encounters](ON-SITE-ENCOUNTERS-V1.md).

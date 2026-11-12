@@ -1,5 +1,6 @@
 import { personalChronicleEntry } from './Chronicle';
 import { territoryHistoryText } from './TerritoryAttention';
+import { encounterHistoryText, encounterHistoryTypes } from './EncounterHistory';
 import type { SimulationEvent, SimulationState, GameTime } from '../simulation/SimulationCore';
 import type { BookChapter } from './ClanBook';
 import { ordinal } from './NarrativeTime';
@@ -86,6 +87,8 @@ function rolesFor(event: SimulationEvent, personaId: string, byId: ReadonlyMap<s
             prior.details?.success === true && prior.details.incidentId === details.incidentId &&
             prior.details.mediatorId === personaId ? ['mediator'] : [];
     }
+    if (encounterHistoryTypes.has(event.type))
+        return encounterHistoryText(event) && ids(details.participants).includes(personaId) ? ['expedition participant'] : [];
     if (['ExpeditionDeparted', 'ExpeditionReturned', 'ExploreAreaDeparted', 'ExploreAreaReturned'].includes(event.type))
         return ids(details.participants).includes(personaId) ? ['expedition participant'] : [];
     if (housingKinds.has(event.type))

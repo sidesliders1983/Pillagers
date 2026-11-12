@@ -1,3 +1,4 @@
+import { livestockInCustody } from './TransitCargo';
 import {weatherProfile,weatherProductionModifiers,weatherFacts} from './Weather';
 import {farmyards, livestockHerdSpace} from './Farmyards';
 import type {SimulationState, GameTime} from './SimulationCore';
@@ -8,7 +9,7 @@ import { eventFacts } from './EventFacts';
 import { slaughterHides } from './SpecialistStocks';
 import { ageEligibleForBreeding, compatibleLivestockPartner, livestockBirthIntervalReady,
     livestockBirthSpaceReady, livestockFeedingBlocked } from './LivestockBreeding';
-export function cattleSheltered(state:SimulationState,cattle:Cattle):boolean {return cattle.farmyardId!==null&&farmyards(state).some(f=>f.id===cattle.farmyardId);}
+export function cattleSheltered(state:SimulationState,cattle:Cattle):boolean {return !livestockInCustody(state,cattle.id)&&cattle.farmyardId!==null&&farmyards(state).some(f=>f.id===cattle.farmyardId);}
 function emit(state: SimulationState, type: string, details: Record<string, unknown>): void {
     // Production and feeding already have source IDs and exact amounts. Do not repeat the
     // complete identity snapshot for every resource unit or for the entire herd each year.
@@ -22,7 +23,7 @@ export function cattleFoodNeed(state: SimulationState): number {
     const modifiers = weatherProfile(state);
     let need = 0;
     for (const animal of Object.values(state.landing.cattle)) {
-        if (animal.deathWinter !== null) continue;
+        if (animal.deathWinter !== null || livestockInCustody(state, animal.id)) continue;
         const profile = animalProfile(state, animal);
         const adult = state.time.winter - animal.birthWinter >= profile.adultAge;
         // Older weather campaigns applied their multiplier only to adult feeding.
@@ -41,7 +42,7 @@ export function stepCattleOutput(state: SimulationState): void {
     const weather = weatherProductionModifiers(state, workedTick), scale = state.ticksPerWinter * 10000;
     for (const id of Object.keys(landing.cattle).sort()) {
         const animal = landing.cattle[id];
-        if (animal.deathWinter !== null) continue;
+        if (animal.deathWinter !== null || livestockInCustody(state, animal.id)) continue;
         const profile = animalProfile(state, animal);
         if (winter - animal.birthWinter < profile.adultAge) continue;
         const sheltered = animal.farmyardId !== null && shelteredIds.has(animal.farmyardId);
@@ -70,7 +71,7 @@ export function stepCattleOutput(state: SimulationState): void {
 }
 export function consumeCattleFood(state: SimulationState): void {
     if (!state.landing) return;
-    const animals = Object.values(state.landing.cattle).filter(animal => animal.deathWinter === null);
+    const animals = Object.values(state.landing.cattle).filter(animal => animal.deathWinter === null && !livestockInCustody(state, animal.id));
     const need = cattleFoodNeed(state), units = Math.min(need, state.stocks.food);
     state.stocks.food -= units;
     const ids = animals.map(animal => animal.id).sort();

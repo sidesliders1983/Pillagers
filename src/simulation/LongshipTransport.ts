@@ -39,6 +39,13 @@ export function longshipPose(state: SimulationState, shipId: string, context: Ph
     }
     return foundingLongshipPose(context, shipId);
 }
+/** A released hull may move later; the lost crew keeps its factual terminal sea pose. */
+export function lostSeaReceipt(state: SimulationState, mission: SpatialMission) {
+    if (mission.status !== 'Lost') return undefined;
+    return state.events.find(event => event.type === 'ExploreAreaLost' &&
+        event.details?.missionId === mission.id && event.details?.lostAtSea !== undefined);
+}
+
 function foundingLongshipPose(context: PhysicalExpeditionContext, shipId: string): LongshipPose {
     const initial = context.longshipOrigins?.[shipId];
     if (initial) return { ...initial };
@@ -324,6 +331,22 @@ export function validateLongshipState(state: SimulationState) {
     for (const mission of missions) {
         if (mission.lastShipId !== undefined && (typeof mission.lastShipId !== 'string' || !ships[mission.lastShipId])) fail();
         const transport = mission.transport;
+        const seaLoss = lostSeaReceipt(state, mission);
+        if (seaLoss) {
+            const fact = seaLoss.details!.lostAtSea as { version: number; shipId: string; position: Point2 };
+            const position = spatialMissionPosition(mission);
+            if (!fact || fact.version !== 1 || fact.shipId !== mission.lastShipId || !ships[fact.shipId] ||
+                Object.keys(fact).sort().join() !== 'position,shipId,version' || !point(fact.position) ||
+                seaLoss.details?.onSiteVersion !== 1 ||
+                seaLoss.time.winter * state.ticksPerWinter + seaLoss.time.tick !== mission.endedAt ||
+                Math.hypot(position.x - fact.position.x, position.z - fact.position.z) > 1e-6 || transport ||
+                ships[fact.shipId].transport?.groupId === mission.groupId || !mission.homeOrigins ||
+                !mission.memberRoutes || !mission.returnRoutes || mission.memberIds.some(id =>
+                    JSON.stringify(mission.memberRoutes![id]) !== JSON.stringify(mission.route) ||
+                    !route(mission.returnRoutes![id]) || !point(mission.homeOrigins![id]) ||
+                    Math.hypot(mission.returnRoutes![id].at(-1)!.x - mission.homeOrigins![id].x,
+                        mission.returnRoutes![id].at(-1)!.z - mission.homeOrigins![id].z) > 1e-6)) fail();
+        }
         if (!transport) continue;
         if (transport.version !== 1 || !['boarding', 'embarked'].includes(transport.phase) ||
             !mission.provisions || mission.task || ['Prepared', 'Returned', 'Stranded'].includes(mission.status) ||
@@ -359,13 +382,19 @@ export function assertLongshipWorld(state: SimulationState, context: PhysicalExp
         if (ship.transport && !navigableSea(context, ship.transport)) throw new Error('Invalid saved longship berth.');
     for (const mission of Object.values(state.world?.spatial?.missions ?? {})) {
         const transport = mission.transport;
-        if (transport?.phase !== 'embarked') continue;
-        for (const path of [mission.route, transport.seaReturnRoute]) {
+        const seaLoss = lostSeaReceipt(state, mission);
+        if (transport?.phase !== 'embarked' && !seaLoss) continue;
+        const homeLandRoutes = transport?.phase === 'embarked' ? transport.homeLandRoutes : mission.returnRoutes!;
+        const seaRoutes = transport?.phase === 'embarked' ? [mission.route, transport.seaReturnRoute] : [mission.route];
+        if (seaLoss && !navigableSea(context,
+            (seaLoss.details!.lostAtSea as { position: Point2 }).position))
+            throw new Error('Invalid saved lost-at-sea position.');
+        for (const path of seaRoutes) {
             for (let i = 1; i < path.length; i++)
                 if (!validSeaSegment(context, path[i - 1], path[i])) throw new Error('Invalid saved sailing route.');
         }
         for (const id of mission.memberIds) {
-            const path = transport.homeLandRoutes[id];
+            const path = homeLandRoutes[id];
             // Recheck reserved return geometry when regenerated geography is bound.
             for (let i = 1; i < path.length; i++) {
                 const a = path[i - 1], b = path[i];

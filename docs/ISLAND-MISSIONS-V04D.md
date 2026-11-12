@@ -2,6 +2,16 @@
 
 Physical island campaigns use the existing expedition groups and canonical land routes. The four-direction Region graph remains the compatibility adapter for older campaigns; physical targets are versioned world/site references, not extra Region slots.
 
+## Current on-site rules (#308)
+
+New physical orders in awareness-enabled campaigns save version-1 encounter rules.
+They use actual present defenders, on-site mortality and captured cargo; homecoming
+reports the stored result. The success/casualty percentages and return-time capture
+below describe **legacy regional and already-dispatched physical missions only**.
+Durations, provisions, routes and historical receipts remain unchanged. See
+[the current encounter contract](gameplay/ON-SITE-ENCOUNTERS-V1.md) for new rules,
+trial coefficients, custody, withdrawal and compatibility.
+
 ## Separate missions from home
 
 A free group with living, eligible members can leave home on Recon, Surveillance or Pillage. An active Explore expedition cannot change into one of these missions. Its members must return first. Membership, childcare exclusion, away work/consumption, weather, mission success, casualties and carrying capacity reuse the existing Core rules.

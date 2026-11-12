@@ -39,6 +39,17 @@ export function scheduleBirth(state: SimulationState, motherId: string, fatherId
     emit('BirthScheduled', motherId, { participants: [motherId, fatherId], dueAt: { ...dueAt } });
 }
 
+/** On-site deaths happen after the domestic birth step and must close invalid maternal plans now. */
+export function cancelUnavailableBirthPlans(state: SimulationState, emit: EventWriter): void {
+    if (!state.birthdayCalendar) return;
+    state.birthdayCalendar.pendingBirths = state.birthdayCalendar.pendingBirths.filter(birth => {
+        const mother = state.personas[birth.motherId];
+        if (mother && mother.deathWinter === null) return true;
+        emit('BirthPlanCancelled', birth.motherId, { reason: 'mother-deceased-or-departed',
+            participants: [birth.motherId, birth.fatherId], dueAt: { ...birth.dueAt } });
+        return false;
+    });
+}
 /** Called after domestic annual rules and world returns, including headless CPU progression. */
 export function resolveScheduledBirths(state: SimulationState, emit: EventWriter): boolean {
     const calendar = state.birthdayCalendar;

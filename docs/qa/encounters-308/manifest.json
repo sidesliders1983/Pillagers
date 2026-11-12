@@ -1,0 +1,302 @@
+{
+  "source": "ce7076a6e5a5b8ca55d4f7026ee5967e91f5cee7",
+  "publication": "draft PR330; no main merge or Sites publication",
+  "artifacts": [
+    {
+      "path": "media/desktop-four-real-crew-before-default-combat.jpg",
+      "source": "D:/CodexSites/Pillagers/scratch/on-site-encounters-308/scratch/encounter-308/native-ce7076a6-1794500200434/desktop-four-real-crew-before-default-combat.jpg",
+      "bytes": 69808,
+      "sha256": "ca5d8eab159889a51d16746e6191ba7f5e8bb5b4c6e4074207f9c9ba52088f60",
+      "rawBytes": 69808,
+      "rawSha256": "ca5d8eab159889a51d16746e6191ba7f5e8bb5b4c6e4074207f9c9ba52088f60",
+      "gzip": false
+    },
+    {
+      "path": "media/desktop-three-real-crew-after-on-site-death.jpg",
+      "source": "D:/CodexSites/Pillagers/scratch/on-site-encounters-308/scratch/encounter-308/native-ce7076a6-1794500200434/desktop-three-real-crew-after-on-site-death.jpg",
+      "bytes": 82224,
+      "sha256": "bb69d975098e09c2f1147b20871b5e5d117aa1baf377cc94005e75a55333fc0d",
+      "rawBytes": 82224,
+      "rawSha256": "bb69d975098e09c2f1147b20871b5e5d117aa1baf377cc94005e75a55333fc0d",
+      "gzip": false
+    },
+    {
+      "path": "media/touch-landscape-three-survivors-before-home-clock.jpg",
+      "source": "D:/CodexSites/Pillagers/scratch/on-site-encounters-308/scratch/encounter-308/native-ce7076a6-1794500200434/touch-landscape-three-survivors-before-home-clock.jpg",
+      "bytes": 57690,
+      "sha256": "7cf48c91b84b8e500a7081907b8e218ebcd2d681fc03e510ac3c48342da2aed9",
+      "rawBytes": 57690,
+      "rawSha256": "7cf48c91b84b8e500a7081907b8e218ebcd2d681fc03e510ac3c48342da2aed9",
+      "gzip": false
+    },
+    {
+      "path": "media/touch-landscape-three-survivors-arrived-world.jpg",
+      "source": "D:/CodexSites/Pillagers/scratch/on-site-encounters-308/scratch/encounter-308/native-ce7076a6-1794500200434/touch-landscape-three-survivors-arrived-world.jpg",
+      "bytes": 58076,
+      "sha256": "66ef59356c0e4f4f2e29cc3bce6f509790f184eb3219e47e071fd36a8ad217eb",
+      "rawBytes": 58076,
+      "rawSha256": "66ef59356c0e4f4f2e29cc3bce6f509790f184eb3219e47e071fd36a8ad217eb",
+      "gzip": false
+    },
+    {
+      "path": "media/desktop-on-site-casualty.webm",
+      "source": "D:/CodexSites/Pillagers/scratch/on-site-encounters-308/scratch/encounter-308/native-ce7076a6-1794500200434/video/page@db09a00ebbad098dbe99bebb993d7e56.webm",
+      "bytes": 6697923,
+      "sha256": "3cb19c8690888dc775ad8e3a2c1a95dfed809456f8a438b12d7ade67e68530e0",
+      "rawBytes": 6697923,
+      "rawSha256": "3cb19c8690888dc775ad8e3a2c1a95dfed809456f8a438b12d7ade67e68530e0",
+      "gzip": false
+    },
+    {
+      "path": "media/touch-physical-homecoming.webm",
+      "source": "D:/CodexSites/Pillagers/scratch/on-site-encounters-308/scratch/encounter-308/native-ce7076a6-1794500200434/video/page@5124bbbabf4f2c7898e183f3b0e172c4.webm",
+      "bytes": 2671136,
+      "sha256": "791431d2d3fb32a8a60359cea35e3b55ec5569a531e458517ad551d0bdf0970d",
+      "rawBytes": 2671136,
+      "rawSha256": "791431d2d3fb32a8a60359cea35e3b55ec5569a531e458517ad551d0bdf0970d",
+      "gzip": false
+    },
+    {
+      "path": "saves/ready-at-home.shared.json.gz",
+      "source": "scratch/encounter-308/production-final/seed-72/ready-at-home.shared.json",
+      "bytes": 15917,
+      "sha256": "bff7b56f31959f874212c86735152ad63a3bd1edee9a24ec4b8eac42fe83dcf1",
+      "rawBytes": 149962,
+      "rawSha256": "983091901645ab37efca5f6d52441264a3f73ac4cd01e00b4f76aeabc306c43b",
+      "gzip": true
+    },
+    {
+      "path": "saves/actual-contact.shared.json.gz",
+      "source": "scratch/encounter-308/production-final/seed-72/actual-contact.shared.json",
+      "bytes": 22406,
+      "sha256": "aeabd77e18958e471235bb787329136437793235ddc26865c60d8895cd3d1043",
+      "rawBytes": 206834,
+      "rawSha256": "6086b7188a331b6e02e4487216c0af7bc278382d117b565086b3596db7d26edb",
+      "gzip": true
+    },
+    {
+      "path": "saves/after-combat-casualty.shared.json.gz",
+      "source": "scratch/encounter-308/production-final/seed-72/after-combat-casualty.shared.json",
+      "bytes": 23333,
+      "sha256": "072db1397b5f65c66382eecb0c709d70a27c0492efd8de70a610a9eed5912b9c",
+      "rawBytes": 215735,
+      "rawSha256": "a6a106a612ff8f1b9db760e101f08bb8e654feb8c6b25d5c98daf6839e53e8c3",
+      "gzip": true
+    },
+    {
+      "path": "saves/actual-cargo-in-transit.shared.json.gz",
+      "source": "scratch/encounter-308/production-final/seed-72/actual-cargo-in-transit.shared.json",
+      "bytes": 23690,
+      "sha256": "423c698759e07f61c5a428950fe6d459d600739678bca94c7fc737af716661a1",
+      "rawBytes": 220461,
+      "rawSha256": "373cee14d361b97849f351c20059b6d9ae7b3ce0ab46e6800c8b1f44084f72dc",
+      "gzip": true
+    },
+    {
+      "path": "saves/three-survivors-near-home.shared.json.gz",
+      "source": "scratch/encounter-308/production-final/seed-72/three-survivors-near-home.shared.json",
+      "bytes": 22905,
+      "sha256": "6807c79e40869edb5c00d0d60810433b675c7bb731ff6ea6510d06ac5cd01842",
+      "rawBytes": 225084,
+      "rawSha256": "fb2d3b27e606c32453589a3091005cb22ae8c65240dafd94ba220b4e0245150d",
+      "gzip": true
+    },
+    {
+      "path": "saves/after-journey.shared.json.gz",
+      "source": "scratch/encounter-308/production-final/seed-72/after-journey.shared.json",
+      "bytes": 23099,
+      "sha256": "93cf94ba47e70c9b35468331db11fdf59979a0f1d5847edb7fc4c022dd850892",
+      "rawBytes": 227064,
+      "rawSha256": "e362c6160e7eb717c992106dd4855a949e4b1b4a32456d2294b6893f3a265f99",
+      "gzip": true
+    },
+    {
+      "path": "native-summary.json.gz",
+      "source": "scratch/encounter-308/final-qa-summary.json",
+      "bytes": 2022,
+      "sha256": "8104413d222fdeb227ce77021040fc48abe581d9510473cc4e0c98550e7b5894",
+      "rawBytes": 5196,
+      "rawSha256": "1f7bdccabbcbc8c9b156041cff15e1baee0a9acbb9071b97ea47ffc5709b6e5a",
+      "gzip": true
+    },
+    {
+      "path": "media-selection.json.gz",
+      "source": "scratch/encounter-308/final-artifact-selection.json",
+      "bytes": 1372,
+      "sha256": "171f333d0dc8dccdda5e8e303e971c19259e9cc148e6c02df93aa40886766bb1",
+      "rawBytes": 3914,
+      "rawSha256": "9135d298b799339e6ee2f21312f16b5377622a359b75746becdc1eaa86031dd4",
+      "gzip": true
+    },
+    {
+      "path": "production-report.json.gz",
+      "source": "scratch/encounter-308/production-final/report.json",
+      "bytes": 2586,
+      "sha256": "0d1132bc196311bd48ff072f2af1c43b6f57677b551c7ecbd4812c2558f70e6b",
+      "rawBytes": 11007,
+      "rawSha256": "7e55afd2fddff20ee57fce4b3d3079b2f55dc60b81fa137d8f00c9aad76b75b1",
+      "gzip": true
+    },
+    {
+      "path": "production-fixtures.json.gz",
+      "source": "scratch/encounter-308/production-final/browser-fixtures.json",
+      "bytes": 2294,
+      "sha256": "0f620bd628a26cb7db763c3c60c11481e7bd7110b85e5072fd6adb48a01af01f",
+      "rawBytes": 7557,
+      "rawSha256": "4e2170b9358a659d256753a87844155e533bc8c111a86bdc1a2a67306dda07a0",
+      "gzip": true
+    },
+    {
+      "path": "balance-comparison.json.gz",
+      "source": "scratch/encounter-308/default-final/report-expanded.json",
+      "bytes": 4914,
+      "sha256": "39f35f1b62cdc20317128acdf08d485351424dc981bf0a3873a17c56101324eb",
+      "rawBytes": 135854,
+      "rawSha256": "dbc77712223b799d1df81085289ad9be7e492c92131550709ef4eb7103ebad82",
+      "gzip": true
+    },
+    {
+      "path": "native-functional.json.gz",
+      "source": "scratch/encounter-308/native-ce7076a6-1794499633180/report.json",
+      "bytes": 2277,
+      "sha256": "c74c9a2e833e37e1d3da51f46a4e1f85c51222204af5dc49f1035859c81ff710",
+      "rawBytes": 11377,
+      "rawSha256": "246c8262f89db2944ce0c3c267acca718b106ae3449250060e146fe69b30da4a",
+      "gzip": true
+    },
+    {
+      "path": "native-focused.json.gz",
+      "source": "scratch/encounter-308/native-ce7076a6-1794500200434/report.json",
+      "bytes": 2195,
+      "sha256": "f4e9e4eae67fac3b50ef18a79bf5674f09734082d55036c7beef09282517c129",
+      "rawBytes": 9957,
+      "rawSha256": "15245f736d86069fd01727496147cb613ba71ff2c00ecc77eb46c876466aca39",
+      "gzip": true
+    },
+    {
+      "path": "historical/native-harness-failure.json.gz",
+      "source": "scratch/encounter-308/native-ce7076a6-1794499381347/report.json",
+      "bytes": 2532,
+      "sha256": "2900e677afc98242ad5721ae47cdb6f181ae126ae99fe77ffa5de54209342bda",
+      "rawBytes": 6274,
+      "rawSha256": "61137871d7301c14782766d86fa4a47767c84af60ac1d85728333966c47b2e28",
+      "gzip": true
+    },
+    {
+      "path": "scripts/native-functional.executed.mjs.gz",
+      "source": "scratch/encounter-308/native-ce7076a6-1794499633180/executed-script.mjs",
+      "bytes": 5405,
+      "sha256": "9f7c3a129ea32574566dc2d373ca01ee505d20a7c7a57c0275aabfb411de8050",
+      "rawBytes": 19216,
+      "rawSha256": "e0d8be32dc11ba0ad0bb0d2ca973a849c8c813d187a624fecc668e9d598bc8e6",
+      "gzip": true
+    },
+    {
+      "path": "scripts/native-focused.executed.mjs.gz",
+      "source": "scratch/encounter-308/native-ce7076a6-1794500200434/executed-script.mjs",
+      "bytes": 5596,
+      "sha256": "93c02445c57d67e43a03d942a2f25d8bcd62496c68b51012681ed2ab69d8af60",
+      "rawBytes": 20038,
+      "rawSha256": "7d994060cc828c3b25dc59ac6cbadb696f41915940b3478e2f8b206f460b1ccd",
+      "gzip": true
+    },
+    {
+      "path": "scripts/compare-default.mjs.gz",
+      "source": "scratch/encounter-308/compare-default.mjs",
+      "bytes": 4543,
+      "sha256": "eb76110f4f1c39fbfdb29809e9015cac01bbb9897a6cab1a40388a69f782d170",
+      "rawBytes": 13998,
+      "rawSha256": "0c654038088a8b20e16d28d9e4facaacd3efc77c71d6e3bb22e5307e0309c218",
+      "gzip": true
+    },
+    {
+      "path": "scripts/prepare-production.mjs.gz",
+      "source": "scratch/encounter-308/prepare-production.mjs",
+      "bytes": 4030,
+      "sha256": "18f5d617977f0174607d9c54a614b49065313ec6bdf95e5272b3a533a06bae80",
+      "rawBytes": 12282,
+      "rawSha256": "4a595027556009579087946a247551206c31de08b1678ee747db3d7ca50dd986",
+      "gzip": true
+    },
+    {
+      "path": "logs/focused-48.log.gz",
+      "source": "scratch/encounter-308/validation/encounter-integrated-final.log",
+      "bytes": 2508,
+      "sha256": "e4a349d285514397efef41831d5e7393ed0bbc5184d7bf980461bfe286f05557",
+      "rawBytes": 6055,
+      "rawSha256": "21aaf15b6a4dc7e3df069a5e3bc3643a2500143b968783d11ecc69fba99c3ddd",
+      "gzip": true
+    },
+    {
+      "path": "historical/local-draft-integration.log.gz",
+      "source": "scratch/encounter-308/validation/full-integration-draft.log",
+      "bytes": 77250,
+      "sha256": "99e5f1154970b0e30b291695ea528582656016ea904099c557e1a5a829e82b19",
+      "rawBytes": 268743,
+      "rawSha256": "86c4b58939f92bf413e894c689d1a2b0b6345a105041e548d6b0cce548d4138b",
+      "gzip": true
+    },
+    {
+      "path": "legacy/report.json.gz",
+      "source": "scratch/legacy-compatibility-308-ce7076a6/report.json",
+      "bytes": 5442,
+      "sha256": "27171534f04c4993cf532a621d7bedf6fc014c233b0ca5ebd17c5c386df7cdf3",
+      "rawBytes": 72213,
+      "rawSha256": "76aa89980014d10b27d289e0ec235403a95d2cb4e1d058b4b2b3b3babb08bc02",
+      "gzip": true
+    },
+    {
+      "path": "legacy/report.sha256.gz",
+      "source": "scratch/legacy-compatibility-308-ce7076a6/report.sha256",
+      "bytes": 88,
+      "sha256": "269691c6bd9e4d0c65b0684b8174cc8f1a3818cc3293819f4cbc422aff4a0c97",
+      "rawBytes": 78,
+      "rawSha256": "c0386d8aebf77b3caf66d554eb8de3cd04688a3d619017a5af3fd4c365436f78",
+      "gzip": true
+    },
+    {
+      "path": "legacy/prove-legacy.mjs.gz",
+      "source": "scratch/legacy-compatibility-308-ce7076a6/prove-legacy.mjs",
+      "bytes": 3679,
+      "sha256": "6208f01d6182b579d360173f7a85a96540612c8c092add5bb386fca138af55d8",
+      "rawBytes": 13186,
+      "rawSha256": "169035e5219796c783006e02fd7782e956b9b0905e32209cc9c26f293a206c0b",
+      "gzip": true
+    },
+    {
+      "path": "legacy/current-source-manifest.json.gz",
+      "source": "scratch/legacy-compatibility-308-ce7076a6/current-source-manifest.json",
+      "bytes": 25075,
+      "sha256": "e75614812d94a367763f08196d8ff9f649141a90fac3da6e90618115f010aaa6",
+      "rawBytes": 77787,
+      "rawSha256": "bb653f58f97eb5261cbc04218dfeb7caa2c9df2ac0fa2b57c264f1366fd8ea6d",
+      "gzip": true
+    },
+    {
+      "path": "legacy/parent-source-manifest.json.gz",
+      "source": "scratch/legacy-compatibility-308-ce7076a6/parent-source-manifest.json",
+      "bytes": 24826,
+      "sha256": "90e64cd339878963ac02582f353c2d4c842a498d4f61f9e18c643757ee84280a",
+      "rawBytes": 77132,
+      "rawSha256": "772c5dbdf52094c28bd32217a12087a057ae8ffbd6450b02a8837087f36131ce",
+      "gzip": true
+    },
+    {
+      "path": "balance-raw-cases.json.gz",
+      "bytes": 616797,
+      "sha256": "2fb4388e5b46940018aacd92f11e752c1e1d5691f4e574919c25f9d7551a34f7",
+      "rawBytes": 6259863,
+      "rawSha256": "ed19b02ece5fcd93db151d1a64a8539d01246fde62d7b6fdb37997328a838889",
+      "gzip": true
+    },
+    {
+      "path": "native-QA.md.gz",
+      "source": "scratch/encounter-308/FINAL-QA.md",
+      "bytes": 1834,
+      "sha256": "81503edc38ccee897ecc3e7a10b7983d1623a5de452245898dea410e0419e5f1",
+      "rawBytes": 3702,
+      "rawSha256": "ad0d70c57fd023e323a1badd9e65f7ae05440353626b3c2311d8ed0af58a0d54",
+      "gzip": true
+    }
+  ]
+}

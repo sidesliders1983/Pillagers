@@ -1,3 +1,7 @@
+import { bindLivestockPresence, reconcileLivestockPresence, validateLivestockPresence, assertLivestockWorld,
+    type LivestockPresenceState } from './LivestockPresence';
+import { stepOnSiteEncounters, validateOnSiteEncounters } from './OnSiteEncounters';
+import { validateCustody, type CustodyState } from './TransitCargo';
 import { bindTerritorialAwareness, stepTerritorialAwareness, reconcileTerritorialAwareness,
     validateTerritorialAwareness, assertTerritorialWorld, suspendPresenceForGathering, type TerritorialPolicy } from './TerritorialAwareness';
 import type { ResidentPresenceState } from './ResidentPresence';
@@ -87,6 +91,8 @@ export type Persona = {
 };
 export type SimulationEvent = {id: string; time: GameTime; type: string; personaId?: string; details?: Record<string, unknown>};
 export type SimulationState = {
+    custody?: CustodyState;
+    livestockPresence?: LivestockPresenceState;
     residentPresence?: ResidentPresenceState;
     communityHearth?: CommunityHearthState;
     mining?: MiningState;
@@ -298,6 +304,7 @@ export function applyCommand(input: SimulationState, command: SimulationCommand,
     }
     if (command.type === 'DispatchIslandMission') {
         const state = structuredClone(input);
+        bindLivestockPresence(state, context);
         dispatchIslandMission(state, command, context);
         reconcileTerritorialAwareness(state); validateState(state);
         return state;
@@ -306,6 +313,7 @@ export function applyCommand(input: SimulationState, command: SimulationCommand,
         command.type === 'ExploreArea' || command.type === 'RecallExpedition' ||
         command.type === 'CreateExplorationGroup' || command.type === 'SetExplorationMember') {
         const state = structuredClone(input);
+        bindLivestockPresence(state, context);
         applySpatialCommand(state, command, context);
         reconcileTerritorialAwareness(state); validateState(state);
         return state;
@@ -351,14 +359,19 @@ export function applyCommand(input: SimulationState, command: SimulationCommand,
     const state = structuredClone(input);
     if (state.mechanics) {
         assertTerritorialWorld(state, context);
+        bindLivestockPresence(state, context);
+        assertLivestockWorld(state, context);
         requireMiningAdvance(state, context);
         requireSpatialAdvance(state, context);
         assertWildlifeWorld(state, context);
         for (let index = 0; index < ticks; index++) {
             stepMechanicsTick(state);
+            reconcileLivestockPresence(state, context);
             stepMining(state);
             const missions = stepSpatialExpeditions(state, context);
             stepTerritorialAwareness(state, context);
+            stepOnSiteEncounters(state, context);
+            reconcileLivestockPresence(state, context);
             stepWildlifeSightings(state, context, missions);
         }
         reconcileTerritorialAwareness(state); validateState(state);
@@ -382,6 +395,7 @@ export function initializeTerritorialAwareness(input: SimulationState, context?:
     validateState(input);
     const state = structuredClone(input);
     bindTerritorialAwareness(state, context, policy);
+    bindLivestockPresence(state, context);
     validateState(state);
     assertTerritorialWorld(state, context);
     return state;
@@ -396,6 +410,7 @@ export function reconstructState(serialized: string): SimulationState {
 
 function validateState(state: SimulationState): void {
     if (!state || state.schemaVersion !== 1) throw new Error('Unsupported simulation save');
+    validateLivestockPresence(state);
     integer(state.seed, 'Seed'); integer(state.rngState, 'RNG state');
     if (state.seed > 0xffffffff || state.rngState > 0xffffffff) throw new Error('Seed/RNG state must be uint32');
     if (state.ticksPerWinter !== ticksPerWinter) throw new Error('Unsupported tick scale');
@@ -508,6 +523,7 @@ function validateState(state: SimulationState): void {
             throw new Error('Missing owning clan discovery.');
     }
     validateLanding(state);validateWeather(state);validateWorld(state,validateState);validateSpatialExpeditions(state);
+    validateCustody(state); validateOnSiteEncounters(state);
     validateTerritorialAwareness(state);
 }
 

@@ -1,5 +1,6 @@
 import './expedition-guided.css';
 import { territoryNotice } from './TerritoryView';
+import { encounterDescription, manifestDescription, renderTransitManifest } from './MissionOutcomeView';
 import { recentGroupWildlife } from '../lore/WildlifeBookView';
 import { expeditionEligible, groupMission, personaAway } from '../simulation/WorldExpeditions';
 import { defaultExpeditionFoodPerMember, inspectSpatialExpeditions,
@@ -28,7 +29,7 @@ const phase = (mission?: Mission) => mission?.transport?.phase === 'boarding' ? 
     mission?.transport?.phase === 'embarked' ? (mission.status === 'Traveling' ? 'Sailing' :
         mission.status === 'Returning' ? 'Sailing home' : 'Aboard longship') : ({ Prepared: 'Ready to depart', Traveling: 'Travelling',
     Exploring: 'Exploring', Returning: 'Returning home', Returned: 'Home again',
-    Stranded: 'Stranded' })[mission?.status ?? 'Returned'];
+    Stranded: 'Stranded', Lost: 'Expedition lost' })[mission?.status ?? 'Returned'];
 
 /** A preparation workspace and a persistent map toolbar, backed by the same Core commands. */
 export class ExpeditionPanel {
@@ -148,7 +149,7 @@ export class ExpeditionPanel {
     private get dialog() { return this.root.querySelector<HTMLDialogElement>('#expedition-start-dialog')!; }
     private activeMission(state = this.session.readSnapshot(), groupId = this.groupId) {
         return inspectSpatialExpeditions(state).missions
-            .find(mission => mission.groupId === groupId && mission.status !== 'Returned');
+            .find(mission => mission.groupId === groupId && mission.status !== 'Returned' && mission.status !== 'Lost');
     }
     private notify(message: string) { this.message = message; this.refresh(); }
     private showTarget(point?: Point2, valid?: boolean) {
@@ -427,7 +428,8 @@ export class ExpeditionPanel {
                 <div class="fjord-expedition-members">${unavailable.map(person => row(person.id, false)).join('')}</div></details>` : ''}`;
     }
     private supplies(mission: Mission) {
-        if (mission.missionType) return `<p class="fjord-caption">${escape(mission.missionType)} · ${mission.foodCost} Food paid. Travel and return are included in the mission duration.</p>`;
+        if (mission.missionType) return `<p class="fjord-caption">${escape(mission.missionType)} · ${mission.foodCost} Food paid. Travel and return are included in the mission duration.</p>` +
+            renderTransitManifest(mission);
         if (!mission.supplies) return '<p class="fjord-caption">Return home to prepare a new expedition with carried supplies.</p>';
         const remaining = mission.supplies.explorationTicksRemaining;
         const total = mission.supplies.capacityPerMember * mission.supplies.ticksPerFood;
@@ -513,19 +515,22 @@ export class ExpeditionPanel {
         return mission.outcome === 'Cancelled' ? 'Expedition ended' : 'Returned home';
     }
     private missionDescription(mission: Mission) {
-        if (mission.transport?.phase === 'boarding') return 'Walking to shore. The group boards together when everyone arrives.';
-        if (mission.transport?.phase === 'embarked') return 'Longship · 2× speed · 2× Food and cargo capacity. Choose water to sail; disembark near safe shore.';
+        const encounter = [encounterDescription(mission), manifestDescription(mission)].filter(Boolean).join(' ');
+        if (mission.encounter && !mission.recon && !mission.transport) return encounter;
+        if (mission.transport?.phase === 'boarding') return ['Walking to shore. The group boards together when everyone arrives.', encounter].filter(Boolean).join(' ');
+        if (mission.transport?.phase === 'embarked') return ['Longship · 2× speed · 2× Food and cargo capacity. Choose water to sail; disembark near safe shore.', encounter].filter(Boolean).join(' ');
         if (mission.missionType) {
             const description = mission.status === 'Exploring' ? `${mission.missionType} in progress. Results are reported after returning home.` :
                 mission.status === 'Traveling' ? `Travelling for ${mission.missionType}. Return home to change missions.` :
                 mission.status === 'Returning' ? 'The group is returning home with its report.' :
-                mission.status === 'Stranded' ? 'The return route is blocked. The group is stranded.' : 'Mission completed.';
+                mission.status === 'Stranded' ? 'The return route is blocked. The group is stranded.' :
+                mission.status === 'Lost' ? 'No party returned.' : 'Mission completed.';
             if (!mission.recon) return description;
             const observation = mission.recon;
             const coverage = observation.coverage === 'circuit' ? 'circuit' : 'partial arc';
             const progress = `${observation.reachedViewpoints}/${observation.plannedViewpoints} viewpoints reached`;
             return `${description} Observation ${coverage}: ${progress}; ` +
-                `${observation.observedViewpoints} settlement sightings.`;
+                `${observation.observedViewpoints} settlement sightings. ${encounter}`.trim();
         }
         if (mission.returnReason === 'low-supplies')
             return 'Returning home — supplies needed for the journey home. No exploration time remains.';
@@ -536,6 +541,7 @@ export class ExpeditionPanel {
             Exploring: 'The group is revealing nearby land. Choose another destination to continue.',
             Returning: 'The group is on its way home. You can still choose another destination using the same pack.',
             Returned: 'This expedition has ended.',
+            Lost: 'No survivors. No party returned.',
             Stranded: 'This group cannot travel or return. Its expedition is stranded.' })[mission.status];
     }
 
@@ -543,7 +549,7 @@ export class ExpeditionPanel {
     collapseControls() {
         this.clearTarget();
         for (const mission of Object.values(this.session.readSnapshot().world?.spatial?.missions ?? {}))
-            if (mission.status !== 'Returned') this.hiddenGroups.add(mission.groupId);
+            if (mission.status !== 'Returned' && mission.status !== 'Lost') this.hiddenGroups.add(mission.groupId);
         this.toolbarExpanded = false;
         this.refresh();
     }
@@ -563,7 +569,7 @@ export class ExpeditionPanel {
         }
         const groups = Object.values(state.world?.groups ?? {});
         const rawMissions = Object.values(state.world?.spatial?.missions ?? {});
-        const activeGroups = new Set(rawMissions.filter(mission => mission.status !== 'Returned').map(mission => mission.groupId));
+        const activeGroups = new Set(rawMissions.filter(mission => mission.status !== 'Returned' && mission.status !== 'Lost').map(mission => mission.groupId));
         if (!groups.some(group => group.id === this.groupId)) {
             this.clearTarget();
             this.groupId = groups.find(group => activeGroups.has(group.id))?.id ?? groups[0]?.id ?? '';
@@ -582,7 +588,7 @@ export class ExpeditionPanel {
         }
         const group = groups.find(candidate => candidate.id === this.groupId);
         const missions = inspectSpatialExpeditions(state).missions;
-        const mission = missions.find(candidate => candidate.groupId === this.groupId && candidate.status !== 'Returned');
+        const mission = missions.find(candidate => candidate.groupId === this.groupId && candidate.status !== 'Returned' && candidate.status !== 'Lost');
         this.root.dataset.expeditionStep = this.view === 'places' ? 'places' : mission ? 'journey' : this.preparationStep;
         if (this.choosing && (!mission || mission.status === 'Stranded')) this.clearTarget();
         this.renderToolbar(group, mission, groups.filter(candidate => activeGroups.has(candidate.id)));

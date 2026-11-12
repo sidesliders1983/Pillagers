@@ -1,3 +1,4 @@
+import { encounterRulesFor } from './OnSiteEncounters';
 import type { SimulationState, SimulationEvent } from './SimulationCore';
 import type { PhysicalExpeditionContext } from './SpatialExpeditions';
 import type { Bounds2, Point2 } from '../world-generation/WorldBlueprint';
@@ -264,7 +265,7 @@ function clanById(root: SimulationState, id: string) {
 function activeVisitors(root: SimulationState) {
     return clans(root).flatMap(clan => Object.values(clan.world?.spatial?.missions ?? {})
         .filter(mission => mission.territoryVersion === 1 &&
-            !['Prepared', 'Returned'].includes(mission.status) && mission.transport?.phase !== 'embarked')
+            !['Prepared', 'Returned', 'Lost'].includes(mission.status) && mission.transport?.phase !== 'embarked')
         .map(mission => ({ clan, mission, people: mission.memberIds
             .filter(id => clan.personas[id]?.deathWinter === null)
             .map(id => ({ id, position: spatialMemberPosition(mission, id) })) })));
@@ -288,7 +289,7 @@ export function territorialContact(root: SimulationState, context: PhysicalExped
     if (!saved || saved.worldId !== context.worldId || !defender || !intruder || defender === intruder ||
         intruder.personas[intruderId]?.deathWinter !== null) return;
     const mission = Object.values(intruder.world?.spatial?.missions ?? {}).find(candidate =>
-        candidate.territoryVersion === 1 && !['Prepared', 'Returned'].includes(candidate.status) &&
+        candidate.territoryVersion === 1 && !['Prepared', 'Returned', 'Lost'].includes(candidate.status) &&
         candidate.transport?.phase !== 'embarked' && candidate.memberIds.includes(intruderId));
     const position = mission ? spatialMemberPosition(mission, intruderId) :
         residentAtHome(intruder, intruderId) && !presenceIndoors(intruder, intruderId)
@@ -353,6 +354,21 @@ function closeIncident(root: SimulationState, incident: TerritorialIncident, rea
 function assignResponders(root: SimulationState, incident: TerritorialIncident, context: PhysicalExpeditionContext) {
     const defender = clanById(root, incident.defendingClanId)!;
     const residents = defender.residentPresence!.residents, policy = root.world!.territory!.policy;
+    const mission = clanById(root, incident.intrudingClanId)?.world?.spatial?.missions[incident.missionId];
+    const encounterId = mission && encounterRulesFor(mission)?.encounterId;
+    const encounter = encounterId ? root.world!.encounters?.records[encounterId] : undefined;
+    if (encounter?.phase === 'resolved') { releaseIncident(root, incident); return; }
+    if (encounter && ['engaging', 'withdrawing'].includes(encounter.phase)) {
+        const committed = encounter.defenderIds.filter(id => eligibleTerritorialObserver(defender, id));
+        for (const id of incident.responderIds) if (!committed.includes(id) && residents[id]?.incidentId === incident.id)
+            releasePresence(residents[id]);
+        incident.responderIds = committed;
+        for (const id of incident.responderIds) {
+            const actor = residents[id]; actor.incidentId = incident.id; actor.mode = 'mobilise';
+            freezePresence(actor); actor.facing = { ...encounter.position };
+        }
+        return;
+    }
     const role = incident.phase === 'Suspicious' ? 'watch' : incident.phase === 'Hostile' ? 'mobilise' : 'warn';
     const ids = Object.keys(residents).filter(id => eligibleTerritorialObserver(defender, id) &&
         (!residents[id].incidentId || residents[id].incidentId === incident.id))
@@ -375,8 +391,8 @@ function assignResponders(root: SimulationState, incident: TerritorialIncident, 
         const center = defender.residentPresence!.site.center;
         const dx = center.x - incident.position.x, dz = center.z - incident.position.z;
         const length = Math.hypot(dx, dz) || 1;
-        const target = { x: incident.position.x + dx / length * 7 - dz / length * index * 2,
-            z: incident.position.z + dz / length * 7 + dx / length * index * 2 };
+        const target = { x: incident.position.x + dx / length * (mission && encounterRulesFor(mission) && incident.phase === 'Hostile' ? 2 : 7) - dz / length * index * 2,
+            z: incident.position.z + dz / length * (mission && encounterRulesFor(mission) && incident.phase === 'Hostile' ? 2 : 7) + dx / length * index * 2 };
         const end = actor.route.at(-1)!;
         if (Math.hypot(target.x - actor.home.x, target.z - actor.home.z) <= policy.maxPursuit &&
             (changed || Math.hypot(target.x - end.x, target.z - end.z) > 6))

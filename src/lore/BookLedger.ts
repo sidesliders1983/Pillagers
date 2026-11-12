@@ -71,6 +71,7 @@ export function bookLedger(events: readonly SimulationEvent[], opening: Record<R
                 add(e, 'food', 'otherReceipts', 'food'); break;
             case 'CulturalGatheringHeld':
             case 'LongshipFoodLoaded': case 'ExploreAreaPrepared': case 'ExploreAreaDeparted': case 'ExpeditionDeparted': add(e, 'food', 'spending', 'foodCost'); break;
+            // Transit events describe custody only. The arrival report owns the actual home-stock credit.
             case 'ExpeditionReturned':
                 add(e, 'food', 'otherReceipts', 'food'); add(e, 'materials', 'otherReceipts', 'materials'); break;
             case 'SettlementPillaged':
