@@ -49,7 +49,7 @@ import { SeasonAppearanceTransition } from '../world/SeasonAppearanceTransition'
 import { DirectionalAtmosphere } from '../world/DirectionalAtmosphere';
 import { createWorld } from '../world/WorldFactory';
 import { RTSCameraController } from '../camera/RTSCameraController';
-import { inspectCampfire, inspectSpatialExpeditions } from '../simulation/SimulationCore';
+import { inspectCampfire, inspectSpatialExpeditions, inspectTerritory } from '../simulation/SimulationCore';
 import { FjordModels } from './FjordModels';
 import { FjordEntities } from './FjordEntities';
 import { fjordGroundWeights } from './FjordGround';
@@ -829,6 +829,9 @@ export function createFjordScene(options: {
                     });
                     canvas.dataset.structureSnow = JSON.stringify(layer!.inspectSeason());
                     canvas.dataset.campfireEffect = JSON.stringify(campfireEffect!.inspect());
+                    const presenceTickSeconds = Math.max(host.tickIntervalSeconds,
+                        Math.ceil(secondsPerTick / host.tickIntervalSeconds - 1e-9) * host.tickIntervalSeconds);
+                    motion!.setPresenceTickSeconds(presenceTickSeconds);
                     motion!.reconcile(view.entities, view.ground, communityReservations, view.campfire);
                     const trees = host.loading
                         ? await host.loading.measure('standing-tree-targets', () => world!.standingTrees())
@@ -837,8 +840,10 @@ export function createFjordScene(options: {
                     motion!.setStandingTrees(trees);
                     layer!.configureMotion(motion!);
                     layer!.advance(motion!, 0, false);
-                    await rivalScene?.sync(view.rival, view.calendar.visualProgress, trees, seasonAppearance.current);
+                    await rivalScene?.sync(view.rival, view.calendar.visualProgress, trees,
+                        seasonAppearance.current, presenceTickSeconds);
                     if (!current()) return;
+                    canvas.dataset.territory = JSON.stringify(inspectTerritory(state));
                     canvas.dataset.rival = JSON.stringify({
                         known: view.rival.known,
                         currentlyObserved: view.rival.currentlyObserved, rendered: rivalScene?.describe() ?? []
@@ -856,7 +861,9 @@ export function createFjordScene(options: {
                     ...assets!.diagnostics, ...models!.diagnostics, ...motion!.diagnostics,
                         sceneCanonicalTime,
                         'Reused FjordSide DNA, Talk/Listen and authored cattle activities; missing clip capabilities remain disabled.',
-                        'Ambient motion is presentation only. Young children and active caregivers stay indoors.',
+                        state.residentPresence
+                            ? 'Resident movement follows saved presence. Young children and active caregivers stay indoors.'
+                            : 'Ambient motion is presentation only. Young children and active caregivers stay indoors.',
                     'Geography: ' + view.layout.geographyId].join('\n');
                 } while (queued && !inactive());
             })().finally(() => {

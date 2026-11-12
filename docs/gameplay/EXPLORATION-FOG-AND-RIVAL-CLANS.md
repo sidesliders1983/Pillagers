@@ -92,3 +92,20 @@ group sightings and the actual participants' personal Chronicles refer to the sa
 canonical event. Undiscovered species names and locations are absent from these views.
 See [the event, persistence and performance contract](../WILDLIFE-SIGHTINGS-226.md).
 This does not add hunting, combat, taming or a Familiar knowledge threshold.
+
+## Territorial awareness (#306)
+
+New physical Fjord campaigns save both communities' actual resident positions and
+local duties. A visitor must be seen by an available resident within 32 m through
+an unobstructed terrain sightline. A perimeter visit prompts watching; deeper
+intrusion prompts a warning and up to two actual responders. Ignoring a warning
+for 25 canonical ticks or visibly beginning Pillage requests a later engagement.
+The current slice adds no on-site damage or loot resolution.
+
+Responders suspend their ordinary work and conflicting assignments. The existing
+**Withdraw group** action recalls the expedition; loss of contact and return close
+the same linked incident. Attention, Activity Center and Clan Book use its saved
+facts without exposing an unseen rival roster. Earlier campaigns retain their
+saved rules unless explicitly adopted; already active historical missions retain
+their outcome rules. See [Territorial awareness v0.1](TERRITORIAL-AWARENESS-V01.md)
+for the versioned policy, cultural reservation, persistence and evidence contract.

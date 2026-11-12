@@ -1,4 +1,5 @@
 import { personalChronicleEntry } from './Chronicle';
+import { territoryHistoryText } from './TerritoryAttention';
 import type { SimulationEvent, SimulationState, GameTime } from '../simulation/SimulationCore';
 import type { BookChapter } from './ClanBook';
 import { ordinal } from './NarrativeTime';
@@ -51,6 +52,9 @@ function housingIds(event: SimulationEvent): string[] | null {
 }
 function rolesFor(event: SimulationEvent, personaId: string, byId: ReadonlyMap<string, SimulationEvent>): string[] {
     const details = event.details ?? {};
+    if (['TerritoryIncidentOpened', 'TerritoryIncidentChanged', 'TerritoryIncidentClosed'].includes(event.type))
+        return territoryHistoryText(event) && ids(details.participants).includes(personaId)
+            ? ['incident participant'] : [];
     if (['SupportOffered', 'SupportAccepted', 'SupportCompleted', 'SupportDeclined', 'SupportEnded'].includes(event.type)) {
         if (!ids(details.participants).includes(personaId)) return [];
         return personaId === details.helperId ? ['support helper'] :

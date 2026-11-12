@@ -3,7 +3,7 @@ import { icon, type FjordIcon } from '../fjord-play/FjordIcons';
 import type { SharedSettlement } from '../play/SharedSettlement';
 import { attentionLimits, type AttentionRecord, type AttentionTarget } from './AttentionHistory';
 import { resolveAttentionTarget, type AttentionNavigation } from './AttentionNavigation';
-import { attentionGroups } from './AttentionState';
+import { attentionGroupId, attentionGroups } from './AttentionState';
 import './attention.css';
 
 const escape = (value: unknown) => String(value ?? '').replace(/[&<>"']/g,
@@ -104,7 +104,7 @@ export class AttentionView {
         html += '<ul class="attention-list">' + groups.slice(this.page * attentionLimits.page,
             (this.page + 1) * attentionLimits.page).map(group => {
                 const first = group.records[0], category = categories[first.category];
-                const title = group.records.length === 1 ? first.headline :
+                const title = first.incidentId || group.records.length === 1 ? first.headline :
                     group.records.length + ' ' + (plurals[first.canonicalType] ?? 'recorded events');
                 const meta = category.label + ' · Year ' + first.time.winter +
                     (group.unread ? ' · ' + group.unread + ' unread' : ' · Read');
@@ -168,8 +168,9 @@ export class AttentionView {
         let html = this.button('back', this.mode === 'unread' ? 'Back to overview' : 'Back to history');
         if (detail.kind === 'group') {
             const records = this.owner.fjord.attentionView().records.filter(record =>
-                record.canonicalType + ':' + record.time.winter === detail.id).slice().reverse();
-            html += '<h3>Recorded events</h3>' + this.button('read-group', 'Mark these events read', detail.id) +
+                attentionGroupId(record) === detail.id).slice().reverse();
+            html += '<h3>' + (records[0]?.incidentId ? 'Territorial encounter' : 'Recorded events') + '</h3>' +
+                this.button('read-group', 'Mark these events read', detail.id) +
                 '<ul class="attention-list">' + records.slice(this.detailPage * 20, this.detailPage * 20 + 20).map(record =>
                     this.row('event', record.eventId, record.headline, when(record), categories[record.category].glyph, !record.read)).join('') + '</ul>' +
                 (this.detailPage > 0 ? this.button('detail-page', 'Newer events', String(this.detailPage - 1)) : '') +
@@ -214,7 +215,7 @@ export class AttentionView {
         else if (action === 'read-all') { this.owner.fjord.markAllAttentionRead(); this.changed(); }
         else if (action === 'read-group') {
             this.owner.fjord.markAttentionRead(this.owner.fjord.attentionView().records.filter(record =>
-                record.canonicalType + ':' + record.time.winter === id).map(record => record.eventId)); this.changed();
+                attentionGroupId(record) === id).map(record => record.eventId)); this.changed();
         } else if (action === 'ack') {
             const [alertId, since] = id.split('|'); this.owner.fjord.acknowledgeAttention(alertId, Number(since)); this.changed();
         } else if (action === 'page' || action === 'detail-page') {

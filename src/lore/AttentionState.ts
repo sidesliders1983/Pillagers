@@ -53,12 +53,14 @@ export interface AttentionGroup {
     unread: number;
     records: AttentionRecord[];
 }
+export const attentionGroupId = (record: AttentionRecord) => record.incidentId
+    ? 'territory:' + record.incidentId : record.canonicalType + ':' + record.time.winter;
 export function attentionGroups(records: readonly AttentionRecord[], metadata: AttentionMetadata, unreadOnly: boolean) {
     const groups = new Map<string, AttentionGroup>();
     for (const record of records.slice().reverse()) {
         const unread = !attentionRead(metadata, record.eventId);
         if (unreadOnly && !unread) continue;
-        const id = record.canonicalType + ':' + record.time.winter;
+        const id = attentionGroupId(record);
         const group = groups.get(id) ?? { id, canonicalType: record.canonicalType, category: record.category,
             year: record.time.winter, unread: 0, records: [] };
         group.records.push(record);

@@ -1,4 +1,7 @@
 import { WeddingInvitationHistory } from './WeddingInvitationState';
+import type { PresenceSite } from '../simulation/ResidentPresence';
+import { planRoute, maximumTargetCorrection } from '../world-generation/LandRoutes';
+import { residentMovementConfig } from '../systems/SocialEncounters';
 import { communityHearthBounds, findCommunityHearthPlacement,
     inspectCommunityHearthPlacement, resolveCommunityHearthPlacement,
     type CommunityHearthPlacementResult } from './CommunityHearthPlacement';
@@ -20,7 +23,7 @@ import { GameplaySession } from '../gameplay-lab/GameplaySession';
 import { generateWorld } from '../world-generation/GenerateWorld';
 import { parseWorld } from '../world-generation/WorldSave';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
-import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
+import type { WorldBlueprint, Point2 } from '../world-generation/WorldBlueprint';
 import { createFjordLayout, fjordPlotFits, geographyIdentity, longshipBerth, projectFjordSettlement, settlementCampfire } from './FjordProjection';
 import type { FjordLayout, FjordTransform } from './FjordProjection';
 export const sharedCampaignKey = 'pillagers.gameplay-lab.v1';
@@ -127,6 +130,95 @@ export class FjordCampaign {
         this.layout = createFjordLayout(this.blueprint, undefined, session.snapshot().seed);
         this.bindExpeditionWorld();
     }
+    private presenceBinding?: { key: string; sites: PresenceSite[] };
+    private presenceSites(): PresenceSite[] {
+        const state = this.session.readSnapshot(), link = state.world?.island;
+        if (!link) throw new Error('Territorial reactions need a physical neighbouring clan.');
+        const target = state.world!.targetClans[link.clanId];
+        const key = JSON.stringify([geographyIdentity(this.blueprint),
+            ...[state, target].map(clan => [Object.keys(clan.personas), clan.households,
+                clan.residences, clan.buildings]), this.layout.plots, this.rivalLayout?.plots]);
+        if (this.presenceBinding?.key === key) return this.presenceBinding.sites;
+        // Static, validated residential facts establish homes before canonical presence takes over.
+        const local = projectFjordSettlement({ ...state, residentPresence: undefined }, this.blueprint, this.layout);
+        const remote = projectRivalSettlement({ ...target, residentPresence: undefined }, this.blueprint, this.rivalLayout);
+        this.layout = local.layout;
+        this.rivalLayout = remote.layout;
+        const exclusions = [...Object.values(local.layout.plots), ...Object.values(remote.layout.plots)]
+            .map(plot => ({ minX: plot.x - plot.halfWidth, maxX: plot.x + plot.halfWidth,
+                minZ: plot.z - plot.halfDepth, maxZ: plot.z + plot.halfDepth }));
+        for (const fire of [local.campfire, remote.campfire]) exclusions.push({
+            minX: fire.transform.x - fire.obstacleRadius, maxX: fire.transform.x + fire.obstacleRadius,
+            minZ: fire.transform.z - fire.obstacleRadius, maxZ: fire.transform.z + fire.obstacleRadius,
+        });
+        const routeContext = { world: this.blueprint, exclusions };
+        const sites = [state, target].map((clan, index): PresenceSite => {
+            const view = index === 0 ? local : remote;
+            const center = index === 0 ? this.blueprint.settlement.center : this.blueprint.rivalSite!.center;
+            const homes: PresenceSite['homes'] = {};
+            const reserveExterior = (preferred: Point2): Point2 => {
+                const nav = this.blueprint.navigation;
+                const column = Math.round((preferred.x - nav.bounds.minX) / nav.spacing);
+                const row = Math.round((preferred.z - nav.bounds.minZ) / nav.spacing);
+                const nearby: Point2[] = [];
+                const reach = Math.ceil(maximumTargetCorrection / nav.spacing);
+                for (let dz = -reach; dz <= reach; dz++) for (let dx = -reach; dx <= reach; dx++) {
+                    const point = { x: nav.bounds.minX + (column + dx) * nav.spacing,
+                        z: nav.bounds.minZ + (row + dz) * nav.spacing };
+                    if (Math.hypot(point.x - preferred.x, point.z - preferred.z) <= maximumTargetCorrection)
+                        nearby.push(point);
+                }
+                nearby.sort((a, b) => Math.hypot(a.x - preferred.x, a.z - preferred.z) -
+                    Math.hypot(b.x - preferred.x, b.z - preferred.z) || a.z - b.z || a.x - b.x);
+                for (const point of [preferred, ...nearby]) {
+                    if (Math.hypot(point.x - preferred.x, point.z - preferred.z) > maximumTargetCorrection) continue;
+                    try {
+                        const confirmed = planRoute(routeContext, point, preferred, true).target;
+                        if (Math.hypot(confirmed.x - preferred.x, confirmed.z - preferred.z) > maximumTargetCorrection ||
+                            Object.values(homes).some(home => Math.hypot(home.x - confirmed.x,
+                                home.z - confirmed.z) < residentMovementConfig.radius * 2)) continue;
+                        return { x: confirmed.x, z: confirmed.z };
+                    } catch { /* Try the next nearby dry exterior through the existing route solver. */ }
+                }
+                throw new Error('No separate reachable home exterior for territorial presence.');
+            };
+            for (const [id, person] of Object.entries(clan.personas)) {
+                if (person.deathWinter !== null) continue;
+                const savedHome = clan.residentPresence?.residents[id]?.home;
+                if (savedHome) {
+                    homes[id] = { ...savedHome };
+                    continue;
+                }
+                const home = Object.values(clan.households).find(home => home.memberIds.includes(id));
+                const residence = home?.residenceId ? clan.residences[home.residenceId] : undefined;
+                const plot = residence?.buildingId ? view.layout.plots['building:' + residence.buildingId] :
+                    home ? view.layout.plots['household:' + home.id] : undefined;
+                const actor = view.entities.find(entity => entity.kind === 'persona' && entity.id === id &&
+                    !entity.status.expedition && !entity.status.mining);
+                const point = actor?.transform ?? (home?.memberIds.flatMap(member => {
+                    const visible = view.entities.find(entity => entity.kind === 'persona' && entity.id === member);
+                    return visible?.transform && !visible.status.expedition && !visible.status.mining
+                        ? [visible.transform] : [];
+                })[0]);
+                const fallback = plot ? { x: plot.x, z: plot.z + plot.halfDepth + 1.5 } : center;
+                const exterior = { x: point?.x ?? fallback.x, z: point?.z ?? fallback.z };
+                homes[id] = reserveExterior(exterior);
+            }
+            const source = index === 0 ? this.blueprint.settlement.bounds : this.blueprint.rivalSite!.bounds;
+            const values = Object.values(homes);
+            const terrain = this.blueprint.terrain.bounds;
+            const bounds = { minX: Math.max(terrain.minX, Math.min(source.minX, ...values.map(p => p.x)) - 1),
+                maxX: Math.min(terrain.maxX, Math.max(source.maxX, ...values.map(p => p.x)) + 1),
+                minZ: Math.max(terrain.minZ, Math.min(source.minZ, ...values.map(p => p.z)) - 1),
+                maxZ: Math.min(terrain.maxZ, Math.max(source.maxZ, ...values.map(p => p.z)) + 1) };
+            return { clanId: clan.clan.id, center: { ...center }, bounds, homes };
+        });
+        this.presenceBinding = { key, sites };
+        return sites;
+    }
+    enableTerritorialAwareness(): void {
+        this.session.initializeTerritory();
+    }
     private bindExpeditionWorld() {
         this.session.bindPhysicalWorld(this.blueprint, geographyIdentity(this.blueprint), () => {
             const fire = settlementCampfire(this.blueprint);
@@ -152,7 +244,7 @@ export class FjordCampaign {
                         minX: rivalFire.x-5, maxX: rivalFire.x+5, minZ: rivalFire.z-5, maxZ: rivalFire.z+5
                     }] : []);
         }, () => Object.fromEntries(Object.keys(this.session.readSnapshot().landing?.longships ?? {})
-            .map(id => [id, longshipBerth(this.layout.mooring)])));
+            .map(id => [id, longshipBerth(this.layout.mooring)])), () => this.presenceSites());
     }
     /** Prepare new-campaign deposits before discovery/founding; historical worlds stay unchanged. */
     prepareMining(): void {

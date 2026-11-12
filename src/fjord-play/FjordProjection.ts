@@ -1,4 +1,5 @@
 import { miningWorkerPosition } from '../simulation/Mining';
+import { inspectResidentPresence } from '../simulation/ResidentPresence';
 import { communityHearthAccess, communityHearthOccupancy, communityHearthReservation,
     resolveCommunityHearthPlacement } from './CommunityHearthPlacement';
 import { communityHearthContains, communityHearthGeometry, communityHearthOverlapsPlot } from './CommunityHearthGeometry';
@@ -53,6 +54,20 @@ export interface FjordLayout {
     mooring: FjordTransform;
     mooringResolved: boolean;
 }
+export interface FjordResidentPresence {
+    position: Point2;
+    previousPosition: Point2;
+    route: Point2[];
+    home: Point2;
+    rotation: number;
+    moving: boolean;
+    updatedAt: number;
+    mode: 'local' | 'watch' | 'warn' | 'mobilise' | 'withdraw' | 'return';
+    incidentId: string | null;
+    facing: Point2 | null;
+    suspended: boolean;
+    duty?: { incidentId: string; role: 'watch' | 'warn' | 'mobilise' | 'withdraw' };
+}
 export interface FjordEntity {
     kind: EntityKind;
     id: string;
@@ -69,6 +84,7 @@ export interface FjordEntity {
         living: boolean;
         expedition?: string;
         mining?: boolean;
+        presence?: FjordResidentPresence;
         expeditionWalking?: boolean;
         shipExpedition?: string;
         transportGroup?: string;
@@ -92,6 +108,24 @@ export interface FjordEntity {
         indoorReason?: 'young-child' | 'childcare' | null;
         grazingZone?: 'yard' | 'overflow' | 'exposed';
     };
+}
+/** The scene receives reached route geometry; future route points stay in Core. */
+function residentPresenceView(state: SimulationState, id: string): FjordResidentPresence | undefined {
+    const actor = inspectResidentPresence(state, id);
+    if (!actor) return;
+    const route = [{ ...actor.route[0] }];
+    let distance = 0;
+    for (let index = 1; index < actor.route.length; index++) {
+        const first = actor.route[index - 1], next = actor.route[index];
+        distance += Math.hypot(next.x - first.x, next.z - first.z);
+        if (distance < actor.travelled) route.push({ ...next });
+    }
+    route.push({ ...actor.position });
+    return { position: { ...actor.position }, previousPosition: { ...actor.previousPosition }, route,
+        home: { ...actor.home }, rotation: actor.rotation, moving: actor.moving, updatedAt: actor.updatedAt,
+        mode: actor.mode, incidentId: actor.incidentId, facing: actor.facing ? { ...actor.facing } : null,
+        suspended: actor.ceremonyUntil !== null && actor.ceremonyUntil > state.time.winter * state.ticksPerWinter + state.time.tick,
+        ...(actor.duty ? { duty: { ...actor.duty } } : {}) };
 }
 const geographyIds = new WeakMap<WorldBlueprint, string>();
 const plotCandidates = new WeakMap<WorldBlueprint, { x: number; z: number }[]>();
@@ -362,16 +396,19 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
             const key = 'persona:' + id + '@' + (plot ? plot.x + ',' + plot.z : home.id);
             const miningPoint = miner ? miningWorkerPosition(miner) : undefined;
             const partyPoint = mission ? spatialMemberPosition(mission, id) : undefined;
+            const presence = !miner && !mission && !indoorReason ? residentPresenceView(state, id) : undefined;
             const transport = mission?.transport?.phase === 'embarked' ? mission.transport : undefined;
             const deckMembers = transport ? visibleLongshipMembers(mission!.memberIds.filter(member =>
                 state.personas[member]?.deathWinter === null)) : [];
             const aboardAnchor = deckMembers.indexOf(id);
             const point = miningPoint ? {...miningPoint, rotation: 0, y: surface.surfaceHeightAt(miningPoint.x, miningPoint.z), scale: 1} : transport && aboardAnchor < 0 ? undefined : partyPoint ? { ...partyPoint,
-                y: transport ? world.waterLevel + .15 : surface.surfaceHeightAt(partyPoint.x, partyPoint.z), scale: 1 } : plot && !indoorReason ? allocatePoint(key, { x: plot.x - 3 + index % 5 * 1.8,
+                y: transport ? world.waterLevel + .15 : surface.surfaceHeightAt(partyPoint.x, partyPoint.z), scale: 1 } : presence ? {
+                ...presence.position, y: surface.surfaceHeightAt(presence.position.x, presence.position.z),
+                rotation: presence.rotation, scale: 1 } : plot && !indoorReason ? allocatePoint(key, { x: plot.x - 3 + index % 5 * 1.8,
                 z: plot.z + plot.halfDepth + 1.5 + Math.floor(index / 5) * 1.8 }) : undefined;
             const growth = .4 + .6 * Math.min(16, Math.max(0, age)) / 16;
             add('persona', id, p.name, 'human', point ? { ...point, scale: growth } : undefined,
-                { living: true, mining: !!miner, expedition: mission?.id, expeditionWalking: partyPoint?.moving ?? false,
+                { living: true, mining: !!miner, presence, expedition: mission?.id, expeditionWalking: partyPoint?.moving ?? false,
                     aboardShip: transport?.shipId, aboardAnchor: transport ? aboardAnchor : undefined,
                     sex: p.dna.sex, age, indoorReason, occupation: p.occupation,
                     workEligible: state.mechanics ? inspectWork(state, id).reason === null : false,

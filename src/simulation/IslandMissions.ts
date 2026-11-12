@@ -1,3 +1,4 @@
+import { canonicalDepartureOrigins } from './ResidentPresence';
 import { pillageEquipment, validatePillageEquipment, type PillageEquipment } from './Smithery';
 import type { SimulationState } from './SimulationCore';
 import type { PhysicalExpeditionContext, SpatialMission } from './SpatialExpeditions';
@@ -72,8 +73,9 @@ function prepareMission(state: SimulationState, groupId: string, target: IslandT
         position.x, position.z) === 'unknown') throw new Error('Choose a mapped area for Recon.');
     const group = requireReadyExpeditionGroup(state, groupId, context);
     const home = context.world.settlement.center;
-    // Presentation supplies exact local departure positions; it cannot shorten a trip by inventing remote origins.
-    if (origins && (Object.keys(origins).length !== group.memberIds.length || group.memberIds.some(id =>
+    origins = canonicalDepartureOrigins(state, group.memberIds, origins);
+    // Only legacy presentation origins need a home-radius check; adopted bodies are already canonical.
+    if (!state.residentPresence && origins && (Object.keys(origins).length !== group.memberIds.length || group.memberIds.some(id =>
         !origins[id] || !Number.isFinite(origins[id].x) || !Number.isFinite(origins[id].z) ||
         Math.hypot(origins[id].x - home.x, origins[id].z - home.z) > state.discovery!.policy.settlementRadius)))
         throw new Error('Every member must depart from home.');
@@ -122,6 +124,7 @@ export function dispatchIslandMission(state: SimulationState, command: IslandMis
     const id = `explore-${Object.keys(spatial.missions).length + 1}`, now = absoluteTick(state);
     const mission: SpatialMission = {
         id, routeMode: 'eight-way-v1', groupId: offer.group.id, groupName: offer.group.name, memberIds: [...offer.group.memberIds],
+        ...(state.world!.territory ? { territoryVersion: 1 as const } : {}),
         target: offer.ref.position, route: offer.route, memberRoutes: offer.memberRoutes,
         homeOrigins: Object.fromEntries(offer.group.memberIds.map(id => [id, { ...offer.memberRoutes[id][0] }])),
         returnRoutes: Object.fromEntries(offer.group.memberIds.map(id => [id, [...offer.memberRoutes[id]].reverse()])),

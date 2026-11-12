@@ -1,3 +1,4 @@
+import { canonicalDepartureOrigins } from './ResidentPresence';
 import { planRoute, maximumTargetCorrection } from '../world-generation/LandRoutes';
 export { planRoute } from '../world-generation/LandRoutes';
 import { assertIslandClanWorld } from './IslandClans';
@@ -13,6 +14,7 @@ import { eventFacts } from './EventFacts';
 import { completeIslandMission, observeIslandMission, recordIslandSightings, validateIslandMission, type IslandMissionTask } from './IslandMissions';
 
 export interface PhysicalExpeditionContext {
+    presenceSites?: import('./ResidentPresence').PresenceSite[];
     longshipOrigins?: Record<string, LongshipPose>;
     wildlifeWorld?: WorldBlueprint;
     exclusions?: readonly Bounds2[];
@@ -41,6 +43,7 @@ export interface ExpeditionProvisions {
     members: Record<string, { food: number; rationTicks: number; consumed: number; discarded: number; lost: number; loaded?: number }>;
 }
 export interface SpatialMission {
+    territoryVersion?: 1;
     transport?: ExpeditionTransport;
     lastShipId?: string;
     task?: IslandMissionTask;
@@ -194,6 +197,7 @@ function prepareExplore(state: SimulationState, groupId: string, target: Point2,
         group.memberIds.some(id => !expeditionEligible(state, id, groupId))))
         throw new Error('Group needs living eligible members without childcare.');
     if (active && active.status !== 'Prepared') origins = Object.fromEntries(group.memberIds.map(id => [id, spatialMemberPosition(active, id)]));
+    else origins = canonicalDepartureOrigins(state, group.memberIds, origins);
     if (origins && (group.memberIds.some(id => !origins[id] || !Number.isFinite(origins[id].x) || !Number.isFinite(origins[id].z)) || Object.keys(origins).length !== group.memberIds.length ||
         group.memberIds.some(id => !Object.hasOwn(origins, id))))
         throw new Error('Every expedition member needs an exact departure origin.');
@@ -253,6 +257,7 @@ export function applySpatialCommand(state: SimulationState, command: SpatialExpe
         const home = { ...context!.world.settlement.center };
         const mission: SpatialMission = {
             id, groupId: group.id, groupName: group.name, memberIds: [...group.memberIds], target: home,
+            ...(state.world!.territory ? { territoryVersion: 1 as const } : {}),
             route: [home, { ...home }], distance: 0, travelled: 0, departedAt: now, updatedAt: now,
             exploringUntil: null, returnedAt: null, foodCost: offer.foodCost, status: 'Prepared', outcome: null,
             provisions: { version: 2, foodPerMember: offer.foodPerMember, ticksPerFood: offer.ticksPerFood,
@@ -338,6 +343,8 @@ export function applySpatialCommand(state: SimulationState, command: SpatialExpe
     const id = offer.active?.id ?? `explore-${Object.keys(spatial.missions).length + 1}`;
     spatial.missions[id] = {
         id, groupId: command.groupId, groupName: offer.group.name,
+        ...((offer.active?.territoryVersion === 1 || !offer.active && state.world!.territory)
+            ? { territoryVersion: 1 as const } : {}),
         memberIds: [...offer.group.memberIds], target: { ...offer.target }, route: offer.route,
         ...(offer.memberRoutes ? { memberRoutes: offer.memberRoutes } : {}),
         ...(offer.homeOrigins ? { homeOrigins: offer.homeOrigins, returnRoutes: offer.returnRoutes } : {}),
@@ -689,6 +696,8 @@ export function validateSpatialExpeditions(state: SimulationState) {
     };
     let active = 0, observers = 0;
     for (const [id, mission] of Object.entries(spatial.missions)) {
+        if (mission.territoryVersion !== undefined && (mission.territoryVersion !== 1 ||
+            !state.world!.territory || mission.departedAt < state.world!.territory.adoptedAt)) fail();
         if (mission.task) validateIslandMission(state, mission);
         const group = state.world!.groups[mission.groupId];
         if (mission.routeMode !== undefined &&

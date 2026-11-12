@@ -1,4 +1,6 @@
 import { miningBusy } from './Mining';
+import { presenceAtGathering, territorialDuty } from './ResidentPresence';
+import type { TerritorialState } from './TerritorialAwareness';
 import { pillageEquipment, equipmentResult, releaseEquipment, validatePillageEquipment,
     type PillageEquipment, type EquipmentResult } from './Smithery';
 import { validateIslandClans, type IslandClanLink } from './IslandClans';
@@ -32,6 +34,7 @@ export type ExpeditionResult={success:boolean;discovery:Knowledge|null;casualtyI
 export type ExpeditionMission={id:string;groupId:string;groupName:string;regionId:string;type:MissionType;memberIds:string[];memberNames:string[];priorities:Cargo[];shipId:string|null;departedAt:number;returnsAt:number;foodCost:number;successBps:number;casualtyBps:number;status:'Away'|'Returned';returnedAt:number|null;result:ExpeditionResult|null;equipment?:PillageEquipment};
 export type ExpeditionCommand={type:'DisbandExpeditionGroup';groupId:string}|{type:'CreateExpeditionGroup';name:string;memberIds:string[]}|{type:'EditExpeditionGroup';groupId:string;name:string;memberIds:string[]}|{type:'DispatchExpedition';groupId:string;regionId:string;mission:MissionType;priorities?:Cargo[]};
 export type WorldState = {
+ territory?: TerritorialState;
  version: 1 | 2;
  spatial?: SpatialExpeditions;
  island?: IslandClanLink;
@@ -134,7 +137,7 @@ export const absoluteTick=(state:SimulationState)=>state.time.winter*state.ticks
 export function groupMission(state:SimulationState,groupId:string){return spatialGroupMission(state,groupId)??Object.values(state.world?.missions??{}).find(m=>m.groupId===groupId&&m.status==='Away');}
 export function personaAway(state:SimulationState,id:string):boolean{return Object.values(state.world?.spatial?.missions??{}).some(m=>m.status!=='Returned'&&m.status!=='Prepared'&&m.memberIds.includes(id))||Object.values(state.world?.missions??{}).some(m=>m.status==='Away'&&m.memberIds.includes(id));}
 export function expeditionEligible(state:SimulationState,id:string,groupId?:string):boolean {
- const p=state.personas[id];return !!p&&p.deathWinter===null&&personaAge(state,id)>=(state.mechanics?.config.workAge??16)&&!isProvidingCare(state,id)&&!personaAway(state,id)&&!miningBusy(state,id)&&!Object.values(state.world?.groups??{}).some(g=>g.id!==groupId&&g.memberIds.includes(id));
+ const p=state.personas[id];return !!p&&p.deathWinter===null&&personaAge(state,id)>=(state.mechanics?.config.workAge??16)&&!isProvidingCare(state,id)&&!personaAway(state,id)&&!miningBusy(state,id)&&!territorialDuty(state,id)&&!presenceAtGathering(state,id)&&!Object.values(state.world?.groups??{}).some(g=>g.id!==groupId&&g.memberIds.includes(id));
 }
 export function missionOffer(state:SimulationState,groupId:string,regionId:string,type:MissionType,priorities:Cargo[]=[]){
  const w=state.world,g=w?.groups[groupId],r=w?.regions[regionId];

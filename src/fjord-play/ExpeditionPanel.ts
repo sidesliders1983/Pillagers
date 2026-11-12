@@ -1,4 +1,5 @@
 import './expedition-guided.css';
+import { territoryNotice } from './TerritoryView';
 import { recentGroupWildlife } from '../lore/WildlifeBookView';
 import { expeditionEligible, groupMission, personaAway } from '../simulation/WorldExpeditions';
 import { defaultExpeditionFoodPerMember, inspectSpatialExpeditions,
@@ -607,6 +608,7 @@ export class ExpeditionPanel {
                             this.session.running ? 'pause' : 'play', 'data-expedition-action="clock"') : ''}
                     </div><p class="fjord-caption">${!this.session.running ? 'Clock paused. Resume travel when you are ready.' :
                         'The clock is running.'} ${mission.missionType ? 'Return home before starting another mission.' : 'New destinations use the same carried supplies.'}</p>`;
+                html += territoryNotice(state, group.id);
                 html += recentGroupWildlife(this.session, group.id);
                 const latest = missions.filter(candidate => candidate.groupId === group.id).at(-1);
                 if (!mission && latest) html += `<p class="fjord-expedition-history">${icon('check')}Previous expedition: ${escape(this.finishedDescription(latest))} · ${latest.foodCost} Food supplied</p>`;
@@ -660,6 +662,7 @@ export class ExpeditionPanel {
                 <span class="fjord-exploration-clock">${this.session.running ? 'Clock running' : 'Clock paused'}</span></div>
             <div class="fjord-exploration-content"><div class="fjord-exploration-instruction"><h2>${title}</h2><p>${instruction}</p></div>
                 ${this.supplies(mission)}</div>
+            ${territoryNotice(this.session.readSnapshot(), group.id)}
             <div class="fjord-expedition-actions">${controls}
                 ${button('Show group', 'locate', 'data-expedition-action="focus"')}
             </div><p class="fjord-exploration-hint">${mission.missionType ? 'Travel and return are included in the paid mission.' : `${this.choosing ? 'No extra Food charged. ' : ''}Travel, exploration and the return share this pack.`}</p>
@@ -686,7 +689,8 @@ export class ExpeditionPanel {
             <div id="expedition-mobile-details" ${this.toolbarExpanded ? '' : 'hidden'}>
                 <p class="fjord-caption">${group.memberIds.map(id => escape(this.session.readSnapshot().personas[id]?.name ?? id)).join(', ')}</p>
                 ${this.supplies(mission)}<p class="fjord-caption">${mission.missionType ? 'The paid mission includes travel and return.' : 'Travel, exploration and return share this pack.'}</p>
-            </div><div class="fjord-expedition-actions">${controls}</div>
+            </div>${territoryNotice(this.session.readSnapshot(), group.id)}
+            <div class="fjord-expedition-actions">${controls}</div>
             <p class="fjord-expedition-message" role="status" aria-live="polite" ${this.message ? '' : 'hidden'}>${escape(this.message)}</p>`;
         this.replace(this.toolbar, html, this.toolbarHTML);
         this.toolbarHTML = html;

@@ -8,6 +8,7 @@ import type { FjordGround } from './FjordGround';
 import type { Point2, WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
 import { communityHearthContains, communityHearthObstacleBounds } from './CommunityHearthGeometry';
+import { presenceRouteLength, presenceRoutePosition } from '../simulation/ResidentPresence';
 export type RouteObservation = { agent: string; kind: string; purpose: string; target: string;
     goal: Point2 | null; from: Point2; reason: string; nodes: number; accepted: boolean;
     navigationGeneration: number; reservationGeneration: number; occupancy: string;
@@ -71,6 +72,7 @@ type Agent = {
     signature: string;
     pace: number;
     runPace: number | null;
+    presenceFrame?: { updatedAt: number; route: Point2[]; distance: number; elapsed: number; duration: number };
     expeditionGoal?: Point2;
     failedRoutes: Map<string, { context: string; expires: number; reason: string }>;
 };
@@ -97,6 +99,10 @@ export class LivingWorldController {
     private gathering?: { eventId: string; participants: Map<string, GatheringParticipant> };
     private gatheringReturns = new Map<string, GatheringReturn>();
     private agents = new Map<string, Agent>();
+    private presenceTickSeconds = .5;
+    setPresenceTickSeconds(seconds: number) {
+        if (Number.isFinite(seconds) && seconds > 0) this.presenceTickSeconds = seconds;
+    }
     private social = new SocialEncounters();
     private surface;
     private campfire;
@@ -284,6 +290,7 @@ export class LivingWorldController {
         person.suspended = null;
         this.cancelVisit(actor);
         if (actor.signature !== person.signature || actor.entity.status.indoorReason ||
+            actor.entity.status.presence && !actor.entity.status.presence.suspended ||
             (actor.entity.status.expedition || actor.entity.status.mining) || actor.entity.status.living === false || !path) return;
         this.gatheringReturns.set(actor.key, { origin: person.origin, signature: actor.signature,
             suspended, remaining: this.visitBudget(actor, path) });
@@ -329,7 +336,10 @@ export class LivingWorldController {
                 this.yardVersions.delete(key);
             }
         for (const entity of active) {
-            const p = entity.transform!, signature = JSON.stringify([p.x, p.z, entity.status.assignment, entity.status.grazingZone]);
+            const p = entity.transform!;
+            const presence = entity.status.presence;
+            const anchor = presence?.home ?? p;
+            const signature = JSON.stringify([anchor.x, anchor.z, entity.status.assignment, entity.status.grazingZone]);
             let agent = this.agents.get(entity.selectionKey);
             if (agent && entity.status.expedition) {
                 agent.anchor = { x: p.x, z: p.z };
@@ -373,7 +383,40 @@ export class LivingWorldController {
                 this.cancelVisit(agent);
             }
             agent.entity = entity;
-            if (!entity.status.expedition && !this.safe(agent, agent)) {
+            if (presence && this.followsPresence(agent)) {
+                this.social.remove(agent.key);
+                this.cancelVisit(agent);
+                const previous = agent.presenceFrame;
+                if (!previous) {
+                    agent.presenceFrame = { updatedAt: presence.updatedAt, route: [{ x: p.x, z: p.z }],
+                        distance: 0, elapsed: 0, duration: this.presenceTickSeconds };
+                    agent.x = p.x;
+                    agent.z = p.z;
+                    agent.rotation = presence.rotation;
+                    agent.speed = 0;
+                    agent.state = 'Idle';
+                } else if (previous.updatedAt !== presence.updatedAt) {
+                    const confirmed = presence.route?.length ? presence.route.map(point => ({ ...point }))
+                        : [{ ...presence.previousPosition }, { ...presence.position }];
+                    let route = this.presenceRouteFrom(agent, confirmed);
+                    if (!route) {
+                        // Retain a previous route's unreached bends when Core has begun its next leg.
+                        const remaining = this.remainingPresenceRoute(agent);
+                        const end = remaining.at(-1)!;
+                        if (Math.hypot(end.x - confirmed[0].x, end.z - confirmed[0].z) < .01)
+                            route = [...remaining.slice(0, -1), ...confirmed];
+                    }
+                    // A skipped annual jump has no witnessed connecting route to replay.
+                    if (!route) {
+                        route = [{ ...presence.position }];
+                        agent.x = presence.position.x;
+                        agent.z = presence.position.z;
+                    }
+                    agent.presenceFrame = { updatedAt: presence.updatedAt, route,
+                        distance: presenceRouteLength(route), elapsed: 0, duration: this.presenceTickSeconds };
+                }
+            } else if (!presence) agent.presenceFrame = undefined;
+            if (!presence && !entity.status.expedition && !this.safe(agent, agent)) {
                 this.social.remove(agent.key);
                 agent.x = p.x;
                 agent.z = p.z;
@@ -387,7 +430,7 @@ export class LivingWorldController {
             Number(existing.has(a.key)) - Number(existing.has(b.key)));
         for (const actor of actors) {
             // Actual fenced yard support is bound afterwards by the loaded source layer.
-            if (actor.entity.status.grazingZone === 'yard' || this.bodyClearance(actor, actor)) continue;
+            if (actor.entity.status.presence || actor.entity.status.grazingZone === 'yard' || this.bodyClearance(actor, actor)) continue;
             let point: Point2 | undefined;
             for (let radius = .25; radius <= 3 && !point; radius += .25)
                 for (let direction = 0; direction < 32 && !point; direction++) {
@@ -409,8 +452,9 @@ export class LivingWorldController {
         }
         for (const person of this.gathering?.participants.values() ?? []) {
             const actor = this.agents.get(person.key);
-            if (!actor || actor.entity.status.indoorReason || (actor.entity.status.expedition || actor.entity.status.mining) ||
-                actor.entity.status.living === false) {
+            if (!actor || actor.entity.status.indoorReason ||
+                actor.entity.status.presence && !actor.entity.status.presence.suspended ||
+                (actor.entity.status.expedition || actor.entity.status.mining) || actor.entity.status.living === false) {
                 person.dropped = true;
                 person.arrived = false;
                 if (actor) this.cancelVisit(actor);
@@ -419,12 +463,58 @@ export class LivingWorldController {
         for (const [key, returning] of this.gatheringReturns) {
             const actor = this.agents.get(key);
             if (!actor || actor.signature !== returning.signature || actor.entity.status.indoorReason ||
+                actor.entity.status.presence && !actor.entity.status.presence.suspended ||
                 (actor.entity.status.expedition || actor.entity.status.mining) || actor.entity.status.living === false) {
                 this.gatheringReturns.delete(key);
                 if (actor) this.cancelVisit(actor);
             }
         }
         this.clearReleasedPoses();
+    }
+    private followsPresence(actor: Agent) {
+        return !!actor.entity.status.presence && !this.ownsGathering(actor.key);
+    }
+    private presenceRouteFrom(actor: Agent, route: readonly Point2[]): Point2[] | undefined {
+        if (Math.hypot(actor.x - route[0].x, actor.z - route[0].z) < 1e-6)
+            return route.map(point => ({ ...point }));
+        for (let index = 1; index < route.length; index++) {
+            const first = route[index - 1], next = route[index];
+            const dx = next.x - first.x, dz = next.z - first.z;
+            const squared = dx * dx + dz * dz;
+            const ratio = squared ? ((actor.x - first.x) * dx + (actor.z - first.z) * dz) / squared : -1;
+            if (ratio < 0 || ratio > 1 ||
+                Math.hypot(first.x + dx * ratio - actor.x, first.z + dz * ratio - actor.z) > 1e-6) continue;
+            return [{ x: actor.x, z: actor.z }, ...route.slice(index).map(point => ({ ...point }))];
+        }
+    }
+    private remainingPresenceRoute(actor: Agent): Point2[] {
+        const frame = actor.presenceFrame!;
+        const travelled = frame.distance * Math.min(1, frame.elapsed / frame.duration);
+        const route = [{ x: actor.x, z: actor.z }];
+        let distance = 0;
+        for (let index = 1; index < frame.route.length; index++) {
+            const first = frame.route[index - 1], next = frame.route[index];
+            distance += Math.hypot(next.x - first.x, next.z - first.z);
+            if (distance > travelled + 1e-8) route.push({ ...next });
+        }
+        return route;
+    }
+    private advancePresence(actor: Agent, seconds: number) {
+        const frame = actor.presenceFrame, presence = actor.entity.status.presence;
+        if (!frame || !presence) return;
+        const before = { x: actor.x, z: actor.z };
+        frame.elapsed += seconds;
+        const ratio = Math.min(1, frame.elapsed / frame.duration);
+        const position = presenceRoutePosition(frame.route, frame.distance * ratio);
+        actor.x = position.x;
+        actor.z = position.z;
+        actor.y = this.surface.surfaceHeightAt(position.x, position.z);
+        const distance = Math.hypot(actor.x - before.x, actor.z - before.z);
+        const moving = distance > 1e-8;
+        const heading = moving ? Math.atan2(actor.x - before.x, actor.z - before.z) : presence.rotation;
+        actor.rotation = moving ? heading : turnToward(actor.rotation, heading, seconds, residentMovementConfig.turnSpeed);
+        actor.speed = moving ? distance / seconds : 0;
+        actor.state = moving ? presence.mode === 'withdraw' || presence.mode === 'mobilise' ? 'Run' : 'Walk' : 'Idle';
     }
     private clearReleasedPoses() {
         for (const actor of this.agents.values())
@@ -1042,7 +1132,8 @@ export class LivingWorldController {
         return { key: a.key, x: a.x, z: a.z, radius: this.radius(a),
             velocity: distance > .15 ? { x: (next.x - a.x) / distance * pace,
                 z: (next.z - a.z) / distance * pace } : { x: 0, z: 0 },
-            enabled: a.kind === 'persona' && a.socialEnabled && !a.entity.status.expedition && !this.ownsGathering(a.key), busy: a.visit?.phase === 'activity' };
+            enabled: a.kind === 'persona' && a.socialEnabled && !a.entity.status.presence &&
+                !a.entity.status.expedition && !this.ownsGathering(a.key), busy: a.visit?.phase === 'activity' };
     }
     private bodyClearance(a: Agent, point: Point2, from: Point2 = a) {
         const dx = point.x - from.x, dz = point.z - from.z;
@@ -1089,7 +1180,8 @@ export class LivingWorldController {
                 point => this.bodyClearance(a, point)) ?? [];
     }
     private cattleEncounters() {
-        const people = [...this.agents.values()].filter(a => a.kind === 'persona' && a.socialEnabled && !a.entity.status.expedition && !this.ownsGathering(a.key) && a.visit?.phase !== 'activity');
+        const people = [...this.agents.values()].filter(a => a.kind === 'persona' && a.socialEnabled &&
+            !a.entity.status.presence && !a.entity.status.expedition && !this.ownsGathering(a.key) && a.visit?.phase !== 'activity');
         for (const cow of this.agents.values()) {
             if (cow.kind !== 'cattle' || cow.state === 'Rest' || !cow.interactionSeconds || !this.social.available(cow.key)) continue;
             const reference = livestockPresentation(cow.entity.asset);
@@ -1125,6 +1217,10 @@ export class LivingWorldController {
         }
         for (const a of this.agents.values()) {
             if (a.entity.status.expedition) continue;
+            if (this.followsPresence(a)) {
+                this.advancePresence(a, dt);
+                continue;
+            }
             const gathering = this.gathering?.participants.get(a.key);
             const returning = this.gatheringReturns.get(a.key);
             if (returning) {

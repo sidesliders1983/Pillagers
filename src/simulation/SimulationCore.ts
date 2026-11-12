@@ -1,3 +1,8 @@
+import { bindTerritorialAwareness, stepTerritorialAwareness, reconcileTerritorialAwareness,
+    validateTerritorialAwareness, assertTerritorialWorld, suspendPresenceForGathering, type TerritorialPolicy } from './TerritorialAwareness';
+import type { ResidentPresenceState } from './ResidentPresence';
+export { inspectTerritory, territorialContact } from './TerritorialAwareness';
+export { inspectResidentPresence, territorialDuty } from './ResidentPresence';
 import { applyCommunityHearthCommand, validateCommunityHearth, isCommunityHearthEvent } from './CommunityHearth';
 import type { CommunityHearthState, CommunityHearthCommand } from './CommunityHearth';
 export { inspectCommunityHearth, communityHearthRules, communityHearthTiers } from './CommunityHearth';
@@ -82,6 +87,7 @@ export type Persona = {
 };
 export type SimulationEvent = {id: string; time: GameTime; type: string; personaId?: string; details?: Record<string, unknown>};
 export type SimulationState = {
+    residentPresence?: ResidentPresenceState;
     communityHearth?: CommunityHearthState;
     mining?: MiningState;
     trade?: TradeState;
@@ -234,7 +240,7 @@ export function createSettlement(seed:number, overrides:Partial<PrototypeConfig>
     }
     initializeSocial(state,socialOverrides);validateState(state); return state;
 }
-export type SimulationCommand = CommunityHearthCommand | MiningCommand | {type: 'UseSeasonalWeatherProduction'} | {type: 'UseCulturalOccasions'} | MerchantCommand | CultureCommand | SmitheryCommand | LongshipCommand | IslandMissionCommand | SpatialExpeditionCommand | CampfireCommand | ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
+export type SimulationCommand = { type: 'EnableTerritorialAwareness' } | CommunityHearthCommand | MiningCommand | {type: 'UseSeasonalWeatherProduction'} | {type: 'UseCulturalOccasions'} | MerchantCommand | CultureCommand | SmitheryCommand | LongshipCommand | IslandMissionCommand | SpatialExpeditionCommand | CampfireCommand | ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
 function integer(value: number, label: string) {
     if (!Number.isSafeInteger(value) || value < 0) throw new Error(`${label} must be a nonnegative safe integer`);
 }
@@ -244,52 +250,56 @@ function emit(state: SimulationState, type: string, personaId?: string, details?
 }
 export function applyCommand(input: SimulationState, command: SimulationCommand, context?: PhysicalExpeditionContext): SimulationState {
     validateState(input);
+    if (command.type === 'EnableTerritorialAwareness') return initializeTerritorialAwareness(input, context);
     if (command.type === 'UseCulturalOccasions') {
         const state = structuredClone(input);
         useCulturalOccasions(state);
-        validateState(state);
+        reconcileTerritorialAwareness(state); validateState(state);
         return state;
     }
     if (command.type === 'UseSeasonalWeatherProduction') {
         const state = structuredClone(input);
         useSeasonalWeatherProduction(state);
-        validateState(state);
+        reconcileTerritorialAwareness(state); validateState(state);
         return state;
     }
     if (command.type === 'BarterWithMerchant') {
         const state = structuredClone(input);
         applyMerchantCommand(state, command);
-        validateState(state);
+        reconcileTerritorialAwareness(state); validateState(state);
         return state;
     }
     if (command.type === 'SponsorGathering') {
         const state = structuredClone(input);
+        const previousEvents = state.events.length;
         applyCultureCommand(state, command);
-        validateState(state);
+        const receipt = state.events.find(event => event.id === state.culture?.lastGatheringEventId);
+        if (receipt && Number(receipt.id.slice(6)) > previousEvents) suspendPresenceForGathering(state, receipt);
+        reconcileTerritorialAwareness(state); validateState(state);
         return state;
     }
     if (command.type === 'AssignMiner' || command.type === 'RecallMiner' || command.type === 'BuildMine') {
         const state = structuredClone(input);
         applyMiningCommand(state, command, context);
-        validateState(state);
+        reconcileTerritorialAwareness(state); validateState(state);
         return state;
     }
     if (command.type === 'SetSmitheryTarget' || command.type === 'AssignEquipment') {
         const state = structuredClone(input);
         applySmitheryCommand(state, command);
-        validateState(state);
+        reconcileTerritorialAwareness(state); validateState(state);
         return state;
     }
     if (command.type === 'BoardLongship' || command.type === 'DisembarkLongship' || command.type === 'LoadLongshipFood') {
         const state = structuredClone(input);
         applyLongshipCommand(state, command, context);
-        validateState(state);
+        reconcileTerritorialAwareness(state); validateState(state);
         return state;
     }
     if (command.type === 'DispatchIslandMission') {
         const state = structuredClone(input);
         dispatchIslandMission(state, command, context);
-        validateState(state);
+        reconcileTerritorialAwareness(state); validateState(state);
         return state;
     }
     if (command.type === 'StartExpedition' || command.type === 'CancelExpedition' ||
@@ -297,24 +307,24 @@ export function applyCommand(input: SimulationState, command: SimulationCommand,
         command.type === 'CreateExplorationGroup' || command.type === 'SetExplorationMember') {
         const state = structuredClone(input);
         applySpatialCommand(state, command, context);
-        validateState(state);
+        reconcileTerritorialAwareness(state); validateState(state);
         return state;
     }
     if (command.type === 'EnableCommunityHearth' || command.type === 'UpgradeCommunityHearth') {
         const state = structuredClone(input);
         applyCommunityHearthCommand(state, command);
-        validateState(state);
+        reconcileTerritorialAwareness(state); validateState(state);
         return state;
     }
     if (command.type === 'SetCampfire') {
         const state = structuredClone(input);
         setCampfire(state, command.lit);
-        validateState(state);
+        reconcileTerritorialAwareness(state); validateState(state);
         return state;
     }
-    if(['CreateExpeditionGroup','EditExpeditionGroup','DisbandExpeditionGroup','DispatchExpedition'].includes(command.type)){const state=structuredClone(input);applyExpeditionCommand(state,command as ExpeditionCommand);validateState(state);return state;}
-    if(isLandingCommand(command)){const state=structuredClone(input);applyLandingCommand(state,command as LandingCommand);reconcileFarmyards(state,farmyards(input).map(f=>f.id));validateState(state);return state;}
-    if(isMechanicsCommand(command)){const state=structuredClone(input);applyMechanicsCommand(state,command as MechanicsCommand);reconcileFarmyards(state,farmyards(input).map(f=>f.id));validateState(state);return state;}
+    if(['CreateExpeditionGroup','EditExpeditionGroup','DisbandExpeditionGroup','DispatchExpedition'].includes(command.type)){const state=structuredClone(input);applyExpeditionCommand(state,command as ExpeditionCommand);reconcileTerritorialAwareness(state); validateState(state);return state;}
+    if(isLandingCommand(command)){const state=structuredClone(input);applyLandingCommand(state,command as LandingCommand);reconcileFarmyards(state,farmyards(input).map(f=>f.id));reconcileTerritorialAwareness(state); validateState(state);return state;}
+    if(isMechanicsCommand(command)){const state=structuredClone(input);applyMechanicsCommand(state,command as MechanicsCommand);reconcileFarmyards(state,farmyards(input).map(f=>f.id));reconcileTerritorialAwareness(state); validateState(state);return state;}
     if (command.type === 'AssignOccupation') {
         const occupations = availableOccupationIds(input);
         if(personaAway(input,command.personaId))throw new Error('Persona away on expedition');
@@ -330,7 +340,7 @@ export function applyCommand(input: SimulationState, command: SimulationCommand,
         target.occupation = command.occupation;
         if (command.occupation !== null) target.occupationHistory.push({occupation: command.occupation, startedAt: {...state.time}, endedAt: null});
         emit(state, 'OccupationAssigned', target.id, {occupation: command.occupation, name: target.name, age: personaAge(state, target.id)});
-        reconcileFarmyards(state,farmyards(input).map(f=>f.id));validateState(state);
+        reconcileFarmyards(state,farmyards(input).map(f=>f.id));reconcileTerritorialAwareness(state); validateState(state);
         return state;
     }
     const ticks = command.type === 'AdvanceWinter' ? input.ticksPerWinter : command.type === 'AdvanceTicks' ? command.ticks : NaN;
@@ -340,6 +350,7 @@ export function applyCommand(input: SimulationState, command: SimulationCommand,
     integer(input.time.winter + Math.floor(total / input.ticksPerWinter), 'Winter');
     const state = structuredClone(input);
     if (state.mechanics) {
+        assertTerritorialWorld(state, context);
         requireMiningAdvance(state, context);
         requireSpatialAdvance(state, context);
         assertWildlifeWorld(state, context);
@@ -347,9 +358,10 @@ export function applyCommand(input: SimulationState, command: SimulationCommand,
             stepMechanicsTick(state);
             stepMining(state);
             const missions = stepSpatialExpeditions(state, context);
+            stepTerritorialAwareness(state, context);
             stepWildlifeSightings(state, context, missions);
         }
-        validateState(state);
+        reconcileTerritorialAwareness(state); validateState(state);
         return state;
     }
     const winter = state.time.winter + Math.floor(total / state.ticksPerWinter);
@@ -358,10 +370,21 @@ export function applyCommand(input: SimulationState, command: SimulationCommand,
         emit(state, 'WinterAdvanced');
     }
     state.time.tick = total % state.ticksPerWinter;
-    validateState(state); return state;
+    reconcileTerritorialAwareness(state); validateState(state); return state;
 }
 export function advanceWinter(state: SimulationState): SimulationState {
     return applyCommand(state, {type: 'AdvanceWinter'});
+}
+
+/** Explicit adoption records local presence before the renderer starts. */
+export function initializeTerritorialAwareness(input: SimulationState, context?: PhysicalExpeditionContext,
+    policy: Partial<TerritorialPolicy> = {}): SimulationState {
+    validateState(input);
+    const state = structuredClone(input);
+    bindTerritorialAwareness(state, context, policy);
+    validateState(state);
+    assertTerritorialWorld(state, context);
+    return state;
 }
 
 export function serializeState(state: SimulationState): string {validateState(state); return JSON.stringify(state);}
@@ -485,6 +508,7 @@ function validateState(state: SimulationState): void {
             throw new Error('Missing owning clan discovery.');
     }
     validateLanding(state);validateWeather(state);validateWorld(state,validateState);validateSpatialExpeditions(state);
+    validateTerritorialAwareness(state);
 }
 
 export function canApplyCommand(state:SimulationState,command:SimulationCommand):boolean {

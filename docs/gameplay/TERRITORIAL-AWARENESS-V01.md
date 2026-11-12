@@ -1,9 +1,9 @@
 # Territorial awareness v0.1
 
-Status is under development for [#306](https://github.com/sidesliders1983/Pillagers/issues/306),
+Status is implemented on the draft feature branch for [#306](https://github.com/sidesliders1983/Pillagers/issues/306),
 the first implementation slice of [#305](https://github.com/sidesliders1983/Pillagers/issues/305).
 The starting source is main commit `decdc07881b80ff17195bfdef60940506af88b87`.
-This document describes the intended contract. It does not certify shipped behavior.
+This document records the versioned implementation contract. Main and public Sites remain unchanged until review and merge.
 
 ## Player behavior
 
@@ -48,11 +48,31 @@ canonical tick and their confirmed positions. Distance and exact
 `traceTerrainSightline` checks authorize detection. A camera, a settlement-wide
 discovery mask or an unseen mission order cannot authorize it.
 
-The phases are Unaware, Suspicious, Alerted and Hostile, with closure after
-withdrawal or loss of contact. Configured sample intervals, warning grace,
-contact loss and re-entry cooldown must be bounded and saved. Select experimental
-values during the first behavioral slice and document the resulting examples
-here before review.
+The first sighting opens Suspicious or Alerted. Unaware has no incident record.
+A detected deeper intrusion warns before escalating to Hostile. Withdrawal,
+loss of contact or disappearance closes the linked incident. The versioned
+trial policy saves these bounded values.
+
+| Setting | Trial value |
+| --- | ---: |
+| Detection sample | Every 5 canonical ticks |
+| Observer radius | 32 m |
+| Observer eye height | 1.7 m |
+| Warning grace | 25 ticks |
+| Loss of contact | 50 ticks |
+| Re-entry cooldown | 100 ticks |
+| Maximum responders per incident | 2 |
+| Maximum pursuit from home | 48 m |
+| Canonical resident movement | 0.6 m per tick |
+| Local ambient destination interval | 25 ticks |
+| Local ambient radius | 4 m |
+| New-resident exterior search | At most 16 m from the saved household anchor |
+
+A visiting group must be actually observed within this radius. The selected
+destination alone cannot cause a warning. An outside destination can still
+warn if its confirmed route crosses the settlement interior. Both defending
+clans use the same contact query and eligibility rules. The current visitor
+controller creates no CPU expedition orders.
 
 A perimeter observation leads to watching. A detected deeper intrusion leads to
 a warning and bounded local response. Ignoring that warning or witnessing an
@@ -76,7 +96,16 @@ The same duty read must reach local and rival `inspectWork`, production,
 expedition eligibility, mining, caregiving and cultural availability. Releasing
 a duty resumes the person's ordinary role from the reached location. Recall,
 death, disappearance, transfer and loss of an observer reconcile safely.
-Responders stay within the incident's local pursuit limit.
+Responders stay within the incident's local pursuit limit. Canonical movement
+waits for resident body clearance and can retry a blocked local route through
+the existing terrain router.
+
+A newly sponsored cultural receipt reserves its actual participants from
+territorial observation and response for 250 canonical ticks. The existing
+cosmetic performance can use that interval and is released when the reservation
+expires. A fast simulation clock can therefore shorten that cosmetic overlay.
+The reservation is saved and its expiry never depends on a render callback.
+Earlier campaigns use their existing cultural presentation behavior.
 
 ## Player knowledge and history
 
@@ -93,7 +122,9 @@ existing group-level Return home action, presented as withdrawal where relevant.
 
 ## Saved campaigns
 
-Adoption is explicit and versioned. Existing historical and in-flight missions
+New physical Fjord campaigns adopt presence before the scene starts. Existing
+physical campaigns can explicitly adopt using the territory review entry.
+Adoption is versioned. Existing historical and in-flight missions
 retain their saved outcome rules. New participating missions identify the
 awareness version under which they departed. Detection is independent of camera,
 pause, render cadence and browser visibility.
@@ -104,6 +135,36 @@ observation provenance, world identity, timestamps and unique responder
 reservations. Loading cannot replay warnings, reconstruct new earlier events,
 advance time or duplicate responders.
 
+## Reusable Core contract
+
+`initializeTerritorialAwareness(state, context, policy?)` or the public
+`EnableTerritorialAwareness` command adopts both clans. The physical context supplies
+validated home exteriors only at adoption. Afterwards, saved positions and homes
+are authoritative; new identities receive a deterministic safe exterior through
+the existing terrain router. Initial home normalization is bounded to 8 m; a new
+identity searches at most 16 m from its saved household anchor inside the saved
+settlement bounds. Exhausting those reachable separate exteriors raises an explicit
+error rather than placing overlapping residents. Rendered positions cannot become departure origins
+for newly participating exploration, island missions or longship boarding.
+
+`world.territory` stores version 1, world/adoption identity, the adoption receipt,
+policy, next incident sequence and incident snapshots. Each owning clan's
+`residentPresence` stores its own actors, confirmed routes, temporary duty and
+availability intervals. Closed snapshots beyond the latest 2,048 can be compacted
+after their re-entry cooldown; their immutable source events remain history.
+
+An incident links the actual defending/intruding clans, mission and group to one
+confirmed observation and its source event IDs. `TerritoryIncidentOpened`,
+`TerritoryIncidentChanged` and `TerritoryIncidentClosed` carry versioned private
+facts. `inspectTerritory` and the shared history adapter expose only the permitted
+player projection. `territorialContact` applies the same real-person eligibility,
+distance and terrain query for either defending clan.
+
+A Hostile transition stores `engagement = { version: 1, requestedAt, position,
+defenderIds, intruderIds, sourceEventId }`. The later on-site resolver must consume
+that existing incident/request and retain its provenance; it must not derive a new
+outcome from a renderer callback or regenerate defenders. Existing mission outcome
+rules continue until that separate integration is implemented and versioned.
 ## Required proof
 
 - Seeded distant pass, blocked terrain LOS, detected perimeter visit, deeper
@@ -118,9 +179,9 @@ advance time or duplicate responders.
 - A pinned Fjord Play build and seed showing benign and detected visits on
   desktop and mobile browser. Physical-device results are recorded separately.
 
-The public Core commands and inspectors, terrain sight queries, save/load/replay
-and the expedition/history controls are the proposed test boundaries. User
-confirmation of these boundaries is pending before new TDD tests are written.
+The owner approved the public Core commands and inspectors, terrain sight
+queries, resident availability, save/load/replay, expedition/history controls
+and desktop/mobile browser behavior as the TDD test boundaries.
 
 ## Supplied assets
 

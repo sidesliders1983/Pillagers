@@ -9,6 +9,7 @@ import { stepCampfire } from './Campfire';
 import {evaluateSocialYear, pruneSocialIncidents} from './PersonalityLifeEvents';
 import {personaIdentity} from './Identity';
 import {personaAway,stepWorld} from './WorldExpeditions';
+import { territorialDuty } from './ResidentPresence';
 import {determineWeather,weatherProfile,weatherProductionModifiers,weatherFacts} from './Weather';
 import {randomUint} from './Random';
 import {resolveMortality,defaultMortalityBands} from './Mortality';
@@ -88,7 +89,7 @@ export function inspectWork(state:SimulationState,id:string) {
     const person=state.personas[id];if(!person||!state.mechanics)throw new Error('Gameplay persona required');
     const config=state.mechanics.config,role=person.occupation;
     const craft = craftingOffer(state, role);
-    const reason=person.deathWinter!==null?'deceased':personaAway(state,id)?'expedition':isProvidingCare(state,id)?'childcare':personaAge(state,id)<config.workAge?'underage':role===null?'unassigned':role==='miner'?miningWorkReason(state,id):miningBusy(state,id)?'returning-from-mine':config.occupations[role]!.resource===null?craft.reason:null;
+    const reason=person.deathWinter!==null?'deceased':personaAway(state,id)?'expedition':territorialDuty(state,id)?'territorial-duty':isProvidingCare(state,id)?'childcare':personaAge(state,id)<config.workAge?'underage':role===null?'unassigned':role==='miner'?miningWorkReason(state,id):miningBusy(state,id)?'returning-from-mine':config.occupations[role]!.resource===null?craft.reason:null;
     if(role===null)return {aptitudeBps:0,productivityBps:0,unitsPerWinter:0,resource:null,progress:0,reason};
     const job=config.occupations[role]!;
         let efficiency=aptitude(person.dna.traits,job);
