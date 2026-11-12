@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "generator": "scripts/prepare-campaign-islands.mjs",
+  "mode": "full regeneration; no repack",
+  "entries": 14,
+  "allCompressedAndCanonicalEntriesIdentical": true,
+  "inputChanges": [
+    {
+      "path": "src/world-generation/LandRoutes.ts",
+      "before": "062388811fea5214d08445d986b8f9b72ee3ffb342c015755c0f4e995afdbe66",
+      "after": "1a2dc21920bc51908947de1c9149b686f7153fbbf9566205eeb9ba6e580cbebe"
+    }
+  ]
+}

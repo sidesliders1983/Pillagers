@@ -1,0 +1,87 @@
+{
+  "commit": "8673809d615d9a7d33e9403bcc10d28a973728a3",
+  "version": "island-pool-v3",
+  "method": "Prepared public baked geography; actual SharedSettlement creation, explicit discovery/presence adoption, exact Shared/Core save roundtrip, then one canonical tick.",
+  "cases": [
+    {
+      "geographySeed": 18,
+      "campaignSeed": 0,
+      "passed": true,
+      "localResidents": 10,
+      "rivalResidents": 10,
+      "milliseconds": 2526
+    },
+    {
+      "geographySeed": 7,
+      "campaignSeed": 25,
+      "passed": true,
+      "localResidents": 10,
+      "rivalResidents": 10,
+      "milliseconds": 2036
+    },
+    {
+      "geographySeed": 15,
+      "campaignSeed": 26,
+      "passed": true,
+      "localResidents": 10,
+      "rivalResidents": 10,
+      "milliseconds": 1896
+    },
+    {
+      "geographySeed": 79,
+      "campaignSeed": 16,
+      "passed": true,
+      "localResidents": 10,
+      "rivalResidents": 10,
+      "milliseconds": 1759
+    },
+    {
+      "geographySeed": 88,
+      "campaignSeed": 1,
+      "passed": true,
+      "localResidents": 10,
+      "rivalResidents": 10,
+      "milliseconds": 1802
+    },
+    {
+      "geographySeed": 101,
+      "campaignSeed": 5,
+      "passed": true,
+      "localResidents": 10,
+      "rivalResidents": 10,
+      "milliseconds": 1933
+    },
+    {
+      "geographySeed": 112,
+      "campaignSeed": 8,
+      "passed": true,
+      "localResidents": 10,
+      "rivalResidents": 10,
+      "milliseconds": 1700
+    },
+    {
+      "geographySeed": 168,
+      "campaignSeed": 9,
+      "passed": true,
+      "localResidents": 10,
+      "rivalResidents": 10,
+      "milliseconds": 1754
+    },
+    {
+      "geographySeed": 195,
+      "campaignSeed": 4,
+      "passed": true,
+      "localResidents": 10,
+      "rivalResidents": 10,
+      "milliseconds": 2097
+    },
+    {
+      "geographySeed": 227,
+      "campaignSeed": 2,
+      "passed": true,
+      "localResidents": 10,
+      "rivalResidents": 10,
+      "milliseconds": 1671
+    }
+  ]
+}

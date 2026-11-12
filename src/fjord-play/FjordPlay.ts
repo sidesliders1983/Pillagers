@@ -99,6 +99,7 @@ export class FjordPlay {
         this.loading.check();
         const query = new URLSearchParams(location.search);
         const hearthPreview = query.get('communityHearth') === '1';
+        const territorialPreview = query.get('territory') === '306';
         let tracedBook: GameplaySession['book'] | undefined, tracedBookId: string | undefined;
         const trace = this.trace = new LifecycleTrace(query.has('debugLifecycle'), () => {
             if (!this.session) return {};
@@ -173,6 +174,9 @@ export class FjordPlay {
             enableStartDiscovery) this.campaign.enableDiscovery();
         if (entry.kind === 'new' && this.campaign.blueprint.oreSites)
             this.session.initializeMining(this.campaign.blueprint, this.session.readSnapshot().discovery!.worldId);
+        if ((entry.kind === 'new' && !entry.diagnosticRun || territorialPreview) &&
+            this.session.readSnapshot().world?.version === 2)
+            this.campaign.enableTerritorialAwareness();
         if (!entry.diagnosticRun) {
             useSeasonalFjordProduction(this.session);
             useFjordCulturalOccasions(this.session);
@@ -674,6 +678,7 @@ export class FjordPlay {
                     if (discoveryEnabled) this.campaign.enableDiscovery();
                     if (this.campaign.blueprint.oreSites) this.session.initializeMining(
                         this.campaign.blueprint, this.session.readSnapshot().discovery!.worldId);
+                    if (discoveryEnabled) this.campaign.enableTerritorialAwareness();
                     resetProduction();
                     campaignFields();
                     await presentation!.replace();

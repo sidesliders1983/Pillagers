@@ -1,0 +1,28 @@
+{
+  "location": "From the source repository root, copy these .mjs files into scratch/territory-review-306. Set PROFILE_SOURCE_ROOT to the desired clean source snapshot, or leave it unset for cwd. GIT_EXE may override git on PATH.",
+  "setup": [
+    "node scratch/territory-review-306/generate-populations.mjs",
+    "node scratch/territory-review-306/generate-default-care.mjs"
+  ],
+  "prepareEnvironment": {
+    "PROFILE_LABEL": "final-<pinned-short-sha>",
+    "PROFILE_COMMON_CONTEXT": "1",
+    "PROFILE_SOURCE_ROOT": "<clean pinned source root or omit for cwd>"
+  },
+  "prepare": [
+    "node scratch/territory-review-306/prepare-scenarios.mjs"
+  ],
+  "measure": [
+    "node scratch/territory-review-306/run-measurements.mjs"
+  ],
+  "requirements": [
+    "Install locked project dependencies before running.",
+    "Keep heavy browser/build/test processes stopped during timings.",
+    "Do not set PROFILE_PILOT for the full four-case matrix.",
+    "Leave PROFILE_THRESHOLDS unset for 50 and 100 cases.",
+    "The child is spawned automatically with --expose-gc.",
+    "PROFILE_COMMON_CONTEXT derives real physical exclusions from adopted public projection and binds them to BOTH variants before public dispatch.",
+    "Historical CPU profile and metadata-repair scripts intentionally expect 0041 and its named fixture files."
+  ],
+  "meaning": "Public Core wall-clock profile with clone+validation, not browser FPS/thermals or production-balance evidence."
+}

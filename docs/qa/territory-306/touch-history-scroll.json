@@ -1,0 +1,44 @@
+{
+  "status": "passed",
+  "origin": "http://127.0.0.1:5198",
+  "source": "8673809d615d9a7d33e9403bcc10d28a973728a3",
+  "gestures": [
+    {
+      "before": 67,
+      "after": 272,
+      "from": 310,
+      "to": 90
+    }
+  ],
+  "visibleFacts": [
+    {
+      "name": "closed",
+      "text": "incident ended",
+      "file": "history-closed-visible.jpg",
+      "copy": [
+        "Year 800 · tick 645\nThe settlement lost contact with the expedition party and the incident ended.\n›"
+      ]
+    },
+    {
+      "name": "warning",
+      "text": "warned the expedition party",
+      "file": "history-warning-visible.jpg",
+      "copy": [
+        "Year 800 · tick 645\nThe settlement lost contact with the expedition party and the incident ended.\n›",
+        "Year 800 · tick 595\nThe settlement warned the expedition party to withdraw.\n›",
+        "Year 800 · tick 590\nAn expedition party was noticed near the settlement perimeter.\n›"
+      ]
+    },
+    {
+      "name": "noticed",
+      "text": "noticed near the settlement perimeter",
+      "file": "history-noticed-visible.jpg",
+      "copy": [
+        "Year 800 · tick 645\nThe settlement lost contact with the expedition party and the incident ended.\n›",
+        "Year 800 · tick 595\nThe settlement warned the expedition party to withdraw.\n›",
+        "Year 800 · tick 590\nAn expedition party was noticed near the settlement perimeter.\n›"
+      ]
+    }
+  ],
+  "errors": []
+}

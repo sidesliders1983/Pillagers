@@ -1,0 +1,20 @@
+{
+  "status": "executed; final runtime/catalog eight-child matrix passed",
+  "source": "e78658217023a048c06449f2e35310c140229fbb",
+  "preservedMeasuredSource": "ce43e3dbc0360ea829596eea3aa268b483e05f6d",
+  "sourceHashes": {
+    "src/simulation/ResidentPresence.ts": "d842ec193d84b152a3e739735f85448975afd8d194ea464dd4f69ea60be1c7a4",
+    "src/simulation/TerritorialAwareness.ts": "39c7bbb07ebbded0bc22fa274746b7171371fcad32cecffe4dec10a376a829be",
+    "src/world-generation/LandRoutes.ts": "1a2dc21920bc51908947de1c9149b686f7153fbbf9566205eeb9ba6e580cbebe",
+    "src/fjord-play/BakedIslandCatalog.ts": "d1b6fa8daa3d4d3a4152521ef7132f49e7a6832b5a4363711ac6904b6e86d73b"
+  },
+  "catalog": {
+    "entries": 14,
+    "allEntryMetadataIdenticalToCe43": true,
+    "allCompressedPayloadHashesMatch": true,
+    "changedGeneratedInputs": [
+      "src/world-generation/LandRoutes.ts"
+    ]
+  },
+  "results": "performance-summary.json"
+}

@@ -99,6 +99,20 @@ export function inspectRivalSettlement(state: SimulationState, world: WorldBluep
             occupation: entity.status.occupation === 'farmer' ? 'farmer' : undefined,
             assignment: entity.status.assignment && visibleBuildings.has(entity.status.assignment) ? entity.status.assignment : null,
             grazingZone: entity.status.assignment && visibleBuildings.has(entity.status.assignment) ? entity.status.grazingZone : 'exposed' };
+        const presence = entity.status.presence;
+        if (presence) {
+            // A visible reaction does not reveal its future route, hidden home or unobserved trail.
+            const observed = (point: { x: number; z: number }) =>
+                discoveryAt(knowledge, point.x, point.z) === 'visible';
+            let start = 0;
+            for (let index = 0; index < presence.route.length; index++)
+                if (!observed(presence.route[index])) start = index + 1;
+            const route = presence.route.slice(start).map(point => ({ ...point }));
+            status.presence = { ...presence, home: { ...presence.position },
+                previousPosition: observed(presence.previousPosition) ? { ...presence.previousPosition } : { ...presence.position },
+                route: route.length ? route : [{ ...presence.position }],
+                facing: presence.facing && observed(presence.facing) ? { ...presence.facing } : null };
+        }
         const appearance = entity.dna ? { dna: { ...dna, traits: {
             physicality: .5, agility: .5, intelligence: .5, cunning: .5, temperament: .5
         } } as FjordEntity['dna'], visualProfile } : {};

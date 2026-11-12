@@ -1,3 +1,4 @@
+import { territorialDuty } from './ResidentPresence';
 import { miningBusy } from './Mining';
 import { birthdayCalendarMode } from './BirthdayCalendar';
 import { careActive } from './CareCalendar';
@@ -95,7 +96,7 @@ export function isProvidingCare(state:SimulationState,id:string):boolean {
 }
 export function caregiverEligible(state:SimulationState,id:string):boolean {
     const person=state.personas[id];
-    return !!person&&!personaAway(state,id)&&!miningBusy(state,id)&&person.deathWinter===null&&person.dna.sex==='female'&&personaAge(state,id)>=state.mechanics!.config.adultAge&&person.occupation===null&&!isProvidingCare(state,id);
+    return !!person&&!personaAway(state,id)&&!miningBusy(state,id)&&!territorialDuty(state,id)&&person.deathWinter===null&&person.dna.sex==='female'&&personaAge(state,id)>=state.mechanics!.config.adultAge&&person.occupation===null&&!isProvidingCare(state,id);
 }
 export function assignCaregiver(state:SimulationState,motherId:string,caregiverId:string|null,locked:boolean,emit:EventWriter):void {
     const mother=state.personas[motherId],info=state.mechanics!.people[motherId];

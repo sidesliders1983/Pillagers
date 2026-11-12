@@ -4,6 +4,10 @@ import { gatheringOffer, inspectCulture } from '../simulation/CulturalEvents';
 import type { CultureConfig, CulturalOccasion } from '../simulation/CulturalEvents';
 import type { ContextualSupportConfig } from '../simulation/ContextualSupport';
 import { wildlifeAttentionAdapter } from '../lore/WildlifeAttention';
+import { territoryAttentionAdapter } from '../lore/TerritoryAttention';
+import type { PresenceSite } from '../simulation/ResidentPresence';
+import { initializeTerritorialAwareness } from '../simulation/SimulationCore';
+import { assertTerritorialWorld } from '../simulation/TerritorialAwareness';
 import { AttentionHistoryIndex } from '../lore/AttentionHistory';
 import { WildlifeHistoryIndex } from '../lore/WildlifeHistory';
 import { initializeWildlifeSightings, assertWildlifeWorld } from '../simulation/WildlifeSightings';
@@ -25,21 +29,33 @@ export class GameplaySession {
     private physicalWorld?: PhysicalExpeditionContext;
     private physicalExclusions?: () => PhysicalExpeditionContext['exclusions'];
     private physicalShips?: () => PhysicalExpeditionContext['longshipOrigins'];
+    private physicalResidents?: () => PresenceSite[];
     bindPhysicalWorld(world: PhysicalExpeditionContext['world'], worldId: string,
         exclusions?: () => PhysicalExpeditionContext['exclusions'],
-        ships?: () => PhysicalExpeditionContext['longshipOrigins']): void {
+        ships?: () => PhysicalExpeditionContext['longshipOrigins'],
+        residents?: () => PresenceSite[]): void {
         const fullWorld = world as WorldBlueprint;
         const context = { world, worldId, ...(fullWorld.config && fullWorld.coast && fullWorld.biomes && fullWorld.placementPlan ? { wildlifeWorld: fullWorld } : {}) };
         assertMiningWorld(this.state, world, worldId);
         assertSpatialWorld(this.state, context);
         assertWildlifeWorld(this.state, context);
+        assertTerritorialWorld(this.state, context);
         this.physicalWorld = context;
         this.physicalExclusions = exclusions;
         this.physicalShips = ships;
+        this.physicalResidents = residents;
     }
     private physicalContext() {
         return this.physicalWorld && { ...this.physicalWorld, exclusions: this.physicalExclusions?.(),
             longshipOrigins: this.physicalShips?.() };
+    }
+    initializeTerritory(): void {
+        const context = this.physicalContext();
+        const next = initializeTerritorialAwareness(this.state, context && {
+            ...context, ...(!this.state.world?.territory ? { presenceSites: this.physicalResidents?.() } : {}),
+        });
+        this.state = next;
+        this.invalidateRead();
     }
     boardLongshipOffer(groupId: string, shipId: string, origins?: Record<string, { x: number; z: number }>) {
         return boardLongshipOffer(this.state, groupId, shipId, this.physicalContext(), origins);
@@ -81,7 +97,7 @@ export class GameplaySession {
         this.readState = undefined;
         this.serializedState = undefined;
     }
-    private attentionIndex = new AttentionHistoryIndex([wildlifeAttentionAdapter]);
+    private attentionIndex = new AttentionHistoryIndex([wildlifeAttentionAdapter, territoryAttentionAdapter]);
     attentionHistory() {
         this.attentionIndex.append(this.state.events);
         return this.attentionIndex;
@@ -136,7 +152,7 @@ export class GameplaySession {
     }
     initializeMining(world: WorldBlueprint, worldId: string): void {
         this.state = initializePhysicalMining(this.state, world, worldId);
-        this.bindPhysicalWorld(world, worldId, this.physicalExclusions, this.physicalShips);
+        this.bindPhysicalWorld(world, worldId, this.physicalExclusions, this.physicalShips, this.physicalResidents);
         this.invalidateRead();
     }
     initializeDiscovery(world: WorldBlueprint, worldId: string): void {
@@ -286,7 +302,7 @@ export class GameplaySession {
     private replace(state: SimulationState, fresh = true): void {
         this.physicalWorld = undefined;
         this.physicalExclusions = undefined;
-        this.attentionIndex = new AttentionHistoryIndex([wildlifeAttentionAdapter]);
+        this.attentionIndex = new AttentionHistoryIndex([wildlifeAttentionAdapter, territoryAttentionAdapter]);
         this.familyIndex = new FamilyTreeIndex();
         this.personalIndex = new PersonalHistoryIndex();
         this.wildlifeIndex = new WildlifeHistoryIndex();

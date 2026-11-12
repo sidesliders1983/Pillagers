@@ -1,0 +1,783 @@
+{
+  "status": "passed",
+  "source": {
+    "head": "e78658217023a048c06449f2e35310c140229fbb",
+    "sourceHashes": {
+      "src/simulation/TerritorialAwareness.ts": "39c7bbb07ebbded0bc22fa274746b7171371fcad32cecffe4dec10a376a829be",
+      "src/simulation/ResidentPresence.ts": "d842ec193d84b152a3e739735f85448975afd8d194ea464dd4f69ea60be1c7a4",
+      "src/simulation/SimulationCore.ts": "0def97b1e66d11949eb79fe112d2d2aa73c3b67068ab98d2075bf2f410bfdea1",
+      "src/fjord-play/FjordCampaign.ts": "0ad15961e27d3e15b4c55d0d439c2df1302fc7a3cee3f03dbc5c30e31cf54ebc",
+      "src/world-generation/LandRoutes.ts": "1a2dc21920bc51908947de1c9149b686f7153fbbf9566205eeb9ba6e580cbebe"
+    },
+    "dirtyTracked": null,
+    "bakedSHA256": "b8a1f5444187113b825fe1ead69ec5da49b65451bae5d7a6e43d300fd7b67c39",
+    "bakedCanonicalSHA256": "c9bf0343274e49065387cf18effdda291764bf727a6cae1dab10db78eeea39a8"
+  },
+  "measurement": "One fresh Node process per variant;20 warmup ticks,250 measured public Core AdvanceTicks1 commands including clone+validation; no Winter transition. Eight children ran sequentially without competing heavy tests/build/browser work.",
+  "contextControl": "Both variants use the same immutable actual adopted-public-projection exclusion set, bound before public dispatch; same context hash, RNG, biological cohorts, accepted member routes and reached progress are asserted.",
+  "cases": [
+    {
+      "thresholdPerClan": 50,
+      "groups": 1,
+      "dispatchPopulation": [
+        {
+          "id": "founding-clan",
+          "living": 72,
+          "indoorUnder5": 18,
+          "outdoorAge5plus": 54,
+          "workAge": 10,
+          "adultAge": 10,
+          "providingCare": 0,
+          "pendingBirths": 0,
+          "births": 62,
+          "secondGeneration": 0,
+          "households": 5,
+          "events": 1084
+        },
+        {
+          "id": "island-rival",
+          "living": 51,
+          "indoorUnder5": 5,
+          "outdoorAge5plus": 46,
+          "workAge": 10,
+          "adultAge": 10,
+          "providingCare": 0,
+          "pendingBirths": 0,
+          "births": 41,
+          "secondGeneration": 0,
+          "households": 6,
+          "events": 917
+        }
+      ],
+      "measuredStartPopulation": [
+        {
+          "id": "founding-clan",
+          "living": 72,
+          "indoorUnder5": 17,
+          "outdoorAge5plus": 55,
+          "workAge": 10,
+          "adultAge": 10,
+          "providingCare": 0,
+          "pendingBirths": 0,
+          "births": 62,
+          "secondGeneration": 0,
+          "households": 5,
+          "events": 1087
+        },
+        {
+          "id": "island-rival",
+          "living": 51,
+          "indoorUnder5": 5,
+          "outdoorAge5plus": 46,
+          "workAge": 10,
+          "adultAge": 10,
+          "providingCare": 0,
+          "pendingBirths": 0,
+          "births": 41,
+          "secondGeneration": 0,
+          "households": 6,
+          "events": 917
+        }
+      ],
+      "actualCanonicalOutdoorAtHome": {
+        "start": [
+          {
+            "id": "founding-clan",
+            "savedResidents": 72,
+            "outdoorAvailableAtHome": 52
+          },
+          {
+            "id": "island-rival",
+            "savedResidents": 51,
+            "outdoorAvailableAtHome": 46
+          }
+        ],
+        "end": [
+          {
+            "id": "founding-clan",
+            "savedResidents": 72,
+            "outdoorAvailableAtHome": 53
+          },
+          {
+            "id": "island-rival",
+            "savedResidents": 51,
+            "outdoorAvailableAtHome": 46
+          }
+        ]
+      },
+      "endPopulation": [
+        {
+          "id": "founding-clan",
+          "living": 72,
+          "indoorUnder5": 17,
+          "outdoorAge5plus": 55,
+          "workAge": 10,
+          "adultAge": 10,
+          "providingCare": 0,
+          "pendingBirths": 0,
+          "births": 62,
+          "secondGeneration": 0,
+          "households": 5,
+          "events": 1100
+        },
+        {
+          "id": "island-rival",
+          "living": 51,
+          "indoorUnder5": 5,
+          "outdoorAge5plus": 46,
+          "workAge": 10,
+          "adultAge": 10,
+          "providingCare": 0,
+          "pendingBirths": 0,
+          "births": 41,
+          "secondGeneration": 0,
+          "households": 6,
+          "events": 924
+        }
+      ],
+      "disabledMilliseconds": {
+        "p50": 30.629899999999907,
+        "p95": 43.634399999999914,
+        "max": 66.08820000000014,
+        "mean": 31.943778800000057,
+        "total": 7985.944700000015
+      },
+      "adoptedMilliseconds": {
+        "p50": 54.240200000000186,
+        "p95": 121.57040000000052,
+        "max": 330.8634999999995,
+        "mean": 68.86063519999993,
+        "total": 17215.158799999983
+      },
+      "delta": {
+        "p50Milliseconds": 23.61030000000028,
+        "p95Milliseconds": 77.9360000000006,
+        "p95Ratio": 2.7861137084502308,
+        "postGCHeapBytes": -1345432,
+        "postGCRSSBytes": -155648,
+        "serializedStartBytes": 45368,
+        "serializedEndBytes": 59979
+      },
+      "memory": {
+        "disabledPostGC": {
+          "rss": 352690176,
+          "heapTotal": 204087296,
+          "heapUsed": 63085664,
+          "external": 23905503,
+          "arrayBuffers": 162111
+        },
+        "adoptedPostGC": {
+          "rss": 352534528,
+          "heapTotal": 203370496,
+          "heapUsed": 61740232,
+          "external": 23901682,
+          "arrayBuffers": 162111
+        }
+      },
+      "serializedCore": {
+        "disabled": {
+          "startBytes": 707871,
+          "endBytes": 713595,
+          "deltaBytes": 5724
+        },
+        "adopted": {
+          "startBytes": 753239,
+          "endBytes": 773574,
+          "deltaBytes": 20335
+        }
+      },
+      "phases": {
+        "no-incident": 74,
+        "Alerted": 25,
+        "Hostile": 151
+      },
+      "responderCountByTick": {
+        "0": 74,
+        "2": 176
+      },
+      "sameContextHash": true,
+      "sharedContextHash": "8ba5c47ab4368cf14b1865d9c6f9c0d6d2658677eac72514dfe35e433654698f",
+      "sameReachedRoutes": true
+    },
+    {
+      "thresholdPerClan": 50,
+      "groups": 2,
+      "dispatchPopulation": [
+        {
+          "id": "founding-clan",
+          "living": 72,
+          "indoorUnder5": 18,
+          "outdoorAge5plus": 54,
+          "workAge": 10,
+          "adultAge": 10,
+          "providingCare": 0,
+          "pendingBirths": 0,
+          "births": 62,
+          "secondGeneration": 0,
+          "households": 5,
+          "events": 1087
+        },
+        {
+          "id": "island-rival",
+          "living": 51,
+          "indoorUnder5": 5,
+          "outdoorAge5plus": 46,
+          "workAge": 10,
+          "adultAge": 10,
+          "providingCare": 0,
+          "pendingBirths": 0,
+          "births": 41,
+          "secondGeneration": 0,
+          "households": 6,
+          "events": 917
+        }
+      ],
+      "measuredStartPopulation": [
+        {
+          "id": "founding-clan",
+          "living": 72,
+          "indoorUnder5": 17,
+          "outdoorAge5plus": 55,
+          "workAge": 10,
+          "adultAge": 10,
+          "providingCare": 0,
+          "pendingBirths": 0,
+          "births": 62,
+          "secondGeneration": 0,
+          "households": 5,
+          "events": 1091
+        },
+        {
+          "id": "island-rival",
+          "living": 51,
+          "indoorUnder5": 5,
+          "outdoorAge5plus": 46,
+          "workAge": 10,
+          "adultAge": 10,
+          "providingCare": 0,
+          "pendingBirths": 0,
+          "births": 41,
+          "secondGeneration": 0,
+          "households": 6,
+          "events": 917
+        }
+      ],
+      "actualCanonicalOutdoorAtHome": {
+        "start": [
+          {
+            "id": "founding-clan",
+            "savedResidents": 72,
+            "outdoorAvailableAtHome": 50
+          },
+          {
+            "id": "island-rival",
+            "savedResidents": 51,
+            "outdoorAvailableAtHome": 46
+          }
+        ],
+        "end": [
+          {
+            "id": "founding-clan",
+            "savedResidents": 72,
+            "outdoorAvailableAtHome": 51
+          },
+          {
+            "id": "island-rival",
+            "savedResidents": 51,
+            "outdoorAvailableAtHome": 46
+          }
+        ]
+      },
+      "endPopulation": [
+        {
+          "id": "founding-clan",
+          "living": 72,
+          "indoorUnder5": 17,
+          "outdoorAge5plus": 55,
+          "workAge": 10,
+          "adultAge": 10,
+          "providingCare": 0,
+          "pendingBirths": 0,
+          "births": 62,
+          "secondGeneration": 0,
+          "households": 5,
+          "events": 1110
+        },
+        {
+          "id": "island-rival",
+          "living": 51,
+          "indoorUnder5": 5,
+          "outdoorAge5plus": 46,
+          "workAge": 10,
+          "adultAge": 10,
+          "providingCare": 0,
+          "pendingBirths": 0,
+          "births": 41,
+          "secondGeneration": 0,
+          "households": 6,
+          "events": 924
+        }
+      ],
+      "disabledMilliseconds": {
+        "p50": 32.78720000000067,
+        "p95": 53.81130000000121,
+        "max": 68.92370000000119,
+        "mean": 34.57227239999998,
+        "total": 8643.068099999995
+      },
+      "adoptedMilliseconds": {
+        "p50": 55.887399999999616,
+        "p95": 123.0568000000003,
+        "max": 390.90660000000025,
+        "mean": 68.90519520000007,
+        "total": 17226.298800000015
+      },
+      "delta": {
+        "p50Milliseconds": 23.10019999999895,
+        "p95Milliseconds": 69.24549999999908,
+        "p95Ratio": 2.286820797862113,
+        "postGCHeapBytes": -1262264,
+        "postGCRSSBytes": 958464,
+        "serializedStartBytes": 45176,
+        "serializedEndBytes": 64632
+      },
+      "memory": {
+        "disabledPostGC": {
+          "rss": 352620544,
+          "heapTotal": 203563008,
+          "heapUsed": 63309168,
+          "external": 23905503,
+          "arrayBuffers": 162111
+        },
+        "adoptedPostGC": {
+          "rss": 353579008,
+          "heapTotal": 205467648,
+          "heapUsed": 62046904,
+          "external": 23901682,
+          "arrayBuffers": 162111
+        }
+      },
+      "serializedCore": {
+        "disabled": {
+          "startBytes": 720285,
+          "endBytes": 728471,
+          "deltaBytes": 8186
+        },
+        "adopted": {
+          "startBytes": 765461,
+          "endBytes": 793103,
+          "deltaBytes": 27642
+        }
+      },
+      "phases": {
+        "no-incident": 74,
+        "Alerted": 5,
+        "Alerted+Suspicious": 5,
+        "Alerted+Alerted": 15,
+        "Alerted+Hostile": 10,
+        "Hostile+Hostile": 141
+      },
+      "responderCountByTick": {
+        "0": 74,
+        "2": 5,
+        "4": 171
+      },
+      "sameContextHash": true,
+      "sharedContextHash": "8ba5c47ab4368cf14b1865d9c6f9c0d6d2658677eac72514dfe35e433654698f",
+      "sameReachedRoutes": true
+    },
+    {
+      "thresholdPerClan": 100,
+      "groups": 1,
+      "dispatchPopulation": [
+        {
+          "id": "founding-clan",
+          "living": 126,
+          "indoorUnder5": 43,
+          "outdoorAge5plus": 83,
+          "workAge": 49,
+          "adultAge": 41,
+          "providingCare": 0,
+          "pendingBirths": 4,
+          "births": 116,
+          "secondGeneration": 46,
+          "households": 16,
+          "events": 1993
+        },
+        {
+          "id": "island-rival",
+          "living": 102,
+          "indoorUnder5": 45,
+          "outdoorAge5plus": 57,
+          "workAge": 40,
+          "adultAge": 35,
+          "providingCare": 0,
+          "pendingBirths": 5,
+          "births": 92,
+          "secondGeneration": 51,
+          "households": 17,
+          "events": 1756
+        }
+      ],
+      "measuredStartPopulation": [
+        {
+          "id": "founding-clan",
+          "living": 127,
+          "indoorUnder5": 44,
+          "outdoorAge5plus": 83,
+          "workAge": 49,
+          "adultAge": 42,
+          "providingCare": 0,
+          "pendingBirths": 3,
+          "births": 117,
+          "secondGeneration": 47,
+          "households": 16,
+          "events": 1996
+        },
+        {
+          "id": "island-rival",
+          "living": 103,
+          "indoorUnder5": 46,
+          "outdoorAge5plus": 57,
+          "workAge": 40,
+          "adultAge": 35,
+          "providingCare": 0,
+          "pendingBirths": 4,
+          "births": 93,
+          "secondGeneration": 52,
+          "households": 17,
+          "events": 1757
+        }
+      ],
+      "actualCanonicalOutdoorAtHome": {
+        "start": [
+          {
+            "id": "founding-clan",
+            "savedResidents": 127,
+            "outdoorAvailableAtHome": 81
+          },
+          {
+            "id": "island-rival",
+            "savedResidents": 103,
+            "outdoorAvailableAtHome": 57
+          }
+        ],
+        "end": [
+          {
+            "id": "founding-clan",
+            "savedResidents": 127,
+            "outdoorAvailableAtHome": 82
+          },
+          {
+            "id": "island-rival",
+            "savedResidents": 104,
+            "outdoorAvailableAtHome": 58
+          }
+        ]
+      },
+      "endPopulation": [
+        {
+          "id": "founding-clan",
+          "living": 127,
+          "indoorUnder5": 43,
+          "outdoorAge5plus": 84,
+          "workAge": 51,
+          "adultAge": 44,
+          "providingCare": 0,
+          "pendingBirths": 3,
+          "births": 117,
+          "secondGeneration": 47,
+          "households": 16,
+          "events": 2010
+        },
+        {
+          "id": "island-rival",
+          "living": 104,
+          "indoorUnder5": 46,
+          "outdoorAge5plus": 58,
+          "workAge": 41,
+          "adultAge": 37,
+          "providingCare": 0,
+          "pendingBirths": 3,
+          "births": 94,
+          "secondGeneration": 53,
+          "households": 17,
+          "events": 1766
+        }
+      ],
+      "disabledMilliseconds": {
+        "p50": 54.96650000000045,
+        "p95": 66.86499999999978,
+        "max": 81.48630000000048,
+        "mean": 55.9090856,
+        "total": 13977.2714
+      },
+      "adoptedMilliseconds": {
+        "p50": 118.21709999999803,
+        "p95": 191.73619999999937,
+        "max": 394.1260000000002,
+        "mean": 125.02600720000001,
+        "total": 31256.501800000002
+      },
+      "delta": {
+        "p50Milliseconds": 63.250599999997576,
+        "p95Milliseconds": 124.87119999999959,
+        "p95Ratio": 2.8675121513497346,
+        "postGCHeapBytes": -1126640,
+        "postGCRSSBytes": 831488,
+        "serializedStartBytes": 89078,
+        "serializedEndBytes": 102697
+      },
+      "memory": {
+        "disabledPostGC": {
+          "rss": 353468416,
+          "heapTotal": 206184448,
+          "heapUsed": 64748680,
+          "external": 23905503,
+          "arrayBuffers": 162111
+        },
+        "adoptedPostGC": {
+          "rss": 354299904,
+          "heapTotal": 205729792,
+          "heapUsed": 63622040,
+          "external": 23901682,
+          "arrayBuffers": 162111
+        }
+      },
+      "serializedCore": {
+        "disabled": {
+          "startBytes": 1392875,
+          "endBytes": 1400699,
+          "deltaBytes": 7824
+        },
+        "adopted": {
+          "startBytes": 1481953,
+          "endBytes": 1503396,
+          "deltaBytes": 21443
+        }
+      },
+      "phases": {
+        "no-incident": 69,
+        "Suspicious": 5,
+        "Alerted": 25,
+        "Hostile": 151
+      },
+      "responderCountByTick": {
+        "0": 69,
+        "2": 181
+      },
+      "sameContextHash": true,
+      "sharedContextHash": "ddd3d8d6eee5277190bc92af5dae03729b6540a9c5423bc4edfd8ba75656613a",
+      "sameReachedRoutes": true
+    },
+    {
+      "thresholdPerClan": 100,
+      "groups": 2,
+      "dispatchPopulation": [
+        {
+          "id": "founding-clan",
+          "living": 126,
+          "indoorUnder5": 43,
+          "outdoorAge5plus": 83,
+          "workAge": 49,
+          "adultAge": 41,
+          "providingCare": 0,
+          "pendingBirths": 4,
+          "births": 116,
+          "secondGeneration": 46,
+          "households": 16,
+          "events": 1996
+        },
+        {
+          "id": "island-rival",
+          "living": 102,
+          "indoorUnder5": 45,
+          "outdoorAge5plus": 57,
+          "workAge": 40,
+          "adultAge": 35,
+          "providingCare": 0,
+          "pendingBirths": 5,
+          "births": 92,
+          "secondGeneration": 51,
+          "households": 17,
+          "events": 1756
+        }
+      ],
+      "measuredStartPopulation": [
+        {
+          "id": "founding-clan",
+          "living": 127,
+          "indoorUnder5": 44,
+          "outdoorAge5plus": 83,
+          "workAge": 49,
+          "adultAge": 42,
+          "providingCare": 0,
+          "pendingBirths": 3,
+          "births": 117,
+          "secondGeneration": 47,
+          "households": 16,
+          "events": 2000
+        },
+        {
+          "id": "island-rival",
+          "living": 103,
+          "indoorUnder5": 46,
+          "outdoorAge5plus": 57,
+          "workAge": 40,
+          "adultAge": 35,
+          "providingCare": 0,
+          "pendingBirths": 4,
+          "births": 93,
+          "secondGeneration": 52,
+          "households": 17,
+          "events": 1757
+        }
+      ],
+      "actualCanonicalOutdoorAtHome": {
+        "start": [
+          {
+            "id": "founding-clan",
+            "savedResidents": 127,
+            "outdoorAvailableAtHome": 79
+          },
+          {
+            "id": "island-rival",
+            "savedResidents": 103,
+            "outdoorAvailableAtHome": 57
+          }
+        ],
+        "end": [
+          {
+            "id": "founding-clan",
+            "savedResidents": 127,
+            "outdoorAvailableAtHome": 80
+          },
+          {
+            "id": "island-rival",
+            "savedResidents": 104,
+            "outdoorAvailableAtHome": 58
+          }
+        ]
+      },
+      "endPopulation": [
+        {
+          "id": "founding-clan",
+          "living": 127,
+          "indoorUnder5": 43,
+          "outdoorAge5plus": 84,
+          "workAge": 51,
+          "adultAge": 44,
+          "providingCare": 0,
+          "pendingBirths": 3,
+          "births": 117,
+          "secondGeneration": 47,
+          "households": 16,
+          "events": 2019
+        },
+        {
+          "id": "island-rival",
+          "living": 104,
+          "indoorUnder5": 46,
+          "outdoorAge5plus": 58,
+          "workAge": 41,
+          "adultAge": 37,
+          "providingCare": 0,
+          "pendingBirths": 3,
+          "births": 94,
+          "secondGeneration": 53,
+          "households": 17,
+          "events": 1765
+        }
+      ],
+      "disabledMilliseconds": {
+        "p50": 56.40740000000005,
+        "p95": 78.89420000000064,
+        "max": 97.78830000000016,
+        "mean": 58.81895440000004,
+        "total": 14704.73860000001
+      },
+      "adoptedMilliseconds": {
+        "p50": 107.35970000000088,
+        "p95": 145.83439999999973,
+        "max": 191.2725999999966,
+        "mean": 109.91690519999997,
+        "total": 27479.226299999995
+      },
+      "delta": {
+        "p50Milliseconds": 50.95230000000083,
+        "p95Milliseconds": 66.9401999999991,
+        "p95Ratio": 1.8484806234171658,
+        "postGCHeapBytes": -1083640,
+        "postGCRSSBytes": -978944,
+        "serializedStartBytes": 88874,
+        "serializedEndBytes": 105500
+      },
+      "memory": {
+        "disabledPostGC": {
+          "rss": 355262464,
+          "heapTotal": 205135872,
+          "heapUsed": 64926760,
+          "external": 23905503,
+          "arrayBuffers": 162111
+        },
+        "adoptedPostGC": {
+          "rss": 354283520,
+          "heapTotal": 205467648,
+          "heapUsed": 63843120,
+          "external": 23901682,
+          "arrayBuffers": 162111
+        }
+      },
+      "serializedCore": {
+        "disabled": {
+          "startBytes": 1405289,
+          "endBytes": 1415401,
+          "deltaBytes": 10112
+        },
+        "adopted": {
+          "startBytes": 1494163,
+          "endBytes": 1520901,
+          "deltaBytes": 26738
+        }
+      },
+      "phases": {
+        "no-incident": 69,
+        "Suspicious": 5,
+        "Alerted+Suspicious": 10,
+        "Alerted+Alerted": 15,
+        "Alerted+Hostile": 10,
+        "Hostile+Hostile": 141
+      },
+      "responderCountByTick": {
+        "0": 69,
+        "2": 5,
+        "4": 176
+      },
+      "sameContextHash": true,
+      "sharedContextHash": "ddd3d8d6eee5277190bc92af5dae03729b6540a9c5423bc4edfd8ba75656613a",
+      "sameReachedRoutes": true
+    }
+  ],
+  "memoryLimit": "Fresh-process post-GC heap/RSS include runtime/projection caches and V8 allocator arenas. Negative deltas are not evidence of feature memory savings. Serialized Core bytes provide a separate deterministic size comparison.",
+  "otherLimits": [
+    "Stress-growth configuration is explicit; zero care/cooldown is not production balance. Default fertility/care25-year fixture is separate correctness evidence.",
+    "Single production island/seed and one fresh process per variant; no physical-device thermals, GPU or browser FPS claim.",
+    "Measured start population can exceed dispatch population because genuine individual births occur during warmup; actual start/end counts are retained.",
+    "The e786100g1 tail differs materially from ce43. These single-workstation samples do not establish a causal performance effect of the mine/home guard."
+  ],
+  "correctness": {
+    "finalCatalog": "final-pin-e7865821.json",
+    "optimizationParity": "optimization-parity.json",
+    "stressGrowth": "growth-report.json",
+    "defaultCareGrowth": "default-care-growth-report.json",
+    "historicalProfile": "0041b92b-cpu-profile-summary.json",
+    "rawProfile": "0041b92b-adopted-50-groups-2.cpuprofile",
+    "routingCallers": "0041b92b-routing-callers.json"
+  },
+  "reproduction": {
+    "scripts": "reproduce-portable",
+    "protocol": "benchmark-protocol.json",
+    "hashes": "executed-script-hashes.json"
+  },
+  "interpretation": "Material awareness overhead remains: adopted p95 spans 121.57–191.74 ms versus disabled 43.63–78.89 ms. This is not a browser FPS or production performance-budget pass."
+}

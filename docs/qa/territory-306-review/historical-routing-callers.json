@@ -1,0 +1,50 @@
+[
+  {
+    "callerPath": [
+      "(root)",
+      "(anonymous)",
+      "applyCommand",
+      "stepTerritorialAwareness",
+      "advanceResidentPresence",
+      "setPresenceRoute"
+    ],
+    "selfSamples": 2054,
+    "inclusiveSamples": 2809
+  },
+  {
+    "callerPath": [
+      "(root)",
+      "(anonymous)",
+      "applyCommand",
+      "stepTerritorialAwareness",
+      "assignResponders",
+      "setPresenceRoute"
+    ],
+    "selfSamples": 861,
+    "inclusiveSamples": 875
+  },
+  {
+    "callerPath": [
+      "(anonymous)",
+      "applyCommand",
+      "stepTerritorialAwareness",
+      "changeIncident",
+      "assignResponders",
+      "setPresenceRoute"
+    ],
+    "selfSamples": 36,
+    "inclusiveSamples": 38
+  },
+  {
+    "callerPath": [
+      "(anonymous)",
+      "applyCommand",
+      "stepTerritorialAwareness",
+      "advanceResidentPresence",
+      "updateIndoorPlacement",
+      "setPresenceRoute"
+    ],
+    "selfSamples": 3,
+    "inclusiveSamples": 3
+  }
+]

@@ -8,6 +8,7 @@ import { personaAge } from './PersonaAge';
 import { personaIdentity } from './Identity';
 import { inspectWeather, weatherFacts } from './Weather';
 import { personaAway } from './WorldExpeditions';
+import { presenceIndoors, territorialDuty } from './ResidentPresence';
 import type { GameTime, SimulationEvent, SimulationState } from './SimulationCore';
 
 export type CulturalOccasion = 'storytelling_music' | 'communal_ceremony' | 'wedding';
@@ -77,7 +78,7 @@ export function availableCulturalParticipants(state: SimulationState): CulturalP
     return Object.keys(state.personas).sort().filter(id => {
         const person = state.personas[id];
         return person.deathWinter === null && personaAge(state, id) >= state.mechanics!.config.adultAge &&
-            !personaAway(state, id) && !miningBusy(state, id) && !care.has(id);
+            !personaAway(state, id) && !miningBusy(state, id) && !territorialDuty(state, id) && !presenceIndoors(state, id) && !care.has(id);
     }).map(id => ({ id, name: state.personas[id].name, age: personaAge(state, id) }));
 }
 export type WeddingCandidate = {

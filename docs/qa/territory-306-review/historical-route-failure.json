@@ -1,0 +1,42 @@
+{
+  "time": {
+    "winter": 816,
+    "tick": 577
+  },
+  "failures": [
+    {
+      "clan": "island-rival",
+      "id": "island-rival:persona-16",
+      "mode": "local",
+      "home": {
+        "x": -30,
+        "z": -51
+      },
+      "current": {
+        "x": -30.6,
+        "z": -51
+      },
+      "routeIndex": 1,
+      "first": {
+        "x": -30.6,
+        "z": -51
+      },
+      "last": {
+        "x": -31,
+        "z": -44
+      },
+      "sample": {
+        "x": -30.653333333333336,
+        "z": -50.06666666666667
+      },
+      "priorHeight": 0.9977386967341145,
+      "fact": {
+        "nav": false,
+        "height": 1.059130200942358,
+        "inside": true
+      },
+      "deltaHeight": 0.061391504208243464,
+      "allowed": 0.3038291678112738
+    }
+  ]
+}

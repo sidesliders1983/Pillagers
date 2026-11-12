@@ -1,0 +1,146 @@
+{
+  "status": "passed",
+  "origin": "http://127.0.0.1:5198",
+  "chrome": "157.0.8103.52",
+  "continuationOf": "run-1794472167229",
+  "scenarios": [
+    {
+      "mode": "desktop",
+      "kind": "returned-history-normal-continue-reload",
+      "chain": {
+        "eventIds": [
+          "event-13",
+          "event-14",
+          "event-15"
+        ],
+        "eventTypes": [
+          "TerritoryIncidentOpened",
+          "TerritoryIncidentChanged",
+          "TerritoryIncidentClosed"
+        ],
+        "historyCopy": "Overview\nHistory\nBack to history\nTerritorial encounter\nMark these events read\nYear 800 · tick 645\nThe settlement lost contact with the expedition party and the incident ended.\n›\nYear 800 · tick 595\nThe settlement warned the expedition party to withdraw.\n›\nYear 800 · tick 590\nAn expedition party was noticed near the settlement perimeter.\n›"
+      }
+    },
+    {
+      "mode": "touch-landscape",
+      "kind": "benign",
+      "time": {
+        "winter": 800,
+        "tick": 598
+      },
+      "incidents": 0
+    },
+    {
+      "mode": "touch-landscape",
+      "kind": "perimeter",
+      "incidents": [
+        {
+          "id": "incident-1",
+          "defendingClanId": "island-rival",
+          "intrudingClanId": "founding-clan",
+          "missionId": "explore-1",
+          "groupId": "group-1",
+          "groupName": "Coast watch",
+          "phase": "Suspicious",
+          "reason": "perimeter-sighting",
+          "openedAt": 800590,
+          "changedAt": 800590,
+          "lastSeenAt": 800590,
+          "warnedAt": null,
+          "closedAt": null,
+          "position": {
+            "x": 18,
+            "z": -88
+          },
+          "observation": {
+            "tick": 800590,
+            "observerId": "island-rival:founder-7",
+            "intruderId": "founder-1",
+            "observerPosition": {
+              "x": 12,
+              "z": -61
+            },
+            "intruderPosition": {
+              "x": 18,
+              "z": -88
+            }
+          },
+          "responderIds": [
+            "island-rival:founder-7",
+            "island-rival:founder-2"
+          ],
+          "sourceEventIds": [
+            "event-15"
+          ],
+          "observedByPlayer": true,
+          "engagement": null
+        }
+      ]
+    },
+    {
+      "mode": "touch-landscape",
+      "kind": "warning-withdrawal",
+      "time": {
+        "winter": 800,
+        "tick": 692
+      },
+      "incidents": [
+        {
+          "id": "incident-1",
+          "defendingClanId": "island-rival",
+          "intrudingClanId": "founding-clan",
+          "missionId": "explore-1",
+          "groupId": "group-1",
+          "groupName": "Coast watch",
+          "phase": "Closed",
+          "reason": "lost-contact",
+          "openedAt": 800590,
+          "changedAt": 800645,
+          "lastSeenAt": 800595,
+          "warnedAt": 800595,
+          "closedAt": 800645,
+          "position": {
+            "x": 18,
+            "z": -75.08326112068514
+          },
+          "observation": {
+            "tick": 800595,
+            "observerId": "island-rival:founder-2",
+            "intruderId": "founder-1",
+            "observerPosition": {
+              "x": 1.0000000000000002,
+              "z": -54
+            },
+            "intruderPosition": {
+              "x": 18,
+              "z": -75.08326112068514
+            }
+          },
+          "responderIds": [],
+          "sourceEventIds": [
+            "event-15",
+            "event-16",
+            "event-17"
+          ],
+          "observedByPlayer": true,
+          "engagement": null
+        }
+      ],
+      "chain": {
+        "eventIds": [
+          "event-15",
+          "event-16",
+          "event-17"
+        ],
+        "eventTypes": [
+          "TerritoryIncidentOpened",
+          "TerritoryIncidentChanged",
+          "TerritoryIncidentClosed"
+        ],
+        "historyCopy": "Overview\nHistory\nBack to history\nTerritorial encounter\nMark these events read\nYear 800 · tick 645\nThe settlement lost contact with the expedition party and the incident ended.\n›\nYear 800 · tick 595\nThe settlement warned the expedition party to withdraw.\n›\nYear 800 · tick 590\nAn expedition party was noticed near the settlement perimeter.\n›"
+      }
+    }
+  ],
+  "errors": [],
+  "limitation": "Touch input is native Chrome emulation, not a physical iPhone."
+}

@@ -27,7 +27,7 @@ export const campaignIslandCatalog = {
         "src/world-generation/IslandShape.ts": "9da05b4325c3dce7ec3329dde917a30f8e12a5563130b6bf04dd059d67d2aae4",
         "src/world-generation/IslandShapeQuality.ts": "cc29d38e123307e71b3e1fb0a76bb1b80e9407dcf8f79f81321341a82d2282f0",
         "src/world-generation/IslandShapeV1.ts": "b06dd485ccdd82f27ba64f678006cf905cd9d85a0e997e574b0e972b1072c473",
-        "src/world-generation/LandRoutes.ts": "062388811fea5214d08445d986b8f9b72ee3ffb342c015755c0f4e995afdbe66",
+        "src/world-generation/LandRoutes.ts": "1a2dc21920bc51908947de1c9149b686f7153fbbf9566205eeb9ba6e580cbebe",
         "src/world-generation/MacroIsland.ts": "4804a88cc9a2a79dd5d661b42faa8c319e19ad3b278b11956becd3f6ab81c5be",
         "src/world-generation/NatureFootprints.ts": "96f3fbaf8a90414f0ccc7a69725d674600900329ff13e8d05bd739b84f88c37c",
         "src/world-generation/OreSites.ts": "780d57a15fcf7b0b51ce9d6db2719d7407857ddc02ac5d961d644eaa6351084a",

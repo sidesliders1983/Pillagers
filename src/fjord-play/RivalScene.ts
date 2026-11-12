@@ -4,6 +4,7 @@ import type { ObservedRivalSettlement } from './RivalSettlement';
 import { FjordEntities } from './FjordEntities';
 import type { FjordModels } from './FjordModels';
 import { LivingWorldController } from './LivingWorldController';
+import { settlementCampfire } from './SettlementCampfire';
 import type { SeasonAppearance } from '../world/SeasonAppearanceTransition';
 import type { Object3D, Texture } from 'three';
 
@@ -12,6 +13,7 @@ export class RivalScene {
     private layer: FjordEntities;
     private motion?: LivingWorldController;
     private disposed = false;
+    private canonicalPresence = false;
     constructor(private world: WorldBlueprint, models: FjordModels, private knowledge: () => DiscoveryView | undefined,
         decorateMaterials?: (root: Object3D) => void, homeMasks?: ReadonlyMap<string, Texture>) {
         // Newly observed houses are knowledge updates, not witnessed construction commands.
@@ -25,7 +27,8 @@ export class RivalScene {
     setHomeDarkness(darkness: number) { this.layer.setHomeDarkness(darkness); }
     setSeasonAppearance(appearance: SeasonAppearance) { this.layer.setSeasonAppearance(appearance); }
     async sync(view: ObservedRivalSettlement, season: number,
-        trees: Parameters<LivingWorldController['setStandingTrees']>[0], appearance?: SeasonAppearance) {
+        trees: Parameters<LivingWorldController['setStandingTrees']>[0], appearance?: SeasonAppearance,
+        presenceTickSeconds = .5) {
         if (this.disposed) return;
         if (appearance) this.layer.setSeasonAppearance(appearance);
         else this.layer.setSeason(season);
@@ -39,15 +42,20 @@ export class RivalScene {
         });
         await this.layer.sync(view.entities, undefined, () => !this.disposed, deaths);
         if (this.disposed) return;
-        if (!this.motion && view.entities.length && view.campfire) {
-            const bounds = this.world.rivalSite!.bounds;
+        this.canonicalPresence = view.entities.some(entity => !!entity.status.presence);
+        if (!this.motion && view.entities.length && (view.campfire || this.canonicalPresence)) {
+            const site = this.world.rivalSite!;
+            const bounds = site.bounds;
+            const campfire = view.campfire ?? settlementCampfire(this.world,
+                { id: site.candidateId + ':campfire', center: site.center });
             this.motion = new LivingWorldController(this.world, (x, z) => {
                 const knowledge = this.knowledge();
                 return Boolean(knowledge && discoveryAt(knowledge, x, z) === 'visible' &&
-                    x >= bounds.minX && x <= bounds.maxX && z >= bounds.minZ && z <= bounds.maxZ);
-            }, view.campfire);
+                    (this.canonicalPresence || x >= bounds.minX && x <= bounds.maxX && z >= bounds.minZ && z <= bounds.maxZ));
+            }, campfire);
         }
         if (this.motion) {
+            this.motion.setPresenceTickSeconds(presenceTickSeconds);
             this.motion.reconcile(view.entities, view.ground);
             this.motion.setStandingTrees(trees);
             this.layer.configureMotion(this.motion);

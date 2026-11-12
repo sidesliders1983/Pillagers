@@ -6,9 +6,14 @@ export interface LandRouteContext {
     exclusions?: readonly Bounds2[];
 }
 export const maximumTargetCorrection = 8;
+export interface LandRouteOptions {
+    strictNavigation?: boolean;
+    allowTargetAdjustment?: boolean;
+}
 
 /** Bounded search on the existing grid. Diagonals cannot cut blocked cell or building corners. */
-export function planRoute(context: LandRouteContext, target: Point2, origin?: Point2, eightWay = false) {
+export function planRoute(context: LandRouteContext, target: Point2, origin?: Point2, eightWay = false,
+    options: LandRouteOptions = {}) {
     const { world } = context, nav = world.navigation, surface = createBlueprintSurface(world);
     const bounds = nav.bounds;
     const inside = (p: Point2) => p && Number.isFinite(p.x) && Number.isFinite(p.z) &&
@@ -20,6 +25,8 @@ export function planRoute(context: LandRouteContext, target: Point2, origin?: Po
     });
     const index = (p: Point2) => Math.round((p.z - bounds.minZ) / nav.spacing) * nav.columns +
         Math.round((p.x - bounds.minX) / nav.spacing);
+    const supported = (p: Point2) => inside(p) && Boolean(nav.cells[index(p)]);
+    const sampleRate = options.strictNavigation ? 2 : 1;
     const free = (p: Point2) => !context.exclusions?.some(b =>
         p.x >= b.minX - .4 && p.x <= b.maxX + .4 && p.z >= b.minZ - .4 && p.z <= b.maxZ + .4);
     const safe = (i: number) => i >= 0 && i < nav.cells.length && nav.cells[i] && inside(point(i)) &&
@@ -28,6 +35,8 @@ export function planRoute(context: LandRouteContext, target: Point2, origin?: Po
     const adjusted = !safe(end);
     if (surface.surfaceHeightAt(target.x, target.z) <= world.waterLevel + .25)
         throw new Error('Choose a land destination. This spot is in the water.');
+    if (adjusted && options.allowTargetAdjustment === false)
+        throw new Error('The exact land destination is blocked.');
     if (adjusted) {
         // Touch need not hit one exact free cell. Propose nearby ground without crossing a shore or cliff.
         const radius = maximumTargetCorrection, candidates: number[] = [];
@@ -38,7 +47,7 @@ export function planRoute(context: LandRouteContext, target: Point2, origin?: Po
             const p = { x: nearest.x + dx * nav.spacing, z: nearest.z + dz * nav.spacing };
             const distance = Math.hypot(p.x - target.x, p.z - target.z);
             if (!inside(p) || distance > radius || !safe(index(p))) continue;
-            const samples = Math.max(1, Math.ceil(distance));
+            const samples = Math.max(1, Math.ceil(distance * sampleRate));
             let previous = surface.surfaceHeightAt(target.x, target.z), connected = true;
             for (let step = 1; step <= samples; step++) {
                 const q = { x: target.x + (p.x - target.x) * step / samples, z: target.z + (p.z - target.z) * step / samples };
@@ -61,12 +70,12 @@ export function planRoute(context: LandRouteContext, target: Point2, origin?: Po
     const exits = context.exclusions?.filter(b => home.x >= b.minX - .4 && home.x <= b.maxX + .4 &&
         home.z >= b.minZ - .4 && home.z <= b.maxZ + .4) ?? [];
     const connectorSafe = (p: Point2) => {
-        const length = Math.hypot(p.x - home.x, p.z - home.z), steps = Math.max(1, Math.ceil(length));
+        const length = Math.hypot(p.x - home.x, p.z - home.z), steps = Math.max(1, Math.ceil(length * sampleRate));
         let previous = surface.surfaceHeightAt(home.x, home.z);
         for (let i = 0; i <= steps; i++) {
             const q = { x: home.x + (p.x - home.x) * i / steps, z: home.z + (p.z - home.z) * i / steps };
             const height = surface.surfaceHeightAt(q.x, q.z);
-            if (height <= world.waterLevel + .25 || i > 0 && Math.abs(height - previous) > .65 * length / steps ||
+            if (options.strictNavigation && !supported(q) || height <= world.waterLevel + .25 || i > 0 && Math.abs(height - previous) > .65 * length / steps ||
                 context.exclusions?.some(b => !exits.includes(b) && q.x >= b.minX - .4 && q.x <= b.maxX + .4 &&
                     q.z >= b.minZ - .4 && q.z <= b.maxZ + .4)) return false;
             previous = height;
@@ -143,7 +152,7 @@ export function planRoute(context: LandRouteContext, target: Point2, origin?: Po
             const a = point(i), b = point(next);
             let passable = true;
             const distance = Math.hypot(b.x - a.x, b.z - a.z);
-            const samples = Math.max(1, Math.ceil(distance));
+            const samples = Math.max(1, Math.ceil(distance * sampleRate));
             let previous = surface.surfaceHeightAt(a.x, a.z);
             for (let step = 1; step <= samples; step++) {
                 const h = surface.surfaceHeightAt(a.x + (b.x - a.x) * step / samples,

@@ -12,6 +12,7 @@ export type AttentionTarget =
     | { kind: 'wildlife'; id: string };
 export interface AttentionRecord {
     eventId: string;
+    incidentId?: string;
     canonicalType: string;
     category: AttentionCategory;
     severity: AttentionSeverity;

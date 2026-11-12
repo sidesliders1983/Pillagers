@@ -1,0 +1,563 @@
+{
+  "status": "passed",
+  "source": {
+    "head": "0041b92b49dd2f0a1865eb158100a20e20e5df0c",
+    "sourceHashes": {
+      "src/simulation/TerritorialAwareness.ts": "39c7bbb07ebbded0bc22fa274746b7171371fcad32cecffe4dec10a376a829be",
+      "src/simulation/ResidentPresence.ts": "1d27db02a37c91e18931983e08defa1fddc56ce7b81825a9b3cf1571e0b8ed38",
+      "src/simulation/SimulationCore.ts": "0def97b1e66d11949eb79fe112d2d2aa73c3b67068ab98d2075bf2f410bfdea1",
+      "src/fjord-play/FjordCampaign.ts": "0ad15961e27d3e15b4c55d0d439c2df1302fc7a3cee3f03dbc5c30e31cf54ebc",
+      "src/world-generation/LandRoutes.ts": "644f5275ccded66ba8f296a42f960a352c6ba63a1090afb41a0bac2ac3ad7661"
+    },
+    "dirtyTracked": null,
+    "bakedSHA256": "b8a1f5444187113b825fe1ead69ec5da49b65451bae5d7a6e43d300fd7b67c39",
+    "bakedCanonicalSHA256": "c9bf0343274e49065387cf18effdda291764bf727a6cae1dab10db78eeea39a8"
+  },
+  "fixture": "D:\\CodexSites\\Pillagers\\scratch\\territorial-awareness-306\\scratch\\territory-review-306\\final-0041b92b-population-50-groups-2-enabled.shared.json",
+  "method": "Untimed V8 sampling profile of250 public Core AdvanceTicks1 calls after20 warmup calls. No timed benchmark runs were active. Bootstrap, warmup, serialization and metadata inspection are outside the profiling window.",
+  "profile": "D:\\CodexSites\\Pillagers\\scratch\\territorial-awareness-306\\scratch\\territory-review-306\\0041b92b-adopted-50-groups-2.cpuprofile",
+  "startTick": 520,
+  "endTime": {
+    "winter": 816,
+    "tick": 770
+  },
+  "sampleIntervalMicroseconds": 1000,
+  "sampleCount": 11934,
+  "observedProfileMicroseconds": 21261055,
+  "limit": "Sample attribution estimates CPU hot paths. Aggregated inclusive totals can count recursive/nested instances more than once; this is not a replacement for wall-clock tick timings.",
+  "selected": [
+    {
+      "functionName": "validateState",
+      "selfSamples": 291,
+      "inclusiveSamples": 2437
+    },
+    {
+      "functionName": "validateWildlife",
+      "selfSamples": 64,
+      "inclusiveSamples": 111
+    },
+    {
+      "functionName": "validateWorld",
+      "selfSamples": 21,
+      "inclusiveSamples": 539
+    },
+    {
+      "functionName": "validateSocial",
+      "selfSamples": 59,
+      "inclusiveSamples": 123
+    },
+    {
+      "functionName": "validateWildlifeSighting",
+      "selfSamples": 13,
+      "inclusiveSamples": 31
+    },
+    {
+      "functionName": "validateTerritorialAwareness",
+      "selfSamples": 26,
+      "inclusiveSamples": 134
+    },
+    {
+      "functionName": "validateResidentPresence",
+      "selfSamples": 55,
+      "inclusiveSamples": 92
+    },
+    {
+      "functionName": "isProvidingCare",
+      "selfSamples": 160,
+      "inclusiveSamples": 360
+    },
+    {
+      "functionName": "isCaregiver",
+      "selfSamples": 213,
+      "inclusiveSamples": 233
+    },
+    {
+      "functionName": "validateMechanics",
+      "selfSamples": 63,
+      "inclusiveSamples": 74
+    },
+    {
+      "functionName": "validateBirthdayCalendar",
+      "selfSamples": 2,
+      "inclusiveSamples": 2
+    },
+    {
+      "functionName": "validateLanding",
+      "selfSamples": 27,
+      "inclusiveSamples": 35
+    },
+    {
+      "functionName": "validateLivestockRules",
+      "selfSamples": 2,
+      "inclusiveSamples": 2
+    },
+    {
+      "functionName": "validateAnimalSpecies",
+      "selfSamples": 3,
+      "inclusiveSamples": 3
+    },
+    {
+      "functionName": "validateContextualSupport",
+      "selfSamples": 36,
+      "inclusiveSamples": 52
+    },
+    {
+      "functionName": "validateSmithery",
+      "selfSamples": 8,
+      "inclusiveSamples": 9
+    },
+    {
+      "functionName": "validateWeather",
+      "selfSamples": 9,
+      "inclusiveSamples": 9
+    },
+    {
+      "functionName": "validateTrade",
+      "selfSamples": 3,
+      "inclusiveSamples": 3
+    },
+    {
+      "functionName": "validateIslandIntel",
+      "selfSamples": 20,
+      "inclusiveSamples": 29
+    },
+    {
+      "functionName": "validateGroupArchive",
+      "selfSamples": 1,
+      "inclusiveSamples": 1
+    },
+    {
+      "functionName": "validateIslandClans",
+      "selfSamples": 1,
+      "inclusiveSamples": 1
+    },
+    {
+      "functionName": "validateSpatialExpeditions",
+      "selfSamples": 59,
+      "inclusiveSamples": 205
+    },
+    {
+      "functionName": "validateMemberRoute",
+      "selfSamples": 21,
+      "inclusiveSamples": 30
+    },
+    {
+      "functionName": "validateLongshipState",
+      "selfSamples": 1,
+      "inclusiveSamples": 1
+    },
+    {
+      "functionName": "validateClanDiscovery",
+      "selfSamples": 6,
+      "inclusiveSamples": 328
+    },
+    {
+      "functionName": "validatePersonaDates",
+      "selfSamples": 0,
+      "inclusiveSamples": 1
+    },
+    {
+      "functionName": "validateCommunityHearth",
+      "selfSamples": 3,
+      "inclusiveSamples": 3
+    },
+    {
+      "functionName": "assertTerritorialWorld",
+      "selfSamples": 29,
+      "inclusiveSamples": 139
+    },
+    {
+      "functionName": "assertResidentRoutes",
+      "selfSamples": 5,
+      "inclusiveSamples": 97
+    },
+    {
+      "functionName": "assertPresenceSite",
+      "selfSamples": 6,
+      "inclusiveSamples": 9
+    },
+    {
+      "functionName": "assertIslandClanWorld",
+      "selfSamples": 1,
+      "inclusiveSamples": 1
+    },
+    {
+      "functionName": "movingPresenceClear",
+      "selfSamples": 155,
+      "inclusiveSamples": 897
+    },
+    {
+      "functionName": "planRoute",
+      "selfSamples": 2954,
+      "inclusiveSamples": 3725
+    },
+    {
+      "functionName": "assertDiscoveryWorld",
+      "selfSamples": 2,
+      "inclusiveSamples": 2
+    },
+    {
+      "functionName": "assertWildlifeWorld",
+      "selfSamples": 2,
+      "inclusiveSamples": 2
+    }
+  ],
+  "topSelf": [
+    {
+      "functionName": "structuredClone",
+      "selfSamples": 3434,
+      "inclusiveSamples": 3533
+    },
+    {
+      "functionName": "planRoute",
+      "selfSamples": 2954,
+      "inclusiveSamples": 3725
+    },
+    {
+      "functionName": "(anonymous)",
+      "selfSamples": 960,
+      "inclusiveSamples": 13269
+    },
+    {
+      "functionName": "(garbage collector)",
+      "selfSamples": 604,
+      "inclusiveSamples": 604
+    },
+    {
+      "functionName": "safe",
+      "selfSamples": 316,
+      "inclusiveSamples": 502
+    },
+    {
+      "functionName": "surfaceHeightAt",
+      "selfSamples": 302,
+      "inclusiveSamples": 302
+    },
+    {
+      "functionName": "validateState",
+      "selfSamples": 291,
+      "inclusiveSamples": 2437
+    },
+    {
+      "functionName": "decode",
+      "selfSamples": 261,
+      "inclusiveSamples": 322
+    },
+    {
+      "functionName": "isCaregiver",
+      "selfSamples": 213,
+      "inclusiveSamples": 233
+    },
+    {
+      "functionName": "isProvidingCare",
+      "selfSamples": 160,
+      "inclusiveSamples": 360
+    },
+    {
+      "functionName": "traceTerrainSightline",
+      "selfSamples": 159,
+      "inclusiveSamples": 212
+    },
+    {
+      "functionName": "movingPresenceClear",
+      "selfSamples": 155,
+      "inclusiveSamples": 897
+    },
+    {
+      "functionName": "(program)",
+      "selfSamples": 140,
+      "inclusiveSamples": 140
+    },
+    {
+      "functionName": "visit",
+      "selfSamples": 99,
+      "inclusiveSamples": 955
+    },
+    {
+      "functionName": "parseCharacterDNA",
+      "selfSamples": 96,
+      "inclusiveSamples": 141
+    },
+    {
+      "functionName": "personaIdentity",
+      "selfSamples": 90,
+      "inclusiveSamples": 90
+    },
+    {
+      "functionName": "personaAway",
+      "selfSamples": 88,
+      "inclusiveSamples": 111
+    },
+    {
+      "functionName": "pop",
+      "selfSamples": 77,
+      "inclusiveSamples": 77
+    },
+    {
+      "functionName": "residentAtHome",
+      "selfSamples": 69,
+      "inclusiveSamples": 180
+    },
+    {
+      "functionName": "validateWildlife",
+      "selfSamples": 64,
+      "inclusiveSamples": 111
+    },
+    {
+      "functionName": "validateMechanics",
+      "selfSamples": 63,
+      "inclusiveSamples": 74
+    },
+    {
+      "functionName": "validateSocial",
+      "selfSamples": 59,
+      "inclusiveSamples": 123
+    },
+    {
+      "functionName": "validateSpatialExpeditions",
+      "selfSamples": 59,
+      "inclusiveSamples": 205
+    },
+    {
+      "functionName": "validateResidentPresence",
+      "selfSamples": 55,
+      "inclusiveSamples": 92
+    },
+    {
+      "functionName": "advanceResidentPresence",
+      "selfSamples": 54,
+      "inclusiveSamples": 3865
+    },
+    {
+      "functionName": "residentRouteSupported",
+      "selfSamples": 53,
+      "inclusiveSamples": 98
+    },
+    {
+      "functionName": "valid",
+      "selfSamples": 48,
+      "inclusiveSamples": 215
+    },
+    {
+      "functionName": "connectorSafe",
+      "selfSamples": 43,
+      "inclusiveSamples": 93
+    },
+    {
+      "functionName": "normalizeHeritage",
+      "selfSamples": 37,
+      "inclusiveSamples": 43
+    },
+    {
+      "functionName": "validateContextualSupport",
+      "selfSamples": 36,
+      "inclusiveSamples": 52
+    },
+    {
+      "functionName": "bodyDistance",
+      "selfSamples": 34,
+      "inclusiveSamples": 34
+    },
+    {
+      "functionName": "setPresenceRoute",
+      "selfSamples": 33,
+      "inclusiveSamples": 3766
+    },
+    {
+      "functionName": "stepWildlifeSightings",
+      "selfSamples": 33,
+      "inclusiveSamples": 491
+    },
+    {
+      "functionName": "timeValue",
+      "selfSamples": 31,
+      "inclusiveSamples": 33
+    },
+    {
+      "functionName": "isCommunityHearthEvent",
+      "selfSamples": 31,
+      "inclusiveSamples": 31
+    }
+  ],
+  "topInclusive": [
+    {
+      "functionName": "(anonymous)",
+      "selfSamples": 960,
+      "inclusiveSamples": 13269
+    },
+    {
+      "functionName": "(root)",
+      "selfSamples": 0,
+      "inclusiveSamples": 11983
+    },
+    {
+      "functionName": "applyCommand",
+      "selfSamples": 26,
+      "inclusiveSamples": 11227
+    },
+    {
+      "functionName": "stepTerritorialAwareness",
+      "selfSamples": 13,
+      "inclusiveSamples": 4853
+    },
+    {
+      "functionName": "advanceResidentPresence",
+      "selfSamples": 54,
+      "inclusiveSamples": 3865
+    },
+    {
+      "functionName": "setPresenceRoute",
+      "selfSamples": 33,
+      "inclusiveSamples": 3766
+    },
+    {
+      "functionName": "planRoute",
+      "selfSamples": 2954,
+      "inclusiveSamples": 3725
+    },
+    {
+      "functionName": "structuredClone",
+      "selfSamples": 3434,
+      "inclusiveSamples": 3533
+    },
+    {
+      "functionName": "validateState",
+      "selfSamples": 291,
+      "inclusiveSamples": 2437
+    },
+    {
+      "functionName": "visit",
+      "selfSamples": 99,
+      "inclusiveSamples": 955
+    },
+    {
+      "functionName": "assignResponders",
+      "selfSamples": 3,
+      "inclusiveSamples": 927
+    },
+    {
+      "functionName": "movingPresenceClear",
+      "selfSamples": 155,
+      "inclusiveSamples": 897
+    },
+    {
+      "functionName": "(garbage collector)",
+      "selfSamples": 604,
+      "inclusiveSamples": 604
+    },
+    {
+      "functionName": "validateWorld",
+      "selfSamples": 21,
+      "inclusiveSamples": 539
+    },
+    {
+      "functionName": "safe",
+      "selfSamples": 316,
+      "inclusiveSamples": 502
+    },
+    {
+      "functionName": "stepWildlifeSightings",
+      "selfSamples": 33,
+      "inclusiveSamples": 491
+    },
+    {
+      "functionName": "isProvidingCare",
+      "selfSamples": 160,
+      "inclusiveSamples": 360
+    },
+    {
+      "functionName": "validateClanDiscovery",
+      "selfSamples": 6,
+      "inclusiveSamples": 328
+    },
+    {
+      "functionName": "stepSpatialExpeditions",
+      "selfSamples": 6,
+      "inclusiveSamples": 325
+    },
+    {
+      "functionName": "decode",
+      "selfSamples": 261,
+      "inclusiveSamples": 322
+    },
+    {
+      "functionName": "surfaceHeightAt",
+      "selfSamples": 302,
+      "inclusiveSamples": 302
+    },
+    {
+      "functionName": "refreshSpatialObservations",
+      "selfSamples": 3,
+      "inclusiveSamples": 261
+    },
+    {
+      "functionName": "commitClanObservation",
+      "selfSamples": 17,
+      "inclusiveSamples": 256
+    },
+    {
+      "functionName": "isCaregiver",
+      "selfSamples": 213,
+      "inclusiveSamples": 233
+    },
+    {
+      "functionName": "advance",
+      "selfSamples": 26,
+      "inclusiveSamples": 229
+    },
+    {
+      "functionName": "valid",
+      "selfSamples": 48,
+      "inclusiveSamples": 215
+    },
+    {
+      "functionName": "traceTerrainSightline",
+      "selfSamples": 159,
+      "inclusiveSamples": 212
+    },
+    {
+      "functionName": "validateSpatialExpeditions",
+      "selfSamples": 59,
+      "inclusiveSamples": 205
+    },
+    {
+      "functionName": "residentAtHome",
+      "selfSamples": 69,
+      "inclusiveSamples": 180
+    },
+    {
+      "functionName": "stepMechanicsTick",
+      "selfSamples": 14,
+      "inclusiveSamples": 175
+    },
+    {
+      "functionName": "parseCharacterDNA",
+      "selfSamples": 96,
+      "inclusiveSamples": 141
+    },
+    {
+      "functionName": "(program)",
+      "selfSamples": 140,
+      "inclusiveSamples": 140
+    },
+    {
+      "functionName": "assertTerritorialWorld",
+      "selfSamples": 29,
+      "inclusiveSamples": 139
+    },
+    {
+      "functionName": "sample",
+      "selfSamples": 8,
+      "inclusiveSamples": 139
+    },
+    {
+      "functionName": "validateTerritorialAwareness",
+      "selfSamples": 26,
+      "inclusiveSamples": 134
+    }
+  ],
+  "phases": [
+    "Hostile",
+    "Hostile"
+  ]
+}

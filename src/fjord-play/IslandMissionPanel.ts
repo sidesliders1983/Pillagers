@@ -1,3 +1,4 @@
+import { territoryNotice } from './TerritoryView';
 import { renderRaiderEquipment, renderEquipmentReadiness, renderEquipmentReport } from './SmitheryView';
 import type { Weapon, Shield } from '../simulation/Smithery';
 import { inspectIslandMissions, type IslandTarget } from '../simulation/IslandMissions';
@@ -218,6 +219,7 @@ export class IslandMissionPanel {
         const html = `<h3>Island missions</h3><p class="fjord-caption">Separate missions depart from home. Explore first to map possible destinations.</p>
             ${this.workspace ? `<p class="fjord-caption">Selected group: <strong>${escape(group?.name ?? 'None')}</strong></p>` : `<label>Mission group <select id="island-mission-group"><option value="" ${group ? 'hidden' : ''}>Create a group above</option>${groups.map(g =>
                 `<option value="${escape(g.id)}" ${g.id === this.groupId ? 'selected' : ''}>${escape(g.name)}</option>`).join('')}</select></label>`}
+            ${territoryNotice(state, this.groupId, 'island')}
             ${groupReason ? `<p class="fjord-caption" id="island-mission-group-block">${escape(groupReason)}</p>` : ''}
             ${canRecall ? '<button type="button" data-island-return>Return group home</button>' : ''}
             ${active?.task ? `<p>${escape(active.task.type)} · ${escape(active.status)}</p>` : ''}

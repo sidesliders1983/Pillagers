@@ -1,3 +1,4 @@
+import { canonicalDepartureOrigins } from './ResidentPresence';
 import type { SimulationState } from './SimulationCore';
 import type { Point2 } from '../world-generation/WorldBlueprint';
 import { assertDiscoveryWorld } from './ClanDiscovery';
@@ -85,7 +86,7 @@ export function boardLongshipOffer(state: SimulationState, groupId: string, ship
     freeShip(state, shipId, groupId);
     const ship = longshipPose(state, shipId, bound);
     if (!navigableSea(bound, ship)) throw new Error('The longship has no navigable embarkation berth.');
-    const starts = mission.status === 'Prepared' ? origins : Object.fromEntries(mission.memberIds.map(id =>
+    const starts = mission.status === 'Prepared' ? canonicalDepartureOrigins(state, mission.memberIds, origins) : Object.fromEntries(mission.memberIds.map(id =>
         [id, spatialMemberPosition(mission, id)]));
     if (starts && (Object.keys(starts).length !== mission.memberIds.length || mission.memberIds.some(id =>
         !starts[id] || !Number.isFinite(starts[id].x) || !Number.isFinite(starts[id].z))))

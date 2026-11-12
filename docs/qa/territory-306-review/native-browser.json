@@ -1,0 +1,85 @@
+{
+  "status": "passed",
+  "source": {
+    "head": "e78658217023a048c06449f2e35310c140229fbb",
+    "sourceHashes": {
+      "src/simulation/TerritorialAwareness.ts": "39c7bbb07ebbded0bc22fa274746b7171371fcad32cecffe4dec10a376a829be",
+      "src/simulation/ResidentPresence.ts": "d842ec193d84b152a3e739735f85448975afd8d194ea464dd4f69ea60be1c7a4",
+      "src/simulation/SimulationCore.ts": "0def97b1e66d11949eb79fe112d2d2aa73c3b67068ab98d2075bf2f410bfdea1",
+      "src/fjord-play/FjordCampaign.ts": "0ad15961e27d3e15b4c55d0d439c2df1302fc7a3cee3f03dbc5c30e31cf54ebc",
+      "src/world-generation/LandRoutes.ts": "1a2dc21920bc51908947de1c9149b686f7153fbbf9566205eeb9ba6e580cbebe"
+    },
+    "dirtyTracked": null,
+    "bakedSHA256": "b8a1f5444187113b825fe1ead69ec5da49b65451bae5d7a6e43d300fd7b67c39",
+    "bakedCanonicalSHA256": "c9bf0343274e49065387cf18effdda291764bf727a6cae1dab10db78eeea39a8"
+  },
+  "origin": "http://127.0.0.1:5198",
+  "chrome": "157.0.8103.52",
+  "startedAt": "2026-11-12T10:29:02.693Z",
+  "scenarios": [
+    {
+      "mode": "desktop",
+      "kind": "historical-file-import-withdraw-return-reload",
+      "chain": {
+        "sourceEventIds": [
+          "event-13",
+          "event-14",
+          "event-17"
+        ],
+        "historyCopy": "Overview\nHistory\nBack to history\nTerritorial encounter\nMark these events read\nYear 800 · tick 645\nThe settlement lost contact with the expedition party and the incident ended.\n›\nYear 800 · tick 595\nThe settlement warned the expedition party to withdraw.\n›\nYear 800 · tick 590\nAn expedition party was noticed near the settlement perimeter.\n›"
+      }
+    },
+    {
+      "mode": "touch-landscape",
+      "kind": "historical-file-import-withdraw-return-reload",
+      "chain": {
+        "sourceEventIds": [
+          "event-13",
+          "event-14",
+          "event-17"
+        ],
+        "historyCopy": "Overview\nHistory\nBack to history\nTerritorial encounter\nMark these events read\nYear 800 · tick 645\nThe settlement lost contact with the expedition party and the incident ended.\n›\nYear 800 · tick 595\nThe settlement warned the expedition party to withdraw.\n›\nYear 800 · tick 590\nAn expedition party was noticed near the settlement perimeter.\n›"
+      }
+    },
+    {
+      "mode": "desktop-family",
+      "kind": "real-progressed-family-indoor-rendering-and-inspection",
+      "population": [
+        24,
+        18
+      ],
+      "sourceFixture": "placement-proof-default-care-25.fjord.json",
+      "time": {
+        "winter": 828,
+        "tick": 500
+      },
+      "pendingIds": [
+        "persona-2",
+        "persona-14",
+        "island-rival:persona-2",
+        "island-rival:persona-8"
+      ],
+      "inspected": {
+        "id": "persona-2",
+        "name": "Hallfrid Olafsdóttir",
+        "age": 25,
+        "workReason": "childcare",
+        "indoorReason": "childcare"
+      },
+      "renderedLocalBodies": 22,
+      "residentCardCopy": "SETTLEMENT\nHallfrid Olafsdóttir\n\n25 Winters · Female · No occupation\n\nchildcare\n\nProductivity\n0%\nOccupation fit\n0%\n\n0.0 recorded years in current occupation · Autonomous career\n\nPhysicality\n38%\nAgility\n43%\nIntelligence\n37%\nCunning\n18%\nTemperament\n27%\nHousehold\nMáhte, Hallfrid Olafsdóttir and Halldis Sigurdardóttir’s household\nPartner\nMáhte\nChildren\nHalldis Sigurdardóttir\nChange work\nHeritage, parents & occupation aptitudes\nPersonal history\nMore management"
+    }
+  ],
+  "screenshots": [
+    "D:\\CodexSites\\Pillagers\\scratch\\territorial-awareness-306\\scratch\\territory-review-306\\native-final-1794479342689\\desktop-imported-warning.jpg",
+    "D:\\CodexSites\\Pillagers\\scratch\\territorial-awareness-306\\scratch\\territory-review-306\\native-final-1794479342689\\desktop-withdrawing.jpg",
+    "D:\\CodexSites\\Pillagers\\scratch\\territorial-awareness-306\\scratch\\territory-review-306\\native-final-1794479342689\\desktop-withdrawn-linked-history.jpg",
+    "D:\\CodexSites\\Pillagers\\scratch\\territorial-awareness-306\\scratch\\territory-review-306\\native-final-1794479342689\\touch-landscape-imported-warning.jpg",
+    "D:\\CodexSites\\Pillagers\\scratch\\territorial-awareness-306\\scratch\\territory-review-306\\native-final-1794479342689\\touch-landscape-withdrawing.jpg",
+    "D:\\CodexSites\\Pillagers\\scratch\\territorial-awareness-306\\scratch\\territory-review-306\\native-final-1794479342689\\touch-landscape-withdrawn-linked-history.jpg",
+    "D:\\CodexSites\\Pillagers\\scratch\\territorial-awareness-306\\scratch\\territory-review-306\\native-final-1794479342689\\desktop-family-indoor-resident-details.jpg"
+  ],
+  "errors": [],
+  "limitation": "Touch landscape is native Chrome emulation. Physical iPhone UAT remains pending.",
+  "finishedAt": "2026-11-12T10:35:00.449Z"
+}
