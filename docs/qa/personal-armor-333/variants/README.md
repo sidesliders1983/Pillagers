@@ -39,8 +39,8 @@ Evidence:
   [prepared sources](prepared-sources.json), and [native integration](native-integration.json).
 - 85 focused Core tests, six Smithery DOM tests, 96 native motion samples and
   36 new-pair hand-prop states/144 exact pair checks passed locally.
-- Final clean built browser/rendering observations are added after the implementation
-  is committed. Physical iPhone and combined owner acceptance remain separate.
+- [Current clean-build browser/rendering observations](acceptance.md) are retained
+  against eb73baee671534fa105be05a1e000ff6457b1e36. Physical iPhone and combined owner acceptance remain separate.
 
 Earlier two-item measurements under the parent QA directory remain historical;
 they are not relabelled as four-variant measurements.

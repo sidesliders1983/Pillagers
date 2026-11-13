@@ -4,8 +4,7 @@ Owner-approved additional trial values: Leather Helmet 5%; Iron-reinforced Body
 Armor 30%. Original Leather Body Armor 20%, Iron Helmet 10% and all shield values
 remain unchanged. Total personal protection remains capped at 60%.
 
-Implementation fingerprint: 2a6339e5f7707953d33b66db1950b45839fd18861f2c631b88cea20fa785e22b. The implementation commit is
-recorded separately once the source is committed; these results do not accept
+Implementation fingerprint: 2a6339e5f7707953d33b66db1950b45839fd18861f2c631b88cea20fa785e22b. Implementation commit: eb73baee671534fa105be05a1e000ff6457b1e36; these results do not accept
 later code changes or physical-device fitting.
 
 The same named wearer and unchanged unarmed ally use 64 recorded matched

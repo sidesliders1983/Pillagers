@@ -1,6 +1,6 @@
 # Personal armor #333 — acceptance status
 
-> Four-variant follow-up: [current QA guide](variants/README.md). The retained
+> Four-variant follow-up: [current acceptance matrix](variants/acceptance.md). The retained
 > matrix below records the original two-item clean build, not acceptance of the
 > subsequently added Leather Helmet and Iron-reinforced Body Armor.
 

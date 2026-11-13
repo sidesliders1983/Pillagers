@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "testedBuildCommit": "eb73baee671534fa105be05a1e000ff6457b1e36",
+  "scope": "Evidence-only follow-up keeps production source/public assets and build inputs equal to the clean tested build.",
+  "gitObjectIdentities": {
+    "src": "9f5e1c0ce68feffc95f84b6ae7d8be318f3e9082",
+    "public": "000f2116f6892b8565b8a6a5c7d7760db58b1c27",
+    "index.html": "974748f43476b19e2ce8d8a1b90ccc39e58fe698",
+    "package.json": "3eab58a3fa7397a5d1b98c0f4488e7e65aa1d86a",
+    "pnpm-lock.yaml": "f535e99deaeb71f2a631fb1ef87520048c95f520",
+    "vite.config.ts": "26b538d4f10e63c1ebfb669d83b3512770f9f271",
+    "tsconfig.json": "32bcb76fc459f127871dd6968d6b3cb9488c4a95"
+  },
+  "verifyCommand": "git diff --exit-code eb73baee671534fa105be05a1e000ff6457b1e36 HEAD -- src public index.html package.json pnpm-lock.yaml vite.config.ts tsconfig.json"
+}

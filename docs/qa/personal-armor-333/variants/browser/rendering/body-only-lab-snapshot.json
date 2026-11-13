@@ -1,0 +1,153 @@
+{
+  "version": "pillagers-lab-snapshot/1",
+  "styleVersion": "pillagers-meshy-human/1",
+  "contractVersion": 1,
+  "fitVersion": "pillagers-fit/0.2",
+  "dna": {
+    "schemaVersion": 1,
+    "seed": 1983,
+    "sex": "male",
+    "age": 32,
+    "traits": {
+      "physicality": 0.55,
+      "agility": 0.55,
+      "intelligence": 0.55,
+      "cunning": 0.4,
+      "temperament": 0.4
+    },
+    "heritage": {
+      "scandinavian": 0.5,
+      "angloSaxon": 0.2,
+      "gaelic": 0.15,
+      "finnic": 0.05,
+      "sami": 0.05,
+      "baltic": 0.05
+    }
+  },
+  "presentation": {
+    "hair": "hair/manual-long-2",
+    "beard": "none",
+    "headwear": "none",
+    "outfit": "garment/meshy-grid-trial-001",
+    "shoes": "garment/meshy-low-shoes-005",
+    "trousers": "none",
+    "top": "none",
+    "bodyArmor": "garment/native-iron-body-armor",
+    "equipment": "none",
+    "equipmentItems": [
+      "equipment/native-iron-spear",
+      "equipment/native-iron-shield"
+    ],
+    "equipmentSocket": "auto",
+    "hairColor": null,
+    "technicalWaistWrap": false
+  },
+  "body": {
+    "version": 1,
+    "preset": "auto",
+    "source": "meshy"
+  },
+  "lod": 2,
+  "pose": {
+    "animation": "Idle_02",
+    "time": 0.06709999999403954,
+    "paused": true
+  },
+  "camera": {
+    "type": "orthographic",
+    "scale": 2.4,
+    "fov": 38,
+    "position": [
+      0,
+      0.9500000000000001,
+      3.7
+    ],
+    "target": [
+      0,
+      0.9499999999999998,
+      0
+    ]
+  },
+  "lighting": "lab-neutral/1",
+  "modules": [
+    {
+      "id": "body/meshy-human",
+      "path": "/game-assets/human/Human_LOD2.glb",
+      "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+    },
+    {
+      "id": "hair/manual-long-2",
+      "path": "/character-lab/modules/manual-long-hair/long-2.glb",
+      "sha256": "4d9b26798bf511c5141a93abd2c73e9d4ca02b2ccb92daa53e0146b35ae4afe6",
+      "binding": {
+        "path": "/character-lab/modules/manual-long-hair/long-2.binding.json",
+        "sha256": "b808c552c30a68e7b6b2b3221227dc8af9d98deb4dcdba425133ef77f58f186d",
+        "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+      }
+    },
+    {
+      "id": "garment/meshy-grid-trial-001",
+      "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.glb",
+      "sha256": "79794137e3e2bb33da24429d084cec0e5fb84711fdc4fd87c1568b1dabb4d52e",
+      "binding": {
+        "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.binding.json",
+        "sha256": "1b59e5dea6a0ab5203361d593106ab94c0cbb9e1db496c3c022afa4b883e4076",
+        "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+      }
+    },
+    {
+      "id": "garment/meshy-low-shoes-005",
+      "path": "/character-lab/candidates/meshy-additional-005/low-shoes.glb",
+      "sha256": "0bd55b3eeb8abadaecc1e9ab4d824a5beaee454833473524173e17b14d7c2e2c",
+      "binding": {
+        "path": "/character-lab/candidates/meshy-additional-005/low-shoes.binding.json",
+        "sha256": "0a1dd118c8d6224a3783a723b9b5e0a081e1ac80e08d5a401a99953397073bb8",
+        "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+      }
+    },
+    {
+      "id": "garment/native-iron-body-armor",
+      "path": "/character-lab/modules/native-personal-armor/iron-body-armor.glb",
+      "sha256": "bf9cc7cabc42ed3c9a570d27de5f08a4f7f9dcf412ccf5bc917f8c9fb3294d1c",
+      "binding": {
+        "path": "/character-lab/modules/native-personal-armor/iron-body-armor.binding.json",
+        "sha256": "2f776841ac4bc51c88bd96fe18a39c20b7adfa55827344c1099210d5e9ba547c",
+        "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+      }
+    },
+    {
+      "id": "equipment/native-iron-spear",
+      "path": "/character-lab/modules/native-combat-equipment/iron-spear.glb",
+      "sha256": "9e2c044b7bf31797713a0d1ec702efe5a8efbb0c8292fed78fabacf42dbf4e30",
+      "binding": {
+        "path": "/character-lab/modules/native-combat-equipment/iron-spear.binding.json",
+        "sha256": "1b9c74fcc3cb06cd6030e24028aa9c877b52b3e443fbea96896d48a6211f43cd",
+        "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+      }
+    },
+    {
+      "id": "equipment/native-iron-shield",
+      "path": "/character-lab/modules/native-combat-equipment/iron-shield.glb",
+      "sha256": "e10f6848b376ebdcea08bd9a2b4d02965faf3fe550f805306b7542b9a9d0a81b",
+      "binding": {
+        "path": "/character-lab/modules/native-combat-equipment/iron-shield.binding.json",
+        "sha256": "4930e7b835a15b2353c5b310e10c2ca703a02479ac38d8392d6866078b8cf78b",
+        "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+      }
+    }
+  ],
+  "face": {
+    "version": "facial-identity-v1",
+    "axes": {
+      "faceWidth": -0.4565396949648857,
+      "faceLength": -0.08349660262465478,
+      "jawWidth": 0.3483388274908066,
+      "chinProjection": 0.4721937604248524,
+      "noseWidth": -0.7485977910459042,
+      "noseProjection": 0.4720705784857273,
+      "eyeSpacing": -0.04287448301911354
+    },
+    "derivation": "founder",
+    "parentIds": []
+  }
+}

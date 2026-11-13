@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0-alpha",
+  "channel": "alpha",
+  "displayVersion": "v0.1 alpha",
+  "origin": "local",
+  "buildNumber": null,
+  "buildId": "local-7fd18c9442ecded73fbc",
+  "builtAt": "2026-11-13T17:12:07.628Z",
+  "source": {
+    "commit": "eb73baee671534fa105be05a1e000ff6457b1e36",
+    "dirty": false,
+    "provenance": "git"
+  },
+  "legacyBuild": "eb73baee671534fa105be05a1e000ff6457b1e36",
+  "configuration": {
+    "feedbackURL": ""
+  }
+}

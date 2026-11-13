@@ -1,0 +1,259 @@
+{
+  "version": 1,
+  "testedBuildCommit": "eb73baee671534fa105be05a1e000ff6457b1e36",
+  "scope": "Actual clean built UI, native renderer captures and bounded desktop rendering costs; physical owner UAT pending.",
+  "files": [
+    {
+      "file": "ui/01-home-equipment.png",
+      "source": "scratch/personal-armor-browser/variants-ui-final/01-home-equipment.png",
+      "bytes": 1103504,
+      "sha256": "c63cf189ec69e449ae1a3d1b54a9cda4660bbc5ed1e640afbbdc780ab6cbe94b"
+    },
+    {
+      "file": "ui/02-home-pillage-offer.png",
+      "source": "scratch/personal-armor-browser/variants-ui-final/02-home-pillage-offer.png",
+      "bytes": 696412,
+      "sha256": "abea2f4d655c3e04123e21d5375e83a1e3b9d9045cb208e09ba257fd361c09d4"
+    },
+    {
+      "file": "ui/03-compact-desktop-equipment.png",
+      "source": "scratch/personal-armor-browser/variants-ui-final/03-compact-desktop-equipment.png",
+      "bytes": 307869,
+      "sha256": "d741b175d78ece9de573023a7b17b13ffcd62623a2abe1614ad3324f111580e9"
+    },
+    {
+      "file": "ui/04-home-character-card.png",
+      "source": "scratch/personal-armor-browser/variants-ui-final/04-home-character-card.png",
+      "bytes": 1326389,
+      "sha256": "7c6ce7cb4697e6bd0dd2245370ee192dc74631a02f0775153f18c353b1f14939"
+    },
+    {
+      "file": "ui/05-touch-away-equipment.png",
+      "source": "scratch/personal-armor-browser/variants-ui-final/05-touch-away-equipment.png",
+      "bytes": 348998,
+      "sha256": "0ea4fce4062b94f934a889c5a60712fb4d7688cd0655df28d02b0ee2745030fe"
+    },
+    {
+      "file": "ui/06-touch-character-card.png",
+      "source": "scratch/personal-armor-browser/variants-ui-final/06-touch-character-card.png",
+      "bytes": 355895,
+      "sha256": "d031151ae1c0f970936f913e9214791016f7d89ec975f31002c1dec8544e839b"
+    },
+    {
+      "file": "ui/build-info.json",
+      "source": "scratch/personal-armor-browser/variants-ui-final/build-info.json",
+      "bytes": 467,
+      "sha256": "36cbcab40bea711677717d622a01c7df187953faabe123a7963d45de2bbe7651"
+    },
+    {
+      "file": "ui/home-ui-reimported.json",
+      "source": "scratch/personal-armor-browser/variants-ui-final/home-ui-reimported.json",
+      "bytes": 866200,
+      "sha256": "5b683016387939f1f11571866935b74bfc3e6b38b50fb72d839787caafe51662"
+    },
+    {
+      "file": "ui/home-ui-roundtrip.json",
+      "source": "scratch/personal-armor-browser/variants-ui-final/home-ui-roundtrip.json",
+      "bytes": 866200,
+      "sha256": "5b683016387939f1f11571866935b74bfc3e6b38b50fb72d839787caafe51662"
+    },
+    {
+      "file": "ui/report.json",
+      "source": "scratch/personal-armor-browser/variants-ui-final/report.json",
+      "bytes": 21967,
+      "sha256": "849d165de2b7636baa0ac8e2a0ffec361bcdd9a0b8adae95ae0498f126f1e26f"
+    },
+    {
+      "file": "native/Death-no-shield-back.png",
+      "source": "scratch/personal-armor-browser/variants-native-final/Death-no-shield-back.png",
+      "bytes": 140457,
+      "sha256": "2325bc6e9eb4f05fd47d31290dc14f1c33c6fa255b824fe363f9760dfd0953a4"
+    },
+    {
+      "file": "native/Death-no-shield-front.png",
+      "source": "scratch/personal-armor-browser/variants-native-final/Death-no-shield-front.png",
+      "bytes": 144887,
+      "sha256": "57b78cd299b28f86c62c933593ed5996167d7811bed7d89832b8b861a6ea8e47"
+    },
+    {
+      "file": "native/Death-no-shield-side.png",
+      "source": "scratch/personal-armor-browser/variants-native-final/Death-no-shield-side.png",
+      "bytes": 174891,
+      "sha256": "8909e151ad64b16334984b0f957f1600df4a5f51793bfb7a0345d3116688f778"
+    },
+    {
+      "file": "native/Death-no-shield-snapshot.json",
+      "source": "scratch/personal-armor-browser/variants-native-final/Death-no-shield-snapshot.json",
+      "bytes": 4669,
+      "sha256": "126813097942783c2bd360318b29bdfc164bd44f60154ceebbae974aec76ba91"
+    },
+    {
+      "file": "native/Idle-no-props-back.png",
+      "source": "scratch/personal-armor-browser/variants-native-final/Idle-no-props-back.png",
+      "bytes": 247071,
+      "sha256": "af293e952978ce89047dc989f1ecaa9aaac359e583a578b1c34ef9c6d842e57a"
+    },
+    {
+      "file": "native/Idle-no-props-front.png",
+      "source": "scratch/personal-armor-browser/variants-native-final/Idle-no-props-front.png",
+      "bytes": 285804,
+      "sha256": "51ac8e44a85d1927c25b6404497afc30fa18b926bee2108bdffa1b33febbd3f3"
+    },
+    {
+      "file": "native/Idle-no-props-side.png",
+      "source": "scratch/personal-armor-browser/variants-native-final/Idle-no-props-side.png",
+      "bytes": 209523,
+      "sha256": "83d2761adc88ebdd5361714b41176c8c7de32e9d1fcc852d832c06622e19653d"
+    },
+    {
+      "file": "native/Idle-no-props-snapshot.json",
+      "source": "scratch/personal-armor-browser/variants-native-final/Idle-no-props-snapshot.json",
+      "bytes": 4114,
+      "sha256": "6c0d54a2ebd6733e86f414502a52df4a727303b8582f748536a7bc77379c0aa6"
+    },
+    {
+      "file": "native/LOD0-Death-iron-0-75-front.png",
+      "source": "scratch/personal-armor-browser/variants-native-final/LOD0-Death-iron-0-75-front.png",
+      "bytes": 140868,
+      "sha256": "04fe76c18ef50363b2cd27a104387ddf94f79b238a3216ccf74d82e898d89246"
+    },
+    {
+      "file": "native/LOD0-Death-iron-0-75-snapshot.json",
+      "source": "scratch/personal-armor-browser/variants-native-final/LOD0-Death-iron-0-75-snapshot.json",
+      "bytes": 4650,
+      "sha256": "11130a2288b15f9699b0a30842626a102eab9614d66a0f553727354f59287180"
+    },
+    {
+      "file": "native/LOD0-Death-iron-1-front.png",
+      "source": "scratch/personal-armor-browser/variants-native-final/LOD0-Death-iron-1-front.png",
+      "bytes": 144456,
+      "sha256": "b259b24d647a198f62a7ef1111cc3ac77c3503cfdc096cf89b301488675d95d9"
+    },
+    {
+      "file": "native/LOD0-Death-iron-1-snapshot.json",
+      "source": "scratch/personal-armor-browser/variants-native-final/LOD0-Death-iron-1-snapshot.json",
+      "bytes": 4648,
+      "sha256": "ab3e3ab4a17c5dc766a1b6d511781dda297660792118254dd6bb73a5285413e8"
+    },
+    {
+      "file": "native/LOD0-Death-wooden-0-75-front.png",
+      "source": "scratch/personal-armor-browser/variants-native-final/LOD0-Death-wooden-0-75-front.png",
+      "bytes": 140832,
+      "sha256": "52c3578d367a8dd81ad74d2c01ab487f992e36568d70645ff53c813a9dc56ac0"
+    },
+    {
+      "file": "native/LOD0-Death-wooden-0-75-snapshot.json",
+      "source": "scratch/personal-armor-browser/variants-native-final/LOD0-Death-wooden-0-75-snapshot.json",
+      "bytes": 4658,
+      "sha256": "46fb8de20745266eed4c1235abc8b93fa2de6f4a60a6a0ed24eab87d28a01beb"
+    },
+    {
+      "file": "native/LOD0-Death-wooden-1-front.png",
+      "source": "scratch/personal-armor-browser/variants-native-final/LOD0-Death-wooden-1-front.png",
+      "bytes": 143043,
+      "sha256": "2fe32823baf4f33bd05d8a3a0e4e3e4792c669a3eff45a452df40cd6297aa283"
+    },
+    {
+      "file": "native/LOD0-Death-wooden-1-snapshot.json",
+      "source": "scratch/personal-armor-browser/variants-native-final/LOD0-Death-wooden-1-snapshot.json",
+      "bytes": 4656,
+      "sha256": "eaa15b246384fffe802b77216a43c6c625dcabfa6d3c8a2f59a81d2ee2fe8fa3"
+    },
+    {
+      "file": "native/page@d13dae2062a18f72027c8b64fc9675c7.webm",
+      "source": "scratch/personal-armor-browser/variants-native-final/page@d13dae2062a18f72027c8b64fc9675c7.webm",
+      "bytes": 4604572,
+      "sha256": "d04ad303596785fa845066e477d45474b7b5dc4b4c84d1593b433f1ea29f2e6f"
+    },
+    {
+      "file": "native/report.json",
+      "source": "scratch/personal-armor-browser/variants-native-final/report.json",
+      "bytes": 380206,
+      "sha256": "6bb8bfddbc3b61e861eecc979d5c66eeac6d0a5d95607285a8214586fc1d5e12"
+    },
+    {
+      "file": "native/Spear-no-shield-back.png",
+      "source": "scratch/personal-armor-browser/variants-native-final/Spear-no-shield-back.png",
+      "bytes": 232476,
+      "sha256": "fa16a4a853160724fa60b8036bea1cb927d373bc30372598b39fe59148d5be46"
+    },
+    {
+      "file": "native/Spear-no-shield-front.png",
+      "source": "scratch/personal-armor-browser/variants-native-final/Spear-no-shield-front.png",
+      "bytes": 257616,
+      "sha256": "cd30fb5b789283a2ba776a8b7fb8b10da70879b8abd086e1d5c472e45af7290b"
+    },
+    {
+      "file": "native/Spear-no-shield-side.png",
+      "source": "scratch/personal-armor-browser/variants-native-final/Spear-no-shield-side.png",
+      "bytes": 255218,
+      "sha256": "87120aebfcc45917e06d00c07d265296b576c2ff48b6e20c8418dd05db9a22fd"
+    },
+    {
+      "file": "native/Spear-no-shield-snapshot.json",
+      "source": "scratch/personal-armor-browser/variants-native-final/Spear-no-shield-snapshot.json",
+      "bytes": 4684,
+      "sha256": "9c4b2031caa94c0d6d5f0013d39012405be109048b3013d9d0dddf548edab469"
+    },
+    {
+      "file": "rendering/baseline-lab-snapshot.json",
+      "source": "scratch/personal-armor-browser/variants-rendering-final/baseline-lab-snapshot.json",
+      "bytes": 4601,
+      "sha256": "e2150fec549317e6724678d097a0064b2a9442dd9c8df465ff6d767ef3e0fb70"
+    },
+    {
+      "file": "rendering/baseline.png",
+      "source": "scratch/personal-armor-browser/variants-rendering-final/baseline.png",
+      "bytes": 83969,
+      "sha256": "d488065477be469269dc8335da373fe2bcc835c35811b43b7b330224798a03d0"
+    },
+    {
+      "file": "rendering/body-only-lab-snapshot.json",
+      "source": "scratch/personal-armor-browser/variants-rendering-final/body-only-lab-snapshot.json",
+      "bytes": 5149,
+      "sha256": "6300d92b0a389b67c73a957badb8b26eddb7f935bbb3534ff4d32f7fe49281c0"
+    },
+    {
+      "file": "rendering/body-only.png",
+      "source": "scratch/personal-armor-browser/variants-rendering-final/body-only.png",
+      "bytes": 87661,
+      "sha256": "9e7ded3dbb1213bd1a83cff81dbf60b92e62d49528e254fa87f8415ca788ac8c"
+    },
+    {
+      "file": "rendering/both-lab-snapshot.json",
+      "source": "scratch/personal-armor-browser/variants-rendering-final/both-lab-snapshot.json",
+      "bytes": 5695,
+      "sha256": "8bc9291b7d3714c09a7f0e97160cabcec32781058e081408966a2599fc8ec4a5"
+    },
+    {
+      "file": "rendering/both.png",
+      "source": "scratch/personal-armor-browser/variants-rendering-final/both.png",
+      "bytes": 88600,
+      "sha256": "7d0c35c8447541b526c8aa1ffd2f91fab67c5d0359f7a7e3148ef33e4e66e02b"
+    },
+    {
+      "file": "rendering/helmet-only-lab-snapshot.json",
+      "source": "scratch/personal-armor-browser/variants-rendering-final/helmet-only-lab-snapshot.json",
+      "bytes": 5147,
+      "sha256": "2a5728cb797c01f4b628f9e91026119cc892e8d484b3663e0af903aeca1e2a6e"
+    },
+    {
+      "file": "rendering/helmet-only.png",
+      "source": "scratch/personal-armor-browser/variants-rendering-final/helmet-only.png",
+      "bytes": 84795,
+      "sha256": "229824c58812240f531c2634a41a3b56154b41bc19dd5bdda81c29f2151c6ced"
+    },
+    {
+      "file": "rendering/report.json",
+      "source": "scratch/personal-armor-browser/variants-rendering-final/report.json",
+      "bytes": 836903,
+      "sha256": "4aef6d5362557f237ceeb0695b8e8792a7945b55d15da874edfc6ed4fc28d77f"
+    },
+    {
+      "file": "rendering/summary.md",
+      "source": "scratch/personal-armor-browser/variants-rendering-final/summary.md",
+      "bytes": 2051,
+      "sha256": "db4b6d192996c53f042a0a8a4fb468ba4f53acdc369ba59b3277c63b08fb1e29"
+    }
+  ]
+}

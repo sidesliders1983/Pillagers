@@ -2,7 +2,7 @@
   "issue": 333,
   "status": "Owner-approved four-variant trial; bounded matched-cohort measurement, not complete combat or physical-device acceptance.",
   "source": {
-    "finalCommit": null,
+    "finalCommit": "eb73baee671534fa105be05a1e000ff6457b1e36",
     "prerequisiteCommit": "8374fac84e766aedf16131c1c246cddbecb13db9",
     "fingerprint": "2a6339e5f7707953d33b66db1950b45839fd18861f2c631b88cea20fa785e22b",
     "files": [
