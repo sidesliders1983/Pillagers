@@ -56,7 +56,8 @@ export function parseLabSnapshot(value:unknown):LabTestSnapshot {
     const point=(v:unknown)=>Array.isArray(v)&&v.length===3&&v.every(n=>typeof n==='number'&&Number.isFinite(n)&&Math.abs(n)<=60);
     if(!s.camera||!point(s.camera.position)||!point(s.camera.target)||Math.hypot(...s.camera.position.map((n,i)=>n-s.camera.target[i]))<2-1e-6||Math.hypot(...s.camera.position.map((n,i)=>n-s.camera.target[i]))>14+1e-6||s.camera.position[1]<s.camera.target[1]-1e-6)throw new Error('Invalid snapshot camera.');
     const modules=snapshotModules(dna,presentation,s.lod,body);
-    if (!labCombatAnimationAvailable(s.pose.animation, modules.map(module => module.id)))
+    if (!labCombatAnimationAvailable(s.pose.animation,
+        resolveCharacterPresentation(dna, presentation, source).equipmentIds))
         throw new Error('Combat review pose does not match its equipped combat equipment.');
     if(!Array.isArray(s.modules)||JSON.stringify(s.modules)!==JSON.stringify(modules))throw new Error('Snapshot assets differ from the current registry. Capture a new snapshot deliberately.');
     return {version:labSnapshotVersion,styleVersion:source.styleVersion,contractVersion:1,fitVersion:s.fitVersion,dna,presentation,body,lod:s.lod,pose:{...s.pose},camera:{type:s.camera.type,scale:s.camera.scale,fov:38,position:[...s.camera.position],target:[...s.camera.target]},lighting:'lab-neutral/1',modules,...(face ? {face} : {})};
