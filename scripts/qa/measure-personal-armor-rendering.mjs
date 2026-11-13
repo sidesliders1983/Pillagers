@@ -10,6 +10,7 @@ const { values } = parseArgs({ options: {
     origin: { type: 'string', default: 'http://127.0.0.1:5204' },
     output: { type: 'string' }, chrome: { type: 'string' },
     'expect-commit': { type: 'string' },
+    armor: { type: 'string', default: 'leather' }, helmet: { type: 'string', default: 'iron' },
     frames: { type: 'string', default: '30' }, cycles: { type: 'string', default: '3' },
     hair: { type: 'string', default: 'long-2' },
     'native-counts': { type: 'boolean', default: false },
@@ -31,6 +32,9 @@ if (values.help) {
   --native-counts      After closing Chrome, count actual local native meshes,
                        materials and texture objects using public factory APIs
 
+  --armor leather|iron Choose the actual body armor model (default leather)
+  --helmet leather|iron Choose the actual helmet model (default iron)
+
 Set PILLAGERS_PLAYWRIGHT_MODULE to an installed Playwright module directory when
 Playwright is not installed in this repository. No packages are installed.
 This measures instrumented synchronous render-callback wall time, not isolated
@@ -45,12 +49,15 @@ const cpuTiming = values['cpu-timing'] && !values['no-cpu-timing'];
 assert.ok(Number.isSafeInteger(frames) && frames >= 30 && frames <= 300);
 assert.ok(Number.isSafeInteger(cycles) && cycles >= 3 && cycles <= 5);
 assert.ok(['long-2', 'none'].includes(values.hair));
+assert.ok(['leather', 'iron'].includes(values.armor));
+assert.ok(['leather', 'iron'].includes(values.helmet));
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const origin = new URL(values.origin).origin;
 const output = resolve(root, values.output ??
     'scratch/personal-armor-browser/rendering-' + new Date().toISOString().replace(/[:.]/g, '-'));
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
-const armor = 'garment/native-leather-body-armor', helmet = 'headwear/native-iron-helmet';
+const armor = values.armor === 'iron' ? 'garment/native-iron-body-armor' : 'garment/native-leather-body-armor';
+const helmet = values.helmet === 'leather' ? 'headwear/native-leather-helmet' : 'headwear/native-iron-helmet';
 const hair = values.hair === 'long-2' ? 'hair/manual-long-2' : null;
 const fixedItems = ['equipment/native-iron-spear', 'equipment/native-iron-shield'];
 const profiles = [
@@ -60,7 +67,7 @@ const profiles = [
 const report = {
     schemaVersion: 1, kind: 'Personal armor rendering delta', status: 'RUNNING',
     startedAt: new Date().toISOString(), origin,
-    configuration: { frames, cycles, gpuTiming, cpuTiming, hair: values.hair, viewport: [1280, 900], deviceScaleFactor: 1,
+    configuration: { frames, cycles, gpuTiming, cpuTiming, hair: values.hair, armor, helmet, viewport: [1280, 900], deviceScaleFactor: 1,
         camera: 'public Front orthographic view', animation: 'live native Idle_02', fixedItems },
     methodology: {
         instrumentation: 'Disposable WebGL and requestAnimationFrame wrappers, derived from the earlier scratch instrument-rendering.mjs hook; no production edits.',

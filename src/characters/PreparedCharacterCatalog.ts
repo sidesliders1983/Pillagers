@@ -387,6 +387,22 @@ export const preparedCharacterCatalog = {
             "bytes": 524006
         },
         {
+            "originalPath": "/character-lab/modules/native-personal-armor/iron-body-armor.binding.json",
+            "originalSha256": "2f776841ac4bc51c88bd96fe18a39c20b7adfa55827344c1099210d5e9ba547c",
+            "originalBytes": 4659280,
+            "path": "/game-assets/character-sources/0e2ad30626da65d53355.bin",
+            "sha256": "0e2ad30626da65d5335579e721ef29df8a008a96445c008050302b9a5b70f9b2",
+            "bytes": 1512200
+        },
+        {
+            "originalPath": "/character-lab/modules/native-personal-armor/iron-body-armor.glb",
+            "originalSha256": "bf9cc7cabc42ed3c9a570d27de5f08a4f7f9dcf412ccf5bc917f8c9fb3294d1c",
+            "originalBytes": 744320,
+            "path": "/game-assets/character-sources/4ea64dbc10c0d86d0cf1.bin",
+            "sha256": "4ea64dbc10c0d86d0cf18a8e1f40348f19bd5d4d1dbe4491b53a76adbbe24422",
+            "bytes": 533387
+        },
+        {
             "originalPath": "/character-lab/modules/native-personal-armor/iron-helmet.binding.json",
             "originalSha256": "1f9578759fdbc8cd36beaa21b8b3a21cbbee9c35bb82fd17404e5ed84b32d468",
             "originalBytes": 201878,
@@ -417,6 +433,22 @@ export const preparedCharacterCatalog = {
             "path": "/game-assets/character-sources/744a9fb0be75a7f35e37.bin",
             "sha256": "744a9fb0be75a7f35e37835f2c082695048849ff6bb5c883ddd7c86851e72244",
             "bytes": 466735
+        },
+        {
+            "originalPath": "/character-lab/modules/native-personal-armor/leather-helmet.binding.json",
+            "originalSha256": "40e327c7766620789d9f08cdcc10b1d83221fda10ee3a402257112d7257c99e4",
+            "originalBytes": 224650,
+            "path": "/game-assets/character-sources/61a5d8099c0619fbd741.bin",
+            "sha256": "61a5d8099c0619fbd741606b57e8ddd05e40690167574985047a4058378e93cc",
+            "bytes": 66167
+        },
+        {
+            "originalPath": "/character-lab/modules/native-personal-armor/leather-helmet.glb",
+            "originalSha256": "fafaf39d0e7a1cc550199d33f2ef102c96e5f12aafe2462e97f0db3dd94fde33",
+            "originalBytes": 636128,
+            "path": "/game-assets/character-sources/6b49c185609d5cd1c077.bin",
+            "sha256": "6b49c185609d5cd1c077335e6d6faa798a78bd57310b8bdb06b2381b87e1243a",
+            "bytes": 434870
         },
         {
             "originalPath": "/character-lab/modules/occupation-hats/farmer.binding.json",

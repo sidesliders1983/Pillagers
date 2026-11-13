@@ -1,0 +1,156 @@
+{
+  "version": 1,
+  "status": "PASS: two independent cold prepare --verify plus iron-specific underlay --verify rounds asserted exact existing output bytes.",
+  "runs": 2,
+  "rawModelsPublic": false,
+  "sourceScriptsLF": true,
+  "commands": [
+    "node scripts/prepare-native-personal-armor.mjs --verify",
+    "node scripts/characters/derive-native-personal-armor-underlay-fit.mjs --item=ironBodyArmor --verify"
+  ],
+  "legacyIdentityScope": "Original two GLBs, bindings, provenance and original leather underlay data remain exact against the historical14-artifact receipt. That earlier source/QA record is not rewritten.",
+  "historicalExistingIdentitiesPreserved": [
+    {
+      "path": "scripts/characters/native-personal-armor-underlay-fit.json",
+      "bytes": 4366673,
+      "sha256": "6e295089d296a494bbe450f267556aa8dbc1e8c88492caef01145e4a944aa5fc"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/iron-helmet.binding.json",
+      "bytes": 201878,
+      "sha256": "1f9578759fdbc8cd36beaa21b8b3a21cbbee9c35bb82fd17404e5ed84b32d468"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/iron-helmet.glb",
+      "bytes": 635156,
+      "sha256": "dbdebf3feaa607dd3afaa687cbdc277028bf1c00c3ae3b7b05f307fe2c1df1f8"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/iron-helmet.provenance.json",
+      "bytes": 5632,
+      "sha256": "947769d59841cb568b3406c1d6d88815cea6adc2c16a8ca40f0c071e30f97357"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/leather-body-armor.binding.json",
+      "bytes": 4369149,
+      "sha256": "8f9653339f32015fd46d56198110e28d4c0ea9c3f466658e992356b8b2d2e4c8"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/leather-body-armor.glb",
+      "bytes": 658104,
+      "sha256": "1083a715439a5a2acb3b714908070802459d3d0b8f72eb5d270956f9152c002a"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/leather-body-armor.provenance.json",
+      "bytes": 49710,
+      "sha256": "4a69f008ae108533607d49f3231772154df0702bf59a576d40a5d21b4db819f7"
+    }
+  ],
+  "records": [
+    {
+      "path": "scripts/prepare-native-personal-armor.mjs",
+      "bytes": 42311,
+      "sha256": "342e788748a6cf2324111d471d9517137fa71a55293b7e351dda9d2cbb7c93db"
+    },
+    {
+      "path": "scripts/characters/derive-native-personal-armor-underlay-fit.mjs",
+      "bytes": 20265,
+      "sha256": "06cd4da767f18f175c88c4bfff6f76e23dcdca499a7db815f7e01eca096a3f48"
+    },
+    {
+      "path": "scripts/characters/native-personal-armor.sources.json",
+      "bytes": 7667,
+      "sha256": "668bd5d7085ee071f720897ff80ec8db412488fe520e5d8da05e527a0fc8b7e7"
+    },
+    {
+      "path": "scripts/characters/native-personal-armor-underlay-fit.json",
+      "bytes": 4366673,
+      "sha256": "6e295089d296a494bbe450f267556aa8dbc1e8c88492caef01145e4a944aa5fc"
+    },
+    {
+      "path": "scripts/characters/native-iron-body-armor-underlay-fit.json",
+      "bytes": 4656810,
+      "sha256": "b83a3a594f209736a97ae5089d6ee08dc03a9b91b21c73d7b86d25de1b4683a9"
+    },
+    {
+      "path": "src/characters/NativePersonalArmorMeasurements.ts",
+      "bytes": 4902,
+      "sha256": "ff835f75609b3680e6880cb021f630d44b3da7c18a54f893cc4fd8d59e63b9e1"
+    },
+    {
+      "path": "output/native-personal-armor-333/preparation.json",
+      "bytes": 125623,
+      "sha256": "af4cc7dca9b94cde43b5e05a724521d95cfd1ee046275e28e089a6d77f1d5595"
+    },
+    {
+      "path": "output/native-personal-armor-333/variants/iron-body-armor-underlay-fit-derivation.json",
+      "bytes": 11340,
+      "sha256": "d3587bc7bd917658951544df2e9955985f68b09189c0542cf00ab6b2b8b129d8"
+    },
+    {
+      "path": "output/native-personal-armor-333/variants/iron-body-armor-underlay-fit-derivation.json.gz",
+      "bytes": 3782586,
+      "sha256": "f923b77675135fee755988bde2114b832d9401c36fa8b63fbc6ff8af06a112d0"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/leather-body-armor.glb",
+      "bytes": 658104,
+      "sha256": "1083a715439a5a2acb3b714908070802459d3d0b8f72eb5d270956f9152c002a"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/leather-body-armor.binding.json",
+      "bytes": 4369149,
+      "sha256": "8f9653339f32015fd46d56198110e28d4c0ea9c3f466658e992356b8b2d2e4c8"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/leather-body-armor.provenance.json",
+      "bytes": 49710,
+      "sha256": "4a69f008ae108533607d49f3231772154df0702bf59a576d40a5d21b4db819f7"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/iron-helmet.glb",
+      "bytes": 635156,
+      "sha256": "dbdebf3feaa607dd3afaa687cbdc277028bf1c00c3ae3b7b05f307fe2c1df1f8"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/iron-helmet.binding.json",
+      "bytes": 201878,
+      "sha256": "1f9578759fdbc8cd36beaa21b8b3a21cbbee9c35bb82fd17404e5ed84b32d468"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/iron-helmet.provenance.json",
+      "bytes": 5632,
+      "sha256": "947769d59841cb568b3406c1d6d88815cea6adc2c16a8ca40f0c071e30f97357"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/leather-helmet.glb",
+      "bytes": 636128,
+      "sha256": "fafaf39d0e7a1cc550199d33f2ef102c96e5f12aafe2462e97f0db3dd94fde33"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/leather-helmet.binding.json",
+      "bytes": 224650,
+      "sha256": "40e327c7766620789d9f08cdcc10b1d83221fda10ee3a402257112d7257c99e4"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/leather-helmet.provenance.json",
+      "bytes": 11947,
+      "sha256": "cc30b955a223d623311580d53220c6a5856aa060b547466867b023648d837050"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/iron-body-armor.glb",
+      "bytes": 744320,
+      "sha256": "bf9cc7cabc42ed3c9a570d27de5f08a4f7f9dcf412ccf5bc917f8c9fb3294d1c"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/iron-body-armor.binding.json",
+      "bytes": 4659280,
+      "sha256": "2f776841ac4bc51c88bd96fe18a39c20b7adfa55827344c1099210d5e9ba547c"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/iron-body-armor.provenance.json",
+      "bytes": 42589,
+      "sha256": "1998d74799c33f8b39347a333e41cac5f0d0d38bdf18477d7b29829a1b00c43b"
+    }
+  ]
+}

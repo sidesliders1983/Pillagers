@@ -30,6 +30,36 @@ export const nativePersonalArmorRecords = [
             "min": 16,
             "max": 100
         }
+    },
+    {
+        "id": "headwear/native-leather-helmet",
+        "item": "leatherHelmet",
+        "label": "Leather Helmet · source review",
+        "path": "/character-lab/modules/native-personal-armor/leather-helmet.glb",
+        "triangles": 5101,
+        "materials": 1,
+        "bindingPath": "/character-lab/modules/native-personal-armor/leather-helmet.binding.json",
+        "bindingSha256": "40e327c7766620789d9f08cdcc10b1d83221fda10ee3a402257112d7257c99e4",
+        "anchor": "socket_head_top",
+        "supportedAges": {
+            "min": 16,
+            "max": 100
+        }
+    },
+    {
+        "id": "garment/native-iron-body-armor",
+        "item": "ironBodyArmor",
+        "label": "Iron-reinforced Body Armor · source review",
+        "path": "/character-lab/modules/native-personal-armor/iron-body-armor.glb",
+        "triangles": 6697,
+        "materials": 1,
+        "bindingPath": "/character-lab/modules/native-personal-armor/iron-body-armor.binding.json",
+        "bindingSha256": "2f776841ac4bc51c88bd96fe18a39c20b7adfa55827344c1099210d5e9ba547c",
+        "anchor": "socket_chest",
+        "supportedAges": {
+            "min": 16,
+            "max": 100
+        }
     }
 ] as const;
 export const nativePersonalArmorMeasurements: Record<string, AssetMeasurement> = {
@@ -66,6 +96,42 @@ export const nativePersonalArmorMeasurements: Record<string, AssetMeasurement> =
                 0.10340322554111481,
                 1.7661621570587158,
                 0.13514293730258942
+            ]
+        }
+    },
+    "/character-lab/modules/native-personal-armor/leather-helmet.glb": {
+        "sha256": "fafaf39d0e7a1cc550199d33f2ef102c96e5f12aafe2462e97f0db3dd94fde33",
+        "triangles": 5101,
+        "materials": 1,
+        "bytes": 636128,
+        "bounds": {
+            "min": [
+                -0.08386796712875366,
+                1.60014009475708,
+                -0.08851432055234909
+            ],
+            "max": [
+                0.08268096297979355,
+                1.7345244884490967,
+                0.12352193892002106
+            ]
+        }
+    },
+    "/character-lab/modules/native-personal-armor/iron-body-armor.glb": {
+        "sha256": "bf9cc7cabc42ed3c9a570d27de5f08a4f7f9dcf412ccf5bc917f8c9fb3294d1c",
+        "triangles": 6697,
+        "materials": 1,
+        "bytes": 744320,
+        "bounds": {
+            "min": [
+                -0.18978449702262878,
+                0.9493841528892517,
+                -0.1922934353351593
+            ],
+            "max": [
+                0.18457083404064178,
+                1.4421405792236328,
+                0.18137677013874054
             ]
         }
     }

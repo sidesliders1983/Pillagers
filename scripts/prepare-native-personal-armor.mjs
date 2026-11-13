@@ -161,7 +161,8 @@ for (let vertex = 0; vertex < fit.source.positions.length / 3; vertex++)
 function armorFit(primitive, recipe) {
     const sourcePositions = primitive.getAttribute('POSITION'), count = sourcePositions.getCount();
     const indices = Array.from(primitive.getIndices().getArray());
-    const seed = new Matrix4().makeTranslation(0, .95, -.018).multiply(new Matrix4().makeScale(.95, .77, 1.05));
+    const seed = new Matrix4().makeTranslation(...recipe.sourceSeed.translation)
+        .multiply(new Matrix4().makeScale(...recipe.sourceSeed.scale));
     const points = Array.from({ length: count }, (_, v) => new Vector3(...sourcePositions.getElement(v, [])).applyMatrix4(seed));
     const sourceParent = Array.from({ length: count }, (_, v) => v), positionKeys = new Map();
     const find = v => sourceParent[v] === v ? v : (sourceParent[v] = find(sourceParent[v]));
@@ -193,7 +194,7 @@ function armorFit(primitive, recipe) {
         component.area += new Triangle(...ids.map(v => points[v])).getArea();
     }
     const ordered = [...components.values()].sort((a, b) => b.area - a.area || a.root - b.root), main = ordered[0];
-    assert.equal(main.triangles.length, 2346, 'The actual source main panel changed');
+    assert.equal(main.triangles.length, recipe.mainSourceTriangles, 'The actual source main panel changed');
     const center = new Vector3(0, 1.18, -.018), outerIndices = [], innerIndices = [], outerSourceTriangles = [];
     for (const face of main.triangles) {
         const ids = indices.slice(face * 3, face * 3 + 3), triangle = new Triangle(...ids.map(v => points[v]));
@@ -290,7 +291,7 @@ function armorFit(primitive, recipe) {
     // These exact source corners exposed 4.5-6.1 mm of the real native skin
     // during Spear. The compact smooth bias affects sixteen cage controls,
     // including the mirrored side; it adds no blanket garment inflation.
-    const skinPatchVertices = [1375, 1376, 1382], skinPatchPoints = skinPatchVertices.flatMap(vertex => [points[vertex], points[vertex].clone().setX(-points[vertex].x)]);
+    const skinPatchVertices = recipe.localSkinClearance?.sourceVertices ?? [], skinPatchPoints = skinPatchVertices.flatMap(vertex => [points[vertex], points[vertex].clone().setX(-points[vertex].x)]);
     let projectedControls = 0, maximumControlProjection = 0, localSkinClearanceControls = 0;
     for (const control of controls) {
         const fitted = control.point.clone().add(control.delta), contact = bodyQuery.closest(fitted);
@@ -427,7 +428,7 @@ function armorFit(primitive, recipe) {
                 maximumOffset: .008,
                 footprint: .03,
                 controls: localSkinClearanceControls,
-                reason: 'Measured4.5–6.1mm complete-body Spear rear-armhole exposure against source faces1358/3847'
+                reason: recipe.localSkinClearance?.reason ?? 'Measured4.5–6.1mm complete-body Spear rear-armhole exposure against source faces1358/3847'
             },
             rigidSmallDetailComponents: rigidDetails,
             smallDetailMaximumDiameter: .08,
@@ -454,15 +455,15 @@ function armorFit(primitive, recipe) {
         }
     };
 }
-function helmetFit(primitive) {
+function helmetFit(primitive, recipe = {}) {
     const count = primitive.getAttribute('POSITION').getCount();
     const source = Array.from({ length: count }, (_, vertex) => new Vector3(...primitive.getAttribute('POSITION').getElement(vertex, [])));
-    const openingNormal = new Vector3(.01909356764293636, .9329022265811046, .3596232352263713).normalize();
+    const openingNormal = new Vector3(...(recipe.openingNormal ?? [.01909356764293636, .9329022265811046, .3596232352263713])).normalize();
     const rotation = new Matrix4().makeRotationFromQuaternion(new Quaternion().setFromUnitVectors(openingNormal, new Vector3(0, 1, 0)));
-    const level = rotation.clone().multiply(new Matrix4().makeTranslation(0, -.08546512046603905, 0));
+    const level = rotation.clone().multiply(new Matrix4().makeTranslation(0, -(recipe.openingCenterY ?? .08546512046603905), 0));
     const points = source.map(p => p.clone().applyMatrix4(level));
     const rays = shellQuery(points.flatMap(p => p.toArray()), Array.from(primitive.getIndices().getArray()));
-    const sourceRim = .025;
+    const sourceRim = recipe.sourceRim ?? .025;
     const maximumY = Math.max(...points.map(p => p.y));
     const radii = y => {
         const values = [[1, 0, 0], [-1, 0, 0], [0, 0, 1], [0, 0, -1]].map(dir => rays(new Vector3(0, y, 0), new Vector3(...dir))[0] ?? 0);
@@ -503,6 +504,9 @@ function helmetFit(primitive) {
             }
             sx *= radial;
             sz *= radial;
+            const aspect = sy / Math.sqrt(sx * sz);
+            if (recipe.verticalToRadialScale && (aspect < recipe.verticalToRadialScale.minimum
+                || aspect > recipe.verticalToRadialScale.maximum)) continue;
             const cost = sx * sz * sy + .7 * Math.abs(rimY - 1.59);
             if (sx < 1.10 && sz < 1.20 && (!best || cost < best.cost))
                 best = {
@@ -549,7 +553,7 @@ function helmetFit(primitive) {
     ]).flat();
     const actualCapRays = shellQuery(localCapPositions, Array.from(primitive.getIndices().getArray()));
     const angularSamples = 96, heightSamples = 80;
-    const minimumY = Math.min(...Array.from({ length: count }, (_, vertex) => localCapPositions[vertex * 3 + 1])) + .0001;
+    const minimumY = Math.min(...Array.from({ length: count }, (_, vertex) => localCapPositions[vertex * 3 + 1])) + .0001 - (recipe.crownRimGutterMetres ?? 0);
     const upperY = Math.max(...Array.from({ length: count }, (_, vertex) => localCapPositions[vertex * 3 + 1])) - .0001;
     const stepY = (upperY - minimumY) / (heightSamples - 1), cavityRadii = [];
     let ceilingY = -Infinity, closedRows = 0;
@@ -584,7 +588,7 @@ function helmetFit(primitive) {
             headJoint: 5,
             frame: frame.elements,
             profile: profile.map(row => [row[0] * best.sy, row[1] * best.sx * .98, row[2] * best.sz * .98]),
-            clearance: .003,
+            clearance: recipe.hairClearanceMetres ?? .003,
             maximumLift: .012,
             maximumRadialScale: 1.08,
             crownCavity
@@ -612,6 +616,7 @@ function helmetFit(primitive) {
 }
 const records = [], measurements = {}, receipts = [];
 for (const source of sources) {
+    const isBodyArmor = source.item.endsWith('BodyArmor');
     const original = await readFile(source.path);
     assert.equal(original.length, source.bytes);
     assert.equal(hash(original), source.sha256, 'Do not substitute a supplied source');
@@ -625,7 +630,7 @@ for (const source of sources) {
     assert.equal(primitive.getIndices().getCount() / 3, source.triangles);
     const sourceUV = Array.from(primitive.getAttribute('TEXCOORD_0').getArray());
     const sourceIndices = Array.from(primitive.getIndices().getArray());
-    const prepared = source.item === 'leatherBodyArmor' ? armorFit(primitive, source.preparation) : helmetFit(primitive);
+    const prepared = isBodyArmor ? armorFit(primitive, source.preparation) : helmetFit(primitive, source.preparation);
     const buffer = primitive.getAttribute('POSITION').getBuffer();
     const accessor = (array, type) => document.createAccessor().setArray(array).setType(type).setBuffer(buffer);
     primitive.setAttribute('POSITION', accessor(prepared.positions, 'VEC3'))
@@ -639,7 +644,7 @@ for (const source of sources) {
     geometry.dispose();
     assert.deepEqual(Array.from(primitive.getAttribute('TEXCOORD_0').getArray()), sourceUV);
     assert.deepEqual(Array.from(primitive.getIndices().getArray()), sourceIndices);
-    const meshName = source.item === 'leatherBodyArmor' ? 'Module_native_leather_body_armor' : 'Module_native_iron_helmet';
+    const meshName = 'Module_' + source.id.split('/')[1].replaceAll('-', '_');
     node.setName(meshName);
     node.getMesh().setName(meshName);
     const material = primitive.getMaterial(), texture = material.getBaseColorTexture();
@@ -681,7 +686,7 @@ for (const source of sources) {
         ...baseTemplate,
         id: source.id,
         moduleSha256: hash(output),
-        skinning: source.item === 'leatherBodyArmor' ? 'surface-barycentric-native' : 'rigid-native-head',
+        skinning: isBodyArmor ? 'surface-barycentric-native' : 'rigid-native-head',
         recipe: {
             id: 'supplied-native-personal-armor',
             version: 1,
@@ -702,7 +707,7 @@ for (const source of sources) {
             bodyBindings: template.precomputedNative.bodyBindings,
             moduleCoverage: []
         },
-        ...(source.item === 'leatherBodyArmor'
+        ...(isBodyArmor
             ? { bodyArmorLayer: {
                     version: 1,
                     underlayId,
@@ -712,7 +717,7 @@ for (const source of sources) {
                 } }
             : { headwearFit: prepared.headwearFit }),
     };
-    const bindingBytes = Buffer.from(JSON.stringify(binding, null, source.item === 'leatherBodyArmor' ? 0 : 2) + '\n');
+    const bindingBytes = Buffer.from(JSON.stringify(binding, null, isBodyArmor ? 0 : 2) + '\n');
     const bounds = new Box3().setFromBufferAttribute(new BufferAttribute(prepared.positions, 3));
     const entry = {
         id: source.id,
@@ -723,7 +728,7 @@ for (const source of sources) {
         materials: document.getRoot().listMaterials().length,
         bindingPath: path.replace('.glb', '.binding.json'),
         bindingSha256: hash(bindingBytes),
-        anchor: source.item === 'leatherBodyArmor' ? 'socket_chest' : 'socket_head_top',
+        anchor: isBodyArmor ? 'socket_chest' : 'socket_head_top',
         supportedAges: binding.supportedAges
     };
     measurements[path] = {

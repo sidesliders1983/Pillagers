@@ -6,7 +6,7 @@
  */
 import assert from 'node:assert/strict';
 import { createSurfaceQuery } from './outfit-surface-binding.mjs';
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { gzipSync } from 'node:zlib';
 import { NodeIO } from '@gltf-transform/core';
@@ -23,16 +23,20 @@ globalThis.self = globalThis;
 globalThis.createImageBitmap = async () => ({ width: 2048, height: 2048, close() { } });
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const verifyOnly = process.argv.includes('--verify');
-const armorPath = 'public/character-lab/modules/native-personal-armor/leather-body-armor.glb';
+const item = process.argv.find(argument => argument.startsWith('--item='))?.slice(7) ?? 'leatherBodyArmor';
+const expectedOwnerSource = JSON.parse(await readFile('scripts/characters/native-personal-armor.sources.json', 'utf8'))
+    .find(source => source.item === item);
+assert.ok(expectedOwnerSource && item.endsWith('BodyArmor'), 'Choose an actual supplied body-armor source');
+const armorPath = 'public/character-lab/modules/native-personal-armor/' + expectedOwnerSource.name + '.glb';
+const dataPath = expectedOwnerSource.underlayFit?.path ?? 'scripts/characters/native-iron-body-armor-underlay-fit.json';
+const proofStem = item === 'leatherBodyArmor' ? 'underlay-fit-derivation' : 'variants/iron-body-armor-underlay-fit-derivation';
 const tunicPath = 'public/character-lab/candidates/meshy-grid-trial-002/outfit.glb';
 const armorHash = hash(await readFile(armorPath)), tunicHash = hash(await readFile(tunicPath));
-const expectedOwnerSource = JSON.parse(await readFile('scripts/characters/native-personal-armor.sources.json', 'utf8'))
-    .find(item => item.item === 'leatherBodyArmor');
 assert.equal(armorHash, expectedOwnerSource.preparation.preparedAssetSha256 ?? expectedOwnerSource.underlayFit.armorSha256);
 assert.equal(tunicHash, '79794137e3e2bb33da24429d084cec0e5fb84711fdc4fd87c1568b1dabb4d52e');
 const receipt = JSON.parse(await readFile(armorPath.replace('.glb', '.provenance.json'), 'utf8'));
 const outerFaces = receipt.fitting.sourceMainOuterTriangles;
-assert.equal(outerFaces.length, 1319);
+assert.equal(outerFaces.length, expectedOwnerSource.preparation.mainOuterTriangles ?? 1319);
 await MeshoptDecoder.ready;
 const io = new NodeIO()
     .registerExtensions(ALL_EXTENSIONS)
@@ -156,8 +160,7 @@ function bodyAnchor(point) {
 }
 // Derive connected source panels from the exact privately retained owner model.
 // No ignored QA output participates in reproducible generation.
-const source = JSON.parse(await readFile('scripts/characters/native-personal-armor.sources.json', 'utf8'))
-    .find(item => item.item === 'leatherBodyArmor');
+const source = expectedOwnerSource;
 const originalBytes = await readFile(source.path);
 assert.equal(hash(originalBytes), source.sha256);
 const original = (await io.readBinary(originalBytes)).getRoot().listMeshes()[0].listPrimitives()[0];
@@ -186,10 +189,12 @@ for (let f = 0; f < originalIndices.length; f += 3) {
         components.set(root, []);
     components.get(root).push(f / 3);
 }
-const wanted = [2346, 356, 78], groups = wanted.map(count => {
+const wanted = source.preparation.underlayPanelComponentCounts ?? [2346, 356, 78];
+const groups = wanted.map(count => {
     const matching = [...components.values()].filter(faces => faces.length === count);
-    assert.equal(matching.length, 1);
-    return matching[0];
+    assert.ok(matching.length > 0, 'A declared actual opaque source panel is missing');
+    if (item === 'leatherBodyArmor') assert.equal(matching.length, 1);
+    return matching.flat();
 });
 const panelFaces = groups.flat(), nativeVestRay = shell(vestPoints, vestIndices, panelFaces);
 const tucked = [];
@@ -360,9 +365,12 @@ const data = {
 };
 assert.ok(data.maximumDisplacementMetres < .08, 'Qualified underlay fit exceeds the measured80mm bound');
 const dataBytes = Buffer.from(JSON.stringify(data) + '\n');
-if (verifyOnly) assert.ok((await readFile('scripts/characters/native-personal-armor-underlay-fit.json')).equals(dataBytes), 'Underlay fit reproduction differs');
-else if (!(await readFile('scripts/characters/native-personal-armor-underlay-fit.json')).equals(dataBytes))
-    await writeFile('scripts/characters/native-personal-armor-underlay-fit.json', dataBytes);
+const previousData = await readFile(dataPath).catch(error => {
+    if (error.code === 'ENOENT') return null;
+    throw error;
+});
+if (verifyOnly) assert.ok(previousData?.equals(dataBytes), 'Underlay fit reproduction differs');
+else if (!previousData?.equals(dataBytes)) await writeFile(dataPath, dataBytes);
 const proof = {
     version: 1,
     derivationScriptSha256: hash(await readFile(new URL(import.meta.url))),
@@ -389,7 +397,8 @@ const proof = {
 };
 const detailBytes = Buffer.from(JSON.stringify(proof, null, 2) + '\n');
 const detailGzip = gzipSync(detailBytes, { level: 9 });
-const detailPath = 'output/native-personal-armor-333/underlay-fit-derivation.json.gz';
+await mkdir('output/native-personal-armor-333/variants', { recursive: true });
+const detailPath = 'output/native-personal-armor-333/' + proofStem + '.json.gz';
 const summary = {
     ...proof,
     vertices: undefined,
@@ -410,6 +419,6 @@ async function writeProof(path, bytes) {
     else if (!previous?.equals(bytes)) await writeFile(path, bytes);
 }
 await writeProof(detailPath, detailGzip);
-await writeProof('output/native-personal-armor-333/underlay-fit-derivation.json',
+await writeProof('output/native-personal-armor-333/' + proofStem + '.json',
     Buffer.from(JSON.stringify(summary, null, 2) + '\n'));
 console.log(JSON.stringify({ ...proof, vertices: undefined, largest: undefined }));

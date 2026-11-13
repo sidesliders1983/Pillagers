@@ -15,7 +15,7 @@ import { weatherProfile } from './Weather';
 import { eventFacts } from './EventFacts';
 import { equipmentResult, equipmentFor, defaultSmitheryConfig, equipmentSpearBonus, equipmentCasualtyRisk,
     type PersonalEquipment } from './Smithery';
-import { wearingPersonalArmor } from './PersonalArmor';
+import { wearingPersonalArmor, wearingPersonalArmorVariants } from './PersonalArmor';
 import { eligibleTerritorialObserver, freezePresence } from './ResidentPresence';
 import { commitPersonaDeaths } from './Mortality';
 import { farmyards, reconcileFarmyards } from './Farmyards';
@@ -43,8 +43,8 @@ export type EncounterPhase = 'approach' | 'contact' | 'engaging' | 'resolved' | 
 export interface ClanEventRef { clanId: string; eventId: string }
 export interface CombatEquipment extends PersonalEquipment {
     metalworking?: { version: 1; ironSpearBonusBps: number; ironShieldProtectionBps: number };
-    personalArmor?: { version: 1; leatherBodyArmorProtectionBps: number; ironHelmetProtectionBps: number;
-        maximumPersonalProtectionBps: number };
+    personalArmor?: { version: 1 | 2; leatherBodyArmorProtectionBps: number; ironHelmetProtectionBps: number;
+        maximumPersonalProtectionBps: number; leatherHelmetProtectionBps?: number; ironBodyArmorProtectionBps?: number };
     personaId: string;
     spearBonusBps: number;
     woodenShieldProtectionBps: number;
@@ -155,16 +155,19 @@ function snapshotEquipment(state: SimulationState, id: string): CombatEquipment 
     const config = state.smithery?.config ?? defaultSmitheryConfig;
     const gear = equipmentFor(state, id);
     const hasIron = gear.weapon === 'ironSpear' || gear.shield === 'ironShield';
+    const hasVariants = wearingPersonalArmorVariants(gear);
     return { personaId: id, ...gear, spearBonusBps: config.spearBonusBps,
         woodenShieldProtectionBps: config.woodenShieldProtectionBps,
         leatherShieldProtectionBps: config.leatherShieldProtectionBps,
         ...(hasIron ? { metalworking: { version: 1 as const,
             ironSpearBonusBps: config.ironSpearBonusBps!,
             ironShieldProtectionBps: config.ironShieldProtectionBps! } } : {}),
-        ...(wearingPersonalArmor(gear) ? { personalArmor: { version: 1 as const,
+        ...(wearingPersonalArmor(gear) ? { personalArmor: { version: hasVariants ? 2 as const : 1 as const,
             leatherBodyArmorProtectionBps: config.leatherBodyArmorProtectionBps!,
             ironHelmetProtectionBps: config.ironHelmetProtectionBps!,
-            maximumPersonalProtectionBps: config.maximumPersonalProtectionBps! } } : {}) };
+            maximumPersonalProtectionBps: config.maximumPersonalProtectionBps!,
+            ...(hasVariants ? { leatherHelmetProtectionBps: config.leatherHelmetProtectionBps!,
+                ironBodyArmorProtectionBps: config.ironBodyArmorProtectionBps! } : {}) } } : {}) };
 }
 function combatEquipmentRules(gear: CombatEquipment) {
     return { ...gear, ...gear.metalworking, ...gear.personalArmor };
@@ -543,9 +546,15 @@ function validGear(value: CombatEquipment, id: string) {
         !uint(iron.ironShieldProtectionBps, 7500) : iron !== undefined) return false;
     const hasArmor = wearingPersonalArmor(value), armor = value.personalArmor;
     if (!hasArmor) return armor === undefined && value.bodyArmor === undefined && value.headgear === undefined;
-    return [null, 'leatherBodyArmor'].includes(value.bodyArmor!) && [null, 'ironHelmet'].includes(value.headgear!) &&
-        armor?.version === 1 && [armor.leatherBodyArmorProtectionBps, armor.ironHelmetProtectionBps,
-            armor.maximumPersonalProtectionBps].every(number => uint(number, 6000));
+    const variants = wearingPersonalArmorVariants(value);
+    return [null, 'leatherBodyArmor', ...(variants ? ['ironBodyArmor'] : [])].includes(value.bodyArmor!) &&
+        [null, 'ironHelmet', ...(variants ? ['leatherHelmet'] : [])].includes(value.headgear!) &&
+        armor?.version === (variants ? 2 : 1) &&
+        [armor.leatherBodyArmorProtectionBps, armor.ironHelmetProtectionBps, armor.maximumPersonalProtectionBps]
+            .every(number => uint(number, 6000)) &&
+        (variants ? [armor.leatherHelmetProtectionBps, armor.ironBodyArmorProtectionBps]
+            .every(number => uint(number, 6000)) :
+            armor.leatherHelmetProtectionBps === undefined && armor.ironBodyArmorProtectionBps === undefined);
 }
 export function validateOnSiteEncounters(state: SimulationState) {
     const registry = state.world?.encounters;

@@ -33,7 +33,7 @@ const stamp = new Date().toISOString().replace(/[:.]/g, '-');
 const output = resolve(root, values.output ?? `scratch/personal-armor-browser/ui-${stamp}`);
 const fixtureDirectory = resolve(root, 'scratch/personal-armor-review-333');
 const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
-const itemNames = ['Iron-tipped Spear', 'Iron-reinforced Shield', 'Leather Body Armor', 'Iron Helmet'];
+const itemNames = ['Iron-tipped Spear', 'Iron-reinforced Shield', 'Iron-reinforced Body Armor', 'Iron Helmet'];
 const slots = ['weapon', 'shield', 'bodyArmor', 'headgear'];
 const hero = 'founder-1', ally = 'founder-3', group = 'group-2';
 const nativeItems = ['equipment/native-iron-spear', 'equipment/native-iron-shield'];
@@ -320,12 +320,19 @@ try {
         record('Home Group 2 exposes four actual personal slots', { slots: homeSlots,
             screenshot: await screenshot(page, '01-home-equipment') });
 
-        for (const [slot, item] of [['bodyArmor', 'leatherBodyArmor'], ['headgear', 'ironHelmet']]) {
+        for (const slot of ['bodyArmor', 'headgear']) {
+            const heroItem = source.smithery.assignments[hero][slot];
+            const allyItem = source.smithery.assignments[ally][slot] ?? '';
+            if (allyItem) await changeSlot(page, ally, slot, '');
             await changeSlot(page, hero, slot, '');
-            await changeSlot(page, ally, slot, item);
-            assert.equal(await slotChoice(page, hero, slot).inputValue(), '');
+            await changeSlot(page, ally, slot, heroItem);
+            if (allyItem) await changeSlot(page, hero, slot, allyItem);
+            assert.equal(await slotChoice(page, ally, slot).inputValue(), heroItem);
+            assert.equal(await slotChoice(page, hero, slot).inputValue(), allyItem);
             await changeSlot(page, ally, slot, '');
-            await changeSlot(page, hero, slot, item);
+            if (allyItem) await changeSlot(page, hero, slot, '');
+            await changeSlot(page, hero, slot, heroItem);
+            if (allyItem) await changeSlot(page, ally, slot, allyItem);
         }
         await assertSlots(page, hero, source.smithery.assignments[hero], false);
         await assertSlots(page, ally, source.smithery.assignments[ally], false);
@@ -409,11 +416,24 @@ try {
         assert.equal(actor.clothing.id, 'generic', 'Away gear must use the normal field tunic, not occupational clothes.');
         assert.equal(actor.clothing.assets.outfit, 'garment/meshy-grid-trial-001');
         assert.equal(actor.clothing.assets.headwear, 'headwear/native-iron-helmet');
-        assert.equal(actor.clothing.assets.bodyArmor, 'garment/native-leather-body-armor');
+        assert.equal(actor.clothing.assets.bodyArmor, 'garment/native-iron-body-armor');
         assert.deepEqual([...actor.clothing.assets.equipmentItems].sort(), [...nativeItems].sort());
         assert.deepEqual(actor.equipment, fixtures.field.core.smithery.assignments[hero]);
-        record('Public scene DOM projects actual native armor, helmet and two iron props with field clothing',
-            { rendered: actor });
+        await page.waitForFunction(id => {
+            try {
+                return JSON.parse(document.querySelector('#fjord-canvas')?.dataset.rendered ?? '[]')
+                    .some(person => person.kind === 'persona' && person.id === id &&
+                        !person.placeholder && person.clothing?.assets?.headwear === 'headwear/native-leather-helmet');
+            } catch { return false; }
+        }, ally);
+        const other = await page.locator('#fjord-canvas').evaluate((canvas, id) =>
+            JSON.parse(canvas.dataset.rendered).find(person => person.kind === 'persona' && person.id === id), ally);
+        assert.equal(other.clothing.id, 'generic');
+        assert.equal(other.clothing.assets.bodyArmor, 'garment/native-leather-body-armor');
+        assert.equal(other.clothing.assets.headwear, 'headwear/native-leather-helmet');
+        assert.deepEqual(other.equipment, fixtures.field.core.smithery.assignments[ally]);
+        record('Public scene DOM projects both actual body and helmet variants with field clothing',
+            { rendered: actor, ally: other });
 
         const fieldCard = await openCharacterCard(page, true);
         assert.doesNotMatch(fieldCard, /stowed/i, 'The away card must not claim home occupational stowage.');

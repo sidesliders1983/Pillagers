@@ -1,0 +1,6448 @@
+{
+  "issue": 333,
+  "status": "Owner-approved four-variant trial; bounded matched-cohort measurement, not complete combat or physical-device acceptance.",
+  "source": {
+    "finalCommit": null,
+    "prerequisiteCommit": "8374fac84e766aedf16131c1c246cddbecb13db9",
+    "fingerprint": "2a6339e5f7707953d33b66db1950b45839fd18861f2c631b88cea20fa785e22b",
+    "files": [
+      "src/simulation/Smithery.ts",
+      "src/simulation/Metalworking.ts",
+      "src/simulation/PersonalArmor.ts",
+      "src/simulation/Mining.ts",
+      "src/simulation/SimulationCore.ts",
+      "src/simulation/Mechanics.ts",
+      "src/simulation/WorldExpeditions.ts",
+      "src/simulation/Random.ts",
+      "src/simulation/Mortality.ts"
+    ]
+  },
+  "command": "node scripts/calibrate-personal-armor-variants.mjs 64",
+  "protocol": {
+    "samples": 64,
+    "seeds": [
+      2324092723,
+      50410230,
+      3620900317,
+      4047189400,
+      1336097815,
+      803809930,
+      3115522145,
+      1740035660,
+      1199971643,
+      682029406,
+      1665313061,
+      1523796032,
+      372448927,
+      3099712370,
+      1238926377,
+      689373044,
+      1857430595,
+      4172053702,
+      3325963629,
+      2203430888,
+      965169703,
+      416852314,
+      1555261681,
+      2900643228,
+      2402225227,
+      1946907950,
+      590494389,
+      3305966736,
+      2871654063,
+      3169924162,
+      166913721,
+      230908100,
+      990704979,
+      1525774998,
+      170914045,
+      1670905400,
+      2917739575,
+      1245912106,
+      2133466497,
+      1525471468,
+      1743781723,
+      322972926,
+      762081349,
+      3060344032,
+      4267119295,
+      2902065426,
+      3159371081,
+      716002836,
+      3749464675,
+      1594698854,
+      2780878989,
+      2739347592,
+      189385287,
+      4139090682,
+      3762304529,
+      2095413308,
+      3218732651,
+      3810662606,
+      3341437397,
+      1758236976,
+      1046180559,
+      218710498,
+      87644121,
+      3985235812
+    ],
+    "seedSchedule": "Existing public randomUint LCG, fixed seed-schedule initial state 0x333224; these are counterfactual initial saved RNG states, not an extra in-game outcome stream.",
+    "memberIds": [
+      "founder-1",
+      "founder-2"
+    ],
+    "memberNames": [
+      "MaelColuim",
+      "Kauppi"
+    ],
+    "changedWearer": "founder-1",
+    "unchangedAlly": "founder-2",
+    "sourceStateDigest": "5483e93efa45b56d621d59ab5cf363663fd7ac08402730ee9695fcd708807758",
+    "sourceTime": {
+      "winter": 801,
+      "tick": 326
+    },
+    "sourceSeed": 32,
+    "geometrySeed": 18,
+    "actualPipeline": "Public scout, finite Mining, physical worker return, real eligible livestock slaughter, Smith/Leatherworker progress, targets, individual assignment, dispatch, and actual public Core AdvanceTicks return.",
+    "ingredientPolicy": "Fast Core fixture explicitly gives 2 Hides per real eligible slaughter; shipped yield stays 1. Three actual slaughter commands fund all 6 recipe Hides. No finished stock is injected.",
+    "timing": "Saved workPerUnit=100000 accelerates production; Recon and legacy Pillage durations are one tick for the comparison. No annual boundary, weather or additional source work outcome is crossed. Coefficients and same participant ordering remain real.",
+    "onSiteScope": "The on-site columns are analytic evaluations of the shared public equipment risk/offense functions, not a second encounter resolver. Actual reached on-site four-slot/loss/interruption tests run separately.",
+    "samplingLimit": "Small matched cohort exposes per-wearer direction and RNG conservation; it cannot certify fine balance or population-wide casualty frequencies."
+  },
+  "productionProvenance": {
+    "sourceStateDigest": "5483e93efa45b56d621d59ab5cf363663fd7ac08402730ee9695fcd708807758",
+    "remainingStocks": {
+      "food": 9999,
+      "materials": 475,
+      "version": 1,
+      "hides": 0,
+      "ironOre": 8
+    },
+    "actualStoredItems": {
+      "woodenSpear": 1,
+      "woodenShield": 1,
+      "leatherShield": 1,
+      "ironSpear": 1,
+      "ironShield": 1,
+      "leatherBodyArmor": 1,
+      "ironHelmet": 1,
+      "leatherHelmet": 1,
+      "ironBodyArmor": 1
+    },
+    "craftReceipts": [
+      {
+        "id": "event-68",
+        "time": {
+          "winter": 801,
+          "tick": 132
+        },
+        "type": "EquipmentCrafted",
+        "personaId": "founder-1",
+        "details": {
+          "item": "woodenSpear",
+          "itemName": "Wooden Spear",
+          "units": 1,
+          "materials": 2,
+          "hides": 0,
+          "creatorId": "founder-1",
+          "creatorName": "MaelColuim",
+          "occupation": "smith",
+          "people": [
+            {
+              "id": "founder-1",
+              "name": "MaelColuim",
+              "age": 41
+            }
+          ]
+        }
+      },
+      {
+        "id": "event-69",
+        "time": {
+          "winter": 801,
+          "tick": 138
+        },
+        "type": "EquipmentCrafted",
+        "personaId": "founder-1",
+        "details": {
+          "item": "woodenShield",
+          "itemName": "Wooden Shield",
+          "units": 1,
+          "materials": 3,
+          "hides": 0,
+          "creatorId": "founder-1",
+          "creatorName": "MaelColuim",
+          "occupation": "smith",
+          "people": [
+            {
+              "id": "founder-1",
+              "name": "MaelColuim",
+              "age": 41
+            }
+          ]
+        }
+      },
+      {
+        "id": "event-70",
+        "time": {
+          "winter": 801,
+          "tick": 151
+        },
+        "type": "EquipmentCrafted",
+        "personaId": "founder-1",
+        "details": {
+          "item": "ironSpear",
+          "itemName": "Iron-tipped Spear",
+          "units": 1,
+          "materials": 2,
+          "hides": 0,
+          "creatorId": "founder-1",
+          "creatorName": "MaelColuim",
+          "occupation": "smith",
+          "metalworkingVersion": 1,
+          "clanId": "founding-clan",
+          "ironOre": 1,
+          "recipe": {
+            "materials": 2,
+            "hides": 0,
+            "ironOre": 1,
+            "unitsPerWinter": 2
+          },
+          "people": [
+            {
+              "id": "founder-1",
+              "name": "MaelColuim",
+              "age": 41
+            }
+          ]
+        }
+      },
+      {
+        "id": "event-71",
+        "time": {
+          "winter": 801,
+          "tick": 175
+        },
+        "type": "EquipmentCrafted",
+        "personaId": "founder-1",
+        "details": {
+          "item": "ironShield",
+          "itemName": "Iron-reinforced Shield",
+          "units": 1,
+          "materials": 4,
+          "hides": 0,
+          "creatorId": "founder-1",
+          "creatorName": "MaelColuim",
+          "occupation": "smith",
+          "metalworkingVersion": 1,
+          "clanId": "founding-clan",
+          "ironOre": 2,
+          "recipe": {
+            "materials": 4,
+            "hides": 0,
+            "ironOre": 2,
+            "unitsPerWinter": 1
+          },
+          "people": [
+            {
+              "id": "founder-1",
+              "name": "MaelColuim",
+              "age": 41
+            }
+          ]
+        }
+      },
+      {
+        "id": "event-72",
+        "time": {
+          "winter": 801,
+          "tick": 201
+        },
+        "type": "EquipmentCrafted",
+        "personaId": "founder-1",
+        "details": {
+          "item": "ironHelmet",
+          "itemName": "Iron Helmet",
+          "units": 1,
+          "materials": 3,
+          "hides": 0,
+          "creatorId": "founder-1",
+          "creatorName": "MaelColuim",
+          "occupation": "smith",
+          "personalArmorVersion": 1,
+          "clanId": "founding-clan",
+          "recipe": {
+            "materials": 3,
+            "hides": 0,
+            "ironOre": 2,
+            "unitsPerWinter": 1
+          },
+          "ironOre": 2,
+          "people": [
+            {
+              "id": "founder-1",
+              "name": "MaelColuim",
+              "age": 41
+            }
+          ]
+        }
+      },
+      {
+        "id": "event-73",
+        "time": {
+          "winter": 801,
+          "tick": 226
+        },
+        "type": "EquipmentCrafted",
+        "personaId": "founder-1",
+        "details": {
+          "item": "ironBodyArmor",
+          "itemName": "Iron-reinforced Body Armor",
+          "units": 1,
+          "materials": 3,
+          "hides": 2,
+          "creatorId": "founder-1",
+          "creatorName": "MaelColuim",
+          "occupation": "smith",
+          "personalArmorVersion": 2,
+          "clanId": "founding-clan",
+          "recipe": {
+            "materials": 3,
+            "hides": 2,
+            "ironOre": 2,
+            "unitsPerWinter": 1
+          },
+          "ironOre": 2,
+          "people": [
+            {
+              "id": "founder-1",
+              "name": "MaelColuim",
+              "age": 41
+            }
+          ]
+        }
+      },
+      {
+        "id": "event-75",
+        "time": {
+          "winter": 801,
+          "tick": 265
+        },
+        "type": "EquipmentCrafted",
+        "personaId": "founder-1",
+        "details": {
+          "item": "leatherShield",
+          "itemName": "Leather-reinforced Shield",
+          "units": 1,
+          "materials": 3,
+          "hides": 1,
+          "creatorId": "founder-1",
+          "creatorName": "MaelColuim",
+          "occupation": "leatherAndJewelleryMaker",
+          "people": [
+            {
+              "id": "founder-1",
+              "name": "MaelColuim",
+              "age": 41
+            }
+          ]
+        }
+      },
+      {
+        "id": "event-76",
+        "time": {
+          "winter": 801,
+          "tick": 292
+        },
+        "type": "EquipmentCrafted",
+        "personaId": "founder-1",
+        "details": {
+          "item": "leatherBodyArmor",
+          "itemName": "Leather Body Armor",
+          "units": 1,
+          "materials": 3,
+          "hides": 2,
+          "creatorId": "founder-1",
+          "creatorName": "MaelColuim",
+          "occupation": "leatherAndJewelleryMaker",
+          "personalArmorVersion": 1,
+          "clanId": "founding-clan",
+          "recipe": {
+            "materials": 3,
+            "hides": 2,
+            "unitsPerWinter": 1
+          },
+          "people": [
+            {
+              "id": "founder-1",
+              "name": "MaelColuim",
+              "age": 41
+            }
+          ]
+        }
+      },
+      {
+        "id": "event-77",
+        "time": {
+          "winter": 801,
+          "tick": 320
+        },
+        "type": "EquipmentCrafted",
+        "personaId": "founder-1",
+        "details": {
+          "item": "leatherHelmet",
+          "itemName": "Leather Helmet",
+          "units": 1,
+          "materials": 2,
+          "hides": 1,
+          "creatorId": "founder-1",
+          "creatorName": "MaelColuim",
+          "occupation": "leatherAndJewelleryMaker",
+          "personalArmorVersion": 2,
+          "clanId": "founding-clan",
+          "recipe": {
+            "materials": 2,
+            "hides": 1,
+            "unitsPerWinter": 1
+          },
+          "people": [
+            {
+              "id": "founder-1",
+              "name": "MaelColuim",
+              "age": 41
+            }
+          ]
+        }
+      }
+    ],
+    "ingredientReceipts": [
+      {
+        "id": "event-23",
+        "time": {
+          "winter": 800,
+          "tick": 436
+        },
+        "type": "IronOreExtracted",
+        "personaId": "founder-1",
+        "details": {
+          "clanId": "founding-clan",
+          "siteId": "iron-18-408-424",
+          "source": "rock-iron",
+          "units": 1,
+          "remainingUnits": 79
+        }
+      },
+      {
+        "id": "event-24",
+        "time": {
+          "winter": 800,
+          "tick": 442
+        },
+        "type": "IronOreExtracted",
+        "personaId": "founder-1",
+        "details": {
+          "clanId": "founding-clan",
+          "siteId": "iron-18-408-424",
+          "source": "rock-iron",
+          "units": 1,
+          "remainingUnits": 78
+        }
+      },
+      {
+        "id": "event-25",
+        "time": {
+          "winter": 800,
+          "tick": 449
+        },
+        "type": "IronOreExtracted",
+        "personaId": "founder-1",
+        "details": {
+          "clanId": "founding-clan",
+          "siteId": "iron-18-408-424",
+          "source": "rock-iron",
+          "units": 1,
+          "remainingUnits": 77
+        }
+      },
+      {
+        "id": "event-26",
+        "time": {
+          "winter": 800,
+          "tick": 455
+        },
+        "type": "IronOreExtracted",
+        "personaId": "founder-1",
+        "details": {
+          "clanId": "founding-clan",
+          "siteId": "iron-18-408-424",
+          "source": "rock-iron",
+          "units": 1,
+          "remainingUnits": 76
+        }
+      },
+      {
+        "id": "event-27",
+        "time": {
+          "winter": 800,
+          "tick": 461
+        },
+        "type": "IronOreExtracted",
+        "personaId": "founder-1",
+        "details": {
+          "clanId": "founding-clan",
+          "siteId": "iron-18-408-424",
+          "source": "rock-iron",
+          "units": 1,
+          "remainingUnits": 75
+        }
+      },
+      {
+        "id": "event-28",
+        "time": {
+          "winter": 800,
+          "tick": 468
+        },
+        "type": "IronOreExtracted",
+        "personaId": "founder-1",
+        "details": {
+          "clanId": "founding-clan",
+          "siteId": "iron-18-408-424",
+          "source": "rock-iron",
+          "units": 1,
+          "remainingUnits": 74
+        }
+      },
+      {
+        "id": "event-29",
+        "time": {
+          "winter": 800,
+          "tick": 474
+        },
+        "type": "IronOreExtracted",
+        "personaId": "founder-1",
+        "details": {
+          "clanId": "founding-clan",
+          "siteId": "iron-18-408-424",
+          "source": "rock-iron",
+          "units": 1,
+          "remainingUnits": 73
+        }
+      },
+      {
+        "id": "event-30",
+        "time": {
+          "winter": 800,
+          "tick": 480
+        },
+        "type": "IronOreExtracted",
+        "personaId": "founder-1",
+        "details": {
+          "clanId": "founding-clan",
+          "siteId": "iron-18-408-424",
+          "source": "rock-iron",
+          "units": 1,
+          "remainingUnits": 72
+        }
+      },
+      {
+        "id": "event-31",
+        "time": {
+          "winter": 800,
+          "tick": 487
+        },
+        "type": "IronOreExtracted",
+        "personaId": "founder-1",
+        "details": {
+          "clanId": "founding-clan",
+          "siteId": "iron-18-408-424",
+          "source": "rock-iron",
+          "units": 1,
+          "remainingUnits": 71
+        }
+      },
+      {
+        "id": "event-32",
+        "time": {
+          "winter": 800,
+          "tick": 493
+        },
+        "type": "IronOreExtracted",
+        "personaId": "founder-1",
+        "details": {
+          "clanId": "founding-clan",
+          "siteId": "iron-18-408-424",
+          "source": "rock-iron",
+          "units": 1,
+          "remainingUnits": 70
+        }
+      },
+      {
+        "id": "event-35",
+        "time": {
+          "winter": 800,
+          "tick": 500
+        },
+        "type": "IronOreExtracted",
+        "personaId": "founder-1",
+        "details": {
+          "clanId": "founding-clan",
+          "siteId": "iron-18-408-424",
+          "source": "rock-iron",
+          "units": 1,
+          "remainingUnits": 69
+        }
+      },
+      {
+        "id": "event-37",
+        "time": {
+          "winter": 800,
+          "tick": 506
+        },
+        "type": "IronOreExtracted",
+        "personaId": "founder-1",
+        "details": {
+          "clanId": "founding-clan",
+          "siteId": "iron-18-408-424",
+          "source": "rock-iron",
+          "units": 1,
+          "remainingUnits": 68
+        }
+      },
+      {
+        "id": "event-38",
+        "time": {
+          "winter": 800,
+          "tick": 512
+        },
+        "type": "IronOreExtracted",
+        "personaId": "founder-1",
+        "details": {
+          "clanId": "founding-clan",
+          "siteId": "iron-18-408-424",
+          "source": "rock-iron",
+          "units": 1,
+          "remainingUnits": 67
+        }
+      },
+      {
+        "id": "event-39",
+        "time": {
+          "winter": 800,
+          "tick": 519
+        },
+        "type": "IronOreExtracted",
+        "personaId": "founder-1",
+        "details": {
+          "clanId": "founding-clan",
+          "siteId": "iron-18-408-424",
+          "source": "rock-iron",
+          "units": 1,
+          "remainingUnits": 66
+        }
+      },
+      {
+        "id": "event-40",
+        "time": {
+          "winter": 800,
+          "tick": 525
+        },
+        "type": "IronOreExtracted",
+        "personaId": "founder-1",
+        "details": {
+          "clanId": "founding-clan",
+          "siteId": "iron-18-408-424",
+          "source": "rock-iron",
+          "units": 1,
+          "remainingUnits": 65
+        }
+      },
+      {
+        "id": "event-52",
+        "time": {
+          "winter": 801,
+          "tick": 125
+        },
+        "type": "LivestockSlaughtered",
+        "details": {
+          "livestockId": "livestock-1",
+          "food": 10,
+          "hides": 2,
+          "parentIds": [],
+          "sex": "female",
+          "age": 3,
+          "farmyardId": null,
+          "livestock": {
+            "version": 1,
+            "recordedClanId": "founding-clan",
+            "animals": [
+              {
+                "id": "livestock-1",
+                "name": "Livestock 1",
+                "species": "goat",
+                "speciesName": "Goat",
+                "sex": "female",
+                "sexTerm": "Doe",
+                "birthWinter": 798,
+                "age": 3,
+                "stage": "Adult",
+                "parentIds": [],
+                "origin": "founding"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "event-53",
+        "time": {
+          "winter": 801,
+          "tick": 125
+        },
+        "type": "LivestockSlaughtered",
+        "details": {
+          "livestockId": "livestock-2",
+          "food": 10,
+          "hides": 2,
+          "parentIds": [],
+          "sex": "female",
+          "age": 3,
+          "farmyardId": null,
+          "livestock": {
+            "version": 1,
+            "recordedClanId": "founding-clan",
+            "animals": [
+              {
+                "id": "livestock-2",
+                "name": "Livestock 2",
+                "species": "goat",
+                "speciesName": "Goat",
+                "sex": "female",
+                "sexTerm": "Doe",
+                "birthWinter": 798,
+                "age": 3,
+                "stage": "Adult",
+                "parentIds": [],
+                "origin": "founding"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "event-54",
+        "time": {
+          "winter": 801,
+          "tick": 125
+        },
+        "type": "LivestockSlaughtered",
+        "details": {
+          "livestockId": "livestock-3",
+          "food": 10,
+          "hides": 2,
+          "parentIds": [],
+          "sex": "male",
+          "age": 3,
+          "farmyardId": null,
+          "livestock": {
+            "version": 1,
+            "recordedClanId": "founding-clan",
+            "animals": [
+              {
+                "id": "livestock-3",
+                "name": "Livestock 3",
+                "species": "goat",
+                "speciesName": "Goat",
+                "sex": "male",
+                "sexTerm": "Buck",
+                "birthWinter": 798,
+                "age": 3,
+                "stage": "Adult",
+                "parentIds": [],
+                "origin": "founding"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "rules": {
+    "baseLegacySuccessBps": 6000,
+    "baseLegacyCasualtyBps": 1000,
+    "onSiteUnequippedLethalityBps": 250,
+    "config": {
+      "recipes": {
+        "woodenSpear": {
+          "materials": 2,
+          "hides": 0,
+          "unitsPerWinter": 4
+        },
+        "woodenShield": {
+          "materials": 3,
+          "hides": 0,
+          "unitsPerWinter": 4
+        },
+        "leatherShield": {
+          "materials": 3,
+          "hides": 1,
+          "unitsPerWinter": 2
+        },
+        "ironSpear": {
+          "materials": 2,
+          "hides": 0,
+          "ironOre": 1,
+          "unitsPerWinter": 2
+        },
+        "ironShield": {
+          "materials": 4,
+          "hides": 0,
+          "ironOre": 2,
+          "unitsPerWinter": 1
+        },
+        "leatherBodyArmor": {
+          "materials": 3,
+          "hides": 2,
+          "unitsPerWinter": 1
+        },
+        "ironHelmet": {
+          "materials": 3,
+          "hides": 0,
+          "ironOre": 2,
+          "unitsPerWinter": 1
+        },
+        "leatherHelmet": {
+          "materials": 2,
+          "hides": 1,
+          "unitsPerWinter": 1
+        },
+        "ironBodyArmor": {
+          "materials": 3,
+          "hides": 2,
+          "ironOre": 2,
+          "unitsPerWinter": 1
+        }
+      },
+      "maximumTarget": 20,
+      "spearBonusBps": 1000,
+      "woodenShieldProtectionBps": 2500,
+      "leatherShieldProtectionBps": 4000,
+      "ironSpearBonusBps": 1500,
+      "ironShieldProtectionBps": 5000,
+      "leatherBodyArmorProtectionBps": 2000,
+      "ironHelmetProtectionBps": 1000,
+      "maximumPersonalProtectionBps": 6000,
+      "leatherHelmetProtectionBps": 500,
+      "ironBodyArmorProtectionBps": 3000
+    },
+    "formulas": {
+      "legacy": "base success + floor(sum of each actual spear bonus / crew count), capped at 10000. A wooden/iron spear gives 1000/1500 additive bps before averaging.",
+      "onSite": "floor(base action lethality * (10000 + own spear bonus)/10000). Wooden/iron spear multipliers 1.10/1.15; no legacy victory roll is added.",
+      "protection": "Actual shield * body * helmet remaining-risk factors; one product floor. Total reduction <= 60% uses a CEIL minimum remaining risk, preventing rounding-induced immunity at tiny nonzero base chances. Without new armor, original shield floor remains exact.",
+      "customPolicy": "An old custom shield above 60% remains exact alone; equipping it together with new armor is explicitly rejected atomically."
+    }
+  },
+  "parityRegressionEvidence": {
+    "suite": "Separate executed public Core tests",
+    "cases": [
+      {
+        "file": "tests/metalworking.test.mjs",
+        "seeds": 100,
+        "contract": "No iron worn: original v1 dispatch bytes, shared resolver result and final RNG unchanged."
+      },
+      {
+        "file": "tests/personal-armor.test.mjs",
+        "seeds": 100,
+        "contract": "No armor worn, including actual iron gear: original v2 dispatch bytes, shared resolver result and final RNG unchanged."
+      },
+      {
+        "file": "tests/personal-armor-variants.test.mjs",
+        "seeds": 100,
+        "contract": "No new variant worn after v4 adoption: exact v3 snapshots, shared resolver outcomes and final RNG remain unchanged."
+      }
+    ]
+  },
+  "elapsedMs": 247594.3139,
+  "results": [
+    {
+      "name": "no-shield/no-body/no-helmet",
+      "weapon": "ironSpear",
+      "shield": null,
+      "bodyArmor": null,
+      "headgear": null,
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 1000,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 250,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 11,
+      "wearerCasualtyPercent": 17.1875,
+      "wearerCasualtySeeds": [
+        2324092723,
+        1523796032,
+        965169703,
+        3169924162,
+        166913721,
+        1525774998,
+        1743781723,
+        2739347592,
+        1046180559,
+        218710498,
+        3985235812
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 11,
+      "drawCounts": {
+        "2": 2,
+        "3": 62
+      },
+      "elapsedMs": 4353.3606,
+      "snapshot": {
+        "version": 2,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": null,
+            "casualtyBps": 1000
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-83",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "no-shield/no-body/leatherHelmet",
+      "weapon": "ironSpear",
+      "shield": null,
+      "bodyArmor": null,
+      "headgear": "leatherHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 950,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 237,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 10,
+      "wearerCasualtyPercent": 15.625,
+      "wearerCasualtySeeds": [
+        2324092723,
+        1523796032,
+        3169924162,
+        166913721,
+        1525774998,
+        1743781723,
+        2739347592,
+        1046180559,
+        218710498,
+        3985235812
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 20,
+      "drawCounts": {
+        "2": 2,
+        "3": 62
+      },
+      "elapsedMs": 4458.577300000001,
+      "snapshot": {
+        "version": 4,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "leatherHelmetProtectionBps": 500,
+        "ironBodyArmorProtectionBps": 3000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": null,
+            "headgear": "leatherHelmet",
+            "bodyArmor": null,
+            "casualtyBps": 950
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": null,
+                "headgear": "leatherHelmet",
+                "bodyArmor": null,
+                "casualtyBps": 950
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-84",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "leatherHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Leather Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 2,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "no-shield/no-body/ironHelmet",
+      "weapon": "ironSpear",
+      "shield": null,
+      "bodyArmor": null,
+      "headgear": "ironHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 900,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 225,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 10,
+      "wearerCasualtyPercent": 15.625,
+      "wearerCasualtySeeds": [
+        2324092723,
+        1523796032,
+        3169924162,
+        166913721,
+        1525774998,
+        1743781723,
+        2739347592,
+        1046180559,
+        218710498,
+        3985235812
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 20,
+      "drawCounts": {
+        "2": 2,
+        "3": 62
+      },
+      "elapsedMs": 5488.901300000001,
+      "snapshot": {
+        "version": 3,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": null,
+            "headgear": "ironHelmet",
+            "bodyArmor": null,
+            "casualtyBps": 900
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": null,
+                "headgear": "ironHelmet",
+                "bodyArmor": null,
+                "casualtyBps": 900
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-84",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "ironHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Iron Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 1,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "no-shield/leatherBodyArmor/no-helmet",
+      "weapon": "ironSpear",
+      "shield": null,
+      "bodyArmor": "leatherBodyArmor",
+      "headgear": null,
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 800,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 200,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 9,
+      "wearerCasualtyPercent": 14.0625,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        166913721,
+        1525774998,
+        1743781723,
+        2739347592,
+        1046180559,
+        218710498,
+        3985235812
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 18,
+      "drawCounts": {
+        "2": 2,
+        "3": 62
+      },
+      "elapsedMs": 5161.077300000001,
+      "snapshot": {
+        "version": 3,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": null,
+            "bodyArmor": "leatherBodyArmor",
+            "headgear": null,
+            "casualtyBps": 800
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": null,
+                "bodyArmor": "leatherBodyArmor",
+                "headgear": null,
+                "casualtyBps": 800
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-84",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "leatherBodyArmor"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Leather Body Armor"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 1,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "no-shield/leatherBodyArmor/leatherHelmet",
+      "weapon": "ironSpear",
+      "shield": null,
+      "bodyArmor": "leatherBodyArmor",
+      "headgear": "leatherHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 760,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 190,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 9,
+      "wearerCasualtyPercent": 14.0625,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        166913721,
+        1525774998,
+        1743781723,
+        2739347592,
+        1046180559,
+        218710498,
+        3985235812
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 27,
+      "drawCounts": {
+        "2": 2,
+        "3": 62
+      },
+      "elapsedMs": 5720.655699999999,
+      "snapshot": {
+        "version": 4,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "leatherHelmetProtectionBps": 500,
+        "ironBodyArmorProtectionBps": 3000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": null,
+            "bodyArmor": "leatherBodyArmor",
+            "headgear": "leatherHelmet",
+            "casualtyBps": 760
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": null,
+                "bodyArmor": "leatherBodyArmor",
+                "headgear": "leatherHelmet",
+                "casualtyBps": 760
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-85",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "leatherBodyArmor",
+                "leatherHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Leather Body Armor",
+                "Leather Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 2,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "no-shield/leatherBodyArmor/ironHelmet",
+      "weapon": "ironSpear",
+      "shield": null,
+      "bodyArmor": "leatherBodyArmor",
+      "headgear": "ironHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 720,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 180,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 8,
+      "wearerCasualtyPercent": 12.5,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        166913721,
+        1525774998,
+        2739347592,
+        1046180559,
+        218710498,
+        3985235812
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 24,
+      "drawCounts": {
+        "2": 2,
+        "3": 62
+      },
+      "elapsedMs": 5922.189299999998,
+      "snapshot": {
+        "version": 3,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": null,
+            "bodyArmor": "leatherBodyArmor",
+            "headgear": "ironHelmet",
+            "casualtyBps": 720
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": null,
+                "bodyArmor": "leatherBodyArmor",
+                "headgear": "ironHelmet",
+                "casualtyBps": 720
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-85",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "leatherBodyArmor",
+                "ironHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Leather Body Armor",
+                "Iron Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 1,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "no-shield/ironBodyArmor/no-helmet",
+      "weapon": "ironSpear",
+      "shield": null,
+      "bodyArmor": "ironBodyArmor",
+      "headgear": null,
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 700,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 175,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 8,
+      "wearerCasualtyPercent": 12.5,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        166913721,
+        1525774998,
+        2739347592,
+        1046180559,
+        218710498,
+        3985235812
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 16,
+      "drawCounts": {
+        "2": 2,
+        "3": 62
+      },
+      "elapsedMs": 5041.286899999999,
+      "snapshot": {
+        "version": 4,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "leatherHelmetProtectionBps": 500,
+        "ironBodyArmorProtectionBps": 3000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": null,
+            "bodyArmor": "ironBodyArmor",
+            "headgear": null,
+            "casualtyBps": 700
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": null,
+                "bodyArmor": "ironBodyArmor",
+                "headgear": null,
+                "casualtyBps": 700
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-84",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "ironBodyArmor"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Iron-reinforced Body Armor"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 2,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "no-shield/ironBodyArmor/leatherHelmet",
+      "weapon": "ironSpear",
+      "shield": null,
+      "bodyArmor": "ironBodyArmor",
+      "headgear": "leatherHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 665,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 166,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 8,
+      "wearerCasualtyPercent": 12.5,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        166913721,
+        1525774998,
+        2739347592,
+        1046180559,
+        218710498,
+        3985235812
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 24,
+      "drawCounts": {
+        "2": 2,
+        "3": 62
+      },
+      "elapsedMs": 4365.467700000001,
+      "snapshot": {
+        "version": 4,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "leatherHelmetProtectionBps": 500,
+        "ironBodyArmorProtectionBps": 3000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": null,
+            "bodyArmor": "ironBodyArmor",
+            "headgear": "leatherHelmet",
+            "casualtyBps": 665
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": null,
+                "bodyArmor": "ironBodyArmor",
+                "headgear": "leatherHelmet",
+                "casualtyBps": 665
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-85",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "ironBodyArmor",
+                "leatherHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Iron-reinforced Body Armor",
+                "Leather Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 2,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "no-shield/ironBodyArmor/ironHelmet",
+      "weapon": "ironSpear",
+      "shield": null,
+      "bodyArmor": "ironBodyArmor",
+      "headgear": "ironHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 630,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 157,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 8,
+      "wearerCasualtyPercent": 12.5,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        166913721,
+        1525774998,
+        2739347592,
+        1046180559,
+        218710498,
+        3985235812
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 24,
+      "drawCounts": {
+        "2": 2,
+        "3": 62
+      },
+      "elapsedMs": 4597.9883000000045,
+      "snapshot": {
+        "version": 4,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "leatherHelmetProtectionBps": 500,
+        "ironBodyArmorProtectionBps": 3000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": null,
+            "bodyArmor": "ironBodyArmor",
+            "headgear": "ironHelmet",
+            "casualtyBps": 630
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": null,
+                "bodyArmor": "ironBodyArmor",
+                "headgear": "ironHelmet",
+                "casualtyBps": 630
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-85",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "ironBodyArmor",
+                "ironHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Iron-reinforced Body Armor",
+                "Iron Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 2,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "woodenShield/no-body/no-helmet",
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "bodyArmor": null,
+      "headgear": null,
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 750,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 187,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 8,
+      "wearerCasualtyPercent": 12.5,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        166913721,
+        1525774998,
+        2739347592,
+        1046180559,
+        218710498,
+        3985235812
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 16,
+      "drawCounts": {
+        "2": 2,
+        "3": 62
+      },
+      "elapsedMs": 4324.537100000001,
+      "snapshot": {
+        "version": 2,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "woodenShield",
+            "casualtyBps": 750
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "woodenShield",
+                "casualtyBps": 750
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-84",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "woodenShield"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Wooden Shield"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "woodenShield/no-body/leatherHelmet",
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "bodyArmor": null,
+      "headgear": "leatherHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 712,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 178,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 8,
+      "wearerCasualtyPercent": 12.5,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        166913721,
+        1525774998,
+        2739347592,
+        1046180559,
+        218710498,
+        3985235812
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 24,
+      "drawCounts": {
+        "2": 2,
+        "3": 62
+      },
+      "elapsedMs": 4311.407599999991,
+      "snapshot": {
+        "version": 4,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "leatherHelmetProtectionBps": 500,
+        "ironBodyArmorProtectionBps": 3000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "woodenShield",
+            "headgear": "leatherHelmet",
+            "bodyArmor": null,
+            "casualtyBps": 712
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "woodenShield",
+                "headgear": "leatherHelmet",
+                "bodyArmor": null,
+                "casualtyBps": 712
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-85",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "woodenShield",
+                "leatherHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Wooden Shield",
+                "Leather Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 2,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "woodenShield/no-body/ironHelmet",
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "bodyArmor": null,
+      "headgear": "ironHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 675,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 168,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 8,
+      "wearerCasualtyPercent": 12.5,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        166913721,
+        1525774998,
+        2739347592,
+        1046180559,
+        218710498,
+        3985235812
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 24,
+      "drawCounts": {
+        "2": 2,
+        "3": 62
+      },
+      "elapsedMs": 4243.929400000008,
+      "snapshot": {
+        "version": 3,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "woodenShield",
+            "headgear": "ironHelmet",
+            "bodyArmor": null,
+            "casualtyBps": 675
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "woodenShield",
+                "headgear": "ironHelmet",
+                "bodyArmor": null,
+                "casualtyBps": 675
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-85",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "woodenShield",
+                "ironHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Wooden Shield",
+                "Iron Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 1,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "woodenShield/leatherBodyArmor/no-helmet",
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "bodyArmor": "leatherBodyArmor",
+      "headgear": null,
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 600,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 150,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 8,
+      "wearerCasualtyPercent": 12.5,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        166913721,
+        1525774998,
+        2739347592,
+        1046180559,
+        218710498,
+        3985235812
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 24,
+      "drawCounts": {
+        "2": 2,
+        "3": 62
+      },
+      "elapsedMs": 4292.635300000009,
+      "snapshot": {
+        "version": 3,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "woodenShield",
+            "bodyArmor": "leatherBodyArmor",
+            "headgear": null,
+            "casualtyBps": 600
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "woodenShield",
+                "bodyArmor": "leatherBodyArmor",
+                "headgear": null,
+                "casualtyBps": 600
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-85",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "woodenShield",
+                "leatherBodyArmor"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Wooden Shield",
+                "Leather Body Armor"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 1,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "woodenShield/leatherBodyArmor/leatherHelmet",
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "bodyArmor": "leatherBodyArmor",
+      "headgear": "leatherHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 570,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 142,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 8,
+      "wearerCasualtyPercent": 12.5,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        166913721,
+        1525774998,
+        2739347592,
+        1046180559,
+        218710498,
+        3985235812
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 32,
+      "drawCounts": {
+        "2": 2,
+        "3": 62
+      },
+      "elapsedMs": 4257.029800000004,
+      "snapshot": {
+        "version": 4,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "leatherHelmetProtectionBps": 500,
+        "ironBodyArmorProtectionBps": 3000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "woodenShield",
+            "bodyArmor": "leatherBodyArmor",
+            "headgear": "leatherHelmet",
+            "casualtyBps": 570
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "woodenShield",
+                "bodyArmor": "leatherBodyArmor",
+                "headgear": "leatherHelmet",
+                "casualtyBps": 570
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-86",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "woodenShield",
+                "leatherBodyArmor",
+                "leatherHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Wooden Shield",
+                "Leather Body Armor",
+                "Leather Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 2,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "woodenShield/leatherBodyArmor/ironHelmet",
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "bodyArmor": "leatherBodyArmor",
+      "headgear": "ironHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 540,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 135,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 8,
+      "wearerCasualtyPercent": 12.5,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        166913721,
+        1525774998,
+        2739347592,
+        1046180559,
+        218710498,
+        3985235812
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 32,
+      "drawCounts": {
+        "2": 2,
+        "3": 62
+      },
+      "elapsedMs": 4526.141999999993,
+      "snapshot": {
+        "version": 3,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "woodenShield",
+            "bodyArmor": "leatherBodyArmor",
+            "headgear": "ironHelmet",
+            "casualtyBps": 540
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "woodenShield",
+                "bodyArmor": "leatherBodyArmor",
+                "headgear": "ironHelmet",
+                "casualtyBps": 540
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-86",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "woodenShield",
+                "leatherBodyArmor",
+                "ironHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Wooden Shield",
+                "Leather Body Armor",
+                "Iron Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 1,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "woodenShield/ironBodyArmor/no-helmet",
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "bodyArmor": "ironBodyArmor",
+      "headgear": null,
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 525,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 131,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 7,
+      "wearerCasualtyPercent": 10.9375,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        1525774998,
+        2739347592,
+        1046180559,
+        218710498,
+        3985235812
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 21,
+      "drawCounts": {
+        "2": 2,
+        "3": 62
+      },
+      "elapsedMs": 4250.202400000009,
+      "snapshot": {
+        "version": 4,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "leatherHelmetProtectionBps": 500,
+        "ironBodyArmorProtectionBps": 3000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "woodenShield",
+            "bodyArmor": "ironBodyArmor",
+            "headgear": null,
+            "casualtyBps": 525
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "woodenShield",
+                "bodyArmor": "ironBodyArmor",
+                "headgear": null,
+                "casualtyBps": 525
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-85",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "woodenShield",
+                "ironBodyArmor"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Wooden Shield",
+                "Iron-reinforced Body Armor"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 2,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "woodenShield/ironBodyArmor/leatherHelmet",
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "bodyArmor": "ironBodyArmor",
+      "headgear": "leatherHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 498,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 124,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 6,
+      "wearerCasualtyPercent": 9.375,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        1525774998,
+        2739347592,
+        218710498,
+        3985235812
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 24,
+      "drawCounts": {
+        "2": 1,
+        "3": 63
+      },
+      "elapsedMs": 4540.727500000008,
+      "snapshot": {
+        "version": 4,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "leatherHelmetProtectionBps": 500,
+        "ironBodyArmorProtectionBps": 3000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "woodenShield",
+            "bodyArmor": "ironBodyArmor",
+            "headgear": "leatherHelmet",
+            "casualtyBps": 498
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "woodenShield",
+                "bodyArmor": "ironBodyArmor",
+                "headgear": "leatherHelmet",
+                "casualtyBps": 498
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-86",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "woodenShield",
+                "ironBodyArmor",
+                "leatherHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Wooden Shield",
+                "Iron-reinforced Body Armor",
+                "Leather Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 2,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "woodenShield/ironBodyArmor/ironHelmet",
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "bodyArmor": "ironBodyArmor",
+      "headgear": "ironHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 472,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 118,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 5,
+      "wearerCasualtyPercent": 7.8125,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        1525774998,
+        2739347592,
+        218710498
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 20,
+      "drawCounts": {
+        "2": 1,
+        "3": 63
+      },
+      "elapsedMs": 4259.093699999998,
+      "snapshot": {
+        "version": 4,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "leatherHelmetProtectionBps": 500,
+        "ironBodyArmorProtectionBps": 3000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "woodenShield",
+            "bodyArmor": "ironBodyArmor",
+            "headgear": "ironHelmet",
+            "casualtyBps": 472
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "woodenShield",
+                "bodyArmor": "ironBodyArmor",
+                "headgear": "ironHelmet",
+                "casualtyBps": 472
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-86",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "woodenShield",
+                "ironBodyArmor",
+                "ironHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Wooden Shield",
+                "Iron-reinforced Body Armor",
+                "Iron Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 2,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "leatherShield/no-body/no-helmet",
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "bodyArmor": null,
+      "headgear": null,
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 600,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 150,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 8,
+      "wearerCasualtyPercent": 12.5,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        166913721,
+        1525774998,
+        2739347592,
+        1046180559,
+        218710498,
+        3985235812
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 16,
+      "drawCounts": {
+        "2": 2,
+        "3": 62
+      },
+      "elapsedMs": 4112.426999999996,
+      "snapshot": {
+        "version": 2,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "leatherShield",
+            "casualtyBps": 600
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "leatherShield",
+                "casualtyBps": 600
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-84",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "leatherShield"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Leather-reinforced Shield"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "leatherShield/no-body/leatherHelmet",
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "bodyArmor": null,
+      "headgear": "leatherHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 570,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 142,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 8,
+      "wearerCasualtyPercent": 12.5,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        166913721,
+        1525774998,
+        2739347592,
+        1046180559,
+        218710498,
+        3985235812
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 24,
+      "drawCounts": {
+        "2": 2,
+        "3": 62
+      },
+      "elapsedMs": 6853.508900000001,
+      "snapshot": {
+        "version": 4,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "leatherHelmetProtectionBps": 500,
+        "ironBodyArmorProtectionBps": 3000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "leatherShield",
+            "headgear": "leatherHelmet",
+            "bodyArmor": null,
+            "casualtyBps": 570
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "leatherShield",
+                "headgear": "leatherHelmet",
+                "bodyArmor": null,
+                "casualtyBps": 570
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-85",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "leatherShield",
+                "leatherHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Leather-reinforced Shield",
+                "Leather Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 2,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "leatherShield/no-body/ironHelmet",
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "bodyArmor": null,
+      "headgear": "ironHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 540,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 135,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 8,
+      "wearerCasualtyPercent": 12.5,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        166913721,
+        1525774998,
+        2739347592,
+        1046180559,
+        218710498,
+        3985235812
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 24,
+      "drawCounts": {
+        "2": 2,
+        "3": 62
+      },
+      "elapsedMs": 11673.621,
+      "snapshot": {
+        "version": 3,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "leatherShield",
+            "headgear": "ironHelmet",
+            "bodyArmor": null,
+            "casualtyBps": 540
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "leatherShield",
+                "headgear": "ironHelmet",
+                "bodyArmor": null,
+                "casualtyBps": 540
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-85",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "leatherShield",
+                "ironHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Leather-reinforced Shield",
+                "Iron Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 1,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "leatherShield/leatherBodyArmor/no-helmet",
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "bodyArmor": "leatherBodyArmor",
+      "headgear": null,
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 480,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 120,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 6,
+      "wearerCasualtyPercent": 9.375,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        1525774998,
+        2739347592,
+        218710498,
+        3985235812
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 18,
+      "drawCounts": {
+        "2": 1,
+        "3": 63
+      },
+      "elapsedMs": 21789.13579999999,
+      "snapshot": {
+        "version": 3,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "leatherShield",
+            "bodyArmor": "leatherBodyArmor",
+            "headgear": null,
+            "casualtyBps": 480
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "leatherShield",
+                "bodyArmor": "leatherBodyArmor",
+                "headgear": null,
+                "casualtyBps": 480
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-85",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "leatherShield",
+                "leatherBodyArmor"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Leather-reinforced Shield",
+                "Leather Body Armor"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 1,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "leatherShield/leatherBodyArmor/leatherHelmet",
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "bodyArmor": "leatherBodyArmor",
+      "headgear": "leatherHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 456,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 114,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 5,
+      "wearerCasualtyPercent": 7.8125,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        1525774998,
+        2739347592,
+        218710498
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 20,
+      "drawCounts": {
+        "2": 1,
+        "3": 63
+      },
+      "elapsedMs": 12827.835000000021,
+      "snapshot": {
+        "version": 4,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "leatherHelmetProtectionBps": 500,
+        "ironBodyArmorProtectionBps": 3000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "leatherShield",
+            "bodyArmor": "leatherBodyArmor",
+            "headgear": "leatherHelmet",
+            "casualtyBps": 456
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "leatherShield",
+                "bodyArmor": "leatherBodyArmor",
+                "headgear": "leatherHelmet",
+                "casualtyBps": 456
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-86",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "leatherShield",
+                "leatherBodyArmor",
+                "leatherHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Leather-reinforced Shield",
+                "Leather Body Armor",
+                "Leather Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 2,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "leatherShield/leatherBodyArmor/ironHelmet",
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "bodyArmor": "leatherBodyArmor",
+      "headgear": "ironHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 432,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 108,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 4,
+      "wearerCasualtyPercent": 6.25,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        1525774998,
+        218710498
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 16,
+      "drawCounts": {
+        "2": 1,
+        "3": 63
+      },
+      "elapsedMs": 12116.096700000024,
+      "snapshot": {
+        "version": 3,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "leatherShield",
+            "bodyArmor": "leatherBodyArmor",
+            "headgear": "ironHelmet",
+            "casualtyBps": 432
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "leatherShield",
+                "bodyArmor": "leatherBodyArmor",
+                "headgear": "ironHelmet",
+                "casualtyBps": 432
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-86",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "leatherShield",
+                "leatherBodyArmor",
+                "ironHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Leather-reinforced Shield",
+                "Leather Body Armor",
+                "Iron Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 1,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "leatherShield/ironBodyArmor/no-helmet",
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "bodyArmor": "ironBodyArmor",
+      "headgear": null,
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 420,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 105,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 4,
+      "wearerCasualtyPercent": 6.25,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        1525774998,
+        218710498
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 12,
+      "drawCounts": {
+        "2": 1,
+        "3": 63
+      },
+      "elapsedMs": 10866.453699999984,
+      "snapshot": {
+        "version": 4,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "leatherHelmetProtectionBps": 500,
+        "ironBodyArmorProtectionBps": 3000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "leatherShield",
+            "bodyArmor": "ironBodyArmor",
+            "headgear": null,
+            "casualtyBps": 420
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "leatherShield",
+                "bodyArmor": "ironBodyArmor",
+                "headgear": null,
+                "casualtyBps": 420
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-85",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "leatherShield",
+                "ironBodyArmor"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Leather-reinforced Shield",
+                "Iron-reinforced Body Armor"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 2,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "leatherShield/ironBodyArmor/leatherHelmet",
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "bodyArmor": "ironBodyArmor",
+      "headgear": "leatherHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 400,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 100,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 4,
+      "wearerCasualtyPercent": 6.25,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        1525774998,
+        218710498
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 16,
+      "drawCounts": {
+        "2": 1,
+        "3": 63
+      },
+      "elapsedMs": 9281.599799999996,
+      "snapshot": {
+        "version": 4,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "leatherHelmetProtectionBps": 500,
+        "ironBodyArmorProtectionBps": 3000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "leatherShield",
+            "bodyArmor": "ironBodyArmor",
+            "headgear": "leatherHelmet",
+            "casualtyBps": 400
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "leatherShield",
+                "bodyArmor": "ironBodyArmor",
+                "headgear": "leatherHelmet",
+                "casualtyBps": 400
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-86",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "leatherShield",
+                "ironBodyArmor",
+                "leatherHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Leather-reinforced Shield",
+                "Iron-reinforced Body Armor",
+                "Leather Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 2,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "leatherShield/ironBodyArmor/ironHelmet",
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "bodyArmor": "ironBodyArmor",
+      "headgear": "ironHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 400,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 100,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 4,
+      "wearerCasualtyPercent": 6.25,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        1525774998,
+        218710498
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 16,
+      "drawCounts": {
+        "2": 1,
+        "3": 63
+      },
+      "elapsedMs": 7467.27840000001,
+      "snapshot": {
+        "version": 4,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "leatherHelmetProtectionBps": 500,
+        "ironBodyArmorProtectionBps": 3000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "leatherShield",
+            "bodyArmor": "ironBodyArmor",
+            "headgear": "ironHelmet",
+            "casualtyBps": 400
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "leatherShield",
+                "bodyArmor": "ironBodyArmor",
+                "headgear": "ironHelmet",
+                "casualtyBps": 400
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-86",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "leatherShield",
+                "ironBodyArmor",
+                "ironHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Leather-reinforced Shield",
+                "Iron-reinforced Body Armor",
+                "Iron Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 2,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ironShield/no-body/no-helmet",
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "bodyArmor": null,
+      "headgear": null,
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 500,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 125,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 6,
+      "wearerCasualtyPercent": 9.375,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        1525774998,
+        2739347592,
+        218710498,
+        3985235812
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 12,
+      "drawCounts": {
+        "2": 1,
+        "3": 63
+      },
+      "elapsedMs": 5477.812600000005,
+      "snapshot": {
+        "version": 2,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "ironShield",
+            "casualtyBps": 500
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "ironShield",
+                "casualtyBps": 500
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-84",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "ironShield"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Iron-reinforced Shield"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ironShield/no-body/leatherHelmet",
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "bodyArmor": null,
+      "headgear": "leatherHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 475,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 118,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 5,
+      "wearerCasualtyPercent": 7.8125,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        1525774998,
+        2739347592,
+        218710498
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 15,
+      "drawCounts": {
+        "2": 1,
+        "3": 63
+      },
+      "elapsedMs": 5178.338099999994,
+      "snapshot": {
+        "version": 4,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "leatherHelmetProtectionBps": 500,
+        "ironBodyArmorProtectionBps": 3000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "ironShield",
+            "headgear": "leatherHelmet",
+            "bodyArmor": null,
+            "casualtyBps": 475
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "ironShield",
+                "headgear": "leatherHelmet",
+                "bodyArmor": null,
+                "casualtyBps": 475
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-85",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "ironShield",
+                "leatherHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Iron-reinforced Shield",
+                "Leather Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 2,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ironShield/no-body/ironHelmet",
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "bodyArmor": null,
+      "headgear": "ironHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 450,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 112,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 5,
+      "wearerCasualtyPercent": 7.8125,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        1525774998,
+        2739347592,
+        218710498
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 15,
+      "drawCounts": {
+        "2": 1,
+        "3": 63
+      },
+      "elapsedMs": 4286.878700000001,
+      "snapshot": {
+        "version": 3,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "ironShield",
+            "headgear": "ironHelmet",
+            "bodyArmor": null,
+            "casualtyBps": 450
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "ironShield",
+                "headgear": "ironHelmet",
+                "bodyArmor": null,
+                "casualtyBps": 450
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-85",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "ironShield",
+                "ironHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Iron-reinforced Shield",
+                "Iron Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 1,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ironShield/leatherBodyArmor/no-helmet",
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "bodyArmor": "leatherBodyArmor",
+      "headgear": null,
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 400,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 100,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 4,
+      "wearerCasualtyPercent": 6.25,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        1525774998,
+        218710498
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 12,
+      "drawCounts": {
+        "2": 1,
+        "3": 63
+      },
+      "elapsedMs": 4056.624299999996,
+      "snapshot": {
+        "version": 3,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "ironShield",
+            "bodyArmor": "leatherBodyArmor",
+            "headgear": null,
+            "casualtyBps": 400
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "ironShield",
+                "bodyArmor": "leatherBodyArmor",
+                "headgear": null,
+                "casualtyBps": 400
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-85",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "ironShield",
+                "leatherBodyArmor"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Iron-reinforced Shield",
+                "Leather Body Armor"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 1,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ironShield/leatherBodyArmor/leatherHelmet",
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "bodyArmor": "leatherBodyArmor",
+      "headgear": "leatherHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 400,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 100,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 4,
+      "wearerCasualtyPercent": 6.25,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        1525774998,
+        218710498
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 16,
+      "drawCounts": {
+        "2": 1,
+        "3": 63
+      },
+      "elapsedMs": 4105.0436000000045,
+      "snapshot": {
+        "version": 4,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "leatherHelmetProtectionBps": 500,
+        "ironBodyArmorProtectionBps": 3000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "ironShield",
+            "bodyArmor": "leatherBodyArmor",
+            "headgear": "leatherHelmet",
+            "casualtyBps": 400
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "ironShield",
+                "bodyArmor": "leatherBodyArmor",
+                "headgear": "leatherHelmet",
+                "casualtyBps": 400
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-86",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "ironShield",
+                "leatherBodyArmor",
+                "leatherHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Iron-reinforced Shield",
+                "Leather Body Armor",
+                "Leather Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 2,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ironShield/leatherBodyArmor/ironHelmet",
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "bodyArmor": "leatherBodyArmor",
+      "headgear": "ironHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 400,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 100,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 4,
+      "wearerCasualtyPercent": 6.25,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        1525774998,
+        218710498
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 16,
+      "drawCounts": {
+        "2": 1,
+        "3": 63
+      },
+      "elapsedMs": 4692.49059999999,
+      "snapshot": {
+        "version": 3,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "ironShield",
+            "bodyArmor": "leatherBodyArmor",
+            "headgear": "ironHelmet",
+            "casualtyBps": 400
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "ironShield",
+                "bodyArmor": "leatherBodyArmor",
+                "headgear": "ironHelmet",
+                "casualtyBps": 400
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-86",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "ironShield",
+                "leatherBodyArmor",
+                "ironHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Iron-reinforced Shield",
+                "Leather Body Armor",
+                "Iron Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 1,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ironShield/ironBodyArmor/no-helmet",
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "bodyArmor": "ironBodyArmor",
+      "headgear": null,
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 400,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 100,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 4,
+      "wearerCasualtyPercent": 6.25,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        1525774998,
+        218710498
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 12,
+      "drawCounts": {
+        "2": 1,
+        "3": 63
+      },
+      "elapsedMs": 4320.412699999986,
+      "snapshot": {
+        "version": 4,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "leatherHelmetProtectionBps": 500,
+        "ironBodyArmorProtectionBps": 3000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "ironShield",
+            "bodyArmor": "ironBodyArmor",
+            "headgear": null,
+            "casualtyBps": 400
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "ironShield",
+                "bodyArmor": "ironBodyArmor",
+                "headgear": null,
+                "casualtyBps": 400
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-85",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "ironShield",
+                "ironBodyArmor"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Iron-reinforced Shield",
+                "Iron-reinforced Body Armor"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 2,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ironShield/ironBodyArmor/leatherHelmet",
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "bodyArmor": "ironBodyArmor",
+      "headgear": "leatherHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 400,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 100,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 4,
+      "wearerCasualtyPercent": 6.25,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        1525774998,
+        218710498
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 16,
+      "drawCounts": {
+        "2": 1,
+        "3": 63
+      },
+      "elapsedMs": 5100.818399999989,
+      "snapshot": {
+        "version": 4,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "leatherHelmetProtectionBps": 500,
+        "ironBodyArmorProtectionBps": 3000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "ironShield",
+            "bodyArmor": "ironBodyArmor",
+            "headgear": "leatherHelmet",
+            "casualtyBps": 400
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "ironShield",
+                "bodyArmor": "ironBodyArmor",
+                "headgear": "leatherHelmet",
+                "casualtyBps": 400
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-86",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "ironShield",
+                "ironBodyArmor",
+                "leatherHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Iron-reinforced Shield",
+                "Iron-reinforced Body Armor",
+                "Leather Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 2,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ironShield/ironBodyArmor/ironHelmet",
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "bodyArmor": "ironBodyArmor",
+      "headgear": "ironHelmet",
+      "samples": 64,
+      "successBps": 6750,
+      "wearerCasualtyBps": 400,
+      "allyCasualtyBps": 1000,
+      "onSiteIncomingBpsFromUnarmed250": 100,
+      "onSiteOwnAttackBpsAgainstUnprotected": 287,
+      "successes": 43,
+      "successPercent": 67.1875,
+      "wearerDeaths": 4,
+      "wearerCasualtyPercent": 6.25,
+      "wearerCasualtySeeds": [
+        2324092723,
+        3169924162,
+        1525774998,
+        218710498
+      ],
+      "allyDeaths": 10,
+      "allyCasualtySeeds": [
+        1665313061,
+        2203430888,
+        2871654063,
+        3169924162,
+        990704979,
+        1525471468,
+        2780878989,
+        1758236976,
+        1046180559,
+        87644121
+      ],
+      "lostItems": 16,
+      "drawCounts": {
+        "2": 1,
+        "3": 63
+      },
+      "elapsedMs": 5648.765699999989,
+      "snapshot": {
+        "version": 4,
+        "baseSuccessBps": 6000,
+        "baseCasualtyBps": 1000,
+        "spearBonusBps": 1000,
+        "woodenShieldProtectionBps": 2500,
+        "leatherShieldProtectionBps": 4000,
+        "ironSpearBonusBps": 1500,
+        "ironShieldProtectionBps": 5000,
+        "leatherBodyArmorProtectionBps": 2000,
+        "ironHelmetProtectionBps": 1000,
+        "maximumPersonalProtectionBps": 6000,
+        "leatherHelmetProtectionBps": 500,
+        "ironBodyArmorProtectionBps": 3000,
+        "successBps": 6750,
+        "members": [
+          {
+            "personaId": "founder-1",
+            "name": "MaelColuim",
+            "weapon": "ironSpear",
+            "shield": "ironShield",
+            "bodyArmor": "ironBodyArmor",
+            "headgear": "ironHelmet",
+            "casualtyBps": 400
+          },
+          {
+            "personaId": "founder-2",
+            "name": "Kauppi",
+            "weapon": null,
+            "shield": null,
+            "casualtyBps": 1000
+          }
+        ]
+      },
+      "example": {
+        "seed": 2324092723,
+        "wearerDied": true,
+        "finalRng": 4047189400,
+        "outcome": {
+          "success": false,
+          "discovery": null,
+          "casualtyIds": [
+            "founder-1"
+          ],
+          "survivorIds": [
+            "founder-2"
+          ],
+          "food": 0,
+          "materials": 0,
+          "cattleIds": [],
+          "personaIds": [],
+          "equipment": {
+            "returned": [
+              {
+                "personaId": "founder-2",
+                "name": "Kauppi",
+                "weapon": null,
+                "shield": null,
+                "casualtyBps": 1000
+              }
+            ],
+            "lost": [
+              {
+                "personaId": "founder-1",
+                "name": "MaelColuim",
+                "weapon": "ironSpear",
+                "shield": "ironShield",
+                "bodyArmor": "ironBodyArmor",
+                "headgear": "ironHelmet",
+                "casualtyBps": 400
+              }
+            ]
+          },
+          "summary": "Mission failed; no discoveries or recovered assets."
+        },
+        "lossReceipts": [
+          {
+            "id": "event-86",
+            "time": {
+              "winter": 801,
+              "tick": 327
+            },
+            "type": "EquipmentLost",
+            "personaId": "founder-1",
+            "details": {
+              "name": "MaelColuim",
+              "items": [
+                "ironSpear",
+                "ironShield",
+                "ironBodyArmor",
+                "ironHelmet"
+              ],
+              "itemNames": [
+                "Iron-tipped Spear",
+                "Iron-reinforced Shield",
+                "Iron-reinforced Body Armor",
+                "Iron Helmet"
+              ],
+              "reason": "death",
+              "missionId": "mission-2",
+              "metalworkingVersion": 1,
+              "clanId": "founding-clan",
+              "personalArmorVersion": 2,
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 41
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import type { PersonalEquipment } from '../simulation/Smithery';
+import { equipmentLabels, type PersonalEquipment } from '../simulation/Smithery';
 import { characterAsset } from '../characters/CharacterAssets';
 import { nativeCombatEquipmentByItem } from '../characters/NativeCombatEquipmentCatalog';
 import { nativePersonalArmorByItem, nativePersonalArmorAges } from '../characters/NativePersonalArmorCatalog';
@@ -105,14 +105,19 @@ function personalArmorVisibility(entity: Pick<FjordEntity, 'kind' | 'dna' | 'sta
         }
         return true;
     };
-    if (gear.bodyArmor && supported(nativePersonalArmorByItem.leatherBodyArmor, 'Leather Body Armor')) {
-        if (fjordClothingSets[fjordClothingSet(entity)].outfit === gridTrialOutfitId)
-            bodyArmor = nativePersonalArmorByItem.leatherBodyArmor;
-        else stowed.push('Leather Body Armor stowed: the current work outfit is not its qualified field tunic.');
+    if (gear.bodyArmor) {
+        const asset = nativePersonalArmorByItem[gear.bodyArmor], label = equipmentLabels[gear.bodyArmor];
+        if (supported(asset, label)) {
+            if (fjordClothingSets[fjordClothingSet(entity)].outfit === gridTrialOutfitId) bodyArmor = asset;
+            else stowed.push(label + ' stowed: the current work outfit is not its qualified field tunic.');
+        }
     }
-    if (gear.headgear && supported(nativePersonalArmorByItem.ironHelmet, 'Iron Helmet')) {
-        if (occupationModuleAsset(entity, 'headwear') === 'none') headwear = nativePersonalArmorByItem.ironHelmet;
-        else stowed.push('Iron Helmet stowed while the occupational hat is worn.');
+    if (gear.headgear) {
+        const asset = nativePersonalArmorByItem[gear.headgear], label = equipmentLabels[gear.headgear];
+        if (supported(asset, label)) {
+            if (occupationModuleAsset(entity, 'headwear') === 'none') headwear = asset;
+            else stowed.push(label + ' stowed while the occupational hat is worn.');
+        }
     }
     return { bodyArmor, headwear, stowed };
 }

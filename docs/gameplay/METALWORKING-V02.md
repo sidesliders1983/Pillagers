@@ -1,7 +1,7 @@
 # Metalworking v0.2 (#224)
 
 The two owner-approved iron items extend the existing personal Weapon and Shield
-inventory. Leather Body Armor and Iron Helmet belong to the separate
+inventory. The Leather/Iron Body Armor and Helmet variants belong to the separate
 [personal armor contract](PERSONAL-ARMOR-V01.md), not this catalogue version.
 The earlier [Smithery v0.1](SMITHERY-V01.md) rules remain the historical baseline.
 

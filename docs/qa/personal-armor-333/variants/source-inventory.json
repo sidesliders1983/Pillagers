@@ -1,0 +1,844 @@
+{
+  "version": 1,
+  "rights": "Both exact sources were supplied in the owner combat Drive folder and explicitly authorized for Pillagers. Possession and task authorization do not establish an independently verified public/open redistribution license.",
+  "rawModelsPublic": false,
+  "historicalExistingIdentitiesPreserved": [
+    {
+      "path": "scripts/characters/native-personal-armor-underlay-fit.json",
+      "bytes": 4366673,
+      "sha256": "6e295089d296a494bbe450f267556aa8dbc1e8c88492caef01145e4a944aa5fc"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/iron-helmet.binding.json",
+      "bytes": 201878,
+      "sha256": "1f9578759fdbc8cd36beaa21b8b3a21cbbee9c35bb82fd17404e5ed84b32d468"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/iron-helmet.glb",
+      "bytes": 635156,
+      "sha256": "dbdebf3feaa607dd3afaa687cbdc277028bf1c00c3ae3b7b05f307fe2c1df1f8"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/iron-helmet.provenance.json",
+      "bytes": 5632,
+      "sha256": "947769d59841cb568b3406c1d6d88815cea6adc2c16a8ca40f0c071e30f97357"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/leather-body-armor.binding.json",
+      "bytes": 4369149,
+      "sha256": "8f9653339f32015fd46d56198110e28d4c0ea9c3f466658e992356b8b2d2e4c8"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/leather-body-armor.glb",
+      "bytes": 658104,
+      "sha256": "1083a715439a5a2acb3b714908070802459d3d0b8f72eb5d270956f9152c002a"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/leather-body-armor.provenance.json",
+      "bytes": 49710,
+      "sha256": "4a69f008ae108533607d49f3231772154df0702bf59a576d40a5d21b4db819f7"
+    }
+  ],
+  "topologyComparisons": [
+    {
+      "left": "Assets/Combat/leather-body-armor-original.glb",
+      "right": "Assets/Combat/iron-body-armor-original.glb",
+      "exactVertexCorrespondence": false,
+      "maximumIndexedPositionComponentDelta": null,
+      "indicesEqual": false
+    },
+    {
+      "left": "Assets/Combat/iron-helmet-original.glb",
+      "right": "Assets/Combat/leather-helmet-original.glb",
+      "exactVertexCorrespondence": false,
+      "maximumIndexedPositionComponentDelta": null,
+      "indicesEqual": false
+    }
+  ],
+  "variants": [
+    {
+      "item": "leatherHelmet",
+      "id": "headwear/native-leather-helmet",
+      "source": {
+        "item": "leatherHelmet",
+        "id": "headwear/native-leather-helmet",
+        "label": "Leather Helmet · source review",
+        "name": "leather-helmet",
+        "path": "Assets/Combat/leather-helmet-original.glb",
+        "bytes": 3413336,
+        "sha256": "aa1ace130f8377da61a25253e975b917fbd9b86753dd1e7c5b0cab4ffe099a66",
+        "driveFileId": "1N0cubr7JuFgonOF8SYK-KzBm-9l_1VGW",
+        "driveFilename": "Meshy_AI_viking_leather_helmet_1111093142_texture.glb",
+        "provider": "Meshy",
+        "triangles": 5101,
+        "rights": "Owner-supplied asset authorized for Pillagers personal armor work; no independently verified open redistribution license.",
+        "driveFolderId": "1KLQh4TMMHZmr6WPw2UpUOzJRMUouGaVV",
+        "preparation": {
+          "openingNormal": [
+            0.0016515633783521098,
+            0.9833392545215075,
+            -0.18177233798213968
+          ],
+          "openingCenterY": 0.022807146603135483,
+          "sourceRim": 0.005,
+          "openingMeasurement": {
+            "angularSamples": 72,
+            "verticalStepMetres": 0.0005,
+            "maximumPlaneResidualMetres": 0.001572106427708865,
+            "method": "Least-squares plane through first actual inner-wall contacts at72 radial angles; retain source face opening."
+          },
+          "verticalToRadialScale": {
+            "minimum": 0.95,
+            "maximum": 1.1,
+            "reason": "Preserve the actual supplied cap depth; the unconstrained minimum-volume objective compressedY to0.4 despite radial0.71–0.81."
+          },
+          "crownRimGutterMetres": 0.006,
+          "hairClearanceMetres": 0.005
+        },
+        "textures": [
+          {
+            "width": 2048,
+            "height": 2048,
+            "mime": "image/png",
+            "bytes": 3173360
+          }
+        ],
+        "sourceVertices": 5538,
+        "sourceTriangles": 5101,
+        "bounds": {
+          "min": [
+            -0.11776131391525269,
+            0,
+            -0.1299598067998886
+          ],
+          "max": [
+            0.11789529025554657,
+            0.20000000298023224,
+            0.13103213906288147
+          ]
+        },
+        "nodeTransform": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "skins": 0,
+        "animations": 0
+      },
+      "prepared": {
+        "sha256": "fafaf39d0e7a1cc550199d33f2ef102c96e5f12aafe2462e97f0db3dd94fde33",
+        "triangles": 5101,
+        "materials": 1,
+        "bytes": 636128,
+        "bounds": {
+          "min": [
+            -0.08386796712875366,
+            1.60014009475708,
+            -0.08851432055234909
+          ],
+          "max": [
+            0.08268096297979355,
+            1.7345244884490967,
+            0.12352193892002106
+          ]
+        },
+        "bindingSha256": "40e327c7766620789d9f08cdcc10b1d83221fda10ee3a402257112d7257c99e4",
+        "path": "public/character-lab/modules/native-personal-armor/leather-helmet.glb",
+        "preservation": {
+          "sourceUVsExact": true,
+          "sourceIndicesExact": true,
+          "sourceVertices": 5538,
+          "derivedVertices": 5538
+        }
+      },
+      "fitting": {
+        "method": "Level actual source opening, ray-measure inner cavity, then solve against native skull",
+        "sourceOpeningNormal": [
+          0.0016515633783521098,
+          0.9833392545215075,
+          -0.18177233798213968
+        ],
+        "sourceRim": 0.005,
+        "lowerBandSamples": 194,
+        "cavityField": {
+          "angularSamples": 96,
+          "heightSamples": 80,
+          "minimumY": -0.010759905242919459,
+          "stepY": 0.001774485996101476,
+          "ceilingY": 0.11522860048028534,
+          "closedRows": 67
+        },
+        "sourceProfile": [
+          [
+            0,
+            0.10887702840154756,
+            0.11363361111845273
+          ],
+          [
+            0.002248688549473317,
+            0.10854676293594566,
+            0.11432138368897499
+          ],
+          [
+            0.004497377098946633,
+            0.10741613011602773,
+            0.11649424496952059
+          ],
+          [
+            0.006746065648419953,
+            0.10897579986039674,
+            0.11735376575026923
+          ],
+          [
+            0.008994754197893268,
+            0.10986414709468637,
+            0.11695439278836312
+          ],
+          [
+            0.011243442747366585,
+            0.11076918713257407,
+            0.11720926288637085
+          ],
+          [
+            0.013492131296839904,
+            0.1114375380447202,
+            0.11728625349124294
+          ],
+          [
+            0.01574081984631322,
+            0.11036368157202228,
+            0.11711614263958951
+          ],
+          [
+            0.017989508395786537,
+            0.1096691567597472,
+            0.11291852827345021
+          ],
+          [
+            0.020238196945259856,
+            0.10918801056164724,
+            0.1120836857479304
+          ],
+          [
+            0.022486885494733173,
+            0.1076896239514085,
+            0.11210047862353878
+          ],
+          [
+            0.02473557404420649,
+            0.10600664232319049,
+            0.11215077035699779
+          ],
+          [
+            0.026984262593679805,
+            0.10442389336069081,
+            0.11220106209045681
+          ],
+          [
+            0.029232951143153125,
+            0.10406679507123992,
+            0.11225135382391589
+          ],
+          [
+            0.03148163969262644,
+            0.10370969678178904,
+            0.11230164555737494
+          ],
+          [
+            0.03373032824209976,
+            0.10335259849233816,
+            0.11235193729083397
+          ],
+          [
+            0.035979016791573074,
+            0.10299550020288728,
+            0.11240222902429298
+          ],
+          [
+            0.03822770534104639,
+            0.1026384019134364,
+            0.11245252075775203
+          ],
+          [
+            0.04047639389051971,
+            0.102323007221064,
+            0.11245496685745306
+          ],
+          [
+            0.042725082439993026,
+            0.10218787539535089,
+            0.11245403622976953
+          ],
+          [
+            0.044973770989466345,
+            0.10205274356963777,
+            0.11193914825869365
+          ],
+          [
+            0.047222459538939665,
+            0.10190581475666724,
+            0.11135619252583176
+          ],
+          [
+            0.04947114808841298,
+            0.1016381196807376,
+            0.11077323679296985
+          ],
+          [
+            0.0517198366378863,
+            0.10137021956569817,
+            0.11019891476024658
+          ],
+          [
+            0.05396852518735962,
+            0.10101253468427888,
+            0.10963918483139723
+          ],
+          [
+            0.05621721373683293,
+            0.10055065788954165,
+            0.10907945490254792
+          ],
+          [
+            0.05846590228630625,
+            0.09991004909833207,
+            0.10846115005820653
+          ],
+          [
+            0.060714590835779576,
+            0.09926944030712251,
+            0.10757107317864287
+          ],
+          [
+            0.06296327938525288,
+            0.09862883151591294,
+            0.10668099629907922
+          ],
+          [
+            0.0652119679347262,
+            0.09798822272470338,
+            0.10579091941951559
+          ],
+          [
+            0.06746065648419952,
+            0.09729029353665265,
+            0.10490084253995197
+          ],
+          [
+            0.06970934503367283,
+            0.09652116345882034,
+            0.10401076566038832
+          ],
+          [
+            0.07195803358314615,
+            0.09575203338098803,
+            0.10312068878082468
+          ],
+          [
+            0.07420672213261947,
+            0.09498290330315573,
+            0.10223061190126104
+          ],
+          [
+            0.07645541068209279,
+            0.09421377322532344,
+            0.10134053502169738
+          ],
+          [
+            0.0787040992315661,
+            0.09344464314749112,
+            0.10045045814213376
+          ],
+          [
+            0.08095278778103943,
+            0.09268924570111875,
+            0.09956038126257011
+          ],
+          [
+            0.08320147633051274,
+            0.09184964612739997,
+            0.09867030438300647
+          ],
+          [
+            0.08545016487998605,
+            0.09095126461865877,
+            0.09778022750344283
+          ],
+          [
+            0.08769885342945938,
+            0.09005288310991756,
+            0.09689015062387918
+          ],
+          [
+            0.08994754197893269,
+            0.08915450160117637,
+            0.09600007374431556
+          ],
+          [
+            0.092196230528406,
+            0.08815608868355572,
+            0.09508935685722722
+          ],
+          [
+            0.09444491907787933,
+            0.08710830356320291,
+            0.09394743206792426
+          ],
+          [
+            0.09669360762735264,
+            0.08606051844285013,
+            0.09133692022313943
+          ],
+          [
+            0.09894229617682596,
+            0.08483894805619835,
+            0.08903302800071593
+          ],
+          [
+            0.10119098472629928,
+            0.08379652912770137,
+            0.08695630164312827
+          ],
+          [
+            0.1034396732757726,
+            0.08275411019920438,
+            0.08511034032192151
+          ],
+          [
+            0.10568836182524591,
+            0.08124727309948544,
+            0.08326437900071475
+          ],
+          [
+            0.10793705037471923,
+            0.0795955420538975,
+            0.08141841767950797
+          ],
+          [
+            0.11018573892419255,
+            0.07794381100830958,
+            0.0795724563583012
+          ],
+          [
+            0.11243442747366586,
+            0.07605771502603445,
+            0.07772649503709445
+          ],
+          [
+            0.11468311602313919,
+            0.07429916863476718,
+            0.07588053371588767
+          ],
+          [
+            0.1169318045726125,
+            0.07254062224349991,
+            0.07398299208504037
+          ],
+          [
+            0.11918049312208581,
+            0.07078207585223265,
+            0.07198006170880406
+          ],
+          [
+            0.12142918167155914,
+            0.06902352946096536,
+            0.06972184831722486
+          ],
+          [
+            0.12367787022103244,
+            0.06726498306969812,
+            0.06741775159075139
+          ],
+          [
+            0.12592655877050576,
+            0.06550643667843084,
+            0.0651136548642779
+          ],
+          [
+            0.1281752473199791,
+            0.06362739268978357,
+            0.06280955813780441
+          ],
+          [
+            0.1304239358694524,
+            0.06172827781759225,
+            0.060505461411330945
+          ],
+          [
+            0.13267262441892572,
+            0.059829162945400895,
+            0.05778715730961163
+          ],
+          [
+            0.13492131296839904,
+            0.057930048073209554,
+            0.05494622388855038
+          ],
+          [
+            0.13717000151787234,
+            0.05600052290327444,
+            0.052105290467489185
+          ],
+          [
+            0.13941869006734567,
+            0.05389976161149964,
+            0.049264357046427946
+          ],
+          [
+            0.141667378616819,
+            0.05179900031972484,
+            0.046423423625366715
+          ],
+          [
+            0.1439160671662923,
+            0.04911364406038611,
+            0.04358249020430552
+          ],
+          [
+            0.14616475571576562,
+            0.0445110039797569,
+            0.04074155678324428
+          ],
+          [
+            0.14841344426523895,
+            0.03967615662492216,
+            0.037900623362183035
+          ],
+          [
+            0.15066213281471225,
+            0.034841309270087495,
+            0.03498525074345698
+          ],
+          [
+            0.15291082136418557,
+            0.030018830073526043,
+            0.03185380036501737
+          ],
+          [
+            0.1551595099136589,
+            0.02578602116145609,
+            0.026519200162471872
+          ],
+          [
+            0.1574081984631322,
+            0.021100383647656543,
+            0.02058437185637349
+          ],
+          [
+            0.15965688701260553,
+            0.015697080230363883,
+            0.01608206413764315
+          ],
+          [
+            0.16190557556207885,
+            0.010293776813071224,
+            0.011665548634896258
+          ],
+          [
+            0.16415426411155215,
+            0.00489047339577863,
+            0.005537417567582408
+          ],
+          [
+            0.16640295266102548,
+            0.018911147733391188,
+            0.004660560996341123
+          ],
+          [
+            0.1686516412104988,
+            0.013375339478436263,
+            0.0054157387542565685
+          ],
+          [
+            0.1709003297599721,
+            0.0030289112073590614,
+            0.0031019596418260533
+          ],
+          [
+            0.17314901830944543,
+            0.0045427151371601575,
+            0.0027357662217092973
+          ]
+        ],
+        "scale": [
+          0.7067454232380589,
+          0.7200000000000003,
+          0.8106785737142439
+        ],
+        "frame": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          -0.000634807064279222,
+          1.6049999999999995,
+          0.015,
+          1
+        ],
+        "transform": [
+          0.7067444512599456,
+          0.0011891256324135196,
+          0.0001227085218628077,
+          0,
+          -0.0011672348588379405,
+          0.7080042632554857,
+          0.1473589396960645,
+          0,
+          0.00010697666008552468,
+          -0.13087608334714065,
+          0.7971731792487948,
+          0,
+          -0.000608185767733415,
+          1.5852524429722867,
+          0.011639163059069256,
+          1
+        ],
+        "skullClearanceMetres": 0.003
+      }
+    },
+    {
+      "item": "ironBodyArmor",
+      "id": "garment/native-iron-body-armor",
+      "source": {
+        "item": "ironBodyArmor",
+        "id": "garment/native-iron-body-armor",
+        "label": "Iron-reinforced Body Armor · source review",
+        "name": "iron-body-armor",
+        "path": "Assets/Combat/iron-body-armor-original.glb",
+        "bytes": 3834404,
+        "sha256": "78ff9395653e12472c7dc792245f44b98e7c66e4cf16470fff4abc08a6f402e5",
+        "driveFileId": "1p_kaHyRNed8w-G0YVWquLlS05YdbsIQF",
+        "driveFilename": "Meshy_AI_viking_iron_bust_mode_1111093247_texture.glb",
+        "provider": "Meshy",
+        "triangles": 6697,
+        "rights": "Owner-supplied asset authorized for Pillagers personal armor work; no independently verified open redistribution license.",
+        "driveFolderId": "1KLQh4TMMHZmr6WPw2UpUOzJRMUouGaVV",
+        "preparation": {
+          "carrier": "largest-geometrically-connected-source-panel",
+          "sourceWeldTolerance": 0.000001,
+          "mainSourceTriangles": 2016,
+          "cageSmoothingPasses": 6,
+          "smallDetailMaximumDiameter": 0.08,
+          "target": "actual-native-body-torso-and-shoulder-surface",
+          "nativeInfluences": 4,
+          "sourceSeed": {
+            "translation": [
+              0,
+              0.95,
+              -0.018
+            ],
+            "scale": [
+              0.8430952699535348,
+              0.77,
+              1.0013538488326887
+            ]
+          },
+          "localSkinClearance": {
+            "sourceVertices": [],
+            "mirrored": true,
+            "maximumOffset": 0.008,
+            "footprint": 0.03,
+            "reason": "No indexed patch from the differing leather source is reused; actual iron geometry receives its own bounded qualification."
+          },
+          "finalPointDonorBodyLOD": 2,
+          "centralBackClearance": {
+            "center": [
+              0.015,
+              1.178
+            ],
+            "radii": [
+              0.05,
+              0.07
+            ],
+            "maximumZ": -0.07,
+            "maximumOffset": 0.013,
+            "reason": "Reuse the accepted native-body central-back fitting dimension; actual new geometry is separately qualified."
+          },
+          "underlayPanelComponentCounts": [
+            2016,
+            322,
+            136,
+            131,
+            55,
+            43
+          ],
+          "preparedAssetSha256": "bf9cc7cabc42ed3c9a570d27de5f08a4f7f9dcf412ccf5bc917f8c9fb3294d1c",
+          "mainOuterTriangles": 1038
+        },
+        "underlayFit": {
+          "path": "scripts/characters/native-iron-body-armor-underlay-fit.json",
+          "sha256": "b83a3a594f209736a97ae5089d6ee08dc03a9b91b21c73d7b86d25de1b4683a9",
+          "armorSha256": "bf9cc7cabc42ed3c9a570d27de5f08a4f7f9dcf412ccf5bc917f8c9fb3294d1c",
+          "tunicSha256": "79794137e3e2bb33da24429d084cec0e5fb84711fdc4fd87c1568b1dabb4d52e",
+          "bodySourceSha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+          "vertices": 23559,
+          "derivation": "scripts/characters/derive-native-personal-armor-underlay-fit.mjs",
+          "derivationArguments": [
+            "--item=ironBodyArmor"
+          ]
+        },
+        "textures": [
+          {
+            "width": 2048,
+            "height": 2048,
+            "mime": "image/png",
+            "bytes": 3533660
+          }
+        ],
+        "sourceVertices": 6839,
+        "sourceTriangles": 6697,
+        "bounds": {
+          "min": [
+            -0.23097077012062073,
+            0,
+            -0.18351273238658905
+          ],
+          "max": [
+            0.23097077012062073,
+            0.6000000238418579,
+            0.17950698733329773
+          ]
+        },
+        "nodeTransform": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "skins": 0,
+        "animations": 0
+      },
+      "prepared": {
+        "sha256": "bf9cc7cabc42ed3c9a570d27de5f08a4f7f9dcf412ccf5bc917f8c9fb3294d1c",
+        "triangles": 6697,
+        "materials": 1,
+        "bytes": 744320,
+        "bounds": {
+          "min": [
+            -0.18978449702262878,
+            0.9493841528892517,
+            -0.1922934353351593
+          ],
+          "max": [
+            0.18457083404064178,
+            1.4421405792236328,
+            0.18137677013874054
+          ]
+        },
+        "bindingSha256": "2f776841ac4bc51c88bd96fe18a39c20b7adfa55827344c1099210d5e9ba547c",
+        "path": "public/character-lab/modules/native-personal-armor/iron-body-armor.glb",
+        "preservation": {
+          "sourceUVsExact": true,
+          "sourceIndicesExact": true,
+          "sourceVertices": 6839,
+          "derivedVertices": 6839
+        }
+      },
+      "fitting": {
+        "method": "Smooth native BODY-supported main source panel cage; actual details preserved as source-surface residuals",
+        "sourceVertices": 6839,
+        "sourceTriangles": 6697,
+        "sourceComponents": 146,
+        "mainSourceTriangles": 2016,
+        "mainOuterTriangles": 1038,
+        "mainInnerTriangles": 928,
+        "cageControls": 736,
+        "cageSmoothingPasses": 6,
+        "projectedControls": 444,
+        "maximumControlProjection": 0.02199912616141883,
+        "localSkinClearance": {
+          "sourceVertices": [],
+          "mirrored": true,
+          "maximumOffset": 0.008,
+          "footprint": 0.03,
+          "controls": 0,
+          "reason": "No indexed patch from the differing leather source is reused; actual iron geometry receives its own bounded qualification."
+        },
+        "rigidSmallDetailComponents": 135,
+        "smallDetailMaximumDiameter": 0.08,
+        "maximumSourceDisplacement": 0.07875238155594108,
+        "maximumDetailResidual": 0.056402016197807034,
+        "maximumDiscardedNativeMass": 0.17819276950061713,
+        "finalPointDonorBodyLOD": 2,
+        "finalPointDonorBodySha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+        "maximumPreviousToFinalWeightDifference": 0.34527662185353103,
+        "centralBackClearance": {
+          "center": [
+            0.015,
+            1.178
+          ],
+          "radii": [
+            0.05,
+            0.07
+          ],
+          "maximumZ": -0.07,
+          "maximumOffset": 0.013,
+          "reason": "Reuse the accepted native-body central-back fitting dimension; actual new geometry is separately qualified."
+        },
+        "maximumBackClearanceBias": 0.013,
+        "backClearanceVertices": 109,
+        "nativeJointVertexCounts": {
+          "0": 3236,
+          "1": 5493,
+          "2": 4119,
+          "4": 924,
+          "5": 212,
+          "8": 2356,
+          "9": 2427,
+          "21": 3111,
+          "22": 2533,
+          "34": 1252,
+          "39": 1478
+        },
+        "sourceNormalThickness": {
+          "min": 0,
+          "max": 0.011498641324260005,
+          "mean": 0.002594418141065066
+        },
+        "bodySourceSha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "bodyDomainTriangles": 2389,
+        "clearanceMetres": 0.008,
+        "underlayFit": {
+          "vertices": 23559,
+          "maximumDisplacementMetres": 0.06932891458934916,
+          "sourceDataSha256": "b83a3a594f209736a97ae5089d6ee08dc03a9b91b21c73d7b86d25de1b4683a9",
+          "nativeBodyCoverageAdded": 0,
+          "originalUnderlayIndicesRetained": true
+        }
+      }
+    }
+  ]
+}

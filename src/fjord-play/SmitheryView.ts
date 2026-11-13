@@ -5,7 +5,8 @@ import { miningBusy } from '../simulation/Mining';
 import { territorialDuty } from '../simulation/ResidentPresence';
 import { weatherProfile } from '../simulation/Weather';
 import { craftingOccupation, defaultSmitheryConfig, equipmentFor, equipmentItems, equipmentLabels,
-    equipmentOwned, equipmentRecipe, equipmentCasualtyRisk, equipmentSpearBonus,
+    equipmentOwned, equipmentRecipe, equipmentCraftingOccupation, bodyArmorItems, headgearItems,
+    equipmentCasualtyRisk, equipmentSpearBonus,
     pillageEquipment, type EquipmentItem, type EquipmentResult, type PillageEquipment } from '../simulation/Smithery';
 
 const escape = (value: unknown) => String(value ?? '').replace(/[&<>"']/g,
@@ -37,7 +38,7 @@ export function renderSmithery(state: SimulationState): string {
             const stored = state.smithery?.stored[item] ?? 0;
             return `<article><h3>${equipmentLabels[item]}</h3>
                 <p>${stored} stored · ${owned - stored} assigned · ${owned} total</p>
-                <p class="fjord-caption">${item === 'leatherShield' || item === 'leatherBodyArmor' ? 'Leatherworker' : 'Smith'} ·
+                <p class="fjord-caption">${equipmentCraftingOccupation(item) === 'leatherAndJewelleryMaker' ? 'Leatherworker' : 'Smith'} ·
                 ${recipe.materials} Materials${recipe.hides ? ` + ${recipe.hides} ${recipe.hides === 1 ? 'Hide' : 'Hides'}` : ''}${recipe.ironOre ? ` + ${recipe.ironOre} Iron Ore` : ''} per item</p>
                 <label>Target stock<input type="number" inputmode="numeric" min="0" max="${rules.maximumTarget}"
                     step="1" value="${state.smithery?.targets[item] ?? 0}" data-smithery-target="${item}"
@@ -82,8 +83,8 @@ export function renderRaiderEquipment(state: SimulationState, memberIds: readonl
     const slots = [
         { key: 'weapon', label: 'Weapon', items: weapons },
         { key: 'shield', label: 'Shield', items: shields },
-        { key: 'bodyArmor', label: 'Body Armor', items: ['leatherBodyArmor'] },
-        { key: 'headgear', label: 'Headgear', items: ['ironHelmet'] },
+        { key: 'bodyArmor', label: 'Body Armor', items: bodyArmorItems },
+        { key: 'headgear', label: 'Headgear', items: headgearItems },
     ] as const;
     const snapshot = pillageEquipment(state, memberIds, state.world!.config.successBps.Pillage,
         Math.min(10000, state.world!.config.casualtyBps.Pillage + weatherProfile(state).travelRiskBps));

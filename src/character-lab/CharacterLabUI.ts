@@ -15,7 +15,7 @@ import { characterAsset } from '../characters/CharacterAssets';
 import {gridTrialOutfitId} from '../characters/GridTrialOutfitCatalog';
 import { nativeCombatEquipmentByItem, nativeSpearAssets,
     nativeShieldAssets } from '../characters/NativeCombatEquipmentCatalog';
-import { nativePersonalArmorByItem } from '../characters/NativePersonalArmorCatalog';
+import { nativePersonalArmorByItem, nativeBodyArmorAssets, nativeHelmetAssets } from '../characters/NativePersonalArmorCatalog';
 import { fjordClothingSets } from '../fjord-play/FjordWardrobe';
 import { CharacterPresentation, GarmentChoiceKey, defaultCharacterPresentation, presentationChoices, presentationModuleFields, separateGarmentKeys, resolveCharacterPresentation, outfitAllowsSeparateFootwear } from '../characters/CharacterPresentation';
 
@@ -78,9 +78,11 @@ export class CharacterLabUI {
                             <label>Body Armor<select id="lab-combat-body-armor">
                                 <option value="none">None</option>
                                 <option value="${nativePersonalArmorByItem.leatherBodyArmor}">Leather Body Armor</option>
+                                <option value="${nativePersonalArmorByItem.ironBodyArmor}">Iron-reinforced Body Armor</option>
                             </select></label>
                             <label>Headgear<select id="lab-combat-headgear">
                                 <option value="none">None</option>
+                                <option value="${nativePersonalArmorByItem.leatherHelmet}">Leather Helmet</option>
                                 <option value="${nativePersonalArmorByItem.ironHelmet}">Iron Helmet</option>
                             </select></label>
                         </div>
@@ -184,7 +186,7 @@ export class CharacterLabUI {
                 this.onPresentation({ ...this.presentation,
                     outfit: field.outfit, shoes: field.shoes,
                     trousers: field.trousers, top: field.top,
-                    headwear: this.presentation.headwear === nativePersonalArmorByItem.ironHelmet
+                    headwear: nativeHelmetAssets.includes(this.presentation.headwear)
                         ? this.presentation.headwear : 'none',
                     [key]: choice.value,
                 });
@@ -243,8 +245,8 @@ export class CharacterLabUI {
         for (const [id, items] of [
             ['lab-combat-weapon', nativeSpearAssets],
             ['lab-combat-shield', nativeShieldAssets],
-            ['lab-combat-body-armor', [nativePersonalArmorByItem.leatherBodyArmor]],
-            ['lab-combat-headgear', [nativePersonalArmorByItem.ironHelmet]],
+            ['lab-combat-body-armor', nativeBodyArmorAssets],
+            ['lab-combat-headgear', nativeHelmetAssets],
         ] as const) {
             const select = document.getElementById(id) as HTMLSelectElement;
             select.disabled = !eligible;

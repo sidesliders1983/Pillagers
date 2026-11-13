@@ -10,7 +10,8 @@ import { parseArgs } from 'node:util';
 const { values } = parseArgs({ options: {
     origin: { type: 'string', default: 'http://127.0.0.1:5204' },
     output: { type: 'string' }, chrome: { type: 'string' },
-    'expect-commit': { type: 'string' }, help: { type: 'boolean', default: false },
+    'expect-commit': { type: 'string' },
+    armor: { type: 'string', default: 'leather' }, helmet: { type: 'string', default: 'iron' }, help: { type: 'boolean', default: false },
 } });
 if (values.help) {
     console.log(`Usage: node scripts/qa/capture-personal-armor-native.mjs [options]
@@ -18,6 +19,9 @@ if (values.help) {
   --output PATH        Evidence directory, relative to the repository or absolute
   --chrome PATH        Optional Chrome executable; otherwise Playwright Chromium
   --expect-commit SHA  Require this exact source commit; a clean build is always required
+
+  --armor leather|iron Choose the actual body armor model (default leather)
+  --helmet leather|iron Choose the actual helmet model (default iron)
 
 Set PILLAGERS_PLAYWRIGHT_MODULE to an installed Playwright module directory when
 Playwright is not installed locally. No packages are installed by this runner.
@@ -28,12 +32,15 @@ performance, physical-device or owner-acceptance pass.`);
     process.exit(0);
 }
 
+assert.ok(['leather', 'iron'].includes(values.armor));
+assert.ok(['leather', 'iron'].includes(values.helmet));
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const origin = new URL(values.origin).origin;
 const output = resolve(root, values.output ??
     'scratch/personal-armor-browser/native-' + new Date().toISOString().replace(/[:.]/g, '-'));
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
-const armorId = 'garment/native-leather-body-armor', helmetId = 'headwear/native-iron-helmet';
+const armorId = values.armor === 'iron' ? 'garment/native-iron-body-armor' : 'garment/native-leather-body-armor';
+const helmetId = values.helmet === 'leather' ? 'headwear/native-leather-helmet' : 'headwear/native-iron-helmet';
 const ironSpear = 'equipment/native-iron-spear', woodenSpear = 'equipment/native-wooden-spear';
 const ironShield = 'equipment/native-iron-shield';
 const report = {
@@ -42,7 +49,8 @@ const report = {
     scope: { publicDOMOnly: true, isolatedContext: true, storageInjection: false,
         viewport: [1600, 1100], deviceScaleFactor: 2, videoSize: [1280, 880],
         stillZoom: 'One public -450 wheel step after each exact fixed view reset.',
-        source: 'Native Meshy body; normal field tunic, Leather Body Armor and Iron Helmet.',
+        source: 'Native Meshy body and normal field tunic with the selected actual source variants.',
+        armorId, helmetId,
         phase: 'Frozen CombatDeath time divided by the public clip duration.',
         live: 'Six public animation selections, 90 browser animation-frame callbacks each.',
     },
@@ -182,7 +190,7 @@ try {
     report.build = await buildResponse.json();
     assert.equal(report.build.source.dirty, false, 'Native capture requires a clean served build.');
     if (values['expect-commit']) assert.equal(report.build.source.commit, values['expect-commit']);
-    await page.goto(origin + '/character-lab?combat=ready&weapon=iron&shield=iron&armor=leather&helmet=iron',
+    await page.goto(origin + '/character-lab?combat=ready&weapon=iron&shield=iron&armor=' + values.armor + '&helmet=' + values.helmet,
         { waitUntil: 'domcontentloaded' });
     await ready(2, ironSpear, ironShield);
     initialDNA = JSON.parse(await page.locator('#lab-json').inputValue());

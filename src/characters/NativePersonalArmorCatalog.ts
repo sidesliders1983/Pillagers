@@ -5,8 +5,17 @@ import { meshyRigSignature } from './MeshyNativeRig';
 
 export const nativePersonalArmorByItem = Object.freeze({
     leatherBodyArmor: 'garment/native-leather-body-armor',
+    ironBodyArmor: 'garment/native-iron-body-armor',
+    leatherHelmet: 'headwear/native-leather-helmet',
     ironHelmet: 'headwear/native-iron-helmet',
 } as const);
+
+export const nativeBodyArmorAssets: readonly string[] = Object.freeze([
+    nativePersonalArmorByItem.leatherBodyArmor, nativePersonalArmorByItem.ironBodyArmor,
+]);
+export const nativeHelmetAssets: readonly string[] = Object.freeze([
+    nativePersonalArmorByItem.leatherHelmet, nativePersonalArmorByItem.ironHelmet,
+]);
 
 /** Eligibility comes from the exact prepared binding, not a guessed field age. */
 export function nativePersonalArmorAges(assetId: string) {
@@ -15,7 +24,7 @@ export function nativePersonalArmorAges(assetId: string) {
 
 /** Supplied protective pieces remain explicit previews until combined fit acceptance. */
 export const nativePersonalArmorAssets: CharacterAsset[] = nativePersonalArmorRecords.map(record => {
-    const bodyArmor = record.item === 'leatherBodyArmor';
+    const bodyArmor = nativeBodyArmorAssets.includes(record.id);
     return {
         id: record.id, type: bodyArmor ? 'garment' : 'headwear', version: 1,
         scope: 'body-bound', reviewStatus: 'preview', label: record.label,

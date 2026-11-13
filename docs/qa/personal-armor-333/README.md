@@ -1,5 +1,9 @@
 # Personal armor QA - #333
 
+Current four-variant follow-up: [Leather/Iron body armor and helmets](variants/README.md).
+The recipe/production path now includes nine products. The earlier retained browser
+and balance evidence below records its original two-item scope.
+
 This follow-up is stacked on iron equipment #224 (draft PR #334), itself stacked
 on the native combat-presentation baseline #310 (draft PR #332). It does not
 merge those drafts or publish to Sites. Owner-approved trial rules are in
@@ -37,9 +41,10 @@ Run from this worktree:
 
 Open /qa/review.html on that server. It offers downloads; it never replaces a
 browser campaign automatically. Import through Load game and choose Continue
-campaign. Seed 25 selects the actual shipping island 7. Fionnín has the four
-personal items in Group 2 (Armor QA). The ally owns the Wooden Shield; the
-Leather-reinforced Shield is stored. The accelerated saved labour threshold and
+campaign. Seed 25 selects the actual shipping island 7. Fionnín has the iron body/helmet and iron hand items in Group 2 (Armor QA).
+The ally has the leather body/helmet and Wooden Spear/Shield; the Leather-reinforced
+Shield is stored. The current QA file explicitly uses two Hides per eligible
+slaughter (normal FjordSide: one). The accelerated saved labour threshold and
 ample starting supplies are explicit QA settings. Ore, Hides, finished equipment
 and Recon knowledge still come from public commands and genuine outcomes.
 

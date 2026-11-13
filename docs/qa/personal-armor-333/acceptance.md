@@ -1,5 +1,9 @@
 # Personal armor #333 — acceptance status
 
+> Four-variant follow-up: [current QA guide](variants/README.md). The retained
+> matrix below records the original two-item clean build, not acceptance of the
+> subsequently added Leather Helmet and Iron-reinforced Body Armor.
+
 This is a combined-playtest checklist, not owner or release acceptance.
 The implementation rules are pinned at 99a254fa6eee76c401981b795b32f20d801c6eae;
 current clean browser build: **7f756202b47e30ad9db6b96f95eea1aa56cedeb3**.

@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
+import { parseArgs } from 'node:util';
+import { resolve } from 'node:path';
 import { loadTypeScript } from '../load-typescript.mjs';
 
 const load = file => loadTypeScript(new URL('../../src/' + file + '.ts', import.meta.url));
@@ -13,6 +15,13 @@ const { SharedSettlement } = load('play/SharedSettlement');
 const { fjordLivestockRules } = load('config/FjordLivestock');
 const { planRoute } = load('world-generation/LandRoutes');
 
+const { values } = parseArgs({ options: { output: { type: 'string' } } });
+// Explicit QA supply policy; normal FjordSide keeps one Hide per eligible animal.
+const qaLivestockRules = {
+    ...structuredClone(fjordLivestockRules),
+    hides: Object.fromEntries(Object.entries(fjordLivestockRules.hides)
+        .map(([species, quantity]) => [species, quantity * 2])),
+};
 const seed = 25;
 assert.equal(islandRecipe(seed).seed, 7);
 const entry = campaignIslandCatalog.entries.find(value =>
@@ -24,7 +33,7 @@ const campaign = core.createCampaign(seed,
     { mortalityBands: [{ minAge: 0, chanceBps: 0 }], fertilityChanceBps: 0,
         partnershipChanceBps: 0, switchTicks: 0, workPerUnit: 100000 },
     { enabled: false }, {}, {}, {}, 'summer-800-v1', undefined,
-    { player: fjordLivestockRules });
+    { player: qaLivestockRules });
 const session = new GameplaySession();
 session.loadJSON(core.serializeState(campaign));
 const shared = new SharedSettlement(session, undefined, true, 'island-pool-v3');
@@ -69,18 +78,19 @@ waitUntil(() => !core.personaAway(state(), 'founder-2'), 3000, 'The scout must r
 const matureAnimals = () => Object.values(state().landing.cattle).filter(animal =>
     animal.deathWinter === null && state().landing.livestock.hides[animal.species] > 0 &&
     state().time.winter - animal.birthWinter >= 2);
-waitUntil(() => matureAnimals().length >= 3, 4000, 'Three actual hide-bearing animals must mature.');
+waitUntil(() => matureAnimals().length >= 3, 4000,
+    'Three actual hide-bearing animals must mature for the explicit QA supply policy.');
 for (const animal of matureAnimals().slice(0, 3))
     command({ type: 'SlaughterLivestock', livestockId: animal.id });
-assert.equal(state().specialistStocks.hides, 3);
+assert.equal(state().specialistStocks.hides, 6);
 
 command({ type: 'AssignOccupation', personaId: 'founder-1', occupation: 'smith' });
 command({ type: 'AssignOccupation', personaId: 'founder-3', occupation: 'leatherAndJewelleryMaker' });
 const products = ['woodenSpear', 'woodenShield', 'leatherShield', 'ironSpear',
-    'ironShield', 'leatherBodyArmor', 'ironHelmet'];
+    'ironShield', 'leatherBodyArmor', 'ironHelmet', 'leatherHelmet', 'ironBodyArmor'];
 for (const item of products) command({ type: 'SetSmitheryTarget', item, target: 1 });
 waitUntil(() => products.every(item => state().smithery.stored[item] === 1), 3000,
-    'Ordinary paid work must complete all seven stock targets.');
+    'Ordinary paid work must complete all nine stock targets.');
 assert.equal(state().specialistStocks.hides, 0);
 
 
@@ -116,19 +126,21 @@ assert.deepEqual(state().events.slice(0, beforeTerritory.events.length), beforeT
     'Territorial adoption must preserve every earlier factual receipt.');
 command({ type: 'CreateExpeditionGroup', name: 'Armor QA', memberIds: ['founder-1', 'founder-3'] });
 for (const [slot, item] of [['weapon', 'ironSpear'], ['shield', 'ironShield'],
-    ['bodyArmor', 'leatherBodyArmor'], ['headgear', 'ironHelmet']])
+    ['bodyArmor', 'ironBodyArmor'], ['headgear', 'ironHelmet']])
     command({ type: 'AssignEquipment', personaId: 'founder-1', slot, item });
 command({ type: 'AssignEquipment', personaId: 'founder-3', slot: 'weapon', item: 'woodenSpear' });
 command({ type: 'AssignEquipment', personaId: 'founder-3', slot: 'shield', item: 'woodenShield' });
+command({ type: 'AssignEquipment', personaId: 'founder-3', slot: 'bodyArmor', item: 'leatherBodyArmor' });
+command({ type: 'AssignEquipment', personaId: 'founder-3', slot: 'headgear', item: 'leatherHelmet' });
 const pillageOffer = shared.session.islandMissionOffer('group-2',
     { kind: 'site', siteId: pillageSite.id }, 'Pillage', ['Food']);
 assert.equal(pillageOffer.encounter?.version, 1,
     'The actual available Pillage offer must use on-site combat, not legacy return risk.');
-assert.equal(pillageOffer.equipment?.version, 3,
+assert.equal(pillageOffer.equipment?.version, 4,
     'The offer must freeze the actual four-slot personal loadout.');
 shared.session.setRunning(false);
 
-const directory = 'scratch/personal-armor-review-333';
+const directory = resolve(values.output ?? 'scratch/personal-armor-review-333');
 mkdirSync(directory, { recursive: true });
 writeFileSync(directory + '/review.html', readFileSync('scripts/qa/personal-armor-review.html'));
 writeFileSync(directory + '/fjord-theme.css', readFileSync('src/ui/fjord-theme.css'));
@@ -164,8 +176,10 @@ const context = {
     fieldEncounterVersion: fieldMission.encounterRules.version, time: state().time,
     saveFormat: { kind: 'FjordCampaign', bridgeVersion: JSON.parse(homeText).bridgeVersion,
         sharedWrapper: false, pausedOnRestore: true, inGameImportValidated: true },
-    note: 'Actual shipping island and recipe. Ore is mined, Hides are slaughtered, and all gear is paid work. Only initial QA supplies, demographic stability and the saved labour threshold are explicit test settings.',
+    note: 'Actual shipping island and recipe. Ore is mined, Hides are slaughtered, and all gear is paid work. Initial supplies, demographic stability, the saved labour threshold and two Hides per eligible slaughter are explicit QA settings; normal FjordSide yields one Hide.',
     labour: { workPerUnit: state().mechanics.config.workPerUnit },
+    products, assignments: state().smithery.assignments,
+    actualHides: { slaughtered: 3, yieldPerEligibleAnimal: 2, normalYieldPerEligibleAnimal: 1, testOnlyYield: true },
     homeBytes: Buffer.byteLength(homeText), fieldBytes: Buffer.byteLength(fieldText),
 };
 writeFileSync(directory + '/context.json', JSON.stringify(context, null, 2) + '\n');

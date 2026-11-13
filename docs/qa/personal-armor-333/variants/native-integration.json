@@ -1,0 +1,251 @@
+{
+  "version": 1,
+  "createdAt": "2026-11-13T17:07:23.965Z",
+  "status": "PASS: bounded native integration, public controls and actual hand-prop checks; clean-build rendered and owner acceptance are separate",
+  "models": [
+    {
+      "item": "leatherBodyArmor",
+      "id": "garment/native-leather-body-armor",
+      "modelPath": "public/character-lab/modules/native-personal-armor/leather-body-armor.glb",
+      "modelSha256": "1083a715439a5a2acb3b714908070802459d3d0b8f72eb5d270956f9152c002a",
+      "bindingPath": "public/character-lab/modules/native-personal-armor/leather-body-armor.binding.json",
+      "bindingSha256": "8f9653339f32015fd46d56198110e28d4c0ea9c3f466658e992356b8b2d2e4c8",
+      "supportedAges": {
+        "min": 16,
+        "max": 100
+      },
+      "underlayId": "garment/meshy-grid-trial-001",
+      "underlaySha256": "79794137e3e2bb33da24429d084cec0e5fb84711fdc4fd87c1568b1dabb4d52e",
+      "ownUnderlayFitRows": 22067
+    },
+    {
+      "item": "ironBodyArmor",
+      "id": "garment/native-iron-body-armor",
+      "modelPath": "public/character-lab/modules/native-personal-armor/iron-body-armor.glb",
+      "modelSha256": "bf9cc7cabc42ed3c9a570d27de5f08a4f7f9dcf412ccf5bc917f8c9fb3294d1c",
+      "bindingPath": "public/character-lab/modules/native-personal-armor/iron-body-armor.binding.json",
+      "bindingSha256": "2f776841ac4bc51c88bd96fe18a39c20b7adfa55827344c1099210d5e9ba547c",
+      "supportedAges": {
+        "min": 16,
+        "max": 100
+      },
+      "underlayId": "garment/meshy-grid-trial-001",
+      "underlaySha256": "79794137e3e2bb33da24429d084cec0e5fb84711fdc4fd87c1568b1dabb4d52e",
+      "ownUnderlayFitRows": 23559
+    },
+    {
+      "item": "leatherHelmet",
+      "id": "headwear/native-leather-helmet",
+      "modelPath": "public/character-lab/modules/native-personal-armor/leather-helmet.glb",
+      "modelSha256": "fafaf39d0e7a1cc550199d33f2ef102c96e5f12aafe2462e97f0db3dd94fde33",
+      "bindingPath": "public/character-lab/modules/native-personal-armor/leather-helmet.binding.json",
+      "bindingSha256": "40e327c7766620789d9f08cdcc10b1d83221fda10ee3a402257112d7257c99e4",
+      "supportedAges": {
+        "min": 16,
+        "max": 100
+      },
+      "hairClearanceMetres": 0.005
+    },
+    {
+      "item": "ironHelmet",
+      "id": "headwear/native-iron-helmet",
+      "modelPath": "public/character-lab/modules/native-personal-armor/iron-helmet.glb",
+      "modelSha256": "dbdebf3feaa607dd3afaa687cbdc277028bf1c00c3ae3b7b05f307fe2c1df1f8",
+      "bindingPath": "public/character-lab/modules/native-personal-armor/iron-helmet.binding.json",
+      "bindingSha256": "1f9578759fdbc8cd36beaa21b8b3a21cbbee9c35bb82fd17404e5ed84b32d468",
+      "supportedAges": {
+        "min": 16,
+        "max": 100
+      },
+      "hairClearanceMetres": 0.003
+    }
+  ],
+  "identities": {
+    "nativeRuntimeSha256": "d9d5791f9652b5c8bd6f4c3f5942734f777f9b020f03f5ff8387c430366c3ad8",
+    "nativeHeadwearFitSha256": "9ea9f82cb80ff7c46ff7ec3a8c7659431afe1824b3c8d76aa1bfa27a39122388",
+    "testFiles": {
+      "tests/personal-armor-variants-presentation.test.mjs": "269776e236a7246e5592cb955f08fe7239a6f8d593bed4e7b3719366caff5e6a",
+      "tests/personal-armor-variants-lab.test.mjs": "e4517394ecca3da21698539ca151b3eefc1d8796475d46da4f5c447e95ed9cd4",
+      "tests/native-personal-armor-variants.test.mjs": "0ad158a56e393f7cf660a1e81b17437e6a8ebbca8818d8d01fb53d011169197f",
+      "tests/native-personal-armor-variants-props.test.mjs": "bce5dee323e6cbd861edd6e42556fab36799f191734f43148c1c94624d68d1be"
+    },
+    "integrationSourcesCanonicalLfSha256": {
+      "src/characters/NativePersonalArmorCatalog.ts": "de781204422b6be7211efa918d523b65fcde148868e17771cf16fb208b7e4da3",
+      "src/fjord-play/FjordWardrobe.ts": "6d4a1042e016baea7f1f0f687033ff54e510bb3784643be279c125070c95ecf8",
+      "src/character-lab/CharacterLab.ts": "e71d646d0145978a82a1a48d2a315ad4d950d3af951f2482b1b0f913e77ac430",
+      "src/character-lab/CharacterLabUI.ts": "37cd6acae0a1382b6e7dabd6221be74501f1cb516a79c2a22000aeafb218c1da"
+    }
+  },
+  "sourceHashPolicy": "Models, bindings and test files use exact bytes. Handwritten integration sources use explicitly normalized UTF-8 LF to match Git across platform checkout settings.",
+  "runs": [
+    {
+      "command": "node --test --test-concurrency=1 tests/personal-armor-variants-presentation.test.mjs tests/personal-armor-variants-lab.test.mjs",
+      "exitCode": 0,
+      "tests": 4,
+      "checks": [
+        "Actual four canonical items map to their own native slots, without granting equipment",
+        "Exact body/head combinations roundtrip public Lab snapshots with the same resident, manual hair, beard and hand items",
+        "Home occupation/unsupported-age/historical casualty behavior retains actual variant identity and honest English stow labels",
+        "Public Lab selectors load real hash-pinned binding age declarations and preserve existing choices"
+      ]
+    },
+    {
+      "command": "node --test --test-concurrency=1 tests/personal-armor-variants-presentation.test.mjs tests/personal-armor-variants-lab.test.mjs tests/personal-armor-presentation.test.mjs tests/lab-combat-review.test.mjs",
+      "exitCode": 0,
+      "tests": 13,
+      "scope": "Includes nine unchanged existing public contracts. This run preceded the final new-cap-only 5 mm field update; the four variant public tests above were rerun on the final binding."
+    },
+    {
+      "command": "node --test tests/native-personal-armor-variants.test.mjs",
+      "exitCode": 0,
+      "loadouts": 12,
+      "poseSamples": 96,
+      "profiles": [
+        {
+          "name": "owner default",
+          "seed": 1983,
+          "age": 32,
+          "lod": 0,
+          "hair": "hair/manual-long-2",
+          "beard": "beard/manual-fitted-normal",
+          "face": "founderFacialIdentity(1983)"
+        },
+        {
+          "name": "teen female",
+          "seed": 1983,
+          "age": 16,
+          "sex": "female",
+          "masculinity": 0.15,
+          "heightMetres": 1.16,
+          "lod": 2,
+          "hair": "hair/manual-fitted-short",
+          "beard": "none",
+          "face": "founderFacialIdentity(1983)"
+        },
+        {
+          "name": "bounded older adult",
+          "seed": 930,
+          "age": 100,
+          "sex": "male",
+          "masculinity": 0.95,
+          "heightMetres": 1.6,
+          "intelligence": 0,
+          "agility": 0,
+          "lod": 2,
+          "hair": "hair/manual-long-braided",
+          "beard": "beard/manual-fitted-normal",
+          "facialAxes": "All 0.75"
+        }
+      ],
+      "motions": [
+        {
+          "clip": "Idle",
+          "time": 0.2
+        },
+        {
+          "clip": "Walk",
+          "time": 0.3
+        },
+        {
+          "clip": "Run",
+          "time": 0.4
+        },
+        {
+          "action": "spear",
+          "phase": 0.5
+        },
+        {
+          "action": "shield",
+          "phase": 0.5
+        },
+        {
+          "action": "death",
+          "phase": 0.5
+        },
+        {
+          "action": "death",
+          "phase": 0.75
+        },
+        {
+          "action": "death",
+          "phase": 1
+        }
+      ],
+      "checks": [
+        "All four actual body/head combinations use the existing 44-bone rig with both actual iron hand props",
+        "Strict helmet versus actual visible body, fitted hair and exposed beard; zero intersections and zero exemptions",
+        "Finite bone matrices and sampled native armor, helmet and tunic positions",
+        "Actual selected variant IDs with one body layer and one headgear slot",
+        "No motion refitting or identity change",
+        "Exact native-body coverage and independent neutral wearer retained",
+        "Exact normal-tunic and hair topology/attributes restored on unequip"
+      ]
+    },
+    {
+      "command": "node --test tests/native-personal-armor-variants-props.test.mjs",
+      "exitCode": 0,
+      "loadouts": 6,
+      "nativeStates": 36,
+      "exactMeshPairs": 144,
+      "bodyArmor": "garment/native-iron-body-armor",
+      "headgear": "headwear/native-leather-helmet",
+      "profile": "defaultDNA(), LOD2, long-2 hair and normal fitted beard",
+      "spears": [
+        "equipment/native-wooden-spear",
+        "equipment/native-iron-spear"
+      ],
+      "shields": [
+        "equipment/native-wooden-shield",
+        "equipment/native-leather-shield",
+        "equipment/native-iron-shield"
+      ],
+      "actions": [
+        [
+          "ready",
+          0.5
+        ],
+        [
+          "spear",
+          0.5
+        ],
+        [
+          "shield",
+          0.5
+        ],
+        [
+          "death",
+          0.5
+        ],
+        [
+          "death",
+          0.75
+        ],
+        [
+          "death",
+          1
+        ]
+      ],
+      "checks": [
+        "Actual sampled native action and finite bone matrices",
+        "Each actual protective layer against each actual hand prop in both finite edge/triangle directions",
+        "Zero intersections, zero exemptions and no motion refitting"
+      ]
+    }
+  ],
+  "otherChecks": {
+    "typeScript": "PASS: tsc --noEmit",
+    "diffCheck": "PASS: git diff --check"
+  },
+  "renderedReview": {
+    "sourceComparison": "Ignored localhost-only actual-texture source/fitted comparison, equal metre scale; geometry hash matches the final leather cap. Dome, stitched panels and riveted band remain recognizable.",
+    "provisionalPreview": "Earlier complete six-view new-pair capture recorded zero browser errors on the first shallow-cap candidate and remains historical. Current revised Idle front/side were inspected; Vite HMR reset the remaining provisional capture during prepared-catalog regeneration, so that partial set is not final evidence.",
+    "authoritativeFinalBuild": "Root-owned clean built capture and owner combined combat QA remain separate."
+  },
+  "limits": [
+    "Representative ages, body LODs, hair and morphology samples are listed explicitly; not every intermediate age/face/style combination is established.",
+    "The 96-pose test measures helmet against body/hair/beard, not continuous zero vest/tunic/body crossings. The body-armor finite-pose checks and source/unequip mechanics do not replace rendered composite inspection.",
+    "The hand-prop test covers the new iron-body/leather-helmet pair on one default resident. Existing original-pair and earlier all-prop reports remain historical with their own identities.",
+    "Original source opening/self-contact and minor composite boundary artifacts are not reclassified as zero contacts by these passing tests.",
+    "No physical iPhone, thermal behavior, GPU timing or continuous camera/motion acceptance is inferred from Node or provisional headless captures."
+  ]
+}

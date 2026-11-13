@@ -12,7 +12,7 @@ import { CharacterPresentation, defaultCharacterPresentation, parseCharacterPres
 import { LabTestSnapshot, parseLabSnapshot } from './LabSnapshot';
 import {gridTrialOutfitId} from '../characters/GridTrialOutfitCatalog';
 import { nativeCombatEquipmentByItem } from '../characters/NativeCombatEquipmentCatalog';
-import { nativePersonalArmorByItem } from '../characters/NativePersonalArmorCatalog';
+import { nativePersonalArmorByItem, nativeBodyArmorAssets, nativeHelmetAssets } from '../characters/NativePersonalArmorCatalog';
 import { fjordClothingSets } from '../fjord-play/FjordWardrobe';
 import { labCombatAnimations } from './LabCombatPreview';
 import {braidedHairAsset} from '../characters/BraidedHairCatalog';
@@ -87,10 +87,10 @@ export class CharacterLab {
         const combat = requestedOutfit.get('combat');
         if (combat && this.dna.age >= 16) {
             this.presentation = { ...this.presentation,
-                bodyArmor: requestedOutfit.get('armor') === 'leather'
-                    ? nativePersonalArmorByItem.leatherBodyArmor : 'none',
-                headwear: requestedOutfit.get('helmet') === 'iron'
-                    ? nativePersonalArmorByItem.ironHelmet : 'none',
+                bodyArmor: requestedOutfit.get('armor') === 'iron' ? nativePersonalArmorByItem.ironBodyArmor :
+                    requestedOutfit.get('armor') === 'leather' ? nativePersonalArmorByItem.leatherBodyArmor : 'none',
+                headwear: requestedOutfit.get('helmet') === 'leather' ? nativePersonalArmorByItem.leatherHelmet :
+                    requestedOutfit.get('helmet') === 'iron' ? nativePersonalArmorByItem.ironHelmet : 'none',
             };
             this.loadCombatOutfit([
                 requestedOutfit.get('weapon') === 'iron'
@@ -115,9 +115,9 @@ export class CharacterLab {
             shoes: field.shoes,
             trousers: field.trousers,
             top: field.top,
-            headwear: this.presentation.headwear === nativePersonalArmorByItem.ironHelmet
+            headwear: nativeHelmetAssets.includes(this.presentation.headwear)
                 ? this.presentation.headwear : 'none',
-            bodyArmor: this.presentation.bodyArmor === nativePersonalArmorByItem.leatherBodyArmor
+            bodyArmor: nativeBodyArmorAssets.includes(this.presentation.bodyArmor ?? 'none')
                 ? this.presentation.bodyArmor : 'none',
             equipment: 'none',
             equipmentSocket: 'auto',

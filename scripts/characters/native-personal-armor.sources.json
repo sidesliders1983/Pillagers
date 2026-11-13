@@ -2,7 +2,7 @@
   {
     "item": "leatherBodyArmor",
     "id": "garment/native-leather-body-armor",
-    "label": "Leather Body Armor \u00b7 source review",
+    "label": "Leather Body Armor · source review",
     "name": "leather-body-armor",
     "path": "Assets/Combat/leather-body-armor-original.glb",
     "bytes": 3428496,
@@ -15,7 +15,7 @@
     "driveFolderId": "1KLQh4TMMHZmr6WPw2UpUOzJRMUouGaVV",
     "preparation": {
       "carrier": "largest-geometrically-connected-source-panel",
-      "sourceWeldTolerance": 1e-06,
+      "sourceWeldTolerance": 0.000001,
       "mainSourceTriangles": 2346,
       "cageSmoothingPasses": 6,
       "smallDetailMaximumDiameter": 0.08,
@@ -59,7 +59,7 @@
         ],
         "maximumZ": -0.07,
         "maximumOffset": 0.013,
-        "reason": "Measured torso cloth face47382 crossed the corresponding bowed-back vest by2.18\u201310.74mm; local source-preserving clearance plus margin."
+        "reason": "Measured torso cloth face47382 crossed the corresponding bowed-back vest by2.18–10.74mm; local source-preserving clearance plus margin."
       },
       "preparedAssetSha256": "1083a715439a5a2acb3b714908070802459d3d0b8f72eb5d270956f9152c002a"
     },
@@ -76,7 +76,7 @@
   {
     "item": "ironHelmet",
     "id": "headwear/native-iron-helmet",
-    "label": "Iron Helmet \u00b7 source review",
+    "label": "Iron Helmet · source review",
     "name": "iron-helmet",
     "path": "Assets/Combat/iron-helmet-original.glb",
     "bytes": 3791588,
@@ -87,5 +87,121 @@
     "triangles": 4871,
     "rights": "Owner-supplied asset authorized for Pillagers personal armor work; no independently verified open redistribution license.",
     "driveFolderId": "1KLQh4TMMHZmr6WPw2UpUOzJRMUouGaVV"
+  },
+  {
+    "item": "leatherHelmet",
+    "id": "headwear/native-leather-helmet",
+    "label": "Leather Helmet · source review",
+    "name": "leather-helmet",
+    "path": "Assets/Combat/leather-helmet-original.glb",
+    "bytes": 3413336,
+    "sha256": "aa1ace130f8377da61a25253e975b917fbd9b86753dd1e7c5b0cab4ffe099a66",
+    "driveFileId": "1N0cubr7JuFgonOF8SYK-KzBm-9l_1VGW",
+    "driveFilename": "Meshy_AI_viking_leather_helmet_1111093142_texture.glb",
+    "provider": "Meshy",
+    "triangles": 5101,
+    "rights": "Owner-supplied asset authorized for Pillagers personal armor work; no independently verified open redistribution license.",
+    "driveFolderId": "1KLQh4TMMHZmr6WPw2UpUOzJRMUouGaVV",
+    "preparation": {
+      "openingNormal": [
+        0.0016515633783521098,
+        0.9833392545215075,
+        -0.18177233798213968
+      ],
+      "openingCenterY": 0.022807146603135483,
+      "sourceRim": 0.005,
+      "openingMeasurement": {
+        "angularSamples": 72,
+        "verticalStepMetres": 0.0005,
+        "maximumPlaneResidualMetres": 0.001572106427708865,
+        "method": "Least-squares plane through first actual inner-wall contacts at72 radial angles; retain source face opening."
+      },
+      "verticalToRadialScale": {
+        "minimum": 0.95,
+        "maximum": 1.1,
+        "reason": "Preserve the actual supplied cap depth; the unconstrained minimum-volume objective compressedY to0.4 despite radial0.71–0.81."
+      },
+      "crownRimGutterMetres": 0.006,
+      "hairClearanceMetres": 0.005
+    }
+  },
+  {
+    "item": "ironBodyArmor",
+    "id": "garment/native-iron-body-armor",
+    "label": "Iron-reinforced Body Armor · source review",
+    "name": "iron-body-armor",
+    "path": "Assets/Combat/iron-body-armor-original.glb",
+    "bytes": 3834404,
+    "sha256": "78ff9395653e12472c7dc792245f44b98e7c66e4cf16470fff4abc08a6f402e5",
+    "driveFileId": "1p_kaHyRNed8w-G0YVWquLlS05YdbsIQF",
+    "driveFilename": "Meshy_AI_viking_iron_bust_mode_1111093247_texture.glb",
+    "provider": "Meshy",
+    "triangles": 6697,
+    "rights": "Owner-supplied asset authorized for Pillagers personal armor work; no independently verified open redistribution license.",
+    "driveFolderId": "1KLQh4TMMHZmr6WPw2UpUOzJRMUouGaVV",
+    "preparation": {
+      "carrier": "largest-geometrically-connected-source-panel",
+      "sourceWeldTolerance": 0.000001,
+      "mainSourceTriangles": 2016,
+      "cageSmoothingPasses": 6,
+      "smallDetailMaximumDiameter": 0.08,
+      "target": "actual-native-body-torso-and-shoulder-surface",
+      "nativeInfluences": 4,
+      "sourceSeed": {
+        "translation": [
+          0,
+          0.95,
+          -0.018
+        ],
+        "scale": [
+          0.8430952699535348,
+          0.77,
+          1.0013538488326887
+        ]
+      },
+      "localSkinClearance": {
+        "sourceVertices": [],
+        "mirrored": true,
+        "maximumOffset": 0.008,
+        "footprint": 0.03,
+        "reason": "No indexed patch from the differing leather source is reused; actual iron geometry receives its own bounded qualification."
+      },
+      "finalPointDonorBodyLOD": 2,
+      "centralBackClearance": {
+        "center": [
+          0.015,
+          1.178
+        ],
+        "radii": [
+          0.05,
+          0.07
+        ],
+        "maximumZ": -0.07,
+        "maximumOffset": 0.013,
+        "reason": "Reuse the accepted native-body central-back fitting dimension; actual new geometry is separately qualified."
+      },
+      "underlayPanelComponentCounts": [
+        2016,
+        322,
+        136,
+        131,
+        55,
+        43
+      ],
+      "preparedAssetSha256": "bf9cc7cabc42ed3c9a570d27de5f08a4f7f9dcf412ccf5bc917f8c9fb3294d1c",
+      "mainOuterTriangles": 1038
+    },
+    "underlayFit": {
+      "path": "scripts/characters/native-iron-body-armor-underlay-fit.json",
+      "sha256": "b83a3a594f209736a97ae5089d6ee08dc03a9b91b21c73d7b86d25de1b4683a9",
+      "armorSha256": "bf9cc7cabc42ed3c9a570d27de5f08a4f7f9dcf412ccf5bc917f8c9fb3294d1c",
+      "tunicSha256": "79794137e3e2bb33da24429d084cec0e5fb84711fdc4fd87c1568b1dabb4d52e",
+      "bodySourceSha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+      "vertices": 23559,
+      "derivation": "scripts/characters/derive-native-personal-armor-underlay-fit.mjs",
+      "derivationArguments": [
+        "--item=ironBodyArmor"
+      ]
+    }
   }
 ]

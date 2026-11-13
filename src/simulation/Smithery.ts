@@ -7,14 +7,17 @@ import { miningBusy } from './Mining';
 import { metalworkingItems, prototypeMetalworkingConfig, validateMetalworkingLedger,
     type MetalworkingAdoption } from './Metalworking';
 export { prototypeMetalworkingConfig } from './Metalworking';
-import { personalArmorItems, prototypePersonalArmorConfig, wearingPersonalArmor,
-    assertPersonalArmorCombination, protectedPersonalRisk, validatePersonalArmorLedger,
-    type BodyArmor, type Headgear, type PersonalArmorAdoption, type PersonalArmorRules } from './PersonalArmor';
-export { prototypePersonalArmorConfig } from './PersonalArmor';
+import { legacyPersonalArmorItems, personalArmorItems, personalArmorVariantItems, bodyArmorItems, headgearItems,
+    prototypePersonalArmorConfig, prototypePersonalArmorVariantsConfig, wearingPersonalArmor, wearingPersonalArmorVariants,
+    personalArmorItemVersion, assertPersonalArmorCombination, protectedPersonalRisk, validatePersonalArmorLedger,
+    type BodyArmor, type Headgear, type PersonalArmorAdoption, type PersonalArmorVariantsAdoption,
+    type PersonalArmorRules } from './PersonalArmor';
+export { prototypePersonalArmorConfig, prototypePersonalArmorVariantsConfig, bodyArmorItems, headgearItems } from './PersonalArmor';
 export type { BodyArmor, Headgear } from './PersonalArmor';
 
 export const legacyEquipmentItems = ['woodenSpear', 'woodenShield', 'leatherShield'] as const;
 export const metalworkingEquipmentItems = [...legacyEquipmentItems, ...metalworkingItems] as const;
+export const originalArmorEquipmentItems = [...metalworkingEquipmentItems, ...legacyPersonalArmorItems] as const;
 export const equipmentItems = [...metalworkingEquipmentItems, ...personalArmorItems] as const;
 type LegacyEquipmentItem = typeof legacyEquipmentItems[number];
 export type EquipmentCounts = Record<LegacyEquipmentItem, number> & Partial<Record<EquipmentItem, number>>;
@@ -27,6 +30,7 @@ export const equipmentLabels: Record<EquipmentItem, string> = {
     leatherShield: 'Leather-reinforced Shield',
     ironSpear: 'Iron-tipped Spear', ironShield: 'Iron-reinforced Shield',
     leatherBodyArmor: 'Leather Body Armor', ironHelmet: 'Iron Helmet',
+    leatherHelmet: 'Leather Helmet', ironBodyArmor: 'Iron-reinforced Body Armor',
 };
 export type Recipe = { materials: number; hides: number; unitsPerWinter: number; ironOre?: number };
 export type SmitheryConfig = PersonalArmorRules & {
@@ -49,16 +53,17 @@ export const defaultSmitheryConfig: SmitheryConfig = {
     woodenShieldProtectionBps: 2500, leatherShieldProtectionBps: 4000,
 };
 export interface SmitheryState {
-    version: 1 | 2 | 3;
+    version: 1 | 2 | 3 | 4;
     metalworking?: MetalworkingAdoption;
     personalArmor?: PersonalArmorAdoption;
+    personalArmorVariants?: PersonalArmorVariantsAdoption;
     config: SmitheryConfig;
     stored: EquipmentCounts;
     targets: EquipmentCounts;
     assignments: Record<string, PersonalEquipment>;
 }
 export interface PillageEquipment extends PersonalArmorRules {
-    version: 1 | 2 | 3;
+    version: 1 | 2 | 3 | 4;
     baseSuccessBps: number;
     baseCasualtyBps: number;
     spearBonusBps: number;
@@ -87,13 +92,15 @@ export function initializeSmithery(): SmitheryState {
 }
 /** Saved versions select their actual catalogue; loading never fabricates an adoption. */
 export function equipmentItemsFor(state: Pick<SimulationState, 'smithery'>): readonly EquipmentItem[] {
-    return state.smithery?.version === 3 ? equipmentItems :
-        state.smithery?.version === 2 ? metalworkingEquipmentItems : legacyEquipmentItems;
+    return state.smithery?.version === 4 ? equipmentItems :
+        state.smithery?.version === 3 ? originalArmorEquipmentItems :
+            state.smithery?.version === 2 ? metalworkingEquipmentItems : legacyEquipmentItems;
 }
 export function equipmentRecipe(state: Pick<SimulationState, 'smithery'>, item: EquipmentItem): Recipe {
     const recipe = state.smithery?.config.recipes[item] ?? defaultSmitheryConfig.recipes[item] ??
         prototypeMetalworkingConfig.recipes[item as keyof typeof prototypeMetalworkingConfig.recipes] ??
-        prototypePersonalArmorConfig.recipes[item as keyof typeof prototypePersonalArmorConfig.recipes];
+        prototypePersonalArmorConfig.recipes[item as keyof typeof prototypePersonalArmorConfig.recipes] ??
+        prototypePersonalArmorVariantsConfig.recipes[item as keyof typeof prototypePersonalArmorVariantsConfig.recipes];
     if (!recipe) throw new Error('Unknown equipment recipe.');
     return recipe;
 }
@@ -112,18 +119,34 @@ function adoptMetalworking(state: SimulationState): SmitheryState {
 }
 function adoptPersonalArmor(state: SimulationState): SmitheryState {
     const smithery = adoptMetalworking(state);
-    if (smithery.version === 3) return smithery;
+    if (smithery.version >= 3) return smithery;
     smithery.version = 3;
     Object.assign(smithery.config.recipes, structuredClone(prototypePersonalArmorConfig.recipes));
     smithery.config.leatherBodyArmorProtectionBps = prototypePersonalArmorConfig.leatherBodyArmorProtectionBps;
     smithery.config.ironHelmetProtectionBps = prototypePersonalArmorConfig.ironHelmetProtectionBps;
     smithery.config.maximumPersonalProtectionBps = prototypePersonalArmorConfig.maximumPersonalProtectionBps;
-    for (const item of personalArmorItems) { smithery.stored[item] = 0; smithery.targets[item] = 0; }
+    for (const item of legacyPersonalArmorItems) { smithery.stored[item] = 0; smithery.targets[item] = 0; }
     const openingHides = state.specialistStocks?.hides ?? 0;
     record(state, 'PersonalArmorAdopted', { personalArmorVersion: 1, clanId: state.clan.id, openingHides });
     smithery.personalArmor = { version: 1, eventId: state.events.at(-1)!.id, openingHides,
         adoptedAt: state.time.winter * state.ticksPerWinter + state.time.tick };
     return smithery;
+}
+function adoptPersonalArmorVariants(state: SimulationState): SmitheryState {
+    const smithery = adoptPersonalArmor(state);
+    if (smithery.version === 4) return smithery;
+    smithery.version = 4;
+    Object.assign(smithery.config.recipes, structuredClone(prototypePersonalArmorVariantsConfig.recipes));
+    smithery.config.leatherHelmetProtectionBps = prototypePersonalArmorVariantsConfig.leatherHelmetProtectionBps;
+    smithery.config.ironBodyArmorProtectionBps = prototypePersonalArmorVariantsConfig.ironBodyArmorProtectionBps;
+    for (const item of personalArmorVariantItems) { smithery.stored[item] = 0; smithery.targets[item] = 0; }
+    record(state, 'PersonalArmorVariantsAdopted', { personalArmorVersion: 2, clanId: state.clan.id });
+    smithery.personalArmorVariants = { version: 2, eventId: state.events.at(-1)!.id,
+        adoptedAt: state.time.winter * state.ticksPerWinter + state.time.tick };
+    return smithery;
+}
+export function equipmentCraftingOccupation(item: EquipmentItem): 'smith' | 'leatherAndJewelleryMaker' {
+    return ['leatherShield', 'leatherBodyArmor', 'leatherHelmet'].includes(item) ? 'leatherAndJewelleryMaker' : 'smith';
 }
 export function craftingOccupation(role: Occupation | null): boolean {
     return role === 'smith' || role === 'leatherAndJewelleryMaker';
@@ -150,8 +173,7 @@ function affordable(state: SimulationState, item: EquipmentItem): string | null 
 export function craftingOffer(state: SimulationState, role: Occupation | null) {
     if (!state.smithery || !craftingOccupation(role))
         return { item: null, unitsPerWinter: 0, reason: 'inactive-role' } as const;
-    const items = equipmentItemsFor(state).filter(item =>
-        (item === 'leatherShield' || item === 'leatherBodyArmor') === (role === 'leatherAndJewelleryMaker'));
+    const items = equipmentItemsFor(state).filter(item => equipmentCraftingOccupation(item) === role);
     const needed = items.filter(item => equipmentOwned(state, item) < (state.smithery!.targets[item] ?? 0));
     const item = needed.find(item => !affordable(state, item));
     return item ? { item, unitsPerWinter: state.smithery.config.recipes[item]!.unitsPerWinter, reason: null } :
@@ -180,7 +202,8 @@ export function stepSmitheryWork(state: SimulationState, personaId: string, prod
                 metalworkingVersion: 1, clanId: state.clan.id, ironOre: recipe.ironOre, recipe: structuredClone(recipe),
             } : {}),
             ...(personalArmorItems.includes(next.item as typeof personalArmorItems[number]) ? {
-                personalArmorVersion: 1, clanId: state.clan.id, recipe: structuredClone(recipe),
+                personalArmorVersion: personalArmorItemVersion(next.item as typeof personalArmorItems[number]),
+                clanId: state.clan.id, recipe: structuredClone(recipe),
                 ...(recipe.ironOre ? { ironOre: recipe.ironOre } : {}),
             } : {}) });
     }
@@ -196,9 +219,10 @@ export function applySmitheryCommand(state: SimulationState, command: SmitheryCo
         if (!equipmentItems.includes(command.item) || !Number.isSafeInteger(command.target) ||
             command.target < 0 || command.target > config.maximumTarget)
             throw new Error(`Choose a whole stock target from 0 to ${config.maximumTarget}.`);
-        const smithery = personalArmorItems.includes(command.item as typeof personalArmorItems[number]) ?
-            adoptPersonalArmor(state) : metalworkingItems.includes(command.item as typeof metalworkingItems[number]) ?
-                adoptMetalworking(state) : state.smithery ??= initializeSmithery();
+        const smithery = personalArmorVariantItems.includes(command.item as typeof personalArmorVariantItems[number]) ?
+            adoptPersonalArmorVariants(state) : legacyPersonalArmorItems.includes(command.item as typeof legacyPersonalArmorItems[number]) ?
+                adoptPersonalArmor(state) : metalworkingItems.includes(command.item as typeof metalworkingItems[number]) ?
+                    adoptMetalworking(state) : state.smithery ??= initializeSmithery();
         if (smithery.targets[command.item] === command.target) return;
         smithery.targets[command.item] = command.target;
         record(state, 'EquipmentTargetSet', { item: command.item,
@@ -217,8 +241,8 @@ export function applySmitheryCommand(state: SimulationState, command: SmitheryCo
     if (!['weapon', 'shield', 'bodyArmor', 'headgear'].includes(command.slot) ||
         command.slot === 'weapon' && command.item !== null && !['woodenSpear', 'ironSpear'].includes(command.item) ||
         command.slot === 'shield' && command.item !== null && !['woodenShield', 'leatherShield', 'ironShield'].includes(command.item) ||
-        command.slot === 'bodyArmor' && command.item !== null && command.item !== 'leatherBodyArmor' ||
-        command.slot === 'headgear' && command.item !== null && command.item !== 'ironHelmet')
+        command.slot === 'bodyArmor' && command.item !== null && !bodyArmorItems.includes(command.item as Exclude<BodyArmor, null>) ||
+        command.slot === 'headgear' && command.item !== null && !headgearItems.includes(command.item as Exclude<Headgear, null>))
         throw new Error('Choose equipment for the matching Weapon, Shield, Body Armor or Headgear slot.');
     const gear = equipmentFor(state, person.id), previous = gear[command.slot] ?? null;
     if (previous === command.item) return;
@@ -265,8 +289,9 @@ export function releaseEquipment(
         reason, missionId: expeditionMissionId ?? mission?.id ?? null,
         ...(items.some(item => item === 'ironSpear' || item === 'ironShield') ?
             { metalworkingVersion: 1, clanId: state.clan.id } : {}),
-        ...(items.some(item => item === 'leatherBodyArmor' || item === 'ironHelmet') ?
-            { personalArmorVersion: 1, clanId: state.clan.id } : {}),
+        ...(items.some(item => personalArmorItems.includes(item as typeof personalArmorItems[number])) ?
+            { personalArmorVersion: items.some(item => personalArmorVariantItems.includes(item as typeof personalArmorVariantItems[number])) ? 2 : 1,
+                clanId: state.clan.id } : {}),
     }, personaId);
 }
 export function equipmentSpearBonus(weapon: Weapon, rules: Pick<SmitheryConfig,
@@ -294,8 +319,8 @@ export function pillageEquipment(state: SimulationState, members: readonly strin
             casualtyBps: equipmentCasualtyRisk(baseCasualtyBps, gear, rules) };
     });
     const hasIron = crew.some(member => member.weapon === 'ironSpear' || member.shield === 'ironShield');
-    const hasArmor = crew.some(wearingPersonalArmor);
-    return { version: hasArmor ? 3 : hasIron ? 2 : 1, baseSuccessBps, baseCasualtyBps, spearBonusBps: rules.spearBonusBps,
+    const hasArmor = crew.some(wearingPersonalArmor), hasVariants = crew.some(wearingPersonalArmorVariants);
+    return { version: hasVariants ? 4 : hasArmor ? 3 : hasIron ? 2 : 1, baseSuccessBps, baseCasualtyBps, spearBonusBps: rules.spearBonusBps,
         woodenShieldProtectionBps: rules.woodenShieldProtectionBps,
         leatherShieldProtectionBps: rules.leatherShieldProtectionBps,
         ...(hasIron || hasArmor ? { ironSpearBonusBps: rules.ironSpearBonusBps,
@@ -303,6 +328,8 @@ export function pillageEquipment(state: SimulationState, members: readonly strin
         ...(hasArmor ? { leatherBodyArmorProtectionBps: rules.leatherBodyArmorProtectionBps,
             ironHelmetProtectionBps: rules.ironHelmetProtectionBps,
             maximumPersonalProtectionBps: rules.maximumPersonalProtectionBps } : {}),
+        ...(hasVariants ? { leatherHelmetProtectionBps: rules.leatherHelmetProtectionBps,
+            ironBodyArmorProtectionBps: rules.ironBodyArmorProtectionBps } : {}),
         successBps: Math.min(10000, baseSuccessBps + Math.floor(crew.reduce((sum, member) =>
             sum + equipmentSpearBonus(member.weapon, rules), 0) / Math.max(1, crew.length))),
         members: crew };
@@ -315,22 +342,24 @@ function uint(value: unknown, maximum = Number.MAX_SAFE_INTEGER): asserts value 
     if (!Number.isSafeInteger(value) || (value as number) < 0 || (value as number) > maximum)
         throw new Error('Invalid Smithery integer.');
 }
-function validateSlots(gear: PersonalEquipment, allowIron = false, allowArmor = false) {
+function validateSlots(gear: PersonalEquipment, allowIron = false, allowArmor = false, allowVariants = false) {
     if (!gear || gear.weapon !== null && gear.weapon !== 'woodenSpear' &&
         !(allowIron && gear.weapon === 'ironSpear') || gear.shield !== null &&
         gear.shield !== 'woodenShield' && gear.shield !== 'leatherShield' &&
         !(allowIron && gear.shield === 'ironShield'))
         throw new Error('Invalid personal equipment slots.');
     if (!allowArmor && (gear.bodyArmor !== undefined || gear.headgear !== undefined) ||
-        allowArmor && (gear.bodyArmor !== undefined && gear.bodyArmor !== null && gear.bodyArmor !== 'leatherBodyArmor' ||
-            gear.headgear !== undefined && gear.headgear !== null && gear.headgear !== 'ironHelmet') ||
+        allowArmor && (gear.bodyArmor !== undefined && gear.bodyArmor !== null && gear.bodyArmor !== 'leatherBodyArmor' &&
+                !(allowVariants && gear.bodyArmor === 'ironBodyArmor') ||
+            gear.headgear !== undefined && gear.headgear !== null && gear.headgear !== 'ironHelmet' &&
+                !(allowVariants && gear.headgear === 'leatherHelmet')) ||
         wearingPersonalArmor(gear) && (gear.bodyArmor === undefined || gear.headgear === undefined))
         throw new Error('Invalid personal armor slots.');
 }
 export function validatePillageEquipment(snapshot: PillageEquipment | undefined,
     memberIds: readonly string[], successBps: number, casualtyBps: number): void {
     if (snapshot === undefined) return;
-    if (!snapshot || ![1, 2, 3].includes(snapshot.version) || !Array.isArray(snapshot.members) ||
+    if (!snapshot || ![1, 2, 3, 4].includes(snapshot.version) || !Array.isArray(snapshot.members) ||
         snapshot.members.length !== memberIds.length) throw new Error('Invalid Pillage equipment snapshot.');
     for (const value of [snapshot.baseSuccessBps, snapshot.baseCasualtyBps, snapshot.spearBonusBps,
         snapshot.woodenShieldProtectionBps, snapshot.leatherShieldProtectionBps, snapshot.successBps]) uint(value, 10000);
@@ -340,14 +369,19 @@ export function validatePillageEquipment(snapshot: PillageEquipment | undefined,
             throw new Error('An iron snapshot requires actual dispatched iron equipment.');
     } else if (snapshot.ironSpearBonusBps !== undefined || snapshot.ironShieldProtectionBps !== undefined)
         throw new Error('Historical equipment cannot acquire iron coefficients.');
-    if (snapshot.version === 3) {
+    if (snapshot.version >= 3) {
         uint(snapshot.leatherBodyArmorProtectionBps, 6000); uint(snapshot.ironHelmetProtectionBps, 6000);
         uint(snapshot.maximumPersonalProtectionBps, 6000);
         if (!snapshot.members.some(wearingPersonalArmor)) throw new Error('An armor snapshot requires actual personal armor.');
     } else if (snapshot.leatherBodyArmorProtectionBps !== undefined || snapshot.ironHelmetProtectionBps !== undefined ||
         snapshot.maximumPersonalProtectionBps !== undefined) throw new Error('Historical snapshots cannot acquire armor rules.');
+    if (snapshot.version === 4) {
+        uint(snapshot.leatherHelmetProtectionBps, 6000); uint(snapshot.ironBodyArmorProtectionBps, 6000);
+        if (!snapshot.members.some(wearingPersonalArmorVariants)) throw new Error('A variant snapshot requires actual worn variants.');
+    } else if (snapshot.leatherHelmetProtectionBps !== undefined || snapshot.ironBodyArmorProtectionBps !== undefined)
+        throw new Error('Historical snapshots cannot acquire variant rules.');
     snapshot.members.forEach((member, index) => {
-        validateSlots(member, snapshot.version >= 2, snapshot.version === 3);
+        validateSlots(member, snapshot.version >= 2, snapshot.version >= 3, snapshot.version === 4);
         if (member.personaId !== memberIds[index] || typeof member.name !== 'string' || !member.name.trim() ||
             member.casualtyBps !== equipmentCasualtyRisk(snapshot.baseCasualtyBps, member, snapshot))
             throw new Error('Invalid Pillage member snapshot.');
@@ -365,7 +399,7 @@ export function validateSmithery(state: SimulationState): void {
             throw new Error('Pillage equipment requires its saved Smithery inventory.');
         return;
     }
-    if (!smithery || ![1, 2, 3].includes(smithery.version) || !state.mechanics || !smithery.config ||
+    if (!smithery || ![1, 2, 3, 4].includes(smithery.version) || !state.mechanics || !smithery.config ||
         !smithery.stored || !smithery.targets || !smithery.assignments)
         throw new Error('Invalid Smithery state.');
     const rules = smithery.config, catalogue = equipmentItemsFor(state);
@@ -382,26 +416,30 @@ export function validateSmithery(state: SimulationState): void {
         // Preserve custom saved wooden/leather coefficients; adoption cannot silently rewrite them.
     } else if (smithery.metalworking || rules.ironSpearBonusBps !== undefined ||
         rules.ironShieldProtectionBps !== undefined) throw new Error('Historical Smithery cannot acquire iron rules.');
-    if (smithery.version === 3) {
+    if (smithery.version >= 3) {
         uint(rules.leatherBodyArmorProtectionBps, 6000); uint(rules.ironHelmetProtectionBps, 6000);
         uint(rules.maximumPersonalProtectionBps, 6000);
     } else if (smithery.personalArmor || rules.leatherBodyArmorProtectionBps !== undefined ||
         rules.ironHelmetProtectionBps !== undefined || rules.maximumPersonalProtectionBps !== undefined)
         throw new Error('Historical Smithery cannot acquire personal armor rules.');
+    if (smithery.version === 4) {
+        uint(rules.leatherHelmetProtectionBps, 6000); uint(rules.ironBodyArmorProtectionBps, 6000);
+    } else if (smithery.personalArmorVariants || rules.leatherHelmetProtectionBps !== undefined ||
+        rules.ironBodyArmorProtectionBps !== undefined) throw new Error('Historical Smithery cannot acquire armor variant rules.');
     for (const item of catalogue) {
         const recipe = rules.recipes?.[item];
         if (!recipe) throw new Error('Missing Smithery recipe.');
         uint(recipe.materials, 100); uint(recipe.hides, 100); uint(recipe.unitsPerWinter, 1000);
         if (!recipe.materials || !recipe.unitsPerWinter ||
-            (item === 'leatherShield' || item === 'leatherBodyArmor') !== (recipe.hides > 0) ||
-            (metalworkingItems.includes(item as typeof metalworkingItems[number]) || item === 'ironHelmet' ?
+            ['leatherShield', 'leatherBodyArmor', 'leatherHelmet', 'ironBodyArmor'].includes(item) !== (recipe.hides > 0) ||
+            (metalworkingItems.includes(item as typeof metalworkingItems[number]) || item === 'ironHelmet' || item === 'ironBodyArmor' ?
                 !Number.isSafeInteger(recipe.ironOre) || recipe.ironOre! < 1 || recipe.ironOre! > 100 :
                 recipe.ironOre !== undefined)) throw new Error('Invalid Smithery recipe.');
         uint(smithery.stored[item]); uint(smithery.targets[item], rules.maximumTarget);
         uint(equipmentOwned(state, item));
     }
     for (const [id, gear] of Object.entries(smithery.assignments)) {
-        validateSlots(gear, smithery.version >= 2, smithery.version === 3);
+        validateSlots(gear, smithery.version >= 2, smithery.version >= 3, smithery.version === 4);
         assertPersonalArmorCombination(gear, equipmentProtection(gear.shield, rules), rules);
         if (!state.personas[id] || state.personas[id].deathWinter !== null ||
             personaAge(state, id) < state.mechanics.config.workAge ||

@@ -118,3 +118,16 @@ tests/native-death-helmet-transition.test.mjs text eol=lf
 
 # Retained Markdown summaries are included in the exact-byte evidence manifest.
 docs/qa/personal-armor-333/browser/**/*.md -text
+
+# Additional armor variant receipts preserve their measured bytes.
+scripts/calibrate-personal-armor-variants.mjs text eol=lf
+tests/*personal-armor-variants*.mjs text eol=lf
+docs/qa/personal-armor-333/variants/**/*.json -text
+docs/qa/personal-armor-333/variants/**/*.md -text
+docs/qa/personal-armor-333/variants/**/*.webm -text
+
+scripts/characters/native-iron-body-armor-underlay-fit.json text eol=lf
+
+output/native-personal-armor-333/variants/*.json -text
+
+output/native-personal-armor-333/variants/*.gz -text
