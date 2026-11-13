@@ -618,6 +618,16 @@ export class MeshyModuleRuntime {
   const part = record?.parts[0];
   if (!record?.group.visible || !pose || !part || !(part.mesh as SkinnedMesh).isSkinnedMesh) return;
   const bones = this.fit.nativeSkeleton.bones;
+  if (request.hasShield) {
+   const shield = [...this.records.values()].find(value => value.group.visible &&
+    ['equipment/native-wooden-shield', 'equipment/native-leather-shield'].includes(value.source.asset.id));
+   const shieldGrip = shield?.source.binding.rigidEquipment?.gripPose;
+   if (shieldGrip) {
+    // The shield keeps its prepared brace while the spear action owns the other arm.
+    bones[shieldGrip.upperArmJoint].quaternion.fromArray(shieldGrip.upperArmRotation);
+    bones[shieldGrip.forearmJoint].quaternion.fromArray(shieldGrip.forearmRotation);
+   }
+  }
   const upper = bones[pose.upperArmJoint], forearm = bones[pose.forearmJoint], wrist = bones[pose.wristJoint];
   upper.quaternion.fromArray(pose.upperArmRotation);
   forearm.quaternion.fromArray(pose.forearmRotation);

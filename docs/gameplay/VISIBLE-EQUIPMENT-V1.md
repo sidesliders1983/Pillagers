@@ -57,7 +57,9 @@ of passing the board through the hand/arm. Each source model has a measured nati
 rear offset from the finger-cavity reference; the hand anchor, original geometry,
 UVs, scale and native rig are retained. Shield defence follows the signed source
 front face toward the opponent, so its mounting direction cannot flip when the
-arm is raised. Fitting stays in the shared preparation/runtime path for both the
+arm is raised. During spear actions the left shield arm retains its prepared
+brace, keeping both real props clear while preserving the right-hand spear
+trajectory. Fitting stays in the shared preparation/runtime path for both the
 Lab and FjordSide.
 
 `tests/native-shield-contact.test.mjs` checks actual posed forearm/hand/finger
