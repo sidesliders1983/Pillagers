@@ -49,9 +49,9 @@ test('the review wooden spear fits the existing native right hand without replac
 });
 
 
-test('both actual source shields use the existing native left hand for eligible residents', async () => {
+test('all actual source shields use the existing native left hand for eligible residents', async () => {
     const factory = nativeFactory();
-    for (const assetId of ['equipment/native-wooden-shield', 'equipment/native-leather-shield']) {
+    for (const assetId of ['equipment/native-wooden-shield', 'equipment/native-leather-shield', 'equipment/native-iron-shield']) {
         const asset = characterAsset(assetId);
         assert.equal(asset.metadata.anchor, 'socket_hand_L');
         const binding = JSON.parse(await bytesFor(asset.metadata.nativeBinding.path));
@@ -82,6 +82,8 @@ test('supplied prop provenance and native rigid transforms survive all existing 
         ['wooden-spear', 3098, 24, 'f643ee1d240c2e0006caa66e60e45d512c6fd4a49533369d10965ded3e0a0fe6'],
         ['wooden-shield', 2914, 11, '30b7d88b41b7b78550a54a217518561939ebbf745f6b50c9deb862c8916b9ea1'],
         ['leather-shield', 3020, 11, '9a8513cba8e15bdf76d86707849528b3bb6dfaa1eb2c88eef8d764026a3833a6'],
+        ['iron-spear', 3016, 24, '7e8c82a8278b84f512bf38ed6d710e6d4c01e81696090afd8d382230c04d8f0c'],
+        ['iron-shield', 2866, 11, 'ad7934dd7ce34d3ce62a775c865be556620ccb6ca553f4c7b57fe8bed9d652f4'],
     ];
     const factory = nativeFactory();
     for (const [name, triangles, joint, sourceHash] of expected) {

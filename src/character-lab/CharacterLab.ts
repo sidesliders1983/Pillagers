@@ -86,9 +86,11 @@ export class CharacterLab {
         const combat = requestedOutfit.get('combat');
         if (combat && this.dna.age >= 16) {
             this.loadCombatOutfit([
-                nativeCombatEquipmentByItem.woodenSpear,
-                requestedOutfit.get('shield') === 'leather'
-                    ? nativeCombatEquipmentByItem.leatherShield : nativeCombatEquipmentByItem.woodenShield,
+                requestedOutfit.get('weapon') === 'iron'
+                    ? nativeCombatEquipmentByItem.ironSpear : nativeCombatEquipmentByItem.woodenSpear,
+                requestedOutfit.get('shield') === 'iron' ? nativeCombatEquipmentByItem.ironShield :
+                    requestedOutfit.get('shield') === 'leather'
+                        ? nativeCombatEquipmentByItem.leatherShield : nativeCombatEquipmentByItem.woodenShield,
             ]);
             const animation = labCombatAnimations.find(entry => entry.action === combat) ?? labCombatAnimations[0];
             this.preview.setAnimation(animation.id);

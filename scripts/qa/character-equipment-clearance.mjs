@@ -7,7 +7,10 @@ export function createEquipmentCharacterIntersectionMeasure(
 ) {
     const prop = human.fit.modules.get(equipmentId)?.children.find(mesh => mesh.isSkinnedMesh);
     if (!prop) throw new Error('The actual equipment must be installed.');
-    const spear = equipmentId === 'equipment/native-wooden-spear';
+    const partBinding = gripBinding?.rigidEquipment?.parts.find(part => part.mesh === prop.name);
+    if (!partBinding || ![11, 24].includes(partBinding.joint))
+        throw new Error('The contact probe requires the actual source-bound left or right native hand.');
+    const spear = partBinding.joint === 24;
     const bones = human.fit.nativeSkeleton.bones;
     const hand = bones.find(bone => bone.name === (spear ? 'mixamorigRightHand' : 'mixamorigLeftForeArm'));
     const contactJoints = new Set(bones.flatMap((bone, joint) => {

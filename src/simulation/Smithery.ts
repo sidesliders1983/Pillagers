@@ -4,23 +4,32 @@ import { personaAge } from './PersonaAge';
 import { eventFacts } from './EventFacts';
 import { territorialDuty } from './ResidentPresence';
 import { miningBusy } from './Mining';
+import { metalworkingItems, prototypeMetalworkingConfig, validateMetalworkingLedger,
+    type MetalworkingAdoption } from './Metalworking';
+export { prototypeMetalworkingConfig } from './Metalworking';
 
-export const equipmentItems = ['woodenSpear', 'woodenShield', 'leatherShield'] as const;
+export const legacyEquipmentItems = ['woodenSpear', 'woodenShield', 'leatherShield'] as const;
+export const equipmentItems = [...legacyEquipmentItems, ...metalworkingItems] as const;
+type LegacyEquipmentItem = typeof legacyEquipmentItems[number];
+export type EquipmentCounts = Record<LegacyEquipmentItem, number> & Partial<Record<EquipmentItem, number>>;
 export type EquipmentItem = typeof equipmentItems[number];
-export type Weapon = 'woodenSpear' | null;
-export type Shield = 'woodenShield' | 'leatherShield' | null;
+export type Weapon = 'woodenSpear' | 'ironSpear' | null;
+export type Shield = 'woodenShield' | 'leatherShield' | 'ironShield' | null;
 export type PersonalEquipment = { weapon: Weapon; shield: Shield };
 export const equipmentLabels: Record<EquipmentItem, string> = {
     woodenSpear: 'Wooden Spear', woodenShield: 'Wooden Shield',
     leatherShield: 'Leather-reinforced Shield',
+    ironSpear: 'Iron-tipped Spear', ironShield: 'Iron-reinforced Shield',
 };
-export type Recipe = { materials: number; hides: number; unitsPerWinter: number };
+export type Recipe = { materials: number; hides: number; unitsPerWinter: number; ironOre?: number };
 export type SmitheryConfig = {
-    recipes: Record<EquipmentItem, Recipe>;
+    recipes: Record<LegacyEquipmentItem, Recipe> & Partial<Record<EquipmentItem, Recipe>>;
     maximumTarget: number;
     spearBonusBps: number;
     woodenShieldProtectionBps: number;
     leatherShieldProtectionBps: number;
+    ironSpearBonusBps?: number;
+    ironShieldProtectionBps?: number;
 };
 /** #221 coefficients approved after matched-seed review; saved campaigns retain their own rules. */
 export const defaultSmitheryConfig: SmitheryConfig = {
@@ -33,19 +42,22 @@ export const defaultSmitheryConfig: SmitheryConfig = {
     woodenShieldProtectionBps: 2500, leatherShieldProtectionBps: 4000,
 };
 export interface SmitheryState {
-    version: 1;
+    version: 1 | 2;
+    metalworking?: MetalworkingAdoption;
     config: SmitheryConfig;
-    stored: Record<EquipmentItem, number>;
-    targets: Record<EquipmentItem, number>;
+    stored: EquipmentCounts;
+    targets: EquipmentCounts;
     assignments: Record<string, PersonalEquipment>;
 }
 export interface PillageEquipment {
-    version: 1;
+    version: 1 | 2;
     baseSuccessBps: number;
     baseCasualtyBps: number;
     spearBonusBps: number;
     woodenShieldProtectionBps: number;
     leatherShieldProtectionBps: number;
+    ironSpearBonusBps?: number;
+    ironShieldProtectionBps?: number;
     successBps: number;
     members: (PersonalEquipment & { personaId: string; name: string; casualtyBps: number })[];
 }
@@ -57,11 +69,34 @@ export type SmitheryCommand =
     { type: 'AssignEquipment'; personaId: string; slot: 'weapon'; item: Weapon } |
     { type: 'AssignEquipment'; personaId: string; slot: 'shield'; item: Shield };
 
-const emptyCounts = (): Record<EquipmentItem, number> =>
+const emptyCounts = (): EquipmentCounts =>
     ({ woodenSpear: 0, woodenShield: 0, leatherShield: 0 });
 export function initializeSmithery(): SmitheryState {
     return { version: 1, config: structuredClone(defaultSmitheryConfig),
         stored: emptyCounts(), targets: emptyCounts(), assignments: {} };
+}
+/** Saved versions select their actual catalogue; loading never fabricates an adoption. */
+export function equipmentItemsFor(state: Pick<SimulationState, 'smithery'>): readonly EquipmentItem[] {
+    return state.smithery?.version === 2 ? equipmentItems : legacyEquipmentItems;
+}
+export function equipmentRecipe(state: Pick<SimulationState, 'smithery'>, item: EquipmentItem): Recipe {
+    const recipe = state.smithery?.config.recipes[item] ?? defaultSmitheryConfig.recipes[item] ??
+        prototypeMetalworkingConfig.recipes[item as keyof typeof prototypeMetalworkingConfig.recipes];
+    if (!recipe) throw new Error('Unknown equipment recipe.');
+    return recipe;
+}
+function adoptMetalworking(state: SimulationState): SmitheryState {
+    const smithery = state.smithery ??= initializeSmithery();
+    if (smithery.version === 2) return smithery;
+    smithery.version = 2;
+    Object.assign(smithery.config.recipes, structuredClone(prototypeMetalworkingConfig.recipes));
+    smithery.config.ironSpearBonusBps = prototypeMetalworkingConfig.ironSpearBonusBps;
+    smithery.config.ironShieldProtectionBps = prototypeMetalworkingConfig.ironShieldProtectionBps;
+    for (const item of metalworkingItems) { smithery.stored[item] = 0; smithery.targets[item] = 0; }
+    record(state, 'MetalworkingAdopted', { metalworkingVersion: 1, clanId: state.clan.id });
+    smithery.metalworking = { version: 1, eventId: state.events.at(-1)!.id,
+        adoptedAt: state.time.winter * state.ticksPerWinter + state.time.tick };
+    return smithery;
 }
 export function craftingOccupation(role: Occupation | null): boolean {
     return role === 'smith' || role === 'leatherAndJewelleryMaker';
@@ -78,20 +113,21 @@ function record(state: SimulationState, type: string, details: Record<string, un
         ...(personaId ? { personaId } : {}), details: eventFacts(state, details, personaId) });
 }
 function affordable(state: SimulationState, item: EquipmentItem): string | null {
-    const recipe = state.smithery!.config.recipes[item];
+    const recipe = state.smithery!.config.recipes[item]!;
     if (state.stocks.materials < recipe.materials) return 'missing-materials';
     if ((state.specialistStocks?.hides ?? 0) < recipe.hides) return 'missing-hides';
+    if ((state.specialistStocks?.ironOre ?? 0) < (recipe.ironOre ?? 0)) return 'missing-iron-ore';
     return null;
 }
 /** Targets count all clan-owned items, including those worn or carried away. */
 export function craftingOffer(state: SimulationState, role: Occupation | null) {
     if (!state.smithery || !craftingOccupation(role))
         return { item: null, unitsPerWinter: 0, reason: 'inactive-role' } as const;
-    const items = equipmentItems.filter(item =>
+    const items = equipmentItemsFor(state).filter(item =>
         (item === 'leatherShield') === (role === 'leatherAndJewelleryMaker'));
-    const needed = items.filter(item => equipmentOwned(state, item) < state.smithery!.targets[item]);
+    const needed = items.filter(item => equipmentOwned(state, item) < (state.smithery!.targets[item] ?? 0));
     const item = needed.find(item => !affordable(state, item));
-    return item ? { item, unitsPerWinter: state.smithery.config.recipes[item].unitsPerWinter, reason: null } :
+    return item ? { item, unitsPerWinter: state.smithery.config.recipes[item]!.unitsPerWinter, reason: null } :
         { item: null, unitsPerWinter: 0, reason: needed.length ? affordable(state, needed[0]) : 'target-reached' };
 }
 /** Called by the ordinary work loop, using its aptitude, care, age and building modifiers. */
@@ -104,14 +140,18 @@ export function stepSmitheryWork(state: SimulationState, personaId: string, prod
     while (person.workProgress >= workPerUnit) {
         const next = craftingOffer(state, person.occupation);
         if (!next.item) break;
-        const recipe = smithery.config.recipes[next.item];
+        const recipe = smithery.config.recipes[next.item]!;
         state.stocks.materials -= recipe.materials;
         if (recipe.hides) state.specialistStocks!.hides -= recipe.hides;
-        smithery.stored[next.item]++;
+        if (recipe.ironOre) state.specialistStocks!.ironOre! -= recipe.ironOre;
+        smithery.stored[next.item] = (smithery.stored[next.item] ?? 0) + 1;
         person.workProgress -= workPerUnit;
         produced.push({ item: next.item, itemName: equipmentLabels[next.item], units: 1,
             materials: recipe.materials, hides: recipe.hides, creatorId: personaId,
-            creatorName: person.name, occupation: person.occupation });
+            creatorName: person.name, occupation: person.occupation,
+            ...(metalworkingItems.includes(next.item as typeof metalworkingItems[number]) ? {
+                metalworkingVersion: 1, clanId: state.clan.id, ironOre: recipe.ironOre, recipe: structuredClone(recipe),
+            } : {}) });
     }
     // Completed work cannot be banked as unpaid whole items after a target or input runs out.
     person.workProgress %= workPerUnit;
@@ -125,7 +165,8 @@ export function applySmitheryCommand(state: SimulationState, command: SmitheryCo
         if (!equipmentItems.includes(command.item) || !Number.isSafeInteger(command.target) ||
             command.target < 0 || command.target > config.maximumTarget)
             throw new Error(`Choose a whole stock target from 0 to ${config.maximumTarget}.`);
-        const smithery = state.smithery ??= initializeSmithery();
+        const smithery = metalworkingItems.includes(command.item as typeof metalworkingItems[number]) ?
+            adoptMetalworking(state) : state.smithery ??= initializeSmithery();
         if (smithery.targets[command.item] === command.target) return;
         smithery.targets[command.item] = command.target;
         record(state, 'EquipmentTargetSet', { item: command.item,
@@ -142,17 +183,17 @@ export function applySmitheryCommand(state: SimulationState, command: SmitheryCo
     if (territorialDuty(state, person.id))
         throw new Error('Equipment cannot be changed while the resident is on territorial duty.');
     if (command.slot !== 'weapon' && command.slot !== 'shield' ||
-        command.slot === 'weapon' && command.item !== null && command.item !== 'woodenSpear' ||
+        command.slot === 'weapon' && command.item !== null && command.item !== 'woodenSpear' && command.item !== 'ironSpear' ||
         command.slot === 'shield' && command.item !== null &&
-            command.item !== 'woodenShield' && command.item !== 'leatherShield')
+            command.item !== 'woodenShield' && command.item !== 'leatherShield' && command.item !== 'ironShield')
         throw new Error('Choose equipment for the matching Weapon or Shield slot.');
     const gear = equipmentFor(state, person.id), previous = gear[command.slot];
     if (previous === command.item) return;
     if (command.item && (state.smithery?.stored[command.item] ?? 0) < 1)
         throw new Error(`No stored ${equipmentLabels[command.item]} is available. Craft one or unequip it at home.`);
     const smithery = state.smithery ??= initializeSmithery();
-    if (previous) smithery.stored[previous]++;
-    if (command.item) smithery.stored[command.item]--;
+    if (previous) smithery.stored[previous] = (smithery.stored[previous] ?? 0) + 1;
+    if (command.item) smithery.stored[command.item] = smithery.stored[command.item]! - 1;
     smithery.assignments[person.id] = { ...gear, [command.slot]: command.item };
     if (!smithery.assignments[person.id].weapon && !smithery.assignments[person.id].shield)
         delete smithery.assignments[person.id];
@@ -177,18 +218,30 @@ export function releaseEquipment(
         Object.values(state.world?.spatial?.missions ?? {}).find(m =>
             m.status !== 'Prepared' && m.status !== 'Returned' && m.memberIds.includes(personaId));
     const items = [gear.weapon, gear.shield].filter((item): item is EquipmentItem => item !== null);
-    if (!lost) for (const item of items) state.smithery!.stored[item]++;
+    if (!lost) for (const item of items)
+        state.smithery!.stored[item] = (state.smithery!.stored[item] ?? 0) + 1;
     delete state.smithery!.assignments[personaId];
     record(state, lost ? 'EquipmentLost' : 'EquipmentRecovered', {
         name: state.personas[personaId].name, items, itemNames: items.map(item => equipmentLabels[item]),
         reason, missionId: expeditionMissionId ?? mission?.id ?? null,
+        ...(items.some(item => item === 'ironSpear' || item === 'ironShield') ?
+            { metalworkingVersion: 1, clanId: state.clan.id } : {}),
     }, personaId);
 }
+export function equipmentSpearBonus(weapon: Weapon, rules: Pick<SmitheryConfig,
+    'spearBonusBps' | 'ironSpearBonusBps'>): number {
+    return weapon === 'woodenSpear' ? rules.spearBonusBps :
+        weapon === 'ironSpear' ? rules.ironSpearBonusBps ?? 0 : 0;
+}
+export function equipmentProtection(shield: Shield, rules: Pick<SmitheryConfig,
+    'woodenShieldProtectionBps' | 'leatherShieldProtectionBps' | 'ironShieldProtectionBps'>): number {
+    return shield === 'woodenShield' ? rules.woodenShieldProtectionBps :
+        shield === 'leatherShield' ? rules.leatherShieldProtectionBps :
+            shield === 'ironShield' ? rules.ironShieldProtectionBps ?? 0 : 0;
+}
 function protectedRisk(base: number, shield: Shield, rules: Pick<SmitheryConfig,
-    'woodenShieldProtectionBps' | 'leatherShieldProtectionBps'>) {
-    const protection = shield === 'woodenShield' ? rules.woodenShieldProtectionBps :
-        shield === 'leatherShield' ? rules.leatherShieldProtectionBps : 0;
-    return Math.floor(base * (10000 - protection) / 10000);
+    'woodenShieldProtectionBps' | 'leatherShieldProtectionBps' | 'ironShieldProtectionBps'>) {
+    return Math.floor(base * (10000 - equipmentProtection(shield, rules)) / 10000);
 }
 export function pillageEquipment(state: SimulationState, members: readonly string[],
     baseSuccessBps: number, baseCasualtyBps: number): PillageEquipment | undefined {
@@ -199,11 +252,14 @@ export function pillageEquipment(state: SimulationState, members: readonly strin
         return { personaId, name: state.personas[personaId].name, ...gear,
             casualtyBps: protectedRisk(baseCasualtyBps, gear.shield, rules) };
     });
-    return { version: 1, baseSuccessBps, baseCasualtyBps, spearBonusBps: rules.spearBonusBps,
+    const hasIron = crew.some(member => member.weapon === 'ironSpear' || member.shield === 'ironShield');
+    return { version: hasIron ? 2 : 1, baseSuccessBps, baseCasualtyBps, spearBonusBps: rules.spearBonusBps,
         woodenShieldProtectionBps: rules.woodenShieldProtectionBps,
         leatherShieldProtectionBps: rules.leatherShieldProtectionBps,
-        successBps: Math.min(10000, baseSuccessBps + Math.floor(rules.spearBonusBps *
-            crew.filter(member => member.weapon === 'woodenSpear').length / Math.max(1, crew.length))),
+        ...(hasIron ? { ironSpearBonusBps: rules.ironSpearBonusBps,
+            ironShieldProtectionBps: rules.ironShieldProtectionBps } : {}),
+        successBps: Math.min(10000, baseSuccessBps + Math.floor(crew.reduce((sum, member) =>
+            sum + equipmentSpearBonus(member.weapon, rules), 0) / Math.max(1, crew.length))),
         members: crew };
 }
 export function equipmentResult(snapshot: PillageEquipment | undefined, survivors: readonly string[]) {
@@ -214,26 +270,34 @@ function uint(value: unknown, maximum = Number.MAX_SAFE_INTEGER): asserts value 
     if (!Number.isSafeInteger(value) || (value as number) < 0 || (value as number) > maximum)
         throw new Error('Invalid Smithery integer.');
 }
-function validateSlots(gear: PersonalEquipment) {
-    if (!gear || gear.weapon !== null && gear.weapon !== 'woodenSpear' ||
-        gear.shield !== null && gear.shield !== 'woodenShield' && gear.shield !== 'leatherShield')
+function validateSlots(gear: PersonalEquipment, allowIron = false) {
+    if (!gear || gear.weapon !== null && gear.weapon !== 'woodenSpear' &&
+        !(allowIron && gear.weapon === 'ironSpear') || gear.shield !== null &&
+        gear.shield !== 'woodenShield' && gear.shield !== 'leatherShield' &&
+        !(allowIron && gear.shield === 'ironShield'))
         throw new Error('Invalid personal equipment slots.');
 }
 export function validatePillageEquipment(snapshot: PillageEquipment | undefined,
     memberIds: readonly string[], successBps: number, casualtyBps: number): void {
     if (snapshot === undefined) return;
-    if (!snapshot || snapshot.version !== 1 || !Array.isArray(snapshot.members) ||
+    if (!snapshot || ![1, 2].includes(snapshot.version) || !Array.isArray(snapshot.members) ||
         snapshot.members.length !== memberIds.length) throw new Error('Invalid Pillage equipment snapshot.');
     for (const value of [snapshot.baseSuccessBps, snapshot.baseCasualtyBps, snapshot.spearBonusBps,
         snapshot.woodenShieldProtectionBps, snapshot.leatherShieldProtectionBps, snapshot.successBps]) uint(value, 10000);
+    if (snapshot.version === 2) {
+        uint(snapshot.ironSpearBonusBps, 2500); uint(snapshot.ironShieldProtectionBps, 7500);
+        if (!snapshot.members.some(member => member.weapon === 'ironSpear' || member.shield === 'ironShield'))
+            throw new Error('An iron snapshot requires actual dispatched iron equipment.');
+    } else if (snapshot.ironSpearBonusBps !== undefined || snapshot.ironShieldProtectionBps !== undefined)
+        throw new Error('Historical equipment cannot acquire iron coefficients.');
     snapshot.members.forEach((member, index) => {
-        validateSlots(member);
+        validateSlots(member, snapshot.version === 2);
         if (member.personaId !== memberIds[index] || typeof member.name !== 'string' || !member.name.trim() ||
             member.casualtyBps !== protectedRisk(snapshot.baseCasualtyBps, member.shield, snapshot))
             throw new Error('Invalid Pillage member snapshot.');
     });
-    const expected = Math.min(10000, snapshot.baseSuccessBps + Math.floor(snapshot.spearBonusBps *
-        snapshot.members.filter(m => m.weapon === 'woodenSpear').length / Math.max(1, memberIds.length)));
+    const expected = Math.min(10000, snapshot.baseSuccessBps + Math.floor(snapshot.members.reduce((sum, member) =>
+        sum + equipmentSpearBonus(member.weapon, snapshot), 0) / Math.max(1, memberIds.length)));
     if (snapshot.successBps !== expected || successBps !== expected || casualtyBps !== snapshot.baseCasualtyBps)
         throw new Error('Pillage probabilities do not match the dispatched equipment.');
 }
@@ -245,34 +309,45 @@ export function validateSmithery(state: SimulationState): void {
             throw new Error('Pillage equipment requires its saved Smithery inventory.');
         return;
     }
-    if (!smithery || smithery.version !== 1 || !state.mechanics || !smithery.config ||
+    if (!smithery || ![1, 2].includes(smithery.version) || !state.mechanics || !smithery.config ||
         !smithery.stored || !smithery.targets || !smithery.assignments)
         throw new Error('Invalid Smithery state.');
-    const rules = smithery.config;
+    const rules = smithery.config, catalogue = equipmentItemsFor(state);
     for (const values of [smithery.stored, smithery.targets, rules.recipes]) {
-        if (!values || Object.keys(values).sort().join(',') !== [...equipmentItems].sort().join(','))
+        if (!values || Object.keys(values).sort().join(',') !== [...catalogue].sort().join(','))
             throw new Error('Invalid Smithery item catalogue.');
     }
     uint(rules.maximumTarget, 100); uint(rules.spearBonusBps, 2500);
     uint(rules.woodenShieldProtectionBps, 7500); uint(rules.leatherShieldProtectionBps, 7500);
     if (!rules.maximumTarget || rules.leatherShieldProtectionBps < rules.woodenShieldProtectionBps)
         throw new Error('Invalid Smithery limits.');
-    for (const item of equipmentItems) {
+    if (smithery.version === 2) {
+        uint(rules.ironSpearBonusBps, 2500); uint(rules.ironShieldProtectionBps, 7500);
+        if (rules.ironSpearBonusBps! < rules.spearBonusBps ||
+            rules.ironShieldProtectionBps! < rules.leatherShieldProtectionBps)
+            throw new Error('Iron equipment must preserve the saved tier ordering.');
+    } else if (smithery.metalworking || rules.ironSpearBonusBps !== undefined ||
+        rules.ironShieldProtectionBps !== undefined) throw new Error('Historical Smithery cannot acquire iron rules.');
+    for (const item of catalogue) {
         const recipe = rules.recipes?.[item];
         if (!recipe) throw new Error('Missing Smithery recipe.');
         uint(recipe.materials, 100); uint(recipe.hides, 100); uint(recipe.unitsPerWinter, 1000);
         if (!recipe.materials || !recipe.unitsPerWinter ||
-            (item === 'leatherShield') !== (recipe.hides > 0)) throw new Error('Invalid Smithery recipe.');
+            (item === 'leatherShield') !== (recipe.hides > 0) ||
+            (metalworkingItems.includes(item as typeof metalworkingItems[number]) ?
+                !Number.isSafeInteger(recipe.ironOre) || recipe.ironOre! < 1 || recipe.ironOre! > 100 :
+                recipe.ironOre !== undefined)) throw new Error('Invalid Smithery recipe.');
         uint(smithery.stored[item]); uint(smithery.targets[item], rules.maximumTarget);
         uint(equipmentOwned(state, item));
     }
     for (const [id, gear] of Object.entries(smithery.assignments)) {
-        validateSlots(gear);
+        validateSlots(gear, smithery.version === 2);
         if (!state.personas[id] || state.personas[id].deathWinter !== null ||
             personaAge(state, id) < state.mechanics.config.workAge ||
             !gear.weapon && !gear.shield || Object.keys(gear).length !== 2)
             throw new Error('Equipment requires a living current owner.');
     }
+    validateMetalworkingLedger(state);
     const missions = [
         ...Object.values(state.world?.missions ?? {}).map(mission => ({
             snapshot: mission.equipment, status: mission.status, result: mission.result,

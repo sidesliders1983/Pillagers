@@ -7,6 +7,7 @@ import { createEquipmentCharacterIntersectionMeasure } from '../scripts/qa/chara
 import { load } from './load-source.mjs';
 
 const { MeshyHumanFactory } = load('../src/characters/MeshyHuman.ts');
+const { characterAsset } = load('../src/characters/CharacterAssets.ts');
 const { nativeRegion } = load('../src/characters/MeshyBodyFitAdapter.ts');
 const { defaultDNA } = load('../src/characters/CharacterDNA.ts');
 const { universalHumanProfile } = load('../src/characters/UniversalHumanProfile.ts');
@@ -28,12 +29,13 @@ test('actual combat equipment clears the visible body, head and worn field cloth
         profiles.push({ label: 'age ' + age + ' / masculinity ' + masculinity,
             dna: { ...original, morphology: { masculinity, height: universalHumanProfile(original).height } } });
     }
-    const spear = 'equipment/native-wooden-spear';
-    const gripBinding = JSON.parse(await readFile('public/character-lab/modules/native-combat-equipment/wooden-spear.binding.json', 'utf8'));
-    const loadouts = [
-        [spear, 'equipment/native-wooden-shield'], [spear, 'equipment/native-leather-shield'],
-        [spear], ['equipment/native-wooden-shield'], ['equipment/native-leather-shield'],
-    ];
+    const spears = ['equipment/native-iron-spear', 'equipment/native-wooden-spear'];
+    const shields = ['equipment/native-wooden-shield', 'equipment/native-leather-shield',
+        'equipment/native-iron-shield'];
+    const loadouts = [...spears.flatMap(spear => shields.map(shield => [spear, shield])),
+        ...spears.map(spear => [spear]), ...shields.map(shield => [shield])];
+    const bindings = new Map(await Promise.all([...spears, ...shields].map(async id => [id,
+        JSON.parse(await readFile('public' + characterAsset(id).metadata.nativeBinding.path, 'utf8'))])));
     const phases = [0, .1, .2, .25, .2647, .3, .4, .5, .6, .7, .75, .8, .9, 1];
     let samples = 0;
     for (const { label, dna } of profiles) for (const equipmentItems of loadouts) {
@@ -43,9 +45,11 @@ test('actual combat equipment clears the visible body, head and worn field cloth
         try {
             const garmentIds = resolveCharacterPresentation(dna, presentation, human.fit.body).garmentIds;
             const measures = equipmentItems.map(id => ({ id,
-                measure: createEquipmentCharacterIntersectionMeasure(human, id, garmentIds, nativeRegion, { gripBinding }) }));
+                measure: createEquipmentCharacterIntersectionMeasure(human, id, garmentIds, nativeRegion,
+                    { gripBinding: bindings.get(id) }) }));
             const fitRuns = human.modules.fitRuns, identity = JSON.stringify(human.dna);
-            const hasSpear = equipmentItems.includes(spear), hasShield = equipmentItems.length > (hasSpear ? 1 : 0);
+            const hasSpear = equipmentItems.some(id => spears.includes(id));
+            const hasShield = equipmentItems.some(id => shields.includes(id));
             for (const action of [hasSpear ? 'spear' : null, hasShield ? 'shield' : null].filter(Boolean)) {
                 for (const phase of phases) {
                     human.sampleEncounterPose({ key: 'public-character-equipment-clearance', action,
@@ -64,7 +68,7 @@ test('actual combat equipment clears the visible body, head and worn field cloth
             assert.equal(JSON.stringify(human.dna), identity);
         } finally { human.dispose(); }
         if (equipmentItems === loadouts[loadouts.length - 1])
-            console.log('Character equipment clearance: ' + label + ' complete; ' + samples + '/490 poses.');
+            console.log('Character equipment clearance: ' + label + ' complete; ' + samples + '/1190 poses.');
     }
-    assert.equal(samples, 490, 'Every body, valid equipment/action combination and specified phase runs');
+    assert.equal(samples, 1190, 'Every body, valid equipment/action combination and specified phase runs');
 });

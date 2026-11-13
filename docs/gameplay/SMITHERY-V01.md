@@ -1,5 +1,9 @@
 # Smithery v0.1 — personal raiding equipment (#221)
 
+This is the saved three-item baseline. The prospectively adopted
+[Metalworking v0.2](METALWORKING-V02.md) catalogue adds the two approved iron items
+without rewriting these historical rules or mission snapshots.
+
 This slice uses the existing Smith (`smith`) and Leatherworker
 (`leatherAndJewelleryMaker`), work progress, care/age/away restrictions and home
 specialization upgrades. No mine, new workplace building, training XP, body armor,

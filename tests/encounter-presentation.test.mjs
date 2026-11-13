@@ -422,3 +422,30 @@ test('a retained prior response faces its own actually recorded opponent rather 
         assert.equal(core.serializeState(state), before);
     } finally { trace.layer.dispose(); }
 });
+
+
+test('canonical iron gear selects armed presentation and clearing it restores the unarmed action', async () => {
+    const { state, world, encounter } = firstExchange();
+    const action = encounter.exchanges[0].actions.find(value => value.actorClanId === state.clan.id &&
+        encounter.exchanges[0].actions.some(other => other.targetId === value.actorId));
+    const view = projectFjordSettlement(state, world, createFjordLayout(world));
+    const participant = view.entities.find(value => value.kind === 'persona' && value.id === action.actorId);
+    const equipped = { ...participant, status: { ...participant.status,
+        equipment: { weapon: 'ironSpear', shield: 'ironShield' } } };
+    const before = core.serializeState(state);
+    const trace = await sceneTrace(state, world, equipped);
+    try {
+        trace.layer.advance(trace.motion, 0, false);
+        assert.equal(trace.requests.at(-1).action, 'spear');
+        assert.equal(trace.requests.at(-1).hasSpear, true);
+        assert.equal(trace.requests.at(-1).hasShield, true);
+        const unarmed = { ...participant, status: { ...participant.status,
+            equipment: { weapon: null, shield: null } } };
+        await trace.layer.sync([unarmed]);
+        trace.layer.advance(trace.motion, 0, false);
+        assert.equal(trace.requests.at(-1).action, 'strike');
+        assert.equal(trace.requests.at(-1).hasSpear, false);
+        assert.equal(trace.requests.at(-1).hasShield, false);
+        assert.equal(core.serializeState(state), before, 'Presentation cannot craft or assign the projected gear');
+    } finally { trace.layer.dispose(); }
+});

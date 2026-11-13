@@ -49,5 +49,39 @@
     "rights": "User-supplied Meshy export from the owner-provided Drive folder for Pillagers #309.",
     "driveFolderId": "1KLQh4TMMHZmr6WPw2UpUOzJRMUouGaVV",
     "rearMountOffsetMetres": 0.077
+  },
+  {
+    "item": "ironSpear",
+    "id": "equipment/native-iron-spear",
+    "label": "Iron-tipped Spear · source review",
+    "name": "iron-spear",
+    "path": "Assets/Combat/iron-spear-original.glb",
+    "bytes": 44460656,
+    "sha256": "7e8c82a8278b84f512bf38ed6d710e6d4c01e81696090afd8d382230c04d8f0c",
+    "driveFileId": "1Ttjy71EiCnVYwRBt_Wq8naBe8gyRvnNM",
+    "provider": "Meshy",
+    "triangles": 3016,
+    "scale": 0.9,
+    "gripY": 0.9,
+    "hand": "right",
+    "rights": "User-supplied Meshy export from the owner-provided Drive folder for Pillagers #224.",
+    "driveFolderId": "1KLQh4TMMHZmr6WPw2UpUOzJRMUouGaVV"
+  },
+  {
+    "item": "ironShield",
+    "id": "equipment/native-iron-shield",
+    "label": "Iron-reinforced Shield · source review",
+    "name": "iron-shield",
+    "path": "Assets/Combat/iron-shield-original.glb",
+    "bytes": 48473968,
+    "sha256": "ad7934dd7ce34d3ce62a775c865be556620ccb6ca553f4c7b57fe8bed9d652f4",
+    "driveFileId": "1pUj9uFFRlrIwqfHOzuiiSLst8-Ym-EYX",
+    "provider": "Meshy",
+    "triangles": 2866,
+    "scale": 0.78,
+    "hand": "left",
+    "rights": "User-supplied Meshy export from the owner-provided Drive folder for Pillagers #224.",
+    "driveFolderId": "1KLQh4TMMHZmr6WPw2UpUOzJRMUouGaVV",
+    "rearMountOffsetMetres": 0.112
   }
 ]

@@ -13,7 +13,8 @@ import {
 } from './TransitCargo';
 import { weatherProfile } from './Weather';
 import { eventFacts } from './EventFacts';
-import { equipmentResult, equipmentFor, defaultSmitheryConfig, type PersonalEquipment } from './Smithery';
+import { equipmentResult, equipmentFor, defaultSmitheryConfig, equipmentSpearBonus, equipmentProtection,
+    type PersonalEquipment } from './Smithery';
 import { eligibleTerritorialObserver, freezePresence } from './ResidentPresence';
 import { commitPersonaDeaths } from './Mortality';
 import { farmyards, reconcileFarmyards } from './Farmyards';
@@ -40,6 +41,7 @@ export type EncounterPhase = 'approach' | 'contact' | 'engaging' | 'resolved' | 
     'returning' | 'lost' | 'stranded' | 'completed';
 export interface ClanEventRef { clanId: string; eventId: string }
 export interface CombatEquipment extends PersonalEquipment {
+    metalworking?: { version: 1; ironSpearBonusBps: number; ironShieldProtectionBps: number };
     personaId: string;
     spearBonusBps: number;
     woodenShieldProtectionBps: number;
@@ -148,9 +150,17 @@ function ensureRecord(state: SimulationState, mission: SpatialMission) {
 }
 function snapshotEquipment(state: SimulationState, id: string): CombatEquipment {
     const config = state.smithery?.config ?? defaultSmitheryConfig;
-    return { personaId: id, ...equipmentFor(state, id), spearBonusBps: config.spearBonusBps,
+    const gear = equipmentFor(state, id);
+    const hasIron = gear.weapon === 'ironSpear' || gear.shield === 'ironShield';
+    return { personaId: id, ...gear, spearBonusBps: config.spearBonusBps,
         woodenShieldProtectionBps: config.woodenShieldProtectionBps,
-        leatherShieldProtectionBps: config.leatherShieldProtectionBps };
+        leatherShieldProtectionBps: config.leatherShieldProtectionBps,
+        ...(hasIron ? { metalworking: { version: 1 as const,
+            ironSpearBonusBps: config.ironSpearBonusBps!,
+            ironShieldProtectionBps: config.ironShieldProtectionBps! } } : {}) };
+}
+function combatEquipmentRules(gear: CombatEquipment) {
+    return { ...gear, ...gear.metalworking };
 }
 function sees(context: PhysicalExpeditionContext, first: Point2, second: Point2) {
     const surface = createBlueprintSurface(context.world);
@@ -281,9 +291,8 @@ function exchange(state: SimulationState, mission: SpatialMission, entry: Encoun
         const targetId = reachable[(index + entry.exchangeIndex) % reachable.length];
         const gear = entry.equipment[id], targetGear = entry.equipment[targetId];
         const base = Math.min(10000, Math.floor(rules.policy.actionLethalityBps *
-            (10000 + (gear.weapon === 'woodenSpear' ? gear.spearBonusBps : 0)) / 10000));
-        const protection = targetGear.shield === 'woodenShield' ? targetGear.woodenShieldProtectionBps :
-            targetGear.shield === 'leatherShield' ? targetGear.leatherShieldProtectionBps : 0;
+            (10000 + equipmentSpearBonus(gear.weapon, combatEquipmentRules(gear))) / 10000));
+        const protection = equipmentProtection(targetGear.shield, combatEquipmentRules(targetGear));
         const probabilityBps = Math.floor(base * (10000 - protection) / 10000);
         const roll = randomUint(side.clan);
         const fatal = roll < Math.floor(probabilityBps * 4294967296 / 10000);
@@ -516,10 +525,17 @@ function eventAt(clan: SimulationState, id: string) {
     return clan.events.find(event => event.id === id);
 }
 function validGear(value: CombatEquipment, id: string) {
-    return value && value.personaId === id && [null, 'woodenSpear'].includes(value.weapon) &&
-        [null, 'woodenShield', 'leatherShield'].includes(value.shield) &&
-        [value.spearBonusBps, value.woodenShieldProtectionBps, value.leatherShieldProtectionBps]
-            .every(number => Number.isSafeInteger(number) && number >= 0 && number <= 10000);
+    if (!value || value.personaId !== id || ![null, 'woodenSpear', 'ironSpear'].includes(value.weapon) ||
+        ![null, 'woodenShield', 'leatherShield', 'ironShield'].includes(value.shield) ||
+        ![value.spearBonusBps, value.woodenShieldProtectionBps, value.leatherShieldProtectionBps]
+            .every(number => Number.isSafeInteger(number) && number >= 0 && number <= 10000)) return false;
+    const hasIron = value.weapon === 'ironSpear' || value.shield === 'ironShield';
+    if (!hasIron) return value.metalworking === undefined;
+    const rules = value.metalworking;
+    return rules?.version === 1 && Number.isSafeInteger(rules.ironSpearBonusBps) &&
+        rules.ironSpearBonusBps >= 0 && rules.ironSpearBonusBps <= 2500 &&
+        Number.isSafeInteger(rules.ironShieldProtectionBps) && rules.ironShieldProtectionBps >= 0 &&
+        rules.ironShieldProtectionBps <= 7500;
 }
 export function validateOnSiteEncounters(state: SimulationState) {
     const registry = state.world?.encounters;
@@ -658,9 +674,8 @@ export function validateOnSiteEncounters(state: SimulationState) {
                     !actorGear || !targetGear) fail();
                 acted.add(action.actorId);
                 const base = Math.min(10000, Math.floor(rules.policy.actionLethalityBps *
-                    (10000 + (actorGear.weapon === 'woodenSpear' ? actorGear.spearBonusBps : 0)) / 10000));
-                const protection = targetGear.shield === 'woodenShield' ? targetGear.woodenShieldProtectionBps :
-                    targetGear.shield === 'leatherShield' ? targetGear.leatherShieldProtectionBps : 0;
+                    (10000 + equipmentSpearBonus(actorGear.weapon, combatEquipmentRules(actorGear))) / 10000));
+                const protection = equipmentProtection(targetGear.shield, combatEquipmentRules(targetGear));
                 const probability = Math.floor(base * (10000 - protection) / 10000);
                 const outcome = action.roll < Math.floor(probability * 4294967296 / 10000) ? 'death' :
                     protection > 0 && action.roll < Math.floor(base * 4294967296 / 10000) ? 'blocked' : 'survived';

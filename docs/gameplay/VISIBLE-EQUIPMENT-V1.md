@@ -1,5 +1,11 @@
 # Visible personal equipment v1 (#309)
 
+The [Metalworking v0.2](METALWORKING-V02.md) extension adds the actual owner-supplied
+Iron-tipped Spear and Iron-reinforced Shield through this same native fitting and
+canonical assignment path. Their source and qualification evidence is recorded in
+[the iron asset audit](../characters/native-metalworking-equipment.md).
+The first three-item baseline below remains separately identified.
+
 The existing Weapon and Shield assignments select each real resident's visible
 props. The first catalogue contains Wooden Spear, Wooden Shield and
 Leather-reinforced Shield. Both, either item, and neither are valid. Opening a

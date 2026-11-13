@@ -32,20 +32,20 @@ function rootPose(human) {
     return [...human.root.position, ...human.root.quaternion, ...human.root.scale];
 }
 
-test('Lab spear, shield and death previews exactly match the public native action sampler with either real shield and retain identity, fit and root', async () => {
+test('Lab combat previews exactly match the public native action sampler with both spears and all shields while retaining identity, fit and root', async () => {
     const factory = nativeFactory();
     const dna = { ...defaultDNA(), age: 32 };
-    for (const shield of ['woodenShield', 'leatherShield']) {
+    for (const weapon of ['woodenSpear', 'ironSpear']) for (const shield of ['woodenShield', 'leatherShield', 'ironShield']) {
         const presentation = fjordWardrobePresentation({ kind: 'persona', dna,
             status: { living: true, expedition: 'lab-adapter-proof',
-                equipment: { weapon: 'woodenSpear', shield } } });
+                equipment: { weapon, shield } } });
         const preview = await factory.create(dna, 2, undefined, presentation);
         const reference = await factory.create(dna, 2, undefined, presentation);
         try {
             for (const human of [preview, reference]) {
                 human.root.position.set(13, 2, -7);
                 human.root.rotation.y = .7;
-                assert.ok(human.fit.modules.has(nativeCombatEquipmentByItem.woodenSpear));
+                assert.ok(human.fit.modules.has(nativeCombatEquipmentByItem[weapon]));
                 assert.ok(human.fit.modules.has(nativeCombatEquipmentByItem[shield]));
                 assert.ok(human.fit.modules.has('garment/meshy-grid-trial-001'));
             }
@@ -55,11 +55,12 @@ test('Lab spear, shield and death previews exactly match the public native actio
             const modules = [...preview.fit.modules.keys()];
             const root = rootPose(preview);
             for (const [id, action] of [
-                ['CombatSpear', 'spear'], ['CombatShield', 'shield'], ['CombatDeath', 'death'],
+                ['CombatReady', 'ready'], ['CombatSpear', 'spear'], ['CombatShield', 'shield'],
+                ['CombatBrace', 'brace'], ['CombatWithdraw', 'withdraw'], ['CombatDeath', 'death'],
             ]) {
                 const duration = labCombatDuration(preview, id);
                 for (const phase of [0, .25, .5, .75, 1]) {
-                    const label = shield + ' / ' + id + ' / phase ' + phase;
+                    const label = weapon + ' + ' + shield + ' / ' + id + ' / phase ' + phase;
                     assert.equal(sampleLabCombatPose(preview, id, duration * phase), true, label);
                     reference.sampleEncounterPose({ key: 'native-adapter-reference', action,
                         startedAt: 100, durationTicks: 8, tick: 100 + 8 * phase,
