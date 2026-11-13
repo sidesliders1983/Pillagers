@@ -60,7 +60,7 @@ export class CharacterLabUI {
                         <h2>Combat review</h2>
                         <p class="lab-note">Inspect the normal field tunic with the supplied spear and shield models on this character's native rig.</p>
                         <button data-action="combat-outfit">Load field outfit</button>
-                        <div class="lab-identity">
+                        <div class="lab-identity lab-combat-equipment">
                             <label>Weapon<select id="lab-combat-weapon"><option value="none">None</option><option value="${nativeCombatEquipmentByItem.woodenSpear}">Wooden spear</option></select></label>
                             <label>Shield<select id="lab-combat-shield"><option value="none">None</option><option value="${nativeCombatEquipmentByItem.woodenShield}">Wooden shield</option><option value="${nativeCombatEquipmentByItem.leatherShield}">Leather-reinforced shield</option></select></label>
                         </div>
