@@ -1,4 +1,5 @@
 import type { NativeEncounterPoseRequest } from './NativeEncounterPose';
+import { NativeEncounterBodyEnvelope, nativePropFrame, placeNativeArm, rotateNativeBoneWorld } from './NativeEncounterArmPose';
 import {
  BufferAttribute, Color, Group, Material, Matrix3, Matrix4, Mesh,
  MeshStandardMaterial, Quaternion, SkinnedMesh, Vector3,
@@ -413,6 +414,7 @@ export class MeshyModuleRuntime {
  }
 
  refit(profile: HumanProfile) {
+  this.encounterBodyEnvelope = undefined;
   const started = performance.now();
   for (const [id, record] of [...this.records]) {
    if (!nativeModuleEligible(record.source, profile)) this.remove(id);
@@ -481,8 +483,7 @@ export class MeshyModuleRuntime {
     this.coverageMaterials = originals.map(material => preparedNeckMaterial(material, this.fit.encoding, necks[0]));
     this.fit.mesh.material = Array.isArray(this.originalBodyMaterial) ? this.coverageMaterials : this.coverageMaterials[0];
    }
-   this.fitRuns++;
-   this.lastFitMilliseconds = performance.now() - started;
+   this.finishRefit(started);
    return;
   }
   if (prepared.length) {
@@ -498,8 +499,7 @@ export class MeshyModuleRuntime {
     fullCoverage.coverage));
    this.fit.mesh.material = Array.isArray(this.originalBodyMaterial)
     ? this.coverageMaterials : this.coverageMaterials[0];
-   this.fitRuns++;
-   this.lastFitMilliseconds = performance.now() - started;
+   this.finishRefit(started);
    return;
   }
   const covered = new Set<number>();
@@ -521,12 +521,19 @@ export class MeshyModuleRuntime {
     }
    }
   }
+  this.finishRefit(started);
+ }
+
+ private finishRefit(started: number) {
+  if ([...this.records.keys()].some(id => id.startsWith('equipment/native-'))) this.encounterBody();
   this.fitRuns++;
   this.lastFitMilliseconds = performance.now() - started;
  }
 
- private encounterShieldFrame = new WeakMap<SkinnedMesh, { right: number; left: number; up: number }>();
- private encounterSpearEnds = new WeakMap<SkinnedMesh, { tip: number; butt: number }>();
+ private encounterBodyEnvelope?: NativeEncounterBodyEnvelope;
+ private encounterShieldFrame = new WeakMap<SkinnedMesh, { right: number; left: number; up: number; rear: number }>();
+ private encounterSpearEnds = new WeakMap<SkinnedMesh, { tip: number; butt: number; radius: number;
+  sections: {from: number; to: number; radius: number}[] }>();
  private gripArm: {joint: number; rotation: Quaternion}[] = [];
 
  /** Apply one carry layer over the original animation; equipment changes restore its saved arm. */
@@ -564,15 +571,30 @@ export class MeshyModuleRuntime {
   }
  }
 
+ private encounterBody() {
+  if (!this.encounterBodyEnvelope) {
+   const meshes = [this.fit.mesh];
+   for (const record of this.records.values()) {
+    if (record.source.asset.type === 'equipment') continue;
+    for (const part of record.parts) if ((part.mesh as SkinnedMesh).isSkinnedMesh)
+     meshes.push(part.mesh as SkinnedMesh);
+   }
+   this.encounterBodyEnvelope = characterSync(this.observe, 'encounter-body-envelope-preparation',
+    () => new NativeEncounterBodyEnvelope(meshes, this.fit.encoding));
+  }
+  return this.encounterBodyEnvelope;
+ }
+
  /** Keep the measured fingers while an action owns its arm pose instead of the carry layer. */
  poseEncounterAction(animationRotations: ReadonlyMap<import('three').Bone, Quaternion>,
   request: NativeEncounterPoseRequest, phase: number) {
   this.poseEquipmentGrips(animationRotations, false, true, false);
-  if (request.action === 'shield' && request.hasShield) {
+  if (['ready', 'spear', 'shield', 'brace', 'withdraw'].includes(request.action) && request.hasShield) {
    const shield = [...this.records.values()].find(record => record.group.visible &&
     ['equipment/native-wooden-shield', 'equipment/native-leather-shield'].includes(record.source.asset.id));
    const grip = shield?.source.binding.rigidEquipment?.gripPose;
    if (shield && grip) {
+    const defence = request.action === 'shield' ? Math.sin(Math.PI * phase) : 0;
     const bones = this.fit.nativeSkeleton.bones;
     bones[grip.upperArmJoint].quaternion.fromArray(grip.upperArmRotation);
     bones[grip.forearmJoint].quaternion.fromArray(grip.forearmRotation);
@@ -580,7 +602,7 @@ export class MeshyModuleRuntime {
     const bodyRotation = this.fit.bodyRoot.getWorldQuaternion(new Quaternion());
     const parent = bones[grip.upperArmJoint].parent!.getWorldQuaternion(new Quaternion());
     const lift = new Quaternion().setFromAxisAngle(new Vector3(-1, 0, 0).applyQuaternion(bodyRotation),
-     Math.sin(Math.PI * phase));
+     defence);
     bones[grip.upperArmJoint].quaternion.premultiply(parent.clone().invert().multiply(lift).multiply(parent));
     this.fit.rootForModulesUpdate();
     const part = shield.parts[0], mesh = part.mesh as SkinnedMesh;
@@ -591,13 +613,15 @@ export class MeshyModuleRuntime {
      const up = new Vector3(0, 1, 0).addScaledVector(across, -across.y).normalize();
      // Match the generator's signed source frame: its +Z is the shield's front face.
      if (across.clone().cross(up).x < 0) across.negate();
-     frame = { right: 0, left: 0, up: 0 };
-     let maximum = -Infinity, minimum = Infinity, highest = -Infinity;
+     frame = { right: 0, left: 0, up: 0, rear: 0 };
+     let maximum = -Infinity, minimum = Infinity, highest = -Infinity, rearmost = Infinity;
+     const front = across.clone().cross(up).normalize();
      for (let vertex = 0; vertex < positions.count; vertex++) {
       const point = new Vector3().fromBufferAttribute(positions, vertex);
       if (point.dot(across) > maximum) { maximum = point.dot(across); frame.right = vertex; }
       if (point.dot(across) < minimum) { minimum = point.dot(across); frame.left = vertex; }
       if (point.dot(up) > highest) { highest = point.dot(up); frame.up = vertex; }
+      if (point.dot(front) < rearmost) { rearmost = point.dot(front); frame.rear = vertex; }
      }
      this.encounterShieldFrame.set(mesh, frame);
     }
@@ -605,76 +629,139 @@ export class MeshyModuleRuntime {
     const left = point(frame.left), right = point(frame.right), top = point(frame.up);
     const normal = right.clone().sub(left).cross(top.sub(left.clone().lerp(right, .5))).normalize();
     const forward = new Vector3(0, 0, 1).applyQuaternion(bodyRotation);
-    const turn = new Quaternion().slerp(new Quaternion().setFromUnitVectors(normal, forward), Math.sin(Math.PI * phase));
-    // Turn the braced forearm and its hand together, retaining the shield's rear contact.
-    const forearmParent = bones[grip.forearmJoint].parent!.getWorldQuaternion(new Quaternion());
-    bones[grip.forearmJoint].quaternion.premultiply(forearmParent.clone().invert().multiply(turn).multiply(forearmParent));
-    this.fit.rootForModulesUpdate();
+    const turn = new Quaternion().slerp(new Quaternion().setFromUnitVectors(normal, forward), defence);
+    const update = () => this.fit.rootForModulesUpdate();
+    const upper = bones[grip.upperArmJoint], forearm = bones[grip.forearmJoint], wrist = bones[grip.wristJoint];
+    const shoulder = upper.getWorldPosition(new Vector3()), elbow = forearm.getWorldPosition(new Vector3());
+    const hand = wrist.getWorldPosition(new Vector3());
+    const desiredNormal = normal.clone().applyQuaternion(turn);
+    const desiredArm = hand.clone().sub(elbow).normalize().applyQuaternion(turn);
+    const rearOffset = point(frame.rear).sub(hand).dot(normal);
+    const localNormal = desiredNormal.clone().applyMatrix3(new Matrix3()
+     .setFromMatrix4(this.fit.bodyRoot.matrixWorld).transpose());
+    const bodySupport = this.encounterBody().support(this.fit.bodyRoot, localNormal) +
+     this.fit.bodyRoot.getWorldPosition(new Vector3()).dot(desiredNormal);
+    const upperVector = elbow.clone().sub(shoulder), upperLength = upperVector.length();
+    const lowerLength = hand.distanceTo(elbow);
+    const clearance = grip.fingerRadius * this.fit.bodyRoot.getWorldScale(new Vector3()).x / 4;
+    const needed = bodySupport + clearance - rearOffset - shoulder.dot(desiredNormal)
+     - lowerLength * desiredArm.dot(desiredNormal);
+    const along = Math.min(upperLength - 1e-6, Math.max(needed, upperVector.dot(desiredNormal)));
+    const tangent = upperVector.clone().addScaledVector(desiredNormal, -upperVector.dot(desiredNormal)).normalize();
+    const elbowTarget = shoulder.clone().addScaledVector(desiredNormal, along)
+     .addScaledVector(tangent, Math.sqrt(Math.max(0, upperLength * upperLength - along * along)));
+    rotateNativeBoneWorld(upper, new Quaternion().setFromUnitVectors(upperVector.normalize(),
+     elbowTarget.clone().sub(shoulder).normalize()), update);
+    // Reorient the entire forearm/hand mount after moving its elbow in front of the protected body.
+    const sourceArm = wrist.getWorldPosition(new Vector3()).sub(forearm.getWorldPosition(new Vector3())).normalize();
+    const sourceNormal = point(frame.right).sub(point(frame.left))
+     .cross(point(frame.up).sub(point(frame.left).lerp(point(frame.right), .5))).normalize();
+    const sourceAcross = sourceArm.clone().addScaledVector(sourceNormal, -sourceArm.dot(sourceNormal)).normalize();
+    const targetAcross = desiredArm.clone().addScaledVector(desiredNormal, -desiredArm.dot(desiredNormal)).normalize();
+    const sourceFrame = new Matrix4().makeBasis(sourceAcross, sourceNormal.clone().cross(sourceAcross), sourceNormal);
+    const targetFrame = new Matrix4().makeBasis(targetAcross, desiredNormal.clone().cross(targetAcross), desiredNormal);
+    const orient = new Quaternion().setFromRotationMatrix(targetFrame)
+     .multiply(new Quaternion().setFromRotationMatrix(sourceFrame).invert());
+    rotateNativeBoneWorld(forearm, orient, update);
    }
   }
-  if (request.action !== 'spear' || !request.hasSpear) return;
+  if (!['ready', 'spear', 'shield', 'brace', 'withdraw'].includes(request.action) || !request.hasSpear) return;
   const record = this.records.get('equipment/native-wooden-spear');
   const pose = record?.source.binding.rigidEquipment?.gripPose;
   const part = record?.parts[0];
   if (!record?.group.visible || !pose || !part || !(part.mesh as SkinnedMesh).isSkinnedMesh) return;
   const bones = this.fit.nativeSkeleton.bones;
-  if (request.hasShield) {
-   const shield = [...this.records.values()].find(value => value.group.visible &&
-    ['equipment/native-wooden-shield', 'equipment/native-leather-shield'].includes(value.source.asset.id));
-   const shieldGrip = shield?.source.binding.rigidEquipment?.gripPose;
-   if (shieldGrip) {
-    // The shield keeps its prepared brace while the spear action owns the other arm.
-    bones[shieldGrip.upperArmJoint].quaternion.fromArray(shieldGrip.upperArmRotation);
-    bones[shieldGrip.forearmJoint].quaternion.fromArray(shieldGrip.forearmRotation);
-   }
-  }
   const upper = bones[pose.upperArmJoint], forearm = bones[pose.forearmJoint], wrist = bones[pose.wristJoint];
   upper.quaternion.fromArray(pose.upperArmRotation);
   forearm.quaternion.fromArray(pose.forearmRotation);
-  const extension = Math.sin(Math.PI * phase);
+  const extension = request.action === 'spear' ? Math.sin(Math.PI * phase) : 0;
   this.fit.rootForModulesUpdate();
   const bodyRotation = this.fit.bodyRoot.getWorldQuaternion(new Quaternion());
-  const rotateWorld = (bone: import('three').Bone, rotation: Quaternion) => {
-   const parent = bone.parent!.getWorldQuaternion(new Quaternion());
-   bone.quaternion.premultiply(parent.clone().invert().multiply(rotation).multiply(parent));
-   this.fit.rootForModulesUpdate();
-  };
-  const shoulder = upper.getWorldPosition(new Vector3());
-  const elbow = forearm.getWorldPosition(new Vector3()), hand = wrist.getWorldPosition(new Vector3());
-  const upperLength = shoulder.distanceTo(elbow), lowerLength = elbow.distanceTo(hand);
-  const reach = upperLength + lowerLength;
-  // Bounded physical arm targets keep the shoulder/elbow/hand on the original native bones.
-  const target = shoulder.clone().add(new Vector3(-.12, -.32, .22 + .68 * extension)
-   .multiplyScalar(reach).applyQuaternion(bodyRotation));
-  const direction = target.clone().sub(shoulder), distance = direction.length();
-  direction.normalize();
-  const outward = new Vector3(-1, -.25, 0).applyQuaternion(bodyRotation);
-  outward.addScaledVector(direction, -outward.dot(direction)).normalize();
-  const along = (upperLength * upperLength - lowerLength * lowerLength + distance * distance) / (2 * distance);
-  const offset = Math.sqrt(Math.max(0, upperLength * upperLength - along * along));
-  const elbowTarget = shoulder.clone().addScaledVector(direction, along).addScaledVector(outward, offset);
-  rotateWorld(upper, new Quaternion().setFromUnitVectors(elbow.clone().sub(shoulder).normalize(),
-   elbowTarget.clone().sub(shoulder).normalize()));
-  const currentElbow = forearm.getWorldPosition(new Vector3());
-  rotateWorld(forearm, new Quaternion().setFromUnitVectors(
-   wrist.getWorldPosition(new Vector3()).sub(currentElbow).normalize(), target.clone().sub(currentElbow).normalize()));
+  const update = () => this.fit.rootForModulesUpdate();
   const mesh = part.mesh as SkinnedMesh, positions = part.original.geometry.getAttribute('position');
   let ends = this.encounterSpearEnds.get(mesh);
   if (!ends) {
    const sourceAxis = new Vector3().fromArray(pose.axis);
-   ends = { tip: 0, butt: 0 };
+   ends = { tip: 0, butt: 0, radius: 0, sections: [] };
    let maximum = -Infinity, minimum = Infinity;
+   const gripPoint = new Vector3(...record.source.binding.rigidEquipment!.parts[0].grip);
    for (let vertex = 0; vertex < positions.count; vertex++) {
-    const distance = new Vector3().fromBufferAttribute(positions, vertex).dot(sourceAxis);
+    const sourcePoint = new Vector3().fromBufferAttribute(positions, vertex);
+    const distance = sourcePoint.dot(sourceAxis);
+    const radial = sourcePoint.sub(gripPoint);
+    ends.radius = Math.max(ends.radius, radial.addScaledVector(sourceAxis, -radial.dot(sourceAxis)).length());
     if (distance > maximum) { maximum = distance; ends.tip = vertex; }
     if (distance < minimum) { minimum = distance; ends.butt = vertex; }
+   }
+   const gripProjection = gripPoint.dot(sourceAxis);
+   const count = Math.min(64, Math.max(1, Math.ceil((maximum - minimum) / (2 * pose.fingerRadius))));
+   const width = (maximum - minimum) / count;
+   ends.sections = Array.from({length: count}, (_, index) => ({
+    from: minimum + index * width - gripProjection,
+    to: minimum + (index + 1) * width - gripProjection, radius: 0,
+   }));
+   const indices = part.original.geometry.index!;
+   // A triangle contributes to every axial slice it spans, including long shaft faces.
+   for (let triangle = 0; triangle < indices.count; triangle += 3) {
+    let low = Infinity, high = -Infinity, radius = 0;
+    for (let corner = 0; corner < 3; corner++) {
+     const vertex = new Vector3().fromBufferAttribute(positions, indices.getX(triangle + corner));
+     const projection = vertex.dot(sourceAxis);
+     low = Math.min(low, projection); high = Math.max(high, projection);
+     const radial = vertex.sub(gripPoint);
+     radius = Math.max(radius, radial.addScaledVector(sourceAxis, -radial.dot(sourceAxis)).length());
+    }
+    const first = Math.max(0, Math.min(count - 1, Math.floor((low - minimum) / width)));
+    const last = Math.max(0, Math.min(count - 1, Math.floor((high - minimum) / width)));
+    for (let section = first; section <= last; section++)
+     ends.sections[section].radius = Math.max(ends.sections[section].radius, radius);
    }
    this.encounterSpearEnds.set(mesh, ends);
   }
   const point = (vertex: number) => mesh.getVertexPosition(vertex, new Vector3()).applyMatrix4(mesh.matrixWorld);
-  const axis = point(ends.tip).sub(point(ends.butt)).normalize();
+  const frame = this.fit.bodyRoot;
+  const inverse = frame.matrixWorld.clone().invert();
+  const shoulder = upper.getWorldPosition(new Vector3()).applyMatrix4(inverse);
+  const elbow = forearm.getWorldPosition(new Vector3()).applyMatrix4(inverse);
+  const hand = wrist.getWorldPosition(new Vector3()).applyMatrix4(inverse);
+  const reach = shoulder.distanceTo(elbow) + elbow.distanceTo(hand);
+  const body = this.encounterBody().bounds(this.fit.bodyRoot, false);
+  const propFrame = nativePropFrame(mesh, pose.wristJoint, this.fit.encoding, frame);
+  const scale = propFrame.elements;
+  const radiusScale = Math.sqrt(scale[0] ** 2 + scale[1] ** 2 + scale[2] ** 2 +
+   scale[4] ** 2 + scale[5] ** 2 + scale[6] ** 2 + scale[8] ** 2 + scale[9] ** 2 + scale[10] ** 2);
+  const gripSection = ends.sections.find(section => section.from <= 0 && section.to >= 0)!;
+  const clearance = pose.fingerRadius / 4;
+  const lateralLimit = Math.min(body.min.x, shoulder.x) - clearance;
+  const target = shoulder.clone();
+  target.x = lateralLimit - gripSection.radius * radiusScale - pose.fingerRadius;
+  target.y -= .32 * reach;
   const forward = new Vector3(0, .8 * (1 - extension), 1).normalize().applyQuaternion(bodyRotation);
-  rotateWorld(wrist, new Quaternion().setFromUnitVectors(axis, forward));
+  for (let pass = 0; pass < 3; pass++) {
+   const sideways = target.x - shoulder.x, down = target.y - shoulder.y;
+   const available = Math.sqrt(Math.max(0, (reach - clearance) ** 2 - sideways ** 2 - down ** 2));
+   target.z = shoulder.z + available * (extension - .5 * (1 - extension));
+   placeNativeArm(upper, forearm, wrist, frame.localToWorld(target.clone()),
+    new Vector3(0, -1, 0).applyQuaternion(bodyRotation), update);
+   const axis = point(ends.tip).sub(point(ends.butt)).normalize();
+   rotateNativeBoneWorld(wrist, new Quaternion().setFromUnitVectors(axis, forward), update);
+   const fitted = nativePropFrame(mesh, pose.wristJoint, this.fit.encoding, frame);
+   const sourceAxis = new Vector3().fromArray(pose.axis);
+   const origin = new Vector3(...record.source.binding.rigidEquipment!.parts[0].grip);
+   let correction = 0;
+   for (const section of ends.sections) {
+    const start = origin.clone().addScaledVector(sourceAxis, section.from).applyMatrix4(fitted);
+    const end = origin.clone().addScaledVector(sourceAxis, section.to).applyMatrix4(fitted);
+    const radius = section.radius * radiusScale;
+    const gap = Math.max(body.min.y - Math.max(start.y, end.y), Math.min(start.y, end.y) - body.max.y,
+     body.min.z - Math.max(start.z, end.z), Math.min(start.z, end.z) - body.max.z, 0);
+    const span = start.distanceTo(end);
+    const blend = Math.max(0, Math.min(1, (gap - radius) / Math.max(span, 1e-6)));
+    const relevance = 1 - blend * blend * (3 - 2 * blend);
+    correction = Math.max(correction, Math.max(0, Math.max(start.x, end.x) + radius - lateralLimit) * relevance);
+   }
+   target.x -= correction;
+  }
  }
  poseHair() {
   for (const record of this.records.values()) record.hairRig?.pose();
@@ -709,6 +796,7 @@ export class MeshyModuleRuntime {
  }
 
  clear() {
+  this.encounterBodyEnvelope = undefined;
   this.frames.forEach(frame => frame.removeFromParent());
   this.frames = [];
   for (const id of [...this.records.keys()]) this.remove(id);

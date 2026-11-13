@@ -76,7 +76,7 @@ test('a recorded spear action uses the existing Attack motion, moves the actual 
     } finally { human.dispose(); }
 });
 
-test('a recorded block visibly raises the actual shield and retains its measured hand grip', async () => {
+test('a recorded block advances the actual shield in front of the character and retains its measured hand grip', async () => {
     const human = await equippedHuman(nativeFactory());
     try {
         const shield = human.fit.modules.get('equipment/native-wooden-shield').children.find(mesh => mesh.isSkinnedMesh);
@@ -92,8 +92,12 @@ test('a recorded block visibly raises the actual shield and retains its measured
         const resting = centre(), hand = left.getWorldPosition(new Vector3());
         human.sampleEncounterPose(request('shield', 104));
         const blocked = centre(), raised = left.getWorldPosition(new Vector3());
-        assert.ok(raised.y - hand.y > .12, 'The actual shield hand rises in a recorded block');
-        assert.ok(blocked.y - resting.y > .1, 'The source shield follows that hand into a protective position');
+        const forward = human.fit.bodyRoot.getWorldDirection(new Vector3());
+        assert.ok(raised.clone().sub(hand).dot(forward) > .12,
+            'The actual shield hand moves forward to protect the body');
+        assert.ok(blocked.clone().sub(resting).dot(forward) > .2,
+            'The complete shield moves in front of the character rather than through its head');
+        assert.ok(blocked.y >= resting.y - .001, 'The forward block does not lower the shield');
         assert.equal(shield.skeleton, human.fit.nativeSkeleton);
         assert.ok(blocked.toArray().every(Number.isFinite));
     } finally { human.dispose(); }

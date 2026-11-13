@@ -49,6 +49,31 @@ action arms must remain visible while the actual prop stays gripped. Ordinary
 Idle/Walk/Run and occupation animation retain their existing defaults. Animation
 sampling must not refit or reinstall the body, garment or equipment each frame.
 
+## Equipment clearance around the character
+
+Spear offence and shield defence must keep the complete real props clear of the
+character, including the spear's long rear shaft. Protection covers the visible
+head, neck, torso, pelvis and currently worn field clothes; hiding or shortening
+an offending mesh is not a pose correction. The carrying hand/fingers and the
+shield's mounted forearm are intentional contact surfaces, not exceptions for the
+head or torso.
+
+The spear arm keeps its shaft outside the protected body and uses its actual
+reach for a forward action. A spear still carried during defence obeys the same
+clearance. The shield's rear surface moves in front of the protected head/body,
+with its existing forearm, wrist and board kept together. Shoulder/elbow targets
+and body bounds use the fitted native character and actual prop dimensions.
+These are skeletal presentation changes; navigation roots, recorded actions and
+simulation outcomes remain unchanged.
+
+Body/clothing envelopes are cached on fit/equipment changes and sampled through
+existing bones. Runtime does not test every triangle each animation frame. The
+public geometry regression independently checks the actual posed visible body
+and clothes from both triangle directions across the action phases, loadouts and
+sampled body shapes. Only actual authored hand/grip and mounted forearm contact
+is exempt. Native side/rear playback is required alongside still poses so an
+occluded shaft or shield/head crossing cannot be accepted from a front view.
+
 ## Transition and clock contract
 
 Priority is recorded casualty, registered exchange action/response, active ready

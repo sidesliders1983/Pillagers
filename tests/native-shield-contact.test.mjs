@@ -90,7 +90,7 @@ test('both supplied shields stay outside the real forearm and fingers during fie
 });
 
 
-test('the real spear clears either braced shield throughout its action while its accepted weapon motion stays unchanged', async () => {
+test('the real spear clears either braced shield and shares the same action with or without a shield', async () => {
     const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
     const bytes = async path => {
         const buffer = await readFile('public' + path.split('?')[0]);
@@ -135,7 +135,7 @@ test('the real spear clears either braced shield throughout its action while its
                         maximumWeaponDrift = Math.max(maximumWeaponDrift, actual.distanceTo(expected));
                     }
                     assert.ok(maximumWeaponDrift < 1e-7,
-                        'Bracing the shield cannot change the accepted actual right-hand spear trajectory');
+                        'Shield presence cannot change the shared actual right-hand spear action');
                 }
                 assert.equal(human.modules.fitRuns, fitRuns, 'The action cannot rebuild either prop fit');
             } finally { human.dispose(); }
