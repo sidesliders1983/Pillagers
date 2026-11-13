@@ -50,7 +50,7 @@ export const nativeCombatEquipmentRecords = [
         "triangles": 2914,
         "materials": 1,
         "bindingPath": "/character-lab/modules/native-combat-equipment/wooden-shield.binding.json",
-        "bindingSha256": "c8a868da67a7e47e0865cd313fc4dc2b573f51da00efd1ed22b318c489eb876a",
+        "bindingSha256": "f8d7be650236879c1175cf5f084688a55d99188b3e23cc569f15603c8c53f403",
         "anchor": "socket_hand_L",
         "equipmentBindings": {
             "grip": {
@@ -91,7 +91,7 @@ export const nativeCombatEquipmentRecords = [
         "triangles": 3020,
         "materials": 1,
         "bindingPath": "/character-lab/modules/native-combat-equipment/leather-shield.binding.json",
-        "bindingSha256": "4daebf543c0a37ec47436b6019c64fbaa5d71533dacab3b8e81b293962cdf22d",
+        "bindingSha256": "cbb47c90ff2d17b062f1c89a5771ed2891df715b3b81c0a120335992fc5d5011",
         "anchor": "socket_hand_L",
         "equipmentBindings": {
             "grip": {
@@ -145,38 +145,38 @@ export const nativeCombatEquipmentMeasurements: Record<string, AssetMeasurement>
         }
     },
     "/character-lab/modules/native-combat-equipment/wooden-shield.glb": {
-        "sha256": "20cdce10db815db5b9937d45f5d789e7a177d67bffdb1031920d38981b1c0626",
+        "sha256": "d283eed9ea73778b4cf859818ed5d4d1e5b1de477892bedaf485740048627735",
         "triangles": 2914,
         "materials": 1,
-        "bytes": 801080,
+        "bytes": 801076,
         "bounds": {
             "min": [
-                0.1291422142777185,
+                0.22422378317057096,
                 0.446612486737511,
-                -0.2872183821931999
+                -0.3464087129649886
             ],
             "max": [
-                0.5306072018016805,
+                0.625688770694533,
                 1.1507975272261608,
-                0.3129968018727513
+                0.2538064711009626
             ]
         }
     },
     "/character-lab/modules/native-combat-equipment/leather-shield.glb": {
-        "sha256": "b8bdaa375ebf4330613db7f47f4c962f87f2e20942a1969ef1c403a98d6d28f3",
+        "sha256": "efd88e3df464d6d78f797e293fb9999c2e1ad0c042a2a0d35e888e1dd92536c7",
         "triangles": 3020,
         "materials": 1,
         "bytes": 850132,
         "bounds": {
             "min": [
-                0.1737867007382518,
+                0.2391552793520879,
                 0.4448552776758741,
-                -0.30983862736141965
+                -0.3505319797670243
             ],
             "max": [
-                0.5751670228708616,
+                0.6405356014846978,
                 1.1532439377784014,
-                0.29094553635786835
+                0.25025218395226356
             ]
         }
     }

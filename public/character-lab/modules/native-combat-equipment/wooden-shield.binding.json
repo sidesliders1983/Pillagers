@@ -1,11 +1,11 @@
 {
   "version": "pillagers-fit/0.2",
   "id": "equipment/native-wooden-shield",
-  "moduleSha256": "20cdce10db815db5b9937d45f5d789e7a177d67bffdb1031920d38981b1c0626",
+  "moduleSha256": "d283eed9ea73778b4cf859818ed5d4d1e5b1de477892bedaf485740048627735",
   "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
   "recipe": {
     "id": "supplied-native-combat-prop-grip",
-    "version": 1,
+    "version": 2,
     "blender": "not-required"
   },
   "coordinateFrame": {

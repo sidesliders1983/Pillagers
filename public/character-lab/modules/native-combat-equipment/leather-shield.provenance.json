@@ -14,29 +14,30 @@
     "scale": 0.78,
     "hand": "left",
     "rights": "User-supplied Meshy export from the owner-provided Drive folder for Pillagers #309.",
-    "driveFolderId": "1KLQh4TMMHZmr6WPw2UpUOzJRMUouGaVV"
+    "driveFolderId": "1KLQh4TMMHZmr6WPw2UpUOzJRMUouGaVV",
+    "rearMountOffsetMetres": 0.077
   },
   "reviewRequired": true,
   "reviewStatus": "pending-combined-owner-QA",
   "output": {
-    "sha256": "b8bdaa375ebf4330613db7f47f4c962f87f2e20942a1969ef1c403a98d6d28f3",
+    "sha256": "efd88e3df464d6d78f797e293fb9999c2e1ad0c042a2a0d35e888e1dd92536c7",
     "triangles": 3020,
     "materials": 1,
     "bytes": 850132,
     "bounds": {
       "min": [
-        0.1737867007382518,
+        0.2391552793520879,
         0.4448552776758741,
-        -0.30983862736141965
+        -0.3505319797670243
       ],
       "max": [
-        0.5751670228708616,
+        0.6405356014846978,
         1.1532439377784014,
-        0.29094553635786835
+        0.25025218395226356
       ]
     }
   },
-  "bindingSha256": "4daebf543c0a37ec47436b6019c64fbaa5d71533dacab3b8e81b293962cdf22d",
+  "bindingSha256": "cbb47c90ff2d17b062f1c89a5771ed2891df715b3b81c0a120335992fc5d5011",
   "nativeRig": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
   "bodyBindings": [
     {
@@ -74,7 +75,7 @@
     "localSource": [
       0.00046122074127197266,
       0.44999998807907104,
-      -0.08654921561479569
+      -0.1852671643327444
     ],
     "nativeTarget": [
       0.3175929624977574,
@@ -94,16 +95,27 @@
       -2.1649348980190547e-17,
       -0.4122183750178143,
       0,
-      0.4633959840062393,
+      0.5287645626200754,
       0.48992612438078825,
-      0.1273714197868521,
+      0.08667806738124736,
       1
+    ]
+  },
+  "mount": {
+    "kind": "forearm-backed-shield",
+    "sourceFront": "+Z",
+    "rearMountOffsetMetres": 0.077,
+    "originalSourceGrip": [
+      0.00046122074127197266,
+      0.44999998807907104,
+      -0.08654921561479569
     ]
   },
   "operations": [
     "Preserve all supplied source triangles, UVs and material colours; no mannequin/body replacement",
     "Resize albedo to 1024 and metallic/roughness to 512; remove normal/occlusion/emissive maps",
-    "Bind rigidly to the measured native hand/finger cavity without new bones, body masks or clips"
+    "Bind rigidly to the measured native hand/finger cavity without new bones, body masks or clips",
+    "Place the shield rear surface outside the dorsal forearm, preserving the native hand anchor"
   ],
   "originalBounds": {
     "min": [

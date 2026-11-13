@@ -52,6 +52,21 @@ measured native hand/finger grips. They do not mask or replace the tunic. Native
 Idle/Walk/Run carry posing reuses the existing clock; combat action authoring and
 its arm/finger precedence follow [encounter presentation](ENCOUNTER-PRESENTATION-V1.md).
 
+The shield mount places the actual rear surface outside the dorsal forearm instead
+of passing the board through the hand/arm. Each source model has a measured native
+rear offset from the finger-cavity reference; the hand anchor, original geometry,
+UVs, scale and native rig are retained. Shield defence follows the signed source
+front face toward the opponent, so its mounting direction cannot flip when the
+arm is raised. Fitting stays in the shared preparation/runtime path for both the
+Lab and FjordSide.
+
+`tests/native-shield-contact.test.mjs` checks actual posed forearm/hand/finger
+vertices against the source shield triangle surfaces across sampled ages, sexes,
+carry motion and combat phases. It measures rear-surface contact and front-face
+direction; it is not certification of every triangle, garment or possible pose.
+Updated source hashes deliberately require recapturing old exact-asset Lab
+snapshots. Campaign item assignments retain their existing canonical identities.
+
 ## Character Lab review
 
 Open `/character-lab?combat=ready` for the normal field tunic, low shoes, supplied

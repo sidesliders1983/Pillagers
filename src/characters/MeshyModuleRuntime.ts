@@ -589,6 +589,8 @@ export class MeshyModuleRuntime {
      const positions = part.original.geometry.getAttribute('position');
      const across = new Vector3().fromArray(grip.axis);
      const up = new Vector3(0, 1, 0).addScaledVector(across, -across.y).normalize();
+     // Match the generator's signed source frame: its +Z is the shield's front face.
+     if (across.clone().cross(up).x < 0) across.negate();
      frame = { right: 0, left: 0, up: 0 };
      let maximum = -Infinity, minimum = Infinity, highest = -Infinity;
      for (let vertex = 0; vertex < positions.count; vertex++) {
@@ -603,10 +605,10 @@ export class MeshyModuleRuntime {
     const left = point(frame.left), right = point(frame.right), top = point(frame.up);
     const normal = right.clone().sub(left).cross(top.sub(left.clone().lerp(right, .5))).normalize();
     const forward = new Vector3(0, 0, 1).applyQuaternion(bodyRotation);
-    if (normal.dot(forward) < 0) normal.negate();
     const turn = new Quaternion().slerp(new Quaternion().setFromUnitVectors(normal, forward), Math.sin(Math.PI * phase));
-    const wristParent = bones[grip.wristJoint].parent!.getWorldQuaternion(new Quaternion());
-    bones[grip.wristJoint].quaternion.premultiply(wristParent.clone().invert().multiply(turn).multiply(wristParent));
+    // Turn the braced forearm and its hand together, retaining the shield's rear contact.
+    const forearmParent = bones[grip.forearmJoint].parent!.getWorldQuaternion(new Quaternion());
+    bones[grip.forearmJoint].quaternion.premultiply(forearmParent.clone().invert().multiply(turn).multiply(forearmParent));
     this.fit.rootForModulesUpdate();
    }
   }

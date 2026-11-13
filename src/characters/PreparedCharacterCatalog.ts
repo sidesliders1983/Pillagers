@@ -308,35 +308,35 @@ export const preparedCharacterCatalog = {
         },
         {
             "originalPath": "/character-lab/modules/native-combat-equipment/leather-shield.binding.json",
-            "originalSha256": "4daebf543c0a37ec47436b6019c64fbaa5d71533dacab3b8e81b293962cdf22d",
+            "originalSha256": "cbb47c90ff2d17b062f1c89a5771ed2891df715b3b81c0a120335992fc5d5011",
             "originalBytes": 5336,
-            "path": "/game-assets/character-sources/4908f37397fa4e3c4a76.bin",
-            "sha256": "4908f37397fa4e3c4a76eb73bf9a26527be795072ab2e53e76ddc2b8cd304aa5",
-            "bytes": 1722
+            "path": "/game-assets/character-sources/a0575a3f07cd234ef3ce.bin",
+            "sha256": "a0575a3f07cd234ef3ced7b9871e1532478264485cbfec65147aa02b97182bd5",
+            "bytes": 1721
         },
         {
             "originalPath": "/character-lab/modules/native-combat-equipment/leather-shield.glb",
-            "originalSha256": "b8bdaa375ebf4330613db7f47f4c962f87f2e20942a1969ef1c403a98d6d28f3",
+            "originalSha256": "efd88e3df464d6d78f797e293fb9999c2e1ad0c042a2a0d35e888e1dd92536c7",
             "originalBytes": 850132,
-            "path": "/game-assets/character-sources/73dd3a3629977605beee.bin",
-            "sha256": "73dd3a3629977605beee5e1309c1d1f2b78c85c88a65fb7e0959e687e39032f1",
-            "bytes": 590657
+            "path": "/game-assets/character-sources/fbac48b5ebb666094706.bin",
+            "sha256": "fbac48b5ebb666094706c54512149ca754eaa96a4565c7b3af92613b7e6eaa99",
+            "bytes": 590695
         },
         {
             "originalPath": "/character-lab/modules/native-combat-equipment/wooden-shield.binding.json",
-            "originalSha256": "c8a868da67a7e47e0865cd313fc4dc2b573f51da00efd1ed22b318c489eb876a",
+            "originalSha256": "f8d7be650236879c1175cf5f084688a55d99188b3e23cc569f15603c8c53f403",
             "originalBytes": 5333,
-            "path": "/game-assets/character-sources/3328455813003320a7e1.bin",
-            "sha256": "3328455813003320a7e1adff09ca2e6fb5d87d28fed1a8987a0775ad506e0c29",
+            "path": "/game-assets/character-sources/0877b0cad5d84c17a078.bin",
+            "sha256": "0877b0cad5d84c17a078655f10822b5a23fa25fada1176e41205fdeb9ab5babf",
             "bytes": 1722
         },
         {
             "originalPath": "/character-lab/modules/native-combat-equipment/wooden-shield.glb",
-            "originalSha256": "20cdce10db815db5b9937d45f5d789e7a177d67bffdb1031920d38981b1c0626",
-            "originalBytes": 801080,
-            "path": "/game-assets/character-sources/ab3c4dbd2146894b9d4b.bin",
-            "sha256": "ab3c4dbd2146894b9d4b5747674e5319e1931cec264514816a363fa5479f2d88",
-            "bytes": 608231
+            "originalSha256": "d283eed9ea73778b4cf859818ed5d4d1e5b1de477892bedaf485740048627735",
+            "originalBytes": 801076,
+            "path": "/game-assets/character-sources/a6c33c1c4aaef28e0a63.bin",
+            "sha256": "a6c33c1c4aaef28e0a638af37aa35b9b56a527d57784568efa80e7201069ead5",
+            "bytes": 608281
         },
         {
             "originalPath": "/character-lab/modules/native-combat-equipment/wooden-spear.binding.json",
