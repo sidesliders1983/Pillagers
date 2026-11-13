@@ -3,7 +3,7 @@ import { inspectWork } from '../simulation/Mechanics';
 import { personaAway } from '../simulation/WorldExpeditions';
 import { weatherProfile } from '../simulation/Weather';
 import { craftingOccupation, defaultSmitheryConfig, equipmentFor, equipmentItems, equipmentLabels,
-    equipmentOwned, pillageEquipment, type EquipmentItem, type EquipmentResult,
+    equipmentOwned, equipmentRecipe, pillageEquipment, type EquipmentItem, type EquipmentResult,
     type PillageEquipment } from '../simulation/Smithery';
 
 const escape = (value: unknown) => String(value ?? '').replace(/[&<>"']/g,
@@ -12,13 +12,16 @@ const percent = (basisPoints: number) => (basisPoints / 100).toFixed(1).replace(
 const reasons: Record<string, string> = {
     'inactive-role': 'Set a production target to begin',
     'target-reached': 'Targets reached', 'missing-materials': 'Needs Materials',
-    'missing-hides': 'Needs Hides from livestock slaughter', expedition: 'Away on expedition',
+    'missing-hides': 'Needs Hides from livestock slaughter',
+    'missing-iron-ore': 'Needs Iron Ore from a worked deposit',
+    'missing-ore': 'Needs Iron Ore from a worked deposit', expedition: 'Away on expedition',
     childcare: 'Providing care', underage: 'Below working age', deceased: 'Deceased',
 };
 
 /** Specialist production lives in existing occupational home/person details, never the global HUD. */
 export function renderSmithery(state: SimulationState): string {
     const rules = state.smithery?.config ?? defaultSmitheryConfig;
+    const items = equipmentItems;
     const workers = Object.values(state.personas).filter(person => person.deathWinter === null &&
         craftingOccupation(person.occupation));
     return `<section class="fjord-smithery" aria-label="Smithery production">
@@ -27,13 +30,13 @@ export function renderSmithery(state: SimulationState): string {
         Targets include stored and worn items, including equipment away on expedition.</p>
         ${state.landing?.livestock?.version !== 2 ?
             '<p class="fjord-caption">This campaign retains historical slaughter rules without Hides. Wooden equipment remains available.</p>' : ''}
-        <div class="fjord-smithery-products">${equipmentItems.map(item => {
-            const recipe = rules.recipes[item], owned = equipmentOwned(state, item);
+        <div class="fjord-smithery-products">${items.map(item => {
+            const recipe = equipmentRecipe(state, item), owned = equipmentOwned(state, item);
             const stored = state.smithery?.stored[item] ?? 0;
             return `<article><h3>${equipmentLabels[item]}</h3>
                 <p>${stored} stored · ${owned - stored} worn · ${owned} total</p>
                 <p class="fjord-caption">${item === 'leatherShield' ? 'Leatherworker' : 'Smith'} ·
-                ${recipe.materials} Materials${recipe.hides ? ` + ${recipe.hides} Hide` : ''} per item</p>
+                ${recipe.materials} Materials${recipe.hides ? ` + ${recipe.hides} Hide` : ''}${recipe.ironOre ? ` + ${recipe.ironOre} Iron Ore` : ''} per item</p>
                 <label>Target stock<input type="number" inputmode="numeric" min="0" max="${rules.maximumTarget}"
                     step="1" value="${state.smithery?.targets[item] ?? 0}" data-smithery-target="${item}"
                     aria-label="${equipmentLabels[item]} target stock"></label></article>`;
@@ -45,7 +48,8 @@ export function renderSmithery(state: SimulationState): string {
                     `${Math.floor(work.progress * 100)}% item progress · ${percent(work.productivityBps)} effective productivity`}</small></p>`;
         }).join('') : '<p class="fjord-caption">Assign a Smith or Leatherworker through Manage work to start production.</p>'}
         <p class="fjord-caption">Hides come from eligible livestock slaughter. Poultry and natural deaths provide no Hides.
-        Inputs are consumed once when an item is finished. No Materials or Hides are spent when setting a target.</p>
+        Iron Ore comes from worked deposits. Inputs are consumed once when an item is finished.
+        Setting a target does not spend Materials, Hides or Iron Ore.</p>
     </section>`;
 }
 
@@ -70,6 +74,9 @@ export function renderRaiderEquipment(state: SimulationState, memberIds: readonl
             return `<option value="${item}" ${current === item ? 'selected' : ''}
                 ${!available && current !== item ? 'disabled' : ''}>${equipmentLabels[item]} (${available} stored)</option>`;
         }).join('');
+    const items = equipmentItems;
+    const weapons = items.filter(item => item === 'woodenSpear' || item === 'ironSpear');
+    const shields = items.filter(item => item !== 'woodenSpear' && item !== 'ironSpear');
     const snapshot = pillageEquipment(state, memberIds, state.world!.config.successBps.Pillage,
         Math.min(10000, state.world!.config.casualtyBps.Pillage + weatherProfile(state).travelRiskBps));
     return `<details class="fjord-raider-equipment" data-island-equipment open><summary>Pillage equipment</summary>
@@ -79,10 +86,10 @@ export function renderRaiderEquipment(state: SimulationState, memberIds: readonl
             return `<fieldset class="fjord-equipment-person"><legend>${escape(state.personas[id].name)}</legend>
                 <div class="fjord-equipment-slots"><label>Weapon<select data-equipment-person="${escape(id)}"
                     data-equipment-slot="weapon" aria-label="${escape(state.personas[id].name)} Weapon" ${disabled}>
-                    ${options(['woodenSpear'], gear.weapon)}</select></label>
+                    ${options(weapons, gear.weapon)}</select></label>
                 <label>Shield<select data-equipment-person="${escape(id)}" data-equipment-slot="shield"
                     aria-label="${escape(state.personas[id].name)} Shield" ${disabled}>
-                    ${options(['woodenShield', 'leatherShield'], gear.shield)}</select></label></div></fieldset>`;
+                    ${options(shields, gear.shield)}</select></label></div></fieldset>`;
         }).join('')}${renderEquipmentReadiness(snapshot, onSite)}</details>`;
 }
 

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "sourceBaseline": "92d66f35971ccf84fb61cd6a5e9651342f326c03",
+  "records": [
+    {
+      "name": "iron-spear",
+      "sha256": "9e2c044b7bf31797713a0d1ec702efe5a8efbb0c8292fed78fabacf42dbf4e30",
+      "bytes": 651048,
+      "sourceVertices": 3884,
+      "triangles": 3016,
+      "sourceUVsExact": true,
+      "sourceIndicesExact": true,
+      "maximumPositionError": 6.681811491542951e-8,
+      "textures": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "mimeType": "image/jpeg",
+          "bytes": 346777
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "mimeType": "image/jpeg",
+          "bytes": 66909
+        }
+      ]
+    },
+    {
+      "name": "iron-shield",
+      "sha256": "e10f6848b376ebdcea08bd9a2b4d02965faf3fe550f805306b7542b9a9d0a81b",
+      "bytes": 815552,
+      "sourceVertices": 5860,
+      "triangles": 2866,
+      "sourceUVsExact": true,
+      "sourceIndicesExact": true,
+      "maximumPositionError": 5.981629109215338e-8,
+      "textures": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "mimeType": "image/jpeg",
+          "bytes": 396074
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "mimeType": "image/jpeg",
+          "bytes": 72362
+        }
+      ]
+    }
+  ],
+  "unchangedBaselineAssets": [
+    {
+      "path": "public/character-lab/modules/native-combat-equipment/wooden-spear.glb",
+      "sha256": "8522a3ce8115fbbd66fa9739d9f55760013cc09e4ee4142cff36e5dae16c4904",
+      "byteIdentical": true
+    },
+    {
+      "path": "public/character-lab/modules/native-combat-equipment/wooden-spear.binding.json",
+      "sha256": "098b961762a54292559b9302a52000b31edfd57b7862b76f6815345e3f49496b",
+      "byteIdentical": true
+    },
+    {
+      "path": "public/character-lab/modules/native-combat-equipment/wooden-spear.provenance.json",
+      "sha256": "98bee131b0312a3ee52cb43f5c79a51ae3e7faacd7338816e1dc3f23fcad1fd4",
+      "byteIdentical": true
+    },
+    {
+      "path": "public/character-lab/modules/native-combat-equipment/wooden-shield.glb",
+      "sha256": "d283eed9ea73778b4cf859818ed5d4d1e5b1de477892bedaf485740048627735",
+      "byteIdentical": true
+    },
+    {
+      "path": "public/character-lab/modules/native-combat-equipment/wooden-shield.binding.json",
+      "sha256": "f8d7be650236879c1175cf5f084688a55d99188b3e23cc569f15603c8c53f403",
+      "byteIdentical": true
+    },
+    {
+      "path": "public/character-lab/modules/native-combat-equipment/wooden-shield.provenance.json",
+      "sha256": "3d6bba15dbe1f65ec3c4ce40c681d904c38c84dc5bf3675e7075372a5e1f8013",
+      "byteIdentical": true
+    },
+    {
+      "path": "public/character-lab/modules/native-combat-equipment/leather-shield.glb",
+      "sha256": "efd88e3df464d6d78f797e293fb9999c2e1ad0c042a2a0d35e888e1dd92536c7",
+      "byteIdentical": true
+    },
+    {
+      "path": "public/character-lab/modules/native-combat-equipment/leather-shield.binding.json",
+      "sha256": "cbb47c90ff2d17b062f1c89a5771ed2891df715b3b81c0a120335992fc5d5011",
+      "byteIdentical": true
+    },
+    {
+      "path": "public/character-lab/modules/native-combat-equipment/leather-shield.provenance.json",
+      "sha256": "8a3ea7007a5f633c9ceca49145e58a37f437b66d99442aa2ee619b73165b348c",
+      "byteIdentical": true
+    }
+  ],
+  "contact": {
+    "samples": 80,
+    "maximumIntrusion": -0.0030090062215801638,
+    "maximumForearmGap": 0.008825219201230807,
+    "ahead": 0,
+    "minimumBlockFrontDotForward": 0.9999713642616368
+  }
+}

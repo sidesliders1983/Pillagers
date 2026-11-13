@@ -8,7 +8,30 @@ export const nativeCombatEquipmentByItem = Object.freeze({
     woodenSpear: 'equipment/native-wooden-spear',
     woodenShield: 'equipment/native-wooden-shield',
     leatherShield: 'equipment/native-leather-shield',
+    ironSpear: 'equipment/native-iron-spear',
+    ironShield: 'equipment/native-iron-shield',
 } as const);
+
+export const nativeSpearAssets: readonly string[] = Object.freeze([
+    nativeCombatEquipmentByItem.woodenSpear, nativeCombatEquipmentByItem.ironSpear,
+]);
+export const nativeShieldAssets: readonly string[] = Object.freeze([
+    nativeCombatEquipmentByItem.woodenShield, nativeCombatEquipmentByItem.leatherShield,
+    nativeCombatEquipmentByItem.ironShield,
+]);
+
+/** Item identity determines the existing action; an arbitrary hand prop is never a weapon. */
+export function nativeCombatEquipmentRole(assetId: string): 'spear' | 'shield' | undefined {
+    if (nativeSpearAssets.includes(assetId)) return 'spear';
+    if (nativeShieldAssets.includes(assetId)) return 'shield';
+    return undefined;
+}
+
+export function nativeCombatItemRole(item: string | null | undefined) {
+    if (!item || !Object.hasOwn(nativeCombatEquipmentByItem, item)) return undefined;
+    return nativeCombatEquipmentRole(
+        nativeCombatEquipmentByItem[item as keyof typeof nativeCombatEquipmentByItem]);
+}
 
 /** Supplied source props remain preview assets until combined owner QA accepts their fit. */
 export const nativeCombatEquipmentAssets: CharacterAsset[] = nativeCombatEquipmentRecords.map(record => ({

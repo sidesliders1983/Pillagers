@@ -1,7 +1,7 @@
 import type { MeshyHuman } from '../characters/MeshyHuman';
 import type { NativeEncounterPoseRequest } from '../characters/NativeEncounterPose';
 import { characterAsset } from '../characters/CharacterAssets';
-import { nativeCombatEquipmentByItem } from '../characters/NativeCombatEquipmentCatalog';
+import { nativeCombatEquipmentRole } from '../characters/NativeCombatEquipmentCatalog';
 
 /** Lab names retain the game sampler while keeping raw source clips separately selectable. */
 export const labCombatAnimations = Object.freeze([
@@ -22,9 +22,8 @@ export function labCombatAnimationAvailable(id: string, equipmentIds: readonly s
     const animation = labCombatAnimation(id);
     if (animation?.action === 'strike') return !equipmentIds.some(id =>
         characterAsset(id).type === 'equipment' && characterAsset(id).metadata?.anchor === 'socket_hand_R');
-    if (animation?.action === 'spear') return equipmentIds.includes(nativeCombatEquipmentByItem.woodenSpear);
-    if (animation?.action === 'shield') return equipmentIds.includes(nativeCombatEquipmentByItem.woodenShield) ||
-        equipmentIds.includes(nativeCombatEquipmentByItem.leatherShield);
+    if (animation?.action === 'spear') return equipmentIds.some(id => nativeCombatEquipmentRole(id) === 'spear');
+    if (animation?.action === 'shield') return equipmentIds.some(id => nativeCombatEquipmentRole(id) === 'shield');
     return true;
 }
 
@@ -41,12 +40,11 @@ export function sampleLabCombatPose(model: MeshyHuman, id: string, time: number)
     if (!animation) return false;
     const equipment = [...model.fit.modules.keys()];
     if (!labCombatAnimationAvailable(id, equipment))
-        throw new Error(animation.action === 'spear' ? 'Equip a Wooden Spear to review its action.' :
+        throw new Error(animation.action === 'spear' ? 'Equip a spear to review its action.' :
             animation.action === 'strike' ? 'Clear the weapon hand to review an unarmed strike.' :
             'Equip a shield to review shield defence.');
     return model.sampleEncounterPose({ key: 'lab:' + id, action: animation.action,
         startedAt: 0, durationTicks: labCombatDuration(model, id), tick: time,
-        hasSpear: equipment.includes(nativeCombatEquipmentByItem.woodenSpear),
-        hasShield: equipment.includes(nativeCombatEquipmentByItem.woodenShield) ||
-            equipment.includes(nativeCombatEquipmentByItem.leatherShield) });
+        hasSpear: equipment.some(id => nativeCombatEquipmentRole(id) === 'spear'),
+        hasShield: equipment.some(id => nativeCombatEquipmentRole(id) === 'shield') });
 }

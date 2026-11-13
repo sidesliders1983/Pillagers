@@ -57,7 +57,7 @@ test('desktop and mobile occupational home panels set bounded targets without de
             ui.handle(open);
             assert.ok(document.querySelector('[aria-label="Smithery production"]'));
             const inputs = document.querySelectorAll('[data-smithery-target]');
-            assert.equal(inputs.length, 3);
+            assert.equal(inputs.length, 5);
             const materials = session.readSnapshot().stocks.materials;
             const spear = document.querySelector('[data-smithery-target="woodenSpear"]');
             spear.value = '2';
@@ -132,4 +132,52 @@ test('real management transactions commit Smithery targets together and reject i
     assert.equal(session.saveJSON(), saved);
     assert.equal(session.readSnapshot(), after, 'A rejected batch does not publish a new UI revision');
     assert.throws(() => session.commandBatch([{ type: 'AdvanceTicks', ticks: 1 }]), /unsupported/);
+});
+
+test('adopted metalworking targets stay in existing management and cannot create free iron equipment', () => {
+    const fixture = documentFixture();
+    let ui;
+    try {
+        globalThis.matchMedia = () => ({ matches: true });
+        let state = core.createCampaign(32, { initialMaterials: 100 });
+        state = core.applyCommand(state, {
+            type: 'AssignOccupation', personaId: 'founder-1', occupation: 'smith',
+        });
+        state = core.applyCommand(state, {
+            type: 'SetSmitheryTarget', item: 'ironSpear', target: 1,
+        });
+        const session = new GameplaySession();
+        session.loadJSON(core.serializeState(state));
+        const owner = new SharedSettlement(session), notices = [];
+        const refresh = () => ui.refresh(session.readSnapshot(), owner.selection, '', () => '');
+        ui = new FjordInterface(owner, {
+            select() {}, refresh, notify: text => notices.push(text),
+            commit(commands, done) {
+                session.commandBatch(typeof commands === 'function' ? commands() : commands);
+                done();
+            },
+        });
+        owner.select({ kind: 'household', id: Object.values(state.households)
+            .find(home => home.memberIds.includes('founder-1')).id });
+        refresh();
+        ui.handle(document.querySelector('button[data-ui="smithery"]'));
+        const production = document.querySelector('[aria-label="Smithery production"]');
+        assert.ok(production);
+        assert.match(production.textContent, /Iron Ore/);
+        assert.equal(production.querySelectorAll('[data-smithery-target]').length, 5);
+        const target = production.querySelector('[data-smithery-target="ironShield"]');
+        const before = session.readSnapshot();
+        target.value = '2';
+        target.dispatchEvent(new fixture.dom.window.Event('change', { bubbles: true }));
+        const after = session.readSnapshot();
+        assert.equal(after.smithery.targets.ironShield, 2);
+        assert.deepEqual(after.stocks, before.stocks);
+        assert.deepEqual(after.specialistStocks, before.specialistStocks);
+        assert.deepEqual(after.time, before.time);
+        assert.equal(after.rngState, before.rngState);
+        assert.equal(after.smithery.stored.ironSpear, 0);
+        assert.equal(after.smithery.stored.ironShield, 0);
+        assert.ok(document.querySelector('[aria-label="Smithery production"]'));
+        assert.deepEqual(notices, ['Crafting target updated.']);
+    } finally { ui?.dispose(); fixture.restore(); }
 });

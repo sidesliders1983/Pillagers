@@ -22,7 +22,7 @@ function rootPose(human) {
     return [...human.root.position, ...human.root.quaternion, ...human.root.scale];
 }
 
-test('both supplied shields stay outside the real forearm and fingers during field and combat motion without changing identity or refitting', async () => {
+test('all supplied shields stay outside the real forearm and fingers during field and combat motion without changing identity or refitting', async () => {
     const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
     const bytes = async path => {
         const buffer = await readFile('public' + path.split('?')[0]);
@@ -30,7 +30,7 @@ test('both supplied shields stay outside the real forearm and fingers during fie
     };
     const factory = new MeshyHumanFactory(async path => loader.parseAsync(await bytes(path), ''), bytes);
     let samples = 0;
-    for (const name of ['wooden-shield', 'leather-shield']) {
+    for (const name of ['wooden-shield', 'leather-shield', 'iron-shield']) {
         const path = '/character-lab/modules/native-combat-equipment/' + name + '.glb';
         const source = await loader.parseAsync(await bytes(path), '');
         const provenance = JSON.parse(await readFile('public' + path.replace('.glb', '.provenance.json'), 'utf8'));
@@ -86,59 +86,63 @@ test('both supplied shields stay outside the real forearm and fingers during fie
             } finally { human.dispose(); }
         }
     }
-    assert.equal(samples, 160, 'Both shields, body ages/sexes and all specified motion samples run');
+    assert.equal(samples, 240, 'All three shields, body ages/sexes and all specified motion samples run');
 });
 
 
-test('the real spear clears either braced shield and shares the same action with or without a shield', async () => {
+test('both real spears clear every braced shield and share the same action with or without a shield', async () => {
     const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
     const bytes = async path => {
         const buffer = await readFile('public' + path.split('?')[0]);
         return buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength);
     };
     const factory = new MeshyHumanFactory(async path => loader.parseAsync(await bytes(path), ''), bytes);
-    const presentation = { ...fjordClothingSets.generic, hair: 'none', beard: 'none', equipment: 'none',
-        equipmentItems: ['equipment/native-wooden-spear'] };
-    const reference = await factory.create(defaultDNA(), 2, undefined, presentation);
-    try {
-        const referenceSpear = reference.fit.modules.get('equipment/native-wooden-spear')
-            .children.find(mesh => mesh.isSkinnedMesh);
-        for (const name of ['wooden-shield', 'leather-shield']) {
-            const human = await factory.create(defaultDNA(), 2, undefined, { ...presentation,
-                equipmentItems: [...presentation.equipmentItems, 'equipment/native-' + name] });
-            try {
-                const spear = human.fit.modules.get('equipment/native-wooden-spear')
-                    .children.find(mesh => mesh.isSkinnedMesh);
-                const shield = human.fit.modules.get('equipment/native-' + name)
-                    .children.find(mesh => mesh.isSkinnedMesh);
-                const measure = createRigidPropIntersectionMeasure(spear, shield);
-                const fitRuns = human.modules.fitRuns;
-                for (const phase of [0, .25, .2647, .5, .75, 1]) {
-                    const request = { key: 'public-spear-shield-clearance', action: 'spear',
-                        startedAt: 100, durationTicks: 8, tick: 100 + 8 * phase,
-                        hasSpear: true, hasShield: true };
-                    human.sampleEncounterPose(request);
-                    reference.sampleEncounterPose({ ...request, hasShield: false });
-                    human.root.updateMatrixWorld(true);
-                    reference.root.updateMatrixWorld(true);
-                    const contact = measure();
-                    assert.equal(contact.intersections, 0,
-                        name + ' / spear phase ' + phase + ': actual prop surfaces must not cross: ' +
-                        JSON.stringify(contact));
-                    assert.equal(spear.geometry.getAttribute('position').count,
-                        referenceSpear.geometry.getAttribute('position').count);
-                    let maximumWeaponDrift = 0;
-                    for (let vertex = 0; vertex < spear.geometry.getAttribute('position').count; vertex++) {
-                        const actual = spear.getVertexPosition(vertex, new Vector3()).applyMatrix4(spear.matrixWorld);
-                        const expected = referenceSpear.getVertexPosition(vertex, new Vector3())
-                            .applyMatrix4(referenceSpear.matrixWorld);
-                        maximumWeaponDrift = Math.max(maximumWeaponDrift, actual.distanceTo(expected));
+    let samples = 0;
+    for (const spearName of ['wooden-spear', 'iron-spear']) {
+        const spearId = 'equipment/native-' + spearName;
+        const presentation = { ...fjordClothingSets.generic, hair: 'none', beard: 'none', equipment: 'none',
+            equipmentItems: [spearId] };
+        const reference = await factory.create(defaultDNA(), 2, undefined, presentation);
+        try {
+            const referenceSpear = reference.fit.modules.get(spearId).children.find(mesh => mesh.isSkinnedMesh);
+            for (const name of ['wooden-shield', 'leather-shield', 'iron-shield']) {
+                const human = await factory.create(defaultDNA(), 2, undefined, { ...presentation,
+                    equipmentItems: [spearId, 'equipment/native-' + name] });
+                try {
+                    const spear = human.fit.modules.get(spearId).children.find(mesh => mesh.isSkinnedMesh);
+                    const shield = human.fit.modules.get('equipment/native-' + name)
+                        .children.find(mesh => mesh.isSkinnedMesh);
+                    const measure = createRigidPropIntersectionMeasure(spear, shield);
+                    const fitRuns = human.modules.fitRuns;
+                    for (const phase of [0, .25, .2647, .5, .75, 1]) {
+                        const request = { key: 'public-spear-shield-clearance', action: 'spear',
+                            startedAt: 100, durationTicks: 8, tick: 100 + 8 * phase,
+                            hasSpear: true, hasShield: true };
+                        human.sampleEncounterPose(request);
+                        reference.sampleEncounterPose({ ...request, hasShield: false });
+                        human.root.updateMatrixWorld(true);
+                        reference.root.updateMatrixWorld(true);
+                        const contact = measure();
+                        assert.equal(contact.intersections, 0,
+                            spearName + ' + ' + name + ' / spear phase ' + phase +
+                            ': actual prop surfaces must not cross: ' + JSON.stringify(contact));
+                        assert.equal(spear.geometry.getAttribute('position').count,
+                            referenceSpear.geometry.getAttribute('position').count);
+                        let maximumWeaponDrift = 0;
+                        for (let vertex = 0; vertex < spear.geometry.getAttribute('position').count; vertex++) {
+                            const actual = spear.getVertexPosition(vertex, new Vector3()).applyMatrix4(spear.matrixWorld);
+                            const expected = referenceSpear.getVertexPosition(vertex, new Vector3())
+                                .applyMatrix4(referenceSpear.matrixWorld);
+                            maximumWeaponDrift = Math.max(maximumWeaponDrift, actual.distanceTo(expected));
+                        }
+                        assert.ok(maximumWeaponDrift < 1e-7,
+                            'Shield presence cannot change the shared actual right-hand spear action');
+                        samples++;
                     }
-                    assert.ok(maximumWeaponDrift < 1e-7,
-                        'Shield presence cannot change the shared actual right-hand spear action');
-                }
-                assert.equal(human.modules.fitRuns, fitRuns, 'The action cannot rebuild either prop fit');
-            } finally { human.dispose(); }
-        }
-    } finally { reference.dispose(); }
+                    assert.equal(human.modules.fitRuns, fitRuns, 'The action cannot rebuild either prop fit');
+                } finally { human.dispose(); }
+            }
+        } finally { reference.dispose(); }
+    }
+    assert.equal(samples, 36, 'Both spears, all three shields and every specified phase run');
 });

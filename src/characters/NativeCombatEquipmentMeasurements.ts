@@ -123,6 +123,88 @@ export const nativeCombatEquipmentRecords = [
                 }
             }
         }
+    },
+    {
+        "id": "equipment/native-iron-spear",
+        "item": "ironSpear",
+        "label": "Iron-tipped Spear · source review",
+        "path": "/character-lab/modules/native-combat-equipment/iron-spear.glb",
+        "triangles": 3016,
+        "materials": 1,
+        "bindingPath": "/character-lab/modules/native-combat-equipment/iron-spear.binding.json",
+        "bindingSha256": "1b9c74fcc3cb06cd6030e24028aa9c877b52b3e443fbea96896d48a6211f43cd",
+        "anchor": "socket_hand_R",
+        "equipmentBindings": {
+            "grip": {
+                "position": [
+                    -0.31221641023987096,
+                    0.794625134709556,
+                    0.024209013734798713
+                ],
+                "quaternion": [
+                    0.37384375808976283,
+                    0.15749905409363746,
+                    0.3548668045777289,
+                    0.8423208673099133
+                ]
+            },
+            "sockets": {
+                "socket_hand_R": {
+                    "position": [
+                        -0.002276640423845011,
+                        -0.05992729759679227,
+                        0.04808478462535935
+                    ],
+                    "quaternion": [
+                        0.37384375808976283,
+                        0.15749905409363746,
+                        0.3548668045777289,
+                        0.8423208673099133
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "id": "equipment/native-iron-shield",
+        "item": "ironShield",
+        "label": "Iron-reinforced Shield · source review",
+        "path": "/character-lab/modules/native-combat-equipment/iron-shield.glb",
+        "triangles": 2866,
+        "materials": 1,
+        "bindingPath": "/character-lab/modules/native-combat-equipment/iron-shield.binding.json",
+        "bindingSha256": "4930e7b835a15b2353c5b310e10c2ca703a02479ac38d8392d6866078b8cf78b",
+        "anchor": "socket_hand_L",
+        "equipmentBindings": {
+            "grip": {
+                "position": [
+                    0.3175929624977574,
+                    0.7984115182434144,
+                    0.020897263010556714
+                ],
+                "quaternion": [
+                    -0.21470364141034054,
+                    0.8474343009658521,
+                    -0.11924948669862472,
+                    0.470677184314018
+                ]
+            },
+            "sockets": {
+                "socket_hand_L": {
+                    "position": [
+                        -0.05105876655120828,
+                        -0.0650662090485794,
+                        0.03771363107475291
+                    ],
+                    "quaternion": [
+                        -0.21470364141034054,
+                        0.8474343009658521,
+                        -0.11924948669862472,
+                        0.470677184314018
+                    ]
+                }
+            }
+        }
     }
 ] as const;
 export const nativeCombatEquipmentMeasurements: Record<string, AssetMeasurement> = {
@@ -177,6 +259,42 @@ export const nativeCombatEquipmentMeasurements: Record<string, AssetMeasurement>
                 0.6405356014846978,
                 1.1532439377784014,
                 0.25025218395226356
+            ]
+        }
+    },
+    "/character-lab/modules/native-combat-equipment/iron-spear.glb": {
+        "sha256": "9e2c044b7bf31797713a0d1ec702efe5a8efbb0c8292fed78fabacf42dbf4e30",
+        "triangles": 3016,
+        "materials": 1,
+        "bytes": 651048,
+        "bounds": {
+            "min": [
+                -0.7877755686426053,
+                0.390907467404914,
+                -0.5845920350202023
+            ],
+            "max": [
+                0.10117011095103512,
+                1.2588108781552518,
+                0.7611840570519213
+            ]
+        }
+    },
+    "/character-lab/modules/native-combat-equipment/iron-shield.glb": {
+        "sha256": "e10f6848b376ebdcea08bd9a2b4d02965faf3fe550f805306b7542b9a9d0a81b",
+        "triangles": 2866,
+        "materials": 1,
+        "bytes": 815552,
+        "bounds": {
+            "min": [
+                0.23388400287445155,
+                0.450106691400022,
+                -0.3473726737545507
+            ],
+            "max": [
+                0.6210361207272361,
+                1.15283794418583,
+                0.24975545394484908
             ]
         }
     }

@@ -1,4 +1,5 @@
 import type { NativeEncounterPoseRequest } from '../characters/NativeEncounterPose';
+import { nativeCombatItemRole } from '../characters/NativeCombatEquipmentCatalog';
 import { ExpeditionStanding, type ExpeditionStandingGround } from './ExpeditionStanding';
 import { miningWorkerPosition, type MiningWorker } from '../simulation/Mining';
 import { spatialMemberPosition, type SpatialMission } from '../simulation/SpatialExpeditions';
@@ -83,7 +84,8 @@ export class FjordEntities {
         const tick = this.encounterTick ?? cue?.snapshotTick ?? death?.tick;
         if (tick === undefined) return;
         const gear = death?.equipment ?? facts?.equipment;
-        const base = { tick, hasSpear: gear?.weapon === 'woodenSpear', hasShield: !!gear?.shield };
+        const base = { tick, hasSpear: nativeCombatItemRole(gear?.weapon) === 'spear',
+            hasShield: nativeCombatItemRole(gear?.shield) === 'shield' };
         if (death) return { ...base, key: death.key, action: 'death',
             startedAt: death.tick, durationTicks: death.durationTicks };
         if (!cue || cue.phase === 'contact' && !stationary) return;

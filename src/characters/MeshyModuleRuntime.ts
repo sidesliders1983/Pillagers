@@ -1,4 +1,5 @@
 import type { NativeEncounterPoseRequest } from './NativeEncounterPose';
+import { nativeCombatEquipmentRole } from './NativeCombatEquipmentCatalog';
 import { NativeEncounterBodyEnvelope, nativePropFrame, placeNativeArm, rotateNativeBoneWorld } from './NativeEncounterArmPose';
 import {
  BufferAttribute, Color, Group, Material, Matrix3, Matrix4, Mesh,
@@ -591,7 +592,7 @@ export class MeshyModuleRuntime {
   this.poseEquipmentGrips(animationRotations, false, true, false);
   if (['ready', 'spear', 'shield', 'brace', 'withdraw'].includes(request.action) && request.hasShield) {
    const shield = [...this.records.values()].find(record => record.group.visible &&
-    ['equipment/native-wooden-shield', 'equipment/native-leather-shield'].includes(record.source.asset.id));
+    nativeCombatEquipmentRole(record.source.asset.id) === 'shield');
    const grip = shield?.source.binding.rigidEquipment?.gripPose;
    if (shield && grip) {
     const defence = request.action === 'shield' ? Math.sin(Math.PI * phase) : 0;
@@ -666,7 +667,8 @@ export class MeshyModuleRuntime {
    }
   }
   if (!['ready', 'spear', 'shield', 'brace', 'withdraw'].includes(request.action) || !request.hasSpear) return;
-  const record = this.records.get('equipment/native-wooden-spear');
+  const record = [...this.records.values()].find(record => record.group.visible &&
+   nativeCombatEquipmentRole(record.source.asset.id) === 'spear');
   const pose = record?.source.binding.rigidEquipment?.gripPose;
   const part = record?.parts[0];
   if (!record?.group.visible || !pose || !part || !(part.mesh as SkinnedMesh).isSkinnedMesh) return;

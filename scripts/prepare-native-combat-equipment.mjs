@@ -158,4 +158,14 @@ await writeFile('src/characters/NativeCombatEquipmentMeasurements.ts',
     'import type { AssetMeasurement } from \'./CharacterAssetMeasurements\';\n' +
     'export const nativeCombatEquipmentRecords = ' + JSON.stringify(records, null, 4) + ' as const;\n' +
     'export const nativeCombatEquipmentMeasurements: Record<string, AssetMeasurement> = ' + JSON.stringify(measurements, null, 4) + ';\n');
-await writeFile(outputDirectory + '/preparation.json', JSON.stringify(receipts, null, 2) + '\n');
+// Keep the original three-item receipt scoped to #309; metalworking has its own
+// reproducibility record rather than rewriting that historical source audit.
+for (const [reportDirectory, items] of [
+    [outputDirectory, new Set(['woodenSpear', 'woodenShield', 'leatherShield'])],
+    ['output/native-combat-equipment-224', new Set(['ironSpear', 'ironShield'])],
+]) {
+    const report = receipts.filter(receipt => items.has(receipt.source.item));
+    if (!report.length) continue;
+    await mkdir(reportDirectory, { recursive: true });
+    await writeFile(reportDirectory + '/preparation.json', JSON.stringify(report, null, 2) + '\n');
+}

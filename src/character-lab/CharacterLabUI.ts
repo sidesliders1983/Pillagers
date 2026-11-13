@@ -13,7 +13,8 @@ import { LabBodyPresentation, LabBodyPreset, defaultLabBodyPresentation, preview
 import { goldenLabBody, labBodyAsset, labCandidatePresetNames, isMeshyLabBodySource } from '../characters/LabBodySources';
 import { characterAsset } from '../characters/CharacterAssets';
 import {gridTrialOutfitId} from '../characters/GridTrialOutfitCatalog';
-import { nativeCombatEquipmentByItem } from '../characters/NativeCombatEquipmentCatalog';
+import { nativeCombatEquipmentByItem, nativeSpearAssets,
+    nativeShieldAssets } from '../characters/NativeCombatEquipmentCatalog';
 import { CharacterPresentation, GarmentChoiceKey, defaultCharacterPresentation, presentationChoices, presentationModuleFields, separateGarmentKeys, resolveCharacterPresentation, outfitAllowsSeparateFootwear } from '../characters/CharacterPresentation';
 
 import { ModuleAgeRange, loadNativeModuleAgeRange, moduleAvailableAtAge, nativeModuleAgeKey } from '../characters/NativeModuleAgePolicy';
@@ -61,8 +62,17 @@ export class CharacterLabUI {
                         <p class="lab-note">Inspect the normal field tunic with the supplied spear and shield models on this character's native rig.</p>
                         <button data-action="combat-outfit">Load field outfit</button>
                         <div class="lab-identity lab-combat-equipment">
-                            <label>Weapon<select id="lab-combat-weapon"><option value="none">None</option><option value="${nativeCombatEquipmentByItem.woodenSpear}">Wooden spear</option></select></label>
-                            <label>Shield<select id="lab-combat-shield"><option value="none">None</option><option value="${nativeCombatEquipmentByItem.woodenShield}">Wooden shield</option><option value="${nativeCombatEquipmentByItem.leatherShield}">Leather-reinforced shield</option></select></label>
+                            <label>Weapon<select id="lab-combat-weapon">
+                                <option value="none">None</option>
+                                <option value="${nativeCombatEquipmentByItem.woodenSpear}">Wooden spear</option>
+                                <option value="${nativeCombatEquipmentByItem.ironSpear}">Iron-tipped spear</option>
+                            </select></label>
+                            <label>Shield<select id="lab-combat-shield">
+                                <option value="none">None</option>
+                                <option value="${nativeCombatEquipmentByItem.woodenShield}">Wooden shield</option>
+                                <option value="${nativeCombatEquipmentByItem.leatherShield}">Leather-reinforced shield</option>
+                                <option value="${nativeCombatEquipmentByItem.ironShield}">Iron-reinforced shield</option>
+                            </select></label>
                         </div>
                         <p id="lab-combat-status" class="lab-note"></p>
                     </section>
@@ -206,10 +216,9 @@ export class CharacterLabUI {
         const eligible = native && this.dna.age >= 16;
         const selected = resolveCharacterPresentation(this.dna, this.presentation,
             labBodyAsset(this.body.source ?? 'published', 2));
-        const combat = nativeCombatEquipmentByItem;
         for (const [id, items] of [
-            ['lab-combat-weapon', [combat.woodenSpear]],
-            ['lab-combat-shield', [combat.woodenShield, combat.leatherShield]],
+            ['lab-combat-weapon', nativeSpearAssets],
+            ['lab-combat-shield', nativeShieldAssets],
         ] as const) {
             const select = document.getElementById(id) as HTMLSelectElement;
             select.disabled = !eligible;

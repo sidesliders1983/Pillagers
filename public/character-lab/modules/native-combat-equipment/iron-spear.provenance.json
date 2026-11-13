@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "item": "ironSpear",
+    "id": "equipment/native-iron-spear",
+    "label": "Iron-tipped Spear · source review",
+    "name": "iron-spear",
+    "path": "Assets/Combat/iron-spear-original.glb",
+    "bytes": 44460656,
+    "sha256": "7e8c82a8278b84f512bf38ed6d710e6d4c01e81696090afd8d382230c04d8f0c",
+    "driveFileId": "1Ttjy71EiCnVYwRBt_Wq8naBe8gyRvnNM",
+    "provider": "Meshy",
+    "triangles": 3016,
+    "scale": 0.9,
+    "gripY": 0.9,
+    "hand": "right",
+    "rights": "User-supplied Meshy export from the owner-provided Drive folder for Pillagers #224.",
+    "driveFolderId": "1KLQh4TMMHZmr6WPw2UpUOzJRMUouGaVV"
+  },
+  "reviewRequired": true,
+  "reviewStatus": "pending-combined-owner-QA",
+  "output": {
+    "sha256": "9e2c044b7bf31797713a0d1ec702efe5a8efbb0c8292fed78fabacf42dbf4e30",
+    "triangles": 3016,
+    "materials": 1,
+    "bytes": 651048,
+    "bounds": {
+      "min": [
+        -0.7877755686426053,
+        0.390907467404914,
+        -0.5845920350202023
+      ],
+      "max": [
+        0.10117011095103512,
+        1.2588108781552518,
+        0.7611840570519213
+      ]
+    }
+  },
+  "bindingSha256": "1b9c74fcc3cb06cd6030e24028aa9c877b52b3e443fbea96896d48a6211f43cd",
+  "nativeRig": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+  "bodyBindings": [
+    {
+      "lod": 0,
+      "bodySha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+      "topology": "411df128"
+    },
+    {
+      "lod": 1,
+      "bodySha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+      "topology": "0cf34010"
+    },
+    {
+      "lod": 2,
+      "bodySha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+      "topology": "74f95fa6"
+    },
+    {
+      "lod": 0,
+      "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+      "topology": "8216f232"
+    },
+    {
+      "lod": 1,
+      "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+      "topology": "8216f232"
+    },
+    {
+      "lod": 2,
+      "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+      "topology": "8216f232"
+    }
+  ],
+  "grip": {
+    "localSource": [
+      -0.0001413971185684204,
+      0.9,
+      -0.004231957718729973
+    ],
+    "nativeTarget": [
+      -0.31221641023987096,
+      0.794625134709556,
+      0.024209013734798713
+    ],
+    "transform": [
+      0.6286744781431226,
+      0.644025155200845,
+      0,
+      0,
+      -0.4320570174002313,
+      0.4217587119830068,
+      0.6674176522850227,
+      0,
+      0.4775930634407171,
+      -0.4662093825042164,
+      0.6037828064944781,
+      0,
+      0.07874495183130398,
+      0.4131603788312478,
+      -0.573911690013341,
+      1
+    ]
+  },
+  "operations": [
+    "Preserve all supplied source triangles, UVs and material colours; no mannequin/body replacement",
+    "Resize albedo to 1024 and metallic/roughness to 512; remove normal/occlusion/emissive maps",
+    "Bind rigidly to the measured native hand/finger cavity without new bones, body masks or clips"
+  ],
+  "originalBounds": {
+    "min": [
+      -0.11001216620206833,
+      0,
+      -0.06517039984464645
+    ],
+    "max": [
+      0.10948757827281952,
+      2,
+      0.061933621764183044
+    ]
+  },
+  "scale": 0.9
+}
