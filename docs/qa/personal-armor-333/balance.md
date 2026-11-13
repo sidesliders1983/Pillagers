@@ -1,6 +1,6 @@
 # Personal armor matched-cohort balance - #333
 
-Owner-approved playtest values, 13 November 2026. Source final commit remains unpinned;
+Owner-approved playtest values, 13 November 2026. Source implementation commit: 99a254fa6eee76c401981b795b32f20d801c6eae;
 algorithm fingerprint: 8279c843025d7934bc9daecaccb8a85ba084838db351115ae749353a7f6789cc.
 
 The same named wearer (MaelColuim) and unchanged unarmed ally

@@ -3,7 +3,7 @@
 This is a combined-playtest checklist, not owner or release acceptance. The
 implementation uses vest model 1083a715439a5a2acb3b714908070802459d3d0b8f72eb5d270956f9152c002a
 and binding 8f9653339f32015fd46d56198110e28d4c0ea9c3f466658e992356b8b2d2e4c8.
-Final clean source commit and built-candidate checks are still pending below.
+Implementation commit: 99a254fa6eee76c401981b795b32f20d801c6eae. Final clean built-candidate checks are pending below.
 Earlier observations retain their actual source/build scope.
 
 | Check | Status | Evidence and limits |
@@ -14,6 +14,7 @@ Earlier observations retain their actual source/build scope.
 | Public UI journeys on the final clean commit | **NOT TESTED** | Rerun [the public UI runner](../../../scripts/qa/check-personal-armor-ui.mjs) against the exact clean built commit, retain build identity, screenshots and errors. |
 | Native helmet geometry and legacy cap parity | **PASS — bounded pinned samples** | [Helmet qualification](helmet-qualification.json): 861 head/hair/beard motion samples plus 252 spear/shield motion states (357 exact pair checks); [legacy cap parity](legacy-cap-parity.json). The report pins tested source/assets. It does not cover every character or physical device. |
 | Vest source preparation and visible tunic/body composite | **READY FOR BOUNDED OWNER REVIEW — limits remain** | Actual textured Idle/Spear views are substantially clean at normal Lab framing. The revised Death view retains a small central torso contact, measured at up to 4.547 mm on the bounded probe, plus opening-edge contacts. The [dark spot](death-dark-spot-classification.json) is opaque inner lining/fold shadow with intact tunic behind it. Strict source self-crossing diagnostics remain RED; no zero-contact or owner fit acceptance is claimed. [Source audit](../../assets/NATIVE-PERSONAL-ARMOR-333.md), [fit-only mechanical contract](underlay-runtime-contract.json). |
+| Bounded composite mechanics and LOD samples | **PASS — bounded; visual diagnostics remain** | [45 cases / 90 paired evaluations](BOUNDED-COMPOSITE-REVIEW.md) retain exact source identities, finite native evaluation, one native rig, no frame-time fitting and exact restoration. LOD0 garment delta ≤0.4833 mm; LOD1/2 equal in the four matched poses. Raw forearm rays remain unresolved; no zero-gap or owner-acceptance claim. |
 | Existing character/Lab contracts | **PASS** | Full local validation: 20 assets / 36 GLBs, 12 Golden Characters, 19 equipped modules, Idle/Walk/Run and World; visual owner approval is separate. |
 | Actual rendering cost and retained GPU-resource deltas | **NOT TESTED** | [Performance runner](../../../scripts/qa/measure-personal-armor-rendering.mjs) is prepared; no actual renderer measurements have run. Required: fixed-DNA/camera/LOD/no-armor, body-only, helmet-only and both; repeated off/on cycles; actual draws/triangles/resources and callback wall time, plus GPU query samples when supported. |
 | Physical iPhone rendering, touch, frame pacing and heat | **NOT TESTED** | Browser touch emulation and desktop timings cannot certify this. |
