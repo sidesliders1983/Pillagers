@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "status": "PASS: bounded native Death forearm, source-grasp and equipment regressions; owner visual acceptance remains separate",
+  "createdAt": "2026-11-13T15:50:51.264Z",
+  "identities": {
+    "src/characters/MeshyModuleRuntime.ts": "d9d5791f9652b5c8bd6f4c3f5942734f777f9b020f03f5ff8387c430366c3ad8",
+    "src/characters/NativeHeadwearFit.ts": "9ea9f82cb80ff7c46ff7ec3a8c7659431afe1824b3c8d76aa1bfa27a39122388",
+    "tests/native-personal-helmet-clearance.test.mjs": "304d516c1e10e27259a04559a1f24d79238c4a145cf0ccb28d30a6f22cdb3602",
+    "tests/native-death-helmet-transition.test.mjs": "d40b6f28ff5a6d36de3cdc2d368b4b7b7e4136e591ba885185385ccb7a59c490",
+    "tests/native-death-equipment-clearance.test.mjs": "31fac86ea3fd09173fe061b2535fb5d4f6ea4f305f7b95c308ac373841d6d721",
+    "scripts/qa/character-equipment-clearance.mjs": "a6eb64290b2b26378bbc0266b4cf15a8739129862b4d5e590ccb4a3e4c363d1b",
+    "public/character-lab/modules/native-personal-armor/iron-helmet.glb": "dbdebf3feaa607dd3afaa687cbdc277028bf1c00c3ae3b7b05f307fe2c1df1f8",
+    "public/character-lab/modules/native-personal-armor/iron-helmet.binding.json": "1f9578759fdbc8cd36beaa21b8b3a21cbbee9c35bb82fd17404e5ed84b32d468",
+    "public/character-lab/modules/native-personal-armor/leather-body-armor.glb": "1083a715439a5a2acb3b714908070802459d3d0b8f72eb5d270956f9152c002a",
+    "public/character-lab/modules/native-personal-armor/leather-body-armor.binding.json": "8f9653339f32015fd46d56198110e28d4c0ea9c3f466658e992356b8b2d2e4c8"
+  },
+  "correction": {
+    "scope": "Death with an actually installed spear only; other actions and the native fall outside the right-arm branch are unchanged",
+    "armTarget": "An early smooth phase ramp reaches six measured source-grip radii by mid-fall and retains that margin, keeping the curled right forearm outside the helmet.",
+    "wrist": "Roll about the actual held shaft axis so the measured grip offset points away from the elbow. The same smooth ramp is zero at phase 0. Shaft direction, actual native hand grip, original prop geometry and helmet fit are retained.",
+    "excludedChanges": [
+      "No helmet or hair fit changes",
+      "No test tolerance or hand-contact exemption changes",
+      "No source asset, skeleton, native fall, gameplay, RNG or clock change"
+    ]
+  },
+  "runs": [
+    {
+      "command": "node --test tests/native-personal-helmet-clearance.test.mjs",
+      "exitCode": 0,
+      "nativeSamples": 861,
+      "meaning": "The unchanged full existing helmet/body/hair/beard matrix passed after the final Death correction.",
+      "profiles": "Existing representative ages 16, 32, 75 and 100; bounded sex, face and morphology samples; body LODs 0, 1 and 2 as listed in helmet-qualification.json."
+    },
+    {
+      "command": "node --test tests/native-death-helmet-transition.test.mjs",
+      "exitCode": 0,
+      "nativeSamples": 84,
+      "profiles": 7,
+      "spears": [
+        "equipment/native-wooden-spear",
+        "equipment/native-iron-spear"
+      ],
+      "phases": [
+        0,
+        0.25,
+        0.5,
+        0.75,
+        0.9,
+        1
+      ],
+      "lods": "LOD0 for owner-default and the four age16/32 sex/morphology profiles; LOD2 for bounded age75/100 profiles",
+      "checks": [
+        "Native Death sampler returns true",
+        "Finite native bone matrices",
+        "Actual helmet against visible body, without exemptions",
+        "Actual source shaft against visible body with only the existing finite anatomical source-grasp allowance",
+        "Actual source spear remains above the native floor",
+        "No motion refitting"
+      ]
+    },
+    {
+      "command": "node --test tests/native-death-equipment-clearance.test.mjs",
+      "exitCode": 0,
+      "nativeSamples": 20,
+      "meaning": "The unchanged actual-source body/clothes/grasp/floor test passed for both spear models, with and without armor, across five Death phases.",
+      "checks": [
+        "All native bone positions and rotations outside the right-arm branch remain exact",
+        "Existing source-grasp cavity only",
+        "Visible body, normal clothes, armor and helmet contacts remain protected",
+        "Actual source spear remains above the native floor",
+        "Deterministic replay after unrelated Idle sampling",
+        "No refitting or root movement"
+      ]
+    }
+  ],
+  "otherChecks": {
+    "typeScript": "PASS: tsc --noEmit",
+    "diffCheck": "PASS: git diff --check",
+    "readOnlyPeerReview": "No additional actionable issue found in the world-frame shaft/grip/elbow projections, guarded signed roll or expanded transition assertions."
+  },
+  "limits": [
+    "Finite sample sets do not establish every body morphology or continuous triangle collision proof.",
+    "Source vest composite contacts, raw source self-intersections and unresolved forearm diagnostic rays are reported separately in the current bounded-composite report.",
+    "These Node tests do not establish rendered acceptance, device frame pacing, GPU performance or phone thermal behavior.",
+    "Actual textured browser review and owner combined combat QA remain separate."
+  ]
+}

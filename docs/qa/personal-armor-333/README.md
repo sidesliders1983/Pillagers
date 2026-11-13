@@ -85,6 +85,19 @@ separate supported CDP thread-CPU / asynchronous GPU query durations. Unsupporte
 CPU or GPU counters remain explicitly unmeasured. Thirty frames per profile are
 a bounded observation; they do not establish phone heat or frame pacing.
 
+Retain actual native Lab stills, exact replayable snapshots and a continuous video
+with the same public controls:
+
+    node scripts/qa/capture-personal-armor-native.mjs --origin http://127.0.0.1:5204 --expect-commit <full-commit-sha>
+
+The capture runner includes LOD2 front/side/rear views, targeted LOD0 Death phases
+0.75 and 1 with both actual spear models, and live idle/walk/run/spear/shield/Death
+segments. Capture completion is not a geometry or owner-acceptance verdict.
+The retained browser bundle and rendering report identify the tested clean build;
+evidence-only commits must leave its production source and public assets equal.
+Earlier failed revisions and inherited skips are retained in
+[the regression history](regression-history.md).
+
 The current source/fit documents and final pinned build evidence determine
 pass/fail/not-tested status. This page does not itself assert that unfinished
 geometry fitting or physical acceptance has passed.

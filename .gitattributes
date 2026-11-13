@@ -109,3 +109,9 @@ tests/native-death-equipment-clearance.test.mjs text eol=lf
 scripts/characters/derive-native-personal-armor-underlay-fit.mjs text eol=lf
 
 tests/native-personal-armor.test.mjs text eol=lf
+
+# Preserve actual browser evidence bytes.
+docs/qa/personal-armor-333/browser/**/*.json -text
+docs/qa/personal-armor-333/browser/**/*.webm -text
+
+tests/native-death-helmet-transition.test.mjs text eol=lf

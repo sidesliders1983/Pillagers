@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "status": "PASS",
+  "runtimeSha256": "d9d5791f9652b5c8bd6f4c3f5942734f777f9b020f03f5ff8387c430366c3ad8",
+  "command": "node --test tests/native-death-equipment-clearance.test.mjs",
+  "testSha256": "31fac86ea3fd09173fe061b2535fb5d4f6ea4f305f7b95c308ac373841d6d721",
+  "armorSha256": "1083a715439a5a2acb3b714908070802459d3d0b8f72eb5d270956f9152c002a",
+  "armorBindingSha256": "8f9653339f32015fd46d56198110e28d4c0ea9c3f466658e992356b8b2d2e4c8",
+  "independentRun": "Executed by armor_assets_audit after the stable d9d5791f runtime release; not copied from the sibling result.",
+  "tests": 1,
+  "passed": 1,
+  "failed": 0,
+  "skipped": 0,
+  "durationMilliseconds": 12222.7842,
+  "actualStates": 20,
+  "spears": [
+    "equipment/native-wooden-spear",
+    "equipment/native-iron-spear"
+  ],
+  "armored": [
+    false,
+    true
+  ],
+  "phases": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1
+  ],
+  "nativeLOD": 2,
+  "checked": [
+    "Actual visible-body and retained-clothing clearance, allowing only measured anatomical source-grasp cavity contacts",
+    "Actual source-shaft vertices above native floor",
+    "Exact native non-right-arm fall bones",
+    "Deterministic reordered sampling",
+    "Unchanged root and garment fit count"
+  ],
+  "limitations": "Finite owner-default native samples; separate861 head/hair/body and84 transition receipt covers additional profiles. Historical failures remain preserved, not rewritten as passes."
+}

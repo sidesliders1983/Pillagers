@@ -280,7 +280,17 @@
   },
   "currentRuntimeHook": {
     "source": "src/characters/MeshyModuleRuntime.ts",
-    "sha256": "f061f5e5f4b03fc08126247422785c35eca5ce83a487fe9bae43d98034e9788f",
-    "scope": "Optional body-armor underlay occlusion only; verified separately in underlay-runtime-contract.json. The 861/252 helmet matrix predates this unrelated optional branch."
+    "sha256": "d9d5791f9652b5c8bd6f4c3f5942734f777f9b020f03f5ff8387c430366c3ad8",
+    "scope": "Fit-only private underlay integration and the bounded Death-only native forearm/source-shaft correction. The full existing 861-case helmet matrix was rerun successfully on this exact runtime.",
+    "report": "docs/qa/personal-armor-333/death-forearm-regression.json"
+  },
+  "afterDeathForearmCorrection": {
+    "report": "docs/qa/personal-armor-333/death-forearm-regression.json",
+    "runtimeSha256": "d9d5791f9652b5c8bd6f4c3f5942734f777f9b020f03f5ff8387c430366c3ad8",
+    "fullExistingHelmetSamples": 861,
+    "bothSpearTransitionSamples": 84,
+    "bodyClothesGraspFloorDeathSamples": 20,
+    "status": "PASS: exact current runtime; no contact exemption or helmet geometry change",
+    "physicalAcceptance": "Separate current-build browser review and combined owner QA"
   }
 }

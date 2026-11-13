@@ -227,7 +227,7 @@ const report = { version: 1, status: 'MEASURED: bounded native composite; no zer
     profiles, states: cases.length, actualPoseEvaluations: cases.length * 2,
     method: 'Actual complete native body triangle centroids in the source normal-tunic height band, plus135 exact known default-Death central-back rays. Compare actual outward cloth and vest walls; normal-tunic baseline identifies potential added cover gaps. No anatomical contact exemption or global pass threshold is applied.',
     mechanicalAssertions: 'PASS:44-bone rig, finite queried body/cloth/vest points and native bone matrices, unchanged DNA, no motion fitting, exact normal-tunic restoration',
-    knownMinorArtifact: 'The current combined-QA candidate has an explicitly recorded defaultLOD2 Death central-back cloth contact up to4.55mm; source opening-edge and raw source-self contacts are not claimed absent. All contacts remain reported.',
+    knownMinorArtifact: 'The prior pre-wrist-roll runtime recorded a defaultLOD2 Death central-back cloth contact up to4.55mm. That is historical, not a current result. Current exact135-ray measurements are recorded separately in docs/qa/personal-armor-333/death-central-back-current.json. Source opening-edge and raw source-self contacts are not claimed absent; all diagnostic contacts remain reported.',
     crossLOD, cases, durationMilliseconds: performance.now() - started,
     limitations: ['Finite source-surface rays do not prove continuous triangle coverage or every camera/view.',
         'The120mm diagnostic search range and source-tunic height sampling band bound this measurement; they are not collision tolerances.',

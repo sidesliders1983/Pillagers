@@ -751,6 +751,11 @@ export class MeshyModuleRuntime {
   upper.quaternion.fromArray(pose.upperArmRotation);
   forearm.quaternion.fromArray(pose.forearmRotation);
   const extension = request.action === 'spear' ? Math.sin(Math.PI * phase) : 0;
+  // The head curls toward this arm before the fall ends. Reach the measured
+  // six-radius forearm margin by mid-fall and keep it through the resting pose.
+  const deathRise = Math.min(1, 2 * phase);
+  const deathForearmClearance = request.action === 'death'
+   ? 6 * pose.fingerRadius * deathRise * deathRise * (3 - 2 * deathRise) : 0;
   this.fit.rootForModulesUpdate();
   const bodyRotation = this.fit.bodyRoot.getWorldQuaternion(new Quaternion());
   const update = () => this.fit.rootForModulesUpdate();
@@ -819,11 +824,32 @@ export class MeshyModuleRuntime {
   for (let pass = 0; pass < 3; pass++) {
    const sideways = target.x - shoulder.x, down = target.y - shoulder.y;
    const available = Math.sqrt(Math.max(0, (reach - clearance) ** 2 - sideways ** 2 - down ** 2));
-   target.z = shoulder.z + available * (extension - .5 * (1 - extension));
+   // Keep the fallen forearm outside the helmet's side. The source grip radius
+   // bounds this Death-only target offset; wrist grasp and shaft direction stay fixed.
+   target.z = shoulder.z + available * (extension - .5 * (1 - extension))
+    - deathForearmClearance;
    placeNativeArm(upper, forearm, wrist, frame.localToWorld(target.clone()),
     new Vector3(0, -1, 0).applyQuaternion(bodyRotation), update);
    const axis = point(ends.tip).sub(point(ends.butt)).normalize();
    rotateNativeBoneWorld(wrist, new Quaternion().setFromUnitVectors(axis, forward), update);
+   if (request.action === 'death' && deathRise > 0) {
+    // The shaft keeps its direction while the wrist rolls its real grip away
+    // from the elbow. Otherwise the curled forearm can cross the held shaft.
+    const gripFrame = nativePropFrame(mesh, pose.wristJoint, this.fit.encoding, frame);
+    const shaft = new Vector3(...pose.axis).transformDirection(gripFrame).transformDirection(frame.matrixWorld);
+    const wristPoint = wrist.getWorldPosition(new Vector3());
+    const gripOffset = new Vector3(...record.source.binding.rigidEquipment!.parts[0].grip)
+     .applyMatrix4(gripFrame).applyMatrix4(frame.matrixWorld).sub(wristPoint);
+    gripOffset.addScaledVector(shaft, -gripOffset.dot(shaft));
+    const awayFromElbow = wristPoint.clone().sub(forearm.getWorldPosition(new Vector3()));
+    awayFromElbow.addScaledVector(shaft, -awayFromElbow.dot(shaft));
+    if (gripOffset.lengthSq() > 1e-12 && awayFromElbow.lengthSq() > 1e-12) {
+     gripOffset.normalize(); awayFromElbow.normalize();
+     const roll = Math.atan2(shaft.dot(gripOffset.clone().cross(awayFromElbow)), gripOffset.dot(awayFromElbow));
+     const blend = deathRise * deathRise * (3 - 2 * deathRise);
+     rotateNativeBoneWorld(wrist, new Quaternion().setFromAxisAngle(shaft, roll * blend), update);
+    }
+   }
    const fitted = nativePropFrame(mesh, pose.wristJoint, this.fit.encoding, frame);
    const sourceAxis = new Vector3().fromArray(pose.axis);
    const origin = new Vector3(...record.source.binding.rigidEquipment!.parts[0].grip);
