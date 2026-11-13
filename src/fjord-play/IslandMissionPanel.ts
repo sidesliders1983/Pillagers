@@ -1,7 +1,7 @@
 import { territoryNotice } from './TerritoryView';
 import { encounterDescription, renderTransitManifest } from './MissionOutcomeView';
 import { renderRaiderEquipment, renderEquipmentReadiness, renderEquipmentReport } from './SmitheryView';
-import type { Weapon, Shield } from '../simulation/Smithery';
+import type { Weapon, Shield, BodyArmor, Headgear } from '../simulation/Smithery';
 import { inspectIslandMissions, type IslandTarget } from '../simulation/IslandMissions';
 import { inspectSpatialExpeditions } from '../simulation/SpatialExpeditions';
 import { expeditionEligible, groupMission, type Cargo, type MissionType } from '../simulation/WorldExpeditions';
@@ -88,6 +88,11 @@ export class IslandMissionPanel {
                         personaId, slot: 'weapon', item: (input.value || null) as Weapon });
                     else if (input.dataset.equipmentSlot === 'shield') this.command({ type: 'AssignEquipment',
                         personaId, slot: 'shield', item: (input.value || null) as Shield });
+                    else if (input.dataset.equipmentSlot === 'bodyArmor') this.command({ type: 'AssignEquipment',
+                        personaId, slot: 'bodyArmor', item: (input.value || null) as BodyArmor });
+                    else if (input.dataset.equipmentSlot === 'headgear') this.command({ type: 'AssignEquipment',
+                        personaId, slot: 'headgear', item: (input.value || null) as Headgear });
+                    else throw new Error('Choose a valid personal equipment slot.');
                     this.message = 'Personal equipment updated.';
                 } catch (error) { this.message = error instanceof Error ? error.message : String(error); }
                 this.refresh();

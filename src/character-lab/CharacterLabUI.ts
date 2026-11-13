@@ -15,6 +15,8 @@ import { characterAsset } from '../characters/CharacterAssets';
 import {gridTrialOutfitId} from '../characters/GridTrialOutfitCatalog';
 import { nativeCombatEquipmentByItem, nativeSpearAssets,
     nativeShieldAssets } from '../characters/NativeCombatEquipmentCatalog';
+import { nativePersonalArmorByItem } from '../characters/NativePersonalArmorCatalog';
+import { fjordClothingSets } from '../fjord-play/FjordWardrobe';
 import { CharacterPresentation, GarmentChoiceKey, defaultCharacterPresentation, presentationChoices, presentationModuleFields, separateGarmentKeys, resolveCharacterPresentation, outfitAllowsSeparateFootwear } from '../characters/CharacterPresentation';
 
 import { ModuleAgeRange, loadNativeModuleAgeRange, moduleAvailableAtAge, nativeModuleAgeKey } from '../characters/NativeModuleAgePolicy';
@@ -59,7 +61,7 @@ export class CharacterLabUI {
                     <div class="lab-source-controls"><label>Body source<select id="lab-body-source"><option value="meshy">Meshy Human · textured</option><option value="golden-v04-preview">v0.4 · new body preview</option><option value="published">Published body · existing modules</option></select></label><p class="lab-note" id="lab-source-status"></p></div>
                     <section class="lab-panel" aria-label="Combat review">
                         <h2>Combat review</h2>
-                        <p class="lab-note">Inspect the normal field tunic with the supplied spear and shield models on this character's native rig.</p>
+                        <p class="lab-note">Inspect the normal field tunic, personal armor, helmet, spear and shield on this character's native rig. These source-fit previews do not create campaign inventory.</p>
                         <button data-action="combat-outfit">Load field outfit</button>
                         <div class="lab-identity lab-combat-equipment">
                             <label>Weapon<select id="lab-combat-weapon">
@@ -72,6 +74,14 @@ export class CharacterLabUI {
                                 <option value="${nativeCombatEquipmentByItem.woodenShield}">Wooden shield</option>
                                 <option value="${nativeCombatEquipmentByItem.leatherShield}">Leather-reinforced shield</option>
                                 <option value="${nativeCombatEquipmentByItem.ironShield}">Iron-reinforced shield</option>
+                            </select></label>
+                            <label>Body Armor<select id="lab-combat-body-armor">
+                                <option value="none">None</option>
+                                <option value="${nativePersonalArmorByItem.leatherBodyArmor}">Leather Body Armor</option>
+                            </select></label>
+                            <label>Headgear<select id="lab-combat-headgear">
+                                <option value="none">None</option>
+                                <option value="${nativePersonalArmorByItem.ironHelmet}">Iron Helmet</option>
                             </select></label>
                         </div>
                         <p id="lab-combat-status" class="lab-note"></p>
@@ -168,6 +178,18 @@ export class CharacterLabUI {
                 this.setCombatItem(choice.id === 'lab-combat-weapon' ? 'socket_hand_R' : 'socket_hand_L', choice.value);
                 return;
             }
+            if (choice.id === 'lab-combat-body-armor' || choice.id === 'lab-combat-headgear') {
+                const field = fjordClothingSets.generic;
+                const key = choice.id === 'lab-combat-body-armor' ? 'bodyArmor' : 'headwear';
+                this.onPresentation({ ...this.presentation,
+                    outfit: field.outfit, shoes: field.shoes,
+                    trousers: field.trousers, top: field.top,
+                    headwear: this.presentation.headwear === nativePersonalArmorByItem.ironHelmet
+                        ? this.presentation.headwear : 'none',
+                    [key]: choice.value,
+                });
+                return;
+            }
             if(choice.id==='lab-body-source'){this.onBody(isMeshyLabBodySource(choice.value)?{version:1,preset:'auto',source:choice.value}:choice.value===goldenLabBody.source?{...previewLabBodyPresentation}:{...defaultLabBodyPresentation});return;}
             if(choice.id==='lab-body-preset'){this.onBody({version:1,preset:choice.value as LabBodyPreset,...(this.body.source?{source:this.body.source}:{})});return;}
             if (choice.dataset.presentation) {
@@ -216,9 +238,13 @@ export class CharacterLabUI {
         const eligible = native && this.dna.age >= 16;
         const selected = resolveCharacterPresentation(this.dna, this.presentation,
             labBodyAsset(this.body.source ?? 'published', 2));
+        const visibleItems = [...selected.equipmentIds, ...selected.garmentIds,
+            ...(selected.headwearId ? [selected.headwearId] : [])];
         for (const [id, items] of [
             ['lab-combat-weapon', nativeSpearAssets],
             ['lab-combat-shield', nativeShieldAssets],
+            ['lab-combat-body-armor', [nativePersonalArmorByItem.leatherBodyArmor]],
+            ['lab-combat-headgear', [nativePersonalArmorByItem.ironHelmet]],
         ] as const) {
             const select = document.getElementById(id) as HTMLSelectElement;
             select.disabled = !eligible;
@@ -228,7 +254,7 @@ export class CharacterLabUI {
                 option.disabled = !eligible || !moduleAvailableAtAge(asset, this.dna.age,
                     this.moduleAges.get(nativeModuleAgeKey(asset)));
             }
-            select.value = selected.equipmentIds.find(item =>
+            select.value = visibleItems.find(item =>
                 (items as readonly string[]).includes(item)) ?? 'none';
         }
         (document.querySelector('[data-action="combat-outfit"]') as HTMLButtonElement).disabled =
@@ -236,7 +262,7 @@ export class CharacterLabUI {
         document.getElementById('lab-combat-status')!.textContent = this.dna.age < 16
             ? 'Field clothing and combat props are available from age 16. The character keeps their real age.'
             : !native ? 'Load the field outfit to use the native Meshy body and its combat props.'
-            : 'Choose a combat preview in Animation, then use Freeze pose and Front / Side / Back to inspect the fit. Each hand holds one item.';
+            : 'Choose a combat preview in Animation, then use Freeze pose and Front / Side / Back to inspect the fit. Each hand holds one item; body armor and headgear are separate slots.';
     }
 
     private updateModuleChoices() {
@@ -278,14 +304,15 @@ export class CharacterLabUI {
                 return option;
             });
             const automatic = new Option('Auto · profile', 'auto');
+            if (key === 'bodyArmor') automatic.disabled = true;
             if (native) {
-                automatic.disabled = !entries.some(entry => {
+                automatic.disabled = key === 'bodyArmor' || !entries.some(entry => {
                     const asset = characterAsset(entry.id);
                     return asset.reviewStatus === 'accepted' && availableAtAge(asset.id);
                 });
             }
             select.replaceChildren(automatic, new Option('None', 'none'), ...options);
-            select.value = this.presentation[key];
+            select.value = this.presentation[key] ?? 'none';
             const separate = separateGarmentKeys.includes(key as typeof separateGarmentKeys[number]);
             select.disabled = separate && !native ||
                 key === 'beard' && !(this.dna.age >= 18 && universalHumanProfile(this.dna).masculinity > .5);

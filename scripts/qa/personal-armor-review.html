@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FjordSide · Personal armor review</title>
+<link rel="icon" type="image/png" sizes="32x32" href="/branding/fjordside/favicon-32.png">
+<link rel="stylesheet" href="/qa/fjord-theme.css">
+<style>
+body {
+    margin:0;
+    background:var(--fs-canvas);
+    color:var(--fs-text);
+    font-family:var(--fs-font-body);
+    line-height:1.55;
+}
+main {
+    max-width:64rem;
+    margin:auto;
+    padding:clamp(1rem,4vw,3rem);
+}
+section {
+    background:var(--fs-panel);
+    border:1px solid var(--fs-border);
+    border-radius:var(--fs-radius-panel);
+    padding:1.25rem;
+    margin-block:1rem;
+}
+h1,h2 {
+    margin-block:.25rem .75rem;
+}
+p {
+    max-width:70ch;
+}
+.muted {
+    color:var(--fs-muted);
+}
+.actions {
+    display:flex;
+    flex-wrap:wrap;
+    gap:.75rem;
+}
+.actions a {
+    display:inline-flex;
+    align-items:center;
+    min-height:44px;
+    padding:.5rem 1rem;
+    color:var(--fs-text);
+    background:var(--fs-card);
+    border:1px solid var(--fs-border);
+    border-radius:var(--fs-radius-control);
+    text-decoration:none;
+}
+.actions a:hover {
+    background:var(--fs-hover);
+}
+table {
+    border-collapse:collapse;
+    width:100%;
+}
+th,td {
+    border-bottom:1px solid var(--fs-divider);
+    text-align:left;
+    padding:.55rem;
+}
+code {
+    overflow-wrap:anywhere;
+}
+li {
+    margin-block:.5rem;
+}
+
+</style>
+</head>
+<body>
+<main>
+<h1>Personal armor review</h1>
+<p class="muted" id="build">Checking the local review build…</p>
+<section>
+<h2>Start with a prepared campaign</h2>
+<p id="campaign">Seed 25 · Island 7 · Group 2: Armor QA.</p>
+<p>Every item was crafted through ordinary work. Ore came from actual mining and Hides from actual livestock slaughter. The test campaign uses accelerated labour and ample starting supplies.</p>
+<div class="actions">
+<a href="/qa/home-campaign.json" download="fjordside-armor-home-seed25.json">Download home save</a>
+<a href="/qa/field-campaign.json" download="fjordside-armor-field-seed25.json">Download expedition save</a>
+<a href="/fjord-play" target="_blank" rel="noopener">Open FjordSide</a>
+</div>
+<p>Download a save, open FjordSide, choose <strong>Load game</strong> and load the file, then choose <strong>Continue campaign</strong>. These links do not replace your current campaign.</p>
+</section>
+<section>
+<h2>Review the four personal slots</h2>
+<p>A small cloth contact on the back during Fall and a few opening-edge contacts remain for visual review. Include these in the combined combat QA; the dark fold is intact inner lining.</p>
+<ol>
+<li>Use the home save to change Body Armor and Headgear independently in Group 2. Each slot needs real available stock; removing an item returns it to storage.</li>
+<li>Use the expedition save to inspect the equipped raider in the landscape and Character Card. All four items should match that person. Equipment cannot be reassigned while away.</li>
+<li>Return home to compare shields. The ally carries the only Wooden Shield; unequip it from that ally first if the main raider needs it. The Leather-reinforced Shield is stored, and removing the Iron-reinforced Shield returns it to stock.</li>
+<li>Use Character Lab pose selections to inspect idle, walking, running, spear action, shield defence and the return to a ready stance. Check front, side and rear views. The expedition save is paused on a journey to the mine; it is not an active combat encounter.</li>
+</ol>
+<div class="actions">
+<a href="/character-lab?combat=ready&amp;weapon=iron&amp;shield=iron&amp;armor=leather&amp;helmet=iron" target="_blank" rel="noopener">Open four-slot Character Lab</a>
+</div>
+<p class="muted">Character Lab is a fitting preview. It does not craft or assign items in your campaign.</p>
+</section>
+<section>
+<h2>Try an actual on-site encounter</h2>
+<p>Import the home save and continue. Open <strong>Expeditions</strong>, choose <strong>Armor QA</strong>, then <strong>Known places</strong>. Select the identified settlement and choose <strong>Pillage</strong>. Review the real cost and four personal items, confirm <strong>Start mission</strong>, then start the clock.</p>
+<p>This campaign has territorial awareness and the current on-site encounter rules. Travel, defenders and outcomes remain real; the save does not force a victory. Return home before changing equipment or starting another mission. Keep the downloaded home save to repeat comparisons.</p>
+</section>
+<section>
+<h2>Approved playtest protection</h2>
+<table>
+<thead><tr><th>Item</th><th>Own protection</th></tr></thead>
+<tbody>
+<tr><td>Wooden Shield</td><td>25%</td></tr>
+<tr><td>Leather-reinforced Shield</td><td>40%</td></tr>
+<tr><td>Iron-reinforced Shield</td><td>50%</td></tr>
+<tr><td>Leather Body Armor</td><td>20%</td></tr>
+<tr><td>Iron Helmet</td><td>10%</td></tr>
+</tbody>
+</table>
+<p>Protection combines multiplicatively for its wearer, with a 60% total cap when new armor is worn. Allies do not receive an armor bonus. Previous mission outcomes retain their recorded rules.</p>
+</section>
+</main>
+<script type="module">
+try {
+    const [build, context] = await Promise.all([
+        fetch('/build-info.json').then(response => response.json()),
+        fetch('/qa/context.json').then(response => response.json()),
+    ]);
+    const revision = build.source.commit.slice(0, 8);
+    const workStatus = build.source.dirty ? ' · working changes' : '';
+    document.getElementById('build').textContent =
+        'Local review build ' + revision + workStatus;
+    document.getElementById('campaign').textContent =
+        context.name + ' · Group 2: Armor QA · ' + context.materials +
+        ' Materials · ' + context.ironOre + ' Iron Ore remaining.';
+} catch {
+    document.getElementById('build').textContent = 'Build details are currently unavailable.';
+}
+</script>
+</body>
+</html>

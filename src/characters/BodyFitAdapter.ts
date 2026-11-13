@@ -51,6 +51,9 @@ export interface NativeHeadwearFitBinding {
  clearance: number;
  maximumLift: number;
  maximumRadialScale: number;
+ /** Optional actual source-wall field; null cells retain real face and lock openings. */
+ crownCavity?: {version: 1; minimumY: number; stepY: number; angularSamples: number;
+  radii: (number | null)[]; ceilingY: number};
 }
 export interface ModuleBindingV2 {
  version:typeof bodyFitVersion;id:string;moduleSha256:string;rigSignature:string;
@@ -60,6 +63,13 @@ export interface ModuleBindingV2 {
  skinning?:'authored-four-native'|'rigid-native-head'|'rigid-native-equipment'|'surface-barycentric-native'|'secondary-hair-chain';reviewScope?:string;
  hairRig?: NativeHairRigBinding;
  headwearFit?: NativeHeadwearFitBinding;
+ /** A protective layer qualified against one exact native field tunic; body coverage stays unchanged. */
+ bodyArmorLayer?: {version: 1; underlayId: string; underlaySha256: string; clearanceMetres: number;
+  /** Fit only this wearer's qualified torso vertices; source topology and body coverage stay exact. */
+  underlayFit?: {version: 1; meshName: 'Module_grid_trial_top_0'; maximumDisplacementMetres: number;
+   vertices: {vertex: number; position: [number, number, number];
+    joints?: [number, number, number, number]; weights?: [number, number, number, number]}[]};
+ };
  /** Source-baked rigid tools share the existing hand/back bones, without an auxiliary rig. */
  rigidEquipment?: {version: 1;
   gripPose?: {wristJoint: number; wristRotation: number[];

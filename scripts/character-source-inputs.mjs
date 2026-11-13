@@ -10,6 +10,7 @@ export function characterSourceInputs() {
     const { humanExtraAnimations } = load('characters/HumanExtraAnimations');
     const { worldResidentDetail } = load('config/PresentationQuality');
     const { nativeCombatEquipmentByItem } = load('characters/NativeCombatEquipmentCatalog');
+    const { nativePersonalArmorByItem } = load('characters/NativePersonalArmorCatalog');
     const sources = new Map();
     const add = (path, hash) => {
         assert.ok(!sources.has(path) || sources.get(path) === hash, 'Conflicting character source identity');
@@ -20,6 +21,7 @@ export function characterSourceInputs() {
     add(humanExtraAnimations.path, humanExtraAnimations.sha256);
     const occupations = ['farmer', 'fisher', 'hunter', 'smith'];
     const ids = new Set([...fjordHairAssets, ...fjordBeardAssets, ...Object.values(nativeCombatEquipmentByItem),
+        ...Object.values(nativePersonalArmorByItem),
         ...occupations.flatMap(name => ['headwear/occupation-' + name, 'equipment/occupation-' + name]),
         ...Object.values(fjordClothingSets).flatMap(value => Object.values(value))]);
     for (const id of ids) {

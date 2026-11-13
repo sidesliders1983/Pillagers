@@ -1,0 +1,91 @@
+[
+  {
+    "item": "leatherBodyArmor",
+    "id": "garment/native-leather-body-armor",
+    "label": "Leather Body Armor \u00b7 source review",
+    "name": "leather-body-armor",
+    "path": "Assets/Combat/leather-body-armor-original.glb",
+    "bytes": 3428496,
+    "sha256": "abfda0fa59265ea2275d2a9230dea57ccdda8dd85a922b174814bc35e2998488",
+    "driveFileId": "1Z6zBeYUNvV3LmkWZkorzYCznPI2zgMbd",
+    "driveFilename": "Meshy_AI_viking_leather_bust_m_1111093203_texture.glb",
+    "provider": "Meshy",
+    "triangles": 6016,
+    "rights": "Owner-supplied asset authorized for Pillagers personal armor work; no independently verified open redistribution license.",
+    "driveFolderId": "1KLQh4TMMHZmr6WPw2UpUOzJRMUouGaVV",
+    "preparation": {
+      "carrier": "largest-geometrically-connected-source-panel",
+      "sourceWeldTolerance": 1e-06,
+      "mainSourceTriangles": 2346,
+      "cageSmoothingPasses": 6,
+      "smallDetailMaximumDiameter": 0.08,
+      "target": "actual-native-body-torso-and-shoulder-surface",
+      "nativeInfluences": 4,
+      "sourceSeed": {
+        "translation": [
+          0,
+          0.95,
+          -0.018
+        ],
+        "scale": [
+          0.95,
+          0.77,
+          1.05
+        ]
+      },
+      "localSkinClearance": {
+        "sourceVertices": [
+          1375,
+          1376,
+          1382
+        ],
+        "mirrored": true,
+        "maximumOffset": 0.008,
+        "footprint": 0.03
+      },
+      "finalPointDonorBodyLOD": 2,
+      "centralBackClearance": {
+        "sourceFaces": [
+          3113,
+          4112
+        ],
+        "center": [
+          0.015,
+          1.178
+        ],
+        "radii": [
+          0.05,
+          0.07
+        ],
+        "maximumZ": -0.07,
+        "maximumOffset": 0.013,
+        "reason": "Measured torso cloth face47382 crossed the corresponding bowed-back vest by2.18\u201310.74mm; local source-preserving clearance plus margin."
+      },
+      "preparedAssetSha256": "1083a715439a5a2acb3b714908070802459d3d0b8f72eb5d270956f9152c002a"
+    },
+    "underlayFit": {
+      "path": "scripts/characters/native-personal-armor-underlay-fit.json",
+      "sha256": "6e295089d296a494bbe450f267556aa8dbc1e8c88492caef01145e4a944aa5fc",
+      "armorSha256": "1083a715439a5a2acb3b714908070802459d3d0b8f72eb5d270956f9152c002a",
+      "tunicSha256": "79794137e3e2bb33da24429d084cec0e5fb84711fdc4fd87c1568b1dabb4d52e",
+      "bodySourceSha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+      "vertices": 22067,
+      "derivation": "scripts/characters/derive-native-personal-armor-underlay-fit.mjs"
+    }
+  },
+  {
+    "item": "ironHelmet",
+    "id": "headwear/native-iron-helmet",
+    "label": "Iron Helmet \u00b7 source review",
+    "name": "iron-helmet",
+    "path": "Assets/Combat/iron-helmet-original.glb",
+    "bytes": 3791588,
+    "sha256": "15bfebdb4a1295e3889cbcd0e4c739bfad44c501e6675b0e6c7bafd6cf21295c",
+    "driveFileId": "18J1lgwe19XtvuCCpttDoIEIyRCeNBB_I",
+    "driveFilename": "Meshy_AI_viking_iron_helmet_mo_1111093229_texture.glb",
+    "provider": "Meshy",
+    "triangles": 4871,
+    "rights": "Owner-supplied asset authorized for Pillagers personal armor work; no independently verified open redistribution license.",
+    "driveFolderId": "1KLQh4TMMHZmr6WPw2UpUOzJRMUouGaVV"
+  }
+]

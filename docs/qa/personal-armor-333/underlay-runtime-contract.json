@@ -1,0 +1,66 @@
+{
+  "version": 2,
+  "createdAt": "2026-11-13T13:36:21.469Z",
+  "status": "PASS: public runtime fitting contract; actual generated fit/composite acceptance is separate",
+  "testFile": "tests/personal-armor-underlay-fit.test.mjs",
+  "passingTests": 27,
+  "sourceIdentities": {
+    "src/characters/MeshyModuleRuntime.ts": "6cc31f288ed6bd45f142f4e9c8530653f54785d50302b658e3db5123e1947ad1",
+    "src/characters/PreparedNativeOutfit.ts": "f2e799e0d270e57648b151f62341a6e47b4ee24b4c6d3a96f08c3d835b676e95",
+    "src/characters/BodyFitAdapter.ts": "bd67fb62ea89f5ff8390e1d16062dfef08cd49b76d1625583cfc21cbc0e7478c",
+    "tests/personal-armor-underlay-fit.test.mjs": "cfe544ab03750773e85bfdbfd350f97e0be5215ce6db558132e164ad946b048d"
+  },
+  "technicalFixture": {
+    "meshName": "Module_grid_trial_top_0",
+    "vertices": [
+      100,
+      101
+    ],
+    "offsetMetres": 0.001,
+    "actualArtworkQualification": false
+  },
+  "guards": [
+    "exact pinned normal field-tunic identity and source hash",
+    "single named native garment mesh and original vertex bounds",
+    "unique safe integer IDs and finite metre positions",
+    "declared actual displacement and 80 mm validation ceiling",
+    "optional paired normalized four existing native influences",
+    "effective opaque armor material",
+    "unchanged native body coverage and no extra openings",
+    "all cross-source validation before live outfit replacement"
+  ],
+  "preserved": [
+    "all original source indices and UVs",
+    "all unlisted source positions/influences and distant normals",
+    "cached source, other wearer, trousers and native body geometry",
+    "normal motion path without appearance refitting",
+    "exact unequip restoration",
+    "unsupported-age complete-body restoration",
+    "failed borrowed-portrait restoration"
+  ],
+  "validation": {
+    "typeScript": "PASS",
+    "diffCheck": "PASS"
+  },
+  "supersedes": "The prior whole-triangle underlayCoverage experiment was rejected; no artwork acceptance claim from those mask IDs remains.",
+  "documentation": "docs/assets/PERSONAL-ARMOR-UNDERLAY-FIT.md",
+  "lastFocusedRun": {
+    "passingTests": 32,
+    "suites": [
+      "tests/personal-armor-underlay-fit.test.mjs",
+      "tests/native-personal-armor.test.mjs",
+      "tests/resident-portrait-studio.test.mjs"
+    ],
+    "bindingSha256": "a585d715c53ddb81ec462d0cd0500b683a1d92400dec66a533d1fb7b934d1cfc",
+    "meaning": "The focused runtime contract/portrait run preceded the final measured source back-shell correction; do not treat it as final artwork clearance."
+  },
+  "finalBoundedActualData": {
+    "cases": 45,
+    "baselinePoseEvaluations": 45,
+    "modelSha256": "1083a715439a5a2acb3b714908070802459d3d0b8f72eb5d270956f9152c002a",
+    "bindingSha256": "8f9653339f32015fd46d56198110e28d4c0ea9c3f466658e992356b8b2d2e4c8",
+    "report": "docs/qa/personal-armor-333/bounded-composite-qualification.json",
+    "mechanicalAssertions": "PASS",
+    "physicalAcceptance": "Combined owner QA pending; known minor Death/opening-edge artifacts and unresolved forearm rays are explicit."
+  }
+}

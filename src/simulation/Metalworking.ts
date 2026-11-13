@@ -36,7 +36,7 @@ function fail(): never { throw new Error('Invalid saved Metalworking provenance.
 
 /** Factual paid consumption, not another resource stock or a reconstruction of old work. */
 export function metalworkingOreSpent(state: SimulationState): number {
-    if (state.smithery?.version !== 2) return 0;
+    if (!state.smithery || state.smithery.version < 2) return 0;
     return state.events.filter(event => event.type === 'EquipmentCrafted' && isIron(event.details?.item))
         .reduce((sum, event) => sum + Number(event.details!.ironOre), 0);
 }
@@ -44,7 +44,7 @@ export function metalworkingOreSpent(state: SimulationState): number {
 /** New iron items must be explained by actual crafting receipts and real carried losses. */
 export function validateMetalworkingLedger(state: SimulationState): void {
     const smithery = state.smithery;
-    if (!smithery || smithery.version !== 2) return;
+    if (!smithery || smithery.version < 2) return;
     const adoption = smithery.metalworking;
     const event = adoption && state.events.find(value => value.id === adoption.eventId);
     if (!adoption || adoption.version !== 1 || !integer(adoption.adoptedAt) ||

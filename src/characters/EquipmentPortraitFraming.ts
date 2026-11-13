@@ -11,7 +11,16 @@ export function equipmentPortraitFrame(human: MeshyHuman, frame: PortraitBasis,
     const scale = human.root.getWorldScale(new Vector3()).y;
     const include = (point: Vector3) => { bounds.expandByPoint(point); references.push(point); };
     for (const [id, module] of human.fit.modules) {
-        if (!id.startsWith('equipment/') || !module.visible) continue;
+        if (!module.visible) continue;
+        const personalArmor = characterAsset(id).tags.some(tag =>
+            tag === 'personal-body-armor' || tag === 'personal-headgear');
+        if (!id.startsWith('equipment/') && !personalArmor) continue;
+        if (personalArmor) {
+            const complete = new Box3().setFromObject(module, true);
+            for (const x of [complete.min.x, complete.max.x]) for (const y of [complete.min.y, complete.max.y])
+                for (const z of [complete.min.z, complete.max.z]) include(new Vector3(x, y, z));
+            continue;
+        }
         if (full) {
             const complete = new Box3().setFromObject(module, true);
             for (const x of [complete.min.x, complete.max.x]) for (const y of [complete.min.y, complete.max.y])

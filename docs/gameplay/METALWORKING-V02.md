@@ -2,14 +2,15 @@
 
 The two owner-approved iron items extend the existing personal Weapon and Shield
 inventory. Leather Body Armor and Iron Helmet belong to the separate
-[personal armor follow-up](https://github.com/sidesliders1983/Pillagers/issues/333), not this catalogue version.
+[personal armor contract](PERSONAL-ARMOR-V01.md), not this catalogue version.
 The earlier [Smithery v0.1](SMITHERY-V01.md) rules remain the historical baseline.
 
 ## Approved playtest balance
 
 The owner approved these trial values on 13 November 2026. Normal aptitude,
-learned proficiency, care, absence, adulthood, household specialization and work
-progress continue to determine actual output.
+parental apprenticeship modifiers, care, absence, adulthood, household specialization
+and work progress continue to determine actual output. Occupational experience
+retains its existing career-retention role; no extra personal skill-speed bonus is added.
 
 | Item | Worker | Inputs per finished item | Items/Winter at 100% productivity | Wearer effect |
 | --- | --- | --- | --- | --- |

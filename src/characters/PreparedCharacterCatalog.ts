@@ -387,6 +387,38 @@ export const preparedCharacterCatalog = {
             "bytes": 524006
         },
         {
+            "originalPath": "/character-lab/modules/native-personal-armor/iron-helmet.binding.json",
+            "originalSha256": "1f9578759fdbc8cd36beaa21b8b3a21cbbee9c35bb82fd17404e5ed84b32d468",
+            "originalBytes": 201878,
+            "path": "/game-assets/character-sources/ca7cdef8738e18a548bb.bin",
+            "sha256": "ca7cdef8738e18a548bbc4fcf7aa617c52d09efd56f403ebfb721458953e51bd",
+            "bytes": 54881
+        },
+        {
+            "originalPath": "/character-lab/modules/native-personal-armor/iron-helmet.glb",
+            "originalSha256": "dbdebf3feaa607dd3afaa687cbdc277028bf1c00c3ae3b7b05f307fe2c1df1f8",
+            "originalBytes": 635156,
+            "path": "/game-assets/character-sources/386a9e9f2abb30dc460d.bin",
+            "sha256": "386a9e9f2abb30dc460d8a8f852961f87c0e6b590ae77cc799788049457452f4",
+            "bytes": 440345
+        },
+        {
+            "originalPath": "/character-lab/modules/native-personal-armor/leather-body-armor.binding.json",
+            "originalSha256": "8f9653339f32015fd46d56198110e28d4c0ea9c3f466658e992356b8b2d2e4c8",
+            "originalBytes": 4369149,
+            "path": "/game-assets/character-sources/5dd69d583a6460b718cb.bin",
+            "sha256": "5dd69d583a6460b718cb0d4a464e2f43e29b4a195de18b539aaa158947f1ea3d",
+            "bytes": 1413376
+        },
+        {
+            "originalPath": "/character-lab/modules/native-personal-armor/leather-body-armor.glb",
+            "originalSha256": "1083a715439a5a2acb3b714908070802459d3d0b8f72eb5d270956f9152c002a",
+            "originalBytes": 658104,
+            "path": "/game-assets/character-sources/744a9fb0be75a7f35e37.bin",
+            "sha256": "744a9fb0be75a7f35e37835f2c082695048849ff6bb5c883ddd7c86851e72244",
+            "bytes": 466735
+        },
+        {
             "originalPath": "/character-lab/modules/occupation-hats/farmer.binding.json",
             "originalSha256": "7eb9d84b16cb19339ff1f1bfd488caa7d79ab403e01904786ae20617f780b411",
             "originalBytes": 8438,

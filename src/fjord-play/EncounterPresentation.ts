@@ -147,7 +147,10 @@ export function projectCombatDeaths(owner: SimulationState, clan: SimulationStat
             if (!fatal) continue;
             const combatDeath: FjordCombatDeath = { version: 1, key: clan.clan.id + ':' + event.id,
                 encounterId: entry.id, tick: diedAt, durationTicks: 5, expiresAt: diedAt + 15,
-                equipment: { weapon: gear.weapon, shield: gear.shield } };
+                equipment: { weapon: gear.weapon, shield: gear.shield,
+                    ...(gear.bodyArmor !== undefined ? { bodyArmor: gear.bodyArmor } : {}),
+                    ...(gear.headgear !== undefined ? { headgear: gear.headgear } : {}),
+                } };
             entities.set(person.id, { kind: 'persona', id: person.id, selectionKey: 'persona:' + person.id,
                 label: person.name, asset: 'human', dna: appearance.dna,
                 facialIdentity: parseFacialShape(appearance.face),

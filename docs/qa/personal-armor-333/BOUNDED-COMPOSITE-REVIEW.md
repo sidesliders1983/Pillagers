@@ -1,0 +1,13 @@
+# Bounded personal-armor composite review
+
+The frozen combined-QA candidate uses vest model 1083a715439a5a2acb3b714908070802459d3d0b8f72eb5d270956f9152c002a and binding 8f9653339f32015fd46d56198110e28d4c0ea9c3f466658e992356b8b2d2e4c8. Runtime and source data are pinned in bounded-composite-qualification.json.
+
+The reproducible command is node scripts/qa/qualify-personal-armor-333.mjs. It evaluates 45 composite cases and 45 matching ordinary-tunic baselines: the default 32-year-old at LOD2 in 13 locomotion/combat/Death states; four representative states at LOD0 and LOD1; and six female/male, age16/32/75/100, bounded height/face profiles at LOD2 in those four states. The report includes the exact DNA and loadouts. Death uses an actual iron spear without a shield; the other states include the actual iron shield.
+
+All explicit point/bone finiteness, 44-bone rig, unchanged DNA, absence of motion-time fitting, and exact original-tunic restoration assertions pass. Default garment world positions differ by at most 0.4833 mm between LOD0 and LOD2 in the four matched poses. LOD1 equals LOD2 exactly in these samples. This is measured equality/delta, not an assumption about all LODs or morphs.
+
+The ray diagnostics retain all positive-contact and potential added-cover-gap counts and maxima, with the 12 largest contact details and first 15 gap details per case. They do not claim zero contacts or pixel-perfect coverage. A broad ray can reach another sleeve/cloth patch; the largest 119 mm value is cross-patch depth, not local penetration. Independent static review confirms that NECK faces 1637/1638 retain full body geometry at LOD1/2. Representative forearm signals remain unresolved and explicitly unqualified; their absence from full retained triangles is not treated as proof of either a visible hole or harmless exposed skin.
+
+Actual textured default Idle/Spear/Death views were reviewed; the current candidate is ready for combined owner QA with the stated limitations. The known defaultLOD2 Death central-back contact reaches 4.55 mm, and small opening-edge artifacts remain. Raw source-self intersection evidence remains RED and is recorded separately. There is no global numeric contact exemption, no claim of owner visual acceptance, and no phone/GPU/thermal certification.
+
+The separate helmet-fit evidence covers the unchanged crown-fitting algorithm and source identities; final hand-prop checks are recorded separately in vest-prop-qualification.json and helmet-props-after-death-fix.json. This finite body-surface sampling cannot prove continuous triangle coverage, every camera, every morph, or every animation time. Combined owner combat QA remains the physical/rendered acceptance step.

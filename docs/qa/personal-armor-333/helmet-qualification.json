@@ -1,0 +1,286 @@
+{
+  "version": 1,
+  "status": "bounded native helmet sample passed; owner visual acceptance pending",
+  "generatedAt": "2026-11-13T11:13:14.739Z",
+  "identities": {
+    "public/character-lab/modules/native-personal-armor/iron-helmet.glb": "dbdebf3feaa607dd3afaa687cbdc277028bf1c00c3ae3b7b05f307fe2c1df1f8",
+    "public/character-lab/modules/native-personal-armor/iron-helmet.binding.json": "1f9578759fdbc8cd36beaa21b8b3a21cbbee9c35bb82fd17404e5ed84b32d468",
+    "src/characters/NativeHeadwearFit.ts": "9ea9f82cb80ff7c46ff7ec3a8c7659431afe1824b3c8d76aa1bfa27a39122388",
+    "src/characters/MeshyModuleRuntime.ts": "c35a0e28fd664d0ef87dc6a317e26ba66194438c36d5de3612f47eca3e9f23e2"
+  },
+  "headHairBeard": {
+    "motions": 861,
+    "bodyLODs": [
+      0,
+      1,
+      2
+    ],
+    "profiles": [
+      {
+        "label": "owner default",
+        "seed": 1983,
+        "age": 32,
+        "sex": "male",
+        "lods": [
+          0,
+          1,
+          2
+        ],
+        "hairs": [
+          "none",
+          "hair/manual-long-braided",
+          "hair/manual-long-2"
+        ],
+        "beard": "beard/manual-fitted-normal",
+        "face": "founderFacialIdentity(1983)"
+      },
+      {
+        "seed": 1983,
+        "age": 16,
+        "masculinity": 0.15,
+        "sex": "female",
+        "height": "universalHumanProfile(defaultDNA with age and sex).height",
+        "lods": [
+          0,
+          1,
+          2
+        ],
+        "hairs": [
+          "none",
+          "hair/manual-fitted-short"
+        ],
+        "beard": "none",
+        "face": "founderFacialIdentity(1983)"
+      },
+      {
+        "seed": 1983,
+        "age": 16,
+        "masculinity": 0.85,
+        "sex": "male",
+        "height": "universalHumanProfile(defaultDNA with age and sex).height",
+        "lods": [
+          0,
+          1,
+          2
+        ],
+        "hairs": [
+          "none",
+          "hair/manual-fitted-short"
+        ],
+        "beard": "none",
+        "face": "founderFacialIdentity(1983)"
+      },
+      {
+        "seed": 1983,
+        "age": 32,
+        "masculinity": 0.15,
+        "sex": "female",
+        "height": "universalHumanProfile(defaultDNA with age and sex).height",
+        "lods": [
+          0,
+          1,
+          2
+        ],
+        "hairs": [
+          "none",
+          "femaleHairAssets[0]",
+          "femaleHairAssets[1]"
+        ],
+        "beard": "none",
+        "face": "founderFacialIdentity(1983)"
+      },
+      {
+        "seed": 1983,
+        "age": 32,
+        "masculinity": 0.85,
+        "sex": "male",
+        "height": "universalHumanProfile(defaultDNA with age and sex).height",
+        "lods": [
+          0,
+          1,
+          2
+        ],
+        "hairs": [
+          "none",
+          "hair/manual-long-braided",
+          "hair/manual-long-2"
+        ],
+        "beard": "beard/manual-fitted-normal",
+        "face": "founderFacialIdentity(1983)"
+      },
+      {
+        "seed": 17,
+        "age": 75,
+        "masculinity": 0.05,
+        "height": 1.16,
+        "intelligence": 1,
+        "agility": 1,
+        "lods": [
+          2
+        ],
+        "hairs": [
+          "femaleHairAssets[0]"
+        ],
+        "beard": "none",
+        "face": "alternating +0.75/-0.75 public facial axes"
+      },
+      {
+        "seed": 930,
+        "age": 100,
+        "masculinity": 0.95,
+        "height": 1.6,
+        "intelligence": 0,
+        "agility": 0,
+        "lods": [
+          2
+        ],
+        "hairs": [
+          "hair/manual-long-2"
+        ],
+        "beard": "beard/manual-fitted-normal",
+        "face": "all public facial axes +0.75"
+      }
+    ],
+    "locomotion": [
+      [
+        "Idle",
+        0.6
+      ],
+      [
+        "Walk",
+        0.25
+      ],
+      [
+        "Run",
+        0.3
+      ]
+    ],
+    "actions": [
+      "ready",
+      "spear",
+      "shield",
+      "brace",
+      "withdraw",
+      "death"
+    ],
+    "actionPhases": [
+      0,
+      0.5,
+      1
+    ],
+    "targets": "actual indexed helmet against actual visible body/hair/beard triangles",
+    "allowedContactExemptions": 0,
+    "motionRefits": 0
+  },
+  "props": {
+    "combinations": 12,
+    "motions": 252,
+    "actualPairChecks": 357,
+    "weapons": [
+      null,
+      "woodenSpear",
+      "ironSpear"
+    ],
+    "shields": [
+      null,
+      "woodenShield",
+      "leatherShield",
+      "ironShield"
+    ],
+    "body": "owner default, LOD2, long-2 hair, normal beard",
+    "allowedContactExemptions": 0,
+    "motionRefits": 0
+  },
+  "restoration": {
+    "status": "passed",
+    "ownerDefaultLong2": {
+      "changedOriginalVertices": 356,
+      "maximumModuleDisplacement": 0.01998768643787371,
+      "maximumWorldMetres": 0.014770182009518594,
+      "preservedDistantTipVertices": 5247,
+      "addedVertices": 2415,
+      "addedTriangles": 3270,
+      "addedMaterials": 0,
+      "addedTextures": 0,
+      "coldCachedBodyEquipInclusiveMilliseconds": 3402.4757,
+      "equipTiming": {
+        "environment": "Node headless, shared Windows host; descriptive samples, not a latency or device certification",
+        "beforeOptimization": {
+          "coldInclusiveMilliseconds": 3604.8378,
+          "helmetFitObserverMilliseconds": 3275.8576
+        },
+        "afterOptimization": {
+          "coldInclusiveMilliseconds": 1581.917,
+          "helmetFitObserverMilliseconds": 867.4646
+        },
+        "scope": "One source-cache-warm character, first helmet loading/preparation and equip; observer isolates existing qualified-helmet-crown-fit stage. No per-frame fitting."
+      }
+    },
+    "checks": [
+      "cached source geometry unchanged",
+      "concurrent wearer unchanged",
+      "later wearer unchanged",
+      "original skin weights and UVs unchanged",
+      "distant exposed lock positions unchanged",
+      "beard geometry unchanged",
+      "unequip restores original hair topology, normals, skinning",
+      "borrowed portrait with actual helmet preserves fitted geometry, original world/renderer state and fit count"
+    ]
+  },
+  "legacyCaps": {
+    "status": "passed against pinned #224 source",
+    "baseCommit": "8374fac84e766aedf16131c1c246cddbecb13db9",
+    "samples": 12,
+    "path": "docs/qa/personal-armor-333/legacy-cap-parity.json"
+  },
+  "limits": [
+    "Representative ages 16/32/75/100 and bounded shapes, not every age or face permutation",
+    "Only owner-default long-2 geometry delta/equip timing measured here",
+    "Node headless timings do not certify GPU, physical iPhone performance or thermal behavior",
+    "Body armor fitting has a separate qualification; this report does not accept the vest",
+    "Desktop visual captures and owner UAT remain separate"
+  ],
+  "finalVerification": {
+    "optimizedRuntime": true,
+    "headHairBeardMotions": 861,
+    "propMotions": 252,
+    "propPairChecks": 357,
+    "sourceAndUnequipTests": 3,
+    "borrowedPortraitTests": 2,
+    "focusedWardrobeSuiteTests": 37,
+    "realCanonicalBlockAndCorpseTests": 2,
+    "typeScript": "passed",
+    "legacyCaps": "12 exact pinned-baseline samples passed",
+    "gpuPerformance": "not measured by these Node tests",
+    "physicalIPhone": "not tested"
+  },
+  "sourceTextNormalization": {
+    "kind": "UTF-8 LF text normalization only; original measured hashes retained",
+    "files": [
+      {
+        "path": "src/characters/NativeHeadwearFit.ts",
+        "measuredSourceByteSHA256": "1c7150c4163dad053291b25e137e76c60842661604ed354de45fad495c2d1d80",
+        "canonicalLFSourceSHA256": "9ea9f82cb80ff7c46ff7ec3a8c7659431afe1824b3c8d76aa1bfa27a39122388",
+        "identicalEmittedJavaScriptSHA256": "d09cdadd00da72bb8bcdf6534c3e2f4f2a440df19b66080365c820accb977714"
+      },
+      {
+        "path": "src/characters/MeshyModuleRuntime.ts",
+        "measuredSourceByteSHA256": "db846722aece71f44660b714edb23cb9dc452e15c951f7995d4477d63579f63d",
+        "canonicalLFSourceSHA256": "c35a0e28fd664d0ef87dc6a317e26ba66194438c36d5de3612f47eca3e9f23e2",
+        "identicalEmittedJavaScriptSHA256": "bd2e08af3753975f212ee26fab35f87abe96f492ba5a0e28c5789ab731f9e292"
+      }
+    ]
+  },
+  "sourceLineEndingNote": "NativeHeadwearFit has canonical LF bytes; the prior CRLF source produces the same compiled fitting behavior.",
+  "priorFullMatrixRuntimeIdentities": {
+    "public/character-lab/modules/native-personal-armor/iron-helmet.glb": "dbdebf3feaa607dd3afaa687cbdc277028bf1c00c3ae3b7b05f307fe2c1df1f8",
+    "public/character-lab/modules/native-personal-armor/iron-helmet.binding.json": "1f9578759fdbc8cd36beaa21b8b3a21cbbee9c35bb82fd17404e5ed84b32d468",
+    "src/characters/NativeHeadwearFit.ts": "9ea9f82cb80ff7c46ff7ec3a8c7659431afe1824b3c8d76aa1bfa27a39122388",
+    "src/characters/MeshyModuleRuntime.ts": "c35a0e28fd664d0ef87dc6a317e26ba66194438c36d5de3612f47eca3e9f23e2"
+  },
+  "currentRuntimeHook": {
+    "source": "src/characters/MeshyModuleRuntime.ts",
+    "sha256": "f061f5e5f4b03fc08126247422785c35eca5ce83a487fe9bae43d98034e9788f",
+    "scope": "Optional body-armor underlay occlusion only; verified separately in underlay-runtime-contract.json. The 861/252 helmet matrix predates this unrelated optional branch."
+  }
+}

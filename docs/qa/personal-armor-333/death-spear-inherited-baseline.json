@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "scope": "Raw existing native Death before any solver change; compare all posed original body/spear vertices with and without the supplied vest. Full body diagnostic depth remains in death-spear-classification.json.",
+  "records": [
+    {
+      "item": "woodenSpear",
+      "phase": 0.5,
+      "maximumBodyVertexDifference": 0,
+      "maximumSpearVertexDifference": 0,
+      "sourceBodyVertices": 5005,
+      "sourceSpearVertices": 4585
+    },
+    {
+      "item": "woodenSpear",
+      "phase": 1,
+      "maximumBodyVertexDifference": 0,
+      "maximumSpearVertexDifference": 0,
+      "sourceBodyVertices": 5005,
+      "sourceSpearVertices": 4585
+    },
+    {
+      "item": "ironSpear",
+      "phase": 0.5,
+      "maximumBodyVertexDifference": 0,
+      "maximumSpearVertexDifference": 0,
+      "sourceBodyVertices": 5005,
+      "sourceSpearVertices": 3884
+    },
+    {
+      "item": "ironSpear",
+      "phase": 1,
+      "maximumBodyVertexDifference": 0,
+      "maximumSpearVertexDifference": 0,
+      "sourceBodyVertices": 5005,
+      "sourceSpearVertices": 3884
+    }
+  ]
+}

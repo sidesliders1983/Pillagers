@@ -445,7 +445,76 @@ test('canonical iron gear selects armed presentation and clearing it restores th
         trace.layer.advance(trace.motion, 0, false);
         assert.equal(trace.requests.at(-1).action, 'strike');
         assert.equal(trace.requests.at(-1).hasSpear, false);
+        for (let frame = 0; frame < 40 && !trace.requests.length; frame++)
+            trace.layer.advance(trace.motion, .1, true);
+        assert.ok(trace.requests.length, 'The real displayed body reaches its confirmed contact point');
         assert.equal(trace.requests.at(-1).hasShield, false);
         assert.equal(core.serializeState(state), before, 'Presentation cannot craft or assign the projected gear');
     } finally { trace.layer.dispose(); }
+});
+
+
+test('real personal protection can block a recorded hit without inventing a shield defence', async () => {
+    const { equippedPersonalArmorFixture } = await import('./personal-armor-fixture.mjs');
+    const { ironEncounterFixture } = await import('./metalworking-fixture.mjs');
+    const setup = ironEncounterFixture({ shield: null, actionLethalityBps: 5000,
+        initialState: equippedPersonalArmorFixture({ physical: true, nearbyRival: true }) });
+    let state = setup.state, blocked;
+    for (let tick = 0; tick < 1500 && !blocked; tick++) {
+        state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 1 }, setup.context);
+        for (const entry of Object.values(state.world.encounters?.records ?? {})) {
+            for (const exchange of entry.exchanges) {
+                const action = exchange.actions.find(action => action.targetId === 'founder-1' && action.outcome === 'blocked');
+                if (action) { blocked = { entry, exchange, action }; break; }
+            }
+            if (blocked) break;
+        }
+    }
+    assert.ok(blocked, 'The actual named armor wearer must reach a recorded protective block');
+    assert.equal(blocked.action.probabilityBps, 3600);
+    assert.equal(blocked.entry.equipment['founder-1'].shield, null);
+    assert.equal(blocked.entry.equipment['founder-1'].bodyArmor, 'leatherBodyArmor');
+    assert.equal(blocked.entry.equipment['founder-1'].headgear, 'ironHelmet');
+    state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 4 }, setup.context);
+    const world = projectionWorld(setup.context.world, state.seed);
+    const view = projectFjordSettlement(state, world, createFjordLayout(world));
+    const entity = view.entities.find(entity => entity.kind === 'persona' && entity.id === 'founder-1');
+    assert.ok(entity);
+    const before = core.serializeState(state), trace = await sceneTrace(state, world, entity);
+    try {
+        trace.layer.advance(trace.motion, 0, false);
+        assert.equal(trace.requests.at(-1).hasShield, false);
+        assert.equal(trace.requests.at(-1).action, 'brace', 'Armor protection shows survived contact, not a phantom shield');
+        assert.equal(core.serializeState(state), before);
+        const restored = core.reconstructState(before);
+        assert.deepEqual(projectFjordSettlement(restored, world, view.layout).entities
+            .find(entity => entity.kind === 'persona' && entity.id === 'founder-1').status.equipment,
+        entity.status.equipment);
+    } finally { trace.layer.dispose(); }
+});
+
+test('real personal protection remains on the historical corpse after all four carried items are lost canonically', async () => {
+    const { equippedPersonalArmorFixture } = await import('./personal-armor-fixture.mjs');
+    const { ironEncounterFixture } = await import('./metalworking-fixture.mjs');
+    const setup = ironEncounterFixture({ lethal: true,
+        initialState: equippedPersonalArmorFixture({ physical: true, nearbyRival: true }) });
+    let state = setup.state;
+    for (let tick = 0; tick < 1500; tick++) {
+        state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 1 }, setup.context);
+        if (state.events.some(event => event.type === 'PersonaDied' && event.personaId === 'founder-1' &&
+            event.details?.cause === 'Combat')) break;
+    }
+    assert.equal(state.smithery.assignments['founder-1'], undefined);
+    const world = projectionWorld(setup.context.world, state.seed), view = projectFjordSettlement(state, world, createFjordLayout(world));
+    const corpse = view.entities.find(entity => entity.id === 'founder-1' && entity.status.combatDeath);
+    assert.ok(corpse);
+    assert.deepEqual(corpse.status.combatDeath.equipment, { weapon: 'ironSpear', shield: 'ironShield',
+        bodyArmor: 'leatherBodyArmor', headgear: 'ironHelmet' });
+    const { fjordWardrobePresentation } = load('../src/fjord-play/FjordWardrobe.ts');
+    const presentation = fjordWardrobePresentation(corpse);
+    assert.equal(presentation.bodyArmor, 'garment/native-leather-body-armor');
+    assert.equal(presentation.headwear, 'headwear/native-iron-helmet');
+    const restored = core.reconstructState(core.serializeState(state));
+    assert.deepEqual(projectFjordSettlement(restored, world, view.layout).entities
+        .find(entity => entity.id === 'founder-1' && entity.status.combatDeath), corpse);
 });

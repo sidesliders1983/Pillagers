@@ -13,8 +13,9 @@ import {
 } from './TransitCargo';
 import { weatherProfile } from './Weather';
 import { eventFacts } from './EventFacts';
-import { equipmentResult, equipmentFor, defaultSmitheryConfig, equipmentSpearBonus, equipmentProtection,
+import { equipmentResult, equipmentFor, defaultSmitheryConfig, equipmentSpearBonus, equipmentCasualtyRisk,
     type PersonalEquipment } from './Smithery';
+import { wearingPersonalArmor } from './PersonalArmor';
 import { eligibleTerritorialObserver, freezePresence } from './ResidentPresence';
 import { commitPersonaDeaths } from './Mortality';
 import { farmyards, reconcileFarmyards } from './Farmyards';
@@ -42,6 +43,8 @@ export type EncounterPhase = 'approach' | 'contact' | 'engaging' | 'resolved' | 
 export interface ClanEventRef { clanId: string; eventId: string }
 export interface CombatEquipment extends PersonalEquipment {
     metalworking?: { version: 1; ironSpearBonusBps: number; ironShieldProtectionBps: number };
+    personalArmor?: { version: 1; leatherBodyArmorProtectionBps: number; ironHelmetProtectionBps: number;
+        maximumPersonalProtectionBps: number };
     personaId: string;
     spearBonusBps: number;
     woodenShieldProtectionBps: number;
@@ -157,10 +160,14 @@ function snapshotEquipment(state: SimulationState, id: string): CombatEquipment 
         leatherShieldProtectionBps: config.leatherShieldProtectionBps,
         ...(hasIron ? { metalworking: { version: 1 as const,
             ironSpearBonusBps: config.ironSpearBonusBps!,
-            ironShieldProtectionBps: config.ironShieldProtectionBps! } } : {}) };
+            ironShieldProtectionBps: config.ironShieldProtectionBps! } } : {}),
+        ...(wearingPersonalArmor(gear) ? { personalArmor: { version: 1 as const,
+            leatherBodyArmorProtectionBps: config.leatherBodyArmorProtectionBps!,
+            ironHelmetProtectionBps: config.ironHelmetProtectionBps!,
+            maximumPersonalProtectionBps: config.maximumPersonalProtectionBps! } } : {}) };
 }
 function combatEquipmentRules(gear: CombatEquipment) {
-    return { ...gear, ...gear.metalworking };
+    return { ...gear, ...gear.metalworking, ...gear.personalArmor };
 }
 function sees(context: PhysicalExpeditionContext, first: Point2, second: Point2) {
     const surface = createBlueprintSurface(context.world);
@@ -292,14 +299,13 @@ function exchange(state: SimulationState, mission: SpatialMission, entry: Encoun
         const gear = entry.equipment[id], targetGear = entry.equipment[targetId];
         const base = Math.min(10000, Math.floor(rules.policy.actionLethalityBps *
             (10000 + equipmentSpearBonus(gear.weapon, combatEquipmentRules(gear))) / 10000));
-        const protection = equipmentProtection(targetGear.shield, combatEquipmentRules(targetGear));
-        const probabilityBps = Math.floor(base * (10000 - protection) / 10000);
+        const probabilityBps = equipmentCasualtyRisk(base, targetGear, combatEquipmentRules(targetGear));
         const roll = randomUint(side.clan);
         const fatal = roll < Math.floor(probabilityBps * 4294967296 / 10000);
         actions.push({ actorClanId: side.clan.clan.id, actorId: id,
             targetClanId: side.opponent.clan.id, targetId, actorPosition: { x: first.x, z: first.z },
             targetPosition: { ...position(side.opponent, targetId) }, probabilityBps, roll,
-            outcome: fatal ? 'death' : protection > 0 && roll < Math.floor(base * 4294967296 / 10000) ? 'blocked' : 'survived' });
+            outcome: fatal ? 'death' : probabilityBps < base && roll < Math.floor(base * 4294967296 / 10000) ? 'blocked' : 'survived' });
     }
     const actionEventId = record(state, 'EncounterExchange', mission, { encounterId: entry.id,
         incidentId: entry.incidentId, exchangeIndex: entry.exchangeIndex, actions: structuredClone(actions) });
@@ -518,6 +524,7 @@ function validatePolicy(policy: EncounterPolicy) {
         throw new Error('Invalid encounter policy.');
 }
 const same = (first: unknown, second: unknown) => JSON.stringify(first) === JSON.stringify(second);
+const equipmentSlots = (gear: PersonalEquipment) => [gear.weapon, gear.shield, gear.bodyArmor ?? null, gear.headgear ?? null];
 function encounterClan(root: SimulationState, id: string) {
     return id === root.clan.id ? root : root.world?.targetClans[id];
 }
@@ -525,17 +532,20 @@ function eventAt(clan: SimulationState, id: string) {
     return clan.events.find(event => event.id === id);
 }
 function validGear(value: CombatEquipment, id: string) {
+    const uint = (number: unknown, maximum: number) => Number.isSafeInteger(number) && Number(number) >= 0 && Number(number) <= maximum;
     if (!value || value.personaId !== id || ![null, 'woodenSpear', 'ironSpear'].includes(value.weapon) ||
         ![null, 'woodenShield', 'leatherShield', 'ironShield'].includes(value.shield) ||
         ![value.spearBonusBps, value.woodenShieldProtectionBps, value.leatherShieldProtectionBps]
-            .every(number => Number.isSafeInteger(number) && number >= 0 && number <= 10000)) return false;
+            .every(number => uint(number, 10000))) return false;
     const hasIron = value.weapon === 'ironSpear' || value.shield === 'ironShield';
-    if (!hasIron) return value.metalworking === undefined;
-    const rules = value.metalworking;
-    return rules?.version === 1 && Number.isSafeInteger(rules.ironSpearBonusBps) &&
-        rules.ironSpearBonusBps >= 0 && rules.ironSpearBonusBps <= 2500 &&
-        Number.isSafeInteger(rules.ironShieldProtectionBps) && rules.ironShieldProtectionBps >= 0 &&
-        rules.ironShieldProtectionBps <= 7500;
+    const iron = value.metalworking;
+    if (hasIron ? iron?.version !== 1 || !uint(iron.ironSpearBonusBps, 2500) ||
+        !uint(iron.ironShieldProtectionBps, 7500) : iron !== undefined) return false;
+    const hasArmor = wearingPersonalArmor(value), armor = value.personalArmor;
+    if (!hasArmor) return armor === undefined && value.bodyArmor === undefined && value.headgear === undefined;
+    return [null, 'leatherBodyArmor'].includes(value.bodyArmor!) && [null, 'ironHelmet'].includes(value.headgear!) &&
+        armor?.version === 1 && [armor.leatherBodyArmorProtectionBps, armor.ironHelmetProtectionBps,
+            armor.maximumPersonalProtectionBps].every(number => uint(number, 6000));
 }
 export function validateOnSiteEncounters(state: SimulationState) {
     const registry = state.world?.encounters;
@@ -561,6 +571,9 @@ export function validateOnSiteEncounters(state: SimulationState) {
             if (value !== null && !tick(value, mission.departedAt)) fail();
         if (!rules.attackerEquipment || !same(Object.keys(rules.attackerEquipment).sort(), [...mission.memberIds].sort()) ||
             Object.entries(rules.attackerEquipment).some(([id, gear]) => !validGear(gear, id))) fail();
+        if (!['Prepared', 'Returned', 'Lost'].includes(mission.status)) for (const [id, gear] of Object.entries(rules.attackerEquipment)) {
+            if (state.personas[id]?.deathWinter === null && !same(equipmentSlots(equipmentFor(state, id)), equipmentSlots(gear))) fail();
+        }
         const departure = state.events.find(event => ['ExpeditionDeparted', 'ExploreAreaDeparted'].includes(event.type) &&
             event.details?.missionId === mission.id && event.details?.onSiteVersion === 1);
         if (!departure || !same(departure.details?.encounterPolicy, rules.policy) ||
@@ -645,6 +658,8 @@ export function validateOnSiteEncounters(state: SimulationState) {
         if (['engaging', 'withdrawing'].includes(entry.phase)) for (const person of entry.defenderIds) {
             const key = defender.clan.id + ':' + person;
             if (reserved.has(key)) fail();
+            if (defender.personas[person]?.deathWinter === null &&
+                !same(equipmentSlots(equipmentFor(defender, person)), equipmentSlots(entry.equipment[person]))) fail();
             reserved.add(key);
         }
         const withdrawal = events.filter(event => event.type === 'EncounterWithdrawalRequested').at(-1);
@@ -675,10 +690,9 @@ export function validateOnSiteEncounters(state: SimulationState) {
                 acted.add(action.actorId);
                 const base = Math.min(10000, Math.floor(rules.policy.actionLethalityBps *
                     (10000 + equipmentSpearBonus(actorGear.weapon, combatEquipmentRules(actorGear))) / 10000));
-                const protection = equipmentProtection(targetGear.shield, combatEquipmentRules(targetGear));
-                const probability = Math.floor(base * (10000 - protection) / 10000);
+                const probability = equipmentCasualtyRisk(base, targetGear, combatEquipmentRules(targetGear));
                 const outcome = action.roll < Math.floor(probability * 4294967296 / 10000) ? 'death' :
-                    protection > 0 && action.roll < Math.floor(base * 4294967296 / 10000) ? 'blocked' : 'survived';
+                    probability < base && action.roll < Math.floor(base * 4294967296 / 10000) ? 'blocked' : 'survived';
                 if (action.probabilityBps !== probability || action.outcome !== outcome) fail();
                 const actorClan = encounterClan(state, action.actorClanId)!;
                 const targetClan = encounterClan(state, action.targetClanId)!;

@@ -1,8 +1,11 @@
-import {Material, Matrix4, Mesh, SkinnedMesh, Vector3} from 'three';
+import {Material, Matrix4, Mesh, MeshStandardMaterial, NormalBlending, SkinnedMesh, Vector3} from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import {createBodyCoverageBuilder, maskedBodyGeometry, type BodyCutPlane} from './BodyCoverage';
 import type {NativeModuleSource} from './MeshyModuleRuntime';
 import type {MeshyBodyFitAdapter} from './MeshyBodyFitAdapter';
+import {meshyNativeRig} from './MeshyNativeRig';
+import {gridTrialOutfitId} from './GridTrialOutfitCatalog';
+import {gridTrialOutfitMeasurement} from './GridTrialOutfitMeasurements';
 
 // Coverage intersections are stored in the body's quantized float32 frame.
 // Use the same small tolerance when stabilizing their weights and hiding the tank top.
@@ -10,6 +13,69 @@ const preparedOpeningTolerance = 1e-5;
 
 function requireValue(value: unknown, message: string): asserts value {
     if (!value) throw new Error(message);
+}
+
+/** A qualified vest fits only a private copy of its exact field tunic.
+ * Cross-source, opaque-material and displacement checks run before clearing a live outfit.
+ * Physical body/sleeve clearance is qualified by the source preparation evidence. */
+export function validateArmorUnderlayFit(layer: NativeModuleSource, underlay: NativeModuleSource) {
+    const qualification = layer.binding.bodyArmorLayer!;
+    const fitting = qualification.underlayFit;
+    if (fitting === undefined) return;
+    requireValue(fitting?.version === 1 && fitting.meshName === 'Module_grid_trial_top_0'
+        && Array.isArray(fitting.vertices)
+        && fitting.vertices.every(value => value && typeof value === 'object'
+            && Number.isSafeInteger(value.vertex) && value.vertex >= 0
+            && Array.isArray(value.position) && value.position.length === 3
+            && value.position.every(Number.isFinite))
+        && new Set(fitting.vertices.map(value => value.vertex)).size === fitting.vertices.length,
+    'Invalid Body Armor underlay fit');
+    requireValue(Number.isFinite(fitting.maximumDisplacementMetres)
+        && fitting.maximumDisplacementMetres > 0 && fitting.maximumDisplacementMetres <= .08,
+    'Invalid Body Armor underlay fit displacement bound');
+    requireValue(underlay.asset.id === gridTrialOutfitId
+        && qualification.underlayId === underlay.asset.id
+        && qualification.underlaySha256 === underlay.binding.moduleSha256
+        && qualification.underlaySha256 === gridTrialOutfitMeasurement.sha256
+        && underlay.asset.metadata?.slot === 'full' && underlay.binding.precomputedNative?.version === 2,
+    'Underlay fitting requires the exact qualified field tunic');
+    const targets: Mesh[] = [];
+    underlay.source.scene.traverse(node => {
+        if ((node as Mesh).isMesh && node.name === fitting.meshName) targets.push(node as Mesh);
+    });
+    const target = targets[0], position = target?.geometry.getAttribute('position');
+    requireValue(targets.length === 1 && position && target.geometry.index
+        && target.geometry.getAttribute('normal')?.count === position.count
+        && target.geometry.getAttribute('skinIndex')?.count === position.count
+        && target.geometry.getAttribute('skinWeight')?.count === position.count,
+    'Underlay fitting requires the exact skinned tunic torso mesh');
+    requireValue(fitting.vertices.every(value => value.vertex < position.count),
+    'Body Armor underlay fit exceeds the original tunic vertex count');
+    for (const value of fitting.vertices) {
+        const original = new Vector3(position.getX(value.vertex), position.getY(value.vertex), position.getZ(value.vertex));
+        requireValue(original.distanceTo(new Vector3(...value.position)) <= fitting.maximumDisplacementMetres + 1e-6,
+        'Body Armor underlay fit exceeds its declared displacement');
+        if (value.joints === undefined && value.weights === undefined) continue;
+        requireValue(Array.isArray(value.joints) && value.joints.length === 4
+            && value.joints.every(joint => Number.isSafeInteger(joint) && joint >= 0
+                && joint < meshyNativeRig.length)
+            && Array.isArray(value.weights) && value.weights.length === 4
+            && value.weights.every(weight => Number.isFinite(weight) && weight >= 0 && weight <= 1)
+            && Math.abs(value.weights.reduce((sum, weight) => sum + weight, 0) - 1) < 1e-5,
+        'Invalid Body Armor underlay native influences');
+    }
+    layer.source.scene.traverse(node => {
+        if (!(node as Mesh).isMesh) return;
+        const mesh = node as Mesh;
+        const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+        requireValue(materials.every(material => {
+            const value = material as MeshStandardMaterial;
+            return value.isMeshStandardMaterial && value.visible && value.colorWrite
+                && !value.transparent && value.opacity === 1 && value.alphaTest === 0
+                && !value.alphaMap && !value.alphaHash && !value.alphaToCoverage
+                && value.blending === NormalBlending;
+        }), 'Only an opaque Body Armor material may fit its tunic underlay');
+    });
 }
 
 /** Prepared review assets contain metre positions and four frozen native influences. */
@@ -21,6 +87,19 @@ export function validatePreparedOutfit(source: NativeModuleSource, fit: MeshyBod
     'Invalid prepared outfit contract');
     const headwear = asset.type === 'headwear';
     const equipment = asset.type === 'equipment';
+    const armorLayer = binding.bodyArmorLayer;
+    if (asset.tags.includes('personal-body-armor') || armorLayer) {
+        requireValue(armorLayer?.version === 1 && asset.type === 'garment'
+            && asset.metadata?.slot === 'over' && asset.tags.includes('personal-body-armor')
+            && armorLayer.underlayId === gridTrialOutfitId
+            && armorLayer.underlaySha256 === gridTrialOutfitMeasurement.sha256
+            && Number.isFinite(armorLayer.clearanceMetres)
+            && armorLayer.clearanceMetres > 0 && armorLayer.clearanceMetres <= .03
+            && prepared.version === 3 && !prepared.moduleCoverage.length
+            && !prepared.bodyOpenings?.length && !prepared.lowerUnderlap && !prepared.neckMaterial
+            && binding.skinning === 'surface-barycentric-native',
+        'Body Armor requires its exact qualified field tunic and unchanged native body coverage');
+    }
     if (equipment) {
         const tool = binding.rigidEquipment;
         const parents: Record<string, number> = {socket_hand_L: 11, socket_hand_R: 24, socket_back: 3};
@@ -82,9 +161,24 @@ export function validatePreparedOutfit(source: NativeModuleSource, fit: MeshyBod
             && Number.isFinite(cap.maximumRadialScale)
             && cap.maximumRadialScale >= 1 && cap.maximumRadialScale <= 1.5,
         'Invalid measured headwear cavity');
+        if (cap.crownCavity) {
+            const cavity = cap.crownCavity;
+            const rows = cavity.radii.length / cavity.angularSamples;
+            requireValue(asset.tags.includes('personal-headgear') && cavity.version === 1
+                && Number.isInteger(cavity.angularSamples) && cavity.angularSamples >= 16
+                && cavity.angularSamples <= 256 && Number.isInteger(rows) && rows >= 2 && rows <= 256
+                && Number.isFinite(cavity.minimumY) && cavity.minimumY >= -.25
+                && Number.isFinite(cavity.stepY) && cavity.stepY > 0 && cavity.stepY <= .02
+                && cavity.minimumY + cavity.stepY * (rows - 1) <= .5
+                && Number.isFinite(cavity.ceilingY) && cavity.ceilingY >= cavity.minimumY
+                && cavity.ceilingY <= cavity.minimumY + cavity.stepY * (rows - 1)
+                && cavity.radii.every(radius => radius === null || Number.isFinite(radius)
+                    && radius > 0 && radius <= .35),
+            'Qualified helmet crown fitting requires a bounded actual source-wall field');
+        }
     } else requireValue(!binding.headwearFit, 'Headwear fitting cannot be applied to clothing or hair');
     if (prepared.version === 3) {
-        requireValue((headwear || equipment || prepared.moduleCoverage?.length) && prepared.moduleCoverage.every(band =>
+        requireValue((headwear || equipment || armorLayer || prepared.moduleCoverage?.length) && prepared.moduleCoverage.every(band =>
             band.regions.length > 0 && Number.isFinite(band.minimumY)
             && Number.isFinite(band.maximumY) && band.minimumY < band.maximumY
             && (band.preserveRegions === undefined || Array.isArray(band.preserveRegions)

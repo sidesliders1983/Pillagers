@@ -15,7 +15,7 @@ import {resolveMortality} from './Mortality';
 import {farmyards,reconcileFarmyards} from './Farmyards';
 import {personaAge} from './PersonaAge';
 import {isProvidingCare} from './FamilyMechanics';
-import {stepMechanicsTick} from './Mechanics';
+import {stepMechanicsTick, availableOccupationIds} from './Mechanics';
 import {weatherProfile} from './Weather';
 import {randomUint} from './Random';
 import {eventFacts} from './EventFacts';
@@ -305,6 +305,12 @@ export function transferPersona(source:SimulationState,destination:SimulationSta
  if(p.partnerId!==null&&source.personas[p.partnerId]){source.personas[p.partnerId].partnerId=null;p.partnerId=null;}
  for(const home of Object.values(source.households)){home.memberIds=home.memberIds.filter(x=>x!==id);if(!home.memberIds.length)home.residenceId=null;}
  releasePersonaCare(source,id);
+ const unavailableOccupation=p.occupation!==null&&!availableOccupationIds(destination).includes(p.occupation)?p.occupation:null;
+ if(unavailableOccupation){
+  const active=p.occupationHistory.at(-1);
+  if(active?.endedAt===null)active.endedAt={...source.time};
+  p.occupation=null;p.workProgress=0;
+ }
  delete source.personas[id];delete source.mechanics!.people[id];
  delete destination.personaArchive[id];destination.personas[id]=p;destination.mechanics!.people[id]=info;
  const householdId=`arrival-${id}`,residenceId=`tent-${householdId}`;
@@ -313,6 +319,8 @@ export function transferPersona(source:SimulationState,destination:SimulationSta
  reconcileFarmyards(source,previousFarmyards);
  record(source,'PersonaTransferredOut',{missionId,personaId:id,name:p.name,formerPartnerId,destinationClanId:destination.clan.id});
  record(destination,'PersonaTransferredIn',{missionId,personaId:id,name:p.name,formerPartnerId,originClanId:p.originClanId,...(arrivalPosition?{arrivalPosition:{...arrivalPosition}}:{})},id);
+ if(unavailableOccupation)record(destination,'OccupationAssigned',{occupation:null,previousOccupation:unavailableOccupation,
+  reason:'occupation-unavailable-on-arrival',name:p.name},id);
  pruneSocialIncidents(source);
 }
 export function transferCattle(source:SimulationState,destination:SimulationState,id:string):void {

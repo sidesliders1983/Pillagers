@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "status": "Two independent cold-process derivation and complete preparation --verify rounds passed exact byte comparison, including deterministic lossless gzip numeric evidence; no public output writes during verification.",
+  "runs": 2,
+  "nativeSourceModelsPublished": false,
+  "sourceScriptsLF": true,
+  "commands": [
+    "node scripts/characters/derive-native-personal-armor-underlay-fit.mjs --verify",
+    "node scripts/prepare-native-personal-armor.mjs --verify"
+  ],
+  "records": [
+    {
+      "path": "scripts/prepare-native-personal-armor.mjs",
+      "bytes": 41882,
+      "sha256": "166cc275f4a2ffbb7840c47cf5d7484630fbdf53dbf7ca4717a2676e12ec5131"
+    },
+    {
+      "path": "scripts/characters/derive-native-personal-armor-underlay-fit.mjs",
+      "bytes": 19665,
+      "sha256": "923cce0a2f2a26859c43976a05b866f02e704d4a78d1602792a9b2d91c277257"
+    },
+    {
+      "path": "scripts/characters/native-personal-armor.sources.json",
+      "bytes": 3298,
+      "sha256": "fcc36627ac9fd225acd886eb673f589c7c5a155b03881f4d298db3a2935c7677"
+    },
+    {
+      "path": "scripts/characters/native-personal-armor-underlay-fit.json",
+      "bytes": 4366673,
+      "sha256": "6e295089d296a494bbe450f267556aa8dbc1e8c88492caef01145e4a944aa5fc"
+    },
+    {
+      "path": "src/characters/NativePersonalArmorMeasurements.ts",
+      "bytes": 2583,
+      "sha256": "ae732749a06b4188f4aa464f7f0dfdd3cb35c866ca6dab46c7a9be142b4c008a"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/iron-helmet.binding.json",
+      "bytes": 201878,
+      "sha256": "1f9578759fdbc8cd36beaa21b8b3a21cbbee9c35bb82fd17404e5ed84b32d468"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/iron-helmet.glb",
+      "bytes": 635156,
+      "sha256": "dbdebf3feaa607dd3afaa687cbdc277028bf1c00c3ae3b7b05f307fe2c1df1f8"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/iron-helmet.provenance.json",
+      "bytes": 5632,
+      "sha256": "947769d59841cb568b3406c1d6d88815cea6adc2c16a8ca40f0c071e30f97357"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/leather-body-armor.binding.json",
+      "bytes": 4369149,
+      "sha256": "8f9653339f32015fd46d56198110e28d4c0ea9c3f466658e992356b8b2d2e4c8"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/leather-body-armor.glb",
+      "bytes": 658104,
+      "sha256": "1083a715439a5a2acb3b714908070802459d3d0b8f72eb5d270956f9152c002a"
+    },
+    {
+      "path": "public/character-lab/modules/native-personal-armor/leather-body-armor.provenance.json",
+      "bytes": 49710,
+      "sha256": "4a69f008ae108533607d49f3231772154df0702bf59a576d40a5d21b4db819f7"
+    },
+    {
+      "path": "output/native-personal-armor-333/preparation.json",
+      "bytes": 63545,
+      "sha256": "16d897d4f234acf690460521e6a37f7f50f32ccf9688897a6c9cf1796cfb2f73"
+    },
+    {
+      "path": "output/native-personal-armor-333/underlay-fit-derivation.json",
+      "bytes": 11315,
+      "sha256": "c75fa9ac0749d4395c8c605c19dbb13b1a890d70b9f898dec5d8afb283f667a5"
+    },
+    {
+      "path": "output/native-personal-armor-333/underlay-fit-derivation.json.gz",
+      "bytes": 3550561,
+      "sha256": "fe4546bf76cb0dbdba3e51ef14fb4a12cb799ed2abf58fdca9cb966d9e8342c0"
+    }
+  ],
+  "gzipDecodedIdentityVerified": true,
+  "limitations": [
+    "Deterministic source preparation is not final owner visual/physical acceptance.",
+    "The frozen candidate retains the disclosed minor Death/opening-edge contacts."
+  ],
+  "formatter": "Existing TypeScript printer with object-field line breaks; final formatted generator independently reproduced the frozen outputs twice."
+}

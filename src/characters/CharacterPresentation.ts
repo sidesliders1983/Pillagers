@@ -4,6 +4,7 @@ import { universalHumanProfile } from './UniversalHumanProfile';
 import { EquipmentSocket, equipmentSocketNames, moduleAtEquipmentSocket } from './AttachmentContract';
 import { identitySample } from './seededRandom';
 import type { HairStyle, BeardStyle } from './AppearanceTypes';
+import { gridTrialOutfitId } from './GridTrialOutfitCatalog';
 
 export const separateGarmentKeys = ['shoes', 'trousers', 'top'] as const;
 export type SeparateGarmentKey = typeof separateGarmentKeys[number];
@@ -15,9 +16,10 @@ export const presentationModuleFields = [
     {key: 'shoes', type: 'garment', label: 'Shoes'},
     {key: 'trousers', type: 'garment', label: 'Lower clothing'},
     {key: 'top', type: 'garment', label: 'Upper clothing'},
+    {key: 'bodyArmor', type: 'garment', label: 'Body Armor'},
     {key: 'equipment', type: 'equipment', label: 'Equipment'},
 ] as const;
-export type GarmentChoiceKey = 'outfit' | SeparateGarmentKey;
+export type GarmentChoiceKey = 'outfit' | SeparateGarmentKey | 'bodyArmor';
 
 /** Lab authoring choices are presentation state, never persistent character identity. */
 export interface CharacterPresentation {
@@ -29,6 +31,8 @@ export interface CharacterPresentation {
     trousers: string;
     top: string;
     equipment: string;
+    /** An explicit fitted layer; historical payloads may omit this choice. */
+    bodyArmor?: string;
     /** Additional independently authored native hand modules; old single-item payloads stay valid. */
     equipmentItems?: readonly string[];
     equipmentSocket: EquipmentSocket | 'auto';
@@ -37,7 +41,7 @@ export interface CharacterPresentation {
 }
 export const defaultCharacterPresentation: Readonly<CharacterPresentation> = Object.freeze({
     hair: 'auto', beard: 'auto', headwear: 'none', outfit: 'auto',
-    shoes: 'none', trousers: 'none', top: 'none',
+    shoes: 'none', trousers: 'none', top: 'none', bodyArmor: 'none',
     equipment: 'none', equipmentItems: Object.freeze([]), equipmentSocket: 'auto', hairColor: null, technicalWaistWrap: false,
 });
 
@@ -46,9 +50,10 @@ export function garmentFitsChoice(asset: CharacterAsset, choice: GarmentChoiceKe
     const slot = asset.metadata?.slot;
     if (choice === 'outfit') return slot === 'full';
     if (asset.metadata?.version !== 'pillagers-fit/0.2') return false;
+    if (choice === 'bodyArmor') return slot === 'over' && asset.tags.includes('personal-body-armor');
     if (choice === 'shoes') return slot === 'footwear';
     if (choice === 'trousers') return slot === 'lower';
-    return slot === 'upper' || slot === 'over';
+    return (slot === 'upper' || slot === 'over') && !asset.tags.includes('personal-body-armor');
 }
 
 /** An explicit ensemble can reserve only the upper/lower slots and leave shoes independent. */
@@ -76,6 +81,8 @@ export function parseCharacterPresentation(value: unknown = defaultCharacterPres
     for (const {key, type} of presentationModuleFields) {
         const id = result[key];
         if (typeof id !== 'string') throw new Error('Invalid ' + key + ' choice.');
+        if (key === 'bodyArmor' && id === 'auto')
+            throw new Error('Body Armor requires an explicit choice; it is never equipped automatically.');
         if (id === 'auto' || id === 'none') continue;
         const asset = characterAsset(id);
         if (asset.type !== type) throw new Error('Invalid ' + key + ' asset type.');
@@ -93,6 +100,11 @@ export function parseCharacterPresentation(value: unknown = defaultCharacterPres
         })) throw new Error('Choose up to two distinct native hand equipment modules.');
     if (Object.hasOwn(input, 'equipmentItems')) result.equipmentItems = [...equipmentItems];
     else delete result.equipmentItems;
+    if (result.bodyArmor !== 'none' && (result.outfit !== gridTrialOutfitId ||
+        result.top !== 'none' || result.trousers !== 'none')) {
+        throw new Error('Body Armor requires its qualified normal field tunic underlay.');
+    }
+    if (!Object.hasOwn(input, 'bodyArmor')) delete result.bodyArmor;
     const separateRequested = separateGarmentKeys.some(key => result[key] !== 'none');
     if (separateRequested && result.outfit !== 'auto' && result.outfit !== 'none'
         && !complementaryFootwear(result)) {
@@ -135,7 +147,7 @@ export function resolveCharacterPresentation(
 
     // Saved choices retain their exact source identity even while age/sex hides them.
     for (const {key} of presentationModuleFields) {
-        const choice = presentation[key];
+        const choice = presentation[key] ?? 'none';
         if (choice !== 'auto' && choice !== 'none' &&
             !characterAssetFitsBody(characterAsset(choice), body)) {
             throw new Error(choice + ': module is not compatible with this exact body source.');
@@ -183,7 +195,8 @@ export function resolveCharacterPresentation(
     const shoesId = select(presentation.shoes, automatic('garment', '', 'shoes'));
     const trousersId = select(presentation.trousers, automatic('garment', '', 'trousers'));
     const topId = select(presentation.top, automatic('garment', '', 'top'));
-    const garmentIds = [outfitId, shoesId, trousersId, topId]
+    const bodyArmorId = presentation.bodyArmor && presentation.bodyArmor !== 'none' ? presentation.bodyArmor : null;
+    const garmentIds = [outfitId, shoesId, trousersId, topId, bodyArmorId]
         .filter((id): id is string => !!id);
 
     let equipmentId = select(presentation.equipment, automatic('equipment', ''));
@@ -208,6 +221,6 @@ export function resolveCharacterPresentation(
         beardStyle: beardId ? characterAsset(beardId).style as BeardStyle : 'none' as const,
         color: presentation.hairColor ?? base.appearance.color,
     }};
-    return {presentation, profile, hairId, beardId, headwearId, outfitId, shoesId, trousersId, topId,
+    return {presentation, profile, hairId, beardId, headwearId, outfitId, shoesId, trousersId, topId, bodyArmorId,
         garmentIds, equipmentId, equipmentIds, equipmentSocket, beardEligible};
 }
