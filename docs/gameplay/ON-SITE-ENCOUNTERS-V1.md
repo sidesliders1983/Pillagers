@@ -142,3 +142,9 @@ source ownership, manifest conservation, delivery receipts and terminal phase.
 Core saves do not embed another terrain field. Owner desktop/physical-touch UAT
 is deferred to the combined combat/offense QA; automated and emulated checks do
 not substitute for it.
+
+## Native encounter presentation
+
+The same-rig visual layer samples registered participants, exchange receipts and
+canonical ticks without changing these rules. See [encounter presentation](ENCOUNTER-PRESENTATION-V1.md)
+for pose, pause/restore, visibility and recorded-casualty contracts.

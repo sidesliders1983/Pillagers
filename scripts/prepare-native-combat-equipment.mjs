@@ -75,6 +75,17 @@ for (const source of sources) {
     const sourceMin = positions.getMin([]), sourceMax = positions.getMax([]);
     const grip = source.hand === 'right' ? spearGrip(positions, source.gripY) :
         new Vector3((sourceMin[0] + sourceMax[0]) / 2, (sourceMin[1] + sourceMax[1]) / 2, sourceMin[2] + .015);
+    const originalGrip = grip.clone();
+    const rearMountOffset = source.rearMountOffsetMetres ?? 0;
+    assert.ok(Number.isFinite(rearMountOffset) && rearMountOffset >= 0 && rearMountOffset <= .2);
+    assert.ok(source.hand === 'left' || rearMountOffset === 0, 'A spear retains its measured shaft grip');
+    // The finger cavity lies inward of the wrist. Move the shield itself outside
+    // the dorsal forearm surface while keeping that real hand anchor and rig.
+    grip.z -= rearMountOffset / source.scale;
+    const mount = source.hand === 'left' ? {
+        kind: 'forearm-backed-shield', sourceFront: '+Z', rearMountOffsetMetres: rearMountOffset,
+        originalSourceGrip: originalGrip.toArray(),
+    } : undefined;
     const transform = new Matrix4().makeTranslation(...hand.centre.toArray()).multiply(rotation)
         .multiply(new Matrix4().makeScale(source.scale, source.scale, source.scale))
         .multiply(new Matrix4().makeTranslation(...grip.clone().negate().toArray()));
@@ -108,7 +119,7 @@ for (const source of sources) {
     await document.transform(prune({ keepAttributes: true }));
     const output = await io.writeBinary(document), path = directory + '/' + source.name + '.glb';
     const binding = { ...template, id: source.id, moduleSha256: hash(output),
-        recipe: { id: 'supplied-native-combat-prop-grip', version: 1, blender: 'not-required' },
+        recipe: { id: 'supplied-native-combat-prop-grip', version: mount ? 2 : 1, blender: 'not-required' },
         reviewScope: 'Owner-supplied Meshy prop; derived native fitting pending combined owner QA',
         supportedAges: { min: 16, max: 100 },
         materialPolicy: { kind: 'provider-original', provider: 'Meshy', sourceSha256: source.sha256, reviewOnly: true },
@@ -129,9 +140,11 @@ for (const source of sources) {
         output: measurements[path], bindingSha256: entry.bindingSha256, nativeRig: binding.rigSignature,
         bodyBindings: binding.precomputedNative.bodyBindings,
         grip: { localSource: grip.toArray(), nativeTarget: hand.centre.toArray(), transform: transform.elements },
+        ...(mount ? { mount } : {}),
         operations: ['Preserve all supplied source triangles, UVs and material colours; no mannequin/body replacement',
             'Resize albedo to 1024 and metallic/roughness to 512; remove normal/occlusion/emissive maps',
-            'Bind rigidly to the measured native hand/finger cavity without new bones, body masks or clips'],
+            'Bind rigidly to the measured native hand/finger cavity without new bones, body masks or clips',
+            ...(mount ? ['Place the shield rear surface outside the dorsal forearm, preserving the native hand anchor'] : [])],
         originalBounds: { min: sourceMin, max: sourceMax }, scale: source.scale };
     await writeFile('public' + path, output);
     await writeFile('public' + entry.bindingPath, bindingBytes);

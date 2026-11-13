@@ -38,3 +38,8 @@
     border-radius: 3px;
     background: var(--lab-swatch);
 }
+
+/* Both field equipment selectors need room for their item names. */
+.lab-combat-equipment {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}

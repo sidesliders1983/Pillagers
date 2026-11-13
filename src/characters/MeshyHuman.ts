@@ -1,3 +1,4 @@
+import { nativeEncounterPhase, type NativeEncounterPoseRequest } from './NativeEncounterPose';
 import { worldResidentDetail } from '../config/PresentationQuality';
 import {
  AnimationAction, AnimationClip, AnimationMixer, Bone, Box3, Group, LoopOnce, LoopRepeat, Material,
@@ -358,6 +359,8 @@ export class MeshyHuman {
  private playbackRateOverride: number | null = null;
  private nativeNeutral = false;
  private animationRotations = new Map<Bone, Quaternion>();
+ private animationPositions = new Map<Bone, Vector3>();
+ private encounterPoseKey?: string;
  private presentationClips = new Map<string, AnimationClip>();
  private action:AnimationAction|null=null;private materials:Material[]=[];private baseHeight:number;private disposed=false;
  constructor(source:GLTF,dna:CharacterDNA,readonly lod:number,profile?:HumanProfile,identity?:NativeBodyIdentity,face?:FacialShapeV1,
@@ -379,6 +382,7 @@ export class MeshyHuman {
     });
     this.scales.set(bone, bone.scale.clone());
     this.animationRotations.set(bone, bone.quaternion.clone());
+    this.animationPositions.set(bone, bone.position.clone());
    }
    if((node as Mesh).isMesh){
     const mesh=node as Mesh;mesh.castShadow=true;mesh.receiveShadow=true;
@@ -425,6 +429,8 @@ export class MeshyHuman {
  }
  /** forceRefit retains the complete original fitting path for verification and fallback. */
  applyDNA(input:CharacterDNA,override?:HumanProfile,options:{forceRefit?:boolean;face?:FacialShapeV1}={}){
+  this.encounterPoseKey = undefined;
+  delete this.root.userData.encounterPose;
   if (options.face) {
    const face = parseFacialShape(options.face);
    if (!this.fit.mesh.geometry.morphAttributes.position?.length)
@@ -538,9 +544,39 @@ export class MeshyHuman {
   this.setAnimation('Idle');
   return true;
  }
+ /** Sample a recorded action without advancing a second animation or gameplay clock. */
+ sampleEncounterPose(request: NativeEncounterPoseRequest) {
+  if (this.disposed) return false;
+  const phase = nativeEncounterPhase(request);
+  const poseKey = JSON.stringify([request.key, request.action, phase, request.hasSpear, request.hasShield,
+   this.equipRevision, this.boundsShapeSignature]);
+  if (this.encounterPoseKey === poseKey) {
+   this.root.userData.encounterPose = { ...request, phase };
+   return true;
+  }
+  const clip = request.action === 'spear' || request.action === 'strike' ? 'Attack'
+   : request.action === 'death' ? 'Death' : 'Idle';
+  const duration = this.clips.find(value => value.name === meshyAnimationClips[clip])?.duration;
+  if (!duration) return false;
+  const sourcePhase = request.action === 'spear' ? .08 * Math.sin(Math.PI * phase) : phase;
+  this.sampleAnimation(clip, duration * sourcePhase);
+  const hips = this.bones[0], rest = this.rest.get(hips)!;
+  hips.position.x = rest.position.x;
+  hips.position.z = rest.position.z;
+  const torso = this.bones.find(bone => bone.name.endsWith('Spine2'));
+  if (torso && request.action === 'brace') torso.rotateX(-.16 * Math.sin(Math.PI * phase));
+  if (torso && request.action === 'withdraw') torso.rotateX(-.10);
+  this.modules.poseEncounterAction(this.animationRotations, request, phase);
+  this.modules.poseHair();
+  this.root.userData.encounterPose = { ...request, phase };
+  this.encounterPoseKey = poseKey;
+  return true;
+ }
  setMovementSpeed(speed:number){this.setAnimation(speed<.03?'Idle':speed<1.4?'Walk':'Run');}
  setAnimation(state:MeshyAnimation){this.playClip(meshyAnimationClips[state],state);}
  playClip(name:string,state:MeshyAnimation='Idle'){
+  this.encounterPoseKey = undefined;
+  delete this.root.userData.encounterPose;
   if (this.nativeNeutral) this.applyDNA(this.dna, this.profile);
   const semantic=Object.entries(meshyAnimationClips).find(([,clip])=>clip===name)?.[0] as MeshyAnimation|undefined;if(semantic)state=semantic;
   const clip=this.clips.find(clip=>clip.name===name) ?? this.presentationClips.get(name);if(!clip)throw new Error('Missing human animation: '+name);
@@ -554,6 +590,8 @@ export class MeshyHuman {
   if (!this.action || !Number.isFinite(time) || time < 0) {
    throw new Error('Invalid animation sample');
   }
+  this.encounterPoseKey = undefined;
+  delete this.root.userData.encounterPose;
   this.mixer.stopAllAction();
   for (const bone of this.bones) bone.quaternion.copy(this.rest.get(bone)!.rotation);
   this.action.reset().play();
@@ -565,6 +603,8 @@ export class MeshyHuman {
  }
  /** Restore the exact source skeleton and scale for reference views and initial review. */
  sampleNativeNeutral() {
+  this.encounterPoseKey = undefined;
+  delete this.root.userData.encounterPose;
   this.fit.mesh.morphTargetInfluences?.fill(0);
   this.mixer.stopAllAction();
   this.action = null;
@@ -616,12 +656,20 @@ export class MeshyHuman {
   this.modules.poseEquipmentGrips(this.animationRotations, false, this.carryPoseEnabled);
  }
  private captureAnimationRotations() {
-  for (const bone of this.bones) this.animationRotations.get(bone)!.copy(bone.quaternion);
+  for (const bone of this.bones) {
+   this.animationRotations.get(bone)!.copy(bone.quaternion);
+   this.animationPositions.get(bone)!.copy(bone.position);
+  }
  }
  update(delta: number, _distance?: number) {
   if (this.disposed || this.nativeNeutral) return;
+  this.encounterPoseKey = undefined;
+  delete this.root.userData.encounterPose;
   // The mixer skips unchanged tracks. Restore its last output, then apply DNA shaping once.
-  for (const bone of this.bones) bone.quaternion.copy(this.animationRotations.get(bone)!);
+  for (const bone of this.bones) {
+   bone.quaternion.copy(this.animationRotations.get(bone)!);
+   bone.position.copy(this.animationPositions.get(bone)!);
+  }
   this.mixer.update(delta);
   if (this.action && this.presentationClips.has(this.action.getClip().name) && !this.action.isRunning()) {
    this.setAnimation('Idle');

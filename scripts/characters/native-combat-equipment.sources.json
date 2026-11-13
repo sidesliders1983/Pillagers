@@ -30,7 +30,8 @@
     "scale": 0.78,
     "hand": "left",
     "rights": "User-supplied Meshy export from the owner-provided Drive folder for Pillagers #309.",
-    "driveFolderId": "1KLQh4TMMHZmr6WPw2UpUOzJRMUouGaVV"
+    "driveFolderId": "1KLQh4TMMHZmr6WPw2UpUOzJRMUouGaVV",
+    "rearMountOffsetMetres": 0.112
   },
   {
     "item": "leatherShield",
@@ -46,6 +47,7 @@
     "scale": 0.78,
     "hand": "left",
     "rights": "User-supplied Meshy export from the owner-provided Drive folder for Pillagers #309.",
-    "driveFolderId": "1KLQh4TMMHZmr6WPw2UpUOzJRMUouGaVV"
+    "driveFolderId": "1KLQh4TMMHZmr6WPw2UpUOzJRMUouGaVV",
+    "rearMountOffsetMetres": 0.077
   }
 ]
