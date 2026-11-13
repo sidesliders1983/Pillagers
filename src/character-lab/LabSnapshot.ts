@@ -1,3 +1,4 @@
+import { labCombatAnimations, labCombatAnimationAvailable } from './LabCombatPreview';
 import { LabBodyPresentation, defaultLabBodyPresentation, parseLabBodyPresentation } from '../characters/LabBodyPresentation';
 import { CharacterDNA, parseCharacterDNA } from '../characters/CharacterDNA';
 import { CharacterPresentation, parseCharacterPresentation, resolveCharacterPresentation } from '../characters/CharacterPresentation';
@@ -49,12 +50,14 @@ export function parseLabSnapshot(value:unknown):LabTestSnapshot {
     if (face && !isMeshyLabBodySource(body.source))
         throw new Error('Facial identity requires the native Meshy body.');
     if(s.styleVersion!==source.styleVersion)throw new Error('Snapshot style differs from the selected body source.');
-    if(!s.pose||!([...characterContract.animations,...(isMeshyLabBodySource(body.source)?[...meshyHumanAvailableClips,...humanExtraAnimations.clips,nativeNeutralPose]:[])] as readonly string[]).includes(s.pose.animation)||!Number.isFinite(s.pose.time)||s.pose.time<0||s.pose.time>60||typeof s.pose.paused!=='boolean')throw new Error('Invalid snapshot animation or clip time (0–60 seconds).');
+    if(!s.pose||!([...characterContract.animations,...(isMeshyLabBodySource(body.source)?[...meshyHumanAvailableClips,...humanExtraAnimations.clips,nativeNeutralPose,...labCombatAnimations.map(animation=>animation.id)]:[])] as readonly string[]).includes(s.pose.animation)||!Number.isFinite(s.pose.time)||s.pose.time<0||s.pose.time>60||typeof s.pose.paused!=='boolean')throw new Error('Invalid snapshot animation or clip time (0–60 seconds).');
     if(s.pose.animation===nativeNeutralPose&&(s.pose.time!==0||!s.pose.paused))throw new Error('Native neutral snapshots must be paused at time zero.');
     if(!s.camera||!['perspective','orthographic'].includes(s.camera.type)||s.camera.fov!==38||(s.camera.type==='perspective'?s.camera.scale!==null:!Number.isFinite(s.camera.scale)||s.camera.scale!<.5||s.camera.scale!>10))throw new Error('Invalid snapshot camera type or fixed scale.');
     const point=(v:unknown)=>Array.isArray(v)&&v.length===3&&v.every(n=>typeof n==='number'&&Number.isFinite(n)&&Math.abs(n)<=60);
     if(!s.camera||!point(s.camera.position)||!point(s.camera.target)||Math.hypot(...s.camera.position.map((n,i)=>n-s.camera.target[i]))<2-1e-6||Math.hypot(...s.camera.position.map((n,i)=>n-s.camera.target[i]))>14+1e-6||s.camera.position[1]<s.camera.target[1]-1e-6)throw new Error('Invalid snapshot camera.');
     const modules=snapshotModules(dna,presentation,s.lod,body);
+    if (!labCombatAnimationAvailable(s.pose.animation, modules.map(module => module.id)))
+        throw new Error('Combat review pose does not match its equipped combat equipment.');
     if(!Array.isArray(s.modules)||JSON.stringify(s.modules)!==JSON.stringify(modules))throw new Error('Snapshot assets differ from the current registry. Capture a new snapshot deliberately.');
     return {version:labSnapshotVersion,styleVersion:source.styleVersion,contractVersion:1,fitVersion:s.fitVersion,dna,presentation,body,lod:s.lod,pose:{...s.pose},camera:{type:s.camera.type,scale:s.camera.scale,fov:38,position:[...s.camera.position],target:[...s.camera.target]},lighting:'lab-neutral/1',modules,...(face ? {face} : {})};
 }

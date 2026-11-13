@@ -52,6 +52,30 @@ measured native hand/finger grips. They do not mask or replace the tunic. Native
 Idle/Walk/Run carry posing reuses the existing clock; combat action authoring and
 its arm/finger precedence follow [encounter presentation](ENCOUNTER-PRESENTATION-V1.md).
 
+## Character Lab review
+
+Open `/character-lab?combat=ready` for the normal field tunic, low shoes, supplied
+spear and wooden shield. Add `&shield=leather` for the leather-reinforced shield.
+The Combat review panel also loads the field outfit on the current identity and
+provides independent Weapon and Shield choices. Loading it removes occupational
+hats/tools and preserves the current face, body, hair and beard. It does not equip
+any resident or modify a campaign. Existing native age/binding requirements apply.
+
+The Animation selector includes Ready, Spear action, Unarmed strike, Shield
+defence, Brace, Withdrawal and Fall. These reuse FjordSide's native encounter pose
+sampler, including its spear/hand corrections, rather than previewing only the raw
+source Attack clip. Spear and shield actions require their actual installed prop;
+the unarmed strike requires an empty weapon hand. Removing required gear returns the review
+to Ready. Front, Side, Back, Freeze pose and Play use the existing Lab renderer.
+Combat reviews play once and stop at the end; Play then restarts them. The displayed
+review duration maps to the same normalized game action phase, not a new gameplay
+clock or combat balance value.
+
+Exported Lab snapshots retain both props, identity, camera and the exact combat
+review time. Import and pinned comparisons restore that pose. Static posed GLB
+exports include the frozen combat pose; rigged GLB exports still contain only the
+original source animation clips, so use the static export for a combat pose.
+
 ## Reconciliation, portraits and privacy
 
 The native presentation contract adds optional `equipmentItems`, containing up to

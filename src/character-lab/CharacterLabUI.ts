@@ -13,6 +13,7 @@ import { LabBodyPresentation, LabBodyPreset, defaultLabBodyPresentation, preview
 import { goldenLabBody, labBodyAsset, labCandidatePresetNames, isMeshyLabBodySource } from '../characters/LabBodySources';
 import { characterAsset } from '../characters/CharacterAssets';
 import {gridTrialOutfitId} from '../characters/GridTrialOutfitCatalog';
+import { nativeCombatEquipmentByItem } from '../characters/NativeCombatEquipmentCatalog';
 import { CharacterPresentation, GarmentChoiceKey, defaultCharacterPresentation, presentationChoices, presentationModuleFields, separateGarmentKeys, resolveCharacterPresentation, outfitAllowsSeparateFootwear } from '../characters/CharacterPresentation';
 
 import { ModuleAgeRange, loadNativeModuleAgeRange, moduleAvailableAtAge, nativeModuleAgeKey } from '../characters/NativeModuleAgePolicy';
@@ -24,7 +25,7 @@ const traitInfo:Record<TraitKey,{label:string;low:string;high:string}>={
     cunning:{label:'Cunning',low:'Straightforward',high:'Crafty / opportunistic'},
     temperament:{label:'Temperament',low:'Calm / restrained',high:'Fierce / volatile'},
 };
-export type LabAction=`animation-${string}`|'reroll-name'|'reroll'|'randomize'|'defaults'|'pin'|'unpin'|'copy'|'export'|'import'|'export-glb'|'export-static-glb'|'reset-view'|'overview'|'idle'|'walk'|'run'|'lod0'|'lod1'|'lod2'|`debug-${'sockets'|'landmarks'|'cages'|'coverage'|'bounds'}`|`preset-${keyof typeof fitPresetLabels}`|`golden-${string}`|`view-${'front'|'side'|'back'}`|'freeze-pose'|'play'|'golden-base'|'reset-presentation'|'snapshot-export'|'snapshot-import'|'reset-lab'|'reset-body'|'portrait';
+export type LabAction=`animation-${string}`|'reroll-name'|'reroll'|'randomize'|'defaults'|'pin'|'unpin'|'copy'|'export'|'import'|'export-glb'|'export-static-glb'|'reset-view'|'overview'|'idle'|'walk'|'run'|'lod0'|'lod1'|'lod2'|`debug-${'sockets'|'landmarks'|'cages'|'coverage'|'bounds'}`|`preset-${keyof typeof fitPresetLabels}`|`golden-${string}`|`view-${'front'|'side'|'back'}`|'freeze-pose'|'play'|'golden-base'|'reset-presentation'|'snapshot-export'|'snapshot-import'|'reset-lab'|'reset-body'|'portrait'|'combat-outfit';
 export class CharacterLabUI {
     private dna:CharacterDNA;
     private presentation:CharacterPresentation={...defaultCharacterPresentation};
@@ -55,6 +56,16 @@ export class CharacterLabUI {
                     <div class="lab-stage-heading"><span class="lab-eyebrow">LIVE PHENOTYPE</span><span id="lab-dominant"></span></div>
                     <canvas id="lab-preview" aria-label="Universal Human. Drag to rotate, scroll or pinch to zoom."></canvas>
                     <div class="lab-source-controls"><label>Body source<select id="lab-body-source"><option value="meshy">Meshy Human · textured</option><option value="golden-v04-preview">v0.4 · new body preview</option><option value="published">Published body · existing modules</option></select></label><p class="lab-note" id="lab-source-status"></p></div>
+                    <section class="lab-panel" aria-label="Combat review">
+                        <h2>Combat review</h2>
+                        <p class="lab-note">Inspect the normal field tunic with the supplied spear and shield models on this character's native rig.</p>
+                        <button data-action="combat-outfit">Load field outfit</button>
+                        <div class="lab-identity">
+                            <label>Weapon<select id="lab-combat-weapon"><option value="none">None</option><option value="${nativeCombatEquipmentByItem.woodenSpear}">Wooden spear</option></select></label>
+                            <label>Shield<select id="lab-combat-shield"><option value="none">None</option><option value="${nativeCombatEquipmentByItem.woodenShield}">Wooden shield</option><option value="${nativeCombatEquipmentByItem.leatherShield}">Leather-reinforced shield</option></select></label>
+                        </div>
+                        <p id="lab-combat-status" class="lab-note"></p>
+                    </section>
                     <label class="lab-source-controls">Animation<select id="lab-animation" aria-label="Available animations"></select></label>
                     <div id="lab-ground-controls" class="lab-ground-controls"></div>
                     <div class="lab-button-row lab-model-tools" aria-label="Level of detail"><button data-action="lod0">LOD0</button><button data-action="lod1">LOD1</button><button data-action="lod2">LOD2</button></div>
@@ -143,6 +154,10 @@ export class CharacterLabUI {
             const choice=event.target as HTMLInputElement;
             if(choice.id==='lab-character-type'){const url=new URL(location.href);if(choice.value==='cow')url.searchParams.set('model','cow');else{url.searchParams.delete('model');url.searchParams.delete('variant');url.searchParams.delete('animation');}location.href=url.pathname+url.search+url.hash;return;}
             if(choice.id==='lab-animation'){this.onAction(`animation-${choice.value}`);return;}
+            if (choice.id === 'lab-combat-weapon' || choice.id === 'lab-combat-shield') {
+                this.setCombatItem(choice.id === 'lab-combat-weapon' ? 'socket_hand_R' : 'socket_hand_L', choice.value);
+                return;
+            }
             if(choice.id==='lab-body-source'){this.onBody(isMeshyLabBodySource(choice.value)?{version:1,preset:'auto',source:choice.value}:choice.value===goldenLabBody.source?{...previewLabBodyPresentation}:{...defaultLabBodyPresentation});return;}
             if(choice.id==='lab-body-preset'){this.onBody({version:1,preset:choice.value as LabBodyPreset,...(this.body.source?{source:this.body.source}:{})});return;}
             if (choice.dataset.presentation) {
@@ -156,6 +171,12 @@ export class CharacterLabUI {
                     choice.value !== 'none') {
                     if (key !== 'shoes' || !outfitAllowsSeparateFootwear(next.outfit)) next.outfit = 'none';
                 }
+                if (key === 'equipment' || key === 'equipmentSocket') {
+                    const scalar = resolveCharacterPresentation(this.dna, {...next, equipmentItems: []},
+                        labBodyAsset(this.body.source ?? 'published', 2));
+                    next.equipmentItems = (this.presentation.equipmentItems ?? []).filter(id =>
+                        id !== scalar.equipmentId && characterAsset(id).metadata?.anchor !== scalar.equipmentSocket);
+                }
                 this.onPresentation(next);
                 return;
             }
@@ -166,6 +187,49 @@ export class CharacterLabUI {
             if((event.target as HTMLElement).id==='lab-seed'&&!(event.target as HTMLInputElement).value){(event.target as HTMLInputElement).value=String(this.dna.seed);}
         });
     }
+    private setCombatItem(hand: 'socket_hand_R' | 'socket_hand_L', id: string) {
+        const selected = resolveCharacterPresentation(this.dna, this.presentation,
+            labBodyAsset(this.body.source ?? 'published', 2));
+        const next = {...this.presentation};
+        next.equipmentItems = (next.equipmentItems ?? []).filter(item =>
+            characterAsset(item).metadata?.anchor !== hand);
+        if (selected.equipmentSocket === hand) {
+            next.equipment = 'none';
+            next.equipmentSocket = 'auto';
+        }
+        if (id !== 'none') next.equipmentItems = [...next.equipmentItems, id];
+        this.onPresentation(next);
+    }
+
+    private updateCombatChoices() {
+        const native = isMeshyLabBodySource(this.body.source);
+        const eligible = native && this.dna.age >= 16;
+        const selected = resolveCharacterPresentation(this.dna, this.presentation,
+            labBodyAsset(this.body.source ?? 'published', 2));
+        const combat = nativeCombatEquipmentByItem;
+        for (const [id, items] of [
+            ['lab-combat-weapon', [combat.woodenSpear]],
+            ['lab-combat-shield', [combat.woodenShield, combat.leatherShield]],
+        ] as const) {
+            const select = document.getElementById(id) as HTMLSelectElement;
+            select.disabled = !eligible;
+            for (const option of Array.from(select.options)) {
+                if (option.value === 'none') continue;
+                const asset = characterAsset(option.value);
+                option.disabled = !eligible || !moduleAvailableAtAge(asset, this.dna.age,
+                    this.moduleAges.get(nativeModuleAgeKey(asset)));
+            }
+            select.value = selected.equipmentIds.find(item =>
+                (items as readonly string[]).includes(item)) ?? 'none';
+        }
+        (document.querySelector('[data-action="combat-outfit"]') as HTMLButtonElement).disabled =
+            this.dna.age < 16;
+        document.getElementById('lab-combat-status')!.textContent = this.dna.age < 16
+            ? 'Field clothing and combat props are available from age 16. The character keeps their real age.'
+            : !native ? 'Load the field outfit to use the native Meshy body and its combat props.'
+            : 'Choose a combat preview in Animation, then use Freeze pose and Front / Side / Back to inspect the fit. Each hand holds one item.';
+    }
+
     private updateModuleChoices() {
         const body = labBodyAsset(this.body.source ?? 'published', 2);
         const selected = resolveCharacterPresentation(this.dna, this.presentation, body);
@@ -217,6 +281,7 @@ export class CharacterLabUI {
             select.disabled = separate && !native ||
                 key === 'beard' && !(this.dna.age >= 18 && universalHumanProfile(this.dna).masculinity > .5);
         }
+        this.updateCombatChoices();
     }
     update(dna:CharacterDNA,phenotype:Phenotype,comparison:CharacterDNA|null,presentation:CharacterPresentation=defaultCharacterPresentation,bodyPresentation:LabBodyPresentation=defaultLabBodyPresentation){
         this.dna=cloneDNA(dna);this.presentation={...presentation};this.body=bodyPresentation;
