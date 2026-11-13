@@ -20,6 +20,13 @@ merge those drafts or publish to Sites. Owner-approved trial rules are in
   bindings, qualification samples and measured limits. Geometry qualification
   and physical-device acceptance are distinct.
 
+Current retained clean-build observations: [12 public UI steps](browser/ui/report.json),
+[13 native stills and replayable snapshots/video](browser/native/report.json),
+[bounded rendering cost](browser/rendering/summary.md), and the
+[acceptance matrix](acceptance.md). Browser code is pinned to 7f756202;
+[production-input equivalence](browser/build-equivalence.json) covers the
+subsequent evidence-only change. Physical device and owner acceptance are pending.
+
 ## Local review campaign
 
 Run from this worktree:

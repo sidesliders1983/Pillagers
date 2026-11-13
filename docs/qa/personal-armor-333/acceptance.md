@@ -1,24 +1,28 @@
 # Personal armor #333 — acceptance status
 
-This is a combined-playtest checklist, not owner or release acceptance. The
-implementation uses vest model 1083a715439a5a2acb3b714908070802459d3d0b8f72eb5d270956f9152c002a
-and binding 8f9653339f32015fd46d56198110e28d4c0ea9c3f466658e992356b8b2d2e4c8.
-Implementation commit: 99a254fa6eee76c401981b795b32f20d801c6eae. Final clean built-candidate checks are pending below.
-Earlier observations retain their actual source/build scope.
+This is a combined-playtest checklist, not owner or release acceptance.
+The implementation rules are pinned at 99a254fa6eee76c401981b795b32f20d801c6eae;
+current clean browser build: **7f756202b47e30ad9db6b96f95eea1aa56cedeb3**.
+The evidence-only follow-up preserves its production inputs; see
+[build equivalence](browser/build-equivalence.json) and the
+[exact retained file hashes](browser/retained-files.json).
+Earlier failures and measurements retain their actual source scope in
+[regression history](regression-history.md).
 
 | Check | Status | Evidence and limits |
 | --- | --- | --- |
-| Canonical recipes, actual production, four-slot ownership, individual protection/cap, loss/transfer, save/replay and historical/RNG parity | **PASS** | 75 focused Core tests passed. Current gameplay contract: [Personal armor v0.1](../../gameplay/PERSONAL-ARMOR-V01.md). No replacement resolver or fabricated finished stock. |
-| Repeatable balance comparison | **PASS** | [4,224 public Core trials](balance.md), 33 loadouts × 128 matched recorded seeds; [raw results](balance.json) and [real production receipts](production-provenance.json). The unchanged ally retains its exact casualty seed set. This is bounded evidence, not fine balance certification. |
-| Public UI journeys on provisional, dirty candidates | **PASS — historical** | 12 observed steps passed with no observed page errors: ordinary home/field file loading, four actual slots, reassignment, preparation, own-person presentation, export/reimport and compact desktop/touch-emulated controls. Local report: `scratch/personal-armor-browser/ui-integrated-1794568146585/report.json`. The portable runner also passed all 12 steps on a585 fitting data (`scratch/personal-armor-browser/ui-2026-11-13T14-10-28-829Z/report.json`). Neither observation accepts the final clean build. |
-| Public UI journeys on the final clean commit | **NOT TESTED** | Rerun [the public UI runner](../../../scripts/qa/check-personal-armor-ui.mjs) against the exact clean built commit, retain build identity, screenshots and errors. |
-| Native helmet geometry and legacy cap parity | **PASS — bounded pinned samples** | [Helmet qualification](helmet-qualification.json): the unchanged 861 head/hair/beard samples pass on the final correction, plus [84 both-spear transitions and 20 Death/grasp/floor samples](death-forearm-regression.json), and 252 spear/shield motion states (357 exact pair checks); [legacy cap parity](legacy-cap-parity.json). The report pins tested source/assets. It does not cover every character or physical device. |
-| Vest source preparation and visible tunic/body composite | **READY FOR BOUNDED OWNER REVIEW — limits remain** | Actual textured Idle/Spear views are substantially clean at normal Lab framing. The final Death correction leaves cloth at least 7.087 mm behind the outer vest in the bounded 121 comparable central-back rays (the earlier 4.547 mm contact is historical). Opening-edge signals and broader unresolved surface rays remain for rendered review. The [dark spot](death-dark-spot-classification.json) is opaque inner lining/fold shadow with intact tunic behind it. Strict source self-crossing diagnostics remain RED; no zero-contact or owner fit acceptance is claimed. [Source audit](../../assets/NATIVE-PERSONAL-ARMOR-333.md), [fit-only mechanical contract](underlay-runtime-contract.json). |
-| Bounded composite mechanics and LOD samples | **PASS — bounded; visual diagnostics remain** | [45 cases / 90 paired evaluations](BOUNDED-COMPOSITE-REVIEW.md) retain exact source identities, finite native evaluation, one native rig, no frame-time fitting and exact restoration. LOD0 garment delta ≤0.4833 mm; LOD1/2 equal in the four matched poses. Raw forearm rays remain unresolved; no zero-gap or owner-acceptance claim. |
-| Existing character/Lab contracts | **PASS** | Full local validation: 20 assets / 36 GLBs, 12 Golden Characters, 19 equipped modules, Idle/Walk/Run and World; visual owner approval is separate. |
-| Actual rendering cost and retained GPU-resource deltas | **NOT TESTED** | [Performance runner](../../../scripts/qa/measure-personal-armor-rendering.mjs) is prepared; no actual renderer measurements have run. Required: fixed-DNA/camera/LOD/no-armor, body-only, helmet-only and both; repeated off/on cycles; actual draws/triangles/resources and callback wall time, plus GPU query samples when supported. |
-| Physical iPhone rendering, touch, frame pacing and heat | **NOT TESTED** | Browser touch emulation and desktop timings cannot certify this. |
-| Owner combined combat/offense UAT | **NOT TESTED** | Pending owner review after the fitting blockers and final built-candidate checks are resolved. |
+| Recipes, real production, four-slot ownership, individual protection/cap, loss/transfer, save/replay and historical/RNG parity | **PASS** | 75 focused Core tests. Current contract: [Personal armor v0.1](../../gameplay/PERSONAL-ARMOR-V01.md). No replacement resolver or fabricated finished stock. |
+| Repeatable balance comparison | **PASS — bounded** | [4,224 public Core trials](balance.md), 33 loadouts × 128 matched recorded seeds, with [real production receipts](production-provenance.json). The unchanged ally retains its exact casualty seed set. Not fine balance certification. |
+| Public UI on the current clean production build | **PASS** | [12 observed steps](browser/ui/report.json), desktop and touch-emulated landscape: ordinary home/field import and Continue, four actual slots, independent transfer/back, real Pillage preview/Back, native scene/Card, canonical export/reimport and pause/time/RNG/stock conservation. No page/console/HTTP errors. Physical touch is separate. |
+| Native helmet, source-grasp and Death correction | **PASS — bounded** | [861 unchanged helmet samples plus 84 both-spear transitions and 20 Death samples](death-forearm-regression.json). Actual body/shaft/helmet/floor and native-fall parity checks stay strict. The previous full-suite failure is recorded, not reclassified as a pass. |
+| Vest/helmet against hand props | **PASS — bounded** | Current [vest](vest-prop-qualification.json) and [helmet](helmet-props-after-death-fix.json) reports: each 252 motion states / 357 exact pair checks on the final runtime. |
+| Composite mechanics, original-clothes restoration and LOD samples | **PASS — bounded diagnostics remain** | [45 cases / 90 paired evaluations](BOUNDED-COMPOSITE-REVIEW.md), one 44-bone native rig, finite points, preserved DNA, no frame-time fitting, exact restoration. Matched LOD0 delta ≤0.483248 mm; LOD1/2 equal in those samples. 39 potential-gap cases and broad forearm/cross-patch rays remain explicit, not pixel-coverage verdicts. |
+| Actual textured native rendering | **REVIEWED — owner QA pending** | [13 stills, seven exact snapshots and six live actions](browser/native/report.json); [bounded visual review](browser/visual-review.md). Small jagged shoulder/armhole cloth edges and dark Death-panel flecks remain. The [current central-back probe](death-central-back-current.json) leaves cloth ≥7.087 mm behind the outer vest in 121 comparable rays; prior 4.547 mm contact is historical. Source-self diagnostics remain RED. No zero-contact or all-body fit acceptance is claimed. |
+| Existing character/Lab contracts | **PASS locally; exact-head CI required** | Full local validation: 20 assets / 36 GLBs, 12 Golden Characters, 19 equipped modules, Idle/Walk/Run and World. Current assets remain byte-pinned. |
+| Actual desktop rendering cost and retained resources | **MEASURED — bounded** | [Raw report](browser/rendering/report.json), [summary](browser/rendering/summary.md). Fixed-DNA LOD2 Iron Spear/Shield comparison: +14,157 native triangles (including fitted hair), +2 materials/+2 texture objects, actual draws 19→23 and submitted triangles 386,806→415,120. Thirty GPU samples per profile; median baseline/both 7.294/7.468 ms. Aggregate thread-CPU and callback-wall counters are separately labelled. Three warm on/off cycles plateau; two textures remain cached when armor is removed. No precise causal-cost or phone-FPS claim. |
+| Full regression on the final PR head | **EXACT-HEAD CI** | [PR #335 checks](https://github.com/sidesliders1983/Pillagers/pull/335/checks) must succeed before ready/merge. The ten inherited private-source/opt-in skips and previous 8e87768e failure are detailed in [regression history](regression-history.md); no test gate was weakened. |
+| Physical iPhone rendering, touch, frame pacing and heat | **NOT TESTED** | Browser emulation and Intel HD Graphics 630 / ANGLE / D3D11 desktop observations cannot certify this. |
+| Owner combined combat/offense UAT | **NOT TESTED** | Pending owner review of the current candidate and the explicit visual limits. |
 
 ## Public review steps
 
@@ -47,5 +51,5 @@ starting supplies are explicit test settings.
    Character Lab for repeatable front/side/rear motion inspection; it does not
    manufacture campaign items. Include a physical iPhone run separately.
 
-Final acceptance must replace pending rows with evidence tied to the exact clean
-commit and current assets. Keep earlier measurements as historical records.
+Owner acceptance remains separate from these automated and bounded rendered checks.
+Keep earlier measurements as historical records.
