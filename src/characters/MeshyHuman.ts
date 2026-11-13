@@ -339,12 +339,16 @@ export class MeshyHuman {
   const installed = this.nativeSources.filter(source => this.fit.modules.has(source.asset.id));
   const assetOfType = (type: string) => installed.find(source => source.asset.type === type)?.asset.id ?? null;
   const garmentAt = (...slots: string[]) => installed.find(source =>
-   source.asset.type === 'garment' && slots.includes(source.asset.metadata?.slot ?? ''))?.asset.id ?? null;
+   source.asset.type === 'garment' && !source.binding.bodyArmorLayer
+    && slots.includes(source.asset.metadata?.slot ?? ''))?.asset.id ?? null;
   this.root.userData.selectedAssets = {
    hair: assetOfType('hair'), beard: assetOfType('beard'), headwear: assetOfType('headwear'),
    outfit: garmentAt('full'), shoes: garmentAt('footwear'),
    trousers: garmentAt('lower'), top: garmentAt('upper', 'over'),
    equipment: assetOfType('equipment'),
+   ...(installed.some(source => source.binding.bodyArmorLayer) ? {
+    bodyArmor: installed.find(source => source.binding.bodyArmorLayer)!.asset.id,
+   } : {}),
    ...(this.root.userData.presentation?.equipmentItems?.length ? {
     equipmentItems: installed.filter(source => source.asset.type === 'equipment').map(source => source.asset.id),
    } : {}),

@@ -447,7 +447,9 @@ function validateState(state: SimulationState): void {
         if (person.occupation !== null && !occupations.includes(person.occupation)) throw new Error('Unknown occupation');
         let previousEnd = 0;
         person.occupationHistory.forEach((entry, index) => {
-            if (!occupations.includes(entry.occupation)) throw new Error('Invalid occupation history');
+            // A transferred resident keeps genuine mining history even where that job is unavailable.
+            if (!occupations.includes(entry.occupation) && entry.occupation !== 'miner')
+                throw new Error('Invalid occupation history');
             const start = timeValue(entry.startedAt);
             if (start < previousEnd) throw new Error('Overlapping occupation history');
             if (entry.endedAt === null) {

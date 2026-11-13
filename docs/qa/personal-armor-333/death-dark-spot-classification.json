@@ -1,0 +1,179 @@
+{
+  "version": 1,
+  "scope": "Actual saved Lab Death snapshot; side orthographic camera and canvas pixel coordinates; exact first visible native mesh ray plus source vest texture sample. No geometry or image was changed.",
+  "modelSha256": "1083a715439a5a2acb3b714908070802459d3d0b8f72eb5d270956f9152c002a",
+  "records": [
+    {
+      "pixel": [
+        810,
+        884
+      ],
+      "firstMesh": "Module_native_leather_body_armor",
+      "triangle": 3393,
+      "point": [
+        0.08606667695761017,
+        0.3895911978362262,
+        0.14010220054094255
+      ],
+      "uv": [
+        0.6587385917728733,
+        0.1120907643574105
+      ],
+      "vestAlbedoPixel": [
+        674,
+        114
+      ],
+      "vestAlbedoRGB": [
+        50,
+        24,
+        7
+      ],
+      "subsequent": [
+        {
+          "mesh": "Module_native_leather_body_armor",
+          "triangle": 1780,
+          "distanceFromFirst": 0.002507870298932957
+        },
+        {
+          "mesh": "Module_grid_trial_top_0",
+          "triangle": 35728,
+          "distanceFromFirst": 0.01273023220578473
+        },
+        {
+          "mesh": "Module_grid_trial_top_0",
+          "triangle": 36025,
+          "distanceFromFirst": 0.013832755838868671
+        }
+      ]
+    },
+    {
+      "pixel": [
+        807,
+        881
+      ],
+      "firstMesh": "Module_native_leather_body_armor",
+      "triangle": 3393,
+      "point": [
+        0.08300241403898934,
+        0.395121547857579,
+        0.14563255056229568
+      ],
+      "uv": [
+        0.6562560313945616,
+        0.11488899688016875
+      ],
+      "vestAlbedoPixel": [
+        672,
+        117
+      ],
+      "vestAlbedoRGB": [
+        49,
+        23,
+        6
+      ],
+      "subsequent": [
+        {
+          "mesh": "Module_native_leather_body_armor",
+          "triangle": 3711,
+          "distanceFromFirst": 0.0036300068967687338
+        },
+        {
+          "mesh": "Module_grid_trial_top_0",
+          "triangle": 35728,
+          "distanceFromFirst": 0.010848604995792765
+        },
+        {
+          "mesh": "Module_grid_trial_top_0",
+          "triangle": 36025,
+          "distanceFromFirst": 0.013101366083411392
+        }
+      ]
+    },
+    {
+      "pixel": [
+        813,
+        885
+      ],
+      "firstMesh": "Module_native_leather_body_armor",
+      "triangle": 2425,
+      "point": [
+        0.08966028313954633,
+        0.38774774782910837,
+        0.13457185051958961
+      ],
+      "uv": [
+        0.6620172490239232,
+        0.11157371544624228
+      ],
+      "vestAlbedoPixel": [
+        677,
+        114
+      ],
+      "vestAlbedoRGB": [
+        50,
+        24,
+        7
+      ],
+      "subsequent": [
+        {
+          "mesh": "Module_native_leather_body_armor",
+          "triangle": 1780,
+          "distanceFromFirst": 0.0014728684862315156
+        },
+        {
+          "mesh": "Module_grid_trial_top_0",
+          "triangle": 35728,
+          "distanceFromFirst": 0.01306610266060515
+        },
+        {
+          "mesh": "Module_grid_trial_top_0",
+          "triangle": 36025,
+          "distanceFromFirst": 0.013665929075684424
+        }
+      ]
+    },
+    {
+      "pixel": [
+        810,
+        889
+      ],
+      "firstMesh": "Module_native_leather_body_armor",
+      "triangle": 2425,
+      "point": [
+        0.08430073928238979,
+        0.3803739478006378,
+        0.14010220054094255
+      ],
+      "uv": [
+        0.6573643136378149,
+        0.10646773013938002
+      ],
+      "vestAlbedoPixel": [
+        673,
+        109
+      ],
+      "vestAlbedoRGB": [
+        50,
+        24,
+        7
+      ],
+      "subsequent": [
+        {
+          "mesh": "Module_native_leather_body_armor",
+          "triangle": 1780,
+          "distanceFromFirst": 0.00016440563062491975
+        },
+        {
+          "mesh": "Module_grid_trial_top_0",
+          "triangle": 35730,
+          "distanceFromFirst": 0.014518058982685211
+        },
+        {
+          "mesh": "Module_grid_trial_top_0",
+          "triangle": 36026,
+          "distanceFromFirst": 0.015344546476146803
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,501 @@
+{
+  "version": 1,
+  "derivationScriptSha256": "923cce0a2f2a26859c43976a05b866f02e704d4a78d1602792a9b2d91c277257",
+  "status": "Candidate fit-only recipe; actual textured combined owner acceptance pending",
+  "armorSha256": "1083a715439a5a2acb3b714908070802459d3d0b8f72eb5d270956f9152c002a",
+  "tunicSha256": "79794137e3e2bb33da24429d084cec0e5fb84711fdc4fd87c1568b1dabb4d52e",
+  "bodySourceSha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+  "bodyLOD": 2,
+  "sourceOwnerArmorSha256": "abfda0fa59265ea2275d2a9230dea57ccdda8dd85a922b174814bc35e2998488",
+  "dataSha256": "6e295089d296a494bbe450f267556aa8dbc1e8c88492caef01145e4a944aa5fc",
+  "sourceTunicVertices": 66875,
+  "fitVertices": 22067,
+  "nativeDonorVertices": 22063,
+  "maximumDiscardedNativeWeight": 0.1953309180800471,
+  "maximumDisplacementMetres": 0.06932891458934916,
+  "boundaryVertices": 5772,
+  "boundaryGeodesicFalloffMetres": 0.03,
+  "bodyCoverageChanged": false,
+  "indicesChanged": false,
+  "uvsChanged": false,
+  "method": "Nearest COMPLETE actual native body anchors; body+3mm under opaque main/belt/tab footprint,8mm tangent boundary,30mm source-cloth geodesic seam falloff; coherent actual native4 blended by the same fitted amount. Distant garment attributes remain exact.",
+  "largest": [
+    {
+      "vertex": 25822,
+      "anchor": {
+        "triangle": 1319,
+        "vertices": [
+          1403,
+          1398,
+          1404
+        ],
+        "barycentric": [
+          0,
+          0.7759047814544489,
+          0.22409521854555103
+        ],
+        "sourceDistance": 0.07232598481468126,
+        "regions": [
+          "TORSO_LOWER",
+          "PELVIS",
+          "TORSO_UPPER"
+        ]
+      },
+      "amount": 1,
+      "original": [
+        -0.04817821830511093,
+        1.0770089626312256,
+        -0.17055657505989075
+      ],
+      "position": [
+        -0.05555037839940942,
+        1.1123187994794963,
+        -0.1113504514287172
+      ],
+      "displacement": 0.06932891458934916,
+      "joints": [
+        0,
+        1,
+        22,
+        39
+      ],
+      "weights": [
+        0.43111331641148826,
+        0.3086980816588113,
+        0.1705170321161109,
+        0.08967156981358956
+      ],
+      "actualBodyDonorBlend": 1
+    },
+    {
+      "vertex": 31056,
+      "anchor": {
+        "triangle": 1319,
+        "vertices": [
+          1403,
+          1398,
+          1404
+        ],
+        "barycentric": [
+          0,
+          0.7759047814544489,
+          0.22409521854555103
+        ],
+        "sourceDistance": 0.07232598481468126,
+        "regions": [
+          "TORSO_LOWER",
+          "PELVIS",
+          "TORSO_UPPER"
+        ]
+      },
+      "amount": 1,
+      "original": [
+        -0.04817821830511093,
+        1.0770089626312256,
+        -0.17055657505989075
+      ],
+      "position": [
+        -0.05555037839940942,
+        1.1123187994794963,
+        -0.1113504514287172
+      ],
+      "displacement": 0.06932891458934916,
+      "joints": [
+        0,
+        1,
+        22,
+        39
+      ],
+      "weights": [
+        0.43111331641148826,
+        0.3086980816588113,
+        0.1705170321161109,
+        0.08967156981358956
+      ],
+      "actualBodyDonorBlend": 1
+    },
+    {
+      "vertex": 25823,
+      "anchor": {
+        "triangle": 1318,
+        "vertices": [
+          1402,
+          1398,
+          1403
+        ],
+        "barycentric": [
+          0.29092642173264605,
+          0.6225339282828296,
+          0.08653964998452439
+        ],
+        "sourceDistance": 0.07216336156299051,
+        "regions": [
+          "PELVIS",
+          "PELVIS",
+          "TORSO_LOWER"
+        ]
+      },
+      "amount": 1,
+      "original": [
+        -0.047426871955394745,
+        1.068414568901062,
+        -0.1689986139535904
+      ],
+      "position": [
+        -0.038832239418345474,
+        1.0787744840559337,
+        -0.10115780741187903
+      ],
+      "displacement": 0.06916336156299051,
+      "joints": [
+        0,
+        1,
+        39,
+        22
+      ],
+      "weights": [
+        0.5529638981996362,
+        0.2509752084988705,
+        0.09880123184592829,
+        0.09725966145556492
+      ],
+      "actualBodyDonorBlend": 1
+    },
+    {
+      "vertex": 31055,
+      "anchor": {
+        "triangle": 1318,
+        "vertices": [
+          1402,
+          1398,
+          1403
+        ],
+        "barycentric": [
+          0.29092642173264605,
+          0.6225339282828296,
+          0.08653964998452439
+        ],
+        "sourceDistance": 0.07216336156299051,
+        "regions": [
+          "PELVIS",
+          "PELVIS",
+          "TORSO_LOWER"
+        ]
+      },
+      "amount": 1,
+      "original": [
+        -0.047426871955394745,
+        1.068414568901062,
+        -0.1689986139535904
+      ],
+      "position": [
+        -0.038832239418345474,
+        1.0787744840559337,
+        -0.10115780741187903
+      ],
+      "displacement": 0.06916336156299051,
+      "joints": [
+        0,
+        1,
+        39,
+        22
+      ],
+      "weights": [
+        0.5529638981996362,
+        0.2509752084988705,
+        0.09880123184592829,
+        0.09725966145556492
+      ],
+      "actualBodyDonorBlend": 1
+    },
+    {
+      "vertex": 25821,
+      "anchor": {
+        "triangle": 1318,
+        "vertices": [
+          1402,
+          1398,
+          1403
+        ],
+        "barycentric": [
+          0.32129099075438805,
+          0.6282314181388484,
+          0.05047759110676356
+        ],
+        "sourceDistance": 0.07204901819691298,
+        "regions": [
+          "PELVIS",
+          "PELVIS",
+          "TORSO_LOWER"
+        ]
+      },
+      "amount": 1,
+      "original": [
+        -0.047699905931949615,
+        1.0651262998580933,
+        -0.16834530234336853
+      ],
+      "position": [
+        -0.03911948235166992,
+        1.0754690876272466,
+        -0.10061665267203036
+      ],
+      "displacement": 0.069049018196913,
+      "joints": [
+        0,
+        1,
+        39,
+        22
+      ],
+      "weights": [
+        0.5649364985382445,
+        0.23840464782124812,
+        0.1025397327000742,
+        0.09411912094043322
+      ],
+      "actualBodyDonorBlend": 1
+    },
+    {
+      "vertex": 31053,
+      "anchor": {
+        "triangle": 1318,
+        "vertices": [
+          1402,
+          1398,
+          1403
+        ],
+        "barycentric": [
+          0.32129099075438805,
+          0.6282314181388484,
+          0.05047759110676356
+        ],
+        "sourceDistance": 0.07204901819691298,
+        "regions": [
+          "PELVIS",
+          "PELVIS",
+          "TORSO_LOWER"
+        ]
+      },
+      "amount": 1,
+      "original": [
+        -0.047699905931949615,
+        1.0651262998580933,
+        -0.16834530234336853
+      ],
+      "position": [
+        -0.03911948235166992,
+        1.0754690876272466,
+        -0.10061665267203036
+      ],
+      "displacement": 0.069049018196913,
+      "joints": [
+        0,
+        1,
+        39,
+        22
+      ],
+      "weights": [
+        0.5649364985382445,
+        0.23840464782124812,
+        0.1025397327000742,
+        0.09411912094043322
+      ],
+      "actualBodyDonorBlend": 1
+    },
+    {
+      "vertex": 25825,
+      "anchor": {
+        "triangle": 1319,
+        "vertices": [
+          1403,
+          1398,
+          1404
+        ],
+        "barycentric": [
+          0,
+          0.7518086250052951,
+          0.24819137499470484
+        ],
+        "sourceDistance": 0.07120216957192234,
+        "regions": [
+          "TORSO_LOWER",
+          "PELVIS",
+          "TORSO_UPPER"
+        ]
+      },
+      "amount": 1,
+      "original": [
+        -0.0479176789522171,
+        1.0799360275268555,
+        -0.17095330357551575
+      ],
+      "position": [
+        -0.054766798787009324,
+        1.1145894799639435,
+        -0.11260708973786605
+      ],
+      "displacement": 0.06820595925217689,
+      "joints": [
+        0,
+        1,
+        22,
+        2
+      ],
+      "weights": [
+        0.4236926962377342,
+        0.3133255863980564,
+        0.17458270006968327,
+        0.08839901729452597
+      ],
+      "actualBodyDonorBlend": 1
+    },
+    {
+      "vertex": 31057,
+      "anchor": {
+        "triangle": 1319,
+        "vertices": [
+          1403,
+          1398,
+          1404
+        ],
+        "barycentric": [
+          0,
+          0.7518086250052951,
+          0.24819137499470484
+        ],
+        "sourceDistance": 0.07120216957192234,
+        "regions": [
+          "TORSO_LOWER",
+          "PELVIS",
+          "TORSO_UPPER"
+        ]
+      },
+      "amount": 1,
+      "original": [
+        -0.0479176789522171,
+        1.0799360275268555,
+        -0.17095330357551575
+      ],
+      "position": [
+        -0.054766798787009324,
+        1.1145894799639435,
+        -0.11260708973786605
+      ],
+      "displacement": 0.06820595925217689,
+      "joints": [
+        0,
+        1,
+        22,
+        2
+      ],
+      "weights": [
+        0.4236926962377342,
+        0.3133255863980564,
+        0.17458270006968327,
+        0.08839901729452597
+      ],
+      "actualBodyDonorBlend": 1
+    },
+    {
+      "vertex": 31050,
+      "anchor": {
+        "triangle": 1317,
+        "vertices": [
+          1401,
+          1398,
+          1402
+        ],
+        "barycentric": [
+          0.22532149556216174,
+          0.4877910388479674,
+          0.2868874655898709
+        ],
+        "sourceDistance": 0.07019446714083676,
+        "regions": [
+          "PELVIS",
+          "PELVIS",
+          "PELVIS"
+        ]
+      },
+      "amount": 1,
+      "original": [
+        -0.04704264551401138,
+        1.0500190258026123,
+        -0.1653267741203308
+      ],
+      "position": [
+        -0.043045873267265514,
+        1.0551984217754338,
+        -0.09845154639507105
+      ],
+      "displacement": 0.06719446714083675,
+      "joints": [
+        0,
+        1,
+        39,
+        22
+      ],
+      "weights": [
+        0.5861168736883147,
+        0.18845530015612025,
+        0.1556271711664949,
+        0.06980065498907023
+      ],
+      "actualBodyDonorBlend": 1
+    },
+    {
+      "vertex": 31054,
+      "anchor": {
+        "triangle": 1317,
+        "vertices": [
+          1401,
+          1398,
+          1402
+        ],
+        "barycentric": [
+          0.21111858850806048,
+          0.46937690959820694,
+          0.31950450189373264
+        ],
+        "sourceDistance": 0.0701901682769104,
+        "regions": [
+          "PELVIS",
+          "PELVIS",
+          "PELVIS"
+        ]
+      },
+      "amount": 1,
+      "original": [
+        -0.04496558755636215,
+        1.049380898475647,
+        -0.16539716720581055
+      ],
+      "position": [
+        -0.04096907100894339,
+        1.0545599630890656,
+        -0.09852621792067046
+      ],
+      "displacement": 0.06719016827691039,
+      "joints": [
+        0,
+        1,
+        39,
+        22
+      ],
+      "weights": [
+        0.5931167046306183,
+        0.186508357436845,
+        0.15312477965445812,
+        0.06725015827807855
+      ],
+      "actualBodyDonorBlend": 1
+    }
+  ],
+  "detail": {
+    "path": "output/native-personal-armor-333/underlay-fit-derivation.json.gz",
+    "sha256": "fe4546bf76cb0dbdba3e51ef14fb4a12cb799ed2abf58fdca9cb966d9e8342c0",
+    "bytes": 3550561,
+    "decodedSha256": "8fde5aa9c65b76acd3e8f791509a3d148d54b91ede1e22d3efb3c0cb8df33031",
+    "decodedBytes": 22059384
+  }
+}

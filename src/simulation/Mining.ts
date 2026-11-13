@@ -13,6 +13,7 @@ import type { OreSite, OreSiteRules } from '../world-generation/OreSites';
 import { assertOreSitePlan } from '../world-generation/OreSites';
 import { discoveryAt, inspectClanDiscovery } from './ClanDiscovery';
 import { metalworkingOreSpent } from './Metalworking';
+import { personalArmorOreSpent } from './PersonalArmor';
 
 export interface MiningSite extends OreSite {
     remainingUnits: number;
@@ -122,7 +123,7 @@ export function validateMining(state: SimulationState): void {
         ids.add(site.id);
         extracted += site.initialUnits - site.remainingUnits;
     }
-    if (state.specialistStocks?.ironOre !== extracted - metalworkingOreSpent(state)) fail();
+    if (state.specialistStocks?.ironOre !== extracted - metalworkingOreSpent(state) - personalArmorOreSpent(state)) fail();
     if (!mining.policy || mining.policy.version !== 2 || !Number.isFinite(mining.policy.metresPerTick) ||
         mining.policy.metresPerTick <= 0 || mining.policy.metresPerTick > 10 ||
         !Number.isSafeInteger(mining.policy.unitsPerYear) || mining.policy.unitsPerYear < 1 ||

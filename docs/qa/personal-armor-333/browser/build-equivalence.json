@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "testedBuildCommit": "7f756202b47e30ad9db6b96f95eea1aa56cedeb3",
+  "scope": "Production source, public assets and build inputs remain equal in the evidence-only follow-up; Git object identities, not SHA256 file digests.",
+  "gitObjectIdentities": {
+    "src": "88018ae716a75d06459433269d5e9ba0916d5773",
+    "public": "a914aef9aecd6cb879b299c170cb162537e07095",
+    "index.html": "974748f43476b19e2ce8d8a1b90ccc39e58fe698",
+    "package.json": "3eab58a3fa7397a5d1b98c0f4488e7e65aa1d86a",
+    "pnpm-lock.yaml": "f535e99deaeb71f2a631fb1ef87520048c95f520",
+    "vite.config.ts": "26b538d4f10e63c1ebfb669d83b3512770f9f271",
+    "tsconfig.json": "32bcb76fc459f127871dd6968d6b3cb9488c4a95"
+  },
+  "verifyCommand": "git diff --exit-code 7f756202b47e30ad9db6b96f95eea1aa56cedeb3 HEAD -- src public index.html package.json pnpm-lock.yaml vite.config.ts tsconfig.json",
+  "browserAcceptance": "Public UI12steps PASS; native captures need bounded visual review; desktop performance is not phone acceptance."
+}

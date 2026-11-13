@@ -2,7 +2,7 @@ import type { FirstStepsInspection } from './FirstStepsState';
 import { gatheringOffer, inspectCommunityHearth, weddingCandidates } from '../simulation/SimulationCore';
 import { renderGatheringCard, renderGatheringReview, type GatheringChoice, type GatheringOffer } from './CulturalGatheringView';
 import { renderCommunityHearth, type HearthUpgradeOffer } from './CommunityHearthView';
-import { renderSmithery } from './SmitheryView';
+import { renderSmithery, renderPersonalEquipmentSummary } from './SmitheryView';
 import { craftingOccupation, equipmentFor, type EquipmentItem } from '../simulation/Smithery';
 import { applyCommand, inspectWork, inspectCattle, inspectLivestock, occupationAptitude, occupationIds, availableOccupationIds, personaAge, personaAway, landingSummary } from '../simulation/SimulationCore';
 import { renderLivestockBreeding, slaughterBreedingWarning } from '../play/LivestockBreedingView';
@@ -21,7 +21,7 @@ import './mobile-horizon.css';
 import { isMobileLayout } from './MobileShell';
 import { CharacterPortraits, type PortraitRequest } from '../characters/CharacterPortraits';
 import { projectResidentAppearance } from '../characters/ResidentAppearance';
-import { fjordWardrobePresentation } from './FjordWardrobe';
+import { fjordWardrobePresentation, fjordPersonalArmorStatus } from './FjordWardrobe';
 import { presentationProfiles } from '../config/PresentationQuality';
 
 const esc = (value: unknown) => String(value ?? '').replace(/[&<>"']/g,
@@ -181,12 +181,16 @@ export class FjordInterface {
         const person = state.personas[id];
         const home = this.household();
         const work = inspectWork(state, id);
+        const wardrobe = this.residentWardrobe(state, id);
+        const assigned = renderPersonalEquipmentSummary(state, id,
+            wardrobe ? fjordPersonalArmorStatus(wardrobe.entity) : []);
         if (isMobileLayout() && !this.expanded) {
             return this.heading(person.name,
                 `${personaAge(state, id)} Winters · ${occupationLabel(person.occupation)}`, 'people', true) +
                 `<div class="fjord-card-body"><p class="fjord-caption">${person.deathWinter !== null ?
                     'Deceased · Winter ' + person.deathWinter : work.reason ? esc(work.reason.replaceAll('-', ' ')) :
                     'Working · ' + esc(work.resource ?? 'occupation')}</p>
+                ${assigned}
                 <div class="fjord-actions">${button('occupation', 'Change work', 'work')}${person.occupation === 'miner' ? `<button type="button" data-mining-resident="${esc(id)}">Assign mining site</button>` : ''}${craftingOccupation(person.occupation) ? button('smithery', 'Crafting & equipment', 'work') : ''}
                     ${button('expand-card', 'Personal details', 'book')}</div></div>`;
         }
@@ -200,6 +204,7 @@ export class FjordInterface {
         return this.heading(person.name, `${personaAge(state, id)} Winters · ${person.dna.sex === 'male' ? 'Male' : 'Female'} · ${occupationLabel(person.occupation)}`, 'people', true) +
             `<div class="fjord-card-body"><p class="fjord-status">${person.deathWinter !== null ? 'Deceased · Winter ' + person.deathWinter :
                 work.reason ? esc(work.reason.replaceAll('-', ' ')) : 'Working · ' + esc(work.resource ?? 'occupation')}</p>
+            ${assigned}
             <div class="fjord-profile-stats">${meter('Productivity', work.productivityBps / 10000)}${meter('Occupation fit', work.aptitudeBps / 10000)}</div>
             <p class="fjord-caption">${experience.toFixed(1)} recorded years in current occupation · ${state.mechanics!.people[id].occupationLocked ? 'Assigned career' : 'Autonomous career'}</p>
             <div class="fjord-traits">${traitKeys.map(key => meter(key[0].toUpperCase() + key.slice(1), person.dna.traits[key])).join('')}</div>
@@ -333,7 +338,7 @@ export class FjordInterface {
         }
     }
 
-    private portraitInput(state: SimulationState, id: string): PortraitRequest | undefined {
+    private residentWardrobe(state: SimulationState, id: string) {
         const appearance = projectResidentAppearance(state, id);
         if (!appearance) return undefined;
         const person = state.personas[id] ?? state.personaArchive![id];
@@ -343,9 +348,16 @@ export class FjordInterface {
         const status = projected?.status ?? { living: person.deathWinter === null, occupation: person.occupation,
             equipment: equipmentFor(state, id),
             expedition: state.personas[id] && personaAway(state, id) ? 'away' : undefined };
-        const presentation = fjordWardrobePresentation({ kind: 'persona', dna: appearance.dna, status });
-        return { residentId: id, ...appearance, presentation,
-            ...(presentation.equipmentItems?.length ? { framing: 'equipment' as const } : {}),
+        return { appearance, entity: { kind: 'persona' as const, dna: appearance.dna, status } };
+    }
+
+    private portraitInput(state: SimulationState, id: string): PortraitRequest | undefined {
+        const wardrobe = this.residentWardrobe(state, id);
+        if (!wardrobe) return undefined;
+        const presentation = fjordWardrobePresentation(wardrobe.entity);
+        return { residentId: id, ...wardrobe.appearance, presentation,
+            ...(presentation.equipmentItems?.length || presentation.bodyArmor && presentation.bodyArmor !== 'none'
+                ? { framing: 'equipment' as const } : {}),
             pixelRatio: presentationProfiles[this.owner.presentation?.quality ?? 'low'].maximumPixelRatio };
     }
 

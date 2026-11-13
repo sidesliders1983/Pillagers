@@ -1,6 +1,7 @@
-import type { PersonalEquipment } from '../simulation/Smithery';
+import { equipmentLabels, type PersonalEquipment } from '../simulation/Smithery';
 import { characterAsset } from '../characters/CharacterAssets';
 import { nativeCombatEquipmentByItem } from '../characters/NativeCombatEquipmentCatalog';
+import { nativePersonalArmorByItem, nativePersonalArmorAges } from '../characters/NativePersonalArmorCatalog';
 import {defaultCharacterPresentation, type CharacterPresentation} from '../characters/CharacterPresentation';
 import {gridTrialOutfitId} from '../characters/GridTrialOutfitCatalog';
 import type { CharacterPreparationObserver } from '../characters/CharacterPreparation';
@@ -79,10 +80,51 @@ function occupationModuleAsset(entity: Pick<FjordEntity, 'kind' | 'dna' | 'statu
         ? type + '/occupation-' + occupation : 'none';
 }
 export function fjordHeadwearAsset(entity: Pick<FjordEntity, 'kind' | 'dna' | 'status'>): string {
-    return occupationModuleAsset(entity, 'headwear');
+    const personal = personalArmorVisibility(entity).headwear;
+    return personal !== 'none' ? personal : occupationModuleAsset(entity, 'headwear');
 }
 export function fjordToolAsset(entity: Pick<FjordEntity, 'kind' | 'dna' | 'status'>): string {
     return occupationModuleAsset(entity, 'equipment');
+}
+
+/** Personal protection is visible only on its qualified body/outfit; assignment never changes. */
+function personalArmorVisibility(entity: Pick<FjordEntity, 'kind' | 'dna' | 'status'>) {
+    let bodyArmor = 'none', headwear = 'none';
+    const stowed: string[] = [];
+    const gear = entity.status.combatDeath?.equipment ?? entity.status.equipment;
+    if (entity.kind !== 'persona' || !entity.dna || !gear) return { bodyArmor, headwear, stowed };
+    const supported = (assetId: string, label: string) => {
+        const range = nativePersonalArmorAges(assetId);
+        if (!range || entity.dna!.age < range.min || entity.dna!.age > range.max) {
+            stowed.push(label + ' stowed: no qualified model is available for this age.');
+            return false;
+        }
+        if (!entity.status.living && !entity.status.combatDeath) {
+            stowed.push(label + ' is not shown on an inactive resident.');
+            return false;
+        }
+        return true;
+    };
+    if (gear.bodyArmor) {
+        const asset = nativePersonalArmorByItem[gear.bodyArmor], label = equipmentLabels[gear.bodyArmor];
+        if (supported(asset, label)) {
+            if (fjordClothingSets[fjordClothingSet(entity)].outfit === gridTrialOutfitId) bodyArmor = asset;
+            else stowed.push(label + ' stowed: the current work outfit is not its qualified field tunic.');
+        }
+    }
+    if (gear.headgear) {
+        const asset = nativePersonalArmorByItem[gear.headgear], label = equipmentLabels[gear.headgear];
+        if (supported(asset, label)) {
+            if (occupationModuleAsset(entity, 'headwear') === 'none') headwear = asset;
+            else stowed.push(label + ' stowed while the occupational hat is worn.');
+        }
+    }
+    return { bodyArmor, headwear, stowed };
+}
+
+/** Own-person UI can report stowing without exposing hidden rival assignments. */
+export function fjordPersonalArmorStatus(entity: Pick<FjordEntity, 'kind' | 'dna' | 'status'>): readonly string[] {
+    return personalArmorVisibility(entity).stowed;
 }
 
 /** Only items occupying a free authored hand are visible; stowed assignments remain private. */
@@ -93,8 +135,12 @@ export function fjordVisibleEquipment(entity: Pick<FjordEntity, 'kind' | 'dna' |
     const gear = entity.status.combatDeath?.equipment ?? entity.status.equipment;
     const tool = fjordToolAsset(entity);
     const workHand = tool === 'none' ? undefined : characterAsset(tool).metadata?.anchor;
+    const personal = personalArmorVisibility(entity);
     return { weapon: workHand === 'socket_hand_R' ? null : gear?.weapon ?? null,
-        shield: workHand === 'socket_hand_L' ? null : gear?.shield ?? null };
+        shield: workHand === 'socket_hand_L' ? null : gear?.shield ?? null,
+        ...(gear?.bodyArmor !== undefined ? { bodyArmor: personal.bodyArmor !== 'none' ? gear.bodyArmor : null } : {}),
+        ...(gear?.headgear !== undefined ? { headgear: personal.headwear !== 'none' ? gear.headgear : null } : {}),
+    };
 }
 
 /** Portraits and live residents use exactly the same wardrobe choices and actual personal items. */
@@ -104,7 +150,9 @@ export function fjordWardrobePresentation(entity: Pick<FjordEntity, 'kind' | 'dn
     const items = [gear.weapon, gear.shield].flatMap(item => item ? [nativeCombatEquipmentByItem[item]] : []);
     return { ...fjordClothingSets[fjordClothingSet(entity)], hair: fjordHairAsset(entity),
         beard: fjordBeardAsset(entity), headwear: fjordHeadwearAsset(entity),
-        equipment: tool, equipmentItems: items } as CharacterPresentation;
+        equipment: tool, equipmentItems: items,
+        ...(gear.bodyArmor ? { bodyArmor: personalArmorVisibility(entity).bodyArmor } : {}),
+    } as CharacterPresentation;
 }
 interface WardrobeState {
     toolsVisible?: boolean;

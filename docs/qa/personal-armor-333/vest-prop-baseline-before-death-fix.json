@@ -1,0 +1,1722 @@
+{
+  "version": 1,
+  "armorSha256": "66277cffdcfa3bb5fd29e0ce8e2d241119d5ac47e2c3041e3147aa65a39f74a4",
+  "bindingSha256": "057688f23497200fe10ee30143843b70ea602b0c700e5a338b92c02695da7426",
+  "scope": "Actual vest versus each actual carried prop using native public factory; owner default native LOD2; no contact exemptions or motion refitting; body/cloth visibility separate.",
+  "combinations": 12,
+  "motions": 252,
+  "pairChecks": 357,
+  "failures": [
+    {
+      "weapon": "woodenSpear",
+      "shield": null,
+      "motion": "death 0.5",
+      "id": "equipment/native-wooden-spear",
+      "leftEdgesAgainstRight": 1,
+      "rightEdgesAgainstLeft": 1,
+      "intersections": 2,
+      "allowedContacts": 0,
+      "firstHit": [
+        -0.1485913893742351,
+        0.691934941818982,
+        0.06882913755058473
+      ],
+      "firstHitDetails": {
+        "point": [
+          -0.1485913893742351,
+          0.691934941818982,
+          0.06882913755058473
+        ],
+        "edge": [
+          386,
+          387
+        ],
+        "triangle": 1770,
+        "direction": "left-to-right"
+      }
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": null,
+      "motion": "death 1",
+      "id": "equipment/native-wooden-spear",
+      "leftEdgesAgainstRight": 1,
+      "rightEdgesAgainstLeft": 1,
+      "intersections": 2,
+      "allowedContacts": 0,
+      "firstHit": [
+        -0.03693316912173206,
+        0.41847149579381354,
+        -0.0023823973814412333
+      ],
+      "firstHitDetails": {
+        "point": [
+          -0.03693316912173206,
+          0.41847149579381354,
+          -0.0023823973814412333
+        ],
+        "edge": [
+          3527,
+          3526
+        ],
+        "triangle": 1830,
+        "direction": "left-to-right"
+      }
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "woodenShield",
+      "motion": "death 0.5",
+      "id": "equipment/native-wooden-spear",
+      "leftEdgesAgainstRight": 1,
+      "rightEdgesAgainstLeft": 1,
+      "intersections": 2,
+      "allowedContacts": 0,
+      "firstHit": [
+        -0.1485913893742351,
+        0.691934941818982,
+        0.06882913755058473
+      ],
+      "firstHitDetails": {
+        "point": [
+          -0.1485913893742351,
+          0.691934941818982,
+          0.06882913755058473
+        ],
+        "edge": [
+          386,
+          387
+        ],
+        "triangle": 1770,
+        "direction": "left-to-right"
+      }
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "woodenShield",
+      "motion": "death 1",
+      "id": "equipment/native-wooden-spear",
+      "leftEdgesAgainstRight": 1,
+      "rightEdgesAgainstLeft": 1,
+      "intersections": 2,
+      "allowedContacts": 0,
+      "firstHit": [
+        -0.03693316912173206,
+        0.41847149579381354,
+        -0.0023823973814412333
+      ],
+      "firstHitDetails": {
+        "point": [
+          -0.03693316912173206,
+          0.41847149579381354,
+          -0.0023823973814412333
+        ],
+        "edge": [
+          3527,
+          3526
+        ],
+        "triangle": 1830,
+        "direction": "left-to-right"
+      }
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "leatherShield",
+      "motion": "death 0.5",
+      "id": "equipment/native-wooden-spear",
+      "leftEdgesAgainstRight": 1,
+      "rightEdgesAgainstLeft": 1,
+      "intersections": 2,
+      "allowedContacts": 0,
+      "firstHit": [
+        -0.1485913893742351,
+        0.691934941818982,
+        0.06882913755058473
+      ],
+      "firstHitDetails": {
+        "point": [
+          -0.1485913893742351,
+          0.691934941818982,
+          0.06882913755058473
+        ],
+        "edge": [
+          386,
+          387
+        ],
+        "triangle": 1770,
+        "direction": "left-to-right"
+      }
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "leatherShield",
+      "motion": "death 1",
+      "id": "equipment/native-wooden-spear",
+      "leftEdgesAgainstRight": 1,
+      "rightEdgesAgainstLeft": 1,
+      "intersections": 2,
+      "allowedContacts": 0,
+      "firstHit": [
+        -0.03693316912173206,
+        0.41847149579381354,
+        -0.0023823973814412333
+      ],
+      "firstHitDetails": {
+        "point": [
+          -0.03693316912173206,
+          0.41847149579381354,
+          -0.0023823973814412333
+        ],
+        "edge": [
+          3527,
+          3526
+        ],
+        "triangle": 1830,
+        "direction": "left-to-right"
+      }
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "ironShield",
+      "motion": "death 0.5",
+      "id": "equipment/native-wooden-spear",
+      "leftEdgesAgainstRight": 1,
+      "rightEdgesAgainstLeft": 1,
+      "intersections": 2,
+      "allowedContacts": 0,
+      "firstHit": [
+        -0.1485913893742351,
+        0.691934941818982,
+        0.06882913755058473
+      ],
+      "firstHitDetails": {
+        "point": [
+          -0.1485913893742351,
+          0.691934941818982,
+          0.06882913755058473
+        ],
+        "edge": [
+          386,
+          387
+        ],
+        "triangle": 1770,
+        "direction": "left-to-right"
+      }
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "ironShield",
+      "motion": "death 1",
+      "id": "equipment/native-wooden-spear",
+      "leftEdgesAgainstRight": 1,
+      "rightEdgesAgainstLeft": 1,
+      "intersections": 2,
+      "allowedContacts": 0,
+      "firstHit": [
+        -0.03693316912173206,
+        0.41847149579381354,
+        -0.0023823973814412333
+      ],
+      "firstHitDetails": {
+        "point": [
+          -0.03693316912173206,
+          0.41847149579381354,
+          -0.0023823973814412333
+        ],
+        "edge": [
+          3527,
+          3526
+        ],
+        "triangle": 1830,
+        "direction": "left-to-right"
+      }
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": null,
+      "motion": "death 0.5",
+      "id": "equipment/native-iron-spear",
+      "leftEdgesAgainstRight": 1,
+      "rightEdgesAgainstLeft": 1,
+      "intersections": 2,
+      "allowedContacts": 0,
+      "firstHit": [
+        -0.09454850914768649,
+        0.6362203173777684,
+        0.07150019366926352
+      ],
+      "firstHitDetails": {
+        "point": [
+          -0.09454850914768649,
+          0.6362203173777684,
+          0.07150019366926352
+        ],
+        "edge": [
+          3168,
+          3167
+        ],
+        "triangle": 998,
+        "direction": "left-to-right"
+      }
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": null,
+      "motion": "death 1",
+      "id": "equipment/native-iron-spear",
+      "leftEdgesAgainstRight": 1,
+      "rightEdgesAgainstLeft": 1,
+      "intersections": 2,
+      "allowedContacts": 0,
+      "firstHit": [
+        -0.04204785423763969,
+        0.4258315262786026,
+        -0.00025126936296821124
+      ],
+      "firstHitDetails": {
+        "point": [
+          -0.04204785423763969,
+          0.4258315262786026,
+          -0.00025126936296821124
+        ],
+        "edge": [
+          3529,
+          3530
+        ],
+        "triangle": 1383,
+        "direction": "left-to-right"
+      }
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "motion": "death 0.5",
+      "id": "equipment/native-iron-spear",
+      "leftEdgesAgainstRight": 1,
+      "rightEdgesAgainstLeft": 1,
+      "intersections": 2,
+      "allowedContacts": 0,
+      "firstHit": [
+        -0.09454850914768649,
+        0.6362203173777684,
+        0.07150019366926352
+      ],
+      "firstHitDetails": {
+        "point": [
+          -0.09454850914768649,
+          0.6362203173777684,
+          0.07150019366926352
+        ],
+        "edge": [
+          3168,
+          3167
+        ],
+        "triangle": 998,
+        "direction": "left-to-right"
+      }
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "motion": "death 1",
+      "id": "equipment/native-iron-spear",
+      "leftEdgesAgainstRight": 1,
+      "rightEdgesAgainstLeft": 1,
+      "intersections": 2,
+      "allowedContacts": 0,
+      "firstHit": [
+        -0.04204785423763969,
+        0.4258315262786026,
+        -0.00025126936296821124
+      ],
+      "firstHitDetails": {
+        "point": [
+          -0.04204785423763969,
+          0.4258315262786026,
+          -0.00025126936296821124
+        ],
+        "edge": [
+          3529,
+          3530
+        ],
+        "triangle": 1383,
+        "direction": "left-to-right"
+      }
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "motion": "death 0.5",
+      "id": "equipment/native-iron-spear",
+      "leftEdgesAgainstRight": 1,
+      "rightEdgesAgainstLeft": 1,
+      "intersections": 2,
+      "allowedContacts": 0,
+      "firstHit": [
+        -0.09454850914768649,
+        0.6362203173777684,
+        0.07150019366926352
+      ],
+      "firstHitDetails": {
+        "point": [
+          -0.09454850914768649,
+          0.6362203173777684,
+          0.07150019366926352
+        ],
+        "edge": [
+          3168,
+          3167
+        ],
+        "triangle": 998,
+        "direction": "left-to-right"
+      }
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "motion": "death 1",
+      "id": "equipment/native-iron-spear",
+      "leftEdgesAgainstRight": 1,
+      "rightEdgesAgainstLeft": 1,
+      "intersections": 2,
+      "allowedContacts": 0,
+      "firstHit": [
+        -0.04204785423763969,
+        0.4258315262786026,
+        -0.00025126936296821124
+      ],
+      "firstHitDetails": {
+        "point": [
+          -0.04204785423763969,
+          0.4258315262786026,
+          -0.00025126936296821124
+        ],
+        "edge": [
+          3529,
+          3530
+        ],
+        "triangle": 1383,
+        "direction": "left-to-right"
+      }
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "motion": "death 0.5",
+      "id": "equipment/native-iron-spear",
+      "leftEdgesAgainstRight": 1,
+      "rightEdgesAgainstLeft": 1,
+      "intersections": 2,
+      "allowedContacts": 0,
+      "firstHit": [
+        -0.09454850914768649,
+        0.6362203173777684,
+        0.07150019366926352
+      ],
+      "firstHitDetails": {
+        "point": [
+          -0.09454850914768649,
+          0.6362203173777684,
+          0.07150019366926352
+        ],
+        "edge": [
+          3168,
+          3167
+        ],
+        "triangle": 998,
+        "direction": "left-to-right"
+      }
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "motion": "death 1",
+      "id": "equipment/native-iron-spear",
+      "leftEdgesAgainstRight": 1,
+      "rightEdgesAgainstLeft": 1,
+      "intersections": 2,
+      "allowedContacts": 0,
+      "firstHit": [
+        -0.04204785423763969,
+        0.4258315262786026,
+        -0.00025126936296821124
+      ],
+      "firstHitDetails": {
+        "point": [
+          -0.04204785423763969,
+          0.4258315262786026,
+          -0.00025126936296821124
+        ],
+        "edge": [
+          3529,
+          3530
+        ],
+        "triangle": 1383,
+        "direction": "left-to-right"
+      }
+    }
+  ],
+  "states": [
+    {
+      "weapon": null,
+      "shield": null,
+      "motion": "Idle 0.6"
+    },
+    {
+      "weapon": null,
+      "shield": null,
+      "motion": "Walk 0.25"
+    },
+    {
+      "weapon": null,
+      "shield": null,
+      "motion": "Run 0.3"
+    },
+    {
+      "weapon": null,
+      "shield": null,
+      "motion": "ready 0"
+    },
+    {
+      "weapon": null,
+      "shield": null,
+      "motion": "ready 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": null,
+      "motion": "ready 1"
+    },
+    {
+      "weapon": null,
+      "shield": null,
+      "motion": "spear 0"
+    },
+    {
+      "weapon": null,
+      "shield": null,
+      "motion": "spear 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": null,
+      "motion": "spear 1"
+    },
+    {
+      "weapon": null,
+      "shield": null,
+      "motion": "shield 0"
+    },
+    {
+      "weapon": null,
+      "shield": null,
+      "motion": "shield 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": null,
+      "motion": "shield 1"
+    },
+    {
+      "weapon": null,
+      "shield": null,
+      "motion": "brace 0"
+    },
+    {
+      "weapon": null,
+      "shield": null,
+      "motion": "brace 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": null,
+      "motion": "brace 1"
+    },
+    {
+      "weapon": null,
+      "shield": null,
+      "motion": "withdraw 0"
+    },
+    {
+      "weapon": null,
+      "shield": null,
+      "motion": "withdraw 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": null,
+      "motion": "withdraw 1"
+    },
+    {
+      "weapon": null,
+      "shield": null,
+      "motion": "death 0"
+    },
+    {
+      "weapon": null,
+      "shield": null,
+      "motion": "death 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": null,
+      "motion": "death 1"
+    },
+    {
+      "weapon": null,
+      "shield": "woodenShield",
+      "motion": "Idle 0.6"
+    },
+    {
+      "weapon": null,
+      "shield": "woodenShield",
+      "motion": "Walk 0.25"
+    },
+    {
+      "weapon": null,
+      "shield": "woodenShield",
+      "motion": "Run 0.3"
+    },
+    {
+      "weapon": null,
+      "shield": "woodenShield",
+      "motion": "ready 0"
+    },
+    {
+      "weapon": null,
+      "shield": "woodenShield",
+      "motion": "ready 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": "woodenShield",
+      "motion": "ready 1"
+    },
+    {
+      "weapon": null,
+      "shield": "woodenShield",
+      "motion": "spear 0"
+    },
+    {
+      "weapon": null,
+      "shield": "woodenShield",
+      "motion": "spear 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": "woodenShield",
+      "motion": "spear 1"
+    },
+    {
+      "weapon": null,
+      "shield": "woodenShield",
+      "motion": "shield 0"
+    },
+    {
+      "weapon": null,
+      "shield": "woodenShield",
+      "motion": "shield 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": "woodenShield",
+      "motion": "shield 1"
+    },
+    {
+      "weapon": null,
+      "shield": "woodenShield",
+      "motion": "brace 0"
+    },
+    {
+      "weapon": null,
+      "shield": "woodenShield",
+      "motion": "brace 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": "woodenShield",
+      "motion": "brace 1"
+    },
+    {
+      "weapon": null,
+      "shield": "woodenShield",
+      "motion": "withdraw 0"
+    },
+    {
+      "weapon": null,
+      "shield": "woodenShield",
+      "motion": "withdraw 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": "woodenShield",
+      "motion": "withdraw 1"
+    },
+    {
+      "weapon": null,
+      "shield": "woodenShield",
+      "motion": "death 0"
+    },
+    {
+      "weapon": null,
+      "shield": "woodenShield",
+      "motion": "death 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": "woodenShield",
+      "motion": "death 1"
+    },
+    {
+      "weapon": null,
+      "shield": "leatherShield",
+      "motion": "Idle 0.6"
+    },
+    {
+      "weapon": null,
+      "shield": "leatherShield",
+      "motion": "Walk 0.25"
+    },
+    {
+      "weapon": null,
+      "shield": "leatherShield",
+      "motion": "Run 0.3"
+    },
+    {
+      "weapon": null,
+      "shield": "leatherShield",
+      "motion": "ready 0"
+    },
+    {
+      "weapon": null,
+      "shield": "leatherShield",
+      "motion": "ready 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": "leatherShield",
+      "motion": "ready 1"
+    },
+    {
+      "weapon": null,
+      "shield": "leatherShield",
+      "motion": "spear 0"
+    },
+    {
+      "weapon": null,
+      "shield": "leatherShield",
+      "motion": "spear 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": "leatherShield",
+      "motion": "spear 1"
+    },
+    {
+      "weapon": null,
+      "shield": "leatherShield",
+      "motion": "shield 0"
+    },
+    {
+      "weapon": null,
+      "shield": "leatherShield",
+      "motion": "shield 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": "leatherShield",
+      "motion": "shield 1"
+    },
+    {
+      "weapon": null,
+      "shield": "leatherShield",
+      "motion": "brace 0"
+    },
+    {
+      "weapon": null,
+      "shield": "leatherShield",
+      "motion": "brace 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": "leatherShield",
+      "motion": "brace 1"
+    },
+    {
+      "weapon": null,
+      "shield": "leatherShield",
+      "motion": "withdraw 0"
+    },
+    {
+      "weapon": null,
+      "shield": "leatherShield",
+      "motion": "withdraw 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": "leatherShield",
+      "motion": "withdraw 1"
+    },
+    {
+      "weapon": null,
+      "shield": "leatherShield",
+      "motion": "death 0"
+    },
+    {
+      "weapon": null,
+      "shield": "leatherShield",
+      "motion": "death 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": "leatherShield",
+      "motion": "death 1"
+    },
+    {
+      "weapon": null,
+      "shield": "ironShield",
+      "motion": "Idle 0.6"
+    },
+    {
+      "weapon": null,
+      "shield": "ironShield",
+      "motion": "Walk 0.25"
+    },
+    {
+      "weapon": null,
+      "shield": "ironShield",
+      "motion": "Run 0.3"
+    },
+    {
+      "weapon": null,
+      "shield": "ironShield",
+      "motion": "ready 0"
+    },
+    {
+      "weapon": null,
+      "shield": "ironShield",
+      "motion": "ready 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": "ironShield",
+      "motion": "ready 1"
+    },
+    {
+      "weapon": null,
+      "shield": "ironShield",
+      "motion": "spear 0"
+    },
+    {
+      "weapon": null,
+      "shield": "ironShield",
+      "motion": "spear 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": "ironShield",
+      "motion": "spear 1"
+    },
+    {
+      "weapon": null,
+      "shield": "ironShield",
+      "motion": "shield 0"
+    },
+    {
+      "weapon": null,
+      "shield": "ironShield",
+      "motion": "shield 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": "ironShield",
+      "motion": "shield 1"
+    },
+    {
+      "weapon": null,
+      "shield": "ironShield",
+      "motion": "brace 0"
+    },
+    {
+      "weapon": null,
+      "shield": "ironShield",
+      "motion": "brace 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": "ironShield",
+      "motion": "brace 1"
+    },
+    {
+      "weapon": null,
+      "shield": "ironShield",
+      "motion": "withdraw 0"
+    },
+    {
+      "weapon": null,
+      "shield": "ironShield",
+      "motion": "withdraw 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": "ironShield",
+      "motion": "withdraw 1"
+    },
+    {
+      "weapon": null,
+      "shield": "ironShield",
+      "motion": "death 0"
+    },
+    {
+      "weapon": null,
+      "shield": "ironShield",
+      "motion": "death 0.5"
+    },
+    {
+      "weapon": null,
+      "shield": "ironShield",
+      "motion": "death 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": null,
+      "motion": "Idle 0.6"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": null,
+      "motion": "Walk 0.25"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": null,
+      "motion": "Run 0.3"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": null,
+      "motion": "ready 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": null,
+      "motion": "ready 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": null,
+      "motion": "ready 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": null,
+      "motion": "spear 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": null,
+      "motion": "spear 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": null,
+      "motion": "spear 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": null,
+      "motion": "shield 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": null,
+      "motion": "shield 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": null,
+      "motion": "shield 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": null,
+      "motion": "brace 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": null,
+      "motion": "brace 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": null,
+      "motion": "brace 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": null,
+      "motion": "withdraw 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": null,
+      "motion": "withdraw 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": null,
+      "motion": "withdraw 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": null,
+      "motion": "death 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": null,
+      "motion": "death 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": null,
+      "motion": "death 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "woodenShield",
+      "motion": "Idle 0.6"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "woodenShield",
+      "motion": "Walk 0.25"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "woodenShield",
+      "motion": "Run 0.3"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "woodenShield",
+      "motion": "ready 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "woodenShield",
+      "motion": "ready 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "woodenShield",
+      "motion": "ready 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "woodenShield",
+      "motion": "spear 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "woodenShield",
+      "motion": "spear 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "woodenShield",
+      "motion": "spear 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "woodenShield",
+      "motion": "shield 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "woodenShield",
+      "motion": "shield 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "woodenShield",
+      "motion": "shield 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "woodenShield",
+      "motion": "brace 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "woodenShield",
+      "motion": "brace 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "woodenShield",
+      "motion": "brace 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "woodenShield",
+      "motion": "withdraw 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "woodenShield",
+      "motion": "withdraw 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "woodenShield",
+      "motion": "withdraw 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "woodenShield",
+      "motion": "death 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "woodenShield",
+      "motion": "death 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "woodenShield",
+      "motion": "death 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "leatherShield",
+      "motion": "Idle 0.6"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "leatherShield",
+      "motion": "Walk 0.25"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "leatherShield",
+      "motion": "Run 0.3"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "leatherShield",
+      "motion": "ready 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "leatherShield",
+      "motion": "ready 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "leatherShield",
+      "motion": "ready 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "leatherShield",
+      "motion": "spear 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "leatherShield",
+      "motion": "spear 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "leatherShield",
+      "motion": "spear 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "leatherShield",
+      "motion": "shield 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "leatherShield",
+      "motion": "shield 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "leatherShield",
+      "motion": "shield 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "leatherShield",
+      "motion": "brace 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "leatherShield",
+      "motion": "brace 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "leatherShield",
+      "motion": "brace 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "leatherShield",
+      "motion": "withdraw 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "leatherShield",
+      "motion": "withdraw 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "leatherShield",
+      "motion": "withdraw 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "leatherShield",
+      "motion": "death 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "leatherShield",
+      "motion": "death 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "leatherShield",
+      "motion": "death 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "ironShield",
+      "motion": "Idle 0.6"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "ironShield",
+      "motion": "Walk 0.25"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "ironShield",
+      "motion": "Run 0.3"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "ironShield",
+      "motion": "ready 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "ironShield",
+      "motion": "ready 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "ironShield",
+      "motion": "ready 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "ironShield",
+      "motion": "spear 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "ironShield",
+      "motion": "spear 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "ironShield",
+      "motion": "spear 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "ironShield",
+      "motion": "shield 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "ironShield",
+      "motion": "shield 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "ironShield",
+      "motion": "shield 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "ironShield",
+      "motion": "brace 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "ironShield",
+      "motion": "brace 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "ironShield",
+      "motion": "brace 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "ironShield",
+      "motion": "withdraw 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "ironShield",
+      "motion": "withdraw 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "ironShield",
+      "motion": "withdraw 1"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "ironShield",
+      "motion": "death 0"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "ironShield",
+      "motion": "death 0.5"
+    },
+    {
+      "weapon": "woodenSpear",
+      "shield": "ironShield",
+      "motion": "death 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": null,
+      "motion": "Idle 0.6"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": null,
+      "motion": "Walk 0.25"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": null,
+      "motion": "Run 0.3"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": null,
+      "motion": "ready 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": null,
+      "motion": "ready 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": null,
+      "motion": "ready 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": null,
+      "motion": "spear 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": null,
+      "motion": "spear 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": null,
+      "motion": "spear 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": null,
+      "motion": "shield 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": null,
+      "motion": "shield 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": null,
+      "motion": "shield 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": null,
+      "motion": "brace 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": null,
+      "motion": "brace 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": null,
+      "motion": "brace 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": null,
+      "motion": "withdraw 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": null,
+      "motion": "withdraw 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": null,
+      "motion": "withdraw 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": null,
+      "motion": "death 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": null,
+      "motion": "death 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": null,
+      "motion": "death 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "motion": "Idle 0.6"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "motion": "Walk 0.25"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "motion": "Run 0.3"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "motion": "ready 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "motion": "ready 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "motion": "ready 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "motion": "spear 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "motion": "spear 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "motion": "spear 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "motion": "shield 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "motion": "shield 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "motion": "shield 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "motion": "brace 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "motion": "brace 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "motion": "brace 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "motion": "withdraw 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "motion": "withdraw 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "motion": "withdraw 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "motion": "death 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "motion": "death 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "woodenShield",
+      "motion": "death 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "motion": "Idle 0.6"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "motion": "Walk 0.25"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "motion": "Run 0.3"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "motion": "ready 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "motion": "ready 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "motion": "ready 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "motion": "spear 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "motion": "spear 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "motion": "spear 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "motion": "shield 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "motion": "shield 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "motion": "shield 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "motion": "brace 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "motion": "brace 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "motion": "brace 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "motion": "withdraw 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "motion": "withdraw 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "motion": "withdraw 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "motion": "death 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "motion": "death 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "leatherShield",
+      "motion": "death 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "motion": "Idle 0.6"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "motion": "Walk 0.25"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "motion": "Run 0.3"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "motion": "ready 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "motion": "ready 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "motion": "ready 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "motion": "spear 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "motion": "spear 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "motion": "spear 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "motion": "shield 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "motion": "shield 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "motion": "shield 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "motion": "brace 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "motion": "brace 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "motion": "brace 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "motion": "withdraw 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "motion": "withdraw 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "motion": "withdraw 1"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "motion": "death 0"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "motion": "death 0.5"
+    },
+    {
+      "weapon": "ironSpear",
+      "shield": "ironShield",
+      "motion": "death 1"
+    }
+  ],
+  "status": "Historical strict contact baseline before the inherited Death spear clearance repair; not final qualification."
+}

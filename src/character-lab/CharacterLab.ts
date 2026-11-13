@@ -12,6 +12,7 @@ import { CharacterPresentation, defaultCharacterPresentation, parseCharacterPres
 import { LabTestSnapshot, parseLabSnapshot } from './LabSnapshot';
 import {gridTrialOutfitId} from '../characters/GridTrialOutfitCatalog';
 import { nativeCombatEquipmentByItem } from '../characters/NativeCombatEquipmentCatalog';
+import { nativePersonalArmorByItem, nativeBodyArmorAssets, nativeHelmetAssets } from '../characters/NativePersonalArmorCatalog';
 import { fjordClothingSets } from '../fjord-play/FjordWardrobe';
 import { labCombatAnimations } from './LabCombatPreview';
 import {braidedHairAsset} from '../characters/BraidedHairCatalog';
@@ -85,6 +86,12 @@ export class CharacterLab {
         this.preview=new CharacterPreview(document.getElementById('lab-preview') as HTMLCanvasElement,(message,error)=>this.ui.status(message,error));this.update();
         const combat = requestedOutfit.get('combat');
         if (combat && this.dna.age >= 16) {
+            this.presentation = { ...this.presentation,
+                bodyArmor: requestedOutfit.get('armor') === 'iron' ? nativePersonalArmorByItem.ironBodyArmor :
+                    requestedOutfit.get('armor') === 'leather' ? nativePersonalArmorByItem.leatherBodyArmor : 'none',
+                headwear: requestedOutfit.get('helmet') === 'leather' ? nativePersonalArmorByItem.leatherHelmet :
+                    requestedOutfit.get('helmet') === 'iron' ? nativePersonalArmorByItem.ironHelmet : 'none',
+            };
             this.loadCombatOutfit([
                 requestedOutfit.get('weapon') === 'iron'
                     ? nativeCombatEquipmentByItem.ironSpear : nativeCombatEquipmentByItem.woodenSpear,
@@ -108,7 +115,10 @@ export class CharacterLab {
             shoes: field.shoes,
             trousers: field.trousers,
             top: field.top,
-            headwear: 'none',
+            headwear: nativeHelmetAssets.includes(this.presentation.headwear)
+                ? this.presentation.headwear : 'none',
+            bodyArmor: nativeBodyArmorAssets.includes(this.presentation.bodyArmor ?? 'none')
+                ? this.presentation.bodyArmor : 'none',
             equipment: 'none',
             equipmentSocket: 'auto',
             equipmentItems: equipmentItems ?? [...new Set(currentItems)],
@@ -143,7 +153,7 @@ export class CharacterLab {
         if(action.startsWith('view-')){this.preview.fixedView(action.slice(5) as 'front'|'side'|'back');return;}
         if(action==='freeze-pose'){this.preview.setPose(this.ui.getPoseTime());return;}
         if(action==='play'){this.preview.resume();return;}
-        if(action==='golden-base'){this.presentation={...this.presentation,hair:'none',beard:'none',headwear:'none',outfit:'none',shoes:'none',trousers:'none',top:'none',equipment:'none',equipmentItems:[],equipmentSocket:'auto',technicalWaistWrap:false};this.update();this.ui.status('Body-only Golden presentation.');return;}
+        if(action==='golden-base'){this.presentation={...this.presentation,hair:'none',beard:'none',headwear:'none',bodyArmor:'none',outfit:'none',shoes:'none',trousers:'none',top:'none',equipment:'none',equipmentItems:[],equipmentSocket:'auto',technicalWaistWrap:false};this.update();this.ui.status('Body-only Golden presentation.');return;}
         if(action==='reset-presentation'){this.presentation=(this.body.source===goldenLabBody.source||isMeshyLabBodySource(this.body.source))?{...defaultCharacterPresentation,hair:'none',beard:'none',outfit:'none'}:{...defaultCharacterPresentation};this.update();return;}
         if(action==='reset-body'){this.body={...defaultLabBodyPresentation,...(this.body.source?{source:this.body.source}:{})};this.update();return;}
         if(action==='reset-lab'){this.body={version:1,preset:'auto',source:'meshy'};this.dna=defaultDNA();this.presentation={...defaultCharacterPresentation,hair:'none',beard:'none',outfit:'none'};this.comparison=null;this.preview.setComparison(null);this.preview.setAnimation('Idle');this.preview.resetView();this.update();return;}

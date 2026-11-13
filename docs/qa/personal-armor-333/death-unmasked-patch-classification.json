@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "scope": "Exact four rays through the complete-body diagnostic patch; source native triangle IDs checked against ordinary field-tunic body coverage. No body mask is added by armor.",
+  "records": [
+    {
+      "pixel": [
+        675,
+        410
+      ],
+      "first": {
+        "mesh": "body",
+        "triangle": 1319,
+        "point": [
+          0.06394775138549846,
+          0.40604111599968806,
+          0.20806903755596284
+        ],
+        "sourceVertices": [
+          1403,
+          1398,
+          1404
+        ],
+        "visibleInUnchangedTunicBodyCoverage": false
+      },
+      "next": [
+        {
+          "mesh": "vest",
+          "triangle": 2070,
+          "point": [
+            0.06167645963166901,
+            0.4053597284735393,
+            0.2057977458021334
+          ]
+        },
+        {
+          "mesh": "vest",
+          "triangle": 1273,
+          "point": [
+            0.05069214797461852,
+            0.4020644349764241,
+            0.1948134341450829
+          ]
+        }
+      ]
+    },
+    {
+      "pixel": [
+        700,
+        390
+      ],
+      "first": {
+        "mesh": "body",
+        "triangle": 1320,
+        "point": [
+          0.0716601052288528,
+          0.41909828720095377,
+          0.19069585547129986
+        ],
+        "sourceVertices": [
+          1404,
+          1398,
+          1396
+        ],
+        "visibleInUnchangedTunicBodyCoverage": false
+      },
+      "next": [
+        {
+          "mesh": "vest",
+          "triangle": 2012,
+          "point": [
+            0.0601435752998265,
+            0.4156433282222459,
+            0.17917932554227356
+          ]
+        },
+        {
+          "mesh": "vest",
+          "triangle": 1272,
+          "point": [
+            0.05633191616193001,
+            0.4144998304808769,
+            0.17536766640437706
+          ]
+        }
+      ]
+    },
+    {
+      "pixel": [
+        730,
+        420
+      ],
+      "first": {
+        "mesh": "body",
+        "triangle": 1319,
+        "point": [
+          0.06977621712981552,
+          0.3922582811480063,
+          0.1587093242586417
+        ],
+        "sourceVertices": [
+          1403,
+          1398,
+          1404
+        ],
+        "visibleInUnchangedTunicBodyCoverage": false
+      },
+      "next": [
+        {
+          "mesh": "vest",
+          "triangle": 3710,
+          "point": [
+            0.06905409072548041,
+            0.39204164322670576,
+            0.1579871978543066
+          ]
+        },
+        {
+          "mesh": "vest",
+          "triangle": 3393,
+          "point": [
+            0.06459386506895726,
+            0.3907035755297489,
+            0.15352697219778344
+          ]
+        }
+      ]
+    },
+    {
+      "pixel": [
+        680,
+        450
+      ],
+      "first": {
+        "mesh": "vest",
+        "triangle": 419,
+        "point": [
+          0.06655169224298563,
+          0.37705714130416956,
+          0.20565587122784645
+        ],
+        "sourceVertices": [
+          3049,
+          3053,
+          3050
+        ]
+      },
+      "next": [
+        {
+          "mesh": "vest",
+          "triangle": 1271,
+          "point": [
+            0.05801347157099901,
+            0.37449567510257364,
+            0.19711765055585984
+          ]
+        },
+        {
+          "mesh": "body",
+          "triangle": 1321,
+          "point": [
+            0.054727685507063306,
+            0.37350993928339293,
+            0.19383186449192413
+          ]
+        }
+      ]
+    }
+  ],
+  "runtimeSha256": "96aa6ba6d7786310c97da830219b6163119cbd87ce43445101a769d3e996c73c",
+  "armorSha256": "66277cffdcfa3bb5fd29e0ce8e2d241119d5ac47e2c3041e3147aa65a39f74a4"
+}

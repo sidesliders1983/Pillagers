@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { Group, Color, Vector4, SRGBColorSpace } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
@@ -24,6 +25,24 @@ test('resident snapshots reuse the loaded rig and renderer, restoring the live s
     const factory = new MeshyHumanFactory(async url => loader.parseAsync(await bytes(url), ''), bytes);
     const humans = await Promise.all([1, 2, 3].map(seed => factory.createWorld(generateCharacterDNA(seed),
         undefined, founderFacialIdentity(seed))));
+    const { fjordClothingSets } = load('../src/fjord-play/FjordWardrobe.ts');
+    await factory.equip(humans[0], { ...fjordClothingSets.generic, hair: 'hair/manual-long-2',
+        beard: 'beard/manual-fitted-normal', headwear: 'headwear/native-iron-helmet',
+        bodyArmor: 'garment/native-leather-body-armor' });
+    assert.ok(humans[0].fit.modules.has('headwear/native-iron-helmet'));
+    assert.ok(humans[0].fit.modules.has('garment/native-leather-body-armor'));
+    assert.ok(humans[0].fit.modules.has('hair/manual-long-2'));
+    const moduleGeometry = human => {
+        const hash = createHash('sha256');
+        for (const group of human.fit.modules.values()) group.traverse(mesh => {
+            if (!mesh.isSkinnedMesh) return;
+            for (const attribute of Object.values(mesh.geometry.attributes))
+                hash.update(new Uint8Array(attribute.array.buffer, attribute.array.byteOffset, attribute.array.byteLength));
+            if (mesh.geometry.index) hash.update(new Uint8Array(mesh.geometry.index.array.buffer,
+                mesh.geometry.index.array.byteOffset, mesh.geometry.index.array.byteLength));
+        });
+        return hash.digest('hex');
+    };
     const world = new Group();
     const sibling = new Group();
     world.add(sibling, ...humans.map(human => human.root));
@@ -38,7 +57,8 @@ test('resident snapshots reuse the loaded rig and renderer, restoring the live s
     const saved = humans.map(human => ({ parent: human.root.parent,
         matrix: human.root.matrix.toArray(), world: human.root.matrixWorld.toArray(),
         pose: human.animationState, geometry: human.fit.mesh.geometry,
-        morphs: [...human.fit.mesh.morphTargetInfluences] }));
+        morphs: [...human.fit.mesh.morphTargetInfluences], modules: moduleGeometry(human),
+        fitRuns: human.modules.fitRuns }));
     const renderState = { target: null, viewport: new Vector4(2, 3, 800, 600),
         scissor: new Vector4(4, 5, 700, 500), test: true };
     let draws = 0, outputs = 0, fail = false;
@@ -83,6 +103,8 @@ test('resident snapshots reuse the loaded rig and renderer, restoring the live s
             assert.deepEqual(humans[index].animationState, saved[index].pose);
             assert.equal(humans[index].fit.mesh.geometry, saved[index].geometry);
             assert.deepEqual(humans[index].fit.mesh.morphTargetInfluences, saved[index].morphs);
+            assert.equal(moduleGeometry(humans[index]), saved[index].modules, 'Borrowing preserves fitted helmet/hair/gear geometry');
+            assert.equal(humans[index].modules.fitRuns, saved[index].fitRuns, 'Borrowed portraits cannot refit the equipped modules');
             assert.deepEqual(world.children, [sibling, ...humans.map(human => human.root)]);
             assert.equal(renderState.target, null);
             assert.deepEqual(renderState.viewport.toArray(), [2, 3, 800, 600]);

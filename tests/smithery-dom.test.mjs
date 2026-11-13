@@ -2,12 +2,15 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { JSDOM } from 'jsdom';
 import { loadDOMSource } from './load-dom-source.mjs';
+import { craftedPersonalArmorFixture, personalArmorApply } from './personal-armor-fixture.mjs';
+import { craftedPersonalArmorVariantsFixture } from './personal-armor-variants-fixture.mjs';
 
 const core = loadDOMSource('../src/simulation/SimulationCore.ts');
 const { GameplaySession } = loadDOMSource('../src/gameplay-lab/GameplaySession.ts');
 const { SharedSettlement } = loadDOMSource('../src/play/SharedSettlement.ts');
 const { FjordInterface } = loadDOMSource('../src/fjord-play/FjordInterface.ts');
 const { IslandMissionPanel } = loadDOMSource('../src/fjord-play/IslandMissionPanel.ts');
+const { renderRaiderEquipment, renderSmithery } = loadDOMSource('../src/fjord-play/SmitheryView.ts');
 
 function documentFixture() {
     const dom = new JSDOM(`<main id="fjord-play"><nav id="fjord-navigation"></nav>
@@ -57,7 +60,7 @@ test('desktop and mobile occupational home panels set bounded targets without de
             ui.handle(open);
             assert.ok(document.querySelector('[aria-label="Smithery production"]'));
             const inputs = document.querySelectorAll('[data-smithery-target]');
-            assert.equal(inputs.length, 5);
+            assert.equal(inputs.length, 9);
             const materials = session.readSnapshot().stocks.materials;
             const spear = document.querySelector('[data-smithery-target="woodenSpear"]');
             spear.value = '2';
@@ -75,7 +78,7 @@ test('desktop and mobile occupational home panels set bounded targets without de
     } finally { ui?.dispose(); fixture.restore(); }
 });
 
-test('Pillage preparation selectors assign distinct real stock, disable shortages and never create a third slot', () => {
+test('Pillage preparation keeps four personal slots independent and disables unavailable real stock', () => {
     const fixture = documentFixture();
     let panel;
     try {
@@ -104,7 +107,11 @@ test('Pillage preparation selectors assign distinct real stock, disable shortage
         assert.equal(state.smithery.stored.woodenSpear, 0);
         const other = document.querySelector('[data-equipment-person="founder-2"][data-equipment-slot="weapon"]');
         assert.ok(other.querySelector('[value="woodenSpear"]').disabled);
-        assert.equal(document.querySelectorAll('[data-equipment-slot]').length, 4);
+        assert.equal(document.querySelectorAll('[data-equipment-slot]').length, 8);
+        assert.ok(document.querySelector('[data-equipment-slot="bodyArmor"] [value="leatherBodyArmor"]').disabled);
+        assert.ok(document.querySelector('[data-equipment-slot="headgear"] [value="ironHelmet"]').disabled);
+        assert.ok(document.querySelector('[data-equipment-slot="bodyArmor"] [value="ironBodyArmor"]').disabled);
+        assert.ok(document.querySelector('[data-equipment-slot="headgear"] [value="leatherHelmet"]').disabled);
         assert.equal(document.querySelector('[data-equipment-slot="body"]'), null);
         assert.match(document.querySelector('[aria-label="Personal Pillage risks"]').textContent, /65%/);
     } finally { panel?.dispose(); fixture.restore(); }
@@ -164,7 +171,7 @@ test('adopted metalworking targets stay in existing management and cannot create
         const production = document.querySelector('[aria-label="Smithery production"]');
         assert.ok(production);
         assert.match(production.textContent, /Iron Ore/);
-        assert.equal(production.querySelectorAll('[data-smithery-target]').length, 5);
+        assert.equal(production.querySelectorAll('[data-smithery-target]').length, 9);
         const target = production.querySelector('[data-smithery-target="ironShield"]');
         const before = session.readSnapshot();
         target.value = '2';
@@ -180,4 +187,130 @@ test('adopted metalworking targets stay in existing management and cannot create
         assert.ok(document.querySelector('[aria-label="Smithery production"]'));
         assert.deepEqual(notices, ['Crafting target updated.']);
     } finally { ui?.dispose(); fixture.restore(); }
+});
+
+test('four-slot preparation uses real crafted armor and helmet stock without duplication or away reassignment', () => {
+    const fixture = documentFixture();
+    let panel;
+    try {
+        globalThis.matchMedia = () => ({ matches: true });
+        let state = craftedPersonalArmorFixture({ physical: true });
+        state = personalArmorApply(state, {
+            type: 'SetExplorationMember', groupId: 'group-1', personaId: 'founder-1', included: true,
+        });
+        panel = new IslandMissionPanel(document.querySelector('#mission-host'),
+            { readSnapshot: () => state },
+            command => { state = personalArmorApply(state, command); },
+            () => ({}), () => {}, () => {}, () => {});
+        panel.refresh();
+        const choice = (person, slot) => document.querySelector(
+            '[data-equipment-person="' + person + '"][data-equipment-slot="' + slot + '"]');
+        const change = (person, slot, item) => {
+            const input = choice(person, slot);
+            assert.ok(input, 'Every named member has the actual requested slot');
+            input.value = item;
+            input.dispatchEvent(new fixture.dom.window.Event('change', { bubbles: true }));
+        };
+        change('founder-1', 'bodyArmor', 'leatherBodyArmor');
+        change('founder-1', 'headgear', 'ironHelmet');
+        assert.equal(state.smithery.assignments['founder-1'].bodyArmor, 'leatherBodyArmor');
+        assert.equal(state.smithery.assignments['founder-1'].headgear, 'ironHelmet');
+        assert.equal(state.smithery.stored.leatherBodyArmor, 0);
+        assert.equal(state.smithery.stored.ironHelmet, 0);
+        assert.ok(choice('founder-2', 'bodyArmor').querySelector('[value="leatherBodyArmor"]').disabled);
+        assert.ok(choice('founder-2', 'headgear').querySelector('[value="ironHelmet"]').disabled);
+        change('founder-1', 'weapon', 'ironSpear');
+        change('founder-1', 'shield', 'ironShield');
+        const effects = document.createElement('div');
+        effects.innerHTML = renderRaiderEquipment(state, ['founder-1', 'founder-2'], true);
+        const ownText = effects.querySelector('[data-equipment-person="founder-1"]')
+            .closest('fieldset').textContent;
+        const allyText = effects.querySelector('[data-equipment-person="founder-2"]')
+            .closest('fieldset').textContent;
+        assert.match(ownText, /Own attack: \+15%/);
+        assert.match(ownText, /Own protection:\s*60% \(combined cap:\s*60%\)/);
+        assert.match(allyText, /Own attack: \+0%/);
+        assert.match(allyText, /Own protection:\s*0%/,
+            'A different resident must not inherit this personal protection');
+        change('founder-1', 'bodyArmor', '');
+        assert.equal(state.smithery.stored.leatherBodyArmor, 1);
+        change('founder-2', 'bodyArmor', 'leatherBodyArmor');
+        assert.equal(state.smithery.stored.leatherBodyArmor, 0);
+        assert.equal(state.smithery.assignments['founder-2'].bodyArmor, 'leatherBodyArmor');
+        state = personalArmorApply(state, { type: 'StartExpedition', groupId: 'group-1' });
+        state = personalArmorApply(state, { type: 'ExploreArea', groupId: 'group-1',
+            target: state.mining.sites[0].approach });
+        assert.equal(core.personaAway(state, 'founder-1'), true);
+        panel.refresh();
+        assert.ok(choice('founder-1', 'headgear').disabled);
+        assert.ok(choice('founder-2', 'bodyArmor').disabled);
+        const before = core.serializeState(state);
+        change('founder-1', 'headgear', '');
+        assert.equal(core.serializeState(state), before, 'Away gear remains with its actual owner');
+        assert.match(document.querySelector('.island-mission-status').textContent, /home/i);
+    } finally { panel?.dispose(); fixture.restore(); }
+});
+
+
+test('both actual body and helmet variants share four slots and exchange only real paid stock', () => {
+    const fixture = documentFixture();
+    let panel;
+    try {
+        globalThis.matchMedia = () => ({ matches: true });
+        let state = craftedPersonalArmorVariantsFixture({ physical: true });
+        state = personalArmorApply(state, {
+            type: 'SetExplorationMember', groupId: 'group-1', personaId: 'founder-1', included: true,
+        });
+        panel = new IslandMissionPanel(document.querySelector('#mission-host'),
+            { readSnapshot: () => state },
+            command => { state = personalArmorApply(state, command); },
+            () => ({}), () => {}, () => {}, () => {});
+        panel.refresh();
+        const choice = (person, slot) => document.querySelector(
+            '[data-equipment-person="' + person + '"][data-equipment-slot="' + slot + '"]');
+        const change = (person, slot, item) => {
+            const input = choice(person, slot);
+            input.value = item;
+            input.dispatchEvent(new fixture.dom.window.Event('change', { bubbles: true }));
+        };
+        assert.equal(document.querySelectorAll('[data-equipment-slot]').length, 8);
+        assert.deepEqual([...choice('founder-1', 'bodyArmor').options].map(option => option.value),
+            ['', 'leatherBodyArmor', 'ironBodyArmor']);
+        assert.deepEqual([...choice('founder-1', 'headgear').options].map(option => option.value),
+            ['', 'leatherHelmet', 'ironHelmet']);
+        change('founder-1', 'bodyArmor', 'ironBodyArmor');
+        change('founder-1', 'headgear', 'leatherHelmet');
+        change('founder-2', 'bodyArmor', 'leatherBodyArmor');
+        change('founder-2', 'headgear', 'ironHelmet');
+        assert.equal(state.smithery.assignments['founder-1'].bodyArmor, 'ironBodyArmor');
+        assert.equal(state.smithery.assignments['founder-1'].headgear, 'leatherHelmet');
+        assert.equal(state.smithery.stored.ironBodyArmor, 0);
+        assert.equal(state.smithery.stored.leatherHelmet, 0);
+        assert.ok(choice('founder-2', 'bodyArmor').querySelector('[value="ironBodyArmor"]').disabled);
+        assert.ok(choice('founder-2', 'headgear').querySelector('[value="leatherHelmet"]').disabled);
+        change('founder-2', 'bodyArmor', '');
+        change('founder-1', 'bodyArmor', 'leatherBodyArmor');
+        assert.equal(state.smithery.stored.ironBodyArmor, 1);
+        change('founder-2', 'bodyArmor', 'ironBodyArmor');
+        assert.equal(state.smithery.stored.ironBodyArmor, 0);
+        const products = document.createElement('div');
+        products.innerHTML = renderSmithery(state);
+        const article = item => products.querySelector('[data-smithery-target="' + item + '"]').closest('article').textContent;
+        assert.match(article('leatherHelmet'), /Leatherworker\s*·\s*2 Materials \+ 1 Hide/);
+        assert.match(article('ironBodyArmor'), /Smith\s*·\s*3 Materials \+ 2 Hides \+ 2 Iron Ore/);
+        const saved = core.serializeState(state);
+        assert.equal(core.serializeState(core.reconstructState(saved)), saved);
+        state = personalArmorApply(state, { type: 'StartExpedition', groupId: 'group-1' });
+        state = personalArmorApply(state, { type: 'ExploreArea', groupId: 'group-1',
+            target: state.mining.sites[0].approach });
+        panel.refresh();
+        assert.ok(choice('founder-1', 'headgear').disabled);
+        assert.ok(choice('founder-2', 'bodyArmor').disabled);
+        const before = core.serializeState(state);
+        change('founder-2', 'bodyArmor', '');
+        assert.equal(core.serializeState(state), before);
+    } finally {
+        panel?.dispose();
+        fixture.restore();
+    }
 });

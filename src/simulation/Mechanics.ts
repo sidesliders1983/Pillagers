@@ -380,7 +380,11 @@ export function validateMechanics(state:SimulationState):void {
         if(info.caregiverWorkedWinter!==null){uint(info.caregiverWorkedWinter,'caregiver participation');if(info.caregiverWorkedWinter>state.time.winter)fail('Future caregiving');}
         if(info.lastBirthWinter!==null){uint(info.lastBirthWinter,'last birth');if(info.lastBirthWinter>state.time.winter||info.lastBirthWinter<person.birthWinter)fail('Invalid last birth');}
         if(!info.progress||!info.dominantLegacy)fail('Missing work/legacy records');
-        for(const [role,progress] of Object.entries(info.progress)){if(!configuredRoles.includes(role as Occupation))fail('Unknown work progress role');uint(progress,'work progress',config.workPerUnit-1);}
+        for(const [role,progress] of Object.entries(info.progress)){
+            const historicalMiner=role==='miner'&&person.occupationHistory.some(entry=>entry.occupation==='miner');
+            if(!configuredRoles.includes(role as Occupation)&&!historicalMiner)fail('Unknown work progress role');
+            uint(progress,'work progress',config.workPerUnit-1);
+        }
         uint(person.workProgress,'active work progress',config.workPerUnit-1);
         if(person.occupation!==null&&person.workProgress!==(info.progress[person.occupation]??0))fail('Inconsistent work progress');
         for(const [trait,parent] of Object.entries(info.dominantLegacy))if(!traitKeys.includes(trait as TraitKey)||!person.parentIds.includes(parent))fail('Invalid dominant legacy source');

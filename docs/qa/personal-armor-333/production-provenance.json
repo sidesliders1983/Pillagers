@@ -1,0 +1,587 @@
+{
+  "sourceStateDigest": "4d58200f77b5cccda7311fffb0dcfe3f05158e6ec72fc62f4e2ed5ac395e4044",
+  "remainingStocks": {
+    "food": 9999,
+    "materials": 480,
+    "version": 1,
+    "hides": 0,
+    "ironOre": 10
+  },
+  "actualStoredItems": {
+    "woodenSpear": 1,
+    "woodenShield": 1,
+    "leatherShield": 1,
+    "ironSpear": 1,
+    "ironShield": 1,
+    "leatherBodyArmor": 1,
+    "ironHelmet": 1
+  },
+  "craftReceipts": [
+    {
+      "id": "event-61",
+      "time": {
+        "winter": 801,
+        "tick": 138
+      },
+      "type": "EquipmentCrafted",
+      "personaId": "founder-1",
+      "details": {
+        "item": "ironSpear",
+        "itemName": "Iron-tipped Spear",
+        "units": 1,
+        "materials": 2,
+        "hides": 0,
+        "creatorId": "founder-1",
+        "creatorName": "MaelColuim",
+        "occupation": "smith",
+        "metalworkingVersion": 1,
+        "clanId": "founding-clan",
+        "ironOre": 1,
+        "recipe": {
+          "materials": 2,
+          "hides": 0,
+          "ironOre": 1,
+          "unitsPerWinter": 2
+        },
+        "people": [
+          {
+            "id": "founder-1",
+            "name": "MaelColuim",
+            "age": 41
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-62",
+      "time": {
+        "winter": 801,
+        "tick": 163
+      },
+      "type": "EquipmentCrafted",
+      "personaId": "founder-1",
+      "details": {
+        "item": "ironShield",
+        "itemName": "Iron-reinforced Shield",
+        "units": 1,
+        "materials": 4,
+        "hides": 0,
+        "creatorId": "founder-1",
+        "creatorName": "MaelColuim",
+        "occupation": "smith",
+        "metalworkingVersion": 1,
+        "clanId": "founding-clan",
+        "ironOre": 2,
+        "recipe": {
+          "materials": 4,
+          "hides": 0,
+          "ironOre": 2,
+          "unitsPerWinter": 1
+        },
+        "people": [
+          {
+            "id": "founder-1",
+            "name": "MaelColuim",
+            "age": 41
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-63",
+      "time": {
+        "winter": 801,
+        "tick": 189
+      },
+      "type": "EquipmentCrafted",
+      "personaId": "founder-1",
+      "details": {
+        "item": "ironHelmet",
+        "itemName": "Iron Helmet",
+        "units": 1,
+        "materials": 3,
+        "hides": 0,
+        "creatorId": "founder-1",
+        "creatorName": "MaelColuim",
+        "occupation": "smith",
+        "personalArmorVersion": 1,
+        "clanId": "founding-clan",
+        "recipe": {
+          "materials": 3,
+          "hides": 0,
+          "ironOre": 2,
+          "unitsPerWinter": 1
+        },
+        "ironOre": 2,
+        "people": [
+          {
+            "id": "founder-1",
+            "name": "MaelColuim",
+            "age": 41
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-65",
+      "time": {
+        "winter": 801,
+        "tick": 554
+      },
+      "type": "EquipmentCrafted",
+      "personaId": "founder-1",
+      "details": {
+        "item": "leatherBodyArmor",
+        "itemName": "Leather Body Armor",
+        "units": 1,
+        "materials": 3,
+        "hides": 2,
+        "creatorId": "founder-1",
+        "creatorName": "MaelColuim",
+        "occupation": "leatherAndJewelleryMaker",
+        "personalArmorVersion": 1,
+        "clanId": "founding-clan",
+        "recipe": {
+          "materials": 3,
+          "hides": 2,
+          "unitsPerWinter": 1
+        },
+        "people": [
+          {
+            "id": "founder-1",
+            "name": "MaelColuim",
+            "age": 41
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-70",
+      "time": {
+        "winter": 801,
+        "tick": 632
+      },
+      "type": "EquipmentCrafted",
+      "personaId": "founder-1",
+      "details": {
+        "item": "woodenSpear",
+        "itemName": "Wooden Spear",
+        "units": 1,
+        "materials": 2,
+        "hides": 0,
+        "creatorId": "founder-1",
+        "creatorName": "MaelColuim",
+        "occupation": "smith",
+        "people": [
+          {
+            "id": "founder-1",
+            "name": "MaelColuim",
+            "age": 41
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-71",
+      "time": {
+        "winter": 801,
+        "tick": 638
+      },
+      "type": "EquipmentCrafted",
+      "personaId": "founder-1",
+      "details": {
+        "item": "woodenShield",
+        "itemName": "Wooden Shield",
+        "units": 1,
+        "materials": 3,
+        "hides": 0,
+        "creatorId": "founder-1",
+        "creatorName": "MaelColuim",
+        "occupation": "smith",
+        "people": [
+          {
+            "id": "founder-1",
+            "name": "MaelColuim",
+            "age": 41
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-74",
+      "time": {
+        "winter": 801,
+        "tick": 739
+      },
+      "type": "EquipmentCrafted",
+      "personaId": "founder-1",
+      "details": {
+        "item": "leatherShield",
+        "itemName": "Leather-reinforced Shield",
+        "units": 1,
+        "materials": 3,
+        "hides": 1,
+        "creatorId": "founder-1",
+        "creatorName": "MaelColuim",
+        "occupation": "leatherAndJewelleryMaker",
+        "people": [
+          {
+            "id": "founder-1",
+            "name": "MaelColuim",
+            "age": 41
+          }
+        ]
+      }
+    }
+  ],
+  "ingredientReceipts": [
+    {
+      "id": "event-23",
+      "time": {
+        "winter": 800,
+        "tick": 436
+      },
+      "type": "IronOreExtracted",
+      "personaId": "founder-1",
+      "details": {
+        "clanId": "founding-clan",
+        "siteId": "iron-18-408-424",
+        "source": "rock-iron",
+        "units": 1,
+        "remainingUnits": 79
+      }
+    },
+    {
+      "id": "event-24",
+      "time": {
+        "winter": 800,
+        "tick": 442
+      },
+      "type": "IronOreExtracted",
+      "personaId": "founder-1",
+      "details": {
+        "clanId": "founding-clan",
+        "siteId": "iron-18-408-424",
+        "source": "rock-iron",
+        "units": 1,
+        "remainingUnits": 78
+      }
+    },
+    {
+      "id": "event-25",
+      "time": {
+        "winter": 800,
+        "tick": 449
+      },
+      "type": "IronOreExtracted",
+      "personaId": "founder-1",
+      "details": {
+        "clanId": "founding-clan",
+        "siteId": "iron-18-408-424",
+        "source": "rock-iron",
+        "units": 1,
+        "remainingUnits": 77
+      }
+    },
+    {
+      "id": "event-26",
+      "time": {
+        "winter": 800,
+        "tick": 455
+      },
+      "type": "IronOreExtracted",
+      "personaId": "founder-1",
+      "details": {
+        "clanId": "founding-clan",
+        "siteId": "iron-18-408-424",
+        "source": "rock-iron",
+        "units": 1,
+        "remainingUnits": 76
+      }
+    },
+    {
+      "id": "event-27",
+      "time": {
+        "winter": 800,
+        "tick": 461
+      },
+      "type": "IronOreExtracted",
+      "personaId": "founder-1",
+      "details": {
+        "clanId": "founding-clan",
+        "siteId": "iron-18-408-424",
+        "source": "rock-iron",
+        "units": 1,
+        "remainingUnits": 75
+      }
+    },
+    {
+      "id": "event-28",
+      "time": {
+        "winter": 800,
+        "tick": 468
+      },
+      "type": "IronOreExtracted",
+      "personaId": "founder-1",
+      "details": {
+        "clanId": "founding-clan",
+        "siteId": "iron-18-408-424",
+        "source": "rock-iron",
+        "units": 1,
+        "remainingUnits": 74
+      }
+    },
+    {
+      "id": "event-29",
+      "time": {
+        "winter": 800,
+        "tick": 474
+      },
+      "type": "IronOreExtracted",
+      "personaId": "founder-1",
+      "details": {
+        "clanId": "founding-clan",
+        "siteId": "iron-18-408-424",
+        "source": "rock-iron",
+        "units": 1,
+        "remainingUnits": 73
+      }
+    },
+    {
+      "id": "event-30",
+      "time": {
+        "winter": 800,
+        "tick": 480
+      },
+      "type": "IronOreExtracted",
+      "personaId": "founder-1",
+      "details": {
+        "clanId": "founding-clan",
+        "siteId": "iron-18-408-424",
+        "source": "rock-iron",
+        "units": 1,
+        "remainingUnits": 72
+      }
+    },
+    {
+      "id": "event-31",
+      "time": {
+        "winter": 800,
+        "tick": 487
+      },
+      "type": "IronOreExtracted",
+      "personaId": "founder-1",
+      "details": {
+        "clanId": "founding-clan",
+        "siteId": "iron-18-408-424",
+        "source": "rock-iron",
+        "units": 1,
+        "remainingUnits": 71
+      }
+    },
+    {
+      "id": "event-32",
+      "time": {
+        "winter": 800,
+        "tick": 493
+      },
+      "type": "IronOreExtracted",
+      "personaId": "founder-1",
+      "details": {
+        "clanId": "founding-clan",
+        "siteId": "iron-18-408-424",
+        "source": "rock-iron",
+        "units": 1,
+        "remainingUnits": 70
+      }
+    },
+    {
+      "id": "event-35",
+      "time": {
+        "winter": 800,
+        "tick": 500
+      },
+      "type": "IronOreExtracted",
+      "personaId": "founder-1",
+      "details": {
+        "clanId": "founding-clan",
+        "siteId": "iron-18-408-424",
+        "source": "rock-iron",
+        "units": 1,
+        "remainingUnits": 69
+      }
+    },
+    {
+      "id": "event-37",
+      "time": {
+        "winter": 800,
+        "tick": 506
+      },
+      "type": "IronOreExtracted",
+      "personaId": "founder-1",
+      "details": {
+        "clanId": "founding-clan",
+        "siteId": "iron-18-408-424",
+        "source": "rock-iron",
+        "units": 1,
+        "remainingUnits": 68
+      }
+    },
+    {
+      "id": "event-38",
+      "time": {
+        "winter": 800,
+        "tick": 512
+      },
+      "type": "IronOreExtracted",
+      "personaId": "founder-1",
+      "details": {
+        "clanId": "founding-clan",
+        "siteId": "iron-18-408-424",
+        "source": "rock-iron",
+        "units": 1,
+        "remainingUnits": 67
+      }
+    },
+    {
+      "id": "event-39",
+      "time": {
+        "winter": 800,
+        "tick": 519
+      },
+      "type": "IronOreExtracted",
+      "personaId": "founder-1",
+      "details": {
+        "clanId": "founding-clan",
+        "siteId": "iron-18-408-424",
+        "source": "rock-iron",
+        "units": 1,
+        "remainingUnits": 66
+      }
+    },
+    {
+      "id": "event-40",
+      "time": {
+        "winter": 800,
+        "tick": 525
+      },
+      "type": "IronOreExtracted",
+      "personaId": "founder-1",
+      "details": {
+        "clanId": "founding-clan",
+        "siteId": "iron-18-408-424",
+        "source": "rock-iron",
+        "units": 1,
+        "remainingUnits": 65
+      }
+    },
+    {
+      "id": "event-56",
+      "time": {
+        "winter": 801,
+        "tick": 125
+      },
+      "type": "LivestockSlaughtered",
+      "details": {
+        "livestockId": "livestock-1",
+        "food": 10,
+        "hides": 1,
+        "parentIds": [],
+        "sex": "female",
+        "age": 3,
+        "farmyardId": null,
+        "livestock": {
+          "version": 1,
+          "recordedClanId": "founding-clan",
+          "animals": [
+            {
+              "id": "livestock-1",
+              "name": "Livestock 1",
+              "species": "goat",
+              "speciesName": "Goat",
+              "sex": "female",
+              "sexTerm": "Doe",
+              "birthWinter": 798,
+              "age": 3,
+              "stage": "Adult",
+              "parentIds": [],
+              "origin": "founding"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "event-57",
+      "time": {
+        "winter": 801,
+        "tick": 125
+      },
+      "type": "LivestockSlaughtered",
+      "details": {
+        "livestockId": "livestock-2",
+        "food": 10,
+        "hides": 1,
+        "parentIds": [],
+        "sex": "female",
+        "age": 3,
+        "farmyardId": null,
+        "livestock": {
+          "version": 1,
+          "recordedClanId": "founding-clan",
+          "animals": [
+            {
+              "id": "livestock-2",
+              "name": "Livestock 2",
+              "species": "goat",
+              "speciesName": "Goat",
+              "sex": "female",
+              "sexTerm": "Doe",
+              "birthWinter": 798,
+              "age": 3,
+              "stage": "Adult",
+              "parentIds": [],
+              "origin": "founding"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "event-66",
+      "time": {
+        "winter": 801,
+        "tick": 625
+      },
+      "type": "LivestockSlaughtered",
+      "details": {
+        "livestockId": "livestock-3",
+        "food": 10,
+        "hides": 1,
+        "parentIds": [],
+        "sex": "male",
+        "age": 3,
+        "farmyardId": null,
+        "livestock": {
+          "version": 1,
+          "recordedClanId": "founding-clan",
+          "animals": [
+            {
+              "id": "livestock-3",
+              "name": "Livestock 3",
+              "species": "goat",
+              "speciesName": "Goat",
+              "sex": "male",
+              "sexTerm": "Buck",
+              "birthWinter": 798,
+              "age": 3,
+              "stage": "Adult",
+              "parentIds": [],
+              "origin": "founding"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

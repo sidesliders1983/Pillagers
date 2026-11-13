@@ -84,3 +84,50 @@ docs/qa/cultural-occasions-277/approach-qualification/*.json -text
 # Preserve frozen contextual-support protocol, runner and save evidence.
 docs/qa/contextual-support-278/*.mjs -text
 docs/qa/contextual-support-278/*.json -text
+
+# Personal armor preparation and interpolation receipts preserve exact bytes.
+scripts/prepare-native-personal-armor.mjs text eol=lf
+scripts/characters/native-personal-armor.sources.json text eol=lf
+scripts/characters/native-personal-armor-underlay-fit.json text eol=lf
+output/native-personal-armor-333/*.json -text
+output/native-personal-armor-333/*.gz -text
+docs/qa/personal-armor-333/*.json text eol=lf
+
+# Personal armor QA runners have reproducible source fingerprints.
+scripts/qa/*personal-armor* text eol=lf
+scripts/calibrate-personal-armor.mjs text eol=lf
+
+# Native armor qualification pins canonical LF source and test bytes.
+src/characters/NativeHeadwearFit.ts text eol=lf
+src/characters/MeshyModuleRuntime.ts text eol=lf
+src/characters/BodyFitAdapter.ts text eol=lf
+src/characters/PreparedNativeOutfit.ts text eol=lf
+src/characters/NativePersonalArmorMeasurements.ts text eol=lf
+src/characters/NativePersonalArmorCatalog.ts text eol=lf
+tests/personal-armor-underlay-fit.test.mjs text eol=lf
+tests/native-death-equipment-clearance.test.mjs text eol=lf
+scripts/characters/derive-native-personal-armor-underlay-fit.mjs text eol=lf
+
+tests/native-personal-armor.test.mjs text eol=lf
+
+# Preserve actual browser evidence bytes.
+docs/qa/personal-armor-333/browser/**/*.json -text
+docs/qa/personal-armor-333/browser/**/*.webm -text
+
+tests/native-death-helmet-transition.test.mjs text eol=lf
+
+# Retained Markdown summaries are included in the exact-byte evidence manifest.
+docs/qa/personal-armor-333/browser/**/*.md -text
+
+# Additional armor variant receipts preserve their measured bytes.
+scripts/calibrate-personal-armor-variants.mjs text eol=lf
+tests/*personal-armor-variants*.mjs text eol=lf
+docs/qa/personal-armor-333/variants/**/*.json -text
+docs/qa/personal-armor-333/variants/**/*.md -text
+docs/qa/personal-armor-333/variants/**/*.webm -text
+
+scripts/characters/native-iron-body-armor-underlay-fit.json text eol=lf
+
+output/native-personal-armor-333/variants/*.json -text
+
+output/native-personal-armor-333/variants/*.gz -text

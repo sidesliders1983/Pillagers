@@ -36,8 +36,8 @@ const advance = (state, ticks) => metalworkingApply(state, { type: 'AdvanceTicks
 const cachedMinedStates = new Map();
 
 /** Real scout, Miner and finite deposit; only the saved labour threshold is accelerated for QA. */
-export function minedMetalworkingFixture({ physical = false, nearbyRival = false } = {}) {
-    const key = `${physical}:${nearbyRival}`;
+export function minedMetalworkingFixture({ physical = false, nearbyRival = false, livestockRules } = {}) {
+    const key = `${physical}:${nearbyRival}:${JSON.stringify(livestockRules ?? null)}`;
     if (cachedMinedStates.has(key)) return structuredClone(cachedMinedStates.get(key));
     const context = nearbyRival ? metalworkingNearbyContext : metalworkingContext;
     const { world, worldId } = context;
@@ -47,7 +47,7 @@ export function minedMetalworkingFixture({ physical = false, nearbyRival = false
         { initialFood: 10000, initialMaterials: 500 }, {
             mortalityBands: [{ minAge: 0, chanceBps: 0 }], fertilityChanceBps: 0,
             partnershipChanceBps: 0, switchTicks: 0, workPerUnit: 100000,
-        }, { enabled: false });
+        }, { enabled: false }, {}, {}, {}, undefined, undefined, livestockRules ? { player: livestockRules } : undefined);
     let state = core.initializePhysicalMining(physical ? core.initializeIslandClans(campaign, world, worldId) :
         core.initializePhysicalDiscovery(campaign, world, worldId), world, worldId);
     for (const id of Object.keys(state.personas))
@@ -92,8 +92,12 @@ export function craftedIronFixture(spears = 2, shields = 2, options = {}) {
 }
 
 /** Actual physical rival, discovery and presence binding, after the same real extraction/crafting path. */
-export function ironEncounterFixture({ lethal = false } = {}) {
-    let state = craftedIronFixture(2, 2, { physical: true, nearbyRival: true });
+export function ironEncounterFixture({ lethal = false, initialState, mission = 'Pillage',
+    shield = 'ironShield', actionLethalityBps = lethal ? 10000 : 250 } = {}) {
+    assert.ok(shield === null || shield === 'ironShield', 'The fixture uses the actual iron shield or an empty slot');
+    assert.ok(Number.isInteger(actionLethalityBps) && actionLethalityBps >= 0 && actionLethalityBps <= 10000,
+        'The explicit encounter trial lethality must be bounded basis points');
+    let state = initialState ?? craftedIronFixture(2, 2, { physical: true, nearbyRival: true });
     const world = metalworkingNearbyWorld;
     const apply = (state, command) => core.applyCommand(state, command, metalworkingNearbyContext);
     const step = (state, ticks) => apply(state, { type: 'AdvanceTicks', ticks });
@@ -128,7 +132,7 @@ export function ironEncounterFixture({ lethal = false } = {}) {
     };
     const center = world.settlement.center;
     const encounterContext = { ...metalworkingNearbyContext,
-        encounterPolicy: { actionLethalityBps: lethal ? 10000 : 250, maximumExchanges: 1 },
+        encounterPolicy: { actionLethalityBps, maximumExchanges: 1 },
         presenceSites: [
             { clanId: state.clan.id, center, bounds: { minX: center.x - 40, maxX: center.x + 40,
                 minZ: center.z - 40, maxZ: center.z + 40 }, homes: homes(state, center, { minX: center.x - 40, maxX: center.x + 40, minZ: center.z - 40, maxZ: center.z + 40 }) },
@@ -140,10 +144,17 @@ export function ironEncounterFixture({ lethal = false } = {}) {
         state.smithery.config.woodenShieldProtectionBps = 0;
         state.smithery.config.leatherShieldProtectionBps = 0;
         state.smithery.config.ironShieldProtectionBps = 0;
+        if (state.smithery.version === 3) {
+            state.smithery.config.leatherBodyArmorProtectionBps = 0;
+            state.smithery.config.ironHelmetProtectionBps = 0;
+        }
     }
-    for (const [slot, item] of [['weapon', 'ironSpear'], ['shield', 'ironShield']])
+    for (const [slot, item] of [['weapon', 'ironSpear'], ['shield', shield]])
         state = core.applyCommand(state, { type: 'AssignEquipment', personaId: 'founder-1', slot, item }, encounterContext);
-    state = core.applyCommand(state, { type: 'DispatchIslandMission', groupId: 'group-1',
+    if (mission === 'Explore') {
+        state = core.applyCommand(state, { type: 'StartExpedition', groupId: 'group-1' }, encounterContext);
+        state = core.applyCommand(state, { type: 'ExploreArea', groupId: 'group-1', target: world.rivalSite.center }, encounterContext);
+    } else state = core.applyCommand(state, { type: 'DispatchIslandMission', groupId: 'group-1',
         target: { kind: 'site', siteId: world.rivalSite.candidateId }, mission: 'Pillage', priorities: ['Materials'] }, encounterContext);
     return { state, context: encounterContext };
 }

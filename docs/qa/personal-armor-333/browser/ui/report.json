@@ -1,0 +1,602 @@
+{
+  "schemaVersion": 1,
+  "kind": "Personal armor public UI journey",
+  "status": "PASS",
+  "startedAt": "2026-11-13T15:56:25.212Z",
+  "origin": "http://127.0.0.1:5204",
+  "output": "D:\\CodexSites\\Pillagers\\scratch\\personal-armor-333\\scratch\\personal-armor-browser\\ui-final-d",
+  "steps": [
+    {
+      "step": "Normal home file import and Continue campaign",
+      "result": "PASS"
+    },
+    {
+      "step": "Home Group 2 exposes four actual personal slots",
+      "result": "PASS",
+      "slots": [
+        {
+          "slot": "weapon",
+          "value": "ironSpear",
+          "disabled": false,
+          "label": "Fionnín Weapon",
+          "options": [
+            {
+              "value": "",
+              "text": "None",
+              "disabled": false
+            },
+            {
+              "value": "woodenSpear",
+              "text": "Wooden Spear (0 stored)",
+              "disabled": true
+            },
+            {
+              "value": "ironSpear",
+              "text": "Iron-tipped Spear (0 stored)",
+              "disabled": false
+            }
+          ]
+        },
+        {
+          "slot": "shield",
+          "value": "ironShield",
+          "disabled": false,
+          "label": "Fionnín Shield",
+          "options": [
+            {
+              "value": "",
+              "text": "None",
+              "disabled": false
+            },
+            {
+              "value": "woodenShield",
+              "text": "Wooden Shield (0 stored)",
+              "disabled": true
+            },
+            {
+              "value": "leatherShield",
+              "text": "Leather-reinforced Shield (1 stored)",
+              "disabled": false
+            },
+            {
+              "value": "ironShield",
+              "text": "Iron-reinforced Shield (0 stored)",
+              "disabled": false
+            }
+          ]
+        },
+        {
+          "slot": "bodyArmor",
+          "value": "leatherBodyArmor",
+          "disabled": false,
+          "label": "Fionnín Body Armor",
+          "options": [
+            {
+              "value": "",
+              "text": "None",
+              "disabled": false
+            },
+            {
+              "value": "leatherBodyArmor",
+              "text": "Leather Body Armor (0 stored)",
+              "disabled": false
+            }
+          ]
+        },
+        {
+          "slot": "headgear",
+          "value": "ironHelmet",
+          "disabled": false,
+          "label": "Fionnín Headgear",
+          "options": [
+            {
+              "value": "",
+              "text": "None",
+              "disabled": false
+            },
+            {
+              "value": "ironHelmet",
+              "text": "Iron Helmet (0 stored)",
+              "disabled": false
+            }
+          ]
+        }
+      ],
+      "screenshot": "01-home-equipment.png"
+    },
+    {
+      "step": "Body Armor and Headgear transfer independently to the ally and back; hand slots unchanged",
+      "result": "PASS"
+    },
+    {
+      "step": "Actual on-site Pillage preview; Back closes it without dispatch",
+      "result": "PASS",
+      "text": "Start Pillage\n\nArmor QA\n\nThis will cost 10 Food (5 per member). Are you sure?\n\n500 ticks, including travel and return. No refunds.\n\nCombat depends on actual present defenders and personal equipment. Provisional trial rules.\n\nTravel hazard: 0% per member. Combat losses are resolved on site.\n\n2/2 spear holders\n\nFionnín · Iron-tipped Spear · Iron-reinforced Shield · Leather Body Armor · Iron Helmet\n\nTautvydas · Wooden Spear · Wooden Shield\n\nStart mission Back",
+      "screenshot": "02-home-pillage-offer.png"
+    },
+    {
+      "step": "Normal campaign download conserves canonical time, RNG, stocks and all gear",
+      "result": "PASS",
+      "facts": {
+        "time": {
+          "winter": 801,
+          "tick": 475
+        },
+        "rngState": 2345743795,
+        "stocks": {
+          "food": 9992,
+          "materials": 480
+        },
+        "specialistStocks": {
+          "version": 1,
+          "hides": 0,
+          "ironOre": 7
+        },
+        "stored": {
+          "woodenSpear": 0,
+          "woodenShield": 0,
+          "leatherShield": 1,
+          "ironSpear": 0,
+          "ironShield": 0,
+          "leatherBodyArmor": 0,
+          "ironHelmet": 0
+        },
+        "assignments": {
+          "founder-1": {
+            "weapon": "ironSpear",
+            "shield": "ironShield",
+            "bodyArmor": "leatherBodyArmor",
+            "headgear": "ironHelmet"
+          },
+          "founder-3": {
+            "weapon": "woodenSpear",
+            "shield": "woodenShield"
+          }
+        },
+        "targets": {
+          "woodenSpear": 1,
+          "woodenShield": 1,
+          "leatherShield": 1,
+          "ironSpear": 1,
+          "ironShield": 1,
+          "leatherBodyArmor": 1,
+          "ironHelmet": 1
+        }
+      }
+    },
+    {
+      "step": "Ordinary in-game file reimport remains paused and preserves the complete exported Core",
+      "result": "PASS",
+      "notice": "Campaign imported, paused."
+    },
+    {
+      "step": "Short desktop viewport retains reachable four-slot controls",
+      "result": "PASS",
+      "dimensions": {
+        "width": 844,
+        "height": 390,
+        "documentWidth": 844,
+        "coarse": false,
+        "mobile": false,
+        "maxTouchPoints": 0
+      },
+      "boxes": [
+        {
+          "slot": "weapon",
+          "box": {
+            "x": 96.5,
+            "y": 207.96875,
+            "width": 321.5,
+            "height": 44
+          }
+        },
+        {
+          "slot": "shield",
+          "box": {
+            "x": 426,
+            "y": 207.96875,
+            "width": 321.5,
+            "height": 44
+          }
+        },
+        {
+          "slot": "bodyArmor",
+          "box": {
+            "x": 96.5,
+            "y": 208.265625,
+            "width": 321.5,
+            "height": 44
+          }
+        },
+        {
+          "slot": "headgear",
+          "box": {
+            "x": 426,
+            "y": 208.265625,
+            "width": 321.5,
+            "height": 44
+          }
+        }
+      ],
+      "screenshot": "03-compact-desktop-equipment.png"
+    },
+    {
+      "step": "Home Character Card names four actual items and honest occupational-hat stowage",
+      "result": "PASS",
+      "text": "Assigned equipment\n\nWeapon: Iron-tipped Spear\n\nShield: Iron-reinforced Shield\n\nBody Armor: Leather Body Armor\n\nHeadgear: Iron Helmet\n\nIron Helmet stowed while the occupational hat is worn.",
+      "screenshot": "04-home-character-card.png"
+    },
+    {
+      "step": "Fresh touch context imports ordinary field file through Load game and Continue",
+      "result": "PASS"
+    },
+    {
+      "step": "Touch-emulated landscape has four disabled away slots and reachable controls",
+      "result": "PASS",
+      "dimensions": {
+        "width": 844,
+        "height": 390,
+        "documentWidth": 844,
+        "coarse": true,
+        "mobile": true,
+        "maxTouchPoints": 1
+      },
+      "boxes": [
+        {
+          "slot": "weapon",
+          "box": {
+            "x": 34.5,
+            "y": 174.78125,
+            "width": 209.5,
+            "height": 44
+          }
+        },
+        {
+          "slot": "shield",
+          "box": {
+            "x": 252,
+            "y": 174.78125,
+            "width": 209.5,
+            "height": 44
+          }
+        },
+        {
+          "slot": "bodyArmor",
+          "box": {
+            "x": 34.5,
+            "y": 267.078125,
+            "width": 209.5,
+            "height": 44
+          }
+        },
+        {
+          "slot": "headgear",
+          "box": {
+            "x": 252,
+            "y": 267.078125,
+            "width": 209.5,
+            "height": 44
+          }
+        }
+      ],
+      "slots": [
+        {
+          "slot": "weapon",
+          "value": "ironSpear",
+          "disabled": true,
+          "label": "Fionnín Weapon",
+          "options": [
+            {
+              "value": "",
+              "text": "None",
+              "disabled": false
+            },
+            {
+              "value": "woodenSpear",
+              "text": "Wooden Spear (0 stored)",
+              "disabled": true
+            },
+            {
+              "value": "ironSpear",
+              "text": "Iron-tipped Spear (0 stored)",
+              "disabled": false
+            }
+          ]
+        },
+        {
+          "slot": "shield",
+          "value": "ironShield",
+          "disabled": true,
+          "label": "Fionnín Shield",
+          "options": [
+            {
+              "value": "",
+              "text": "None",
+              "disabled": false
+            },
+            {
+              "value": "woodenShield",
+              "text": "Wooden Shield (0 stored)",
+              "disabled": true
+            },
+            {
+              "value": "leatherShield",
+              "text": "Leather-reinforced Shield (1 stored)",
+              "disabled": false
+            },
+            {
+              "value": "ironShield",
+              "text": "Iron-reinforced Shield (0 stored)",
+              "disabled": false
+            }
+          ]
+        },
+        {
+          "slot": "bodyArmor",
+          "value": "leatherBodyArmor",
+          "disabled": true,
+          "label": "Fionnín Body Armor",
+          "options": [
+            {
+              "value": "",
+              "text": "None",
+              "disabled": false
+            },
+            {
+              "value": "leatherBodyArmor",
+              "text": "Leather Body Armor (0 stored)",
+              "disabled": false
+            }
+          ]
+        },
+        {
+          "slot": "headgear",
+          "value": "ironHelmet",
+          "disabled": true,
+          "label": "Fionnín Headgear",
+          "options": [
+            {
+              "value": "",
+              "text": "None",
+              "disabled": false
+            },
+            {
+              "value": "ironHelmet",
+              "text": "Iron Helmet (0 stored)",
+              "disabled": false
+            }
+          ]
+        }
+      ],
+      "screenshot": "05-touch-away-equipment.png"
+    },
+    {
+      "step": "Public scene DOM projects actual native armor, helmet and two iron props with field clothing",
+      "result": "PASS",
+      "rendered": {
+        "key": "persona:founder-1",
+        "renderId": "843da95b-5ca1-4c17-9e93-65284223a642",
+        "kind": "persona",
+        "id": "founder-1",
+        "living": true,
+        "mining": false,
+        "expedition": "explore-4",
+        "expeditionWalking": true,
+        "sex": "female",
+        "age": 29,
+        "indoorReason": null,
+        "occupation": "smith",
+        "equipment": {
+          "weapon": "ironSpear",
+          "shield": "ironShield",
+          "bodyArmor": "leatherBodyArmor",
+          "headgear": "ironHelmet"
+        },
+        "workEligible": false,
+        "visible": true,
+        "insideMine": false,
+        "position": [
+          155,
+          3.3594307899475098,
+          -120
+        ],
+        "asset": "human",
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            154.3390632831151,
+            3.3432474355714032,
+            -120.8556773531136
+          ],
+          "max": [
+            155.81789683606232,
+            4.91051672396555,
+            -119.21476580624747
+          ]
+        },
+        "appearance": {
+          "seed": 3152282013,
+          "height": 1.4804846278671175,
+          "adultAge": 29,
+          "masculinity": 0.49,
+          "weightDeviation": 0.018045301956087455,
+          "age": 29,
+          "stage": "adult",
+          "appearance": {
+            "hairStyle": "braid",
+            "beardStyle": "none",
+            "color": "#786052",
+            "greyAmount": 0
+          },
+          "appearanceFit": {
+            "hair": 1,
+            "beard": 1,
+            "clothing": 1
+          },
+          "motion": {
+            "cadence": 0.9844,
+            "stride": 1,
+            "footfall": 1.06
+          },
+          "weights": {
+            "Masculine": 0,
+            "Feminine": 0.01200000000000001,
+            "Breasts": 0.01200000000000001,
+            "Powerful": 0,
+            "Slight": 0,
+            "Agile": 0,
+            "Grounded": 0.156,
+            "Tall": 0.1686859494463233,
+            "Short": 0,
+            "Overweight": 0.010827181173652473,
+            "Underweight": 0,
+            "Age": 0,
+            "HeadWidth": -0.09606584664434194,
+            "HeadLength": -0.29181822706013916,
+            "Jaw": -0.2029688770417124,
+            "Nose": 0.09216888877563179,
+            "LegRatio": 0.06727697188034654,
+            "ShoulderSlope": -0.04352430840954185,
+            "Asymmetry": 0.047874413069803265,
+            "BellyJiggle": 0,
+            "BreastJiggle": 0,
+            "Child": 0,
+            "ChildPower": 0,
+            "ChildAgility": 0,
+            "FemininePower": 0,
+            "MasculineAgility": 0,
+            "TallSlight": 0,
+            "ElderHeavy": 0
+          }
+        },
+        "motion": {
+          "state": "Idle",
+          "speed": 0,
+          "clipTime": 0,
+          "sourceClip": "Idle_02",
+          "generation": 1,
+          "loop": 0,
+          "duration": 1.875,
+          "clip": "Idle"
+        },
+        "clothing": {
+          "id": "generic",
+          "assets": {
+            "hair": "hair/manual-female-mid-hair-knotted",
+            "beard": null,
+            "headwear": "headwear/native-iron-helmet",
+            "outfit": "garment/meshy-grid-trial-001",
+            "shoes": "garment/meshy-low-shoes-005",
+            "trousers": null,
+            "top": null,
+            "equipment": "equipment/native-iron-spear",
+            "bodyArmor": "garment/native-leather-body-armor",
+            "equipmentItems": [
+              "equipment/native-iron-spear",
+              "equipment/native-iron-shield"
+            ]
+          }
+        },
+        "placeholder": false
+      }
+    },
+    {
+      "step": "Touch Character Card names all four assignments and loads its native portrait",
+      "result": "PASS",
+      "text": "Assigned equipment\n\nWeapon: Iron-tipped Spear\n\nShield: Iron-reinforced Shield\n\nBody Armor: Leather Body Armor\n\nHeadgear: Iron Helmet",
+      "screenshot": "06-touch-character-card.png",
+      "portrait": {
+        "width": 128,
+        "height": 128
+      }
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "failedRequests": [],
+  "httpErrors": [],
+  "scope": {
+    "publicDOMOnly": true,
+    "isolatedContexts": true,
+    "storageInjection": false,
+    "desktop": {
+      "width": 1366,
+      "height": 768,
+      "deviceScaleFactor": 1
+    },
+    "compactDesktop": {
+      "width": 844,
+      "height": 390
+    },
+    "touch": {
+      "width": 844,
+      "height": 390,
+      "isMobile": true,
+      "hasTouch": true,
+      "deviceScaleFactor": 1
+    },
+    "reducedMotion": "reduce",
+    "quality": "low",
+    "effects": "off"
+  },
+  "requestFailureScope": "All request failures are retained. Only requests failing during closure of an owned context are marked as cleanup; none are silently removed.",
+  "limitations": [
+    "UI correctness and factual clothing projection only; geometry fit acceptance is separate.",
+    "Touch-emulated Chrome is not a physical iPhone or a phone heat/frame-pacing test.",
+    "No CPU/GPU delta, rendering-resource budget or physical-device performance is measured."
+  ],
+  "source": {
+    "runnerSha256": "dea4b56c641c7176b723dc979815875c429bbd75c4f3024724407db350a138df",
+    "home": {
+      "path": "D:\\CodexSites\\Pillagers\\scratch\\personal-armor-333\\scratch\\personal-armor-review-333\\home-campaign.json",
+      "sha256": "9914c24cac461cdabe83662edc59d6f9e05f4d5e793ecafcc421fd6516c5812a",
+      "coreSha256": "6437e5cdc5683f9c6714a39a0f5b893104ed8f3115b2ddd41e8c8db784bef2f7"
+    },
+    "field": {
+      "path": "D:\\CodexSites\\Pillagers\\scratch\\personal-armor-333\\scratch\\personal-armor-review-333\\field-campaign.json",
+      "sha256": "e20e094d4e796c213752950f11b1c17f601f1947ee5ef3bf62bd430524837c5e",
+      "coreSha256": "43238ae9e5243e4169956905f2fe9695c2105bc08f7355e7f154940bb0f7ce3a"
+    }
+  },
+  "build": {
+    "schemaVersion": 1,
+    "version": "0.1.0-alpha",
+    "channel": "alpha",
+    "displayVersion": "v0.1 alpha",
+    "origin": "local",
+    "buildNumber": null,
+    "buildId": "local-4ca0cb28c899bc6803a7",
+    "builtAt": "2026-11-13T15:55:49.590Z",
+    "source": {
+      "commit": "7f756202b47e30ad9db6b96f95eea1aa56cedeb3",
+      "dirty": false,
+      "provenance": "git"
+    },
+    "legacyBuild": "7f756202b47e30ad9db6b96f95eea1aa56cedeb3",
+    "configuration": {
+      "feedbackURL": ""
+    }
+  },
+  "export": {
+    "file": "home-ui-roundtrip.json",
+    "sha256": "0b9a73ea401ed4c64e2943a3e0c51dbf51da5abf616ddcb5d5f3ca3d13b21bea",
+    "coreSha256": "b0fcc4c8645d36ef3c7bedf76f78385434b82e5971401ae9f5ced3c259021dfd",
+    "formatKeys": [
+      "bridgeVersion",
+      "campaign",
+      "island",
+      "oreSites",
+      "layout",
+      "selection",
+      "rivalLayout",
+      "narrative",
+      "attention",
+      "weddingInvitations"
+    ]
+  },
+  "finishedAt": "2026-11-13T15:58:01.091Z"
+}

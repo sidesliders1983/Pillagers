@@ -2,7 +2,7 @@ import type { NativeEncounterPoseRequest } from './NativeEncounterPose';
 import { nativeCombatEquipmentRole } from './NativeCombatEquipmentCatalog';
 import { NativeEncounterBodyEnvelope, nativePropFrame, placeNativeArm, rotateNativeBoneWorld } from './NativeEncounterArmPose';
 import {
- BufferAttribute, Color, Group, Material, Matrix3, Matrix4, Mesh,
+ BufferAttribute, type BufferGeometry, Color, Group, Material, Matrix3, Matrix4, Mesh,
  MeshStandardMaterial, Quaternion, SkinnedMesh, Vector3,
 } from 'three';
 import type {GLTF} from 'three/addons/loaders/GLTFLoader.js';
@@ -15,7 +15,7 @@ import {maskedBodyGeometry} from './BodyCoverage';
 import {sewModuleOpenings, weldModuleOpeningCorners} from './ModuleRims';
 import {CharacterAsset, assetMeasurement} from './CharacterAssets';
 import {HumanProfile} from './UniversalHumanProfile';
-import {validatePreparedOutfit, preparedCoverage, preparedCoverageMaterial, preparedModuleCoverage, preparedNeckMaterial} from './PreparedNativeOutfit';
+import {validatePreparedOutfit, validateArmorUnderlayFit, preparedCoverage, preparedCoverageMaterial, preparedModuleCoverage, preparedNeckMaterial} from './PreparedNativeOutfit';
 import { characterSync, type CharacterPreparationObserver } from './CharacterPreparation';
 
 export interface NativeModuleSource {asset: CharacterAsset; source: GLTF; binding: ModuleBindingV2;}
@@ -32,6 +32,39 @@ function sourceMeshes(source: GLTF) {
 }
 function providerOriginal(binding: ModuleBindingV2) {
  return binding.materialPolicy?.kind === 'provider-original';
+}
+
+/** Appearance-time fitting changes only a wearer's fresh clone and adjacent normals. */
+function fitArmorUnderlay(geometry: BufferGeometry,
+ vertices: NonNullable<NonNullable<ModuleBindingV2['bodyArmorLayer']>['underlayFit']>['vertices']) {
+ const position = geometry.getAttribute('position'), normal = geometry.getAttribute('normal');
+ const joints = geometry.getAttribute('skinIndex'), weights = geometry.getAttribute('skinWeight');
+ const changed = new Set(vertices.map(value => value.vertex)), adjacent = new Set(changed);
+ for (const value of vertices) {
+  position.setXYZ(value.vertex, ...value.position);
+  if (value.joints && value.weights) for (let influence = 0; influence < 4; influence++) {
+   joints.setComponent(value.vertex, influence, value.joints[influence]);
+   weights.setComponent(value.vertex, influence, value.weights[influence]);
+  }
+ }
+ const index = geometry.index!;
+ for (let offset = 0; offset < index.count; offset += 3) {
+  const face = [index.getX(offset), index.getX(offset + 1), index.getX(offset + 2)];
+  if (face.some(vertex => changed.has(vertex))) face.forEach(vertex => adjacent.add(vertex));
+ }
+ const sums = new Map([...adjacent].map(vertex => [vertex, new Vector3()]));
+ const a = new Vector3(), b = new Vector3(), c = new Vector3(), faceNormal = new Vector3();
+ for (let offset = 0; offset < index.count; offset += 3) {
+  const face = [index.getX(offset), index.getX(offset + 1), index.getX(offset + 2)];
+  if (!face.some(vertex => adjacent.has(vertex))) continue;
+  a.fromBufferAttribute(position, face[0]); b.fromBufferAttribute(position, face[1]); c.fromBufferAttribute(position, face[2]);
+  faceNormal.crossVectors(b.sub(a), c.sub(a));
+  for (const vertex of face) sums.get(vertex)?.add(faceNormal);
+ }
+ for (const [vertex, sum] of sums) {
+  if (sum.lengthSq() < 1e-20) continue;
+  sum.normalize(); normal.setXYZ(vertex, sum.x, sum.y, sum.z);
+ }
 }
 
 /** Validation is performed before an instance takes ownership of fitted geometry. */
@@ -71,6 +104,9 @@ export function validateNativeModule(source: NativeModuleSource, fit: MeshyBodyF
   'Rigid tools require their prepared source binding');
  fail(asset.type !== 'headwear' || binding.precomputedNative && binding.headwearFit,
   'Headwear requires its prepared cavity and rigid native head binding');
+ fail(!asset.tags.includes('personal-body-armor') && !binding.bodyArmorLayer
+  || binding.precomputedNative && binding.bodyArmorLayer,
+ 'Personal Body Armor requires a prepared qualified layer');
  if (binding.precomputedNative) {
   validatePreparedOutfit(source, fit);
   return;
@@ -216,6 +252,16 @@ export class MeshyModuleRuntime {
   });
   fail(new Set(sources.map(source => source.asset.id)).size === sources.length,
    'Native module IDs must be unique');
+  const armorLayers = sources.filter(source => source.binding.bodyArmorLayer);
+  fail(armorLayers.length <= 1, 'Only one personal Body Armor layer may be installed');
+  for (const layer of armorLayers) {
+   const qualification = layer.binding.bodyArmorLayer!;
+   const underlay = sources.find(source => source.asset.id === qualification.underlayId);
+   fail(underlay && assetMeasurement(underlay.asset.lods[2]).sha256 === qualification.underlaySha256
+    && (!nativeModuleEligible(layer, profile) || nativeModuleEligible(underlay, profile)),
+   'Body Armor requires its exact available field tunic underlay');
+   validateArmorUnderlayFit(layer, underlay);
+  }
   this.clear();
   for (const source of sources) {
    if (!nativeModuleEligible(source, profile)) continue;
@@ -269,6 +315,11 @@ export class MeshyModuleRuntime {
   mesh.geometry = original.geometry.clone();
   const position = mesh.geometry.getAttribute('position');
   if (source.binding.precomputedNative) {
+   for (const upper of this.records.values()) {
+    const layer = upper.source.binding.bodyArmorLayer, fitting = layer?.underlayFit;
+    if (!fitting || layer!.underlayId !== source.asset.id || fitting.meshName !== original.name) continue;
+    fitArmorUnderlay(mesh.geometry, fitting.vertices);
+   }
    for (const upper of this.records.values()) {
     const prepared = upper.source.binding.precomputedNative;
     const underlap = prepared?.version === 3 ? prepared.lowerUnderlap : undefined;
@@ -429,6 +480,20 @@ export class MeshyModuleRuntime {
      this.fitPart(record, part, inverseEncoding, profile), record.source.asset.id);
    }
   }
+  const qualifiedHeadwear = [...this.records.values()].filter(record =>
+   record.source.binding.headwearFit?.crownCavity);
+  if (qualifiedHeadwear.length) {
+   this.fit.rootForModulesUpdate();
+   const crownHair = [...this.records.values()].filter(record => record.source.asset.type === 'hair')
+    .flatMap(record => record.parts.map(part => part.mesh)
+     .filter((mesh): mesh is SkinnedMesh => (mesh as SkinnedMesh).isSkinnedMesh));
+   // Source-wall fields are measured before facial offsets. Fit that crown first, then
+   // apply the shared facial field to both helmet and hair so their clearance deforms together.
+   for (const record of qualifiedHeadwear) for (const part of record.parts)
+    characterSync(this.observe, 'qualified-helmet-crown-fit', () =>
+     fitNativeHeadwear(part.mesh as SkinnedMesh, record.source.binding.headwearFit!, crownHair, this.fit),
+    record.source.asset.id);
+  }
   if (this.fit.facialIdentity && this.fit.mesh.morphTargetInfluences?.some(weight => weight !== 0)) {
    for (const record of this.records.values()) {
     if (!['hair', 'beard', 'headwear'].includes(record.source.asset.type)) continue;
@@ -452,7 +517,8 @@ export class MeshyModuleRuntime {
   const hair = [...this.records.values()].filter(record => record.source.asset.type === 'hair')
    .flatMap(record => record.parts.map(part => part.mesh).filter((mesh): mesh is SkinnedMesh => (mesh as SkinnedMesh).isSkinnedMesh));
   for (const record of this.records.values()) {
-   if (record.source.binding.headwearFit) for (const part of record.parts) {
+   if (record.source.binding.headwearFit && !record.source.binding.headwearFit.crownCavity)
+    for (const part of record.parts) {
     characterSync(this.observe, 'hat-fit', () =>
      fitNativeHeadwear(part.mesh as SkinnedMesh, record.source.binding.headwearFit!, hair, this.fit), record.source.asset.id);
    }
@@ -463,7 +529,13 @@ export class MeshyModuleRuntime {
   this.restoreMask();
   const prepared = [...this.records.values()].filter(record => record.source.asset.type === 'garment' && record.source.binding.precomputedNative);
   const full = prepared.filter(record => record.source.binding.precomputedNative!.version === 2);
-  const footwear = prepared.filter(record => record !== full[0]);
+  const layers = prepared.filter(record => record.source.binding.bodyArmorLayer);
+  const footwear = prepared.filter(record => record !== full[0] && !record.source.binding.bodyArmorLayer);
+  fail(layers.length <= 1 && layers.every(record => {
+   const layer = record.source.binding.bodyArmorLayer!;
+   return full.length === 1 && full[0].source.asset.id === layer.underlayId
+    && assetMeasurement(full[0].source.asset.lods[2]).sha256 === layer.underlaySha256;
+  }), 'Body Armor requires its exact qualified tunic and unchanged native body coverage');
   fail(full.length <= 1 && (!full.length || !footwear.length
    || full[0].source.asset.metadata?.includesFootwear === false
    && footwear.every(record => record.source.asset.metadata?.slot === 'footwear'
@@ -666,7 +738,9 @@ export class MeshyModuleRuntime {
     rotateNativeBoneWorld(forearm, orient, update);
    }
   }
-  if (!['ready', 'spear', 'shield', 'brace', 'withdraw'].includes(request.action) || !request.hasSpear) return;
+  // Native Death keeps its fall, while the existing hand/shaft solver prevents
+  // the held source spear passing through the folded body and outer clothing.
+  if (!['ready', 'spear', 'shield', 'brace', 'withdraw', 'death'].includes(request.action) || !request.hasSpear) return;
   const record = [...this.records.values()].find(record => record.group.visible &&
    nativeCombatEquipmentRole(record.source.asset.id) === 'spear');
   const pose = record?.source.binding.rigidEquipment?.gripPose;
@@ -677,6 +751,11 @@ export class MeshyModuleRuntime {
   upper.quaternion.fromArray(pose.upperArmRotation);
   forearm.quaternion.fromArray(pose.forearmRotation);
   const extension = request.action === 'spear' ? Math.sin(Math.PI * phase) : 0;
+  // The head curls toward this arm before the fall ends. Reach the measured
+  // six-radius forearm margin by mid-fall and keep it through the resting pose.
+  const deathRise = Math.min(1, 2 * phase);
+  const deathForearmClearance = request.action === 'death'
+   ? 6 * pose.fingerRadius * deathRise * deathRise * (3 - 2 * deathRise) : 0;
   this.fit.rootForModulesUpdate();
   const bodyRotation = this.fit.bodyRoot.getWorldQuaternion(new Quaternion());
   const update = () => this.fit.rootForModulesUpdate();
@@ -738,15 +817,39 @@ export class MeshyModuleRuntime {
   const target = shoulder.clone();
   target.x = lateralLimit - gripSection.radius * radiusScale - pose.fingerRadius;
   target.y -= .32 * reach;
-  const forward = new Vector3(0, .8 * (1 - extension), 1).normalize().applyQuaternion(bodyRotation);
+  // A corpse keeps the held shaft beside its body; the standing diagonal
+  // would push the butt below the ground after the native fall reaches its end.
+  const forward = new Vector3(0, request.action === 'death' ? 0 : .8 * (1 - extension), 1)
+   .normalize().applyQuaternion(bodyRotation);
   for (let pass = 0; pass < 3; pass++) {
    const sideways = target.x - shoulder.x, down = target.y - shoulder.y;
    const available = Math.sqrt(Math.max(0, (reach - clearance) ** 2 - sideways ** 2 - down ** 2));
-   target.z = shoulder.z + available * (extension - .5 * (1 - extension));
+   // Keep the fallen forearm outside the helmet's side. The source grip radius
+   // bounds this Death-only target offset; wrist grasp and shaft direction stay fixed.
+   target.z = shoulder.z + available * (extension - .5 * (1 - extension))
+    - deathForearmClearance;
    placeNativeArm(upper, forearm, wrist, frame.localToWorld(target.clone()),
     new Vector3(0, -1, 0).applyQuaternion(bodyRotation), update);
    const axis = point(ends.tip).sub(point(ends.butt)).normalize();
    rotateNativeBoneWorld(wrist, new Quaternion().setFromUnitVectors(axis, forward), update);
+   if (request.action === 'death' && deathRise > 0) {
+    // The shaft keeps its direction while the wrist rolls its real grip away
+    // from the elbow. Otherwise the curled forearm can cross the held shaft.
+    const gripFrame = nativePropFrame(mesh, pose.wristJoint, this.fit.encoding, frame);
+    const shaft = new Vector3(...pose.axis).transformDirection(gripFrame).transformDirection(frame.matrixWorld);
+    const wristPoint = wrist.getWorldPosition(new Vector3());
+    const gripOffset = new Vector3(...record.source.binding.rigidEquipment!.parts[0].grip)
+     .applyMatrix4(gripFrame).applyMatrix4(frame.matrixWorld).sub(wristPoint);
+    gripOffset.addScaledVector(shaft, -gripOffset.dot(shaft));
+    const awayFromElbow = wristPoint.clone().sub(forearm.getWorldPosition(new Vector3()));
+    awayFromElbow.addScaledVector(shaft, -awayFromElbow.dot(shaft));
+    if (gripOffset.lengthSq() > 1e-12 && awayFromElbow.lengthSq() > 1e-12) {
+     gripOffset.normalize(); awayFromElbow.normalize();
+     const roll = Math.atan2(shaft.dot(gripOffset.clone().cross(awayFromElbow)), gripOffset.dot(awayFromElbow));
+     const blend = deathRise * deathRise * (3 - 2 * deathRise);
+     rotateNativeBoneWorld(wrist, new Quaternion().setFromAxisAngle(shaft, roll * blend), update);
+    }
+   }
    const fitted = nativePropFrame(mesh, pose.wristJoint, this.fit.encoding, frame);
    const sourceAxis = new Vector3().fromArray(pose.axis);
    const origin = new Vector3(...record.source.binding.rigidEquipment!.parts[0].grip);

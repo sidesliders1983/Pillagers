@@ -85,3 +85,34 @@ test('actual iron loadouts roundtrip exact native modules and valid combat poses
         assert.equal(JSON.stringify(original), before);
     }
 });
+
+test('four actual personal modules roundtrip with the same face, hair, beard and combat pose', () => {
+    const saved = snapshot('CombatShield', ['equipment/native-iron-spear', 'equipment/native-iron-shield']);
+    saved.presentation.bodyArmor = 'garment/native-leather-body-armor';
+    saved.presentation.headwear = 'headwear/native-iron-helmet';
+    saved.presentation.hair = 'hair/manual-long-braided';
+    saved.presentation.beard = 'beard/manual-fitted-normal';
+    saved.modules = snapshotModules(saved.dna, saved.presentation, saved.lod, saved.body);
+    const before = JSON.stringify(saved);
+    const restored = parseLabSnapshot(JSON.parse(before));
+    assert.deepEqual(restored, saved);
+    for (const id of ['garment/native-leather-body-armor', 'headwear/native-iron-helmet',
+        'equipment/native-iron-spear', 'equipment/native-iron-shield'])
+        assert.ok(restored.modules.some(module => module.id === id));
+    assert.equal(restored.presentation.hair, 'hair/manual-long-braided');
+    assert.equal(restored.presentation.beard, 'beard/manual-fitted-normal');
+    assert.deepEqual(restored.dna, saved.dna);
+    assert.equal(JSON.stringify(saved), before);
+});
+
+test('body armor cannot silently replace the required tunic or occupy a hand slot', () => {
+    const saved = snapshot('CombatReady');
+    saved.presentation.bodyArmor = 'garment/native-leather-body-armor';
+    saved.presentation.outfit = 'none';
+    assert.throws(() => snapshotModules(saved.dna, saved.presentation, saved.lod, saved.body),
+        /armor|underlay|tunic|outfit/i);
+    const hand = snapshot('CombatReady');
+    hand.presentation.equipmentItems = ['garment/native-leather-body-armor'];
+    assert.throws(() => snapshotModules(hand.dna, hand.presentation, hand.lod, hand.body),
+        /equipment|hand|module/i);
+});

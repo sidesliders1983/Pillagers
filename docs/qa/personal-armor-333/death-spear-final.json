@@ -1,0 +1,2046 @@
+{
+  "version": 1,
+  "scope": "Exact supplied posed spear vertices in complete actual native body: majority odd finite ray parity in three non-axis directions; nearest actual body-surface Euclidean depth. This is a native corpse diagnostic, not an exemption or body-mask change.",
+  "cases": [
+    {
+      "weapon": "wooden",
+      "phase": 0.5,
+      "spearVertices": 4585,
+      "insideBodyVertices": 411,
+      "maximumVertexBodyDepth": 0.02526092201888463,
+      "sourceGraspRegionVertices": 354,
+      "nonGraspVertices": 57,
+      "maximumNonGraspDepth": 0.011011299545762089,
+      "deepestNonGrasp": [
+        {
+          "vertex": 1850,
+          "point": [
+            -0.563138484954834,
+            0.8254929184913635,
+            -0.02881041169166565
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.011011299545762089,
+          "bodyTriangle": 36,
+          "bodyPoint": [
+            -0.5592152753909339,
+            0.8210185355301204,
+            -0.03807523988868906
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightForeArm"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 2330,
+          "point": [
+            -0.563138484954834,
+            0.8254929184913635,
+            -0.02881041169166565
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.011011299545762089,
+          "bodyTriangle": 36,
+          "bodyPoint": [
+            -0.5592152753909339,
+            0.8210185355301204,
+            -0.03807523988868906
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightForeArm"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 2685,
+          "point": [
+            -0.563138484954834,
+            0.8254929184913635,
+            -0.02881041169166565
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.011011299545762089,
+          "bodyTriangle": 36,
+          "bodyPoint": [
+            -0.5592152753909339,
+            0.8210185355301204,
+            -0.03807523988868906
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightForeArm"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 1650,
+          "point": [
+            -0.5525640249252319,
+            0.822629988193512,
+            0.020531851798295975
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.007649283547124926,
+          "bodyTriangle": 180,
+          "bodyPoint": [
+            -0.5518865667149214,
+            0.8228880211180171,
+            0.028146706239942927
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightForeArm",
+              "mixamorigRightHand",
+              "mixamorigRightHandThumb2"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 2101,
+          "point": [
+            -0.5525640249252319,
+            0.822629988193512,
+            0.020531851798295975
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.007649283547124926,
+          "bodyTriangle": 180,
+          "bodyPoint": [
+            -0.5518865667149214,
+            0.8228880211180171,
+            0.028146706239942927
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightForeArm",
+              "mixamorigRightHand",
+              "mixamorigRightHandThumb2"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 1666,
+          "point": [
+            -0.5449336171150208,
+            0.8206943869590759,
+            0.018275614827871323
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.007465720372785362,
+          "bodyTriangle": 181,
+          "bodyPoint": [
+            -0.5378299964289823,
+            0.8192507087360372,
+            0.02006204899173888
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightForeArm",
+              "mixamorigRightHandThumb2",
+              "mixamorigRightHandThumb2"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 1851,
+          "point": [
+            -0.5449336171150208,
+            0.8206943869590759,
+            0.018275614827871323
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.007465720372785362,
+          "bodyTriangle": 181,
+          "bodyPoint": [
+            -0.5378299964289823,
+            0.8192507087360372,
+            0.02006204899173888
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightForeArm",
+              "mixamorigRightHandThumb2",
+              "mixamorigRightHandThumb2"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 1848,
+          "point": [
+            -0.5572348237037659,
+            0.8240839838981628,
+            -0.028966834768652916
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.0071223811918561825,
+          "bodyTriangle": 37,
+          "bodyPoint": [
+            -0.5520809026001045,
+            0.8207583216492672,
+            -0.025346699176494715
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightForeArm",
+              "mixamorigRightHandMiddle1"
+            ],
+            "sourceGraspRegion": false
+          }
+        }
+      ],
+      "deepest": [
+        {
+          "vertex": 2226,
+          "point": [
+            -0.6015242338180542,
+            0.8014205098152161,
+            -0.010385419242084026
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.02526092201888463,
+          "bodyTriangle": 12,
+          "bodyPoint": [
+            -0.6116391180798678,
+            0.8076026140170324,
+            0.0119211915549907
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2266,
+          "point": [
+            -0.6015242338180542,
+            0.8014205098152161,
+            -0.010385419242084026
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.02526092201888463,
+          "bodyTriangle": 12,
+          "bodyPoint": [
+            -0.6116391180798678,
+            0.8076026140170324,
+            0.0119211915549907
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2267,
+          "point": [
+            -0.6015242338180542,
+            0.8014205098152161,
+            -0.010385419242084026
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.02526092201888463,
+          "bodyTriangle": 12,
+          "bodyPoint": [
+            -0.6116391180798678,
+            0.8076026140170324,
+            0.0119211915549907
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2236,
+          "point": [
+            -0.6020476818084717,
+            0.7893474698066711,
+            -0.004764433950185776
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.023961309739845983,
+          "bodyTriangle": 13,
+          "bodyPoint": [
+            -0.6139305844184006,
+            0.7999989176896634,
+            0.013109783459471126
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2270,
+          "point": [
+            -0.6020476818084717,
+            0.7893474698066711,
+            -0.004764433950185776
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.023961309739845983,
+          "bodyTriangle": 13,
+          "bodyPoint": [
+            -0.6139305844184006,
+            0.7999989176896634,
+            0.013109783459471126
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2271,
+          "point": [
+            -0.6009839177131653,
+            0.7965775728225708,
+            -0.010387794114649296
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.023716003166964865,
+          "bodyTriangle": 269,
+          "bodyPoint": [
+            -0.589699644154287,
+            0.7896203234289026,
+            -0.030052754255422323
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHandThumb3",
+              "mixamorigRightHandThumb2",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2225,
+          "point": [
+            -0.5989810228347778,
+            0.8081910014152527,
+            -0.014662436209619045
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.022625416320854328,
+          "bodyTriangle": 269,
+          "bodyPoint": [
+            -0.5882156596599379,
+            0.80155368302431,
+            -0.03342309781796954
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHandThumb3",
+              "mixamorigRightHandThumb2",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2268,
+          "point": [
+            -0.5989810228347778,
+            0.8081910014152527,
+            -0.014662436209619045
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.022625416320854328,
+          "bodyTriangle": 269,
+          "bodyPoint": [
+            -0.5882156596599379,
+            0.80155368302431,
+            -0.03342309781796954
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHandThumb3",
+              "mixamorigRightHandThumb2",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        }
+      ]
+    },
+    {
+      "weapon": "wooden",
+      "phase": 1,
+      "spearVertices": 4585,
+      "insideBodyVertices": 290,
+      "maximumVertexBodyDepth": 0.02315573478191569,
+      "sourceGraspRegionVertices": 272,
+      "nonGraspVertices": 18,
+      "maximumNonGraspDepth": 0.006900453988274163,
+      "deepestNonGrasp": [
+        {
+          "vertex": 1843,
+          "point": [
+            -0.4642510712146759,
+            0.41834956407546997,
+            0.35880208015441895
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.006900453988274163,
+          "bodyTriangle": 36,
+          "bodyPoint": [
+            -0.46480545883787416,
+            0.4176092896549884,
+            0.3519638849692905
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightForeArm"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 2090,
+          "point": [
+            -0.4642510712146759,
+            0.41834956407546997,
+            0.35880208015441895
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.006900453988274163,
+          "bodyTriangle": 36,
+          "bodyPoint": [
+            -0.46480545883787416,
+            0.4176092896549884,
+            0.3519638849692905
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightForeArm"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 2329,
+          "point": [
+            -0.4642510712146759,
+            0.41834956407546997,
+            0.35880208015441895
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.006900453988274163,
+          "bodyTriangle": 36,
+          "bodyPoint": [
+            -0.46480545883787416,
+            0.4176092896549884,
+            0.3519638849692905
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightForeArm"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 1848,
+          "point": [
+            -0.4594649076461792,
+            0.41566893458366394,
+            0.35530155897140503
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.003528464444215085,
+          "bodyTriangle": 36,
+          "bodyPoint": [
+            -0.4597483871129059,
+            0.4152904041310198,
+            0.35180492982
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightForeArm"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 1849,
+          "point": [
+            -0.4594649076461792,
+            0.41566893458366394,
+            0.35530155897140503
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.003528464444215085,
+          "bodyTriangle": 36,
+          "bodyPoint": [
+            -0.4597483871129059,
+            0.4152904041310198,
+            0.35180492982
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightForeArm"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 2589,
+          "point": [
+            -0.4594649076461792,
+            0.41566893458366394,
+            0.35530155897140503
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.003528464444215085,
+          "bodyTriangle": 36,
+          "bodyPoint": [
+            -0.4597483871129059,
+            0.4152904041310198,
+            0.35180492982
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightForeArm"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 2692,
+          "point": [
+            -0.4594649076461792,
+            0.41566893458366394,
+            0.35530155897140503
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.003528464444215085,
+          "bodyTriangle": 36,
+          "bodyPoint": [
+            -0.4597483871129059,
+            0.4152904041310198,
+            0.35180492982
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightForeArm"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 2693,
+          "point": [
+            -0.4594649076461792,
+            0.41566893458366394,
+            0.35530155897140503
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.003528464444215085,
+          "bodyTriangle": 36,
+          "bodyPoint": [
+            -0.4597483871129059,
+            0.4152904041310198,
+            0.35180492982
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightForeArm"
+            ],
+            "sourceGraspRegion": false
+          }
+        }
+      ],
+      "deepest": [
+        {
+          "vertex": 2271,
+          "point": [
+            -0.5038239359855652,
+            0.38915735483169556,
+            0.3738805949687958
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.02315573478191569,
+          "bodyTriangle": 12,
+          "bodyPoint": [
+            -0.5105746602619553,
+            0.39649036029750695,
+            0.3947813797835571
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2225,
+          "point": [
+            -0.501559317111969,
+            0.40072259306907654,
+            0.3696059584617615
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.0227662494293678,
+          "bodyTriangle": 11,
+          "bodyPoint": [
+            -0.5086383845040188,
+            0.41216146712306156,
+            0.3879728057229567
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2268,
+          "point": [
+            -0.501559317111969,
+            0.40072259306907654,
+            0.3696059584617615
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.0227662494293678,
+          "bodyTriangle": 11,
+          "bodyPoint": [
+            -0.5086383845040188,
+            0.41216146712306156,
+            0.3879728057229567
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2309,
+          "point": [
+            -0.501559317111969,
+            0.40072259306907654,
+            0.3696059584617615
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.0227662494293678,
+          "bodyTriangle": 11,
+          "bodyPoint": [
+            -0.5086383845040188,
+            0.41216146712306156,
+            0.3879728057229567
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2226,
+          "point": [
+            -0.5042547583580017,
+            0.3940112888813019,
+            0.3738829791545868
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.021490828887884034,
+          "bodyTriangle": 12,
+          "bodyPoint": [
+            -0.5105201030624371,
+            0.40081704854230593,
+            0.3932809898118569
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2266,
+          "point": [
+            -0.5042547583580017,
+            0.3940112888813019,
+            0.3738829791545868
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.021490828887884034,
+          "bodyTriangle": 12,
+          "bodyPoint": [
+            -0.5105201030624371,
+            0.40081704854230593,
+            0.3932809898118569
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2267,
+          "point": [
+            -0.5042547583580017,
+            0.3940112888813019,
+            0.3738829791545868
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.021490828887884034,
+          "bodyTriangle": 12,
+          "bodyPoint": [
+            -0.5105201030624371,
+            0.40081704854230593,
+            0.3932809898118569
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2279,
+          "point": [
+            -0.5012736320495605,
+            0.38539746403694153,
+            0.3733845055103302
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.021216568518311746,
+          "bodyTriangle": 269,
+          "bodyPoint": [
+            -0.4916139009125286,
+            0.3789041614301755,
+            0.3556455823381239
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHandThumb3",
+              "mixamorigRightHandThumb2",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        }
+      ]
+    },
+    {
+      "weapon": "iron",
+      "phase": 0.5,
+      "spearVertices": 3884,
+      "insideBodyVertices": 73,
+      "maximumVertexBodyDepth": 0.025427217162239762,
+      "sourceGraspRegionVertices": 67,
+      "nonGraspVertices": 6,
+      "maximumNonGraspDepth": 0.01302420899645108,
+      "deepestNonGrasp": [
+        {
+          "vertex": 2352,
+          "point": [
+            -0.5605922937393188,
+            0.8352264761924744,
+            0.015599383972585201
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.01302420899645108,
+          "bodyTriangle": 180,
+          "bodyPoint": [
+            -0.5594009069269803,
+            0.8356459589121669,
+            0.028562202018616027
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightForeArm",
+              "mixamorigRightHand",
+              "mixamorigRightHandThumb2"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 2405,
+          "point": [
+            -0.5605922937393188,
+            0.8352264761924744,
+            0.015599383972585201
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.01302420899645108,
+          "bodyTriangle": 180,
+          "bodyPoint": [
+            -0.5594009069269803,
+            0.8356459589121669,
+            0.028562202018616027
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightForeArm",
+              "mixamorigRightHand",
+              "mixamorigRightHandThumb2"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 2450,
+          "point": [
+            -0.5605922937393188,
+            0.8352264761924744,
+            0.015599383972585201
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.01302420899645108,
+          "bodyTriangle": 180,
+          "bodyPoint": [
+            -0.5594009069269803,
+            0.8356459589121669,
+            0.028562202018616027
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightForeArm",
+              "mixamorigRightHand",
+              "mixamorigRightHandThumb2"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 2453,
+          "point": [
+            -0.5508869886398315,
+            0.8289794325828552,
+            -0.013586536981165409
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.008762969221892814,
+          "bodyTriangle": 312,
+          "bodyPoint": [
+            -0.5508009352687065,
+            0.826742268472121,
+            -0.02205868671678749
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightForeArm",
+              "mixamorigRightHandThumb2",
+              "mixamorigRightHandMiddle1"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 2487,
+          "point": [
+            -0.5508869886398315,
+            0.8289794325828552,
+            -0.013586536981165409
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.008762969221892814,
+          "bodyTriangle": 312,
+          "bodyPoint": [
+            -0.5508009352687065,
+            0.826742268472121,
+            -0.02205868671678749
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightForeArm",
+              "mixamorigRightHandThumb2",
+              "mixamorigRightHandMiddle1"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 2528,
+          "point": [
+            -0.5508869886398315,
+            0.8289794325828552,
+            -0.013586536981165409
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.008762969221892814,
+          "bodyTriangle": 312,
+          "bodyPoint": [
+            -0.5508009352687065,
+            0.826742268472121,
+            -0.02205868671678749
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightForeArm",
+              "mixamorigRightHandThumb2",
+              "mixamorigRightHandMiddle1"
+            ],
+            "sourceGraspRegion": false
+          }
+        }
+      ],
+      "deepest": [
+        {
+          "vertex": 2404,
+          "point": [
+            -0.570591926574707,
+            0.8374147415161133,
+            -0.0026308586820960045
+          ],
+          "insideVotes": [
+            false,
+            true,
+            true
+          ],
+          "depth": 0.025427217162239762,
+          "bodyTriangle": 38,
+          "bodyPoint": [
+            -0.5560112758188845,
+            0.8298632629348616,
+            -0.022045367879841127
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHandMiddle1",
+              "mixamorigRightHandThumb3"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2442,
+          "point": [
+            -0.570591926574707,
+            0.8374147415161133,
+            -0.0026308586820960045
+          ],
+          "insideVotes": [
+            false,
+            true,
+            true
+          ],
+          "depth": 0.025427217162239762,
+          "bodyTriangle": 38,
+          "bodyPoint": [
+            -0.5560112758188845,
+            0.8298632629348616,
+            -0.022045367879841127
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHandMiddle1",
+              "mixamorigRightHandThumb3"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2482,
+          "point": [
+            -0.570591926574707,
+            0.8374147415161133,
+            -0.0026308586820960045
+          ],
+          "insideVotes": [
+            false,
+            true,
+            true
+          ],
+          "depth": 0.025427217162239762,
+          "bodyTriangle": 38,
+          "bodyPoint": [
+            -0.5560112758188845,
+            0.8298632629348616,
+            -0.022045367879841127
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHandMiddle1",
+              "mixamorigRightHandThumb3"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2484,
+          "point": [
+            -0.570591926574707,
+            0.8374147415161133,
+            -0.0026308586820960045
+          ],
+          "insideVotes": [
+            false,
+            true,
+            true
+          ],
+          "depth": 0.025427217162239762,
+          "bodyTriangle": 38,
+          "bodyPoint": [
+            -0.5560112758188845,
+            0.8298632629348616,
+            -0.022045367879841127
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHandMiddle1",
+              "mixamorigRightHandThumb3"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2518,
+          "point": [
+            -0.570591926574707,
+            0.8374147415161133,
+            -0.0026308586820960045
+          ],
+          "insideVotes": [
+            false,
+            true,
+            true
+          ],
+          "depth": 0.025427217162239762,
+          "bodyTriangle": 38,
+          "bodyPoint": [
+            -0.5560112758188845,
+            0.8298632629348616,
+            -0.022045367879841127
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHandMiddle1",
+              "mixamorigRightHandThumb3"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2440,
+          "point": [
+            -0.5779726505279541,
+            0.8367179036140442,
+            -0.023268401622772217
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.016406741894047065,
+          "bodyTriangle": 34,
+          "bodyPoint": [
+            -0.5748980160272174,
+            0.8302557317920208,
+            -0.0380321456468132
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2512,
+          "point": [
+            -0.5779726505279541,
+            0.8367179036140442,
+            -0.023268401622772217
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.016406741894047065,
+          "bodyTriangle": 34,
+          "bodyPoint": [
+            -0.5748980160272174,
+            0.8302557317920208,
+            -0.0380321456468132
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2552,
+          "point": [
+            -0.5779726505279541,
+            0.8367179036140442,
+            -0.023268401622772217
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.016406741894047065,
+          "bodyTriangle": 34,
+          "bodyPoint": [
+            -0.5748980160272174,
+            0.8302557317920208,
+            -0.0380321456468132
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        }
+      ]
+    },
+    {
+      "weapon": "iron",
+      "phase": 1,
+      "spearVertices": 3884,
+      "insideBodyVertices": 55,
+      "maximumVertexBodyDepth": 0.018080431725431237,
+      "sourceGraspRegionVertices": 49,
+      "nonGraspVertices": 6,
+      "maximumNonGraspDepth": 0.009408236796577535,
+      "deepestNonGrasp": [
+        {
+          "vertex": 2453,
+          "point": [
+            -0.4511188268661499,
+            0.41750454902648926,
+            0.37068185210227966
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.009408236796577535,
+          "bodyTriangle": 312,
+          "bodyPoint": [
+            -0.4506511804755802,
+            0.4149435325259848,
+            0.3616409770916401
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightForeArm",
+              "mixamorigRightHandThumb2",
+              "mixamorigRightHandMiddle1"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 2487,
+          "point": [
+            -0.4511188268661499,
+            0.41750454902648926,
+            0.37068185210227966
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.009408236796577535,
+          "bodyTriangle": 312,
+          "bodyPoint": [
+            -0.4506511804755802,
+            0.4149435325259848,
+            0.3616409770916401
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightForeArm",
+              "mixamorigRightHandThumb2",
+              "mixamorigRightHandMiddle1"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 2528,
+          "point": [
+            -0.4511188268661499,
+            0.41750454902648926,
+            0.37068185210227966
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.009408236796577535,
+          "bodyTriangle": 312,
+          "bodyPoint": [
+            -0.4506511804755802,
+            0.4149435325259848,
+            0.3616409770916401
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightForeArm",
+              "mixamorigRightHandThumb2",
+              "mixamorigRightHandMiddle1"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 2352,
+          "point": [
+            -0.4607130289077759,
+            0.42392095923423767,
+            0.3998677730560303
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.005369519412568049,
+          "bodyTriangle": 180,
+          "bodyPoint": [
+            -0.4575519291464771,
+            0.42435676984373416,
+            0.4041862515072573
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightForeArm",
+              "mixamorigRightHand",
+              "mixamorigRightHandThumb2"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 2405,
+          "point": [
+            -0.4607130289077759,
+            0.42392095923423767,
+            0.3998677730560303
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.005369519412568049,
+          "bodyTriangle": 180,
+          "bodyPoint": [
+            -0.4575519291464771,
+            0.42435676984373416,
+            0.4041862515072573
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightForeArm",
+              "mixamorigRightHand",
+              "mixamorigRightHandThumb2"
+            ],
+            "sourceGraspRegion": false
+          }
+        },
+        {
+          "vertex": 2450,
+          "point": [
+            -0.4607130289077759,
+            0.42392095923423767,
+            0.3998677730560303
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.005369519412568049,
+          "bodyTriangle": 180,
+          "bodyPoint": [
+            -0.4575519291464771,
+            0.42435676984373416,
+            0.4041862515072573
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightForeArm",
+              "mixamorigRightHand",
+              "mixamorigRightHandThumb2"
+            ],
+            "sourceGraspRegion": false
+          }
+        }
+      ],
+      "deepest": [
+        {
+          "vertex": 2404,
+          "point": [
+            -0.47067275643348694,
+            0.4262843430042267,
+            0.3816375136375427
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.018080431725431237,
+          "bodyTriangle": 10,
+          "bodyPoint": [
+            -0.47621293941169085,
+            0.43312990261541157,
+            0.3974282291867417
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2442,
+          "point": [
+            -0.47067275643348694,
+            0.4262843430042267,
+            0.3816375136375427
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.018080431725431237,
+          "bodyTriangle": 10,
+          "bodyPoint": [
+            -0.47621293941169085,
+            0.43312990261541157,
+            0.3974282291867417
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2482,
+          "point": [
+            -0.47067275643348694,
+            0.4262843430042267,
+            0.3816375136375427
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.018080431725431237,
+          "bodyTriangle": 10,
+          "bodyPoint": [
+            -0.47621293941169085,
+            0.43312990261541157,
+            0.3974282291867417
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2484,
+          "point": [
+            -0.47067275643348694,
+            0.4262843430042267,
+            0.3816375136375427
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.018080431725431237,
+          "bodyTriangle": 10,
+          "bodyPoint": [
+            -0.47621293941169085,
+            0.43312990261541157,
+            0.3974282291867417
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2518,
+          "point": [
+            -0.47067275643348694,
+            0.4262843430042267,
+            0.3816375136375427
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.018080431725431237,
+          "bodyTriangle": 10,
+          "bodyPoint": [
+            -0.47621293941169085,
+            0.43312990261541157,
+            0.3974282291867417
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2445,
+          "point": [
+            -0.4573729634284973,
+            0.42179787158966064,
+            0.3727697730064392
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.011756077187306459,
+          "bodyTriangle": 276,
+          "bodyPoint": [
+            -0.4563916751485213,
+            0.4173062296081679,
+            0.36194999590820004
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHandThumb2",
+              "mixamorigRightHandThumb3",
+              "mixamorigRightHandMiddle1"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2483,
+          "point": [
+            -0.4573729634284973,
+            0.42179787158966064,
+            0.3727697730064392
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.011756077187306459,
+          "bodyTriangle": 276,
+          "bodyPoint": [
+            -0.4563916751485213,
+            0.4173062296081679,
+            0.36194999590820004
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHandThumb2",
+              "mixamorigRightHandThumb3",
+              "mixamorigRightHandMiddle1"
+            ],
+            "sourceGraspRegion": true
+          }
+        },
+        {
+          "vertex": 2440,
+          "point": [
+            -0.47806453704833984,
+            0.42571714520454407,
+            0.3609999716281891
+          ],
+          "insideVotes": [
+            true,
+            true,
+            true
+          ],
+          "depth": 0.010861407940939701,
+          "bodyTriangle": 34,
+          "bodyPoint": [
+            -0.4738275187209931,
+            0.4234903387287881,
+            0.3512501413182418
+          ],
+          "nativeBody": {
+            "regions": [
+              "LOWER_ARM_R",
+              "LOWER_ARM_R",
+              "LOWER_ARM_R"
+            ],
+            "bones": [
+              "mixamorigRightHand",
+              "mixamorigRightHand",
+              "mixamorigRightHand"
+            ],
+            "sourceGraspRegion": true
+          }
+        }
+      ]
+    }
+  ],
+  "runtimeSha256": "96aa6ba6d7786310c97da830219b6163119cbd87ce43445101a769d3e996c73c",
+  "armorSha256": "66277cffdcfa3bb5fd29e0ce8e2d241119d5ac47e2c3041e3147aa65a39f74a4",
+  "classificationLimit": "The coarse sourceGraspRegion flag requires all nearest-triangle corner dominant bones to be RightHand descendants. Mixed hand/forearm wrist triangles can therefore be marked false even when the actual intersection is in the finite measured source grip cavity. Actual source-grasp-only acceptance is checked independently by native-death-equipment-clearance.test.mjs; raw complete-body parity remains recorded, not silently discarded.",
+  "status": "Historical shared Death-solver source-body/grasp classification before the final vest donor/back revision; final source-grasp regression and final prop matrix are separately pinned to1083/8f96."
+}

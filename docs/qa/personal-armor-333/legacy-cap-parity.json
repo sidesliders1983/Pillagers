@@ -1,0 +1,65 @@
+{
+  "base": "8374fac84e766aedf16131c1c246cddbecb13db9",
+  "samples": [
+    {
+      "hat": "headwear/occupation-farmer",
+      "clip": "Idle",
+      "digest": "78729358f194223c21019d05620c57581d27cbc66f2ad0e63fb77fc74c8812c6"
+    },
+    {
+      "hat": "headwear/occupation-farmer",
+      "clip": "Walk",
+      "digest": "78729358f194223c21019d05620c57581d27cbc66f2ad0e63fb77fc74c8812c6"
+    },
+    {
+      "hat": "headwear/occupation-farmer",
+      "clip": "Run",
+      "digest": "78729358f194223c21019d05620c57581d27cbc66f2ad0e63fb77fc74c8812c6"
+    },
+    {
+      "hat": "headwear/occupation-fisher",
+      "clip": "Idle",
+      "digest": "1979a611a30251a68d5bd4c68bf88ed72b8be8e524092dac0624b80124fbfe25"
+    },
+    {
+      "hat": "headwear/occupation-fisher",
+      "clip": "Walk",
+      "digest": "1979a611a30251a68d5bd4c68bf88ed72b8be8e524092dac0624b80124fbfe25"
+    },
+    {
+      "hat": "headwear/occupation-fisher",
+      "clip": "Run",
+      "digest": "1979a611a30251a68d5bd4c68bf88ed72b8be8e524092dac0624b80124fbfe25"
+    },
+    {
+      "hat": "headwear/occupation-hunter",
+      "clip": "Idle",
+      "digest": "216c7a8a3647f8c828b3cbc7d60d92f21602b1c7f1f74e06467dcef232f635e4"
+    },
+    {
+      "hat": "headwear/occupation-hunter",
+      "clip": "Walk",
+      "digest": "216c7a8a3647f8c828b3cbc7d60d92f21602b1c7f1f74e06467dcef232f635e4"
+    },
+    {
+      "hat": "headwear/occupation-hunter",
+      "clip": "Run",
+      "digest": "216c7a8a3647f8c828b3cbc7d60d92f21602b1c7f1f74e06467dcef232f635e4"
+    },
+    {
+      "hat": "headwear/occupation-smith",
+      "clip": "Idle",
+      "digest": "21e9ad24552254ab287d064a48a50d3f96e4783cfd54df870d732b5749945de6"
+    },
+    {
+      "hat": "headwear/occupation-smith",
+      "clip": "Walk",
+      "digest": "21e9ad24552254ab287d064a48a50d3f96e4783cfd54df870d732b5749945de6"
+    },
+    {
+      "hat": "headwear/occupation-smith",
+      "clip": "Run",
+      "digest": "21e9ad24552254ab287d064a48a50d3f96e4783cfd54df870d732b5749945de6"
+    }
+  ]
+}
