@@ -13,7 +13,7 @@ export const campaignIslandCatalog = {
         "src/config/TerrainAssets.ts": "9ed1cb6b179fdebe1389dc504c28ed76499fd0f1f93950d4fbd90dc4de974680",
         "src/config/lightingConfig.ts": "90a8db233c0c90aabee248d27c2bef1ff3fec3fe7070b8aac97010d07aea2b86",
         "src/config/worldConfig.ts": "e3cd430e0aed4f4747537fa49d87001c9427992ce7ba1abbfc655e28f3f819d9",
-        "src/core/AssetManager.ts": "b971feaa38f494ac507520373e43c1adf850f0ad19c79f3cd1b39947348aa446",
+        "src/core/AssetManager.ts": "8027dc8670628d941199dbcee9d1d66f1eb99a1d1fc56e8f8894c0bb2044136c",
         "src/core/EmissiveSurfaces.ts": "84d0f0a693d46437e0ec2521b1c4459655bce542d6d368531faeb9fa17789f6e",
         "src/fjord-play/CampaignIsland.ts": "9fbe79ce43ea258e664c68d70d5deaf4161e345c7897936abaffb3a7f78fb9d2",
         "src/fjord-play/VillageNature.ts": "dc21173c545ef3e41760e3fe6f56eb02cf3ff0f9bd307835a322ce1a3996bfce",
