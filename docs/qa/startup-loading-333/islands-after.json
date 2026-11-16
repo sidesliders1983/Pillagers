@@ -1,0 +1,635 @@
+{
+  "baselineCommit": "4e2226a0abe91b65379e19af30edae4f645f776e",
+  "candidateCommit": "8830d48511eb8ae34a14b25dc4590ec9c78faf43",
+  "packageScript": "assets:islands",
+  "command": "node scripts/prepare-campaign-islands.mjs",
+  "packageManagerAttempt": "pnpm wrapper refused its automatic cross-worktree junction installation; no dependency changes",
+  "repack": false,
+  "canonicalOutputsByteIdentical": true,
+  "generatedIslands": 14,
+  "inputChanges": [
+    {
+      "path": "src/core/AssetManager.ts",
+      "before": "b971feaa38f494ac507520373e43c1adf850f0ad19c79f3cd1b39947348aa446",
+      "after": "8027dc8670628d941199dbcee9d1d66f1eb99a1d1fc56e8f8894c0bb2044136c"
+    }
+  ],
+  "identities": [
+    {
+      "version": "island-pool-v3",
+      "seed": 18,
+      "path": "/game-assets/islands/island-pool-v3-18-c105fc26372b.json.bin",
+      "sha256": "c105fc26372b3d12a4946e40a0f4048141d0f92e8f30a557180ed641d2dd30e3",
+      "bytes": 2668137,
+      "jsonBytes": 16522098,
+      "canonicalSha256": "78a96937455b9fb2c50fa041f5e806c3baf126b9fe860eb004bdac5ef7ba4f79",
+      "worldConfiguration": {
+        "seed": 18,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "recipe": {
+        "version": "island-pool-v3",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 18
+      },
+      "worldSha256": "564f858cda13aab38ac2d1b779b6a486c7db6a5a75db8f2e333ad6f853bd9451",
+      "planSha256": "6a6d332c3799da49d618193a9f6a2182f3cab3673c0559b9e52354c59c62b376",
+      "terrainSha256": "c2dbeec31c27c827b573169bc06f930702f4f1d239514955f67218aad8afcb38",
+      "navigationSha256": "6479029d24af79a55adc15657f5d51975409da215428825f180aedc1393ecd53",
+      "placementsSha256": "32ff0f961be6a174d8f2e8b4806aa737d5c1da35f0fd47084b6471c744a81ab5",
+      "accepted": true
+    },
+    {
+      "version": "island-pool-v3",
+      "seed": 7,
+      "path": "/game-assets/islands/island-pool-v3-7-794faee6aca8.json.bin",
+      "sha256": "794faee6aca8838b3338b4eda13ef7e0c84cad34f75e69b866e11b08f0c39f39",
+      "bytes": 2468301,
+      "jsonBytes": 16501586,
+      "canonicalSha256": "6bcccb9a871df5cf1b1af4b648aeafdf0fddf189d236446ad1e884f51d36be8c",
+      "worldConfiguration": {
+        "seed": 7,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "recipe": {
+        "version": "island-pool-v3",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 7
+      },
+      "worldSha256": "2caacc7fd5426867930ca7da4931a69714c6024f045dfd8a7dac5ca27652feaf",
+      "planSha256": "54636aba7604e0284397aec42c22a9512114e9656b2603b9ae6d7d6777a2a7e6",
+      "terrainSha256": "c8778a680a487104436d32273a0a13dfaafb23b39eb343288b0783b705f3c3d9",
+      "navigationSha256": "32a414cfb82291908b680fb796ba41a502c20aa99e888b3bb9dc4b0ed8c08ade",
+      "placementsSha256": "f270f1c7cef216e56ca6f765e453db8c8e51401d5731bff8747fe6a160f2da08",
+      "accepted": true
+    },
+    {
+      "version": "island-pool-v3",
+      "seed": 15,
+      "path": "/game-assets/islands/island-pool-v3-15-7139bc1c465a.json.bin",
+      "sha256": "7139bc1c465a9e99b38d120e680be5d02b7f93d40e7bc914d94fe7e5534158f4",
+      "bytes": 2822309,
+      "jsonBytes": 16612380,
+      "canonicalSha256": "8aacf2797a1ab6a2fd9b99cfa29ba4cb0d886410e9c47d10c0c762ced6469867",
+      "worldConfiguration": {
+        "seed": 15,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "recipe": {
+        "version": "island-pool-v3",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 15
+      },
+      "worldSha256": "2cad1c1743c5d1bcd9c2bcaa467a9290393edfd08bde709b8d2212c262d3cb20",
+      "planSha256": "5c989f305d66e4bc8cebd78e948578bd5b0012d01c0445ea7d3818a43bdb303d",
+      "terrainSha256": "5a6612a8864a3c07d5f8c29c2601958438b785cf1843d21f817643939a86f1ea",
+      "navigationSha256": "d9ebff2776c2a6d5aedd1ae478dbaa7326055b1feabde50918a06dcd98d3bb43",
+      "placementsSha256": "72a87810425a82981345fac5ffbad5c85612cc63268cd49bf1fd90ac5f51ffe0",
+      "accepted": true
+    },
+    {
+      "version": "island-pool-v3",
+      "seed": 79,
+      "path": "/game-assets/islands/island-pool-v3-79-8eda20c1b293.json.bin",
+      "sha256": "8eda20c1b2934c5cc2e4e33d1f96ad91c8515a222ff29a1b23c550abe434b495",
+      "bytes": 2628177,
+      "jsonBytes": 16495681,
+      "canonicalSha256": "0c1e5a5c229de75c14e3a1527e70fc1b1ddafb64f3410bf821ebd597faf55e95",
+      "worldConfiguration": {
+        "seed": 79,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "recipe": {
+        "version": "island-pool-v3",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 79
+      },
+      "worldSha256": "bd2ea6f5df8a54654a19d93de696bdbbbca5b409ce4dd3b93602637b473ea54e",
+      "planSha256": "90bee4140ad066b7a30bedbc1899d0000756d4f80577efbac9541bae03ff7241",
+      "terrainSha256": "0886f15ac45b43d6c24b3945eccc8290882f50f3cc0cba0bf8df4c9bcfaf456a",
+      "navigationSha256": "dfe0167405bc4a038e571b975c73abe5ae8d27d09ff4c6a0c6e920f8d6df8603",
+      "placementsSha256": "b80a15d415525d5c7a7293808d69671e99b3e0153d49426468e43e4363e19aa3",
+      "accepted": true
+    },
+    {
+      "version": "island-pool-v3",
+      "seed": 88,
+      "path": "/game-assets/islands/island-pool-v3-88-e8d8e41de2ac.json.bin",
+      "sha256": "e8d8e41de2ac17435ef0b5dc7d9d1199aba9ff675960a9cc170be60e4772d2f4",
+      "bytes": 2728807,
+      "jsonBytes": 16561130,
+      "canonicalSha256": "0934c44a53408e0dfe6b367313c11f97a2fba741409d124f60f7ad45d60e81f8",
+      "worldConfiguration": {
+        "seed": 88,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "recipe": {
+        "version": "island-pool-v3",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 88
+      },
+      "worldSha256": "5d7d0df49fa6b18c3761fd0ba4aee870566eb8fe666b1d8aaaeaf41be16d9630",
+      "planSha256": "cdbe8e062d6e6e14c3961804448802db23d1420219703e32283a321397dedee6",
+      "terrainSha256": "f5f1a710faa83b1f8530dc275150cdb7a73b5123c49488fc3b5518467aa52b62",
+      "navigationSha256": "d59782a4f3747e9a55b0e168d81b811358ef5dbbc4907cee1213a769ffefd259",
+      "placementsSha256": "8e41dc4e46d40fcf6005d73bf56a49340bbce9b978ef7bef0f147522df5ce9fb",
+      "accepted": true
+    },
+    {
+      "version": "island-pool-v3",
+      "seed": 101,
+      "path": "/game-assets/islands/island-pool-v3-101-cbf497fab5fc.json.bin",
+      "sha256": "cbf497fab5fc34e41e647b4d2fdb1dcea07c7b0f2fdcc444c7cce12c07d36fc1",
+      "bytes": 2695244,
+      "jsonBytes": 16566104,
+      "canonicalSha256": "7de87397eeb199d6f46fa0e6c184ef0e31e6d28d218aba59c9dd51ea0656a208",
+      "worldConfiguration": {
+        "seed": 101,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "recipe": {
+        "version": "island-pool-v3",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 101
+      },
+      "worldSha256": "e89f3af840fd64a68785f0c0d3f9355cc83d61b9d63223c141ca4fb80b92113f",
+      "planSha256": "76e85bc2c8d4906e4daeb72df6ae01085058ed61f49c01e487dfbf5edf573915",
+      "terrainSha256": "a235defd0b13a713a74217a4e16dd6070860c3fa32bafb0d11826430dab888ef",
+      "navigationSha256": "767b41ae0491098398b10cf2abb532d7c91ee1a58539b67471e62264eade7c8b",
+      "placementsSha256": "163a5e4d32bef83e61f532b1d7e437557ffa04195eadebcc1dc706c60106685c",
+      "accepted": true
+    },
+    {
+      "version": "island-pool-v3",
+      "seed": 112,
+      "path": "/game-assets/islands/island-pool-v3-112-2837ddb94ac1.json.bin",
+      "sha256": "2837ddb94ac12fd5ebcf8cc4567f9b48e9ffb5ecef0d37e66c3781a6c1cc1900",
+      "bytes": 2647936,
+      "jsonBytes": 16520646,
+      "canonicalSha256": "f3368e9c931e700cd7babbbeef2fb6e0b69c679b669627dc5834facfa345128c",
+      "worldConfiguration": {
+        "seed": 112,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "recipe": {
+        "version": "island-pool-v3",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 112
+      },
+      "worldSha256": "4f4f86d4c589862a2111588cd5188075daacbd0b5e37fe8721d123e6a4a469f4",
+      "planSha256": "865c8dd2ba5d95f88f76cc2952112843e17fd425a75db10d38ab159eafed860a",
+      "terrainSha256": "a4c0ebcdb83e2be9f729c9eca7ffd3dad17ce0343e754b52febd668132963bf2",
+      "navigationSha256": "6b01b36019659f57f16a16b7b07604ff7269c93815a04993469824c8776b2540",
+      "placementsSha256": "c83c1fa311413cf2e2cbb40c181d466fa8582bcb0b21bf19d9b1032efa5cd779",
+      "accepted": true
+    },
+    {
+      "version": "island-pool-v3",
+      "seed": 168,
+      "path": "/game-assets/islands/island-pool-v3-168-4d7db82c160c.json.bin",
+      "sha256": "4d7db82c160cde1be150ea3347afe876a71ceedaa78f9827932de982090cc8de",
+      "bytes": 2649976,
+      "jsonBytes": 16540277,
+      "canonicalSha256": "a71a1906e3afe9618213865cec9ec3a8229be3d06f2e5a09897d7f438898d7a9",
+      "worldConfiguration": {
+        "seed": 168,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "recipe": {
+        "version": "island-pool-v3",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 168
+      },
+      "worldSha256": "7efbe5563f1a8f0ebf8bc7515d84ff771d143362d23af0360701b7309794e14a",
+      "planSha256": "c7a970eb76b1371bebdf80daf3c792c0779123fe10dce67ea361cd99d2fb01a9",
+      "terrainSha256": "36bd012ae498b0496b92142c957d73b27573c54fa32f935bde28cda31b53214a",
+      "navigationSha256": "02344e9e9e0eac67f75898b5568e98e86b8fa3bc7fb95268d6a193567c416a35",
+      "placementsSha256": "f0e64be485a5ae339cc69c621403360cdd7dfd1b7dff90f2e0654650350d64bb",
+      "accepted": true
+    },
+    {
+      "version": "island-pool-v3",
+      "seed": 195,
+      "path": "/game-assets/islands/island-pool-v3-195-8acee4c35805.json.bin",
+      "sha256": "8acee4c358053b8a237c8316550a9f453a7a31c56c8720bb5b37a2125fe94869",
+      "bytes": 2785945,
+      "jsonBytes": 16569670,
+      "canonicalSha256": "e238e4407b455ba65b4899b86857c5a6ce6c4e9cdd50610a40ade7c61ad22a91",
+      "worldConfiguration": {
+        "seed": 195,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "recipe": {
+        "version": "island-pool-v3",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 195
+      },
+      "worldSha256": "df6de59c0b5380d476c8559f80a5cc5bd77e140b7bd484d4241f42d455362aaf",
+      "planSha256": "9f5f7b7e5868fd70a3cf1f74bc9c72bb0504015f89bf45f981d569a9a593c696",
+      "terrainSha256": "c8e087e3b9782feaf4c2a9ff7208e4cdba0003a4455cf42ad925f6bed416abbf",
+      "navigationSha256": "82789e2bf6e134fba1a185cc468b12f398ee8c55501b301a11fc8b76ebf3fad9",
+      "placementsSha256": "e88831e2b3074629b17b1778443e3cbb70a1c12c240ea6dba84f5f8b16b7378c",
+      "accepted": true
+    },
+    {
+      "version": "island-pool-v3",
+      "seed": 227,
+      "path": "/game-assets/islands/island-pool-v3-227-d835cd8694ac.json.bin",
+      "sha256": "d835cd8694acabee4ac9171b2444339a6b1bc152e89584dd83e0088a1be469c9",
+      "bytes": 2525272,
+      "jsonBytes": 16468430,
+      "canonicalSha256": "ff98e603c4e8221abf3636ade473ee050ee96390ec5ef75c22487a74df5e1deb",
+      "worldConfiguration": {
+        "seed": 227,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "recipe": {
+        "version": "island-pool-v3",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 227
+      },
+      "worldSha256": "ff35251563796bc0387239972fd62f3ebac3e369a31daf4112265201d048122c",
+      "planSha256": "0ac9775c6f10be80b4401c5cf7291f96b0a81ec36db25ed9fb8e7df358fbf38a",
+      "terrainSha256": "d5896a370ba4080634b6a5044f9ef8091cab43758a1ef4fc365992ee979e5fd3",
+      "navigationSha256": "f6c5648ddf12259e965b87362b57a9b16a3a452a3f5159d94ecb8f532a86de55",
+      "placementsSha256": "23ceb883742414ae39076a4ad1609723c5f561452d52ff1b1536cc1a87b55a42",
+      "accepted": true
+    },
+    {
+      "version": "island-pool-v1",
+      "seed": 18,
+      "path": "/game-assets/islands/island-pool-v1-18-56abf4b0f058.json.bin",
+      "sha256": "56abf4b0f058b1c1fdfd7301b4d0171deda213a6236780c60f992e7f7a8dce6c",
+      "bytes": 2667992,
+      "jsonBytes": 16522048,
+      "canonicalSha256": "8ffa0c69b03d174c0c2d931184d4c73deb73cf0d951b703037cddc6062ee146b",
+      "worldConfiguration": {
+        "seed": 18,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "recipe": {
+        "version": "island-pool-v1",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 18
+      },
+      "worldSha256": "60a7d74db1afcadeadb7a76385d8872b622cae57044f3f4c9b577fd27645cef6",
+      "planSha256": "5b404497754a0f0bb25ac966ed74d77e113847f1ddf07e2253e21ec5d861b1b1",
+      "terrainSha256": "c2dbeec31c27c827b573169bc06f930702f4f1d239514955f67218aad8afcb38",
+      "navigationSha256": "d15f43141354ad957d2a6b2f72d5b40ef7ec0f2c3d5c6c5e13bca8d6f343405a",
+      "placementsSha256": "cb51403ec8b2a84705fa6d15515342aa3e76caedb11c28e14921e6b0a81ec99d",
+      "accepted": true
+    },
+    {
+      "version": "island-pool-v1",
+      "seed": 7,
+      "path": "/game-assets/islands/island-pool-v1-7-b8a1f5444187.json.bin",
+      "sha256": "b8a1f5444187113b825fe1ead69ec5da49b65451bae5d7a6e43d300fd7b67c39",
+      "bytes": 2468214,
+      "jsonBytes": 16501806,
+      "canonicalSha256": "c9bf0343274e49065387cf18effdda291764bf727a6cae1dab10db78eeea39a8",
+      "worldConfiguration": {
+        "seed": 7,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "recipe": {
+        "version": "island-pool-v1",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 7
+      },
+      "worldSha256": "49403b70494f860507dee3c7d7d2798b38ced1edfb5643393633b2a2f36c6eba",
+      "planSha256": "9a5dc26d358f913ebd1e63a0e160f0617f9b0af5d0f9fa38a7168b5adb0709ad",
+      "terrainSha256": "c8778a680a487104436d32273a0a13dfaafb23b39eb343288b0783b705f3c3d9",
+      "navigationSha256": "dd411ea061961c9d505f6af10607e39d86b0a22f7138ffa22c35016c7507aaad",
+      "placementsSha256": "a2d8dcf028df3b2746ad62a037db8b2cb8dd94dd1431a059d4801275e664fad8",
+      "accepted": true
+    },
+    {
+      "version": "island-pool-v2",
+      "seed": 18,
+      "path": "/game-assets/islands/island-pool-v2-18-44f6636034a1.json.bin",
+      "sha256": "44f6636034a1799935994963168bc12cf701ca26a37fa360d740e1d6f7b99413",
+      "bytes": 2668139,
+      "jsonBytes": 16522098,
+      "canonicalSha256": "39b090270b29b060afafd84eb76cab06beec31aa96629881edcdd14ea1bcee92",
+      "worldConfiguration": {
+        "seed": 18,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "recipe": {
+        "version": "island-pool-v2",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 18
+      },
+      "worldSha256": "564f858cda13aab38ac2d1b779b6a486c7db6a5a75db8f2e333ad6f853bd9451",
+      "planSha256": "c5f20a90d61faa8b5850c7a7c173fa2d0853312105cd6abf0ad88b11bfb9efac",
+      "terrainSha256": "c2dbeec31c27c827b573169bc06f930702f4f1d239514955f67218aad8afcb38",
+      "navigationSha256": "6479029d24af79a55adc15657f5d51975409da215428825f180aedc1393ecd53",
+      "placementsSha256": "32ff0f961be6a174d8f2e8b4806aa737d5c1da35f0fd47084b6471c744a81ab5",
+      "accepted": true
+    },
+    {
+      "version": "island-pool-v2",
+      "seed": 7,
+      "path": "/game-assets/islands/island-pool-v2-7-1d8de09d7199.json.bin",
+      "sha256": "1d8de09d7199398386b78170ef79849d6f8e9d62c557e9ac71ff8ae7e69e84b5",
+      "bytes": 2468303,
+      "jsonBytes": 16501586,
+      "canonicalSha256": "a9e773bbe719b1573e30b96703b8c67a4a098f3c7e935ed1fafcc9b5a8b5b645",
+      "worldConfiguration": {
+        "seed": 7,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "recipe": {
+        "version": "island-pool-v2",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 7
+      },
+      "worldSha256": "2caacc7fd5426867930ca7da4931a69714c6024f045dfd8a7dac5ca27652feaf",
+      "planSha256": "434361e2e16e1148aaf2ffc236b820664cacd1647f23eabe35eb876b6226b2f3",
+      "terrainSha256": "c8778a680a487104436d32273a0a13dfaafb23b39eb343288b0783b705f3c3d9",
+      "navigationSha256": "32a414cfb82291908b680fb796ba41a502c20aa99e888b3bb9dc4b0ed8c08ade",
+      "placementsSha256": "f270f1c7cef216e56ca6f765e453db8c8e51401d5731bff8747fe6a160f2da08",
+      "accepted": true
+    }
+  ]
+}

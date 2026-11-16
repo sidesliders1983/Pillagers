@@ -1,0 +1,104 @@
+{
+  "differences": [
+    {
+      "path": "/events/98",
+      "exported": {
+        "id": "event-99",
+        "time": {
+          "winter": 801,
+          "tick": 500
+        },
+        "type": "WeatherProductionTimingChanged",
+        "details": {
+          "from": "annual-v1",
+          "to": "winter-quarter-v1"
+        }
+      }
+    },
+    {
+      "path": "/events/99",
+      "exported": {
+        "id": "event-100",
+        "time": {
+          "winter": 801,
+          "tick": 500
+        },
+        "type": "CulturalOccasionsEnabled",
+        "details": {
+          "rulesVersion": 1
+        }
+      }
+    },
+    {
+      "path": "/weather/productionTiming",
+      "exported": "winter-quarter-v1"
+    },
+    {
+      "path": "/world/targetClans/island-rival/events/3126",
+      "exported": {
+        "id": "event-3127",
+        "time": {
+          "winter": 801,
+          "tick": 500
+        },
+        "type": "WeatherProductionTimingChanged",
+        "details": {
+          "from": "annual-v1",
+          "to": "winter-quarter-v1"
+        }
+      }
+    },
+    {
+      "path": "/world/targetClans/island-rival/events/3127",
+      "exported": {
+        "id": "event-3128",
+        "time": {
+          "winter": 801,
+          "tick": 500
+        },
+        "type": "CulturalOccasionsEnabled",
+        "details": {
+          "rulesVersion": 1
+        }
+      }
+    },
+    {
+      "path": "/world/targetClans/island-rival/weather/productionTiming",
+      "exported": "winter-quarter-v1"
+    },
+    {
+      "path": "/world/targetClans/island-rival/culture",
+      "exported": {
+        "version": 1,
+        "config": {
+          "enabled": true,
+          "foodCost": 3,
+          "minParticipants": 3,
+          "maxParticipants": 8,
+          "supportCapacity": 2,
+          "exposureReductionBps": 2500
+        },
+        "nextSequence": 1,
+        "supportSourceEventIds": [],
+        "lastGatheringEventId": null
+      }
+    },
+    {
+      "path": "/culture",
+      "exported": {
+        "version": 1,
+        "config": {
+          "enabled": true,
+          "foodCost": 3,
+          "minParticipants": 3,
+          "maxParticipants": 8,
+          "supportCapacity": 2,
+          "exposureReductionBps": 2500
+        },
+        "nextSequence": 1,
+        "supportSourceEventIds": [],
+        "lastGatheringEventId": null
+      }
+    }
+  ]
+}

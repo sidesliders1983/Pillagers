@@ -1,0 +1,118 @@
+{
+  "measuredBaselineCommit": "4e2226a0abe91b65379e19af30edae4f645f776e",
+  "measuredCandidateCommit": "d9bf10c8cb511e8740c013654c29495c94a292ab",
+  "files": [
+    {
+      "path": "candidate-export.json.gz",
+      "bytes": 44728,
+      "sha256": "c599c4e7b5920a2e7b4b006f50f1cb9940517d2585bab12d47b430cb78d57ecf"
+    },
+    {
+      "path": "core-parity-diff.json",
+      "bytes": 2349,
+      "sha256": "a0179c750af9d3a59f0b450f84dfa4277e67c474bab17b175cd84de69079803c"
+    },
+    {
+      "path": "delivery-probe.json",
+      "bytes": 2523,
+      "sha256": "2b83a406a5e6955a092e7eafeffb7b335e9b5e5579c976ca3d67f7cbe46201e5"
+    },
+    {
+      "path": "fixture-campaign.json.gz",
+      "bytes": 44322,
+      "sha256": "c9684b9f9ac602bf5e16d037bd162f8cb9ddd71df4de46ea02e7e503d9a5978f"
+    },
+    {
+      "path": "hardware-before.png",
+      "bytes": 1308622,
+      "sha256": "9fecbe8b126c0df2ab0015ccc5eb379fd59340bacd8f553e127577b5d73e1d5d"
+    },
+    {
+      "path": "hardware-candidate.png",
+      "bytes": 1133384,
+      "sha256": "41891a0f551699789435ed81275e3e7f1c0c3c77b4caeeb0e214ee329f631bc9"
+    },
+    {
+      "path": "hardware-raw.json.gz",
+      "bytes": 169457,
+      "sha256": "0b68839a5e2c828bb1f3c21f0b937797065f6b106a719bc3ab808f9b57ab7aba"
+    },
+    {
+      "path": "hardware-summary.json",
+      "bytes": 6311,
+      "sha256": "d452fc1953531604c336ae32eabaecc3cddd913c1c3153ac15f6c3e81f89549a"
+    },
+    {
+      "path": "islands-after.json",
+      "bytes": 24359,
+      "sha256": "b3095bd377a44f2098c01ac2a862aa216761a9415216110b300d0e066f2c5f70"
+    },
+    {
+      "path": "islands-before.json",
+      "bytes": 34404,
+      "sha256": "6aae1fa63be5b294785817444a3e6415ea771a955146e3f540fe54678a88db98"
+    },
+    {
+      "path": "sites-before-diagnostics.json",
+      "bytes": 204286,
+      "sha256": "f2924191cd65c4e4c08ecad45d07feef1fb0be27b8e94cb093ddbe4c9c257dd8"
+    },
+    {
+      "path": "software-baseline-raw.json.gz",
+      "bytes": 78288,
+      "sha256": "6b3868d146e24b9be82d03b0641d8ad23a8b6a9dbc54a723a09cdf4fac63b916"
+    },
+    {
+      "path": "software-baseline-summary.json",
+      "bytes": 4356,
+      "sha256": "8670bae7ca2111a394fd52fe2619f3ad3e7d9b1c82cb019e01f4ad2a8a8f90a2"
+    },
+    {
+      "path": "software-baseline.cpuprofile.gz",
+      "bytes": 112231,
+      "sha256": "8706b6f8db23325db6b1f4fa8e5ba64f8814147dd1dcb468b30d3b39526b6b84"
+    },
+    {
+      "path": "software-raw.json.gz",
+      "bytes": 40684,
+      "sha256": "7e568342ebe32ba164c5bb9d8b3c20bdb756f0f71add1b10e5f38be4ff1ab5d8"
+    },
+    {
+      "path": "software-summary.json",
+      "bytes": 8762,
+      "sha256": "e6b6d3131af38fe34faf710ec08a85712c74f9630a35f14e4ab2323829216b0c"
+    }
+  ],
+  "originals": [
+    {
+      "path": "hardware-raw.json.gz",
+      "originalBytes": 3853781,
+      "originalSha256": "64557190c9678628ed2a5db7b3d49ec3406818e2e75e6a9a4cc8747585882153"
+    },
+    {
+      "path": "candidate-export.json.gz",
+      "originalBytes": 875309,
+      "originalSha256": "5da055b63ea1c25bea2574dbc2f88b3706698c2b2cb8a0a74389cdd440e031cd"
+    },
+    {
+      "path": "software-raw.json.gz",
+      "originalBytes": 449864,
+      "originalSha256": "27c0ed3cad67547be67fa86fe31c01bf7450e3c848f44e9fe7290fe8878d89cc"
+    },
+    {
+      "path": "software-baseline-raw.json.gz",
+      "originalBytes": 1064597,
+      "originalSha256": "1386effaa324a4ff6cd7497fb8762da19d7bc1a943be3b105182ca631eb29612"
+    },
+    {
+      "path": "software-baseline.cpuprofile.gz",
+      "originalBytes": 927722,
+      "originalSha256": "b1a2aed454bbd4407725e313411ce1992e9cede56e359d286b0c7822ffc97502"
+    },
+    {
+      "path": "fixture-campaign.json.gz",
+      "originalBytes": 874179,
+      "originalSha256": "aec3bb8a4eb1249afe73230d0d80e861f49a565202e795c9a6c5db22901b5068"
+    }
+  ]
+}

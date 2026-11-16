@@ -1,0 +1,273 @@
+{
+  "kind": "One software-renderer candidate pilot; historical baseline comparison only",
+  "status": "OBSERVED",
+  "sourceCommit": "d9bf10c8cb511e8740c013654c29495c94a292ab",
+  "rawReportSha256": "27c0ed3cad67547be67fa86fe31c01bf7450e3c848f44e9fe7290fe8878d89cc",
+  "fixture": {
+    "sha256": "aec3bb8a4eb1249afe73230d0d80e861f49a565202e795c9a6c5db22901b5068",
+    "bytes": 874179,
+    "facts": {
+      "time": {
+        "winter": 801,
+        "tick": 500
+      },
+      "rngState": 2345743795,
+      "stocks": {
+        "food": 9976,
+        "materials": 475
+      },
+      "specialistStocks": {
+        "version": 1,
+        "hides": 0,
+        "ironOre": 5
+      },
+      "stored": {
+        "woodenSpear": 0,
+        "woodenShield": 0,
+        "leatherShield": 1,
+        "ironSpear": 0,
+        "ironShield": 0,
+        "leatherBodyArmor": 0,
+        "ironHelmet": 0,
+        "leatherHelmet": 0,
+        "ironBodyArmor": 0
+      },
+      "assignments": {
+        "founder-1": {
+          "weapon": "ironSpear",
+          "shield": "ironShield",
+          "bodyArmor": "ironBodyArmor",
+          "headgear": "ironHelmet"
+        },
+        "founder-3": {
+          "weapon": "woodenSpear",
+          "shield": "woodenShield",
+          "bodyArmor": "leatherBodyArmor",
+          "headgear": "leatherHelmet"
+        }
+      },
+      "targets": {
+        "woodenSpear": 1,
+        "woodenShield": 1,
+        "leatherShield": 1,
+        "ironSpear": 1,
+        "ironShield": 1,
+        "leatherBodyArmor": 1,
+        "ironHelmet": 1,
+        "leatherHelmet": 1,
+        "ironBodyArmor": 1
+      }
+    }
+  },
+  "protocol": {
+    "viewport": [
+      1366,
+      768
+    ],
+    "deviceScaleFactor": 1,
+    "reducedMotion": "reduce",
+    "httpCache": "cleared before navigation, enabled during this one fresh context",
+    "browserLaunches": 1,
+    "cpuProfiler": false,
+    "order": [
+      "candidate"
+    ],
+    "chromeExecutable": "bundled Playwright headless shell"
+  },
+  "actualRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "candidate": {
+    "sourcePlayableMs": 31375.100000023842,
+    "sourceFirstFrameMs": 31339.900000035763,
+    "observedInteractiveMs": 43519.200000047684,
+    "allTenNativeMs": 17348.600000023842,
+    "stages": [
+      {
+        "stage": "campaign-restore-inclusive",
+        "startedMs": 73.80000001192093,
+        "durationMs": 2088.5,
+        "outcome": "complete"
+      },
+      {
+        "stage": "geography",
+        "startedMs": 163,
+        "durationMs": 741.1000000238419,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:island-download",
+        "startedMs": 197.90009766817093,
+        "durationMs": 64.80000001192093,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:island-unpack",
+        "startedMs": 262.70014649629593,
+        "durationMs": 142.0999999642372,
+        "outcome": "complete"
+      },
+      {
+        "stage": "worker:island-verify",
+        "startedMs": 404.80000001192093,
+        "durationMs": 72.5,
+        "outcome": "complete"
+      },
+      {
+        "stage": "receive-and-freeze",
+        "startedMs": 831.8000000119209,
+        "durationMs": 72,
+        "outcome": "complete"
+      },
+      {
+        "stage": "assets-fetch-decode",
+        "startedMs": 2399,
+        "durationMs": 661.8000000119209,
+        "outcome": "complete"
+      },
+      {
+        "stage": "nature-assets-fetch-decode",
+        "startedMs": 3097,
+        "durationMs": 214.60000002384186,
+        "outcome": "complete"
+      },
+      {
+        "stage": "ground-textures-fetch-decode",
+        "startedMs": 3311.800000011921,
+        "durationMs": 23,
+        "outcome": "complete"
+      },
+      {
+        "stage": "terrain-mesh-and-masks",
+        "startedMs": 3334.900000035763,
+        "durationMs": 6441.399999976158,
+        "outcome": "complete"
+      },
+      {
+        "stage": "pine-assets-fetch-decode",
+        "startedMs": 9776.400000035763,
+        "durationMs": 326.7999999523163,
+        "outcome": "complete"
+      },
+      {
+        "stage": "nature-instance-assembly",
+        "startedMs": 10103.5,
+        "durationMs": 7.900000035762787,
+        "outcome": "complete"
+      },
+      {
+        "stage": "movement-surface",
+        "startedMs": 10128.800000011921,
+        "durationMs": 2.100000023841858,
+        "outcome": "complete"
+      },
+      {
+        "stage": "wildlife-preparation",
+        "startedMs": 10132.100000023842,
+        "durationMs": 626.5999999642372,
+        "outcome": "complete"
+      },
+      {
+        "stage": "initial-character-scene-sync",
+        "startedMs": 10893.5,
+        "durationMs": 6061,
+        "outcome": "complete"
+      },
+      {
+        "stage": "initial-settlement-models",
+        "startedMs": 10966.400000035763,
+        "durationMs": 5972.599999964237,
+        "outcome": "complete"
+      },
+      {
+        "stage": "standing-tree-targets",
+        "startedMs": 16943.100000023842,
+        "durationMs": 2.699999988079071,
+        "outcome": "complete"
+      },
+      {
+        "stage": "construction-gpu-preparation",
+        "startedMs": 16960.80000001192,
+        "durationMs": 2205.399999976158,
+        "outcome": "complete"
+      },
+      {
+        "stage": "texture-upload",
+        "startedMs": 19168.5,
+        "durationMs": 556.8000000119209,
+        "outcome": "complete"
+      },
+      {
+        "stage": "shader-compilation",
+        "startedMs": 19725.600000023842,
+        "durationMs": 83.80000001192093,
+        "outcome": "complete"
+      },
+      {
+        "stage": "initial-gpu-upload-and-draws",
+        "startedMs": 19809.600000023842,
+        "durationMs": 11530.199999988079,
+        "outcome": "complete"
+      }
+    ],
+    "transferBytes": 54566558,
+    "resources": 182,
+    "longTaskCount": 80,
+    "longTaskTotalMs": 39526,
+    "actualRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "softwareRenderer": true
+  },
+  "errors": {
+    "failedRequests": [],
+    "http": [],
+    "console": [],
+    "page": []
+  },
+  "historical": {
+    "sourceCommit": "4e2226a0abe91b65379e19af30edae4f645f776e",
+    "report": "D:/CodexSites/Pillagers/scratch/loading-baseline-333/loading-baseline.json",
+    "rawReportSha256": "1386effaa324a4ff6cd7497fb8762da19d7bc1a943be3b105182ca631eb29612",
+    "rows": [
+      {
+        "run": "cold",
+        "profiled": true,
+        "sourcePlayableMs": 54683.5,
+        "observedInteractiveAfterContinueMs": 65408.80000001192,
+        "allTenNativeInstancesMs": 27504.099999964237,
+        "constructionGpuMs": 29909,
+        "terrainMs": 6356.5,
+        "settlementModelsMs": 6627.899999976158,
+        "firstDrawsMs": 6564.700000047684,
+        "windowTransferBytes": 54562855,
+        "longTasks": 79,
+        "totalWindowLongTaskMs": 65652,
+        "maximumWindowLongTaskMs": 7330,
+        "sourceMaximumObservationGapMs": 9518.900000035763,
+        "resources": 182
+      },
+      {
+        "run": "warm",
+        "profiled": false,
+        "sourcePlayableMs": 62443.80000001192,
+        "observedInteractiveAfterContinueMs": 75751.10000002384,
+        "allTenNativeInstancesMs": 25993.100000023842,
+        "constructionGpuMs": 37018.69999998808,
+        "terrainMs": 6348.100000023842,
+        "settlementModelsMs": 5998.299999952316,
+        "firstDrawsMs": 8288.199999988079,
+        "windowTransferBytes": 50226104,
+        "longTasks": 88,
+        "totalWindowLongTaskMs": 75117,
+        "maximumWindowLongTaskMs": 9148,
+        "sourceMaximumObservationGapMs": 9100.099999964237,
+        "resources": 181
+      }
+    ]
+  },
+  "conclusion": "This one software candidate observation has a much shorter construction span and source-playable time than the two historical software observations. Final GPU draws increased. These data support a software-fallback pilot benefit, not a tightly controlled total-load speed claim.",
+  "limits": [
+    "Bundled headless shell uses SwiftShader/SwANGLE software rendering. This is not physical hardware GPU or phone evidence.",
+    "Historical cold observation was CPU-profiled; historical repeat was not fully cache-warm. Candidate was not profiled. Host/driver/OS caches and observation chronology were not isolated.",
+    "Same paused field fixture, viewport, low quality and reduced motion. Candidate cache cleared before navigation and enabled during the single load, matching the historical cold policy.",
+    "Authoritative source first-frame/playable marks differ from delayed DOM observations. Resource and long-task totals include entry/import; nested spans overlap.",
+    "Candidate contains exactly one completed leg. No further software/native legs were run."
+  ]
+}
