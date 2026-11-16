@@ -143,3 +143,6 @@ scripts/pine-transport-tools.mjs text eol=lf
 scripts/prepare-pine-transport.mjs text eol=lf
 scripts/validate-pine-transport.mjs text eol=lf
 tests/pine-lossless-transport.test.mjs text eol=lf
+
+# Preserve exact pine transport browser and derivation receipts.
+docs/qa/pine-transport-333/** -text

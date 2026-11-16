@@ -1,0 +1,149 @@
+{
+  "candidateCommit": "d45fee1d987ae341b16574d6eb0814228b3023bd",
+  "comparison": "Raw working bytes before derivative preparation versus frozen committed candidate",
+  "all14OriginalFilesRawByteIdentical": true,
+  "before": [
+    {
+      "file": "LICENSE-EZ-Tree.txt",
+      "bytes": 1094,
+      "sha256": "dfcc723b09e99427663fb35ad5a86a39667255d3d6ea35a1efe0d8235d24cb40"
+    },
+    {
+      "file": "NOTICE.txt",
+      "bytes": 532,
+      "sha256": "edabc5f113004641528dc3e4c884e51e11a6e5abbc24af5db76fe89b5f998543"
+    },
+    {
+      "file": "TEXTURE-ATTRIBUTION.md",
+      "bytes": 1402,
+      "sha256": "3f17468025e37e51b22533c48fb7a9a893ddf115dd6a837315afc68148282ce2"
+    },
+    {
+      "file": "manifest.json",
+      "bytes": 12353,
+      "sha256": "10acc05550007ae121221627c0436e4c36e5131ba33c11acb9c8a86b5e357dd3"
+    },
+    {
+      "file": "pine-large.bin",
+      "bytes": 827296,
+      "sha256": "6e83f31aa83daf0b63574125467aca38a251621640d8b6bf2d4b9631e950957e"
+    },
+    {
+      "file": "pine-large.gltf",
+      "bytes": 2459,
+      "sha256": "ba3e7e52d6fccb55d9847b02d999861597cc87d41f8548e5f59ebb21a1c85fef"
+    },
+    {
+      "file": "pine-medium.bin",
+      "bytes": 954784,
+      "sha256": "c73ec01b073524308ef60b6dd445650079fec15aa1a900d8fbe76526fcf9a0cf"
+    },
+    {
+      "file": "pine-medium.gltf",
+      "bytes": 2463,
+      "sha256": "e0c6f3d83e1851ae7f6acae4251dc9e0b85eb2b84c35a33ab5123ce5f0af47ee"
+    },
+    {
+      "file": "pine-small.bin",
+      "bytes": 829720,
+      "sha256": "c4394262e7c5699b3ac70d4f60406662ea4b1c10b86036530eba34c9a9dae538"
+    },
+    {
+      "file": "pine-small.gltf",
+      "bytes": 2455,
+      "sha256": "0b5f0e4858e7aa293329364cdaa019189b58215b79239f61c5046adea56f8aa6"
+    },
+    {
+      "file": "texture-00e12de668fe6669.png",
+      "bytes": 3188072,
+      "sha256": "00e12de668fe666983edad60327b98a1d4d9600d1438ef7827a7459a7b2cfae9"
+    },
+    {
+      "file": "texture-614ef034a298fef1.png",
+      "bytes": 2421052,
+      "sha256": "614ef034a298fef197bfe41209f3fc264f2e34a70880e40129ffa659a2f2266f"
+    },
+    {
+      "file": "texture-713a5cc87d11921a.png",
+      "bytes": 982844,
+      "sha256": "713a5cc87d11921a8b92f47bf3a8667aa7d04111ea51cf3bd1a3ca763333e8aa"
+    },
+    {
+      "file": "texture-be24b5c0a3104eba.png",
+      "bytes": 1215172,
+      "sha256": "be24b5c0a3104ebaf0e38dcd396ba06e36f210f9cf3786f535ab1a47c08d5e34"
+    }
+  ],
+  "after": [
+    {
+      "file": "LICENSE-EZ-Tree.txt",
+      "bytes": 1094,
+      "sha256": "dfcc723b09e99427663fb35ad5a86a39667255d3d6ea35a1efe0d8235d24cb40"
+    },
+    {
+      "file": "NOTICE.txt",
+      "bytes": 532,
+      "sha256": "edabc5f113004641528dc3e4c884e51e11a6e5abbc24af5db76fe89b5f998543"
+    },
+    {
+      "file": "TEXTURE-ATTRIBUTION.md",
+      "bytes": 1402,
+      "sha256": "3f17468025e37e51b22533c48fb7a9a893ddf115dd6a837315afc68148282ce2"
+    },
+    {
+      "file": "manifest.json",
+      "bytes": 12353,
+      "sha256": "10acc05550007ae121221627c0436e4c36e5131ba33c11acb9c8a86b5e357dd3"
+    },
+    {
+      "file": "pine-large.bin",
+      "bytes": 827296,
+      "sha256": "6e83f31aa83daf0b63574125467aca38a251621640d8b6bf2d4b9631e950957e"
+    },
+    {
+      "file": "pine-large.gltf",
+      "bytes": 2459,
+      "sha256": "ba3e7e52d6fccb55d9847b02d999861597cc87d41f8548e5f59ebb21a1c85fef"
+    },
+    {
+      "file": "pine-medium.bin",
+      "bytes": 954784,
+      "sha256": "c73ec01b073524308ef60b6dd445650079fec15aa1a900d8fbe76526fcf9a0cf"
+    },
+    {
+      "file": "pine-medium.gltf",
+      "bytes": 2463,
+      "sha256": "e0c6f3d83e1851ae7f6acae4251dc9e0b85eb2b84c35a33ab5123ce5f0af47ee"
+    },
+    {
+      "file": "pine-small.bin",
+      "bytes": 829720,
+      "sha256": "c4394262e7c5699b3ac70d4f60406662ea4b1c10b86036530eba34c9a9dae538"
+    },
+    {
+      "file": "pine-small.gltf",
+      "bytes": 2455,
+      "sha256": "0b5f0e4858e7aa293329364cdaa019189b58215b79239f61c5046adea56f8aa6"
+    },
+    {
+      "file": "texture-00e12de668fe6669.png",
+      "bytes": 3188072,
+      "sha256": "00e12de668fe666983edad60327b98a1d4d9600d1438ef7827a7459a7b2cfae9"
+    },
+    {
+      "file": "texture-614ef034a298fef1.png",
+      "bytes": 2421052,
+      "sha256": "614ef034a298fef197bfe41209f3fc264f2e34a70880e40129ffa659a2f2266f"
+    },
+    {
+      "file": "texture-713a5cc87d11921a.png",
+      "bytes": 982844,
+      "sha256": "713a5cc87d11921a8b92f47bf3a8667aa7d04111ea51cf3bd1a3ca763333e8aa"
+    },
+    {
+      "file": "texture-be24b5c0a3104eba.png",
+      "bytes": 1215172,
+      "sha256": "be24b5c0a3104ebaf0e38dcd396ba06e36f210f9cf3786f535ab1a47c08d5e34"
+    }
+  ]
+}
