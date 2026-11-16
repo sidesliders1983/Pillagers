@@ -1,0 +1,296 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Pixel-identical image transport for the existing static Large pine.",
+  "source": {
+    "file": "pine-large.gltf",
+    "bytes": 2459,
+    "sha256": "ba3e7e52d6fccb55d9847b02d999861597cc87d41f8548e5f59ebb21a1c85fef"
+  },
+  "transport": {
+    "file": "pine-large-lossless.gltf",
+    "bytes": 2941,
+    "sha256": "51d548d287ba8da24f5aa824081946b75ea6f3ccfaac62040a09f79acb8e8570"
+  },
+  "preservedSources": [
+    {
+      "file": "LICENSE-EZ-Tree.txt",
+      "bytes": 1073,
+      "sha256": "20e4afadfb10c67952b3d73cd2982d21d165ab4ae82b0dd9e4d6f2166ee349b6",
+      "normalization": "lf"
+    },
+    {
+      "file": "NOTICE.txt",
+      "bytes": 531,
+      "sha256": "07b9c8a02e2b72677362bf6c0c36073e47cdf10a86d0c9a006d7fb7abe1b7899",
+      "normalization": "lf"
+    },
+    {
+      "file": "TEXTURE-ATTRIBUTION.md",
+      "bytes": 1378,
+      "sha256": "c4c67cf955536e61d9ac3fdf13830114edcd4c19c9aa0356ed0862cedf64140a",
+      "normalization": "lf"
+    },
+    {
+      "file": "manifest.json",
+      "bytes": 11865,
+      "sha256": "cff5abaf599d76ce924870f77f88a93ed6fed1b06e8d89dfabe10f11d06e6a90",
+      "normalization": "lf"
+    },
+    {
+      "file": "pine-large.bin",
+      "bytes": 827296,
+      "sha256": "6e83f31aa83daf0b63574125467aca38a251621640d8b6bf2d4b9631e950957e"
+    },
+    {
+      "file": "pine-large.gltf",
+      "bytes": 2459,
+      "sha256": "ba3e7e52d6fccb55d9847b02d999861597cc87d41f8548e5f59ebb21a1c85fef"
+    },
+    {
+      "file": "pine-medium.bin",
+      "bytes": 954784,
+      "sha256": "c73ec01b073524308ef60b6dd445650079fec15aa1a900d8fbe76526fcf9a0cf"
+    },
+    {
+      "file": "pine-medium.gltf",
+      "bytes": 2463,
+      "sha256": "e0c6f3d83e1851ae7f6acae4251dc9e0b85eb2b84c35a33ab5123ce5f0af47ee"
+    },
+    {
+      "file": "pine-small.bin",
+      "bytes": 829720,
+      "sha256": "c4394262e7c5699b3ac70d4f60406662ea4b1c10b86036530eba34c9a9dae538"
+    },
+    {
+      "file": "pine-small.gltf",
+      "bytes": 2455,
+      "sha256": "0b5f0e4858e7aa293329364cdaa019189b58215b79239f61c5046adea56f8aa6"
+    },
+    {
+      "file": "texture-00e12de668fe6669.png",
+      "bytes": 3188072,
+      "sha256": "00e12de668fe666983edad60327b98a1d4d9600d1438ef7827a7459a7b2cfae9"
+    },
+    {
+      "file": "texture-614ef034a298fef1.png",
+      "bytes": 2421052,
+      "sha256": "614ef034a298fef197bfe41209f3fc264f2e34a70880e40129ffa659a2f2266f"
+    },
+    {
+      "file": "texture-713a5cc87d11921a.png",
+      "bytes": 982844,
+      "sha256": "713a5cc87d11921a8b92f47bf3a8667aa7d04111ea51cf3bd1a3ca763333e8aa"
+    },
+    {
+      "file": "texture-be24b5c0a3104eba.png",
+      "bytes": 1215172,
+      "sha256": "be24b5c0a3104ebaf0e38dcd396ba06e36f210f9cf3786f535ab1a47c08d5e34"
+    }
+  ],
+  "images": [
+    {
+      "source": {
+        "file": "texture-be24b5c0a3104eba.png",
+        "bytes": 1215172,
+        "sha256": "be24b5c0a3104ebaf0e38dcd396ba06e36f210f9cf3786f535ab1a47c08d5e34"
+      },
+      "transport": {
+        "file": "texture-be24b5c0a3104eba.webp",
+        "bytes": 598132,
+        "sha256": "51452252c1c733bdaec73f5d1dfa0202a1abfd4c71085e08ce2ae404baa06d6b"
+      },
+      "pixels": {
+        "source": {
+          "width": 1024,
+          "height": 1024,
+          "space": "srgb",
+          "depth": "uchar",
+          "channels": 4,
+          "hasAlpha": true,
+          "iccBytes": 0,
+          "iccSha256": null,
+          "orientation": null
+        },
+        "transport": {
+          "width": 1024,
+          "height": 1024,
+          "space": "srgb",
+          "depth": "uchar",
+          "channels": 3,
+          "hasAlpha": false,
+          "iccBytes": 0,
+          "iccSha256": null,
+          "orientation": null
+        },
+        "decodedRgbaBytes": 4194304,
+        "sourceRgbaSha256": "41d21fbfee17223579db0604053428aed6bb35bb03907715cc0dbd474b1ed5d4",
+        "transportRgbaSha256": "41d21fbfee17223579db0604053428aed6bb35bb03907715cc0dbd474b1ed5d4",
+        "containerChunks": [
+          "VP8L"
+        ]
+      }
+    },
+    {
+      "source": {
+        "file": "texture-614ef034a298fef1.png",
+        "bytes": 2421052,
+        "sha256": "614ef034a298fef197bfe41209f3fc264f2e34a70880e40129ffa659a2f2266f"
+      },
+      "transport": {
+        "file": "texture-614ef034a298fef1.webp",
+        "bytes": 1360042,
+        "sha256": "869bdcb3163a5de262fd0801fd0d1a6c14ad000adf31d0a38ded4422a4fe09cd"
+      },
+      "pixels": {
+        "source": {
+          "width": 1024,
+          "height": 1024,
+          "space": "srgb",
+          "depth": "uchar",
+          "channels": 4,
+          "hasAlpha": true,
+          "iccBytes": 0,
+          "iccSha256": null,
+          "orientation": null
+        },
+        "transport": {
+          "width": 1024,
+          "height": 1024,
+          "space": "srgb",
+          "depth": "uchar",
+          "channels": 3,
+          "hasAlpha": false,
+          "iccBytes": 0,
+          "iccSha256": null,
+          "orientation": null
+        },
+        "decodedRgbaBytes": 4194304,
+        "sourceRgbaSha256": "793d36b544ce72497ab710765d8bc89fe0d929a61b579ce658b32e9693deaf62",
+        "transportRgbaSha256": "793d36b544ce72497ab710765d8bc89fe0d929a61b579ce658b32e9693deaf62",
+        "containerChunks": [
+          "VP8L"
+        ]
+      }
+    },
+    {
+      "source": {
+        "file": "texture-00e12de668fe6669.png",
+        "bytes": 3188072,
+        "sha256": "00e12de668fe666983edad60327b98a1d4d9600d1438ef7827a7459a7b2cfae9"
+      },
+      "transport": {
+        "file": "texture-00e12de668fe6669.webp",
+        "bytes": 2532852,
+        "sha256": "efbf2fbeeb36490954bb3f91811e2735af037501f2ba844289073fdc8a476188"
+      },
+      "pixels": {
+        "source": {
+          "width": 1024,
+          "height": 1024,
+          "space": "srgb",
+          "depth": "uchar",
+          "channels": 4,
+          "hasAlpha": true,
+          "iccBytes": 0,
+          "iccSha256": null,
+          "orientation": null
+        },
+        "transport": {
+          "width": 1024,
+          "height": 1024,
+          "space": "srgb",
+          "depth": "uchar",
+          "channels": 3,
+          "hasAlpha": false,
+          "iccBytes": 0,
+          "iccSha256": null,
+          "orientation": null
+        },
+        "decodedRgbaBytes": 4194304,
+        "sourceRgbaSha256": "cdfe4a065ef4a8cb3cd8a932ffe036e651a6403f4b203431a8815f575ac0889d",
+        "transportRgbaSha256": "cdfe4a065ef4a8cb3cd8a932ffe036e651a6403f4b203431a8815f575ac0889d",
+        "containerChunks": [
+          "VP8L"
+        ]
+      }
+    },
+    {
+      "source": {
+        "file": "texture-713a5cc87d11921a.png",
+        "bytes": 982844,
+        "sha256": "713a5cc87d11921a8b92f47bf3a8667aa7d04111ea51cf3bd1a3ca763333e8aa"
+      },
+      "transport": {
+        "file": "texture-713a5cc87d11921a.webp",
+        "bytes": 273020,
+        "sha256": "4555ff2e6b61b9c97462f30c8c68d2f1722d923e02098a6b18c56c99b13e1da8"
+      },
+      "pixels": {
+        "source": {
+          "width": 1024,
+          "height": 1024,
+          "space": "srgb",
+          "depth": "uchar",
+          "channels": 4,
+          "hasAlpha": true,
+          "iccBytes": 0,
+          "iccSha256": null,
+          "orientation": null
+        },
+        "transport": {
+          "width": 1024,
+          "height": 1024,
+          "space": "srgb",
+          "depth": "uchar",
+          "channels": 4,
+          "hasAlpha": true,
+          "iccBytes": 0,
+          "iccSha256": null,
+          "orientation": null
+        },
+        "decodedRgbaBytes": 4194304,
+        "sourceRgbaSha256": "09387c9e9bf25364b72129310c5aabfc4126f12926973ac8b30f27ff6b823448",
+        "transportRgbaSha256": "09387c9e9bf25364b72129310c5aabfc4126f12926973ac8b30f27ff6b823448",
+        "containerChunks": [
+          "VP8L"
+        ]
+      }
+    }
+  ],
+  "encoding": {
+    "lossless": true,
+    "exact": true,
+    "effort": 6
+  },
+  "encoder": {
+    "sharp": "0.35.5",
+    "vips": "8.18.7",
+    "webp": "1.6.0"
+  },
+  "derivationInputs": [
+    {
+      "file": "scripts/pine-transport-tools.mjs",
+      "sha256": "d30e1bb27f25820fceaaf50fa002d0f5dd652d4d8754dc0c51bfbcbc1f83f85b"
+    },
+    {
+      "file": "scripts/prepare-pine-transport.mjs",
+      "sha256": "6338344bdf72c5676dd4128ab426bd19e10415ce749eb218a4c91ee9cd5867de"
+    }
+  ],
+  "sourceProvenance": {
+    "revision": "dcf309bd86bd521083d9c70f01f2de45fdc7c457",
+    "sourceLock": "/scripts/qa/vendor/ez-tree/source-lock.json",
+    "retainedNotices": [
+      "LICENSE-EZ-Tree.txt",
+      "NOTICE.txt",
+      "TEXTURE-ATTRIBUTION.md"
+    ]
+  },
+  "fallback": "Original PNG texture.source remains available to readers ignoring EXT_texture_webp. Three r187 does not retry PNG; an image failure can leave missing maps while the model still loads.",
+  "measurements": {
+    "originalImageBytes": 7807140,
+    "encodedImageBytes": 4764046,
+    "savedBytes": 3043094,
+    "decodedRgbaBytes": 16777216
+  }
+}

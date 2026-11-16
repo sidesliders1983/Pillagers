@@ -1,0 +1,42 @@
+{
+  "byteIdenticalRepeatedPreparation": true,
+  "all14OriginalFilesRawByteIdentical": true,
+  "artifacts": [
+    {
+      "file": "pine-large-lossless.gltf",
+      "bytes": 2941,
+      "sha256": "51d548d287ba8da24f5aa824081946b75ea6f3ccfaac62040a09f79acb8e8570"
+    },
+    {
+      "file": "texture-be24b5c0a3104eba.webp",
+      "bytes": 598132,
+      "sha256": "51452252c1c733bdaec73f5d1dfa0202a1abfd4c71085e08ce2ae404baa06d6b"
+    },
+    {
+      "file": "texture-614ef034a298fef1.webp",
+      "bytes": 1360042,
+      "sha256": "869bdcb3163a5de262fd0801fd0d1a6c14ad000adf31d0a38ded4422a4fe09cd"
+    },
+    {
+      "file": "texture-00e12de668fe6669.webp",
+      "bytes": 2532852,
+      "sha256": "efbf2fbeeb36490954bb3f91811e2735af037501f2ba844289073fdc8a476188"
+    },
+    {
+      "file": "texture-713a5cc87d11921a.webp",
+      "bytes": 273020,
+      "sha256": "4555ff2e6b61b9c97462f30c8c68d2f1722d923e02098a6b18c56c99b13e1da8"
+    },
+    {
+      "file": "lossless-transport.manifest.json",
+      "bytes": 8876,
+      "sha256": "c4a1595f47232087592a5e0d6503710e2136356fe1b3851fd67006c097829984"
+    }
+  ],
+  "manifestMeasurements": {
+    "originalImageBytes": 7807140,
+    "encodedImageBytes": 4764046,
+    "savedBytes": 3043094,
+    "decodedRgbaBytes": 16777216
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "measuredImplementationCommit": "d45fee1d987ae341b16574d6eb0814228b3023bd",
+  "files": [
+    {
+      "file": "source-originals-before-after.json",
+      "bytes": 4594,
+      "sha256": "f0a8c81e9d16b4501644aebafc68a2ab839e01ce16d6aed05206d6363eac5a5d"
+    },
+    {
+      "file": "reproduction.json",
+      "bytes": 1268,
+      "sha256": "9fd346267e68b329dbb4d13310b3178dfae3846d9b50f6a1d6c366c55fdaa737"
+    },
+    {
+      "file": "verification.json",
+      "bytes": 3043,
+      "sha256": "5fffd9218730ac1a80a42ee94c87e864854ede1b7f29c3427dd3a35ff9d358c8"
+    },
+    {
+      "file": "browser-report.json.gz",
+      "bytes": 19568,
+      "sha256": "4f21c4e35eb552f1cd4848b7b3bd7e74ba48f720eaf468605470af8062e2d894",
+      "uncompressedBytes": 125293,
+      "uncompressedSha256": "a31810889a45eca9045170fd704bb4747870760a1313f3f8406d31231a44d717"
+    },
+    {
+      "file": "exported-campaign.json.gz",
+      "bytes": 44728,
+      "sha256": "c599c4e7b5920a2e7b4b006f50f1cb9940517d2585bab12d47b430cb78d57ecf",
+      "uncompressedBytes": 875309,
+      "uncompressedSha256": "5da055b63ea1c25bea2574dbc2f88b3706698c2b2cb8a0a74389cdd440e031cd"
+    },
+    {
+      "file": "browser-check.mjs.gz",
+      "bytes": 7471,
+      "sha256": "98acf9a17b59d761b3735b888d16ee8364b965435890aa5ff853a184c04a43f2",
+      "uncompressedBytes": 24610,
+      "uncompressedSha256": "bdd6d1ffbcf2e2a5b450861a6c3ecd8013719d59f97b525b62f506539065c73d"
+    },
+    {
+      "file": "field-scene.png",
+      "bytes": 1308621,
+      "sha256": "c5793f0c7c4cb8cec2000a9e26616ca09ef3d71fced8455cec31b3b88e932700"
+    }
+  ]
+}

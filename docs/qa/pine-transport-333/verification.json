@@ -1,0 +1,80 @@
+{
+  "implementationCommit": "d45fee1d987ae341b16574d6eb0814228b3023bd",
+  "executionState": "Checks ran on the frozen uncommitted candidate; those same files were subsequently committed unchanged as this implementation commit.",
+  "commands": [
+    {
+      "command": "node --test tests/pine-lossless-transport.test.mjs",
+      "exitCode": 0,
+      "tests": 7,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "command": "node scripts/validate-public-assets.mjs",
+      "exitCode": 0,
+      "publicFiles": 696,
+      "decodedTerrainModels": 47,
+      "compactVariants": 12,
+      "preparedIslands": 14,
+      "exactCharacterSources": 74,
+      "exactPineImages": 4
+    },
+    {
+      "command": "node scripts/prepare-pine-transport.mjs",
+      "runs": 2,
+      "byteIdenticalArtifacts": 6,
+      "all14OriginalFilesRawByteIdentical": true
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0
+    }
+  ],
+  "sourceIdentities": [
+    {
+      "file": "scripts/pine-transport-tools.mjs",
+      "sha256": "d30e1bb27f25820fceaaf50fa002d0f5dd652d4d8754dc0c51bfbcbc1f83f85b",
+      "normalizedLfSha256": "d30e1bb27f25820fceaaf50fa002d0f5dd652d4d8754dc0c51bfbcbc1f83f85b"
+    },
+    {
+      "file": "scripts/prepare-pine-transport.mjs",
+      "sha256": "6338344bdf72c5676dd4128ab426bd19e10415ce749eb218a4c91ee9cd5867de",
+      "normalizedLfSha256": "6338344bdf72c5676dd4128ab426bd19e10415ce749eb218a4c91ee9cd5867de"
+    },
+    {
+      "file": "scripts/validate-pine-transport.mjs",
+      "sha256": "e6fb45cc93fc47d896e8cd0c67d014a65330634479b66d48fd92a3534756123d",
+      "normalizedLfSha256": "e6fb45cc93fc47d896e8cd0c67d014a65330634479b66d48fd92a3534756123d"
+    },
+    {
+      "file": "scripts/validate-public-assets.mjs",
+      "sha256": "878e7651c5af068b7df81cdfa72d2f8d6d98a020405dd896c062d5688c9bebe4",
+      "normalizedLfSha256": "3745e9a1b49bbbbcf517ab9199835e12511914c39fdd22b9250b4762090211a4"
+    },
+    {
+      "file": "src/world/PineModels.ts",
+      "sha256": "4731d31ce13f1955907f1cd5509888ff7ab4a1252da9470499bc56f4b3e627ee",
+      "normalizedLfSha256": "e46e8e5020340d48b44cdea64047fe0b97201d9829d6d70076a5b22d1df8b035"
+    },
+    {
+      "file": "tests/pine-lossless-transport.test.mjs",
+      "sha256": "874118cbe11104ce16efb5fc44269d1d268bbb37002c436edfc369ceb477ddae",
+      "normalizedLfSha256": "874118cbe11104ce16efb5fc44269d1d268bbb37002c436edfc369ceb477ddae"
+    }
+  ],
+  "reports": [
+    {
+      "file": "scratch/pine-lossless-transport-trial/source-originals-before-after.json",
+      "bytes": 4594,
+      "sha256": "f0a8c81e9d16b4501644aebafc68a2ab839e01ce16d6aed05206d6363eac5a5d"
+    },
+    {
+      "file": "scratch/pine-lossless-transport-trial/reproduction.json",
+      "bytes": 1268,
+      "sha256": "9fd346267e68b329dbb4d13310b3178dfae3846d9b50f6a1d6c366c55fdaa737"
+    }
+  ],
+  "parentOwnedChecks": "Root reported TypeScript/Vite passed; browser checks are still in progress and are not certified by this receipt.",
+  "noCodeOrAssetChangesDuringReceiptCollection": true
+}
