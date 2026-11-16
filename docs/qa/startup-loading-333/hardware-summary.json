@@ -1,0 +1,149 @@
+{
+  "status": "OBSERVED",
+  "rawReportSha256": "64557190c9678628ed2a5db7b3d49ec3406818e2e75e6a9a4cc8747585882153",
+  "fixtureSha256": "aec3bb8a4eb1249afe73230d0d80e861f49a565202e795c9a6c5db22901b5068",
+  "browserVersion": "157.0.8103.52",
+  "protocol": {
+    "viewport": [
+      1366,
+      768
+    ],
+    "deviceScaleFactor": 1,
+    "reducedMotion": "no-preference",
+    "httpCache": "disabled with CDP in both fresh contexts",
+    "browserLaunches": 1,
+    "cpuProfiler": false,
+    "order": [
+      "baseline-first",
+      "candidate",
+      "baseline-repeat"
+    ],
+    "chromeExecutable": "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe"
+  },
+  "observedRenderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "runs": [
+    {
+      "name": "baseline-first",
+      "commit": "4e2226a0abe91b65379e19af30edae4f645f776e",
+      "dirty": false,
+      "sourcePlayableMs": 27787.5,
+      "sourceFirstFrameMs": 27678.30000001192,
+      "observedInteractiveMs": 28412.100000023842,
+      "allTenNativeMs": 18406,
+      "stages": {
+        "nature-assets-fetch-decode": 461.89999997615814,
+        "terrain-mesh-and-masks": 6314.599999964237,
+        "pine-assets-fetch-decode": 815.6999999880791,
+        "initial-character-scene-sync": 6233.899999976158,
+        "construction-gpu-preparation": 8091.700000047684,
+        "texture-upload": 294.30000001192093,
+        "shader-compilation": 179.9000000357628,
+        "initial-gpu-upload-and-draws": 1060.300000011921
+      },
+      "gpuPreparationFourStageSumMs": 9626.200000107288,
+      "transferBytes": 55590676,
+      "resourceCount": 185,
+      "longTaskTotalMs": 14712,
+      "failedRequestCount": 0,
+      "httpErrors": [],
+      "pageErrors": [],
+      "consoleErrors": [],
+      "entryBeforeContinue": "animated backdrop ready",
+      "actualRenderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "softwareRenderer": false
+    },
+    {
+      "name": "candidate",
+      "commit": "d9bf10c8cb511e8740c013654c29495c94a292ab",
+      "dirty": false,
+      "sourcePlayableMs": 21159.400000035763,
+      "sourceFirstFrameMs": 21126.5,
+      "observedInteractiveMs": 21492.400000035763,
+      "allTenNativeMs": 17987.19999998808,
+      "stages": {
+        "nature-assets-fetch-decode": 289.80000001192093,
+        "terrain-mesh-and-masks": 6288.199999988079,
+        "pine-assets-fetch-decode": 708.1999999880791,
+        "initial-character-scene-sync": 5941.199999988079,
+        "construction-gpu-preparation": 397.7999999523163,
+        "texture-upload": 651.9000000357628,
+        "shader-compilation": 187.69999998807907,
+        "initial-gpu-upload-and-draws": 2115.600000023842
+      },
+      "gpuPreparationFourStageSumMs": 3353,
+      "transferBytes": 55594379,
+      "resourceCount": 185,
+      "longTaskTotalMs": 7715,
+      "failedRequestCount": 0,
+      "httpErrors": [],
+      "pageErrors": [],
+      "consoleErrors": [],
+      "entryBeforeContinue": "animated backdrop ready",
+      "actualRenderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "softwareRenderer": false
+    },
+    {
+      "name": "baseline-repeat",
+      "commit": "4e2226a0abe91b65379e19af30edae4f645f776e",
+      "dirty": false,
+      "sourcePlayableMs": 19940.399999976158,
+      "sourceFirstFrameMs": 19900.69999998808,
+      "observedInteractiveMs": 20141.799999952316,
+      "allTenNativeMs": 18003.19999998808,
+      "stages": {
+        "nature-assets-fetch-decode": 280.69999998807907,
+        "terrain-mesh-and-masks": 6252.599999964237,
+        "pine-assets-fetch-decode": 115.70000004768372,
+        "initial-character-scene-sync": 5623.099999964237,
+        "construction-gpu-preparation": 2649.899999976158,
+        "texture-upload": 297,
+        "shader-compilation": 30.899999976158142,
+        "initial-gpu-upload-and-draws": 1067.5
+      },
+      "gpuPreparationFourStageSumMs": 4045.2999999523163,
+      "transferBytes": 55590676,
+      "resourceCount": 185,
+      "longTaskTotalMs": 9243,
+      "failedRequestCount": 0,
+      "httpErrors": [],
+      "pageErrors": [],
+      "consoleErrors": [],
+      "entryBeforeContinue": "animated backdrop ready",
+      "actualRenderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "softwareRenderer": false
+    }
+  ],
+  "parity": {
+    "nativeAppearance": true,
+    "cameraMatrices": true,
+    "maximumCameraElementDelta": 0,
+    "ui": true,
+    "candidateExportMatchesInputFacts": true,
+    "candidateCompleteCoreMatchesInput": false
+  },
+  "baselineRepeat": {
+    "sourcePlayableMs": 19940.399999976158,
+    "maximumCameraElementDelta": 0,
+    "nativeAppearance": true,
+    "ui": true
+  },
+  "publicExportNormalization": {
+    "rawInputExact": false,
+    "exactAfterExistingFjordPublicCompatibilityCommands": true,
+    "commands": [
+      "UseSeasonalWeatherProduction",
+      "UseCulturalOccasions"
+    ],
+    "changedLeafCount": 8,
+    "differenceFile": "core-parity-diff.json"
+  },
+  "conclusion": "The candidate reduced the measured construction-preparation span and the sum of the four GPU-preparation spans. This single fixed-order A/B/A does not establish a total loading-time improvement: the repeated baseline loaded faster overall than the candidate.",
+  "limits": [
+    "Three fixed-order observations in one installed-Chrome launch, with fresh contexts and HTTP cache disabled. OS, GPU-driver and shader caches were not reset.",
+    "Actual game WebGL renderer was Intel HD630/D3D11 in every leg; these are local desktop observations, not physical-phone or remote-network measurements.",
+    "Entry animation was ready before Continue, low quality, normal motion, same ordinary paused save and viewport. No CPU profiler or network interception.",
+    "Source playable/first-frame timing is authoritative. DOM marks may lag long tasks. Nested loading spans overlap; transfer/long-task totals include entry and import.",
+    "Raw report limits incorrectly say Two observations; its actual protocol and runs contain the three completed A/B/A legs.",
+    "Candidate screenshot was taken after public export with the save menu open. Appearance/camera/UI parity was measured before that interaction."
+  ]
+}

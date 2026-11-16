@@ -131,3 +131,6 @@ scripts/characters/native-iron-body-armor-underlay-fit.json text eol=lf
 output/native-personal-armor-333/variants/*.json -text
 
 output/native-personal-armor-333/variants/*.gz -text
+
+# Preserve the exact retained startup measurements.
+docs/qa/startup-loading-333/** -text

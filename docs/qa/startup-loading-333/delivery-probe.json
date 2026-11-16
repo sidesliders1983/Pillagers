@@ -1,0 +1,76 @@
+{
+  "startedAt": "2026-11-16T12:41:33.630Z",
+  "kind": "Read-only cache-key delivery probe",
+  "rows": [
+    {
+      "path": "game-assets/character-sources/a85a175d059013b5066f.bin",
+      "cache": "existing-url",
+      "headersMs": 1101.752700000001,
+      "totalMs": 1963.3138,
+      "bytes": 5826299,
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "cfCacheStatus": "HIT",
+      "age": null,
+      "etag": "\"43e92b0e2909f5fdb0e6be43772e1eb4\""
+    },
+    {
+      "path": "game-assets/character-sources/a85a175d059013b5066f.bin",
+      "cache": "unique-query",
+      "headersMs": 234.72099999999773,
+      "totalMs": 1153.9915,
+      "bytes": 5826299,
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "cfCacheStatus": "HIT",
+      "age": null,
+      "etag": "\"43e92b0e2909f5fdb0e6be43772e1eb4\""
+    },
+    {
+      "path": "nature/ez-tree-pilot/texture-00e12de668fe6669.png",
+      "cache": "existing-url",
+      "headersMs": 92.54129999999714,
+      "totalMs": 533.1062999999995,
+      "bytes": 3188072,
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "cfCacheStatus": "HIT",
+      "age": null,
+      "etag": "\"3aa16fd972a743ec7b8e5da2753e2bae\""
+    },
+    {
+      "path": "nature/ez-tree-pilot/texture-00e12de668fe6669.png",
+      "cache": "unique-query",
+      "headersMs": 112.19930000000022,
+      "totalMs": 615.8018000000011,
+      "bytes": 3188072,
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "cfCacheStatus": "HIT",
+      "age": null,
+      "etag": "\"3aa16fd972a743ec7b8e5da2753e2bae\""
+    },
+    {
+      "path": "game-assets/compact-models/campfire.glb",
+      "cache": "existing-url",
+      "headersMs": 97.24519999999757,
+      "totalMs": 220.1908000000003,
+      "bytes": 962196,
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "cfCacheStatus": "HIT",
+      "age": null,
+      "etag": "\"241a6de2b8013c9baafbaa33218bd83f\""
+    },
+    {
+      "path": "game-assets/compact-models/campfire.glb",
+      "cache": "unique-query",
+      "headersMs": 149.01209999999992,
+      "totalMs": 269.77319999999963,
+      "bytes": 962196,
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "cfCacheStatus": "HIT",
+      "age": null,
+      "etag": "\"241a6de2b8013c9baafbaa33218bd83f\""
+    }
+  ],
+  "limitations": [
+    "Unique query does not prove an empty CDN cache; actual CF cache status is retained.",
+    "Node service-header requests are not browser transfer or playtester network measurements."
+  ]
+}

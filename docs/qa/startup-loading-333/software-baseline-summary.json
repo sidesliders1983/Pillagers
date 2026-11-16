@@ -1,0 +1,113 @@
+{
+  "status": "OBSERVED: cold and repeat; no fully warm-cache or physical-device claim",
+  "sourceCommit": "4e2226a0abe91b65379e19af30edae4f645f776e",
+  "startedAt": "2026-11-16T12:25:09.521Z",
+  "finishedAt": "2026-11-16T12:29:01.614Z",
+  "fixture": {
+    "path": "/qa/field-campaign.json",
+    "sha256": "aec3bb8a4eb1249afe73230d0d80e861f49a565202e795c9a6c5db22901b5068",
+    "bytes": 874179,
+    "time": {
+      "winter": 801,
+      "tick": 500
+    }
+  },
+  "rows": [
+    {
+      "run": "cold",
+      "profiled": true,
+      "sourcePlayableMs": 54683.5,
+      "observedInteractiveAfterContinueMs": 65408.80000001192,
+      "allTenNativeInstancesMs": 27504.099999964237,
+      "constructionGpuMs": 29909,
+      "terrainMs": 6356.5,
+      "settlementModelsMs": 6627.899999976158,
+      "firstDrawsMs": 6564.700000047684,
+      "windowTransferBytes": 54562855,
+      "longTasks": 79,
+      "totalWindowLongTaskMs": 65652,
+      "maximumWindowLongTaskMs": 7330,
+      "sourceMaximumObservationGapMs": 9518.900000035763,
+      "resources": 182
+    },
+    {
+      "run": "warm",
+      "profiled": false,
+      "sourcePlayableMs": 62443.80000001192,
+      "observedInteractiveAfterContinueMs": 75751.10000002384,
+      "allTenNativeInstancesMs": 25993.100000023842,
+      "constructionGpuMs": 37018.69999998808,
+      "terrainMs": 6348.100000023842,
+      "settlementModelsMs": 5998.299999952316,
+      "firstDrawsMs": 8288.199999988079,
+      "windowTransferBytes": 50226104,
+      "longTasks": 88,
+      "totalWindowLongTaskMs": 75117,
+      "maximumWindowLongTaskMs": 9148,
+      "sourceMaximumObservationGapMs": 9100.099999964237,
+      "resources": 181
+    }
+  ],
+  "cacheObservations": [
+    {
+      "run": "cold",
+      "networkBodyResponses": 167,
+      "smallOrRevalidatedResponses": 15,
+      "zeroTransferResponses": 0,
+      "diskCacheResponses": 0
+    },
+    {
+      "run": "warm",
+      "networkBodyResponses": 163,
+      "smallOrRevalidatedResponses": 18,
+      "zeroTransferResponses": 0,
+      "diskCacheResponses": 0
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "httpErrors": [],
+  "failedRequests": [],
+  "identities": {
+    "rawTraceSha256": "1386effaa324a4ff6cd7497fb8762da19d7bc1a943be3b105182ca631eb29612",
+    "coldCpuProfileSha256": "b1a2aed454bbd4407725e313411ce1992e9cede56e359d286b0c7822ffc97502"
+  },
+  "gpu": {
+    "devices": [
+      {
+        "vendorId": 65535,
+        "deviceId": 65535,
+        "subSysId": 0,
+        "revision": 0,
+        "vendorString": "Google Inc. (Google)",
+        "deviceString": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver-5.0.0)",
+        "driverVendor": "SwANGLE",
+        "driverVersion": "5.0.0"
+      }
+    ],
+    "featureStatus": {
+      "2d_canvas": "unavailable_software",
+      "direct_rendering_display_compositor": "disabled_off_ok",
+      "gpu_compositing": "disabled_software",
+      "multiple_raster_threads": "enabled_on",
+      "opengl": "disabled_off",
+      "rasterization": "disabled_software",
+      "raw_draw": "disabled_off_ok",
+      "skia_graphite": "disabled_off",
+      "trees_in_viz": "disabled_off",
+      "video_decode": "disabled_software",
+      "video_encode": "disabled_software",
+      "webgl": "unavailable_software",
+      "webgpu": "unavailable_software",
+      "webnn": "unavailable_software"
+    }
+  },
+  "limits": [
+    "Two single observations, not a controlled statistical benchmark.",
+    "Window Resource Timing and long tasks do not cover all worker decode/GPU work. Model spans include waiting, decoding and fitting; decodedBodySize is a byte count, not CPU decode time.",
+    "Nested loading spans overlap and must not be summed as total CPU time.",
+    "Headless desktop/loopback does not certify physical iPhone loading, thermals or actual private Sites network latency.",
+    "Warm-intent repeated loading still transferred about50MB and had no disk-cache responses. It cannot establish the benefit of a fully populated browser cache or prove that caching is ineffective on the published Site."
+  ],
+  "conclusion": "The construction preparation span is the largest measured startup block in both observations, while terrain and initial draw spans also persist on loopback. This does not independently identify pure GPU time; the CPU profile and stage observations must be read together."
+}
