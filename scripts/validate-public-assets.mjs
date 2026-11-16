@@ -9,6 +9,7 @@ import { terrainIO } from './terrain-io.mjs';
 import { getBounds } from '@gltf-transform/functions';
 import { validatePreparedAssets } from './validate-prepared-assets.mjs';
 import { validateCompactModels } from './validate-compact-models.mjs';
+import { validatePineTransport } from './validate-pine-transport.mjs';
 import { validateCulturalAudio } from './audio/culture/validate.mjs';
 
 // Public audio must pass the same retained-file and per-source publication gate on every build.
@@ -18,6 +19,8 @@ execFileSync(process.execPath, ['scripts/audio/validate.mjs',
 validateCulturalAudio();
 const root = resolve('public');
 const prepared = await validatePreparedAssets();
+const pineTransport = await validatePineTransport();
+console.log('Validated ' + pineTransport.images + ' pixel-identical lossless pine images.');
 console.log('Validated ' + await validateCompactModels() + ' compact model variants with identical geometry.');
 const { generatedHouseFiles } = loadTypeScript(new URL('../src/config/HousingAssets.ts', import.meta.url));
 const { terrainModels, longshipModel } = loadTypeScript(new URL('../src/config/TerrainAssets.ts', import.meta.url));

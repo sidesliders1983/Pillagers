@@ -5,7 +5,7 @@ import {NatureAssetKey} from '../config/NatureAssets';
 
 /** Static pinned Large preset at the existing three conifer role heights; shared by Lab and Fjordside. */
 export async function loadPineModels(assets:AssetManager){
- const {scene:source}=await new GLTFLoader().loadAsync(import.meta.env.BASE_URL+'nature/ez-tree-pilot/pine-large.gltf');
+ const {scene:source}=await new GLTFLoader().loadAsync(import.meta.env.BASE_URL+'nature/ez-tree-pilot/pine-large-lossless.gltf');
  source.updateMatrixWorld(true);
  const bounds=new Box3().setFromObject(source),center=bounds.getCenter(new Vector3()),sourceHeight=bounds.getSize(new Vector3()).y;
  if(!Number.isFinite(sourceHeight)||sourceHeight<=0)throw new Error('EZ-Tree pine has invalid source bounds');

@@ -134,3 +134,12 @@ output/native-personal-armor-333/variants/*.gz -text
 
 # Preserve the exact retained startup measurements.
 docs/qa/startup-loading-333/** -text
+
+# Pixel-identical pine transport derivatives and reproducible authoring scripts.
+public/nature/ez-tree-pilot/*.webp -text
+public/nature/ez-tree-pilot/pine-large-lossless.gltf -text
+public/nature/ez-tree-pilot/lossless-transport.manifest.json text eol=lf
+scripts/pine-transport-tools.mjs text eol=lf
+scripts/prepare-pine-transport.mjs text eol=lf
+scripts/validate-pine-transport.mjs text eol=lf
+tests/pine-lossless-transport.test.mjs text eol=lf
